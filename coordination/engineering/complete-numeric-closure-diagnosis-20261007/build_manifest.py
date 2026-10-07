@@ -15,7 +15,9 @@ MANIFEST=PREFIX+'evidence-quality.json'
 PIN_PATHS={
     'original_operator_sha256':'coordination/engineering/global-physical-comparison-20261006/comparison.py',
     'physical_scientific_report':'coordination/engineering/global-physical-comparison-20261006/results/report.json',
-    'audited_successor_report':'coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json'}
+    'audited_successor_report':'coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json',
+    'delivered_routing_report':'coordination/engineering/global-actionability-routing-20261007/results/report.json',
+    'delivered_routing_input_config':'coordination/engineering/global-actionability-routing-20261007/input-config.json'}
 
 def descriptor(path):
     raw=reader.safe_path(ROOT,path).read_bytes()
