@@ -20,6 +20,7 @@ export async function publishGeographicReleases({manifest,batch,readBatch,reques
  if(!['publish','stage','finalize'].includes(mode))throw Error('Unknown geographic publication mode');
  concurrency=bootstrapConcurrency(concurrency);
  manifest=structuredClone(manifest);
+ if(!Array.isArray(manifest?.batches)||!manifest.batches.length||!Array.isArray(manifest.releases)||!manifest.releases.length)throw Error('Nonempty prepared release and batch inventories required');
  const need=pathname=>{const part=manifest.batches.find(p=>p.path===pathname||p.path===pathname+'.gz');if(!part)throw Error(`Missing prepared reference batch: ${pathname}`);return part;};
  let plan;
  async function admittedBatch(part){for(const body of plan.get(part.path))await batch(part,Buffer.from(body));}

@@ -66,7 +66,7 @@ test('encoded plus decoded plus derived bytes all count; admission budgets canno
 });
 
 test('real publisher entrypoint performs zero writes for late malformed, missing or duplicate inputs', async () => {
-  const c=buildCases(),source=Buffer.from(JSON.stringify({sources:[{id:c.release.source_id}]})),definition=Buffer.from(JSON.stringify({release:c.release}));
+  const c=buildCases(),source=Buffer.from(JSON.stringify({sources:[{id:c.release.source_id,name:'Isolated reference fixture',url:'https://example.invalid/source',license:'CC0 fixture',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]})),definition=Buffer.from(JSON.stringify({release:c.release}));
   for(const kind of ['malformed','missing','duplicate','conflicting-release']){
     const late=kind==='malformed'?c.admissionInputs.at(-1).bytes:Buffer.from(JSON.stringify({release_id:kind==='conflicting-release'?'other':c.release.id,
       memberships:kind==='duplicate'?[c.memberships[0],c.memberships[0]]:[c.memberships[0]]}));
@@ -82,4 +82,23 @@ test('real publisher entrypoint performs zero writes for late malformed, missing
 
 test('independent raw-record oracle rejects coherent missing, reordered and invented output records', () => {
   const c=buildCases();for(const altered of Object.values(c.alteredOutput))assert.throws(()=>assertPreservedRequests(c.partitions,altered));
+});
+
+test('later source field failures and entity cycles are rejected before any earlier prerequisite writes', async () => {
+  const source={id:'reference',name:'Fixture',license:'CC0',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027};
+  const early=Buffer.from(JSON.stringify({sources:[source]})),release=buildCases().release,definition=Buffer.from(JSON.stringify({release}));
+  for(const [late,path,reason] of [
+    [{sources:[{...source,id:'later',license:''}]},'sources-7.json',/source license/],
+    [{sources:[{...source,id:'later',supported_from:0}]},'sources-7.json',/date interval/],
+    [{entities:[{id:'first',kind:'location',name:'First',parent_id:'second'},{id:'second',kind:'province',name:'Second',parent_id:'first'}]},'entities-location-0.json',/parent cycle/]]){
+    const bytes=Buffer.from(JSON.stringify(late)),parts=[descriptor(early,'sources.json','/api/records/import'),descriptor(bytes,path,'/api/records/import'),descriptor(definition,'release-7.json')];
+    let writes=0;
+    await assert.rejects(publishGeographicReleases({manifest:{releases:[release],batches:parts,sources_batches:path.startsWith('sources-')?['sources.json',path]:['sources.json']},mode:'stage',
+      request:async()=>Response.json(null),readBatch:p=>p.path==='sources.json'?early:p.path==='release-7.json'?definition:bytes,batch:async()=>{writes++;}}),reason);
+    assert.equal(writes,0);
+  }
+});
+
+test('empty release inventory cannot produce a vacuous completed stage', async () => {
+  let calls=0;await assert.rejects(publishGeographicReleases({manifest:{releases:[],batches:[{path:'sources.json'}]},batch:async()=>calls++,request:async()=>calls++}),/Nonempty/);assert.equal(calls,0);
 });

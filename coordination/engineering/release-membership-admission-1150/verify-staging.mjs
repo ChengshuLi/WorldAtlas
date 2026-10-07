@@ -107,10 +107,18 @@ try{
  }
  const row=bodies.find(b=>JSON.parse(b.body).memberships?.length),altered=JSON.parse(row.body);altered.memberships[0].reference_name+=' conflicting';
  await assert.rejects(stageGeographicRelease(db,altered),e=>e.status===409&&/Ingestion ID/.test(e.message));
+ // All seven releases absent is a different, oversized required phase. Exercise
+ // the real entry point and actual original inputs, not a budget boolean.
+ let refusalReads=0,refusalBytes=0,refusalWrites=0,refusalReason;
+ await assert.rejects(publishGeographicReleases({manifest:original,request,mode:'stage',concurrency:1,
+  readBatch:part=>{const bytes=read(baseline,'data/geographic-releases/'+part.path);refusalReads++;refusalBytes+=bytes.length;return bytes;},
+  batch:async()=>{refusalWrites++;}}),error=>{refusalReason=error.message;return /complete phase budget/.test(error.message);});
+ assert.equal(refusalWrites,0);
  const requestHash=createHash('sha256');for(const {body}of bodies)requestHash.update(body).update('\n');
- const ledger={baseline,execution_commit:executionCommit,catalog_inputs:phaseInputs.catalog,staging_inputs:phaseInputs.staging,execution_code:[...code.values()],
+ const ledger={baseline,execution_commit:executionCommit,runtime:{node:process.versions.node,sqlite:db.sqlite.prepare('SELECT sqlite_version() version').get().version},catalog_inputs:phaseInputs.catalog,staging_inputs:phaseInputs.staging,execution_code:[...code.values()],
   memberships:members.length,changes:changes.length,requests:bodies.length,duplicate_replays:replays,interrupted_durable_memberships:firstCount,catalog_phase_admitted_bytes:catalogBytes*3,
   original_registry_source_rows_verified:originalRows.size,predecessor_definitions_sha256:sha(JSON.stringify(original.releases.slice(0,-1))),
+  full_bootstrap_refusal:{reads:refusalReads,encoded_bytes:refusalBytes,writes:refusalWrites,reason:refusalReason},
   request_bodies_sha256:requestHash.digest('hex'),membership_sha256:release.membership_sha256,location_ids_sha256:release.location_ids_sha256,changes_sha256:release.changes_sha256,
   limits:'Isolated successor7-only staging; authentic original stable registry seeded separately. No finalization, live import, source authority or geography approval.'};
  const bytes=Buffer.from(JSON.stringify(ledger,null,2)+'\n');if(bytes.length>32*1024*1024)throw Error('Verification output exceeds file budget');

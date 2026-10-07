@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
+import {validateGeographicPrerequisiteBatch} from '../hosted/records.js';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const MiB = 1024 * 1024;
@@ -115,18 +116,8 @@ export async function admitGeographicReleaseBatches(parts, {readBatch, phaseByte
     let requests;
     if (part.route === '/api/geography/stage') requests = splitGeographicReleaseBatch(decoded, part);
     else {
-      let count = 0;
-      for (const [key, collection] of Object.entries(payload)) {
-        if (key === 'ingestion_id') {if (!identity(collection)) throw Error('Invalid record ingestion ID'); continue;}
-        if (!['sources', 'entities'].includes(key) || !Array.isArray(collection)) throw Error('Invalid geographic prerequisite collection');
-        const ids = new Set();
-        for (const row of collection) {
-          if (!object(row) || !identity(row.id) || ids.has(row.id)) throw Error('Invalid or duplicate prerequisite identity');
-          ids.add(row.id);
-        }
-        count += collection.length;
-      }
-      if (!count || count > 250 || decoded.length > MiB || Buffer.byteLength(JSON.stringify(payload)) > MiB)
+      validateGeographicPrerequisiteBatch(payload);
+      if (decoded.length > MiB)
         throw Error('Geographic prerequisite exceeds service row/byte limits');
       requests = [Buffer.from(decoded)];
     }
