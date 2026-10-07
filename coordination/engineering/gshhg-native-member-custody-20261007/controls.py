@@ -146,7 +146,7 @@ def run(repo, commit, out):
             for i in range(18):z.writestr(f'member-{i:02}.b',bytes([i]))
         archive.seek(0)
         with zipfile.ZipFile(archive) as z:
-            inventory=[{'name:x.filename,'bytes':x.file_size,'compressed_bytes':x.compress_size,
+            inventory=[{'name':x.filename,'bytes':x.file_size,'compressed_bytes':x.compress_size,
                         'compression':x.compress_type,'crc32':x.CRC,'sha256':reader.sha(bytes([i]))}
                        for i,x in enumerate(z.infolist())]
             positive('actual-all-eighteen-directory-positive-no-body-read',
