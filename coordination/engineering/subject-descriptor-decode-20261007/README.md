@@ -17,3 +17,15 @@ node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs
 Use fresh absent run destinations. The complete-source reader authenticates source mode and whole encoded/decoded bodies through the real shared validator. The original input/caller files must match the frozen commit; numerical source data are read from immutable Git without materializing a world checkout.
 
 The earlier shared-reader gzip parse failure and the first claim rejection caused by conflicting kind labels are historical receipts, not successful executions. This PR does not change GEO5 sources, observations, ownership, release or production. After delivery, GEO5 must refresh its genuine baseline/manifest and exact-head gate under its own claim.
+
+The first real package build at head `7c33ffce` refused the changed shared helper against the original context validator's code pin. The coupled continuation retains all seventeen literal validator files from actual ancestor `83bed8c4c49e8f54077bb4abf0f32d41d0992f81`. This source ancestor is distinct from the old manifest's unchanged advertised execution commit. The dispatcher authenticates every file and transitive import before executing the actual original validator. Original stage manifests, snapshot overrides, context/release/geometry pointsets and hashes remain unchanged.
+
+After the complete old stage passes, the dispatcher reads the same authenticated before/after contexts, proposal and release registry and calls current `validateContextMigration`. Its result must have exactly the same non-token receipt. Only the genuinely reconstructed current-realm proof crosses into coverage rebinding; the old realm's proof cannot substitute.
+
+Frozen coupled code/control commit: `7c38a431fe89085b11d3c2a89a7934a788164f9c`. The actual 38-test command includes six coupled controls:
+
+```
+node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs test/build-context-validation-vintage.test.mjs
+```
+
+Those local tests use bounded fixtures and authentic small code/stage bodies. They do not materialize a whole context image or certify a combined scientific phase. The existing original consumer retains its independently bounded 17-code/105-data admission, including mandatory snapshot overrides; its complete real continuation must pass in hosted package CI. Combining that source floor with subject custody would exceed one ordinary scientific phase, so no such claim is made here. No original native/geography calculation is repeated. Ordinary Node without loaders or preloads is required for the captured code realm.

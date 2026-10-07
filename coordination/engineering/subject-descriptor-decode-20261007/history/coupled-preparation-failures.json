@@ -1,0 +1,17 @@
+{
+  "status": "failed-preparation-preserved",
+  "attempts": [
+    {
+      "head": "7c33ffce4ec2206fee3bb5ad9a99c541ac4e853d",
+      "workflow": 37618783976,
+      "job": 112783601017,
+      "error": "Context migration input bytes differ: scripts/evidence-quality.mjs",
+      "scope": "actual hosted package; no original scientific data was regenerated"
+    },
+    {
+      "description": "Initial snapshot smoke used an overly broad import regex that matched ordinary strings containing from",
+      "error": "Unsupported captured project import",
+      "disposition": "anchored literal import declaration parser; subsequent smoke authenticates all seventeen bodies"
+    }
+  ]
+}
