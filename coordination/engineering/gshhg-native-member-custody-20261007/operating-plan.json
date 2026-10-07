@@ -1,0 +1,28 @@
+{
+  "version":1,
+  "status":"planning only; actual storage guard required before each invocation",
+  "workspace_reserve_bytes":1073741824,
+  "io_buffer_bytes":8388608,
+  "unavoidable_contiguous_raw_gzip_fragment_max_bytes":33554432,
+  "original_zip_scratch_each_run_bytes":118617033,
+  "retained_zip_scratch_runs_including_input_only":3,
+  "retained_three_zip_total_bytes":355851099,
+  "native_alias_each_full_run_measured_encoded_bytes":65602297,
+  "native_alias_two_full_run_bytes":131204594,
+  "prior_original_complete_record_metadata_products_encoded_bytes":28546031,
+  "prior_original_record_metadata_is_estimate_not_new_output_bound":true,
+  "new_record_metadata_two_full_runs_reserved_bytes":100663296,
+  "temporary_authenticated_downstream_virtual_native_image_bytes":95809336,
+  "all_other_code_controls_indexes_reports_reserved_bytes":33554432,
+  "maximum_sparse_checkout_and_git_overhead_reservation_bytes":186597729,
+  "conservative_peak_total_bytes":903680486,
+  "no_retained_raw_native_copy_in_each_run":true,
+  "downstream_native_image_is_temporary_and_consumed_before_close":true,
+  "full_ZIP_scratch_copies_are_preserved_outside_final_Git_payloads":true,
+  "limits":[
+    "Both actual full native alias/record trees and original ZIP scratch images remain cached until durable review/readback/preservation.",
+    "No sourcepart copies in the author checkout; immutable originals are streamed through their declared Git bodies.",
+    "New metadata gzip sizes/part counts must be measured after input-only and first full execution; this reservation is not final admission.",
+    "If actual complete payload/storage exceeds declared ordinary or allocator limits, preserve failure and coordinate; never omit native records or waive caps."
+  ]
+}
