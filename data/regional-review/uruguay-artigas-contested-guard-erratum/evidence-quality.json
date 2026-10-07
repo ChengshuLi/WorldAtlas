@@ -420,5 +420,91 @@
     "python3 data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py --output data/regional-review/uruguay-artigas-contested-guard-erratum/outputs/run-2",
     "python3 data/regional-review/uruguay-artigas-contested-guard-erratum/verify-guard.py",
     "node scripts/evidence-quality.mjs data/regional-review/uruguay-artigas-contested-guard-erratum/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/baseline/data-administrative-sources.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/baseline/data-geography-part-25.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/baseline/data-hierarchy.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/baseline/data-macro-publication-v5.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/baseline/data-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/code/capsule-reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/code/original-reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/original-reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/original-source-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-gb-2017.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-igm-current.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/outputs/run-1/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/outputs/run-2/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/outputs/run-3/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/outputs/run-4/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/verify-guard.py",
+      "status": "added"
+    }
   ]
 }
