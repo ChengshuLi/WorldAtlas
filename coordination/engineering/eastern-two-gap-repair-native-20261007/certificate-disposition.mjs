@@ -39,7 +39,7 @@ export function disposeCertificates(repo,baseline,{hierarchy,before,after,releas
       'The complete v8 reference has changed descendant geometries; old envelope compatibility is not a v8 certificate.',
       'Existing absent regional approvals and location-attribute import restrictions remain closed.']};
   const nextCertificate={...certificate,reference_invalidation:disposition};
-  const nextHandoffs={...handoffs,reference_invalidation:disposition};
+  const nextHandoffs={...handoffs,macro_certificate_sha256:sha(json(nextCertificate)),reference_invalidation:disposition};
   const nextGate={...gate,reason:'The two reviewed physical reference corrections are staged in v8. Original pending v6 macro certificates have no verified v8 envelope compatibility; no complete regional branches are approved and location-attribute imports remain closed.',
     macro_boundaries:{...gate.macro_boundaries,pending_macro_certificate_sha256:sha(json(nextCertificate))},reference_correction_disposition:disposition};
   // Actual canonical consumers must reject both existing and falsely opened gates.
