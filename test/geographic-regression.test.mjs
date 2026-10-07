@@ -7,5 +7,5 @@ test('differential geography checks preserve neighbor, water, dateline and immut
     encoding: 'utf8', env: process.env, timeout: 120000
   });
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
-  assert.match(result.stderr, /Ran 20 tests/);
+  assert.match(result.stderr, /Ran 29 tests/);
 });

@@ -6,9 +6,10 @@ circle arcs. Polar caps/hemisphere-scale rings require a separately reviewed met
 """
 import math
 from pyproj import Geod, Transformer
-from shapely.geometry import Polygon, box
+from shapely.geometry import Polygon, MultiPolygon, box
 from shapely.affinity import translate
-from shapely import union_all
+from shapely import STRtree, union_all
+from shapely.validation import explain_validity
 from ellipsoidal_area import area
 
 VERSION = 'worldatlas-evidence-geometry-v1'
@@ -51,10 +52,38 @@ def _unwrap(ring):
     return result
 
 
+def _validate_multipart(polygons):
+    """Check original members in the declared periodic short-edge domain.
+
+    Clipping a single valid member at the date line creates artificial pieces.
+    Check before that operation, so those pieces are not confused with distinct
+    source members, and before union can dissolve an invalid shared edge/sliver.
+    """
+    if len(polygons) < 2:
+        return
+    multipart = MultiPolygon(polygons)
+    if not multipart.is_valid:
+        raise ValueError('Invalid original multipart topology in shortest-edge longitude domain: '
+                         + explain_validity(multipart))
+    tree = STRtree(polygons)
+    for index, polygon in enumerate(polygons):
+        for shift in (-360, 360):
+            shifted = translate(polygon, xoff=shift)
+            for other in tree.query(shifted):
+                other = int(other)
+                if other == index:
+                    continue
+                pair = MultiPolygon([shifted, polygons[other]])
+                if not pair.is_valid:
+                    raise ValueError('Invalid original periodic multipart topology between members '
+                                     f'{index} and {other}, longitude shift {shift}: '
+                                     + explain_validity(pair))
+
+
 def canonical_land(geometry):
     if geometry.is_empty or geometry.geom_type not in ('Polygon', 'MultiPolygon'):
         raise ValueError('Expected nonempty Polygon or MultiPolygon land')
-    pieces = []
+    polygons = []
     for p in ([geometry] if geometry.geom_type == 'Polygon' else geometry.geoms):
         outer = _unwrap(p.exterior)
         center = sum(x for x, _ in outer) / len(outer)
@@ -69,13 +98,16 @@ def canonical_land(geometry):
         west, south, east, north = q.bounds
         if east - west >= 180 or north - south > 120:
             raise ValueError('Hemisphere-scale land exceeds v1 method scope; subdivide with reviewed evidence')
+        polygons.append(q)
+    _validate_multipart(polygons)
+    pieces = []
+    for q in polygons:
+        west, south, east, north = q.bounds
         for n in range(math.floor((west + 180) / 360), math.floor((east + 180) / 360) + 1):
             cut = q.intersection(box(-180 + 360*n, -90, 180 + 360*n, 90))
             if cut.area > 0:
                 pieces.append(translate(cut, xoff=-360*n))
     result = union_all(pieces)
-    if sum(area(piece) for piece in pieces) - area(result) > max(1e-6, area(result) * 1e-10):
-        raise ValueError('Overlapping source multipart land; inspect instead of silently repairing')
     if result.is_empty or not result.is_valid or area(result) <= 0:
         raise ValueError('Land has no valid positive-area footprint')
     return result
