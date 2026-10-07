@@ -12,7 +12,7 @@ def record(commit,name,input_only=False):
     spec=spec_from_file_location('recorded_admission',HERE/'run.py');entry=module_from_spec(spec);spec.loader.exec_module(entry)
     out=REPO/'.cache'/name;entry.destination(out)
     logs=REPO/'.cache'/(name+'-execution');entry.destination(logs);logs.mkdir()
-    command=['/usr/bin/time','-l',PYTHON,'-I',str(HERE/'run.py'),'--commit',commit,'--out',str(out)]
+    command=['/usr/bin/time','-l',PYTHON,'-I','-B','-X','pycache_prefix='+str(REPO/'.cache'/'1421-never-materialized-bytecode'),str(HERE/'run.py'),'--commit',commit,'--out',str(out)]
     if input_only:command+=['--input-only']
     start=datetime.datetime.now(datetime.timezone.utc).isoformat();mono=time.monotonic_ns();env=dict(os.environ,PYTHONDONTWRITEBYTECODE='1')
     with (logs/'stdout').open('xb') as stdout,(logs/'stderr').open('xb') as stderr:

@@ -13,6 +13,7 @@ import types
 HERE = Path(__file__).absolute().parent
 REPO = HERE.parents[2]
 OWNED = 'coordination/engineering/mongolia-russia-guarded-execution-20261007/'
+BYTECODE_PREFIX = REPO / '.cache' / '1421-never-materialized-bytecode'
 LIMIT = 32 * 1024 * 1024
 PHASE = 256 * 1024 * 1024
 
@@ -57,8 +58,8 @@ def destination(path):
 
 
 def load(commit):
-    if not sys.flags.isolated:
-        raise ValueError('Use isolated Python; no project preloads')
+    if not sys.flags.isolated or not sys.dont_write_bytecode or sys.pycache_prefix!=str(BYTECODE_PREFIX) or BYTECODE_PREFIX.exists() or BYTECODE_PREFIX.is_symlink():
+        raise ValueError('Use isolated -B Python with the fixed nonexistent bytecode prefix; no cached or preloaded project execution')
     if subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD']).decode().strip() != commit:
         raise ValueError('Current exact immutable execution commit required')
     inventory = json.loads(materialized(commit, 'code-list.json'))
