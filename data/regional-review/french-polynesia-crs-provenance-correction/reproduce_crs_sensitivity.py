@@ -351,7 +351,7 @@ def main():
         'method_id': 'french-polynesia-rgpf-export-and-sensitivity-v1',
         'issue': 1294,
         'subjects': sorted(SUBJECTS),
-        'atlas_baseline_commit': '7962b56b08e21c581b5d4034fe3616da5f87efd7',
+        'atlas_baseline_commit': run_checked(['git', 'rev-parse', 'origin/main'], ROOT).strip(),
         'source_packet_baseline_commit': '0463152556158926681120155ec2e6fd7d0d8c7f',
         'archive_hashes': original_archive_checks,
         'source_crs': {'authority': ['EPSG', '4687'], 'name': 'RGPF', 'datum': 'Reseau Geodesique de la Polynesie Francaise', 'ellipsoid': 'GRS 1980', 'sidecars': prj_members},
