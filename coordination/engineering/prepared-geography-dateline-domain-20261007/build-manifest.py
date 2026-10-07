@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import shlex
 import sys
 
 CASE=Path(__file__).resolve().parent
@@ -78,7 +79,7 @@ manifest={'version':1,'issue':1293,'lane':'engineering','worker_id':'01a10fea-fe
           'conclusions':[{'status':'supported','source_ids':[s['id'] for s in sources],'text':'Both actual complete 49,625-feature executions agree: prepared failures zero, three strict-source failures and all twelve directed seam contacts retained. No source pointset or installed geography changed.'},
                          {'status':'unresolved','source_ids':['gb:FJI:ADM2','gb:RUS:ADM2'],'text':'Original Fiji out-of-range source coordinates remain unsupported; original/current source member differences and historical execution cause are not resolved. This method does not approve land, water, ownership, legal authority or repair.'}],
           'stages':{'research':'complete','implementation':'implemented','geographic_approval':'unapproved'},
-          'commands':[r['complete_command'] for r in [report,json.loads((CASE/'run-two/report.json').read_bytes())]],
+          'commands':[shlex.join(r['complete_command']) for r in [report,json.loads((CASE/'run-two/report.json').read_bytes())]],
           'validation':[{'method_id':'prepared-domain-validation','kind':kind,'outcome':'passed','evidence_path':PREFIX+'/verification/'+kind+'.json'} for kind in ['positive-control','negative-control','reproducibility']],
           'change_receipts':sorted(receipts,key=lambda r:r['path'])}
 (CASE/'evidence-quality.json').write_bytes(canonical(manifest))
