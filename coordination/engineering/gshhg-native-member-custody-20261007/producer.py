@@ -3,7 +3,6 @@ import argparse
 import datetime
 import hashlib
 import json
-import marshal
 import types
 import gzip
 import struct
@@ -32,6 +31,29 @@ CODEC_SHA = 'b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd'
 
 
 def callable_guard(module, raw, names):
+    # Marshal reference/intern tables can differ for byte-identical loaded code.
+    # Compare every public execution field and recursively typed constants instead.
+    fields = ('co_argcount','co_posonlyargcount','co_kwonlyargcount','co_nlocals',
+              'co_stacksize','co_flags','co_code','co_consts','co_names','co_varnames',
+              'co_filename','co_name','co_qualname','co_firstlineno','co_linetable',
+              'co_exceptiontable','co_freevars','co_cellvars')
+    def shape(value):
+        if isinstance(value,types.CodeType):
+            return ['code',[[name,shape(getattr(value,name))] for name in fields]]
+        if value is None:return ['none']
+        if value is Ellipsis:return ['ellipsis']
+        if type(value) is bool:return ['bool',value]
+        if type(value) is int:return ['int',str(value)]
+        if type(value) is float:return ['float',struct.pack('>d',value).hex()]
+        if type(value) is complex:return ['complex',shape(value.real),shape(value.imag)]
+        if type(value) is str:return ['str',value]
+        if type(value) is bytes:return ['bytes',value.hex()]
+        if type(value) is tuple:return ['tuple',[shape(x) for x in value]]
+        if type(value) is frozenset:
+            return ['frozenset',sorted((shape(x) for x in value),key=lambda x:json.dumps(x,sort_keys=True))]
+        raise ValueError('Unsupported immutable callable constant: '+type(value).__name__)
+    def fingerprint(code):
+        return json.dumps(shape(code),ensure_ascii=True,separators=(',',':')).encode()
     compiled = compile(raw,str(pathlib.Path(module.__file__)), 'exec')
     expected = {}
     def collect(code):
@@ -46,10 +68,10 @@ def callable_guard(module, raw, names):
         for part in name.split('.'):
             value = getattr(value,part)
         actual = getattr(value,'__code__',None)
-        if actual is None or name not in expected or marshal.dumps(actual) != marshal.dumps(expected[name]):
+        if actual is None or name not in expected or fingerprint(actual) != fingerprint(expected[name]):
             raise ValueError('Actual in-memory project callable differs: '+module.__name__+'.'+name)
         rows.append({'module':module.__name__,'callable':name,
-                     'code_sha256':hashlib.sha256(marshal.dumps(actual)).hexdigest()})
+                     'code_sha256':hashlib.sha256(fingerprint(actual)).hexdigest()})
     return rows
 
 
