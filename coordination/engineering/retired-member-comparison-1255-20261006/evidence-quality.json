@@ -38,7 +38,21 @@
         "path": "scripts/evidence/immutable.py",
         "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
       }
-    ]
+    ],
+    "pin_files": {
+      "current_component_successor_report": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+      "current_family_report": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "original_component_report": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "original_context_report": "coordination/engineering/worldwide-contexts-1184-20261006/run-one/report.json",
+      "semantic_recipe_report": "data/semantic-report.json"
+    },
+    "pins": {
+      "current_component_successor_report": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+      "current_family_report": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+      "original_component_report": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+      "original_context_report": "8180ea63d6c898940fbb2ea8b09c8604550c5883b74e9110f9bdee2d7a3a30d1",
+      "semantic_recipe_report": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+    }
   },
   "change_receipts": [
     {
@@ -693,10 +707,10 @@
       "sha256": "b2da93607871ed3b5431bec2a97c23fe19be2d9814c389ee3ef3472f7a9cb92e"
     },
     {
-      "bytes": 10610,
+      "bytes": 10910,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/retired-member-comparison-1255-20261006/package.py",
-      "sha256": "20680be7a3a5b2d571be03f56f425bd1221c9c405715c180b76b8069df96ef87"
+      "sha256": "0d3299d93653c253f9b096855216ed3eece1c688b2726d88b60bf90a3dd44e33"
     },
     {
       "bytes": 14060,
@@ -1046,7 +1060,7 @@
       "bytes": 1390,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/retired-member-comparison-1255-20261006.json",
-      "sha256": "37a747285164ba7fc4db33ecd4a09b43333467945feeb549a903134cf2279b95"
+      "sha256": "cccee540aaf2cb6ae973341f66fe5ac3647270142fde161a7f0911b8b24e60a9"
     }
   ],
   "sources": [
@@ -1553,7 +1567,7 @@
         "terms": "Previously retained repository and geoBoundaries derivative bytes. Complete derivative citation/use terms and individual original attribution retained; underlying government Direct Permission remains independently unverified, not a new permission claim."
       },
       "retention": "retained",
-      "retrieved_at": "2026-10-07T00:54:22.088962+00:00",
+      "retrieved_at": "2026-10-07T00:56:32.137792+00:00",
       "role": "Whole original immutable component/family/context aliases, complete original encoded and decoded archive fragments and recorded original attribution; no source authority approval",
       "temporal_status": "reference",
       "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1255",
