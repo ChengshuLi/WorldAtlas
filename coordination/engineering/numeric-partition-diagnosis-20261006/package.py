@@ -42,6 +42,8 @@ def package():
     (v/'failed-input-only-declared-algorithm.log').write_bytes((P/'.cache/failed-input-only-incorrect-declared-digest-algorithm.log').read_bytes())
     write('failed-input-only-declared-algorithm.json',{'status':'preserved-failed-input-only-attempt','failure':'Issue prose said LF-joined identifiers; all five unchanged acceptance digests actually encode canonical JSON arrays with final LF. Complete ordinary reconstruction verified the latter; issue prose was narrowly corrected.','counted_scientific_run':False,'original_scope_counts_or_digest_values_changed':False})
     write('executions.json',json.loads((P/'.cache/executions.json').read_bytes()))
+    for name in ['complete-reason-and-consensus-aggregation.json','complete-dimension-and-example-aggregation.json']:
+        write(name,json.loads((P/'.cache'/name).read_bytes()))
     # Complete evidence buckets retain all cases and all intact family contexts.
     rows=[]
     for pin in report['component_outputs']:rows.extend(json.loads(gzip.decompress((P/'run-one'/pin['path']).read_bytes())))
