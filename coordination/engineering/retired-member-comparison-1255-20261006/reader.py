@@ -59,6 +59,7 @@ class Inputs:
 
 
 def authenticate_executed_modules(repo,commit,paths):
+    if not isinstance(commit,str)or not re.fullmatch('[a-f0-9]{40}',commit):raise ValueError('Immutable execution commit required before Git')
     root=pathlib.Path(repo).resolve();receipt=[]
     for path in paths:
         path=safe_path(path);local=root/path

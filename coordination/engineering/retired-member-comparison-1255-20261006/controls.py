@@ -47,6 +47,13 @@ def run(commit,out):
         assert r.returncode!=0 and b'processed'not in r.stdout and sorted(str(p.relative_to(R))for p in P.rglob('*'))==before
         results.append({'control':'actual CLI rejects before writes '+bad,'outcome':'passed'})
     assert sentinel.read_bytes()==b'preserve'
+    for malformed in ['short','G'*40,'--output='+str(temp/'unsafe-git-output')]:
+        with unittest.mock.patch('reader.subprocess.check_output',side_effect=AssertionError('Git must not be called')):
+            checked('commit validated before Git '+malformed,lambda malformed=malformed:rejected(lambda:authenticate_executed_modules(R,malformed,[PREFIX+'/reader.py']),'Immutable execution commit'))
+        before=sorted(str(p.relative_to(R))for p in P.rglob('*'))
+        r=subprocess.run([sys.executable,str(P/'producer.py'),'--code-commit='+malformed,'--output',PREFIX+'/.cache/invalid-commit-cli'],capture_output=True)
+        assert r.returncode!=0 and b'Immutable execution commit required before Git'in r.stderr and sorted(str(p.relative_to(R))for p in P.rglob('*'))==before and sentinel.read_bytes()==b'preserve'
+        results.append({'control':'actual CLI rejects commit/option before Git or output writes '+malformed,'outcome':'passed'})
     fixture={'id':'c','geometry':mapping(box(0,0,1,1))};member={**fixture,'id':'m','metadata':{'number':1}}
     sc={'family_ids':['f'],'component_ids':['c'],'member_ids':['m'],'contact_ids':['t'],'roster_canonical_sha256':{'families':SHA(canon(['f'])),'components':SHA(canon(['c'])),'members':SHA(canon(['m']))},'existing_current_component_and_member_pins':[{'id':'c','canonical_feature_sha256':SHA(canon(fixture)),'geometry_sha256':SHA(canon(fixture['geometry']))}],'retired_member_complete_record_pins':[{'id':'m','canonical_record_sha256':SHA(canon(member)),'canonical_geometry_sha256':SHA(canon(member['geometry'])),'metadata':member['metadata']}]}
     fam={'f':{'component_ids':['c'],'component_count':1,'component_ids_sha256':SHA(canon(['c'])),'contact_ids':['t'],'source_families':[{'kind':'physical-adaptation-processing-reproduction','original_source_member_ids':['m']}]}}
