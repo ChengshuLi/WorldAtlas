@@ -8,6 +8,7 @@ def desc(p):
  if b[:2]==b'\x1f\x8b':raw=gzip.decompress(b);d.update(uncompressed_bytes=len(raw),uncompressed_sha256=sha(raw));assert len(raw)<=32*1024*1024
  assert len(b)<=32*1024*1024;return d
 config=json.loads((CASE/'input-config.json').read_bytes());base=config['baseline_commit']
+delivery={r['original_path']:r['delivered_path']for r in json.loads((CASE/'delivery-input-aliases.json').read_bytes())['rows']}
 pinpaths={'original_administrative_registry':'data/administrative-sources.json','original_physical_inventory':'coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json','existing_lossless_codec':'scripts/evidence/immutable.py'}
 pins={'original_administrative_registry':'ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633','original_physical_inventory':'a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c','existing_lossless_codec':'b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd'}
 baseline=[]
@@ -15,7 +16,7 @@ for key,path in pinpaths.items():
  b=subprocess.check_output(['git','show',base+':'+path],cwd=ROOT);assert sha(b)==pins[key];baseline.append({'path':path,'bytes':len(b),'sha256':sha(b),'hash_kind':'file-bytes','role':'original-source'})
 sources=[];source_paths=set()
 for product in config['source_products']:
- files=[desc(CASE/p['alias'])for p in product['parts']];source_paths.update(f['path']for f in files)
+ files=[desc(ROOT/delivery[str((CASE/p['alias']).relative_to(ROOT))])for p in product['parts']];source_paths.update(f['path']for f in files)
  sources.append({'id':product['key'],'url':product['recorded_consumed_url'],'role':'Complete original consumed input geometry, not dated physical land/water or legal authority','vintage':'Original consumed whole SHA '+product['original_sha256']+'; advertised represented year '+str(product['source_represented_year_claim']),'retrieved_at':'2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown','license':{'status':'redistributable','terms':product['recorded_license']+'; original source metadata and attribution retained through source catalogue and feature bindings.'},'retention':'retained','verification':'unverified','temporal_status':'reference','files':files,'limit':'Whole source bytes verified, source date/physical water/legal meaning not independently approved.'})
 manifest_path=str((CASE.parent/'evidence-quality.json').relative_to(ROOT));outputs=[]
 for p in sorted(CASE.rglob('*')):
