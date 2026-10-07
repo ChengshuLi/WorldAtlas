@@ -84,6 +84,9 @@ guarantee. Do not silently leave a legacy standalone writer in a new wrapper.
   attempts; never reuse them or infer success from some files being present.
   Research and engineering evidence namespaces are supported. The legacy single-file
   `write_new_vintage` interface remains available; whole-run producers use NewVintage.
+  `publish_bytes` applies the same safeguards to complete CSV/JSONL/GeoJSON and other
+  plain named products, including actual bounded gzip decoding. ZIP/archive producers
+  must separately admit all decoded members; a small transport never waives those caps.
 
 The existing manifest can optionally include versioned `record_checks` for structured
 claims. Each v1 check declares `path`, `json_pointer`, `id_key`, an independent pinned

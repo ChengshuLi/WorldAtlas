@@ -217,9 +217,9 @@ def admit_destination(baseline, owned_path, vintage, filenames):
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', vintage):
         raise ValueError('Use a safe named fresh vintage')
     if not filenames or len(filenames) != len(set(filenames)) or any(
-        not re.fullmatch(r'[a-zA-Z0-9_-]+\.json(?:\.gz)?', name) for name in filenames
+        not isinstance(name, str) or not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}', name) for name in filenames
     ):
-        raise ValueError('Use a complete unique plain JSON output inventory')
+        raise ValueError('Use a complete unique plain output filename inventory')
     root = Path(baseline.repo) / owned_path / 'vintages' / vintage
     for target in [root, *(root / name for name in filenames)]:
         for ancestor in [target, *target.parents]:
@@ -244,17 +244,32 @@ class NewVintage:
             raise FileExistsError('Fresh run directory already exists')
 
     def publish(self, values):
+        if any(not re.fullmatch(r'[a-zA-Z0-9_-]+\.json(?:\.gz)?', name) for name in values):
+            raise ValueError('Use publish_bytes for non-JSON products')
+        payloads = {}
+        for name, value in values.items():
+            raw = canonical_json(value)
+            if len(raw) > MAX_FILE_BYTES:
+                raise ValueError('Output exceeds file byte budget')
+            payloads[name] = deterministic_gzip(raw) if name.endswith('.gz') else raw
+        return self.publish_bytes(payloads)
+
+    def publish_bytes(self, values):
+        """Publish complete CSV/JSONL/GeoJSON/etc. bytes with the same safeguards."""
         if set(values) != set(self.filenames):
             raise ValueError('Incomplete or unexpected output set')
         payloads = {}
         decoded_output_bytes = 0
         for name, value in values.items():
-            raw = canonical_json(value)
-            payloads[name] = deterministic_gzip(raw) if name.endswith('.gz') else raw
+            if not isinstance(value, bytes) or len(value) > MAX_FILE_BYTES:
+                raise ValueError('Require bounded complete output bytes')
+            payloads[name] = value
             if name.endswith('.gz'):
+                with gzip.GzipFile(fileobj=io.BytesIO(value)) as stream:
+                    raw = stream.read(MAX_FILE_BYTES + 1)
+                if len(raw) > MAX_FILE_BYTES:
+                    raise ValueError('Decoded output exceeds file byte budget')
                 decoded_output_bytes += len(raw)
-            if len(raw) > MAX_FILE_BYTES or len(payloads[name]) > MAX_FILE_BYTES:
-                raise ValueError('Output exceeds file byte budget')
         if sum(self.baseline.consumed.values()) + sum(len(raw) for raw in payloads.values()) + decoded_output_bytes + 4096 > self.baseline.max_phase_bytes:
             raise ValueError('Complete phase including output exceeds byte budget')
         records = [descriptor(str((self.root / name).relative_to(self.baseline.repo)), raw) for name, raw in payloads.items()]

@@ -124,6 +124,11 @@ class Prevention(unittest.TestCase):
         link = first.root.parent / 'broken'; link.symlink_to(self.root / 'absent')
         with self.assertRaisesRegex(ValueError, 'Symlink'): NewVintage(self.baseline, self.owned, 'broken', list(outputs))
         self.assertFalse((self.root / 'absent').exists())
+        raw = NewVintage(self.baseline, self.owned, 'raw-products', ['rows.csv', 'rows.jsonl'])
+        products = {'rows.csv': b'id,parent\na,province-a\n', 'rows.jsonl': b'{"id":"a"}\n'}
+        raw.publish_bytes(products)
+        for name, value in products.items(): self.assertEqual((raw.root / name).read_bytes(), value)
+        self.assertEqual(len(json.loads((raw.root / 'publication.json').read_bytes())['outputs']), 2)
 
     def test_partial_failure_cannot_claim_complete(self):
         run = NewVintage(self.baseline, self.owned, 'partial', ['one.json', 'two.json'])
