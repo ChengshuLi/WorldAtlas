@@ -332,7 +332,7 @@
     {
       "description": "Two individual isolated CLI invocations share the exact frozen execution commit, code/input closure, interpreter/native runtime bodies and callable fingerprints; each command, cwd, invoked/resolved interpreter, exit, timestamps and result hash are retained.",
       "id": "frozen-bounded-source-fitness-measurement",
-      "kind": "reproducibility",
+      "kind": "code",
       "software": "Python 3.12.14; zlib 1.2.12; Shapely 2.1.2; GEOS 3.13.1",
       "units": "Result bytes and SHA-256."
     }
