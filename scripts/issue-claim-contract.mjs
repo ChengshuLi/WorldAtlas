@@ -1,4 +1,5 @@
 import {quotaDelay} from './github-quota.mjs';
+import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
@@ -131,13 +132,18 @@ export async function linkedPulls(api,repo,number){
  for(const event of timeline){const source=event.source?.issue;if(!source?.pull_request)continue;try{if(validateIssuePRBody(source.body??'').github_issue===number)ids.add(source.number);}catch{}}
  return Promise.all([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
-export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms))} = {}){
+export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining} = {}){
  if(!token)throw Error('Read/write GitHub token required');
+ if(deadlineRemaining!==undefined&&typeof deadlineRemaining!=='function')throw Error('Invalid job deadline');
+ const remaining=()=>{const value=deadlineRemaining?deadlineRemaining():Infinity;if(deadlineRemaining&&!Number.isFinite(value))throw Error('Invalid job deadline');return value;};
+ const admit=()=>{if(remaining()<=HTTP_ATTEMPT_MS)throw Object.assign(Error('Job deadline cannot admit another bounded HTTP attempt'),{jobDeadline:true});};
  const apiStarted=now();let httpAdmission=null;
  const request = async(route,method='GET',body,observeCapacity=()=>{},capacityProbe=false)=>{
+  admit();
   httpAdmission?.({route,method,capacityProbe});
+  admit();
   let response;
-  try {response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(20000)});}
+  try {response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS)});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
   onRequest({route, method, status: response.status});
   const headerNumber = name => {const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
@@ -155,27 +161,32 @@ export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Da
      ['retry_after',numeric('retry-after')],['request_id',/^[a-fA-F0-9:]{1,100}$/.test(requestId??'')?requestId:undefined]].filter(([,value])=>value!==undefined))};
    throw error;
   }
-  if(response.status===204)return null;
+  const finish=payload=>{if(remaining()<=0)throw Object.assign(Error('Job deadline exhausted while consuming HTTP response'),{jobDeadline:true});return payload;};
+  if(response.status===204)return finish(null);
   const payload=await response.json();
   if(route==='/rate_limit'){
    const numeric=name=>{const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
    const capacity_headers={limit:numeric('x-ratelimit-limit'),remaining:numeric('x-ratelimit-remaining'),reset:numeric('x-ratelimit-reset')};
    // Only numeric capacity fields are exposed. No complete response/header map
    // or authentication data crosses into pacing logs or durable receipts.
-   return {...payload,capacity_headers};
+   return finish({...payload,capacity_headers});
   }
-  return payload;
+  return finish(payload);
  };
  const api = async(route, method='GET', body) => {
   let lastQuota;
   for(let attempt=0;;attempt++){
    try{return await request(route,method,body);}
    catch(error){
-    if(error.requestBudget&&lastQuota)error.quotaCause=lastQuota;
+    if((error.requestBudget||error.jobDeadline)&&lastQuota)error.quotaCause=lastQuota;
     const delay=quotaDelay(error,now());
     if(delay!==null)lastQuota=error;
     // Never retry writes, transport ambiguity, ordinary denial or unbounded waits.
-    if(method!=='GET'||body!==undefined||delay===null||attempt>=2||delay>=readWaitMs-(now()-apiStarted))throw error;
+    if(method!=='GET'||body!==undefined||delay===null||attempt>=2)throw error;
+    // Include the next complete attempt, not only the sleep. Recheck admission
+    // after waking too, because previous work or an oversleep may consume time.
+    if(delay+HTTP_ATTEMPT_MS>=remaining()){error.jobDeadline=true;throw error;}
+    if(delay>=readWaitMs-(now()-apiStarted))throw error;
     await sleep(delay);
    }
   }

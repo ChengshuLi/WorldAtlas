@@ -27,10 +27,12 @@ jobs:
       contents: read
       pull-requests: write
       issues: write
+      # Read the exact current attempt's job start before admitting queue work.
+      actions: read
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: main
+          ref: ${{ github.workflow_sha }}
           persist-credentials: false
           sparse-checkout: |
             scripts
@@ -60,7 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: main
+          ref: ${{ github.workflow_sha }}
           persist-credentials: false
           sparse-checkout: |
             scripts

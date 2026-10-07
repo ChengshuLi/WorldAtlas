@@ -1,0 +1,347 @@
+{
+  "version": 1,
+  "issue": 1275,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "993f79e82bf5da34a208ea4a1b4edbd78e4e559e",
+    "files": [
+      {
+        "path": ".github/workflows/merge-scheduler.yml",
+        "bytes": 2251,
+        "sha256": "cc2e2917c92c147fe8fa93b12871046730e7364f80adfc63edd5e70265c5b2fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "AGENTS.md",
+        "bytes": 9674,
+        "sha256": "f4610111c7c5878a46dfe242728c278f6dd0f8bf3e99a41870a139873c7a6ab6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/MERGE_QUEUE_CLIENT.md",
+        "bytes": 3746,
+        "sha256": "75e68d8be4ba6bf9547ae232b07b7ca01fb6e9e52395cc4c57ac7fc930bcde07",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 40708,
+        "sha256": "16017e07e979f155372073708650224927994a95c4e1658e22128d0825ad6417",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 7069,
+        "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/final-capacity.mjs",
+        "bytes": 20323,
+        "sha256": "90542cc945e6a967c5da5daacf52ffcaff613e6f5ee0fdebf83c74f017c8e643",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/git-blob-transport.mjs",
+        "bytes": 4576,
+        "sha256": "f77d927e5f4096f03518c5d785cfde08952909597b5a429b12e3b118096f4c1c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/github-quota.mjs",
+        "bytes": 1758,
+        "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 16802,
+        "sha256": "f6deff27deeeb73799ba3540af0099d5292f192ec88098debef458b13d93f4d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-scheduler.mjs",
+        "bytes": 8191,
+        "sha256": "264572f616f4f23010f418d13be3064dc9daf0d713b6618daab128583a94ea06",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 21033,
+        "sha256": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-merge-scheduler.mjs",
+        "bytes": 1303,
+        "sha256": "7d8f00b0e03ccfee51bb1b000b5fec2b2c8e1da55aa79b9b8bbfeccabacb0215",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/worker-result.mjs",
+        "bytes": 2228,
+        "sha256": "4e4a416ba0492dd841617cf14b390d0900bcc0ef427076b209827ca6d67f2215",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/github-quota.test.mjs",
+        "bytes": 5885,
+        "sha256": "a55ec32f91052bece03d92214699abfb6ccec48431d0165e596916add4474d0d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration-entrypoint.test.mjs",
+        "bytes": 14358,
+        "sha256": "67475a665686ddf3a127f46d9128b17c8b0b1072cab1cdccd99956dc9e2806fc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-scheduler.test.mjs",
+        "bytes": 5950,
+        "sha256": "06f828b96f075e35e0e11eecde82eac02deafa739ce10a325bd54bdca34b4955",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-scheduler.yml",
+      "bytes": 2395,
+      "sha256": "6cd9063053720e79b424058ec49a0d22f2aea75e820634f599032cef3fad96b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007.json",
+      "bytes": 2073,
+      "sha256": "d2d978302fc5c1baa698597bf1d0d3cc356b6d4d4759cefe8c38908cb493b13f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/README.md",
+      "bytes": 3830,
+      "sha256": "39534b8fc50a3563b3ac1034c6a9b3f4e77b3551ab9c50ad3572eed52c229fc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/claim.json",
+      "bytes": 838,
+      "sha256": "d57fbcd59caad790b3b0bee068bd8220700feb338d1d6c7a4ec53733380f9291",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/controls.txt",
+      "bytes": 15923,
+      "sha256": "aa051bb608232cffdd87591ea92c8c0c6e8d762b22138b6f3404f63b16c01ffb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/historical-job-metadata.json",
+      "bytes": 367,
+      "sha256": "e1732c2ab6070b427f148124c568c2e4aba5c7e932d0620d44e94f3539e35b1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/issue-snapshot.json",
+      "bytes": 10841,
+      "sha256": "13b5547ffb6a2489d1fa8324c2a009509a434476f31ef34f9820a40a31847d20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/scope-controls.txt",
+      "bytes": 2374,
+      "sha256": "dd32242f75e2090db860af70d016069f6b8a6446ff107ab9034ae017306085ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/verification.json",
+      "bytes": 2492,
+      "sha256": "b8915e7a781612e1e140a4bdd4a6b77f6c5116c1389ae4b055b05a1f2b2eef44",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "bytes": 4813,
+      "sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 42868,
+      "sha256": "24d0362091130994584f404f4fcf1748e629e9c6aeb3f56efa87a228ed280a0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 17819,
+      "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "bytes": 4238,
+      "sha256": "c14b239a08d5b27f64253e164c8647b13ac0c593ffc21dc387982fbf11711a13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-scheduler.mjs",
+      "bytes": 8253,
+      "sha256": "f15eaeded7415a250e502f573656db31ed1fbe17c9a2986bd9ee692fe490584c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-merge-scheduler.mjs",
+      "bytes": 4942,
+      "sha256": "b299418995a92e1c56836571fb347c4ac25d100b04895290705f7645e2b363e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/job-deadline.test.mjs",
+      "bytes": 17731,
+      "sha256": "b70dbd2d64be5a67c9f731ac22c7619f7921e9990f73f06b21ef80dc3c03ee67",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-boundaries.mjs",
+      "bytes": 7480,
+      "sha256": "566bf13b9429234c92ae7a88703d2993b368e8197f13d928eefa63984a3302a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-native-http.mjs",
+      "bytes": 4761,
+      "sha256": "d2bfd9a504a835013be4d44fba58d34b2d0a3fe2443fdf9d231be63212134785",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/job-deadline-independent.test.mjs",
+      "bytes": 954,
+      "sha256": "59acaa2ee3a0431b3f246d86835c8ec75906f057c0748f22c6d632435ef14d72",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "actual-job-deadline-admission",
+      "kind": "code",
+      "description": "Authenticate current scheduler job/run/attempt start and pinned workflow timeout; exercise actual registration/scheduling entrypoint and CLI with the real quota classifier, independent expected time/attempt counts and synthetic HTTP; preserve queue/capacity/evidence/ownership safeguards.",
+      "software": "Node 24 and pinned repository modules; tests use mocked HTTP and simulated clock, not live GitHub quota exhaustion.",
+      "units": "Milliseconds for elapsed-time/wait/timeout controls; counts of actual HTTP attempts and tests; no scientific or geographic measurement."
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "metric_bindings": [],
+  "rendered_tables": [],
+  "validation": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "Verify all named test files exist; node --test test/github-quota.test.mjs test/git-blob-transport.test.mjs test/final-capacity.test.mjs test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs test/job-deadline.test.mjs test/job-deadline-independent.test.mjs",
+    "node --test test/handoff-scope.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/job-deadline-admission-1275-20261007/evidence-quality.json",
+    "Read-only validatePremergeManifest against current issue/claim and complete changed-file receipts"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-scheduler.yml",
+      "status": "modified",
+      "original_sha256": "cc2e2917c92c147fe8fa93b12871046730e7364f80adfc63edd5e70265c5b2fe"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/historical-job-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/issue-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/scope-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/job-deadline-admission-1275-20261007/verification.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "status": "modified",
+      "original_sha256": "75e68d8be4ba6bf9547ae232b07b7ca01fb6e9e52395cc4c57ac7fc930bcde07"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "16017e07e979f155372073708650224927994a95c4e1658e22128d0825ad6417"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "f6deff27deeeb73799ba3540af0099d5292f192ec88098debef458b13d93f4d1"
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/merge-scheduler.mjs",
+      "status": "modified",
+      "original_sha256": "264572f616f4f23010f418d13be3064dc9daf0d713b6618daab128583a94ea06"
+    },
+    {
+      "path": "scripts/run-merge-scheduler.mjs",
+      "status": "modified",
+      "original_sha256": "7d8f00b0e03ccfee51bb1b000b5fec2b2c8e1da55aa79b9b8bbfeccabacb0215"
+    },
+    {
+      "path": "test/job-deadline.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-boundaries.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-native-http.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/job-deadline-independent.test.mjs",
+      "status": "added"
+    }
+  ]
+}
