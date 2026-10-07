@@ -1,0 +1,1287 @@
+{
+  "version": 1,
+  "issue": 1389,
+  "lane": "geography",
+  "worker_id": "01a10947-3b7d-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:NOR:ADM2:86288312B50158709887361",
+    "gb:NOR:ADM2:86288312B64496782861055",
+    "gb:NOR:ADM2:86288312B82966611739072",
+    "gb:SWE:ADM2:70781695B94600430897975"
+  ],
+  "subject_ids_sha256": "375c256e87d635c9c28bfb8335912c973a3b9d03a2d0a3cedc531e2524db6ea5",
+  "baseline": {
+    "commit": "24272235650c50528304e8146fb80a5b0c515800",
+    "files": [
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "bytes": 73547,
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4948066,
+        "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "bytes": 2085110,
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-000.geojson.gz",
+        "bytes": 1131547,
+        "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388165,
+        "uncompressed_sha256": "653d22e8f1490641938f1d8b747e88cd565b21041bc61e6b3ad9ea325f6f44bc"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-001.geojson.gz",
+        "bytes": 945171,
+        "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387218,
+        "uncompressed_sha256": "687212d297c8c65863020693f1938f62aa70297aa68332c8047032fc6b0be708"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-002.geojson.gz",
+        "bytes": 1030525,
+        "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387138,
+        "uncompressed_sha256": "b9a92855986811f4232fe01b763d97bf7593a05b01be11c2975122623d1ebe83"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-003.geojson.gz",
+        "bytes": 1164442,
+        "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387472,
+        "uncompressed_sha256": "d5329c7b3fb7ee964f2e582823fea5435f801214162a835dca4210ec12bb2474"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-004.geojson.gz",
+        "bytes": 1126016,
+        "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388041,
+        "uncompressed_sha256": "186e5a53eecb217ec96ce7b4dcbc5adc9dbf05edcfe75e3a9c4681065f6569dc"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-005.geojson.gz",
+        "bytes": 1137361,
+        "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388046,
+        "uncompressed_sha256": "7532e21d6aefe58343e7529d244f3dc5fb8e11ad4a3212a91a3b7d6a777694ba"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-006.geojson.gz",
+        "bytes": 1130906,
+        "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388016,
+        "uncompressed_sha256": "59a3777a8ababfbe09f67a4f5ede3cd5577805dadd6f895f0bf8b69ac92db98a"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+        "bytes": 1120843,
+        "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388589,
+        "uncompressed_sha256": "2460e55beb8ed740fc92341993e67660b30a142b3433aebcd006b833998f62d4"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-008.geojson.gz",
+        "bytes": 1161752,
+        "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387297,
+        "uncompressed_sha256": "45a0a16bf4340220d10f8bd3826309508850b7c4b945f5911fd2fe3d3de66042"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+        "bytes": 1196442,
+        "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386692,
+        "uncompressed_sha256": "7cc734babaec29ee58954f972711d8f2933e5aa65f85f51826f48ffc993df0f5"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-010.geojson.gz",
+        "bytes": 1155467,
+        "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388250,
+        "uncompressed_sha256": "9c6450445339823d4de930682cd935a4016ecaad4ea96b54cc1618897f6e9301"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-011.geojson.gz",
+        "bytes": 1098101,
+        "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387813,
+        "uncompressed_sha256": "1b8b9e6c174151dda62b223cac86578e4673c70a0c637c48e4c61348dd350929"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-012.geojson.gz",
+        "bytes": 1137180,
+        "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387729,
+        "uncompressed_sha256": "bfc3f8d794b361f6c31c750166a4193e110d6bc71d0eb96687389204562fdd01"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+        "bytes": 1214905,
+        "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388217,
+        "uncompressed_sha256": "6d4e5a76dd96557de78ab8678a1992bce8bf91b31264f1dec6e2dbb5a4266591"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-014.geojson.gz",
+        "bytes": 1298884,
+        "sha256": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388144,
+        "uncompressed_sha256": "e243ff5498dad81d691dc24c0717079926b14b01ed34c5c5d89e24be83faaad4"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-015.geojson.gz",
+        "bytes": 1290795,
+        "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387738,
+        "uncompressed_sha256": "7a6a1e59523a504de4924d90f744eef0f6262cc8f95918bb15c3d6741c4060a5"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-016.geojson.gz",
+        "bytes": 670977,
+        "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 4422645,
+        "uncompressed_sha256": "39513f963e6e42eb666fa9be703c81bc5c1b314221f8550e8aff19b73c1b80d5"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df.bin",
+        "bytes": 771440,
+        "sha256": "4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+        "bytes": 492083,
+        "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/receipt.json",
+        "bytes": 669,
+        "sha256": "55f4399d4bc54bbaed8bdd28be665f6cb27bfcb4b0db5dd144a950bb25fe38fb",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+        "bytes": 1565161,
+        "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 5043554,
+        "uncompressed_sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9"
+      },
+      {
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/manifest.json.gz",
+        "bytes": 3241,
+        "sha256": "71ac7d75f7d1ed5992893f6a983e839773f6ec2423baee33017bebbc8b3788ec",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 10452,
+        "uncompressed_sha256": "aa50635f372959d7c36045648e8e426737da4d6039e7ebcb4309160fcc917894"
+      },
+      {
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/natural-earth-land.geojson.gz.gz",
+        "bytes": 3570430,
+        "sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 3569322,
+        "uncompressed_sha256": "6642c0dfdb15359c3fb5135bd525f76392ca01df7efd2a4652fa60c4cd961294"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/README.md",
+        "bytes": 6481,
+        "sha256": "8b1511e2e1cc3b75794053f7f514e3400d0df34dd2ec203ed883999e5625c3e4",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/evidence-quality.json",
+        "bytes": 69649,
+        "sha256": "38f526711d8085fb3dc6c79a6b80069a678710168316793bcc10d1f571020e87",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson",
+        "bytes": 4724258,
+        "sha256": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/gb-SWE-ADM2-original-simplified.geojson",
+        "bytes": 969526,
+        "sha256": "da1070d503e08824b28f8dfac98df108f7ba07772da8c0d3a6f5016a5938801a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/natural-earth-lakes.geojson.gz",
+        "bytes": 1565161,
+        "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 5043554,
+        "uncompressed_sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/natural-earth-land.geojson.gz.gz",
+        "bytes": 3570430,
+        "sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 3569322,
+        "uncompressed_sha256": "6642c0dfdb15359c3fb5135bd525f76392ca01df7efd2a4652fa60c4cd961294"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/physical-reference-overlays.json",
+        "bytes": 5382,
+        "sha256": "f2b5f0108a18b3383ce762d2b24d8bdf6bf09608445a4622f2d3a8123ec38a68",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_physical_reference_overlay.py",
+        "bytes": 2880,
+        "sha256": "b01cfd198117137ebdf4e15293af9477073ed1c0d1726833edb9ee2df9edd66a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_source_comparison.py",
+        "bytes": 13824,
+        "sha256": "4fbae5c96877995dc5df97bec42bdbc769f6b44937998ffef91d1963f9f680bc",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-consumed-source-subjects.geojson",
+        "bytes": 29279,
+        "sha256": "ff1575cf01715366895b6fb9e1a982923f00875d55cb0d4da9fe0f4a52a96ba3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-atlas-subjects.geojson",
+        "bytes": 20876,
+        "sha256": "8766e34825f8f3cb3341f9000f6cf24b5c769c585264b11dc6b329b3c3b1c472",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-components.geojson",
+        "bytes": 3904,
+        "sha256": "995a8aac45ad4dfd707d4d14e1e002eeb85dea4d5ffe611877ee4fb4554ea38f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-fragments.geojson",
+        "bytes": 8590,
+        "sha256": "9583c153adf2774b49771fac018d5cb670be595837f22cce29d5d425bc2026c1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/source-and-candidate-comparison.json",
+        "bytes": 140112,
+        "sha256": "a20495f6a86bb95a8b598789b5ed592ed1518b452c9f7b2e1ae2831a4955b6b3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/native-context-migration/snapshots/data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "baseline_1": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline_2": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "baseline_3": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+      "baseline_4": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "baseline_5": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3",
+      "baseline_6": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "baseline_7": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+      "baseline_8": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+      "baseline_9": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+      "baseline_10": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+      "baseline_11": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "baseline_12": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+      "baseline_13": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "baseline_14": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+      "baseline_15": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "baseline_16": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+      "baseline_17": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+      "baseline_18": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b",
+      "baseline_19": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57",
+      "baseline_20": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc",
+      "baseline_21": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e",
+      "baseline_22": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6",
+      "baseline_23": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f",
+      "baseline_24": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e",
+      "baseline_25": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+      "baseline_26": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77",
+      "baseline_27": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d",
+      "baseline_28": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f",
+      "baseline_29": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5",
+      "baseline_30": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8",
+      "baseline_31": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab",
+      "baseline_32": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1",
+      "baseline_33": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede",
+      "baseline_34": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf",
+      "baseline_35": "4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df",
+      "baseline_36": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+      "baseline_37": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "baseline_38": "55f4399d4bc54bbaed8bdd28be665f6cb27bfcb4b0db5dd144a950bb25fe38fb",
+      "baseline_39": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+      "baseline_40": "71ac7d75f7d1ed5992893f6a983e839773f6ec2423baee33017bebbc8b3788ec",
+      "baseline_41": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68",
+      "original_1233_1": "8b1511e2e1cc3b75794053f7f514e3400d0df34dd2ec203ed883999e5625c3e4",
+      "original_1233_2": "38f526711d8085fb3dc6c79a6b80069a678710168316793bcc10d1f571020e87",
+      "original_1233_3": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e",
+      "original_1233_4": "da1070d503e08824b28f8dfac98df108f7ba07772da8c0d3a6f5016a5938801a",
+      "original_1233_5": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+      "original_1233_6": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68",
+      "original_1233_7": "f2b5f0108a18b3383ce762d2b24d8bdf6bf09608445a4622f2d3a8123ec38a68",
+      "original_1233_8": "b01cfd198117137ebdf4e15293af9477073ed1c0d1726833edb9ee2df9edd66a",
+      "original_1233_9": "4fbae5c96877995dc5df97bec42bdbc769f6b44937998ffef91d1963f9f680bc",
+      "original_1233_10": "ff1575cf01715366895b6fb9e1a982923f00875d55cb0d4da9fe0f4a52a96ba3",
+      "original_1233_11": "8766e34825f8f3cb3341f9000f6cf24b5c769c585264b11dc6b329b3c3b1c472",
+      "original_1233_12": "995a8aac45ad4dfd707d4d14e1e002eeb85dea4d5ffe611877ee4fb4554ea38f",
+      "original_1233_13": "9583c153adf2774b49771fac018d5cb670be595837f22cce29d5d425bc2026c1",
+      "original_1233_14": "a20495f6a86bb95a8b598789b5ed592ed1518b452c9f7b2e1ae2831a4955b6b3",
+      "actual_comparison_part-17": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+      "actual_comparison_part-22": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    "pin_files": {
+      "baseline_1": "data/hierarchy.json",
+      "baseline_2": "data/administrative-sources.json",
+      "baseline_3": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "baseline_4": "data/canonical-grid/manifest.json",
+      "baseline_5": "data/geography/part-17.json",
+      "baseline_6": "data/geography/part-22.json",
+      "baseline_7": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "baseline_8": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "baseline_9": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "baseline_10": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "baseline_11": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "baseline_12": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "baseline_13": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "baseline_14": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "baseline_15": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "baseline_16": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "baseline_17": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "baseline_18": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-000.geojson.gz",
+      "baseline_19": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-001.geojson.gz",
+      "baseline_20": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-002.geojson.gz",
+      "baseline_21": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-003.geojson.gz",
+      "baseline_22": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-004.geojson.gz",
+      "baseline_23": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-005.geojson.gz",
+      "baseline_24": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-006.geojson.gz",
+      "baseline_25": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+      "baseline_26": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-008.geojson.gz",
+      "baseline_27": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+      "baseline_28": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-010.geojson.gz",
+      "baseline_29": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-011.geojson.gz",
+      "baseline_30": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-012.geojson.gz",
+      "baseline_31": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+      "baseline_32": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-014.geojson.gz",
+      "baseline_33": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-015.geojson.gz",
+      "baseline_34": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-016.geojson.gz",
+      "baseline_35": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df.bin",
+      "baseline_36": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+      "baseline_37": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "baseline_38": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/receipt.json",
+      "baseline_39": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+      "baseline_40": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/manifest.json.gz",
+      "baseline_41": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/natural-earth-land.geojson.gz.gz",
+      "original_1233_1": "research/geography/gap-source-nordic-shared-seams-20261006/README.md",
+      "original_1233_2": "research/geography/gap-source-nordic-shared-seams-20261006/evidence-quality.json",
+      "original_1233_3": "research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson",
+      "original_1233_4": "research/geography/gap-source-nordic-shared-seams-20261006/gb-SWE-ADM2-original-simplified.geojson",
+      "original_1233_5": "research/geography/gap-source-nordic-shared-seams-20261006/natural-earth-lakes.geojson.gz",
+      "original_1233_6": "research/geography/gap-source-nordic-shared-seams-20261006/natural-earth-land.geojson.gz.gz",
+      "original_1233_7": "research/geography/gap-source-nordic-shared-seams-20261006/physical-reference-overlays.json",
+      "original_1233_8": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_physical_reference_overlay.py",
+      "original_1233_9": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_source_comparison.py",
+      "original_1233_10": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-consumed-source-subjects.geojson",
+      "original_1233_11": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-atlas-subjects.geojson",
+      "original_1233_12": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-components.geojson",
+      "original_1233_13": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-fragments.geojson",
+      "original_1233_14": "research/geography/gap-source-nordic-shared-seams-20261006/source-and-candidate-comparison.json",
+      "actual_comparison_part-17": "data/native-context-migration/snapshots/data/geography/part-17.json",
+      "actual_comparison_part-22": "data/geography/part-22.json"
+    },
+    "subject_files": {
+      "gb:NOR:ADM2:86288312B50158709887361": "data/native-context-migration/snapshots/data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B64496782861055": "data/native-context-migration/snapshots/data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B82966611739072": "data/native-context-migration/snapshots/data/geography/part-17.json",
+      "gb:SWE:ADM2:70781695B94600430897975": "data/geography/part-22.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-nor-consumed",
+      "url": "https://github.com/wmgeolab/geoBoundaries",
+      "role": "Identity or mechanical comparison context; no territorial adjudication",
+      "vintage": "geoBoundaries pinned commit 9469f09592ced973a3448cf66b6100b741b64c0d; consumed simplified NOR product advertised 2013",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms were not independently verified for this packet; retain only exact already-preserved repository bytes or restore from the cited official page."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore from baseline pin original_1233_3 in research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson.",
+      "limit": "Does not establish exact historical boundary, parent crosswalk, legal territory, source completeness beyond the exact retained products, or license status.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "retained-swe-consumed",
+      "url": "https://github.com/wmgeolab/geoBoundaries",
+      "role": "Identity or mechanical comparison context; no territorial adjudication",
+      "vintage": "geoBoundaries pinned commit 9469f09592ced973a3448cf66b6100b741b64c0d; consumed simplified SWE product advertised 2017",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms were not independently verified for this packet; retain only exact already-preserved repository bytes or restore from the cited official page."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore from baseline pin original_1233_4 in research/geography/gap-source-nordic-shared-seams-20261006/gb-SWE-ADM2-original-simplified.geojson.",
+      "limit": "Does not establish exact historical boundary, parent crosswalk, legal territory, source completeness beyond the exact retained products, or license status.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "statistics-norway-identity",
+      "url": "https://dataportal.ssb.no/classifications/131/correspondences/190",
+      "role": "Identity or mechanical comparison context; no territorial adjudication",
+      "vintage": "2017 municipality classification/correspondence; identity context only",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms were not independently verified for this packet; retain only exact already-preserved repository bytes or restore from the cited official page."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Official page inspected 2026-10-07; retrieve directly from cited URL.",
+      "limit": "Does not establish exact historical boundary, parent crosswalk, legal territory, source completeness beyond the exact retained products, or license status.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "kartverket-names",
+      "url": "https://www.kartverket.no/til-lands/stadnamn/samiske-og-kvenske-fylkes-og-kommunenamn",
+      "role": "Identity or mechanical comparison context; no territorial adjudication",
+      "vintage": "Current multilingual name list; updated 2026-08-31",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms were not independently verified for this packet; retain only exact already-preserved repository bytes or restore from the cited official page."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Official page inspected 2026-10-07; retrieve directly from cited URL.",
+      "limit": "Does not establish exact historical boundary, parent crosswalk, legal territory, source completeness beyond the exact retained products, or license status.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "kiruna-context",
+      "url": "https://kiruna.se/download/18.70c3d424173b4900fc548d3e/1600606427810/engelska.pdf",
+      "role": "Identity or mechanical comparison context; no territorial adjudication",
+      "vintage": "Municipal information PDF, 2015 revision cited in PDF; context only",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms were not independently verified for this packet; retain only exact already-preserved repository bytes or restore from the cited official page."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Official PDF inspected 2026-10-07; retrieve directly from cited URL.",
+      "limit": "Does not establish exact historical boundary, parent crosswalk, legal territory, source completeness beyond the exact retained products, or license status.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "natural-earth-diagnostics",
+      "url": "https://www.naturalearthdata.com/",
+      "role": "Identity or mechanical comparison context; no territorial adjudication",
+      "vintage": "Retained Natural Earth generalized land/lakes diagnostic source bytes; source version is recorded in #1233 retention record",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms were not independently verified for this packet; retain only exact already-preserved repository bytes or restore from the cited official page."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore exact compressed source bytes from source-lock pins original_1233_5 and original_1233_6.",
+      "limit": "Does not establish exact historical boundary, parent crosswalk, legal territory, source completeness beyond the exact retained products, or license status.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/README.md",
+      "bytes": 7693,
+      "sha256": "53117bbe5245b3c94610fa31c4cdad53dec5f7241a8ed05d457fdaa941f97fa0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/attempt-history.json",
+      "bytes": 2085,
+      "sha256": "a479d60d231c39a56bd5c3d8fe2515bf241ec7bd80c1c4f47dd892b4d50ba821",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/authority-context.json",
+      "bytes": 5940,
+      "sha256": "f1f9847c46a9d642eabbb4a920a7c74436f9cd3a9be5b83211984bce4482ec90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-negative-control.json",
+      "bytes": 1048,
+      "sha256": "a64af164ecb62585c1d55537433e9990388d263536e2662bb11b0ead8ce5e37d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-positive-control.json",
+      "bytes": 290,
+      "sha256": "291217c0a47d45476acdd72d37f05fb8de0f8d5e710ea9ba9578e77fb99b8c08",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/issue-contract-source.txt",
+      "bytes": 30064,
+      "sha256": "c6fe2c500b0145e20b99554d4dbf5a4a053ca9bd32907b773ad0ac02369a2984",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/measurement-negative-control.json",
+      "bytes": 319,
+      "sha256": "5939113ed816b3f0ebb4f13b0904e50e7b6b2a0eb35ce40624c110ee4eaa77c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/measurement-positive-control.json",
+      "bytes": 223,
+      "sha256": "ed6088778c87f1b7cc246cc49b83a731d7d536d1c1785fd97285251a8619b1c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
+      "bytes": 1769,
+      "sha256": "0e1a9cd683739f2992faa881748de37baeaae84f0d1c3e5b74b58c6b86f5191c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py",
+      "bytes": 41579,
+      "sha256": "7dadeaf17d825750170bf75d624aebad5d5ef60d6f9bb7b39344edd7dba0dc79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/source-lock.json",
+      "bytes": 44637,
+      "sha256": "b59c618cc31cdd02a4d7f6b8b204a0466349de775981feb816e514fb99cbdf8f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/validation-controls.json",
+      "bytes": 1903,
+      "sha256": "e704586ad02f592c273d903eab8433477d216b4056353177ce7d3ec14d0cbc69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3226629,
+      "sha256": "2cecd02596584475cf965596deaff794712cfc1304597e8a72d494935a51425d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-one-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "ebc9b396d6cca51912ab68912f2a5561ece2766ccd9e90860278dcc360e977d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3226629,
+      "sha256": "d676f99b0d16d6f4a9cdcaa00ef5299523ef90d8cde1499e5312742dfa2bbc3d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-two-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "5da419b2b075ecc567c51f4d1690579f80ea76516d20ecf8a74a37da765c2c50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316529,
+      "sha256": "7e81d6477178ea9138f01d00e6fddfeda30456566ce53cc547f3a0c85ee0299e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-one-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "4ba3777e3cfe796d7c769de3da09ae999b6c784198078d3cde728bdd9d6979f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316529,
+      "sha256": "486d88ca4499507a34b39d55cb6ddcd3d71e10c46ca2321246c354699ec5d0ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-two-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "1b406e37048391010832d2d346fc6480f7716b6a842eb8ce0dd6e0654c260978",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316529,
+      "sha256": "907cac1e58dcef39b368fd142811ad13f1b0c58d452ba07630df3718df2e4d7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-one-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "d4e838fcbde77b3e3897bd413de42e23c458a3f49cfeac074f57c7b569ea2cc9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316529,
+      "sha256": "01216568de76e08f2a7b626ece048d3e807e2557e631b64ce0239987bd1dfc54",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-two-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "c23ceb44bbc891bb4e217bd09b0120ddb54c0a32461de630977ba97fc1a287a1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v3-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3100633,
+      "sha256": "c7564cfe73517bdf1619c4e2ba46bfda1de9603251024f66e1502c14a3116d2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v3-one-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "e6e0ff58200c4f5295474b569a12a09528044367b890dc4ab5b2188868d70e93",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3112673,
+      "sha256": "e9cfe4b65cf3102c0ccb1b403263d4feb88f14b0aa74c270cfac5816da773a19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-one-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "fd4b16ebf14d8224eaefd249e65d56ef6be92afc09d03105643981e8e295a6e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3112673,
+      "sha256": "a60d82fc7c34724fd082542f1ef70b8e12856a9dc556b2b3b4a243cdecd04d86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-two-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "39873f31e7b5cb01e13b58af8a3db07393a57a260b64090e37fa0faf1b1e400b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3113714,
+      "sha256": "e74f762f87e76b3d6b6a54e680ee1c0580fae33ee645a364165eace6f97506d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-one-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "93281890ba7ae2dd492a29157a0d767ad3d489a8fcd4cd60299b816a477a8069",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3113714,
+      "sha256": "ad9f9adb0480c85ffd0cdbc7d9a261b11d27c81e03fa01a8a17504a2fe15b1a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-two-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "261b6ed7dfb3395fb9dec87e05eab0b2b14d96a947455d43b9b7925365f4a17c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3113714,
+      "sha256": "8c0fd39fbb0663bfdd16b00cc371d2ef256f3a89cd2e8b28db138bd10548d06b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-one-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "1b13f2207e00faa316cb19c5442b02f50efc6f9e24a5aa676de482bcc933f197",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3113714,
+      "sha256": "bed50b7f6634551a15300c026389334c6665eb9912c7b16572211983093ef7f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-two-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "fabe05aec9be2bbff4caebc08b558b17a07730eb873e212d1c87c0af7316ebcc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3226518,
+      "sha256": "61a917e6eeb7f93b9fb72450ffb1de05eac3372d1d6ab4e952892934540b73fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-one-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "7bae2721215aed5ced19fe4297cb9a4a419f8e82a61cd074af89c49790c9be82",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3226518,
+      "sha256": "2cca6216ad00a992219ca819d9748f5a67e3dad4ebc16388ef1148ecb8d2b252",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-two-20261007/receipt.json",
+      "bytes": 299,
+      "sha256": "7dcac62378ed5fe3070d22ffe9d5df0985eadfcb58273326f159d3509594e598",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 155304,
+      "sha256": "b6f16603a9080299da69857ef8629c55060451b9e4b6c74961bcb7b0b69c6de5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-one-20261007/receipt.json",
+      "bytes": 293,
+      "sha256": "52a948bbf3504531cc0c3644909e8fc5a29c7aa237004618dfcb5382b723c8ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 155304,
+      "sha256": "da028c28d2f119492da5e632eed77deff0ddc321ccb14fb5e3077cac3426d497",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-two-20261007/receipt.json",
+      "bytes": 293,
+      "sha256": "fec51644c575d5e69a6d823c05d10fa450ab00f2339c6524a7f96c6cf7290190",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-complete-reproduction",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Authenticated bounded complete scans of exact frozen source and Atlas inputs; semantic rows joined to retained originals; reproducibility outputs only, no geography adjudication.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1",
+      "units": "Feature counts, exact bytes and planar square degrees where recorded; planar measures are not physical area."
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The v12 packet reproduces the exact retained four-subject/four-component evidence and full declared producer families; this is a mechanical integrity result only.",
+      "status": "supported",
+      "source_ids": [
+        "retained-nor-consumed",
+        "retained-swe-consumed"
+      ]
+    },
+    {
+      "text": "Historic Norway source-to-parent crosswalk, Omasvuotna legacy name, boundary accuracy, legal meaning and physical-water interpretation remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "statistics-norway-identity",
+        "kartverket-names",
+        "kiruna-context"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py --run-id repro-v12-one-20261007",
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py --run-id repro-v12-two-20261007"
+  ],
+  "validation": [
+    {
+      "method_id": "bounded-complete-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-positive-control.json"
+    },
+    {
+      "method_id": "bounded-complete-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-negative-control.json"
+    },
+    {
+      "method_id": "bounded-complete-reproduction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/attempt-history.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/authority-context.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/issue-contract-source.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/measurement-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/measurement-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/source-lock.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/validation-controls.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v10-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v11-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v3-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v3-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v6-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v7-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v8-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v9-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/run-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ],
+  "record_checks": [
+    {
+      "version": 1,
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-one-20261007/authentication-and-phase-accounting.json",
+      "json_pointer": "/complete_component_features",
+      "id_key": "id",
+      "reference_path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-components.geojson",
+      "reference_json_pointer": "/features",
+      "reference_id_key": "id",
+      "fields": {
+        "geometry": "geometry",
+        "properties": "properties"
+      }
+    },
+    {
+      "version": 1,
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-one-20261007/authentication-and-phase-accounting.json",
+      "json_pointer": "/complete_subject_comparisons",
+      "id_key": "id",
+      "reference_path": "research/geography/gap-source-nordic-shared-seams-20261006/source-and-candidate-comparison.json",
+      "reference_json_pointer": "/subject_feature_comparisons",
+      "reference_id_key": "id",
+      "fields": {
+        "source_full_feature_sha256": "consumed_source_full_feature_sha256",
+        "atlas_C_full_feature_sha256": "atlas_full_feature_sha256",
+        "source_C_topologically_equal": "topologically_equal"
+      }
+    }
+  ]
+}
