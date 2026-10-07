@@ -1,0 +1,1980 @@
+{
+  "version": 1,
+  "issue": 1358,
+  "lane": "geography",
+  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "subject_ids": [
+    "gb:AGO:ADM2:16411231B14510444140190",
+    "gb:AGO:ADM2:16411231B28551746118834",
+    "gb:AGO:ADM2:16411231B36562728226085",
+    "gb:NAM:ADM2:8085530B15355770078360",
+    "gb:NAM:ADM2:8085530B25496891828693",
+    "gb:NAM:ADM2:8085530B32015186497374",
+    "gb:NAM:ADM2:8085530B43563455443088",
+    "gb:NAM:ADM2:8085530B54610932550654",
+    "gb:NAM:ADM2:8085530B8620298556926",
+    "gb:NAM:ADM2:8085530B94702234009846"
+  ],
+  "subject_ids_sha256": "0273221d08cdaa665a81e7f6d510091dd77798f54385948b3b1b92c944d79676",
+  "baseline": {
+    "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+    "files": [
+      {
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "bytes": 73547,
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz",
+        "bytes": 1674139,
+        "sha256": "7548a2b3ab10339e64ec6432afedda84e21502eb392ee94ace5b0e2f2e6e2de8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "bytes": 103877,
+        "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+        "bytes": 65206,
+        "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+        "bytes": 23958,
+        "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+        "bytes": 46722,
+        "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+        "bytes": 74139,
+        "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/manifest.json",
+        "bytes": 5317,
+        "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/sources/uk-treaty-series-1926-ts-29.pdf",
+        "bytes": 195690,
+        "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "original_administrative_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "original_physical_inventory": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+      "current_native_inventory": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+      "current_successor_inventory": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+    },
+    "pin_files": {
+      "original_administrative_registry": "data/administrative-sources.json",
+      "original_physical_inventory": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "current_native_inventory": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "current_successor_inventory": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json"
+    },
+    "subject_files": {
+      "gb:AGO:ADM2:16411231B14510444140190": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B28551746118834": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B36562728226085": "data/geography/part-29.json",
+      "gb:NAM:ADM2:8085530B15355770078360": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B25496891828693": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B32015186497374": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B43563455443088": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B54610932550654": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B8620298556926": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B94702234009846": "data/geography/part-16.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "copernicus-sentinel2-l2a-products",
+      "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "role": "Official Sentinel-2 L2A product origin and data-use notice; pixels were accessed through Element84 public AWS COG derivative.",
+      "vintage": "2019-2020 acquisitions; processing/product metadata retained per scene",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "The Copernicus Sentinel legal notice permits free, full and open use subject to lawful-use exceptions and requires source notice for distribution and a modified-data notice. Attribution included in README: Copernicus Sentinel data 2019; Contains modified Copernicus Sentinel data 2019; Copernicus Sentinel data 2020; Contains modified Copernicus Sentinel data 2020. This describes product origin; it does not certify mirror service terms."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20190904_0_L2A_granule_metadata.xml",
+          "bytes": 631269,
+          "sha256": "7050dc179251d77bb064fc631dfa48285d71d266be050df2dcf2feae8a3bdf00",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20190904_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1488,
+          "sha256": "78f85153767408edb6eaf717b86f4c283bd62ff724b9b227fcae2caf2b219f18",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200122_0_L2A_granule_metadata.xml",
+          "bytes": 631604,
+          "sha256": "ffe0fab8d5176a359d838637dc60de7b193c62b986a32e8675605d6f932fc4b4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200122_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1491,
+          "sha256": "d62ffb9fd6664718bfe42a8ab41186657c500352321ae560ecae045360c6f6d3",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200809_0_L2A_granule_metadata.xml",
+          "bytes": 631346,
+          "sha256": "1b7002763e0b0f3149b0711bca657bda9b1185a504af5abd4d0cadb77ad6e73a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200809_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1488,
+          "sha256": "61bf8d7f871ebffa4ed6b6567565f0ad2e77be9e250639abc2fb30d668604b57",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20190904_0_L2A_granule_metadata.xml",
+          "bytes": 553085,
+          "sha256": "b81fabc4884c879987e16752295b424ec24f2bb08f6d96ea5f5aecfc00431e04",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20190904_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1488,
+          "sha256": "cbd9af77b24653c5256a149aa3e1e9bf87fe70c5b429a77772dcc7c64a780c02",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200122_0_L2A_granule_metadata.xml",
+          "bytes": 553277,
+          "sha256": "050a0cff9d32061f787ba8703084be2047f491c3733c497672698a66f6e9e2eb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200122_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1491,
+          "sha256": "a7fd7adad9a92238a3731bd62b9b43d6b680edec6253d20d2034498a4c5a4a95",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200809_0_L2A_granule_metadata.xml",
+          "bytes": 553202,
+          "sha256": "5670f781d5cc29525e8d9e500629222d8465f349fffdbab92dcc46e053d23502",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200809_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1488,
+          "sha256": "1cf16d43cb2cb56c610ca1f09eef01b3989d1514b18f4424f6f1343af433b660",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KCF_20200122_0_L2A_granule_metadata.xml",
+          "bytes": 380563,
+          "sha256": "a112360531090c916b7e03d7b146074df8b8cac416fcd91f587da093b99b197f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KCF_20200122_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1510,
+          "sha256": "80e91c292dc66799719a432b52045a8e4a4719347aa0ffb9803163c6cf5b658d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20190223_0_L2A_granule_metadata.xml",
+          "bytes": 631452,
+          "sha256": "08a009ea8daeb091b1efd856a0b6838fbb822dd56682d03445fd71b6ac5cacd2",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20190223_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1491,
+          "sha256": "855715b17bc58d44420e901e5a643ad1e16033a38197b4544f0fe8f51adf6a4c",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20200119_0_L2A_granule_metadata.xml",
+          "bytes": 631670,
+          "sha256": "d70d34ba03a4cb5d184e05882880590ef66fbabfeb9e56e587c884f719480c5e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20200119_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1491,
+          "sha256": "67e08f1b083b4b2f2e4531747235a394552c10c0c91653b03ed6ce75de40256c",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_33KZA_20190221_0_L2A_granule_metadata.xml",
+          "bytes": 631907,
+          "sha256": "39542fb7ea48ed5211d784e69582e0e7b46877af3fbcd27fab028d26ff6e3997",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_33KZA_20190221_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1491,
+          "sha256": "446961837fa3df0a862e04503652f9f5f749ec0f3fc4fc1e281c2a1c630f4e9c",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KBF_20190221_0_L2A_granule_metadata.xml",
+          "bytes": 553161,
+          "sha256": "6ecd0561963b75e70d800055fb074d9ab69769cb32b0f02aad60a52f49618027",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KBF_20190221_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1491,
+          "sha256": "19ee35c73083270b112441a05d816f610b7d2b1b38393931c9da571ea24d95ec",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190221_0_L2A_granule_metadata.xml",
+          "bytes": 379947,
+          "sha256": "6d760b2df628ce5d7ca5a798f9ce25c7544299694097db6d4555e89fb9a1d956",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190221_0_L2A_tileinfo_metadata.xml",
+          "bytes": 13966,
+          "sha256": "b7e8c1e0752c08a41c8375a424b5511b0c8cf58c5360ffc6ed1b54d2f647bb08",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190909_0_L2A_granule_metadata.xml",
+          "bytes": 380000,
+          "sha256": "28eef05066f2be75e92318fc539140aebf5d3ad8b9405fe6f3b4be07b72fb7c9",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190909_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1508,
+          "sha256": "510d4201f38bcc252c5ec46b69490e33ce8ba854343669ac00b6f27d0ffe3369",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20200814_0_L2A_granule_metadata.xml",
+          "bytes": 379900,
+          "sha256": "d3c33a65060982cd769580c4ca9f3e22b2d4b0377f6198d91a5fcfc505c41502",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20200814_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1509,
+          "sha256": "a3432696e84275916abd1d92e3cd51b9a8f08fe2c03c78ea09e8cdbc98668dc6",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20190906_0_L2A_granule_metadata.xml",
+          "bytes": 631453,
+          "sha256": "0cf31a24d0fac6684f694d490f12db7a371f53d0bcdff3985ff8c7358e841820",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20190906_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1488,
+          "sha256": "8988e2d17ac47b9fd9fbee95c4217a3af3d81e6dd205b17fa5120683820bb31f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20200811_0_L2A_granule_metadata.xml",
+          "bytes": 631483,
+          "sha256": "36dffe3c4ca28ce41cf69428c8f58831a88f229e41f5ad40e173aa56fe615f24",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20200811_0_L2A_tileinfo_metadata.xml",
+          "bytes": 1491,
+          "sha256": "47e7833be003bbbdd75d5137322e414d05717dc967c80d046941f6bf0b378700",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_33KZA_20190904_0_L2A.npz",
+          "bytes": 880305,
+          "sha256": "3816c38e71dbc3174e6968f15c28819a8af77fa7c768af495c4879262ce51b27",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_33KZA_20200122_0_L2A.npz",
+          "bytes": 917440,
+          "sha256": "f8c2ffc1f44447d5f844d3c7ae9ee7a95a93c70130d82586e9c3200b7d58126a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_33KZA_20200809_0_L2A.npz",
+          "bytes": 879673,
+          "sha256": "25fdd5c6a4be644ff563c69587e7efb03db3ca8b220e499a2bf8679af27cf27b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KBF_20190904_0_L2A.npz",
+          "bytes": 1237887,
+          "sha256": "474a339643bff36544646c2a250763e85af08fa7e16aba6468dccc868b8cff6c",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KBF_20200122_0_L2A.npz",
+          "bytes": 1310406,
+          "sha256": "2bb8165970de7388ce617a046928940e4ea746384950b43a8ade49f512dda631",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KBF_20200809_0_L2A.npz",
+          "bytes": 1232393,
+          "sha256": "662ba1c035db387159ce0fc71e23157e0ea3121da28dc83165ae4f412aa658bf",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KCF_20200122_0_L2A.npz",
+          "bytes": 1836094,
+          "sha256": "72cd4d5abca2b4241281e1ddd5ecfbcda418c2e4b1e8d6cb8ad2f8d2b8b07570",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KDF_20190223_0_L2A.npz",
+          "bytes": 1442315,
+          "sha256": "f2b5ca4175b79e16e134a5107ac04faa79a86a025967a3c4ae71f70adeea39eb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KDF_20200119_0_L2A.npz",
+          "bytes": 1454288,
+          "sha256": "5cbf7a5f03e1b3f73b15bb651df900aeafd7d4e704c2f8389e41a3e21df0cccc",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_33KZA_20190221_0_L2A.npz",
+          "bytes": 908985,
+          "sha256": "3c6d94b2a890cebd264b5b76f21f7bc3c613dba06f61ae250f8067415615c349",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KBF_20190221_0_L2A.npz",
+          "bytes": 1307760,
+          "sha256": "694a5f5b267c878daaf58e58c5ec152ba946a3e15b072544da7bbfa28c847d97",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KCF_20190221_0_L2A.npz",
+          "bytes": 1794627,
+          "sha256": "139412f9b84bee4d83b0e9c4740c0a0406f1de2740dd6c887e828aa3f86c0e79",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KCF_20190909_0_L2A.npz",
+          "bytes": 1739943,
+          "sha256": "feef0d653d58b2df65512f25c1bd481271dda567aecef56831a176b2348bc64d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KCF_20200814_0_L2A.npz",
+          "bytes": 1702292,
+          "sha256": "c4b35670bd8c24ce4fabe414b808e70a495f9cd88e2b4ec907ecebbc913fb8bb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KDF_20190906_0_L2A.npz",
+          "bytes": 1357548,
+          "sha256": "dbe155665b2acb10d32451aa973eef3734f5f71aab92b884aa9e789dddd11a73",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KDF_20200811_0_L2A.npz",
+          "bytes": 1383002,
+          "sha256": "cb06eda3b4ba5fd36d4c80c8e6b2f8791ed9a3f174eb5280bfeeb091a16b9ea8",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Use retained STAC item snapshots, asset URLs, ETags and range-session record; retrieve the same immutable COG objects from the listed public URLs and extract the source pixel windows using extract_sentinel2_windows.py. Recompute NPZ SHA-256 against source-window-receipts.json.",
+      "limit": "Whole COG objects were not downloaded or hashed; exact retained windows and hashes plus object ETags, Last-Modified and byte-range trace are available. Copernicus product openness does not certify mirror service terms. No ground-control registration accuracy is available.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2019,
+        "to": 2021
+      }
+    },
+    {
+      "id": "element84-earth-search-sentinel-2-l2a",
+      "url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a",
+      "role": "STAC catalog and public AWS COG access path for the Copernicus-derived Sentinel-2 L2A scene assets.",
+      "vintage": "catalog responses retrieved 2026-10-07; assets acquired 2019-2020",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Public catalog and S3 COG access; Sentinel product legal notice is recorded separately. No claim that the mirror itself grants additional reuse rights."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use retained Earth Search STAC snapshots and COG URLs/ETags. Run query_sentinel2_stac.py for refreshed discovery only; use frozen selected items for exact reproduction.",
+      "limit": "Earth Search describes its public API as best effort; retained query snapshots are the discovery record. Selected COG assets are derivative access copies.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2019,
+        "to": 2021
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/README.md",
+      "bytes": 7695,
+      "sha256": "b24fcdda4c73187991b656788fe70c6b04b967263b52b98c49c7e735207fd4aa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/analyze_sentinel2_windows.py",
+      "bytes": 18567,
+      "sha256": "9d47b5e6b436834857272f2b5bb44474fb87d7fe9d7168cd1288ca87275a9a81",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/extract_sentinel2_windows.py",
+      "bytes": 11091,
+      "sha256": "e9a98fa9ea9a09f4f6f63ecb2ba9a337387cefc4f3afd9ee0dff12dadf53f5ec",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/cog-object-head-receipts.json",
+      "bytes": 36507,
+      "sha256": "fa5d35f7f025ea8c7912b613fd7f0fcac4c0c18bccd9cd92f6dd168261fdb5fc",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-dry-page-01.json",
+      "bytes": 3336608,
+      "sha256": "796c89d793ac264150ac7ea17d514c9483385f760b64e31c11d2908dd23650ab",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-dry-page-02.json",
+      "bytes": 279,
+      "sha256": "e9b8dd5549dc9b6f4ba438388f67d27c968e9c18823f16ce470a71f5b4fde7b5",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-wet-page-01.json",
+      "bytes": 2036499,
+      "sha256": "57f6c9afed6de0179df52e7bcf1d9a765a05a328c874055de79bd0d4fcae949c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-wet-page-02.json",
+      "bytes": 277,
+      "sha256": "944e8474b2073861bac92e58a7ba34d8ff25c6b958c4ad98abb4775ce5ee07cc",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-dry-page-01.json",
+      "bytes": 3724831,
+      "sha256": "f0560034540ae2584cfeebec18e592a75202bb085c7993f7a8044cf7cadfc6e2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-dry-page-02.json",
+      "bytes": 279,
+      "sha256": "88ba0b0787dbf41399fe8f30a04e4af99b323b0c0e8756b47c37f34d8fed26c4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-wet-page-01.json",
+      "bytes": 985374,
+      "sha256": "ff1ac03afe2f5a05335c7d5907a4b569337cb47c5b85231f9f5e166b5967c43c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-wet-page-02.json",
+      "bytes": 277,
+      "sha256": "b7335a5908408152c62e161f0adb3a93257f933317b11a4b302f2ffce72642fd",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2024-dry.json",
+      "bytes": 1667561,
+      "sha256": "f99f4703fb2cd42b64b805582ad53f499e593f250f2d1ef404ce28e22efc4d0b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2024-wet.json",
+      "bytes": 1070755,
+      "sha256": "b824dfbbbf2606cbd0801dd8adf5fd62aab3bc39f85d1001971589118d91626b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2024.json",
+      "bytes": 2134115,
+      "sha256": "bbe3896fdce4bcd3dbb31163ba6afd6a11fff3d8ef61f1626a1b317d631888a4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/selected-sentinel2-items.json",
+      "bytes": 657880,
+      "sha256": "14a7594d1900646470564f33b5a60b95c889b86404e373490eee845a1e5779ec",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/source-metadata-receipts.json",
+      "bytes": 23413,
+      "sha256": "4bcfa58c9b65ce8582ac6edd551ff2fa55fa455a3d91786ab75362c57025e59f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/source-window-receipts.json",
+      "bytes": 214166,
+      "sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/stac-query-receipts-2019-2020.json",
+      "bytes": 9470,
+      "sha256": "cacf6852ffd061aed9db59d7073f42749d503916cce3d5d3fc3d46a2746e85cd",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/stac-query-receipts.json",
+      "bytes": 2301,
+      "sha256": "0a8428f720188d21754f6209a227b25517894b7630ccd54c0fb2af7d34b8573d",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/query_sentinel2_stac.py",
+      "bytes": 2368,
+      "sha256": "6d0893add05e4782cae3eccee62fb91c151b359b097024b05089054ad0cf870a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/record_selected_assets.py",
+      "bytes": 2621,
+      "sha256": "7118b260d3767b1a656c20558e51e8ff536d2ae04d9dfc9ed2326b686aa258f7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/reproduction-runs.json",
+      "bytes": 2174,
+      "sha256": "3ec659f526c3e414451e02f592519d9be5cfffac907552140ca78b12c59eccd7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "bytes": 966929,
+      "sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-two.json",
+      "bytes": 966929,
+      "sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/select_scenes.py",
+      "bytes": 2690,
+      "sha256": "1e85ecdacbc84c178fddeae15bb2904c25f1a19644c60e822c7b0be8e30f4534",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/cog-range-session.log",
+      "bytes": 913106,
+      "sha256": "4cf16548ded9011850483f1155fcf01260e720b24b0b8c1c51a128f353edccb7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-negative-control.json",
+      "bytes": 642,
+      "sha256": "d3bcfeda6c4c0ca3bbc1bf5788df0bc6d1e492bda6b36d99558e4f2186b5ba88",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-positive-control.json",
+      "bytes": 603,
+      "sha256": "f8ec7247cfb383302f4a1a9756cdfb2a1ffd0a95682bc6158d1fd3a169006ba8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-reproducibility-control.json",
+      "bytes": 391,
+      "sha256": "fa17e5c4bd60bea9048cd80d3f4fd42d25477b92457ec6a44afc91a7414fdef0",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "sentinel2-window-water-screen",
+      "kind": "measurement",
+      "description": "Retain and analyze exact native 20 m S2 L2A source windows on unmodified candidate polygon center masks and candidate-union∩source-contact masks. Average B03/B08 2×2 raw 10 m blocks, combine with B11 and SCL 20 m samples; calculate MNDWI/NDWI threshold sensitivity and same-center SCL6/positive-MNDWI concordance. Exclude no-data, defective, dark, cloud/shadow, cirrus and snow classes from clear indices. No geometry repair/reprojection/buffering and no bank or authority inference.",
+      "software": "Python 3.12.14; NumPy 2.3.5; Rasterio 1.4.3; GDAL 3.9.3; EPSG:32733/32734 native grids",
+      "units": "20 m pixel-center sample counts; nonadditive across overlapping dates/tiles/masks; normalized index values"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "candidate_count",
+      "value": 21,
+      "unit": "features",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_count",
+      "value": 10,
+      "unit": "contact features",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "selected_scene_count",
+      "value": 16,
+      "unit": "scene items",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "scene_observation_row_count",
+      "value": 496,
+      "unit": "mask-scene rows",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "candidate_summary_count",
+      "value": 21,
+      "unit": "component summaries",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_mask_summary_count",
+      "value": 10,
+      "unit": "candidate-contact overlap summaries",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_01_clear",
+      "value": 137237,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_01_concordant",
+      "value": 6111,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_02_clear",
+      "value": 44223,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_02_concordant",
+      "value": 3642,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_03_clear",
+      "value": 1946,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_03_concordant",
+      "value": 252,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_04_clear",
+      "value": 29955,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_04_concordant",
+      "value": 581,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_05_clear",
+      "value": 3387,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_05_concordant",
+      "value": 76,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_06_clear",
+      "value": 1660,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_06_concordant",
+      "value": 39,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_07_clear",
+      "value": 91589,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_07_concordant",
+      "value": 2731,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_08_clear",
+      "value": 1973,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_08_concordant",
+      "value": 109,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_09_clear",
+      "value": 49869,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_09_concordant",
+      "value": 2431,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_10_clear",
+      "value": 24545,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_10_concordant",
+      "value": 379,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_11_clear",
+      "value": 23037,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_11_concordant",
+      "value": 312,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_12_clear",
+      "value": 269460,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_12_concordant",
+      "value": 4599,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_13_clear",
+      "value": 43416,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_13_concordant",
+      "value": 2089,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_14_clear",
+      "value": 209785,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_14_concordant",
+      "value": 5686,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_15_clear",
+      "value": 65218,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_15_concordant",
+      "value": 1433,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_16_clear",
+      "value": 53520,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_16_concordant",
+      "value": 2789,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_17_clear",
+      "value": 89182,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_17_concordant",
+      "value": 2752,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_18_clear",
+      "value": 1017,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_18_concordant",
+      "value": 0,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_19_clear",
+      "value": 55674,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_19_concordant",
+      "value": 1583,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_20_clear",
+      "value": 2585,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_20_concordant",
+      "value": 84,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_21_clear",
+      "value": 74477,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "component_21_concordant",
+      "value": 4596,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_01_clear",
+      "value": 308229,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_01_concordant",
+      "value": 13841,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_02_clear",
+      "value": 568843,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_02_concordant",
+      "value": 21471,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_03_clear",
+      "value": 302746,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_03_concordant",
+      "value": 5549,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_04_clear",
+      "value": 15390,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_04_concordant",
+      "value": 584,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_05_clear",
+      "value": 20367,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_05_concordant",
+      "value": 49,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_06_clear",
+      "value": 21783,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_06_concordant",
+      "value": 750,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_07_clear",
+      "value": 1388,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_07_concordant",
+      "value": 0,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_08_clear",
+      "value": 4323,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_08_concordant",
+      "value": 0,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_09_clear",
+      "value": 16934,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_09_concordant",
+      "value": 13,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_10_clear",
+      "value": 7559,
+      "unit": "usable 20 m center observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    },
+    {
+      "id": "contact_10_concordant",
+      "value": 17,
+      "unit": "same-center SCL6 and positive-MNDWI observations; nonadditive across dates/tiles",
+      "input_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+      "vintage": "current",
+      "evaluation_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "candidate_count",
+      "value": 21,
+      "unit": "features",
+      "text": "candidate_count = 21 features."
+    },
+    {
+      "metric_id": "contact_count",
+      "value": 10,
+      "unit": "contact features",
+      "text": "contact_count = 10 contact features."
+    },
+    {
+      "metric_id": "selected_scene_count",
+      "value": 16,
+      "unit": "scene items",
+      "text": "selected_scene_count = 16 scene items."
+    },
+    {
+      "metric_id": "scene_observation_row_count",
+      "value": 496,
+      "unit": "mask-scene rows",
+      "text": "scene_observation_row_count = 496 mask-scene rows."
+    },
+    {
+      "metric_id": "candidate_summary_count",
+      "value": 21,
+      "unit": "component summaries",
+      "text": "candidate_summary_count = 21 component summaries."
+    },
+    {
+      "metric_id": "contact_mask_summary_count",
+      "value": 10,
+      "unit": "candidate-contact overlap summaries",
+      "text": "contact_mask_summary_count = 10 candidate-contact overlap summaries."
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "source_ids": [
+        "copernicus-sentinel2-l2a-products",
+        "element84-earth-search-sentinel-2-l2a"
+      ],
+      "text": "Across 16 retained dated scenes, 20/21 original candidate masks have at least one same-center SCL6 and positive-MNDWI observation. One candidate has only three SCL6 samples and no concordant center; counts are observational, nonadditive, and not bank delineations."
+    },
+    {
+      "status": "supported",
+      "source_ids": [
+        "copernicus-sentinel2-l2a-products"
+      ],
+      "text": "Eight of ten candidate-contact overlap masks have at least one concordant water-like sample; one contact mask has no detected SCL6 or nonnegative MNDWI in these scenes, and one is sparse/nonconcordant. The masks are limited to candidate-union intersections and do not characterize full administrative polygons."
+    },
+    {
+      "status": "unresolved",
+      "source_ids": [
+        "copernicus-sentinel2-l2a-products"
+      ],
+      "text": "Absolute image-to-candidate registration, exact shoreline/bank position, historic/current channel position, boundary authority, processing cause and territorial assignment remain unresolved."
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/namibia-angola-sentinel2-followup-20261007/query_sentinel2_stac.py",
+    "python3 research/geography/namibia-angola-sentinel2-followup-20261007/select_scenes.py",
+    "python3 research/geography/namibia-angola-sentinel2-followup-20261007/record_selected_assets.py",
+    "python3 research/geography/namibia-angola-sentinel2-followup-20261007/extract_sentinel2_windows.py",
+    "python3 research/geography/namibia-angola-sentinel2-followup-20261007/analyze_sentinel2_windows.py --output runs/run-one.json",
+    "python3 research/geography/namibia-angola-sentinel2-followup-20261007/analyze_sentinel2_windows.py --output runs/run-two.json"
+  ],
+  "validation": [
+    {
+      "method_id": "sentinel2-window-water-screen",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-positive-control.json"
+    },
+    {
+      "method_id": "sentinel2-window-water-screen",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-negative-control.json"
+    },
+    {
+      "method_id": "sentinel2-window-water-screen",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/reproduction-runs.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/analyze_sentinel2_windows.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/extract_sentinel2_windows.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/cog-object-head-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-dry-page-01.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-dry-page-02.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-wet-page-01.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2019-wet-page-02.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-dry-page-01.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-dry-page-02.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-wet-page-01.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2020-wet-page-02.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2024-dry.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2024-wet.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/earth-search-stac-2024.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/selected-sentinel2-items.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/source-metadata-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/source-window-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/stac-query-receipts-2019-2020.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/inputs/stac-query-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/query_sentinel2_stac.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/record_selected_assets.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/reproduction-runs.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-two.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/select_scenes.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/cog-range-session.log",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20190904_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20190904_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200122_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200122_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200809_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_33KZA_20200809_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20190904_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20190904_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200122_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200122_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200809_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KBF_20200809_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KCF_20200122_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KCF_20200122_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20190223_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20190223_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20200119_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2A_34KDF_20200119_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_33KZA_20190221_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_33KZA_20190221_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KBF_20190221_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KBF_20190221_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190221_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190221_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190909_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20190909_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20200814_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KCF_20200814_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20190906_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20190906_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20200811_0_L2A_granule_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/metadata/S2B_34KDF_20200811_0_L2A_tileinfo_metadata.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_33KZA_20190904_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_33KZA_20200122_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_33KZA_20200809_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KBF_20190904_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KBF_20200122_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KBF_20200809_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KCF_20200122_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KDF_20190223_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2A_34KDF_20200119_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_33KZA_20190221_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KBF_20190221_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KCF_20190221_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KCF_20190909_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KCF_20200814_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KDF_20190906_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/sources/windows/S2B_34KDF_20200811_0_L2A.npz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/validation-reproducibility-control.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "candidate_count",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/original_feature_counts/components"
+    },
+    {
+      "metric_id": "contact_count",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/original_feature_counts/source_contacts"
+    },
+    {
+      "metric_id": "selected_scene_count",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/summary_counts/selected_scene_items"
+    },
+    {
+      "metric_id": "scene_observation_row_count",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/summary_counts/scene_observation_rows"
+    },
+    {
+      "metric_id": "candidate_summary_count",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/summary_counts/candidate_summaries"
+    },
+    {
+      "metric_id": "contact_mask_summary_count",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/summary_counts/contact_overlap_summaries"
+    },
+    {
+      "metric_id": "component_01_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/0/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_01_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/0/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_02_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/1/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_02_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/1/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_03_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/2/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_03_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/2/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_04_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/3/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_04_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/3/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_05_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/4/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_05_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/4/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_06_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/5/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_06_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/5/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_07_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/6/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_07_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/6/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_08_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/7/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_08_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/7/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_09_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/8/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_09_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/8/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_10_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/9/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_10_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/9/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_11_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/10/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_11_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/10/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_12_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/11/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_12_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/11/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_13_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/12/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_13_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/12/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_14_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/13/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_14_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/13/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_15_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/14/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_15_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/14/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_16_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/15/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_16_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/15/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_17_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/16/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_17_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/16/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_18_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/17/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_18_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/17/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_19_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/18/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_19_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/18/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_20_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/19/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_20_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/19/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_21_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/20/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "component_21_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/candidate_summaries/20/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_01_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/0/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_01_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/0/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_02_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/1/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_02_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/1/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_03_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/2/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_03_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/2/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_04_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/3/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_04_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/3/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_05_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/4/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_05_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/4/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_06_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/5/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_06_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/5/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_07_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/6/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_07_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/6/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_08_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/7/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_08_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/7/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_09_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/8/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_09_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/8/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_10_clear",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/9/clear_index_centers_across_tiles_and_dates_nonadditive"
+    },
+    {
+      "metric_id": "contact_10_concordant",
+      "path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "json_pointer": "/contact_overlap_summaries/9/concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive"
+    }
+  ]
+}
