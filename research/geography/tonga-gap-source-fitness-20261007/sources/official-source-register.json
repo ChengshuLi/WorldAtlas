@@ -1,0 +1,90 @@
+[
+  {
+    "id": "TSD-reboundary-plan-2020-2021",
+    "title": "Re-boundary Plan 2020-2021: Statistical Administrative Boundary Revision",
+    "url": "https://tongastats.gov.to/download/279/reboundary/7658/reboundary-plan-v2.pdf",
+    "published_vintage": "2020-2021 plan",
+    "inspected": "2026-10-07",
+    "document_pages": 13,
+    "inspected_pages": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "relevant_claims": [
+      "Tonga Statistics Department framework identifies country/division/district/village/census-block levels and five divisions including Vava'u.",
+      "TSD mapwork changed census blocks and added census units for fieldwork; it states village-to-division boundaries would not be changed because they are reported and legally constrained.",
+      "This is statistical framework context and does not provide the original 2017 geoBoundaries Vava'u ADM1 polygon or direct candidate-point resolution."
+    ],
+    "use_limit": "Primary statistical source-role/date context; not a cadastral or legal ADM1 geometry."
+  },
+  {
+    "id": "TSD-2021-census-preactivities",
+    "title": "Tonga 2021 Population and Housing Census — Census Pre-activities",
+    "url": "https://tongastats.gov.to/census-2/population-census-3/census-pre-activities/",
+    "published_vintage": "2021 census preparation; current page inspected 2026-10-07",
+    "inspected": "2026-10-07",
+    "relevant_claims": [
+      "The department revised census-block boundaries through TSGF to improve data collection/geographic accuracy.",
+      "Objectives were manageable block sizes, comparability with old/new administrative boundaries, and semi-village settlement representation."
+    ],
+    "use_limit": "Census block framework; no division boundary geometry in inspected page."
+  },
+  {
+    "id": "Tonga-Electoral-Boundaries-Regulations-2017",
+    "title": "Electoral Boundaries Regulations, Cap. 2.04.01 (2020 Revised Edition; regulations dated 2017)",
+    "url": "https://ago.gov.to/cms/images/LEGISLATION/SUBORDINATE/2016/2016-2103/ElectoralBoundariesRegulations_2.pdf",
+    "inspected": "2026-10-07",
+    "document_pages": 48,
+    "inspected_pages": [
+      39,
+      40,
+      41,
+      42,
+      43
+    ],
+    "relevant_claims": [
+      "Schedules 16-18 describe Vava'u 14-16 as electoral constituencies using estate boundaries, roads and Mean High Water Mark; they are not the whole Vava'u ADM1 island-division polygon."
+    ],
+    "use_limit": "Authoritative legal electoral-boundary evidence for a distinct geographic purpose; must not be substituted for Vava'u ADM1."
+  },
+  {
+    "id": "MLNR-surveying-services",
+    "title": "Ministry of Lands, Survey, Planning & Natural Resources — Surveying Services",
+    "url": "https://www.lands.gov.to/programs/land-survey",
+    "inspected": "2026-10-07",
+    "relevant_claims": [
+      "Government survey division manages survey measurements for boundaries/land use; Cadastral Survey Section demarcates land boundaries and allotments; Geodetic Survey Section manages positioning infrastructure."
+    ],
+    "use_limit": "Authoritative locator and custodian lead; inspected page does not publish a Vava'u ADM1 boundary file or certify the geoBoundaries product."
+  },
+  {
+    "id": "MLNR-land-GIS",
+    "title": "Ministry of Lands, Survey, Planning & Natural Resources — Land and Geographical Information Systems Division",
+    "url": "https://www.lands.gov.to/programs/land-gis",
+    "inspected": "2026-10-07",
+    "relevant_claims": [
+      "Government GIS division describes mapping/cadastral-information responsibilities and contact route."
+    ],
+    "use_limit": "Authority lead, not a retrieved exact boundary dataset."
+  },
+  {
+    "id": "NZNL-Vavau-1975-map-record",
+    "title": "1:25,000 Kingdom of Tonga, Sheet 5, Vava'u Group — National Library of New Zealand catalogue record",
+    "url": "https://natlib.govt.nz/records/21499890",
+    "map_vintage": "1975",
+    "inspected": "2026-10-07",
+    "relevant_claims": [
+      "Catalogue describes a Vava'u group map published for the Kingdom of Tonga by the British Government Ministry of Overseas Development (Directorate of Overseas Surveys)."
+    ],
+    "use_limit": "Map pixels were unavailable for inspection; old general map locator only, not used for spatial conclusions."
+  }
+]

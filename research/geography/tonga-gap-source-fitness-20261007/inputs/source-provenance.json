@@ -1,0 +1,87 @@
+{
+  "source_vintage": {
+    "boundary_year_claim": "2017",
+    "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+    "build_date": "Dec 12, 2023",
+    "effective_date": "unknown"
+  },
+  "source_claims": {
+    "boundary_id": "TON-ADM1-12702645",
+    "source": "OpenStreetMap, Wambacher",
+    "canonical_role": "Unknown",
+    "license": "Open Data Commons Open Database License 1.0",
+    "license_source": "OpenStreetMap copyright",
+    "boundary_source_url": "https//wambachers-osm.website/boundaries/",
+    "admUnitCount": "5"
+  },
+  "unsimplified_product": {
+    "path": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1.geojson",
+    "bytes": 1202782,
+    "sha256": "c879101306e56a83d5efc5cae56b5c92f02d1e3485ea6ac64bd3f94a67b7e24a",
+    "metadata_path": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1-metaData.json",
+    "metadata_bytes": 852,
+    "metadata_sha256": "b838c88c03410c69802cca9b7e80660270c8ddffe9761ea22b2b619f60748056",
+    "citation_notice_path": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/CITATION-AND-USE-geoBoundaries.txt",
+    "citation_notice_bytes": 4316,
+    "citation_notice_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+  },
+  "consumed_simplified_product": {
+    "requested_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1_simplified.geojson",
+    "resolved_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1_simplified.geojson",
+    "path": "research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson",
+    "bytes": 34754,
+    "sha256": "e4937a7fcb49cc344f2e32f4525b90dbbbb3ef7e81d311b2d4b91a348b1f6f9d",
+    "feature_count": 5,
+    "shapeIDs": [
+      "12702645B14719640472686",
+      "12702645B16834523743175",
+      "12702645B50986277851262",
+      "12702645B14713027314985",
+      "12702645B6842520552302"
+    ],
+    "retrieved_at_utc": "2026-10-07",
+    "retrieval_status": 200
+  },
+  "feature_roster": [
+    {
+      "shapeID": "12702645B14719640472686",
+      "shapeName": "Ha'apai",
+      "shapeISO": "TO-02",
+      "shapeType": "ADM1"
+    },
+    {
+      "shapeID": "12702645B16834523743175",
+      "shapeName": "Niuas",
+      "shapeISO": "TO-03",
+      "shapeType": "ADM1"
+    },
+    {
+      "shapeID": "12702645B50986277851262",
+      "shapeName": "Tongatapu",
+      "shapeISO": "TO-04",
+      "shapeType": "ADM1"
+    },
+    {
+      "shapeID": "12702645B14713027314985",
+      "shapeName": "Vava'u",
+      "shapeISO": "TO-05",
+      "shapeType": "ADM1"
+    },
+    {
+      "shapeID": "12702645B6842520552302",
+      "shapeName": "'Eua",
+      "shapeISO": "TO-01",
+      "shapeType": "ADM1"
+    }
+  ],
+  "selected_contact": {
+    "subject_id": "gb:TON:ADM1:12702645B14713027314985",
+    "shapeID": "12702645B14713027314985",
+    "shapeName": "Vava'u"
+  },
+  "limits": [
+    "2017 is a represented-year claim from geoBoundaries metadata; source effective date and national authority approval remain unknown.",
+    "The geoBoundaries source contributor/license strings are source metadata claims; licensing applicability to particular derived outputs remains subject to retained citation/use notices.",
+    "The web site does not expose the source product as a government-certified administrative boundary."
+  ]
+}

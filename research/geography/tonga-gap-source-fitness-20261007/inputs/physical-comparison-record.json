@@ -1,0 +1,140 @@
+{
+  "source_file": "coordination/engineering/global-physical-comparison-20261006/results/components-003.jsonl.gz",
+  "source_file_sha256": "a02d8ef7b63ad0d155d49cd14310fedd3feb7e0e6b6e0181673d2745b44eb5fb",
+  "record": {
+    "complete_contact_ids": [],
+    "complete_current_record_metadata_alias": "v1",
+    "complete_support": {
+      "contradictory_land_water_support": {
+        "area_m2": 0.0,
+        "geometry": {
+          "geometries": [],
+          "type": "GeometryCollection"
+        },
+        "kind": "empty",
+        "planar_area": 0.0
+      },
+      "extra_reconstruction": {
+        "area_m2": 0.0,
+        "geometry": {
+          "coordinates": [],
+          "type": "Polygon"
+        },
+        "kind": "empty",
+        "planar_area": 0.0
+      },
+      "hierarchy_disagreements": {
+        "L2-outside-L1": {
+          "area_m2": 0.0,
+          "geometry": {
+            "geometries": [],
+            "type": "GeometryCollection"
+          },
+          "kind": "empty",
+          "planar_area": 0.0
+        },
+        "L3-outside-L2": {
+          "area_m2": 0.0,
+          "geometry": {
+            "geometries": [],
+            "type": "GeometryCollection"
+          },
+          "kind": "empty",
+          "planar_area": 0.0
+        },
+        "L4-outside-L3": {
+          "area_m2": 0.0,
+          "geometry": {
+            "geometries": [],
+            "type": "GeometryCollection"
+          },
+          "kind": "empty",
+          "planar_area": 0.0
+        }
+      },
+      "mapped_inland_water_support": {
+        "area_m2": 0.0,
+        "geometry": {
+          "geometries": [],
+          "type": "GeometryCollection"
+        },
+        "kind": "empty",
+        "planar_area": 0.0
+      },
+      "mapped_land_support": {
+        "area_m2": 2494.141562927083,
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                -174.66080329069192,
+                -18.786601629975728
+              ],
+              [
+                -174.66146520567634,
+                -18.787988167679934
+              ],
+              [
+                -174.661244,
+                -18.786879
+              ],
+              [
+                -174.66080329069192,
+                -18.786601629975728
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "geometry_sha256": "b52e73213a58884f9fd29d7fbcac419500fb610fb336064e88b1d143724e5743",
+        "kind": "whole-operation-pointset",
+        "planar_area": 2.1373234848671314e-07
+      },
+      "missing_reconstruction": {
+        "area_m2": 0.0,
+        "geometry": {
+          "coordinates": [],
+          "type": "Polygon"
+        },
+        "kind": "empty",
+        "planar_area": 0.0
+      },
+      "outside_mapped_L1_context": {
+        "area_m2": 0.0,
+        "geometry": {
+          "coordinates": [],
+          "type": "Polygon"
+        },
+        "kind": "empty",
+        "planar_area": 0.0
+      }
+    },
+    "component_id": "physical-component:0ba5f016c1cac781aba0a9bd5e5fe1736d54077a2fa188026e3907fe98cfaac6",
+    "physical_authority": "unapproved",
+    "physical_limits": [
+      "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+      "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+    ],
+    "physical_status": "unknown-source-fitness-and-observation-date",
+    "query_relations": [
+      {
+        "candidate_covers_source": false,
+        "container_chain_issues": [],
+        "disjoint": false,
+        "intersects": true,
+        "periodic_offset": 0,
+        "source_container": -1,
+        "source_covers_candidate": true,
+        "source_id": 3792,
+        "source_level": 1,
+        "source_pointset_sha256": "1fbf7e69c58b90872b9a3fb414cc9798171fbb88a4deec432a1247646fdfdcd6",
+        "source_record_sha256": "673da6b0ba426b3846ff2030da8bca2ae0795fbd4dfb7ff889ea8f12e5e72f4a",
+        "status": "checked",
+        "witness": "complete-candidate-reconstruction"
+      }
+    ],
+    "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+    "status": "mapped-land-support",
+    "unresolved": []
+  }
+}
