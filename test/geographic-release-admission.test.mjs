@@ -73,8 +73,9 @@ test('real publisher entrypoint performs zero writes for late malformed, missing
     const bytes=new Map([['sources.json',source],['release-7.json',definition],['7-memberships-final.json',late]]);
     const manifest={releases:[c.release],batches:[descriptor(source,'sources.json','/api/records/import'),descriptor(definition,'release-7.json'),descriptor(late,'7-memberships-final.json')]};
     let writes=0,reads=0;
+    const reason={malformed:/JSON|Unexpected|Expected.*property/,missing:/Missing final input/,duplicate:/duplicate.*identity/, 'conflicting-release':/batch release ID mismatch/}[kind];
     await assert.rejects(publishGeographicReleases({manifest,mode:'stage',request:async()=>{reads++;return Response.json(null);},
-      batch:async()=>{writes++;},readBatch:p=>{if(kind==='missing'&&p.path==='7-memberships-final.json')throw Error('Missing final input');return bytes.get(p.path);}}));
+      batch:async()=>{writes++;},readBatch:p=>{if(kind==='missing'&&p.path==='7-memberships-final.json')throw Error('Missing final input');return bytes.get(p.path);}}),reason);
     assert.equal(writes,0,kind);assert.equal(reads,1);
   }
 });

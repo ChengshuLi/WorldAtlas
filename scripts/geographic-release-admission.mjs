@@ -45,6 +45,8 @@ export function splitGeographicReleaseBatch(bytes, part) {
 
   const parent = sha(bytes), envelope = Object.fromEntries(Object.entries(payload)
     .filter(([key]) => !['release', 'memberships', 'changes', 'ingestion_id'].includes(key)));
+  const memberBytes = members.map(row => Buffer.byteLength(JSON.stringify(row)));
+  const changeBytes = changes.map(row => Buffer.byteLength(JSON.stringify(row)));
   const chunks = [];
   let memberIndex = 0, changeIndex = 0;
   do {
@@ -55,14 +57,16 @@ export function splitGeographicReleaseBatch(bytes, part) {
     if (Object.hasOwn(payload, 'memberships')) next.memberships = [];
     if (Object.hasOwn(payload, 'changes')) next.changes = [];
     let used = Number(Boolean(next.release));
-    if (Buffer.byteLength(JSON.stringify(next)) > MiB) throw Error('Release envelope exceeds request byte limit');
-    for (const [field, input, getIndex, advance] of [
-      ['memberships', members, () => memberIndex, () => memberIndex++],
-      ['changes', changes, () => changeIndex, () => changeIndex++]]) {
+    let wireBytes = Buffer.byteLength(JSON.stringify(next));
+    if (wireBytes > MiB) throw Error('Release envelope exceeds request byte limit');
+    for (const [field, input, sizes, getIndex, advance] of [
+      ['memberships', members, memberBytes, () => memberIndex, () => memberIndex++],
+      ['changes', changes, changeBytes, () => changeIndex, () => changeIndex++]]) {
       while (getIndex() < input.length && used < geographicAdmissionLimits.rows) {
+        const addedBytes = sizes[getIndex()] + Number(next[field].length > 0);
+        if (wireBytes + addedBytes > MiB) break;
         next[field].push(input[getIndex()]);
-        if (Buffer.byteLength(JSON.stringify(next)) > MiB) {next[field].pop(); break;}
-        advance(); used++;
+        wireBytes += addedBytes; advance(); used++;
       }
       // Do not jump over a membership that requires the following request.
       if (field === 'memberships' && memberIndex < members.length) break;
@@ -71,7 +75,9 @@ export function splitGeographicReleaseBatch(bytes, part) {
       throw Error('Single release row exceeds request byte limit');
     const {ingestion_id: placeholder, ...content} = next;
     next.ingestion_id = `geographic-split:v1:${sha(JSON.stringify([part.route, part.path, parent, index, sha(JSON.stringify(content))]))}`;
-    chunks.push(Buffer.from(JSON.stringify(next)));
+    const body = Buffer.from(JSON.stringify(next));
+    if (body.length !== wireBytes || body.length > MiB) throw Error('Release request byte accounting mismatch');
+    chunks.push(body);
   } while (memberIndex < members.length || changeIndex < changes.length);
   return chunks;
 }
