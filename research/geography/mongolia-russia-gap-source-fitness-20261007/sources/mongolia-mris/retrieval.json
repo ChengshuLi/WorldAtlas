@@ -1,0 +1,27 @@
+{
+  "retrieved_at_utc": "2026-10-07T14:59:31.030659+00:00",
+  "method": "HTTP GET only; public ArcGIS REST metadata and full unfiltered feature query; no edits or authenticated endpoint.",
+  "feature_layer_metadata": {
+    "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/mongolia-mris/feature-service-layer.json",
+    "sha256": "8aa26a3b26486439484705e66a8155cc53fff882f303a8107edcd7875e881f31",
+    "bytes": 17014,
+    "url": "https://services-ap1.arcgis.com/QIJaUt9oyULFXfLr/ArcGIS/rest/services/mng_admbnda_adm2_nso_20201019/FeatureServer/0?f=pjson"
+  },
+  "full_query": {
+    "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/mongolia-mris/mng-adm2-nso-featurelayer-full.geojson",
+    "url": "https://services-ap1.arcgis.com/QIJaUt9oyULFXfLr/ArcGIS/rest/services/mng_admbnda_adm2_nso_20201019/FeatureServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "last_modified": "Tue, 20 May 2025 10:39:16 GMT",
+    "bytes": 7206047,
+    "sha256": "c27ae477804c5954c4db7cec76093c62baea6c56c8f5aedf7ad95af165ad0e11",
+    "feature_count": 339,
+    "source_crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "transfer_limit_exceeded": false
+  }
+}

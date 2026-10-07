@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "scope": "48 physical components and eight current contacts in gap-source-batch:0a4b122a996ef2050e5cac94",
+  "sources": [
+    {
+      "id": "geoboundaries-mng-adm2-2021-claim",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MNG/ADM2/geoBoundaries-MNG-ADM2_simplified.geojson",
+      "publisher": "geoBoundaries / William & Mary geoLab",
+      "role": "Historical simplified administrative registry comparator",
+      "vintage": "represented-year claim 2021; original input bytes in retained corpus",
+      "feature_count": 339,
+      "advertised_feature_count": 339,
+      "crs": "EPSG:4326 in retained GeoJSON; no explicit accuracy or precision metadata in the retained catalogue",
+      "license": "CC BY 3.0 IGO (retained catalogue attribution claim; not an independent legal opinion)",
+      "retrieved_at": "Retained source corpus acquisition record; exact whole-source SHA-256 pinned in the evidence manifest",
+      "overlay": {"positive_area_components": 33, "scope_components": 48},
+      "fitness": "Suitable as an explicit historical comparison layer and source-name cross-check. Simplification, represented-year status, positional accuracy, effective legal dates, and authority for current boundaries remain unverified."
+    },
+    {
+      "id": "geoboundaries-rus-adm2-2017-claim",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2_simplified.geojson",
+      "publisher": "geoBoundaries / William & Mary geoLab",
+      "role": "Historical simplified administrative registry comparator",
+      "vintage": "represented-year claim 2017; original input bytes in retained corpus",
+      "feature_count": 2327,
+      "advertised_feature_count": 2328,
+      "crs": "EPSG:4326 in retained GeoJSON; no explicit accuracy or precision metadata in the retained catalogue",
+      "license": "ODbL 1.0 (retained catalogue attribution claim; not an independent legal opinion)",
+      "retrieved_at": "Retained source corpus acquisition record; exact whole-source SHA-256 pinned in the evidence manifest",
+      "overlay": {"positive_area_components": 34, "scope_components": 48},
+      "fitness": "Useful as a historical spatial comparator. The retained count differs from the advertised count and 2017 is stale relative to official 2025 and 2026 Buryatia administrative publications. It cannot establish current legal boundaries or status."
+    },
+    {
+      "id": "mongolia-mris-nso-adm2-service",
+      "url": "https://services-ap1.arcgis.com/QIJaUt9oyULFXfLr/ArcGIS/rest/services/mng_admbnda_adm2_nso_20201019/FeatureServer/0",
+      "publisher": "Mongolia National Statistics Office layer published through ArcGIS service; source lineage/authority not established by the service metadata",
+      "role": "Independent official-candidate current district/soum geometry comparator",
+      "vintage": "Layer title suffix 2020-10-19; all 339 features have date=2016-12-01, validOn=2020-10-19, validTo=null; service data/schema edit timestamps 2025-05-20",
+      "feature_count": 339,
+      "crs": "Native service CRS EPSG:32648; captured full GeoJSON response explicitly requested with outSR=4326 and declares EPSG:4326",
+      "precision_accuracy": "Not stated in layer metadata; no survey scale or positional accuracy recorded",
+      "license": "Layer metadata licenseInfo is absent. Separate service credit text is not treated as a reuse license; terms unresolved.",
+      "retrieved_at": "2026-10-07T14:59:31.030659Z",
+      "response_bytes": 7206047,
+      "response_sha256": "c27ae477804c5954c4db7cec76093c62baea6c56c8f5aedf7ad95af165ad0e11",
+      "query": "where=1=1&outFields=*&returnGeometry=true&outSR=4326&f=geojson; HTTP 200; exceededTransferLimit=false",
+      "overlay": {"positive_area_components": 37, "scope_components": 48},
+      "fitness": "Independent national-statistics candidate layer with full feature coverage and explicit validity attributes. Effective-date semantics, legal authority for boundary adjudication, positional accuracy, lineage, and reuse terms are unresolved; it cannot approve or assign any component."
+    },
+    {
+      "id": "mongolia-nsdi-service-catalogue",
+      "url": "https://nsdi.gov.mn/p/%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/",
+      "publisher": "Mongolia National Spatial Data Infrastructure portal",
+      "role": "Official dataset discovery catalogue for boundary and hydrography source candidates",
+      "vintage": "Page captured 2026-10-07; page identifies countrywide soum/district boundary vector geodatabases and countrywide water/hydrology vector geodatabases; dataset-specific versions not given on the catalogue page",
+      "crs_accuracy_lineage": "Not provided for specific source packages on the reviewed catalogue page",
+      "license": "Unknown for the listed boundary and water datasets",
+      "retrieved_at": "2026-10-07T15:07:17.173967Z",
+      "fitness": "High-priority source lead only. The page identifies relevant candidate packages but no downloadable payload, specific metadata, positional accuracy, dates, lineage, or terms were acquired; no overlay made."
+    },
+    {
+      "id": "buryatia-rosstat-2025-roster",
+      "url": "https://03.rosstat.gov.ru/statcurrentevents/document/259140",
+      "publisher": "Federal State Statistics Service territorial body for Republic of Buryatia",
+      "role": "Statistical roster/currentness cross-check, not boundary geometry",
+      "vintage": "Municipal-district population reference date 2025-01-01; publication dated 2025-04-28",
+      "crs_accuracy_lineage": "Not applicable; no geometry",
+      "license": "Reuse terms not assessed",
+      "retrieved_at": "2026-10-07 (primary source page reviewed in web research; response bytes not retained)",
+      "fitness": "Lists Zakamensky, Okinsky and Tunkinsky municipal districts at the statistical reference date. Cannot identify a boundary line or prove legal status/currentness beyond that date."
+    },
+    {
+      "id": "buryatia-fns-oktmo-2026",
+      "url": "https://www.nalog.gov.ru/rn03/news/activities_fts/16620384/",
+      "publisher": "Federal Tax Service of Russia, Republic of Buryatia office",
+      "role": "Official documentary currentness warning for municipal formations and OKTMO changes",
+      "vintage": "Publication 2026-04-27; page cites Republic of Buryatia Law 985-III (2004), as amended by Law 1013-VII (2025)",
+      "crs_accuracy_lineage": "Not applicable; no geometry",
+      "license": "Reuse terms not assessed; retained as source-research record only",
+      "retrieved_at": "2026-10-07T15:07:15.398644Z",
+      "response_bytes": 70711,
+      "response_sha256": "5cf084fde2aebe3d9c73696315fd2c38984624d00163f33930bef119b420faaa",
+      "fitness": "Official evidence that 2026 municipal-formation and OKTMO changes postdate the 2017 Russia product. It is not a legal boundary polygon source and does not establish component-level parent assignment."
+    }
+  ],
+  "common_limits": [
+    "No reviewed source establishes the legal owner, current authoritative administrative parent, physical land/water status, ownership, or cause of any component.",
+    "Positive overlay area is a geometric comparison result, not evidence of legal containment, ground position, or physical land.",
+    "All 48 target component rows and all eight contact features remain part of the scope, including unresolved and no-intersection cases.",
+    "Source licensing and attribution fields are claims from preserved metadata; only the explicit service layer licenseInfo field is absent, and no blanket legal reuse conclusion is made."
+  ]
+}

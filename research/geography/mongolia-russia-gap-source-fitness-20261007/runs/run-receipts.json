@@ -1,0 +1,194 @@
+{
+  "baseline_commit": "6a47b43025d963daf80915c6d219c75ebcc8cd91",
+  "baseline_helpers": [
+    {
+      "bytes": 8846,
+      "hash_kind": "file-bytes",
+      "path": "scripts/evidence/geometry.py",
+      "role": "input-helper",
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+    },
+    {
+      "bytes": 1953,
+      "hash_kind": "file-bytes",
+      "path": "scripts/ellipsoidal_area.py",
+      "role": "input-helper",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    }
+  ],
+  "byte_identical_comparison_outputs": true,
+  "byte_identical_extraction_receipts": true,
+  "code": [
+    {
+      "bytes": 7280,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/extract_inputs.py",
+      "sha256": "eae27612b506f49f2ad8d491003127c4a4f33d495242f7a65f1417097037a96d"
+    },
+    {
+      "bytes": 6718,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/compare_sources.py",
+      "sha256": "c439cb00750b91de8833cd4c6b0c45a8c5bbab58c05550f3d618a4b7bc18a686"
+    },
+    {
+      "bytes": 4184,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/run_controls.py",
+      "sha256": "fd1b15c032eb7ca5c0126559f16a99f8e58163795e2f8a053835e958cacc3883"
+    }
+  ],
+  "controls": [
+    {
+      "bytes": 496,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/custody-family-restoration-positive-control.json",
+      "sha256": "3abfb0c0f9de1f3257e17785152bb5a91730976e0ee36eeb3b46f60fbd934c4b"
+    },
+    {
+      "bytes": 634,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/custody-family-restoration-negative-control.json",
+      "sha256": "b48821812eecab7cce2b9675c2757f9d10a1ac6be75ce87dc6a566ec51d5c75b"
+    },
+    {
+      "bytes": 494,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/source-overlay-positive-control.json",
+      "sha256": "cab0ce3cd1e1d710b22d593562d4e9c387e989b3af4c28c8ad06f891e6475b97"
+    },
+    {
+      "bytes": 508,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/source-overlay-negative-control.json",
+      "sha256": "20a4e4e6b01b851633ab4474f237b610f4a616ceb4fb37a5f57844f89e531c25"
+    },
+    {
+      "bytes": 477,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/custody-family-restoration-reproducibility.json",
+      "sha256": "b670a22a2368d3c6cde247c89d5b1c0e0441a88c71fa1ba9ec5cd001b2938a64"
+    },
+    {
+      "bytes": 457,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/source-overlay-reproducibility.json",
+      "sha256": "4b263739af55d3ee5d83e4e0dd500a6165f94eb05c06029878148044013b9466"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 14826,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/inputs/complete-family.json",
+      "sha256": "b3774b8f93f3f7dc1d3c367b01c67a551bd82f5d04731162d83c0ecec6090d99"
+    },
+    {
+      "bytes": 102543,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/inputs/route-component-rows.jsonl",
+      "sha256": "6ed43e97112613ecf071448ddc3784098360939966090f4643ad20b2b8b2b012"
+    },
+    {
+      "bytes": 57697,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/inputs/route-admin-binding-rows.jsonl",
+      "sha256": "02dcf70b203fef5478bbb3e626535d076c699c60490d47d8e1668eec3055700b"
+    },
+    {
+      "bytes": 41406,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/inputs/physical-component-features.geojson",
+      "sha256": "dfc5f579b36cb0be114556f1fc48574631e316860444c8be2e9da3b797a2bb01"
+    },
+    {
+      "bytes": 79925,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/inputs/current-contact-features.geojson",
+      "sha256": "26c1d06ded5307765749ce6dc15154c653c8b48de30aff11b3be5e308752e3d2"
+    },
+    {
+      "bytes": 17014,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/mongolia-mris/feature-service-layer.json",
+      "sha256": "8aa26a3b26486439484705e66a8155cc53fff882f303a8107edcd7875e881f31"
+    },
+    {
+      "bytes": 7206047,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/mongolia-mris/mng-adm2-nso-featurelayer-full.geojson",
+      "sha256": "c27ae477804c5954c4db7cec76093c62baea6c56c8f5aedf7ad95af165ad0e11"
+    },
+    {
+      "bytes": 1358,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/mongolia-mris/retrieval.json",
+      "sha256": "beb5fd437d47ca957ab4ee85cc5658ff72f4c0d6c6ae3f952962ed314a90bb2c"
+    },
+    {
+      "bytes": 548809,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/geoboundaries/gb-MNG-ADM2-000.bin.gz",
+      "sha256": "0f520c0d4ce2d70b9a780b9826edfb299bac4618cda936f2ada4a056725417fb"
+    },
+    {
+      "bytes": 8557994,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/geoboundaries/gb-RUS-ADM2-000.bin.gz",
+      "sha256": "51b8518672c25f12a6da6b86f32fd991f6f57271d8c883029ae14df2e4122521"
+    }
+  ],
+  "limits": [
+    "Runs were separate fresh Python processes and re-extracted the 48 component/8 contact roster each time.",
+    "Overlay and controls preserve all inputs and establish only source-byte consistency and comparison mechanics, not territorial truth."
+  ],
+  "runs": [
+    {
+      "comparison_output": {
+        "bytes": 87395,
+        "hash_kind": "file-bytes",
+        "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/comparison-run-1.json",
+        "sha256": "317b47f679c40e5c3451c37a0be7adc1c922e7f0efcb86cd6d1bab9bc2970c40"
+      },
+      "completed_at_utc": "2026-10-07T15:30:21.679927+00:00",
+      "extract_command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/mongolia-russia-gap-source-fitness-20261007/extract_inputs.py",
+      "extraction_stdout": {
+        "bytes": 880,
+        "hash_kind": "file-bytes",
+        "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/extract-run-1.stdout.json",
+        "sha256": "0937aec4b72637234747fcbb1a206aab48d675adc4ff3fb17e9789af1d02e9b8"
+      },
+      "overlay_command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/mongolia-russia-gap-source-fitness-20261007/compare_sources.py research/geography/mongolia-russia-gap-source-fitness-20261007/runs/comparison-run-1.json",
+      "run": "run1"
+    },
+    {
+      "comparison_output": {
+        "bytes": 87395,
+        "hash_kind": "file-bytes",
+        "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/comparison-run-2.json",
+        "sha256": "317b47f679c40e5c3451c37a0be7adc1c922e7f0efcb86cd6d1bab9bc2970c40"
+      },
+      "completed_at_utc": "2026-10-07T15:30:27.351410+00:00",
+      "extract_command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/mongolia-russia-gap-source-fitness-20261007/extract_inputs.py",
+      "extraction_stdout": {
+        "bytes": 880,
+        "hash_kind": "file-bytes",
+        "path": "research/geography/mongolia-russia-gap-source-fitness-20261007/runs/extract-run-2.stdout.json",
+        "sha256": "0937aec4b72637234747fcbb1a206aab48d675adc4ff3fb17e9789af1d02e9b8"
+      },
+      "overlay_command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/mongolia-russia-gap-source-fitness-20261007/compare_sources.py research/geography/mongolia-russia-gap-source-fitness-20261007/runs/comparison-run-2.json",
+      "run": "run2"
+    }
+  ],
+  "software": {
+    "GEOS": "3.13.1",
+    "PROJ": "9.5.1",
+    "geometry_helper_version": "worldatlas-evidence-geometry-v1",
+    "numpy": "2.3.5",
+    "preparation_helper_version": "worldatlas-evidence-preparation-v1",
+    "pyproj": "3.7.2",
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "version": 1
+}
