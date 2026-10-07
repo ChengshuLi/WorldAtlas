@@ -1,4 +1,5 @@
 {
+  "all_run_outputs_identical": true,
   "frozen_input_code_manifest": {
     "binding_timing": "Computed after both runs from the exact preserved input and producer bytes; the producer and source-input bytes listed here are the bytes used by both runs.",
     "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/frozen-input-code-manifest.json",
@@ -16,13 +17,12 @@
     "producer_code_sha256": "d7fb044da19192bcb665338151a1511ad4792f77e1301214764e87b2b860d2c0",
     "sha256": "814e637b3d53cfcc794288a16a7a5d552df68fa793686c3de7369d35cd87117f"
   },
-  "identical_output_sha256": true,
   "limits": [
     "Capture timestamps differ by design; every complete analysis output file has an identical whole-file hash across both runs.",
     "Determinism confirms computational reproducibility only and does not resolve source availability, licensing, historical coverage, or classification."
   ],
   "output_count": 18,
-  "outputs": [
+  "output_sha256": [
     {
       "bytes": 244210,
       "path": "administrative-source-overlays.json",
@@ -114,11 +114,7 @@
       "sha256": "329994cdd68b9e6dc2b7a436bb9d80e5c3392e09e38bb0496de0089927afd845"
     }
   ],
-  "run_ids": [
-    "run-1",
-    "run-2"
-  ],
-  "run_manifests": {
+  "runs": {
     "run-1": {
       "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/run-manifest.json",
       "sha256": "a1df14de504bba55631e3d3fa2da453070391291e3a1a18f5ecfc612cda27113"
@@ -128,10 +124,5 @@
       "sha256": "6166b63912273eadeaedb9b5d619204bb00045f4d3526cd54718076e6b50deb8"
     }
   },
-  "schema": "worldatlas-source-run-reproducibility-v1",
-  "scope": {
-    "components": 70,
-    "contacts": 57,
-    "families": 52
-  }
+  "schema": "worldatlas-source-execution-binding-v1"
 }

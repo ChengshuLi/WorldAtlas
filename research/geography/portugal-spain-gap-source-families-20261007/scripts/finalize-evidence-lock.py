@@ -12,6 +12,12 @@ ROOT = Path(__file__).resolve().parents[4]
 PACKAGE = ROOT / "research/geography/portugal-spain-gap-source-families-20261007"
 MAX_FILE = 32 * 1024 * 1024
 MAX_TOTAL = 256 * 1024 * 1024
+PRODUCERS = [
+    "extract-jrc-scope.py", "inventory-jrc-2024.py", "summarize-jrc-2024.py",
+    "compare-admin-source-products.py", "overlay-apa-wfd-lines.py",
+    "overlay-mapa-current-snapshot.py", "assemble-source-status.py",
+    "validate-source-controls.py",
+]
 
 
 def sha(path: Path) -> str:
@@ -23,7 +29,9 @@ def sha(path: Path) -> str:
 
 
 def inventory(*directories: Path) -> list[dict[str, object]]:
-    files = sorted(path for directory in directories for path in directory.rglob("*") if path.is_file())
+    lock_path = PACKAGE / "inputs/frozen-input-code-manifest.json"
+    files = sorted(path for directory in directories for path in directory.rglob("*")
+                   if path.is_file() and path != lock_path)
     rows = []
     for path in files:
         size = path.stat().st_size
@@ -95,10 +103,34 @@ def main() -> None:
     }
     lock_path = PACKAGE / "inputs/frozen-input-code-manifest.json"
     lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n")
+    producer_paths = [f"research/geography/portugal-spain-gap-source-families-20261007/scripts/{name}"
+                      for name in ["run-complete-analysis.py", *PRODUCERS]]
+    producer_rows = [next(row for row in closure if row["path"] == path) for path in producer_paths]
+    reproducibility["frozen_input_code_manifest"] = {
+        "path": str(lock_path.relative_to(ROOT)), "sha256": sha(lock_path),
+        "producer_code_paths": producer_paths,
+        "producer_code_sha256": hashlib.sha256(json.dumps(producer_rows, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
+        "binding_timing": "Computed after both runs from the exact preserved input and producer bytes; the producer and source-input bytes listed here are the bytes used by both runs.",
+    }
+    reproducibility_path = PACKAGE / "outputs/reproducibility.json"
+    reproducibility_path.write_text(json.dumps(reproducibility, indent=2, sort_keys=True) + "\n")
+    binding = {
+        "schema": "worldatlas-source-execution-binding-v1",
+        "frozen_input_code_manifest": reproducibility["frozen_input_code_manifest"],
+        "runs": reproducibility["run_manifests"],
+        "output_count": len(left),
+        "all_run_outputs_identical": True,
+        "output_sha256": list(left.values()),
+        "limits": reproducibility["limits"],
+    }
+    binding_path = PACKAGE / "outputs/execution-code-input-binding.json"
+    binding_path.write_text(json.dumps(binding, indent=2, sort_keys=True) + "\n")
     print(json.dumps({"runs_equal": True, "run_output_count": len(left), "source_index_bytes": desc_bytes,
                       "local_closure_bytes": lock["package_declared_bytes"], "closure_files": len(closure),
                       "max_file_bytes": max(int(row["bytes"]) for row in closure),
-                      "reproducibility_sha256": sha(out), "lock_sha256": sha(lock_path)}))
+                      "combined_bytes": combined_bytes, "reproducibility_sha256": sha(reproducibility_path),
+                      "execution_binding_sha256": sha(binding_path), "lock_sha256": sha(lock_path),
+                      "producer_code_sha256": reproducibility["frozen_input_code_manifest"]["producer_code_sha256"]}))
 
 
 if __name__ == "__main__":
