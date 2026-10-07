@@ -8,6 +8,16 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 export const FIXED_PRIOR_STAGE_SHA='471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765';
 export const FIXED_NATIVE_COMPARISON_SHA='3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28';
 export const FIXED_PRIOR_VALIDATOR_SHA='5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7';
+export function authenticateSuccessorContextInventory(indexRaw,imageIndex,comparisonRaw){
+ assert.equal(sha(comparisonRaw),FIXED_NATIVE_COMPARISON_SHA,'Original complete native comparison binding changed');
+ const comparison=JSON.parse(comparisonRaw),original=comparison.products.find(p=>p.path==='context-index.json');
+ assert.equal(indexRaw.length,original.bytes);assert.equal(sha(indexRaw),original.sha256,'Original full context index changed');
+ const index=JSON.parse(indexRaw);assert.deepEqual(imageIndex.files.map(p=>p.path).sort(),index.parts.map(p=>p.path).sort(),'Complete original context body roster required');
+ for(const pin of index.parts){const product=comparison.products.find(p=>p.path===pin.path),retained=imageIndex.files.find(p=>p.path===pin.path);
+  assert.equal(pin.bytes,product.bytes);assert.equal(pin.sha256,product.sha256);assert.equal(retained.mode,'100644');assert.equal(retained.bytes,pin.bytes);assert.equal(retained.sha256,pin.sha256);
+  assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
+ }return index;
+}
 export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile}){
  requirePlainExecution();assert.equal(stage.version,2);assert.equal(stage.issue,1295);assert.equal(stage.kind,'retained-identity-context-continuation-v2');assert.equal(stage.lane,'engineering');
  assert.deepEqual(stage.subject_ids,[...TARGETS]);assert.equal(stage.prior_stage_sha256,FIXED_PRIOR_STAGE_SHA);
@@ -46,7 +56,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  assert(stage.after_context_image,'Complete retained successor-context transport required');
  const afterImageRaw=read(stage.after_context_image),afterImageIndex=JSON.parse(afterImageRaw),afterImageBase=path.posix.dirname(stage.after_context_image.path);
  for(const pin of afterImageIndex.parts)read({path:afterImageBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
- assert.deepEqual(afterImageIndex.files.map(p=>p.path).sort(),afterIndex.parts.map(p=>p.path).sort(),'Complete original context body roster required');
+ authenticateSuccessorContextInventory(read(stage.after_context),afterImageIndex,nativeComparisonRaw);
  const afterImage=path.join(temporary,'successor-context');restoreWholeImage(path.join(root,afterImageBase),afterImage,{expectedIndexSha:stage.after_context_image.sha256});
  for(const pin of afterIndex.parts){
   safeEvidencePath(pin.path);const originalProduct=nativeComparison.products.find(p=>p.path===pin.path);assert.equal(pin.bytes,originalProduct.bytes);assert.equal(pin.sha256,originalProduct.sha256);

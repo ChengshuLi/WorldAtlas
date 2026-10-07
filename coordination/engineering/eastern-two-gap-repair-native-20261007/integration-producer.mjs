@@ -27,7 +27,7 @@ export function prepareInputClosure(repo,out){
  const raw=fs.readFileSync(transport+'/index.json');restoreWholeImage(transport,restored,{expectedIndexSha:sha(raw)});
  const declared=JSON.parse(fs.readFileSync(repo+'/'+NS+'/complete-input-index.json'));
  const restoredIndex=fs.readFileSync(restored+'/'+NS+'/complete-input-index.json');assert(restoredIndex.equals(fs.readFileSync(repo+'/'+NS+'/complete-input-index.json')));
- assert.equal(declared.files.length,201);const storage=new Map();
+ assert.equal(declared.files.length,202);const storage=new Map();
  for(const pin of declared.files)storage.set(pin.original.commit+':'+pin.original.path,{...pin,alias:{...pin.alias,path:path.relative(repo,restored+'/'+pin.alias.path)}});
  const readers=new Map(),budget=candidateBudget([]);
  for(const pin of declared.files){const c=pin.original.commit;if(!readers.has(c))readers.set(c,immutableReader(repo,c,storage));const body=readers.get(c).read(pin.original.path);budget.add({bytes:body.length});}
@@ -38,7 +38,7 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  const head=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();assert.match(head,/^[a-f0-9]{40}$/);
  const code=codeClosure(repo,NS+'/integration-producer.mjs');code.push(NS+'/serialize-release.py','scripts/evidence/immutable.py','.github/package-inputs.json');
  const modules=[...new Set(code)].sort().map(p=>{const local=fs.readFileSync(repo+'/'+p),committed=execFileSync('git',['-C',repo,'cat-file','blob',head+':'+p],{maxBuffer:32*1024*1024});assert(local.equals(committed),'Actual executed code differs '+p);return{path:p,bytes:local.length,sha256:sha(local)};});
- const {storage,input_only}=prepareInputClosure(repo,out);fs.writeFileSync(out+'/input-only.json',json(input_only));console.log('ALL201 original inputs loaded',input_only.budget);
+ const {storage,input_only}=prepareInputClosure(repo,out);fs.writeFileSync(out+'/input-only.json',json(input_only));console.log('ALL202 original inputs loaded',input_only.budget);
  if(inputOnly)return input_only;
  const image=out+'/delivery';fs.mkdirSync(image);const put=(p,b)=>{assert(b.length<=32*1024*1024);const target=image+'/'+p;fs.mkdirSync(path.dirname(target),{recursive:true});assert(!fs.existsSync(target));fs.writeFileSync(target,b);return{path:p,bytes:b.length,sha256:sha(b)};};
  const original=await releaseInputs(repo,BASE,{storage,nativeStorage:storage});console.log('Complete84833 membership release loaded');
