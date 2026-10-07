@@ -148,6 +148,14 @@ def authenticate_execution(commit):
 
 def restore(commit, destination, identical_prior=None):
     code = authenticate_execution(commit)
+    destination = Path(os.path.abspath(destination))
+    if destination.parent != ROOT / '.cache' or not re.fullmatch('1386-[a-z0-9-]+', destination.name):
+        raise ValueError('Fresh job-owned .cache/1386 run name required')
+    for parent in destination.parents:
+        if parent.is_symlink():
+            raise ValueError('Symlink output ancestor rejected')
+    if identical_prior is not None:
+        identical_prior = Path(os.path.abspath(identical_prior))
     if destination.exists() or destination.is_symlink():
         raise ValueError('Fresh exclusively owned destination required')
     index_raw = (PREFIX / 'source-index.json').read_bytes()

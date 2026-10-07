@@ -158,6 +158,7 @@ def code_image(root, index):
 
 
 def run(commit, destination, node, identical_prior=None):
+    destination = Path(os.path.abspath(destination))
     index, restored = restore(commit, destination, identical_prior)
     result = {'world': world_relation(destination, index), 'ownership': ownership_relation(destination),
               'pixel': pixel_relation(destination)}
