@@ -7,12 +7,19 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 import json
 import sys
+import importlib.util
 
 from shapely.geometry import LineString, Point, Polygon, shape
 
-from run_analysis import (ROOT, SCOPE_PATH, BASELINE, load_context, digest, write_json,
-                          bounds_and_extent, count_geom, polygon_pair, read_capture,
-                          wa_geometry, geom_json)
+ANALYSIS_PATH = Path(__file__).with_name("run-analysis.py")
+ANALYSIS_SPEC = importlib.util.spec_from_file_location("run_analysis", ANALYSIS_PATH)
+ANALYSIS = importlib.util.module_from_spec(ANALYSIS_SPEC)
+ANALYSIS_SPEC.loader.exec_module(ANALYSIS)
+ROOT, SCOPE_PATH, BASELINE = ANALYSIS.ROOT, ANALYSIS.SCOPE_PATH, ANALYSIS.BASELINE
+CAPTURE_INDEX_PATH = ANALYSIS.CAPTURE_INDEX_PATH
+load_context, digest, write_json = ANALYSIS.load_context, ANALYSIS.digest, ANALYSIS.write_json
+bounds_and_extent, count_geom, polygon_pair = ANALYSIS.bounds_and_extent, ANALYSIS.count_geom, ANALYSIS.polygon_pair
+read_capture, wa_geometry, geom_json = ANALYSIS.read_capture, ANALYSIS.wa_geometry, ANALYSIS.geom_json
 
 METHOD_ID = "official-source-geography-v1"
 
@@ -33,6 +40,7 @@ def run_controls():
     positive = {
         "version": 1,
         "method_id": METHOD_ID,
+        "kind": "positive-control",
         "outcome": "passed",
         "checks": [
             {"id": "exact-complete-scope", "outcome": "passed", "families": len(scope["families"]),
@@ -52,6 +60,8 @@ def run_controls():
                  for key, value in ctx["lines"].items()}},
             {"id": "mixed-polygon-line-point-residue", "outcome": "passed",
              "polygon_area_m2": None, "line_contact_m": None, "point_contact_count": None},
+            {"id": "uncovered-residual-preserved", "outcome": "passed",
+             "residual_area_m2": None, "residual_type": None},
         ],
         "limits": ["Positive custody and geometric controls validate the evidence path, not ownership, land/water status, history, or legal authority."],
     }
@@ -69,10 +79,14 @@ def run_controls():
         "line_geometry_type": line.geom_type, "point_geometry_type": point.geom_type})
     if abs(positive["checks"][3]["half_fraction"] - 0.5) > 1e-10 or positive["checks"][3]["line_contact_m"] <= 0 or not positive["checks"][3]["point_contact_count"]:
         raise AssertionError("Mixed residue control did not preserve known polygon/line/point outcomes")
+    residual = square.difference(half)
+    positive["checks"][4].update({"residual_area_m2": wa_geometry.area(residual), "residual_type": residual.geom_type})
+    if residual.is_empty or wa_geometry.area(residual) <= 0:
+        raise AssertionError("Uncovered residual was not preserved")
 
     negative_rows = []
     def expected_feature_identity_failure():
-        raise ValueError("Native item ID/name differs from the frozen source identity")
+        ANALYSIS.geojson_feature(ctx["capture_index"], "dgt-barrancos-0204", "not-0204", "Barrancos")
     negative_rows.append(reject("wrong-native-identity", expected_feature_identity_failure))
 
     def wrong_vintage():
@@ -112,16 +126,8 @@ def run_controls():
             raise ValueError("Whole original response bytes changed")
     negative_rows.append(reject("modified-whole-source-response", altered_original_response))
 
-    def unresolved_residual_preserved():
-        whole = wa_geometry.canonical_land(Polygon([(-7.0, 37.0), (-6.9, 37.0), (-6.9, 37.1), (-7.0, 37.1), (-7.0, 37.0)]))
-        cover = wa_geometry.canonical_land(Polygon([(-7.0, 37.0), (-6.95, 37.0), (-6.95, 37.1), (-7.0, 37.1), (-7.0, 37.0)]))
-        residual = whole.difference(cover)
-        if residual.is_empty or wa_geometry.area(residual) <= 0:
-            raise ValueError("Unexpectedly lost unresolved residual")
-    negative_rows.append(reject("uncovered-residual-not-filled", unresolved_residual_preserved))
-
     negative = {"version": 1, "method_id": METHOD_ID, "outcome": "passed",
-                "checks": negative_rows,
+                "kind": "negative-control", "checks": negative_rows,
                 "limits": ["Each perturbed case must fail closed; these controls do not determine political identity, authority, or physical class."]}
 
     # Actual paired runs are the reproducibility control, rather than an in-memory approximation.
@@ -138,8 +144,10 @@ def run_controls():
         if len(a) != len(b) or digest(a) != digest(b):
             raise ValueError(f"Paired full-run output differs: {rel}")
         pairs.append({"path": rel, "bytes": len(a), "sha256": digest(a)})
+    inventory_digest = digest(json.dumps(pairs, sort_keys=True, separators=(",", ":")).encode())
     reproducibility = {"version": 1, "method_id": METHOD_ID, "kind": "reproducibility", "outcome": "passed",
                        "run_one": "runs/run-01", "run_two": "runs/run-02", "compared_files": pairs,
+                       "run_one_sha256": inventory_digest, "run_two_sha256": inventory_digest,
                        "source_capture_index_sha256": __import__("hashlib").sha256(CAPTURE_INDEX_PATH.read_bytes()).hexdigest(),
                        "limits": ["Execution times are recorded separately; identical science result files are compared byte-for-byte."]}
     write_json(ROOT / "controls" / "positive-control.json", positive)
