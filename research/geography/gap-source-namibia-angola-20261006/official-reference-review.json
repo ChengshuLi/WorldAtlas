@@ -342,16 +342,48 @@
       "use_limit": "Potential independent L-band SAR surface-water evidence, but the product source description and presence of a water code do not establish actual coverage, valid observations, seasonal state, or water classification in these candidates. Do not use pending lawful access, tile/date coverage checks, mask review, and independent spatial-registration assessment."
     },
     {
-      "id": "AWS Sentinel-1 GRD COG public archive / Earth Search STAC coverage screen",
+      "id": "AWS Sentinel-1 GRD COG archive / 2020 seasonal backscatter screen",
       "operator": "AWS Open Data Registry (public Sentinel-1 L1 GRD COG collection); Earth Search STAC catalog operated by Element 84",
       "url": "https://registry.opendata.aws/sentinel-1/",
       "stac_api": "https://earth-search.aws.element84.com/v1/search",
       "document_date": "Scene acquisitions screened: 2015-09, 2018-08, 2020-03, 2020-08, 2025-03, 2025-08. STAC catalog records specify Sentinel-1 platform, acquisition datetime, orbit, polarization, scene footprint and asset metadata.",
-      "retrieval_status": "Six exact Earth Search STAC search responses are retained in sources/sentinel-1-aws/ and bound by SHA-256 in footprint-screening.json. Per-period unions of returned footprints cover all 21 candidates in 2018-08, 2020-03, 2020-08 and 2025-03; 2015-09 covers 14 and 2025-08 covers 20. The same-day/same-relative-orbit unions cover no more than 14 components in any screened period. COG pixel values were not interpreted or classified.",
-      "use_limit": "This is a source-availability and footprint-only result. Combining multiple acquisition dates into a monthly union does not produce a dated water observation. Public VV/VH COG assets are uint16 with nodata 0 and STAC reports scale 1/offset 0; calibration and noise assets are separate. No calibrated backscatter, geolocation refinement, water mask, seasonality estimate, or bank line was produced. The asset requires a processing method and per-component acquisition-date accounting before any hydrologic inference.",
+      "retrieval_status": "In addition to six saved STAC coverage searches, six 2020 scene products from March 19/24 and August 10/15 were sampled in wet-season and dry-season windows, matched by relative orbit for each candidate. The 21 original candidates have sampled VV/VH backscatter in both windows. Of 49 positive-area candidate/contact intersections, 48 have at least one selected pixel center in both windows; the remaining positive-area intersection is too small to contain a pixel center. Nineteen candidate polygons are fully covered by their SAFE tiepoint-footprint unions; two have 99.7% and 99.9% planar coverage. The analysis is a signal-distribution screen, not a water classification.",
+      "use_limit": "COG pixels are uint16 raw measurements; sigma0 distributions were calculated using ESA sigmaNought and noiseRangeLut annotations. However, every inspected COG TIFF ImageDescription says Sentinel-1A while the STAC item and SAFE missionId say Sentinel-1B; the COGs also carry no embedded CRS/geotransform. Geographic placement uses the SAFE tiepoint lattice, but the spacecraft-tag conflict and absolute registration remain unresolved. No DEM terrain correction, radiometric terrain normalization, speckle filtering, ground-truth validation, water mask, bank line, or historic channel inference was produced. Threshold fractions are sensitivity measures only.",
       "local_file": "sources/sentinel-1-aws/footprint-screening.json",
       "reproduction_script": "reproduce_sentinel1_footprint_screening.py",
-      "scope": "STAC search footprint intersection and coverage against all 21 immutable candidate polygons; no production geometry change and no administrative assignment."
+      "scope": "STAC search footprint intersection and coverage against all 21 immutable candidate polygons; no production geometry change and no administrative assignment.",
+      "analysis_result_file": "sentinel1-2020-seasonal-backscatter.json",
+      "candidate_contact_assessment_file": "sentinel1-2020-backscatter-assessments.json",
+      "calibration_reference": "ESA Sentinel-1 Product Specification, issue 3/9, 2021-05-07, Sections 6.3.2–6.3.3; see separate reference record.",
+      "safe_annotation_directory": "sources/sentinel-1-aws/safe-annotation/",
+      "cog_header_metadata_file": "sources/sentinel-1-aws/cog-header-metadata.json"
+    },
+    {
+      "id": "National Archives of Namibia Findaid 2/31, Map Collection entries 3833, 3836 and 3839",
+      "operator": "National Archives of Namibia",
+      "url": "https://www.nan.gov.na/documents/3219017/3228694/Findaid_2-031.pdf/35bc9ed2-872f-5b81-85e2-633f8848e785?t=1707296061518",
+      "document_date": "Map 3833 is dated October 1928; dates are not specified in the finding aid for Maps 3836 and 3839.",
+      "retrieval_status": "Printed page 15 of the retained 24-page official finding aid was inspected. It states all maps/plans are in the Map Collection and lists: Map 3833, a Tsintsabis–Kuring Kuru road and water-holes map compiled from measurements by Capt. E.J. Nelson and H.J. Anderson, October 1928, approx. 1:400,000; Map 3836, “Skizze des nördlichen Ovambolandes, Grenze zu Angola” (northern Ovamboland, Angola border), with no scale/date given; and Map 3839, Oberleutnant von Winkler route sketch through Ovamboland and southeastern Angola, approx. 1:1,000,000. The map sheets themselves have not been retrieved or inspected.",
+      "use_limit": "Dated and scaled catalogue leads only. The finding aid does not establish the sheets’ extent relative to the 21 candidates, water depiction, datum, accuracy, survey basis, or boundary authority. The 1:400,000 road/water-holes map is not treated as a boundary or candidate-scale water source.",
+      "local_file": "sources/national-archives-namibia/findaid-2-031.pdf",
+      "bytes": 1297104,
+      "sha256": "9844b23fcb30a458b6251ae641381c986deabb713bd681dd5ec9836726e49983",
+      "printed_page_inspected": 15,
+      "scope": "Archival retrieval leads; no map georeferencing or administrative assignment."
+    },
+    {
+      "id": "ESA Sentinel-1 Product Specification, issue 3/9 (2021-05-07)",
+      "operator": "European Space Agency / Copernicus Sentinel-1 Mission Performance Centre",
+      "url": "https://sentinels.copernicus.eu/documents/247904/1877131/Sentinel-1-Product-Specification-18052021.pdf",
+      "document_date": "Issue 3/9 dated 2021-05-07.",
+      "retrieval_status": "Official product specification inspected for Level-1 GRD uint16 measurement description and Section 6.3.3 noise LUT calibration/removal relation. It documents sigma0 value from (DN^2 – eta)/A^2 and bilinear LUT interpolation (printed pages 189–190); this is the formula used for the retained COG samples.",
+      "use_limit": "The document supports the processing equation, not the accuracy or provenance of the particular public COG objects. The COG TIFF ImageDescription says Sentinel-1A while the corresponding STAC and SAFE metadata say Sentinel-1B; this conflict remains unresolved and is retained in cog-header-metadata.json.",
+      "scope": "Calibration method reference only; no water classification or boundary interpretation.",
+      "local_file": "sources/sentinel-1-aws/ESA-Sentinel-1-Product-Specification-2021.pdf",
+      "bytes": 4229866,
+      "sha256": "d3c4764ef6ee6a13a2a1c0903aa418b4393d52b20657e44da31bd6cdb91128a0",
+      "pdf_pages": 209,
+      "printed_page_inspected": 190
     }
   ],
   "spatial_screen": {

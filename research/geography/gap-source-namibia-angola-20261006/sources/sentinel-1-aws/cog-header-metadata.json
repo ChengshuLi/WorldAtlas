@@ -1,0 +1,733 @@
+{
+  "version": 1,
+  "purpose": "Header-only metadata inspection; no COG pixel values are read by this script.",
+  "rasterio_version": "1.4.3",
+  "stac_inputs": {
+    "2020-03": {
+      "file": "search-2020-03.geojson",
+      "sha256": "8a26f07b50bbb4fa9a3c79310b0342619146baa7fd46793357b89a13ac778a2f"
+    },
+    "2020-08": {
+      "file": "search-2020-08.geojson",
+      "sha256": "90bb51d37fd39a9231736513e2b7585e481abbba944d3819e13f50f96fc37e55"
+    }
+  },
+  "scene_item_count": 6,
+  "safe_annotation_mission_ids": {
+    "S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2": {
+      "mission_id": "S1B",
+      "annotation_sha256": "6203745c330465e121b82427ee15d8ea3e0da4b16d1abf1bfbaccef911375dbd",
+      "annotation_file": "safe-annotation/S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2__schema-product-vv.xml"
+    },
+    "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2": {
+      "mission_id": "S1B",
+      "annotation_sha256": "9ef861018ca981bac36144de492a9d4b2f622ef756060d4ac2cd4c9d9a6feb17",
+      "annotation_file": "safe-annotation/S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2__schema-product-vv.xml"
+    },
+    "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E": {
+      "mission_id": "S1B",
+      "annotation_sha256": "0f506cb72f4f9b7782b5f52d6da25d0b3ccd275600295079c40d9a10f1f8e4ce",
+      "annotation_file": "safe-annotation/S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E__schema-product-vv.xml"
+    },
+    "S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D": {
+      "mission_id": "S1B",
+      "annotation_sha256": "346a6430f4b7412a339aa2e9fb4e44bd22787cfceda0989e48011c61947a58be",
+      "annotation_file": "safe-annotation/S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D__schema-product-vv.xml"
+    },
+    "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D": {
+      "mission_id": "S1B",
+      "annotation_sha256": "111de52560daaf1f4d1071e2c274e1b7b88d87abbb99915fbb6bf14197fd0825",
+      "annotation_file": "safe-annotation/S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D__schema-product-vv.xml"
+    },
+    "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896": {
+      "mission_id": "S1B",
+      "annotation_sha256": "9bd877eacddf183353fec8fa75995260b7b24d0825f98f81fd4b5eaf5f02b3b0",
+      "annotation_file": "safe-annotation/S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896__schema-product-vv.xml"
+    }
+  },
+  "asset_count": 12,
+  "assets": [
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2",
+      "datetime": "2020-03-19T17:04:58.508302Z",
+      "platform": "sentinel-1b",
+      "polarization": "vv",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/3/19/IW/DV/S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2_62DC/measurement/iw-vv.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25986,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          25986.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.20",
+          "TIFFTAG_DATETIME": "2020:03:19 18:21:08",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2",
+      "datetime": "2020-03-19T17:04:58.508302Z",
+      "platform": "sentinel-1b",
+      "polarization": "vh",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/3/19/IW/DV/S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2_62DC/measurement/iw-vh.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25986,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          25986.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.20",
+          "TIFFTAG_DATETIME": "2020:03:19 18:22:15",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+      "datetime": "2020-03-19T17:05:23.508355Z",
+      "platform": "sentinel-1b",
+      "polarization": "vv",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/3/19/IW/DV/S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2_5259/measurement/iw-vv.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25972,
+        "height": 16853,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16853.0,
+          25972.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.20",
+          "TIFFTAG_DATETIME": "2020:03:19 18:20:06",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+      "datetime": "2020-03-19T17:05:23.508355Z",
+      "platform": "sentinel-1b",
+      "polarization": "vh",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/3/19/IW/DV/S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2_5259/measurement/iw-vh.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25972,
+        "height": 16853,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16853.0,
+          25972.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.20",
+          "TIFFTAG_DATETIME": "2020:03:19 18:21:07",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+      "datetime": "2020-03-24T17:13:24.107617Z",
+      "platform": "sentinel-1b",
+      "polarization": "vv",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/3/24/IW/DV/S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E_8B0F/measurement/iw-vv.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 26012,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          26012.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.20",
+          "TIFFTAG_DATETIME": "2020:03:25 08:49:22",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+      "datetime": "2020-03-24T17:13:24.107617Z",
+      "platform": "sentinel-1b",
+      "polarization": "vh",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/3/24/IW/DV/S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E_8B0F/measurement/iw-vh.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 26012,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          26012.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.20",
+          "TIFFTAG_DATETIME": "2020:03:25 08:50:23",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D",
+      "datetime": "2020-08-10T17:05:05.858716Z",
+      "platform": "sentinel-1b",
+      "polarization": "vv",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/8/10/IW/DV/S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D_500B/measurement/iw-vv.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25986,
+        "height": 16853,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16853.0,
+          25986.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.31",
+          "TIFFTAG_DATETIME": "2020:08:10 19:07:42",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D",
+      "datetime": "2020-08-10T17:05:05.858716Z",
+      "platform": "sentinel-1b",
+      "polarization": "vh",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/8/10/IW/DV/S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D_500B/measurement/iw-vh.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25986,
+        "height": 16853,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16853.0,
+          25986.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.31",
+          "TIFFTAG_DATETIME": "2020:08:10 19:08:49",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+      "datetime": "2020-08-10T17:05:30.858696Z",
+      "platform": "sentinel-1b",
+      "polarization": "vv",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/8/10/IW/DV/S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D_0F43/measurement/iw-vv.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25971,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          25971.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.31",
+          "TIFFTAG_DATETIME": "2020:08:10 19:06:55",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+      "datetime": "2020-08-10T17:05:30.858696Z",
+      "platform": "sentinel-1b",
+      "polarization": "vh",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/8/10/IW/DV/S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D_0F43/measurement/iw-vh.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 25971,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          25971.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.31",
+          "TIFFTAG_DATETIME": "2020:08:10 19:07:56",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+      "datetime": "2020-08-15T17:13:31.730099Z",
+      "platform": "sentinel-1b",
+      "polarization": "vv",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/8/15/IW/DV/S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896_8FF7/measurement/iw-vv.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 26012,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          26012.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.31",
+          "TIFFTAG_DATETIME": "2020:08:15 18:45:33",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    },
+    {
+      "item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+      "datetime": "2020-08-15T17:13:31.730099Z",
+      "platform": "sentinel-1b",
+      "polarization": "vh",
+      "asset_href": "s3://sentinel-s1-l1c/GRD/2020/8/15/IW/DV/S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896_8FF7/measurement/iw-vh.tiff",
+      "stac_asset_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "stac_raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16"
+        }
+      ],
+      "rasterio": {
+        "width": 26012,
+        "height": 16854,
+        "count": 1,
+        "crs": null,
+        "transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds": [
+          0.0,
+          16854.0,
+          26012.0,
+          0.0
+        ],
+        "nodata": 0.0,
+        "dtype": [
+          "uint16"
+        ],
+        "scales": [
+          1.0
+        ],
+        "offsets": [
+          0.0
+        ],
+        "block_shapes": [
+          [
+            1024,
+            1024
+          ]
+        ],
+        "tags": {
+          "TIFFTAG_IMAGEDESCRIPTION": "Sentinel-1A IW GRD HR L1",
+          "TIFFTAG_SOFTWARE": "Sentinel-1 IPF 003.31",
+          "TIFFTAG_DATETIME": "2020:08:15 18:46:33",
+          "AREA_OR_POINT": "Area"
+        }
+      }
+    }
+  ],
+  "metadata_conflict": {
+    "stac_platform": "sentinel-1b",
+    "safe_annotation_mission_ids": [
+      "S1B"
+    ],
+    "cog_tifftag_imagedescription_values": [
+      "Sentinel-1A IW GRD HR L1"
+    ],
+    "disposition": "Unresolved internal disagreement; preserve as a source-quality limitation. Do not silently treat the TIFF tag as proof of a different spacecraft or as harmless."
+  }
+}

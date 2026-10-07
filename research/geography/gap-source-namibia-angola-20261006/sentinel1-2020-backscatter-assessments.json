@@ -1,0 +1,3315 @@
+{
+  "version": 1,
+  "source_analysis_file": "sentinel1-2020-seasonal-backscatter.json",
+  "source_analysis_sha256": "f72d38fde34227cb7343d9c43814b19276ff58b09b3039e976636f92241d2245",
+  "cog_header_metadata_file": "sources/sentinel-1-aws/cog-header-metadata.json",
+  "cog_header_metadata_sha256": "5d88bc9d8ede6153201ced8067d52a6b0da67512c66bd0f0fae47c75c30120c2",
+  "input_counts": {
+    "candidate_components": 21,
+    "source_contacts": 10
+  },
+  "scope_disposition": {
+    "water_classification": "not performed",
+    "candidate_bank_or_channel_line": "not derived",
+    "historic_channel": "unresolved",
+    "processing_cause": "unresolved",
+    "boundary_authority": "unresolved",
+    "administrative_assignment": "not made"
+  },
+  "source_quality_conflict": {
+    "stac_and_safe_mission": "Sentinel-1B",
+    "cog_image_description": [
+      "Sentinel-1A IW GRD HR L1"
+    ],
+    "cog_has_embedded_crs_or_geotransform": false,
+    "disposition": "Unresolved internal disagreement; preserve as a source-quality limitation. Do not silently treat the TIFF tag as proof of a different spacecraft or as harmless."
+  },
+  "candidates": [
+    {
+      "component_id": "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000009,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000009,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000009,
+            "selected_pixel_centers": 73176,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 72936,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -46.86208652779478,
+                  "p10": -19.66620404230241,
+                  "p25": -12.49501521693292,
+                  "p50": -9.854172275559733,
+                  "p75": -7.972359415833468,
+                  "p90": -6.51510249416585,
+                  "max": -0.7782036882965357
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.023842821103433148,
+                  "-22": 0.06143742459142262,
+                  "-20": 0.09497367555116815,
+                  "-18": 0.12356038170450806,
+                  "-15": 0.16237523308105736
+                },
+                "input_valid_pixel_centers": 73176,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 240
+              },
+              "vh": {
+                "valid_pixel_centers": 71310,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -68.48711324254128,
+                  "p10": -23.599377850229185,
+                  "p25": -18.460990639840226,
+                  "p50": -15.587862899539985,
+                  "p75": -13.612823679898002,
+                  "p90": -12.094553774746041,
+                  "max": -3.973229037611784
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.07759080072921049,
+                  "-22": 0.13169260973215538,
+                  "-20": 0.18503716168840276,
+                  "-18": 0.27808161548169963,
+                  "-15": 0.574421539755995
+                },
+                "input_valid_pixel_centers": 73176,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1866
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000009,
+            "selected_pixel_centers": 73183,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 72429,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -62.71910940714271,
+                  "p10": -20.873889857461386,
+                  "p25": -16.64787345237492,
+                  "p50": -13.627464252866275,
+                  "p75": -11.163608596138479,
+                  "p90": -9.250525859112592,
+                  "max": -2.0242619297544002
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.040646702287757665,
+                  "-22": 0.08006461500227809,
+                  "-20": 0.11801902552844855,
+                  "-18": 0.17985889629844398,
+                  "-15": 0.37137058360601416
+                },
+                "input_valid_pixel_centers": 73183,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 754
+              },
+              "vh": {
+                "valid_pixel_centers": 67675,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -63.78051175828085,
+                  "p10": -27.96470477272266,
+                  "p25": -23.84905253122649,
+                  "p50": -19.957802239912358,
+                  "p75": -16.775610671714404,
+                  "p90": -14.606973751453504,
+                  "max": -6.428917381905755
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.19960103435537496,
+                  "-22": 0.36059106021425935,
+                  "-20": 0.4943332101957887,
+                  "-18": 0.6557222016992981,
+                  "-15": 0.8787292205393424
+                },
+                "input_valid_pixel_centers": 73183,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 5508
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000007,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000007,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000007,
+            "selected_pixel_centers": 51834,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 51813,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -47.040414779082795,
+                  "p10": -19.9514432223675,
+                  "p25": -16.036929749375858,
+                  "p50": -11.672527376618905,
+                  "p75": -9.228378727921282,
+                  "p90": -7.520109854108997,
+                  "max": 5.8390170121405705
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.01200470924285411,
+                  "-22": 0.04691872696041534,
+                  "-20": 0.09889409993630942,
+                  "-18": 0.1729874741860151,
+                  "-15": 0.29205025765734466
+                },
+                "input_valid_pixel_centers": 51834,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 21
+              },
+              "vh": {
+                "valid_pixel_centers": 50483,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -54.01138366912549,
+                  "p10": -28.067403895718986,
+                  "p25": -22.970386099282027,
+                  "p50": -17.67232333544647,
+                  "p75": -14.924296056889968,
+                  "p90": -13.136958279500217,
+                  "max": -6.358564978152618
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.18643899926708002,
+                  "-22": 0.2810252956440782,
+                  "-20": 0.3558425608620724,
+                  "-18": 0.4785571380464711,
+                  "-15": 0.7422894835885347
+                },
+                "input_valid_pixel_centers": 51834,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1351
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000007,
+            "selected_pixel_centers": 51842,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 51496,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -66.19221188757528,
+                  "p10": -24.100688490965357,
+                  "p25": -18.543856332671197,
+                  "p50": -15.183369283358584,
+                  "p75": -12.39808335946865,
+                  "p90": -10.224790766764734,
+                  "max": 5.659235391446763
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.08148205685878515,
+                  "-22": 0.14647739630262543,
+                  "-20": 0.19422867795556936,
+                  "-18": 0.28046838589405004,
+                  "-15": 0.5169333540469163
+                },
+                "input_valid_pixel_centers": 51842,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 346
+              },
+              "vh": {
+                "valid_pixel_centers": 48576,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -62.45741504981482,
+                  "p10": -30.227839025055182,
+                  "p25": -25.991911457811277,
+                  "p50": -21.791066940135536,
+                  "p75": -18.30678473870522,
+                  "p90": -15.802865073562483,
+                  "max": -8.025057034016303
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.29693675889328064,
+                  "-22": 0.48579545454545453,
+                  "-20": 0.6288290513833992,
+                  "-18": 0.7716361989459816,
+                  "-15": 0.9334650856389987
+                },
+                "input_valid_pixel_centers": 51842,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 3266
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000009,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000009,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0000000000000009,
+            "selected_pixel_centers": 2019,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 2016,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -36.03166343243712,
+                  "p10": -21.25588085341041,
+                  "p25": -18.996455630448047,
+                  "p50": -15.968558188952095,
+                  "p75": -12.694866887780826,
+                  "p90": -10.597062078036503,
+                  "max": -2.558441324516097
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.018353174603174604,
+                  "-22": 0.06994047619047619,
+                  "-20": 0.1810515873015873,
+                  "-18": 0.3169642857142857,
+                  "-15": 0.5798611111111112
+                },
+                "input_valid_pixel_centers": 2019,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 3
+              },
+              "vh": {
+                "valid_pixel_centers": 1813,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -45.5940667992154,
+                  "p10": -32.472044857621086,
+                  "p25": -27.696278004093394,
+                  "p50": -23.981619849302188,
+                  "p75": -19.435276791167375,
+                  "p90": -16.339142596234645,
+                  "max": -11.691444310832333
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.41312741312741313,
+                  "-22": 0.619415333701048,
+                  "-20": 0.7236624379481522,
+                  "-18": 0.8174296745725317,
+                  "-15": 0.948703805846663
+                },
+                "input_valid_pixel_centers": 2019,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 206
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0000000000000009,
+            "selected_pixel_centers": 2020,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 1993,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -42.9327658194849,
+                  "p10": -24.769817965368034,
+                  "p25": -16.90813317039146,
+                  "p50": -13.368803417300041,
+                  "p75": -11.265933910036614,
+                  "p90": -9.510254619912274,
+                  "max": -5.4044920631953905
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.09934771700953336,
+                  "-22": 0.16056196688409433,
+                  "-20": 0.18815855494229805,
+                  "-18": 0.2187656798795785,
+                  "-15": 0.3632714500752634
+                },
+                "input_valid_pixel_centers": 2020,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 27
+              },
+              "vh": {
+                "valid_pixel_centers": 1887,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -42.471300369980305,
+                  "p10": -28.080243893656473,
+                  "p25": -22.954561412698443,
+                  "p50": -19.653079870840312,
+                  "p75": -17.200608219294153,
+                  "p90": -15.065609466007958,
+                  "max": -9.49901628865314
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.17700052994170642,
+                  "-22": 0.30895601483836777,
+                  "-20": 0.4636989931107578,
+                  "-18": 0.6756756756756757,
+                  "-15": 0.9014308426073132
+                },
+                "input_valid_pixel_centers": 2020,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 133
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 34837,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 34836,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -41.77934705328501,
+                  "p10": -19.336814530932763,
+                  "p25": -14.424281502953841,
+                  "p50": -11.235711843999493,
+                  "p75": -9.218418242562679,
+                  "p90": -7.700707137967838,
+                  "max": -1.665191734841758
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.010018371799288092,
+                  "-22": 0.04093466528878172,
+                  "-20": 0.08344815707888391,
+                  "-18": 0.13440119416695373,
+                  "-15": 0.22450912848777127
+                },
+                "input_valid_pixel_centers": 34837,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1
+              },
+              "vh": {
+                "valid_pixel_centers": 34646,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -50.65445440167774,
+                  "p10": -26.188103654185177,
+                  "p25": -21.126123197095595,
+                  "p50": -17.394715294288677,
+                  "p75": -15.185608715698917,
+                  "p90": -13.584550516076956,
+                  "max": -8.144906756410899
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.1367257403452058,
+                  "-22": 0.22094902730473936,
+                  "-20": 0.301650984240605,
+                  "-18": 0.4403105697627432,
+                  "-15": 0.7732494371644635
+                },
+                "input_valid_pixel_centers": 34837,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 191
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 34835,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 34812,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -51.19386528311719,
+                  "p10": -22.31096128108808,
+                  "p25": -18.516222956542602,
+                  "p50": -16.000474356102043,
+                  "p75": -13.58735558749608,
+                  "p90": -11.464753510664114,
+                  "max": -3.6473694976627296
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.047569803516028956,
+                  "-22": 0.10878432724347926,
+                  "-20": 0.17149258876249568,
+                  "-18": 0.28984258301735033,
+                  "-15": 0.610622773756176
+                },
+                "input_valid_pixel_centers": 34835,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 23
+              },
+              "vh": {
+                "valid_pixel_centers": 34033,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -65.84752858457269,
+                  "p10": -30.00110223941843,
+                  "p25": -26.46681515945792,
+                  "p50": -23.154084927951462,
+                  "p75": -20.066040216382824,
+                  "p90": -17.511382643183044,
+                  "max": -9.405858844347614
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.34736873034995447,
+                  "-22": 0.5941586107601445,
+                  "-20": 0.7509476096729645,
+                  "-18": 0.8755031880821555,
+                  "-15": 0.9776393500426057
+                },
+                "input_valid_pixel_centers": 34835,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 802
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 3763,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 3756,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -34.99885810748235,
+                  "p10": -17.341192515799932,
+                  "p25": -13.039789673375065,
+                  "p50": -10.415255220184772,
+                  "p75": -8.606393362008586,
+                  "p90": -7.278135684980308,
+                  "max": -2.634971691847812
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.017305644302449415,
+                  "-22": 0.03807241746538871,
+                  "-20": 0.06256656017039404,
+                  "-18": 0.09052183173588925,
+                  "-15": 0.1514909478168264
+                },
+                "input_valid_pixel_centers": 3763,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 7
+              },
+              "vh": {
+                "valid_pixel_centers": 3675,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -37.59481652680848,
+                  "p10": -23.44931960761508,
+                  "p25": -18.32177792632357,
+                  "p50": -15.869392504635007,
+                  "p75": -14.006127565166112,
+                  "p90": -12.610401949406825,
+                  "max": -8.241213049131987
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.07537414965986394,
+                  "-22": 0.1235374149659864,
+                  "-20": 0.17795918367346938,
+                  "-18": 0.27319727891156464,
+                  "-15": 0.6285714285714286
+                },
+                "input_valid_pixel_centers": 3763,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 88
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 3761,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 3750,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -42.149624215101326,
+                  "p10": -17.074696791396804,
+                  "p25": -13.126593055686161,
+                  "p50": -11.01123275655984,
+                  "p75": -9.04371727951293,
+                  "p90": -7.517401301237365,
+                  "max": -2.172956715106656
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.028533333333333334,
+                  "-22": 0.05333333333333334,
+                  "-20": 0.0776,
+                  "-18": 0.0904,
+                  "-15": 0.15226666666666666
+                },
+                "input_valid_pixel_centers": 3761,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 11
+              },
+              "vh": {
+                "valid_pixel_centers": 3668,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -38.35454148031062,
+                  "p10": -23.120406496952505,
+                  "p25": -19.33499544279211,
+                  "p50": -16.380030609393113,
+                  "p75": -14.103048157218026,
+                  "p90": -12.506541603236636,
+                  "max": -7.383056457709384
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.06461286804798255,
+                  "-22": 0.13004362050163576,
+                  "-20": 0.2044711014176663,
+                  "-18": 0.34814612868047984,
+                  "-15": 0.6613958560523446
+                },
+                "input_valid_pixel_centers": 3761,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 93
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000002,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000002,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000002,
+            "selected_pixel_centers": 2611,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 2611,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -32.45819638244355,
+                  "p10": -20.189612708584363,
+                  "p25": -16.78583921954753,
+                  "p50": -12.439467333704062,
+                  "p75": -9.771513404405777,
+                  "p90": -8.102263743999183,
+                  "max": -0.047247367446993795
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.011106855610877058,
+                  "-22": 0.050172347759479125,
+                  "-20": 0.10915358100344695,
+                  "-18": 0.19571045576407506,
+                  "-15": 0.34354653389505935
+                },
+                "input_valid_pixel_centers": 2611,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 0
+              },
+              "vh": {
+                "valid_pixel_centers": 2540,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -43.59541355215073,
+                  "p10": -27.8708919281524,
+                  "p25": -23.49390866077779,
+                  "p50": -18.312246243250495,
+                  "p75": -15.516217058821717,
+                  "p90": -13.654478134999005,
+                  "max": -9.282469721690605
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.18385826771653543,
+                  "-22": 0.30275590551181103,
+                  "-20": 0.39173228346456695,
+                  "-18": 0.5220472440944882,
+                  "-15": 0.7874015748031497
+                },
+                "input_valid_pixel_centers": 2611,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 71
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000002,
+            "selected_pixel_centers": 2615,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 2601,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -44.06997824289812,
+                  "p10": -24.056385733398024,
+                  "p25": -20.042258730567767,
+                  "p50": -16.902436507721685,
+                  "p75": -14.178058868341651,
+                  "p90": -11.835197810026017,
+                  "max": 0.18683813278393852
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.07650903498654364,
+                  "-22": 0.1587850826605152,
+                  "-20": 0.25144175317185696,
+                  "-18": 0.3917723952326028,
+                  "-15": 0.6701268742791234
+                },
+                "input_valid_pixel_centers": 2615,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 14
+              },
+              "vh": {
+                "valid_pixel_centers": 2456,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -43.35847667163284,
+                  "p10": -31.107877046207115,
+                  "p25": -27.315655183766935,
+                  "p50": -24.160258182831477,
+                  "p75": -21.32793739886376,
+                  "p90": -18.095287027554992,
+                  "max": -10.192461227367907
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.42711726384364823,
+                  "-22": 0.6864820846905537,
+                  "-20": 0.8228827361563518,
+                  "-18": 0.9035016286644951,
+                  "-15": 0.9714983713355049
+                },
+                "input_valid_pixel_centers": 2615,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 159
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999997,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999997,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999997,
+            "selected_pixel_centers": 65054,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 65048,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -40.44184489461194,
+                  "p10": -18.73129390078527,
+                  "p25": -15.306196010209533,
+                  "p50": -11.40611990196015,
+                  "p75": -8.96019416701633,
+                  "p90": -7.295489835782451,
+                  "max": -1.8974211200689928
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.005073176731029394,
+                  "-22": 0.024520354199975402,
+                  "-20": 0.06196962243266511,
+                  "-18": 0.1274289755257656,
+                  "-15": 0.26460459968023614
+                },
+                "input_valid_pixel_centers": 65054,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 6
+              },
+              "vh": {
+                "valid_pixel_centers": 63991,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -41.82565242936893,
+                  "p10": -26.595906702082846,
+                  "p25": -22.01756212059602,
+                  "p50": -17.364757338660365,
+                  "p75": -14.61146391748208,
+                  "p90": -12.746814460702804,
+                  "max": -6.934299852984123
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.15042740385366693,
+                  "-22": 0.2507852666781266,
+                  "-20": 0.3326405275741901,
+                  "-18": 0.4491569126908472,
+                  "-15": 0.7127095997874701
+                },
+                "input_valid_pixel_centers": 65054,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1063
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999997,
+            "selected_pixel_centers": 65080,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 64895,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -40.85628141785877,
+                  "p10": -21.42403144767753,
+                  "p25": -17.361233691140473,
+                  "p50": -14.326164820002909,
+                  "p75": -11.776503343298605,
+                  "p90": -9.726477388936326,
+                  "max": -3.3746444874326698
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04504199090839048,
+                  "-22": 0.0912859234147469,
+                  "-20": 0.13389321211187302,
+                  "-18": 0.20983126589105477,
+                  "-15": 0.43517990600200324
+                },
+                "input_valid_pixel_centers": 65080,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 185
+              },
+              "vh": {
+                "valid_pixel_centers": 62799,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -65.29716598910186,
+                  "p10": -28.737984073331546,
+                  "p25": -24.872256849425494,
+                  "p50": -20.581406053428374,
+                  "p75": -17.405858380036463,
+                  "p90": -15.127756465817129,
+                  "max": -7.402592338138158
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.23678720998742017,
+                  "-22": 0.40796827974967753,
+                  "-20": 0.5466010605264415,
+                  "-18": 0.7015716810777242,
+                  "-15": 0.9045526202646539
+                },
+                "input_valid_pixel_centers": 65080,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 2281
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000007,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000007,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0000000000000007,
+            "selected_pixel_centers": 2496,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 2482,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -44.7599114745948,
+                  "p10": -20.164622955339635,
+                  "p25": -14.026623884837724,
+                  "p50": -11.470028790190185,
+                  "p75": -9.563137364171487,
+                  "p90": -8.073489503618186,
+                  "max": -4.102541668126219
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.03585817888799355,
+                  "-22": 0.07937147461724416,
+                  "-20": 0.10233682514101532,
+                  "-18": 0.12449637389202256,
+                  "-15": 0.20024174053182917
+                },
+                "input_valid_pixel_centers": 2496,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 14
+              },
+              "vh": {
+                "valid_pixel_centers": 2434,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -41.44636239837482,
+                  "p10": -23.93645414053708,
+                  "p25": -19.731478049841403,
+                  "p50": -16.832985109115963,
+                  "p75": -14.733433189349576,
+                  "p90": -12.945256534733351,
+                  "max": -8.338648211237711
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.07271980279375513,
+                  "-22": 0.1516023007395234,
+                  "-20": 0.23130649137222678,
+                  "-18": 0.3771569433032046,
+                  "-15": 0.7136400986031224
+                },
+                "input_valid_pixel_centers": 2496,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 62
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0000000000000007,
+            "selected_pixel_centers": 2500,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 2486,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -35.41454710066659,
+                  "p10": -19.357509233812802,
+                  "p25": -14.362280093763022,
+                  "p50": -11.303589586918548,
+                  "p75": -8.911992524966248,
+                  "p90": -7.099555314609898,
+                  "max": -2.562002731056049
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.029766693483507644,
+                  "-22": 0.06596942880128721,
+                  "-20": 0.09090909090909091,
+                  "-18": 0.12831858407079647,
+                  "-15": 0.2172164119066774
+                },
+                "input_valid_pixel_centers": 2500,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 14
+              },
+              "vh": {
+                "valid_pixel_centers": 2395,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -45.484806494805625,
+                  "p10": -24.218403993166294,
+                  "p25": -19.988114751001277,
+                  "p50": -16.171634490456636,
+                  "p75": -13.094424783752796,
+                  "p90": -11.22654316333752,
+                  "max": -6.723997040958273
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.08517745302713987,
+                  "-22": 0.1649269311064718,
+                  "-20": 0.24801670146137786,
+                  "-18": 0.3565762004175365,
+                  "-15": 0.5908141962421712
+                },
+                "input_valid_pixel_centers": 2500,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 105
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0,
+            "selected_pixel_centers": 56688,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 56234,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -63.65289007006059,
+                  "p10": -21.036598217134596,
+                  "p25": -13.332960870666554,
+                  "p50": -10.473657530463573,
+                  "p75": -8.560870459199906,
+                  "p90": -7.093550868721124,
+                  "max": -1.6289684711475956
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.0393356332467902,
+                  "-22": 0.08381050609951275,
+                  "-20": 0.11619305046768859,
+                  "-18": 0.14336522388590534,
+                  "-15": 0.1888359355550023
+                },
+                "input_valid_pixel_centers": 56688,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 454
+              },
+              "vh": {
+                "valid_pixel_centers": 54034,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -67.9871265690136,
+                  "p10": -24.926190920751772,
+                  "p25": -19.364927363200344,
+                  "p50": -16.305957486936393,
+                  "p75": -14.16305049588991,
+                  "p90": -12.581011056575917,
+                  "max": -6.814261724243728
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.09858607543398601,
+                  "-22": 0.1584928008291076,
+                  "-20": 0.22128659732760855,
+                  "-18": 0.3370655513195395,
+                  "-15": 0.6510530406780916
+                },
+                "input_valid_pixel_centers": 56688,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 2654
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0,
+            "selected_pixel_centers": 56686,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 55985,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -52.95650217559046,
+                  "p10": -21.524437781143472,
+                  "p25": -15.697107451544266,
+                  "p50": -12.526737418549024,
+                  "p75": -10.165558365967646,
+                  "p90": -8.405072139329896,
+                  "max": -2.1648658334265125
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04812003215146914,
+                  "-22": 0.09195320175046888,
+                  "-20": 0.12481914798606769,
+                  "-18": 0.16350808252210414,
+                  "-15": 0.2920603733142806
+                },
+                "input_valid_pixel_centers": 56686,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 701
+              },
+              "vh": {
+                "valid_pixel_centers": 52138,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -63.570454247140624,
+                  "p10": -27.448598502292857,
+                  "p25": -22.623423962271435,
+                  "p50": -18.530953868121752,
+                  "p75": -15.735002744102044,
+                  "p90": -13.787524514605698,
+                  "max": -7.249669179548506
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.16266446737504314,
+                  "-22": 0.27822317695346965,
+                  "-20": 0.3908473666040124,
+                  "-18": 0.543979439180636,
+                  "-15": 0.8134182362192642
+                },
+                "input_valid_pixel_centers": 56686,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 4548
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999999,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999999,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999999,
+            "selected_pixel_centers": 94458,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 94455,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -41.64083348260778,
+                  "p10": -18.785005715719734,
+                  "p25": -13.238632196830638,
+                  "p50": -10.339215734547707,
+                  "p75": -8.296978556636956,
+                  "p90": -6.797397368344308,
+                  "max": 7.0249917866043905
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.010174157005981684,
+                  "-22": 0.04146948282250807,
+                  "-20": 0.07631147107088031,
+                  "-18": 0.11270975596845058,
+                  "-15": 0.1772590122280451
+                },
+                "input_valid_pixel_centers": 94458,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 3
+              },
+              "vh": {
+                "valid_pixel_centers": 94190,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -58.612681796409774,
+                  "p10": -24.838913341464007,
+                  "p25": -19.099867195922997,
+                  "p50": -15.750987421929505,
+                  "p75": -13.518230871334701,
+                  "p90": -11.897654610866226,
+                  "max": -1.1051067766939247
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.09567894680964009,
+                  "-22": 0.15463424992037372,
+                  "-20": 0.21195455993205223,
+                  "-18": 0.31253848603885764,
+                  "-15": 0.5831616944473935
+                },
+                "input_valid_pixel_centers": 94458,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 268
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999999,
+            "selected_pixel_centers": 94467,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 94397,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -42.30014239084886,
+                  "p10": -21.32369855797941,
+                  "p25": -17.450371083005464,
+                  "p50": -14.527689535568264,
+                  "p75": -11.933307436306507,
+                  "p90": -9.968546062025236,
+                  "max": 3.393906969790069
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04562644999311419,
+                  "-22": 0.08728031611174084,
+                  "-20": 0.12933673739631557,
+                  "-18": 0.21801540303187603,
+                  "-15": 0.4577581914679492
+                },
+                "input_valid_pixel_centers": 94467,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 70
+              },
+              "vh": {
+                "valid_pixel_centers": 92874,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -56.3649616469467,
+                  "p10": -28.34065611921274,
+                  "p25": -24.325579968982307,
+                  "p50": -20.631847497323157,
+                  "p75": -17.473378441889167,
+                  "p90": -15.297374789987686,
+                  "max": -6.053973133367666
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.21560393651614015,
+                  "-22": 0.39471757434804144,
+                  "-20": 0.5461593126170942,
+                  "-18": 0.7122660809268472,
+                  "-15": 0.9171565777289661
+                },
+                "input_valid_pixel_centers": 94467,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1593
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 31606,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 31604,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -44.87928031320366,
+                  "p10": -18.303917235372616,
+                  "p25": -14.293680998880987,
+                  "p50": -10.563698949256072,
+                  "p75": -8.24970598199225,
+                  "p90": -6.6168671865537885,
+                  "max": -1.7236018888058653
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.0038286292874319706,
+                  "-22": 0.02176939627895203,
+                  "-20": 0.05556258701430199,
+                  "-18": 0.11147323123655234,
+                  "-15": 0.22095304391849133
+                },
+                "input_valid_pixel_centers": 31606,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 2
+              },
+              "vh": {
+                "valid_pixel_centers": 31158,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -69.45097032645943,
+                  "p10": -26.22472778077135,
+                  "p25": -20.690235965509107,
+                  "p50": -16.281583391974927,
+                  "p75": -13.593786177584706,
+                  "p90": -11.738933665919836,
+                  "max": -6.644654162078835
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.12568200783105463,
+                  "-22": 0.2106682072020027,
+                  "-20": 0.2781308171256178,
+                  "-18": 0.37418961422427627,
+                  "-15": 0.6122023236407985
+                },
+                "input_valid_pixel_centers": 31606,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 448
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 31614,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 31479,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -64.81581328716675,
+                  "p10": -22.686476177486913,
+                  "p25": -17.464391730974555,
+                  "p50": -14.049219124886642,
+                  "p75": -11.236087846170284,
+                  "p90": -9.095425088939619,
+                  "max": -3.708988886174052
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.05899170875821977,
+                  "-22": 0.11325010324343213,
+                  "-20": 0.15584993170049874,
+                  "-18": 0.22491184599256647,
+                  "-15": 0.4213920391372026
+                },
+                "input_valid_pixel_centers": 31614,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 135
+              },
+              "vh": {
+                "valid_pixel_centers": 30324,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -52.8343851985672,
+                  "p10": -28.869540051785673,
+                  "p25": -24.35440307529519,
+                  "p50": -19.74383248359407,
+                  "p75": -16.20104420423037,
+                  "p90": -14.045102403479474,
+                  "max": -7.618985497221478
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.22147473948027965,
+                  "-22": 0.3699709800817834,
+                  "-20": 0.48492942883524603,
+                  "-18": 0.6143318823374225,
+                  "-15": 0.8399617464714417
+                },
+                "input_valid_pixel_centers": 31614,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1290
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999997,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999997,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999997,
+            "selected_pixel_centers": 325524,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 325385,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -50.98133550159912,
+                  "p10": -19.67694576742644,
+                  "p25": -15.877779214252985,
+                  "p50": -12.142128514678843,
+                  "p75": -9.626860312220074,
+                  "p90": -7.861535815126113,
+                  "max": 6.673866797368698
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.011242067089755213,
+                  "-22": 0.04196874471779584,
+                  "-20": 0.08975828633772301,
+                  "-18": 0.15988751786345407,
+                  "-15": 0.29470934431519585
+                },
+                "input_valid_pixel_centers": 325524,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 139
+              },
+              "vh": {
+                "valid_pixel_centers": 318169,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -65.52193176306355,
+                  "p10": -26.707956670815385,
+                  "p25": -22.267132842185518,
+                  "p50": -18.09028303143668,
+                  "p75": -15.288442535490361,
+                  "p90": -13.328924825786888,
+                  "max": -3.506058710415468
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.14918172417803116,
+                  "-22": 0.2619991262505147,
+                  "-20": 0.3651361383415732,
+                  "-18": 0.5082267599923311,
+                  "-15": 0.7750880821198797
+                },
+                "input_valid_pixel_centers": 325524,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 7355
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999997,
+            "selected_pixel_centers": 325569,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 324118,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -70.909265201672,
+                  "p10": -22.0139566677111,
+                  "p25": -18.469281956081883,
+                  "p50": -15.470565221332528,
+                  "p75": -12.405093806620275,
+                  "p90": -10.006854502741286,
+                  "max": 6.059797175997414
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04659414163977317,
+                  "-22": 0.10047266736188672,
+                  "-20": 0.16562486501829582,
+                  "-18": 0.2848376208664746,
+                  "-15": 0.541126996957898
+                },
+                "input_valid_pixel_centers": 325569,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1451
+              },
+              "vh": {
+                "valid_pixel_centers": 308768,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -79.97226682097063,
+                  "p10": -29.41839305365829,
+                  "p25": -25.630832247217405,
+                  "p50": -21.782617283865562,
+                  "p75": -17.970551611006634,
+                  "p90": -15.12615750434212,
+                  "max": -3.9297376286837817
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.28527567623587935,
+                  "-22": 0.48454826925069955,
+                  "-20": 0.6213079075551871,
+                  "-18": 0.7477199709814488,
+                  "-15": 0.9058451653021038
+                },
+                "input_valid_pixel_centers": 325569,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 16801
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999994,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999994,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999994,
+            "selected_pixel_centers": 25106,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 25083,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -53.219707057845966,
+                  "p10": -20.82811940238383,
+                  "p25": -16.547236915546222,
+                  "p50": -12.063662157481199,
+                  "p75": -9.6854760285677,
+                  "p90": -8.015187195364357,
+                  "max": -2.017872295663913
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.02316309851293705,
+                  "-22": 0.06761551648526891,
+                  "-20": 0.124347167404218,
+                  "-18": 0.19834150619941793,
+                  "-15": 0.3098114260654627
+                },
+                "input_valid_pixel_centers": 25106,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 23
+              },
+              "vh": {
+                "valid_pixel_centers": 24285,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -63.85746476124214,
+                  "p10": -27.85764126831684,
+                  "p25": -22.6286821550817,
+                  "p50": -17.796172513099418,
+                  "p75": -15.292562856156039,
+                  "p90": -13.52078565238725,
+                  "max": -8.214770097198524
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.17846407247271978,
+                  "-22": 0.26884908379658223,
+                  "-20": 0.34721021206506075,
+                  "-18": 0.4836318715256331,
+                  "-15": 0.7799464690137945
+                },
+                "input_valid_pixel_centers": 25106,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 821
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999994,
+            "selected_pixel_centers": 25095,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 24894,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -43.31924859382288,
+                  "p10": -22.537477833694066,
+                  "p25": -18.566693580130547,
+                  "p50": -15.986567209524198,
+                  "p75": -13.733521845190623,
+                  "p90": -11.649122232336003,
+                  "max": -4.268566961401353
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.05812645617417852,
+                  "-22": 0.11223588013175866,
+                  "-20": 0.17341528079055193,
+                  "-18": 0.29517152727564877,
+                  "-15": 0.6152084839720414
+                },
+                "input_valid_pixel_centers": 25095,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 201
+              },
+              "vh": {
+                "valid_pixel_centers": 22914,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -61.01546938466982,
+                  "p10": -30.493478248028225,
+                  "p25": -26.564933379305895,
+                  "p50": -23.096981943821,
+                  "p75": -19.955298047127233,
+                  "p90": -17.460930335559315,
+                  "max": -9.073796900745924
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.35131360740158857,
+                  "-22": 0.5916906694597189,
+                  "-20": 0.7457886008553722,
+                  "-18": 0.8726979139390766,
+                  "-15": 0.973902417735882
+                },
+                "input_valid_pixel_centers": 25095,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 2181
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 117814,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 117387,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -61.57331899240103,
+                  "p10": -19.148059613298663,
+                  "p25": -13.145971981431039,
+                  "p50": -10.351161526340238,
+                  "p75": -8.457029919458066,
+                  "p90": -7.016528280908611,
+                  "max": -1.3385269056036417
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.02080298499833883,
+                  "-22": 0.051351512518421974,
+                  "-20": 0.08385085230902911,
+                  "-18": 0.12090776661810933,
+                  "-15": 0.18067588404167412
+                },
+                "input_valid_pixel_centers": 117814,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 427
+              },
+              "vh": {
+                "valid_pixel_centers": 113922,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -60.91532754934498,
+                  "p10": -24.114864606689068,
+                  "p25": -19.021004783492028,
+                  "p50": -16.05181669570048,
+                  "p75": -13.982218984220925,
+                  "p90": -12.438292130994448,
+                  "max": -6.746745129987774
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.08314460771404997,
+                  "-22": 0.1425536770772985,
+                  "-20": 0.20329699267920157,
+                  "-18": 0.31424132301048086,
+                  "-15": 0.6260774916170714
+                },
+                "input_valid_pixel_centers": 117814,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 3892
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 117812,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 116174,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -57.13789810929944,
+                  "p10": -21.74073921919606,
+                  "p25": -17.42753913991018,
+                  "p50": -14.508400382963895,
+                  "p75": -12.024555601646947,
+                  "p90": -9.988252240228105,
+                  "max": -2.9871377791874476
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04714480004131733,
+                  "-22": 0.09483189009589064,
+                  "-20": 0.1415204779038339,
+                  "-18": 0.2183276808924544,
+                  "-15": 0.4503503365641193
+                },
+                "input_valid_pixel_centers": 117812,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1638
+              },
+              "vh": {
+                "valid_pixel_centers": 107777,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -68.98697641437457,
+                  "p10": -28.30349033226596,
+                  "p25": -24.393716776998087,
+                  "p50": -20.75259173195517,
+                  "p75": -17.626304887790596,
+                  "p90": -15.341825994077325,
+                  "max": -8.311259240513774
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.21911910704510237,
+                  "-22": 0.40581942343913824,
+                  "-20": 0.5626432355697413,
+                  "-18": 0.7211000491756127,
+                  "-15": 0.9163086743924956
+                },
+                "input_valid_pixel_centers": 117812,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 10035
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9992147968130332,
+          "fully_covered": false
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9992059678584487,
+          "fully_covered": false
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.9802028664551047,
+            "selected_pixel_centers": 73986,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 73485,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -58.134621763648575,
+                  "p10": -20.781125849988754,
+                  "p25": -15.651542390977644,
+                  "p50": -12.129072627650974,
+                  "p75": -9.938264763077944,
+                  "p90": -8.343302052079855,
+                  "max": -1.6097084945281448
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.032618901816697285,
+                  "-22": 0.07494046404028033,
+                  "-20": 0.11848676600666802,
+                  "-18": 0.16944954752670613,
+                  "-15": 0.27873715724297476
+                },
+                "input_valid_pixel_centers": 73986,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 501
+              },
+              "vh": {
+                "valid_pixel_centers": 70109,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -56.3456131603748,
+                  "p10": -25.823804761050578,
+                  "p25": -21.21024022687194,
+                  "p50": -17.50738459434266,
+                  "p75": -15.073417024849808,
+                  "p90": -13.358312534684753,
+                  "max": -7.482786866132457
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.11932847423298007,
+                  "-22": 0.21626324722931436,
+                  "-20": 0.31033105592719906,
+                  "-18": 0.45288051462722334,
+                  "-15": 0.7566218317191802
+                },
+                "input_valid_pixel_centers": 73986,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 3877
+              }
+            }
+          },
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:04:58.508302Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.019011930357928614,
+            "selected_pixel_centers": 1404,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 1404,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -22.46048311167668,
+                  "p10": -14.767827827092109,
+                  "p25": -12.752254897601654,
+                  "p50": -10.983320307096804,
+                  "p75": -9.230204311141076,
+                  "p90": -7.7112946853698086,
+                  "max": -3.750577813363763
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.0,
+                  "-22": 0.0007122507122507123,
+                  "-20": 0.0014245014245014246,
+                  "-18": 0.013532763532763533,
+                  "-15": 0.08547008547008547
+                },
+                "input_valid_pixel_centers": 1404,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 0
+              },
+              "vh": {
+                "valid_pixel_centers": 1397,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -37.83193162858433,
+                  "p10": -20.803176344768914,
+                  "p25": -18.2874329623406,
+                  "p50": -16.13379863217028,
+                  "p75": -14.313994150926714,
+                  "p90": -12.89422051366697,
+                  "max": -8.290022610951178
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.020042949176807445,
+                  "-22": 0.06299212598425197,
+                  "-20": 0.1388690050107373,
+                  "-18": 0.28060128847530424,
+                  "-15": 0.654974946313529
+                },
+                "input_valid_pixel_centers": 1404,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 7
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.9787806139430536,
+            "selected_pixel_centers": 73844,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 72654,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -64.00409188808064,
+                  "p10": -21.215087058052166,
+                  "p25": -16.293037909075785,
+                  "p50": -12.96187264123552,
+                  "p75": -10.12768278243513,
+                  "p90": -8.153885450452462,
+                  "max": -1.4309725395807198
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04513172020810967,
+                  "-22": 0.08632697442673494,
+                  "-20": 0.12264981969334104,
+                  "-18": 0.17436066837338618,
+                  "-15": 0.33779282627246954
+                },
+                "input_valid_pixel_centers": 73844,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1190
+              },
+              "vh": {
+                "valid_pixel_centers": 68830,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -63.602317860144446,
+                  "p10": -27.201185378346715,
+                  "p25": -23.102516764204537,
+                  "p50": -18.801236363720044,
+                  "p75": -15.200073228138196,
+                  "p90": -12.842921975466597,
+                  "max": -5.5657066772365855
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.16781926485544094,
+                  "-22": 0.3082522156036612,
+                  "-20": 0.4255702455324713,
+                  "-18": 0.5512857765509226,
+                  "-15": 0.7634897573732384
+                },
+                "input_valid_pixel_centers": 73844,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 5014
+              }
+            }
+          },
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:05.858716Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.02042535391539528,
+            "selected_pixel_centers": 1537,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 1536,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -31.21698704968682,
+                  "p10": -17.486553562406733,
+                  "p25": -15.25741057920515,
+                  "p50": -13.112118176318438,
+                  "p75": -10.602472264342856,
+                  "p90": -8.56387144240622,
+                  "max": -2.665756997803598
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.0026041666666666665,
+                  "-22": 0.014973958333333334,
+                  "-20": 0.033854166666666664,
+                  "-18": 0.072265625,
+                  "-15": 0.2760416666666667
+                },
+                "input_valid_pixel_centers": 1537,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 1
+              },
+              "vh": {
+                "valid_pixel_centers": 1470,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -47.80375489585434,
+                  "p10": -25.57226596054158,
+                  "p25": -22.078121795262714,
+                  "p50": -18.892670347300857,
+                  "p75": -15.845753037586265,
+                  "p90": -13.671227470548823,
+                  "max": -8.841052129480886
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.12040816326530612,
+                  "-22": 0.25510204081632654,
+                  "-20": 0.40272108843537413,
+                  "-18": 0.5795918367346938,
+                  "-15": 0.8115646258503402
+                },
+                "input_valid_pixel_centers": 1537,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 67
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999998,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 187551,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 187511,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -54.1918462961233,
+                  "p10": -20.62181291363139,
+                  "p25": -14.887357643430166,
+                  "p50": -10.86156885520748,
+                  "p75": -8.572144912139315,
+                  "p90": -6.977701922883453,
+                  "max": 2.971117682654463
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.018340257371567536,
+                  "-22": 0.06596946312483001,
+                  "-20": 0.11705446613798658,
+                  "-18": 0.16703553391534362,
+                  "-15": 0.24522294692044733
+                },
+                "input_valid_pixel_centers": 187551,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 40
+              },
+              "vh": {
+                "valid_pixel_centers": 186701,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -60.80988488299574,
+                  "p10": -26.227401536465077,
+                  "p25": -21.33319797024984,
+                  "p50": -16.70849805930366,
+                  "p75": -14.133420080213757,
+                  "p90": -12.370086891238351,
+                  "max": -5.917829994912687
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.1366195146249886,
+                  "-22": 0.22971489172527196,
+                  "-20": 0.29852544978334344,
+                  "-18": 0.40209211520023996,
+                  "-15": 0.6588930964483318
+                },
+                "input_valid_pixel_centers": 187551,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 850
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999998,
+            "selected_pixel_centers": 187565,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 187338,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -56.96130637359505,
+                  "p10": -22.987418955353714,
+                  "p25": -18.498461364161386,
+                  "p50": -15.145878690509603,
+                  "p75": -12.155490359825986,
+                  "p90": -10.031698253010678,
+                  "max": 1.427747218911268
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.059438021116911675,
+                  "-22": 0.1218759675025889,
+                  "-20": 0.1803638343528809,
+                  "-18": 0.2804983505748967,
+                  "-15": 0.5107719736519019
+                },
+                "input_valid_pixel_centers": 187565,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 227
+              },
+              "vh": {
+                "valid_pixel_centers": 183391,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -69.5255245767813,
+                  "p10": -29.57318759768318,
+                  "p25": -25.687727740810793,
+                  "p50": -21.205506239794396,
+                  "p75": -17.614468095784847,
+                  "p90": -15.25570101163947,
+                  "max": -7.873358329881929
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.2833835902525206,
+                  "-22": 0.451641574559275,
+                  "-20": 0.5782671995899472,
+                  "-18": 0.719789956977169,
+                  "-15": 0.9133436210064834
+                },
+                "input_valid_pixel_centers": 187565,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 4174
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000007,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000007,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0000000000000007,
+            "selected_pixel_centers": 104102,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 103494,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -67.3512158953618,
+                  "p10": -21.620927644728226,
+                  "p25": -14.676024967737417,
+                  "p50": -11.011869337234618,
+                  "p75": -8.809164541686018,
+                  "p90": -7.206065261591973,
+                  "max": -1.012485328775984
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04030185324753126,
+                  "-22": 0.09189904728776548,
+                  "-20": 0.13537016638645719,
+                  "-18": 0.17310182232786442,
+                  "-15": 0.23855489207103794
+                },
+                "input_valid_pixel_centers": 104102,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 608
+              },
+              "vh": {
+                "valid_pixel_centers": 99409,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -72.6348454637675,
+                  "p10": -25.932686848139983,
+                  "p25": -20.545193786257098,
+                  "p50": -16.742828146467954,
+                  "p75": -14.282395914796133,
+                  "p90": -12.554008325165336,
+                  "max": -6.512983616754523
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.12038145439547727,
+                  "-22": 0.19913689907352453,
+                  "-20": 0.2739088010139927,
+                  "-18": 0.39234878129746803,
+                  "-15": 0.6745868080354898
+                },
+                "input_valid_pixel_centers": 104102,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 4693
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0000000000000007,
+            "selected_pixel_centers": 104095,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 103227,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -59.93036170752671,
+                  "p10": -21.289190633801585,
+                  "p25": -16.023946066828657,
+                  "p50": -12.6787731841271,
+                  "p75": -10.093138176980888,
+                  "p90": -8.239366155648163,
+                  "max": -1.900277622852833
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04115202417972042,
+                  "-22": 0.08697336937041665,
+                  "-20": 0.1258585447605762,
+                  "-18": 0.17214488457477212,
+                  "-15": 0.31056797155782884
+                },
+                "input_valid_pixel_centers": 104095,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 868
+              },
+              "vh": {
+                "valid_pixel_centers": 97307,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -68.6778842893302,
+                  "p10": -27.42472727831535,
+                  "p25": -23.057156663907826,
+                  "p50": -18.651001651380298,
+                  "p75": -15.43046189776233,
+                  "p90": -13.385189252063794,
+                  "max": -6.955371373678123
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.17130319504249436,
+                  "-22": 0.3013246734561748,
+                  "-20": 0.41288910355883957,
+                  "-18": 0.5464046779779461,
+                  "-15": 0.7839929295939655
+                },
+                "input_valid_pixel_centers": 104095,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 6788
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0,
+            "selected_pixel_centers": 1220,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 1220,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -35.863730047994444,
+                  "p10": -15.226215807253391,
+                  "p25": -11.18166075868774,
+                  "p50": -9.093028840980825,
+                  "p75": -7.551582372733424,
+                  "p90": -6.304121430359285,
+                  "max": -2.552570383284966
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.006557377049180328,
+                  "-22": 0.022131147540983605,
+                  "-20": 0.03442622950819672,
+                  "-18": 0.06393442622950819,
+                  "-15": 0.10245901639344263
+                },
+                "input_valid_pixel_centers": 1220,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 0
+              },
+              "vh": {
+                "valid_pixel_centers": 1201,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -39.373427770217205,
+                  "p10": -19.39968644426852,
+                  "p25": -15.497044197824286,
+                  "p50": -13.701413206820341,
+                  "p75": -11.946158043854345,
+                  "p90": -10.737390637321361,
+                  "max": -7.291431710311622
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.04995836802664446,
+                  "-22": 0.07577019150707744,
+                  "-20": 0.09408825978351373,
+                  "-18": 0.1257285595337219,
+                  "-15": 0.3097418817651957
+                },
+                "input_valid_pixel_centers": 1220,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 19
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 1.0,
+            "selected_pixel_centers": 1214,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 1198,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -37.766444589818185,
+                  "p10": -15.543378731592766,
+                  "p25": -11.300974849917404,
+                  "p50": -9.101964538460482,
+                  "p75": -7.634982420685404,
+                  "p90": -6.387957142317406,
+                  "max": -4.321574120694159
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.02671118530884808,
+                  "-22": 0.05509181969949917,
+                  "-20": 0.0676126878130217,
+                  "-18": 0.08013355592654424,
+                  "-15": 0.10684474123539232
+                },
+                "input_valid_pixel_centers": 1214,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 16
+              },
+              "vh": {
+                "valid_pixel_centers": 1177,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -40.63731068975486,
+                  "p10": -20.103544201228946,
+                  "p25": -16.978333183052325,
+                  "p50": -14.382723572043869,
+                  "p75": -12.13088143220138,
+                  "p90": -10.224971400323518,
+                  "max": -6.545379038120953
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.045879354290569246,
+                  "-22": 0.07561597281223449,
+                  "-20": 0.10195412064570943,
+                  "-18": 0.18011894647408666,
+                  "-15": 0.43500424808836025
+                },
+                "input_valid_pixel_centers": 1214,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 37
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000002,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 1.0000000000000002,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000002,
+            "selected_pixel_centers": 29442,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 29390,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -53.1447807473464,
+                  "p10": -18.822774705761095,
+                  "p25": -13.022558088943025,
+                  "p50": -10.462006930647147,
+                  "p75": -8.637245447882384,
+                  "p90": -7.239657666829028,
+                  "max": -1.4857935936019526
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.021878189860496767,
+                  "-22": 0.053011228308948624,
+                  "-20": 0.08315753657706702,
+                  "-18": 0.1114664851990473,
+                  "-15": 0.16757400476352502
+                },
+                "input_valid_pixel_centers": 29442,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 52
+              },
+              "vh": {
+                "valid_pixel_centers": 28852,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -67.60122513146682,
+                  "p10": -24.22009932428509,
+                  "p25": -18.596288464611234,
+                  "p50": -15.857954915497896,
+                  "p75": -13.963359027011354,
+                  "p90": -12.406649430961336,
+                  "max": -2.8300776189848307
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.08502010259254124,
+                  "-22": 0.13694024677665326,
+                  "-20": 0.18889505060307776,
+                  "-18": 0.2876057119090531,
+                  "-15": 0.6105642589768474
+                },
+                "input_valid_pixel_centers": 29442,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 590
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 1.0000000000000002,
+            "selected_pixel_centers": 29441,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 29287,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -46.6814416672448,
+                  "p10": -20.829634999278973,
+                  "p25": -17.688615304213076,
+                  "p50": -15.116335159795305,
+                  "p75": -12.728366075970289,
+                  "p90": -10.67647310568521,
+                  "max": -4.264303559081696
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.03496431863966948,
+                  "-22": 0.0753235223819442,
+                  "-20": 0.12466281968108717,
+                  "-18": 0.22880458906682147,
+                  "-15": 0.5141188923413118
+                },
+                "input_valid_pixel_centers": 29441,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 154
+              },
+              "vh": {
+                "valid_pixel_centers": 27156,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -70.0180537075429,
+                  "p10": -29.38031475273522,
+                  "p25": -25.54565104026283,
+                  "p50": -22.025625481512378,
+                  "p75": -18.77120149943501,
+                  "p90": -16.15656100398667,
+                  "max": -2.6561962785746562
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.2807482692590956,
+                  "-22": 0.5021726321991457,
+                  "-20": 0.6555457357490058,
+                  "-18": 0.8013330387391369,
+                  "-15": 0.9421858889379879
+                },
+                "input_valid_pixel_centers": 29441,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 2285
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 160,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999999,
+          "fully_covered": true
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9999999999999999,
+          "fully_covered": true
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E",
+            "acquisition_datetime": "2020-03-24T17:13:24.107617Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999999,
+            "selected_pixel_centers": 1489,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 1481,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -41.06040066263297,
+                  "p10": -21.784565028541696,
+                  "p25": -15.913054005030855,
+                  "p50": -12.53804897154506,
+                  "p75": -10.011470497431121,
+                  "p90": -8.399308166359807,
+                  "max": -3.9711894548100886
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.041188386225523295,
+                  "-22": 0.09318028359216746,
+                  "-20": 0.13706954760297096,
+                  "-18": 0.174881836596894,
+                  "-15": 0.30452397029034434
+                },
+                "input_valid_pixel_centers": 1489,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 8
+              },
+              "vh": {
+                "valid_pixel_centers": 1440,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -43.113139239908804,
+                  "p10": -26.06790987575896,
+                  "p25": -22.015556246582953,
+                  "p50": -18.424572977351627,
+                  "p75": -15.734432171760679,
+                  "p90": -13.800886530750683,
+                  "max": -8.515577299273025
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.12361111111111112,
+                  "-22": 0.2520833333333333,
+                  "-20": 0.3784722222222222,
+                  "-18": 0.5347222222222222,
+                  "-15": 0.8090277777777778
+                },
+                "input_valid_pixel_centers": 1489,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 49
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896",
+            "acquisition_datetime": "2020-08-15T17:13:31.730099Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 160,
+            "scene_component_fraction_planar_deg2": 0.9999999999999999,
+            "selected_pixel_centers": 1491,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 1455,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -38.74568279777682,
+                  "p10": -22.3008297676817,
+                  "p25": -17.036274796647646,
+                  "p50": -14.328491450148249,
+                  "p75": -12.275777909419432,
+                  "p90": -10.533989871373041,
+                  "max": -6.396938010160241
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.06666666666666667,
+                  "-22": 0.10996563573883161,
+                  "-20": 0.1436426116838488,
+                  "-18": 0.2,
+                  "-15": 0.4137457044673539
+                },
+                "input_valid_pixel_centers": 1491,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 36
+              },
+              "vh": {
+                "valid_pixel_centers": 1408,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -46.85966239647652,
+                  "p10": -27.388320173614193,
+                  "p25": -24.213255539179826,
+                  "p50": -20.77359461302693,
+                  "p75": -18.483209780582545,
+                  "p90": -16.641369736550715,
+                  "max": -11.846090692537686
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.19176136363636365,
+                  "-22": 0.3849431818181818,
+                  "-20": 0.5887784090909091,
+                  "-18": 0.7819602272727273,
+                  "-15": 0.9751420454545454
+                },
+                "input_valid_pixel_centers": 1491,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 83
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    },
+    {
+      "component_id": "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a",
+      "physical_water_status": "unverified",
+      "historic_channel_status": "unresolved",
+      "candidate_orbit": 87,
+      "tiepoint_footprint_coverage": {
+        "wet": {
+          "fraction_of_candidate_planar_deg2": 0.9971397161354517,
+          "fully_covered": false
+        },
+        "dry": {
+          "fraction_of_candidate_planar_deg2": 0.9971979996877844,
+          "fully_covered": false
+        }
+      },
+      "seasonal_scene_observations": {
+        "wet": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:05:23.508355Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.10873140780216303,
+            "selected_pixel_centers": 9156,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 9150,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -46.96368821015666,
+                  "p10": -20.53937743327472,
+                  "p25": -17.384532374057635,
+                  "p50": -12.95684693239415,
+                  "p75": -10.239611832827928,
+                  "p90": -8.390063282561066,
+                  "max": -2.029026471348258
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.014098360655737704,
+                  "-22": 0.05715846994535519,
+                  "-20": 0.12043715846994535,
+                  "-18": 0.2123497267759563,
+                  "-15": 0.37366120218579235
+                },
+                "input_valid_pixel_centers": 9156,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 6
+              },
+              "vh": {
+                "valid_pixel_centers": 8209,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -62.48363289968758,
+                  "p10": -30.22253628784946,
+                  "p25": -25.1821738774678,
+                  "p50": -20.466261118022494,
+                  "p75": -17.32593653562783,
+                  "p90": -15.254388053520593,
+                  "max": -9.21830284663031
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.26544037032525275,
+                  "-22": 0.4055305152880984,
+                  "-20": 0.5359970763795834,
+                  "-18": 0.6944816664636375,
+                  "-15": 0.9146059203313437
+                },
+                "input_valid_pixel_centers": 9156,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 947
+              }
+            }
+          },
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2",
+            "acquisition_datetime": "2020-03-19T17:04:58.508302Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.8884083083332888,
+            "selected_pixel_centers": 74343,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 74027,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -71.07284073077012,
+                  "p10": -20.886015427341196,
+                  "p25": -14.540067313178483,
+                  "p50": -11.026408471089512,
+                  "p75": -8.836217300496319,
+                  "p90": -7.190596987195733,
+                  "max": -0.01696472360765784
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.03463601118510814,
+                  "-22": 0.07845785997001094,
+                  "-20": 0.11694381779620949,
+                  "-18": 0.1571858916341335,
+                  "-15": 0.23302308617126183
+                },
+                "input_valid_pixel_centers": 74343,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 316
+              },
+              "vh": {
+                "valid_pixel_centers": 69520,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -71.667593315798,
+                  "p10": -27.047383182825616,
+                  "p25": -22.127259525466428,
+                  "p50": -18.592865626620842,
+                  "p75": -16.130138822194564,
+                  "p90": -14.312665161645684,
+                  "max": -7.259346577484685
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.14896432681242808,
+                  "-22": 0.25592635212888376,
+                  "-20": 0.37730149597238205,
+                  "-18": 0.557825086306099,
+                  "-15": 0.8501438434982739
+                },
+                "input_valid_pixel_centers": 74343,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 4823
+              }
+            }
+          }
+        ],
+        "dry": [
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:30.858696Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.10364384236707432,
+            "selected_pixel_centers": 8687,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 8594,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -55.51756308727609,
+                  "p10": -23.415582017499972,
+                  "p25": -16.78696881377653,
+                  "p50": -11.811827980173376,
+                  "p75": -9.210562510365623,
+                  "p90": -7.6279602506928725,
+                  "max": -2.604656405514543
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.06725622527344659,
+                  "-22": 0.1348615313009076,
+                  "-20": 0.17907842680940192,
+                  "-18": 0.22282988131254364,
+                  "-15": 0.31114731207819407
+                },
+                "input_valid_pixel_centers": 8687,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 93
+              },
+              "vh": {
+                "valid_pixel_centers": 7969,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -72.7492345763841,
+                  "p10": -28.58027358439459,
+                  "p25": -22.48927200497175,
+                  "p50": -17.314575084018607,
+                  "p75": -14.381082186683255,
+                  "p90": -12.582003254351978,
+                  "max": -7.882126657143144
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.18195507591918686,
+                  "-22": 0.26841510854561423,
+                  "-20": 0.34295394654285355,
+                  "-18": 0.4521269920943657,
+                  "-15": 0.6949429037520392
+                },
+                "input_valid_pixel_centers": 8687,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 718
+              }
+            }
+          },
+          {
+            "scene_item_id": "S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D",
+            "acquisition_datetime": "2020-08-10T17:05:05.858716Z",
+            "platform": "sentinel-1b",
+            "relative_orbit": 87,
+            "scene_component_fraction_planar_deg2": 0.8935541573207101,
+            "selected_pixel_centers": 74875,
+            "bands": {
+              "vv": {
+                "valid_pixel_centers": 73900,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -58.29652763139441,
+                  "p10": -22.23754101448943,
+                  "p25": -14.83518173863706,
+                  "p50": -11.420432851886286,
+                  "p75": -9.26524177253416,
+                  "p90": -7.688299501010699,
+                  "max": -1.9367471906642413
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.0576319350473613,
+                  "-22": 0.10384303112313938,
+                  "-20": 0.13185385656292287,
+                  "-18": 0.15837618403247633,
+                  "-15": 0.24238159675236806
+                },
+                "input_valid_pixel_centers": 74875,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 975
+              },
+              "vh": {
+                "valid_pixel_centers": 70621,
+                "backscatter_sigma0_db_quantiles": {
+                  "min": -67.10717500651427,
+                  "p10": -26.177288091834367,
+                  "p25": -20.725172246980172,
+                  "p50": -16.766928338029025,
+                  "p75": -14.344063123162554,
+                  "p90": -12.635632631230127,
+                  "max": -6.6344190498546425
+                },
+                "fraction_below_db_threshold": {
+                  "-25": 0.12470794806077512,
+                  "-22": 0.20447175769247108,
+                  "-20": 0.28069554381841094,
+                  "-18": 0.4004049786890585,
+                  "-15": 0.6794721116948217
+                },
+                "input_valid_pixel_centers": 74875,
+                "nodata_pixel_centers": 0,
+                "noise_floor_pixel_centers": 4254
+              }
+            }
+          }
+        ]
+      },
+      "interpretation_limit": "Only two 2020 seasonal backscatter distributions are summarized. They do not classify water, identify banks or channel history, or establish boundary authority."
+    }
+  ],
+  "contacts": [
+    {
+      "contact_shape_id": "16411231B14510444140190",
+      "contact_name": "Dirico",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 9,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 9,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 8,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 8,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "16411231B36562728226085",
+      "contact_name": "Calai",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 5,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 5,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "8085530B15355770078360",
+      "contact_name": "Grootfontein",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 6,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 6,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "8085530B25496891828693",
+      "contact_name": "Berseba",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 3,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 3,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 7,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 7,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "8085530B43563455443088",
+      "contact_name": "Rundu Urban",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 2,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": [
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022"
+          ]
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 2,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": [
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022"
+          ]
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "8085530B54610932550654",
+      "contact_name": "Luderitz",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 4,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 4,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "8085530B8620298556926",
+      "contact_name": "Tsumeb",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 3,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 3,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    },
+    {
+      "contact_shape_id": "8085530B94702234009846",
+      "contact_name": "Luderitz",
+      "physical_water_status": "unverified",
+      "candidate_intersection_samples_only": true,
+      "seasonal_candidate_intersection_coverage": {
+        "wet": {
+          "positive_area_candidate_intersection_count": 2,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        },
+        "dry": {
+          "positive_area_candidate_intersection_count": 2,
+          "intersection_ids_with_sampled_pixel_centers": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a"
+          ],
+          "intersection_ids_without_sampled_pixel_centers": []
+        }
+      },
+      "interpretation_limit": "These measurements cover only positive-area candidate/contact intersection pieces, not the full administrative contact polygon."
+    }
+  ],
+  "thresholds_db_are_sensitivity_metrics_not_a_water_mask": [
+    -25,
+    -22,
+    -20,
+    -18,
+    -15
+  ]
+}
