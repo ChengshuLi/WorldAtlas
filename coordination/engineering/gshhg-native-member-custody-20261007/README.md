@@ -10,7 +10,12 @@ source coordinates, geography, providers or data permissions are changed.
 Root freezes the complete six-file execution closure before invoking controls,
 input-only and two complete runs with Python3.12.14 and the pinned runtime.
 Commands require the actual full immutable commit; branches/short hashes fail.
-The intended arguments are:
+Reproduction uses a fresh managed sparse checkout with HEAD exactly
+`bc1dcbecebedf35203cf14b92a91ef0d957cf2f0`, the scientific execution freeze.
+The final delivery HEAD is a distinct metadata vintage and cannot be passed
+with `--commit bc1...` from a different checkout: the production guard rejects
+that mismatch. Use the fixed interpreter in `runtime-pins.json`, and invoke
+these files from this namespace in that frozen checkout. Arguments are:
 
 ```
 python -B controls.py --repo /absolute/owned/work --commit FULL40HEX --out /absolute/owned/work/.cache/1376/controls
@@ -19,7 +24,9 @@ python -B producer.py --repo /absolute/owned/work --commit FULL40HEX --out /abso
 python -B producer.py --repo /absolute/owned/work --commit FULL40HEX --out /absolute/owned/work/.cache/1376/run-two
 ```
 
-These are future recipes, not executed results. No source getter can read an
+These descriptive recipes require fresh exclusive output destinations. The
+actual completed commands/times and results are retained separately below.
+No source getter can read an
 undeclared commit/path/mode/OID/body. All twelve originals pass whole-byte
 preflight before extraction/output creation. ZIP reconstruction rereads the
 four same admitted originals; reports distinguish both actual read passes.
@@ -53,7 +60,25 @@ phase does not retroactively admit them. Fresh later #1353 runs must use these
 actually merged/admitted native aliases at a new immutable source-provider
 vintage, preserving all46/28+18/209 and all45 original numerical products.
 
-Root owns final data generation, actual complete two-run verification,
-manifest/ordinary admission, exact-head independent review, normal queue,
-actual merged readback and lifecycle. This directory contains no proof of
-those future outcomes until actual execution receipts and products exist.
+Both full frozen executions completed with actual exit0 (sessions15209 and
+27359), retaining all188,612 records and23 complete scientific products per
+run. Every ordered encoded/decoded body is equal; the94,162,588-byte scientific
+payload is delivered once in `results/`. `proof/run-one-report.json` and
+`proof/run-two-report.json` preserve their distinct real commands/PIDs/times;
+`proof/root-actual-process-terminals.json` preserves root's actual process
+outcomes. `proof/reproducibility.json` binds both complete ordered hash trees
+and the canonical retention. `results/downstream-reader.json` records real
+whole-member validation followed by the no-ZIP callback in both executions.
+
+Actual input-only/report/member checks and all63 controls are retained in
+`proof/`. Failed syntax/marshal/source-citation validator attempts and the
+transient storage failure remain explicit. C's independent complete188,612
+record parity and both-tree readback proofs are separately labeled. Only
+three redundant reconstructed ZIP scratch files were removed after fresh
+original-source/hash authentication; both complete actual scientific trees
+remain preserved outside the delivered canonical tree.
+
+Final ordinary admission and distinct review are separate from these actual
+execution facts. Root owns the final commit, independent exact-head review,
+normalCI/queue, actual merge/readback and lifecycle. Nothing here claims
+merged delivery, physical/political source approval or a repaired gap.
