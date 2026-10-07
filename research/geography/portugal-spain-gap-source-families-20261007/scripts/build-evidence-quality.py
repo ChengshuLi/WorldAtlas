@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import subprocess
 from pathlib import Path
@@ -22,9 +23,12 @@ PIN_FILES = {
 SUBJECT_PARTS = [8, 19, 20, 28, 29]
 
 
-def descriptor(path: str, vintage: str = "candidate", *, original_source: bool = False) -> dict:
+def descriptor(path: str, vintage: str = "candidate", *, original_source: bool = False,
+               baseline_commit: str | None = None) -> dict:
     if vintage == "baseline":
-        raw = subprocess.run(["git", "show", f"HEAD:{path}"], cwd=ROOT, check=True, stdout=subprocess.PIPE).stdout
+        if not baseline_commit:
+            raise ValueError("baseline_commit is required for baseline descriptors")
+        raw = subprocess.run(["git", "show", f"{baseline_commit}:{path}"], cwd=ROOT, check=True, stdout=subprocess.PIPE).stdout
     else:
         raw = (ROOT / path).read_bytes()
     row = {"path": path, "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(), "hash_kind": "file-bytes"}
@@ -34,19 +38,24 @@ def descriptor(path: str, vintage: str = "candidate", *, original_source: bool =
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--baseline-commit", required=True,
+                        help="exact commit used as the issue/PR baseline")
+    args = parser.parse_args()
+    baseline_commit = args.baseline_commit
+    subprocess.run(["git", "cat-file", "-e", f"{baseline_commit}^{{commit}}"], cwd=ROOT, check=True)
     index_path = PACKAGE / "inputs/complete-input-index.json"
     index = json.loads(index_path.read_text())
     contacts = index["scope"]["contact_ids"]
     if len(contacts) != 57 or len(set(contacts)) != 57:
         raise SystemExit("exact 57-contact scope failed")
-    base = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, check=True, text=True, stdout=subprocess.PIPE).stdout.strip()
-
     baseline_paths = set(PIN_FILES.values())
     baseline_paths.update(f"data/geography/part-{number}.json" for number in SUBJECT_PARTS)
     product_descriptors = index["source_product_payload_descriptors"]
     for row in product_descriptors:
         baseline_paths.add(row["descriptor"]["path"])
-    baseline_files = [descriptor(path, "baseline", original_source=path in {row["descriptor"]["path"] for row in product_descriptors})
+    baseline_files = [descriptor(path, "baseline", original_source=path in {row["descriptor"]["path"] for row in product_descriptors},
+                                 baseline_commit=baseline_commit)
                       for path in sorted(baseline_paths)]
     baseline_by_path = {row["path"]: row for row in baseline_files}
 
@@ -64,7 +73,7 @@ def main() -> None:
     remaining = set(contacts)
     for part in SUBJECT_PARTS:
         path = f"data/geography/part-{part}.json"
-        collection = json.loads(subprocess.run(["git", "show", f"HEAD:{path}"], cwd=ROOT, check=True,
+        collection = json.loads(subprocess.run(["git", "show", f"{baseline_commit}:{path}"], cwd=ROOT, check=True,
                                                stdout=subprocess.PIPE).stdout)
         for feature in collection["features"]:
             identity = feature.get("id") or feature.get("properties", {}).get("id")
@@ -169,7 +178,7 @@ def main() -> None:
         "version": 1, "issue": 1274, "lane": "geography", "worker_id": WORKER,
         "subject_ids": contacts,
         "subject_ids_sha256": hashlib.sha256(json.dumps(sorted(contacts), separators=(",", ":")).encode()).hexdigest(),
-        "baseline": {"commit": base, "files": baseline_files, "pins": pins,
+        "baseline": {"commit": baseline_commit, "files": baseline_files, "pins": pins,
                      "pin_files": PIN_FILES, "subject_files": subject_files},
         "sources": sources,
         "outputs": output_files,
