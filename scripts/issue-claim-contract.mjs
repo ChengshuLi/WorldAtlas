@@ -133,8 +133,9 @@ export async function linkedPulls(api,repo,number){
 }
 export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms))} = {}){
  if(!token)throw Error('Read/write GitHub token required');
- const apiStarted=now();
- const request = async(route,method='GET',body,observeCapacity=()=>{})=>{
+ const apiStarted=now();let httpAdmission=null;
+ const request = async(route,method='GET',body,observeCapacity=()=>{},capacityProbe=false)=>{
+  httpAdmission?.({route,method,capacityProbe});
   let response;
   try {response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(20000)});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
@@ -166,20 +167,28 @@ export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Da
   return payload;
  };
  const api = async(route, method='GET', body) => {
+  let lastQuota;
   for(let attempt=0;;attempt++){
    try{return await request(route,method,body);}
    catch(error){
+    if(error.requestBudget&&lastQuota)error.quotaCause=lastQuota;
     const delay=quotaDelay(error,now());
+    if(delay!==null)lastQuota=error;
     // Never retry writes, transport ambiguity, ordinary denial or unbounded waits.
     if(method!=='GET'||body!==undefined||delay===null||attempt>=2||delay>=readWaitMs-(now()-apiStarted))throw error;
     await sleep(delay);
    }
   }
  };
+ api.setHTTPAdmission=handler=>{
+  if(handler!==null&&typeof handler!=='function')throw Error('Invalid HTTP admission hook');
+  if(httpAdmission&&handler!==null)throw Error('An HTTP admission budget is already active');
+  httpAdmission=handler;return ()=>{if(httpAdmission===handler)httpAdmission=null;};
+ };
  api.readRepositoryCapacity=async repo=>{
   if(!/^[-\w.]+\/[-\w.]+$/.test(repo))throw Error('Invalid capacity repository');
   let observed;
-  try {await request(`/repos/${repo}`,'GET',undefined,row=>{observed=row;});}
+  try {await request(`/repos/${repo}`,'GET',undefined,row=>{observed=row;},true);}
   catch(error){if(quotaDelay(error,now())===null||error.github?.rate_remaining!=='0')throw error;}
   const row={...observed};
   if(row.resource!=='core'||!['limit','remaining','reset'].every(key=>Number.isSafeInteger(row[key]))||row.limit<1||row.remaining<0||row.remaining>row.limit||row.reset<1)throw Error('Unavailable actual repository capacity');

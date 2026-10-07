@@ -28,7 +28,7 @@ export function requestAccounting(phase) {
   }, receipt() {return {phase, actual_http_attempts: Object.values(counts).reduce((a,b)=>a+b,0), counts: {...counts}};}};
 }
 export function copyAPIFeatures(target, source) {
-  for (const name of ['readRepositoryCapacity', 'prefetchGitBlobs'])
+  for (const name of ['readRepositoryCapacity', 'prefetchGitBlobs', 'setHTTPAdmission', 'hasGitBlobs'])
     if (typeof source[name] === 'function') target[name] = source[name].bind(source);
   return target;
 }

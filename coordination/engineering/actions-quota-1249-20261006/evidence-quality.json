@@ -27,6 +27,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 27048,
+        "sha256": "5f664eedd5628f058e79ded1654aeb37e5fd3e72161d14f116f1770325b83d1b",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "scripts/merge-scheduler.mjs",
         "bytes": 7254,
         "sha256": "03568b7ff1a58628ca46e6de0b085e6b0b4058143c2b5513bcbef24b22889073",
@@ -49,6 +55,12 @@
         "bytes": 6321,
         "sha256": "f19fdad80e06d0a6cdef9a76ebaf770de5ee39224f4329725924220667425905",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/final-capacity.test.mjs",
+        "bytes": 20398,
+        "sha256": "749dc81b6004b81c0eec73b2723671fbfe40c8392cf6aff7e5c05dbac8041d06",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {},
@@ -58,8 +70,8 @@
   "outputs": [
     {
       "path": "coordination/engineering/actions-quota-1249-20261006/controls.txt",
-      "bytes": 13738,
-      "sha256": "cc2e21df1a3e04d8370c1bfce27950d383b8f3d9132eae18973a7649363ee10a",
+      "bytes": 14027,
+      "sha256": "3da638a58fc59a3a32666ca6e53934bf64919571e141ceb40e6d1f58a972a22f",
       "hash_kind": "file-bytes"
     },
     {
@@ -69,9 +81,15 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/actions-quota-1249-20261006/scope-controls.txt",
+      "bytes": 2152,
+      "sha256": "ea3df3851711d66a9b0db8d693e5b3f183e47d385d20a9eaba4cc5b854a7647c",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/actions-quota-1249-20261006/transport-probe.json",
       "bytes": 734,
-      "sha256": "937965c9047762d74bd60ea96cd348afbe8269645027ca1dd215e6dde837eead",
+      "sha256": "c2aa11943254a4b158f705c13c7f07b595941bed16cbc3759ddd0059fc35320f",
       "hash_kind": "file-bytes"
     },
     {
@@ -88,20 +106,20 @@
     },
     {
       "path": "scripts/final-capacity.mjs",
-      "bytes": 19606,
-      "sha256": "b7e46c7d1fbdbcd81796744b225d95b6d79a22223c4c927c8b92eae8fdcedf02",
+      "bytes": 20323,
+      "sha256": "90542cc945e6a967c5da5daacf52ffcaff613e6f5ee0fdebf83c74f017c8e643",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/git-blob-transport.mjs",
-      "bytes": 4428,
-      "sha256": "59e2d1a78fa9646d181a0c19c7aa644c09450f7d5169d58598901645eb1ba547",
+      "bytes": 4576,
+      "sha256": "f77d927e5f4096f03518c5d785cfde08952909597b5a429b12e3b118096f4c1c",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/github-quota.mjs",
-      "bytes": 1723,
-      "sha256": "db1b0063badb5980c0516ca14cceac15f0a8cf5a8d5c0af8ca405dc87a7bda18",
+      "bytes": 1758,
+      "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23",
       "hash_kind": "file-bytes"
     },
     {
@@ -112,8 +130,14 @@
     },
     {
       "path": "scripts/issue-claim-contract.mjs",
-      "bytes": 16276,
-      "sha256": "caef0596afa88b7be0c73ddb4cef6cb24a6b664186c7b0c2834fe5489288453c",
+      "bytes": 16802,
+      "sha256": "f6deff27deeeb73799ba3540af0099d5292f192ec88098debef458b13d93f4d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 27097,
+      "sha256": "2e514b20872d7358821f0c85eddeeee11a2b1ea7facf7ea5250efede8ad4dbae",
       "hash_kind": "file-bytes"
     },
     {
@@ -136,8 +160,14 @@
     },
     {
       "path": "scripts/run-worker-merge.mjs",
-      "bytes": 7144,
-      "sha256": "0996d0842324a311aa342f98a0aced0cbf51f2af38f51fe1d098d9f5d0832c13",
+      "bytes": 7365,
+      "sha256": "6c6b74512880f1d7bede38a1caccc0f08e64aadb48a94a059e8a400ae934d1ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "bytes": 21078,
+      "sha256": "b58901d99efe35cd7837bedd04919af2dc5bee6a32c07a4c193e370122408150",
       "hash_kind": "file-bytes"
     },
     {
@@ -148,8 +178,8 @@
     },
     {
       "path": "test/github-quota.test.mjs",
-      "bytes": 4602,
-      "sha256": "90b5b383fe66cbdd86e1dcfe65030410d317912af658667e0afac8075c3f6901",
+      "bytes": 5885,
+      "sha256": "a55ec32f91052bece03d92214699abfb6ccec48431d0165e596916add4474d0d",
       "hash_kind": "file-bytes"
     }
   ],
@@ -169,7 +199,7 @@
       "unit": "files",
       "vintage": "archived",
       "evaluation_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
-      "input_sha256": "937965c9047762d74bd60ea96cd348afbe8269645027ca1dd215e6dde837eead"
+      "input_sha256": "c2aa11943254a4b158f705c13c7f07b595941bed16cbc3759ddd0059fc35320f"
     },
     {
       "id": "unique_oids",
@@ -177,7 +207,7 @@
       "unit": "objects",
       "vintage": "archived",
       "evaluation_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
-      "input_sha256": "937965c9047762d74bd60ea96cd348afbe8269645027ca1dd215e6dde837eead"
+      "input_sha256": "c2aa11943254a4b158f705c13c7f07b595941bed16cbc3759ddd0059fc35320f"
     },
     {
       "id": "actual_git_fetches",
@@ -185,7 +215,7 @@
       "unit": "requests",
       "vintage": "archived",
       "evaluation_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
-      "input_sha256": "937965c9047762d74bd60ea96cd348afbe8269645027ca1dd215e6dde837eead"
+      "input_sha256": "c2aa11943254a4b158f705c13c7f07b595941bed16cbc3759ddd0059fc35320f"
     },
     {
       "id": "actual_blob_rest_requests",
@@ -193,7 +223,7 @@
       "unit": "requests",
       "vintage": "archived",
       "evaluation_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
-      "input_sha256": "937965c9047762d74bd60ea96cd348afbe8269645027ca1dd215e6dde837eead"
+      "input_sha256": "c2aa11943254a4b158f705c13c7f07b595941bed16cbc3759ddd0059fc35320f"
     },
     {
       "id": "decoded_bytes",
@@ -201,15 +231,15 @@
       "unit": "bytes",
       "vintage": "archived",
       "evaluation_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
-      "input_sha256": "937965c9047762d74bd60ea96cd348afbe8269645027ca1dd215e6dde837eead"
+      "input_sha256": "c2aa11943254a4b158f705c13c7f07b595941bed16cbc3759ddd0059fc35320f"
     },
     {
       "id": "duration_ms",
-      "value": 30273,
+      "value": 30585,
       "unit": "milliseconds",
       "vintage": "archived",
       "evaluation_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
-      "input_sha256": "937965c9047762d74bd60ea96cd348afbe8269645027ca1dd215e6dde837eead"
+      "input_sha256": "c2aa11943254a4b158f705c13c7f07b595941bed16cbc3759ddd0059fc35320f"
     }
   ],
   "metric_bindings": [
@@ -265,6 +295,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/actions-quota-1249-20261006/scope-controls.txt",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/actions-quota-1249-20261006/transport-probe.json",
       "status": "added"
     },
@@ -300,6 +334,11 @@
       "original_sha256": "6e7cdac9e6d87d5ea3e78c697fd34797b00ddcb9b1ba1b6e8cb91f8c93bc410c"
     },
     {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "5f664eedd5628f058e79ded1654aeb37e5fd3e72161d14f116f1770325b83d1b"
+    },
+    {
       "path": "scripts/merge-scheduler.mjs",
       "status": "modified",
       "original_sha256": "03568b7ff1a58628ca46e6de0b085e6b0b4058143c2b5513bcbef24b22889073"
@@ -318,6 +357,11 @@
       "path": "scripts/run-worker-merge.mjs",
       "status": "modified",
       "original_sha256": "f19fdad80e06d0a6cdef9a76ebaf770de5ee39224f4329725924220667425905"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "status": "modified",
+      "original_sha256": "749dc81b6004b81c0eec73b2723671fbfe40c8392cf6aff7e5c05dbac8041d06"
     },
     {
       "path": "test/git-blob-transport.test.mjs",

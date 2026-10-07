@@ -60,3 +60,20 @@ test('scheduler with real zero capacity neither inventories the queue nor spends
  const api=Object.assign(async()=>assert.fail('no queue read or write without capacity'),{readRepositoryCapacity:async()=>({remaining:0,limit:1000,reset:100})});
  const result=await scheduleNext({api,repo:'a/b',now:99000});assert.equal(result.status,'waiting-quota');assert.equal(Date.parse(result.retry_at),101000);
 });
+test('final paid-call allowance covers actual HTTP retries and preserves recovery capacity',async()=>{
+ const {finalRequestBudget}=await import('../scripts/final-capacity.mjs');let calls=0,time=99000;
+ await mocked(async()=>{calls++;return response(calls===1?403:200,calls===1?'0':'999');},async()=>{
+  const raw=githubAPI('private',{readWaitMs:10000,now:()=>time,sleep:async ms=>{time+=ms;}});
+  const budget=finalRequestBudget(raw);budget.setLimit(1);
+  await assert.rejects(budget.api('/repos/a/b/pulls/1'),error=>error.requestBudget===true&&error.quotaCause?.github?.rate_remaining==='0');
+  assert.equal(calls,1);budget.dispose();await raw('/repos/a/b/issues/1/comments','POST',{body:'recovery'});assert.equal(calls,2);
+ });
+});
+test('final deadline is checked before a retry actually sends HTTP',async()=>{
+ const {finalRequestBudget}=await import('../scripts/final-capacity.mjs');let calls=0,time=99000;
+ await mocked(async()=>{calls++;return response(403);},async()=>{
+  const raw=githubAPI('private',{readWaitMs:10000,now:()=>time,sleep:async ms=>{time+=ms;}});
+  const budget=finalRequestBudget(raw);budget.setLimit(3);budget.setDeadline(()=>100000-time);
+  await assert.rejects(budget.api('/repos/a/b/pulls/1'),/deadline/);assert.equal(calls,1);budget.dispose();
+ });
+});

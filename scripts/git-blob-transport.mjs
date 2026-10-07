@@ -54,5 +54,6 @@ export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execut
   return {sha:match[2],size:bytes.length,encoding:'base64',content:bytes.toString('base64')};
  };
  copyAPIFeatures(wrapped,api);wrapped.prefetchGitBlobs=prefetch;
+ wrapped.hasGitBlobs=(targetRepo,rows)=>targetRepo===repo&&Array.isArray(rows)&&rows.every(row=>known.has(row.sha)&&known.get(row.sha)===row.size);
  return {api:wrapped,close(){fs.rmSync(store,{recursive:true,force:true});}};
 }

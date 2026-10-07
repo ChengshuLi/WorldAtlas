@@ -53,12 +53,13 @@ try {
 } catch (error) {
   result.reason = error.message;
   if (error.github) result.api_error = error.github;
+  if (error.quotaCause?.github)result.quota_cause=error.quotaCause.github;
   if (error.capacity) result.final_capacity = error.capacity;
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
-  result.retryable = /resubmit unchanged head/.test(error.message) || quotaDelay(error)!==null;
-  if(quotaDelay(error)!==null)result.quota_retry_at=new Date(Date.now()+quotaDelay(error)).toISOString();
+  result.retryable = /resubmit unchanged head/.test(error.message) || (quotaDelay(error)??quotaDelay(error.quotaCause))!==null;
+  if((quotaDelay(error)??quotaDelay(error.quotaCause))!==null)result.quota_retry_at=new Date(Date.now()+(quotaDelay(error)??quotaDelay(error.quotaCause))).toISOString();
   if (phase === 'prepare') process.exitCode = 1;
 }
 if (phase === 'merge' && process.env.CANDIDATE_REF) {
@@ -82,6 +83,7 @@ catch (error) {
     try { result.candidate_cleanup = await cleanupCandidate(options, result.candidate_ref, result.tested_candidate); }
     catch (cleanupError) { result.candidate_cleanup = {status: 'pending', reference: result.candidate_ref, reason: cleanupError.message}; }
   }
+  result.request_accounting=accounting.receipt();
   fs.writeFileSync('merge-result.json', JSON.stringify(result, null, 2) + '\n');
   console.log(JSON.stringify(result));
   throw error;
