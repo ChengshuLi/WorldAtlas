@@ -1,0 +1,11 @@
+{
+  "archive_bytes": 13902,
+  "archive_path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-11/evidence-quality.json.gz",
+  "archive_sha256": "95115915b09b033b753d9ee86e5040cc9a3afdb7913311ae2ba7d82fc8c9ff7a",
+  "issue": 1361,
+  "original_bytes": 101693,
+  "original_path": "research/geography/fiji-evidence-integrity-1140-erratum/evidence-quality.json",
+  "original_sha256": "2ec6ea32570eac102ef02606978ea712b3ddd10258328bc9bc24bb7268b82f38",
+  "recorded_at": "2026-10-07",
+  "restoration": "Decompress this gzip file and write the exact bytes to the original evidence-quality.json path; SHA256 must equal original_sha256. This hosted-rejected attempt was regenerated because boolean metrics must be numeric in the evidence ledger and bind to a generated numeric 1 field, while the pair still records byte_identical as JSON true."
+}

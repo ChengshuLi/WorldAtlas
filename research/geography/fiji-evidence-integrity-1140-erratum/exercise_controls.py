@@ -15,7 +15,7 @@ from packet import ROOT, OWNED, canonical, json_file, sha
 VINTAGES=ROOT/"vintages"
 CONTROLS=ROOT/"controls"
 FIXTURES=CONTROLS/"fixtures"
-RESULT=CONTROLS/"builder-controls-final-4.json"
+RESULT=CONTROLS/"builder-controls-final-6.json"
 
 
 def hash_tree(path):
@@ -58,7 +58,7 @@ def fixture_root(temp):
     for name in ("issue-1361-contract.json","claim-receipt.json","source-provenance-correction.json","packet.py","reproduce.py","build_packet.py"):
         shutil.copy2(ROOT/name,root/name)
     (root/"controls").mkdir()
-    (root/"controls"/"builder-controls-final-3.json").write_bytes(canonical(provisional_controls()))
+    (root/"controls"/"builder-controls-final-6.json").write_bytes(canonical(provisional_controls()))
     (root/"vintages").mkdir()
     for vintage,source in (("run-one","run-seven"),("run-two","run-eight")):
         shutil.copytree(VINTAGES/source,root/"vintages"/vintage)
@@ -117,21 +117,21 @@ def main():
     r=run([str(ROOT/"reproduce.py"),"--vintage","run-seven"])
     assert_reject("producer-existing-vintage-preserved","reproduce.py --vintage run-seven",r,hash_tree(VINTAGES/"run-seven")==original["run-seven"],"Vintage already exists",records)
     records[-1].update({"output_path":str(VINTAGES/"run-seven"),"output_absent":False,"protected_tree_sha256":sha(canonical(original["run-seven"]))})
-    broken=VINTAGES/"broken-link-control-final-4"
+    broken=VINTAGES/"broken-link-control-final-6"
     if broken.exists() or broken.is_symlink(): raise FileExistsError(broken)
-    broken.symlink_to(VINTAGES/"missing-target-control-final-4")
+    broken.symlink_to(VINTAGES/"missing-target-control-final-6")
     r=run([str(ROOT/"reproduce.py"),"--vintage",broken.name])
-    assert_reject("producer-broken-symlink-rejected","reproduce.py",r,broken.is_symlink() and not (VINTAGES/"missing-target-control-final-4").exists(),"Symlink in destination path",records)
+    assert_reject("producer-broken-symlink-rejected","reproduce.py",r,broken.is_symlink() and not (VINTAGES/"missing-target-control-final-6").exists(),"Symlink in destination path",records)
     records[-1].update({"output_path":str(broken),"output_absent":False,"destination_was_broken_symlink":True})
     broken.unlink()
     records[-1].update({"output_absent_after_test_cleanup":not broken.exists() and not broken.is_symlink(),"test_fixture_cleanup":"The test-created broken symlink was removed after recording rejection; no target existed."})
-    outside=(VINTAGES/"../../../../escaped-control-final-4").resolve()
-    r=run([str(ROOT/"reproduce.py"),"--vintage","../../../../escaped-control-final-4"])
+    outside=(VINTAGES/"../../../../escaped-control-final-6").resolve()
+    r=run([str(ROOT/"reproduce.py"),"--vintage","../../../../escaped-control-final-6"])
     assert_reject("producer-path-traversal-rejected","reproduce.py",r,not outside.exists(),"Unsafe vintage name",records)
     records[-1].update({"output_path":str(outside),"output_absent":not outside.exists()})
     before={n:hash_tree(VINTAGES/n) for n in ("run-seven","run-eight")}
-    r=run([str(ROOT/"reproduce.py"),"--vintage","failed-after-compute-final-4","--audit-fail-after-compute"])
-    failed=VINTAGES/"failed-after-compute-final-4"
+    r=run([str(ROOT/"reproduce.py"),"--vintage","failed-after-compute-final-6","--audit-fail-after-compute"])
+    failed=VINTAGES/"failed-after-compute-final-6"
     assert_reject("producer-post-calculation-failure-preserved","reproduce.py --audit-fail-after-compute",r,not failed.exists() and before=={n:hash_tree(VINTAGES/n) for n in before},"audit-injected failure after calculation",records)
     records[-1].update({"output_path":str(failed),"output_absent":not failed.exists()})
 
@@ -164,7 +164,7 @@ def main():
     builder_case("failed-producer-run-rejected",failed_run,"incomplete or unexpected run product set",records)
     builder_case("builder-existing-manifest-preserved",lambda root: None,"Existing evidence manifest is preserved",records,True)
 
-    ordinary=VINTAGES/"ordinary-file-control-final-4"
+    ordinary=VINTAGES/"ordinary-file-control-final-6"
     ordinary.write_bytes(b"protected ordinary sentinel\n")
     before_sha=sha(ordinary.read_bytes())
     r=run([str(ROOT/"reproduce.py"),"--vintage",ordinary.name])

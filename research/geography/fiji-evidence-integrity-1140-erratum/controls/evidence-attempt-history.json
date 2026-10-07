@@ -1,14 +1,14 @@
 {
   "authoritative_current_evidence": {
-    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-4.json",
-    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-11",
+    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-6.json",
+    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-13",
     "producer_runs": [
       "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-seven",
       "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-eight"
     ]
   },
   "issue": 1361,
-  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted.",
+  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted. The hosted-rejected final-pair-11 manifest is also retained losslessly in prior-builder-attempt-10 with exact restoration hashes. The hosted-rejected final-pair-12 manifest is retained losslessly in prior-builder-attempt-11 with exact restoration hashes.",
   "recorded_at": "2026-10-07",
   "superseded_artifacts": [
     {
@@ -947,6 +947,102 @@
       "kind": "file",
       "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final-3",
       "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 25207,
+          "path": "builder-controls.json",
+          "sha256": "b77f0b4d47ddad0998faf0265fda86171bcc111fec8dec62d8c1137f76dd4100"
+        },
+        {
+          "bytes": 949,
+          "path": "publication.json",
+          "sha256": "66009bb134ba86de474dd2e98ac34183728fb60ef3894b3bc853192bb4cfa291"
+        },
+        {
+          "bytes": 2078,
+          "path": "run-bindings.json",
+          "sha256": "84b1865af14c0839da91695258a7acc06985c40376435559d2e09550f1da405f"
+        },
+        {
+          "bytes": 359,
+          "path": "run-metadata.json",
+          "sha256": "50357bde4bc26c0b1c05779955a979d25e8bc1361210aa1b5b4cb1403d343354"
+        },
+        {
+          "bytes": 2453,
+          "path": "two-run-reproducibility.json",
+          "sha256": "f22483b76fd08dd485ab9e825f701b4254c570985a69f82ae03b3ba300779abc"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-11",
+      "reason": "Superseded after the trusted hosted evidence checker found the manifest represented the boolean stable_run_products_byte_identical value as integer 1; rerun final-pair-12 uses JSON boolean true and is the current pair.",
+      "tree_index_sha256": "a43b98eb139f636092300662573a1efeaf3be69b7c24601b9b3ac40d5ec25334"
+    },
+    {
+      "bytes": 26622,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-4.json",
+      "reason": "Superseded by controls final-5, rerun after the final builder change so the selected control receipt matches the current CLI and fresh metric ledger.",
+      "sha256": "3c5795a549713302ae909800ff0ec440afdf7a4484da9f8f62ea270751fc4daa"
+    },
+    {
+      "bytes": 28,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final-4",
+      "reason": "Prior protected sentinel from the superseded final-4 control run; exact bytes remain unchanged and are retained as historical fixture evidence.",
+      "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 25207,
+          "path": "builder-controls.json",
+          "sha256": "0b87f5be256da437b6d73d599a57224a7607eaa50aca08aa0a0bc28df043499e"
+        },
+        {
+          "bytes": 949,
+          "path": "publication.json",
+          "sha256": "3455ae703eb1226c651a8df176a06c30ec1838941917e1f5fbdf60e7adce538a"
+        },
+        {
+          "bytes": 2078,
+          "path": "run-bindings.json",
+          "sha256": "1b64c63a087e79d0b2039e991882f553fb0389536aa04bbfaa45f14b4ec6e93e"
+        },
+        {
+          "bytes": 359,
+          "path": "run-metadata.json",
+          "sha256": "4d003c2a204f79322115b638be0901fdf108553d77c1490a73f544a6d14a0d8a"
+        },
+        {
+          "bytes": 2453,
+          "path": "two-run-reproducibility.json",
+          "sha256": "a08c379b82935090c7134749f1cf37461f3b1503c34e7f08d96e4746487a8275"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-12",
+      "reason": "Superseded because the trust checker requires each numeric metric to bind to a JSON number. This pair used JSON boolean true at the numeric metric pointer; current pair-13 binds 1 to a dedicated numeric field and preserves byte_identical:true separately.",
+      "tree_index_sha256": "578b04b0de1502fd3b87fc24dd906b41070b1d4412faabb11be1fd847df44fad"
+    },
+    {
+      "bytes": 26622,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-5.json",
+      "reason": "Superseded by controls final-6, rerun through the actual producer/builder entry points after the final numeric metric binding change.",
+      "sha256": "f756fabfdfe59e9d87388dd95d62ec8721f926efd8ef38a4e81f716fa8e74e63"
+    },
+    {
+      "bytes": 28,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final-5",
+      "reason": "Prior protected sentinel from the superseded final-5 controls; exact bytes remain in the packet as historical fixture evidence.",
       "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
     }
   ],

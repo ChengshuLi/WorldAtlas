@@ -18,7 +18,7 @@ from packet import (
 )
 
 PAIR_OUTPUTS = ["two-run-reproducibility.json", "builder-controls.json", "run-bindings.json", "run-metadata.json"]
-PAIR_CONTROLS_PATH = ROOT / "controls" / "builder-controls-final-4.json"
+PAIR_CONTROLS_PATH = ROOT / "controls" / "builder-controls-final-6.json"
 MANIFEST_PATH = ROOT / "evidence-quality.json"
 
 
@@ -157,7 +157,7 @@ def build_manifest(ctx, audit, pair, controls_path, run_one, run_two, output_vin
             {"metric_id":"lau_intersection","path":audit_path,"json_pointer":"/lau_outline_comparison/intersection_m2"},
             {"metric_id":"lau_union","path":audit_path,"json_pointer":"/lau_outline_comparison/union_m2"},
             {"metric_id":"independent_successful_runs","path":pair_path,"json_pointer":"/independent_execution_count"},
-            {"metric_id":"stable_run_products_byte_identical","path":pair_path,"json_pointer":"/byte_identical"},
+            {"metric_id":"stable_run_products_byte_identical","path":pair_path,"json_pointer":"/stable_run_products_byte_identical"},
         ],
         "validation":[
             {"method_id":method_id,"kind":"positive-control","outcome":"passed","evidence_path":OWNED+f"vintages/{run_one}/positive-control.json"},
@@ -204,6 +204,7 @@ def main():
         "run_one_sha256":one["output_hashes"]["audit.json"],
         "run_two_sha256":two["output_hashes"]["audit.json"],
         "byte_identical":True,
+        "stable_run_products_byte_identical":1,
         "metadata_is_expected_to_differ":["execution_id","process_id","started_at","command"],
         "adverse_control_record":{"path":cpath,"sha256":controls_hash,"rejected_cases":len(control_rows)},
         "interpretation":"Only the complete deterministic calculation/control/binding products are compared byte-for-byte. Each run has a distinct execution identity and its own complete publication receipt. No source/legal or boundary approval follows from repeatability.",
