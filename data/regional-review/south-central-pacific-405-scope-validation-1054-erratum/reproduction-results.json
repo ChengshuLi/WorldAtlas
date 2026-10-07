@@ -7,7 +7,7 @@
     {
       "run": "run-1",
       "returncode": 0,
-      "stdout": "{\n  \"scope_ids\": 23,\n  \"locations\": 23,\n  \"provinces\": 23,\n  \"areas\": 10,\n  \"natural_earth_comparator_features\": 25,\n  \"geometry_rows\": 23,\n  \"output\": \"/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1281-run-1-ubwf3pwh/repo/data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json\"\n}",
+      "stdout": "{\"areas\":10,\"geometry_rows\":23,\"locations\":23,\"natural_earth_comparator_features\":25,\"provinces\":23,\"scope_ids\":23}",
       "outputs": {
         "geometry-comparison.json": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
         "geometry-controls.json": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
@@ -17,7 +17,7 @@
     {
       "run": "run-2",
       "returncode": 0,
-      "stdout": "{\n  \"scope_ids\": 23,\n  \"locations\": 23,\n  \"provinces\": 23,\n  \"areas\": 10,\n  \"natural_earth_comparator_features\": 25,\n  \"geometry_rows\": 23,\n  \"output\": \"/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1281-run-2-6dgmd38r/repo/data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json\"\n}",
+      "stdout": "{\"areas\":10,\"geometry_rows\":23,\"locations\":23,\"natural_earth_comparator_features\":25,\"provinces\":23,\"scope_ids\":23}",
       "outputs": {
         "geometry-comparison.json": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
         "geometry-controls.json": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
@@ -102,7 +102,7 @@
       "control": "wrong-parent-crosswalk",
       "expected": "reject",
       "actual": "rejected",
-      "reason": "province row IDs/count mismatch",
+      "reason": "province member/parent crosswalk mismatch: framework:province:easter-island-province:56a8d02c6b29",
       "replay_suppressed": true,
       "result_file_count": 0
     },
@@ -118,7 +118,7 @@
       "control": "area-member-substitution",
       "expected": "reject",
       "actual": "rejected",
-      "reason": "area-assessments.csv bytes differ from immutable original",
+      "reason": "area member association differs from pinned baseline: atlas:macro-review:area:0bf7d87aca905fea",
       "replay_suppressed": true,
       "result_file_count": 0
     }

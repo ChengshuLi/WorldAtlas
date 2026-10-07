@@ -65,7 +65,9 @@ def main():
             if outputs!=preserved: raise SystemExit(f"replay differs from preserved immutable outputs in {name}")
             kept=ROOT/"runs"/name; kept.mkdir(parents=True,exist_ok=True)
             for n,b in outputs.items(): (kept/n).write_bytes(b)
-            run_records.append({"run":name,"returncode":ret.returncode,"stdout":ret.stdout.strip(),"outputs":{n:sha(b) for n,b in outputs.items()}})
+            stdout=json.loads(ret.stdout)
+            stdout.pop("output",None)  # The verifier prints its disposable temp path; omit it for byte-stable evidence.
+            run_records.append({"run":name,"returncode":ret.returncode,"stdout":json.dumps(stdout,sort_keys=True,separators=(",",":")),"outputs":{n:sha(b) for n,b in outputs.items()}})
         finally: shutil.rmtree(d,ignore_errors=True)
     # Execute documented defect against original code; verifier must accept the 24-entry list.
     malformed=dict(scope); malformed["member_location_ids"]=roster+[roster[0]]
@@ -85,7 +87,7 @@ def main():
     from importlib.util import spec_from_file_location, module_from_spec
     spec=spec_from_file_location("scope_validator",ROOT/"scope-validator.py"); validator=module_from_spec(spec); spec.loader.exec_module(validator)
     # Positive original input, using immutable pinned crosswalk files.
-    outcomes.append({"control":"original-valid","expected":"pass","actual":validator.validate(source/"scope.json",basepacket)})
+    outcomes.append({"control":"original-valid","expected":"pass","actual":validator.validate(source/"scope.json",basepacket,reference_dir=basepacket)})
     controls={
       "24-entry-duplicate": lambda x: x["member_location_ids"].append(x["member_location_ids"][0]),
       "equal-length-duplicate-replacement-rehashed": lambda x: x["member_location_ids"].__setitem__(-1,x["member_location_ids"][0]),
@@ -95,13 +97,13 @@ def main():
     }
     for name,mutate in controls.items():
         altered=json.loads(original_scope); mutate(altered); path=vroot/f"{name}.json"; path.write_text(json.dumps(altered,indent=2)+"\n")
-        try: validator.validate(path,basepacket,check_pins=False)
+        try: validator.validate(path,basepacket,check_pins=False,reference_dir=basepacket)
         except ValueError as exc: outcomes.append({"control":name,"expected":"reject","actual":"rejected","reason":str(exc),"fixture_sha256":sha(path.read_bytes()),"replay_suppressed":True,"result_file_count":0})
         else: raise SystemExit(f"validator accepted negative control {name}")
     # Row controls alter source files while keeping the scope itself valid.
     for name,filename,needle,replacement in (
       ("missing-location-row","location-assessments.csv",b"COK-4950,",b"ZZZ-0000,"),
-      ("wrong-parent-crosswalk","province-assessments.csv",b"framework:province:easter-island-province:56a8d02c6b29",b"FOREIGN:PARENT"),
+      ("wrong-parent-crosswalk","province-assessments.csv",b",gb:CHL:ADM3:31580391B33082267781919,1,",b",COK-4950,1,"),
       ("area-member-count-mismatch","area-assessments.csv",b",4,True,",b",99,True,"),
       ("area-member-substitution","area-assessments.csv",b"COK-4959;COK-4960;COK-4961;COK-4962",b"COK-4950;COK-4960;COK-4961;COK-4962"),
     ):
@@ -112,7 +114,7 @@ def main():
                 if needle not in raw: raise SystemExit(f"control anchor not found: {name}")
                 raw=raw.replace(needle,replacement,1)
             (scratch/fn).write_bytes(raw)
-        try: validator.validate(source/"scope.json",scratch,check_pins=name=="area-member-substitution")
+        try: validator.validate(source/"scope.json",scratch,check_pins=False,reference_dir=basepacket)
         except ValueError as exc: outcomes.append({"control":name,"expected":"reject","actual":"rejected","reason":str(exc),"replay_suppressed":True,"result_file_count":0})
         else: raise SystemExit(f"validator accepted row control {name}")
     results={"version":1,"affected_merge":MERGE,"baseline_commit":BASE,"original_scope_sha256":sha(original_scope),"runs":run_records,"legacy_duplicate_control":{"raw_count":24,"unique_count":23,"verifier_returncode":ret.returncode if False else 0,"accepted":True},"validator_controls":outcomes,"all_outputs_match_original_and_each_other":True,"scope_outputs_written_before_guard_on_negative_controls":False}

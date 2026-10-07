@@ -60,7 +60,7 @@
       "control": "wrong-parent-crosswalk",
       "expected": "reject",
       "actual": "rejected",
-      "reason": "province row IDs/count mismatch",
+      "reason": "province member/parent crosswalk mismatch: framework:province:easter-island-province:56a8d02c6b29",
       "replay_suppressed": true,
       "result_file_count": 0
     },
@@ -76,7 +76,7 @@
       "control": "area-member-substitution",
       "expected": "reject",
       "actual": "rejected",
-      "reason": "area-assessments.csv bytes differ from immutable original",
+      "reason": "area member association differs from pinned baseline: atlas:macro-review:area:0bf7d87aca905fea",
       "replay_suppressed": true,
       "result_file_count": 0
     }

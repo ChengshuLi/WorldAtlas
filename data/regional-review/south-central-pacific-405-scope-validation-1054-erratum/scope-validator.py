@@ -16,7 +16,7 @@ PINS = {
  "area-assessments.csv":"dc08e6a656e420ef00c6d07ffd10b26474c40252bb06fc81c4c7044bdaa10707"
 }
 
-def validate(scope_path, packet_dir, check_pins=True):
+def validate(scope_path, packet_dir, check_pins=True, reference_dir=None):
     raw = Path(scope_path).read_bytes()
     scope = json.loads(raw)
     ids = scope.get("member_location_ids")
@@ -28,27 +28,36 @@ def validate(scope_path, packet_dir, check_pins=True):
         raise ValueError(f"roster differs from frozen issue contract: missing={sorted(set(EXPECTED)-set(ids))}; foreign={sorted(set(ids)-set(EXPECTED))}")
     if scope.get("location_count") != len(ids): raise ValueError("declared location_count differs from raw roster")
     if check_pins and hashlib.sha256(raw).hexdigest() != PINS["scope.json"]: raise ValueError("consumed scope differs from immutable original scope bytes")
+    reference_dir=Path(reference_dir) if reference_dir else Path(packet_dir)
     def rows(name):
-        p=Path(packet_dir)/name
-        data=p.read_bytes()
+        reference=(reference_dir/name).read_bytes()
+        if hashlib.sha256(reference).hexdigest()!=PINS[name]: raise ValueError(f"{name} reference is not the pinned original")
+        data=(Path(packet_dir)/name).read_bytes()
         if check_pins and hashlib.sha256(data).hexdigest()!=PINS[name]: raise ValueError(f"{name} bytes differ from immutable original")
-        return list(csv.DictReader(data.decode("utf-8-sig").splitlines()))
-    loc=rows("location-assessments.csv")
-    prov=rows("province-assessments.csv")
-    area=rows("area-assessments.csv")
+        decode=lambda b:list(csv.DictReader(b.decode("utf-8-sig").splitlines()))
+        return decode(data),decode(reference)
+    loc,reference_loc=rows("location-assessments.csv")
+    prov,reference_prov=rows("province-assessments.csv")
+    area,reference_area=rows("area-assessments.csv")
     if len(loc)!=23 or set(r["location_id"] for r in loc)!=set(EXPECTED): raise ValueError("location row count/IDs mismatch")
     if len({r["location_id"] for r in loc})!=23: raise ValueError("duplicate location assessment row")
     if len(prov)!=23 or set(r["province_id"] for r in prov)!={x["id"] for x in scope["province_scopes"]}: raise ValueError("province row IDs/count mismatch")
     if len(area)!=10 or set(r["area_id"] for r in area)!={x["id"] for x in scope["area_scopes"]}: raise ValueError("area row IDs/count mismatch")
     by={r["location_id"]:r for r in loc}
+    reference_by={r["location_id"]:r for r in reference_loc}
     if any(not r.get("current_parent_id") for r in loc): raise ValueError("location-parent association missing")
+    if any(by[k]["current_parent_id"]!=reference_by[k]["current_parent_id"] for k in EXPECTED): raise ValueError("location-parent association differs from pinned baseline")
     pby={r["province_id"]:r for r in prov}
+    reference_pby={r["province_id"]:r for r in reference_prov}
     for p in scope["province_scopes"]:
         row=pby[p["id"]]
         members=[x for x in EXPECTED if by[x]["current_parent_id"]==p["id"]]
         declared=[x for x in str(row["expected_scoped_member_ids"]).split(";") if x]
+        baseline_declared=[x for x in str(reference_pby[p["id"]]["expected_scoped_member_ids"]).split(";") if x]
         if set(declared)!=set(members) or len(declared)!=len(members): raise ValueError(f"province member/parent crosswalk mismatch: {p['id']}")
+        if declared!=baseline_declared: raise ValueError(f"province member association differs from pinned baseline: {p['id']}")
     aby={r["area_id"]:r for r in area}
+    reference_aby={r["area_id"]:r for r in reference_area}
     area_subjects=set()
     for a in scope["area_scopes"]:
         row=aby[a["id"]]
@@ -56,6 +65,8 @@ def validate(scope_path, packet_dir, check_pins=True):
         if int(row["owned_member_location_count"]) != len(ids_cell) or len(set(ids_cell))!=len(ids_cell): raise ValueError(f"area row count/uniqueness mismatch: {a['id']}")
         if not set(ids_cell).issubset(EXPECTED): raise ValueError(f"area contains foreign native subject: {a['id']}")
         if int(a["owned_member_location_count"]) != len(ids_cell): raise ValueError(f"scope/area member count mismatch: {a['id']}")
+        reference_row=reference_aby[a["id"]]
+        if ids_cell!=[x for x in str(reference_row["scoped_location_ids"]).split(";") if x]: raise ValueError(f"area member association differs from pinned baseline: {a['id']}")
         area_subjects.update(ids_cell)
     if area_subjects!=set(EXPECTED): raise ValueError("area rows do not cover the complete native roster")
     return {"status":"passed","raw_subject_count":len(ids),"unique_subject_count":len(set(ids)),"location_rows":len(loc),"parent_rows":len(prov),"area_rows":len(area),"scope_sha256":hashlib.sha256(raw).hexdigest()}
