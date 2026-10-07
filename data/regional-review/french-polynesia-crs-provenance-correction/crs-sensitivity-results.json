@@ -1,0 +1,588 @@
+{
+  "archive_hashes": {
+    "loc-commune-associee.zip": {
+      "bytes": 15310967,
+      "sha256": "29230c18487385f84ca480e9b2c921ea389f848663a4a9574e77b9cbbf40db7b"
+    },
+    "loc-groupe-ile.zip": {
+      "bytes": 1168408,
+      "sha256": "3f71d87855a6d46885396b6802ccfa19f559ca4b9876f6480cd122fcba42d6fb"
+    },
+    "loc-ile.zip": {
+      "bytes": 14253080,
+      "sha256": "5018fa62ff269ae5b93502218213ce57baa36f31fcbf9d12b47bd36e12a6e29b"
+    }
+  },
+  "atlas_baseline_commit": "7962b56b08e21c581b5d4034fe3616da5f87efd7",
+  "datum_operations": {
+    "EPSG:15833": {
+      "accuracy_m": 1.0,
+      "description": "axis order change (2D) + RGPF to WGS 84 (2) + axis order change (2D)",
+      "proj_pipeline": "proj=noop ellps=GRS80",
+      "transformations": [
+        {
+          "accuracy": "1.0",
+          "id": {
+            "authority": "EPSG",
+            "code": 15833
+          },
+          "method": {
+            "id": {
+              "authority": "EPSG",
+              "code": 9603
+            },
+            "name": "Geocentric translations (geog2D domain)"
+          },
+          "name": "RGPF to WGS 84 (2)",
+          "parameters": [
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8605
+              },
+              "name": "X-axis translation",
+              "unit": "metre",
+              "value": 0
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8606
+              },
+              "name": "Y-axis translation",
+              "unit": "metre",
+              "value": 0
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8607
+              },
+              "name": "Z-axis translation",
+              "unit": "metre",
+              "value": 0
+            }
+          ],
+          "remarks": "Approximation at the +/- 1m level assuming that RGPF is equivalent to WGS 84."
+        }
+      ]
+    },
+    "EPSG:8828": {
+      "accuracy_m": 0.5,
+      "description": "axis order change (2D) + RGPF to WGS 84 (1) + axis order change (2D)",
+      "proj_pipeline": "proj=pipeline step proj=unitconvert xy_in=deg xy_out=rad step proj=push v_3 step proj=cart ellps=GRS80 step proj=helmert x=0.072 y=-0.507 z=-0.245 rx=0.0183 ry=-0.0003 rz=0.007 s=-0.0093 convention=position_vector step inv proj=cart ellps=WGS84 step proj=pop v_3 step proj=unitconvert xy_in=rad xy_out=deg",
+      "transformations": [
+        {
+          "accuracy": "0.5",
+          "id": {
+            "authority": "EPSG",
+            "code": 8828
+          },
+          "method": {
+            "id": {
+              "authority": "EPSG",
+              "code": 9606
+            },
+            "name": "Position Vector transformation (geog2D domain)"
+          },
+          "name": "RGPF to WGS 84 (1)",
+          "parameters": [
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8605
+              },
+              "name": "X-axis translation",
+              "unit": "metre",
+              "value": 0.072
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8606
+              },
+              "name": "Y-axis translation",
+              "unit": "metre",
+              "value": -0.507
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8607
+              },
+              "name": "Z-axis translation",
+              "unit": "metre",
+              "value": -0.245
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8608
+              },
+              "name": "X-axis rotation",
+              "unit": {
+                "conversion_factor": 4.84813681109536e-06,
+                "name": "arc-second",
+                "type": "AngularUnit"
+              },
+              "value": 0.0183
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8609
+              },
+              "name": "Y-axis rotation",
+              "unit": {
+                "conversion_factor": 4.84813681109536e-06,
+                "name": "arc-second",
+                "type": "AngularUnit"
+              },
+              "value": -0.0003
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8610
+              },
+              "name": "Z-axis rotation",
+              "unit": {
+                "conversion_factor": 4.84813681109536e-06,
+                "name": "arc-second",
+                "type": "AngularUnit"
+              },
+              "value": 0.007
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8611
+              },
+              "name": "Scale difference",
+              "unit": {
+                "conversion_factor": 1e-06,
+                "name": "parts per million",
+                "type": "ScaleUnit"
+              },
+              "value": -0.0093
+            }
+          ],
+          "remarks": "SHOM report gives scale difference as 0.999 999 9907 (wrt unity). Transformation is to original Transit definition of WGS 84. It is consistent with later WGS 84 realisations G730, G873 and G1150 to no better than 1m."
+        }
+      ]
+    },
+    "group_best_available": true,
+    "sample_comparison": [
+      {
+        "displacement_from_untransformed_m": 0.712654185,
+        "input_lon_lat": [
+          -149.5,
+          -17.5
+        ],
+        "operation": "EPSG:8828",
+        "output_lon_lat": [
+          -149.49999495651193,
+          -17.50000424756141
+        ]
+      },
+      {
+        "displacement_from_untransformed_m": 0.0,
+        "input_lon_lat": [
+          -149.5,
+          -17.5
+        ],
+        "operation": "EPSG:15833",
+        "output_lon_lat": [
+          -149.5,
+          -17.5
+        ]
+      }
+    ],
+    "selection_for_sensitivity": "EPSG:8828 RGPF to WGS 84 (1), position-vector 7-parameter operation. This reproduces a supported EPSG database operation; it is not evidence that DAF or the historical export selected it.",
+    "unavailable_operations": 0
+  },
+  "issue": 1294,
+  "limits": [
+    "DAF is the authoritative producer for the retained 2022 GEO PF inputs; its site states that RGPF is the legal geodetic system, but no DAF export instruction for a WGS 84 transformation was found.",
+    "Mapshaper reads only +proj=longlat +ellps=GRS80 from the ESRI sidecar and emits no CRS member; byte-identical RFC 7946 GeoJSON carries WGS 84 semantics despite preserving RGPF coordinate numbers.",
+    "EPSG operation 8828 is a registered, supported sensitivity scenario, not a DAF-endorsed operation. Its catalog accuracy is 0.5 m to original WGS 84 Transit and its remarks say later WGS 84 realizations agree no better than 1 m.",
+    "EPSG operation 15833 is a registered no-op approximation with stated +/-1 m assumption. The historical Mapshaper command did not identify/select EPSG:15833, so numerical equivalence does not prove that operation was intentionally selected.",
+    "Area comparison reuses five frozen Natural Earth comparators and DAF island objects assigned by greatest planar overlap to a figurative division polygon. It is not a legal boundary, complete island roster, shoreline, surface-land, or regional approval test.",
+    "DAF source feature acquisition/edit dates vary; the five administrative-group records were last edited in 2020 and asset published in 2022. The asset does not establish current 2026 boundaries or complete uninhabited/offshore membership.",
+    "The DAF catalog reports Creative Commons Attribution but does not specify a license version. Attribution and source links are preserved; separate legal terms for official narrative pages were not assessed."
+  ],
+  "mapshaper_export": {
+    "default_geojson_has_crs_member": false,
+    "default_vs_proj_wgs84_changed_vertices": 248990,
+    "epsg_8828_changed_vertices": 1296757,
+    "file_hashes": {
+      "explicit_proj_wgs84_full_islands_sha256": "0521a30220fc503bc0433f7aed04a8a23cd9efb91baa3f886dba59d89fd12a28",
+      "joined_group_output_sha256": {
+        "1": "6179ac6a617f56e3f298d5564db513ab49310c288a6d178158bfaf273852f069",
+        "2": "9ef0719f4bfb842b9c5ccf6b4c0d87c7bde1d33ad24825dfd722612a4a983e9b",
+        "3": "8bad07bfb6bb95dbfa384e4e3ffe389c988f79416fcf85215620acef1f759759",
+        "4": "ddd015f5ee8f07faee6d1844575cb79ecf7dbf54ffdad96d713c32c450c10523",
+        "5": "de4ea30975d1e135862f16beb3fbde6ab196c55b9537a32016645770212dc311"
+      },
+      "joined_group_outputs_match_retained": true,
+      "raw_admin_matches_retained_sha256": "88a970ed225298e6f1d06d9d4a12659c74d64389e1e73463505ad52f7bae027f",
+      "raw_admin_sha256": "88a970ed225298e6f1d06d9d4a12659c74d64389e1e73463505ad52f7bae027f",
+      "raw_full_islands_sha256": "b505af7738714838474144b2a2058e7b6e4912c094c185992528dd7f4cbd3610"
+    },
+    "input_crs_from_info": "+proj=longlat +ellps=GRS80",
+    "mapshaper_proj_wgs84_coordinate_count": 1296757,
+    "max_absolute_degree_delta": 2.842170943040401e-14,
+    "max_default_output_vs_epsg_8828_displacement_m": 0.8249909401324175,
+    "max_proj_wgs84_output_vs_epsg_8828_displacement_m": 0.8249909401324175,
+    "max_surface_displacement_m": 3.1897240548243366e-09,
+    "raw_admin_and_all_five_join_outputs_match_retained_hashes": true
+  },
+  "method_id": "french-polynesia-rgpf-export-and-sensitivity-v1",
+  "software": {
+    "epsg_database_version": "v11.022",
+    "mapshaper": "0.6.121",
+    "node": "v24.19.0",
+    "numpy": "2.3.5",
+    "proj": "9.5.1",
+    "proj_db": {
+      "bytes": 9273344,
+      "sha256": "ec8cea0a5490a6f9247d9063645049e0f93fb83307067ebfc859187f0539e67e"
+    },
+    "pyproj": "3.7.2",
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "source_crs": {
+    "authority": [
+      "EPSG",
+      "4687"
+    ],
+    "datum": "Reseau Geodesique de la Polynesie Francaise",
+    "ellipsoid": "GRS 1980",
+    "name": "RGPF",
+    "sidecars": [
+      {
+        "archive": "loc-ile.zip",
+        "bytes": 176,
+        "crs_name": "RGPF",
+        "datum": "Reseau Geodesique de la Polynesie Francaise",
+        "ellipsoid": "GRS 1980",
+        "inverse_flattening": 298.257222101,
+        "member": "loc_ile.prj",
+        "parsed_crs": [
+          "EPSG",
+          "4687"
+        ],
+        "semi_major_m": 6378137.0,
+        "sha256": "55803b5f85ca4b970f33ea4a84198cfa395451fd24fd2748578018f74068a7e1",
+        "wkt_ascii": "GEOGCS[\"GCS_RGPF\",DATUM[\"D_Reseau_Geodesique_de_la_Polynesie_Francaise\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]"
+      },
+      {
+        "archive": "loc-groupe-ile.zip",
+        "bytes": 176,
+        "crs_name": "RGPF",
+        "datum": "Reseau Geodesique de la Polynesie Francaise",
+        "ellipsoid": "GRS 1980",
+        "inverse_flattening": 298.257222101,
+        "member": "loc_groupe_ile.prj",
+        "parsed_crs": [
+          "EPSG",
+          "4687"
+        ],
+        "semi_major_m": 6378137.0,
+        "sha256": "55803b5f85ca4b970f33ea4a84198cfa395451fd24fd2748578018f74068a7e1",
+        "wkt_ascii": "GEOGCS[\"GCS_RGPF\",DATUM[\"D_Reseau_Geodesique_de_la_Polynesie_Francaise\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]"
+      },
+      {
+        "archive": "loc-commune-associee.zip",
+        "bytes": 176,
+        "crs_name": "RGPF",
+        "datum": "Reseau Geodesique de la Polynesie Francaise",
+        "ellipsoid": "GRS 1980",
+        "inverse_flattening": 298.257222101,
+        "member": "loc_commune_associee.prj",
+        "parsed_crs": [
+          "EPSG",
+          "4687"
+        ],
+        "semi_major_m": 6378137.0,
+        "sha256": "55803b5f85ca4b970f33ea4a84198cfa395451fd24fd2748578018f74068a7e1",
+        "wkt_ascii": "GEOGCS[\"GCS_RGPF\",DATUM[\"D_Reseau_Geodesique_de_la_Polynesie_Francaise\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]"
+      }
+    ]
+  },
+  "source_group_assignments": {
+    "axis_order_negative_control": {
+      "message": "transform error: Invalid coordinate: (Internal Proj Error: push: Invalid latitude)",
+      "reversed_axis_input_rejected": true
+    },
+    "changed_memberships_after_epsg_8828": [],
+    "epsg_8828_counts": {
+      "1": 5,
+      "2": 8,
+      "3": 16,
+      "4": 10,
+      "5": 86
+    },
+    "epsg_8828_tie_ids": [],
+    "epsg_8828_unassigned_ids": [
+      "61",
+      "122",
+      "128"
+    ],
+    "negative_controls": [
+      {
+        "epsg_8828_unassigned": true,
+        "raw_unassigned": true,
+        "source_id": "61"
+      },
+      {
+        "epsg_8828_unassigned": true,
+        "raw_unassigned": true,
+        "source_id": "122"
+      },
+      {
+        "epsg_8828_unassigned": true,
+        "raw_unassigned": true,
+        "source_id": "128"
+      }
+    ],
+    "positive_controls": [
+      {
+        "epsg_8828_group_id": 1,
+        "expected_group_id": 1,
+        "island_name": "Tahiti",
+        "passed": true,
+        "raw_group_id": 1,
+        "source_id": "90"
+      },
+      {
+        "epsg_8828_group_id": 2,
+        "expected_group_id": 2,
+        "island_name": "Bora Bora",
+        "passed": true,
+        "raw_group_id": 2,
+        "source_id": "14"
+      },
+      {
+        "epsg_8828_group_id": 3,
+        "expected_group_id": 3,
+        "island_name": "Nuku Hiva",
+        "passed": true,
+        "raw_group_id": 3,
+        "source_id": "67"
+      },
+      {
+        "epsg_8828_group_id": 4,
+        "expected_group_id": 4,
+        "island_name": "Tubuai",
+        "passed": true,
+        "raw_group_id": 4,
+        "source_id": "111"
+      },
+      {
+        "epsg_8828_group_id": 5,
+        "expected_group_id": 5,
+        "island_name": "Mangareva",
+        "passed": true,
+        "raw_group_id": 5,
+        "source_id": "40"
+      }
+    ],
+    "raw_counts": {
+      "1": 5,
+      "2": 8,
+      "3": 16,
+      "4": 10,
+      "5": 86
+    },
+    "raw_spatial_replay_vs_retained_disagreements": [],
+    "raw_tie_ids": [],
+    "raw_unassigned_ids": [
+      "61",
+      "122",
+      "128"
+    ],
+    "retained_mapshaper_assignment_count": 125
+  },
+  "source_packet_baseline_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+  "subject_sensitivity": [
+    {
+      "daf_group_id": 1,
+      "delta_m2_or_ratio": {
+        "atlas_land_area_m2": 0.0,
+        "atlas_land_covered_by_daf": -3.377e-05,
+        "daf_island_union_area_m2": -98.32000017,
+        "daf_land_covered_by_atlas": -3.241e-05,
+        "intersection_area_m2": -38884.32000005,
+        "intersection_over_union": -4.979e-05
+      },
+      "epsg_8828_position_vector": {
+        "assigned_island_feature_count": 5,
+        "atlas_land_area_m2": 1151360620.4,
+        "atlas_land_covered_by_daf": 0.86401008,
+        "daf_island_union_area_m2": 1197069991.11,
+        "daf_land_covered_by_atlas": 0.8310184,
+        "intersection_area_m2": 994787183.88,
+        "intersection_over_union": 0.73489603
+      },
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "raw_interpretation": {
+        "assigned_island_feature_count": 5,
+        "atlas_land_area_m2": 1151360620.4,
+        "atlas_land_covered_by_daf": 0.86404385,
+        "daf_island_union_area_m2": 1197070089.43,
+        "daf_land_covered_by_atlas": 0.83105081,
+        "intersection_area_m2": 994826068.2,
+        "intersection_over_union": 0.73494582
+      },
+      "raw_reproduces_archived_baseline": true,
+      "stable_parent_id": "framework:province:windward-islands:f00645bd9827",
+      "subject_id": "PYF-4963",
+      "subject_name": "Windward Islands"
+    },
+    {
+      "daf_group_id": 2,
+      "delta_m2_or_ratio": {
+        "atlas_land_area_m2": 0.0,
+        "atlas_land_covered_by_daf": -3.168e-05,
+        "daf_island_union_area_m2": -30.26000005,
+        "daf_land_covered_by_atlas": -2.459e-05,
+        "intersection_area_m2": -9787.52000001,
+        "intersection_over_union": -3.316e-05
+      },
+      "epsg_8828_position_vector": {
+        "assigned_island_feature_count": 8,
+        "atlas_land_area_m2": 309006690.35,
+        "atlas_land_covered_by_daf": 0.80889821,
+        "daf_island_union_area_m2": 397290331.71,
+        "daf_land_covered_by_atlas": 0.62914936,
+        "intersection_area_m2": 249954959.2,
+        "intersection_over_union": 0.54773596
+      },
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "raw_interpretation": {
+        "assigned_island_feature_count": 8,
+        "atlas_land_area_m2": 309006690.35,
+        "atlas_land_covered_by_daf": 0.80892989,
+        "daf_island_union_area_m2": 397290361.97,
+        "daf_land_covered_by_atlas": 0.62917395,
+        "intersection_area_m2": 249964746.72,
+        "intersection_over_union": 0.54776912
+      },
+      "raw_reproduces_archived_baseline": true,
+      "stable_parent_id": "framework:province:leeward-islands:f1d53af78fed",
+      "subject_id": "PYF-4964",
+      "subject_name": "Leeward Islands"
+    },
+    {
+      "daf_group_id": 5,
+      "delta_m2_or_ratio": {
+        "atlas_land_area_m2": 0.0,
+        "atlas_land_covered_by_daf": -3.3e-07,
+        "daf_island_union_area_m2": -65.74000001,
+        "daf_land_covered_by_atlas": -2.3e-07,
+        "intersection_area_m2": -164.61,
+        "intersection_over_union": -1.5e-07
+      },
+      "epsg_8828_position_vector": {
+        "assigned_island_feature_count": 86,
+        "atlas_land_area_m2": 488872321.18,
+        "atlas_land_covered_by_daf": 0.109556,
+        "daf_island_union_area_m2": 685783341.58,
+        "daf_land_covered_by_atlas": 0.07809886,
+        "intersection_area_m2": 53558894.86,
+        "intersection_over_union": 0.04777366
+      },
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "raw_interpretation": {
+        "assigned_island_feature_count": 86,
+        "atlas_land_area_m2": 488872321.18,
+        "atlas_land_covered_by_daf": 0.10955633,
+        "daf_island_union_area_m2": 685783407.32,
+        "daf_land_covered_by_atlas": 0.07809909,
+        "intersection_area_m2": 53559059.47,
+        "intersection_over_union": 0.04777381
+      },
+      "raw_reproduces_archived_baseline": true,
+      "stable_parent_id": "framework:province:tuamotu-gambier:f6a7d4ec9817",
+      "subject_id": "PYF-4965",
+      "subject_name": "Tuamotu-Gambier"
+    },
+    {
+      "daf_group_id": 4,
+      "delta_m2_or_ratio": {
+        "atlas_land_area_m2": 0.0,
+        "atlas_land_covered_by_daf": -2.855e-05,
+        "daf_island_union_area_m2": -37.98000002,
+        "daf_land_covered_by_atlas": -7.43e-06,
+        "intersection_area_m2": -3048.05,
+        "intersection_over_union": -7.43e-06
+      },
+      "epsg_8828_position_vector": {
+        "assigned_island_feature_count": 10,
+        "atlas_land_area_m2": 106745724.53,
+        "atlas_land_covered_by_daf": 0.52736588,
+        "daf_island_union_area_m2": 409272444.56,
+        "daf_land_covered_by_atlas": 0.13754665,
+        "intersection_area_m2": 56294052.51,
+        "intersection_over_union": 0.12245182
+      },
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "raw_interpretation": {
+        "assigned_island_feature_count": 10,
+        "atlas_land_area_m2": 106745724.53,
+        "atlas_land_covered_by_daf": 0.52739443,
+        "daf_island_union_area_m2": 409272482.54,
+        "daf_land_covered_by_atlas": 0.13755408,
+        "intersection_area_m2": 56297100.56,
+        "intersection_over_union": 0.12245925
+      },
+      "raw_reproduces_archived_baseline": true,
+      "stable_parent_id": "framework:province:austral-islands:280986970614",
+      "subject_id": "PYF-4966",
+      "subject_name": "Austral Islands"
+    },
+    {
+      "daf_group_id": 3,
+      "delta_m2_or_ratio": {
+        "atlas_land_area_m2": 0.0,
+        "atlas_land_covered_by_daf": -6.079e-05,
+        "daf_island_union_area_m2": -108.04999995,
+        "daf_land_covered_by_atlas": -5.831e-05,
+        "intersection_area_m2": -64665.82000005,
+        "intersection_over_union": -8.178e-05
+      },
+      "epsg_8828_position_vector": {
+        "assigned_island_feature_count": 16,
+        "atlas_land_area_m2": 1063671724.74,
+        "atlas_land_covered_by_daf": 0.80975033,
+        "daf_island_union_area_m2": 1107569334.54,
+        "daf_land_covered_by_atlas": 0.77765653,
+        "intersection_area_m2": 861308529.76,
+        "intersection_over_union": 0.65752129
+      },
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "raw_interpretation": {
+        "assigned_island_feature_count": 16,
+        "atlas_land_area_m2": 1063671724.74,
+        "atlas_land_covered_by_daf": 0.80981112,
+        "daf_island_union_area_m2": 1107569442.59,
+        "daf_land_covered_by_atlas": 0.77771484,
+        "intersection_area_m2": 861373195.58,
+        "intersection_over_union": 0.65760307
+      },
+      "raw_reproduces_archived_baseline": true,
+      "stable_parent_id": "framework:province:marquesas-islands:0beb7fe5d3cd",
+      "subject_id": "PYF-4967",
+      "subject_name": "Marquesas Islands"
+    }
+  ],
+  "subjects": [
+    "PYF-4963",
+    "PYF-4964",
+    "PYF-4965",
+    "PYF-4966",
+    "PYF-4967"
+  ]
+}

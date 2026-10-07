@@ -1,0 +1,21 @@
+{
+  "controls": [
+    {
+      "expected": "EPSG:4687 / RGPF / GRS 1980",
+      "id": "all-three-prj-crs",
+      "outcome": "passed"
+    },
+    {
+      "expected": "7-parameter operation, materially nonzero at sample",
+      "id": "operation-8828-nonzero",
+      "outcome": "passed"
+    },
+    {
+      "expected": "1m approximation, unchanged sample",
+      "id": "operation-15833-noop",
+      "outcome": "passed"
+    }
+  ],
+  "kind": "positive-control",
+  "method_id": "rgpf-to-wgs84-sensitivity-v1"
+}
