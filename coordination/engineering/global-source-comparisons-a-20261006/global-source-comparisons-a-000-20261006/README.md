@@ -28,3 +28,7 @@ The complete remaining source/member plan contains 37,388 current components in 
 ## Short delivery names
 
 `delivery-input-aliases.json` binds each original frozen input path and Git blob to a shorter delivered name under the declared `delivery_root`, with its complete encoded and decoded hashes. The previous delivery-map vintage is retained separately. Only names changed. `input-aliases.json` preserves the original execution paths. The numerical producer reads its inputs from immutable Git `3b4ca9e9f42d692530a4139efe2bd8f72ce15723`, so this delivery change does not change either execution or require restoring inputs on disk. The immutable tag `evidence-freeze-1246-package0-3b4ca9e9` preserves that frozen commit. Fetch that tag before reproduction if the commit is absent. The original remote author branch is also retained.
+
+## Oman derivative attribution
+
+The original Oman ADM2 metadata reports underlying government “Other - Direct Permission”; its permission details remain unverified. The retained 4,316-byte upstream `CITATION-AND-USE-geoBoundaries-original.txt` (whole SHA `f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5`) independently states CC BY 4.0 for geoBoundaries derivative products and requires attribution. The manifest distinguishes this derivative-product statement from the preserved underlying metadata. This does not establish border, source-date or physical-water approval.
