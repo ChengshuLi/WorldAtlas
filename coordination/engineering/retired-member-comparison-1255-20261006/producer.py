@@ -78,7 +78,7 @@ def run(commit,target):
     for pin in cr['outputs']:
         for row in inputs.original(H,pin['path'],index):
             if row['id']in contexts:raise ValueError('Duplicate original context')
-            contexts[row['id']]=row
+            contexts[row['id']]=SHA(canon(row))  # Full bytes/fields consumed and retained; keep compact roster in memory.
     if len(contexts)!=49625 or not set(scope['contact_ids'])<=set(contexts):raise ValueError('Incomplete context/contact closure')
     archive=inputs.archive(index);members={r['id']:r for r in archive['locations']}
     if len(members)!=19050 or len(archive['locations'])!=19050:raise ValueError('Duplicate archive membership')
