@@ -14,8 +14,37 @@ from packet import ROOT, OWNED, canonical, json_file, sha, shared_new_vintage
 
 VINTAGES=ROOT/"vintages"
 CONTROLS=ROOT/"controls"
-FIXTURES=CONTROLS/"fixtures"
-RESULT=CONTROLS/"builder-controls-final-9.json"
+RUN_ID="final-13"
+RUN_NAMESPACE=CONTROLS/f"control-exercise-{RUN_ID}"
+FIXTURES=RUN_NAMESPACE/"fixtures"
+RESULT=RUN_NAMESPACE/"builder-controls.json"
+ORDINARY_SENTINEL=VINTAGES/f"ordinary-file-control-{RUN_ID}"
+BROKEN_LINK=VINTAGES/f"broken-link-control-{RUN_ID}"
+BROKEN_TARGET=VINTAGES/f"missing-target-control-{RUN_ID}"
+FAILED_AFTER=VINTAGES/f"failed-after-compute-{RUN_ID}"
+ESCAPED_CONTROL=(VINTAGES/f"../../../../escaped-control-{RUN_ID}").resolve()
+
+
+def reserve_control_namespace():
+    """Reject every known destination before mutation, then exclusively reserve this run."""
+    parents=(CONTROLS,VINTAGES)
+    for parent in parents:
+        if parent.is_symlink() or (parent.exists() and not parent.is_dir()):
+            raise FileExistsError(f"Unsafe control parent: {parent}")
+    destinations=(RUN_NAMESPACE,RESULT,ORDINARY_SENTINEL,BROKEN_LINK,BROKEN_TARGET,
+                  FAILED_AFTER,ESCAPED_CONTROL)
+    occupied=[str(path) for path in destinations if os.path.lexists(path)]
+    if occupied:
+        raise FileExistsError("Control namespace has existing result/sentinel/symlink destinations: "+", ".join(occupied))
+    CONTROLS.mkdir(exist_ok=True)
+    VINTAGES.mkdir(exist_ok=True)
+    RUN_NAMESPACE.mkdir()  # atomic exclusive reservation after the complete preflight
+    receipt={"version":1,"run_id":RUN_ID,"namespace":str(RUN_NAMESPACE.relative_to(ROOT)),
+      "reserved_before_fixture_writes":True,"preflight_destinations":[str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else os.path.relpath(p,ROOT) for p in destinations],
+      "exclusive_reservation":"mkdir without exist_ok; an existing namespace is rejected"}
+    (RUN_NAMESPACE/"reservation.json").write_bytes(canonical(receipt))
+    FIXTURES.mkdir()
+    return receipt
 
 
 def hash_tree(path):
@@ -48,7 +77,7 @@ def rewrite_receipt(run_root, vintage):
 
 
 def provisional_controls():
-    required=["copied-run-rejected","empty-run-rejected","partial-run-rejected","coherently-rehashed-mismatch-rejected","failed-producer-run-rejected","producer-existing-vintage-preserved","producer-broken-symlink-rejected","producer-path-traversal-rejected","producer-post-calculation-failure-preserved","producer-ordinary-file-preserved","shared-writer-path-escape-rejected","shared-writer-aggregate-budget-rejected","builder-existing-manifest-preserved"]
+    required=["copied-run-rejected","empty-run-rejected","partial-run-rejected","coherently-rehashed-mismatch-rejected","failed-producer-run-rejected","producer-existing-vintage-preserved","producer-broken-symlink-rejected","producer-path-traversal-rejected","producer-post-calculation-failure-preserved","producer-ordinary-file-preserved","shared-writer-path-escape-rejected","shared-writer-aggregate-budget-rejected","builder-existing-manifest-preserved","control-harness-rerun-preserved"]
     return {"version":1,"issue":1361,"outcome":"passed","controls":[{"name":n,"entry_point":"exercise_controls.py fixture setup","outcome":"rejected","observation":"The test harness reserves this case; final result is written only after all actual cases pass."} for n in required]}
 
 
@@ -58,7 +87,7 @@ def fixture_root(temp):
     for name in ("issue-1361-contract.json","claim-receipt.json","source-provenance-correction.json","packet.py","reproduce.py","build_packet.py"):
         shutil.copy2(ROOT/name,root/name)
     (root/"controls").mkdir()
-    (root/"controls"/"builder-controls-final-9.json").write_bytes(canonical(provisional_controls()))
+    (root/"controls"/"builder-controls-final-10.json").write_bytes(canonical(provisional_controls()))
     (root/"vintages").mkdir()
     for vintage,source in (("run-one","run-nine"),("run-two","run-ten")):
         shutil.copytree(VINTAGES/source,root/"vintages"/vintage)
@@ -154,8 +183,7 @@ def shared_writer_cases(records):
 
 
 def main():
-    CONTROLS.mkdir(exist_ok=True)
-    FIXTURES.mkdir(parents=True,exist_ok=True)
+    reservation=reserve_control_namespace()
     records=[]
     original={n:hash_tree(VINTAGES/n) for n in ("run-nine","run-ten")}
     if not original["run-nine"] or not original["run-ten"]:
@@ -164,21 +192,20 @@ def main():
     r=run([str(ROOT/"reproduce.py"),"--vintage","run-nine"])
     assert_reject("producer-existing-vintage-preserved","reproduce.py --vintage run-nine",r,hash_tree(VINTAGES/"run-nine")==original["run-nine"],"Evidence already exists; choose a new vintage",records)
     records[-1].update({"output_path":str(VINTAGES/"run-nine"),"output_absent":False,"protected_tree_sha256":sha(canonical(original["run-nine"]))})
-    broken=VINTAGES/"broken-link-control-final-9"
-    if broken.exists() or broken.is_symlink(): raise FileExistsError(broken)
-    broken.symlink_to(VINTAGES/"missing-target-control-final-9")
+    broken=BROKEN_LINK
+    broken.symlink_to(BROKEN_TARGET)
     r=run([str(ROOT/"reproduce.py"),"--vintage",broken.name])
-    assert_reject("producer-broken-symlink-rejected","reproduce.py",r,broken.is_symlink() and not (VINTAGES/"missing-target-control-final-9").exists(),"Symlink in output path",records)
+    assert_reject("producer-broken-symlink-rejected","reproduce.py",r,broken.is_symlink() and not BROKEN_TARGET.exists(),"Symlink in output path",records)
     records[-1].update({"output_path":str(broken),"output_absent":False,"destination_was_broken_symlink":True})
     broken.unlink()
     records[-1].update({"output_absent_after_test_cleanup":not broken.exists() and not broken.is_symlink(),"test_fixture_cleanup":"The test-created broken symlink was removed after recording rejection; no target existed."})
-    outside=(VINTAGES/"../../../../escaped-control-final-9").resolve()
-    r=run([str(ROOT/"reproduce.py"),"--vintage","../../../../escaped-control-final-9"])
+    outside=ESCAPED_CONTROL
+    r=run([str(ROOT/"reproduce.py"),"--vintage",f"../../../../escaped-control-{RUN_ID}"])
     assert_reject("producer-path-traversal-rejected","reproduce.py",r,not outside.exists(),"Unsafe vintage name",records)
     records[-1].update({"output_path":str(outside),"output_absent":not outside.exists()})
     before={n:hash_tree(VINTAGES/n) for n in ("run-nine","run-ten")}
-    r=run([str(ROOT/"reproduce.py"),"--vintage","failed-after-compute-final-9","--audit-fail-after-compute"])
-    failed=VINTAGES/"failed-after-compute-final-9"
+    r=run([str(ROOT/"reproduce.py"),"--vintage",FAILED_AFTER.name,"--audit-fail-after-compute"])
+    failed=FAILED_AFTER
     assert_reject("producer-post-calculation-failure-preserved","reproduce.py --audit-fail-after-compute",r,not failed.exists() and before=={n:hash_tree(VINTAGES/n) for n in before},"audit-injected failure after calculation",records)
     records[-1].update({"output_path":str(failed),"output_absent":not failed.exists()})
 
@@ -211,7 +238,7 @@ def main():
     builder_case("failed-producer-run-rejected",failed_run,"incomplete or unexpected run product set",records)
     builder_case("builder-existing-manifest-preserved",lambda root: None,"Existing evidence manifest is preserved",records,True)
 
-    ordinary=VINTAGES/"ordinary-file-control-final-9"
+    ordinary=ORDINARY_SENTINEL
     ordinary.write_bytes(b"protected ordinary sentinel\n")
     before_sha=sha(ordinary.read_bytes())
     r=run([str(ROOT/"reproduce.py"),"--vintage",ordinary.name])
@@ -222,7 +249,18 @@ def main():
 
     if original!={n:hash_tree(VINTAGES/n) for n in original}:
         raise AssertionError("A control modified one of the successful original runs")
-    payload=(json.dumps({"version":1,"issue":1361,"outcome":"passed","entry_points":["reproduce.py","build_packet.py"],"controls":records,"original_run_hashes_unchanged":True,"credentials_removed_from_probe_environments":True,"private_fixture_policy":"Complete copied packets were run through the actual build_packet.py CLI with only packet root-discovery paths redirected into owned controls/fixtures; baseline Git reads and builder logic were unchanged. Each fixture tree hash was equal before/after its probe. The temporary fixture root was removed by TemporaryDirectory after the result was recorded; retained product runs and prior attempts were preserved."},sort_keys=True,ensure_ascii=False,indent=2)+"\n").encode()
+    control_tree_before=hash_tree(RUN_NAMESPACE)
+    sentinel_before=sha(ordinary.read_bytes())
+    rerun=run([str(ROOT/"exercise_controls.py")])
+    control_tree_after=hash_tree(RUN_NAMESPACE)
+    sentinel_after=sha(ordinary.read_bytes())
+    expected="Control namespace has existing result/sentinel/symlink destinations"
+    preserved=(rerun["returncode"]!=0 and expected in rerun["stderr_excerpt"]
+      and control_tree_before==control_tree_after and sentinel_before==sentinel_after and not RESULT.exists())
+    if not preserved:
+        raise AssertionError(f"control-harness-rerun-preserved: rerun changed reserved outputs or missed rejection: {rerun}")
+    records.append({"name":"control-harness-rerun-preserved","entry_point":"exercise_controls.py","outcome":"rejected","returncode":rerun["returncode"],"expected_failure":expected,"observed_error":rerun["stderr_excerpt"],"protected_bytes_unchanged":True,"control_namespace_sha256_before":sha(canonical(control_tree_before)),"control_namespace_sha256_after":sha(canonical(control_tree_after)),"ordinary_sentinel_sha256":sentinel_after,"result_absent":not RESULT.exists(),"observation":"A second real entry-point invocation rejected the already reserved namespace and existing sentinel before writing; the complete existing namespace and sentinel hashes stayed byte-identical."})
+    payload=(json.dumps({"version":1,"issue":1361,"outcome":"passed","entry_points":["reproduce.py","build_packet.py"],"controls":records,"original_run_hashes_unchanged":True,"credentials_removed_from_probe_environments":True,"namespace_reservation":reservation,"private_fixture_policy":"Complete copied packets were run through the actual build_packet.py CLI with only packet root-discovery paths redirected into the exclusively reserved control namespace; baseline Git reads and builder logic were unchanged. Each fixture tree hash was equal before/after its probe. The temporary fixture root was removed by TemporaryDirectory after the result was recorded; retained product runs and prior attempts were preserved."},sort_keys=True,ensure_ascii=False,indent=2)+"\n").encode()
     with RESULT.open("xb") as stream:
         stream.write(payload); stream.flush(); os.fsync(stream.fileno())
     print(json.dumps({"control_count":len(records),"outcome":"passed","sha256":sha(payload)},sort_keys=True))

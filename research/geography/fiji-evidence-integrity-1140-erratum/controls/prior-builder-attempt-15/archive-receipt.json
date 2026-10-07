@@ -1,0 +1,13 @@
+{
+  "archive_bytes": 16228,
+  "archive_path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-15/evidence-quality.json.gz",
+  "archive_sha256": "0fc3ef0c9b6f1d2230c48d1b23825605176a017c8c955b81a1bc674bda2720b7",
+  "attempt": "prior-builder-attempt-15",
+  "original_bytes": 120789,
+  "original_path": "research/geography/fiji-evidence-integrity-1140-erratum/evidence-quality.json",
+  "original_sha256": "d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365",
+  "reason": "Preserve the final-pair-16 root manifest byte-for-byte before generating a fresh final-pair-17 manifest bound to corrected controls.",
+  "restoration_command": "gzip -dc controls/prior-builder-attempt-15/evidence-quality.json.gz > evidence-quality.json",
+  "restored_sha256": "d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365",
+  "version": 1
+}

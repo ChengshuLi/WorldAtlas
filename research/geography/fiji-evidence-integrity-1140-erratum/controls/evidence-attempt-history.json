@@ -1,14 +1,14 @@
 {
   "authoritative_current_evidence": {
-    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-9.json",
-    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-15",
+    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-13.json",
+    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-17",
     "producer_runs": [
       "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-nine",
       "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-ten"
     ]
   },
   "issue": 1361,
-  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted. The hosted-rejected final-pair-11 manifest is also retained losslessly in prior-builder-attempt-10 with exact restoration hashes. The hosted-rejected final-pair-12 manifest is retained losslessly in prior-builder-attempt-11 with exact restoration hashes. Intermediate pair-14 and its manifest remain preserved as superseded evidence; prior-builder-attempt-13 has exact restoration hashes for the pair-14 manifest.",
+  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted. The hosted-rejected final-pair-11 manifest is also retained losslessly in prior-builder-attempt-10 with exact restoration hashes. The hosted-rejected final-pair-12 manifest is retained losslessly in prior-builder-attempt-11 with exact restoration hashes. Intermediate pair-14 and its manifest remain preserved as superseded evidence; prior-builder-attempt-13 has exact restoration hashes for the pair-14 manifest. Failed control harness namespaces final-10 (pre-fixture abort) and final-11 (13 controls, superseded before the rerun preservation check) are retained with their exact receipts and hashes. Previous current evidence-quality.json SHA256 f3bb42e8c9dc3a7414bd9b0deddb6c0c83bd771facbbafb89b29982edfe40016 (115365 bytes) is archived byte-identically as controls/prior-builder-attempt-14/evidence-quality.json.gz with archive-receipt.json; it was removed from the root only after decompression/readback equality, so the exclusive builder can create a new root manifest. final-pair-16 and its d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365 root manifest are retained in the packet/pair history; the exact root manifest is archived as prior-builder-attempt-15. Previous root manifest SHA256 d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365 (120789 bytes) is archived byte-identically under controls/prior-builder-attempt-15/; removed only after decompression/readback verification for exclusive fresh-manifest publication.",
   "recorded_at": "2026-10-07",
   "superseded_artifacts": [
     {
@@ -1118,6 +1118,104 @@
       "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-14/two-run-reproducibility.json",
       "reason": "Intermediate final-pair-14 artifact retained; its manifest is superseded only to update authoritative history pointers after the shared-writer correction.",
       "sha256": "5a36ac334b2cec27fb4da13b95a101429e572a1951827c6ead6c1fbf94fd8a69"
+    },
+    {
+      "bytes": 627,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/control-exercise-final-10/attempt-failure.json",
+      "reason": "Failed before fixture writes because a traversal target path was relativized against the wrong base; preserved as the exact failed attempt receipt.",
+      "sha256": "735650a4eb6496aa5acbbc7584104b3fbf9aac9fa7676cfadaddf991807cecbf"
+    },
+    {
+      "bytes": 28377,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/control-exercise-final-11/builder-controls.json",
+      "reason": "Successful 13-control output superseded because the entry-point rerun-preservation control had not yet been added; bytes retained.",
+      "sha256": "d294a4043f8ca716bd06dfc01c0400c6124494d1bfe82d7442b046f226d7d07f"
+    },
+    {
+      "bytes": 530,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/control-exercise-final-11/reservation.json",
+      "reason": "Exclusive control namespace reservation for the superseded 13-control attempt; retained with its result.",
+      "sha256": "8ea87dd704885392f0319cd9469fdb5907b64d315a788984b4f7859a07005621"
+    },
+    {
+      "bytes": 882,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-14/archive-receipt.json",
+      "reason": "Lossless archive of prior root manifest before generating current pair-16 evidence; see archive receipt for restoration.",
+      "sha256": "18ffba5eaca141a1862d870395c4fc46e611e81d1835f2391e42032c2f00ed83"
+    },
+    {
+      "bytes": 15515,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-14/evidence-quality.json.gz",
+      "reason": "Lossless archive of prior root manifest before generating current pair-16 evidence; see archive receipt for restoration.",
+      "sha256": "03fd64e565dbd2daef2048b2537565e500d8a227315a1c8370f7fa981554d8bf"
+    },
+    {
+      "bytes": 30483,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/control-exercise-final-12/builder-controls.json",
+      "reason": "14-control output superseded because its final path-traversal target assertions still named the previous run; exact bytes retained.",
+      "sha256": "323b17d60fd03429692a2719dd95777a9b16b25e6263999213967de8c6d12c99"
+    },
+    {
+      "bytes": 530,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/control-exercise-final-12/reservation.json",
+      "reason": "Exclusive namespace receipt for superseded final-12 control run; retained.",
+      "sha256": "fed844042dc0735e1f841612de0ab64bc60bc5a0428b04a6dc7d6987509763a3"
+    },
+    {
+      "bytes": 30483,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-12.json",
+      "reason": "Current-control copy superseded after correcting final-13 traversal/symlink target bindings; bytes retained.",
+      "sha256": "323b17d60fd03429692a2719dd95777a9b16b25e6263999213967de8c6d12c99"
+    },
+    {
+      "bytes": 2490,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-16/two-run-reproducibility.json",
+      "reason": "Builder pair and its root manifest superseded to bind the corrected final-13 controls and exercise harness.",
+      "sha256": "e55785b10f3baea33dd6d91ac635f9cde410e25df60e631305e1cea06ff84a29"
+    },
+    {
+      "bytes": 28507,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-16/builder-controls.json",
+      "reason": "Builder pair and its root manifest superseded to bind the corrected final-13 controls and exercise harness.",
+      "sha256": "9c02a7f526a1b69a124eb56ef664302104a25d4ee5cd8a8e454b3966e73e7e3f"
+    },
+    {
+      "bytes": 2328,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-16/run-bindings.json",
+      "reason": "Builder pair and its root manifest superseded to bind the corrected final-13 controls and exercise harness.",
+      "sha256": "68f857e16007c3c0f493b9a60b19394b1ec121074258bdcbdfcd32ce8f740af4"
+    },
+    {
+      "bytes": 300,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-16/run-metadata.json",
+      "reason": "Builder pair and its root manifest superseded to bind the corrected final-13 controls and exercise harness.",
+      "sha256": "ff8428721243d989e0b2441b8b885a12d916a400dc79a0f293c5282d75ce2bf4"
+    },
+    {
+      "bytes": 884,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-15/archive-receipt.json",
+      "reason": "Lossless archive of final-pair-16 root manifest; see exact restoration receipt.",
+      "sha256": "fa908b83b5a9d1c83d12e59772a7e797af719814ce23cf48c2ae70cb60b65807"
+    },
+    {
+      "bytes": 16228,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-15/evidence-quality.json.gz",
+      "reason": "Lossless archive of final-pair-16 root manifest; see exact restoration receipt.",
+      "sha256": "0fc3ef0c9b6f1d2230c48d1b23825605176a017c8c955b81a1bc674bda2720b7"
     }
   ],
   "version": 1
