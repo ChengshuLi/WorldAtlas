@@ -1,0 +1,30 @@
+{
+  "corrected_complete_runs": [
+    {
+      "exit_code": 0,
+      "session": 70689
+    },
+    {
+      "exit_code": 0,
+      "session": 57673
+    }
+  ],
+  "corrected_execution_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+  "failed_attempts": [
+    {
+      "execution_commit": "6187d27d44accbc4004ec35addac5987d3d1e6aa",
+      "exit_code": 1,
+      "reason": "runtime wire header mismatch, complete originals retained",
+      "session": 16199,
+      "source_proof_invoked": false
+    },
+    {
+      "execution_commit": "a7f2eb6afe8fcbd632d41f62a3ab8044a0c875da",
+      "exit_code": 1,
+      "reason": "lazy cp437 import runtime roster drift after extraction, complete originals/members retained",
+      "session": 35069,
+      "source_proof_invoked": false
+    }
+  ],
+  "failed_attempts_are_not_scientific_completions": true
+}
