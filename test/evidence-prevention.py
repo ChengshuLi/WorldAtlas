@@ -48,6 +48,20 @@ class Prevention(unittest.TestCase):
                 self.baseline.load_modules({'producer': 'producer.py'})
         finally:
             sys.path.remove(str(self.root))
+        namespace = self.root / 'native_package'; namespace.mkdir()
+        (namespace / 'helper.py').write_text('value = 4\n')
+        producer = self.root / 'namespace_producer.py'
+        producer.write_text('from native_package.helper import value\nresult = value\n')
+        self.git('add', '.'); self.git('commit', '-qm', 'Namespace project fixture')
+        raw = producer.read_bytes()
+        namespace_baseline = Baseline(self.root, self.git('rev-parse', 'HEAD'), [descriptor('namespace_producer.py', raw)])
+        (namespace / 'helper.py').write_text('value = 999\n')
+        sys.path.insert(0, str(self.root))
+        try:
+            with self.assertRaisesRegex(ValueError, 'Undeclared executed project code'):
+                namespace_baseline.load_modules({'producer': 'namespace_producer.py'})
+        finally:
+            sys.path.remove(str(self.root))
 
     def test_real_records_not_summary_counts_or_candidate_hashes(self):
         self.assertEqual(len(join_rows(self.rows, self.rows, {'parent': 'parent'})), 2)
@@ -81,6 +95,12 @@ class Prevention(unittest.TestCase):
     def test_destination_admission_and_complete_output_budget(self):
         for owned, run in [(self.owned, '../../../escape'), (self.owned, '/absolute'), ('data/other/', 'fresh')]:
             with self.assertRaises(ValueError): NewVintage(self.baseline, owned, run, ['one.json'])
+        self.assertFalse((self.root / 'coordination').exists())
+        # Small compressed transport must not hide an oversized decoded phase.
+        compressed = {f'part-{i}.json.gz': {'value': 'x' * 1000} for i in range(10)}
+        decoded_budget = Baseline(self.root, self.commit, [self.pins[0]], max_phase_bytes=5000)
+        with self.assertRaisesRegex(ValueError, 'including output'):
+            NewVintage(decoded_budget, self.owned, 'compressed', list(compressed)).publish(compressed)
         self.assertFalse((self.root / 'coordination').exists())
         vintage = NewVintage(self.baseline, self.owned, 'fresh', ['one.json', 'two.json'])
         with self.assertRaises(ValueError): vintage.publish({'one.json': {}})

@@ -151,7 +151,10 @@ class Baseline:
             # Looking up a dotted name can execute its parent package. Admit the
             # top-level location first rather than importing an unverified parent.
             spec = importlib.util.find_spec(name.split('.')[0])
-            if spec and spec.origin and spec.origin not in ('built-in', 'frozen') and Path(spec.origin).resolve().is_relative_to(self.repo):
+            locations = list(spec.submodule_search_locations or []) if spec else []
+            if spec and spec.origin and spec.origin not in ('built-in', 'frozen'):
+                locations.append(spec.origin)
+            if any(Path(location).resolve().is_relative_to(self.repo) for location in locations):
                 raise ValueError('Undeclared executed project code: ' + name)
             return builtins.__import__(name, globals, locals, fromlist, level)
         return {name: load(name) for name in sources}
@@ -244,12 +247,15 @@ class NewVintage:
         if set(values) != set(self.filenames):
             raise ValueError('Incomplete or unexpected output set')
         payloads = {}
+        decoded_output_bytes = 0
         for name, value in values.items():
             raw = canonical_json(value)
             payloads[name] = deterministic_gzip(raw) if name.endswith('.gz') else raw
+            if name.endswith('.gz'):
+                decoded_output_bytes += len(raw)
             if len(raw) > MAX_FILE_BYTES or len(payloads[name]) > MAX_FILE_BYTES:
                 raise ValueError('Output exceeds file byte budget')
-        if sum(self.baseline.consumed.values()) + sum(len(raw) for raw in payloads.values()) + 4096 > self.baseline.max_phase_bytes:
+        if sum(self.baseline.consumed.values()) + sum(len(raw) for raw in payloads.values()) + decoded_output_bytes + 4096 > self.baseline.max_phase_bytes:
             raise ValueError('Complete phase including output exceeds byte budget')
         records = [descriptor(str((self.root / name).relative_to(self.baseline.repo)), raw) for name, raw in payloads.items()]
         receipt = canonical_json({'version': 1, 'status': 'complete', 'outputs': records})
@@ -295,7 +301,8 @@ def write_new_vintage(baseline, owned_path, vintage, filename, value):
             raise ValueError('Immutable baseline input changed')
     raw = canonical_json(value)
     encoded = deterministic_gzip(raw) if filename.endswith('.gz') else raw
-    if len(raw) > MAX_FILE_BYTES or len(encoded) > MAX_FILE_BYTES or sum(baseline.consumed.values()) + len(encoded) > baseline.max_phase_bytes:
+    output_bytes = len(encoded) + (len(raw) if filename.endswith('.gz') else 0)
+    if len(raw) > MAX_FILE_BYTES or len(encoded) > MAX_FILE_BYTES or sum(baseline.consumed.values()) + output_bytes > baseline.max_phase_bytes:
         raise ValueError('Output exceeds complete byte budget')
     target.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
