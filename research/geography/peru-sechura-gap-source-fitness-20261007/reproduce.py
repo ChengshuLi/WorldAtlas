@@ -10,6 +10,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 from pyproj import Transformer
@@ -19,6 +20,8 @@ from shapely.validation import explain_validity
 
 ROOT = Path(__file__).resolve().parents[3]
 OUT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT / "scripts"))
+from evidence.geometry import land_area_m2
 FAMILY_ID = "gap-source-batch:5344ddbbdcc5dac52d0580aa"
 COMPONENT_ID = "physical-component:d15872b646c35d39fa1f0cc1bda6edc9775a46edd3c2c5278690d770ef211708"
 CONTACT_ID = "gb:PER:ADM2:86281439B13089313750619"
@@ -232,6 +235,12 @@ def main():
             "current_atlas_vs_simplified": pairwise(atlas_contact, simple_contact),
             "current_atlas_vs_unsimplified": pairwise(atlas_contact, full_contact),
             "simplified_vs_unsimplified": pairwise(simple_contact, full_contact),
+        },
+        "wgs84_source_edge_areas_m2": {
+            "candidate_component": float(land_area_m2(candidate_geo)),
+            "current_atlas_contact": float(land_area_m2(shape(atlas_contact["geometry"]))),
+            "simplified_source_contact": float(land_area_m2(shape(simple_contact["geometry"]))),
+            "unsimplified_source_contact": float(land_area_m2(shape(full_contact["geometry"]))),
         },
         "existing_global_accounting": {
             "source_fitness": family[0].get("source_fitness"),

@@ -227,6 +227,20 @@
         "bytes": 12313,
         "hash_kind": "file-bytes",
         "role": "baseline-input"
+      },
+      {
+        "path": "scripts/ellipsoidal_area.py",
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+        "bytes": 1953,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+        "bytes": 8846,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
       }
     ],
     "pins": {
@@ -348,8 +362,8 @@
     },
     {
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
-      "sha256": "f33806295f94c46d7f6f883b41014ea87e31e939ab966066c8ffb336512d3587",
-      "bytes": 14305,
+      "sha256": "47f079b98aa325024e5712c40eae5d56af47e93c5cbfba8ff7e7ef43af524701",
+      "bytes": 14543,
       "hash_kind": "file-bytes",
       "role": "generated-analysis"
     },
@@ -362,7 +376,7 @@
     },
     {
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/execution.json",
-      "sha256": "7f03c46341ecb9dbc88e197beb854ac503feda068ce4c66ed8d44a425ca2dd4c",
+      "sha256": "1e85eb68acd90c21c711a79bc912ee817573b06f599b2d0ee566b3a7a33f94ec",
       "bytes": 6351,
       "hash_kind": "file-bytes",
       "role": "generated-analysis"
@@ -432,22 +446,22 @@
     },
     {
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/reproduce.py",
-      "sha256": "18122faf80b3a2464961b2e6f28834da40cb32bc52f282a4855dfc3c22f8e15a",
-      "bytes": 15467,
+      "sha256": "1e6befedf7696164c4c456bc5c065c6e5424fbdedf79b390f3fac66b55c0fcf6",
+      "bytes": 15971,
       "hash_kind": "file-bytes",
       "role": "supporting-output"
     },
     {
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/run-controls.py",
-      "sha256": "764e8e6f94d489fd9082b08d45b0d0786574dea90e64f0aecd4a756650b3fb2d",
-      "bytes": 1073,
+      "sha256": "43ff7e5da5cf1a19d3806f3e20ec0fe919944cf1fa96777ad4b33b8cdfc317c9",
+      "bytes": 2392,
       "hash_kind": "file-bytes",
       "role": "supporting-output"
     },
     {
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/analysis.json",
-      "sha256": "f33806295f94c46d7f6f883b41014ea87e31e939ab966066c8ffb336512d3587",
-      "bytes": 14305,
+      "sha256": "47f079b98aa325024e5712c40eae5d56af47e93c5cbfba8ff7e7ef43af524701",
+      "bytes": 14543,
       "hash_kind": "file-bytes",
       "role": "generated-analysis"
     },
@@ -543,8 +557,8 @@
     },
     {
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/analysis.json",
-      "sha256": "f33806295f94c46d7f6f883b41014ea87e31e939ab966066c8ffb336512d3587",
-      "bytes": 14305,
+      "sha256": "47f079b98aa325024e5712c40eae5d56af47e93c5cbfba8ff7e7ef43af524701",
+      "bytes": 14543,
       "hash_kind": "file-bytes",
       "role": "generated-analysis"
     },
@@ -651,19 +665,29 @@
       "bytes": 399,
       "hash_kind": "file-bytes",
       "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/wgs84-negative-control.json",
+      "sha256": "589254db02daa187db5dce3126d3622bef295e230cdd3962df7f57a7eebd0d1c",
+      "bytes": 359,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/wgs84-positive-control.json",
+      "sha256": "d8efbe02be99f740290d11c5206f6e002c5fbbd1e92f182674f8e0fe6ce3d799",
+      "bytes": 368,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
     }
   ],
   "methods": [
     {
       "id": "bounded-sechura-component-comparison",
-      "kind": "geography",
+      "kind": "code",
       "description": "Original-coordinate intersection/covers/positive-area predicates for one candidate component against one current contact and the selected feature in each complete source product; all 196 source features checked for geometry validity.",
       "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; pyproj 3.7.2; PROJ 9.5.1",
-      "units": "feature count, coordinates, coverage fraction, m2",
-      "axis_order": "longitude-latitude",
-      "crs": "EPSG:4326 predicates; EPSG:32717 local planar area",
-      "area_method": "Shapely planar area after projecting this local candidate/products to EPSG:32717; descriptive, not accuracy",
-      "distance_method": "No distance metric computed."
+      "units": "feature count, coordinates, coverage fraction, m2"
     },
     {
       "id": "bounded-packet-reproduction",
@@ -671,6 +695,18 @@
       "description": "Runs the bounded parser and component comparison twice; compares generated output tree hashes. No global producers run.",
       "software": "Python 3.12.14; scripts included in packet",
       "units": "SHA-256 file/tree receipts"
+    },
+    {
+      "id": "wgs84-selected-feature-area",
+      "kind": "geography",
+      "description": "Supplemental WGS84 straight-source-edge area measurements of the selected candidate and current/simplified/unsimplified Sechura features using the repository diagnostic helper.",
+      "software": "Python 3.12.14; scripts/evidence/geometry.py worldatlas-evidence-geometry-v1; pyproj 3.7.2",
+      "units": "m2",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
     }
   ],
   "metrics": [
@@ -769,6 +805,38 @@
       "vintage": "baseline",
       "input_sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
       "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "wgs84_candidate_area",
+      "value": 27.71966428313268,
+      "unit": "m2 WGS84 source-edge area",
+      "vintage": "baseline",
+      "input_sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "wgs84_current_contact_area",
+      "value": 6354169491.504037,
+      "unit": "m2 WGS84 source-edge area",
+      "vintage": "baseline",
+      "input_sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "wgs84_simplified_source_area",
+      "value": 6352910275.767673,
+      "unit": "m2 WGS84 source-edge area",
+      "vintage": "baseline",
+      "input_sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "wgs84_unsimplified_source_area",
+      "value": 6354654098.649521,
+      "unit": "m2 WGS84 source-edge area",
+      "vintage": "baseline",
+      "input_sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
     }
   ],
   "summaries": [
@@ -843,6 +911,30 @@
       "value": 1,
       "unit": "features",
       "text": "current_contact_feature_count: 1 features"
+    },
+    {
+      "metric_id": "wgs84_candidate_area",
+      "value": 27.71966428313268,
+      "unit": "m2 WGS84 source-edge area",
+      "text": "wgs84_candidate_area: 27.71966428313268 m2"
+    },
+    {
+      "metric_id": "wgs84_current_contact_area",
+      "value": 6354169491.504037,
+      "unit": "m2 WGS84 source-edge area",
+      "text": "wgs84_current_contact_area: 6354169491.504037 m2"
+    },
+    {
+      "metric_id": "wgs84_simplified_source_area",
+      "value": 6352910275.767673,
+      "unit": "m2 WGS84 source-edge area",
+      "text": "wgs84_simplified_source_area: 6352910275.767673 m2"
+    },
+    {
+      "metric_id": "wgs84_unsimplified_source_area",
+      "value": 6354654098.649521,
+      "unit": "m2 WGS84 source-edge area",
+      "text": "wgs84_unsimplified_source_area: 6354654098.649521 m2"
     }
   ],
   "conclusions": [
@@ -940,6 +1032,26 @@
       "metric_id": "current_contact_feature_count",
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
       "json_pointer": "/product_comparisons/current_atlas_contact/candidate_intersection_feature_count"
+    },
+    {
+      "metric_id": "wgs84_candidate_area",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/wgs84_source_edge_areas_m2/candidate_component"
+    },
+    {
+      "metric_id": "wgs84_current_contact_area",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/wgs84_source_edge_areas_m2/current_atlas_contact"
+    },
+    {
+      "metric_id": "wgs84_simplified_source_area",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/wgs84_source_edge_areas_m2/simplified_source_contact"
+    },
+    {
+      "metric_id": "wgs84_unsimplified_source_area",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/wgs84_source_edge_areas_m2/unsimplified_source_contact"
     }
   ],
   "validation": [
@@ -954,6 +1066,18 @@
       "kind": "negative-control",
       "outcome": "passed",
       "evidence_path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/negative-control.json"
+    },
+    {
+      "method_id": "wgs84-selected-feature-area",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/wgs84-positive-control.json"
+    },
+    {
+      "method_id": "wgs84-selected-feature-area",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/wgs84-negative-control.json"
     }
   ],
   "change_receipts": [
@@ -1189,6 +1313,16 @@
     },
     {
       "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/wgs84-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/wgs84-positive-control.json",
       "status": "added",
       "previous_path": null
     }

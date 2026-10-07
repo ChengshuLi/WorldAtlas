@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "method_id": "wgs84-selected-feature-area",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "expected": "reject zero-area geometry",
+  "observed": "rejected",
+  "software": "scripts/evidence/geometry.py worldatlas-evidence-geometry-v1",
+  "geometry": "Synthetic degenerate polygon boundary; control only, not geographic evidence"
+}
