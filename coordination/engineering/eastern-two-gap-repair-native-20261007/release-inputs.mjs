@@ -29,7 +29,9 @@ export async function releaseInputs(repo,baseline,{storage,nativeStorage}={}){
  const native=loadSuccessor(repo,baseline,{storage:nativeStorage});
  const receiptRaw=input.read('data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz');
  const receipt=input.object('data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz');
- const originalPhysicalSource=input.object('data/hosted-catalog/batch-2.json').sources[125];
+ const sourceBatchPin=JSON.parse(catalog).batches.find(p=>p.path==='batch-2.json');assert.equal(sourceBatchPin.kind,'sources');
+ const originalPhysicalRaw=input.read('data/hosted-catalog/batch-2.json');assert.equal(sha(originalPhysicalRaw),sourceBatchPin.sha256,'Original AAFC identity-source catalog payload changed');
+ const originalPhysicalSource=JSON.parse(originalPhysicalRaw).sources[125];
  const relationships=receipt.relationships.flatMap(r=>{assert.equal(r.history_transfer,false);assert.equal(r.identity_pairs.length,1);return r.identity_pairs.map(p=>({old_entity_id:p.before_id,new_entity_id:p.after_id,change_type:'retain',history_transfer:'none'}));});
  const result=await successorRelease({registry,memberships,changes,world:native.features,hierarchySha:sha(hierarchy),originalCatalogSha:sha(catalog),relationships,
   receiptSha:sha(receiptRaw),proposalCommit:'b4b7db357ba92d19df513f188bbd046fe66a35e4',releaseId:native.releaseId,sourceId:native.sourceId,
