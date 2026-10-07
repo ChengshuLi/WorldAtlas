@@ -1,0 +1,1686 @@
+{
+  "version": 1,
+  "issue": 1299,
+  "lane": "geography",
+  "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612",
+  "subject_ids": [
+    "atlas:district:ESP-2101:def08fa9",
+    "gb:ESP:ADM3:28895703B56784737193540",
+    "gb:PRT:ADM2:2272694B13078000098594",
+    "gb:PRT:ADM2:2272694B82300393258858"
+  ],
+  "subject_ids_sha256": "0f4ae31ee63fe3adf34439fbb8c6f0d7c59da0d376061612e96634b508fafc1d",
+  "baseline": {
+    "commit": "fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "audited-world-index"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes",
+        "role": "whole-baseline-subject-part"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes",
+        "role": "whole-baseline-subject-part"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes",
+        "role": "whole-baseline-subject-part"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes",
+        "role": "baseline-source-registry"
+      },
+      {
+        "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/complete-input-index.json",
+        "bytes": 438758,
+        "sha256": "fde93383b699cff1e36668b85ee6529e7fb27062ab0c714c82412ab8f48e08be",
+        "hash_kind": "file-bytes",
+        "role": "predecessor-source-and-lineage-index"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ESP-ADM3-000.bin.gz",
+        "bytes": 5048979,
+        "sha256": "2c79b3b7c2338733c7026f311148d10c20693facd06a635991e7fdf76204be62",
+        "hash_kind": "file-bytes",
+        "role": "complete-consumed-source-product",
+        "uncompressed_bytes": 18613175,
+        "uncompressed_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz",
+        "bytes": 85617,
+        "sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+        "hash_kind": "file-bytes",
+        "role": "complete-consumed-source-product",
+        "uncompressed_bytes": 387331,
+        "uncompressed_sha256": "f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "role": "complete-containing-component-custody-payload",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "role": "complete-containing-component-custody-payload",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes",
+        "role": "complete-containing-component-custody-payload",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "role": "complete-containing-component-custody-payload",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      }
+    ],
+    "pins": {
+      "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "scoped_part_8": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+      "scoped_part_19": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+      "scoped_part_29": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    "pin_files": {
+      "audited_world_index": "data/world-index.json",
+      "scoped_part_8": "data/geography/part-8.json",
+      "scoped_part_19": "data/geography/part-19.json",
+      "scoped_part_29": "data/geography/part-29.json"
+    },
+    "subject_files": {
+      "atlas:district:ESP-2101:def08fa9": "data/geography/part-29.json",
+      "gb:ESP:ADM3:28895703B56784737193540": "data/geography/part-8.json",
+      "gb:PRT:ADM2:2272694B13078000098594": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B82300393258858": "data/geography/part-19.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "official:dgt-caop-page",
+      "url": "https://www.dgterritorio.gov.pt/atividades/cartografia/cartografia-tematica/caop?language=pt",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:51.183931+00:00",
+      "retrieved_at": "2026-10-07T04:39:51.183931+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/dgt-caop-page.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:dgt-caop2025-change-list",
+      "url": "https://www.dgterritorio.gov.pt/sites/default/files/ficheiros-cartografia/alteracoes_CAOP2025.pdf",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:52.083640+00:00",
+      "retrieved_at": "2026-10-07T04:39:52.083640+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/dgt-caop2025-change-list.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:dgt-caop2025-approval-notice",
+      "url": "https://www.dgterritorio.gov.pt/sites/default/files/ficheiros-artigos/DR_AvisoCAOP2025.pdf",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:52.992286+00:00",
+      "retrieved_at": "2026-10-07T04:39:52.992286+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/dgt-caop2025-approval-notice.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:dgt-open-data-terms",
+      "url": "https://www.dgterritorio.gov.pt/dados-abertos",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:54.281143+00:00",
+      "retrieved_at": "2026-10-07T04:39:54.281143+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/dgt-open-data-terms.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:dgt-caop2025-collection",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/municipios?f=json",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:54.852871+00:00",
+      "retrieved_at": "2026-10-07T04:39:54.852871+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/dgt-caop2025-collection.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:dgt-caop2025-queryables",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/municipios/queryables?f=json",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:55.409788+00:00",
+      "retrieved_at": "2026-10-07T04:39:55.409788+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/dgt-caop2025-queryables.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:dgt-barrancos-0204",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/municipios/items/0204?f=json",
+      "role": "Complete direct OGC API Features native item response",
+      "vintage": "CAOP2025 product, feature effective date unresolved",
+      "retrieved_at": "2026-10-07T04:39:56.823923+00:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "DGT open-data terms, CC BY 4.0; attribution to Direção-Geral do Território."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-barrancos-0204.body",
+          "bytes": 492214,
+          "sha256": "1863c1a2984e1d2d747983493e59962b675699cc52173aae603cdeacfc35b468",
+          "hash_kind": "file-bytes",
+          "role": "official-whole-native-item-response"
+        }
+      ]
+    },
+    {
+      "id": "official:dgt-moura-0210",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/municipios/items/0210?f=json",
+      "role": "Complete direct OGC API Features native item response",
+      "vintage": "CAOP2025 product, feature effective date unresolved",
+      "retrieved_at": "2026-10-07T04:39:58.574792+00:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "DGT open-data terms, CC BY 4.0; attribution to Direção-Geral do Território."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-moura-0210.body",
+          "bytes": 866981,
+          "sha256": "2825a5eb72020b3a9b16784faea3e8d15028b2f6e2411c76a05495f510ada0a2",
+          "hash_kind": "file-bytes",
+          "role": "official-whole-native-item-response"
+        }
+      ]
+    },
+    {
+      "id": "official:ign-administrativeunit-collection",
+      "url": "https://api-features.ign.es/collections/administrativeunit?f=json",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:59.147078+00:00",
+      "retrieved_at": "2026-10-07T04:39:59.147078+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-administrativeunit-collection.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-administrativeunit-queryables",
+      "url": "https://api-features.ign.es/collections/administrativeunit/queryables?f=json",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:39:59.733170+00:00",
+      "retrieved_at": "2026-10-07T04:39:59.733170+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-administrativeunit-queryables.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-administrativeboundary-collection",
+      "url": "https://api-features.ign.es/collections/administrativeboundary?f=json",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:40:00.298826+00:00",
+      "retrieved_at": "2026-10-07T04:40:00.298826+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-administrativeboundary-collection.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-administrativeboundary-queryables",
+      "url": "https://api-features.ign.es/collections/administrativeboundary/queryables?f=json",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:40:00.878496+00:00",
+      "retrieved_at": "2026-10-07T04:40:00.878496+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-administrativeboundary-queryables.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-openapi",
+      "url": "https://api-features.ign.es/openapi?f=json",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:52:08.004687+00:00",
+      "retrieved_at": "2026-10-07T04:52:08.004687+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-openapi.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-encinasola-1166667",
+      "url": "https://api-features.ign.es/collections/administrativeunit/items/1166667?f=json",
+      "role": "Complete direct OGC API Features native item response",
+      "vintage": "IGN OGC API retrieval-time item; no effective polygon date returned",
+      "retrieved_at": "2026-10-07T04:40:02.337053+00:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "IGN/CNIG data policy and license terms, CC BY 4.0; attribution to IGN/CNIG."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-encinasola-1166667.body",
+          "bytes": 119156,
+          "sha256": "8010006e52e9cbb36cb09d4a5a0b1431612ab033cca04425e2ef31a1feffd9c6",
+          "hash_kind": "file-bytes",
+          "role": "official-whole-native-item-response"
+        }
+      ]
+    },
+    {
+      "id": "official:ign-rosal-1166698",
+      "url": "https://api-features.ign.es/collections/administrativeunit/items/1166698?f=json",
+      "role": "Complete direct OGC API Features native item response",
+      "vintage": "IGN OGC API retrieval-time item; no effective polygon date returned",
+      "retrieved_at": "2026-10-07T04:40:03.837423+00:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "IGN/CNIG data policy and license terms, CC BY 4.0; attribution to IGN/CNIG."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-rosal-1166698.body",
+          "bytes": 186305,
+          "sha256": "462b4c332e5221aabc2aba1de30bcd250642a18fee47489b41e9d869bf11bc43",
+          "hash_kind": "file-bytes",
+          "role": "official-whole-native-item-response"
+        }
+      ]
+    },
+    {
+      "id": "official:ign-encinasola-portugal-5679963",
+      "url": "https://api-features.ign.es/collections/administrativeboundary/items/5679963?f=json",
+      "role": "Complete direct OGC API Features native item response",
+      "vintage": "IGN OGC API retrieval-time item; no effective polygon date returned",
+      "retrieved_at": "2026-10-07T04:40:04.603673+00:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "IGN/CNIG data policy and license terms, CC BY 4.0; attribution to IGN/CNIG."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-encinasola-portugal-5679963.body",
+          "bytes": 39972,
+          "sha256": "7d19b4307691b959f514374e1b5577489515d4c2e00cd762dd250889ed77fd6c",
+          "hash_kind": "file-bytes",
+          "role": "official-whole-native-item-response"
+        }
+      ]
+    },
+    {
+      "id": "official:ign-rosal-portugal-5671403",
+      "url": "https://api-features.ign.es/collections/administrativeboundary/items/5671403?f=json",
+      "role": "Complete direct OGC API Features native item response",
+      "vintage": "IGN OGC API retrieval-time item; no effective polygon date returned",
+      "retrieved_at": "2026-10-07T04:40:05.738751+00:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "IGN/CNIG data policy and license terms, CC BY 4.0; attribution to IGN/CNIG."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-rosal-portugal-5671403.body",
+          "bytes": 93835,
+          "sha256": "b12acf2cdafdb2331d10e31116f6d6a18dfa0eafc90ce16b71617a9b55d92b54",
+          "hash_kind": "file-bytes",
+          "role": "official-whole-native-item-response"
+        }
+      ]
+    },
+    {
+      "id": "official:ign-encinasola-record-page",
+      "url": "https://centrodedescargas.cnig.es/CentroDescargas/busquedaIdProductor.do?idProductor=M011569M014001&Serie=HRLLJ",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:52:09.544412+00:00",
+      "retrieved_at": "2026-10-07T04:52:09.544412+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-encinasola-record-page.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-rosal-record-page",
+      "url": "https://centrodedescargas.cnig.es/CentroDescargas/busquedaIdProductor.do?idProductor=M011779M014001&Serie=HRLLJ",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:52:11.150835+00:00",
+      "retrieved_at": "2026-10-07T04:52:11.150835+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-rosal-record-page.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-license-terms",
+      "url": "https://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:40:05.858178+00:00",
+      "retrieved_at": "2026-10-07T04:40:05.858178+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-license-terms.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-data-policy",
+      "url": "https://www.ign.es/web/ign/portal/politica-datos",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:40:05.942439+00:00",
+      "retrieved_at": "2026-10-07T04:40:05.942439+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-data-policy.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-legal-notice",
+      "url": "https://www.ign.es/web/ign/portal/info-aviso-legal",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:40:06.026088+00:00",
+      "retrieved_at": "2026-10-07T04:40:06.026088+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-legal-notice.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "official:ign-fom-2807-2015",
+      "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2015-14129",
+      "role": "Official provider legal, product, service or collection metadata response",
+      "vintage": "Direct response retrieved 2026-10-07T04:40:06.909467+00:00",
+      "retrieved_at": "2026-10-07T04:40:06.909467+00:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Capture is retained as primary-source evidence; this record does not assert a license for republishing the webpage or legal document text."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the preserved direct response at sources/official/ign-fom-2807-2015.body (bound by sources/official-capture-index.json); the complete response remains in this PR packet.",
+      "limit": "Captured primary page/document/service metadata is cited as evidence; reuse rights in the page/document text itself are not asserted."
+    },
+    {
+      "id": "consumed:gb:ESP:ADM3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3_simplified.geojson",
+      "role": "Complete original administrative source product consumed by the pinned Atlas baseline",
+      "vintage": "geoBoundaries represented year 2018",
+      "retrieved_at": "Captured and pinned in predecessor source packet before the baseline commit",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries source terms CC BY 4.0; attribution to geoBoundaries and original provider as stated in the retained source packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read the complete source-product bytes at baseline commit fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7 path coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ESP-ADM3-000.bin.gz; verify the raw and uncompressed hashes recorded in baseline.files and inputs/frozen-execution-closure.json.",
+      "limit": "The original complete consumed source product is byte-pinned in the immutable baseline and read by the analysis; it is not copied into this PR packet."
+    },
+    {
+      "id": "consumed:gb:PRT:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2_simplified.geojson",
+      "role": "Complete original administrative source product consumed by the pinned Atlas baseline",
+      "vintage": "geoBoundaries represented year 2020",
+      "retrieved_at": "Captured and pinned in predecessor source packet before the baseline commit",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries Portugal source product CC0 as documented in the retained source packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read the complete source-product bytes at baseline commit fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7 path coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz; verify the raw and uncompressed hashes recorded in baseline.files and inputs/frozen-execution-closure.json.",
+      "limit": "The original complete consumed source product is byte-pinned in the immutable baseline and read by the analysis; it is not copied into this PR packet."
+    },
+    {
+      "id": "original-component-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "role": "Complete original containing component shard custody evidence",
+      "vintage": "Original pre-water component archive; version and source limits documented in predecessor lineage index",
+      "retrieved_at": "Pinned by predecessor custody payload commit c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "license": {
+        "status": "unknown",
+        "terms": "Original derived geometry custody retained in repository; upstream source reuse terms are not resolved by this comparison."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use the complete byte-pinned payload descriptors in baseline.files and inputs/frozen-execution-closure.json; reconstruct the original shards with gzip and verify the recorded hashes.",
+      "limit": "This packet preserves the original containing-shard custody by immutable reference without duplicating the complete payload files."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/README.md",
+      "bytes": 7267,
+      "sha256": "cd8256ed466498caef1c2fca3696c6506d07f096fa67ac867a0593389fa43bf3",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/controls/negative-control.json",
+      "bytes": 1525,
+      "sha256": "3c7aff667fe6ca1acf99f558866ec9fb994a83b2130da4ba955cfc9f8df8a52c",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/controls/positive-control.json",
+      "bytes": 3786,
+      "sha256": "aaf13cc51c8ad5ae527afe5b1457135d00197eae750e369f29277e4f70e70d18",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/controls/reproducibility.json",
+      "bytes": 3505,
+      "sha256": "c68b1ba17aa46e05a3586db7ade75c52ec1d38b9c5767d9ceede0728b66fe565",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/inputs/frozen-execution-closure.json",
+      "bytes": 25054,
+      "sha256": "8a2f6c7ee31596a02fb758403863537e216489844244b16d3ebc208fe75de695",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/inputs/scope.json",
+      "bytes": 3733,
+      "sha256": "ca652688f051fbd44bed3cc5a4130bb9b4ada0d3b20667f6b3a91209bd68a6c5",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/boundary-line-overlays.json",
+      "bytes": 1011527,
+      "sha256": "0af9f512b1617042496a46e2aab64a61b442b51cd08493814e6862684455a4ca",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/coverage-summary.json",
+      "bytes": 1085,
+      "sha256": "b1b75db7df61df26e594e10991e718811f3870d6744b5eb431ff949e55a71497",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/polygon-overlays.json",
+      "bytes": 25656,
+      "sha256": "e907d9e5c374e4ef6c8d09a903ac9dc95bbc1958e73d905577135f540566571f",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/coverage-summary.json",
+      "bytes": 3702,
+      "sha256": "c5c3de5070bb68af676690fa89a88e7a2d20bc5a283a7a4c89cd7ea8809fff9b",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/polygon-overlays.json",
+      "bytes": 41455,
+      "sha256": "801de2da2c53c879921ab77d5b4acf2611d2b0a80b45fe0eaf9a6c1e21de0297",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/coverage-summary.json",
+      "bytes": 10495,
+      "sha256": "925c74628530fa39dfa43ed0d4fc13f410e674284697d0f4caac6c9cf1c459c9",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/polygon-overlays.json",
+      "bytes": 84985,
+      "sha256": "cb2cb1a9e7802d90a903e0598bb45269f674cd4b0740fb2f825cc94cee817129",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/coverage-summary.json",
+      "bytes": 4732,
+      "sha256": "67620029a194c09885f85b124e1463cd573f8624820feea17522544a9f3d752f",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/polygon-overlays.json",
+      "bytes": 43119,
+      "sha256": "c151e394f881b9387ee83b7e1b93d2ab5bd8616695d56c709e4b0c938d8b021a",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/execution-receipt.json",
+      "bytes": 605,
+      "sha256": "acf57fae21c87cf5d1eb691649c55eb67d90d531900a5166edcfe82e2d8663e7",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/identity-and-vintage.json",
+      "bytes": 20851,
+      "sha256": "e09090a3df01db29d136eae652689143e9921c7b1ddd9446c5c440ab6219fba2",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/identity-geometry-comparisons.json",
+      "bytes": 3246426,
+      "sha256": "f77ee817f1a849dfbdce08435a7531ab72071734991d6d15395d205a303fc4c4",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/source-vintage-crs-and-terms-assessment.json",
+      "bytes": 3458,
+      "sha256": "a7afc006a08254e5869e20d3300d27d2545b9085d86ee5dd291c3dd6f535f7e9",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/summary.json",
+      "bytes": 26637,
+      "sha256": "193ceca0f6318b33e8efc309e11e2b28672edc0fc25461ff348a81567820a300",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/boundary-line-overlays.json",
+      "bytes": 1011527,
+      "sha256": "0af9f512b1617042496a46e2aab64a61b442b51cd08493814e6862684455a4ca",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/coverage-summary.json",
+      "bytes": 1085,
+      "sha256": "b1b75db7df61df26e594e10991e718811f3870d6744b5eb431ff949e55a71497",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/polygon-overlays.json",
+      "bytes": 25656,
+      "sha256": "e907d9e5c374e4ef6c8d09a903ac9dc95bbc1958e73d905577135f540566571f",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/coverage-summary.json",
+      "bytes": 3702,
+      "sha256": "c5c3de5070bb68af676690fa89a88e7a2d20bc5a283a7a4c89cd7ea8809fff9b",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/polygon-overlays.json",
+      "bytes": 41455,
+      "sha256": "801de2da2c53c879921ab77d5b4acf2611d2b0a80b45fe0eaf9a6c1e21de0297",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/coverage-summary.json",
+      "bytes": 10495,
+      "sha256": "925c74628530fa39dfa43ed0d4fc13f410e674284697d0f4caac6c9cf1c459c9",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/polygon-overlays.json",
+      "bytes": 84985,
+      "sha256": "cb2cb1a9e7802d90a903e0598bb45269f674cd4b0740fb2f825cc94cee817129",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/coverage-summary.json",
+      "bytes": 4732,
+      "sha256": "67620029a194c09885f85b124e1463cd573f8624820feea17522544a9f3d752f",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/polygon-overlays.json",
+      "bytes": 43119,
+      "sha256": "c151e394f881b9387ee83b7e1b93d2ab5bd8616695d56c709e4b0c938d8b021a",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/execution-receipt.json",
+      "bytes": 605,
+      "sha256": "c7902c14e718463253f03cd85731f6d97f1b4b4e37e3a5636ee3321e7a1c62a9",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/identity-and-vintage.json",
+      "bytes": 20851,
+      "sha256": "e09090a3df01db29d136eae652689143e9921c7b1ddd9446c5c440ab6219fba2",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/identity-geometry-comparisons.json",
+      "bytes": 3246426,
+      "sha256": "f77ee817f1a849dfbdce08435a7531ab72071734991d6d15395d205a303fc4c4",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/source-vintage-crs-and-terms-assessment.json",
+      "bytes": 3458,
+      "sha256": "a7afc006a08254e5869e20d3300d27d2545b9085d86ee5dd291c3dd6f535f7e9",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/summary.json",
+      "bytes": 26637,
+      "sha256": "193ceca0f6318b33e8efc309e11e2b28672edc0fc25461ff348a81567820a300",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/capture-official-sources.py",
+      "bytes": 8336,
+      "sha256": "5210bcf5b8cc6fd32eb8c861d7478f5eedff6263fd36a2048679e046ad9d7662",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/freeze-input-closure.py",
+      "bytes": 5030,
+      "sha256": "ccc0d888776d200ee3faafe203d5e93137041dc6e5f1ae4d1ad7104a5be8d5ec",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/run-analysis.py",
+      "bytes": 37840,
+      "sha256": "5c76e61342821764ede98e110f56dc59cbb2b71d598b4d340aab19b3e992c8b2",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/run-controls.py",
+      "bytes": 10460,
+      "sha256": "402363701784e35ff2484d82480b57a2c0e846ef38880839bc2eacb4d7d50efa",
+      "hash_kind": "file-bytes",
+      "role": "research-report-script-input-or-output"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/failed-requests/dgt-caop2025-change-list-incorrect-route-404.body",
+      "bytes": 59563,
+      "sha256": "f409d82df5e0e96135a89c229740254ace0514f63b26f94957e1d84aee6025d8",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/failed-requests/dgt-caop2025-change-list-incorrect-route-404.headers.txt",
+      "bytes": 831,
+      "sha256": "e346714eae3ab89c054cde4922c83509ae6a018b306cc3d61f0e4f34a79a0aa2",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-barrancos-0204.headers.txt",
+      "bytes": 279,
+      "sha256": "e4fcc6532b0b183b12cbf3b363131e406e5cd4acbf5de32ec21a29f5524de4a2",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop-page.headers.txt",
+      "bytes": 570,
+      "sha256": "167e4282f2f2d8422ee48ce5bd2497b3b4d828c7521d228967c8988bcb6fb1cd",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-approval-notice.headers.txt",
+      "bytes": 294,
+      "sha256": "d9eb04a03449067c8f1174baeafd28d29a40fbb069ef27f358ec0f63aa857434",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-change-list.headers.txt",
+      "bytes": 295,
+      "sha256": "4376e8c3bbd930ebcac3e2aa96cfa9920b0c7b94a43c9858d968d22a5ed5ae8e",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-collection.headers.txt",
+      "bytes": 216,
+      "sha256": "64e03bad67741061bc4c3e6afa9f15ed676fbe302805a6ceeb859b9af3fdd7df",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-queryables.headers.txt",
+      "bytes": 223,
+      "sha256": "ac192fa4f01149352008deac7b80949ea6cfdb509fe8c386ff03780270eb5107",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-moura-0210.headers.txt",
+      "bytes": 279,
+      "sha256": "25b9b78dc2e39a03c263b812ceb8a9f1c0a70adf3a40ac11758331166332a01a",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-open-data-terms.headers.txt",
+      "bytes": 570,
+      "sha256": "fc1cdb97c2ade6cad5d1329cae2ce6e20bcc02726559d10c3338dc627e34a625",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeboundary-collection.headers.txt",
+      "bytes": 301,
+      "sha256": "43ebfcd31b7b6c0ae3e1306e80296d4872f65393c4c4aac64e8071c9dbe431ce",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeboundary-queryables.headers.txt",
+      "bytes": 308,
+      "sha256": "810d6833ef2dde32fb844f2aa0748e2454bee5e41b72d9ca1be72ab3392a3c4e",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeunit-collection.headers.txt",
+      "bytes": 301,
+      "sha256": "e2085727e8c4ef3a89a4527f004fffebcfbf5300c9c9676f98ba34d7745609c7",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeunit-queryables.headers.txt",
+      "bytes": 308,
+      "sha256": "f935a7cf531481436667824bca7c01944f675f2ef5931a3999c687d2a6780f98",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-data-policy.headers.txt",
+      "bytes": 838,
+      "sha256": "99ba7b33520443e86c8f1efd79a6b573f90ef0e78de0e0d40281420d9f76e753",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-encinasola-1166667.headers.txt",
+      "bytes": 364,
+      "sha256": "5da17f7bef827fc0f053e85fc8532acb78b5d7d617e27e8bfdb38133f53b9ebb",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-encinasola-portugal-5679963.headers.txt",
+      "bytes": 363,
+      "sha256": "0667c91dc707bffa89becfce5dd6b8256c0a93aafa983302461cd0f78ecb2f16",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-encinasola-record-page.headers.txt",
+      "bytes": 282,
+      "sha256": "26a144f9972bfdfe139609caec0e6ed4a28ba1efcc42a1399f8398cf208c5ee6",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-fom-2807-2015.headers.txt",
+      "bytes": 772,
+      "sha256": "bbbe3ba142979c0968d680bc4d536deec88a676d4bc5e133a9aacab3f5307ab7",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-legal-notice.headers.txt",
+      "bytes": 838,
+      "sha256": "4e2d0021d3d91d4d203a99672e01e94675a08bfe925ebae3c69cce1aced13b6c",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-license-terms.headers.txt",
+      "bytes": 548,
+      "sha256": "cab7db7605188aef1289173ef5a58e6aa2a91c3cba06797bce0926efcd5a74c0",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-openapi.headers.txt",
+      "bytes": 331,
+      "sha256": "07b99b3755653aa03d3e22e5f68d204e16e762764b5074db4eb2fe4091a45dd5",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-rosal-1166698.headers.txt",
+      "bytes": 364,
+      "sha256": "b30b1fae82119b7ce79e736b9cb2cb62daa6b82323b2d5e0b25889a9a607a0c1",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-rosal-portugal-5671403.headers.txt",
+      "bytes": 363,
+      "sha256": "8e5f3aac0867933bb013e9433f8be8aea6716039ab45e85e3f52bfc51a49a604",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-rosal-record-page.headers.txt",
+      "bytes": 282,
+      "sha256": "66a6823083633f137fd16b0518290ed66e5a62d77b8b379b678b227197e050fd",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop-page.body",
+      "bytes": 161975,
+      "sha256": "51b642481d4ff0305806c1e042264d887954ae95b0cd1fb293b4d72ba4c44aca",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-approval-notice.body",
+      "bytes": 60709,
+      "sha256": "c45eea538c3ccd75c18777c9a939ff4484b09af6af4a098973d94137489cfc5a",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-change-list.body",
+      "bytes": 68103,
+      "sha256": "57789ac681cacf0699179b84072416188c0d0fbfc61a19fe72660ee02954f9eb",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-collection.body",
+      "bytes": 5075,
+      "sha256": "7c123a42e833b3bfa9d302564f8550c8045d73b2db1014772d4cc3a1bcf2c7e6",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-queryables.body",
+      "bytes": 1306,
+      "sha256": "3b0eeac423f242b2614642a88c2dde464d479537094c706bdab21543591daa8e",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-open-data-terms.body",
+      "bytes": 211275,
+      "sha256": "6a28acde81ae6a2d507ec62f7adabf486d5ac22a32d57a07fc5cd33a1db38c53",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeboundary-collection.body",
+      "bytes": 5908,
+      "sha256": "6142d8b4ffafb37442847a73e1ef7f35a999d5c64270dbe170fcf83b598b6129",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeboundary-queryables.body",
+      "bytes": 1863,
+      "sha256": "ab75a6e49485dafe75d07cc435bf4c028661803fa1a75e7fbf9a7bb4e0de1e17",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeunit-collection.body",
+      "bytes": 5932,
+      "sha256": "8ae89b34391bc561dd9a1a9dcb067d831b415054213a4b69f6633f6a2012080f",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeunit-queryables.body",
+      "bytes": 1226,
+      "sha256": "f9bf50be263819b12fa7011396742b6f6dc7823415ac3e4caa14e89fc6e03160",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-data-policy.body",
+      "bytes": 71565,
+      "sha256": "5cf6bfe8c89d9b5d61141d005f429e6762bbbd1d72293b86d2b0fb0c64d2ab81",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-encinasola-record-page.body",
+      "bytes": 53161,
+      "sha256": "99739979509c7c4b2e16d53284fe40d1d4036123e879ce1bcce113cf757bcc2b",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-fom-2807-2015.body",
+      "bytes": 54447,
+      "sha256": "9576563d369b7d328a0591335eec772cedccbb65681d97df3980afa9eba85fb0",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-legal-notice.body",
+      "bytes": 98649,
+      "sha256": "c048841f913cce51d6e028a4102209b4014dcd4de4fadca2828f32f6fb47c0ae",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-license-terms.body",
+      "bytes": 145381,
+      "sha256": "48b745c62276e4d5ae8870922b9db89d276e9b339f66e3d1f9eea6379f2957d9",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-openapi.body",
+      "bytes": 203012,
+      "sha256": "0301606a4cf2ec5564c0d2692bc401b05c53b199e909ab27416c432a19a8e391",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-rosal-record-page.body",
+      "bytes": 53161,
+      "sha256": "99739979509c7c4b2e16d53284fe40d1d4036123e879ce1bcce113cf757bcc2b",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official-capture-index.json",
+      "bytes": 18643,
+      "sha256": "f63611c528ff85074b1e527e95d1647778d06473cb663b10fd1be5320f377f6d",
+      "hash_kind": "file-bytes",
+      "role": "source-header-and-response-index"
+    }
+  ],
+  "methods": [
+    {
+      "id": "official-source-geography-v1",
+      "kind": "geography",
+      "description": "Two ordered complete source/geometry analyses of the exact retained two-family scope. Inputs are the pinned Atlas baseline, whole consumed source products, full containing component shards and captured direct DGT/IGN features.",
+      "software": "Bundled CPython 3.12; NumPy 2.3.3; PyProj 3.7.2; Shapely 2.1.2 / GEOS; WorldAtlas evidence helper; producer commit 3df6fa1e47f05238087b838a69b0134513ed0f37.",
+      "units": "m² (WGS84 ellipsoidal area), m (WGS84 geodesic line length), unitless coverage fractions",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "gap-source-batch:509d6812e22b584f960be362:coverage",
+      "value": 0.9969479848900172,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "input_sha256": "8a2f6c7ee31596a02fb758403863537e216489844244b16d3ebc208fe75de695",
+      "evaluation_commit": "fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7",
+      "numerator": 462147.28753493703,
+      "denominator": 463562.08602590323
+    },
+    {
+      "id": "gap-source-batch:509d6812e22b584f960be362:residual",
+      "value": 1414.7984911014807,
+      "unit": "m2",
+      "vintage": "baseline",
+      "input_sha256": "8a2f6c7ee31596a02fb758403863537e216489844244b16d3ebc208fe75de695",
+      "evaluation_commit": "fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7"
+    },
+    {
+      "id": "gap-source-batch:4c43b39b2038f22dfdedebce:coverage",
+      "value": 0.9997735509110778,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "input_sha256": "8a2f6c7ee31596a02fb758403863537e216489844244b16d3ebc208fe75de695",
+      "evaluation_commit": "fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7",
+      "numerator": 4667764.922989489,
+      "denominator": 4668822.173517021
+    },
+    {
+      "id": "gap-source-batch:4c43b39b2038f22dfdedebce:residual",
+      "value": 1057.2505274202927,
+      "unit": "m2",
+      "vintage": "baseline",
+      "input_sha256": "8a2f6c7ee31596a02fb758403863537e216489844244b16d3ebc208fe75de695",
+      "evaluation_commit": "fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "gap-source-batch:509d6812e22b584f960be362:coverage",
+      "value": 0.9969479848900172,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "gap-source-batch:509d6812e22b584f960be362:residual",
+      "value": 1414.7984911014807,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "gap-source-batch:4c43b39b2038f22dfdedebce:coverage",
+      "value": 0.9997735509110778,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "gap-source-batch:4c43b39b2038f22dfdedebce:residual",
+      "value": 1057.2505274202927,
+      "unit": "m2"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "gap-source-batch:509d6812e22b584f960be362:coverage",
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/summary.json",
+      "json_pointer": "/families/0/coverage_fraction_of_component_area_sum"
+    },
+    {
+      "metric_id": "gap-source-batch:509d6812e22b584f960be362:residual",
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/summary.json",
+      "json_pointer": "/families/0/uncovered_area_sum_m2"
+    },
+    {
+      "metric_id": "gap-source-batch:4c43b39b2038f22dfdedebce:coverage",
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/summary.json",
+      "json_pointer": "/families/1/coverage_fraction_of_component_area_sum"
+    },
+    {
+      "metric_id": "gap-source-batch:4c43b39b2038f22dfdedebce:residual",
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/summary.json",
+      "json_pointer": "/families/1/uncovered_area_sum_m2"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "official-source-geography-v1",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/portugal-spain-official-boundaries-20261007/controls/positive-control.json"
+    },
+    {
+      "method_id": "official-source-geography-v1",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/portugal-spain-official-boundaries-20261007/controls/negative-control.json"
+    },
+    {
+      "method_id": "official-source-geography-v1",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/portugal-spain-official-boundaries-20261007/controls/reproducibility.json"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Four complete direct municipal-item response bodies and two complete Spanish administrative-boundary line-item bodies are captured with original response envelopes, retrieval times, CRS headers and whole-body byte receipts.",
+      "status": "supported",
+      "source_ids": [
+        "official:dgt-barrancos-0204",
+        "official:dgt-moura-0210",
+        "official:ign-encinasola-1166667",
+        "official:ign-rosal-1166698",
+        "official:ign-encinasola-portugal-5679963",
+        "official:ign-rosal-portugal-5671403"
+      ]
+    },
+    {
+      "text": "The official item responses declare CRS84 longitude-latitude; the DGT collection also reports EPSG:3763 storage CRS. Direct comparison used returned CRS84 coordinates without an additional transformation.",
+      "status": "supported",
+      "source_ids": [
+        "official:dgt-caop2025-collection",
+        "official:dgt-barrancos-0204",
+        "official:dgt-moura-0210",
+        "official:ign-administrativeunit-collection"
+      ]
+    },
+    {
+      "text": "All four full gap components are overwhelmingly covered by the union of the four current official municipal items, with the measured per-component residuals preserved; this does not establish physical class or ownership.",
+      "status": "supported",
+      "source_ids": [
+        "official:dgt-barrancos-0204",
+        "official:dgt-moura-0210",
+        "official:ign-encinasola-1166667",
+        "official:ign-rosal-1166698",
+        "original-component-custody"
+      ]
+    },
+    {
+      "text": "The four old-to-official candidate polygon pairs have nonzero symmetric differences; official item effective dates are absent or unresolved, so historical or operational equivalence is not established.",
+      "status": "unresolved",
+      "source_ids": [
+        "official:dgt-barrancos-0204",
+        "official:dgt-moura-0210",
+        "official:ign-encinasola-1166667",
+        "official:ign-rosal-1166698",
+        "consumed:gb:ESP:ADM3",
+        "consumed:gb:PRT:ADM2",
+        "official:dgt-caop2025-collection",
+        "official:ign-administrativeunit-collection"
+      ]
+    },
+    {
+      "text": "The two Spanish boundary-line records report agreed/date attributes but the available captures do not establish matching Portuguese-side line geometry or bilateral legal authority.",
+      "status": "unresolved",
+      "source_ids": [
+        "official:ign-encinasola-portugal-5679963",
+        "official:ign-rosal-portugal-5671403",
+        "official:ign-administrativeboundary-collection",
+        "official:ign-encinasola-record-page",
+        "official:ign-rosal-record-page"
+      ]
+    },
+    {
+      "text": "The direct DGT 2025 product collection metadata reports a 2000–2007 temporal extent, which conflicts with the product page and 2026 approval notice; item-level effective dates are unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "official:dgt-caop-page",
+        "official:dgt-caop2025-approval-notice",
+        "official:dgt-caop2025-collection"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B research/geography/portugal-spain-official-boundaries-20261007/scripts/run-analysis.py run-01",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B research/geography/portugal-spain-official-boundaries-20261007/scripts/run-analysis.py run-02",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B research/geography/portugal-spain-official-boundaries-20261007/scripts/run-controls.py"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/controls/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/controls/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/controls/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/inputs/frozen-execution-closure.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/inputs/scope.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/boundary-line-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/execution-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/identity-and-vintage.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/identity-geometry-comparisons.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/source-vintage-crs-and-terms-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-01/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/boundary-line-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/coverage-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/components/physical-component_a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c/polygon-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/execution-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/identity-and-vintage.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/identity-geometry-comparisons.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/source-vintage-crs-and-terms-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/runs/run-02/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/capture-official-sources.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/freeze-input-closure.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/run-analysis.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/scripts/run-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/failed-requests/dgt-caop2025-change-list-incorrect-route-404.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/failed-requests/dgt-caop2025-change-list-incorrect-route-404.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-barrancos-0204.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop-page.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-approval-notice.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-change-list.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-collection.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-caop2025-queryables.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-moura-0210.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/dgt-open-data-terms.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeboundary-collection.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeboundary-queryables.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeunit-collection.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-administrativeunit-queryables.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-data-policy.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-encinasola-1166667.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-encinasola-portugal-5679963.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-encinasola-record-page.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-fom-2807-2015.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-legal-notice.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-license-terms.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-openapi.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-rosal-1166698.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-rosal-portugal-5671403.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/http-headers/ign-rosal-record-page.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop-page.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-approval-notice.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-change-list.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-collection.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-caop2025-queryables.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/dgt-open-data-terms.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeboundary-collection.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeboundary-queryables.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeunit-collection.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-administrativeunit-queryables.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-data-policy.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-encinasola-record-page.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-fom-2807-2015.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-legal-notice.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-license-terms.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-openapi.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official/ign-rosal-record-page.body",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/sources/official-capture-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-official-boundaries-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
