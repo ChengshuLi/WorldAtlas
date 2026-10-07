@@ -33,12 +33,29 @@ explicitly and does not describe them as square metres. Unsupported geometry is
 reported rather than silently reinterpreted.
 
 Original multipart members are validated together before clipping or union can
-dissolve an invalid overlap or shared edge. This uses the declared shortest-edge
-longitude domain, including exact ±360-degree comparisons between distinct source
-members. A valid single polygon split at the date line is not mistaken for two
-original members. Disjoint members and valid point contacts remain supported;
-positive overlap of any size and invalid shared-edge contact fail without an area
-waiver. Naive flat-longitude validity is not substituted for this periodic domain.
+dissolve an invalid overlap or shared edge. The shared `canonical_land` entry point
+retains strict original-source semantics, including exact ±360-degree comparisons
+between distinct source members. Its original periodic shared-edge rejection is
+unchanged.
+
+The trusted prepared-footprint consumer explicitly uses
+`worldatlas-prepared-antimeridian-cut-v1` through `canonical_prepared_land`.
+GeoJSON may represent one feature footprint as pieces cut at opposing ±180 edges
+(RFC 7946 §3.1.9). In this declared representation domain, a periodic contact is
+permitted only when its entire intersection lies exactly on a world seam, the
+members occupy opposing sides and their interiors do not intersect. There is no
+near-seam tolerance or geographic ID exception. Every member and the unshifted
+short-edge combination must still be valid before clipping or union; positive
+overlap of any size, real non-seam shared edges and mixed defects remain errors.
+Disjoint members and valid point contacts remain supported. Naive flat-longitude
+validity is not substituted for the short-edge method.
+
+The consumer configuration is committed code, not feature metadata or a source
+approval. Differential reports bind the same prepared domain to both complete
+immutable inventories, their containing-file descriptors, release/hierarchy pins,
+feature counts and sorted identity/geometry hashes. Unknown or altered bindings
+fail closed. This representation decision changes no stored location pointset and
+does not certify source authority, historical preparation, water or ownership.
 Baseline defects remain explicit, even if the candidate corrects the defect:
 invalid baseline geometry cannot certify the differential comparison.
 

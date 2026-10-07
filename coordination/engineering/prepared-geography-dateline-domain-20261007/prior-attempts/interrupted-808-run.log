@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/prepared-geography-dateline-domain-20261007/producer.py", line 236, in <module>
+    run(args.code_commit, args.out)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/prepared-geography-dateline-domain-20261007/producer.py", line 155, in run
+    'gb:RUS:ADM2': json.loads(baseline.read(config['source_files'][1]['path']))['features']}
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/prepared-geography-dateline-domain-20261007/verify.py", line 121, in <module>
+    args=parser.parse_args();print(json.dumps(verify(Path(args.run_one),Path(args.run_two),args.science_commit,args.reader_commit),sort_keys=True))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/prepared-geography-dateline-domain-20261007/verify.py", line 105, in verify
+    if row!=p.validate_feature(feature,path,ordinal):raise ValueError('Complete exceptional-feature method replay differs')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Complete exceptional-feature method replay differs

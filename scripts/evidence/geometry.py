@@ -17,6 +17,7 @@ METHOD = {'version': VERSION, 'axis_order': 'longitude-latitude', 'crs': 'EPSG:4
           'area_method': 'WGS84 straight-source-edge ellipsoidal integral',
           'area_units': 'm2', 'distance_method': 'WGS84 inverse geodesic', 'distance_units': 'm'}
 GEOD = Geod(ellps='WGS84')
+PREPARED_DOMAIN = 'worldatlas-prepared-antimeridian-cut-v1'
 
 
 def point(lon, lat):
@@ -52,7 +53,31 @@ def _unwrap(ring):
     return result
 
 
-def _validate_multipart(polygons):
+def _prepared_seam_contact(a, b):
+    """Observe an exact representation seam, without repairing either member."""
+    if not a.is_valid or not b.is_valid:
+        from shapely.geometry import mapping
+        error = ValueError('Invalid actually translated prepared member; seam exception cannot repair it')
+        error.invalid_translated_members = [mapping(a), mapping(b)]
+        raise error
+    if not a.relate_pattern(b, 'F********'):
+        return None
+    contact = a.intersection(b)
+    if contact.is_empty or contact.area != 0:
+        return None
+    west, _, east, _ = contact.bounds
+    if west != east or west not in (-180, 180):
+        return None
+    seam = west
+    opposing = (a.bounds[2] == seam == b.bounds[0]
+                or b.bounds[2] == seam == a.bounds[0])
+    if not opposing:
+        return None
+    # Complete bounds, not a sampled vertex, bind every contact to the seam.
+    return contact
+
+
+def _validate_multipart(polygons, *, prepared=False, seam_contacts=None):
     """Check original members in the declared periodic short-edge domain.
 
     Clipping a single valid member at the date line creates artificial pieces.
@@ -75,12 +100,20 @@ def _validate_multipart(polygons):
                     continue
                 pair = MultiPolygon([shifted, polygons[other]])
                 if not pair.is_valid:
+                    contact = _prepared_seam_contact(shifted, polygons[other]) if prepared else None
+                    if contact is not None:
+                        if seam_contacts is not None:
+                            from shapely.geometry import mapping
+                            seam_contacts.append({'member': index, 'other_member': other,
+                                                  'longitude_shift': shift,
+                                                  'contact_geometry': mapping(contact)})
+                        continue
                     raise ValueError('Invalid original periodic multipart topology between members '
                                      f'{index} and {other}, longitude shift {shift}: '
                                      + explain_validity(pair))
 
 
-def canonical_land(geometry):
+def _canonical_land(geometry, *, prepared=False, seam_contacts=None):
     if geometry.is_empty or geometry.geom_type not in ('Polygon', 'MultiPolygon'):
         raise ValueError('Expected nonempty Polygon or MultiPolygon land')
     polygons = []
@@ -99,7 +132,7 @@ def canonical_land(geometry):
         if east - west >= 180 or north - south > 120:
             raise ValueError('Hemisphere-scale land exceeds v1 method scope; subdivide with reviewed evidence')
         polygons.append(q)
-    _validate_multipart(polygons)
+    _validate_multipart(polygons, prepared=prepared, seam_contacts=seam_contacts)
     pieces = []
     for q in polygons:
         west, south, east, north = q.bounds
@@ -111,6 +144,21 @@ def canonical_land(geometry):
     if result.is_empty or not result.is_valid or area(result) <= 0:
         raise ValueError('Land has no valid positive-area footprint')
     return result
+
+
+def canonical_land(geometry):
+    """Strict original-source member topology; representation is not inferred."""
+    return _canonical_land(geometry)
+
+
+def canonical_prepared_land(geometry, *, seam_contacts=None):
+    """Committed prepared-footprint consumer domain, never feature metadata.
+
+    A GeoJSON feature may carry antimeridian-cut pieces of one footprint.
+    Exact opposing world-seam contacts are representation edges in this domain.
+    Original source validation retains canonical_land's strict default.
+    """
+    return _canonical_land(geometry, prepared=True, seam_contacts=seam_contacts)
 
 
 def land_area_m2(geometry):

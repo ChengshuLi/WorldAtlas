@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/prepared-geography-dateline-domain-20261007/record-controls.py", line 32, in <module>
+    if expected not in raw:raise ValueError('Unexpected actual test count: '+name)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unexpected actual test count: actual-controls-03.log
