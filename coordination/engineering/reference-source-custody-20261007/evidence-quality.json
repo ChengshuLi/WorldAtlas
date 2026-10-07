@@ -1,0 +1,1104 @@
+{
+  "baseline": {
+    "commit": "15025282de755d631024211687f036751fba963d",
+    "files": [
+      {
+        "bytes": 1953,
+        "hash_kind": "file-bytes",
+        "path": "scripts/ellipsoidal_area.py",
+        "role": "original-source",
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+      },
+      {
+        "bytes": 3114,
+        "hash_kind": "file-bytes",
+        "path": "scripts/majority.py",
+        "role": "original-source",
+        "sha256": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405"
+      },
+      {
+        "bytes": 28797,
+        "hash_kind": "file-bytes",
+        "path": "scripts/prepare-ownership-incremental.py",
+        "role": "original-source",
+        "sha256": "31ea705a96a09ed3a2ced8081434c4d2b25557c14c473c6bd77adf29704047e9"
+      },
+      {
+        "bytes": 7337,
+        "hash_kind": "file-bytes",
+        "path": "scripts/prepare-reference-attributes.py",
+        "role": "original-source",
+        "sha256": "c8c6d07ef35fba885aee82cdd94cc843391cceb93cf8b33b28ff81276ad0bbf0"
+      },
+      {
+        "bytes": 19226,
+        "hash_kind": "file-bytes",
+        "path": "scripts/prepare-reference-incremental.py",
+        "role": "original-source",
+        "sha256": "6ce34552eb53fa952d17c999149caa7c3079f259a51e6d05b248c6b49a8dc7db"
+      },
+      {
+        "bytes": 9103,
+        "hash_kind": "file-bytes",
+        "path": "scripts/prepare-topography.py",
+        "role": "original-source",
+        "sha256": "7ede54bcab629331d125439dcfc661dc5d5229e8a9441a59d4ecbfa1cdd45553"
+      },
+      {
+        "bytes": 14208,
+        "hash_kind": "file-bytes",
+        "path": "scripts/recheck-vegetation.py",
+        "role": "original-source",
+        "sha256": "de561a964ed228032b0643280eef18ca7f29b811765a3ba5178865572f6c0f55"
+      }
+    ],
+    "pin_files": {
+      "ellipsoidal_area": "scripts/ellipsoidal_area.py",
+      "majority": "scripts/majority.py",
+      "prepare_ownership_incremental": "scripts/prepare-ownership-incremental.py",
+      "prepare_reference_attributes": "scripts/prepare-reference-attributes.py",
+      "prepare_reference_incremental": "scripts/prepare-reference-incremental.py",
+      "prepare_topography": "scripts/prepare-topography.py",
+      "recheck_vegetation": "scripts/recheck-vegetation.py"
+    },
+    "pins": {
+      "ellipsoidal_area": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "majority": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405",
+      "prepare_ownership_incremental": "31ea705a96a09ed3a2ced8081434c4d2b25557c14c473c6bd77adf29704047e9",
+      "prepare_reference_attributes": "c8c6d07ef35fba885aee82cdd94cc843391cceb93cf8b33b28ff81276ad0bbf0",
+      "prepare_reference_incremental": "6ce34552eb53fa952d17c999149caa7c3079f259a51e6d05b248c6b49a8dc7db",
+      "prepare_topography": "7ede54bcab629331d125439dcfc661dc5d5229e8a9441a59d4ecbfa1cdd45553",
+      "recheck_vegetation": "de561a964ed228032b0643280eef18ca7f29b811765a3ba5178865572f6c0f55"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/custody.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/input-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/evidence-immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/ellipsoidal_area.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/majority.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-ownership-incremental.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-reference-attributes.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-reference-incremental.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-topography.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/recheck-vegetation.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/members/1901_1930/koppen_geiger_0p00833333.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/members/1931_1960/koppen_geiger_0p00833333.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/members/1961_1990/koppen_geiger_0p00833333.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/members/1991_2020/koppen_geiger_0p00833333.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/original-reference-index.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-001.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-002.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-003.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-004.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-005.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-006.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-007.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-008.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-009.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-010.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-011.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-012.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-013.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-014.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-015.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-001.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-002.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-003.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-001.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-002.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-003.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-004.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-005.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-006.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-007.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/prior-failed-attempts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/producer.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/proposed-read-accounting.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/reader-control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/run-one/execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/run-one/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/run-two/execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/run-two/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-001.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-002.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-003.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime-control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/zip-lazy-import-preflight.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/reference-source-custody-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "Pinned Python producer.py --commit135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d --source-map COMPLETE_ORIGINAL_SOURCE_MAP --output FRESH_OWN_CACHE",
+    "Pinned Python controls.py; pinned Python runtime-controls.py"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "complete-original-reference-source-custody"
+      ],
+      "status": "supported",
+      "text": "Two complete authentic frozen source-proof runs preserve complete whole originals, four whole native climate members, runtime and code custody. Numeric reference recalculation and parent activation remain pending."
+    },
+    {
+      "source_ids": [
+        "complete-original-reference-source-custody"
+      ],
+      "status": "unresolved",
+      "text": "Source fitness, authority, dates beyond original metadata, reference14 calculations, all unaffected-record comparison and parent offline/production activation are not approved by this source custody delivery."
+    }
+  ],
+  "issue": 1364,
+  "lane": "engineering",
+  "methods": [
+    {
+      "description": "Reviewed equivalent job-local exact whole-byte fragment/custody reader, flat unique ordinary encoded admission and literal unchanged source_proof; no native numeric calculation",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "literal-reference-source-custody",
+      "kind": "generator",
+      "software": "Pinned Python3.12.14 and all actual loaded-file/callable bindings in runtime-plan.json",
+      "units": "whole bytes, CRC and SHA"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/complete_original_objects",
+      "metric_id": "complete_original_objects",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    },
+    {
+      "json_pointer": "/complete_climate_members",
+      "metric_id": "complete_climate_members",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    },
+    {
+      "json_pointer": "/runtime_whole_bodies",
+      "metric_id": "runtime_whole_bodies",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    },
+    {
+      "json_pointer": "/wire_payload_files",
+      "metric_id": "wire_payload_files",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    },
+    {
+      "json_pointer": "/wire_payload_bytes",
+      "metric_id": "wire_payload_bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    },
+    {
+      "json_pointer": "/two_complete_sourceproof_runs",
+      "metric_id": "two_complete_sourceproof_runs",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    },
+    {
+      "json_pointer": "/raw_original_bytes",
+      "metric_id": "raw_original_bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    },
+    {
+      "json_pointer": "/native_calculation_performed",
+      "metric_id": "native_calculation_performed",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "complete_original_objects",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "count",
+      "value": 3,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "complete_climate_members",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "count",
+      "value": 4,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "runtime_whole_bodies",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "count",
+      "value": 332,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "wire_payload_files",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "files",
+      "value": 36,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "wire_payload_bytes",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "bytes",
+      "value": 263683133,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "two_complete_sourceproof_runs",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "count",
+      "value": 2,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "raw_original_bytes",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "bytes",
+      "value": 225796375,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "135c451e2f9600336d0b1aad70fc9e2c0aa1fa4d",
+      "id": "native_calculation_performed",
+      "input_sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143",
+      "unit": "count",
+      "value": 0,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 3065,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/README.md",
+      "role": "complete-code-or-evidence",
+      "sha256": "de31d1be6e7fc8d884e3b2da77f5d702f34b08ed2502dca814e6229992afae7d"
+    },
+    {
+      "bytes": 7351,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/controls.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "fd3f517500502858ca989765da3a321b2c0a23a61f303500bed9beeb8088c6a7"
+    },
+    {
+      "bytes": 8802,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/custody.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "cc404943d666a9da071d0e20414b24add8414c2501d75f413ecf6af9a616b57c"
+    },
+    {
+      "bytes": 20511,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/input-plan.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "39a4fbd23a8c29ed0e5688b5c6173ab872d18f767c81699bc2c2e9e2eb29c150"
+    },
+    {
+      "bytes": 17414,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/evidence-immutable.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    {
+      "bytes": 1953,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/ellipsoidal_area.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "bytes": 3114,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/majority.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405"
+    },
+    {
+      "bytes": 28797,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-ownership-incremental.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "31ea705a96a09ed3a2ced8081434c4d2b25557c14c473c6bd77adf29704047e9"
+    },
+    {
+      "bytes": 7337,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-reference-attributes.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "c8c6d07ef35fba885aee82cdd94cc843391cceb93cf8b33b28ff81276ad0bbf0"
+    },
+    {
+      "bytes": 19226,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-reference-incremental.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "6ce34552eb53fa952d17c999149caa7c3079f259a51e6d05b248c6b49a8dc7db"
+    },
+    {
+      "bytes": 9103,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/prepare-topography.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "7ede54bcab629331d125439dcfc661dc5d5229e8a9441a59d4ecbfa1cdd45553"
+    },
+    {
+      "bytes": 14208,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/literal/scripts/recheck-vegetation.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "de561a964ed228032b0643280eef18ca7f29b811765a3ba5178865572f6c0f55"
+    },
+    {
+      "bytes": 482,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/negative-control.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "bbf9274f9dd8ae98926abae94508eab78d66d41831bd7da4050d685c86dade0a"
+    },
+    {
+      "bytes": 36611,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/original-reference-index.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "9080c5332c4e05798bb66a3ea9470180444878267ed5c1fab195452452fef69f"
+    },
+    {
+      "bytes": 482,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/positive-control.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "7eb06a30d1ad36896cbc26aa5cc78756f71725e28c0d1fa2918592c748a7bc01"
+    },
+    {
+      "bytes": 834,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/prior-failed-attempts.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "3d02d8d5ce2b12e95f49ed87c021818860d26a5b2c48ba030f3fc9a359d3d775"
+    },
+    {
+      "bytes": 13227,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/producer.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "f9d7053a29687bb1c427a18b25eadf5f2eccd59ee3d87dd32011495a874bc3ac"
+    },
+    {
+      "bytes": 20509,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/proposed-read-accounting.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "9127f7a0ef71de48a453da2aa6af81e9698e7a8229e61e0cd93a7ee9083a3ff1"
+    },
+    {
+      "bytes": 893,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/reader-control-results.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "c13a832f31ed4e6cd0844fb2e16e3f66c5b517b7ddc13736879616a8fe8efcd6"
+    },
+    {
+      "bytes": 10582,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/reproducibility.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "c85868b7a97bfd03f77128bb9ca106efdf99f7de7118025630eff76e6f8d504e"
+    },
+    {
+      "bytes": 274,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/results.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "74081baa0e8ba5196da5eaf147415ecceaaebb6c71d59cfeb4872b0946bf2143"
+    },
+    {
+      "bytes": 115609,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/run-one/execution.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "ae0693350a77bb7af7068eb30e04986aefa7819a7426eadce106a140407832d6"
+    },
+    {
+      "bytes": 225672,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/run-one/report.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "f0eb817300fb1c48c4e9369826abc79caa963b6fa66dff1434689802cbb5ee39"
+    },
+    {
+      "bytes": 115609,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/run-two/execution.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "d83fc843f28ed540f962a85135b942087ac78fe456577164110b1fc1cb312dba"
+    },
+    {
+      "bytes": 225672,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/run-two/report.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "f0eb817300fb1c48c4e9369826abc79caa963b6fa66dff1434689802cbb5ee39"
+    },
+    {
+      "bytes": 1142,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime-control-results.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "1856a45792dca5e40685fd4bebc7e643d3eda9d81e5c452aea2ad312cdbc373a"
+    },
+    {
+      "bytes": 2439,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime-controls.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "50ff4d53452ad4bc476ae1689b35b88e6c453d1ab1545e664290d414888a2b81"
+    },
+    {
+      "bytes": 201792,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime-plan.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "172d57ae39a560776a22103804d41862e54ab74d4b3ece7a95521ebad4a6767f"
+    },
+    {
+      "bytes": 6754,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/runtime.py",
+      "role": "complete-code-or-evidence",
+      "sha256": "950227d4ca6df6a689551950550a3a8a878e3ce9096db535a7cc379bba7a0e4c"
+    },
+    {
+      "bytes": 15539,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/reference-source-custody-20261007/zip-lazy-import-preflight.json",
+      "role": "complete-code-or-evidence",
+      "sha256": "3c10d6b2112880d25f05a96a06c4e47142c237ee6cef13c17d09844b3c52916b"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 12549418,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/members/1901_1930/koppen_geiger_0p00833333.tif",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "bcce8f83c6c850a34705ff49dbbeb19baae2a409ca2492e18e30ace1786893ef"
+        },
+        {
+          "bytes": 12634493,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/members/1931_1960/koppen_geiger_0p00833333.tif",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "cc71784dcb61635a4913cb42111bdf98ab7fba3157b5f9f3e297da633f3e33d3"
+        },
+        {
+          "bytes": 12513474,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/members/1961_1990/koppen_geiger_0p00833333.tif",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "ccdc6c70b20a62eb09b9dac715c136c48a7d3721e2fccaf19b52ad282916fefd"
+        },
+        {
+          "bytes": 12494241,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/members/1991_2020/koppen_geiger_0p00833333.tif",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "2130f0071dfb2904947d8ec3a0d807fac71004df76e769262004f1602e4d6a13"
+        },
+        {
+          "bytes": 8372144,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-000.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "d53a32431c1a5664947c9202ac2919a141cbb7ff2face0db7d9cf7a8c1e2b626",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "78ff8a2554ea9bd5a8503d069bd0fa701ff7977df3709789ba6dbde7a5eb0da7"
+        },
+        {
+          "bytes": 8368902,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-001.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "3aafbbfaff3099cae8a02e677d4fdeae1dc8718ee5089be18057739368c31e16",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "a44676359bde9f042f429c434b57f493d2a4a72d4b6ad8860195333b9179d106"
+        },
+        {
+          "bytes": 8372796,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-002.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "7ab0ff21c7e9f30c4c216495bf51942135686885acedcfbcfa2be64379b6a7f2",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "e13932a45f25d02d50b874e4fd3dde12180ae6ee32f3f643458ac214b8af8264"
+        },
+        {
+          "bytes": 8369535,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-003.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "9f3efcea06de105145978618a7492302dc3a0fc235401b47f12de17978b47757",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "af2ba5b00c8a74621043b964099824c183c7584fc51bd8d8fbd6f841c23feec3"
+        },
+        {
+          "bytes": 8372829,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-004.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "96450bd5031733d068708c51b7a2ad218dbb0fe8f93ea9f35350a32cbf5edfd6",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "adc00e066b4ed3d64decc5d156f9e728fc76ed0f29e698cb812f71159c659090"
+        },
+        {
+          "bytes": 8363738,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-005.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "45734590cafb3aed1acaf597fe23de92aac95599138d826704115194d018369f",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "a4ceb9c6ec08b87e383a0cdbb26d9b1628c424fe00a48d49c7d6aecfd9c3f831"
+        },
+        {
+          "bytes": 8373324,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-006.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "640dd7b609cae629049eaa9e7ec8561b33a823a0855388f00d5e47704d715ccc",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "c8602d2381b346666ce3c687737163ca21c346d700a72ca9cf8c531f64642b7a"
+        },
+        {
+          "bytes": 8371671,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-007.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "560b4d1f7f82d7cb061da0dc7dbe463b3f0ee4029b7c835ee89a041ed1b63133",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "d523afa85314800ad489635d07deddf44daafe76a67d9f6baa439439ffbacc24"
+        },
+        {
+          "bytes": 8369162,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-008.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "3673901b14fea7653045bc6add94dee7c425786089d3b73d203394aa015f1a75",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "322d4deab7501138a4fc7777580a6cda07b42d1f5cf6edcca7e5cf6d6d694db8"
+        },
+        {
+          "bytes": 8372154,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-009.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "f3132b70af95326d35f83ecd79f312b16d037b3cc3f82cd87752fa4dbdb2bbde",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "ed94ebef32de06ae5de767ca273c967c233ce7bad48603ebc8f9d5cdfb036b11"
+        },
+        {
+          "bytes": 8370252,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-010.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "a44c678fcd0db2cd2bcea7a5d4ae08ab94322d6e7e8ba594a917d107b3a5836d",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "0bbaa8a01bfac300eb362529d1973ef2562311d3f33eaec7e56b2493b8b55f74"
+        },
+        {
+          "bytes": 8368932,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-011.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "dc75f6ac3d62b2617465a5e18cf95d816603a9f076435b67efb69c8c5837bc96",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "da69313b1ffb90bb783d11cf3b871609f548d6108278dd9ec1994a8787eb389d"
+        },
+        {
+          "bytes": 8367096,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-012.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "e3c4a6b114673aae57e9f43d04a28ea394c41709730b0e603686584381f568d5",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "5047dedb47e3f5387fd671ac1d485b336dbb44d85b5b1d7a24627b3fb1006f6d"
+        },
+        {
+          "bytes": 8370003,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-013.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "f43d76b97628b1007efc42f24baa0f9278312baaacc9b2ee39184313d5c7757d",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "1487f3429cdee15c8a7f7e1c9ad5a1cf3fa7d860cefb884401aefeffaa55370b"
+        },
+        {
+          "bytes": 8370901,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-014.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "70a1ed75eee93195985dcd2d2e05b7a0062a0aa0be7b6f7fdeef310268726b71",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "210d1ff8ce99604a75b4689d28faa154f2596c38a7c62c34de93ec00cd84ac93"
+        },
+        {
+          "bytes": 4774484,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/koppen-geiger-v3-original.zip.part-015.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "649bd7d367db4acd9b9c25b227020d5b3fa987b6c07fcbe63e1a9cd965ae3c6d",
+          "uncompressed_bytes": 4789291,
+          "uncompressed_sha256": "632db12d8e8a00ac12bfeea5ff2b3ebf1f144826ddab55d18aa0a27f2454564b"
+        },
+        {
+          "bytes": 2770087,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-000.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "d0828d9ab713355af97fdd6beff6154e19ded491a9221d1df875e54f575514be",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "954e01cad1c14c0edb12b2b18140db9f991c775a34bcaf5060c662458ff9f52e"
+        },
+        {
+          "bytes": 2606176,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-001.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "2e7b5c598f1629acd578ef00cbae933b597f56543fa6728e954187e371c3a460",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "583d89ecee5016131cdb681e37e3c5f66424117f096ca76b5ce678d6a4efd8bc"
+        },
+        {
+          "bytes": 2775630,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-002.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "369f005549dfde66e6871e8e5aafcfc28a95f376a49316ec1dd3e073530774ce",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "3ecb1e9fb6b90bcf728bc1d8f11190f9a867101a5ba4baff912eaad45825c5ed"
+        },
+        {
+          "bytes": 2594673,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/resolve-original.geojson.part-003.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "b7d31d1eac6138d6b9f286b95caf8dcf4ac1443cabdfa87e3e620fdc8dfa3ea5",
+          "uncompressed_bytes": 8031374,
+          "uncompressed_sha256": "d9eb1065df361ab26057e0ecee53919c9d0fdb5ae0f84f098b95644d6425ee81"
+        },
+        {
+          "bytes": 8225593,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-000.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "b24976501bdec9e3a6590f7bceeb98a279e404f2415a723de5a70607f998ce23",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "c48b0be1eacb4bba24dfd9d259d049a4e444cbb81e0853e5a23586dadbd9a740"
+        },
+        {
+          "bytes": 8367906,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-001.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "313a84c54b61972494fc4584df3b4fabb4cc9fc02f96b7e5ad24b97564d26750",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "4ce9ce2164ba816010e1b249440df69b106151ce6abe1a35c1604d45f5db88f2"
+        },
+        {
+          "bytes": 8340429,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-002.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "f6702c69cbf291a4d36726057f8281d8cd029beccf17d77f9d9d91bd69334fa0",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "70c05ad697120cf0cd89c82f12d44d0331ae8f4037fd8396d720d4bdbc94113e"
+        },
+        {
+          "bytes": 8306839,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-003.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "2df7c86e9ab83b989bc0934112e7b9693f2e90ccef2b9451eca408376a6e1a2b",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "ad28d2ee77d26afe49e209b6dba6ad54ac02a89bdda5fa04d574587ca4c43fb9"
+        },
+        {
+          "bytes": 8253392,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-004.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "76e0d82237d45d73400ef4114843082020c9b9ef66c96bf5d42671b346499aea",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "3d1aced0331cbf6894ca95f11b2fb077b12a2d07dd7debff0528347a2ace535d"
+        },
+        {
+          "bytes": 8181552,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-005.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "4342f2bb2e53526087e0d0aaac95ca9446def5f72fe312cd947bd79c44f1c787",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "f1f0489ea3c0bc284720eb2579a7820a91523135f31ecb8093277926b5a1682f"
+        },
+        {
+          "bytes": 8159446,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-006.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "1943a2c6aa5d89b65effe762e6ea883c63d70bd81f3b8bf2da69dcfc45e4c01b",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "7be1a4cd6e07788e414791e3ea3730548e5e32df9c3b942c82320a088e361de6"
+        },
+        {
+          "bytes": 2995957,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/originals/terrain-original.tif.part-007.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "529267f41e4c5c2d5126d336ed9492f5c5c1d6003c250c501a9fe0de5b6d9476",
+          "uncompressed_bytes": 3260510,
+          "uncompressed_sha256": "7f09dcd3d405f96e63f95e9123aec2f47ff50f3077a6865b6348f6416aa81563"
+        },
+        {
+          "bytes": 3991991,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-000.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "3cc8deffbdb18307fa526f101c9e638a4d8454abf6da2b8dcac2706d41806215",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "b99d3b4090c19b25a5eacf1c8f317e507f77efadf2e8b2d6afbc70b0ee01745c"
+        },
+        {
+          "bytes": 3047930,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-001.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "85c65e2e84b96bb7ed92f9ffea2ae21c454ad349c9d2fc4108cad09c6816e7a5",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "38536c65dac51954c3fb70ba39caf21dcb69ee2f1c7605cfb540d74549d706a3"
+        },
+        {
+          "bytes": 2277378,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-002.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "250eb1efa1483b30a3a105dcfaccd0d5f0207fe3b875091f908b383fb276d61a",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "4638edc4f272f1776bc5eed5274cfb066a6d15b94c41ea46799e9ce6d8169188"
+        },
+        {
+          "bytes": 2268605,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/reference-source-custody-20261007/runtime/part-003.bin.gz",
+          "role": "whole-source-member-runtime-payload",
+          "sha256": "19cc683ecb5c84aa39a0ce47f74d392a758a916166379212b25185050b0ed0fc",
+          "uncompressed_bytes": 7924851,
+          "uncompressed_sha256": "23cb0e437e8ea42da51b0d21e031e1ff4102b488ec9f8e4c5339efcfef8c7466"
+        }
+      ],
+      "id": "complete-original-reference-source-custody",
+      "license": {
+        "status": "redistributable",
+        "terms": "Original retained metadata records CC BY4.0; original upstream citations and unknown retrieval dates remain unchanged, no independent current licence/fitness approval"
+      },
+      "retention": "retained",
+      "retrieved_at": "Original retrieval dates unknown; complete retained bodies authenticated2026-10-07",
+      "role": "Original recorded reference sources, whole member/runtime custody; source role/date/terms retained without semantic approval",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1364",
+      "verification": "unverified",
+      "vintage": "Original captured Beck2023 normals, RESOLVE2017 potential vegetation and modern EarthEnv/GMTED reference"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "not-requested",
+    "implementation": "implemented",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "atlas:physical:CAN-103:QUE",
+    "atlas:physical:CAN-114:NFL"
+  ],
+  "subject_ids_sha256": "0dd4ac233a43f039327650df718f0d3aeb15f4b4eb0efb7dfe26bca8499b1bff",
+  "summaries": [
+    {
+      "metric_id": "complete_original_objects",
+      "unit": "count",
+      "value": 3
+    },
+    {
+      "metric_id": "complete_climate_members",
+      "unit": "count",
+      "value": 4
+    },
+    {
+      "metric_id": "runtime_whole_bodies",
+      "unit": "count",
+      "value": 332
+    },
+    {
+      "metric_id": "wire_payload_files",
+      "unit": "files",
+      "value": 36
+    },
+    {
+      "metric_id": "wire_payload_bytes",
+      "unit": "bytes",
+      "value": 263683133
+    },
+    {
+      "metric_id": "two_complete_sourceproof_runs",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "metric_id": "raw_original_bytes",
+      "unit": "bytes",
+      "value": 225796375
+    },
+    {
+      "metric_id": "native_calculation_performed",
+      "unit": "count",
+      "value": 0
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/reference-source-custody-20261007/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "literal-reference-source-custody",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/reference-source-custody-20261007/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "literal-reference-source-custody",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/reference-source-custody-20261007/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "literal-reference-source-custody",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a112b0-39fb-7f02-a3c7-d21d0916009f"
+}
