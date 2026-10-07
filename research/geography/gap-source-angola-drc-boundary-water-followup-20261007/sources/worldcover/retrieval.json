@@ -1,0 +1,65 @@
+{
+  "attribution": "© ESA WorldCover project [year] / Contains modified Copernicus Sentinel data ([year]) processed by ESA WorldCover consortium",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "statement": "ESA WorldCover states the products are provided free of charge without restriction of use under Creative Commons Attribution 4.0 International; use required attribution below."
+  },
+  "method": "Complete unauthenticated HTTPS GET of each exact versioned Cloud-Optimized GeoTIFF object; files are preserved whole, without crop or resampling.",
+  "references": [
+    "https://esa-worldcover.org/en/data-access",
+    "https://doi.org/10.5281/zenodo.5571936",
+    "https://doi.org/10.5281/zenodo.7254221"
+  ],
+  "retrieved_utc_date": "2026-10-07",
+  "tiles": [
+    {
+      "algorithm": "v100",
+      "bytes": 103919999,
+      "etag": "\"e9aabd9f26b36088b7dbf1bb9e2e341d-13\"",
+      "http_status": 200,
+      "last_modified": "Tue, 25 Oct 2022 13:42:10 GMT",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/worldcover/v100-2020-S09E015.tif",
+      "sha256": "868452e91ababb6602aff3b240a52e49dbcd66da802ae04051ca02fcfc852594",
+      "tile": "S09E015",
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S09E015_Map.tif",
+      "year": 2020
+    },
+    {
+      "algorithm": "v100",
+      "bytes": 106525748,
+      "etag": "\"2a5693a66808ddb42434beda1d99a0d3-13\"",
+      "http_status": 200,
+      "last_modified": "Tue, 25 Oct 2022 13:42:10 GMT",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/worldcover/v100-2020-S09E018.tif",
+      "sha256": "e75aa2f0246607d5bd8da486443292ba63367917fad4e13faedb9aa70e63ff00",
+      "tile": "S09E018",
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_S09E018_Map.tif",
+      "year": 2020
+    },
+    {
+      "algorithm": "v200",
+      "bytes": 105892989,
+      "etag": "\"f0db6b639bfc1e2826dcce73041c4abe-13\"",
+      "http_status": 200,
+      "last_modified": "Wed, 26 Oct 2022 12:46:54 GMT",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/worldcover/v200-2021-S09E015.tif",
+      "sha256": "6033c776f2b66117f15b563aa0429a8afb9f6c993da15740ff949b814081e611",
+      "tile": "S09E015",
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S09E015_Map.tif",
+      "year": 2021
+    },
+    {
+      "algorithm": "v200",
+      "bytes": 104169416,
+      "etag": "\"3a8aae27e4f511ee8c4498b8d20cdcd5-13\"",
+      "http_status": 200,
+      "last_modified": "Wed, 26 Oct 2022 12:46:50 GMT",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/worldcover/v200-2021-S09E018.tif",
+      "sha256": "5f0e07b325e5a5ed8e7a372fa7c38472d3395b93f39cf9bace9999fe8727f68f",
+      "tile": "S09E018",
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S09E018_Map.tif",
+      "year": 2021
+    }
+  ],
+  "version": "direct-esa-worldcover-public-s3-retrieval-v1"
+}

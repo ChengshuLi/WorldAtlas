@@ -1,0 +1,60 @@
+{
+  "collection": "sentinel-2-l2a",
+  "dataset_license_metadata_caveat": "Earth Search STAC collection reports license as proprietary; original Copernicus Sentinel data legal notice states free/full/open use, with attribution. The SCL JP2 objects were fetched from the public Sentinel-2 L2A AWS Open Data bucket, not derived COG assets.",
+  "limitations": [
+    "SCL is a single-scene 20m product label; it is not ground truth or a full-feature water/no-water decision.",
+    "Scene dates differ and are not interpreted as a time series.",
+    "SCL class 2 is treated as unknown across processing baselines."
+  ],
+  "method": "The top returned low-cloud item per exact component search that covered the full component geometry was selected, then checked against native SCL grid coverage. Full raw SCL JP2 files retained.",
+  "retrieval_version": "sentinel-2-native-scl-retrieval-v1",
+  "scl_sources": [
+    {
+      "bytes": 454593,
+      "etag": "\"bf806d55dfd021a263fed7a7da26783c\"",
+      "last_modified": "2026-05-25T16:43:13Z",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_33MZM_20260525_0_L2A-SCL-20m.jp2",
+      "resolution_m": 20,
+      "scene_id": "S2A_33MZM_20260525_0_L2A",
+      "sha256": "c0c438d26c8853139f7d633a85cf0585694d4c85e655154dc47c1fbc5bbd9fc1",
+      "url": "https://sentinel-s2-l2a.s3.eu-central-1.amazonaws.com/tiles/33/M/ZM/2026/5/25/0/R20m/SCL.jp2"
+    },
+    {
+      "bytes": 1450265,
+      "etag": "\"2586c62d57fd4d346a8377aa2fc02a95\"",
+      "last_modified": "2023-09-05T17:58:26Z",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_34MBS_20200812_1_L2A-SCL-20m.jp2",
+      "resolution_m": 20,
+      "scene_id": "S2A_34MBS_20200812_1_L2A",
+      "sha256": "fb0c1db754eb5e8bced38b00585fa49253704889211e09d15b0f24159fdc6238",
+      "url": "https://sentinel-s2-l2a.s3.eu-central-1.amazonaws.com/tiles/34/M/BS/2020/8/12/1/R20m/SCL.jp2"
+    },
+    {
+      "bytes": 687454,
+      "etag": "\"cf3b025d39dc1f43c1909970d479a0d0\"",
+      "last_modified": "2026-09-02T16:45:29Z",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_34MCS_20260902_1_L2A-SCL-20m.jp2",
+      "resolution_m": 20,
+      "scene_id": "S2A_34MCS_20260902_1_L2A",
+      "sha256": "abb5485eb3c8058e9474c73d064156a96f025285cead29c532c67c30a2c4b6f6",
+      "url": "https://sentinel-s2-l2a.s3.eu-central-1.amazonaws.com/tiles/34/M/CS/2026/9/2/1/R20m/SCL.jp2"
+    },
+    {
+      "bytes": 3353755,
+      "etag": "\"97ae84e4af0c05dee85ef61487d89d52\"",
+      "last_modified": "2026-07-27T14:04:59Z",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2B_33MYM_20260727_0_L2A-SCL-20m.jp2",
+      "resolution_m": 20,
+      "scene_id": "S2B_33MYM_20260727_0_L2A",
+      "sha256": "523b0bdd8e632efb66106aa9d3a33942294f9a6706a9a16cdae5dba11fa35f7f",
+      "url": "https://sentinel-s2-l2a.s3.eu-central-1.amazonaws.com/tiles/33/M/YM/2026/7/27/0/R20m/SCL.jp2"
+    }
+  ],
+  "source_api": "https://earth-search.aws.element84.com/v1",
+  "terms": {
+    "attribution": "Copernicus Sentinel data [year]",
+    "aws_registry": "https://registry.opendata.aws/sentinel-2/",
+    "copernicus_legal_notice": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "specification": "https://sentinels.copernicus.eu/documents/d/sentinel/s2-pdgs-cs-di-psd-v15-0"
+  }
+}
