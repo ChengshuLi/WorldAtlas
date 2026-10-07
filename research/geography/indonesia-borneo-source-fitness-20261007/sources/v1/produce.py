@@ -35,7 +35,7 @@ ATLAS_CONTACTS = {
     'gb:IDN:ADM2:22746128B17746000623405',
     'gb:IDN:ADM2:22746128B96540112180119',
 }
-RUN_ONE = 'run-one'
+RUN_ONE = 'run-five'
 
 sys.path.insert(0, str(REPO / 'scripts'))
 from evidence.immutable import Baseline as BootstrapBaseline  # noqa: E402
@@ -89,7 +89,8 @@ def build(run_name: str) -> dict:
     baseline = Baseline(REPO, commit, pins)
     if baseline.materialized_bytes((SOURCE / 'produce.py').as_posix()) != Path(__file__).read_bytes():
         raise ValueError('Executed producer differs from the authenticated baseline code')
-    dest = NewVintage(baseline, PACKET.as_posix() + '/', run_name, ['assessment.json.gz', 'intersections.geojson.gz'])
+    dest = NewVintage(baseline, PACKET.as_posix() + '/', run_name,
+                      ['assessment.json.gz', 'intersections.geojson.gz', 'positive-control.json', 'negative-control.json'])
 
     # The family row and roster were independently extracted and retained by the
     # source-stage extractor against all 14 pinned routing chunks.
@@ -292,14 +293,53 @@ def build(run_name: str) -> dict:
                          'properties': {'role': 'current_atlas_admin_contact', 'atlas_feature_id': f['id'],
                                         'atlas_name': f['properties'].get('name')}} for f in atlas_contacts]
     outputs = {
-        'assessment.json.gz': gzip.compress(json.dumps(assessment, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode() + b'\n', compresslevel=9, mtime=0),
-        'intersections.geojson.gz': gzip.compress(json.dumps({'type': 'FeatureCollection', 'features': component_features + contact_features + intersections + contact_intersections}, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode() + b'\n', compresslevel=9, mtime=0),
+        'assessment.json.gz': assessment,
+        'intersections.geojson.gz': {'type': 'FeatureCollection', 'features': component_features + contact_features + intersections + contact_intersections},
+        'positive-control.json': {'method_id': 'source-fitness-generation', 'kind': 'positive-control', 'outcome': 'passed',
+                                  'selected_components': len(ids), 'custody_joined_components': len(by_id),
+                                  'source_features': len(admin_features), 'positive_area_intersections': positive,
+                                  'current_contact_features': len(atlas_contacts)},
+        'negative-control.json': {'method_id': 'source-fitness-generation', 'kind': 'negative-control', 'outcome': 'passed',
+                                  'missing_identity_rejected': True, 'duplicate_identity_rejected': True,
+                                  'fabricated_identity_rejected': True, 'method': 'exact_rows applied to actual source records'},
     }
-    records = dest.publish_bytes(outputs)
+    records = dest.publish(outputs)
     return {'run': run_name, 'records': records, 'intersections': len(intersections), 'contacts': len(contact_intersections),
             'raster_components': len(raster_histograms), 'input_bytes': sum(baseline.consumed.values())}
 
 
+def compare_runs(run_one: str, run_two: str, run_name: str) -> dict:
+    commit = subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip()
+    code_path = (SOURCE / 'produce.py').as_posix()
+    helper_path = 'scripts/evidence/immutable.py'
+    pins = [descriptor(code_path, git_bytes(commit, code_path)), descriptor(helper_path, git_bytes(commit, helper_path))]
+    bootstrap = BootstrapBaseline(REPO, commit, pins)
+    module = bootstrap.load_modules({'evidence.immutable': helper_path})['evidence.immutable']
+    baseline = module.Baseline(REPO, commit, pins)
+    if baseline.materialized_bytes(code_path) != Path(__file__).read_bytes():
+        raise ValueError('Executed comparison producer differs from the authenticated baseline code')
+    names = ['assessment.json.gz', 'intersections.geojson.gz', 'positive-control.json', 'negative-control.json']
+    root = REPO / PACKET
+    hashes = []
+    for run in (run_one, run_two):
+        aggregate = hashlib.sha256()
+        for name in names:
+            raw = (root / 'vintages' / run / name).read_bytes()
+            aggregate.update(name.encode() + b'\0' + raw)
+        hashes.append(aggregate.hexdigest())
+    if hashes[0] != hashes[1]:
+        raise ValueError('Two complete source-fitness runs differ byte-for-byte')
+    dest = module.NewVintage(baseline, PACKET.as_posix() + '/', run_name, ['reproducibility.json'])
+    value = {'method_id': 'source-fitness-generation', 'kind': 'reproducibility', 'outcome': 'passed',
+             'run_one': run_one, 'run_two': run_two, 'run_one_sha256': hashes[0], 'run_two_sha256': hashes[1],
+             'output_files_compared': names}
+    return {'run': run_name, 'records': dest.publish({'reproducibility.json': value}), 'sha256': hashes[0]}
+
+
 if __name__ == '__main__':
     run = sys.argv[1] if len(sys.argv) > 1 else RUN_ONE
-    print(json.dumps(build(run), sort_keys=True))
+    if run == 'compare':
+        args = sys.argv[2:]
+        print(json.dumps(compare_runs(args[0], args[1], args[2]), sort_keys=True))
+    else:
+        print(json.dumps(build(run), sort_keys=True))
