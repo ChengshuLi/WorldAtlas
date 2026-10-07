@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "issue": 632,
+  "retrieved": "2026-10-07",
+  "policy": "Official legal/census documents were inspected from their canonical publisher URLs. Original PDF bytes are not redistributed in this packet because no explicit reuse license was located on the inspected documents. Restore from the exact URL and verify the recorded byte count and SHA-256 before reuse.",
+  "sources": [
+    {
+      "source_id": "MDG-LAW-2021-012",
+      "title": "Madagascar Law 2021-012",
+      "url": "https://cnlegis.gov.mg/uploads/L2021-012-VF.pdf",
+      "bytes": 52879,
+      "sha256": "bdb238f48484e8ddaa189c6d29c4be76ed27c2ff8aeb3eead192eda68b592210",
+      "license": "No explicit license located; restore only for research and confirm terms before redistribution.",
+      "inspection": "Promulgated 2021-08-11. Annex assigns Mananjary, Nosy Varika and Ifanadiana to Vatovavy; Manakara, Ikongo and Vohipeno to Fitovinany. It states other commune/fokontany attachments remain unchanged. Article 7 makes effect contingent on radio/television publication or posting; the exact publication/effective date was not established here."
+    },
+    {
+      "source_id": "MDG-LAW-2023-012",
+      "title": "Madagascar Law 2023-012",
+      "url": "https://cnlegis.gov.mg/uploads/L2023-012_VF.pdf",
+      "bytes": 129279,
+      "sha256": "15821ddd4a6012f2c3819baae2d00ae481ddac0cb17e139e10bc48390a9936a0",
+      "license": "No explicit license located; restore only for research and confirm terms before redistribution.",
+      "inspection": "Promulgated 2023-08-11. Creates Ambatosoa from Mananara Nord and Maroantsetra, states other district/commune attachments remain unchanged, and lists 24 regions and 1,695 communes. Article 7 makes effect contingent on radio/television publication or posting; exact publication/effective date was not established here."
+    },
+    {
+      "source_id": "MDG-DECREE-2024-480",
+      "title": "Madagascar Decree 2024-480",
+      "url": "https://cnlegis.gov.mg/uploads/D2024-480-VF.pdf",
+      "bytes": 306676,
+      "sha256": "cc44602d79ef541b65032452be76ebc65d3f8feb652c9c3fce902b65d3204180",
+      "license": "No explicit license located; restore only for research and confirm terms before redistribution.",
+      "inspection": "Dated 2024-03-06. Article 1 schedules Antanimora Sud under Ambovombe prefecture with eight communes: Antanimora Sud, Ampamata, Andalatanosy, Imanombo, Jafaro, Marovato Befeno, Andragnanivo and Andoharano. Article 3 makes effect contingent on radio/television publication; exact publication/effective date was not established here."
+    },
+    {
+      "source_id": "INSTAT-RGPH3-ERRATA-2020",
+      "title": "INSTAT RGPH-3 Definitif errata",
+      "url": "https://www.instat.mg/documents/upload/main/INSTAT_RGPH3-Definitif-Errata_17-2021.pdf",
+      "bytes": 1741885,
+      "sha256": "e8a25573d592d1728bd764351c8e2775d64e847aab811ea76bc8ec8086da6555",
+      "license": "No explicit license located; restore only for research and confirm terms before redistribution.",
+      "inspection": "Inspected pp. 5–6: the page-81 column is explicitly Commune/Arrondissement and the corrected entry is Antanimora Atsimo. This is not district-level census evidence."
+    },
+    {
+      "source_id": "GEOBOUNDARIES-MDG-ADM2-2020",
+      "title": "geoBoundaries gbOpen Madagascar ADM2 reference used by current Atlas features",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved": "Baseline commit b765c34077b6d7c5745c7285f08e954edd62144a; current feature metadata identifies the 2020 reference vintage.",
+      "license": "CC BY 3.0 IGO as recorded in current Atlas feature metadata; attribution applies.",
+      "verification": "The complete current subject features and metadata are pinned as immutable Git blob/file hashes in each reproduction input-pins.json. This is the Atlas input vintage, not an independent current administrative authority.",
+      "limit": "Source release and current Atlas polygons do not establish all present legal boundaries or administrative parent assignments."
+    },
+    {
+      "source_id": "OCHA-HDX-COD-PS-MDG-2018",
+      "title": "OCHA/HDX Madagascar administrative population reference",
+      "url": "https://data.humdata.org/dataset/cod-ps-mdg",
+      "retrieved": "2026-10-03",
+      "license": "CC BY-IGO noted in inherited #482 source registry; upstream terms and attribution apply.",
+      "retained_inputs": "Inherited immutable files and hashes are pinned in each vintage input-pins.json. ADM2/ADM3/ADM4 CSVs contain 119/1,579/17,465 rows. The ADM3 row MG52516130 is Antanimora Atsimo, type Commune, parent ADM2 Ambovombe-Androy MG52516; 41 ADM4 rows carry its ADM3 code.",
+      "limit": "Statistical/administrative code evidence, not polygon geometry or proof of later legal continuity."
+    },
+    {
+      "source_id": "OCHA-HDX-COD-AB-MDG-V01",
+      "title": "OCHA/HDX Madagascar COD-AB source package",
+      "url": "https://data.humdata.org/dataset/cod-ab-mdg",
+      "resource_url": "https://data.humdata.org/dataset/26fa506b-0727-4d9d-a590-d2abee21ee22/resource/4cefb60b-0986-4a91-8186-70ef5730ede6/download/mdg_admin_boundaries.geojson.zip",
+      "license": "CC BY-IGO noted in inherited #482 source registry; attribute and indicate modifications; no endorsement implied.",
+      "retrieved": "2026-10-03",
+      "archive": {"bytes": 81104333, "sha256": "273badc1391c5663ea4dd5878def610b6f0aa7e6a91ef579db23b5692dfa4913", "retained": false},
+      "retained_exact_members": [
+        {"member": "mdg_admin2.geojson", "raw_sha256": "f4a437a737e7b9c71b19db1eb41fc39abd9579aa95505471c6149b06be98c8b9", "gzip_sha256": "a47198ec1307eb1644cec30198e9d4647bb00a67e5a38c3f8bd9537a0ed4f94b"},
+        {"member": "mdg_admin1.geojson", "raw_sha256": "5820a206ddcef5a48385dba8f0eee9f5a23db2927580c7afe109c564f4edc47f", "gzip_sha256": "ed66726d7b60faead0d00cdbf640b94319f58535720d42968c2063072cf912f6"}
+      ],
+      "metadata": "Dataset reviewed 2026-07-06; source boundary creation 2009-08-01; valid_on 2018-08-10; version v01; package modified 2026-08-14. OCHA COD-AB specification defines valid_on as a dataset-version update date, not legal creation/effect date.",
+      "limit": "The declared vintage and geometry do not establish present-day legal boundary authority."
+    },
+    {
+      "source_id": "OCHA-COD-AB-SPEC",
+      "title": "OCHA COD-AB specification",
+      "url": "https://ocha-dap.github.io/hdx-cod-ab-spec/",
+      "retrieved": "2026-10-07",
+      "finding": "valid_on records when the dataset version was last updated; it is not an administrative law effective date."
+    },
+    {
+      "source_id": "INSTAT-ANTANIMORA-2026-04",
+      "title": "INSTAT 21 April 2026 operational notice",
+      "url": "https://www.instat.mg/recrutement/avis-dappel-a-manifestation-dinteret-rsue-fokontany-poste-de-chef-dequipe-amboasary-atsimo-antalaha-antanimora-sud-vatomandry",
+      "retrieved": "2026-10-07",
+      "finding": "Operational notice names Antanimora-Sud with four communes (Ampamata, Imanombo, Jafaro and Andoharano), fewer than Decree 2024-480's eight scheduled communes. Its operational purpose does not repeal the decree or define polygon boundaries; discrepancy unresolved."
+    },
+    {
+      "source_id": "MADAGASCAR-GOV-REGIONS-DISTRICTS-PORTAL",
+      "title": "Madagascar government regions and districts portal",
+      "url": "https://torolalana.gov.mg/fr/services/regions-et-districts/",
+      "retrieved": "2026-10-07",
+      "finding": "Page lists 23 regions/119 districts, separates Vatovavy and Fitovinany, places Mananara Nord and Maroantsetra under Analanjirofo and omits Antanimora. No visible update date; it conflicts with the later laws/decree and is treated as potentially stale, not controlling."
+    },
+    {
+      "source_id": "MAPACTION-AMBOVOMBE-2022",
+      "title": "MapAction Ambovombe-Androy 2022 mapbook",
+      "url": "https://maps.mapaction.org/dataset/cabf8c3e-922a-4dca-8852-7b624bbae5d9/resource/08637b63-0f45-46cd-93df-6a3ad4e0c529/download/ma025-v01-madagascar-series-with-admin-2-and-3-boundaries-mapbook_ambovombe-androy.pdf",
+      "retrieved": "2026-10-07",
+      "role": "Secondary lead only; mapbook states BNGRC, GADM and OSM inputs and depicts Antanimora Atsimo as commune MG52516130 under Ambovombe-Androy.",
+      "limit": "Does not establish legal continuity or polygon identity; exact original BNGRC predecessor bytes/metadata still need restoration."
+    }
+  ]
+}

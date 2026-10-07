@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "issue": 632,
+  "method_id": "madagascar-codab-crosswalk-controls",
+  "outcome": "passed",
+  "positive_source_join": {
+    "name": "Tsihombe",
+    "codab_pcode": "MG52514",
+    "codps_2018_pcode": "MG52514",
+    "current_id": "gb:MDG:ADM2:10022922B95964642483948",
+    "control": "same-name ADM2 source rows join across all three rosters"
+  },
+  "negative_level_control": {
+    "name": "Antanimora Atsimo",
+    "codab_adm2_pcode": "MG52519",
+    "current_adm2_match": false,
+    "codps_adm2_match": false,
+    "codps_adm3_candidate": {
+      "pcode": "MG52516130",
+      "type": "Commune",
+      "parent_pcode": "MG52516"
+    },
+    "control": "same-name ADM3 commune is not silently promoted or joined as ADM2"
+  },
+  "repeat_name_control": {
+    "name": "Ambohimanambola",
+    "codps_adm3_candidates": 2,
+    "control": "duplicate nationwide commune names remain multi-valued"
+  },
+  "coherent_parent_mutation_negative_control": {
+    "commune_name": "Ambohimanambola",
+    "original_parent": "Antananarivo Avaradrano",
+    "original_parent_code": "MG11102",
+    "selected_adm3_pcode": "MG11102050",
+    "mutated_parent": "Betafo",
+    "mutated_parent_code": "MG12109",
+    "selected_adm3_pcode_after_mutation": "MG12109250",
+    "control": "changing an actual source parent name and code coherently changes the unique parent-qualified candidate"
+  },
+  "positive_geometry_control": {
+    "source_area_km2": 1.0,
+    "current_area_km2": 1.0,
+    "intersection_km2": 1.0,
+    "source_overlap_percent": 100.0,
+    "current_overlap_percent": 100.0,
+    "symmetric_difference_percent_of_union": 0.0,
+    "relative_area_change_percent": 0.0,
+    "source_valid_before_ephemeral_repair": true,
+    "current_valid_before_ephemeral_repair": true,
+    "source_valid_after_ephemeral_repair": true,
+    "current_valid_after_ephemeral_repair": true,
+    "repair_used": false
+  },
+  "negative_geometry_control": {
+    "source_area_km2": 1.0,
+    "current_area_km2": 1.0,
+    "intersection_km2": 0.0,
+    "source_overlap_percent": 0.0,
+    "current_overlap_percent": 0.0,
+    "symmetric_difference_percent_of_union": 100.0,
+    "relative_area_change_percent": 0.0,
+    "source_valid_before_ephemeral_repair": true,
+    "current_valid_before_ephemeral_repair": true,
+    "source_valid_after_ephemeral_repair": true,
+    "current_valid_after_ephemeral_repair": true,
+    "repair_used": false
+  },
+  "limitations": [
+    "Synthetic controls exercise metric implementation only, not Madagascar boundaries.",
+    "Source-backed controls verify selected rows and do not prove complete legal history."
+  ]
+}
