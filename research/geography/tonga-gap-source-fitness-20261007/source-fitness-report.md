@@ -14,7 +14,7 @@ The retained geoBoundaries metadata calls the represented year 2017, lists OpenS
 
 ## Bounded geometry comparison
 
-On the exact retained candidate support coordinates, Shapely 2.1.2 planar XY predicates (no reprojection, buffer, repair, or densification) find that the complete Vava’u feature in both simplified and related unsimplified products covers the support pointset. The current Atlas Vava’u contact in `data/geography/part-23.json` intersects only at a boundary: intersection area is zero and it does not cover the candidate. WGS84 ellipsoidal measurement of this bounded support geometry is 2,494.153781838715 m²; all measured support lies outside the current contact and inside the simplified source feature. This differs slightly from the inherited 2,494.141562927083 m² emitted value because the methods/inputs are distinct. The source, unsimplified product, and current contact geometries are not topologically equal.
+On the exact retained candidate support coordinates, Shapely 2.1.2 planar XY predicates (no reprojection, buffer, repair, or densification) find that the complete Vava’u feature in both simplified and related unsimplified products covers the support pointset. The current Atlas Vava’u contact in `data/geography/part-23.json` intersects only at a boundary and does not cover the candidate. The approved `worldatlas-evidence-geometry-v1` helper measures this bounded support at 2,494.141562927083 m², equal at emitted precision to the inherited support metric. The source, unsimplified product, and current contact geometries are not topologically equal.
 
 This establishes a source-to-current geometry discrepancy for the bounded retained support, not its cause or correctness. It does not establish dry land, legal boundaries, ownership, positional accuracy, registration, or which product should be released. Narrow shoreline/channel registration, observation-date mismatch, source precision, and physical authority remain unresolved.
 
@@ -32,6 +32,6 @@ Tonga Statistics Department’s [Re-boundary Plan 2020–2021](https://tongastat
 - `inputs/physical-comparison-record.json` — complete physical row, query relation, source vintage, and retained unknowns.
 - `inputs/source-provenance.json` — metadata, exact simplified product bytes/hash, feature roster, and related unsimplified product identity.
 - `inputs/bounded-source-comparison.json` — geometry predicates, bounded ellipsoidal area, hashes, and explicit limits.
-- `compare-bounded-support.py` — reproduction helper for the one retained component/source/contact comparison.
+- `compare-bounded-support.py` — reproduction helper for the one retained component/source/contact comparison; it runs positive/negative controls with the approved geometry helper.
 - `sources/official-source-register.json` — official/context source URLs, access dates, findings, and use limits.
 - `sources/geoBoundaries-TON-ADM1_simplified.geojson` — exact retrieved product bytes.

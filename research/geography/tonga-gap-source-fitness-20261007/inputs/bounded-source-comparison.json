@@ -67,18 +67,15 @@
   },
   "limits": [
     "Topological predicates do not establish legal boundaries, accuracy, registration, dry land, effective date, or ownership.",
-    "No displayed planar degree-area is used as an earth area. The 2,494.141562927083 m² value is inherited as a prior emitted metric, not recomputed here.",
-    "The query/physical comparison is inherited. This script only compared one complete retained support pointset to the complete Vava’u feature and current contact."
+    "No displayed planar degree-area is used as an earth area. The 2,494.141562927083 m\u00b2 value is inherited as a prior emitted metric, not recomputed here.",
+    "The query/physical comparison is inherited. This script only compared one complete retained support pointset to the complete Vava\u2019u feature and current contact."
   ],
   "bounded_ellipsoidal_area_comparison": {
-    "method": "WGS84 ellipsoidal area of bounded candidate-support subsets using pyproj.Geod(ellps=WGS84), independently from source polygon comparisons; no buffer, repair, or global producer rerun. This value is measurement of mapped support geometry only, not dry land or a legal boundary.",
-    "candidate_support_area_m2": 2494.153781838715,
-    "candidate_contact_intersection_area_m2": 0.0,
-    "candidate_outside_current_contact_area_m2": 2494.153781838715,
-    "candidate_source_intersection_area_m2": 2494.153781838715,
-    "candidate_outside_simplified_source_area_m2": 0.0,
-    "coverage_fraction_of_support_by_current_contact": 0.0,
-    "coverage_fraction_of_support_by_simplified_source": 1.0,
-    "inherited_reported_support_m2": 2494.141562927083
+    "method": "Approved worldatlas-evidence-geometry-v1 WGS84 straight-source-edge ellipsoidal integral, using scripts/evidence/geometry.py:land_area_m2 on the bounded candidate support only. No area is reported for line-only current-contact intersection.",
+    "candidate_support_area_m2": 2494.141562927083,
+    "limits": [
+      "No legal, physical, or accuracy conclusion follows from this area.",
+      "The value equals the inherited support metric at displayed binary64 precision; source/current containment remains a separate topological predicate."
+    ]
   }
 }
