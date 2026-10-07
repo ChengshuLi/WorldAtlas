@@ -183,8 +183,8 @@ sources += [
 
 manifest_path = str(PACKET / "evidence-quality.json")
 changed_paths = set(output_paths) | {str(path) for path in tile_paths}
-change_receipts = [{"path":path,"status":"added","previous_path":None} for path in sorted(changed_paths)]
-change_receipts.append({"path":manifest_path,"status":"added","previous_path":None})
+change_receipts = [{"path":path,"status":"added"} for path in sorted(changed_paths)]
+change_receipts.append({"path":manifest_path,"status":"added"})
 manifest = {
     "version":1,"issue":1416,"lane":"geography","worker_id":THREAD,
     "subject_ids":scope["components"]+scope["contacts"],
