@@ -48,6 +48,19 @@ producer, explain the equivalent tested guarantee in the existing PR explanation
 independent review must examine that exception. Neither the helpers nor CI grant
 scientific approval or publication authority.
 
+Control runners are producers too. Admit their complete fresh fixture and result
+locations before any mkdir, write or expensive probe; use exclusive creation for
+fixture files. Reject existing targets and dangling symlinks without changing
+sentinels, original evidence or publishing a success receipt. A new hard-coded
+suffix avoids one collision but does not make a rerun safe. Preservation checks
+must capture the original sentinel before execution, not hash it after a write.
+Test both the producer and its control writer when fixing output admission.
+
+A retained helper is not necessarily the executed helper. Bind provenance to the
+bytes actually consumed or executed. If using a custom adapter instead of the
+shared helper, document and independently test its equivalent complete guarantees;
+do not attribute execution to a pinned file that the entry point never loads.
+
 Author preflight prepares evidence for review. It does not replace the reviewer's
 independently derived expectations, source inspection or adverse fixtures.
 
@@ -148,6 +161,17 @@ support completion.
 Every new commit, including documentation-only commits, requires a new exact-head
 receipt. Substantive acceptance/PR disposition changes also invalidate contract
 bindings and require renewed relevant review. Ordinary progress comments do not invalidate review.
+Before resubmitting to the queue, inspect the latest receipt from **each reviewer**
+for the current head and reconcile every substantive objection. One reviewer's
+acceptance does not clear another reviewer's changes-requested receipt. Ask the
+objecting reviewer to recheck the repair; do not repeatedly submit an unchanged
+head or treat queue rejection as a transient error. Review of a previous head is
+not acceptance of a new head. The final accepting receipt must cover the required
+whole-PR domains; a narrow finding or resolution comment is not a full acceptance.
+When a new head addresses earlier objections, request renewed relevant review and
+make the resolution explicit rather than relying on old receipts dropping out of
+the current-head gate. The trusted queue remains the final safeguard.
+
 After merge, reconcile the issue and direct dependents, preserve the checkpoint,
 and release the owned checkout before taking the next fresh job.
 
@@ -159,7 +183,10 @@ checkpoint and completed evidence. Select the checks needed by your actual
 acceptance claims before implementation; use authenticated consumed inputs/code,
 independent reference records, safe fresh outputs and meaningful adverse controls
 where applicable. Run the documented focused preflight before the first review
-request and resolve quick ownership/evidence failures. Record limits honestly.
+request and resolve quick ownership/evidence failures. Apply fresh-output admission
+to control fixtures and result writers too. Before queue submission, reconcile all
+reviewers' outstanding findings and obtain renewed relevant exact-head review;
+one acceptance does not override another objection. Record limits honestly.
 Source-only research keeps its focused CI. Obtain a distinct review of the exact
 final head, use the normal queue, reconcile the issue/dependents and release the
 owned checkout afterward. This refresh changes neither scope nor scientific or

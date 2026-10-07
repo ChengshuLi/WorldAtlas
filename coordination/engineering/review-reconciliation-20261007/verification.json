@@ -1,0 +1,23 @@
+{
+  "baseline_commit": "450126d04c7e6bf85c8763c9bb6949c1fac68000",
+  "purpose": "Documentation-only clarification of existing all-reviewer queue rejection and safe control-output guarantees",
+  "tests": {
+    "command": "node --test test/premerge-evidence.test.mjs",
+    "result": "passed; complete terminal report retained in premerge-tests.txt"
+  },
+  "actual_rollout_evidence": [
+    "https://github.com/ChengshuLi/WorldAtlas/pull/1375#issuecomment-6036694823",
+    "https://github.com/ChengshuLi/WorldAtlas/pull/1375#issuecomment-6036859670",
+    "https://github.com/ChengshuLi/WorldAtlas/pull/1375#issuecomment-6036914447"
+  ],
+  "interface_checks": [
+    "scripts/premerge-evidence.mjs chooses latest receipt per reviewer and rejects any current-head changes-requested before accepting a receipt",
+    "scripts/evidence/immutable.py shared NewVintage destination admission and exclusive publication",
+    "All role handovers and engineering/geography/history/Auditor prompts already reference docs/AUTHOR_PREFLIGHT.md"
+  ],
+  "limits": [
+    "No candidate geographic computation or provider operation executed for this documentation PR",
+    "PR #1375 control admission repair remains with its canonical geography owner",
+    "No assertion of universal worker adoption or history-specific subsequent handoff"
+  ]
+}
