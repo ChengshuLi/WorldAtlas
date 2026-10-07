@@ -38,7 +38,7 @@ def world_relation(root, index):
             raise ValueError('Unchanged whole source pointset differs')
         if ordinal == 29:
             proposal = proof['proposal']
-            source = next(b for b in index['bindings'] if b.get('original_binding', {}).get('blob') == proposal['blob'])
+            source = next(b for b in index['bindings'] if (b.get('original_binding') or {}).get('blob') == proposal['blob'])
             proposed = gunzip(checked(root, source['group'] + '/' + source['path']).read_bytes())
             if not proposed.endswith(b'\n') or after != proposed[:-1]:
                 raise ValueError('Exact proposed final-LF derivation differs')
@@ -78,6 +78,10 @@ def ownership_relation(root):
     for part in old_index['parts']:
         old_rows = read(original / part['path'])
         reused = next((p for p in new_index['parts'] if p.get('reused_original_sha256') == part['sha256']), None)
+        if reused is None:
+            # The complete part containing the two targets is rewritten after
+            # removing just those rows; its whole checksum correctly changes.
+            reused = next((p for p in new_index['parts'] if p['path'] == part['path']), None)
         if reused is None:
             raise ValueError('Original whole location part reuse missing')
         new_rows = read(proposed / reused['path'])
