@@ -124,9 +124,9 @@ def main() -> None:
     out = args.out.resolve()
     if out.exists():
         raise SystemExit(f"Refusing to replace existing output: {out}")
-    # Pin the fetched current main explicitly, not HEAD (which may already
+    # Pin the PR's actual comparison base, not HEAD (which may already
     # contain earlier commits from this same PR).
-    main_sha = git("rev-parse", "origin/main").decode().strip()
+    main_sha = git("merge-base", "HEAD", "origin/main").decode().strip()
     helper_path = repo / "scripts/evidence/immutable.py"
     helper_bytes = git("show", f"{main_sha}:scripts/evidence/immutable.py")
     if helper_path.read_bytes() != helper_bytes:

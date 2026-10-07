@@ -7,7 +7,7 @@ import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
-RUN = ROOT / "vintages/run-20"
+RUN = ROOT / "vintages/run-22"
 CONTACT = "atlas:district:CAN-5917:BRC"
 
 
@@ -107,11 +107,11 @@ def main():
             products.append({"path": leaf, "bytes": len(raw), "sha256": sha(raw)})
         return sha(canonical(products)), products
 
-    digest_one, run_one = run_digest("run-19")
-    digest_two, run_two = run_digest("run-20")
+    digest_one, run_one = run_digest("run-21")
+    digest_two, run_two = run_digest("run-22")
     if digest_one != digest_two:
         raise ValueError("Fresh producer vintages are not byte-identical")
-    control_path = ROOT / "vintages/run-20-controls.json"
+    control_path = ROOT / "vintages/run-22-controls.json"
     control_bytes = control_path.read_bytes()
     control_result = json.loads(control_bytes)
     if control_result.get("counts", {}).get("controls") != 14 or control_result["counts"].get("passed") != 14:
@@ -127,11 +127,11 @@ def main():
     validation = [
         {"path": f"{owned_prefix}/validation/generator-positive-controls.json", "value": {
             "method_id": "source-packet-generator", "kind": "positive-control", "outcome": "passed",
-            "source_control_path": "vintages/run-20-controls.json",
+            "source_control_path": "vintages/run-22-controls.json",
             "source_control_sha256": sha(control_bytes), "control_ids": positive_ids}},
         {"path": f"{owned_prefix}/validation/generator-negative-controls.json", "value": {
             "method_id": "source-packet-generator", "kind": "negative-control", "outcome": "passed",
-            "source_control_path": "vintages/run-20-controls.json",
+            "source_control_path": "vintages/run-22-controls.json",
             "source_control_sha256": sha(control_bytes), "control_ids": negative_ids}},
         {"path": f"{owned_prefix}/validation/generator-reproducibility.json", "value": {
             "method_id": "source-packet-generator", "kind": "reproducibility", "outcome": "passed",
@@ -196,8 +196,8 @@ def main():
          "limit": "Point/centroid screening does not cover component polygons; absence of a mapped-water match does not prove dry land."},
     ]
 
-    summary_file = f"{ROOT.relative_to(ROOT.parent.parent.parent).as_posix()}/vintages/run-20/scope-summary.json"
-    assessment_file = f"{ROOT.relative_to(ROOT.parent.parent.parent).as_posix()}/vintages/run-20/source-assessment.json"
+    summary_file = f"{ROOT.relative_to(ROOT.parent.parent.parent).as_posix()}/vintages/run-22/scope-summary.json"
+    assessment_file = f"{ROOT.relative_to(ROOT.parent.parent.parent).as_posix()}/vintages/run-22/source-assessment.json"
     source_pin = report_pin["sha256"]
     metric_specs = [
         ("complete_components", 43, "physical component records", summary_file, "/complete_component_count"),
@@ -259,8 +259,8 @@ def main():
                                "routes_and_diagnoses": [path for path, _ in partition_pins],
                                "note": "Every named compressed source/diagnosis part is separately pinned by whole-file and uncompressed SHA-256, allowing independent bounded decompression and complete partition-roster review."},
         "directed_control_runs": [
-            {"packet": "vintages/run-19", "controls": "vintages/run-19-controls.json"},
-            {"packet": "vintages/run-20", "controls": "vintages/run-20-controls.json"},
+            {"packet": "vintages/run-21", "controls": "vintages/run-21-controls.json"},
+            {"packet": "vintages/run-22", "controls": "vintages/run-22-controls.json"},
         ],
         "change_receipts": ([{"path": path, "status": "added"} for path in changed_paths] +
                             [{"path": manifest_path, "status": "added"}]),
