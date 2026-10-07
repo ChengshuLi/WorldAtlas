@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-07",
+  "scope": {
+    "issue": 1234,
+    "component_count": 10,
+    "contact_subject_count": 4,
+    "geometry_changed": false,
+    "classifications_changed": false
+  },
+  "sources": [
+    {
+      "id": "uk-boundaries-order-1963-2083",
+      "url": "https://www.legislation.gov.uk/uksi/1963/2083/pdfs/uksi_19632083_en.pdf",
+      "role": "Primary legal boundary description and map custody/sheet inventory",
+      "made_date": "1963-12-20",
+      "effective_date": "1964-01-01",
+      "retrieved_at": "2026-10-07",
+      "file": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/follow-up-v1/sources/uksi-1963-2083.pdf",
+      "bytes": 275796,
+      "sha256": "a2dab1294c3e9f0f83b8c8965719fa336a69408b495b115f903e9cbdce02e0ed",
+      "license": "Open Government Licence v3.0 for legislation.gov.uk legislation text; attribution required; any third-party content remains subject to its terms.",
+      "coverage_and_precision": "Text describes the river boundary by medium filum and island channels and the Lake Kariba reach by straight lines. It names deposited signed 1:50,000 and smaller-scale sheets but is not a georeferenced map image and gives no candidate-scale positional accuracy.",
+      "limits": "Does not show the deposited map images, locate the ten components, establish present bilateral interpretation, or determine physical water status."
+    },
+    {
+      "id": "us-state-international-boundary-study-30-1964",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs030.pdf",
+      "role": "Contemporaneous U.S. Department of State boundary study; secondary reproduction of legal text and approximate named-island coordinates",
+      "publication_date": "1964",
+      "retrieved_at": "2026-10-07",
+      "retention": "restoration-only; PDF not copied because host scan/format reuse terms were not established",
+      "restoration": "Retrieve from the cited Florida State University Law Library URL; verify any host-specific scan terms before redistribution.",
+      "license": "Unknown for the university-hosted scan/format. U.S. federal employee-authored report text is public domain under U.S. copyright, but this does not establish rights in all scan components.",
+      "coverage_and_precision": "Regional boundary narrative, deposited map-sheet list, and approximate whole-minute coordinates for named islands.",
+      "limits": "Approximate coordinates are not a survey control or accuracy statement; report does not identify any of the ten components or four contacts and cannot establish current water or boundary status."
+    },
+    {
+      "id": "ide-jetro-zimbabwe-surveyor-general-map-catalogue",
+      "url": "https://d-arch.ide.go.jp/map/mokuroku/mokuroku-689.1-AM-1%26category-103.html",
+      "role": "Library catalogue record for Zimbabwe Surveyor-General 1:50,000 topographic maps and sheet titles",
+      "publication_date": "Catalogue describes sheets issued 1967-1991",
+      "retrieved_at": "2026-10-07",
+      "retention": "restoration-only; no catalogue HTML or map image redistributed",
+      "license": "Unknown for catalogue-page redistribution; only factual bibliographic identifiers and titles are reported here.",
+      "coverage_and_precision": "Bibliographic index lists 564 sheets, including 1529 C3 Nyakasanga, 1529 C4 Rukomechi, 1530 C1 Mupata Gorge, 1530 C2 Kanyemba, and 1628 B2 Chirundu, at 1:50,000.",
+      "limits": "Catalogue does not establish map-image availability, georeferencing, positional accuracy, or identity with the signed 1963 deposited boundary maps."
+    },
+    {
+      "id": "zamcom-zamwis-public-description",
+      "url": "https://www.zambezicommission.org/zamwis",
+      "role": "Official description of ZAMWIS data classes and intended basin-wide information system",
+      "retrieved_at": "2026-10-07",
+      "retention": "restoration-only",
+      "license": "Unknown for redistribution of page content.",
+      "coverage_and_precision": "Describes the system as holding contemporary and historical spatial data, hydrological time series, and Earth-observation information for the Zambezi Basin.",
+      "limits": "Public description did not expose an item-level downloadable candidate dataset or metadata; no physical-water inference is made."
+    },
+    {
+      "id": "zambia-ngdr-arcgis-service-directory",
+      "url": "https://www.map.gov.zm/arcgis/rest/services?f=pjson",
+      "role": "Public service-catalogue discovery endpoint",
+      "retrieved_at": "2026-10-07",
+      "retention": "restoration-only",
+      "license": "Unknown for service-layer data; no layer data retained or redistributed.",
+      "coverage_and_precision": "The directory lists public service folders and services, including NSDI vector, imagery, DTM, cadastral and roads services.",
+      "limits": "The catalogue listing is not proof that no suitable hydrography service exists; the generic Vector_layers service and any non-indexed data require custodian clarification."
+    }
+  ],
+  "handoff": {
+    "responsible_custodians": [
+      "Current Surveyor-General offices of Zambia and Zimbabwe: obtain signed 1963 deposited map sheets and map-registration/accuracy/reuse metadata.",
+      "ZAMCOM/ZAMWIS or ZRA: identify date-stamped, candidate-scale hydrology or Earth-observation sources and their metadata/licensing."
+    ],
+    "resume_condition": "A custodian supplies retained source bytes or a stable public item/API with adequate coverage, date, scale/resolution, positional metadata, and lawful reuse terms.",
+    "status": "No external request was sent; all ten water classifications and component classes remain unchanged."
+  }
+}
