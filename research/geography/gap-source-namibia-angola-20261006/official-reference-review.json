@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checked_utc": "2026-10-07T01:59:10Z",
+  "checked_utc": "2026-10-07T03:00:00Z",
   "references": [
     {
       "id": "UK Treaty Series 29 (1926), Cmd. 2777",
@@ -109,6 +109,38 @@
       "document_date": "Official finding-aid index lists the commission as 1926–1928, one unit, reference 3/3/3.",
       "retrieval_status": "Official archive index page inspected; underlying document/catalog file not retrieved or inspected.",
       "use_limit": "Archival lead to potential demarcation material, not evidence of the exact modern alignment until the record and survey annexes are inspected."
+    },
+    {
+      "id": "JRC Global Surface Water v1.5 Occurrence 1984-2024",
+      "operator": "European Commission Joint Research Centre / Google",
+      "url": "https://global-surface-water.appspot.com/download",
+      "document_date": "Release page updated for 2024; retained official metadata identifies product creation/publication 2026-08-27. Occurrence summarizes March 1984 through December 2024.",
+      "retrieval_status": "Both original 10E_10S and 20E_10S GeoTIFF tile byte streams retained, reassembled from size-limited custody parts, and verified against original-file SHA-256. Official occurrence ISO metadata and the v2024 Data Users Guide are retained.",
+      "relevant_content": "The official guide defines occurrence as month-normalized frequency of surface-water detections from March 1984 through December 2024; values 1–100 represent percentage and 0 means not water. The 30 m nominal grid yields positive occurrence pixels inside all 21 unchanged candidates; candidate-level counts are in jrc-gsw-water-analysis.json.",
+      "use_limit": "Occurrence is a long-term summary and does not date detections. The dataset describes a spatially variable residual co-registration offset at the 2022 Landsat Collection 2 transition, generally sub-pixel but at or above one 30 m pixel in some path/rows. It does not establish a specific bank, waterbody type, legal boundary, processing cause, or territorial assignment. Attribution: Source: EC JRC/Google.",
+      "local_files": [
+        "sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
+        "sources/jrc-gsw-2024/occurrence_10E_10S.part-ab",
+        "sources/jrc-gsw-2024/occurrence_20E_10S.part-aa",
+        "sources/jrc-gsw-2024/occurrence_20E_10S.part-ab",
+        "sources/jrc-gsw-2024/occurrence_2024.xml",
+        "sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf"
+      ]
+    },
+    {
+      "id": "JRC Global Surface Water v1.5 Seasonality 2024",
+      "operator": "European Commission Joint Research Centre / Google",
+      "url": "https://global-surface-water.appspot.com/download",
+      "document_date": "2024 observation year; retained official metadata identifies product creation/publication 2026-08-27.",
+      "retrieval_status": "Both original 10E_10S and 20E_10S GeoTIFFs retained and verified against SHA-256. Official seasonality ISO metadata and the v2024 Data Users Guide are retained.",
+      "relevant_content": "The official guide defines seasonality as the number of months with surface water in a single year; 2024 seasonality is a separate one-year measure. Positive seasonality pixels occur within all 21 unchanged candidates.",
+      "use_limit": "An annual water-classification layer is not a surveyed bank or proof of a historic channel. It does not establish the international line, waterbody type, processing cause, or territorial assignment. The 2022 Landsat Collection 2 transition has the documented registration limit. Attribution: Source: EC JRC/Google.",
+      "local_files": [
+        "sources/jrc-gsw-2024/seasonality_10E_10S.tif",
+        "sources/jrc-gsw-2024/seasonality_20E_10S.tif",
+        "sources/jrc-gsw-2024/seasonality_2024.xml",
+        "sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf"
+      ]
     }
   ],
   "spatial_screen": {
@@ -127,7 +159,7 @@
   },
   "separate_classifications": {
     "consumed_source_geometry": "Source products overlap candidate footprints by positive area; see source-geometry-comparison.json.",
-    "current_physical_water_or_historic_course": "Unresolved. Official Namibia material supplies basin-management/map context only; the 1:2,000,000 water-basin map is too generalized for the candidate edge. The approved Okavango–Omatako booklet was identified but not obtained or inspected. No suitable dated, gap-scale bank/course source is retained.",
+    "current_physical_water_or_historic_course": "JRC GSW v1.5 provides separate 1984–2024 occurrence and 2024 seasonality observations at approximately 30 m; positive water-classified pixels occur within all 21 candidates. This supports water occurrence within the candidate footprints, not exact shoreline/current course or historical channel location. Waterbody type, floods/wetlands, collection-transition geolocation shift, and suitability for any legal line remain limits.",
     "processing_cause": "Unresolved; no exact processing defect has been reproduced.",
     "international_boundary_authority": "The 1926 agreement gives a treaty framework and requires joint demarcation, with archival catalogue leads for 1927–28 survey/commission records. Those underlying survey and beacon records are not inspected. Exact demarcated/current alignment across the candidate coordinates remains unresolved.",
     "administrative_assignment": "Not made."
