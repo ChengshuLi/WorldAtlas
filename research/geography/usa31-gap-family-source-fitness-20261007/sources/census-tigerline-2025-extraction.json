@@ -1,0 +1,171 @@
+{
+  "year": 2025,
+  "source_url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+  "archive_bytes": 83989800,
+  "archive_sha256": "9c6e9d9076abce2670d1de255de3710c35ecca00a7005d88e012dec52d95f763",
+  "shapefile_member": {
+    "name": "tl_2025_us_county.shp",
+    "bytes": 132270192,
+    "sha256": "d2add252ccd38f1c46efaba677efe0d20cdd9bf1f3ff7af7ce84fe06a3205df7"
+  },
+  "dbf_member": {
+    "name": "tl_2025_us_county.dbf",
+    "bytes": 993755,
+    "sha256": "966a258724c861daa722dfa64038df494fac089781c695a88615d9786e61a5cb"
+  },
+  "prj_member": {
+    "name": "tl_2025_us_county.prj",
+    "bytes": 165,
+    "sha256": "0b9041e921d9ebb43247d314608fe9e38a0b008ee793067fc1806199ea1fb9dd",
+    "text": "GEOGCS[\"GCS_North_American_1983\",DATUM[\"D_North_American_1983\",SPHEROID[\"GRS_1980\",6378137,298.257222101]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+    "epsg": "EPSG:4269"
+  },
+  "cpg_member": {
+    "name": "tl_2025_us_county.cpg",
+    "bytes": 5,
+    "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+    "text": "UTF-8"
+  },
+  "dbf_fields": [
+    {
+      "name": "STATEFP",
+      "type": "C",
+      "length": 2,
+      "decimals": 0
+    },
+    {
+      "name": "COUNTYFP",
+      "type": "C",
+      "length": 3,
+      "decimals": 0
+    },
+    {
+      "name": "COUNTYNS",
+      "type": "C",
+      "length": 8,
+      "decimals": 0
+    },
+    {
+      "name": "GEOID",
+      "type": "C",
+      "length": 5,
+      "decimals": 0
+    },
+    {
+      "name": "GEOIDFQ",
+      "type": "C",
+      "length": 14,
+      "decimals": 0
+    },
+    {
+      "name": "NAME",
+      "type": "C",
+      "length": 100,
+      "decimals": 0
+    },
+    {
+      "name": "NAMELSAD",
+      "type": "C",
+      "length": 100,
+      "decimals": 0
+    },
+    {
+      "name": "LSAD",
+      "type": "C",
+      "length": 2,
+      "decimals": 0
+    },
+    {
+      "name": "CLASSFP",
+      "type": "C",
+      "length": 2,
+      "decimals": 0
+    },
+    {
+      "name": "MTFCC",
+      "type": "C",
+      "length": 5,
+      "decimals": 0
+    },
+    {
+      "name": "CSAFP",
+      "type": "C",
+      "length": 3,
+      "decimals": 0
+    },
+    {
+      "name": "CBSAFP",
+      "type": "C",
+      "length": 5,
+      "decimals": 0
+    },
+    {
+      "name": "METDIVFP",
+      "type": "C",
+      "length": 5,
+      "decimals": 0
+    },
+    {
+      "name": "FUNCSTAT",
+      "type": "C",
+      "length": 1,
+      "decimals": 0
+    },
+    {
+      "name": "ALAND",
+      "type": "N",
+      "length": 14,
+      "decimals": 0
+    },
+    {
+      "name": "AWATER",
+      "type": "N",
+      "length": 14,
+      "decimals": 0
+    },
+    {
+      "name": "INTPTLAT",
+      "type": "C",
+      "length": 11,
+      "decimals": 0
+    },
+    {
+      "name": "INTPTLON",
+      "type": "C",
+      "length": 12,
+      "decimals": 0
+    }
+  ],
+  "features": [
+    {
+      "geoid": "36059",
+      "record_ordinal": 1232,
+      "dbf_record_sha256": "a6ae8a6489a3451325299c9dfb177ede675535543f8229636a7bc3cbf3c3db7d",
+      "shp_record_sha256": "d69eacc1e493c6dc5d9e59a0374992c3d3b1a13d44dafade00b96497cdc1b9d7",
+      "shp_content_sha256": "0a5522bfa28ed50409332215659f72d516bdcd9935d79f3a415e624a432eeee1",
+      "canonical_feature_sha256": "4f665abe94a1bd4d9af888f3505d0a89bd960783aa76d8c8b60a6f5fdd24be9f"
+    },
+    {
+      "geoid": "36103",
+      "record_ordinal": 2483,
+      "dbf_record_sha256": "2c9be9742b203e6bc198df3294969ecf1a78543843810c1ea39bcf6a32f5635c",
+      "shp_record_sha256": "a9f0d562cc04f83d1183fbbe281037a02ab165349bcf771a2e92b2656298bcb5",
+      "shp_content_sha256": "43402b2a338e28bc73a46b8c7839adc9eceddff9beb5dfe460df9c53e7d65804",
+      "canonical_feature_sha256": "05858d2d906dc11577d3229dc6dc266f564c1110b007e4701dae979eeee260a3"
+    },
+    {
+      "geoid": "36119",
+      "record_ordinal": 2042,
+      "dbf_record_sha256": "37150619b64e21319dd785a5fe52757e4dac39b1f946afcbde5ca05ade7fcc15",
+      "shp_record_sha256": "2f13e46cf73ddbc48cd0437d41564f08e4df9dcdc3033f4f2155f3409e892016",
+      "shp_content_sha256": "96199137b980bcff61cb7d8b04190433890136ce5727af5c8220af1cc937d9d3",
+      "canonical_feature_sha256": "d1463cd09a1582b5e0171b5f6cf34e74b071b95d38e664eee05cd4cf22e1c135"
+    }
+  ],
+  "output_path": "sources/census-tigerline-2025-target-counties.geojson",
+  "output_bytes": 76033,
+  "output_sha256": "d20c2e22e8cbdcd41b7ed63cff4aaaf442b0c21c92129a68102a17c0e425567f",
+  "geometry_coordinates_retained_in_native_crs": true,
+  "license_note": "Census Bureau source; no separate archive license text was included in the ZIP. Treat as source evidence; preserve source terms separately.",
+  "archive_location": "Temporary storage outside repository; local filesystem path intentionally omitted."
+}

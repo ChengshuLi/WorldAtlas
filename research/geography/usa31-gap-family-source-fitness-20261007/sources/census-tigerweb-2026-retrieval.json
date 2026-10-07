@@ -1,0 +1,56 @@
+{
+  "feature_count": 3,
+  "features_by_geoid": [
+    "36059",
+    "36103",
+    "36119"
+  ],
+  "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE+%3D+%2736%27+AND+COUNTY+IN+%28%27059%27%2C%27103%27%2C%27119%27%29&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&orderByFields=COUNTY",
+  "headers": {
+    "Cache-Control": "max-age=0,must-revalidate",
+    "Connection": "close",
+    "Content-Security-Policy": "script-src 'self';",
+    "Content-Type": "application/geo+json;charset=UTF-8",
+    "Date": "Wed, 07 Oct 2026 10:58:03 GMT",
+    "ETag": "\"1784720359\"",
+    "Set-Cookie": "TS01d8b8de=01283c52a4f112bd02e40034d218e4a8d9327bc2cd43fc3f7a9a208079c7e927ccde46bc0aa9a29eb5e364823429b4187c51655767; Path=/; Domain=.tigerweb.geo.census.gov; Secure; HttpOnly",
+    "Strict-Transport-Security": "max-age=31536000",
+    "Transfer-Encoding": "chunked",
+    "Vary": "Origin",
+    "X-Content-Type-Options": "nosniff"
+  },
+  "http_status": 200,
+  "layer_metadata_bytes": 7463,
+  "layer_metadata_final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1?f=pjson",
+  "layer_metadata_headers": {
+    "Cache-Control": "max-age=0,must-revalidate",
+    "Connection": "close",
+    "Content-Length": "7463",
+    "Content-Security-Policy": "script-src 'self';",
+    "Content-Type": "text/plain;charset=UTF-8",
+    "Date": "Wed, 07 Oct 2026 10:58:04 GMT",
+    "ETag": "\"1289e918\"",
+    "Set-Cookie": "TS01d8b8de=01283c52a4d9d21a3b55e4de9d516150bc99c8cb6a1ebda3c85cb948cdea6c440b361ad95cfd453012dad1d45b71396f17050f1f0b; Path=/; Domain=.tigerweb.geo.census.gov; Secure; HttpOnly",
+    "Strict-Transport-Security": "max-age=31536000",
+    "Vary": "Origin",
+    "X-Content-Type-Options": "nosniff"
+  },
+  "layer_metadata_http_status": 200,
+  "layer_metadata_path": "sources/census-tigerweb-2026-layer-metadata.json",
+  "layer_metadata_sha256": "2d3d122db59e0f4171d4ac8972dff969b42567bc7239f90a67412fd3616a1b59",
+  "layer_metadata_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1?f=pjson",
+  "parameters": {
+    "f": "geojson",
+    "orderByFields": "COUNTY",
+    "outFields": "*",
+    "outSR": "4326",
+    "returnGeometry": "true",
+    "where": "STATE = '36' AND COUNTY IN ('059','103','119')"
+  },
+  "request_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE+%3D+%2736%27+AND+COUNTY+IN+%28%27059%27%2C%27103%27%2C%27119%27%29&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&orderByFields=COUNTY",
+  "response_bytes": 135074,
+  "response_path": "sources/census-tigerweb-2026-target-counties.geojson",
+  "response_sha256": "67b6991260737bebfc956018613e2e9d8e88cd7267aed48037b440f98d2f3a32",
+  "retrieved_at_utc": "2026-10-07T10:58:04.675420+00:00",
+  "service_endpoint": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query"
+}
