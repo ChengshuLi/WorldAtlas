@@ -564,6 +564,7 @@ def source_vintage_caveats(ctx):
 def run_analysis(run_name: str):
     if run_name not in ("run-01", "run-02"):
         raise ValueError("Use run-01 or run-02")
+    started_at = datetime.now(ZoneInfo("America/Los_Angeles"))
     ctx = load_context()
     run_dir = ROOT / "runs" / run_name
     if run_dir.exists() and any(run_dir.iterdir()):
@@ -616,10 +617,9 @@ def run_analysis(run_name: str):
         ],
     }
     results_bytes = write_json(run_dir / "summary.json", summary)
-    started = os.environ.get("WORLDATLAS_RUN_STARTED_AT", "")
     receipt = {
         "version": 1, "run_id": run_name,
-        "started_at_local": started or datetime.now(ZoneInfo("America/Los_Angeles")).isoformat(),
+        "started_at_local": started_at.isoformat(),
         "finished_at_local": datetime.now(ZoneInfo("America/Los_Angeles")).isoformat(),
         "finished_at_utc": datetime.now(timezone.utc).isoformat(),
         "command": f"PYTHONDONTWRITEBYTECODE=1 python3 -B {Path(__file__).relative_to(REPO).as_posix()} {run_name}",
