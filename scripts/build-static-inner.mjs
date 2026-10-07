@@ -15,7 +15,7 @@ import {packageReferenceBundle} from './package-reference-bundle.mjs';
 import {loadCoverageClassification} from '../src/coverage-classification.js';
 import {packageStartupOwnership} from './package-startup-ownership.mjs';
 import {selectBuildOwnership,readBuildOwnershipSelection} from './select-build-ownership.mjs';
-import {validateBuildContextStage} from './native-ownership/validate-build-context-stage.mjs';
+import {validateBuildContextVintage as validateBuildContextStage} from '../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs';
 import {packageNativeLatitudes} from './package-native-latitudes.mjs';
 import {rebindCoverageManifest} from './rebind-coverage-manifest.mjs';
 import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';

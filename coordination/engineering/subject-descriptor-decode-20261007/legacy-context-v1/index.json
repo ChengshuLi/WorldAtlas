@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "source_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+  "historical_execution_commit": "daa8ea20eed509a243201b01f053d64f69ca0ff8",
+  "stage_path": "data/native-context-migration/manifest.json",
+  "stage_sha256": "471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765",
+  "stage_bytes": 6278,
+  "entry": "scripts/native-ownership/validate-build-context-stage.mjs",
+  "files": [
+    {
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+      "bytes": 9460,
+      "sha256": "5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/validate-context-input-stage.mjs",
+      "bytes": 9478,
+      "sha256": "c8f993458f46ca21d5d10619ac1a77ec86ba45b7e5e8ab20b921fe0f8da0406f",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/validate-context-migration.mjs",
+      "bytes": 5078,
+      "sha256": "34c94e25f8d17f424e82511ecaf85c4f1c0449579f90b218aba264a69b6c2bf0",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/native-only-inputs.mjs",
+      "bytes": 6822,
+      "sha256": "4599b7c42b248268c1e8a419857835e0e1ef336a4a260385630184cffc8e94d1",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/compact-context-inputs.mjs",
+      "bytes": 2093,
+      "sha256": "bba188fcb97fadcce680959694c8b9617720b5fd30b68e42202611d5fac62bf2",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371,
+      "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 14753,
+      "sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/prepare-geographic-release.mjs",
+      "bytes": 47459,
+      "sha256": "dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/check-prepared.mjs",
+      "bytes": 3133,
+      "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242",
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978,
+      "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486",
+      "mode": "100644"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+      "mode": "100644"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+      "mode": "100644"
+    },
+    {
+      "path": "hosted/geographic-releases.js",
+      "bytes": 17288,
+      "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+      "mode": "100644"
+    }
+  ],
+  "limit": "Literal original validation code; no new scientific execution or approval"
+}
