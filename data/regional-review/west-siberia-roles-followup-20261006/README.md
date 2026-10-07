@@ -24,7 +24,7 @@ Run the safe, isolated erratum reproduction from the repository root:
 python3 data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/verify-erratum.py
 ```
 
-The erratum refuses occupied, symlinked, original or escaped output destinations and refuses modified pinned inputs before writing. It creates two fresh complete output directories under `findings/errata-20261007/`; do not remove or reuse them. The verifier records exact inputs, executed-code hashes, Python runtime, evaluation commit, controls and whole-run receipts. See its README for the new statutory source and remaining legal/geographic limits.
+The erratum refuses occupied, symlinked, original or escaped output destinations and refuses modified pinned inputs before writing. It creates two fresh complete output directories under `findings/errata-20261007/`; do not remove or reuse them. The verifier records exact inputs, executed-code hashes, Python runtime, evaluation commit, controls and whole-run receipts. Run `finalize-receipt.py` once afterward to create the standard reproducibility receipt without modifying either complete run. See the erratum README for the new statutory source and remaining legal/geographic limits.
 
 The original v1 command and result description below document the historical packet as accepted on 2026-10-06. It is retained for provenance; it is not the safe reproduction procedure for a fresh run.
 

@@ -479,8 +479,8 @@
   "outputs": [
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/README.md",
-      "bytes": 6415,
-      "sha256": "cc0de63afe2f254d8dd6e9dff426666624d10bca8f722ee6e4e89012fa4499fd",
+      "bytes": 6550,
+      "sha256": "2fcbc3199d4c33384f8884446dc6a5fd7d2f23c18cc0da3c90c82ff66bebf786",
       "hash_kind": "file-bytes"
     },
     {
@@ -491,8 +491,8 @@
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/README.md",
-      "bytes": 3336,
-      "sha256": "ea07f48fcefe15816b18474106d68a1ac15a4021cf5244ba3f7df220c72e535b",
+      "bytes": 3533,
+      "sha256": "7ed965f2bb52344f69181d05d9663b036ee6ee82c3997449cab175d2be28aedb",
       "hash_kind": "file-bytes"
     },
     {
@@ -502,9 +502,21 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/finalize-receipt.py",
+      "bytes": 3466,
+      "sha256": "2d839c7e42461d51512ed0b5a1dc8c96aa9dbdb0f8ed5c67b3f4179ae83db687",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/reproduce-erratum.py",
       "bytes": 9729,
       "sha256": "3d25b2a8287d2a0bdc543340193febd3f263287fb473e43796e4da11e4d79f40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/reproduction-receipt.json",
+      "bytes": 3415,
+      "sha256": "2cf414a32d0dee7afe8fcc1ff43056eac207bd708951a490946e4a624e3debb6",
       "hash_kind": "file-bytes"
     },
     {
@@ -649,7 +661,8 @@
       "kind": "generator",
       "description": "Read the immutable original 45-subject assessment and contract, apply the dated text-only Law 63-oz supplement to the exact eight HMAO city subjects, and produce isolated outputs with source, code, runtime and whole-run bindings.",
       "software": "Python standard library; two separate Python processes; canonical JSON SHA-256",
-      "units": "45 assessment rows, eight supplemental HMAO city rows, four products per run plus execution manifest"
+      "units": "45 assessment rows, eight supplemental HMAO city rows, four products per run plus execution manifest",
+      "helper_version": "worldatlas-evidence-preparation-v1"
     }
   ],
   "metrics": [
@@ -749,6 +762,7 @@
   },
   "commands": [
     "python3 data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/verify-erratum.py",
+    "python3 data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/finalize-receipt.py",
     "node scripts/evidence-quality.mjs data/regional-review/west-siberia-roles-followup-20261006/evidence-quality.json",
     "node scripts/premerge-evidence.mjs --help"
   ],
@@ -787,7 +801,7 @@
       "method_id": "west-siberia-20261007-erratum",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/reproduction-result.json"
+      "evidence_path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/reproduction-receipt.json"
     }
   ],
   "change_receipts": [
@@ -810,7 +824,15 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/finalize-receipt.py",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/reproduce-erratum.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/errata-20261007/reproduction-receipt.json",
       "status": "added"
     },
     {
