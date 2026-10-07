@@ -2,7 +2,7 @@
   "version": 1,
   "issue": 1389,
   "lane": "geography",
-  "worker_id": "01a10947-3b7d-7812-8b2f-c5a47e88ccb2",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
   "subject_ids": [
     "gb:NOR:ADM2:86288312B50158709887361",
     "gb:NOR:ADM2:86288312B64496782861055",
@@ -684,13 +684,13 @@
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/README.md",
       "bytes": 7693,
-      "sha256": "53117bbe5245b3c94610fa31c4cdad53dec5f7241a8ed05d457fdaa941f97fa0",
+      "sha256": "1390f105c14088c3270509c1e0c0537be2e679eb9722ca131c7aa7a4e770be51",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/attempt-history.json",
-      "bytes": 2085,
-      "sha256": "a479d60d231c39a56bd5c3d8fe2515bf241ec7bd80c1c4f47dd892b4d50ba821",
+      "bytes": 2481,
+      "sha256": "fd124dff42d5ccfa0326f061903bb127cd4334db8c4c53178232914242258595",
       "hash_kind": "file-bytes"
     },
     {
@@ -701,14 +701,14 @@
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-negative-control.json",
-      "bytes": 1048,
-      "sha256": "a64af164ecb62585c1d55537433e9990388d263536e2662bb11b0ead8ce5e37d",
+      "bytes": 1054,
+      "sha256": "872a6bcb6793d2139e7501e28d739939b9740a0c8f340c65401628c4ed35748d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-positive-control.json",
-      "bytes": 290,
-      "sha256": "291217c0a47d45476acdd72d37f05fb8de0f8d5e710ea9ba9578e77fb99b8c08",
+      "bytes": 296,
+      "sha256": "4dca32069e5f5853082f1504ad05fd369d65467c32ed1a6a704b208e33d96a48",
       "hash_kind": "file-bytes"
     },
     {
@@ -731,14 +731,14 @@
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
-      "bytes": 1769,
-      "sha256": "0e1a9cd683739f2992faa881748de37baeaae84f0d1c3e5b74b58c6b86f5191c",
+      "bytes": 1764,
+      "sha256": "975fe0d7cc7049a61a57f6a5ccddcebec626324acde2684e370f24d484c12bb0",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py",
-      "bytes": 41579,
-      "sha256": "7dadeaf17d825750170bf75d624aebad5d5ef60d6f9bb7b39344edd7dba0dc79",
+      "bytes": 42330,
+      "sha256": "a66a2d3b83c735af9abc8c1b383c9daf7272f514d4d166bc7bcfd15936bb2109",
       "hash_kind": "file-bytes"
     },
     {
@@ -823,6 +823,30 @@
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-two-20261007/receipt.json",
       "bytes": 300,
       "sha256": "c23ceb44bbc891bb4e217bd09b0120ddb54c0a32461de630977ba97fc1a287a1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316529,
+      "sha256": "60fe1d022600a27d3da725a415b8fdd16fca13a62f8b89e9988c436e013697d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-one-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "0278d33dc40e8a89df7e4a254f6bd839c73a7796a6b4812f42b890acfb138096",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316529,
+      "sha256": "6c5eca03f5fae4d46a0d936b2d531c60e3b264e283eda55b1e6568621eb68e30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-two-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "40733f4622a6eb9435f003af434c091eaf4aaf73ee0e55a62670eed36871fb94",
       "hash_kind": "file-bytes"
     },
     {
@@ -963,9 +987,16 @@
       "id": "bounded-complete-reproduction",
       "kind": "generator",
       "helper_version": "worldatlas-evidence-preparation-v1",
-      "description": "Authenticated bounded complete scans of exact frozen source and Atlas inputs; semantic rows joined to retained originals; reproducibility outputs only, no geography adjudication.",
+      "description": "Authenticated complete semantic reproduction; executes the exact issue-pinned immutable helper for canonical serialization and safe path admission, plus whole-source scans and exclusive new-vintage publication.",
       "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1",
       "units": "Feature counts, exact bytes and planar square degrees where recorded; planar measures are not physical area."
+    },
+    {
+      "id": "pairwise-measurements",
+      "kind": "measurement",
+      "description": "Independent comparison of complete fresh-run source/Atlas and retained physical measurements; deliberate perturbation must be rejected.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1",
+      "units": "Feature counts and planar square degrees; not physical area."
     }
   ],
   "metrics": [],
@@ -1016,6 +1047,18 @@
       "kind": "reproducibility",
       "outcome": "passed",
       "evidence_path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json"
+    },
+    {
+      "method_id": "pairwise-measurements",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-reproduction-integrity-1233-erratum/measurement-positive-control.json"
+    },
+    {
+      "method_id": "pairwise-measurements",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-reproduction-integrity-1233-erratum/measurement-negative-control.json"
     }
   ],
   "change_receipts": [
@@ -1136,6 +1179,26 @@
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v12-two-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-one-20261007/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-two-20261007/receipt.json",
       "status": "added",
       "previous_path": null
     },

@@ -6,6 +6,7 @@ admitted as an exclusive directory below vintages/<run-id> before work starts.
 """
 from __future__ import annotations
 import argparse, gzip, hashlib, json, math, os, pathlib, re, shutil, stat, subprocess, sys, tempfile
+import types
 from datetime import datetime, timezone
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -13,6 +14,7 @@ ROOT = HERE.parents[2]
 LOCK_PATH = HERE / "source-lock.json"
 RAW_LIMIT = 32 * 1024 * 1024
 PHASE_LIMIT = 256 * 1024 * 1024
+PREPARATION_HELPER = None
 
 
 def sha(data: bytes) -> str:
@@ -20,10 +22,14 @@ def sha(data: bytes) -> str:
 
 
 def canon(value) -> bytes:
+    if PREPARATION_HELPER is not None:
+        return PREPARATION_HELPER.canonical_json(value)
     return (json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False) + "\n").encode()
 
 
 def git_blob(commit: str, path: str) -> bytes:
+    if PREPARATION_HELPER is not None:
+        PREPARATION_HELPER.safe_path(path)
     if not re.fullmatch(r"[0-9a-f]{40}", commit) or path.startswith("/") or ".." in pathlib.PurePosixPath(path).parts:
         raise ValueError("unsafe immutable object reference")
     return subprocess.check_output(["git", "-C", str(ROOT), "show", f"{commit}:{path}"])
@@ -335,6 +341,8 @@ def safe_output(run_id, root=None):
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{7,63}", run_id):
         raise ValueError("run id must be 8-64 lowercase letters, digits or dashes")
     base = pathlib.Path(root) if root is not None else HERE / "vintages"
+    if PREPARATION_HELPER is not None:
+        PREPARATION_HELPER.safe_path("vintages/" + run_id)
     base.mkdir(mode=0o700, exist_ok=True)
     if base.is_symlink() or not base.is_dir():
         raise ValueError("vintages path is not a real directory")
@@ -404,6 +412,8 @@ def exclusive_output_controls():
 
 
 def atomic_new(base, target, root_id, target_id, rel, data):
+    if PREPARATION_HELPER is not None:
+        PREPARATION_HELPER.safe_path(rel)
     parts = pathlib.PurePosixPath(rel).parts
     if not parts or any(p in ("", ".", "..") for p in parts):
         raise ValueError("invalid output path")
@@ -450,6 +460,12 @@ def main():
     helper = lock["authenticated_helper"]
     helper_bytes = git_blob(helper["commit"], helper["path"])
     verify_pinned_bytes(helper_bytes,helper["bytes"],helper["sha256"],"shared immutable helper")
+    global PREPARATION_HELPER
+    pinned_helper = types.ModuleType("worldatlas_pinned_immutable")
+    exec(compile(helper_bytes, helper["path"], "exec"), pinned_helper.__dict__)
+    if pinned_helper.VERSION != "worldatlas-evidence-preparation-v1":
+        raise ValueError("pinned immutable helper version mismatch")
+    PREPARATION_HELPER = pinned_helper
     try: verify_pinned_bytes(helper_bytes+b"# altered helper control\n",helper["bytes"],helper["sha256"],"altered helper control")
     except ValueError: helper_control={"case":"altered-helper-bytes","rejected_before_output":True}
     else: raise ValueError("altered helper bytes passed authentication")

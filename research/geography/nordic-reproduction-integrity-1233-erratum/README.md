@@ -12,7 +12,7 @@ PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-reproduction-inte
 
 Each successful run creates a new, exclusive directory in `vintages/<unique-run-id>/`, writes the complete result, then installs `receipt.json` last. It refuses occupied paths, traversal IDs, symlinked ancestors, and replaced destinations. It uses only whole Git blobs pinned in `source-lock.json`. The exact C and M Atlas parts are both pinned, including the older C part-17 bytes through their preserved snapshot at the current baseline; each final result also includes the four full source features, the four C Atlas features, and the four full component and referenced fragment features for independent row checks.
 
-The two accepted fresh runs are `vintages/repro-v12-one-20261007/` and `vintages/repro-v12-two-20261007/`. Their canonical semantic outputs, full family scans, source joins, overlays, and controls match exactly; timestamps and each new receipt digest differ. `pairwise-reproducibility.json` binds both outputs. `validation-controls.json` and the four positive/negative control receipts record the actual outcomes. Earlier partial runs and failed attempts remain in `vintages/` or `attempt-history.json`; only the v12 pair is treated as the completed run.
+The two accepted fresh runs are `vintages/repro-v13-one-20261007/` and `vintages/repro-v13-two-20261007/`. Their canonical semantic outputs, full family scans, source joins, overlays, and controls match exactly; timestamps and each new receipt digest differ. `pairwise-reproducibility.json` binds both outputs. `validation-controls.json` and the four positive/negative control receipts record the actual outcomes. Earlier partial runs and failed attempts remain in `vintages/` or `attempt-history.json`; only the v13 pair is treated as the completed run.
 
 ## Scope and results
 
@@ -24,7 +24,7 @@ All four Atlas subject geometries differ from the corresponding consumed simplif
 
 The complete retained Natural Earth land layer intersects the full area of each of the four component geometries; the Natural Earth lakes layer intersects none. The original detector records all four water statuses as unverified, no positive-area administrative-input overlap, and no assignment. These generalized modern references do not establish historic land, water, ice, coastlines, legal borders, or a territorial assignment.
 
-All declared pin, source, component, fragment, contact, country-source, combined-overlay, and physical phases include raw and decoded bytes, project code, and derived result/fixture bytes. The largest measured phase is 157,731,319 bytes, below the 268,435,456-byte cap; each raw or decoded file is at most 32 MiB. The exact totals are in each run report.
+All declared pin, source, component, fragment, contact, country-source, combined-overlay, and physical phases include raw and decoded bytes, project code, and derived result/fixture bytes. The largest measured phase is 157,732,070 bytes, below the 268,435,456-byte cap; each raw or decoded file is at most 32 MiB. The exact totals are in each run report.
 
 ## Source context and unresolved findings
 
@@ -45,6 +45,6 @@ The exact 2013 Norway ADM1 crosswalk, the old combined Troms og Finnmark parent 
 - `reproduce.py`: authenticated whole-file checks, full semantic scans, measurement comparisons, negative controls, output admission, and exclusive publication.
 - `evidence-quality.json`: bounded manifest, per-file output hashes, result bindings, methods, source records, and limitations.
 - `attempt-history.json`: failed and superseded attempts kept distinct from the final pair.
-- `vintages/`: fresh results and receipts for each retained run; only the v12 pair is the final complete reproduction.
+- `vintages/`: fresh results and receipts for each retained run; only the v13 pair is the final complete reproduction.
 
 Engineering handoff: keep the historic parent/name/source crosswalk open under its existing owners. Any later correction requires that source owner to establish the exact historic join and a separate scoped engineering proposal. This packet makes no regional approval or release claim.

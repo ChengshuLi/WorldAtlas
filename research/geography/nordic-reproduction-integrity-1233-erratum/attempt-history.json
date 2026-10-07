@@ -1,7 +1,7 @@
 {
   "current_accepted_runs": [
-    "repro-v12-one-20261007",
-    "repro-v12-two-20261007"
+    "repro-v13-one-20261007",
+    "repro-v13-two-20261007"
   ],
   "failed_attempts": [
     {
@@ -27,7 +27,7 @@
   ],
   "issue": 1389,
   "limits": [
-    "Superseded runs and failed attempts are retained as history; only the v12 pair is the final full reproduction against the exact live issue body.",
+    "Superseded runs and failed attempts are retained as history; only the v13 pair is the final full reproduction against the exact live issue body.",
     "Failed attempts carry no passing output and no geographic finding."
   ],
   "preserved_superseded_runs": [
@@ -45,7 +45,17 @@
     "repro-v10-one-20261007",
     "repro-v10-two-20261007",
     "repro-v11-one-20261007",
-    "repro-v11-two-20261007"
+    "repro-v11-two-20261007",
+    "repro-v12-one-20261007",
+    "repro-v12-two-20261007"
   ],
-  "version": 1
+  "version": 1,
+  "incomplete_attempts": [],
+  "recovered_attempts": [
+    {
+      "run_id": "repro-v13-one-20261007",
+      "status": "accepted-as-run-one-of-v13-pair",
+      "note": "A storage-gate check blocked run two at the first attempt; the gate later passed and the second fresh run completed. Both outputs are retained and paired."
+    }
+  ]
 }
