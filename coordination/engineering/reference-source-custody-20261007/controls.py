@@ -24,7 +24,7 @@ def reject(fn, text):
 
 def run():
     checked = []
-    with tempfile.TemporaryDirectory(prefix='1364-custody-controls-') as folder:
+    with tempfile.TemporaryDirectory(prefix='1364-custody-controls-',dir=producer.REPO/'.cache') as folder:
         root = Path(folder); payload = b'whole-original-fixture\x00\xff'
         original = root / 'original'; original.write_bytes(payload)
         obj = {'whole_bytes': len(payload), 'whole_sha256': hashlib.sha256(payload).hexdigest()}
@@ -91,7 +91,7 @@ def run():
         reject(lambda: producer.run(commit,{},root/'escaped'),'own checkout cache')
         with tempfile.TemporaryDirectory(prefix='1364-existing-',dir=producer.REPO/'.cache') as existing:
             reject(lambda: producer.run(commit,{},existing),'Fresh owned run tree')
-        with tempfile.TemporaryDirectory(prefix='1364-cache-root-') as fake:
+        with tempfile.TemporaryDirectory(prefix='1364-cache-root-',dir=producer.REPO/'.cache') as fake:
             repo=Path(fake)/'repo';repo.mkdir();(repo/'.cache').symlink_to(root,target_is_directory=True)
             old_repo=producer.REPO
             try:
