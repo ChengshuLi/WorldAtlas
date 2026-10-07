@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Exact full bytes for both official tiles match whole-file SHA and byte-length receipts",
+    "Both raster headers and complete component footprint coverage verified by final producer",
+    "Two clean producer runs preserve identical pixel-centre class-count outputs"
+  ],
+  "kind": "positive-control",
+  "method_id": "worldcover-pixel-sampling",
+  "outcome": "passed"
+}

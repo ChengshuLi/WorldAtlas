@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "All source product whole-byte hashes and complete feature counts",
+    "All ten full component record hashes and pointsets from seven exact baseline shards",
+    "All ten detector-v4 fragment IDs and feature hashes",
+    "All five full contact record hashes and geometries",
+    "Both whole Natural Earth sources match pinned baseline compressed and uncompressed hashes",
+    "Ten component lineage links and unchanged tile 759 query",
+    "All ten assessment rows retained"
+  ],
+  "kind": "positive-control",
+  "method_id": "source-assessment-generator",
+  "outcome": "passed"
+}

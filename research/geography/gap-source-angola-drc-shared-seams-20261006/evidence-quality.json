@@ -1,0 +1,956 @@
+{
+  "baseline": {
+    "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+    "files": [
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "role": "pinned-reference",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "role": "pinned-reference",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 73547,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "role": "pinned-reference",
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+      },
+      {
+        "bytes": 271171,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/manifest.json",
+        "role": "pinned-reference",
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      },
+      {
+        "bytes": 2080037,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "role": "original-source",
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "bytes": 2081831,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "role": "original-source",
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "bytes": 2080606,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "role": "original-source",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "bytes": 2085907,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "role": "original-source",
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "bytes": 2085110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "role": "original-source",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "bytes": 2079838,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "role": "original-source",
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "bytes": 1714760,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "role": "original-source",
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "bytes": 1164442,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-003.geojson.gz",
+        "role": "original-source",
+        "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e",
+        "uncompressed_bytes": 8387472,
+        "uncompressed_sha256": "d5329c7b3fb7ee964f2e582823fea5435f801214162a835dca4210ec12bb2474"
+      },
+      {
+        "bytes": 492083,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+        "role": "original-source",
+        "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330"
+      },
+      {
+        "bytes": 12932167,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-29.json",
+        "role": "original-source",
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+      },
+      {
+        "bytes": 5226173,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-5.json",
+        "role": "original-source",
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+      }
+    ],
+    "pin_files": {
+      "administrative_sources": "data/administrative-sources.json",
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json",
+      "physical_inventory": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json"
+    },
+    "pins": {
+      "administrative_sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "physical_inventory": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+    },
+    "subject_files": {
+      "gb:AGO:ADM2:16411231B62076307190429": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B71421381230719": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B80406676016894": "data/geography/part-29.json",
+      "gb:COD:ADM2:63176286B37251946319002": "data/geography/part-5.json",
+      "gb:COD:ADM2:63176286B94968684087840": "data/geography/part-5.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/administrative-sources.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/baseline-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-source-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-source-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/current-successor-vintage.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/family-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/issue-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/natural-earth-reference-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/original-fragments.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/prior-source-screen.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/source-acquisition-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/component-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/fragment-contact-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/geometry-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/run-one-digests.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/run-two-digests.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-samples.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-AGO-ADM2-ADM2-consumed-simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-COD-ADM2-ADM2-consumed-simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/natural-earth/natural-earth-lakes.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/natural-earth/natural-earth-land.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/worldcover-v200/retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/verify_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "Restore both exact WorldCover tiles from sources/worldcover-v200/retrieval.json and verify the full SHA-256 hashes.",
+    "WORLD_COVER_DIR=/path/to/exact-worldcover-tiles python3 research/geography/gap-source-angola-drc-shared-seams-20261006/reproduce.py",
+    "python3 research/geography/gap-source-angola-drc-shared-seams-20261006/verify_packet.py"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "gb:COD:ADM2",
+        "gb:AGO:ADM2"
+      ],
+      "status": "supported",
+      "text": "Complete consumed COD and AGO simplified admin product bytes and all 350 features were retained and verified; overlays establish source geometry relationships only."
+    },
+    {
+      "source_ids": [
+        "natural-earth-lakes",
+        "natural-earth-land",
+        "worldcover-v200"
+      ],
+      "status": "supported",
+      "text": "Natural Earth and 2021 WorldCover references do not determine dated physical-water status for any complete component; all ten current dispositions remain unresolved."
+    },
+    {
+      "source_ids": [
+        "atlas-original-components",
+        "atlas-contact-features"
+      ],
+      "status": "unresolved",
+      "text": "Cause and any repair authorization remain unknown; this packet makes no geometry proposal or ownership decision."
+    },
+    {
+      "source_ids": [
+        "prior-complete-family-screen"
+      ],
+      "status": "supported",
+      "text": "The included prior complete-family screen reports two unique-compatible and eight mixed/partial cases, but is retained as preceding context rather than independent water or causal evidence."
+    },
+    {
+      "source_ids": [
+        "merged-successor-1215"
+      ],
+      "status": "supported",
+      "text": "Merged #1215 successor lineage preserves ten exact component IDs and hashes; an unmerged later assessment is not treated as delivered."
+    }
+  ],
+  "issue": 1243,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Deterministic exact source-coordinate intersection/union/symmetric-difference producer and complete source feature/context extraction receipts.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "source-assessment-generator",
+      "kind": "generator",
+      "software": "Python 3.12.14; Shapely 2.1.2; Rasterio 1.4.3; NumPy 2.3.5; PROJ 3.7.2",
+      "units": "EPSG:4326 coordinate units and pixel counts"
+    },
+    {
+      "description": "Whole-file pins for consumed COD/AGO products, original Atlas components/fragments/contacts, and distinct merged successor lineage.",
+      "id": "source-vintage-check",
+      "kind": "source",
+      "software": "Git; Python 3.12.14; SHA-256",
+      "units": "whole-file bytes and source feature identities"
+    },
+    {
+      "description": "Strict-interior pixel-centre categorical counts from exact ESA WorldCover v200 2021 tiles; observations only.",
+      "id": "worldcover-pixel-sampling",
+      "kind": "measurement",
+      "software": "Python 3.12.14; Rasterio 1.4.3; NumPy 2.3.5; Shapely 2.1.2",
+      "units": "WorldCover pixels by class; no whole-polygon water area"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/component_count",
+      "metric_id": "component_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    },
+    {
+      "json_pointer": "/original_fragment_count",
+      "metric_id": "original_fragment_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    },
+    {
+      "json_pointer": "/contact_count",
+      "metric_id": "contact_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    },
+    {
+      "json_pointer": "/admin_source_feature_counts/COD",
+      "metric_id": "COD_source_feature_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    },
+    {
+      "json_pointer": "/admin_source_feature_counts/AGO",
+      "metric_id": "AGO_source_feature_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    },
+    {
+      "json_pointer": "/prior_unique_compatible_screen_count",
+      "metric_id": "prior_unique_compatible_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    },
+    {
+      "json_pointer": "/prior_mixed_partial_screen_count",
+      "metric_id": "prior_mixed_partial_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    },
+    {
+      "json_pointer": "/successor_linked_component_count",
+      "metric_id": "successor_linked_component_count",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "component_count",
+      "input_sha256": "7fdb8b5647b49207c2050b8546f69dc144c8f9c88a96c886d5e0a631dc6b86f6",
+      "unit": "components",
+      "value": 10,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "original_fragment_count",
+      "input_sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e",
+      "unit": "original fragments",
+      "value": 10,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "contact_count",
+      "input_sha256": "d274c734aa90f5262c3f434a92c813fcb8397f3004e0005a8603dd94bf6047e9",
+      "unit": "contact features",
+      "value": 5,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "COD_source_feature_count",
+      "input_sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa",
+      "unit": "source features",
+      "value": 189,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "AGO_source_feature_count",
+      "input_sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+      "unit": "source features",
+      "value": 161,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "prior_unique_compatible_count",
+      "input_sha256": "1e6a29d1161062eabc372e925d43d6209cb7c0ca48d079d55da650d2ef315c10",
+      "unit": "components in prior screen",
+      "value": 2,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "prior_mixed_partial_count",
+      "input_sha256": "1e6a29d1161062eabc372e925d43d6209cb7c0ca48d079d55da650d2ef315c10",
+      "unit": "components in prior screen",
+      "value": 8,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "id": "successor_linked_component_count",
+      "input_sha256": "8d419bbe10d5a59fa69865dd5f13d960e8b812a57e8c5248aa8adde1e354d132",
+      "unit": "components in merged successor",
+      "value": 10,
+      "vintage": "baseline"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 6604,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/README.md",
+      "role": "assessment-artifact",
+      "sha256": "d27357ca5424c5ec585787d0b3baa15dd6255facafa22db544c75ce6476e8300"
+    },
+    {
+      "bytes": 661416,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/administrative-sources.json",
+      "role": "assessment-artifact",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "bytes": 916,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/baseline-pins.json",
+      "role": "assessment-artifact",
+      "sha256": "aa192c5486c81adafeec8b5836e7eb214ee65d7644dbaf09b126ad10c8e88f2c"
+    },
+    {
+      "bytes": 747,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/claim-receipt.json",
+      "role": "assessment-artifact",
+      "sha256": "d03d4689c946a1a58b390eb30f918abf81eb452c01537ea923fc9ba7538b2157"
+    },
+    {
+      "bytes": 9974,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "role": "assessment-artifact",
+      "sha256": "56b2e75d7a2a17f02f64fdcfa4cce353f82cd8c0fd276d15069e4e25b427a707"
+    },
+    {
+      "bytes": 12520,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-source-bindings.json",
+      "role": "assessment-artifact",
+      "sha256": "d896b524e1d63499e1564923aa3a51f092c39d3434ef27ae85c620cf2afc6fb0"
+    },
+    {
+      "bytes": 48025,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+      "role": "assessment-artifact",
+      "sha256": "c3a6a160537d47b2dc09fe4797fd696d5989cd15f645a624c4214eba90b1106f"
+    },
+    {
+      "bytes": 11878,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-source-bindings.json",
+      "role": "assessment-artifact",
+      "sha256": "d274c734aa90f5262c3f434a92c813fcb8397f3004e0005a8603dd94bf6047e9"
+    },
+    {
+      "bytes": 13677,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/current-successor-vintage.json",
+      "role": "assessment-artifact",
+      "sha256": "8d419bbe10d5a59fa69865dd5f13d960e8b812a57e8c5248aa8adde1e354d132"
+    },
+    {
+      "bytes": 3371,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/family-roster.json",
+      "role": "assessment-artifact",
+      "sha256": "7fdb8b5647b49207c2050b8546f69dc144c8f9c88a96c886d5e0a631dc6b86f6"
+    },
+    {
+      "bytes": 1636,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/issue-contract.json",
+      "role": "assessment-artifact",
+      "sha256": "1301ffe30d21879a6d7ed7c37b90bdd54617f1f78ade0b5d0f1bdc3a94e51045"
+    },
+    {
+      "bytes": 1799,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/natural-earth-reference-receipt.json",
+      "role": "assessment-artifact",
+      "sha256": "aea8c8836c424ed6058059de80b066fd4a275e9f915133b53ce5288689212c3b"
+    },
+    {
+      "bytes": 19803,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/original-fragments.geojson",
+      "role": "assessment-artifact",
+      "sha256": "d8d93d0542920ffa5a4798c6c082b5fb96bdc21b6c6f3ede869a1e0493613010"
+    },
+    {
+      "bytes": 110680,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/prior-source-screen.json",
+      "role": "assessment-artifact",
+      "sha256": "1e6a29d1161062eabc372e925d43d6209cb7c0ca48d079d55da650d2ef315c10"
+    },
+    {
+      "bytes": 3701,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/source-acquisition-receipt.json",
+      "role": "assessment-artifact",
+      "sha256": "43bd910878a74d2f356293f45a6d36ac4ef5d17113aa09b05510425fbdc970ed"
+    },
+    {
+      "bytes": 12857,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/component-assessment.json",
+      "role": "assessment-artifact",
+      "sha256": "985237eb84431b852a493a753fb73a5cdad3fe94b289251619c416ad79b99654"
+    },
+    {
+      "bytes": 287771,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/fragment-contact-overlays.json",
+      "role": "assessment-artifact",
+      "sha256": "5b2231232d4b5c027db51bad8e4127c8a798733aadb9bd7d742123e50227fdfd"
+    },
+    {
+      "bytes": 1242991,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/geometry-overlays.json",
+      "role": "assessment-artifact",
+      "sha256": "6e164778a95d81177b4f019ad32c77b01d6c27060a583ca252d1e719069e99f4"
+    },
+    {
+      "bytes": 391,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/negative-control.json",
+      "role": "assessment-artifact",
+      "sha256": "9bf009e5c563eacb1ac0d8121c39fb3a859f58f2108070c41869976720560eb3"
+    },
+    {
+      "bytes": 601,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/positive-control.json",
+      "role": "assessment-artifact",
+      "sha256": "946b752c3caf01ecfa75e162971e1cc674d0d15183c619ff86eca1de7ced3b5e"
+    },
+    {
+      "bytes": 786,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/reproducibility-control.json",
+      "role": "assessment-artifact",
+      "sha256": "722222213cb6b3a18b595c920704a3518ef6a9824dbcc67ed6b2f3fe52c7db9a"
+    },
+    {
+      "bytes": 512,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/run-one-digests.json",
+      "role": "assessment-artifact",
+      "sha256": "139e5d6bbf1dbea4164ec92ec725d72bb9d097d7f3c717536b14b06776d53ee3"
+    },
+    {
+      "bytes": 512,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/run-two-digests.json",
+      "role": "assessment-artifact",
+      "sha256": "139e5d6bbf1dbea4164ec92ec725d72bb9d097d7f3c717536b14b06776d53ee3"
+    },
+    {
+      "bytes": 471,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/summary.json",
+      "role": "assessment-artifact",
+      "sha256": "7ffa3b40ffe4fbbd7d90ac018a4a63f71323f4cc68fffb85365628ab20b938a6"
+    },
+    {
+      "bytes": 403,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-negative-control.json",
+      "role": "assessment-artifact",
+      "sha256": "ac8f527f00ee3c520257010d81fefecb1eddd6de0f6080e5566c9f1db11a64c9"
+    },
+    {
+      "bytes": 391,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-positive-control.json",
+      "role": "assessment-artifact",
+      "sha256": "cd5552c6ccfaccc2646c7b3122b4e97198a96b2b2ee8bf4348f7b384c656679b"
+    },
+    {
+      "bytes": 6021,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-samples.json",
+      "role": "assessment-artifact",
+      "sha256": "0b0dd0eb7312ac55e4ae9daa80873fc6c7566a561aabace8c1d47cf4d73857f4"
+    },
+    {
+      "bytes": 16835,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/reproduce.py",
+      "role": "assessment-artifact",
+      "sha256": "548bc60fd5e7448e1b03f57e5efcba43e43b051da2424c58b74fd40d8c0d78d4"
+    },
+    {
+      "bytes": 1950,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/worldcover-v200/retrieval.json",
+      "role": "assessment-artifact",
+      "sha256": "166f9cda411913951ef07cf378dcc897a9e0064480f7a52e25085882d0e63a9f"
+    },
+    {
+      "bytes": 5258,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/verify_packet.py",
+      "role": "assessment-artifact",
+      "sha256": "5d95864a5ae24ace4ea98d34d01612ee9edbcc04489fdbfcfda83f656c5e426c"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 3294607,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-COD-ADM2-ADM2-consumed-simplified.geojson",
+          "role": "retained-original-source",
+          "sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa"
+        }
+      ],
+      "id": "gb:COD:ADM2",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "limit": "Administrative feature coverage does not establish physical water status, dated legal authority, or causal processing history.",
+      "restoration": "Complete original product bytes retained at the whole-file descriptor path; actual retrieval observation and SHA-256 are recorded.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-06T22:17:16.098071+00:00",
+      "role": "Complete consumed simplified administrative source product; source coverage only, not physical-water or legal-ownership evidence",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2_simplified.geojson",
+      "verification": "verified",
+      "vintage": "2019"
+    },
+    {
+      "files": [
+        {
+          "bytes": 813152,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-AGO-ADM2-ADM2-consumed-simplified.geojson",
+          "role": "retained-original-source",
+          "sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf"
+        }
+      ],
+      "id": "gb:AGO:ADM2",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "limit": "Administrative feature coverage does not establish physical water status, dated legal authority, or causal processing history.",
+      "restoration": "Complete original product bytes retained at the whole-file descriptor path; actual retrieval observation and SHA-256 are recorded.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-06T23:21:12Z",
+      "role": "Complete consumed simplified administrative source product; source coverage only, not physical-water or legal-ownership evidence",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2_simplified.geojson",
+      "verification": "verified",
+      "vintage": "2018"
+    },
+    {
+      "files": [
+        {
+          "bytes": 1565161,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/natural-earth/natural-earth-lakes.geojson.gz",
+          "role": "retained-original-source",
+          "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+          "uncompressed_bytes": 5043554,
+          "uncompressed_sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9"
+        }
+      ],
+      "id": "natural-earth-lakes",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain; Natural Earth terms."
+      },
+      "limit": "1:10m major lakes/reservoirs only; incomplete for rivers, small water and date-specific hydrology.",
+      "restoration": "Exact compressed source bytes retained and SHA-256 checked against pinned baseline copy.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05T00:00:00Z",
+      "role": "Independent coarse physical reference",
+      "temporal_status": "reference",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+      "verification": "verified",
+      "vintage": "Natural Earth pinned release ca96624a56bd078437bca8184e78163e5039ad19"
+    },
+    {
+      "files": [
+        {
+          "bytes": 3569322,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/natural-earth/natural-earth-land.geojson.gz",
+          "role": "retained-original-source",
+          "sha256": "6642c0dfdb15359c3fb5135bd525f76392ca01df7efd2a4652fa60c4cd961294",
+          "uncompressed_bytes": 10157965,
+          "uncompressed_sha256": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416"
+        }
+      ],
+      "id": "natural-earth-land",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain; Natural Earth terms."
+      },
+      "limit": "1:10m land reference; incomplete for fine shorelines and small islands.",
+      "restoration": "Exact compressed source bytes retained and SHA-256 checked against pinned baseline copy.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05T00:00:00Z",
+      "role": "Independent coarse physical reference",
+      "temporal_status": "reference",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+      "verification": "verified",
+      "vintage": "Natural Earth pinned release ca96624a56bd078437bca8184e78163e5039ad19"
+    },
+    {
+      "id": "atlas-original-components",
+      "license": {
+        "status": "unknown",
+        "terms": "Atlas-derived records; no separate external license declaration asserted here."
+      },
+      "limit": "Atlas outputs do not establish the original upstream inputs or executed processing closure.",
+      "restoration": "Use the seven pinned `.bin` component shards and detector products in baseline.files at the immutable baseline commit; verify whole and uncompressed digests.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T23:03:50Z",
+      "role": "Original Atlas full component features and exact detector lineage",
+      "temporal_status": "unknown",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/79ffb2ed04702e16f009e4675a8d74ef9bd09d4f/coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads",
+      "verification": "verified",
+      "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+    },
+    {
+      "id": "atlas-contact-features",
+      "license": {
+        "status": "unknown",
+        "terms": "Atlas-derived records; no separate external license declaration asserted here."
+      },
+      "limit": "Contact features are not adjudication of legal ownership or current administrative role.",
+      "restoration": "Retrieve two whole geography partitions pinned in baseline.files at the immutable commit.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T23:03:50Z",
+      "role": "Five complete Atlas contact feature records under exact issue scope",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/79ffb2ed04702e16f009e4675a8d74ef9bd09d4f/data/geography",
+      "verification": "verified",
+      "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+    },
+    {
+      "id": "worldcover-v200",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 International (CC BY 4.0)."
+      },
+      "limit": "Full tile bytes exceed the evidence per-file limit and are not included. Class 80/90 point-centre observations are not full-shape hydrology, absence does not establish dry land, and 2021 postdates consumed 2018/2019 products.",
+      "restoration": "Retrieve both exact 3\u00b0\u00d73\u00b0 URLs in `sources/worldcover-v200/retrieval.json`; verify full bytes against SHA-256 and length before producer execution.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T22:17:16Z",
+      "role": "Independent 2021 land-cover observations at strict-interior pixel centres",
+      "temporal_status": "reference",
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S09E015_Map.tif",
+      "verification": "verified",
+      "vintage": "ESA WorldCover 10m 2021 v200; release 2022-10-28"
+    },
+    {
+      "id": "prior-complete-family-screen",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal prior-screen evidence; no external reuse terms asserted."
+      },
+      "limit": "Not independently validated here as primary evidence of physical water or cause.",
+      "restoration": "Original screen payload is included at inputs/prior-source-screen.json with whole-file SHA-256 recorded.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T23:03:50Z",
+      "role": "Preceding complete family source coverage screen, kept as prior context only",
+      "temporal_status": "unknown",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1243",
+      "verification": "unverified",
+      "vintage": "10-component source screen bound to Atlas baseline 79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+    },
+    {
+      "id": "merged-successor-1215",
+      "license": {
+        "status": "unknown",
+        "terms": "Atlas-generated analysis output; no separate external license asserted."
+      },
+      "limit": "A later #1231 assessment was open/unmerged when inspected and is not called delivered. Linked identity does not establish physical-water correctness or cause.",
+      "restoration": "Exact target rows and original source descriptors are included in inputs/current-successor-vintage.json; source files can be recovered at the immutable commit.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T23:03:50Z",
+      "role": "Merged successor run-one lineage and unchanged tile query, separate from original and current observations",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/c6a26e1caba54e1b81a89fbda3a64fff56da323d/coordination/engineering/worldwide-successor-1215-20261006/run-one",
+      "verification": "verified",
+      "vintage": "Merged #1215 successor commit c6a26e1caba54e1b81a89fbda3a64fff56da323d"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:AGO:ADM2:16411231B62076307190429",
+    "gb:AGO:ADM2:16411231B71421381230719",
+    "gb:AGO:ADM2:16411231B80406676016894",
+    "gb:COD:ADM2:63176286B37251946319002",
+    "gb:COD:ADM2:63176286B94968684087840"
+  ],
+  "subject_ids_sha256": "c357232965451bf4bd2fba8563b3d32c37235f7014177faf1e50750ece1bc324",
+  "summaries": [
+    {
+      "metric_id": "component_count",
+      "unit": "components",
+      "value": 10
+    },
+    {
+      "metric_id": "original_fragment_count",
+      "unit": "original fragments",
+      "value": 10
+    },
+    {
+      "metric_id": "contact_count",
+      "unit": "contact features",
+      "value": 5
+    },
+    {
+      "metric_id": "COD_source_feature_count",
+      "unit": "source features",
+      "value": 189
+    },
+    {
+      "metric_id": "AGO_source_feature_count",
+      "unit": "source features",
+      "value": 161
+    },
+    {
+      "metric_id": "prior_unique_compatible_count",
+      "unit": "components in prior screen",
+      "value": 2
+    },
+    {
+      "metric_id": "prior_mixed_partial_count",
+      "unit": "components in prior screen",
+      "value": 8
+    },
+    {
+      "metric_id": "successor_linked_component_count",
+      "unit": "components in merged successor",
+      "value": 10
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "source-assessment-generator",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "source-assessment-generator",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/reproducibility-control.json",
+      "kind": "reproducibility",
+      "method_id": "source-assessment-generator",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "worldcover-pixel-sampling",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/outputs/worldcover-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "worldcover-pixel-sampling",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
+}

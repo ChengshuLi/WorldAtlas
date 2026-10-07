@@ -1,0 +1,330 @@
+{
+  "source_commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+  "source_files": [
+    {
+      "bytes": 2608186,
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-00.json.gz",
+      "sha256": "6c1716ffb456af088cd971bbfe458f25d27f32b42461ff86d75a2e6dfbd15309"
+    },
+    {
+      "bytes": 2611617,
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-01.json.gz",
+      "sha256": "2d4c2e01e2901d80b161c94d58dbe8118396fbc2884f0d3f438831b766cd653f"
+    },
+    {
+      "bytes": 2610148,
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-02.json.gz",
+      "sha256": "e7b13a079b9fefec1591a66c1e8bc29fc83b85e8dc7cd2d3db29135cc4bc3dd6"
+    },
+    {
+      "bytes": 2610902,
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-03.json.gz",
+      "sha256": "2b3d6321ea37bad41251533288ad13314dd8bf1486c078da670425cfe913c8ea"
+    },
+    {
+      "bytes": 1980702,
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-04.json.gz",
+      "sha256": "01c8e0b078d766194209774149fc63b69c4e8785c45550f70fe457a88b09a6a7"
+    }
+  ],
+  "target_component_lineage": [
+    {
+      "counterparts": [
+        "physical-component:021fd4e137bfb491d460efb7193c9d4c90fa355aa6011d5ce17076df7df0869a"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:38:9451bcd7e25a151e0cb827f86307b6c4c3c447003b1bb55333fcc3b3dbc2d141"
+      ],
+      "full_feature_sha256": "379ef51288808cf52fc4e393a138bb78c09b05d2574226c8a98702e1f5e53b0e",
+      "id": "physical-component:021fd4e137bfb491d460efb7193c9d4c90fa355aa6011d5ce17076df7df0869a",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:4a0bb7b34741b7705e900ddde2f988ab4827ffea2b80954fc9cb6797146f1f88"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:39:5a6899278f6ee42d9b66033e365116f5fbf9f9d87c3d77bcc7dbb78135d1014a"
+      ],
+      "full_feature_sha256": "caf604b40ffb405a5db09ae59dbb60f17d8730bb16c855207a87206aafd576a5",
+      "id": "physical-component:4a0bb7b34741b7705e900ddde2f988ab4827ffea2b80954fc9cb6797146f1f88",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:19:d57c8d5906975fb117822cc04521c6b2c53de49d0739dbd063f7d857ebf36ca1"
+      ],
+      "full_feature_sha256": "911bc5c8100f6b26c749c9aabf185cf4fa4c97a514ba736896b9a8ca5bf370cc",
+      "id": "physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:7b457906483432e330c121d5feec77b0eb96e63299da2719873cad13c35a24b0"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:18:90636176fd4de6c05388c0a37ceefa710b8280e31103af5aa58bd35f46fc5a38"
+      ],
+      "full_feature_sha256": "f30ab0e0465c1c4708e98b7420872bccad7a0f8396ec51e5574d7506b5c7e854",
+      "id": "physical-component:7b457906483432e330c121d5feec77b0eb96e63299da2719873cad13c35a24b0",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:939bc3dbbf1a6ecf3734d8f1ebbc901f522b1935dc51301afb66ca702c8383ec"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:45:d914eab8f54b46144d05d6dc65823000c9c4ebfa624da265821825c812c6a8f6"
+      ],
+      "full_feature_sha256": "7fcc6bc6c34ef28f192bd0b574e65329407b6d095d4fa8968878298b7f49c2dc",
+      "id": "physical-component:939bc3dbbf1a6ecf3734d8f1ebbc901f522b1935dc51301afb66ca702c8383ec",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:a4338eeba714b43b93c9959104be85591f256ce0374958558229c80e46b37e17"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:40:ad0e7f32f96f40ee34963b22d5d1ffb2d0dda888b6a415114084e844877c2ca0"
+      ],
+      "full_feature_sha256": "757f5319741ad15f58671339071a3d4da3f6053a20b7f05d37bb612a43665f12",
+      "id": "physical-component:a4338eeba714b43b93c9959104be85591f256ce0374958558229c80e46b37e17",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:d2ac6f596c024aa333f12ec66e1f542a5ef8f984b8ca5a9fcfbd3f6135c9440a"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:44:465667535ab5036c81757dcdf4fa25f5fc94020bb92e9235d2a514ff03d672c4"
+      ],
+      "full_feature_sha256": "2d9cb3067e30f9cd08a3416c5caf9736c91e7751e129ac07281e2f5316bfbc9e",
+      "id": "physical-component:d2ac6f596c024aa333f12ec66e1f542a5ef8f984b8ca5a9fcfbd3f6135c9440a",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:20:58a4c920b56908538bfbf7db14fc55b360442a08df39b3c78ad1783398f052b9"
+      ],
+      "full_feature_sha256": "645d73a900180d4c52c4ee4de5a14c94c03ec0059604aa78cdddd0e9b383fdeb",
+      "id": "physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:dfa4e25a97eff43fac2b408cdc2db1d7e45439931b47951ef18a233b9910e8ec"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:37:fb00b077b07d95336ee6ecdbc5a228cf15a017832f949f546d5f8ef4352a5d26"
+      ],
+      "full_feature_sha256": "4d46a5ae8f9136fd86c6c1c85429e056e1ec233f9662d40d70f616b8ba7f37c3",
+      "id": "physical-component:dfa4e25a97eff43fac2b408cdc2db1d7e45439931b47951ef18a233b9910e8ec",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    },
+    {
+      "counterparts": [
+        "physical-component:eded93368ac9537653931967882e67115d076d812fadb42837a53fd619926de1"
+      ],
+      "fragment_ids": [
+        "physical-gap:759:43:30948e67e12d5aaa45b6ab9e4b87ad5237a9b96cdb03681b2f02e31e4c8ef518"
+      ],
+      "full_feature_sha256": "4901ef076517c51bd5e1fdf4bd3ed564ae8e65c6191fdcdf030b42f80c99fd4c",
+      "id": "physical-component:eded93368ac9537653931967882e67115d076d812fadb42837a53fd619926de1",
+      "relation": "linked",
+      "unmeasured_fragment_ids": []
+    }
+  ],
+  "target_tile_query": {
+    "bounds": [
+      15,
+      -10,
+      20,
+      -5
+    ],
+    "current_query": {
+      "invalid_land": [],
+      "invalid_locations": [],
+      "invalid_water": [],
+      "land": [
+        "land-reference:0"
+      ],
+      "locations": [
+        "gb:AGO:ADM2:16411231B5624904826032",
+        "gb:AGO:ADM2:16411231B14026851768459",
+        "gb:AGO:ADM2:16411231B59057839791077",
+        "gb:AGO:ADM2:16411231B78464555589118",
+        "gb:AGO:ADM2:16411231B29129195178285",
+        "gb:AGO:ADM2:16411231B17334259111199",
+        "gb:AGO:ADM2:16411231B75218276401206",
+        "gb:AGO:ADM2:16411231B74814474784787",
+        "gb:AGO:ADM2:16411231B11923183554394",
+        "gb:AGO:ADM2:16411231B78055758253465",
+        "gb:AGO:ADM2:16411231B62076307190429",
+        "gb:AGO:ADM2:16411231B87068264799500",
+        "gb:AGO:ADM2:16411231B87249097951168",
+        "gb:AGO:ADM2:16411231B67670331694972",
+        "gb:COD:ADM2:63176286B94968684087840",
+        "gb:COD:ADM2:63176286B93121803325272",
+        "gb:COD:ADM2:63176286B47421332346835",
+        "gb:COD:ADM2:63176286B18264844623742",
+        "gb:COD:ADM2:63176286B37254158064276",
+        "gb:AGO:ADM2:16411231B80406676016894",
+        "gb:AGO:ADM2:16411231B71421381230719",
+        "gb:AGO:ADM2:16411231B16486458607962",
+        "gb:COD:ADM2:63176286B37251946319002",
+        "gb:COD:ADM2:63176286B40120828568077",
+        "gb:COD:ADM2:63176286B71176382547280",
+        "gb:COD:ADM2:63176286B32367911689095",
+        "gb:COD:ADM2:63176286B53815785774290",
+        "gb:COD:ADM2:63176286B11990771214401",
+        "gb:AGO:ADM2:16411231B37485282645839",
+        "gb:AGO:ADM2:16411231B47759155186361",
+        "gb:AGO:ADM2:16411231B98067547947449",
+        "gb:AGO:ADM2:16411231B24832260856221",
+        "gb:AGO:ADM2:16411231B65481598851378",
+        "gb:AGO:ADM2:16411231B72274635220449",
+        "gb:AGO:ADM2:16411231B16338972906264",
+        "gb:AGO:ADM2:16411231B97968728022198",
+        "gb:AGO:ADM2:16411231B49543454586368",
+        "gb:AGO:ADM2:16411231B93186609195170",
+        "gb:AGO:ADM2:16411231B37796017846890",
+        "gb:AGO:ADM2:16411231B13630390951601",
+        "gb:AGO:ADM2:16411231B8958758392272",
+        "gb:AGO:ADM2:16411231B62517281304335",
+        "gb:AGO:ADM2:16411231B20563031193513",
+        "gb:AGO:ADM2:16411231B24225125223000",
+        "gb:AGO:ADM2:16411231B18194256485425",
+        "gb:AGO:ADM2:16411231B93051847257849",
+        "gb:AGO:ADM2:16411231B88680283055362",
+        "gb:AGO:ADM2:16411231B13101730310660",
+        "gb:AGO:ADM2:16411231B57264663611478",
+        "gb:AGO:ADM2:16411231B50903558782725",
+        "gb:AGO:ADM2:16411231B8170218299463",
+        "gb:AGO:ADM2:16411231B23372606700244",
+        "gb:AGO:ADM2:16411231B78351669790785",
+        "gb:AGO:ADM2:16411231B72125125970883",
+        "gb:AGO:ADM2:16411231B84083925442954",
+        "gb:AGO:ADM2:16411231B93417670268347",
+        "gb:AGO:ADM2:16411231B13673884729200",
+        "gb:AGO:ADM2:16411231B94377396488260",
+        "gb:AGO:ADM2:16411231B1695185499214",
+        "gb:COD:ADM2:63176286B83971453832478",
+        "gb:COD:ADM2:63176286B8336769847246",
+        "gb:COD:ADM2:63176286B98008703469616",
+        "gb:COD:ADM2:63176286B82592558575614",
+        "gb:COD:ADM2:63176286B22382339186814",
+        "gb:COD:ADM2:63176286B79360907689545"
+      ],
+      "shorelines": []
+    },
+    "current_unknowns": [],
+    "original_query": {
+      "invalid_land": [],
+      "invalid_locations": [],
+      "invalid_water": [],
+      "land": [
+        "land-reference:0"
+      ],
+      "locations": [
+        "gb:AGO:ADM2:16411231B5624904826032",
+        "gb:AGO:ADM2:16411231B14026851768459",
+        "gb:AGO:ADM2:16411231B59057839791077",
+        "gb:AGO:ADM2:16411231B78464555589118",
+        "gb:AGO:ADM2:16411231B29129195178285",
+        "gb:AGO:ADM2:16411231B17334259111199",
+        "gb:AGO:ADM2:16411231B75218276401206",
+        "gb:AGO:ADM2:16411231B74814474784787",
+        "gb:AGO:ADM2:16411231B11923183554394",
+        "gb:AGO:ADM2:16411231B78055758253465",
+        "gb:AGO:ADM2:16411231B62076307190429",
+        "gb:AGO:ADM2:16411231B87068264799500",
+        "gb:AGO:ADM2:16411231B87249097951168",
+        "gb:AGO:ADM2:16411231B67670331694972",
+        "gb:COD:ADM2:63176286B94968684087840",
+        "gb:COD:ADM2:63176286B93121803325272",
+        "gb:COD:ADM2:63176286B47421332346835",
+        "gb:COD:ADM2:63176286B18264844623742",
+        "gb:COD:ADM2:63176286B37254158064276",
+        "gb:AGO:ADM2:16411231B80406676016894",
+        "gb:AGO:ADM2:16411231B71421381230719",
+        "gb:AGO:ADM2:16411231B16486458607962",
+        "gb:COD:ADM2:63176286B37251946319002",
+        "gb:COD:ADM2:63176286B40120828568077",
+        "gb:COD:ADM2:63176286B71176382547280",
+        "gb:COD:ADM2:63176286B32367911689095",
+        "gb:COD:ADM2:63176286B53815785774290",
+        "gb:COD:ADM2:63176286B11990771214401",
+        "gb:AGO:ADM2:16411231B37485282645839",
+        "gb:AGO:ADM2:16411231B47759155186361",
+        "gb:AGO:ADM2:16411231B98067547947449",
+        "gb:AGO:ADM2:16411231B24832260856221",
+        "gb:AGO:ADM2:16411231B65481598851378",
+        "gb:AGO:ADM2:16411231B72274635220449",
+        "gb:AGO:ADM2:16411231B16338972906264",
+        "gb:AGO:ADM2:16411231B97968728022198",
+        "gb:AGO:ADM2:16411231B49543454586368",
+        "gb:AGO:ADM2:16411231B93186609195170",
+        "gb:AGO:ADM2:16411231B37796017846890",
+        "gb:AGO:ADM2:16411231B13630390951601",
+        "gb:AGO:ADM2:16411231B8958758392272",
+        "gb:AGO:ADM2:16411231B62517281304335",
+        "gb:AGO:ADM2:16411231B20563031193513",
+        "gb:AGO:ADM2:16411231B24225125223000",
+        "gb:AGO:ADM2:16411231B18194256485425",
+        "gb:AGO:ADM2:16411231B93051847257849",
+        "gb:AGO:ADM2:16411231B88680283055362",
+        "gb:AGO:ADM2:16411231B13101730310660",
+        "gb:AGO:ADM2:16411231B57264663611478",
+        "gb:AGO:ADM2:16411231B50903558782725",
+        "gb:AGO:ADM2:16411231B8170218299463",
+        "gb:AGO:ADM2:16411231B23372606700244",
+        "gb:AGO:ADM2:16411231B78351669790785",
+        "gb:AGO:ADM2:16411231B72125125970883",
+        "gb:AGO:ADM2:16411231B84083925442954",
+        "gb:AGO:ADM2:16411231B93417670268347",
+        "gb:AGO:ADM2:16411231B13673884729200",
+        "gb:AGO:ADM2:16411231B94377396488260",
+        "gb:AGO:ADM2:16411231B1695185499214",
+        "gb:COD:ADM2:63176286B83971453832478",
+        "gb:COD:ADM2:63176286B8336769847246",
+        "gb:COD:ADM2:63176286B98008703469616",
+        "gb:COD:ADM2:63176286B82592558575614",
+        "gb:COD:ADM2:63176286B22382339186814",
+        "gb:COD:ADM2:63176286B79360907689545"
+      ],
+      "shorelines": []
+    },
+    "original_unknowns": [],
+    "result": {
+      "bounds": [
+        15,
+        -10,
+        20,
+        -5
+      ],
+      "candidate_fragments": 50,
+      "id": 759,
+      "invalid_water_diagnostics": [],
+      "missing_geometry_sha256": "d80a9e3f601fe3c50c82acd63fda88eae6982bec7bb3d4d2bf885e8758739e9d",
+      "residues": 0,
+      "status": "checked"
+    },
+    "reused": true,
+    "tile_id": 759
+  }
+}
