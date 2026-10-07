@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "issue": 1359,
+  "retrieved_at": "2026-10-07",
+  "final_vintage": "runs-20261007-101517-0d6bd20f",
+  "superseded_rehearsals": [
+    {
+      "vintage": "runs-20261007-095550-6c4add37",
+      "current_main_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+      "input_commit": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+      "runner_sha256": null,
+      "run_ids": [
+        "b1ebb94974614bb5922c45363253e36d",
+        "4a23cc60a205433abd367bf175127745"
+      ],
+      "process_ids": [
+        19336,
+        19336
+      ],
+      "validator_sha256": "eed92403eaa4470e4df25f97522d22eb0a17df3afc5df94dc4b4e85e0fa390b4",
+      "product_hashes": {
+        "companion-membership.csv": "127e71a9130e8f9dd4456fa042a4b4316d6bfed87b9e7e04083c76957254e94f",
+        "subject-parent-area.csv": "67ab4bacf33a8c561b52460072654c66e70363eed3dee3a6b3eb4845309df796",
+        "report.json": "b85799b8d8082a445235628896baaeb4219934e58fae2e1b8036ebc04012b099",
+        "positive-control.json": "adcca9ca0a5a2465691b81f5387f73d13500d42f772748bcd547f300a76b2168",
+        "negative-control.json": "84aac293af5d21b8a7510c9606a5a9ba0a00e0231403553d308fd990469077f6"
+      },
+      "external_tables": [
+        {
+          "bytes": 9933,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        },
+        {
+          "bytes": 17137,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        }
+      ],
+      "disposition": "Superseded: both actual main() calls ran in one interpreter, and the early receipt also mislabeled the Level 3 restoration path. Raw five-product hashes match the final result."
+    },
+    {
+      "vintage": "runs-20261007-100022-8af6d04f",
+      "current_main_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+      "input_commit": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+      "runner_sha256": "d8c7fa241943d6fa99962c9fd9a70f943177201e004d028d12996ce8dfcad2f3",
+      "run_ids": [
+        "34fc816fe5ca4e4294ddc7e471eb6077",
+        "3aa01e0f0f704524ab479af2021aacd6"
+      ],
+      "process_ids": [
+        32760,
+        32824
+      ],
+      "validator_sha256": "eed92403eaa4470e4df25f97522d22eb0a17df3afc5df94dc4b4e85e0fa390b4",
+      "product_hashes": {
+        "companion-membership.csv": "127e71a9130e8f9dd4456fa042a4b4316d6bfed87b9e7e04083c76957254e94f",
+        "subject-parent-area.csv": "67ab4bacf33a8c561b52460072654c66e70363eed3dee3a6b3eb4845309df796",
+        "report.json": "b85799b8d8082a445235628896baaeb4219934e58fae2e1b8036ebc04012b099",
+        "positive-control.json": "adcca9ca0a5a2465691b81f5387f73d13500d42f772748bcd547f300a76b2168",
+        "negative-control.json": "84aac293af5d21b8a7510c9606a5a9ba0a00e0231403553d308fd990469077f6"
+      },
+      "external_tables": [
+        {
+          "bytes": 9933,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        },
+        {
+          "bytes": 17137,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        }
+      ],
+      "disposition": "Superseded: separate child processes, but both external source path labels incorrectly named tblLevel4.txt. Source hashes and lengths distinguish the two pinned tables; final receipt corrects their names."
+    },
+    {
+      "vintage": "runs-20261007-100116-aa18d818",
+      "current_main_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+      "input_commit": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+      "runner_sha256": "806eea9e5c634c3e43c0606ad2e6aaa7daa0309a2815ed0549b1fd9c8e88596b",
+      "run_ids": [
+        "892f1ae506944e698c268363f77a6d25",
+        "835ea3aeab62432d86b049addb7f464b"
+      ],
+      "process_ids": [
+        34911,
+        35085
+      ],
+      "validator_sha256": "eed92403eaa4470e4df25f97522d22eb0a17df3afc5df94dc4b4e85e0fa390b4",
+      "product_hashes": {
+        "companion-membership.csv": "127e71a9130e8f9dd4456fa042a4b4316d6bfed87b9e7e04083c76957254e94f",
+        "subject-parent-area.csv": "67ab4bacf33a8c561b52460072654c66e70363eed3dee3a6b3eb4845309df796",
+        "report.json": "b85799b8d8082a445235628896baaeb4219934e58fae2e1b8036ebc04012b099",
+        "positive-control.json": "adcca9ca0a5a2465691b81f5387f73d13500d42f772748bcd547f300a76b2168",
+        "negative-control.json": "84aac293af5d21b8a7510c9606a5a9ba0a00e0231403553d308fd990469077f6"
+      },
+      "external_tables": [
+        {
+          "bytes": 9933,
+          "path": "109-488-1-ED/2nd Edition/tblLevel3.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        },
+        {
+          "bytes": 17137,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        }
+      ],
+      "disposition": "Superseded: source path labels and separate process identities were correct, but the baseline was the then-current prior main."
+    },
+    {
+      "vintage": "runs-20261007-100359-abba2a39",
+      "current_main_commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+      "input_commit": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+      "runner_sha256": "23756e92f9e15638c684ff07c0992d2c4b957ea056a4a5327facf098ba8f869a",
+      "run_ids": [
+        "292998e2a4ee4ed69fe3644b201141e5",
+        "bc023495fbc94b06963cb2a09df9c9ac"
+      ],
+      "process_ids": [
+        40096,
+        40263
+      ],
+      "validator_sha256": "eed92403eaa4470e4df25f97522d22eb0a17df3afc5df94dc4b4e85e0fa390b4",
+      "product_hashes": {
+        "companion-membership.csv": "127e71a9130e8f9dd4456fa042a4b4316d6bfed87b9e7e04083c76957254e94f",
+        "subject-parent-area.csv": "67ab4bacf33a8c561b52460072654c66e70363eed3dee3a6b3eb4845309df796",
+        "report.json": "b85799b8d8082a445235628896baaeb4219934e58fae2e1b8036ebc04012b099",
+        "positive-control.json": "adcca9ca0a5a2465691b81f5387f73d13500d42f772748bcd547f300a76b2168",
+        "negative-control.json": "84aac293af5d21b8a7510c9606a5a9ba0a00e0231403553d308fd990469077f6"
+      },
+      "external_tables": [
+        {
+          "bytes": 9933,
+          "path": "109-488-1-ED/2nd Edition/tblLevel3.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        },
+        {
+          "bytes": 17137,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        }
+      ],
+      "disposition": "Superseded: complete corrected runner on the prior main commit; all raw output hashes match the final current-main vintage."
+    },
+    {
+      "vintage": "runs-20261007-100835-7eff7be3",
+      "current_main_commit": "0c30d0bf9cee9a8c300c7e3c8f45720b471a74ff",
+      "input_commit": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+      "runner_sha256": "53019b42f5cdf697f0c89259dfb36daaf60c9f469afd592656fca79a7d32b12a",
+      "run_ids": [
+        "9f5df6c7337e4c78a535f6fc732d83ba",
+        "cfe4096d8ae240039cd401baad4fb643"
+      ],
+      "process_ids": [
+        52763,
+        52800
+      ],
+      "validator_sha256": "eed92403eaa4470e4df25f97522d22eb0a17df3afc5df94dc4b4e85e0fa390b4",
+      "product_hashes": {
+        "companion-membership.csv": "127e71a9130e8f9dd4456fa042a4b4316d6bfed87b9e7e04083c76957254e94f",
+        "subject-parent-area.csv": "67ab4bacf33a8c561b52460072654c66e70363eed3dee3a6b3eb4845309df796",
+        "report.json": "b85799b8d8082a445235628896baaeb4219934e58fae2e1b8036ebc04012b099",
+        "positive-control.json": "adcca9ca0a5a2465691b81f5387f73d13500d42f772748bcd547f300a76b2168",
+        "negative-control.json": "84aac293af5d21b8a7510c9606a5a9ba0a00e0231403553d308fd990469077f6"
+      },
+      "external_tables": [
+        {
+          "bytes": 9933,
+          "path": "109-488-1-ED/2nd Edition/tblLevel3.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        },
+        {
+          "bytes": 17137,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        }
+      ],
+      "disposition": "Superseded: complete current-main run with correct hashes and separate process IDs; stored CSVs lacked explicit compressed-byte receipts."
+    },
+    {
+      "vintage": "runs-20261007-101332-d32359b2",
+      "current_main_commit": "0c30d0bf9cee9a8c300c7e3c8f45720b471a74ff",
+      "input_commit": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+      "runner_sha256": "81f538fca1d8bd6b1bb90956bf3eebfc091334c14cf0e27b4cf4f4a74b842156",
+      "run_ids": [
+        "f9f1d8d33f85486199251ee939eff832",
+        "e683c2665baf4aa68940105f3b319fd5"
+      ],
+      "process_ids": [
+        65491,
+        65825
+      ],
+      "validator_sha256": "eed92403eaa4470e4df25f97522d22eb0a17df3afc5df94dc4b4e85e0fa390b4",
+      "product_hashes": {
+        "companion-membership.csv": "127e71a9130e8f9dd4456fa042a4b4316d6bfed87b9e7e04083c76957254e94f",
+        "subject-parent-area.csv": "67ab4bacf33a8c561b52460072654c66e70363eed3dee3a6b3eb4845309df796",
+        "report.json": "b85799b8d8082a445235628896baaeb4219934e58fae2e1b8036ebc04012b099",
+        "positive-control.json": "adcca9ca0a5a2465691b81f5387f73d13500d42f772748bcd547f300a76b2168",
+        "negative-control.json": "84aac293af5d21b8a7510c9606a5a9ba0a00e0231403553d308fd990469077f6"
+      },
+      "external_tables": [
+        {
+          "bytes": 9933,
+          "path": "109-488-1-ED/2nd Edition/tblLevel3.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        },
+        {
+          "bytes": 17137,
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "retention": "private-restoration-only; terms not located",
+          "retrieved_at": "2026-10-07",
+          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+          "source_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54"
+        }
+      ],
+      "disposition": "Superseded: complete current-main run with deterministic gzip CSV storage; final run adds explicit stored/uncompressed byte receipts."
+    }
+  ],
+  "failed_attempts": [
+    {
+      "at": "2026-10-07",
+      "stage": "separate-process execution",
+      "result": "child stopped before invoking the producer because the first wrapper draft had a truncated expected source hash literal; no product writes occurred. Corrected the literal and later process-separated runs passed."
+    },
+    {
+      "at": "2026-10-07",
+      "stage": "compressed-output publication",
+      "result": "NewVintage rejected a mismatch between admitted .gz names and initially unsuffixed publication keys before creating an output vintage. Corrected stored names and later complete publication passed."
+    },
+    {
+      "at": "2026-10-07",
+      "stage": "workspace admission",
+      "result": "One check found managed checkout use slightly above the 50 GiB cap after other workspace allocations; the reproduction was not started. Later checks passed before each source restoration and actual run."
+    }
+  ],
+  "preservation": "All historical #1124/#1134 inputs remain untouched at baseline; identical product hashes and control outcomes are retained in the final current-main vintage. Only redundant private rehearsal vintages were removed from this PR."
+}
