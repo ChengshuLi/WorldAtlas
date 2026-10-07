@@ -319,7 +319,7 @@
       "description": "Verify byte-pinned full GeoJSON product feature rosters and geometries, then screen both exact candidate source features against every feature in both products without transformation or repair.",
       "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; source_fit.py SHA-256 1564a5d833e307c87a4f141ebabc2882b907b59e2a6ddc350c9e1e00eb947910",
       "units": "Coordinates in source GeoJSON longitude/latitude degrees; intersection diagnostic in degree-squared; no metric area/distance computed.",
-      "kind": "geography",
+      "kind": "source",
       "crs": "WGS 84 / RFC 7946 GeoJSON",
       "axis_order": "longitude-latitude",
       "area_method": "Shapely/GEOS topological intersection in unmodified angular coordinates; area reported only as a numerically fragile degree-squared diagnostic.",
