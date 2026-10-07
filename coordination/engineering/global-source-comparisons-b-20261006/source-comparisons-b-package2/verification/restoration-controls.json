@@ -1,0 +1,69 @@
+{
+  "complete_controls": 13,
+  "controls": [
+    {
+      "name": "positive exact complete transport fixture",
+      "passed": true
+    },
+    {
+      "name": "changed-delivery",
+      "passed": true,
+      "rejection": "Encoded alias mismatch"
+    },
+    {
+      "name": "missing-delivery",
+      "passed": true,
+      "rejection": "Missing ordinary delivery alias"
+    },
+    {
+      "name": "duplicate-original",
+      "passed": true,
+      "rejection": "Duplicate alias path"
+    },
+    {
+      "name": "duplicate-delivered-distinct-original",
+      "passed": true,
+      "rejection": "Duplicate alias path"
+    },
+    {
+      "name": "unsafe-delivery",
+      "passed": true,
+      "rejection": "Unsafe alias path"
+    },
+    {
+      "name": "wrong-existing-original",
+      "passed": true,
+      "rejection": "Encoded alias mismatch"
+    },
+    {
+      "name": "wrong-whole-pin",
+      "passed": true,
+      "rejection": "Encoded alias mismatch"
+    },
+    {
+      "name": "wrong-decoded-pin",
+      "passed": true,
+      "rejection": "Decoded alias mismatch"
+    },
+    {
+      "name": "symlink-delivery",
+      "passed": true,
+      "rejection": "Symlink alias path"
+    },
+    {
+      "name": "fresh absent original directories created exclusively and full readback; exact repeat is idempotent",
+      "passed": true
+    },
+    {
+      "name": "symlink original parent rejected before create",
+      "passed": true,
+      "rejection": "Symlink alias path"
+    },
+    {
+      "name": "non-directory original parent rejected during complete prevalidation",
+      "passed": true,
+      "rejection": "Non-directory alias parent"
+    }
+  ],
+  "science_executed": false
+}
