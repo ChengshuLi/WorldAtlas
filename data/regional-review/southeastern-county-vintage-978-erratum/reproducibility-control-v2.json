@@ -1,0 +1,18 @@
+{
+  "kind": "reproducibility",
+  "method_id": "six-county-frozen-reproduction",
+  "outcome": "passed",
+  "run_one_sha256": "178102273a81041c726800219d68b1fcc70f30b5802946f4320c4d9861c5c3fc",
+  "run_two_sha256": "178102273a81041c726800219d68b1fcc70f30b5802946f4320c4d9861c5c3fc",
+  "runs": [
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json",
+      "sha256": "178102273a81041c726800219d68b1fcc70f30b5802946f4320c4d9861c5c3fc"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-f/native-geometry-audit.json",
+      "sha256": "178102273a81041c726800219d68b1fcc70f30b5802946f4320c4d9861c5c3fc"
+    }
+  ],
+  "scope": "all six identities, source/Atlas/Census join values, geometry summaries, frozen IoUs and rosters"
+}

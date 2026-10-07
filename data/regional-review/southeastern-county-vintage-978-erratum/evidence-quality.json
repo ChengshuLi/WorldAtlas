@@ -1,0 +1,1791 @@
+{
+  "baseline": {
+    "commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+    "files": [
+      {
+        "bytes": 4525239,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-25.json",
+        "role": "baseline",
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      },
+      {
+        "bytes": 4608983,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-26.json",
+        "role": "baseline",
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      },
+      {
+        "bytes": 4863162,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-27.json",
+        "role": "baseline",
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+      },
+      {
+        "bytes": 6873,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/census-tigerweb-state-retrieval-receipts.json",
+        "role": "source-metadata-or-retrieval-receipt",
+        "sha256": "efb6dbe4859e5d36595403b418afb0ebc7e50f0289fffec22c8a5e7f75721f0a"
+      },
+      {
+        "bytes": 3554,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/reproduction-summary.json",
+        "role": "original-source",
+        "sha256": "128272bc12bde479eef92fb02594fcb671540eb75da74e8f7e1adfbcd33fcd94"
+      },
+      {
+        "bytes": 69131,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+        "role": "original-source",
+        "sha256": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a"
+      },
+      {
+        "bytes": 22554,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/reproduce-review.py",
+        "role": "original-source",
+        "sha256": "50204510d6786d0708cf911f0653ea795542e30ccdefec6b907a3d14b1f1088d"
+      },
+      {
+        "bytes": 11530479,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/cb_2018_us_county_500k.zip",
+        "role": "original-source",
+        "sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67"
+      },
+      {
+        "bytes": 1830,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/http-receipt.json",
+        "role": "source-metadata-or-retrieval-receipt",
+        "sha256": "5fdacef2a48ed190d498948176e35cc60e98bed93014816f542720054c7f7a8c"
+      },
+      {
+        "bytes": 6021222,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-01.geojson",
+        "role": "original-source",
+        "sha256": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084"
+      },
+      {
+        "bytes": 7635933,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-28.geojson",
+        "role": "original-source",
+        "sha256": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1"
+      },
+      {
+        "bytes": 10736861,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-47.geojson",
+        "role": "original-source",
+        "sha256": "b9b10ee31927e67c295180c885e8e616940d099a52879df2c5a49bad123f6a15"
+      },
+      {
+        "bytes": 7489,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/layer-82-metadata-20261005.json",
+        "role": "original-source",
+        "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d"
+      },
+      {
+        "bytes": 4316,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/CITATION-AND-USE-geoBoundaries.txt",
+        "role": "original-source",
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+      },
+      {
+        "bytes": 14362,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/LICENSE",
+        "role": "original-source",
+        "sha256": "f3e5a21600528018a566fe0020a8b433f542bd67920c6804aac8929b598035bd"
+      },
+      {
+        "bytes": 10500644,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+        "role": "original-source",
+        "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+      },
+      {
+        "bytes": 1709,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/http-receipt.json",
+        "role": "source-metadata-or-retrieval-receipt",
+        "sha256": "71d365e3cfaabe45013b1041c1802b3e41b92c5a30d920af806ccf749a4e9dcb"
+      },
+      {
+        "bytes": 939,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/upstream-metaData.json",
+        "role": "source-metadata-or-retrieval-receipt",
+        "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+      },
+      {
+        "bytes": 10264,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/RESEARCH.md",
+        "role": "original-retained",
+        "sha256": "0c52c4254f89872b66ccc81a7c4c970f937e72ecf8cfeac0c21819ae3dea8283"
+      },
+      {
+        "bytes": 22906,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/evidence-quality.json",
+        "role": "original-retained",
+        "sha256": "39dd3d0017aeb0aacee4fb45544d38a4023a710a0130d848800a95416c242193"
+      },
+      {
+        "bytes": 477,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-negative-control.json",
+        "role": "original-retained",
+        "sha256": "ed4bbe492ba492754962e0eafcadbf0dd5326ca227225bc074ea82e62074b547"
+      },
+      {
+        "bytes": 296,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-positive-control.json",
+        "role": "original-retained",
+        "sha256": "f569d070b374b18c0a68e3621f153de9e617a621f77922cf9d42893d107a5f17"
+      },
+      {
+        "bytes": 8983,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/issue-978-scope-snapshot.json",
+        "role": "original-retained",
+        "sha256": "5ad623c6e9f4bb867d80461021601fb4da8358ce48271358d676d5d42021768a"
+      },
+      {
+        "bytes": 143,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/measurement-negative-control.json",
+        "role": "original-retained",
+        "sha256": "86864d3eca0c7f88edd9fffec8fc829ba8c066faca7719d3be77d317ad5c5588"
+      },
+      {
+        "bytes": 131,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/measurement-positive-control.json",
+        "role": "original-retained",
+        "sha256": "71cfc8727c6db06dc046ebd68df07d26805c5863404618c07929d265403012b7"
+      },
+      {
+        "bytes": 13389,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/native-geometry-audit.json",
+        "role": "original-retained",
+        "sha256": "0ccbc6515d05e8c8fa93f8acec4045486843307e9dce4199c756120dbd235beb"
+      },
+      {
+        "bytes": 4745,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/reproduce-native-geometry.py",
+        "role": "original-retained",
+        "sha256": "350b4389b80f21c319560f99b9a4a1d7d07187c17a32f73ddbb177596b3b59f6"
+      },
+      {
+        "bytes": 2745,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/run-measurement-controls.py",
+        "role": "original-retained",
+        "sha256": "c6212e32ebb1f4999630af42409c420259f6db3a13c4db26367a639d21b14bdc"
+      },
+      {
+        "bytes": 2253,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/source-retrieval-receipts.json",
+        "role": "original-retained",
+        "sha256": "f83dc3143327f800c00357ad198f1c133dfb5889f54bf5eccc354d700a677c38"
+      },
+      {
+        "bytes": 365191,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/sources/census-official/cartographic-boundary-file-description.html",
+        "role": "original-retained",
+        "sha256": "37afe5c5409332dd5908f18e3263bb3a9fb6fc230a5518ee3fc0c042358a844d"
+      },
+      {
+        "bytes": 4598419,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/sources/census-official/tiger-line-2025-technical-documentation.pdf",
+        "role": "original-retained",
+        "sha256": "21476bdba82fe8072f8994ae59bda484260d1b932c13f31991f6414f8e04d551"
+      },
+      {
+        "bytes": 7090,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "role": "immutable-reader-code",
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      }
+    ],
+    "pin_files": {
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/RESEARCH.md": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/RESEARCH.md",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/evidence-quality.json": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/evidence-quality.json",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/native-geometry-audit.json": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/native-geometry-audit.json",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/reproduce-native-geometry.py": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/reproduce-native-geometry.py",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/run-measurement-controls.py": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/run-measurement-controls.py",
+      "input_1": "data/geography/part-26.json",
+      "input_10": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-47.geojson",
+      "input_11": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/layer-82-metadata-20261005.json",
+      "input_12": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+      "input_13": "data/regional-review/regional-review-599d6fe712bbbcae/findings/reproduction-summary.json",
+      "input_14": "data/regional-review/regional-review-599d6fe712bbbcae/reproduce-review.py",
+      "input_2": "data/geography/part-27.json",
+      "input_3": "data/geography/part-25.json",
+      "input_4": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+      "input_5": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/CITATION-AND-USE-geoBoundaries.txt",
+      "input_6": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/LICENSE",
+      "input_7": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/cb_2018_us_county_500k.zip",
+      "input_8": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-01.geojson",
+      "input_9": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-28.geojson"
+    },
+    "pins": {
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/RESEARCH.md": "0c52c4254f89872b66ccc81a7c4c970f937e72ecf8cfeac0c21819ae3dea8283",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/evidence-quality.json": "39dd3d0017aeb0aacee4fb45544d38a4023a710a0130d848800a95416c242193",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/native-geometry-audit.json": "0ccbc6515d05e8c8fa93f8acec4045486843307e9dce4199c756120dbd235beb",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/reproduce-native-geometry.py": "350b4389b80f21c319560f99b9a4a1d7d07187c17a32f73ddbb177596b3b59f6",
+      "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/run-measurement-controls.py": "c6212e32ebb1f4999630af42409c420259f6db3a13c4db26367a639d21b14bdc",
+      "input_1": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "input_10": "b9b10ee31927e67c295180c885e8e616940d099a52879df2c5a49bad123f6a15",
+      "input_11": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+      "input_12": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a",
+      "input_13": "128272bc12bde479eef92fb02594fcb671540eb75da74e8f7e1adfbcd33fcd94",
+      "input_14": "50204510d6786d0708cf911f0653ea795542e30ccdefec6b907a3d14b1f1088d",
+      "input_2": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "input_3": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "input_4": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "input_5": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "input_6": "f3e5a21600528018a566fe0020a8b433f542bd67920c6804aac8929b598035bd",
+      "input_7": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+      "input_8": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084",
+      "input_9": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1"
+    },
+    "subject_files": {
+      "gb:USA:ADM2:52423323B10934602069357": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B16895111765374": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B27952664457255": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B49198903326940": "data/geography/part-27.json",
+      "gb:USA:ADM2:52423323B60515004813393": "data/geography/part-25.json",
+      "gb:USA:ADM2:52423323B65626355292212": "data/geography/part-26.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-table.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/baseline-inventory-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/check-archive.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/metric-inputs-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/metric-table.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/negative-control-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/numeric-table-negative-control-v4.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/numeric-table-negative-control-v4.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/positive-control-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/reproduce-v2.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/reproducibility-control-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/state-roster-table.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/verify-controls-v2.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-f/native-geometry-audit.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 data/regional-review/southeastern-county-vintage-978-erratum/reproduce-v2.py --vintage 2026-10-07-e --runner-sha256 239900aab93b02664d0338990d291356a9ce9ad6b3d97c70a7e3f0576e391477 --inventory-sha256 dd3a1383addc6e967a78e421b3927a385b588ef0babc118f111f528629d87d12",
+    "PYTHONDONTWRITEBYTECODE=1 python3 data/regional-review/southeastern-county-vintage-978-erratum/reproduce-v2.py --vintage 2026-10-07-f --runner-sha256 239900aab93b02664d0338990d291356a9ce9ad6b3d97c70a7e3f0576e391477 --inventory-sha256 dd3a1383addc6e967a78e421b3927a385b588ef0babc118f111f528629d87d12",
+    "PYTHONDONTWRITEBYTECODE=1 python3 data/regional-review/southeastern-county-vintage-978-erratum/verify-controls-v2.py --script-sha256 a27cdf2a9670079c72021abf7b3d58b1469efe330dda7de54fc713fb46fe920f --runner-sha256 239900aab93b02664d0338990d291356a9ce9ad6b3d97c70a7e3f0576e391477 --inventory-sha256 dd3a1383addc6e967a78e421b3927a385b588ef0babc118f111f528629d87d12",
+    "python3 data/regional-review/southeastern-county-vintage-978-erratum/check-archive.py --script-sha256 0f431cc60ef20a6293f1684147701f0b8e89b3edd1b86915ece156f861f71130 --inventory-sha256 dd3a1383addc6e967a78e421b3927a385b588ef0babc118f111f528629d87d12 --runner-sha256 239900aab93b02664d0338990d291356a9ce9ad6b3d97c70a7e3f0576e391477",
+    "node data/regional-review/southeastern-county-vintage-978-erratum/numeric-table-negative-control-v4.mjs"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "geoboundaries-usa-adm2-2018",
+        "census-tigerweb-acs2026-counties"
+      ],
+      "status": "supported",
+      "text": "The six Atlas identities, source names, Census GEOIDs/state codes/LSADC values and retained county-level crosswalk joins are unique and reproducible in the pinned baseline."
+    },
+    {
+      "source_ids": [
+        "census-cartographic-county-file-2018",
+        "census-tigerweb-acs2026-counties"
+      ],
+      "status": "supported",
+      "text": "Fresh 2026 TIGERweb comparison IoUs reproduce the archived #1162 values at eight decimal places; archived 2018 CBF IoUs remain unchanged and are not recomputed."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-usa-adm2-2018",
+        "census-cartographic-county-file-2018",
+        "census-tigerweb-acs2026-counties",
+        "census-cartographic-boundary-description",
+        "census-tiger-line-2025-disclaimer"
+      ],
+      "status": "unresolved",
+      "text": "Whether any of the six compared geometries matches a legally authoritative, exhaustive county boundary—including coastal water, islands or offshore extent—remains unresolved."
+    }
+  ],
+  "issue": 1252,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Strict unique-ID joins for the six declared Atlas, 2018 geoBoundaries, and 2026 Census features; native EPSG:4326 validity/component/vertex checks without repair; fresh EPSG:5070 intersection-over-union; full state-roster identity checks. Archived 2018 IoUs are preserved from the frozen crosswalk, not recomputed.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "six-county-frozen-reproduction",
+      "kind": "generator",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; pyproj 3.7.2; pinned immutable reader; exact runner SHA-256 239900aab93b02664d0338990d291356a9ce9ad6b3d97c70a7e3f0576e391477; immutable preparation helper worldatlas-evidence-preparation-v1; exclusive symlink-checking output writer; archive reproduction code SHA-256 0f431cc60ef20a6293f1684147701f0b8e89b3edd1b86915ece156f861f71130; numeric-table validation and symlink-control code SHA-256 6796b0b17a7220d37e12355b6ea73e99e14c680be67e8a6b0497145acd549b25",
+      "units": "Boolean geometry validity, Polygon component and vertex counts, and dimensionless EPSG:5070 intersection-over-union fraction"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/subjects/0/archived_2018_cbf_iou",
+      "metric_id": "2018-cbf-iou--archived-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/archived_2018_cbf_iou",
+      "metric_id": "2018-cbf-iou--archived-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/archived_2018_cbf_iou",
+      "metric_id": "2018-cbf-iou--archived-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/archived_2018_cbf_iou",
+      "metric_id": "2018-cbf-iou--archived-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/archived_2018_cbf_iou",
+      "metric_id": "2018-cbf-iou--archived-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/archived_2018_cbf_iou",
+      "metric_id": "2018-cbf-iou--archived-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/0/reproduced_2026_tigerweb_iou",
+      "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/reproduced_2026_tigerweb_iou",
+      "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/reproduced_2026_tigerweb_iou",
+      "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/reproduced_2026_tigerweb_iou",
+      "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/reproduced_2026_tigerweb_iou",
+      "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/reproduced_2026_tigerweb_iou",
+      "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/0/atlas/components",
+      "metric_id": "atlas-polygon-components-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/atlas/components",
+      "metric_id": "atlas-polygon-components-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/atlas/components",
+      "metric_id": "atlas-polygon-components-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/atlas/components",
+      "metric_id": "atlas-polygon-components-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/atlas/components",
+      "metric_id": "atlas-polygon-components-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/atlas/components",
+      "metric_id": "atlas-polygon-components-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/0/atlas/vertices",
+      "metric_id": "atlas-vertices-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/atlas/vertices",
+      "metric_id": "atlas-vertices-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/atlas/vertices",
+      "metric_id": "atlas-vertices-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/atlas/vertices",
+      "metric_id": "atlas-vertices-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/atlas/vertices",
+      "metric_id": "atlas-vertices-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/atlas/vertices",
+      "metric_id": "atlas-vertices-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/0/geoboundaries_2018/components",
+      "metric_id": "geoboundaries-2018-polygon-components-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/geoboundaries_2018/components",
+      "metric_id": "geoboundaries-2018-polygon-components-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/geoboundaries_2018/components",
+      "metric_id": "geoboundaries-2018-polygon-components-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/geoboundaries_2018/components",
+      "metric_id": "geoboundaries-2018-polygon-components-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/geoboundaries_2018/components",
+      "metric_id": "geoboundaries-2018-polygon-components-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/geoboundaries_2018/components",
+      "metric_id": "geoboundaries-2018-polygon-components-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/0/geoboundaries_2018/vertices",
+      "metric_id": "geoboundaries-2018-vertices-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/geoboundaries_2018/vertices",
+      "metric_id": "geoboundaries-2018-vertices-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/geoboundaries_2018/vertices",
+      "metric_id": "geoboundaries-2018-vertices-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/geoboundaries_2018/vertices",
+      "metric_id": "geoboundaries-2018-vertices-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/geoboundaries_2018/vertices",
+      "metric_id": "geoboundaries-2018-vertices-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/geoboundaries_2018/vertices",
+      "metric_id": "geoboundaries-2018-vertices-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/0/tigerweb_2026/components",
+      "metric_id": "tigerweb-2026-polygon-components-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/tigerweb_2026/components",
+      "metric_id": "tigerweb-2026-polygon-components-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/tigerweb_2026/components",
+      "metric_id": "tigerweb-2026-polygon-components-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/tigerweb_2026/components",
+      "metric_id": "tigerweb-2026-polygon-components-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/tigerweb_2026/components",
+      "metric_id": "tigerweb-2026-polygon-components-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/tigerweb_2026/components",
+      "metric_id": "tigerweb-2026-polygon-components-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/0/tigerweb_2026/vertices",
+      "metric_id": "tigerweb-2026-vertices-28059",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/1/tigerweb_2026/vertices",
+      "metric_id": "tigerweb-2026-vertices-47127",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/2/tigerweb_2026/vertices",
+      "metric_id": "tigerweb-2026-vertices-28047",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/3/tigerweb_2026/vertices",
+      "metric_id": "tigerweb-2026-vertices-28045",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/4/tigerweb_2026/vertices",
+      "metric_id": "tigerweb-2026-vertices-01003",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/subjects/5/tigerweb_2026/vertices",
+      "metric_id": "tigerweb-2026-vertices-01097",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/roster_counts_by_state_fips/01",
+      "metric_id": "state-roster-count-01",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/roster_counts_by_state_fips/28",
+      "metric_id": "state-roster-count-28",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/roster_counts_by_state_fips/47",
+      "metric_id": "state-roster-count-47",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json"
+    },
+    {
+      "json_pointer": "/original_1162_descriptor_count",
+      "metric_id": "archive-admission-original_1162_descriptor_count",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    },
+    {
+      "json_pointer": "/original_1162_encoded_bytes",
+      "metric_id": "archive-admission-original_1162_encoded_bytes",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    },
+    {
+      "json_pointer": "/zip_encoded_bytes",
+      "metric_id": "archive-admission-zip_encoded_bytes",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    },
+    {
+      "json_pointer": "/member_count",
+      "metric_id": "archive-admission-member_count",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    },
+    {
+      "json_pointer": "/decoded_member_bytes",
+      "metric_id": "archive-admission-decoded_member_bytes",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    },
+    {
+      "json_pointer": "/largest_decoded_member_bytes",
+      "metric_id": "archive-admission-largest_decoded_member_bytes",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    },
+    {
+      "json_pointer": "/reserve_bytes",
+      "metric_id": "archive-admission-reserve_bytes",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    },
+    {
+      "json_pointer": "/original_encoded_plus_decoded_zip_plus_reserve_bytes",
+      "metric_id": "archive-admission-original_encoded_plus_decoded_zip_plus_reserve_bytes",
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2018-cbf-iou--archived-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.96938004,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2018-cbf-iou--archived-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.94568923,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2018-cbf-iou--archived-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.96383669,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2018-cbf-iou--archived-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.99548631,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2018-cbf-iou--archived-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.99255004,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2018-cbf-iou--archived-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.978808,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2026-tigerweb-iou--frozen-baseline-reproduction-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.73690647656133,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2026-tigerweb-iou--frozen-baseline-reproduction-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.945409449603168,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2026-tigerweb-iou--frozen-baseline-reproduction-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.6177024195641188,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2026-tigerweb-iou--frozen-baseline-reproduction-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.8760258078267498,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2026-tigerweb-iou--frozen-baseline-reproduction-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.823224119247868,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "2026-tigerweb-iou--frozen-baseline-reproduction-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "intersection-over-union fraction",
+      "value": 0.7816397324239746,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-polygon-components-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 3.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-polygon-components-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-polygon-components-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 3.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-polygon-components-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-polygon-components-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-polygon-components-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 4.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-vertices-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 49.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-vertices-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 42.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-vertices-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 42.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-vertices-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 41.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-vertices-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 114.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "atlas-vertices-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 85.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-polygon-components-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 3.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-polygon-components-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-polygon-components-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 3.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-polygon-components-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-polygon-components-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-polygon-components-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 4.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-vertices-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 95.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-vertices-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 52.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-vertices-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 78.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-vertices-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 117.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-vertices-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 332.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "geoboundaries-2018-vertices-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 143.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-polygon-components-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-polygon-components-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-polygon-components-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-polygon-components-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-polygon-components-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-polygon-components-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "components",
+      "value": 1.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-vertices-28059",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 1164.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-vertices-47127",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 3605.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-vertices-28047",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 752.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-vertices-28045",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 1389.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-vertices-01003",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 5016.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "tigerweb-2026-vertices-01097",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "vertices",
+      "value": 1768.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "state-roster-count-01",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "county-equivalent records in complete retained state response",
+      "value": 67,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "state-roster-count-28",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "county-equivalent records in complete retained state response",
+      "value": 82,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "state-roster-count-47",
+      "input_sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "unit": "county-equivalent records in complete retained state response",
+      "value": 95,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-original_1162_descriptor_count",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "unique retained descriptors",
+      "value": 26,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-original_1162_encoded_bytes",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "bytes",
+      "value": 65550965,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-zip_encoded_bytes",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "bytes",
+      "value": 11530479,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-member_count",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "members",
+      "value": 7,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-decoded_member_bytes",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "bytes",
+      "value": 17480047,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-largest_decoded_member_bytes",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "bytes",
+      "value": 16869220,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-reserve_bytes",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "bytes",
+      "value": 8388608,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+      "id": "archive-admission-original_encoded_plus_decoded_zip_plus_reserve_bytes",
+      "input_sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "unit": "bytes",
+      "value": 91419620,
+      "vintage": "baseline"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/RESEARCH.md",
+      "bytes": 10447,
+      "sha256": "ee2380180a08f0c52f9011df932425436e76dac3b8d74d9613b9b6504a49592b",
+      "hash_kind": "file-bytes",
+      "role": "report"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-reproduction.json",
+      "bytes": 2548,
+      "sha256": "fde439287db1868ecb8f364c5b29cb4e6d0ef29be81d3f77a7044158cbb8aa80",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-table.md",
+      "bytes": 428,
+      "sha256": "0e1b1d2456db577b5951cd80a2ef06902b59ff826c5ce6d2439b115c9946ca0b",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/baseline-inventory-v2.json",
+      "bytes": 10088,
+      "sha256": "dd3a1383addc6e967a78e421b3927a385b588ef0babc118f111f528629d87d12",
+      "hash_kind": "file-bytes",
+      "role": "supporting-evidence"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/check-archive.py",
+      "bytes": 3266,
+      "sha256": "0f431cc60ef20a6293f1684147701f0b8e89b3edd1b86915ece156f861f71130",
+      "hash_kind": "file-bytes",
+      "role": "control-code"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/metric-inputs-v2.json",
+      "bytes": 9195,
+      "sha256": "15e71bbfc64516bfb70bac83b8950b58e47b393b30cd4e50341081fd5b8fbdc4",
+      "hash_kind": "file-bytes",
+      "role": "supporting-evidence"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/metric-table.md",
+      "bytes": 2309,
+      "sha256": "9fd7fdece024704b7de59b24d544fe3ecf3a5d8bf77c5b8b9ce24257c1f82807",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/negative-control-v2.json",
+      "bytes": 1088,
+      "sha256": "4f4a9c53b72d451c214ffd8e0f8910ca712351ce1e0b88feccb657fd9f05595e",
+      "hash_kind": "file-bytes",
+      "role": "validation-control"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/numeric-table-negative-control-v4.json",
+      "bytes": 1039,
+      "sha256": "930ed21fabaccc6f402aabe9a78c4b9ddeace4ee475f5eb8f1116731bdd90498",
+      "hash_kind": "file-bytes",
+      "role": "validation-control"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/numeric-table-negative-control-v4.mjs",
+      "bytes": 7313,
+      "sha256": "6796b0b17a7220d37e12355b6ea73e99e14c680be67e8a6b0497145acd549b25",
+      "hash_kind": "file-bytes",
+      "role": "control-code"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/positive-control-v2.json",
+      "bytes": 318,
+      "sha256": "db6587e22f85fc108769397fe1dbcdadbe43ef7159928b8810b604912933ca96",
+      "hash_kind": "file-bytes",
+      "role": "validation-control"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/reproduce-v2.py",
+      "bytes": 17127,
+      "sha256": "239900aab93b02664d0338990d291356a9ce9ad6b3d97c70a7e3f0576e391477",
+      "hash_kind": "file-bytes",
+      "role": "control-code"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/reproducibility-control-v2.json",
+      "bytes": 853,
+      "sha256": "074c52d7e7af51c8cf0a927845a70e294871cdea8001d77c6346a3a7aea95c77",
+      "hash_kind": "file-bytes",
+      "role": "validation-control"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/state-roster-table.md",
+      "bytes": 319,
+      "sha256": "6e40318726d8474c4e6c91d4d0eca25948de7b82f4afa39839b3472b1e1c2947",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/verify-controls-v2.py",
+      "bytes": 7629,
+      "sha256": "a27cdf2a9670079c72021abf7b3d58b1469efe330dda7de54fc713fb46fe920f",
+      "hash_kind": "file-bytes",
+      "role": "control-code"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-e/native-geometry-audit.json",
+      "bytes": 13114,
+      "sha256": "178102273a81041c726800219d68b1fcc70f30b5802946f4320c4d9861c5c3fc",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/vintages/2026-10-07-f/native-geometry-audit.json",
+      "bytes": 13114,
+      "sha256": "178102273a81041c726800219d68b1fcc70f30b5802946f4320c4d9861c5c3fc",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/metric-table.md",
+      "rows": [
+        {
+          "decimals": 8,
+          "line": 9,
+          "metric_id": "2018-cbf-iou--archived-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 10,
+          "metric_id": "2018-cbf-iou--archived-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 11,
+          "metric_id": "2018-cbf-iou--archived-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 12,
+          "metric_id": "2018-cbf-iou--archived-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 13,
+          "metric_id": "2018-cbf-iou--archived-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 14,
+          "metric_id": "2018-cbf-iou--archived-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 20,
+          "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 21,
+          "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 22,
+          "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 23,
+          "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 24,
+          "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 8,
+          "line": 25,
+          "metric_id": "2026-tigerweb-iou--frozen-baseline-reproduction-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 31,
+          "metric_id": "atlas-polygon-components-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 32,
+          "metric_id": "atlas-polygon-components-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 33,
+          "metric_id": "atlas-polygon-components-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 34,
+          "metric_id": "atlas-polygon-components-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 35,
+          "metric_id": "atlas-polygon-components-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 36,
+          "metric_id": "atlas-polygon-components-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 42,
+          "metric_id": "atlas-vertices-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 43,
+          "metric_id": "atlas-vertices-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 44,
+          "metric_id": "atlas-vertices-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 45,
+          "metric_id": "atlas-vertices-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 46,
+          "metric_id": "atlas-vertices-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 47,
+          "metric_id": "atlas-vertices-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 53,
+          "metric_id": "geoboundaries-2018-polygon-components-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 54,
+          "metric_id": "geoboundaries-2018-polygon-components-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 55,
+          "metric_id": "geoboundaries-2018-polygon-components-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 56,
+          "metric_id": "geoboundaries-2018-polygon-components-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 57,
+          "metric_id": "geoboundaries-2018-polygon-components-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 58,
+          "metric_id": "geoboundaries-2018-polygon-components-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 64,
+          "metric_id": "geoboundaries-2018-vertices-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 65,
+          "metric_id": "geoboundaries-2018-vertices-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 66,
+          "metric_id": "geoboundaries-2018-vertices-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 67,
+          "metric_id": "geoboundaries-2018-vertices-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 68,
+          "metric_id": "geoboundaries-2018-vertices-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 69,
+          "metric_id": "geoboundaries-2018-vertices-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 75,
+          "metric_id": "tigerweb-2026-polygon-components-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 76,
+          "metric_id": "tigerweb-2026-polygon-components-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 77,
+          "metric_id": "tigerweb-2026-polygon-components-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 78,
+          "metric_id": "tigerweb-2026-polygon-components-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 79,
+          "metric_id": "tigerweb-2026-polygon-components-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 80,
+          "metric_id": "tigerweb-2026-polygon-components-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 86,
+          "metric_id": "tigerweb-2026-vertices-28059",
+          "template": "| Jackson, 28 | 28059 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 87,
+          "metric_id": "tigerweb-2026-vertices-47127",
+          "template": "| Moore, 47 | 47127 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 88,
+          "metric_id": "tigerweb-2026-vertices-28047",
+          "template": "| Harrison, 28 | 28047 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 89,
+          "metric_id": "tigerweb-2026-vertices-28045",
+          "template": "| Hancock, 28 | 28045 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 90,
+          "metric_id": "tigerweb-2026-vertices-01003",
+          "template": "| Baldwin, 01 | 01003 | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 91,
+          "metric_id": "tigerweb-2026-vertices-01097",
+          "template": "| Mobile, 01 | 01097 | {value} |"
+        }
+      ]
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/state-roster-table.md",
+      "rows": [
+        {
+          "decimals": 0,
+          "line": 7,
+          "metric_id": "state-roster-count-01",
+          "template": "| 01 | Alabama | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 8,
+          "metric_id": "state-roster-count-28",
+          "template": "| 28 | Mississippi | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 9,
+          "metric_id": "state-roster-count-47",
+          "template": "| 47 | Tennessee | {value} |"
+        }
+      ]
+    },
+    {
+      "path": "data/regional-review/southeastern-county-vintage-978-erratum/archive-admission-table.md",
+      "rows": [
+        {
+          "decimals": 0,
+          "line": 5,
+          "metric_id": "archive-admission-original_1162_descriptor_count",
+          "template": "| Original #1162 descriptor count | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 6,
+          "metric_id": "archive-admission-original_1162_encoded_bytes",
+          "template": "| Original #1162 encoded bytes | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 7,
+          "metric_id": "archive-admission-zip_encoded_bytes",
+          "template": "| Retained 2018 CBF ZIP encoded bytes | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 8,
+          "metric_id": "archive-admission-member_count",
+          "template": "| ZIP member count | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 9,
+          "metric_id": "archive-admission-decoded_member_bytes",
+          "template": "| ZIP decoded member bytes | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 10,
+          "metric_id": "archive-admission-largest_decoded_member_bytes",
+          "template": "| Largest decoded ZIP member bytes | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 11,
+          "metric_id": "archive-admission-reserve_bytes",
+          "template": "| Reserved bytes for new evidence | {value} |"
+        },
+        {
+          "decimals": 0,
+          "line": 12,
+          "metric_id": "archive-admission-original_encoded_plus_decoded_zip_plus_reserve_bytes",
+          "template": "| Original encoded + ZIP decoded + reserve bytes | {value} |"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "geoboundaries-usa-adm2-2018",
+      "license": {
+        "status": "redistributable",
+        "terms": "Underlying Census MAF/TIGER source is marked Public Domain in retained upstream metadata; generated geoBoundaries product requires CC BY 4.0 attribution. Treat the scopes separately."
+      },
+      "limit": "Exact archived 2018 product only; not legal boundary evidence or a current-host reauthentication.",
+      "restoration": "Original bytes remain pinned at baseline a1cf4cd86fd07d00ae592b4705e4b39f50628df7: data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson (SHA-256 81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43). Restore with git show a1cf4cd86fd07d00ae592b4705e4b39f50628df7:data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05T13:34:35.375135Z",
+      "role": "2018 ADM2 source geometry and source identity",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "verification": "verified",
+      "vintage": "boundaryYear 2018; source release commit 9469f09592ced973a3448cf66b6100b741b64c0d; retained metadata updated 2023-01-19; product built 2023-12-12"
+    },
+    {
+      "id": "census-cartographic-county-file-2018",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal government work; Public Domain; Census Bureau attribution requested."
+      },
+      "limit": "Generalized small-scale mapping product; can omit holes, discontiguous/offshore parts and is not for precise-area relationships. IoU remains archival, not recomputed here.",
+      "restoration": "Original ZIP remains pinned at baseline a1cf4cd86fd07d00ae592b4705e4b39f50628df7: data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/cb_2018_us_county_500k.zip (SHA-256 aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67). Restore with git show a1cf4cd86fd07d00ae592b4705e4b39f50628df7:data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/cb_2018_us_county_500k.zip.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05T13:37:43.090638Z",
+      "role": "2018 1:500,000 Census generalized county comparator and archived IoU source",
+      "temporal_status": "reference",
+      "url": "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_county_500k.zip",
+      "verification": "verified",
+      "vintage": "2018 cartographic boundary vintage; original retrieval 2026-10-05T13:37:43.090638Z"
+    },
+    {
+      "id": "census-tigerweb-acs2026-counties",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. Census Bureau federal work; Public Domain. Cite Census Bureau and retain TIGER statistical-use limitations."
+      },
+      "limit": "Census statistical representation only. No legal boundary determination, exhaustive coastal/island coverage, or current Census-host reauthentication.",
+      "restoration": "AL/MS/TN responses remain pinned in the baseline inventory (SHAs 386d08c9…; 3826b033…; b9b10ee3…). Restore each exact file with git show a1cf4cd86fd07d00ae592b4705e4b39f50628df7:<path>; prior request/status/hash receipts are in data/regional-review/regional-review-599d6fe712bbbcae/census-tigerweb-state-retrieval-receipts.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 UTC; each state timestamp is preserved in the original receipt",
+      "role": "January 1, 2026 county-equivalent comparator, state rosters and identity join",
+      "temporal_status": "reference",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82",
+      "verification": "verified",
+      "vintage": "January 1, 2026 layer vintage; original state responses retrieved 2026-10-05 UTC"
+    },
+    {
+      "id": "census-cartographic-boundary-description",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal government work; Public Domain; cite Census Bureau."
+      },
+      "limit": "Generalized-file description; does not identify the legal county line for a target subject.",
+      "restoration": "Exact captured HTML remains pinned at baseline a1cf4cd86fd07d00ae592b4705e4b39f50628df7: data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/sources/census-official/cartographic-boundary-file-description.html, SHA-256 37afe5c5409332dd5908f18e3263bb3a9fb6fc230a5518ee3fc0c042358a844d.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06 UTC (date-only precision in retained receipt)",
+      "role": "official scale/generalization and appropriate-use limitations",
+      "temporal_status": "reference",
+      "url": "https://cdn.www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+      "verification": "verified",
+      "vintage": "Census technical description captured 2026-10-06 UTC"
+    },
+    {
+      "id": "census-tiger-line-2025-disclaimer",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal government work; Public Domain; cite Census Bureau."
+      },
+      "limit": "2025 TIGER/Line disclaimer bounds interpretation; it is not a direct legal determination for the 2026 service feature.",
+      "restoration": "Exact PDF remains pinned at baseline a1cf4cd86fd07d00ae592b4705e4b39f50628df7: data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/sources/census-official/tiger-line-2025-technical-documentation.pdf, SHA-256 21476bdba82fe8072f8994ae59bda484260d1b932c13f31991f6414f8e04d551.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06 UTC (date-only precision in retained receipt)",
+      "role": "official TIGER/Line statistical-use/legal disclaimer and citation",
+      "temporal_status": "reference",
+      "url": "https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2025/TGRSHP2025_TechDoc.pdf",
+      "verification": "verified",
+      "vintage": "2025 technical documentation captured 2026-10-06 UTC; Chapter 1 legal disclaimer"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:USA:ADM2:52423323B10934602069357",
+    "gb:USA:ADM2:52423323B16895111765374",
+    "gb:USA:ADM2:52423323B27952664457255",
+    "gb:USA:ADM2:52423323B49198903326940",
+    "gb:USA:ADM2:52423323B60515004813393",
+    "gb:USA:ADM2:52423323B65626355292212"
+  ],
+  "subject_ids_sha256": "ac6252951a4e0bca2737bdbb1836636ffcb8f9c6060ebd37afaa2a4424f7825e",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/southeastern-county-vintage-978-erratum/positive-control-v2.json",
+      "kind": "positive-control",
+      "method_id": "six-county-frozen-reproduction",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/southeastern-county-vintage-978-erratum/negative-control-v2.json",
+      "kind": "negative-control",
+      "method_id": "six-county-frozen-reproduction",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/southeastern-county-vintage-978-erratum/reproducibility-control-v2.json",
+      "kind": "reproducibility",
+      "method_id": "six-county-frozen-reproduction",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/southeastern-county-vintage-978-erratum/numeric-table-negative-control-v4.json",
+      "kind": "negative-control",
+      "method_id": "six-county-frozen-reproduction",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc"
+}
