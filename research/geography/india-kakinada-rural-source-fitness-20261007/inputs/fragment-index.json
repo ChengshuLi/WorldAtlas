@@ -1,0 +1,81 @@
+{
+  "ancestor": {
+    "commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+    "inventory_path": "data/regional-review/regional-review-d0984f717127fb3e/source-inventory.json",
+    "inventory_sha256": "ef561241b2c81afe4eaea501963a955d7d57d06cc925cc8090310205e2e55e56",
+    "metadata_path": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+    "metadata_sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33"
+  },
+  "literal_part_body_bytes": 53834276,
+  "note": "Parts are contiguous literal byte ranges. Whole gzip remains historical restoration/provenance evidence and is not an executable scientific input.",
+  "ordinary_file_limit_bytes": 33554432,
+  "original_source": {
+    "count_difference": 14,
+    "count_difference_status": "unresolved",
+    "features": 6822,
+    "metadata_admUnitCount": 6836,
+    "path": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz",
+    "vintage": "represented 2018"
+  },
+  "streams": [
+    {
+      "bytes": 13794274,
+      "id": "original-encoded-gzip",
+      "part_bytes": 13794274,
+      "parts": [
+        {
+          "bytes": 8388608,
+          "offset": 0,
+          "ordinal": 0,
+          "path": "encoded-000.bin",
+          "role": "encoded-gzip-opaque-fragment",
+          "sha256": "efda0832c732ae68adc9caac7d532a3a4a4d0ef44928d5986b3c0fe1f035c16c"
+        },
+        {
+          "bytes": 5405666,
+          "offset": 8388608,
+          "ordinal": 1,
+          "path": "encoded-001.bin",
+          "role": "encoded-gzip-opaque-fragment",
+          "sha256": "de1c99a569b16ff0c7a0b4a4f78d812d4175dded2e63c3837706bb50e8c7f082"
+        }
+      ],
+      "role": "opaque-encoded-original-source",
+      "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301"
+    },
+    {
+      "bytes": 40040002,
+      "id": "original-decoded-json",
+      "part_bytes": 40040002,
+      "parts": [
+        {
+          "bytes": 16777216,
+          "offset": 0,
+          "ordinal": 0,
+          "path": "decoded-000.bin",
+          "role": "decoded-raw-source-fragment",
+          "sha256": "0d9423248c254d54fbc8a4e80fb4d424ab269b9dbb6df764f4280156be3e0b0b"
+        },
+        {
+          "bytes": 16777216,
+          "offset": 16777216,
+          "ordinal": 1,
+          "path": "decoded-001.bin",
+          "role": "decoded-raw-source-fragment",
+          "sha256": "186fdfc2e9edd6876c954b6fb963140cbf00abddc8a6eed1c44605a3869f7e88"
+        },
+        {
+          "bytes": 6485570,
+          "offset": 33554432,
+          "ordinal": 2,
+          "path": "decoded-002.bin",
+          "role": "decoded-raw-source-fragment",
+          "sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+        }
+      ],
+      "role": "complete-decoded-original-source",
+      "sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb"
+    }
+  ],
+  "version": 1
+}

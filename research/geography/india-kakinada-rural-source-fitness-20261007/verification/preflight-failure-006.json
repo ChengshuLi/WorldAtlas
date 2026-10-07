@@ -1,0 +1,8 @@
+{
+  "accepted_run": false,
+  "correction": "Freeze and run only after correcting the exact family uncertainty-flag field.",
+  "failure": "Code review found one redundant check used a non-existent optional spelling for the family unmeasured-fragment flag. The authenticated row also has components_with_unmeasured_fragments=0; the final check is corrected to assert that exact field.",
+  "freeze_sha256": "8986d24f57194eacd8759c86d2297f7a2f8e83ef96cf1369d0a7a09dcd54aa8c",
+  "kind": "engineering-preflight-freeze-invalidation",
+  "version": 1
+}

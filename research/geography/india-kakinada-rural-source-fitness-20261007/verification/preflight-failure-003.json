@@ -1,0 +1,10 @@
+{
+  "accepted_run": false,
+  "command": "python3 research/geography/india-kakinada-rural-source-fitness-20261007/measure.py --packet research/geography/india-kakinada-rural-source-fitness-20261007 --result research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json",
+  "correction": "Use only exact top-level records in the complete decoded comparison list, recompute and compare the complete canonical row hash, and bind the original routed family row from its authenticated full compressed/decoded shard at the reviewed literal byte offset. No accepted run emitted.",
+  "exit_code": 1,
+  "failure": "Complete source stream admission, ID accounting and candidate filtering succeeded, then recursive component lookup failed to select the exact top-level whole component-comparison row. The row carries component, family, feature/geometry hashes, and whole-original-row hash is independently recomputed from the complete top-level row; it does not have a whole_original_row_sha256 field.",
+  "freeze_sha256": "793e17e0d99cd47bb28fb8e91dd08781fc596ebd5a61caf614b95a4e6c7a3a70",
+  "kind": "engineering-preflight-failure",
+  "version": 1
+}

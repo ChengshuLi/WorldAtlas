@@ -1,0 +1,8 @@
+{
+  "accepted_run": false,
+  "correction": "Use a normal file write to assert the exact components_with_unmeasured_fragments field, then freeze again.",
+  "failure": "The local sed implementation rejected in-place editing, so no source change occurred and no producer was run under this freeze.",
+  "freeze_sha256": "8986d24f57194eacd8759c86d2297f7a2f8e83ef96cf1369d0a7a09dcd54aa8c",
+  "kind": "engineering-preflight-freeze-invalidation",
+  "version": 1
+}

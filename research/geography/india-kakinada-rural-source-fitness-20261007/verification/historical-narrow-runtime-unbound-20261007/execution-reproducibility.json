@@ -1,0 +1,30 @@
+{
+  "closure_freeze_sha256": "833675c7b21b94918e17a35f78d2beaa545e07a78e60fbbdf27e7189badafbc1",
+  "independent_cli_invocations": 2,
+  "kind": "reproducibility",
+  "method_id": "frozen-bounded-source-fitness-measurement",
+  "outcome": "passed",
+  "result_files_byte_identical": true,
+  "run_one": {
+    "bytes": 348578,
+    "hash_kind": "file-bytes",
+    "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json",
+    "role": "accepted-run-result",
+    "sha256": "4adc1b189d22979e176b81051b6a94f03773cc1cecbdea74d3ac16c615f2692c"
+  },
+  "run_two": {
+    "bytes": 348578,
+    "hash_kind": "file-bytes",
+    "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-two/result.json",
+    "role": "accepted-run-result",
+    "sha256": "4adc1b189d22979e176b81051b6a94f03773cc1cecbdea74d3ac16c615f2692c"
+  },
+  "runtime": {
+    "geos": "3.13.1",
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "zlib_compile": "1.2.12",
+    "zlib_runtime": "1.2.12"
+  },
+  "version": 1
+}

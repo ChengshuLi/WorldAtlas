@@ -1,0 +1,925 @@
+{
+  "baseline": {
+    "commit": "6f21733e4c39e4a912890ed1a5387dd4a536f208",
+    "files": [
+      {
+        "bytes": 965771,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0"
+      },
+      {
+        "bytes": 301503,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476"
+      },
+      {
+        "bytes": 754172,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-011.json.gz",
+        "sha256": "c23403bddb316a691126954828294061daf09b4305f58e18d53b1010a57df317"
+      },
+      {
+        "bytes": 1825364,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scope.json",
+        "sha256": "7e74cb58f1c111316522ad92a09767bdc315c2c710eba1642e33ae907f9592c0"
+      },
+      {
+        "bytes": 2080606,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf"
+      },
+      {
+        "bytes": 1016389,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-016.json.gz",
+        "sha256": "36423a8ef87ad3cbe63bff3183446468a9503e62420b46223e9f0bf9ec747db3"
+      },
+      {
+        "bytes": 10211739,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-32.json",
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 5547,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-d0984f717127fb3e/source-inventory.json",
+        "sha256": "ef561241b2c81afe4eaea501963a955d7d57d06cc925cc8090310205e2e55e56"
+      },
+      {
+        "bytes": 2206,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+        "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33"
+      }
+    ],
+    "pin_files": {
+      "current-hierarchy": "data/hierarchy.json",
+      "current-location-part-32": "data/geography/part-32.json",
+      "numeric-source-priority": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-016.json.gz",
+      "original-comparison-scope": "coordination/engineering/global-source-comparisons-a-001-20261006/scope.json",
+      "original-physical-components": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-011.json.gz",
+      "retained-source-2018-byte-identity-metadata": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+      "retained-source-metadata": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+      "routing-family-roster": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+      "source-fitness-candidates": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+      "source-inventory": "data/regional-review/regional-review-d0984f717127fb3e/source-inventory.json"
+    },
+    "pins": {
+      "current-hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "current-location-part-32": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+      "numeric-source-priority": "36423a8ef87ad3cbe63bff3183446468a9503e62420b46223e9f0bf9ec747db3",
+      "original-comparison-scope": "7e74cb58f1c111316522ad92a09767bdc315c2c710eba1642e33ae907f9592c0",
+      "original-physical-components": "c23403bddb316a691126954828294061daf09b4305f58e18d53b1010a57df317",
+      "retained-source-2018-byte-identity-metadata": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "retained-source-metadata": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "routing-family-roster": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+      "source-fitness-candidates": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "source-inventory": "ef561241b2c81afe4eaea501963a955d7d57d06cc925cc8090310205e2e55e56"
+    },
+    "subject_files": {
+      "atlas:local:IND:7132399B91549871673633": "data/geography/part-32.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/assessment.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/capture-fragments.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/closure-freeze.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/decoded-000.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/decoded-001.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/decoded-002.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/encoded-000.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/encoded-001.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/fragment-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/measure.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/runner.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/execution-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/closure-freeze.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/execution-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/note.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/run-one-result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/run-two-result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/source-reader-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/source-reader-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/execution-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/note.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/run-one-older-preflight-result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/run-one-result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/run-two-result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/source-reader-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/source-reader-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-001.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-002.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-003.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-004.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-006.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-007.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-001.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-002.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-003.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-004.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-005.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-006.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-007.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-two/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/source-reader-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/source-reader-positive.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "{\"argv\": [\"/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python\", \"-I\", \"-B\", \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/india-kakinada-rural-source-fitness-20261007/measure.py\", \"--packet\", \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/india-kakinada-rural-source-fitness-20261007\", \"--result\", \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json\"], \"cwd\": \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work\"}",
+    "{\"argv\": [\"/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python\", \"-I\", \"-B\", \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/india-kakinada-rural-source-fitness-20261007/measure.py\", \"--packet\", \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/india-kakinada-rural-source-fitness-20261007\", \"--result\", \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-two/result.json\"], \"cwd\": \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work\"}",
+    "python -I -B controls.py freeze",
+    "python -I -B controls.py controls",
+    "python -I -B controls.py positive --run-one verification/run-one/result.json",
+    "python -I -B runner.py"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "geoBoundaries-IND-ADM3-2018",
+        "india-lgd-current-directory",
+        "census-india-2011-h03-andhra-pradesh",
+        "census-india-2001-east-godavari-map"
+      ],
+      "status": "unresolved",
+      "text": "The retained 2018 source feature uniquely covers the frozen physical component geometrically, but present-day administrative validity, authority, and reuse grant remain unverified; source fitness remains unapproved."
+    }
+  ],
+  "issue": 1392,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Captured ancestor-retained encoded bytes and their complete decoded stream in exact contiguous literal fragments. Preparation is excluded from the scientific measurement invocation.",
+      "id": "literal-source-fragment-capture",
+      "kind": "source",
+      "software": "Python standard library",
+      "units": "Exact bytes; ordinary files capped at 32 MiB."
+    },
+    {
+      "description": "At the actual measure.py CLI, checks packet paths without following symlinks, checks ordinary-file size before bounded reads, verifies every part/range/hash, streams the complete encoded stream through gzip, compares every decoded byte with the complete decoded fragment chain, parses every feature incrementally and joins the complete source, component, family, candidate, scope, priority and current-contact records.",
+      "id": "bounded-complete-source-reader",
+      "kind": "source",
+      "software": "Python 3.12.14; zlib 1.2.12",
+      "units": "Bytes, exact identity and count relations; no whole decoded file written."
+    },
+    {
+      "description": "Uses frozen loaded callable bodies for shape conversion, validity, coverage, difference and symmetric difference on complete source, component and current-contact geometries; the directed actual-entry fixture binds expected outputs and rejects uncovered, contact-covering and invalid cases.",
+      "id": "direct-stored-coordinate-polygon-overlay",
+      "kind": "measurement",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1",
+      "units": "Boolean set relations; diagnostic square degrees only."
+    },
+    {
+      "description": "Two individual isolated CLI invocations share the exact frozen execution commit, code/input closure, interpreter/native runtime bodies and callable fingerprints; each command, cwd, invoked/resolved interpreter, exit, timestamps and result hash are retained.",
+      "id": "frozen-bounded-source-fitness-measurement",
+      "kind": "code",
+      "software": "Python 3.12.14; zlib 1.2.12; Shapely 2.1.2; GEOS 3.13.1",
+      "units": "Result bytes and SHA-256."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/metric_values/source_covers_component",
+      "metric_id": "source_covers_component",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json"
+    },
+    {
+      "json_pointer": "/metric_values/current_contact_covers_component",
+      "metric_id": "current_contact_covers_component",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json"
+    },
+    {
+      "json_pointer": "/metric_values/source_current_symmetric_difference_coordinate_area",
+      "metric_id": "source_current_symmetric_difference_coordinate_area",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json"
+    },
+    {
+      "json_pointer": "/metric_values/source_minus_component_empty",
+      "metric_id": "source_minus_component_empty",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json"
+    },
+    {
+      "json_pointer": "/metric_values/component_minus_source_empty",
+      "metric_id": "component_minus_source_empty",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json"
+    },
+    {
+      "json_pointer": "/metric_values/source_current_topologically_equal",
+      "metric_id": "source_current_topologically_equal",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "307cf801644076b347da4100c989983d37380c5c",
+      "id": "source_covers_component",
+      "input_sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60",
+      "limitations": "Geometric relation does not establish source authority or approval.",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "unit": "boolean set coverage",
+      "value": 1,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "307cf801644076b347da4100c989983d37380c5c",
+      "id": "current_contact_covers_component",
+      "input_sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60",
+      "limitations": "Geometric relation does not establish source authority or approval.",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "unit": "boolean set coverage",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "307cf801644076b347da4100c989983d37380c5c",
+      "id": "source_current_symmetric_difference_coordinate_area",
+      "input_sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60",
+      "limitations": "Coordinate overlay is not ground area or legal/administrative authority.",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "unit": "square coordinate units (degrees squared); diagnostic only",
+      "value": 7.820532549576249e-05,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "307cf801644076b347da4100c989983d37380c5c",
+      "id": "source_minus_component_empty",
+      "input_sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60",
+      "limitations": "Geometric relation does not establish source authority or approval.",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "unit": "boolean",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "307cf801644076b347da4100c989983d37380c5c",
+      "id": "component_minus_source_empty",
+      "input_sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60",
+      "limitations": "Geometric relation does not establish source authority or approval.",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "unit": "boolean",
+      "value": 1,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "307cf801644076b347da4100c989983d37380c5c",
+      "id": "source_current_topologically_equal",
+      "input_sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60",
+      "limitations": "Geometric relation does not establish source authority or approval.",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "unit": "boolean",
+      "value": 0,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 9267,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/assessment.md",
+      "role": "assessment-report",
+      "sha256": "4caee6a4970be3c1dfe063e2459e24625276fe4740893c4ff91015ea10a5609e"
+    },
+    {
+      "bytes": 9667,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/capture-fragments.py",
+      "role": "source-fragment-preparation-entry",
+      "sha256": "b109912c2985e5721838e8a86996027cc76f955731e62102f15027d629819f70"
+    },
+    {
+      "bytes": 45553,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/measure.py",
+      "role": "measurement-entry",
+      "sha256": "f6f1d47baf2a54b83154043a95a360ee01e98eaabfa44436cff90fd3a27bda6a"
+    },
+    {
+      "bytes": 20924,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/controls.py",
+      "role": "actual-entry-controls-and-freeze",
+      "sha256": "de05cecb8d9f6bc7017cad725f27c1c3fd571435a5383c41e9abe4ce705e4369"
+    },
+    {
+      "bytes": 3343,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/runner.py",
+      "role": "two-run-execution-recorder",
+      "sha256": "e2aee2ffd019f885605a202e86b715f29b0b07d270f4c0974b3548937fd85e2b"
+    },
+    {
+      "bytes": 8665,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/closure-freeze.json",
+      "role": "frozen-execution-code-input-runtime-closure",
+      "sha256": "4cc8544659ee1c623f0b508300ed9cae4ea2a1f180feb75db86334838edd553b"
+    },
+    {
+      "bytes": 352415,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json",
+      "role": "accepted-run-one",
+      "sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60"
+    },
+    {
+      "bytes": 352415,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-two/result.json",
+      "role": "accepted-run-two",
+      "sha256": "bf01a849322d2821e931c8ee44e2ea799aa0c8c3dc8450afae423156ade87d60"
+    },
+    {
+      "bytes": 382,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/source-reader-positive.json",
+      "role": "source-reader-positive-control",
+      "sha256": "23db97959965971455a24320d99087646870c1b4e98b9c1c054cb44691b32fee"
+    },
+    {
+      "bytes": 8309,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/source-reader-negative.json",
+      "role": "source-reader-and-file-boundary-negative-controls",
+      "sha256": "5fdf70865a3fb5a4eba768b6ed116e033e5f020b4c42e7e8821965e68834c970"
+    },
+    {
+      "bytes": 749,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-controls.json",
+      "role": "directed-geometry-method-controls",
+      "sha256": "bc1cf0a0d8d10ab8c4b9f3eb4c6713a9dbb1e16bd18c33eb36e7c06772358434"
+    },
+    {
+      "bytes": 868,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-positive.json",
+      "role": "directed-geometry-positive-control",
+      "sha256": "999f411619c3cd09346179ce3f69c2b72963fb861f5e4284dc037f2d26fc1c5e"
+    },
+    {
+      "bytes": 241,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-negative.json",
+      "role": "directed-geometry-negative-control",
+      "sha256": "9e6c1200742da4c9e5074ee9e2f13a9669105f068aed80cf4de6acbf3eecf08b"
+    },
+    {
+      "bytes": 11641,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/execution-reproducibility.json",
+      "role": "individual-execution-reproducibility-receipt",
+      "sha256": "ea37e227ab0c0b71771c8d2519245e4e98860360c2755e7df4609b7cdd04d4d6"
+    },
+    {
+      "bytes": 1047,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-001.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "b0999ce58933d3e5c4fa1a7b29e738d994d442b162b5dd719933c130269bedc6"
+    },
+    {
+      "bytes": 943,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-002.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "8a39288de70b5742aaa071334029814a2de6c65d522e106bb179b28d79c083f1"
+    },
+    {
+      "bytes": 1174,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-003.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "b8fe90e4fe24f0aa3436ab8545de91f529fce89a7a61c701a1a51d252d561ba4"
+    },
+    {
+      "bytes": 628,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-004.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "46340a67da165a7d15040faff42dcfe9fa67ee5edbe5f475b6bcad448d604064"
+    },
+    {
+      "bytes": 544,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-006.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "fa848909b0c7e9003fb2d7778e209fc928a341969c6bc6593542b101f1009386"
+    },
+    {
+      "bytes": 456,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-failure-007.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "d6351e7593aee639a5bf36c36ad05d6a1846082465d82c18e93129f64bbccb44"
+    },
+    {
+      "bytes": 4292,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-001.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "a30c62c72c185af6f38b16ac48a788a8194a841306123e3771b3321e207852e2"
+    },
+    {
+      "bytes": 4292,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-002.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "80502860b2980f636b17df1e67f58186152a3407f7466b6b4655f908ea9019e1"
+    },
+    {
+      "bytes": 4292,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-003.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "793e17e0d99cd47bb28fb8e91dd08781fc596ebd5a61caf614b95a4e6c7a3a70"
+    },
+    {
+      "bytes": 4766,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-004.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "71b0d6ba47feba1c2dee73ae6244bd5bf350ec66f772b30db6558f7e29d3600f"
+    },
+    {
+      "bytes": 4766,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-005.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "d2c2530885bfab22b36925433e4b8be27c932319c3747ee87f6758340c7beb0f"
+    },
+    {
+      "bytes": 4766,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-006.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "8986d24f57194eacd8759c86d2297f7a2f8e83ef96cf1369d0a7a09dcd54aa8c"
+    },
+    {
+      "bytes": 4766,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/preflight-freeze-invalidated-007.json",
+      "role": "preserved-nonaccepted-preflight-history",
+      "sha256": "8986d24f57194eacd8759c86d2297f7a2f8e83ef96cf1369d0a7a09dcd54aa8c"
+    },
+    {
+      "bytes": 1057,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/execution-reproducibility.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "cf2b054fbf3baf56f88ef53e3da58f20574633c10104e50bd3a40a763074ab86"
+    },
+    {
+      "bytes": 426,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/note.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "967477c0cc1de6c4ded0dbb1858406e6e69411f2b29ab91d726c2e149b6a5746"
+    },
+    {
+      "bytes": 348578,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/run-one-older-preflight-result.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "b8ee91b5dc43e9fedd16f999f63c8f7421d5951da72f1701519f2341a16555b8"
+    },
+    {
+      "bytes": 348578,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/run-one-result.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "331c72523ec8a8b66ece460eb147947622ae33e7aa7d3407cfc4b076977b6454"
+    },
+    {
+      "bytes": 348578,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/run-two-result.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "331c72523ec8a8b66ece460eb147947622ae33e7aa7d3407cfc4b076977b6454"
+    },
+    {
+      "bytes": 5467,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/source-reader-negative.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "e9bfddb8b4d1b6809d27ac2ac71f05b5901dbc4266cf04f7d86a0d89527874d6"
+    },
+    {
+      "bytes": 382,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/pre-family-flag-join/source-reader-positive.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "cafda1512e7d8b538e5b165f56b3913694c81408f4ef91effce2118557148872"
+    },
+    {
+      "bytes": 4766,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/closure-freeze.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "833675c7b21b94918e17a35f78d2beaa545e07a78e60fbbdf27e7189badafbc1"
+    },
+    {
+      "bytes": 1051,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/execution-reproducibility.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "bdd3944fa56cff25f71162835f25b5d9c6ca086b4889826e6f27ed54d95e63ba"
+    },
+    {
+      "bytes": 1242,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/note.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "6e6b6d640823f6fb733c777c0e8564892ebaa20ec39f6c83b8aecb1073e913ac"
+    },
+    {
+      "bytes": 348578,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/run-one-result.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "4adc1b189d22979e176b81051b6a94f03773cc1cecbdea74d3ac16c615f2692c"
+    },
+    {
+      "bytes": 348578,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/run-two-result.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "4adc1b189d22979e176b81051b6a94f03773cc1cecbdea74d3ac16c615f2692c"
+    },
+    {
+      "bytes": 5467,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/source-reader-negative.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "c831fbf94ae33905c1f1ef569ed624285f7d7f66ed585fd44e6d4d6886aa99e1"
+    },
+    {
+      "bytes": 382,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/historical-narrow-runtime-unbound-20261007/source-reader-positive.json",
+      "role": "historical-narrow-proof-or-superseded-revision",
+      "sha256": "a3c379cdbfef749c9315ddb5ac4ae0e69f2c23d47a92f1308c3ddbd61123e392"
+    }
+  ],
+  "source_execution_boundary": {
+    "candidate_index_limit_bytes": 1048576,
+    "decoded_whole_file_written": false,
+    "descriptor_cap": 512,
+    "growth_rejected_while_reading": true,
+    "historical_unbound_pair_retained": true,
+    "literal_fragment_body_bytes": 53834276,
+    "ordinary_part_limit_bytes": 33554432,
+    "pre_read_regular_file_and_symlink_checks": true,
+    "retained_whole_gzip": "ancestor-only restoration/provenance relation; not used as executable ordinary input",
+    "total_cap_bytes": 268435456
+  },
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 2987,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/fragment-index.json",
+          "role": "dual-stream-fragment-index",
+          "sha256": "c0c3385b795edaa2027f8ff879d26a71cdc948421614963590a06045ca46d7b7"
+        },
+        {
+          "bytes": 16777216,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/decoded-000.bin",
+          "role": "literal-source-fragment",
+          "sha256": "0d9423248c254d54fbc8a4e80fb4d424ab269b9dbb6df764f4280156be3e0b0b"
+        },
+        {
+          "bytes": 16777216,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/decoded-001.bin",
+          "role": "literal-source-fragment",
+          "sha256": "186fdfc2e9edd6876c954b6fb963140cbf00abddc8a6eed1c44605a3869f7e88"
+        },
+        {
+          "bytes": 6485570,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/decoded-002.bin",
+          "role": "literal-source-fragment",
+          "sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+        },
+        {
+          "bytes": 8388608,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/encoded-000.bin",
+          "role": "literal-source-fragment",
+          "sha256": "efda0832c732ae68adc9caac7d532a3a4a4d0ef44928d5986b3c0fe1f035c16c"
+        },
+        {
+          "bytes": 5405666,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/inputs/encoded-001.bin",
+          "role": "literal-source-fragment",
+          "sha256": "de1c99a569b16ff0c7a0b4a4f78d812d4175dded2e63c3837706bb50e8c7f082"
+        }
+      ],
+      "id": "geoBoundaries-IND-ADM3-2018",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0 as reported by the pinned geoBoundaries metadata; legal grant not independently verified"
+      },
+      "metadata_descriptor": {
+        "path": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+        "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+        "shared_pin_keys": [
+          "retained-source-metadata",
+          "retained-source-2018-byte-identity-metadata"
+        ]
+      },
+      "restoration": "The historical whole gzip is retained unchanged at its original ancestor Git path and is not an executable ordinary input or packet copy. Its full encoded/decoded byte identities are admitted through this index and the corresponding literal fragments.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "historical administrative source used for identity and geometry comparison",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      },
+      "temporal_status": "historical",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3-metaData.json",
+      "verification": "unverified",
+      "vintage": "represented year 2018; source update reported 2023-01-19; built 2023-12-12",
+      "whole_source_identities": {
+        "decoded_json": {
+          "bytes": 40040002,
+          "sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb"
+        },
+        "decoded_whole_file_materialized": false,
+        "difference": 14,
+        "difference_status": "unresolved",
+        "encoded_gzip": {
+          "bytes": 13794274,
+          "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301"
+        },
+        "feature_count": 6822,
+        "metadata_admUnitCount": 6836
+      }
+    },
+    {
+      "id": "india-lgd-current-directory",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for any future LGD record or geometry were not verified."
+      },
+      "limit": "The landing page does not establish legal authority or validity of the retained 2018 geometry.",
+      "restoration": "Search the Government of India Local Government Directory for the current Kakinada (Rural) record; retain its code, parent, effective date, geometry or legal schedule, and applicable terms.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "current administrative directory context and route for follow-up verification",
+      "temporal_status": "reference",
+      "url": "https://lgdirectory.gov.in/",
+      "verification": "unverified",
+      "vintage": "current website accessed 2026-10-07"
+    },
+    {
+      "id": "census-india-2011-h03-andhra-pradesh",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for catalog data were not assessed."
+      },
+      "limit": "Historical name/type evidence only; does not establish a current boundary or parent.",
+      "restoration": "Consult the official Census of India 2011 H-03 Andhra Pradesh catalog and retain the exact Kakinada (Rural) table row with stable code.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "historical name and administrative type cross-check",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "temporal_status": "historical",
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/10013",
+      "verification": "unverified",
+      "vintage": "2011 Census catalog"
+    },
+    {
+      "id": "census-india-2001-east-godavari-map",
+      "license": {
+        "status": "unknown",
+        "terms": "The map displays Government of India copyright and Survey of India map-source conditions; reuse permissions for derivative geometry were not assessed."
+      },
+      "limit": "The map is too old to establish current boundaries or survey accuracy.",
+      "restoration": "Consult the official Census of India East Godavari administrative map and retain the relevant page and map notes.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "historical map context only",
+      "supported_interval": {
+        "from": 2001,
+        "to": 2002
+      },
+      "temporal_status": "historical",
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/27672/download/30841/DH_28_2001_EGOD.pdf",
+      "verification": "unverified",
+      "vintage": "2001 Census administrative map"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "atlas:local:IND:7132399B91549871673633"
+  ],
+  "subject_ids_sha256": "b6e4c1c5ecc215d0735150da773280fd13906ff07ec343ae98dfcb48b9c1189a",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/source-reader-positive.json",
+      "kind": "positive-control",
+      "method_id": "bounded-complete-source-reader",
+      "outcome": "passed"
+    },
+    {
+      "case_count": 22,
+      "evidence_path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/source-reader-negative.json",
+      "kind": "negative-control",
+      "method_id": "bounded-complete-source-reader-and-ordinary-file-boundary",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-positive.json",
+      "kind": "positive-control",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/geometry-method-negative.json",
+      "kind": "negative-control",
+      "method_id": "direct-stored-coordinate-polygon-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/india-kakinada-rural-source-fitness-20261007/verification/execution-reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "frozen-bounded-source-fitness-measurement",
+      "outcome": "passed",
+      "run_count": 2
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c"
+}
