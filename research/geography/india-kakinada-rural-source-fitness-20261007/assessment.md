@@ -18,7 +18,7 @@ I decoded the exact original component feature, retained 2018 source feature, an
 
 - The 2018 source polygon covers the complete physical component (`source.covers(component) = true`); `component - source` is empty.
 - The source polygon is much larger than the component; `source - component` is non-empty. This is consistent with the component being a small gap contained inside an administrative polygon, not a proposed boundary reconstruction.
-- The current Atlas polygon is not topologically equal to the retained source polygon. Its symmetric difference from the 2018 source is non-empty (about `0.0000782053` square degrees in this direct planar calculation). The source and current polygons share bounds but differ in shape. Neither full polygon covers the component in the current version; this is consistent with the tiny component not being part of the current stored contact geometry.
+- The current Atlas polygon is not topologically equal to the retained source polygon. Its symmetric difference from the 2018 source is non-empty (about `0.0000782053` square degrees in this direct planar calculation). The source and current polygons share bounds but differ in shape. The 2018 source covers the component, while the current Atlas contact does not (`current_contact.covers(component) = false`).
 - The comparison dataset independently records one compatible source feature, complete component coverage, and an empty component-minus-source result. The direct check above confirms that coverage from the pinned raw geometries.
 
 The area figures in square degrees are only overlay diagnostics in raw longitude/latitude coordinates. They are not area estimates on the ground. The inherited priority area (`799.9893 m²`) and inherited fragment area are not new measurements.
@@ -33,7 +33,7 @@ Current Atlas metadata ties the contact to the retained geoBoundaries member and
 
 ## Uncertainty and follow-up evidence
 
-The family summary says the component touches a reference shore, while the original physical component feature in the pinned custody payload says `touches_reference_shore=false`; I retain both values as a source-record inconsistency. Water status remains unverified. Cause remains unknown. The 2018 polygon's coverage does not settle whether the component is land, water, a coastline artifact, or a later administrative change.
+The original physical component feature in the pinned custody payload says `touches_reference_shore=false`. The matched pinned family row contains no reference-shore field, so it does not establish a family-level shore value. Water status remains unverified. Cause remains unknown. The 2018 polygon's coverage does not settle whether the component is land, water, a coastline artifact, or a later administrative change.
 
 Before approving source fitness, obtain a current official LGD or state-government record for Kakinada (Rural), including its code, parent, effective date, geometry or legal schedule, and reuse terms. Reconcile that evidence against the 2018 source and current Atlas shape; then separately resolve the shoreline/water and parent uncertainty. Do not infer approval from source coverage alone.
 
