@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "issue": 1309,
+  "status": "passed",
+  "base_main_commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40",
+  "checks": [
+    {
+      "id": "documented-local-byte-command",
+      "outcome": "passed",
+      "detail": "Executed evidence-quality.mjs on the owned manifest with actual baseline/candidate bytes."
+    },
+    {
+      "id": "optional-record-command",
+      "outcome": "passed",
+      "detail": "Executed the documented repositoryReader/validateRecordChecks imports; no record checks are declared for this instructions-only packet. Absence proves no scientific claim."
+    },
+    {
+      "id": "full-local-premerge-interface",
+      "outcome": "passed",
+      "detail": "Actual issue contract, renewed canonical holder and complete changed-file receipts pass validatePremergeManifest with the actual baseline adapter."
+    },
+    {
+      "id": "byte-versus-full-boundary",
+      "outcome": "passed",
+      "detail": "Removing a change receipt still passes the byte-only checker and is rejected by the full premerge validator, as the guide explains."
+    },
+    {
+      "id": "actual-byte-drift-control",
+      "outcome": "passed",
+      "detail": "A reader returning altered candidate guide bytes is rejected without modifying repository files."
+    },
+    {
+      "id": "role-links-and-helper-interfaces",
+      "outcome": "passed",
+      "detail": "Checked local guide links, helper entry points and budget constants against actual pinned code; separate independent advisory inspection covered behavioral descriptions and limits."
+    },
+    {
+      "id": "focused-validator-profile-tests",
+      "outcome": "passed",
+      "detail": "Verified all five test paths exist, then executed test/integration-proof.test.mjs, test/full-regression-shards.test.mjs, test/merge-integration.test.mjs, test/evidence-quality.test.mjs, test/premerge-evidence.test.mjs on Node 24: 106 passed, 0 failed/cancelled/skipped. Original cc32bcb command silently omitted nonexistent test/integration-profile.test.mjs; its 28 passing validator tests did not establish profile-suite execution. Corrected before acceptance after independent review."
+    },
+    {
+      "id": "focused-ci-selection",
+      "outcome": "passed",
+      "detail": "integrationProfile selects evidence for the actual changed path inventory. Hosted selection/acceptance remain pending."
+    }
+  ],
+  "limits": [
+    "Documentation-only work: no new scientific computation, source finding, geography approval, import or publication.",
+    "Local checks and advisory inspection do not replace hosted authority or fresh independent exact-head review.",
+    "Worker adoption remains unverified; #1266/#1275 and other owned historical follow-ups remain separate unfinished work."
+  ]
+}

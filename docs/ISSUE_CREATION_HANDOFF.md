@@ -26,3 +26,11 @@ Start from current main to read the instructions. GitHub access to the repositor
 Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.
 
 Read docs/AUDIT_FAILURE_PREVENTION.md on current main before the next job or review. Identify the consequential acceptance claims and independently test applicable consumed-input/code, identity/join, source/method, safe-reproduction, nonvacuous-control and operating-limit invariants. Use shared evidence helpers or an explicitly reviewed equivalent; reviewers derive expectations from original acceptance and independent records before relying on author tests. Exercise real entry points and adjacent paths for corrective PRs; record unexecuted proof as a limit. Keep exact-head review, original evidence, scientific/publication gates and focused research CI. Adoption requires actual subsequent handoffs, not just this prompt edit.
+
+## Author preparation
+
+Use [AUTHOR_PREFLIGHT.md](AUTHOR_PREFLIGHT.md) to make acceptance and supporting
+evidence expectations concrete before handing work to its lane. Receiving authors
+select applicable preflight checks before implementation. Issue creation still
+updates ordinary GitHub issues only; it does not implement, run a universal research
+regression or approve scientific claims.

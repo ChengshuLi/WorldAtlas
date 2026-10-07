@@ -1,0 +1,69 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "author-preflight-20261007",
+  "branch": "engineering/author-preflight-20261007",
+  "base_main_commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40",
+  "github_issue": 1309,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Practical author preflight and consistent role entry links; preserve focused research CI and independent review"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-07T07:16:30.423Z",
+  "completed": [
+    "Practical author guide and role-specific links prepared on a fresh verified-main branch",
+    "Documented local interfaces and focused CI selection checked; final exact-head review remains required",
+    "Independent review identified a missing test path; actual validator/profile suites rerun with path checks (106 passed) and evidence corrected before acceptance"
+  ],
+  "checks": [
+    {
+      "check": "documented-local-byte-command",
+      "status": "passed"
+    },
+    {
+      "check": "optional-record-command",
+      "status": "passed"
+    },
+    {
+      "check": "full-local-premerge-interface",
+      "status": "passed"
+    },
+    {
+      "check": "byte-versus-full-boundary",
+      "status": "passed"
+    },
+    {
+      "check": "actual-byte-drift-control",
+      "status": "passed"
+    },
+    {
+      "check": "role-links-and-helper-interfaces",
+      "status": "passed"
+    },
+    {
+      "check": "focused-validator-profile-tests",
+      "status": "passed"
+    },
+    {
+      "check": "focused-ci-selection",
+      "status": "passed"
+    }
+  ],
+  "deployment": "No deployment or import; instructions only",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "docs/AUTHOR_PREFLIGHT.md",
+    "coordination/engineering/author-preflight-20261007/CHECKPOINT.md",
+    "coordination/engineering/author-preflight-20261007/verification.json"
+  ],
+  "blockers": [],
+  "next_action": "Verify actual documented interfaces and local/hosted evidence; independent exact-head review and normal queue",
+  "pull_request": 1331,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
