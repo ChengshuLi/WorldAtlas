@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "tested_code_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8",
-  "node_tests": 41,
+  "tested_code_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be",
+  "node_tests": 59,
   "python_execution_controls": 7,
   "python_scientific_cli_controls": 10,
   "failed": 0,
@@ -23,7 +23,8 @@
   ],
   "additional_controls": [
     "Raw CSV and JSONL use the same fresh-run writer",
-    "Existing trusted-runner entry points preserve the self-contained immutable-helper dependency boundary"
+    "Existing trusted-runner entry points preserve the self-contained immutable-helper dependency boundary",
+    "Retained execution code uses its authenticated historical vintage; actual missing/duplicate/altered code bindings reject"
   ],
   "python_geographic_regression_controls": 40,
   "python_trusted_geography_controls": 17

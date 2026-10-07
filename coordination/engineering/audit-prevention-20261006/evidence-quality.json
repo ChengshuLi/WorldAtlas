@@ -121,6 +121,18 @@
         "bytes": 21028,
         "sha256": "576da9a8dbebecd8bde556b5f25e3d6078812bf1571a70a58c81aec8d0e137fc",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/validate-physical-audit-evidence.py",
+        "hash_kind": "file-bytes",
+        "bytes": 17576,
+        "sha256": "11d501770684b30ca114fda8cb560de8a8d936bb9bef2c402b19a090fd608eee"
+      },
+      {
+        "path": "test/physical-audit-evidence.test.mjs",
+        "hash_kind": "file-bytes",
+        "bytes": 1799,
+        "sha256": "4351368a0313a0ae2f30414b75fa777ea27aa3085dd95b038f32366d66f6c749"
       }
     ],
     "pins": {}
@@ -267,15 +279,27 @@
     },
     {
       "path": "coordination/engineering/audit-prevention-20261006/verification.json",
-      "bytes": 1057,
-      "sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "bytes": 1185,
+      "sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/audit-prevention-20261006/CHECKPOINT.md",
-      "bytes": 799,
-      "sha256": "5d68522cfffdf7acc1cf52e1444180e583c72020d911b22837b3d7a574b9e858",
+      "bytes": 1008,
+      "sha256": "eab02040288c5efb52ae5cbafe7d6307d759e7e466a978cd1814ef8d2cf41c95",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/validate-physical-audit-evidence.py",
+      "hash_kind": "file-bytes",
+      "bytes": 18386,
+      "sha256": "3e742b3ad094db2f36e0e8b9944e01d3e00698de07a1359a7c4231130a2256cf"
+    },
+    {
+      "path": "test/physical-audit-evidence.test.mjs",
+      "hash_kind": "file-bytes",
+      "bytes": 5197,
+      "sha256": "995ed0986efe93c5e9cb18f9bc0c4764574f0beec7037dc98576acb3eaaf6cc9"
     }
   ],
   "methods": [
@@ -290,65 +314,65 @@
   "metrics": [
     {
       "id": "node_tests",
-      "value": 41,
+      "value": 59,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
-      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
     },
     {
       "id": "python_execution_controls",
       "value": 7,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
-      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
     },
     {
       "id": "python_scientific_cli_controls",
       "value": 10,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
-      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
     },
     {
       "id": "failed",
       "value": 0,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
-      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
     },
     {
       "id": "skipped",
       "value": 0,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
-      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
     },
     {
       "id": "python_geographic_regression_controls",
       "unit": "count",
       "vintage": "archived",
       "value": 40,
-      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
-      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
     },
     {
       "id": "python_trusted_geography_controls",
       "unit": "count",
       "vintage": "archived",
       "value": 17,
-      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
-      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
     }
   ],
   "summaries": [
     {
       "metric_id": "node_tests",
-      "value": 41,
+      "value": 59,
       "unit": "count"
     },
     {
@@ -389,7 +413,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "PYTHON=/path/to/isolated-python WORLDATLAS_TEST_PYTHON=/path/to/isolated-python PYTHONDONTWRITEBYTECODE=1 node --test test/evidence-prevention.test.mjs test/geographic-regression.test.mjs test/trusted-geography-check.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/integration-profile.test.mjs test/deployment-budget-scope.test.mjs"
+    "PYTHON=/path/to/isolated-python WORLDATLAS_TEST_PYTHON=/path/to/isolated-python PYTHONDONTWRITEBYTECODE=1 node --test test/evidence-prevention.test.mjs test/geographic-regression.test.mjs test/trusted-geography-check.test.mjs test/geographic-adjudication-api.test.mjs test/physical-audit-evidence.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/integration-profile.test.mjs test/deployment-budget-scope.test.mjs"
   ],
   "metric_bindings": [
     {
@@ -551,6 +575,16 @@
     {
       "path": "coordination/engineering/audit-prevention-20261006/evidence-quality.json",
       "status": "added"
+    },
+    {
+      "path": "scripts/validate-physical-audit-evidence.py",
+      "status": "modified",
+      "original_sha256": "11d501770684b30ca114fda8cb560de8a8d936bb9bef2c402b19a090fd608eee"
+    },
+    {
+      "path": "test/physical-audit-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "4351368a0313a0ae2f30414b75fa777ea27aa3085dd95b038f32366d66f6c749"
     }
   ]
 }
