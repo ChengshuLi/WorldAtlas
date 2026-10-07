@@ -28,7 +28,7 @@
   },
   "commands": [
     "node --test test/premerge-evidence.test.mjs",
-    "node scripts/evidence-quality.mjs coordination/engineering/review-reconciliation-20261007/evidence-quality.json"
+    "node scripts/evidence-quality.mjs coordination/engineering/review-reconciliation-1309-20261007/evidence-quality.json"
   ],
   "baseline": {
     "commit": "450126d04c7e6bf85c8763c9bb6949c1fac68000",
@@ -82,19 +82,19 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/review-reconciliation-20261007/premerge-tests.txt",
+      "path": "coordination/engineering/review-reconciliation-1309-20261007/premerge-tests.txt",
       "bytes": 1964,
       "sha256": "ee653f28b29a7cbb2d69865c3a3a27dd1b424130f2b1264410b4cd2f84918fe9",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/review-reconciliation-20261007/CHECKPOINT.md",
+      "path": "coordination/engineering/review-reconciliation-1309-20261007/CHECKPOINT.md",
       "bytes": 789,
       "sha256": "3e712f9bf0b91a59fccd89015dcde6136298e1e71f349ea000f9a185fabc3dd7",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/review-reconciliation-20261007/verification.json",
+      "path": "coordination/engineering/review-reconciliation-1309-20261007/verification.json",
       "bytes": 1321,
       "sha256": "415a3a3978a27e424d57686b16c76f6380d498f12c959a1150df9aa678b9d02e",
       "hash_kind": "file-bytes"
@@ -112,19 +112,19 @@
       "original_sha256": "b196c2287928980c105f59aa9c2bcbfca286a830c0c785fb76ead0f65858cd9f"
     },
     {
-      "path": "coordination/engineering/review-reconciliation-20261007/premerge-tests.txt",
+      "path": "coordination/engineering/review-reconciliation-1309-20261007/premerge-tests.txt",
       "status": "added"
     },
     {
-      "path": "coordination/engineering/review-reconciliation-20261007/CHECKPOINT.md",
+      "path": "coordination/engineering/review-reconciliation-1309-20261007/CHECKPOINT.md",
       "status": "added"
     },
     {
-      "path": "coordination/engineering/review-reconciliation-20261007/verification.json",
+      "path": "coordination/engineering/review-reconciliation-1309-20261007/verification.json",
       "status": "added"
     },
     {
-      "path": "coordination/engineering/review-reconciliation-20261007/evidence-quality.json",
+      "path": "coordination/engineering/review-reconciliation-1309-20261007/evidence-quality.json",
       "status": "added"
     }
   ]
