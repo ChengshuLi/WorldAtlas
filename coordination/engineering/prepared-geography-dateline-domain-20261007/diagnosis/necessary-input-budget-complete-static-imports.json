@@ -1,0 +1,541 @@
+{
+  "kind": "Necessary immutable original input/consumer closure measured before author claim; not final admission",
+  "observed_commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+  "whole_world_geometry_parts": 36,
+  "whole_world_expected_features": 49625,
+  "consumed_snapshot": [
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 9544,
+      "sha256": "d8d7b07bfbbbdf558308100cc9da7531ddc7d1a7ec73e9c24bc2bd7b9bd6c867"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 9253,
+      "sha256": "fb2545b2300f2d8f536eb278e6fb27c75bdfa0a09ff5aac168c1730ba844cc1b"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "AGENTS.md",
+      "bytes": 8939,
+      "sha256": "af462db59f343cfb05708180141d8bc5e8b34d7197b4e7fccbf1cac84b7c069d"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/canonical-grid/manifest.json",
+      "bytes": 271171,
+      "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geographic-releases/current-manifest.json",
+      "bytes": 215,
+      "sha256": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geographic-releases/index.json",
+      "bytes": 225846,
+      "sha256": "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geographic-releases/releases-v7-repacked-gzip.json.gz",
+      "bytes": 168219,
+      "sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7",
+      "decoded_bytes": 571794,
+      "decoded_sha256": "c94d5ba51478c377f0c465a8e2736e2a4b83249c78fe84709622345bb51c8cb3"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-1.json",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-10.json",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-11.json",
+      "bytes": 5133018,
+      "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-12.json",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-13.json",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-14.json",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-15.json",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-16.json",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-17.json",
+      "bytes": 4948066,
+      "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-18.json",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-19.json",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-20.json",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-24.json",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-25.json",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-26.json",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-3.json",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-30.json",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-31.json",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-32.json",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-33.json",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-4.json",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-6.json",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-7.json",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-8.json",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/geography/source-restoration-additions.json",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "bytes": 6807,
+      "sha256": "3742cc4427584c4821746e4acaa722d540a92ec24c3dfd6cc55bbb9fa465dcf6"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "bytes": 9514,
+      "sha256": "d99838bb409cd2d67c09188cc3610b7c357ed035a33852abd228e687e4bbda38"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 16791,
+      "sha256": "133bd70416028375e4b1923432fb3d6bc51dcf88ae032758f6cbc9711608e6ef"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "hosted/geographic-releases.js",
+      "bytes": 17288,
+      "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/check-geographic-adjudications.mjs",
+      "bytes": 1374,
+      "sha256": "c1047ff3b45572ef4a668ab41360201b98e4eedff6f6553940b0c75a89f7da86"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/check-geographic-regression.py",
+      "bytes": 13813,
+      "sha256": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 7069,
+      "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/check-prepared.mjs",
+      "bytes": 3133,
+      "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/evidence-policy.mjs",
+      "bytes": 2126,
+      "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 14753,
+      "sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/evidence/geometry.py",
+      "bytes": 6573,
+      "sha256": "0b8e5b155c7a68b802b99a3597c63ac48293f276e682d34e9167cb5105b2a334"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 7090,
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/final-capacity.mjs",
+      "bytes": 20323,
+      "sha256": "90542cc945e6a967c5da5daacf52ffcaff613e6f5ee0fdebf83c74f017c8e643"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/geographic-adjudication-api.mjs",
+      "bytes": 12389,
+      "sha256": "ce0357365f791064971067e1e7a9a74e10dbe65e8437dfe3a0c64e708f86a7e8"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/geographic_adjudication.py",
+      "bytes": 11758,
+      "sha256": "f5347aa32b4d0caf137b8d2f7308bf9946fbd857776c8516812255223d1f5ada"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/github-quota.mjs",
+      "bytes": 1758,
+      "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/immutable-git-blobs.mjs",
+      "bytes": 2368,
+      "sha256": "36aeb2bc33eceb3782982b63e8d02199fd65893c0bc52781b7907f6915645645"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/integration-profile.mjs",
+      "bytes": 2443,
+      "sha256": "14cd71768884d7caa315b26a1d3afe34b6edd9f5b35717f226f63fdcf2c5d746"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 3844,
+      "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 16802,
+      "sha256": "f6deff27deeeb73799ba3540af0099d5292f192ec88098debef458b13d93f4d1"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 27097,
+      "sha256": "2e514b20872d7358821f0c85eddeeee11a2b1ea7facf7ea5250efede8ad4dbae"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/premerge-evidence.mjs",
+      "bytes": 18184,
+      "sha256": "faa3fc0f6763aa0b25bc72bedb4b19cf450c6b7955b311884aabc05135f52e39"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/prepare-geographic-release.mjs",
+      "bytes": 47459,
+      "sha256": "dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978,
+      "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/requirements.txt",
+      "bytes": 58,
+      "sha256": "a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "scripts/research-import-gate.mjs",
+      "bytes": 335,
+      "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "src/regional-import-gate.js",
+      "bytes": 7292,
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "bytes": 16099,
+      "sha256": "aee05daafed344f4312ed6eaff7fa8d411a0bc01b515c207108bd56398865523"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "test/geographic-adjudication.py",
+      "bytes": 14660,
+      "sha256": "3fa9ee9cdc71d3c16d42944b1ddd7c61471415fa4cbb779d02d6342eb9347ccd"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "test/geographic-adjudication.test.mjs",
+      "bytes": 518,
+      "sha256": "595b7a052fe29023679a0f8cc43d8b4cbc58fffc3ab589616218f8df1a3a848b"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "test/geographic-regression.py",
+      "bytes": 27085,
+      "sha256": "4659ed6315e4ecba835572877025628e8d2952793e5440baedc3f2c9a47b3aff"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "test/geographic-regression.test.mjs",
+      "bytes": 510,
+      "sha256": "8240fba579be2531ef9f55de136fca8193ace9921515fb904ddc0071d96fe014"
+    },
+    {
+      "commit": "68d2ac2ad2606703d6cc38177a243df0fed59181",
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 39654,
+      "sha256": "dc77e9a279f1887ede11d3d23552e3d09521d28b868228be2ca4b202fbfbd9c5"
+    }
+  ],
+  "whole_original_sources": [
+    {
+      "key": "gb:FJI:ADM2",
+      "bytes": 335438,
+      "sha256": "0339f90794264719b98c93a9a7c2d71fdb473c0a2f9c1e9b74ecd98a67ddb93f",
+      "recorded_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FJI/ADM2/geoBoundaries-FJI-ADM2_simplified.geojson",
+      "body_relation": "/Users/chengshuli/world-atlas-workspace/.cache/repair-readiness-1231-20261006/original-administrative-corpus-capture/gb-FJI-ADM2.original"
+    },
+    {
+      "key": "gb:RUS:ADM2",
+      "bytes": 26338801,
+      "sha256": "81dabf7930ff5e306e2423b586bcec14163fbd10481db6e49aab47273953b128",
+      "recorded_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2_simplified.geojson",
+      "body_relation": [
+        "data/regional-review/regional-review-5cf69eed7fdff0b5/source/geoboundaries-rus-adm2-2017-simplified-full-source.geojson"
+      ]
+    }
+  ],
+  "unique_input_encoded_bytes": 241858083,
+  "descriptor_count": 82,
+  "headroom_for_owned_code_controls_results_receipts": 26577373,
+  "fits_existing_aggregate_as_inputs": true,
+  "limits": [
+    "Actual final output/producer/import closure must be measured after implementation, without dropping rows or widening caps.",
+    "No full world execution occurred in this size proof. Test/runtime dynamic import closure needs actual execution authentication before final run.",
+    "All37world-index/parts+4fixedsnapshotpins+actual pointed release retained. Whole source originals separately retained; source metadata URLs not substituted for source bodies.",
+    "Static relative JS import closure is authenticated; future execution still must report actual imported modules and fixture/code inputs. checkPrepared is provenance code only, not invoked to read unrelated ownership/runtime assets in this bounded geometry validation."
+  ],
+  "static_relative_JS_import_closure_complete_for_consumer_roots": [
+    "hosted/geographic-releases.js",
+    "scripts/check-geographic-adjudications.mjs",
+    "scripts/check-handoff-scope.mjs",
+    "scripts/check-prepared.mjs",
+    "scripts/evidence-policy.mjs",
+    "scripts/evidence-quality.mjs",
+    "scripts/final-capacity.mjs",
+    "scripts/geographic-adjudication-api.mjs",
+    "scripts/github-quota.mjs",
+    "scripts/immutable-git-blobs.mjs",
+    "scripts/integration-profile.mjs",
+    "scripts/integration-proof.mjs",
+    "scripts/issue-claim-contract.mjs",
+    "scripts/merge-integration.mjs",
+    "scripts/premerge-evidence.mjs",
+    "scripts/prepare-geographic-release.mjs",
+    "scripts/read-geographic-release-manifest.mjs",
+    "scripts/research-import-gate.mjs",
+    "src/regional-import-gate.js",
+    "test/geographic-adjudication.test.mjs",
+    "test/geographic-regression.test.mjs"
+  ]
+}

@@ -18,7 +18,7 @@ import shapely
 from shapely import STRtree, union_all
 from shapely.geometry import shape, mapping
 from shapely.affinity import translate
-from evidence.geometry import canonical_land, METHOD
+from evidence.geometry import canonical_prepared_land, METHOD, PREPARED_DOMAIN
 from evidence.immutable import Baseline, canonical_json, descriptor, safe_path
 
 VERSION = 'worldatlas-geographic-regression-v1'
@@ -98,6 +98,21 @@ def geometry_hash(feature):
     return hashlib.sha256(canonical_json(feature['geometry'])).hexdigest()
 
 
+def prepared_inventory_binding(snapshot):
+    """Bind the committed consumer domain to the complete immutable inventory."""
+    return {'domain': PREPARED_DOMAIN, 'commit': snapshot['commit'],
+            'files': snapshot['files'], 'release_and_hierarchy_pins': snapshot['pins'],
+            'feature_count': len(snapshot['features']),
+            'feature_geometry_bindings_sha256': hashlib.sha256(canonical_json([
+                [identity, snapshot['containing'][identity], geometry_hash(snapshot['features'][identity])]
+                for identity in sorted(snapshot['features'])])).hexdigest()}
+
+
+def validate_prepared_inventory_binding(snapshot, binding):
+    if canonical_json(binding) != canonical_json(prepared_inventory_binding(snapshot)):
+        raise ValueError('Prepared geometry domain or complete immutable inventory binding mismatch')
+
+
 def polygon_parts(geometry):
     if geometry.geom_type == 'Polygon':
         if not geometry.is_empty and geometry.area > 0:
@@ -116,7 +131,7 @@ def prepare(features, vintage, validated=None, original=None):
             if validated is not None and identity in validated and identity in original and geometry_hash(features[identity]) == geometry_hash(original[identity]):
                 result[identity] = validated[identity]
             else:
-                result[identity] = canonical_land(shape(features[identity]['geometry']))
+                result[identity] = canonical_prepared_land(shape(features[identity]['geometry']))
         except (ValueError, shapely.errors.ShapelyError, TypeError, KeyError, AttributeError) as error:
             errors.append({'vintage': vintage, 'location_id': identity, 'reason': str(error),
                            'original_geometry': features[identity]['geometry']})
@@ -151,6 +166,7 @@ def compare(before_features, after_features):
                      if identity not in before_features or identity not in after_features
                      or geometry_hash(before_features[identity]) != geometry_hash(after_features[identity]))
     base = {'changed_location_ids': changed, 'affected_neighbor_ids': [],
+            'geometry_domain': PREPARED_DOMAIN,
             'geometry_errors': [], 'findings': {'type': 'FeatureCollection', 'features': []},
             'coverage_gained': {'type': 'FeatureCollection', 'features': []}}
     before, before_errors = prepare(before_features, 'baseline')
@@ -208,6 +224,10 @@ def compare(before_features, after_features):
 def inspect(repo, baseline_commit, candidate_commit):
     baseline = snapshot(repo, baseline_commit)
     candidate = baseline if baseline_commit == candidate_commit else snapshot(repo, candidate_commit)
+    bindings = {vintage: prepared_inventory_binding(snap)
+                for vintage, snap in [('baseline', baseline), ('candidate', candidate)]}
+    for vintage, snap in [('baseline', baseline), ('candidate', candidate)]:
+        validate_prepared_inventory_binding(snap, bindings[vintage])
     result = compare(baseline['features'], candidate['features'])
     for vintage, snap in [('baseline', baseline), ('candidate', candidate)]:
         identities = sorted(set(result['changed_location_ids']) | set(result['affected_neighbor_ids']) |
@@ -218,6 +238,7 @@ def inspect(repo, baseline_commit, candidate_commit):
             'original_geometry': snap['features'][i]['geometry'],
             'properties': snap['features'][i].get('properties', {})} for i in identities if i in snap['features']]
     return {'version': 1, 'method_id': VERSION, 'geometry_helper': METHOD,
+        'prepared_geometry_bindings': bindings,
         'software': {'shapely': shapely.__version__, 'geos': shapely.geos_version_string},
         'coordinates': 'longitude, latitude; WGS84; short straight source edges; antimeridian split',
         'positive_area_threshold_square_degrees': 0, 'snapping_applied': False,

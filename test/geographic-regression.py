@@ -7,6 +7,7 @@ import json
 import hashlib
 import tempfile
 import subprocess
+import copy
 from unittest.mock import patch
 
 from shapely.geometry import Polygon, MultiPolygon, box, mapping, shape
@@ -26,6 +27,167 @@ def features(**geometries):
 
 
 class RegressionControls(unittest.TestCase):
+    def test_identical_periodic_fixture_has_explicit_prepared_representation(self):
+        candidate = MultiPolygon([box(179, 0, 180, 1), box(-180, 0, -179, 1)])
+        raw = gate.canonical_json(mapping(candidate))
+        contacts = []
+        result = shared_geometry.canonical_prepared_land(candidate, seam_contacts=contacts)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.area, 2)
+        self.assertEqual(len(contacts), 2)
+        self.assertEqual(raw, gate.canonical_json(mapping(candidate)))
+        self.assertEqual(gate.compare(features(land=candidate), features(land=candidate))['status'],
+                         'no-footprint-change')
+        with self.assertRaisesRegex(ValueError, 'Invalid original periodic multipart topology'):
+            shared_geometry.canonical_land(candidate)
+
+    def test_prepared_domain_retains_nonseam_and_tiny_overlap_rejections(self):
+        across = Polygon([(179, 0), (-179, 0), (-179, 1), (179, 1), (179, 0)])
+        periodic_overlap = Polygon([(-179, 0), (179.999999999, 0),
+                                    (179.999999999, 1), (-179, 1), (-179, 0)])
+        candidates = [self.tiny_invalid_multipart(),
+                      MultiPolygon([box(0, 0, 1, 1), box(1, 0, 2, 1)]),
+                      MultiPolygon([across, box(-179, 0, -178, 1)]),
+                      MultiPolygon([box(179, 0, 180, 1), periodic_overlap]),
+                      MultiPolygon([box(179, 0, 179.999999, 1),
+                                    box(179.999999, 0, 180, 1)])]
+        for candidate in candidates:
+            with self.subTest(geometry=mapping(candidate)):
+                with patch.object(shared_geometry, 'union_all', side_effect=AssertionError('union must not execute')):
+                    with self.assertRaisesRegex(ValueError, 'Invalid original'):
+                        shared_geometry.canonical_prepared_land(candidate)
+
+    def test_prepared_domain_rejects_mixed_seam_and_interior_defect(self):
+        candidate = MultiPolygon([box(179, 0, 180, 1), box(-180, 0, -179, 1),
+                                  box(0, 0, 1, 1), box(1, 0, 2, 1)])
+        with patch.object(shared_geometry, 'union_all', side_effect=AssertionError('union must not execute')):
+            with self.assertRaisesRegex(ValueError, 'Invalid original multipart topology'):
+                shared_geometry.canonical_prepared_land(candidate)
+
+    def test_prepared_disjoint_point_hole_and_single_crossing_positives(self):
+        hole = Polygon([(0, 0), (3, 0), (3, 3), (0, 3), (0, 0)],
+                       [[(1, 1), (2, 1), (2, 2), (1, 2), (1, 1)]])
+        candidates = [MultiPolygon([box(0, 0, 1, 1), box(2, 0, 3, 1)]),
+                      MultiPolygon([box(0, 0, 1, 1), box(1, 1, 2, 2)]),
+                      MultiPolygon([hole, box(4, 0, 5, 1)]),
+                      Polygon([(179, 0), (-179, 0), (-179, 1), (179, 1), (179, 0)])]
+        for candidate in candidates:
+            raw = gate.canonical_json(mapping(candidate))
+            self.assertTrue(shared_geometry.canonical_prepared_land(candidate).is_valid)
+            self.assertEqual(raw, gate.canonical_json(mapping(candidate)))
+
+    def test_prepared_domain_rejects_invalid_member_and_operation_failure(self):
+        bowtie = Polygon([(0, 0), (1, 1), (1, 0), (0, 1), (0, 0)])
+        with self.assertRaisesRegex(ValueError, 'Invalid unwrapped'):
+            shared_geometry.canonical_prepared_land(bowtie)
+        candidate = MultiPolygon([box(179, 0, 180, 1), box(-180, 0, -179, 1)])
+        with patch.object(shared_geometry, '_prepared_seam_contact', side_effect=ValueError('synthetic operation failure')):
+            with self.assertRaisesRegex(ValueError, 'synthetic operation failure'):
+                shared_geometry.canonical_prepared_land(candidate)
+
+    def test_complete_three_current_features_preserve_all_seam_contacts(self):
+        path = ROOT / 'coordination/engineering/prepared-geography-dateline-domain-20261007/diagnosis/complete-three-counterexamples.json'
+        rows = json.loads(path.read_bytes())['rows']
+        self.assertEqual(len(rows), 3)
+        for row in rows:
+            candidate = shape(row['whole_feature']['geometry'])
+            original = gate.canonical_json(mapping(candidate))
+            contacts = []
+            self.assertTrue(shared_geometry.canonical_prepared_land(candidate, seam_contacts=contacts).is_valid)
+            actual = {(c['member'], c['other_member'], c['longitude_shift']): c['contact_geometry'] for c in contacts}
+            expected = {(c['i'], c['j'], c['shift']): c['intersection']['geometry']
+                        for c in row['all_intersecting_directed_pairs'] if not c['combined_valid']}
+            self.assertEqual(set(actual), set(expected))
+            for key in actual:
+                self.assertEqual(gate.canonical_json(actual[key]), gate.canonical_json(expected[key]))
+            self.assertEqual(original, gate.canonical_json(mapping(candidate)))
+            with self.assertRaisesRegex(ValueError, 'Invalid original periodic'):
+                shared_geometry.canonical_land(candidate)
+
+    def test_whole_original_sources_retain_distinct_domain_failures(self):
+        path = ROOT / 'coordination/engineering/prepared-geography-dateline-domain-20261007/diagnosis/complete-source-predecessor-lineage.json'
+        rows = json.loads(path.read_bytes())['matches']
+        for row in rows:
+            original = shape(row['whole_original_feature']['geometry'])
+            if row['original_source_key'] == 'gb:FJI:ADM2':
+                with self.assertRaisesRegex(ValueError, 'Expected finite longitude'):
+                    shared_geometry.canonical_prepared_land(original)
+            else:
+                self.assertTrue(shared_geometry.canonical_prepared_land(original).is_valid)
+                with self.assertRaisesRegex(ValueError, 'Invalid original periodic'):
+                    shared_geometry.canonical_land(original)
+            self.assertFalse(row['exact_canonical_geometry_equal'])
+            self.assertFalse(row['source_equals_current_pointset'])
+
+    def test_metadata_cannot_choose_domain_or_approve_invalid_member(self):
+        invalid = features(land=self.tiny_invalid_multipart())
+        invalid['land']['properties']['metadata'] = {'geometry_domain': shared_geometry.PREPARED_DOMAIN,
+                                                    'source_approval': True, 'skip_geometry_validation': True}
+        report = gate.compare(invalid, invalid)
+        self.assertEqual(report['status'], 'blocked-invalid-or-unsupported-geometry')
+        self.assertEqual(report['geometry_domain'], shared_geometry.PREPARED_DOMAIN)
+        self.assertEqual(report['geometry_errors'][0]['original_geometry'], invalid['land']['geometry'])
+        with self.assertRaises(TypeError):
+            shared_geometry.canonical_land(shape(invalid['land']['geometry']), domain='untrusted-approval')
+
+    def test_complete_binding_rejects_unknown_domain_or_forged_roster_and_release(self):
+        fixture = self.trusted_fixture()
+        try:
+            snap = gate.snapshot(fixture.repo, fixture.baseline)
+            binding = gate.prepared_inventory_binding(snap)
+            gate.validate_prepared_inventory_binding(snap, binding)
+            for key, value in [('domain', 'unknown'), ('commit', '0'*40), ('feature_count', 1),
+                               ('feature_geometry_bindings_sha256', '0'*64),
+                               ('release_and_hierarchy_pins', {}), ('files', [])]:
+                wrong = copy.deepcopy(binding)
+                wrong[key] = value
+                with self.subTest(field=key):
+                    with self.assertRaisesRegex(ValueError, 'complete immutable inventory binding mismatch'):
+                        gate.validate_prepared_inventory_binding(snap, wrong)
+            wrong = copy.deepcopy(snap)
+            wrong['features'].pop('left')
+            with self.assertRaisesRegex(ValueError, 'binding mismatch'):
+                gate.validate_prepared_inventory_binding(wrong, binding)
+        finally:
+            fixture.close()
+
+    def test_trusted_pr_and_combined_candidate_use_prepared_domain_bindings(self):
+        fixture = self.trusted_fixture()
+        try:
+            seam = MultiPolygon([box(179, 0, 180, 1), box(-180, 0, -179, 1)])
+            fixture.write('data/geography/part.json', {'type': 'FeatureCollection',
+                          'features': list(features(seam=seam, far=box(10, 0, 11, 1)).values())})
+            baseline = fixture.commit('prepared-seam-baseline')
+            fixture.baseline = baseline
+            fixture.git('checkout', '-qb', 'prepared-proposal', baseline)
+            fixture.write('data/geography/part.json', {'type': 'FeatureCollection',
+                          'features': list(features(seam=seam, far=box(10, 0, 11.1, 1)).values())})
+            helper = fixture.repo / 'scripts/evidence/geometry.py'
+            helper.write_text(helper.read_text() + "\nPREPARED_DOMAIN = 'forged-candidate-domain'\n")
+            proposed = fixture.commit('valid-prepared-growth')
+            result, report = fixture.run(proposed)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(report['differential_report']['geometry_domain'], shared_geometry.PREPARED_DOMAIN)
+            for vintage, commit in [('baseline', baseline), ('candidate', proposed)]:
+                binding = report['differential_report']['prepared_geometry_bindings'][vintage]
+                gate.validate_prepared_inventory_binding(gate.snapshot(fixture.repo, commit), binding)
+            (fixture.repo / 'geography-check.json').unlink()
+            fixture.git('checkout', '-qb', 'prepared-advanced-main', baseline)
+            fixture.write('data/geographic-releases/index.json', {'synthetic_context': 'advanced'})
+            advanced = fixture.commit('independent-prepared-context')
+            fixture.git('merge', '--no-ff', '--no-edit', proposed)
+            combined = fixture.git('rev-parse', 'HEAD')
+            fixture.baseline = advanced
+            result, report = fixture.run(combined)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(report['baseline_commit'], advanced)
+            self.assertEqual(report['candidate_commit'], combined)
+            for vintage, commit in [('baseline', advanced), ('candidate', combined)]:
+                binding = report['differential_report']['prepared_geometry_bindings'][vintage]
+                gate.validate_prepared_inventory_binding(gate.snapshot(fixture.repo, commit), binding)
+        finally:
+            fixture.close()
+
     @staticmethod
     def tiny_invalid_multipart():
         return MultiPolygon([box(0, 0, 1e-6, 1e-6),
