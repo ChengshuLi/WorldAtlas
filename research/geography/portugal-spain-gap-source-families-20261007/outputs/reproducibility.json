@@ -1,0 +1,120 @@
+{
+  "identical_output_sha256": true,
+  "limits": [
+    "Capture timestamps differ by design; every complete analysis output file has an identical whole-file hash across both runs.",
+    "Determinism confirms computational reproducibility only and does not resolve source availability, licensing, historical coverage, or classification."
+  ],
+  "output_count": 18,
+  "outputs": [
+    {
+      "bytes": 244210,
+      "path": "administrative-source-overlays.json",
+      "sha256": "199dbdbbd7b5296adf74b2f18f7e898c9b4b82c63a79fe7d886ae09bb5ee6f67"
+    },
+    {
+      "bytes": 45549,
+      "path": "apa-wfd-line-overlays.json",
+      "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
+    },
+    {
+      "bytes": 427,
+      "path": "control-admin-gb-ESP-ADM3-negative-control.json",
+      "sha256": "fcc3e6582adae3d35c33f1c4437133025fd92a984b208ab5ea09557bbd773595"
+    },
+    {
+      "bytes": 376,
+      "path": "control-admin-gb-ESP-ADM3-positive-control.json",
+      "sha256": "f334a358b92d0ddc8146ef288f29a33a4c1771e8c9ab00c3fd72b67ff61883b8"
+    },
+    {
+      "bytes": 427,
+      "path": "control-admin-gb-PRT-ADM2-negative-control.json",
+      "sha256": "072da719cc2381fd3381f80cc5e81ea2071050707015c6e9cb68eeea60d994c6"
+    },
+    {
+      "bytes": 376,
+      "path": "control-admin-gb-PRT-ADM2-positive-control.json",
+      "sha256": "0361ea09de1a4d8de846e95f9d54c2302971118fc5f04534ee8ed9398a30217e"
+    },
+    {
+      "bytes": 358,
+      "path": "control-apa-wfd-lines-negative-control.json",
+      "sha256": "67714396e91b6cd2b5b15b52953c6973cc72b380d3a979f5eb8615bf53bc9628"
+    },
+    {
+      "bytes": 372,
+      "path": "control-apa-wfd-lines-positive-control.json",
+      "sha256": "7c35cc3f8ea2be3f2b822e87e35350be3a81818cb72ebff15a4172bcf32c210b"
+    },
+    {
+      "bytes": 575,
+      "path": "control-jrc-monthly-history-negative-control.json",
+      "sha256": "77b0f974bf174a6e872ddf6e3388a26afac1d40b76cc76d97df17efade71b2c0"
+    },
+    {
+      "bytes": 576,
+      "path": "control-jrc-monthly-history-positive-control.json",
+      "sha256": "32a967f6d54ecc76663dc8d66063ca16aa79a21172c7d5deb101c1548f673593"
+    },
+    {
+      "bytes": 275,
+      "path": "control-mapa-current-snapshot-negative-control.json",
+      "sha256": "c1ed2b6234294fe3e539ee8080baa16f8598cc3f115b48f131b3bb1bee119115"
+    },
+    {
+      "bytes": 345,
+      "path": "control-mapa-current-snapshot-positive-control.json",
+      "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
+    },
+    {
+      "bytes": 629423,
+      "path": "jrc-2024-component-month-summary.json",
+      "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
+    },
+    {
+      "bytes": 71213,
+      "path": "mapa-current-snapshot-overlays.json",
+      "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
+    },
+    {
+      "bytes": 2158,
+      "path": "reproducibility.json",
+      "sha256": "cbfd2acba960f18a50781921973b537c62a83bdc703b8cd8fefb2ea9b0d8a910"
+    },
+    {
+      "bytes": 526,
+      "path": "runtime-capture.json",
+      "sha256": "514cfb957d2f66ac2d89b6ae09594ab1dae682e4d6c62e6148a70529b5ec42c3"
+    },
+    {
+      "bytes": 602633,
+      "path": "source-status-matrix.json",
+      "sha256": "4f52f16e17710ae0b06a55450a142fea2389f1c6258d8a1b9340e1ddb17c6fd2"
+    },
+    {
+      "bytes": 5971,
+      "path": "validation-controls.json",
+      "sha256": "329994cdd68b9e6dc2b7a436bb9d80e5c3392e09e38bb0496de0089927afd845"
+    }
+  ],
+  "run_ids": [
+    "run-1",
+    "run-2"
+  ],
+  "run_manifests": {
+    "run-1": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/run-manifest.json",
+      "sha256": "a1df14de504bba55631e3d3fa2da453070391291e3a1a18f5ecfc612cda27113"
+    },
+    "run-2": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/run-manifest.json",
+      "sha256": "6166b63912273eadeaedb9b5d619204bb00045f4d3526cd54718076e6b50deb8"
+    }
+  },
+  "schema": "worldatlas-source-run-reproducibility-v1",
+  "scope": {
+    "components": 70,
+    "contacts": 57,
+    "families": 52
+  }
+}

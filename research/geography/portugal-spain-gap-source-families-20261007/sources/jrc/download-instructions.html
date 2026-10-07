@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GSWE Download Script — Instructions</title>
+<style>
+  @page { size: A4; margin: 18mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.5;
+    font-size: 11pt;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  /* ---- banner ---- */
+  .banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(90deg, #003399 0%, #0b3d91 100%);
+    color: #fff;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+  }
+  .banner .flag {
+    flex: 0 0 auto;
+    width: 54px;
+    height: 36px;
+    background: #003399;
+    border: 1px solid #ffd617;
+    border-radius: 3px;
+    position: relative;
+  }
+  /* 12 stars arranged in a circle */
+  .banner .flag span {
+    position: absolute;
+    color: #ffd617;
+    font-size: 7px;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+  }
+  .banner .title h1 { font-size: 18pt; margin: 0; color: #fff; }
+  .banner .title p { margin: 2px 0 0 0; font-size: 9.5pt; color: #d7e0f4; }
+
+  h2 {
+    font-size: 13pt;
+    color: #0b3d91;
+    border-bottom: 2px solid #0b3d91;
+    padding-bottom: 3px;
+    margin-top: 26px;
+  }
+  h3 { font-size: 11.5pt; margin: 16px 0 4px 0; color: #0b3d91; }
+  code, pre { font-family: "Consolas", "Courier New", monospace; font-size: 9.75pt; }
+  code { background: #f0f3f8; padding: 1px 5px; border-radius: 3px; color: #b1361e; }
+  pre {
+    background: #f6f8fa;
+    border: 1px solid #d7dde5;
+    border-radius: 5px;
+    padding: 10px 12px;
+    color: #1a1a1a;
+    white-space: pre-wrap;       /* wrap long lines instead of overflowing the page */
+    word-break: break-all;       /* allow breaking inside long URLs */
+    overflow-wrap: anywhere;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 4px 0; }
+  th, td { border: 1px solid #cbd3dd; padding: 6px 9px; text-align: left; vertical-align: top; }
+  th { background: #0b3d91; color: #fff; font-weight: 600; }
+  tr:nth-child(even) td { background: #f6f8fa; }
+  .param { white-space: nowrap; font-weight: 600; }
+  .mono { font-family: "Consolas", "Courier New", monospace; }
+  ul { margin: 6px 0; padding-left: 20px; }
+  .note {
+    background: #fff8e6;
+    border-left: 4px solid #e0a800;
+    padding: 8px 12px;
+    margin: 12px 0;
+    font-size: 10pt;
+  }
+  .disclaimer {
+    margin-top: 28px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    font-size: 8.5pt;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============================= BANNER ============================= -->
+  <div class="banner">
+    <div class="flag">
+      <span style="left:50%;  top:14%;">★</span>
+      <span style="left:68%;  top:18%;">★</span>
+      <span style="left:82%;  top:34%;">★</span>
+      <span style="left:86%;  top:54%;">★</span>
+      <span style="left:82%;  top:72%;">★</span>
+      <span style="left:68%;  top:84%;">★</span>
+      <span style="left:50%;  top:88%;">★</span>
+      <span style="left:32%;  top:84%;">★</span>
+      <span style="left:18%;  top:72%;">★</span>
+      <span style="left:14%;  top:54%;">★</span>
+      <span style="left:18%;  top:34%;">★</span>
+      <span style="left:32%;  top:18%;">★</span>
+    </div>
+    <div class="title">
+      <h1>Global Surface Water Explorer (GSWE)</h1>
+      <p>Data download script &mdash; <span class="mono">downloadWaterData_Python3_v1_5.py</span> &middot; European Commission</p>
+    </div>
+  </div>
+
+  <h2>1. Overview</h2>
+  <p>
+    This Python 3 script downloads tiles of the Global Surface Water Explorer (GSWE) dataset
+    from the European Commission distribution endpoint. It walks the standard
+    10&deg;&times;10&deg; tile grid, downloads one GeoTIFF (<code>.tif</code>) per tile, skips
+    files that are already present locally, and reports tiles that are not available on the
+    server.
+  </p>
+  <p>
+    Two download modes are available, selected by the <strong>second parameter</strong>:
+  </p>
+  <ul>
+    <li><strong>Aggregated products</strong> &mdash; one file per tile for the long-term GSWE
+        layers (Section 3).</li>
+    <li><strong>Monthly History time series</strong> &mdash; the <code>monthlyhistory</code>
+        option, one file per tile, per month, per year (Section 4).</li>
+  </ul>
+
+  <h2>2. Requirements and general usage</h2>
+  <p>Python 3 with the standard library (no extra packages required). General syntax:</p>
+  <pre><code>python downloadWaterData_Python3_v1_5.py \
+       &lt;destination_folder&gt; &lt;dataset_name&gt; [years] [tileIDs]</code></pre>
+  <ul>
+    <li>The <strong>destination folder</strong> is created automatically if it does not exist.</li>
+    <li>The <strong>tile grid</strong> uses 10&deg; cells: longitudes <code>180W</code> &rarr;
+        <code>170E</code>, latitudes <code>50S</code> &rarr; <code>80N</code> (360 tiles).</li>
+    <li>Existing files are skipped; missing tiles are reported as <em>not found</em>.</li>
+    <li>The optional <em>years</em> and <em>tileIDs</em> parameters apply to the
+        <code>monthlyhistory</code> mode (Section 4).</li>
+  </ul>
+
+  <h2>3. Aggregated products</h2>
+  <p>
+    When the second parameter is any aggregated dataset name, the script downloads a single
+    file per tile from the aggregated (VER1-5) distribution:
+  </p>
+  <pre><code>https://s3.waw4-1.cloudferro.com/swift/v1/global-surface-water/
+    download2024/Aggregated/VER1-5/&lt;dataset_name&gt;/
+    &lt;dataset_name&gt;_&lt;lng&gt;_&lt;lat&gt;_v1_5_2024.tif</code></pre>
+
+  <p>The dataset name must match the product folder on the server. The GSWE products are:</p>
+  <table>
+    <thead>
+      <tr><th>Dataset name</th><th>Product</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mono">occurrence</td>
+        <td>Water Occurrence</td>
+        <td>Frequency with which water was present at each pixel over the full observation
+            record (percentage).</td>
+      </tr>
+      <tr>
+        <td class="mono">change</td>
+        <td>Occurrence Change Intensity</td>
+        <td>Change in water occurrence between two epochs &mdash; increases and decreases in
+            surface water presence.</td>
+      </tr>
+      <tr>
+        <td class="mono">seasonality</td>
+        <td>Seasonality</td>
+        <td>Number of months per year that water was present (0&ndash;12), distinguishing
+            seasonal from permanent water.</td>
+      </tr>
+      <tr>
+        <td class="mono">recurrence</td>
+        <td>Recurrence</td>
+        <td>Inter-annual behaviour: how often water returns from year to year (percentage).</td>
+      </tr>
+      <tr>
+        <td class="mono">transitions</td>
+        <td>Transitions</td>
+        <td>Class of change between the first and last year (e.g. new/lost permanent, new/lost
+            seasonal, conversions).</td>
+      </tr>
+      <tr>
+        <td class="mono">extent</td>
+        <td>Maximum Water Extent</td>
+        <td>Union of all locations ever detected as water over the observation record.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Aggregated examples</h3>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>... ./out occurrence</code></td>
+        <td>Water occurrence, one file per tile, all 360 tiles.</td>
+      </tr>
+      <tr>
+        <td><code>... ./out seasonality</code></td>
+        <td>Seasonality, one file per tile, all 360 tiles.</td>
+      </tr>
+      <tr>
+        <td><code>... ./out transitions</code></td>
+        <td>Transitions, one file per tile, all 360 tiles.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Monthly History (<span class="mono">monthlyhistory</span>) option</h2>
+  <p>
+    Passing <code>monthlyhistory</code> as the <strong>second parameter</strong> downloads the
+    Monthly History GeoTIFF time series instead of an aggregated product. The downloaded
+    <code>.tif</code> files are selected according to the second, third and fourth parameters.
+  </p>
+
+  <h3>Command syntax</h3>
+  <pre><code>python downloadWaterData_Python3_v1_5.py \
+       &lt;destination_folder&gt; monthlyhistory [years] [tileIDs]</code></pre>
+
+  <h3>Parameters</h3>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Parameter</th><th>Required</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td class="param">destination_folder</td>
+        <td>Yes</td>
+        <td>Local folder where the files are saved. Created automatically if it does not exist.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="param">monthlyhistory</td>
+        <td>Yes</td>
+        <td>Dataset name. The literal value <code>monthlyhistory</code> activates the monthly time-series download mode.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="param">years</td>
+        <td>Optional</td>
+        <td>Comma-separated list of years to download, e.g. <code>2023</code> or <code>2022,2024</code>.
+            If omitted, <strong>all years are downloaded (2022, 2023, 2024)</strong>.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="param">tileIDs</td>
+        <td>Optional</td>
+        <td>Comma-separated list of tile IDs in <code>&lt;lng&gt;_&lt;lat&gt;</code> form, e.g.
+            <code>100W_80N</code> or <code>0E_0N,10E_0N</code>.
+            If omitted, <strong>all tiles are downloaded (360 tiles)</strong>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    All 12 months (01&ndash;12) are downloaded for every selected year and tile. If both the
+    years and the tile IDs are omitted, the script downloads the complete monthly history for
+    all years and all tiles.
+  </div>
+
+  <h3>File naming and source</h3>
+  <p>Each downloaded file follows the pattern:</p>
+  <pre><code>monthlyhistory_&lt;lng&gt;_&lt;lat&gt;_v1_5_&lt;YYYY&gt;_&lt;MM&gt;.tif</code></pre>
+  <p>and is retrieved from the CloudFerro endpoint:</p>
+  <pre><code>https://s3.waw4-1.cloudferro.com/swift/v1/global-surface-water/
+    download2024/monthlyhistory/VER1-5/&lt;YYYY&gt;/&lt;YYYY&gt;_&lt;MM&gt;/
+    monthlyhistory_&lt;lng&gt;_&lt;lat&gt;_v1_5_&lt;YYYY&gt;_&lt;MM&gt;.tif</code></pre>
+
+  <h3>Monthly History examples</h3>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>... ./out monthlyhistory</code></td>
+        <td>All years (2022, 2023, 2024), all tiles, all 12 months.</td>
+      </tr>
+      <tr>
+        <td><code>... ./out monthlyhistory 2023</code></td>
+        <td>Only 2023, all tiles, all 12 months.</td>
+      </tr>
+      <tr>
+        <td><code>... ./out monthlyhistory 2022,2024</code></td>
+        <td>Years 2022 and 2024, all tiles, all 12 months.</td>
+      </tr>
+      <tr>
+        <td><code>... ./out monthlyhistory 2023 100W_80N</code></td>
+        <td>Only 2023, only tile <code>100W_80N</code>, all 12 months.</td>
+      </tr>
+      <tr>
+        <td><code>... ./out monthlyhistory 2022,2023,2024 0E_0N,10E_0N</code></td>
+        <td>All years, tiles <code>0E_0N</code> and <code>10E_0N</code>, all 12 months.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="disclaimer">
+    This script is produced by the European Commission to download the Global Surface Water
+    Explorer (GSWE) dataset. It is released WITHOUT ANY WARRANTY of any kind, express or implied,
+    including but not limited to the warranties of merchantability and fitness for a particular
+    purpose. Use it AT YOUR OWN RISK. &copy; 2025, European Union.
+  </p>
+
+</body>
+</html>

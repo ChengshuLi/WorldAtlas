@@ -1,0 +1,143 @@
+{
+  "checks": [
+    {
+      "method": "full-simplified-admin-overlay",
+      "negative": {
+        "component_id": "physical-component:05ce4853d2711cf61c70c60f97bdde8cb0721fe6cc5c2732badfb1f4d225328a",
+        "distance_m_equal_area": 576082.4960998123,
+        "intersects": false,
+        "source_feature_id": "gb:ESP:ADM3:28895703B91436656566713",
+        "source_feature_position": 0,
+        "source_product": "gb:ESP:ADM3"
+      },
+      "positive": {
+        "component_id": "physical-component:05ce4853d2711cf61c70c60f97bdde8cb0721fe6cc5c2732badfb1f4d225328a",
+        "intersection_area_m2_equal_area": 315975.96762266115,
+        "positive_area_overlap": true,
+        "source_feature_id": "gb:ESP:ADM3:28895703B7862342212751"
+      },
+      "source_product": "gb:ESP:ADM3"
+    },
+    {
+      "method": "full-simplified-admin-overlay",
+      "negative": {
+        "component_id": "physical-component:05ce4853d2711cf61c70c60f97bdde8cb0721fe6cc5c2732badfb1f4d225328a",
+        "distance_m_equal_area": 465662.77621855936,
+        "intersects": false,
+        "source_feature_id": "gb:PRT:ADM2:2272694B83396008352996",
+        "source_feature_position": 0,
+        "source_product": "gb:PRT:ADM2"
+      },
+      "positive": {
+        "component_id": "physical-component:05ce4853d2711cf61c70c60f97bdde8cb0721fe6cc5c2732badfb1f4d225328a",
+        "intersection_area_m2_equal_area": 3244.8769417627764,
+        "positive_area_overlap": true,
+        "source_feature_id": "gb:PRT:ADM2:2272694B41768317119061"
+      },
+      "source_product": "gb:PRT:ADM2"
+    },
+    {
+      "method": "complete-APA-WFD-line-overlay",
+      "negative": {
+        "component_id": "physical-component:0faa2efb5e10e17a8d24344ee5afdabe5f6d2c23888f52d2f7fdd51494a00329",
+        "gml_id": "AM.WaterBodyForWFD.100000003",
+        "intersects": false,
+        "line_length_inside_component_m": 0.0,
+        "objectid": "100000003"
+      },
+      "positive": {
+        "component_id": "physical-component:0faa2efb5e10e17a8d24344ee5afdabe5f6d2c23888f52d2f7fdd51494a00329",
+        "gml_id": "AM.WaterBodyForWFD.100000178",
+        "intersects": true,
+        "line_length_inside_component_m": 1432.0690392564056,
+        "objectid": "100000178"
+      }
+    },
+    {
+      "method": "MAPA-current-snapshot-overlay",
+      "negative": {
+        "component_id": "physical-component:702be284158c7cf38e791ba5010d99c948da4e3fd65516ba2917eca0d8bc0222",
+        "intersecting_current_source_feature_count": 0
+      },
+      "positive": {
+        "component_id": "physical-component:05ce4853d2711cf61c70c60f97bdde8cb0721fe6cc5c2732badfb1f4d225328a",
+        "intersection_area_m2_equal_area": 321132.56391342054,
+        "positive_area_overlap": true,
+        "source_objectid": 399
+      }
+    },
+    {
+      "method": "JRC-monthly-history-source-codes",
+      "no_observation_unknown": {
+        "component_id": "physical-component:72db06639029f21bb6a9066b8bce95cf6f47c61da8b2d507e7194d8614ea504b",
+        "expected_source_code": 0,
+        "month": "2024-01",
+        "pixel_center_lonlat": [
+          -7.008875,
+          39.826875
+        ],
+        "pixel_column": 11964,
+        "pixel_row": 692,
+        "source_asset": "monthlyhistory_10W_30N_v1_5_2024_01.tif",
+        "source_asset_sha256": "020292049847f5a364be6423b9fa30280bf950d48818e9e9e8ce770dd354aa85",
+        "tile": "10W_30N"
+      },
+      "observed_non_detection": {
+        "component_id": "physical-component:72db06639029f21bb6a9066b8bce95cf6f47c61da8b2d507e7194d8614ea504b",
+        "expected_source_code": 1,
+        "month": "2024-01",
+        "pixel_center_lonlat": [
+          -6.928125,
+          39.951375
+        ],
+        "pixel_column": 12287,
+        "pixel_row": 194,
+        "source_asset": "monthlyhistory_10W_30N_v1_5_2024_01.tif",
+        "source_asset_sha256": "020292049847f5a364be6423b9fa30280bf950d48818e9e9e8ce770dd354aa85",
+        "tile": "10W_30N"
+      },
+      "positive_water_detection": {
+        "component_id": "physical-component:72db06639029f21bb6a9066b8bce95cf6f47c61da8b2d507e7194d8614ea504b",
+        "expected_source_code": 2,
+        "month": "2024-01",
+        "pixel_center_lonlat": [
+          -7.211375,
+          39.683625
+        ],
+        "pixel_column": 11154,
+        "pixel_row": 1265,
+        "source_asset": "monthlyhistory_10W_30N_v1_5_2024_01.tif",
+        "source_asset_sha256": "020292049847f5a364be6423b9fa30280bf950d48818e9e9e8ce770dd354aa85",
+        "tile": "10W_30N"
+      }
+    },
+    {
+      "boundary_edits": 0,
+      "components": 70,
+      "families": 52,
+      "method": "whole-scope-unknown-preservation"
+    }
+  ],
+  "input_hashes": {
+    "admin_source_overlays": "199dbdbbd7b5296adf74b2f18f7e898c9b4b82c63a79fe7d886ae09bb5ee6f67",
+    "apa_wfd_overlays": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38",
+    "complete_input_index": "fde93383b699cff1e36668b85ee6529e7fb27062ab0c714c82412ab8f48e08be",
+    "jrc_summary": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d",
+    "mapa_current_overlays": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93",
+    "source_status_matrix": "4f52f16e17710ae0b06a55450a142fea2389f1c6258d8a1b9340e1ddb17c6fd2"
+  },
+  "limits": [
+    "Controls exercise actual source-positive and source-negative comparisons and the three monthly-history codes; they do not certify source truth or classify any component.",
+    "The no-observation control remains unknown, and a monthly non-detection is not a whole-component land conclusion."
+  ],
+  "schema": "worldatlas-source-controls-v1",
+  "scope": {
+    "component_roster_sha256": "d537eeaee6c9cbc0ac03ff7227cb1a87c214bfde6644df9c50d46bb2e63e5c5f",
+    "components": 70,
+    "contact_roster_sha256": "a47f36a11e723a12f662930f8ac98c4f500e6d0a8f78872699a8592cea60c2d6",
+    "contacts": 57,
+    "families": 52,
+    "family_roster_sha256": "6ccdac13874fa8d4b6f444076ace737a4ac6a9f84fae2c1168207b1385d892a0"
+  },
+  "status": "passed"
+}
