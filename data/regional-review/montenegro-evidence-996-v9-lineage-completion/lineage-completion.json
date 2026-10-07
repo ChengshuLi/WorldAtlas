@@ -1,0 +1,476 @@
+{
+  "version": 1,
+  "issue": 1235,
+  "source_merge": "d401d1040c698d7273fda37c6449447548052083",
+  "authoritative_version": "anchored-v10",
+  "authoritative_runs": [
+    "runs/2026-10-06/anchored-v10/run-1",
+    "runs/2026-10-06/anchored-v10/run-2"
+  ],
+  "authoritative_control": {
+    "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json",
+    "sha256": "9e52517764bb90f43a9b5445352966bf06b1ebe476e23edf00bfa78c81709eff"
+  },
+  "historical_comparison_sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+  "superseded_runs": [
+    {
+      "reason": "Superseded because the initial PR-head runner did not authenticate its own committed Git blob before producing outputs.",
+      "run_dir": "runs/2026-10-06/final/run-1"
+    },
+    {
+      "reason": "Superseded because the initial PR-head runner did not authenticate its own committed Git blob before producing outputs.",
+      "run_dir": "runs/2026-10-06/final/run-2"
+    },
+    {
+      "reason": "Superseded because an intermediate finalized manifest accidentally included generated Python bytecode and duplicated manifest receipts; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored/run-1"
+    },
+    {
+      "reason": "Superseded because an intermediate finalized manifest accidentally included generated Python bytecode and duplicated manifest receipts; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored/run-2"
+    },
+    {
+      "reason": "Superseded because the intermediate manifest did not include descriptors for all retained changed files; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v2/run-1"
+    },
+    {
+      "reason": "Superseded because the intermediate manifest did not include descriptors for all retained changed files; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v2/run-2"
+    },
+    {
+      "reason": "Superseded because the manifest was serialized before all retained-file descriptors were added; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v3/run-1"
+    },
+    {
+      "reason": "Superseded because the manifest was serialized before all retained-file descriptors were added; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v3/run-2"
+    },
+    {
+      "reason": "Superseded because its finalizer did not authenticate committed code before writing the control and manifest; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v4/run-1"
+    },
+    {
+      "reason": "Superseded because its finalizer did not authenticate committed code before writing the control and manifest; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v4/run-2"
+    },
+    {
+      "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v5/run-1"
+    },
+    {
+      "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v5/run-2"
+    },
+    {
+      "reason": "Superseded because finalization hit an implementation error before writing any control or manifest; these independent runs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v6/run-1"
+    },
+    {
+      "reason": "Superseded because finalization hit an implementation error before writing any control or manifest; these independent runs remain retained.",
+      "run_dir": "runs/2026-10-06/anchored-v6/run-2"
+    },
+    {
+      "reason": "Superseded after independent review found inherited area metrics omitted the pinned measured-area assessment input.",
+      "run_dir": "runs/2026-10-06/anchored-v7/run-1"
+    },
+    {
+      "reason": "Superseded after independent review found inherited area metrics omitted the pinned measured-area assessment input.",
+      "run_dir": "runs/2026-10-06/anchored-v7/run-2"
+    },
+    {
+      "reason": "Superseded because finalization's exact-prior-manifest allow-list omitted the current v7 manifest; outputs were generated with the corrected input ledger but not finalized.",
+      "run_dir": "runs/2026-10-06/anchored-v8/run-1"
+    },
+    {
+      "reason": "Superseded because finalization's exact-prior-manifest allow-list omitted the current v7 manifest; outputs were generated with the corrected input ledger but not finalized.",
+      "run_dir": "runs/2026-10-06/anchored-v8/run-2"
+    },
+    {
+      "run_dir": "runs/2026-10-06/anchored-v9/run-1",
+      "reason": "Superseded: the issue-approved anchored-v10 pair/control is the authoritative final lineage; this retained anchored-v9 run and its control are historical and remain preserved.",
+      "superseded_by": {
+        "version": "anchored-v10",
+        "runs": [
+          "runs/2026-10-06/anchored-v10/run-1",
+          "runs/2026-10-06/anchored-v10/run-2"
+        ],
+        "control": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json"
+      },
+      "run_control_reference": {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json",
+        "sha256": "adb0afdbdfbf7e660a5e39c755af172a7c15a112f9267547ec875154587064ff"
+      },
+      "run_evidence": [
+        {
+          "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/comparison.json",
+          "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b"
+        },
+        {
+          "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/positive-control.json",
+          "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6"
+        },
+        {
+          "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/negative-control.json",
+          "sha256": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590"
+        }
+      ],
+      "reported_input_references": [
+        "source/issue-996-api-response.json#worldatlas-work:v1.evidence_quality.subject_ids",
+        "data/regional-review/regional-review-3c4fe25a21fa428d/source/area-assessments.json",
+        "source/official-municipal-areas-2017.json",
+        "source/official-municipal-areas-2018.json"
+      ],
+      "input_reference_limit": "These paths are reproduced verbatim from the pinned comparison report; #1235 does not declare their original source-file bytes as pins."
+    },
+    {
+      "run_dir": "runs/2026-10-06/anchored-v9/run-2",
+      "reason": "Superseded: the issue-approved anchored-v10 pair/control is the authoritative final lineage; this retained anchored-v9 run and its control are historical and remain preserved.",
+      "superseded_by": {
+        "version": "anchored-v10",
+        "runs": [
+          "runs/2026-10-06/anchored-v10/run-1",
+          "runs/2026-10-06/anchored-v10/run-2"
+        ],
+        "control": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json"
+      },
+      "run_control_reference": {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json",
+        "sha256": "adb0afdbdfbf7e660a5e39c755af172a7c15a112f9267547ec875154587064ff"
+      },
+      "run_evidence": [
+        {
+          "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/comparison.json",
+          "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b"
+        },
+        {
+          "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/positive-control.json",
+          "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6"
+        },
+        {
+          "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/negative-control.json",
+          "sha256": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590"
+        }
+      ],
+      "reported_input_references": [
+        "source/issue-996-api-response.json#worldatlas-work:v1.evidence_quality.subject_ids",
+        "data/regional-review/regional-review-3c4fe25a21fa428d/source/area-assessments.json",
+        "source/official-municipal-areas-2017.json",
+        "source/official-municipal-areas-2018.json"
+      ],
+      "input_reference_limit": "These paths are reproduced verbatim from the pinned comparison report; #1235 does not declare their original source-file bytes as pins."
+    }
+  ],
+  "superseded_control": {
+    "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json",
+    "sha256": "adb0afdbdfbf7e660a5e39c755af172a7c15a112f9267547ec875154587064ff",
+    "reason": "The retained anchored-v9 control documents the historical v9 pair; the accepted anchored-v10 pair/control is authoritative."
+  },
+  "preserved_prior_superseded_rows": 18,
+  "added_v9_superseded_rows": 2,
+  "scope_subject_count": 23,
+  "scope_subject_ids_sha256": "a3247490b6758e44570b1288cce6f352f6e59a52a8934e55f9dd452ed82b1757",
+  "scoped_retained_identity_context": [
+    {
+      "id": "gb:MNE:ADM1:59799669B12564288388297",
+      "display_name": "Danilovgrad Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:danilovgrad-municipality:376f3171f6f0",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B20110685483927",
+      "display_name": "Budva Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:budva-municipality:c6c84d2d94e6",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B20319020653405",
+      "display_name": "Podgorica Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:podgorica-municipality:21b7be55a3bf",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B20349667855259",
+      "display_name": "Bijelo Polje Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:bijelo-polje-municipality:70ce2db896e2",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B22511566400758",
+      "display_name": "Bar Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:bar-municipality:1defad411535",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B28207041867492",
+      "display_name": "Plužine Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:pluzine-municipality:c5400d0d6837",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B41052051546873",
+      "display_name": "Žabljak Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:zabljak-municipality:c2475144815e",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B48420505719641",
+      "display_name": "Kolašin Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:kolasin-municipality:26e0a9801fa9",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B58100018961631",
+      "display_name": "Pljevlja Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:pljevlja-municipality:19b0f907f4fa",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B59523358081802",
+      "display_name": "Plav Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:plav-municipality:eb72345ac7fb",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B66678983232609",
+      "display_name": "Nikšić Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:niksic-municipality:0cc37079cc06",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B74362705567987",
+      "display_name": "Mojkovac Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:mojkovac-municipality:5b04659e73f8",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B75560777931070",
+      "display_name": "Gusinje Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:gusinje-municipality:ce49165beccc",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B7591395216485",
+      "display_name": "Tivat Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:tivat-municipality:c8fc03bbf90e",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B78864851615199",
+      "display_name": "Petnjica Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:petnjica-municipality:0f14d7d8b6f3",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B79583520985931",
+      "display_name": "Šavnik Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:savnik-municipality:17308ddb3d0c",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B80293643035426",
+      "display_name": "Kotor Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:kotor-municipality:851250b85282",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B84579627936880",
+      "display_name": "Ulcinj Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:ulcinj-municipality:87a45566ae10",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B88193558767116",
+      "display_name": "Rožaje Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:rozaje-municipality:8c314627b72a",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B91583747266461",
+      "display_name": "Cetinje Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:cetinje-municipality:6863e9793229",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B93063361678836",
+      "display_name": "Andrijevica Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:andrijevica-municipality:527b6945dfb9",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B93779420845023",
+      "display_name": "Berane Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:berane-municipality:34c02fdca8d2",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    },
+    {
+      "id": "gb:MNE:ADM1:59799669B9703090978387",
+      "display_name": "Herceg Novi Municipality",
+      "source_id": "gb:MNE:ADM1",
+      "source_role": "Municipality",
+      "source_reference_year": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "atlas_parent_id": "framework:province:herceg-novi-municipality:b5f562f2da68",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count_metadata": 1,
+      "atlas_parent_framework_status": "retained-reference",
+      "atlas_parent_boundary_review_status": "open"
+    }
+  ],
+  "distinct_read_only_atlas_parent_contexts": 23,
+  "context_limit": "Source roles, 2017 reference metadata and Atlas parent IDs are retained identity context only; they do not verify legal parentage, boundary accuracy, or current completeness.",
+  "geographic_scope": "Lineage metadata only; no new territorial, boundary, license, or parentage finding."
+}
