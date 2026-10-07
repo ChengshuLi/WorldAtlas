@@ -31,8 +31,9 @@ def authenticate_code(commit):
              'proposed-read-accounting.json', 'original-reference-index.json']
     plan = json.loads((ROOT / 'input-plan.json').read_bytes())
     names += [str(Path(x['path']).relative_to(NAMESPACE)) for x in plan['literal_helpers']]
+    names += [str(Path(plan['transport_helper']['path']).relative_to(NAMESPACE))]
     pins = []
-    executed = {str(Path(m.__file__).resolve()): m for m in (sys.modules[__name__], custody, runtime)}
+    executed = {str(Path(m.__file__).resolve()): m for m in (sys.modules[__name__], custody, runtime, custody.wire_codec)}
     for name in names:
         relative = NAMESPACE + name
         path = custody.ordinary(REPO, relative)
@@ -78,6 +79,8 @@ def authenticate_code(commit):
                     raise ValueError('Actual in-memory project callable differs from frozen source')
         pins.append({'path': relative, 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest(),
                      'mode': tree[0], 'blob': oid, 'commit': commit})
+    transport = plan['transport_helper']
+    custody.digest(ROOT / Path(transport['path']).relative_to(NAMESPACE), transport['original']['bytes'], transport['original']['sha256'], cap=custody.CAP)
     for obj in (custody, runtime):
         if Path(obj.__file__).resolve() != ROOT / (obj.__name__ + '.py'):
             raise ValueError('Imported project code path drift')
@@ -101,7 +104,7 @@ def runtime_payload(root, plan):
                     pin = plan['frames'][ordinal]
                     if hashlib.sha256(frame).hexdigest() != pin['decoded_sha256']:
                         raise ValueError('Runtime concatenated frame drift')
-                    custody.publish(root, pin, gzip.compress(bytes(frame), mtime=0))
+                    custody.publish(root, pin, custody.wire_codec.deterministic_gzip(bytes(frame)))
                     frame.clear(); ordinal += 1
             if stream.read(1):
                 raise ValueError('Runtime whole body growth')
@@ -109,7 +112,7 @@ def runtime_payload(root, plan):
         pin = plan['frames'][ordinal]
         if len(frame) != pin['decoded_bytes'] or hashlib.sha256(frame).hexdigest() != pin['decoded_sha256']:
             raise ValueError('Runtime final frame drift')
-        custody.publish(root, pin, gzip.compress(bytes(frame), mtime=0)); ordinal += 1
+        custody.publish(root, pin, custody.wire_codec.deterministic_gzip(bytes(frame))); ordinal += 1
     if ordinal != len(plan['frames']):
         raise ValueError('Runtime frame roster drift')
 

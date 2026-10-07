@@ -1,5 +1,6 @@
 """Job-local whole-byte transport; no scientific algorithms or geometry changes."""
 import gzip
+import importlib.util
 import hashlib
 import os
 import stat
@@ -12,6 +13,10 @@ CAP = 32 * 1024 * 1024
 FRAME = 8 * 1024 * 1024
 TOTAL = 256 * 1024 * 1024
 PREFIX = 'coordination/engineering/reference-source-custody-20261007/'
+_wire_path = Path(__file__).resolve().parent / 'literal/evidence-immutable.py'
+_wire_spec = importlib.util.spec_from_file_location('literal_custody_wire_codec', _wire_path)
+wire_codec = importlib.util.module_from_spec(_wire_spec)
+_wire_spec.loader.exec_module(wire_codec)
 
 
 def ordinary(root, relative):

@@ -35,6 +35,10 @@ def run():
         custody.restore_original(root, obj, [pin], root / 'restored')
         assert (root / 'restored').read_bytes() == payload
         checked.append('complete exact fragment positive')
+        runtime_wire=custody.wire_codec.deterministic_gzip(payload)
+        assert runtime_wire[9]==255 and gzip.decompress(runtime_wire)==payload
+        assert gzip.compress(payload,mtime=0)[9]!=runtime_wire[9]
+        checked.append('runtime literal GzipFile wire header distinct from source gzip.compress')
         reject(lambda: custody.ordinary(root, '../outside'), 'Unsafe ordinary')
         reject(lambda: custody.ordinary(root, str(original)), 'Unsafe ordinary')
         (root / 'link').symlink_to(root / 'frames', target_is_directory=True)
