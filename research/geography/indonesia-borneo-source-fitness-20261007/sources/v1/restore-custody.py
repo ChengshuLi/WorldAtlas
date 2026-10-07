@@ -18,7 +18,7 @@ ROSTER_PATH = SOURCE.as_posix() + '/component-roster.txt'
 INDEX_SHA = 'dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c'
 FAMILY_SHA = 'a08249214711d84d7d220a61fe10f2d4582e7bc64f1a5ae811436ddaf22d94b3'
 RESTORE_VINTAGE = 'restore-745cc86a'
-RESTORE_ROOT = SOURCE.as_posix() + '/custody-restored'
+RESTORE_ROOT = PACKET.as_posix() + '/vintages'
 
 sys.path.insert(0, str(REPO / 'scripts'))
 from evidence.immutable import Baseline as BootstrapBaseline  # noqa: E402
@@ -158,7 +158,7 @@ def main() -> None:
         'selected_subject_containing_files': dict(sorted(subject_locations.items())),
     }
     outputs['custody-restoration.json'] = canonical_json(restoration)
-    destination = NewVintage(baseline, RESTORE_ROOT + '/', RESTORE_VINTAGE, list(outputs))
+    destination = NewVintage(baseline, PACKET.as_posix() + '/', RESTORE_VINTAGE, list(outputs))
     records = destination.publish_bytes(outputs)
     print(json.dumps({'status': 'complete', 'source_commit': source_commit,
                       'shard_count': len(input_receipts), 'restored_features': restored_features,

@@ -38,7 +38,7 @@ ATLAS_CONTACTS = {
 RUN_ONE = 'run-five'
 CURRENT_SCOPE_RECEIPT = 'scope-extraction-current-745cc86a.json'
 RESTORE_VINTAGE = 'restore-745cc86a'
-RESTORE_ROOT = SOURCE / 'custody-restored' / RESTORE_VINTAGE
+RESTORE_ROOT = PACKET / 'vintages' / RESTORE_VINTAGE
 RESTORE_RECEIPT = RESTORE_ROOT / 'custody-restoration.json'
 
 sys.path.insert(0, str(REPO / 'scripts'))
