@@ -141,8 +141,8 @@ def reproduce(output_path):
         for (feature_id, source_geom), source_feature in zip(source_shapes, features):
             if geom.intersects(source_geom):
                 touching.append(feature_id)
-                # The sign is only a topological distinction in input coordinate space;
-                # no planar area value is emitted or interpreted as ground area.
+                # This computes an area-sign Boolean in input coordinate space.
+                # No numeric area value is emitted or interpreted as ground area.
                 if geom.intersection(source_geom).area > 0:
                     positive.append(feature_id)
         component_rows.append({
@@ -236,7 +236,8 @@ def reproduce(output_path):
             'components_intersecting_any_feature': sum(bool(row['intersecting_simplified_feature_ids']) for row in component_rows),
             'components_covered_by_product_union': sum(row['covered_by_simplified_product_union'] for row in component_rows),
             'components_not_covered_by_product_union': sum(not row['covered_by_simplified_product_union'] for row in component_rows),
-            'overlap_areas_or_dry_land_area_computed': False,
+            'coordinate_plane_intersection_area_sign_predicate_used': True,
+            'numeric_area_values_or_dry_land_area_reported': False,
             'classification_or_ownership_inferred': False,
         },
         'controls': {
@@ -247,7 +248,7 @@ def reproduce(output_path):
             'Simplified geoBoundaries is a comparative product and is not Malaysian legal authority.',
             'The pinned registry advertises 160 units while the complete pinned simplified payload contains 159 features.',
             'The seven selected feature IDs/names are present in the complete source payload, but their current Atlas part-16 geometries are not coordinate-identical or topologically equal to these source geometries; the part-16 artifact is not the source bytes.',
-            'Predicates use source longitude/latitude coordinates without registration to Malaysian survey geometry; coordinate-plane intersection area is not reported as physical area.',
+            'The positive-intersection diagnostic uses intersection(...).area > 0 as a Boolean in source longitude/latitude coordinates. No numeric area is reported; this coordinate-plane area sign is not physical area and the geometries are not registered to Malaysian survey geometry.',
             'The official MyGOS layer has a separate CRS metadata conflict and provider-controlled reuse terms; it is assessed separately in the source notes.',
             'Physical land/water, effective legal date, boundary authority, registration accuracy, cause, and rightful ownership remain unresolved.',
             'All three numeric-closure components remain in the frozen issue cohort and retain their original unknown status.',
