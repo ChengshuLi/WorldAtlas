@@ -49,8 +49,12 @@ def run(guard, objects, source):
     class Products:
         def __init__(self):
             self.rows = []
+            self.buffers = {}
+            self.ordinals = {}
         def emit(self, name, value):
             self.rows.append((name, value))
+            self.buffers.setdefault(name, bytearray()).extend(source.canonical(value))
+            self.ordinals.setdefault(name, 0)
 
     # Tiny physical objects exercise exact original/periodic aliases and changed
     # output bodies. They do not claim to validate any geographic source.
@@ -80,7 +84,7 @@ def run(guard, objects, source):
     rejected('wrong containing feature binding', lambda: instance.resolve_alias(bad))
     bad = copy.deepcopy(alias); bad['whole_object_sha256'] = '0' * 64
     rejected('wrong reconstructed body hash', lambda: instance.resolve_alias(bad))
-    native = next(a for rows in instance.native.values() for body, a in rows
+    native = next(a for rows in instance.native.values() for a in rows
                   if a['periodic_offset'] == 360)
     instance.verify_alias(native, source.canonical(instance.resolve_alias(native)))
     bad = copy.deepcopy(native); bad['original_native_record']['record_ordinal'] = 3

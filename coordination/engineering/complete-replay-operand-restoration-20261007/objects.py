@@ -1,5 +1,7 @@
 """Complete inverse aliases; unmatched mappings are always ordinary full bodies."""
 import json
+import gzip
+import io
 from shapely.affinity import translate
 from source import canonical, sha, require
 
@@ -39,11 +41,16 @@ class Objects:
                      'decoder': 'literal original comparison.decode_record then original periodic translate',
                      'whole_mapping_bytes': len(raw), 'whole_mapping_sha256': key}
             self.verify_alias(alias, raw)
-            # Keep the exact canonical body for collision/container equality, not
-            # merely its digest. These are in-memory source operands, not outputs.
-            self.native.setdefault(key, []).append((raw, alias))
+            # The digest is a lookup index only. Every selected alias is resolved
+            # and compared with complete canonical bytes before use.
+            self.native.setdefault(key, []).append(alias)
+            # Reconstruction was checked in full above; native index retains only
+            # selectors/pins. Do not keep a second full source serialization.
+            self.verified_aliases.clear()
 
     def begin(self, identity):
+        # Prior component feature/physical/diagnosis bodies must not accumulate.
+        self.verified_aliases.clear()
         self.component = {}
         feature = self.loaded['state']['candidates'][identity]
         row, pin = self.loaded['physical'][identity]
@@ -54,7 +61,12 @@ class Objects:
                         'Polygon', 'MultiPolygon', 'GeometryCollection', 'LineString',
                         'MultiLineString', 'Point', 'MultiPoint', 'LinearRing'):
                     raw = canonical(value)
-                    self.component.setdefault(sha(raw), []).append((raw, self.alias(kind, identity, parts, value)))
+                    key = sha(raw)
+                    previous = self.component.get(key, [])
+                    if previous:
+                        require(previous[0][0] == raw, 'Whole original object digest collision')
+                        raw = previous[0][0]  # Share exact immutable bytes, not a copy.
+                    self.component.setdefault(key, []).append((raw, self.alias(kind, identity, parts, value, raw=raw)))
                     if value['type'] == 'GeometryCollection':
                         visit(value['geometries'], parts + ['geometries'])
                     return
@@ -67,8 +79,8 @@ class Objects:
                             visit(child, parts + [ordinal])
             visit(root, [])
 
-    def alias(self, kind, identity, parts, value):
-        raw = canonical(value)
+    def alias(self, kind, identity, parts, value, *, raw=None):
+        raw = canonical(value) if raw is None else raw
         alias = {'kind': 'complete-original-object', 'component_id': identity,
                  'original_object': kind, 'selector': parts,
                  'whole_object_bytes': len(raw), 'whole_object_sha256': sha(raw)}
@@ -82,9 +94,14 @@ class Objects:
     def verify_alias(self, alias, expected):
         key = canonical(alias)
         if key not in self.verified_aliases:
-            reconstructed = canonical(self.resolve_alias(alias))
-            require(reconstructed == expected, 'Executed inverse alias roundtrip differs')
-            self.verified_aliases[key] = reconstructed
+            self._accept_resolved(alias, expected, self._resolved_bytes(alias))
+        require(self.verified_aliases[key] == expected, 'Previously verified inverse object changed')
+
+    def _accept_resolved(self, alias, expected, reconstructed):
+        require(reconstructed == expected, 'Executed inverse alias roundtrip differs')
+        key = canonical(alias)
+        if key not in self.verified_aliases:
+            self.verified_aliases[key] = expected  # Share the checked immutable body.
         require(self.verified_aliases[key] == expected, 'Previously verified inverse object changed')
 
     def retain(self, value):
@@ -93,15 +110,28 @@ class Objects:
                 'MultiLineString', 'Point', 'MultiPoint', 'LinearRing'):
             raw = canonical(value)
             key = sha(raw)
-            for original, alias in self.component.get(key, []) + self.native.get(key, []):
+            for original, alias in self.component.get(key, []):
                 if original == raw:
                     self.verify_alias(alias, raw)
                     return {'complete_inverse_alias': alias}
+            for alias in self.native.get(key, []):
+                original = self._resolved_bytes(alias)
+                if original == raw:
+                    self._accept_resolved(alias, raw, original)
+                    return {'complete_inverse_alias': alias}
             if key in self.emitted:
-                require(self.emitted[key] == raw, 'Whole geometry object digest collision')
+                require(self._emitted_bytes(key) == raw, 'Whole geometry object digest collision')
             else:
-                self.products.emit('geometry-objects', {'whole_geometry_sha256': key, 'geometry': value})
-                self.emitted[key] = raw
+                row = {'whole_geometry_sha256': key, 'geometry': value}
+                row_raw = canonical(row)
+                self.products.emit('geometry-objects', row)
+                # Products.emit may flush first. The newly emitted complete row
+                # is now at the end of the current bounded scientific buffer.
+                kind = 'geometry-objects'
+                self.emitted[key] = {
+                    'ordinal': self.products.ordinals[kind],
+                    'offset': len(self.products.buffers[kind]) - len(row_raw),
+                    'bytes': len(row_raw), 'sha256': sha(row_raw)}
             return {'complete_ordinary_geometry_sha256': key}
         if isinstance(value, dict):
             return {key: self.retain(child) for key, child in value.items()}
@@ -109,7 +139,50 @@ class Objects:
             return [self.retain(child) for child in value]
         return value
 
+    def _emitted_bytes(self, key):
+        locator = self.emitted[key]
+        kind = 'geometry-objects'
+        ordinal = locator['ordinal']
+        if ordinal == self.products.ordinals[kind] and kind in self.products.buffers:
+            body = self.products.buffers[kind]
+        else:
+            name = f'{kind}-{ordinal:03}.jsonl.gz'
+            matches = [pin for pin in self.products.outputs if pin['path'] == name]
+            require(len(matches) == 1, 'Missing/duplicate emitted whole shard descriptor')
+            pin = matches[0]
+            require(0 <= pin['bytes'] <= 33554432 and
+                    0 <= pin['uncompressed_bytes'] <= 33554432, 'Emitted shard bound differs')
+            target = self.products.directory / name
+            require(target.is_file() and not any(part.is_symlink() for part in
+                    (target, *target.parents)), 'Emitted shard must remain ordinary without symlink ancestors')
+            with target.open('rb') as stream:
+                encoded = stream.read(pin['bytes'] + 1)
+            require(len(encoded) == pin['bytes'] and sha(encoded) == pin['sha256'],
+                    'Emitted whole encoded shard changed')
+            with gzip.GzipFile(fileobj=io.BytesIO(encoded)) as stream:
+                body = stream.read(pin['uncompressed_bytes'] + 1)
+            require(len(body) == pin['uncompressed_bytes'] and
+                    sha(body) == pin['uncompressed_sha256'], 'Emitted whole decoded shard changed')
+        start, length = locator['offset'], locator['bytes']
+        require(0 <= start and 0 <= length <= 33554432 and start + length <= len(body),
+                'Emitted complete row locator escaped shard')
+        row_raw = bytes(body[start:start + length])
+        require(sha(row_raw) == locator['sha256'], 'Emitted complete geometry row changed')
+        row = json.loads(row_raw)
+        require(row['whole_geometry_sha256'] == key, 'Emitted geometry identity changed')
+        return canonical(row['geometry'])
+
     def resolve_alias(self, alias):
+        value, _ = self._resolved(alias)
+        return value
+
+    def _resolved_bytes(self, alias):
+        value, raw = self._resolved(alias)
+        # Drop the newly rebuilt mapping before another large full-byte check.
+        del value
+        return raw
+
+    def _resolved(self, alias):
         if alias['kind'] == 'complete-native-record-geometry':
             identity, offset = alias['source_id'], alias['periodic_offset']
             require(type(identity) is int and type(offset) in (int, float) and
@@ -138,4 +211,4 @@ class Objects:
         raw = canonical(value)
         require(len(raw) == expected_bytes and sha(raw) == expected_sha,
                 'Complete inverse alias reconstructed bytes differ')
-        return value
+        return value, raw
