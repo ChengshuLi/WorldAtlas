@@ -22,6 +22,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('--commit', required=True)
     p.add_argument('--run', required=True)
+    p.add_argument('--validate-inputs-only', action='store_true')
     p.add_argument('--scope-fixture')
     p.add_argument('--source-fixture')
     a = p.parse_args()

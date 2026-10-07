@@ -151,6 +151,10 @@ def run(repo, args, immutable, code, own):
     if sha(own['triage.json']) != plan['scope_sha256']:
         raise ValueError('Authoritative triage identity')
     frozen_scope = scope
+    required_frames = sorted({frame for f in frozen_scope for frame in f['containing_parts']})
+    actual_frames = sorted(pathlib.Path(p['path']).name for p in plan['ordinary_inputs'] if p['kind'] == 'families')
+    if required_frames != actual_frames or plan['required_family_frames'] != required_frames:
+        raise ValueError('Whole family containing-frame UNION mismatch')
     if args.scope_fixture:
         target = pathlib.Path(args.scope_fixture)
         if target.is_symlink() or target.stat().st_size > CAP:
@@ -257,7 +261,23 @@ def run(repo, args, immutable, code, own):
     retired = [r['id'] for r in json.loads(read('data/semantic-report.json'))['retired'] if r['id'].startswith('gb:AGO:ADM2:91424787')]
     if sorted(retired) != sorted(r['id'] for r, raw, offset in selected):
         raise ValueError('Recorded executed refresh obsolete identity join')
+    anchor = json.loads(read(private['metadata_anchor']['path']))
+    archive_rows = [r for r in anchor['files'] if r['sha256'] == private['sha256']]
+    if len(archive_rows) != 1 or archive_rows[0]['bytes'] != private['bytes']:
+        raise ValueError('Independent whole private archive metadata anchor')
     archive_encoded = None; gc.collect()
+    if args.validate_inputs_only:
+        print(json.dumps({'status': 'complete-input-only-admission-no-GIS-import-or-calculation', 'execution_commit': args.commit,
+                          'complete_families': 8, 'complete_components': 10, 'complete_contacts': 9, 'complete_context_batches': 3,
+                          'complete_context_families': 173, 'complete_context_components': 543, 'whole_archive_records': 19050,
+                          'selected_archive_records': 158, 'source_features': 161, 'actual_family_frame_union': required_frames,
+                          'family_row_hashes': {f['family']: f['row_sha256'] for f in scope},
+                          'ordinary_input_bytes': sum(base.consumed.values()), 'private_input_bytes': private['bytes'] + private['decoded_bytes'],
+                          'runtime_input_bytes': runtime_plan['total_bytes'], 'admitted_total_forecast_bytes': total_forecast,
+                          'max_rss_bytes': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+                          'source_raw_sha256': sha(source_raw), 'archive_whole': archive_receipt,
+                          'destination_admitted_not_created': str(out.root.relative_to(repo))}))
+        return
     # Full source/input/code/output admission is complete here. Every archive
     # raw record is preserved untouched; original invalidity is never repaired.
     if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss > plan['resource_forecast']['max_rss_bytes']:
@@ -308,6 +328,7 @@ def run(repo, args, immutable, code, own):
         votes_all.append({'source_id': f['properties']['shapeID'], 'old_parent_overlap_votes_degrees2': dict(votes), 'conditional_old_parent': parent})
         diagnostic.append({'type': 'Feature', 'id': 'gb:AGO:ADM2:' + f['properties']['shapeID'], 'properties': {'conditional_archived_envelope_only': True, 'old_parent_vote': parent}, 'geometry': mapping(geometry)})
     part_union = union_all(parts)
+    recorded_revision = json.loads(read('data/semantic-report.json'))['angola_source_revision']
     results = []
     for identity in sorted(wanted):
         g = cg[identity]; missing_old = g.difference(envelope); missing_source = g.difference(source_union); missing_conditional = g.difference(part_union)
@@ -330,6 +351,9 @@ def run(repo, args, immutable, code, own):
                   'current_contact_comparisons': contact_comparisons, 'original_validity': validity,
                   'source_crs': source.get('crs'), 'axis_order': 'longitude-latitude', 'coordinate_units': 'degrees', 'area_units': 'square degrees',
                   'conditional_old_parent_votes': votes_all, 'conditional_historical_adjustments': environment['adjustments'],
+                  'recorded_adjustments_byte_equal': canonical(recorded_revision['adjustments']) == canonical(environment['adjustments']),
+                  'recorded_adjustments_sha256': sha(canonical(recorded_revision['adjustments'])),
+                  'conditional_adjustments_sha256': sha(canonical(environment['adjustments'])),
                   'conditional_remaining_degrees2': residual.area, 'executed_historical_method_sha256': sha(method_raw),
                   'executed_historical_ast_sha256': sha(ast.dump(method, include_attributes=True).encode()),
                   'executed_historical_vote_ast_sha256': sha(ast.dump(vote_method, include_attributes=True).encode()),

@@ -7,14 +7,16 @@ REPO = ROOT.parents[2]
 
 
 def main():
-    p = argparse.ArgumentParser(); p.add_argument('--commit', required=True); p.add_argument('--vintage', required=True); a = p.parse_args()
+    p = argparse.ArgumentParser(); p.add_argument('--commit', required=True); p.add_argument('--vintage', required=True); p.add_argument('--admission-only', action='store_true'); a = p.parse_args()
     files = []
-    for name in [N + 'execute.py', 'scripts/evidence/immutable.py']:
+    for name in [N + 'execute.py', N + 'input-plan.json', 'scripts/evidence/immutable.py']:
         raw = subprocess.check_output(['git', '-C', str(REPO), 'show', a.commit + ':' + name])
         path = REPO / name
         if path.is_symlink() or path.read_bytes() != raw:
             raise ValueError('Actual invocation writer/code drift')
         files.append({'path': name, 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest(), 'hash_kind': 'file-bytes'})
+        if name == N + 'input-plan.json':
+            plan_raw = raw
         if name == 'scripts/evidence/immutable.py':
             helper = raw
     immutable = types.ModuleType('immutable'); immutable.__file__ = str(REPO / 'scripts/evidence/immutable.py')
@@ -27,10 +29,12 @@ def main():
         run = a.vintage + '-' + label
         command = [sys.executable, '-I', '-B', N + 'run.py', '--commit', a.commit, '--run', run]
         started = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        if failed:
+        if failed or (a.admission_only and ordinal == 2):
             payload[label + '.stdout.txt'] = b''; payload[label + '.stderr.txt'] = b''
-            records.append({'ordinal': ordinal, 'executed': False, 'reason': 'Previous attempt failed; no fake successful pair'})
+            records.append({'ordinal': ordinal, 'executed': False, 'reason': 'Input-only admission requested; no second scientific execution' if a.admission_only else 'Previous attempt failed; no fake successful pair'})
             continue
+        if a.admission_only:
+            command.append('--validate-inputs-only')
         execution = subprocess.run(command, cwd=REPO, capture_output=True)
         ended = datetime.datetime.now(datetime.timezone.utc).isoformat()
         if len(execution.stdout) + len(execution.stderr) > 2 * 1024 * 1024:
@@ -40,8 +44,10 @@ def main():
         records.append({'ordinal': ordinal, 'executed': True, 'command': ['<runtime-prefix>/bin/python', *command[1:]], 'cwd': '<owned-checkout>', 'started_utc': started, 'ended_utc': ended, 'returncode': execution.returncode, 'executable_role': 'exact fixed shared runtime; authenticated executable and installed closure in runtime-plan.json', 'platform': sys.platform})
         if execution.returncode:
             failed = True; continue
+        if a.admission_only:
+            continue
         product = ROOT / 'vintages' / run
-        plan = json.loads((ROOT / 'input-plan.json').read_bytes())
+        plan = json.loads(plan_raw)
         rows = []
         for name in plan['output_names']:
             raw = (product / name).read_bytes(); rows.append({'name': name, 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()})
@@ -50,10 +56,10 @@ def main():
         product_sets.append(rows)
     equal = not failed and len(product_sets) == 2 and product_sets[0] == product_sets[1]
     payload['invocations.json'] = immutable.canonical_json({'execution_commit': a.commit, 'invocations': records, 'receipt_interpretation': 'Actual invocation timestamps/commands retained; receipts excluded from scientific product equality.'})
-    payload['equality.json'] = immutable.canonical_json({'status': 'complete-scientific-product-byte-equality' if equal else 'failed-execution-or-product-equality', 'all_paired_scientific_products_equal': equal, 'complete_product_sets': product_sets, 'completion_publication_receipts': 'Fresh destination paths differ truthfully; excluded from scientific product equality.'})
+    payload['equality.json'] = immutable.canonical_json({'status': 'complete-input-only-admission-no-GIS' if a.admission_only and not failed else ('complete-scientific-product-byte-equality' if equal else 'failed-execution-or-product-equality'), 'all_paired_scientific_products_equal': equal, 'complete_product_sets': product_sets, 'completion_publication_receipts': 'Fresh destination paths differ truthfully; excluded from scientific product equality.'})
     output.publish_bytes(payload)
     print(json.dumps({'scientific_products_byte_equal': equal, 'executed_subprocesses': sum(r['executed'] for r in records), 'invocations': N + 'vintages/' + a.vintage + '-invocations'}))
-    if not equal:
+    if failed or (not a.admission_only and not equal):
         raise SystemExit(1)
 
 
