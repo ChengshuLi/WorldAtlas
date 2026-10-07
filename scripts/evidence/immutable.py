@@ -11,7 +11,6 @@ import tempfile
 import builtins
 import importlib.util
 import types
-from evidence.contracts import exact_rows
 
 VERSION = 'worldatlas-evidence-preparation-v1'
 MAX_FILE_BYTES = 32 * 1024 * 1024
@@ -160,7 +159,12 @@ class Baseline:
         return {name: load(name) for name in sources}
 
     def subjects(self, ids, index='data/world-index.json'):
-        exact_rows([{'id': identity} for identity in ids], ids)
+        # Keep foundational immutable reads self-contained: existing trusted
+        # runners authenticate/copy this module without a record-helper module.
+        if not isinstance(ids, list) or not ids or any(not isinstance(identity, str) or not identity for identity in ids):
+            raise ValueError('Require a nonempty subject identity list')
+        if len(ids) != len(set(ids)):
+            raise ValueError('Duplicate raw subject identities')
         index = safe_path(index)
         if index not in self.pins:
             raise ValueError('World-index bytes must have a reviewed pin')
