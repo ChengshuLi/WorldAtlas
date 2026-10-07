@@ -17,8 +17,8 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[3]
 OWNED = 'research/geography/malaysia-terengganu-gap-source-fitness-20261007'
-VINTAGE = OWNED + '/vintages/20261007-dosm-r7/'
-METHOD = 'terengganu-dosm-source-generator-r7'
+VINTAGE = OWNED + '/vintages/20261007-dosm-r9/'
+METHOD = 'terengganu-dosm-source-generator-r9'
 PRODUCER = OWNED + '/reproduce-dosm.py'
 EXPECTED_COMPONENTS = [
     'physical-component:46a2537871d6055d90416c1508d40805648567d8dfc37696192a8a23d778922b',

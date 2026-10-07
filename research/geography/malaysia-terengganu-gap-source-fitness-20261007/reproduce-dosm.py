@@ -72,7 +72,7 @@ def sha256(raw):
 
 MAX_PACKET_FILE_BYTES = 32 * 1024 * 1024
 ALLOWED_RUN_FILES = {'run-one.json', 'run-two.json', 'execution-one.json', 'execution-two.json'}
-METHOD_ID = 'terengganu-dosm-source-generator-r7'
+METHOD_ID = 'terengganu-dosm-source-generator-r9'
 
 
 def read_bounded_packet_file(path):
@@ -134,16 +134,17 @@ def safe_output_relative_path(value):
 def validate_output_admission(relative):
     relative = safe_output_relative_path(relative)
     target = ROOT / relative
-    vintage = target.parent
-    for ancestor in (target, vintage, *vintage.parents):
+    for ancestor in (target.parent, *target.parent.parents):
         if ancestor == ROOT.parent:
             break
         if ancestor.is_symlink():
             raise ValueError('Symlink in output path')
-    if target.exists() or target.is_symlink():
+        if ancestor.exists() and not ancestor.is_dir():
+            raise ValueError('Output path ancestor is not an ordinary directory')
+    if target.is_symlink():
+        raise ValueError('Symlink output target')
+    if target.exists():
         raise FileExistsError('Evidence already exists; choose a fresh vintage')
-    if vintage.exists() and not vintage.is_dir():
-        raise ValueError('Vintage output parent is not an ordinary directory')
     return target
 
 
@@ -170,6 +171,9 @@ def exclusive_write(path, raw):
 def run_output_path_controls():
     traversal_rejected = symlink_rejected = overwrite_rejected = parent_symlink_rejected = False
     entry_rejected_before_calculation = False
+    ancestor_file_rejected_before_calculation = existing_output_rejected_before_calculation = False
+    existing_receipt_rejected_before_calculation = broken_leaf_rejected_before_calculation = False
+    fresh_entry_reached_calculation = False
     try:
         safe_output_relative_path(OWNED + '/vintages/20261007-dosm-r999999/../escape/run-one.json')
     except ValueError:
@@ -220,6 +224,86 @@ def run_output_path_controls():
         finally:
             sys.argv = previous_argv
             globals()['reproduce'] = previous_reproduce
+        def entry_canary(label, root, output, receipt, expected):
+            nonlocal entry_rejected_before_calculation, ancestor_file_rejected_before_calculation
+            nonlocal existing_output_rejected_before_calculation, existing_receipt_rejected_before_calculation
+            nonlocal broken_leaf_rejected_before_calculation, fresh_entry_reached_calculation
+            previous_root, previous_argv, previous_reproduce = ROOT, sys.argv, globals()['reproduce']
+            calls = []
+            def calculation_canary(_):
+                calls.append(True)
+                raise RuntimeError('bounded main-entry calculation canary')
+            outcome = 'rejected'
+            try:
+                globals()['ROOT'] = pathlib.Path(root)
+                sys.argv = [str(ROOT / (OWNED + '/reproduce-dosm.py')), '--output', output, '--receipt', receipt]
+                globals()['reproduce'] = calculation_canary
+                try:
+                    main()
+                except (ValueError, FileExistsError):
+                    outcome = 'rejected'
+                except RuntimeError as error:
+                    if str(error) != 'bounded main-entry calculation canary':
+                        raise
+                    outcome = 'invoked'
+            finally:
+                globals()['ROOT'], sys.argv = previous_root, previous_argv
+                globals()['reproduce'] = previous_reproduce
+            passed = outcome == expected and len(calls) == (1 if expected == 'invoked' else 0)
+            if expected == 'invoked':
+                fresh_entry_reached_calculation = passed
+            elif label == 'non-directory-ancestor':
+                ancestor_file_rejected_before_calculation = passed
+            elif label == 'existing-run':
+                existing_output_rejected_before_calculation = passed
+            elif label == 'existing-receipt':
+                existing_receipt_rejected_before_calculation = passed
+            elif label == 'broken-leaf':
+                broken_leaf_rejected_before_calculation = passed
+            elif label == 'symlinked-vintage':
+                entry_rejected_before_calculation = passed
+            return passed
+
+        with tempfile.TemporaryDirectory(prefix='dosm-main-entry-controls-') as control_root:
+            control_base = pathlib.Path(control_root)
+            # Existing ordinary file at the vintages ancestor must reject before calculation.
+            blocked_root = control_base / 'ancestor-file-root'
+            blocked_owned = blocked_root / OWNED
+            blocked_owned.mkdir(parents=True)
+            (blocked_owned / 'vintages').write_bytes(b'ordinary file, not a directory')
+            entry_canary('non-directory-ancestor', blocked_root,
+                         OWNED + '/vintages/20261007-dosm-r' + nonce + '/run-one.json',
+                         OWNED + '/vintages/20261007-dosm-r' + nonce + '/execution-one.json', 'rejected')
+
+            ordinary_root = control_base / 'ordinary-root'
+            ordinary_vintages = ordinary_root / OWNED / 'vintages'
+            ordinary_vintages.mkdir(parents=True)
+            existing_run = ordinary_vintages / ('20261007-dosm-r' + nonce)
+            existing_run.mkdir()
+            (existing_run / 'run-one.json').write_bytes(b'existing run')
+            entry_canary('existing-run', ordinary_root,
+                         OWNED + '/vintages/' + existing_run.name + '/run-one.json',
+                         OWNED + '/vintages/' + existing_run.name + '/execution-one.json', 'rejected')
+
+            receipt_dir = ordinary_vintages / ('20261007-dosm-r' + str(int(nonce) + 1))
+            receipt_dir.mkdir()
+            (receipt_dir / 'execution-one.json').write_bytes(b'existing receipt')
+            entry_canary('existing-receipt', ordinary_root,
+                         OWNED + '/vintages/' + receipt_dir.name + '/run-one.json',
+                         OWNED + '/vintages/' + receipt_dir.name + '/execution-one.json', 'rejected')
+
+            broken_dir = ordinary_vintages / ('20261007-dosm-r' + str(int(nonce) + 2))
+            broken_dir.mkdir()
+            (broken_dir / 'run-one.json').symlink_to(control_base / 'missing-target')
+            entry_canary('broken-leaf', ordinary_root,
+                         OWNED + '/vintages/' + broken_dir.name + '/run-one.json',
+                         OWNED + '/vintages/' + broken_dir.name + '/execution-one.json', 'rejected')
+
+            fresh_dir = ordinary_vintages / ('20261007-dosm-r' + str(int(nonce) + 3))
+            fresh_dir.mkdir()
+            entry_canary('fresh', ordinary_root,
+                         OWNED + '/vintages/' + fresh_dir.name + '/run-one.json',
+                         OWNED + '/vintages/' + fresh_dir.name + '/execution-one.json', 'invoked')
     finally:
         if real_vintage.exists() and not real_vintage.is_symlink():
             shutil.rmtree(real_vintage)
@@ -232,10 +316,18 @@ def run_output_path_controls():
         {'control': 'existing output rejected and original bytes preserved', 'passed': overwrite_rejected},
         {'control': 'symlink vintage directory rejected by production output path guard', 'passed': parent_symlink_rejected},
         {'control': 'CLI rejects symlinked vintage before calculation is invoked', 'passed': entry_rejected_before_calculation},
+        {'control': 'CLI rejects ordinary-file ancestor before calculation is invoked', 'passed': ancestor_file_rejected_before_calculation},
+        {'control': 'CLI rejects existing run output before calculation is invoked', 'passed': existing_output_rejected_before_calculation},
+        {'control': 'CLI rejects existing execution receipt before calculation is invoked', 'passed': existing_receipt_rejected_before_calculation},
+        {'control': 'CLI rejects broken symlink output before calculation is invoked', 'passed': broken_leaf_rejected_before_calculation},
     ]
     if not all(row['passed'] for row in checks):
         raise ValueError('Safe fresh output path controls failed')
-    return checks
+    if not fresh_entry_reached_calculation:
+        raise ValueError('Fresh output admission did not reach calculation exactly once')
+    return {'negative': checks,
+            'positive': {'control': 'fresh CLI output admission reaches calculation exactly once',
+                         'passed': fresh_entry_reached_calculation}}
 
 
 def loaded_shapely_module_fingerprints():
@@ -657,7 +749,9 @@ def reproduce(output_path):
     product = validate_source_bytes(source_raw, source_descriptor)
     districts = index_districts(product['features'])
     controls = run_loader_controls(source_raw, source_descriptor, product['features'])
-    controls['negative'].extend(run_output_path_controls())
+    output_path_controls = run_output_path_controls()
+    controls['negative'].extend(output_path_controls['negative'])
+    controls['positive'].append(output_path_controls['positive'])
     controls['negative'].append({
         'control': 'mutated pinned imported helper rejected by immutable baseline loader',
         'passed': modules['_helper_mutation_control']['passed'],
