@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "source_retrieval_utc": "2026-10-07T05:06:46Z",
+  "analysis_runs": [
+    {
+      "completion_time_utc": "2026-10-07T05:29:04Z",
+      "command": "python reproduce_glad_water_history.py --tiles-root /tmp/namibia-official-review/glad-water-1999-2023",
+      "output": "glad-water-1999-2023-analysis.json",
+      "output_bytes": 1167341,
+      "output_sha256": "1ee2725475b7968174483ec8033b5de23b065788cb6136100c2e8bbbe036714f"
+    },
+    {
+      "completion_time_utc": "2026-10-07T05:31:35Z",
+      "command": "python reproduce_glad_water_history.py --tiles-root /tmp/namibia-official-review/glad-water-1999-2023 --output /tmp/namibia-official-review/glad-water-1999-2023/analysis-repeat.json",
+      "output": "/tmp/namibia-official-review/glad-water-1999-2023/analysis-repeat.json",
+      "output_bytes": 1167341,
+      "output_sha256": "1ee2725475b7968174483ec8033b5de23b065788cb6136100c2e8bbbe036714f"
+    }
+  ],
+  "byte_identical_outputs": true,
+  "inputs": {
+    "original_components": {
+      "bytes": 23958,
+      "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f9d8c085a42622b9"
+    },
+    "source_contact_features": {
+      "bytes": 46722,
+      "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
+    },
+    "object_metadata": {
+      "bytes": 78500,
+      "sha256": "32cc86e9bf9d01939453825e1297ff4f4d72849c2b2822eff8547eed745db4c6"
+    },
+    "initial_download_receipts": {
+      "bytes": 39573,
+      "sha256": "bc9bb37821dd7149db54f4fca101d111e3ba6f2b9fe646f304e6dfde1cd4563b"
+    },
+    "verified_source_objects": 74,
+    "verified_source_bytes": 2383301892
+  },
+  "software": {
+    "python": "3.11.10",
+    "numpy": "2.4.6",
+    "rasterio": "1.4.4",
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "script_sha256": "7db16db61bc0ff12f7efdcc2b4877207ea9d5b2315938ff41543d2773234b738",
+  "source_pixels_note": "The raw 74 COG files are stored in the local review cache and are not added to Git. The packet includes generation-pinned Google Cloud Storage object metadata, the original acquisition receipt, a checksum-verifying downloader, the exact-analysis script, and the full output."
+}

@@ -11,9 +11,9 @@
   },
   "classification_rules": {
     "source_geometry": "Supported only as a geometric observation when an exact candidate intersects source geometry by positive area; no administrative or legal resolution is implied.",
-    "physical_water_or_historic_course": "JRC GSW v1.5 supplies water-pixel observations within each candidate for 1984–2024 occurrence and 2024 seasonality; exact bank/course, waterbody type, historic course, cause, and boundary authority remain unresolved.",
+    "physical_water_or_historic_course": "Remain unresolved as a physical/legal classification. JRC GSW v1.5 and GLAD provide raster water-class observations at different temporal resolutions; GLAD is a separate classification product but uses Landsat sensors, and neither product locates exact banks, historic midstream positions, wetland/floodplain status, or legal effect.",
     "processing_cause": "Unresolved unless a specific processing step and mechanism are reproduced.",
-    "boundary_authority": "Unresolved absent the completed demarcation record or authoritative modern line source.",
+    "boundary_authority": "Historical demarcation is partially evidenced by the 1928 Final Act and 1931 exchange of notes (official Treaty Series scan); candidate geometries east/south of terminal Beacon 47 remain unlocated relative to the treaty-defined river midstream. Present legal effect is not decided.",
     "administrative_assignment": "Not made."
   },
   "aggregate_observations": {
@@ -30,7 +30,20 @@
     "jrc_gsw_occurrence_positive_components": 21,
     "jrc_gsw_occurrence_ge_50_components": 21,
     "jrc_gsw_occurrence_ge_90_components": 20,
-    "jrc_gsw_2024_seasonality_positive_components": 21
+    "jrc_gsw_2024_seasonality_positive_components": 21,
+    "glad_1999_2023_verified_raster_files": 74,
+    "glad_1999_2023_components_with_ge_50_water_center_each_year": 21,
+    "glad_1999_2023_contacts_with_ge_50_water_center_each_year": 10,
+    "glad_1999_2023_positive_area_pairs_with_ge_50_water_in_any_year": 39,
+    "historical_1928_final_act_beacons": 47,
+    "components_east_and_south_of_scheduled_beacon_47": 21,
+    "river_midstream_alignment_east_of_beacon_47": "unresolved",
+    "worldcover_2021_v200_components_with_class80": 21,
+    "worldcover_2021_v200_components_with_class90": 21,
+    "worldcover_2021_v200_positive_area_pairs_with_class80": 38,
+    "worldcover_2021_v200_positive_area_pairs_with_class90": 44,
+    "worldcover_2021_v200_positive_area_pairs_with_class80_or90": 46,
+    "worldcover_2021_v200_local_mask_mismatches": 61
   },
   "components": [
     {
@@ -132,6 +145,51 @@
           "seasonality_valid_pixel_centers": 10097,
           "seasonality_water_pixels_gt_0": 1127,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 10097,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 923,
+          "annual_centers_ge_50_max": 1279,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 939,
+            "2000": 939,
+            "2001": 923,
+            "2002": 941,
+            "2003": 941,
+            "2004": 997,
+            "2005": 957,
+            "2006": 984,
+            "2007": 977,
+            "2008": 960,
+            "2009": 1073,
+            "2010": 1104,
+            "2011": 1163,
+            "2012": 1055,
+            "2013": 1190,
+            "2014": 1279,
+            "2015": 1207,
+            "2016": 1165,
+            "2017": 1136,
+            "2018": 1160,
+            "2019": 1087,
+            "2020": 1175,
+            "2021": 1082,
+            "2022": 1204,
+            "2023": 1168
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -139,11 +197,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          18.42566188925082,
+          -17.5385438392717,
+          18.5429,
+          -17.399540716612382
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 90928,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 13721,
+        "class_90_herbaceous_wetland": 1869,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
@@ -244,6 +328,51 @@
           "seasonality_valid_pixel_centers": 7167,
           "seasonality_water_pixels_gt_0": 1981,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 7167,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 1125,
+          "annual_centers_ge_50_max": 2289,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 1230,
+            "2000": 1165,
+            "2001": 1159,
+            "2002": 1125,
+            "2003": 1125,
+            "2004": 1330,
+            "2005": 1244,
+            "2006": 1189,
+            "2007": 1200,
+            "2008": 1213,
+            "2009": 2011,
+            "2010": 2071,
+            "2011": 2289,
+            "2012": 1832,
+            "2013": 1356,
+            "2014": 1423,
+            "2015": 1359,
+            "2016": 1388,
+            "2017": 1318,
+            "2018": 1307,
+            "2019": 1164,
+            "2020": 1318,
+            "2021": 1210,
+            "2022": 1295,
+            "2023": 1290
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -251,11 +380,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          18.943613028919327,
+          -17.84,
+          19.117083356876847,
+          -17.8222
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 64588,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 14960,
+        "class_90_herbaceous_wetland": 6316,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
@@ -356,6 +511,51 @@
           "seasonality_valid_pixel_centers": 281,
           "seasonality_water_pixels_gt_0": 54,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 281
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 48,
+          "annual_centers_ge_50_max": 70,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 54,
+            "2000": 53,
+            "2001": 55,
+            "2002": 48,
+            "2003": 48,
+            "2004": 54,
+            "2005": 56,
+            "2006": 56,
+            "2007": 55,
+            "2008": 55,
+            "2009": 70,
+            "2010": 60,
+            "2011": 55,
+            "2012": 55,
+            "2013": 56,
+            "2014": 55,
+            "2015": 54,
+            "2016": 53,
+            "2017": 51,
+            "2018": 53,
+            "2019": 53,
+            "2020": 54,
+            "2021": 53,
+            "2022": 54,
+            "2023": 54
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -363,11 +563,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.927399149162458,
+          -17.98596625897368,
+          20.943746679773703,
+          -17.968173229547006
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 2514,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 537,
+        "class_90_herbaceous_wetland": 1123,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
@@ -490,6 +716,51 @@
           "seasonality_valid_pixel_centers": 4800,
           "seasonality_water_pixels_gt_0": 849,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 4800,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 501,
+          "annual_centers_ge_50_max": 1258,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 501,
+            "2000": 535,
+            "2001": 535,
+            "2002": 509,
+            "2003": 509,
+            "2004": 620,
+            "2005": 560,
+            "2006": 564,
+            "2007": 512,
+            "2008": 517,
+            "2009": 875,
+            "2010": 918,
+            "2011": 1238,
+            "2012": 1258,
+            "2013": 603,
+            "2014": 632,
+            "2015": 620,
+            "2016": 609,
+            "2017": 585,
+            "2018": 589,
+            "2019": 526,
+            "2020": 597,
+            "2021": 588,
+            "2022": 616,
+            "2023": 613
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -497,11 +768,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          19.72624724006288,
+          -17.9137,
+          19.770956351455812,
+          -17.889330662474734
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 43380,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 7018,
+        "class_90_herbaceous_wetland": 4633,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
@@ -602,6 +899,51 @@
           "seasonality_valid_pixel_centers": 518,
           "seasonality_water_pixels_gt_0": 52,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 518
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 43,
+          "annual_centers_ge_50_max": 71,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 53,
+            "2000": 52,
+            "2001": 56,
+            "2002": 56,
+            "2003": 56,
+            "2004": 63,
+            "2005": 64,
+            "2006": 67,
+            "2007": 63,
+            "2008": 61,
+            "2009": 68,
+            "2010": 62,
+            "2011": 60,
+            "2012": 63,
+            "2013": 71,
+            "2014": 70,
+            "2015": 57,
+            "2016": 62,
+            "2017": 50,
+            "2018": 56,
+            "2019": 50,
+            "2020": 59,
+            "2021": 43,
+            "2022": 49,
+            "2023": 51
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -609,11 +951,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.57115897887324,
+          -17.9831,
+          20.58168269513991,
+          -17.9781
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 4667,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 472,
+        "class_90_herbaceous_wetland": 612,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
@@ -714,6 +1082,51 @@
           "seasonality_valid_pixel_centers": 361,
           "seasonality_water_pixels_gt_0": 153,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 361,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 55,
+          "annual_centers_ge_50_max": 178,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 57,
+            "2000": 62,
+            "2001": 55,
+            "2002": 57,
+            "2003": 57,
+            "2004": 66,
+            "2005": 65,
+            "2006": 60,
+            "2007": 69,
+            "2008": 59,
+            "2009": 178,
+            "2010": 102,
+            "2011": 119,
+            "2012": 123,
+            "2013": 62,
+            "2014": 63,
+            "2015": 63,
+            "2016": 67,
+            "2017": 62,
+            "2018": 62,
+            "2019": 61,
+            "2020": 62,
+            "2021": 62,
+            "2022": 62,
+            "2023": 60
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -721,11 +1134,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          19.3312,
+          -17.8615,
+          19.357440909090908,
+          -17.848093802262667
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 3255,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 559,
+        "class_90_herbaceous_wetland": 445,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
@@ -826,6 +1265,51 @@
           "seasonality_valid_pixel_centers": 8997,
           "seasonality_water_pixels_gt_0": 2422,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 8997,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 729,
+          "annual_centers_ge_50_max": 2565,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 899,
+            "2000": 801,
+            "2001": 729,
+            "2002": 730,
+            "2003": 730,
+            "2004": 1137,
+            "2005": 897,
+            "2006": 853,
+            "2007": 782,
+            "2008": 834,
+            "2009": 2565,
+            "2010": 2143,
+            "2011": 2448,
+            "2012": 1463,
+            "2013": 889,
+            "2014": 953,
+            "2015": 906,
+            "2016": 1040,
+            "2017": 911,
+            "2018": 912,
+            "2019": 809,
+            "2020": 919,
+            "2021": 878,
+            "2022": 923,
+            "2023": 916
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -833,11 +1317,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          19.128527593203145,
+          -17.8308,
+          19.23764058394161,
+          -17.8064
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 80979,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 10690,
+        "class_90_herbaceous_wetland": 19079,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
@@ -938,6 +1448,51 @@
           "seasonality_valid_pixel_centers": 341,
           "seasonality_water_pixels_gt_0": 75,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 341
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 53,
+          "annual_centers_ge_50_max": 102,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 53,
+            "2000": 55,
+            "2001": 64,
+            "2002": 57,
+            "2003": 57,
+            "2004": 67,
+            "2005": 67,
+            "2006": 71,
+            "2007": 72,
+            "2008": 66,
+            "2009": 76,
+            "2010": 102,
+            "2011": 70,
+            "2012": 72,
+            "2013": 85,
+            "2014": 95,
+            "2015": 82,
+            "2016": 85,
+            "2017": 80,
+            "2018": 75,
+            "2019": 72,
+            "2020": 78,
+            "2021": 75,
+            "2022": 81,
+            "2023": 78
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -945,11 +1500,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.65523020134228,
+          -17.99141996086106,
+          20.676408806262234,
+          -17.983805121865064
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 3103,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 887,
+        "class_90_herbaceous_wetland": 1804,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
@@ -1050,6 +1631,51 @@
           "seasonality_valid_pixel_centers": 7838,
           "seasonality_water_pixels_gt_0": 1144,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 7838
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 883,
+          "annual_centers_ge_50_max": 1305,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 902,
+            "2000": 883,
+            "2001": 917,
+            "2002": 918,
+            "2003": 918,
+            "2004": 1106,
+            "2005": 990,
+            "2006": 956,
+            "2007": 957,
+            "2008": 899,
+            "2009": 1271,
+            "2010": 1305,
+            "2011": 1138,
+            "2012": 1170,
+            "2013": 1191,
+            "2014": 1217,
+            "2015": 1106,
+            "2016": 1089,
+            "2017": 1170,
+            "2018": 1079,
+            "2019": 1034,
+            "2020": 1102,
+            "2021": 1172,
+            "2022": 1177,
+            "2023": 1153
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1057,11 +1683,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.15750490463215,
+          -17.8958,
+          20.25837689110557,
+          -17.8749
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 70560,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 14714,
+        "class_90_herbaceous_wetland": 2878,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
@@ -1184,6 +1836,51 @@
           "seasonality_valid_pixel_centers": 13064,
           "seasonality_water_pixels_gt_0": 1537,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 13064,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 984,
+          "annual_centers_ge_50_max": 2243,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 1042,
+            "2000": 1057,
+            "2001": 1018,
+            "2002": 989,
+            "2003": 989,
+            "2004": 1271,
+            "2005": 1067,
+            "2006": 1057,
+            "2007": 1036,
+            "2008": 999,
+            "2009": 1778,
+            "2010": 1698,
+            "2011": 2243,
+            "2012": 2185,
+            "2013": 1121,
+            "2014": 1163,
+            "2015": 1127,
+            "2016": 1111,
+            "2017": 1093,
+            "2018": 1064,
+            "2019": 984,
+            "2020": 1115,
+            "2021": 1077,
+            "2022": 1081,
+            "2023": 1067
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1191,11 +1888,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          19.773469660194174,
+          -17.894073240291263,
+          19.897422769230765,
+          -17.8676
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 117569,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 13029,
+        "class_90_herbaceous_wetland": 14825,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
@@ -1318,6 +2041,51 @@
           "seasonality_valid_pixel_centers": 4369,
           "seasonality_water_pixels_gt_0": 1045,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 4377,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 470,
+          "annual_centers_ge_50_max": 1313,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 612,
+            "2000": 481,
+            "2001": 472,
+            "2002": 470,
+            "2003": 470,
+            "2004": 542,
+            "2005": 516,
+            "2006": 515,
+            "2007": 482,
+            "2008": 511,
+            "2009": 1313,
+            "2010": 777,
+            "2011": 769,
+            "2012": 639,
+            "2013": 552,
+            "2014": 593,
+            "2015": 565,
+            "2016": 701,
+            "2017": 556,
+            "2018": 581,
+            "2019": 531,
+            "2020": 573,
+            "2021": 547,
+            "2022": 566,
+            "2023": 540
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1325,11 +2093,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          19.24524446764092,
+          -17.842103490886622,
+          19.316535001544636,
+          -17.8177
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 39369,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 6444,
+        "class_90_herbaceous_wetland": 12426,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
@@ -1452,6 +2246,51 @@
           "seasonality_valid_pixel_centers": 45009,
           "seasonality_water_pixels_gt_0": 10090,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 45009,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 3526,
+          "annual_centers_ge_50_max": 6939,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 3526,
+            "2000": 3924,
+            "2001": 3798,
+            "2002": 3591,
+            "2003": 3591,
+            "2004": 4818,
+            "2005": 4331,
+            "2006": 4214,
+            "2007": 3821,
+            "2008": 3916,
+            "2009": 6135,
+            "2010": 5175,
+            "2011": 6939,
+            "2012": 5421,
+            "2013": 4274,
+            "2014": 4644,
+            "2015": 4439,
+            "2016": 4914,
+            "2017": 4203,
+            "2018": 4280,
+            "2019": 3794,
+            "2020": 4398,
+            "2021": 4108,
+            "2022": 4326,
+            "2023": 4273
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1459,11 +2298,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          19.365,
+          -17.8889,
+          19.717294341055826,
+          -17.8447
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 405029,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 49601,
+        "class_90_herbaceous_wetland": 124207,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
@@ -1564,6 +2429,51 @@
           "seasonality_valid_pixel_centers": 3470,
           "seasonality_water_pixels_gt_0": 647,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 3470,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 391,
+          "annual_centers_ge_50_max": 832,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 396,
+            "2000": 395,
+            "2001": 397,
+            "2002": 391,
+            "2003": 391,
+            "2004": 431,
+            "2005": 407,
+            "2006": 413,
+            "2007": 419,
+            "2008": 399,
+            "2009": 642,
+            "2010": 655,
+            "2011": 832,
+            "2012": 628,
+            "2013": 427,
+            "2014": 450,
+            "2015": 436,
+            "2016": 436,
+            "2017": 426,
+            "2018": 428,
+            "2019": 401,
+            "2020": 430,
+            "2021": 420,
+            "2022": 429,
+            "2023": 424
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1571,11 +2481,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          18.79217601424896,
+          -17.8096,
+          18.876100000000005,
+          -17.768899485454185
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 31243,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 4451,
+        "class_90_herbaceous_wetland": 1029,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
@@ -1698,6 +2634,51 @@
           "seasonality_valid_pixel_centers": 16268,
           "seasonality_water_pixels_gt_0": 1915,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 16269,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 1392,
+          "annual_centers_ge_50_max": 2351,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 1630,
+            "2000": 1392,
+            "2001": 1524,
+            "2002": 1504,
+            "2003": 1504,
+            "2004": 1720,
+            "2005": 1601,
+            "2006": 1638,
+            "2007": 1770,
+            "2008": 1637,
+            "2009": 1915,
+            "2010": 2302,
+            "2011": 2351,
+            "2012": 1906,
+            "2013": 2043,
+            "2014": 2207,
+            "2015": 2098,
+            "2016": 2037,
+            "2017": 1922,
+            "2018": 1994,
+            "2019": 1783,
+            "2020": 2023,
+            "2021": 1824,
+            "2022": 1976,
+            "2023": 1975
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1705,11 +2686,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          18.541064406779665,
+          -17.713288454011742,
+          18.724162230919763,
+          -17.549770056497177
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 146523,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 24913,
+        "class_90_herbaceous_wetland": 4007,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
@@ -1810,6 +2817,51 @@
           "seasonality_valid_pixel_centers": 10444,
           "seasonality_water_pixels_gt_0": 1307,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 10444
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 922,
+          "annual_centers_ge_50_max": 1701,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 1028,
+            "2000": 922,
+            "2001": 1076,
+            "2002": 982,
+            "2003": 982,
+            "2004": 1108,
+            "2005": 1044,
+            "2006": 1156,
+            "2007": 1092,
+            "2008": 1106,
+            "2009": 1303,
+            "2010": 1701,
+            "2011": 1197,
+            "2012": 1183,
+            "2013": 1306,
+            "2014": 1347,
+            "2015": 1234,
+            "2016": 1234,
+            "2017": 1216,
+            "2018": 1227,
+            "2019": 1185,
+            "2020": 1275,
+            "2021": 1169,
+            "2022": 1272,
+            "2023": 1190
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1817,11 +2869,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.685229508196723,
+          -18.0291897706589,
+          20.790402439024387,
+          -17.9998
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 94045,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 13766,
+        "class_90_herbaceous_wetland": 25573,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
@@ -1970,6 +3048,51 @@
           "seasonality_valid_pixel_centers": 25984,
           "seasonality_water_pixels_gt_0": 3910,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 11600,
+            "10S_020E": 14384
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 3063,
+          "annual_centers_ge_50_max": 6002,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 3176,
+            "2000": 3086,
+            "2001": 3063,
+            "2002": 3069,
+            "2003": 3069,
+            "2004": 3951,
+            "2005": 3277,
+            "2006": 3167,
+            "2007": 3218,
+            "2008": 3124,
+            "2009": 6002,
+            "2010": 4637,
+            "2011": 4921,
+            "2012": 5072,
+            "2013": 3589,
+            "2014": 3702,
+            "2015": 3548,
+            "2016": 3500,
+            "2017": 3554,
+            "2018": 3372,
+            "2019": 3183,
+            "2020": 3467,
+            "2021": 3485,
+            "2022": 3481,
+            "2023": 3462
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -1977,11 +3100,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          19.90008759124088,
+          -17.9119,
+          20.150781174438688,
+          -17.8626
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 233351,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 40329,
+        "class_90_herbaceous_wetland": 27060,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
@@ -2104,6 +3253,51 @@
           "seasonality_valid_pixel_centers": 14415,
           "seasonality_water_pixels_gt_0": 2376,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 14415
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 1794,
+          "annual_centers_ge_50_max": 2643,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 1914,
+            "2000": 1794,
+            "2001": 1936,
+            "2002": 1854,
+            "2003": 1854,
+            "2004": 2208,
+            "2005": 1962,
+            "2006": 2033,
+            "2007": 1987,
+            "2008": 1962,
+            "2009": 2287,
+            "2010": 2643,
+            "2011": 2547,
+            "2012": 2324,
+            "2013": 2353,
+            "2014": 2407,
+            "2015": 2309,
+            "2016": 2273,
+            "2017": 2286,
+            "2018": 2255,
+            "2019": 2162,
+            "2020": 2336,
+            "2021": 2267,
+            "2022": 2354,
+            "2023": 2329
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -2111,11 +3305,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.281033741429976,
+          -17.94927619561309,
+          20.480919525350597,
+          -17.8589
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 129697,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 27000,
+        "class_90_herbaceous_wetland": 7139,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
@@ -2192,6 +3412,51 @@
           "seasonality_valid_pixel_centers": 169,
           "seasonality_water_pixels_gt_0": 17,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 169
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 10,
+          "annual_centers_ge_50_max": 19,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 13,
+            "2000": 13,
+            "2001": 14,
+            "2002": 10,
+            "2003": 10,
+            "2004": 12,
+            "2005": 15,
+            "2006": 17,
+            "2007": 14,
+            "2008": 17,
+            "2009": 16,
+            "2010": 19,
+            "2011": 17,
+            "2012": 16,
+            "2013": 19,
+            "2014": 19,
+            "2015": 19,
+            "2016": 18,
+            "2017": 13,
+            "2018": 16,
+            "2019": 14,
+            "2020": 17,
+            "2021": 13,
+            "2022": 15,
+            "2023": 13
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -2199,11 +3464,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.60869965618364,
+          -17.985,
+          20.615498500245288,
+          -17.980279188997873
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 1509,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 122,
+        "class_90_herbaceous_wetland": 1326,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
@@ -2304,6 +3595,51 @@
           "seasonality_valid_pixel_centers": 4068,
           "seasonality_water_pixels_gt_0": 406,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 4068,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 273,
+          "annual_centers_ge_50_max": 447,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 312,
+            "2000": 273,
+            "2001": 290,
+            "2002": 283,
+            "2003": 283,
+            "2004": 334,
+            "2005": 317,
+            "2006": 311,
+            "2007": 308,
+            "2008": 295,
+            "2009": 417,
+            "2010": 376,
+            "2011": 447,
+            "2012": 360,
+            "2013": 336,
+            "2014": 369,
+            "2015": 366,
+            "2016": 354,
+            "2017": 349,
+            "2018": 348,
+            "2019": 320,
+            "2020": 367,
+            "2021": 343,
+            "2022": 357,
+            "2023": 354
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -2311,11 +3647,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          18.742875480299578,
+          -17.761951607939682,
+          18.786186967225728,
+          -17.7361
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 36638,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 4392,
+        "class_90_herbaceous_wetland": 654,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
@@ -2416,6 +3778,51 @@
           "seasonality_valid_pixel_centers": 206,
           "seasonality_water_pixels_gt_0": 30,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 206,
+            "10S_020E": 0
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 25,
+          "annual_centers_ge_50_max": 38,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 27,
+            "2000": 27,
+            "2001": 27,
+            "2002": 25,
+            "2003": 25,
+            "2004": 25,
+            "2005": 27,
+            "2006": 27,
+            "2007": 25,
+            "2008": 27,
+            "2009": 38,
+            "2010": 28,
+            "2011": 33,
+            "2012": 29,
+            "2013": 32,
+            "2014": 34,
+            "2015": 33,
+            "2016": 32,
+            "2017": 32,
+            "2018": 32,
+            "2019": 29,
+            "2020": 32,
+            "2021": 32,
+            "2022": 32,
+            "2023": 32
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -2423,11 +3830,37 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          18.73398846153846,
+          -17.730518003127095,
+          18.739719767701587,
+          -17.721376923076924
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 1858,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 354,
+        "class_90_herbaceous_wetland": 29,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     },
     {
       "component_id": "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a",
@@ -2528,6 +3961,51 @@
           "seasonality_valid_pixel_centers": 11615,
           "seasonality_water_pixels_gt_0": 1979,
           "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        },
+        "glad_global_surface_water_dynamics": {
+          "source": "GLAD Global Surface Water Dynamics",
+          "analysis_reference": "glad-water-1999-2023-analysis.json",
+          "annual_percent_interval": "1999 through 2023 (25 annual layers)",
+          "grid": "EPSG:4326; 0.00025 degree; approximately 30 m at equator",
+          "candidate_pixel_center_counts_by_tile": {
+            "10S_010E": 0,
+            "10S_020E": 11615
+          },
+          "annual_year_count": 25,
+          "annual_years_with_any_center_classified_ge_50_percent_water": 25,
+          "annual_years_with_valid_centers": 25,
+          "annual_centers_ge_50_min": 1536,
+          "annual_centers_ge_50_max": 2163,
+          "annual_water_center_counts_ge_50_by_year": {
+            "1999": 1746,
+            "2000": 1578,
+            "2001": 1723,
+            "2002": 1536,
+            "2003": 1536,
+            "2004": 1626,
+            "2005": 1638,
+            "2006": 1770,
+            "2007": 1718,
+            "2008": 1767,
+            "2009": 2037,
+            "2010": 2163,
+            "2011": 1883,
+            "2012": 1858,
+            "2013": 1981,
+            "2014": 1988,
+            "2015": 1908,
+            "2016": 1927,
+            "2017": 1900,
+            "2018": 1904,
+            "2019": 1806,
+            "2020": 1948,
+            "2021": 1822,
+            "2022": 1979,
+            "2023": 1921
+          },
+          "no_data_centers_within_candidate_masks": 0,
+          "tile_seam_aggregation": "Each annual record merges disjoint tile pixel centers by year; counts are not duplicated across the 10E/20E tile seam.",
+          "interpretation": "Water-classified pixel centers in this product provide dated product evidence only. They do not locate exact bank/midstream lines, identify waterbody type, prove historical channel position, or resolve original diagnostic status."
         }
       },
       "processing_cause": {
@@ -2535,17 +4013,597 @@
         "finding": "No exact data-processing defect or specific causal step has been reproduced."
       },
       "boundary_authority": {
-        "status": "unresolved",
-        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+        "status": "historical_demarcation_documented_river_midstream_unlocated",
+        "source": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and beacon schedule",
+        "source_path": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+        "source_sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+        "beacon_47_coordinate_lon_lat": [
+          18.41838888888889,
+          -17.389916666666668
+        ],
+        "candidate_bounds_lon_lat": [
+          20.809552130457654,
+          -18.0421,
+          20.89342479338843,
+          -17.9965
+        ],
+        "candidate_east_of_beacon_47_longitude": true,
+        "candidate_south_of_beacon_47_latitude": true,
+        "candidate_covers_beacon_47_coordinate": false,
+        "finding": "The original geometry bounds lie east and south of scheduled Beacon 47 at the Okavango/Cubango. The 1926 treaty defines a river-midstream segment beyond the beacon endpoint; no historical channel line is retained to locate this component against that rule.",
+        "limits": "This records a historical demarcation instrument and a coordinate comparison, not contemporary legal effect, territory, or an authoritative current line."
       },
       "administrative_assignment": "not made",
-      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water.",
+      "esa_worldcover_2021_v200": {
+        "reference_year": 2021,
+        "valid_pixel_centers": 104529,
+        "nodata_pixel_centers": 0,
+        "class_80_permanent_water": 19024,
+        "class_90_herbaceous_wetland": 51635,
+        "class_70_snow_ice": 0,
+        "physical_water_or_historic_course": "unresolved; 2021 annual land-cover class evidence only"
+      }
     }
   ],
   "global_limits": [
     "Areas are planar EPSG:4326 square degrees; not ground-area estimates.",
     "No geometry repair, clipping, snapping, reclassification, or territorial assignment was performed.",
     "No present water edge, historic channel, demarcation monument, or exact legal boundary was independently located.",
-    "Source overlap is geometric product comparison only and cannot identify authority or processing cause."
+    "Source overlap is geometric product comparison only and cannot identify authority or processing cause.",
+    "The 1928 Final Act schedule provides 47 beacon records through Beacon 47 at the Okavango/Cubango; all 21 candidate bounds lie east/south of that endpoint. No historical channel or current midstream alignment east of Beacon 47 was reconstructed; do not use current or 30 m raster water classes as a substitute."
+  ],
+  "glad_surface_water_aggregate": {
+    "source": "glad-water-1999-2023-analysis.json",
+    "annual_interval": "1999 through 2023; 25 unique years after tile-seam aggregation",
+    "contact_geometries": 10,
+    "contacts_with_valid_centers_each_year": 10,
+    "contacts_with_ge_50_percent_water_center_each_year": 10,
+    "positive_area_candidate_contact_intersections": 49,
+    "intersections_with_any_ge_50_percent_water_center_in_any_year": 39,
+    "intersections_with_any_valid_center_in_any_year": 46,
+    "intersections_with_no_ge_50_water_center_in_any_year": 10,
+    "interpretation": "Full annual and contact/pair results are retained in glad-water-1999-2023-analysis.json. Zero raster centers or no threshold detections do not establish dry ground."
+  },
+  "worldcover_2021_v200_positive_area_intersections": [
+    {
+      "component_id": "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 13716,
+      "class_90_herbaceous_wetland": 1864,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 88151,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+      "contact_id": "gb:NAM:ADM2:8085530B94702234009846",
+      "contact_name": "Luderitz",
+      "class_80_permanent_water": 5,
+      "class_90_herbaceous_wetland": 2,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 2756,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 14960,
+      "class_90_herbaceous_wetland": 6316,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 64555,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+      "contact_id": "gb:NAM:ADM2:8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 0,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 31,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 537,
+      "class_90_herbaceous_wetland": 1119,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 2507,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+      "contact_id": "gb:NAM:ADM2:8085530B15355770078360",
+      "contact_name": "Grootfontein",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 5,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 8,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+      "contact_id": "gb:AGO:ADM2:16411231B36562728226085",
+      "contact_name": "Calai",
+      "class_80_permanent_water": 7018,
+      "class_90_herbaceous_wetland": 4486,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 42922,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+      "contact_id": "gb:NAM:ADM2:8085530B43563455443088",
+      "contact_name": "Rundu Urban",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 0,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 0,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+      "contact_id": "gb:NAM:ADM2:8085530B54610932550654",
+      "contact_name": "Luderitz",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 5,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 16,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 472,
+      "class_90_herbaceous_wetland": 612,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 4658,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+      "contact_id": "gb:NAM:ADM2:8085530B15355770078360",
+      "contact_name": "Grootfontein",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 0,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 7,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+      "contact_id": "gb:AGO:ADM2:16411231B36562728226085",
+      "contact_name": "Calai",
+      "class_80_permanent_water": 559,
+      "class_90_herbaceous_wetland": 401,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 3089,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+      "contact_id": "gb:NAM:ADM2:8085530B25496891828693",
+      "contact_name": "Berseba",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 44,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 166,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 10680,
+      "class_90_herbaceous_wetland": 18210,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 76798,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+      "contact_id": "gb:NAM:ADM2:8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "class_80_permanent_water": 11,
+      "class_90_herbaceous_wetland": 869,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 4185,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 884,
+      "class_90_herbaceous_wetland": 1804,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 3100,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+      "contact_id": "gb:NAM:ADM2:8085530B15355770078360",
+      "contact_name": "Grootfontein",
+      "class_80_permanent_water": 4,
+      "class_90_herbaceous_wetland": 0,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 4,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 14709,
+      "class_90_herbaceous_wetland": 2137,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 65628,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+      "contact_id": "gb:NAM:ADM2:8085530B8620298556926",
+      "contact_name": "Tsumeb",
+      "class_80_permanent_water": 5,
+      "class_90_herbaceous_wetland": 740,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 4933,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+      "contact_id": "gb:AGO:ADM2:16411231B36562728226085",
+      "contact_name": "Calai",
+      "class_80_permanent_water": 13029,
+      "class_90_herbaceous_wetland": 13307,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 111531,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+      "contact_id": "gb:NAM:ADM2:8085530B43563455443088",
+      "contact_name": "Rundu Urban",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 571,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 1699,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+      "contact_id": "gb:NAM:ADM2:8085530B54610932550654",
+      "contact_name": "Luderitz",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 634,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 3042,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 5323,
+      "class_90_herbaceous_wetland": 11051,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 31498,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+      "contact_id": "gb:NAM:ADM2:8085530B25496891828693",
+      "contact_name": "Berseba",
+      "class_80_permanent_water": 1122,
+      "class_90_herbaceous_wetland": 1366,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 7625,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+      "contact_id": "gb:NAM:ADM2:8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 4,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 237,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+      "contact_id": "gb:AGO:ADM2:16411231B36562728226085",
+      "contact_name": "Calai",
+      "class_80_permanent_water": 47415,
+      "class_90_herbaceous_wetland": 114196,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 375811,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+      "contact_id": "gb:NAM:ADM2:8085530B25496891828693",
+      "contact_name": "Berseba",
+      "class_80_permanent_water": 1464,
+      "class_90_herbaceous_wetland": 9028,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 24149,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+      "contact_id": "gb:NAM:ADM2:8085530B54610932550654",
+      "contact_name": "Luderitz",
+      "class_80_permanent_water": 723,
+      "class_90_herbaceous_wetland": 983,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 5082,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 2876,
+      "class_90_herbaceous_wetland": 608,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 25926,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+      "contact_id": "gb:NAM:ADM2:8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "class_80_permanent_water": 1576,
+      "class_90_herbaceous_wetland": 421,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 4605,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 24371,
+      "class_90_herbaceous_wetland": 3934,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 139793,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+      "contact_id": "gb:NAM:ADM2:8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 36,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 2181,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+      "contact_id": "gb:NAM:ADM2:8085530B94702234009846",
+      "contact_name": "Luderitz",
+      "class_80_permanent_water": 540,
+      "class_90_herbaceous_wetland": 35,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 2338,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 13201,
+      "class_90_herbaceous_wetland": 22732,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 84544,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+      "contact_id": "gb:NAM:ADM2:8085530B15355770078360",
+      "contact_name": "Grootfontein",
+      "class_80_permanent_water": 565,
+      "class_90_herbaceous_wetland": 2841,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 9501,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 38856,
+      "class_90_herbaceous_wetland": 25225,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 215251,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+      "contact_id": "gb:AGO:ADM2:16411231B36562728226085",
+      "contact_name": "Calai",
+      "class_80_permanent_water": 1458,
+      "class_90_herbaceous_wetland": 1021,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 8123,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+      "contact_id": "gb:NAM:ADM2:8085530B54610932550654",
+      "contact_name": "Luderitz",
+      "class_80_permanent_water": 15,
+      "class_90_herbaceous_wetland": 809,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 8423,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+      "contact_id": "gb:NAM:ADM2:8085530B8620298556926",
+      "contact_name": "Tsumeb",
+      "class_80_permanent_water": 0,
+      "class_90_herbaceous_wetland": 6,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 1564,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 26709,
+      "class_90_herbaceous_wetland": 6927,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 113624,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+      "contact_id": "gb:NAM:ADM2:8085530B15355770078360",
+      "contact_name": "Grootfontein",
+      "class_80_permanent_water": 1,
+      "class_90_herbaceous_wetland": 17,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 1390,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+      "contact_id": "gb:NAM:ADM2:8085530B8620298556926",
+      "contact_name": "Tsumeb",
+      "class_80_permanent_water": 287,
+      "class_90_herbaceous_wetland": 180,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 14658,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 122,
+      "class_90_herbaceous_wetland": 1326,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 1509,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 4386,
+      "class_90_herbaceous_wetland": 531,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 31775,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+      "contact_id": "gb:NAM:ADM2:8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "class_80_permanent_water": 6,
+      "class_90_herbaceous_wetland": 123,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 4841,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+      "contact_id": "gb:AGO:ADM2:16411231B28551746118834",
+      "contact_name": "Cuangar",
+      "class_80_permanent_water": 349,
+      "class_90_herbaceous_wetland": 29,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 1848,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+      "contact_id": "gb:NAM:ADM2:8085530B32015186497374",
+      "contact_name": "Rehoboth West",
+      "class_80_permanent_water": 5,
+      "class_90_herbaceous_wetland": 0,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 9,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a",
+      "contact_id": "gb:AGO:ADM2:16411231B14510444140190",
+      "contact_name": "Dirico",
+      "class_80_permanent_water": 18142,
+      "class_90_herbaceous_wetland": 46757,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 95417,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    },
+    {
+      "component_id": "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a",
+      "contact_id": "gb:NAM:ADM2:8085530B15355770078360",
+      "contact_name": "Grootfontein",
+      "class_80_permanent_water": 881,
+      "class_90_herbaceous_wetland": 4878,
+      "class_70_snow_ice": 0,
+      "valid_pixel_centers": 9113,
+      "nodata_pixel_centers": 0,
+      "classification": "2021 land-cover classes; not an exact water-edge or historic-course determination"
+    }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checked_utc": "2026-10-07T03:00:00Z",
+  "checked_utc": "2026-10-07",
   "references": [
     {
       "id": "UK Treaty Series 29 (1926), Cmd. 2777",
@@ -23,10 +23,16 @@
     {
       "id": "MAWLR Water Basin Map 2008.pdf",
       "operator": "Namibia Ministry of Agriculture, Water and Land Reform (MAWLR)",
-      "url": "https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297598",
-      "document_date": "Portal identifies Version 1.0 Approved; extracted PDF metadata says created 2008-12-19 and modified 2017-02-10; portal lists 1.2 MB",
-      "retrieval_status": "metadata verified from official portal search result; local HTTPS retrieval timed out before bytes were received; PDF not visually inspected and no local hash is available",
-      "use_limit": "Basin context only unless inspection demonstrates a suitable scale and mapped edge; a basin map is not exact river-bank, historic-course, or international-boundary evidence."
+      "url": "https://mawlr.gov.na/documents/268157/1297437/Water+Basin+Map+2008.pdf/3db54901-f00f-1cca-1a25-042f0472cf95?t=1668084455213&download=true",
+      "document_date": "Map title Water Basins, printed scale 1:2,000,000; PDF metadata created 2008-12-19 and modified 2017-02-10.",
+      "retrieval_status": "Downloaded from the direct document URL linked in the official Ministry portal response, retained and visually inspected. The view_file endpoint itself returned HTML; that response is preserved separately as sources/mawlr-water-basin-map-portal-response.html.",
+      "use_limit": "At 1:2,000,000 and without a verified candidate-scale georeference, this is regional context only, not a bank line, historic channel survey, beacon record, or exact boundary geometry.",
+      "portal_item_url": "https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297598",
+      "local_file": "sources/mawlr-water-basin-map-2008.pdf",
+      "bytes": 1296417,
+      "sha256": "35d3ee6a03d3d690788e90448a46248c5456c0029cbfe0f9b2aad18149514100",
+      "pdf_pages": 1,
+      "relevant_content": "Regional water-basin, river, road and administrative context across Namibia, including the Kunene and Okavango–Omatako basin areas."
     },
     {
       "id": "Integrated Water Resources Management Plan for Namibia - Summary",
@@ -141,6 +147,119 @@
         "sources/jrc-gsw-2024/seasonality_2024.xml",
         "sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf"
       ]
+    },
+    {
+      "id": "UK Treaty Series No. 28 (1931), Cmd. 3896; enclosed 1928 Final Act and Beacon schedule",
+      "operator": "United Kingdom Foreign, Commonwealth and Development Office treaty archive",
+      "url": "https://treaties.fcdo.gov.uk/data/Library2/pdf/1931-TS0028.pdf",
+      "local_file": "sources/uk-treaty-series-1931-ts-28-cmd-3896.pdf",
+      "bytes": 624269,
+      "sha256": "8eac7e45ac296353b829bafe5c076e5299b459908ff8cb936ebb630a3e123541",
+      "pdf_pages": 16,
+      "document_date": "Exchange of Notes Lisbon 1931-04-29; enclosed South-West Africa–Angola Boundary Demarcation Commission Final Act signed at Kakeri 1928-09-23.",
+      "inspected_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16
+      ],
+      "relevant_content": "The 1928 Final Act states the line was defined by chords joining 47 main beacons, starting on the left bank of the Kunene at Oruahakana/Ruacana Falls and ending at Beacon 47 at Kakeri on the Okavango. The schedule gives Beacon 47 at 17°23′23.7″ S, 18°25′06.2″ E and describes it on a limestone ridge 240 m west of the river bank. It reports astronomical observations at intervals no greater than 50 km and beacons no greater than 10 km apart. The 1931 exchange records the Union Government’s acceptance of the demarcation/description, and the Portuguese reply states that the exchange of notes shall be considered the instruments of ratification of the 1928 Kakeri Agreement and its annexes.",
+      "use_limit": "This is primary evidence of the historical demarcation and its scheduled endpoint. It does not provide georeferenced 1928 river midstream geometry east of Beacon 47, establish current beacon condition, or decide present legal effect. All 21 candidate geometry bounds lie east and south of Beacon 47; their relation to the treaty’s river-midstream line remains unresolved."
+    },
+    {
+      "id": "GLAD Global Surface Water Dynamics, tiles 10S_010E and 10S_020E, 1999–2023 objects",
+      "operator": "Global Land Analysis and Discovery / University of Maryland; Google Cloud Storage public objects",
+      "url": "https://storage.googleapis.com/earthenginepartners-hansen/waterC2/download.html",
+      "metadata_endpoint": "https://storage.googleapis.com/storage/v1/b/earthenginepartners-hansen/o",
+      "local_files": [
+        "sources/glad-water-1999-2023/object-metadata.json",
+        "sources/glad-water-1999-2023/download-receipts-original.json",
+        "glad-water-1999-2023-analysis.json",
+        "glad-water-1999-2023-reproduction-runs.json",
+        "download_glad_water_tiles.py",
+        "reproduce_glad_water_history.py"
+      ],
+      "retrieval_status": "All 74 generation-pinned COGs (25 annual percent layers and 12 monthly climatologies for each of two tiles) downloaded, checked against GCS size and MD5 and SHA-256 hashed; 2,383,301,892 bytes total. Original raster bytes are in the local review cache rather than Git; the packet records object generations and hashes and includes a re-download/verification script. The actual object inventory ends at 2023 even though the product page currently advertises through 2025.",
+      "relevant_content": "The 30 m, EPSG:4326 pixel-center analysis finds at least one >=50% water-classified center in each of the 21 candidates in every annual layer 1999–2023, and in 39 of 49 positive-area candidate/contact intersections in at least one year. The analysis JSON was reproduced byte-identically twice.",
+      "use_limit": "A distinct classification product using Landsat 5/7/8/9, not an independent sensor family from other Landsat-derived water products. No per-pixel observation counts are supplied. Annual percentages and month-of-year climatologies cannot date individual detections or establish a 1928 watercourse/bank. Mixed pixels, seasonal vegetation, observability, registration and the 30 m grid limit interpretation.",
+      "object_metadata_sha256": "32cc86e9bf9d01939453825e1297ff4f4d72849c2b2822eff8547eed745db4c6",
+      "original_download_receipts_sha256": "bc9bb37821dd7149db54f4fca101d111e3ba6f2b9fe646f304e6dfde1cd4563b",
+      "analysis_output_sha256": "1ee2725475b7968174483ec8033b5de23b065788cb6136100c2e8bbbe036714f",
+      "reproduction_run_log_sha256": "51df8198622df8e9294191a2adb6acbffa5b21a15c14f6c684ebc3ec2e40cdd3"
+    },
+    {
+      "id": "USGS Landsat MSS Collection 2 L1 STAC scene-footprint query for family bbox, 1972–1982 search interval",
+      "operator": "United States Geological Survey / EROS",
+      "url": "https://landsatlook.usgs.gov/stac-server/search",
+      "local_files": [
+        "sources/landsat-mss-1972-1982/search-request.json",
+        "sources/landsat-mss-1972-1982/search-response.json",
+        "sources/landsat-mss-1972-1982/candidate-footprint-report.json"
+      ],
+      "retrieval_status": "STAC returned 65 Tier 2 footprints intersecting the family query (all 21 candidates and all 10 contacts), including 42 L1TP and 23 L1GS items from Landsat 1–3, dated 1972–1978. The scene browse/band assets redirect to USGS EROS sign-in; imagery content was not retrieved or inspected.",
+      "use_limit": "Footprint overlap is only a catalog lead, not evidence that water is visible or that a candidate’s historic river edge can be resolved. Tier 2 registration uncertainty and cloud cover must be evaluated from source scene products before use.",
+      "request_bytes": 317,
+      "request_sha256": "627da30c35bd413aa73b614297e375ff6b78f2774b9bcc4a8666eadecd6c3114",
+      "response_bytes": 842735,
+      "response_sha256": "ff73aebd9489256233edf311f44bff3cb14584b020d1ea71e7616911933934d8",
+      "candidate_footprint_report_bytes": 280434,
+      "candidate_footprint_report_sha256": "b6d5bbaa6dadf09b0536c8a6930e9f745127de9c009a8b0bf02a6478eaa359a9"
+    },
+    {
+      "id": "ESA WorldCover 2021 v200 Sentinel-1/Sentinel-2 10 m annual land-cover classification",
+      "operator": "ESA WorldCover consortium",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "manual_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/docs/WorldCover_PUM_V2.0.pdf",
+      "local_files": [
+        {
+          "file": "sources/worldcover-2021-v200/ESA_WorldCover_10m_2021_v200_S18E018_Map.tif",
+          "bytes": 89118646,
+          "sha256": "d3f98f6146916f6d7e2b47f85a2d34916f50f8ec7bd3efa3fadd9bbaea668a5c"
+        },
+        {
+          "file": "sources/worldcover-2021-v200/ESA_WorldCover_10m_2021_v200_S21E018_Map.tif",
+          "bytes": 35359810,
+          "sha256": "d22c3838c1b2b1ca8b3b94a3aa55a7d97c73836abc7619a3ecc05dfafc1a1c2f"
+        },
+        {
+          "file": "sources/worldcover-2021-v200/WorldCover_PUM_V2.0.pdf",
+          "bytes": 4102952,
+          "sha256": "4301a3d95260d88bd4315f43ccf2a12ef74ad391109b9f36e22b6e51d8490107"
+        }
+      ],
+      "retrieval_status": "Two source COGs covering all 21 candidates and the 49 positive-area candidate/contact intersections were retained from the official 2021 v200 dataset path. Full source-file SHA-256 hashes and dimensions are included in worldcover-2021-analysis.json. Output was reproduced twice byte-identically using source pixel centers from the original EPSG:4326 affine grid.",
+      "use_limit": "Annual 2021 land-cover labels, not dated water observations or shoreline/bank vectors. Manual class 80 is permanent water bodies (water covering >9 months per year); class 90 is herbaceous vegetation permanently or regularly flooded; class 70 is snow/ice. Class labels do not locate exact banks, distinguish historic channels, or decide boundary authority. Product classification is partly based on Sentinel-1 and Sentinel-2; validation estimates are global and not candidate-specific. Per-geometry center counts are not deduplicated areas. A direct global-center mask is retained; comparison with Rasterio local window masks produced 61 differing center decisions across all 70 analyzed masks, so boundary/mask sensitivity is disclosed.",
+      "source_cogs": [
+        {
+          "file": "sources/worldcover-2021-v200/ESA_WorldCover_10m_2021_v200_S18E018_Map.tif",
+          "bytes": 89118646,
+          "sha256": "d3f98f6146916f6d7e2b47f85a2d34916f50f8ec7bd3efa3fadd9bbaea668a5c"
+        },
+        {
+          "file": "sources/worldcover-2021-v200/ESA_WorldCover_10m_2021_v200_S21E018_Map.tif",
+          "bytes": 35359810,
+          "sha256": "d22c3838c1b2b1ca8b3b94a3aa55a7d97c73836abc7619a3ecc05dfafc1a1c2f"
+        }
+      ],
+      "manual": {
+        "file": "sources/worldcover-2021-v200/WorldCover_PUM_V2.0.pdf",
+        "bytes": 4102952,
+        "sha256": "4301a3d95260d88bd4315f43ccf2a12ef74ad391109b9f36e22b6e51d8490107"
+      },
+      "analysis_output": {
+        "bytes": 47103,
+        "sha256": "0ad8eb9cea29c56384d082d7abc7ec2d2dbeddf910207e3c5c990fe635d26c2b"
+      },
+      "reproduction_script": "reproduce_worldcover_2021.py",
+      "reproduction_script_sha256": "8d152fd5c6d57528658aef41c4206081605ed77a48eed9e886d120d2ce24d039"
     }
   ],
   "spatial_screen": {
@@ -159,7 +278,7 @@
   },
   "separate_classifications": {
     "consumed_source_geometry": "Source products overlap candidate footprints by positive area; see source-geometry-comparison.json.",
-    "current_physical_water_or_historic_course": "JRC GSW v1.5 provides separate 1984–2024 occurrence and 2024 seasonality observations at approximately 30 m; positive water-classified pixels occur within all 21 candidates. This supports water occurrence within the candidate footprints, not exact shoreline/current course or historical channel location. Waterbody type, floods/wetlands, collection-transition geolocation shift, and suitability for any legal line remain limits.",
+    "current_physical_water_or_historic_course": "JRC GSW v1.5 provides separate 1984–2024 occurrence and 2024 seasonality observations at approximately 30 m; positive water-classified pixels occur within all 21 candidates. This supports water occurrence within the candidate footprints, not exact shoreline/current course or historical channel location. Waterbody type, floods/wetlands, collection-transition geolocation shift, and suitability for any legal line remain limits. ESA WorldCover 2021 v200 independently adds 10 m Sentinel-1/Sentinel-2 annual land-cover classes: class 80 occurs in all 21 candidate masks and 38/49 positive-area overlaps; class 90 occurs in all 21 and 44/49 overlaps. Class 80/90 occurs in 46/49 overlaps. This supports class presence in 2021 labels only; it is not exact bank or historic-course evidence.",
     "processing_cause": "Unresolved; no exact processing defect has been reproduced.",
     "international_boundary_authority": "The 1926 agreement gives a treaty framework and requires joint demarcation, with archival catalogue leads for 1927–28 survey/commission records. Those underlying survey and beacon records are not inspected. Exact demarcated/current alignment across the candidate coordinates remains unresolved.",
     "administrative_assignment": "Not made."

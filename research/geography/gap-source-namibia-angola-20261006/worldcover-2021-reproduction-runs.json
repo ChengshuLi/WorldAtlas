@@ -1,0 +1,47 @@
+{
+  "runs": [
+    {
+      "run": 1,
+      "date_utc": "2026-10-07",
+      "command": "python reproduce_worldcover_2021.py",
+      "analysis_output_bytes": 47103,
+      "analysis_output_sha256": "0ad8eb9cea29c56384d082d7abc7ec2d2dbeddf910207e3c5c990fe635d26c2b",
+      "candidate_classifications_sha256": "b5a35eefd97d14b70e0825f1d36932198e98750cb89e40363b088cce66d64bb7",
+      "reproduction_script_sha256": "8d152fd5c6d57528658aef41c4206081605ed77a48eed9e886d120d2ce24d039"
+    },
+    {
+      "run": 2,
+      "date_utc": "2026-10-07",
+      "command": "python reproduce_worldcover_2021.py",
+      "analysis_output_bytes": 47103,
+      "analysis_output_sha256": "0ad8eb9cea29c56384d082d7abc7ec2d2dbeddf910207e3c5c990fe635d26c2b",
+      "candidate_classifications_sha256": "b5a35eefd97d14b70e0825f1d36932198e98750cb89e40363b088cce66d64bb7",
+      "reproduction_script_sha256": "8d152fd5c6d57528658aef41c4206081605ed77a48eed9e886d120d2ce24d039"
+    }
+  ],
+  "environment": {
+    "python": "3.11.10",
+    "numpy": "2.4.6",
+    "rasterio": "1.4.4",
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "inputs": {
+    "original_components_sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+    "source_contact_features_sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14",
+    "worldcover_s18e018_sha256": "d3f98f6146916f6d7e2b47f85a2d34916f50f8ec7bd3efa3fadd9bbaea668a5c",
+    "worldcover_s21e018_sha256": "d22c3838c1b2b1ca8b3b94a3aa55a7d97c73836abc7619a3ecc05dfafc1a1c2f"
+  },
+  "scope": {
+    "components": 21,
+    "standalone_contacts": 0,
+    "positive_area_candidate_contact_intersections": 49,
+    "standalone_contacts_analyzed_in_glad": 10
+  },
+  "notes": [
+    "The source files and byte-identical outputs are retained. The input candidate-classifications file is provenance-pinned in the output, but was not used to calculate raster memberships.",
+    "Rasterio local-window comparison differs in 61 pixel-center membership decisions across the 70 candidate/intersection masks. Report the exact original-affine global-center method and mismatch count; do not characterize these as 61 observed surface differences.",
+    "Pixel centers exactly on subject boundaries: zero in this set. NoData class 0 is counted separately and is not treated as evidence of absence of water.",
+    "Candidate classifications now include per-component and per-overlap WorldCover summaries; the two raster runs were repeated after that provenance input changed. Membership results and output hashes match between those two runs."
+  ]
+}
