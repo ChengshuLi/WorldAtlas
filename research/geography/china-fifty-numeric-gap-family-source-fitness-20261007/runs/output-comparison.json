@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "comparison": "whole output bytes",
+  "final_runs": [
+    {
+      "run": "final-1",
+      "execution": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1-execution.json",
+      "bytes": 633213,
+      "sha256": "ea270f3be4fe993dbe5e9d1d567d8efef4348f3ea1a27505b91b762ea8505340"
+    },
+    {
+      "run": "final-2",
+      "execution": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2-execution.json",
+      "bytes": 633213,
+      "sha256": "ea270f3be4fe993dbe5e9d1d567d8efef4348f3ea1a27505b91b762ea8505340"
+    }
+  ],
+  "byte_for_byte_equal": true,
+  "head": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7",
+  "complete_family_ids": [
+    "gap-source-batch:61a32ae390d6bc77599ca035",
+    "gap-source-batch:aae5d81537d301c52e5303d1"
+  ],
+  "component_count": 50,
+  "contact_count": 14,
+  "contacts": 14,
+  "local_contradictions": 5,
+  "counts_by_family": [
+    {
+      "family": "gap-source-batch:61a32ae390d6bc77599ca035",
+      "components": 34,
+      "contacts": 9,
+      "positive_length_neighbor_ids": 8,
+      "physical_status_counts": {
+        "mixed-source-support": 10,
+        "unknown": 24
+      },
+      "administrative_source_status_counts": {
+        "no-source-intersection-in-literal-domain": 4,
+        "positive-source-coverage-mixed-partial-or-subject-unresolved": 30
+      }
+    },
+    {
+      "family": "gap-source-batch:aae5d81537d301c52e5303d1",
+      "components": 16,
+      "contacts": 5,
+      "positive_length_neighbor_ids": 5,
+      "physical_status_counts": {
+        "mixed-source-support": 5,
+        "outside-mapped-L1-context": 1,
+        "unknown": 10
+      },
+      "administrative_source_status_counts": {
+        "no-source-intersection-in-literal-domain": 1,
+        "positive-source-coverage-mixed-partial-or-subject-unresolved": 15
+      }
+    }
+  ]
+}
