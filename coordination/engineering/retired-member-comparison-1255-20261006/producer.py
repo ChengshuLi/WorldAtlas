@@ -1,5 +1,5 @@
 """Complete frozen retired-member coverage comparison for issue1255 only."""
-import argparse,collections,gzip,hashlib,json,pathlib,platform,subprocess,sys,time,zlib
+import argparse,collections,gzip,hashlib,json,pathlib,platform,subprocess,sys,time,zlib,re
 import numpy,shapely
 from shapely.geometry import mapping
 P=pathlib.Path(__file__).resolve().parent;R=P.parents[2];PREFIX=str(P.relative_to(R))
@@ -35,6 +35,7 @@ class Objects:
 
 
 def run(commit,target):
+    if not isinstance(commit,str)or not re.fullmatch('[a-f0-9]{40}',commit):raise ValueError('Immutable execution commit required before Git')
     versions={'python':platform.python_version(),'numpy':numpy.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string,'zlib':zlib.ZLIB_VERSION}
     expected={'python':'3.12.14','numpy':'2.3.5','shapely':'2.1.2','geos':'3.13.1','zlib':'1.2.12'}
     if versions!=expected:raise ValueError('Pinned numerical runtime required')

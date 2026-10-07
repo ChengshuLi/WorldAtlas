@@ -24,6 +24,10 @@ def run(commit,out):
         row=compare(feature(name,g),u);assert row['status']==status and row['administrative_assignment']is None and row['physical_status']=='unverified';results.append({'control':name,'outcome':'passed'})
     invalid={'id':'bad','geometry':{'type':'Polygon','coordinates':[[[0,0],[1,1],[1,0],[0,1],[0,0]]]}}
     d,v=member_union([invalid]);assert v is None and d['status']=='unknown-invalid-original-member';results.append({'control':'invalid original member is unknown','outcome':'passed'})
+    for malformed in [None,{'type':'Polygon','coordinates':[]}]:
+        d,v=member_union([{'id':'malformed','geometry':malformed}]);assert v is None and d['status']=='unknown-invalid-original-member'
+        r=compare({'id':'malformed','geometry':malformed},u);assert r['status'].startswith('unknown-')and r['administrative_assignment']is None
+        results.append({'control':'malformed/empty geometry retained unknown','outcome':'passed'})
     rows=[]
     class Broken:
         is_empty=False;is_valid=True;geom_type='Polygon'

@@ -18,7 +18,7 @@ def member_union(records):
             if g.is_empty or not g.is_valid or g.geom_type not in ('Polygon','MultiPolygon'):
                 invalid.append({'id':r['id'],'status':'invalid-empty-or-nonpolygon-original-member'})
             else: geoms.append(g)
-        except (GEOSException,ValueError,TypeError,KeyError) as e:
+        except (GEOSException,ValueError,TypeError,KeyError,AttributeError) as e:
             invalid.append({'id':r['id'],'status':'failed-original-member-read','failure_class':type(e).__name__})
     if invalid: return {'status':'unknown-invalid-original-member','invalid_members':invalid},None
     try:
@@ -36,6 +36,9 @@ def compare(component,union):
         row['status']='unknown-original-member-union'; return row
     try:
         g=shape(component['geometry'])
+    except (GEOSException,ValueError,TypeError,KeyError,AttributeError)as e:
+        row['status']='unknown-failed-original-component-read';row['failure_class']=type(e).__name__;return row
+    try:
         if g.is_empty or not g.is_valid or g.geom_type not in ('Polygon','MultiPolygon'):
             row['status']='unknown-invalid-empty-or-nonpolygon-component'; return row
         ix=g.intersection(union); diff=g.difference(union)
