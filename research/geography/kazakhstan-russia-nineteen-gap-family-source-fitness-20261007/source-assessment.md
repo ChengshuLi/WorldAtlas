@@ -1,0 +1,36 @@
+# Source and physical evidence assessment
+
+## Decision summary
+
+The assigned cohort closes at 19 gap families, 52 components, and 41 Atlas contacts. It contains zero numeric-first families. Against the original 2017 geoBoundaries ADM2 source features, 28 components have one compatible recorded source subject uniquely covering the component; 24 are partial or unbound. Four candidates have zero-area-only administrative contacts, and the remaining administrative observations are positive-coverage cases. These are geometric/source-fitness classifications from the pinned products, not decisions about which country owns territory.
+
+Every component has `mapped-land-support` in the retained GSHHG-based physical comparison, but the physical source is heterogeneous and authority is unapproved. All 52 water-status values are `unverified`; the run found no independent, contemporary hydrology or land-cover evidence that resolves narrow shoreline, river-channel, seasonal-water, or source-registration uncertainty. Therefore mapped-land-support must not be read as proof of dry land. No geometry was changed or proposed, and all source fitness remains unapproved for the cohort.
+
+The component-level records are in [`executions/run-1/candidate-assessment.jsonl`](executions/run-1/candidate-assessment.jsonl). Family aggregation and closure are in [`executions/run-1/family-reconciliation.json`](executions/run-1/family-reconciliation.json). Full contact and source lineage is in [`executions/run-1/contact-lineage.json`](executions/run-1/contact-lineage.json). Source metadata and measured product counts are in [`executions/run-1/source-products.json`](executions/run-1/source-products.json).
+
+## Administrative source fitness
+
+The observed source products are geoBoundaries `gbOpen` 2017 ADM2 single-country layers for Kazakhstan and Russia, pinned to release commit `9469f09592ced973a3448cf66b6100b741b64c0d`. They are stored in CRS84. The products derive from OpenStreetMap and Wambacher sources. Their metadata reports source update dates in January and March 2023 and a build date of December 12, 2023. The consumed layers used by the original route were the simplified files (KAZ: 923,186 bytes / 174 features; RUS: 26,338,801 bytes / 2,327 features). geoBoundaries documents [simplified geometry as less accurate and intended for faster rendering](https://www.geoboundaries.org/simplifiedDownloads.html), and its [API documentation](https://www.geoboundaries.org/api.html) distinguishes the full and simplified download links. These consumed versions are not suitable as legal or survey-grade boundary authority.
+
+The full-resolution and simplified products at the same pinned release have matching, unique `shapeID` sets: 174/174 for KAZ and 2,327/2,327 for RUS. The full RUS source file hash is `74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0` and was retained in the local restoration cache because it is 120,489,189 bytes. The comparison is limited to feature identity; it did not compare full and simplified geometries for equality or quantify their positional differences. The RUS metadata advertises 2,328 features, one more than the 2,327 actually present in both pinned products. That discrepancy is a source metadata defect/unknown that should be resolved with the data publisher before relying on completeness.
+
+The 28/24 component classes preserve the original source-fitness result and are not inferred from the simplified products alone. The per-component evidence preserves candidate-to-source feature identities, source record hashes, coverage classifications, and Atlas contact IDs. `hierarchy_disagreement_areas_m2` is zero at each reported level in this cohort; this only describes the observed overlay result and does not validate the hierarchy source.
+
+## Physical evidence and uncertainty
+
+The physical comparison uses [GSHHG 2.3.7, released June 15, 2017](https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html), a compilation combining WVS shorelines with WDBII rivers and borders, with heterogeneous source observation dates. The retained run labels all 52 components `mapped-land-support`, but records physical authority as `unapproved`. Its recorded limitations include shoreline registration and resolution uncertainty, unrecorded river widths, seasonal wetness, and observation-date mismatch. The physical table’s `water_status` is `unverified` for all 52 components. These records are useful to identify where mapped land support exists in that source; they do not establish physical ground truth.
+
+The full physical records in the two repeated science runs match each other and the packed source records after the explicit lossless field restoration recorded by the producer. This verifies custody and repeatability of the comparison outputs, not the correctness, currency, or authority of the underlying shoreline evidence. No component geometry was proposed or edited in this assessment.
+
+## Authority and legal relevance
+
+The geoBoundaries metadata and source history are not legal enactments or official survey records. For Kazakhstan, the [Constitutional Law on the Administrative-Territorial Structure](https://adilet.zan.kz/rus/docs/Z2600000300), effective July 1, 2026, describes the legal process for establishing/changing administrative boundaries. Its Article 20 calls for a map with coordinate description in the national reference system, with signatures from designated authorities, for the covered change procedure. That is a useful indication of the type of primary evidence to seek; it does not authenticate these 2017 geoBoundaries files or establish the current state of any candidate boundary.
+
+For Russia, the official publication portal contains [Rosreestr Order No. P/0559 of December 1, 2021](https://publication.pravo.gov.ru/document/0001202112300112), which sets requirements for displaying the Russian Federation’s boundaries and the territories of its subjects and municipalities on map materials. This is a map-display standard, not a boundary dataset or proof of the position of any assigned boundary. This packet did not obtain an official, boundary-specific register extract, approved delimitation/formation act, or coordinate-bearing map tied to the candidate components, so it makes no Russian boundary-law conclusion. A subsequent authority review should obtain those records from the competent authority. Until the necessary legal instruments and authoritative geometry are independently matched, every source-fitness and physical observation remains unapproved.
+
+## Follow-up evidence needed
+
+1. Resolve the RUS advertised-versus-observed feature count with geoBoundaries and document whether the extra metadata count is a stale count or a missing feature.
+2. Obtain current authoritative boundary records for the 19 families from the competent agencies in both states, with reference system, effective date, approval/signature provenance, and source identifiers.
+3. For candidates where physical truth affects a decision, acquire current high-resolution imagery, hydrography, and/or authoritative cadastral/topographic evidence, and evaluate the stated registration and temporal limits.
+4. Only after source authority and physical applicability are resolved should any separately authorized geometry proposal be considered.

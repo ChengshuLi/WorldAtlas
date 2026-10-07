@@ -1,0 +1,39 @@
+{
+  "run": 2,
+  "command": "python3.12 build_assessment.py --out executions/run-2",
+  "started_utc": "2026-10-07T07:12:57Z",
+  "finished_utc": "2026-10-07T07:16:34Z",
+  "exit_code": 0,
+  "outcome": "PASS",
+  "producer_sha256": "a9c6fa9fb93e3a045f60d8ed031e0f2205b8c890e65209fb71b9e3f2f4440b04",
+  "input_manifest_sha256": "b978741af412988f07f02de49bc6f54e18c68c2809008c63cab76955462ca0e4",
+  "output_manifest": {
+    "contacts": 41,
+    "families": 19,
+    "inputs_frozen": true,
+    "outputs": [
+      {
+        "bytes": 167901,
+        "path": "candidate-assessment.jsonl",
+        "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba"
+      },
+      {
+        "bytes": 233591,
+        "path": "contact-lineage.json",
+        "sha256": "f5e13688c1db5e692c6746cf66c8dc2a94dc0d9d55885a7e159d73b8cacc914b"
+      },
+      {
+        "bytes": 11970,
+        "path": "family-reconciliation.json",
+        "sha256": "628d460e69c93ea9bc82a9b330d46b03e8bfa7cb4e6c3c40978aa376580ca426"
+      },
+      {
+        "bytes": 2268,
+        "path": "source-products.json",
+        "sha256": "f0a0a90219199f092032b406799bd451845710efd6f3456610431574bc38e809"
+      }
+    ],
+    "rows": 52
+  },
+  "output_manifest_sha256": "bfa755cc6770c193e04b5704b04d13e7325e648458144f607f4345ee60abab89"
+}

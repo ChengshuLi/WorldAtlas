@@ -1,0 +1,14 @@
+{
+  "attempt": 1,
+  "command": "python3.12 build_assessment.py --out executions/run-1",
+  "producer_sha256_at_attempt": "90a7206154d6b5ece68cbd1d6a50db0115c57d2a061e108a892a7bbf1f6d0cf2",
+  "input_manifest_sha256": "36e5dca337dcec8bb1cfd5919e2255d7cc3c72776c4ff523d31dfe8c09d61c2e",
+  "started_utc": null,
+  "started_time_capture": "not captured by the initial execution invocation",
+  "finished_utc_observed": "2026-10-07T06:34:14Z",
+  "elapsed_seconds_observed": 409,
+  "exit_code": 1,
+  "outcome": "failed-before-output",
+  "stderr": "KeyError: 'admin_bindings'; the complete routing body is named 'admin-bindings'.",
+  "superseded": true
+}

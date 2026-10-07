@@ -1,0 +1,14 @@
+{
+  "attempt": 4,
+  "command": "python3.12 build_assessment.py --out executions/run-1",
+  "producer_sha256_at_attempt": "48db767f0add748dc58d5e8a308fe5b87aa9f08843c87e294a0e2e1aeff5fe6d",
+  "input_manifest_sha256": "646ebbdac433aa87e3af43daaeb7b08d0cae56ac5cc5d097453a0d0d0c420f37",
+  "started_utc": "2026-10-07T06:49:50Z",
+  "finished_utc": null,
+  "elapsed_seconds_observed": 102,
+  "exit_code": 1,
+  "outcome": "failed-before-output",
+  "stderr": "ValueError: physical row identity hash mismatch for the first assigned component.",
+  "cause": "The routing row digest binds the packed physical result in the routing source group, not the expanded full scientific row. Its original checksum is reproduced by the exact fbc3c4c source packed row. The revised producer now separately checks both full runs and exact packed-to-full lossless restoration.",
+  "superseded": true
+}

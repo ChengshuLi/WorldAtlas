@@ -1,0 +1,28 @@
+{
+  "method_id": "assessment-producer",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "case": "omitted-component",
+      "rejected": true,
+      "reason": "candidate roster differs"
+    },
+    {
+      "case": "duplicate-component",
+      "rejected": true,
+      "reason": "duplicate candidate identity"
+    },
+    {
+      "case": "foreign-or-rebound-family-member",
+      "rejected": true,
+      "reason": "family assignment differs"
+    },
+    {
+      "case": "source-identity-drift",
+      "rejected": true,
+      "reason": "full/simplified source ID digest mismatch"
+    }
+  ],
+  "claim_limit": "Mutated identity/closure controls are rejected; does not test legal or physical truth."
+}
