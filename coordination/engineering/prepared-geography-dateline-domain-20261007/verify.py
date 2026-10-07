@@ -102,7 +102,7 @@ def verify(one,two,science_commit,reader_commit):
             if row['strict_default']['status']!='valid':
                 failures.append(identity)
                 if p.canonical_json(row['strict_default']['original_geometry'])!=p.canonical_json(feature['geometry']):raise ValueError('Original defect evidence lost')
-                if row!=p.validate_feature(feature,path,ordinal):raise ValueError('Complete exceptional-feature method replay differs')
+                if p.canonical_json(row)!=p.canonical_json(p.validate_feature(feature,path,ordinal)):raise ValueError('Complete exceptional-feature method replay differs')
             if row['prepared']['status']!='valid':raise ValueError('Prepared failure hidden by successful receipt')
             if not re.fullmatch('[a-f0-9]{64}',row['prepared']['canonical_geometry_sha256']):raise ValueError('Missing canonical measurement binding')
             contacts+=len(row['prepared']['seam_contacts'])

@@ -19,7 +19,7 @@ node='/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies
 commands=[([sys.executable,'-B','test/geographic-regression.py'],40),
           ([sys.executable,'-B','test/geographic-adjudication.py'],14),
           ([sys.executable,'-B',str(CASE/'controls.py'),'--code-commit',args.science_commit],9),
-          ([node,'--test','test/trusted-geography-check.test.mjs','test/merge-integration.test.mjs','test/merge-integration-entrypoint.test.mjs'],51)]
+          ([node,'--test','--test-reporter=tap','test/trusted-geography-check.test.mjs','test/merge-integration.test.mjs','test/merge-integration-entrypoint.test.mjs'],51)]
 out=CASE/'verification';out.mkdir(exist_ok=True)
 records=[]
 for ordinal,(command,count) in enumerate(commands):
