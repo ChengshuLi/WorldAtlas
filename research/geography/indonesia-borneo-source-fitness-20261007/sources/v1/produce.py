@@ -36,7 +36,7 @@ ATLAS_CONTACTS = {
     'gb:IDN:ADM2:22746128B96540112180119',
 }
 RUN_ONE = 'run-five'
-CURRENT_SCOPE_RECEIPT = 'scope-extraction-current-431ecbbf.json'
+CURRENT_SCOPE_RECEIPT = 'scope-extraction-current-745cc86a.json'
 
 sys.path.insert(0, str(REPO / 'scripts'))
 from evidence.immutable import Baseline as BootstrapBaseline  # noqa: E402
