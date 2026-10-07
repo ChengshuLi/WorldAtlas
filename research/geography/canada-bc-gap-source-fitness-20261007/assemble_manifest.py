@@ -114,7 +114,7 @@ def main():
     control_path = ROOT / "vintages/run-16-controls.json"
     control_bytes = control_path.read_bytes()
     control_result = json.loads(control_bytes)
-    if control_result.get("counts", {}).get("controls") != 13 or control_result["counts"].get("passed") != 13:
+    if control_result.get("counts", {}).get("controls") != 14 or control_result["counts"].get("passed") != 14:
         raise ValueError("Complete directed-control receipt is missing or unsuccessful")
     control_ids = {row["id"] for row in control_result["directed_controls"] if row["passed"]}
     positive_ids = sorted(x for x in control_ids if x.startswith("positive-"))
