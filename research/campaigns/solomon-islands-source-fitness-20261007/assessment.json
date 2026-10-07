@@ -1,0 +1,442 @@
+{
+  "version": 1,
+  "issue": 1424,
+  "baseline_commit": "69a5f97161c36611fc974b626c9666fdf2941a31",
+  "classification_scope": "Seven selected complete families only; full batch rows retained as context.",
+  "counts": {
+    "scoped_families": 7,
+    "scoped_components": 12,
+    "compatible_candidates": 8,
+    "noncandidate_siblings": 4,
+    "shared_admin_contacts": 5,
+    "context_batch_families": 28,
+    "context_batch_components": 45,
+    "context_physical_rows": 45,
+    "context_native_source_rows": 26,
+    "context_admin_binding_rows": 39,
+    "native_source_pointset_joins": 55
+  },
+  "source_product": {
+    "id": "gb:SLB:ADM1",
+    "name": "Solomon Islands ADM1",
+    "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1_simplified.geojson",
+    "recorded_product_commit": "9469f09",
+    "represented_year": "2021",
+    "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+    "build_date": "Dec 12, 2023",
+    "effective_date": "unknown",
+    "crs": "urn:ogc:def:crs:OGC:1.3:CRS84",
+    "feature_count": 10,
+    "compressed_bytes": 33558,
+    "compressed_sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+    "decoded_bytes": 93632,
+    "decoded_sha256": "418f5f1aeaab5f63d240219d1a78efda66e6ceb35ee1f35345d6e4e55fa0798c",
+    "source_credit": "Natural Earth",
+    "license_as_recorded": "Public Domain",
+    "derivative_terms": "CC BY 4.0 attribution per retained geoBoundaries statement; underlying Natural Earth Public Domain metadata preserved, particulars not independently verified."
+  },
+  "contacts": [
+    {
+      "shape_id": "17018030B21762340724861",
+      "name": "Central",
+      "current_id": "gb:SLB:ADM1:17018030B21762340724861",
+      "source_geometry_type": "MultiPolygon",
+      "current_geometry_type": "MultiPolygon",
+      "source_valid": true,
+      "current_valid": true,
+      "topologically_equal": false,
+      "symmetric_difference_area_m2": 25644279.105544,
+      "symmetric_difference_area_km2": 25.644279105544
+    },
+    {
+      "shape_id": "17018030B36628097040544",
+      "name": "Isabel",
+      "current_id": "gb:SLB:ADM1:17018030B36628097040544",
+      "source_geometry_type": "MultiPolygon",
+      "current_geometry_type": "MultiPolygon",
+      "source_valid": true,
+      "current_valid": true,
+      "topologically_equal": false,
+      "symmetric_difference_area_m2": 33637822.74500035,
+      "symmetric_difference_area_km2": 33.63782274500035
+    },
+    {
+      "shape_id": "17018030B43755880178831",
+      "name": "Makira",
+      "current_id": "gb:SLB:ADM1:17018030B43755880178831",
+      "source_geometry_type": "MultiPolygon",
+      "current_geometry_type": "MultiPolygon",
+      "source_valid": true,
+      "current_valid": true,
+      "topologically_equal": false,
+      "symmetric_difference_area_m2": 24235900.332500495,
+      "symmetric_difference_area_km2": 24.235900332500496
+    },
+    {
+      "shape_id": "17018030B68013150931387",
+      "name": "Choiseul",
+      "current_id": "gb:SLB:ADM1:17018030B68013150931387",
+      "source_geometry_type": "MultiPolygon",
+      "current_geometry_type": "MultiPolygon",
+      "source_valid": true,
+      "current_valid": true,
+      "topologically_equal": false,
+      "symmetric_difference_area_m2": 21750379.929774947,
+      "symmetric_difference_area_km2": 21.750379929774947
+    },
+    {
+      "shape_id": "17018030B8659224027401",
+      "name": "Western",
+      "current_id": "gb:SLB:ADM1:17018030B8659224027401",
+      "source_geometry_type": "MultiPolygon",
+      "current_geometry_type": "MultiPolygon",
+      "source_valid": true,
+      "current_valid": true,
+      "topologically_equal": false,
+      "symmetric_difference_area_m2": 80771640.0631694,
+      "symmetric_difference_area_km2": 80.7716400631694
+    }
+  ],
+  "source_current_geometry_method": {
+    "helper": {
+      "version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "area_units": "m2",
+      "distance_method": "WGS84 inverse geodesic",
+      "distance_units": "m"
+    },
+    "interpreted_edges": "WGS84 straight source edges",
+    "comparison": "topological equality and symmetric-difference area; diagnostic only",
+    "runtime": {
+      "python": "3.12.14",
+      "shapely": "2.1.2",
+      "geos": "3.13.1",
+      "pyproj": "3.7.2"
+    }
+  },
+  "physical_source": {
+    "id": "GSHHG 2.3.7",
+    "release_date": "2017-06-15",
+    "observation_dates": "heterogeneous/unknown for these records",
+    "license_evidence": {
+      "retained_LICENSE.TXT": "LGPL v3 or later",
+      "official_GSHHG_page": "LGPL v3 or any earlier version",
+      "interpretation": "Preserve the differing version wording; no legal interpretation made."
+    },
+    "results_source_ids": [
+      8,
+      59,
+      69,
+      99,
+      102,
+      144,
+      149,
+      160,
+      167,
+      189,
+      204,
+      293,
+      349,
+      403,
+      426,
+      606,
+      656,
+      677,
+      904,
+      1215,
+      1804,
+      2453,
+      2962,
+      3279,
+      13324,
+      159350
+    ],
+    "pointset_source_rows": 26,
+    "scope_source_ids": [
+      149,
+      160,
+      167,
+      204,
+      656,
+      1804
+    ],
+    "scope_native_source_rows": 6,
+    "all_scoped_pointsets_resolved": true,
+    "original_native_archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "native_member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "native_record_subset_path": "native-source-records.bin",
+    "native_record_subset_bytes": 1033544,
+    "native_record_subset_sha256": "e4ad379d9b8d19a28d46a9fb8b371a45d45f4b5e093c46ff7312127c1c8bb60c",
+    "candidate_total_area_m2": 202.30437931587176,
+    "limits": [
+      "Release date is not an observation date.",
+      "Mapped land support is relative to this retained pointset, not legal boundary, physical-land truth, dry-land status, or ownership.",
+      "Shoreline registration, source precision, seasonal wetness and unrecorded river widths remain unresolved.",
+      "Original source license files differ in LGPL version wording; no legal interpretation is made."
+    ]
+  },
+  "components": [
+    {
+      "component_id": "physical-component:721838ee1e1d6c3acde27742d49376d80aeea2a3818aff8ef006e4d407827ebb",
+      "family_id": "gap-source-batch:da01a18537aad7221b48c471",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 81.05264596532209,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        1804
+      ],
+      "source_pointset_hashes": [
+        "b720d0b27527744aac04689503cdb0975fa13b0d57652c7596c4f7caeb18c5d0"
+      ],
+      "source_record_hashes": [
+        "4a3d23a048dbc04e292aa5f45b345389618c37bc2fc3a3c8f982d7ae84630226"
+      ],
+      "whole_physical_row_sha256": "32ed51cc725b514414037044468d6179fd75b731c07669547ed1ecf99ab7eeb5"
+    },
+    {
+      "component_id": "physical-component:854f216abedb0bc31b01c6cfa93a441c7aed86924b3331c0b61c72c2936733d3",
+      "family_id": "gap-source-batch:da01a18537aad7221b48c471",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 8.56726280226518,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        204
+      ],
+      "source_pointset_hashes": [
+        "3ad743d7302f57e851d421d79d9c2f5bce33e59d89eab0f3e12791b6a229bafb"
+      ],
+      "source_record_hashes": [
+        "53d3f14059fab08b6ca0a714d0a7250c91ff0e94eafbbb8a5bae8f8486dca54f"
+      ],
+      "whole_physical_row_sha256": "594b95fde23b2fd33a40e50c933dc80995828d244638a6e26bdf73d983006c5f"
+    },
+    {
+      "component_id": "physical-component:10f89b3868b4e895d2339368b755f073a626d439640301111352521c9bc24b4b",
+      "family_id": "gap-source-batch:cda72270fe02057af7bc959e",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 74.56546065909643,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        167
+      ],
+      "source_pointset_hashes": [
+        "e84cc52645f0ea3eb3b853148ef635422c7542c8a87cedc0ab5c9a3cf2690f84"
+      ],
+      "source_record_hashes": [
+        "799556c95d0e254cfecdba361e7963b8b1ff95c01839c058969221a024829f31"
+      ],
+      "whole_physical_row_sha256": "ffbeca83055d1d1d3889ea674ebfc706943f923a82a3f6c1a7bfa0c0f945ba73"
+    },
+    {
+      "component_id": "physical-component:6a0546bc1c627a174a8cf599f75d35bc9e6d023cc20da86326599465c5553346",
+      "family_id": "gap-source-batch:8b0f3a4a12b1b53e8cdb8243",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 27.51012604442554,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        160
+      ],
+      "source_pointset_hashes": [
+        "be1f8e3a5b19f29d60e26932707c5214a26927686f906a95c9ff49c231b4fd45"
+      ],
+      "source_record_hashes": [
+        "5269c248c24e54721b392eb7f727ab875801d2c9bbf254cf9fbd2a337de3ee7b"
+      ],
+      "whole_physical_row_sha256": "6523148b5144414f024dadf44ad2ead1539af41a573048ea81526c80150d848c"
+    },
+    {
+      "component_id": "physical-component:2b39965dae96675fca4577dd52a5bfe9cc7e430f79dfa7089c919bd4ed616af8",
+      "family_id": "gap-source-batch:0c1cdaad9f40381ff5391a6e",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 6.841506418841418,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        149
+      ],
+      "source_pointset_hashes": [
+        "581cd1133032026c099a6a223395d1da16bdac199c23af048a6d669667fb0afe"
+      ],
+      "source_record_hashes": [
+        "724a894c9550beb504b8bbb8622c9ba1119a9a62d9745411110ff42039ab5523"
+      ],
+      "whole_physical_row_sha256": "d93d60f0dd00f3b72b52fae93e25fcda1b8f3e69ae4215feb8b99eaa458a6bea"
+    },
+    {
+      "component_id": "physical-component:7deb1a01865ea8f87256a5442ca03a55613d4187137d49c1342fdfe33573cb15",
+      "family_id": "gap-source-batch:0c1cdaad9f40381ff5391a6e",
+      "compatible_candidate": false,
+      "disposition": "noncandidate-mixed-retained-L1-and-outside-support",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 5260.749900291813,
+      "outside_mapped_L1_context_m2": 31.803120412790825,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        149
+      ],
+      "source_pointset_hashes": [
+        "581cd1133032026c099a6a223395d1da16bdac199c23af048a6d669667fb0afe"
+      ],
+      "source_record_hashes": [
+        "724a894c9550beb504b8bbb8622c9ba1119a9a62d9745411110ff42039ab5523"
+      ],
+      "whole_physical_row_sha256": "a114075068f9b38e7fbb2303bc7ae49703f0bd67c909c9228b62eb4d7a338638"
+    },
+    {
+      "component_id": "physical-component:371f640e87dd9da0b20648ffcdadb479281917d49399982ba56eaf5801237bb7",
+      "family_id": "gap-source-batch:26c50f1a932243cab76eb1d8",
+      "compatible_candidate": false,
+      "disposition": "noncandidate-outside-retained-L1-context",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 0.0,
+      "outside_mapped_L1_context_m2": 167.63933538011133,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        149
+      ],
+      "source_pointset_hashes": [
+        "581cd1133032026c099a6a223395d1da16bdac199c23af048a6d669667fb0afe"
+      ],
+      "source_record_hashes": [
+        "724a894c9550beb504b8bbb8622c9ba1119a9a62d9745411110ff42039ab5523"
+      ],
+      "whole_physical_row_sha256": "4f5a851c5a67b14fdec62e4a5595d832235fe59ff1eb3674607714d4e8c8bbec"
+    },
+    {
+      "component_id": "physical-component:abc8439a48b08d63bdd9f2c558a1b54af220f947d8377772e78401acb1b72481",
+      "family_id": "gap-source-batch:26c50f1a932243cab76eb1d8",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 3.273522266748408,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        149
+      ],
+      "source_pointset_hashes": [
+        "581cd1133032026c099a6a223395d1da16bdac199c23af048a6d669667fb0afe"
+      ],
+      "source_record_hashes": [
+        "724a894c9550beb504b8bbb8622c9ba1119a9a62d9745411110ff42039ab5523"
+      ],
+      "whole_physical_row_sha256": "d0a99554ee3c7e8f0931938df4fb0276b238d52c808fdb9046bfe8c5acddc6b6"
+    },
+    {
+      "component_id": "physical-component:cf77bf2034affdf3b9cf01618054901916271c0061bd6b79a9b57e7c22e1817d",
+      "family_id": "gap-source-batch:26c50f1a932243cab76eb1d8",
+      "compatible_candidate": false,
+      "disposition": "noncandidate-mixed-retained-L1-and-outside-support",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 0.8031669258905314,
+      "outside_mapped_L1_context_m2": 961.9713917041119,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        149
+      ],
+      "source_pointset_hashes": [
+        "581cd1133032026c099a6a223395d1da16bdac199c23af048a6d669667fb0afe"
+      ],
+      "source_record_hashes": [
+        "724a894c9550beb504b8bbb8622c9ba1119a9a62d9745411110ff42039ab5523"
+      ],
+      "whole_physical_row_sha256": "45dc685f201638f90097f48b1482ad33eb9696c9b6adfa3b13d0e943ecd9701e"
+    },
+    {
+      "component_id": "physical-component:8bce0affeeb72b155c7df58ba9138fd9cb40ed5134eb25332ef4fcb6c0335d78",
+      "family_id": "gap-source-batch:e31c6e10338c57623af2d97d",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 0.43647330563370634,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        656
+      ],
+      "source_pointset_hashes": [
+        "aeb7e4e61f34764ca566fbe6374a40906c1ee5cf9a355cbd48bbb9b9e982de21"
+      ],
+      "source_record_hashes": [
+        "0e167615077b20f5f5bca4cc7a765aa9d033fb10e3b81eefcdddc5759d6da633"
+      ],
+      "whole_physical_row_sha256": "5bf663a83a6cda5bcd2cbe54064f690c39c61f4a525e355816878e926cb47d35"
+    },
+    {
+      "component_id": "physical-component:5144bba87ee1f376f8a809bad0bce0b86a29418d83bb211779892346d4f6b7a2",
+      "family_id": "gap-source-batch:b0800cc5fbd19e035ee42a9a",
+      "compatible_candidate": false,
+      "disposition": "noncandidate-outside-retained-L1-context",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 0.0,
+      "outside_mapped_L1_context_m2": 129.77951808328643,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        656
+      ],
+      "source_pointset_hashes": [
+        "aeb7e4e61f34764ca566fbe6374a40906c1ee5cf9a355cbd48bbb9b9e982de21"
+      ],
+      "source_record_hashes": [
+        "0e167615077b20f5f5bca4cc7a765aa9d033fb10e3b81eefcdddc5759d6da633"
+      ],
+      "whole_physical_row_sha256": "9b60c239b7c482961fb2a00663471526462f77e95a79f5798f75d0a7cd0e9305"
+    },
+    {
+      "component_id": "physical-component:aed8ce56171d9b7da8532f00404bbc07d547c4d75b5a73daefbd9f35290ff2c7",
+      "family_id": "gap-source-batch:b0800cc5fbd19e035ee42a9a",
+      "compatible_candidate": true,
+      "disposition": "candidate-fully-covered-by-retained-GSHHG-L1-land-pointset",
+      "physical_status": "unknown-source-fitness-and-observation-date",
+      "mapped_land_support_m2": 0.05738185353898262,
+      "outside_mapped_L1_context_m2": 0.0,
+      "mapped_inland_water_support_m2": 0.0,
+      "contradictory_land_water_support_m2": 0.0,
+      "source_ids": [
+        656
+      ],
+      "source_pointset_hashes": [
+        "aeb7e4e61f34764ca566fbe6374a40906c1ee5cf9a355cbd48bbb9b9e982de21"
+      ],
+      "source_record_hashes": [
+        "0e167615077b20f5f5bca4cc7a765aa9d033fb10e3b81eefcdddc5759d6da633"
+      ],
+      "whole_physical_row_sha256": "8a131ccde1649f353d32b23f933f9b559d4d3000fc703927e6e9804636e89ca3"
+    }
+  ],
+  "batch_context_path": "batch-context.json",
+  "batch_context_sha256": "e6e600668f9015bd2d6a73a14686f1473c15bfa002629dce4ce491e61262dbe6",
+  "limits": [
+    "The source/current geometry difference does not identify which geometry is correct.",
+    "The source alone does not establish legal authority, effective boundary date, land/water truth, or source suitability at 202 m² scale.",
+    "No public source download or broad imagery inspection was performed.",
+    "Full batch context is retained; classification conclusions are limited to the 12 issue subjects and five named contacts."
+  ]
+}

@@ -1,0 +1,1439 @@
+{
+  "version": 1,
+  "issue": 1424,
+  "lane": "source-only",
+  "worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
+  "subject_ids": [
+    "physical-component:721838ee1e1d6c3acde27742d49376d80aeea2a3818aff8ef006e4d407827ebb",
+    "physical-component:854f216abedb0bc31b01c6cfa93a441c7aed86924b3331c0b61c72c2936733d3",
+    "physical-component:10f89b3868b4e895d2339368b755f073a626d439640301111352521c9bc24b4b",
+    "physical-component:6a0546bc1c627a174a8cf599f75d35bc9e6d023cc20da86326599465c5553346",
+    "physical-component:2b39965dae96675fca4577dd52a5bfe9cc7e430f79dfa7089c919bd4ed616af8",
+    "physical-component:7deb1a01865ea8f87256a5442ca03a55613d4187137d49c1342fdfe33573cb15",
+    "physical-component:371f640e87dd9da0b20648ffcdadb479281917d49399982ba56eaf5801237bb7",
+    "physical-component:abc8439a48b08d63bdd9f2c558a1b54af220f947d8377772e78401acb1b72481",
+    "physical-component:cf77bf2034affdf3b9cf01618054901916271c0061bd6b79a9b57e7c22e1817d",
+    "physical-component:8bce0affeeb72b155c7df58ba9138fd9cb40ed5134eb25332ef4fcb6c0335d78",
+    "physical-component:5144bba87ee1f376f8a809bad0bce0b86a29418d83bb211779892346d4f6b7a2",
+    "physical-component:aed8ce56171d9b7da8532f00404bbc07d547c4d75b5a73daefbd9f35290ff2c7"
+  ],
+  "subject_ids_sha256": "0657d7ea69f522257461f43275112d8c639bb180c5fe6ea46b865ccd15d07622",
+  "baseline": {
+    "commit": "69a5f97161c36611fc974b626c9666fdf2941a31",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-000.bin.gz",
+        "bytes": 1423781,
+        "sha256": "fa75a261900a8daecaf79d5ec52ff98c558c75113f125ce37b3a6cd823884e84",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-001.bin.gz",
+        "bytes": 1425093,
+        "sha256": "1ef86a2583ec6abfd84f58d443c31b4884c567be263cdbb39de0e80cd2f8849f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "0b45b984c5c4636f622ff4f04d2b7174e8cf6c30d70bab63ddf9e2f25dc982c1"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-002.bin.gz",
+        "bytes": 1423887,
+        "sha256": "47b3065edc3da9872679100c070f27054d197833b66e423b35325c41dc66ef80",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a170b28d3a86f5ed30ec5c537c3f846baeb04412e20814310ddf4cd7e29b3b9b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-003.bin.gz",
+        "bytes": 1424763,
+        "sha256": "281c330f5f7f5727709bdce4c3e662c313e080178d52a5e9f8a0a41c585b0a86",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d89f2e8f8267493aa9e9ca614fcf401d343b8c4b03dc511bbc1acc036c118a3d"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-004.bin.gz",
+        "bytes": 1423919,
+        "sha256": "733c6f92ae1a0975c18b64ab9b12fe63b2f7429d876e986c9dde53c453c273d0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6289b606b922d8c01ca231ede71a349da841b98b713c372dc4123893945d2a8b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-005.bin.gz",
+        "bytes": 1425720,
+        "sha256": "7f1ba06f6b035c9efa1a940bab789b6032bfbcee6425f9a06693db3e9cb11b6b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "2a8bb616b56839ee1e7c21d95443555194de318393bf489818703c014b745aab"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-006.bin.gz",
+        "bytes": 1424087,
+        "sha256": "4385d260ee3161c97a44a2bf53c342b79e2d9712083de969bbc965b950ebbd4c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "9fdca5fb279d413251803a00736ff0b2573eca815effb8a3e24c42f4630ca00f"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-007.bin.gz",
+        "bytes": 1424128,
+        "sha256": "06389d188e7b544f187a471c4ebfba937d8f07ccbfadba68d5f302888304b81f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e1f9dad27239a5d5f8dd38c0132bc08ea28e8482d394a3fee9eb53ebdfcf30b6"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-008.bin.gz",
+        "bytes": 158811,
+        "sha256": "57a60c413f397633712a7f20663c4423cc4ab1abfb0f597790c66d385da72dc8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 932144,
+        "uncompressed_sha256": "91fe1012b01980cbcfc0f309f5d3fbfc321b0135c80a103f1dd5210c1a7a78db"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/batches-000.bin.gz",
+        "bytes": 3006599,
+        "sha256": "b353876db77c5162e4c89e2f9949a1f844dbab8089e50f5475a214d71d9380ae",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "51dc023ef6da2efd841274372abddc63c547853e2926ce9717af9bf77534cea2"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/batches-001.bin.gz",
+        "bytes": 1806566,
+        "sha256": "a7db2803850edccec30fbf47212b44cf3181d6c06605c6116668fdd84d0e5168",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5520396,
+        "uncompressed_sha256": "9b9ca17683643f6565afcb7275f62a50ac4710483ed43c21042e8aadb9bb21e8"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+        "bytes": 1056877,
+        "sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-001.bin.gz",
+        "bytes": 1055138,
+        "sha256": "039c1c64d81c73a01a57cc9549d84b085b7d5f943eb0c93f888d5868e23a0a2e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a9b44b74dcca0a37191e10cbe1f08fbf98e460610f5cab441768e044f37c6b34"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-002.bin.gz",
+        "bytes": 1056628,
+        "sha256": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "9de1ea80581fe6f4445108c0c49b68e78bdbd0e2f288d80716ca337c5c2d8561"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-003.bin.gz",
+        "bytes": 1057266,
+        "sha256": "c1f4128e05d2147936bc76d773110572fa4d85f112acf9fa6023fc1e8af948ee",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "ab35a3bd7f4064d7ef3ad1d37edcb1b1b1b35db2232b026f1322dbbc74b7bacb"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-004.bin.gz",
+        "bytes": 1056615,
+        "sha256": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "651b27a01f11f6b7328ce866abe1c0918ed858e8ab7fc1dac76e2697e9037866"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-005.bin.gz",
+        "bytes": 1055630,
+        "sha256": "fc45ee3c6e2c9aa6671e9e31453673227de9d36298ca44962795302c00ef58e2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "7f8d2ab0ce1f0047f30dcd9d97549386fa8f8aa6d252bc96df73f57343ca7d95"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-006.bin.gz",
+        "bytes": 1056046,
+        "sha256": "c5521f8a382f45e6b7febdd7616d407cbe1a41ad1bcd685fbe59dd49cc91f2ee",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "4b92cb5e1e63dda727254e08b28784fa7ef387d1f946569ea25189bb51607720"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-007.bin.gz",
+        "bytes": 1056202,
+        "sha256": "5f4240fb226c6bd06e42a72000c3d4e89525e3cf5f1e4ae48f5d90d03834b297",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "228541ac222e9bf1927699c71e2adbb1ba194fa6ddba0d9b70aa500f1c50caf5"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-008.bin.gz",
+        "bytes": 1056508,
+        "sha256": "efcf3436ed85a990a4ac4716caf967e2480c1b5eaa2e3047ffc412d9341273eb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "30ed065c87e4a11f3039a3ce1e8a917d1c4ce324b70d08e81a08911bda36f7b0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-009.bin.gz",
+        "bytes": 1055685,
+        "sha256": "6b91eea504ecf337a7b4c2d727a42ebf1fc153c4b4340708458003e4563b79ee",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "59429efa412c896af9347049b579293fc9d05b80e950b5640d6e510e46e87ace"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-010.bin.gz",
+        "bytes": 1054508,
+        "sha256": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "7889ff3e15b041a666f0394c9647835fd89b7ac489075831ed47745be2e83071"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-011.bin.gz",
+        "bytes": 1056946,
+        "sha256": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1ff9b2ea435250fbf47c36e203bc95ca99efeadcc43f4b9052d8aaeea12e100e"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-012.bin.gz",
+        "bytes": 1056866,
+        "sha256": "0cbfd374a2f1fde800ee8a14ad81aec01f55e5ab46d3de4f9f82d92d233533c3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "48cb9ea6bf7baedefea4391bd3be8aa0564e98c5a4f72c93e9fcf9112d014408"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-013.bin.gz",
+        "bytes": 1060324,
+        "sha256": "42081c1b1bb00fb8a97f7d238a8c17bd9ac421d6b4e7507c56629ed0fe2e5682",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8cf5b9d3c11815a5fe548e12d03edd5ef2689ac7627067ec34ffab75dc23ec9e"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-014.bin.gz",
+        "bytes": 1055098,
+        "sha256": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d1e3acfb2623dc398ec5266a1a3f2154a958ba0ebc0cf0ad3d3fb108ef555ba9"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-015.bin.gz",
+        "bytes": 1056340,
+        "sha256": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8336e041079ab4cdaeee76442c40fb9f6e69bdb24ead60ef170010b8c1169c8b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-016.bin.gz",
+        "bytes": 1056102,
+        "sha256": "fcf08ffe589c2cbd4543fa8d2525ee70d44b4aa3d3a3811f40f71c1e1b60420b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "504dc711ab22b934f2e47f0546e54f6f4f3352a0589fb47b9ae12348067adc9f"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-017.bin.gz",
+        "bytes": 1057188,
+        "sha256": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "ff1fd84298383e79f20f27a865ff1d72ba36856a1decc521cc3c460ead16f492"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-018.bin.gz",
+        "bytes": 1058049,
+        "sha256": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "0445faa56bff82aa5d0b98c78c420bb2f83671aa289bda55dfb71283e3673c8c"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-019.bin.gz",
+        "bytes": 1056760,
+        "sha256": "fe00f2750343c55b0b21a8ae21934321252dff58235a0b4e5fbdd3fd8235c999",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a54ed7e781d10fbd6403572826bcc801118e78b290c74b9aea56095a7a34c882"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-020.bin.gz",
+        "bytes": 1054653,
+        "sha256": "f3a284602b62d1fb63b2f18dc478afe366be58837a8c5a30eb87bae939ed8e10",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "2d284aa2cb981e01d9d3ae65458ae97a0bceeeb8b41154adeb90e56b919a91b3"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-021.bin.gz",
+        "bytes": 1057471,
+        "sha256": "9aed3f2e504a3a5799b39a8a92661d6496b85b853ba2adb4fb84f2e92bef8753",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "bfe35843058aa894e6806f0799bd151ed484efb638f20ad0d8af565e641497a6"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-022.bin.gz",
+        "bytes": 1057293,
+        "sha256": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "146a652d7cead31fc783d93423b74cb52691cf2eded8de39f4272a1e6cb2250f"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-023.bin.gz",
+        "bytes": 1055293,
+        "sha256": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "12be08c70304f2c808f53d74ef350c0d302def8e53568922c1734c7bfd06dee9"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-024.bin.gz",
+        "bytes": 890162,
+        "sha256": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7065187,
+        "uncompressed_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "bytes": 1046123,
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "bytes": 1003990,
+        "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "947627e169a22ca6a4f877f7ea192467c150fcc43d4fad4d99d3599702029a75"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "bytes": 1001586,
+        "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "dbe45982cb0fbe54d9c8b61e0189a3f6a2093c407849326b250305723a49c0f0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "bytes": 1063935,
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "bytes": 987691,
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "3d329a587e2e06a426dc802e04abfe01726d86657acfc469287cfe668c8102a8"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "bytes": 1026831,
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "bytes": 1493537,
+        "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8d270e713aa1ec33b8b279ae71224b7c2996053e1c2aced441723df8e82c80bb"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "bytes": 962830,
+        "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1e9358bfccab1b75a7073f63d8b84d65f64b064244a1fdad76669378204d1fc0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "bytes": 1043652,
+        "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e354113a88c2d3deb64a327a469bcbca7c248b17083b3d739c18445b7b8c23df"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "bytes": 998433,
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "049ab5f591d9821e7279c6c7afccfc0b55ed5a9f81976edfe969315ee25df079"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "bytes": 1039493,
+        "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "23d37fcd6c369a1dca6ba0fbccea55bc40bbeb74a340b4cca6752ca0d78cf231"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "bytes": 1081053,
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "bytes": 965771,
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a1663477a0e01de8bb56736262b57e95c3c49647d54db95c4d2fd6d86600c328"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "bytes": 247084,
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2171381,
+        "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+        "bytes": 1008871,
+        "sha256": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7440052,
+        "uncompressed_sha256": "717c9e64fbc2c63a774b15defaddc84893dc527333a44fe38920e2f9ae1c329b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-004.jsonl.gz",
+        "bytes": 1001848,
+        "sha256": "e31bf3c632466c74dd45ffc4b531619a75d5370d883fa4bae08d8ea18450c6e0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7397110,
+        "uncompressed_sha256": "b3d50e4dd2e4bfb5fe3f3a6bd84da3b8331f0cd699440e6c8e8cbeb5c51fca24"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-007.jsonl.gz",
+        "bytes": 968974,
+        "sha256": "5310f2bdb0595015ed0bee066ea156abf335ae467825a4e05318673c68ab9e5c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7396648,
+        "uncompressed_sha256": "6c608d455eaba7e0be2edb0accddbd818b9112aa8a4753a761f58d4cf495c59c"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-010.jsonl.gz",
+        "bytes": 966679,
+        "sha256": "3bc42aca221488b5974803e82a4b6746291b4694acab5f61d4912e4849169416",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7358889,
+        "uncompressed_sha256": "fce4e059f37697591a0bdf6259a46cdb2cdc1125c5c4c422d859aaa1ac284599"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-012.jsonl.gz",
+        "bytes": 968486,
+        "sha256": "c480c3a1a3d159210bfd46e2cb1d0abf023d286291eabee330bf9b6d85a2cf3a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7382607,
+        "uncompressed_sha256": "002a2dae6c8259e5664d6ca585890600942c9ecbcd4689a431de3fa706744b29"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-013.jsonl.gz",
+        "bytes": 1012203,
+        "sha256": "dc60c8dc5223b6d8d4813da0bd7ff66d83bdfa1a01e37e5dccadd843f742fa3b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7444535,
+        "uncompressed_sha256": "ad3c9b02af0a4a2c6aec20536235e84d4b6e4a18a9f4999ac46f2beede9fe4f0"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-015.jsonl.gz",
+        "bytes": 959629,
+        "sha256": "103f4d3d57629822e5014fb7aade94682df8fe2b47453223d3cd527516833cf9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7374556,
+        "uncompressed_sha256": "0854be96e5a297b5a19d2c379d10782c902195d0e76f8f57d83772db13b58a1d"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-019.jsonl.gz",
+        "bytes": 985486,
+        "sha256": "8bc7b9bcb3b1ba707e0f342a18fad5ec1abccd9a008327f477749b75305cf384",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7404491,
+        "uncompressed_sha256": "b5b89a481d0e0e27106ee6eede009481947fe3e9da9c6be0211e5513ca06a0e2"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-022.jsonl.gz",
+        "bytes": 987473,
+        "sha256": "5a0a899e2f259a87386bcb3c05f3ed4cb74930bfbde06afd3a0be7c5cc13cf2f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7401185,
+        "uncompressed_sha256": "4e4d7d37fd4e04fc1d607b232ff72c1220db5e0ca83e7b373053dbd7a00f9059"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-023.jsonl.gz",
+        "bytes": 1012775,
+        "sha256": "1baa614c77d7c8e77e5681f5217e57099b3e9945657abfcc26dda97d4f2c6e29",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7426541,
+        "uncompressed_sha256": "f4283a231dbe68dd20cc63bf2da6413d6fb5c8b428f275197efcb934132b03ae"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-026.jsonl.gz",
+        "bytes": 963015,
+        "sha256": "d88625fbc3d2ee666fbf67bdc8b587351ca05c9f59512ab7a728581cfa92abf7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7347357,
+        "uncompressed_sha256": "cfd28c37b668c0f5efa168fde1615fa21df040676f6a5516584949b75932add0"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-029.jsonl.gz",
+        "bytes": 975090,
+        "sha256": "45b326a57f93a7892a292912d922a6172d86f2e59af12a98f14eefddb26d6f94",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7374914,
+        "uncompressed_sha256": "f611173bb5be6855ffecdde3b1da2b8cb4c3989b732234b2b8e4e59913a5cb4c"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-031.jsonl.gz",
+        "bytes": 999677,
+        "sha256": "577f0a0700cbdbcfd27bb24acd9345c6e4aac318f58f92d7b522e2798f8e7be8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7417057,
+        "uncompressed_sha256": "8c1c372c191b5eb0c5e0f379dd32b078b32485f1d4a3ef9b067492fee5046e3d"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-032.jsonl.gz",
+        "bytes": 967892,
+        "sha256": "663c636242521ba76187e5e1f9782f5da138cf8a3d445f034be2754e8bc99c42",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7369682,
+        "uncompressed_sha256": "fd7e9d9c072abdaf8e9fc57263d8b1ec9ec9f7669ed7fd5d68534a055ac110d5"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-033.jsonl.gz",
+        "bytes": 978044,
+        "sha256": "8140fd6762f492b8795f4ee61f0526098033db8b7e510638301a0596ad74aa2c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7416431,
+        "uncompressed_sha256": "91a30e2cbe640865469c197c7b4e3f961c606d1e9428f0b619089175d354c7f8"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-034.jsonl.gz",
+        "bytes": 982942,
+        "sha256": "02282d8037833b6017613adc83b48593d67625f3b919898ca406831807792c35",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7397751,
+        "uncompressed_sha256": "9efdaf582eebf17f37baecccd45bd2611aacf272fc3fcb833505aac54da919c7"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-035.jsonl.gz",
+        "bytes": 1042017,
+        "sha256": "f03a2f3d6a3c54f10312693dcd0fbebbc56a8736c2b67bf422aa7c869d621d18",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7447644,
+        "uncompressed_sha256": "99dbb57026c7eae331775d8e7840c8030653033248e6a44552ebeca9485f1a12"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-036.jsonl.gz",
+        "bytes": 981658,
+        "sha256": "53c2d55ef83f774b50b413d6c37d6dc152544ed7e3461ca9752842a25949277a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7408351,
+        "uncompressed_sha256": "a89070a56552d0b03f989a0d637920b8489fc2d4525b032d33d44d434afac4fa"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-038.jsonl.gz",
+        "bytes": 981190,
+        "sha256": "473161113fffee3bfb72871c49bad805a94b9fa3907ebfee000a65bf8132ebef",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7410225,
+        "uncompressed_sha256": "ef385e405c9ddddda5a3f3dadb97cea84e9c59d4b17fab2561746efde6fee6a7"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-039.jsonl.gz",
+        "bytes": 967578,
+        "sha256": "1ba3f4114f98f6654e7196c4d9d1ce0de259574f47118654954ce253fbeff37f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7384474,
+        "uncompressed_sha256": "9a0432a410df5bdf8d8d7b5eb9702aeef12364ff4b3ef18646546add33086791"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-041.jsonl.gz",
+        "bytes": 1034996,
+        "sha256": "d41606e2e21e91fff44c2b921e5ad69e4845f7baca50d06d2f9353d8629e6c3a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7418379,
+        "uncompressed_sha256": "705e199cdc9a4e5834c15db02450d2881fc819f8adfaa1e959128c73ee817038"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-043.jsonl.gz",
+        "bytes": 1013025,
+        "sha256": "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7436197,
+        "uncompressed_sha256": "69888f613738655b7f8c1731b1186fba06ca259233254e7309aebf8f3e93113e"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-044.jsonl.gz",
+        "bytes": 950482,
+        "sha256": "f3abb47188e2645668e4de41c8e630d8c97441ce5de9bf549bfb35d94027f014",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7293115,
+        "uncompressed_sha256": "93e8f75205a8635c50f4d22120d4a487bafcb1c50dc9f4862d064eb52bc996f7"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-045.jsonl.gz",
+        "bytes": 990498,
+        "sha256": "645a2f9c4d85a4e8de76ff658208ab5eae1a906b49f0233f3cfb5b5f65c819b3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7419383,
+        "uncompressed_sha256": "2acbd30e56f3667ad769b2581539b3f7e436fe8ce88448e518564f20f13d7e74"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-047.jsonl.gz",
+        "bytes": 965956,
+        "sha256": "da98827a9f205991086008ab6687a816e7968861ce9ea0d69c20ba3900b6e9c3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7384305,
+        "uncompressed_sha256": "0c67ce097d15e937dd8bc38d9a542d615036b31b937a5ef63970322b0e976ca6"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-048.jsonl.gz",
+        "bytes": 1001662,
+        "sha256": "9bd72e091b921d9d1122289bda41118e94ca3180576ed13802fe600a5d90fff7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7412313,
+        "uncompressed_sha256": "23e4b13f572e7692ecf6b2a3736517c66bfc07a997630b5688e86a345c900e99"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-049.jsonl.gz",
+        "bytes": 998684,
+        "sha256": "baa98801bb9c8eabef84ee9d7188a682779f2882d9357504042062cfd734da2e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7419961,
+        "uncompressed_sha256": "dda8c700cf7381a60e2399c7ed8e2e6d735320e2670e49798c4eab7d531b727c"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-050.jsonl.gz",
+        "bytes": 1002394,
+        "sha256": "d025baa090677a7cbab94e5eda5bf6e48cd372842a51d3735ade26c559ff8d4f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7409441,
+        "uncompressed_sha256": "e96ba0c7f4c3a70191cc0c6f237b8a19c714a9b50cd2bea797fbe832a4780b1c"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-053.jsonl.gz",
+        "bytes": 991771,
+        "sha256": "3c7dc9313074e616f5f80573eaf274beb1c59f6219412f8246504e53cb1f8854",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7410855,
+        "uncompressed_sha256": "13d715546d0bd8bcd944797a560001a5f2cd6b35538ea5cd1c558916d98fd003"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-057.jsonl.gz",
+        "bytes": 1233045,
+        "sha256": "883e4036eca58e598c8e02a05034c86d81b19a9d8b9727ec7135ffb66c528ea5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7640594,
+        "uncompressed_sha256": "13101e6720367512f7784489ebdeec47fd8f44afdb213c00b034f918ce425bfb"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-058.jsonl.gz",
+        "bytes": 990723,
+        "sha256": "0688535e4eeb2ba594d46f90e3f753cca1c814a3d370ba6514d6cc9ea2e5619d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7394892,
+        "uncompressed_sha256": "8a683d81ab38c4fd039472955f91cef51ba8ac93cb13d0f7cfbf385cf6aa3c58"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-059.jsonl.gz",
+        "bytes": 1063065,
+        "sha256": "fdb3e1b89f8dba54cd2827b7118d47398c8dc4935bee5cff8444cb5623d5f8b9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7466738,
+        "uncompressed_sha256": "9e4058b5e8ab8f751779ea1af54ad6f15f0250fc1e17f1d97cf550eb4ee12ebd"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-063.jsonl.gz",
+        "bytes": 977510,
+        "sha256": "9805acd0429673ba673b44e4cf1aa64989b2bbdf791f1ce65ee2852c8d0adfb1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7389498,
+        "uncompressed_sha256": "cbe99618d773e6841ea3537955768027f41ae07c06d6c0d43e60c38a2241cbd9"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-066.jsonl.gz",
+        "bytes": 1008625,
+        "sha256": "5c54fc0d47bab1ee41943df55f2dc0cb8b993d1e134801821a78993ce8e15c9d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7415458,
+        "uncompressed_sha256": "e206f65a915b846c1bf78390bfd37634e1851b1a70289692a37ca784a6af1d6b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-067.jsonl.gz",
+        "bytes": 1053154,
+        "sha256": "030cc387ebf6731c3b78390c6a75e20edddcf757b3f85c1830251db4f5629f0a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7469651,
+        "uncompressed_sha256": "a2a65d7f4559afbe8f453358373f05500e8c296755c7a336daa71f07c5c7fa66"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-068.jsonl.gz",
+        "bytes": 1009610,
+        "sha256": "174658349676fc4be49a24013712c99a336280582d4a98d1693d3938939b482a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7422396,
+        "uncompressed_sha256": "f6eaf06605d49883fc07f879f57d25c7d37f664f62180f3a56376c93b7b46746"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+        "bytes": 1257080,
+        "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7012839,
+        "uncompressed_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+        "bytes": 1208965,
+        "sha256": "0969ea1fbd0732c135f470089e3f83cb64a6d21446dc72e65a87a53f81548f9f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7014642,
+        "uncompressed_sha256": "a73007a3b420340633aca019bd7cd1dd296d40555a4746215f10ad72bd2be6f6"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+        "bytes": 1191861,
+        "sha256": "cef9a67165d875695263e2c729b5379e329ccf906356a885dbbf114fa1abe264",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7014694,
+        "uncompressed_sha256": "3d897da85e15160acd6353a35a84d4267698182cad78bedab61cad0c0bd23668"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+        "bytes": 1177247,
+        "sha256": "f67073921a62be3e8d4f5433d1aa3f1690baf72a667820e44a40d2c2b817a32b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7014749,
+        "uncompressed_sha256": "2e96abf8a8211ec815df65f24af98d6a1a03d26e8941baee61185d446483665f"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+        "bytes": 1164683,
+        "sha256": "58bc6035a98a29762527078ee91dafd3499804ccd9411f51c8b3b11980dbcf22",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7014199,
+        "uncompressed_sha256": "26fcb4f9da76f475f9f3315cc882f90f24ffabda0edbad869c477c6783bd63a1"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+        "bytes": 1155371,
+        "sha256": "ded396a5db78a6768a3c237568fd2c43b2753976d3bf67e1bbf3eb931f048f49",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7014174,
+        "uncompressed_sha256": "489d49bf2ce07498122d9f8dc6c8d1db5ad5dee1b7b4bc88d81ee5daaf0cac5a"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+        "bytes": 1148156,
+        "sha256": "c6410e64029a6e4beaf9adaa009060e55c71cf9f0cb8f06efed9f9fba0d8ef34",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7013520,
+        "uncompressed_sha256": "25c663cc296c1777fad7497bf6ca860d8aa340e90a86b72a7fce26a83da315b4"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+        "bytes": 1140886,
+        "sha256": "341324e9950ff86b6d38205a7bdb6940ba87a779a7201d21b8a0ad146f87f319",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7012813,
+        "uncompressed_sha256": "7bdc09e3b789589c2074b3c5af8f5ede24fdd2e7bcc75a8f394ce284d91adeaf"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+        "bytes": 1141102,
+        "sha256": "343be75a5e6a7687f44cc51848216ea102e7fa8bfbe3942641312f1dfd66edde",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7012443,
+        "uncompressed_sha256": "57cab3c2c3bf49abab7b906343c28430cd65847f9463439392a3eaf633f94236"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+        "bytes": 1132445,
+        "sha256": "a5ceddd483762da22405fd629a3a4a1b3182069de970524ceaf2a9c7599a7b14",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7015134,
+        "uncompressed_sha256": "6f036d9fb94b850f81de3c831429fbc10d135ebc3da22ecc6bea1c5dd0e986d3"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+        "bytes": 1128682,
+        "sha256": "87726c6fce692d786b0a8d14c1220d2e8db1c663e898b688b3b633dc10c1b66f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7016591,
+        "uncompressed_sha256": "58d061b7e8cef2aa7f6d00e2531aa11d07f82d8f3880567e0d3e0380422b72fe"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+        "bytes": 1125219,
+        "sha256": "457d4cc8279bd36eadaac16e1b5a2b7ed5d572040192f090edfd4933d4c6f8f1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7016280,
+        "uncompressed_sha256": "7641a6edc182863b077b56490fbcb1e3ac5b442ed32457f01ea7d5963a1e864d"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+        "bytes": 1121691,
+        "sha256": "c00491f50f55fdc7baca221394ad23aa2aa9a000f7b333733a9223fb8ddfe498",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7016007,
+        "uncompressed_sha256": "f9b0d86a82edd023e24aa812486ca07b9624dad18a173eb14b1ab8eafce445fa"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+        "bytes": 1120633,
+        "sha256": "0cd35cddcd698907ce1211429fa393086a29bc6bc1729bb68e711221ea737eb5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7017004,
+        "uncompressed_sha256": "7cd8ba527146ce246c815ab2e7bdab31875d13e8652f2f782f2125a1cf7f39ef"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+        "bytes": 1113872,
+        "sha256": "fbc3a4810a36f33f0724e176d61ad13bdf6a36b741640aa65508130c8ebbf6fe",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7015008,
+        "uncompressed_sha256": "7760399c48419566282104e557c3bc8cc1ba4d616896b36daca163b65e8d4a3a"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+        "bytes": 1107592,
+        "sha256": "df4d45b2c2b1f7d96c57ab30f9974b7849e16626deb0ad6aa50efc0acc102819",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7016846,
+        "uncompressed_sha256": "ea833e3041e389ed5be390aad1b5067a54835850abd3fca43c12695a55c21f1c"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+        "bytes": 1117463,
+        "sha256": "c90919472ed35d2a4a223abcda6c253e6d529eff0070b23b933e42e7ff9dae0e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7019678,
+        "uncompressed_sha256": "75f47541ccf2611712193d93664a6c58376ba2f2e1a3be1bedbaac5092f07b4a"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+        "bytes": 698664,
+        "sha256": "0015c9a348e6eebd18a4d5f6491a0cda7b60e89ee76cf8f4c6cc54a6a3986eff",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4091365,
+        "uncompressed_sha256": "ec752ab13dd319e7bada205c154974b1bde2edcffea2adce401fb72277070afb"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/COPYING.LESSERv3",
+        "bytes": 7816,
+        "sha256": "ea7d049c7705dc13afc202dd18e1827f3484f8212fd3fa7b82fc4a0c363432c9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/LICENSE.TXT",
+        "bytes": 1375,
+        "sha256": "dc53a4833bf9121360a5286917683f041439327353ffe0231206c6b746005b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/README.TXT",
+        "bytes": 15350,
+        "sha256": "8c83b0d9e861c3cf9390ccfcc28d57dd484b192e1767524e094c988ee9f84ac7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/catalogue.json",
+        "bytes": 1355,
+        "sha256": "4217ccadad0060ac4b1f150f94bba93af4204c567242cb30c324351cffb1c48a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/00.bin",
+        "bytes": 33554432,
+        "sha256": "ddaa3533a37d73764aeae81068bf369d2fa81849901094655e06ee32a501408d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/01.bin",
+        "bytes": 33554432,
+        "sha256": "9f6fff8b9ca1b1d5bc234b11af33562e2769dd7a704e20c9630a0c2190310527",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/02.bin",
+        "bytes": 33554432,
+        "sha256": "2ddd98d3743cc8886b8b4d07c8e5cdd199503d0a48145bdb1f38a1ef49549a3d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/03.bin",
+        "bytes": 17953737,
+        "sha256": "4a44f7e0b83d840f94a71cf5961f7f214826d26e10aae2a47d1d6711db140f83",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/complete-custody-validity.json",
+        "bytes": 195690,
+        "sha256": "8a16f5b2064f6c5fa76e5c899606bb40b6e9f38408a4a1ee5572e0607953327b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+        "bytes": 806110,
+        "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SLB-ADM1-000.bin.gz",
+        "bytes": 33558,
+        "sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 93632,
+        "uncompressed_sha256": "418f5f1aeaab5f63d240219d1a78efda66e6ceb35ee1f35345d6e4e55fa0798c"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/EVIDENCE_GEOGRAPHY_HELPERS.md",
+        "bytes": 6582,
+        "sha256": "a88cff6be51f58e4e789cc238bf18fb56426dc1979d22ec26e844c2caeaaf2d6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/ellipsoidal_area.py",
+        "bytes": 1953,
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "bytes": 8846,
+        "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "adm1_compressed": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "gshhg_archive_part_00": "ddaa3533a37d73764aeae81068bf369d2fa81849901094655e06ee32a501408d",
+      "gshhg_archive_part_01": "9f6fff8b9ca1b1d5bc234b11af33562e2769dd7a704e20c9630a0c2190310527",
+      "gshhg_archive_part_02": "2ddd98d3743cc8886b8b4d07c8e5cdd199503d0a48145bdb1f38a1ef49549a3d",
+      "gshhg_archive_part_03": "4a44f7e0b83d840f94a71cf5961f7f214826d26e10aae2a47d1d6711db140f83"
+    },
+    "pin_files": {
+      "adm1_compressed": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SLB-ADM1-000.bin.gz",
+      "gshhg_archive_part_00": "coordination/engineering/global-physical-sources-20261006/i/00.bin",
+      "gshhg_archive_part_01": "coordination/engineering/global-physical-sources-20261006/i/01.bin",
+      "gshhg_archive_part_02": "coordination/engineering/global-physical-sources-20261006/i/02.bin",
+      "gshhg_archive_part_03": "coordination/engineering/global-physical-sources-20261006/i/03.bin"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-slb-adm1-simplified",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1_simplified.geojson",
+      "role": "Exact consumed geoBoundaries simplified ADM1 product; identity and comparative geometry only.",
+      "vintage": "Recorded represented-year claim 2021; original metadata at c6a26e1caba54e1b81a89fbda3a64fff56da323d; effective applicability unverified",
+      "retrieved_at": "2026-10-06T22:17:43.570852+00:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "The retained original upstream geoBoundaries derivative-product statement declares CC-BY4.0 with geoBoundaries and individual-source attribution; see CITATION-AND-USE-geoBoundaries-original.txt and individual-source-attribution.json. Exact underlying original metadata declares Public Domain; detail=nan; licenseSource=www.naturalearthdata.com/about/terms-of-use/. These terms are preserved, not independently broadened or reapproved by this engineering receipt."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "files": [
+        {
+          "path": "research/campaigns/solomon-islands-source-fitness-20261007/geoboundaries-adm1-source.bin.gz",
+          "bytes": 33558,
+          "sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+          "hash_kind": "file-bytes",
+          "role": "original-source",
+          "uncompressed_bytes": 93632,
+          "uncompressed_sha256": "418f5f1aeaab5f63d240219d1a78efda66e6ceb35ee1f35345d6e4e55fa0798c"
+        }
+      ]
+    },
+    {
+      "id": "gshhg-2.3.7-binary",
+      "url": "https://www.soest.hawaii.edu/wessel/gshhg/",
+      "role": "Original GSHHG 2.3.7 binary source; only the 26 exact queried native records are retained in this packet.",
+      "vintage": "GSHHG 2.3.7; release 2017-06-15; record observation dates heterogeneous/unknown.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Retained LICENSE.TXT says LGPL v3 or later; official project page says LGPL v3 or any earlier version. Wording conflict preserved; no legal interpretation."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "files": [
+        {
+          "path": "research/campaigns/solomon-islands-source-fitness-20261007/native-source-records.bin",
+          "bytes": 1033544,
+          "sha256": "e4ad379d9b8d19a28d46a9fb8b371a45d45f4b5e093c46ff7312127c1c8bb60c",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/README.md",
+      "bytes": 7954,
+      "sha256": "c9b281aeddc568bedc8372717bc5ed2f5f26775ea3ef94deeb1483cfeac8d533",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "bytes": 18223,
+      "sha256": "d987bc86edeee10daef719cc6ee39370c65ed3f01db398633e82bdc0349f8acd",
+      "hash_kind": "file-bytes",
+      "role": "evidence-record"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/batch-context.json",
+      "bytes": 473014,
+      "sha256": "e6e600668f9015bd2d6a73a14686f1473c15bfa002629dce4ce491e61262dbe6",
+      "hash_kind": "file-bytes",
+      "role": "evidence-record"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/geometry-positive-control.json",
+      "bytes": 215,
+      "sha256": "9704cdc669f0b8f436d861f432135a2078c55569484db1af410e4af3cc9c2ef0",
+      "hash_kind": "file-bytes",
+      "role": "evidence-record"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/geometry-negative-control.json",
+      "bytes": 248,
+      "sha256": "11ba36a5f040019074f3bf252452312f004c8ec236f1fb087707af2d4bfd1f4f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-record"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/verify.py",
+      "bytes": 31737,
+      "sha256": "02308688a2e9954b568a10659a6ecb03548848e340e77bc15b88bd111688bf81",
+      "hash_kind": "file-bytes",
+      "role": "method"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-source-and-route-byte-verification",
+      "kind": "source",
+      "description": "Reconstruct all complete source/result records from immutable baseline Git blobs; authenticate exact native GSHHG record bytes, route chunks, physical rows and pointset joins. No remote data fetched.",
+      "software": "Python 3.12.14; Git baseline blob reader; NumPy (runtime recorded in verifier environment)",
+      "units": "bytes, SHA-256 digests, exact identities and record counts"
+    },
+    {
+      "id": "slb-adm1-geometry-discrepancy",
+      "kind": "geography",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic",
+      "description": "Validate source/current polygons and compute topological equality plus WGS84 symmetric-difference area; diagnostic only.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; pyproj 3.7.2",
+      "units": "m² and km²; topological equality"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "slb-adm1-geometry-discrepancy",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/campaigns/solomon-islands-source-fitness-20261007/geometry-positive-control.json"
+    },
+    {
+      "method_id": "slb-adm1-geometry-discrepancy",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/campaigns/solomon-islands-source-fitness-20261007/geometry-negative-control.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "contact-central-symmetric-difference",
+      "value": 25.644279105544,
+      "unit": "km²",
+      "vintage": "baseline",
+      "input_sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "input_sha256s": [
+        "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      ],
+      "evaluation_commit": "69a5f97161c36611fc974b626c9666fdf2941a31"
+    },
+    {
+      "id": "contact-isabel-symmetric-difference",
+      "value": 33.63782274500035,
+      "unit": "km²",
+      "vintage": "baseline",
+      "input_sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "input_sha256s": [
+        "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      ],
+      "evaluation_commit": "69a5f97161c36611fc974b626c9666fdf2941a31"
+    },
+    {
+      "id": "contact-makira-symmetric-difference",
+      "value": 24.235900332500496,
+      "unit": "km²",
+      "vintage": "baseline",
+      "input_sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "input_sha256s": [
+        "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      ],
+      "evaluation_commit": "69a5f97161c36611fc974b626c9666fdf2941a31"
+    },
+    {
+      "id": "contact-choiseul-symmetric-difference",
+      "value": 21.750379929774947,
+      "unit": "km²",
+      "vintage": "baseline",
+      "input_sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "input_sha256s": [
+        "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      ],
+      "evaluation_commit": "69a5f97161c36611fc974b626c9666fdf2941a31"
+    },
+    {
+      "id": "contact-western-symmetric-difference",
+      "value": 80.7716400631694,
+      "unit": "km²",
+      "vintage": "baseline",
+      "input_sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "input_sha256s": [
+        "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      ],
+      "evaluation_commit": "69a5f97161c36611fc974b626c9666fdf2941a31"
+    },
+    {
+      "id": "candidate-total-area",
+      "value": 202.30437931587176,
+      "unit": "m²",
+      "vintage": "baseline",
+      "input_sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "input_sha256s": [
+        "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "039c1c64d81c73a01a57cc9549d84b085b7d5f943eb0c93f888d5868e23a0a2e",
+        "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+        "c1f4128e05d2147936bc76d773110572fa4d85f112acf9fa6023fc1e8af948ee",
+        "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+        "fc45ee3c6e2c9aa6671e9e31453673227de9d36298ca44962795302c00ef58e2",
+        "c5521f8a382f45e6b7febdd7616d407cbe1a41ad1bcd685fbe59dd49cc91f2ee",
+        "5f4240fb226c6bd06e42a72000c3d4e89525e3cf5f1e4ae48f5d90d03834b297",
+        "efcf3436ed85a990a4ac4716caf967e2480c1b5eaa2e3047ffc412d9341273eb",
+        "6b91eea504ecf337a7b4c2d727a42ebf1fc153c4b4340708458003e4563b79ee",
+        "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+        "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+        "0cbfd374a2f1fde800ee8a14ad81aec01f55e5ab46d3de4f9f82d92d233533c3",
+        "42081c1b1bb00fb8a97f7d238a8c17bd9ac421d6b4e7507c56629ed0fe2e5682",
+        "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+        "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+        "fcf08ffe589c2cbd4543fa8d2525ee70d44b4aa3d3a3811f40f71c1e1b60420b",
+        "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+        "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+        "fe00f2750343c55b0b21a8ae21934321252dff58235a0b4e5fbdd3fd8235c999",
+        "f3a284602b62d1fb63b2f18dc478afe366be58837a8c5a30eb87bae939ed8e10",
+        "9aed3f2e504a3a5799b39a8a92661d6496b85b853ba2adb4fb84f2e92bef8753",
+        "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+        "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+        "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+        "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+        "e31bf3c632466c74dd45ffc4b531619a75d5370d883fa4bae08d8ea18450c6e0",
+        "5310f2bdb0595015ed0bee066ea156abf335ae467825a4e05318673c68ab9e5c",
+        "3bc42aca221488b5974803e82a4b6746291b4694acab5f61d4912e4849169416",
+        "c480c3a1a3d159210bfd46e2cb1d0abf023d286291eabee330bf9b6d85a2cf3a",
+        "dc60c8dc5223b6d8d4813da0bd7ff66d83bdfa1a01e37e5dccadd843f742fa3b",
+        "103f4d3d57629822e5014fb7aade94682df8fe2b47453223d3cd527516833cf9",
+        "8bc7b9bcb3b1ba707e0f342a18fad5ec1abccd9a008327f477749b75305cf384",
+        "5a0a899e2f259a87386bcb3c05f3ed4cb74930bfbde06afd3a0be7c5cc13cf2f",
+        "1baa614c77d7c8e77e5681f5217e57099b3e9945657abfcc26dda97d4f2c6e29",
+        "d88625fbc3d2ee666fbf67bdc8b587351ca05c9f59512ab7a728581cfa92abf7",
+        "45b326a57f93a7892a292912d922a6172d86f2e59af12a98f14eefddb26d6f94",
+        "577f0a0700cbdbcfd27bb24acd9345c6e4aac318f58f92d7b522e2798f8e7be8",
+        "663c636242521ba76187e5e1f9782f5da138cf8a3d445f034be2754e8bc99c42",
+        "8140fd6762f492b8795f4ee61f0526098033db8b7e510638301a0596ad74aa2c",
+        "02282d8037833b6017613adc83b48593d67625f3b919898ca406831807792c35",
+        "f03a2f3d6a3c54f10312693dcd0fbebbc56a8736c2b67bf422aa7c869d621d18",
+        "53c2d55ef83f774b50b413d6c37d6dc152544ed7e3461ca9752842a25949277a",
+        "473161113fffee3bfb72871c49bad805a94b9fa3907ebfee000a65bf8132ebef",
+        "1ba3f4114f98f6654e7196c4d9d1ce0de259574f47118654954ce253fbeff37f",
+        "d41606e2e21e91fff44c2b921e5ad69e4845f7baca50d06d2f9353d8629e6c3a",
+        "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+        "f3abb47188e2645668e4de41c8e630d8c97441ce5de9bf549bfb35d94027f014",
+        "645a2f9c4d85a4e8de76ff658208ab5eae1a906b49f0233f3cfb5b5f65c819b3",
+        "da98827a9f205991086008ab6687a816e7968861ce9ea0d69c20ba3900b6e9c3",
+        "9bd72e091b921d9d1122289bda41118e94ca3180576ed13802fe600a5d90fff7",
+        "baa98801bb9c8eabef84ee9d7188a682779f2882d9357504042062cfd734da2e",
+        "d025baa090677a7cbab94e5eda5bf6e48cd372842a51d3735ade26c559ff8d4f",
+        "3c7dc9313074e616f5f80573eaf274beb1c59f6219412f8246504e53cb1f8854",
+        "883e4036eca58e598c8e02a05034c86d81b19a9d8b9727ec7135ffb66c528ea5",
+        "0688535e4eeb2ba594d46f90e3f753cca1c814a3d370ba6514d6cc9ea2e5619d",
+        "fdb3e1b89f8dba54cd2827b7118d47398c8dc4935bee5cff8444cb5623d5f8b9",
+        "9805acd0429673ba673b44e4cf1aa64989b2bbdf791f1ce65ee2852c8d0adfb1",
+        "5c54fc0d47bab1ee41943df55f2dc0cb8b993d1e134801821a78993ce8e15c9d",
+        "030cc387ebf6731c3b78390c6a75e20edddcf757b3f85c1830251db4f5629f0a",
+        "174658349676fc4be49a24013712c99a336280582d4a98d1693d3938939b482a"
+      ],
+      "evaluation_commit": "69a5f97161c36611fc974b626c9666fdf2941a31"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "contact-central-symmetric-difference",
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "json_pointer": "/contacts/0/symmetric_difference_area_km2"
+    },
+    {
+      "metric_id": "contact-isabel-symmetric-difference",
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "json_pointer": "/contacts/1/symmetric_difference_area_km2"
+    },
+    {
+      "metric_id": "contact-makira-symmetric-difference",
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "json_pointer": "/contacts/2/symmetric_difference_area_km2"
+    },
+    {
+      "metric_id": "contact-choiseul-symmetric-difference",
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "json_pointer": "/contacts/3/symmetric_difference_area_km2"
+    },
+    {
+      "metric_id": "contact-western-symmetric-difference",
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "json_pointer": "/contacts/4/symmetric_difference_area_km2"
+    },
+    {
+      "metric_id": "candidate-total-area",
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "json_pointer": "/physical_source/candidate_total_area_m2"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "contact-central-symmetric-difference",
+      "value": 25.644279105544,
+      "unit": "km²"
+    },
+    {
+      "metric_id": "contact-isabel-symmetric-difference",
+      "value": 33.63782274500035,
+      "unit": "km²"
+    },
+    {
+      "metric_id": "contact-makira-symmetric-difference",
+      "value": 24.235900332500496,
+      "unit": "km²"
+    },
+    {
+      "metric_id": "contact-choiseul-symmetric-difference",
+      "value": 21.750379929774947,
+      "unit": "km²"
+    },
+    {
+      "metric_id": "contact-western-symmetric-difference",
+      "value": 80.7716400631694,
+      "unit": "km²"
+    },
+    {
+      "metric_id": "candidate-total-area",
+      "value": 202.30437931587176,
+      "unit": "m²"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/README.md",
+      "rows": [
+        {
+          "metric_id": "contact-central-symmetric-difference",
+          "line": 38,
+          "template": "| Central | `17018030B21762340724861` | {value} km² |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "contact-isabel-symmetric-difference",
+          "line": 39,
+          "template": "| Isabel | `17018030B36628097040544` | {value} km² |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "contact-makira-symmetric-difference",
+          "line": 40,
+          "template": "| Makira | `17018030B43755880178831` | {value} km² |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "contact-choiseul-symmetric-difference",
+          "line": 41,
+          "template": "| Choiseul | `17018030B68013150931387` | {value} km² |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "contact-western-symmetric-difference",
+          "line": 42,
+          "template": "| Western | `17018030B8659224027401` | {value} km² |",
+          "decimals": 3
+        }
+      ]
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The retained geoBoundaries product authenticates five matching contact IDs and names, but those valid contact geometries differ from current representations; no authority or effective date is established.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-slb-adm1-simplified"
+      ]
+    },
+    {
+      "text": "Eight scoped candidates are fully covered by mapped GSHHG Level-1 land pointsets in the retained source-relative comparison; this does not establish physical land, dryness, ownership, or legal boundaries.",
+      "status": "supported",
+      "source_ids": [
+        "gshhg-2.3.7-binary"
+      ]
+    },
+    {
+      "text": "Physical-source fitness and observation dates for all twelve scoped components remain unknown.",
+      "status": "unresolved",
+      "source_ids": [
+        "gshhg-2.3.7-binary"
+      ]
+    },
+    {
+      "text": "Underlying geoBoundaries source permissions, authority and effective-date particulars are unverified.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-slb-adm1-simplified"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/campaigns/solomon-islands-source-fitness-20261007/verify.py --repo . --compare-dir research/campaigns/solomon-islands-source-fitness-20261007",
+    "node scripts/evidence-quality.mjs {rel}/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/batch-context.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/geoboundaries-adm1-source.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/geometry-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/geometry-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/native-source-records.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/solomon-islands-source-fitness-20261007/verify.py",
+      "status": "added"
+    }
+  ]
+}
