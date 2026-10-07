@@ -22,6 +22,21 @@ The official API item bodies declare `Content-Crs` OGC:CRS84, so their coordinat
 
 The analyses report administrative polygon intersections, residuals, boundary-line contacts, and whole feature identities. These measurements do not establish physical land/water class, ownership, historical authority, why the original gaps occurred, or that an older source has been replaced legally or operationally. All four component classifications remain unknown. This packet does not certify geography, change source registries, or authorize publication.
 
+## Results
+
+Both paired runs completed with the same producer revision and their 13 scientific output files match byte-for-byte. The six negative controls rejected their perturbed cases; the positive checks preserved known polygon, line, point, and uncovered-residual outcomes.
+
+| Family | Components | Component area | Covered by union of the four whole official municipality items | Uncovered residual |
+| --- | ---: | ---: | ---: | ---: |
+| `509d6812e22b584f960be362` | 2 | 463,562.09 m² | 462,147.29 m² (99.6948%) | 1,414.80 m² |
+| `4c43b39b2038f22dfdedebce` | 2 | 4,668,822.17 m² | 4,667,764.92 m² (99.9774%) | 1,057.25 m² |
+
+By component, the first family has one completely covered member (134,556.05 m²) and one with 1,414.80 m² uncovered (329,006.03 m²). The second family has residuals of 135.78 m² and 921.47 m² against component areas 608,927.88 m² and 4,059,894.29 m². These are planar topological overlay results measured with WGS84 ellipsoidal areas, not a classification of the residuals.
+
+The consumed-source polygons and current Atlas contacts do not exactly match the candidate official polygons. Their old-to-official symmetric-difference areas are approximately 2.29 km² for Rosal, 1.60 km² for Encinasola, 72.84 km² for Barrancos, and 153.67 km² for Moura. Different native identifier schemes and unresolved effective dates remain visible in the records. The Atlas `ESP-2101` aggregate is not an Encinasola alias: the 28 source-member union differs from the Atlas district and remains an aggregate lineage check only. The two IGN line items are analyzed separately against each polygon/component; no Portuguese-side line was captured to establish matched bilateral geometry.
+
+The official item comparisons therefore support a limited answer: the four source families/contact records can be examined against complete current provider features, but the retained metadata does not establish a shared effective vintage or legal equivalence. The small component residuals and larger polygon differences remain unresolved measurements. No cause, owner, physical class, or certification is inferred.
+
 ## Capture source links
 
 - DGT CAOP2025 page and Aviso 3502/2026/2; direct captured PDF and linked change list are indexed in the capture index.
