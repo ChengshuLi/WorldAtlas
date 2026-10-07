@@ -119,6 +119,13 @@ def run(commit,out):
         else:a['original']['sha256']='0'*64
         expected_error='Original whole containing input omitted'if change in ['commit','path']else'Original alias relationship'
         checked('wrong frozen source selector '+change+' rejects',lambda altered=altered:rejected(lambda:reader.original(alias['original']['commit'],alias['original']['path'],altered,parse=False),expected_error))
+    from verify import validate_family_extras
+    f={'id':'f','component_ids':['c'],'grouping':{'observed_scope_bucket':'unknown'},'contact_ids':['t'],'edge_neighbor_ids':['t'],'existing_related_issues':[1]};result={'complete_original_member_ids':['m'],'literal_member_union':{'status':'unknown-invalid-original-member'}}
+    e={'c':{'family':'f','complete_member_ids':['m'],'source_union_reference':result['literal_member_union'],'original_native_scope_bucket':'unknown','contacts':['t'],'edge_neighbor_ids':['t'],'existing_related_issues':[1]}}
+    validate_family_extras(f,result,e);results.append({'control':'immutable family/component extras positive','outcome':'passed'})
+    for change in ['complete_member_ids','contacts','edge_neighbor_ids','existing_related_issues','original_native_scope_bucket']:
+        altered=json.loads(canon(e));altered['c'][change]=[]if isinstance(altered['c'][change],list)else'wrong'
+        checked('immutable family extras '+change+' rejects',lambda altered=altered:rejected(lambda:validate_family_extras(f,result,altered),'Full immutable family'))
     reader.close();out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(canon({'controls':results,'count':len(results),'world_generation':False,'limitations':['Directed controls do not approve factual source roles or replace two complete final runs.']}));print(json.dumps({'controls':len(results),'out':str(out)}))
 
 if __name__=='__main__':

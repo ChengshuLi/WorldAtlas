@@ -18,6 +18,13 @@ def read_pin(root,pin):
     return json.loads(raw)
 
 
+def validate_family_extras(f,result,rows):
+    for i in f['component_ids']:
+        r=rows[i]
+        expected={'family':f['id'],'complete_member_ids':result['complete_original_member_ids'],'source_union_reference':result['literal_member_union'],'original_native_scope_bucket':f['grouping']['observed_scope_bucket'],'contacts':f['contact_ids'],'edge_neighbor_ids':f['edge_neighbor_ids'],'existing_related_issues':f['existing_related_issues']}
+        if any(canon(r.get(k))!=canon(v)for k,v in expected.items()):raise ValueError('Full immutable family/component extra relation differs')
+
+
 def normalized_diagnostic(expected):
     # Only transport the exact geometry payload; every scientific field and
     # absent/unknown field stays in the canonical result comparison.
@@ -100,7 +107,7 @@ def verify(run):
         if dict(per_family[fid])!=f['counts']or len(f['family']['component_ids'])!=f['family']['component_count']:raise ValueError('Family complete status totals differ')
     # Original full feature/member pins bind the literal input geometry; this
     # verifier reads every containing ordinary frozen alias, not hash-only refs.
-    from reader import Inputs,validate_pointsets
+    from reader import Inputs,validate_pointsets,validate_family_scope
     inp=Inputs(R,report['code_commit'],str(P.relative_to(R)));index=json.loads(inp.read('input-index.json'));archive=inp.archive(index);members={r['id']:r for r in archive['locations']};featurepins={r['id']:r for r in scope['existing_current_component_and_member_pins']};features={};wanted=set(rows)
     M='79ffb2ed04702e16f009e4675a8d74ef9bd09d4f';S='7c7cdf2388e0e7200b937c2cfb440b53165d9d98';ir=inp.original(M,'coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json',index)
     for pin in ir['complete_products']['components']:
@@ -116,6 +123,17 @@ def verify(run):
     for i,r in rows.items():
         if r['component_full_feature_sha256']!=featurepins[i]['canonical_feature_sha256']or r['component_geometry_sha256']!=featurepins[i]['geometry_sha256']:raise ValueError('Unknown-row full feature pins changed')
     from kernel import member_union,compare
+    N='a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd';nr=inp.original(N,'coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json',index);expected_families={}
+    for pin in nr['outputs']['current-batches']:
+        for f in inp.original(N,pin['path'],index):
+            if f['id']in families:
+                if f['id']in expected_families:raise ValueError('Duplicate immutable family')
+                expected_families[f['id']]=f
+    validate_family_scope(scope,expected_families)
+    for fid,result in families.items():
+        f=expected_families[fid];mids=sorted({i for source in f['source_families']for i in source.get('original_source_member_ids',[])})
+        if canon(result['family'])!=canon(f)or result['complete_original_member_ids']!=mids:raise ValueError('Complete immutable family/member relation differs')
+        validate_family_extras(f,result,rows)
     union_cache={};measured=0
     extras={'family','complete_member_ids','source_union_reference','component_full_feature_sha256','component_geometry_sha256','original_native_scope_bucket','contacts','edge_neighbor_ids','existing_related_issues'}
     for fid,f in families.items():
