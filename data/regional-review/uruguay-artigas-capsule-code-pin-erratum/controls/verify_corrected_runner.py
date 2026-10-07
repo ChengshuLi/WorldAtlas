@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Exercise the corrected actual CLI with isolated, hard-linked fixtures."""
 import hashlib
+import contextlib
+import importlib.util
+import io
 import json
 import os
 from pathlib import Path
@@ -101,6 +104,14 @@ def symlink_parent(root):
     (root / "outputs").symlink_to(outside, target_is_directory=True)
 
 
+def replace_after_validation(root):
+    target = root / CAPSULE
+    raw = target.read_bytes() + b"\nopen(sys.argv[1] + '/audit-unreviewed-code.txt','w').write('probe')\n"
+    replace(target, raw)
+    input_path = root / "inputs/baseline/data-world-index.json"
+    replace(input_path, input_path.read_bytes() + b" ")
+
+
 def main():
     FIXTURES.mkdir(parents=True, exist_ok=True)
     LOGS.mkdir(parents=True, exist_ok=True)
@@ -133,6 +144,45 @@ def main():
         if name == "existing-output-sentinel" and row["sentinel_sha256"] != digest(b"retain"):
             raise AssertionError("sentinel changed")
         cases.append(row)
+    root = fixture("replacement-after-validation")
+    spec = importlib.util.spec_from_file_location("artigas_corrected_runner", root / "reproduce.py")
+    runner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runner)
+    original_destination = runner.destination
+    def mutate_after_capture(name):
+        replace_after_validation(root)
+        return original_destination(name)
+    runner.destination = mutate_after_capture
+    previous_argv = sys.argv
+    stdout, stderr = io.StringIO(), io.StringIO()
+    try:
+        sys.argv = [str(root / "reproduce.py"), "--output", "attempt"]
+        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+            runner.main()
+    finally:
+        sys.argv = previous_argv
+    out = root / "outputs/attempt"
+    race_row = {"case": "capsule-and-input-replaced-after-validation",
+                "exit_code": 0, "expected_exit_code": 0,
+                "capsule_sha256_after_replacement": digest((root / CAPSULE).read_bytes()),
+                "input_sha256_after_replacement": digest((root / "inputs/baseline/data-world-index.json").read_bytes()),
+                "retained_report_sha256": digest((out / "reproduction-results.json").read_bytes()),
+                "success_receipt_exists": (out / "publication.json").is_file(),
+                "probe_created": (out / "audit-unreviewed-code.txt").exists(),
+                "stdout_sha256": digest(stdout.getvalue().encode()),
+                "stderr_sha256": digest(stderr.getvalue().encode()),
+                "stdout_bytes": len(stdout.getvalue().encode()),
+                "stderr_bytes": len(stderr.getvalue().encode()),
+                "execution": "actual reproduce.py main() with capsule/input paths replaced by the destination-admission hook after validate() returned"}
+    logs = LOGS / "capsule-and-input-replaced-after-validation"
+    if logs.exists():
+        shutil.rmtree(logs)
+    logs.mkdir(parents=True)
+    (logs / "stdout.txt").write_text(stdout.getvalue())
+    (logs / "stderr.txt").write_text(stderr.getvalue())
+    if race_row["retained_report_sha256"] != "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a" or not race_row["success_receipt_exists"] or race_row["probe_created"]:
+        raise AssertionError("runner did not consume the captured code/input bytes")
+    cases.append(race_row)
     root, process, row = run("traversal", output="../escape")
     row["escape_created"] = (root.parent / "escape").exists()
     row["outputs"] = sorted(p.name for p in (root / "outputs").iterdir())
@@ -157,6 +207,7 @@ def main():
     audit = {"version": 1, "issue": 1413, "originals_unchanged": after_pins,
              "cases": cases, "runtime": {"python": sys.version, "executable": sys.executable},
              "limits": ["Fixtures use hard links for unchanged inputs; changed manifest/code/input paths are atomically replaced before invocation.",
+                        "The directed race hook replaces both executable and consumed input paths after validation; the runner still executes and reads the captured byte values.",
                         "The probes write only inside their isolated fixture output directory; generated fixture copies are removed after the retained outcome records are written."]}
     (CONTROLS / "corrected-runner-audit.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n")
     shutil.rmtree(FIXTURES)

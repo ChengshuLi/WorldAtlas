@@ -13,7 +13,7 @@ sha = lambda raw: hashlib.sha256(raw).hexdigest()
 
 def main():
     rows = []
-    for name in ("verified-run-six", "verified-run-seven"):
+    for name in ("verified-run-twelve", "verified-run-thirteen"):
         command = [sys.executable, str(HERE / "reproduce.py"), "--output", name]
         process = subprocess.run(command, cwd=HERE, text=True, capture_output=True)
         logdir = CONTROLS / "corrected-baseline-logs" / name
@@ -32,12 +32,34 @@ def main():
         if process.returncode or row["report_sha256"] != "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a" or not receipt.is_file():
             raise AssertionError("full corrected reproduction did not complete: " + name)
         rows.append(row)
+    name = "failure-captured-safe-two"
+    command = [sys.executable, str(HERE / "reproduce.py"), "--output", name, "--fail-after-compute"]
+    process = subprocess.run(command, cwd=HERE, text=True, capture_output=True)
+    logdir = CONTROLS / "corrected-baseline-logs" / name
+    logdir.mkdir(parents=True)
+    (logdir / "stdout.txt").write_text(process.stdout)
+    (logdir / "stderr.txt").write_text(process.stderr)
+    out = HERE / "outputs" / name
+    report = out / "reproduction-results.json"
+    failure = out / "failure.json"
+    failed_attempt = {"command": command, "exit_code": process.returncode,
+                      "stdout_sha256": sha(process.stdout.encode()),
+                      "stderr_sha256": sha(process.stderr.encode()),
+                      "report_sha256": sha(report.read_bytes()) if report.is_file() else None,
+                      "failure": json.loads(failure.read_text()) if failure.is_file() else None,
+                      "success_receipt_exists": (out / "publication.json").exists(),
+                      "output_name": name}
+    if (process.returncode != 1 or not report.is_file() or not failure.is_file() or
+            failed_attempt["success_receipt_exists"] or failed_attempt["report_sha256"] != "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a"):
+        raise AssertionError("failed full run was not safely retained")
     result = {"version": 1, "issue": 1413, "capsule_sha256": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
               "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
-              "runs": rows, "runtime": {"python": sys.version, "executable": sys.executable}}
+              "runs": rows, "directed_failure": failed_attempt,
+              "runtime": {"python": sys.version, "executable": sys.executable}}
     (CONTROLS / "corrected-baseline-runs.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps({"runs": len(rows), "matched_report": True,
-                      "completion_receipts": all(row["publication_sha256"] for row in rows)}, sort_keys=True))
+                      "completion_receipts": all(row["publication_sha256"] for row in rows),
+                      "failed_attempt_retained_without_receipt": True}, sort_keys=True))
 
 
 if __name__ == "__main__":

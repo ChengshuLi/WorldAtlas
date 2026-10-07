@@ -1,8 +1,8 @@
 Traceback (most recent call last):
-  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/altered-code-unchanged-manifest/reproduce.py", line 119, in <module>
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/altered-code-unchanged-manifest/reproduce.py", line 187, in <module>
     main()
-  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/altered-code-unchanged-manifest/reproduce.py", line 87, in main
-    validate()  # All source and executed-code checks precede destination creation.
-  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/altered-code-unchanged-manifest/reproduce.py", line 64, in validate
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/altered-code-unchanged-manifest/reproduce.py", line 149, in main
+    captured = validate()  # The exact bytes used below are captured before destination creation.
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/altered-code-unchanged-manifest/reproduce.py", line 69, in validate
     raise ValueError("immutable whole-file pin mismatch: " + rel)
 ValueError: immutable whole-file pin mismatch: inputs/code/capsule-reproduce.py

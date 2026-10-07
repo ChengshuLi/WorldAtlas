@@ -13,8 +13,8 @@
       "expected_exit_code": 1,
       "output_names": [],
       "probe_created": false,
-      "stderr_bytes": 1209,
-      "stderr_sha256": "9749a4eeeea58c8226a86177210163b6f317f138e75585b7b84aa998e1c3722c",
+      "stderr_bytes": 1224,
+      "stderr_sha256": "a0b6868ace59f674e7fd6bf5ed0b11367670d81398f3f5b641c188df00128aa1",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -31,8 +31,8 @@
       "expected_exit_code": 1,
       "output_names": [],
       "probe_created": false,
-      "stderr_bytes": 1242,
-      "stderr_sha256": "c99d7a2bfb7ec56f1fe51976b3a47411909f899aa2fb82ab0f44d859ce07eba2",
+      "stderr_bytes": 1257,
+      "stderr_sha256": "0b55185479e90594e58eef35b654abb8220916fb7f25ac1759229fde2ba48c74",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -49,8 +49,8 @@
       "expected_exit_code": 1,
       "output_names": [],
       "probe_created": false,
-      "stderr_bytes": 1230,
-      "stderr_sha256": "24538ff5af8766184c7a921472318c9c4260094251dcad7e63edb8cc36d53be2",
+      "stderr_bytes": 1245,
+      "stderr_sha256": "787be53409f946005be5e751eb51f214ab6511e7241bd89fc73d7ef45bc86a5d",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -67,8 +67,8 @@
       "expected_exit_code": 1,
       "output_names": [],
       "probe_created": false,
-      "stderr_bytes": 1214,
-      "stderr_sha256": "06ec42221c6f1217ea25dc13d9070ab8aeaa905087a3b89e1d80f46f92141046",
+      "stderr_bytes": 1229,
+      "stderr_sha256": "f2d06b2847945823171102d646b20919b21f9595ca76d93351faa16cde839a59",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -88,8 +88,8 @@
       ],
       "probe_created": false,
       "sentinel_sha256": "6b428ace0262db5de1acac5d5e225a117674ede63c6631800103512289d791e6",
-      "stderr_bytes": 1119,
-      "stderr_sha256": "4e4b89147794599f656ccfdca71443db470261d218c827a0c844b6f74d7e67bd",
+      "stderr_bytes": 1129,
+      "stderr_sha256": "8d4789e50482c2dbf3a36041fa67c8ab6d34090b57e489b9e19473dc5c0060cf",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -108,8 +108,8 @@
         "attempt"
       ],
       "probe_created": false,
-      "stderr_bytes": 1089,
-      "stderr_sha256": "9b7d88503a07aa47fd0fcadba768b8866b5e4292d1c1659b8d45e69fb2df363c",
+      "stderr_bytes": 1099,
+      "stderr_sha256": "82a1322967f5ef6749abc987fb23b7c266356d00117becde6f3e2935d40ffcfb",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -126,10 +126,25 @@
       "expected_exit_code": 1,
       "output_names": [],
       "probe_created": false,
-      "stderr_bytes": 1106,
-      "stderr_sha256": "4af57fb1015d572fe9c060eae634a395a3e5cf26dcc96e4db8ca2c41c46660d7",
+      "stderr_bytes": 1116,
+      "stderr_sha256": "c6dba62556bce7273a75ff6446c51e37d4f01fe2e1888fe22e4f06d930c5511d",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "capsule_sha256_after_replacement": "7f3fe7914b04496b65d4db2826d2ec89e6821372dc633a0aa54b175c2c13f864",
+      "case": "capsule-and-input-replaced-after-validation",
+      "execution": "actual reproduce.py main() with capsule/input paths replaced by the destination-admission hook after validate() returned",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "input_sha256_after_replacement": "b9cdf1e6d61c824bada13aab11153cfd5cb157afc61a95f302d2134ba3397fbe",
+      "probe_created": false,
+      "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 434,
+      "stdout_sha256": "d1e667b52d5e507bbd92f6f94e33700bdcdc0537ad9c8625586b0bc771162fe3",
+      "success_receipt_exists": true
     },
     {
       "case": "traversal",
@@ -143,8 +158,8 @@
       "exit_code": 1,
       "expected_exit_code": 1,
       "outputs": [],
-      "stderr_bytes": 1122,
-      "stderr_sha256": "ba58fbaa6f9ea8f7590698034eb2426d965bbd4375133649cac3d19582668633",
+      "stderr_bytes": 1132,
+      "stderr_sha256": "eb3585fb84ce312af587e2bbddb0e96d653e2b421ec319317d7d5b091ab115bb",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -160,13 +175,14 @@
       "exit_code": 1,
       "expected_exit_code": 1,
       "failure_record": {
+        "capsule_stdout": "{\"features_checked\": 2, \"igm_features\": 21, \"old_adm1\": 19, \"pins_checked\": 5, \"result_sha256\": \"3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a\"}\n",
         "error": "directed failure after computation; preserve this attempt",
         "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
         "status": "failed"
       },
       "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
       "stderr_bytes": 826,
-      "stderr_sha256": "118c9f57e498d2c0424e841f818b1e87604504c2319e76a1a1d0c1328aed5c8a",
+      "stderr_sha256": "62144ef1f8f4c9f08f793974de858746e8ea3ccb566e08178ec3dc78ddce6650",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "success_receipt_exists": false
@@ -175,6 +191,7 @@
   "issue": 1413,
   "limits": [
     "Fixtures use hard links for unchanged inputs; changed manifest/code/input paths are atomically replaced before invocation.",
+    "The directed race hook replaces both executable and consumed input paths after validation; the runner still executes and reads the captured byte values.",
     "The probes write only inside their isolated fixture output directory; generated fixture copies are removed after the retained outcome records are written."
   ],
   "originals_unchanged": {

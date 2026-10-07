@@ -4,11 +4,12 @@
 The manifest is a descriptive inventory, never the trust root for executed code.
 """
 import argparse
+import contextlib
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
-import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
@@ -58,12 +59,56 @@ def validate():
         raise ValueError("required executable and input pin inventory differs")
     if set(MANIFEST) != set(manifest["capsule"]):
         raise ValueError("required executable pin inventory is incomplete")
+    captured = {}
     for rel, expected in MANIFEST.items():
         path = HERE / ("inputs/code/original-wrapper.py" if rel == "reproduce.py" else rel)
-        if path.is_symlink() or not path.is_file() or sha(path.read_bytes()) != expected:
+        if path.is_symlink() or not path.is_file():
             raise ValueError("immutable whole-file pin mismatch: " + rel)
-    if sha((HERE / CAPSULE).read_bytes()) != CAPSULE_SHA256:
+        raw = path.read_bytes()
+        if sha(raw) != expected:
+            raise ValueError("immutable whole-file pin mismatch: " + rel)
+        captured[rel] = raw
+    if sha(captured[CAPSULE]) != CAPSULE_SHA256:
         raise ValueError("executed capsule identity mismatch")
+    return captured
+
+
+def execute_captured_capsule(captured, out):
+    """Execute reviewed code and serve its pinned inputs from captured bytes."""
+    script = HERE / CAPSULE
+    pinned_paths = {str((HERE / rel).absolute()): raw for rel, raw in captured.items()
+                    if rel != "reproduce.py"}
+    read_bytes = Path.read_bytes
+    write_bytes = Path.write_bytes
+    output_path = str((out / "reproduction-results.json").absolute())
+    outputs = {}
+
+    def pinned_read_bytes(path):
+        value = pinned_paths.get(str(path.absolute()))
+        return value if value is not None else read_bytes(path)
+
+    def capture_output_bytes(path, raw):
+        if str(path.absolute()) != output_path or "reproduction-results.json" in outputs:
+            raise ValueError("capsule attempted an unplanned or duplicate output")
+        if not isinstance(raw, bytes):
+            raise ValueError("capsule output must be exact bytes")
+        outputs["reproduction-results.json"] = raw
+        return len(raw)
+
+    previous_argv = sys.argv
+    stdout = io.StringIO()
+    try:
+        sys.argv = [str(script), str(out)]
+        Path.read_bytes = pinned_read_bytes
+        Path.write_bytes = capture_output_bytes
+        with contextlib.redirect_stdout(stdout):
+            exec(compile(captured[CAPSULE], str(script), "exec"),
+                 {"__name__": "__main__", "__file__": str(script)})
+    finally:
+        Path.read_bytes = read_bytes
+        Path.write_bytes = write_bytes
+        sys.argv = previous_argv
+    return stdout.getvalue(), outputs
 
 
 def destination(name):
@@ -75,8 +120,25 @@ def destination(name):
     target = root / name
     if target.exists() or target.is_symlink():
         raise FileExistsError("output already exists")
-    target.mkdir()  # Exclusive reservation before executing the capsule.
-    return target
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0)
+    root_fd = os.open(str(root), flags)
+    try:
+        os.mkdir(name, dir_fd=root_fd)
+        out_fd = os.open(name, flags, dir_fd=root_fd)
+    finally:
+        os.close(root_fd)
+    return target, out_fd
+
+
+def write_exclusive(directory_fd, name, raw):
+    if name not in ("reproduction-results.json", "publication.json", "failure.json"):
+        raise ValueError("unplanned output file")
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
+    file_fd = os.open(name, flags, 0o600, dir_fd=directory_fd)
+    with os.fdopen(file_fd, "wb") as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
 
 
 def main():
@@ -84,35 +146,41 @@ def main():
     parser.add_argument("--output", required=True, help="fresh plain name under outputs/")
     parser.add_argument("--fail-after-compute", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
-    validate()  # All source and executed-code checks precede destination creation.
-    out = destination(args.output)
+    captured = validate()  # The exact bytes used below are captured before destination creation.
+    out, out_fd = destination(args.output)
+    capsule_stdout = ""
     try:
-        result = subprocess.run([sys.executable, str(HERE / CAPSULE), str(out)],
-                                cwd=HERE, text=True, capture_output=True)
-        report = out / "reproduction-results.json"
-        if result.returncode or not report.is_file() or report.is_symlink():
-            raise RuntimeError("capsule failed: " + result.stderr[-2000:])
-        actual = report.read_bytes()
-        retained = (HERE / "inputs/original-reproduction-results.json").read_bytes()
+        capsule_stdout, output_bytes = execute_captured_capsule(captured, out)
+        actual = output_bytes.get("reproduction-results.json")
+        if actual is None:
+            raise ValueError("capsule did not create its report")
+        retained = captured["inputs/original-reproduction-results.json"]
+        write_exclusive(out_fd, "reproduction-results.json", actual)
         if actual != retained:
             raise ValueError("report differs from the exact retained result")
         if args.fail_after_compute:
             raise RuntimeError("directed failure after computation; preserve this attempt")
         receipt = {"status": "complete", "capsule_sha256": CAPSULE_SHA256,
                    "report_sha256": sha(actual)}
-        with (out / "publication.json").open("x") as stream:
-            json.dump(receipt, stream, sort_keys=True)
-            stream.write("\n")
+        write_exclusive(out_fd, "publication.json", (json.dumps(receipt, sort_keys=True) + "\n").encode())
         print(json.dumps({"exit_code": 0, "report_sha256": sha(actual),
                           "capsule_sha256": CAPSULE_SHA256,
-                          "output": str(report.relative_to(HERE)),
-                          "stdout": result.stdout}, sort_keys=True))
+                          "output": str((out / "reproduction-results.json").relative_to(HERE)),
+                          "stdout": capsule_stdout}, sort_keys=True))
     except Exception as exc:
         failure = {"status": "failed", "error": str(exc),
-                   "report_sha256": sha((out / "reproduction-results.json").read_bytes())
-                   if (out / "reproduction-results.json").is_file() else None}
-        (out / "failure.json").write_text(json.dumps(failure, sort_keys=True) + "\n")
+                   "report_sha256": sha(output_bytes["reproduction-results.json"])
+                   if "output_bytes" in locals() and "reproduction-results.json" in output_bytes else None,
+                   "capsule_stdout": capsule_stdout}
+        if "output_bytes" in locals() and "reproduction-results.json" in output_bytes:
+            try:
+                write_exclusive(out_fd, "reproduction-results.json", output_bytes["reproduction-results.json"])
+            except FileExistsError:
+                pass
+        write_exclusive(out_fd, "failure.json", (json.dumps(failure, sort_keys=True) + "\n").encode())
         raise
+    finally:
+        os.close(out_fd)
 
 
 if __name__ == "__main__":
