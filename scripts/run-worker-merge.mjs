@@ -1,3 +1,5 @@
+import {gitBlobTransport} from './git-blob-transport.mjs';
+import {quotaDelay,requestAccounting} from './github-quota.mjs';
 import {loadGeographicReport} from './geographic-report-artifact.mjs';
 import fs from 'node:fs';
 import {assertAdmission} from './merge-scheduler.mjs';
@@ -12,7 +14,9 @@ if (process.env.GITHUB_REF !== 'refs/heads/main' || !/^[-\w.]+\/[-\w.]+$/.test(r
 const number = Number(input.pr_number), phase = process.env.MERGE_PHASE;
 if (!['prepare','merge'].includes(phase) || !Number.isSafeInteger(number) || number < 1 ||
     !/^[a-f0-9]{40}$/.test(input.expected_head ?? '') || !/^[-a-zA-Z0-9]{16,100}$/.test(input.request_id ?? '')) throw Error('Invalid merge request');
-const api = githubAPI(process.env.GH_TOKEN), options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
+const accounting=requestAccounting(phase);
+const transport=gitBlobTransport(githubAPI(process.env.GH_TOKEN,{onRequest:accounting.observe,readWaitMs:phase==='merge'?61*60*1000:8*60*1000}),{repo,token:process.env.GH_TOKEN,directory:process.cwd(),onFetch:row=>console.log(JSON.stringify({phase,immutable_transport:row}))});
+const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
   prepareFallback: process.env.PREPARE_FALLBACK === 'true',
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase, ...(input.queue_attempt ? {queue_attempt: Number(input.queue_attempt)} : {})};
@@ -49,20 +53,24 @@ try {
 } catch (error) {
   result.reason = error.message;
   if (error.github) result.api_error = error.github;
+  if (error.quotaCause?.github)result.quota_cause=error.quotaCause.github;
   if (error.capacity) result.final_capacity = error.capacity;
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
-  result.retryable = /resubmit unchanged head/.test(error.message);
+  result.retryable = /resubmit unchanged head/.test(error.message) || (quotaDelay(error)??quotaDelay(error.quotaCause))!==null;
+  if((quotaDelay(error)??quotaDelay(error.quotaCause))!==null)result.quota_retry_at=new Date(Date.now()+(quotaDelay(error)??quotaDelay(error.quotaCause))).toISOString();
   if (phase === 'prepare') process.exitCode = 1;
 }
 if (phase === 'merge' && process.env.CANDIDATE_REF) {
   try { result.candidate_cleanup = await cleanupCandidate(options, process.env.CANDIDATE_REF, process.env.TESTED_CANDIDATE); }
   catch (error) { result.candidate_cleanup = {status: 'pending', reference: process.env.CANDIDATE_REF, reason: error.message}; }
 }
+result.request_accounting=accounting.receipt();
 fs.writeFileSync('merge-result.json', JSON.stringify(result, null, 2) + '\n');
 fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${result.status} PR #${number}: ${result.reason ?? ''}\n`);
 console.log(JSON.stringify(result));
+transport.close();
 // Preserve the decision before attempting its remote notification. A comment
 // permission/network failure must not discard the original result or reason.
 try { await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)}); }
@@ -75,7 +83,12 @@ catch (error) {
     try { result.candidate_cleanup = await cleanupCandidate(options, result.candidate_ref, result.tested_candidate); }
     catch (cleanupError) { result.candidate_cleanup = {status: 'pending', reference: result.candidate_ref, reason: cleanupError.message}; }
   }
+  result.request_accounting=accounting.receipt();
   fs.writeFileSync('merge-result.json', JSON.stringify(result, null, 2) + '\n');
   console.log(JSON.stringify(result));
   throw error;
 }
+
+result.request_accounting=accounting.receipt();
+fs.writeFileSync('merge-result.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify({request_accounting:accounting.receipt()}));

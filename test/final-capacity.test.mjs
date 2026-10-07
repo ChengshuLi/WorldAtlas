@@ -263,3 +263,12 @@ test('same-token success capacity metadata never logs arbitrary bodies or header
   assert.ok(artifactCalls > 0 && artifactCalls < 100); assert.equal(downloads, 0);
   assert.equal(f.writes.filter(row => row.method === 'PUT').length, 0);
 });
+test('capacity excludes blob REST requests only after exact transport proves the entire bound inventory',async()=>{
+ for(const complete of [false,true]){
+  const f=fixture();let rows;
+  f.api.prefetchGitBlobs=async(repo,inventory)=>{assert.equal(repo,f.repo);rows=inventory;};
+  f.api.hasGitBlobs=(repo,inventory)=>complete&&inventory===rows;
+  const value=await inventoryFinalEvidence({api:f.api,repo:f.repo,pr:f.pr,issue:f.issue,reservation:f.claim,files:f.files,policy:{version:1,mode:'enforce-new',activation_time:'2020-01-01T00:00:00Z'}});
+  assert(rows.length>0);assert.equal(value.exact_git_transport,complete);assert.equal(value.blob_calls,complete?0:rows.length);
+ }
+});

@@ -1,3 +1,4 @@
+import {quotaDelay} from './github-quota.mjs';
 import {githubPages} from './issue-claim-contract.mjs';
 import {readWorkerResult, renderWorkerResult} from './worker-result.mjs';
 
@@ -63,6 +64,14 @@ export async function registerRequest({api, repo, request}) {
   return api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'request'})});
 }
 export async function scheduleNext({api, repo, now = Date.now()}) {
+  // Observe the actual repository bucket before spending any dispatch attempt.
+  // This is a refusal gate, not a reservation against other consumers.
+  if(typeof api.readRepositoryCapacity==='function'){
+    let capacity;
+    try{capacity=await api.readRepositoryCapacity(repo);}
+    catch(error){const delay=quotaDelay(error,now);if(delay===null)throw error;return {status:'waiting-quota',retry_at:new Date(now+delay).toISOString()};}
+    if(capacity.remaining<17)return {status:'waiting-quota',retry_at:new Date(Math.max(now+1000,capacity.reset*1000+1000)).toISOString()};
+  }
   // This routine runs only in the short serialized scheduler job. GitHub may
   // coalesce pending scheduler ticks; requests are separate durable comments.
   const live = await workerRuns(api, repo);
@@ -70,6 +79,11 @@ export async function scheduleNext({api, repo, now = Date.now()}) {
   const entry = (await loadQueue(api, repo))[0];
   if (!entry) return {status: 'empty'};
   const {request, pr, dispatches} = entry;
+  if(entry.result?.quota_retry_at){
+    const retryAt=Date.parse(entry.result.quota_retry_at);
+    if(!Number.isFinite(retryAt))throw Error('Invalid durable quota recovery checkpoint');
+    if(retryAt>now)return {status:'waiting-quota',request_id:request.request_id,retry_at:entry.result.quota_retry_at};
+  }
   const finish = async reason => {
     const result = {accepted: false, status: 'not-merged', retryable: false, ...request, reason};
     await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: renderWorkerResult('merge', result)});

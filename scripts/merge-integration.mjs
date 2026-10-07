@@ -305,6 +305,7 @@ export async function prepareIntegration(options) {
 }
 export async function completeIntegration(options) {
   const capacityBudget = options.finalCapacity ? finalRequestBudget(options.api) : null;
+  try {
   options = {...options, ...(capacityBudget ? {capacityBudget} : {}),
     api: memoizeImmutableGitBlobs(capacityBudget?.api ?? options.api)};
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
@@ -389,4 +390,5 @@ export async function completeIntegration(options) {
       report_sha256: options.geographyReportHash, adjudication: geography.adjudication ?? null},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
     head_cleanup: await cleanupMergedHead(options)};
+  } finally {capacityBudget?.dispose();}
 }
