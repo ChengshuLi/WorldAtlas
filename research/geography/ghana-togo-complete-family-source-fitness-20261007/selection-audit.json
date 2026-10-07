@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "selection_snapshot": "coordination/engineering/global-actionability-routing-20261007/results/",
+  "baseline_commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+  "method": "Grouped the routing eligible source-match rows by complete fine-family ID and ranked families using the prescribed source-locator-readiness, measured-impact, and coordination-complexity tuple. Rechecked current issue/PR body matches, active canonical claims, and family/component ownership before creating issue 1403.",
+  "selected": {
+    "family_id": "gap-source-batch:836f0998d0d7b82bd3486750",
+    "eligible_row_rank_positions": [
+      2457,
+      94833,
+      52630
+    ],
+    "family_rank_position": 30,
+    "total_ranked_families": 711,
+    "family_best_rank": {
+      "coordination_complexity": 52146,
+      "measured_impact": 69149,
+      "source_locator_readiness": 619
+    }
+  },
+  "collision_audit": {
+    "components": [
+      "physical-component:01c3bef8e5c4dceec102c248a9f7db86d7a6bcfbdb322d493704dcd3903912c3",
+      "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc",
+      "physical-component:0a149a1adf1f22badf1c73d3ff5d1960f7dd5a6be8dbed0f6e68d20e1cea7cdd",
+      "physical-component:100033d5f179136790f2bc870beca47f18b0dd6459018b7d5db1916cdc21030a",
+      "physical-component:9124722a82606c8db57df20583a15739055eab7f62eda2346640080bc7137b7f",
+      "physical-component:dbd76c808ddc0bf725ad6085fce94ba4fe23beb60eef0deeb6509d6c0a334f87"
+    ],
+    "contacts": [
+      "gb:GHA:ADM2:2480657B35240131522033",
+      "gb:GHA:ADM2:2480657B47242267083805",
+      "gb:TGO:ADM2:56601680B4042875560778",
+      "gb:TGO:ADM2:56601680B98633254865748"
+    ],
+    "component_issue_or_pr_matches": [],
+    "contact_issue_matches": [
+      {
+        "issue": 472,
+        "subjects": [
+          "gb:GHA:ADM2:2480657B35240131522033",
+          "gb:GHA:ADM2:2480657B47242267083805"
+        ],
+        "status": "closed",
+        "claim": "inactive/released"
+      },
+      {
+        "issue": 479,
+        "subjects": [
+          "gb:TGO:ADM2:56601680B4042875560778",
+          "gb:TGO:ADM2:56601680B98633254865748"
+        ],
+        "status": "closed",
+        "claim": "inactive/released"
+      }
+    ],
+    "open_broader_context": [
+      {
+        "issue": 466,
+        "description": "West Africa umbrella; kept separate"
+      },
+      {
+        "issue": 801,
+        "description": "RESOLVE atlas:physical source-role umbrella; kept separate"
+      }
+    ],
+    "higher_ranked_families_screened": 28,
+    "excluded_candidates": [
+      "blocked by prior issue scope or active ownership; includes GEO3–GEO7 reserved/current families"
+    ],
+    "route_specific_prerequisites": [
+      472,
+      479
+    ]
+  },
+  "readiness": {
+    "issue": 1403,
+    "eligible": true,
+    "coverage": "complete",
+    "findings": []
+  }
+}
