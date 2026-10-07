@@ -1,0 +1,13 @@
+{
+  "attempt": 1,
+  "attempt_label": "contact-polygon-outside-tile",
+  "attempted_utc_finish": "2026-10-07T02:04:59.474832+00:00",
+  "attempted_utc_start": "2026-10-07T02:04:53.399732+00:00",
+  "exit_code": 1,
+  "finding": "The draft attempted to treat each complete adjacent administrative contact polygon as a candidate raster footprint. One full contact polygon extends east to 20.018529892E, beyond the JRC source tile maximum 20E; the full-coverage assertion correctly rejected the run. These are complete neighboring administrative polygons, not candidate gap footprints. Corrected scope retains their exact IDs/geometries as contact context and applies JRC pixels only to the ten gap components.",
+  "input_freeze_sha256": "640ca9cb7df54462e88530c2979f4c99b8d76a38bf79336e82d79a1650af821c",
+  "producer_executed": true,
+  "producer_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/reproduce_additional.py",
+  "producer_sha256": "fa5b89800305d504926eee3441a51c19f14f8f8cd023e033164222644936d03e",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/gap-source-angola-drc-shared-seams-20261006/reproduce_additional.py\", line 127, in <module>\n    rasters[str(year)], rows = load_raster(year, gsw_receipt, feature_set)\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/gap-source-angola-drc-shared-seams-20261006/reproduce_additional.py\", line 75, in load_raster\n    raise ValueError(f'JRC tile does not fully cover {kind} {feature[\"id\"]}')\nValueError: JRC tile does not fully cover contact gb:AGO:ADM2:16411231B71421381230719\n"
+}

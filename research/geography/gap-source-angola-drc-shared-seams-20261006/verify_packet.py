@@ -58,3 +58,47 @@ combined=sha256(canonical_json(first))
 repro={'method_id':'source-assessment-generator','kind':'reproducibility','outcome':'passed','run_one_sha256':combined,'run_two_sha256':combined,'files':first['files']}
 (PACKET/'outputs/reproducibility-control.json').write_text(json.dumps(repro,sort_keys=True,indent=2)+'\n')
 print('positive, negative and reproducibility controls passed')
+
+# Additional independent water and legal-source family: verify full source and
+# code freezes, exact 10/5 subject preservation, and the actual two-run bytes.
+freeze=readj(PACKET/'inputs/additional-freeze.json')
+for row in freeze['inputs']:
+ raw=(PACKET/row['path']).read_bytes()
+ assert len(raw)==row['bytes'] and sha256(raw)==row['sha256'], row['path']
+for key in ('producer','runner'):
+ raw=(PACKET/freeze[f'{key}_path']).read_bytes()
+ assert len(raw)==freeze[f'{key}_bytes'] and sha256(raw)==freeze[f'{key}_sha256']
+extra=readj(PACKET/'outputs/physical-water-authority-assessment.json')
+assert len(extra['components'])==10 and len(extra['contacts'])==5
+assert {row['contact_id'] for row in extra['contacts']}==set(extra['contact_ids'])
+assert len({row['geometry_sha256'] for row in extra['contacts']})==5
+assert extra['components_with_seasonal_water_pixel']==2
+assert extra['components_with_permanent_water_pixel']==0
+assert extra['components_all_nodata_both_years']==7
+assert extra['components_intersecting_legal_parallel_coordinates']==3
+assert len(extra['jrc_water_summary']['years'])==2
+first=readj(PACKET/'outputs/additional-run-1-digests.json'); second=readj(PACKET/'outputs/additional-run-2-digests.json')
+observed=readj(PACKET/'outputs/additional-run-observations.json')
+assert first==second and first['files']=={'physical-water-authority-assessment.json':sha256((PACKET/'outputs/physical-water-authority-assessment.json').read_bytes())}
+assert first['producer_sha256']==freeze['producer_sha256'] and first['runner_sha256']==freeze['runner_sha256']
+assert observed['byte_identical_outputs'] is True and len(observed['runs'])==2
+assert all(run['exit_code']==0 and run['finished_utc']>run['started_utc'] for run in observed['runs'])
+# Mutation controls are in memory and do not alter the pinned source files.
+source_mutations=[]
+for rel in ('sources/jrc-gsw-v1.4/jrc-gsw-yearly-2018-0000320000-0000760000.tif',
+            'sources/official-angola/angola-law-14-24-official-gazette.pdf'):
+ original=(PACKET/rel).read_bytes(); changed=bytearray(original); changed[len(changed)//2]^=1
+ expected=next(x['sha256'] for x in freeze['inputs'] if x['path']==rel)
+ assert sha256(changed)!=expected
+ source_mutations.append({'path':rel,'expected_sha256':expected,'altered_sha256':sha256(changed),'rejected':True})
+additional={'method_id':'jrc-gsw-annual-pixel-observation','kind':'positive-control','outcome':'passed',
+ 'checks':['JRC 2018/2019 exact full-file byte pins','Frozen producer and runner hashes','Ten candidate component outputs and all five contact IDs/geometries','Actual two successful full executions with byte-identical output'],
+ 'output_sha256':sha256((PACKET/'outputs/physical-water-authority-assessment.json').read_bytes())}
+(PACKET/'outputs/additional-source-positive-control.json').write_text(json.dumps(additional,sort_keys=True,indent=2)+'\n')
+negative2={'method_id':'jrc-gsw-annual-pixel-observation','kind':'negative-control','outcome':'passed',
+ 'description':'One interior byte in each independent JRC and official law source was flipped in memory; both source-pin checks reject the altered bytes.',
+ 'source_mutations':source_mutations}
+(PACKET/'outputs/additional-source-negative-control.json').write_text(json.dumps(negative2,sort_keys=True,indent=2)+'\n')
+assert len(list((PACKET/'outputs').glob('additional-failed-attempt-*.json')))==3
+assert (PACKET/'outputs/additional-superseded-run-pair.json').is_file()
+print('additional JRC/law controls passed')

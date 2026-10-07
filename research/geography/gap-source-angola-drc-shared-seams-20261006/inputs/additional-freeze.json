@@ -1,0 +1,62 @@
+{
+  "inputs": [
+    {
+      "bytes": 9974,
+      "path": "inputs/component-features.geojson",
+      "sha256": "56b2e75d7a2a17f02f64fdcfa4cce353f82cd8c0fd276d15069e4e25b427a707"
+    },
+    {
+      "bytes": 48025,
+      "path": "inputs/contact-features.geojson",
+      "sha256": "c3a6a160537d47b2dc09fe4797fd696d5989cd15f645a624c4214eba90b1106f"
+    },
+    {
+      "bytes": 3371,
+      "path": "inputs/family-roster.json",
+      "sha256": "7fdb8b5647b49207c2050b8546f69dc144c8f9c88a96c886d5e0a631dc6b86f6"
+    },
+    {
+      "bytes": 12857,
+      "path": "outputs/component-assessment.json",
+      "sha256": "985237eb84431b852a493a753fb73a5cdad3fe94b289251619c416ad79b99654"
+    },
+    {
+      "bytes": 3361,
+      "path": "inputs/jrc-gsw-v1.4-retrieval.json",
+      "sha256": "adde3b29e20438135c0c47b05740e8c55263b8f9c97e1fab6b53b99a0b7847d3"
+    },
+    {
+      "bytes": 1807,
+      "path": "inputs/angola-law-14-24-retrieval.json",
+      "sha256": "c0547d20418f7c22f992b9579952b2bd18bb85480ba155376129d6d160cd99ab"
+    },
+    {
+      "bytes": 13773222,
+      "path": "sources/jrc-gsw-v1.4/jrc-gsw-yearly-2018-0000320000-0000760000.tif",
+      "sha256": "a261800db00cfec5412cd5b3f7447c30d0a8ccf7b66e6bee4e9902cf40b64b66"
+    },
+    {
+      "bytes": 14737382,
+      "path": "sources/jrc-gsw-v1.4/jrc-gsw-yearly-2019-0000320000-0000760000.tif",
+      "sha256": "6e2b83a576df1e3f8bfeeb4a5fd5291c78b59d066242ad98d64ff979f3e874b2"
+    },
+    {
+      "bytes": 30348260,
+      "path": "sources/official-angola/angola-law-14-24-official-gazette.pdf",
+      "sha256": "37b74dc28f2d092122b41be4032be7dfed67c1921a84e41b303315bc1dff476a"
+    }
+  ],
+  "producer_bytes": 16145,
+  "producer_path": "reproduce_additional.py",
+  "producer_sha256": "f0396ab90a748cb52fec0944b383d97f87deae677d3e5b52e4610452c9904436",
+  "purpose": "Frozen input/code bytes for two complete candidate-family JRC and official-boundary source screening runs",
+  "runner_bytes": 3518,
+  "runner_path": "run_additional_twice.py",
+  "runner_sha256": "6cef5dc7bc53ae0fa648d8408f9c5dc6bd9c10e554b8e9b9387b908405b7f51f",
+  "runtime": {
+    "numpy": "2.3.5",
+    "rasterio": "1.4.3",
+    "shapely": "2.1.2"
+  },
+  "version": 1
+}

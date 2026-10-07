@@ -1,0 +1,13 @@
+{
+  "attempt": 3,
+  "attempt_label": "producer-name-error-after-complete-analysis",
+  "exit_code": 1,
+  "finished_utc": "2026-10-07T02:07:26.629789+00:00",
+  "input_freeze_sha256": "4460338b77c89c55c5d58ea20ee4cc3a4411df6af5f1e933a1de8dc7437bd9c5",
+  "producer_sha256": "fc9fb0a9459b5e6a61b62751b72b652695b5d8f33aac3fc94975edf11da581cd",
+  "run": 1,
+  "runner_sha256": "7b293dd3f0265bf10dbf0b04d753e33f4c21c5fbc0782fe1ac23a0bb284ab488",
+  "started_utc": "2026-10-07T02:07:26.167487+00:00",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/gap-source-angola-drc-shared-seams-20261006/reproduce_additional.py\", line 218, in <module>\n    'law_pdf_sha256': law_summary['source_pdf_sha256'],\n                      ^^^^^^^^^^^\nNameError: name 'law_summary' is not defined. Did you mean: 'legal_summary'?\n",
+  "stdout": ""
+}

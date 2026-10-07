@@ -1,0 +1,29 @@
+{
+  "input_freeze_sha256": "23aa5e5e7d95773eff778fe621d5f18e201310528e9a5c571040863c44525522",
+  "preserved_files": [
+    {
+      "bytes": 621,
+      "path": "outputs/superseded-before-window-audit-additional-run-1-digests.json",
+      "sha256": "ce38e619776800706404878d163dea5ccf952b0f6e4e2d48da28b26b0c7f6f41"
+    },
+    {
+      "bytes": 621,
+      "path": "outputs/superseded-before-window-audit-additional-run-2-digests.json",
+      "sha256": "ce38e619776800706404878d163dea5ccf952b0f6e4e2d48da28b26b0c7f6f41"
+    },
+    {
+      "bytes": 732,
+      "path": "outputs/superseded-before-window-audit-additional-run-observations.json",
+      "sha256": "2baba2c4be8de8c87d018ddeccd3b1d491cd6119da8f2d3ab5c477c7a21dc260"
+    },
+    {
+      "bytes": 31026,
+      "path": "outputs/superseded-before-window-audit-physical-water-authority-assessment.json",
+      "sha256": "c3037cd5a4560fda8ad02179bf46c580b08a6cc59b977ad640081cb6a4ccc207"
+    }
+  ],
+  "producer_sha256": "e0fddc834c40b745945e2534439d718fd4d2bf807535bd7c62dd63d1141260ea",
+  "reason": "A read-only boundary-window audit compared the floating Rasterio window transform against the integer pixel grid. round_offsets().round_lengths() rounded column/row lengths to nearest and could omit pixel centers at the polygon extent. The initial pair was deterministic but used an under-sized raster window, so its counts are preserved as historical and will not be used as final evidence. The final frozen producer expands bounds by one pixel and uses floor-start/ceil-stop integer windows before masking.",
+  "runner_sha256": "6cef5dc7bc53ae0fa648d8408f9c5dc6bd9c10e554b8e9b9387b908405b7f51f",
+  "status": "superseded-not-final"
+}

@@ -30,6 +30,10 @@ Restore the two versioned WorldCover tiles from the URLs in `sources/worldcover-
 
 ```sh
 WORLD_COVER_DIR=/path/to/exact-worldcover-tiles python3 reproduce.py
+# Restore the JRC 2018/2019 tiles and Lei 14/24 PDF to their pinned source paths.
+python3 reproduce_additional.py
+# For the recorded two-run execution, provide the pinned Python 3.12 environment at .venv312/bin/python.
+python3 run_additional_twice.py
 python3 verify_packet.py
 ```
 
@@ -38,3 +42,11 @@ The final producer was executed twice after its last change; both runs produced 
 ## Limits and handoff
 
 There is no complete, date-matched authoritative river/lake/water-boundary source or original executed processing closure in this packet. The source products and independent land-cover references do not support a water/dry decision for any whole component. Do not infer that Atlas geometry is wrong, that any feature should be reassigned, or that the reviewed administrative names imply legal ownership. Any future repair needs separately authorized engineering work, full affected-neighbor review, preserved stable identities, and the explicit prepared-v7 successor chain.
+
+## Candidate-scale water and current legal-text screening
+
+Two additional independent references were assessed against every candidate component. JRC Global Surface Water v1.4 annual history provides Landsat-derived 30 m classifications for 1984–2021 ([official catalog](https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory)). Exact 2018 and 2019 tile bytes, retrieval receipts and hashes are retained. The final producer counts pixel-centre classes and separately preserves all-touched counts and NoData. Seasonal-water pixels occur in two components; no permanent-water pixels occur in any component. Seven components have only NoData pixel-centre observations in both years. NoData is not land, and sparse positive pixels do not classify a whole component.
+
+The current Angolan administrative law, Lei 14/24 in the official gazette of 5 September 2024, is retained as a full PDF ([official gazette PDF](https://c2a.portais.gov.ao/uploads/LEI_14_24_5_de_SETEMBRO_LEI_DA_DPA_043a0de85f.pdf)). Three component geometries intersect one or more infinite latitude parallels named in the text. The law describes rivers and endpoint locations but this screen does not derive the finite river segments or georeference the printed maps. These coordinate intersections are research leads only. This 2024 legal source postdates the consumed 2018/2019 source products and does not establish their historical boundary geometry, ownership, or the cause of the candidate fragments.
+
+The exact assessment output preserves all ten candidate pointsets and all five contact IDs and geometry hashes. Contacts remain full neighboring administrative polygons; they are not treated as candidate gap footprints and are not classified by the raster or legal-parallel screen. `reproduce_additional.py` is frozen with its inputs in `inputs/additional-freeze.json`; `run_additional_twice.py` records the two completed executions. `verify_packet.py` verifies all additional source/code pins, output coverage, both run receipts, and in-memory negative controls for altered JRC and law bytes. The method is tile-based and can be applied globally for selected years, but a global annual sweep would require many distinct 10-degree tiles and is outside this ten-component assessment.

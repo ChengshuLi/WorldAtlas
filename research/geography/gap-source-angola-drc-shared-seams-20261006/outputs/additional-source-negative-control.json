@@ -1,0 +1,20 @@
+{
+  "description": "One interior byte in each independent JRC and official law source was flipped in memory; both source-pin checks reject the altered bytes.",
+  "kind": "negative-control",
+  "method_id": "jrc-gsw-annual-pixel-observation",
+  "outcome": "passed",
+  "source_mutations": [
+    {
+      "altered_sha256": "a33882b7a5e21cb2ae4ff4f4ca8324af53cfdd69f8264447aea8d682a741641f",
+      "expected_sha256": "a261800db00cfec5412cd5b3f7447c30d0a8ccf7b66e6bee4e9902cf40b64b66",
+      "path": "sources/jrc-gsw-v1.4/jrc-gsw-yearly-2018-0000320000-0000760000.tif",
+      "rejected": true
+    },
+    {
+      "altered_sha256": "73f0c1f53efc476ffd40f59d922723a2cbf6ec1c897d49beadc32f4cef8d4982",
+      "expected_sha256": "37b74dc28f2d092122b41be4032be7dfed67c1921a84e41b303315bc1dff476a",
+      "path": "sources/official-angola/angola-law-14-24-official-gazette.pdf",
+      "rejected": true
+    }
+  ]
+}
