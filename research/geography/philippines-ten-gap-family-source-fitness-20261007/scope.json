@@ -1,0 +1,72 @@
+{
+  "issue": 1328,
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "claim_id": "a5d96d24-d2b5-4cdd-a79c-fb85e47587aa",
+  "branch": "geography/philippines-ten-gap-family-source-fitness-20261007",
+  "base_commit": "9618736b023d041f81496c923e7d0c2154e1491c",
+  "status": "source-only assessment; implementation not proposed; geographic approval not requested",
+  "family_count": 10,
+  "whole_component_count": 22,
+  "complete_contact_subject_count": 22,
+  "category_counts": {
+    "land-plus-compatible-original-processing-reproduction-candidate": 11,
+    "land-with-admin-partial-or-unbound-source-fitness-review": 4,
+    "mixed-support-retain-whole-source-fitness-review": 2,
+    "outside-source-domain-unclassified": 5
+  },
+  "scope_limit": "No boundary geometry edits, source-feature repairs, dataset imports, publishing, deployment, or geographic approval.",
+  "issue_pins": {
+    "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "delivered_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+    "delivered_routing_input_config": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+    "scoped_part_18": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+    "scoped_part_19": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+    "whole_consumed_phl_adm3_source_transport": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c"
+  },
+  "goal_tracking": {
+    "thread_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+    "objective": "Complete issue #1328: assess source fitness for all ten Philippines gap families, all 22 whole components, and all 22 full Atlas contact subjects using evidence; deliver the source-only milestone-2 handoff, obtain a distinct review, merge through the normal serialized queue, read back the complete merged changes, reconcile original acceptance, and safely clean up the checkout.",
+    "status": "blocked",
+    "tokens_used": 723362,
+    "time_used_seconds": 2478,
+    "recorded_at_utc": "2026-10-07T07:58:05Z"
+  },
+  "source_identity": {
+    "id": "whole_consumed_phl_adm3_source",
+    "decoded_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+    "decoded_bytes": 7071267,
+    "features": 1647,
+    "transport_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz",
+    "transport_sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+    "transport_bytes": 2224353
+  },
+  "accepted_predecessor": {
+    "routing_merge_commit": "0198938719a5666b6726fb6a1e45779926eefeb2",
+    "routing_baseline_commit": "9618736b023d041f81496c923e7d0c2154e1491c",
+    "routing_body_closure": {
+      "component_partitions": 25,
+      "family_partitions": 14,
+      "all_encoded_and_decoded_bytes_verified": true
+    },
+    "physical_comparison_body_closure": {
+      "whole_partitions": 18,
+      "selected_whole_component_rows": 22,
+      "original_routing_merge_equals_pinned_baseline_bytes": true
+    },
+    "current_contact_full_parts": [
+      "data/geography/part-18.json",
+      "data/geography/part-19.json"
+    ],
+    "pointsets_and_family_assessments": "unchanged accepted predecessor outputs; no geometry comparison or source adjudication regenerated",
+    "full_proposal_sha256": "5582eeb86f274c2a1d3939f2e8dcaaaeb29473c8d7f58427d6f84ae92f2dab1e",
+    "original_source_handoff_sha256": "e743bcc7287a0d45ff88033aa737f66f6209c8a7f604329aae7544d1916bf1b1"
+  },
+  "producer_integrity": {
+    "previous_vintage_commit": "8eb782a00313bb3749653cd570f12126614a49a7",
+    "previous_extractor_sha256": "e66182c1cefd3b11dfaa07d56bb4af586a4fb9595a97a8ffa12fcce8b9a80efa",
+    "previous_run_receipt_sha256": "246f5d4a731564642d786395c8f44d44608687b007466403fd2b2c1ed4805f68",
+    "counterexample_component": "physical-component:10d537ef342283ca7291f87dea56fc4ef092dcda4691c4008a94941dcd122ecf",
+    "counterexample_reproduced_mutated_feature_sha256": "1d7c4f173ac5456e2366ecc85b84b922d41e29a79881afe1f1157afae0978571",
+    "corrective_invariant": "Each candidate full-feature SHA and geometry SHA must match its independently authenticated whole routing row before that candidate can be emitted."
+  }
+}

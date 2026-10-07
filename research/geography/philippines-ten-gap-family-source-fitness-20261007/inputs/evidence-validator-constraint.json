@@ -1,0 +1,29 @@
+{
+  "issue": 1328,
+  "pin": "whole_consumed_phl_adm3_source",
+  "required_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+  "evidence": "The complete consumed 7,071,267-byte simplified source is retained at inputs/gb-PHL-ADM3.original with the required exact SHA-256. The immutable baseline repository stores that same source in coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz as a compressed file; the source catalogue records the uncompressed SHA-256 in uncompressed_sha256, while the compressed blob has a different whole-file SHA-256.",
+  "validator_behavior": "scripts/evidence-quality.mjs requires each issue pin to equal the sha256 of a whole-file descriptor in baseline.files, selected through baseline.pin_files. It does not accept a baseline file's uncompressed_sha256 as a pin target, nor does it accept a candidate retained source file for a baseline pin.",
+  "observed_failure": "Error: Pin has no actual file binding: whole_consumed_phl_adm3_source",
+  "diagnostic": "A temporary diagnostic copy of the evidence manifest with only this one issue pin and its pin_files mapping omitted passed whole-byte evidence-quality validation for every other descriptor and found only the stated factual/source limits. The authoritative manifest preserves all six issue pins and therefore correctly retains the observed failure.",
+  "scope_boundary": "This source-only assignment owns only research/geography/philippines-ten-gap-family-source-fitness-20261007/. Changing the repository-wide evidence validator or rewriting the issue's acceptance pins is outside its declared scope.",
+  "resolution_required_before_merge": "Resolved through the issue owner-reviewed pin correction: bind the transport gzip as a whole-file pin while retaining and verifying the mandatory raw decoded SHA. No shared validator change or source substitution.",
+  "accepted_binding_correction": {
+    "issue_updated_at": "2026-10-07T07:33:14Z",
+    "transport_pin": "whole_consumed_phl_adm3_source_transport",
+    "transport_sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+    "transport_bytes": 2224353,
+    "baseline_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz",
+    "decoded_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+    "decoded_bytes": 7071267,
+    "decoded_features": 1647,
+    "retained_candidate_identical_to_decoded_baseline": true,
+    "independent_decode_check": {
+      "method": "git show pinned baseline gzip bytes; gzip-decompress; compare complete byte array to retained original",
+      "command": "python3 one-off stdlib gzip/hashlib/subprocess comparison against baseline commit 9618736b023d041f81496c923e7d0c2154e1491c",
+      "result": "passed; 7,071,267 bytes identical",
+      "raw_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+      "decoded_features": 1647
+    }
+  }
+}
