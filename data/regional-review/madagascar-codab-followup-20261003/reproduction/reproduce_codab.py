@@ -18,6 +18,7 @@ import pathlib
 import re
 import subprocess
 import sys
+import tempfile
 import unicodedata
 from collections import Counter, defaultdict
 
@@ -80,6 +81,53 @@ def unique_index(rows: list[dict], key, label: str) -> dict[str, dict]:
 
 def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def checked_output_root(owned_dir: pathlib.Path, run_id: str | None = None) -> pathlib.Path:
+    """Reject symlinked output ancestors and any destination escaping the packet."""
+    owned = owned_dir.resolve(strict=True)
+    if not owned.is_dir():
+        raise ValueError(f"owned packet is not a directory: {owned_dir}")
+    output_root = owned_dir / "vintages"
+    if output_root.is_symlink():
+        raise ValueError(f"output root must not be a symlink: {output_root}")
+    if output_root.exists() and not output_root.is_dir():
+        raise ValueError(f"output root must be an ordinary directory: {output_root}")
+    candidate = output_root / run_id if run_id is not None else output_root
+    resolved = candidate.resolve(strict=False)
+    try:
+        resolved.relative_to(owned)
+    except ValueError as exc:
+        raise ValueError(f"output destination escapes the owned packet: {candidate}") from exc
+    return output_root
+
+
+def output_path_controls() -> dict:
+    """Exercise live and dangling symlink attacks without writing outside a fixture."""
+    with tempfile.TemporaryDirectory(dir=OWNED, prefix=".output-root-control-") as temporary:
+        fixture = pathlib.Path(temporary) / "owned-fixture"
+        outside = pathlib.Path(temporary) / "outside"
+        fixture.mkdir()
+        outside.mkdir()
+        results = {}
+        for label, target in (("live", outside), ("dangling", pathlib.Path(temporary) / "absent")):
+            output_root = fixture / "vintages"
+            output_root.symlink_to(target, target_is_directory=True)
+            try:
+                checked_output_root(fixture, "probe")
+            except ValueError:
+                results[label] = "rejected"
+            else:
+                raise ValueError(f"{label} symlink output-root control was not rejected")
+            if list(outside.iterdir()):
+                raise ValueError(f"{label} symlink control created an outside file")
+            output_root.unlink()
+        return {
+            "live_symlink_output_root": results["live"],
+            "dangling_symlink_output_root": results["dangling"],
+            "outside_fixture_files_created": 0,
+            "control": "both symlinked output-root ancestors are rejected before any write",
+        }
 
 
 def rounded(value: float | None) -> float | None:
@@ -181,6 +229,7 @@ def method_controls(old2_by_name, old3_by_name, current_by_name, codab2_by_name)
         "repeat_name_control": {"name": "Ambohimanambola", "codps_adm3_candidates": len(repeated), "control": "duplicate nationwide commune names remain multi-valued"},
         "coherent_parent_mutation_negative_control": {"commune_name": "Ambohimanambola", "original_parent": first["ADM2_EN"], "original_parent_code": first["ADM2_PCODE"], "selected_adm3_pcode": genuine_parent[0]["ADM3_PCODE"], "mutated_parent": adverse_parent_name, "mutated_parent_code": adverse_parent_code, "selected_adm3_pcode_after_mutation": adverse_parent[0]["ADM3_PCODE"], "control": "changing an actual source parent name and code coherently changes the unique parent-qualified candidate"},
         "positive_geometry_control": positive_geom, "negative_geometry_control": negative_geom,
+        "output_path_containment_control": output_path_controls(),
         "limitations": ["Synthetic controls exercise metric implementation only, not Madagascar boundaries.", "Source-backed controls verify selected rows and do not prove complete legal history."],
     }
 
@@ -194,7 +243,7 @@ def write_exclusive(path: pathlib.Path, data: bytes) -> None:
 def build(repo: pathlib.Path, run_id: str, compare_to: str | None = None) -> pathlib.Path:
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", run_id):
         raise ValueError("run id must be a lowercase alphanumeric/hyphen token")
-    output_root = OWNED / "vintages"
+    output_root = checked_output_root(OWNED, run_id)
     destination = output_root / run_id
     if destination.exists() or destination.is_symlink():
         raise FileExistsError(f"destination already exists; preserved unchanged: {destination}")
@@ -488,6 +537,7 @@ def build(repo: pathlib.Path, run_id: str, compare_to: str | None = None) -> pat
     bundle_hash = sha(bundle)
     code_hash = sha(pathlib.Path(__file__).read_bytes())
     output_root.mkdir(parents=True, exist_ok=True)
+    checked_output_root(OWNED, run_id)
     if compare_to:
         prior = json.loads((reference / "completion.json").read_text())
         if prior.get("outcome") != "passed" or prior.get("code_sha256") != code_hash or prior.get("output_bundle_sha256") != bundle_hash:
@@ -503,10 +553,12 @@ def build(repo: pathlib.Path, run_id: str, compare_to: str | None = None) -> pat
         if set(products) != {row["path"] for row in prior.get("outputs", [])}:
             raise ValueError("reproduction output inventory differs from retained first run")
         destination.mkdir(mode=0o700)
+        checked_output_root(OWNED, run_id)
         receipt = {"version": 1, "issue": 632, "method_id": "madagascar-codab-crosswalk", "kind": "reproducibility-control", "outcome": "passed", "run_one_id": compare_to, "run_two_id": run_id, "code_sha256": code_hash, "run_one_bundle_sha256": bundle_hash, "run_two_bundle_sha256": sha(bundle), "products_recomputed_in_memory": output_files, "matches_retained_run": True}
         write_exclusive(destination / "reproducibility.json", (json.dumps(receipt, ensure_ascii=False, indent=2) + "\n").encode())
         return destination
     destination.mkdir(mode=0o700)
+    checked_output_root(OWNED, run_id)
     for name, data in products.items():
         write_exclusive(destination / name, data)
     completion = {"version": 1, "issue": 632, "method_id": "madagascar-codab-crosswalk", "kind": "reproducibility", "outcome": "passed", "run_id": run_id, "code_sha256": code_hash, "output_bundle_sha256": bundle_hash, "outputs": output_files}
