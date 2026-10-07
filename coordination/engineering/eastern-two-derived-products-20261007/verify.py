@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -22,7 +23,12 @@ def read(p):
 
 def same_values(a, b):
     if isinstance(a, (int, float)) and not isinstance(a, bool) and isinstance(b, (int, float)) and not isinstance(b, bool):
-        return struct.pack('>d', float(a)) == struct.pack('>d', float(b))
+        if isinstance(a, int) and isinstance(b, int):
+            return a == b
+        if isinstance(a, int) or isinstance(b, int):
+            integer, floating = (a, b) if isinstance(a, int) else (b, a)
+            return math.isfinite(floating) and floating.is_integer() and int(floating) == integer and not (integer == 0 and math.copysign(1.0, floating) < 0)
+        return struct.pack('>d', a) == struct.pack('>d', b)
     if type(a) is not type(b):
         return False
     if isinstance(a, dict):
@@ -158,6 +164,10 @@ def code_image(root, index):
 
 
 def run(commit, destination, node, identical_prior=None):
+    from execution import authenticate_runtime
+    from restore import authenticate_execution
+    authenticate_execution(commit)
+    runtime_receipt = authenticate_runtime(node)
     destination = Path(os.path.abspath(destination))
     index, restored = restore(commit, destination, identical_prior)
     result = {'world': world_relation(destination, index), 'ownership': ownership_relation(destination),
@@ -171,6 +181,7 @@ def run(commit, destination, node, identical_prior=None):
     subprocess.run([sys.executable, str(old_namespace / 'runtime-complete-equivalence.py'),
                     '--source', str(ownership), '--runtime', str(runtime), '--selector-map', str(selector),
                     '--receipt', str(destination / 'complete-runtime-semantic-proof.json')], check=True, cwd=image)
+    result['execution_runtime'] = runtime_receipt
     result['runtime'] = read(destination / 'complete-runtime-semantic-proof.json')
     result['restoration'] = restored
     result['scientific_stage_reuse'] = {'ownership': 'b7b45a6c686c3dff9063185829ec0e2f66d7932d',

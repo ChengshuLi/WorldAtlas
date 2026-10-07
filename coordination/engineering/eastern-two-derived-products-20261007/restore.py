@@ -46,7 +46,10 @@ def raw_file(root, pin):
     p = checked(root, pin['path'])
     if not isinstance(pin['bytes'], int) or not 0 <= pin['bytes'] <= MAX or not p.is_file() or p.stat().st_size != pin['bytes']:
         raise ValueError('Ordinary declared/stat file bounds differ')
-    raw = p.read_bytes()
+    with p.open('rb') as handle:
+        raw = handle.read(pin['bytes'] + 1)
+        if len(raw) != pin['bytes'] or handle.read(1):
+            raise ValueError('Actual ordinary EOF length differs')
     if sha(raw) != pin['sha256']:
         raise ValueError('Whole file checksum differs')
     return raw
@@ -135,7 +138,7 @@ def original_guard(binding, raw):
 def authenticate_execution(commit):
     if not re.fullmatch('[a-f0-9]{40}', commit):
         raise ValueError('Execution commit required before Git')
-    paths = [str(Path(__file__).relative_to(ROOT)), str((PREFIX / 'verify.py').relative_to(ROOT))]
+    paths = [str((PREFIX / name).relative_to(ROOT)) for name in ('restore.py', 'verify.py', 'execution.py', 'runtime-guard.json')]
     receipts = []
     for name in paths:
         expected = subprocess.check_output(['git', '-C', str(ROOT), 'show', commit + ':' + name])
