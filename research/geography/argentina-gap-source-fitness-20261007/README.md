@@ -37,4 +37,4 @@ The runner reads only issue-pinned whole files through `Baseline`, authenticates
 
 `evidence-quality.json` is the byte manifest for this packet. Its `limited` result is intentional: retrieval timestamp, unsimplified decoded input, Georef vintage/terms, source authority, physical cause and surface status remain unresolved. It is evidence review, not geographic approval or a publication gate.
 
-Refs #1202
+Closes #1418
