@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "tested_code_commit": "85d12fe728365fc5476a4b1ecc2457b1fa884bb2",
+  "tested_code_commit": "f519cea5770d04f6f9133dc8fc3fcf9aa734819a",
   "node_tests": 39,
   "python_execution_controls": 7,
   "python_scientific_cli_controls": 10,
@@ -20,5 +20,8 @@
   "reviewer_supplied_regressions": [
     "Reject undeclared namespace-package code",
     "Reject aggregate decoded output exceeding the phase budget"
+  ],
+  "additional_controls": [
+    "Raw CSV and JSONL use the same fresh-run writer"
   ]
 }
