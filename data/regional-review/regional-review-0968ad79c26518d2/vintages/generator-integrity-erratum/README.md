@@ -25,4 +25,4 @@ python3 data/regional-review/regional-review-0968ad79c26518d2/vintages/generator
 python3 data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/validate_controls.py
 ```
 
-The output path must not already exist. The input manifest is deliberately pinned to the original #1087 merge vintage and will fail closed if changed.
+Every assessment, control, summary and ledger destination must be fresh; a rerun refuses existing outputs before writing. The input manifest is deliberately pinned to the original #1087 merge vintage and will fail closed if changed.

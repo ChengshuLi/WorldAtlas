@@ -7,6 +7,12 @@ from integrity_guards import verify_bound_input, require_new_output
 ROOT = Path(__file__).resolve().parents[2]
 VINTAGE = Path(__file__).resolve().parent
 RUNS = VINTAGE / 'runs' / '2026-10-07'
+OUT = VINTAGE / 'controls' / 'verified-run-2'
+SUMMARY = VINTAGE / 'erratum-summary-v2.json'
+LEDGER = VINTAGE / 'correction-ledger-v2.json'
+# Check every destination before reading or writing any control result.
+for destination in (OUT, SUMMARY, LEDGER):
+    require_new_output(destination)
 OLD = ROOT / 'assessments.json'
 ONE = RUNS / 'run-1' / 'assessments.json.gz'
 TWO = RUNS / 'run-2' / 'assessments.json.gz'
@@ -61,8 +67,8 @@ for old_row, new_row in zip(original['exact_subjects'], a['exact_subjects']):
                             'before': old_row[key], 'after': new_row[key]})
 assert len(changes) == 16 and all(x['before'] is None for x in changes)
 
-out = VINTAGE / 'controls'
-out.mkdir(exist_ok=True)
+out = OUT
+out.mkdir()
 results = {
  'positive-control.json': {'method_id':'integrity-erratum','kind':'positive-control','outcome':'passed',
    'checked':'All four Agar subject records use the one retained Agar-Malwa roster key; 16 null-to-source metadata fields; classifications unchanged; Sheopur remains unbound.'},
@@ -78,8 +84,8 @@ for name, row in results.items():
 summary = {'version':1,'issue':1308,'baseline_commit':BASE,'subjects':224,'province_groups':27,
  'corrected_field_values':len(changes),'newly_roster_bound_subjects':4,'justified':0,'correction_needed':11,
  'insufficient_evidence':213,'sheopur_roster_source_available':False}
-(VINTAGE/'erratum-summary.json').write_text(json.dumps(summary,indent=2)+'\n')
-(VINTAGE/'correction-ledger.json').write_text(json.dumps({'version':1,'issue':1308,'baseline_commit':BASE,
+(SUMMARY).write_text(json.dumps(summary,indent=2)+'\n')
+(LEDGER).write_text(json.dumps({'version':1,'issue':1308,'baseline_commit':BASE,
  'baseline_assessments_sha256':sha(before),'corrected_assessments_sha256':sha(ONE.read_bytes()),
  'changes':changes,'unchanged_metrics':summary,
  'uncertainty_preserved':['IGOD is administrative roster evidence only; it does not establish jurisdiction or polygons.',

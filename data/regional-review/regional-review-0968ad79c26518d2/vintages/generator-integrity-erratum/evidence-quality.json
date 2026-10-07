@@ -644,8 +644,8 @@
     },
     {
       "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/README.md",
-      "bytes": 3831,
-      "sha256": "d9950622b3178bd0cc4bb3dde516dba6dcbdc3c4e4f9c038e0b5d2151f134b23",
+      "bytes": 3913,
+      "sha256": "db606f2e8a3023e573f5a8f81c0e91ed47cf3abb98699f09816a3eb48623aec0",
       "hash_kind": "file-bytes"
     },
     {
@@ -667,9 +667,39 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/negative-control.json",
+      "bytes": 322,
+      "sha256": "5f9e6097e270d49774bf2afaa1ab6954411f930a5373cee268d676b1e579ee4b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/positive-control.json",
+      "bytes": 269,
+      "sha256": "aef71110b57d3a4a6dc28034f4e601c893ea06b48952233320b0645b7c7911c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/reproducibility.json",
+      "bytes": 552,
+      "sha256": "ec369ea3e1b8c8615bc02b11b95b0475761a3ba77411efc94835ec1c86dfb650",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/correction-ledger-v2.json",
+      "bytes": 4574,
+      "sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/correction-ledger.json",
       "bytes": 4574,
       "sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/erratum-summary-v2.json",
+      "bytes": 334,
+      "sha256": "3c87e6d7e63150485bc98029d1a15ee37ec0d2aad95679deeffaa3333f565da6",
       "hash_kind": "file-bytes"
     },
     {
@@ -732,8 +762,8 @@
     },
     {
       "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/validate_controls.py",
-      "bytes": 5472,
-      "sha256": "b878fbbbcb23037b6a97bc25cfe773447a4e450ac727451183001d4642822694",
+      "bytes": 5683,
+      "sha256": "6ccd223e130725f030ffff5ff5da62f0d9c81758745690036de2e21483e40ec9",
       "hash_kind": "file-bytes"
     }
   ],
@@ -934,7 +964,27 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/correction-ledger-v2.json",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/correction-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/erratum-summary-v2.json",
       "status": "added"
     },
     {
@@ -987,19 +1037,19 @@
       "method_id": "integrity-erratum",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/positive-control.json"
+      "evidence_path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/positive-control.json"
     },
     {
       "method_id": "integrity-erratum",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/negative-control.json"
+      "evidence_path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/negative-control.json"
     },
     {
       "method_id": "integrity-erratum",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/reproducibility.json"
+      "evidence_path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/controls/verified-run-2/reproducibility.json"
     }
   ]
 }
