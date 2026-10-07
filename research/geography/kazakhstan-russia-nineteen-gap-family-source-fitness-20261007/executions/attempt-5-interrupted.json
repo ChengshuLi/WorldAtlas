@@ -1,0 +1,12 @@
+{
+  "attempt": 5,
+  "command": "python3.12 build_assessment.py --out executions/run-1",
+  "producer_sha256_at_attempt": "d6104b2f6f53d60e30b087947152dad3c0556ffd6f36c945244f91d5b6b0e47d",
+  "input_manifest_sha256": "b978741af412988f07f02de49bc6f54e18c68c2809008c63cab76955462ca0e4",
+  "started_utc": "2026-10-07T06:53:42Z",
+  "interrupted_utc": "2026-10-07T07:09:33Z",
+  "elapsed_seconds_observed": 951,
+  "exit_code": "SIGTERM",
+  "outcome": "interrupted-before-output",
+  "reason": "Process sampling showed Python garbage-collector traversal dominated the run while parsing acyclic JSON trees; the run had produced no output directory. Revision 6 disables cyclic GC for the deterministic parsing pass."
+}

@@ -1,0 +1,13 @@
+{
+  "attempt": 2,
+  "command": "python3.12 build_assessment.py --out executions/run-1",
+  "producer_sha256_at_attempt": "73c367d7bfe4f2768da1f43c3aa7516f2c754200f0c2d501ac8dffec19f36399",
+  "input_manifest_sha256": "36e5dca337dcec8bb1cfd5919e2255d7cc3c72776c4ff523d31dfe8c09d61c2e",
+  "started_utc": "2026-10-07T06:35:06Z",
+  "finished_utc": null,
+  "elapsed_seconds_observed": 254,
+  "exit_code": 1,
+  "outcome": "failed-before-output",
+  "stderr": "ValueError: physical container size mismatch for components-001.jsonl.gz. The copied compact delivery chunk (978,433 bytes) did not match the original scientific result descriptor (1,203,607 bytes). Corrected by restoring exact original rows from the two retained complete scientific runs.",
+  "superseded": true
+}

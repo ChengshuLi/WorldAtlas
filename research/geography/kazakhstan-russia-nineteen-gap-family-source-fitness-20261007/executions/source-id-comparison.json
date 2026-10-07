@@ -1,0 +1,47 @@
+{
+  "comparison": "sorted unique feature properties.shapeID values; identity set only, no geometry equality claim",
+  "id_list_digest": "sha256 of UTF-8 concatenation of each sorted shapeID followed by LF",
+  "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "method": "Parsed both GeoJSON FeatureCollections, extracted properties.shapeID, sorted values, counted duplicates, and compared exact sets. SHA-256 fingerprints were calculated over the sorted IDs with one LF after each ID.",
+  "results": {
+    "KAZ": {
+      "full_feature_count": 174,
+      "full_unique_id_count": 174,
+      "full_id_list_sha256": "43e4eedda2d25bea5f75d6402a7788ba928c62dd972d8a72e24334594f6a23b8",
+      "full_source_bytes": 1031928,
+      "full_source_preservation": "included in packet",
+      "full_source_path_in_packet": "inputs/geoboundaries-kaz-adm2-2017-full-source.geojson",
+      "full_source_sha256": "b69520a12a7e3642c3ee48d6b2fcae0776c70fe5f757d6235beca3e9710833ae",
+      "same_id_set": true,
+      "full_only_count": 0,
+      "simplified_only_count": 0,
+      "simplified_feature_count": 174,
+      "simplified_unique_id_count": 174,
+      "simplified_id_list_sha256": "43e4eedda2d25bea5f75d6402a7788ba928c62dd972d8a72e24334594f6a23b8",
+      "simplified_source_bytes": 923186,
+      "simplified_source_path_in_packet": "inputs/geoboundaries-kaz-adm2-2017-simplified-full-source.geojson",
+      "simplified_source_sha256": "68868f08e28fa4b8510fa28db21b8432ad9c1539625b92842158a168edfd2efd"
+    },
+    "RUS": {
+      "full_feature_count": 2327,
+      "full_unique_id_count": 2327,
+      "full_id_list_sha256": "f18bbf542807cf0a8999edf8f92441274b72c7eb8618dc92da26c6298abaf45b",
+      "full_source_bytes": 120489189,
+      "full_source_preservation": "local restoration cache; omitted from ordinary packet because of per-file size cap",
+      "full_source_path_in_packet": null,
+      "full_source_sha256": "74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0",
+      "same_id_set": true,
+      "full_only_count": 0,
+      "simplified_only_count": 0,
+      "simplified_feature_count": 2327,
+      "simplified_unique_id_count": 2327,
+      "simplified_id_list_sha256": "f18bbf542807cf0a8999edf8f92441274b72c7eb8618dc92da26c6298abaf45b",
+      "simplified_source_bytes": 26338801,
+      "simplified_source_path_in_packet": "inputs/geoboundaries-rus-adm2-2017-simplified-full-source.geojson",
+      "simplified_source_sha256": "81dabf7930ff5e306e2423b586bcec14163fbd10481db6e49aab47273953b128",
+      "full_source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson",
+      "advertised_feature_count": 2328
+    }
+  },
+  "scope_note": "A matching ID set does not establish geometry equivalence, positional accuracy, completeness of the underlying territorial source, temporal applicability, or legal authority. RUS count mismatch remains unresolved."
+}

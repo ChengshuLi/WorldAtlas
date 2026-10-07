@@ -1,0 +1,13 @@
+{
+  "command": "python3.12 compare_source_ids.py --packet <packet> --rus-full <restoration-cache>/geoBoundaries-RUS-ADM2.geojson --out executions/source-id-comparison.json",
+  "completed_at_utc": "2026-10-07T07:25:12Z",
+  "exit_code": 0,
+  "input_rus_full_source_bytes": 120489189,
+  "input_rus_full_source_sha256": "74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0",
+  "output_bytes": 2990,
+  "output_sha256": "f62a135985e793364210c8c9d96cb1bad19fffd5e8911a97b8f0dd2ab30e38d0",
+  "producer_sha256": "8960a0c769e2ac107d474aac974f706cae0da0b87d18f8f846bdba0ef0ed4e44",
+  "runtime": "Python 3.12.14; Codex primary dependency runtime",
+  "status": "completed",
+  "supplemental_scope": "feature identity-set comparison only; no geometry equivalence assertion"
+}

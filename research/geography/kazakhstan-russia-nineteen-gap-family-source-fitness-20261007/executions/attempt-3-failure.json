@@ -1,0 +1,14 @@
+{
+  "attempt": 3,
+  "command": "python3.12 build_assessment.py --out executions/run-1",
+  "producer_sha256_at_attempt": "0c08a0a11088415ed71d8580827fffedac1999a4d61c9aee31f6d122d8925181",
+  "input_manifest_sha256": "646ebbdac433aa87e3af43daaeb7b08d0cae56ac5cc5d097453a0d0d0c420f37",
+  "started_utc": "2026-10-07T06:41:59Z",
+  "finished_utc": null,
+  "elapsed_seconds_observed": 153,
+  "exit_code": 1,
+  "outcome": "failed-before-output",
+  "stderr": "ValueError: physical row identity hash mismatch for component physical-component:04685666eeb75dff39e5a7cfc518cf0beaf12608959417b28719bec646b42d41.",
+  "cause": "The validator's canonical JSON omitted the newline required by the original routing producer's immutable.canonical_json().",
+  "superseded": true
+}
