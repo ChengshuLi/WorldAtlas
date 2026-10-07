@@ -1,0 +1,452 @@
+{
+  "version": 1,
+  "issue": 1422,
+  "lane": "geography",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "physical-component:0083c01969242c7ff7bd7169be50cb52f58156add0cd4229dccb556a3f0469a6",
+    "physical-component:99cae6efa6335e68990e353f15940b4bda47276e159af4214919b932b232df4f"
+  ],
+  "subject_ids_sha256": "501446ce130a74e3477de69aa87a14a50b607e68ac1781b3667e5112f4929f06",
+  "baseline": {
+    "commit": "69a5f97161c36611fc974b626c9666fdf2941a31",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "bytes": 1063935,
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+        "bytes": 1056877,
+        "sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-014.bin.gz",
+        "bytes": 1055098,
+        "sha256": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+        "bytes": 433512,
+        "sha256": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-000.json.gz",
+        "bytes": 1018111,
+        "sha256": "c5a3f232c7d31eb51847f65be310cc598db73436515633d5bed65793dfb743a4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-020.json.gz",
+        "bytes": 1016322,
+        "sha256": "c7c667ae8876ecf746030663cd9d94ddbef08691925e905a5dfcd324071bd19e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-009.json.gz",
+        "bytes": 1503204,
+        "sha256": "f41027713434934502934d0b5b91c9eea18f605e818bbce26f30737f7f8737a3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+        "bytes": 1008871,
+        "sha256": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-042.jsonl.gz",
+        "bytes": 983640,
+        "sha256": "e6b7900cefbe801d54d054f6ce0d5b7d9767a5e63e138db052086d3ac5cbe413",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      }
+    ],
+    "pins": {
+      "global_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "global_routing_family_shard_003": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "global_routing_source_match_slice_000": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "global_routing_component_shard_000": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+      "global_routing_component_shard_014": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+      "priority_v3_report": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+      "priority_v3_investigations_000": "c5a3f232c7d31eb51847f65be310cc598db73436515633d5bed65793dfb743a4",
+      "priority_v3_investigations_020": "c7c667ae8876ecf746030663cd9d94ddbef08691925e905a5dfcd324071bd19e",
+      "original_mrt_admin_row": "f41027713434934502934d0b5b91c9eea18f605e818bbce26f30737f7f8737a3",
+      "original_physical_row_0083": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+      "original_physical_row_99ca": "e6b7900cefbe801d54d054f6ce0d5b7d9767a5e63e138db052086d3ac5cbe413"
+    },
+    "pin_files": {
+      "global_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "global_routing_family_shard_003": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+      "global_routing_source_match_slice_000": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+      "global_routing_component_shard_000": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+      "global_routing_component_shard_014": "coordination/engineering/global-actionability-routing-20261007/results/components-014.bin.gz",
+      "priority_v3_report": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+      "priority_v3_investigations_000": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-000.json.gz",
+      "priority_v3_investigations_020": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-020.json.gz",
+      "original_mrt_admin_row": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-009.json.gz",
+      "original_physical_row_0083": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+      "original_physical_row_99ca": "coordination/engineering/global-physical-comparison-20261006/results/components-042.jsonl.gz"
+    },
+    "subject_files": {
+      "physical-component:0083c01969242c7ff7bd7169be50cb52f58156add0cd4229dccb556a3f0469a6": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:99cae6efa6335e68990e353f15940b4bda47276e159af4214919b932b232df4f": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-mrt-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MRT/ADM2/geoBoundaries-MRT-ADM2_simplified.geojson",
+      "role": "Exact original-consumed administrative geometry used for source-fit comparison; not independent physical land/water evidence.",
+      "vintage": "Recorded represented-year claim 2020; product build date 2023-12-12. Effective date not established.",
+      "retrieved_at": "2026-10-07T16:53:49Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 3.0 IGO per pinned administrative source registry; attribute World Food Programme, OCHA ROWCA; legal review not performed."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-MRT-ADM2_simplified.geojson",
+          "bytes": 124489,
+          "sha256": "1902199c8a95554f6fc671b72445584e6b511a79223e0cd30399de2da6fb69da",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Byte identity and geometry validity verified. Does not establish effective political boundary, authority, or physical surface status."
+    },
+    {
+      "id": "geoboundaries-sen-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SEN/ADM2/geoBoundaries-SEN-ADM2_simplified.geojson",
+      "role": "Exact original-consumed administrative geometry used for source-fit comparison; not independent physical land/water evidence.",
+      "vintage": "Recorded represented-year claim 2019; product build date 2023-12-12. Effective date not established.",
+      "retrieved_at": "2026-10-07T16:53:49Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 3.0 IGO per pinned administrative source registry; attribute Government of Senegal, OCHA ROWCA; legal review not performed."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-SEN-ADM2_simplified.geojson",
+          "bytes": 424564,
+          "sha256": "cb9aa64a7c8d1302527dd97e85acccafefe28b63e2a3f550c2218ed9a22ba335",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Byte identity and geometry validity verified. Does not establish effective political boundary, authority, or physical surface status."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/README.md",
+      "bytes": 7754,
+      "sha256": "222908729b7c6c827d16d36f838175219cc571d0887f9cecf878b661ad9d34be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/source_fit.py",
+      "bytes": 13275,
+      "sha256": "1564a5d833e307c87a4f141ebabc2882b907b59e2a6ddc350c9e1e00eb947910",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/controls.py",
+      "bytes": 3079,
+      "sha256": "0a0621ce2bc5097d226a42e13aa167ba38f23553d0e2640d6a1990a363c5d8ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-MRT-ADM2.geojson",
+      "bytes": 163642,
+      "sha256": "29caf92b290e3281d43c3a6497893ebfcebede733694d49cebb6d12ea4ff256b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-SEN-ADM2.geojson",
+      "bytes": 1949566,
+      "sha256": "2011b3b60e3b17c47ce0def3e26718631a245a7e3455ece1ad7fb5affc8cc517",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/first/source-fit.json",
+      "bytes": 4331,
+      "sha256": "55a7c183520fe6af5dd8a9397ea6dd22b5bc8f63a4f88cdf45cc7ee768f1af6b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/second/source-fit.json",
+      "bytes": 4331,
+      "sha256": "55a7c183520fe6af5dd8a9397ea6dd22b5bc8f63a4f88cdf45cc7ee768f1af6b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls.json",
+      "bytes": 294,
+      "sha256": "8f40ce32691e27421b0884acda7a2756b83381a16545002e5222115d6aee21eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-a/source-fit.json",
+      "bytes": 6689,
+      "sha256": "140462711cd8112fcc6a61b03bb27a730bc3063fcf9bd162d84d71c6f3238f42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-b/source-fit.json",
+      "bytes": 6689,
+      "sha256": "140462711cd8112fcc6a61b03bb27a730bc3063fcf9bd162d84d71c6f3238f42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-final.json",
+      "bytes": 294,
+      "sha256": "8f40ce32691e27421b0884acda7a2756b83381a16545002e5222115d6aee21eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-confirmation.json",
+      "bytes": 294,
+      "sha256": "8f40ce32691e27421b0884acda7a2756b83381a16545002e5222115d6aee21eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-c/source-fit.json",
+      "bytes": 6689,
+      "sha256": "140462711cd8112fcc6a61b03bb27a730bc3063fcf9bd162d84d71c6f3238f42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-d/source-fit.json",
+      "bytes": 6689,
+      "sha256": "140462711cd8112fcc6a61b03bb27a730bc3063fcf9bd162d84d71c6f3238f42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-validation.json",
+      "bytes": 294,
+      "sha256": "8f40ce32691e27421b0884acda7a2756b83381a16545002e5222115d6aee21eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-e/source-fit.json",
+      "bytes": 6889,
+      "sha256": "1db1c793d2ab433a176884b7b0f2fb82d34eda3756271cb2c9e8aac7bd3a71f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-f/source-fit.json",
+      "bytes": 6889,
+      "sha256": "1db1c793d2ab433a176884b7b0f2fb82d34eda3756271cb2c9e8aac7bd3a71f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-safe.json",
+      "bytes": 403,
+      "sha256": "a48daef4eb6c725ece8a282e2a5c8faa6deec9a6bb7d1e1a2a524af3b189f249",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-final-review.json",
+      "bytes": 600,
+      "sha256": "b8b14533adc27d9f188919cb3e8695a8101a56dd6a7dea5f21ebc197382d3f2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/retrieval-receipt.json",
+      "bytes": 3336,
+      "sha256": "03c7018056afd0f47efcd3ebc396563682392920c42be4b39061551ea63cd0d0",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "full-consumed-product-source-fit",
+      "description": "Verify byte-pinned full GeoJSON product feature rosters and geometries, then screen both exact candidate source features against every feature in both products without transformation or repair.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; source_fit.py SHA-256 1564a5d833e307c87a4f141ebabc2882b907b59e2a6ddc350c9e1e00eb947910",
+      "units": "Coordinates in source GeoJSON longitude/latitude degrees; intersection diagnostic in degree-squared; no metric area/distance computed.",
+      "kind": "source",
+      "crs": "WGS 84 / RFC 7946 GeoJSON",
+      "axis_order": "longitude-latitude",
+      "area_method": "Shapely/GEOS topological intersection in unmodified angular coordinates; area reported only as a numerically fragile degree-squared diagnostic.",
+      "distance_method": "None."
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Both candidate geometries are topologically covered by MRT Keur Macene in the pinned simplified product; the second also has a fragile intersection with SEN Dagana. This supports only administrative source-fit observations.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-mrt-adm2",
+        "geoboundaries-sen-adm2"
+      ]
+    },
+    {
+      "text": "Physical land-versus-inland-water classification and a safe physical geometry repair remain unresolved; no date-matched independent surface observation at suitable positional precision is available in this assessment.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-mrt-adm2",
+        "geoboundaries-sen-adm2"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "Run source_fit.py to each of the two fresh output paths; compare resulting source-fit.json files byte-for-byte.",
+    "Run controls.py; it exercises the same entrypoint with a missing family member and altered consumed source bytes."
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-confirmation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-final.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-a/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-b/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-c/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-d/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/first/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/second/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/source_fit.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-MRT-ADM2.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-SEN-ADM2.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-MRT-ADM2_simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-SEN-ADM2_simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/retrieval-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-e/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-f/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-final-review.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-safe.json",
+      "status": "added"
+    }
+  ]
+}

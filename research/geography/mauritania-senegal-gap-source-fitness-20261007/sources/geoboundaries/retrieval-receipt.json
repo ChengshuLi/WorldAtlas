@@ -1,0 +1,62 @@
+{
+  "consumed_original_source_products": [
+    {
+      "bytes": 124489,
+      "content_length_header": 124489,
+      "content_type": "application/octet-stream",
+      "etag": "\"1902199c8a95554f6fc671b72445584e6b511a79223e0cd30399de2da6fb69da\"",
+      "http_status": 200,
+      "iso3": "MRT",
+      "last_modified": "Wed, 07 Oct 2026 16:53:26 GMT",
+      "level": "ADM2",
+      "original_registry_hash_match": true,
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-MRT-ADM2_simplified.geojson",
+      "product_variant": "simplified exact original-consumed product",
+      "resolved_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at_utc": "2026-10-07T16:53:49.113322+00:00",
+      "sha256": "1902199c8a95554f6fc671b72445584e6b511a79223e0cd30399de2da6fb69da",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MRT/ADM2/geoBoundaries-MRT-ADM2_simplified.geojson"
+    },
+    {
+      "bytes": 424564,
+      "content_length_header": 424564,
+      "content_type": "application/octet-stream",
+      "etag": "\"cb9aa64a7c8d1302527dd97e85acccafefe28b63e2a3f550c2218ed9a22ba335\"",
+      "http_status": 200,
+      "iso3": "SEN",
+      "last_modified": "Wed, 07 Oct 2026 16:53:26 GMT",
+      "level": "ADM2",
+      "original_registry_hash_match": true,
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-SEN-ADM2_simplified.geojson",
+      "product_variant": "simplified exact original-consumed product",
+      "resolved_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at_utc": "2026-10-07T16:53:49.226904+00:00",
+      "sha256": "cb9aa64a7c8d1302527dd97e85acccafefe28b63e2a3f550c2218ed9a22ba335",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SEN/ADM2/geoBoundaries-SEN-ADM2_simplified.geojson"
+    }
+  ],
+  "limits": [
+    "The exact original simplified source bytes are authenticated by full SHA-256 equality to the retained source-corpus original raw pins.",
+    "Transport timestamps do not establish source effective dates or physical surface status.",
+    "No geometry was modified or normalized."
+  ],
+  "non_consumed_same_commit_full_variants": [
+    {
+      "bytes": 163642,
+      "consumed": false,
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-MRT-ADM2.geojson",
+      "reason": "different product variant; excluded from the pinned original simplified source input",
+      "sha256": "29caf92b290e3281d43c3a6497893ebfcebede733694d49cebb6d12ea4ff256b",
+      "variant": "full, non-simplified"
+    },
+    {
+      "bytes": 1949566,
+      "consumed": false,
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-SEN-ADM2.geojson",
+      "reason": "different product variant; excluded from the pinned original simplified source input",
+      "sha256": "2011b3b60e3b17c47ce0def3e26718631a245a7e3455ece1ad7fb5affc8cc517",
+      "variant": "full, non-simplified"
+    }
+  ],
+  "version": 1
+}
