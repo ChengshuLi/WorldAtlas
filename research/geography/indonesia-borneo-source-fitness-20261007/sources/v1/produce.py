@@ -303,6 +303,13 @@ def build(run_name: str) -> dict:
         next(r for r in contact_summary if r['atlas_feature_id'] == 'gb:IDN:ADM2:22746128B2679722836886')['classification'] != 'point-only'):
         raise ValueError('Contact overlay omitted an issue-pinned current admin feature')
 
+    area_exact = family.get('exact_existing_fragment_area_sum_m2')
+    if not isinstance(area_exact, dict) or not {'numerator', 'denominator'}.issubset(area_exact):
+        raise ValueError('Pinned family source lacks the exact inherited area-sum rational')
+    area_value = int(area_exact['numerator']) / int(area_exact['denominator'])
+    if area_value != 1078088489.3853252:
+        raise ValueError('Inherited route area sum differs from the issue-pinned displayed value')
+
     assessment = {
         'version': 1,
         'baseline_commit': commit,
@@ -312,7 +319,8 @@ def build(run_name: str) -> dict:
                   'contact_count': len(atlas_contacts), 'contact_ids': sorted(ATLAS_CONTACTS)},
         'routing_source_flags': {'numeric_closure_component_count': family.get('numeric_closure_component_count'),
                                  'numeric_closure_component_ids': sorted(family.get('numeric_closure_component_ids', [])),
-                                 'existing_fragment_area_sum_m2': family.get('exact_existing_fragment_area_sum_m2'),
+                                 'existing_fragment_area_sum_m2': area_value,
+                                 'existing_fragment_area_sum_exact': area_exact,
                                  'positive_length_neighbor_ids': sorted(family.get('complete_positive_length_neighbor_ids', [])),
                                  'compatible_original_admin_component_ids': sorted(family.get('compatible_original_admin_component_ids', [])),
                                  'source_fitness_required_compatible_land_component_ids': sorted(family.get('source_fitness_required_compatible_land_component_ids', [])),
