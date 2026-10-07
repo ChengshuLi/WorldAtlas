@@ -18,6 +18,30 @@ def read_pin(root,pin):
     return json.loads(raw)
 
 
+def normalized_diagnostic(expected):
+    # Only transport the exact geometry payload; every scientific field and
+    # absent/unknown field stays in the canonical result comparison.
+    if isinstance(expected,list):return [normalized_diagnostic(v)for v in expected]
+    if not isinstance(expected,dict):return expected
+    out={k:normalized_diagnostic(v)for k,v in expected.items()if k!='geometry'}
+    if 'geometry'in expected:out['geometry_reference']={'canonical_geometry_sha256':SHA(canon(expected['geometry'])),'object_index':'objects.json'}
+    return out
+
+
+def validate_diagnostic(stored,expected,objects):
+    transformed=normalized_diagnostic(expected)
+    if canon(stored)!=canon(transformed):raise ValueError('Complete scientific diagnostic status/fields differ')
+    def check(v):
+        if isinstance(v,dict):
+            if 'geometry_reference'in v:
+                h=v['geometry_reference']['canonical_geometry_sha256']
+                if h not in objects or SHA(canon(objects[h]))!=h:raise ValueError('Complete diagnostic pointset absent')
+            for x in v.values():check(x)
+        elif isinstance(v,list):
+            for x in v:check(x)
+    check(transformed)
+
+
 def verify(run):
     scope=json.loads(gzip.decompress((P/'scope.json.gz').read_bytes()));report=json.loads((run/'report.json').read_bytes());idx=read_pin(run,report['object_index']);objects={}
     for pin in idx['shards']:
@@ -91,28 +115,17 @@ def verify(run):
     validate_pointsets(scope,features,members)
     for i,r in rows.items():
         if r['component_full_feature_sha256']!=featurepins[i]['canonical_feature_sha256']or r['component_geometry_sha256']!=featurepins[i]['geometry_sha256']:raise ValueError('Unknown-row full feature pins changed')
+    from kernel import member_union,compare
     union_cache={};measured=0
+    extras={'family','complete_member_ids','source_union_reference','component_full_feature_sha256','component_geometry_sha256','original_native_scope_bucket','contacts','edge_neighbor_ids','existing_related_issues'}
     for fid,f in families.items():
         mids=tuple(f['complete_original_member_ids']);d=f['literal_member_union']
-        if d['status']!='literal-original-member-union':continue
-        if mids not in union_cache:
-            gs=[shape(members[i]['geometry'])for i in mids]
-            if any(not g.is_valid or g.is_empty or g.geom_type not in ('Polygon','MultiPolygon')for g in gs):raise ValueError('Invalid original input promoted to union')
-            union_cache[mids]=union_all(gs)
-        u=union_cache[mids];stored=pointset(d['union'])
-        if canon(objects[d['union']['geometry_reference']['canonical_geometry_sha256']])!=canon(__import__('shapely').geometry.mapping(u)):raise ValueError('Full literal union pointset differs')
+        if mids not in union_cache:union_cache[mids]=member_union([members[i]for i in mids])
+        expected,u=union_cache[mids]
+        validate_diagnostic(d,expected,objects)
         for i in f['family']['component_ids']:
-            r=rows[i];g=shape(features[i]['geometry'])
-            if SHA(canon(features[i]))!=featurepins[i]['canonical_feature_sha256']or SHA(canon(features[i]['geometry']))!=r['component_geometry_sha256']:raise ValueError('Complete original feature binding differs')
-            if 'intersection'in r:
-                ix=g.intersection(u);sg=objects[r['intersection']['geometry_reference']['canonical_geometry_sha256']]
-                if canon(sg)!=canon(__import__('shapely').geometry.mapping(ix)):raise ValueError('Full intersection pointset differs')
-            if 'difference'in r:
-                diff=g.difference(u);sg=objects[r['difference']['geometry_reference']['canonical_geometry_sha256']]
-                if canon(sg)!=canon(__import__('shapely').geometry.mapping(diff)):raise ValueError('Full difference pointset differs')
-            if 'partition_equals_original'in r:
-                same=union_all([g.intersection(u),g.difference(u)]).equals(g)
-                if same!=r['partition_equals_original']:raise ValueError('Numerical consistency unknown was changed')
+            r=rows[i];expected=compare(features[i],u)
+            validate_diagnostic({k:v for k,v in r.items()if k not in extras},expected,objects)
             measured+=1
     inp.close()
     scientific=sorted((str(p.relative_to(run)),SHA(p.read_bytes()))for p in run.rglob('*')if p.is_file()and p.name not in ('checkpoint.json',))

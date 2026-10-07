@@ -88,6 +88,37 @@ def run(commit,out):
         checked(kind+' missing fragment rejects',lambda changed=changed:rejected(lambda:reader.archive(changed),'Archive whole bytes'))
         changed=json.loads(canon(index));changed['archive'][kind]['whole_sha256']='0'*64
         checked(kind+' wrong whole hash rejects',lambda changed=changed:rejected(lambda:reader.archive(changed),'Archive whole bytes'))
+    alias=index['aliases'][0];bad_index=json.loads(canon(index));bad_alias=bad_index['aliases'][0];bad=b'not-json-original-fixture'
+    bad_alias['original'].update(bytes=len(bad),sha256=SHA(bad),decoded_bytes=len(bad),decoded_sha256=SHA(bad))
+    with unittest.mock.patch.object(reader,'read',return_value=bad):
+        assert reader.original(bad_alias['original']['commit'],bad_alias['original']['path'],bad_index,parse=False)==bad
+        checked('malformed actual JSON decoder path rejects after byte authentication',lambda:rejected(lambda:reader.original(bad_alias['original']['commit'],bad_alias['original']['path'],bad_index),'Expecting value'))
+    from verify import normalized_diagnostic,validate_diagnostic
+    expected=compare(feature('diagnostic',box(.2,.2,1,1)),u);stored=normalized_diagnostic(expected)
+    objects={SHA(canon(expected[k]['geometry'])):expected[k]['geometry']for k in ['intersection','difference']}
+    validate_diagnostic(stored,expected,objects);results.append({'control':'complete scientific diagnostic positive','outcome':'passed'})
+    for change in ['status','intersection','difference','partition_equals_original','member_union_covers_component','area_arithmetic_delta']:
+        changed=json.loads(canon(stored))
+        if change=='status':changed[change]='unknown-original-member-union'
+        elif change in ['intersection','difference','partition_equals_original']:changed.pop(change)
+        else:changed[change]=not changed[change]if isinstance(changed[change],bool)else 999
+        # Rebound counts and whole-shard digest cannot hide scientific mutation.
+        rebound={'counts':{changed['status']:1},'shard_sha256':SHA(canon([changed]))}
+        assert rebound['shard_sha256']==SHA(canon([changed]))
+        checked('rebound diagnostic '+change+' rejects',lambda changed=changed:rejected(lambda:validate_diagnostic(changed,expected,objects),'Complete scientific diagnostic'))
+    unknown,_=member_union([invalid]);unknown_stored=normalized_diagnostic(unknown);validate_diagnostic(unknown_stored,unknown,{})
+    for change in ['status','invalid_members','failure_class']:
+        altered=json.loads(canon(unknown_stored))
+        if change=='status':altered['status']='literal-original-member-union'
+        elif change=='invalid_members':altered['invalid_members']=[]
+        else:altered['invalid_members'][0]['failure_class']='invented'
+        checked('unknown original member '+change+' rejects',lambda altered=altered:rejected(lambda:validate_diagnostic(altered,unknown,{}),'Complete scientific diagnostic'))
+    for change in ['commit','path','sha256']:
+        altered=json.loads(canon(index));a=altered['aliases'][0]
+        if change in ['commit','path']:a['original'][change]='0'*40 if change=='commit'else 'wrong-source-report.json'
+        else:a['original']['sha256']='0'*64
+        expected_error='Original whole containing input omitted'if change in ['commit','path']else'Original alias relationship'
+        checked('wrong frozen source selector '+change+' rejects',lambda altered=altered:rejected(lambda:reader.original(alias['original']['commit'],alias['original']['path'],altered,parse=False),expected_error))
     reader.close();out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(canon({'controls':results,'count':len(results),'world_generation':False,'limitations':['Directed controls do not approve factual source roles or replace two complete final runs.']}));print(json.dumps({'controls':len(results),'out':str(out)}))
 
 if __name__=='__main__':

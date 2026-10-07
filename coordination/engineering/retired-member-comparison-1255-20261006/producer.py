@@ -34,7 +34,7 @@ class Objects:
         return {'canonical_geometry_sha256':h,'object_index':'objects.json'}
 
 
-def run(commit,target):
+def run(commit,target,inputs_only=False):
     if not isinstance(commit,str)or not re.fullmatch('[a-f0-9]{40}',commit):raise ValueError('Immutable execution commit required before Git')
     versions={'python':platform.python_version(),'numpy':numpy.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string,'zlib':zlib.ZLIB_VERSION}
     expected={'python':'3.12.14','numpy':'2.3.5','shapely':'2.1.2','geos':'3.13.1','zlib':'1.2.12'}
@@ -91,6 +91,8 @@ def run(commit,target):
     # metadata context not consumed by the literal geometry loop.
     for a in index['aliases']:inputs.original(a['original']['commit'],a['original']['path'],index,parse=False)
     for a in index['attribution_context']:inputs.read(a['ordinary']['path'],a['ordinary'])
+    if inputs_only:
+        print(json.dumps({'status':'complete-input-closure-authenticated-no-geometry','code_commit':commit,'full_families':len(families),'full_components':len(features),'full_original_members':len(members),'full_contexts':len(contexts),'complete_aliases':len(index['aliases']),'ordinary_inputs':inputs.pins,'executed_modules':modules,'software':versions}),flush=True);inputs.close();return
     target.mkdir(parents=True,exist_ok=False);objects=Objects(target);rows=[];size=0;outputs=[];counts=collections.Counter();family_results=[];processed=[]
     def retain_pointset(p):
         if 'geometry'in p:p['geometry_reference']=objects.retain(p.pop('geometry'))
@@ -134,6 +136,6 @@ def run(commit,target):
     (target/'report.json').write_bytes(canon(result));inputs.close();print(json.dumps({'complete':True,'counts':dict(counts),'report_sha256':SHA(canon(result))}),flush=True)
 
 if __name__=='__main__':
-    a=argparse.ArgumentParser();a.add_argument('--code-commit',required=True);a.add_argument('--output',required=True);args=a.parse_args()
+    a=argparse.ArgumentParser();a.add_argument('--code-commit',required=True);a.add_argument('--output',required=True);a.add_argument('--validate-inputs-only',action='store_true');args=a.parse_args()
     target=output_target(R,PREFIX,args.output)
-    run(args.code_commit,target)
+    run(args.code_commit,target,args.validate_inputs_only)
