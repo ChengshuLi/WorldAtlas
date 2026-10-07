@@ -1,5 +1,5 @@
 """Directed complete-pointset fixtures, not additional counted scientific runs."""
-import pathlib,sys,json
+import pathlib,sys,json,copy,subprocess,tempfile
 from unittest.mock import patch
 from shapely.geometry import box,mapping,LineString,Point,Polygon
 from shapely.errors import GEOSException
@@ -39,6 +39,52 @@ def run():
     assert len(rows)==3 and rows[0]['status']==rows[2]['status']=='complete-literal-reconstruction-diagnosis' and rows[1]['status']=='unknown-failed-diagnostic-operation';passed.append('failed-middle-row-and-later-rows-retained')
     predicates={'original_relate_union':'2FF1FF212','union_covers_original':False,'original_covered_by_union':True,'original_disjoint_union':False,'original_intersects_union':True}
     d=k.coverage(predicates,g,g,g,Polygon());assert d['status']=='unknown-predicate-or-overlay-disagreement' and not d['direct_predicate_consensus'];passed.append('direct-predicate-disagreement-never-promoted')
+    whole=k.diagnose(mapping(g),mapping(g),mapping(box(0,0,5,5)),mapping(Polygon()))
+    assert whole['coverage_observation']['status']=='unknown-predicate-or-overlay-disagreement' and whole['predicates']['partition_equals_original']is False;passed.append('incomplete-overlay-never-full-coverage')
+    contaminated=k.diagnose(mapping(g),mapping(g),mapping(box(0,0,15,15)),mapping(Polygon()))
+    assert contaminated['coverage_observation']['status']=='unknown-predicate-or-overlay-disagreement';passed.append('contaminated-overlay-never-full-coverage')
+    u=box(5,5,15,15)
+    partial=k.diagnose(mapping(g),mapping(u),mapping(box(6,6,9,9)),mapping(box(0,0,4,4)))
+    assert partial['coverage_observation']['status']=='literal-positive-area-overlap-and-outside-member-union' and partial['predicates']['partition_equals_original']is False and partial['coverage_observation']['partition_recovery']=='not-certified-by-coverage-observation';passed.append('partial-relation-does-not-certify-complete-partition')
+    import custody,importlib.util
+    spec=importlib.util.spec_from_file_location('numeric_verify',P/'verify.py');verify=importlib.util.module_from_spec(spec);spec.loader.exec_module(verify)
+    from reader import output_target,authenticate_executed_modules
+    def reject(name,fn):
+        try:fn()
+        except ValueError:passed.append(name);return
+        raise AssertionError('Intended rejection absent: '+name)
+    # Every diagnostic field, including absent fields and exact numeric
+    # representation, participates in whole canonical replay equality.
+    expected=k.diagnose(mapping(g),mapping(g),mapping(g),mapping(Polygon()))
+    stored=verify.old.normalized_diagnostic(expected);objects={}
+    for name in ['reconstructed_partition','original_minus_partition','partition_minus_original']:
+        objects[custody.SHA(custody.canon(expected[name]['geometry']))]=expected[name]['geometry']
+    original={'component':'c','family':'f','status':'unknown-numerical-partition-disagreement','component_full_feature_sha256':'a'*64,'component_geometry_sha256':'b'*64,'contacts':['n'],'edge_neighbor_ids':['n'],'existing_related_issues':[1]}
+    family={'complete_original_member_ids':['m']};ref={'commit':'c'*40,'path':'ordinary.json','canonical_record_sha256':'d'*64}
+    extras={'component':'c','family':'f','archived_original_diagnostic':{'reference':ref,'record':original},'complete_member_ids':['m'],'original_family_reference':ref,'component_full_feature_sha256':'a'*64,'component_geometry_sha256':'b'*64,'contacts':['n'],'edge_neighbor_ids':['n'],'existing_related_issues':[1]}
+    row={**stored,**extras}
+    verify.validate_row(row,expected,objects,original,family,ref,ref);passed.append('complete-diagnostic-and-archived-original-positive')
+    mutations=[('coherently-rehashed-status-mutation','status','unknown-unmeasured'),('coverage-authority-mutation','physical_status','land'),('member-reassignment','complete_member_ids',['other']),('contact-loss','contacts',[]),('edge-neighbor-loss','edge_neighbor_ids',[]),('existing-related-work-loss','existing_related_issues',[]),('original-row-promotion','archived_original_diagnostic',{'reference':ref,'record':{**original,'status':'measured'}}),('source-reference-mutation','original_family_reference',{**ref,'commit':'e'*40}),('mandatory-remainder-pointset-loss','original_minus_partition',None),('numeric-representation-mutation','coordinate_area_arithmetic',{**row['coordinate_area_arithmetic'],'original':100})]
+    for name,key,value in mutations:
+        changed=copy.deepcopy(row)
+        if value is None:del changed[key]
+        else:changed[key]=value
+        reject(name,lambda c=changed:verify.validate_row(c,expected,objects,original,family,ref,ref))
+    reject('complete-generated-geometry-loss',lambda:verify.validate_row(row,expected,{},original,family,ref,ref))
+    frozen=k.diagnose({'type':'bad'},mapping(g),mapping(g),mapping(Polygon()));changed=copy.deepcopy(frozen);changed['failure_class']='Other'
+    reject('unknown-failure-class-mutation',lambda:verify.old.validate_diagnostic(changed,frozen,{}))
+    for key in custody.ROSTERS:
+        reject('missing-complete-roster-'+key,lambda x=key:custody.check_rosters({a:[]for a in custody.ROSTERS if a!=x}))
+    with tempfile.TemporaryDirectory(dir=P/'.cache')as directory:
+        tmp=pathlib.Path(directory);target=tmp/'git-option-output'
+        # Actual command entry must reject before Git can interpret any option.
+        result=subprocess.run([sys.executable,'-B',str(P/'producer.py'),'--code-commit','--output='+str(target),'--output',str(tmp/'science')],capture_output=True)
+        assert result.returncode!=0 and not target.exists() and not(tmp/'science').exists();passed.append('actual-invalid-commit-cli-no-write')
+        reject('git-option-auth-no-write',lambda:authenticate_executed_modules(custody.R,'--output='+str(target),[]));assert not target.exists()
+        reject('output-escape',lambda:output_target(custody.R,str(P.relative_to(custody.R)),'scripts/out'))
+        reject('output-traversal',lambda:output_target(custody.R,str(P.relative_to(custody.R)),str(P.relative_to(custody.R))+'/../bad'))
+        linked=tmp/'linked';linked.symlink_to(tmp,target_is_directory=True)
+        reject('symlink-output-parent',lambda:output_target(custody.R,str(P.relative_to(custody.R)),str((linked/'out').relative_to(custody.R))))
     return {'directed_controls':len(passed),'passed':passed,'limits':['Small directed fixtures only; no complete current dataset result or source authority is certified.']}
 
 if __name__=='__main__':print(json.dumps(run(),sort_keys=True))

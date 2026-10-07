@@ -14,6 +14,7 @@ def pointset(g):
 def coverage(predicates,original,union,intersection,difference):
     result={'status':'unknown-predicate-or-overlay-disagreement',
             'method':'complete-input-predicate-and-complete-overlay-relation-consensus',
+            'partition_recovery':'not-certified-by-coverage-observation',
             'physical_status':'unverified','administrative_assignment':None,
             'historical_stage_identity':'unverified','cause_status':'unknown'}
     relation=predicates['original_relate_union']
