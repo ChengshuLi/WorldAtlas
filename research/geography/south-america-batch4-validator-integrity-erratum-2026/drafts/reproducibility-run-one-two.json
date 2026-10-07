@@ -1,0 +1,37 @@
+{
+  "comparison_policy": "Compare every deterministic calculation/control product byte-for-byte. Run name, timestamp and path-bound publication receipt are retained as different truthful per-run metadata.",
+  "equal_deterministic_product_digest": true,
+  "kind": "reproducibility",
+  "method_id": "south-america-batch4-validator-integrity-erratum",
+  "method_note": "The digests bind all six whole calculation/control files; publication receipts independently bind all seven run outputs for each fresh vintage.",
+  "outcome": "passed",
+  "run_metadata_differ": true,
+  "run_one": {
+    "metadata_sha256": "8130e13d04db9745b78816727e9d56e3958ed9bef1e404a8eec3a6d5aca8b6c4",
+    "outputs": {
+      "audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
+      "child-roster-controls.json": "a114287faa2c9d613304c78b1fdcf99591cb868905871ebf9395d078fc86b4fd",
+      "execution-bindings.json": "9e80dd015d9414424fcb286aa236cc94503035cd9d4f7c0d51bf2f54af93fb66",
+      "legacy-writer-control.json": "ec2bbbf5f39c3e10bd53f44f23baf1310e834d333262e76a992436a07bbe66c2",
+      "negative-control.json": "d8653de39e512327e833cb762e860c69250c7ea1875ca04c7cfaab46be1ce916",
+      "positive-control.json": "d48ce763ad8da62fd2c2f64b4bd7c60815c626e0be59075b6df6761afc26efa8"
+    },
+    "publication_sha256": "1de548bf6bdb9c92a1f0d79a5eba13adbe23290be3fb05e135f0c96477a78524",
+    "vintage": "run-one"
+  },
+  "run_one_sha256": "1df68d6bb88965330b821affea3e1943cfaa322a9ff3793b68c7959cc8ea680f",
+  "run_two": {
+    "metadata_sha256": "b5ceac8c3c5f063e9e52180ffb78efc98009bc547be0ecda49528e561b974f8b",
+    "outputs": {
+      "audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
+      "child-roster-controls.json": "a114287faa2c9d613304c78b1fdcf99591cb868905871ebf9395d078fc86b4fd",
+      "execution-bindings.json": "9e80dd015d9414424fcb286aa236cc94503035cd9d4f7c0d51bf2f54af93fb66",
+      "legacy-writer-control.json": "ec2bbbf5f39c3e10bd53f44f23baf1310e834d333262e76a992436a07bbe66c2",
+      "negative-control.json": "d8653de39e512327e833cb762e860c69250c7ea1875ca04c7cfaab46be1ce916",
+      "positive-control.json": "d48ce763ad8da62fd2c2f64b4bd7c60815c626e0be59075b6df6761afc26efa8"
+    },
+    "publication_sha256": "30c725f59a79876d18fcecd766abe295ea425aae7ca26949b21ac5978fefed10",
+    "vintage": "run-two"
+  },
+  "run_two_sha256": "1df68d6bb88965330b821affea3e1943cfaa322a9ff3793b68c7959cc8ea680f"
+}
