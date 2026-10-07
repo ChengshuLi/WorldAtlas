@@ -1,0 +1,68 @@
+{
+  "files": [
+    {
+      "comparison_expressions": [
+        "verified['complete_components']==report['complete_components']",
+        "verified['complete_families']==report['complete_families']",
+        "verified['complete_witnesses']==report['counts']['one-compatible-recorded-subject-uniquely-covers-component']==317",
+        "verified['complete_operation_unknowns']==34"
+      ],
+      "path": "build-manifest.py",
+      "sha256": "f5661a6e2b6d5449779f7749c7dc76cd3d9857c53a2818c76a4eb7fefbea7321"
+    },
+    {
+      "comparison_expressions": [
+        "v['complete_components']==14708",
+        "v['complete_families']==3482",
+        "v['complete_witnesses']==317",
+        "v['complete_operation_unknowns']==34"
+      ],
+      "path": "record-reproducibility.py",
+      "sha256": "9d51b321dbeaaeefeebd28ef13d43e6b58fef8c2f0e54c9a5023d04a19d12721"
+    },
+    {
+      "comparison_expressions": [
+        "len(controls['controls'])==22"
+      ],
+      "path": "record-controls.py",
+      "sha256": "0157d785039f1a20d790ae880c7fbccf6a8391a88171e976eba3d751dfbd7ecc"
+    },
+    {
+      "comparison_expressions": [],
+      "path": "retain-run.py",
+      "sha256": "9fa393dd5d46a8c6cc4c21a04682b69b6a35c30cc324551feac3d3e1bfb67b14"
+    },
+    {
+      "comparison_expressions": [],
+      "path": "verify.py",
+      "sha256": "267fa9adb0bf5f57fffc02d0604939a0e235b32c287659471f03be370184a5b5"
+    },
+    {
+      "comparison_expressions": [],
+      "path": "record-execution.py",
+      "sha256": "e8daf99b77a2d38865e6ce692c26bfb3a3bedfb42aaee237b30ea607b1eb56df"
+    }
+  ],
+  "findings": [
+    {
+      "actual_required": 25,
+      "path": "record-controls.py",
+      "unused_expected": 22
+    },
+    {
+      "actual_required": 2282,
+      "path": "record-reproducibility.py",
+      "unused_expected_families": 3482
+    }
+  ],
+  "kind": "read-only postprocessing constant preflight, not execution or admission proof",
+  "producer_commit": "9b440dcb947884303ba61f9808867b4e0fdda273",
+  "resolution": "Preserve frozen unused originals; after both scientific runs freeze distinct final non-scientific recorders before actual execution. No scientific rerun.",
+  "scope_counts": {
+    "actual_directed_controls": 25,
+    "components": 14708,
+    "families": 2282,
+    "operation_unknowns": 34,
+    "witnesses": 317
+  }
+}

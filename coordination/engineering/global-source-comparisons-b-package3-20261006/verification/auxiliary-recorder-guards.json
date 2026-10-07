@@ -1,0 +1,103 @@
+{
+  "controls": [
+    {
+      "command": [
+        "/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python",
+        "-B",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-reproducibility-final.py",
+        "--producer-commit",
+        "9b440dcb947884303ba61f9808867b4e0fdda273",
+        "--recorder-commit",
+        "adbccdfeb41b3ccea02af212dd43ff569e9df6e0",
+        "--two",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/science-two-verification.json",
+        "--one",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/auxiliary-guard-fixtures/wrong-families.json",
+        "--out",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/auxiliary-guard-fixtures/wrong-family-output.json"
+      ],
+      "control": "reject actual wrong family constant",
+      "exit_code": 1,
+      "finished_utc": "2026-10-07T02:59:36.339639+00:00",
+      "intended_rejection_branch": "complete_families",
+      "output_absent": true,
+      "started_utc": "2026-10-07T02:59:36.035028+00:00",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-reproducibility-final.py\", line 28, in <module>\n    body=checked_cache_path(name,True).read_bytes();v=json.loads(body);assert v['outcome']=='passed'and v['all_original_rows_equal']and v['complete_components']==14708 and v['complete_families']==2282 and v['complete_witnesses']==317 and v['complete_operation_unknowns']==34\n                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python",
+        "-B",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-reproducibility-final.py",
+        "--producer-commit",
+        "9b440dcb947884303ba61f9808867b4e0fdda273",
+        "--recorder-commit",
+        "adbccdfeb41b3ccea02af212dd43ff569e9df6e0",
+        "--two",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/science-two-verification.json",
+        "--one",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/auxiliary-guard-fixtures/wrong-vector.json",
+        "--out",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/auxiliary-guard-fixtures/wrong-vector-output.json"
+      ],
+      "control": "reject different scientific vector",
+      "exit_code": 1,
+      "finished_utc": "2026-10-07T02:59:36.643579+00:00",
+      "intended_rejection_branch": "scientific_product_sha256",
+      "output_absent": true,
+      "started_utc": "2026-10-07T02:59:36.339691+00:00",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-reproducibility-final.py\", line 32, in <module>\n    assert receipts[0]['actual_verification']['scientific_product_sha256']==receipts[1]['actual_verification']['scientific_product_sha256']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python",
+        "-B",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-controls-final.py",
+        "--producer-commit",
+        "9b440dcb947884303ba61f9808867b4e0fdda273",
+        "--recorder-commit",
+        "adbccdf",
+        "--output",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/auxiliary-guard-fixtures/bad-selector-output"
+      ],
+      "control": "reject malformed auxiliary immutable selector",
+      "exit_code": 1,
+      "finished_utc": "2026-10-07T02:59:36.928915+00:00",
+      "intended_rejection_branch": "re.fullmatch",
+      "output_absent": true,
+      "started_utc": "2026-10-07T02:59:36.643624+00:00",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-controls-final.py\", line 20, in <module>\n    assert re.fullmatch('[a-f0-9]{40}',a.producer_commit) and re.fullmatch('[a-f0-9]{40}',a.recorder_commit)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python",
+        "-B",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-controls-final.py",
+        "--producer-commit",
+        "9b440dcb947884303ba61f9808867b4e0fdda273",
+        "--recorder-commit",
+        "adbccdfeb41b3ccea02af212dd43ff569e9df6e0",
+        "--output",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/package3/auxiliary-guard-fixtures/link/output"
+      ],
+      "control": "reject auxiliary output ancestor symlink",
+      "exit_code": 1,
+      "finished_utc": "2026-10-07T02:59:38.097778+00:00",
+      "intended_rejection_branch": "is_symlink",
+      "output_absent": true,
+      "started_utc": "2026-10-07T02:59:36.928969+00:00",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-controls-final.py\", line 25, in <module>\n    out=checked_cache_path(a.output,False)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/global-source-comparisons-b-package3-20261006/record-controls-final.py\", line 17, in checked_cache_path\n    for parent in [path,*path.parents]:assert not parent.is_symlink()\n                                              ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+      "stdout": ""
+    }
+  ],
+  "immutable_recorder_commit": "adbccdfeb41b3ccea02af212dd43ff569e9df6e0",
+  "immutable_scientific_producer": "9b440dcb947884303ba61f9808867b4e0fdda273",
+  "kind": "four actual auxiliary reporting guard controls, distinct from frozen25 science/input controls",
+  "limits": [
+    "Small production-entry negative controls; not another complete scientific execution."
+  ],
+  "outcome": "passed"
+}
