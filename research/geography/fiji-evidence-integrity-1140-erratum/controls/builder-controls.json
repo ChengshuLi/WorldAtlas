@@ -1,0 +1,134 @@
+{
+  "controls": [
+    {
+      "entry_point": "reproduce.py --vintage run-one",
+      "name": "producer-existing-vintage-preserved",
+      "observation": "the producer rejected the occupied run name and every original output hash stayed equal",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "tx[\"NewVintage\"](baseline,OWNED,vintage,OUTPUTS)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 104, in __init__\n    if self.root.exists() or self.root.is_symlink(): raise FileExistsError(\"Vintage already exists\")\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileExistsError: Vintage already exists\n",
+      "stderr_sha256": "a6b7d8bd513c805c889c7eeb949f1713744a9169218cf5c8143e2b86d5e587ff",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "reproduce.py",
+      "name": "producer-broken-symlink-rejected",
+      "observation": "broken output symlink remains and no target was created",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "0-erratum/packet.py\", line 389, in run_products\n    writer=ctx[\"NewVintage\"](baseline,OWNED,vintage,OUTPUTS)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 103, in __init__\n    if p.is_symlink(): raise ValueError(\"Symlink in destination path\")\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Symlink in destination path\n",
+      "stderr_sha256": "69577e37abc9c3ab4f8062e3fc66cd3fd08b6c69fc88a2ad283cc28d64b2cba6",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_fixture_cleanup": "The test-created broken symlink was removed after recording rejection; no target existed."
+    },
+    {
+      "entry_point": "reproduce.py",
+      "name": "producer-path-traversal-rejected",
+      "observation": "unsafe vintage name was rejected and no escaped path was created",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "k/research/geography/fiji-evidence-integrity-1140-erratum/reproduce.py\", line 15, in main\n    records = run_products(args.vintage, fail_after_compute=args.audit_fail_after_compute)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 386, in run_products\n    raise ValueError(\"Unsafe vintage name\")\nValueError: Unsafe vintage name\n",
+      "stderr_sha256": "b43fa201b9affb1348efd3d69bfff855d27c91fa00ae5a82e4e7f2f3e480ad9d",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "reproduce.py --audit-fail-after-compute",
+      "name": "producer-post-calculation-failure-preserved",
+      "observation": "intentional post-calculation fault exits nonzero, publishes no run directory/receipt and leaves prior runs byte-identical",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "cords = run_products(args.vintage, fail_after_compute=args.audit_fail_after_compute)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 408, in run_products\n    raise RuntimeError(\"audit-injected failure after calculation; no output was published\")\nRuntimeError: audit-injected failure after calculation; no output was published\n",
+      "stderr_sha256": "a378d245744bb6abc15aa3bfd2b7c6c533f88c181e4d3b95a151a7837cb211f6",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "build_packet.py",
+      "name": "copied-run-rejected",
+      "observation": "the builder rejected duplicate producer execution IDs; no pair receipt was published",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/build_packet.py\", line 181, in main\n    two=validate_run(args.run_two,ctx,audit,positive,negative)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 425, in validate_run\n    raise ValueError(\"whole-run receipt inventory mismatch\")\nValueError: whole-run receipt inventory mismatch\n",
+      "stderr_sha256": "0dc0ab4d3219d8a353fc967d8d1cb23cde236c7bd1138507bfddadb754ee52b5",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "build_packet.py",
+      "name": "empty-run-rejected",
+      "observation": "empty second run fails whole-run receipt/product inventory; no pair receipt was published",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "phy/fiji-evidence-integrity-1140-erratum/build_packet.py\", line 181, in main\n    two=validate_run(args.run_two,ctx,audit,positive,negative)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 420, in validate_run\n    raise ValueError(f\"incomplete or unexpected run product set: {vintage}\")\nValueError: incomplete or unexpected run product set: empty-run-two\n",
+      "stderr_sha256": "52f8f4e8c65928a083d310b5d9a39a94d5d5bb5f29d6bfcd86275a127ec976dd",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "build_packet.py",
+      "name": "partial-run-rejected",
+      "observation": "one matching product cannot substitute for the five expected products plus completion receipt",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "y/fiji-evidence-integrity-1140-erratum/build_packet.py\", line 181, in main\n    two=validate_run(args.run_two,ctx,audit,positive,negative)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 420, in validate_run\n    raise ValueError(f\"incomplete or unexpected run product set: {vintage}\")\nValueError: incomplete or unexpected run product set: partial-run-two\n",
+      "stderr_sha256": "91b6964211c86e2d73a23fcb6d578bab48288f7e15e08c6a8b8d11f5b713f817",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "build_packet.py",
+      "name": "coherently-rehashed-mismatch-rejected",
+      "observation": "builder accepts internally consistent file hashes only after exact pinned-input recomputation; altered Lau metric is rejected",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/build_packet.py\", line 181, in main\n    two=validate_run(args.run_two,ctx,audit,positive,negative)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 425, in validate_run\n    raise ValueError(\"whole-run receipt inventory mismatch\")\nValueError: whole-run receipt inventory mismatch\n",
+      "stderr_sha256": "0dc0ab4d3219d8a353fc967d8d1cb23cde236c7bd1138507bfddadb754ee52b5",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "build_packet.py",
+      "name": "failed-producer-run-rejected",
+      "observation": "missing failed-run output/receipt is rejected; no successful pair receipt is created",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "s.run_two,ctx,audit,positive,negative)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 416, in validate_run\n    if root.is_symlink() or not root.is_dir(): raise ValueError(f\"missing whole run: {vintage}\")\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: missing whole run: failed-after-compute\n",
+      "stderr_sha256": "1c823a6280acabe8241ffffc307057fcbdc42004f9a011e3d15abd4f6f2dabbf",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "reproduce.py",
+      "name": "producer-ordinary-file-preserved",
+      "observation": "ordinary file at run destination is preserved and no completion record is written",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "stderr_excerpt": "tx[\"NewVintage\"](baseline,OWNED,vintage,OUTPUTS)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/fiji-evidence-integrity-1140-erratum/packet.py\", line 104, in __init__\n    if self.root.exists() or self.root.is_symlink(): raise FileExistsError(\"Vintage already exists\")\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileExistsError: Vintage already exists\n",
+      "stderr_sha256": "a6b7d8bd513c805c889c7eeb949f1713744a9169218cf5c8143e2b86d5e587ff",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "entry_point": "build_packet.publish_root_manifest",
+      "name": "builder-existing-manifest-preserved",
+      "observation": "exclusive root-manifest publisher rejects an existing target and leaves its exact sentinel bytes unchanged",
+      "outcome": "rejected",
+      "protected_bytes_unchanged": true,
+      "returncode": 1,
+      "sentinel_sha256": "803a4398715b422f1fa141f69d848cac5186767b53b645b34bb775473b55273e"
+    }
+  ],
+  "credentials_removed_from_probe_environments": true,
+  "entry_points": [
+    "reproduce.py",
+    "build_packet.py",
+    "build_packet.publish_root_manifest"
+  ],
+  "issue": 1361,
+  "original_run_hashes_unchanged": true,
+  "outcome": "passed",
+  "version": 1
+}
