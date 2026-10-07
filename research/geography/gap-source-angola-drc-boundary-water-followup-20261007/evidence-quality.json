@@ -137,6 +137,11 @@
       "status": "added"
     },
     {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v4.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/issue-contract.json",
       "previous_path": null,
       "status": "added"
@@ -208,6 +213,11 @@
     },
     {
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v2.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v3.json",
       "previous_path": null,
       "status": "added"
     },
@@ -369,7 +379,7 @@
   ],
   "commands": [
     "python restore_worldcover.py",
-    "PYTHONPATH=\"$PWD/.evidence-venv/lib/python3.12/site-packages\" /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py",
+    "PYTHONPATH=\"$PWD/.evidence-venv/lib/python3.12/site-packages\" /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py (loads inputs/freeze-v4.json)",
     "node scripts/evidence-quality.mjs research/geography/gap-source-angola-drc-boundary-water-followup-20261007/evidence-quality.json ."
   ],
   "conclusions": [
@@ -1614,11 +1624,11 @@
   ],
   "outputs": [
     {
-      "bytes": 7111,
+      "bytes": 7267,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/README.md",
       "role": "method-and-provenance",
-      "sha256": "ddf61c6bd68a05e1a451dd11002b55db164d5d9272b8ab47f1b97d8132181592"
+      "sha256": "eaa90b161272150d53ed0b7ace1235b8b75edc32b5ad82144177833c0475b1fa"
     },
     {
       "bytes": 2343,
@@ -1691,6 +1701,13 @@
       "sha256": "a586facdf613f8a3e87c1e443fc6cf465a15e040f7ce4050aeda4dc71d3cb43c"
     },
     {
+      "bytes": 12904,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v4.json",
+      "role": "method-and-provenance",
+      "sha256": "0ffb752b522466ac7d0a5995be1412811f644d8e3fdac3d5631fcf8ae9cadf18"
+    },
+    {
       "bytes": 1636,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/issue-contract.json",
@@ -1726,11 +1743,11 @@
       "sha256": "985237eb84431b852a493a753fb73a5cdad3fe94b289251619c416ad79b99654"
     },
     {
-      "bytes": 1822,
+      "bytes": 3182,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/execution-history.json",
       "role": "method-and-provenance",
-      "sha256": "6feb81413e9103a8cac671f9cbc8b872eefc69bef023f770ccca3caea392efbf"
+      "sha256": "3868bdcf6dfeb94ea179a607a3362e34a5d3a82305ee4344b9475e2f0955c3bd"
     },
     {
       "bytes": 287771,
@@ -1765,21 +1782,21 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/reproduction-receipt.json",
       "role": "generated-result",
-      "sha256": "f16851fa14bc5a1a18ea694a5ef312faa8dbdcb71e4c8c51ffc6600ecc7d05a3"
+      "sha256": "1084a018d03e8cfe20770130ed5f7a8061dc07b9d064292e6702f61c35e23eb2"
     },
     {
-      "bytes": 429,
+      "bytes": 480,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-negative-control-v1.json",
       "role": "generated-result",
-      "sha256": "64181e508dc04a10df97c22bf3921bc52b7f604893a562cd468fa5123e2f012e"
+      "sha256": "dd6943061d0a16d584bad5cd32ae516d8531b30c3b65c05c44d42d12d5257bf7"
     },
     {
-      "bytes": 1284,
+      "bytes": 1673,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-positive-control-v1.json",
       "role": "generated-result",
-      "sha256": "444433ef7a8d77ef907183e4232b68ccb11e1af882be67ba609762d809b92c88"
+      "sha256": "06ee757387bca983bc1b94ba0093620e96d01c89212ade6b230c03102bb8fb02"
     },
     {
       "bytes": 408,
@@ -1796,25 +1813,32 @@
       "sha256": "59a1289bf50c6875818172565a6c27e6448da129e40ace20682b04fd5ded87bd"
     },
     {
-      "bytes": 420,
+      "bytes": 408,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v3.json",
+      "role": "method-and-provenance",
+      "sha256": "f16851fa14bc5a1a18ea694a5ef312faa8dbdcb71e4c8c51ffc6600ecc7d05a3"
+    },
+    {
+      "bytes": 471,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-negative-control-v1.json",
       "role": "generated-result",
-      "sha256": "9cf545048eb682b60ec404a264311168fca3aec48328a22be7baf3c64fe8c4fc"
+      "sha256": "910ae8bb67c762be0cbae3914e6fe1059ee04fa8eefef8515f627ee2b623cc6e"
     },
     {
-      "bytes": 1275,
+      "bytes": 1664,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-positive-control-v1.json",
       "role": "generated-result",
-      "sha256": "d33eec084fac904f1edb24cfdc9f6ed63a8668bb14136b09c3db84e699104606"
+      "sha256": "dbb69fe19797bf5479e70cec227ca6d1e0942613ece9f04df83840a3aa21bb07"
     },
     {
-      "bytes": 25525,
+      "bytes": 26168,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/reproduce_assessment.py",
       "role": "method-and-provenance",
-      "sha256": "cf4da0c1283a5c41ac3326cca2510d9b0e269c21f765e2b50a26a150aee8addc"
+      "sha256": "7f397f52ab8f16abd3624b27cc292d55aa71ed1c93c85e4ba0c38ef8fc522bca"
     },
     {
       "bytes": 1386,
@@ -1824,11 +1848,11 @@
       "sha256": "55ca53d796932cf7c7277512b0bb4b7a695ff71c52ce872b868bbf66b5766b84"
     },
     {
-      "bytes": 11408,
+      "bytes": 13599,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py",
       "role": "method-and-provenance",
-      "sha256": "4dfc3f8697bf329784db0b57de3c8d707192c789d4446536b6b0280034fabdd6"
+      "sha256": "ae5133595d3502d29c43170ed9c42563b29c2d2875e112a60b570328903cd40a"
     },
     {
       "bytes": 1040603,

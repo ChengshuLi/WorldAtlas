@@ -10,7 +10,7 @@ import tempfile
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from reproduce_assessment import pixel_counts, validate_roster, validate_worldcover_grid, verify_pinned_bytes
+from reproduce_assessment import pixel_counts, scl_accounting, validate_scl_accounting, validate_roster, validate_worldcover_grid, verify_pinned_bytes
 import numpy as np
 import rasterio
 from affine import Affine
@@ -20,7 +20,7 @@ from shapely.geometry import Point, box
 
 ROOT = Path(__file__).resolve().parents[3]
 PACKET = ROOT / "research/geography/gap-source-angola-drc-boundary-water-followup-20261007"
-FREEZE = PACKET / "inputs/freeze-v3.json"
+FREEZE = PACKET / "inputs/freeze-v4.json"
 PRODUCER = PACKET / "reproduce_assessment.py"
 
 
@@ -62,6 +62,33 @@ def main():
                      "fixture": "3x3 unit grid; polygon [2.4,2.6] x [2.4,2.6] contains centre (2.5,2.5)",
                      "expected_class_counts": {"3": 1}, "actual_class_counts": actual_counts,
                      "strict_centres": actual_centres}
+    scl_fixture_classes = np.array([[0, 2, 3, 8, 9, 10, 6]], dtype=np.uint8)
+    with MemoryFile() as memory:
+        with memory.open(driver="GTiff", height=1, width=7, count=1, dtype="uint8",
+                         transform=from_origin(0, 1, 1, 1), crs="EPSG:4326") as dataset:
+            dataset.write(scl_fixture_classes, 1)
+            fixture_counts, fixture_centres, _ = pixel_counts(dataset, box(0, 0, 7, 1))
+            fixture_accounting = scl_accounting(fixture_counts)
+            if fixture_centres != 7 or fixture_counts != {str(k): 1 for k in (0, 2, 3, 6, 8, 9, 10)}:
+                raise RuntimeError("SCL ambiguity fixture did not read all seven native pixel centres")
+            validate_scl_accounting(fixture_counts, fixture_accounting)
+            corrupted_accounting = {**fixture_accounting,
+                                    "ambiguous_or_unclassified_pixel_centers": fixture_accounting["ambiguous_or_unclassified_pixel_centers"] - 1}
+            try:
+                validate_scl_accounting(fixture_counts, corrupted_accounting)
+            except ValueError:
+                corrupted_ambiguous_rejected = True
+            else:
+                raise RuntimeError("corrupt SCL ambiguous-class accounting was not rejected")
+    if fixture_accounting != {"pixel_center_count": 7, "water_class_6_pixel_centers": 1,
+                              "ambiguous_or_unclassified_pixel_centers": 6}:
+        raise RuntimeError("SCL class 2 or cloud/shadow/NoData ambiguity was misclassified")
+    scl_fixture_control = {"passed": True, "fixture_classes": [0, 2, 3, 8, 9, 10, 6],
+                           "fixture_accounting": fixture_accounting,
+                           "class_2_remains_ambiguous": True,
+                           "cloud_shadow_unclassified_and_nodata_remain_ambiguous": True,
+                           "corrupt_ambiguous_accounting_rejected": corrupted_ambiguous_rejected,
+                           "whole_component_status": "unknown"}
     with tempfile.TemporaryDirectory(prefix="angola-drc-repro-") as temp:
         outputs = []
         for run_number in (1, 2):
@@ -151,6 +178,7 @@ def main():
             "worldcover_crs_registration_checks": registration_checks,
             "source_independence": independence_check,
             "strict_native_pixel_centre_oracle": centre_oracle,
+            "scl_cloud_nodata_classification_fixture": scl_fixture_control,
         }
         negative = {
             "kind": "negative-control", "outcome": "passed",
@@ -159,6 +187,7 @@ def main():
             "contact_omission_rejected": omission_rejections["contact"],
             "half_pixel_registration_shift_rejected_on_all_tiles": all(x["half_pixel_shift_rejected"] for x in registration_checks),
             "cloud_shadow_unclassified_and_nodata_cells_remain_ambiguous": len(cloud_nodata_checks) == 10,
+            "corrupt_ambiguous_class_accounting_rejected": corrupted_ambiguous_rejected,
             "scl_water_class_remains_local_product_label": all(row["whole_component_water_status"] == "unknown" for row in assessment["components"]),
             "worldcover_and_scl_vintages_not_collapsed": len(assessment["methods"].get("worldcover_vintages", [])) == 2,
         }

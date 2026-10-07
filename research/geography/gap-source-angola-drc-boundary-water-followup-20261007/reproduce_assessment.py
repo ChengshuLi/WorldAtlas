@@ -46,6 +46,7 @@ WORLD_COVER = {
         },
     },
 }
+AMBIGUOUS_SCL_CLASSES = (0, 1, 2, 3, 7, 8, 9, 10, 11)
 
 SCL_SCENES = {
     "MBS": {
@@ -193,6 +194,23 @@ def pixel_counts(dataset, geom):
     return {str(int(v)): int(c) for v, c in zip(unique, counts)}, int(mask.sum()), int(win.width * win.height)
 
 
+def scl_accounting(class_counts):
+    """Derive local SCL label totals without promoting them to feature status."""
+    counts = {int(key): int(value) for key, value in class_counts.items()}
+    return {
+        "pixel_center_count": sum(counts.values()),
+        "water_class_6_pixel_centers": counts.get(6, 0),
+        "ambiguous_or_unclassified_pixel_centers": sum(counts.get(cls, 0) for cls in AMBIGUOUS_SCL_CLASSES),
+    }
+
+
+def validate_scl_accounting(class_counts, reported):
+    expected = scl_accounting(class_counts)
+    if any(reported.get(key) != value for key, value in expected.items()):
+        raise ValueError("SCL class counts disagree with pixel-centre, water-label, or ambiguous accounting")
+    return True
+
+
 def run(output_path):
     pins = load_and_verify_pins()
     component_doc = read_geojson(INPUT / "component-features.geojson")
@@ -318,8 +336,7 @@ def run(output_path):
         for cls in SCL_CLASS_NAMES:
             scl_counts.setdefault(cls, 0)
         scl["class_counts"] = {str(k): scl_counts[k] for k in sorted(scl_counts)}
-        scl["water_class_6_pixel_centers"] = scl_counts.get(6, 0)
-        scl["ambiguous_or_unclassified_pixel_centers"] = sum(scl_counts.get(c, 0) for c in (0, 1, 2, 3, 7, 8, 9, 10, 11))
+        scl.update(scl_accounting(scl_counts))
         scl["class_labels"] = {str(k): SCL_CLASS_NAMES[k] for k in sorted(SCL_CLASS_NAMES)}
         scl["interpretation"] = "SCL product water label only; 20 m scene class is not ground truth or a full-feature wet/dry decision. Class 2 remains unknown across the mixed processing baselines."
 
