@@ -7,7 +7,7 @@ The runner executes the retained `inputs/code/capsule-reproduce.py`, a checked-i
 Run from the repository root:
 
 ```sh
-python3 data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py --output data/regional-review/uruguay-artigas-contested-guard-erratum/outputs/run-3
+python3 data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py --output data/regional-review/uruguay-artigas-contested-guard-erratum/outputs/run-5
 python3 data/regional-review/uruguay-artigas-contested-guard-erratum/verify-guard.py
 node scripts/evidence-quality.mjs data/regional-review/uruguay-artigas-contested-guard-erratum/evidence-quality.json .
 ```
