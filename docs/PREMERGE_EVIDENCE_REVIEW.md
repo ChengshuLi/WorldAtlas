@@ -143,3 +143,11 @@ Read ISSUE_LIFECYCLE.md. Review the original acceptance and PR completion/contin
 For PRs created on or after `.github/evidence-policy.json` review_contract_activation_time, add `issue_contract_sha256` and `pr_body_sha256` to the existing worldatlas-review:v1 receipt. Calculate them with `reviewContractBinding(issue, pr)` from scripts/premerge-evidence.mjs using the current GitHub issue and PR. The hash binds normalized issue acceptance prose and canonical work contract plus normalized PR body. Inspect the actual acceptance/disposition before accepting; a hash alone is not semantic approval. Source/geometry/release gates are unchanged. Ordinary issue/PR progress comments do not invalidate these bindings. Substantive body/scope/linkage/closure changes require a renewed exact-head receipt. Older PRs preserve existing receipt compatibility; voluntarily bound receipts are always rechecked. No new handoff form is required.
 
 Read docs/AUDIT_FAILURE_PREVENTION.md on current main before the next job or review. Identify the consequential acceptance claims and independently test applicable consumed-input/code, identity/join, source/method, safe-reproduction, nonvacuous-control and operating-limit invariants. Use shared evidence helpers or an explicitly reviewed equivalent; reviewers derive expectations from original acceptance and independent records before relying on author tests. Exercise real entry points and adjacent paths for corrective PRs; record unexecuted proof as a limit. Keep exact-head review, original evidence, scientific/publication gates and focused research CI. Adoption requires actual subsequent handoffs, not just this prompt edit.
+
+## Author preparation
+
+Read [AUTHOR_PREFLIGHT.md](AUTHOR_PREFLIGHT.md) for the author's preparation and
+actual local-versus-hosted check boundaries. Reviewers still derive expectations
+from original acceptance and independent reference records; author controls and
+byte-only local success do not replace substantive exact-head review. Select only
+applicable failure families and preserve focused source-only CI.

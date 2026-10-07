@@ -127,3 +127,13 @@ Keep scientific/publication limits, exact-head review, focused CI and the normal
 Auditor distinguishes defects from unknowns and reuses scoped follow-ups. Do not start
 another ledger or background monitor. Refresh is adopted only when subsequent actual
 author/reviewer handoffs demonstrate these behaviors.
+
+## Prepare for the first review
+
+Follow [AUTHOR_PREFLIGHT.md](AUTHOR_PREFLIGHT.md) before the next job and before
+requesting its first review. Select the checks implicated by the original acceptance
+and changed behavior from the start; preserve source-only focused CI. Resolve quick
+ownership/evidence errors before review, while long regressions and substantive
+independent review may proceed in parallel. The guide supplies practical helper and
+command details, meaningful adverse cases and existing-chat refresh text; author
+preflight does not replace independently derived reviewer expectations.

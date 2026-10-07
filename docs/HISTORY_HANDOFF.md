@@ -63,3 +63,13 @@ Before ending, push every source note, input, bundle and receipt needed by a fre
 Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.
 
 Read docs/AUDIT_FAILURE_PREVENTION.md on current main before the next job or review. Identify the consequential acceptance claims and independently test applicable consumed-input/code, identity/join, source/method, safe-reproduction, nonvacuous-control and operating-limit invariants. Use shared evidence helpers or an explicitly reviewed equivalent; reviewers derive expectations from original acceptance and independent records before relying on author tests. Exercise real entry points and adjacent paths for corrective PRs; record unexecuted proof as a limit. Keep exact-head review, original evidence, scientific/publication gates and focused research CI. Adoption requires actual subsequent handoffs, not just this prompt edit.
+
+## Prepare for the first review
+
+Follow [AUTHOR_PREFLIGHT.md](AUTHOR_PREFLIGHT.md) before the next job and before
+requesting its first review. Select the checks implicated by the original acceptance
+and changed behavior from the start; preserve source-only focused CI. Resolve quick
+ownership/evidence errors before review, while long regressions and substantive
+independent review may proceed in parallel. The guide supplies practical helper and
+command details, meaningful adverse cases and existing-chat refresh text; author
+preflight does not replace independently derived reviewer expectations.
