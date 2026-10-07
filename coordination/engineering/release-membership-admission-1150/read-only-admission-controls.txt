@@ -1,0 +1,95 @@
+Execution commit: c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc
+Scope: unchanged actual hosted import/staging handlers through strict read-only write-intent sinks; isolated tests only.
+
+✔ fixed environmental database guards reproduce exactly from the shared registry (6.027208ms)
+✔ all fixed IDs, display labels, explicit legacy aliases and null pass raw local and hosted SQL (1551.801583ms)
+✔ unlisted environmental values reject every local import and raw snapshot/history/typed insertion (97.979375ms)
+✔ adding local guards preserves existing unrecognized evidence byte for byte and blocks changed values (22.098958ms)
+✔ hosted migration retains old claim bytes, permits exact retries and still rejects stable-ID collisions (47.591708ms)
+✔ bounded import concurrency defaults to six and accepts only one through eight (2.049917ms)
+✔ stage then finalize publishes atomically without replaying ownership batches (325.781208ms)
+✔ append-only source batches import before newly registered geography and retain the original source bytes (206.486333ms)
+✔ interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history (640.487417ms)
+✔ a mismatched existing staged or published manifest blocks all geographic staging before writes (128.29975ms)
+✔ identical archive bytes upload once with a stable first-sorted name and preserve every receipt alias across retries (3.458709ms)
+✔ independent combined-row and UTF8 fixtures split with complete raw preservation (618.387667ms)
+✔ input-bound replay IDs differ for changed meaningful bytes and parent identities (235.611375ms)
+✔ bounded originals retain exact bytes and ingestion IDs; duplicate raw IDs cannot hide behind sets (14.447375ms)
+✔ complete admission authenticates compressed and decoded bytes and captures once for execution (185.593583ms)
+✔ encoded plus decoded plus derived bytes all count; admission budgets cannot be raised (46.413166ms)
+✔ real publisher entrypoint performs zero writes for late malformed, missing or duplicate inputs (77.447625ms)
+✔ independent raw-record oracle rejects coherent missing, reordered and invented output records (173.305417ms)
+✔ later source field failures and entity cycles are rejected before any earlier prerequisite writes (20.486416ms)
+✔ empty release inventory cannot produce a vacuous completed stage (0.649167ms)
+✔ independent coherently pinned invalid staging fields reject before prerequisite writes (62.229625ms)
+✔ independent delayed parent transports preserve global source order at default concurrency (312.961167ms)
+✔ complete descriptor admission rejects oversized inventory before reading any inputs (0.56075ms)
+✔ field-only admission refuses unknown reads, premature success and unrelated write failures (653.825ms)
+✔ prerequisite admission rejects unexpected real importer reads, success and refusal errors (606.371208ms)
+✔ staging is invisible; publication requires complete pinned membership and preserves original registry (237.265ms)
+✔ rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases (354.517916ms)
+✔ manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates (185.507459ms)
+✔ bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents (131.704667ms)
+✔ immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass (137.5405ms)
+✔ crosswalk evidence, tier identity and retired membership must match the published release (252.951292ms)
+✔ published pages use indexed keyset queries and older releases remain inspectable (203.242083ms)
+✔ streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries (840.981042ms)
+✔ source-backed new territory publishes with a null predecessor and no invented historical attributes (170.446875ms)
+✔ geographic pin guards the write transaction and retains exact original replay context (222.023666ms)
+✔ publication between preflight and batch rejects stale pins atomically, staged/malformed pins never authorize writes (233.642708ms)
+✔ unknown pinned commit outcome stays retryable and never claims a rollback (199.066292ms)
+✔ profile titles prefer direct dated evidence over English reference attestations and opt-in examples (55.421042ms)
+✔ hosted imports preserve whole-location raw values, precedence evidence and exact intervals (67.95325ms)
+✔ stable ID collisions roll back the entire batch and identical evidence stays idempotent (147.796167ms)
+✔ all tiers and nongeographic graph entities obey parent contracts (124.995375ms)
+✔ source intervals, category identity, typed scalars and habitation contradictions reject imports (121.406334ms)
+✔ raw SQL protects typed records, Unicode blank evidence, no-year-zero and retained identity (120.848959ms)
+✔ dated names and graph claims are sourced, pageable and never silently become ancient names (93.408333ms)
+✔ examples remain opt-in and bounded attribute pages preserve every location record (189.7895ms)
+✔ media metadata is immutable and content-addressed with retained sourced links (97.211833ms)
+✔ raw SQL rejects half-dated graph and media links (42.115916ms)
+✔ dated graph assertions cannot exceed known endpoint lifetimes (66.165708ms)
+✔ category IDs are shared graph identities and fictional entities remain opt-in (80.895666ms)
+✔ example media on real locations stays opt-in regardless of link source (176.85175ms)
+✔ reference and estimate source classes cannot masquerade as direct evidence (59.2075ms)
+✔ sourced corrections supersede attributes atomically while preserving old evidence (141.060792ms)
+✔ dated name corrections and habitation withdrawal update every reader and conflict check (145.499ms)
+✔ withdrawn relationships and media links disappear from profiles but remain inspectable (159.234833ms)
+✔ failed replacements roll back retirements and the ingestion ledger together (46.985666ms)
+✔ raw SQL keeps retirement provenance sourced, immutable, unique and atomically finalized (96.653583ms)
+✔ supersession chains remain traceable and cannot form cycles (96.89425ms)
+✔ evidence history keeps fictional claims opt-in after retirement (56.49475ms)
+✔ map name paging excludes future graph names while default queries retain them (66.280459ms)
+✔ import preview rejects invalid dates, scalar values and unsupported source intervals before upload (4.449917ms)
+✔ import preview enforces whole-batch row and UTF-8 byte bounds (10.414833ms)
+✔ import submission preserves evidence and reports database rejection without treating it as saved (99.577666ms)
+✔ source-backed corrections preview withdrawal and replacement while retaining source evidence (0.666167ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3373.596041
+
+Actual immutable verifier output-safety negative controls:
+{"execution_commit":"c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc","output":"coordination/engineering/release-membership-admission-1150/verification-fourth.json","expected_error":"/fresh filename/","exit_code":1}
+{"execution_commit":"c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc","output":"coordination/engineering/release-membership-admission-1150/../escaped-output.json","expected_error":"/fresh owned JSON/","exit_code":1}
+{"execution_commit":"c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc","output":"coordination/engineering/release-membership-admission-1150/owned-negative-dangling-link.json","expected_error":"/Output symlink refused/","exit_code":1}
+{"execution_commit":"c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc","output":"coordination/engineering/release-membership-admission-1150/owned-negative-mismatch.json","expected_error":"/Consumed verifier code differs/","exit_code":1}
+
+Independent retained staging mutation controls:
+{"name":"omitted-ingestion-intent","rejected":true}
+{"name":"forged-intent-token","rejected":true}
+{"name":"wrong-marker-status","rejected":true}
+{"name":"swallowed-refusal-success","rejected":true}
+{"name":"wrong-read-bind-shape","rejected":true}
+
+Independent retained importer mutation controls:
+{"name":"omitted-ingestion-intent","rejected":true}
+{"name":"forged-intent-token","rejected":true}
+{"name":"swallowed-refusal-success","rejected":true}
+{"name":"wrong-read-bind-shape","rejected":true}
+{"name":"retryable-marker-status","rejected":true}
+{"name":"unknown-commit-outcome","rejected":true}

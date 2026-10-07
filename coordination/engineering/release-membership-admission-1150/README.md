@@ -92,3 +92,15 @@ as well as 32 MiB per file and 256 MiB for encoded, decoded and request bytes.
 The catalog seed uses a separately validated existing-v1 manifest; the primary
 manifest binds that manifest, but does not recursively execute or validate it.
 Independent review must validate both inventories and the isolated experiment.
+
+## Independently supplied sink controls
+
+The two `independent-*-sink-controls.mjs` files preserve fixtures supplied by the
+independent reviewer, separate from author regression tests. Run each with Node 24
+and the absolute checkout directory as its argument. They mutate only in-memory
+handler text in credential-free subprocesses, leaving the retained handler bytes
+unchanged. Missing ingestion statements, forged tokens, swallowed refusal,
+incorrect status/read binding and importer retry/unknown-commit errors must reject.
+These controls establish fail-closed field admission, not successful database
+transactions or provider operations. Their prior execution is preliminary review;
+a final exact-head review and current-vintage full-store proof remain required.
