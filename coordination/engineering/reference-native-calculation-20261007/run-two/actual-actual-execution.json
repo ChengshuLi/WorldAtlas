@@ -1,0 +1,37 @@
+{
+  "actual_command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+    "coordination/engineering/reference-native-calculation-20261007/producer.py",
+    "--commit",
+    "b596ef836c51c5405baa8ceda770a2554ca12b7f",
+    "--name",
+    "reference-native-b596-run-two"
+  ],
+  "working_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work",
+  "environment_override": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "actual_start_utc": "2026-10-07T17:08:53.950542+00:00",
+  "actual_start_monotonic_ns": 223259584777708,
+  "recorder_source_sha256": "31d58eb856d2c43e6f963b577cd22419ab3a5aa70fd2b51b92053ab2afd3ea6c",
+  "actual_method_freeze": "b596ef836c51c5405baa8ceda770a2554ca12b7f",
+  "status": "PASS",
+  "actual_exit_code": 0,
+  "actual_end_utc": "2026-10-07T17:09:48.486537+00:00",
+  "actual_elapsed_monotonic_ns": 54534818417,
+  "maximum_resident_set_size_native": 435093504,
+  "maximum_resident_set_size_units": "Darwin /usr/bin/time -l native bytes; not physical footprint or total swap",
+  "output": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/reference-native-b596-run-two",
+  "stdout": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/reference-native-preflight/reference-native-b596-run-two.stdout",
+    "bytes": 265,
+    "sha256": "f569d0de419efb744565f7774dc502d1292bc2deca8d620d59858e46516fa207"
+  },
+  "stderr_and_statistics": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/reference-native-preflight/reference-native-b596-run-two.stderr-and-native-time",
+    "bytes": 777,
+    "sha256": "c9e2e66d2461a5389cf1dca6f9fd04fd500ba18d6d75f1df94fa49f1c715e20e"
+  }
+}
