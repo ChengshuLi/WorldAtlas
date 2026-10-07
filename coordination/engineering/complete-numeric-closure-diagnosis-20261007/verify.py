@@ -90,7 +90,7 @@ def bindings(state,identity,original,pin):
 def same(a,b):
     return reader.canonical(a)==reader.canonical(b)
 
-def probe_structure(probe,geometry):
+def probe_structure(probe,geometry,candidate_geometry=None):
     require(probe['helper_version']==kernel.exact.VERSION and probe['coordinate_context']==kernel.exact.context(kernel.CONTEXT),
             'Changed probe method/context')
     require(probe['original_point_domain']=='IEEE754-binary64-as-exact-rational' and
@@ -99,19 +99,46 @@ def probe_structure(probe,geometry):
             'Promoted point probe or changed coordinate domain')
     require(probe['status'] in ('diagnostic','invalid','unsupported','unknown','unknown-operation-failed'),
             'Undeclared exact guard disposition')
+    partial=probe['status']=='unknown-operation-failed'
     if probe['status']!='diagnostic':
         require('reason' in probe or 'exception_type' in probe,'Missing guarded failure evidence')
-        return
+        if not partial:
+            # Immutable point_diagnostics DiagnosticError branches precede the
+            # query loop: topology/orientation/work guards cannot emit queries.
+            require(probe['vertices']==[] and probe['triangles']==[],
+                    'Guarded helper failure cannot carry emitted point witnesses')
+            return
+        require('exception_type' in probe and 'exception_message' in probe,'Missing partial operation failure')
+        if not probe['vertices'] and not probe['triangles']:
+            return
+        require(candidate_geometry is not None,'Partial witness lacks complete candidate pointset')
+        try:
+            kernel.exact.prepare_geometry(candidate_geometry)
+            kernel.exact.prepare_geometry(geometry)
+        except kernel.exact.DiagnosticError as error:
+            raise ValueError('Partial witness violates original full topology/work guard: '+error.reason)
     require(geometry.get('type') in ('Polygon','MultiPolygon'),'Diagnostic nonpolygon promoted')
     polygons=[geometry['coordinates']] if geometry['type']=='Polygon' else geometry['coordinates']
-    vertices=[];triangles=[];nontriangles=[]
+    vertices=[];triangles=[];nontriangles=[];query_order=[]
     for pi,polygon in enumerate(polygons):
         for ri,ring in enumerate(polygon):
-            for vi,point in enumerate(ring[:-1]):vertices.append((pi,ri,vi,point))
+            for vi,point in enumerate(ring[:-1]):
+                vertices.append((pi,ri,vi,point));query_order.append(('vertex',len(vertices)-1))
         if len(polygon)==1 and len(polygon[0])==4:
             centre=[sum(Fraction(x[k]) for x in polygon[0][:-1])/3 for k in (0,1)]
-            triangles.append((pi,[kernel.exact.rational(x) for x in centre]))
+            triangles.append((pi,[kernel.exact.rational(x) for x in centre]));query_order.append(('triangle',len(triangles)-1))
         else:nontriangles.append(dict(polygon=pi,interior_witness='not-certified'))
+    total=len(vertices)+len(triangles)
+    if partial:
+        # A later GEOS/floating observation may fail after genuine earlier
+        # exact witnesses. Validate their original-query prefix, never erase it.
+        emitted=len(probe['vertices'])+len(probe['triangles'])
+        require(0<emitted<=total,'Invalid partial witness count')
+        prefix=query_order[:emitted]
+        vertices=[vertices[i] for kind,i in prefix if kind=='vertex']
+        triangles=[triangles[i] for kind,i in prefix if kind=='triangle']
+        require('query_batches' not in probe and 'complete_query_count' not in probe,
+                'Partial failure cannot declare completed query coverage')
     require(len(vertices)==len(probe['vertices']) and len(triangles)==len(probe['triangles']),
             'Incomplete vertex/triangle roster')
     for (pi,ri,vi,point),row in zip(vertices,probe['vertices']):
@@ -129,7 +156,10 @@ def probe_structure(probe,geometry):
         require(row['interior_witness_certified'] is
                 (row['exact_triangle_state']=='inside' and row['exact_residue_state']=='inside'),'Promoted triangle witness')
     require(probe['nontriangle_polygons']==nontriangles,'Lost nontriangle uncertainty')
-    total=len(vertices)+len(triangles);segments=sum(len(ring)-1 for poly in polygons for ring in poly)
+    segments=sum(len(ring)-1 for poly in polygons for ring in poly)
+    require(segments<=kernel.exact.MAX_SEGMENTS and segments*(segments-1)//2<=kernel.exact.MAX_PAIR_CHECKS,
+            'Partial or complete pointset work exceeds unchanged helper guard')
+    if partial:return
     require(probe['complete_query_count']==total,'Incomplete declared exact query count')
     offset=0
     for batch in probe['query_batches']:
@@ -191,7 +221,7 @@ def validate_result(actual,state,identity,original,pin,db):
     contradictions=[]
     for relation in (*kernel.RELATIONS[3:],'L2-outside-L1','L3-outside-L2','L4-outside-L3'):
         probe=probes[relation]
-        probe_structure(probe,geometry[relation])
+        probe_structure(probe,geometry[relation],state['candidates'][identity]['geometry'])
         for witness in probe['triangles']:
             state_label=witness['exact_candidate_state']
             if witness['interior_witness_certified'] and ((relation=='extra_reconstruction' and state_label=='inside') or
