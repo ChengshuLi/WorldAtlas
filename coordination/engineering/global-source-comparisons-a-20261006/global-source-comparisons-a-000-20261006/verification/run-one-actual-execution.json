@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/python-env/bin/python",
+    "-B",
+    "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/producer.py",
+    "--repo",
+    ".",
+    "--producer-commit",
+    "3b4ca9e9f42d692530a4139efe2bd8f72ce15723",
+    "--output",
+    ".cache/package0-run-one"
+  ],
+  "complete_components": 15039,
+  "elapsed_numerical_seconds": 943.3339679579949,
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "limits": [
+    "First run did not use record-execution.py; file mtime marks receipt writing, not a fabricated process end time."
+  ],
+  "observed_process_started_utc": "2026-10-06T23:38:29Z",
+  "observed_receipt_written_utc": "2026-10-06T23:55:03.110706+00:00",
+  "observed_terminal_exit_code": 0,
+  "pid": 73788,
+  "producer_commit": "3b4ca9e9f42d692530a4139efe2bd8f72ce15723",
+  "start_time_basis": "Previously recorded OS ps lstart for actual PID73788; one-second OS time resolution, not an instrumented wrapper timestamp.",
+  "status": "completed",
+  "terminal_basis": "Original unified execution session42270 returned terminal exit0; exact process end time was not instrumented.",
+  "tool_session": 42270
+}
