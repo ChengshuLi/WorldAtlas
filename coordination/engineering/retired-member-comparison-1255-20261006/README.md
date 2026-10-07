@@ -1,0 +1,17 @@
+# Complete retired-member coverage diagnostics — issue #1255
+
+This packet compares every one of the 20,032 components in 2,476 intact physical-adaptation families with the exact declared original archived member pointsets. It retains all 2,438 member identities and 869 coordinated family contacts. It changes no map geometry, owner assignment, database or deployment.
+
+Both actual complete executions use the frozen producer/import closure at `c501ec6f6a11563286997c85e6d0edd004905c29`. `run-one` and `run-two` retain both complete scientific trees, including their identical complete reports. `verification/executions.json` records the actual run identities, runtime and input-only preflight/module equality; `verification/reproducibility.json` compares every whole scientific file. The earlier input authentication failure at `270fb` is preserved separately and is not counted as a successful scientific run.
+
+The complete original encoded archive is preserved as two ordered raw fragments; its decoded original body is preserved as seven bounded gzip fragments. The reader reconstructs both entire byte streams and checks the actual decompression relationship. Original archive records are never reserialized as replacement source authority. Every original containing component/family/context file is retained in full with its immutable source commit, mode and whole byte hashes in `input-index.json`.
+
+`objects.json` in each run indexes every complete generated member union, intersection and difference pointset. Whole geometry objects are deduplicated without removing coordinates; any oversized object is retained through complete bounded exact canonical-byte fragments. Complete result rows reference the exact objects. The readback verifier reconstructs every object and every selected family/member/component relation, including all absent fields, unknown statuses and contextual contacts/native/issue references.
+
+Literal original-member coverage is a diagnostic witness, not proof of administrative authority, land/water, an original historical adaptation recipe, cause or repair safety. Recorded RESOLVE/IBRA recipe metadata is preserved beside the contextual `refine-remote.py` route. AAFC routing is contextual `semantic-locations.py`. Natural Earth combined adaptation routing and historical execution identity remain unresolved. Full original derivative citation/use terms and government attribution are retained; underlying Direct Permission remains independently unverified.
+
+`diagnostic-unknowns.json.gz` accounts for every numerical disagreement and complete affected family, with full source and pointset references. The predicate compares the union of separately computed intersection/difference outputs against the original component; a disagreement is preserved as unknown. It does not establish missing physical coverage. Follow-up engineering must diagnose these exact retained overlay/equality cases before proposing a changed numeric policy or map repair.
+
+Contacts and edge-neighbor IDs in result rows are the complete coordinated **family** closure from the accepted native assessment. They are not newly measured per-component adjacency. A downstream two-neighbor repair witness must also authenticate the original component-specific contact products.
+
+The remaining 3,547 families /17,356 components outside this child, source/physical classification, geography repair and global campaign #1202 remain unfinished. This packet can complete only its bounded diagnostic acceptance.

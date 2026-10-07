@@ -1,0 +1,153 @@
+"""Whole-byte, full-roster and complete numerical-pointset verifier for issue1255."""
+import argparse,collections,gzip,json,pathlib,sys
+from shapely import union_all
+from shapely.geometry import shape
+P=pathlib.Path(__file__).resolve().parent;R=P.parents[2];sys.path.insert(0,str(R/'scripts'))
+from evidence.immutable import canonical_json as canon
+from reader import SHA
+
+
+def read_pin(root,pin):
+    p=root/pin['path']
+    if p.is_symlink()or not p.is_file():raise ValueError('Missing ordinary scientific output')
+    b=p.read_bytes()
+    if len(b)!=pin['bytes']or SHA(b)!=pin['sha256']or len(b)>32*1024*1024:raise ValueError('Changed scientific output bytes')
+    raw=gzip.decompress(b)if 'decoded_sha256'in pin else b
+    if len(raw)>32*1024*1024:raise ValueError('Oversized decoded ordinary scientific output')
+    if 'decoded_sha256'in pin and(len(raw)!=pin['decoded_bytes']or SHA(raw)!=pin['decoded_sha256']):raise ValueError('Changed decoded scientific output')
+    return json.loads(raw)
+
+
+def validate_family_extras(f,result,rows):
+    for i in f['component_ids']:
+        r=rows[i]
+        expected={'family':f['id'],'complete_member_ids':result['complete_original_member_ids'],'source_union_reference':result['literal_member_union'],'original_native_scope_bucket':f['grouping']['observed_scope_bucket'],'contacts':f['contact_ids'],'edge_neighbor_ids':f['edge_neighbor_ids'],'existing_related_issues':f['existing_related_issues']}
+        if any(canon(r.get(k))!=canon(v)for k,v in expected.items()):raise ValueError('Full immutable family/component extra relation differs')
+
+
+def normalized_diagnostic(expected):
+    # Only transport the exact geometry payload; every scientific field and
+    # absent/unknown field stays in the canonical result comparison.
+    if isinstance(expected,list):return [normalized_diagnostic(v)for v in expected]
+    if not isinstance(expected,dict):return expected
+    out={k:normalized_diagnostic(v)for k,v in expected.items()if k!='geometry'}
+    if 'geometry'in expected:out['geometry_reference']={'canonical_geometry_sha256':SHA(canon(expected['geometry'])),'object_index':'objects.json'}
+    return out
+
+
+def validate_diagnostic(stored,expected,objects):
+    transformed=normalized_diagnostic(expected)
+    if canon(stored)!=canon(transformed):raise ValueError('Complete scientific diagnostic status/fields differ')
+    def check(v):
+        if isinstance(v,dict):
+            if 'geometry_reference'in v:
+                h=v['geometry_reference']['canonical_geometry_sha256']
+                if h not in objects or SHA(canon(objects[h]))!=h:raise ValueError('Complete diagnostic pointset absent')
+            for x in v.values():check(x)
+        elif isinstance(v,list):
+            for x in v:check(x)
+    check(transformed)
+
+
+def verify(run):
+    scope=json.loads(gzip.decompress((P/'scope.json.gz').read_bytes()));report=json.loads((run/'report.json').read_bytes());idx=read_pin(run,report['object_index']);objects={}
+    for pin in idx['shards']:
+        rows=read_pin(run,pin)
+        if len(rows)!=pin['records']:raise ValueError('Object shard count differs')
+        for row in rows:
+            if row['id']in objects or SHA(canon(row['geometry']))!=row['id']:raise ValueError('Duplicate/changed full object')
+            objects[row['id']]=row['geometry']
+    for h,entry in idx['objects'].items():
+        if entry['codec']=='canonical-json-exact-byte-fragments':
+            parts=[];offset=0
+            for pin in entry['parts']:
+                if pin['offset']!=offset:raise ValueError('Missing/reordered complete object fragment')
+                b=(run/pin['path']).read_bytes();raw=gzip.decompress(b)
+                if len(b)!=pin['bytes']or SHA(b)!=pin['sha256']or len(raw)!=pin['decoded_bytes']or SHA(raw)!=pin['decoded_sha256']or len(raw)>32*1024*1024:raise ValueError('Changed object fragment')
+                parts.append(raw);offset+=len(raw)
+            body=b''.join(parts)
+            if len(body)!=entry['canonical_bytes']or SHA(body)!=h:raise ValueError('Whole object reconstruction differs')
+            if h in objects:raise ValueError('Duplicate object')
+            objects[h]=json.loads(body)
+        elif entry['codec']!='canonical-json-object-in-indexed-shard':raise ValueError('Unsupported pointset object codec')
+    if set(objects)!=set(idx['objects']):raise ValueError('Incomplete whole object index')
+    for h,g in objects.items():
+        if len(canon(g))!=idx['objects'][h]['canonical_bytes']or SHA(canon(g))!=h:raise ValueError('Full canonical object mismatch')
+    def pointset(p):
+        ref=p['geometry_reference']
+        if ref['object_index']!='objects.json' or ref['canonical_geometry_sha256']not in objects:raise ValueError('Missing full pointset reference')
+        g=shape(objects[ref['canonical_geometry_sha256']])
+        if (g.geom_type,g.is_empty,g.is_valid,g.area,g.length)!=(p['geometry_type'],p['is_empty'],p['is_valid'],p['planar_area_coordinate_units_squared'],p['planar_length_coordinate_units']):raise ValueError('Pointset metadata differs from complete geometry')
+        return g
+    families={}
+    for pin in report['family_outputs']:
+        rows=read_pin(run,pin)
+        if len(rows)!=pin['records']:raise ValueError('Family shard count differs')
+        for f in rows:
+            fid=f['family']['id']
+            if fid in families:raise ValueError('Duplicate family scientific row')
+            families[fid]=f
+            d=f['literal_member_union']
+            if 'union'in d:pointset(d['union'])
+    if sorted(families)!=scope['family_ids']:raise ValueError('Whole scientific family roster differs')
+    rows={};counts=collections.Counter();per_family=collections.defaultdict(collections.Counter)
+    for pin in report['component_outputs']:
+        values=read_pin(run,pin)
+        if len(values)!=pin['records']:raise ValueError('Component shard count differs')
+        for row in values:
+            i=row['component'];fid=row['family']
+            if i in rows or fid not in families or i not in families[fid]['family']['component_ids']:raise ValueError('Duplicate/lost/reassigned component')
+            if row['complete_member_ids']!=families[fid]['complete_original_member_ids']or row['source_union_reference']!=families[fid]['literal_member_union']:raise ValueError('Whole member/union relation differs')
+            if row['physical_status']!='unverified'or row['administrative_assignment']is not None or row['cause_status']!='unknown'or row['historical_stage_identity']!='unverified':raise ValueError('Unknown source/physical authority promoted')
+            if 'intersection'in row:pointset(row['intersection'])
+            if 'difference'in row:pointset(row['difference'])
+            rows[i]=row;counts[row['status']]+=1;per_family[fid][row['status']]+=1
+    if sorted(rows)!=scope['component_ids']or len(rows)!=20032 or len(families)!=2476 or dict(counts)!=report['counts']:raise ValueError('Complete scientific scope/counts differ')
+    for fid,f in families.items():
+        if dict(per_family[fid])!=f['counts']or len(f['family']['component_ids'])!=f['family']['component_count']:raise ValueError('Family complete status totals differ')
+    # Original full feature/member pins bind the literal input geometry; this
+    # verifier reads every containing ordinary frozen alias, not hash-only refs.
+    from reader import Inputs,validate_pointsets,validate_family_scope
+    inp=Inputs(R,report['code_commit'],str(P.relative_to(R)));index=json.loads(inp.read('input-index.json'));archive=inp.archive(index);members={r['id']:r for r in archive['locations']};featurepins={r['id']:r for r in scope['existing_current_component_and_member_pins']};features={};wanted=set(rows)
+    M='79ffb2ed04702e16f009e4675a8d74ef9bd09d4f';S='7c7cdf2388e0e7200b937c2cfb440b53165d9d98';ir=inp.original(M,'coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json',index)
+    for pin in ir['complete_products']['components']:
+        path=next(p['path']for p in ir['source_descriptors']if p['sha256']==pin['sha256'])
+        for f in inp.original(M,path,index)['features']:
+            if f['id']in wanted:features[f['id']]=f
+    delta=inp.original(S,'coordination/engineering/worldwide-successor-1215-20261006/run-one/components-delta.json.gz',index)
+    if set(delta['removed_ids'])&wanted:raise ValueError('Removed component in scientific results')
+    for f in delta['upsert_records']:
+        if f['id']in wanted:features[f['id']]=f
+    if set(features)!=wanted:raise ValueError('Missing full original/current pointsets')
+    validate_pointsets(scope,features,members)
+    for i,r in rows.items():
+        if r['component_full_feature_sha256']!=featurepins[i]['canonical_feature_sha256']or r['component_geometry_sha256']!=featurepins[i]['geometry_sha256']:raise ValueError('Unknown-row full feature pins changed')
+    from kernel import member_union,compare
+    N='a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd';nr=inp.original(N,'coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json',index);expected_families={}
+    for pin in nr['outputs']['current-batches']:
+        for f in inp.original(N,pin['path'],index):
+            if f['id']in families:
+                if f['id']in expected_families:raise ValueError('Duplicate immutable family')
+                expected_families[f['id']]=f
+    validate_family_scope(scope,expected_families)
+    for fid,result in families.items():
+        f=expected_families[fid];mids=sorted({i for source in f['source_families']for i in source.get('original_source_member_ids',[])})
+        if canon(result['family'])!=canon(f)or result['complete_original_member_ids']!=mids:raise ValueError('Complete immutable family/member relation differs')
+        validate_family_extras(f,result,rows)
+    union_cache={};measured=0
+    extras={'family','complete_member_ids','source_union_reference','component_full_feature_sha256','component_geometry_sha256','original_native_scope_bucket','contacts','edge_neighbor_ids','existing_related_issues'}
+    for fid,f in families.items():
+        mids=tuple(f['complete_original_member_ids']);d=f['literal_member_union']
+        if mids not in union_cache:union_cache[mids]=member_union([members[i]for i in mids])
+        expected,u=union_cache[mids]
+        validate_diagnostic(d,expected,objects)
+        for i in f['family']['component_ids']:
+            r=rows[i];expected=compare(features[i],u)
+            validate_diagnostic({k:v for k,v in r.items()if k not in extras},expected,objects)
+            measured+=1
+    inp.close()
+    scientific=sorted((str(p.relative_to(run)),SHA(p.read_bytes()))for p in run.rglob('*')if p.is_file()and p.name not in ('checkpoint.json',))
+    return {'status':'passed-complete-whole-record-and-pointset-readback','complete_components':len(rows),'complete_families':len(families),'full_comparison_pointsets_replayed':measured,'counts':dict(counts),'scientific_product_sha256':SHA(canon(scientific)),'scientific_files':scientific,'limits':['Full numerical diagnostic readback is not a third counted producer execution or factual source approval.']}
+
+if __name__=='__main__':
+    a=argparse.ArgumentParser();a.add_argument('--run',required=True);a.add_argument('--output',required=True);x=a.parse_args();v=verify(pathlib.Path(x.run));p=pathlib.Path(x.output);p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(canon(v));print(json.dumps({k:v[k]for k in ['status','complete_components','complete_families','full_comparison_pointsets_replayed','scientific_product_sha256']}))
