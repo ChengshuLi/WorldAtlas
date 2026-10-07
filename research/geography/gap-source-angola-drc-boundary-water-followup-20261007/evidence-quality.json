@@ -1,0 +1,2179 @@
+{
+  "baseline": {
+    "commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+    "files": [
+      {
+        "bytes": 73547,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "role": "pinned-reference",
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "role": "pinned-reference",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 271171,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/manifest.json",
+        "role": "pinned-reference",
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "role": "pinned-reference",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 9974,
+        "hash_kind": "file-bytes",
+        "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+        "role": "original-source",
+        "sha256": "56b2e75d7a2a17f02f64fdcfa4cce353f82cd8c0fd276d15069e4e25b427a707"
+      },
+      {
+        "bytes": 48025,
+        "hash_kind": "file-bytes",
+        "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+        "role": "original-source",
+        "sha256": "c3a6a160537d47b2dc09fe4797fd696d5989cd15f645a624c4214eba90b1106f"
+      }
+    ],
+    "pin_files": {
+      "administrative_sources": "data/administrative-sources.json",
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json",
+      "physical_inventory": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json"
+    },
+    "pins": {
+      "administrative_sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "physical_inventory": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+    },
+    "subject_files": {
+      "gb:AGO:ADM2:16411231B62076307190429": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+      "gb:AGO:ADM2:16411231B71421381230719": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+      "gb:AGO:ADM2:16411231B80406676016894": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+      "gb:COD:ADM2:63176286B37251946319002": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+      "gb:COD:ADM2:63176286B94968684087840": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/contact-features.geojson",
+      "physical-component:021fd4e137bfb491d460efb7193c9d4c90fa355aa6011d5ce17076df7df0869a": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:4a0bb7b34741b7705e900ddde2f988ab4827ffea2b80954fc9cb6797146f1f88": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:7b457906483432e330c121d5feec77b0eb96e63299da2719873cad13c35a24b0": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:939bc3dbbf1a6ecf3734d8f1ebbc901f522b1935dc51301afb66ca702c8383ec": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:a4338eeba714b43b93c9959104be85591f256ce0374958558229c80e46b37e17": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:d2ac6f596c024aa333f12ec66e1f542a5ef8f984b8ca5a9fcfbd3f6135c9440a": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:dfa4e25a97eff43fac2b408cdc2db1d7e45439931b47951ef18a233b9910e8ec": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson",
+      "physical-component:eded93368ac9537653931967882e67115d076d812fadb42837a53fd619926de1": "research/geography/gap-source-angola-drc-shared-seams-20261006/inputs/component-features.geojson"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/additional-freeze.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/component-source-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/contact-source-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/family-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v1-superseded.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v4.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v5.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v6.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v7.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/issue-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/original-fragments.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/source-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/component-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/execution-history.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/fragment-contact-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/geometry-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/physical-water-authority-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/reproducibility-control-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/reproduction-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-negative-control-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-positive-control-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-691655432aecee3cb49d22d33531c6d551489241.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v4.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-negative-control-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-positive-control-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/reproduce_assessment.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/restore_worldcover.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-01-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-02-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-03-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-04-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-05-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-06-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-07-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-08-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-09-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-10-search.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/official-belgian-gazette/retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2A_33MZM_20260525_0_L2A.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2A_34MBS_20200812_1_L2A.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2A_34MCS_20260902_1_L2A.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2B_33MYM_20260727_0_L2A.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/collection-sentinel-2-l2a.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2A_33MZM_20260525_0_L2A.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2A_34MBS_20200812_1_L2A.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2A_34MCS_20260902_1_L2A.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2B_33MYM_20260727_0_L2A.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_33MZM_20260525_0_L2A-SCL-20m.jp2",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_34MBS_20200812_1_L2A-SCL-20m.jp2",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_34MCS_20260902_1_L2A-SCL-20m.jp2",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2B_33MYM_20260727_0_L2A-SCL-20m.jp2",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/worldcover/retrieval.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python restore_worldcover.py",
+    "PYTHONPATH=\"$PWD/.evidence-venv/lib/python3.12/site-packages\" /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py (loads inputs/freeze-v7.json)",
+    "node scripts/evidence-quality.mjs research/geography/gap-source-angola-drc-boundary-water-followup-20261007/evidence-quality.json ."
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "gazette-lunda-1894"
+      ],
+      "status": "supported",
+      "text": "The retrieved 1894 official Gazette text records the 26 June 1893 Lunda tracing, its ratification and effective date, and states that detailed approved limits are in five earlier commission minutes."
+    },
+    {
+      "source_ids": [
+        "sentinel2-native-scl",
+        "worldcover-2020-v100",
+        "worldcover-2021-v200"
+      ],
+      "status": "unresolved",
+      "text": "Candidate-scale product labels are local observations only. All ten component whole-footprint water statuses and causal classifications remain unknown; all five contact polygons remain complete, pinned context with unknown water and boundary-authority status."
+    },
+    {
+      "source_ids": [
+        "gazette-lunda-1894",
+        "belgian-archives-ae1-inventory"
+      ],
+      "status": "unresolved",
+      "text": "The finite 1893 treaty segments have not been matched to any of the ten components. The 1894 text lacks the referenced minutes/maps, and the official archives catalog is only a locator; modern boundary authority remains unresolved."
+    },
+    {
+      "source_ids": [
+        "sentinel2-stac-searches",
+        "sentinel2-native-scl"
+      ],
+      "status": "unresolved",
+      "text": "The Sentinel scene choice is reproducible among saved first-page search hits only; the larger numberMatched item set was not fully enumerated."
+    }
+  ],
+  "issue": 1287,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Strict pixel-centre categorical counts from exact ESA WorldCover 2020 v100 and 2021 v200 COG tiles; each source vintage and algorithm is reported separately.",
+      "id": "worldcover-pixel-observation",
+      "kind": "measurement",
+      "software": "Python 3.12.14; Rasterio 1.4.3; GDAL 3.9.3; NumPy 2.3.5; Shapely 2.1.2; PROJ 9.5.1",
+      "units": "WorldCover pixels by class; no whole-polygon water area."
+    },
+    {
+      "description": "Native 20 m Sentinel-2 L2A SCL pixel-centre counts for one source scene covering each full component; the saved search selection is reproduced within captured first-page results.",
+      "id": "native-sentinel-scl-pixel-observation",
+      "kind": "measurement",
+      "software": "Python 3.12.14; Rasterio 1.4.3; GDAL 3.9.3; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.1",
+      "units": "SCL product-label pixels by scene and class; no whole-polygon water area."
+    },
+    {
+      "description": "Exact source-coordinate intersections of candidate polygons with literal latitude references in the 1894 Gazette text, retained as leads because river endpoints and finite boundary segments are unavailable.",
+      "id": "gazette-coordinate-text-screen",
+      "kind": "source",
+      "software": "Python 3.12.14; Shapely 2.1.2; SHA-256",
+      "units": "EPSG:4326 coordinate units; no legal applicability inference."
+    },
+    {
+      "description": "Ordinary-byte source retrieval, source/vintage, complete-contact and code freeze receipts; raw WorldCover inputs are restored from official URLs and verified before producer execution.",
+      "id": "source-byte-and-vintage-pins",
+      "kind": "code",
+      "software": "Python 3.12.14; SHA-256; Git immutable baseline",
+      "units": "whole-file byte count, SHA-256, source IDs, and source vintages."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/components/0/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-01-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-01-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-01-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-01-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-01-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-01-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-01-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-01-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/0/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-01-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-02-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-02-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-02-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-02-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-02-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-02-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-02-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-02-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/1/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-02-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-03-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-03-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-03-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-03-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-03-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-03-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-03-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-03-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/2/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-03-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-04-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-04-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-04-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-04-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-04-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-04-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-04-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-04-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/3/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-04-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-05-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-05-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-05-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-05-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-05-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-05-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-05-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-05-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/4/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-05-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-06-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-06-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-06-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-06-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-06-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-06-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-06-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-06-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/5/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-06-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-07-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-07-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-07-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-07-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-07-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-07-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-07-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-07-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/6/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-07-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-08-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-08-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-08-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-08-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-08-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-08-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-08-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-08-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/7/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-08-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-09-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-09-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-09-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-09-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-09-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-09-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-09-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-09-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/8/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-09-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/worldcover/2020-v100/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2020-v100-component-10-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/worldcover/2020-v100/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2020-v100-component-10-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/worldcover/2020-v100/pixel_center_count",
+      "metric_id": "wc-2020-v100-component-10-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/worldcover/2021-v200/permanent_water_class_80_pixel_centers",
+      "metric_id": "wc-2021-v200-component-10-class80",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/worldcover/2021-v200/herbaceous_wetland_class_90_pixel_centers",
+      "metric_id": "wc-2021-v200-component-10-class90",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/worldcover/2021-v200/pixel_center_count",
+      "metric_id": "wc-2021-v200-component-10-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/sentinel2_scl/water_class_6_pixel_centers",
+      "metric_id": "scl-component-10-class6",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/sentinel2_scl/ambiguous_or_unclassified_pixel_centers",
+      "metric_id": "scl-component-10-unknown",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    },
+    {
+      "json_pointer": "/components/9/sentinel2_scl/pixel_center_count",
+      "metric_id": "scl-component-10-centres",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-01-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-01-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-01-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 198425,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-01-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-01-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-01-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 198425,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-01-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-01-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 6141,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-01-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 41998,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-02-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 63,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-02-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 7023,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-02-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 161809,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-02-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 593,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-02-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 6734,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-02-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 161809,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-02-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-02-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 5566,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-02-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 34211,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-03-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-03-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 251,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-03-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 154903,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-03-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-03-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 1490,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-03-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 154903,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-03-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-03-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 11167,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-03-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 32811,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-04-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-04-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 272,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-04-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 218484,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-04-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-04-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 1172,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-04-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 218484,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-04-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-04-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 25,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-04-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 46285,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-05-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-05-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 2206,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-05-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 22628,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-05-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-05-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 2040,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-05-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 22628,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-05-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-05-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 40,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-05-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 4791,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-06-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-06-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 127,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-06-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 42617,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-06-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-06-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 110,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-06-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 42617,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-06-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-06-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 371,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-06-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 9020,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-07-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-07-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-07-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 5732,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-07-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-07-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 111,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-07-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 5732,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-07-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-07-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 7,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-07-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 1195,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-08-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-08-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 563,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-08-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 20805,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-08-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-08-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 1203,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-08-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 20805,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-08-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-08-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 218,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-08-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 4410,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-09-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-09-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 205,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-09-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 1161288,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-09-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 27,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-09-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 297,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-09-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 1161288,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-09-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 1,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-09-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 700,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-09-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 246297,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-10-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-10-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 37,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2020-v100-component-10-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 58473,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-10-class80",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-10-class90",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "wc-2021-v200-component-10-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 58473,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-10-class6",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-10-unknown",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixels",
+      "value": 0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+      "id": "scl-component-10-centres",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
+      "unit": "pixel centres",
+      "value": 12380,
+      "vintage": "baseline"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 7891,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/README.md",
+      "role": "method-and-provenance",
+      "sha256": "e7eb166c0661e4d76b14c6c5f8d4d62eaebfe07da92465f27c9b780d6c59672c"
+    },
+    {
+      "bytes": 2343,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/additional-freeze.json",
+      "role": "method-and-provenance",
+      "sha256": "b89a28c2ed2849b1ac42cac228560096302587f74cb25e2495ad86f9d3333b7d"
+    },
+    {
+      "bytes": 9974,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/component-features.geojson",
+      "role": "method-and-provenance",
+      "sha256": "56b2e75d7a2a17f02f64fdcfa4cce353f82cd8c0fd276d15069e4e25b427a707"
+    },
+    {
+      "bytes": 12520,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/component-source-bindings.json",
+      "role": "method-and-provenance",
+      "sha256": "d896b524e1d63499e1564923aa3a51f092c39d3434ef27ae85c620cf2afc6fb0"
+    },
+    {
+      "bytes": 48025,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/contact-features.geojson",
+      "role": "method-and-provenance",
+      "sha256": "c3a6a160537d47b2dc09fe4797fd696d5989cd15f645a624c4214eba90b1106f"
+    },
+    {
+      "bytes": 11878,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/contact-source-bindings.json",
+      "role": "method-and-provenance",
+      "sha256": "d274c734aa90f5262c3f434a92c813fcb8397f3004e0005a8603dd94bf6047e9"
+    },
+    {
+      "bytes": 3371,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/family-roster.json",
+      "role": "method-and-provenance",
+      "sha256": "7fdb8b5647b49207c2050b8546f69dc144c8f9c88a96c886d5e0a631dc6b86f6"
+    },
+    {
+      "bytes": 10403,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v1-superseded.json",
+      "role": "method-and-provenance",
+      "sha256": "85455ec60bfdd1f9bb3ffcf430f0bebd171d7f2ad18b262a5a7f3b126bb79430"
+    },
+    {
+      "bytes": 10403,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v1.json",
+      "role": "method-and-provenance",
+      "sha256": "85455ec60bfdd1f9bb3ffcf430f0bebd171d7f2ad18b262a5a7f3b126bb79430"
+    },
+    {
+      "bytes": 12442,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v2.json",
+      "role": "method-and-provenance",
+      "sha256": "24fda368a3149a70d3bd5401d6bee17f10ef2db38e974c9d856f44c54c1525f2"
+    },
+    {
+      "bytes": 12673,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v3.json",
+      "role": "method-and-provenance",
+      "sha256": "a586facdf613f8a3e87c1e443fc6cf465a15e040f7ce4050aeda4dc71d3cb43c"
+    },
+    {
+      "bytes": 12904,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v4.json",
+      "role": "method-and-provenance",
+      "sha256": "0ffb752b522466ac7d0a5995be1412811f644d8e3fdac3d5631fcf8ae9cadf18"
+    },
+    {
+      "bytes": 13135,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v5.json",
+      "role": "method-and-provenance",
+      "sha256": "1815d814a82c2910d6a0c7f7ed1ce130165c9bd7561c8e9a180b6fe781e97bf1"
+    },
+    {
+      "bytes": 13366,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v6.json",
+      "role": "method-and-provenance",
+      "sha256": "6557e93c2211958e88f17393e2f063b7a4d36c160a3b4a17a519e703dce52b7d"
+    },
+    {
+      "bytes": 13597,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v7.json",
+      "role": "method-and-provenance",
+      "sha256": "24388108fedcec825cd7265b5fe93b309c7e67688c9a64934130682d77990143"
+    },
+    {
+      "bytes": 1636,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/issue-contract.json",
+      "role": "method-and-provenance",
+      "sha256": "1301ffe30d21879a6d7ed7c37b90bdd54617f1f78ade0b5d0f1bdc3a94e51045"
+    },
+    {
+      "bytes": 19803,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/original-fragments.geojson",
+      "role": "method-and-provenance",
+      "sha256": "d8d93d0542920ffa5a4798c6c082b5fb96bdc21b6c6f3ede869a1e0493613010"
+    },
+    {
+      "bytes": 13403,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/source-pins.json",
+      "role": "method-and-provenance",
+      "sha256": "f209c37e0e6708f86b3a4fb5b08b6e6976fdcb2af79922a83b0212d6c4c4434b"
+    },
+    {
+      "bytes": 51807,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json",
+      "role": "generated-result",
+      "sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360"
+    },
+    {
+      "bytes": 12857,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/component-assessment.json",
+      "role": "generated-result",
+      "sha256": "985237eb84431b852a493a753fb73a5cdad3fe94b289251619c416ad79b99654"
+    },
+    {
+      "bytes": 4660,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/execution-history.json",
+      "role": "method-and-provenance",
+      "sha256": "2844f3a542b4774fdfdfe413fd107cf749edc35f491b8522f16143fa6dab65f4"
+    },
+    {
+      "bytes": 287771,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/fragment-contact-overlays.json",
+      "role": "generated-result",
+      "sha256": "5b2231232d4b5c027db51bad8e4127c8a798733aadb9bd7d742123e50227fdfd"
+    },
+    {
+      "bytes": 1242991,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/geometry-overlays.json",
+      "role": "generated-result",
+      "sha256": "6e164778a95d81177b4f019ad32c77b01d6c27060a583ca252d1e719069e99f4"
+    },
+    {
+      "bytes": 31026,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/physical-water-authority-assessment.json",
+      "role": "generated-result",
+      "sha256": "97e2d7092fa17ad57fe6974b389813197840503d4ef964bae18d838bf5d1e76d"
+    },
+    {
+      "bytes": 320,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/reproducibility-control-v1.json",
+      "role": "generated-result",
+      "sha256": "9246266a7d14c0e8a537aa8c61dfc993d0ced43fce707d653409245d83a0d433"
+    },
+    {
+      "bytes": 408,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/reproduction-receipt.json",
+      "role": "generated-result",
+      "sha256": "74959b64feb397a8e6d86604b6643c73149004d9e0421d9410037a8b1dd00b90"
+    },
+    {
+      "bytes": 480,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-negative-control-v1.json",
+      "role": "generated-result",
+      "sha256": "dd6943061d0a16d584bad5cd32ae516d8531b30c3b65c05c44d42d12d5257bf7"
+    },
+    {
+      "bytes": 2025,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-positive-control-v1.json",
+      "role": "generated-result",
+      "sha256": "5a05449511a1f3335fe4430c3e76de0137b30a7ea5446339ab0e73e637465bc8"
+    },
+    {
+      "bytes": 408,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-691655432aecee3cb49d22d33531c6d551489241.json",
+      "role": "method-and-provenance",
+      "sha256": "d9738d4528c19550fbcd224c6e3ce39441149f93fc5956e3b672d1512be5d97e"
+    },
+    {
+      "bytes": 408,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v2.json",
+      "role": "method-and-provenance",
+      "sha256": "59a1289bf50c6875818172565a6c27e6448da129e40ace20682b04fd5ded87bd"
+    },
+    {
+      "bytes": 408,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v3.json",
+      "role": "method-and-provenance",
+      "sha256": "f16851fa14bc5a1a18ea694a5ef312faa8dbdcb71e4c8c51ffc6600ecc7d05a3"
+    },
+    {
+      "bytes": 408,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v4.json",
+      "role": "method-and-provenance",
+      "sha256": "1084a018d03e8cfe20770130ed5f7a8061dc07b9d064292e6702f61c35e23eb2"
+    },
+    {
+      "bytes": 471,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-negative-control-v1.json",
+      "role": "generated-result",
+      "sha256": "910ae8bb67c762be0cbae3914e6fe1059ee04fa8eefef8515f627ee2b623cc6e"
+    },
+    {
+      "bytes": 2016,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-positive-control-v1.json",
+      "role": "generated-result",
+      "sha256": "7a72614108c1b0bb2a6fb800e9476a7ba826ef738b73cc7ff646f3712bd95c16"
+    },
+    {
+      "bytes": 26268,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/reproduce_assessment.py",
+      "role": "method-and-provenance",
+      "sha256": "92fc202ed1ad7f665cde7eace736299a40f5cacad663fe2b215ae575e4671aab"
+    },
+    {
+      "bytes": 1386,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/restore_worldcover.py",
+      "role": "method-and-provenance",
+      "sha256": "55ca53d796932cf7c7277512b0bb4b7a695ff71c52ce872b868bbf66b5766b84"
+    },
+    {
+      "bytes": 15912,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py",
+      "role": "method-and-provenance",
+      "sha256": "9489aad6f6dd54dc396768fde022707f2fa69f6ae50f20ac3ce6c1db24894f3a"
+    },
+    {
+      "bytes": 1040603,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-01-search.json",
+      "role": "method-and-provenance",
+      "sha256": "a0b965a6fe4ea8f50f0f2531551ab67ad7016f26e687350d5f12273c15382be1"
+    },
+    {
+      "bytes": 1051180,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-02-search.json",
+      "role": "method-and-provenance",
+      "sha256": "cf4ed451605910c62ef010b37e0896963eb78fb33572042af5ff10eba617d466"
+    },
+    {
+      "bytes": 1041720,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-03-search.json",
+      "role": "method-and-provenance",
+      "sha256": "1b0d59a670c264568c74e991cb6ff6e832ae84f956fc7e0b2af98bea87adf846"
+    },
+    {
+      "bytes": 1049819,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-04-search.json",
+      "role": "method-and-provenance",
+      "sha256": "244390519ac3b79156b0d408c5ca316d231880106636595b944af517ba9ca691"
+    },
+    {
+      "bytes": 1043772,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-05-search.json",
+      "role": "method-and-provenance",
+      "sha256": "73d7d4cbce559d9ae67367f27324c6e1634764541bf6beb76d54f6c73c3d1cbf"
+    },
+    {
+      "bytes": 1050249,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-06-search.json",
+      "role": "method-and-provenance",
+      "sha256": "68d8047153500b6866bfa73b0ae07b6aa89cc4587c26bfc5e6c9d983fa2104aa"
+    },
+    {
+      "bytes": 1051113,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-07-search.json",
+      "role": "method-and-provenance",
+      "sha256": "93c7806dfa2190eaea86b7ab4743eba6b83cb84a27bc327566e5af9121b6e3ce"
+    },
+    {
+      "bytes": 1040700,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-08-search.json",
+      "role": "method-and-provenance",
+      "sha256": "eceac2b3816471e00589f15e54d2a8582ae6942624b7f772df64d6d372b3d6d3"
+    },
+    {
+      "bytes": 1040957,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-09-search.json",
+      "role": "method-and-provenance",
+      "sha256": "2fd5ed9087520436c09277bce0dbc40ff9a9d7a1ec50b7b879548bbdeaa39d72"
+    },
+    {
+      "bytes": 1051662,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/earth-search/component-10-search.json",
+      "role": "method-and-provenance",
+      "sha256": "8263929535a314d915eb536384fddce209d6840061fc857d530bc55cb19e9403"
+    },
+    {
+      "bytes": 1365,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/official-belgian-gazette/retrieval.json",
+      "role": "method-and-provenance",
+      "sha256": "d1f8262659685e4bf8fc4b4c8860ff44a80dc30d5bc9467675fc5e97487e1c95"
+    },
+    {
+      "bytes": 33031,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2A_33MZM_20260525_0_L2A.xml",
+      "role": "method-and-provenance",
+      "sha256": "2f2851a7db26be4a938a76ac75e3f2d789ca2d2b705540260072350dba6bde69"
+    },
+    {
+      "bytes": 26203,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2A_34MBS_20200812_1_L2A.xml",
+      "role": "method-and-provenance",
+      "sha256": "56cee7abe1c154bbe9ec36e61280c96b2e6abb3d53604ff372d0c2d2ddff8d5b"
+    },
+    {
+      "bytes": 32969,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2A_34MCS_20260902_1_L2A.xml",
+      "role": "method-and-provenance",
+      "sha256": "de560206d47720d01f68b348c98af9fb15996582c7ea7e61c0949771aca48f7f"
+    },
+    {
+      "bytes": 33067,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/aws-listings/S2B_33MYM_20260727_0_L2A.xml",
+      "role": "method-and-provenance",
+      "sha256": "fa00ae35175ab133d999a0758fd3b4ee6a627387082589cc0e73315ef4e4a98a"
+    },
+    {
+      "bytes": 18299,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/collection-sentinel-2-l2a.json",
+      "role": "method-and-provenance",
+      "sha256": "9c5fe9a8c8785d8439a1697cd91adc21f7ac45f7f3b95786c1398904c413975e"
+    },
+    {
+      "bytes": 20842,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2A_33MZM_20260525_0_L2A.json",
+      "role": "method-and-provenance",
+      "sha256": "2a685ad8b30bd9561f659ccda8e076c15604996a31300b13beb8a19d6f7744cb"
+    },
+    {
+      "bytes": 21374,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2A_34MBS_20200812_1_L2A.json",
+      "role": "method-and-provenance",
+      "sha256": "7137bc6b238f6a6bf955ced8e1d6b884fd98492c262ae7488f3691e6ff689dc6"
+    },
+    {
+      "bytes": 20827,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2A_34MCS_20260902_1_L2A.json",
+      "role": "method-and-provenance",
+      "sha256": "63c8b9b96fd3de4faa72147d4ddf236d18fad055afc8a62c40a7fd9ca8cd2491"
+    },
+    {
+      "bytes": 20885,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/items/S2B_33MYM_20260727_0_L2A.json",
+      "role": "method-and-provenance",
+      "sha256": "9cca9b21e7c3d05197121d6663819f95e0dac5f1b78a9959120fe41d129824e0"
+    },
+    {
+      "bytes": 3560,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/retrieval.json",
+      "role": "method-and-provenance",
+      "sha256": "0d149804fa7019afad237ef62ef6f0fb6435cf7ccccc50904d79f4be6567ade5"
+    },
+    {
+      "bytes": 3201,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/worldcover/retrieval.json",
+      "role": "method-and-provenance",
+      "sha256": "441c07d0ca228ee969a86d9235381ed3f7ffa0481744f305af7ae8d4692c0a13"
+    }
+  ],
+  "sources": [
+    {
+      "id": "worldcover-2020-v100",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0; attribute: \u00a9 ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium."
+      },
+      "limit": "The complete original COG tiles are used by the frozen producer and are pinned by ordinary bytes; the evidence descriptor records their public official retrieval receipts because each full tile exceeds the premerge evidence file-size ceiling. WorldCover is a thematic product, not independent local validation or temporal change evidence.",
+      "restoration": "Run python restore_worldcover.py; it retrieves each exact official object URL from sources/worldcover/retrieval.json and verifies full byte length and SHA-256 against inputs/source-pins.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "ESA WorldCover 2020 v100 10 m land-cover product; classes 80 and 90 sampled as product labels",
+      "temporal_status": "reference",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "verification": "verified",
+      "vintage": "2020 v100; source tiles S09E015 and S09E018"
+    },
+    {
+      "id": "worldcover-2021-v200",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0; attribute: \u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium."
+      },
+      "limit": "The complete original COG tiles are used by the frozen producer and are pinned by ordinary bytes; the evidence descriptor records their public official retrieval receipts because each full tile exceeds the premerge evidence file-size ceiling. v100 and v200 use different algorithms; differences are not interpreted as land-cover changes.",
+      "restoration": "Run python restore_worldcover.py; it retrieves each exact official object URL from sources/worldcover/retrieval.json and verifies full byte length and SHA-256 against inputs/source-pins.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "ESA WorldCover 2021 v200 10 m land-cover product; classes 80 and 90 sampled as product labels",
+      "temporal_status": "reference",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "verification": "verified",
+      "vintage": "2021 v200; source tiles S09E015 and S09E018"
+    },
+    {
+      "id": "sentinel2-stac-searches",
+      "license": {
+        "status": "unknown",
+        "terms": "Saved STAC response metadata report source data licenses inconsistently; no reuse license is asserted for the search snapshots. Original SCL data terms are recorded separately."
+      },
+      "limit": "Selection is reproducible only within the saved returned page. The total matching item set is larger, so no global lowest-cloud ranking is claimed.",
+      "restoration": "Search snapshots are preserved in sources/earth-search/; each output stores its SHA-256 and selection rank.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Earth Search STAC item/query snapshots used to reproduce the selected Sentinel-2 scene among captured first-page results",
+      "temporal_status": "reference",
+      "url": "https://earth-search.aws.element84.com/v1",
+      "verification": "verified",
+      "vintage": "search snapshots retrieved 2026-10-07; each search has up to 50 results and numberMatched is larger"
+    },
+    {
+      "id": "gazette-lunda-1894",
+      "license": {
+        "status": "unknown",
+        "terms": "File-specific digital reuse rights were not established; no license or public-domain status is asserted."
+      },
+      "limit": "Text names rivers and coordinate references but refers the detailed approved limits to five commission minutes and maps absent from the scan; coordinate screens do not establish a finite treaty segment or applicability.",
+      "restoration": "The retrieval URL and full PDF ordinary-byte descriptor (11,821,646 bytes; SHA-256 32cb71b96ff33ae1805e8ff742da754986fa666912df8af71b629deedd1eeeea) are recorded in sources/official-belgian-gazette/retrieval.json and inputs/source-pins.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Official 1894 Gazette text ratifying the June 1893 Lunda tracing",
+      "supported_interval": {
+        "from": 1894,
+        "to": 1895
+      },
+      "temporal_status": "historical",
+      "url": "https://www.kaowarsom.be/documents/BOC/BOEIC1894.pdf",
+      "verification": "verified",
+      "vintage": "1893 route act; ratification 24 March 1894; effective 31 March 1894"
+    },
+    {
+      "id": "belgian-archives-ae1-inventory",
+      "license": {
+        "status": "unknown",
+        "terms": "The finding aid is cited as an official catalog locator; no separate reuse license is asserted."
+      },
+      "limit": "Finding aid only; no original minutes, seven sketches, general Lunda boundary map, or 24 March 1894 map copy was retrieved or geometrically checked.",
+      "restoration": "Consult PDF pages 40\u201341 at the official Belgian Archives URL. The inventory says five original minutes are annexed to special letter no. sp. 209 of 7 July 1893.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Official archival finding aid locating Lunda boundary file AE(270), item 331 and original 1892\u201393 commission minutes",
+      "temporal_status": "reference",
+      "url": "https://www.arch.be/docs/invent/archives-africaines/AE1.pdf",
+      "verification": "verified",
+      "vintage": "digitized finding aid, consulted 2026-10-07"
+    },
+    {
+      "files": [
+        {
+          "bytes": 454593,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_33MZM_20260525_0_L2A-SCL-20m.jp2",
+          "role": "original-source",
+          "sha256": "c0c438d26c8853139f7d633a85cf0585694d4c85e655154dc47c1fbc5bbd9fc1"
+        },
+        {
+          "bytes": 1450265,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_34MBS_20200812_1_L2A-SCL-20m.jp2",
+          "role": "original-source",
+          "sha256": "fb0c1db754eb5e8bced38b00585fa49253704889211e09d15b0f24159fdc6238"
+        },
+        {
+          "bytes": 687454,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2A_34MCS_20260902_1_L2A-SCL-20m.jp2",
+          "role": "original-source",
+          "sha256": "abb5485eb3c8058e9474c73d064156a96f025285cead29c532c67c30a2c4b6f6"
+        },
+        {
+          "bytes": 3353755,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/sources/sentinel-2/native-scl/S2B_33MYM_20260727_0_L2A-SCL-20m.jp2",
+          "role": "original-source",
+          "sha256": "523b0bdd8e632efb66106aa9d3a33942294f9a6706a9a16cdae5dba11fa35f7f"
+        }
+      ],
+      "id": "sentinel2-native-scl",
+      "license": {
+        "status": "redistributable",
+        "terms": "Copernicus Sentinel data legal notice: free, full and open use with attribution \u201cCopernicus Sentinel data [year]\u201d; see sources/sentinel-2/retrieval.json."
+      },
+      "limit": "Single-scene product labels at native 20 m. The scenes differ by date, cloud/NoData/ambiguous classes remain unknown, and one isolated class-6 pixel does not classify a whole component. Source-record independence from JRC Landsat-derived GSW and WorldCover does not imply independent local ground validation.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-07",
+      "role": "Original Sentinel-2 L2A native 20 m Scene Classification Layer JP2 source assets",
+      "temporal_status": "reference",
+      "url": "https://registry.opendata.aws/sentinel-2/",
+      "verification": "verified",
+      "vintage": "2020-08-12; 2026-07-27; 2026-05-25; 2026-09-02 acquisitions"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "not-requested",
+    "implementation": "not-proposed",
+    "research": "partial"
+  },
+  "subject_ids": [
+    "gb:AGO:ADM2:16411231B62076307190429",
+    "gb:AGO:ADM2:16411231B71421381230719",
+    "gb:AGO:ADM2:16411231B80406676016894",
+    "gb:COD:ADM2:63176286B37251946319002",
+    "gb:COD:ADM2:63176286B94968684087840",
+    "physical-component:021fd4e137bfb491d460efb7193c9d4c90fa355aa6011d5ce17076df7df0869a",
+    "physical-component:4a0bb7b34741b7705e900ddde2f988ab4827ffea2b80954fc9cb6797146f1f88",
+    "physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4",
+    "physical-component:7b457906483432e330c121d5feec77b0eb96e63299da2719873cad13c35a24b0",
+    "physical-component:939bc3dbbf1a6ecf3734d8f1ebbc901f522b1935dc51301afb66ca702c8383ec",
+    "physical-component:a4338eeba714b43b93c9959104be85591f256ce0374958558229c80e46b37e17",
+    "physical-component:d2ac6f596c024aa333f12ec66e1f542a5ef8f984b8ca5a9fcfbd3f6135c9440a",
+    "physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2",
+    "physical-component:dfa4e25a97eff43fac2b408cdc2db1d7e45439931b47951ef18a233b9910e8ec",
+    "physical-component:eded93368ac9537653931967882e67115d076d812fadb42837a53fd619926de1"
+  ],
+  "subject_ids_sha256": "40d33aa186229b19aeae76e40ee10db338c0147d24b23c00b550bae5a0e51468",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-positive-control-v1.json",
+      "kind": "positive-control",
+      "method_id": "worldcover-pixel-observation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-negative-control-v1.json",
+      "kind": "negative-control",
+      "method_id": "worldcover-pixel-observation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-positive-control-v1.json",
+      "kind": "positive-control",
+      "method_id": "native-sentinel-scl-pixel-observation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-negative-control-v1.json",
+      "kind": "negative-control",
+      "method_id": "native-sentinel-scl-pixel-observation",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
+}

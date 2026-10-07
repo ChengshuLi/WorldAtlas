@@ -1,0 +1,261 @@
+#!/usr/bin/env python3
+"""Verify frozen bytes, reproduce the assessment twice, and compare exact outputs."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from reproduce_assessment import pixel_counts, scl_accounting, validate_scl_accounting, validate_roster, validate_worldcover_grid, verify_pinned_bytes, window_for_geometry
+import numpy as np
+import rasterio
+from affine import Affine
+from rasterio.io import MemoryFile
+from rasterio.transform import from_origin
+from shapely import contains_xy
+from shapely.geometry import Point, box
+from rasterio.windows import transform as window_transform
+from rasterio.transform import xy as pixel_xy
+
+ROOT = Path(__file__).resolve().parents[3]
+PACKET = ROOT / "research/geography/gap-source-angola-drc-boundary-water-followup-20261007"
+FREEZE = PACKET / "inputs/freeze-v7.json"
+PRODUCER = PACKET / "reproduce_assessment.py"
+
+
+def digest(path):
+    data = path.read_bytes()
+    return len(data), hashlib.sha256(data).hexdigest()
+
+
+def verify_frozen():
+    document = json.loads(FREEZE.read_text(encoding="utf-8"))
+    for row in document["files"]:
+        size, sha = digest(ROOT / row["path"])
+        if (size, sha) != (row["bytes"], row["sha256"]):
+            raise RuntimeError(f"frozen byte mismatch: {row['path']}")
+    return document
+
+
+def main():
+    freeze = verify_frozen()
+    # Direct native-centre oracle: this tiny polygon contains exactly one of
+    # the 3x3 grid's centres and catches windows whose rounded lengths omit it.
+    oracle_geom = box(2.4, 2.4, 2.6, 2.6)
+    oracle_data = np.arange(1, 10, dtype=np.uint8).reshape((3, 3))
+    with MemoryFile() as memory:
+        with memory.open(driver="GTiff", height=3, width=3, count=1, dtype="uint8",
+                         transform=from_origin(0, 3, 1, 1), crs="EPSG:4326") as dataset:
+            dataset.write(oracle_data, 1)
+            actual_counts, actual_centres, _ = pixel_counts(dataset, oracle_geom)
+            direct_values = []
+            for row in range(dataset.height):
+                for col in range(dataset.width):
+                    x, y = dataset.transform * (col + 0.5, row + 0.5)
+                    if oracle_geom.contains(Point(x, y)):
+                        direct_values.append(int(oracle_data[row, col]))
+            direct_counts = {str(value): direct_values.count(value) for value in sorted(set(direct_values))}
+            if direct_counts != {"3": 1} or actual_counts != direct_counts or actual_centres != 1:
+                raise RuntimeError("strict pixel-centre counterexample disagrees with direct native-centre oracle")
+    centre_oracle = {"passed": True, "oracle": "direct shapely Point construction at every native pixel centre; geom.contains(Point)",
+                     "fixture": "3x3 unit grid; polygon [2.4,2.6] x [2.4,2.6] contains centre (2.5,2.5)",
+                     "expected_class_counts": {"3": 1}, "actual_class_counts": actual_counts,
+                     "strict_centres": actual_centres}
+    class LargeGridWindowFixture:
+        width = height = 36000
+        transform = Affine(1 / 12000, 0, 18.0, 0, -1 / 12000, -6.0)
+        def read(self, *args, window):
+            return np.ones((int(window.height), int(window.width)), dtype=np.uint8)
+        def window_transform(self, window):
+            return window_transform(window, self.transform)
+        def xy(self, row, col):
+            return pixel_xy(self.transform, row, col)
+
+    affine_fixture = LargeGridWindowFixture()
+    global_row, global_col = 24045, 4716
+    native_x, native_y = affine_fixture.xy(global_row, global_col)
+    affine_geom = box(native_x, native_y - 0.0001, native_x + 0.0000001, native_y + 0.0001)
+    affine_counts, affine_centres, _ = pixel_counts(affine_fixture, affine_geom)
+    affine_window = window_for_geometry(affine_fixture, affine_geom)
+    local_row = global_row - int(affine_window.row_off)
+    local_col = global_col - int(affine_window.col_off)
+    local_transform = affine_fixture.window_transform(affine_window)
+    local_x, local_y = local_transform * (local_col + 0.5, local_row + 0.5)
+    local_probe = contains_xy(affine_geom, np.array([[local_x]]), np.array([[local_y]]))
+    if (native_x, native_y) != (18.393041666666665, -8.003791666666666) or affine_geom.contains(Point(native_x, native_y)):
+        raise RuntimeError("native affine/global-index boundary fixture no longer matches its outside oracle")
+    if affine_centres != 0 or affine_counts or not bool(local_probe[0, 0]):
+        raise RuntimeError("pixel-centre result depends on cropped-window affine precision")
+    global_affine_control = {"passed": True, "fixture_global_row_col": [global_row, global_col],
+                             "original_dataset_xy": [native_x, native_y],
+                             "cropped_window_xy": [local_x, local_y],
+                             "original_centre_is_strictly_outside": True,
+                             "cropped_affine_would_include_centre": True,
+                             "count_uses_original_affine_and_global_indices": affine_centres == 0}
+    scl_fixture_classes = np.array([[0, 2, 3, 8, 9, 10, 6]], dtype=np.uint8)
+    with MemoryFile() as memory:
+        with memory.open(driver="GTiff", height=1, width=7, count=1, dtype="uint8",
+                         transform=from_origin(0, 1, 1, 1), crs="EPSG:4326") as dataset:
+            dataset.write(scl_fixture_classes, 1)
+            fixture_counts, fixture_centres, _ = pixel_counts(dataset, box(0, 0, 7, 1))
+            fixture_accounting = scl_accounting(fixture_counts)
+            if fixture_centres != 7 or fixture_counts != {str(k): 1 for k in (0, 2, 3, 6, 8, 9, 10)}:
+                raise RuntimeError("SCL ambiguity fixture did not read all seven native pixel centres")
+            validate_scl_accounting(fixture_counts, fixture_accounting)
+            corrupted_accounting = {**fixture_accounting,
+                                    "ambiguous_or_unclassified_pixel_centers": fixture_accounting["ambiguous_or_unclassified_pixel_centers"] - 1}
+            try:
+                validate_scl_accounting(fixture_counts, corrupted_accounting)
+            except ValueError:
+                corrupted_ambiguous_rejected = True
+            else:
+                raise RuntimeError("corrupt SCL ambiguous-class accounting was not rejected")
+    if fixture_accounting != {"pixel_center_count": 7, "water_class_6_pixel_centers": 1,
+                              "ambiguous_or_unclassified_pixel_centers": 6}:
+        raise RuntimeError("SCL class 2 or cloud/shadow/NoData ambiguity was misclassified")
+    scl_fixture_control = {"passed": True, "fixture_classes": [0, 2, 3, 8, 9, 10, 6],
+                           "fixture_accounting": fixture_accounting,
+                           "class_2_remains_ambiguous": True,
+                           "cloud_shadow_unclassified_and_nodata_remain_ambiguous": True,
+                           "corrupt_ambiguous_accounting_rejected": corrupted_ambiguous_rejected,
+                           "whole_component_status": "unknown"}
+    with tempfile.TemporaryDirectory(prefix="angola-drc-repro-") as temp:
+        outputs = []
+        for run_number in (1, 2):
+            target = Path(temp) / f"assessment-{run_number}.json"
+            env = os.environ.copy()
+            subprocess.run([sys.executable, str(PRODUCER), "--output", str(target)],
+                           cwd=ROOT, env=env, check=True)
+            outputs.append(target.read_bytes())
+            verify_frozen()
+        if outputs[0] != outputs[1]:
+            raise RuntimeError("two full producer outputs differ byte-for-byte")
+        output_hash = hashlib.sha256(outputs[0]).hexdigest()
+        assessment = json.loads(outputs[0])
+        output_path = PACKET / "outputs/assessment-v1.json"
+        output_path.write_bytes(outputs[0])
+        pins = json.loads((PACKET / "inputs/source-pins.json").read_text(encoding="utf-8"))
+        small_pin = next(row for row in pins["files"] if row["path"].endswith("sources/worldcover/retrieval.json"))
+        actual = (ROOT / small_pin["path"]).read_bytes()
+        verify_pinned_bytes(actual, small_pin)
+        altered = bytearray(actual); altered[0] ^= 1
+        try:
+            verify_pinned_bytes(bytes(altered), small_pin)
+        except ValueError:
+            source_mutation_rejected = True
+        else:
+            raise RuntimeError("altered source bytes were not rejected")
+
+        component_doc = json.loads((PACKET / "inputs/component-features.geojson").read_text(encoding="utf-8"))
+        contact_doc = json.loads((PACKET / "inputs/contact-features.geojson").read_text(encoding="utf-8"))
+        roster = json.loads((PACKET / "inputs/family-roster.json").read_text(encoding="utf-8"))
+        validate_roster(component_doc["features"], contact_doc["features"], roster)
+        omission_rejections = {}
+        for label, comps, contacts in (
+            ("component", component_doc["features"][:-1], contact_doc["features"]),
+            ("contact", component_doc["features"], contact_doc["features"][:-1]),
+        ):
+            try:
+                validate_roster(comps, contacts, roster)
+            except ValueError:
+                omission_rejections[label] = True
+            else:
+                raise RuntimeError(f"omitted {label} was not rejected")
+
+        registration_checks = []
+        for config in assessment["methods"].get("worldcover_tiles", []):
+            with rasterio.open(ROOT / config["path"]) as dataset:
+                validate_worldcover_grid(dataset, config["tile"])
+                shifted = Affine.translation(1 / 24000, 0) * dataset.transform
+                try:
+                    validate_worldcover_grid(dataset, config["tile"], transform=shifted)
+                except ValueError:
+                    registration_checks.append({"tile": config["tile"], "valid_grid_passed": True,
+                                                "half_pixel_shift_rejected": True})
+                else:
+                    raise RuntimeError(f"half-pixel registration shift was not rejected: {config['tile']}")
+        if len(registration_checks) != 4:
+            raise RuntimeError("expected four WorldCover CRS/registration checks")
+
+        cloud_nodata_checks = []
+        for row in assessment["components"]:
+            scl = row["sentinel2_scl"]
+            counts = {int(k): v for k, v in scl["class_counts"].items()}
+            ambiguous = sum(counts.get(cls, 0) for cls in (0, 1, 2, 3, 7, 8, 9, 10, 11))
+            if ambiguous != scl["ambiguous_or_unclassified_pixel_centers"] or counts.get(6, 0) != scl["water_class_6_pixel_centers"]:
+                raise RuntimeError("SCL cloud/NoData accounting mismatch")
+            if sum(counts.values()) != scl["pixel_center_count"] or row["whole_component_water_status"] != "unknown":
+                raise RuntimeError("SCL pixel accounting upgraded or lost unknowns")
+            cloud_nodata_checks.append(row["component_number_in_frozen_feature_order"])
+
+        scls = [row["sentinel2_scl"]["source_asset_path"] for row in assessment["components"]]
+        if any("native-scl/" not in path or "worldcover" in path or "jrc-gsw" in path for path in scls):
+            raise RuntimeError("Sentinel SCL path is not the preserved native product asset")
+        independence_check = {
+            "passed": True,
+            "scope": "Source-record independence only: sampled SCL values come from pinned original Sentinel-2 native SCL JP2 assets, distinct from JRC Landsat-derived output and ESA WorldCover thematic maps.",
+            "does_not_claim_sensor_independent_validation": True,
+            "native_scl_component_rows": len(scls),
+        }
+
+        positive = {
+            "kind": "positive-control", "outcome": "passed",
+            "ten_components_and_five_contacts_present": assessment["controls"]["positive"]["ten_frozen_components_and_five_contacts_present"],
+            "all_ten_worldcover_coverage": assessment["controls"]["positive"]["all_ten_have_worldcover_pixel_centres_in_each_vintage"],
+            "all_ten_full_scl_grid_coverage": assessment["controls"]["positive"]["all_ten_have_fully_covered_scl_scene_grid"],
+            "all_contact_bindings_retained": len(assessment["contacts"]) == 5,
+            "all_ten_saved_search_selections_reproduced": assessment["controls"]["sentinel_selection_is_reproduced_from_saved_first_page"],
+            "worldcover_crs_registration_checks": registration_checks,
+            "source_independence": independence_check,
+            "strict_native_pixel_centre_oracle": centre_oracle,
+            "original_affine_global_index_oracle": global_affine_control,
+            "scl_cloud_nodata_classification_fixture": scl_fixture_control,
+        }
+        negative = {
+            "kind": "negative-control", "outcome": "passed",
+            "altered_source_byte_rejected": source_mutation_rejected,
+            "component_omission_rejected": omission_rejections["component"],
+            "contact_omission_rejected": omission_rejections["contact"],
+            "half_pixel_registration_shift_rejected_on_all_tiles": all(x["half_pixel_shift_rejected"] for x in registration_checks),
+            "cloud_shadow_unclassified_and_nodata_cells_remain_ambiguous": len(cloud_nodata_checks) == 10,
+            "corrupt_ambiguous_class_accounting_rejected": corrupted_ambiguous_rejected,
+            "scl_water_class_remains_local_product_label": all(row["whole_component_water_status"] == "unknown" for row in assessment["components"]),
+            "worldcover_and_scl_vintages_not_collapsed": len(assessment["methods"].get("worldcover_vintages", [])) == 2,
+        }
+        if not all(value for key, value in negative.items() if key not in ("method_id", "kind", "outcome")):
+            raise RuntimeError("negative control did not pass")
+        for method_id, prefix in (("worldcover-pixel-observation", "worldcover"),
+                                  ("native-sentinel-scl-pixel-observation", "sentinel-scl")):
+            pos = {"method_id": method_id, **positive}
+            neg = {"method_id": method_id, **negative}
+            (PACKET / f"outputs/{prefix}-positive-control-v1.json").write_text(
+                json.dumps(pos, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")
+            (PACKET / f"outputs/{prefix}-negative-control-v1.json").write_text(
+                json.dumps(neg, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")
+        run_hash = hashlib.sha256(outputs[0]).hexdigest()
+        reproducibility = {"method_id": "assessment-generator", "kind": "reproducibility", "outcome": "passed",
+                           "run_one_sha256": run_hash, "run_two_sha256": hashlib.sha256(outputs[1]).hexdigest(),
+                           "run_one_bytes": len(outputs[0]), "run_two_bytes": len(outputs[1]),
+                           "runs_byte_identical": outputs[0] == outputs[1]}
+        (PACKET / "outputs/reproducibility-control-v1.json").write_text(json.dumps(reproducibility, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")
+        receipt = {
+            "version": "frozen-two-run-receipt-v1",
+            "freeze_sha256": hashlib.sha256(FREEZE.read_bytes()).hexdigest(),
+            "freeze_file_count": len(freeze["files"]),
+            "run_count": 2,
+            "runs_byte_identical": True,
+            "output_path": str(output_path.relative_to(ROOT)),
+            "output_bytes": len(outputs[0]),
+            "output_sha256": output_hash,
+        }
+        (PACKET / "outputs/reproduction-receipt.json").write_text(
+            json.dumps(receipt, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")
+        print(json.dumps(receipt, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()
