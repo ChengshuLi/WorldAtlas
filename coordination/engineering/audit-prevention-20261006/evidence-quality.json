@@ -225,8 +225,8 @@
     },
     {
       "path": "scripts/evidence/immutable.py",
-      "bytes": 17064,
-      "sha256": "9413b06c4cc211f9dcf6ef0e9b9bcff607fa64a1cbfcee48ac0b9c1cf72a1eec",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
       "hash_kind": "file-bytes"
     },
     {
@@ -267,14 +267,14 @@
     },
     {
       "path": "coordination/engineering/audit-prevention-20261006/verification.json",
-      "bytes": 858,
-      "sha256": "cf05dbff627af2b715edf268d1ecbbac2ab5c6f5d88e5f7bc7446d31a75e8eae",
+      "bytes": 1057,
+      "sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/audit-prevention-20261006/CHECKPOINT.md",
-      "bytes": 458,
-      "sha256": "395089c57f36df99be30d4fc57ca7865d8f595ac9d78edf8a15c64cd750f20c4",
+      "bytes": 799,
+      "sha256": "5d68522cfffdf7acc1cf52e1444180e583c72020d911b22837b3d7a574b9e858",
       "hash_kind": "file-bytes"
     }
   ],
@@ -290,49 +290,65 @@
   "metrics": [
     {
       "id": "node_tests",
-      "value": 39,
+      "value": 41,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "cf05dbff627af2b715edf268d1ecbbac2ab5c6f5d88e5f7bc7446d31a75e8eae",
-      "evaluation_commit": "f519cea5770d04f6f9133dc8fc3fcf9aa734819a"
+      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
     },
     {
       "id": "python_execution_controls",
       "value": 7,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "cf05dbff627af2b715edf268d1ecbbac2ab5c6f5d88e5f7bc7446d31a75e8eae",
-      "evaluation_commit": "f519cea5770d04f6f9133dc8fc3fcf9aa734819a"
+      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
     },
     {
       "id": "python_scientific_cli_controls",
       "value": 10,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "cf05dbff627af2b715edf268d1ecbbac2ab5c6f5d88e5f7bc7446d31a75e8eae",
-      "evaluation_commit": "f519cea5770d04f6f9133dc8fc3fcf9aa734819a"
+      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
     },
     {
       "id": "failed",
       "value": 0,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "cf05dbff627af2b715edf268d1ecbbac2ab5c6f5d88e5f7bc7446d31a75e8eae",
-      "evaluation_commit": "f519cea5770d04f6f9133dc8fc3fcf9aa734819a"
+      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
     },
     {
       "id": "skipped",
       "value": 0,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "cf05dbff627af2b715edf268d1ecbbac2ab5c6f5d88e5f7bc7446d31a75e8eae",
-      "evaluation_commit": "f519cea5770d04f6f9133dc8fc3fcf9aa734819a"
+      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+    },
+    {
+      "id": "python_geographic_regression_controls",
+      "unit": "count",
+      "vintage": "archived",
+      "value": 40,
+      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
+    },
+    {
+      "id": "python_trusted_geography_controls",
+      "unit": "count",
+      "vintage": "archived",
+      "value": 17,
+      "input_sha256": "ff6984cd7c42428d934b631d5816f2ed6f14d4efacd4a232a66fbb6af6656607",
+      "evaluation_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8"
     }
   ],
   "summaries": [
     {
       "metric_id": "node_tests",
-      "value": 39,
+      "value": 41,
       "unit": "count"
     },
     {
@@ -354,6 +370,16 @@
       "metric_id": "skipped",
       "value": 0,
       "unit": "count"
+    },
+    {
+      "metric_id": "python_geographic_regression_controls",
+      "unit": "count",
+      "value": 40
+    },
+    {
+      "metric_id": "python_trusted_geography_controls",
+      "unit": "count",
+      "value": 17
     }
   ],
   "conclusions": [],
@@ -363,7 +389,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/evidence-prevention.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/integration-profile.test.mjs test/deployment-budget-scope.test.mjs"
+    "PYTHON=/path/to/isolated-python WORLDATLAS_TEST_PYTHON=/path/to/isolated-python PYTHONDONTWRITEBYTECODE=1 node --test test/evidence-prevention.test.mjs test/geographic-regression.test.mjs test/trusted-geography-check.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/integration-profile.test.mjs test/deployment-budget-scope.test.mjs"
   ],
   "metric_bindings": [
     {
@@ -390,6 +416,16 @@
       "metric_id": "skipped",
       "path": "coordination/engineering/audit-prevention-20261006/verification.json",
       "json_pointer": "/skipped"
+    },
+    {
+      "metric_id": "python_geographic_regression_controls",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/python_geographic_regression_controls"
+    },
+    {
+      "metric_id": "python_trusted_geography_controls",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/python_trusted_geography_controls"
     }
   ],
   "change_receipts": [

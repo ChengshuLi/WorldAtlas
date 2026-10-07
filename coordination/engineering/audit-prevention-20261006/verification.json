@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "tested_code_commit": "f519cea5770d04f6f9133dc8fc3fcf9aa734819a",
-  "node_tests": 39,
+  "tested_code_commit": "20c7c80ee37fe6de052797bb5597b44eaf13dbc8",
+  "node_tests": 41,
   "python_execution_controls": 7,
   "python_scientific_cli_controls": 10,
   "failed": 0,
@@ -22,6 +22,9 @@
     "Reject aggregate decoded output exceeding the phase budget"
   ],
   "additional_controls": [
-    "Raw CSV and JSONL use the same fresh-run writer"
-  ]
+    "Raw CSV and JSONL use the same fresh-run writer",
+    "Existing trusted-runner entry points preserve the self-contained immutable-helper dependency boundary"
+  ],
+  "python_geographic_regression_controls": 40,
+  "python_trusted_geography_controls": 17
 }
