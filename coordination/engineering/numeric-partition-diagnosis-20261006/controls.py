@@ -86,6 +86,17 @@ def run():
     reject('unknown-failure-class-mutation',lambda:verify.old.validate_diagnostic(changed,frozen,{}))
     for key in custody.ROSTERS:
         reject('missing-complete-roster-'+key,lambda x=key:custody.check_rosters({a:[]for a in custody.ROSTERS if a!=x}))
+    from reader import validate_pointsets
+    feature={'id':'c','geometry':{'type':'Polygon','coordinates':[[[0,0],[1,0],[1,1],[0,0]]]}}
+    member={'id':'m','geometry':feature['geometry'],'metadata':{'original_value':1}}
+    scope={'component_ids':['c'],'member_ids':['m'],'existing_current_component_and_member_pins':[{'id':'c','canonical_feature_sha256':custody.SHA(custody.canon(feature)),'geometry_sha256':custody.SHA(custody.canon(feature['geometry']))}],'retired_member_complete_record_pins':[{'id':'m','canonical_record_sha256':custody.SHA(custody.canon(member)),'canonical_geometry_sha256':custody.SHA(custody.canon(member['geometry'])),'metadata':member['metadata']}]}
+    validate_pointsets(scope,{'c':feature},{'m':member});passed.append('full-source-pointset-and-metadata-positive')
+    coordinate=copy.deepcopy(feature);coordinate['geometry']['coordinates'][0][1][0]=1.0
+    assert coordinate==feature and custody.canon(coordinate)!=custody.canon(feature)
+    reject('source-coordinate-numerical-equality-not-byte-identity',lambda:validate_pointsets(scope,{'c':coordinate},{'m':member}))
+    metadata=copy.deepcopy(member);metadata['metadata']['original_value']=1.0
+    assert metadata==member and custody.canon(metadata)!=custody.canon(member)
+    reject('source-metadata-numerical-equality-not-byte-identity',lambda:validate_pointsets(scope,{'c':feature},{'m':metadata}))
     with tempfile.TemporaryDirectory(dir=P/'.cache')as directory:
         tmp=pathlib.Path(directory);target=tmp/'git-option-output'
         # Actual command entry must reject before Git can interpret any option.
@@ -101,6 +112,17 @@ def run():
         reject('ordinary-read-absolute',lambda:verify.checked_output(tmp,str(ordinary)))
         reject('ordinary-read-symlink-ancestor',lambda:verify.checked_output(tmp,'linked/ordinary.json'))
         assert verify.checked_output(tmp,'ordinary.json').read_bytes()==b'{}';passed.append('ordinary-read-complete-local-positive')
+        from evidence.immutable import deterministic_gzip
+        for name,key,value in [('coherently-rehashed-status-and-count-rebound','status','unknown-unmeasured'),('coherently-rehashed-mandatory-pointset-loss','original_minus_partition',None),('coherently-rehashed-member-reassignment','complete_member_ids',['other'])]:
+            changed=copy.deepcopy(row)
+            if value is None:del changed[key]
+            else:changed[key]=value
+            raw=custody.canon([changed]);encoded=deterministic_gzip(raw);out=tmp/'rehashed.json.gz';out.write_bytes(encoded)
+            pin={'path':out.name,'bytes':len(encoded),'sha256':custody.SHA(encoded),'decoded_bytes':len(raw),'decoded_sha256':custody.SHA(raw)}
+            authenticated=verify.read_pin(tmp,pin)[0]
+            rebound={'counts':{authenticated['status']:1},'literal_coverage_observations':{authenticated['coverage_observation']['status']:1}}
+            assert sum(rebound['counts'].values())==1
+            reject(name,lambda c=authenticated:verify.validate_row(c,expected,objects,original,family,ref,ref))
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=custody.R,text=True).strip();module=P/'numeric_kernel.py';original_read=pathlib.Path.read_bytes
     def dirty_read(path):return original_read(path)+b'\n# directed executed-code mutation\n' if path==module else original_read(path)
     with patch.object(pathlib.Path,'read_bytes',dirty_read):
