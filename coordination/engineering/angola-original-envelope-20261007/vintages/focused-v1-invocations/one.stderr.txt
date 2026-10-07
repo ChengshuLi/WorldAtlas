@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "<owned-checkout>/coordination/engineering/angola-original-envelope-20261007/run.py", line 45, in <module>
-    main()
-  File "<owned-checkout>/coordination/engineering/angola-original-envelope-20261007/run.py", line 41, in main
-    loaded.run(REPO, a, module, code, own)
-  File "<owned-checkout>/coordination/engineering/angola-original-envelope-20261007/producer.py", line 189, in run
-    raise ValueError('Missing complete selected family; byte-frame boundary requires additional containing frame')
-ValueError: Missing complete selected family; byte-frame boundary requires additional containing frame
