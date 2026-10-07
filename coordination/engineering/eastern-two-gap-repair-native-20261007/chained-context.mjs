@@ -2,9 +2,11 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFileSync}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
 import{restoreWholeImage}from'./whole-image.mjs';import{validateContextMigration}from'../../../scripts/native-ownership/validate-context-migration.mjs';
 import{candidateBudget,requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../../../scripts/evidence-quality.mjs';
+import{validateNativeSelectionReceipt}from'../../../scripts/native-ownership/require-verified-selection.mjs';
 import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export const FIXED_PRIOR_STAGE_SHA='471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765';
+export const FIXED_NATIVE_COMPARISON_SHA='3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28';
 export const FIXED_PRIOR_VALIDATOR_SHA='5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7';
 export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile}){
  requirePlainExecution();assert.equal(stage.version,2);assert.equal(stage.issue,1295);assert.equal(stage.kind,'retained-identity-context-continuation-v2');assert.equal(stage.lane,'engineering');
@@ -37,13 +39,18 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  assert.equal(prior.status,'verified');assert.equal(prior.migration.locations,49625);assert.equal(prior.migration.footprints_sha256,BEFORE);assert.equal(prior.migration.successor_release_id,predecessor.id);
  function legacyContext(pin){const index=JSON.parse(fs.readFileSync(path.join(image,pin.path))),rows=[];for(const p of index.parts){const base=p.reused_from??pin.path;const raw=fs.readFileSync(path.join(image,path.posix.dirname(base),p.path));assert.equal(raw.length,p.bytes);assert.equal(sha(raw),p.sha256);const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,p.uncompressed_bytes);assert.equal(sha(decoded),p.uncompressed_sha256);rows.push(...JSON.parse(decoded));}return {index,rows};}
  const before=legacyContext(oldStage.after_context),afterIndex=JSON.parse(read(stage.after_context)),after=[];
+ const nativeComparisonRaw=read(stage.native_comparison);assert.equal(sha(nativeComparisonRaw),FIXED_NATIVE_COMPARISON_SHA);
+ const nativeComparison=JSON.parse(nativeComparisonRaw),nativeManifestRaw=read(stage.native_manifest),nativeManifest=JSON.parse(nativeManifestRaw);
+ validateNativeSelectionReceipt(nativeManifest,sha(nativeManifestRaw),nativeComparison);
+ const originalContextProduct=nativeComparison.products.find(p=>p.path==='context-index.json');assert.equal(stage.after_context.bytes,originalContextProduct.bytes);assert.equal(stage.after_context.sha256,originalContextProduct.sha256);
  assert(stage.after_context_image,'Complete retained successor-context transport required');
  const afterImageRaw=read(stage.after_context_image),afterImageIndex=JSON.parse(afterImageRaw),afterImageBase=path.posix.dirname(stage.after_context_image.path);
  for(const pin of afterImageIndex.parts)read({path:afterImageBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
  assert.deepEqual(afterImageIndex.files.map(p=>p.path).sort(),afterIndex.parts.map(p=>p.path).sort(),'Complete original context body roster required');
  const afterImage=path.join(temporary,'successor-context');restoreWholeImage(path.join(root,afterImageBase),afterImage,{expectedIndexSha:stage.after_context_image.sha256});
  for(const pin of afterIndex.parts){
-  safeEvidencePath(pin.path);const retained=afterImageIndex.files.find(p=>p.path===pin.path);
+  safeEvidencePath(pin.path);const originalProduct=nativeComparison.products.find(p=>p.path===pin.path);assert.equal(pin.bytes,originalProduct.bytes);assert.equal(pin.sha256,originalProduct.sha256);
+  const retained=afterImageIndex.files.find(p=>p.path===pin.path);
   assert.equal(retained.mode,'100644');assert.equal(retained.bytes,pin.bytes);assert.equal(retained.sha256,pin.sha256);
   assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');
   assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
