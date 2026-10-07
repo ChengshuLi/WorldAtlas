@@ -263,10 +263,15 @@
       "path": "test/premerge-evidence.test.mjs",
       "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
       "bytes": 22314
+    },
+    {
+      "path": "src/regional-import-gate.js",
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d",
+      "bytes": 7292
     }
   ],
   "stdout_sha256": "d9e748505ce310c7f376bbe9ce80878abbccf8d2c12cbed659d2c2933328b70f",
   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "limitation": "38 focused code controls, including six coupled controls; no complete context/world scientific execution. Actual full retained context continuation remains required in hosted package CI.",
-  "code_closure_note": "Complete literal static test import closure plus all authenticated dynamically imported original modules; captured source namespace stays separate from current realm."
+  "code_closure_note": "Complete literal test import/re-export closure plus all authenticated dynamically imported original modules; captured source namespace stays separate from current realm."
 }
