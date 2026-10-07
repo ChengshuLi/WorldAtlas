@@ -22,6 +22,35 @@ class Controls(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'immutable lowercase'):
                     p.authenticate(value)
 
+    def test_actual_executed_byte_mutation(self):
+        original=p.read_git
+        def changed(commit,path):
+            raw=original(commit,path)
+            return raw+b'\n# changed actual binding' if path=='scripts/evidence/geometry.py' else raw
+        with patch.object(p,'read_git',side_effect=changed):
+            with self.assertRaisesRegex(ValueError,'Actual execution bytes differ'):
+                p.authenticate(COMMIT)
+
+    def test_runtime_mutation(self):
+        with patch.object(p,'PINNED',dict(p.PINNED,geos='unknown')):
+            with self.assertRaisesRegex(ValueError,'runtime mismatch'):
+                p.authenticate(COMMIT)
+
+    def test_output_guard_before_inputs(self):
+        values=['relative',str(p.ROOT/'.cache/1293'),str(p.ROOT/'.cache/1293/../outside'),str(p.ROOT/'outside')]
+        with patch.object(p,'authenticate',return_value=({},[],{},None)),patch.object(p,'Baseline',side_effect=AssertionError('inputs called')):
+            for value in values:
+                with self.subTest(value=value),self.assertRaises(ValueError):p.run(COMMIT,value)
+
+    def test_retained_symlink_and_missing(self):
+        scratch=CASE/'.cache';scratch.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=scratch) as folder:
+            target=Path(folder)/'alias';target.symlink_to(CASE/'config.json')
+            pin={'path':str(target.relative_to(p.ROOT)),'bytes':0,'sha256':'0'*64}
+            with self.assertRaisesRegex(ValueError,'symlink'):p.checked_retained(pin)
+            target.unlink()
+            with self.assertRaises(FileNotFoundError):p.checked_retained(pin)
+
     def test_actual_cli_no_write(self):
         with tempfile.TemporaryDirectory() as scratch:
             target = Path(scratch) / 'not-created'
