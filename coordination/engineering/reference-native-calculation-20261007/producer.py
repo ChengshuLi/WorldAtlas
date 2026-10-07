@@ -108,6 +108,57 @@ def actual_inputs(commit):
     return owned,source,plan
 
 
+def runtime_body_closure(owned,source,actual):
+    frozen=owned.json(NS+'runtime-plan.json')
+    old=source.json(N+'runtime-plan.json')
+    if (frozen['upstream_runtime_commit']!=C or frozen['upstream_runtime_plan_path']!=N+'runtime-plan.json' or
+            frozen['upstream_runtime_plan_sha256']!=source.pins[N+'runtime-plan.json']['sha256']):
+        raise ValueError('Authentic complete upstream runtime binding required')
+    members=old['members']; hashes=[hashlib.sha256() for _ in members]
+    counts=[0 for _ in members];offset=0
+    for pin in old['frames']:
+        raw=source.read(pin['path'])
+        if reader.sha(raw)!=pin['sha256'] or len(raw)!=pin['bytes'] or pin['offset']!=offset:
+            raise ValueError('Complete ordered runtime frame drift')
+        data=reader.gunzip(raw,pin['decoded_bytes'])
+        if reader.sha(data)!=pin['decoded_sha256']:
+            raise ValueError('Runtime decoded frame drift')
+        for j,m in enumerate(members):
+            start=max(offset,m['offset']);end=min(offset+len(data),m['offset']+m['length'])
+            if start<end:
+                hashes[j].update(data[start-offset:end-offset]);counts[j]+=end-start
+        offset+=len(data)
+    if offset!=old['raw_bytes'] or len(members)!=332:
+        raise ValueError('Whole332 upstream runtime roster required')
+    known={};end=0
+    for m,h,count in zip(members,hashes,counts):
+        if m['offset']!=end or count!=m['bytes'] or m['length']!=m['bytes'] or h.hexdigest()!=m['sha256']:
+            raise ValueError('Whole upstream runtime member byte relation drift')
+        end+=m['length'];known[m['path']]=(m['bytes'],m['sha256'])
+    extras=frozen['additional_runtime_bodies']
+    if [p['module'] for p in extras]!=['numpy.ma','numpy.ma.core','numpy.ma.extras']:
+        raise ValueError('Complete extra actual runtime roster required')
+    for pin in extras:
+        raw=owned.read(pin['ordinary_path'])
+        if len(raw)!=pin['bytes'] or reader.sha(raw)!=pin['sha256']:
+            raise ValueError('Actual extra runtime wholebody drift')
+        known[pin['path']]=(pin['bytes'],pin['sha256'])
+    paths=[actual['python'],*actual['loaded_module_files'].values()]
+    project_paths={str(HERE/n) for n in CODE}
+    for pin in paths:
+        if pin['path'] in project_paths:
+            relative=NS+Path(pin['path']).name
+            if owned.pins[relative]['sha256']!=pin['sha256'] or owned.pins[relative]['bytes']!=pin['bytes']:
+                raise ValueError('Actual runtime project body drift')
+        elif known.get(pin['path'])!=(pin['bytes'],pin['sha256']):
+            raise ValueError('Actual loaded runtime body omitted or changed')
+    if actual!=frozen['actual_runtime']:
+        raise ValueError('Actual warmed runtime/operator snapshot drift')
+    return frozen,{'whole_upstream_members':332,'whole_upstream_frames':4,
+        'additional_whole_runtime_members':len(extras),'actual_loaded_modules':len(actual['loaded_module_files']),
+        'runtime_paths_project_code_separately_bound':True}
+
+
 def run(commit,name,*,inputs_only=False):
     reader.exact_commit(commit)
     if not name or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789-' for c in name):
@@ -129,12 +180,11 @@ def run(commit,name,*,inputs_only=False):
     products.records(original,bodies,complete['ids'])
     warm=native_runtime.warm(guard,objects)
     actual_runtime=native_runtime.snapshot(guard,objects)
+    expected,body_proof=runtime_body_closure(owned,source,actual_runtime)
+    budget=custody.budget(list(source.pins.values())+list(owned.pins.values()),reserve=64*1024*1024)
     if inputs_only:
         return {'status':'PASS','scope':'complete171 original inputs/49625 pointset join/346346 original rows and tiny actual operators only',
-            'budget':budget,'actual_runtime':actual_runtime,'tiny_operator_positive':warm,'no_target_GIS_calculation':True}
-    expected=owned.json(NS+'runtime-plan.json')
-    if actual_runtime!=expected['actual_runtime']:
-        raise ValueError('Actual warmed scientific runtime does not match frozen plan')
+            'budget':budget,'runtime_whole_body_proof':body_proof,'actual_runtime':actual_runtime,'tiny_operator_positive':warm,'no_target_GIS_calculation':True}
     # Every output is fresh and job-local; original bytes are never changed.
     out.mkdir();private=out/'private-native-originals';private.mkdir()
     custody_plan=source.json(N+'input-plan.json')
