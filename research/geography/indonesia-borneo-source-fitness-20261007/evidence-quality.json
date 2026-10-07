@@ -247,6 +247,10 @@
       "status": "added"
     },
     {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/assess-big-ksp-overlay.py",
+      "status": "added"
+    },
+    {
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/build-subject-inventory.py",
       "status": "added"
     },
@@ -292,6 +296,10 @@
     },
     {
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/metadata/big-2022-ksp-layer.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/metadata/big-2022-ksp-overlay-receipt.json",
       "status": "added"
     },
     {
@@ -508,6 +516,18 @@
     },
     {
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-fifteen/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-three/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-two/big-ksp-overlay-assessment.json",
       "status": "added"
     },
     {
@@ -1034,6 +1054,13 @@
       ],
       "status": "unresolved",
       "text": "Physical cause, dry-land status, local positional accuracy, legal authority, and BIG polygon reuse remain unresolved. The 21 numeric-closure IDs and 1,078,088,489.3853252 m² route area sum are inherited source-relative diagnostics. No geography approval, correction, import, release change, or publication is proposed."
+    },
+    {
+      "source_ids": [
+        "big-administrative-layer-metadata"
+      ],
+      "status": "unresolved",
+      "text": "A pinned BIG 2022 KSP geometry query produced 47 positive-area component-feature intersections across 43 components; two have no intersection in the bounded returned subset. This does not establish official jurisdiction, legal authority, completeness, positional accuracy, or whether unmatched geometry reflects a source gap. Reuse rights remain unknown."
     }
   ],
   "issue": 1355,
@@ -1046,6 +1073,14 @@
       "kind": "generator",
       "software": "Python 3.12; NumPy 2.3.5; Shapely 2.1.2; Rasterio 1.4.3; pinned repository evidence immutable.py and contracts.py; exact versions in sources/v1/requirements.txt.",
       "units": "component/source identities; topological contact dimension; per-component all-touched pixel counts; inherited square metres clearly labelled as source-relative."
+    },
+    {
+      "id": "big-ksp-administrative-overlay",
+      "kind": "generator",
+      "description": "Query the official BIG KSP 2022 ADM2 area layer for features intersecting the WGS84 envelope of all 45 pinned components; verify exact response pins and classify all direct, unbuffered component-feature intersections without retaining source geometry.",
+      "software": "Python 3.12; Shapely 2.1.2; assess-big-ksp-overlay.py; public BIG ArcGIS REST feature query.",
+      "helper_version": "big-source-overlay-v1",
+      "units": "component-feature pairs and topological relation classifications; no area values."
     }
   ],
   "metric_bindings": [
@@ -1118,6 +1153,36 @@
       "json_pointer": "/raster_component_observation_count",
       "metric_id": "raster_observed_component_count",
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-thirty-eight/assessment.json.gz"
+    },
+    {
+      "metric_id": "big_ksp_source_feature_count",
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "json_pointer": "/scope/source_feature_count"
+    },
+    {
+      "metric_id": "big_ksp_component_source_pair_count",
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "json_pointer": "/scope/candidate_pair_count"
+    },
+    {
+      "metric_id": "big_ksp_positive_area_intersection_count",
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "json_pointer": "/summary/intersection_count_by_relation/positive_area"
+    },
+    {
+      "metric_id": "big_ksp_components_with_intersection",
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "json_pointer": "/summary/components_with_intersection"
+    },
+    {
+      "metric_id": "big_ksp_components_without_intersection",
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "json_pointer": "/summary/components_without_intersection"
+    },
+    {
+      "metric_id": "big_ksp_positive_length_intersection_count",
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "json_pointer": "/summary/intersection_count_by_relation/positive_length"
     }
   ],
   "metrics": [
@@ -1232,22 +1297,70 @@
       "unit": "components with source raster observations",
       "value": 45,
       "vintage": "archived"
+    },
+    {
+      "id": "big_ksp_source_feature_count",
+      "unit": "source features",
+      "value": 12,
+      "input_sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "evaluation_commit": "886eac9b58d63274f1ca4ca5167d5bd7eae55b7b",
+      "vintage": "archived"
+    },
+    {
+      "id": "big_ksp_component_source_pair_count",
+      "unit": "component × source-feature pairs",
+      "value": 540,
+      "input_sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "evaluation_commit": "886eac9b58d63274f1ca4ca5167d5bd7eae55b7b",
+      "vintage": "archived"
+    },
+    {
+      "id": "big_ksp_positive_area_intersection_count",
+      "unit": "positive-area intersections",
+      "value": 47,
+      "input_sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "evaluation_commit": "886eac9b58d63274f1ca4ca5167d5bd7eae55b7b",
+      "vintage": "archived"
+    },
+    {
+      "id": "big_ksp_components_with_intersection",
+      "unit": "components",
+      "value": 43,
+      "input_sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "evaluation_commit": "886eac9b58d63274f1ca4ca5167d5bd7eae55b7b",
+      "vintage": "archived"
+    },
+    {
+      "id": "big_ksp_components_without_intersection",
+      "unit": "components",
+      "value": 2,
+      "input_sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "evaluation_commit": "886eac9b58d63274f1ca4ca5167d5bd7eae55b7b",
+      "vintage": "archived"
+    },
+    {
+      "id": "big_ksp_positive_length_intersection_count",
+      "unit": "positive-length intersections",
+      "value": 0,
+      "input_sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "evaluation_commit": "886eac9b58d63274f1ca4ca5167d5bd7eae55b7b",
+      "vintage": "archived"
     }
   ],
   "outputs": [
     {
-      "bytes": 12077,
+      "bytes": 14271,
       "hash_kind": "file-bytes",
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/findings.md",
       "role": "evidence",
-      "sha256": "d319488b3c70c4bd2f8ca4690a8006ee0014302a4690273ce8412d20441d84b9"
+      "sha256": "59f64ce7b642a22d199baa21dae56db93324a9bf31871f5b249fda44e301b8c9"
     },
     {
-      "bytes": 4527,
+      "bytes": 5187,
       "hash_kind": "file-bytes",
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/README.md",
       "role": "evidence",
-      "sha256": "5999b9799b227bc9374fe3cf2dc94aa11509f5c2ee764a4e6b7a2059a41ea325"
+      "sha256": "df8c57eb28512c23d36a8d449bb9fa0b5b6f8b3ffe2cfc270fa98b3ff48c725e"
     },
     {
       "bytes": 2535,
@@ -2494,6 +2607,41 @@
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-two/publication.json",
       "role": "superseded-development-evidence",
       "sha256": "6b6b4754bda112a20ca4eb6af2bea2c66d8f83ad04eaaf7f38fc5c41bceac0c7"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/assess-big-ksp-overlay.py",
+      "bytes": 8705,
+      "sha256": "fada1d5cf5cff4f382940ca78680f0a3310642ae8f49efb5f5a2431847d6d3d4",
+      "hash_kind": "file-bytes",
+      "role": "source assessment method"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/metadata/big-2022-ksp-overlay-receipt.json",
+      "bytes": 2425,
+      "sha256": "9bac830e06b2bfe87baf44bc8fd7bcc4958ccbb7f2ad8dbcec2ac39cc7b7fc5d",
+      "hash_kind": "file-bytes",
+      "role": "source retrieval receipt"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-one/big-ksp-overlay-assessment.json",
+      "bytes": 19938,
+      "sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "hash_kind": "file-bytes",
+      "role": "generated source overlay assessment"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-two/big-ksp-overlay-assessment.json",
+      "bytes": 19938,
+      "sha256": "9a23a4b0dbf44bfe66701672dda96c0cdb03fc08abe3d604bfbdd18e153f5a0d",
+      "hash_kind": "file-bytes",
+      "role": "independent deterministic reproduction"
+    },
+    {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-three/reproducibility.json",
+      "bytes": 607,
+      "sha256": "30c4ba415dd7012a1baa06fc57f6b2e76700a630f27785faa186378a18365a12",
+      "hash_kind": "file-bytes",
+      "role": "reproducibility comparison receipt"
     }
   ],
   "review_kind": "source",
@@ -2687,15 +2835,24 @@
         "status": "unknown",
         "terms": "The inspected layer metadata has empty copyrightText and states no open redistribution license for BIG polygon geometry; KSP portal describes governed access/data sharing."
       },
-      "limit": "BIG polygon reuse and legal authority remain unresolved pending direct reuse terms or lawful access.",
-      "restoration": "Exact metadata JSON responses are preserved as evidence outputs at sources/v1/metadata/big-2022-ksp-layer.json and big-2023-rbi-layer.json; no BIG polygon response or derivative geometry is retained or used.",
+      "limit": "Layer metadata does not state an open redistribution license; raw geometry is preserved only outside the repository. Overlay is a correspondence screen, not authority, completeness, effective date or local accuracy. Two components have no intersection in the bounded returned subset.",
+      "restoration": "Metadata responses remain under sources/v1/metadata/. Geometry response hash, byte length, selected object IDs, exact query and retrieval time are in metadata/big-2022-ksp-overlay-receipt.json; raw response is held in the workspace ignored preservation area and omitted from the repository.",
       "retention": "restoration-only",
-      "retrieved_at": "2026-10-07; exact metadata response hashes and date precision are retained in metadata/big-source-receipts.json.",
-      "role": "Primary service metadata assessment for BIG 2022 KSP and the separate 2023 RBI polygon layer.",
+      "retrieved_at": "2026-10-07T13:45:41.811184Z polygon response; 2026-10-07T13:46:42.975446Z feature-ID selection response.",
+      "role": "Primary BIG 2022 KSP layer metadata and official administrative polygon overlay receipt.",
       "temporal_status": "unknown",
       "url": "https://kspservices.big.go.id/satupeta/rest/services/PUBLIK/BATAS_WILAYAH/MapServer/2?f=pjson",
-      "verification": "unverified",
-      "vintage": "2022 KSP layer revised December 2022; companion 2023 RBI service metadata."
+      "verification": "verified",
+      "vintage": "2022 KSP layer revised December 2022; companion 2023 RBI service metadata.",
+      "files": [
+        {
+          "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/metadata/big-2022-ksp-overlay-receipt.json",
+          "bytes": 2425,
+          "sha256": "9bac830e06b2bfe87baf44bc8fd7bcc4958ccbb7f2ad8dbcec2ac39cc7b7fc5d",
+          "hash_kind": "file-bytes",
+          "role": "evidence"
+        }
+      ]
     }
   ],
   "stages": {
@@ -2829,6 +2986,36 @@
       "metric_id": "raster_observed_component_count",
       "unit": "components with source raster observations",
       "value": 45
+    },
+    {
+      "metric_id": "big_ksp_source_feature_count",
+      "unit": "source features",
+      "value": 12
+    },
+    {
+      "metric_id": "big_ksp_component_source_pair_count",
+      "unit": "component × source-feature pairs",
+      "value": 540
+    },
+    {
+      "metric_id": "big_ksp_positive_area_intersection_count",
+      "unit": "positive-area intersections",
+      "value": 47
+    },
+    {
+      "metric_id": "big_ksp_components_with_intersection",
+      "unit": "components",
+      "value": 43
+    },
+    {
+      "metric_id": "big_ksp_components_without_intersection",
+      "unit": "components",
+      "value": 2
+    },
+    {
+      "metric_id": "big_ksp_positive_length_intersection_count",
+      "unit": "positive-length intersections",
+      "value": 0
     }
   ],
   "validation": [
@@ -2849,6 +3036,12 @@
       "kind": "reproducibility",
       "method_id": "source-fitness-generation",
       "outcome": "passed"
+    },
+    {
+      "kind": "reproducibility",
+      "method_id": "big-ksp-administrative-overlay",
+      "outcome": "passed",
+      "evidence_path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/run-forty-three/reproducibility.json"
     }
   ],
   "version": 1,
