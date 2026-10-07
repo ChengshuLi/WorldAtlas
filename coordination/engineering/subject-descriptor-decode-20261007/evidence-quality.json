@@ -1,0 +1,1209 @@
+{
+  "version": 1,
+  "issue": 1393,
+  "lane": "engineering",
+  "worker_id": "01a10fea-fe9b-7722-a974-0269a733a330",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+    "files": [
+      {
+        "bytes": 2080037,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "bytes": 2081609,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "bytes": 2080126,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "bytes": 2081831,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "bytes": 2074475,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "bytes": 2080606,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "bytes": 2085907,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "bytes": 2079265,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "bytes": 2085110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "bytes": 2079838,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "bytes": 1714760,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "bytes": 5144571,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-10.json",
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 14753,
+        "sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/evidence-quality.test.mjs",
+        "bytes": 9677,
+        "sha256": "11faea09b86bd194a852a674c482b52db8e8a840e7bf2cb589e26470fc1975e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+        "bytes": 9460,
+        "sha256": "5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/validate-context-input-stage.mjs",
+        "bytes": 9478,
+        "sha256": "c8f993458f46ca21d5d10619ac1a77ec86ba45b7e5e8ab20b921fe0f8da0406f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/validate-context-migration.mjs",
+        "bytes": 5078,
+        "sha256": "34c94e25f8d17f424e82511ecaf85c4f1c0449579f90b218aba264a69b6c2bf0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/native-only-inputs.mjs",
+        "bytes": 6822,
+        "sha256": "4599b7c42b248268c1e8a419857835e0e1ef336a4a260385630184cffc8e94d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/compact-context-inputs.mjs",
+        "bytes": 2093,
+        "sha256": "bba188fcb97fadcce680959694c8b9617720b5fd30b68e42202611d5fac62bf2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+        "bytes": 1540,
+        "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "bytes": 6371,
+        "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "bytes": 4472,
+        "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/audit-grid-intervals.mjs",
+        "bytes": 6777,
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/prepare-geographic-release.mjs",
+        "bytes": 47459,
+        "sha256": "dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-prepared.mjs",
+        "bytes": 3133,
+        "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/read-geographic-release-manifest.mjs",
+        "bytes": 3978,
+        "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/native-runtime.js",
+        "bytes": 3497,
+        "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 6408,
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/geographic-releases.js",
+        "bytes": 17288,
+        "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/native-context-migration/manifest.json",
+        "bytes": 6278,
+        "sha256": "471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/package-inputs.json",
+        "bytes": 8653,
+        "sha256": "6a6edbd480166dd2ea84860db87f652c848c987a264a8f39000fd962a831457c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-static-inner.mjs",
+        "bytes": 18343,
+        "sha256": "a265bab8b1c475819a83111e921245f27d449125b66ad77a33751749242bf6c4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 7069,
+        "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/github-quota.mjs",
+        "bytes": 1758,
+        "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/immutable-git-blobs.mjs",
+        "bytes": 2368,
+        "sha256": "36aeb2bc33eceb3782982b63e8d02199fd65893c0bc52781b7907f6915645645",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 17819,
+        "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/job-deadline.mjs",
+        "bytes": 4238,
+        "sha256": "c14b239a08d5b27f64253e164c8647b13ac0c593ffc21dc387982fbf11711a13",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/package-inputs.mjs",
+        "bytes": 3021,
+        "sha256": "b34b30e1d8bb1661558d2ec891ca4eb23f43d1844750dc3d600ff76a90a88a2e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 21033,
+        "sha256": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/research-import-gate.mjs",
+        "bytes": 335,
+        "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/regional-import-gate.js",
+        "bytes": 7292,
+        "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 22314,
+        "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "original_subject_validator": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb"
+    },
+    "pin_files": {
+      "original_subject_validator": "scripts/evidence-quality.mjs"
+    }
+  },
+  "sources": [
+    {
+      "id": "original-subject-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/ea7ba3eafb0f7b5a384920c79fb6ed42cf48a653",
+      "role": "Retained component/contact identity custody only",
+      "vintage": "ea7ba3eafb0f7b5a384920c79fb6ed42cf48a653",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms/date/physical authority remain as retained by original research; this fix grants no approval"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Read all twelve immutable whole Git files in source-plan.json; encoded and decoded descriptors are in the baseline",
+      "limit": "Subject membership/byte verification only; no numerical geography or source-fitness approval"
+    },
+    {
+      "id": "original-context-code",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "role": "Literal original validator code and unchanged existing context admission",
+      "vintage": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository and underlying source terms remain unchanged; no factual authority approval"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Use the seventeen literal legacy-context-v1 bodies and pinned index; original context data stays in existing package paths and its mandatory stage admission",
+      "limit": "Focused local controls only; complete original context continuation is separately verified by hosted package CI, not a newly combined scientific phase"
+    }
+  ],
+  "outputs": [
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 8835,
+      "sha256": "5e160bc8dbd6302b89ae83ce13d49e39550c82b679a75c18459107a2e5c87f66",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/README.md",
+      "bytes": 4942,
+      "sha256": "333c9d4b338a051af85e2c172a4f4dbd54342ae02773829936ac189764f37b4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/build-manifest.py",
+      "bytes": 7469,
+      "sha256": "3d94415592511f606855da732104bb79aee4c3f17542fb2cba827bc472b5b5da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/check-subjects.mjs",
+      "bytes": 3422,
+      "sha256": "ba18825a738d569817660f7b0e27653efdb7b4bcca2dd5c79db98a13b6cea69e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
+      "bytes": 6944,
+      "sha256": "0026e844448d2e0589214b555a77dc4a373ad8a2302789d413b6f992c746e316",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/fixtures/original-context-stage.json",
+      "bytes": 6278,
+      "sha256": "471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-complete-membership-proof.json",
+      "bytes": 12899,
+      "sha256": "9020b99333b07cdb1da462342b5be4f3f58ff25b423b0dbe1a09001e9b937124",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-real-entry-failure.json",
+      "bytes": 422,
+      "sha256": "2cdc656be4197eb3db5447167b6d4ee0df44d37373cbd0988c8a04c6d33bdd45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/coupled-preparation-failures.json",
+      "bytes": 678,
+      "sha256": "c08daafad676d7ab70425a45264e9873d6bb6c14696877caf57c7ad3af63a8a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/rejected-first-claim.json",
+      "bytes": 367,
+      "sha256": "5725f80a09698b261cab02bef991d47ea4fab56d579240185bc75dd4bf9ccc18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/hosted/geographic-releases.js",
+      "bytes": 17288,
+      "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/index.json",
+      "bytes": 3887,
+      "sha256": "51d3be21c7c95f9672acbd437348d5536880f6245b845ae78d9e1ae24e6c3c41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/check-prepared.mjs",
+      "bytes": 3133,
+      "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/evidence-quality.mjs",
+      "bytes": 14753,
+      "sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/compact-context-inputs.mjs",
+      "bytes": 2093,
+      "sha256": "bba188fcb97fadcce680959694c8b9617720b5fd30b68e42202611d5fac62bf2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/native-only-inputs.mjs",
+      "bytes": 6822,
+      "sha256": "4599b7c42b248268c1e8a419857835e0e1ef336a4a260385630184cffc8e94d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371,
+      "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-build-context-stage.mjs",
+      "bytes": 9460,
+      "sha256": "5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-context-input-stage.mjs",
+      "bytes": 9478,
+      "sha256": "c8f993458f46ca21d5d10619ac1a77ec86ba45b7e5e8ab20b921fe0f8da0406f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-context-migration.mjs",
+      "bytes": 5078,
+      "sha256": "34c94e25f8d17f424e82511ecaf85c4f1c0449579f90b218aba264a69b6c2bf0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/prepare-geographic-release.mjs",
+      "bytes": 47459,
+      "sha256": "dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978,
+      "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/source-plan.json",
+      "bytes": 22296,
+      "sha256": "874659cfa368ea723ae0b98271d83b5a4a9c374c81b773c2156464eb1d6f0c4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-negative-controls.json",
+      "bytes": 450,
+      "sha256": "2346630dde49a7835b5aa2017c24e738dd856592964f9bb19257ed375928384d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-positive-controls.json",
+      "bytes": 450,
+      "sha256": "03be0865d7ffe64c72fc3b25198bf73498bc9ed3c63870ad4d100570054d3f2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests-actual-execution.json",
+      "bytes": 11515,
+      "sha256": "b03eb17ebc06bc165f35dc5d6bd8c0381747b366f0a95de1bc195ab348a4b72a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests.stdout",
+      "bytes": 4032,
+      "sha256": "5cdb24e6b88807d98969c846b295d6ef1f64a0a2d1cb40fcade82ee28e536c3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests-actual-execution.json",
+      "bytes": 622,
+      "sha256": "f9fbef44b5cc82744a85e7325755b7bc1787e6959acb53b9ca085180f4715647",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stdout.txt",
+      "bytes": 3450,
+      "sha256": "adb212d942d8bc75fc82d93814e9640202ea8b06ab429d0e0a3a24d99a7ba8ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/negative-controls.json",
+      "bytes": 460,
+      "sha256": "8752cbe71d7941ef82a635ec3de07c217242ece761a7bf9801622210bcff25a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/original-context-data-admission.json",
+      "bytes": 54059,
+      "sha256": "9f4845483f792dc1c1d9e9ea2409873f2b4794bf5a4bd05d62078e53245b1f94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
+      "bytes": 460,
+      "sha256": "0f0aa3b99f62074a888a47a02cc6bc4f8f8714548b1deb16c7241161c70bc221",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-negative-controls.json",
+      "bytes": 422,
+      "sha256": "ccf988917e9b2be766395c924fce4395fad1aaea9b949de76d29ffc6928bffbb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-positive-controls.json",
+      "bytes": 422,
+      "sha256": "1a46288a647ca3f901873b9f78afa59d8eea8bf6ca6a880ff2a7824bf9ae8e73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests-actual-execution.json",
+      "bytes": 11322,
+      "sha256": "18fd7303c5cba29196e79234f3b789c85557d6a48d2afa6b0b3e450d0f47081b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stdout",
+      "bytes": 4040,
+      "sha256": "d9e748505ce310c7f376bbe9ce80878abbccf8d2c12cbed659d2c2933328b70f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-negative-controls.json",
+      "bytes": 446,
+      "sha256": "908dff132c0f0e3309906fd0907a9b6b2cbbe42a57634631d6cc0ee0b003093e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-positive-controls.json",
+      "bytes": 446,
+      "sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests-actual-execution.json",
+      "bytes": 11286,
+      "sha256": "84181ee17da44c6fe90d79522228b1476b57e780e5221926cc3c671d10a87e57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stdout",
+      "bytes": 4025,
+      "sha256": "330c04213a17049f2596a9a1b46ce069aff33a9895e500e6bc40b7a0fbab5355",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json",
+      "bytes": 462,
+      "sha256": "69a97a79658950a56ceaa678352dc38038535f120d4a65a2f9aed942f0db55bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-actual-execution.json",
+      "bytes": 814,
+      "sha256": "927ea7f59208e20e3a46f1b92d92038a43498bf8d14ff305556bbb1cfba6496a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "bytes": 8185,
+      "sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stdout",
+      "bytes": 233,
+      "sha256": "44d9ae6cd54e2a3edf45f2f2051d36c4c8d2fe5e7526ab0449fbfd0b472e60c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-actual-execution.json",
+      "bytes": 808,
+      "sha256": "ed5779949727761c15d64fb5d33f88aa4e899100c2ab6c5180bf907fe89ef34d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-subjects.json",
+      "bytes": 8185,
+      "sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stdout",
+      "bytes": 233,
+      "sha256": "b82d15971c23426a9a85d9a2042379b3b8a6357aef5b3974fdf55e04c8ee3e38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/runtime-and-code.json",
+      "bytes": 1473,
+      "sha256": "ec06d5bbcede0da7868bad17c5635308b34092ba653303b0df2a4bd7e4dbb108",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "bytes": 18414,
+      "sha256": "ce8a9cdbcac2d35b54477b1addc3b10d43c5911594f0650d54302f446db37c2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 15247,
+      "sha256": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/build-context-validation-vintage.test.mjs",
+      "bytes": 8659,
+      "sha256": "c8e7882ea117b9a9279a63d59f8e81b50f83d470d2a45d704648d59e8c933ec8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "bytes": 14771,
+      "sha256": "a6ccee6f79315ea4fa47c4f8bef359bc1a4dceb9180c1940298239e357a21e5d",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "subject-decode",
+      "kind": "code",
+      "description": "Declared gzip subject JSON through the existing bounded reader, exact baseline membership and real-entry controls",
+      "software": "Node24.19.0; Python metadata only; no GIS",
+      "units": "bytes and subject identities"
+    },
+    {
+      "id": "context-vintage",
+      "kind": "code",
+      "description": "Execute authentic original context validator and all original guards, then revalidate identical operands in current realm; no historical hash refresh",
+      "software": "Node24.19.0 ordinary invocation with no loader or preload",
+      "units": "whole bytes, identities and proof bindings"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "subject-decode",
+      "kind": "positive",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json"
+    },
+    {
+      "method_id": "subject-decode",
+      "kind": "negative",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/negative-controls.json"
+    },
+    {
+      "method_id": "subject-decode",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json"
+    },
+    {
+      "method_id": "context-vintage",
+      "kind": "positive",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-positive-controls.json"
+    },
+    {
+      "method_id": "context-vintage",
+      "kind": "negative",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-negative-controls.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "subject_count",
+      "value": 53,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "physical_components",
+      "value": 45,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "current_contacts",
+      "value": 8,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "numeric_siblings_preserved",
+      "value": 21,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "source_files",
+      "value": 12,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "69a97a79658950a56ceaa678352dc38038535f120d4a65a2f9aed942f0db55bc",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "passed_tests",
+      "value": 32,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "0f0aa3b99f62074a888a47a02cc6bc4f8f8714548b1deb16c7241161c70bc221",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "context_control_count",
+      "value": 6,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "03be0865d7ffe64c72fc3b25198bf73498bc9ed3c63870ad4d100570054d3f2e",
+      "evaluation_commit": "99160ebecb6e94f3419609810d81d33b019e875a"
+    },
+    {
+      "id": "all_focused_test_count",
+      "value": 38,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "03be0865d7ffe64c72fc3b25198bf73498bc9ed3c63870ad4d100570054d3f2e",
+      "evaluation_commit": "99160ebecb6e94f3419609810d81d33b019e875a"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "subject_count",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/subject_count"
+    },
+    {
+      "metric_id": "physical_components",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/physical_components"
+    },
+    {
+      "metric_id": "current_contacts",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/current_contacts"
+    },
+    {
+      "metric_id": "numeric_siblings_preserved",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/numeric_siblings_preserved"
+    },
+    {
+      "metric_id": "source_files",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json",
+      "json_pointer": "/source_files"
+    },
+    {
+      "metric_id": "passed_tests",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
+      "json_pointer": "/passed_tests"
+    },
+    {
+      "metric_id": "context_control_count",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-positive-controls.json",
+      "json_pointer": "/context_control_count"
+    },
+    {
+      "metric_id": "all_focused_test_count",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-positive-controls.json",
+      "json_pointer": "/all_focused_test_count"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "subject_count",
+      "value": 53,
+      "unit": "count"
+    },
+    {
+      "metric_id": "physical_components",
+      "value": 45,
+      "unit": "count"
+    },
+    {
+      "metric_id": "current_contacts",
+      "value": 8,
+      "unit": "count"
+    },
+    {
+      "metric_id": "numeric_siblings_preserved",
+      "value": 21,
+      "unit": "count"
+    },
+    {
+      "metric_id": "source_files",
+      "value": 12,
+      "unit": "count"
+    },
+    {
+      "metric_id": "passed_tests",
+      "value": 32,
+      "unit": "count"
+    },
+    {
+      "metric_id": "context_control_count",
+      "value": 6,
+      "unit": "count"
+    },
+    {
+      "metric_id": "all_focused_test_count",
+      "value": 38,
+      "unit": "count"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Corrected readers preserve complete membership and bounded decoding; source physical/date/license approvals remain unresolved",
+      "status": "unresolved",
+      "source_ids": [
+        "original-subject-custody",
+        "original-context-code"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs",
+    "node coordination/engineering/subject-descriptor-decode-20261007/check-subjects.mjs 4de4a4c2ed0c908eb08f3927b45ad73e75539b65 run-one|run-two",
+    "node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs test/build-context-validation-vintage.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/package-inputs.json",
+      "status": "modified",
+      "original_sha256": "6a6edbd480166dd2ea84860db87f652c848c987a264a8f39000fd962a831457c"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/build-manifest.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/check-subjects.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/fixtures/original-context-stage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-complete-membership-proof.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-real-entry-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/coupled-preparation-failures.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/rejected-first-claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/hosted/geographic-releases.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/index.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/audit-grid-intervals.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/check-prepared.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/evidence-quality.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/compact-context-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/compile-native-ownership.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/native-only-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/native-preparation-guards.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/read-pinned-build-file.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-build-context-stage.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-context-input-stage.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-context-migration.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/prepare-geographic-release.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/read-geographic-release-manifest.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/src/native-grid.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/src/native-runtime.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/source-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/original-context-data-admission.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-subjects.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/runtime-and-code.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "status": "modified",
+      "original_sha256": "a265bab8b1c475819a83111e921245f27d449125b66ad77a33751749242bf6c4"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "status": "modified",
+      "original_sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb"
+    },
+    {
+      "path": "test/build-context-validation-vintage.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "status": "modified",
+      "original_sha256": "11faea09b86bd194a852a674c482b52db8e8a840e7bf2cb589e26470fc1975e4"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
