@@ -28,6 +28,20 @@
       "prior_value": "The label producer-freeze-v2-e919 could imply the helper code was part of the e919 Git tree.",
       "corrected_value": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7 is the input/base vintage. The helper was not present in that Git tree; its exact whole-file SHA-256 is daeb6cb71fdb0f8d9b9938bf61259513670204e713214ff542f7f5bd753e5aaa, recorded in producer-freeze-v2-e919.json.",
       "reason": "Identify source/base and locally frozen producer separately."
+    },
+    {
+      "field": "source-fitness.md and evidence-quality.json source references",
+      "prior_values": {
+        "china-map-management-regulation": "https://www.gov.cn/zhengce/zhengceku/2015-12/14/content_10403.htm",
+        "china-public-map-standard-2023": "https://big5.www.gov.cn/gate/big5/www.gov.cn/gongbao/content/2023/content_5752310.htm",
+        "jrc-global-surface-water": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC143989/JRC143989_01.pdf"
+      },
+      "corrected_values": {
+        "china-map-management-regulation": "https://xzfg.moj.gov.cn/front/law/detail?LawID=421",
+        "china-public-map-standard-2023": "https://zrzyt.hunan.gov.cn/zrzyt/chglln/202302/t20230214_29246255.html",
+        "jrc-global-surface-water": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_Metadata"
+      },
+      "reason": "Replace two government mirrors that failed access and a JRC PDF identified as an unrelated biodiversity viewer. The replacement references support the narrower statements retained; no raster analysis or science run was added."
     }
   ]
 }
