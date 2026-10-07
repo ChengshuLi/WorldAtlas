@@ -76,7 +76,9 @@ def verify(root):
         raise ValueError('Complete global output counts differ')
     numeric = {i for i, r in R.items() if any(x.get('issue') in NUMERIC for x in r['unresolved'])}
     zero = {i for i, r in R.items() if any(x.get('issue') == 'nonempty-polygon-zero-ellipsoidal-area' for x in r['unresolved'])}
-    if len(numeric) != 26276 or len(zero) != 5 or any(R[i]['next_prerequisite'] != 'engineering-numeric-closure-first' for i in numeric):
+    closure = {i for i, r in R.items() if any(x.get('issue') == 'nonempty-support-closure-disagreement' for x in r['unresolved'])}
+    additional_zero = zero - closure
+    if len(numeric) != 26276 or len(zero) != 10 or len(additional_zero) != 5 or any(R[i]['next_prerequisite'] != 'engineering-numeric-closure-first' for i in numeric):
         raise ValueError('All numerical-first membership, including five zero-area cases, differs')
     family_members = []
     batch_families = []
@@ -136,7 +138,7 @@ def verify(root):
         raise ValueError('Complete compatible land/GEO prerequisite differs')
     return dict(status='PASS', report_sha256=sha((root/'report.json').read_bytes()),
         verifier_sha256=sha(pathlib.Path(__file__).read_bytes()), complete_components=len(R), complete_families=len(F),
-        complete_batches=len(B), complete_numeric_first=len(numeric), complete_zero_area_numeric_ids=sorted(zero),
+        complete_batches=len(B), complete_numeric_first=len(numeric), complete_zero_area_numeric_ids=sorted(zero), additional_zero_area_numeric_ids=sorted(additional_zero),
         whole_family_numeric_union_sha256=sha(canonical(sorted(numeric))), exact_measurement_partition_sums='PASS',
         complete_land_source_fitness_components=len(land), complete_land_families=711,
         complete_complement_groups=27, missing_source_bindings_subset=True,
