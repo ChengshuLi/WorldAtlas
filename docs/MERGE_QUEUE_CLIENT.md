@@ -25,6 +25,17 @@ before deciding what action is justified; an observation timeout is not cancella
 or evidence that the request is live. A failed registration is reported explicitly.
 Incomplete registration searches or comment pagination fail safely.
 
+The trusted registration job separately binds its retries to the current job's
+actual start and five-minute workflow timeout. A wait must leave room for the next
+HTTP attempt and refusal/accounting. It reports quota/deadline refusal under the
+same request identity and fails the registration job; that failure cannot imply a
+successful durable request or trigger a duplicate submission. Timing metadata is
+one bounded, non-retried current-attempt Actions jobs read. An unavailable timing
+authority refuses before queue writes. Inspect the actual workflow/result before
+an authorized retry, especially after an uncertain POST. The ten-minute scheduler
+uses its own corresponding job budget; local observation retains its separate
+65-minute deadline.
+
 The observer uses one-minute then two/four/five-minute waits with bounded jitter.
 Once the durable request exists, it reads result comments rather than repeatedly
 checking PR state or successful registration. Complete pagination remains required.

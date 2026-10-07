@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "job-deadline-admission-1275-20261007",
+  "branch": "engineering/job-deadline-admission-1275-20261007",
+  "base_main_commit": "993f79e82bf5da34a208ea4a1b4edbd78e4e559e",
+  "github_issue": 1275,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Bind registration/scheduling quota read admission to actual remaining job time, preserve existing queue authority and controlled refusal/accounting"
+  ],
+  "dependencies": [
+    1249
+  ],
+  "updated_at_utc": "2026-10-07T07:41:08.034Z",
+  "completed": [
+    "Actual-job timing and shared HTTP deadline integration implemented",
+    "Real entrypoint/CLI/adverse controls pass; no live exhaustion or provider writes"
+  ],
+  "checks": [
+    {
+      "check": "original-plus-deadline-controls",
+      "status": "passed"
+    },
+    {
+      "check": "scope-entrypoint-trusted-sparse-controls",
+      "status": "passed"
+    }
+  ],
+  "deployment": "No deployment or import; trusted scheduler implementation not yet merged",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/job-deadline-admission-1275-20261007/README.md",
+    "coordination/engineering/job-deadline-admission-1275-20261007/verification.json",
+    "coordination/engineering/job-deadline-admission-1275-20261007/controls.txt",
+    "coordination/engineering/job-deadline-admission-1275-20261007/scope-controls.txt"
+  ],
+  "blockers": [],
+  "next_action": "Local full evidence/scope validation, hosted CI, independent exact-head review, normal queue, actual-main and subsequent normal hosted timing verification",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

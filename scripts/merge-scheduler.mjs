@@ -63,14 +63,14 @@ export async function registerRequest({api, repo, request}) {
   }
   return api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'request'})});
 }
-export async function scheduleNext({api, repo, now = Date.now()}) {
+export async function scheduleNext({api, repo, now = Date.now(), clock = () => now}) {
   // Observe the actual repository bucket before spending any dispatch attempt.
   // This is a refusal gate, not a reservation against other consumers.
   if(typeof api.readRepositoryCapacity==='function'){
     let capacity;
     try{capacity=await api.readRepositoryCapacity(repo);}
-    catch(error){const delay=quotaDelay(error,now);if(delay===null)throw error;return {status:'waiting-quota',retry_at:new Date(now+delay).toISOString()};}
-    if(capacity.remaining<17)return {status:'waiting-quota',retry_at:new Date(Math.max(now+1000,capacity.reset*1000+1000)).toISOString()};
+    catch(error){const observed=clock(),delay=quotaDelay(error,observed);if(delay===null)throw error;return {status:'waiting-quota',retry_at:new Date(observed+delay).toISOString()};}
+    if(capacity.remaining<17)return {status:'waiting-quota',retry_at:new Date(Math.max(clock()+1000,capacity.reset*1000+1000)).toISOString()};
   }
   // This routine runs only in the short serialized scheduler job. GitHub may
   // coalesce pending scheduler ticks; requests are separate durable comments.
@@ -82,7 +82,7 @@ export async function scheduleNext({api, repo, now = Date.now()}) {
   if(entry.result?.quota_retry_at){
     const retryAt=Date.parse(entry.result.quota_retry_at);
     if(!Number.isFinite(retryAt))throw Error('Invalid durable quota recovery checkpoint');
-    if(retryAt>now)return {status:'waiting-quota',request_id:request.request_id,retry_at:entry.result.quota_retry_at};
+    if(retryAt>clock())return {status:'waiting-quota',request_id:request.request_id,retry_at:entry.result.quota_retry_at};
   }
   const finish = async reason => {
     const result = {accepted: false, status: 'not-merged', retryable: false, ...request, reason};
@@ -97,7 +97,7 @@ export async function scheduleNext({api, repo, now = Date.now()}) {
     const response = await api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=100`);
     const run = response.workflow_runs?.find(row => row.display_title === executionTitle(request, last.attempt));
     if (run && run.status !== 'completed') return {status: 'live', run_ids: [run.id]};
-    if (!run && now - Date.parse(last.dispatched_at) < 120000) return {status: 'awaiting-dispatch', request_id: request.request_id};
+    if (!run && clock() - Date.parse(last.dispatched_at) < 120000) return {status: 'awaiting-dispatch', request_id: request.request_id};
     if (run) {
       // Preserve each cancelled/failed attempt even if its final job never ran.
       await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'dispatch',
@@ -106,7 +106,7 @@ export async function scheduleNext({api, repo, now = Date.now()}) {
   }
   const attempt = (last?.attempt ?? 0) + 1;
   if (attempt > MAX_ATTEMPTS) return finish('Queue recovery exhausted three terminal/absent executions; inspect durable attempt receipts and resubmit unchanged reviewed head');
-  await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'dispatch', attempt, dispatched_at: new Date(now).toISOString()})});
+  await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'dispatch', attempt, dispatched_at: new Date(clock()).toISOString()})});
   await api(`/repos/${repo}/actions/workflows/worker-merge.yml/dispatches`, 'POST', {ref: 'main', inputs: {
     pr_number: String(pr.number), expected_head: request.expected_head, request_id: request.request_id, queue_attempt: String(attempt)}});
   return {status: 'dispatched', request_id: request.request_id, attempt};

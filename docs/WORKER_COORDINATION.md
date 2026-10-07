@@ -333,6 +333,34 @@ cannot be recovered by rerunning just that final job under the resolved ticket.
 Local controls demonstrate pacing and rejection, not hosted quota recovery;
 record actual same-token hosted observations separately when those conditions occur.
 
+### Registration and scheduling job deadlines
+
+Registration and scheduling bind retry admission to the executing job's actual
+start, current run/attempt and literal workflow timeout (five and ten minutes,
+respectively). One bounded, non-retried Actions jobs read establishes this timing;
+missing, incomplete, mismatched or ambiguous metadata refuses before queue writes.
+Registration has only the additional `actions: read` permission needed for that
+read. The request is included in normal HTTP accounting.
+
+The remaining budget includes earlier setup and metadata time, then decreases
+with a monotonic clock. Each retry must fit both its complete wait and a bounded
+20-second HTTP attempt, leaving 30 seconds for refusal/accounting and runner
+cleanup. Response consumption shares the HTTP timeout; a late response cannot
+authorize a subsequent queue write. The deadline is rechecked after sleeping and
+before each actual attempt, independently of the existing capacity-admission hook.
+Dispatch and recovery timestamps use the clock after quota waits, so a newly
+written attempt cannot inherit an already-expired discovery window.
+The bootstrap itself is bounded to one 20-second read; if the runner is already
+unable to reach/finish that first read, no controlled completion is claimed.
+
+A registration refusal exits unsuccessfully, preserves the request identity and
+sanitized quota cause when available, and cannot advance scheduling as though a
+durable request exists. Inspect that same identity's workflow and bot comments
+before any authorized recovery; uncertain POSTs are never automatically retried.
+This changes neither FIFO/cadence nor preparation/final-validation's separate
+capacity and timing controls. Simulated clocks prove admission/refusal cases;
+actual hosted operation and quota observations must be recorded separately.
+
 ## Issue lifecycle accuracy
 
 Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.

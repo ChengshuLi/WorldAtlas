@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "issue": 1275,
+  "base_main_commit": "993f79e82bf5da34a208ea4a1b4edbd78e4e559e",
+  "status": "local-controls-passed",
+  "checks": [
+    {
+      "id": "original-plus-deadline-controls",
+      "outcome": "passed",
+      "tests": 160,
+      "detail": "Original #1249 eight named suites plus real deadline/registration/CLI controls; all named file paths checked present. Isolated mocked HTTP and simulated time, not live quota exhaustion."
+    },
+    {
+      "id": "scope-entrypoint-trusted-sparse-controls",
+      "outcome": "passed",
+      "tests": 23,
+      "detail": "Existing handoff scope and real merge entrypoint controls plus actual workflow sparse imports. Required data/research-geography-gate.json materialized from pinned Git after first sparse fixture invocation revealed it was absent; no gate was weakened."
+    }
+  ],
+  "limits": [
+    "All refusal/retry/late-body/ambiguous-write controls use isolated HTTP and virtual clocks; no real quota exhaustion, forced runner cancellation or service/provider write.",
+    "Historical hosted metadata demonstrates available job fields under the operator credential; corrected registration-token read permission and actual corrected main operation require subsequent hosted verification.",
+    "Preparation/final capacity/deadline controls are preserved and exercised separately, not claimed converted to this scheduler job-start mechanism.",
+    "Bootstrap is one bounded non-retried read; a runner unable to complete that first read has no claimed controlled success.",
+    "Independent exact-head review, hosted checks, normal queue and actual-main verification remain required."
+  ]
+}
