@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-07",
+  "scope": "Administrative identity and level context only; not a boundary adjudication",
+  "subjects": [
+    {
+      "id": "gb:NOR:ADM2:86288312B50158709887361",
+      "captured_name": "Målselv nor",
+      "atlas_parent": "framework:province:troms-og-finnmark:38859f82963b",
+      "recorded_tier": "Norway ADM2; municipality role; source parent level ADM1",
+      "cited_context": "Statistics Norway's archived municipalities-2017 classification lists Målselv (1924); the full original registry labels the consumed boundary vintage 2013.",
+      "unresolved": "The source feature identifier is not crosswalked here to a dated 2013 ADM1 polygon or current official municipality boundary."
+    },
+    {
+      "id": "gb:NOR:ADM2:86288312B64496782861055",
+      "captured_name": "Omasvuotna sme 2",
+      "atlas_parent": "framework:province:troms-og-finnmark:38859f82963b",
+      "recorded_tier": "Norway ADM2; municipality role; source parent level ADM1",
+      "cited_context": "Statistics Norway's archived municipalities-2017 classification lists Storfjord–Omasvuotna–Omasvuono (1939). Kartverket's current official name list places Storfjord/Omasvuotna/Omasvuono under Troms.",
+      "unresolved": "The historic source label's `sme 2` suffix and shapeID have no authenticated crosswalk to Storfjord 1939 or a current boundary. The name resemblance is not proof that these geometries are the same unit."
+    },
+    {
+      "id": "gb:NOR:ADM2:86288312B82966611739072",
+      "captured_name": "Bardu nor",
+      "atlas_parent": "framework:province:troms-og-finnmark:38859f82963b",
+      "recorded_tier": "Norway ADM2; municipality role; source parent level ADM1",
+      "cited_context": "Statistics Norway's archived municipalities-2017 classification lists Bardu (1922); the full original registry labels the consumed boundary vintage 2013.",
+      "unresolved": "The source feature identifier is not crosswalked here to a dated 2013 ADM1 polygon or current official municipality boundary."
+    },
+    {
+      "id": "gb:SWE:ADM2:70781695B94600430897975",
+      "captured_name": "Kiruna",
+      "atlas_parent": "framework:province:norrbottens-lan:a6d0306eee4c",
+      "recorded_tier": "Sweden ADM2; municipality role; source parent level ADM1",
+      "cited_context": "Kiruna Municipality's official information describes a municipal territory adjoining Norway and Finland and the municipalities of Pajala and Gällivare; the full original registry labels the consumed boundary vintage 2017.",
+      "unresolved": "The official information page/PDF is not a boundary product and does not independently authenticate the 2017 source geometry or current border."
+    }
+  ],
+  "source_products": {
+    "NOR": {"level": "ADM2", "registered_feature_count": 431, "represented_vintage": "2013", "recorded_parent_level": "ADM1", "source_role": "Municipality", "license_assertion": "CC BY 4.0 in retained repository registry; underlying terms not independently verified"},
+    "SWE": {"level": "ADM2", "registered_feature_count": 290, "represented_vintage": "2017", "recorded_parent_level": "ADM1", "source_role": "Municipality", "license_assertion": "CC0 1.0 in retained repository registry; underlying terms not independently verified"}
+  },
+  "neighboring_granularity": "The consumed products are complete recorded country ADM2 files and the parent source level is ADM1. Original #1233 scans all 431 NOR and 290 SWE features for candidate contacts. No finer national unit, current registered municipal geometry, or authoritative bilateral seam source is part of this mechanical scope.",
+  "parent_handoff": "All three Norway Atlas features retain the combined Troms og Finnmark framework parent while the retained geoBoundaries vintage is stated as 2013 and SSB's archived 2017 classification identifies Bardu, Målselv and Storfjord/Omasvuotna as 1922, 1924 and 1939. Establish the exact historical source-to-parent crosswalk and parent-purpose before any engineering hierarchy revision. Preserve current IDs and geometry. Original source owner: #1229; regional context: #336/#337.",
+  "official_sources": [
+    {"title": "Statistics Norway: Classification of municipalities, archived municipalities 2017 correspondence", "url": "https://dataportal.ssb.no/classifications/131/correspondences/190", "retrieved_at": "2026-10-07", "inspected_facts": ["municipality is a political and administrative level and statistical regional level", "2017 codes list Bardu 1922, Målselv 1924, Storfjord–Omasvuotna–Omasvuono 1939"], "license": "Not assessed; no source file copied"},
+    {"title": "Kartverket: Sámi and Kven county and municipality names", "url": "https://www.kartverket.no/til-lands/stadnamn/samiske-og-kvenske-fylkes-og-kommunenamn", "retrieved_at": "2026-10-07", "page_last_updated": "2026-08-31", "inspected_facts": ["Kartverket identifies Storfjord/Omasvuotna/Omasvuono as a multilingual municipality name under Troms"], "license": "Not assessed; no source file copied"},
+    {"title": "Kiruna Municipality: English municipal information PDF", "url": "https://kiruna.se/download/18.70c3d424173b4900fc548d3e/1600606427810/engelska.pdf", "retrieved_at": "2026-10-07", "document_date": "2015 revision cited in document", "inspected_facts": ["municipal territory described as adjoining Norway, Finland, Pajala and Gällivare"], "license": "Not assessed; no source file copied"}
+  ],
+  "limits": ["Current official name lists do not certify a historical feature join or geometry.", "Registry source roles, years, feature counts and license assertions are retained metadata and were not independently re-extracted from upstream full products.", "No current/candidate-scale legal map, exact historic source-parent crosswalk, or finer neighbor source was acquired for this erratum.", "No territorial correction, source approval, hierarchy decision, or release authorization is made."]
+}

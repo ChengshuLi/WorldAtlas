@@ -1,0 +1,29 @@
+{
+  "comparison": "Complete authenticated semantic phases, source/vintage joins, overlays, physical diagnostics, helper authentication/execution, issue-pin mutation rejection, and controls match; only run identifiers, timestamps, and exclusive receipts differ.",
+  "kind": "reproducibility",
+  "method_id": "bounded-complete-reproduction",
+  "outcome": "passed",
+  "run_one_sha256": "6f1c50be7a0f87c56ec37027b371e9edec48f398a811be9b71d17b73fcd7c8da",
+  "run_two_sha256": "6f1c50be7a0f87c56ec37027b371e9edec48f398a811be9b71d17b73fcd7c8da",
+  "semantic_closure_sha256": "6f1c50be7a0f87c56ec37027b371e9edec48f398a811be9b71d17b73fcd7c8da",
+  "runs": [
+    {
+      "run_id": "repro-v14-one-20261007",
+      "receipt_path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/receipt.json",
+      "receipt_bytes": 300,
+      "receipt_sha256": "e06bfb3e149fd4b4d6e2a486afe535fbbd0207ff3090464a1110318bdf654723",
+      "report_path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/authentication-and-phase-accounting.json",
+      "report_bytes": 3316661,
+      "report_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f"
+    },
+    {
+      "run_id": "repro-v14-two-20261007",
+      "receipt_path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/receipt.json",
+      "receipt_bytes": 300,
+      "receipt_sha256": "18c46e1b94a75c3c5773880a162a64bda5cb71546b453e5887c852b8b7685ff1",
+      "report_path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/authentication-and-phase-accounting.json",
+      "report_bytes": 3316661,
+      "report_sha256": "8913542cdb56c62af045a3e09c225bfa687b345360519759904f16795f1425e5"
+    }
+  ]
+}

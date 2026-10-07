@@ -1,0 +1,69 @@
+{
+  "current_accepted_runs": [
+    "repro-v14-one-20261007",
+    "repro-v14-two-20261007"
+  ],
+  "failed_attempts": [
+    {
+      "reason": "Initial audit attempted JSON parsing on an immutable README/code/double-gzip pin; no output directory or retained input changed.",
+      "run_id": "initial-pin-audit",
+      "status": "failed-before-output"
+    },
+    {
+      "reason": "An exact floating-point comparison rejected 4e-18 to 7e-18 square-degree rounding differences from the retained overlay. The final runner uses explicit rel_tol 1e-10 and abs_tol 1e-14 and retains both raw values.",
+      "run_id": "repro-v2-one-20261007",
+      "status": "failed-after-exclusive-reservation-before-output"
+    },
+    {
+      "reason": "Inventory closure check initially assumed a product path instead of following its immutable custody descriptor; corrected to bind the source inventory to the exact issue-pinned custody blob.",
+      "run_id": "repro-v4-one-20261007",
+      "status": "failed-before-output"
+    },
+    {
+      "reason": "The output-admission control fixture initially targeted the wrong directory level and falsely reported one occupied-directory case as accepted. No real output was altered; corrected fixture passes all seven cases.",
+      "run_id": "repro-v5-one-20261007",
+      "status": "failed-before-output"
+    }
+  ],
+  "issue": 1389,
+  "limits": [
+    "Superseded runs and failed attempts remain historical; only the v14 pair is the final reproduction against the exact live issue contract.",
+    "The rejection control verifies source-lock pin identity; it does not establish boundary accuracy, source licensing, territorial meaning, or history."
+  ],
+  "preserved_superseded_runs": [
+    "run-one-20261007",
+    "run-two-20261007",
+    "repro-v3-one-20261007",
+    "repro-v6-one-20261007",
+    "repro-v6-two-20261007",
+    "repro-v7-one-20261007",
+    "repro-v7-two-20261007",
+    "repro-v8-one-20261007",
+    "repro-v8-two-20261007",
+    "repro-v9-one-20261007",
+    "repro-v9-two-20261007",
+    "repro-v10-one-20261007",
+    "repro-v10-two-20261007",
+    "repro-v11-one-20261007",
+    "repro-v11-two-20261007",
+    "repro-v12-one-20261007",
+    "repro-v12-two-20261007",
+    "repro-v13-one-20261007",
+    "repro-v13-two-20261007"
+  ],
+  "version": 1,
+  "incomplete_attempts": [],
+  "recovered_attempts": [
+    {
+      "run_id": "repro-v13-one-20261007",
+      "status": "accepted-as-run-one-of-v13-pair",
+      "note": "A storage-gate check blocked run two at the first attempt; the gate later passed and the second fresh run completed. Both outputs are retained and paired."
+    }
+  ],
+  "audit_findings": [
+    {
+      "case": "issue-pin-roster-authentication",
+      "finding": "Independent review found a prior runner accepted a mutable source-lock substitution that changed actual_comparison_part-17 to the M vintage while the captured issue contract remained unchanged. That pair is superseded. The v14 runner now checks a hard-pinned exact issue-body hash and compares all 57 id/hash entries to the embedded reviewed work specification; the actual C-to-M mutation is a negative control rejected before output."
+    }
+  ]
+}
