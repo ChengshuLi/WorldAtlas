@@ -1,0 +1,67 @@
+{
+  "run_id": "run-1",
+  "started_utc": "2026-10-07T08:06:42.659103+00:00",
+  "ended_utc": "2026-10-07T08:08:15.628688+00:00",
+  "elapsed_seconds": 92.96664175001206,
+  "argv": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py",
+    "--repo",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work",
+    "--run-id",
+    "run-1",
+    "--output",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output"
+  ],
+  "working_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work",
+  "python_executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "frozen_execution_sha256": "ef2d425110a26f955784a158dc57f00aa99b5561fec613bc81956a97ab756d2b",
+  "frozen_code": [
+    {
+      "bytes": 38869,
+      "path": "source_extract.py",
+      "sha256": "8873c2759313b37877ca07635e79fbf66c44ce7fd31923aaf6d7d8023e2115cc"
+    },
+    {
+      "bytes": 2106,
+      "path": "run_final.py",
+      "sha256": "b86dc178b4fd2d2f234a4e30e15143c856e4b941ec72302c36d03ce505a212ac"
+    },
+    {
+      "bytes": 24243,
+      "path": "compat/producer.py",
+      "sha256": "7203d789acb45886c7ed6cf88c7c6536e27bf8942d6fafa8362ffee25154c3bc"
+    },
+    {
+      "bytes": 3409,
+      "path": "compat/inputs.py",
+      "sha256": "6d27ce5ea16280a9cc30507a1960fd69ce3f23e6ecc13f2957d7746281f98503"
+    },
+    {
+      "bytes": 7090,
+      "path": "compat/immutable.py",
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    },
+    {
+      "bytes": 12279,
+      "path": "compat/transport.py",
+      "sha256": "abe52d6f3c945c4423f2eab81cbe3c57cd3e400fef7584df0ee34801d892a887"
+    },
+    {
+      "bytes": 9834,
+      "path": "compat/comparison.py",
+      "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe"
+    },
+    {
+      "bytes": 1953,
+      "path": "compat/ellipsoidal_area.py",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    }
+  ],
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py\", line 652, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py\", line 645, in main\n    result = extract(Path(args.repo).resolve(), Path(args.output).resolve(), lock)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py\", line 523, in extract\n    must_reject(\"geometry-binding\", lambda: _reject_geometry(candidates_by_id[component_ids[0]], route_map[component_ids[0]][\"record\"])),\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py\", line 515, in must_reject\n    raise ValueError(f\"Negative control did not reject: {name}\")\nValueError: Negative control did not reject: geometry-binding\n",
+  "exit_code": 1,
+  "complete_source_pass": false,
+  "outputs": [],
+  "outputs_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+}

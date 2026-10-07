@@ -1,0 +1,118 @@
+{
+  "run_id": "run-1",
+  "started_utc": "2026-10-07T08:32:28.096131+00:00",
+  "ended_utc": "2026-10-07T08:33:35.635209+00:00",
+  "elapsed_seconds": 67.53655591700226,
+  "argv": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py",
+    "--repo",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work",
+    "--run-id",
+    "run-1",
+    "--output",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work/research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output"
+  ],
+  "working_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/1d2153a037c15e2d66af5fd02969c854c3996b06ec9f75892a1566714b908321/work",
+  "python_executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "frozen_execution_sha256": "9a553ad3586e8aebb769dbf9746f49e8dbd27349150b669773ae38d84a2f26f3",
+  "frozen_code": [
+    {
+      "bytes": 41590,
+      "path": "source_extract.py",
+      "sha256": "0fd94dd584ec4f361954e29c2bd6c2b09b079fbd85f117a69a7a0cd5bbfcc091"
+    },
+    {
+      "bytes": 2106,
+      "path": "run_final.py",
+      "sha256": "b86dc178b4fd2d2f234a4e30e15143c856e4b941ec72302c36d03ce505a212ac"
+    },
+    {
+      "bytes": 3409,
+      "path": "compat/inputs.py",
+      "sha256": "6d27ce5ea16280a9cc30507a1960fd69ce3f23e6ecc13f2957d7746281f98503"
+    },
+    {
+      "bytes": 7090,
+      "path": "compat/immutable.py",
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    }
+  ],
+  "stdout": "{\"result\": \"PASS\", \"run_id\": \"run-1\", \"output_sha256\": \"c9fb2c0bfeb8f8fe2fd5ba400cea0b602329764319d2a534addeb0106964a622\", \"components\": 49, \"contacts\": 6}\n",
+  "stderr": "",
+  "exit_code": 0,
+  "complete_source_pass": true,
+  "outputs": [
+    {
+      "path": "runs/run-1/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1"
+    },
+    {
+      "path": "runs/run-1/output/candidate-routing-rows.jsonl",
+      "bytes": 109140,
+      "sha256": "0e423884304181e252b0ac369db5e23617932d9f5907d6f5535396d29719d853"
+    },
+    {
+      "path": "runs/run-1/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33"
+    },
+    {
+      "path": "runs/run-1/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad"
+    },
+    {
+      "path": "runs/run-1/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "path": "runs/run-1/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c"
+    },
+    {
+      "path": "runs/run-1/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "runs/run-1/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1"
+    },
+    {
+      "path": "runs/run-1/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335"
+    },
+    {
+      "path": "runs/run-1/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa"
+    },
+    {
+      "path": "runs/run-1/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5"
+    },
+    {
+      "path": "runs/run-1/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c"
+    },
+    {
+      "path": "runs/run-1/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1"
+    },
+    {
+      "path": "runs/run-1/output/summary.json",
+      "bytes": 2618,
+      "sha256": "a43dd0f3f15c09d78ce08229ebc2169ecd34ec22c76f7477f5ec2c83a406b542"
+    }
+  ],
+  "outputs_sha256": "c630cd3d1ed586d7f787787432362009dec54465ccb4fbee6d611b729fdc7f3d"
+}
