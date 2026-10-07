@@ -8,6 +8,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 
+sys.path.insert(0, str(Path(__file__).parent))
 import controls
 from measure import bounded_candidate, runtime_receipt, sha
 
