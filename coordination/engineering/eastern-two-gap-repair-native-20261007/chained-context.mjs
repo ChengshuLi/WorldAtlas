@@ -37,7 +37,19 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  assert.equal(prior.status,'verified');assert.equal(prior.migration.locations,49625);assert.equal(prior.migration.footprints_sha256,BEFORE);assert.equal(prior.migration.successor_release_id,predecessor.id);
  function legacyContext(pin){const index=JSON.parse(fs.readFileSync(path.join(image,pin.path))),rows=[];for(const p of index.parts){const base=p.reused_from??pin.path;const raw=fs.readFileSync(path.join(image,path.posix.dirname(base),p.path));assert.equal(raw.length,p.bytes);assert.equal(sha(raw),p.sha256);const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,p.uncompressed_bytes);assert.equal(sha(decoded),p.uncompressed_sha256);rows.push(...JSON.parse(decoded));}return {index,rows};}
  const before=legacyContext(oldStage.after_context),afterIndex=JSON.parse(read(stage.after_context)),after=[];
- for(const pin of afterIndex.parts){safeEvidencePath(pin.path);const raw=read({path:path.posix.dirname(stage.after_context.path)+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256}),decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(sha(decoded),pin.decoded_sha256);after.push(...JSON.parse(decoded));}
+ assert(stage.after_context_image,'Complete retained successor-context transport required');
+ const afterImageRaw=read(stage.after_context_image),afterImageIndex=JSON.parse(afterImageRaw),afterImageBase=path.posix.dirname(stage.after_context_image.path);
+ for(const pin of afterImageIndex.parts)read({path:afterImageBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
+ assert.deepEqual(afterImageIndex.files.map(p=>p.path).sort(),afterIndex.parts.map(p=>p.path).sort(),'Complete original context body roster required');
+ const afterImage=path.join(temporary,'successor-context');restoreWholeImage(path.join(root,afterImageBase),afterImage,{expectedIndexSha:stage.after_context_image.sha256});
+ for(const pin of afterIndex.parts){
+  safeEvidencePath(pin.path);const retained=afterImageIndex.files.find(p=>p.path===pin.path);
+  assert.equal(retained.mode,'100644');assert.equal(retained.bytes,pin.bytes);assert.equal(retained.sha256,pin.sha256);
+  assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');
+  assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
+  const raw=fs.readFileSync(path.join(afterImage,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);
+  const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(sha(decoded),pin.decoded_sha256);after.push(...JSON.parse(decoded));
+ }
  assert.equal(before.rows.length,49625);assert.equal(after.length,49625);assert.equal(before.index.owner_sha256,afterIndex.owner_sha256);assert.equal(afterIndex.owner_sha256,prior.migration.owner_sha256);
  const candidates=JSON.parse(read(stage.native_proposal));assert.deepEqual(Object.keys(candidates).sort(),[...TARGETS].sort());
  const geometryManifest=JSON.parse(read(stage.geometry_manifest)),geometryBase=path.posix.dirname(stage.geometry_manifest.path),pins=Object.entries(geometryManifest.files).map(([name,pin])=>({path:geometryBase+'/'+(pin.archive_path??name),bytes:pin.bytes,sha256:pin.sha256}));assert.deepEqual(stage.geometry_files,pins);for(const pin of pins)read(pin);
@@ -46,5 +58,5 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,
   original_v1_replay:{actual_command:command,explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
    advertised_commit_matches_validator_closure:false,receipt_sha256:sha(priorRaw),receipt:prior,input_image_index_sha256:stage.prior_image.sha256},
-  checked_files:seen.size,budget:budget.snapshot(),scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation};
+  checked_files:seen.size,context_transport:{index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:budget.snapshot(),scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation};
 }
