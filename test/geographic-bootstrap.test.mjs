@@ -17,14 +17,14 @@ async function fixture({visibleStaged=true}={}){
  const entities=Array.from({length:6},(_,n)=>tiers.map((kind,i)=>({id:`${kind}:${n}`,kind,name:`Original ${kind} ${n}`,parent_id:i?`${tiers[i-1]}:${n}`:null}))).flat();
  const members=entities.map(e=>({entity_id:e.id,kind:e.kind,parent_id:e.parent_id,reference_name:e.name,active:1,source_id:'reference',evidence:{source:'test-only'}}));
  const release={id:'test:reference',version:1,source_id:'reference',reference_date:'2026-10-01',membership_sha256:await geographicMembershipHash(members),location_ids_sha256:await geographicLocationIdsHash(members),changes_sha256:await geographicChangesHash([]),hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64),expected_counts:Object.fromEntries(tiers.map(t=>[t,6]))};
- const payloads=new Map(),parts=[];const part=(name,payload,route='/api/geography/stage')=>{payloads.set(name,payload);parts.push({path:name,route});};
+ const payloads=new Map(),parts=[];const part=(name,payload,route='/api/geography/stage')=>{payloads.set(name,payload);parts.push({path:name,route,sha256:createHash('sha256').update(JSON.stringify(payload)).digest('hex')});};
  part('sources.json',{sources:[{id:'reference',name:'QA reference',license:'CC0 test-only',vintage:'2026',supported_from:2026,supported_to:2027,status:'reference'},{id:'history',name:'QA observed history',license:'CC0 test-only',vintage:'1000',supported_from:1000,supported_to:1100,status:'historical'}],ingestion_id:'sources'},'/api/records/import');
  for(const tier of tiers)part(`entities-${tier}-0.json`,{entities:entities.filter(e=>e.kind===tier),ingestion_id:`entities:${tier}`},'/api/records/import');
  part('release-1.json',{release,ingestion_id:'release'});for(let n=0;n<members.length;n+=6)part(`1-memberships-${n}.json`,{release_id:release.id,memberships:members.slice(n,n+6),ingestion_id:`members:${n}`});
  const calls=[];let inFlight=0,maxInFlight=0;
- const batch=async p=>{calls.push(p.path);inFlight++;maxInFlight=Math.max(maxInFlight,inFlight);try{await new Promise(resolve=>setImmediate(resolve));return await(p.route==='/api/records/import'?importBatch(db,payloads.get(p.path)):stageGeographicRelease(db,payloads.get(p.path)));}finally{inFlight--;}};
+ const batch=async (p,body)=>{calls.push(p.path);inFlight++;maxInFlight=Math.max(maxInFlight,inFlight);try{await new Promise(resolve=>setImmediate(resolve));return await(p.route==='/api/records/import'?importBatch(db,JSON.parse(body)):stageGeographicRelease(db,JSON.parse(body)));}finally{inFlight--;}};
  const request=async(route,options)=>{const url=new URL(route,'https://example.invalid');if(url.pathname==='/api/geography/release')return Response.json(await geographicRelease(db,url.searchParams.get('release_id'),{includeStaged:visibleStaged}));if(url.pathname==='/api/geography/finalize')return Response.json(await finalizeGeographicRelease(db,JSON.parse(options.body).release_id));throw Error('Unexpected test route');};
- return {db,release,manifest:{batches:parts,releases:[release]},batch,request,calls,maxInFlight:()=>maxInFlight};
+ return {db,release,manifest:{batches:parts,releases:[release]},readBatch:p=>Buffer.from(JSON.stringify(payloads.get(p.path))),batch,request,calls,maxInFlight:()=>maxInFlight};
 }
 
 test('bounded import concurrency defaults to six and accepts only one through eight',()=>{assert.equal(bootstrapConcurrency('6'),6);assert.equal(bootstrapConcurrency(8),8);assert.equal(bootstrapConcurrency(1),1);for(const value of ['0','9','3.5','06','six','',null])assert.throws(()=>bootstrapConcurrency(value),/integer from 1 to 8/);});
@@ -45,13 +45,13 @@ test('stage then finalize publishes atomically without replaying ownership batch
 
 test('append-only source batches import before newly registered geography and retain the original source bytes',async()=>{
  const f=await fixture();try{
-  const original=f.manifest.batches.find(p=>p.path==='sources.json'),later={path:'sources-3.json',route:'/api/records/import'};
+  const original=f.manifest.batches.find(p=>p.path==='sources.json'),later={path:'sources-3.json',route:'/api/records/import',sha256:createHash('sha256').update(JSON.stringify({sources:[{id:'later-source',name:'Later inspected reference',license:'CC0 test-only',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]})).digest('hex')};
   const manifest={...f.manifest,sources_batches:['sources.json','sources-3.json'],batches:[...f.manifest.batches,later]};
   let newSourceImported=false;
-  await publishGeographicReleases({...f,manifest,batch:async part=>{
+  await publishGeographicReleases({...f,manifest,readBatch:part=>part.path===later.path?Buffer.from(JSON.stringify({sources:[{id:'later-source',name:'Later inspected reference',license:'CC0 test-only',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]})):f.readBatch(part),batch:async (part,body)=>{
    if(part.path===later.path){await importBatch(f.db,{sources:[{id:'later-source',name:'Later inspected reference',license:'CC0 test-only',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]});newSourceImported=true;return;}
    if(part.path.startsWith('entities-'))assert.equal(newSourceImported,true);
-   return f.batch(part);
+   return f.batch(part,body);
   }});
   assert.equal(f.manifest.batches.find(p=>p.path==='sources.json'),original);
   assert.equal(f.db.sqlite.prepare("SELECT count(*) n FROM atlas_sources WHERE id IN ('reference','later-source')").get().n,2);
@@ -61,7 +61,7 @@ test('append-only source batches import before newly registered geography and re
 
 test('interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history',async()=>{
  for(const visibleStaged of [true,false]){const f=await fixture({visibleStaged});try{
-  let interrupted=false;await assert.rejects(publishGeographicReleases({...f,concurrency:1,batch:async p=>{if(p.path==='1-memberships-12.json'&&!interrupted){interrupted=true;throw Error('Interrupted fixture transport');}return f.batch(p);}}),/Interrupted/);
+  let interrupted=false;await assert.rejects(publishGeographicReleases({...f,concurrency:1,batch:async (p,body)=>{if(p.path==='1-memberships-12.json'&&!interrupted){interrupted=true;throw Error('Interrupted fixture transport');}return f.batch(p,body);}}),/Interrupted/);
   assert.equal((await geographicRelease(f.db,f.release.id,{includeStaged:true})).status,'staged');assert.equal(f.db.sqlite.prepare('SELECT count(*) n FROM atlas_geographic_memberships').get().n,12);
   await importBatch(f.db,{records:[{id:'kept-history',location_id:'location:0',attribute:'population',value:42,valid_from:1000,valid_to:1100,source_id:'history'}]});
   const snapshot=table=>JSON.stringify(f.db.sqlite.prepare(`SELECT * FROM ${table} ORDER BY id`).all()),records=snapshot('atlas_attribute_records'),entities=snapshot('atlas_entities'),sources=snapshot('atlas_sources');
@@ -72,7 +72,7 @@ test('interrupted real-D1 staging resumes explicit or hidden staged releases wit
 
 test('a mismatched existing staged or published manifest blocks all geographic staging before writes',async()=>{
  const f=await fixture();try{
-  for(const p of f.manifest.batches.filter(p=>p.path==='sources.json'||p.path.startsWith('entities-')))await f.batch(p);await f.batch(f.manifest.batches.find(p=>p.path==='release-1.json'));
+  for(const p of f.manifest.batches.filter(p=>p.path==='sources.json'||p.path.startsWith('entities-')))await f.batch(p,f.readBatch(p));const definition=f.manifest.batches.find(p=>p.path==='release-1.json');await f.batch(definition,f.readBatch(definition));
   for(const state of ['staged','published']){if(state==='published')await publishGeographicReleases({...f,concurrency:6});const before=JSON.stringify(f.db.sqlite.prepare('SELECT * FROM atlas_geographic_memberships').all());
   for(const key of ['membership_sha256','footprints_sha256','hierarchy_sha256','location_ids_sha256','changes_sha256']){const altered={...f.manifest,releases:[{...f.release,[key]:'c'.repeat(64)}]},start=f.calls.length;await assert.rejects(publishGeographicReleases({...f,manifest:altered,concurrency:6}),new RegExp(`${key} mismatch`));assert.ok(f.calls.slice(start).every(v=>v==='sources.json'||v.startsWith('entities-')));assert.equal(JSON.stringify(f.db.sqlite.prepare('SELECT * FROM atlas_geographic_memberships').all()),before);}
   }
