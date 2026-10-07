@@ -14,7 +14,7 @@ from packet import ROOT, OWNED, canonical, json_file, sha, shared_new_vintage
 
 VINTAGES=ROOT/"vintages"
 CONTROLS=ROOT/"controls"
-RUN_ID="final-13"
+RUN_ID="final-14"
 RUN_NAMESPACE=CONTROLS/f"control-exercise-{RUN_ID}"
 FIXTURES=RUN_NAMESPACE/"fixtures"
 RESULT=RUN_NAMESPACE/"builder-controls.json"
@@ -239,7 +239,10 @@ def main():
     builder_case("builder-existing-manifest-preserved",lambda root: None,"Existing evidence manifest is preserved",records,True)
 
     ordinary=ORDINARY_SENTINEL
-    ordinary.write_bytes(b"protected ordinary sentinel\n")
+    with ordinary.open("xb") as stream:
+        stream.write(b"protected ordinary sentinel\n")
+        stream.flush()
+        os.fsync(stream.fileno())
     before_sha=sha(ordinary.read_bytes())
     r=run([str(ROOT/"reproduce.py"),"--vintage",ordinary.name])
     assert_reject("producer-ordinary-file-preserved","reproduce.py",r,ordinary.is_file() and sha(ordinary.read_bytes())==before_sha,"Fresh run directory already exists",records)

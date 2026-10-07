@@ -18,7 +18,7 @@ from packet import (
 )
 
 PAIR_OUTPUTS = ["two-run-reproducibility.json", "builder-controls.json", "run-bindings.json", "run-metadata.json"]
-PAIR_CONTROLS_PATH = ROOT / "controls" / "builder-controls-final-13.json"
+PAIR_CONTROLS_PATH = ROOT / "controls" / "builder-controls-final-14.json"
 MANIFEST_PATH = ROOT / "evidence-quality.json"
 
 

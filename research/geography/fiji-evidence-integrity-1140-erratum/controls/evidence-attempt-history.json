@@ -1,14 +1,14 @@
 {
   "authoritative_current_evidence": {
-    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-13.json",
-    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-17",
+    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-14.json",
+    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-18",
     "producer_runs": [
       "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-nine",
       "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-ten"
     ]
   },
   "issue": 1361,
-  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted. The hosted-rejected final-pair-11 manifest is also retained losslessly in prior-builder-attempt-10 with exact restoration hashes. The hosted-rejected final-pair-12 manifest is retained losslessly in prior-builder-attempt-11 with exact restoration hashes. Intermediate pair-14 and its manifest remain preserved as superseded evidence; prior-builder-attempt-13 has exact restoration hashes for the pair-14 manifest. Failed control harness namespaces final-10 (pre-fixture abort) and final-11 (13 controls, superseded before the rerun preservation check) are retained with their exact receipts and hashes. Previous current evidence-quality.json SHA256 f3bb42e8c9dc3a7414bd9b0deddb6c0c83bd771facbbafb89b29982edfe40016 (115365 bytes) is archived byte-identically as controls/prior-builder-attempt-14/evidence-quality.json.gz with archive-receipt.json; it was removed from the root only after decompression/readback equality, so the exclusive builder can create a new root manifest. final-pair-16 and its d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365 root manifest are retained in the packet/pair history; the exact root manifest is archived as prior-builder-attempt-15. Previous root manifest SHA256 d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365 (120789 bytes) is archived byte-identically under controls/prior-builder-attempt-15/; removed only after decompression/readback verification for exclusive fresh-manifest publication.",
+  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted. The hosted-rejected final-pair-11 manifest is also retained losslessly in prior-builder-attempt-10 with exact restoration hashes. The hosted-rejected final-pair-12 manifest is retained losslessly in prior-builder-attempt-11 with exact restoration hashes. Intermediate pair-14 and its manifest remain preserved as superseded evidence; prior-builder-attempt-13 has exact restoration hashes for the pair-14 manifest. Failed control harness namespaces final-10 (pre-fixture abort) and final-11 (13 controls, superseded before the rerun preservation check) are retained with their exact receipts and hashes. Previous current evidence-quality.json SHA256 f3bb42e8c9dc3a7414bd9b0deddb6c0c83bd771facbbafb89b29982edfe40016 (115365 bytes) is archived byte-identically as controls/prior-builder-attempt-14/evidence-quality.json.gz with archive-receipt.json; it was removed from the root only after decompression/readback equality, so the exclusive builder can create a new root manifest. final-pair-16 and its d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365 root manifest are retained in the packet/pair history; the exact root manifest is archived as prior-builder-attempt-15. Previous root manifest SHA256 d655bebae1a3402a404be42e439ad18d320ab2c4ada6772350fbe71946c7a365 (120789 bytes) is archived byte-identically under controls/prior-builder-attempt-15/; removed only after decompression/readback verification for exclusive fresh-manifest publication. Pair17 and its prior root manifest are retained; the root manifest is archived as prior-builder-attempt-16 before publication of pair18. Pair17 root manifest fcac125238db4c2aaf4e856c39e0f8d6cf73d0b9d1149e2ac3b41774ec02e1d0 (124746 bytes) retained losslessly in prior-builder-attempt-16; removed after successful archive readback for exclusive root output.",
   "recorded_at": "2026-10-07",
   "superseded_artifacts": [
     {
@@ -1216,6 +1216,69 @@
       "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-15/evidence-quality.json.gz",
       "reason": "Lossless archive of final-pair-16 root manifest; see exact restoration receipt.",
       "sha256": "0fc3ef0c9b6f1d2230c48d1b23825605176a017c8c955b81a1bc674bda2720b7"
+    },
+    {
+      "bytes": 30483,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/control-exercise-final-13/builder-controls.json",
+      "reason": "14-control result superseded after reviewer identified overwrite-capable ordinary sentinel creation; final14 changes to exclusive create and reruns all controls.",
+      "sha256": "f33f25becd2dabf3889e98256a3c0c4ad9f5aae8f5331a09849d7b0d22d712d6"
+    },
+    {
+      "bytes": 530,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/control-exercise-final-13/reservation.json",
+      "reason": "Reservation receipt for superseded final13 controls; retained.",
+      "sha256": "38105733897ff9e21a7546ae00bed7ad94ffb47cd7ffbfeac943200084472dd3"
+    },
+    {
+      "bytes": 30483,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-13.json",
+      "reason": "Current control copy superseded after making ordinary sentinel creation exclusive.",
+      "sha256": "f33f25becd2dabf3889e98256a3c0c4ad9f5aae8f5331a09849d7b0d22d712d6"
+    },
+    {
+      "bytes": 2490,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-17/two-run-reproducibility.json",
+      "reason": "Pair17 superseded to bind exclusive ordinary-sentinel creation and final14 controls.",
+      "sha256": "ce4e9416ca1b4b9177f4c6ae67feed5a8bda8b0fe525577312f5b2f4e9e580e6"
+    },
+    {
+      "bytes": 28507,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-17/builder-controls.json",
+      "reason": "Pair17 superseded to bind exclusive ordinary-sentinel creation and final14 controls.",
+      "sha256": "6cc7e16fbba735f1f4c31dcab7478657c70e71ae1ada6c34dde84cdd37effc0d"
+    },
+    {
+      "bytes": 2328,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-17/run-bindings.json",
+      "reason": "Pair17 superseded to bind exclusive ordinary-sentinel creation and final14 controls.",
+      "sha256": "c52504e8293b4153b9cdb7dddfa2723f335908bff97fbf509b836f5e495fb525"
+    },
+    {
+      "bytes": 300,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-17/run-metadata.json",
+      "reason": "Pair17 superseded to bind exclusive ordinary-sentinel creation and final14 controls.",
+      "sha256": "9a59ec7349d626d6c53e04daebc2e29827b982fa9cfebf2971651071b1dc95d4"
+    },
+    {
+      "bytes": 831,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-16/archive-receipt.json",
+      "reason": "Lossless archive of pair17 root manifest; see restoration receipt.",
+      "sha256": "c8dbb337bf913449c84b1440ed3bc84b8e919785ce82efe210e18a37113ee9bc"
+    },
+    {
+      "bytes": 16807,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-16/evidence-quality.json.gz",
+      "reason": "Lossless archive of pair17 root manifest; see restoration receipt.",
+      "sha256": "8564161f8e753e6a06ec7b53e47f8206fb0d9aa0153029a92f265e7bbd02e375"
     }
   ],
   "version": 1
