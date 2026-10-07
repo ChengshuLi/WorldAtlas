@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "issue": 1392,
+  "lane": "geography",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "atlas:local:IND:7132399B91549871673633"
+  ],
+  "subject_ids_sha256": "b6e4c1c5ecc215d0735150da773280fd13906ff07ec343ae98dfcb48b9c1189a",
+  "baseline": {
+    "commit": "6f21733e4c39e4a912890ed1a5387dd4a536f208",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "bytes": 965771,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "bytes": 301503,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-016.json.gz",
+        "sha256": "36423a8ef87ad3cbe63bff3183446468a9503e62420b46223e9f0bf9ec747db3",
+        "bytes": 1016389,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-011.json.gz",
+        "sha256": "c23403bddb316a691126954828294061daf09b4305f58e18d53b1010a57df317",
+        "bytes": 754172,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scope.json",
+        "sha256": "7e74cb58f1c111316522ad92a09767bdc315c2c710eba1642e33ae907f9592c0",
+        "bytes": 1825364,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz",
+        "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+        "bytes": 13794274,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+        "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+        "bytes": 2206,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d0984f717127fb3e/source-inventory.json",
+        "sha256": "ef561241b2c81afe4eaea501963a955d7d57d06cc925cc8090310205e2e55e56",
+        "bytes": 5547,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "bytes": 10211739,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "bytes": 10164089,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "bytes": 2080606,
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "routing-family-roster": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+      "source-fitness-candidates": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "numeric-source-priority": "36423a8ef87ad3cbe63bff3183446468a9503e62420b46223e9f0bf9ec747db3",
+      "original-physical-components": "c23403bddb316a691126954828294061daf09b4305f58e18d53b1010a57df317",
+      "original-comparison-scope": "7e74cb58f1c111316522ad92a09767bdc315c2c710eba1642e33ae907f9592c0",
+      "retained-source-2018": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+      "retained-source-metadata": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "source-inventory": "ef561241b2c81afe4eaea501963a955d7d57d06cc925cc8090310205e2e55e56",
+      "current-location-part-32": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+      "current-hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "routing-family-roster": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+      "source-fitness-candidates": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+      "numeric-source-priority": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-016.json.gz",
+      "original-physical-components": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-011.json.gz",
+      "original-comparison-scope": "coordination/engineering/global-source-comparisons-a-001-20261006/scope.json",
+      "retained-source-2018": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz",
+      "retained-source-metadata": "data/regional-review/regional-review-d0984f717127fb3e/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+      "source-inventory": "data/regional-review/regional-review-d0984f717127fb3e/source-inventory.json",
+      "current-location-part-32": "data/geography/part-32.json",
+      "current-hierarchy": "data/hierarchy.json"
+    },
+    "subject_files": {
+      "atlas:local:IND:7132399B91549871673633": "data/geography/part-32.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoBoundaries-IND-ADM3-2018",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3-metaData.json",
+      "role": "historical administrative source used for identity and geometry comparison",
+      "vintage": "represented year 2018; source update reported 2023-01-19; built 2023-12-12",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0 as reported by the pinned geoBoundaries metadata; legal grant not independently verified"
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      },
+      "files": [
+        {
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz",
+          "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+          "bytes": 13794274,
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/india-kakinada-rural-source-fitness-20261007/sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+          "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+          "bytes": 2206,
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "india-lgd-current-directory",
+      "url": "https://lgdirectory.gov.in/",
+      "role": "current administrative directory context and route for follow-up verification",
+      "vintage": "current website accessed 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for any future LGD record or geometry were not verified."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Search the Government of India Local Government Directory for the current Kakinada (Rural) record; retain its code, parent, effective date, geometry or legal schedule, and applicable terms.",
+      "limit": "The landing page does not establish legal authority or validity of the retained 2018 geometry."
+    },
+    {
+      "id": "census-india-2011-h03-andhra-pradesh",
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/10013",
+      "role": "historical name and administrative type cross-check",
+      "vintage": "2011 Census catalog",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for catalog data were not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "restoration": "Consult the official Census of India 2011 H-03 Andhra Pradesh catalog and retain the exact Kakinada (Rural) table row with stable code.",
+      "limit": "Historical name/type evidence only; does not establish a current boundary or parent."
+    },
+    {
+      "id": "census-india-2001-east-godavari-map",
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/27672/download/30841/DH_28_2001_EGOD.pdf",
+      "role": "historical map context only",
+      "vintage": "2001 Census administrative map",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "The map displays Government of India copyright and Survey of India map-source conditions; reuse permissions for derivative geometry were not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2001,
+        "to": 2002
+      },
+      "restoration": "Consult the official Census of India East Godavari administrative map and retain the relevant page and map notes.",
+      "limit": "The map is too old to establish current boundaries or survey accuracy."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/india-kakinada-rural-source-fitness-20261007/assessment.md",
+      "sha256": "d1c58f7dc3f394f534ec42dfcc513d8652877de766b5f001839182c1f39087ec",
+      "bytes": 7313,
+      "hash_kind": "file-bytes",
+      "role": "assessment-report"
+    }
+  ],
+  "methods": [
+    {
+      "id": "direct-stored-coordinate-polygon-overlay",
+      "kind": "source",
+      "description": "Decoded the original component, retained source and current Atlas features and evaluated polygon coverage, difference, and symmetric difference on stored longitude/latitude coordinates without transformation. Area is diagnostic only.",
+      "software": "Python 3.12.14; Shapely 2.1.2",
+      "units": "Boolean set coverage; diagnostic square degrees"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The retained 2018 source feature uniquely covers the frozen physical component geometrically, but present-day administrative validity, authority, and reuse grant remain unverified; source fitness remains unapproved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoBoundaries-IND-ADM3-2018",
+        "india-lgd-current-directory",
+        "census-india-2011-h03-andhra-pradesh",
+        "census-india-2001-east-godavari-map"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "Recompute whole-file hashes for baseline pins and retained source copies.",
+    "Decode the three selected Polygon features and run Shapely covers, difference, and symmetric_difference using stored coordinates as-is."
+  ],
+  "metric_bindings": []
+}
