@@ -37,6 +37,9 @@ ATLAS_CONTACTS = {
 }
 RUN_ONE = 'run-five'
 CURRENT_SCOPE_RECEIPT = 'scope-extraction-current-745cc86a.json'
+RESTORE_VINTAGE = 'restore-745cc86a'
+RESTORE_ROOT = SOURCE / 'custody-restored' / RESTORE_VINTAGE
+RESTORE_RECEIPT = RESTORE_ROOT / 'custody-restoration.json'
 
 sys.path.insert(0, str(REPO / 'scripts'))
 from evidence.immutable import Baseline as BootstrapBaseline  # noqa: E402
@@ -85,6 +88,9 @@ def build(run_name: str) -> dict:
     component_aliases = [a for a in index['aliases'] if '/components-v3/components-' in a['original']['path']]
     if len(component_aliases) != 11:
         raise ValueError('Expected the complete 11-shard component-v3 inventory')
+    restore_paths = [RESTORE_RECEIPT.as_posix()] + [
+        (RESTORE_ROOT / Path(a['original']['path']).name.removesuffix('.gz')).as_posix()
+        for a in component_aliases]
     pin_paths = {
         INDEX_PATH,
         GEO_PATH,
@@ -93,6 +99,7 @@ def build(run_name: str) -> dict:
         'scripts/evidence/contracts.py',
         (SOURCE / 'produce.py').as_posix(),
         *[a['payload'] for a in component_aliases],
+        *restore_paths,
         *[p.as_posix() for p in (SOURCE / CURRENT_SCOPE_RECEIPT, SOURCE / 'scope-extraction.json', SOURCE / 'family-row.json', SOURCE / 'component-roster.txt', SOURCE / 'jrc-source-receipts.json', SOURCE / 'worldcover-whole-tile-receipts.json', SOURCE / 'worldcover-extract-receipts.json', SOURCE / 'README.md', SOURCE / 'metadata-sources.md', SOURCE / 'metadata/occurrence_2024.xml', SOURCE / 'metadata/seasonality_2024.xml', SOURCE / 'metadata/big-2022-ksp-layer.json', SOURCE / 'metadata/big-2023-rbi-layer.json', SOURCE / 'metadata/big-source-receipts.json', SOURCE / 'requirements.txt')],
         *[p.as_posix() for p in sorted((SOURCE / 'worldcover').glob('*.tif'))],
         *[p.as_posix() for p in sorted((SOURCE / 'worldcover-crops').glob('*.tif'))],
@@ -138,6 +145,13 @@ def build(run_name: str) -> dict:
 
     index = json.loads(baseline.pinned_bytes(INDEX_PATH))
     component_aliases = [a for a in index['aliases'] if '/components-v3/components-' in a['original']['path']]
+    restoration = json.loads(baseline.materialized_bytes(RESTORE_RECEIPT.as_posix()))
+    restoration_rows = {row['custody_payload_path']: row for row in restoration.get('source_shards', [])}
+    if (restoration.get('status') != 'complete' or restoration.get('source_commit') != evaluation_commit or
+        restoration.get('custody_index', {}).get('sha256') != INDEX_SHA or
+        restoration.get('family_row_sha256') != FAMILY_SHA or restoration.get('selected_subject_count') != 45 or
+        restoration.get('restored_shard_count') != 11 or len(restoration_rows) != 11):
+        raise ValueError('Complete authenticated JSON custody restoration receipt is missing or inconsistent')
     by_id = {}
     source_shards = []
     for alias in component_aliases:
@@ -145,12 +159,23 @@ def build(run_name: str) -> dict:
         d = alias['original']
         if len(raw) != d['bytes'] or sha(raw) != d['sha256']:
             raise ValueError('Custody component payload differs from its index alias')
-        decoded = gzip.decompress(raw)
-        baseline.admit(alias['payload'] + ':decoded', len(decoded))
-        if len(decoded) != d['uncompressed_bytes'] or sha(decoded) != d['uncompressed_sha256']:
-            raise ValueError('Decoded custody component shard differs from its index alias')
-        source_shards.append({'path': d['path'], 'bytes': d['bytes'], 'sha256': d['sha256'], 'uncompressed_bytes': len(decoded), 'uncompressed_sha256': sha(decoded)})
-        for feature in json.loads(decoded)['features']:
+        row = restoration_rows.get(alias['payload'])
+        output_path = (RESTORE_ROOT / Path(d['path']).name.removesuffix('.gz')).as_posix()
+        decoded = baseline.materialized_bytes(output_path)
+        if (row is None or row.get('original_source_path') != d['path'] or
+            len(decoded) != d['uncompressed_bytes'] or sha(decoded) != d['uncompressed_sha256'] or
+            row.get('decoded_bytes') != len(decoded) or row.get('decoded_sha256') != sha(decoded) or
+            row.get('restored_output', {}).get('path') != output_path or
+            row.get('restored_output', {}).get('sha256') != sha(decoded)):
+            raise ValueError('Restored ordinary JSON bytes do not equal the complete authenticated custody payload')
+        source_shards.append({'compressed_path': alias['payload'], 'compressed_bytes': len(raw),
+                              'compressed_sha256': sha(raw), 'source_path': d['path'],
+                              'decoded_path': output_path, 'uncompressed_bytes': len(decoded),
+                              'uncompressed_sha256': sha(decoded)})
+        document = json.loads(decoded)
+        if document.get('type') != 'FeatureCollection' or not isinstance(document.get('features'), list):
+            raise ValueError('Restored custody shard is not a complete JSON FeatureCollection')
+        for feature in document['features']:
             identity = feature.get('id')
             if identity in ids:
                 if identity in by_id:
