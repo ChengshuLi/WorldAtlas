@@ -1,0 +1,2239 @@
+{
+  "version": 1,
+  "issue": 1403,
+  "parent_issue": 1202,
+  "claim_id": "fd3fbfee-54eb-4a33-82ce-999dcd12703f",
+  "claim_request_id": "29b05049-ea31-461f-b03b-55c847aaab14",
+  "branch": "geography/ghana-togo-complete-family-source-fitness-20261007",
+  "baseline_commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+  "scope": {
+    "fine_family_id": "gap-source-batch:836f0998d0d7b82bd3486750",
+    "operational_batch": "gap-operational-batch:ff2e40a0b63b14f8c4b669f7",
+    "component_ids": [
+      "physical-component:01c3bef8e5c4dceec102c248a9f7db86d7a6bcfbdb322d493704dcd3903912c3",
+      "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc",
+      "physical-component:0a149a1adf1f22badf1c73d3ff5d1960f7dd5a6be8dbed0f6e68d20e1cea7cdd",
+      "physical-component:100033d5f179136790f2bc870beca47f18b0dd6459018b7d5db1916cdc21030a",
+      "physical-component:9124722a82606c8db57df20583a15739055eab7f62eda2346640080bc7137b7f",
+      "physical-component:dbd76c808ddc0bf725ad6085fce94ba4fe23beb60eef0deeb6509d6c0a334f87"
+    ],
+    "component_ids_sha256": "deb1ad7dab965e0962de4047776899c02e019d8b72a591c1ee75f90e2279ca07",
+    "contact_ids": [
+      "gb:GHA:ADM2:2480657B35240131522033",
+      "gb:GHA:ADM2:2480657B47242267083805",
+      "gb:TGO:ADM2:56601680B4042875560778",
+      "gb:TGO:ADM2:56601680B98633254865748"
+    ],
+    "aggregate_extent_lonlat": [
+      0.5454247787610618,
+      6.736496153846153,
+      0.651,
+      6.930799999999998
+    ],
+    "recorded_fragment_area_sum_m2": 48917.06359418356,
+    "area_interpretation": "Original emitted measurement sum; not a new measurement or proof of dry land."
+  },
+  "routing_row": {
+    "admin_status_counts": {
+      "one-compatible-recorded-subject-uniquely-covers-component": 1,
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 5
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      472,
+      479
+    ],
+    "compatible_original_admin_component_ids": [
+      "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc"
+    ],
+    "complete_component_ids": [
+      "physical-component:01c3bef8e5c4dceec102c248a9f7db86d7a6bcfbdb322d493704dcd3903912c3",
+      "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc",
+      "physical-component:0a149a1adf1f22badf1c73d3ff5d1960f7dd5a6be8dbed0f6e68d20e1cea7cdd",
+      "physical-component:100033d5f179136790f2bc870beca47f18b0dd6459018b7d5db1916cdc21030a",
+      "physical-component:9124722a82606c8db57df20583a15739055eab7f62eda2346640080bc7137b7f",
+      "physical-component:dbd76c808ddc0bf725ad6085fce94ba4fe23beb60eef0deeb6509d6c0a334f87"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:GHA:ADM2:2480657B35240131522033",
+      "gb:GHA:ADM2:2480657B47242267083805"
+    ],
+    "component_count": 6,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "604462909807314587353088",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "29568550599369646542610519093"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "604462909807314587353088",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "29568550599369646542610519093"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 8.14281196597377e-9,
+      "land-with-admin-partial-or-unbound-source-fitness-review": 48917.063594175415
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 1,
+      "land-with-admin-partial-or-unbound-source-fitness-review": 5
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:836f0998d0d7b82bd3486750",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 48917.06359418356,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:ff2e40a0b63b14f8c4b669f7",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        0.5454247787610618,
+        6.736496153846153,
+        0.651,
+        6.930799999999998
+      ],
+      "best_rank": {
+        "coordination_complexity": 52146,
+        "measured_impact": 69149,
+        "source_locator_readiness": 619
+      },
+      "cause_status": "unknown",
+      "component_count": 6,
+      "component_ids": [
+        "physical-component:01c3bef8e5c4dceec102c248a9f7db86d7a6bcfbdb322d493704dcd3903912c3",
+        "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc",
+        "physical-component:0a149a1adf1f22badf1c73d3ff5d1960f7dd5a6be8dbed0f6e68d20e1cea7cdd",
+        "physical-component:100033d5f179136790f2bc870beca47f18b0dd6459018b7d5db1916cdc21030a",
+        "physical-component:9124722a82606c8db57df20583a15739055eab7f62eda2346640080bc7137b7f",
+        "physical-component:dbd76c808ddc0bf725ad6085fce94ba4fe23beb60eef0deeb6509d6c0a334f87"
+      ],
+      "component_ids_sha256": "deb1ad7dab965e0962de4047776899c02e019d8b72a591c1ee75f90e2279ca07",
+      "contact_ids": [
+        "gb:GHA:ADM2:2480657B35240131522033",
+        "gb:GHA:ADM2:2480657B47242267083805",
+        "gb:TGO:ADM2:56601680B4042875560778",
+        "gb:TGO:ADM2:56601680B98633254865748"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:GHA:ADM2:2480657B35240131522033",
+        "gb:GHA:ADM2:2480657B47242267083805"
+      ],
+      "existing_related_issues": [
+        472,
+        479
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:plateaux-region:475553e356da",
+          "framework:province:volta-region:c10898f0f555"
+        ],
+        "source_families": [
+          "97957902075d6fc030f72e58119c36657ead17d9f8d97fab9066ae0f4ea478ce",
+          "fb9a18c2716409f7dbf62568ea5d63e86878e16791e6cfe3aa4ff52a7c7331d3"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:western-africa:6280a2b17f17"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:836f0998d0d7b82bd3486750",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GHA/ADM2/geoBoundaries-GHA-ADM2.geojson",
+          "reference_year": "2019",
+          "source_id": "gb:GHA:ADM2",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        },
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2.geojson",
+          "reference_year": "2017",
+          "source_id": "gb:TGO:ADM2",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 6
+    },
+    "positive_length_neighbor_count": 2,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [
+      "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc"
+    ],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0,
+      "extra_reconstruction": 0,
+      "mapped_inland_water_support": 0,
+      "mapped_land_support": 48917.06359418356,
+      "missing_reconstruction": 0,
+      "outside_mapped_L1_context": 0
+    },
+    "unmeasured_components": []
+  },
+  "physical_component_rows": [
+    {
+      "file": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-001.json.gz",
+      "row": {
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "component": "physical-component:01c3bef8e5c4dceec102c248a9f7db86d7a6bcfbdb322d493704dcd3903912c3",
+        "component_geometry_sha256": "b064f48d130908817f351d17a87719f50cf5ca80797abe6293ad200eae23235b",
+        "component_minus_source_union": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.5482448504983388,
+                  6.833730232558139
+                ],
+                [
+                  0.5488804725992321,
+                  6.833991959305566
+                ],
+                [
+                  0.5526537370867425,
+                  6.8306158803339425
+                ],
+                [
+                  0.5491849911186039,
+                  6.833063803764027
+                ],
+                [
+                  0.5482448504983388,
+                  6.833730232558139
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "9e9dd2b7f351535d9a30d3c6feb027001be1891ffa4f63ecb80b87f1db9b734d",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.0000015718772954642624,
+          "planar_length_coordinate_units": 0.011148458483881936
+        },
+        "coordinate_scope": "literal original GeoJSON lon/lat pointsets; no periodic wrapping, coordinate snapping, datum transformation or normalization",
+        "current_component_relation": "retained-full-original-feature-pointset",
+        "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "dateline_connected": false,
+        "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+        "feature_intersections": [
+          {
+            "binding": {
+              "feature_index": 89,
+              "feature_sha256": "cc81924e6eccd064583898fb1dd218f6a87c5da99cc64652342782d06e06087c",
+              "geometry_sha256": "7933f17ae51f881749b2f14c1b7c486db7da6f77f43ff1131bf857c853cd918a",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B35240131522033",
+                  "original_feature_sha256": "59bbceb560b44702e5b747e59ebc766439beff28598b1907be742129b370afe1",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B35240131522033",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.552793287435455,
+                      6.830506024096386
+                    ],
+                    [
+                      0.5491849911185146,
+                      6.83306380376409
+                    ],
+                    [
+                      0.5527339616823987,
+                      6.830559265156821
+                    ],
+                    [
+                      0.552793287435455,
+                      6.830506024096386
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "66d36abbff0a3e1a1f44524be0e69bb50af2237c7a48f13ea430097cb2345a9c",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 2.018365866962847e-8,
+              "planar_length_coordinate_units": 0.008846332621199602
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 93,
+              "feature_sha256": "38b2cf4d23fc6fb8de208a85888a3a16f88b26574f599e9a468df59ea730385a",
+              "geometry_sha256": "357c38a16493d6e4f3290ec0828432d4ebae3d1d4bdb0c52cbfa10c3f71bc913",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B47242267083805",
+                  "original_feature_sha256": "9d040dcb24d67bf9db31d5d3d084693a8d95a01e7e2b72e8ae8aca6bed430d74",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B47242267083805",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 95,
+              "feature_sha256": "ac5d0bcec5dc7a842cdc5685d7110fdfcea63121cdd9a2fdd1fd69e99051b932",
+              "geometry_sha256": "2e27041ca598e80f12590c18c921c7bd3050bc25d94877fda8a77593a8bddd94",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B45105521184723",
+                  "original_feature_sha256": "a47b149545cb52ca275b10e662ddaf14a46daa6df6f5b458a192c178a642552d",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B45105521184723",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 34,
+              "feature_sha256": "a69e69b5e91eb309914d1bb7ebb3213a2562684205a7cc6de39ba84e9b8fe5d8",
+              "geometry_sha256": "03da908354486a19969ac856eda68ec5309b7b6febb7b94810f5b9077d113958",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:TGO:ADM2:56601680B4042875560778",
+                  "original_feature_sha256": "14be3cd6e8501ec6d4b94d285208723e1d88ef25539983023f63289e9b31db98",
+                  "original_parent_id": "framework:province:plateaux-region:475553e356da",
+                  "reference_year": "2017"
+                }
+              ],
+              "shapeID": "56601680B4042875560778",
+              "source_id": "gb:TGO:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.552793287435455,
+                      6.830506024096386
+                    ],
+                    [
+                      0.5527125637405155,
+                      6.83056324595609
+                    ],
+                    [
+                      0.5488804725992321,
+                      6.833991959305566
+                    ],
+                    [
+                      0.5489,
+                      6.834
+                    ],
+                    [
+                      0.552793287435455,
+                      6.830506024096386
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "0e6cf426b46b9f1d6538b04d6375f2387b029b1caa0c0ca75401be9e49801fb8",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 7.851601557694923e-8,
+              "planar_length_coordinate_units": 0.010493356544511003
+            },
+            "source_feature_covers_entire_component": false
+          }
+        ],
+        "full_component_feature_sha256": "86ad0be9c1a8019160a9624d4d90e0bee0666d82bdb11154e8b062f44bb9cd5d",
+        "original_component_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "positive_area_feature_ids": [
+          {
+            "feature_index": 89,
+            "recorded_stable_subject_ids": [
+              "gb:GHA:ADM2:2480657B35240131522033"
+            ],
+            "shapeID": "2480657B35240131522033",
+            "source_id": "gb:GHA:ADM2"
+          },
+          {
+            "feature_index": 34,
+            "recorded_stable_subject_ids": [
+              "gb:TGO:ADM2:56601680B4042875560778"
+            ],
+            "shapeID": "56601680B4042875560778",
+            "source_id": "gb:TGO:ADM2"
+          }
+        ],
+        "source_products": [
+          "gb:GHA:ADM2",
+          "gb:TGO:ADM2"
+        ],
+        "source_union_intersection": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.552793287435455,
+                  6.830506024096386
+                ],
+                [
+                  0.5491849911186039,
+                  6.833063803764027
+                ],
+                [
+                  0.5526537370867425,
+                  6.8306158803339425
+                ],
+                [
+                  0.5488804725992321,
+                  6.833991959305566
+                ],
+                [
+                  0.5489,
+                  6.834
+                ],
+                [
+                  0.552793287435455,
+                  6.830506024096386
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "418713c15baacfbbd849badf70c3ab75c8ffe63d7322df382a1ee4ef48156156",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 9.780208651582389e-8,
+          "planar_length_coordinate_units": 0.018983902140230192
+        },
+        "status": "positive-source-coverage-mixed-partial-or-subject-unresolved",
+        "surface_status": "unverified",
+        "uniquely_covering_compatible_recorded_subject": null,
+        "unknowns": [],
+        "whole_product_bbox_queries": [
+          {
+            "complete_bbox_candidate_indices": [
+              89,
+              93,
+              95
+            ],
+            "source_id": "gb:GHA:ADM2",
+            "whole_product_feature_count": 260
+          },
+          {
+            "complete_bbox_candidate_indices": [
+              34
+            ],
+            "source_id": "gb:TGO:ADM2",
+            "whole_product_feature_count": 37
+          }
+        ],
+        "whole_relevant_source_union": {
+          "geometry": {
+            "canonical_geometry_bytes": 47083,
+            "geometry_object_sha256": "7c9e85b6b55702f952f9905c8bf9793a00016bfc7aed5ed9ac4e0fbee923dfe4",
+            "object_index": "source-union-object-index.json"
+          },
+          "geometry_sha256": "7c9e85b6b55702f952f9905c8bf9793a00016bfc7aed5ed9ac4e0fbee923dfe4",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.21926808135593595,
+          "planar_length_coordinate_units": 4.290845873968933
+        },
+        "zero_area_feature_ids": []
+      }
+    },
+    {
+      "file": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-002.json.gz",
+      "row": {
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "component": "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc",
+        "component_geometry_sha256": "3d26b992f388383b04a21e896a59d80406122ae9744130a6f8a0dbbadb068fbb",
+        "component_minus_source_union": {
+          "geometry": {
+            "coordinates": [],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "geometry_type": "Polygon",
+          "is_empty": true,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0,
+          "planar_length_coordinate_units": 0
+        },
+        "coordinate_scope": "literal original GeoJSON lon/lat pointsets; no periodic wrapping, coordinate snapping, datum transformation or normalization",
+        "current_component_relation": "retained-full-original-feature-pointset",
+        "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "dateline_connected": false,
+        "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+        "feature_intersections": [
+          {
+            "binding": {
+              "feature_index": 93,
+              "feature_sha256": "38b2cf4d23fc6fb8de208a85888a3a16f88b26574f599e9a468df59ea730385a",
+              "geometry_sha256": "357c38a16493d6e4f3290ec0828432d4ebae3d1d4bdb0c52cbfa10c3f71bc913",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B47242267083805",
+                  "original_feature_sha256": "9d040dcb24d67bf9db31d5d3d084693a8d95a01e7e2b72e8ae8aca6bed430d74",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B47242267083805",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.5579,
+                      6.929
+                    ],
+                    [
+                      0.5626612903225806,
+                      6.925649462365592
+                    ],
+                    [
+                      0.5626612903225803,
+                      6.925649462365592
+                    ],
+                    [
+                      0.5579,
+                      6.929
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "e7beae97d86981c2d70361ebc6f0a0d36c7ca93da49e3edabc943db6fb4026d5",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 5.573476792933296e-19,
+              "planar_length_coordinate_units": 0.011644052211405938
+            },
+            "source_feature_covers_entire_component": true
+          },
+          {
+            "binding": {
+              "feature_index": 95,
+              "feature_sha256": "ac5d0bcec5dc7a842cdc5685d7110fdfcea63121cdd9a2fdd1fd69e99051b932",
+              "geometry_sha256": "2e27041ca598e80f12590c18c921c7bd3050bc25d94877fda8a77593a8bddd94",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B45105521184723",
+                  "original_feature_sha256": "a47b149545cb52ca275b10e662ddaf14a46daa6df6f5b458a192c178a642552d",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B45105521184723",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 34,
+              "feature_sha256": "a69e69b5e91eb309914d1bb7ebb3213a2562684205a7cc6de39ba84e9b8fe5d8",
+              "geometry_sha256": "03da908354486a19969ac856eda68ec5309b7b6febb7b94810f5b9077d113958",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:TGO:ADM2:56601680B4042875560778",
+                  "original_feature_sha256": "14be3cd6e8501ec6d4b94d285208723e1d88ef25539983023f63289e9b31db98",
+                  "original_parent_id": "framework:province:plateaux-region:475553e356da",
+                  "reference_year": "2017"
+                }
+              ],
+              "shapeID": "56601680B4042875560778",
+              "source_id": "gb:TGO:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          }
+        ],
+        "full_component_feature_sha256": "90bd715fbb6b906a9bc248dccea3d2ec87a5ff2711146b699a1b752ec1a2e8c7",
+        "original_component_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "positive_area_feature_ids": [
+          {
+            "feature_index": 93,
+            "recorded_stable_subject_ids": [
+              "gb:GHA:ADM2:2480657B47242267083805"
+            ],
+            "shapeID": "2480657B47242267083805",
+            "source_id": "gb:GHA:ADM2"
+          }
+        ],
+        "source_products": [
+          "gb:GHA:ADM2",
+          "gb:TGO:ADM2"
+        ],
+        "source_union_intersection": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.5579,
+                  6.929
+                ],
+                [
+                  0.5626612903225806,
+                  6.925649462365592
+                ],
+                [
+                  0.5626612903225803,
+                  6.925649462365592
+                ],
+                [
+                  0.5579,
+                  6.929
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "e7beae97d86981c2d70361ebc6f0a0d36c7ca93da49e3edabc943db6fb4026d5",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.573476792933296e-19,
+          "planar_length_coordinate_units": 0.011644052211405938
+        },
+        "status": "one-compatible-recorded-subject-uniquely-covers-component",
+        "surface_status": "unverified",
+        "uniquely_covering_compatible_recorded_subject": {
+          "id": "gb:GHA:ADM2:2480657B47242267083805",
+          "original_feature_sha256": "9d040dcb24d67bf9db31d5d3d084693a8d95a01e7e2b72e8ae8aca6bed430d74",
+          "original_parent_id": "framework:province:volta-region:c10898f0f555",
+          "reference_year": "2019"
+        },
+        "unknowns": [],
+        "whole_product_bbox_queries": [
+          {
+            "complete_bbox_candidate_indices": [
+              93,
+              95
+            ],
+            "source_id": "gb:GHA:ADM2",
+            "whole_product_feature_count": 260
+          },
+          {
+            "complete_bbox_candidate_indices": [
+              34
+            ],
+            "source_id": "gb:TGO:ADM2",
+            "whole_product_feature_count": 37
+          }
+        ],
+        "whole_relevant_source_union": {
+          "geometry": {
+            "canonical_geometry_bytes": 53607,
+            "geometry_object_sha256": "a4450eb46f2c57d400bc65964ec856a09166559de8e339eadb2b1e1f162b0c33",
+            "object_index": "source-union-object-index.json"
+          },
+          "geometry_sha256": "a4450eb46f2c57d400bc65964ec856a09166559de8e339eadb2b1e1f162b0c33",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.17246769679661297,
+          "planar_length_coordinate_units": 4.326547853992736
+        },
+        "zero_area_feature_ids": []
+      }
+    },
+    {
+      "file": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-002.json.gz",
+      "row": {
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "component": "physical-component:0a149a1adf1f22badf1c73d3ff5d1960f7dd5a6be8dbed0f6e68d20e1cea7cdd",
+        "component_geometry_sha256": "a7d59d938138be418ae7fffb0902efa5acf940f02dc2899e070479e045410425",
+        "component_minus_source_union": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.545452177098992,
+                  6.827950572920787
+                ],
+                [
+                  0.545993279000072,
+                  6.828193273000068
+                ],
+                [
+                  0.5459928761761585,
+                  6.828196821678594
+                ],
+                [
+                  0.546,
+                  6.8282
+                ],
+                [
+                  0.5459523568486948,
+                  6.828619259731487
+                ],
+                [
+                  0.5463487593987707,
+                  6.828186515631256
+                ],
+                [
+                  0.545452177098992,
+                  6.827950572920787
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "4f053d9f78d12bfc6ac870117a75c804f5b16a9eaff0341af5aab2a3f0c6838a",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.1898658673853079e-7,
+          "planar_length_coordinate_units": 0.002540334495590486
+        },
+        "coordinate_scope": "literal original GeoJSON lon/lat pointsets; no periodic wrapping, coordinate snapping, datum transformation or normalization",
+        "current_component_relation": "retained-full-original-feature-pointset",
+        "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "dateline_connected": false,
+        "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+        "feature_intersections": [
+          {
+            "binding": {
+              "feature_index": 89,
+              "feature_sha256": "cc81924e6eccd064583898fb1dd218f6a87c5da99cc64652342782d06e06087c",
+              "geometry_sha256": "7933f17ae51f881749b2f14c1b7c486db7da6f77f43ff1131bf857c853cd918a",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B35240131522033",
+                  "original_feature_sha256": "59bbceb560b44702e5b747e59ebc766439beff28598b1907be742129b370afe1",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B35240131522033",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.5463487593987707,
+                      6.828186515631256
+                    ],
+                    [
+                      0.5459523568486947,
+                      6.828619259731487
+                    ],
+                    [
+                      0.545945945945946,
+                      6.828675675675676
+                    ],
+                    [
+                      0.5464,
+                      6.8282
+                    ],
+                    [
+                      0.5463487593987707,
+                      6.828186515631256
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "17dfcadd71e0b6437e893108f545809c3b10113f9e67f867f3617a8a0b51d81c",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 2.5042841853184448e-8,
+              "planar_length_coordinate_units": 0.0013542182502691827
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 93,
+              "feature_sha256": "38b2cf4d23fc6fb8de208a85888a3a16f88b26574f599e9a468df59ea730385a",
+              "geometry_sha256": "357c38a16493d6e4f3290ec0828432d4ebae3d1d4bdb0c52cbfa10c3f71bc913",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B47242267083805",
+                  "original_feature_sha256": "9d040dcb24d67bf9db31d5d3d084693a8d95a01e7e2b72e8ae8aca6bed430d74",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B47242267083805",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 95,
+              "feature_sha256": "ac5d0bcec5dc7a842cdc5685d7110fdfcea63121cdd9a2fdd1fd69e99051b932",
+              "geometry_sha256": "2e27041ca598e80f12590c18c921c7bd3050bc25d94877fda8a77593a8bddd94",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B45105521184723",
+                  "original_feature_sha256": "a47b149545cb52ca275b10e662ddaf14a46daa6df6f5b458a192c178a642552d",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B45105521184723",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 34,
+              "feature_sha256": "a69e69b5e91eb309914d1bb7ebb3213a2562684205a7cc6de39ba84e9b8fe5d8",
+              "geometry_sha256": "03da908354486a19969ac856eda68ec5309b7b6febb7b94810f5b9077d113958",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:TGO:ADM2:56601680B4042875560778",
+                  "original_feature_sha256": "14be3cd6e8501ec6d4b94d285208723e1d88ef25539983023f63289e9b31db98",
+                  "original_parent_id": "framework:province:plateaux-region:475553e356da",
+                  "reference_year": "2017"
+                }
+              ],
+              "shapeID": "56601680B4042875560778",
+              "source_id": "gb:TGO:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.5454247787610618,
+                      6.827943362831858
+                    ],
+                    [
+                      0.5459928761761585,
+                      6.828196821678594
+                    ],
+                    [
+                      0.545993279000072,
+                      6.828193273000068
+                    ],
+                    [
+                      0.5454521770989907,
+                      6.827950572920787
+                    ],
+                    [
+                      0.5454247787610618,
+                      6.827943362831858
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "8c68508cdb1c3767cb9b67ca694a0e66cfbb175a25620fad1c961b4b643a47e6",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 2.4331401717825633e-9,
+              "planar_length_coordinate_units": 0.0012470150653200087
+            },
+            "source_feature_covers_entire_component": false
+          }
+        ],
+        "full_component_feature_sha256": "61bff55197fde4e9ef13c5d2c7b49f91cb6bc082e0d5dbbb9ee6f1c36d66ae80",
+        "original_component_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "positive_area_feature_ids": [
+          {
+            "feature_index": 89,
+            "recorded_stable_subject_ids": [
+              "gb:GHA:ADM2:2480657B35240131522033"
+            ],
+            "shapeID": "2480657B35240131522033",
+            "source_id": "gb:GHA:ADM2"
+          },
+          {
+            "feature_index": 34,
+            "recorded_stable_subject_ids": [
+              "gb:TGO:ADM2:56601680B4042875560778"
+            ],
+            "shapeID": "56601680B4042875560778",
+            "source_id": "gb:TGO:ADM2"
+          }
+        ],
+        "source_products": [
+          "gb:GHA:ADM2",
+          "gb:TGO:ADM2"
+        ],
+        "source_union_intersection": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  [
+                    0.5463487593987707,
+                    6.828186515631256
+                  ],
+                  [
+                    0.5459523568486948,
+                    6.828619259731487
+                  ],
+                  [
+                    0.545945945945946,
+                    6.828675675675676
+                  ],
+                  [
+                    0.5464,
+                    6.8282
+                  ],
+                  [
+                    0.5463487593987707,
+                    6.828186515631256
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    0.5454247787610618,
+                    6.827943362831858
+                  ],
+                  [
+                    0.5459928761761585,
+                    6.828196821678594
+                  ],
+                  [
+                    0.545993279000072,
+                    6.828193273000068
+                  ],
+                  [
+                    0.545452177098992,
+                    6.827950572920787
+                  ],
+                  [
+                    0.5454247787610618,
+                    6.827943362831858
+                  ]
+                ]
+              ]
+            ],
+            "type": "MultiPolygon"
+          },
+          "geometry_sha256": "a60d1453d65cef3ad0d8e1bc53ca23c7931b1e457194458c09deef8b3b6d1d8f",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 2.747598202509247e-8,
+          "planar_length_coordinate_units": 0.0026012333155891955
+        },
+        "status": "positive-source-coverage-mixed-partial-or-subject-unresolved",
+        "surface_status": "unverified",
+        "uniquely_covering_compatible_recorded_subject": null,
+        "unknowns": [],
+        "whole_product_bbox_queries": [
+          {
+            "complete_bbox_candidate_indices": [
+              89,
+              93,
+              95
+            ],
+            "source_id": "gb:GHA:ADM2",
+            "whole_product_feature_count": 260
+          },
+          {
+            "complete_bbox_candidate_indices": [
+              34
+            ],
+            "source_id": "gb:TGO:ADM2",
+            "whole_product_feature_count": 37
+          }
+        ],
+        "whole_relevant_source_union": {
+          "geometry": {
+            "canonical_geometry_bytes": 47083,
+            "geometry_object_sha256": "7c9e85b6b55702f952f9905c8bf9793a00016bfc7aed5ed9ac4e0fbee923dfe4",
+            "object_index": "source-union-object-index.json"
+          },
+          "geometry_sha256": "7c9e85b6b55702f952f9905c8bf9793a00016bfc7aed5ed9ac4e0fbee923dfe4",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.21926808135593595,
+          "planar_length_coordinate_units": 4.290845873968933
+        },
+        "zero_area_feature_ids": []
+      }
+    },
+    {
+      "file": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-002.json.gz",
+      "row": {
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "component": "physical-component:100033d5f179136790f2bc870beca47f18b0dd6459018b7d5db1916cdc21030a",
+        "component_geometry_sha256": "176c0241ccc2e1959d5eb18682023d59e28def407639e0b2eb5da0809a1efef4",
+        "component_minus_source_union": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.6504148571808914,
+                  6.7365284968368035
+                ],
+                [
+                  0.6504096266193451,
+                  6.737542250318569
+                ],
+                [
+                  0.65095930800004,
+                  6.737166210000055
+                ],
+                [
+                  0.6504148571808914,
+                  6.7365284968368035
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "15a1a386940d02e589dbe6a97eab45ed92065ae13f5e9bad2e2fafde5dcb8272",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 2.7763725575557074e-7,
+          "planar_length_coordinate_units": 0.002518280361961242
+        },
+        "coordinate_scope": "literal original GeoJSON lon/lat pointsets; no periodic wrapping, coordinate snapping, datum transformation or normalization",
+        "current_component_relation": "retained-full-original-feature-pointset",
+        "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "dateline_connected": false,
+        "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+        "feature_intersections": [
+          {
+            "binding": {
+              "feature_index": 89,
+              "feature_sha256": "cc81924e6eccd064583898fb1dd218f6a87c5da99cc64652342782d06e06087c",
+              "geometry_sha256": "7933f17ae51f881749b2f14c1b7c486db7da6f77f43ff1131bf857c853cd918a",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B35240131522033",
+                  "original_feature_sha256": "59bbceb560b44702e5b747e59ebc766439beff28598b1907be742129b370afe1",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B35240131522033",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.6504,
+                      6.736496153846153
+                    ],
+                    [
+                      0.6504,
+                      6.7376
+                    ],
+                    [
+                      0.6503250564334115,
+                      6.737657787810382
+                    ],
+                    [
+                      0.6504093253960063,
+                      6.737600631470535
+                    ],
+                    [
+                      0.6504149336701258,
+                      6.736513672189955
+                    ],
+                    [
+                      0.6504,
+                      6.736496153846153
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "79946f2f0e794cec55a72e6cf8d965b927f77c27f105665884e015fc07a27f4f",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 1.3605280197732978e-8,
+              "planar_length_coordinate_units": 0.002410299484610155
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 19,
+              "feature_sha256": "624c25b992bacd1cc9c814e1ba21139a624c7ea67d052ee15cef34b6b4750a61",
+              "geometry_sha256": "c976e59db1aa9a26f017a1af9e2f72915846435ca1354e25896a58de78324c55",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:TGO:ADM2:56601680B98633254865748",
+                  "original_feature_sha256": "6c65f289bc7ef90101b0c213070e1be55f6ed5fb5e47f08dbc317b01b54bc732",
+                  "original_parent_id": "framework:province:plateaux-region:475553e356da",
+                  "reference_year": "2017"
+                }
+              ],
+              "shapeID": "56601680B98633254865748",
+              "source_id": "gb:TGO:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.6504,
+                      6.736496153846153
+                    ],
+                    [
+                      0.6504,
+                      6.736511094677618
+                    ],
+                    [
+                      0.65095930800004,
+                      6.737166210000055
+                    ],
+                    [
+                      0.6504,
+                      6.737548835946411
+                    ],
+                    [
+                      0.6504,
+                      6.7376
+                    ],
+                    [
+                      0.6503250564334115,
+                      6.737657787810382
+                    ],
+                    [
+                      0.651,
+                      6.7372
+                    ],
+                    [
+                      0.6504,
+                      6.736496153846153
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "b6ad9d6eb5151969c161f5a161b5e06a89a6c1369e13029810521091971b70ea",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 4.3292979147016775e-8,
+              "planar_length_coordinate_units": 0.0034402256685229426
+            },
+            "source_feature_covers_entire_component": false
+          }
+        ],
+        "full_component_feature_sha256": "b480a725ff290bd8dbe9c8e915ae84db8589fa624e0c8ecbf7688241161d2ba2",
+        "original_component_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "positive_area_feature_ids": [
+          {
+            "feature_index": 89,
+            "recorded_stable_subject_ids": [
+              "gb:GHA:ADM2:2480657B35240131522033"
+            ],
+            "shapeID": "2480657B35240131522033",
+            "source_id": "gb:GHA:ADM2"
+          },
+          {
+            "feature_index": 19,
+            "recorded_stable_subject_ids": [
+              "gb:TGO:ADM2:56601680B98633254865748"
+            ],
+            "shapeID": "56601680B98633254865748",
+            "source_id": "gb:TGO:ADM2"
+          }
+        ],
+        "source_products": [
+          "gb:GHA:ADM2",
+          "gb:TGO:ADM2"
+        ],
+        "source_union_intersection": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.6504,
+                  6.736496153846153
+                ],
+                [
+                  0.6504,
+                  6.7376
+                ],
+                [
+                  0.6503250564334115,
+                  6.737657787810382
+                ],
+                [
+                  0.651,
+                  6.7372
+                ],
+                [
+                  0.6504,
+                  6.736496153846153
+                ]
+              ],
+              [
+                [
+                  0.6504096266193451,
+                  6.737542250318569
+                ],
+                [
+                  0.6504148571808914,
+                  6.7365284968368035
+                ],
+                [
+                  0.65095930800004,
+                  6.737166210000055
+                ],
+                [
+                  0.6504096266193451,
+                  6.737542250318569
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "662e5f7c5ec561b38aff7ab23a4adcc951f3394b4681d22cf93a1bd1015217a9",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.5864220195294015e-8,
+          "planar_length_coordinate_units": 0.0054571885226005245
+        },
+        "status": "positive-source-coverage-mixed-partial-or-subject-unresolved",
+        "surface_status": "unverified",
+        "uniquely_covering_compatible_recorded_subject": null,
+        "unknowns": [],
+        "whole_product_bbox_queries": [
+          {
+            "complete_bbox_candidate_indices": [
+              89
+            ],
+            "source_id": "gb:GHA:ADM2",
+            "whole_product_feature_count": 260
+          },
+          {
+            "complete_bbox_candidate_indices": [
+              19
+            ],
+            "source_id": "gb:TGO:ADM2",
+            "whole_product_feature_count": 37
+          }
+        ],
+        "whole_relevant_source_union": {
+          "geometry": {
+            "canonical_geometry_bytes": 21145,
+            "geometry_object_sha256": "fedd4db494147d1d2574ccad428ddd2f085915104d425a0476a6fa5d930f85d8",
+            "object_index": "source-union-object-index.json"
+          },
+          "geometry_sha256": "fedd4db494147d1d2574ccad428ddd2f085915104d425a0476a6fa5d930f85d8",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.12917188528295795,
+          "planar_length_coordinate_units": 2.6209278238977793
+        },
+        "zero_area_feature_ids": []
+      }
+    },
+    {
+      "file": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-004.json.gz",
+      "row": {
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "component": "physical-component:9124722a82606c8db57df20583a15739055eab7f62eda2346640080bc7137b7f",
+        "component_geometry_sha256": "8e2da434fc3eb67facada7a46404c0bb98036bc16934687d1fc9e5c752cfd4a3",
+        "component_minus_source_union": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.5663,
+                  6.8234
+                ],
+                [
+                  0.5675960000000002,
+                  6.821294
+                ],
+                [
+                  0.5662619078418364,
+                  6.8220722204255955
+                ],
+                [
+                  0.565720060801848,
+                  6.82239994760173
+                ],
+                [
+                  0.5654012326828054,
+                  6.823415767847671
+                ],
+                [
+                  0.5663,
+                  6.8234
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "5b46f0c215ef71de9cad75b5ad01c360792fa37a5bc9abfb63e064ab9916300d",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.0000017204602425397348,
+          "planar_length_coordinate_units": 0.006614139269346691
+        },
+        "coordinate_scope": "literal original GeoJSON lon/lat pointsets; no periodic wrapping, coordinate snapping, datum transformation or normalization",
+        "current_component_relation": "retained-full-original-feature-pointset",
+        "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "dateline_connected": false,
+        "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+        "feature_intersections": [
+          {
+            "binding": {
+              "feature_index": 89,
+              "feature_sha256": "cc81924e6eccd064583898fb1dd218f6a87c5da99cc64652342782d06e06087c",
+              "geometry_sha256": "7933f17ae51f881749b2f14c1b7c486db7da6f77f43ff1131bf857c853cd918a",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B35240131522033",
+                  "original_feature_sha256": "59bbceb560b44702e5b747e59ebc766439beff28598b1907be742129b370afe1",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B35240131522033",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.5653907975460122,
+                      6.823415950920245
+                    ],
+                    [
+                      0.5654012326828055,
+                      6.823415767847671
+                    ],
+                    [
+                      0.565720060801848,
+                      6.82239994760173
+                    ],
+                    [
+                      0.5662619078418407,
+                      6.822072220425593
+                    ],
+                    [
+                      0.5657,
+                      6.8224
+                    ],
+                    [
+                      0.5653907975460122,
+                      6.823415950920245
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "68cf69fb37386e2c496b04a39ba95b3f02cc691b94d4a6f8b84926df1bf04809",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 1.872626052862717e-8,
+              "planar_length_coordinate_units": 0.0034208486939062335
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 93,
+              "feature_sha256": "38b2cf4d23fc6fb8de208a85888a3a16f88b26574f599e9a468df59ea730385a",
+              "geometry_sha256": "357c38a16493d6e4f3290ec0828432d4ebae3d1d4bdb0c52cbfa10c3f71bc913",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B47242267083805",
+                  "original_feature_sha256": "9d040dcb24d67bf9db31d5d3d084693a8d95a01e7e2b72e8ae8aca6bed430d74",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B47242267083805",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 95,
+              "feature_sha256": "ac5d0bcec5dc7a842cdc5685d7110fdfcea63121cdd9a2fdd1fd69e99051b932",
+              "geometry_sha256": "2e27041ca598e80f12590c18c921c7bd3050bc25d94877fda8a77593a8bddd94",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B45105521184723",
+                  "original_feature_sha256": "a47b149545cb52ca275b10e662ddaf14a46daa6df6f5b458a192c178a642552d",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B45105521184723",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 34,
+              "feature_sha256": "a69e69b5e91eb309914d1bb7ebb3213a2562684205a7cc6de39ba84e9b8fe5d8",
+              "geometry_sha256": "03da908354486a19969ac856eda68ec5309b7b6febb7b94810f5b9077d113958",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:TGO:ADM2:56601680B4042875560778",
+                  "original_feature_sha256": "14be3cd6e8501ec6d4b94d285208723e1d88ef25539983023f63289e9b31db98",
+                  "original_parent_id": "framework:province:plateaux-region:475553e356da",
+                  "reference_year": "2017"
+                }
+              ],
+              "shapeID": "56601680B4042875560778",
+              "source_id": "gb:TGO:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          }
+        ],
+        "full_component_feature_sha256": "c63e07854803c223d3af5aab5d10c3c946c2df384eda6c99fe6fef0f8cf8b9d1",
+        "original_component_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "positive_area_feature_ids": [
+          {
+            "feature_index": 89,
+            "recorded_stable_subject_ids": [
+              "gb:GHA:ADM2:2480657B35240131522033"
+            ],
+            "shapeID": "2480657B35240131522033",
+            "source_id": "gb:GHA:ADM2"
+          }
+        ],
+        "source_products": [
+          "gb:GHA:ADM2",
+          "gb:TGO:ADM2"
+        ],
+        "source_union_intersection": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.5653907975460122,
+                  6.823415950920245
+                ],
+                [
+                  0.5654012326828054,
+                  6.823415767847671
+                ],
+                [
+                  0.565720060801848,
+                  6.82239994760173
+                ],
+                [
+                  0.5662619078418364,
+                  6.8220722204255955
+                ],
+                [
+                  0.5657,
+                  6.8224
+                ],
+                [
+                  0.5653907975460122,
+                  6.823415950920245
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "e1be81975df0616665dc52a1187ed035c66e0d0e8ebd28e73208acf785e38397",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.8726260528544134e-8,
+          "planar_length_coordinate_units": 0.003420848693895989
+        },
+        "status": "positive-source-coverage-mixed-partial-or-subject-unresolved",
+        "surface_status": "unverified",
+        "uniquely_covering_compatible_recorded_subject": null,
+        "unknowns": [],
+        "whole_product_bbox_queries": [
+          {
+            "complete_bbox_candidate_indices": [
+              89,
+              93,
+              95
+            ],
+            "source_id": "gb:GHA:ADM2",
+            "whole_product_feature_count": 260
+          },
+          {
+            "complete_bbox_candidate_indices": [
+              34
+            ],
+            "source_id": "gb:TGO:ADM2",
+            "whole_product_feature_count": 37
+          }
+        ],
+        "whole_relevant_source_union": {
+          "geometry": {
+            "canonical_geometry_bytes": 47083,
+            "geometry_object_sha256": "7c9e85b6b55702f952f9905c8bf9793a00016bfc7aed5ed9ac4e0fbee923dfe4",
+            "object_index": "source-union-object-index.json"
+          },
+          "geometry_sha256": "7c9e85b6b55702f952f9905c8bf9793a00016bfc7aed5ed9ac4e0fbee923dfe4",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.21926808135593595,
+          "planar_length_coordinate_units": 4.290845873968933
+        },
+        "zero_area_feature_ids": []
+      }
+    },
+    {
+      "file": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-005.json.gz",
+      "row": {
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "component": "physical-component:dbd76c808ddc0bf725ad6085fce94ba4fe23beb60eef0deeb6509d6c0a334f87",
+        "component_geometry_sha256": "e58943108a4ec60b8e1a8d7e6d0c02187b00f4fdaead23078eb2d8b64f0b756a",
+        "component_minus_source_union": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.5510922675759297,
+                  6.930068114675398
+                ],
+                [
+                  0.550022447225385,
+                  6.92963065935722
+                ],
+                [
+                  0.5500200404500367,
+                  6.9296390758514335
+                ],
+                [
+                  0.5517765479520313,
+                  6.9303906191808125
+                ],
+                [
+                  0.5527999999999949,
+                  6.930799999999998
+                ],
+                [
+                  0.5510922675759297,
+                  6.930068114675398
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "b4a4806008fc2cf84ff149062322f4cb4f9a8453df53e9f32174b68e8d055756",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.61044300953976e-8,
+          "planar_length_coordinate_units": 0.006035339807560467
+        },
+        "coordinate_scope": "literal original GeoJSON lon/lat pointsets; no periodic wrapping, coordinate snapping, datum transformation or normalization",
+        "current_component_relation": "retained-full-original-feature-pointset",
+        "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "dateline_connected": false,
+        "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+        "feature_intersections": [
+          {
+            "binding": {
+              "feature_index": 93,
+              "feature_sha256": "38b2cf4d23fc6fb8de208a85888a3a16f88b26574f599e9a468df59ea730385a",
+              "geometry_sha256": "357c38a16493d6e4f3290ec0828432d4ebae3d1d4bdb0c52cbfa10c3f71bc913",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B47242267083805",
+                  "original_feature_sha256": "9d040dcb24d67bf9db31d5d3d084693a8d95a01e7e2b72e8ae8aca6bed430d74",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B47242267083805",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.55,
+                      6.9296
+                    ],
+                    [
+                      0.5499793721973094,
+                      6.929671748878923
+                    ],
+                    [
+                      0.5498,
+                      6.9296
+                    ],
+                    [
+                      0.5500074819885797,
+                      6.929682992795431
+                    ],
+                    [
+                      0.550022447225385,
+                      6.92963065935722
+                    ],
+                    [
+                      0.5510922675759344,
+                      6.9300681146754
+                    ],
+                    [
+                      0.55,
+                      6.9296
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "94c7d900fdb468a40ae2aee6f8fcf1ed47f2dc3391da22a9d97a4183ac7f58b4",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 1.3431347245626182e-8,
+              "planar_length_coordinate_units": 0.0028898967460601705
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 95,
+              "feature_sha256": "ac5d0bcec5dc7a842cdc5685d7110fdfcea63121cdd9a2fdd1fd69e99051b932",
+              "geometry_sha256": "2e27041ca598e80f12590c18c921c7bd3050bc25d94877fda8a77593a8bddd94",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:GHA:ADM2:2480657B45105521184723",
+                  "original_feature_sha256": "a47b149545cb52ca275b10e662ddaf14a46daa6df6f5b458a192c178a642552d",
+                  "original_parent_id": "framework:province:volta-region:c10898f0f555",
+                  "reference_year": "2019"
+                }
+              ],
+              "shapeID": "2480657B45105521184723",
+              "source_id": "gb:GHA:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+              "geometry_type": "Polygon",
+              "is_empty": true,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 0,
+              "planar_length_coordinate_units": 0
+            },
+            "source_feature_covers_entire_component": false
+          },
+          {
+            "binding": {
+              "feature_index": 34,
+              "feature_sha256": "a69e69b5e91eb309914d1bb7ebb3213a2562684205a7cc6de39ba84e9b8fe5d8",
+              "geometry_sha256": "03da908354486a19969ac856eda68ec5309b7b6febb7b94810f5b9077d113958",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:TGO:ADM2:56601680B4042875560778",
+                  "original_feature_sha256": "14be3cd6e8501ec6d4b94d285208723e1d88ef25539983023f63289e9b31db98",
+                  "original_parent_id": "framework:province:plateaux-region:475553e356da",
+                  "reference_year": "2017"
+                }
+              ],
+              "shapeID": "56601680B4042875560778",
+              "source_id": "gb:TGO:ADM2",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      0.5499793721973094,
+                      6.929671748878923
+                    ],
+                    [
+                      0.5498296587708941,
+                      6.929611863508358
+                    ],
+                    [
+                      0.5517765479520306,
+                      6.9303906191808125
+                    ],
+                    [
+                      0.5499921914140367,
+                      6.9296271602990025
+                    ],
+                    [
+                      0.5499793721973094,
+                      6.929671748878923
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "4342c376b6a331b2a164920b791e2af83b718cc7dec791c7fcf7f8a23acd0263",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 4.467443448541954e-8,
+              "planar_length_coordinate_units": 0.004245328854946924
+            },
+            "source_feature_covers_entire_component": false
+          }
+        ],
+        "full_component_feature_sha256": "2c1381528fbca17b8b2cf839d3c4ac97107f882722305ee26a5c4071a55ae7bb",
+        "original_component_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "positive_area_feature_ids": [
+          {
+            "feature_index": 93,
+            "recorded_stable_subject_ids": [
+              "gb:GHA:ADM2:2480657B47242267083805"
+            ],
+            "shapeID": "2480657B47242267083805",
+            "source_id": "gb:GHA:ADM2"
+          },
+          {
+            "feature_index": 34,
+            "recorded_stable_subject_ids": [
+              "gb:TGO:ADM2:56601680B4042875560778"
+            ],
+            "shapeID": "56601680B4042875560778",
+            "source_id": "gb:TGO:ADM2"
+          }
+        ],
+        "source_products": [
+          "gb:GHA:ADM2",
+          "gb:TGO:ADM2"
+        ],
+        "source_union_intersection": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  0.55,
+                  6.9296
+                ],
+                [
+                  0.5499793721973094,
+                  6.929671748878923
+                ],
+                [
+                  0.5498,
+                  6.9296
+                ],
+                [
+                  0.5517765479520313,
+                  6.9303906191808125
+                ],
+                [
+                  0.5500200404500367,
+                  6.9296390758514335
+                ],
+                [
+                  0.550022447225385,
+                  6.92963065935722
+                ],
+                [
+                  0.5510922675759297,
+                  6.930068114675398
+                ],
+                [
+                  0.55,
+                  6.9296
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "3e74a9293f907f740d2db876bd8a699b60cf4451555306e452b0ae10791de32d",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.672068201202289e-8,
+          "planar_length_coordinate_units": 0.006660094735241874
+        },
+        "status": "positive-source-coverage-mixed-partial-or-subject-unresolved",
+        "surface_status": "unverified",
+        "uniquely_covering_compatible_recorded_subject": null,
+        "unknowns": [],
+        "whole_product_bbox_queries": [
+          {
+            "complete_bbox_candidate_indices": [
+              93,
+              95
+            ],
+            "source_id": "gb:GHA:ADM2",
+            "whole_product_feature_count": 260
+          },
+          {
+            "complete_bbox_candidate_indices": [
+              34
+            ],
+            "source_id": "gb:TGO:ADM2",
+            "whole_product_feature_count": 37
+          }
+        ],
+        "whole_relevant_source_union": {
+          "geometry": {
+            "canonical_geometry_bytes": 53607,
+            "geometry_object_sha256": "a4450eb46f2c57d400bc65964ec856a09166559de8e339eadb2b1e1f162b0c33",
+            "object_index": "source-union-object-index.json"
+          },
+          "geometry_sha256": "a4450eb46f2c57d400bc65964ec856a09166559de8e339eadb2b1e1f162b0c33",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.17246769679661297,
+          "planar_length_coordinate_units": 4.326547853992736
+        },
+        "zero_area_feature_ids": []
+      }
+    }
+  ],
+  "source_products": {
+    "metadata": {
+      "GHA": {
+        "boundaryID": "GHA-ADM2-2480657",
+        "boundaryName": "Ghana",
+        "boundaryISO": "GHA",
+        "boundaryYearRepresented": "2019",
+        "boundaryType": "ADM2",
+        "boundaryCanonical": "Districts",
+        "boundarySource": "USAID Ghana HPNO, Ghana Statistical Service",
+        "boundaryLicense": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "licenseDetail": "nan",
+        "licenseSource": "creativecommons.org/licenses/by/4.0/",
+        "boundarySourceURL": "hub.arcgis.com/datasets/USAID-Ghana-HPNO",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Western Africa",
+        "worldBankIncomeGroup": "Lower-middle-income Countries",
+        "admUnitCount": "260",
+        "meanVertices": "2539.0",
+        "minVertices": "15",
+        "maxVertices": "13975",
+        "meanPerimeterLengthKM": "175.87317160581716",
+        "minPerimeterLengthKM": "5.348893460879481",
+        "maxPerimeterLengthKM": "707.2388622159976",
+        "meanAreaSqKM": "921.0570561270184",
+        "minAreaSqKM": "1.556765182956466",
+        "maxAreaSqKM": "7558.215177152616",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GHA/ADM2/geoBoundaries-GHA-ADM2-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GHA/ADM2/geoBoundaries-GHA-ADM2.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GHA/ADM2/geoBoundaries-GHA-ADM2.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GHA/ADM2/geoBoundaries-GHA-ADM2-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GHA/ADM2/geoBoundaries-GHA-ADM2_simplified.geojson",
+        "sha256": "ae10ae6edbf0a04e5cbedde2d6cb9c30e7867969c530264772d1e76990142f02"
+      },
+      "TGO": {
+        "boundaryID": "TGO-ADM2-56601680",
+        "boundaryName": "Togo",
+        "boundaryISO": "TGO",
+        "boundaryYearRepresented": "2017",
+        "boundaryType": "ADM2",
+        "boundaryCanonical": "Prefectures",
+        "boundarySource": "OpenStreetMap, Wambacher",
+        "boundaryLicense": "Creative Commons Attribution-ShareAlike 2.0",
+        "licenseDetail": "nan",
+        "licenseSource": "www.openstreetmap.org/copyright",
+        "boundarySourceURL": "wambachers-osm.website/boundaries/",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Western Africa",
+        "worldBankIncomeGroup": "Low-income Countries",
+        "admUnitCount": "37",
+        "meanVertices": "256.0",
+        "minVertices": "61",
+        "maxVertices": "489",
+        "meanPerimeterLengthKM": "188.66564942352207",
+        "minPerimeterLengthKM": "50.86474781281546",
+        "maxPerimeterLengthKM": "364.6130978237084",
+        "meanAreaSqKM": "1534.2330972897512",
+        "minAreaSqKM": "129.89354601592208",
+        "maxAreaSqKM": "4417.078777764401",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2_simplified.geojson",
+        "sha256": "f0b555060987b20814aaf807c156cecfbe91d822d62e1b1e2920930d910bc291"
+      }
+    },
+    "individual_attribution": [
+      {
+        "files": null,
+        "id": "gb:GHA:ADM2",
+        "license": {
+          "status": "redistributable",
+          "terms": "The retained original upstream geoBoundaries derivative-product statement declares CC-BY4.0 with geoBoundaries and individual-source attribution; see CITATION-AND-USE-geoBoundaries-original.txt and individual-source-attribution.json. Exact underlying original metadata declares Creative Commons Attribution 4.0 International (CC BY 4.0); detail=nan; licenseSource=creativecommons.org/licenses/by/4.0/. These terms are preserved, not independently broadened or reapproved by this engineering receipt."
+        },
+        "limit": "Source authority, underlying original permission particulars, effective dates, water/land and political interpretation are not independently verified; exact source bytes/counts and recorded metadata are preserved. Product derivative-use terms do not approve those facts.",
+        "restoration": "Complete original bytes are independently retained as ordinary candidate original-source descriptors. Decode catalogue-listed gzip payloads in exact ordinal/offset order, then verify original whole ae10ae6edbf0a04e5cbedde2d6cb9c30e7867969c530264772d1e76990142f02 / 3017886 bytes before parsing. corpus.py performs this actual reconstruction. No remote retrieval is needed for package reproduction.",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06T22:17:20.897649+00:00",
+        "role": "actual consumed original administrative-registry product; byte custody only, source authority unapproved",
+        "temporal_status": "unknown",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GHA/ADM2/geoBoundaries-GHA-ADM2_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Recorded represented-year claim 2019; original metadata at c6a26e1caba54e1b81a89fbda3a64fff56da323d; effective applicability unverified"
+      },
+      {
+        "files": null,
+        "id": "gb:TGO:ADM2",
+        "license": {
+          "status": "redistributable",
+          "terms": "The retained original upstream geoBoundaries derivative-product statement declares CC-BY4.0 with geoBoundaries and individual-source attribution; see CITATION-AND-USE-geoBoundaries-original.txt and individual-source-attribution.json. Exact underlying original metadata declares Creative Commons Attribution-ShareAlike 2.0; detail=nan; licenseSource=www.openstreetmap.org/copyright. These terms are preserved, not independently broadened or reapproved by this engineering receipt."
+        },
+        "limit": "Source authority, underlying original permission particulars, effective dates, water/land and political interpretation are not independently verified; exact source bytes/counts and recorded metadata are preserved. Product derivative-use terms do not approve those facts.",
+        "restoration": "Complete original bytes are independently retained as ordinary candidate original-source descriptors. Decode catalogue-listed gzip payloads in exact ordinal/offset order, then verify original whole f0b555060987b20814aaf807c156cecfbe91d822d62e1b1e2920930d910bc291 / 151571 bytes before parsing. corpus.py performs this actual reconstruction. No remote retrieval is needed for package reproduction.",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06T22:17:21.426109+00:00",
+        "role": "actual consumed original administrative-registry product; byte custody only, source authority unapproved",
+        "temporal_status": "unknown",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Recorded represented-year claim 2017; original metadata at c6a26e1caba54e1b81a89fbda3a64fff56da323d; effective applicability unverified"
+      }
+    ],
+    "retained_payloads": {
+      "GHA": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GHA-ADM2-000.bin.gz",
+        "decoded_bytes": 3017886,
+        "decoded_sha256": "ae10ae6edbf0a04e5cbedde2d6cb9c30e7867969c530264772d1e76990142f02",
+        "feature_count": 260,
+        "features": [
+          {
+            "properties": {
+              "shapeName": "Ho Municipal",
+              "shapeISO": "",
+              "shapeID": "2480657B35240131522033",
+              "shapeGroup": "GHA",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "MultiPolygon"
+          },
+          {
+            "properties": {
+              "shapeName": "Ho West",
+              "shapeISO": "",
+              "shapeID": "2480657B47242267083805",
+              "shapeGroup": "GHA",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      },
+      "TGO": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TGO-ADM2-000.bin.gz",
+        "decoded_bytes": 151571,
+        "decoded_sha256": "f0b555060987b20814aaf807c156cecfbe91d822d62e1b1e2920930d910bc291",
+        "feature_count": 37,
+        "features": [
+          {
+            "properties": {
+              "shapeName": "Agou",
+              "shapeISO": "",
+              "shapeID": "56601680B98633254865748",
+              "shapeGroup": "TGO",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          },
+          {
+            "properties": {
+              "shapeName": "Kloto",
+              "shapeISO": "",
+              "shapeID": "56601680B4042875560778",
+              "shapeGroup": "TGO",
+              "shapeType": "ADM2"
+            },
+            "geometry_type": "Polygon"
+          }
+        ]
+      }
+    }
+  },
+  "land_source_fitness_matching_rows": [
+    {
+      "component": "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc",
+      "dispatch_ready": false,
+      "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+      "operational_batch": "gap-operational-batch:ff2e40a0b63b14f8c4b669f7",
+      "original_admin_observations": [
+        {
+          "cause_status": "unknown",
+          "component": "physical-component:06dc16bf3ee20625d3efb70f8f94afa061a476eb1d83eb3ddbd7bcf9495a28fc",
+          "component_geometry_sha256": "3d26b992f388383b04a21e896a59d80406122ae9744130a6f8a0dbbadb068fbb",
+          "containing_file": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-002.json.gz",
+          "current_binding": "exact-current-geometry",
+          "current_component_relation": "retained-full-original-feature-pointset",
+          "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+          "family": "gap-source-batch:836f0998d0d7b82bd3486750",
+          "full_component_feature_sha256": "90bd715fbb6b906a9bc248dccea3d2ec87a5ff2711146b699a1b752ec1a2e8c7",
+          "packet": "global-source-comparisons-b-package3-20261006",
+          "source_products": [
+            "gb:GHA:ADM2",
+            "gb:TGO:ADM2"
+          ],
+          "status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "surface_status": "unverified",
+          "uniquely_covering_compatible_recorded_subject": {
+            "id": "gb:GHA:ADM2:2480657B47242267083805",
+            "original_feature_sha256": "9d040dcb24d67bf9db31d5d3d084693a8d95a01e7e2b72e8ae8aca6bed430d74",
+            "original_parent_id": "framework:province:volta-region:c10898f0f555",
+            "reference_year": "2019"
+          },
+          "unknowns": [],
+          "whole_original_row_sha256": "9821ed59c6aefaadb44ef017c2b20ff01678ba0e35a59df66d9baa6f203bafcf"
+        }
+      ],
+      "original_responsible_role": "GEO-source-research",
+      "physical_authority": "unapproved",
+      "source_fitness_prerequisite": "GEO-source-fitness-before-processing-reproduction"
+    }
+  ],
+  "conclusion": {
+    "status": "source-fit remains unapproved for the entire family",
+    "bounded_finding": "The pinned GHA/TGO product bytes include the four expected shapeIDs and names. The retained source-comparison rows indicate one uniquely covering compatible recorded Ghana subject and five components with partial or unresolved relationships. All six physical surface assessments remain unverified and authority unapproved.",
+    "limits": [
+      "Represented-year fields (GHA 2019; TGO 2017) are metadata claims, not independently established effective dates.",
+      "geoBoundaries product and underlying source license statements are retained claims; reuse scope and attribution obligations require primary-source/legal confirmation.",
+      "No evidence here establishes legal boundary authority, source completeness, land/water truth, or cause.",
+      "Stored geometry comparisons use literal source coordinate pointsets and existing comparison outputs; no new geometry calculations or normalization were performed.",
+      "No remote source retrieval was performed in this packet.",
+      "Current official geoBoundaries and OSM pages were checked on 2026-10-07. They are not proof of the exact terms effective for the retained 2017 TGO data; the retained CC BY-SA 2.0 may reflect documentation/data terms confusion and requires clarification."
+    ]
+  },
+  "external_references_checked": {
+    "checked_at": "2026-10-07",
+    "sources": [
+      {
+        "url": "https://www.geoboundaries.org/api.html",
+        "finding": "Official geoBoundaries documentation describes versioned archival access, says gbOpen is CC BY 4.0 compliant, and says API metadata includes represented year, primary source, original license, source update and build dates. This supports treating the retained dates and licenses as metadata fields; it does not establish the specific historical source or boundary authority."
+      },
+      {
+        "url": "https://www.openstreetmap.org/copyright",
+        "finding": "Current OSM copyright page states OSM data is under ODbL and distinguishes the page documentation license (CC BY-SA 2.0). The retained 2017 TGO product metadata records CC BY-SA 2.0 for the underlying source. This apparent data/documentation license mismatch requires source-vintage-specific clarification; no legal conclusion is made."
+      }
+    ]
+  }
+}
