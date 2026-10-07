@@ -1,0 +1,508 @@
+{
+  "actual_downstream_reader": {
+    "actual_consumer_bytes": 95809336,
+    "actual_consumer_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "complete_original_record_count": 188612,
+    "full_validation_before_consumer": true,
+    "index_sha256": "ad77048751f2826071afb727f794752ca999d5a91a21657b1514e60982fd0005",
+    "member_bytes": 95809336,
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "native_geometry_operations": false,
+    "reader_sha256": "c06f8b65e700b81fb73352ffb17bee719eaab7a1bc8ae30ed1707d6e2f3b015a",
+    "source_zip_reads_by_downstream": 0
+  },
+  "actual_execution_commit": "bc1dcbecebedf35203cf14b92a91ef0d957cf2f0",
+  "actual_report_sha256": "5934561ea2b90950812c82d7eb4bbfdba69d54b96ebf1991eadc9bcda33c11f1",
+  "all23newoutputs_whole_encoded_checked": 23,
+  "all_fields_equal_except": "literal nonsemantic geometry_validity string; both expressly not-evaluated",
+  "complete_canonical_record_hash_excluding_geometry_validity": "2ff420b8a7b69d3b03f391b5d434aa24b3c470c44eb70bf3446d7a8ed05e5d03",
+  "complete_native_bytes": 95809336,
+  "complete_native_parts": [
+    {
+      "bytes": 22743455,
+      "hash_kind": "file-bytes",
+      "offset": 0,
+      "ordinal": 0,
+      "path": "native-00.bin.gz",
+      "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb",
+      "uncompressed_bytes": 33554432,
+      "uncompressed_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281"
+    },
+    {
+      "bytes": 23286998,
+      "hash_kind": "file-bytes",
+      "offset": 33554432,
+      "ordinal": 1,
+      "path": "native-01.bin.gz",
+      "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf",
+      "uncompressed_bytes": 33554432,
+      "uncompressed_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c"
+    },
+    {
+      "bytes": 19571844,
+      "hash_kind": "file-bytes",
+      "offset": 67108864,
+      "ordinal": 2,
+      "path": "native-02.bin.gz",
+      "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0",
+      "uncompressed_bytes": 28700472,
+      "uncompressed_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f"
+    }
+  ],
+  "complete_native_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+  "complete_record_shards": [
+    {
+      "ordinary_tree": "100644 blob cb895d9b7f2335f20d4969c1e9d2844751840aaf\tcoordination/engineering/global-physical-sources-20261006/run-one/records-000.jsonl.gz\n",
+      "pin": {
+        "bytes": 1774667,
+        "hash_kind": "file-bytes",
+        "path": "records-000.jsonl.gz",
+        "sha256": "546134cfca6fff194b6b82fa94e2fc6ce058dbd53e5edca658bd641560ef42d3",
+        "uncompressed_bytes": 8388198,
+        "uncompressed_sha256": "3336a34f054682e36848903934cdfa4dcb164007e71912818d3f6f8da034244e"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1888476,
+        "hash_kind": "file-bytes",
+        "path": "records-000.jsonl.gz",
+        "sha256": "888e0fbe4ff2c466a96e9bdf089cc9a796e807de5dd4782ad58e0c3ebdb4ab50",
+        "uncompressed_bytes": 8388394,
+        "uncompressed_sha256": "2270f64f3ed5b693df2466006902a58467f026d7260e55e8082058349facfe1b"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob c806c1c5e753fd515bec8a30b8ccc65edd8ddc78\tcoordination/engineering/global-physical-sources-20261006/run-one/records-001.jsonl.gz\n",
+      "pin": {
+        "bytes": 1719061,
+        "hash_kind": "file-bytes",
+        "path": "records-001.jsonl.gz",
+        "sha256": "25cf21d7ae905396f54d00bb22b8fd3d78511d49feb2972586d9bfb294cef283",
+        "uncompressed_bytes": 8388499,
+        "uncompressed_sha256": "a9893e1714ed728b27c82a22cd576df8fb394e1120eb414690fb287b718bf7df"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1829227,
+        "hash_kind": "file-bytes",
+        "path": "records-001.jsonl.gz",
+        "sha256": "d6b70d352cbe2e8344e2fc8f97a92acf02fb23d042b26b85633dbccfa0cb0376",
+        "uncompressed_bytes": 8388286,
+        "uncompressed_sha256": "db5bae3eb62575f652428e9e558f422a041d7c9cf5609fb0a08dbda37932524a"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 9573881e83fd9459d42c7a3e1bc00c22d1edb478\tcoordination/engineering/global-physical-sources-20261006/run-one/records-002.jsonl.gz\n",
+      "pin": {
+        "bytes": 1700683,
+        "hash_kind": "file-bytes",
+        "path": "records-002.jsonl.gz",
+        "sha256": "63fadbcea4f4a63f7b040017da3bf75862b9fe455ffe1d96cb2a184ad473c09a",
+        "uncompressed_bytes": 8388239,
+        "uncompressed_sha256": "af8aada6e617b0f4316d012fa25307d18ac295c6949a681b2b1deef465440c47"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1809983,
+        "hash_kind": "file-bytes",
+        "path": "records-002.jsonl.gz",
+        "sha256": "8cba5bd46b5ce61e2e82fe25b635b3089872dae07b713bd87d6a7a320b749534",
+        "uncompressed_bytes": 8388030,
+        "uncompressed_sha256": "5e95cd9db9cd7b42e2257ad33a333b7b7b627e6af41e893c6879377686b15e36"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 1ba2bb6b3c980b16c9f30df8882443cf6bbe0598\tcoordination/engineering/global-physical-sources-20261006/run-one/records-003.jsonl.gz\n",
+      "pin": {
+        "bytes": 1686789,
+        "hash_kind": "file-bytes",
+        "path": "records-003.jsonl.gz",
+        "sha256": "970fc4923cb62cf0e58b8e9288e19c066ef5b3ce2d716a9172fcf262b6e5cbab",
+        "uncompressed_bytes": 8388596,
+        "uncompressed_sha256": "8c6101aa1f7e7300d767a13da7553425c71853e8d6084a373b248c6301f375de"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1795948,
+        "hash_kind": "file-bytes",
+        "path": "records-003.jsonl.gz",
+        "sha256": "73bb0b314a4c9e8571727c74bb41a8bd351025ce46b61d1c943d60a8bf5c4965",
+        "uncompressed_bytes": 8388541,
+        "uncompressed_sha256": "269ca49eac003fb303cac6a3b51a2cba378a91689f959ad8c30775315a12e792"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob b624c3360b838d94b0e2682c91ea64a29df1ac0d\tcoordination/engineering/global-physical-sources-20261006/run-one/records-004.jsonl.gz\n",
+      "pin": {
+        "bytes": 1677094,
+        "hash_kind": "file-bytes",
+        "path": "records-004.jsonl.gz",
+        "sha256": "c53bb56618adadffc66dbfb3c9f2ba571fcfc4d8111d06a979efaf2c8b353b2e",
+        "uncompressed_bytes": 8388315,
+        "uncompressed_sha256": "32b4a4f92aba376aa71b3c330e7dec4b53512418365d6101a088a80ce34fc23d"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1785624,
+        "hash_kind": "file-bytes",
+        "path": "records-004.jsonl.gz",
+        "sha256": "0c356b6fff12db48ea8b45b8e9f121ddc98dbf16106ab70e931e0b75ea81e853",
+        "uncompressed_bytes": 8387974,
+        "uncompressed_sha256": "388d41d2d3baf5a8b1c3057b72839f0360996b81bd1c292798bbac01db65ff8a"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 7b83808fb4061fbbb39c00f703b40b1f7adb1cb8\tcoordination/engineering/global-physical-sources-20261006/run-one/records-005.jsonl.gz\n",
+      "pin": {
+        "bytes": 1670400,
+        "hash_kind": "file-bytes",
+        "path": "records-005.jsonl.gz",
+        "sha256": "708335956bb3fb9ea45df4781eb6646ab825c0f0fe5c49b58f313339d0d7a180",
+        "uncompressed_bytes": 8388162,
+        "uncompressed_sha256": "6d1de7830d4ed99d93878580fe4730a8772b047446b0689bb9182d808d6ffe4b"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1779621,
+        "hash_kind": "file-bytes",
+        "path": "records-005.jsonl.gz",
+        "sha256": "cb1ccdabc997dac000c32efb862d22d8334b2539ee9e7db5ec4c3cc76cecd230",
+        "uncompressed_bytes": 8388290,
+        "uncompressed_sha256": "ac62acebef58709421133e8d95df93cad588235beef56ec4e6180bcd1e0f01aa"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 2968694b1345daefdc07442f2037c0f3bf9dc2be\tcoordination/engineering/global-physical-sources-20261006/run-one/records-006.jsonl.gz\n",
+      "pin": {
+        "bytes": 1665214,
+        "hash_kind": "file-bytes",
+        "path": "records-006.jsonl.gz",
+        "sha256": "f215ad82406a100474863575ed4228e23b092c20e4fe05f81211e2738be41ffc",
+        "uncompressed_bytes": 8388105,
+        "uncompressed_sha256": "15477bbfad594bdc8fe39896a55f0a6874256bbc901eedf5b41cc6f1f34a385a"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1774058,
+        "hash_kind": "file-bytes",
+        "path": "records-006.jsonl.gz",
+        "sha256": "5781519b8370c516861b23f85b0a960fd2d18c80c130c827776ef5f697de4b8d",
+        "uncompressed_bytes": 8388592,
+        "uncompressed_sha256": "0627feb1f559e26366461d778d21891d33c7c9f4965f11be77f5516760a3fc2a"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 3c6370936089218d582ec888b639b5791e68b1c0\tcoordination/engineering/global-physical-sources-20261006/run-one/records-007.jsonl.gz\n",
+      "pin": {
+        "bytes": 1661336,
+        "hash_kind": "file-bytes",
+        "path": "records-007.jsonl.gz",
+        "sha256": "b7b27bd265d768f31275c0a97b46b0a533e763114dae31cd453fda3e3fcaa203",
+        "uncompressed_bytes": 8388077,
+        "uncompressed_sha256": "990f2097ae41eb8b24b42374705276aefe2293415182b2f67d0d1444ea9d9ce6"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1771943,
+        "hash_kind": "file-bytes",
+        "path": "records-007.jsonl.gz",
+        "sha256": "946e48b915c444d16dabde3af73dff97f2575c4021f8b5eb0ebcb3b712df2096",
+        "uncompressed_bytes": 8388410,
+        "uncompressed_sha256": "915370a2cc24ef70e6a933a6f326be86be74a42875c6e0f368f060b62d02b3fe"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 814719aee6caccd4bed0ea7739d5a260010292e6\tcoordination/engineering/global-physical-sources-20261006/run-one/records-008.jsonl.gz\n",
+      "pin": {
+        "bytes": 1660873,
+        "hash_kind": "file-bytes",
+        "path": "records-008.jsonl.gz",
+        "sha256": "602b5d276b59317aec89c61259b89c60ea105f8ffcb0d6a90f612b7627ca8465",
+        "uncompressed_bytes": 8388571,
+        "uncompressed_sha256": "2801e8fb866d63342f2c6aa6b4177307e87ce6913b7167e09770d40566e59c81"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1765747,
+        "hash_kind": "file-bytes",
+        "path": "records-008.jsonl.gz",
+        "sha256": "c4630ab00633afa9291ccfd3ab0ef68e382826d0fdd0eb30f972d67bb2559d72",
+        "uncompressed_bytes": 8388250,
+        "uncompressed_sha256": "6fe5ebe9b1709a60923596a10e3d45d181a8d30d7634f3f93e8b3744f0b8c141"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob c22a484cd6849105e2fca876d40f18a87a06b1a4\tcoordination/engineering/global-physical-sources-20261006/run-one/records-009.jsonl.gz\n",
+      "pin": {
+        "bytes": 1651778,
+        "hash_kind": "file-bytes",
+        "path": "records-009.jsonl.gz",
+        "sha256": "62ee9fc40ff922293a1be4a446c1a2e50e66a0d56ca0d047b47797183a3481d7",
+        "uncompressed_bytes": 8388491,
+        "uncompressed_sha256": "73ce6c27640d5d81dddc693741857e4f4edaab4559367a288a3eceaffb252ce9"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1759063,
+        "hash_kind": "file-bytes",
+        "path": "records-009.jsonl.gz",
+        "sha256": "9bc1a94804c7d0067f8a9ed0428860132733a9c3fb5ea0ab34e9e21e6d80a2ac",
+        "uncompressed_bytes": 8388037,
+        "uncompressed_sha256": "d4846456d82550d9669a482cf71afea8bcade13f54f999b773699d0d30bb8eaa"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 32f8ca39e733e413b6ff6871b8f030bb8825ac8f\tcoordination/engineering/global-physical-sources-20261006/run-one/records-010.jsonl.gz\n",
+      "pin": {
+        "bytes": 1648796,
+        "hash_kind": "file-bytes",
+        "path": "records-010.jsonl.gz",
+        "sha256": "092b27b2509da84dd8dcfb1f79314e9dfb59ab3d682d6e01803633711611248e",
+        "uncompressed_bytes": 8388578,
+        "uncompressed_sha256": "6d7cb193fbd5f2c6a2dbfa87e73a6d311670eed072e247dbc4b8325801211e09"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1758025,
+        "hash_kind": "file-bytes",
+        "path": "records-010.jsonl.gz",
+        "sha256": "ca99fa62b6e7f5770c93714aa6b2de19cb83f4b59699caf8feffb22d72e05ba8",
+        "uncompressed_bytes": 8388442,
+        "uncompressed_sha256": "c2554d4e70e0523d3374abf5e3b11f6312370bfc64e4d3b7bb1c819239057aeb"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 7a5dfd2e9e16c3c1f15106cf44257a3e26a6e017\tcoordination/engineering/global-physical-sources-20261006/run-one/records-011.jsonl.gz\n",
+      "pin": {
+        "bytes": 1646423,
+        "hash_kind": "file-bytes",
+        "path": "records-011.jsonl.gz",
+        "sha256": "e073250af7327454ed07d099ed1a26625ef1a5dd4313f86dae5222ef61c96dfa",
+        "uncompressed_bytes": 8387912,
+        "uncompressed_sha256": "135d9915bc7063a4a471eb2ca35670d2e97d4d1617cd4f3606a9095fa03ea81a"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1755032,
+        "hash_kind": "file-bytes",
+        "path": "records-011.jsonl.gz",
+        "sha256": "cdd97954c8f32b59ad27b4ca2e737c08697b9ea37f8b38a4c5199eaf57f4b54d",
+        "uncompressed_bytes": 8388503,
+        "uncompressed_sha256": "bc5929e27a8d53c46faf9c324c8c7bd55ffc131a5ef5f9afd1a63e0ffb4efb50"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob ddeddc8aa2db1b4c226c5afa74a4efe0262809ec\tcoordination/engineering/global-physical-sources-20261006/run-one/records-012.jsonl.gz\n",
+      "pin": {
+        "bytes": 1646092,
+        "hash_kind": "file-bytes",
+        "path": "records-012.jsonl.gz",
+        "sha256": "dfbdc80947aaa13932327983b2fead5125b870dd4a85784f97be61927e47a61e",
+        "uncompressed_bytes": 8388380,
+        "uncompressed_sha256": "45b476436dc508b68d73ae1cb30dd2062a65a8ce237fe3be83c2165ed33e979e"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1754652,
+        "hash_kind": "file-bytes",
+        "path": "records-012.jsonl.gz",
+        "sha256": "9aa948137f288aa3db164994095600daf7f25d8adbaa021b1bdc4546e31dbeab",
+        "uncompressed_bytes": 8388297,
+        "uncompressed_sha256": "3ae2fd4e19124cfef24c212dcf193cb1e67f899bffbcae9f369297cfa1532757"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob e84dce8dec91ab8fd7d64406b430fee0f030b2b1\tcoordination/engineering/global-physical-sources-20261006/run-one/records-013.jsonl.gz\n",
+      "pin": {
+        "bytes": 1644469,
+        "hash_kind": "file-bytes",
+        "path": "records-013.jsonl.gz",
+        "sha256": "1226a4c04b315e53033b5d6666c49a47729a608d578e6189f838e555517c4df2",
+        "uncompressed_bytes": 8388507,
+        "uncompressed_sha256": "387c49ec68e22033ee9aec1f13edf5d04da630db2783d9ce8fdd6a2755a33814"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1750101,
+        "hash_kind": "file-bytes",
+        "path": "records-013.jsonl.gz",
+        "sha256": "8053624a0f727734a774ca90b38af0086acc4d0904941afc4788e6a6a042114a",
+        "uncompressed_bytes": 8387960,
+        "uncompressed_sha256": "afd70bb43c7df4c7ff8e4bdb3666ed972df10573a4acdd6487bf40739ac0ef25"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 44ecf8fc47dcb9f1a5a64e4799e749cb6666c5d9\tcoordination/engineering/global-physical-sources-20261006/run-one/records-014.jsonl.gz\n",
+      "pin": {
+        "bytes": 1641116,
+        "hash_kind": "file-bytes",
+        "path": "records-014.jsonl.gz",
+        "sha256": "97d3636253f8406901e6e1d88014320e2e0ded7207492a3bb67d128b252e7709",
+        "uncompressed_bytes": 8388583,
+        "uncompressed_sha256": "513aff6d9261eebfcb9107e4f3e2140780022903fadc4a96f488119ebb1accfb"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1733038,
+        "hash_kind": "file-bytes",
+        "path": "records-014.jsonl.gz",
+        "sha256": "027932b27dbef840d53adb4d1aef12a48208dc14ef7a5e2acaa66609b2469f92",
+        "uncompressed_bytes": 8388274,
+        "uncompressed_sha256": "fd8e0557edcb2152fa9eaa7c7f4844048ef69eb1fab7a12180d081a7720cf9d5"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 61fe3a89229535f5de8137cbfbbbfed25cd2a41b\tcoordination/engineering/global-physical-sources-20261006/run-one/records-015.jsonl.gz\n",
+      "pin": {
+        "bytes": 1624726,
+        "hash_kind": "file-bytes",
+        "path": "records-015.jsonl.gz",
+        "sha256": "5bdf2bd239d32441ed44d16baaeb88fc00817a5c74fd3f4d6c9b38437d5602f7",
+        "uncompressed_bytes": 8388559,
+        "uncompressed_sha256": "7199c3e6e7593902fd587047493fda9c359e5a64bbcec31ed31db61340ae3a97"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 1815151,
+        "hash_kind": "file-bytes",
+        "path": "records-015.jsonl.gz",
+        "sha256": "7540ae55f4710f9a64e016d9295e25620303c3c78ff952f7595ccf599b2ffebf",
+        "uncompressed_bytes": 8388294,
+        "uncompressed_sha256": "1dcd1257084bb0bf255ab9b3b35af43bc1cdf4cf1177d7447391770bac1724c8"
+      },
+      "upstream": false
+    },
+    {
+      "ordinary_tree": "100644 blob 0277fa5b423fd8d694be9f4b771b3b682348d47c\tcoordination/engineering/global-physical-sources-20261006/run-one/records-016.jsonl.gz\n",
+      "pin": {
+        "bytes": 1704174,
+        "hash_kind": "file-bytes",
+        "path": "records-016.jsonl.gz",
+        "sha256": "1d85a1cc1f88c7ddaaef4b919b4e51cf47c39bde8f2e3e0959e872e2deaaf277",
+        "uncompressed_bytes": 8387940,
+        "uncompressed_sha256": "a3c5eba6cfb8052bf5726e8c5290954940467b9c8dcaae11f16b008349e909f6"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": "100644 blob 27e4943bfc60af724c21d4504ae6b96c9d2cdda2\tcoordination/engineering/global-physical-sources-20261006/run-one/records-017.jsonl.gz\n",
+      "pin": {
+        "bytes": 119152,
+        "hash_kind": "file-bytes",
+        "path": "records-017.jsonl.gz",
+        "sha256": "eea888831ab90bf8e187e6899352acafb76b1cc31f0537dc5d7ddc9d2d6afb8c",
+        "uncompressed_bytes": 578580,
+        "uncompressed_sha256": "3da53e5871c1565fee078185c38883ab2fc617d58b298bc56cd2180fba20f459"
+      },
+      "upstream": true
+    },
+    {
+      "ordinary_tree": null,
+      "pin": {
+        "bytes": 23058,
+        "hash_kind": "file-bytes",
+        "path": "records-016.jsonl.gz",
+        "sha256": "d0353a528dc526957a1c436614387f73b9e5bca9206e0253c84884c5b4864b7f",
+        "uncompressed_bytes": 102954,
+        "uncompressed_sha256": "0212403db84a02274a19c5e43cd2dc70fde10d9fde8d810f67a4c818235592bb"
+      },
+      "upstream": false
+    }
+  ],
+  "counts": {
+    "coordinate_out_of_range": 0,
+    "coordinate_pairs": 10938801,
+    "level:1": 179832,
+    "level:2": 6659,
+    "level:3": 1437,
+    "level:4": 11,
+    "level:5": 329,
+    "level:6": 344,
+    "records": 188612,
+    "seam:0": 188597,
+    "seam:1": 7,
+    "seam:2": 5,
+    "seam:3": 3,
+    "unclosed": 2
+  },
+  "limitations": [
+    "Custody first-run metadata/nativebyte proof only; two-run/finalhead admission pending.",
+    "No polygon validity/source/date/physical/political/legal/repair approval inferred.",
+    "No other17member body hashes recomputed; upstream inheritedproof unchanged."
+  ],
+  "original_commit": "f8f99612e4d83d561b370189a1969c3e4301a1e3",
+  "original_report_sha256": "b90334b4a836604049eb268604f090f686400147e4747dd12bd2ea1d698b497c",
+  "rows": 188612,
+  "status": "PASS complete first-run upstream metadata parity; no GIS",
+  "upstream_limits": [
+    "Custody only: no polygon validity, physical classification, political assignment or repair.",
+    "Original L5/L6 Antarctic alternatives retained, not conflated with ordinary L1 land.",
+    "Exact original integer coordinate bytes remain in the authenticated complete member; roster is not a substitute geometry.",
+    "2017 compiled archive includes much older WDBII lakes and uncertain registration/dates.",
+    "LICENSE.TXT says LGPLv3 or later; historical README says v3 or earlier; both exact originals retained.",
+    "LICENSE.TXT references COPYINGv3, absent from this actual18-member binary ZIP; no extra original member invented."
+  ]
+}
