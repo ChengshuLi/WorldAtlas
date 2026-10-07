@@ -1,0 +1,53 @@
+{
+  "captured_at_utc": "2026-10-07T02:01:00.522052+00:00",
+  "dataset": "JRC Global Surface Water v1.4 YearlyHistory; official JRC open-data tile retrieval; direct full original GeoTIFF bytes",
+  "dataset_class_semantics": {
+    "0": "No data",
+    "1": "Not water",
+    "2": "Seasonal water",
+    "3": "Permanent water"
+  },
+  "license": "Copernicus Programme; free of charge without restriction of use; dataset attribution EC JRC/Google required",
+  "products": [
+    {
+      "bytes": 13773222,
+      "catalog_or_reference_url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory",
+      "retrieval": {
+        "advertised_content_length": "13773222",
+        "content_type": "image/tiff",
+        "date_header": "Wed, 07 Oct 2026 02:00:51 GMT",
+        "etag": "\"d229a6-5975e856e8642\"",
+        "finished_utc": "2026-10-07T02:00:52.962587+00:00",
+        "http_status": 200,
+        "last_modified_header": "Fri, 15 Nov 2019 08:38:24 GMT",
+        "request_url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/YearlyClassification/LATEST/tiles/yearlyClassification2018/yearlyClassification2018-0000320000-0000760000.tif",
+        "resolved_url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/YearlyClassification/LATEST/tiles/yearlyClassification2018/yearlyClassification2018-0000320000-0000760000.tif",
+        "retrieved_started_utc": "2026-10-07T02:00:50.438491+00:00"
+      },
+      "saved_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/jrc-gsw-v1.4/jrc-gsw-yearly-2018-0000320000-0000760000.tif",
+      "sha256": "a261800db00cfec5412cd5b3f7447c30d0a8ccf7b66e6bee4e9902cf40b64b66",
+      "title": "JRC GSW v1.4 YearlyHistory 2018",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/YearlyClassification/LATEST/tiles/yearlyClassification2018/yearlyClassification2018-0000320000-0000760000.tif"
+    },
+    {
+      "bytes": 14737382,
+      "catalog_or_reference_url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_YearlyHistory",
+      "retrieval": {
+        "advertised_content_length": "14737382",
+        "content_type": "image/tiff",
+        "date_header": "Wed, 07 Oct 2026 02:00:53 GMT",
+        "etag": "\"e0dfe6-5c0797231dec0\"",
+        "finished_utc": "2026-10-07T02:00:55.727927+00:00",
+        "http_status": 200,
+        "last_modified_header": "Wed, 21 Apr 2021 10:58:43 GMT",
+        "request_url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/YearlyClassification/LATEST/tiles/yearlyClassification2019/yearlyClassification2019-0000320000-0000760000.tif",
+        "resolved_url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/YearlyClassification/LATEST/tiles/yearlyClassification2019/yearlyClassification2019-0000320000-0000760000.tif",
+        "retrieved_started_utc": "2026-10-07T02:00:52.962778+00:00"
+      },
+      "saved_path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/jrc-gsw-v1.4/jrc-gsw-yearly-2019-0000320000-0000760000.tif",
+      "sha256": "6e2b83a576df1e3f8bfeeb4a5fd5291c78b59d066242ad98d64ff979f3e874b2",
+      "title": "JRC GSW v1.4 YearlyHistory 2019",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/YearlyClassification/LATEST/tiles/yearlyClassification2019/yearlyClassification2019-0000320000-0000760000.tif"
+    }
+  ]
+}
