@@ -223,4 +223,8 @@ if __name__ == '__main__':
     parser.add_argument('--destination', type=Path, required=True)
     parser.add_argument('--identical-prior', type=Path)
     args = parser.parse_args()
-    restore(args.commit, args.destination, args.identical_prior)
+    import restore as actual_entry
+    from execution import authenticate_runtime
+    actual_entry.authenticate_execution(args.commit)
+    authenticate_runtime(json.loads((PREFIX / 'runtime-guard.json').read_bytes())['node']['path'])
+    actual_entry.restore(args.commit, args.destination, args.identical_prior)

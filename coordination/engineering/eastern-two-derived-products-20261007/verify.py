@@ -201,4 +201,5 @@ if __name__ == '__main__':
     parser.add_argument('--node', required=True)
     parser.add_argument('--identical-prior', type=Path)
     args = parser.parse_args()
-    run(args.commit, args.destination, args.node, args.identical_prior)
+    import verify as actual_entry
+    actual_entry.run(args.commit, args.destination, args.node, args.identical_prior)
