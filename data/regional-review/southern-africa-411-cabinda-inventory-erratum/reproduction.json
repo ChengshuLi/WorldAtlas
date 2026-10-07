@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "issue": 1284,
+  "method_id": "cabinda-inventory-reproduction",
+  "baseline_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+  "historical_readme_commit": "762d7b5a568ca845d85a98a4d188678c126a5d58",
+  "verified_inputs": {
+    "readme1047": {
+      "commit": "762d7b5a568ca845d85a98a4d188678c126a5d58",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/README.md",
+      "bytes": 8350,
+      "sha256": "44005dd5b85ecf2eed4e05d9b1d5c649e1dc4172f609a471f0f13308ac343155"
+    },
+    "readme1057": {
+      "commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/README.md",
+      "bytes": 9697,
+      "sha256": "89cfade5ddbb9e5208772bee3ba8431d690a9461bdff0c3b6aa62e6ae54499e2"
+    },
+    "scope": {
+      "commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/scope.json",
+      "bytes": 20734,
+      "sha256": "20b2cc1aae272ba862059a11779fa14d2569d1a0c3e5cf59ffa034ce764347ee"
+    },
+    "atlasPart29": {
+      "commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    "sourceReview": {
+      "commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/source-review.json",
+      "bytes": 22077,
+      "sha256": "87201ce5d44caee0adb742aa823fce5f7687e5ff9b05b65e587139a3c78d9356"
+    },
+    "geoBoundaries2018": {
+      "commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-AGO-ADM2-2018.geojson",
+      "bytes": 3146775,
+      "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    },
+    "geoBoundaries2018Metadata": {
+      "commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/geoBoundaries-AGO-ADM2-metaData.json",
+      "bytes": 927,
+      "sha256": "0f45ab188f1e12b2f4068ecddeb62b2fb73d4ee7d1a71e29a8a8992d4b7ad302"
+    }
+  },
+  "historical_claim_present_in_both_readmes": true,
+  "original_source": {
+    "name": "geoBoundaries gbHumanitarian AGO ADM2",
+    "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "source_vintage": "2018",
+    "source_data_updated": "2023-01-19",
+    "source_build": "2023-12-12",
+    "source_retrieved_at_utc": "2026-10-06T00:15:21Z",
+    "source_feature_count": 161,
+    "source_level": "ADM2",
+    "source_lineage": "www.gadm.org and Instituto Nacional de Estatística (INE); see methodology; HDX COD-AB AGO",
+    "source_reported_upstream_url": "https//data.humdata.org/dataset/cod-ab-ago",
+    "source_reported_upstream_url_malformed": true,
+    "metadata_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "metadata_lineage": "www.gadm.org and Instituto Nacional de Estatística (INE - www.ine.gov.ao) - see methodology, HDX",
+    "metadata_reported_upstream_url": "https//data.humdata.org/dataset/cod-ab-ago",
+    "source_feature_matches": 4,
+    "source_name_matches_atlas_count": 4,
+    "limitation": "2018 humanitarian ADM2 source identity/name match only; no current legal boundary, completeness, geometry accuracy or neighboring-granularity conclusion."
+  },
+  "atlas_partition_feature_count": 1500,
+  "frozen_scope_member_count": 223,
+  "subject_count": 4,
+  "subject_source_occurrence_count": 4,
+  "subject_source_name_match_count": 4,
+  "subject_atlas_occurrence_count": 4,
+  "subject_frozen_scope_occurrence_count": 0,
+  "subject_outside_frozen_scope_count": 4,
+  "subjects": [
+    {
+      "id": "gb:AGO:ADM2:16411231B22766430211667",
+      "name": "Belize",
+      "source_name": "Belize",
+      "source_name_matches_atlas": true,
+      "source_occurrences": 1,
+      "parent_id": "framework:province:cabinda:fb67d098df5d",
+      "atlas_occurrences": 1,
+      "in_frozen_scope": false
+    },
+    {
+      "id": "gb:AGO:ADM2:16411231B679187258105",
+      "name": "Buco Zau",
+      "source_name": "Buco Zau",
+      "source_name_matches_atlas": true,
+      "source_occurrences": 1,
+      "parent_id": "framework:province:cabinda:fb67d098df5d",
+      "atlas_occurrences": 1,
+      "in_frozen_scope": false
+    },
+    {
+      "id": "gb:AGO:ADM2:16411231B42954517222252",
+      "name": "Cabinda",
+      "source_name": "Cabinda",
+      "source_name_matches_atlas": true,
+      "source_occurrences": 1,
+      "parent_id": "framework:province:cabinda:fb67d098df5d",
+      "atlas_occurrences": 1,
+      "in_frozen_scope": false
+    },
+    {
+      "id": "gb:AGO:ADM2:16411231B63355352791940",
+      "name": "Cacongo (Landana)",
+      "source_name": "Cacongo (Landana)",
+      "source_name_matches_atlas": true,
+      "source_occurrences": 1,
+      "parent_id": "framework:province:cabinda:fb67d098df5d",
+      "atlas_occurrences": 1,
+      "in_frozen_scope": false
+    }
+  ],
+  "positive_control_passed": true,
+  "negative_controls_passed": true,
+  "negative_control": {
+    "fabricated_id": "gb:AGO:ADM2:NOT_A_REAL_CABINDA_FEATURE_1284",
+    "atlas_matches": 0,
+    "frozen_scope_matches": 0,
+    "incorrect_all_four_in_scope_assertion": false
+  },
+  "result": "All four exact IDs are present once in the retained Atlas partition and absent from the frozen 223-member #411 workload.",
+  "limitations": [
+    "This verifies retained Atlas identity/name/parent bytes and workload membership only.",
+    "It does not establish territorial meaning, current municipality identity, boundary geometry or accuracy, source authority/completeness, source reuse rights, or neighboring granularity.",
+    "The historical 2018 source and current-ten-municipality question remain outside this inventory erratum."
+  ]
+}
