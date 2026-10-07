@@ -151,6 +151,10 @@
     {
       "path": "data/regional-review/french-polynesia-crs-provenance-correction/reproducibility-validation.json",
       "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/evidence-quality.json",
+      "status": "added"
     }
   ],
   "commands": [
@@ -194,12 +198,12 @@
   "lane": "geography",
   "methods": [
     {
-      "area_method": "WGS84 straight-source-edge ellipsoidal integral after explicit scenario transform",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
       "axis_order": "longitude-latitude",
-      "crs": "Source EPSG:4687 RGPF; scenario output EPSG:4326 WGS84",
+      "crs": "EPSG:4326",
       "description": "Reproduce pinned raw RGPF-coordinate overlap outputs and compare them to EPSG:8828 transformed coordinates; evaluate operation metadata, axis-order controls and area sensitivity; no DAF operation is selected.",
-      "distance_method": "WGS84 geodesic for transformation sample displacement",
-      "helper_version": "packet-specific-v1",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
       "id": "rgpf-to-wgs84-sensitivity-v1",
       "kind": "geography",
       "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; PROJ 9.5.1 EPSG v11.022; Mapshaper 0.6.121; Node 24.19.0",
@@ -558,11 +562,11 @@
       "sha256": "f6d4f446fdda3b8166e82095558e53d30df7b55dd3ac7ce869f9ea705d3bb30a"
     },
     {
-      "bytes": 4429,
+      "bytes": 5327,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
       "role": "generated-table",
-      "sha256": "512be1ed10c4fdb2756f5ab7bf37a0c8a26ec46cd5937768a3f254b6febbb7c6"
+      "sha256": "8ddb422f08fc428f52882e35d150889a263b40f6751cd3026b397c765d2781da"
     },
     {
       "bytes": 3305,
@@ -607,10 +611,157 @@
       "sha256": "a8fb9fa5efad766f47d677569293d516852050837248f4f3463e1b2d80f4c15d"
     },
     {
-      "bytes": 292,
+      "bytes": 278,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/french-polynesia-crs-provenance-correction/reproducibility-validation.json",
-      "sha256": "c165c1ffe0a636aa10407f248b0a5a21503e412e7a645d5c1de65f7e40fab53f"
+      "sha256": "eabf17941844d8b719b668465f5fdcd8e555ad5c210a97e1a83b3fc649e77b82"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rows": [
+        {
+          "decimals": 8,
+          "line": 15,
+          "metric_id": "pyf-4963-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 16,
+          "metric_id": "pyf-4963-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 17,
+          "metric_id": "pyf-4963-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 18,
+          "metric_id": "pyf-4963-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 19,
+          "metric_id": "pyf-4964-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 20,
+          "metric_id": "pyf-4964-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 21,
+          "metric_id": "pyf-4964-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 22,
+          "metric_id": "pyf-4964-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 23,
+          "metric_id": "pyf-4965-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 24,
+          "metric_id": "pyf-4965-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 25,
+          "metric_id": "pyf-4965-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 26,
+          "metric_id": "pyf-4965-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 27,
+          "metric_id": "pyf-4966-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 28,
+          "metric_id": "pyf-4966-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 29,
+          "metric_id": "pyf-4966-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 30,
+          "metric_id": "pyf-4966-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 31,
+          "metric_id": "pyf-4967-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 32,
+          "metric_id": "pyf-4967-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 33,
+          "metric_id": "pyf-4967-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 34,
+          "metric_id": "pyf-4967-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | Delta intersection area | {value} | m\u00b2 |"
+        }
+      ]
     }
   ],
   "sources": [
