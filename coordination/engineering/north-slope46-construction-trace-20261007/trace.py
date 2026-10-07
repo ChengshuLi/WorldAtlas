@@ -56,7 +56,7 @@ def fresh_queries(candidate,row,sources,validity=None,shifted_cache=None):
 def original_levels(candidate,row,sources,shifted_cache):
     """Original104 operand semantics, including whole-source reconstruction.
 
-    The numerical1300 helper deliberately had no native geometry restoration.
+    The retained diagnostic reconstruction did not restore native geometry.
     Here the full native input is authenticated, so this named source alias has
     its original complete operand instead of an omitted-polygon placeholder.
     No fresh query result or altered geometry substitutes for retained evidence.

@@ -87,7 +87,7 @@ def main():
         from shapely.affinity import translate
         source2=box(1,0,1.5,1);meta2=dict(full_meta,id=8)
         q2,p2=reader.old.comparison.relation(candidate,source2,8);q2.update(source_level=1,source_container=-1,source_record_sha256='a'*64,source_pointset_sha256='b'*64)
-        ordered,_=trace.original_levels(candidate,{'query_relations':[q2,q]},dict(source,**{})|{8:(meta2,source2)}, {})
+        ordered,_=trace.original_levels(candidate,{'query_relations':[q2,q]},source|{8:(meta2,source2)}, {})
         assert [reader.canonical(trace.kernel.ordinary_mapping(g))for g in ordered[1]]==[reader.canonical(trace.kernel.ordinary_mapping(source2)),reader.canonical(trace.kernel.ordinary_mapping(source[7][1]))]
         moved=translate(candidate,xoff=360);moved_source=translate(source[7][1],xoff=360)
         frame=dict(q,periodic_offset=360)
