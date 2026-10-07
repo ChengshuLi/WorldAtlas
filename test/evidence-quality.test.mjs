@@ -122,3 +122,67 @@ test('identity-only projection rejects duplicates, geometry and altered native I
   f.m.baseline.files[0].bytes=raw.length;f.m.baseline.files[0].sha256=sha256(raw);
   assert.throws(()=>validateEvidence(f.m,{readFile:(name,vintage)=>name==='prior-audit.json'?raw:f.readFile(name,vintage)}),/unique/);
 });
+
+function gzipDescriptor(name, raw) {
+  const packed = gzipSync(raw, {mtime:0});
+  return {packed, file:{path:name, bytes:packed.length, sha256:sha256(packed), hash_kind:'file-bytes',
+    uncompressed_bytes:raw.length, uncompressed_sha256:sha256(raw)}};
+}
+function mixedSubjectFixture(name='components.bin', declared=true) {
+  const m=fixture(), components=Array.from({length:45},(_,i)=>`physical-component:${i}`),
+    contacts=Array.from({length:8},(_,i)=>`gb:IDN:ADM2:${i}`);
+  const raw=Buffer.from(JSON.stringify({features:components.map(id=>({id}))}));
+  const plain=Buffer.from(JSON.stringify({features:contacts.map(id=>({properties:{id}}))}));
+  const {packed,file}=gzipDescriptor(name,raw);
+  if(!declared){delete file.uncompressed_bytes;delete file.uncompressed_sha256;}
+  m.lane='geography';m.subject_ids=[...components,...contacts];m.subject_ids_sha256=subjectsHash(m.subject_ids);
+  m.baseline.files=[file,{path:'contacts.json',bytes:plain.length,sha256:sha256(plain),hash_kind:'file-bytes'}];
+  m.baseline.pins={};m.baseline.subject_files=Object.fromEntries(m.subject_ids.map(id=>[id,components.includes(id)?name:'contacts.json']));
+  m.metrics=[];m.summaries=[];
+  return {m,raw,packed,plain,readFile:(path,vintage)=>{
+    assert.equal(vintage,commit,'subjects must use immutable baseline');
+    if(path===name)return packed;if(path==='contacts.json')return plain;throw Error('Undeclared fixture input');
+  }};
+}
+test('declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership',()=>{
+  const f=mixedSubjectFixture();assert.equal(f.m.subject_ids.length,53);
+  assert.equal(validateEvidence(f.m,{readFile:f.readFile}).status,'bytes-verified');
+  assert.equal(validateEvidence(mixedSubjectFixture('legacy.json.gz',false).m,
+    {readFile:mixedSubjectFixture('legacy.json.gz',false).readFile}).status,'bytes-verified');
+  const plain=structuredClone(f.m);plain.baseline.files[0]={path:'components.bin',bytes:f.raw.length,sha256:sha256(f.raw),hash_kind:'file-bytes'};
+  assert.equal(validateEvidence(plain,{readFile:(name,vintage)=>name==='components.bin'?f.raw:f.readFile(name,vintage)}).status,'bytes-verified');
+});
+test('subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects',()=>{
+  let f=mixedSubjectFixture('components.bin',false);assert.throws(()=>validateEvidence(f.m,{readFile:f.readFile}),SyntaxError);
+  for(const key of ['sha256','uncompressed_sha256']){
+    f=mixedSubjectFixture();f.m.baseline.files[0][key]='f'.repeat(64);
+    assert.throws(()=>validateEvidence(f.m,{readFile:f.readFile}),key==='sha256'?/Input bytes mismatch/:/Uncompressed bytes mismatch/);
+  }
+  for(const mutation of [features=>features.pop(),features=>features[0].id='foreign']){
+    f=mixedSubjectFixture();const body=JSON.parse(f.raw);mutation(body.features);
+    const replacement=gzipDescriptor('components.bin',Buffer.from(JSON.stringify(body)));f.m.baseline.files[0]=replacement.file;
+    assert.throws(()=>validateEvidence(f.m,{readFile:(name,vintage)=>name==='components.bin'?replacement.packed:f.readFile(name,vintage)}),/Subject missing/);
+  }
+  f=mixedSubjectFixture();assert.throws(()=>validateEvidence(f.m,{readFile:(name,vintage)=>f.readFile(name,'candidate')}),/immutable baseline/);
+});
+test('actual subject decompression remains bounded for legacy gzip with small encoded bytes',()=>{
+  const f=mixedSubjectFixture('components.json.gz',false),raw=Buffer.from(JSON.stringify({features:[],padding:'x'.repeat(10000)})),packed=gzipSync(raw);
+  f.m.baseline.files[0]={path:'components.json.gz',bytes:packed.length,sha256:sha256(packed),hash_kind:'file-bytes'};
+  // Both descriptors fit the 512-byte encoded budget, but actual decoded bytes do not.
+  assert.ok(packed.length<512);assert.ok(f.plain.length<512);
+  assert.throws(()=>validateEvidence(f.m,{maxFileBytes:512,readFile:(name,vintage)=>name==='components.json.gz'?packed:f.readFile(name,vintage)}),
+    error=>error.code==='ERR_BUFFER_TOO_LARGE');
+});
+test('prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages',()=>{
+  const f=inventoryFixture(),record=gzipDescriptor('prior-audit.bin',f.record),registry=gzipDescriptor('registry.bin',f.registry);
+  f.m.baseline.files=[record.file];f.m.outputs=[registry.file];f.m.baseline.subject_inventory.path='prior-audit.bin';f.m.baseline.subject_inventory.registry_path='registry.bin';
+  const readFile=(name,vintage)=>{
+    if(name==='prior-audit.bin'){assert.equal(vintage,commit);return record.packed;}
+    if(name==='registry.bin'){assert.equal(vintage,'candidate');return registry.packed;}
+    throw Error('Wrong source');
+  };
+  assert.equal(validateEvidence(f.m,{readFile}).status,'limited');
+  const wrong=JSON.parse(f.registry);wrong.features[0].properties.source_value='foreign';
+  const rebound=gzipDescriptor('registry.bin',Buffer.from(JSON.stringify(wrong)));f.m.outputs=[rebound.file];
+  assert.throws(()=>validateEvidence(f.m,{readFile:(name,vintage)=>name==='registry.bin'?rebound.packed:readFile(name,vintage)}),/registry/);
+});

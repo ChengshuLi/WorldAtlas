@@ -23,6 +23,14 @@ function fileDescriptor(file) {
     Number.isSafeInteger(file.uncompressed_bytes) && file.uncompressed_bytes >= 0, 'Invalid uncompressed descriptor');
 }
 
+// Subject JSON uses the same declared gzip transport as whole-file inspection.
+// Legacy .gz files remain supported; arbitrary binary files are never sniffed.
+function subjectJSON(file, name, vintage, readFile, maxFileBytes) {
+  const raw = readFile(name, vintage);
+  const compressed = file.uncompressed_sha256 !== undefined || name.endsWith('.gz');
+  return JSON.parse(compressed ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw);
+}
+
 /** Identity-only projection from retained prior evidence, never a geometry/source certification. */
 function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
   const inventory = manifest.baseline.subject_inventory;
@@ -40,8 +48,8 @@ function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
   limits.push(`Subject inventory uses retained prior evidence (${inventory.path}); original source membership and geometry were not independently validated by this inventory check`);
   if (!readFile) return;
   const decode = (name, vintage) => {
-    const raw = readFile(name, vintage);
-    return JSON.parse(name.endsWith('.gz') ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw);
+    const files = vintage === 'candidate' ? manifest.outputs : manifest.baseline.files;
+    return subjectJSON(files.find(file => file.path === name), name, vintage, readFile, maxFileBytes);
   };
   let values = decode(inventory.path, manifest.baseline.commit);
   for (const key of inventory.json_pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
@@ -121,8 +129,8 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
       require(manifest.baseline.files.some(f => f.path === name), 'Subject references unpinned file');
       if (readFile) {
         if (!parsed.has(name)) {
-          const raw = readFile(name, manifest.baseline.commit);
-          parsed.set(name, JSON.parse(name.endsWith('.gz') ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw));
+          const file = manifest.baseline.files.find(file => file.path === name);
+          parsed.set(name, subjectJSON(file, name, manifest.baseline.commit, readFile, maxFileBytes));
         }
         require(parsed.get(name).features?.some(f => (f.id ?? f.properties?.id) === id),
           `Subject missing from claimed containing file: ${id}`);
