@@ -1,0 +1,927 @@
+{
+  "baseline": {
+    "commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+    "files": [
+      {
+        "bytes": 90091,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+        "sha256": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173"
+      },
+      {
+        "bytes": 1063935,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c"
+      },
+      {
+        "bytes": 174829,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265"
+      },
+      {
+        "bytes": 403376,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+      },
+      {
+        "bytes": 85617,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz",
+        "role": "original-source",
+        "sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+        "uncompressed_bytes": 387331,
+        "uncompressed_sha256": "f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac"
+      },
+      {
+        "bytes": 117156,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+      },
+      {
+        "bytes": 2080126,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "role": "original-source",
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "bytes": 2081831,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "role": "original-source",
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "bytes": 2080037,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "role": "original-source",
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "bytes": 2074475,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "role": "original-source",
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "bytes": 2079265,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "role": "original-source",
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "bytes": 2085110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "role": "original-source",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "bytes": 2085907,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "role": "original-source",
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "bytes": 2079838,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "role": "original-source",
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "bytes": 2081609,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "role": "original-source",
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "bytes": 1714760,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "role": "original-source",
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "bytes": 2080606,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "role": "original-source",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "bytes": 58829,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/evidence-quality.json",
+        "sha256": "cfcc6ba3d20d405715bbedf22cc8da8464a4c2bd01caeda4b0913442c778d5c3"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 6570767,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-20.json",
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 438758,
+        "hash_kind": "file-bytes",
+        "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/complete-input-index.json",
+        "sha256": "fde93383b699cff1e36668b85ee6529e7fb27062ab0c714c82412ab8f48e08be"
+      },
+      {
+        "bytes": 12313,
+        "hash_kind": "file-bytes",
+        "path": "scripts/administrative.py",
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+      }
+    ],
+    "pin_files": {
+      "coordination/engineering/global-actionability-routing-20261007/input-config.json": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+      "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+      "coordination/engineering/global-actionability-routing-20261007/results/report.json": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/evidence-quality.json": "coordination/engineering/physical-gap-components-1005-20261005-local19/evidence-quality.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/geography/part-20.json": "data/geography/part-20.json",
+      "data/world-index.json": "data/world-index.json",
+      "research/geography/portugal-spain-gap-source-families-20261007/inputs/complete-input-index.json": "research/geography/portugal-spain-gap-source-families-20261007/inputs/complete-input-index.json",
+      "scripts/administrative.py@cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1": "scripts/administrative.py"
+    },
+    "pins": {
+      "coordination/engineering/global-actionability-routing-20261007/input-config.json": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+      "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "coordination/engineering/global-actionability-routing-20261007/results/report.json": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+      "coordination/engineering/physical-gap-components-1005-20261005-local19/evidence-quality.json": "cfcc6ba3d20d405715bbedf22cc8da8464a4c2bd01caeda4b0913442c778d5c3",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/geography/part-20.json": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "research/geography/portugal-spain-gap-source-families-20261007/inputs/complete-input-index.json": "fde93383b699cff1e36668b85ee6529e7fb27062ab0c714c82412ab8f48e08be",
+      "scripts/administrative.py@cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+    },
+    "subject_files": {
+      "gb:PRT:ADM2:2272694B11703437565908": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B14195441772590": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B14276851137333": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B19826937126659": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B2981277827282": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B33325499022339": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B34401883056370": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B40640066990777": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B4115863363061": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B41725550003559": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B4202330031635": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B47980590419850": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B7809713979732": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B90158079900101": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B91442542352830": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B94332722873813": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B95713128960189": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B99137580342110": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B99472059069113": "data/geography/part-20.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/assess.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/complete-components.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/control-source-overlay-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/control-source-overlay-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/current-atlas-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/complete-components.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/control-source-overlay-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/control-source-overlay-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/current-atlas-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/selected-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/complete-components.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/control-source-overlay-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/control-source-overlay-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/current-atlas-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/selected-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/selected-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/scope.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/CAOP_RAA_2025-gpkg.zip",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/CITATION-AND-USE-geoBoundaries-90a1d52.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/dgt-caop2025-page.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/dgt-open-data-page.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/geoBoundaries-PRT-ADM2-metaData-90a1d52.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/physical-source-catalog-observations.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python research/geography/portugal-azores-gap-source-fitness-20261007/assess.py (run 1)",
+    "PYTHONDONTWRITEBYTECODE=1 python research/geography/portugal-azores-gap-source-fitness-20261007/assess.py (run 2)"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "geoboundaries-prt-adm2-simplified-90a1d52"
+      ],
+      "status": "supported",
+      "text": "The exact pinned 311-feature simplified product contains all 19 target source feature IDs once; 34 components were compared to all selected complete features."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-prt-adm2-simplified-90a1d52"
+      ],
+      "status": "supported",
+      "text": "Compared with the exact simplified input, 5 of 34 components have no intersection and 29 have positive-area contact. This is a source-relative overlay result and does not establish administrative correctness."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-prt-adm2-simplified-90a1d52"
+      ],
+      "status": "supported",
+      "text": "Current Atlas contact geometries are not topologically equal to the simplified product; in the 646-pair matrix the products produce 10 different intersects outcomes and 19 different positive-area outcomes. Product distinction is material; cause is unresolved."
+    },
+    {
+      "source_ids": [
+        "dgt-caop2025-azores"
+      ],
+      "status": "supported",
+      "text": "The separate CAOP2025 municipal overlay intersects 32 distinct components in 39 pairs; two components do not intersect a CAOP municipality polygon. This is an administrative-product comparison only."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-prt-adm2-simplified-90a1d52",
+        "dgt-caop2025-azores",
+        "snig-azores-orthophoto-catalog-listings"
+      ],
+      "status": "unresolved",
+      "text": "Source authority/effective dates/accuracy/registration, physical land or water, candidate cause and rightful administration remain unknown for the full family; no source supports a component reclassification."
+    }
+  ],
+  "issue": 1390,
+  "lane": "geography",
+  "methods": [
+    {
+      "area_method": "pyproj.Geod.geometry_area_perimeter absolute area; independent Lambert azimuthal equal-area projection centered 38.2N, 28.2W for comparison; area does not mean land area.",
+      "axis_order": "longitude-latitude",
+      "crs": "geoBoundaries/current Atlas GeoJSON CRS84; component custody geometries interpreted as WGS84 longitude/latitude; DGT GeoPackages EPSG:5014 and EPSG:5015 transformed with pyproj always_xy.",
+      "description": "Compare every full component geometry to all 19 selected features from the exact simplified source product consumed by the pinned recipe; independently compare to current Atlas contact geometry and official CAOP2025 municipal polygons. No clipping, correction, geometry repair, snapping, buffering, simplification or fill.",
+      "distance_method": "No distance metric was calculated.",
+      "id": "exact-source-overlay",
+      "kind": "measurement",
+      "software": "Python 3.12.14; Shapely 2.1.2 / GEOS 3.13.1; pyproj 3.7.2 / PROJ 9.5.1",
+      "units": "Unclipped intersection and coverage predicates; WGS84 ellipsoidal geodesic square metres and independent Azores-centred LAEA square metres; counts are component-feature pairs."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/result_metrics/component_count",
+      "metric_id": "component_count",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/contact_count",
+      "metric_id": "contact_count",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/numeric_closure_component_count",
+      "metric_id": "numeric_closure_scope_count",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/source_product_features",
+      "metric_id": "simplified_product_feature_count",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/contact_source_join_exact_ids",
+      "metric_id": "selected_source_contact_ids_joined",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/simplified_positive_intersection_components",
+      "metric_id": "simplified_positive_intersection_components",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/simplified_zero_intersection_components",
+      "metric_id": "simplified_no_intersection_components",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/simplified_component_contact_intersection_pairs",
+      "metric_id": "simplified_intersection_pairs",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/intersects_predicate_difference_pairs",
+      "metric_id": "atlas_simplified_intersects_differences",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/positive_area_predicate_difference_pairs",
+      "metric_id": "atlas_simplified_positive_area_differences",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/current_contact_geometries_topologically_equal_to_simplified_count",
+      "metric_id": "atlas_contacts_topologically_equal_simplified",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/caop_component_municipality_pairs",
+      "metric_id": "caop_intersection_pairs",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/caop_distinct_components_intersecting",
+      "metric_id": "caop_distinct_components_intersecting",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/result_metrics/caop_components_without_intersection",
+      "metric_id": "caop_components_without_intersection",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    },
+    {
+      "json_pointer": "/name_match_summary/normalized_exact_name_matches",
+      "metric_id": "caop_normalized_exact_contact_name_matches",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "component_count",
+      "input_sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "unit": "count",
+      "value": 34,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "contact_count",
+      "input_sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+      "unit": "count",
+      "value": 19,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "numeric_closure_scope_count",
+      "input_sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "unit": "count",
+      "value": 17,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "simplified_product_feature_count",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "features",
+      "value": 311,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "selected_source_contact_ids_joined",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "features",
+      "value": 19,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "simplified_positive_intersection_components",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "components",
+      "value": 29,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "simplified_no_intersection_components",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "components",
+      "value": 5,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "simplified_intersection_pairs",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "pairs",
+      "value": 34,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "atlas_simplified_intersects_differences",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "pairs",
+      "value": 10,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "atlas_simplified_positive_area_differences",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "pairs",
+      "value": 19,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "atlas_contacts_topologically_equal_simplified",
+      "input_sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+      "unit": "features",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "caop_intersection_pairs",
+      "input_sha256": "b0e3b4fe5544647eb4593e0222c6430fae7e50c97f953d8ceae10707c4df9dcf",
+      "unit": "pairs",
+      "value": 39,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "caop_distinct_components_intersecting",
+      "input_sha256": "b0e3b4fe5544647eb4593e0222c6430fae7e50c97f953d8ceae10707c4df9dcf",
+      "unit": "components",
+      "value": 32,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "caop_components_without_intersection",
+      "input_sha256": "b0e3b4fe5544647eb4593e0222c6430fae7e50c97f953d8ceae10707c4df9dcf",
+      "unit": "components",
+      "value": 2,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+      "id": "caop_normalized_exact_contact_name_matches",
+      "input_sha256": "b0e3b4fe5544647eb4593e0222c6430fae7e50c97f953d8ceae10707c4df9dcf",
+      "unit": "features",
+      "value": 18,
+      "vintage": "current"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 9420,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/README.md",
+      "role": "generated-evidence",
+      "sha256": "b39ad00f10d534f382e125de405583ee637ee7680fe01dcfd14c2656e37a1205"
+    },
+    {
+      "bytes": 22436,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/assess.py",
+      "role": "generated-evidence",
+      "sha256": "99e5269733902cf9c44d0dd1b700b670aceafff1bed2048c48216a7874e53321"
+    },
+    {
+      "bytes": 130507,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/assessment.json",
+      "role": "generated-evidence",
+      "sha256": "fea90d7e2b1d24c7d32d35e497ceb0a649a13d637b2e418bc06c4dfeaa9d960d"
+    },
+    {
+      "bytes": 33263,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/complete-components.geojson",
+      "role": "generated-evidence",
+      "sha256": "74856ce26a553c42377af1d5df1dc6516b395addf509cf2d2a89bc737dbbd217"
+    },
+    {
+      "bytes": 321,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/control-source-overlay-negative.json",
+      "role": "generated-evidence",
+      "sha256": "8944b26d59abe5242e0e98eb589a930873f9a09ae1c0848672f63a2a8fff329a"
+    },
+    {
+      "bytes": 359,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/control-source-overlay-positive.json",
+      "role": "generated-evidence",
+      "sha256": "88b2c1f12e39306513234b59bcd8fe607e298a3e05be10b2a070cd2fb5fbbbad"
+    },
+    {
+      "bytes": 47246,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/current-atlas-contact-features.geojson",
+      "role": "generated-evidence",
+      "sha256": "a3fdd5f729b47bf8ea07bf62f38d9debaaa48915dfced80b2ba12c2ee77e45f3"
+    },
+    {
+      "bytes": 2149,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/reproducibility.json",
+      "role": "generated-evidence",
+      "sha256": "93fc2cd785783484850165bddf84758abd0fa14c16c6e40a04205543bdb8ac77"
+    },
+    {
+      "bytes": 130507,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/assessment.json",
+      "role": "generated-evidence",
+      "sha256": "fea90d7e2b1d24c7d32d35e497ceb0a649a13d637b2e418bc06c4dfeaa9d960d"
+    },
+    {
+      "bytes": 33263,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/complete-components.geojson",
+      "role": "generated-evidence",
+      "sha256": "74856ce26a553c42377af1d5df1dc6516b395addf509cf2d2a89bc737dbbd217"
+    },
+    {
+      "bytes": 321,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/control-source-overlay-negative.json",
+      "role": "generated-evidence",
+      "sha256": "8944b26d59abe5242e0e98eb589a930873f9a09ae1c0848672f63a2a8fff329a"
+    },
+    {
+      "bytes": 359,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/control-source-overlay-positive.json",
+      "role": "generated-evidence",
+      "sha256": "88b2c1f12e39306513234b59bcd8fe607e298a3e05be10b2a070cd2fb5fbbbad"
+    },
+    {
+      "bytes": 47246,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/current-atlas-contact-features.geojson",
+      "role": "generated-evidence",
+      "sha256": "a3fdd5f729b47bf8ea07bf62f38d9debaaa48915dfced80b2ba12c2ee77e45f3"
+    },
+    {
+      "bytes": 14140,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-1/selected-source-features.geojson",
+      "role": "generated-evidence",
+      "sha256": "983c6019252a7a53f4246de5ca6076fbdf79da523e59cffa784312b2e8e0c954"
+    },
+    {
+      "bytes": 130507,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/assessment.json",
+      "role": "generated-evidence",
+      "sha256": "fea90d7e2b1d24c7d32d35e497ceb0a649a13d637b2e418bc06c4dfeaa9d960d"
+    },
+    {
+      "bytes": 33263,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/complete-components.geojson",
+      "role": "generated-evidence",
+      "sha256": "74856ce26a553c42377af1d5df1dc6516b395addf509cf2d2a89bc737dbbd217"
+    },
+    {
+      "bytes": 321,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/control-source-overlay-negative.json",
+      "role": "generated-evidence",
+      "sha256": "8944b26d59abe5242e0e98eb589a930873f9a09ae1c0848672f63a2a8fff329a"
+    },
+    {
+      "bytes": 359,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/control-source-overlay-positive.json",
+      "role": "generated-evidence",
+      "sha256": "88b2c1f12e39306513234b59bcd8fe607e298a3e05be10b2a070cd2fb5fbbbad"
+    },
+    {
+      "bytes": 47246,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/current-atlas-contact-features.geojson",
+      "role": "generated-evidence",
+      "sha256": "a3fdd5f729b47bf8ea07bf62f38d9debaaa48915dfced80b2ba12c2ee77e45f3"
+    },
+    {
+      "bytes": 14140,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/runs/run-2/selected-source-features.geojson",
+      "role": "generated-evidence",
+      "sha256": "983c6019252a7a53f4246de5ca6076fbdf79da523e59cffa784312b2e8e0c954"
+    },
+    {
+      "bytes": 14140,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/selected-source-features.geojson",
+      "role": "generated-evidence",
+      "sha256": "983c6019252a7a53f4246de5ca6076fbdf79da523e59cffa784312b2e8e0c954"
+    },
+    {
+      "bytes": 4134,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/scope.json",
+      "role": "generated-evidence",
+      "sha256": "08b686a84f1ab772c4e056b6c4ada2dabd5e378a608836b88860398af398de53"
+    },
+    {
+      "bytes": 4316,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/CITATION-AND-USE-geoBoundaries-90a1d52.txt",
+      "role": "generated-evidence",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "bytes": 161975,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/dgt-caop2025-page.html",
+      "role": "generated-evidence",
+      "sha256": "51b642481d4ff0305806c1e042264d887954ae95b0cd1fb293b4d72ba4c44aca"
+    },
+    {
+      "bytes": 211275,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/dgt-open-data-page.html",
+      "role": "generated-evidence",
+      "sha256": "6a28acde81ae6a2d507ec62f7adabf486d5ac22a32d57a07fc5cd33a1db38c53"
+    },
+    {
+      "bytes": 790,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/geoBoundaries-PRT-ADM2-metaData-90a1d52.json",
+      "role": "generated-evidence",
+      "sha256": "f965d5da9e3b5d17f70f6f011e2bcb2d5873ddcc9ee399c65e1009332d9e7ae3"
+    },
+    {
+      "bytes": 3513,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/physical-source-catalog-observations.json",
+      "role": "generated-evidence",
+      "sha256": "f0627a25c6bce919cede5b60401c9770bd476b25215534acb9d9959cd7e44295"
+    }
+  ],
+  "sources": [
+    {
+      "id": "geoboundaries-prt-adm2-simplified-90a1d52",
+      "license": {
+        "status": "unknown",
+        "terms": "Per-boundary metadata says CC0 1.0; the same release CITATION-AND-USE says attribution is required and code/derivative works are CC-BY 4.0. Attribution is retained, but exact applicability to the original geometry/derivative is unresolved; the metadata source URL is a malformed generic Wikipedia file link."
+      },
+      "limit": "Underlying Wikipedia source file, source effective dates, boundary authority, positional accuracy, registration, and exact data/derivative license applicability are not established.",
+      "restoration": "Use immutable whole simplified-source capture at coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz (baseline whole-file pin) and its complete input descriptor in #1274; reassemble 387331 raw bytes with SHA256 f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac. Upstream metadata and citation text are retained under this packet sources/. The full product is not duplicated.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Exact simplified national ADM2 product the pinned Atlas administrative recipe consumed; current-contact and full component comparisons are source-relative only.",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2_simplified.geojson",
+      "verification": "verified",
+      "vintage": "Pinned release commit 90a1d52; represented-year claim 2020; metadata source update/build claims 21 Feb 2024."
+    },
+    {
+      "files": [
+        {
+          "bytes": 15909724,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-azores-gap-source-fitness-20261007/sources/CAOP_RAA_2025-gpkg.zip",
+          "role": "official-source",
+          "sha256": "b0e3b4fe5544647eb4593e0222c6430fae7e50c97f953d8ceae10707c4df9dcf"
+        }
+      ],
+      "id": "dgt-caop2025-azores",
+      "license": {
+        "status": "redistributable",
+        "terms": "DGT Open Data page states CC-BY 4.0; attribute Direção-Geral do Território."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-07",
+      "role": "Official current cadastral/cartographic administrative comparator, not a physical coastline or historical product validation.",
+      "temporal_status": "reference",
+      "url": "https://geo2.dgterritorio.gov.pt/caop/CAOP_RAA_2025-gpkg.zip",
+      "verification": "verified",
+      "vintage": "CAOP2025; approved 28 Jan 2026 and published 18 Feb 2026; includes changes published 16 Mar through 31 Dec 2025."
+    },
+    {
+      "id": "snig-azores-orthophoto-catalog-listings",
+      "license": {
+        "status": "unknown",
+        "terms": "Metadata access failed; license/reuse terms for the specific raster products were not verified."
+      },
+      "limit": "Metadata API returned HTTP 500/400; no images, acquisition date, image registration, accuracy or license terms were obtained or compared. Catalog listings cannot support land/water classification.",
+      "restoration": "Retry the exact two SNIG metadata records linked in sources/physical-source-catalog-observations.json and obtain native image products and metadata through the RAA/DGT catalogue if permitted.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Catalog-only candidate physical imagery lead for Corvo and Graciosa; not measured imagery evidence.",
+      "temporal_status": "unknown",
+      "url": "https://snig.dgterritorio.gov.pt/rndg/srv/search?_source=e652bd46-4143-4371-b14c-a55d494c4d5c",
+      "verification": "unverified",
+      "vintage": "Catalog titles claim 2024 10 cm orthophotos for Corvo and Graciosa; other listed island imagery has different vintages/resolutions."
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:PRT:ADM2:2272694B11703437565908",
+    "gb:PRT:ADM2:2272694B14195441772590",
+    "gb:PRT:ADM2:2272694B14276851137333",
+    "gb:PRT:ADM2:2272694B19826937126659",
+    "gb:PRT:ADM2:2272694B2981277827282",
+    "gb:PRT:ADM2:2272694B33325499022339",
+    "gb:PRT:ADM2:2272694B34401883056370",
+    "gb:PRT:ADM2:2272694B40640066990777",
+    "gb:PRT:ADM2:2272694B4115863363061",
+    "gb:PRT:ADM2:2272694B41725550003559",
+    "gb:PRT:ADM2:2272694B4202330031635",
+    "gb:PRT:ADM2:2272694B47980590419850",
+    "gb:PRT:ADM2:2272694B7809713979732",
+    "gb:PRT:ADM2:2272694B90158079900101",
+    "gb:PRT:ADM2:2272694B91442542352830",
+    "gb:PRT:ADM2:2272694B94332722873813",
+    "gb:PRT:ADM2:2272694B95713128960189",
+    "gb:PRT:ADM2:2272694B99137580342110",
+    "gb:PRT:ADM2:2272694B99472059069113"
+  ],
+  "subject_ids_sha256": "0c88e5bdbbd3fea65161e1e3c2928c750510135511c3db7a3c15d451854b1c50",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/control-source-overlay-positive.json",
+      "kind": "positive-control",
+      "method_id": "exact-source-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/control-source-overlay-negative.json",
+      "kind": "negative-control",
+      "method_id": "exact-source-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-azores-gap-source-fitness-20261007/outputs/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "exact-source-overlay",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612"
+}
