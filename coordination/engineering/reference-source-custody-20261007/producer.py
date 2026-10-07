@@ -126,7 +126,17 @@ def preflight(commit, source_map):
         custody.digest(source_map[obj['original_name']], obj['whole_bytes'], obj['whole_sha256'])
     for member in rp['members']:
         custody.digest(member['path'], member['bytes'], member['sha256'], cap=custody.CAP)
-    index = json.loads((ROOT / 'original-reference-index.json').read_bytes())
+    original_index = plan['original_reference_index']
+    custody.digest(ROOT / 'original-reference-index.json', original_index['bytes'], original_index['sha256'], cap=custody.CAP)
+    original_raw = (ROOT / 'original-reference-index.json').read_bytes()
+    original_oid = hashlib.sha1(b'blob ' + str(len(original_raw)).encode() + b'\0' + original_raw).hexdigest()
+    if original_oid != original_index['OID']:
+        raise ValueError('Actual original reference-index Git blob drift')
+    tree = subprocess.check_output(['git', '-C', str(REPO), 'ls-tree',
+        original_index['commit'], '--', original_index['path']]).decode().strip().split()
+    if len(tree) != 4 or tree[0] != original_index['mode'] or tree[2] != original_oid:
+        raise ValueError('Original reference-index immutable source relation drift')
+    index = json.loads(original_raw)
     module.type_schema(index)
     ordinary_pins = plan['original_fragment_inputs'] + plan['full_member_outputs'] + rp['frames'] + code
     admission = custody.budget(ordinary_pins, RESERVE)
