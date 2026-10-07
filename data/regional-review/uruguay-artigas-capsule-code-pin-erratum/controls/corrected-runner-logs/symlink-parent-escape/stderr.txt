@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/symlink-parent-escape/reproduce.py", line 119, in <module>
+    main()
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/symlink-parent-escape/reproduce.py", line 88, in main
+    out = destination(args.output)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/symlink-parent-escape/reproduce.py", line 74, in destination
+    raise ValueError("unsafe outputs directory")
+ValueError: unsafe outputs directory

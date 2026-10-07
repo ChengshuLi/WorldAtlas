@@ -1,0 +1,169 @@
+#!/usr/bin/env python3
+"""Exercise the corrected actual CLI with isolated, hard-linked fixtures."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+HERE = Path(__file__).resolve().parents[1]
+CONTROLS = HERE / "controls"
+FIXTURES = CONTROLS / "corrected-runner-fixtures"
+LOGS = CONTROLS / "corrected-runner-logs"
+CAPSULE = "inputs/code/capsule-reproduce.py"
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def link_file(source, target):
+    os.link(source, target)
+
+
+def fixture(name):
+    root = FIXTURES / name
+    if root.exists():
+        shutil.rmtree(root)
+    root.mkdir(parents=True)
+    shutil.copytree(HERE / "inputs", root / "inputs", copy_function=link_file)
+    shutil.copy2(HERE / "reproduce.py", root / "reproduce.py")
+    (root / "outputs").mkdir()
+    return root
+
+
+def replace(path, raw):
+    temporary = path.with_name(path.name + ".replacement")
+    temporary.write_bytes(raw)
+    temporary.replace(path)
+
+
+def run(name, mutate=None, output="attempt", expected=1, extra=()):
+    root = fixture(name)
+    if mutate:
+        mutate(root)
+    command = [sys.executable, str(root / "reproduce.py"), "--output", output, *extra]
+    process = subprocess.run(command, cwd=root, text=True, capture_output=True)
+    logs = LOGS / name
+    if logs.exists():
+        shutil.rmtree(logs)
+    logs.mkdir(parents=True)
+    (logs / "stdout.txt").write_text(process.stdout)
+    (logs / "stderr.txt").write_text(process.stderr)
+    return root, process, {"case": name, "exit_code": process.returncode,
+        "expected_exit_code": expected, "stdout_sha256": digest(process.stdout.encode()),
+        "stderr_sha256": digest(process.stderr.encode()), "stdout_bytes": len(process.stdout.encode()),
+        "stderr_bytes": len(process.stderr.encode()), "command": command}
+
+
+def manifest(root):
+    path = root / "inputs/original-manifest.json"
+    return path, json.loads(path.read_text())
+
+
+def remove_capsule_pin(root):
+    path, value = manifest(root)
+    del value["capsule"][CAPSULE]
+    replace(path, json.dumps(value, sort_keys=True).encode() + b"\n")
+
+
+def alter_capsule(root, refresh=False):
+    target = root / CAPSULE
+    raw = target.read_bytes() + b"\nopen(sys.argv[1] + '/audit-unreviewed-code.txt','w').write('probe')\n"
+    replace(target, raw)
+    if refresh:
+        path, value = manifest(root)
+        value["capsule"][CAPSULE] = digest(raw)
+        replace(path, json.dumps(value, sort_keys=True).encode() + b"\n")
+
+
+def wrong_input(root):
+    path = root / "inputs/baseline/data-world-index.json"
+    replace(path, path.read_bytes() + b" ")
+
+
+def existing_sentinel(root):
+    target = root / "outputs/attempt"
+    target.mkdir()
+    (target / "sentinel.txt").write_text("retain")
+
+
+def broken_symlink(root):
+    (root / "outputs/attempt").symlink_to(root / "not-present")
+
+
+def symlink_parent(root):
+    outside = root / "outside"
+    outside.mkdir()
+    (root / "outputs").rmdir()
+    (root / "outputs").symlink_to(outside, target_is_directory=True)
+
+
+def main():
+    FIXTURES.mkdir(parents=True, exist_ok=True)
+    LOGS.mkdir(parents=True, exist_ok=True)
+    original_manifest = json.loads((HERE / "inputs/original-manifest.json").read_text())
+    original_pins = {}
+    for rel, expected in original_manifest["capsule"].items():
+        path = HERE / ("inputs/code/original-wrapper.py" if rel == "reproduce.py" else rel)
+        original_pins[rel] = digest(path.read_bytes())
+        if original_pins[rel] != expected:
+            raise AssertionError("original packet pin mismatch before control: " + rel)
+    original_pins["issue-1413-api.json"] = digest((HERE / "inputs/issue-1413-api.json").read_bytes())
+    cases = []
+    for name, mutate in [
+        ("missing-executable-pin", remove_capsule_pin),
+        ("altered-code-unchanged-manifest", lambda root: alter_capsule(root)),
+        ("coherently-refreshed-manifest", lambda root: alter_capsule(root, True)),
+        ("wrong-complete-input", wrong_input),
+        ("existing-output-sentinel", existing_sentinel),
+        ("broken-symlink", broken_symlink),
+        ("symlink-parent-escape", symlink_parent),
+    ]:
+        root, process, row = run(name, mutate)
+        row["destination_created"] = (root / "outputs/attempt").exists() and not (root / "outputs/attempt").is_symlink()
+        row["probe_created"] = (root / "outputs/attempt/audit-unreviewed-code.txt").exists()
+        row["output_names"] = sorted(p.name for p in (root / "outputs").iterdir())
+        if name == "existing-output-sentinel":
+            row["sentinel_sha256"] = digest((root / "outputs/attempt/sentinel.txt").read_bytes())
+        if process.returncode != 1 or (name != "existing-output-sentinel" and row["destination_created"]) or row["probe_created"]:
+            raise AssertionError("rejected fixture mutated output: " + name)
+        if name == "existing-output-sentinel" and row["sentinel_sha256"] != digest(b"retain"):
+            raise AssertionError("sentinel changed")
+        cases.append(row)
+    root, process, row = run("traversal", output="../escape")
+    row["escape_created"] = (root.parent / "escape").exists()
+    row["outputs"] = sorted(p.name for p in (root / "outputs").iterdir())
+    if process.returncode != 1 or row["escape_created"] or row["outputs"]:
+        raise AssertionError("traversal fixture was not rejected safely")
+    cases.append(row)
+    root, process, row = run("failure-after-compute", expected=1, extra=("--fail-after-compute",))
+    out = root / "outputs/attempt"
+    row["retained_report_sha256"] = digest((out / "reproduction-results.json").read_bytes())
+    row["failure_record"] = json.loads((out / "failure.json").read_text())
+    row["success_receipt_exists"] = (out / "publication.json").exists()
+    if process.returncode != 1 or row["success_receipt_exists"] or row["retained_report_sha256"] != "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a":
+        raise AssertionError("failed run lacks durable failure state")
+    cases.append(row)
+    after_pins = {}
+    for rel in original_manifest["capsule"]:
+        path = HERE / ("inputs/code/original-wrapper.py" if rel == "reproduce.py" else rel)
+        after_pins[rel] = digest(path.read_bytes())
+    after_pins["issue-1413-api.json"] = digest((HERE / "inputs/issue-1413-api.json").read_bytes())
+    if after_pins != original_pins:
+        raise AssertionError("original issue/source/code closure changed during controls")
+    audit = {"version": 1, "issue": 1413, "originals_unchanged": after_pins,
+             "cases": cases, "runtime": {"python": sys.version, "executable": sys.executable},
+             "limits": ["Fixtures use hard links for unchanged inputs; changed manifest/code/input paths are atomically replaced before invocation.",
+                        "The probes write only inside their isolated fixture output directory; generated fixture copies are removed after the retained outcome records are written."]}
+    (CONTROLS / "corrected-runner-audit.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n")
+    shutil.rmtree(FIXTURES)
+    print(json.dumps({"cases": len(cases), "originals_unchanged": after_pins,
+                      "all_adverse_cases_safe": True,
+                      "retained_failure_without_success_receipt": True}, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

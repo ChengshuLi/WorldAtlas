@@ -1,0 +1,200 @@
+{
+  "cases": [
+    {
+      "case": "missing-executable-pin",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/missing-executable-pin/reproduce.py",
+        "--output",
+        "attempt"
+      ],
+      "destination_created": false,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "output_names": [],
+      "probe_created": false,
+      "stderr_bytes": 1209,
+      "stderr_sha256": "9749a4eeeea58c8226a86177210163b6f317f138e75585b7b84aa998e1c3722c",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "altered-code-unchanged-manifest",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/altered-code-unchanged-manifest/reproduce.py",
+        "--output",
+        "attempt"
+      ],
+      "destination_created": false,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "output_names": [],
+      "probe_created": false,
+      "stderr_bytes": 1242,
+      "stderr_sha256": "c99d7a2bfb7ec56f1fe51976b3a47411909f899aa2fb82ab0f44d859ce07eba2",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "coherently-refreshed-manifest",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/coherently-refreshed-manifest/reproduce.py",
+        "--output",
+        "attempt"
+      ],
+      "destination_created": false,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "output_names": [],
+      "probe_created": false,
+      "stderr_bytes": 1230,
+      "stderr_sha256": "24538ff5af8766184c7a921472318c9c4260094251dcad7e63edb8cc36d53be2",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "wrong-complete-input",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/wrong-complete-input/reproduce.py",
+        "--output",
+        "attempt"
+      ],
+      "destination_created": false,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "output_names": [],
+      "probe_created": false,
+      "stderr_bytes": 1214,
+      "stderr_sha256": "06ec42221c6f1217ea25dc13d9070ab8aeaa905087a3b89e1d80f46f92141046",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "existing-output-sentinel",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/existing-output-sentinel/reproduce.py",
+        "--output",
+        "attempt"
+      ],
+      "destination_created": true,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "output_names": [
+        "attempt"
+      ],
+      "probe_created": false,
+      "sentinel_sha256": "6b428ace0262db5de1acac5d5e225a117674ede63c6631800103512289d791e6",
+      "stderr_bytes": 1119,
+      "stderr_sha256": "4e4b89147794599f656ccfdca71443db470261d218c827a0c844b6f74d7e67bd",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "broken-symlink",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/broken-symlink/reproduce.py",
+        "--output",
+        "attempt"
+      ],
+      "destination_created": false,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "output_names": [
+        "attempt"
+      ],
+      "probe_created": false,
+      "stderr_bytes": 1089,
+      "stderr_sha256": "9b7d88503a07aa47fd0fcadba768b8866b5e4292d1c1659b8d45e69fb2df363c",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "symlink-parent-escape",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/symlink-parent-escape/reproduce.py",
+        "--output",
+        "attempt"
+      ],
+      "destination_created": false,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "output_names": [],
+      "probe_created": false,
+      "stderr_bytes": 1106,
+      "stderr_sha256": "4af57fb1015d572fe9c060eae634a395a3e5cf26dcc96e4db8ca2c41c46660d7",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "traversal",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/traversal/reproduce.py",
+        "--output",
+        "../escape"
+      ],
+      "escape_created": false,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "outputs": [],
+      "stderr_bytes": 1122,
+      "stderr_sha256": "ba58fbaa6f9ea8f7590698034eb2426d965bbd4375133649cac3d19582668633",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "failure-after-compute",
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-fixtures/failure-after-compute/reproduce.py",
+        "--output",
+        "attempt",
+        "--fail-after-compute"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "failure_record": {
+        "error": "directed failure after computation; preserve this attempt",
+        "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+        "status": "failed"
+      },
+      "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "stderr_bytes": 826,
+      "stderr_sha256": "118c9f57e498d2c0424e841f818b1e87604504c2319e76a1a1d0c1328aed5c8a",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "success_receipt_exists": false
+    }
+  ],
+  "issue": 1413,
+  "limits": [
+    "Fixtures use hard links for unchanged inputs; changed manifest/code/input paths are atomically replaced before invocation.",
+    "The probes write only inside their isolated fixture output directory; generated fixture copies are removed after the retained outcome records are written."
+  ],
+  "originals_unchanged": {
+    "inputs/baseline/data-administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "inputs/baseline/data-geography-part-25.json": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+    "inputs/baseline/data-hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "inputs/baseline/data-macro-publication-v5.json": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+    "inputs/baseline/data-world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "inputs/code/capsule-reproduce.py": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+    "inputs/code/original-reproduce.py": "c6abb1d4b2ba662d2b7318db55d4fb9943945257a754ee8e42ff17d4ac0d79f8",
+    "inputs/original-reproduction-results.json": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+    "inputs/original-source-inventory.json": "83c6a22703baedab022144d3284e4b6434043c91e04dccd1573c02473c576675",
+    "inputs/sources/ury-gb-2017.geojson": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+    "inputs/sources/ury-igm-current.geojson": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+    "issue-1413-api.json": "4d0606fd5f65966bcab06b2718c5aae8d5fb35187507a1e76424ab1a4dc449d8",
+    "reproduce.py": "107c20e0cb35ad47d614d56d11bc97780178e769d885bfd66bf0a7f96eba3265"
+  },
+  "runtime": {
+    "executable": "/usr/local/opt/python/bin/python3.7",
+    "python": "3.7.3 (default, Mar 27 2019, 09:23:32) \n[Clang 9.0.0 (clang-900.0.39.2)]"
+  },
+  "version": 1
+}

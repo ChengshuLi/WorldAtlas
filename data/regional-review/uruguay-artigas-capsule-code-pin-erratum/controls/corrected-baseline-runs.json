@@ -1,0 +1,44 @@
+{
+  "capsule_sha256": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+  "issue": 1413,
+  "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+  "runs": [
+    {
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/reproduce.py",
+        "--output",
+        "verified-run-six"
+      ],
+      "exit_code": 0,
+      "output_name": "verified-run-six",
+      "publication_sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 443,
+      "stdout_sha256": "79b90337007f4b3a125b248966081a3d76cb6575361b289cfd633d52c54984b7"
+    },
+    {
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/reproduce.py",
+        "--output",
+        "verified-run-seven"
+      ],
+      "exit_code": 0,
+      "output_name": "verified-run-seven",
+      "publication_sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 445,
+      "stdout_sha256": "0a20316aceed4226eaa4219e1b46f8bf7a63d482535d31f942359794603e211b"
+    }
+  ],
+  "runtime": {
+    "executable": "/usr/local/opt/python/bin/python3.7",
+    "python": "3.7.3 (default, Mar 27 2019, 09:23:32) \n[Clang 9.0.0 (clang-900.0.39.2)]"
+  },
+  "version": 1
+}
