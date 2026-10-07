@@ -11,8 +11,8 @@ import {assertResearchImportsReady} from '../../../src/regional-import-gate.js';
 import {prepareReferenceMacroBinding} from '../../../scripts/prepare-reference-macro-binding.mjs';
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const json=value=>Buffer.from(JSON.stringify(value)+'\n');
-export function disposeCertificates(repo,baseline,{hierarchy,before,after,release}) {
-  const reader=immutableReader(repo,baseline),prefix='data/macro-foundation/eastern-two-gap-repair-20261006/';
+export function disposeCertificates(repo,baseline,{hierarchy,before,after,release,storage}) {
+  const reader=immutableReader(repo,baseline,storage),prefix='data/macro-foundation/eastern-two-gap-repair-20261006/';
   const certificate=reader.object('data/macro-foundation/macro-certificate.json');
   const handoffs=reader.object('data/macro-foundation/regional-handoffs.json.gz');
   const gate=reader.object('data/research-geography-gate.json');
