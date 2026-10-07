@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "actual_checked_at": "2026-10-07T17:05:51.390951+00:00",
+  "storage": {
+    "freeBytes": 13407059968,
+    "checkoutBytes": 48373190656,
+    "limits": {
+      "minimumFree": 10737418240,
+      "maximumCheckouts": 53687091200
+    }
+  },
+  "own_full_conservative_peak": {
+    "allocator_reservation": 1073741824,
+    "complete_current_checkout_last_observed": 189169664,
+    "two_full_relevant_private_originals": 190355928,
+    "two_exact_original_reference_views": 4593602,
+    "two_product_trees_reserved": 16777216,
+    "runtime_controls_reports_reserved": 83886080,
+    "retained_final_delivery_and_Git_growth_reserved": 40000000,
+    "scratch_reserved": 100000000,
+    "unchanged_existing_source_aliases_copied_again": false,
+    "conservative_peak_sum": 624782490
+  },
+  "both_fresh_output_paths_absent": true,
+  "actual_declared_scientific_freeze": "b596ef836c51c5405baa8ceda770a2554ca12b7f"
+}
