@@ -1,0 +1,316 @@
+TAP version 13
+# Subtest: actual trusted entry point preserves the original rejection before a denied comment
+ok 1 - actual trusted entry point preserves the original rejection before a denied comment
+  ---
+  duration_ms: 88.57925
+  type: 'test'
+  ...
+# Subtest: actual trusted entry point retains its preparation receipt before successful notification
+ok 2 - actual trusted entry point retains its preparation receipt before successful notification
+  ---
+  duration_ms: 78.60025
+  type: 'test'
+  ...
+# Subtest: trusted preparation has PR comment permission while candidate tests remain read-only
+ok 3 - trusted preparation has PR comment permission while candidate tests remain read-only
+  ---
+  duration_ms: 0.281833
+  type: 'test'
+  ...
+# Subtest: actual entry point saves stale/head/conflict/base diagnostics even when notification fails
+ok 4 - actual entry point saves stale/head/conflict/base diagnostics even when notification fails
+  ---
+  duration_ms: 328.65675
+  type: 'test'
+  ...
+# Subtest: actual final entry point cleans only its owned ref and retains successful merge on cleanup failure
+ok 5 - actual final entry point cleans only its owned ref and retains successful merge on cleanup failure
+  ---
+  duration_ms: 227.602834
+  type: 'test'
+  ...
+# Subtest: actual fallback prepare cleans its confirmed ref when receipt notification is denied
+ok 6 - actual fallback prepare cleans its confirmed ref when receipt notification is denied
+  ---
+  duration_ms: 84.947583
+  type: 'test'
+  ...
+# Subtest: only staging-test shards prepare the immutable migration derivative
+ok 7 - only staging-test shards prepare the immutable migration derivative
+  ---
+  duration_ms: 20.452958
+  type: 'test'
+  ...
+# Subtest: two reviewed PRs sharing a base integrate serially without changing authored head
+ok 8 - two reviewed PRs sharing a base integrate serially without changing authored head
+  ---
+  duration_ms: 8.21325
+  type: 'test'
+  ...
+# Subtest: conflicts and non-conflicting changes to reviewed bytes require intervention
+ok 9 - conflicts and non-conflicting changes to reviewed bytes require intervention
+  ---
+  duration_ms: 0.527917
+  type: 'test'
+  ...
+# Subtest: stale merge object and truncated inventories fail closed
+ok 10 - stale merge object and truncated inventories fail closed
+  ---
+  duration_ms: 0.589166
+  type: 'test'
+  ...
+# Subtest: stale head or review and expired ownership prohibit integration
+ok 11 - stale head or review and expired ownership prohibit integration
+  ---
+  duration_ms: 0.350166
+  type: 'test'
+  ...
+# Subtest: failed or skipped candidate tests never merge an open PR
+ok 12 - failed or skipped candidate tests never merge an open PR
+  ---
+  duration_ms: 0.288208
+  type: 'test'
+  ...
+# Subtest: base advances before or during final validation are retryable without branch updates
+ok 13 - base advances before or during final validation are retryable without branch updates
+  ---
+  duration_ms: 0.195333
+  type: 'test'
+  ...
+# Subtest: latest failed or pending check replaces old success
+ok 14 - latest failed or pending check replaces old success
+  ---
+  duration_ms: 0.099708
+  type: 'test'
+  ...
+# Subtest: workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
+ok 15 - workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
+  ---
+  duration_ms: 0.440542
+  type: 'test'
+  ...
+# Subtest: commit status changing during final review prevents the merge
+ok 16 - commit status changing during final review prevents the merge
+  ---
+  duration_ms: 0.429875
+  type: 'test'
+  ...
+# Subtest: trusted profile uses focused invariants only for isolated evidence and docs
+ok 17 - trusted profile uses focused invariants only for isolated evidence and docs
+  ---
+  duration_ms: 0.180625
+  type: 'test'
+  ...
+# Subtest: parallel full-regression shards cover each unit file once and focused profile retains core gates
+ok 18 - parallel full-regression shards cover each unit file once and focused profile retains core gates
+  ---
+  duration_ms: 22.575083
+  type: 'test'
+  ...
+# Subtest: prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
+ok 19 - prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
+  ---
+  duration_ms: 2.101666
+  type: 'test'
+  ...
+# Subtest: failed proof reread and stale main prevent merge despite prior accepted proof
+ok 20 - failed proof reread and stale main prevent merge despite prior accepted proof
+  ---
+  duration_ms: 0.874
+  type: 'test'
+  ...
+# Subtest: successful rerun after preparation invalidates the pinned attempt and refuses merge
+ok 21 - successful rerun after preparation invalidates the pinned attempt and refuses merge
+  ---
+  duration_ms: 0.479291
+  type: 'test'
+  ...
+# Subtest: late candidate fetch replaces initial stale metadata without branch writes
+ok 22 - late candidate fetch replaces initial stale metadata without branch writes
+  ---
+  duration_ms: 0.249125
+  type: 'test'
+  ...
+# Subtest: stale parents and unavailable candidates converge with revalidated authority
+ok 23 - stale parents and unavailable candidates converge with revalidated authority
+  ---
+  duration_ms: 0.572292
+  type: 'test'
+  ...
+# Subtest: permanently stale candidates are bounded and retain exact IDs before tree work
+ok 24 - permanently stale candidates are bounded and retain exact IDs before tree work
+  ---
+  duration_ms: 0.303958
+  type: 'test'
+  ...
+# Subtest: candidate polling stops at its deadline even before exhausting attempts
+ok 25 - candidate polling stops at its deadline even before exhausting attempts
+  ---
+  duration_ms: 0.176958
+  type: 'test'
+  ...
+# Subtest: head/body changes and conflicts during refresh fail without integration or writes
+ok 26 - head/body changes and conflicts during refresh fail without integration or writes
+  ---
+  duration_ms: 1.135458
+  type: 'test'
+  ...
+# Subtest: main and evidence vintage advances are not silently adopted while refreshing
+ok 27 - main and evidence vintage advances are not silently adopted while refreshing
+  ---
+  duration_ms: 0.311042
+  type: 'test'
+  ...
+# Subtest: claim/check/review and issue authority is rechecked after waiting
+ok 28 - claim/check/review and issue authority is rechecked after waiting
+  ---
+  duration_ms: 1.032042
+  type: 'test'
+  ...
+# Subtest: only candidate-object 404 is refreshable; access failures stop immediately
+ok 29 - only candidate-object 404 is refreshable; access failures stop immediately
+  ---
+  duration_ms: 0.44225
+  type: 'test'
+  ...
+# Subtest: post-wait main advance retains old expected and new observed base diagnostics
+ok 30 - post-wait main advance retains old expected and new observed base diagnostics
+  ---
+  duration_ms: 0.24875
+  type: 'test'
+  ...
+# Subtest: post-convergence head change retains the new head in rejection diagnostics
+ok 31 - post-convergence head change retains the new head in rejection diagnostics
+  ---
+  duration_ms: 0.219208
+  type: 'test'
+  ...
+# Subtest: persistent automatic lag falls back to exact owned candidate without editing authored branches
+ok 32 - persistent automatic lag falls back to exact owned candidate without editing authored branches
+  ---
+  duration_ms: 0.843084
+  type: 'test'
+  ...
+# Subtest: isolated conflict or wrong parents is rejected and only the owned ref is deleted
+ok 33 - isolated conflict or wrong parents is rejected and only the owned ref is deleted
+  ---
+  duration_ms: 0.222875
+  type: 'test'
+  ...
+# Subtest: fallback retains reviewed-byte and post-wait authority guards and cleans rejected candidates
+ok 34 - fallback retains reviewed-byte and post-wait authority guards and cleans rejected candidates
+  ---
+  duration_ms: 1.287458
+  type: 'test'
+  ...
+# Subtest: cleanup refuses another request, main/worker refs and changed owned refs
+ok 35 - cleanup refuses another request, main/worker refs and changed owned refs
+  ---
+  duration_ms: 1.026416
+  type: 'test'
+  ...
+# Subtest: failed cleanup retains its exact resource for inspection without hiding rejection
+ok 36 - failed cleanup retains its exact resource for inspection without hiding rejection
+  ---
+  duration_ms: 0.714875
+  type: 'test'
+  ...
+# Subtest: isolated candidate follows the existing final tests/main/head merge guards
+ok 37 - isolated candidate follows the existing final tests/main/head merge guards
+  ---
+  duration_ms: 1.047708
+  type: 'test'
+  ...
+# Subtest: unconfirmed ref creation identifies the resource without deleting a possible collision
+ok 38 - unconfirmed ref creation identifies the resource without deleting a possible collision
+  ---
+  duration_ms: 0.15725
+  type: 'test'
+  ...
+# Subtest: merged head cleanup deletes only confirmed unchanged same-repository unused worker heads
+ok 39 - merged head cleanup deletes only confirmed unchanged same-repository unused worker heads
+  ---
+  duration_ms: 0.872917
+  type: 'test'
+  ...
+# Subtest: unmerged, wrong head, fork, default, protected, advanced and shared heads are retained
+ok 40 - unmerged, wrong head, fork, default, protected, advanced and shared heads are retained
+  ---
+  duration_ms: 1.262
+  type: 'test'
+  ...
+# Subtest: head cleanup checks paginated open PRs and fails conservatively on unknown identities or API failures
+ok 41 - head cleanup checks paginated open PRs and fails conservatively on unknown identities or API failures
+  ---
+  duration_ms: 0.649166
+  type: 'test'
+  ...
+# Subtest: successful integration records cleanup separately, including deletion failure and replay
+ok 42 - successful integration records cleanup separately, including deletion failure and replay
+  ---
+  duration_ms: 1.267625
+  type: 'test'
+  ...
+# Subtest: cleanup stops on time or inventory call budget without starting deletion after pending
+ok 43 - cleanup stops on time or inventory call budget without starting deletion after pending
+  ---
+  duration_ms: 0.503
+  type: 'test'
+  ...
+# Subtest: fresh geography success is required even when application proof is reusable
+ok 44 - fresh geography success is required even when application proof is reusable
+  ---
+  duration_ms: 2.123708
+  type: 'test'
+  ...
+# Subtest: fresh geography success is recorded against exact combined commits
+ok 45 - fresh geography success is recorded against exact combined commits
+  ---
+  duration_ms: 0.240459
+  type: 'test'
+  ...
+# Subtest: green geography job cannot merge without its authenticated exact-combined report
+ok 46 - green geography job cannot merge without its authenticated exact-combined report
+  ---
+  duration_ms: 0.338458
+  type: 'test'
+  ...
+# Subtest: raw unresolved findings cannot be relabeled as a successful geography check
+ok 47 - raw unresolved findings cannot be relabeled as a successful geography check
+  ---
+  duration_ms: 0.156583
+  type: 'test'
+  ...
+# Subtest: trusted geography outputs bind attempted artifact digest through the privileged merge job
+ok 48 - trusted geography outputs bind attempted artifact digest through the privileged merge job
+  ---
+  duration_ms: 0.216583
+  type: 'test'
+  ...
+# Subtest: known stale tested base or head rejects before expensive evidence/tree inspection
+ok 49 - known stale tested base or head rejects before expensive evidence/tree inspection
+  ---
+  duration_ms: 0.274916
+  type: 'test'
+  ...
+# Subtest: candidate waiting rechecks changed claim/check/review/head after caching immutable evidence
+ok 50 - candidate waiting rechecks changed claim/check/review/head after caching immutable evidence
+  ---
+  duration_ms: 0.930708
+  type: 'test'
+  ...
+# Subtest: trusted geography controls reject candidate scripts, import shadows and conflicting integrations
+ok 51 - trusted geography controls reject candidate scripts, import shadows and conflicting integrations
+  ---
+  duration_ms: 26974.693875
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 27028.224042
