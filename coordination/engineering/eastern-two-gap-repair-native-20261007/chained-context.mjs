@@ -4,10 +4,31 @@ import{restoreWholeImage}from'./whole-image.mjs';import{validateContextMigration
 import{candidateBudget,requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../../../scripts/evidence-quality.mjs';
 import{validateNativeSelectionReceipt}from'../../../scripts/native-ownership/require-verified-selection.mjs';
 import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
+import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export const FIXED_PRIOR_STAGE_SHA='471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765';
 export const FIXED_NATIVE_COMPARISON_SHA='3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28';
 export const FIXED_PRIOR_VALIDATOR_SHA='5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7';
+export const FIXED_MIDDLE_GRID_SHA='70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc';
+// Exactly two authentic retained-identity migrations, with the same middle body.
+export function foldCoverageContinuation(manifest,{originalGrid,originalGridSha256,selectedGrid,selectedGridSha256,release,steps}){
+ assert(Array.isArray(steps)&&steps.length===2,'Exactly two ordered physical-association steps required');
+ assert.deepEqual(steps.map(s=>[s.predecessorRelease.version,s.release.version]),[[6,7],[7,8]],'Physical-association steps must be v6→v7→v8');
+ assert.deepEqual(steps[0].release,steps[1].predecessorRelease,'Complete middle release must be identical');
+ assert.deepEqual(steps[1].release,release,'Final physical association differs from selected release');
+ assert.equal(steps[0].selectedGridSha256,FIXED_MIDDLE_GRID_SHA,'Wrong accepted intermediate native manifest');
+ assert.deepEqual(steps[0].selectedGrid,steps[1].originalGrid,'Exact same middle native manifest required');
+ assert.equal(steps[0].selectedGridSha256,steps[1].originalGridSha256,'Middle native byte binding changed');
+ assert.deepEqual(steps[0].originalGrid,originalGrid);assert.equal(steps[0].originalGridSha256,originalGridSha256);
+ assert.deepEqual(steps[1].selectedGrid,selectedGrid);assert.equal(steps[1].selectedGridSha256,selectedGridSha256);
+ let result=manifest;const bindings=[];
+ for(const step of steps){result=rebindCoverageManifest(result,step);bindings.push(structuredClone(result.ownership_binding));}
+ const originalFields=structuredClone(result);delete originalFields.ownership_binding;
+ for(const key of ['release_id','footprints_sha256','canonical_grid_sha256'])originalFields[key]=manifest[key];
+ assert.deepEqual(originalFields,manifest,'Original classes/sources/blocked tiles/encoded asset bindings must remain unchanged');
+ result.ownership_binding.previous_associations=bindings.slice(0,-1);
+ return result;
+}
 export function authenticateSuccessorContextInventory(indexRaw,imageIndex,comparisonRaw){
  assert.equal(sha(comparisonRaw),FIXED_NATIVE_COMPARISON_SHA,'Original complete native comparison binding changed');
  const comparison=JSON.parse(comparisonRaw),original=comparison.products.find(p=>p.path==='context-index.json');
@@ -68,6 +89,17 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
   const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(sha(decoded),pin.decoded_sha256);after.push(...JSON.parse(decoded));
  }
  assert.equal(before.rows.length,49625);assert.equal(after.length,49625);assert.equal(before.index.owner_sha256,afterIndex.owner_sha256);assert.equal(afterIndex.owner_sha256,prior.migration.owner_sha256);
+ // Child receipts are evidence, never substitutes for a live branded proof.
+ const originalRelease=oldRegistry.releases.at(-2);assert.equal(originalRelease.version,6);assert.equal(predecessor.version,7);assert.equal(release.version,8);
+ const middleRaw=read(stage.coverage_middle_grid);assert.equal(sha(middleRaw),FIXED_MIDDLE_GRID_SHA);
+ const middleGrid=JSON.parse(middleRaw);assert.equal(middleGrid.geographic_release,predecessor.id);assert.equal(middleGrid.footprints_sha256,predecessor.footprints_sha256);
+ assert.equal(middleGrid.hierarchy_sha256,predecessor.hierarchy_sha256);
+ const priorMigration=(()=>{
+  const original=legacyContext(oldStage.before_context),oldCandidates=JSON.parse(fs.readFileSync(path.join(image,oldStage.native_proposal.path)));
+  assert.equal(sha(fs.readFileSync(path.join(image,oldStage.native_proposal.path))),oldStage.native_proposal.sha256);
+  return validateContextMigration({original:original.rows,migrated:before.rows,candidates:oldCandidates,predecessorRelease:originalRelease,release:predecessor,migrationManifestFile:path.join(image,oldStage.geometry_manifest.path)});
+ })();
+ assert.equal(priorMigration.owner_sha256,prior.migration.owner_sha256);
  const candidates=JSON.parse(read(stage.native_proposal));assert.deepEqual(Object.keys(candidates).sort(),[...TARGETS].sort());
  const geometryManifest=JSON.parse(read(stage.geometry_manifest)),geometryBase=path.posix.dirname(stage.geometry_manifest.path),pins=Object.entries(geometryManifest.files).map(([name,pin])=>({path:geometryBase+'/'+(pin.archive_path??name),bytes:pin.bytes,sha256:pin.sha256}));assert.deepEqual(stage.geometry_files,pins);for(const pin of pins)read(pin);
  const migration=validateContextMigration({original:before.rows,migrated:after,candidates,predecessorRelease:predecessor,release,migrationManifestFile:path.join(root,stage.geometry_manifest.path)});
@@ -75,5 +107,5 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,
   original_v1_replay:{actual_command:command,explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
    advertised_commit_matches_validator_closure:false,receipt_sha256:sha(priorRaw),receipt:prior,input_image_index_sha256:stage.prior_image.sha256},
-  checked_files:seen.size,context_transport:{index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:budget.snapshot(),scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation};
+  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_transport:{index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:budget.snapshot(),scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
 }

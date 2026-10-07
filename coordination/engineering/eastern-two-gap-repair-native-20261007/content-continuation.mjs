@@ -4,6 +4,9 @@ import {immutableReader,BEFORE,AFTER} from './native-producer.mjs';
 import {revalidatePreparedEvidence} from '../../../scripts/revalidate-prepared-evidence.mjs';
 import {prepareEvidenceBundle} from '../../../scripts/prepare-evidence-bundle.mjs';
 import {validateEvidenceRevalidationChain} from '../../../scripts/validate-evidence-revalidation-chain.mjs';
+import{execFileSync}from'node:child_process';
+import{fileURLToPath}from'node:url';
+import{requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';
 import {footprintHash} from '../../../scripts/check-prepared.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');const json=x=>Buffer.from(JSON.stringify(x)+'\n');
 export function continueContent(repo,baseline,runRoot,plan,{storage}={}){
@@ -47,4 +50,15 @@ export function continueContent(repo,baseline,runRoot,plan,{storage}={}){
    prepared_index_sha256:sha(fs.readFileSync('data/prepared-evidence/index.json')),pending_products:prepared.pending_products,source_pins:[...reader.pins(),...review.pins()],
    limits:['Unchanged dated claim/interval/source bytes only, no historical affiliation transfer','Pending GHSL and macro/regional certificate approvals are not promoted']};
  }finally{process.chdir(initial);}
+}
+
+// The unchanged full consumer runs alone, without a second retained world in its parent heap.
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+ requirePlainExecution();assert.equal(process.argv.length,3);const invocation=JSON.parse(fs.readFileSync(process.argv[2]));
+ assert(path.isAbsolute(invocation.repo)&&fs.realpathSync(invocation.repo)===invocation.repo);assert.equal(invocation.baseline,'913db0624b8aa79b188ff17a7f5c4ae0c0f63965');
+ assert.match(invocation.execution_commit,/^[a-f0-9]{40}$/);
+ for(const pin of invocation.executed_modules){assert(pin.path.split('/').every(p=>p&&p!=='.'&&p!=='..'));const raw=fs.readFileSync(path.join(invocation.repo,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);const committed=execFileSync('git',['-C',invocation.repo,'cat-file','blob',invocation.execution_commit+':'+pin.path],{maxBuffer:32*1024*1024});assert(raw.equals(committed));}
+ const result=continueContent(invocation.repo,invocation.baseline,invocation.runRoot,invocation.plan,{storage:new Map(invocation.storage)});
+ result.actual_execution={commit:invocation.execution_commit,node:process.version,executable:process.execPath,executed_module_pins:invocation.executed_modules};
+ process.stdout.write(JSON.stringify(result)+'\n');
 }

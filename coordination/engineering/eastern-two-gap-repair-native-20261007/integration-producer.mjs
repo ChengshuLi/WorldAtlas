@@ -47,7 +47,7 @@ export function prepareInputClosure(repo,out){
  const raw=fs.readFileSync(transport+'/index.json');restoreWholeImage(transport,restored,{expectedIndexSha:sha(raw)});
  const declared=JSON.parse(fs.readFileSync(repo+'/'+NS+'/complete-input-index.json'));
  const restoredIndex=fs.readFileSync(restored+'/'+NS+'/complete-input-index.json');assert(restoredIndex.equals(fs.readFileSync(repo+'/'+NS+'/complete-input-index.json')));
- assert.equal(declared.files.length,203);const storage=new Map();
+ assert.equal(declared.files.length,204);const storage=new Map();
  for(const pin of declared.files)storage.set(pin.original.commit+':'+pin.original.path,{...pin,alias:{...pin.alias,path:path.relative(repo,restored+'/'+pin.alias.path)}});
  const readers=new Map(),budget=candidateBudget([]);
  for(const pin of declared.files){const c=pin.original.commit;if(!readers.has(c))readers.set(c,immutableReader(repo,c,storage));const body=readers.get(c).read(pin.original.path);budget.add({bytes:body.length});}
@@ -65,7 +65,7 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  const ordinaryRequired=[NS+'/native-proposal.json',NS+'/native-selection-receipt.json','data/ownership-selection.json','scripts/native-ownership/verified-candidates.json',NS+'/content-source-plan.json',NS+'/original-audit-recipe.py.txt'];
  for(const p of ordinaryRequired){const raw=fs.readFileSync(repo+'/'+p),original=execFileSync('git',['-C',repo,'cat-file','blob',head+':'+p],{maxBuffer:32*1024*1024});assert(raw.equals(original),'Final consumer input differs from immutable head '+p);}
  const finalConsumerInputs=verifyFinalConsumerInputs(repo,head,out);fs.writeFileSync(out+'/final-consumer-input-only.json',json(finalConsumerInputs));
- const {storage,input_only}=prepareInputClosure(repo,out);fs.writeFileSync(out+'/input-only.json',json(input_only));console.log('ALL203 original inputs loaded',input_only.budget);
+ const {storage,input_only}=prepareInputClosure(repo,out);fs.writeFileSync(out+'/input-only.json',json(input_only));console.log('ALL204 original inputs loaded',input_only.budget);
  if(inputOnly)return input_only;
  const image=out+'/delivery';fs.mkdirSync(image);const put=(p,b)=>{assert(b.length<=32*1024*1024);const target=image+'/'+p;fs.mkdirSync(path.dirname(target),{recursive:true});assert(!fs.existsSync(target));fs.writeFileSync(target,b);return{path:p,bytes:b.length,sha256:sha(b)};};
  const original=await releaseInputs(repo,BASE,{storage,nativeStorage:storage});console.log('Complete84833 membership release loaded');
@@ -77,13 +77,14 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  const native=loadSuccessor(repo,BASE,{storage}),manifestDir='data/canonical-grid/eastern-v8';
  function copyTree(p){for(const row of fs.readdirSync(repo+'/'+p,{withFileTypes:true})){const s=p+'/'+row.name;if(row.isDirectory())copyTree(s);else{assert(row.isFile());put(s,fs.readFileSync(repo+'/'+s));}}}
  copyTree(manifestDir);copyTree(NS+'/prior-v1');
+ const middleGrid=put('data/native-ownership/repaired-v7/manifest.json',baseline.read('data/native-ownership/repaired-v7/manifest.json'));
  put('.github/package-inputs.json',fs.readFileSync(repo+'/.github/package-inputs.json'));put('data/canonical-grid/bounds.json.gz',baseline.read('data/canonical-grid/bounds.json.gz'));
  for(const p of [NS+'/native-selection-receipt.json',NS+'/native-proposal.json','data/ownership-selection.json','scripts/native-ownership/verified-candidates.json'])put(p,fs.readFileSync(repo+'/'+p));
  const gmPath='data/reference-migrations/eastern-two-gap-repair-20261006/index.json',gm=JSON.parse(baseline.read(gmPath)),installedMigration={...gm,activated:true,activation:{kind:'installed-offline-repository',release_id:native.releaseId,native_manifest_sha256:'a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885',context_stage_version:2,production_deployment_verified:false,original_proposal_index_sha256:sha(baseline.read(gmPath))}},gmPin=put(gmPath,json(installedMigration)),geometryFiles=[];
  for(const [name,pin]of Object.entries(gm.files)){const p=path.posix.dirname(gmPath)+'/'+(pin.archive_path??name);geometryFiles.push(put(p,baseline.read(p)));}
  const pin=p=>{const b=fs.readFileSync(image+'/'+p);return{path:p,bytes:b.length,sha256:sha(b)};};
  const closure=codeClosure(repo,'scripts/native-ownership/validate-build-context-stage.mjs');for(const p of closure)if(!fs.existsSync(image+'/'+p))put(p,fs.readFileSync(repo+'/'+p));
- const stage={version:2,issue:1295,kind:'retained-identity-context-continuation-v2',lane:'engineering',subject_ids:[...TARGETS],prior_stage_sha256:'471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765',prior_image:pin(NS+'/prior-v1/index.json'),releases,predecessor_release_id:next.index.releases.at(-2).id,successor_release_id:next.index.releases.at(-1).id,after_context:pin(manifestDir+'/context-index.json'),after_context_image:pin(manifestDir+'/context-transport/index.json'),native_comparison:pin(NS+'/native-selection-receipt.json'),native_manifest:pin(manifestDir+'/manifest.json'),native_proposal:pin(NS+'/native-proposal.json'),geometry_manifest:gmPin,geometry_files:geometryFiles,validator_sources:closure.map(pin)};
+ const stage={version:2,issue:1295,kind:'retained-identity-context-continuation-v2',lane:'engineering',subject_ids:[...TARGETS],prior_stage_sha256:'471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765',prior_image:pin(NS+'/prior-v1/index.json'),coverage_middle_grid:middleGrid,releases,predecessor_release_id:next.index.releases.at(-2).id,successor_release_id:next.index.releases.at(-1).id,after_context:pin(manifestDir+'/context-index.json'),after_context_image:pin(manifestDir+'/context-transport/index.json'),native_comparison:pin(NS+'/native-selection-receipt.json'),native_manifest:pin(manifestDir+'/manifest.json'),native_proposal:pin(NS+'/native-proposal.json'),geometry_manifest:gmPin,geometry_files:geometryFiles,validator_sources:closure.map(pin)};
  put('data/native-context-migration/manifest.json',json(stage));
  const previousCwd=process.cwd(),previousMarker=process.env.WORLDATLAS_PACKAGE_STAGE;process.chdir(image);process.env.WORLDATLAS_PACKAGE_STAGE=image;
  let selection;try{selection=await selectBuildOwnership({...await readBuildOwnershipSelection(),expectedReference:next.index.releases.at(-1)});}finally{process.chdir(previousCwd);if(previousMarker===undefined)delete process.env.WORLDATLAS_PACKAGE_STAGE;else process.env.WORLDATLAS_PACKAGE_STAGE=previousMarker;}
@@ -92,7 +93,9 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  const context=await validateBuildContextStage({root:image,expectedReference:next.index.releases.at(-1)});assert.equal(context.receipt.status,'verified');put(NS+'/combined-context-receipt.json',json(context.receipt));
  console.log('Full49625 context continuation PASS');
  const contentRoot=out+'/content';fs.mkdirSync(contentRoot);const plan=JSON.parse(fs.readFileSync(repo+'/'+NS+'/content-source-plan.json'));
- const content=continueContent(repo,BASE,contentRoot,plan,{storage});assert.equal(content.claim_rows,3984);
+ const contentInvocation=out+'/content-invocation.json';fs.writeFileSync(contentInvocation,json({repo,baseline:BASE,runRoot:contentRoot,plan,storage:[...storage],execution_commit:head,executed_modules:modules}));
+ const contentRaw=execFileSync(process.execPath,[repo+'/'+NS+'/content-continuation.mjs',contentInvocation],{maxBuffer:32*1024*1024});const content=JSON.parse(contentRaw);assert.equal(content.claim_rows,3984);
+ fs.writeFileSync(out+'/content-child-result.json',contentRaw);
  const productPrefix='data/reference-migrations/eastern-two-gap-repair-20261006/products/';
  function copyOutput(source,p){for(const row of fs.readdirSync(source+'/'+p,{withFileTypes:true})){const s=p+'/'+row.name;if(row.isDirectory())copyOutput(source,s);else put(s,fs.readFileSync(source+'/'+s));}}
  copyOutput(contentRoot,productPrefix.slice(0,-1));copyOutput(contentRoot,'data/prepared-evidence');put(NS+'/combined-content-receipt.json',json(content));

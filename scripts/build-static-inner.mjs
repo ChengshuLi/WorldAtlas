@@ -18,6 +18,7 @@ import {selectBuildOwnership,readBuildOwnershipSelection} from './select-build-o
 import {validateBuildContextStage} from './native-ownership/validate-build-context-stage.mjs';
 import {packageNativeLatitudes} from './package-native-latitudes.mjs';
 import {rebindCoverageManifest} from './rebind-coverage-manifest.mjs';
+import {foldCoverageContinuation} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs';
 import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
 import { createHash } from 'node:crypto';
 assertPackageStage();
@@ -121,7 +122,17 @@ try {
     if(!fixedGrid)throw Error('Physical classification requires canonical grid');
     coverageClassification=JSON.parse(await fs.readFile(coveragePath));
     const canonicalHash=selectedGrid.sha256;
-    if(fixedGrid.method){const originalBytes=await fs.readFile('data/canonical-grid/manifest.json');coverageClassification=rebindCoverageManifest(coverageClassification,{originalGrid:JSON.parse(originalBytes),originalGridSha256:createHash('sha256').update(originalBytes).digest('hex'),selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,predecessorRelease:nativeBuildContext?.predecessorRelease,geometryValidation:nativeBuildContext?.geometryValidation});}
+    if(fixedGrid.method){
+      const originalBytes=await fs.readFile('data/canonical-grid/manifest.json'),originalGrid=JSON.parse(originalBytes),originalGridSha256=createHash('sha256').update(originalBytes).digest('hex');
+      const continuation=nativeBuildContext?.coverageContinuation;
+      if(continuation){
+        const middle={selectedGrid:continuation.middleGrid,selectedGridSha256:continuation.middleGridSha256,release:continuation.middleRelease};
+        coverageClassification=foldCoverageContinuation(coverageClassification,{originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,steps:[
+          {originalGrid,originalGridSha256,...middle,predecessorRelease:continuation.originalRelease,geometryValidation:continuation.originalGeometryValidation},
+          {originalGrid:middle.selectedGrid,originalGridSha256:middle.selectedGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,predecessorRelease:middle.release,geometryValidation:nativeBuildContext.geometryValidation}
+        ]});
+      }else coverageClassification=rebindCoverageManifest(coverageClassification,{originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,predecessorRelease:nativeBuildContext?.predecessorRelease,geometryValidation:nativeBuildContext?.geometryValidation});
+    }
     await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:geographicRelease.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
     pixelMap.canonical_grid_sha256=canonicalHash;
     await fs.mkdir('dist/coverage-classification',{recursive:true});
