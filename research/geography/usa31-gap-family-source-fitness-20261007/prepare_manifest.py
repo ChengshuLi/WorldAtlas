@@ -46,7 +46,7 @@ for p in sorted(root.rglob('*')):
  rel=str(p.relative_to(Path('.')))
  if rel==str(root/'evidence-quality.json'): continue
  if rel in {str(root/x) for x in source_paths}: continue
- role='report' if p.suffix in ('.md','.json') else ('generated-table' if p.suffix in ('.jsonl','.geojson','.gz') else 'report')
+ role='report'
  outputs.append(desc(rel,p.read_bytes(),role))
 ids=[]
 for line in (root/'accepted-routing-component-rows.json').read_text().splitlines():
@@ -59,8 +59,8 @@ manifest={
  'subject_ids':subject_ids,'subject_ids_sha256':subject_ids_sha,
  'baseline':{'commit':base,'files':baseline_files,'pins':pins,'pin_files':pin_files,'subject_files':{x:contact_path for x in subject_ids}},
  'sources':sources,'outputs':outputs,
- 'methods':[{'id':'bounded-source-fitness-review','description':'Join exact immutable family/component/numeric/physical/source record identities; restore and hash all target geometry; retain raw source records; compare exact contact products and recorded equal-area overlap summaries without geometry repair, snapping, semantic inference or ownership transfer.','software':'Python 3; Shapely 2.1.2; pyproj 3.7.2; WorldAtlas evidence-quality v1','units':'Exact IDs and SHA-256; square metres inherited only where explicitly marked; dimensionless intersection-over-union.'}],
- 'metrics':[],'summaries':[],
+ 'methods':[{'id':'bounded-source-fitness-review','kind':'source','description':'Join exact immutable family/component/numeric/physical/source record identities; restore and hash all target geometry; retain raw source records; compare exact contact products and recorded equal-area overlap summaries without geometry repair, snapping, semantic inference or ownership transfer.','software':'Python 3; Shapely 2.1.2; pyproj 3.7.2; WorldAtlas evidence-quality v1','units':'Exact IDs and SHA-256; square metres inherited only where explicitly marked; dimensionless intersection-over-union.'}],
+ 'metrics':[],'metric_bindings':[],'summaries':[],
  'conclusions':[
   {'text':'The exact accepted family has 31 members; all 31 current features and physical query rows were restored and identity/hash matched, and all 15 numeric-first target IDs matched complete #1300 retained scope rows.','status':'supported','source_ids':['worldatlas-accepted-routing-and-candidate-ancestry']},
   {'text':'Source suitability is unresolved for all 31 components. The physical records cite GSHHG 2.3.7 with heterogeneous or unknown observation dates, and legal/water/ownership status is not established. Preserve all candidates and defer geometry processing.','status':'unresolved','source_ids':['gshhg-2.3.7-physical-reference','worldatlas-accepted-routing-and-candidate-ancestry']},
@@ -68,6 +68,7 @@ manifest={
  ],
  'stages':{'research':'partial','implementation':'not-proposed','geographic_approval':'unapproved'},
  'commands':['From repository root, run python3 research/geography/usa31-gap-family-source-fitness-20261007/build_evidence.py (offline reconstruction from pinned commits and captured inputs).','Run extract_tigerline_targets.py YEAR /path/to/tl_YEAR_us_county.zip for a newly downloaded full official TIGER/Line archive; the committed target rows and receipt do not require the full archive.','Run the bounded sources/capture_tigerweb_source.py only when a new Census TIGERweb capture is explicitly required; it performs a limited HTTPS source query.','Run the bundled Node evidence-quality validator against research/geography/usa31-gap-family-source-fitness-20261007/evidence-quality.json and the repository root.'],
+ 'change_receipts':[{'path':line.split('\t',1)[1],'status':{'A':'added','M':'modified','D':'removed','R':'renamed'}.get(line.split('\t',1)[0][0],line.split('\t',1)[0]),'previous_path':None} for line in subprocess.check_output(['git','diff','--name-status',base,'HEAD','--',str(root)],text=True).splitlines()],
  'external_snapshots':{'collision_issue_359_snapshot_body':'8f1539c649a0dd937eeddbbc21dcd50ba899043b47454d1a04b510a17ea8a1a6'},
  'claim_id':'ebb0dbbd-c2a5-4baf-8625-3a82030ce801','branch':'geography/usa31-gap-family-source-fitness-20261007','review_kind':'source'
 }
