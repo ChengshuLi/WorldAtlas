@@ -43,7 +43,7 @@ for h in pins:
  if H(b)!=h:raise ValueError('Required original report pin differs')
  baseline.append(descriptor(path,b))
 path='scripts/evidence/immutable.py';baseline.append(descriptor(path,subprocess.check_output(['git','show',BASE+':'+path],cwd=R)))
-files=sorted([f for f in P.rglob('*')if f.is_file()and'.cache'not in f.relative_to(P).parts and f.name!='evidence-quality.json']);files+=[R/(PREFIX+'.json')]
+files=sorted([f for f in P.rglob('*')if f.is_file()and'.cache'not in f.relative_to(P).parts and'__pycache__'not in f.relative_to(P).parts and f.name!='evidence-quality.json']);files+=[R/(PREFIX+'.json')]
 sources=[];outputs=[]
 for f in files:
  d=descriptor(str(f.relative_to(R)))
