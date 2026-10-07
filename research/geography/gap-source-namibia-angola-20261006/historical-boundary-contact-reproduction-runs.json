@@ -1,15 +1,18 @@
 {
   "version": 1,
   "method_id": "kakeri-boundary-contact-jrc-water",
-  "reproduction_claim": "Two complete consecutive executions using identical pinned source geometries, JRC raster parts, historical documents, code and runtime environment produced identical assessment bytes.",
+  "reproduction_claim": "Two complete executions of the documented --create command used fresh, exclusive NewVintage destinations, authenticated the same immutable baseline bytes and candidate treaty-document hashes, executed the same pixel-center counting helper and controls, and produced identical assessment and control bytes. The ordinary command is a read-only comparison.",
   "runs": [
     {
-      "run_id": "historical-contact-reviewed-run-1",
-      "started_at_utc": "2026-10-07T08:03:48Z",
-      "completed_at_utc": "2026-10-07T08:03:50Z",
+      "run_id": "kakeri-final-run-1",
+      "started_at_utc": "2026-10-07T08:22:00Z",
+      "completed_at_utc": "2026-10-07T08:22:33Z",
       "command": [
         "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-        "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py"
+        "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
+        "--create",
+        "--vintage",
+        "kakeri-final-1"
       ],
       "environment": {
         "os": "macOS-15.6.1-arm64-arm-64bit",
@@ -25,110 +28,132 @@
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
           "bytes": 23958,
-          "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+          "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
           "bytes": 46722,
-          "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
+          "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
           "bytes": 74139,
-          "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c"
+          "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/manifest.json",
           "bytes": 5317,
-          "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
-          "bytes": 21188,
-          "sha256": "0600c27bd0bebab6e62e785f5ad4906cd9a29b42f8dc9b2d08ba79eddcb166e4"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf",
-          "bytes": 7801132,
-          "sha256": "a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/ibs120-1972.pdf",
-          "bytes": 275040,
-          "sha256": "12a88517ffa94bd53307ee26a8fcfa9279c9e106fd031d993c38926e3d77e87e"
+          "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/uk-treaty-series-1926-ts-29.pdf",
           "bytes": 195690,
-          "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de"
+          "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "scripts/evidence/immutable.py",
+          "bytes": 17414,
+          "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
           "bytes": 30000000,
-          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411"
+          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-ab",
           "bytes": 6860540,
-          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31"
+          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-aa",
           "bytes": 30000000,
-          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b"
+          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-ab",
           "bytes": 11757444,
-          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c"
+          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_10E_10S.tif",
           "bytes": 18621860,
-          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc"
+          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_20E_10S.tif",
           "bytes": 20100950,
-          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b"
+          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b",
+          "hash_kind": "file-bytes"
         },
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf",
-          "bytes": 1142853,
-          "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf",
+          "bytes": 7801132,
+          "sha256": "a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f",
+          "hash_kind": "file-bytes"
         },
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_2024.xml",
-          "bytes": 4946,
-          "sha256": "bc813149d2f0b2c5bfefab17c7a7af4b4f1d68b3ae20c7093623c87b945382a3"
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/ibs120-1972.pdf",
+          "bytes": 275040,
+          "sha256": "12a88517ffa94bd53307ee26a8fcfa9279c9e106fd031d993c38926e3d77e87e",
+          "hash_kind": "file-bytes"
         },
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_2024.xml",
-          "bytes": 4937,
-          "sha256": "7f8bacf24395e625471eacb29a6d8f0d095bee15a952c5de6fe176981cbc39a1"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/jrc-gsw-download.html",
-          "bytes": 85116,
-          "sha256": "8b8d8613efb3078b2c2f64c3a76ccdc6fbacdb7d35a7654be2bb98314eb81e62"
+          "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
+          "bytes": 31247,
+          "sha256": "5a1cc63ed2b363d6eda0c720d147cf5ed4eb7aa7007cb965ea0ec23ccaac92dc",
+          "hash_kind": "file-bytes"
         }
       ],
       "outputs": [
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/historical-boundary-contact-water-assessment.json",
-          "bytes": 147912,
-          "sha256": "48f1bb19f6275224931014c8eb0fc0dcb4a8058852e6f473000622c80f06d996"
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/historical-boundary-contact-water-assessment.json",
+          "bytes": 114891,
+          "sha256": "c535068a93886f51d42d9b08a69489f367ff10d69bfcbfb60584d891d2cb260b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/validation-kakeri-positive-control.json",
+          "bytes": 537,
+          "sha256": "decbaa67399f380d56258fd01a4e6b36353eed9e95f7ee7dbe8189171f9d8f56",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/validation-kakeri-negative-control.json",
+          "bytes": 273,
+          "sha256": "e1922b6929bdd6decc8604984ff56caf9169f15cb52d2266cbc1dcc09d0cad0d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/publication.json",
+          "bytes": 785,
+          "sha256": "1059617cbb126e0b4d4a217c13b68a014f9574b52a868e61a0790ee626cc5143",
+          "hash_kind": "file-bytes"
         }
       ],
-      "outcome": "completed; 21 candidates, 10 contacts, 210 candidate-contact pairs"
+      "outcome": "completed with exclusive NewVintage publication; all 21 candidates, 10 source contacts, 210 pairs; positive-area pairs 49; pixel-center and NoData controls passed"
     },
     {
-      "run_id": "historical-contact-reviewed-run-2",
-      "started_at_utc": "2026-10-07T08:03:50Z",
-      "completed_at_utc": "2026-10-07T08:03:52Z",
+      "run_id": "kakeri-final-run-2",
+      "started_at_utc": "2026-10-07T08:22:33Z",
+      "completed_at_utc": "2026-10-07T08:22:48Z",
       "command": [
         "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-        "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py"
+        "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
+        "--create",
+        "--vintage",
+        "kakeri-final-2"
       ],
       "environment": {
         "os": "macOS-15.6.1-arm64-arm-64bit",
@@ -144,120 +169,159 @@
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
           "bytes": 23958,
-          "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+          "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
           "bytes": 46722,
-          "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
+          "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
           "bytes": 74139,
-          "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c"
+          "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/manifest.json",
           "bytes": 5317,
-          "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
-          "bytes": 21188,
-          "sha256": "0600c27bd0bebab6e62e785f5ad4906cd9a29b42f8dc9b2d08ba79eddcb166e4"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf",
-          "bytes": 7801132,
-          "sha256": "a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/ibs120-1972.pdf",
-          "bytes": 275040,
-          "sha256": "12a88517ffa94bd53307ee26a8fcfa9279c9e106fd031d993c38926e3d77e87e"
+          "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/uk-treaty-series-1926-ts-29.pdf",
           "bytes": 195690,
-          "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de"
+          "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "scripts/evidence/immutable.py",
+          "bytes": 17414,
+          "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
           "bytes": 30000000,
-          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411"
+          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-ab",
           "bytes": 6860540,
-          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31"
+          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-aa",
           "bytes": 30000000,
-          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b"
+          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-ab",
           "bytes": 11757444,
-          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c"
+          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_10E_10S.tif",
           "bytes": 18621860,
-          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc"
+          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc",
+          "hash_kind": "file-bytes"
         },
         {
           "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_20E_10S.tif",
           "bytes": 20100950,
-          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b"
+          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b",
+          "hash_kind": "file-bytes"
         },
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf",
-          "bytes": 1142853,
-          "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf",
+          "bytes": 7801132,
+          "sha256": "a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f",
+          "hash_kind": "file-bytes"
         },
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_2024.xml",
-          "bytes": 4946,
-          "sha256": "bc813149d2f0b2c5bfefab17c7a7af4b4f1d68b3ae20c7093623c87b945382a3"
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/ibs120-1972.pdf",
+          "bytes": 275040,
+          "sha256": "12a88517ffa94bd53307ee26a8fcfa9279c9e106fd031d993c38926e3d77e87e",
+          "hash_kind": "file-bytes"
         },
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_2024.xml",
-          "bytes": 4937,
-          "sha256": "7f8bacf24395e625471eacb29a6d8f0d095bee15a952c5de6fe176981cbc39a1"
-        },
-        {
-          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/jrc-gsw-download.html",
-          "bytes": 85116,
-          "sha256": "8b8d8613efb3078b2c2f64c3a76ccdc6fbacdb7d35a7654be2bb98314eb81e62"
+          "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
+          "bytes": 31247,
+          "sha256": "5a1cc63ed2b363d6eda0c720d147cf5ed4eb7aa7007cb965ea0ec23ccaac92dc",
+          "hash_kind": "file-bytes"
         }
       ],
       "outputs": [
         {
-          "path": "research/geography/gap-source-namibia-angola-20261006/historical-boundary-contact-water-assessment.json",
-          "bytes": 147912,
-          "sha256": "48f1bb19f6275224931014c8eb0fc0dcb4a8058852e6f473000622c80f06d996"
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/historical-boundary-contact-water-assessment.json",
+          "bytes": 114891,
+          "sha256": "c535068a93886f51d42d9b08a69489f367ff10d69bfcbfb60584d891d2cb260b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/validation-kakeri-positive-control.json",
+          "bytes": 537,
+          "sha256": "decbaa67399f380d56258fd01a4e6b36353eed9e95f7ee7dbe8189171f9d8f56",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/validation-kakeri-negative-control.json",
+          "bytes": 273,
+          "sha256": "e1922b6929bdd6decc8604984ff56caf9169f15cb52d2266cbc1dcc09d0cad0d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/publication.json",
+          "bytes": 785,
+          "sha256": "978d98021f2e48e6b97725d26a7b47a8d17c099d764cee03cde1af172a11df7b",
+          "hash_kind": "file-bytes"
         }
       ],
-      "outcome": "completed; 21 candidates, 10 contacts, 210 candidate-contact pairs"
+      "outcome": "completed with exclusive NewVintage publication; all 21 candidates, 10 source contacts, 210 pairs; positive-area pairs 49; pixel-center and NoData controls passed"
     }
   ],
   "matching_output_hashes": true,
   "validation_references": [
     {
-      "path": "validation-jrc-gsw-positive-control.json",
-      "sha256": "c1522900623425805458a31dd866700f8fb53d6d78653793304cc42a19b261b4",
-      "role": "Pixel-center inclusion, valid water codes, NoData exclusion and edge-only behavior in the shared mask method."
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-kakeri-positive-control.json",
+      "sha256": "decbaa67399f380d56258fd01a4e6b36353eed9e95f7ee7dbe8189171f9d8f56",
+      "role": "Generated and executed by the same production pixel-center selection helper; counts raw NoData before excluding it and checks edge-only exclusion."
     },
     {
-      "path": "validation-jrc-gsw-negative-control.json",
-      "sha256": "6e6ac7838f8c0b1f158554cd93dd4ed0ddea5ec38ab7c2e30bfd809e7d79a73b",
-      "role": "Disjoint geometry must select no pixels."
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-kakeri-negative-control.json",
+      "sha256": "e1922b6929bdd6decc8604984ff56caf9169f15cb52d2266cbc1dcc09d0cad0d",
+      "role": "Generated and executed by the same production pixel-center selection helper; disjoint geometry selects no centers."
+    }
+  ],
+  "admission_checks": [
+    {
+      "case": "collision with completed run kakeri-final-1",
+      "command": [
+        "--create",
+        "--vintage",
+        "kakeri-final-1"
+      ],
+      "outcome": "rejected before calculation and write; retained run outputs and root assessment hash unchanged"
+    },
+    {
+      "case": "path traversal in vintage",
+      "command": [
+        "--create",
+        "--vintage",
+        "../escaped-kakeri"
+      ],
+      "outcome": "rejected before calculation and write; no escaped output created"
     }
   ],
   "limits": [
-    "Controls validate the shared pixel-center and NoData mask primitive, not local classification accuracy.",
-    "Reproducibility establishes output stability only; it does not resolve historic channel, current banks, processing cause or boundary placement.",
-    "Contact union totals are non-additive across source contacts."
+    "Both controls exercise the production selector on a small synthetic raster; they do not establish local water-classification accuracy.",
+    "Contact union totals are non-additive across source contacts.",
+    "Repeatability does not resolve historic channel, current banks, processing cause or boundary placement."
   ]
 }
