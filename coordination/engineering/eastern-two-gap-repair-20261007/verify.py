@@ -28,7 +28,7 @@ def verify(root):
         after[identity]={**world[identity],'geometry':mapping(new)}
     part=outputs['proposed-part-29.json.gz'];old_part=data['inputs'].json('data/geography/part-29.json')
     expected={**old_part,'features':[after[f['id']]for f in old_part['features']]}
-    if part!=expected or len(part['features'])!=len(old_part['features']):raise ValueError('Full proposed containing part changed')
+    if canonical_json(part)!=canonical_json(expected)or len(part['features'])!=len(old_part['features']):raise ValueError('Full proposed containing part changed')
     for stored,frozen in zip(part['features'],expected['features']):
         if list(stored['geometry'])!=list(frozen['geometry']):raise ValueError('Consumer geometry key representation changed')
     actual_serialized_world={**world,**{f['id']:f for f in part['features']}}
