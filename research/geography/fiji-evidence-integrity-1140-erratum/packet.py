@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import hashlib
 import builtins
-import importlib.util
 import json
 import os
 from pathlib import Path
@@ -17,6 +16,9 @@ REPO = ROOT.parents[2]
 OWNED = "research/geography/fiji-evidence-integrity-1140-erratum/"
 BASELINE_COMMIT = "09c2dcff4f5acd92936fdd49378dd563332a1187"
 HELPER_COMMIT = BASELINE_COMMIT
+SHARED_WRITER_COMMIT = "839883ae281af7bf012f694698624a7ec77275e1"
+SHARED_WRITER_PATH = "scripts/evidence/immutable.py"
+SHARED_WRITER_SHA256 = "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
 ISSUE_FILE = ROOT / "issue-1361-contract.json"
 CLAIM_FILE = ROOT / "claim-receipt.json"
 UPSTREAM_FILE = ROOT / "source-provenance-correction.json"
@@ -92,31 +94,15 @@ class CompositeBaseline:
         return found,containing
 
 
-class NewVintage:
-    """Exclusive complete-run writer; install success receipt only after all bytes flush."""
-    def __init__(self, baseline, owned_path, vintage, filenames):
-        if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}",vintage): raise ValueError("Unsafe vintage name")
-        self.baseline=baseline; self.filenames=list(filenames)
-        self.root=ROOT/"vintages"/vintage
-        for p in [self.root,*self.root.parents]:
-            if p==REPO.parent: break
-            if p.is_symlink(): raise ValueError("Symlink in destination path")
-        if self.root.exists() or self.root.is_symlink(): raise FileExistsError("Vintage already exists")
-    def publish(self, values):
-        if set(values)!=set(self.filenames): raise ValueError("Incomplete/unexpected run output set")
-        encoded={n:canonical(v) for n,v in values.items()}
-        if any(len(v)>32*1024*1024 for v in encoded.values()): raise ValueError("Run output exceeds budget")
-        records=[descriptor(str((self.root/n).relative_to(REPO)),v) for n,v in encoded.items()]
-        receipt=canonical({"version":1,"status":"complete","outputs":records})
-        self.root.mkdir(parents=True,exist_ok=False)
-        try:
-            for name,raw in encoded.items():
-                with (self.root/name).open("xb") as f: f.write(raw); f.flush(); os.fsync(f.fileno())
-            temp=self.root/".publication-incomplete"
-            with temp.open("xb") as f: f.write(receipt); f.flush(); os.fsync(f.fileno())
-            os.link(temp,self.root/"publication.json"); temp.unlink()
-        except Exception: raise
-        return records
+def shared_new_vintage(baseline):
+    """Load the exact shared whole-run writer reviewed on the PR base commit."""
+    raw = git_blob(SHARED_WRITER_PATH, SHARED_WRITER_COMMIT)
+    if sha(raw) != SHARED_WRITER_SHA256:
+        raise ValueError("Shared evidence writer differs from its reviewed immutable pin")
+    module = types.ModuleType("worldatlas_shared_immutable_writer")
+    module.__file__ = f"pinned:{SHARED_WRITER_COMMIT}:{SHARED_WRITER_PATH}"
+    exec(compile(raw, module.__file__, "exec"), module.__dict__)
+    return module.NewVintage, {**descriptor(SHARED_WRITER_PATH, raw), "commit": SHARED_WRITER_COMMIT}
 
 
 def json_file(path: Path):
@@ -158,6 +144,7 @@ def load_context():
         raws[path]=raw; provenance[path]=commit
         descriptors.append(descriptor(path, raw))
     baseline = CompositeBaseline(pins,raws)
+    writer_type, writer_descriptor = shared_new_vintage(baseline)
     baseline_raw = {d["path"]: baseline.pinned_bytes(d["path"]) for d in descriptors}
     area_module=types.ModuleType("worldatlas_pinned_area")
     area_raw=raws["scripts/ellipsoidal_area.py"]; exec(compile(area_raw,"pinned:scripts/ellipsoidal_area.py","exec"),area_module.__dict__)
@@ -173,7 +160,8 @@ def load_context():
     upstream = json_file(UPSTREAM_FILE)
     return {
         "issue": issue, "work": work, "ids": sorted(ids), "claim": claim,
-        "baseline": baseline, "baseline_raw": baseline_raw, "pins": pins, "NewVintage": NewVintage,
+        "baseline": baseline, "baseline_raw": baseline_raw, "pins": pins, "NewVintage": writer_type,
+        "shared_writer": writer_descriptor,
         "pin_commits":provenance,
         "geometry": (METHOD, VERSION, geometry_module.canonical_land, geometry_module.land_area_m2, geometry_module.transform_point, shape),
         "issue_sha256": issue_hash, "claim_sha256": claim_hash, "upstream": upstream,
@@ -378,6 +366,10 @@ def code_bindings():
         if path.is_file():
             raw=path.read_bytes()
             rows.append(descriptor(str(path.relative_to(REPO)),raw))
+    raw=git_blob(SHARED_WRITER_PATH,SHARED_WRITER_COMMIT)
+    if sha(raw)!=SHARED_WRITER_SHA256:
+        raise ValueError("Shared evidence writer differs from its reviewed immutable pin")
+    rows.append({**descriptor(f"git:{SHARED_WRITER_COMMIT}:{SHARED_WRITER_PATH}",raw),"commit":SHARED_WRITER_COMMIT})
     return rows
 
 
@@ -396,10 +388,11 @@ def run_products(vintage: str, fail_after_compute: bool = False):
         "claim_receipt":descriptor("research/geography/fiji-evidence-integrity-1140-erratum/claim-receipt.json",CLAIM_FILE.read_bytes()),
         "source_correction_record":descriptor("research/geography/fiji-evidence-integrity-1140-erratum/source-provenance-correction.json",UPSTREAM_FILE.read_bytes()),
         "executed_code":code,
+        "shared_writer":ctx["shared_writer"],
         "pinned_inputs":[descriptor(name,baseline.pinned_bytes(name) if name in baseline.pins else git_blob(name)) for name in sorted(baseline.consumed)],
         "source_lfs_content":descriptor(SOURCE_PATH,baseline.pinned_bytes(SOURCE_PATH)),
         "output_inventory":OUTPUTS,
-        "immutable_reader":"captured and executed exact baseline scripts/evidence/immutable.py bytes",
+        "immutable_reader":"CompositeBaseline reads exact issue-pinned and baseline Git objects directly; complete output admission and publication use the exact shared writer pinned above",
     }
     import datetime, secrets
     runtime={"version":1,"issue":1361,"vintage":vintage,"execution_id":secrets.token_hex(16),"process_id":os.getpid(),"started_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"command":sys.argv,"status":"complete"}

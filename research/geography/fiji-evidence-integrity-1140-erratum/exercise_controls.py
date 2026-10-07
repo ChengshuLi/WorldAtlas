@@ -10,12 +10,12 @@ import subprocess
 import sys
 import tempfile
 
-from packet import ROOT, OWNED, canonical, json_file, sha
+from packet import ROOT, OWNED, canonical, json_file, sha, shared_new_vintage
 
 VINTAGES=ROOT/"vintages"
 CONTROLS=ROOT/"controls"
 FIXTURES=CONTROLS/"fixtures"
-RESULT=CONTROLS/"builder-controls-final-6.json"
+RESULT=CONTROLS/"builder-controls-final-9.json"
 
 
 def hash_tree(path):
@@ -48,7 +48,7 @@ def rewrite_receipt(run_root, vintage):
 
 
 def provisional_controls():
-    required=["copied-run-rejected","empty-run-rejected","partial-run-rejected","coherently-rehashed-mismatch-rejected","failed-producer-run-rejected","producer-existing-vintage-preserved","producer-broken-symlink-rejected","producer-path-traversal-rejected","producer-post-calculation-failure-preserved","producer-ordinary-file-preserved","builder-existing-manifest-preserved"]
+    required=["copied-run-rejected","empty-run-rejected","partial-run-rejected","coherently-rehashed-mismatch-rejected","failed-producer-run-rejected","producer-existing-vintage-preserved","producer-broken-symlink-rejected","producer-path-traversal-rejected","producer-post-calculation-failure-preserved","producer-ordinary-file-preserved","shared-writer-path-escape-rejected","shared-writer-aggregate-budget-rejected","builder-existing-manifest-preserved"]
     return {"version":1,"issue":1361,"outcome":"passed","controls":[{"name":n,"entry_point":"exercise_controls.py fixture setup","outcome":"rejected","observation":"The test harness reserves this case; final result is written only after all actual cases pass."} for n in required]}
 
 
@@ -58,9 +58,9 @@ def fixture_root(temp):
     for name in ("issue-1361-contract.json","claim-receipt.json","source-provenance-correction.json","packet.py","reproduce.py","build_packet.py"):
         shutil.copy2(ROOT/name,root/name)
     (root/"controls").mkdir()
-    (root/"controls"/"builder-controls-final-6.json").write_bytes(canonical(provisional_controls()))
+    (root/"controls"/"builder-controls-final-9.json").write_bytes(canonical(provisional_controls()))
     (root/"vintages").mkdir()
-    for vintage,source in (("run-one","run-seven"),("run-two","run-eight")):
+    for vintage,source in (("run-one","run-nine"),("run-two","run-ten")):
         shutil.copytree(VINTAGES/source,root/"vintages"/vintage)
         rewrite_receipt(root/"vintages"/vintage,vintage)
     return root
@@ -106,32 +106,79 @@ def builder_case(name, mutate, expected, records, manifest_collision=False):
         records[-1]["fixture_root_scope"]=str(Path(tmp).relative_to(ROOT))
 
 
+def shared_writer_cases(records):
+    writer_type, writer_pin = shared_new_vintage(type("Repo", (), {"repo": str(ROOT.parents[2])})())
+    for name in ("shared-writer-path-escape-rejected", "shared-writer-aggregate-budget-rejected"):
+        with tempfile.TemporaryDirectory(prefix="shared-writer-",dir=FIXTURES) as tmp:
+            repo=Path(tmp)/"repo"
+            repo.mkdir()
+            class Baseline:
+                def __init__(self):
+                    self.repo=str(repo)
+                    self.pins={}
+                    self.consumed={"pinned-input":1}
+                    self.max_phase_bytes=32
+                def pinned_bytes(self, path):
+                    raise AssertionError("No pin reads are required for this isolated writer fixture")
+            baseline=Baseline()
+            before=hash_tree(repo)
+            vintage="path-escape-control" if name.endswith("path-escape-rejected") else "aggregate-budget-control"
+            escaped=repo/"escaped.json"
+            intended=repo/OWNED/"vintages"/vintage
+            publish_reached=False
+            if name.endswith("path-escape-rejected"):
+                unsafe="../../../../../escaped.json"
+                try:
+                    writer=writer_type(baseline,OWNED,vintage,[unsafe])
+                    publish_reached=True
+                    writer.publish({unsafe:{"probe":"must not escape"}})
+                except ValueError as error:
+                    expected="complete unique plain output filename inventory"
+                    observed=str(error)
+                else:
+                    raise AssertionError("Shared writer accepted a traversal filename")
+            else:
+                writer=writer_type(baseline,OWNED,vintage,["payload.json"])
+                try:
+                    publish_reached=True
+                    writer.publish({"payload.json":{"probe":"x"*256}})
+                except ValueError as error:
+                    expected="Complete phase including output exceeds byte budget"
+                    observed=str(error)
+                else:
+                    raise AssertionError("Shared writer published beyond aggregate phase budget")
+            after=hash_tree(repo)
+            if before!=after or escaped.exists() or intended.exists():
+                raise AssertionError(f"{name}: fixture changed or escaped output appeared")
+            records.append({"name":name,"entry_point":"packet.shared_new_vintage -> pinned NewVintage constructor/publish","outcome":"rejected","expected_failure":expected,"observed_error":observed,"observation":("Constructor rejected the traversal filename before publication was entered; the escaped destination and intended run stayed absent." if not publish_reached else "The actual pinned publish method rejected the complete phase budget before reserving a run directory; original fixture bytes were unchanged."),"shared_writer":writer_pin,"fixture_tree_sha256_before":sha(canonical(before)),"fixture_tree_sha256_after":sha(canonical(after)),"fixture_tree_unchanged":True,"escaped_output_absent":not escaped.exists(),"intended_run_absent":not intended.exists(),"publish_reached":publish_reached,"fixture_scope":str(Path(tmp).relative_to(ROOT))})
+
+
 def main():
     CONTROLS.mkdir(exist_ok=True)
     FIXTURES.mkdir(parents=True,exist_ok=True)
     records=[]
-    original={n:hash_tree(VINTAGES/n) for n in ("run-seven","run-eight")}
-    if not original["run-seven"] or not original["run-eight"]:
+    original={n:hash_tree(VINTAGES/n) for n in ("run-nine","run-ten")}
+    if not original["run-nine"] or not original["run-ten"]:
         raise ValueError("Run the actual producer twice after the final code change before these controls")
 
-    r=run([str(ROOT/"reproduce.py"),"--vintage","run-seven"])
-    assert_reject("producer-existing-vintage-preserved","reproduce.py --vintage run-seven",r,hash_tree(VINTAGES/"run-seven")==original["run-seven"],"Vintage already exists",records)
-    records[-1].update({"output_path":str(VINTAGES/"run-seven"),"output_absent":False,"protected_tree_sha256":sha(canonical(original["run-seven"]))})
-    broken=VINTAGES/"broken-link-control-final-6"
+    r=run([str(ROOT/"reproduce.py"),"--vintage","run-nine"])
+    assert_reject("producer-existing-vintage-preserved","reproduce.py --vintage run-nine",r,hash_tree(VINTAGES/"run-nine")==original["run-nine"],"Evidence already exists; choose a new vintage",records)
+    records[-1].update({"output_path":str(VINTAGES/"run-nine"),"output_absent":False,"protected_tree_sha256":sha(canonical(original["run-nine"]))})
+    broken=VINTAGES/"broken-link-control-final-9"
     if broken.exists() or broken.is_symlink(): raise FileExistsError(broken)
-    broken.symlink_to(VINTAGES/"missing-target-control-final-6")
+    broken.symlink_to(VINTAGES/"missing-target-control-final-9")
     r=run([str(ROOT/"reproduce.py"),"--vintage",broken.name])
-    assert_reject("producer-broken-symlink-rejected","reproduce.py",r,broken.is_symlink() and not (VINTAGES/"missing-target-control-final-6").exists(),"Symlink in destination path",records)
+    assert_reject("producer-broken-symlink-rejected","reproduce.py",r,broken.is_symlink() and not (VINTAGES/"missing-target-control-final-9").exists(),"Symlink in output path",records)
     records[-1].update({"output_path":str(broken),"output_absent":False,"destination_was_broken_symlink":True})
     broken.unlink()
     records[-1].update({"output_absent_after_test_cleanup":not broken.exists() and not broken.is_symlink(),"test_fixture_cleanup":"The test-created broken symlink was removed after recording rejection; no target existed."})
-    outside=(VINTAGES/"../../../../escaped-control-final-6").resolve()
-    r=run([str(ROOT/"reproduce.py"),"--vintage","../../../../escaped-control-final-6"])
+    outside=(VINTAGES/"../../../../escaped-control-final-9").resolve()
+    r=run([str(ROOT/"reproduce.py"),"--vintage","../../../../escaped-control-final-9"])
     assert_reject("producer-path-traversal-rejected","reproduce.py",r,not outside.exists(),"Unsafe vintage name",records)
     records[-1].update({"output_path":str(outside),"output_absent":not outside.exists()})
-    before={n:hash_tree(VINTAGES/n) for n in ("run-seven","run-eight")}
-    r=run([str(ROOT/"reproduce.py"),"--vintage","failed-after-compute-final-6","--audit-fail-after-compute"])
-    failed=VINTAGES/"failed-after-compute-final-6"
+    before={n:hash_tree(VINTAGES/n) for n in ("run-nine","run-ten")}
+    r=run([str(ROOT/"reproduce.py"),"--vintage","failed-after-compute-final-9","--audit-fail-after-compute"])
+    failed=VINTAGES/"failed-after-compute-final-9"
     assert_reject("producer-post-calculation-failure-preserved","reproduce.py --audit-fail-after-compute",r,not failed.exists() and before=={n:hash_tree(VINTAGES/n) for n in before},"audit-injected failure after calculation",records)
     records[-1].update({"output_path":str(failed),"output_absent":not failed.exists()})
 
@@ -164,12 +211,14 @@ def main():
     builder_case("failed-producer-run-rejected",failed_run,"incomplete or unexpected run product set",records)
     builder_case("builder-existing-manifest-preserved",lambda root: None,"Existing evidence manifest is preserved",records,True)
 
-    ordinary=VINTAGES/"ordinary-file-control-final-6"
+    ordinary=VINTAGES/"ordinary-file-control-final-9"
     ordinary.write_bytes(b"protected ordinary sentinel\n")
     before_sha=sha(ordinary.read_bytes())
     r=run([str(ROOT/"reproduce.py"),"--vintage",ordinary.name])
-    assert_reject("producer-ordinary-file-preserved","reproduce.py",r,ordinary.is_file() and sha(ordinary.read_bytes())==before_sha,"Vintage already exists",records)
+    assert_reject("producer-ordinary-file-preserved","reproduce.py",r,ordinary.is_file() and sha(ordinary.read_bytes())==before_sha,"Fresh run directory already exists",records)
     records[-1].update({"output_path":str(ordinary),"output_absent":False,"protected_file_sha256":before_sha})
+
+    shared_writer_cases(records)
 
     if original!={n:hash_tree(VINTAGES/n) for n in original}:
         raise AssertionError("A control modified one of the successful original runs")

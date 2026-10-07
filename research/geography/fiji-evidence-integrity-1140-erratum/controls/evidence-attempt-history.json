@@ -1,14 +1,14 @@
 {
   "authoritative_current_evidence": {
-    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-6.json",
-    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-13",
+    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-9.json",
+    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-15",
     "producer_runs": [
-      "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-seven",
-      "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-eight"
+      "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-nine",
+      "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-ten"
     ]
   },
   "issue": 1361,
-  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted. The hosted-rejected final-pair-11 manifest is also retained losslessly in prior-builder-attempt-10 with exact restoration hashes. The hosted-rejected final-pair-12 manifest is retained losslessly in prior-builder-attempt-11 with exact restoration hashes.",
+  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted. The hosted-rejected final-pair-11 manifest is also retained losslessly in prior-builder-attempt-10 with exact restoration hashes. The hosted-rejected final-pair-12 manifest is retained losslessly in prior-builder-attempt-11 with exact restoration hashes. Intermediate pair-14 and its manifest remain preserved as superseded evidence; prior-builder-attempt-13 has exact restoration hashes for the pair-14 manifest.",
   "recorded_at": "2026-10-07",
   "superseded_artifacts": [
     {
@@ -1039,11 +1039,85 @@
       "sha256": "f756fabfdfe59e9d87388dd95d62ec8721f926efd8ef38a4e81f716fa8e74e63"
     },
     {
+      "kind": "test-fixture-symlink",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/broken-link-control-final-7",
+      "reason": "The first run of the shared-writer control suite stopped because its expected error text still named the old writer. The test-created broken symlink was recorded and removed before retry; its target was absent and it did not point to retained evidence.",
+      "target": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/geo-1361-recovery-20261007/research/geography/fiji-evidence-integrity-1140-erratum/vintages/missing-target-control-final-7",
+      "target_sha256": "501393dc56dc290c6791a3efea1e11441e2b01f042ac6566e5c2179210c091fd"
+    },
+    {
       "bytes": 28,
       "kind": "file",
       "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final-5",
       "reason": "Prior protected sentinel from the superseded final-5 controls; exact bytes remain in the packet as historical fixture evidence.",
       "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    },
+    {
+      "archive_sha256": "6ce7945e383bf28916c69f4017770f811717f5f04d887e8fe8f196aa2cc997c3",
+      "bytes": 104912,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/evidence-quality.json",
+      "reason": "Superseded after the packet producer moved to the shared bounded NewVintage writer; exact original bytes are retained in prior-builder-attempt-12 with a restoration receipt.",
+      "restoration_receipt": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-12/archive-receipt.json",
+      "sha256": "9c688429b8da6b52bc10854c8cc6f50dcc55902bedfb06b0b637044f47d1e8f0"
+    },
+    {
+      "bytes": 26993,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-8.json",
+      "reason": "Superseded because build_packet.verify_controls rejected the two new shared-writer records for missing observation text. The controls and experiment outcomes are retained, but this file is not accepted as complete proof.",
+      "sha256": "7e8da03ae0bb7a9bf532a5f500a6a97d3b962d6dc19409d6026e5148a87ad9ff"
+    },
+    {
+      "bytes": 28,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final-8",
+      "reason": "Protected sentinel retained from the incomplete final-8 control run; its bytes were not changed.",
+      "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    },
+    {
+      "archive_sha256": "29bd4226f8266bc531b8dea5cf4fd7cb589762f88eb48b53abccc464df1b6deb",
+      "bytes": 112845,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/evidence-quality.json",
+      "reason": "Intermediate manifest for final-pair-14; superseded to update authoritative history pointers to final-pair-15 while retaining the original manifest bytes losslessly.",
+      "restoration_receipt": "research/geography/fiji-evidence-integrity-1140-erratum/controls/prior-builder-attempt-13/archive-receipt.json",
+      "sha256": "95687d1d5f4b39fc359a832ac43507c54acced4ac9cf931de167cf4378a706fc"
+    },
+    {
+      "bytes": 25566,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-14/builder-controls.json",
+      "reason": "Intermediate final-pair-14 artifact retained; its manifest is superseded only to update authoritative history pointers after the shared-writer correction.",
+      "sha256": "ba52fc9a295ef7417026d4a4482d108c0ce23dacead220b6a9f9e1fd8cf0facb"
+    },
+    {
+      "bytes": 949,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-14/publication.json",
+      "reason": "Intermediate final-pair-14 artifact retained; its manifest is superseded only to update authoritative history pointers after the shared-writer correction.",
+      "sha256": "1439c2e561490e749241b4d35709976929c31500b0c6813235a2e6ef4078879b"
+    },
+    {
+      "bytes": 2328,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-14/run-bindings.json",
+      "reason": "Intermediate final-pair-14 artifact retained; its manifest is superseded only to update authoritative history pointers after the shared-writer correction.",
+      "sha256": "99a9fe665109b08575faa4e516006610862b94164e99c06cebb95bce389ca70f"
+    },
+    {
+      "bytes": 356,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-14/run-metadata.json",
+      "reason": "Intermediate final-pair-14 artifact retained; its manifest is superseded only to update authoritative history pointers after the shared-writer correction.",
+      "sha256": "e539d4d518617af782222e68333a942168350e25b48dc8b1a9301f15989cdcb0"
+    },
+    {
+      "bytes": 2489,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-14/two-run-reproducibility.json",
+      "reason": "Intermediate final-pair-14 artifact retained; its manifest is superseded only to update authoritative history pointers after the shared-writer correction.",
+      "sha256": "5a36ac334b2cec27fb4da13b95a101429e572a1951827c6ead6c1fbf94fd8a69"
     }
   ],
   "version": 1

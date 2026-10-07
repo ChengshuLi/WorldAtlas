@@ -18,7 +18,7 @@ from packet import (
 )
 
 PAIR_OUTPUTS = ["two-run-reproducibility.json", "builder-controls.json", "run-bindings.json", "run-metadata.json"]
-PAIR_CONTROLS_PATH = ROOT / "controls" / "builder-controls-final-6.json"
+PAIR_CONTROLS_PATH = ROOT / "controls" / "builder-controls-final-9.json"
 MANIFEST_PATH = ROOT / "evidence-quality.json"
 
 
@@ -76,7 +76,7 @@ def inventory_outputs():
 def verify_controls(controls):
     if controls.get("version") != 1 or controls.get("issue") != 1361 or controls.get("outcome") != "passed":
         raise ValueError("Actual adverse-control execution record is missing or invalid")
-    required={"copied-run-rejected","empty-run-rejected","partial-run-rejected","coherently-rehashed-mismatch-rejected","failed-producer-run-rejected","producer-existing-vintage-preserved","producer-broken-symlink-rejected","producer-path-traversal-rejected","producer-post-calculation-failure-preserved","producer-ordinary-file-preserved","builder-existing-manifest-preserved"}
+    required={"copied-run-rejected","empty-run-rejected","partial-run-rejected","coherently-rehashed-mismatch-rejected","failed-producer-run-rejected","producer-existing-vintage-preserved","producer-broken-symlink-rejected","producer-path-traversal-rejected","producer-post-calculation-failure-preserved","producer-ordinary-file-preserved","shared-writer-path-escape-rejected","shared-writer-aggregate-budget-rejected","builder-existing-manifest-preserved"}
     rows=controls.get("controls",[])
     names={x.get("name") for x in rows}
     if names != required or any(x.get("outcome") != "rejected" for x in rows):
