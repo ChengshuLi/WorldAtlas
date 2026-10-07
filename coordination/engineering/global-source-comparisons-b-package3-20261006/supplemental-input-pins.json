@@ -1,0 +1,14 @@
+{
+  "pins": [
+    {
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "path": "data/global-sources/IND-ADM3-metadata.json",
+      "bytes": 2206,
+      "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "role": "Complete separate original India refinement metadata actually required by conditional source reader"
+    }
+  ],
+  "limits": [
+    "Original measured raw scope stays unchanged. This adds exact conditional original M refinement metadata as an explicit actual-loader input; no previous package execution is relabeled as package3."
+  ]
+}
