@@ -64,8 +64,12 @@
       "operator": "National Archives of Namibia",
       "url": "https://www.nan.gov.na/documents/3219017/3228694/Findaid_2-031.pdf/35bc9ed2-872f-5b81-85e2-633f8848e785?t=1707296061518",
       "document_date": "Cataloged item: Angola Boundary Delimitation and Kunene Water Commission, 1926–1927; Box 12, item 3/21/4",
-      "retrieval_status": "official archive catalog text verified in search index; direct HTTPS retrieval timed out before bytes were received; finding-aid PDF not locally retained or fully inspected",
-      "use_limit": "Archive description is a lead to primary records, not the underlying minutes, survey, instrument, or line geometry."
+      "retrieval_status": "Official full 24-page PDF retrieved and visually inspected at printed page 11. It lists Box 12, item 3/21/4 as Angola Boundary Delimitation and Kunene Water Commission, 1926–1927. This remains a catalog/finding aid, not the underlying commission records.",
+      "use_limit": "Archive description is a lead to primary records, not the underlying minutes, survey, instrument, or line geometry.",
+      "local_file": "sources/national-archives-namibia/findaid-2-031.pdf",
+      "bytes": 1297104,
+      "sha256": "9844b23fcb30a458b6251ae641381c986deabb713bd681dd5ec9836726e49983",
+      "printed_page_inspected": 11
     },
     {
       "id": "National Archives of South Africa catalog item GG_2075_66/135A_1",
@@ -105,8 +109,13 @@
       "operator": "National Archives of Namibia",
       "url": "https://nan.gov.na/finding-aids-a",
       "document_date": "Official finding-aid index lists the Angola Boundary Survey as 1927–1928, one unit, reference 1/1/071.",
-      "retrieval_status": "Official archive index page inspected; linked image/finding aid fetch timed out; underlying archival item not inspected or retained.",
-      "use_limit": "Archival lead to possible survey evidence; catalog entry alone does not establish surveyed coordinates, completion, or present legal effect."
+      "retrieval_status": "Official finding-aid index and linked p2 scan were retrieved; p2 was visually inspected. It identifies the records as papers of Head Constable McHugh, Officer-in-charge Transport and Supplies, Angola Boundary Survey, 1927–1928, and lists survey correspondence/reports dated May–June 1928, including Report Nos. 1–4. The underlying 1927–28 survey file and any maps remain uninspected.",
+      "use_limit": "Archival lead to possible survey evidence; catalog entry alone does not establish surveyed coordinates, completion, or present legal effect.",
+      "local_file": "sources/national-archives-namibia/findaid-1-1-71-p2.jpg",
+      "bytes": 172815,
+      "sha256": "f05d873dfb113bc50043956dbc45f17fef1833827391b4259e1dbe9833f7cae1",
+      "page_number": 2,
+      "direct_url": "https://nan.gov.na/documents/3219017/3228684/Findaid_1-1-71_p2.jpg/ab1cb767-b179-7af6-151d-6b05943fe910?t=1707294425163"
     },
     {
       "id": "National Archives of Namibia Finding Aid A: South Africa Angola Boundary Commission (ABC), 3/3/3",
@@ -260,6 +269,14 @@
       },
       "reproduction_script": "reproduce_worldcover_2021.py",
       "reproduction_script_sha256": "8d152fd5c6d57528658aef41c4206081605ed77a48eed9e886d120d2ce24d039"
+    },
+    {
+      "id": "National Archives of Namibia Commissions and Committees index, KAB/ABC accessions",
+      "operator": "National Archives of Namibia",
+      "url": "https://www.nan.gov.na/web/nan/commissions-and-committees",
+      "document_date": "Official current catalogue index; KAB series described as Angola Boundary and Kunene Water (1926–1927), reference 1/4/17; ABC series described as South Africa Angola Boundary Commission (1926–1928), reference 3/3/3, on 16 mm microfilm AMR.0017, original at National Archives of South Africa, Pretoria.",
+      "retrieval_status": "Official index page inspected. These references identify repositories and media; underlying papers and microfilm were not acquired or inspected.",
+      "use_limit": "A catalogue listing is a retrieval lead only. It does not establish candidate-scale watercourse position, survey precision, final line, or legal effect."
     }
   ],
   "spatial_screen": {
