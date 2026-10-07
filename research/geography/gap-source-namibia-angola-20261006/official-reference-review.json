@@ -287,6 +287,59 @@
       "sha256": "48a341ecf7a4caa75de6920ed8ba8935eaa702b95f759de90c16193364d274b8",
       "retrieval_status": "Official catalogue HTML retained. The catalogue describes the held 1912 general South West Africa map (1:2,000,000) and states that two other maps listed in the War Office ledger, including \"South West Africa - Angola Boundary Delimitation\", were not present on transfer to the British Library. The specific boundary map was not acquired or inspected.",
       "use_limit": "The catalogue statement verifies a missing-from-transfer status only. It does not identify the map scale, extent, content, current repository, or provide a boundary/water observation. Do not conflate the absent delimitation map with the held 1912 whole-country sheet or the separate 1926 GSGS 2871 map."
+    },
+    {
+      "id": "National Archives of Namibia Findaid 1/1/053, Native Affairs Ovamboland (official archive finding aid)",
+      "operator": "National Archives of Namibia",
+      "url": "https://nan.gov.na/documents/3219017/3228684/Findaid_1-1-053.pdf/baef03da-8156-deaf-3879-3fbe114871b8",
+      "local_file": "sources/national-archives-namibia/findaid-1-1-053.pdf",
+      "bytes": 1593949,
+      "sha256": "b8bca3d2635e145b902058eb133f571712ce8caf53950dc245cf4cba57810a49",
+      "pdf_pages": 27,
+      "document_date": "Official archival finding aid; describes holdings dated 1924–1946.",
+      "retrieval_status": "Official complete finding aid retrieved. Page 11 lists Angola Affairs General file 10/1 (1924–1946) and Border Cases and Disputes file 10/2 (1924–1945) as DIGITISED; Angola Border file 10/3 (1926–1935) and SWA Angola Border Line file 10/3 (1935–1946) are also listed. The public page does not link to the underlying scans; they were not acquired or inspected.",
+      "use_limit": "Finding-aid titles and dates are retrieval leads only. The archive fonds is Native Affairs Ovamboland, and relevance to the 21 Kavango-area candidates is unverified. It supplies no candidate-scale watercourse position, surveyed coordinates, demarcation evidence, or legal determination."
+    },
+    {
+      "id": "Atlas of Namibia Team 2022, chapter 8.06, Kavango crop-clearing maps for 1943, 1972 and 1996",
+      "operator": "Atlas of Namibia Team / Namibia Nature Foundation; reproduced open-access atlas figures",
+      "url": "https://atlasofnamibia.online/chapter-8/farming",
+      "download_index_url": "https://atlasofnamibia.online/chapter-8/download-files",
+      "document_date": "Atlas published 2022; figures depict land-clearing source data labelled 1943, 1972 and 1996.",
+      "files": [
+        {
+          "local_file": "sources/Atlas_ch_08_06_Kavango_1943.jpg",
+          "bytes": 791155,
+          "sha256": "1d1908d7ff520f1c53897fa39bb704b23f1deace1f689186444bd731fb08dc9a"
+        },
+        {
+          "local_file": "sources/Atlas_ch_08_06_Kavango_1972.jpg",
+          "bytes": 896698,
+          "sha256": "e14e7355d9e6b092d66f5b54784460c940761d507f640b282afe111f06b8bcfe"
+        },
+        {
+          "local_file": "sources/Atlas_ch_08_06_Kavango_1996.jpg",
+          "bytes": 1119425,
+          "sha256": "c7032d8c2458071c3a1b96e5879e94468f7a8415ed83f50f3252f62beec41f16"
+        },
+        {
+          "local_file": "sources/Atlas_ch_08_06_Kavango_Zambezi_legend.jpg",
+          "bytes": 633202,
+          "sha256": "fe59d724581b283e4ff54f8040ee10d8d8445f9664b13221326b1ec59934c62c"
+        }
+      ],
+      "inspected_content": "The page states that Kavango crop growers lived along the Okavango River in 1943 and that later fields spread southward. The inspected legend labels mapped classes as percentages of land cleared for crops.",
+      "retrieval_status": "All three official Atlas figure files and the legend were downloaded and visually inspected. They depict land use, not water extent. The downloadable figure images have no graticule or stated scale and were not registered to candidate geometry.",
+      "use_limit": "Historical settlement/land-clearing context only. Do not treat the mapped classes, white spaces, edge outlines, or general river-corridor statement as dated water masks, exact river banks, or candidate-level observations. No territory, cause, or boundary-authority finding follows."
+    },
+    {
+      "id": "JAXA ALOS/PALSAR global 25 m mosaic and forest/non-forest product, 2007–2010",
+      "operator": "Japan Aerospace Exploration Agency, Earth Observation Research Center (JAXA EORC)",
+      "url": "https://www.eorc.jaxa.jp/ALOS/en/dataset/fnf/fnf_palsar20140116_e.htm",
+      "data_portal_url": "https://www.eorc.jaxa.jp/ALOS/en/palsar_fnf/data/index.htm",
+      "document_date": "Global PALSAR mosaic source acquisitions labelled 2007, 2008, 2009 and 2010; official data description page inspected 2026-10-07.",
+      "retrieval_status": "The official description specifies 25 m spacing, approximately 36 m azimuth by 20 m range SAR resolution, ITRF97/GRS80 georeferencing, SRTM3 ortho-rectification, and a mask code 50 for sea and water. The data portal returned HTTP 401 and the documented download procedure requires pre-registration using an email address followed by a second registration step. No account or email submission was made; no tile was acquired or analyzed.",
+      "use_limit": "Potential independent L-band SAR surface-water evidence, but the product source description and presence of a water code do not establish actual coverage, valid observations, seasonal state, or water classification in these candidates. Do not use pending lawful access, tile/date coverage checks, mask review, and independent spatial-registration assessment."
     }
   ],
   "spatial_screen": {
