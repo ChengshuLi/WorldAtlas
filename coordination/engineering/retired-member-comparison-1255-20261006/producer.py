@@ -5,7 +5,7 @@ from shapely.geometry import mapping
 P=pathlib.Path(__file__).resolve().parent;R=P.parents[2];PREFIX=str(P.relative_to(R))
 sys.path.insert(0,str(R/'scripts'))
 from evidence.immutable import canonical_json as canon,deterministic_gzip
-from reader import Inputs,authenticate_executed_modules,output_target,SHA
+from reader import Inputs,authenticate_executed_modules,output_target,SHA,validate_family_scope,validate_pointsets
 from kernel import member_union,compare
 M='79ffb2ed04702e16f009e4675a8d74ef9bd09d4f';H='549cc2a863d4a487a662c2613e4d02888e39b5ba';N='a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd';S='7c7cdf2388e0e7200b937c2cfb440b53165d9d98'
 
@@ -56,6 +56,7 @@ def run(commit,target):
     if sorted({i for f in families.values()for i in f['contact_ids']})!=scope['contact_ids']:raise ValueError('Complete contact roster differs')
     for f in families.values():
         if len(f['component_ids'])!=f['component_count']or f['component_ids']!=sorted(set(f['component_ids']))or SHA(canon(f['component_ids']))!=f['component_ids_sha256']:raise ValueError('Family roster count/digest differs')
+    validate_family_scope(scope,families)
     ir=inputs.original(M,'coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json',index);features={}
     for pin in ir['complete_products']['components']:
         path=next(p['path']for p in ir['source_descriptors']if p['sha256']==pin['sha256'])
@@ -84,6 +85,7 @@ def run(commit,target):
     for binding in scope['retired_member_complete_record_pins']:
         r=members[binding['id']]
         if SHA(canon(r))!=binding['canonical_record_sha256']or SHA(canon(r['geometry']))!=binding['canonical_geometry_sha256']or canon(r['metadata'])!=canon(binding['metadata']):raise ValueError('Changed original member geometry/metadata representation')
+    validate_pointsets(scope,features,members)
     # Every declared alias is authenticated, including actual historical recipe and
     # metadata context not consumed by the literal geometry loop.
     for a in index['aliases']:inputs.original(a['original']['commit'],a['original']['path'],index)

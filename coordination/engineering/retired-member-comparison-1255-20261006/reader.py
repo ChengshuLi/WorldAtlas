@@ -77,3 +77,32 @@ def output_target(repo,prefix,value):
     if not target.resolve().is_relative_to(owned.resolve()):raise ValueError('Escaped output destination')
     if target.exists():raise ValueError('Existing output destination')
     return target
+
+
+def validate_family_scope(scope,families,counts=(2476,20032,2438,869)):
+    if len(families)!=counts[0]or len(scope['component_ids'])!=counts[1]or len(scope['member_ids'])!=counts[2]or len(scope['contact_ids'])!=counts[3]:raise ValueError('Complete fixed scope counts differ')
+    for key in ['family_ids','component_ids','member_ids','contact_ids']:
+        if scope[key]!=sorted(set(scope[key])):raise ValueError('Duplicate or unordered scope roster')
+    if sorted(families)!=scope['family_ids']:raise ValueError('Whole family roster differs')
+    components=[];members=set();contacts=set()
+    for f in families.values():
+        if f['component_ids']!=sorted(set(f['component_ids']))or len(f['component_ids'])!=f['component_count']or SHA(canon(f['component_ids']))!=f['component_ids_sha256']:raise ValueError('Family count/digest changed')
+        components.extend(f['component_ids']);contacts.update(f['contact_ids'])
+        if any(s['kind']!='physical-adaptation-processing-reproduction'for s in f['source_families']):raise ValueError('Wrong source role')
+        for s in f['source_families']:members.update(s.get('original_source_member_ids',[]))
+    if sorted(components)!=scope['component_ids']or sorted(members)!=scope['member_ids']or sorted(contacts)!=scope['contact_ids']:raise ValueError('Complete component/member/contact closure differs')
+    for field,key in [('families','family_ids'),('components','component_ids'),('members','member_ids')]:
+        if SHA(canon(scope[key]))!=scope['roster_canonical_sha256'][field]:raise ValueError('Scope roster digest changed')
+
+
+def validate_pointsets(scope,features,members):
+    featurepins={r['id']:r for r in scope['existing_current_component_and_member_pins']}
+    memberpins={r['id']:r for r in scope['retired_member_complete_record_pins']}
+    if len(featurepins)!=len(scope['existing_current_component_and_member_pins'])or sorted(featurepins)!=scope['component_ids']or sorted(features)!=scope['component_ids']:raise ValueError('Missing/duplicate full current component bindings')
+    if len(memberpins)!=len(scope['retired_member_complete_record_pins'])or sorted(memberpins)!=scope['member_ids']or not set(memberpins)<=set(members):raise ValueError('Missing/duplicate original member bindings')
+    for i,b in featurepins.items():
+        f=features[i]
+        if SHA(canon(f))!=b['canonical_feature_sha256']or SHA(canon(f['geometry']))!=b['geometry_sha256']:raise ValueError('Full current feature or geometry representation differs')
+    for i,b in memberpins.items():
+        r=members[i]
+        if SHA(canon(r))!=b['canonical_record_sha256']or SHA(canon(r['geometry']))!=b['canonical_geometry_sha256']or canon(r['metadata'])!=canon(b['metadata']):raise ValueError('Original member geometry or metadata representation differs')

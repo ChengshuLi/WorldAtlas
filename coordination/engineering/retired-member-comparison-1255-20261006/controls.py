@@ -1,9 +1,9 @@
 """Directed actual-kernel/byte-reader/output-guard controls, not world generation."""
-import argparse,gzip,json,pathlib,sys,tempfile,unittest.mock
+import argparse,gzip,json,pathlib,sys,tempfile,unittest.mock,subprocess
 P=pathlib.Path(__file__).resolve().parent;R=P.parents[2];PREFIX=str(P.relative_to(R));sys.path.insert(0,str(R/'scripts'))
 from evidence.immutable import canonical_json as canon
 from kernel import member_union,compare
-from reader import Inputs,output_target,SHA
+from reader import Inputs,output_target,SHA,validate_family_scope,validate_pointsets,authenticate_executed_modules
 from shapely.geometry import box,mapping
 from shapely.errors import GEOSException
 
@@ -41,6 +41,28 @@ def run(commit,out):
     checked('symlink output rejected',lambda:rejected(lambda:output_target(R,PREFIX,str((symlink/'fresh').relative_to(R))),'Symlink'))
     checked('existing destination rejected',lambda:rejected(lambda:output_target(R,PREFIX,str(temp.relative_to(R))),'Existing'))
     assert sentinel.read_bytes()==b'preserve'and not(temp/'fresh').exists()
+    before=sorted(str(p.relative_to(R))for p in P.rglob('*'))
+    for bad in [PREFIX+'/../escape-cli',PREFIX+'/x//bad-cli','/absolute/invalid-cli','elsewhere/invalid-cli',str((symlink/'fresh').relative_to(R))]:
+        r=subprocess.run([sys.executable,str(P/'producer.py'),'--code-commit',commit,'--output',bad],capture_output=True)
+        assert r.returncode!=0 and b'processed'not in r.stdout and sorted(str(p.relative_to(R))for p in P.rglob('*'))==before
+        results.append({'control':'actual CLI rejects before writes '+bad,'outcome':'passed'})
+    assert sentinel.read_bytes()==b'preserve'
+    fixture={'id':'c','geometry':mapping(box(0,0,1,1))};member={**fixture,'id':'m','metadata':{'number':1}}
+    sc={'family_ids':['f'],'component_ids':['c'],'member_ids':['m'],'contact_ids':['t'],'roster_canonical_sha256':{'families':SHA(canon(['f'])),'components':SHA(canon(['c'])),'members':SHA(canon(['m']))},'existing_current_component_and_member_pins':[{'id':'c','canonical_feature_sha256':SHA(canon(fixture)),'geometry_sha256':SHA(canon(fixture['geometry']))}],'retired_member_complete_record_pins':[{'id':'m','canonical_record_sha256':SHA(canon(member)),'canonical_geometry_sha256':SHA(canon(member['geometry'])),'metadata':member['metadata']}]}
+    fam={'f':{'component_ids':['c'],'component_count':1,'component_ids_sha256':SHA(canon(['c'])),'contact_ids':['t'],'source_families':[{'kind':'physical-adaptation-processing-reproduction','original_source_member_ids':['m']}]}}
+    validate_family_scope(sc,fam,(1,1,1,1));validate_pointsets(sc,{'c':fixture},{'m':member});results.append({'control':'complete fixture source/member/pointset scope','outcome':'passed'})
+    for field in ['component_ids','contact_ids','member_ids']:
+        altered=json.loads(canon(sc));altered[field]=[]
+        checked('omitted '+field,lambda altered=altered:rejected(lambda:validate_family_scope(altered,fam,(1,1,1,1)),'Complete fixed scope'))
+    altered=json.loads(canon(fam));altered['f']['source_families'][0]['kind']='administrative-authority'
+    checked('source role promotion rejects',lambda:rejected(lambda:validate_family_scope(sc,altered,(1,1,1,1)),'Wrong source role'))
+    altered=json.loads(canon(member));altered['metadata']['number']=1.0
+    checked('numerically equal metadata representation mutation rejects',lambda:rejected(lambda:validate_pointsets(sc,{'c':fixture},{'m':altered}),'metadata representation'))
+    checked('missing component pointset rejects',lambda:rejected(lambda:validate_pointsets(sc,{}, {'m':member}),'current component'))
+    checked('missing member pointset rejects',lambda:rejected(lambda:validate_pointsets(sc,{'c':fixture},{}),'member bindings'))
+    with unittest.mock.patch.object(pathlib.Path,'read_bytes',return_value=b'changed local code'):
+        checked('executed local code mutation rejects',lambda:rejected(lambda:authenticate_executed_modules(R,commit,[PREFIX+'/reader.py']),'Executed'))
+
     index=json.loads((P/'input-index.json').read_bytes());reader=Inputs(R,commit,PREFIX)
     raw=reader.read('input-index.json');checked('changed ordinary full pin rejects',lambda:rejected(lambda:reader.read('input-index.json',{'bytes':len(raw),'sha256':'0'*64}),'Changed input'))
     actual_archive=reader.archive(index);assert len(actual_archive['locations'])==19050;results.append({'control':'complete original encoded+decoded fragment relationship','outcome':'passed'})
