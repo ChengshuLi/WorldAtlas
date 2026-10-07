@@ -195,6 +195,8 @@ def build():
         (OWNED + "/drafts/reproducibility-intermediate.json", "preserved intermediate comparison"),
         (OWNED + "/drafts/evidence-quality-prior-final-runs.json", "preserved superseded manifest"),
         (OWNED + "/drafts/reproducibility-prior-final-runs.json", "preserved superseded comparison"),
+        (OWNED + "/drafts/evidence-quality-hosted-check-failure.json", "preserved failed hosted-check manifest"),
+        (OWNED + "/drafts/reproducibility-hosted-check-failure.json", "preserved hosted-check comparison"),
     ]
     output_rows = [candidate_descriptor(path, role) for path, role in static_output_paths + run_output_paths]
     # Bind the contract snapshot by its captured complete file hash and record
@@ -287,7 +289,7 @@ def build():
             {"method_id": METHOD, "kind": "negative-control", "outcome": "passed", "evidence_path": negative_path},
             {"method_id": METHOD, "kind": "reproducibility", "outcome": "passed", "evidence_path": REPRO},
         ],
-        "change_receipts": [{"path": path, "status": "added", "previous_path": None}
+        "change_receipts": [{"path": path, "status": "added"}
                             for path in sorted([row["path"] for row in output_rows] + [MANIFEST])],
         "conclusions": conclusions,
         "stages": {"research": "complete", "implementation": "proposed", "geographic_approval": "unapproved"},
