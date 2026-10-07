@@ -1070,20 +1070,20 @@
   "outputs": [
     {
       "path": "coordination/engineering/release-membership-admission-1150.json",
-      "bytes": 1788,
-      "sha256": "f41486cdf346576fd580604b23cce2ca104f09a7fd294605f7591081104068e0",
+      "bytes": 1965,
+      "sha256": "7177d8930038da2ebe7c3c9c78693b5b1f03bd0dac9a1526f8d56de9271ac474",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/release-membership-admission-1150/README.md",
-      "bytes": 5969,
-      "sha256": "abaf8c6d347e46774887a838a952a4b1b09d1758b7a2a914eed66407e19b9230",
+      "bytes": 7162,
+      "sha256": "bee2734eab8f0a11743ce10c014f4ad7917fb71573aba1cfda95858b9db3e60c",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/release-membership-admission-1150/catalog-evidence.json",
-      "bytes": 99198,
-      "sha256": "139fef0a93cf3b83e5462d20ca9a5057d0e667be86a3f847bb238606833010dc",
+      "bytes": 99201,
+      "sha256": "e8d73d224b56ae9e9d8ca717a533734431d37b4ec678f4e00e1e41a1d6b25c91",
       "hash_kind": "file-bytes"
     },
     {
@@ -1105,9 +1105,27 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/release-membership-admission-1150/independent-import-sink-controls.mjs",
+      "bytes": 2317,
+      "sha256": "16caea3bba2b2c3563acbd8ce485aef949f1aabafa94717110f165d3d1affcaf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/independent-staging-sink-controls.mjs",
+      "bytes": 2181,
+      "sha256": "127e40ce3721582d06547527352ea5c8017a26cdf24d187be3babf35e25d0fff",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/release-membership-admission-1150/issue-snapshot.json",
       "bytes": 10659,
       "sha256": "91536b143fd6a3b708236f5004d295d97b5686eef31d8c3056a92e8e46252dc7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/read-only-admission-controls.txt",
+      "bytes": 8546,
+      "sha256": "b7b8bdff008af99c529df6b2595a704f2e6a9be9a7d0116beb59ce4b91a88ae4",
       "hash_kind": "file-bytes"
     },
     {
@@ -1144,6 +1162,18 @@
       "path": "coordination/engineering/release-membership-admission-1150/verification-second.json",
       "bytes": 103250,
       "sha256": "301821323c9010643fc7384555a50ac8d0f117bd780b52e6d50d02631b2ecfb4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
+      "bytes": 103705,
+      "sha256": "f9ca83626322ccc7ca75e45d505be8d6c1b236155cb6e2e0ff1c2c30d6e8206a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-sixth.json",
+      "bytes": 103705,
+      "sha256": "aa96d7d47d7e3deb57758577ae307c218c51d4b5afa3414771302705b1445a3c",
       "hash_kind": "file-bytes"
     },
     {
@@ -1232,14 +1262,14 @@
     },
     {
       "path": "hosted/geographic-releases.js",
-      "bytes": 17934,
-      "sha256": "36697c7250f4f5fe24afc6f771759d5f058e959a231f86206b54a98990228ebf",
+      "bytes": 17288,
+      "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
       "hash_kind": "file-bytes"
     },
     {
       "path": "hosted/records.js",
-      "bytes": 29461,
-      "sha256": "524f29706fe73afcf147bde20e5f3c8f958473162a8413dfca4cdca9e38c9db8",
+      "bytes": 28109,
+      "sha256": "f5ba42a6059da63dd2db1308b3852422252ffb61cb13f5e3b29d27dbfce4083d",
       "hash_kind": "file-bytes"
     },
     {
@@ -1250,8 +1280,8 @@
     },
     {
       "path": "scripts/geographic-release-admission.mjs",
-      "bytes": 8496,
-      "sha256": "447e133f69531cf2595d9cd4ed8fe7f1b0d3304152fb47abc82e274a678e78ca",
+      "bytes": 12806,
+      "sha256": "27fb447b67cfb8b700491298a1244036ddb32db2b009da27e84676327251e1ea",
       "hash_kind": "file-bytes"
     },
     {
@@ -1310,8 +1340,8 @@
     },
     {
       "path": "test/geographic-release-admission.test.mjs",
-      "bytes": 12239,
-      "sha256": "153d1551fa289489d0b0d0a0b928e24c93885154c79a8e5b6e8e3121ecf85c17",
+      "bytes": 15685,
+      "sha256": "9bc71861ed40f81025370696ae204daabd757522bcc9f86b9514ff7d4f5d4456",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1330,7 +1360,7 @@
       "value": 84833,
       "unit": "rows",
       "vintage": "archived",
-      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "evaluation_commit": "c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc",
       "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
     },
     {
@@ -1338,7 +1368,7 @@
       "value": 2,
       "unit": "rows",
       "vintage": "archived",
-      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "evaluation_commit": "c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc",
       "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
     },
     {
@@ -1346,7 +1376,7 @@
       "value": 441,
       "unit": "requests",
       "vintage": "archived",
-      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "evaluation_commit": "c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc",
       "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
     },
     {
@@ -1354,7 +1384,7 @@
       "value": 17,
       "unit": "requests",
       "vintage": "archived",
-      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "evaluation_commit": "c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc",
       "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
     },
     {
@@ -1362,7 +1392,7 @@
       "value": 85689,
       "unit": "rows",
       "vintage": "archived",
-      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "evaluation_commit": "c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc",
       "input_sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b"
     },
     {
@@ -1370,7 +1400,7 @@
       "value": 143111331,
       "unit": "bytes",
       "vintage": "archived",
-      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "evaluation_commit": "c1dec5d6913d54fcd82f5ee09815c3e63e1ffffc",
       "input_sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b"
     }
   ],
@@ -1409,32 +1439,32 @@
   "metric_bindings": [
     {
       "metric_id": "memberships",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
       "json_pointer": "/memberships"
     },
     {
       "metric_id": "changes",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
       "json_pointer": "/changes"
     },
     {
       "metric_id": "requests",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
       "json_pointer": "/requests"
     },
     {
       "metric_id": "duplicate_replays",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
       "json_pointer": "/duplicate_replays"
     },
     {
       "metric_id": "original_registry_source_rows_verified",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
       "json_pointer": "/original_registry_source_rows_verified"
     },
     {
       "metric_id": "catalog_phase_admitted_bytes",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
       "json_pointer": "/catalog_phase_admitted_bytes"
     }
   ],
@@ -1483,7 +1513,19 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/release-membership-admission-1150/independent-import-sink-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/independent-staging-sink-controls.mjs",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/release-membership-admission-1150/issue-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/read-only-admission-controls.txt",
       "status": "added"
     },
     {
@@ -1511,6 +1553,14 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-sixth.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/release-membership-admission-1150/verification-third.json",
       "status": "added"
     },
@@ -1521,16 +1571,6 @@
     {
       "path": "coordination/engineering/release-membership-admission-1150/verify-staging.mjs",
       "status": "added"
-    },
-    {
-      "path": "hosted/geographic-releases.js",
-      "status": "modified",
-      "original_sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701"
-    },
-    {
-      "path": "hosted/records.js",
-      "status": "modified",
-      "original_sha256": "f5ba42a6059da63dd2db1308b3852422252ffb61cb13f5e3b29d27dbfce4083d"
     },
     {
       "path": "scripts/bootstrap-geographic-release.mjs",

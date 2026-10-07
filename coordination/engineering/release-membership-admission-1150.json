@@ -10,17 +10,17 @@
     "Bound original geographic-release transport admission and preserve raw records/identity/replay; isolated verification only"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-07T09:30:41.483071+00:00",
+  "updated_at_utc": "2026-10-07T10:16:15.808276+00:00",
   "completed": [
     "Whole-needed input and row/UTF8 request admission implemented",
-    "Source/entity and geographic staging preflight reuse actual service field validators",
+    "Source/entity and staging preflight invoke unchanged actual handlers through strict read-only write-intent sinks",
     "Complete successor84833-row real-handler proof, interruption/replay/conflict and full oversized-phase refusal"
   ],
   "checks": [
     {
       "check": "focused-adjacent-record-regressions",
       "status": "passed",
-      "tests": 61
+      "tests": 63
     },
     {
       "check": "scope-entrypoint-controls",
@@ -35,13 +35,14 @@
     "reason": null
   },
   "evidence_paths": [
-    "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+    "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
     "coordination/engineering/release-membership-admission-1150/catalog-evidence.json",
+    "coordination/engineering/release-membership-admission-1150/read-only-admission-controls.txt",
     "coordination/engineering/release-membership-admission-1150/README.md"
   ],
   "blockers": [],
   "next_action": "Independent exact-head review, hosted checks, normal merge queue, actual-main verification and owned cleanup",
-  "pull_request": null,
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/1363",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
