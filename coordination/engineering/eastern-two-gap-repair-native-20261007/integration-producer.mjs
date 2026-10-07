@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync,gzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
-import {authenticateSuccessorContextInventory,FIXED_NATIVE_COMPARISON_SHA} from './chained-context.mjs';
+import {authenticateSuccessorContextInventory,FIXED_NATIVE_COMPARISON_SHA,shareUnchangedContextGeometry} from './chained-context.mjs';
 import {restoreWholeImage} from './whole-image.mjs';
 import {immutableReader,loadSuccessor,TARGETS,BEFORE,AFTER} from './native-producer.mjs';
 import {releaseInputs} from './release-inputs.mjs';
@@ -92,7 +92,7 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  console.log('Starting actual unchanged v1 replay and full successor context validation');
  const context=await validateBuildContextStage({root:image,expectedReference:next.index.releases.at(-1)});assert.equal(context.receipt.status,'verified');put(NS+'/combined-context-receipt.json',json(context.receipt));
  console.log('Full49625 context continuation PASS');
- const native=loadSuccessor(repo,BASE,{storage});
+ const native=loadSuccessor(repo,BASE,{storage});shareUnchangedContextGeometry(native.old,context.geometryValidation.baselineFeatures);shareUnchangedContextGeometry(native.features,context.geometryValidation.baselineFeatures);
  const contentRoot=out+'/content';fs.mkdirSync(contentRoot);const plan=JSON.parse(fs.readFileSync(repo+'/'+NS+'/content-source-plan.json'));
  const contentInvocation=out+'/content-invocation.json';fs.writeFileSync(contentInvocation,json({repo,baseline:BASE,runRoot:contentRoot,plan,storage:[...storage],execution_commit:head,executed_modules:modules}));
  const contentRaw=execFileSync(process.execPath,[repo+'/'+NS+'/content-continuation.mjs',contentInvocation],{maxBuffer:32*1024*1024});const content=JSON.parse(contentRaw);assert.equal(content.claim_rows,3984);
