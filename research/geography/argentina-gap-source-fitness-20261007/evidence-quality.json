@@ -129,16 +129,23 @@
         "role": "original-source"
       },
       {
-        "path": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2-metaData.json",
-        "bytes": 958,
-        "sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
+        "path": "data/regional-review/regional-review-7cf674a63057d43f/packet-manifest.json",
+        "bytes": 3852,
+        "sha256": "c426aa785e4282bd7c4653a3e72c6f64201afb8736675242b3c59d8ead659534",
         "hash_kind": "file-bytes",
         "role": "original-source"
       },
       {
-        "path": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz",
-        "bytes": 22949678,
-        "sha256": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
+        "path": "data/regional-review/regional-review-7cf674a63057d43f/source-register.json",
+        "bytes": 14024,
+        "sha256": "08891ff552e397d237e63feaaea4a4ae4cad69d1d947ca74fd86b13157369347",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2-metaData.json",
+        "bytes": 958,
+        "sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
         "hash_kind": "file-bytes",
         "role": "original-source"
       },
@@ -206,14 +213,15 @@
       "baseline_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
       "original_source_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
       "consumed_simplified_ARG_ADM2": "9b033d8e86946b8f14d9491ec51098e3c5c0e59785707058966d1fc77521546d",
-      "prior_ARG_unsimplified_source_archive": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
       "prior_ARG_source_metadata": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
       "prior_442_source_inventory": "2a794c330534b74bedf5c77dc813386fd5fb1195649ca23ded3bd99b53f12007",
       "prior_442_geometry_comparisons": "9e55c66fc509f35aaf618d5fd1c6ac1338bbeabdc741a32043d4be9d35e12a1c",
       "prior_442_issue_snapshot": "8a86cb2c66c9f29171abb2dd26e74e7af247b3de3a9f61b967ed277831ec3dde",
       "prior_442_artifact_checksums": "8ee5199d16992007cbbb5d9b59875734114b04f705c80e21454475bffe56aa70",
       "prior_Georef_crosswalk": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
-      "baseline_location_policy": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9"
+      "baseline_location_policy": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+      "prior_ARG_source_identity_register": "08891ff552e397d237e63feaaea4a4ae4cad69d1d947ca74fd86b13157369347",
+      "prior_ARG_source_transport_inventory": "c426aa785e4282bd7c4653a3e72c6f64201afb8736675242b3c59d8ead659534"
     },
     "pin_files": {
       "evidence_immutable_helper": "scripts/evidence/immutable.py",
@@ -229,14 +237,15 @@
       "baseline_recipe": "scripts/administrative.py",
       "original_source_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
       "consumed_simplified_ARG_ADM2": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ARG-ADM2-000.bin.gz",
-      "prior_ARG_unsimplified_source_archive": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz",
       "prior_ARG_source_metadata": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2-metaData.json",
       "prior_442_source_inventory": "data/regional-review/regional-review-fd433005036fe22b/source-inventory.json",
       "prior_442_geometry_comparisons": "data/regional-review/regional-review-fd433005036fe22b/geometry-comparisons.jsonl",
       "prior_442_issue_snapshot": "data/regional-review/regional-review-fd433005036fe22b/issue-snapshot.json",
       "prior_442_artifact_checksums": "data/regional-review/regional-review-fd433005036fe22b/artifact-checksums.json",
       "prior_Georef_crosswalk": "data/regional-review/regional-review-fd433005036fe22b/vintages/2026-10-05-georef-cc-by4/departamentos.geojson",
-      "baseline_location_policy": "data/location-policy.json"
+      "baseline_location_policy": "data/location-policy.json",
+      "prior_ARG_source_identity_register": "data/regional-review/regional-review-7cf674a63057d43f/source-register.json",
+      "prior_ARG_source_transport_inventory": "data/regional-review/regional-review-7cf674a63057d43f/packet-manifest.json"
     },
     "subject_files": {
       "gb:ARG:ADM2:61730980B13025573352502": "data/geography/part-0.json",
@@ -265,7 +274,7 @@
     {
       "id": "geoBoundaries-ARG-ADM2-unsimplified-prior-442",
       "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson",
-      "role": "Prior unsimplified source response cited from #442; not consumed for geometry in this packet",
+      "role": "Prior unsimplified source identity cited from #442; oversized archive is not consumed as geometry input in this packet",
       "vintage": "2020",
       "retrieved_at": "2026-10-05 per pinned #442 inventory",
       "license": {
@@ -273,16 +282,25 @@
         "terms": "The pinned #442 record says CC BY 3.0 IGO; no further upstream permission or legal-boundary claim is made."
       },
       "retention": "restoration-only",
-      "verification": "verified",
-      "restoration": "Read data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz only as the pinned encoded archive; do not decode in this packet.",
+      "verification": "unverified",
+      "restoration": "Use pinned #443 source identity register and packet manifest to inspect recorded archive identity; this packet does not read or decompress the oversized archive.",
       "decoded_identity_as_recorded_in_prior_inventory": {
         "bytes": 69702323,
         "sha256": "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177",
         "observed_features": 525,
         "metadata_feature_count": 526
       },
-      "limit": "Encoded archive bytes are verified against the pinned baseline file. Decoded size/hash/feature values come from pinned #442 inventory, not a decoded/admitted payload here; actual decoded size exceeds 32 MiB and no geometry is opened.",
-      "temporal_status": "reference"
+      "limit": "Encoded and decoded identities are cross-bound from pinned provenance records only. The decoded 69,702,323-byte source exceeds the 32 MiB cap; the archive is not an ordinary Baseline input, is not decompressed here, and no geometry from it is admitted.",
+      "temporal_status": "reference",
+      "encoded_identity_as_recorded_in_prior_source_register_and_packet_manifest": {
+        "bytes": 22949678,
+        "sha256": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e"
+      },
+      "metadata_pins": {
+        "source_identity_register": "08891ff552e397d237e63feaaea4a4ae4cad69d1d947ca74fd86b13157369347",
+        "source_transport_inventory": "c426aa785e4282bd7c4653a3e72c6f64201afb8736675242b3c59d8ead659534",
+        "prior_442_source_inventory": "2a794c330534b74bedf5c77dc813386fd5fb1195649ca23ded3bd99b53f12007"
+      }
     },
     {
       "id": "Georef-ARG-ADM2-name-comparator-2026-10-05",
@@ -304,20 +322,32 @@
   "outputs": [
     {
       "path": "research/geography/argentina-gap-source-fitness-20261007/README.md",
-      "bytes": 7675,
-      "sha256": "40a63f08a1843f715df7f5f7155fb1ce8f7743e385770fe6ce81c3d27e310627",
+      "bytes": 9008,
+      "sha256": "9e27e6fdcf4a9381cf59e0d62363db9b952e7ce2f1dc94f4dcba942edd84fb00",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/issue-contract-after-amendment.json",
+      "bytes": 13525,
+      "sha256": "32d180da8b3e7bd697ba9209d7920cb11aaf97ae9efaff73508b60d616b17f91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/issue-contract-before-amendment.json",
+      "bytes": 12232,
+      "sha256": "d49012e3199e5540a8a4c1995130d2a89b37c25d009d7a0e2980e52f2518036f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/argentina-gap-source-fitness-20261007/reproduce.py",
-      "bytes": 26839,
-      "sha256": "e2d811eddc83dfcdec472e992f141078584c13a74c9d278eaf107257b877e232",
+      "bytes": 29398,
+      "sha256": "2a0c5d2049bf66aae4115a849ee6bbc325bc3d35dc633079e51b4e4999b52f57",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/argentina-gap-source-fitness-20261007/run_pair.py",
-      "bytes": 3377,
-      "sha256": "ca8e351fb7168c187e99b9998524eba5a31710dee06da2d3002bd503590236d9",
+      "bytes": 3635,
+      "sha256": "a0b7e194e5544f6469b40e0ee9ba4dd89f390dae04449d7fbc69b3159e1647cd",
       "hash_kind": "file-bytes"
     },
     {
@@ -333,97 +363,21 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-v2/execution-receipt.json",
-      "bytes": 7446,
-      "sha256": "66472c60548b8651584b2854f3eb2a7c20ae9675b27e12ede07d90f100c7ea41",
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-20261007154702696203-8d548285/execution-receipt.json",
+      "bytes": 8094,
+      "sha256": "564c6d0ab72997edcf15ab9478adf7518bd21700286d745562753906c11b797b",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-v2/publication.json",
-      "bytes": 521,
-      "sha256": "f40d1a075a7111d6aeb70715cc91edc85412ff07543460a0cf4e5535ca84ecba",
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-20261007154702696203-8d548285/publication.json",
+      "bytes": 575,
+      "sha256": "528137bba4685365c52c2331ec5fc304d684278c3a74790994a05a333948d0bd",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-v2/reproducibility.json",
-      "bytes": 486,
-      "sha256": "ac5862ed1f74e73dfff1637d6249e2a7b47ebe16ba78e750f3456934b805d7a0",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/component-source-rows.json.gz",
-      "bytes": 5504,
-      "sha256": "dfdfd6b49368c21917703d3843e7f086545a2fb87e9ba95fdea935f92cc22140",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 32295,
-      "uncompressed_sha256": "c4264f0a1220b51816614ee31dadf204b1d020090259c821b69accabe209c379"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/family-record.json",
-      "bytes": 7335,
-      "sha256": "9bb07ae505d1e87db9e11c8a4387dbb8080d222567a0e67c923658d943bdef0c",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/mutation-control.json",
-      "bytes": 418,
-      "sha256": "2febe5f4dbd6dc5979a2445176ec2709430ff31ba9297ebd3174fb989545a317",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/positive-control.json",
-      "bytes": 1523,
-      "sha256": "6d4c22e99eb2d1437d1fe7b8d2bcf009a1c358e07fb3412d32a741f4aba6f7fd",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/publication.json",
-      "bytes": 1191,
-      "sha256": "8fe379c23464c07a7e6c456bb42ae183f72f8bbcee9f1a3c8dc5f76b4478dfd0",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/source-fit.json",
-      "bytes": 110888,
-      "sha256": "4b90df7bde4641fe103e9645ff17ab180d16c1c8326e41a1afdcce59f25eb55b",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/component-source-rows.json.gz",
-      "bytes": 5504,
-      "sha256": "dfdfd6b49368c21917703d3843e7f086545a2fb87e9ba95fdea935f92cc22140",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 32295,
-      "uncompressed_sha256": "c4264f0a1220b51816614ee31dadf204b1d020090259c821b69accabe209c379"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/family-record.json",
-      "bytes": 7335,
-      "sha256": "9bb07ae505d1e87db9e11c8a4387dbb8080d222567a0e67c923658d943bdef0c",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/mutation-control.json",
-      "bytes": 418,
-      "sha256": "2febe5f4dbd6dc5979a2445176ec2709430ff31ba9297ebd3174fb989545a317",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/positive-control.json",
-      "bytes": 1523,
-      "sha256": "6d4c22e99eb2d1437d1fe7b8d2bcf009a1c358e07fb3412d32a741f4aba6f7fd",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/publication.json",
-      "bytes": 1191,
-      "sha256": "1ee4f1eda612281f00c02aebd2bf6ec51bc51aedad9522c5029f3ce45a9e99b9",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/source-fit.json",
-      "bytes": 110888,
-      "sha256": "4b90df7bde4641fe103e9645ff17ab180d16c1c8326e41a1afdcce59f25eb55b",
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-20261007154702696203-8d548285/reproducibility.json",
+      "bytes": 558,
+      "sha256": "5700dd04a466929371ec969259d52e0b153acc377b2072d5f52c5cbc8558c98b",
       "hash_kind": "file-bytes"
     },
     {
@@ -500,6 +454,82 @@
       "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-4/source-fit.json",
       "bytes": 108916,
       "sha256": "d75d630f538017709ba27e89ec76e68c2e95913ebfba19cdf35a27b8ef048bae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/component-source-rows.json.gz",
+      "bytes": 5504,
+      "sha256": "dfdfd6b49368c21917703d3843e7f086545a2fb87e9ba95fdea935f92cc22140",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 32295,
+      "uncompressed_sha256": "c4264f0a1220b51816614ee31dadf204b1d020090259c821b69accabe209c379"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/family-record.json",
+      "bytes": 7335,
+      "sha256": "9bb07ae505d1e87db9e11c8a4387dbb8080d222567a0e67c923658d943bdef0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/mutation-control.json",
+      "bytes": 418,
+      "sha256": "2febe5f4dbd6dc5979a2445176ec2709430ff31ba9297ebd3174fb989545a317",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/positive-control.json",
+      "bytes": 1523,
+      "sha256": "6d4c22e99eb2d1437d1fe7b8d2bcf009a1c358e07fb3412d32a741f4aba6f7fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/publication.json",
+      "bytes": 1366,
+      "sha256": "6eac6f8ac6c8ef8b787e69a1cd12607a7bd536acdce47910efbf71c245968bf7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/source-fit.json",
+      "bytes": 111489,
+      "sha256": "9815926220c835c03524f516d1fc2a832010f6db45a9c0c6659065084ce5a1f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/component-source-rows.json.gz",
+      "bytes": 5504,
+      "sha256": "dfdfd6b49368c21917703d3843e7f086545a2fb87e9ba95fdea935f92cc22140",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 32295,
+      "uncompressed_sha256": "c4264f0a1220b51816614ee31dadf204b1d020090259c821b69accabe209c379"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/family-record.json",
+      "bytes": 7335,
+      "sha256": "9bb07ae505d1e87db9e11c8a4387dbb8080d222567a0e67c923658d943bdef0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/mutation-control.json",
+      "bytes": 418,
+      "sha256": "2febe5f4dbd6dc5979a2445176ec2709430ff31ba9297ebd3174fb989545a317",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/positive-control.json",
+      "bytes": 1523,
+      "sha256": "6d4c22e99eb2d1437d1fe7b8d2bcf009a1c358e07fb3412d32a741f4aba6f7fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/publication.json",
+      "bytes": 1376,
+      "sha256": "b3da986b0d8e7165ba2a918c5e8b92f2db7c02dbe6e6eb4cd11e7ea13e97d50a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/source-fit.json",
+      "bytes": 111489,
+      "sha256": "9815926220c835c03524f516d1fc2a832010f6db45a9c0c6659065084ce5a1f6",
       "hash_kind": "file-bytes"
     }
   ],
@@ -591,6 +621,14 @@
       "status": "added"
     },
     {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/issue-contract-after-amendment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/issue-contract-before-amendment.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/argentina-gap-source-fitness-20261007/reproduce.py",
       "status": "added"
     },
@@ -607,63 +645,15 @@
       "status": "added"
     },
     {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-v2/execution-receipt.json",
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-20261007154702696203-8d548285/execution-receipt.json",
       "status": "added"
     },
     {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-v2/publication.json",
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-20261007154702696203-8d548285/publication.json",
       "status": "added"
     },
     {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-v2/reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/component-source-rows.json.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/family-record.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/mutation-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-1/source-fit.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/component-source-rows.json.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/family-record.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/mutation-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-2/source-fit.json",
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-repro-check-20261007154702696203-8d548285/reproducibility.json",
       "status": "added"
     },
     {
@@ -712,6 +702,54 @@
     },
     {
       "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-4/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/component-source-rows.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/mutation-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/source-fit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/component-source-rows.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/mutation-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285-b/source-fit.json",
       "status": "added"
     },
     {

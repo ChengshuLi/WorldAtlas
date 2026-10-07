@@ -46,7 +46,8 @@ PIN_FILES = {
     "baseline_location_policy": "data/location-policy.json",
     "original_source_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
     "consumed_simplified_ARG_ADM2": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ARG-ADM2-000.bin.gz",
-    "prior_ARG_unsimplified_source_archive": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz",
+    "prior_ARG_source_identity_register": "data/regional-review/regional-review-7cf674a63057d43f/source-register.json",
+    "prior_ARG_source_transport_inventory": "data/regional-review/regional-review-7cf674a63057d43f/packet-manifest.json",
     "prior_ARG_source_metadata": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2-metaData.json",
     "prior_442_source_inventory": "data/regional-review/regional-review-fd433005036fe22b/source-inventory.json",
     "prior_442_geometry_comparisons": "data/regional-review/regional-review-fd433005036fe22b/geometry-comparisons.jsonl",
@@ -70,7 +71,8 @@ PINS = {
     "baseline_location_policy": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
     "original_source_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
     "consumed_simplified_ARG_ADM2": "9b033d8e86946b8f14d9491ec51098e3c5c0e59785707058966d1fc77521546d",
-    "prior_ARG_unsimplified_source_archive": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
+    "prior_ARG_source_identity_register": "08891ff552e397d237e63feaaea4a4ae4cad69d1d947ca74fd86b13157369347",
+    "prior_ARG_source_transport_inventory": "c426aa785e4282bd7c4653a3e72c6f64201afb8736675242b3c59d8ead659534",
     "prior_ARG_source_metadata": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
     "prior_442_source_inventory": "2a794c330534b74bedf5c77dc813386fd5fb1195649ca23ded3bd99b53f12007",
     "prior_442_geometry_comparisons": "9e55c66fc509f35aaf618d5fd1c6ac1338bbeabdc741a32043d4be9d35e12a1c",
@@ -126,9 +128,12 @@ def read_baseline(name, override=None):
     expected = BASELINE_READER.pinned_bytes(name)
     if override is not None:
         raw = override
-    elif name == PIN_FILES["baseline_location_policy"]:
-        # This immutable source file may be absent from a sparse checkout. Read
-        # its pinned Git blob directly; no working-tree substitute is accepted.
+    elif name in (PIN_FILES["baseline_location_policy"],
+                  PIN_FILES["prior_ARG_source_identity_register"],
+                  PIN_FILES["prior_ARG_source_transport_inventory"]):
+        # These immutable provenance files may be absent from a sparse checkout.
+        # Read their issue-pinned Git blobs directly; no working-tree substitute
+        # is accepted.
         raw = BASELINE_READER.pinned_bytes(name)
     else:
         raw = BASELINE_READER.materialized_bytes(name)
@@ -283,6 +288,28 @@ def build_report(inputs):
     unsimplified = j(PIN_FILES["prior_442_source_inventory"])
     georef_issue = j(PIN_FILES["prior_442_issue_snapshot"])
     georef_source = j(PIN_FILES["prior_Georef_crosswalk"])
+    source_register = j(PIN_FILES["prior_ARG_source_identity_register"])
+    retained_original = next(x for x in source_register["retained_sources"]
+                             if x.get("id") == "geoboundaries-arg-adm2-2020")
+    transport_manifest = j(PIN_FILES["prior_ARG_source_transport_inventory"])
+    archive_relative_path = "source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz"
+    archive_path = "data/regional-review/regional-review-7cf674a63057d43f/" + archive_relative_path
+    transport_row = next(x for x in transport_manifest["files"] if x.get("path") == archive_path)
+    inventory_row = next(x for x in unsimplified["sources"] if x.get("id") == "gb:ARG:ADM2")
+    encoded_sha = retained_original.get("retained_archive_sha256")
+    raw_sha = retained_original.get("sha256_uncompressed")
+    raw_bytes = retained_original.get("upstream_reported_bytes")
+    if (encoded_sha != transport_row.get("sha256") or
+            encoded_sha != "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e" or
+            raw_sha != inventory_row.get("retrieved_file_sha256") or
+            raw_bytes != inventory_row.get("retrieved_file_bytes") or
+            raw_sha != "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177" or
+            raw_bytes != 69702323):
+        raise ValueError("pinned source register, transport manifest, and #442 inventory identities disagree")
+    if (transport_row.get("bytes") != 22949678 or
+            retained_original.get("retained_path") != archive_relative_path or
+            retained_original.get("id") != "geoboundaries-arg-adm2-2020"):
+        raise ValueError("pinned source transport identity is incomplete")
     georef_by_shape = {}
     for shape_id, source_feature in sorted(source_features.items()):
         matches = [f.get("properties", {}) for f in georef_source.get("features", [])
@@ -334,13 +361,20 @@ def build_report(inputs):
         "prior_assessments": {
             "issue_442_source_inventory": unsimplified,
             "unsimplified_source_admission": {
-                "encoded_archive_descriptor": descriptor(PIN_FILES["prior_ARG_unsimplified_source_archive"],
-                                                          inputs[PIN_FILES["prior_ARG_unsimplified_source_archive"]]),
-                "decoded_identity_as_recorded_in_pinned_442_inventory": {
-                    "bytes": next(x["retrieved_file_bytes"] for x in unsimplified["sources"] if x["id"] == "gb:ARG:ADM2"),
-                    "sha256": next(x["retrieved_file_sha256"] for x in unsimplified["sources"] if x["id"] == "gb:ARG:ADM2"),
+                "encoded_archive_input": "not admitted; identity is cross-bound from pinned source-register and packet-manifest records",
+                "encoded_identity_as_recorded_in_pinned_source_register_and_packet_manifest": {
+                    "bytes": transport_row["bytes"], "sha256": encoded_sha,
+                    "path": transport_row["path"],
                 },
-                "decoded_input_admission": "refused; recorded decoded size exceeds the 32 MiB per-file limit; no decompression or geometry admission performed",
+                "decoded_identity_as_recorded_in_pinned_442_inventory": {
+                    "bytes": raw_bytes, "sha256": raw_sha,
+                },
+                "decoded_input_admission": "refused before source read; recorded decoded size exceeds the 32 MiB per-file limit; no archive decompression or geometry admission performed",
+                "metadata_pins": {
+                    "source_identity_register": PINS["prior_ARG_source_identity_register"],
+                    "source_transport_inventory": PINS["prior_ARG_source_transport_inventory"],
+                    "prior_442_source_inventory": PINS["prior_442_source_inventory"],
+                },
             },
             "source_locator_resolution": {
                 "baseline_location_policy_path": PIN_FILES["baseline_location_policy"],
@@ -373,8 +407,8 @@ def canonical(value):
 
 
 def write_vintage(name, report, mutation_control):
-    if not re.fullmatch(r"argentina-run-[1-4]", name):
-        raise ValueError("run name must be argentina-run-1 through argentina-run-4")
+    if not re.fullmatch(r"argentina-run-[a-z0-9][a-z0-9-]{0,45}", name):
+        raise ValueError("run name must be a safe unique argentina-run vintage")
     root = ROOT / OWNED / "vintages" / name
     outputs = {
         "source-fit.json": report,
@@ -401,12 +435,15 @@ def main():
     group.add_argument("--run")
     group.add_argument("--finalize-reproducibility", action="store_true")
     parser.add_argument("--execution-log")
+    parser.add_argument("--run-one")
+    parser.add_argument("--run-two")
+    parser.add_argument("--check-vintage")
     args = parser.parse_args()
     inputs = load_case()
     if args.finalize_reproducibility:
-        if not args.execution_log:
-            raise ValueError("actual process receipt required for reproducibility finalization")
-        paths = [ROOT / OWNED / "vintages" / f"argentina-run-{n}" / "source-fit.json" for n in (1, 2)]
+        if not all((args.execution_log, args.run_one, args.run_two, args.check_vintage)):
+            raise ValueError("actual process receipt, unique run names, and a fresh check vintage are required")
+        paths = [ROOT / OWNED / "vintages" / name / "source-fit.json" for name in (args.run_one, args.run_two)]
         reports = [p.read_bytes() for p in paths]
         if reports[0] != reports[1]:
             raise ValueError("two complete source-fit reports differ")
@@ -417,7 +454,7 @@ def main():
         execution = json.loads(Path(args.execution_log).read_text(encoding="utf-8"))
         if execution.get("outcome") != "passed" or len(execution.get("processes", [])) != 2:
             raise ValueError("require two successful recorded extraction processes")
-        vintage = NewVintage(BASELINE_READER, OWNED + "/", "argentina-repro-check-v2",
+        vintage = NewVintage(BASELINE_READER, OWNED + "/", args.check_vintage,
                              ["reproducibility.json", "execution-receipt.json"])
         record = vintage.publish({"reproducibility.json": result, "execution-receipt.json": execution})
         print(json.dumps({"reproducibility": result, "published": record}, indent=2, sort_keys=True))
