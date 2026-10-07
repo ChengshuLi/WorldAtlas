@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "issue": 632,
+  "method_id": "madagascar-codab-crosswalk",
+  "kind": "reproducibility-control",
+  "outcome": "passed",
+  "run_one_id": "2026-10-07-v1-run-12",
+  "run_two_id": "2026-10-07-v1-run-13",
+  "code_sha256": "012757c0b62966bf5145c40e17d1a998c371799cd734609f581ba55ea2188361",
+  "run_one_bundle_sha256": "40741de6a374fc0ade72b2f96943541303e9291a7c443f629fb4d21d6a2fa2d8",
+  "run_two_bundle_sha256": "40741de6a374fc0ade72b2f96943541303e9291a7c443f629fb4d21d6a2fa2d8",
+  "products_recomputed_in_memory": [
+    {
+      "path": "adm1-parent-intersections.csv",
+      "bytes": 57182,
+      "sha256": "0137ea2ff5ef19825ba80d6190e32a6b68b150387dc9faa51e0875753de3114d"
+    },
+    {
+      "path": "adm2-crosswalk-and-geometry.csv",
+      "bytes": 59123,
+      "sha256": "7b2345ba194ecdf8c2831ce1361f28475a114bef99e8a644112b55f269051a34"
+    },
+    {
+      "path": "antanimora-neighbor-intersections.csv",
+      "bytes": 1437,
+      "sha256": "a18edd0350212cdb93f86b753863d8d50712eedf64d3554cd3f11d3a66e529d0"
+    },
+    {
+      "path": "controls.json",
+      "bytes": 2608,
+      "sha256": "11df279459650f92757cea334e32266aa1306b539d29d057f7db11a31c0aca4e"
+    },
+    {
+      "path": "disconnected-components.csv",
+      "bytes": 7837,
+      "sha256": "f242fcae26cfcbe8d666838b05ab51f63ea48a94e679425c3fd70a3f7168be06"
+    },
+    {
+      "path": "input-pins.json",
+      "bytes": 2849,
+      "sha256": "f877b0c012659e79c27c134804d77c4ba7dee8d193558251ae2ff00972d63a7e"
+    },
+    {
+      "path": "results.json",
+      "bytes": 6206,
+      "sha256": "007fa7a264410cecc9d8f75a9c3e734789c72322b4cda3aecc7db71a9bffb3f7"
+    }
+  ],
+  "matches_retained_run": true
+}
