@@ -1,0 +1,428 @@
+{
+  "version": 1,
+  "issue": 1367,
+  "lane": "geography",
+  "worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
+  "subject_ids": [
+    "gb:GRC:ADM3:53547021B10109746206606",
+    "gb:GRC:ADM3:53547021B14104981349473",
+    "gb:GRC:ADM3:53547021B27725910379906",
+    "gb:GRC:ADM3:53547021B33259065854290",
+    "gb:GRC:ADM3:53547021B47996092529292",
+    "gb:GRC:ADM3:53547021B5655608109078",
+    "gb:GRC:ADM3:53547021B57223359042947",
+    "gb:GRC:ADM3:53547021B65639562394227",
+    "gb:GRC:ADM3:53547021B75170445936702",
+    "gb:GRC:ADM3:53547021B81123909455737",
+    "gb:GRC:ADM3:53547021B9865954519717"
+  ],
+  "subject_ids_sha256": "bfb9427e0b3724d524cc9dd9d2e869bc783c627e814c07d2d4b8e03022ca1b4e",
+  "baseline": {
+    "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+    "files": [
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GRC-ADM3-000.bin.gz",
+        "bytes": 376781,
+        "sha256": "55dcb304944675e95c3530f02b71da019a6f647d38300cf1b7a337659fa87b5b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1263212,
+        "uncompressed_sha256": "72179d50a8a85aa9fecf996761f905db9e8a59f4eb882f8481f88651692b7e18"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+        "bytes": 806110,
+        "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/report.json",
+        "bytes": 178556,
+        "sha256": "e47379a74c053b57781fec04aaedc702ecba24adb773b42bb8c75d142326647a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "consumed_source_payload_file": "55dcb304944675e95c3530f02b71da019a6f647d38300cf1b7a337659fa87b5b",
+      "source_metadata_file": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "source_attribution_file": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+      "routing_report_file": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "numeric_diagnosis_report_file": "e47379a74c053b57781fec04aaedc702ecba24adb773b42bb8c75d142326647a",
+      "physical_comparison_report_file": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "contact_feature_container_file": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    "pin_files": {
+      "consumed_source_payload_file": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GRC-ADM3-000.bin.gz",
+      "source_metadata_file": "data/administrative-sources.json",
+      "source_attribution_file": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+      "routing_report_file": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "numeric_diagnosis_report_file": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/report.json",
+      "physical_comparison_report_file": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+      "contact_feature_container_file": "data/geography/part-9.json"
+    },
+    "subject_files": {
+      "gb:GRC:ADM3:53547021B10109746206606": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B14104981349473": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B27725910379906": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B33259065854290": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B47996092529292": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B5655608109078": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B57223359042947": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B65639562394227": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B75170445936702": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B81123909455737": "data/geography/part-9.json",
+      "gb:GRC:ADM3:53547021B9865954519717": "data/geography/part-9.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-grc-adm3-consumed-simplified",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3_simplified.geojson",
+      "role": "Actually consumed historical simplified ADM3 source; exact source identities and source-relative context",
+      "vintage": "Metadata reports represented year 2010; update 2023-02-10; build 2023-12-12",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Pinned metadata declares CC0 1.0 while its licenseDetail attributes sources 2 and 3 to CC BY 3.0. Applicability to this consumed simplified asset and retained derivatives is unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore exact encoded source blob from baseline commit 1bf4bb01d76a76953d4a11308f5af2dd50fe3365:coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-GRC-ADM3-000.bin.gz; gzip decode reproduces 1263212 bytes with SHA-256 72179d50a8a85aa9fecf996761f905db9e8a59f4eb882f8481f88651692b7e18 and 326 features.",
+      "limit": "geoBoundaries/Wikimedia metadata does not provide a traced official local legal-boundary lineage for the 11 contacts; source alone cannot approve boundaries, current land/water or numeric repair.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "okxe-kallikratis-boundary-catalogue",
+      "url": "https://www.geodata.gov.gr/el/dataset?groups=boundaries&organization=okxe&res_format=shapefile&res_format=wms&tags=%CE%B4%CE%B9%CE%BF%CE%B9%CE%BA%CE%B7%CF%84%CE%B9%CE%BA%CE%B1-%CF%8C%CF%81%CE%B9%CE%B1&tags=%CE%BA%CE%B1%CE%BB%CE%BB%CE%B9%CE%BA%CF%81%CE%AC%CF%84%CE%B7%CF%82",
+      "role": "Official OKXE/GEODATA catalogue lead for Kallikratis municipality boundaries",
+      "vintage": "Catalogue describes corrected v1.1 of v1.0 posted 2010-06-28; entry dated 2015-11-04",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Dataset-specific reuse terms were not independently inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open the official catalogue entry and obtain the stated shapefile/WMS/WFS resource; earlier #1006 comment 6000438992 records HTTP 404 for its linked ZIP.",
+      "limit": "Catalogue metadata is a source lead only: no resource bytes or geometry were inspected here.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "ypes-structure-operation-2024",
+      "url": "https://www.ypes.gr/wp-content/uploads/2024/06/STRUCTURE-OPERATION-LRD-ENGLISH-VERSION-2024.pdf",
+      "role": "Official Ministry of Interior description of administrative structure and effective date",
+      "vintage": "2024 publication; states Kallikratis division effective 2011-01-01 and 332 municipalities",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Official government publication; reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the cited Ministry of Interior PDF.",
+      "limit": "Nationwide structure counts do not provide local boundary geometry or exact contact crosswalks.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "elstat-2011-census-context",
+      "url": "https://www.statistics.gr/en/2011-census-pop-hous",
+      "role": "Official statistical census tables and interactive map context",
+      "vintage": "2011 census; page observed 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "ELSTAT page reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the cited ELSTAT census page.",
+      "limit": "Statistical context is not legal municipality geometry; no boundary-purpose statement or source polygons were inspected for this review.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "ypes-municipality-codes",
+      "url": "https://www.ypes.gr/kodikoi-dimon/",
+      "role": "Official municipality code roster lead",
+      "vintage": "Current page observed 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Official government page; reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the cited Ministry of Interior municipality-code page.",
+      "limit": "Code roster does not by itself provide geometry or historical equivalence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gshhg-2.3.7-physical-context",
+      "url": "https://www.ngdc.noaa.gov/mgg/shorelines/",
+      "role": "Generalized physical coastline comparison source represented by the pinned physical report",
+      "vintage": "GSHHG 2.3.7; source input has heterogeneous observation dates",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "The packet preserves source-specific terms in the pinned physical source records; no new license conclusion."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use the source identity and query-level evidence retained in the pinned physical report and handoff.",
+      "limit": "Generalized and heterogeneous vintage; no proof of current dry land, property, municipal boundary or repair.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/complete-family-scope.json",
+      "bytes": 8776,
+      "sha256": "81c78ffc7c9f342c9cee74ffad9c454152099022235c362335d6d67a1c657f7e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/fresh-exact-collision-scan.json",
+      "bytes": 2752,
+      "sha256": "1a0c9e1d4d849827c57d0b299255088963cfe184e3821d92809fc0ce58382fa1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/greek-complete-source-ready-handoff.json",
+      "bytes": 1114523,
+      "sha256": "473905d318929261c3ed9166b30ff76b20a2982496a40414a806fc874715ca56",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/input-lineage.json",
+      "bytes": 33717,
+      "sha256": "6303e25ba9d7b8fccbad398fb5e145ca02f94486badba064c9a701778fc806d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/preflight-closure-integrity.json",
+      "bytes": 1392,
+      "sha256": "808ef3947d4a459e35025adc91f1b08c1183ac2434d5db60fb0a7f318cee03f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/source-access-and-claims.json",
+      "bytes": 6427,
+      "sha256": "636a7d9d43e93bb6049a189f9187f5d640342e45fd903e01c64b0e685277fa0b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1002-comments.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1002.json",
+      "bytes": 11769,
+      "sha256": "b9c34528ad5d3db3e3f934c6078273b6aa85cbe5fc70706d209df2d05dc0c75d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1006-comments.json",
+      "bytes": 7201,
+      "sha256": "d0fae3c2ce9b5528ea54751f37f6d6cef84d6cbea34e8251cde041aae08021c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1006.json",
+      "bytes": 35071,
+      "sha256": "aaa5f2e4f18c5c17adece63083816aab5bddd747ce9b2c94e3abce78e32788b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1007-comments.json",
+      "bytes": 4177,
+      "sha256": "0ae59684dd8671433efdc96caf7b7d3a96ecd84f3ae69553714f1c4fc21629d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1007.json",
+      "bytes": 8867,
+      "sha256": "d9630878ff69ba14181552a05d0a48c3f9847440b327a351723ffc446025df71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1081-comments.json",
+      "bytes": 5937,
+      "sha256": "3588b1be515b44941381c34efc31f26587482a58d6688f55c3ba21c4a00105c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1081.json",
+      "bytes": 20138,
+      "sha256": "e200e4a64028c7aad1522a8605baa445933eebb950bd4e8f1ee803d95c60bb35",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-819-comments.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-819.json",
+      "bytes": 9452,
+      "sha256": "b54f977ee92f5ab8720ac1425eee92b611ada5d978c5399db6f85887515e257e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/source-fitness-report.md",
+      "bytes": 7536,
+      "sha256": "da1225c2f676eae9b32ffdbd0564225132eb9c15f00abd44967161d988b824cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/tools/verify-source-identity.py",
+      "bytes": 3164,
+      "sha256": "7ef9d2f89131e8bbdb2ab385847a4a91b48a277a74809c012743883661ec0db8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-fitness-review",
+      "kind": "source",
+      "description": "Restored and byte-checked the exact consumed source payload, verified 11 source shapeIDs, and compared source metadata/role/vintage against official Greek administrative and statistical source statements. No overlay or geometric boundary decision was made.",
+      "software": "Python 3 standard library for gzip/JSON/SHA-256; Node v24.19.0 evidence-quality validator; public-source review on 2026-10-07",
+      "units": "source bytes, native IDs, feature counts and cited administrative dates"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The exact consumed historical simplified source supports reproducible source-relative identity and contact context, but it is not sufficient by itself to establish authoritative 2010 legal municipality boundaries, current dry land, or repair any numeric contradiction.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-grc-adm3-consumed-simplified",
+        "okxe-kallikratis-boundary-catalogue",
+        "ypes-structure-operation-2024",
+        "elstat-2011-census-context",
+        "gshhg-2.3.7-physical-context"
+      ]
+    },
+    {
+      "text": "Official Kallikratis geometry bytes, per-feature source lineage/accuracy, license applicability, exact local legal records, all seven numerical construction contradictions and all 18 numeric unknowns remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-grc-adm3-consumed-simplified",
+        "okxe-kallikratis-boundary-catalogue",
+        "gshhg-2.3.7-physical-context"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 -m json.tool research/geography/greece-dodecanese-source-fitness-20261007/inputs/complete-family-scope.json",
+    "node scripts/evidence-quality.mjs research/geography/greece-dodecanese-source-fitness-20261007/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/complete-family-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/fresh-exact-collision-scan.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/greek-complete-source-ready-handoff.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/input-lineage.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/preflight-closure-integrity.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/inputs/source-access-and-claims.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1002-comments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1002.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1006-comments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1006.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1007-comments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1007.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1081-comments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-1081.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-819-comments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/related-work/issue-819.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/source-fitness-report.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/greece-dodecanese-source-fitness-20261007/tools/verify-source-identity.py",
+      "status": "added"
+    }
+  ]
+}

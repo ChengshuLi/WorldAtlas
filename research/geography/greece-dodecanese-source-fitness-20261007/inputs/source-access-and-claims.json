@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "observed_at_utc": "2026-10-07",
+  "source_fitness_outcome": "limited-source-relative-context-only",
+  "consumed_source": {
+    "key": "gb:GRC:ADM3",
+    "provider": "geoBoundaries",
+    "boundary_id": "GRC-ADM3-53547021",
+    "level": "ADM3",
+    "canonical_type": "municipality",
+    "represented_year": 2010,
+    "source_data_update_date": "2023-02-10",
+    "build_date": "2023-12-12",
+    "feature_count": 326,
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3_simplified.geojson",
+    "metadata_full_geometry_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3.geojson",
+    "encoded_sha256": "55dcb304944675e95c3530f02b71da019a6f647d38300cf1b7a337659fa87b5b",
+    "encoded_bytes": 376781,
+    "decoded_sha256": "72179d50a8a85aa9fecf996761f905db9e8a59f4eb882f8481f88651692b7e18",
+    "decoded_bytes": 1263212,
+    "contact_ids_verified_by_shapeID": {
+      "gb:GRC:ADM3:53547021B10109746206606": "Symi",
+      "gb:GRC:ADM3:53547021B14104981349473": "Kos",
+      "gb:GRC:ADM3:53547021B27725910379906": "Agathonisi",
+      "gb:GRC:ADM3:53547021B33259065854290": "Rhodes",
+      "gb:GRC:ADM3:53547021B47996092529292": "Tilos",
+      "gb:GRC:ADM3:53547021B5655608109078": "Leros",
+      "gb:GRC:ADM3:53547021B57223359042947": "Kalymnos",
+      "gb:GRC:ADM3:53547021B65639562394227": "Leipsoi",
+      "gb:GRC:ADM3:53547021B75170445936702": "Halki",
+      "gb:GRC:ADM3:53547021B81123909455737": "Nisyros",
+      "gb:GRC:ADM3:53547021B9865954519717": "Patmos"
+    },
+    "metadata_claims": {
+      "boundaryLicense": "CC0 1.0 Universal",
+      "boundarySource": "geoBoundaries, Wikimedia Commons",
+      "licenseDetail": "source 2 and 3-Creative Commons Attribution 3.0 License",
+      "licenseSource": "commons.wikimedia.org/wiki/File"
+    },
+    "license_conclusion": "Applicability to the consumed simplified asset and its source components is unresolved; retain the source as restoration/reference evidence only."
+  },
+  "official_source_leads": [
+    {
+      "id": "okxe-geodata-kallikratis-municipalities",
+      "url": "https://www.geodata.gov.gr/el/dataset?groups=boundaries&organization=okxe&res_format=shapefile&res_format=wms&tags=%CE%B4%CE%B9%CE%BF%CE%B9%CE%BA%CE%B7%CF%84%CE%B9%CE%BA%CE%B1-%CF%8C%CF%81%CE%B9%CE%B1&tags=%CE%BA%CE%B1%CE%BB%CE%BB%CE%B9%CE%BA%CF%81%CE%AC%CF%84%CE%B7%CF%82",
+      "observed": "Official catalogue search/index describes Kallikratis municipality boundaries, corrected v1.1 of a v1.0 posted 2010-06-28; listed under OKXE, formats SHAPEFILE/WMS/WFS. Source review search result was accessible 2026-10-07; direct dataset opening returned an internal access error; no geometry downloaded or inspected. Existing #1006 comment 6000438992 records HTTP 404 for the linked candidate ZIP.",
+      "role": "Best-matched official historical boundary source lead; no bytes available in this work for geometry comparison.",
+      "limit": "Catalogue description does not establish that its unavailable resource exactly matches the consumed 326-feature source or settle any local legal boundary."
+    },
+    {
+      "id": "greek-ministry-local-government-structure-2024",
+      "url": "https://www.ypes.gr/wp-content/uploads/2024/06/STRUCTURE-OPERATION-LRD-ENGLISH-VERSION-2024.pdf",
+      "observed": "Ministry of Interior publication states current administrative division based on Kallikratis is effective 2011-01-01 and lists 332 municipalities.",
+      "role": "Official nationwide administrative structure and temporal context.",
+      "limit": "It is not a local boundary geometry source and does not adjudicate any of the 46 components."
+    },
+    {
+      "id": "elstat-2011-census",
+      "url": "https://www.statistics.gr/en/2011-census-pop-hous",
+      "observed": "ELSTAT page provides 2011 population tables and links the Census 2011 interactive map.",
+      "role": "Statistical/census context only.",
+      "limit": "This page is not legal authority for municipality geometry; census boundaries can be used only as statistical context absent a boundary-purpose statement."
+    },
+    {
+      "id": "ministry-codes-of-municipalities",
+      "url": "https://www.ypes.gr/kodikoi-dimon/",
+      "observed": "Official Ministry page provides municipality codes.",
+      "role": "Identifier/roster lead.",
+      "limit": "Code listing does not provide geometry or resolve historical equivalence."
+    }
+  ],
+  "other_context": [
+    {
+      "id": "gshhg-2.3.7",
+      "role": "Physical coastline comparison source recorded in the pinned comparison report; heterogeneous observation dates and generalized coastlines.",
+      "use": "Query-level context only; cannot establish current dry land, ownership, legal borders, or repair decisions."
+    },
+    {
+      "id": "candidate-current-contact-features",
+      "role": "Current Atlas ADM3 feature context for the 11 exact contacts, pinned in data/geography/part-9.json.",
+      "use": "Identity/shape comparison only; not an independent source of official authority."
+    }
+  ],
+  "interpretation": {
+    "supported": "The exact consumed source bytes and all 11 contact shapeIDs are reproducible. Its published metadata reports 2010 representation and 326 units; the source metadata credits geoBoundaries/Wikimedia and does not give a traceable official Greek geometry lineage for each boundary. A Greek government catalogue identifies a much better purpose/vintage match (Kallikratis) but the source bytes were unavailable for inspection. The consumed simplified source is therefore useful for historical source-relative context and identity joins, but cannot be treated as sufficient authority to close boundary/source questions or certify present land/water status.",
+    "unresolved": "No official source geometry was obtained for direct comparison; source-license applicability, per-feature lineage/accuracy, exact 2010 administrative fit, and the seven numeric construction contradictions remain unresolved. All 18 numeric unknowns and all physical query prerequisites remain open.",
+    "inference": "The “source-relative only” fitness conclusion follows from the mismatch between source metadata provenance and the absence of directly inspected official local geometry; it is a suitability limit, not a finding that any particular feature is wrong or missing."
+  }
+}

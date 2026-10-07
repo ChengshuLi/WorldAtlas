@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "checked_at_utc": "2026-10-07T10:17:56.472899+00:00",
+  "target_issue": 1367,
+  "target_family": "gap-source-batch:6dcdd6a83a01e92e4d85ed5c",
+  "target_component_count": 46,
+  "target_contact_count": 11,
+  "open_issue_count": 619,
+  "open_pr_count": 3,
+  "target_issue_excluded_from_conflict_hits": true,
+  "exact_component_or_family_overlaps": 0,
+  "expected_shared_contact_issues": [
+    {
+      "number": 1081,
+      "title": "Correct Anatolia batch 1 metadata restoration paths and Turkish parent-source absence claim",
+      "labels": [
+        "kind:work-item",
+        "status:blocked",
+        "type:geography",
+        "urgent",
+        "follow-up"
+      ],
+      "component_overlap": [],
+      "contact_overlap": [
+        "gb:GRC:ADM3:53547021B10109746206606",
+        "gb:GRC:ADM3:53547021B14104981349473",
+        "gb:GRC:ADM3:53547021B27725910379906",
+        "gb:GRC:ADM3:53547021B33259065854290",
+        "gb:GRC:ADM3:53547021B47996092529292",
+        "gb:GRC:ADM3:53547021B5655608109078",
+        "gb:GRC:ADM3:53547021B57223359042947",
+        "gb:GRC:ADM3:53547021B65639562394227",
+        "gb:GRC:ADM3:53547021B75170445936702",
+        "gb:GRC:ADM3:53547021B81123909455737",
+        "gb:GRC:ADM3:53547021B9865954519717"
+      ],
+      "family_overlap": false,
+      "owned_paths": [
+        "data/regional-review/anatolia-b1-source-provenance-correction-2026/"
+      ]
+    },
+    {
+      "number": 819,
+      "title": "Resolve 2010 Greek island municipality to 2021 census-unit crosswalk for packet 1",
+      "labels": [
+        "kind:work-item",
+        "status:blocked",
+        "type:geography",
+        "follow-up"
+      ],
+      "component_overlap": [],
+      "contact_overlap": [
+        "gb:GRC:ADM3:53547021B10109746206606",
+        "gb:GRC:ADM3:53547021B14104981349473",
+        "gb:GRC:ADM3:53547021B27725910379906",
+        "gb:GRC:ADM3:53547021B33259065854290",
+        "gb:GRC:ADM3:53547021B47996092529292",
+        "gb:GRC:ADM3:53547021B5655608109078",
+        "gb:GRC:ADM3:53547021B57223359042947",
+        "gb:GRC:ADM3:53547021B65639562394227",
+        "gb:GRC:ADM3:53547021B75170445936702",
+        "gb:GRC:ADM3:53547021B81123909455737",
+        "gb:GRC:ADM3:53547021B9865954519717"
+      ],
+      "family_overlap": false,
+      "owned_paths": [
+        "data/regional-review/greece-east-aegean-2021-crosswalk-issue71/"
+      ]
+    }
+  ],
+  "open_pr_exact_hits": [],
+  "interpretation": "No other open issue or PR names any scoped physical-component ID or exact family key. #819 and #1081 each repeat all 11 contact IDs, with their original rosters and owned paths preserved as related work; these are expected contact-feature references and are not modified. The reviewed paths are distinct."
+}
