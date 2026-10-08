@@ -1,0 +1,282 @@
+{
+  "baseline_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+  "issue": 419,
+  "metrics": {
+    "atlas_locations_in_issue_scope": 224,
+    "boundary_insufficient_evidence_count": 224,
+    "correction_needed_label_count": 4,
+    "geometry_type_disagreement_count": 13,
+    "insufficient_name_crosswalk_count": 0,
+    "multipart_source_location_count": 19,
+    "name_type_matches_using_baseline_parent_count": 220,
+    "official_2021_local_units_in_eight_counties": 231,
+    "overall_correction_needed_count": 4,
+    "overall_insufficient_evidence_count": 220,
+    "scoped_subject_count": 224,
+    "source_id_name_matches": 224,
+    "source_multipolygon_count": 19,
+    "source_polygon_count": 205,
+    "unmatched_official_2021_units_in_eight_counties": 7
+  },
+  "multipart_source_locations": [
+    {
+      "component_count": 22,
+      "id": "gb:HRV:ADM2:41942358B11408332242039",
+      "name": "Grad Korčula",
+      "province": "Dubrovnik-Neretva",
+      "province_id": "framework:province:dubrovnik-neretva:f777dfdf8192"
+    },
+    {
+      "component_count": 37,
+      "id": "gb:HRV:ADM2:41942358B14610637892959",
+      "name": "Grad Komiža",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 17,
+      "id": "gb:HRV:ADM2:41942358B19243079676848",
+      "name": "Grad Vis",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 2,
+      "id": "gb:HRV:ADM2:41942358B19579748364970",
+      "name": "Općina Legrad",
+      "province": "Koprivnica-Križevci",
+      "province_id": "framework:province:koprivnica-krizevci:6c51e4b2373a"
+    },
+    {
+      "component_count": 24,
+      "id": "gb:HRV:ADM2:41942358B24847699776979",
+      "name": "Grad Kaštela",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 2,
+      "id": "gb:HRV:ADM2:41942358B27040282046651",
+      "name": "Grad Solin",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 12,
+      "id": "gb:HRV:ADM2:41942358B3051457735690",
+      "name": "Općina Šolta",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 12,
+      "id": "gb:HRV:ADM2:41942358B40338487230246",
+      "name": "Grad Split",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 2,
+      "id": "gb:HRV:ADM2:41942358B41584880694978",
+      "name": "Općina Milna",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 20,
+      "id": "gb:HRV:ADM2:41942358B51317462978185",
+      "name": "Općina Mljet",
+      "province": "Dubrovnik-Neretva",
+      "province_id": "framework:province:dubrovnik-neretva:f777dfdf8192"
+    },
+    {
+      "component_count": 3,
+      "id": "gb:HRV:ADM2:41942358B58636386184746",
+      "name": "Općina Jelsa",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 10,
+      "id": "gb:HRV:ADM2:41942358B61952995987887",
+      "name": "Grad Trogir",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 30,
+      "id": "gb:HRV:ADM2:41942358B62948971523920",
+      "name": "Grad Hvar",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 20,
+      "id": "gb:HRV:ADM2:41942358B7271748669279",
+      "name": "Grad Dubrovnik",
+      "province": "Dubrovnik-Neretva",
+      "province_id": "framework:province:dubrovnik-neretva:f777dfdf8192"
+    },
+    {
+      "component_count": 50,
+      "id": "gb:HRV:ADM2:41942358B76804398741212",
+      "name": "Općina Lastovo",
+      "province": "Dubrovnik-Neretva",
+      "province_id": "framework:province:dubrovnik-neretva:f777dfdf8192"
+    },
+    {
+      "component_count": 2,
+      "id": "gb:HRV:ADM2:41942358B81819772164255",
+      "name": "Općina Bol",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 19,
+      "id": "gb:HRV:ADM2:41942358B84243302989703",
+      "name": "Općina Marina",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 8,
+      "id": "gb:HRV:ADM2:41942358B85370902157409",
+      "name": "Općina Okrug",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    },
+    {
+      "component_count": 3,
+      "id": "gb:HRV:ADM2:41942358B92131033251533",
+      "name": "Općina Seget",
+      "province": "Split-Dalmatia",
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2"
+    }
+  ],
+  "province_completeness": [
+    {
+      "atlas_province_name": "Zagreb County",
+      "issue_scope_locations": 31,
+      "membership_status": "gap-or-label-review-required",
+      "official_county_english": "Zagreb",
+      "official_county_name": "Zagrebačka",
+      "official_local_units_2021": 34,
+      "official_municipalities_2021": 25,
+      "official_towns_2021": 9,
+      "province_id": "framework:province:zagreb-county:0f4faa1dfd12",
+      "unmatched_official_unit_count": 3,
+      "unmatched_official_unit_names": [
+        "Zaprešić",
+        "Bistra",
+        "Stupnik"
+      ]
+    },
+    {
+      "atlas_province_name": "Varaždin",
+      "issue_scope_locations": 27,
+      "membership_status": "gap-or-label-review-required",
+      "official_county_english": "Varaždin",
+      "official_county_name": "Varaždinska",
+      "official_local_units_2021": 28,
+      "official_municipalities_2021": 22,
+      "official_towns_2021": 6,
+      "province_id": "framework:province:varazdin:600a45216bdf",
+      "unmatched_official_unit_count": 1,
+      "unmatched_official_unit_names": [
+        "Ljubešćica"
+      ]
+    },
+    {
+      "atlas_province_name": "Sisak-Moslavina",
+      "issue_scope_locations": 19,
+      "membership_status": "roster-count-reconciles",
+      "official_county_english": "Sisak-Moslavina",
+      "official_county_name": "Sisačko-moslavačka",
+      "official_local_units_2021": 19,
+      "official_municipalities_2021": 12,
+      "official_towns_2021": 7,
+      "province_id": "framework:province:sisak-moslavina:b2e12bd34165",
+      "unmatched_official_unit_count": 0,
+      "unmatched_official_unit_names": []
+    },
+    {
+      "atlas_province_name": "Međimurje",
+      "issue_scope_locations": 25,
+      "membership_status": "roster-count-reconciles",
+      "official_county_english": "Međimurje",
+      "official_county_name": "Međimurska",
+      "official_local_units_2021": 25,
+      "official_municipalities_2021": 22,
+      "official_towns_2021": 3,
+      "province_id": "framework:province:meimurje:db4f218a3fa6",
+      "unmatched_official_unit_count": 0,
+      "unmatched_official_unit_names": []
+    },
+    {
+      "atlas_province_name": "Split-Dalmatia",
+      "issue_scope_locations": 55,
+      "membership_status": "roster-count-reconciles",
+      "official_county_english": "Split-Dalmatia",
+      "official_county_name": "Splitsko-dalmatinska",
+      "official_local_units_2021": 55,
+      "official_municipalities_2021": 39,
+      "official_towns_2021": 16,
+      "province_id": "framework:province:split-dalmatia:1efff6c4b5f2",
+      "unmatched_official_unit_count": 0,
+      "unmatched_official_unit_names": []
+    },
+    {
+      "atlas_province_name": "Koprivnica-Križevci",
+      "issue_scope_locations": 25,
+      "membership_status": "roster-count-reconciles",
+      "official_county_english": "Koprivnica-Križevci",
+      "official_county_name": "Koprivničko-križevačka",
+      "official_local_units_2021": 25,
+      "official_municipalities_2021": 22,
+      "official_towns_2021": 3,
+      "province_id": "framework:province:koprivnica-krizevci:6c51e4b2373a",
+      "unmatched_official_unit_count": 0,
+      "unmatched_official_unit_names": []
+    },
+    {
+      "atlas_province_name": "Bjelovar-Bilogora",
+      "issue_scope_locations": 20,
+      "membership_status": "gap-or-label-review-required",
+      "official_county_english": "Bjelovar-Bilogora",
+      "official_county_name": "Bjelovarsko-bilogorska",
+      "official_local_units_2021": 23,
+      "official_municipalities_2021": 18,
+      "official_towns_2021": 5,
+      "province_id": "framework:province:bjelovar-bilogora:dbaf1e92e5a7",
+      "unmatched_official_unit_count": 3,
+      "unmatched_official_unit_names": [
+        "Ivanska",
+        "Rovišće",
+        "Zrinski Topolovac"
+      ]
+    },
+    {
+      "atlas_province_name": "Dubrovnik-Neretva",
+      "issue_scope_locations": 22,
+      "membership_status": "roster-count-reconciles",
+      "official_county_english": "Dubrovnik-Neretva",
+      "official_county_name": "Dubrovačko-neretvanska",
+      "official_local_units_2021": 22,
+      "official_municipalities_2021": 17,
+      "official_towns_2021": 5,
+      "province_id": "framework:province:dubrovnik-neretva:f777dfdf8192",
+      "unmatched_official_unit_count": 0,
+      "unmatched_official_unit_names": []
+    }
+  ],
+  "scope_ids_sha256": "c5816fc5587099904fd5c5cff51801676ec361606153cb39c70e9fb19ef0f116",
+  "source_scope_limits": [
+    "The 2021 census roster establishes unit names, types and county grouping, not official polygon coordinates or coastal/island boundary completeness.",
+    "The DGU INSPIRE Administrative Units feed marks a public-access limitation under INSPIRE Article 13(1)(e); no linked polygon archive was downloaded or reused.",
+    "The pinned geoBoundaries metadata reports 2021 as representative year but says source data was updated 2023-01-19. This is not evidence of an exact legal boundary snapshot on 2021-08-31.",
+    "Its metadata claims CC BY-SA 2.0 and points to OpenStreetMap, while current post-2012 OpenStreetMap data is distributed under ODbL and geoBoundaries gives individual data files their own license. Reuse of the raw geometry was not adjudicated; this packet retains exact restoration/hash instructions rather than redistributing the geometry file.",
+    "Multipart and polygon component counts are source-shape screening only; they do not prove boundary correctness or that all named islands are included.",
+    "Only the exact 224 issue members and eight declared counties are assessed. The whole-country 2021 source roster, other Croatian counties and regional integration are not certified."
+  ],
+  "version": 1
+}

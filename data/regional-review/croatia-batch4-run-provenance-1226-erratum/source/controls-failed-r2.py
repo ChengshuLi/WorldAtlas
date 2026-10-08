@@ -254,8 +254,8 @@ def prior_table_evidence(expected: dict, run_id: str) -> tuple[dict, dict]:
         raise ValueError('prior metric/table evidence differs from the exact issue pin map')
     prior_manifest, prior_ledger = json.loads(prior_manifest_raw), json.loads(prior_ledger_raw)
     expected_ids = {metric['id'] for metric in prior_manifest.get('metrics', [])}
-    if len(expected_ids) != 232 or len(prior_ledger.get('rows', [])) != 232:
-        raise ValueError('prior result ledger no longer covers the complete 232-metric report set')
+    if len(expected_ids) != 232 or len(prior_ledger.get('rows', [])) != 464:
+        raise ValueError('prior result ledger no longer covers both complete retained report vintages')
     old_prefix = prefix + 'evidence/runs/2026-10-06/'
     owned_prefix = str(OWNED.relative_to(ROOT)) + '/evidence/runs/'
     table_rows = []
@@ -266,13 +266,11 @@ def prior_table_evidence(expected: dict, run_id: str) -> tuple[dict, dict]:
             raise ValueError('prior table ledger points outside the retained run vintages')
         tail = row['path'][len(old_prefix):]
         old_run, separator, filename = tail.partition('/')
-        if not separator or old_run != 'run-1':
+        if not separator or old_run not in ('run-1', 'run-2'):
             raise ValueError('prior table ledger has an unknown run name')
-        destinations = ['author-fresh-1/' + filename,
-                        'verified-20261008-r1/run-1/' + filename,
-                        'verified-20261008-r1/run-2/' + filename,
-                        run_id + '/run-1/' + filename,
-                        run_id + '/run-2/' + filename]
+        destinations = (['author-fresh-1/' + filename, 'verified-20261008-r1/run-1/' + filename,
+                         run_id + '/run-1/' + filename] if old_run == 'run-1' else
+                        ['verified-20261008-r1/run-2/' + filename, run_id + '/run-2/' + filename])
         template = template_rows.get((row['path'], row['metric_id']))
         if not template or template['line'] != row['line']:
             raise ValueError('prior metric has no exact rendered-line template')
@@ -282,11 +280,7 @@ def prior_table_evidence(expected: dict, run_id: str) -> tuple[dict, dict]:
             if file.is_symlink() or not file.is_file():
                 raise ValueError(f'preserved/fresh report table is missing: {new_path}')
             lines = file.read_text(encoding='utf-8').splitlines()
-            old_template_path = row['path']
-            if '/run-2/' in destination:
-                old_template_path = old_prefix + 'run-2/' + filename
-            selected_template = template_rows.get((old_template_path, row['metric_id']), template)
-            rendered = selected_template['template'].replace('{value}', str(row['value']))
+            rendered = template['template'].replace('{value}', str(row['value']))
             if row['line'] > len(lines) or lines[row['line'] - 1] != rendered:
                 raise ValueError(f'actual CSV row differs from its independently retained table template: {new_path}:{row["line"]}')
             table_rows.append({**row, 'path': new_path})
