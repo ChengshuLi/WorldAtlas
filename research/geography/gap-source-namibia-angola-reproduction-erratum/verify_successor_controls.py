@@ -73,6 +73,14 @@ def replace_features(path, transformation):
     return path, (json.dumps(doc, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
 
 
+def coherently_change_scope(path):
+    doc = json.loads(path.read_bytes())
+    doc["body"] = doc["body"].replace("two supported successor commands", "one unsupported successor command", 1)
+    doc["body_bytes"] = len(doc["body"].encode())
+    doc["body_sha256"] = digest(doc["body"].encode())
+    return path, (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode()
+
+
 def main():
     cases = []
     component_path = INPUTS / "original-components.geojson"
@@ -104,6 +112,9 @@ def main():
         inventory = PACKET / "source-pin-inventory.json"
         cases.append(run(mode, "changed-pin-inventory",
                          lambda p=inventory: (p, p.read_bytes() + b"\n")))
+        scope_snapshot = PACKET / "sources/issue-1437-amended-scope-snapshot.json"
+        cases.append(run(mode, "coherent-scope-snapshot-edit",
+                         lambda p=scope_snapshot: coherently_change_scope(p)))
         cases.append(run(mode, "changed-source-bytes",
                          lambda: (REPO / "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson",
                                   (REPO / "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson").read_bytes() + b" ")))
@@ -118,7 +129,7 @@ def main():
     result = {"issue": 1437, "verified_at": "2026-10-08", "controls": cases,
               "all_rejected_without_valid_output": True,
               "note": "Input/code edits were temporary in this isolated checkout and restored byte-for-byte in finally blocks."}
-    out = PACKET / "vintages/standalone-controls-final-20261008"
+    out = PACKET / "vintages/standalone-controls-rebound-20261008"
     out.mkdir(exist_ok=False)
     target = out / "control-results.json"
     target.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

@@ -14,8 +14,10 @@ OWNED = Path(__file__).resolve().parent
 REPO = Path(subprocess.check_output(["git", "-C", str(OWNED), "rev-parse", "--show-toplevel"], text=True).strip())
 PIN_FILE = OWNED / "source-pin-inventory.json"
 OLD_ISSUE_SNAPSHOT = OWNED / "sources/issue-1437-api-snapshot.json"
+CURRENT_ISSUE_SNAPSHOT = OWNED / "sources/issue-1437-amended-scope-snapshot.json"
 PIN_SHA256 = "a6aa58da227bb7e9f12b48839fd7299d64396e85b831205c97a1d608fdeb5216"
 OLD_ISSUE_BODY_SHA256 = "380c7a61e78319372ea00805ced0ab36370416f3b62b89f5d5fa1c994caf4e35"
+CURRENT_ISSUE_BODY_SHA256 = "15d6ad98802815d5b325bc4573208e32f24258bbe3dc459a7e553f1d7d155aae"
 COMPONENTS = "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson"
 CONTACTS = "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson"
 BINDINGS = "research/geography/gap-source-namibia-angola-20261006/inputs/input-bindings.json"
@@ -62,6 +64,16 @@ def pinned_inputs(head: str):
     if (old_snapshot["body_sha256"] != OLD_ISSUE_BODY_SHA256
             or sha(old_snapshot["body"].encode()) != OLD_ISSUE_BODY_SHA256):
         raise ValueError("The original issue acceptance snapshot changed")
+    current_snapshot = json.loads(CURRENT_ISSUE_SNAPSHOT.read_bytes())
+    current_body = current_snapshot.get("body", "")
+    if (current_snapshot.get("issue") != 1437
+            or current_snapshot.get("body_sha256") != CURRENT_ISSUE_BODY_SHA256
+            or current_snapshot.get("body_bytes") != len(current_body.encode())
+            or sha(current_body.encode()) != CURRENT_ISSUE_BODY_SHA256
+            or "Explicit Main scope decision" not in current_body
+            or '"max_prs":2' not in current_body
+            or '"owned_paths":["research/geography/gap-source-namibia-angola-reproduction-erratum/"]' not in current_body):
+        raise ValueError("The currently authorized issue scope or ownership changed")
     inventory = json.loads(inv_raw)
     if inventory["issue_body_sha256"] != OLD_ISSUE_BODY_SHA256 or len(inventory["pins"]) != inventory["declared_pin_count"]:
         raise ValueError("Issue pin inventory is incomplete or detached from its acceptance snapshot")
@@ -190,6 +202,7 @@ def build_report(mode: str, head: str, blobs, records, code_receipts):
         pins.append({"path": path, "commit": record["commit"], "bytes": len(blobs[path]), "sha256": sha(blobs[path])})
     return {"version": 1, "issue": 1437, "mode": mode, "source_code": code_receipts,
             "executed_at_commit": head, "issue_acceptance_snapshot_sha256": OLD_ISSUE_BODY_SHA256,
+            "current_issue_scope_sha256": CURRENT_ISSUE_BODY_SHA256,
             "pin_inventory_sha256": PIN_SHA256,
             "inventory": {"candidate_count": 21, "contact_count": 10,
                           "complete_full_product_counts": {"NAM": 109, "AGO": 161},
