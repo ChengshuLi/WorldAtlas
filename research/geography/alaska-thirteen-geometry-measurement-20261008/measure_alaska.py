@@ -870,9 +870,11 @@ def main() -> None:
             "is_empty": bool(positive_union_old_residual.is_empty),
             "is_valid": bool(positive_union_old_residual.is_valid),
             "area_raw_square_degrees_exact": positive_union_old_residual.area,
-            "area_projected_m2_exact": transform(PROJECT, positive_union_old_residual).area,
-            "bounds": list(positive_union_old_residual.bounds),
-            "geometry_sha256": sha(canonical(mapping(positive_union_old_residual)))},
+            "area_projected_m2_exact": (transform(PROJECT, positive_union_old_residual).area
+                if not positive_union_old_residual.is_empty else None),
+            "bounds": (list(positive_union_old_residual.bounds)
+                if not positive_union_old_residual.is_empty else None),
+            "geometry_wkb_sha256": sha(positive_union_old_residual.wkb)},
         "old_target_covered": bool(positive_union.covers(positive_union_old)),
         "candidate_retained": bool(positive_union.covers(positive_union_candidate)),
         "gain_equals_candidate_minus_old_target": bool(positive_union_gain.equals(positive_union_expected_gain)
