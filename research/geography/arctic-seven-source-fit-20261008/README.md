@@ -4,33 +4,31 @@ This packet answers the bounded source-fit question in issue #1481 for exactly t
 
 ## Reproduction
 
-From the repository root, with the pinned Python 3.12 / Shapely 2.1.2 runtime available:
+The files at the packet root are the preserved earlier vintage. Their `execution-budget.json` and phase outputs predate the admission controls described here and do not constitute a qualified rerun. New phase products are written only to fresh `vintages/r2-*` directories.
+
+The admitted rerun is tied to an immutable code commit. On the exact Python 3.12.14 / Shapely 2.1.2 environment recorded by `runtime-lock.json`, first commit the phase runner, its source bridge, phase scripts, native tool lock, runtime lock, and lock builders. Then use that exact commit as `EXECUTION_COMMIT` below. The plan builder verifies that all materialized source and code files match the commit and that the issue-pinned inputs retain their original hashes. It creates `phase-plan.json` once; the plan is immutable for the run. If the runtime or code changes, preserve the plan and start a separately reviewed execution vintage.
 
 ```sh
-bash research/geography/arctic-seven-source-fit-20261008/verify_native_member.sh
-python research/geography/arctic-seven-source-fit-20261008/prepare_sources.py
-python research/geography/arctic-seven-source-fit-20261008/scan_neighbors.py a
-python research/geography/arctic-seven-source-fit-20261008/scan_neighbors.py b
-python research/geography/arctic-seven-source-fit-20261008/reproduce_fit.py
-python research/geography/arctic-seven-source-fit-20261008/build_manifest.py
-node scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json
+PYTHON=/Users/chengshuli/.cache/worldatlas-evidence-python/f28ad176e64a6a5ea260-py3.12.14-arm64/bin/python
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_phase_plan.py --execution-commit "$EXECUTION_COMMIT"
+read -r PLAN_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/phase-plan.json)
+read -r NATIVE_TOOLS_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/native-tools-lock.json)
+bash research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh "$EXECUTION_COMMIT" "$PLAN_SHA" "$NATIVE_TOOLS_SHA"
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-a --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-b --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-c --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-d --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
 ```
 
-`execution-budget.json` records the pre-run cumulative byte admission, then the observed per-phase charges. The cap is 268,435,456 bytes per processing phase, including source bytes, decoded source bytes, code, installed runtime, temporary outputs, final outputs, and receipts. It is a cumulative byte budget, not a memory estimate. Native archive custody runs separately in `verify_native_member.sh`; it reconstructs the registered 45,601,680-byte AAFC semantic archive from six immutable baseline Git blobs, verifies archive SHA-256 `9ed454c129cc92cd999dae6877587997c25cec47bdfdc35a8b3f20863858430e`, extracts the exact `aafc-ecoregions.geojson` member, and compares it byte for byte with the retained native file. Its charge conservatively includes the full 162,109,440-byte decompressed tar stream, the temporary archive, the extracted member, all source inputs, the script and installed command runtime.
+Each wrapper checks the exact plan and execution commit, computes the prospective phase charge before reading source bodies, verifies whole-file runtime/code/source pins, and rejects a used or unsafe output vintage. Python phases admit their outputs through a narrow bridge and publish a completion record last. Every later phase authenticates predecessor output, publication, and execution receipts before using it. The native archive phase separately locks its shell tools and host platform, verifies all six archive-part hashes and the full 45,601,680-byte archive hash, streams the 162,109,440-byte decoded tar payload, and compares the extracted `aafc-ecoregions.geojson` member byte for byte with the retained native file.
 
-Observed cumulative phase charges, including exact code/runtime and outputs/receipts, were:
+The enforced cap is 268,435,456 bytes (256 MiB) per phase, including input bytes, decoded-source and scratch reservations, code, installed runtime, predecessor evidence, outputs, and receipts. This is a cumulative byte budget, not a memory estimate. The plan builder reports prospective charges; only a completed phase's execution receipt records an observed charge. No new `r2-*` phase is qualified until its receipt and publication record exist.
 
-| Phase | Charge | Headroom under 256 MiB |
-| --- | ---: | ---: |
-| Native archive member verification | 262,537,608 bytes | 5,897,848 bytes |
-| Retired-member context extraction | 192,076,655 bytes | 76,358,801 bytes |
-| Active-neighbor scan A (18 parts) | 219,703,332 bytes | 48,732,124 bytes |
-| Active-neighbor scan B (18 parts) | 227,103,737 bytes | 41,331,719 bytes |
-| Source-fit, conservation, and controls | 169,194,766 bytes | 99,240,690 bytes |
+`retired-context` authenticates all seven retired-archive parts before decoding, streams their 56,672,580 decoded bytes to a temporary file, verifies the reconstructed digest, and extracts only the five exact retired location records. The four `neighbor-scan-*` phases partition the complete 36-part active geometry index into four disjoint groups of nine parts. Each records its full feature-ID roster and exact candidate intersections. The final `source-fit` phase requires all four authenticated scan vintages, proves that their rosters are disjoint and together equal all 49,625 indexed features, then checks both complete ecoregion editions, target geometry, hierarchy, parent ecoprovinces, four-family context, and five retired reference records. It uses Shapely/GEOS exact predicates and union operations on stored longitude/latitude coordinates. No snapping, buffering, repair, or tolerance is used.
 
-`prepare_sources.py` is a separate bounded phase. It authenticates all seven retired-archive parts before decoding, streams their 56,672,580 decoded bytes to a temporary file, verifies the reconstructed digest, and extracts only the five exact retired location records. It writes `source-custody-phase2.json` and `retired-member-context-phase2.json`. The earlier `source-custody.json` and `retired-member-context.json` are retained as prior-vintage outputs for comparison; an initial phase-2 custody receipt is preserved under `exploratory/` as well.
-
-The 36 active geometry parts are split into two disjoint 18-part scans. `scan_neighbors.py a` and `scan_neighbors.py b` each record their exact path/hash roster, feature count, and all candidate intersections. They cover 27,000 and 22,625 features respectively. The final `reproduce_fit.py` phase proves the two rosters are disjoint and together equal the full world index, then consumes the scan receipts alongside both complete ecoregion editions, the target geometry, hierarchy, parent ecoprovinces, four-family context, and five retired reference records. It uses Shapely/GEOS exact predicates and union operations on stored longitude/latitude coordinates. No snapping, buffering, repair, or tolerance is used. `candidate-decisions.json` retains each candidate geometry, target union, gain/loss and candidate/gain symmetric-difference geometries, the full active-feature contact list, source-version coverage, parent-source comparison, retired-member comparison, all ten decision premises, and candidate-specific missing premises. Scripts refuse to overwrite a differing prior output; the first exploratory result files remain under `exploratory/`. `proposed-additions.geojson` contains only the three strict exact-addition outputs.
+The final `candidate-decisions.json` retains each candidate geometry, target union, gain/loss and candidate/gain symmetric-difference geometries, the full active-feature contact list, source-version coverage, parent-source comparison, retired-member comparison, all ten decision premises, and candidate-specific missing premises. `proposed-additions.geojson` contains only the three strict exact-addition outputs. New fit products are emitted into the fit vintage, never over the preserved root outputs.
 
 ## Findings
 

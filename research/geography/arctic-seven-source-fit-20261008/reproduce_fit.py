@@ -3,11 +3,9 @@
 from __future__ import annotations
 import gzip, hashlib, json, sys
 from pathlib import Path
-from shapely.geometry import shape, mapping
 ROOT=Path(__file__).resolve().parents[3]
 PACKET=Path(__file__).resolve().parent
-sys.path.insert(0,str(ROOT/'scripts'))
-from evidence.geometry import land_area_m2, METHOD as GEOGRAPHIC_METHOD
+from source_phase_runtime import require_phase, read_bytes, read_json, write_packet_output, predecessor_execution, execution_plan
 CONTEXT=ROOT/'coordination/engineering/eastern-two-gap-repair-20261007/run-two/full-four-family-context.json.gz'
 CANDIDATES=[
  ('physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a',15,'atlas:physical:CAN-15:NWT','Sachs Harbour','Victoria Lowlands'),
@@ -18,15 +16,21 @@ CANDIDATES=[
  ('physical-component:17bb5b7f043b0fb2b447b8ccef216e530fed4595da1aec0feb1dea235bed0dbd',25,'atlas:physical:CAN-25:NUN','Baffin, Unorganized','Foxe-Boothia Lowlands'),
  ('physical-component:54dc96cd3d0edd92ff9d9399d8364e17735d12f11407f707d57912f9f6a66475',25,'atlas:physical:CAN-25:NUN','Baffin, Unorganized','Foxe-Boothia Lowlands'),
 ]
-def read_json(p): return json.loads(Path(p).read_bytes())
 def sha(b): return hashlib.sha256(b).hexdigest()
 def disposition(criteria): return 'repair-ready-geometric-proposal' if all(criteria.values()) else 'unresolved-topology-or-neighbor-condition'
-def write_packet_output(path:Path,raw:bytes):
- if path.exists() and path.read_bytes()!=raw: raise RuntimeError(f'Existing result differs; preserve it and use a fresh run directory: {path.name}')
- if not path.exists(): path.write_bytes(raw)
 def main():
- ctx=json.loads(gzip.decompress(CONTEXT.read_bytes()))
+ require_phase('source-fit')
+ from shapely.geometry import shape, mapping
+ sys.path.insert(0,str(ROOT/'scripts'))
+ from evidence.geometry import land_area_m2, METHOD as GEOGRAPHIC_METHOD
+ ctx=json.loads(gzip.decompress(read_bytes(CONTEXT)))
  comps={x['id']:x for x in ctx['components']}
+ native_extraction=read_json(PACKET/'native-archive-extraction.json')
+ assert native_extraction['status']=='native-member-extracted'
+ assert native_extraction['member_byte_identical_to_retained_file'] is True
+ retired_receipt=predecessor_execution(PACKET/'retired-member-context-phase2.json')
+ assert retired_receipt['phase']=='retired-context'
+ assert any(x['path'].endswith('/r2-native-extract/native-archive-extraction.json') for x in retired_receipt['predecessors'])
  atlas_features={f['id']:f for f in read_json(ROOT/'data/geography/part-29.json')['features']}
  hierarchy={x['id']:x for x in read_json(ROOT/'data/hierarchy.json')}
  native=read_json(PACKET/'sources/aafc-ecoregions.native.geojson')['features']
@@ -43,19 +47,42 @@ def main():
  candidate_geometries={cid:shape(comps[cid]['geometry']) for cid,*_ in CANDIDATES}
  hits_by={cid:[] for cid,*_ in CANDIDATES}; neighbors_by={cid:[] for cid,*_ in CANDIDATES}
  target_ids={cid:target for cid,_eid,target,_admin,_parent in CANDIDATES}
- scan_paths=['neighbor-scan-a.json','neighbor-scan-b.json']
+ scan_paths=['neighbor-scan-a.json','neighbor-scan-b.json','neighbor-scan-c.json','neighbor-scan-d.json']
  idx=read_json(ROOT/'data/world-index.json')
  active_feature_count=0; active_part_count=0; scanned_paths=[]
+ scanned_feature_ids=[]
  for scan_name in scan_paths:
   scan=read_json(PACKET/scan_name)
+  scan_receipt=predecessor_execution(PACKET/scan_name)
+  assert scan['version']==2
+  assert scan_receipt['phase']=='neighbor-scan-'+scan['partition'].lower()
+  plan=execution_plan()
+  assert scan_receipt['baseline_commit']==plan['execution_commit']
+  assert scan_receipt['plan_sha256']==sha((PACKET/'phase-plan.json').read_bytes())
+  scan_inputs={row['path']:row for row in scan_receipt['baseline_inputs']}
+  expected_pins={row['path']:row for row in plan['baseline_files']}
+  for path,row in scan_inputs.items():
+   expected=expected_pins.get(path)
+   assert expected and row['bytes']==expected['bytes'] and row['sha256']==expected['sha256']
+  assert scan_inputs['data/world-index.json']['sha256']==sha(read_bytes(ROOT/'data/world-index.json'))
+  assert scan_inputs['coordination/engineering/eastern-two-gap-repair-20261007/run-two/full-four-family-context.json.gz']['sha256']==sha(read_bytes(CONTEXT))
   active_feature_count+=scan['active_feature_count']; active_part_count+=scan['active_part_count']
   assert scan['candidate_ids']==sorted(candidate_geometries)
+  assert len(scan['active_feature_ids'])==scan['active_feature_count']
+  assert len(scan['active_feature_ids'])==len(set(scan['active_feature_ids']))
+  assert all(isinstance(identity,str) and identity for identity in scan['active_feature_ids'])
+  assert sum(row['feature_count'] for row in scan['roster'])==scan['active_feature_count']
+  for part_row in scan['roster']:
+   pinned=scan_inputs.get(part_row['path'])
+   assert pinned and pinned['bytes']==part_row['bytes'] and pinned['sha256']==part_row['sha256']
+  scanned_feature_ids.extend(scan['active_feature_ids'])
   scanned_paths.extend(row['path'].removeprefix('data/') for row in scan['roster'])
   for cid in candidate_geometries:
    hits_by[cid].extend(scan['hits_by_candidate'][cid])
    neighbors_by[cid].extend(scan['neighbors_by_candidate'][cid])
  assert active_feature_count==49625, active_feature_count
  assert active_part_count==36, active_part_count
+ assert len(scanned_feature_ids)==49625 and len(set(scanned_feature_ids))==49625
  assert len(scanned_paths)==len(set(scanned_paths))==len(idx['parts']) and set(scanned_paths)==set(idx['parts'])
  results=[]
  for cid,eid,target_id,admin,parent in CANDIDATES:

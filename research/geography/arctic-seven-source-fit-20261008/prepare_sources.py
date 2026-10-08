@@ -3,6 +3,7 @@
 from __future__ import annotations
 import gzip, hashlib, io, json, tempfile
 from pathlib import Path
+from source_phase_runtime import require_phase, read_bytes, read_json, write_packet_output
 ROOT=Path(__file__).resolve().parents[3]
 PACKET=Path(__file__).resolve().parent
 BASELINE='960ba2f4fef0fc9881b8a106a944e6e3874e98c9'
@@ -10,7 +11,7 @@ REGISTRY=ROOT/'data/semantic-sources.json'
 INPUT_INDEX=ROOT/'coordination/engineering/eastern-two-gap-repair-20261007/input-index.json'
 RETIRED_DIR=ROOT/'coordination/engineering/eastern-two-gap-repair-20261007/inputs'
 NATIVE=PACKET/'sources/aafc-ecoregions.native.geojson'
-NATIVE_VERIFICATION=PACKET/'native-archive-verification.json'
+NATIVE_VERIFICATION=PACKET/'native-archive-extraction.json'
 RETIRED_IDS={
  'gb:CAN:ADM3:43193130B40321569586625','gb:CAN:ADM3:43193130B96648191896746',
  'gb:CAN:ADM3:43193130B13052897136233','gb:CAN:ADM3:43193130B30076837012949',
@@ -18,8 +19,7 @@ RETIRED_IDS={
 def sha(data:bytes)->str:return hashlib.sha256(data).hexdigest()
 def descriptor(path:str,data:bytes)->dict:return {'path':path,'bytes':len(data),'sha256':sha(data),'hash_kind':'file-bytes'}
 def write_new_or_same(path:Path,data:bytes)->None:
- if path.exists() and path.read_bytes()!=data: raise RuntimeError(f'Existing evidence output differs; preserve it and use a fresh run directory: {path.name}')
- if not path.exists(): path.write_bytes(data)
+ write_packet_output(path,data)
 def extract_selected_locations(stream, wanted:set[str])->tuple[dict[str,dict],int]:
  stream.seek(0); text_stream=io.TextIOWrapper(stream,encoding='utf-8',newline='')
  decoder=json.JSONDecoder(); buffer=''; marker='"locations":['; pos=-1
@@ -50,10 +50,11 @@ def extract_selected_locations(stream, wanted:set[str])->tuple[dict[str,dict],in
   buffer=buffer[end:]
  return selected,count
 def main()->None:
- registry_bytes=REGISTRY.read_bytes(); registry=json.loads(registry_bytes)
- native_verification=json.loads(NATIVE_VERIFICATION.read_bytes())
+ require_phase('retired-context')
+ registry_bytes=read_bytes(REGISTRY); registry=json.loads(registry_bytes)
+ native_verification=read_json(NATIVE_VERIFICATION)
  member_row=next(x for x in registry['files'] if x['path']=='aafc-ecoregions.geojson')
- native_bytes=NATIVE.read_bytes(); native=json.loads(native_bytes)
+ native_bytes=read_bytes(NATIVE); native=json.loads(native_bytes)
  ids=[f['properties'].get('ECOREGION_ID') for f in native['features']]
  assert sha(native_bytes)==member_row['sha256']=='a565563a6aef794df831dc9251fb4108018e20a4f0172acbc36b599f9b7f4abf'
  assert len(native['features'])==218 and len(set(ids))==194 and ids.count(15)==1 and ids.count(25)==1
@@ -61,7 +62,7 @@ def main()->None:
  assert native_verification['member_sha256']==sha(native_bytes) and native_verification['member_bytes']==len(native_bytes)
  assert native_verification['member_byte_identical_to_retained_file'] is True
  # Authenticate all seven archive pieces before decoding; combined encoded+decoded phase is capped at 64 MiB.
- input_index=json.loads(INPUT_INDEX.read_bytes()); aliases=[]
+ input_index=read_json(INPUT_INDEX); aliases=[]
  for i in range(47,54):
   name=f'i{i:03d}.bin.gz'; aliases.append(next(a for a in input_index['aliases'] if a['ordinary']['path'].endswith(name)))
  encoded_total=sum(a['ordinary']['bytes'] for a in aliases); decoded_total=sum(a['ordinary']['decoded_bytes'] for a in aliases)
@@ -69,7 +70,7 @@ def main()->None:
  piece_rows=[]; combined_hash=hashlib.sha256(); combined_bytes=0
  with tempfile.TemporaryFile() as retired_stream:
   for alias in aliases:
-   row=alias['ordinary']; payload=(RETIRED_DIR/Path(row['path']).name).read_bytes()
+   row=alias['ordinary']; payload=read_bytes(RETIRED_DIR/Path(row['path']).name)
    assert len(payload)==row['bytes'] and sha(payload)==row['sha256']
    part_hash=hashlib.sha256(); part_bytes=0
    with gzip.GzipFile(fileobj=io.BytesIO(payload),mode='rb') as gz:

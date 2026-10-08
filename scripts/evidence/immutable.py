@@ -53,6 +53,7 @@ class Baseline:
             raise ValueError('Invalid bounded phase budget')
         self.max_phase_bytes = max_phase_bytes
         self.consumed = {}
+        self._captured = {}
         resolved = self._git('rev-parse', '--verify', '--end-of-options', commit + '^{commit}').decode().strip()
         if resolved != commit:
             raise ValueError('Baseline commit mismatch')
@@ -72,6 +73,8 @@ class Baseline:
 
     def read(self, name):
         name = safe_path(name)
+        if name in self._captured:
+            return self._captured[name]
         row = self._git('ls-tree', '-z', self.commit, '--', name).decode().rstrip('\0')
         if not row.startswith(('100644 ', '100755 ')) or '\t' + name != row[row.find('\t'):]:
             raise ValueError('Baseline evidence must be an ordinary committed file: ' + name)
@@ -80,7 +83,9 @@ class Baseline:
         if size > MAX_FILE_BYTES:
             raise ValueError('Baseline file exceeds byte budget')
         self.admit(name, size)
-        return self._git('cat-file', 'blob', blob)
+        raw = self._git('cat-file', 'blob', blob)
+        self._captured[name] = raw
+        return raw
 
     def admit(self, name, size):
         """Account unique actual raw/decoded inputs, including index discoveries."""
