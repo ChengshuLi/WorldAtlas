@@ -138,9 +138,13 @@ def main() -> None:
     rows = rows_from_source()
     output = render(rows)
     if args.write:
-        if OUTPUT.exists():
-            raise SystemExit(f"Refusing to overwrite existing output: {OUTPUT}")
-        OUTPUT.write_bytes(output)
+        try:
+            # Exclusive creation rejects regular files and symlinks (including
+            # dangling symlinks) without a check-then-write race.
+            with OUTPUT.open("xb") as destination:
+                destination.write(output)
+        except FileExistsError:
+            raise SystemExit(f"Refusing to overwrite existing output: {OUTPUT}") from None
         print(f"wrote {OUTPUT.relative_to(REPO)} sha256={hashlib.sha256(output).hexdigest()}")
     else:
         if not OUTPUT.exists():

@@ -1,5 +1,6 @@
 import hashlib
 import pathlib
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -24,6 +25,20 @@ class CrosswalkReproductionTests(unittest.TestCase):
             with patch.object(reproduce, "SOURCE", altered):
                 with self.assertRaisesRegex(SystemExit, "source hash mismatch"):
                     reproduce.rows_from_source()
+
+    def test_write_refuses_dangling_symlink_without_creating_target(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            target = root / "outside.csv"
+            link = root / "crosswalk.csv"
+            link.symlink_to(target)
+            with patch.object(reproduce, "OUTPUT", link), patch.object(
+                sys, "argv", ["reproduce.py", "--write"]
+            ):
+                with self.assertRaisesRegex(SystemExit, "Refusing to overwrite"):
+                    reproduce.main()
+            self.assertTrue(link.is_symlink())
+            self.assertFalse(target.exists())
 
     def test_two_renderings_are_byte_identical(self):
         first = reproduce.render(reproduce.rows_from_source())
