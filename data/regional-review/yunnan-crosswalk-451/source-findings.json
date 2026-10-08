@@ -1,0 +1,388 @@
+{
+  "limits": [
+    "This measures source-internal adjacency only.",
+    "No authoritative legal map or independent county polygon is compared.",
+    "Validity and component count do not establish territorial identity, completeness, vintage correctness, or legal boundary position."
+  ],
+  "method": "Shapely boundary intersection against all features in the retained source file; names and IDs are read from source properties.",
+  "source": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+  "source_bytes": 7618692,
+  "source_feature_count": 2391,
+  "source_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+  "subjects": [
+    {
+      "boundary_metric_limit": "Intersection length is in raw coordinate degrees; source-internal adjacency only, not independent/legal boundary evidence.",
+      "bounds_wgs84": [
+        103.49569578900008,
+        25.157420649000073,
+        104.23210913600008,
+        26.115121643000066
+      ],
+      "component_count": 1,
+      "geometry_type": "Polygon",
+      "properties": {
+        "shapeGroup": "CHN",
+        "shapeID": "17275852B22092438679853",
+        "shapeISO": "",
+        "shapeName": "Qujingshi",
+        "shapeType": "ADM2"
+      },
+      "source_name": "Qujingshi",
+      "source_neighbor_count": 7,
+      "source_neighbors": [
+        {
+          "shared_boundary_degrees": 0.97486665,
+          "source_name": "Fuyuanxian",
+          "source_shape_id": "17275852B63296783362201"
+        },
+        {
+          "shared_boundary_degrees": 0.33647167,
+          "source_name": "Huizhexian",
+          "source_shape_id": "17275852B10474076998029"
+        },
+        {
+          "shared_boundary_degrees": 0.34927994,
+          "source_name": "Luliangxian",
+          "source_shape_id": "17275852B59271898684947"
+        },
+        {
+          "shared_boundary_degrees": 0.33410196,
+          "source_name": "Luopingxian",
+          "source_shape_id": "17275852B93143295309052"
+        },
+        {
+          "shared_boundary_degrees": 0.5198176,
+          "source_name": "Malongxian",
+          "source_shape_id": "17275852B96140347691266"
+        },
+        {
+          "shared_boundary_degrees": 0.84183139,
+          "source_name": "Xuanweishi",
+          "source_shape_id": "17275852B78997448672423"
+        },
+        {
+          "shared_boundary_degrees": 0.25646225,
+          "source_name": "Xundianhuizuyizuzizhixian",
+          "source_shape_id": "17275852B18732774826052"
+        }
+      ],
+      "subject_id": "gb:CHN:ADM2:17275852B22092438679853",
+      "valid": true
+    },
+    {
+      "boundary_metric_limit": "Intersection length is in raw coordinate degrees; source-internal adjacency only, not independent/legal boundary evidence.",
+      "bounds_wgs84": [
+        103.18559761100005,
+        27.00009378900006,
+        103.74166960300005,
+        27.50239780800007
+      ],
+      "component_count": 1,
+      "geometry_type": "Polygon",
+      "properties": {
+        "shapeGroup": "CHN",
+        "shapeID": "17275852B42043031438117",
+        "shapeISO": "",
+        "shapeName": "Ludingshi",
+        "shapeType": "ADM2"
+      },
+      "source_name": "Ludingshi",
+      "source_neighbor_count": 4,
+      "source_neighbors": [
+        {
+          "shared_boundary_degrees": 0.21384367,
+          "source_name": "Huizhexian",
+          "source_shape_id": "17275852B10474076998029"
+        },
+        {
+          "shared_boundary_degrees": 0.60536547,
+          "source_name": "Qiaojiaxian",
+          "source_shape_id": "17275852B12551067010404"
+        },
+        {
+          "shared_boundary_degrees": 0.27372375,
+          "source_name": "Weininglizuhuizumiaozuzizhixian",
+          "source_shape_id": "17275852B55803803315704"
+        },
+        {
+          "shared_boundary_degrees": 1.06766566,
+          "source_name": "Zhaotongshi",
+          "source_shape_id": "17275852B6036299829891"
+        }
+      ],
+      "subject_id": "gb:CHN:ADM2:17275852B42043031438117",
+      "valid": true
+    },
+    {
+      "boundary_metric_limit": "Intersection length is in raw coordinate degrees; source-internal adjacency only, not independent/legal boundary evidence.",
+      "bounds_wgs84": [
+        103.59561173800006,
+        23.360222815000043,
+        104.76745399000004,
+        24.01467838900004
+      ],
+      "component_count": 1,
+      "geometry_type": "Polygon",
+      "properties": {
+        "shapeGroup": "CHN",
+        "shapeID": "17275852B47269106522129",
+        "shapeISO": "",
+        "shapeName": "Jianshanxian",
+        "shapeType": "ADM2"
+      },
+      "source_name": "Jianshanxian",
+      "source_neighbor_count": 6,
+      "source_neighbors": [
+        {
+          "shared_boundary_degrees": 0.63023274,
+          "source_name": "Guangnanxian",
+          "source_shape_id": "17275852B68781805037856"
+        },
+        {
+          "shared_boundary_degrees": 0.41465968,
+          "source_name": "Kaiyuanshi",
+          "source_shape_id": "17275852B10038962244175"
+        },
+        {
+          "shared_boundary_degrees": 0.12912627,
+          "source_name": "Mengzixian",
+          "source_shape_id": "17275852B98994351670446"
+        },
+        {
+          "shared_boundary_degrees": 1.1761491,
+          "source_name": "Qiubeixian",
+          "source_shape_id": "17275852B3143049294932"
+        },
+        {
+          "shared_boundary_degrees": 1.10354491,
+          "source_name": "Wenshanxian",
+          "source_shape_id": "17275852B76506385801060"
+        },
+        {
+          "shared_boundary_degrees": 0.42843941,
+          "source_name": "Xichouxian",
+          "source_shape_id": "17275852B68348636009640"
+        }
+      ],
+      "subject_id": "gb:CHN:ADM2:17275852B47269106522129",
+      "valid": true
+    },
+    {
+      "boundary_metric_limit": "Intersection length is in raw coordinate degrees; source-internal adjacency only, not independent/legal boundary evidence.",
+      "bounds_wgs84": [
+        103.16209819700003,
+        27.188279849000025,
+        103.93571204400007,
+        27.650565228000062
+      ],
+      "component_count": 1,
+      "geometry_type": "Polygon",
+      "properties": {
+        "shapeGroup": "CHN",
+        "shapeID": "17275852B6036299829891",
+        "shapeISO": "",
+        "shapeName": "Zhaotongshi",
+        "shapeType": "ADM2"
+      },
+      "source_name": "Zhaotongshi",
+      "source_neighbor_count": 7,
+      "source_neighbors": [
+        {
+          "shared_boundary_degrees": 0.1847727,
+          "source_name": "Daguanxian",
+          "source_shape_id": "17275852B83580863536590"
+        },
+        {
+          "shared_boundary_degrees": 0.17316158,
+          "source_name": "Jinyangxian",
+          "source_shape_id": "17275852B17138311811008"
+        },
+        {
+          "shared_boundary_degrees": 1.06766566,
+          "source_name": "Ludingshi",
+          "source_shape_id": "17275852B42043031438117"
+        },
+        {
+          "shared_boundary_degrees": 0.05053604,
+          "source_name": "Qiaojiaxian",
+          "source_shape_id": "17275852B12551067010404"
+        },
+        {
+          "shared_boundary_degrees": 0.32681841,
+          "source_name": "Weininglizuhuizumiaozuzizhixian",
+          "source_shape_id": "17275852B55803803315704"
+        },
+        {
+          "shared_boundary_degrees": 0.21020101,
+          "source_name": "Yiliangxian",
+          "source_shape_id": "17275852B29331893920720"
+        },
+        {
+          "shared_boundary_degrees": 0.6546291,
+          "source_name": "Yongshanxian",
+          "source_shape_id": "17275852B2220262487318"
+        }
+      ],
+      "subject_id": "gb:CHN:ADM2:17275852B6036299829891",
+      "valid": true
+    },
+    {
+      "boundary_metric_limit": "Intersection length is in raw coordinate degrees; source-internal adjacency only, not independent/legal boundary evidence.",
+      "bounds_wgs84": [
+        103.08981289900004,
+        23.82491680100003,
+        103.81502568500008,
+        24.703631483000038
+      ],
+      "component_count": 1,
+      "geometry_type": "Polygon",
+      "properties": {
+        "shapeGroup": "CHN",
+        "shapeID": "17275852B72941365568170",
+        "shapeISO": "",
+        "shapeName": "Milexian",
+        "shapeType": "ADM2"
+      },
+      "source_name": "Milexian",
+      "source_neighbor_count": 7,
+      "source_neighbors": [
+        {
+          "shared_boundary_degrees": 0.35668849,
+          "source_name": "Huaningxian",
+          "source_shape_id": "17275852B85094967299324"
+        },
+        {
+          "shared_boundary_degrees": 0.34389837,
+          "source_name": "Jianshuixian",
+          "source_shape_id": "17275852B68484553596353"
+        },
+        {
+          "shared_boundary_degrees": 0.58183752,
+          "source_name": "Kaiyuanshi",
+          "source_shape_id": "17275852B10038962244175"
+        },
+        {
+          "shared_boundary_degrees": 0.30856988,
+          "source_name": "Lunanyizuzizhixian",
+          "source_shape_id": "17275852B67660611492152"
+        },
+        {
+          "shared_boundary_degrees": 0.55729797,
+          "source_name": "Luxixian",
+          "source_shape_id": "17275852B87805726740652"
+        },
+        {
+          "shared_boundary_degrees": 0.43167553,
+          "source_name": "Qiubeixian",
+          "source_shape_id": "17275852B3143049294932"
+        },
+        {
+          "shared_boundary_degrees": 0.27873584,
+          "source_name": "Yiliangxian",
+          "source_shape_id": "17275852B59300404294395"
+        }
+      ],
+      "subject_id": "gb:CHN:ADM2:17275852B72941365568170",
+      "valid": true
+    },
+    {
+      "boundary_metric_limit": "Intersection length is in raw coordinate degrees; source-internal adjacency only, not independent/legal boundary evidence.",
+      "bounds_wgs84": [
+        103.74766825900008,
+        23.131661326000028,
+        104.45263127200008,
+        23.74345053600007
+      ],
+      "component_count": 1,
+      "geometry_type": "Polygon",
+      "properties": {
+        "shapeGroup": "CHN",
+        "shapeID": "17275852B76506385801060",
+        "shapeISO": "",
+        "shapeName": "Wenshanxian",
+        "shapeType": "ADM2"
+      },
+      "source_name": "Wenshanxian",
+      "source_neighbor_count": 5,
+      "source_neighbors": [
+        {
+          "shared_boundary_degrees": 1.10354491,
+          "source_name": "Jianshanxian",
+          "source_shape_id": "17275852B47269106522129"
+        },
+        {
+          "shared_boundary_degrees": 0.58159979,
+          "source_name": "Maguanxian",
+          "source_shape_id": "17275852B76703841753402"
+        },
+        {
+          "shared_boundary_degrees": 0.22334844,
+          "source_name": "Mengzixian",
+          "source_shape_id": "17275852B98994351670446"
+        },
+        {
+          "shared_boundary_degrees": 0.29347864,
+          "source_name": "Pingbianmiaozuzizhixian",
+          "source_shape_id": "17275852B3395613846237"
+        },
+        {
+          "shared_boundary_degrees": 0.10595239,
+          "source_name": "Xichouxian",
+          "source_shape_id": "17275852B68348636009640"
+        }
+      ],
+      "subject_id": "gb:CHN:ADM2:17275852B76506385801060",
+      "valid": true
+    },
+    {
+      "boundary_metric_limit": "Intersection length is in raw coordinate degrees; source-internal adjacency only, not independent/legal boundary evidence.",
+      "bounds_wgs84": [
+        103.22305435200008,
+        23.076358739000057,
+        103.83058983900008,
+        23.58940606300007
+      ],
+      "component_count": 1,
+      "geometry_type": "Polygon",
+      "properties": {
+        "shapeGroup": "CHN",
+        "shapeID": "17275852B98994351670446",
+        "shapeISO": "",
+        "shapeName": "Mengzixian",
+        "shapeType": "ADM2"
+      },
+      "source_name": "Mengzixian",
+      "source_neighbor_count": 5,
+      "source_neighbors": [
+        {
+          "shared_boundary_degrees": 0.71921103,
+          "source_name": "Gejiushi",
+          "source_shape_id": "17275852B42027013653658"
+        },
+        {
+          "shared_boundary_degrees": 0.12912627,
+          "source_name": "Jianshanxian",
+          "source_shape_id": "17275852B47269106522129"
+        },
+        {
+          "shared_boundary_degrees": 0.35835711,
+          "source_name": "Kaiyuanshi",
+          "source_shape_id": "17275852B10038962244175"
+        },
+        {
+          "shared_boundary_degrees": 0.73616972,
+          "source_name": "Pingbianmiaozuzizhixian",
+          "source_shape_id": "17275852B3395613846237"
+        },
+        {
+          "shared_boundary_degrees": 0.22334844,
+          "source_name": "Wenshanxian",
+          "source_shape_id": "17275852B76506385801060"
+        }
+      ],
+      "subject_id": "gb:CHN:ADM2:17275852B98994351670446",
+      "valid": true
+    }
+  ],
+  "target_count": 7
+}
