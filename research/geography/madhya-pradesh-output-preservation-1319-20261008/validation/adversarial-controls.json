@@ -1,0 +1,109 @@
+{
+  "actual_entry_points": [
+    "producer_republish.py",
+    "control_writer.py"
+  ],
+  "cases": {
+    "actual_control_writer_dangling_symlink": {
+      "diagnostic": "control output admission failed: ValueError: Symlink output ancestor refused: research/geography/madhya-pradesh-output-preservation-1319-20261008/vintages/blocked-dangling-symlink",
+      "exit_code": 2,
+      "outcome": "passed"
+    },
+    "actual_control_writer_ordinary_directory": {
+      "diagnostic": "control output admission failed: FileExistsError: Fresh output vintage already exists: research/geography/madhya-pradesh-output-preservation-1319-20261008/vintages/blocked-directory",
+      "exit_code": 2,
+      "outcome": "passed"
+    },
+    "actual_producer_live_symlink": {
+      "diagnostic": "producer output admission failed: ValueError: Symlink output ancestor refused: research/geography/madhya-pradesh-output-preservation-1319-20261008/vintages/blocked-live-symlink",
+      "exit_code": 2,
+      "outcome": "passed"
+    },
+    "actual_producer_ordinary_file": {
+      "diagnostic": "producer output admission failed: FileExistsError: Fresh output vintage already exists: research/geography/madhya-pradesh-output-preservation-1319-20261008/vintages/blocked-file",
+      "exit_code": 2,
+      "outcome": "passed"
+    },
+    "actual_producer_traversal": {
+      "diagnostic": "producer_republish.py: error: run-id must be 1-64 lowercase letters, digits or interior hyphens",
+      "exit_code": 2,
+      "outcome": "passed"
+    },
+    "changed_input": {
+      "changed_input_rejected": true,
+      "original_sha256": "0a268b15caf1878f7dde4c3478cc1c34ec5a4e7aee76dd173fa2184c8ea63be1",
+      "outcome": "passed"
+    },
+    "complete_preflight_cases": {
+      "cases": {
+        "dangling-symlink": "passed",
+        "live-symlink": "passed",
+        "ordinary-directory": "passed",
+        "ordinary-file": "passed",
+        "symlinked-ancestor": "passed",
+        "traversal": "passed"
+      },
+      "cases_passed": 6,
+      "method_id": "safe-output-admission",
+      "outcome": "passed",
+      "scope": "Private output-path controls only; no source or geography claim",
+      "targets_preserved": [
+        "ordinary-file",
+        "ordinary-directory",
+        "live-symlink"
+      ],
+      "version": 1
+    },
+    "control_writer_two_fresh_runs": {
+      "outcome": "passed",
+      "products": {
+        "correction-ledger.json": "e0754767ac869006e1ebf956f7cdd4bf757bde0260fd668207df9c6ca4d79e03",
+        "negative-control.json": "3fd70ee595864e1c66ae0eece9bf51ec9c0d0e85869c35557786b6751d86c4c8",
+        "positive-control.json": "3498f93335baa8a64ba6d8f28a7907e1b7fd54f47ba63d6836c263d3c62f8c80",
+        "reproducibility.json": "0815c55d6178b0d70a63926dd3fca973050315a8886942d35d390b93ab8ab94e",
+        "summary.json": "9a769d322326b2a113cc750080f459c3826f975c2aee104cf6d9bf1b5e23628c"
+      }
+    },
+    "full_retained_row_join": {
+      "changed_fields": 16,
+      "classification_counts": {
+        "correction-needed": 11,
+        "insufficient-evidence": 213,
+        "justified": 0
+      },
+      "corrected_sha256": "0a268b15caf1878f7dde4c3478cc1c34ec5a4e7aee76dd173fa2184c8ea63be1",
+      "no_geometry_replay": true,
+      "original_sha256": "9c5a0cbc869918466c5162aead971a5ccedd72fe42cba007c2660bf120da21ad",
+      "outcome": "passed",
+      "province_groups": 27,
+      "subjects": 224
+    },
+    "missing_retained_input": {
+      "expected_output_vintage": false,
+      "outcome": "passed"
+    },
+    "post_computation_symlink": {
+      "outcome": "passed",
+      "publication_receipt": false,
+      "sentinel_sha256": "4abee46884b3b3d068b137bef9c1dbd81a42b672d4da7feaceed068c8ca5abec",
+      "target_unchanged": true
+    },
+    "producer_two_fresh_runs": {
+      "outcome": "passed",
+      "product": "assessments.json.gz",
+      "run_one_sha256": "0a268b15caf1878f7dde4c3478cc1c34ec5a4e7aee76dd173fa2184c8ea63be1",
+      "run_two_sha256": "0a268b15caf1878f7dde4c3478cc1c34ec5a4e7aee76dd173fa2184c8ea63be1"
+    }
+  },
+  "issue": 1485,
+  "limits": [
+    "Both successful producer outputs republish retained compressed results; the 40,040,002-byte decoded native source exceeds the 32 MiB file limit, so no fresh geometry science was run.",
+    "Tests establish output-path behavior and report reproduction, not current territorial meaning, complete boundaries, source rights, or geographic approval."
+  ],
+  "output_safety_baseline": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+  "repository_head": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+  "status": "passed",
+  "tested_at_utc": "2026-10-08T09:25:08.531755+00:00",
+  "version": 1,
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2"
+}
