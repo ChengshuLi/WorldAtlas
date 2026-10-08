@@ -1,0 +1,28 @@
+{
+  "controls": {
+    "dangling_symlink": {
+      "rejected": true,
+      "symlink_preserved": true,
+      "target_not_created": true
+    },
+    "existing_output": {
+      "no_success_receipt": true,
+      "rejected": true,
+      "sentinel_unchanged": true
+    },
+    "invalid_extension": {
+      "output_not_created": true,
+      "rejected": true
+    },
+    "invalid_receipt": {
+      "no_success_receipt": true,
+      "output_not_created": true,
+      "rejected": true
+    }
+  },
+  "issue": 1369,
+  "kind": "negative-control",
+  "method_id": "exact-source-crosswalk-integrity",
+  "outcome": "passed",
+  "version": 1
+}

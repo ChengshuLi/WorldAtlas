@@ -111,17 +111,23 @@ def bounded_archive(zip_bytes: bytes):
 def safe_output_path(relative: str, receipt: str | None) -> tuple[Path, Path | None]:
     require(relative and not Path(relative).is_absolute() and ".." not in Path(relative).parts,
             "Output directory must be a safe relative path")
-    target = (PACKET / relative).resolve()
+    target = PACKET / relative
     require(RUNS == PACKET / "runs" and not RUNS.is_symlink(),
             "Output root must be the ordinary owned runs directory")
-    require(target.parent == RUNS.resolve(), "Output must be a direct child of this packet's runs directory")
-    require(not target.exists(), "Output vintage already exists; outputs are immutable")
+    require(target.parent == RUNS, "Output must be a direct child of this packet's runs directory")
+    require(not target.is_symlink() and not target.exists(),
+            "Output vintage already exists or is a symlink; outputs are immutable")
     receipt_path = None
     if receipt is not None:
-        require(not Path(receipt).is_absolute() and ".." not in Path(receipt).parts,
+        receipt_relative = Path(receipt)
+        require(not receipt_relative.is_absolute() and ".." not in receipt_relative.parts
+                and receipt_relative.parts and all(part not in ("", ".") for part in receipt_relative.parts),
                 "Receipt path must be relative to the new output vintage")
-        receipt_path = (target / receipt).resolve()
-        require(target in receipt_path.parents and receipt_path.suffix == ".json",
+        receipt_path = target.joinpath(receipt_relative)
+        require(receipt_path.suffix == ".json" and receipt_path.name not in {
+                    "baseline-input-digests.json", "subject-source-crosswalk.jsonl",
+                    "reproduction-summary.json", "positive-control.json",
+                    "negative-control.json", "legacy-controls.json"},
                 "Receipt must be a JSON path inside the new output vintage")
     return target, receipt_path
 
@@ -428,13 +434,15 @@ def main() -> None:
     require(sys.version_info >= (3, 12), "Python 3.12 or later is required for this reproduction")
     run_name = sys.argv[1]
     require(run_name and Path(run_name).name == run_name, "Run name must be a single path component")
+    requested_receipt = sys.argv[2] if len(sys.argv) == 3 else "receipt.json"
+    # Admit the complete destination before source loading, temporary controls,
+    # or reproduction. This keeps rejected CLI requests side-effect free.
+    target, receipt_path = safe_output_path(f"runs/{run_name}", requested_receipt)
     pins, checked = verify_pins()
     module = load_pinned_producer(checked["original_1146_7"])
-    # All computation and legacy controls occur before any owned output is created.
     safe_guards = exercise_safe_guards(checked["original_1146_14"])
     legacy = exercise_legacy(checked["original_1146_7"], checked["original_1146_4"],
                              checked["original_1146_14"], module)
-    target, receipt_path = safe_output_path(f"runs/{run_name}", sys.argv[2] if len(sys.argv) == 3 else "receipt.json")
     files = build_result(pins, checked, module, run_name)
     control_bytes = (json.dumps({"version": 1, "issue": 1369, "legacy_main": legacy,
                                  "safe_admission": safe_guards},
@@ -445,7 +453,8 @@ def main() -> None:
                            for name, data in sorted(files.items())}}
     receipt_bytes = (json.dumps(receipt, sort_keys=True, indent=2) + "\n").encode()
     require(receipt_path is not None, "Validated receipt path unexpectedly absent")
-    files["receipt.json"] = receipt_bytes
+    receipt_relative = receipt_path.relative_to(target)
+    files[str(receipt_relative)] = receipt_bytes
     expanded = json.loads(files["reproduction-summary.json"])['census_archive_expanded_bytes']
     phase_bytes = sum(len(value) for value in checked.values()) + expanded + sum(map(len, files.values()))
     require(phase_bytes <= MAX_TOTAL,

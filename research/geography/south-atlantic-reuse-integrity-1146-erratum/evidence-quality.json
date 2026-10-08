@@ -910,8 +910,8 @@
   "outputs": [
     {
       "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/README.md",
-      "bytes": 6508,
-      "sha256": "1b80e2fbe46198b616bd31068fbddb42ab36871ce9b5831e20dc73b3af88b3ad",
+      "bytes": 6985,
+      "sha256": "0a553b80ae6279055f5ae8b6cdc2f928cb0df39c2c1d788edf2d22393e7956e9",
       "hash_kind": "file-bytes"
     },
     {
@@ -922,20 +922,32 @@
     },
     {
       "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/reproduce_integrity.py",
-      "bytes": 25419,
-      "sha256": "c4f7915839f82065ea16bce989639954297b09256d2791f62762ec1e298b6195",
+      "bytes": 26013,
+      "sha256": "3b3efcff41ee4229c393aeb019f29f130447995bd6edc67822af1dfed7285e7f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/reproducibility.json",
-      "bytes": 926,
-      "sha256": "5e4d03c589e9b40c909b8dc8b8324e266993806795b1d0ed9bb86030ea5c821e",
+      "bytes": 986,
+      "sha256": "e702085ec95a9f74115b5617da752f15136d8af07fde5b4e419db12439d8f60d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/source-pins.json",
       "bytes": 11151,
       "sha256": "a6b40dd3f1161d32dea5d0559f517158b4a58af509a668539f514be007f4d2b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/check_cli_admission.py",
+      "bytes": 2919,
+      "sha256": "993bc20554852d2743f60f1634f3d3827ae638b1bf981371d25e1bfd281dd9c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/destination-controls.json",
+      "bytes": 620,
+      "sha256": "04f04d4583ff546a5824301e881de18625924356d255d070c2b5003e3902b930",
       "hash_kind": "file-bytes"
     },
     {
@@ -1018,6 +1030,90 @@
     },
     {
       "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fourteen/subject-source-crosswalk.jsonl",
+      "bytes": 117620,
+      "sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/baseline-input-digests.json",
+      "bytes": 11049,
+      "sha256": "ea46cfc3a17e946094627747f354c328891b66776afc77a758536f872dfeb015",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/legacy-controls.json",
+      "bytes": 136893,
+      "sha256": "c480dc557b3dfb11d0d7eaba22400412f9ffc1443c0862124fd8086ee07d69cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/negative-control.json",
+      "bytes": 566,
+      "sha256": "cdd19ca79ff08c7e08222532f6a82c4a9e1b5b9de290fb2222f3397e0367c003",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/positive-control.json",
+      "bytes": 285,
+      "sha256": "3eb26483293d32ad21addd8eb76624f9e3c8d00995f51adfff134a25dcd8b189",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/receipts/run.json",
+      "bytes": 955,
+      "sha256": "00ca85f9546f1bea15f1c981a832a6de28318768fef2d9afdf2aad53958058f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/reproduction-summary.json",
+      "bytes": 1269,
+      "sha256": "079df8e05d2ebb4b1af867b12606fb4f8e2b25e1418c49b14831c78202f62b89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/subject-source-crosswalk.jsonl",
+      "bytes": 117620,
+      "sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/baseline-input-digests.json",
+      "bytes": 11049,
+      "sha256": "f349a81a2f429b255a7d07f821f80f3d450ae1e7c516307544c21edb1604822b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/legacy-controls.json",
+      "bytes": 136893,
+      "sha256": "22e9d134ab0fef7743bef611ec18a4d823dc13762a438bb18f8592382c297920",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/negative-control.json",
+      "bytes": 566,
+      "sha256": "cdd19ca79ff08c7e08222532f6a82c4a9e1b5b9de290fb2222f3397e0367c003",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/positive-control.json",
+      "bytes": 285,
+      "sha256": "3eb26483293d32ad21addd8eb76624f9e3c8d00995f51adfff134a25dcd8b189",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/receipts/run.json",
+      "bytes": 955,
+      "sha256": "483cfdee9973d0571c1d5ee1257bce71940571626caae1aaaba0a28a7c6d6d1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/reproduction-summary.json",
+      "bytes": 1269,
+      "sha256": "cb6d47e4866b22a3ab631ddfd3ea2a307741d94eebd67ceb062cd16bedfc35da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/subject-source-crosswalk.jsonl",
       "bytes": 117620,
       "sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
       "hash_kind": "file-bytes"
@@ -1128,22 +1224,22 @@
   "metric_bindings": [
     {
       "metric_id": "scope-subjects",
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/reproduction-summary.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/reproduction-summary.json",
       "json_pointer": "/subject_count"
     },
     {
       "metric_id": "recomputed-crosswalk-rows",
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/reproduction-summary.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/reproduction-summary.json",
       "json_pointer": "/scoped_unique_name_state_matches"
     },
     {
       "metric_id": "census-archive-bytes",
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/reproduction-summary.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/reproduction-summary.json",
       "json_pointer": "/census_archive_bytes"
     },
     {
       "metric_id": "census-dbf-records",
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/reproduction-summary.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/reproduction-summary.json",
       "json_pointer": "/census_dbf_rows"
     }
   ],
@@ -1152,13 +1248,19 @@
       "method_id": "exact-source-crosswalk-integrity",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/positive-control.json"
+      "evidence_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/positive-control.json"
     },
     {
       "method_id": "exact-source-crosswalk-integrity",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/negative-control.json"
+      "evidence_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/negative-control.json"
+    },
+    {
+      "method_id": "exact-source-crosswalk-integrity",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/destination-controls.json"
     },
     {
       "method_id": "exact-source-crosswalk-integrity",
@@ -1174,7 +1276,17 @@
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/reservation.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/check_cli_admission.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/destination-controls.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/evidence-quality.json",
       "status": "added",
       "previous_path": null
     },
@@ -1189,42 +1301,42 @@
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/source-pins.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/reservation.json",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/baseline-input-digests.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/baseline-input-digests.json",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/legacy-controls.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/legacy-controls.json",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/negative-control.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/negative-control.json",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/positive-control.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/positive-control.json",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/receipt.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/receipts/run.json",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/reproduction-summary.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/reproduction-summary.json",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/subject-source-crosswalk.jsonl",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fifteen/subject-source-crosswalk.jsonl",
       "status": "added",
       "previous_path": null
     },
@@ -1264,7 +1376,77 @@
       "previous_path": null
     },
     {
-      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/evidence-quality.json",
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/baseline-input-digests.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/legacy-controls.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/receipts/run.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/reproduction-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-sixteen/subject-source-crosswalk.jsonl",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/baseline-input-digests.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/legacy-controls.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/reproduction-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/subject-source-crosswalk.jsonl",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/source-pins.json",
       "status": "added",
       "previous_path": null
     }
