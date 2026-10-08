@@ -46,7 +46,11 @@ def change_receipts():
         normalized = {"A": "added", "M": "modified", "D": "removed"}.get(status)
         if normalized is None:
             raise SystemExit(f"Unsupported PR diff status: {status}")
-        row = {"path": path, "status": normalized, "previous_path": None}
+        # GitHub's pull-files API omits `previous_filename` for files without a
+        # prior path. Keep the JSON receipt field absent too so the trusted
+        # premerge checker sees `undefined === undefined`, rather than comparing
+        # the API's absent value with JSON null.
+        row = {"path": path, "status": normalized}
         if normalized != "added":
             old = subprocess.check_output(["git", "show", f"{base}:{path}"], cwd=ROOT)
             row["original_sha256"] = sha(old)
