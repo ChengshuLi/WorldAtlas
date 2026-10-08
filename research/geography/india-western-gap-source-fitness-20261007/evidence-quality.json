@@ -1,0 +1,2106 @@
+{
+  "version": 1,
+  "issue": 1432,
+  "lane": "geography",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "physical-component:000f8ceae5d2a99223959081d563a10b524519680b495e98e0ab26acf5feafe7",
+    "physical-component:0b0f4f8da263777fd7e59ebfd90ba6545811dd8014832cf1a91fc10ad2a78194",
+    "physical-component:158d29fe97181ce35bcbee0548005905634f6dfae7083fde2346a0f8a1d88bf5",
+    "physical-component:16a15562778f813213a723286dc05b997683ea5d6c88e421bd533dda812875da",
+    "physical-component:300746aaaeeeaf86e3782f48d123d367aab071fabc57d87028d897ed444184b5",
+    "physical-component:36ffb10735d8d7d402912f989ff500524a686e86a2f636efc100acc56b9d2ba0",
+    "physical-component:4c9fc7c98e4c74fba00b685e964f1082726a32488d14987811702efabc6947ac",
+    "physical-component:777631d5e6656693b99bbebff66787db117ac0e7595fb8b80d5d032ac0659038",
+    "physical-component:87d5810b83156c3f47cd05e5221d064dbf80622f98706a593ec08548d1588364",
+    "physical-component:9bfcc12c85f301e0745895e459345d8f81a1abe87b317188d1fc4c82c5989477",
+    "physical-component:9db43066a4445eede1df1316d18dd6ff40393734a09a720207c5f14685487a2c",
+    "physical-component:a1238cf0d19f4b0a045b41418061764b2ffa076128c4d7718a4a0b6693be1d7c",
+    "physical-component:a5caa084567455808fecd8aec8f98eff8eb24e41498c28eff9b740962c505401",
+    "physical-component:c9ab9d9b1f31057510a02095d979ec7126cd62fd780793d5c2bba7a775759989",
+    "physical-component:d5085885c61def27a4994e0603af5328dc208c342ad9787a1b4d1f98e45cfb0b",
+    "physical-component:d8a7c45330ea4f423c70a95cd8bb8a510225b04bcea292ffb5574e19d323d1ca",
+    "physical-component:e547c85631bb512b40659a4fbb669c704379bd7a2422ac1cf6ed837c2af171b9",
+    "physical-component:f39a89a7d4dd30b99fcd8f6f98b0394c5a17d4e406144262e63c2d0b549df746"
+  ],
+  "subject_ids_sha256": "37dd61b45ab3a5b85e65456f3f9b8e1aa0544ab026118de72e213ca91c14cde5",
+  "baseline": {
+    "commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "bytes": 247084,
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2171381,
+        "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1730300,
+        "uncompressed_sha256": "e189f3ca731cf87433e423f88debce44e666e838fea1a8e57560b1f47f54422c"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+        "bytes": 1008871,
+        "sha256": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7440052,
+        "uncompressed_sha256": "717c9e64fbc2c63a774b15defaddc84893dc527333a44fe38920e2f9ae1c329b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-003.jsonl.gz",
+        "bytes": 976209,
+        "sha256": "a02d8ef7b63ad0d155d49cd14310fedd3feb7e0e6b6e0181673d2745b44eb5fb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7390331,
+        "uncompressed_sha256": "48160ba4160c42746bfc2419d2ab828509bab1f4bd371580944e68a8e9e10a3d"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-005.jsonl.gz",
+        "bytes": 1014529,
+        "sha256": "74b5807ba9624632783977868e107957d44ecb8a3b93cd1a632097c5a6d642a9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7442405,
+        "uncompressed_sha256": "38c2eecacd8e03fbaba5035097116e5477978e1198c64c5db80d0965a38dc696"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-006.jsonl.gz",
+        "bytes": 1007106,
+        "sha256": "292d0b5e5feeb64844652f17d09f5cd215022babde89d3f1434cf0e10af3c009",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7422632,
+        "uncompressed_sha256": "9f239d2c1603855b5a5b40d0ee4f2cc76c0c22e638485847bdfe5f48d845e84f"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-013.jsonl.gz",
+        "bytes": 1012203,
+        "sha256": "dc60c8dc5223b6d8d4813da0bd7ff66d83bdfa1a01e37e5dccadd843f742fa3b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7444535,
+        "uncompressed_sha256": "ad3c9b02af0a4a2c6aec20536235e84d4b6e4a18a9f4999ac46f2beede9fe4f0"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-015.jsonl.gz",
+        "bytes": 959629,
+        "sha256": "103f4d3d57629822e5014fb7aade94682df8fe2b47453223d3cd527516833cf9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7374556,
+        "uncompressed_sha256": "0854be96e5a297b5a19d2c379d10782c902195d0e76f8f57d83772db13b58a1d"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-021.jsonl.gz",
+        "bytes": 1048680,
+        "sha256": "bd56ef9dd652929096534f8cbd7d1edbff4a7ec8cad3573c287903f6543e1b6f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7476190,
+        "uncompressed_sha256": "4a11967c06c5dcb707f06e0eeda129b492e589ecdc91238fe43f3d23bbc0ab16"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-032.jsonl.gz",
+        "bytes": 967892,
+        "sha256": "663c636242521ba76187e5e1f9782f5da138cf8a3d445f034be2754e8bc99c42",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7369682,
+        "uncompressed_sha256": "fd7e9d9c072abdaf8e9fc57263d8b1ec9ec9f7669ed7fd5d68534a055ac110d5"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-037.jsonl.gz",
+        "bytes": 986732,
+        "sha256": "2a3b4c988cf8525ecbd38c2eedf6d07d3f24244288abb49545df6d30b72d520c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7430796,
+        "uncompressed_sha256": "a40108f4f25c2e6dee9fd29887aa6b8b207d315e72aef49dfb000dcd5239e5a5"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-042.jsonl.gz",
+        "bytes": 983640,
+        "sha256": "e6b7900cefbe801d54d054f6ce0d5b7d9767a5e63e138db052086d3ac5cbe413",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7402875,
+        "uncompressed_sha256": "c51b2d3d299630fe2a8e3764d510b164d937f610f9108c9ff04e96f01cc74395"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-043.jsonl.gz",
+        "bytes": 1013025,
+        "sha256": "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7436197,
+        "uncompressed_sha256": "69888f613738655b7f8c1731b1186fba06ca259233254e7309aebf8f3e93113e"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-044.jsonl.gz",
+        "bytes": 950482,
+        "sha256": "f3abb47188e2645668e4de41c8e630d8c97441ce5de9bf549bfb35d94027f014",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7293115,
+        "uncompressed_sha256": "93e8f75205a8635c50f4d22120d4a487bafcb1c50dc9f4862d064eb52bc996f7"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-045.jsonl.gz",
+        "bytes": 990498,
+        "sha256": "645a2f9c4d85a4e8de76ff658208ab5eae1a906b49f0233f3cfb5b5f65c819b3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7419383,
+        "uncompressed_sha256": "2acbd30e56f3667ad769b2581539b3f7e436fe8ce88448e518564f20f13d7e74"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-055.jsonl.gz",
+        "bytes": 956155,
+        "sha256": "e3a739e7ceb809d54d50a4b00d8c1cbccdeff38ce1379168db0de057755e6251",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7361521,
+        "uncompressed_sha256": "f0e294a319c5e8e674d929fabfce07037fefe542c9e972725adf5c0515336dd9"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-058.jsonl.gz",
+        "bytes": 990723,
+        "sha256": "0688535e4eeb2ba594d46f90e3f753cca1c814a3d370ba6514d6cc9ea2e5619d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7394892,
+        "uncompressed_sha256": "8a683d81ab38c4fd039472955f91cef51ba8ac93cb13d0f7cfbf385cf6aa3c58"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-060.jsonl.gz",
+        "bytes": 966219,
+        "sha256": "d8f01fc9c37dbab9a149edf1fdabb4ffa66ee0c05dd7b9b64eea9f4b3b268cea",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7374435,
+        "uncompressed_sha256": "aad8bbe8ecf85bddae348c62219bce340dd0d244987e14e13dc46be04335820f"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-063.jsonl.gz",
+        "bytes": 977510,
+        "sha256": "9805acd0429673ba673b44e4cf1aa64989b2bbdf791f1ce65ee2852c8d0adfb1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7389498,
+        "uncompressed_sha256": "cbe99618d773e6841ea3537955768027f41ae07c06d6c0d43e60c38a2241cbd9"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-067.jsonl.gz",
+        "bytes": 1053154,
+        "sha256": "030cc387ebf6731c3b78390c6a75e20edddcf757b3f85c1830251db4f5629f0a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7469651,
+        "uncompressed_sha256": "a2a65d7f4559afbe8f453358373f05500e8c296755c7a336daa71f07c5c7fa66"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM2-000.bin.gz",
+        "bytes": 2210535,
+        "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7979916,
+        "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+        "bytes": 11542134,
+        "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+        "bytes": 2253028,
+        "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6485570,
+        "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "bytes": 2085110,
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-000.json.gz",
+        "bytes": 1018111,
+        "sha256": "c5a3f232c7d31eb51847f65be310cc598db73436515633d5bed65793dfb743a4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-001.json.gz",
+        "bytes": 1015054,
+        "sha256": "0c93efac5b28567bbf9c5ca456e2de8f9fb6409f1a5fa6c5f7adcfbd3250f2e9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-002.json.gz",
+        "bytes": 1020494,
+        "sha256": "3bc3c7a21889a983d0fe225a7b6ec06b7f84009a9cc9219e91bf769ac955259d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-006.json.gz",
+        "bytes": 1016584,
+        "sha256": "0d6d4e7a02e7972315413f09c81fd4daa08e85b5f9d2f4cd3776f9f4cf6ccdb0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-007.json.gz",
+        "bytes": 1016514,
+        "sha256": "a15f64161b9eb4d9a7935c710d5781cb4d2009d0aa37b7ad4aede0923ba68481",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-010.json.gz",
+        "bytes": 1019514,
+        "sha256": "64c6dec1d8a86bae3ce2c8f471df174698f82caba7643a2aa518e4d2d105b6ac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-015.json.gz",
+        "bytes": 1018746,
+        "sha256": "942ea1c138eab6099e521ee854b60ec69ab5aad7f467368f7aecb74bc10f0db5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-017.json.gz",
+        "bytes": 1018262,
+        "sha256": "e2050795e9e871bcf50303fef37e02077fc4835bfe0903a1435558df0bb3d331",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-020.json.gz",
+        "bytes": 1016322,
+        "sha256": "c7c667ae8876ecf746030663cd9d94ddbef08691925e905a5dfcd324071bd19e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-021.json.gz",
+        "bytes": 1017475,
+        "sha256": "4b833e33f137d531ab87b8fe898c4cf656559e14ce740c1eca56b5acf77532d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-026.json.gz",
+        "bytes": 1019413,
+        "sha256": "b959aa8b81b44225d799f961d04f424a588219979a23ab882e1676b3b891fae0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-027.json.gz",
+        "bytes": 1033378,
+        "sha256": "a5cb9b52e4cf6007eed15b90c02697f1dbbc268d5e781cc92b420bea7c0d83fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-028.json.gz",
+        "bytes": 1019587,
+        "sha256": "71e8b658e78b680b388aedba30a276ee5ec915d9ef876eaf4d31d012da983f0c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-030.json.gz",
+        "bytes": 1015130,
+        "sha256": "30ecd96048f39a06dc104df198bf90872bd849174f3e87a13cc0ba56c27e703b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-031.json.gz",
+        "bytes": 1027529,
+        "sha256": "4913b6367bf4c1e8889f0199a69400b11a5e491c1297104e54e1f60c3eb6242b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+        "bytes": 433512,
+        "sha256": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/global-sources/IND-ADM3-metadata.json",
+        "bytes": 2206,
+        "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "global_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "global_routing_family_shard_013": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+      "global_routing_source_match_slice_000": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "priority_v3_report": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+      "source_corpus_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "administrative_sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "india_adm3_metadata": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "india_adm2_payload": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "india_adm3_payload_000": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "india_adm3_payload_001": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+      "physical_component_rows_00": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+      "physical_component_rows_01": "a02d8ef7b63ad0d155d49cd14310fedd3feb7e0e6b6e0181673d2745b44eb5fb",
+      "physical_component_rows_02": "74b5807ba9624632783977868e107957d44ecb8a3b93cd1a632097c5a6d642a9",
+      "physical_component_rows_03": "292d0b5e5feeb64844652f17d09f5cd215022babde89d3f1434cf0e10af3c009",
+      "physical_component_rows_04": "dc60c8dc5223b6d8d4813da0bd7ff66d83bdfa1a01e37e5dccadd843f742fa3b",
+      "physical_component_rows_05": "103f4d3d57629822e5014fb7aade94682df8fe2b47453223d3cd527516833cf9",
+      "physical_component_rows_06": "bd56ef9dd652929096534f8cbd7d1edbff4a7ec8cad3573c287903f6543e1b6f",
+      "physical_component_rows_07": "663c636242521ba76187e5e1f9782f5da138cf8a3d445f034be2754e8bc99c42",
+      "physical_component_rows_08": "2a3b4c988cf8525ecbd38c2eedf6d07d3f24244288abb49545df6d30b72d520c",
+      "physical_component_rows_09": "e6b7900cefbe801d54d054f6ce0d5b7d9767a5e63e138db052086d3ac5cbe413",
+      "physical_component_rows_10": "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+      "physical_component_rows_11": "f3abb47188e2645668e4de41c8e630d8c97441ce5de9bf549bfb35d94027f014",
+      "physical_component_rows_12": "645a2f9c4d85a4e8de76ff658208ab5eae1a906b49f0233f3cfb5b5f65c819b3",
+      "physical_component_rows_13": "e3a739e7ceb809d54d50a4b00d8c1cbccdeff38ce1379168db0de057755e6251",
+      "physical_component_rows_14": "0688535e4eeb2ba594d46f90e3f753cca1c814a3d370ba6514d6cc9ea2e5619d",
+      "physical_component_rows_15": "d8f01fc9c37dbab9a149edf1fdabb4ffa66ee0c05dd7b9b64eea9f4b3b268cea",
+      "physical_component_rows_16": "9805acd0429673ba673b44e4cf1aa64989b2bbdf791f1ce65ee2852c8d0adfb1",
+      "physical_component_rows_17": "030cc387ebf6731c3b78390c6a75e20edddcf757b3f85c1830251db4f5629f0a",
+      "component_custody_index": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "physical_component_geometry_shard_000": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+      "physical_component_geometry_shard_002": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+      "physical_component_geometry_shard_003": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+      "physical_component_geometry_shard_005": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+      "physical_component_geometry_shard_006": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "physical_component_geometry_shard_008": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "physical_component_geometry_shard_009": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+      "physical_component_geometry_shard_010": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+      "priority_v3_investigations_000": "c5a3f232c7d31eb51847f65be310cc598db73436515633d5bed65793dfb743a4",
+      "priority_v3_investigations_001": "0c93efac5b28567bbf9c5ca456e2de8f9fb6409f1a5fa6c5f7adcfbd3250f2e9",
+      "priority_v3_investigations_002": "3bc3c7a21889a983d0fe225a7b6ec06b7f84009a9cc9219e91bf769ac955259d",
+      "priority_v3_investigations_006": "0d6d4e7a02e7972315413f09c81fd4daa08e85b5f9d2f4cd3776f9f4cf6ccdb0",
+      "priority_v3_investigations_007": "a15f64161b9eb4d9a7935c710d5781cb4d2009d0aa37b7ad4aede0923ba68481",
+      "priority_v3_investigations_010": "64c6dec1d8a86bae3ce2c8f471df174698f82caba7643a2aa518e4d2d105b6ac",
+      "priority_v3_investigations_015": "942ea1c138eab6099e521ee854b60ec69ab5aad7f467368f7aecb74bc10f0db5",
+      "priority_v3_investigations_017": "e2050795e9e871bcf50303fef37e02077fc4835bfe0903a1435558df0bb3d331",
+      "priority_v3_investigations_020": "c7c667ae8876ecf746030663cd9d94ddbef08691925e905a5dfcd324071bd19e",
+      "priority_v3_investigations_021": "4b833e33f137d531ab87b8fe898c4cf656559e14ce740c1eca56b5acf77532d1",
+      "priority_v3_investigations_026": "b959aa8b81b44225d799f961d04f424a588219979a23ab882e1676b3b891fae0",
+      "priority_v3_investigations_027": "a5cb9b52e4cf6007eed15b90c02697f1dbbc268d5e781cc92b420bea7c0d83fe",
+      "priority_v3_investigations_028": "71e8b658e78b680b388aedba30a276ee5ec915d9ef876eaf4d31d012da983f0c",
+      "priority_v3_investigations_030": "30ecd96048f39a06dc104df198bf90872bd849174f3e87a13cc0ba56c27e703b",
+      "priority_v3_investigations_031": "4913b6367bf4c1e8889f0199a69400b11a5e491c1297104e54e1f60c3eb6242b",
+      "evidence_immutable_helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    "pin_files": {
+      "global_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "global_routing_family_shard_013": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+      "global_routing_source_match_slice_000": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+      "priority_v3_report": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+      "source_corpus_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "administrative_sources": "data/administrative-sources.json",
+      "india_adm3_metadata": "data/global-sources/IND-ADM3-metadata.json",
+      "india_adm2_payload": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM2-000.bin.gz",
+      "india_adm3_payload_000": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+      "india_adm3_payload_001": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+      "physical_component_rows_00": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+      "physical_component_rows_01": "coordination/engineering/global-physical-comparison-20261006/results/components-003.jsonl.gz",
+      "physical_component_rows_02": "coordination/engineering/global-physical-comparison-20261006/results/components-005.jsonl.gz",
+      "physical_component_rows_03": "coordination/engineering/global-physical-comparison-20261006/results/components-006.jsonl.gz",
+      "physical_component_rows_04": "coordination/engineering/global-physical-comparison-20261006/results/components-013.jsonl.gz",
+      "physical_component_rows_05": "coordination/engineering/global-physical-comparison-20261006/results/components-015.jsonl.gz",
+      "physical_component_rows_06": "coordination/engineering/global-physical-comparison-20261006/results/components-021.jsonl.gz",
+      "physical_component_rows_07": "coordination/engineering/global-physical-comparison-20261006/results/components-032.jsonl.gz",
+      "physical_component_rows_08": "coordination/engineering/global-physical-comparison-20261006/results/components-037.jsonl.gz",
+      "physical_component_rows_09": "coordination/engineering/global-physical-comparison-20261006/results/components-042.jsonl.gz",
+      "physical_component_rows_10": "coordination/engineering/global-physical-comparison-20261006/results/components-043.jsonl.gz",
+      "physical_component_rows_11": "coordination/engineering/global-physical-comparison-20261006/results/components-044.jsonl.gz",
+      "physical_component_rows_12": "coordination/engineering/global-physical-comparison-20261006/results/components-045.jsonl.gz",
+      "physical_component_rows_13": "coordination/engineering/global-physical-comparison-20261006/results/components-055.jsonl.gz",
+      "physical_component_rows_14": "coordination/engineering/global-physical-comparison-20261006/results/components-058.jsonl.gz",
+      "physical_component_rows_15": "coordination/engineering/global-physical-comparison-20261006/results/components-060.jsonl.gz",
+      "physical_component_rows_16": "coordination/engineering/global-physical-comparison-20261006/results/components-063.jsonl.gz",
+      "physical_component_rows_17": "coordination/engineering/global-physical-comparison-20261006/results/components-067.jsonl.gz",
+      "component_custody_index": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "evidence_immutable_helper": "scripts/evidence/immutable.py",
+      "physical_component_geometry_shard_000": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical_component_geometry_shard_002": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical_component_geometry_shard_003": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "physical_component_geometry_shard_005": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical_component_geometry_shard_006": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical_component_geometry_shard_008": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical_component_geometry_shard_009": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical_component_geometry_shard_010": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "priority_v3_investigations_000": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-000.json.gz",
+      "priority_v3_investigations_001": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-001.json.gz",
+      "priority_v3_investigations_002": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-002.json.gz",
+      "priority_v3_investigations_006": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-006.json.gz",
+      "priority_v3_investigations_007": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-007.json.gz",
+      "priority_v3_investigations_010": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-010.json.gz",
+      "priority_v3_investigations_015": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-015.json.gz",
+      "priority_v3_investigations_017": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-017.json.gz",
+      "priority_v3_investigations_020": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-020.json.gz",
+      "priority_v3_investigations_021": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-021.json.gz",
+      "priority_v3_investigations_026": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-026.json.gz",
+      "priority_v3_investigations_027": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-027.json.gz",
+      "priority_v3_investigations_028": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-028.json.gz",
+      "priority_v3_investigations_030": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-030.json.gz",
+      "priority_v3_investigations_031": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-031.json.gz"
+    },
+    "subject_files": {
+      "physical-component:000f8ceae5d2a99223959081d563a10b524519680b495e98e0ab26acf5feafe7": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:0b0f4f8da263777fd7e59ebfd90ba6545811dd8014832cf1a91fc10ad2a78194": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:158d29fe97181ce35bcbee0548005905634f6dfae7083fde2346a0f8a1d88bf5": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:16a15562778f813213a723286dc05b997683ea5d6c88e421bd533dda812875da": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:300746aaaeeeaf86e3782f48d123d367aab071fabc57d87028d897ed444184b5": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:36ffb10735d8d7d402912f989ff500524a686e86a2f636efc100acc56b9d2ba0": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:4c9fc7c98e4c74fba00b685e964f1082726a32488d14987811702efabc6947ac": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "physical-component:777631d5e6656693b99bbebff66787db117ac0e7595fb8b80d5d032ac0659038": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical-component:87d5810b83156c3f47cd05e5221d064dbf80622f98706a593ec08548d1588364": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical-component:9bfcc12c85f301e0745895e459345d8f81a1abe87b317188d1fc4c82c5989477": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:9db43066a4445eede1df1316d18dd6ff40393734a09a720207c5f14685487a2c": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:a1238cf0d19f4b0a045b41418061764b2ffa076128c4d7718a4a0b6693be1d7c": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:a5caa084567455808fecd8aec8f98eff8eb24e41498c28eff9b740962c505401": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:c9ab9d9b1f31057510a02095d979ec7126cd62fd780793d5c2bba7a775759989": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical-component:d5085885c61def27a4994e0603af5328dc208c342ad9787a1b4d1f98e45cfb0b": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical-component:d8a7c45330ea4f423c70a95cd8bb8a510225b04bcea292ffb5574e19d323d1ca": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical-component:e547c85631bb512b40659a4fbb669c704379bd7a2422ac1cf6ed837c2af171b9": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical-component:f39a89a7d4dd30b99fcd8f6f98b0394c5a17d4e406144262e63c2d0b549df746": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-ind-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2_simplified.geojson",
+      "role": "India district administrative boundaries",
+      "vintage": "2021",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries release metadata declares Open Data Commons Open Database License 1.0; exact terms/version should be checked independently during review."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Complete original product at geoBoundaries commit 9469f09; retained raw bytes are contiguous corpus partitions; product original SHA-256 d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db across 1 part(s); metadata file data/administrative-sources.json.",
+      "limit": "Administrative boundary geometry does not independently establish dated dry-land versus inland-water status. Represented year is a source metadata claim; exact acquisition timestamp is not retained.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/adm2-000.bin.gz",
+          "bytes": 2210535,
+          "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 7979916,
+          "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db"
+        }
+      ]
+    },
+    {
+      "id": "geoboundaries-ind-adm3",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "role": "India sub-district administrative boundaries",
+      "vintage": "2018",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries release metadata declares Open Data Commons Open Database License 1.0; exact terms/version should be checked independently during review."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Complete original product at geoBoundaries commit 9469f09; retained raw bytes are contiguous corpus partitions; product original SHA-256 4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb across 2 part(s); metadata file data/global-sources/IND-ADM3-metadata.json.",
+      "limit": "Administrative boundary geometry does not independently establish dated dry-land versus inland-water status. Represented year is a source metadata claim; exact acquisition timestamp is not retained.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/adm3-000.bin.gz",
+          "bytes": 11542134,
+          "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 33554432,
+          "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+        },
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/adm3-001.bin.gz",
+          "bytes": 2253028,
+          "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 6485570,
+          "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/README.md",
+      "bytes": 7742,
+      "sha256": "0c846a008a6d6c16d2f570953f80b010a3d0c6893afb04e7b267204abc963ecf",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/assess.py",
+      "bytes": 25473,
+      "sha256": "2870b0194d574655a6370a6f576b151a79e75df4aa2e2d2990807745d021151e",
+      "hash_kind": "file-bytes",
+      "role": "method-code"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/baseline-inputs.json",
+      "bytes": 32043,
+      "sha256": "6397fb206092417b8eee395183430c686a7f36f2617fd1917e30cc8277ff6e71",
+      "hash_kind": "file-bytes",
+      "role": "pin-inventory"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/extract_inherited.py",
+      "bytes": 6780,
+      "sha256": "fd6eeaab2244de8ec1201ef5a15bae9f7365e71a6a02ba26a1d8ccfa32c8c2cf",
+      "hash_kind": "file-bytes",
+      "role": "method-code"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/adm2-000.bin.gz",
+      "bytes": 2210535,
+      "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7979916,
+      "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/adm3-000.bin.gz",
+      "bytes": 11542134,
+      "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 33554432,
+      "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/adm3-001.bin.gz",
+      "bytes": 2253028,
+      "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 6485570,
+      "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/member-roster.csv",
+      "bytes": 10305,
+      "sha256": "1d364d07d82d8eab85f105b58fefcc3a0d8aa759695e9e555deead7025e3b04d",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/publication.json",
+      "bytes": 1506,
+      "sha256": "96505af75413ed7800b8eb012e915d98eee55f2af2f2716bcdb9d26de45f3b20",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/report.json",
+      "bytes": 6358,
+      "sha256": "ff43864be7182ff9107b0259e11bdabd615afca0e177169615915d4c546e1e32",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/source-coverage.csv",
+      "bytes": 15608,
+      "sha256": "0797517ac4c4d2f2ebde98cdf7e8c56da96a6a7ca31130df7065a0b97bea1c74",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/adm2-000.bin.gz",
+      "bytes": 2210535,
+      "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7979916,
+      "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/adm3-000.bin.gz",
+      "bytes": 11542134,
+      "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 33554432,
+      "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/adm3-001.bin.gz",
+      "bytes": 2253028,
+      "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 6485570,
+      "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/member-roster.csv",
+      "bytes": 10305,
+      "sha256": "1d364d07d82d8eab85f105b58fefcc3a0d8aa759695e9e555deead7025e3b04d",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/publication.json",
+      "bytes": 1506,
+      "sha256": "500c2cc0612dbd049f92371a38bf90a0b58177f9b74812f17bb3c10468471412",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/report.json",
+      "bytes": 7375,
+      "sha256": "2680a975dbce7b50e2517f7df978e642cc53c43f8c43945e306685f85f0e4a49",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/source-coverage.csv",
+      "bytes": 15608,
+      "sha256": "0797517ac4c4d2f2ebde98cdf7e8c56da96a6a7ca31130df7065a0b97bea1c74",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/adm2-000.bin.gz",
+      "bytes": 2210535,
+      "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7979916,
+      "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/adm3-000.bin.gz",
+      "bytes": 11542134,
+      "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 33554432,
+      "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/adm3-001.bin.gz",
+      "bytes": 2253028,
+      "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 6485570,
+      "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/member-roster.csv",
+      "bytes": 10419,
+      "sha256": "9ed26d05989c02998aa42e1e9c60f7f18ba6cde632eed98bf0bbb4d4cf5044ba",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/publication.json",
+      "bytes": 1506,
+      "sha256": "829bd6b80c30da550ebdd71f8d54dbf8b765ea18336814b09a268eac5162f4a8",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/report.json",
+      "bytes": 7375,
+      "sha256": "6aea8de55f6d9f192eb87e93afbf753ce887aa3f0bf39e69f46b2ddfe4aac27f",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/source-coverage.csv",
+      "bytes": 15608,
+      "sha256": "0797517ac4c4d2f2ebde98cdf7e8c56da96a6a7ca31130df7065a0b97bea1c74",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/adm2-000.bin.gz",
+      "bytes": 2210535,
+      "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7979916,
+      "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/adm3-000.bin.gz",
+      "bytes": 11542134,
+      "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 33554432,
+      "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/adm3-001.bin.gz",
+      "bytes": 2253028,
+      "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 6485570,
+      "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/member-roster.csv",
+      "bytes": 10419,
+      "sha256": "9ed26d05989c02998aa42e1e9c60f7f18ba6cde632eed98bf0bbb4d4cf5044ba",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/publication.json",
+      "bytes": 1506,
+      "sha256": "ed58a56e31fe0b49ba78f93f8ea334fcb00c79140a9c69d30374220094a992b0",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/report.json",
+      "bytes": 8271,
+      "sha256": "e03fe853ac067a5539ad4fbf566ae26528fc5afab083cd267bd8006da38c2dcd",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/source-coverage.csv",
+      "bytes": 15608,
+      "sha256": "0797517ac4c4d2f2ebde98cdf7e8c56da96a6a7ca31130df7065a0b97bea1c74",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/member-roster.csv",
+      "bytes": 10419,
+      "sha256": "9ed26d05989c02998aa42e1e9c60f7f18ba6cde632eed98bf0bbb4d4cf5044ba",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/publication.json",
+      "bytes": 1506,
+      "sha256": "9d951098fcf5ce219efb0373d536cb1ad45c6bbc7ed825a969f9af397e026a13",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "bytes": 8533,
+      "sha256": "3036cfda8f078de75a33801c08876319ae65e4b903c185b0d462361dc3a4f5b9",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/source-coverage.csv",
+      "bytes": 15608,
+      "sha256": "0797517ac4c4d2f2ebde98cdf7e8c56da96a6a7ca31130df7065a0b97bea1c74",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-07-01/inherited-claims.csv",
+      "bytes": 38015,
+      "sha256": "a3f41d178f930f72ad5147ccfcfea2c3c44612194b87378ea6b4282631e3b3a3",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-07-01/publication.json",
+      "bytes": 532,
+      "sha256": "8a86464dd5bcbca45e97db2318d7fb62f04b453d72fe07bbc67c15d2eceeee0f",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-07-01/report.json",
+      "bytes": 6387,
+      "sha256": "c39e20e1dd202255bebff9d4218dbb8923e989680a4cc7cb23ee1bc875625b8f",
+      "hash_kind": "file-bytes",
+      "role": "superseded-run"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/inherited-claims.csv",
+      "bytes": 38015,
+      "sha256": "a3f41d178f930f72ad5147ccfcfea2c3c44612194b87378ea6b4282631e3b3a3",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/publication.json",
+      "bytes": 532,
+      "sha256": "c4d0d87526f0f4f7f8e7015959a1630e1f1e61185bffd53b56f1a9d9a2d4a212",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/report.json",
+      "bytes": 6474,
+      "sha256": "f67163e9bd612b44fc0a23cfcc0bfb62a2951e429594552149cb2747ef85c15f",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "admin-source-coverage-screen",
+      "kind": "source",
+      "description": "Full candidate-pointset bounding-box screening and native-coordinate topological relation checks against every feature of complete retained ADM2 and ADM3 GeoJSON products. Preserve every bbox candidate. This is a source-coverage screen, not a metric geometry measurement: no area/distance values, geometry repairs, CRS transforms, or authority inference.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS version recorded at run",
+      "units": "coordinate values in source GeoJSON; no physical area/distance unit claimed",
+      "axis_order": "longitude-latitude",
+      "crs": "Source metadata does not pin a CRS declaration in these retained GeoJSON products. Coordinates are interpreted as x/y pairs exactly as stored; geographic WGS84 convention is a stated assumption and remains a limitation.",
+      "area_method": "No area measurement; exact topology predicates in native coordinate plane only.",
+      "distance_method": "Not calculated."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "family_members",
+      "value": 18,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "input_set_sha256": "b443dae6b8afae62019feeb528ebb5f7a642e78984631a3fc821e78e7ec8bbe6",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Complete family members"
+    },
+    {
+      "id": "family_rank",
+      "value": 8,
+      "unit": "rank",
+      "vintage": "baseline",
+      "input_sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "input_set_sha256": "b443dae6b8afae62019feeb528ebb5f7a642e78984631a3fc821e78e7ec8bbe6",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Family selection rank"
+    },
+    {
+      "id": "family_universe",
+      "value": 711,
+      "unit": "families",
+      "vintage": "baseline",
+      "input_sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "input_set_sha256": "b443dae6b8afae62019feeb528ebb5f7a642e78984631a3fc821e78e7ec8bbe6",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Ranked source-fitness families"
+    },
+    {
+      "id": "source_fit_witnesses",
+      "value": 2,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "input_set_sha256": "b443dae6b8afae62019feeb528ebb5f7a642e78984631a3fc821e78e7ec8bbe6",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Members requiring source-fitness assessment"
+    },
+    {
+      "id": "adm2_retained_feature_count",
+      "value": 735,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Retained source features"
+    },
+    {
+      "id": "adm2_advertised_feature_count",
+      "value": 736,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Advertised source features"
+    },
+    {
+      "id": "adm2_advertised_minus_retained_feature_count",
+      "value": 1,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Advertised minus retained features"
+    },
+    {
+      "id": "adm2_bbox_candidate_pairs",
+      "value": 41,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Bounding-box candidate pairs"
+    },
+    {
+      "id": "adm2_exact_intersect_pairs",
+      "value": 31,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Exact native-coordinate intersections"
+    },
+    {
+      "id": "adm2_subjects_with_exact_intersection",
+      "value": 18,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Subjects with an exact intersection"
+    },
+    {
+      "id": "adm2_source_covers_target_pairs",
+      "value": 5,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Source polygons covering candidate pointsets"
+    },
+    {
+      "id": "adm2_retained_nonblank_shape_id_count",
+      "value": 735,
+      "unit": "IDs",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Nonblank source shape IDs"
+    },
+    {
+      "id": "adm2_unique_retained_shape_id_count",
+      "value": 735,
+      "unit": "IDs",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Unique source shape IDs"
+    },
+    {
+      "id": "adm2_missing_retained_shape_id_count",
+      "value": 0,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Missing source shape IDs"
+    },
+    {
+      "id": "adm2_duplicate_retained_shape_id_count",
+      "value": 0,
+      "unit": "groups",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Duplicate source shape ID groups"
+    },
+    {
+      "id": "adm2_invalid_source_feature_count",
+      "value": 0,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Invalid source geometries"
+    },
+    {
+      "id": "adm2_topology_error_pairs",
+      "value": 0,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+      "input_set_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM2: Topology predicate errors"
+    },
+    {
+      "id": "adm3_retained_feature_count",
+      "value": 6822,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Retained source features"
+    },
+    {
+      "id": "adm3_advertised_feature_count",
+      "value": 6836,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Advertised source features"
+    },
+    {
+      "id": "adm3_advertised_minus_retained_feature_count",
+      "value": 14,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Advertised minus retained features"
+    },
+    {
+      "id": "adm3_bbox_candidate_pairs",
+      "value": 52,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Bounding-box candidate pairs"
+    },
+    {
+      "id": "adm3_exact_intersect_pairs",
+      "value": 39,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Exact native-coordinate intersections"
+    },
+    {
+      "id": "adm3_subjects_with_exact_intersection",
+      "value": 18,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Subjects with an exact intersection"
+    },
+    {
+      "id": "adm3_source_covers_target_pairs",
+      "value": 0,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Source polygons covering candidate pointsets"
+    },
+    {
+      "id": "adm3_retained_nonblank_shape_id_count",
+      "value": 6822,
+      "unit": "IDs",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Nonblank source shape IDs"
+    },
+    {
+      "id": "adm3_unique_retained_shape_id_count",
+      "value": 6822,
+      "unit": "IDs",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Unique source shape IDs"
+    },
+    {
+      "id": "adm3_missing_retained_shape_id_count",
+      "value": 0,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Missing source shape IDs"
+    },
+    {
+      "id": "adm3_duplicate_retained_shape_id_count",
+      "value": 0,
+      "unit": "groups",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Duplicate source shape ID groups"
+    },
+    {
+      "id": "adm3_invalid_source_feature_count",
+      "value": 0,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Invalid source geometries"
+    },
+    {
+      "id": "adm3_topology_error_pairs",
+      "value": 0,
+      "unit": "pairs",
+      "vintage": "baseline",
+      "input_sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+      "input_set_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "India ADM3: Topology predicate errors"
+    },
+    {
+      "id": "inherited_rows",
+      "value": 18,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "a3f41d178f930f72ad5147ccfcfea2c3c44612194b87378ea6b4282631e3b3a3",
+      "input_set_sha256": "50464e4b869a61e2ffd26c64c2d1dccfa65c55b5d2ad764b8b9fc66e5e5460e1",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Members in inherited comparison rows"
+    },
+    {
+      "id": "inherited_mapped_land",
+      "value": 18,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "a3f41d178f930f72ad5147ccfcfea2c3c44612194b87378ea6b4282631e3b3a3",
+      "input_set_sha256": "50464e4b869a61e2ffd26c64c2d1dccfa65c55b5d2ad764b8b9fc66e5e5460e1",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Inherited mapped-land-support status"
+    },
+    {
+      "id": "inherited_physical_unknown",
+      "value": 18,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "a3f41d178f930f72ad5147ccfcfea2c3c44612194b87378ea6b4282631e3b3a3",
+      "input_set_sha256": "50464e4b869a61e2ffd26c64c2d1dccfa65c55b5d2ad764b8b9fc66e5e5460e1",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Inherited physical status unknown"
+    },
+    {
+      "id": "inherited_authority_unapproved",
+      "value": 18,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "a3f41d178f930f72ad5147ccfcfea2c3c44612194b87378ea6b4282631e3b3a3",
+      "input_set_sha256": "50464e4b869a61e2ffd26c64c2d1dccfa65c55b5d2ad764b8b9fc66e5e5460e1",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Inherited physical authority unapproved"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "family_members",
+      "value": 18,
+      "unit": "components"
+    },
+    {
+      "metric_id": "family_rank",
+      "value": 8,
+      "unit": "rank"
+    },
+    {
+      "metric_id": "family_universe",
+      "value": 711,
+      "unit": "families"
+    },
+    {
+      "metric_id": "source_fit_witnesses",
+      "value": 2,
+      "unit": "components"
+    },
+    {
+      "metric_id": "adm2_retained_feature_count",
+      "value": 735,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm2_advertised_feature_count",
+      "value": 736,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm2_advertised_minus_retained_feature_count",
+      "value": 1,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm2_bbox_candidate_pairs",
+      "value": 41,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "adm2_exact_intersect_pairs",
+      "value": 31,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "adm2_subjects_with_exact_intersection",
+      "value": 18,
+      "unit": "components"
+    },
+    {
+      "metric_id": "adm2_source_covers_target_pairs",
+      "value": 5,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "adm2_retained_nonblank_shape_id_count",
+      "value": 735,
+      "unit": "IDs"
+    },
+    {
+      "metric_id": "adm2_unique_retained_shape_id_count",
+      "value": 735,
+      "unit": "IDs"
+    },
+    {
+      "metric_id": "adm2_missing_retained_shape_id_count",
+      "value": 0,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm2_duplicate_retained_shape_id_count",
+      "value": 0,
+      "unit": "groups"
+    },
+    {
+      "metric_id": "adm2_invalid_source_feature_count",
+      "value": 0,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm2_topology_error_pairs",
+      "value": 0,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "adm3_retained_feature_count",
+      "value": 6822,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm3_advertised_feature_count",
+      "value": 6836,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm3_advertised_minus_retained_feature_count",
+      "value": 14,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm3_bbox_candidate_pairs",
+      "value": 52,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "adm3_exact_intersect_pairs",
+      "value": 39,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "adm3_subjects_with_exact_intersection",
+      "value": 18,
+      "unit": "components"
+    },
+    {
+      "metric_id": "adm3_source_covers_target_pairs",
+      "value": 0,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "adm3_retained_nonblank_shape_id_count",
+      "value": 6822,
+      "unit": "IDs"
+    },
+    {
+      "metric_id": "adm3_unique_retained_shape_id_count",
+      "value": 6822,
+      "unit": "IDs"
+    },
+    {
+      "metric_id": "adm3_missing_retained_shape_id_count",
+      "value": 0,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm3_duplicate_retained_shape_id_count",
+      "value": 0,
+      "unit": "groups"
+    },
+    {
+      "metric_id": "adm3_invalid_source_feature_count",
+      "value": 0,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm3_topology_error_pairs",
+      "value": 0,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "inherited_rows",
+      "value": 18,
+      "unit": "components"
+    },
+    {
+      "metric_id": "inherited_mapped_land",
+      "value": 18,
+      "unit": "components"
+    },
+    {
+      "metric_id": "inherited_physical_unknown",
+      "value": 18,
+      "unit": "components"
+    },
+    {
+      "metric_id": "inherited_authority_unapproved",
+      "value": 18,
+      "unit": "components"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The retained ADM2 and ADM3 product feature counts differ from their version-locked metadata claims; retained shapeID values are present and unique. The responsible cause and missing units are not identified by the retained products.",
+      "source_ids": [
+        "geoboundaries-ind-adm2",
+        "geoboundaries-ind-adm3"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "Within the retained administrative source geometries and exact stored coordinate pairs, every declared component intersects at least one feature in both India products. This is source-relative administrative coverage only.",
+      "source_ids": [
+        "geoboundaries-ind-adm2",
+        "geoboundaries-ind-adm3"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Physical dry-land versus inland-water status, observation date, legal authority and processing cause remain unresolved for every component; no independent dated physical-surface evidence is included.",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/india-western-gap-source-fitness-20261007/assess.py",
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/india-western-gap-source-fitness-20261007/extract_inherited.py",
+    "node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/evidence-quality.json",
+    "node scripts/check-handoff-scope.mjs --branch geography/india-western-gap-source-fitness-20261007 --base origin/main --pr-body-file /tmp/india-pr-body.md --issue-file /tmp/india-issue.json"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "family_members",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/family/complete_member_count"
+    },
+    {
+      "metric_id": "family_rank",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/family/selected_rank_of_711"
+    },
+    {
+      "metric_id": "family_universe",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/family/ranked_source_fitness_family_count"
+    },
+    {
+      "metric_id": "source_fit_witnesses",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/source_fitness_prerequisite_subject_count"
+    },
+    {
+      "metric_id": "adm2_retained_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/retained_feature_count"
+    },
+    {
+      "metric_id": "adm2_advertised_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/advertised_feature_count"
+    },
+    {
+      "metric_id": "adm2_advertised_minus_retained_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/advertised_minus_retained_feature_count"
+    },
+    {
+      "metric_id": "adm2_bbox_candidate_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/bbox_candidate_pairs"
+    },
+    {
+      "metric_id": "adm2_exact_intersect_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/exact_intersect_pairs"
+    },
+    {
+      "metric_id": "adm2_subjects_with_exact_intersection",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/subjects_with_exact_intersection"
+    },
+    {
+      "metric_id": "adm2_source_covers_target_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/source_covers_target_pairs"
+    },
+    {
+      "metric_id": "adm2_retained_nonblank_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/retained_nonblank_shape_id_count"
+    },
+    {
+      "metric_id": "adm2_unique_retained_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/unique_retained_shape_id_count"
+    },
+    {
+      "metric_id": "adm2_missing_retained_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/missing_retained_shape_id_count"
+    },
+    {
+      "metric_id": "adm2_duplicate_retained_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/duplicate_retained_shape_id_count"
+    },
+    {
+      "metric_id": "adm2_invalid_source_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/invalid_source_feature_count"
+    },
+    {
+      "metric_id": "adm2_topology_error_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM2/topology_error_pairs"
+    },
+    {
+      "metric_id": "adm3_retained_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/retained_feature_count"
+    },
+    {
+      "metric_id": "adm3_advertised_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/advertised_feature_count"
+    },
+    {
+      "metric_id": "adm3_advertised_minus_retained_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/advertised_minus_retained_feature_count"
+    },
+    {
+      "metric_id": "adm3_bbox_candidate_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/bbox_candidate_pairs"
+    },
+    {
+      "metric_id": "adm3_exact_intersect_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/exact_intersect_pairs"
+    },
+    {
+      "metric_id": "adm3_subjects_with_exact_intersection",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/subjects_with_exact_intersection"
+    },
+    {
+      "metric_id": "adm3_source_covers_target_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/source_covers_target_pairs"
+    },
+    {
+      "metric_id": "adm3_retained_nonblank_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/retained_nonblank_shape_id_count"
+    },
+    {
+      "metric_id": "adm3_unique_retained_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/unique_retained_shape_id_count"
+    },
+    {
+      "metric_id": "adm3_missing_retained_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/missing_retained_shape_id_count"
+    },
+    {
+      "metric_id": "adm3_duplicate_retained_shape_id_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/duplicate_retained_shape_id_count"
+    },
+    {
+      "metric_id": "adm3_invalid_source_feature_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/invalid_source_feature_count"
+    },
+    {
+      "metric_id": "adm3_topology_error_pairs",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "json_pointer": "/products/gb:IND:ADM3/topology_error_pairs"
+    },
+    {
+      "metric_id": "inherited_rows",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/report.json",
+      "json_pointer": "/row_count"
+    },
+    {
+      "metric_id": "inherited_mapped_land",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/report.json",
+      "json_pointer": "/source_status_counts/mapped-land-support"
+    },
+    {
+      "metric_id": "inherited_physical_unknown",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/report.json",
+      "json_pointer": "/physical_status_counts/unknown-source-fitness-and-observation-date"
+    },
+    {
+      "metric_id": "inherited_authority_unapproved",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/report.json",
+      "json_pointer": "/physical_authority_counts/unapproved"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/README.md",
+      "rows": [
+        {
+          "metric_id": "family_members",
+          "line": 26,
+          "template": "| Complete family members | {value} | components |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "family_rank",
+          "line": 27,
+          "template": "| Family selection rank | {value} | rank |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "family_universe",
+          "line": 28,
+          "template": "| Ranked source-fitness families | {value} | families |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "source_fit_witnesses",
+          "line": 29,
+          "template": "| Members requiring source-fitness assessment | {value} | components |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_retained_feature_count",
+          "line": 30,
+          "template": "| India ADM2: Retained source features | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_advertised_feature_count",
+          "line": 31,
+          "template": "| India ADM2: Advertised source features | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_advertised_minus_retained_feature_count",
+          "line": 32,
+          "template": "| India ADM2: Advertised minus retained features | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_bbox_candidate_pairs",
+          "line": 33,
+          "template": "| India ADM2: Bounding-box candidate pairs | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_exact_intersect_pairs",
+          "line": 34,
+          "template": "| India ADM2: Exact native-coordinate intersections | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_subjects_with_exact_intersection",
+          "line": 35,
+          "template": "| India ADM2: Subjects with an exact intersection | {value} | components |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_source_covers_target_pairs",
+          "line": 36,
+          "template": "| India ADM2: Source polygons covering candidate pointsets | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_retained_nonblank_shape_id_count",
+          "line": 37,
+          "template": "| India ADM2: Nonblank source shape IDs | {value} | IDs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_unique_retained_shape_id_count",
+          "line": 38,
+          "template": "| India ADM2: Unique source shape IDs | {value} | IDs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_missing_retained_shape_id_count",
+          "line": 39,
+          "template": "| India ADM2: Missing source shape IDs | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_duplicate_retained_shape_id_count",
+          "line": 40,
+          "template": "| India ADM2: Duplicate source shape ID groups | {value} | groups |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_invalid_source_feature_count",
+          "line": 41,
+          "template": "| India ADM2: Invalid source geometries | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_topology_error_pairs",
+          "line": 42,
+          "template": "| India ADM2: Topology predicate errors | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_retained_feature_count",
+          "line": 43,
+          "template": "| India ADM3: Retained source features | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_advertised_feature_count",
+          "line": 44,
+          "template": "| India ADM3: Advertised source features | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_advertised_minus_retained_feature_count",
+          "line": 45,
+          "template": "| India ADM3: Advertised minus retained features | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_bbox_candidate_pairs",
+          "line": 46,
+          "template": "| India ADM3: Bounding-box candidate pairs | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_exact_intersect_pairs",
+          "line": 47,
+          "template": "| India ADM3: Exact native-coordinate intersections | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_subjects_with_exact_intersection",
+          "line": 48,
+          "template": "| India ADM3: Subjects with an exact intersection | {value} | components |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_source_covers_target_pairs",
+          "line": 49,
+          "template": "| India ADM3: Source polygons covering candidate pointsets | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_retained_nonblank_shape_id_count",
+          "line": 50,
+          "template": "| India ADM3: Nonblank source shape IDs | {value} | IDs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_unique_retained_shape_id_count",
+          "line": 51,
+          "template": "| India ADM3: Unique source shape IDs | {value} | IDs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_missing_retained_shape_id_count",
+          "line": 52,
+          "template": "| India ADM3: Missing source shape IDs | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_duplicate_retained_shape_id_count",
+          "line": 53,
+          "template": "| India ADM3: Duplicate source shape ID groups | {value} | groups |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_invalid_source_feature_count",
+          "line": 54,
+          "template": "| India ADM3: Invalid source geometries | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_topology_error_pairs",
+          "line": 55,
+          "template": "| India ADM3: Topology predicate errors | {value} | pairs |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "inherited_rows",
+          "line": 56,
+          "template": "| Members in inherited comparison rows | {value} | components |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "inherited_mapped_land",
+          "line": 57,
+          "template": "| Inherited mapped-land-support status | {value} | components |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "inherited_physical_unknown",
+          "line": 58,
+          "template": "| Inherited physical status unknown | {value} | components |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "inherited_authority_unapproved",
+          "line": 59,
+          "template": "| Inherited physical authority unapproved | {value} | components |",
+          "decimals": 0
+        }
+      ]
+    }
+  ],
+  "method_input_hashes": {
+    "selection_input_sha256": "b443dae6b8afae62019feeb528ebb5f7a642e78984631a3fc821e78e7ec8bbe6",
+    "source_screen_analysis_input_sha256": "376b0cb52a9655884a8b07cb93bed0dd4100761ac67d30af9071799b5194d26b",
+    "inherited_rows_input_sha256": "50464e4b869a61e2ffd26c64c2d1dccfa65c55b5d2ad764b8b9fc66e5e5460e1",
+    "inherited_rows_input_definition": "SHA-256 of sorted JSON object mapping every pinned physical_component_rows_NN name to its whole-file SHA-256; each row is extracted by exact component_id after decoded shard identity verification."
+  },
+  "change_receipts": [
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/assess.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/baseline-inputs.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/extract_inherited.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/adm2-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/adm3-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/adm3-001.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/member-roster.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/report.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-03/source-coverage.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/adm2-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/adm3-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/adm3-001.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/member-roster.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/report.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-04/source-coverage.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/adm2-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/adm3-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/adm3-001.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/member-roster.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/report.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-07-05/source-coverage.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/adm2-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/adm3-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/adm3-001.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/member-roster.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/report.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-01/source-coverage.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/adm2-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/adm3-000.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/adm3-001.bin.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/member-roster.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/source-coverage.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-07-01/inherited-claims.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-07-01/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-07-01/report.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/inherited-claims.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/report.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ]
+}
