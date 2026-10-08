@@ -77,19 +77,41 @@ def get_features():
     if set(out)!=set(TARGETS): raise ValueError("target scope mismatch")
     return out,input_files
 
+def validate_capture_membership(cap):
+    expected_counts={"eparses":80,"mayotte":192,"reunion":134}
+    if set(cap.get("product_groups",{}))!=set(expected_counts):
+        raise ValueError("product-group inventory differs from declared scope")
+    records=[]; listings=[]
+    for area,expected in expected_counts.items():
+        group=cap["product_groups"][area]
+        if group.get("package_count")!=expected:
+            raise ValueError("unexpected product package count: "+area)
+        group_path=CATALOG/group["path"]
+        group_bytes=group_path.read_bytes()
+        if sha256(group_bytes).hexdigest()!=group["sha256"] or len(group_bytes)!=group["bytes"]:
+            raise ValueError("product-group response hash mismatch: "+area)
+        names=[x["prepackageName"] for x in json.loads(group_bytes).get("prepackageResources",[])]
+        if len(names)!=expected or len(set(names))!=expected:
+            raise ValueError("product group has missing or duplicate package: "+area)
+        area_records=[x for x in cap.get("metadata_records",[]) if x.get("area")==area]
+        area_listings=[x for x in cap.get("package_file_listings",[]) if x.get("area")==area]
+        record_names=[x.get("package") for x in area_records]
+        listing_names=[x.get("package") for x in area_listings]
+        if len(area_records)!=expected or len(set(record_names))!=expected or set(record_names)!=set(names):
+            raise ValueError("package metadata membership mismatch: "+area)
+        if len(area_listings)!=expected or len(set(listing_names))!=expected or set(listing_names)!=set(names):
+            raise ValueError("package file-list membership mismatch: "+area)
+        records.extend(area_records); listings.extend(area_listings)
+    record_map={(x["area"],x["package"]):x for x in records}
+    listing_map={(x["area"],x["package"]):x for x in listings}
+    if len(record_map)!=406 or record_map.keys()!=listing_map.keys():
+        raise ValueError("catalog metadata/listing membership mismatch")
+    return record_map,listing_map
+
 def main():
     cap=json.loads(CAPTURE.read_text())
     # Verify the retained original group-response bodies and exact inventory membership.
-    for area,g in cap["product_groups"].items():
-        p=CATALOG/g["path"]; h=file_hash(p)
-        if h["sha256"]!=g["sha256"] or h["bytes"]!=g["bytes"]: raise ValueError("group hash mismatch")
-        group=json.loads(p.read_text())
-        names={x["prepackageName"] for x in group["prepackageResources"]}
-        recs={x["package"] for x in cap["metadata_records"] if x["area"]==area}
-        if names!=recs or len(names)!=g["package_count"]: raise ValueError("group/metadata mismatch "+area)
-    records={(x["area"],x["package"]):x for x in cap["metadata_records"]}
-    listing={(x["area"],x["package"]):x for x in cap["package_file_listings"]}
-    if records.keys()!=listing.keys() or len(records)!=406: raise ValueError("catalog listing membership mismatch")
+    records,listing=validate_capture_membership(cap)
     parsed={}
     for key,rec in records.items():
         row=parse_metadata(rec)

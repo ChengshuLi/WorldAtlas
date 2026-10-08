@@ -32,7 +32,10 @@ Package metadata records Eparses under Licence Ouverte v2 (2017) with Shom 2012 
 
 ```sh
 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py
+PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B data/regional-review/wio-offshore-island-sources-20261003/test_shom_catalog_analysis.py
 ```
+
+The membership controls accept the captured 406-package inventory and reject a removed or duplicated package metadata record and a missing package-file listing, without altering retained source files.
 
 The current official Seychelles Ministry of Environment page describes 115 granitic and coral islands and their broad physical groups, while the 2013 NBS “Seychelles in Figures” PDF gives the older approximate description “over 116” islands (43 in the Mahé group and 73 or more coralline outliers). These divergent, coarse aggregates are not full island catalogs and do not map physical islands to the eight assigned ADM2 regions or reconcile the seven current versus 1,057 source “Other Islands” components. Neither source provides licensed region/island polygons. The 2025 National Spatial Data Sharing Policy search result describes a bilateral GIS data license whose Article 8.1 generally restricts delivered datasets to internal use and prevents third-party availability, unless a dataset-specific agreement states otherwise. The official PDF URL returned 404 during direct retrieval on 2026-10-08, so its indexed text is recorded as a lead requiring confirmation from the data custodian, not retained as a license grant. The accessible Ministry ecology page and NBS 2013 PDF are logged by exact response hashes; the newer outer-islands page was confirmed via the current official ministry site but was not retained. Direct NBS GIS/report-page requests returned 403, while the prior issue packet records the census-download account wall. Public statistical tables and enumerator mapping are not a licensed settlement gazetteer.
 
