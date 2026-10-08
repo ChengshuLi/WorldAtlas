@@ -17,15 +17,6 @@ def sha(raw:bytes)->str:return hashlib.sha256(raw).hexdigest()
 def git(*args)->bytes:return subprocess.check_output(['git','-C',str(ROOT),*args],stderr=subprocess.PIPE)
 def canonical(value):return (json.dumps(value,sort_keys=True,ensure_ascii=False,separators=(',',':'),allow_nan=False)+'\n').encode()
 
-class CapturedBaseline:
- """Cache authenticated Git blobs so repeated phase access reads each once."""
- def __init__(self,*args,**kwargs):
-  self._captured={}
-  super().__init__(*args,**kwargs)
- def read(self,name):
-  if name not in self._captured:self._captured[name]=super().read(name)
-  return self._captured[name]
-
 def blob_info(commit,path):
  if not re.fullmatch('[a-f0-9]{40}',commit):raise ValueError('Require an immutable full baseline commit')
  row=git('ls-tree','-z',commit,'--',path).decode().rstrip('\0')
@@ -148,6 +139,14 @@ def main():
  if sha(immutable_raw)!=immutable_row['sha256']:raise ValueError('Shared immutable helper pin mismatch')
  immutable=types.ModuleType('worldatlas_immutable')
  exec(compile(immutable_raw,immutable_row['path'],'exec'),immutable.__dict__)
+ class CapturedBaseline(immutable.Baseline):
+  """Cache authenticated Git blobs so repeated phase access reads each once."""
+  def __init__(self,*args,**kwargs):
+   self._captured={}
+   super().__init__(*args,**kwargs)
+  def read(self,name):
+   if name not in self._captured:self._captured[name]=super().read(name)
+   return self._captured[name]
  files=[row for row in plan['baseline_files'] if row['path'] in phase_paths]
  runner_row=all_files['research/geography/arctic-seven-source-fit-20261008/run_source_phase.py']
  runner_oid,_=blob_info(args.baseline,runner_row['path'])

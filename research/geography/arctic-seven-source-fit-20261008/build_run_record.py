@@ -88,7 +88,7 @@ def main():
   'active_feature_count':plan['candidate_scope']['active_feature_count'],'phases':rows,
   'all_phases_under_cap':all(row['actual_charged_bytes']<=CAP for row in rows)}
  raw=(json.dumps(result,sort_keys=True,ensure_ascii=False,separators=(',',':'))+'\n').encode()
- target=PACKET/'r6-execution-budget.json'
+ target=PACKET/'r7-execution-budget.json'
  if target.is_symlink():raise ValueError('Run record destination cannot be a symlink')
  if target.exists():
   if target.read_bytes()!=raw:raise FileExistsError('Preserve existing execution budget record')
