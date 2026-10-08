@@ -12,14 +12,23 @@ function sinks() {
   return {stdout,stderr,get out(){return out;},get err(){return err;}};
 }
 const code = source => ['--input-type=module','--eval',source];
-test('stdout and stderr arrive while the child is still waiting, with chunked zero-skips summary',async()=>{
-  const s=sinks();let observed=false;
+test('stdout and stderr arrive while the child is still waiting, with chunked zero-skips summary',async t=>{
+  const root=fs.mkdtempSync(path.join(process.cwd(),'.cache/integration-stream-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const release=path.join(root,'release'),s=sinks();let observed=false;
+  s.stdout.once('data',()=>{
+    observed=true;assert.ok(!s.out.includes('# skipped 0'));
+    fs.writeFileSync(release,'continue',{flag:'wx'});
+  });
   const pending=streamTestProcess(code(`
+    import fs from 'node:fs';
     console.log('first-test-completed');console.error('active-next-phase');
-    process.stdin.resume();
-    setTimeout(()=>{process.stdout.write('# skip');setTimeout(()=>{console.log('ped 0');process.exit(0);},20);},150);
+    const timer=setInterval(()=>{if(fs.existsSync(${JSON.stringify(release)})){
+      clearInterval(timer);process.stdout.write('# skip');
+      setTimeout(()=>{console.log('ped 0');process.exit(0);},20);
+    }},20);
+    setTimeout(()=>process.exit(9),5000).unref();
   `),s);
-  s.stdout.once('data',()=>{observed=true;assert.ok(!s.out.includes('# skipped 0'));});
   assert.equal(await pending,0);assert.ok(observed);assert.match(s.err,/active-next-phase/);
 });
 test('the real Node TAP runner reports a finished test while the next test is still active',async t=>{
@@ -74,4 +83,27 @@ test('cancellation terminates the actual test process group, including a descend
     await new Promise(r=>setTimeout(r,50));
   }
   assert.ok(absent,'cancelled descendant must be reaped');
+});
+
+test('exited failures clean detached-stdio descendants and successful orphans reject', {skip:process.platform==='win32'}, async t=>{
+  const root=fs.mkdtempSync(path.join(process.cwd(),'.cache/integration-orphan-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  for (const status of [7,0]) {
+    const pidFile=path.join(root,`${status}.pid`);
+    const source=`import {spawn} from 'node:child_process';import fs from 'node:fs';
+      const c=spawn(process.execPath,['-e',"process.on('SIGTERM',()=>{});setInterval(()=>{},1000)"],{stdio:'ignore'});
+      c.unref();fs.writeFileSync(${JSON.stringify(pidFile)},String(c.pid),{flag:'wx'});
+      setTimeout(()=>{console.log('# skipped 0');process.exit(${status});},150);`;
+    const pending=streamTestProcess(code(source),sinks());
+    if(status===0) await assert.rejects(pending,/unfinished descendants/);
+    else assert.equal(await pending,7);
+    const descendant=Number(fs.readFileSync(pidFile,'utf8'));
+    t.after(()=>{try{process.kill(descendant,'SIGKILL');}catch{}});
+    let absent=false;
+    for(let i=0;i<40;i++){
+      try{process.kill(descendant,0);}catch(e){if(e.code==='ESRCH'){absent=true;break;}throw e;}
+      await new Promise(r=>setTimeout(r,50));
+    }
+    assert.ok(absent,'terminal child must leave no running descendant');
+  }
 });

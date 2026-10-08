@@ -36,8 +36,9 @@ component reconstruction cache in the adverse controls is unchanged.
 
 The integration runner streams stdout/stderr while tests run, retains a bounded
 TAP tail and enforces the existing 64 MiB transcript limit and zero-skips condition.
-Failures retain their exit status. Cancellation terminates the owned test process
-group on POSIX, including descendants, with escalation; it does not kill unrelated
+Failures retain their exit status. Every terminal result cleans remaining owned
+process-group descendants on POSIX with escalation; successful orphaned work
+rejects instead of claiming completion. Cancellation also reaches that group; it does not kill unrelated
 workers. Scientific test wrappers can still buffer their own subprocess output;
 the selected file list identifies them before execution, and their final timings
 remain in TAP. More granular inner progress is a separate optimization.

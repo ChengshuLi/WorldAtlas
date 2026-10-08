@@ -43,7 +43,8 @@ this 8 GiB macOS host. Exact hosted comparisons remain necessary.
 The runner now streams TAP/diagnostics, bounds retained summary memory and keeps
 its transcript and zero-skips protections. Actual process tests cover progress
 before completion, failure and missing/skipped summary rejection, bounded output,
-and cancellation including a descendant. The long Python wrapper streams its
+and cancellation including a descendant. Terminal failure cleans orphaned
+children; apparent success with unfinished children rejects. The long Python wrapper streams its
 active control phases while retaining its original deadline/output bound and
 seven-test assertion. Its real wrapper tests reject nonzero and incomplete runs.
 
@@ -57,7 +58,7 @@ exact-head review, actual hosted full/queue timing, post-merge geography selecti
 and final reconciliation of further opportunities. Use `Refs #1201` for this PR;
 these local results do not justify closing the original issue.
 
-Local verification: 104 runner/selection/proof/sparse-workflow controls pass with
+Local verification: 105 runner/selection/proof/sparse-workflow controls pass with
 zero skips. The two whole-custody fixture tests pass. The complete seven-scenario
 local prototype run remains separate from exact-head hosted verification; its
 wrapper deadline is unchanged. The 40% threshold from individual geography
@@ -69,3 +70,8 @@ The direct Python prototype completed all seven expected semantic rejections:
 hosted timing or proof that the unchanged 600-second Node wrapper deadline fits
 locally. The default control methods were unchanged by subsequent fixture-test
 registration; the actual final wrapper still requires hosted full regression.
+
+The local candidate preparation measurements are archived prototype results based
+on the stated baseline and exact helper bytes, not current PR-base measurements.
+They retain their actual evaluation commit rather than being relabeled as a newer
+run when main advances.

@@ -135,12 +135,21 @@ export async function streamTestProcess(args, {env = process.env,
     });
     // Keep the escalation alive after the parent exits: a descendant can still
     // hold the original process group even after its test worker has terminated.
-    if (cancelled && grouped) {
+    let orphaned = false;
+    if (grouped) {
+      try { process.kill(-child.pid, 0); orphaned = true; }
+      catch (error) { if (error.code !== 'ESRCH') throw error; }
+    }
+    // Even an exited test can leave stdio-detached native children behind.
+    // The group is exclusively owned by this invocation, never another worker.
+    if (orphaned) {
+      stop('SIGTERM');
       await new Promise(resolve => setTimeout(resolve, 1000));
       stop('SIGKILL');
     }
     if (failure) throw failure;
     if (cancelled) return cancelled === 'SIGINT' ? 130 : 143;
+    if (result.status === 0 && orphaned) throw Error('Regression exited successfully with unfinished descendants');
     if (result.status === 0 && !/^# skipped 0$/m.test(tail)) throw Error('Regression did not establish zero skipped tests');
     if (result.status === 0 && /^# skipped [1-9]/m.test(tail)) throw Error('Skipped tests cannot establish regression coverage');
     return result.status ?? 1;
