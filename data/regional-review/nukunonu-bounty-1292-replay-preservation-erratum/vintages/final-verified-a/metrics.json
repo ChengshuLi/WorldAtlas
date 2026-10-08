@@ -1,0 +1,42 @@
+{
+  "method": "Component counts are computed from each pinned report's per-component covered fractions; GSHHG union values use the report's source-union fraction.",
+  "metrics": {
+    "bounty_gshhg_positive_component_fraction": {
+      "denominator": 14,
+      "numerator": 0,
+      "unit": "fraction of GSHHG components with positive-area overlap",
+      "value": 0.0
+    },
+    "bounty_gshhg_union_coverage_fraction": {
+      "unit": "fraction of source-union area covered",
+      "value": 0.0
+    },
+    "bounty_osm_full_component_fraction": {
+      "denominator": 27,
+      "numerator": 27,
+      "unit": "fraction of OSM rings fully area-covered",
+      "value": 1.0
+    },
+    "nukunonu_gshhg_positive_component_fraction": {
+      "denominator": 21,
+      "numerator": 6,
+      "unit": "fraction of GSHHG components with positive-area overlap",
+      "value": 0.2857142857142857
+    },
+    "nukunonu_gshhg_union_coverage_fraction": {
+      "unit": "fraction of source-union area covered",
+      "value": 0.15349689612035136
+    },
+    "nukunonu_osm_full_component_fraction": {
+      "denominator": 97,
+      "numerator": 97,
+      "unit": "fraction of OSM rings fully area-covered",
+      "value": 1.0
+    }
+  },
+  "schema": "worldatlas-1292-replay-metric-ledger-v1",
+  "source_attempt": {
+    "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/attempt.json",
+    "sha256": "8d4a7898e4458b8b81059b1823af4739470e905d9f465fc08f5231da5fe6b2c1"
+  }
+}
