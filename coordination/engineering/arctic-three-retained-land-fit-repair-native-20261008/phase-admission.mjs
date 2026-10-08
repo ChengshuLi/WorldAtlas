@@ -61,6 +61,8 @@ export function authenticateAdmittedBody(admission, file) {
     assert.equal(hash.digest('hex'), snapshot.pin.sha256);
     const after = fs.fstatSync(fd);
     for (const field of Object.keys(identity)) assert.equal(after[field], identity[field], 'Body changed while authenticated');
+    const current = ordinary(file);
+    for (const field of Object.keys(identity)) assert.equal(current[field], identity[field], 'Authenticated pathname replaced');
   } finally { fs.closeSync(fd); }
 }
 
@@ -80,6 +82,8 @@ export function readAdmittedBody(admission, file) {
     assert.equal(createHash('sha256').update(body).digest('hex'), snapshot.pin.sha256);
     const after = fs.fstatSync(fd);
     for (const field of Object.keys(identity)) assert.equal(after[field], identity[field], 'Body changed while read');
+    const current = ordinary(file);
+    for (const field of Object.keys(identity)) assert.equal(current[field], identity[field], 'Read pathname replaced');
     return body;
   } finally { fs.closeSync(fd); }
 }

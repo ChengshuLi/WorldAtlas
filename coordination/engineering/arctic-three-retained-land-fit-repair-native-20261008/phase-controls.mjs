@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {admitPhase, readAdmittedBody} from './phase-admission.mjs';
+import {admitPhase, readAdmittedBody, authenticateAdmittedBody} from './phase-admission.mjs';
 const root = fs.mkdtempSync(path.join(process.cwd(), '.cache-phase-control-'));
 const body = Buffer.from('complete original fixture\n');
 const file = path.join(root, 'input'); fs.writeFileSync(file, body, {mode: 0o600});
@@ -28,7 +28,23 @@ try {
   assert.throws(() => readAdmittedBody(admitted, path.join(root, 'foreign')));
   fs.writeFileSync(file, Buffer.alloc(body.length, 0));
   assert.throws(() => readAdmittedBody(admitted, file));
-  console.log(JSON.stringify({positive: 1, negative: 6, overbound_body_opens: 0,
+  for (const reader of [readAdmittedBody, authenticateAdmittedBody]) {
+    const race = path.join(root, `replacement-${reader.name}`);
+    fs.writeFileSync(race, body, {mode: 0o600});
+    const raceAdmission = admitPhase({inputs: [pin(race)], runtime: pin(runtime), outputReserve: 1024});
+    const fstat = fs.fstatSync; let swapped = false;
+    fs.fstatSync = (...args) => {
+      const value = fstat(...args);
+      if (!swapped) {
+        swapped = true; fs.renameSync(race, race + '.held');
+        fs.writeFileSync(race, body, {mode: 0o600});
+      }
+      return value;
+    };
+    try { assert.throws(() => reader(raceAdmission, race), /pathname replaced/); }
+    finally { fs.fstatSync = fstat; }
+  }
+  console.log(JSON.stringify({positive: 1, negative: 8, pathname_replacement_negatives: 2, overbound_body_opens: 0,
     fixture_runtime_only: true, actual_installed_runtime_qualification: false}));
 } finally {
   fs.openSync = open;
