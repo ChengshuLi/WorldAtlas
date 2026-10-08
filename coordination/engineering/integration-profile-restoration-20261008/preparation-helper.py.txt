@@ -1,0 +1,19 @@
+from pathlib import Path
+import os,json,subprocess,hashlib,gzip,stat
+w=Path('/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work');head=subprocess.check_output(['git','-C',str(w),'rev-parse','HEAD']).decode().strip();assert head.startswith('34bd326b');ns=w/'coordination/engineering/integration-profile-restoration-20261008';ns.mkdir(parents=True,exist_ok=True)
+tree={}
+for line in subprocess.check_output(['git','-C',str(w),'ls-tree','-rlz',head]).split(b'\0'):
+ if line:
+  meta,name=line.split(b'\t');mode,kind,oid,size=meta.decode().split();tree[name.decode()]=(mode,oid,int(size))
+groups=['scripts/','src/','test/','.github/','drizzle/','hosted/'];names=sorted(n for n in tree if any(n.startswith(p)for p in groups)or n in ['data/research-geography-gate.json','package.json','package-lock.json','requirements.txt']);rows=[]
+for n in names:
+ p=w/n;s=p.lstat();mode,oid,size=tree[n];assert stat.S_ISREG(s.st_mode)and not p.is_symlink()and size==s.st_size and size<32*1024*1024;b=p.read_bytes();assert hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()==oid
+ rows.append({'path':n,'mode':mode,'oid':oid,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'base64':__import__('base64').b64encode(b).decode()})
+x={'version':1,'execution_commit':head,'original_base':'689fa0618ce61827adc8862c3e065bcfcf97417b','workflow_paths':groups,'canonical_namespace_present':False,'files':rows};raw=(json.dumps(x,separators=(',',':'))+'\n').encode();encoded=gzip.compress(raw,mtime=0);assert len(raw)<32*1024*1024;assert sum(z['bytes']for z in rows)+len(raw)+len(encoded)+121304480+8*1024*1024<256*1024*1024
+out=ns/'sparse-source-image.json.gz';assert not out.exists();out.write_bytes(encoded)
+for name in ['one','two']:
+ root=w/'.cache'/('evidence-sparse-replay-'+name);assert not root.exists();root.mkdir()
+ for z in rows:
+  p=root/z['path'];p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(__import__('base64').b64decode(z['base64']));p.chmod(0o755 if z['mode']=='100755' else 0o644)
+ assert not (root/'coordination').exists()
+print(json.dumps({'source_commit':head,'files':len(rows),'source_bytes':sum(z['bytes']for z in rows),'archive_bytes':len(encoded),'archive_decoded_bytes':len(raw),'prospective_complete_phase_bytes':sum(z['bytes']for z in rows)+len(raw)+len(encoded)+121304480+8*1024*1024,'fresh_fixture_names':['one','two']}))

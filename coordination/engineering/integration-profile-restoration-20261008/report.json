@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "issue": 1516,
+  "status": "PASS",
+  "execution_commit": "34bd326b3710a1f40d9d9348532d752b0c5b1a4a",
+  "base_commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+  "runs": {
+    "one": {
+      "exit_code": 0,
+      "tests": 207,
+      "passed": 207,
+      "skipped": 0,
+      "failed": 0,
+      "log_sha256": "5a834e8a5fed68cdac54ec3fc7ce7dd8d9bf6dd3bc2c9e36bd163ca70b043be3",
+      "command": "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+      "source_commit": "34bd326b3710a1f40d9d9348532d752b0c5b1a4a"
+    },
+    "two": {
+      "exit_code": 0,
+      "tests": 207,
+      "passed": 207,
+      "skipped": 0,
+      "failed": 0,
+      "log_sha256": "6880be6e9431e6a0d412a6560d6bd746615e9a9348ffe37384ef011737f11639",
+      "command": "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+      "source_commit": "34bd326b3710a1f40d9d9348532d752b0c5b1a4a"
+    }
+  },
+  "boundary_controls": 6,
+  "selected_focused_test_files": 12,
+  "tests_per_run": 207,
+  "skipped_per_run": 0,
+  "full_fixture_restoration_qualification": "Real runner calls controlled helper before selected reader; this is not actual world restoration. Full normal CI remains required.",
+  "source_image_files": 710,
+  "whole_source_files_unchanged_before_after": true,
+  "canonical_namespace_absent_in_both_runs": true,
+  "source_image_sha256": "ffda82cf52beb803358ae64e57b840ea56c9926dbc2c6673d7ae9463594201a2",
+  "prospective_phase": {
+    "source_commit": "34bd326b3710a1f40d9d9348532d752b0c5b1a4a",
+    "files": 710,
+    "source_bytes": 6886624,
+    "archive_bytes": 2804679,
+    "archive_decoded_bytes": 9333750,
+    "prospective_complete_phase_bytes": 148718141,
+    "fresh_fixture_names": [
+      "one",
+      "two"
+    ]
+  },
+  "runtime": {
+    "node_version": "v24.19.0",
+    "node_bytes": 121304480
+  },
+  "initial_boundary_fixture_failure": "Inherited NODE_TEST_CONTEXT suppressed nested node:test execution; corrected only fixture environment to represent plain CLI. Production runner guards unchanged."
+}
