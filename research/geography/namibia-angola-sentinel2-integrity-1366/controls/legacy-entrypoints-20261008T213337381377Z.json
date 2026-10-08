@@ -1,0 +1,36 @@
+{
+  "execution": "unchanged pinned #1366 offline selector and complete analysis CLI copied into this owned fixture; extractor deterministic_npz function executed directly from its authenticated AST",
+  "limits": [
+    "No remote STAC query or COG acquisition was made. Rasterio/GDAL are unavailable in the bundled runtime, so the full remote extractor pipeline and its HTTP readers were not run.",
+    "The shared NewVintage result writer is covered separately in writer-probes; these observations reproduce defects in the unchanged inherited entry points and do not claim those entry points are repaired."
+  ],
+  "results": {
+    "analysis": {
+      "complete_output_matches_retained_run_one": true,
+      "completion_receipt_present": false,
+      "dangling_symlink_followed": true,
+      "late_os_file_limit_exit": 1,
+      "normal_exit": 0,
+      "occupied_output_overwritten": true,
+      "outside_path_traversal_created": true,
+      "partial_result_bytes_after_os_failure": 1024,
+      "symlink_target_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41",
+      "traversal_result_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41"
+    },
+    "extractor_writer": {
+      "dangling_npz_symlink_followed": true,
+      "linked_target_sha256": "e18b22860c6e9f5f718aeba458b3eeee79ac6b0a9aee837ce4b3d87178748e63",
+      "occupied_npz_overwritten": true
+    },
+    "selection": {
+      "dangling_symlink_followed": true,
+      "normal_exit": 0,
+      "occupied_output_overwritten": true,
+      "selected_output_matches_retained_bytes": true,
+      "sentinel_copy_preserved": true,
+      "symlink_target_sha256": "14a7594d1900646470564f33b5a60b95c889b86404e373490eee845a1e5779ec"
+    }
+  },
+  "source_commit": "f513f7d6cb5fb088c1fca0238d915426a14ecfa8",
+  "version": 1
+}
