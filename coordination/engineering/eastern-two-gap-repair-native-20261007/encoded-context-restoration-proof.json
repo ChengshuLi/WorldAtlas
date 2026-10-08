@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "old_index_sha256": "1dad6b42f55a2291a6884f302b31308d9b4323daf4536fc93a41efc7dee1695d",
+  "new_index_sha256": "b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876",
+  "old_encoded_bytes": 131038391,
+  "new_encoded_bytes": 133294524,
+  "whole_inverse_verified": true,
+  "original_members": 286,
+  "current_members": 287,
+  "unchanged_members": 285,
+  "changed": "current-context-byte-patch.json.gz",
+  "added": "current-context-outer-byte-patches.json.gz",
+  "scratch": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/1295-portable-context-bank",
+  "scientific_generators_invoked": false,
+  "code_binding": {
+    "status": "PASS",
+    "source_commit": "53f66ece78a83b17c58d263c9ea06fd65873bd97",
+    "files": 50,
+    "unchanged_whole_bindings": 49,
+    "changed_validator_sources": [
+      "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs"
+    ],
+    "prior_index_sha256": "b10e047e345733a983464a282a9819db42930e667d74186c435088c1d146bcea",
+    "current_index_sha256": "c43eb9885fea639d7c8c43a74804ac192ad710993235287d5996d182883cc2bf",
+    "prior_stage_sha256": "61983d0a4ebed5540d420be3225baa777c7b6a17751a2f36da11461290423453",
+    "current_stage_sha256": "fd4bce908b270716579ecff10064da1275bee30eb0bb941bf4986c53facb6a93",
+    "full_inverse_verified": true,
+    "scientific_producers_invoked": false,
+    "scratch": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/child768-code-bank-gb8lgS"
+  },
+  "actual_control_result": {
+    "status": "PASS",
+    "complete_encoded_member_inverse": true,
+    "complete_outer_transport_inverse": 2,
+    "negative_controls": 6,
+    "compression_encoder_invoked": false,
+    "scientific_generators_invoked": false,
+    "runtime": "Node24.19.0 MacOS; platform-independent operator uses only existing exact copy/literal and bounded gunzip, not any encoder"
+  },
+  "original_member_source_commit": "c67345546a24479e29ff9e2872098c78b256209a",
+  "original_outer_source_commit": "8c8f00e4e946f1820a7afe4f6c4f5a0820445ed7",
+  "failure": {
+    "head": "5dc616f5a2579308a361f1eff340d5fca0f350e2",
+    "run": 37747756387,
+    "exit": "failure",
+    "node": "24.21.0",
+    "python": "3.12.15",
+    "status": "Exact encoded original body mismatch before original-v1 replay; correct strict rejection, no full build qualification."
+  }
+}

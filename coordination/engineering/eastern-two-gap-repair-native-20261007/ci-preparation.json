@@ -1,8 +1,8 @@
 {
   "version": 1,
   "issue": 1295,
-  "pre_ci_head": "8a5a5ae365698990c3ec7bd5766e808f5abec19f",
-  "normal_full_build_status": "pending-existing-GitHub-CI",
+  "pre_ci_head": "5dc616f5a2579308a361f1eff340d5fca0f350e2",
+  "normal_full_build_status": "first-hosted-attempt-failed-exact-gzip-body-check; corrected-byte-only-restoration-pending-next-existing-CI",
   "source_image_head": "8a5a5ae365698990c3ec7bd5766e808f5abec19f",
   "source_image_proof_sha256": "8a8a6cca50890efbdc725c4a01cb35c0af692c491b0c0b3ab6b5592af5bcb0e7",
   "source_files": 7242,
@@ -22,7 +22,16 @@
     "neighbor_relations": 12
   },
   "source_vintages": "Native5b, geometry976, original-v1 explicit913 modules vs advertiseddaa mismatch, accepted1386 and1364 products unchanged. Exact original scientific execution capsules and complete body restoration remain retained.",
-  "hosted_runtime": "Not yet executed; existing workflow Ubuntu/Node24/Python3.12/requirements.txt. Distinct from actual Mac Node24.19/Python3.12.14 qualification.",
+  "hosted_runtime": "Actual first existing Ubuntu workflow Node24.21.0/Python3.12.15. Distinct from local Mac Node24.19/Python3.12.14.",
   "local_failed_history": "All original local admissions and failed/guard-stopped build logs, samples, exact timing/code/source vintages retained under owned external cache; no failed run represented as PASS.",
-  "no_production": true
+  "no_production": true,
+  "restoration_source_commit": "53f66ece78a83b17c58d263c9ea06fd65873bd97",
+  "first_hosted_failure": {
+    "head": "5dc616f5a2579308a361f1eff340d5fca0f350e2",
+    "run": 37747756387,
+    "exit": "failure",
+    "node": "24.21.0",
+    "python": "3.12.15",
+    "status": "Exact encoded original body mismatch before original-v1 replay; correct strict rejection, no full build qualification."
+  }
 }
