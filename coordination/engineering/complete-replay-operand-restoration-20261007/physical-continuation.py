@@ -78,14 +78,29 @@ def original_project(entry, baseline, current_project):
     return result, distinct, aliases
 
 
-def derive_spec(adapter, driver, plan, campaign, prior):
+def derive_spec(adapter, driver, plan, campaign, prior, admitted_spec):
     """Derive old complete stage rosters from the actual original plan/receipts."""
     jobs = {j['id']: j for j in plan['jobs']}
     need(len(jobs) == len(plan['jobs']) and plan['scope']['components'] == 95173 and
          plan['scope']['ordered_queries'] == 10419, 'Original complete plan differs')
+    admitted = {'components': admitted_spec['components'],
+                'mismatches-complete': admitted_spec['mismatches']}
+    admitted.update({f'physical-{i:03}': value for i, value in enumerate(admitted_spec['physical'])})
+    admitted.update({f'routing-{i:03}': value for i, value in enumerate(admitted_spec['routing'])})
+    need(len(admitted) == 98, 'Complete original98 predecessor metadata required')
     def stage(name, ordinal=None):
-        need(name in jobs, 'Foreign original predecessor stage')
-        publication, inventory = driver.receipt_pins(adapter, campaign / name)
+        need(name in jobs and name in admitted, 'Foreign original predecessor stage')
+        publication = admitted[name]['publication']
+        inventory = admitted[name]['inventory']
+        need(publication['path'] == str(campaign / name / 'publication.json') and
+             type(publication['bytes']) is int and publication['bytes'] <= adapter.RECEIPT and
+             inventory['path'] == str(campaign / name / 'stage-inventory.json.gz'),
+             'Admitted original publication/inventory path differs')
+        # Read ONLY the already prospectively admitted whole publication bytes.
+        # Reject a returned foreign inventory before opening its body.
+        receipt = driver.inventory_preview(adapter, publication)
+        need(receipt.get('complete') is True and receipt.get('version') == 1 and
+             receipt['inventory'] == inventory, 'Actual receipt returned unadmitted inventory')
         preview = driver.inventory_preview(adapter, inventory)
         operation = driver.predecessor_operation(name)
         need(preview['facts']['operation'] == operation,
@@ -228,12 +243,12 @@ def main():
     discovery = []
     if operation in ('physical-membership', 'physical-membership-join'):
         # Qualify the complete spec once in membership and again in its parent.
-        # All97 actual old publication/inventory bodies are real phase inputs.
+        # All98 actual old publication/inventory bodies are real phase inputs.
         discovery = [p for stage in [spec['components'], spec['mismatches'], *spec['physical'], *spec['routing']]
                      for p in (stage['publication'], stage['inventory'])]
         modules['driver'].admit_previews(adapter, [*project, *discovery], runtime_bytes=runtime_bytes,
                                          runtime_verified=True, output_reserve=request['output_reserve'])
-        expected = derive_spec(adapter, modules['driver'], plan, campaign, prior)
+        expected = derive_spec(adapter, modules['driver'], plan, campaign, prior, spec)
         expected['continuation_execution_commit'] = head
         need(spec == expected, 'Spec does not match original complete plan/actual receipts')
     else:
