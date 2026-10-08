@@ -1,0 +1,1028 @@
+{
+  "version": 1,
+  "issue": 1452,
+  "lane": "geography",
+  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "subject_ids": [
+    "gb:LTU:ADM2:59024439B19575014620111",
+    "gb:LTU:ADM2:59024439B52033520810825",
+    "gb:LVA:ADM1:71098776B71258051821866",
+    "physical-component:00c5d50d6765602074625e006f08b1b58ac03cd3d9fc5b1a624bbf0158f18ae0",
+    "physical-component:0882c7d92c696f53d8fe8bba690973c32788f2e51bd1ef6bd4c055dd13279056",
+    "physical-component:14f6a86eac664f3256a633ae0f853360d63edb14be9c9811b450176f50ceab26",
+    "physical-component:1a77c37a11f3d84b46d4651220599107401bc21d1536133fcc7618d66c0a49f5",
+    "physical-component:294063970434d15f149c664633f64dba5411458cf843cd925e4e637dd3de51da",
+    "physical-component:694a1cb53116d780f0ee776a0f3989edb0d74b01f4c5d89dc05911407407f69b",
+    "physical-component:7929dff9531413d6e6a860bfffea697694d286b2797a1ff0664d71115d364316",
+    "physical-component:9e0b3beac32b8398b3708a9918c9920a76917068d6711af5b02999314f6bea22",
+    "physical-component:b3a2cc30d91e76ce3dedaa850d8382a882f76db28d279f8bb50d3f77777c1577",
+    "physical-component:b4fd86a506640456d483a8f82a945463e084a45a73582b1010f2fea2f8967ca1",
+    "physical-component:bc256ccd31a291bf847cee3b7dc1f1f37a9fa12e708f978d9dc452880d912e08",
+    "physical-component:c167b7699ddfa22945201526da32448b3ecb1a33ac810ba5457693fb837e901a",
+    "physical-component:e33456f199bc7c1cb595c3211a28fe42231252d4c0348acd321621878fe60eba",
+    "physical-component:eaa5da8229b82a55de103a841fcc4ebb73c7f468f3dcffdb5c0e7171485b345f",
+    "physical-component:ee9bc61cd9e2a907faa1f59362c07e036c2d4a5e499583f33f64c8f7887175e3",
+    "physical-component:f79b07eb63959b23c1477e235d7ecd86ff4a59f0b80fd1555e22c4a0ce723083"
+  ],
+  "subject_ids_sha256": "1add945db4e638b892566a417deac4ab13c448a343ebe65da8b4a3db897be94f",
+  "baseline": {
+    "commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7",
+    "files": [
+      {
+        "bytes": 1056877,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+        "sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415"
+      },
+      {
+        "bytes": 1056628,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-002.bin.gz",
+        "sha256": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "9de1ea80581fe6f4445108c0c49b68e78bdbd0e2f288d80716ca337c5c2d8561"
+      },
+      {
+        "bytes": 1056615,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-004.bin.gz",
+        "sha256": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "651b27a01f11f6b7328ce866abe1c0918ed858e8ab7fc1dac76e2697e9037866"
+      },
+      {
+        "bytes": 1054508,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-010.bin.gz",
+        "sha256": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "7889ff3e15b041a666f0394c9647835fd89b7ac489075831ed47745be2e83071"
+      },
+      {
+        "bytes": 1056946,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-011.bin.gz",
+        "sha256": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1ff9b2ea435250fbf47c36e203bc95ca99efeadcc43f4b9052d8aaeea12e100e"
+      },
+      {
+        "bytes": 1056340,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-015.bin.gz",
+        "sha256": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8336e041079ab4cdaeee76442c40fb9f6e69bdb24ead60ef170010b8c1169c8b"
+      },
+      {
+        "bytes": 1057188,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-017.bin.gz",
+        "sha256": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "ff1fd84298383e79f20f27a865ff1d72ba36856a1decc521cc3c460ead16f492"
+      },
+      {
+        "bytes": 1058049,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-018.bin.gz",
+        "sha256": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "0445faa56bff82aa5d0b98c78c420bb2f83671aa289bda55dfb71283e3673c8c"
+      },
+      {
+        "bytes": 1057293,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-022.bin.gz",
+        "sha256": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "146a652d7cead31fc783d93423b74cb52691cf2eded8de39f4272a1e6cb2250f"
+      },
+      {
+        "bytes": 1055293,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-023.bin.gz",
+        "sha256": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "12be08c70304f2c808f53d74ef350c0d302def8e53568922c1734c7bfd06dee9"
+      },
+      {
+        "bytes": 890162,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-024.bin.gz",
+        "sha256": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+        "uncompressed_bytes": 7065187,
+        "uncompressed_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "bytes": 1081053,
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 174829,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265"
+      },
+      {
+        "bytes": 1008871,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+        "sha256": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+        "uncompressed_bytes": 7440052,
+        "uncompressed_sha256": "717c9e64fbc2c63a774b15defaddc84893dc527333a44fe38920e2f9ae1c329b"
+      },
+      {
+        "bytes": 992979,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-002.jsonl.gz",
+        "sha256": "ae72b98588ea16ca58bd73bc6349fd497b813154d5a452dae881501dd28504a5",
+        "uncompressed_bytes": 7422166,
+        "uncompressed_sha256": "b63f7b7a0675b9cbf8d2f7d5e7ee317497a5a63e8e70a41af5155dc36fce43bc"
+      },
+      {
+        "bytes": 1014529,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-005.jsonl.gz",
+        "sha256": "74b5807ba9624632783977868e107957d44ecb8a3b93cd1a632097c5a6d642a9",
+        "uncompressed_bytes": 7442405,
+        "uncompressed_sha256": "38c2eecacd8e03fbaba5035097116e5477978e1198c64c5db80d0965a38dc696"
+      },
+      {
+        "bytes": 968974,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-007.jsonl.gz",
+        "sha256": "5310f2bdb0595015ed0bee066ea156abf335ae467825a4e05318673c68ab9e5c",
+        "uncompressed_bytes": 7396648,
+        "uncompressed_sha256": "6c608d455eaba7e0be2edb0accddbd818b9112aa8a4753a761f58d4cf495c59c"
+      },
+      {
+        "bytes": 992488,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-011.jsonl.gz",
+        "sha256": "aead1095bf5740f403a6cee0846a57f999574082706c7693124fb317f5bf28da",
+        "uncompressed_bytes": 7414602,
+        "uncompressed_sha256": "de3829fe2034e3d48bbd6bde92437c52311ec2413a6cb3c1231ba6ed339a7fcd"
+      },
+      {
+        "bytes": 993571,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-028.jsonl.gz",
+        "sha256": "ed3f52630f7e4cb6feaaab1507e58a695a123e31d1b2a10763a8f11c07a52fb7",
+        "uncompressed_bytes": 7412333,
+        "uncompressed_sha256": "35b91dd96ed782be8dc1bfbfe08a881e214099426193877ea7eb20a437da29eb"
+      },
+      {
+        "bytes": 978044,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-033.jsonl.gz",
+        "sha256": "8140fd6762f492b8795f4ee61f0526098033db8b7e510638301a0596ad74aa2c",
+        "uncompressed_bytes": 7416431,
+        "uncompressed_sha256": "91a30e2cbe640865469c197c7b4e3f961c606d1e9428f0b619089175d354c7f8"
+      },
+      {
+        "bytes": 1013025,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-043.jsonl.gz",
+        "sha256": "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+        "uncompressed_bytes": 7436197,
+        "uncompressed_sha256": "69888f613738655b7f8c1731b1186fba06ca259233254e7309aebf8f3e93113e"
+      },
+      {
+        "bytes": 998684,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-049.jsonl.gz",
+        "sha256": "baa98801bb9c8eabef84ee9d7188a682779f2882d9357504042062cfd734da2e",
+        "uncompressed_bytes": 7419961,
+        "uncompressed_sha256": "dda8c700cf7381a60e2399c7ed8e2e6d735320e2670e49798c4eab7d531b727c"
+      },
+      {
+        "bytes": 1034453,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-051.jsonl.gz",
+        "sha256": "d01e482dab92a49931caf38faca7562255b33406698889e72aab5ea809c7aa43",
+        "uncompressed_bytes": 7461292,
+        "uncompressed_sha256": "26a0d0e80a3c3382d792c4f9e2fd441b020df6ed2df58c45e8db68598663a41d"
+      },
+      {
+        "bytes": 991771,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-053.jsonl.gz",
+        "sha256": "3c7dc9313074e616f5f80573eaf274beb1c59f6219412f8246504e53cb1f8854",
+        "uncompressed_bytes": 7410855,
+        "uncompressed_sha256": "13d715546d0bd8bcd944797a560001a5f2cd6b35538ea5cd1c558916d98fd003"
+      },
+      {
+        "bytes": 964953,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-062.jsonl.gz",
+        "sha256": "7db607f4afa2efdd43591786014fdcc273ea5493a11137263a0639e556eb56e5",
+        "uncompressed_bytes": 7379933,
+        "uncompressed_sha256": "7cc96b544d820a8741b93576a2c024b129748f8542ec3ae086b05af32e377daf"
+      },
+      {
+        "bytes": 963581,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-064.jsonl.gz",
+        "sha256": "9ed49af6240496e1a0ae55fecd664af74063f00bf79bb52b23723f1d36274218",
+        "uncompressed_bytes": 7391317,
+        "uncompressed_sha256": "b47e205a63532b2763769bd63899855135a0b410201662f57b6e0e4635757f02"
+      },
+      {
+        "bytes": 972945,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-065.jsonl.gz",
+        "sha256": "d3c1c31e0472f9581b5e9616180db8fed3aa2d38a87fd8a3495c8830e09b007a",
+        "uncompressed_bytes": 7383553,
+        "uncompressed_sha256": "2ed290f50c034f97deeec9c5bd73c81455e2870156cc3bf73ba978e8bf71c504"
+      },
+      {
+        "bytes": 1009610,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-068.jsonl.gz",
+        "sha256": "174658349676fc4be49a24013712c99a336280582d4a98d1693d3938939b482a",
+        "uncompressed_bytes": 7422396,
+        "uncompressed_sha256": "f6eaf06605d49883fc07f879f57d25c7d37f664f62180f3a56376c93b7b46746"
+      },
+      {
+        "bytes": 57840,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0"
+      },
+      {
+        "bytes": 403376,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+      },
+      {
+        "bytes": 4316,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/evidence-quality.json",
+        "bytes": 211474,
+        "sha256": "bf06eb5a8fbd869d038a11fb17b6c84e41df7ea6037ab17cded2470054d5c54e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 144745,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LTU-ADM2-000.bin.gz",
+        "sha256": "b5796bf3b3f8cb353b3a26f1d98fb6c42bea6fadad84e8232c37357f3e4dc38d",
+        "uncompressed_bytes": 462674,
+        "uncompressed_sha256": "65a2c1aa9531a6a09af906d87ddc812a290ccc0ef32ac81df4a783f5ffa04e6f"
+      },
+      {
+        "bytes": 188547,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LVA-ADM1-000.bin.gz",
+        "sha256": "bff4ec46685b878061603df14ab0aefc3b76c9149a63ea587bae45d9594c08b7",
+        "uncompressed_bytes": 631152,
+        "uncompressed_sha256": "a4793bdbdc9b707c02f1849a081cf2f098f36b765f7ace290a2c748e2a513ee5"
+      },
+      {
+        "bytes": 117156,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+      },
+      {
+        "bytes": 2080037,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "bytes": 2074475,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "bytes": 2079265,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "bytes": 2085110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "bytes": 2085907,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "bytes": 2079838,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "bytes": 2081609,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "bytes": 1714760,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "bytes": 2080606,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-000.json.gz",
+        "bytes": 1018111,
+        "sha256": "c5a3f232c7d31eb51847f65be310cc598db73436515633d5bed65793dfb743a4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-032.json.gz",
+        "bytes": 1017112,
+        "sha256": "82b419dde1c298bb0abc79e6c35431b162c2d900520b0b066ccf588d1bba656b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+        "bytes": 433512,
+        "sha256": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/administrative.py",
+        "bytes": 12313,
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "priority_v3_report": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+      "priority_v3_investigations_000": "c5a3f232c7d31eb51847f65be310cc598db73436515633d5bed65793dfb743a4",
+      "priority_v3_investigations_032": "82b419dde1c298bb0abc79e6c35431b162c2d900520b0b066ccf588d1bba656b",
+      "global_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "global_routing_family_shard_011": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+      "global_physical_report": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "source_corpus_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_corpus_evidence_quality": "bf06eb5a8fbd869d038a11fb17b6c84e41df7ea6037ab17cded2470054d5c54e",
+      "source_corpus_citation": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "administrative_sources_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "administrative_source_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+      "original_ltu_source_product": "b5796bf3b3f8cb353b3a26f1d98fb6c42bea6fadad84e8232c37357f3e4dc38d",
+      "original_lva_source_product": "bff4ec46685b878061603df14ab0aefc3b76c9149a63ea587bae45d9594c08b7",
+      "physical_component_custody_index": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "component_roster_000": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+      "component_roster_001": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+      "component_roster_004": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "component_roster_005": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+      "component_roster_006": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "component_roster_007": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+      "component_roster_008": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "component_roster_009": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+      "component_roster_010": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+      "route_component_000": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+      "route_component_002": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+      "route_component_004": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+      "route_component_010": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+      "route_component_011": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+      "route_component_015": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+      "route_component_017": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+      "route_component_018": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+      "route_component_022": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+      "route_component_023": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+      "route_component_024": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+      "physical_component_000": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+      "physical_component_002": "ae72b98588ea16ca58bd73bc6349fd497b813154d5a452dae881501dd28504a5",
+      "physical_component_005": "74b5807ba9624632783977868e107957d44ecb8a3b93cd1a632097c5a6d642a9",
+      "physical_component_007": "5310f2bdb0595015ed0bee066ea156abf335ae467825a4e05318673c68ab9e5c",
+      "physical_component_011": "aead1095bf5740f403a6cee0846a57f999574082706c7693124fb317f5bf28da",
+      "physical_component_028": "ed3f52630f7e4cb6feaaab1507e58a695a123e31d1b2a10763a8f11c07a52fb7",
+      "physical_component_033": "8140fd6762f492b8795f4ee61f0526098033db8b7e510638301a0596ad74aa2c",
+      "physical_component_043": "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+      "physical_component_049": "baa98801bb9c8eabef84ee9d7188a682779f2882d9357504042062cfd734da2e",
+      "physical_component_051": "d01e482dab92a49931caf38faca7562255b33406698889e72aab5ea809c7aa43",
+      "physical_component_053": "3c7dc9313074e616f5f80573eaf274beb1c59f6219412f8246504e53cb1f8854",
+      "physical_component_062": "7db607f4afa2efdd43591786014fdcc273ea5493a11137263a0639e556eb56e5",
+      "physical_component_064": "9ed49af6240496e1a0ae55fecd664af74063f00bf79bb52b23723f1d36274218",
+      "physical_component_065": "d3c1c31e0472f9581b5e9616180db8fed3aa2d38a87fd8a3495c8830e09b007a",
+      "physical_component_068": "174658349676fc4be49a24013712c99a336280582d4a98d1693d3938939b482a",
+      "contact_feature_collection_sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    "pin_files": {
+      "priority_v3_report": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+      "priority_v3_investigations_000": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-000.json.gz",
+      "priority_v3_investigations_032": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-032.json.gz",
+      "global_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "global_routing_family_shard_011": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+      "global_physical_report": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+      "source_corpus_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "source_corpus_evidence_quality": "coordination/engineering/original-geography-source-corpus-20261006/evidence-quality.json",
+      "source_corpus_citation": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+      "administrative_sources_registry": "data/administrative-sources.json",
+      "administrative_source_recipe": "scripts/administrative.py",
+      "original_ltu_source_product": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LTU-ADM2-000.bin.gz",
+      "original_lva_source_product": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-LVA-ADM1-000.bin.gz",
+      "physical_component_custody_index": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "component_roster_000": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "component_roster_001": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "component_roster_004": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "component_roster_005": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "component_roster_006": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "component_roster_007": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "component_roster_008": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "component_roster_009": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "component_roster_010": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "route_component_000": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+      "route_component_002": "coordination/engineering/global-actionability-routing-20261007/results/components-002.bin.gz",
+      "route_component_004": "coordination/engineering/global-actionability-routing-20261007/results/components-004.bin.gz",
+      "route_component_010": "coordination/engineering/global-actionability-routing-20261007/results/components-010.bin.gz",
+      "route_component_011": "coordination/engineering/global-actionability-routing-20261007/results/components-011.bin.gz",
+      "route_component_015": "coordination/engineering/global-actionability-routing-20261007/results/components-015.bin.gz",
+      "route_component_017": "coordination/engineering/global-actionability-routing-20261007/results/components-017.bin.gz",
+      "route_component_018": "coordination/engineering/global-actionability-routing-20261007/results/components-018.bin.gz",
+      "route_component_022": "coordination/engineering/global-actionability-routing-20261007/results/components-022.bin.gz",
+      "route_component_023": "coordination/engineering/global-actionability-routing-20261007/results/components-023.bin.gz",
+      "route_component_024": "coordination/engineering/global-actionability-routing-20261007/results/components-024.bin.gz",
+      "physical_component_000": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+      "physical_component_002": "coordination/engineering/global-physical-comparison-20261006/results/components-002.jsonl.gz",
+      "physical_component_005": "coordination/engineering/global-physical-comparison-20261006/results/components-005.jsonl.gz",
+      "physical_component_007": "coordination/engineering/global-physical-comparison-20261006/results/components-007.jsonl.gz",
+      "physical_component_011": "coordination/engineering/global-physical-comparison-20261006/results/components-011.jsonl.gz",
+      "physical_component_028": "coordination/engineering/global-physical-comparison-20261006/results/components-028.jsonl.gz",
+      "physical_component_033": "coordination/engineering/global-physical-comparison-20261006/results/components-033.jsonl.gz",
+      "physical_component_043": "coordination/engineering/global-physical-comparison-20261006/results/components-043.jsonl.gz",
+      "physical_component_049": "coordination/engineering/global-physical-comparison-20261006/results/components-049.jsonl.gz",
+      "physical_component_051": "coordination/engineering/global-physical-comparison-20261006/results/components-051.jsonl.gz",
+      "physical_component_053": "coordination/engineering/global-physical-comparison-20261006/results/components-053.jsonl.gz",
+      "physical_component_062": "coordination/engineering/global-physical-comparison-20261006/results/components-062.jsonl.gz",
+      "physical_component_064": "coordination/engineering/global-physical-comparison-20261006/results/components-064.jsonl.gz",
+      "physical_component_065": "coordination/engineering/global-physical-comparison-20261006/results/components-065.jsonl.gz",
+      "physical_component_068": "coordination/engineering/global-physical-comparison-20261006/results/components-068.jsonl.gz",
+      "contact_feature_collection_sha256": "data/geography/part-13.json"
+    },
+    "subject_files": {
+      "physical-component:00c5d50d6765602074625e006f08b1b58ac03cd3d9fc5b1a624bbf0158f18ae0": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:0882c7d92c696f53d8fe8bba690973c32788f2e51bd1ef6bd4c055dd13279056": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:14f6a86eac664f3256a633ae0f853360d63edb14be9c9811b450176f50ceab26": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:1a77c37a11f3d84b46d4651220599107401bc21d1536133fcc7618d66c0a49f5": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "physical-component:294063970434d15f149c664633f64dba5411458cf843cd925e4e637dd3de51da": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "physical-component:694a1cb53116d780f0ee776a0f3989edb0d74b01f4c5d89dc05911407407f69b": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "physical-component:7929dff9531413d6e6a860bfffea697694d286b2797a1ff0664d71115d364316": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical-component:9e0b3beac32b8398b3708a9918c9920a76917068d6711af5b02999314f6bea22": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:b3a2cc30d91e76ce3dedaa850d8382a882f76db28d279f8bb50d3f77777c1577": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "physical-component:b4fd86a506640456d483a8f82a945463e084a45a73582b1010f2fea2f8967ca1": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "physical-component:bc256ccd31a291bf847cee3b7dc1f1f37a9fa12e708f978d9dc452880d912e08": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "physical-component:c167b7699ddfa22945201526da32448b3ecb1a33ac810ba5457693fb837e901a": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical-component:e33456f199bc7c1cb595c3211a28fe42231252d4c0348acd321621878fe60eba": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical-component:eaa5da8229b82a55de103a841fcc4ebb73c7f468f3dcffdb5c0e7171485b345f": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical-component:ee9bc61cd9e2a907faa1f59362c07e036c2d4a5e499583f33f64c8f7887175e3": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "physical-component:f79b07eb63959b23c1477e235d7ecd86ff4a59f0b80fd1555e22c4a0ce723083": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "gb:LTU:ADM2:59024439B19575014620111": "data/geography/part-13.json",
+      "gb:LTU:ADM2:59024439B52033520810825": "data/geography/part-13.json",
+      "gb:LVA:ADM1:71098776B71258051821866": "data/geography/part-13.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "ort10lt-2025",
+      "url": "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B7E08EDAD-FBD1-4E28-AEEA-691336E62B2D%7D",
+      "role": "official Lithuania orthophoto metadata",
+      "vintage": "title 2025; conflicting abstracts and temporal extent 2024-04-25..2024-06-21",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Generic License constraint; no pixel retention permission established"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open official record URL; no source pixels retained",
+      "limit": "Conflicting year metadata; no per-subject coverage/date join.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "ort10lt-view-service",
+      "url": "https://www.geoportal.lt/mapproxy/nzt_ort10lt_2024_2026/MapServer",
+      "role": "official Lithuania orthophoto view and photography date service",
+      "vintage": "service states 2024–2026 aerial plus 2025 satellite; REST ItemInfo says 2024 material",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Generic License constraint; REST licenseInfo empty"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open official MapServer and metadata/REST catalogue; no imagery retained",
+      "limit": "Service provenance conflict; no per-subject coverage/date join; service-level EPSG:3346 is not a subject-level registration check.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "lgia-cycle8",
+      "url": "https://www.lgia.gov.lv/en/8-cikla-2022-2024-gads-ortofotokartes",
+      "role": "official Latvia orthophoto program metadata",
+      "vintage": "2022–2024, target 20cm RGBI/CIR; eastern border supplemented with satellite",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Cycle-8 reuse/retention not established"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open official program and WMS catalogue; no imagery retained",
+      "limit": "Program metadata only; cycle-8 CSW records describe Kurzeme and 2022–2024/nominal 20 cm LKS 92 TM but give no sheet/date schema or per-subject coverage. WMS requires signed client license; no authorized endpoint or achieved accuracy was established.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "copernicus-wcd",
+      "url": "https://land.copernicus.eu/en/products/water-bodies/high-resolution-water-cover-duration",
+      "role": "supplementary annual water duration metadata",
+      "vintage": "2016-present annual; 10m/100m; not validated; gradual release",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official product documentation says free for any purpose"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open Copernicus product and documentation; no data downloaded",
+      "limit": "Europe 10m yearly hydrological-year water-duration aggregate, not an observation-date or shoreline record; marked not validated, exact release per tile unknown.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "jrc-gsw",
+      "url": "https://global-surface-water.appspot.com/download",
+      "role": "supplementary historical surface-water metadata",
+      "vintage": "1984–2024, 30m; collection 2 after 2021",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official download page says no use restriction; attribution required"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open official download page; no data downloaded",
+      "limit": "30m aggregate/monthly/yearly history is not acquisition-date shoreline evidence; Collection 1/2 seam can reach/exceed 30m in some rows and absolute accuracy/CRS remain unverified.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "lva-cycle6-metadata",
+      "url": "https://s3.storage.pub.lvdc.gov.lv/lgia-opendata/citi/kartes/Ortofoto_6_cikla_metadati.rar",
+      "role": "older licensed Latvia cycle-6 orthophoto metadata context",
+      "vintage": "2016–2018; 25 records; Datums and FOTO_DAT span 2016-05-05..2018-09-19 with two conflicts",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official open data under CC BY 4.0; attribution required."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Official source URL; compressed archive SHA-256 3cd0f617b674ac51dc1a1451cfb4475a620c533dbe47ffdc0f645b7ca1e3b4e6; raw response segments remain in ignored local cache.",
+      "limit": "Supplementary older source only; not a substitute for cycle-8/physical-observation acceptance. No subject join. The decoded PolygonZ member is 108040732 bytes, above the current cap.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "ltu-date-footprint-rights",
+      "url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer",
+      "role": "official product/service rights metadata for Lithuanian date-footprint layers",
+      "vintage": "ORT_recent and ORT10LT_2024_2026 services; records reviewed 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Generic License constraint only; no product-specific reuse grant located. See rights findings."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Compact rights findings and response manifest included; response bodies remain in local ignored cache.",
+      "limit": "Public viewing is evidenced for ORT_recent. Offline research, retaining vector metadata, and publishing derived observations are unresolved; do not infer rights from public access or a copyright notice.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "lva-cycle8-csw-metadata",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw",
+      "role": "official metadata catalog for LGIA cycle-8 orthophoto dataset and service records",
+      "vintage": "8th cycle, 2022–2024; CSW metadata publication/revision timestamps are not acquisition dates",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "restricted",
+        "terms": "Underlying WMS is described as free after client signs a license; no signed license was evidenced. Public metadata availability is not image/data reuse permission."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Compact findings and capture manifest are included; raw responses remain in the ignored local cache.",
+      "limit": "No usable operation URL, public date-feature schema, per-sheet date table, public vector footprint, achieved accuracy, or tile QA found. Dataset abstracts specify Kurzeme; no subject coverage inferred.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "water-context-findings",
+      "url": "https://land.copernicus.eu/en/products/water-bodies/high-resolution-water-cover-duration",
+      "role": "official Copernicus WCD and JRC Global Surface Water product metadata and limits",
+      "vintage": "WCD Europe yearly 10m hydrological-year aggregates; JRC GSW v1.5 1984–2024 at 30m with 2022–2024 monthly/yearly history",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "CDSE says WCD may be used for any purpose with product DOI citation; JRC is free without use restriction with dataset/paper citation and map attribution “Source: EC JRC/Google”."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Compact findings and capture manifest included; raw response bodies remain in local ignored cache.",
+      "limit": "Temporal/spatial aggregates are not exact-date shoreline observations or subject-level coverage evidence. WCD is not validated; JRC Collection 1/2 co-registration can reach/exceed 30m in some rows, with CRS/absolute accuracy unverified.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/README.md",
+      "bytes": 13545,
+      "sha256": "ffa669be68234e2a2ff757fb14fa7284b4451884e6f53383d0cf607195e92157",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/official-source-register.json",
+      "bytes": 14351,
+      "sha256": "39881a6485cc8b83a58718ea82d1ef281408c67b29e85f273f85e3e512e20823",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/components.geojson",
+      "bytes": 13741,
+      "sha256": "07ec5ce9e9f4926063206e8858652814ba9700db1c40b84aa50fab8f190d4cfc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/contacts.geojson",
+      "bytes": 18426,
+      "sha256": "3bb358bcdf677d0bf5a41a31b7e5c788d770aecd759187fafe233027ce94c46d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/member-context.json",
+      "bytes": 233957,
+      "sha256": "8da3efe89bb8a6915cbe6b7d55ebe657886a38c6a3fcf1db5844367b176bd360",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/contact-context.json",
+      "bytes": 57496,
+      "sha256": "c2d42a800a870aa7dba53f972872b5a8835da14788b2e2f610f768e4f9c25711",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
+      "bytes": 28830,
+      "sha256": "fc3fc4d5adb4ce0cff7be799625f12530f25d72eae28d9d2a480b464518dd721",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-pins.json",
+      "bytes": 31735,
+      "sha256": "ff57bf9785a2760aa144811f28f8211feb95dfdab7c9f5fa035a15a122e12417",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/execution-ledger.json",
+      "bytes": 5217,
+      "sha256": "64a973f2f7df4565f85bbdf5458d11de158dfb12ae32034b03e9ccca5a22b6ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/reproducibility.json",
+      "bytes": 2417,
+      "sha256": "64925fc69b5343aff8c0efb2e76da7d76966d33e3600673852bda7f30d97169d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle6-source-note.json",
+      "bytes": 21783,
+      "sha256": "0978d3bced9766402aba404a763408a439ba34d6ae8dca87e504edfe3527f5c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-date-operation-plan.md",
+      "bytes": 34941,
+      "sha256": "e8071b26fed9c27dffc93c33227515381ac1352c4d103dca3ee5d20865fde015",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-rights-findings.json",
+      "bytes": 7159,
+      "sha256": "b023a5ef7baf74da5f4075f53d08b6643bd7d360bf7064c561462aeed66e6e9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-capture-manifest.json",
+      "bytes": 7499,
+      "sha256": "a728f266c4db418f04f7f1e7badc5720548aa26d608e8df6daf31e1dec0878a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-source-findings.json",
+      "bytes": 5866,
+      "sha256": "3f819f3f05826d5b0cbd04afad8ae2c2c4accf471b9a86738b6ca4b03c73aaf2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-capture-manifest.json",
+      "bytes": 10759,
+      "sha256": "f7b731f9b20f92b2fb8c3134fdc2c5f1134ae1b5940aca13a8c8e47b4fdf002b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-availability-assessment.json",
+      "bytes": 23471,
+      "sha256": "3527598047be57c23b74828a141ab86752b738e76880905b19455329eb255f64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-findings.json",
+      "bytes": 4904,
+      "sha256": "94433768235921b55a1fca3f270a3a798458d6b1a8e018262a686d434f3dc033",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-capture-manifest.json",
+      "bytes": 3971,
+      "sha256": "77241068a01e56fee9de2745c4514a5f8bb0ff53eeb5d6d799ea5acdba7a6677",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-metadata-review",
+      "description": "Manual review of official metadata/service catalogues and inherited exact subject and comparison records. No spatial join, overlay, raster inspection, geometry transformation, snapping, classification, or pixels downloaded.",
+      "software": "Manual source review; Python 3.7 used only to extract retained Feature rows and serialize indexes; no GIS libraries.",
+      "units": "feature counts; dates as source-declared; no spatial measurements",
+      "kind": "source"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "scoped-subjects",
+      "value": 19,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "input_sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+      "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+    },
+    {
+      "id": "component-subjects",
+      "value": 16,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+      "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+    },
+    {
+      "id": "contact-subjects",
+      "value": 3,
+      "unit": "contacts",
+      "vintage": "baseline",
+      "input_sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+      "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+    },
+    {
+      "id": "subjects-with-per-subject-coverage-join",
+      "value": 0,
+      "unit": "subjects",
+      "vintage": "current",
+      "input_sha256": "fc3fc4d5adb4ce0cff7be799625f12530f25d72eae28d9d2a480b464518dd721",
+      "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+    },
+    {
+      "id": "subjects-with-confirmed-observation-date",
+      "value": 0,
+      "unit": "subjects",
+      "vintage": "current",
+      "input_sha256": "fc3fc4d5adb4ce0cff7be799625f12530f25d72eae28d9d2a480b464518dd721",
+      "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "scoped-subjects",
+      "value": 19,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "component-subjects",
+      "value": 16,
+      "unit": "components"
+    },
+    {
+      "metric_id": "contact-subjects",
+      "value": 3,
+      "unit": "contacts"
+    },
+    {
+      "metric_id": "subjects-with-per-subject-coverage-join",
+      "value": 0,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "subjects-with-confirmed-observation-date",
+      "value": 0,
+      "unit": "subjects"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Official source metadata identifies candidate orthophoto products but does not establish coverage or dates for any of the 19 scoped subjects.",
+      "status": "supported",
+      "source_ids": [
+        "ort10lt-2025",
+        "ort10lt-view-service",
+        "lgia-cycle8"
+      ]
+    },
+    {
+      "text": "All 16 physical classifications and all three contact observations remain unresolved; no imagery or GIS analysis was performed.",
+      "status": "supported",
+      "source_ids": [
+        "ort10lt-view-service",
+        "lgia-cycle8"
+      ]
+    },
+    {
+      "text": "Reuse/retention rights for source imagery are unestablished; no pixels were retained.",
+      "status": "supported",
+      "source_ids": [
+        "ort10lt-2025",
+        "ort10lt-view-service",
+        "lgia-cycle8"
+      ]
+    },
+    {
+      "text": "Water/ice history, source authority, processing cause, and legal boundary remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "copernicus-wcd",
+        "jrc-gsw"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "Manual review of official source metadata; no GIS command executed.",
+    "python3 /tmp/build_1452.py (one-time extraction from retained content-addressed custody payloads; source geometries not modified)"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/official-source-register.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/components.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/contacts.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/member-context.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/contact-context.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/execution-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-date-operation-plan.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle6-source-note.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-rights-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-capture-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-availability-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-source-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-capture-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-capture-manifest.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "scoped-subjects",
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
+      "json_pointer": "/summary/scoped_subjects"
+    },
+    {
+      "metric_id": "component-subjects",
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
+      "json_pointer": "/summary/components"
+    },
+    {
+      "metric_id": "contact-subjects",
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
+      "json_pointer": "/summary/contacts"
+    },
+    {
+      "metric_id": "subjects-with-per-subject-coverage-join",
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
+      "json_pointer": "/summary/subjects_with_per_subject_coverage_join"
+    },
+    {
+      "metric_id": "subjects-with-confirmed-observation-date",
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
+      "json_pointer": "/summary/subjects_with_confirmed_observation_date"
+    }
+  ]
+}

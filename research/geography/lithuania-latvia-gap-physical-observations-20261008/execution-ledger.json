@@ -1,0 +1,72 @@
+{
+  "issue": 1452,
+  "as_of": "2026-10-08",
+  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "family_id": "gap-source-batch:d6347433d050d025e6e082c0",
+  "scope": {
+    "components": 16,
+    "contacts": 3
+  },
+  "actions": [
+    {
+      "id": "retain-scope",
+      "status": "complete",
+      "detail": "Reused inherited full 16-component/3-contact roster and immutable input pins from #1426/#1436."
+    },
+    {
+      "id": "extract-candidate-and-contact-features",
+      "status": "complete",
+      "detail": "Extracted exact retained component Feature rows from content-addressed custody aliases and exact contact rows from pinned part-13; no feature/geometry edits."
+    },
+    {
+      "id": "source-metadata-review",
+      "status": "partial",
+      "detail": "Reviewed official candidate product metadata and recorded vintage, rights, CRS/accuracy and access limits in source register."
+    },
+    {
+      "id": "per-subject-date-coverage",
+      "status": "not-run",
+      "detail": "No spatial join, GIS, raster query or imagery inspection performed; separate root GIS window is required. Per-subject date and coverage remain unknown for all 19."
+    },
+    {
+      "id": "classification",
+      "status": "not-run",
+      "detail": "Physical status, historic water/ice, processing cause, and authority remain unresolved."
+    },
+    {
+      "id": "cycle6-metadata-review",
+      "status": "complete-metadata-only",
+      "detail": "Verified GEO5 capture files and archive/SHX catalogues; recorded CC BY 4.0 attribution, EPSG:3059 PRJ, 25 indexed records, DBF date-field conflicts, access failures, 108040732-byte decoded member cap, exact 19-subject scope and fresh preparation resource snapshot. Cycle 6 remains supplementary only; no geometry join."
+    },
+    {
+      "id": "lithuanian-date-rights-review",
+      "status": "complete-metadata-only",
+      "detail": "Reviewed exact official Geoportal product/service metadata and ArcGIS iteminfo for ORT_recent and ORT10LT_2024_2026. Generic License labels and empty licenseInfo do not establish offline reuse, date-footprint vector retention, or derived-observation publication. Public viewing and ORT_recent service-contact instruction recorded separately; no contact made."
+    },
+    {
+      "id": "cross-source-availability-metadata-review",
+      "status": "complete-metadata-only",
+      "detail": "Assessed official Lithuania orthophoto/date-layer metadata and reuse uncertainty, four official Latvia cycle-8 GeoNetwork records and signed-license/access limits, the separately capped cycle-6 source, and official Copernicus WCD/JRC GSW product limits against all 19 exact pinned subjects. No per-subject query, geometry, GIS, imagery, or pixels; every subject coverage/date remains unknown."
+    },
+    {
+      "id": "water-context-product-metadata-review",
+      "status": "complete-metadata-only",
+      "detail": "GEO5 official CLMS/CDSE WCD and JRC GSW documentation review completed; 22 response/header captures hash-verified. Product resolutions, temporal aggregation, release/validation, CRS/accuracy limits, and citation terms recorded. No raster, Earth Engine asset, candidate query, geometry, or GIS."
+    }
+  ],
+  "limits": [
+    "No raster/source imagery pixels were accessed; cached cycle-6 metadata headers/schema were assessed, but no candidate coordinates were interpreted, transformed, or joined.",
+    "No spatial join, overlay, raster inspection or geometry transformation.",
+    "No per-subject observation date, coverage, QA, or positional accuracy established.",
+    "No source imagery pixels were inspected or retained; Lithuania/cycle-8 reuse terms remain unresolved. Cycle-6 metadata is licensed CC BY 4.0, but no source geometry was joined.",
+    "No independent authority or legal-boundary conclusion.",
+    "Cycle 6 cannot fulfill the original cycle-8/physical-observation acceptance.",
+    "The 108040732-byte PolygonZ member exceeds the shared 32MiB decoded-member limit; no waiver, extraction, simplification, or omitted-subject workaround is authorized.",
+    "Current public REST alternatives returned 403/empty layers; the WMS endpoint failed normal TLS. GEO5 is investigating the original cycle-8 source; GEO3 owns any later GIS window.",
+    "A prior solid-RAR metadata extraction may have transiently materialized the oversized SHP without interpreting or retaining coordinates; this history is disclosed in the source note.",
+    "Lithuanian date-footprint reuse remains unresolved pending authoritative product-specific terms; metadata access is not treated as permission.",
+    "Source-availability assessment is metadata-level only; no source-to-subject coverage/date result or source jurisdiction was inferred from inherited country/source labels.",
+    "Copernicus WCD and JRC GSW establish only aggregated water context; neither supplies exact candidate acquisition dates or precise microcomponent shoreline evidence."
+  ],
+  "next_action": "Await independent acceptance review and any explicit source/licensing/root-window admission. Until then preserve all 19 exact subjects with unknown coverage, date, and physical status; do not run GIS, imagery, WMS export, or additional archive decode."
+}

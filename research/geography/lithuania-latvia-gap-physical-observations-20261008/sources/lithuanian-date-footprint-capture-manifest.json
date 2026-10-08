@@ -1,0 +1,183 @@
+{
+  "as_of_utc": "2026-10-08T07:09:43Z",
+  "max_body_bytes": 2097152,
+  "max_cumulative_body_bytes": 16777216,
+  "measured_current_response_body_bytes": 224490,
+  "largest_current_body_bytes": 39132,
+  "current_response_bodies": [
+    {
+      "path": "data-gov-dataset-index.body",
+      "url": "https://data.gov.lt/dataset",
+      "status": 500,
+      "bytes": 39112,
+      "sha256": "d3cada07d9ed42285d1da60ecbd9c88edaf13f66fcd15108da946e43212ce1be",
+      "result": "WAF block page; no dataset/license content returned"
+    },
+    {
+      "path": "data-gov-dataset-search-ui.body",
+      "url": "https://data.gov.lt/datasets?q=ORT_recent",
+      "status": 500,
+      "bytes": 39113,
+      "sha256": "4f11a64e40db1feab790e6ebd7f3bdb27aed81ec778e850af2671354d6e56e66",
+      "result": "WAF block page; no dataset/license content returned"
+    },
+    {
+      "path": "data-gov-search-ort-2024-2026.body",
+      "url": "https://data.gov.lt/api/3/action/package_search?q=ORT10LT_2024_2026&rows=10",
+      "status": 500,
+      "bytes": 39132,
+      "sha256": "1b47190cdb1c8fcea60a3f389752e798e22387871c1765b3daec0434294c748d",
+      "result": "WAF block page; no dataset/license content returned"
+    },
+    {
+      "path": "data-gov-search-ort-recent.body",
+      "url": "https://data.gov.lt/api/3/action/package_search?q=ORT_recent&rows=10",
+      "status": 500,
+      "bytes": 39132,
+      "sha256": "fde76f6a90c0b09df24ad4fd4ca3e5c4e5d04f57b79f019ad9ab7e15ed741a58",
+      "result": "WAF block page; no dataset/license content returned"
+    },
+    {
+      "path": "geoportal-metadata-app2-js.body",
+      "url": "https://www.geoportal.lt/metadata-discovery/app2.js",
+      "status": 200,
+      "bytes": 6613,
+      "sha256": "3746067486f3ba68350650ef24720186d8937fa5cfb6c3fe6fd6d5fcd927e390",
+      "result": "official Geoportal metadata catalogue/app shell or code; contains no license text"
+    },
+    {
+      "path": "geoportal-metadata-discovery-app.body",
+      "url": "https://www.geoportal.lt/metadata-discovery/",
+      "status": 200,
+      "bytes": 3753,
+      "sha256": "b6fb057d044da7f1f15ab6994f221bfb723d224fb78e66a1be8ac227d6ca6626",
+      "result": "official Geoportal metadata catalogue/app shell or code; contains no license text"
+    },
+    {
+      "path": "geoportal-metadata-main-js.body",
+      "url": "https://www.geoportal.lt/metadata-discovery/js/metadata-discovery/main.js",
+      "status": 200,
+      "bytes": 4981,
+      "sha256": "4bb76f1d163e315b2c1f2c59c4110af00835b1dafdb32801a1b28620eef97685",
+      "result": "official Geoportal metadata catalogue/app shell or code; contains no license text"
+    },
+    {
+      "path": "geoportal-nzt-download-services.body",
+      "url": "https://www.geoportal.lt/geoportal/en/web/en/national-land-service_download#savedSearchId={3AC096E7-47A0-42E2-B2EE-23B44901F231}&collapsed=true",
+      "status": 200,
+      "bytes": 24048,
+      "sha256": "4e53def9258ad616c683cf17a21f7857403c293f98e18a180f0990d7088d9afb",
+      "result": "official Geoportal metadata catalogue/app shell or code; contains no license text"
+    },
+    {
+      "path": "geoportal-nzt-view-services.body",
+      "url": "https://www.geoportal.lt/geoportal/en/web/en/national-land-service_view#savedSearchId={A2B8B48E-2E19-4AEF-845C-48CA05A78F2F}&collapsed=true",
+      "status": 200,
+      "bytes": 28606,
+      "sha256": "5df5d539d0ad028b853778e51d7de93577c4504248ba47882bc71a119247dfff",
+      "result": "official Geoportal metadata catalogue/app shell or code; contains no license text"
+    }
+  ],
+  "current_response_headers": [
+    {
+      "path": "data-gov-dataset-index.headers",
+      "bytes": 86,
+      "sha256": "1e92964dd8027c1fd3d4301a27b7c47aa5cebdb58217871721c28cff243b53e2",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "data-gov-dataset-search-ui.headers",
+      "bytes": 86,
+      "sha256": "dceac857d10d69b7c8bb70ca589eb2dd54b41482848bd3ca5d9b824e4ee2d013",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "data-gov-search-ort-2024-2026.headers",
+      "bytes": 86,
+      "sha256": "a95716024579f48cd4342f2002f4850c7c86cb7002621b20de0c506f00fc476c",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "data-gov-search-ort-recent.headers",
+      "bytes": 86,
+      "sha256": "a95716024579f48cd4342f2002f4850c7c86cb7002621b20de0c506f00fc476c",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "geoportal-metadata-app2-js.headers",
+      "bytes": 344,
+      "sha256": "45c26ce019cc3bf31808c46dbda21f9de1c0cd1d4e766047fa8c2bf7931b5065",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "geoportal-metadata-discovery-app.headers",
+      "bytes": 348,
+      "sha256": "1ff23468ee1887b1202bc1952ddf4a278e8d46eda6b334229c8358c4b2ae0998",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "geoportal-metadata-main-js.headers",
+      "bytes": 344,
+      "sha256": "f2044d810092898d4eb3287e7f7a2c369cda617492f7a80b7f3144f5bee22f94",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "geoportal-nzt-download-services.headers",
+      "bytes": 1030,
+      "sha256": "20e2afcb5b18c675fe6089c0e0dea47dede9074141c0d1f119a6f473c64a7199",
+      "kind": "complete saved HTTP response headers"
+    },
+    {
+      "path": "geoportal-nzt-view-services.headers",
+      "bytes": 1030,
+      "sha256": "171728bf6a0cf654311c310ccb403c5e422b9cf88c8297ab7f005bd836146a62",
+      "kind": "complete saved HTTP response headers"
+    }
+  ],
+  "prior_official_responses_referenced": [
+    [
+      "lt-ort-recent-product-metadata.html",
+      "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7BF366FCAE-897D-4874-B646-0391037A863C%7D",
+      71951,
+      "f4fed750890f01774abb59c68d5e90b0753dee85cdf454258a3c10eeaa454be8"
+    ],
+    [
+      "lt-ort-recent-service-metadata.html",
+      "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B5E116F93-97ED-4F0C-AE22-8C0C71A51C54%7D",
+      57456,
+      "b0cf54a5ea0a3027095667b10542652e68ca339c51f01fa83b4f6ee1c3d5eadb"
+    ],
+    [
+      "lt-ort-2024-2026-service-metadata.html",
+      "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B242F0DA8-39FE-4367-B648-7CF5D3EB5FDF%7D",
+      63797,
+      "327baf085d87cb47cd18e86122106faf201af59705e5a80126d0f6bc03d6e8ce"
+    ],
+    [
+      "lt-ort-recent-iteminfo.json",
+      "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer?f=pjson",
+      507,
+      "f2793e493a7132af6b197e1adef8f59b6499f17bc644aee7ae453d4c2bfbcb0b"
+    ],
+    [
+      "lt-ort-2024-2026-iteminfo.json",
+      "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT10LT_2024_2026/MapServer?f=pjson",
+      757,
+      "6f184603b8a28938a47ea7e2ca0793347d5b86c1882acfe717fbec6a72a99513"
+    ],
+    [
+      "lt-ort-recent-public-service.json",
+      "https://www.geoportal.lt/mapproxy/nzt_ort10lt_recent_public/MapServer?f=pjson",
+      4737,
+      "5a4e95862ae44e1fe776d9c8b3204bbadd848313581b5bb4d5aa22cc040a1317"
+    ],
+    [
+      "lt-copyright.html",
+      "https://www.geoportal.lt/geoportal/web/en/copyright",
+      54692,
+      "e3dc0279b4442c78b9666dae0f7b45d45445aca5bb593c40b4366024a5cfac98"
+    ]
+  ],
+  "findings_path": "lithuanian-date-footprint-rights-findings.json",
+  "findings_sha256": "b023a5ef7baf74da5f4075f53d08b6643bd7d360bf7064c561462aeed66e6e9b"
+}

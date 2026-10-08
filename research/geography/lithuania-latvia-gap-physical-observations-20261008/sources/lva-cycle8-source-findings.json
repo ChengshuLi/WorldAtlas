@@ -1,0 +1,89 @@
+{
+  "as_of_utc": "2026-10-08T07:04:55Z",
+  "scope": "Official LGIA and GeoNetwork metadata only. No JPEG bodies, orthophoto imagery, pixels, candidate coordinates, GIS, external contacts, or license signing.",
+  "cycle8_product": {
+    "page": "https://www.lgia.gov.lv/lv/8-cikla-2022-2024-gads-ortofotokartes",
+    "vintage": "8th aerial-photography cycle, 2022–2024; LGIA page says work started spring 2022, intended 20 cm, RGBI and CIR; eastern-border coverage gaps are to be complemented with satellite imagery.",
+    "published_schematic_files": [
+      {
+        "url": "https://www.lgia.gov.lv/sites/lgia/files/document/Ortofoto_8cikls_shema_planota.jpg",
+        "type": "image/jpeg",
+        "content_length": 453523,
+        "last_modified": "2022-01-12T09:03:38Z",
+        "body_fetched": false
+      },
+      {
+        "url": "https://www.lgia.gov.lv/sites/lgia/files/document/8.shema_22122023.jpg",
+        "type": "image/jpeg",
+        "content_length": 744411,
+        "last_modified": "2023-12-22T12:37:42Z",
+        "body_fetched": false
+      }
+    ],
+    "coverage_caveat": "Product page speaks of the Latvia-wide cycle, but GeoNetwork dataset abstracts identify the current WMS record as Kurzeme region and say the area orthophoto scheme is incomplete; no page-level sheet/date table or feature schema was found."
+  },
+  "public_metadata_catalog": {
+    "capabilities": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&request=GetCapabilities",
+    "status": "TLS-verified public CSW 2.0.2 metadata API.",
+    "search": "A targeted CSW GetRecords query returned four cycle-8 records matching 2022 and 8. cikls: color and infrared dataset records plus color and infrared service records.",
+    "records": [
+      {
+        "kind": "color dataset",
+        "id": "24311e07-09ac-42e4-834b-dd6e6d476c37",
+        "title": "Krāsainā ortofotokarte 2022. – 2024. g. (8. cikls) – WMS serviss",
+        "dateStamp": "2025-12-17T12:13:10.842Z",
+        "publication": "2025-02-12",
+        "revision": "2025-02-12",
+        "abstract": "WMS color orthophoto for Kurzeme, 20 cm, work period 2022–2024, LKS 92 TM.",
+        "geoBoundingBox_as_metadata": [
+          "west 28.500",
+          "east 20.700",
+          "south 55.600",
+          "north 58.100"
+        ],
+        "note": "Published box is axis-order-confused/reversed in west/east values; not used for spatial claims."
+      },
+      {
+        "kind": "color service",
+        "id": "3f4641f6-b61a-414f-91eb-971a2af06c6d",
+        "title": "Krāsainā ortofotokarte 2022. – 2024. g. (8. cikls) – WMS serviss",
+        "dateStamp": "2025-12-17T12:13:11.934Z",
+        "publication": "2025-12-17",
+        "revision": "2025-02-12",
+        "abstract": "Service available free after the client signs a license; application link https://e-pieteikumi.lgia.gov.lv/WmsServices/ApplicantSelect/.",
+        "onlineOperationUrl": "blank in metadata; GetCapabilities operation is listed but connectPoint URL is empty.",
+        "resourceUseConstraints": "Machine-readable record says no public-access limitations and use conditions unknown, which conflicts with explicit signed-license abstract and LGIA WMS services listing."
+      },
+      {
+        "kind": "infrared dataset",
+        "id": "aec4682b-8b6f-4593-9ebb-266198c55b65",
+        "title": "Infrasarkanā ortofotokarte 2022. – 2024. g. (8. cikls) – WMS serviss",
+        "dateStamp": "2025-02-12T09:54:26.987Z",
+        "abstract": "Infrared orthophoto for Kurzeme, 20 cm, work period 2022–2024, LKS 92 TM."
+      },
+      {
+        "kind": "infrared service",
+        "id": "f0f9bcec-0193-49e2-8251-07bd96232dc9",
+        "title": "Infrasarkanā ortofotokarte 2022. – 2024. g. (8. cikls) – WMS serviss",
+        "dateStamp": "2025-02-12T09:54:27.744Z",
+        "abstract": "Service available free after the client signs a license; same application path."
+      }
+    ],
+    "date_schema": "No per-sheet/per-feature date fields, date-footprint layer schema, download URL, or openly licensed vector footprint is published in these four metadata records. The cycle period and metadata publication/revision dates are not individual flight dates."
+  },
+  "rights": {
+    "lgia_wms_catalogue_url": "https://www.lgia.gov.lv/en/wms-servisi",
+    "catalogue_statement": "Cycle 8 RGB/CIR orthophoto maps with aerial photography time map WMS are free data with access authorized after client signs the license.",
+    "open_data_page_url": "https://www.lgia.gov.lv/en/ortofotokartes",
+    "open_data_statement": "LGIA says products up to and including cycle 6 are available as Open Data; cycle 8 is outside that stated open-data group.",
+    "static_plan_rights": "Two JPG plan files are publicly linked and HEAD returns 200, but no separate license for reuse was located. They are static JPEG schematics, not queryable source vectors; bodies were not fetched."
+  },
+  "service_path_result": "Public GeoNetwork CSW exposes source metadata records without client license, but it does not expose the underlying cycle-8 WMS endpoint. The product page links only two static JPEG schemes. No official publicly queryable date-feature service or provider-published vector/member ≤32 MiB was identified in the reviewed primary sources.",
+  "cycle6_separate_history": {
+    "positive_endpoint": "https://s3.storage.pub.lvdc.gov.lv/lgia-opendata/citi/kartes/Ortofoto_6_cikla_metadati.rar",
+    "positive_rights": "Cycle 6 has a CC BY 4.0 official metadata archive.",
+    "engineering_disposition": "Ineligible for cycle-8 physical-observation/acceptance requirements; its SHP decoded member is 108,040,732 bytes, over 32 MiB; do not decode/process as substitute.",
+    "preserved_at": ".cache/geo5-missing-slot-independent-review-20261007/lv-cycle6-endpoint-batch-20261008/"
+  },
+  "no_external_contact_or_license_signing": true
+}

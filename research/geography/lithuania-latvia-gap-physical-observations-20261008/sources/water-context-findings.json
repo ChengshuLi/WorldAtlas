@@ -1,0 +1,25 @@
+{
+  "task": "GEO4 #1452 supplementary observation source assessment",
+  "as_of": "2026-10-08",
+  "recommendation": "Both products are appropriate only as supplementary surface-water context. Neither is a dated shoreline-observation source; any follow-up needs an explicitly bounded, authorized study using acquisition-level sources and must retain these limitations.",
+  "clms_wcd": {
+    "official_product": "Water Cover Duration 2016-present, Europe, yearly; 10m raster; Sentinel-1 and Sentinel-2; DOI 10.2909/39e1ff33-01d9-45c2-9edc-00924383f34f.",
+    "definition": "Number of water-presence days within hydrological year (1 September\u201331 August), assembled from daily/monthly water information; yearly aggregate, not dated shoreline.",
+    "coverage_projection": "Europe/EEA-38 + UK per metadata. 10m grid in Sentinel-2 UTM/WGS84 tiles (EPSG:32625\u201332638) and LAEA/ETRS89 (EPSG:3035); Sentinel-2 tile grid 100km x 100km.",
+    "availability": "Product page states layers are released gradually from January 2026: 2024\u201325 by end January, then one hydrological year per month back to 2016\u201317. It does not confirm actual availability of a particular year/tile; product access is via CDSE S3/Python workflow. CDSE Sentinel Hub docs identify WCD Europe 10m Yearly V1 and BYOC collection UUID 6cbd4f0b-834d-4e91-aa56-8c347b9cf971. Public CDSE STAC /collections response captured but did not list WCD.",
+    "values_qa": "WCD uint16: 0 no water; 1\u2013366 days water; 65485 cloud/cloud shadow; 65533 sea; 65535 no data. WCD-QA uint8: 0 high, 1 medium, 2 low, 3 minimal, 205 cloud/shadow, 253 sea, 255 no data. Do not confuse QA 0 meaning high quality with WCD value 0 meaning no water.",
+    "accuracy": "CLMS product page says Not validated. PUM/ATBD describe input combination and output, but no quantitative positional accuracy claim was verified. Recent official production notice reports Iceland false water detections and reprocessing in preparation, indicating possible version changes.",
+    "terms": "CDSE product docs state products are free of charge and can be used for any purpose. Product DOI should be cited; page points to CLMS data policy. Product-specific retention/redistribution/derived-output clauses were not separately confirmed beyond this statement."
+  },
+  "jrc_gsw": {
+    "official_product": "Global Surface Water v1.5, updated 2026-08-26, 1984\u20132024. Global, 30m Landsat-derived. 10-degree by 10-degree download tile grid for downloadable rasters; monthly history assets available per year and tile.",
+    "temporal_products": "Occurrence/recurrence/transitions/extent are whole-record aggregates over 1984\u20132024. Seasonality, Monthly History and Yearly History for new release cover 2022\u20132024; join with v1.4/prior assets for historical ranges. Monthly History classifies water/not-water/no observations per month, not specific acquisition date. No daily/date-specific shoreline output.",
+    "geolocation_and_validation": "2022\u20132024 uses Landsat Collection 2 while 1984\u20132021 uses Collection 1. Official release notes residual spatially variable co-registration offset, typically subpixel but reaching/exceeding one 30m pixel in some WRS-2 path/rows; full backprocessing planned. Extensions were not subjected to original 1984\u20132015 validation; updates may contain artifacts.",
+    "qa_nodata": "User guide lists Occurrence 0 not-water, 1\u2013100 occurrence %, 255 no data; Seasonality 0 not-water, 1\u201312 water months, 255 no data; monthly history 0 no observations, 1 not water, 2 water detected; yearly class 0 no observations, 1 not water, 2 seasonal, 3 permanent. Ancillary observation/detection counts proxy confidence; guide describes these metadata stats for 1984\u20132021.",
+    "crs_precision": "Official metadata XML records 30m resolution and 10-degree tile delivery; retrieved XML did not expose a clear coordinate reference system identifier in its parsed fields. Do not assert a CRS from these captures. Pixel size is not positional accuracy; no product-specific quantitative absolute accuracy estimate verified.",
+    "terms": "JRC says free of charge, without restriction of use under Copernicus Programme. Publications/models/products must acknowledge and cite dataset + Pekel et al. (2016); published map attribution must be \u201cSource: EC JRC/Google\u201d.",
+    "catalogue": "New assets documented as Earth Engine IDs; monthly/yearly assets require Earth Engine access. No account/sign-in/asset access was attempted. The data-access page lists aggregate metadata XML and per-tile file listing."
+  },
+  "scope_separation": "This supplementary-source check does not merge, replace, or reinterpret cycle 6 / cycle 8 / LT rights findings. It does not establish historical shoreline provenance or convert temporal aggregates into dated shorelines.",
+  "source_inventory_manifest": "capture-manifest.json"
+}
