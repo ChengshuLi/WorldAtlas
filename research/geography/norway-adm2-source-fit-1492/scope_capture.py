@@ -33,10 +33,10 @@ SELECTED = [
     "physical-component:cc11d3c9c7f82d8c9073539568d8af915da17e21904a60a75d49eb5d2e63ae94",
     "physical-component:dc92c796890cece117d3a70e1422fc2682a46caf3db64f06b2935b46e31b7a9f",
     "physical-component:e0bd74d0efc769aa5b98ba28ca22d0b37692f3387d344e32c14516b0fe062904",
-    "physical-component:eb2b6c25d1a8b8ead2bcb67f7e0423b5f1cc5609ac3f600bb98cd6d5cb11db40",
+    "physical-component:eb2b6c25d1a2b8ead2bcb67f7e0423b5f1cc5609ac3f600bb98cd6d5cb11db40",
     "physical-component:f082e1ba3a2d1267b17f803511ec164c9c8649fd3fb9cc2bc752a4c833659508",
 ]
-VINTAGE = "family-scope-20261008"
+VINTAGE = "family-scope-corrected-20261008"
 OUTPUTS = ["family-scope.json"]
 
 
@@ -47,7 +47,7 @@ def sha(raw):
 def process_snapshot():
     raw = subprocess.check_output(["ps", "-Ao", "pid,ppid,etime,comm,rss,%cpu,args"], text=True)
     return [line.strip() for line in raw.splitlines()[1:]
-            if "physical-continuation.py" in line or "supervise-query-" in line]
+            if "physical-continuation.py" in line or "supervise-query-" in line or "supervise-numerical-cohort-" in line]
 
 
 def iter_fragment_records(chunks):
@@ -158,9 +158,22 @@ def main():
     selected_in_family = sorted(set(SELECTED) & set(members))
     selected_outside_family = sorted(set(SELECTED) - set(members))
 
+    correction_path = OWNED + "vintages/issue-scope-correction-20261008/correction.json"
+    correction_raw = (ROOT / correction_path).read_bytes()
+    correction_publication = json.loads((ROOT / Path(correction_path).parent / "publication.json").read_bytes())
+    correction_descriptor = next((row for row in correction_publication["outputs"]
+                                  if row.get("path") == correction_path), None)
+    if not correction_descriptor or correction_descriptor.get("sha256") != sha(correction_raw) or correction_descriptor.get("bytes") != len(correction_raw):
+        raise SystemExit("Selected-ID correction artifact does not match its completion receipt")
+    correction = json.loads(correction_raw)
+    if correction.get("correction", {}).get("new_id") not in SELECTED or correction.get("correction", {}).get("old_id") in members:
+        raise SystemExit("Pinned issue identifier correction does not reconcile against the family roster")
+    baseline.admit("captured-input:" + correction_path, len(correction_raw))
+
     result = {
         "version": 1,
         "status": "complete-family-scope-captured",
+        "supersedes": "family-scope-20261008",
         "issue": 1492,
         "worker_id": WORKER,
         "created_at": datetime.now(timezone.utc).isoformat(),
@@ -180,6 +193,11 @@ def main():
                   "complete_positive_length_neighbor_ids": neighbors,
                   "family_record_source": family_path,
                   "family_record": family_record},
+        "selection_correction": {"path": correction_path, "sha256": sha(correction_raw),
+                                 "old_id": correction["correction"]["old_id"],
+                                 "corrected_id": correction["correction"]["new_id"],
+                                 "family_membership_after_correction": correction["correction"]["new_id"] in members,
+                                 "previous_capture_selected_id": correction["correction"]["old_id"]},
         "scan": {"shards_scanned": len(scanned), "records_scanned": scanned_records,
                  "shards": scanned, "decoded_input_bytes": sum(x["decoded_bytes"] for x in scanned)},
         "admission": {"pre_read_output_reserve_bytes": 1024 * 1024,
@@ -194,7 +212,7 @@ def main():
                       "process_max_rss_after_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
                       "disk_free_after_bytes": shutil.disk_usage(ROOT).free},
         "limits": ["This captures family/member/neighbor scope only; it is not a GIS result or eligibility decision.",
-                   "The pinned 400-member family roster contains 14 of the 15 issue-selected IDs; the Vevelstad selection is separately preserved as selected but outside this family roster.",
+                   "The original family-scope vintage used the pre-correction Vevelstad ID and reported 14 of 15 selected IDs in the family. This superseding scan uses the pinned corrected ID; it does not change the 400-member family or 15-item selected roster.",
                    "All component geometries, source feature contacts, cause, authority, history, rights, water/ice, and ownership remain unassessed here."]
     }
     encoded = canonical_json(result)
@@ -203,7 +221,9 @@ def main():
     if sha(Path(__file__).read_bytes()) != script_hash:
         raise SystemExit("Producer code changed during the run")
     records = writer.publish({"family-scope.json": result})
-    print(json.dumps({"status": result["status"], "family_members": len(members),
+    print(json.dumps({"status": result["status"], "supersedes": result["supersedes"],
+                      "selected_in_family": len(selected_in_family), "selected_outside_family": selected_outside_family,
+                      "family_members": len(members),
                       "neighbors": len(neighbors), "scanned_records": scanned_records,
                       "phase_consumed_bytes": sum(baseline.consumed.values()),
                       "output": records}, indent=2))

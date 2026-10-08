@@ -2,6 +2,8 @@
 
 This is a bounded source-only report for the issue’s 15 corrected component IDs. It keeps all 400 members and all 36 positive-length ADM2 neighbors in the scope artifacts. It does not alter map geometry, hierarchy, database contents, or publisher outputs. It makes no physical, political, historical, ownership, or water/ice classification.
 
+The first family-scope capture preceded the pinned Vevelstad ID correction and used the invalid `...d1a8...` selection, so it reported 14/15 family membership. The correction record ties that ID to the source-verified `...d1a2...` component. A fresh byte-bounded scan now verifies all 15 corrected selections against the unchanged original 400-member roster and all 36 neighbors. The earlier scope vintage is retained and explicitly superseded by `vintages/family-scope-corrected-20261008/`.
+
 ## Result
 
 The selected 15 component geometries were recovered from the manifest-pinned original component delivery and match the prior source-comparison geometry hashes. Under the pinned simplified geoBoundaries products, each has one positive-area ADM2 intersection with its unique recorded-compatible ADM2 subject; each is covered by that subject and by the complete ADM2 source union. No selected component has a second positive-area source overlap.

@@ -256,7 +256,8 @@ def main():
         ],
         "conclusions": [
             {"status": "supported", "text": "All 15 exact component delivery geometries match their pinned prior component geometry hashes and are covered by their unique-compatible retained 2013 ADM2 source subject. Each has one positive-area current simplified-product contact and no additional positive-area source overlap.", "source_ids": ["original-physical-component-delivery", "nor-adm2-simplified-2013"]},
-            {"status": "unresolved", "text": "Only 13 of 15 candidate components are covered by the recorded Nordland ADM1 parent; the two Rødøy components fail the strict parent predicate. No candidate satisfies the complete acceptance conjunction.", "source_ids": ["current-atlas-part-17-targets", "nor-adm1-simplified-2022"]},
+            {"status": "supported", "text": "The corrected Vevelstad identifier is inside the unchanged original 400-member family. A family-scope capture made before that correction used the invalid prior ID and reported 14/15; the superseding bounded scan verifies all 15 corrected selected IDs against the exact family roster and preserves all 36 positive-length neighbors.", "source_ids": ["original-physical-component-delivery"]},
+            {"status": "unresolved", "text": "13 of 15 candidate components are covered by the recorded Nordland ADM1 parent; the two Rødøy components fail the strict parent predicate. Seven components satisfy the full measured source-fit/no-loss conjunction; the other eight remain unresolved.", "source_ids": ["current-atlas-part-17-targets", "nor-adm1-simplified-2022", "nor-adm2-simplified-2013"]},
             {"status": "unresolved", "text": "The exact current-target no-loss predicate passes 8 of 15 and leaves nonempty residuals for 7. This differs by one pass from the earlier issue observation; the exact current run is preserved and the discrepancy is not waived.", "source_ids": ["current-atlas-part-17-targets", "original-physical-component-delivery"]},
             {"status": "supported", "text": "The prior source-comparison ledger contains 31 bbox candidate rows, including 16 empty intersections. Filtering those empty rows and comparing actual contacts yields exact set equality for all 15 selected components against the byte-identical current simplified product; there are no zero-area contacts in either result.", "source_ids": ["historical-source-contact-ledger", "nor-adm2-simplified-2013"]},
             {"status": "supported", "text": "Seven components satisfy the complete measured source-fit/no-loss conjunction: 1f5426f5180aa4f5b7fd9991b5ae4816d56cb642c31d0937a4977da516f28f2b, 764b247eb21da38adac0b925bededbbb4dccaefa4b52b16976f20543a7ac3384, 7bad7bdf9b1203fe6c676eb2efde10b09ce394ad7d6d554eb557709d7704df35, 8fb9f3f0d7df1c96ac452792fd4a9dbc7a45a576437550dd5b198424ceca14a9, a92cac9c4c3d3a91286eca0e4890becd63441647c7fe7c4cdcc5e1aa167d4803, b6ba064b4525f0c75459a8d1aa05c25e9740cc46b9964f96983d61d6a9b4253a, eb2b6c25d1a2b8ead2bcb67f7e0423b5f1cc5609ac3f600bb98cd6d5cb11db40. This is a source-only proposal result and does not constitute physical or geographic approval.", "source_ids": ["original-physical-component-delivery", "nor-adm1-simplified-2022", "nor-adm2-simplified-2013", "current-atlas-part-17-targets"]},
@@ -265,6 +266,7 @@ def main():
         ],
         "stages": {"research": "complete", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
+            "python3.12 research/geography/norway-adm2-source-fit-1492/scope_capture.py (corrected-ID scan; preserves the 400-member family and 36 neighbors)",
             "python3.12 research/geography/norway-adm2-source-fit-1492/capture_component_geometries.py (use a fresh VINTAGE name for a new run)",
             "python3.12 research/geography/norway-adm2-source-fit-1492/run_bounded_overlay.py (use a fresh VINTAGE name for a new run)",
             "node scripts/evidence-quality.mjs research/geography/norway-adm2-source-fit-1492/evidence-quality.json"
@@ -272,6 +274,7 @@ def main():
         "change_receipts": change_receipts(),
         "limits": [
             "Physical classification, geographic approval, and all core map/database/publisher writes are outside this source-only proposal.",
+            "The first family-scope capture used the pre-correction Vevelstad ID; its 14/15 membership result is superseded by the corrected-ID exact family scan.",
             "Two Rødøy candidates fail strict ADM1 parent coverage; seven candidates fail exact current-target no-loss. The prior strict no-loss summary reported one fewer pass than this exact run; per-component results are retained.",
             "The exact no-loss result is 8/15 pass, one more than the earlier issue observation of 7/15; this packet preserves the per-component discrepancy.",
             "The complete source delivery has one more unique component ID than its pinned input-config declaration.",
