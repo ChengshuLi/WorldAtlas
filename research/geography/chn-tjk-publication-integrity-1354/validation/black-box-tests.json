@@ -1,0 +1,16 @@
+{
+  "command": "python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/test_publication.py",
+  "runtime": "CPython 3.12.14",
+  "outcome": "passed",
+  "test_count": 8,
+  "coverage": [
+    "two intact complete runs",
+    "failed status only",
+    "unsupported schema version only",
+    "duplicate descriptor",
+    "foreign same-basename descriptor paths",
+    "missing and altered actual product",
+    "producer and comparison writer ordinary file, directory, symlink, dangling symlink, and traversal destinations",
+    "late exclusive writer failure leaves no completion receipt"
+  ]
+}

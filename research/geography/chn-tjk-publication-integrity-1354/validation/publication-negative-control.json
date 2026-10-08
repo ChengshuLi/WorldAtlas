@@ -1,0 +1,16 @@
+{
+  "method_id": "zip-member-inventory",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "actual_cli_cases": {
+    "duplicate_output_descriptor": "rejected_without_completion_receipt",
+    "foreign_run_relative_paths_with_same_basenames": "rejected_without_completion_receipt",
+    "missing_actual_product": "rejected_without_completion_receipt",
+    "altered_actual_product": "rejected_without_completion_receipt",
+    "producer_writer_file_directory_symlink_dangling_symlink_traversal": "rejected",
+    "comparison_writer_file_directory_symlink_dangling_symlink_traversal": "rejected",
+    "late_exclusive_writer_receipt_link_failure": "partial_products_retained_without_completion_receipt",
+    "failed_status_only": "rejected_without_completion_receipt",
+    "unsupported_version_only": "rejected_without_completion_receipt"
+  }
+}
