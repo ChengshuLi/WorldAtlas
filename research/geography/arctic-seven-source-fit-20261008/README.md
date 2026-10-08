@@ -4,12 +4,13 @@ This packet answers the bounded source-fit question in issue #1481 for exactly t
 
 ## Reproduction
 
-The files at the packet root are the preserved earlier vintage. Their `execution-budget.json` and phase outputs predate the admission controls described here and do not constitute a qualified rerun. New phase products are written only to fresh `vintages/r5-*` directories.
+The files at the packet root are the preserved earlier vintage. Their `execution-budget.json` and phase outputs predate the admission controls described here and do not constitute a qualified rerun. New phase products are written only to fresh `vintages/r5-*` directories. Superseded setup attempts are retained under `exploratory/`: the first native receipt undercounted the plan read, the next publication named the prior vintage, and the following fit stopped at a stale vintage assertion. They are disclosed for audit and are not part of the qualified run.
 
 The admitted rerun is tied to an immutable code commit. On the exact Python 3.12.14 / Shapely 2.1.2 environment recorded by `runtime-lock.json`, first commit the phase runner, its source bridge, phase scripts, native tool lock, runtime lock, and lock builders. Then use that exact commit as `EXECUTION_COMMIT` below. The plan builder verifies that all materialized source and code files match the commit and that the issue-pinned inputs retain their original hashes. It creates `phase-plan.json` once; the plan is immutable for the run. If the runtime or code changes, preserve the plan and start a separately reviewed execution vintage.
 
 ```sh
 PYTHON=/Users/chengshuli/.cache/worldatlas-evidence-python/f28ad176e64a6a5ea260-py3.12.14-arm64/bin/python
+NODE=/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_phase_plan.py --execution-commit "$EXECUTION_COMMIT"
 read -r PLAN_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/phase-plan.json)
 read -r NATIVE_TOOLS_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/native-tools-lock.json)
@@ -20,6 +21,9 @@ bash research/geography/arctic-seven-source-fit-20261008/native_archive_extract.
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-c --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-d --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA"
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_run_record.py
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_manifest.py
+"$NODE" scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json
 ```
 
 Each wrapper checks the exact plan and execution commit, computes the prospective phase charge before reading source bodies, verifies whole-file runtime/code/source pins, and rejects a used or unsafe output vintage. Python phases admit their outputs through a narrow bridge and publish a completion record last. Every later phase authenticates predecessor output, publication, and execution receipts before using it. The native archive phase separately locks its shell tools and host platform, verifies all six archive-part hashes and the full 45,601,680-byte archive hash, streams the 162,109,440-byte decoded tar payload, and compares the extracted `aafc-ecoregions.geojson` member byte for byte with the retained native file.
@@ -29,6 +33,20 @@ The enforced cap is 268,435,456 bytes (256 MiB) per phase, including input bytes
 `retired-context` authenticates all seven retired-archive parts before decoding, streams their 56,672,580 decoded bytes to a temporary file, verifies the reconstructed digest, and extracts only the five exact retired location records. The four `neighbor-scan-*` phases partition the complete 36-part active geometry index into four disjoint groups of nine parts. Each records its full feature-ID roster and exact candidate intersections. The final `source-fit` phase requires all four authenticated scan vintages, proves that their rosters are disjoint and together equal all 49,625 indexed features, then checks both complete ecoregion editions, target geometry, hierarchy, parent ecoprovinces, four-family context, and five retired reference records. It uses Shapely/GEOS exact predicates and union operations on stored longitude/latitude coordinates. No snapping, buffering, repair, or tolerance is used.
 
 The final `candidate-decisions.json` retains each candidate geometry, target union, gain/loss and candidate/gain symmetric-difference geometries, the full active-feature contact list, source-version coverage, parent-source comparison, retired-member comparison, all ten decision premises, and candidate-specific missing premises. `proposed-additions.geojson` contains only the three strict exact-addition outputs. New fit products are emitted into the fit vintage, never over the preserved root outputs.
+
+The completed run uses execution commit `a4649c264adbb74a4e98a36522f336604b7ba2c8` and phase-plan SHA-256 `7db470923274a09477023def89ce55562c8165479c921ecfbc10ca0a2ca55224`. Every phase stayed below the 268,435,456-byte cap:
+
+| Phase | Charged bytes | Headroom |
+| --- | ---: | ---: |
+| Native archive extraction | 263,776,415 | 4,659,041 |
+| Retired-member context | 235,267,399 | 33,168,057 |
+| Neighbor scan A | 234,161,047 | 34,274,409 |
+| Neighbor scan B | 228,027,666 | 40,407,790 |
+| Neighbor scan C | 228,584,478 | 39,850,978 |
+| Neighbor scan D | 241,003,835 | 27,431,621 |
+| Source fit and controls | 222,702,482 | 45,732,974 |
+
+The machine-readable `r5-execution-budget.json` binds each phase’s plan maximum, observed charge, predecessor receipts, publication receipt, and output hashes. The packet manifest checks 143 file bodies and reports `limited` for the declared boundary-authority and undated-context gaps. It does not report a schema, hash, or byte-inventory failure.
 
 ## Findings
 
