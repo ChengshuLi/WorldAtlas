@@ -41,8 +41,8 @@ class CaptureMembershipTest(unittest.TestCase):
         _, listings=analysis.validate_capture_membership(self.capture)
         target=next(iter(listings))
         mutated=copy.deepcopy(listings)
-        mutated[target].pop("raw_path",None)
-        with self.assertRaisesRegex(ValueError,"raw package-file listing body missing"):
+        mutated[target].pop("raw_member",None)
+        with self.assertRaisesRegex(ValueError,"raw package-file listing member missing"):
             analysis.authenticate_listings(mutated)
 
     def test_actual_eparses_tile_bbox_intersects_juan_component(self):

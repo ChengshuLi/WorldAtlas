@@ -5,9 +5,11 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
 import json, urllib.request, xml.etree.ElementTree as ET
+from zipfile import ZIP_DEFLATED, ZipFile
 
 ROOT = Path(__file__).parent / "sources" / "shom_litto3d_catalog_20261008"
 RAW = ROOT / "raw"
+LISTING_ARCHIVE = ROOT / "package-listing-responses.zip"
 PRODUCTS = {
     "eparses": "LITTO3D_EPARSES_2012_PACK_DL",
     "mayotte": "LITTO3D_MAYOT_2012_PACK_DL",
@@ -47,7 +49,8 @@ def fetch_listing(task):
     obj = json.loads(body)
     return {"area": area, "package": pkg, "url": url,
             "sha256": sha256(body).hexdigest(), "bytes": len(body),
-            "files": obj.get("downloadFiles", []), "retrieved_utc": UTC_RETRIEVED}
+            "files": obj.get("downloadFiles", []), "raw_member": area+"/"+pkg+".json",
+            "retrieved_utc": UTC_RETRIEVED, "_raw_body": body}
 
 ROOT.mkdir(parents=True, exist_ok=True)
 group_entries = {}
@@ -80,15 +83,23 @@ with ThreadPoolExecutor(max_workers=8) as pool:
     for f in as_completed(futures):
         listings.append(f.result())
 listings.sort(key=lambda x: (x["area"], x["package"]))
+with ZipFile(LISTING_ARCHIVE, "x", compression=ZIP_DEFLATED) as archive:
+    for row in listings:
+        archive.writestr(row["raw_member"], row.pop("_raw_body"))
+listing_archive_bytes = LISTING_ARCHIVE.read_bytes()
 inventory = {"retrieved_utc": UTC_RETRIEVED, "source": "Shom INSPIRE prepackage catalog",
     "product_groups": group_entries, "metadata_records": records,
-    "package_file_listings": listings}
+    "package_file_listings": listings,
+    "package_listings_archive": {"path": LISTING_ARCHIVE.name,
+        "sha256": sha256(listing_archive_bytes).hexdigest(), "bytes": len(listing_archive_bytes),
+        "format": "ZIP with original per-package response bytes"}}
 out = ROOT / "catalog-capture.json"
 with out.open("x", encoding="utf-8") as f:
     f.write(json.dumps(inventory, indent=2, ensure_ascii=False) + "\n")
 print(json.dumps({"retrieved_utc": UTC_RETRIEVED,
     "products": {k: v["package_count"] for k,v in group_entries.items()},
     "metadata_records":len(records),"listings":len(listings),
+    "listing_archive_bytes":len(listing_archive_bytes),
     "capture_sha256":sha256(out.read_bytes()).hexdigest(),
     "metadata_bytes":sum(x["bytes"] for x in records),
     "packages_with_files":sum(bool(x["files"]) for x in listings)}, indent=2))

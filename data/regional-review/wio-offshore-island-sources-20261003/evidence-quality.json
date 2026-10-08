@@ -2858,6 +2858,12 @@
           "bytes": 14308,
           "sha256": "97557f50552a9ceaf62443fa8f2d959ec3c335dcbaeda83e80b750ad8689b7c2",
           "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listing-responses.zip",
+          "bytes": 90136,
+          "sha256": "6bcfa977f9a6923a717aa79a09a5754b0d8d1d6b9a669ab38712ae5d744ad73f",
+          "hash_kind": "file-bytes"
         }
       ],
       "catalog_index": {
@@ -3286,14 +3292,14 @@
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/shom-catalog-analysis.json",
-      "bytes": 229440,
-      "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+      "bytes": 126157,
+      "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/catalog-capture.json",
-      "bytes": 487855,
-      "sha256": "a02cd3edcfac07d1713c0312f3dcae21d3f11e0bc4c13602de5c978082299a49",
+      "bytes": 482010,
+      "sha256": "b47c835f9e39fc8101a3373d0e07bfb921dd4a7ea7e6c0680bcb510923a8ac1d",
       "hash_kind": "file-bytes"
     },
     {
@@ -3312,6 +3318,30 @@
       "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-shom-tile-positive-control.json",
       "bytes": 1134,
       "sha256": "48fe79abdac962f61db289656be638ecde32a0b6280fab98a2b5fee2385ff05b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py",
+      "bytes": 14221,
+      "sha256": "045f49c3d51866e134d35657d70aab431e00f39dfed8c1a3b598eacbdfa26ffa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/capture_seychelles_sources.py",
+      "bytes": 4583,
+      "sha256": "c1a6cbaf72591fe6abb8ecdd5da3661455dc03bc302efd825359207b6c67bcf3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/capture_shom_catalog.py",
+      "bytes": 4919,
+      "sha256": "edab7a524b761b25aab06d8973ed83276bb25fe458cddd55b8bd8b7e2cac8d05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/test_shom_catalog_analysis.py",
+      "bytes": 3460,
+      "sha256": "451e4de2e4c944290e7f1547facfedaec2e4d7c91032d28e6d377095a98faa33",
       "hash_kind": "file-bytes"
     }
   ],
@@ -4031,12 +4061,12 @@
       "value": 10,
       "unit": "package bounding boxes",
       "vintage": "baseline",
-      "input_sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+      "input_sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
       "evaluation_commit": "c90773357da171d97367332cb53154da95796bff",
       "input_files": [
         {
           "path": "data/regional-review/wio-offshore-island-sources-20261003/shom-catalog-analysis.json",
-          "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+          "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
           "vintage": "candidate",
           "purpose": "direct numeric output of the Shom package-metadata screen"
         }
@@ -4045,14 +4075,14 @@
       "evaluation_provenance": {
         "baseline_snapshot_commit": "c90773357da171d97367332cb53154da95796bff",
         "producer_path": "data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py",
-        "producer_sha256": "964cdddd05e3503a8d29ea4f849b87cf28686ca3051a1b1dcf24b8762525c044",
+        "producer_sha256": "045f49c3d51866e134d35657d70aab431e00f39dfed8c1a3b598eacbdfa26ffa",
         "result_binding_is_separate": true,
         "upstream_metadata": [
           {
             "source_id": "Shom:Litto3D-package-catalog-20261008",
             "description": "Analysis JSON authenticates every retained package XML/group record and records all package-list URLs, response hashes, archive names, sizes, and MD5s; see its input_files and sources.catalog_index.",
-            "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
-            "bytes": 229440,
+            "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
+            "bytes": 126157,
             "retrieval_date": "2026-10-08"
           }
         ]
@@ -4063,12 +4093,12 @@
       "value": 123,
       "unit": "package bounding boxes",
       "vintage": "baseline",
-      "input_sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+      "input_sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
       "evaluation_commit": "c90773357da171d97367332cb53154da95796bff",
       "input_files": [
         {
           "path": "data/regional-review/wio-offshore-island-sources-20261003/shom-catalog-analysis.json",
-          "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+          "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
           "vintage": "candidate",
           "purpose": "direct numeric output of the Shom package-metadata screen"
         }
@@ -4077,14 +4107,14 @@
       "evaluation_provenance": {
         "baseline_snapshot_commit": "c90773357da171d97367332cb53154da95796bff",
         "producer_path": "data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py",
-        "producer_sha256": "964cdddd05e3503a8d29ea4f849b87cf28686ca3051a1b1dcf24b8762525c044",
+        "producer_sha256": "045f49c3d51866e134d35657d70aab431e00f39dfed8c1a3b598eacbdfa26ffa",
         "result_binding_is_separate": true,
         "upstream_metadata": [
           {
             "source_id": "Shom:Litto3D-package-catalog-20261008",
             "description": "Analysis JSON authenticates every retained package XML/group record and records all package-list URLs, response hashes, archive names, sizes, and MD5s; see its input_files and sources.catalog_index.",
-            "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
-            "bytes": 229440,
+            "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
+            "bytes": 126157,
             "retrieval_date": "2026-10-08"
           }
         ]
@@ -4095,12 +4125,12 @@
       "value": 38,
       "unit": "package bounding boxes",
       "vintage": "baseline",
-      "input_sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+      "input_sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
       "evaluation_commit": "c90773357da171d97367332cb53154da95796bff",
       "input_files": [
         {
           "path": "data/regional-review/wio-offshore-island-sources-20261003/shom-catalog-analysis.json",
-          "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+          "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
           "vintage": "candidate",
           "purpose": "direct numeric output of the Shom package-metadata screen"
         }
@@ -4109,14 +4139,14 @@
       "evaluation_provenance": {
         "baseline_snapshot_commit": "c90773357da171d97367332cb53154da95796bff",
         "producer_path": "data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py",
-        "producer_sha256": "964cdddd05e3503a8d29ea4f849b87cf28686ca3051a1b1dcf24b8762525c044",
+        "producer_sha256": "045f49c3d51866e134d35657d70aab431e00f39dfed8c1a3b598eacbdfa26ffa",
         "result_binding_is_separate": true,
         "upstream_metadata": [
           {
             "source_id": "Shom:Litto3D-package-catalog-20261008",
             "description": "Analysis JSON authenticates every retained package XML/group record and records all package-list URLs, response hashes, archive names, sizes, and MD5s; see its input_files and sources.catalog_index.",
-            "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
-            "bytes": 229440,
+            "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
+            "bytes": 126157,
             "retrieval_date": "2026-10-08"
           }
         ]
@@ -4127,12 +4157,12 @@
       "value": 3,
       "unit": "of 3 current Atlas geometry components",
       "vintage": "baseline",
-      "input_sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+      "input_sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
       "evaluation_commit": "c90773357da171d97367332cb53154da95796bff",
       "input_files": [
         {
           "path": "data/regional-review/wio-offshore-island-sources-20261003/shom-catalog-analysis.json",
-          "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
+          "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
           "vintage": "candidate",
           "purpose": "direct numeric output of the Shom package-metadata screen"
         }
@@ -4141,14 +4171,14 @@
       "evaluation_provenance": {
         "baseline_snapshot_commit": "c90773357da171d97367332cb53154da95796bff",
         "producer_path": "data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py",
-        "producer_sha256": "964cdddd05e3503a8d29ea4f849b87cf28686ca3051a1b1dcf24b8762525c044",
+        "producer_sha256": "045f49c3d51866e134d35657d70aab431e00f39dfed8c1a3b598eacbdfa26ffa",
         "result_binding_is_separate": true,
         "upstream_metadata": [
           {
             "source_id": "Shom:Litto3D-package-catalog-20261008",
             "description": "Analysis JSON authenticates every retained package XML/group record and records all package-list URLs, response hashes, archive names, sizes, and MD5s; see its input_files and sources.catalog_index.",
-            "sha256": "1e0a0bf9460418ad1c8b41a80ff6f17389c4a4160654b42ac82450d2598df79d",
-            "bytes": 229440,
+            "sha256": "893c5a94cadc797f83988050ed01d734f32c416182128e13009eccd552baffa1",
+            "bytes": 126157,
             "retrieval_date": "2026-10-08"
           }
         ]
@@ -4478,275 +4508,1681 @@
   "change_receipts": [
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/README.md",
-      "status": "modified"
+      "status": "modified",
+      "original_sha256": "49de1d14038ce768f6f0a91bfe4e9569bcb66210ae20df0cd68f50d75a979968"
     },
     {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/district-comparison.json",
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/capture_seychelles_sources.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/capture_shom_catalog.py",
       "status": "added"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/evidence-quality.json",
-      "status": "modified"
+      "status": "modified",
+      "original_sha256": "f61d813dcab0b58312867b8c2f6a4d3eb13e36c6c79eb85badcb480076e7b988"
     },
     {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/reproduce.py",
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/seychelles-source-access-20261008.json",
       "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/scope.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/source-inventory.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/mauritius_districts-20261008.geojson",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/mauritius_islet_parks-20261008.geojson",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/test_reproduce_safety.py",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-c/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-c/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-c/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-c/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/control-generator-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/control-generator-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/control-generator-reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/control-overlay-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/control-overlay-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/control-shom-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/control-shom-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-d/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-e/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-e/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-e/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-e/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/control-generator-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/control-generator-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/control-generator-reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/control-overlay-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/control-overlay-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/control-shom-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/control-shom-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-f/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-g/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-g/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-g/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-g/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/subject-findings.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/district-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/results.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-generator-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-generator-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-generator-reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-overlay-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-overlay-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-shom-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-shom-negative.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/analyze_shom_tiles.py",
-      "status": "modified"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/shom-catalog-analysis.json",
-      "status": "modified"
+      "status": "added"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/catalog-capture.json",
-      "status": "modified"
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/eparses-product-group.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/mayotte-product-group.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listing-responses.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0230_8240.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0230_8245.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0235_8240.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0235_8245.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0245_8120.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0245_8125.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0250_8115.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0250_8120.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0250_8125.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0250_8130.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0255_8110.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0255_8115.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0255_8120.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0255_8125.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0255_8130.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0260_8110.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0260_8115.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0260_8120.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0260_8125.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0260_8130.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0265_8115.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0265_8120.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0265_8125.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0620_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0620_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0625_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0625_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0625_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0630_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0630_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0630_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0635_7525.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0635_7530.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0635_7535.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0635_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0635_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0635_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0635_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0640_7525.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0640_7530.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0640_7535.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0640_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0640_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0640_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0645_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0655_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0655_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0655_8645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0660_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0660_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0660_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0660_8645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0660_8650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0665_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0665_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0665_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0665_8645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0665_8650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0670_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0670_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0670_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0670_8645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0675_8635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0675_8640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0745_8720.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0745_8725.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0750_8720.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0750_8725.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0750_8730.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0750_8735.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0755_8720.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0755_8725.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0755_8730.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0755_8735.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0760_8725.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0760_8730.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0760_8735.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0765_8725.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0765_8730.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0765_8735.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0480_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0485_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0490_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0495_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0500_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8545.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0505_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8545.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0510_8630.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8545.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0515_8625.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8545.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0520_8620.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0525_8615.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8550.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0530_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8555.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8560.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8565.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8570.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0535_8610.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0540_8575.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0540_8580.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0540_8585.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0540_8590.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0540_8595.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0540_8600.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/mayotte/0540_8605.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0310_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0310_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0315_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0315_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0315_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0315_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0315_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0320_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0325_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0330_7695.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0335_7695.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0340_7695.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0345_7695.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0350_7695.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0355_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7635.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0360_7690.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7675.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7680.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0365_7685.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0370_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0370_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0370_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0370_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0370_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0370_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0370_7670.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0375_7640.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0375_7645.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0375_7650.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0375_7655.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0375_7660.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/reunion/0375_7665.xml",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/reunion-product-group.json",
+      "status": "added"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/test_shom_catalog_analysis.py",
-      "status": "modified"
+      "status": "added"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-shom-tile-negative-control.json",
@@ -4754,1630 +6190,6 @@
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-h/control-shom-tile-positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0255_8125.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0245_8120.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0260_8125.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0540_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0635_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0250_8130.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0660_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0310_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0230_8240.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0670_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0655_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0640_7525.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7695.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0370_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0620_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0665_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0630_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0750_8720.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0375_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0540_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8545.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0760_8735.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0755_8735.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0370_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0260_8115.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0315_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0250_8120.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0255_8115.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0540_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0640_7535.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0265_8120.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0675_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0235_8245.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0315_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0665_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0640_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0540_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7695.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0635_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0660_8645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7695.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0760_8725.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0625_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0670_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0375_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0655_8645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0370_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0745_8720.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0755_8725.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8545.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0665_8650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0765_8730.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0370_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0635_7530.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0375_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0750_8730.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0635_7525.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0675_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0370_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0765_8725.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0620_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0665_8645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0630_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0750_8725.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0640_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0375_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0540_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0760_8730.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0660_8650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0635_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0755_8730.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0370_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0315_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0255_8120.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0265_8115.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0245_8125.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0260_8120.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0540_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0250_8115.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0660_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0310_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0625_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0670_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0230_8245.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7695.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0645_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0635_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0660_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0625_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0375_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0670_8645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7695.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0655_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0745_8725.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0755_8720.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8550.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0340_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0350_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0765_8735.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8545.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0370_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0635_7535.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0355_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0360_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0375_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0345_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0750_8735.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8545.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0365_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8575.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7655.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0260_8110.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0315_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8590.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0250_8125.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8570.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7650.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8595.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8600.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0255_8110.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7680.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7665.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7685.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0530_8605.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0640_7530.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0325_7660.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0265_8125.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0495_8560.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0235_8240.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0510_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0480_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0485_8565.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0315_7675.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0255_8130.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0665_8635.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0520_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8580.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0500_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7645.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0630_8640.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0525_8615.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0640_8630.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0505_8625.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0330_7670.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0540_8585.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0490_8555.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0535_8610.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0335_7690.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/mayotte-0515_8620.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/eparses-0260_8130.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/package-listings/reunion-0320_7675.json",
       "status": "added"
     }
   ],

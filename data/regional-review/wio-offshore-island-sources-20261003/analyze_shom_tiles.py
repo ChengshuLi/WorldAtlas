@@ -9,6 +9,7 @@ from hashlib import sha256
 from pathlib import Path
 import json, re
 from xml.etree import ElementTree as ET
+from zipfile import ZipFile
 from pyproj import CRS, Transformer
 from shapely.geometry import box, shape, mapping
 from shapely.ops import transform, unary_union
@@ -16,6 +17,7 @@ from shapely.ops import transform, unary_union
 PACKET = Path(__file__).parent
 CATALOG = PACKET / "sources/shom_litto3d_catalog_20261008"
 CAPTURE = CATALOG / "catalog-capture.json"
+LISTING_ARCHIVE = CATALOG / "package-listing-responses.zip"
 OUT = PACKET / "shom-catalog-analysis.json"
 NS = {"gmd":"http://www.isotc211.org/2005/gmd","gco":"http://www.isotc211.org/2005/gco","gmx":"http://www.isotc211.org/2005/gmx"}
 GROUPS = {"eparses":"LITTO3D_EPARSES_2012_PACK_DL","mayotte":"LITTO3D_MAYOT_2012_PACK_DL","reunion":"LITTO3D_REUNION_2016_PACK_DL"}
@@ -109,17 +111,26 @@ def validate_capture_membership(cap):
     return record_map,listing_map
 
 def authenticate_listings(listing_map):
-    """Verify every saved package-list response and its parsed listing fields."""
-    for key, row in listing_map.items():
-        rel = row.get("raw_path")
-        if not rel:
-            raise ValueError("raw package-file listing body missing: "+str(key))
-        path = CATALOG / rel
-        body = path.read_bytes()
-        if len(body) != row["bytes"] or sha256(body).hexdigest() != row["sha256"]:
-            raise ValueError("package-file listing body hash mismatch: "+str(key))
-        if json.loads(body).get("downloadFiles", []) != row["files"]:
-            raise ValueError("parsed package-file listing differs from retained body: "+str(key))
+    """Verify all archived package-list response bytes and parsed fields."""
+    cap=json.loads(CAPTURE.read_text())
+    archive_record=cap.get("package_listings_archive",{})
+    archive_bytes=LISTING_ARCHIVE.read_bytes()
+    if (archive_record.get("path") != LISTING_ARCHIVE.name or
+        len(archive_bytes) != archive_record.get("bytes") or
+        sha256(archive_bytes).hexdigest() != archive_record.get("sha256")):
+        raise ValueError("raw package-file listing archive hash mismatch")
+    expected_members={row.get("raw_member") for row in listing_map.values()}
+    if None in expected_members or len(expected_members) != len(listing_map):
+        raise ValueError("raw package-file listing member missing or duplicated")
+    with ZipFile(LISTING_ARCHIVE) as archive:
+        if set(archive.namelist()) != expected_members:
+            raise ValueError("raw package-file listing archive membership mismatch")
+        for key, row in listing_map.items():
+            body=archive.read(row["raw_member"])
+            if len(body) != row["bytes"] or sha256(body).hexdigest() != row["sha256"]:
+                raise ValueError("package-file listing body hash mismatch: "+str(key))
+            if json.loads(body).get("downloadFiles", []) != row["files"]:
+                raise ValueError("parsed package-file listing differs from retained body: "+str(key))
 
 def screen_component_bbox(component, bbox_wgs84, buffer_m=1000):
     """Apply the declared lon/lat bbox screen to one feature component."""
@@ -195,9 +206,7 @@ def main():
         "method":{"geometry":"transform each metadata EX_GeographicBoundingBox polygon and pinned feature components from WGS84 to EPSG:6933; count direct intersections and intersections with a 1,000 m buffer",
           "interpretation":"Catalog-bbox proximity only. An XML bbox is a rectangular catalog footprint and does not establish raster mask coverage, valid source pixels, island occurrence, coast accuracy, completeness, datum, or legal boundary. Absence of a nearby listed tile is only a candidate-source catalog gap.",
           "license":"Catalog XMLs and parsed file listings identify terms per package; attribution and reuse terms must be respected. Shom says not for navigation in product metadata."}}
-    for row in cap["package_file_listings"]:
-        path=CATALOG/row["raw_path"]
-        out["input_files"][str(path.relative_to(ROOT))]=file_hash(path)
+    out["input_files"][str(LISTING_ARCHIVE.relative_to(ROOT))]=file_hash(LISTING_ARCHIVE)
     with OUT.open("w",encoding="utf-8") as f:
         f.write(json.dumps(out,indent=2,ensure_ascii=False)+"\n")
     print(json.dumps({"output":str(OUT.relative_to(ROOT)),"output_sha256":file_hash(OUT)["sha256"],
