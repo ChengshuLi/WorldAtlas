@@ -1,6 +1,6 @@
 # Evidence baseline-vintage compatibility follow-up
 
-Date: 2026-10-07 America/Los_Angeles; revalidated against fresh main `97291daccaa44e9c67bba9ae87ceaada641226da` at 2026-10-07 19:17 PDT; PR branch subsequently rebased onto `bb0e027b40fffadb5ac29d70221d7635d336c9d3`. This is an implementation handoff, not a change to the one-PR geography scope.
+Date: 2026-10-07 America/Los_Angeles; revalidated against fresh main `97291daccaa44e9c67bba9ae87ceaada641226da` at 2026-10-07 19:17 PDT; PR branch subsequently rebased onto current main `c618e4411a21e9b57afbd704bab219e250662bfb`. This is an implementation handoff, not a change to the one-PR geography scope.
 
 ## Reproduction
 
