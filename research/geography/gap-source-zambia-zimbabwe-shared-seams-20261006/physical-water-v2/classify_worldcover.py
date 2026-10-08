@@ -15,6 +15,7 @@ import json
 import math
 import resource
 import sys
+import tempfile
 import zlib
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -47,6 +48,7 @@ CLASS_NAMES = {
 }
 LAND_CODES = set(CLASS_NAMES) - {WATER, WETLAND}
 MAX_RSS_MIB = 700
+MAX_ONE_FILE_BYTES = 32 * 1024 * 1024
 MAX_ONE_RUN_OUTPUT_BYTES = 64 * 1024 * 1024
 MAX_BOTH_RUN_OUTPUT_BYTES = 128 * 1024 * 1024
 
@@ -193,6 +195,144 @@ def synthetic_controls() -> dict:
         "mutation_control": {"input_change": "single class-80 cell changed to class 30", "expected": "water evidence decreases and mapped-land class increases", "result": "passed"},
         "source_pixels_read": False,
     }
+
+
+def serialize_result_bundle(result: dict) -> dict[str, bytes]:
+    """Serialize complete record arrays as independently bounded JSON shards."""
+    index = {key: value for key, value in result.items() if key not in {"component_results"}}
+    index["scope"] = {key: value for key, value in result.get("scope", {}).items() if key != "point_contact_fragments"}
+    index["output_layout"] = "worldcover-classification-index-v1; component and point-contact-fragment records are in ordered JSON shards listed in this index"
+    payloads: dict[str, bytes] = {}
+    shard_sets = {
+        "component_result_shards": ("component-results", "component-result", result.get("component_results", [])),
+        "point_contact_fragment_shards": ("contact-fragments", "point-contact-fragment", result.get("scope", {}).get("point_contact_fragments", [])),
+    }
+    for field, (directory, record_type, records) in shard_sets.items():
+        descriptors = []
+        for position, record in enumerate(records, start=1):
+            relative_path = f"{directory}/{position:04d}.json"
+            raw = (json.dumps({"version": 1, "record_type": record_type, "record": record}, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+            payloads[relative_path] = raw
+            descriptors.append({"path": relative_path, "bytes": len(raw), "sha256": sha256(raw)})
+        index[field] = descriptors
+    index["component_result_count"] = len(result.get("component_results", []))
+    index["point_contact_fragment_count"] = len(result.get("scope", {}).get("point_contact_fragments", []))
+    index_raw = (json.dumps(index, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    payloads["worldcover-classification-index.json"] = index_raw
+    return payloads
+
+
+def write_result_bundle(result: dict, output_dir: Path, run_name: str, *, existing_output_bytes: int = 0, file_limit_bytes: int = MAX_ONE_FILE_BYTES, run_limit_bytes: int = MAX_ONE_RUN_OUTPUT_BYTES, pair_limit_bytes: int = MAX_BOTH_RUN_OUTPUT_BYTES, producer_sha256: str | None = None) -> dict:
+    """Validate every ordinary-file and aggregate bound before creating output."""
+    if output_dir.exists():
+        raise RuntimeError(f"output already exists; preserve it and inspect: {output_dir}")
+    payloads = serialize_result_bundle(result)
+    for relative_path, raw in payloads.items():
+        if len(raw) > file_limit_bytes:
+            raise RuntimeError(f"Ordinary output file exceeds the {file_limit_bytes}-byte cap before write: {relative_path} ({len(raw)} bytes)")
+    receipt = {
+        "version": 1,
+        "run": run_name,
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "result_index_file": "worldcover-classification-index.json",
+        "result_index_sha256": sha256(payloads["worldcover-classification-index.json"]),
+        "result_files": [{"path": name, "bytes": len(raw), "sha256": sha256(raw)} for name, raw in sorted(payloads.items())],
+        "result_file_count": len(payloads),
+        "result_bytes": sum(map(len, payloads.values())),
+        "producer_sha256": producer_sha256 or sha256(Path(__file__).read_bytes()),
+        "selected_original_block_count": result["selected_original_blocks_loaded"],
+        "selected_original_block_decoded_bytes": result["selected_original_blocks_decoded_bytes"],
+        "components": len(result["component_results"]),
+        "controls": result["synthetic_controls"]["result"],
+        "process_peak_rss_mib": round(peak_rss_mib(), 1),
+    }
+    receipt["bundle_bytes_including_receipt"] = 0
+    for _ in range(4):
+        receipt_raw = (json.dumps(receipt, indent=2) + "\n").encode("utf-8")
+        bundle_bytes = sum(map(len, payloads.values())) + len(receipt_raw)
+        if receipt["bundle_bytes_including_receipt"] == bundle_bytes:
+            break
+        receipt["bundle_bytes_including_receipt"] = bundle_bytes
+    receipt_raw = (json.dumps(receipt, indent=2) + "\n").encode("utf-8")
+    bundle_bytes = sum(map(len, payloads.values())) + len(receipt_raw)
+    if receipt["bundle_bytes_including_receipt"] != bundle_bytes:
+        raise RuntimeError("Could not stabilize the exact receipt-inclusive output byte count")
+    if len(receipt_raw) > file_limit_bytes:
+        raise RuntimeError(f"Execution receipt exceeds the {file_limit_bytes}-byte cap before write")
+    bundle_bytes = sum(map(len, payloads.values())) + len(receipt_raw)
+    if bundle_bytes > run_limit_bytes:
+        raise RuntimeError(f"Run output exceeds the {run_limit_bytes}-byte cap before write: {bundle_bytes}")
+    if existing_output_bytes + bundle_bytes > pair_limit_bytes:
+        raise RuntimeError(f"Combined two-run output exceeds the {pair_limit_bytes}-byte cap before write")
+
+    output_dir.mkdir(parents=True, exist_ok=False)
+    for relative_path, raw in payloads.items():
+        target = output_dir / relative_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(raw)
+    (output_dir / "execution-receipt.json").write_bytes(receipt_raw)
+    return receipt
+
+
+def output_writer_controls() -> dict:
+    """Exercise real shard writing, receipt paths, bounds, and no-overwrite behavior."""
+    synthetic = {
+        "selected_original_blocks_loaded": 0,
+        "selected_original_blocks_decoded_bytes": 0,
+        "synthetic_controls": {"result": "passed"},
+        "component_results": [{"component_id": "synthetic-component", "class_portions": [{"class_code": 80, "coordinates": [[1, 2]]}]}],
+        "scope": {"point_contact_fragments": [{"fragment_id": "synthetic-contact", "classification_status": "nonareal"}]},
+    }
+    with tempfile.TemporaryDirectory(prefix="worldcover-output-controls-") as temporary:
+        output_dir = Path(temporary) / "run-one"
+        receipt = write_result_bundle(synthetic, output_dir, "one", producer_sha256="0" * 64)
+        index_path = output_dir / receipt["result_index_file"]
+        if not index_path.is_file() or sha256(index_path.read_bytes()) != receipt["result_index_sha256"]:
+            raise RuntimeError("Output-writer control failed to bind the index path and bytes")
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+        disk_receipt = json.loads((output_dir / "execution-receipt.json").read_text(encoding="utf-8"))
+        component = json.loads((output_dir / index["component_result_shards"][0]["path"]).read_text(encoding="utf-8"))
+        fragment = json.loads((output_dir / index["point_contact_fragment_shards"][0]["path"]).read_text(encoding="utf-8"))
+        if component["record"] != synthetic["component_results"][0] or fragment["record"] != synthetic["scope"]["point_contact_fragments"][0]:
+            raise RuntimeError("Output-writer control failed to preserve component or contact records")
+        for descriptor in disk_receipt["result_files"]:
+            raw = (output_dir / descriptor["path"]).read_bytes()
+            if len(raw) != descriptor["bytes"] or sha256(raw) != descriptor["sha256"]:
+                raise RuntimeError("Output-writer control failed to verify a receipt file path/hash")
+        actual_bundle_bytes = sum(path.stat().st_size for path in output_dir.rglob("*") if path.is_file())
+        if actual_bundle_bytes != disk_receipt["bundle_bytes_including_receipt"]:
+            raise RuntimeError("Output-writer control reported an incorrect receipt-inclusive byte count")
+        if any(path.stat().st_size > MAX_ONE_FILE_BYTES for path in output_dir.rglob("*") if path.is_file()):
+            raise RuntimeError("Output-writer control exceeded the ordinary-file cap")
+        before = {str(path.relative_to(output_dir)): sha256(path.read_bytes()) for path in output_dir.rglob("*") if path.is_file()}
+        try:
+            write_result_bundle(synthetic, output_dir, "one", producer_sha256="0" * 64)
+        except RuntimeError as error:
+            if "already exists" not in str(error):
+                raise
+        else:
+            raise RuntimeError("Output-writer control overwrote a non-fresh output directory")
+        after = {str(path.relative_to(output_dir)): sha256(path.read_bytes()) for path in output_dir.rglob("*") if path.is_file()}
+        if before != after:
+            raise RuntimeError("Output-writer control changed existing output after fresh-directory rejection")
+        rejected_dir = Path(temporary) / "oversize"
+        try:
+            write_result_bundle(synthetic, rejected_dir, "one", file_limit_bytes=64, producer_sha256="0" * 64)
+        except RuntimeError as error:
+            if "before write" not in str(error) or rejected_dir.exists():
+                raise RuntimeError("Output-writer control did not reject oversized files before writing") from error
+        else:
+            raise RuntimeError("Output-writer control accepted an oversized ordinary file")
+        for name, bounds in [("run-cap", {"run_limit_bytes": 64}), ("pair-cap", {"pair_limit_bytes": 64})]:
+            rejected_cap_dir = Path(temporary) / name
+            try:
+                write_result_bundle(synthetic, rejected_cap_dir, "one", producer_sha256="0" * 64, **bounds)
+            except RuntimeError as error:
+                if "before write" not in str(error) or rejected_cap_dir.exists():
+                    raise RuntimeError(f"Output-writer control did not enforce the {name} before writing") from error
+            else:
+                raise RuntimeError(f"Output-writer control accepted the {name}")
+    return {"result": "passed", "complete_component_and_fragment_records_sharded": True, "index_receipt_paths_and_hashes": "passed", "ordinary_file_cap_bytes": MAX_ONE_FILE_BYTES, "oversize_rejected_before_write": True, "run_cap_rejected_before_write": True, "pair_cap_rejected_before_write": True, "fresh_output_directory_required": True, "existing_output_preserved": True}
 
 
 def load_source():
@@ -411,47 +551,23 @@ def main() -> None:
             parser.error("--preflight-only cannot be combined with other modes")
         frozen_bytes, frozen = validate_frozen_inputs()
         controls = synthetic_controls()
-        print(json.dumps({"result": "preflight passed", "frozen_manifest_sha256": sha256(frozen_bytes), "frozen_input_files": frozen["input_file_count"], "frozen_input_bytes": frozen["input_bytes"], "runtime": frozen["runtime"], "controls": controls["result"], "source_pixels_read": False}, sort_keys=True, indent=2))
+        writer_controls = output_writer_controls()
+        print(json.dumps({"result": "preflight passed", "frozen_manifest_sha256": sha256(frozen_bytes), "frozen_input_files": frozen["input_file_count"], "frozen_input_bytes": frozen["input_bytes"], "runtime": frozen["runtime"], "controls": controls["result"], "output_writer_controls": writer_controls, "source_pixels_read": False}, sort_keys=True, indent=2))
         return
     if args.controls_only:
         if args.run:
             parser.error("--run cannot be combined with --controls-only")
-        print(json.dumps(synthetic_controls(), sort_keys=True, indent=2))
+        print(json.dumps({"classification_controls": synthetic_controls(), "output_writer_controls": output_writer_controls()}, sort_keys=True, indent=2))
         return
     if not args.run:
         parser.error("actual classification requires --run one|two")
     output = BASE / f"run-{args.run}"
-    if output.exists():
-        parser.error(f"output already exists; preserve it and inspect: {output}")
     result = build_result(args.run)
-    raw = (json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
-    receipt = {
-        "version": 1,
-        "run": args.run,
-        "completed_at": datetime.now(timezone.utc).isoformat(),
-        "result_file": str(out.relative_to(PACKET.parent)),
-        "result_bytes": len(raw),
-        "result_sha256": sha256(raw),
-        "producer_sha256": sha256(Path(__file__).read_bytes()),
-        "selected_original_block_count": result["selected_original_blocks_loaded"],
-        "selected_original_block_decoded_bytes": result["selected_original_blocks_decoded_bytes"],
-        "components": len(result["component_results"]),
-        "controls": result["synthetic_controls"]["result"],
-        "process_peak_rss_mib": round(peak_rss_mib(), 1),
-    }
-    if len(raw) > MAX_ONE_RUN_OUTPUT_BYTES:
-        raise RuntimeError(f"Result exceeds the 64 MiB per-run cap: {len(raw)}")
     other_name = "two" if args.run == "one" else "one"
     other_dir = BASE / f"run-{other_name}"
-    existing_output_bytes = sum(path.stat().st_size for path in other_dir.glob("*") if path.is_file()) if other_dir.is_dir() else 0
-    prospective_receipt_bytes = len(json.dumps(receipt, indent=2).encode("utf-8")) + 1
-    if existing_output_bytes + len(raw) + prospective_receipt_bytes > MAX_BOTH_RUN_OUTPUT_BYTES:
-        raise RuntimeError("Combined two-run output would exceed the 128 MiB cap")
+    existing_output_bytes = sum(path.stat().st_size for path in other_dir.rglob("*") if path.is_file()) if other_dir.is_dir() else 0
     enforce_peak_rss()
-    output.mkdir(parents=True, exist_ok=False)
-    out = output / "worldcover-classification.json"
-    out.write_bytes(raw)
-    (output / "execution-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    receipt = write_result_bundle(result, output, args.run, existing_output_bytes=existing_output_bytes)
     print(json.dumps(receipt, indent=2))
 
 

@@ -60,6 +60,10 @@ def main() -> None:
     input_bytes = sum(item["bytes"] for item in inputs)
     storage_snapshot = json.loads((BASE / "workspace-storage-admission.json").read_text(encoding="utf-8"))
     producer_hashes = {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "freeze_inputs.py", "record_workspace_storage.mjs"]}
+    runtime_body_total = 9_901_207 + 18_058_560 + 352_048 + 3_258_528 + 2_289_328
+    producer_bytes = sum((BASE / name).stat().st_size for name in producer_hashes)
+    static_phase_sum = input_bytes + range_manifest["selected_decoded_bytes"] + 932_627 + runtime_body_total + producer_bytes + 67_108_864
+    remaining_phase_budget = 256 * 1024 * 1024 - static_phase_sum
 
     packet_id = "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006"
     report = {
@@ -106,9 +110,9 @@ def main() -> None:
             "command": "bundled Python 3.12.14 classify_worldcover.py --preflight-only under /usr/bin/time -l",
             "result": "passed",
             "source_pixels_read": False,
-            "elapsed_seconds": 0.37,
-            "process_peak_rss_bytes": 45498368,
-            "measured_at_utc": "2026-10-08T03:07:42Z",
+            "elapsed_seconds": 0.20,
+            "process_peak_rss_bytes": 47153152,
+            "measured_at_utc": "2026-10-08T03:13:40Z",
             "pinned_project_input_files": len(inputs),
             "pinned_project_input_bytes": input_bytes,
             "owned_producer_and_checker_files": len(producer_hashes),
@@ -116,12 +120,29 @@ def main() -> None:
             "loaded_runtime_module_files": 236,
             "loaded_runtime_module_file_bytes": 9901207,
             "python_executable_bytes": 18058560,
-            "preflight_wrapper_open_descriptor_snapshot": 4,
-            "runtime_body_measurement_note": "Module and executable byte counts were measured in a second preflight-only process using the same bundled runtime and entry point; descriptor count is a point-in-time wrapper snapshot including the /dev/fd listing handle, not an estimate for classification.",
+            "loaded_non_python_runtime_files": [
+                {"path": "shapely/.dylibs/libgeos_c.1.19.2.dylib", "bytes": 352048},
+                {"path": "shapely/.dylibs/libgeos.3.13.1.dylib", "bytes": 3258528},
+                {"path": "/usr/lib/dyld", "bytes": 2289328},
+            ],
+            "measured_runtime_body_total_bytes": runtime_body_total,
+            "measured_runtime_body_formula": "9,901,207 loaded Python module files + 18,058,560 Python executable + 3,610,576 GEOS dylibs + 2,289,328 macOS dyld",
+            "held_preflight_vmmap_physical_footprint": "24.9 MiB",
+            "preflight_open_descriptor_count_including_stdio": 3,
+            "runtime_body_measurement_note": "Module and executable byte counts were measured in a second preflight-only process using the same bundled runtime and entry point. GEOS dylibs and dyld were inventoried from vmmap/lsof on a held preflight-only process; that process had three open stdio descriptors. macOS system frameworks are shared OS libraries, not project-copied runtime bodies; observed process RSS/physical footprint captures their actual process cost.",
             "per_classification_run_encoded_source_bytes": range_manifest["selected_encoded_bytes"] + range_manifest["ifd_metadata_range"]["content_length"],
             "per_classification_run_decoded_original_block_capacity_bytes": range_manifest["selected_decoded_bytes"],
             "per_classification_run_geometry_compressed_bytes": (PACKET / "run-one/source-geometry-results.json.gz").stat().st_size,
             "per_classification_run_geometry_decoded_bytes": 932627,
+            "largest_retained_encoded_tiff_block_bytes": max(row["encoded_bytes"] for row in range_manifest["blocks"]),
+            "per_run_maximum_ordinary_output_file_bytes": 33554432,
+            "per_run_total_output_cap_bytes_including_receipt": 67108864,
+            "two_run_total_output_cap_bytes": 134217728,
+            "prospective_one_run_static_phase_sum_bytes": static_phase_sum,
+            "prospective_one_run_static_phase_sum_formula": f"{input_bytes} pinned inputs + {range_manifest['selected_decoded_bytes']} decoded original blocks + 932627 decoded comparison geometry + {runtime_body_total} measured runtime bodies incl. GEOS/dyld + {producer_bytes} owned producer/checker bytes + 67108864 result-bundle/receipt cap",
+            "expected_peak_rss_budget_mib": 256,
+            "remaining_256_mib_budget_for_live_row_geometry_and_allocator_overhead_bytes": remaining_phase_budget,
+            "phase_sum_note": "The exact static phase sum leaves the recorded remaining allowance for row-wise GEOS/NumPy geometry intermediates and allocator overhead. Classification RSS remains unmeasured and must be checked live against the 700 MiB abort before and during both authorized runs.",
             "issue_window_pixel_bytes_theoretical_only": range_manifest["complete_pixel_window"]["decoded_bytes"],
             "raster_crop_files_or_crop_intermediates": 0,
             "crop_handling": "No 47,518,164-byte crop file is created. The producer decodes the 60 pinned original TIFF blocks and uses row-bounded candidate/cell intersections; no raster-wide crop array is materialized.",
