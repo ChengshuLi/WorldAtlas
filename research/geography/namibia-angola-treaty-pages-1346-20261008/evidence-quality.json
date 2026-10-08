@@ -1,0 +1,662 @@
+{
+  "version": 1,
+  "issue": 1499,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:AGO:ADM2:16411231B14510444140190",
+    "gb:AGO:ADM2:16411231B28551746118834",
+    "gb:AGO:ADM2:16411231B36562728226085",
+    "gb:NAM:ADM2:8085530B15355770078360",
+    "gb:NAM:ADM2:8085530B25496891828693",
+    "gb:NAM:ADM2:8085530B32015186497374",
+    "gb:NAM:ADM2:8085530B43563455443088",
+    "gb:NAM:ADM2:8085530B54610932550654",
+    "gb:NAM:ADM2:8085530B8620298556926",
+    "gb:NAM:ADM2:8085530B94702234009846"
+  ],
+  "subject_ids_sha256": "0273221d08cdaa665a81e7f6d510091dd77798f54385948b3b1b92c944d79676",
+  "baseline": {
+    "commit": "eddf3d98c725a768959e431462b16d9adf507a41",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5133018,
+        "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4948066,
+        "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "bytes": 11393,
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/historical-boundary-contact-water-assessment.json",
+        "bytes": 114891,
+        "sha256": "c535068a93886f51d42d9b08a69489f367ff10d69bfcbfb60584d891d2cb260b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
+        "bytes": 31247,
+        "sha256": "5a1cc63ed2b363d6eda0c720d147cf5ed4eb7aa7007cb965ea0ec23ccaac92dc",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/historical-boundary-contact-reproduction-runs.json",
+        "bytes": 15086,
+        "sha256": "ce1da9965bf1e0a0fa196e2f5bd5ca9ac1efaec3b6e16416ea4e3ea2bbfc1061",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/sources/boundary-authority-access-receipts.json",
+        "bytes": 7432,
+        "sha256": "fa825657aedf67ce74a75ef4018036b9978aa0c0aaec4f0c66904460763aa6dc",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf",
+        "bytes": 7801132,
+        "sha256": "a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/historical-boundary-contact-water-assessment.json",
+        "bytes": 114891,
+        "sha256": "c535068a93886f51d42d9b08a69489f367ff10d69bfcbfb60584d891d2cb260b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/publication.json",
+        "bytes": 785,
+        "sha256": "1059617cbb126e0b4d4a217c13b68a014f9574b52a868e61a0790ee626cc5143",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/validation-kakeri-positive-control.json",
+        "bytes": 537,
+        "sha256": "decbaa67399f380d56258fd01a4e6b36353eed9e95f7ee7dbe8189171f9d8f56",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-1/validation-kakeri-negative-control.json",
+        "bytes": 273,
+        "sha256": "e1922b6929bdd6decc8604984ff56caf9169f15cb52d2266cbc1dcc09d0cad0d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/historical-boundary-contact-water-assessment.json",
+        "bytes": 114891,
+        "sha256": "c535068a93886f51d42d9b08a69489f367ff10d69bfcbfb60584d891d2cb260b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/publication.json",
+        "bytes": 785,
+        "sha256": "978d98021f2e48e6b97725d26a7b47a8d17c099d764cee03cde1af172a11df7b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/validation-kakeri-positive-control.json",
+        "bytes": 537,
+        "sha256": "decbaa67399f380d56258fd01a4e6b36353eed9e95f7ee7dbe8189171f9d8f56",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/vintages/kakeri-final-2/validation-kakeri-negative-control.json",
+        "bytes": 273,
+        "sha256": "e1922b6929bdd6decc8604984ff56caf9169f15cb52d2266cbc1dcc09d0cad0d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/historical-boundary-contact-water-assessment.json": "c535068a93886f51d42d9b08a69489f367ff10d69bfcbfb60584d891d2cb260b",
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py": "5a1cc63ed2b363d6eda0c720d147cf5ed4eb7aa7007cb965ea0ec23ccaac92dc",
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/sources/boundary-authority-access-receipts.json": "fa825657aedf67ce74a75ef4018036b9978aa0c0aaec4f0c66904460763aa6dc",
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf": "a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f"
+    },
+    "pin_files": {
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/historical-boundary-contact-water-assessment.json": "research/geography/gap-source-namibia-angola-20261006/historical-boundary-contact-water-assessment.json",
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py": "research/geography/gap-source-namibia-angola-20261006/reproduce_1928_boundary_contact_water.py",
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/sources/boundary-authority-access-receipts.json": "research/geography/gap-source-namibia-angola-20261006/sources/boundary-authority-access-receipts.json",
+      "eddf3d98c725a768959e431462b16d9adf507a41:research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf"
+    },
+    "subject_files": {
+      "gb:AGO:ADM2:16411231B14510444140190": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B28551746118834": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B36562728226085": "data/geography/part-29.json",
+      "gb:NAM:ADM2:8085530B15355770078360": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B25496891828693": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B32015186497374": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B43563455443088": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B54610932550654": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B8620298556926": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B94702234009846": "data/geography/part-16.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "lon-treaty-series-2960-kakeri-final-act",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/LON/Volume%20129/v129.pdf",
+      "role": "Primary historical treaty volume; source locators and printed page headers for No. 2960 only",
+      "vintage": "Final Act signed 1928-09-23; exchange 1931-04-29; Treaty Series volume published 1932",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Official League of Nations historical publication served by the United Nations Treaty Collection; no separate reuse license statement captured. This packet retains restoration instructions and the exact source hash, not a rights determination."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve the complete 478-page PDF from the cited UN Treaty Collection URL; require 7,801,132 bytes and SHA-256 a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f. The matching original is retained unchanged at the pinned baseline path.",
+      "limit": "Historical source supports only the cited treaty/schedule page mapping. It states no modern geodetic datum and supplies no present-day bank or thalweg geometry. Beacon 47 latitude was not astronomically observed.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1928,
+        "to": 1932
+      }
+    },
+    {
+      "id": "geoboundaries-namibia-adm2-context",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NAM/ADM2/geoBoundaries-NAM-ADM2.geojson",
+      "role": "Indexed source metadata for the seven issue-declared Namibia context feature IDs; local constituency territory (ADM2)",
+      "vintage": "2007 source feature vintage as recorded in the pinned WorldAtlas feature metadata",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Pinned WorldAtlas feature metadata records Public Domain; this citation audit did not independently retrieve and review the upstream license instrument."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use the exact indexed WorldAtlas feature records and source URL/release hash 9469f09 recorded in their metadata; this packet binds IDs to actual containing files at the immutable baseline commit.",
+      "limit": "Identity and metadata context only. Seven features use a retained-reference “Kavango” parent grouping whose semantic review remains open; this packet establishes neither present administrative status nor parent containment or boundary accuracy.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2007,
+        "to": 2008
+      }
+    },
+    {
+      "id": "geoboundaries-angola-adm2-context",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2.geojson",
+      "role": "Indexed source metadata for the three issue-declared Angola context feature IDs; municipality (ADM2)",
+      "vintage": "2018 source feature vintage as recorded in the pinned WorldAtlas feature metadata",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Pinned WorldAtlas feature metadata records CC BY 3.0 IGO; this citation audit did not independently retrieve and review the upstream license instrument."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use the exact indexed WorldAtlas feature records and source URL/release hash 9469f09 recorded in their metadata; this packet binds IDs to actual containing files at the immutable baseline commit.",
+      "limit": "Identity and metadata context only. Three features use a retained-reference “Cuando Cubango” parent grouping whose semantic review remains open; this packet establishes neither present administrative status nor parent containment or boundary accuracy.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/README.md",
+      "bytes": 5430,
+      "sha256": "d07067bfe9b8a5b00014fba5060d1e8740d4e8e60ba61bb12249857a50b44b46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/historical-to-corrected-locators.json",
+      "bytes": 8115,
+      "sha256": "fed37644c56a68cf8513c1850bdfe2d8408096f8adeace778e1b1216661b3560",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py",
+      "bytes": 23154,
+      "sha256": "9fd1f4afa3ab7a340c44c275b582d4ba3c5effe1ea82ee89635e2e4378594c18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/findings.json",
+      "bytes": 16169,
+      "sha256": "8c7d17ee4a008477a2885eec767628d3a63a7d643cc91af969af67d5da14c0fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/positive-control.json",
+      "bytes": 285,
+      "sha256": "7a869b28f15d93e8379e81e6f1014fbb9b9193ea6c8b3a76dec79b3c0c97c385",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/negative-control.json",
+      "bytes": 1834,
+      "sha256": "4c89c21f620df47cce9ff5ba8f9894a84a473b722d5b0ccfcbf230ed6a6fc187",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/publication.json",
+      "bytes": 749,
+      "sha256": "ff63dade1d7f0ef32a1285bdab3698ed9cb0ae20257e9e848a915b993042e27c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/findings.json",
+      "bytes": 16169,
+      "sha256": "ce7206e6bc3a133a63eab96c5d095d7d476fef892ac30872df5362c7da3a259a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/positive-control.json",
+      "bytes": 285,
+      "sha256": "87febdcbd47f1596f75f5dfbb7651fd15a28376d3f9af21e119a4a6ef0b07af1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/negative-control.json",
+      "bytes": 1834,
+      "sha256": "205f5bc12ee9a1739da2bea95fb955abfcd2c39a487bc6d08cb76fb783ff7fab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/publication.json",
+      "bytes": 749,
+      "sha256": "830715da2a4b3c0fe7c64b8f2f6985990e1203a07b331e2213c846f20b86a77d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-repro-1/reproducibility.json",
+      "bytes": 1099,
+      "sha256": "a748c46c80f73c31679dd99329d207fe4544f8422f05e5192350b594ab590513",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-repro-1/publication.json",
+      "bytes": 288,
+      "sha256": "ae9821d009e7f5d28092dddc7f155cf2094f3fce12a00130138b0d6d99a9405b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "treaty-page-locator-audit",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Authenticate the full PDF and immutable reports, parse actual page text for page headers/content markers, compare each historical erroneous page field and additively test a normalized corrected claim map. Human visual inspection of rendered pages 157–178 establishes printed layout; transient page images were removed. Resolve the complete world index to actual issue subject files and read source/parent metadata without measuring geometry.",
+      "software": "Python 3.12.14; pypdf 6.10.0; shared worldatlas-evidence-preparation-v1 helper",
+      "units": "One-based PDF page numbers and printed page numbers; bytes and SHA-256 for file authentication."
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "In the authenticated volume, English main-beacon schedule page 166 bears printed page 166 and contains beacon 47; printed page 165 is the preceding Portuguese rows 1–35 page. The original printed locator is incorrect.",
+      "status": "supported",
+      "source_ids": [
+        "lon-treaty-series-2960-kakeri-final-act"
+      ]
+    },
+    {
+      "text": "The 1931 acceptance exchange occupies PDF pages 158–160, while the Final Act body occupies pages 160–163 and schedules continue separately in English, Portuguese and French. The old combined citation range omits exchange pages and misstates printed coverage.",
+      "status": "supported",
+      "source_ids": [
+        "lon-treaty-series-2960-kakeri-final-act"
+      ]
+    },
+    {
+      "text": "The ten context identities resolve in the pinned indexed feature parts. Their source roles, represented years, and retained grouping-parent review statuses are recorded, but geography and present territorial/administrative meaning remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-namibia-adm2-context",
+        "geoboundaries-angola-adm2-context"
+      ]
+    },
+    {
+      "text": "The original coordinate values and older raster/water outputs remain preserved; this citation correction does not verify their geographic correctness, present bank position, datum or territorial assignment.",
+      "status": "unresolved",
+      "source_ids": [
+        "lon-treaty-series-2960-kakeri-final-act"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --run-id treaty-page-audit-3",
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --run-id treaty-page-audit-4",
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --compare-runs treaty-page-audit-3 treaty-page-audit-4",
+    "node scripts/evidence-quality.mjs research/geography/namibia-angola-treaty-pages-1346-20261008/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "treaty-page-locator-audit",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/positive-control.json"
+    },
+    {
+      "method_id": "treaty-page-locator-audit",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/negative-control.json"
+    },
+    {
+      "method_id": "treaty-page-locator-audit",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-repro-1/reproducibility.json"
+    }
+  ],
+  "metric_bindings": [],
+  "change_receipts": [
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/historical-to-corrected-locators.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/findings.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-3/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/findings.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-4/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-repro-1/reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/vintages/treaty-page-audit-repro-1/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/namibia-angola-treaty-pages-1346-20261008/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ]
+}

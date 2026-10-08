@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "source_id": "lon-treaty-series-2960-kakeri-final-act",
+  "source_title": "League of Nations Treaty Series No. 2960, volume 129 (1932)",
+  "source_pdf": {
+    "path": "research/geography/gap-source-namibia-angola-20261006/sources/historical-boundary/lon-treaty-series-vol-129-1932.pdf",
+    "bytes": 7801132,
+    "sha256": "a8790efad550c33786a75e26466a241a1858fac902678d8d2a7c2ffb02b0903f",
+    "pdf_pages": 478,
+    "numbering": "One-based PDF page is the physical page index. Running printed headers match PDF pages 158–176. PDF page 157 is the No. 2960 title page without a running printed number."
+  },
+  "visual_review": {
+    "retrieved_at": "2026-10-08",
+    "pages_visually_inspected": [157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178],
+    "rendering_tool": "pdftoppm, 90 dpi local page renders",
+    "key_observations": ["PDF page 166 visibly prints 166 and contains English main beacons 36–47, beacon 47 and the method footnote.", "PDF page 165 visibly prints 165 and contains the Portuguese main beacons 1–35; it is not the English beacon-47 page.", "PDF pages 158–160 contain the exchange of notes; the Final Act begins on page 160 and continues through page 163.", "PDF page 177 begins No. 2961, outside No. 2960."],
+    "page_images_retained": false,
+    "retention_reason": "The official historical volume has no separate license statement captured. Original PDF bytes remain preserved at the pre-existing path with hash and restoration instructions; page renders were transient inspection aids and were discarded."
+  },
+  "observations": [
+    {"pdf_page": 157, "printed_page": null, "content": "No. 2960 volume entry/title page; no running printed page number."},
+    {"pdf_page": 158, "printed_page": 158, "content": "English/Portuguese 1931 exchange of notes begins."},
+    {"pdf_page": 159, "printed_page": 159, "content": "Exchange of notes continues."},
+    {"pdf_page": 160, "printed_page": 160, "content": "Exchange concludes; Portuguese Final Act text begins in lower portion."},
+    {"pdf_page": 161, "printed_page": 161, "content": "Bilingual Final Act body and commission appointments/recitals."},
+    {"pdf_page": 162, "printed_page": 162, "content": "Final Act boundary description and clauses continue."},
+    {"pdf_page": 163, "printed_page": 163, "content": "Final Act clauses and signatures conclude."},
+    {"pdf_page": 164, "printed_page": 164, "content": "English main-beacon schedule, rows 1–35."},
+    {"pdf_page": 165, "printed_page": 165, "content": "Portuguese main-beacon schedule, rows 1–35; does not contain beacon 47."},
+    {"pdf_page": 166, "printed_page": 166, "content": "English main-beacon schedule, rows 36–47; beacon 47 coordinate and method note."},
+    {"pdf_page": 167, "printed_page": 167, "content": "Portuguese main-beacon schedule, rows 36–47."},
+    {"pdf_page": 168, "printed_page": 168, "content": "English description of eight intermediate beacons."},
+    {"pdf_page": 169, "printed_page": 169, "content": "Portuguese description of eight intermediate beacons."},
+    {"pdf_page": 170, "printed_page": 170, "content": "French translation: exchange of notes begins."},
+    {"pdf_page": 171, "printed_page": 171, "content": "French exchange concludes and Final Act begins."},
+    {"pdf_page": 172, "printed_page": 172, "content": "French Final Act body continues."},
+    {"pdf_page": 173, "printed_page": 173, "content": "French Final Act concludes."},
+    {"pdf_page": 174, "printed_page": 174, "content": "French main-beacon schedule begins."},
+    {"pdf_page": 175, "printed_page": 175, "content": "French main-beacon schedule concludes."},
+    {"pdf_page": 176, "printed_page": 176, "content": "French intermediate-beacon schedule."},
+    {"pdf_page": 177, "printed_page": null, "content": "Next Treaty Series item No. 2961 begins; outside No. 2960."}
+  ],
+  "claims": [
+    {"claim_id": "exchange_acceptance", "claim": "1931 exchange acceptance", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [158, 159, 160], "correct_printed_pages": [158, 159, 160], "evidence": "Pages 158–160 visibly contain the English/Portuguese exchange text; page 160 transitions to the Final Act. The 1931 exchange is not supported by the cited Final Act-only page range."},
+    {"claim_id": "final_act_body", "claim": "1928 Kakeri Final Act body, excluding schedules", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [160, 161, 162, 163], "correct_printed_pages": [160, 161, 162, 163], "evidence": "The Final Act text spans the lower portion of page 160 and pages 161–163; schedule tables start on page 164."},
+    {"claim_id": "main_beacons_english_1_35", "claim": "English schedule, main beacons 1–35", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [164], "correct_printed_pages": [164], "evidence": "English table rows 1–35."},
+    {"claim_id": "main_beacons_portuguese_1_35", "claim": "Portuguese schedule, main beacons 1–35", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [165], "correct_printed_pages": [165], "evidence": "Portuguese table rows 1–35; page 165 is not the English beacon-47 page."},
+    {"claim_id": "main_beacons_english_36_47", "claim": "English schedule, main beacons 36–47", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [166], "correct_printed_pages": [166], "evidence": "English table rows 36–47, beacon 47, and the coordinate-method footnote."},
+    {"claim_id": "main_beacons_portuguese_36_47", "claim": "Portuguese schedule, main beacons 36–47", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [167], "correct_printed_pages": [167], "evidence": "Portuguese table rows 36–47."},
+    {"claim_id": "intermediate_beacons_english", "claim": "English schedule of eight intermediate beacons", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [168], "correct_printed_pages": [168], "evidence": "English Enclosure 2."},
+    {"claim_id": "intermediate_beacons_portuguese", "claim": "Portuguese schedule of eight intermediate beacons", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [169], "correct_printed_pages": [169], "evidence": "Portuguese Document 2."},
+    {"claim_id": "french_translation", "claim": "French translation sections (not the original bilingual schedule)", "historical_pdf_pages": [161, 162, 163, 164, 165, 166], "historical_printed_pages": [158, 159, 160, 161, 162, 163, 164, 165], "correct_pdf_pages": [170, 171, 172, 173, 174, 175, 176], "correct_printed_pages": [170, 171, 172, 173, 174, 175, 176], "evidence": "Exchange pages 170–171, Final Act 171–173, Annex 1 main schedule 174–175, Annex 2 intermediate schedule 176."}
+  ],
+  "beacon_47": {
+    "historical_pdf_page": 166,
+    "historical_printed_page": 165,
+    "correct_pdf_page": 166,
+    "correct_printed_page": 166,
+    "latitude_dms": "17 23 23.7 S",
+    "longitude_dms": "18 25 06.2 E",
+    "printed_description": "limestone ridge 240 metres west of the west bank of the Okavango River",
+    "source_method_note": "The schedule states latitude was not astronomically observed for beacon 47; longitude observation method varies by beacon.",
+    "limits": ["No modern geodetic datum is stated.", "No present-day bank or thalweg geometry is supplied.", "This correction does not validate the older raster overlays or their water totals."]
+  }
+}
