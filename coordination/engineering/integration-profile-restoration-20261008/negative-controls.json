@@ -1,0 +1,12 @@
+{
+  "method_id": "profile-boundary",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "actual_entry": "scripts/run-integration-tests.mjs",
+  "actual_boundary_test_file": "test/integration-profile-restoration.test.mjs",
+  "boundary_test_count": 6,
+  "tests_per_sparse_run": 207,
+  "skipped_per_sparse_run": 0,
+  "full_stock_world_restoration_claimed": false,
+  "evidence": "boundary-controls.log.gz and sparse-one.log.gz/sparse-two.log.gz"
+}
