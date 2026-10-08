@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-08T22:09:16.707190+00:00",
+  "storage": {
+    "free_bytes": 18823307264,
+    "checkout_bytes": 45274918093,
+    "limits": {
+      "minimumFree": 10737418240,
+      "maximumCheckouts": 53687091200
+    },
+    "maximum_additional_retained_growth_bytes": 41943040,
+    "own1GiBreservation_covers_both_trees": true
+  },
+  "ram": {
+    "pages": {
+      "free": 3945,
+      "inactive": 79554,
+      "speculative": 1559
+    },
+    "page_bytes": 16384,
+    "free_inactive_speculative_estimate": 1393590272,
+    "required_estimate": 939524096,
+    "uncertainty": "Reclaimability estimate, not guaranteed available RAM. Actual process-tree supervisor stops at640MiB with128MiB margin under768MiB ceiling and128MiB host reserve."
+  },
+  "head": "043af92647438f21e1464c1dccc8b7aaf8a2ea35",
+  "supervisor_sha256": "16fbe542f9e239fcfe557abca469b0acfae045f96a4ad7a412fdde5a76e2d1b7",
+  "accepted_preexecution": "/Users/chengshuli/world-atlas-workspace/.cache/review1520-preexecution-043-20261008/disposition.json",
+  "qualified": true
+}
