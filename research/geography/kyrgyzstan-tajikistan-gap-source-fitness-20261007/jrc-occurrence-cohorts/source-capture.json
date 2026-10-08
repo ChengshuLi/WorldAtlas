@@ -1,0 +1,128 @@
+{
+  "source": "JRC/EC Global Surface Water v1.5 Occurrence 1984\u20132024",
+  "publisher": "European Commission Joint Research Centre / EC JRC/Google",
+  "delivery": "CloudFerro S3-compatible object listing linked from JRC download page",
+  "captured_on": "2026-10-07",
+  "catalogue_url": "https://global-surface-water.appspot.com/download",
+  "product_source_listing_sha256": "ca11c2cd72836eb28d4e15d529cc889ca239c06b8f5f33e22aa7321ba53588cc",
+  "source_role": "Long-period water occurrence frequency context; not current or legally authoritative boundary evidence.",
+  "tiles": [
+    {
+      "tile": "60E_40N",
+      "url": "https://s3.waw4-1.cloudferro.com/swift/v1/global-surface-water/download2024/Aggregated/VER1-5/occurrence/occurrence_60E_40N_v1_5_2024.tif",
+      "object_bytes": 20517553,
+      "etag": "cb0202baa8a76a36c9087be3047525ff-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:40:06Z",
+      "conditional_request": {
+        "method": "GET",
+        "Range": "bytes=0-81327",
+        "If-Match": "cb0202baa8a76a36c9087be3047525ff-1",
+        "Accept-Encoding": "identity"
+      },
+      "response": {
+        "status": 206,
+        "Content-Range": "bytes 0-81327/20517553",
+        "ETag": "cb0202baa8a76a36c9087be3047525ff-1",
+        "Last-Modified": "2026-07-01T10:40:06Z",
+        "Content-Encoding": "identity"
+      },
+      "retained_file": "gsw-ifd-range-2.bin",
+      "retained_bytes": 81328,
+      "retained_sha256": "a68549e437f0ecc6516e020b984a966da963b538524a467c8049a3aa2801f314",
+      "metadata_arrays_end_exclusive": 81324,
+      "earliest_image_block_offset_all_ifds": 81328,
+      "contains_image_block_bytes": false
+    },
+    {
+      "tile": "70E_40N",
+      "url": "https://s3.waw4-1.cloudferro.com/swift/v1/global-surface-water/download2024/Aggregated/VER1-5/occurrence/occurrence_70E_40N_v1_5_2024.tif",
+      "object_bytes": 32461641,
+      "etag": "ca3a75120e8cb7367b90bb2ff6e15d33-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:41:04Z",
+      "conditional_request": {
+        "method": "GET",
+        "Range": "bytes=0-81327",
+        "If-Match": "ca3a75120e8cb7367b90bb2ff6e15d33-1",
+        "Accept-Encoding": "identity"
+      },
+      "response": {
+        "status": 206,
+        "Content-Range": "bytes 0-81327/32461641",
+        "ETag": "ca3a75120e8cb7367b90bb2ff6e15d33-1",
+        "Last-Modified": "2026-07-01T10:41:04Z",
+        "Content-Encoding": "identity"
+      },
+      "retained_file": "gsw-ifd-range-4.bin",
+      "retained_bytes": 81328,
+      "retained_sha256": "341c573aaf6c810da854839c62367a761d2121c5e50f5c38bd470c7b23e205e1",
+      "metadata_arrays_end_exclusive": 81324,
+      "earliest_image_block_offset_all_ifds": 81328,
+      "contains_image_block_bytes": false
+    },
+    {
+      "tile": "60E_50N",
+      "url": "https://s3.waw4-1.cloudferro.com/swift/v1/global-surface-water/download2024/Aggregated/VER1-5/occurrence/occurrence_60E_50N_v1_5_2024.tif",
+      "object_bytes": 63277308,
+      "etag": "f065d7a2ab19495f4d9467028be8abb0-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:40:25Z",
+      "conditional_request": {
+        "method": "GET",
+        "Range": "bytes=0-81327",
+        "If-Match": "f065d7a2ab19495f4d9467028be8abb0-1",
+        "Accept-Encoding": "identity"
+      },
+      "response": {
+        "status": 206,
+        "Content-Range": "bytes 0-81327/63277308",
+        "ETag": "f065d7a2ab19495f4d9467028be8abb0-1",
+        "Last-Modified": "2026-07-01T10:40:25Z",
+        "Content-Encoding": "identity"
+      },
+      "retained_file": "gsw-ifd-range-5.bin",
+      "retained_bytes": 81328,
+      "retained_sha256": "89775e37a7aa661de0780034e97406f1ea23de15f82bdf4469baa7efa2a37fad",
+      "metadata_arrays_end_exclusive": 81324,
+      "earliest_image_block_offset_all_ifds": 81328,
+      "contains_image_block_bytes": false
+    },
+    {
+      "tile": "70E_50N",
+      "url": "https://s3.waw4-1.cloudferro.com/swift/v1/global-surface-water/download2024/Aggregated/VER1-5/occurrence/occurrence_70E_50N_v1_5_2024.tif",
+      "object_bytes": 38518800,
+      "etag": "46aab89d1ff3d3fca1d87edc691588f2-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:41:21Z",
+      "conditional_request": {
+        "method": "GET",
+        "Range": "bytes=0-81327",
+        "If-Match": "46aab89d1ff3d3fca1d87edc691588f2-1",
+        "Accept-Encoding": "identity"
+      },
+      "response": {
+        "status": 206,
+        "Content-Range": "bytes 0-81327/38518800",
+        "ETag": "46aab89d1ff3d3fca1d87edc691588f2-1",
+        "Last-Modified": "2026-07-01T10:41:21Z",
+        "Content-Encoding": "identity"
+      },
+      "retained_file": "gsw-ifd-range-6.bin",
+      "retained_bytes": 81328,
+      "retained_sha256": "e1bf29a3a11dbddc61d39d6b8de4d79852bc7dad0e61fab391f90459be32e593",
+      "metadata_arrays_end_exclusive": 81324,
+      "earliest_image_block_offset_all_ifds": 81328,
+      "contains_image_block_bytes": false
+    }
+  ],
+  "total_retained_bytes": 325312,
+  "prior_prefix_capture_quarantine_manifest": ".cache/kgt-independent-water-source-review-20261007/recovery/previous-512k-prefixes/manifest.json",
+  "prior_prefix_capture_quarantine_manifest_sha256": "8c80b268f10ec217e462e3ba138c75ba64b502efaec4105c04c4b1f60208eff1",
+  "prior_prefix_capture_warning": "Prior 0\u2013524287 ranges include small overview raster blocks beginning at byte 81328; those original bytes and acquisition history are quarantined outside current inputs at .cache/kgt-independent-water-source-review-20261007/recovery/previous-512k-prefixes/. They were not decoded/classified and are excluded from this packet\u2019s current metadata inputs.",
+  "official_metadata_sources": [
+    "https://global-surface-water.appspot.com/download",
+    "https://data.fao.org/catalog/iso/f1b1d45a-e360-44bd-95a9-d628c468a7f6",
+    "https://docs.ogc.org/is/19-008r4/19-008r4.html"
+  ]
+}

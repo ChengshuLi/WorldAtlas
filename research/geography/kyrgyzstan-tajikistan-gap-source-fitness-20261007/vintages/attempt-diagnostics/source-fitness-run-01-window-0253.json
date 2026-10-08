@@ -1,0 +1,40 @@
+{
+  "actual_runner_source": "import datetime, pathlib, subprocess, sys\npacket=pathlib.Path(\"research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007\").resolve()\nsys.path.insert(0,str(packet))\nimport producer\nrepo=pathlib.Path(\".\").resolve()\ncommit=\"e84a999c3e83cb018ed3c5bbea53bb9b8f7d40d0\"\nvintage=\"source-fitness-run-01\"\nwindow=\"gap1202-1431-local15-20261008-0253Z-root-e84a999c\"\nlog=packet/\"vintages\"/\"admission-checks-window-0253-run-01.txt\"\noriginal=subprocess.check_output\ndef capture(args,*pargs,**kwargs):\n    result=original(args,*pargs,**kwargs)\n    if args==[\"memory_pressure\"]:\n        body=result if isinstance(result,str) else result.decode(\"utf-8\",\"replace\")\n        log.write_text(\"captured_at_utc=\"+datetime.datetime.now(datetime.timezone.utc).isoformat()+\"\\ncommand=memory_pressure (producer.admit_run_capacity guard)\\n\"+body)\n    return result\nproducer.subprocess.check_output=capture\nproducer.run(repo,commit,vintage,window)",
+  "attempt": "source-fitness-run-01",
+  "baseline_commit": "e84a999c3e83cb018ed3c5bbea53bb9b8f7d40d0",
+  "command": "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 -B -; wrapper imported the pinned packet producer and called producer.run(repo, baseline_commit, vintage, coordinated_window_id)",
+  "coordinated_window_id": "gap1202-1431-local15-20261008-0253Z-root-e84a999c",
+  "exact_baseline_file_sha256": {
+    "controls": "350ec5dd90a45e17e1a1526b0d8a2c0e5fc2cf40cc1800b55626c3c13fa25be7",
+    "custody_preflight": "e91b67c55490caf52df05e175b3a884c5d511b526103b21417379416ddc00223",
+    "execution_pins": "e528bee22074380ba73d34c58eff4722281591d777762e77865bb1aa5adedb0d",
+    "input_pins": "93467639bf9393aa36970ec5404fa695d3d7a4ae9f936013363cfb01ead8d539",
+    "producer": "7484ef873571955f6d85fed1b1666e0e6105113d269856c77fe93f1f3341a18e",
+    "runtime_capture": "2eb0416df20984399ddcb5c0f594cc9e92c4e0bd179d36486f570983513d0699",
+    "runtime_manifest": "15bf4858d101017e3b9bda4ebdef4464ff18be64f359234b51a76abfe722860a"
+  },
+  "exception": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+  "exception_type": "KeyError",
+  "failure_site": "producer.output_product_context at producer.py line 391; caller keyed staged descriptors by packet-relative paths, lookup expected full repository path",
+  "failure_traceback_excerpt": "producer.run -> output_product_context -> item = staged[path] -> KeyError: full repository path for gb-KGZ-ADM2-000.bin.gz",
+  "input_manifest_sha256": "93467639bf9393aa36970ec5404fa695d3d7a4ae9f936013363cfb01ead8d539",
+  "memory_guard_log_path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/admission-checks-window-0253-run-01.txt",
+  "memory_guard_log_sha256": "1c6291f4d3d6992e1817d88e25abf9b4d56581fdb0020855b42c5cd3b7548265",
+  "memory_guard_result": "passed; captured system-wide free memory was 51%",
+  "new_run_vintage_created": false,
+  "next_action": "normalize descriptor-map keys, refresh custody for changed code, then rerun both same-freeze runs under a new coordinator window",
+  "overlay_loop": "completed for the exact 15 components against the full 41-feature KGZ and 58-feature TJK products before provenance assembly failed; no measurement output was published",
+  "published_output": false,
+  "runtime_manifest_sha256": "15bf4858d101017e3b9bda4ebdef4464ff18be64f359234b51a76abfe722860a",
+  "scope": {
+    "components": 15,
+    "contacts": 9,
+    "families": 2,
+    "operational_batch_components": 441,
+    "operational_batch_families": 85
+  },
+  "started_at_utc": "2026-10-08T02:47:53.353779+00:00",
+  "terminal_exit_code": 1,
+  "terminal_result": "failed before result assembly and publication",
+  "version": 1
+}
