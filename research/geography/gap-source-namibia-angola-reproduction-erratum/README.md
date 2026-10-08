@@ -21,6 +21,7 @@ Each successor verifies all 46 issue-pinned Git blobs against the retained inven
 ```sh
 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/gap-source-namibia-angola-reproduction-erratum/reproduce_source_geometry_successor.py successor-source-one-20261008
 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/gap-source-namibia-angola-reproduction-erratum/reproduce_full_product_successor.py successor-full-one-20261008
+```
 
 For the negative-control suite and row-by-row comparison with the retained historical full-product report, run:
 

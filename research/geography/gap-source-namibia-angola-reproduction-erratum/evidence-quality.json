@@ -534,8 +534,8 @@
     },
     {
       "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/README.md",
-      "bytes": 10303,
-      "sha256": "e7f3ed4d8c76516020f99a3d5e531988b9bd9c232b1de9e7f39f49002e5f1efb",
+      "bytes": 10307,
+      "sha256": "e96abf5685ba2c5b49277554656919d2dfd6347b085580ad1b4804b87c8a1f14",
       "hash_kind": "file-bytes"
     },
     {
@@ -774,8 +774,8 @@
     },
     {
       "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/standalone-controls-rebound-20261008/control-results.json",
-      "bytes": 50595,
-      "sha256": "655192faeb5b986b46d0fd24868384cd6cd7bf71f1eb10990d3fdd0e37830596",
+      "bytes": 50619,
+      "sha256": "512989d2e9adcda5b45439717df3674d1af8b1765a661f531e969bf18b6b1569",
       "hash_kind": "file-bytes"
     },
     {
@@ -934,7 +934,7 @@
       "value": 28,
       "unit": "controls rejected without output",
       "vintage": "archived",
-      "input_sha256": "655192faeb5b986b46d0fd24868384cd6cd7bf71f1eb10990d3fdd0e37830596",
+      "input_sha256": "512989d2e9adcda5b45439717df3674d1af8b1765a661f531e969bf18b6b1569",
       "evaluation_commit": "016dc563e6d6e0d6eb1ac3542c6cc93cd749da49",
       "input_file": {
         "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/standalone-controls-rebound-20261008/control-results.json",
@@ -1111,6 +1111,26 @@
       "metric_id": "pair-intersection-area-differences",
       "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/successor-final-one-20261007/authenticated-matrix.json",
       "json_pointer": "/pairs_with_different_intersection_area"
+    },
+    {
+      "metric_id": "successor-source-row-count",
+      "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/successor-source-final-one-20261008/source-geometry-successor.json",
+      "json_pointer": "/inventory/unique_matrix_rows"
+    },
+    {
+      "metric_id": "successor-full-product-row-count",
+      "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/successor-full-final-one-20261008/full-product-successor.json",
+      "json_pointer": "/inventory/unique_matrix_rows"
+    },
+    {
+      "metric_id": "successor-baseline-rows-matched",
+      "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/successor-baseline-final-20261008/independent-baseline-comparison.json",
+      "json_pointer": "/full_product_rows_equal"
+    },
+    {
+      "metric_id": "successor-adverse-controls",
+      "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/standalone-controls-rebound-20261008/control-results.json",
+      "json_pointer": "/controls_count"
     }
   ],
   "change_receipts": [
