@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination} from '../scripts/additive-gap-repair.mjs';
+import {inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
 import {footprintValueSha256 as hash} from '../src/effective-footprint.js';
 const row=(id,status='mapped-land-support')=>({component_id:id,candidate_feature_sha256:hash(id),candidate_geometry_sha256:hash([id]),status,
  physical_authority:'unapproved',physical_status:'unknown-source-fitness-and-observation-date',physical_limits:['original retained source limits'],complete_support:{whole_original_geometry:true}});
@@ -15,7 +15,7 @@ const rawRows=rows=>rows.map(row=>Buffer.from(JSON.stringify(row)+'\n'));
 const child=rows=>inventoryRows(rows,{source,parent,expectedIds:rows.map(r=>r.component_id),expectedRosterSha256:roster(rows),originalRecordBytes:rawRows(rows)});
 test('all provisional candidates preserved exactly once; land is not repair permission, water rejected',()=>{
  const one=child(all.slice(0,2)),two=child(all.slice(2)); const result=joinInventoryFacts([one,two],parent);
- assert.equal(result.components,4);assert.deepEqual(result.counts,{eligible:0,assigned:0,'zero-cell':0,rejected:1,'awaiting-evidence':3});
+ assert.equal(result.components,4);assert.deepEqual(result.counts,{eligible:0,assigned:0,'zero-cell':0,'already-resolved':0,rejected:1,'awaiting-evidence':3});
  all.forEach((r,i)=>assert.equal(restoreInventoryRow(child(all).rows[i],all,source,rawRows(all)),r));
  assert.equal(candidateDisposition({...all[0],approved:true}).disposition,'awaiting-evidence');
 });
@@ -46,4 +46,41 @@ test('output collision, dangling link and foreign parent rejected before acquisi
   fs.symlinkSync(os.tmpdir(),path.join(directory,'.cache','native-grid-candidates'));
   assert.throws(()=>admitInventoryDestination(directory,'.cache/native-grid-candidates/new'),/symlink/);
  } finally {fs.rmSync(directory,{recursive:true,force:true});}
+});
+
+
+test('selected baseline accepted repairs remain resolved/idempotent; stale target and unverified resolution maps reject',()=>{
+ const geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]};
+ const correction={component_id:'one',subject_id:'target',component_geometry_sha256:all[0].candidate_geometry_sha256,
+  geometry_sha256_after:hash(geometry),pointsets:{new:geometry},historical_transfer:'none'};
+ const manifest={version:2,method:'native-linear-evenodd-first-owner-v1',accounting:{owners:49625},footprints_sha256:'a'.repeat(64),
+  provenance:{source_migration:{history_transfer:'none',after_footprints_sha256:'a'.repeat(64),changed_ids:['target']}}};
+ const args={features:[{id:'target',geometry}],corrections:[correction],selectedManifest:manifest,
+  selectionReceipt:{method:manifest.method,owners:49625,unchecked_cells:0,products:[{path:'manifest.json',sha256:'b'.repeat(64)}]},
+  selectedManifestSha256:'b'.repeat(64),bankDecodedSha256:'c'.repeat(64),expectedBankDecodedSha256:'c'.repeat(64)};
+ const resolutions=selectedBankResolutions(args);
+ for(let i=0;i<2;i++)assert.equal(candidateDisposition(all[0],resolutions).disposition,'already-resolved');
+ assert.throws(()=>candidateDisposition(all[0],new Map()),/Unverified/);
+ assert.throws(()=>selectedBankResolutions({...args,bankDecodedSha256:'d'.repeat(64)}),/Stale/);
+ const changed=structuredClone(args);changed.features[0].geometry=structuredClone(changed.features[0].geometry);changed.features[0].geometry.coordinates[0][1][0]=2;
+ assert.throws(()=>selectedBankResolutions(changed),/full target/);
+ assert.throws(()=>candidateDisposition({...all[0],candidate_geometry_sha256:'e'.repeat(64)},resolutions),/pointset/);
+});
+
+
+test('bounded groups join every original identity and preserve two-level complete inverse',()=>{
+ const group1=inventoryGroup([child(all.slice(0,2))],parent),group2=inventoryGroup([child(all.slice(2))],parent);
+ const final=inventoryGroup([group1,group2],parent,{complete:true});
+ assert.equal(final.facts.components,all.length);
+ for(const row of final.rows){const grouped=restoreGroupedInventoryRow(row,[group1,group2]);
+  const groupIndex=row.original_ledger.stage;
+  const original=restoreGroupedInventoryRow(grouped,[child(groupIndex===0?all.slice(0,2):all.slice(2))]);
+  assert.equal(original.component_id,row.component_id);
+ }
+ assert.throws(()=>inventoryGroup([group1],parent,{complete:true}),/Incomplete/);
+ assert.throws(()=>inventoryGroup([group1,group1],parent,{complete:true}),/Duplicate/);
+ assert.throws(()=>inventoryGroup([group2,group1],parent,{complete:true}),/reordered/);
+ const wrong=structuredClone(group1);wrong.rows[0].source_relative_category='unknown';
+ assert.throws(()=>inventoryGroup([wrong,group2],parent,{complete:true}),/counts/);
+ assert.throws(()=>restoreGroupedInventoryRow({...final.rows[0],disposition:'assigned'},[group1,group2]),/inverse/);
 });

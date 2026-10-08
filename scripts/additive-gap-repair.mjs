@@ -4,11 +4,13 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gunzipSync, gzipSync} from 'node:zlib';
+import {validateNativeSelectionReceipt} from './native-ownership/require-verified-selection.mjs';
+import verifiedCandidates from './native-ownership/verified-candidates.json' with {type:'json'};
 import {canonicalValue, footprintValueSha256} from '../src/effective-footprint.js';
 import {candidateBudget, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
 
 export const INVENTORY_VERSION = 'complete-source-relative-gap-inventory-v1';
-export const DISPOSITIONS = ['eligible', 'assigned', 'zero-cell', 'rejected', 'awaiting-evidence'];
+export const DISPOSITIONS = ['eligible', 'assigned', 'zero-cell', 'already-resolved', 'rejected', 'awaiting-evidence'];
 const categories = new Set(['mapped-land-support', 'mapped-inland-water-support', 'mixed-source-support', 'outside-mapped-L1-context', 'unknown']);
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const canonical = value => Buffer.from(JSON.stringify(canonicalValue(value)) + '\n');
@@ -16,20 +18,61 @@ const hex = value => /^[a-f0-9]{64}$/.test(value ?? '');
 function demand(value, message) { if (!value) throw Error(message); }
 function safe(name) { return typeof name === 'string' && /^[a-zA-Z0-9_.\/-]+$/.test(name) && name.split('/').every(p => p && p !== '.' && p !== '..'); }
 
+const resolutionBrands = new WeakSet();
+// A reconciliation, not permission for a new repair. The caller authenticates
+// these complete bodies against its independently frozen selected-bank plan.
+// Stale pre-repair geography cannot reset an accepted repair's state.
+export function selectedBankResolutions({features, corrections, selectedManifest, selectionReceipt,
+  selectedManifestSha256, bankDecodedSha256, expectedBankDecodedSha256}) {
+  demand(hex(selectedManifestSha256) && hex(bankDecodedSha256) && bankDecodedSha256===expectedBankDecodedSha256,
+    'Stale or foreign installed selected bank');
+  demand(selectedManifest?.method==='native-linear-evenodd-first-owner-v1' && selectedManifest.version===2
+    && selectedManifest.accounting?.owners===49625 && selectionReceipt?.owners===49625
+    && selectionReceipt.method===selectedManifest.method && selectionReceipt.unchecked_cells===0
+    && selectionReceipt.products?.find(pin=>pin.path==='manifest.json')?.sha256===selectedManifestSha256,
+    'Missing actual selected native-bank registration');
+  const migration=selectedManifest.provenance?.source_migration;
+  demand(migration?.history_transfer==='none' && migration.after_footprints_sha256===selectedManifest.footprints_sha256
+    && Array.isArray(corrections) && corrections.length>0 && Array.isArray(features), 'Missing accepted baseline migration');
+  const targets=new Map(features.map(feature=>[feature.id,feature]));
+  demand(targets.size===features.length, 'Duplicate selected baseline identity');
+  const result=new Map(), changed=new Set(migration.changed_ids);
+  demand(changed.size===corrections.length, 'Accepted baseline corrections/selected migration scope differ');
+  for(const correction of corrections){
+    const feature=targets.get(correction.subject_id);
+    demand(feature && changed.has(feature.id) && !result.has(correction.component_id)
+      && hex(correction.component_geometry_sha256) && hex(correction.geometry_sha256_after)
+      && JSON.stringify(canonicalValue(feature.geometry))===JSON.stringify(canonicalValue(correction.pointsets?.new))
+      && (correction.historical_transfer===false || correction.historical_transfer==='none'), 'Actual selected full target differs from accepted after geometry');
+    result.set(correction.component_id,{target_id:feature.id,component_geometry_sha256:correction.component_geometry_sha256,
+      selected_manifest_sha256:selectedManifestSha256,selected_bank_decoded_sha256:bankDecodedSha256,
+      accepted_after_geometry_sha256:correction.geometry_sha256_after});
+  }
+  resolutionBrands.add(result);return result;
+}
+
 // A classification is never an authority to alter ownership. This first stage
 // is immediately usable on the retained complete #1261 inventory, including
 // every unknown. Repair admission consumes a separate whole source-rule proof.
-export function candidateDisposition(row) {
+export function candidateDisposition(row, resolutions) {
   demand(typeof row?.component_id === 'string' && row.component_id && hex(row.candidate_feature_sha256)
     && hex(row.candidate_geometry_sha256) && categories.has(row.status), 'Incomplete original candidate record');
   demand(typeof row.physical_authority === 'string' && typeof row.physical_status === 'string'
     && Array.isArray(row.physical_limits), 'Missing original physical limits');
+  if(resolutions!==undefined){
+    demand(resolutionBrands.has(resolutions), 'Unverified baseline resolutions');
+    const resolved=resolutions.get(row.component_id);
+    if(resolved){
+      demand(row.candidate_geometry_sha256===resolved.component_geometry_sha256, 'Resolved component original pointset changed');
+      return {disposition:'already-resolved',reason:'accepted full after geometry is present in actual selected baseline; no new repair',resolution:resolved};
+    }
+  }
   return row.status === 'mapped-inland-water-support'
     ? {disposition: 'rejected', reason: 'source-relative-water; retained, not reassigned'}
     : {disposition: 'awaiting-evidence', reason: 'classification does not establish source fitness or target eligibility'};
 }
 
-export function inventoryRows(rows, {source, parent, expectedIds, expectedRosterSha256, originalRecordBytes}) {
+export function inventoryRows(rows, {source, parent, expectedIds, expectedRosterSha256, originalRecordBytes, resolutions}) {
   demand(parent?.version === 1 && Number.isSafeInteger(parent.components) && parent.components > 0
     && hex(parent.roster_sha256) && hex(parent.report_sha256), 'Missing independent complete parent denominator');
   demand(Array.isArray(expectedIds) && expectedIds.length && new Set(expectedIds).size === expectedIds.length
@@ -41,7 +84,7 @@ export function inventoryRows(rows, {source, parent, expectedIds, expectedRoster
   rows.forEach((row, ordinal) => {
     demand(JSON.stringify(canonicalValue(JSON.parse(originalRecordBytes[ordinal]))) === JSON.stringify(canonicalValue(row)),
       'Original record bytes/value disagree');
-    const decision = candidateDisposition(row), id = row.component_id;
+    const decision = candidateDisposition(row,resolutions), id = row.component_id;
     demand(expected.has(id) && !seen.has(id), 'Foreign or duplicate candidate identity');
     seen.add(id); counts[decision.disposition]++;
     sourceCounts[row.status] = (sourceCounts[row.status] ?? 0) + 1;
@@ -86,8 +129,57 @@ export function joinInventoryFacts(children, parent) {
     source_relative_counts: sourceCounts, repair_authority: 'none; source-rule and selected-release stages remain required'};
 }
 
+export const GROUP_JOIN_VERSION = 'whole-gap-inventory-group-v1';
+export const COMPLETE_JOIN_VERSION = 'complete-gap-inventory-join-v1';
+// Groups retain the exact complete child ledgers as inverse sources. Their
+// smaller ordered projection is sufficient for a separate complete-denominator
+// join; neither projection replaces original geography or research evidence.
+export function inventoryGroup(children, parent, {complete=false}={}) {
+  demand(Array.isArray(children) && children.length>0 && children.length<=71, 'Missing bounded inventory children');
+  const rows=[], seen=new Set(), counts=Object.fromEntries(DISPOSITIONS.map(key=>[key,0])), sourceCounts={};
+  for(const [stage,child] of children.entries()){
+    demand(child.facts && JSON.stringify(canonicalValue(child.facts.parent))===JSON.stringify(canonicalValue(parent))
+      && child.rows.length===child.facts.components
+      && child.facts.operation===(complete?GROUP_JOIN_VERSION:INVENTORY_VERSION), 'Foreign inventory child/parent');
+    const actualCounts=Object.fromEntries(DISPOSITIONS.map(key=>[key,0])), actualSource={};
+    for(const [ordinal,row] of child.rows.entries()){
+      demand(typeof row.component_id==='string' && !seen.has(row.component_id) && hex(row.candidate_feature_sha256)
+        && DISPOSITIONS.includes(row.disposition) && categories.has(row.source_relative_category), 'Duplicate or invalid inventory row');
+      seen.add(row.component_id);counts[row.disposition]++;actualCounts[row.disposition]++;
+      sourceCounts[row.source_relative_category]=(sourceCounts[row.source_relative_category]??0)+1;
+      actualSource[row.source_relative_category]=(actualSource[row.source_relative_category]??0)+1;
+      rows.push({component_id:row.component_id,candidate_feature_sha256:row.candidate_feature_sha256,
+        disposition:row.disposition,source_relative_category:row.source_relative_category,original_ledger:{stage,ordinal}});
+    }
+    demand(JSON.stringify(canonicalValue(actualCounts))===JSON.stringify(canonicalValue(child.facts.counts))
+      && JSON.stringify(canonicalValue(actualSource))===JSON.stringify(canonicalValue(child.facts.source_relative_counts))
+      && footprintValueSha256(child.rows.map(row=>({id:row.component_id,feature_sha256:row.candidate_feature_sha256})))
+        ===child.facts.complete_ordered_roster_sha256, 'Child inventory counts/ordered roster changed');
+  }
+  const roster=footprintValueSha256(rows.map(row=>({id:row.component_id,feature_sha256:row.candidate_feature_sha256})));
+  demand(rows.length<=parent.components && (!complete || rows.length===parent.components && roster===parent.roster_sha256),
+    'Incomplete or reordered complete parent inventory');
+  return {rows,facts:{version:1,operation:complete?COMPLETE_JOIN_VERSION:GROUP_JOIN_VERSION,parent,components:rows.length,
+    counts,source_relative_counts:sourceCounts,complete_ordered_roster_sha256:roster,
+    repair_authority:'none; full source-rule and selected-release gates remain required',
+    limits:['Complete child ledger bodies and original research files remain inverse sources; projections do not replace geography.',
+      'Counts distinguish prior accepted repairs from new assignments; provisional source categories are not source approval.']}};
+}
+export function restoreGroupedInventoryRow(row, children) {
+  const inverse=row?.original_ledger;
+  demand(Number.isSafeInteger(inverse?.stage) && inverse.stage>=0 && Number.isSafeInteger(inverse.ordinal) && inverse.ordinal>=0,
+    'Missing complete ledger inverse');
+  const original=children[inverse.stage]?.rows?.[inverse.ordinal];
+  demand(original && ['component_id','candidate_feature_sha256','disposition','source_relative_category'].every(key=>original[key]===row[key]),
+    'Grouped inventory inverse changed');
+  return original;
+}
+
 function pinCost(pin) {
-  if(pin?.kind === 'original-report-product'){
+  if(pin?.kind === 'completed-inventory-body'){
+    demand(safe(pin.path) && /^\.cache\/native-grid-candidates\/[A-Za-z0-9_-]+\/(publication\.json|facts\.json|inventory\.jsonl\.gz)$/.test(pin.path)
+      && pin.mode==='100644' && hex(pin.sha256), 'Invalid complete inventory body');
+  } else if(pin?.kind === 'original-report-product'){
     demand(safe(pin.path) && pin.path.startsWith('.cache/additive-native-gap-repair/') && pin.mode === '100644'
       && hex(pin.report_sha256) && hex(pin.sha256) && Number.isSafeInteger(pin.uncompressed_bytes)
       && hex(pin.uncompressed_sha256) && /^components-[0-9]{3}\.jsonl\.gz$/.test(pin.original_product_path), 'Invalid whole report product binding');
@@ -100,7 +192,7 @@ function pinCost(pin) {
 }
 function readPin(repo, pin) {
   pinCost(pin);
-  if(pin.kind === 'original-report-product'){
+  if(pin.kind === 'original-report-product' || pin.kind === 'completed-inventory-body'){
     const file=path.join(fs.realpathSync(repo),pin.path);
     let current=fs.realpathSync(repo);
     for(const part of pin.path.split('/')){
@@ -112,6 +204,7 @@ function readPin(repo, pin) {
       const before=fs.fstatSync(fd);demand(before.size===pin.bytes && (before.mode&0o777)===0o644, 'Original product mode/size drift');
       const raw=fs.readFileSync(fd),after=fs.fstatSync(fd);
       demand(before.ino===after.ino && before.dev===after.dev && before.size===after.size && sha(raw)===pin.sha256, 'Original product whole encoded drift');
+      if(pin.uncompressed_bytes===undefined)return raw;
       const decoded=gunzipSync(raw,{maxOutputLength:pin.uncompressed_bytes+1});
       demand(decoded.length===pin.uncompressed_bytes && sha(decoded)===pin.uncompressed_sha256, 'Original product whole decoded drift');
       return decoded;
@@ -128,6 +221,118 @@ function readPin(repo, pin) {
   demand(decoded.length === pin.uncompressed_bytes && sha(decoded) === pin.uncompressed_sha256, 'Whole decoded input changed');
   return decoded;
 }
+// The independent request names immutable current-selection and accepted
+// predecessor bodies. Every complete body is admitted and authenticated here;
+// no cached reconciliation boolean or raw historical geography is authority.
+export function readBaselineResolutions(repo, baseline) {
+  demand(baseline.version===1 && Array.isArray(baseline.pins) && baseline.pins.length===12,
+    'Missing full selected-bank reconciliation inputs');
+  const bodies=new Map();
+  for(const pin of baseline.pins){
+    demand(pin.kind===undefined && !bodies.has(pin.path),'Foreign/duplicate baseline input');
+    bodies.set(pin.path,{pin,raw:readPin(repo,pin)});
+  }
+  const get=name=>{const body=bodies.get(name);demand(body,'Missing selected baseline body');return body;};
+  const value=name=>JSON.parse(get(name).raw);
+  const selection=value('data/ownership-selection.json'), manifestBody=get(selection.manifest_path),manifest=JSON.parse(manifestBody.raw);
+  demand(selection.sha256===manifestBody.pin.sha256 && selection.method===manifest.method
+    && selection.release_id===manifest.geographic_release, 'Current selected bank/manifest binding changed');
+  // Pointer bodies must also equal this actual executing checkout's immutable
+  // selected state, not merely another branch with a coherent older selection.
+  for(const name of ['data/ownership-selection.json',selection.manifest_path,'data/geographic-releases/current-manifest.json',
+    'data/geographic-releases/releases-v8.json.gz','data/native-context-migration/manifest.json',
+    'data/reference-migrations/eastern-two-gap-repair-20261006/index.json']){
+    const pin=get(name).pin, tree=execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',name],{encoding:'utf8'});
+    demand(tree===`${pin.mode} blob ${pin.blob}\t${name}\0`,'Stale executing selected baseline');
+  }
+  const registration=verifiedCandidates.candidates[selection.sha256];
+  demand(registration?.installation_approval===false && registration.role==='reviewed-exhaustive-native-rule-comparison',
+    'Missing independently reviewed native selection');
+  const receiptBody=get(registration.path);
+  demand(receiptBody.pin.sha256===registration.sha256,'Native selection receipt registration changed');
+  validateNativeSelectionReceipt(manifest,selection.sha256,JSON.parse(receiptBody.raw));
+  const releasePointer=value('data/geographic-releases/current-manifest.json');
+  const releasesBody=get('data/geographic-releases/'+releasePointer.path), releases=JSON.parse(releasesBody.raw);
+  const release=releases.releases.find(row=>row.id===selection.release_id), migration=value('data/reference-migrations/eastern-two-gap-repair-20261006/index.json');
+  demand(releasesBody.pin.sha256===releasePointer.sha256 && release?.footprints_sha256===manifest.footprints_sha256
+    && release.hierarchy_sha256===manifest.hierarchy_sha256 && migration.activated===true && migration.history_transfer===false
+    && migration.after_footprints_sha256===manifest.footprints_sha256
+    && release.metadata.geometry_migration.history_transfer==='none'
+    && release.metadata.physical_reference_correction.issue===1295, 'Selected release is not activated accepted correction');
+  const nativeMigration=value('data/native-context-migration/manifest.json');
+  demand(nativeMigration.successor_release_id===selection.release_id && nativeMigration.native_manifest.sha256===selection.sha256
+    && nativeMigration.geometry_manifest.sha256===get('data/reference-migrations/eastern-two-gap-repair-20261006/index.json').pin.sha256,
+    'Current native/source migration lineage differs');
+  const index=value(baseline.canonical_index_path), part=get(baseline.canonical_first_part_path);
+  const partSpec=index.parts[0];
+  demand(partSpec.sha256===part.pin.sha256 && partSpec.bytes===part.pin.bytes && partSpec.offset===0,
+    'Whole canonical transport/index binding changed');
+  const pathmapSpec=index.files.find(pin=>pin.path==='canonical-path-map.json');
+  demand(pathmapSpec?.offset===0 && pathmapSpec.bytes<=part.raw.length, 'Complete canonical path-map not present');
+  const pathmapRaw=part.raw.subarray(0,pathmapSpec.bytes);
+  demand(sha(pathmapRaw)===pathmapSpec.sha256,'Whole original canonical path-map changed');
+  const pathmap=JSON.parse(pathmapRaw);
+  demand(pathmap.logical_targets.length===302 && new Set(pathmap.logical_targets.map(pin=>pin.target)).size===302,
+    'Incomplete current canonical path-map');
+  const target=pathmap.logical_targets.find(pin=>pin.target==='data/geography/part-29.json'), bank=get(baseline.bank_path);
+  demand(target?.mode==='100644' && target.bytes===bank.raw.length && target.sha256===sha(bank.raw)
+    && target.sha256===baseline.expected_bank_decoded_sha256, 'Historical/foreign bank instead of selected canonical bank');
+  const correctionsBody=get(baseline.corrections_path), corrections=JSON.parse(correctionsBody.raw);
+  demand(correctionsBody.pin.commit===manifest.provenance.source_migration.proposal_commit,
+    'Correction archive not original accepted scientific proposal');
+  const features=JSON.parse(bank.raw).features;
+  return selectedBankResolutions({features,corrections,selectedManifest:manifest,selectionReceipt:JSON.parse(receiptBody.raw),
+    selectedManifestSha256:selection.sha256,bankDecodedSha256:target.sha256,expectedBankDecodedSha256:baseline.expected_bank_decoded_sha256});
+}
+
+function readInventoryChildren(repo, request, report, {project,runtimeSha,runtimeBytes}) {
+  const complete=request.operation===COMPLETE_JOIN_VERSION, children=[], originalProducts=[];
+  for(const [ordinal,expected] of request.children.entries()){
+    demand(expected.ordinal===ordinal && expected.publication.kind==='completed-inventory-body'
+      && expected.facts.kind==='completed-inventory-body' && expected.inventory.kind==='completed-inventory-body'
+      && [expected.publication,expected.facts,expected.inventory].every(pin=>path.dirname(pin.path)===expected.destination),
+      'Foreign or reordered child stage binding');
+    pinCost(expected.request);
+    const publication=JSON.parse(readPin(repo,expected.publication));
+    demand(publication.version===1 && publication.complete===true
+      && ['bytes','sha256'].every(key=>publication.facts[key]===expected.facts[key])
+      && ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>publication.inventory[key]===expected.inventory[key]),
+      'Stale or partial inventory publication');
+    const facts=JSON.parse(readPin(repo,expected.facts));
+    demand(facts.execution_commit===expected.execution_commit && facts.operation===(complete?GROUP_JOIN_VERSION:INVENTORY_VERSION)
+      && JSON.stringify(canonicalValue(facts.request))===JSON.stringify(canonicalValue(expected.request))
+      && JSON.stringify(canonicalValue(facts.executed_code))===JSON.stringify(canonicalValue(project))
+      && facts.runtime.bytes===runtimeBytes && facts.runtime.sha256===runtimeSha
+      && JSON.stringify(canonicalValue(facts.installed_modules))===JSON.stringify(canonicalValue(request.installed_modules))
+      && JSON.stringify(canonicalValue(facts.baseline))===JSON.stringify(canonicalValue(request.baseline??null))
+      && JSON.stringify(canonicalValue(facts.input_descriptors))===JSON.stringify(canonicalValue(expected.input_descriptors)),
+      'Child execution/request/runtime/whole input closure differs');
+    const decoded=readPin(repo,expected.inventory), lines=decoded.toString('utf8').split('\n');
+    demand(lines.pop()==='', 'Truncated complete child ledger');
+    const rows=lines.map(line=>JSON.parse(line));children.push({rows,facts});
+    const products=complete?facts.original_source_products:[facts.input_descriptors[1]];
+    demand(Array.isArray(products) && products.length>0,'Missing original child source custody');
+    for(const source of products){
+      const original=report.products.find(pin=>pin.path===source.original_product_path);
+      demand(source.kind==='original-report-product' && source.report_sha256===request.report.sha256 && original
+        && ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>original[key]===source[key]),
+        'Foreign original containing source product');
+      originalProducts.push(source);
+    }
+  }
+  const productNames=originalProducts.map(pin=>pin.original_product_path);
+  demand(new Set(productNames).size===productNames.length && productNames.every((name,i)=>i===0||name>productNames[i-1]),
+    'Duplicate or reordered containing source shards');
+  if(complete){
+    const all=report.products.filter(pin=>/^components-[0-9]{3}\.jsonl\.gz$/.test(pin.path)).map(pin=>pin.path);
+    demand(JSON.stringify(productNames)===JSON.stringify(all),'Missing original complete containing shard');
+  }
+  const result=inventoryGroup(children,request.parent,{complete});
+  result.facts.original_source_products=originalProducts;
+  result.facts.child_stages=request.children;
+  return result;
+}
+
 export function restoreInventoryRow(alias, originalRows, originalSource, originalRecordBytes) {
   demand(JSON.stringify(canonicalValue(alias.original?.source)) === JSON.stringify(canonicalValue(originalSource))
     && Number.isSafeInteger(alias.original.ordinal), 'Wrong original row source');
@@ -164,20 +369,23 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   demand(runtimeStat.isFile() && !runtimeStat.isSymbolicLink(), 'Installed runtime must be an ordinary whole executable');
   const codeNames = ['package.json','scripts/additive-gap-repair.mjs','src/effective-footprint.js',
     'scripts/native-ownership/native-preparation-guards.mjs','src/native-runtime.js',
-    'scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs','node_modules/@noble/hashes/package.json'];
+    'scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs',
+    'scripts/native-ownership/require-verified-selection.mjs','scripts/native-ownership/read-pinned-build-file.mjs',
+    'scripts/native-ownership/verified-candidates.json','scripts/evidence-quality.mjs','src/ownership-method.js',
+    'node_modules/@noble/hashes/package.json'];
   const projectNames = codeNames.filter(name=>!name.startsWith('node_modules/')).concat('package-lock.json');
   const projectSizes = projectNames.map(name=>({bytes:fs.lstatSync(path.join(sourceRoot,name)).size}));
   candidateBudget([...projectSizes,...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
   const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
-  const runtimeSha = sha(fs.readFileSync(process.execPath));
   const request = JSON.parse(readPin(sourceRoot,requestPin));
-  demand(request.version === 1 && request.operation === INVENTORY_VERSION
+  demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION].includes(request.operation)
     && JSON.stringify(canonicalValue(request.executed_code)) === JSON.stringify(canonicalValue(project)),
     'Foreign request operation/head');
-  demand(typeof destination === 'string' && destination === request.destination && Array.isArray(request.expected_ids), 'Foreign output/scope');
+  demand(typeof destination === 'string' && destination === request.destination
+    && (request.operation!==INVENTORY_VERSION || Array.isArray(request.expected_ids) || request.scope === 'whole-original-report-shard'), 'Foreign output/scope');
   const outputReserve = request.output_reserve;
-  demand(Number.isSafeInteger(outputReserve) && outputReserve >= 131072 && outputReserve <= 32*1024*1024, 'Explicit output reserve required');
+  demand(Number.isSafeInteger(outputReserve) && outputReserve >= 131072 && outputReserve <= 96*1024*1024, 'Explicit output reserve required');
   const dependencyNames = ['package.json','sha2.js','_md.js','_u64.js','utils.js'].map(name=>'node_modules/@noble/hashes/'+name);
   demand(Array.isArray(request.installed_modules) && request.installed_modules.length === dependencyNames.length
     && request.installed_modules.every((pin,i)=>pin.path === dependencyNames[i] && hex(pin.sha256)
@@ -187,15 +395,31 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     demand(stat.isFile() && !stat.isSymbolicLink() && fs.realpathSync(file) === file && stat.size === pin.bytes && sha(fs.readFileSync(file)) === pin.sha256,
       'Actual installed module drift');
   });
-  const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...pinCost(request.source)];
+  const stagePins=request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
+  demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
+  const baselinePins=request.operation===INVENTORY_VERSION?(request.baseline?.pins??[]):[];
+  const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
   const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
+  const runtimeRead=()=>{
+    const before=fs.lstatSync(process.execPath);
+    demand(before.isFile() && !before.isSymbolicLink() && before.size===runtimeStat.size
+      && before.ino===runtimeStat.ino && before.dev===runtimeStat.dev && before.mode===runtimeStat.mode,'Installed runtime descriptor drift');
+    const raw=fs.readFileSync(process.execPath),after=fs.lstatSync(process.execPath);
+    demand(raw.length===runtimeStat.size && after.size===before.size && after.ino===before.ino
+      && after.dev===before.dev && after.mode===before.mode,'Installed runtime whole read drift');
+    return sha(raw);
+  };
+  const runtimeSha=runtimeRead();
   verifyModules();
   demand(requestPin.kind === undefined && request.report.kind === undefined, 'Report/request must be independently immutable Git bodies');
   const report = JSON.parse(readPin(sourceRoot,request.report));
-  if(request.source.kind === 'original-report-product')demand(request.source.report_sha256 === request.report.sha256
+  if(request.operation===INVENTORY_VERSION && request.source.kind === 'original-report-product')demand(request.source.report_sha256 === request.report.sha256
     && request.source.original_product_path === request.original_product_path, 'Foreign report-product source authority');
   demand(request.parent.report_sha256 === request.report.sha256 && request.parent.components === report.component_count
     && request.parent.roster_sha256 === report.complete_roster_sha256, 'Wrong complete original report');
+  const resolutions=baselinePins.length?readBaselineResolutions(sourceRoot,request.baseline):undefined;
+  let result;
+  if(request.operation===INVENTORY_VERSION){
   demand(/^components-[0-9]{3}\.jsonl\.gz$/.test(request.original_product_path), 'Only complete original component shards accepted');
   const product = report.products.find(pin=>pin.path === request.original_product_path);
   demand(product && ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>product[key] === request.source[key]),
@@ -203,15 +427,24 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const decoded = readPin(sourceRoot,request.source), lines = decoded.toString('utf8').split('\n');
   demand(lines.at(-1) === '', 'Truncated original JSONL source'); lines.pop();
   const sourceRows = lines.map(line=>JSON.parse(line));
-  const result = inventoryRows(sourceRows,{source:request.source,parent:request.parent,expectedIds:request.expected_ids,
-    expectedRosterSha256:request.expected_roster_sha256,originalRecordBytes:lines.map(line=>Buffer.from(line+'\n'))});
+  // The independently immutable report authenticates the entire containing
+  // source; this mode cannot select or omit records within that whole source.
+  const expectedIds = request.scope === 'whole-original-report-shard' ? sourceRows.map(row=>row.component_id) : request.expected_ids;
+  const expectedRoster = request.scope === 'whole-original-report-shard'
+    ? footprintValueSha256(sourceRows.map(row=>({id:row.component_id,feature_sha256:row.candidate_feature_sha256})))
+    : request.expected_roster_sha256;
+  result = inventoryRows(sourceRows,{source:request.source,parent:request.parent,expectedIds,
+    expectedRosterSha256:expectedRoster,originalRecordBytes:lines.map(line=>Buffer.from(line+'\n')),resolutions});
+  } else {
+    result=readInventoryChildren(sourceRoot,request,report,{project,runtimeSha,runtimeBytes:runtimeStat.size});
+  }
   const body = Buffer.concat(result.rows.map(canonical)), encoded = gzipSync(body,{mtime:0});
   const facts = canonical({...result.facts,execution_commit:commit,executed_code:project,request:requestPin,
-    input_descriptors:[request.report,request.source],runtime:{bytes:runtimeStat.size,sha256:runtimeSha},
+    input_descriptors:[request.report,...stagePins,...baselinePins],baseline:request.baseline??null,runtime:{bytes:runtimeStat.size,sha256:runtimeSha},
     installed_modules:request.installed_modules, admission:budget.snapshot(), request_admission:requestBudget.snapshot()});
   demand(body.length <= 32*1024*1024 && encoded.length <= 32*1024*1024 && body.length+encoded.length+facts.length <= outputReserve,
     'Complete outputs exceed prospective reserve');
-  demand(sha(fs.readFileSync(process.execPath)) === runtimeSha, 'Installed runtime drift');
+  demand(runtimeRead() === runtimeSha, 'Installed runtime drift');
   verifyModules();
   committedPreparationFiles(sourceRoot,commit,project.map(pin=>pin.path));
   const output = createNativeCandidateOutput(sourceRoot,destination);
