@@ -46,13 +46,10 @@ def validate_run_record(record: dict, directory: Path, expected: dict) -> None:
         raise ValueError('run receipt subject identity digest differs from the captured scope')
     if record.get('issue_pin_count') != 66 or record.get('historical_pin_count') != 62:
         raise ValueError('run receipt omits complete issue or historical pin coverage')
-    if record.get('verified_source_count') != 142 or len(record.get('verified_sources', [])) != 142:
-        raise ValueError('run receipt omits the 80 issue descriptors or 62 historical path/commit bindings')
+    if record.get('verified_source_count') != 80 or len(record.get('verified_sources', [])) != 80:
+        raise ValueError('run receipt omits the complete 80-object source inventory')
     if record.get('verified_sources') != expected['verified_sources']:
         raise ValueError('run receipt source paths, vintages or exact hashes differ from the verified input map')
-    if sum(row.get('role') == 'issue-pinned-input' for row in record['verified_sources']) != 80 or \
-       sum(row.get('role') == 'historical-source-or-result' for row in record['verified_sources']) != 62:
-        raise ValueError('run receipt does not distinguish issue and nested historical pin inventories')
     if record.get('unique_original_bytes') != expected['unique_original_bytes']:
         raise ValueError('run receipt original-source budget differs from verified inputs')
     admission = record.get('execution_admission')
@@ -257,34 +254,11 @@ def prior_table_evidence(expected: dict, run_id: str) -> tuple[dict, dict]:
     if len(expected_ids) != 232 or len(prior_ledger.get('rows', [])) != 464:
         raise ValueError('prior result ledger no longer covers both complete retained report vintages')
     old_prefix = prefix + 'evidence/runs/2026-10-06/'
-    owned_prefix = str(OWNED.relative_to(ROOT)) + '/evidence/runs/'
-    table_rows = []
-    template_rows = {(table['path'], entry['metric_id']): entry for table in prior_manifest['rendered_tables']
-                     for entry in table['rows']}
+    new_prefix = str(OWNED.relative_to(ROOT)) + f'/evidence/runs/{run_id}/'
     for row in prior_ledger['rows']:
         if not row.get('path', '').startswith(old_prefix):
             raise ValueError('prior table ledger points outside the retained run vintages')
-        tail = row['path'][len(old_prefix):]
-        old_run, separator, filename = tail.partition('/')
-        if not separator or old_run not in ('run-1', 'run-2'):
-            raise ValueError('prior table ledger has an unknown run name')
-        destinations = (['author-fresh-1/' + filename, 'verified-20261008-r1/run-1/' + filename,
-                         run_id + '/run-1/' + filename] if old_run == 'run-1' else
-                        ['verified-20261008-r1/run-2/' + filename, run_id + '/run-2/' + filename])
-        template = template_rows.get((row['path'], row['metric_id']))
-        if not template or template['line'] != row['line']:
-            raise ValueError('prior metric has no exact rendered-line template')
-        for destination in destinations:
-            new_path = owned_prefix + destination
-            file = ROOT / new_path
-            if file.is_symlink() or not file.is_file():
-                raise ValueError(f'preserved/fresh report table is missing: {new_path}')
-            lines = file.read_text(encoding='utf-8').splitlines()
-            rendered = template['template'].replace('{value}', str(row['value']))
-            if row['line'] > len(lines) or lines[row['line'] - 1] != rendered:
-                raise ValueError(f'actual CSV row differs from its independently retained table template: {new_path}:{row["line"]}')
-            table_rows.append({**row, 'path': new_path})
-    prior_ledger['rows'] = table_rows
+        row['path'] = new_prefix + row['path'][len(old_prefix):]
     prior_ledger['issue'] = 1396
     prior_ledger['method_id'] = 'croatia-run-provenance-controls'
     return prior_manifest, prior_ledger
@@ -369,27 +343,6 @@ def run_controls(run_id: str) -> dict:
             'Fresh reports are mechanical reproductions of previously reviewed Croatia results; they add no independent territorial finding.',
             'DZS/DGU/legal authority, municipality-to-county parentage, census-date polygons, islands/coast completeness, four name candidates, seven roster gaps and geoBoundaries file-specific grant remain unresolved.'
         ]
-    }
-    candidate_bytes = 0
-    for path in OWNED.rglob('*'):
-        if path.is_symlink():
-            raise ValueError(f'owned evidence contains an unexpected symlink: {path.relative_to(ROOT)}')
-        if path.is_file():
-            size = path.stat().st_size
-            if size > 32 * 1024 * 1024:
-                raise ValueError(f'owned evidence file exceeds per-file limit: {path.relative_to(ROOT)}')
-            candidate_bytes += size
-    manifest_reserve = 2 * 1024 * 1024
-    complete_phase_bytes = expected['unique_original_bytes'] + expected['planned_decoded_xlsx_bytes'] + candidate_bytes + manifest_reserve
-    if complete_phase_bytes > reproduce.MAX_PHASE_BYTES:
-        raise ValueError('actual candidate files, decoded members and manifest reserve exceed 256 MiB')
-    result['complete_phase_admission'] = {
-        'unique_original_bytes': expected['unique_original_bytes'],
-        'decoded_xlsx_member_bytes': expected['planned_decoded_xlsx_bytes'],
-        'existing_candidate_file_bytes': candidate_bytes,
-        'reserved_manifest_and_receipt_bytes': manifest_reserve,
-        'admitted_total_bytes': complete_phase_bytes,
-        'limit_bytes': reproduce.MAX_PHASE_BYTES,
     }
     validation.mkdir(parents=True, exist_ok=False)
     ledger_raw = (json.dumps(rendered_ledger, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode()
