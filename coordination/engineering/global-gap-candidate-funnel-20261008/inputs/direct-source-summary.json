@@ -1,0 +1,921 @@
+{
+  "1391_current_route_statuses": {
+    "mapped-inland-water-support": 12,
+    "mapped-land-support": 1005,
+    "mixed-source-support": 94,
+    "outside-mapped-L1-context": 138,
+    "unknown": 142
+  },
+  "1391_not_in_1005_status_counts": {
+    "mapped-inland-water-support": 12,
+    "mixed-source-support": 94,
+    "outside-mapped-L1-context": 138,
+    "unknown": 142
+  },
+  "555_current_route_statuses": {
+    "mapped-inland-water-support": 2,
+    "mapped-land-support": 430,
+    "mixed-source-support": 39,
+    "outside-mapped-L1-context": 24,
+    "unknown": 60
+  },
+  "555_not_in_1005_status_counts": {
+    "mapped-inland-water-support": 2,
+    "mixed-source-support": 39,
+    "outside-mapped-L1-context": 24,
+    "unknown": 60
+  },
+  "current_cohort": {
+    "components": 95173,
+    "current_cohort_sha256": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+    "routing_report_sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+    "routing_report_status": "PASS",
+    "source_delivery": "fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7"
+  },
+  "current_land_plus_unique_route": {
+    "all_dispatch_ready": false,
+    "all_next_action": "GEO-source-fitness-before-processing-reproduction",
+    "all_physical_authority": "unapproved",
+    "all_physical_status": "mapped-land-support (source-relative only)",
+    "all_source_status_unique_cover": true,
+    "complete_families": 711,
+    "unique_component_ids": 1005
+  },
+  "current_unique_coverage_witnesses": {
+    "all_cause_unknown": true,
+    "all_surface_status_unverified": true,
+    "derived_independently_from_accepted_57,785_admin_bindings_status": "one-compatible-recorded-subject-uniquely-covers-component",
+    "private_join_roster_path": ".cache/repair-readiness-1231-20261006/direct-source-coverage-screen/complete-current-unique-witness-dispatch.json",
+    "private_join_roster_sha256": "a4e27e0fe372006737ae500c8dbe690b419b69618cbce92bee8c1a5744d188a1",
+    "unique_component_ids": 1391,
+    "unique_source_subject_ids": 925
+  },
+  "decision_evidence_capture": {
+    "path": ".cache/root1295-funnel-approval-live-20261008.json",
+    "scope": "Only the two #1295 named physical-region source-envelope fits; remain unactivated. Not administrative-boundary truth, regional interiors, legal territory, historical validity/affiliation, shoreline authority, general source-date suitability, production publication, or other candidates.",
+    "sha256": "a658b6269bcdaa136399985f9cf2c0c5c282d5d5e60e12bdbac9b749fc26c4c0"
+  },
+  "exact_joins": {
+    "1005_in_1391": 1005,
+    "1391_in_1005": 1005,
+    "1391_in_57785": 1391,
+    "555_in_1005": 430,
+    "555_in_1391": 555,
+    "555_in_57785": 555,
+    "numeric_1005": 0,
+    "numeric_1295_targets": 0,
+    "numeric_1391": 142,
+    "numeric_555": 60
+  },
+  "historical_555": {
+    "all_cause_unknown": true,
+    "all_no_admin_assignment": true,
+    "all_surface_status_unverified": true,
+    "cohorts": {
+      "additive-admin-partition-1": 316,
+      "additive-india-refinement": 27,
+      "initial251": 212
+    },
+    "current_source_relative_status_counts": {
+      "mapped-inland-water-support": 2,
+      "mapped-land-support": 430,
+      "mixed-source-support": 39,
+      "outside-mapped-L1-context": 24,
+      "unknown": 60
+    },
+    "meaning": "Distinct physical-component rows with one compatible recorded-source subject uniquely covering the component, from the first terminally reviewed source cohorts; not source subjects, classification decisions, or repairs.",
+    "private_head": "a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd",
+    "private_roster_bytes": 3177760,
+    "private_roster_path": ".cache/repair-readiness-1231-20261006/direct-source-coverage-screen/complete-current-unique-witness-dispatch-555-preserved.json",
+    "private_roster_sha256": "0a1434974528c811b17d0a9ffe3cac6fa6b807a0ad9d30a7201a3180ce5e8a37",
+    "unique_component_ids": 555,
+    "unique_source_subject_ids": 412
+  },
+  "limits": [
+    "The 555 roster is a partial historical cohort, though its 555 distinct IDs match the later merged source-comparison and unique-witness rosters exactly.",
+    "The current 1,391 witness count is reproducible directly from the accepted 57,785 admin-binding rows; it is not 1,391 source subjects or repairs.",
+    "The 1,005 routing subset is a GEO source-fitness prerequisite with physical_authority=unapproved and dispatch_ready=false.",
+    "The 3,666 numeric diagnoses and four Nordic source/Atlas mismatch observations are orthogonal to terminal physical classification.",
+    "The global terminal physical labels have only two approved positive IDs; 95,171 remain unresolved under the current #1202 decision checkpoint. No complete global water/land truth roster exists."
+  ],
+  "numeric_first": {
+    "all_1005_excluded_from_numeric_first": true,
+    "class_counts": {
+      "local-construction-contradiction-demonstrated": 3666,
+      "retained-unresolved-numerical-or-context-prerequisite": 21316,
+      "retained-unresolved-original-replay-mismatch": 1294
+    },
+    "execution_commit": "3ef1b938a4813adcc62be632df29837c8122a1bb",
+    "overlap_with_555_1391_1005_and_#1295_targets": {
+      "#1295_targets": 0,
+      "1005": 0,
+      "1391": 142,
+      "555": 60
+    },
+    "report_sha256": "6a56174de64aee619130282a2fe63db58bed51e7e1c0d8d3f4f10045eddb3914",
+    "report_status": "complete",
+    "unique_component_ids": 26276
+  },
+  "orthogonal_diagnostic_sets": {
+    "local_construction_contradiction_demonstrated": {
+      "count": 3666,
+      "meaning": "Exact #1300 local constructed-difference contradiction for a component; does not classify the entire component as land/water or prove release/rendering impact.",
+      "report": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/report.json"
+    },
+    "mapped_land_source_relative": 42412,
+    "mapped_water_source_relative": 411,
+    "mixed_source_relative": 19962,
+    "nordic_geometric_source_atlas_mismatch_observation": {
+      "count": 4,
+      "ids": [
+        "physical-component:000bb4f5335601ba33572e2aca833ec87188059fcdd1f5d830826fa3783c2f05",
+        "physical-component:2b3823b49787cb624b7298ab8394ef521dd10a907c12c2a2b0249a6796970eb5",
+        "physical-component:4d6cbd694c671b2f56683e931c11b97522823512c0542a6aa7aaa73843ed078b",
+        "physical-component:9bdcd0999b59fbb4e5e8601729b4a4dadf0900ed8ead792d512aaa031e314ae9"
+      ],
+      "meaning": "Complete consumed simplified NOR/SWE source vs Atlas source geometry mismatch and candidate outside-source residuals; no source-truth, dry-land or repair approval.",
+      "packet": "research/geography/gap-source-nordic-shared-seams-20261006/README.md"
+    }
+  },
+  "purpose": "Exact-ID, read-only reconciliation generated directly from verified routing/admin/numeric records; no GIS, geometry operation, source collection, issue edit, or repository change.",
+  "roster": {
+    "decoded_bytes": 54176325,
+    "decoded_sha256": "3f45e56dd8ba6eb0b4f0634eaac1539f1193509d0fcd5756af7a7f2a828162a0",
+    "fields": [
+      "component_id",
+      "terminal_physical_class",
+      "terminal_decision",
+      "numerical_diagnosis",
+      "source_comparison_status",
+      "source_comparison_packet",
+      "source_products",
+      "unique_source_subject_id",
+      "source_reference_year",
+      "source_geometry_sha256",
+      "historical_555_witness",
+      "historical_555_cohort",
+      "unique_source_witness_1391",
+      "land_plus_unique_route_1005",
+      "nordic_geometric_mismatch_observation",
+      "physical_status_source_relative",
+      "physical_source_vintage",
+      "next_prerequisite",
+      "current_feature_sha256",
+      "current_geometry_sha256",
+      "family"
+    ],
+    "format": "ordered deterministic gzip CSV shards generated directly while joining verified original source rows; one row per current component",
+    "header_convention": "Header appears only in first shard; concatenate decoded shard streams in listed order with no inserted bytes.",
+    "rows": 95173,
+    "shards": [
+      {
+        "decoded_bytes": 8388231,
+        "decoded_sha256": "83de891f73bc4210e75ac7882928a7755ae7a3eec543860bc202835a60ef99f2",
+        "encoded_bytes": 2110652,
+        "encoded_sha256": "2f59d54e19f2b6bb6ba3dc408ff468b1c91d0d6d081135c68d970faec8f1446c",
+        "path": "components-01.csv.gz"
+      },
+      {
+        "decoded_bytes": 8388270,
+        "decoded_sha256": "f98947701ab954de94863558fabe68f277928b136505f2b417dd3dfb05fee8f6",
+        "encoded_bytes": 2112190,
+        "encoded_sha256": "2c08fbefc93b0d3f74cc9ee223a7c5f58268efb457e06cd8bc196bdcd615a321",
+        "path": "components-02.csv.gz"
+      },
+      {
+        "decoded_bytes": 8388549,
+        "decoded_sha256": "e4641bbb38e0ac23d7625f04dfea2cbdebc47bded32fb0e5bd4871eda7c13520",
+        "encoded_bytes": 2110684,
+        "encoded_sha256": "e7fcc3c55e325aed1659c0cd5d968a948bf2393f87b5bc478f7297be9fe733de",
+        "path": "components-03.csv.gz"
+      },
+      {
+        "decoded_bytes": 8388206,
+        "decoded_sha256": "bb8a928a6aa73ac4d0bdca4919ae4af79ec40e766ee88060ef76dbef398150cf",
+        "encoded_bytes": 2111276,
+        "encoded_sha256": "7bc3d53c58b90b9fb7d09bc382b30084f9b2ac1a474966a188677a66760408ec",
+        "path": "components-04.csv.gz"
+      },
+      {
+        "decoded_bytes": 8388404,
+        "decoded_sha256": "ff40aa9b35b69cc08b5fd736f1801a128abd10e8a0697e5366dc30ff5c10944b",
+        "encoded_bytes": 2111534,
+        "encoded_sha256": "1e323c1938ed4cb8bae91cd0b9e2c7c90a9d44ba6cfda87e8a40cd03aac34fd8",
+        "path": "components-05.csv.gz"
+      },
+      {
+        "decoded_bytes": 8388452,
+        "decoded_sha256": "c2c526465257bcc7b6b6ef116aada5869b5af0ba762058505bde017bccacfdfc",
+        "encoded_bytes": 2109919,
+        "encoded_sha256": "8ec3d43cf69db5cd4afeabb38fd0ada6a41b6d4e3c3531ecaf6365bb984931ec",
+        "path": "components-06.csv.gz"
+      },
+      {
+        "decoded_bytes": 3846213,
+        "decoded_sha256": "bfc3f6e5260aea2164d462bf0ee700e66ea075d43843d2b8eb109aea3e222640",
+        "encoded_bytes": 970354,
+        "encoded_sha256": "4b236a599b92d3aed5b79315b27abe6ce2839ac49752bea2a48a8957eac53304",
+        "path": "components-07.csv.gz"
+      }
+    ]
+  },
+  "row_provenance": {
+    "decoded_shards_max_bytes": 8388608,
+    "format": "deterministic gzip JSONL shards; one locator record per candidate row",
+    "locator_fields": "Original decoded JSONL product stream offset, record ordinal, and descriptor containing record start; land source uses original array ordinal; historical 555 uses preserved roster path/hash/ordinal.",
+    "prior_transport_only_artifact": {
+      "path": ".cache/root1202-evidence-reconciliation-20261008/bounded-csv-shards-v1/manifest.json",
+      "role": "Preserved prior attempt; transport-only split of existing CSV and not an input to this producer."
+    },
+    "processing_cap_statement": "All individually consumed authenticated source output descriptors decode to at most 8 MiB each. Aggregate decoded input across the 67 descriptors is 539,120,612 bytes, so this is not asserted to fit a 32 MiB aggregate-phase cap; claim only per-file boundedness. The earlier oversized canonical CSV was not read or used by this direct producer. Output CSV and locator shards are each <=8 MiB decoded.",
+    "shards": [
+      {
+        "decoded_bytes": 8388179,
+        "decoded_sha256": "a397f60dce0e00023a83c9dc891c34140b920c17deff30b0e937ee01bd7a68c8",
+        "encoded_bytes": 673553,
+        "encoded_sha256": "307eea6b194b6f349d7ef0b2c835e4c5345edf4726699b7383995971b00e7617",
+        "path": "component-provenance-01.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 8388290,
+        "decoded_sha256": "c4744d8ea2436d84366ff373b02da38a658c640391e45233e1691ce45e084539",
+        "encoded_bytes": 669020,
+        "encoded_sha256": "d59499bcb6802b86dcefe64738dab501f59254445b9b427167b7d8d719a1eaeb",
+        "path": "component-provenance-02.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 8388484,
+        "decoded_sha256": "72abd6c9c541e9fc10e239f37524bbeb1b45f4ce6f383e31956c199c5a2aa369",
+        "encoded_bytes": 669046,
+        "encoded_sha256": "8c8ab24040d144a4453ee3c9f8b2ad6349c1cf70a0a2d812a82fe7e0c8a4043d",
+        "path": "component-provenance-03.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 8388262,
+        "decoded_sha256": "7a858fb9a749f44c20934767c5286b32af0a75dae5fa30b20a49de94881f4da0",
+        "encoded_bytes": 670817,
+        "encoded_sha256": "23e26ee961ddf71fba040db71d301263f59b6bae0b6c3ba41672ebdbce040748",
+        "path": "component-provenance-04.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 8388131,
+        "decoded_sha256": "4fbea725a5c9d7b98ea24efc7bc96f39f8accb0947e8d6b79d3fee83f60dada7",
+        "encoded_bytes": 667999,
+        "encoded_sha256": "38f2fc515fcfd6087629291569187051e6d92a572d7bafa22be3334833966e24",
+        "path": "component-provenance-05.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 8388247,
+        "decoded_sha256": "ab3e1732f04cec2c3ebdda948010dde02b8105aba5d61e9455d60f07da143594",
+        "encoded_bytes": 670288,
+        "encoded_sha256": "16eebd90e6d9b9d26288c8cc4d1ffd85769a3c6918057c0f9971b297ef76b4fa",
+        "path": "component-provenance-06.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 8387699,
+        "decoded_sha256": "7ebd5eb45b59217de4c5d0516864b37858709bd6d97e0ea11c1c399a95563971",
+        "encoded_bytes": 668269,
+        "encoded_sha256": "024cd9854407f9c7ec5b871b76bfb62ae886728b1a9a2445bd903ebd52b9785b",
+        "path": "component-provenance-07.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 8388042,
+        "decoded_sha256": "0c143034c7799c1a9028d325d5fcc65823591a3675d2a1b9dd01608e105a2b1c",
+        "encoded_bytes": 668082,
+        "encoded_sha256": "49f0662dd26c9f58eaa5277f64019b9e9853ffee45be75c161542818d0559e22",
+        "path": "component-provenance-08.jsonl.gz"
+      },
+      {
+        "decoded_bytes": 1348067,
+        "decoded_sha256": "6539a09e132b2a6a4c90242eec9355c4ede37fd6fb9c683cf7998b81a6620dbc",
+        "encoded_bytes": 108480,
+        "encoded_sha256": "60f1834d5c0813840f1ac5d2f5de80c59cb45a9d4d074ee7eb2824a36f0e334e",
+        "path": "component-provenance-09.jsonl.gz"
+      }
+    ],
+    "source_descriptor_totals": {
+      "count": 67,
+      "decoded_bytes": 539120612,
+      "encoded_bytes": 56669525,
+      "max_single_decoded_bytes": 8388608
+    },
+    "source_descriptors": [
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415",
+        "encoded_bytes": 1056877,
+        "encoded_sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "path": "components-000.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "a9b44b74dcca0a37191e10cbe1f08fbf98e460610f5cab441768e044f37c6b34",
+        "encoded_bytes": 1055138,
+        "encoded_sha256": "039c1c64d81c73a01a57cc9549d84b085b7d5f943eb0c93f888d5868e23a0a2e",
+        "path": "components-001.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "9de1ea80581fe6f4445108c0c49b68e78bdbd0e2f288d80716ca337c5c2d8561",
+        "encoded_bytes": 1056628,
+        "encoded_sha256": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+        "path": "components-002.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "ab35a3bd7f4064d7ef3ad1d37edcb1b1b1b35db2232b026f1322dbbc74b7bacb",
+        "encoded_bytes": 1057266,
+        "encoded_sha256": "c1f4128e05d2147936bc76d773110572fa4d85f112acf9fa6023fc1e8af948ee",
+        "path": "components-003.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "651b27a01f11f6b7328ce866abe1c0918ed858e8ab7fc1dac76e2697e9037866",
+        "encoded_bytes": 1056615,
+        "encoded_sha256": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+        "path": "components-004.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "7f8d2ab0ce1f0047f30dcd9d97549386fa8f8aa6d252bc96df73f57343ca7d95",
+        "encoded_bytes": 1055630,
+        "encoded_sha256": "fc45ee3c6e2c9aa6671e9e31453673227de9d36298ca44962795302c00ef58e2",
+        "path": "components-005.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "4b92cb5e1e63dda727254e08b28784fa7ef387d1f946569ea25189bb51607720",
+        "encoded_bytes": 1056046,
+        "encoded_sha256": "c5521f8a382f45e6b7febdd7616d407cbe1a41ad1bcd685fbe59dd49cc91f2ee",
+        "path": "components-006.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "228541ac222e9bf1927699c71e2adbb1ba194fa6ddba0d9b70aa500f1c50caf5",
+        "encoded_bytes": 1056202,
+        "encoded_sha256": "5f4240fb226c6bd06e42a72000c3d4e89525e3cf5f1e4ae48f5d90d03834b297",
+        "path": "components-007.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "30ed065c87e4a11f3039a3ce1e8a917d1c4ce324b70d08e81a08911bda36f7b0",
+        "encoded_bytes": 1056508,
+        "encoded_sha256": "efcf3436ed85a990a4ac4716caf967e2480c1b5eaa2e3047ffc412d9341273eb",
+        "path": "components-008.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "59429efa412c896af9347049b579293fc9d05b80e950b5640d6e510e46e87ace",
+        "encoded_bytes": 1055685,
+        "encoded_sha256": "6b91eea504ecf337a7b4c2d727a42ebf1fc153c4b4340708458003e4563b79ee",
+        "path": "components-009.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "7889ff3e15b041a666f0394c9647835fd89b7ac489075831ed47745be2e83071",
+        "encoded_bytes": 1054508,
+        "encoded_sha256": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+        "path": "components-010.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "1ff9b2ea435250fbf47c36e203bc95ca99efeadcc43f4b9052d8aaeea12e100e",
+        "encoded_bytes": 1056946,
+        "encoded_sha256": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+        "path": "components-011.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "48cb9ea6bf7baedefea4391bd3be8aa0564e98c5a4f72c93e9fcf9112d014408",
+        "encoded_bytes": 1056866,
+        "encoded_sha256": "0cbfd374a2f1fde800ee8a14ad81aec01f55e5ab46d3de4f9f82d92d233533c3",
+        "path": "components-012.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "8cf5b9d3c11815a5fe548e12d03edd5ef2689ac7627067ec34ffab75dc23ec9e",
+        "encoded_bytes": 1060324,
+        "encoded_sha256": "42081c1b1bb00fb8a97f7d238a8c17bd9ac421d6b4e7507c56629ed0fe2e5682",
+        "path": "components-013.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "d1e3acfb2623dc398ec5266a1a3f2154a958ba0ebc0cf0ad3d3fb108ef555ba9",
+        "encoded_bytes": 1055098,
+        "encoded_sha256": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+        "path": "components-014.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "8336e041079ab4cdaeee76442c40fb9f6e69bdb24ead60ef170010b8c1169c8b",
+        "encoded_bytes": 1056340,
+        "encoded_sha256": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+        "path": "components-015.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "504dc711ab22b934f2e47f0546e54f6f4f3352a0589fb47b9ae12348067adc9f",
+        "encoded_bytes": 1056102,
+        "encoded_sha256": "fcf08ffe589c2cbd4543fa8d2525ee70d44b4aa3d3a3811f40f71c1e1b60420b",
+        "path": "components-016.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "ff1fd84298383e79f20f27a865ff1d72ba36856a1decc521cc3c460ead16f492",
+        "encoded_bytes": 1057188,
+        "encoded_sha256": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+        "path": "components-017.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "0445faa56bff82aa5d0b98c78c420bb2f83671aa289bda55dfb71283e3673c8c",
+        "encoded_bytes": 1058049,
+        "encoded_sha256": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+        "path": "components-018.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "a54ed7e781d10fbd6403572826bcc801118e78b290c74b9aea56095a7a34c882",
+        "encoded_bytes": 1056760,
+        "encoded_sha256": "fe00f2750343c55b0b21a8ae21934321252dff58235a0b4e5fbdd3fd8235c999",
+        "path": "components-019.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "2d284aa2cb981e01d9d3ae65458ae97a0bceeeb8b41154adeb90e56b919a91b3",
+        "encoded_bytes": 1054653,
+        "encoded_sha256": "f3a284602b62d1fb63b2f18dc478afe366be58837a8c5a30eb87bae939ed8e10",
+        "path": "components-020.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "bfe35843058aa894e6806f0799bd151ed484efb638f20ad0d8af565e641497a6",
+        "encoded_bytes": 1057471,
+        "encoded_sha256": "9aed3f2e504a3a5799b39a8a92661d6496b85b853ba2adb4fb84f2e92bef8753",
+        "path": "components-021.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "146a652d7cead31fc783d93423b74cb52691cf2eded8de39f4272a1e6cb2250f",
+        "encoded_bytes": 1057293,
+        "encoded_sha256": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+        "path": "components-022.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "12be08c70304f2c808f53d74ef350c0d302def8e53568922c1734c7bfd06dee9",
+        "encoded_bytes": 1055293,
+        "encoded_sha256": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+        "path": "components-023.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 7065187,
+        "decoded_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a",
+        "encoded_bytes": 890162,
+        "encoded_sha256": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+        "path": "components-024.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86",
+        "encoded_bytes": 1423781,
+        "encoded_sha256": "fa75a261900a8daecaf79d5ec52ff98c558c75113f125ce37b3a6cd823884e84",
+        "path": "admin-bindings-000.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "0b45b984c5c4636f622ff4f04d2b7174e8cf6c30d70bab63ddf9e2f25dc982c1",
+        "encoded_bytes": 1425093,
+        "encoded_sha256": "1ef86a2583ec6abfd84f58d443c31b4884c567be263cdbb39de0e80cd2f8849f",
+        "path": "admin-bindings-001.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "a170b28d3a86f5ed30ec5c537c3f846baeb04412e20814310ddf4cd7e29b3b9b",
+        "encoded_bytes": 1423887,
+        "encoded_sha256": "47b3065edc3da9872679100c070f27054d197833b66e423b35325c41dc66ef80",
+        "path": "admin-bindings-002.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "d89f2e8f8267493aa9e9ca614fcf401d343b8c4b03dc511bbc1acc036c118a3d",
+        "encoded_bytes": 1424763,
+        "encoded_sha256": "281c330f5f7f5727709bdce4c3e662c313e080178d52a5e9f8a0a41c585b0a86",
+        "path": "admin-bindings-003.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "6289b606b922d8c01ca231ede71a349da841b98b713c372dc4123893945d2a8b",
+        "encoded_bytes": 1423919,
+        "encoded_sha256": "733c6f92ae1a0975c18b64ab9b12fe63b2f7429d876e986c9dde53c453c273d0",
+        "path": "admin-bindings-004.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "2a8bb616b56839ee1e7c21d95443555194de318393bf489818703c014b745aab",
+        "encoded_bytes": 1425720,
+        "encoded_sha256": "7f1ba06f6b035c9efa1a940bab789b6032bfbcee6425f9a06693db3e9cb11b6b",
+        "path": "admin-bindings-005.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "9fdca5fb279d413251803a00736ff0b2573eca815effb8a3e24c42f4630ca00f",
+        "encoded_bytes": 1424087,
+        "encoded_sha256": "4385d260ee3161c97a44a2bf53c342b79e2d9712083de969bbc965b950ebbd4c",
+        "path": "admin-bindings-006.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8388608,
+        "decoded_sha256": "e1f9dad27239a5d5f8dd38c0132bc08ea28e8482d394a3fee9eb53ebdfcf30b6",
+        "encoded_bytes": 1424128,
+        "encoded_sha256": "06389d188e7b544f187a471c4ebfba937d8f07ccbfadba68d5f302888304b81f",
+        "path": "admin-bindings-007.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 932144,
+        "decoded_sha256": "91fe1012b01980cbcfc0f309f5d3fbfc321b0135c80a103f1dd5210c1a7a78db",
+        "encoded_bytes": 158811,
+        "encoded_sha256": "57a60c413f397633712a7f20663c4423cc4ab1abfb0f597790c66d385da72dc8",
+        "path": "admin-bindings-008.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      },
+      {
+        "decoded_bytes": 8380665,
+        "decoded_sha256": "9cbc55aac66a726de690c6360db1e17496cbb9b27bdfabcc6d52a9c70df493da",
+        "encoded_bytes": 592180,
+        "encoded_sha256": "777c0a0c47ed65d400b7a7eb8463969cf957be45d8c5b1c6dcf1dd253b948e57",
+        "path": "diagnoses-000.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8380025,
+        "decoded_sha256": "c719f4271dfe03ca19513929892b50afde88aa0dadba6f0475a9e91fe7a7458d",
+        "encoded_bytes": 592105,
+        "encoded_sha256": "3d461427b0bedf10fb40b16a7f35951f2e5f9c67801b0b3142d41c4302da1aeb",
+        "path": "diagnoses-001.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8379129,
+        "decoded_sha256": "e37423962ae7429e05ed892579fc71151f725c76ab48339a766495cbbe13a5c2",
+        "encoded_bytes": 598845,
+        "encoded_sha256": "e1e1b3d181eca59d44c9e5c5a1f677b162fdea7893e504220c7d876986b68c0a",
+        "path": "diagnoses-002.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8384755,
+        "decoded_sha256": "7bfd5060419aee509d9dbe48ea41f9ea17c104277cfd3ce04a7f285720a8c470",
+        "encoded_bytes": 584160,
+        "encoded_sha256": "f78556d672164e02e41959d032fb6cadfd2d1ea5f559ade2dd5f8746ec58b364",
+        "path": "diagnoses-003.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8383293,
+        "decoded_sha256": "1184be2b9f9fe408ce32c05e497ad261653f2b6ad74cec9edc10a4c0e8122ad3",
+        "encoded_bytes": 597536,
+        "encoded_sha256": "fcab0f4a769b8aa026fd374ec7b1b6105af3e1069260cd17cb342f5e5019b709",
+        "path": "diagnoses-004.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8386210,
+        "decoded_sha256": "5edddaaaacc95409ec8214046456aead7a3d781b45b391ddbc8efb2c86cd8035",
+        "encoded_bytes": 597988,
+        "encoded_sha256": "b7b3e2350a1b49a2269432ac522bb2fb80132079731e5c67e1668d5573d55a8f",
+        "path": "diagnoses-005.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8380429,
+        "decoded_sha256": "ade83d58e0f1239b12be4912f8ab1d8da3a5eed79d64551582d3da1e04f2454d",
+        "encoded_bytes": 600744,
+        "encoded_sha256": "6491a4dacb3df4648dbf66de743b0134e64f56af15184a846539800c3adbff74",
+        "path": "diagnoses-006.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8377965,
+        "decoded_sha256": "2b5f9beaf66788614ee09c11c45daf5084014b6d109ff0922cc6788972141345",
+        "encoded_bytes": 595205,
+        "encoded_sha256": "e002be2082c70647535bed55dd5e65b15a964521116c447b0fb2c727aaab9a2d",
+        "path": "diagnoses-007.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8383173,
+        "decoded_sha256": "be5d6782822be8b8304865b02bfdc15e3124ddf46d1f1d05a6d43dd3d4dc49a8",
+        "encoded_bytes": 607568,
+        "encoded_sha256": "d8c22c06dd2982a023237fec400cc166a4025ea8f21b69114db5d0f8661f7ef3",
+        "path": "diagnoses-008.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8381199,
+        "decoded_sha256": "6309be62338ae96de55d2fa5751cff178bac99a107be5ef6ebc5451a0008996c",
+        "encoded_bytes": 617901,
+        "encoded_sha256": "1d23e9241730943ef0a2a1f447afe00c6ecd44d5d4b33fdbb6d3222385b5b1c0",
+        "path": "diagnoses-009.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8383422,
+        "decoded_sha256": "dfcf5f2edf096b24dfc10fb80b598bfdb13f7e6c06c4504862cd5ee1cdbe3015",
+        "encoded_bytes": 595984,
+        "encoded_sha256": "3b3459257eaf024a5f24dbd3c4efe9ef36547b399057e913728c84aefb064538",
+        "path": "diagnoses-010.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8385482,
+        "decoded_sha256": "7490c56e28e2e46fd05f0a1fe883d4a578e6f43eca316e03f9dc2c176f5ed39d",
+        "encoded_bytes": 597250,
+        "encoded_sha256": "7ea1a5cb42f36c2e52b62adf58d66ecd1d505c9150dc08eb4a89a53b60344275",
+        "path": "diagnoses-011.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8382121,
+        "decoded_sha256": "31a866e31d8ac8cd955ecdf2c924afb155bb9550a6877eb5dbffdfe49e00d5ea",
+        "encoded_bytes": 598540,
+        "encoded_sha256": "780d428750e8ec3ad323b3e1bd287889796467d5cc3c0dbb5912c39d85f1ac53",
+        "path": "diagnoses-012.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8380847,
+        "decoded_sha256": "cb45901c2cb8091cd13ce93e1a3ed0e3d61cbfebb46decf8599513f38ce87045",
+        "encoded_bytes": 586718,
+        "encoded_sha256": "38625ee8cdf9ec7c2db5be6dfd8c5ddbf192879feddf294f21e4a69e927e04eb",
+        "path": "diagnoses-013.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8379081,
+        "decoded_sha256": "34705acb4f0ced7403e445f7504b93ad9bccc03f77ab3cf4b1adbfc96640871e",
+        "encoded_bytes": 598169,
+        "encoded_sha256": "f7c4f568ecea602dca764138be0ca3b26a7aeb7cc7365bf0b664fa1ccd7f03ce",
+        "path": "diagnoses-014.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8383140,
+        "decoded_sha256": "f9c50ec8c07fe2f200e53a5c92b01d88608d10ecdf07990e855fd283224ea478",
+        "encoded_bytes": 596283,
+        "encoded_sha256": "067040edfac5599de6003a4962730a5af9db1618f66f3159137958cf9152bede",
+        "path": "diagnoses-015.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8387401,
+        "decoded_sha256": "148dd66a6a23a16fcafce2b971e7d78ee8c6378e60d1b462afe6c0d8c8b28f4d",
+        "encoded_bytes": 595328,
+        "encoded_sha256": "31fe79a78dc8670d7e87be09a352527abd2d1861e0f136ad495cc4ba9d4afe1c",
+        "path": "diagnoses-016.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8385690,
+        "decoded_sha256": "f8ba7996c3212ff3b4a8de8e742700d7183223367aeabd817e24299be336a46b",
+        "encoded_bytes": 593967,
+        "encoded_sha256": "e9c3ae5a5e53d63802c32e53558095c25f3fd8b2b5400dca1eb369f876325936",
+        "path": "diagnoses-017.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8381957,
+        "decoded_sha256": "6a4048140cd1da9f87e90f658abc2009f490d16ef06ed7b5785f738ba0a458b5",
+        "encoded_bytes": 591597,
+        "encoded_sha256": "d9f367098b1fa9f779bdc8ba49923a5c310b75311563b59973794f062d88d4de",
+        "path": "diagnoses-018.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8387785,
+        "decoded_sha256": "9109d60c9f63ec5296f430983c4134874fb62eeec26431b6c9c2983ddc193616",
+        "encoded_bytes": 598034,
+        "encoded_sha256": "7c6206dc96ccd1756ff297496bb47bfc65cb93dd6fb8a82590500cc1e472f556",
+        "path": "diagnoses-019.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8384227,
+        "decoded_sha256": "83b1f5ccdd6ec516a3b42d5a755568fd0c5f8bac629baa7fefe687218f33b04d",
+        "encoded_bytes": 596090,
+        "encoded_sha256": "d5db10b267387c69f075108079bf378faa0f82c2306d811dc90ca84cec6d48fd",
+        "path": "diagnoses-020.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8388231,
+        "decoded_sha256": "bb3427096a76945009ff717849fda49477a6c1064744741acb31a51a455f8a2a",
+        "encoded_bytes": 597804,
+        "encoded_sha256": "2fce03d438d1c78544bae23ce56a0711962a5861fb8f18bcb862c5aef7d1e326",
+        "path": "diagnoses-021.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8383637,
+        "decoded_sha256": "49b1bd0f75b670d9e4900ae3346ca5fb3b81c1ce25a4009a866bd6a49a020686",
+        "encoded_bytes": 593080,
+        "encoded_sha256": "bfe58ede5ec8514cf3929cd1796c33a164681ff1b46664e58db32961966f7327",
+        "path": "diagnoses-022.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8385487,
+        "decoded_sha256": "75054366df92e5e36ee986f6a373510b98fd9ae70564121690269a9ab76f1eac",
+        "encoded_bytes": 588777,
+        "encoded_sha256": "4fb824811113e5deb1fd1c233137a65e1d83b1172f1a27d8153a78129516edf7",
+        "path": "diagnoses-023.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8383081,
+        "decoded_sha256": "4bb2c3f0a5bcfdd479f0501bfaabf20a559203d31a009792549763f7eb7c01db",
+        "encoded_bytes": 589239,
+        "encoded_sha256": "1f477f8517231e1e039bd2d378853f8692f14cffe35c3faac04350625b4a83db",
+        "path": "diagnoses-024.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8382120,
+        "decoded_sha256": "b49916a8358aa2d07bfa25e6f7515e790e0bbe69617d8424711864d318ae3de3",
+        "encoded_bytes": 586893,
+        "encoded_sha256": "862566cc24748391f741f055447ab342f36d420bbff05e00c0554c4c1d50a663",
+        "path": "diagnoses-025.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8385810,
+        "decoded_sha256": "71e09356909334dbf59c203be4ab5adbfad07e84f92315face5c1062cc539cc7",
+        "encoded_bytes": 615171,
+        "encoded_sha256": "1e2aa3ff3207c27eafd89c4f48e7bd36699c32d0106045e539bf1f1aca986b5d",
+        "path": "diagnoses-026.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8386234,
+        "decoded_sha256": "958195d196f078753220370bb9e311154a9a84a8a00232a5d83755bfd57accb9",
+        "encoded_bytes": 598510,
+        "encoded_sha256": "ce8e24ec43d5566e51c57145cc3ef546805d9dcfd059aa06da09001df13ced63",
+        "path": "diagnoses-027.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8386157,
+        "decoded_sha256": "1adb574da43bd6f2472f9a46661f31013e2bd025c3ff62e469b3030097f09e09",
+        "encoded_bytes": 590053,
+        "encoded_sha256": "1bb036ad73dc4a271871bb3b46d560998e993ea3da625d0e7f56f89259a97f7b",
+        "path": "diagnoses-028.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8382349,
+        "decoded_sha256": "9dd1e354ea31a1a85da316628261707237f3305945d975374d9150538e917af7",
+        "encoded_bytes": 602140,
+        "encoded_sha256": "e5147018d195ca519b3ad73fd317b862fa3847dcab8511784b7d1868271ea725",
+        "path": "diagnoses-029.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 8381833,
+        "decoded_sha256": "239a0d3e54f9d59bba9ef9220de219703a61287cda1e3f9443dcd3b3c9d4d4bb",
+        "encoded_bytes": 594599,
+        "encoded_sha256": "2ea43447508c342c79bf1561d401ad7a12fc1baaef926fb18f1f8b830ce9d03e",
+        "path": "diagnoses-030.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 1074590,
+        "decoded_sha256": "18c0c60ea740ff88b059fee793e5e221901600bb14a659d78ef5234970ee2a93",
+        "encoded_bytes": 79727,
+        "encoded_sha256": "b26872795e3be7e77a3f7e3b33458188f0bc8fdab9080b814c796eb616aed30f",
+        "path": "diagnoses-031.jsonl.gz",
+        "root": "WorldAtlas/coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2"
+      },
+      {
+        "decoded_bytes": 1730300,
+        "decoded_sha256": "e189f3ca731cf87433e423f88debce44e666e838fea1a8e57560b1f47f54422c",
+        "encoded_bytes": 301503,
+        "encoded_sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "path": "land-source-fitness-000.bin.gz",
+        "root": "WorldAtlas/coordination/engineering/global-actionability-routing-20261007/results"
+      }
+    ]
+  },
+  "source_comparison": {
+    "packet_counts": [
+      {
+        "actual_complete_rows": 15039,
+        "changed_current_geometry": 0,
+        "matched_current_geometry": 15039,
+        "packet": "global-source-comparisons-a-20261006"
+      },
+      {
+        "actual_complete_rows": 15611,
+        "changed_current_geometry": 0,
+        "matched_current_geometry": 15611,
+        "packet": "global-source-comparisons-a-001-20261006"
+      },
+      {
+        "actual_complete_rows": 12427,
+        "changed_current_geometry": 0,
+        "matched_current_geometry": 12427,
+        "packet": "global-source-comparisons-b-20261006"
+      },
+      {
+        "actual_complete_rows": 14708,
+        "changed_current_geometry": 0,
+        "matched_current_geometry": 14708,
+        "packet": "global-source-comparisons-b-package3-20261006"
+      }
+    ],
+    "source_comparison_manifest": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+    "status_counts": {
+      "no-source-intersection-in-literal-domain": 4130,
+      "one-compatible-recorded-subject-uniquely-covers-component": 1391,
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 52162,
+      "zero-area-contact-only": 102
+    },
+    "unique_component_rows": 57785
+  },
+  "source_paths": {
+    "historical_555_private": ".cache/repair-readiness-1231-20261006/direct-source-coverage-screen/complete-current-unique-witness-dispatch-555-preserved.json",
+    "numeric": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/report.json and diagnoses-*.jsonl.gz",
+    "routing": "coordination/engineering/global-actionability-routing-20261007/results/report.json and results/*.bin.gz"
+  },
+  "terminal_decision_lower_bound": {
+    "confirmed_missing_land": {
+      "approval_vintage": "current #1295 issue body/2026-10-08; two corrections originally scoped in PR1 #1317, PR2 activation remains blocked",
+      "count": 2,
+      "decision": "#1295 explicit AAFC native-source envelope approval; source named physical-region subdivision, not administrative boundary; both remain unactivated",
+      "ids": [
+        "physical-component:bb4a3e58a98cdc2a589c2e0d8bc2e8172e3147d7bc68fe755a0f1fc2df713121",
+        "physical-component:1d458ddaf986b7485036312676a27f99539ecb743c8e093805cf4d4f49c55ed8"
+      ],
+      "source_relative_targets": {
+        "physical-component:1d458ddaf986b7485036312676a27f99539ecb743c8e093805cf4d4f49c55ed8": {
+          "geometry_sha256": "172a25d939353bed6168c950cb0f9aaba75e7ff770aad053c7e36c963a6dc98e",
+          "source_relative_mapped_land_area_m2": 4645.122244964981,
+          "target": "atlas:physical:CAN-114:NFL"
+        },
+        "physical-component:bb4a3e58a98cdc2a589c2e0d8bc2e8172e3147d7bc68fe755a0f1fc2df713121": {
+          "geometry_sha256": "b8b357848262d2ccb59b0e9823439c76f329e5dc9baa7678fa0e5bdfb23b1265",
+          "source_relative_mapped_land_area_m2": 20142.432883697165,
+          "target": "atlas:physical:CAN-103:QUE"
+        }
+      }
+    },
+    "confirmed_water": {
+      "count": 0,
+      "reason": "No whole-component, source-approved water decision found in current campaign checkpoint; 411 mapped-inland-water-support rows remain source-relative."
+    },
+    "mixed_land_water_needing_split": {
+      "count": 0,
+      "reason": "No authoritative per-component mixed surface split has been approved; 19,962 mixed-source-support rows remain source-relative."
+    },
+    "reference_data_mismatch_as_adjudicated_cause": {
+      "count": 0,
+      "reason": "57,785 comparison rows are not 57,785 mismatch decisions; geometric differences and source coverage are not adjudication of which reference is wrong."
+    },
+    "unresolved_or_unadjudicated_physical_class": {
+      "count": 95171,
+      "scope": "All current IDs except the two #1295 narrow approvals. Includes source witnesses, local numeric diagnoses and source-relative physical classes that do not resolve whole-component surface truth."
+    }
+  }
+}
