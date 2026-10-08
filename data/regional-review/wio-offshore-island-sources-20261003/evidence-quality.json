@@ -80,6 +80,30 @@
         "bytes": 280454,
         "sha256": "d55b07ec655b78bab31bb8d641a5e080a787fa5fb3a8ee2f3c5cdeacc6a3d1b0",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/sources/geoBoundaries-MUS-ADM1-2017.geojson",
+        "bytes": 429365,
+        "sha256": "fd3c09513dba7df021ed0f7bd2b05d187932155c99027b4dcc1c90ef8ee554c3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/sources/geoBoundaries-SYC-ADM2-2020.geojson",
+        "bytes": 21057454,
+        "sha256": "fc53d69a99b7cadd481c2fa6bcabe36f7138172464ceadf83af382881e3f817a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/sources/natural-earth-10m-admin1-selected.geojson",
+        "bytes": 19491,
+        "sha256": "eb0fac5a0668edd68e5fdf3700de3941ee98551bcf0c00b1eb33e334be7ac496",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {},
@@ -126,7 +150,7 @@
       "verification": "verified",
       "temporal_status": "reference",
       "restoration": "data/regional-review/regional-review-4f180b98473f1071/sources/geoBoundaries-MUS-ADM1-2017.geojson",
-      "limit": "The source calls its 12 records districts and outer islands. It is not a physical island/reef catalogue; the issue scope includes nine Mauritius Island districts plus Rodrigues, St Brandon, and Agaléga."
+      "limit": "The source calls its 12 records districts and outer islands. It is not a physical island/reef catalogue; the issue scope includes nine Mauritius Island districts plus Rodrigues, St Brandon, and Agal\u00e9ga."
     },
     {
       "id": "gb:SYC:ADM2",
@@ -189,7 +213,7 @@
       "retention": "restoration-only",
       "verification": "verified",
       "temporal_status": "unknown",
-      "restoration": "Request current official vector district/outer-island data from the Cartographic Section and obtain the sale agreement/reuse terms; official chart catalogue includes St Brandon and Agaléga charts.",
+      "restoration": "Request current official vector district/outer-island data from the Cartographic Section and obtain the sale agreement/reuse terms; official chart catalogue includes St Brandon and Agal\u00e9ga charts.",
       "limit": "The page describes available product classes, not exact vector coverage, chart shoreline completeness, or a no-cost redistribution permission."
     },
     {
@@ -206,7 +230,7 @@
       "verification": "verified",
       "temporal_status": "unknown",
       "restoration": "Reopen the cited official page; save its exact retrieval date, version and reuse terms before further use.",
-      "limit": "Government text describes the Cargados Carajos reef as a variable group of roughly 40 low islets, coral reefs and shoals; different pages identify named islets and state that shifting sands/storms change counts. Agaléga is described as two main islands encircled by a reef."
+      "limit": "Government text describes the Cargados Carajos reef as a variable group of roughly 40 low islets, coral reefs and shoals; different pages identify named islets and state that shifting sands/storms change counts. Agal\u00e9ga is described as two main islands encircled by a reef."
     },
     {
       "id": "Mauritius:ONSDI-districts",
@@ -330,7 +354,7 @@
       "verification": "verified",
       "temporal_status": "reference",
       "restoration": "Restore the exact metadata record, named WMS capabilities/layer, and per-island prepackages through Shom's distribution service; inspect actual tile metadata and original lawful source files before drawing any completeness conclusion.",
-      "limit": "Scale-appropriate source availability does not prove all named atolls, intertidal rocks, reefs or current shorelines are present. Geyser reef, emergent land, and the full TAAF island-group roster need explicit tile membership and crosswalk."
+      "limit": "The official WMS envelope lies east of the current ATF-5919 record bbox western edge by 0.627298691 degrees. This envelope comparison does not establish absent tile data or physical completeness."
     },
     {
       "id": "Shom:LitTo3D-Mayotte-2012",
@@ -346,13 +370,13 @@
       "verification": "verified",
       "temporal_status": "reference",
       "restoration": "https://services.data.shom.fr/geonetwork/adm/api/records/BATHYMETRIE_LITTO3D_MAYOT_2012.xml",
-      "limit": "The product-level coastal source is a candidate for Mayotte's shoreline and reefs, but exact coverage of each current island/reef feature and acquisition dates remains unverified."
+      "limit": "The current FRA-4602 bbox is enclosed by the official layer envelope, which does not prove raster coverage or island/reef completeness."
     },
     {
       "id": "Shom:LitTo3D-Reunion-2016",
       "url": "https://services.data.shom.fr/geonetwork/system/api/records/BATHYMETRIE_LITTO3D_REUNION_2016.xml",
       "role": "high-resolution coastal elevation candidate; shoreline baseline only",
-      "vintage": "Litto3D Réunion 2016 edition; official metadata reports bathymetric surveys in 2009-2010 and topographic surveys in 2008-2009",
+      "vintage": "Litto3D R\u00e9union 2016 edition; official metadata reports bathymetric surveys in 2009-2010 and topographic surveys in 2008-2009",
       "retrieved_at": "2026-10-07",
       "license": {
         "status": "redistributable",
@@ -362,7 +386,7 @@
       "verification": "verified",
       "temporal_status": "reference",
       "restoration": "https://services.data.shom.fr/geonetwork/system/api/records/BATHYMETRIE_LITTO3D_REUNION_2016.xml",
-      "limit": "2016 product title masks 2008-2010 acquisition epochs; this is not a 2026 shoreline or settlement snapshot. Survey footprints and source masks must be checked before coastline comparison."
+      "limit": "The official WMS envelope ends 0.010225303 degrees west of the current FRA-4601 bbox; this does not prove raster data are missing. Acquisition epochs and tile/source masks remain unverified."
     }
   ],
   "outputs": [
@@ -374,20 +398,20 @@
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/source-inventory.json",
-      "bytes": 22170,
-      "sha256": "6c80ac20c8601c4f5b4ec07b07352f75f5d831f620842d9d317ffa83f3b9ad66",
+      "bytes": 24302,
+      "sha256": "28dc947a5668efb04dc1d9b1934b6962d1d9d40ce9c8910f5150211a6b401388",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/README.md",
-      "bytes": 9592,
-      "sha256": "4cee6ec11be2b53be67b9bb27d56c5715e3f2de4a92001d209f71d72e1651c05",
+      "bytes": 10867,
+      "sha256": "a82f08cae23a031d70d3fb86d8fddb89e6c5170719f3c6911639f75c822ea315",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/wio-offshore-island-sources-20261003/reproduce.py",
-      "bytes": 23159,
-      "sha256": "5d5207fc089949f74b686d6ae35a729e1452830c267132e65ab31cf958070300",
+      "bytes": 30772,
+      "sha256": "957e338a6a9d43a40d4be736f25b76b8cceec650289c4360ff4b4e0858cc3ff6",
       "hash_kind": "file-bytes"
     },
     {
@@ -407,6 +431,60 @@
       "bytes": 10405,
       "sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/test_reproduce_safety.py",
+      "bytes": 3516,
+      "sha256": "cada6789a22cafedb033888ce023fbccf483220d65c37c6bd7f38547c123291d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/district-comparison.json",
+      "bytes": 10925,
+      "sha256": "5cb42ed25fb57f06408a6e7f08ccd0543bc794ca5b73dd3142dc00f754064501",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/publication.json",
+      "bytes": 730,
+      "sha256": "b22269878c7221a7afc0698c82adafab4b7e43b087b8359912f2c74ad5b0a293",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/results.json",
+      "bytes": 12519,
+      "sha256": "5ddb7ec3c374dcd31abd82341341867baa5eacb29f26a738eeb847e5239a7b11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-a/subject-findings.json",
+      "bytes": 73632,
+      "sha256": "6ea51c4b75901e6cf1b1a455d5ad78c1c0173b0102ca5c3f79db326788521289",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/district-comparison.json",
+      "bytes": 10925,
+      "sha256": "5cb42ed25fb57f06408a6e7f08ccd0543bc794ca5b73dd3142dc00f754064501",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/publication.json",
+      "bytes": 730,
+      "sha256": "62e5c84f6879fc662e3723848d7b5355984246a652782996d07ead2098256394",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/results.json",
+      "bytes": 12519,
+      "sha256": "5ddb7ec3c374dcd31abd82341341867baa5eacb29f26a738eeb847e5239a7b11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/vintages/20261008-run-b/subject-findings.json",
+      "bytes": 73632,
+      "sha256": "6ea51c4b75901e6cf1b1a455d5ad78c1c0173b0102ca5c3f79db326788521289",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -424,7 +502,7 @@
       "units": "percent of union polygon area",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:32740/CRS84 transformed to EPSG:6933 using always_xy",
-      "area_method": "planar overlay in equal-area EPSG:6933; symmetric difference divided by union area × 100",
+      "area_method": "planar overlay in equal-area EPSG:6933; symmetric difference divided by union area \u00d7 100",
       "distance_method": "none"
     }
   ],
@@ -524,6 +602,30 @@
       "vintage": "current",
       "input_sha256": "6b52ebbfc8f33a807fc33819e01ff918ab4b08cd1e13d065f0b6d602e99f0796",
       "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Shom-Eparses-product-envelope-west-excess",
+      "value": 0.627298691,
+      "unit": "degrees longitude",
+      "vintage": "current",
+      "input_sha256": "5cb42ed25fb57f06408a6e7f08ccd0543bc794ca5b73dd3142dc00f754064501",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Shom-Reunion-product-envelope-east-excess",
+      "value": 0.010225303,
+      "unit": "degrees longitude",
+      "vintage": "current",
+      "input_sha256": "5cb42ed25fb57f06408a6e7f08ccd0543bc794ca5b73dd3142dc00f754064501",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Shom-product-envelope-contained-targets",
+      "value": 1,
+      "unit": "of 3 target footprints",
+      "vintage": "current",
+      "input_sha256": "5cb42ed25fb57f06408a6e7f08ccd0543bc794ca5b73dd3142dc00f754064501",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
     }
   ],
   "summaries": [
@@ -617,7 +719,7 @@
       ]
     },
     {
-      "text": "St Brandon membership, Agaléga cross-source physical membership, Seychelles Other Islands component crosswalk, exact Litto3D target-island footprints, and current complete settlement coverage remain unresolved.",
+      "text": "St Brandon membership, Agal\u00e9ga cross-source physical membership, Seychelles Other Islands component crosswalk, exact Litto3D target-island footprints, and current complete settlement coverage remain unresolved.",
       "status": "unresolved",
       "source_ids": [
         "Mauritius:OIDC-outer-island-descriptions",

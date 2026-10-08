@@ -123,14 +123,46 @@
       "features": 8,
       "retrieval_date": "2026-10-07 America/Los_Angeles",
       "recorded_features": [
-        {"name": "Rocher des Oiseaux", "longitude": 57.7897018, "latitude": -20.3802518},
-        {"name": "Île d'Ambre", "longitude": 57.6949999999999, "latitude": -20.0336111},
-        {"name": "Île aux Flamants", "longitude": 57.8172688, "latitude": -20.3222841},
-        {"name": "Ile aux Oiseaux", "longitude": 57.8142202, "latitude": -20.3273594},
-        {"name": "Île aux Fouquets", "longitude": 57.7776885000001, "latitude": -20.3953836},
-        {"name": "Île aux Fous", "longitude": 57.7878842, "latitude": -20.3828876},
-        {"name": "Île aux Vacoas", "longitude": 57.770278, "latitude": -20.397778},
-        {"name": "Pigeon House Rock", "longitude": 57.657187, "latitude": -19.8627977}
+        {
+          "name": "Rocher des Oiseaux",
+          "longitude": 57.7897018,
+          "latitude": -20.3802518
+        },
+        {
+          "name": "Île d'Ambre",
+          "longitude": 57.6949999999999,
+          "latitude": -20.0336111
+        },
+        {
+          "name": "Île aux Flamants",
+          "longitude": 57.8172688,
+          "latitude": -20.3222841
+        },
+        {
+          "name": "Ile aux Oiseaux",
+          "longitude": 57.8142202,
+          "latitude": -20.3273594
+        },
+        {
+          "name": "Île aux Fouquets",
+          "longitude": 57.7776885000001,
+          "latitude": -20.3953836
+        },
+        {
+          "name": "Île aux Fous",
+          "longitude": 57.7878842,
+          "latitude": -20.3828876
+        },
+        {
+          "name": "Île aux Vacoas",
+          "longitude": 57.770278,
+          "latitude": -20.397778
+        },
+        {
+          "name": "Pigeon House Rock",
+          "longitude": 57.657187,
+          "latitude": -19.8627977
+        }
       ],
       "restoration": "Restore from the exact ONSDI WFS request and preserve the ODbL attribution. Recheck the current portal record and exact response hash.",
       "completeness_limit": "The layer title/abstract says it contains eight islet national parks, and its published footprint is around Mauritius Island. It is a protected-park POI subset; it cannot settle St Brandon or Agaléga islet membership or demonstrate island/settlement completeness."
@@ -146,13 +178,45 @@
       "retrieval_date": "2026-10-07",
       "facts": "The announcement groups 27 named district administration areas into seven Regional Councils (North, Central 1, Central 2, East, South, West, Inner Islands). These seven councils are an administrative grouping level, not direct aliases for the eight geoBoundaries ADM2 `Regions`.",
       "regional_council_groupings": {
-        "North": ["Bel Ombre", "Beau Vallon", "Glacis", "Anse Etoile"],
-        "Central 1": ["St Louis", "Bel Air", "Mt Buxton", "English River"],
-        "Central 2": ["Mont Fleuri", "Plaisance", "Roche Caiman", "Les Mamelles"],
-        "East": ["Cascade", "Pointe Larue", "Anse Aux Pins"],
-        "South": ["Au Cap", "Anse Royale", "Takamaka"],
-        "West": ["Baie Lazare", "Anse Boileau", "Grand Anse Mahe", "Port Glaud"],
-        "Inner Islands": ["La Digue", "Grand Anse Praslin", "Baie Ste Anne"]
+        "North": [
+          "Bel Ombre",
+          "Beau Vallon",
+          "Glacis",
+          "Anse Etoile"
+        ],
+        "Central 1": [
+          "St Louis",
+          "Bel Air",
+          "Mt Buxton",
+          "English River"
+        ],
+        "Central 2": [
+          "Mont Fleuri",
+          "Plaisance",
+          "Roche Caiman",
+          "Les Mamelles"
+        ],
+        "East": [
+          "Cascade",
+          "Pointe Larue",
+          "Anse Aux Pins"
+        ],
+        "South": [
+          "Au Cap",
+          "Anse Royale",
+          "Takamaka"
+        ],
+        "West": [
+          "Baie Lazare",
+          "Anse Boileau",
+          "Grand Anse Mahe",
+          "Port Glaud"
+        ],
+        "Inner Islands": [
+          "La Digue",
+          "Grand Anse Praslin",
+          "Baie Ste Anne"
+        ]
       },
       "completeness_limit": "The council roster provides no polygons or current statutory Region-to-island crosswalk. It cannot decide the current parent-label differences."
     },
@@ -234,7 +298,15 @@
       "wms_capabilities_sha256": "ed53a1b8fb9ffa50b811e30fa65f5e498f1945153355f539fdeba1755495efbd",
       "distribution_portal": "https://diffusion.shom.fr/ (observed sign-in/create-account requirement for distribution portal)",
       "restoration": "Restore the exact metadata record, named WMS capabilities/layer, and per-island prepackages through Shom's distribution service; inspect actual tile metadata and original lawful source files before drawing any completeness conclusion.",
-      "completeness_limit": "Scale-appropriate source availability does not prove all named atolls, intertidal rocks, reefs or current shorelines are present. Geyser reef, emergent land, and the full TAAF island-group roster need explicit tile membership and crosswalk."
+      "completeness_limit": "Its official WMS metadata envelope excludes the western edge of the current ATF-5919 bounding box by about 0.6273 degrees longitude. This is a product-envelope warning, not proof of absent tile data; no exact tile/source-mask or full land/reef crosswalk was checked.",
+      "wms_capabilities_bytes": 312234,
+      "wms_reported_geographic_bbox_wgs84": {
+        "west": 40.320641309,
+        "east": 54.543871677,
+        "south": -22.411500985,
+        "north": -11.442670153
+      },
+      "wms_bbox_source": "EX_GeographicBoundingBox for the named layer in the exact retained-response hash above; bounding envelope, not per-tile data availability."
     },
     {
       "id": "Shom:LitTo3D-Mayotte-2012",
@@ -246,7 +318,16 @@
       "record_response_bytes": 37048,
       "record_read_date": "2026-10-07",
       "wms_layer": "LITTO3D_MAYOT_2012_PYR_3857_WMSR",
-      "completeness_limit": "The product-level coastal source is a candidate for Mayotte's shoreline and reefs, but exact coverage of each current island/reef feature and acquisition dates remains unverified."
+      "completeness_limit": "The current FRA-4602 record bounding box is enclosed by the advertised WMS layer envelope, but the extent does not prove data pixels, per-island tile coverage, source acquisition dates, or a complete reef inventory.",
+      "wms_capabilities_sha256": "ed53a1b8fb9ffa50b811e30fa65f5e498f1945153355f539fdeba1755495efbd",
+      "wms_capabilities_bytes": 312234,
+      "wms_reported_geographic_bbox_wgs84": {
+        "west": 44.917122953,
+        "east": 45.31324406,
+        "south": -13.080131327,
+        "north": -12.51044844
+      },
+      "wms_bbox_source": "EX_GeographicBoundingBox for the named layer in the exact retained-response hash above; bounding envelope, not per-tile data availability."
     },
     {
       "id": "Shom:LitTo3D-Reunion-2016",
@@ -258,7 +339,16 @@
       "record_response_bytes": 36971,
       "record_read_date": "2026-10-07",
       "wms_layer": "LITTO3D_REUNION_2016_PYR_3857_WMSR",
-      "completeness_limit": "2016 product title masks 2008-2010 acquisition epochs; this is not a 2026 shoreline or settlement snapshot. Survey footprints and source masks must be checked before coastline comparison."
+      "completeness_limit": "The official WMS metadata envelope ends about 0.0102 degrees west of the current FRA-4601 record bounding box. This is a product-envelope warning, not proof of absent tile data; survey footprints, source masks, and 2008-2010 acquisition epochs remain unverified.",
+      "wms_capabilities_sha256": "ed53a1b8fb9ffa50b811e30fa65f5e498f1945153355f539fdeba1755495efbd",
+      "wms_capabilities_bytes": 312234,
+      "wms_reported_geographic_bbox_wgs84": {
+        "west": 55.199844279,
+        "east": 55.844277697,
+        "south": -21.399809142,
+        "north": -20.847097483
+      },
+      "wms_bbox_source": "EX_GeographicBoundingBox for the named layer in the exact retained-response hash above; bounding envelope, not per-tile data availability."
     }
   ],
   "sources_not_retained_due_to_reuse_or_scope": [

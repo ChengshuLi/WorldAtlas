@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import re
 import unicodedata
@@ -16,8 +17,10 @@ from shapely.ops import transform
 PACKET = Path(__file__).resolve().parent
 ROOT = next(parent for parent in PACKET.parents if (parent / "AGENTS.md").is_file())
 PARENT = ROOT / "data/regional-review/regional-review-4f180b98473f1071"
-SCOPE = json.loads((PACKET / "scope.json").read_text(encoding="utf-8"))
-EXPECTED_SUBJECTS = set(SCOPE["subjects"])
+BASELINE = None
+CANDIDATE_BYTES = {}
+SCOPE = None
+EXPECTED_SUBJECTS = set()
 
 MUS_DISTRICT_NAMES = {
     "black river", "flacq", "grand port", "moka", "pamplemousses",
@@ -25,16 +28,20 @@ MUS_DISTRICT_NAMES = {
 }
 
 
+def input_bytes(path: Path) -> bytes:
+    relative = path.resolve(strict=True).relative_to(ROOT.resolve()).as_posix()
+    if relative in CANDIDATE_BYTES:
+        return CANDIDATE_BYTES[relative]
+    require(BASELINE is not None, "immutable baseline reader was not initialized")
+    return BASELINE.materialized_bytes(relative)
+
+
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+    return hashlib.sha256(input_bytes(path)).hexdigest()
 
 
 def read_json(path: Path):
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(input_bytes(path).decode("utf-8"))
 
 
 def norm(value: str) -> str:
@@ -48,8 +55,73 @@ def require(condition: bool, message: str) -> None:
 
 
 def main() -> None:
+    global BASELINE, CANDIDATE_BYTES, SCOPE, EXPECTED_SUBJECTS
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--vintage", required=True,
+                        help="fresh lower-case run name under this packet's vintages/ directory")
+    parser.add_argument("--simulate-post-computation-failure", action="store_true",
+                        help=argparse.SUPPRESS)
+    args = parser.parse_args()
+
+    manifest_path = PACKET / "evidence-quality.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    require(manifest.get("issue") == 633 and manifest.get("lane") == "geography",
+            "evidence manifest must bind this #633 geography packet")
+    require(manifest.get("worker_id") == "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+            "evidence manifest must bind the serialized worker")
+    baseline_spec = manifest["baseline"]
+    helper_path = "scripts/evidence/immutable.py"
+    helper_pin = next((row for row in baseline_spec["files"] if row["path"] == helper_path), None)
+    require(helper_pin is not None, "shared immutable evidence helper must be pinned")
+    # Load the writer from the immutable baseline bytes, never from an unchecked
+    # working-tree import.  The manifest pins the complete helper file.
+    namespace = {"__builtins__": __builtins__, "__name__": "evidence.immutable"}
+    helper_raw = __import__("subprocess").check_output(
+        ["git", "-C", str(ROOT), "show", f"{baseline_spec['commit']}:{helper_path}"])
+    require(hashlib.sha256(helper_raw).hexdigest() == helper_pin["sha256"],
+            "pinned immutable helper hash differs from the evidence manifest")
+    exec(compile(helper_raw, helper_path, "exec"), namespace)
+    BaselineClass = namespace["Baseline"]
+    BASELINE = BaselineClass(ROOT, baseline_spec["commit"], baseline_spec["files"])
+
+    def admit_candidate(file):
+        relative = file["path"]
+        require(relative.startswith("data/regional-review/wio-offshore-island-sources-20261003/"),
+                "candidate inputs must stay inside the issue-owned packet")
+        target = ROOT / relative
+        for ancestor in [target, *target.parents]:
+            if ancestor == ROOT.parent:
+                break
+            require(not ancestor.is_symlink(), f"symlink in candidate input path: {relative}")
+        raw = target.read_bytes()
+        require(len(raw) == file["bytes"] and hashlib.sha256(raw).hexdigest() == file["sha256"],
+                f"candidate input differs from its evidence descriptor: {relative}")
+        BASELINE.admit(relative, len(raw))
+        CANDIDATE_BYTES[relative] = raw
+
+    scope_descriptor = next(row for row in manifest["outputs"] if row["path"].endswith("/scope.json"))
+    inventory_descriptor = next(row for row in manifest["outputs"] if row["path"].endswith("/source-inventory.json"))
+    for descriptor in [scope_descriptor, inventory_descriptor]:
+        admit_candidate(descriptor)
+    for source in manifest["sources"]:
+        for descriptor in source.get("files", []):
+            admit_candidate(descriptor)
+
+    # The owned candidate inventory supplies fixed source metadata, including
+    # official service envelopes; retain its exact bytes/hash as an input.
+    scope_relative = scope_descriptor["path"]
+    inventory_relative = inventory_descriptor["path"]
+    SCOPE = read_json(ROOT / scope_relative)
+    owned_inventory = read_json(ROOT / inventory_relative)
+    EXPECTED_SUBJECTS = set(SCOPE["subjects"])
     require(SCOPE["issue"] == 633 and len(EXPECTED_SUBJECTS) == 24,
             "scope must contain exactly the 24 declared #633 subjects")
+    require(SCOPE["baseline_commit"] == BASELINE.commit,
+            "scope evaluation commit differs from the immutable baseline")
+
+    writer = namespace["NewVintage"](
+        BASELINE, SCOPE["owned_path"], args.vintage,
+        ["subject-findings.json", "district-comparison.json", "results.json"])
 
     inventory_path = PARENT / "subject-inventory.jsonl"
     source_registry_path = PARENT / "sources.json"
@@ -89,6 +161,38 @@ def main() -> None:
                 current[identity] = feature
     require(set(current) == EXPECTED_SUBJECTS,
             "current geography containing files must resolve all 24 exact subjects once")
+
+    # Compare current record envelopes with the official WMS metadata envelopes.
+    # This is a coarse extent screen, not proof of raster or tile availability.
+    shom_subjects = {
+        "atlas:coverage:ATF-5919": "Shom:LitTo3D-Eparses-2012",
+        "atlas:coverage:FRA-4602": "Shom:LitTo3D-Mayotte-2012",
+        "atlas:coverage:FRA-4601": "Shom:LitTo3D-Reunion-2016",
+    }
+    source_by_id = {row["id"]: row for row in owned_inventory["sources"]}
+    shom_extent_screen = []
+    for subject_id, source_id in shom_subjects.items():
+        source = source_by_id[source_id]
+        advertised = source["wms_reported_geographic_bbox_wgs84"]
+        west, south, east, north = shape(current[subject_id]["geometry"]).bounds
+        inside = (west >= advertised["west"] and east <= advertised["east"] and
+                  south >= advertised["south"] and north <= advertised["north"])
+        outside_edges = {}
+        if west < advertised["west"]: outside_edges["west_degrees"] = advertised["west"] - west
+        if east > advertised["east"]: outside_edges["east_degrees"] = east - advertised["east"]
+        if south < advertised["south"]: outside_edges["south_degrees"] = advertised["south"] - south
+        if north > advertised["north"]: outside_edges["north_degrees"] = north - advertised["north"]
+        shom_extent_screen.append({
+            "subject_id": subject_id,
+            "source_id": source_id,
+            "current_record_bbox_wgs84": {"west": west, "south": south, "east": east, "north": north},
+            "advertised_wms_bbox_wgs84": advertised,
+            "record_bbox_inside_wms_envelope": inside,
+            "record_bbox_outside_edges_degrees": outside_edges,
+            "interpretation_limit": "Metadata envelope comparison only; does not prove raster/tile acquisition or physical completeness.",
+        })
+    require({row["subject_id"] for row in shom_extent_screen} == set(shom_subjects),
+            "Shom envelope screen must cover every listed Litto3D target")
 
     geometry_comparison = read_json(prior_geometry_path)
     gb_rows = geometry_comparison["geoBoundaries_location_comparisons"]["per_location"]
@@ -188,6 +292,9 @@ def main() -> None:
             item["agalega_finding"] = "This Public Domain Natural Earth named dependency record remains distinct from the two-component ODbL/OSM geoBoundaries ADM1 record; it is not a substitute for reef/island completeness."
         if identity.startswith("atlas:coverage:") and identity != "atlas:coverage:MUS-5180":
             item["physical_source_finding"] = "Natural Earth 1:10m named territory/dependency geometry reproduces the current feature closely but does not establish a current emergent-land or reef inventory. Shom/IGN Litto3D is a lawful scale-appropriate candidate; exact island/tile crosswalk is still required."
+            match = next((row for row in shom_extent_screen if row["subject_id"] == identity), None)
+            if match:
+                item["shom_wms_extent_screen"] = match
         issue_rows.append(item)
 
     district_path = PACKET / "sources/mauritius_districts-20261008.geojson"
@@ -291,13 +398,14 @@ def main() -> None:
             "features": parks,
             "interpretation": "A protected-islet point subset near Mauritius Island, not a physical land inventory or evidence for St Brandon/Agaléga."
         },
+        "shom_wms_extent_screen": shom_extent_screen,
         "seychelles_current_parent_mismatches_against_2019_reference": syc_mismatches,
         "cross_scope_findings": [
             "St Brandon and Natural Earth Agaléga GSHHG level-1 non-intersections are insufficient-resolution non-detections, not evidence of absence.",
             "Natural Earth Agaléga MUS-5180 and the geoBoundaries Agaléga ADM1 are distinct disjoint records with different source roles. Keep both IDs and preserve their separate pins pending a physical island-to-record crosswalk.",
             "The SeyMSP API count and grouped records are source lead observations, not island counts; underlying licenseInfo is blank and no polygons are retained.",
             "No current official, licensed geocoded settlement inventory for the complete 24-subject scope was found. Census/statistical localities are names or administrative records, not complete settlement coordinate data.",
-            "Shom/IGN Litto3D is an openly licensed high-resolution source candidate for Eparses, Mayotte, and Réunion, but acquired tile footprints and individual island coverage remain unverified."
+            "Shom/IGN Litto3D is an openly licensed high-resolution source candidate for Eparses, Mayotte, and Réunion. Official WMS metadata envelopes enclose the current Mayotte record bbox, but the current Iles Éparses and Réunion record bboxes extend outside their product envelopes; these are extent warnings, not proof of missing data or acquired-tile coverage."
         ],
         "next_actions": [
             "Crosswalk every Eparses, Mayotte, and Réunion target feature to licensed Shom/IGN tile footprints, source masks, acquisition dates, and emergent-land/reef records.",
@@ -306,7 +414,7 @@ def main() -> None:
             "Obtain a dated, licensed geocoded settlement/locality source for all assigned territories, or retain the explicit scoped no-source outcome."
         ]
     }
-    findings_path.write_text(json.dumps(findings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    findings_bytes = (json.dumps(findings, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
 
     input_paths = {
         "scope.json": PACKET / "scope.json",
@@ -347,6 +455,7 @@ def main() -> None:
             "2019_seychelles_adm3_rows": crosswalk["ADM3_district_rows_in_full_reference"]
         },
         "district_comparisons": district_rows,
+        "shom_wms_extent_screen": shom_extent_screen,
         "islet_park_points": parks,
         "retained_parent_scope_comparison_record_count": len(prior_metrics),
         "predecessor_settlement_scope": {
@@ -357,28 +466,54 @@ def main() -> None:
             "named_island_territory_outcome": settlement_review["settlement_disposition"]["Natural Earth island/department units"]
         },
         "input_sha256": {name: sha256(path) for name, path in input_paths.items()},
-        "output_sha256": {
-            "subject-findings.json": sha256(findings_path)
-        }
+        "output_sha256": {}
     }
-    (PACKET / "district-comparison.json").write_text(
-        json.dumps({"version": 1, "method": comparison["method"], "input_sha256": comparison["input_sha256"],
-                    "district_comparisons": district_rows, "park_points": parks},
-                   ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    comparison["output_sha256"]["district-comparison.json"] = sha256(PACKET / "district-comparison.json")
-    (PACKET / "results.json").write_text(json.dumps(comparison, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    district_document = {
+        "version": 1,
+        "method": comparison["method"],
+        "input_sha256": comparison["input_sha256"],
+        "district_comparisons": district_rows,
+        "park_points": parks,
+        "shom_wms_extent_screen": shom_extent_screen,
+    }
+    district_bytes = (json.dumps(district_document, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    comparison["output_sha256"] = {
+        "subject-findings.json": hashlib.sha256(findings_bytes).hexdigest(),
+        "district-comparison.json": hashlib.sha256(district_bytes).hexdigest(),
+    }
+    results_bytes = (json.dumps(comparison, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    if args.simulate_post_computation_failure:
+        raise SystemExit("SIMULATED: failed after computation and before publication")
+    records = writer.publish_bytes({
+        "subject-findings.json": findings_bytes,
+        "district-comparison.json": district_bytes,
+        "results.json": results_bytes,
+    })
+    receipt_path = writer.root / "publication.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    require(receipt.get("version") == 1 and receipt.get("status") == "complete" and
+            receipt.get("outputs") == records,
+            "fresh run completion receipt does not match the complete output set")
+    for record in records:
+        output_path = ROOT / record["path"]
+        raw = output_path.read_bytes()
+        require(len(raw) == record["bytes"] and hashlib.sha256(raw).hexdigest() == record["sha256"],
+                "published run output differs from its completion receipt")
     print(json.dumps({
         "status": "reproduced",
+        "vintage": args.vintage,
+        "publication": receipt_path.relative_to(ROOT).as_posix(),
         "issue_subjects": len(issue_rows),
         "current_subjects_resolved": len(current),
         "mauritius_district_names": len(district_rows),
         "valid_geometry_comparisons": 27,
+        "shom_bbox_inside_by_target": {row["subject_id"]: row["record_bbox_inside_wms_envelope"] for row in shom_extent_screen},
         "district_symdiff_range_percent": [
             min(row["govmu_against_2017_geoboundaries"]["symmetric_difference_percent_of_union"] for row in district_rows),
             max(row["govmu_against_2017_geoboundaries"]["symmetric_difference_percent_of_union"] for row in district_rows)
         ],
         "finding_count": len(issue_rows),
-        "outputs": ["subject-findings.json", "district-comparison.json", "results.json"]
+        "outputs": [record["path"] for record in records],
     }, indent=2))
 
 

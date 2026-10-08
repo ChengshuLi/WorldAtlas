@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "scope_issue": 633,
+  "baseline_commit": "c90773357da171d97367332cb53154da95796bff",
+  "method": {
+    "geometry": "Shapely 2.1.2 valid source/current polygon overlay; EPSG:6933 equal-area area operations",
+    "source_crs": "GeoBoundary/Natural Earth current and source GeoJSON CRS84 is read as longitude-latitude; ONSDI Mauritius districts transform from retained EPSG:32740 via pyproj 3.7.2",
+    "axis_order": "longitude-latitude; all transforms use always_xy=True",
+    "repair_policy": "No geometry repair, simplification, or reprojection relabeling. All 27 polygons compared here were valid.",
+    "crosswalk": "The nine administrative names use a unique Unicode NFKD, case/punctuation-normalized exact equality; no fuzzy match or centroid inference.",
+    "limits": "Symmetric difference is a source-comparison triage metric; a matching name or valid geometry does not prove legal authority, correct role, contemporaneity, complete islands, coastline accuracy, or settlement completeness. Retained #482 all-scope comparisons are read as immutable inputs, not freshly rerun by this script."
+  },
+  "counts": {
+    "issue_subjects": 24,
+    "matched_current_features": 24,
+    "retained_2017_mauritius_source_features": 12,
+    "retained_2020_seychelles_source_features": 8,
+    "onsdi_mauritius_district_features": 9,
+    "onsdi_islet_park_points": 8,
+    "2019_seychelles_regions": 8,
+    "2019_seychelles_adm3_rows": 27
+  },
+  "district_comparisons": [
+    {
+      "name": "Black River",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B99203907341133",
+      "govmu_wfs_fid": "districts.1",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.5525527125363542,
+        "relative_area_change_percent": -0.2701405939008694
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 7.677068351101781,
+        "relative_area_change_percent": -3.657534450791422
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Flacq",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B3325932502431",
+      "govmu_wfs_fid": "districts.2",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.3590208783676938,
+        "relative_area_change_percent": -0.11933655068108173
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 3.6182516751081732,
+        "relative_area_change_percent": 0.4155555316877724
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Grand Port",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B660734165567",
+      "govmu_wfs_fid": "districts.3",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.2967994406823987,
+        "relative_area_change_percent": 0.13411534411675863
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 3.909273937704421,
+        "relative_area_change_percent": -0.16082947715857498
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Moka",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B64352145242214",
+      "govmu_wfs_fid": "districts.4",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.00047730672784465525,
+        "relative_area_change_percent": -0.0004762617906939326
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 2.303630552475344,
+        "relative_area_change_percent": 0.8831041021267527
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Pamplemousses",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B91551715822340",
+      "govmu_wfs_fid": "districts.5",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.0963641033295983,
+        "relative_area_change_percent": 0.02598716098050069
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 4.396912384181242,
+        "relative_area_change_percent": -2.4290212002539224
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Plaines Wilhems",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B21568199301359",
+      "govmu_wfs_fid": "districts.6",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.000569122611307414,
+        "relative_area_change_percent": 0.0005677999471043194
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 6.137146721979495,
+        "relative_area_change_percent": 1.7661222545702904
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Port Louis",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B53255720811613",
+      "govmu_wfs_fid": "districts.7",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 1.351558102259288,
+        "relative_area_change_percent": -1.0809085182899136
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 9.503010083212178,
+        "relative_area_change_percent": 0.7051983732689449
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Riviere du Rempart",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B93227578092779",
+      "govmu_wfs_fid": "districts.8",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.5274382874006149,
+        "relative_area_change_percent": 0.29000835890196086
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 4.401579941699892,
+        "relative_area_change_percent": 0.04562112760850834
+      },
+      "invalid_geometries": 0
+    },
+    {
+      "name": "Savanne",
+      "issue_subject_id": "gb:MUS:ADM1:65221844B93866494923153",
+      "govmu_wfs_fid": "districts.9",
+      "crosswalk": "unique accent/case/punctuation-normalized exact name",
+      "govmu_against_2017_geoboundaries": {
+        "symmetric_difference_percent_of_union": 0.1276588848109845,
+        "relative_area_change_percent": 0.030485263972934717
+      },
+      "current_atlas_against_govmu": {
+        "symmetric_difference_percent_of_union": 3.1818787065916165,
+        "relative_area_change_percent": -0.161125679145524
+      },
+      "invalid_geometries": 0
+    }
+  ],
+  "shom_wms_extent_screen": [
+    {
+      "subject_id": "atlas:coverage:ATF-5919",
+      "source_id": "Shom:LitTo3D-Eparses-2012",
+      "current_record_bbox_wgs84": {
+        "west": 39.69394,
+        "south": -22.365492,
+        "east": 54.521332,
+        "north": -11.550632
+      },
+      "advertised_wms_bbox_wgs84": {
+        "west": 40.320641309,
+        "east": 54.543871677,
+        "south": -22.411500985,
+        "north": -11.442670153
+      },
+      "record_bbox_inside_wms_envelope": false,
+      "record_bbox_outside_edges_degrees": {
+        "west_degrees": 0.6267013090000049
+      },
+      "interpretation_limit": "Metadata envelope comparison only; does not prove raster/tile acquisition or physical completeness."
+    },
+    {
+      "subject_id": "atlas:coverage:FRA-4602",
+      "source_id": "Shom:LitTo3D-Mayotte-2012",
+      "current_record_bbox_wgs84": {
+        "west": 45.042491,
+        "south": -12.98919,
+        "east": 45.290863,
+        "north": -12.647231
+      },
+      "advertised_wms_bbox_wgs84": {
+        "west": 44.917122953,
+        "east": 45.31324406,
+        "south": -13.080131327,
+        "north": -12.51044844
+      },
+      "record_bbox_inside_wms_envelope": true,
+      "record_bbox_outside_edges_degrees": {},
+      "interpretation_limit": "Metadata envelope comparison only; does not prove raster/tile acquisition or physical completeness."
+    },
+    {
+      "subject_id": "atlas:coverage:FRA-4601",
+      "source_id": "Shom:LitTo3D-Reunion-2016",
+      "current_record_bbox_wgs84": {
+        "west": 55.225434,
+        "south": -21.370782,
+        "east": 55.854503,
+        "north": -20.861423
+      },
+      "advertised_wms_bbox_wgs84": {
+        "west": 55.199844279,
+        "east": 55.844277697,
+        "south": -21.399809142,
+        "north": -20.847097483
+      },
+      "record_bbox_inside_wms_envelope": false,
+      "record_bbox_outside_edges_degrees": {
+        "east_degrees": 0.010225302999998576
+      },
+      "interpretation_limit": "Metadata envelope comparison only; does not prove raster/tile acquisition or physical completeness."
+    }
+  ],
+  "islet_park_points": [
+    {
+      "name": "Rocher des Oiseaux",
+      "longitude": 57.7897018,
+      "latitude": -20.3802518
+    },
+    {
+      "name": "Île d'Ambre",
+      "longitude": 57.695,
+      "latitude": -20.0336111
+    },
+    {
+      "name": "Île aux Flamants",
+      "longitude": 57.8172688,
+      "latitude": -20.3222841
+    },
+    {
+      "name": "Ile aux Oiseaux",
+      "longitude": 57.8142202,
+      "latitude": -20.3273594
+    },
+    {
+      "name": "Île aux Fouquets",
+      "longitude": 57.7776885,
+      "latitude": -20.3953836
+    },
+    {
+      "name": "Île aux Fous",
+      "longitude": 57.7878842,
+      "latitude": -20.3828876
+    },
+    {
+      "name": "Île aux Vacoas",
+      "longitude": 57.770278,
+      "latitude": -20.397778
+    },
+    {
+      "name": "Pigeon House Rock",
+      "longitude": 57.657187,
+      "latitude": -19.8627977
+    }
+  ],
+  "retained_parent_scope_comparison_record_count": 143,
+  "predecessor_settlement_scope": {
+    "issue": 482,
+    "assigned_locations": 144,
+    "mauritius_outcome": "2022 national Census Volume III G1 identifies 9 island districts, wards/VCAs, Rodrigues and six local regions; Appendix IV lists 310 Rodrigues locality names. These are not an exhaustive geocoded settlement inventory for all assigned district footprints. Follow-up #633.",
+    "seychelles_outcome": "NBS-provenance OCHA region/district data are 2019/2010-derived and not a geocoded gazetteer. Current official NBS 2022 download routes found during this review returned HTTP 404 on 2026-10-03. Follow-up #633.",
+    "named_island_territory_outcome": "Natural Earth role/geometry is not settlement evidence; this packet found no current, official, reusable geocoded settlement source for the assigned named island/department features. No settlement completeness claim is made."
+  },
+  "input_sha256": {
+    "scope.json": "c1d5c024487fafe6c8530e48cfc37748fdba62952f9285a80aaeed4799fe3028",
+    "parent_subject_inventory": "e7c4a442d415cd51e47ccf18dc2f5533104d993fca41388bd5038706bdeb9dc4",
+    "parent_sources_registry": "051676a2ee7a398ae1b7204cf25d74333faf4cb4cedb837f07308d5ed270d569",
+    "parent_geometry_comparison": "f452d57ed94112b1e8c0f5e1eac9fc1200dec36302efcd2085dea7e354c140f8",
+    "parent_seychelles_crosswalk": "aeb28aa7a06521b5b7457f50f95975aaa52f4eaf3615deb73a95305ff5d0873c",
+    "parent_settlement_review": "d55b07ec655b78bab31bb8d641a5e080a787fa5fb3a8ee2f3c5cdeacc6a3d1b0",
+    "parent_mus_geoboundaries": "fd3c09513dba7df021ed0f7bd2b05d187932155c99027b4dcc1c90ef8ee554c3",
+    "parent_syc_geoboundaries": "fc53d69a99b7cadd481c2fa6bcabe36f7138172464ceadf83af382881e3f817a",
+    "parent_natural_earth_selected": "eb0fac5a0668edd68e5fdf3700de3941ee98551bcf0c00b1eb33e334be7ac496",
+    "current_part_16": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+    "current_part_23": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+    "current_part_28": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "retained_onsdi_districts": "63f5c5c2660ff216a4429529814a3987ffa05e789bcbe889db520a74236b7540",
+    "retained_onsdi_islet_parks": "cbefa4e20d77a48e96ed75ad48b2f69158750e52f2f363a42e6ae0797c84d94e"
+  },
+  "output_sha256": {
+    "subject-findings.json": "6ea51c4b75901e6cf1b1a455d5ad78c1c0173b0102ca5c3f79db326788521289",
+    "district-comparison.json": "5cb42ed25fb57f06408a6e7f08ccd0543bc794ca5b73dd3142dc00f754064501"
+  }
+}
