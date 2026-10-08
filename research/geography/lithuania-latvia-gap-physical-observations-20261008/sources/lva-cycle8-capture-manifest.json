@@ -1,0 +1,282 @@
+{
+  "as_of_utc": "2026-10-08T07:04:55Z",
+  "max_body_bytes": 2097152,
+  "max_cumulative_body_bytes": 16777216,
+  "measured_total_response_bodies": 587083,
+  "largest_body_bytes": 277798,
+  "response_bodies": [
+    {
+      "path": "lgia-sitemap.body",
+      "url": "https://www.lgia.gov.lv/sitemap.xml",
+      "status": 404,
+      "bytes": 28041,
+      "sha256": "0525c108ce12aef68778bc713994de926cba9be94240ad1087a4306a3c342f01",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "lgia-search-en.body",
+      "url": "https://www.lgia.gov.lv/en/search/node?keys=orthophoto%202022%202024",
+      "status": 404,
+      "bytes": 28073,
+      "sha256": "cdb6e4f36bc0e671010b7505c9148cbd89f3fa228df888416c94b42cb70220af",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "lgia-search-lv.body",
+      "url": "https://www.lgia.gov.lv/lv/search/node?keys=aerofotografesanas%202022%202024",
+      "status": 404,
+      "bytes": 28511,
+      "sha256": "ffe391415588a3de6f22186f59633c72bcffea9fc8722ee0b51c3be30d729f40",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "lgia-ortho-catalogue.body",
+      "url": "https://www.lgia.gov.lv/en/ortofotokartes",
+      "status": 200,
+      "bytes": 34022,
+      "sha256": "1dc84a2e9951db9ee603604fe00070079803fcd6556bd639541f51be14cad85b",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "cycle8-product.body",
+      "url": "https://www.lgia.gov.lv/lv/8-cikla-2022-2024-gads-ortofotokartes",
+      "status": 200,
+      "bytes": 31756,
+      "sha256": "8f47ac721937187f9ef0568a4d285f67d59b2c49f362bb3036a4e99ed897fce4",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "lgia-services-schedule-2025.body",
+      "url": "https://www.lgia.gov.lv/sites/lgia/files/document/saraksts%20par%20maksas%20un%20bezmaksas%20pakalpojumiem_03012025_1.pdf",
+      "status": 200,
+      "bytes": 277798,
+      "sha256": "b1e4c4535592b6f1680c3e3ee71e472ed086981c48f1ac662268f22d3f2c9473",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "drupal-jsonapi-root.body",
+      "url": "https://www.lgia.gov.lv/jsonapi",
+      "status": 404,
+      "bytes": 28034,
+      "sha256": "b15f421ed8f6ad22292492b2f194f1331cccac0841385474b2856e9d0b08779e",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "drupal-cycle8-page-api.body",
+      "url": "https://www.lgia.gov.lv/jsonapi/node/page?filter%5Bdrupal_internal__nid%5D=1035",
+      "status": 404,
+      "bytes": 28570,
+      "sha256": "50bb7be587e116c5e2c1c6962420de960c177d6d9d257affa885bbf066f7b602",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "geonetwork-csw-capabilities.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&request=GetCapabilities",
+      "status": 200,
+      "bytes": 13663,
+      "sha256": "09e7d7c9b9a3986070164f520946058d46e3c05a5d848c06317daab1bdcacb51",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "geonetwork-cycle8-search-api.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/api/search/records?any=ortofoto%202022%202024&from=0&size=10",
+      "status": 404,
+      "bytes": 482,
+      "sha256": "39cf3eab9337eb6592f2a9f2821494afbd848fcc16ad0e698d3f336c8f48f338",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "geonetwork-cycle8-csw.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecords (CQL_TEXT request; missing CONSTRAINT_LANGUAGE_VERSION)",
+      "status": 200,
+      "bytes": 403,
+      "sha256": "b10d91a31f0ec918334d9fc1220ef232b55211d03e097b96a2ecedf70b205506",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "geonetwork-cycle8-csw-versioned.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecords (CQL_TEXT request, version 1.1.0; backend rejected leading %8 format)",
+      "status": 200,
+      "bytes": 511,
+      "sha256": "c21f77ae6515192d34c92dd1f0f30e66ef8cca3a2d11e294ece91e0c58de5293",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "geonetwork-cycle8-csw-post.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw (POST GetRecords AnyText LIKE *8. cikla*)",
+      "status": 200,
+      "bytes": 6310,
+      "sha256": "e4157ebcc612b823951866a9fdeaea4f45f911caccf5387df5d52be354f26c56",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "geonetwork-cycle8-targeted.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw (POST GetRecords AnyText contains 2022 and 8. cikls)",
+      "status": 200,
+      "bytes": 2858,
+      "sha256": "bab3fc5d83282acd7735837a9ec1505d8a246b185aa6ab385352a5e61ce6a4d0",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "cycle8-color-dataset.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&ID=24311e07-09ac-42e4-834b-dd6e6d476c37",
+      "status": 200,
+      "bytes": 20614,
+      "sha256": "5b6f82d57fdf8cb3fdb3573754b1997a0f2c70e932c6b2ed667e900babd6a5ec",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "cycle8-color-service.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&ID=3f4641f6-b61a-414f-91eb-971a2af06c6d",
+      "status": 200,
+      "bytes": 20647,
+      "sha256": "4bcf3be2f435f061533c6f3248b722f0f700da40f38410964b89ac55396877d1",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "cycle8-infrared-dataset.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&ID=aec4682b-8b6f-4593-9ebb-266198c55b65",
+      "status": 200,
+      "bytes": 18381,
+      "sha256": "31dd2f55b53758db3952a483a7df7de4ebf1d1bd34b8d6055bea16ba649fa690",
+      "tls": "normal certificate verification"
+    },
+    {
+      "path": "cycle8-infrared-service.body",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw?service=CSW&version=2.0.2&request=GetRecordById&ID=f0f9bcec-0193-49e2-8251-07bd96232dc9",
+      "status": 200,
+      "bytes": 18409,
+      "sha256": "3091c6f49ea30863f07221ec818e4e015db030d2a090b831b216a0776f49bb55",
+      "tls": "normal certificate verification"
+    }
+  ],
+  "header_captures": [
+    {
+      "path": "cycle8-color-dataset.headers",
+      "bytes": 825,
+      "sha256": "ab8fb8fb47e0ff8ff811245be8bc33ef881f2cad0e907909f1de267c6432babc",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "cycle8-color-service.headers",
+      "bytes": 826,
+      "sha256": "a735518d03deb01d2435c7cb7957bddab53bd82503e021cad477722ee15dfa0e",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "cycle8-current-scheme-head.headers",
+      "bytes": 555,
+      "sha256": "f5385b71ab75e7100e38ceab7038500f5deb2072d2391d206a0864e2edeb8c85",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "cycle8-infrared-dataset.headers",
+      "bytes": 825,
+      "sha256": "9759238d658baf08441cb8cddfa71831dbefd46028bc24183e6a4274553debe1",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "cycle8-infrared-service.headers",
+      "bytes": 824,
+      "sha256": "3651b2c985782ae0da46136965de20c5f745db8fb7a8721614f6963ebf7f313c",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "cycle8-planned-scheme-head.headers",
+      "bytes": 555,
+      "sha256": "03a20b3dc0e4b4d4654e4991ccf406b13e155282eb6ddac205ae751ded4a6189",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "cycle8-product.headers",
+      "bytes": 963,
+      "sha256": "88ccb5d8551fb5ac4e055e40b9232bd95f833d9a110c9dcc6e0cfbd42dec6a74",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "drupal-cycle8-page-api.headers",
+      "bytes": 972,
+      "sha256": "8d9055986fd2b12c6bfc6a5aa83ccf92ae8f479e479c28c194ecb60f2c172843",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "drupal-jsonapi-root.headers",
+      "bytes": 944,
+      "sha256": "ccf1e2a9ade12563e71e2cdeaea1fb6c4b54d035a49225ea80588dd949ed9777",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "geonetwork-csw-capabilities.headers",
+      "bytes": 826,
+      "sha256": "16bf5826c97f779a559398038c0d37ac3eb5a23e8dc8ac84ded7b51a5b994708",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "geonetwork-cycle8-csw-post.headers",
+      "bytes": 826,
+      "sha256": "2390dc58b830f1d6a4a5fc6292225179062537aa073b6f023a52c1d57b8db6bb",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "geonetwork-cycle8-csw-versioned.headers",
+      "bytes": 825,
+      "sha256": "533f8253af9bfa1b544b296481b7e5e656f5aba0148128a396f677b02170ed1a",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "geonetwork-cycle8-csw.headers",
+      "bytes": 825,
+      "sha256": "7cf66f1f8f9eb0ca3d88bad0b3ebbc27e727aa0c50d5c879ecab2c444cc4805f",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "geonetwork-cycle8-search-api.headers",
+      "bytes": 684,
+      "sha256": "39cd00f6c168dba66b79b5ff81fc368d19a87d8ea4bdd22f348b4eae5c8b9b33",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "geonetwork-cycle8-targeted.headers",
+      "bytes": 825,
+      "sha256": "6a713692088f023c57e96dad96a2c80e6b639d281586be900bc4abe45a74c0ef",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "lgia-ortho-catalogue.headers",
+      "bytes": 963,
+      "sha256": "d6834bb5de6e51140dddfaf7ba232c36fcd6a4086616f8444cec80635b93db21",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "lgia-search-en.headers",
+      "bytes": 972,
+      "sha256": "8d9a3dd41768a82e5ff6f77780322795004e25b4bd3085778c9ec4296698e27b",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "lgia-search-lv.headers",
+      "bytes": 972,
+      "sha256": "714fa0ad88a932559dfcaf79f479d225affbcf1201a1373bfb641b8283b1e3ab",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "lgia-services-schedule-2025.headers",
+      "bytes": 704,
+      "sha256": "36ddbf1efd1da8c327f4539682c2e440188840b0b8cfafe7f5df07ebf4b4bde3",
+      "kind": "HTTP response headers"
+    },
+    {
+      "path": "lgia-sitemap.headers",
+      "bytes": 948,
+      "sha256": "8bd35c93ba7417251a54a7fe69efb070de7eaf973e7b59d431283f08d731f78c",
+      "kind": "HTTP response headers"
+    }
+  ],
+  "request_xml": [
+    "geonetwork-cycle8-csw-query.xml",
+    "geonetwork-cycle8-targeted-query.xml"
+  ],
+  "findings_path": "cycle8-source-findings.json",
+  "findings_sha256": "3f819f3f05826d5b0cbd04afad8ae2c2c4accf471b9a86738b6ca4b03c73aaf2",
+  "cycle6_history_kept_separate": true
+}

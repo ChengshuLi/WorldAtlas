@@ -1,9 +1,9 @@
 # Candidate-level source/date operation plan
 
 **Issue:** #1452
-**PR:** #1466, current head `51f76761443b26c37635e5f7f400efd72d5c0475`
+**PR:** #1466 (metadata assessment based on head `2c5bb20fcd72937cb33d876df3e85cb73a39710a`)
 **Scope:** full retained family `gap-source-batch:d6347433d050d025e6e082c0` (16 components + 3 contacts).
-**Updated:** 2026-10-08 07:00 UTC (initial plan 06:23 UTC)
+**Updated:** 2026-10-08 07:21 UTC (initial plan 06:23 UTC)
 
 ## Current finding
 
@@ -16,6 +16,18 @@ The public Lithuania date-footprint services are candidate sources for **all 19 
 GEO5 located an official cycle-6 metadata archive under CC BY 4.0 with attribution required. It describes an older 2016–2018 orthophoto program (nominal 0.25 m GSD, EPSG:3059 / LKS_1992_Latvia_TM, TKS-93 sheets). Its whole-country product statement is not evidence for any exact candidate. The same 19 pinned features remain in scope regardless of inherited country/source-owner labels; the complete ID/feature-hash roster is recorded in `sources/lva-cycle6-source-note.json`.
 
 The archive has 25 DBF records. `Datums` and `FOTO_DAT` conflict in rows 20 and 25; both values must be preserved without selecting one. The indexed `PolygonZ` SHP member decodes to 108,040,732 bytes, exceeding the shared 32 MiB decoded-member cap. The public cycle-6 REST feature service returns ArcGIS 403, the open metadata REST service has no layers, and WMS capabilities failed normal TLS verification. Engineering has rejected a cap waiver, whole-member extraction, or unreviewed stream recipe. Cycle 6 therefore remains older contextual evidence only; it cannot satisfy the original cycle-8 or physical-observation acceptance. No cycle-6 subject overlay or geometry processing is authorized.
+
+## Cycle-8 official metadata availability (bounded review)
+
+GEO5 reviewed the public TLS-verified GeoNetwork CSW catalog and four exact 8th-cycle color/infrared dataset and service records. Dataset abstracts describe 2022–2024 work, nominal 20 cm, LKS 92 TM, and Kurzeme; the product page describes a broader program but also satellite-supplemented eastern gaps. The records provide no sheet/date table, date-feature schema, downloadable vector footprint, or usable WMS operation URL. The service records say access is free after a client signs a license; conflicting machine-readable access fields do not override that explicit condition or LGIA’s WMS catalogue. No license was signed. Two static JPG scheme URLs passed HEAD; their bodies were not fetched, and no separate reuse license was found. The sources and exact records are in `sources/lva-cycle8-source-findings.json`; body/header hashes are in its capture manifest, while raw responses remain in GEO5’s ignored local cache. This establishes metadata availability and source-level access limits only; no subject coverage/date is inferred.
+
+## Cross-source availability result for all 19 subjects
+
+`source-availability-assessment.json` binds the exact 16-component/3-contact roster and records the same bounded source-level findings against each exact ID. The Lithuania sources expose official metadata and date-layer leads, but product-specific offline/vector reuse terms are unresolved and the service/provenance/year records conflict. Latvia cycle 8 lacks an authorized endpoint/license, feature schema and per-sheet dates. The older cycle-6 metadata member is over the shared cap and is not used. Copernicus WCD Europe (10 m yearly hydrological-year aggregation) and JRC Global Surface Water (30 m aggregated history with collection/co-registration limits) are context products, not exact subject/date or microcomponent shoreline evidence. All 19 remain unqueried: coverage, date, tile identity, completeness, CRS/operation, achieved accuracy/QA, and physical status are unknown. Inherited source leads and national program descriptions do not establish jurisdiction or coverage.
+
+## Copernicus/JRC metadata availability
+
+GEO5’s supplemental documentation review verified all 22 local response/header captures against the manifest. CLMS/CDSE Water Cover Duration (WCD) Europe is a 10 m yearly hydrological-year water-duration aggregate (1 September–31 August), Sentinel-1/2; metadata identifies UTM/WGS84 EPSG:32625–32638 or LAEA/ETRS89 EPSG:3035 grids and 100 km Sentinel-2 tiles. CLMS marks WCD not validated, and particular year/tile release was not confirmed. CDSE says free for any purpose with product DOI citation. JRC Global Surface Water v1.5, updated 2026-08-26, is 30 m for 1984–2024; its aggregate outputs and 2022–2024 monthly/yearly histories do not give acquisition-date shorelines. The Collection 1/2 seam can reach or exceed 30 m in some WRS-2 rows; absolute positional accuracy and a clear CRS were not verified from the reviewed metadata. JRC is free without use restriction but requires dataset/paper citation and map attribution. Both are context sources only for this task; no data, tiles, or per-subject query was used. Full findings and capture provenance are in `sources/water-context-findings.json` and `sources/water-context-capture-manifest.json`.
 
 ## Candidate-level roster and current source gate
 

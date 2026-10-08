@@ -67,10 +67,13 @@
       "vintage": "2022–2024 program; 20cm RGBI/CIR; eastern-border gaps supplemented by satellite",
       "retrieved": "2026-10-08",
       "reuse": "not established for cycle 8; no imagery retained",
-      "verification": "official program page reviewed",
+      "verification": "Official product page plus four public GeoNetwork CSW dataset/service records reviewed; exact metadata IDs and capture hashes in sources/lva-cycle8-source-findings.json.",
       "known_limits": [
         "Program scope does not prove any scoped subject coverage or date.",
-        "Cycle-8 achieved accuracy not stated in reviewed public pages."
+        "Cycle-8 achieved accuracy not stated in reviewed public pages.",
+        "Four cycle-8 records identify Kurzeme; dataset abstracts state 20 cm and LKS 92 TM for 2022–2024, but no sheet-level acquisition-date table or feature schema.",
+        "Official CSW exposes metadata only; service connectPoint is blank. The service abstract requires a signed client license, while machine-readable access fields are inconsistent.",
+        "Two public static JPG schemes were HEAD-checked only; bodies were not fetched and no separate reuse license was found. No official public queryable date-feature vector or provider-published member under 32 MiB was identified in reviewed sources."
       ]
     },
     {
@@ -81,9 +84,12 @@
       "vintage": "2022–2024 cycle-8 RGB/CIR and aerial photography time map",
       "retrieved": "2026-10-08",
       "reuse": "free only after client signs license; no license evidence",
-      "verification": "official service catalogue reviewed",
+      "verification": "LGIA service catalogue and public GeoNetwork CSW service records reviewed; no signed client license or authorized WMS endpoint.",
       "known_limits": [
-        "No authorized endpoint accessed or per-subject join."
+        "No authorized endpoint accessed or per-subject join.",
+        "Cycle-8 WMS is described as free only after client signs a license; no license evidence.",
+        "CSW service operation URL/connectPoint is blank; machine-readable access/use constraints conflict with the explicit license requirement.",
+        "No per-sheet date schema or freely queryable footprint vector was found."
       ]
     },
     {
@@ -104,28 +110,38 @@
       "jurisdiction": "Europe",
       "source": "Copernicus Water Cover Duration",
       "url": "https://land.copernicus.eu/en/products/water-bodies/high-resolution-water-cover-duration",
-      "vintage": "2016-present annual hydrological years; Sentinel-1/2; 10m/100m; gradual release; product not validated",
+      "vintage": "2016-present, Europe yearly hydrological-year aggregate; 10m; Sentinel-1/2; gradual release; marked not validated",
       "retrieved": "2026-10-08",
-      "reuse": "free for any purpose per official product documentation",
-      "verification": "official product/docs reviewed; no data downloaded",
+      "reuse": "CDSE documentation says free for any purpose; cite product DOI 10.2909/39e1ff33-01d9-45c2-9edc-00924383f34f and CLMS data policy.",
+      "verification": "Official CLMS/CDSE product/docs/catalog captures reviewed and hash-verified; no product raster/tile acquired.",
       "known_limits": [
-        "Annual aggregation (hydrological year starts Sept 1); no exact observation date or per-subject coverage checked.",
-        "Too coarse for microcomponent shoreline adjudication; supplementary context only."
-      ]
+        "Hydrological year runs Sep 1–Aug 31; annual water-presence-day aggregation is not a dated shoreline or exact acquisition observation.",
+        "Europe product is 10m; metadata references Sentinel-2 UTM/WGS84 tiles EPSG:32625–32638 or LAEA/ETRS89 EPSG:3035 on a 100km grid.",
+        "Specific year/tile availability was not confirmed; product layers are released gradually.",
+        "CLMS marks product not validated; no quantitative positional accuracy was verified. Recent production notice notes false water detections and reprocessing.",
+        "No candidate-specific availability/date query; supplementary water context only."
+      ],
+      "product_doi": "10.2909/39e1ff33-01d9-45c2-9edc-00924383f34f",
+      "cdse_collection_uuid": "6cbd4f0b-834d-4e91-aa56-8c347b9cf971",
+      "capture_note": "sources/water-context-findings.json; 22 raw response/header files hash-verified in local cache."
     },
     {
       "id": "jrc-global-surface-water",
       "jurisdiction": "Global",
       "source": "JRC Global Surface Water download and documentation",
       "url": "https://global-surface-water.appspot.com/download",
-      "vintage": "1984–2024; 30m; collection 2 after 2021",
+      "vintage": "Global Surface Water v1.5, updated 2026-08-26; 1984–2024; 30m Landsat-derived; new monthly/yearly history is 2022–2024",
       "retrieved": "2026-10-08",
-      "reuse": "free/no use restriction; attribution required",
-      "verification": "official download page reviewed; no data downloaded",
+      "reuse": "Free without restriction; publications/models/products cite the dataset and Pekel et al. (2016); map attribution “Source: EC JRC/Google”.",
+      "verification": "Official JRC product/docs/release metadata captured and hash-verified; no Earth Engine sign-in, asset, raster, or tile accessed.",
       "known_limits": [
-        "Aggregated products, collection transition, and variable co-registration offsets (typically subpixel, occasionally >=30m).",
-        "Yearly/monthly history 2022–24 requires asset merge; monthly recurrence known issue. Not a precise shoreline or adjudication source."
-      ]
+        "Occurrence/recurrence/transitions/extent are aggregates over 1984–2024; monthly history records monthly water/not-water/no-observation, not acquisition date.",
+        "2022–2024 Collection 2 seam against Collection 1 typically subpixel but reaches/exceeds one 30m pixel in some WRS-2 path/rows; backprocessing planned.",
+        "Extensions were not subjected to original 1984–2015 validation and may contain artifacts.",
+        "Retrieved metadata did not provide a clear CRS identifier or quantitative absolute positional accuracy; pixel size is not positional accuracy.",
+        "Not precise shoreline, subject-date, or microcomponent adjudication evidence."
+      ],
+      "capture_note": "sources/water-context-findings.json; 22 raw response/header files hash-verified in local cache."
     },
     {
       "id": "lva-cycle6-metadata",
@@ -174,6 +190,29 @@
         "Geoportal copyright notice identifies a rights holder but does not grant reuse for date-footprint vectors.",
         "Data.gov.lt returned HTTP 500 block pages; this does not establish absence of another catalog record.",
         "Prior official metadata response headers were not retained in the earlier batch; no known endpoints were re-requested in the rights review."
+      ]
+    },
+    {
+      "id": "lva-cycle8-csw-metadata",
+      "jurisdiction": "Latvia",
+      "source": "GeoNetwork CSW records for LGIA cycle-8 color and infrared datasets/services",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw",
+      "record_ids": [
+        "24311e07-09ac-42e4-834b-dd6e6d476c37",
+        "3f4641f6-b61a-414f-91eb-971a2af06c6d",
+        "aec4682b-8b6f-4593-9ebb-266198c55b65",
+        "f0f9bcec-0193-49e2-8251-07bd96232dc9"
+      ],
+      "vintage": "2022–2024; metadata publication/revision dates are not flight dates",
+      "retrieved": "2026-10-08",
+      "reuse": "Public metadata records retrieved; no image/vector reuse grant found. Underlying cycle-8 WMS requires client-signed license.",
+      "verification": "Four records obtained with CSW GetRecords/GetRecordById; exact findings and capture manifest in sources/lva-cycle8-source-findings.json and sources/lva-cycle8-capture-manifest.json.",
+      "known_limits": [
+        "Dataset abstracts specify Kurzeme, 20 cm, LKS 92 TM; this does not establish any of the 19 subject coverage.",
+        "No per-sheet date feature fields/schema, public vector footprint source, or online operation URL was published in reviewed records.",
+        "Machine-readable access limits conflict with service abstract and LGIA WMS catalogue signed-license requirement.",
+        "Static JPG schemes were HEAD checked only, not fetched or inspected; separate reuse license not found.",
+        "No achieved positional accuracy or tile-level QA was reported in reviewed records."
       ]
     }
   ]

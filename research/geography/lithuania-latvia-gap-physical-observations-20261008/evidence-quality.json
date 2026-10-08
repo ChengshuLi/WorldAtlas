@@ -577,7 +577,7 @@
       "retention": "restoration-only",
       "verification": "verified",
       "restoration": "Open official program and WMS catalogue; no imagery retained",
-      "limit": "Program not proof of scoped coverage/date; achieved cycle-8 accuracy unreported in reviewed pages.",
+      "limit": "Program metadata only; cycle-8 CSW records describe Kurzeme and 2022–2024/nominal 20 cm LKS 92 TM but give no sheet/date schema or per-subject coverage. WMS requires signed client license; no authorized endpoint or achieved accuracy was established.",
       "temporal_status": "reference"
     },
     {
@@ -593,7 +593,7 @@
       "retention": "restoration-only",
       "verification": "verified",
       "restoration": "Open Copernicus product and documentation; no data downloaded",
-      "limit": "Annual aggregation, no subject/date join; too coarse for precise shoreline or microcomponent classification.",
+      "limit": "Europe 10m yearly hydrological-year water-duration aggregate, not an observation-date or shoreline record; marked not validated, exact release per tile unknown.",
       "temporal_status": "reference"
     },
     {
@@ -609,7 +609,7 @@
       "retention": "restoration-only",
       "verification": "verified",
       "restoration": "Open official download page; no data downloaded",
-      "limit": "Aggregated product; collection transition and spatially variable co-registration; not precise shoreline/adjudication evidence.",
+      "limit": "30m aggregate/monthly/yearly history is not acquisition-date shoreline evidence; Collection 1/2 seam can reach/exceed 30m in some rows and absolute accuracy/CRS remain unverified.",
       "temporal_status": "reference"
     },
     {
@@ -643,19 +643,51 @@
       "restoration": "Compact rights findings and response manifest included; response bodies remain in local ignored cache.",
       "limit": "Public viewing is evidenced for ORT_recent. Offline research, retaining vector metadata, and publishing derived observations are unresolved; do not infer rights from public access or a copyright notice.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "lva-cycle8-csw-metadata",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw",
+      "role": "official metadata catalog for LGIA cycle-8 orthophoto dataset and service records",
+      "vintage": "8th cycle, 2022–2024; CSW metadata publication/revision timestamps are not acquisition dates",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "restricted",
+        "terms": "Underlying WMS is described as free after client signs a license; no signed license was evidenced. Public metadata availability is not image/data reuse permission."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Compact findings and capture manifest are included; raw responses remain in the ignored local cache.",
+      "limit": "No usable operation URL, public date-feature schema, per-sheet date table, public vector footprint, achieved accuracy, or tile QA found. Dataset abstracts specify Kurzeme; no subject coverage inferred.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "water-context-findings",
+      "url": "https://land.copernicus.eu/en/products/water-bodies/high-resolution-water-cover-duration",
+      "role": "official Copernicus WCD and JRC Global Surface Water product metadata and limits",
+      "vintage": "WCD Europe yearly 10m hydrological-year aggregates; JRC GSW v1.5 1984–2024 at 30m with 2022–2024 monthly/yearly history",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "CDSE says WCD may be used for any purpose with product DOI citation; JRC is free without use restriction with dataset/paper citation and map attribution “Source: EC JRC/Google”."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Compact findings and capture manifest included; raw response bodies remain in local ignored cache.",
+      "limit": "Temporal/spatial aggregates are not exact-date shoreline observations or subject-level coverage evidence. WCD is not validated; JRC Collection 1/2 co-registration can reach/exceed 30m in some rows, with CRS/absolute accuracy unverified.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/README.md",
-      "bytes": 11677,
-      "sha256": "feb56a23740ab6e55fea51a8d154498310dab25e870ece7f2a8e8e1d291917bc",
+      "bytes": 13545,
+      "sha256": "ffa669be68234e2a2ff757fb14fa7284b4451884e6f53383d0cf607195e92157",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/official-source-register.json",
-      "bytes": 9997,
-      "sha256": "88377bc6ed947835a5abc8e97a06aaeb12497fd880da4a0a3fc7e4090bf48065",
+      "bytes": 14351,
+      "sha256": "39881a6485cc8b83a58718ea82d1ef281408c67b29e85f273f85e3e512e20823",
       "hash_kind": "file-bytes"
     },
     {
@@ -684,8 +716,8 @@
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/subjects/per-subject-source-status.json",
-      "bytes": 24051,
-      "sha256": "98fc8cb18a9e3632b3b3f6fd8ac7c2ff248dbc9430d2dfb1a185c996571f7257",
+      "bytes": 28830,
+      "sha256": "fc3fc4d5adb4ce0cff7be799625f12530f25d72eae28d9d2a480b464518dd721",
       "hash_kind": "file-bytes"
     },
     {
@@ -696,14 +728,14 @@
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/execution-ledger.json",
-      "bytes": 3851,
-      "sha256": "a92e1eb6559a204264255a1509b6a589e6d0159ffe929599d5b3fec5b6eabba5",
+      "bytes": 5217,
+      "sha256": "64a973f2f7df4565f85bbdf5458d11de158dfb12ae32034b03e9ccca5a22b6ed",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/reproducibility.json",
-      "bytes": 1469,
-      "sha256": "8851fe540310b994d97ded98f2bdb60ffa145cf29413354d0ff0d9987fef8091",
+      "bytes": 2417,
+      "sha256": "64925fc69b5343aff8c0efb2e76da7d76966d33e3600673852bda7f30d97169d",
       "hash_kind": "file-bytes"
     },
     {
@@ -714,8 +746,8 @@
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-date-operation-plan.md",
-      "bytes": 31563,
-      "sha256": "259b3303652f855e4ec73d2a40792e06fa5dde971dc56d34b4441ec687fad2a7",
+      "bytes": 34941,
+      "sha256": "e8071b26fed9c27dffc93c33227515381ac1352c4d103dca3ee5d20865fde015",
       "hash_kind": "file-bytes"
     },
     {
@@ -728,6 +760,36 @@
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-capture-manifest.json",
       "bytes": 7499,
       "sha256": "a728f266c4db418f04f7f1e7badc5720548aa26d608e8df6daf31e1dec0878a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-source-findings.json",
+      "bytes": 5866,
+      "sha256": "3f819f3f05826d5b0cbd04afad8ae2c2c4accf471b9a86738b6ca4b03c73aaf2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-capture-manifest.json",
+      "bytes": 10759,
+      "sha256": "f7b731f9b20f92b2fb8c3134fdc2c5f1134ae1b5940aca13a8c8e47b4fdf002b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-availability-assessment.json",
+      "bytes": 23471,
+      "sha256": "3527598047be57c23b74828a141ab86752b738e76880905b19455329eb255f64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-findings.json",
+      "bytes": 4904,
+      "sha256": "94433768235921b55a1fca3f270a3a798458d6b1a8e018262a686d434f3dc033",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-capture-manifest.json",
+      "bytes": 3971,
+      "sha256": "77241068a01e56fee9de2745c4514a5f8bb0ff53eeb5d6d799ea5acdba7a6677",
       "hash_kind": "file-bytes"
     }
   ],
@@ -770,7 +832,7 @@
       "value": 0,
       "unit": "subjects",
       "vintage": "current",
-      "input_sha256": "98fc8cb18a9e3632b3b3f6fd8ac7c2ff248dbc9430d2dfb1a185c996571f7257",
+      "input_sha256": "fc3fc4d5adb4ce0cff7be799625f12530f25d72eae28d9d2a480b464518dd721",
       "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
     },
     {
@@ -778,7 +840,7 @@
       "value": 0,
       "unit": "subjects",
       "vintage": "current",
-      "input_sha256": "98fc8cb18a9e3632b3b3f6fd8ac7c2ff248dbc9430d2dfb1a185c996571f7257",
+      "input_sha256": "fc3fc4d5adb4ce0cff7be799625f12530f25d72eae28d9d2a480b464518dd721",
       "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
     }
   ],
@@ -913,6 +975,26 @@
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-capture-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-availability-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-source-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle8-capture-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/water-context-capture-manifest.json",
       "status": "added"
     }
   ],
