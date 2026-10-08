@@ -345,13 +345,13 @@ export function restoredContextMember(root,name,{prior=false}={}) {
 export function restoredContextPatch(root,{runtimeBytes,codeBytes}) {
   const saved=restored.get(root);assert(saved,'Complete canonical inverse must precede patch selection');
   const base=namespace+'/canonical-products',indexBytes=fs.statSync(ordinary(root,base+'/index.json')).size;assert(Number.isSafeInteger(runtimeBytes+codeBytes+indexBytes+131072)&&runtimeBytes+codeBytes+indexBytes+131072<=256*1024*1024,'Bounded authenticated index-discovery phase');
-  const indexRaw=read(root,{path:base+'/index.json',sha256:canonicalIndex,bytes:indexBytes});
+  const indexRaw=read(root,{path:base+'/index.json',sha256:canonicalIndex,bytes:indexBytes,mode:'100644'});
   const index=JSON.parse(indexRaw),member=index.files.find(p=>p.path==='current-context-byte-patch.json.gz');assert(member&&member.mode==='100644');
   const parts=index.parts.filter(p=>p.offset<member.offset+member.bytes&&p.offset+p.decoded_bytes>member.offset);
   let total=runtimeBytes+codeBytes+131072+indexRaw.length+member.bytes;
   for(const p of parts)total+=p.bytes+p.decoded_bytes;
   assert(Number.isSafeInteger(total)&&total<=256*1024*1024,'Complete patch acquisition budget before source opens');
-  const pieces=[];for(const p of parts){const encoded=read(root,{...p,path:base+'/'+p.path}),decoded=gunzipSync(encoded,{maxOutputLength:CAP});assert.equal(decoded.length,p.decoded_bytes);assert.equal(sha(decoded),p.decoded_sha256);pieces.push(decoded.subarray(Math.max(0,member.offset-p.offset),Math.min(decoded.length,member.offset+member.bytes-p.offset)));}
+  const pieces=[];for(const p of parts){const encoded=read(root,{...p,path:base+'/'+p.path,mode:'100644'}),decoded=gunzipSync(encoded,{maxOutputLength:CAP});assert.equal(decoded.length,p.decoded_bytes);assert.equal(sha(decoded),p.decoded_sha256);pieces.push(decoded.subarray(Math.max(0,member.offset-p.offset),Math.min(decoded.length,member.offset+member.bytes-p.offset)));}
   const raw=Buffer.concat(pieces);assert.equal(raw.length,member.bytes);assert.equal(sha(raw),member.sha256);
   return {raw,pin:member,budget:{complete_phase_bytes:total,installed_runtime_bytes:runtimeBytes,source_parts:parts.map(p=>({...p,path:base+'/'+p.path}))}};
 }

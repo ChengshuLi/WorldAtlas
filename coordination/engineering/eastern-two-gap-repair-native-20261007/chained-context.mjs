@@ -73,9 +73,9 @@ export function verifyAuthoredValidatorSources({stage,codeIndex,authored,current
   if(!wrappers.has(pin.path)){const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
    assert(currentRoot,'Exact current restoration extension source required');const extended=fs.readFileSync(path.join(currentRoot,pin.path));assert.equal(sha(extended),current.sha256);
    const start=extended.indexOf(Buffer.from('// Select an exact member')),end=extended.indexOf(Buffer.from('function checkoutMetadata'),start);assert(start>=0&&end>start);
-   assert.equal(sha(extended.subarray(start,end)),'88b99e5baf8db46e5f0a7e9f855e7fbf704aa0b83cdd6e988767080858eb37b8','Only the exact reviewed selected-member extension is allowed');
+   assert.equal(sha(extended.subarray(start,end)),'6563ec0357559af17da4d14de887e9f06426a73a5e67392cc739aac4188e7e6b','Only the exact reviewed selected-member extension is allowed');
    assert.equal(sha(Buffer.concat([extended.subarray(0,start),extended.subarray(end)])),pin.sha256,'Entire original restoration module must remain byte-identical');
-  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+(current.sha256===pin.sha256?0:2497));assert.equal(current.mode,member.mode);}
+  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+(current.sha256===pin.sha256?0:2525));assert.equal(current.mode,member.mode);}
  }
  return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)).length};
 }
