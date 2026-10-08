@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "status": "source-bytes-verified",
+  "geometry_operations_invoked": false,
+  "source": {
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM1-000.bin.gz",
+    "encoded_bytes": 1702347,
+    "encoded_sha256": "a1059264c0f20ad40a50fb51a19c49182bfd9fb012c591a1a6e8a971340ed43b",
+    "decoded_bytes": 5469814,
+    "decoded_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+    "catalogue_path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+    "catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM1/geoBoundaries-USA-ADM1_simplified.geojson",
+    "recorded_license": "Public Domain",
+    "represented_year_claim": "2018",
+    "whole_feature_count": 56
+  },
+  "selected_parent": {
+    "shape_id": "66186276B62688952876525",
+    "shape_name": "Alaska",
+    "shape_iso": "US-AK",
+    "role": "ADM1",
+    "geometry_type": "MultiPolygon",
+    "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/alaska-adm1-parent/feature.geojson",
+    "bytes": 1859641,
+    "sha256": "938520d544d21c6eaf68e69cb53b220f2e38de44071ded03e980db0ace9e6793"
+  },
+  "limits": [
+    "This is the simplified geoBoundaries USA ADM1 Alaska source parent, retained for geometric containment checks; it is not an authoritative political boundary or accuracy finding.",
+    "The source represented year is the catalogue claim for the product, not an observation date for every feature."
+  ]
+}

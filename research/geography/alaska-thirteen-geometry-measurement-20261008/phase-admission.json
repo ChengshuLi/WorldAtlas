@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "scientific_operations_invoked": false,
+  "cap_bytes": 268435456,
+  "complete_phase_bytes": 261583643,
+  "headroom_bytes": 6851813,
+  "component_totals": {
+    "encoded_source_bodies": 88964941,
+    "decoded_native_source_bodies": 101279150,
+    "imported_runtime_files_and_python_executable": 39196659,
+    "project_code_files": 142893,
+    "selected_native_records_output": 0,
+    "scratch_reservation": 8000000,
+    "generated_output_reservation": 24000000
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2",
+    "numpy": "2.3.5",
+    "proj_db_bytes": 9273344,
+    "proj_db_sha256": "ec8cea0a5490a6f9247d9063645049e0f93fb83307067ebfc859187f0539e67e",
+    "imported_files": 289,
+    "imported_file_bytes": 29923315
+  },
+  "inputs": [
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09.geojson",
+      "role": "complete-source-full",
+      "bytes": 10500644,
+      "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/selected-2018-usa-adm2-features.geojson",
+      "role": "selected-simplified-source",
+      "bytes": 608036,
+      "sha256": "02427b560826d51ab275e3df6f8fa3d4629dd762733f5c4c69b1a8f2ee8e44b5"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-components.geojson",
+      "role": "exact-13-candidate-geometries",
+      "bytes": 18192,
+      "sha256": "b24011f1acef059783ea61d96308f3b43ef0aabdbaf19f1fb7694b613a470b14"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
+      "role": "seven-atlas-target-geometries",
+      "bytes": 366513,
+      "sha256": "0cfe5197d17fdd88fa4a13bbd1ac120a7cf195cc6ee7bf3b49dbd0303b86e326"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/complete-native-family-record.jsonl",
+      "role": "995-member-family-context",
+      "bytes": 226731,
+      "sha256": "5c79b82588ff5c8f3c1e6305e4c1bcd565b7e379203b95bc2c09322f30f18119"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
+      "role": "25-physical-relations",
+      "bytes": 38656,
+      "sha256": "e36d6319cd9d23c4c8d508415f8af7965e069928e5e1206faac3d50cbd5ece50"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/gshhg-native-query-records.json",
+      "role": "11-native-record-metadata",
+      "bytes": 18640,
+      "sha256": "d978c4e92bdcbff3ece9f4f798ea977ed21a4d709ef5598fed5bde71a7130783"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+      "role": "scope-and-join-contract",
+      "bytes": 166310,
+      "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/features.geojson",
+      "role": "17-original-atlas-neighbor-features",
+      "bytes": 163693,
+      "sha256": "ff6fd68435898492221491636e5d8e50e72fce387c2fde9d77f48198f17c03a0"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/receipt.json",
+      "role": "17-neighbor-baseline-source-receipt",
+      "bytes": 7040,
+      "sha256": "892dfa4685aea1a1cd7c6e5108987274404704b4cf42bb8b6862bb63175d3615"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/original-fragment-contacts/features.geojson",
+      "role": "13-original-complete-fragment-contact-records",
+      "bytes": 21588,
+      "sha256": "a2ffac1913df9e1b771e46f1f5a41f3776fbd67a0f2b7926dfea3605810e9185"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/original-fragment-contacts/receipt.json",
+      "role": "13-fragment-contact-readback-receipt",
+      "bytes": 13262,
+      "sha256": "27aec1df27b2320eb8e7c1dfc4093acc3deada46bae7394e5a3c8fc062c16aad"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/contact-authority-receipt.json",
+      "role": "whole-family-contact-authority-receipt",
+      "bytes": 20126,
+      "sha256": "7547a46be51a7a5cdfeaaddb86a9c0c46f9a0d3983d5fbe9239a128fb678cae1"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/detector-vintage-supplement.json",
+      "role": "original-detector-baseline-vintage-receipt",
+      "bytes": 2672,
+      "sha256": "f7972cfbaac738bd12e99d4581660fa2f671a77b5dabc40a06fe390e3e29c271"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/usa-adm2-source-metadata.json",
+      "role": "source-metadata",
+      "bytes": 5084,
+      "sha256": "88dcd7f581d5b8d2b5f5003cf4cd7b39310b8bc52c96e8371d55c92559dd2258"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/usa-adm2-attribution.json",
+      "role": "source-attribution",
+      "bytes": 2949,
+      "sha256": "6236712dd0cf23fd258ce7e4a39412e7652be7d2a3c4db2b3e83ddbd4a60c8cd"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/geoBoundaries-derivative-use-terms.txt",
+      "role": "source-use-terms",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+      "role": "native-member-index",
+      "bytes": 5821,
+      "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/downstream-reader.json",
+      "role": "pinned-reader-index-binding",
+      "bytes": 548,
+      "sha256": "39a571ab73464d46cc2029b430e7db0bfccca82fed3a74d652765fbe5317f731"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/reader.py",
+      "role": "authenticated-native-reader",
+      "bytes": 14829,
+      "sha256": "c06f8b65e700b81fb73352ffb17bee719eaab7a1bc8ae30ed1707d6e2f3b015a"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/codec.py",
+      "role": "native-codec-reference",
+      "bytes": 7090,
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "role": "pinned-administrative-source-catalogue",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/records.bin",
+      "role": "authenticated-selected-native-records",
+      "bytes": 7168404,
+      "sha256": "9f4833fdac3cbebb9e60d413f469570453b1bad177892b9227702125728b99d5"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/receipt.json",
+      "role": "native-selection-authentication-receipt",
+      "bytes": 14483,
+      "sha256": "4b43720ead947aa1a985edf98de7347a5018da05a3b246d42e6f8aa6c5fbf624"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+      "role": "encoded-native-alias",
+      "bytes": 22743455,
+      "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+      "role": "encoded-native-alias",
+      "bytes": 23286998,
+      "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf"
+    },
+    {
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+      "role": "encoded-native-alias",
+      "bytes": 19571844,
+      "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM1-000.bin.gz",
+      "role": "encoded-alaska-adm1-parent-source",
+      "bytes": 1702347,
+      "sha256": "a1059264c0f20ad40a50fb51a19c49182bfd9fb012c591a1a6e8a971340ed43b"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/alaska-adm1-parent/feature.geojson",
+      "role": "captured-alaska-adm1-parent-feature",
+      "bytes": 1859641,
+      "sha256": "938520d544d21c6eaf68e69cb53b220f2e38de44071ded03e980db0ace9e6793"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/alaska-adm1-parent/receipt.json",
+      "role": "parent-feature-capture-receipt",
+      "bytes": 1653,
+      "sha256": "ba0e624e248caeff90b63ba7a9b64729124fe29a1c3082f0cdf280664f0db6a3"
+    }
+  ],
+  "decoded_aliases": [
+    {
+      "path": "native-00.bin.gz",
+      "bytes": 33554432,
+      "sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281",
+      "role": "decoded-native-alias"
+    },
+    {
+      "path": "native-01.bin.gz",
+      "bytes": 33554432,
+      "sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c",
+      "role": "decoded-native-alias"
+    },
+    {
+      "path": "native-02.bin.gz",
+      "bytes": 28700472,
+      "sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f",
+      "role": "decoded-native-alias"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM1-000.bin.gz",
+      "bytes": 5469814,
+      "sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+      "role": "decoded-alaska-adm1-parent-source"
+    }
+  ],
+  "project_code": [
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase_admission.py",
+      "role": "project-code",
+      "bytes": 12730,
+      "sha256": "e1e2fd75d44fe4d025d2e2b563598d42d7e2389a2aacb0db65055b5353856da7"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/extract_native_records.py",
+      "role": "project-code",
+      "bytes": 12014,
+      "sha256": "070d0682c6726cf8d75592d659cf882c48ca1dce9ff9f33d6c541daa09a3420f"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_alaska_parent.py",
+      "role": "project-code",
+      "bytes": 5061,
+      "sha256": "c79bb234817875a06db935e6f8c99ea1a81a06dbc5bf054f4fd585699bbdaaa9"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_atlas_neighbors.py",
+      "role": "project-code",
+      "bytes": 3976,
+      "sha256": "50be53c56ba1eba2f63d7fea1a11c5dc1c7e99c2c2a7899827276f3edaa4879e"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_original_fragment_contacts.py",
+      "role": "project-code",
+      "bytes": 7767,
+      "sha256": "71cb8eec99e12db668d6beff156ab4003bcd07ee1ace157fe4286890f429b3f6"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
+      "role": "project-code",
+      "bytes": 68493,
+      "sha256": "323b8670ca7e9f20a8ffe476c71b01bd349e0fc038595e437cd3bb8ac5fd551f"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+      "role": "project-code",
+      "bytes": 5211,
+      "sha256": "c655156c8fa5e20faf0a4fdb549d6b0ccd26abcb74cc0aa43abd1238e7e170ae"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/run_phase.py",
+      "role": "project-code",
+      "bytes": 6067,
+      "sha256": "7cc30c437a380346f0fee60ca112b916c4500573124c213bc3cc57f3f472229e"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/verify_extraction_replay.py",
+      "role": "project-code",
+      "bytes": 4160,
+      "sha256": "d8b235d2970aca2defc55fb7f39ba60d57d5c46a2cfaeaaba50f9cc40a378312"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "role": "project-code",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    }
+  ],
+  "ceilings": {
+    "generated_output_bytes": 24000000,
+    "scratch_bytes": 8000000
+  },
+  "process_boundary": {
+    "process_scan": "no active GSHHG, Alaska, Arctic, source-fit or named geometry process observed before admission",
+    "memory_pressure_free_percent": 30,
+    "rss_cap_bytes": 805306368,
+    "wall_deadline_seconds": 900,
+    "enforcement": "sampled/cooperative; record actual terminal state and peak RSS",
+    "host_free_disk_bytes": 27992788992,
+    "managed_workspace_free_bytes": 27992772608,
+    "managed_workspace_minimum_free_bytes": 10737418240,
+    "managed_workspace_floor_passed": true,
+    "managed_checkout_bytes": 42401737114,
+    "managed_worker": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
+    "managed_reservation_bytes": 1073741824,
+    "relevant_processes": []
+  }
+}

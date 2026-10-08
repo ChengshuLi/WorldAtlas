@@ -1,0 +1,553 @@
+{
+  "version": 1,
+  "status": "bytes-verified",
+  "geometry_operations_invoked": false,
+  "whole_native_member": {
+    "member_name": "gshhs_f.b",
+    "bytes": 95809336,
+    "sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "records_authenticated": 188612,
+    "validation_completed_before_publish": true
+  },
+  "reader": {
+    "path": "coordination/engineering/gshhg-native-member-custody-20261007/reader.py",
+    "sha256": "c06f8b65e700b81fb73352ffb17bee719eaab7a1bc8ae30ed1707d6e2f3b015a"
+  },
+  "member_index": {
+    "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+    "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+    "canonical_sha256": "ad77048751f2826071afb727f794752ca999d5a91a21657b1514e60982fd0005"
+  },
+  "downstream_reader": {
+    "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/downstream-reader.json",
+    "sha256": "39a571ab73464d46cc2029b430e7db0bfccca82fed3a74d652765fbe5317f731"
+  },
+  "query_metadata": {
+    "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/gshhg-native-query-records.json",
+    "sha256": "d978c4e92bdcbff3ece9f4f798ea977ed21a4d709ef5598fed5bde71a7130783"
+  },
+  "selected_output": {
+    "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/records.bin",
+    "bytes": 7168404,
+    "sha256": "9f4833fdac3cbebb9e60d413f469570453b1bad177892b9227702125728b99d5",
+    "record_order": [
+      2,
+      104,
+      216,
+      1083,
+      1480,
+      2342,
+      2446,
+      3041,
+      3498,
+      4854,
+      6395
+    ],
+    "records": [
+      {
+        "id": 2,
+        "source_offset": 11507808,
+        "output_offset": 0,
+        "bytes": 7012332,
+        "sha256": "586f377d6bca21063987d4f597831a954135209fb3810b2377c746d9b13befea",
+        "coordinate_bytes_sha256": "3be922652a446bdde95d5a4ae79e5b96445da4e33c3179d57a73815a3c063a07",
+        "header_int32": [
+          2,
+          876536,
+          83889921,
+          191867583,
+          304379194,
+          7204750,
+          72002694,
+          201547401,
+          201547401,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 1,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          280073722,
+          9312361
+        ],
+        "last_point": [
+          280073722,
+          9312361
+        ],
+        "native_bounds_microdegrees": [
+          191867583,
+          7204750,
+          304379194,
+          72002694
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 104,
+        "source_offset": 40435664,
+        "output_offset": 7012332,
+        "bytes": 101148,
+        "sha256": "9698a5c23accdcd41384821146087f7ca40c6ac0ba01f6992c8437ef029956ef",
+        "coordinate_bytes_sha256": "40189c7af33dca0091f2ed0a7aa53c99ebe0a9e9830e452c07b62dc4073910e4",
+        "header_int32": [
+          104,
+          12638,
+          352325377,
+          226332444,
+          228046861,
+          54690361,
+          56359556,
+          682180216,
+          682180216,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 5,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          227574167,
+          54997528
+        ],
+        "last_point": [
+          227574167,
+          54997528
+        ],
+        "native_bounds_microdegrees": [
+          226332444,
+          54690361,
+          228046861,
+          56359556
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 216,
+        "source_offset": 43508056,
+        "output_offset": 7113480,
+        "bytes": 32052,
+        "sha256": "61c375166c3040d54eb59efcc804c17ea4a5b7886307f50c28d270e285b11bf0",
+        "coordinate_bytes_sha256": "d43da31cbfb52fc051a63fdd55d67a0dd25fe01cd106c5dee2a8ca5a08062f36",
+        "header_int32": [
+          216,
+          4001,
+          352325377,
+          206776528,
+          208041528,
+          57989833,
+          58482889,
+          188387118,
+          188387118,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 5,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          207128028,
+          57998444
+        ],
+        "last_point": [
+          207128028,
+          57998444
+        ],
+        "native_bounds_microdegrees": [
+          206776528,
+          57989833,
+          208041528,
+          58482889
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 1083,
+        "source_offset": 50324004,
+        "output_offset": 7145532,
+        "bytes": 4804,
+        "sha256": "aeafe3043d56825a601ebc727b821c7a827d746fbf4729e9bd0164f4bb9e9bb6",
+        "coordinate_bytes_sha256": "9bb3526589ae3a09a8f90b844ad313f728c9888ed0e58ea512e868482a7ee37a",
+        "header_int32": [
+          1083,
+          595,
+          419434241,
+          194309111,
+          194612500,
+          54107889,
+          54298778,
+          169625615,
+          169625615,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 6,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          194309111,
+          54240806
+        ],
+        "last_point": [
+          194309111,
+          54240806
+        ],
+        "native_bounds_microdegrees": [
+          194309111,
+          54107889,
+          194612500,
+          54298778
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 1480,
+        "source_offset": 51842416,
+        "output_offset": 7150336,
+        "bytes": 6204,
+        "sha256": "8005ffeaa38b8f64b1043d13a4a78362ec6226ef6a836caacbd45310d57d660a",
+        "coordinate_bytes_sha256": "4b61bd6cbf8525d6abc9bc19dfef121da8dc3603953ccd5cf2e4c92774927392",
+        "header_int32": [
+          1480,
+          770,
+          419434241,
+          200338250,
+          200513528,
+          55035694,
+          55254194,
+          103457596,
+          103457596,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 6,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          200471750,
+          55248222
+        ],
+        "last_point": [
+          200471750,
+          55248222
+        ],
+        "native_bounds_microdegrees": [
+          200338250,
+          55035694,
+          200513528,
+          55254194
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 2342,
+        "source_offset": 54130048,
+        "output_offset": 7156540,
+        "bytes": 3452,
+        "sha256": "5fd33d46183c11cef8c935c1d481724d9f49e034b7f78650e343725649d9785a",
+        "coordinate_bytes_sha256": "b2b6bc527c1d027c538e7d6d0d3efee82f681aa35d7a5ad58acb07764d03b597",
+        "header_int32": [
+          2342,
+          426,
+          486543105,
+          211980750,
+          212157389,
+          60653722,
+          60751278,
+          466250333,
+          466250333,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 7,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          211999139,
+          60706639
+        ],
+        "last_point": [
+          211999139,
+          60706639
+        ],
+        "native_bounds_microdegrees": [
+          211980750,
+          60653722,
+          212157389,
+          60751278
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 2446,
+        "source_offset": 54408104,
+        "output_offset": 7159992,
+        "bytes": 3604,
+        "sha256": "d02ab0dd85ccf3c1b946b9d91cfb54e05e648c29c9a026945505a0123d5fdbad",
+        "coordinate_bytes_sha256": "9711cd2cc37ed379a8bc86a03a2e893c642b0b80f99abbd98e2e260224b21604",
+        "header_int32": [
+          2446,
+          445,
+          486543105,
+          212674111,
+          212929083,
+          60851222,
+          60913722,
+          432812675,
+          432812675,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 7,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          212674111,
+          60875833
+        ],
+        "last_point": [
+          212674111,
+          60875833
+        ],
+        "native_bounds_microdegrees": [
+          212674111,
+          60851222,
+          212929083,
+          60913722
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 3041,
+        "source_offset": 55553412,
+        "output_offset": 7163596,
+        "bytes": 1676,
+        "sha256": "2288785dba1eac73f5a0fd1d2be2720a4f8a2ab8d4ef16fea3075d79e8f50a9b",
+        "coordinate_bytes_sha256": "a446a70cbe26d1ed24de96a0b4423f7b2aba0293de59ce57f239e0a9bd4b4c48",
+        "header_int32": [
+          3041,
+          204,
+          486543105,
+          207059111,
+          207225778,
+          58282083,
+          58346222,
+          303296183,
+          303296183,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 7,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          207059111,
+          58331639
+        ],
+        "last_point": [
+          207059111,
+          58331639
+        ],
+        "native_bounds_microdegrees": [
+          207059111,
+          58282083,
+          207225778,
+          58346222
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 3498,
+        "source_offset": 56298072,
+        "output_offset": 7165272,
+        "bytes": 1236,
+        "sha256": "af6e8681746eb476405567af7cb6cfaa96d3cf95b740fcbc50e615ea2aac71aa",
+        "coordinate_bytes_sha256": "fc72aedbb74ef7195e32da2c859dc44b95a56da2863e50c32b985a892247b025",
+        "header_int32": [
+          3498,
+          149,
+          486543105,
+          226671611,
+          226768639,
+          55400583,
+          55450917,
+          239397935,
+          239397935,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 7,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          226679083,
+          55426139
+        ],
+        "last_point": [
+          226679083,
+          55426139
+        ],
+        "native_bounds_microdegrees": [
+          226671611,
+          55400583,
+          226768639,
+          55450917
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 4854,
+        "source_offset": 58043704,
+        "output_offset": 7166508,
+        "bytes": 1228,
+        "sha256": "4ff83962efb475f17f5519e134c8d8a94bb0fc882dc234de9ac097bd2a11407e",
+        "coordinate_bytes_sha256": "fe0fc61079d0c32b0e78eeea304a96f54426bda7529ca04badf12917443a777b",
+        "header_int32": [
+          4854,
+          148,
+          486543105,
+          208268139,
+          208361861,
+          59095778,
+          59131667,
+          137628236,
+          137628236,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 7,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          208309306,
+          59099861
+        ],
+        "last_point": [
+          208309306,
+          59099861
+        ],
+        "native_bounds_microdegrees": [
+          208268139,
+          59095778,
+          208361861,
+          59131667
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      },
+      {
+        "id": 6395,
+        "source_offset": 59518732,
+        "output_offset": 7167736,
+        "bytes": 668,
+        "sha256": "c51240b4556b0b12e66acd636dd3e0f714ce07d63ea8a56043887fa6858ad10c",
+        "coordinate_bytes_sha256": "7d883adead6ed4426d97396ff53a1e3f936fafaf22a73685dedb94bf8ee38535",
+        "header_int32": [
+          6395,
+          78,
+          553651969,
+          195355000,
+          195418389,
+          63071583,
+          63110694,
+          857895255,
+          857895255,
+          -1,
+          -1
+        ],
+        "level": 1,
+        "version": 15,
+        "seam_flags": 0,
+        "source": 1,
+        "river_lake": 0,
+        "area_scale": 8,
+        "container": -1,
+        "ancestor": -1,
+        "first_point": [
+          195418250,
+          63093028
+        ],
+        "last_point": [
+          195418250,
+          63093028
+        ],
+        "native_bounds_microdegrees": [
+          195355000,
+          63071583,
+          195418389,
+          63110694
+        ],
+        "closed": true,
+        "source_geometry_validity": "not evaluated; custody only"
+      }
+    ]
+  },
+  "limits": [
+    "All 11 selected records are GSHHG level 1 coarse land support; this does not establish shoreline authority.",
+    "Native coordinates are authenticated bytes; geometry validity, observation date, datum registration, and repair authority are not established by this extraction.",
+    "Selected record staging remains private until all 188612 native records and the full member hash pass."
+  ],
+  "execution": {
+    "python": "3.12.14",
+    "elapsed_seconds": 7.751
+  }
+}

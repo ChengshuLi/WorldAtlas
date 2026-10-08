@@ -1,0 +1,68 @@
+{
+  "actual_original_detector_code_pin": {
+    "bytes": 9773,
+    "commit": "b6e0d0d21cfd6dde68c3c292c9513d3a24896a11",
+    "path": "scripts/audit-physical-gaps.py",
+    "sha256": "7656263b33f222942f709c3b9671c344dd5350cafd2726423c6632b38a667f07"
+  },
+  "all_actual13_source_fragment_tiles_checked": [
+    1586,
+    1659,
+    1660,
+    1661,
+    1664,
+    1665,
+    1731,
+    1734
+  ],
+  "all_three_Atlas_parts_whole_encoded_equal_detector_baseline": [
+    {
+      "bytes": 4525239,
+      "detector_source_pin": {
+        "bytes": 4525239,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-25.json",
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      },
+      "path": "data/geography/part-25.json",
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "bytes": 4608983,
+      "detector_source_pin": {
+        "bytes": 4608983,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-26.json",
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      },
+      "path": "data/geography/part-26.json",
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "bytes": 4863162,
+      "detector_source_pin": {
+        "bytes": 4863162,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-27.json",
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+      },
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    }
+  ],
+  "full_Atlas_location_count": 49625,
+  "invalid_Atlas_location_count": 0,
+  "limits": [
+    "No new geometry execution; verified actual retained original report, full-source pins and original producer contract.",
+    "Exact13 fragment-body SHA/contact list readback can use detector17 output ordinary shards or already-preserved accepted predecessor investigation records; not rerun world detection.",
+    "Baseline17contact proof is source-vintage-specific; sourcebyte equality above covers all3 relevant Atlas parts at6c0ea95b."
+  ],
+  "original_detector_actual_baseline": "548c5f89f00271050823076a84695bb41e1b8454",
+  "original_detector_always_records_complete_contact_lists_for_each_emitted_fragment": true,
+  "original_detector_report_pin": {
+    "bytes": 492083,
+    "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+    "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+    "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330"
+  }
+}
