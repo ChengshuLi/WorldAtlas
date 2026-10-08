@@ -37,7 +37,7 @@ def expected_inventory(geometry_path: Path) -> dict:
                 contact_pairs.add((component["component_id"], subject_id))
     fragment_ids = [row["id"] for row in data["original_contact_fragment_features"]]
     source_contact_geometry_hashes = []
-    for row in data["original_source_contacts"]:
+    for row in data["original_source_contacts"]["matched_rows"]:
         geometry = row["geometry"]
         raw = json.dumps(geometry, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
         source_contact_geometry_hashes.append(sha256(raw))
@@ -48,7 +48,7 @@ def expected_inventory(geometry_path: Path) -> dict:
     frozen_path = BASE / "frozen-inputs.json"
     frozen_raw = frozen_path.read_bytes()
     coverage_raw = (BASE / "source-coverage.json").read_bytes()
-    geometry_two_raw = PACKET / "run-two/source-geometry-results.json.gz"
+    geometry_two_raw = (PACKET / "run-two/source-geometry-results.json.gz").read_bytes()
     return {
         "component_ids": set(components),
         "subject_ids": set(subjects),
@@ -247,11 +247,20 @@ def controls_only() -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--controls-only", action="store_true", help="test the verifier against synthetic complete bundles; no raster data is read")
+    parser.add_argument("--inventory-only", action="store_true", help="verify expected rosters from preserved vector inputs; no raster data is read")
     args = parser.parse_args()
+    if args.controls_only and args.inventory_only:
+        parser.error("--controls-only and --inventory-only are mutually exclusive")
     if args.controls_only:
         print(json.dumps(controls_only(), sort_keys=True, indent=2))
         return
-    report = verify_two_runs(BASE / "run-one", BASE / "run-two", expected_inventory(PACKET / "run-one/source-geometry-results.json.gz"))
+    expected = expected_inventory(PACKET / "run-one/source-geometry-results.json.gz")
+    if args.inventory_only:
+        if (len(expected["component_ids"]), len(expected["subject_ids"]), len(expected["contact_pairs"]), len(expected["fragment_ids"])) != (10, 4, 21, 2):
+            raise RuntimeError("Preserved source comparison does not match the complete #1234 subject roster")
+        print(json.dumps({"result": "passed", "component_count": 10, "contact_subject_count": 4, "local_contact_intersection_count": 21, "contact_fragment_count": 2, "source_pixels_read": False}, sort_keys=True, indent=2))
+        return
+    report = verify_two_runs(BASE / "run-one", BASE / "run-two", expected)
     print(json.dumps(report, sort_keys=True, indent=2))
 
 
