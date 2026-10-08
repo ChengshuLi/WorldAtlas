@@ -6,6 +6,8 @@ from __future__ import annotations
 import hashlib
 import importlib.metadata
 import json
+import gzip
+import math
 import platform
 import sys
 import zlib
@@ -34,8 +36,74 @@ def descriptor(path: Path) -> dict:
     return {"path": str(path.relative_to(REPO)), "bytes": path.stat().st_size, "sha256": digest(path)}
 
 
+def coordinate_window(geometry: dict | None, complete_window: dict) -> dict | None:
+    """Measure exact input geometry envelope rows without opening raster values."""
+    if not isinstance(geometry, dict) or not isinstance(geometry.get("coordinates"), list):
+        return None
+    xs: list[float] = []
+    ys: list[float] = []
+
+    def collect(value) -> None:
+        if isinstance(value, list):
+            if len(value) >= 2 and isinstance(value[0], (int, float)) and isinstance(value[1], (int, float)):
+                xs.append(float(value[0]))
+                ys.append(float(value[1]))
+            else:
+                for child in value:
+                    collect(child)
+
+    collect(geometry["coordinates"])
+    if not xs:
+        return None
+    columns = complete_window["columns_half_open"]
+    rows = complete_window["rows_half_open"]
+    pixel = 1 / 12_000
+    c0 = max(columns[0], math.floor((min(xs) - 27.0) / pixel) - 1)
+    c1 = min(columns[1], math.ceil((max(xs) - 27.0) / pixel) + 1)
+    r0 = max(rows[0], math.floor((-15.0 - max(ys)) / pixel) - 1)
+    r1 = min(rows[1], math.ceil((-15.0 - min(ys)) / pixel) + 1)
+    return {"columns": c1 - c0, "rows": r1 - r0, "coordinate_count": len(xs)}
+
+
+def geometry_row_admission(geometry_gzip: bytes, range_manifest: dict) -> dict:
+    """Report the largest exact per-row vector operation envelope for #1234."""
+    data = json.loads(gzip.decompress(geometry_gzip))
+    window = range_manifest["complete_pixel_window"]
+    candidates = []
+    contacts = []
+    fragments = []
+    subjects = set(data["subject_ids"])
+    for component in data["components"]:
+        candidates.append({"component_id": component["component_id"], **coordinate_window(component["original_component_feature"]["geometry"], window)})
+        for row in component["source_feature_intersections"]:
+            source_id = f"gb:{row['country']}:ADM2:{row['shapeID']}"
+            if source_id in subjects:
+                contacts.append({"component_id": component["component_id"], "source_subject_id": source_id, "empty": row["intersection"]["empty"], **(coordinate_window(row["intersection"]["geometry"], window) or {"columns": 0, "rows": 0, "coordinate_count": 0})})
+    for feature in data["original_contact_fragment_features"]:
+        fragments.append({"fragment_id": feature["id"], **(coordinate_window(feature["geometry"], window) or {"columns": 0, "rows": 0, "coordinate_count": 0})})
+    all_rows = [*candidates, *contacts, *fragments]
+    return {
+        "basis": "pinned original comparison geometry coordinates and exact classifier envelope formula; no raster pixel values read",
+        "complete_candidate_count": len(candidates),
+        "local_contact_intersection_count": len(contacts),
+        "original_contact_fragment_count": len(fragments),
+        "maximum_candidate_row_width_cells": max(row["columns"] for row in candidates),
+        "maximum_candidate_window_rows": max(row["rows"] for row in candidates),
+        "maximum_local_contact_row_width_cells": max(row["columns"] for row in contacts),
+        "maximum_local_contact_window_rows": max(row["rows"] for row in contacts),
+        "maximum_all_geometry_row_width_cells": max(row["columns"] for row in all_rows),
+        "maximum_all_geometry_window_rows": max(row["rows"] for row in all_rows),
+        "source_window_width_cells": window["dimensions"][0],
+        "candidates": candidates,
+        "local_contact_intersections": contacts,
+        "point_contact_fragments": fragments,
+    }
+
+
 def main() -> None:
     range_manifest = json.loads((BASE / "worldcover-source-ranges.json").read_text(encoding="utf-8"))
+    geometry_bytes = (PACKET / "run-one/source-geometry-results.json.gz").read_bytes()
+    row_admission = geometry_row_admission(geometry_bytes, range_manifest)
     range_files = [BASE / row["file"] for row in [range_manifest["ifd_metadata_range"], *range_manifest["blocks"]]]
     named = [
         PACKET / "run-one/source-geometry-results.json.gz",
@@ -80,6 +148,7 @@ def main() -> None:
         "retained_worldcover_range_bytes": range_manifest["selected_encoded_bytes"] + range_manifest["ifd_metadata_range"]["content_length"],
         "worldcover_selected_decoded_block_capacity_bytes": range_manifest["selected_decoded_bytes"],
         "worldcover_issue_pixel_window_bytes": range_manifest["complete_pixel_window"]["decoded_bytes"],
+        "geometry_row_admission": row_admission,
         "runtime": {
             "python": sys.version.split()[0],
             "platform": platform.platform(),
