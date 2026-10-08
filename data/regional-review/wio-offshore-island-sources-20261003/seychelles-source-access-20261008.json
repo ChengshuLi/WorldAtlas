@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "issue": 633,
+  "retrieved_utc": "2026-10-08T07:42:57+00:00",
+  "retention": "Only URL, exact response-body SHA-256, byte length, retrieval timestamp, and research finding are retained; official web/PDF bodies are not redistributed here.",
+  "sources": [
+    {
+      "id": "Seychelles-MACCE-ecosystems",
+      "url": "https://environment.gov.sc/seychelles-clearing-house-mechanism/ecosystems/",
+      "role": "official high-level physical island inventory context; geology/groups",
+      "finding": "The ministry page describes 115 granitic and coral islands and groups/physical character. It cites Government of Seychelles biodiversity sources around 2011/2014; it is not a dated per-island polygon inventory or region crosswalk. The number is a broad descriptive aggregate and does not reconcile the assigned Other Islands geometry.",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "response_sha256": "1735052fba1da94732b614c735c3e412a4762c91971152d755d2180df5862748",
+      "response_bytes": 162964
+    },
+    {
+      "id": "Seychelles-MACCE-outer-island-management",
+      "url": "https://macce.gov.sc/management-and-biodiversity-conservation-of-outer-islands/",
+      "role": "official outer-island administrative/management context",
+      "finding": "The ministry page states outer-island management arrangements and that outer islands account for more than half the archipelago total; cited content does not provide an exhaustive per-island GIS inventory or a region membership crosswalk.",
+      "retrieval_error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    },
+    {
+      "id": "Seychelles-National-Spatial-Data-Sharing-Policy",
+      "url": "https://lh.gov.sc/media/documents/NATIONAL_SPATIAL_DATA_SHARING_POLICY.PDF",
+      "role": "official geospatial data request/license policy",
+      "finding": "The policy includes a bilateral GIS Data License Agreement. Article 8.1 states delivered datasets are for internal use; products may be shown but not sold, traded, transmitted, or otherwise made available to third parties, except stated corporate affiliates, unless Article 8 stipulates otherwise. A project-specific written agreement is therefore not an open redistribution license. Request a dataset-specific agreement authorizing intended retention/reuse before obtaining or sharing licensed island/region geometry.",
+      "retrieval_error": "HTTPError: HTTP Error 404: Not Found"
+    },
+    {
+      "id": "Seychelles-NBS-GIS",
+      "url": "https://www.nbs.gov.sc/statistics/gis",
+      "role": "official census/GIS access route",
+      "finding": "The NBS GIS page describes census mapping supporting enumerators and supervisors to identify enumeration areas and locate households/structures. Public page does not provide a licensed complete settlement-point layer; census operational mapping should not be inferred as a public geocoded settlement gazetteer.",
+      "retrieval_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "Seychelles-NBS-Census-2022",
+      "url": "https://www.nbs.gov.sc/downloads/1555-seychelles-population-and-housing-census-2022",
+      "role": "current statistical publication and named locality context",
+      "finding": "The official census report is downloadable as a PDF and supplies census geography/statistics; it does not establish public redistribution of operational GIS coordinates or a complete settlement-point dataset. No such dataset/license is exposed from its page.",
+      "retrieval_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "Seychelles-NBS-Seychelles-in-Figures-2013",
+      "url": "https://www.statehouse.gov.sc/uploads/downloads/filepath_67.pdf",
+      "role": "older official archipelago descriptive context only",
+      "finding": "NBS 2013 says the country has over 116 islands, describes a Mahé group of 43 and an outlying coralline group of 73 or more, and provides a schematic map. Its count differs from the current ministry 115 description, is explicitly approximate/older, and is not a feature-level catalog or region crosswalk.",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "response_sha256": "c818554fda0b4fc0fd6755933e45badab08419c7fcf8e8d51e90e2396bd61cb8",
+      "response_bytes": 4011728
+    }
+  ]
+}
