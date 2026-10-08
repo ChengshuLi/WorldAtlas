@@ -1,0 +1,131 @@
+{
+  "as_of": "2026-10-08",
+  "sources": [
+    {
+      "id": "ltu-ort10-2025-record",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT 2025 metadata record",
+      "url": "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B7E08EDAD-FBD1-4E28-AEEA-691336E62B2D%7D",
+      "vintage": "title 2025; temporal extent 2024-04-25..2024-06-21",
+      "retrieved": "2026-10-08",
+      "reuse": "generic “License”; no pixel-retention permission established",
+      "verification": "official page reviewed; conflicting LT/EN descriptions",
+      "known_limits": [
+        "Lithuanian abstract: 2025 Apr–Jun, about one third national coverage, 0.2m GSD (some 0.25m), about 0.4m RMSE.",
+        "English abstract says 2024 Apr–Jun.",
+        "No per-subject date or footprint join."
+      ]
+    },
+    {
+      "id": "ltu-ort-recent",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT current mosaic and aerial-photography date layers",
+      "url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer",
+      "vintage": "current mosaic; date layers report spatially varying 2022–2025 imagery",
+      "retrieved": "2026-10-08",
+      "reuse": "not established for image retention",
+      "verification": "official service lead reviewed; no tile/date query performed",
+      "known_limits": [
+        "National mosaic description and date layers are leads only; no per-subject date/coverage join.",
+        "Mixed-vintage mosaic cannot be treated as one survey date."
+      ]
+    },
+    {
+      "id": "ltu-ort10-view-service",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT 2024–2026 ArcGIS MapServer, metadata and REST ItemInfo",
+      "url": "https://www.geoportal.lt/mapproxy/nzt_ort10lt_2024_2026/MapServer",
+      "vintage": "service metadata published 2024-10-07; states 2024–2026 aerial imagery plus 2025 satellite; ItemInfo says 2024 orthophoto material",
+      "retrieved": "2026-10-08",
+      "reuse": "generic License; REST licenseInfo empty",
+      "verification": "official service metadata and REST catalogue reviewed",
+      "crs": "EPSG:3346 / LKS94 TM reported in service metadata",
+      "known_limits": [
+        "Conflicting service provenance unresolved.",
+        "No per-subject date/coverage join.",
+        "No pixels downloaded or retained."
+      ]
+    },
+    {
+      "id": "ltu-ort10-2024-record",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT 2024 metadata record",
+      "url": "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B4AE76165-1C49-4F53-ACC1-A1D75C14B6F1%7D",
+      "vintage": "2024-04-09..2024-07-10",
+      "retrieved": "2026-10-08",
+      "reuse": "generic License; pixel-retention terms not established",
+      "verification": "official metadata page reviewed",
+      "known_limits": [
+        "Service record is not per-subject coverage/date evidence."
+      ]
+    },
+    {
+      "id": "lva-cycle8-program",
+      "jurisdiction": "Latvia",
+      "source": "LGIA 8th cycle orthophoto program",
+      "url": "https://www.lgia.gov.lv/en/8-cikla-2022-2024-gads-ortofotokartes",
+      "vintage": "2022–2024 program; 20cm RGBI/CIR; eastern-border gaps supplemented by satellite",
+      "retrieved": "2026-10-08",
+      "reuse": "not established for cycle 8; no imagery retained",
+      "verification": "official program page reviewed",
+      "known_limits": [
+        "Program scope does not prove any scoped subject coverage or date.",
+        "Cycle-8 achieved accuracy not stated in reviewed public pages."
+      ]
+    },
+    {
+      "id": "lva-cycle8-wms",
+      "jurisdiction": "Latvia",
+      "source": "LGIA WMS service catalogue",
+      "url": "https://www.lgia.gov.lv/en/wms-servisi",
+      "vintage": "2022–2024 cycle-8 RGB/CIR and aerial photography time map",
+      "retrieved": "2026-10-08",
+      "reuse": "free only after client signs license; no license evidence",
+      "verification": "official service catalogue reviewed",
+      "known_limits": [
+        "No authorized endpoint accessed or per-subject join."
+      ]
+    },
+    {
+      "id": "lva-crs-transition",
+      "jurisdiction": "Latvia",
+      "source": "LGIA LKS-2020 transition notice",
+      "url": "https://www.lgia.gov.lv/en/node/1384",
+      "vintage": "effective 2026-10-01; legacy LKS-92 service through 2027-02-01 for existing users",
+      "retrieved": "2026-10-08",
+      "reuse": "not applicable",
+      "verification": "official notice reviewed",
+      "known_limits": [
+        "Reported 7–12cm coordinate shift; actual authorized endpoint/CRS/transformation unknown."
+      ]
+    },
+    {
+      "id": "copernicus-wcd",
+      "jurisdiction": "Europe",
+      "source": "Copernicus Water Cover Duration",
+      "url": "https://land.copernicus.eu/en/products/water-bodies/high-resolution-water-cover-duration",
+      "vintage": "2016-present annual hydrological years; Sentinel-1/2; 10m/100m; gradual release; product not validated",
+      "retrieved": "2026-10-08",
+      "reuse": "free for any purpose per official product documentation",
+      "verification": "official product/docs reviewed; no data downloaded",
+      "known_limits": [
+        "Annual aggregation (hydrological year starts Sept 1); no exact observation date or per-subject coverage checked.",
+        "Too coarse for microcomponent shoreline adjudication; supplementary context only."
+      ]
+    },
+    {
+      "id": "jrc-global-surface-water",
+      "jurisdiction": "Global",
+      "source": "JRC Global Surface Water download and documentation",
+      "url": "https://global-surface-water.appspot.com/download",
+      "vintage": "1984–2024; 30m; collection 2 after 2021",
+      "retrieved": "2026-10-08",
+      "reuse": "free/no use restriction; attribution required",
+      "verification": "official download page reviewed; no data downloaded",
+      "known_limits": [
+        "Aggregated products, collection transition, and variable co-registration offsets (typically subpixel, occasionally >=30m).",
+        "Yearly/monthly history 2022–24 requires asset merge; monthly recurrence known issue. Not a precise shoreline or adjudication source."
+      ]
+    }
+  ]
+}

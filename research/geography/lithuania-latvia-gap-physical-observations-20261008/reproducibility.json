@@ -1,0 +1,16 @@
+{
+  "issue": 1452,
+  "scope": "Source-only metadata packet and inherited exact-row extraction.",
+  "reproduction": [
+    "Review source metadata links and product caveats in sources/official-source-register.json.",
+    "Inspect source-pins.json for immutable pointset/contact and physical-row hash bindings.",
+    "No spatial operation or image acquisition was run; no command can reproduce a per-subject coverage/date result from this packet."
+  ],
+  "software": "Python 3.7 standard library for JSON/GZIP extraction; Node.js 24.19.0 for evidence-quality validation.",
+  "not_run": [
+    "GIS overlays or spatial joins",
+    "Raster inspection",
+    "Source imagery downloads",
+    "Geometry edits or candidate classification"
+  ]
+}

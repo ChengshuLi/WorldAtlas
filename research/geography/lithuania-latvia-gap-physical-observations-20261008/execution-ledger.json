@@ -1,0 +1,45 @@
+{
+  "issue": 1452,
+  "as_of": "2026-10-08",
+  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "family_id": "gap-source-batch:d6347433d050d025e6e082c0",
+  "scope": {
+    "components": 16,
+    "contacts": 3
+  },
+  "actions": [
+    {
+      "id": "retain-scope",
+      "status": "complete",
+      "detail": "Reused inherited full 16-component/3-contact roster and immutable input pins from #1426/#1436."
+    },
+    {
+      "id": "extract-candidate-and-contact-features",
+      "status": "complete",
+      "detail": "Extracted exact retained component Feature rows from content-addressed custody aliases and exact contact rows from pinned part-13; no feature/geometry edits."
+    },
+    {
+      "id": "source-metadata-review",
+      "status": "partial",
+      "detail": "Reviewed official candidate product metadata and recorded vintage, rights, CRS/accuracy and access limits in source register."
+    },
+    {
+      "id": "per-subject-date-coverage",
+      "status": "not-run",
+      "detail": "No spatial join, GIS, raster query or imagery inspection performed; separate root GIS window is required. Per-subject date and coverage remain unknown for all 19."
+    },
+    {
+      "id": "classification",
+      "status": "not-run",
+      "detail": "Physical status, historic water/ice, processing cause, and authority remain unresolved."
+    }
+  ],
+  "limits": [
+    "No source pixels or GIS data acquired.",
+    "No spatial join, overlay, raster inspection or geometry transformation.",
+    "No per-subject observation date, coverage, QA, or positional accuracy established.",
+    "No external image retention/reuse permission established.",
+    "No independent authority or legal-boundary conclusion."
+  ],
+  "next_action": "After a separate root GIS/resource admission and any required licenses, join all 16 components and 3 contacts to exact source footprints/date layers; otherwise preserve unknowns."
+}
