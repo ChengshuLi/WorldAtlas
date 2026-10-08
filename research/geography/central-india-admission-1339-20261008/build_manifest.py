@@ -131,6 +131,27 @@ def main() -> None:
         {"id": "retained_source_feature_receipt", "input_sha256": ledger_hash, "input_file": {"path": EXEC_PATH, "commit": BASE}, "evaluation_commit": BASE, "vintage": "baseline", "value": 6822, "unit": "features"},
         {"id": "metadata_declared_feature_count", "input_sha256": pins["native-source-metadata"], "input_file": {"path": metadata_path, "commit": DATA}, "evaluation_commit": BASE, "vintage": "baseline", "value": 6836, "unit": "features"},
     ]
+    metric_pointers = {
+        "complete_encoded_input_bytes": "/raw_input_audit/bytes",
+        "retained_decoded_source_size_claim": "/decoded_source_claim/gzip_footer_isize",
+        "minimum_raw_plus_decoded_bytes": "/admission/minimum_raw_plus_decoded_bytes",
+        "seven_output_reservations": "/admission/full_phase_plan/output_count",
+        "output_reservation_bytes": "/admission/output_reservation_bytes",
+        "complete_phase_reserved_bytes": "/admission/full_phase_plan/complete_phase_bytes",
+        "complete_phase_limit": "/admission/full_phase_plan/limits/phase_bytes",
+        "phase_limit_overage_before_outputs": "/admission/minimum_over_phase_cap_bytes",
+        "whole_source_body_file_limit": "/admission/full_phase_plan/limits/file_bytes",
+        "exact_scoped_subjects": "/scope/subject_count",
+        "scoped_provinces": "/scope/province_count",
+        "partial_madhya_pradesh_subjects": "/scope/areas/0/owned",
+        "partial_uttar_pradesh_subjects": "/scope/areas/1/owned",
+        "retained_source_feature_receipt": "/source_context/retained_chunk_receipt_feature_count",
+        "metadata_declared_feature_count": "/source_context/declared_feature_count",
+    }
+    if set(metric_pointers) != {row["id"] for row in metrics}:
+        raise ValueError("every metric must have exactly one admission assessment pointer")
+    metric_bindings = [{"metric_id": row["id"], "path": OWNED + "admission-assessment.json",
+                        "json_pointer": metric_pointers[row["id"]]} for row in metrics]
     summaries = [{"metric_id": row["id"], "value": row["value"], "unit": row["unit"]} for row in metrics]
     conclusions = [
         {"status": "supported", "source_ids": [source_ids[1]], "text": "All 55 distinct encoded baseline path identities were re-read from immutable Git commit 950eb2188e5b66d88ea47a679936a02fe3eb1c40 and their bytes and SHA-256 values matched the retained run ledger; their sum is 238,931,443 bytes."},
@@ -148,7 +169,7 @@ def main() -> None:
                      "subject_files": subject_files},
         "change_receipts": [{"path": OWNED + name, "status": "added"}
                             for name in candidate_names + ["evidence-quality.json"]],
-        "sources": sources, "outputs": outputs,
+        "sources": sources, "outputs": outputs, "metric_bindings": metric_bindings,
         "methods": [{"id": "whole-input-admission-and-source-free-audit",
                      "description": "Re-read each declared encoded input by immutable Git path and hash; use only gzip trailer size and retained chunk receipt sizes for decoded-body arithmetic; run fail-closed synthetic input, aggregate, identity, output and preservation controls. The original gzip body is not decoded.",
                      "software": "Python standard library 3.x; Node.js evidence-quality validator at the checked repository head", "units": "bytes and scoped administrative record counts", "kind": "measurement"}],

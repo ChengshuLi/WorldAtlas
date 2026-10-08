@@ -1773,8 +1773,8 @@
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/build_manifest.py",
-      "bytes": 16566,
-      "sha256": "56e4de945d302a3248ed699e725db08e5f31c95418cfd1187123392e340af67d",
+      "bytes": 18142,
+      "sha256": "7271387dfc82308560f66307d391086f40376c9aea05330ce486a0a42f11a51e",
       "hash_kind": "file-bytes"
     },
     {
@@ -1788,6 +1788,83 @@
       "bytes": 33310,
       "sha256": "abf53880ac4cebac11ce5aaaee472f803393cd18947209cb24ea0ad492bd6ec9",
       "hash_kind": "file-bytes"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "complete_encoded_input_bytes",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/raw_input_audit/bytes"
+    },
+    {
+      "metric_id": "retained_decoded_source_size_claim",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/decoded_source_claim/gzip_footer_isize"
+    },
+    {
+      "metric_id": "minimum_raw_plus_decoded_bytes",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/admission/minimum_raw_plus_decoded_bytes"
+    },
+    {
+      "metric_id": "seven_output_reservations",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/admission/full_phase_plan/output_count"
+    },
+    {
+      "metric_id": "output_reservation_bytes",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/admission/output_reservation_bytes"
+    },
+    {
+      "metric_id": "complete_phase_reserved_bytes",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/admission/full_phase_plan/complete_phase_bytes"
+    },
+    {
+      "metric_id": "complete_phase_limit",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/admission/full_phase_plan/limits/phase_bytes"
+    },
+    {
+      "metric_id": "phase_limit_overage_before_outputs",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/admission/minimum_over_phase_cap_bytes"
+    },
+    {
+      "metric_id": "whole_source_body_file_limit",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/admission/full_phase_plan/limits/file_bytes"
+    },
+    {
+      "metric_id": "exact_scoped_subjects",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/scope/subject_count"
+    },
+    {
+      "metric_id": "scoped_provinces",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/scope/province_count"
+    },
+    {
+      "metric_id": "partial_madhya_pradesh_subjects",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/scope/areas/0/owned"
+    },
+    {
+      "metric_id": "partial_uttar_pradesh_subjects",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/scope/areas/1/owned"
+    },
+    {
+      "metric_id": "retained_source_feature_receipt",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/source_context/retained_chunk_receipt_feature_count"
+    },
+    {
+      "metric_id": "metadata_declared_feature_count",
+      "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "json_pointer": "/source_context/declared_feature_count"
     }
   ],
   "methods": [
