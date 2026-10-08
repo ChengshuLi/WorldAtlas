@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "actual whole first-shard schema/inverse check; uncommitted module harness, not cold frozen CLI",
+  "input": {
+    "bytes": 1219776,
+    "hash_kind": "file-bytes",
+    "path": "components-000.jsonl.gz",
+    "sha256": "0c6e0c12add305144fc932351dd517af4656808579422c6ba4be932b33cdf6f2",
+    "uncompressed_bytes": 8383652,
+    "uncompressed_sha256": "761304c1ef6034e2f5e87bc0c37489227ae6c523a996fb2fe51eb2a52ebd40a7"
+  },
+  "parent": {
+    "version": 1,
+    "components": 95173,
+    "report_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+    "roster_sha256": "ab1d9b3f9450805219a418c670278dd351b8b9b97b76ce2cd5164058dbf31224"
+  },
+  "components": 1301,
+  "counts": {
+    "eligible": 0,
+    "assigned": 0,
+    "zero-cell": 0,
+    "rejected": 8,
+    "awaiting-evidence": 1293
+  },
+  "source_relative_counts": {
+    "unknown": 386,
+    "mixed-source-support": 279,
+    "mapped-land-support": 543,
+    "outside-mapped-L1-context": 85,
+    "mapped-inland-water-support": 8
+  },
+  "all_whole_original_record_inverses": true,
+  "output_decoded_bytes": 1528734
+}

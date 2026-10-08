@@ -81,3 +81,16 @@ test('streamed reuse coalesces adjacent fragments without changing dense owners 
  assert.deepEqual(result.grid.rows,expected.rows);assert.deepEqual(result.grid.runs,expected.runs);
  assert.equal(result.accounting.recomputedRows,0);
 });
+
+
+test('same retained geometry object with a new additive ledger recomputes native rows and equals a full compile',async()=>{
+ const {footprintValueSha256:hash,compileEffectiveNativeRuntime}=await import('../src/effective-footprint.js');
+ const old=reference[0],gain={type:'Polygon',coordinates:[ring(1,0,1.01,.01)]};
+ const changed={...old,additiveFootprint:{version:1,kind:'retained-base-plus-additions',baseline_release_sha256:'a'.repeat(64),
+  base_geometry_sha256:hash(old.geometry),ledger_sha256:'b'.repeat(64),rule_sha256:'c'.repeat(64),
+  additions:[{component_id:'fixture-gap',geometry:gain,geometry_sha256:hash(gain),source_receipt_sha256:'d'.repeat(64)}]}};
+ const result=await compileNativeLocationContext({referenceFeatures:reference,features:[changed,...reference.slice(1)],base,latitudes});
+ const expected=await compileEffectiveNativeRuntime(result.context.features.map((f,i)=>({...f,pixelIndex:i+1})),{size,latitudes});
+ assert.deepEqual(result.grid.rows,expected.rows);assert.deepEqual(result.grid.runs,expected.runs);
+ assert.ok(result.accounting.recomputedRows>0);assert.equal(changed.geometry,old.geometry);
+});

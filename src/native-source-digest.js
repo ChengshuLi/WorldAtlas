@@ -1,10 +1,11 @@
+import {effectiveFootprintValue} from './effective-footprint.js';
 import {sha256} from '@noble/hashes/sha2.js';
 
 // Hash exactly the retained JSON.stringify(sorted [id, geometry] pairs) bytes,
 // incrementally. This changes neither the original digest nor source authority;
 // it avoids a second complete-world JSON string and UTF-8 buffer in the worker.
 export async function nativeSourceDigest(features, {signal, onProgress = () => {}} = {}) {
-  const ordered = features.map(feature => [feature.id, feature.geometry])
+  const ordered = features.map(feature => [feature.id, effectiveFootprintValue(feature)])
     .sort((a, b) => a[0].localeCompare(b[0]));
   const hash = sha256.create(), encoder = new TextEncoder();
   let bytes = 2, largestFeatureBytes = 0;
