@@ -1,0 +1,76 @@
+{
+  "controls": [
+    {
+      "control": "whole-body-admitted-at-33554431",
+      "passed": true
+    },
+    {
+      "control": "whole-body-admitted-at-33554432",
+      "passed": true
+    },
+    {
+      "control": "whole-body-refused-at-33554433",
+      "passed": true
+    },
+    {
+      "control": "compressed-small-decoded-large-stops-at-limit-plus-one",
+      "passed": true
+    },
+    {
+      "control": "compressed-small-decoded-large-fixture-properties",
+      "passed": true
+    },
+    {
+      "control": "encoded-body-over-file-limit-rejected-before-decode",
+      "passed": true
+    },
+    {
+      "control": "source-plus-geography-single-phase-cap",
+      "passed": true
+    },
+    {
+      "control": "same-logical-identity-counted-once",
+      "passed": true
+    },
+    {
+      "control": "distinct-identities-count-same-bytes-separately",
+      "passed": true
+    },
+    {
+      "control": "outputs-included-in-complete-phase",
+      "passed": true
+    },
+    {
+      "control": "missing-complete-input-descriptor-refused",
+      "passed": true
+    },
+    {
+      "control": "refusal-stops-producer-before-product-creation",
+      "passed": true
+    },
+    {
+      "control": "unclosed-runtime-refused",
+      "passed": true
+    },
+    {
+      "control": "conflicting-logical-input-descriptors-rejected",
+      "passed": true
+    },
+    {
+      "control": "pinned-NewVintage-existing-vintage-collision",
+      "helper_commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40",
+      "helper_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "passed": true,
+      "sentinel_preserved": true,
+      "sentinel_sha256_before_after": "4f855db11c86cec811fbecde9909e67ced17cb3783fdec5666966b356e4b1530"
+    }
+  ],
+  "limits": {
+    "file_bytes": 33554432,
+    "phase_bytes": 268435456,
+    "receipt_bytes": 4096
+  },
+  "scope": "bounded synthetic admission fixtures only; no source decode or geography reproduction",
+  "status": "passed",
+  "version": 1
+}
