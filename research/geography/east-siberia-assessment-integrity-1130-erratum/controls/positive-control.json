@@ -1,0 +1,29 @@
+{
+  "evidence": {
+    "all_15_inventory_fields_exactly_joined": true,
+    "all_36_immutable_feature_files_scanned": true,
+    "assessment_sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5",
+    "baseline_commit": "90d5309c6497073a039099241360ba807d0c3722",
+    "legacy_outputs_unchanged": true,
+    "limits": [
+      "Source level strings are publisher metadata claims only.",
+      "Territorial status, completeness, parent approval and publication remain unresolved."
+    ],
+    "province_parent_records": 6,
+    "source_level_claims": {
+      "ADM2": 185,
+      "Named physical region portion": 22
+    },
+    "source_members_joined": true,
+    "status_counts": {
+      "correction-needed": 22,
+      "insufficient-evidence": 185
+    },
+    "subject_count": 207,
+    "table_sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23"
+  },
+  "kind": "positive-control",
+  "method_id": "corrected-provenance-field-reproduction",
+  "outcome": "passed",
+  "version": 1
+}

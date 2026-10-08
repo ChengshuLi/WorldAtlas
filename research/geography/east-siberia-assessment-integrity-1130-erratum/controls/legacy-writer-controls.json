@@ -1,0 +1,34 @@
+{
+  "adapter_hashes": {
+    "analyzer": "8decb4ad90423c938a74b2fa03cc0e4fe2833d7f1317f6501c94d1ba935b04db",
+    "renderer": "435a9cdb26ecb270246aa7740edce77e4cd48d6db2ae73e6ba4f1bd30d8f62a7"
+  },
+  "control": "pinned-legacy-producer-overwrite-sentinel",
+  "identical_output_bytes_retained_at": {
+    "analyzer": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/geography-assessment.json",
+    "renderer": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/subject-assessments.tsv"
+  },
+  "output_bytes_after": {
+    "analyzer": 456707,
+    "renderer": 137185
+  },
+  "output_hashes_after": {
+    "analyzer": "6da1c9850f0c5bec64061db4fdf06577df475355d5e6f9cb7c233412b665477d",
+    "renderer": "f274cde0d43f108971425c2c09b2c75b126a924cf82b48756bfd968ecb253744"
+  },
+  "outputs": [
+    "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/legacy-analyzer-overwrite.json",
+    "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/legacy-renderer-overwrite.tsv"
+  ],
+  "result": "both-original-writers-replaced-private-sentinels",
+  "retention_note": "The private post-write bytes exactly matched the pinned original outputs; duplicate copies were removed after hashes were recorded. The source bytes remain available at the immutable baseline paths above.",
+  "scope_note": "Only each final output path was redirected to an owned sentinel; original output paths were never opened by these controls.",
+  "sentinel_hashes_before": {
+    "analyzer": "9e75efd61dcdef599226a8a78c9d24be7a7d2238ca4c23137edee59a97bee747",
+    "renderer": "e9bb4bea51198436ce2a6471157cd78f7c2dd7a3eae9a36b6f110ccd589051f6"
+  },
+  "source_hashes": {
+    "analyzer": "7117e2fd8b1c9381a820f3fd80d7daf0dbc3083caf8cdbf93be88e0877c63022",
+    "renderer": "3c0e4810ee8440b6d2aec687d0a886a763aebb3766e144990a3f04d5f229e2a5"
+  }
+}
