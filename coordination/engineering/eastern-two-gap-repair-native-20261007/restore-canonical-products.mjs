@@ -5,11 +5,11 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {restoreWholeImage} from './whole-image.mjs';
 import {applyBytePatch,verifyWholeBytes} from './byte-patch.mjs';
-import {gzipSync,gunzipSync} from 'node:zlib';
+import {gunzipSync} from 'node:zlib';
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const CAP = 32 * 1024 * 1024;
-const canonicalIndex = '1dad6b42f55a2291a6884f302b31308d9b4323daf4536fc93a41efc7dee1695d';
+const canonicalIndex = 'b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
 const priorIndex = 'ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe';
 const originalCanonicalTransport = '3a343812f25b02f4472dbe5338a72e9541e4de180b916e0cf8bbc9a00464f097';
 const originalPriorTransport = '7c555e617c6843b070a0799088420ff535f210c2cf8d795b437230d79402c916';
@@ -136,12 +136,14 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
   const plan=JSON.parse(gunzipSync(planWire,{maxOutputLength:CAP}));
   const original=priorPaths.get(plan.original_source.path);assert.deepEqual(plan.original_source,original);
   const beforeWire=read(prior,{...original,path:original.object});
+  assert.equal(plan.kind,'whole-original-encoded-context-byte-delta-v1');
+  verifyWholeBytes(beforeWire,plan.original_source);
   const before=gunzipSync(beforeWire,{maxOutputLength:CAP});
-  assert.equal(before.length,plan.before_decoded_bytes);assert.equal(sha(before),plan.before_decoded_sha256);
-  const commands=plan.commands.map(c=>Object.hasOwn(c,'copy')?{copy:['original',...c.copy]}:c);
-  const after=applyBytePatch(commands,{bytes:plan.after_decoded_bytes,sha256:plan.after_decoded_sha256,mode:'100644'},name=>{assert.equal(name,'original');return before;});
-  const changedWire=gzipSync(after,{level:9});
-  verifyWholeBytes(changedWire,plan.current_member);
+  assert.equal(sha(before),plan.before_decoded_sha256);
+  const changedWire=applyBytePatch(plan.commands,plan.current_member,name=>{assert.equal(name,'original');return beforeWire;});
+  const after=gunzipSync(changedWire,{maxOutputLength:CAP});
+  assert.equal(sha(after),plan.after_decoded_sha256);
+  assert.equal(after.length,plan.current_member.original_binding.original_product.decoded_bytes);
   const targets=new Map(map.logical_targets.map(p=>[p.target,p]));
   const contextPin=targets.get('data/canonical-grid/eastern-v8/context-transport/index.json');assert(contextPin);
   const contextIndex=JSON.parse(read(canonical,{...contextPin,path:contextPin.object}));
@@ -156,12 +158,20 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
   });
   assert.equal(changes,1);assert.equal(offset,contextIndex.whole_bytes);
   const whole=Buffer.concat(members,offset);assert.equal(sha(whole),contextIndex.whole_sha256);
-  offset=0;
+  const outerPlan=JSON.parse(gunzipSync(imageRead(canonical,'current-context-outer-byte-patches.json.gz'),{maxOutputLength:CAP}));
+  assert.equal(outerPlan.kind,'whole-context-outer-encoded-byte-deltas-v1');
+  assert.equal(outerPlan.whole_sha256,contextIndex.whole_sha256);
+  assert.equal(outerPlan.whole_bytes,whole.length);
+  assert.equal(outerPlan.parts.length,contextIndex.parts.length);
+  offset=0;let partIndex=0;
   for(const part of contextIndex.parts) {
     assert.equal(part.offset,offset);assert(Number.isSafeInteger(part.decoded_bytes)&&part.decoded_bytes>0&&part.decoded_bytes<=16*1024*1024);
     const decoded=whole.subarray(offset,offset+part.decoded_bytes);assert.equal(decoded.length,part.decoded_bytes);
     assert.equal(sha(decoded),part.decoded_sha256);offset+=decoded.length;
-    const encoded=gzipSync(decoded,{level:9}),target=targets.get('data/canonical-grid/eastern-v8/context-transport/'+part.path);assert(target);
+    const patch=outerPlan.parts[partIndex++];assert.deepEqual(patch.part,part);
+    const encoded=applyBytePatch(patch.commands,{...part,mode:'100644'},name=>{assert.equal(name,'whole');return whole;});
+    assert(gunzipSync(encoded,{maxOutputLength:CAP}).equals(decoded));
+    const target=targets.get('data/canonical-grid/eastern-v8/context-transport/'+part.path);assert(target);
     assert.equal(encoded.length,part.bytes);assert.equal(sha(encoded),part.sha256);
     writeExactObject(canonical,{...target,path:target.object},encoded);
   }
