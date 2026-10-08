@@ -1,0 +1,642 @@
+{
+  "version": 1,
+  "issue": 633,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:MUS:ADM1:65221844B12885462064369",
+    "gb:MUS:ADM1:65221844B21568199301359",
+    "gb:MUS:ADM1:65221844B3325932502431",
+    "gb:MUS:ADM1:65221844B37057547030311",
+    "gb:MUS:ADM1:65221844B53255720811613",
+    "gb:MUS:ADM1:65221844B64352145242214",
+    "gb:MUS:ADM1:65221844B660734165567",
+    "gb:MUS:ADM1:65221844B83452679821580",
+    "gb:MUS:ADM1:65221844B91551715822340",
+    "gb:MUS:ADM1:65221844B93227578092779",
+    "gb:MUS:ADM1:65221844B93866494923153",
+    "gb:MUS:ADM1:65221844B99203907341133",
+    "atlas:coverage:MUS-5180",
+    "gb:SYC:ADM2:34574756B14018612202061",
+    "gb:SYC:ADM2:34574756B18865708954128",
+    "gb:SYC:ADM2:34574756B27990728867894",
+    "gb:SYC:ADM2:34574756B38092183622343",
+    "gb:SYC:ADM2:34574756B41664711494427",
+    "gb:SYC:ADM2:34574756B43978553392406",
+    "gb:SYC:ADM2:34574756B49819614716360",
+    "gb:SYC:ADM2:34574756B54247629098598",
+    "atlas:coverage:ATF-5919",
+    "atlas:coverage:FRA-4601",
+    "atlas:coverage:FRA-4602"
+  ],
+  "subject_ids_sha256": "91b35fcc9212ecf928e9c7443af4246d1c02e2456b6d19babb2bd63eb5316d58",
+  "baseline": {
+    "commit": "c90773357da171d97367332cb53154da95796bff",
+    "files": [
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/subject-inventory.jsonl",
+        "bytes": 417496,
+        "sha256": "e7c4a442d415cd51e47ccf18dc2f5533104d993fca41388bd5038706bdeb9dc4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/sources.json",
+        "bytes": 28554,
+        "sha256": "051676a2ee7a398ae1b7204cf25d74333faf4cb4cedb837f07308d5ed270d569",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/geometry-comparison.json",
+        "bytes": 121679,
+        "sha256": "f452d57ed94112b1e8c0f5e1eac9fc1200dec36302efcd2085dea7e354c140f8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/seychelles-2019-region-district-crosswalk.json",
+        "bytes": 3281,
+        "sha256": "aeb28aa7a06521b5b7457f50f95975aaa52f4eaf3615deb73a95305ff5d0873c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/settlement-administration-review.json",
+        "bytes": 280454,
+        "sha256": "d55b07ec655b78bab31bb8d641a5e080a787fa5fb3a8ee2f3c5cdeacc6a3d1b0",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {
+      "gb:MUS:ADM1:65221844B12885462064369": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B21568199301359": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B3325932502431": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B37057547030311": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B53255720811613": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B64352145242214": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B660734165567": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B83452679821580": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B91551715822340": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B93227578092779": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B93866494923153": "data/geography/part-16.json",
+      "gb:MUS:ADM1:65221844B99203907341133": "data/geography/part-16.json",
+      "atlas:coverage:MUS-5180": "data/geography/part-28.json",
+      "gb:SYC:ADM2:34574756B14018612202061": "data/geography/part-23.json",
+      "gb:SYC:ADM2:34574756B18865708954128": "data/geography/part-23.json",
+      "gb:SYC:ADM2:34574756B27990728867894": "data/geography/part-23.json",
+      "gb:SYC:ADM2:34574756B38092183622343": "data/geography/part-23.json",
+      "gb:SYC:ADM2:34574756B41664711494427": "data/geography/part-23.json",
+      "gb:SYC:ADM2:34574756B43978553392406": "data/geography/part-23.json",
+      "gb:SYC:ADM2:34574756B49819614716360": "data/geography/part-23.json",
+      "gb:SYC:ADM2:34574756B54247629098598": "data/geography/part-23.json",
+      "atlas:coverage:ATF-5919": "data/geography/part-28.json",
+      "atlas:coverage:FRA-4601": "data/geography/part-28.json",
+      "atlas:coverage:FRA-4602": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:MUS:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/MUS/ADM1",
+      "role": "mixed administrative and outer-island ADM1 boundary source; not twelve uniform districts",
+      "vintage": "2017 boundary reference; source metadata updated 2023-01-19; geoBoundaries build 2023-12-12",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; metadata also includes geoBoundaries CC BY 4.0 project/citation terms"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "data/regional-review/regional-review-4f180b98473f1071/sources/geoBoundaries-MUS-ADM1-2017.geojson",
+      "limit": "The source calls its 12 records districts and outer islands. It is not a physical island/reef catalogue; the issue scope includes nine Mauritius Island districts plus Rodrigues, St Brandon, and Agaléga."
+    },
+    {
+      "id": "gb:SYC:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/SYC/ADM2",
+      "role": "eight administrative regions",
+      "vintage": "2020 boundary reference; source metadata updated 2023-01-19; geoBoundaries build 2023-12-12",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0; retain upstream OCHA/NBS provenance and geoBoundaries citation terms"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "data/regional-review/regional-review-4f180b98473f1071/sources/geoBoundaries-SYC-ADM2-2020.geojson",
+      "limit": "Administrative regions are not physical-island units. The 2019 OCHA/NBS-provenance district crosswalk is older than the current review; the Other Islands aggregation has a different component granularity from the current feature."
+    },
+    {
+      "id": "natural-earth:admin1-selected",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+      "role": "named dependency/territory reference at 1:10m; comparison source only",
+      "vintage": "Natural Earth snapshot commit ca96624a56bd078437bca8184e78163e5039ad19; underlying feature observation dates unspecified",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain; source project requests attribution"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Fetch the Natural Earth admin-1 source members at the pinned repository commit and re-extract the four exact IDs ATF-5919, FRA-4601, FRA-4602, and MUS-5180.",
+      "limit": "A named 1:10m territory record does not certify a current or complete inventory of reefs, emergent cays, or settlement points."
+    },
+    {
+      "id": "Statistics-Mauritius:Census-2022-Vol-III",
+      "url": "https://statsmauritius.govmu.org/Documents/Census_and_Surveys/Census2022/HPC_TR_Vol3_Geo_Migration_Yr22_%20120126.pdf",
+      "role": "administrative census crosswalk and named locality context; not physical coastline data or a settlement point gazetteer",
+      "vintage": "2022 Housing and Population Census, Volume III; methodology report issued for the 2022 census",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open redistribution license identified. Do not retain the report bytes; use the official restoration URL and cited tables only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "https://statsmauritius.govmu.org/Documents/Census_and_Surveys/Census2022/HPC_TR_Vol3_Geo_Migration_Yr22_%20120126.pdf",
+      "limit": "Administrative names and population totals do not prove settlement coordinates, coastlines, reef emergence, or current subunit boundaries."
+    },
+    {
+      "id": "Mauritius:National-Cartographic-Section",
+      "url": "https://housing.govmu.org/Pages/Dept%20and%20Org/Divisions/Survey/The-Cartographic-Section.aspx",
+      "role": "official map and licensed GIS data access route",
+      "vintage": "Cartography Section page inspected 2026-10-07; maps and map products have multiple dates",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "restricted",
+        "terms": "The ministry sells/controls its digital map products and states that reuse of its copyrighted maps requires permission. No open redistribution grant located for the requested district/outer-island vectors."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Request current official vector district/outer-island data from the Cartographic Section and obtain the sale agreement/reuse terms; official chart catalogue includes St Brandon and Agaléga charts.",
+      "limit": "The page describes available product classes, not exact vector coverage, chart shoreline completeness, or a no-cost redistribution permission."
+    },
+    {
+      "id": "Mauritius:OIDC-outer-island-descriptions",
+      "url": "https://oidc.govmu.org/oidc/?page_id=40",
+      "role": "official island-name, place, and physical-context description",
+      "vintage": "Pages inspected 2026-10-07; some physical-count statements are variable/historical",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open content reuse license located; retain URL/hash restoration instructions, not page copies."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Reopen the cited official page; save its exact retrieval date, version and reuse terms before further use.",
+      "limit": "Government text describes the Cargados Carajos reef as a variable group of roughly 40 low islets, coral reefs and shoals; different pages identify named islets and state that shifting sands/storms change counts. Agaléga is described as two main islands encircled by a reef."
+    },
+    {
+      "id": "Mauritius:ONSDI-districts",
+      "url": "https://geoportal.govmu.org/api/v2/datasets/6/",
+      "role": "official national geospatial portal administrative district polygons; cross-check only",
+      "vintage": "Portal record published 2022-11-23, last_updated 2022-11-23; survey/administrative observation vintage not stated",
+      "retrieved_at": "2026-10-07 America/Los_Angeles",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0 (portal dataset record license identifier odbl)"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/mauritius_districts-20261008.geojson",
+          "bytes": 778323,
+          "sha256": "63f5c5c2660ff216a4429529814a3987ffa05e789bcbe889db520a74236b7540",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "Mauritius:ONSDI-islet-national-parks",
+      "url": "https://geoportal.govmu.org/api/v2/datasets/12/",
+      "role": "official protected-islet park point list; partial physical-place context, not an island-outline or all-islets inventory",
+      "vintage": "Portal record published 2022-11-23, last_updated 2022-11-23; point observation dates unstated",
+      "retrieved_at": "2026-10-07 America/Los_Angeles",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0 (portal dataset record license identifier odbl)"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/wio-offshore-island-sources-20261003/sources/mauritius_islet_parks-20261008.geojson",
+          "bytes": 2142,
+          "sha256": "cbefa4e20d77a48e96ed75ad48b2f69158750e52f2f363a42e6ae0797c84d94e",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "Seychelles:2018-Regional-Councils",
+      "url": "https://www.statehouse.gov.sc/news/4035/regional-councils-officially-launched",
+      "role": "administrative council-to-district grouping context; not a region-boundary source",
+      "vintage": "Official council launch announcement 2018",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open redistribution license found; restore by official URL and hash only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Reopen the cited official page; save its exact retrieval date, version and reuse terms before further use.",
+      "limit": "The council roster provides no polygons or current statutory Region-to-island crosswalk. It cannot decide the current parent-label differences."
+    },
+    {
+      "id": "Seychelles:2025-District-Administrators",
+      "url": "https://www.statehouse.gov.sc/uploads/files/45_c1NWtyh0.pdf",
+      "role": "current named District Administrator list; administration identity context",
+      "vintage": "Revised 2025-03-04",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open redistribution license found; restore by official URL/hash only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Reopen the cited official page; save its exact retrieval date, version and reuse terms before further use.",
+      "limit": "It is not a geocoded settlement list and does not define the legal or statistical parent-region polygons."
+    },
+    {
+      "id": "Seychelles:NBS-2022-census",
+      "url": "https://www.nbs.gov.sc/downloads/1555-seychelles-population-and-housing-census-2022",
+      "role": "current census administration and population context; not geocoded settlement data",
+      "vintage": "2022 census report published 2024-03-21",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "restricted",
+        "terms": "The page states no open license; original 10.5 MB PDF download flow reached an account/login wall in the prior check. No bytes retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use the official NBS download link after an authorized account/access route is available; do not reuse or recirculate a gated copy.",
+      "limit": "Population tables or a current district roster would still not provide a complete geocoded settlement gazetteer."
+    },
+    {
+      "id": "Seychelles:MSP-Atlas-islands",
+      "url": "https://seymsp.com/outputs/atlas/",
+      "role": "candidate contemporary physical-island and place-name source; license not established",
+      "vintage": "MSP Atlas final release v1.1 published in 2025; service created 2020-04-04 and modified 2023-11-20; Basemap_Islands DataLastEditDate 2023-11-18",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "ArcGIS item licenseInfo is blank. Copyright text names Seychelles MEECC and TNC. Public queryability is not a reuse license; no geometry retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use the named service and exact read-only count/group-by REST queries above. Request rights confirmation from MEECC/TNC before retaining or using feature geometry.",
+      "limit": "The 1,315 value counts service polygon records, not islands. Group counts reflect stored features, not real-world island totals. The 117 gazetteer points are described as place names, not settlements. No licensed boundary-to-region crosswalk or scale-based completeness proof was available."
+    },
+    {
+      "id": "Shom:LitTo3D-Eparses-2012",
+      "url": "https://services.data.shom.fr/geonetwork/system/api/records/BATHYMETRIE_LITTO3D_EPARSES_2012.xml",
+      "role": "high-resolution coastal elevation (terrain/bathymetry) candidate for physical emergent-land and reef screening",
+      "vintage": "Litto3D Eparses 2012 edition, publication date 2012-03-01; terrain acquisition date by each tile/islet not yet checked",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Open Licence version 2.0; must cite source; not for navigation"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore the exact metadata record, named WMS capabilities/layer, and per-island prepackages through Shom's distribution service; inspect actual tile metadata and original lawful source files before drawing any completeness conclusion.",
+      "limit": "Scale-appropriate source availability does not prove all named atolls, intertidal rocks, reefs or current shorelines are present. Geyser reef, emergent land, and the full TAAF island-group roster need explicit tile membership and crosswalk."
+    },
+    {
+      "id": "Shom:LitTo3D-Mayotte-2012",
+      "url": "https://services.data.shom.fr/geonetwork/adm/api/records/BATHYMETRIE_LITTO3D_MAYOT_2012.xml",
+      "role": "high-resolution coast elevation candidate, not settlement inventory",
+      "vintage": "Litto3D Mayotte 2012 edition; acquisition dates per tile need checking",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Licence 2.0 stated in official record; source attribution required; not for navigation"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "https://services.data.shom.fr/geonetwork/adm/api/records/BATHYMETRIE_LITTO3D_MAYOT_2012.xml",
+      "limit": "The product-level coastal source is a candidate for Mayotte's shoreline and reefs, but exact coverage of each current island/reef feature and acquisition dates remains unverified."
+    },
+    {
+      "id": "Shom:LitTo3D-Reunion-2016",
+      "url": "https://services.data.shom.fr/geonetwork/system/api/records/BATHYMETRIE_LITTO3D_REUNION_2016.xml",
+      "role": "high-resolution coastal elevation candidate; shoreline baseline only",
+      "vintage": "Litto3D Réunion 2016 edition; official metadata reports bathymetric surveys in 2009-2010 and topographic surveys in 2008-2009",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Licence 2.0 stated in official record; source attribution required; not for navigation"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "https://services.data.shom.fr/geonetwork/system/api/records/BATHYMETRIE_LITTO3D_REUNION_2016.xml",
+      "limit": "2016 product title masks 2008-2010 acquisition epochs; this is not a 2026 shoreline or settlement snapshot. Survey footprints and source masks must be checked before coastline comparison."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/scope.json",
+      "bytes": 1873,
+      "sha256": "c1d5c024487fafe6c8530e48cfc37748fdba62952f9285a80aaeed4799fe3028",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/source-inventory.json",
+      "bytes": 22170,
+      "sha256": "6c80ac20c8601c4f5b4ec07b07352f75f5d831f620842d9d317ffa83f3b9ad66",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/README.md",
+      "bytes": 9592,
+      "sha256": "4cee6ec11be2b53be67b9bb27d56c5715e3f2de4a92001d209f71d72e1651c05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/reproduce.py",
+      "bytes": 23159,
+      "sha256": "5d5207fc089949f74b686d6ae35a729e1452830c267132e65ab31cf958070300",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/subject-findings.json",
+      "bytes": 69067,
+      "sha256": "415078279e7ff88d86fadbc0d59b7b5d1974ea8725311bf539136205571a55b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/district-comparison.json",
+      "bytes": 8811,
+      "sha256": "6b52ebbfc8f33a807fc33819e01ff918ab4b08cd1e13d065f0b6d602e99f0796",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/wio-offshore-island-sources-20261003/results.json",
+      "bytes": 10405,
+      "sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-identity-crosswalk",
+      "description": "Compare the exact 24 issue IDs, administrative roles, dated inventories, source terms and predecessor crosswalks; treat all unlicensed or unobserved membership as unresolved.",
+      "software": "Python 3; pinned #482 source/evidence records and official source catalogs",
+      "units": "features and named administrative units"
+    },
+    {
+      "id": "district-overlays",
+      "kind": "geography",
+      "description": "Exact unique normalized-name join of nine ONSDI district polygons; symmetric-difference/union-area overlays of ONSDI against geoBoundaries 2017 and current Atlas. No geometry repairs.",
+      "software": "Shapely 2.1.2; pyproj 3.7.2; Python 3",
+      "units": "percent of union polygon area",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:32740/CRS84 transformed to EPSG:6933 using always_xy",
+      "area_method": "planar overlay in equal-area EPSG:6933; symmetric difference divided by union area × 100",
+      "distance_method": "none"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "issue-subjects",
+      "value": 24,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "current-subjects-resolved",
+      "value": 24,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Mauritius-2017-records",
+      "value": 12,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Seychelles-2020-records",
+      "value": 8,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "ONSDI-Mauritius-districts",
+      "value": 9,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "ONSDI-islet-park-points",
+      "value": 8,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Seychelles-2019-regions",
+      "value": 8,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Seychelles-ADM3-district-rows",
+      "value": 27,
+      "unit": "records",
+      "vintage": "current",
+      "input_sha256": "5847b9a2d9fab1785c4a5c71bb89512da90812dffae1f7165780ca3c13cb6cf3",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "ONSDI-vs-2017-min",
+      "value": 0.00047730672784465525,
+      "unit": "percent of union area",
+      "vintage": "current",
+      "input_sha256": "6b52ebbfc8f33a807fc33819e01ff918ab4b08cd1e13d065f0b6d602e99f0796",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "ONSDI-vs-2017-max",
+      "value": 1.351558102259288,
+      "unit": "percent of union area",
+      "vintage": "current",
+      "input_sha256": "6b52ebbfc8f33a807fc33819e01ff918ab4b08cd1e13d065f0b6d602e99f0796",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Atlas-vs-ONSDI-min",
+      "value": 2.303630552475344,
+      "unit": "percent of union area",
+      "vintage": "current",
+      "input_sha256": "6b52ebbfc8f33a807fc33819e01ff918ab4b08cd1e13d065f0b6d602e99f0796",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    },
+    {
+      "id": "Atlas-vs-ONSDI-max",
+      "value": 9.503010083212178,
+      "unit": "percent of union area",
+      "vintage": "current",
+      "input_sha256": "6b52ebbfc8f33a807fc33819e01ff918ab4b08cd1e13d065f0b6d602e99f0796",
+      "evaluation_commit": "c90773357da171d97367332cb53154da95796bff"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "issue-subjects",
+      "value": 24,
+      "unit": "records"
+    },
+    {
+      "metric_id": "current-subjects-resolved",
+      "value": 24,
+      "unit": "records"
+    },
+    {
+      "metric_id": "Mauritius-2017-records",
+      "value": 12,
+      "unit": "records"
+    },
+    {
+      "metric_id": "Seychelles-2020-records",
+      "value": 8,
+      "unit": "records"
+    },
+    {
+      "metric_id": "ONSDI-Mauritius-districts",
+      "value": 9,
+      "unit": "records"
+    },
+    {
+      "metric_id": "ONSDI-islet-park-points",
+      "value": 8,
+      "unit": "records"
+    },
+    {
+      "metric_id": "Seychelles-2019-regions",
+      "value": 8,
+      "unit": "records"
+    },
+    {
+      "metric_id": "Seychelles-ADM3-district-rows",
+      "value": 27,
+      "unit": "records"
+    },
+    {
+      "metric_id": "ONSDI-vs-2017-min",
+      "value": 0.00047730672784465525,
+      "unit": "percent of union area"
+    },
+    {
+      "metric_id": "ONSDI-vs-2017-max",
+      "value": 1.351558102259288,
+      "unit": "percent of union area"
+    },
+    {
+      "metric_id": "Atlas-vs-ONSDI-min",
+      "value": 2.303630552475344,
+      "unit": "percent of union area"
+    },
+    {
+      "metric_id": "Atlas-vs-ONSDI-max",
+      "value": 9.503010083212178,
+      "unit": "percent of union area"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The 24 declared subjects resolve one-to-one against current geography records and the pinned predecessor inventory; this establishes scope identity only.",
+      "status": "supported",
+      "source_ids": [
+        "gb:MUS:ADM1",
+        "gb:SYC:ADM2",
+        "natural-earth:admin1-selected"
+      ]
+    },
+    {
+      "text": "Nine ONSDI administrative districts join one-to-one by normalized exact name to the nine Mauritius Island district records; area differences are triage, not legal validation.",
+      "status": "supported",
+      "source_ids": [
+        "Mauritius:ONSDI-districts",
+        "gb:MUS:ADM1"
+      ]
+    },
+    {
+      "text": "Census, park points, MSP map polygons, and official descriptions do not establish complete physical island, reef, or settlement inventories.",
+      "status": "supported",
+      "source_ids": [
+        "Statistics-Mauritius:Census-2022-Vol-III",
+        "Mauritius:ONSDI-islet-national-parks",
+        "Seychelles:MSP-Atlas-islands",
+        "Mauritius:OIDC-outer-island-descriptions"
+      ]
+    },
+    {
+      "text": "St Brandon membership, Agaléga cross-source physical membership, Seychelles Other Islands component crosswalk, exact Litto3D target-island footprints, and current complete settlement coverage remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "Mauritius:OIDC-outer-island-descriptions",
+        "Shom:LitTo3D-Eparses-2012",
+        "Shom:LitTo3D-Mayotte-2012",
+        "Shom:LitTo3D-Reunion-2016",
+        "Seychelles:MSP-Atlas-islands",
+        "Seychelles:NBS-2022-census",
+        "Mauritius:National-Cartographic-Section"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 data/regional-review/wio-offshore-island-sources-20261003/reproduce.py",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/evidence-quality.mjs data/regional-review/wio-offshore-island-sources-20261003/evidence-quality.json"
+  ]
+}

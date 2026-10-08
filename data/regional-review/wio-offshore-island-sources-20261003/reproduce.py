@@ -1,0 +1,386 @@
+#!/usr/bin/env python3
+"""Reproduce the bounded #633 crosswalk and official Mauritius district screen."""
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+import unicodedata
+from pathlib import Path
+
+from pyproj import Transformer
+from shapely.geometry import shape
+from shapely.ops import transform
+
+
+PACKET = Path(__file__).resolve().parent
+ROOT = next(parent for parent in PACKET.parents if (parent / "AGENTS.md").is_file())
+PARENT = ROOT / "data/regional-review/regional-review-4f180b98473f1071"
+SCOPE = json.loads((PACKET / "scope.json").read_text(encoding="utf-8"))
+EXPECTED_SUBJECTS = set(SCOPE["subjects"])
+
+MUS_DISTRICT_NAMES = {
+    "black river", "flacq", "grand port", "moka", "pamplemousses",
+    "plaines wilhems", "port louis", "riviere du rempart", "savanne",
+}
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def read_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def norm(value: str) -> str:
+    value = unicodedata.normalize("NFKD", value.casefold())
+    return " ".join("".join(c for c in value if not unicodedata.combining(c)).replace(".", "").split())
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise SystemExit(f"FAIL: {message}")
+
+
+def main() -> None:
+    require(SCOPE["issue"] == 633 and len(EXPECTED_SUBJECTS) == 24,
+            "scope must contain exactly the 24 declared #633 subjects")
+
+    inventory_path = PARENT / "subject-inventory.jsonl"
+    source_registry_path = PARENT / "sources.json"
+    prior_geometry_path = PARENT / "geometry-comparison.json"
+    syc_crosswalk_path = PARENT / "seychelles-2019-region-district-crosswalk.json"
+    settlement_path = PARENT / "settlement-administration-review.json"
+    settlement_review = read_json(settlement_path)
+    require(settlement_review["scope_issue"] == 482 and settlement_review["scope_location_count"] == 144,
+            "settlement/source-gap evidence must remain the exact predecessor #482 scope")
+    require("not a geocoded" in settlement_review["settlement_disposition"]["Seychelles"].lower(),
+            "prior Seychelles source outcome must distinguish district data from geocoded settlements")
+    require("not an exhaustive geocoded settlement inventory" in
+            settlement_review["settlement_disposition"]["Mauritius"],
+            "prior Mauritius source outcome must distinguish census/locality counts from coordinates")
+
+    parent_inventory = {}
+    for line in inventory_path.read_text(encoding="utf-8").splitlines():
+        row = json.loads(line)
+        if row["id"] in EXPECTED_SUBJECTS:
+            require(row["id"] not in parent_inventory, f"duplicate parent inventory ID: {row['id']}")
+            parent_inventory[row["id"]] = row
+    require(set(parent_inventory) == EXPECTED_SUBJECTS,
+            "parent #482 evidence must include every exact #633 subject and no additional scope row")
+
+    current = {}
+    containing_paths = {
+        "data/geography/part-16.json",
+        "data/geography/part-23.json",
+        "data/geography/part-28.json",
+    }
+    for relative in sorted(containing_paths):
+        document = read_json(ROOT / relative)
+        for feature in document["features"]:
+            identity = feature.get("id") or feature.get("properties", {}).get("id")
+            if identity in EXPECTED_SUBJECTS:
+                require(identity not in current, f"duplicate current geometry ID: {identity}")
+                current[identity] = feature
+    require(set(current) == EXPECTED_SUBJECTS,
+            "current geography containing files must resolve all 24 exact subjects once")
+
+    geometry_comparison = read_json(prior_geometry_path)
+    gb_rows = geometry_comparison["geoBoundaries_location_comparisons"]["per_location"]
+    ne_rows = geometry_comparison["natural_earth_location_comparisons"]
+    prior_metrics = {row["id"]: row for row in gb_rows + ne_rows}
+    require(EXPECTED_SUBJECTS <= set(prior_metrics),
+            "retained #482 comparison results must include all 24 assigned subjects")
+
+    source_registry = read_json(source_registry_path)
+    source_sets = {row["source_id"]: row for row in source_registry["source_sets"]}
+    require(source_sets["gb:MUS:ADM1"]["feature_count"] == 12,
+            "pinned Mauritius source registry count changed")
+    require(source_sets["gb:SYC:ADM2"]["feature_count"] == 8,
+            "pinned Seychelles source registry count changed")
+
+    mus_source_file = PARENT / "sources/geoBoundaries-MUS-ADM1-2017.geojson"
+    syc_source_file = PARENT / "sources/geoBoundaries-SYC-ADM2-2020.geojson"
+    ne_source_file = PARENT / "sources/natural-earth-10m-admin1-selected.geojson"
+    pins = {
+        "mauritius_geoboundaries": (mus_source_file, "fd3c09513dba7df021ed0f7bd2b05d187932155c99027b4dcc1c90ef8ee554c3"),
+        "seychelles_geoboundaries": (syc_source_file, "fc53d69a99b7cadd481c2fa6bcabe36f7138172464ceadf83af382881e3f817a"),
+        "natural_earth_extract": (ne_source_file, "eb0fac5a0668edd68e5fdf3700de3941ee98551bcf0c00b1eb33e334be7ac496"),
+    }
+    for name, (path, expected_hash) in pins.items():
+        require(sha256(path) == expected_hash, f"retained #482 source pin changed: {name}")
+
+    # The parent packet's all-location geometry screen provides independent
+    # context for all 24 rows. This new run does not claim that parent output was
+    # freshly recomputed; it reads and pins its exact retained input bytes.
+    mus_admin = read_json(mus_source_file)["features"]
+    syc_admin = read_json(syc_source_file)["features"]
+    source_component_counts = {
+        "gb:MUS:ADM1": len(mus_admin),
+        "gb:SYC:ADM2": len(syc_admin),
+    }
+    require(source_component_counts == {"gb:MUS:ADM1": 12, "gb:SYC:ADM2": 8},
+            "original boundary source row counts do not match pinned metadata")
+
+    crosswalk = read_json(syc_crosswalk_path)
+    syc_rows = {row["location_id"]: row for row in crosswalk["records"]}
+    require(set(syc_rows) == {identity for identity in EXPECTED_SUBJECTS if identity.startswith("gb:SYC:ADM2:")},
+            "2019 Seychelles crosswalk does not cover exactly the eight assigned regions")
+    require(crosswalk["regions_assigned"] == 8 and crosswalk["ADM3_district_rows_in_full_reference"] == 27,
+            "2019 Seychelles administrative crosswalk counts changed")
+
+    issue_rows = []
+    for identity in sorted(EXPECTED_SUBJECTS):
+        row = parent_inventory[identity]
+        metric = prior_metrics[identity]
+        item = {
+            "id": identity,
+            "name": row["name"],
+            "current_containing_file": row["containing_file"],
+            "current_geometry_type": row["current_geometry_type"],
+            "current_component_count": row["current_component_count"],
+            "administrative_or_physical_role": row["source_role"],
+            "source_id": row["source_id"],
+            "source_vintage": row["source_reference_year"],
+            "source_license": row["source_license"],
+            "source_geometry_component_count": metric.get("source_components"),
+            "retained_parent_source_vs_current_symmetric_difference_percent": metric.get("symmetric_difference_of_union_percent"),
+            "retained_parent_source_vs_current_relative_area_change_percent": metric.get("relative_area_change_percent"),
+            "current_parent_chain": row["parent_chain"],
+            "retained_parent_assessment": row["assessment"],
+            "settlement_locality_disposition": row["settlement_disposition"],
+            "uncertainties": row["uncertainties"],
+        }
+        if identity.startswith("gb:MUS:ADM1:"):
+            item["mauritius_geographical_crosswalk"] = (
+                "One of nine Mauritius Island geographical districts" if row["name"] in {
+                    "Black River", "Flacq", "Grand Port", "Moka", "Pamplemousses",
+                    "Plaines Wilhems", "Port Louis", "Rivière du Rempart", "Savanne"
+                } else "Outer-island/Rodrigues record; not one of the nine Mauritius Island districts"
+            )
+            if norm(row["name"]) in MUS_DISTRICT_NAMES:
+                item["official_onsdi_district_crosswalk"] = "normalized exact name; see district-comparison.json"
+        elif identity.startswith("gb:SYC:ADM2:"):
+            syc = syc_rows[identity]
+            item["2019_nbs_adm3_reference"] = {
+                "reference_region": syc["NBS_reference_region"],
+                "reference_island_parent": syc["NBS_admin1_island"],
+                "district_row_count": syc["2019_district_rows_assigned_to_region"],
+                "current_parent_label_matches_2019_reference": syc["parent_name_matches_reference"],
+                "current_parent_label": syc["current_parent_name"],
+            }
+        if identity == "gb:SYC:ADM2:34574756B54247629098598":
+            item["outer_islands_granularity_finding"] = {
+                "retained_2019_source_components": 1057,
+                "current_components": 7,
+                "meaning": "Counts cannot be reconciled from GSHHG or the unlicensed MSP Atlas candidate without a named island-to-source-feature crosswalk."
+            }
+        if identity == "gb:MUS:ADM1:65221844B12885462064369":
+            item["st_brandon_finding"] = "Official descriptions report a shifting reef with numerous low islets; the retained GSHHG non-intersection is not absence evidence. The exact geoBoundaries footprint-to-island/reef crosswalk is unresolved."
+        if identity == "gb:MUS:ADM1:65221844B83452679821580":
+            item["agalega_finding"] = "This ODbL/OSM ADM1 record is distinct from the disjoint single-component Natural Earth MUS-5180 named dependency record; the source-unit crosswalk between their coverage remains unresolved."
+        if identity == "atlas:coverage:MUS-5180":
+            item["agalega_finding"] = "This Public Domain Natural Earth named dependency record remains distinct from the two-component ODbL/OSM geoBoundaries ADM1 record; it is not a substitute for reef/island completeness."
+        if identity.startswith("atlas:coverage:") and identity != "atlas:coverage:MUS-5180":
+            item["physical_source_finding"] = "Natural Earth 1:10m named territory/dependency geometry reproduces the current feature closely but does not establish a current emergent-land or reef inventory. Shom/IGN Litto3D is a lawful scale-appropriate candidate; exact island/tile crosswalk is still required."
+        issue_rows.append(item)
+
+    district_path = PACKET / "sources/mauritius_districts-20261008.geojson"
+    parks_path = PACKET / "sources/mauritius_islet_parks-20261008.geojson"
+    expected_district_hash = "63f5c5c2660ff216a4429529814a3987ffa05e789bcbe889db520a74236b7540"
+    expected_parks_hash = "cbefa4e20d77a48e96ed75ad48b2f69158750e52f2f363a42e6ae0797c84d94e"
+    require(sha256(district_path) == expected_district_hash, "retained ONSDI district source bytes changed")
+    require(sha256(parks_path) == expected_parks_hash, "retained ONSDI islet-park source bytes changed")
+
+    district_fc = read_json(district_path)
+    parks_fc = read_json(parks_path)
+    require(len(district_fc["features"]) == 9 and district_fc["numberMatched"] == 9,
+            "ONSDI administrative district source must return nine features")
+    require(len(parks_fc["features"]) == 8 and parks_fc["numberMatched"] == 8,
+            "ONSDI park-point layer must return eight features")
+    require(district_fc.get("crs", {}).get("properties", {}).get("name", "").endswith("EPSG::32740"),
+            "ONSDI district WFS native CRS must be EPSG:32740")
+    require(parks_fc.get("crs", {}).get("properties", {}).get("name", "").endswith("EPSG::4326"),
+            "ONSDI park WFS native CRS must be EPSG:4326")
+
+    # Exact one-to-one name join for the nine geographical districts.
+    districts_by_name = {}
+    for feature in district_fc["features"]:
+        name = norm(feature["properties"]["name"])
+        require(name not in districts_by_name, f"duplicate ONSDI district name: {name}")
+        districts_by_name[name] = feature
+    source_by_name = {}
+    for feature in mus_admin:
+        name = norm(feature["properties"]["shapeName"])
+        if name in MUS_DISTRICT_NAMES:
+            require(name not in source_by_name, f"duplicate geoBoundaries district name: {name}")
+            source_by_name[name] = feature
+    current_by_name = {}
+    for feature in current.values():
+        properties = feature["properties"]
+        if properties.get("id", "").startswith("gb:MUS:ADM1:"):
+            name = norm(properties["name"])
+            if name in MUS_DISTRICT_NAMES:
+                require(name not in current_by_name, f"duplicate current district name: {name}")
+                current_by_name[name] = feature
+    require(set(districts_by_name) == MUS_DISTRICT_NAMES,
+            "ONSDI district source roster is not exactly the nine named Mauritius Island districts")
+    require(set(source_by_name) == MUS_DISTRICT_NAMES and set(current_by_name) == MUS_DISTRICT_NAMES,
+            "2017 source/current roster does not crosswalk one-to-one to the nine ONSDI districts")
+
+    to_equal_area = Transformer.from_crs("EPSG:4326", "EPSG:6933", always_xy=True).transform
+    gov_to_equal_area = Transformer.from_crs("EPSG:32740", "EPSG:6933", always_xy=True).transform
+    district_rows = []
+    for name in sorted(MUS_DISTRICT_NAMES):
+        gov_feature = districts_by_name[name]
+        gb_feature = source_by_name[name]
+        current_feature = current_by_name[name]
+        gov_shape = transform(gov_to_equal_area, shape(gov_feature["geometry"]))
+        source_shape = transform(to_equal_area, shape(gb_feature["geometry"]))
+        current_shape = transform(to_equal_area, shape(current_feature["geometry"]))
+        require(all(g.is_valid and g.area > 0 for g in (gov_shape, source_shape, current_shape)),
+                f"invalid/non-area geometry in district comparison for {name}")
+
+        def metrics(a, b):
+            return {
+                "symmetric_difference_percent_of_union": 100 * a.symmetric_difference(b).area / a.union(b).area,
+                "relative_area_change_percent": 100 * (b.area / a.area - 1),
+            }
+
+        district_rows.append({
+            "name": gov_feature["properties"]["name"],
+            "issue_subject_id": current_feature["properties"]["id"],
+            "govmu_wfs_fid": gov_feature.get("id"),
+            "crosswalk": "unique accent/case/punctuation-normalized exact name",
+            "govmu_against_2017_geoboundaries": metrics(gov_shape, source_shape),
+            "current_atlas_against_govmu": metrics(gov_shape, current_shape),
+            "invalid_geometries": 0,
+        })
+
+    parks = [
+        {"name": feature["properties"]["name"], "longitude": feature["geometry"]["coordinates"][0],
+         "latitude": feature["geometry"]["coordinates"][1]}
+        for feature in parks_fc["features"]
+    ]
+    syc_mismatches = [
+        {"id": identity, "reference": row["NBS_reference_region"], "current_parent": row["current_parent_name"]}
+        for identity, row in syc_rows.items() if not row["parent_name_matches_reference"]
+    ]
+
+    findings_path = PACKET / "subject-findings.json"
+    findings = {
+        "version": 1,
+        "issue": 633,
+        "stage": "source-research-with-unresolved-completeness-and-crosswalk-questions",
+        "geographic_approval": "not-requested",
+        "subject_count": len(issue_rows),
+        "subjects": issue_rows,
+        "mauritius_official_district_source": {
+            "crosswalk_count": len(district_rows),
+            "one_to_one_names": [row["name"] for row in district_rows],
+            "comparison_path": "district-comparison.json",
+            "interpretation": "The government source independently corroborates an exact nine-name administrative roster, but source date/legal lineage are not declared and measured geometry differences are not approval or automatic correction triggers."
+        },
+        "mauritius_protected_islet_point_screen": {
+            "feature_count": len(parks),
+            "features": parks,
+            "interpretation": "A protected-islet point subset near Mauritius Island, not a physical land inventory or evidence for St Brandon/Agaléga."
+        },
+        "seychelles_current_parent_mismatches_against_2019_reference": syc_mismatches,
+        "cross_scope_findings": [
+            "St Brandon and Natural Earth Agaléga GSHHG level-1 non-intersections are insufficient-resolution non-detections, not evidence of absence.",
+            "Natural Earth Agaléga MUS-5180 and the geoBoundaries Agaléga ADM1 are distinct disjoint records with different source roles. Keep both IDs and preserve their separate pins pending a physical island-to-record crosswalk.",
+            "The SeyMSP API count and grouped records are source lead observations, not island counts; underlying licenseInfo is blank and no polygons are retained.",
+            "No current official, licensed geocoded settlement inventory for the complete 24-subject scope was found. Census/statistical localities are names or administrative records, not complete settlement coordinate data.",
+            "Shom/IGN Litto3D is an openly licensed high-resolution source candidate for Eparses, Mayotte, and Réunion, but acquired tile footprints and individual island coverage remain unverified."
+        ],
+        "next_actions": [
+            "Crosswalk every Eparses, Mayotte, and Réunion target feature to licensed Shom/IGN tile footprints, source masks, acquisition dates, and emergent-land/reef records.",
+            "Obtain current Seychelles region-to-island and settlement crosswalks from NBS/Ministry with reusable physical-island geometry rights; resolve Other Islands source feature membership and parent labels.",
+            "Obtain current official St Brandon and Agaléga emergent-island/reef vectors or survey coverage metadata under usable reuse terms; compare complete neighbors before any correction recommendation.",
+            "Obtain a dated, licensed geocoded settlement/locality source for all assigned territories, or retain the explicit scoped no-source outcome."
+        ]
+    }
+    findings_path.write_text(json.dumps(findings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    input_paths = {
+        "scope.json": PACKET / "scope.json",
+        "parent_subject_inventory": inventory_path,
+        "parent_sources_registry": source_registry_path,
+        "parent_geometry_comparison": prior_geometry_path,
+        "parent_seychelles_crosswalk": syc_crosswalk_path,
+        "parent_settlement_review": settlement_path,
+        "parent_mus_geoboundaries": mus_source_file,
+        "parent_syc_geoboundaries": syc_source_file,
+        "parent_natural_earth_selected": ne_source_file,
+        "current_part_16": ROOT / "data/geography/part-16.json",
+        "current_part_23": ROOT / "data/geography/part-23.json",
+        "current_part_28": ROOT / "data/geography/part-28.json",
+        "retained_onsdi_districts": district_path,
+        "retained_onsdi_islet_parks": parks_path,
+    }
+    comparison = {
+        "version": 1,
+        "scope_issue": 633,
+        "baseline_commit": SCOPE["baseline_commit"],
+        "method": {
+            "geometry": "Shapely 2.1.2 valid source/current polygon overlay; EPSG:6933 equal-area area operations",
+            "source_crs": "GeoBoundary/Natural Earth current and source GeoJSON CRS84 is read as longitude-latitude; ONSDI Mauritius districts transform from retained EPSG:32740 via pyproj 3.7.2",
+            "axis_order": "longitude-latitude; all transforms use always_xy=True",
+            "repair_policy": "No geometry repair, simplification, or reprojection relabeling. All 27 polygons compared here were valid.",
+            "crosswalk": "The nine administrative names use a unique Unicode NFKD, case/punctuation-normalized exact equality; no fuzzy match or centroid inference.",
+            "limits": "Symmetric difference is a source-comparison triage metric; a matching name or valid geometry does not prove legal authority, correct role, contemporaneity, complete islands, coastline accuracy, or settlement completeness. Retained #482 all-scope comparisons are read as immutable inputs, not freshly rerun by this script."
+        },
+        "counts": {
+            "issue_subjects": len(issue_rows),
+            "matched_current_features": len(current),
+            "retained_2017_mauritius_source_features": len(mus_admin),
+            "retained_2020_seychelles_source_features": len(syc_admin),
+            "onsdi_mauritius_district_features": len(district_fc["features"]),
+            "onsdi_islet_park_points": len(parks_fc["features"]),
+            "2019_seychelles_regions": crosswalk["regions_assigned"],
+            "2019_seychelles_adm3_rows": crosswalk["ADM3_district_rows_in_full_reference"]
+        },
+        "district_comparisons": district_rows,
+        "islet_park_points": parks,
+        "retained_parent_scope_comparison_record_count": len(prior_metrics),
+        "predecessor_settlement_scope": {
+            "issue": settlement_review["scope_issue"],
+            "assigned_locations": settlement_review["scope_location_count"],
+            "mauritius_outcome": settlement_review["settlement_disposition"]["Mauritius"],
+            "seychelles_outcome": settlement_review["settlement_disposition"]["Seychelles"],
+            "named_island_territory_outcome": settlement_review["settlement_disposition"]["Natural Earth island/department units"]
+        },
+        "input_sha256": {name: sha256(path) for name, path in input_paths.items()},
+        "output_sha256": {
+            "subject-findings.json": sha256(findings_path)
+        }
+    }
+    (PACKET / "district-comparison.json").write_text(
+        json.dumps({"version": 1, "method": comparison["method"], "input_sha256": comparison["input_sha256"],
+                    "district_comparisons": district_rows, "park_points": parks},
+                   ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    comparison["output_sha256"]["district-comparison.json"] = sha256(PACKET / "district-comparison.json")
+    (PACKET / "results.json").write_text(json.dumps(comparison, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({
+        "status": "reproduced",
+        "issue_subjects": len(issue_rows),
+        "current_subjects_resolved": len(current),
+        "mauritius_district_names": len(district_rows),
+        "valid_geometry_comparisons": 27,
+        "district_symdiff_range_percent": [
+            min(row["govmu_against_2017_geoboundaries"]["symmetric_difference_percent_of_union"] for row in district_rows),
+            max(row["govmu_against_2017_geoboundaries"]["symmetric_difference_percent_of_union"] for row in district_rows)
+        ],
+        "finding_count": len(issue_rows),
+        "outputs": ["subject-findings.json", "district-comparison.json", "results.json"]
+    }, indent=2))
+
+
+if __name__ == "__main__":
+    main()
