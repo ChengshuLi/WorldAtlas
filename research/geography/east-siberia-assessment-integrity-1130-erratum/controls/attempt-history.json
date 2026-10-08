@@ -56,9 +56,15 @@
       "assessment_sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5",
       "table_sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23",
       "recorded_at_utc": "2026-10-08T05:44:00Z"
+    },
+    {
+      "head_reviewed": "4e2e481465a777f005b715a8ba37e2e36db14981",
+      "outcome": "trusted hosted evidence job rejected the v7 reproducibility receipt because seven ledger bindings expected /run_count and the typed control envelope; no evidence or geography claim was accepted by that run",
+      "correction": "added method_id, kind, outcome, run_count and matching run hashes to the v7 receipt; refreshed all affected receipt/metric/output hashes and will rerun hosted evidence checks",
+      "recorded_at_utc": "2026-10-08T05:57:30Z"
     }
   ],
   "issue": 1356,
-  "recorded_at_utc": "2026-10-08T05:44:00Z",
+  "recorded_at_utc": "2026-10-08T05:57:30Z",
   "version": 1
 }
