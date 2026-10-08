@@ -12,7 +12,9 @@ import csv
 import hashlib
 import io
 import json
+import os
 import pathlib
+import stat
 import zipfile
 
 PACKET = pathlib.Path(__file__).resolve().parent
@@ -131,25 +133,53 @@ def render(rows: list[dict[str, str]]) -> bytes:
     return stream.getvalue().encode("utf-8")
 
 
+def packet_output_path() -> pathlib.Path:
+    if OUTPUT.parent != PACKET:
+        raise SystemExit(f"Refusing output outside the packet directory: {OUTPUT}")
+    try:
+        packet = PACKET.resolve(strict=True)
+        packet.relative_to(REPO.resolve(strict=True))
+    except (OSError, ValueError):
+        raise SystemExit(f"Refusing packet directory outside the repository: {PACKET}") from None
+    return packet / OUTPUT.name
+
+
+def read_packet_output(path: pathlib.Path) -> bytes:
+    if not hasattr(os, "O_NOFOLLOW"):
+        raise SystemExit("Safe output verification requires O_NOFOLLOW support")
+    try:
+        descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    except FileNotFoundError:
+        raise
+    except OSError:
+        raise SystemExit(f"Refusing unsafe output path: {path}") from None
+    with os.fdopen(descriptor, "rb") as source:
+        if not stat.S_ISREG(os.fstat(source.fileno()).st_mode):
+            raise SystemExit(f"Refusing non-regular output: {path}")
+        return source.read()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true", help="write the fixed packet output")
     args = parser.parse_args()
     rows = rows_from_source()
     output = render(rows)
+    path = packet_output_path()
     if args.write:
         try:
-            # Exclusive creation rejects regular files and symlinks (including
-            # dangling symlinks) without a check-then-write race.
-            with OUTPUT.open("xb") as destination:
+            # Exclusive creation rejects existing files and symlinks without
+            # following the destination or a check-then-write race.
+            with path.open("xb") as destination:
                 destination.write(output)
         except FileExistsError:
-            raise SystemExit(f"Refusing to overwrite existing output: {OUTPUT}") from None
-        print(f"wrote {OUTPUT.relative_to(REPO)} sha256={hashlib.sha256(output).hexdigest()}")
+            raise SystemExit(f"Refusing to overwrite existing output: {path}") from None
+        print(f"wrote {path.relative_to(REPO)} sha256={hashlib.sha256(output).hexdigest()}")
     else:
-        if not OUTPUT.exists():
-            raise SystemExit("Output missing; run with --write once")
-        existing = OUTPUT.read_bytes()
+        try:
+            existing = read_packet_output(path)
+        except FileNotFoundError:
+            raise SystemExit("Output missing; run with --write once") from None
         if existing != output:
             raise SystemExit("Output differs from reproducible source extraction")
         counts = {}
