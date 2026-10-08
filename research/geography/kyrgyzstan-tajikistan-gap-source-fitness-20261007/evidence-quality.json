@@ -1470,6 +1470,54 @@
         "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-02/supervision.json",
         "commit": "candidate"
       }
+    },
+    {
+      "id": "run-01-row_count",
+      "value": 1485,
+      "unit": "rows",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "7e0e0b1597c05d4ef69227b2df7997505b8afb92278640a5f0496ad6ff702879",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-01-intersecting_pair_count",
+      "value": 27,
+      "unit": "pairs",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "7e0e0b1597c05d4ef69227b2df7997505b8afb92278640a5f0496ad6ff702879",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-row_count",
+      "value": 1485,
+      "unit": "rows",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "81efd2a0144b01f6d85aa077b71fa04c99f485aacd2ffb294cc942acf4a4f49b",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-intersecting_pair_count",
+      "value": 27,
+      "unit": "pairs",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "81efd2a0144b01f6d85aa077b71fa04c99f485aacd2ffb294cc942acf4a4f49b",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+        "commit": "candidate"
+      }
     }
   ],
   "metric_bindings": [
@@ -1532,6 +1580,26 @@
       "metric_id": "run-02-child_lifetime_rss",
       "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-02/supervision.json",
       "json_pointer": "/terminal_child_lifetime_ru_maxrss_bytes"
+    },
+    {
+      "metric_id": "run-01-row_count",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+      "json_pointer": "/row_count"
+    },
+    {
+      "metric_id": "run-01-intersecting_pair_count",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+      "json_pointer": "/intersecting_pair_count"
+    },
+    {
+      "metric_id": "run-02-row_count",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+      "json_pointer": "/row_count"
+    },
+    {
+      "metric_id": "run-02-intersecting_pair_count",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+      "json_pointer": "/intersecting_pair_count"
     }
   ],
   "summaries": [
@@ -1594,6 +1662,26 @@
       "metric_id": "run-02-child_lifetime_rss",
       "value": 168247296,
       "unit": "bytes"
+    },
+    {
+      "metric_id": "run-01-row_count",
+      "value": 1485,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "run-01-intersecting_pair_count",
+      "value": 27,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "run-02-row_count",
+      "value": 1485,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "run-02-intersecting_pair_count",
+      "value": 27,
+      "unit": "pairs"
     }
   ],
   "conclusions": [
