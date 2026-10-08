@@ -89,7 +89,7 @@ def contract_snapshot(raw: bytes) -> tuple[dict, dict, dict[str, str]]:
         raise ValueError('captured issue ownership or geography mode changed')
     if spec.get('max_prs') != 1 or spec.get('depends_on') != [1194]:
         raise ValueError('captured issue PR budget or completed prerequisite changed')
-    if quality.get('manifest_path') != str(ISSUE_SNAPSHOT.relative_to(ROOT).parent / 'evidence-quality.json'):
+    if quality.get('manifest_path') != str(ISSUE_SNAPSHOT.relative_to(ROOT).parents[1] / 'evidence-quality.json'):
         raise ValueError('captured issue evidence manifest path changed')
     pins = quality.get('pins')
     if not isinstance(pins, dict) or len(pins) != 66:
