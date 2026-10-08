@@ -1,0 +1,752 @@
+{
+  "status": "PASS",
+  "complete_phase_bytes": 262478529,
+  "headroom": 5956927,
+  "code_files": 77,
+  "rows": [
+    {
+      "label": "stage",
+      "bytes": 9279
+    },
+    {
+      "label": "current_code_two_physical_roots",
+      "bytes": 1198198
+    },
+    {
+      "label": "current_execution_metadata_prospective_reserve",
+      "bytes": 131072
+    },
+    {
+      "label": "authored_code_index",
+      "bytes": 32203
+    },
+    {
+      "label": "current:coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code/part-000.bin.gz",
+      "bytes": 113639
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs",
+      "bytes": 2810
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs",
+      "bytes": 18262
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs",
+      "bytes": 15346
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs",
+      "bytes": 23633
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs",
+      "bytes": 5049
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
+      "bytes": 6944
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/hosted/geographic-releases.js",
+      "bytes": 17288
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/index.json",
+      "bytes": 3887
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/package.json",
+      "bytes": 1417
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/audit-grid-intervals.mjs",
+      "bytes": 6777
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/check-prepared.mjs",
+      "bytes": 3133
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/evidence-quality.mjs",
+      "bytes": 14753
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/compact-context-inputs.mjs",
+      "bytes": 2093
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/native-only-inputs.mjs",
+      "bytes": 6822
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-build-context-stage.mjs",
+      "bytes": 9460
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-context-input-stage.mjs",
+      "bytes": 9478
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/native-ownership/validate-context-migration.mjs",
+      "bytes": 5078
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/prepare-geographic-release.mjs",
+      "bytes": 47459
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/src/native-grid.js",
+      "bytes": 6408
+    },
+    {
+      "label": "authored_decoded:coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/src/native-runtime.js",
+      "bytes": 3497
+    },
+    {
+      "label": "authored_decoded:hosted/geographic-releases.js",
+      "bytes": 17288
+    },
+    {
+      "label": "authored_decoded:package.json",
+      "bytes": 1417
+    },
+    {
+      "label": "authored_decoded:scripts/audit-grid-intervals.mjs",
+      "bytes": 6777
+    },
+    {
+      "label": "authored_decoded:scripts/check-prepared.mjs",
+      "bytes": 3133
+    },
+    {
+      "label": "authored_decoded:scripts/evidence-quality.mjs",
+      "bytes": 23246
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/compact-context-inputs.mjs",
+      "bytes": 2093
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/native-candidate-manifest.mjs",
+      "bytes": 5877
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/native-only-inputs.mjs",
+      "bytes": 6822
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/validate-build-context-stage.mjs",
+      "bytes": 9713
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/validate-context-input-stage.mjs",
+      "bytes": 9478
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/validate-context-migration.mjs",
+      "bytes": 5078
+    },
+    {
+      "label": "authored_decoded:scripts/native-ownership/verified-candidates.json",
+      "bytes": 1362
+    },
+    {
+      "label": "authored_decoded:scripts/prepare-geographic-release.mjs",
+      "bytes": 47459
+    },
+    {
+      "label": "authored_decoded:scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978
+    },
+    {
+      "label": "authored_decoded:scripts/rebind-coverage-manifest.mjs",
+      "bytes": 5109
+    },
+    {
+      "label": "authored_decoded:src/coverage-classification.js",
+      "bytes": 7378
+    },
+    {
+      "label": "authored_decoded:src/native-grid.js",
+      "bytes": 6408
+    },
+    {
+      "label": "authored_decoded:src/native-runtime.js",
+      "bytes": 3497
+    },
+    {
+      "label": "authored_decoded:src/ownership-codec.js",
+      "bytes": 2948
+    },
+    {
+      "label": "authored_decoded:src/ownership-method.js",
+      "bytes": 3126
+    },
+    {
+      "label": "authored_decoded:src/pixel-grid.js",
+      "bytes": 3699
+    },
+    {
+      "label": "authored_decoded:src/pixel-ownership.js",
+      "bytes": 6134
+    },
+    {
+      "label": "current:coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/index.json",
+      "bytes": 27488
+    },
+    {
+      "label": "original_stage",
+      "bytes": 6278
+    },
+    {
+      "label": "original_module:package.json",
+      "bytes": 1417
+    },
+    {
+      "label": "original_module:scripts/native-ownership/validate-build-context-stage.mjs",
+      "bytes": 9460
+    },
+    {
+      "label": "original_module:scripts/native-ownership/validate-context-input-stage.mjs",
+      "bytes": 9478
+    },
+    {
+      "label": "original_module:scripts/native-ownership/validate-context-migration.mjs",
+      "bytes": 5078
+    },
+    {
+      "label": "original_module:scripts/native-ownership/native-only-inputs.mjs",
+      "bytes": 6822
+    },
+    {
+      "label": "original_module:scripts/native-ownership/compact-context-inputs.mjs",
+      "bytes": 2093
+    },
+    {
+      "label": "original_module:scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540
+    },
+    {
+      "label": "original_module:scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371
+    },
+    {
+      "label": "original_module:scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472
+    },
+    {
+      "label": "original_module:scripts/audit-grid-intervals.mjs",
+      "bytes": 6777
+    },
+    {
+      "label": "original_module:scripts/evidence-quality.mjs",
+      "bytes": 14753
+    },
+    {
+      "label": "original_module:scripts/prepare-geographic-release.mjs",
+      "bytes": 47459
+    },
+    {
+      "label": "original_module:scripts/check-prepared.mjs",
+      "bytes": 3133
+    },
+    {
+      "label": "original_module:scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978
+    },
+    {
+      "label": "original_module:src/native-runtime.js",
+      "bytes": 3497
+    },
+    {
+      "label": "original_module:src/native-grid.js",
+      "bytes": 6408
+    },
+    {
+      "label": "original_module:hosted/geographic-releases.js",
+      "bytes": 17288
+    },
+    {
+      "label": "prior:data/geographic-releases/releases-v7-repacked-gzip.json.gz",
+      "bytes": 168219
+    },
+    {
+      "label": "prior:decoded:data/geographic-releases/releases-v7-repacked-gzip.json.gz",
+      "bytes": 571794
+    },
+    {
+      "label": "current:data/geographic-releases/releases-v8.json.gz",
+      "bytes": 195488
+    },
+    {
+      "label": "current:decoded:data/geographic-releases/releases-v8.json.gz",
+      "bytes": 655490
+    },
+    {
+      "label": "prior:coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/inputs.json",
+      "bytes": 17380
+    },
+    {
+      "label": "prior:coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/inputs.json",
+      "bytes": 25634
+    },
+    {
+      "label": "current:data/canonical-grid/eastern-v8/context-index.json",
+      "bytes": 9411
+    },
+    {
+      "label": "current:coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+      "bytes": 13848
+    },
+    {
+      "label": "current:data/canonical-grid/eastern-v8/manifest.json",
+      "bytes": 251732
+    },
+    {
+      "label": "current:data/canonical-grid/eastern-v8/context-transport/index.json",
+      "bytes": 19250
+    },
+    {
+      "label": "current:data/reference-migrations/eastern-two-gap-repair-20261006/index.json",
+      "bytes": 1765
+    },
+    {
+      "label": "current:data/native-ownership/repaired-v7/manifest.json",
+      "bytes": 252680
+    },
+    {
+      "label": "current:coordination/engineering/eastern-two-gap-repair-native-20261007/native-proposal.json",
+      "bytes": 70216
+    },
+    {
+      "label": "current:data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz",
+      "bytes": 449759
+    },
+    {
+      "label": "geometry_decoded:migration-receipt.json.gz",
+      "bytes": 1957442
+    },
+    {
+      "label": "prior:coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json",
+      "bytes": 20294
+    },
+    {
+      "label": "prior:coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/index.json",
+      "bytes": 395
+    },
+    {
+      "label": "prior:coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/migration-receipt.json",
+      "bytes": 1886445
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-0.json.gz",
+      "bytes": 2001789
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-0.json.gz",
+      "bytes": 6311057
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-1500.json.gz",
+      "bytes": 3038895
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-1500.json.gz",
+      "bytes": 7498888
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-3000.json.gz",
+      "bytes": 3145634
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-3000.json.gz",
+      "bytes": 7767700
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-4500.json.gz",
+      "bytes": 3492440
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-4500.json.gz",
+      "bytes": 10199115
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-6000.json.gz",
+      "bytes": 4572887
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-6000.json.gz",
+      "bytes": 13128830
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-7500.json.gz",
+      "bytes": 1078928
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-7500.json.gz",
+      "bytes": 3378264
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-9000.json.gz",
+      "bytes": 641440
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-9000.json.gz",
+      "bytes": 2160160
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-10500.json.gz",
+      "bytes": 743386
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-10500.json.gz",
+      "bytes": 2350411
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-12000.json.gz",
+      "bytes": 629985
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-12000.json.gz",
+      "bytes": 1915421
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-13500.json.gz",
+      "bytes": 657907
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-13500.json.gz",
+      "bytes": 2042741
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-15000.json.gz",
+      "bytes": 536556
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-15000.json.gz",
+      "bytes": 1774061
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-16500.json.gz",
+      "bytes": 267934
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-16500.json.gz",
+      "bytes": 973939
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-18000.json.gz",
+      "bytes": 411064
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-18000.json.gz",
+      "bytes": 1408983
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-19500.json.gz",
+      "bytes": 713204
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-19500.json.gz",
+      "bytes": 2248767
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-21000.json.gz",
+      "bytes": 332935
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-21000.json.gz",
+      "bytes": 1229674
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/part-22500.json.gz",
+      "bytes": 950177
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/part-22500.json.gz",
+      "bytes": 2948325
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-24000.json.gz",
+      "bytes": 333224
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-24000.json.gz",
+      "bytes": 1203374
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-25500.json.gz",
+      "bytes": 589309
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-25500.json.gz",
+      "bytes": 1931584
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-27000.json.gz",
+      "bytes": 575253
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-27000.json.gz",
+      "bytes": 1951510
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-28500.json.gz",
+      "bytes": 411142
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-28500.json.gz",
+      "bytes": 1439030
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-30000.json.gz",
+      "bytes": 784733
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-30000.json.gz",
+      "bytes": 2494132
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-31500.json.gz",
+      "bytes": 429650
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-31500.json.gz",
+      "bytes": 1399906
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/part-33000.json.gz",
+      "bytes": 608792
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/part-33000.json.gz",
+      "bytes": 2037383
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-34500.json.gz",
+      "bytes": 324072
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-34500.json.gz",
+      "bytes": 1152581
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-36000.json.gz",
+      "bytes": 670962
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-36000.json.gz",
+      "bytes": 2184581
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-37500.json.gz",
+      "bytes": 1069204
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-37500.json.gz",
+      "bytes": 3174968
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-39000.json.gz",
+      "bytes": 691339
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-39000.json.gz",
+      "bytes": 2257037
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-40500.json.gz",
+      "bytes": 480074
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-40500.json.gz",
+      "bytes": 1625271
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-42000.json.gz",
+      "bytes": 473533
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-42000.json.gz",
+      "bytes": 1567840
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-43500.json.gz",
+      "bytes": 479228
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-43500.json.gz",
+      "bytes": 1618234
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-45000.json.gz",
+      "bytes": 376329
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-45000.json.gz",
+      "bytes": 1291015
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-46500.json.gz",
+      "bytes": 444860
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-46500.json.gz",
+      "bytes": 1491917
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-48000.json.gz",
+      "bytes": 672248
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-48000.json.gz",
+      "bytes": 2211035
+    },
+    {
+      "label": "base_encoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-49500.json.gz",
+      "bytes": 216283
+    },
+    {
+      "label": "base_decoded:/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3/coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-49500.json.gz",
+      "bytes": 729798
+    },
+    {
+      "label": "complete_variants:atlas:physical:CAN-103:QUE",
+      "bytes": 46541
+    },
+    {
+      "label": "complete_variants:atlas:physical:CAN-114:NFL",
+      "bytes": 94101
+    },
+    {
+      "label": "complete_layout:.cache/1295-row-pair-fixture.json",
+      "bytes": 90193
+    },
+    {
+      "label": "complete_variants:gb:IRN:ADM2:26516999B17111396986996",
+      "bytes": 15639
+    },
+    {
+      "label": "complete_layout:.cache/1295-v6-pair-part-22500.json",
+      "bytes": 90193
+    },
+    {
+      "label": "complete_variants:gb:PAK:ADM2:60131773B78019453337506",
+      "bytes": 13031
+    },
+    {
+      "label": "complete_layout:.cache/1295-v6-pair-part-33000.json",
+      "bytes": 90193
+    },
+    {
+      "label": "installed_whole_node",
+      "bytes": 121304480
+    },
+    {
+      "label": "review_output_reserve",
+      "bytes": 131072
+    }
+  ],
+  "acquisitions": [
+    {
+      "fixture": ".cache/1295-row-pair-fixture.json",
+      "budget": {
+        "complete_phase_bytes": 184865991,
+        "installed_runtime_bytes": 121304480,
+        "actual_code_bytes": 1768775,
+        "reserved_output_review_bytes": 26388972,
+        "small_metadata_reserve_bytes": 131072
+      },
+      "rows": 1500,
+      "changes": [
+        {
+          "ordinal": 614,
+          "id": "atlas:physical:CAN-103:QUE",
+          "before_bytes": 23211,
+          "after_bytes": 23330
+        },
+        {
+          "ordinal": 625,
+          "id": "atlas:physical:CAN-114:NFL",
+          "before_bytes": 46990,
+          "after_bytes": 47111
+        }
+      ]
+    },
+    {
+      "fixture": ".cache/1295-v6-pair-part-22500.json",
+      "budget": {
+        "complete_phase_bytes": 136883489,
+        "installed_runtime_bytes": 121304480,
+        "actual_code_bytes": 1768775,
+        "reserved_output_review_bytes": 6021601,
+        "small_metadata_reserve_bytes": 131072
+      },
+      "rows": 1500,
+      "changes": [
+        {
+          "ordinal": 1087,
+          "id": "gb:IRN:ADM2:26516999B17111396986996",
+          "before_bytes": 4759,
+          "after_bytes": 10880
+        }
+      ]
+    },
+    {
+      "fixture": ".cache/1295-v6-pair-part-33000.json",
+      "budget": {
+        "complete_phase_bytes": 132556641,
+        "installed_runtime_bytes": 121304480,
+        "actual_code_bytes": 1768775,
+        "reserved_output_review_bytes": 4199587,
+        "small_metadata_reserve_bytes": 131072
+      },
+      "rows": 1500,
+      "changes": [
+        {
+          "ordinal": 553,
+          "id": "gb:PAK:ADM2:60131773B78019453337506",
+          "before_bytes": 3390,
+          "after_bytes": 9641
+        }
+      ]
+    }
+  ],
+  "scientific_operators_invoked": false,
+  "source_commit": "b8de1547b8ac32d8ffb66a96a5d0c6644e346d5b",
+  "qualification": "Prospective complete context phase and bounded complete chunk acquisition only; full normal hosted build remains pending."
+}

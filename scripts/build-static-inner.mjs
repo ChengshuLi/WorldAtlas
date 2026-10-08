@@ -1,26 +1,53 @@
-import {assertPackageStage} from './package-build.mjs';
 import path from 'node:path';
-import {resolveTypedSnapshot} from '../src/typed-snapshot.js';
 import fs from 'node:fs/promises';
 import { build } from 'vite';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {createGridIndex} from '../src/pixel-grid.js';
-import {compileOwnership,packOwnership} from '../src/pixel-ownership.js';
-import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {prepareEvidenceBundle} from './prepare-evidence-bundle.mjs';
-import {readPreparedEvidenceBundle} from './read-prepared-evidence-bundle.mjs';
-import {validatePreparedEvidenceIndex} from '../src/prepared-evidence.js';
-import {packageOwnershipHistory} from './package-ownership-history.mjs';
-import {packageReferenceBundle} from './package-reference-bundle.mjs';
-import {loadCoverageClassification} from '../src/coverage-classification.js';
-import {packageStartupOwnership} from './package-startup-ownership.mjs';
-import {selectBuildOwnership,readBuildOwnershipSelection} from './select-build-ownership.mjs';
-import {validateBuildContextVintage as validateBuildContextStage} from '../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs';
-import {packageNativeLatitudes} from './package-native-latitudes.mjs';
-import {rebindCoverageManifest} from './rebind-coverage-manifest.mjs';
-import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
 import { createHash } from 'node:crypto';
+import {assertPackageStage} from './package-build.mjs';
+import {requireValidatedGeometryMigrations} from './prepare-geographic-release.mjs';
 assertPackageStage();
+import {restoreCanonicalProducts} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
+await fs.mkdir('.cache',{recursive:true});
+await restoreCanonicalProducts({root:process.cwd(),temporaryRoot:process.cwd()+'/.cache'});
+const {resolveTypedSnapshot} = await import('../src/typed-snapshot.js');
+const {createGridIndex} = await import('../src/pixel-grid.js');
+const {compileOwnership,packOwnership} = await import('../src/pixel-ownership.js');
+const {shuffleOwnershipBytes} = await import('../src/ownership-codec.js');
+const {prepareEvidenceBundle} = await import('./prepare-evidence-bundle.mjs');
+const {readPreparedEvidenceBundle} = await import('./read-prepared-evidence-bundle.mjs');
+const {validatePreparedEvidenceIndex} = await import('../src/prepared-evidence.js');
+const {packageOwnershipHistory} = await import('./package-ownership-history.mjs');
+const {packageReferenceBundle} = await import('./package-reference-bundle.mjs');
+const {loadCoverageClassification} = await import('../src/coverage-classification.js');
+const {packageStartupOwnership} = await import('./package-startup-ownership.mjs');
+const {selectBuildOwnership,readBuildOwnershipSelection} = await import('./select-build-ownership.mjs');
+const {validateBuildContextVintage: validateOriginalBuildContext} = await import('../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs');
+const {validateBuildContextStage: validateCurrentBuildContext,BUILD_CONTEXT_STAGE_PATH} = await import('./native-ownership/validate-build-context-stage.mjs');
+const {packageNativeLatitudes} = await import('./package-native-latitudes.mjs');
+const {rebindCoverageManifest} = await import('./rebind-coverage-manifest.mjs');
+const {foldCoverageContinuation,selectBuildContextValidator} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs');
+const {readPackageCurrentExecution} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs');
+function releaseBuildContextBaselines(context) {
+  const results=[context.geometryValidation,context.coverageContinuation.originalGeometryValidation];
+  const expected=context.receipt.migration.locations;
+  if(!Number.isSafeInteger(expected)||expected<=0||new Set(results).size!==2)throw Error('Complete distinct context validation results required');
+  for(const result of results){
+    requireValidatedGeometryMigrations(result);
+    if(!Array.isArray(result.baselineFeatures)||result.baselineFeatures.length!==expected)throw Error('Complete validated baseline work arrays required');
+  }
+  // These full rows have already passed both complete validations. This builder
+  // consumes only the live branded proofs and disposition sets in coverage folds.
+  // General validators and their other callers keep their own baselineFeatures.
+  for(const result of results)result.baselineFeatures=null;
+  for(const result of results)requireValidatedGeometryMigrations(result);
+  return {results:2,released_baseline_feature_references:expected*2,proofs_and_dispositions_retained:true};
+}
+const contextStage=await fs.readFile(BUILD_CONTEXT_STAGE_PATH,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
+const validateBuildContextStage=selectBuildContextValidator(contextStage,{legacy:validateOriginalBuildContext,current:validateCurrentBuildContext});
+const {readGeographicReleaseManifest,decodeGeographicReleaseBatch} = await import('./read-geographic-release-manifest.mjs');
+const {checkPrepared} = await import('./check-prepared.mjs');
+const {environmentClassifications} = await import('../src/environment-classifications.js');
+const { openDatabase, seedDatabase, geography } = await import('../database.mjs');
 const ownershipSelection=await readBuildOwnershipSelection();
 const audit=JSON.parse(await fs.readFile('data/granularity-audit.json','utf8'));
 if(audit.issues.length || !audit.input_sha256)throw new Error('Geography audit has not passed');
@@ -28,12 +55,20 @@ for(const [file,expected] of Object.entries(audit.input_sha256)){
  const actual=createHash('sha256').update(await fs.readFile(`data/${file}`)).digest('hex');
  if(actual!==expected)throw new Error(`Stale geography audit: ${file}; rerun scripts/audit-granularity.py`);
 }
-import {checkPrepared} from './check-prepared.mjs';
-import {environmentClassifications} from '../src/environment-classifications.js';
-import { openDatabase, seedDatabase, geography } from '../database.mjs';
 
 // A read-only export of the current database, suitable for a private hosted preview.
 const preparedEvidence=ownershipSelection.requireNative?await readPreparedEvidenceBundle():prepareEvidenceBundle();
+// Validate the complete retained context chain before allocating application geography.
+const releaseManifest=readGeographicReleaseManifest('data/geographic-releases');
+const geographicRelease=releaseManifest.releases.at(-1);
+if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
+const fixedGridPath=ownershipSelection.manifestPath;
+const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
+const fixedGrid=selectedGrid?.manifest;
+const currentExecution=contextStage?.version===2?readPackageCurrentExecution(process.cwd()):undefined;
+const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease,currentExecution}):null;
+const nativeContextInputStage=nativeBuildContext?.receipt??null;
+if(nativeBuildContext?.coverageContinuation)releaseBuildContextBaselines(nativeBuildContext);
 const db = openDatabase();
 try {
   seedDatabase(db);
@@ -41,16 +76,8 @@ try {
   const pixelAudit=JSON.parse(await fs.readFile('data/pixel-audit.json','utf8'));
   reference.pixelMissing=pixelAudit.missing.map(f=>f.id);
   checkPrepared(reference.features);
-  const releaseManifest=readGeographicReleaseManifest('data/geographic-releases');
-  const geographicRelease=releaseManifest.releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
   validatePreparedEvidenceIndex(preparedEvidence,geographicRelease);
-  if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
-  const fixedGridPath=ownershipSelection.manifestPath;
-  const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
-  const fixedGrid=selectedGrid?.manifest;
-  const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
-  const nativeContextInputStage=nativeBuildContext?.receipt??null;
   const boundarySourceReviews={};
   if(nativeContextInputStage?.migration){
     const sources=[];
@@ -121,7 +148,17 @@ try {
     if(!fixedGrid)throw Error('Physical classification requires canonical grid');
     coverageClassification=JSON.parse(await fs.readFile(coveragePath));
     const canonicalHash=selectedGrid.sha256;
-    if(fixedGrid.method){const originalBytes=await fs.readFile('data/canonical-grid/manifest.json');coverageClassification=rebindCoverageManifest(coverageClassification,{originalGrid:JSON.parse(originalBytes),originalGridSha256:createHash('sha256').update(originalBytes).digest('hex'),selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,predecessorRelease:nativeBuildContext?.predecessorRelease,geometryValidation:nativeBuildContext?.geometryValidation});}
+    if(fixedGrid.method){
+      const originalBytes=await fs.readFile('data/canonical-grid/manifest.json'),originalGrid=JSON.parse(originalBytes),originalGridSha256=createHash('sha256').update(originalBytes).digest('hex');
+      const continuation=nativeBuildContext?.coverageContinuation;
+      if(continuation){
+        const middle={selectedGrid:continuation.middleGrid,selectedGridSha256:continuation.middleGridSha256,release:continuation.middleRelease};
+        coverageClassification=foldCoverageContinuation(coverageClassification,{originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,steps:[
+          {originalGrid,originalGridSha256,...middle,predecessorRelease:continuation.originalRelease,geometryValidation:continuation.originalGeometryValidation},
+          {originalGrid:middle.selectedGrid,originalGridSha256:middle.selectedGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,predecessorRelease:middle.release,geometryValidation:nativeBuildContext.geometryValidation}
+        ]});
+      }else coverageClassification=rebindCoverageManifest(coverageClassification,{originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,predecessorRelease:nativeBuildContext?.predecessorRelease,geometryValidation:nativeBuildContext?.geometryValidation});
+    }
     await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:geographicRelease.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
     pixelMap.canonical_grid_sha256=canonicalHash;
     await fs.mkdir('dist/coverage-classification',{recursive:true});

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "source_commit": "b8de1547b8ac32d8ffb66a96a5d0c6644e346d5b",
+  "actual_node_version": "v24.19.0",
+  "tests": 13,
+  "failures": 0,
+  "actual_package_spawn_without_execute_injection": true,
+  "actual_inner_boundary_negatives": [
+    "missing receipt path",
+    "wrong receipt hash",
+    "wrong independent source root",
+    "foreign receipt path",
+    "stale loaded body before sentinel"
+  ],
+  "oversized_code_runtime_adversary_runtime_opens": 0,
+  "installed_runtime_bytes": 121304480,
+  "historical_code_whole_encoded_index_decoded_bytes": 570577,
+  "review_reserved_bytes": 131072,
+  "full_context_or_build_executed": false,
+  "logs": [
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution-real-child-controls.log.gz",
+      "bytes": 1262,
+      "sha256": "f4122b964703d0070dbbfdd468dc00d553839cce7396e7d386c162761e0e4ee3"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution-package-tests.log.gz",
+      "bytes": 2077,
+      "sha256": "ba5e5b8441564314e7024f8cf9b7c76a5fad64d0b2340c1a15b08448605012ad"
+    }
+  ],
+  "declared_context_direct_transport_bytes_historical_incomplete_estimate": 86055600,
+  "subtotal_before_current_code_metadata_historical_incomplete_estimate": 208061729,
+  "full_three_context_prospective_phase_bytes": 262478529,
+  "record_alias_method": "All three complete49625 contexts from authenticated whole-v7 chunks and exact complete v6/v8 record variants; original encoded bodies remain losslessly reconstructible."
+}

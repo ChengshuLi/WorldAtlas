@@ -1,0 +1,298 @@
+{
+  "status": "PASS",
+  "old_index_sha256": "1dad6b42f55a2291a6884f302b31308d9b4323daf4536fc93a41efc7dee1695d",
+  "new_index_sha256": "b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876",
+  "old_encoded_bytes": 131038391,
+  "new_encoded_bytes": 133294524,
+  "whole_inverse_verified": true,
+  "original_members": 286,
+  "current_members": 287,
+  "unchanged_members": 285,
+  "changed": "current-context-byte-patch.json.gz",
+  "added": "current-context-outer-byte-patches.json.gz",
+  "scratch": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/1295-portable-context-bank",
+  "scientific_generators_invoked": false,
+  "code_binding": {
+    "status": "PASS",
+    "source_commit": "53f66ece78a83b17c58d263c9ea06fd65873bd97",
+    "files": 50,
+    "unchanged_whole_bindings": 49,
+    "changed_validator_sources": [
+      "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs"
+    ],
+    "prior_index_sha256": "b10e047e345733a983464a282a9819db42930e667d74186c435088c1d146bcea",
+    "current_index_sha256": "c43eb9885fea639d7c8c43a74804ac192ad710993235287d5996d182883cc2bf",
+    "prior_stage_sha256": "61983d0a4ebed5540d420be3225baa777c7b6a17751a2f36da11461290423453",
+    "current_stage_sha256": "fd4bce908b270716579ecff10064da1275bee30eb0bb941bf4986c53facb6a93",
+    "full_inverse_verified": true,
+    "scientific_producers_invoked": false,
+    "scratch": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/child768-code-bank-gb8lgS"
+  },
+  "actual_control_result": {
+    "status": "PASS",
+    "complete_encoded_member_inverse": true,
+    "complete_outer_transport_inverse": 2,
+    "negative_controls": 6,
+    "compression_encoder_invoked": false,
+    "scientific_generators_invoked": false,
+    "runtime": "Node24.19.0 MacOS; platform-independent operator uses only existing exact copy/literal and bounded gunzip, not any encoder"
+  },
+  "original_member_source_commit": "c67345546a24479e29ff9e2872098c78b256209a",
+  "original_outer_source_commit": "8c8f00e4e946f1820a7afe4f6c4f5a0820445ed7",
+  "failure": {
+    "head": "5dc616f5a2579308a361f1eff340d5fca0f350e2",
+    "run": 37747756387,
+    "exit": "failure",
+    "node": "24.21.0",
+    "python": "3.12.15",
+    "status": "Exact encoded original body mismatch before original-v1 replay; correct strict rejection, no full build qualification."
+  },
+  "current_main_library_binding": {
+    "status": "PASS",
+    "source_commit": "01eb10924225a52ce09c321b6afb72543249d589",
+    "files": 50,
+    "unchanged_whole_bindings": 49,
+    "changed_validator_sources": [
+      "scripts/evidence-quality.mjs"
+    ],
+    "prior_index_sha256": "c43eb9885fea639d7c8c43a74804ac192ad710993235287d5996d182883cc2bf",
+    "current_index_sha256": "de4a8f7aac3380fc7c5f1cc06ac9bbf0d170c0921d7ef72d5e46187439a80be9",
+    "prior_stage_sha256": "fd4bce908b270716579ecff10064da1275bee30eb0bb941bf4986c53facb6a93",
+    "current_stage_sha256": "78347715e701c7e7d9775d17f3934dd3c1b61dbc46533d6179c979ae629d69d7",
+    "full_inverse_verified": true,
+    "scientific_producers_invoked": false,
+    "scratch": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/child768-code-bank-hc7ZdS"
+  },
+  "full_current_import_closure": {
+    "status": "PASS",
+    "current_wrapper_complete_imports": [
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs",
+        "bytes": 2810,
+        "sha256": "d3f83b2667e1864b2654bd66edc1bdb2556760409e0783f76a7f3775e1e77c47",
+        "mode": "100644",
+        "blob": "fd920efd547508b203ebf4884b4a470cedc71ef4"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs",
+        "bytes": 18262,
+        "sha256": "603b047a543ed85ea970bf93a35c019306356256bcdd72d4546a6402b5dda8f6",
+        "mode": "100644",
+        "blob": "09f0435c64abcd2ce81ef7e11b03db991911b383"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs",
+        "bytes": 15346,
+        "sha256": "845a0d009093a0ac262174c7784401df32a66a6a1a1a65704ee56faa7013985e",
+        "mode": "100644",
+        "blob": "ea3274a72171e35566334011b30ccd6ecacf02b2"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs",
+        "bytes": 23633,
+        "sha256": "249ae7f16313953a021745a8f13611fce35bcae719e94e421204aadf5270b276",
+        "mode": "100644",
+        "blob": "8a55d134095cd37cc94d02fc60a2d3d9c957540d"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs",
+        "bytes": 5049,
+        "sha256": "c99945eb4fae208e4a6dbf8ce325d93bb35e317b3feeb78312c05bce008d7898",
+        "mode": "100644",
+        "blob": "a638fb29ec7c318b032c50ad00e38fa35053c908"
+      },
+      {
+        "path": "hosted/geographic-releases.js",
+        "bytes": 17288,
+        "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+        "mode": "100644",
+        "blob": "dddb27a2463b4924092a390344fedec23862c8cd"
+      },
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+        "mode": "100644",
+        "blob": "318d842ee999da746956968c9d7e58f9e00cb9e4"
+      },
+      {
+        "path": "scripts/audit-grid-intervals.mjs",
+        "bytes": 6777,
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+        "mode": "100644",
+        "blob": "78fcf8ab2ef8c7b67652e18a43654c6b4dcdd094"
+      },
+      {
+        "path": "scripts/check-prepared.mjs",
+        "bytes": 3133,
+        "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242",
+        "mode": "100644",
+        "blob": "238d7a7526a4fc6e2b2e55ff8a56916e57ea1938"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 23246,
+        "sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03",
+        "mode": "100644",
+        "blob": "71d165421c90c9b13136b7964761011c0b575450"
+      },
+      {
+        "path": "scripts/native-ownership/compact-context-inputs.mjs",
+        "bytes": 2093,
+        "sha256": "bba188fcb97fadcce680959694c8b9617720b5fd30b68e42202611d5fac62bf2",
+        "mode": "100644",
+        "blob": "6d05682a6e9355cd011ff2f47353b81efe98c0f2"
+      },
+      {
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "bytes": 4472,
+        "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+        "mode": "100644",
+        "blob": "cafd0a7efa72b682a46ece67a654d191b029ef9c"
+      },
+      {
+        "path": "scripts/native-ownership/native-candidate-manifest.mjs",
+        "bytes": 5877,
+        "sha256": "2d27cc58e97f4337c3c81143ab3d95be12ab7094cf7163037c07ddff6a61b810",
+        "mode": "100644",
+        "blob": "fd463d1ff5c4df5bafbdb70d07a9351883e28633"
+      },
+      {
+        "path": "scripts/native-ownership/native-only-inputs.mjs",
+        "bytes": 6822,
+        "sha256": "4599b7c42b248268c1e8a419857835e0e1ef336a4a260385630184cffc8e94d1",
+        "mode": "100644",
+        "blob": "b59d8652f14d0c170adb0644f01cd5b827fa3efc"
+      },
+      {
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "bytes": 6371,
+        "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+        "mode": "100644",
+        "blob": "a858fd5fc2f0405f12341171d4a64b0aa5aff350"
+      },
+      {
+        "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+        "bytes": 1540,
+        "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+        "mode": "100644",
+        "blob": "a6d60162cd4ee51bb90bed913110b8fe2b323521"
+      },
+      {
+        "path": "scripts/native-ownership/require-verified-selection.mjs",
+        "bytes": 4377,
+        "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c",
+        "mode": "100644",
+        "blob": "0c73282307526101812f25e3fabb5fca68d8acf0"
+      },
+      {
+        "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+        "bytes": 9713,
+        "sha256": "86d7cdda0bf3192c8ed8983619281041968e8be472c33ce80d6316b7adfd22a7",
+        "mode": "100644",
+        "blob": "d4505c731ba92eb355129d0290c9da25bbe1a823"
+      },
+      {
+        "path": "scripts/native-ownership/validate-context-input-stage.mjs",
+        "bytes": 9478,
+        "sha256": "c8f993458f46ca21d5d10619ac1a77ec86ba45b7e5e8ab20b921fe0f8da0406f",
+        "mode": "100644",
+        "blob": "e7d91e00afdf4afb92944ec6717c0fa20e556096"
+      },
+      {
+        "path": "scripts/native-ownership/validate-context-migration.mjs",
+        "bytes": 5078,
+        "sha256": "34c94e25f8d17f424e82511ecaf85c4f1c0449579f90b218aba264a69b6c2bf0",
+        "mode": "100644",
+        "blob": "8937fb3ea5924009e3de4616d34c3cc3225da138"
+      },
+      {
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "bytes": 1362,
+        "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7",
+        "mode": "100644",
+        "blob": "6be387f2c2a5f349d52957cdd476bbf87780b8c1"
+      },
+      {
+        "path": "scripts/prepare-geographic-release.mjs",
+        "bytes": 47459,
+        "sha256": "dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2",
+        "mode": "100644",
+        "blob": "0603976d39fe8be9266318f47bf4ac86cff5b9b6"
+      },
+      {
+        "path": "scripts/read-geographic-release-manifest.mjs",
+        "bytes": 3978,
+        "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486",
+        "mode": "100644",
+        "blob": "740284b35c0eef1d4b001d648fedbe138cd23de9"
+      },
+      {
+        "path": "scripts/rebind-coverage-manifest.mjs",
+        "bytes": 5109,
+        "sha256": "ae3e018d202993df3a200f01d986cc8a90b548b6ab47d8d34b4b8be35d65a043",
+        "mode": "100644",
+        "blob": "f105ad0e2c2bdc414a7c4afdc3ab294e4673d0bc"
+      },
+      {
+        "path": "src/coverage-classification.js",
+        "bytes": 7378,
+        "sha256": "469e64633f322c0610193f284ece49aea0671384a635a708fa27d69d1047b4c4",
+        "mode": "100644",
+        "blob": "aabb3b0f48b0be011342e16920a45d9d23525a1a"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 6408,
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+        "mode": "100644",
+        "blob": "bc5619798e88b1d2abd4bd11e3fba3b7dd18cf12"
+      },
+      {
+        "path": "src/native-runtime.js",
+        "bytes": 3497,
+        "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+        "mode": "100644",
+        "blob": "a4f8432ac213c5d489db07249d403f7ef91c1296"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+        "mode": "100644",
+        "blob": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4"
+      },
+      {
+        "path": "src/ownership-method.js",
+        "bytes": 3126,
+        "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df",
+        "mode": "100644",
+        "blob": "839abe54e65a98d7be47f7e6d8d58eda0b5a7abe"
+      },
+      {
+        "path": "src/pixel-grid.js",
+        "bytes": 3699,
+        "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595",
+        "mode": "100644",
+        "blob": "008aaf69e65105029e64e09317b8f9aa4df1f352"
+      },
+      {
+        "path": "src/pixel-ownership.js",
+        "bytes": 6134,
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+        "mode": "100644",
+        "blob": "de88d87bea5ddca72c5816b1356ab18b9795f985"
+      }
+    ],
+    "actual_current_library_origin": "6d15b0e12de2e65c84ceab334ebc3e78aa0b46cb",
+    "executed_scientific_generators": false,
+    "original17_scope_unchanged": true
+  },
+  "second_hosted_attempt": {
+    "run": 37750152844,
+    "head": "91889afaecb4f7f0d4d73ac5888513fa08391a89",
+    "actual_merge_checkout": "ae5fd5b7de2ebe111ebe677046478a93ed61a3f4",
+    "actual_merge_base": "6d15b0e12de2e65c84ceab334ebc3e78aa0b46cb",
+    "failure": "Compression restoration completed; current wrapper rejected stale scripts/evidence-quality.mjs pin15247 against genuine merged library23246. No original-v1 validation success claimed."
+  }
+}

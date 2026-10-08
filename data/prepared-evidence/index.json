@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "footprints_sha256": "6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1",
+  "footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433",
   "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
   "location_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
   "sources": [
@@ -208,7 +208,7 @@
   "products": [
     {
       "id": "dated-reference-names",
-      "directory": "dated-reference-names",
+      "directory": "reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names",
       "manifest_sha256": "fe96ce0766515b2b74a2377255f983df0e75e5b6480221fa5ab34254d2a8e75c",
       "inputs": [
         {
@@ -221,7 +221,7 @@
         },
         {
           "path": "revalidation.json",
-          "sha256": "c0b1c0201610cf3ae158c82a965b227e2596de659158f151308c69c8ad16148b"
+          "sha256": "2021469faa7e171be54077d174d9f4895e6cf2820fb40cc24c549b55a325cff9"
         },
         {
           "path": "names.json.gz",
@@ -239,8 +239,8 @@
         "eurostat:nuts:2021"
       ],
       "revalidation": {
-        "path": "dated-reference-names/revalidation.json",
-        "sha256": "c0b1c0201610cf3ae158c82a965b227e2596de659158f151308c69c8ad16148b",
+        "path": "reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/revalidation.json",
+        "sha256": "2021469faa7e171be54077d174d9f4895e6cf2820fb40cc24c549b55a325cff9",
         "entities": 3588,
         "historical_membership_assigned": false
       },
@@ -252,7 +252,7 @@
     },
     {
       "id": "demographic-evidence",
-      "directory": "demographic-evidence",
+      "directory": "reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence",
       "manifest_sha256": "e944267b8c0f0cfdf57ab6f6e4571d4ad537e0e5121b6f0f5ced1a3e46c54280",
       "inputs": [
         {
@@ -261,7 +261,7 @@
         },
         {
           "path": "revalidation.json",
-          "sha256": "745320b928cf3868f61cae34afad68852ac0dae865dcee17db8e30e9015e083c"
+          "sha256": "bbb78e4411a8435a749362f6277ddec6fcf34f74c5f22abb9b22b65c6ea8abf0"
         },
         {
           "path": "sources.json",
@@ -291,8 +291,8 @@
         "abs:2021:G14"
       ],
       "revalidation": {
-        "path": "demographic-evidence/revalidation.json",
-        "sha256": "745320b928cf3868f61cae34afad68852ac0dae865dcee17db8e30e9015e083c",
+        "path": "reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/revalidation.json",
+        "sha256": "bbb78e4411a8435a749362f6277ddec6fcf34f74c5f22abb9b22b65c6ea8abf0",
         "entities": 396,
         "historical_membership_assigned": false
       },
@@ -316,7 +316,7 @@
       "valid_from": 2020,
       "valid_to": 2021,
       "records": 1000,
-      "sha256": "d0dbfeb553ead31eca9e563094a476c83abf3cd80bf68c8f0f4e85f6b0138c20",
+      "sha256": "22fd93c21298b4c952fec997312206772dacb2d7a909ff65c335ecbdf7c4ba6d",
       "decoded_sha256": "439f7a2909e30978d86b291362459114454890f4616dd8fcb24c436f0cb0c5e7",
       "bytes": 51449,
       "source_ids": [
@@ -329,7 +329,7 @@
       "valid_from": 2020,
       "valid_to": 2021,
       "records": 1000,
-      "sha256": "e57ff9ebc1ae33005d1433b6bb204a50bce7217114de54f4a8a6e317da500ab4",
+      "sha256": "cc44b22d320da44694af035400292a135e6816d45568aaba959e500962e0cc4c",
       "decoded_sha256": "dd97ffa55de4a07d05f74658f89392b14087e5d0135865001f39d64b1bb3d4fe",
       "bytes": 52520,
       "source_ids": [
@@ -342,7 +342,7 @@
       "valid_from": 2020,
       "valid_to": 2021,
       "records": 1000,
-      "sha256": "6c59ec87e762b491f0bfc51ec05594676c2e70e974fa33b450689c094a1f2a2f",
+      "sha256": "3f2e4cf2c28b4691c5b29903e53f9ba6781e39db8f32b66407c21dbf499ab16a",
       "decoded_sha256": "60a779ef180c287b61384603a3965481e3e2113924fe59b5be2bb6659859148a",
       "bytes": 52517,
       "source_ids": [
@@ -355,7 +355,7 @@
       "valid_from": 2020,
       "valid_to": 2021,
       "records": 153,
-      "sha256": "aded1102369c485ddfd06b243653559a068811f7c8fedfc57ac382adbe7530ec",
+      "sha256": "d2c2e384d97e75bc863000135d7d8cfabf618f11f39983cf2d0678828f47aa0b",
       "decoded_sha256": "92b778f028751230e9ccc482bea36b943550e79b9ce9875de0eb921d7cdd8d3b",
       "bytes": 8622,
       "source_ids": [
@@ -368,7 +368,7 @@
       "valid_from": 2021,
       "valid_to": 2022,
       "records": 435,
-      "sha256": "af67e9ce0ebb98270531ae020d6d86ef04c259f9f11b6bd324c92b1dfa117c3f",
+      "sha256": "a7d9b6527c722808370eec8ed60bd3db43e6c21b27d999b98d0f2e0d4d7cddf3",
       "decoded_sha256": "9399b1788a6687caa6594b123c252f375e1121cce0794fac4ce46c7332d31e3c",
       "bytes": 24856,
       "source_ids": [
@@ -381,7 +381,7 @@
       "valid_from": 2021,
       "valid_to": 2022,
       "records": 396,
-      "sha256": "4bc86c2b23b735a06080d810690fcbaf34c9bc2e26fc4ae50276bea04eb51f9b",
+      "sha256": "a180805ffd1e2bbf6fec61ae8cc531b8afbb6226c7ad74f046edb2e3326b352e",
       "decoded_sha256": "4774dab94bcf7146664caa8ed8475e4a3f8f7fe6d629e1f1eb9508612ead8c9b",
       "bytes": 59268,
       "source_ids": [
@@ -394,7 +394,7 @@
   "names": 3588,
   "imports": {
     "path": "imports/index.json",
-    "sha256": "07a8f2b8d58b22634746aab27275c34c7687354c311e8b58951566388c4287eb",
+    "sha256": "c7e8b205b9c8f54509f21ab9aa08c32760bca86587d98e49faf43680a4e662fc",
     "batches": 22
   }
 }

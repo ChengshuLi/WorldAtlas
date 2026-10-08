@@ -1,1 +1,239 @@
-{"version":1,"issue":991,"lane":"engineering","kind":"retained-identity-context-migration-v1","execution_commit":"daa8ea20eed509a243201b01f053d64f69ca0ff8","validator_sources":[{"path":"package.json","bytes":1417,"sha256":"2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"},{"path":"scripts/native-ownership/validate-build-context-stage.mjs","bytes":9460,"sha256":"5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7"},{"path":"scripts/native-ownership/validate-context-input-stage.mjs","bytes":9478,"sha256":"c8f993458f46ca21d5d10619ac1a77ec86ba45b7e5e8ab20b921fe0f8da0406f"},{"path":"scripts/native-ownership/validate-context-migration.mjs","bytes":5078,"sha256":"34c94e25f8d17f424e82511ecaf85c4f1c0449579f90b218aba264a69b6c2bf0"},{"path":"scripts/native-ownership/native-only-inputs.mjs","bytes":6822,"sha256":"4599b7c42b248268c1e8a419857835e0e1ef336a4a260385630184cffc8e94d1"},{"path":"scripts/native-ownership/compact-context-inputs.mjs","bytes":2093,"sha256":"bba188fcb97fadcce680959694c8b9617720b5fd30b68e42202611d5fac62bf2"},{"path":"scripts/native-ownership/read-pinned-build-file.mjs","bytes":1540,"sha256":"7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"},{"path":"scripts/native-ownership/native-preparation-guards.mjs","bytes":6371,"sha256":"6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0"},{"path":"scripts/native-ownership/compile-native-ownership.mjs","bytes":4472,"sha256":"2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"},{"path":"scripts/audit-grid-intervals.mjs","bytes":6777,"sha256":"084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"},{"path":"scripts/evidence-quality.mjs","bytes":14753,"sha256":"6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb"},{"path":"scripts/prepare-geographic-release.mjs","bytes":47459,"sha256":"dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2"},{"path":"scripts/check-prepared.mjs","bytes":3133,"sha256":"66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242"},{"path":"scripts/read-geographic-release-manifest.mjs","bytes":3978,"sha256":"9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486"},{"path":"src/native-runtime.js","bytes":3497,"sha256":"988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"},{"path":"src/native-grid.js","bytes":6408,"sha256":"b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"},{"path":"hosted/geographic-releases.js","bytes":17288,"sha256":"9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701"}],"original_stage":{"path":"coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json","bytes":64822,"sha256":"7c911c4aaba40dc61d6bb6a45b94b1d5860662450f63b35127adeaa67e52197b"},"original_snapshot_overrides":[{"commit":"548c5f89f00271050823076a84695bb41e1b8454","original_path":"data/geographic-releases/current-manifest.json","path":"data/native-context-migration/snapshots/data/geographic-releases/current-manifest.json","bytes":206,"sha256":"85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"},{"commit":"548c5f89f00271050823076a84695bb41e1b8454","original_path":"data/geography/part-11.json","path":"data/native-context-migration/snapshots/data/geography/part-11.json","bytes":5131824,"sha256":"97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"},{"commit":"548c5f89f00271050823076a84695bb41e1b8454","original_path":"data/geography/part-17.json","path":"data/native-context-migration/snapshots/data/geography/part-17.json","bytes":4945828,"sha256":"5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"},{"commit":"65cfcef5ffd7d8b98077b9058a374d1e27047430","original_path":"data/geographic-releases/current-manifest.json","path":"data/native-context-migration/snapshots/data/geographic-releases/current-manifest.json","bytes":206,"sha256":"85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"},{"commit":"65cfcef5ffd7d8b98077b9058a374d1e27047430","original_path":"data/geography/part-11.json","path":"data/native-context-migration/snapshots/data/geography/part-11.json","bytes":5131824,"sha256":"97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"},{"commit":"65cfcef5ffd7d8b98077b9058a374d1e27047430","original_path":"data/geography/part-17.json","path":"data/native-context-migration/snapshots/data/geography/part-17.json","bytes":4945828,"sha256":"5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"}],"before_context":{"path":"coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/inputs.json","bytes":17380,"sha256":"3d224732d99333c9d85b12717316965091415fc84ea60e9dbe1c79b510257b0d"},"after_context":{"path":"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/inputs.json","bytes":25634,"sha256":"f635fb68390a3dca271d6faac483ed5cf35cead23cf9cc2bc3c06b0f771970a2"},"native_proposal":{"path":"coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json","bytes":20294,"sha256":"a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d"},"geometry_manifest":{"path":"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/index.json","bytes":395,"sha256":"67c5a2508055fe49abff3d4e5484c7f29b31b0bec9cc120f83881115d5cf48fb"},"geometry_files":[{"path":"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/migration-receipt.json","bytes":1886445,"sha256":"e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0"}],"releases":{"path":"data/geographic-releases/releases-v7-repacked-gzip.json.gz","bytes":168219,"sha256":"08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"},"predecessor_registry":{"path":"data/geographic-releases/releases-v6-gzip.json.gz","bytes":169082,"sha256":"96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16"},"predecessor_release_id":"geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186","successor_release_id":"geography:review:2632d51da0efa5574c74638afe441c4efd5f29e93804c507a24cc6dbb56c0199","installed":false,"published":false,"scientific_approval":false}
+{
+  "version": 2,
+  "issue": 1295,
+  "kind": "retained-identity-context-continuation-v2",
+  "lane": "engineering",
+  "subject_ids": [
+    "atlas:physical:CAN-103:QUE",
+    "atlas:physical:CAN-114:NFL"
+  ],
+  "prior_stage_sha256": "471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765",
+  "prior_image": {
+    "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/index.json",
+    "bytes": 27488,
+    "sha256": "ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe",
+    "original_index_sha256": "e34743a84df2aaaa668b4e7b23c4f6870379edfe7eb88a427d6005b47333a393"
+  },
+  "coverage_middle_grid": {
+    "path": "data/native-ownership/repaired-v7/manifest.json",
+    "bytes": 252680,
+    "sha256": "70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc"
+  },
+  "releases": {
+    "path": "data/geographic-releases/releases-v8.json.gz",
+    "bytes": 195488,
+    "sha256": "10052f88a3ecdd42d555f05a2d5672c212d2ca9196cff383f8ce7a4cccd7652e"
+  },
+  "predecessor_release_id": "geography:review:2632d51da0efa5574c74638afe441c4efd5f29e93804c507a24cc6dbb56c0199",
+  "successor_release_id": "geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e",
+  "after_context": {
+    "path": "data/canonical-grid/eastern-v8/context-index.json",
+    "bytes": 9411,
+    "sha256": "2a1ba93fcdfc81da3247e6abacb49a5df6284d6c1ffd2b2a73f4e84c3b760716"
+  },
+  "after_context_image": {
+    "path": "data/canonical-grid/eastern-v8/context-transport/index.json",
+    "bytes": 19250,
+    "sha256": "3a5c1023ec6ed0df2c8393bb0398f9b9452e1e6e3d6de03e794bccb5825f1d15"
+  },
+  "native_comparison": {
+    "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+    "bytes": 13848,
+    "sha256": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28"
+  },
+  "native_manifest": {
+    "path": "data/canonical-grid/eastern-v8/manifest.json",
+    "bytes": 251732,
+    "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+  },
+  "native_proposal": {
+    "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-proposal.json",
+    "bytes": 70216,
+    "sha256": "53fce7ed6bd6716854a2f653e2a253caeb087d324f4cf010cf0698d33cf745db"
+  },
+  "geometry_manifest": {
+    "path": "data/reference-migrations/eastern-two-gap-repair-20261006/index.json",
+    "bytes": 1765,
+    "sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef"
+  },
+  "geometry_files": [
+    {
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz",
+      "bytes": 449759,
+      "sha256": "84af24772c716b5252ef7b2048c0a2787bfa72d8c8723fb5220d6a89a85aba23"
+    }
+  ],
+  "validator_sources": [
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs",
+      "bytes": 2810,
+      "sha256": "d3f83b2667e1864b2654bd66edc1bdb2556760409e0783f76a7f3775e1e77c47"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs",
+      "bytes": 18262,
+      "sha256": "603b047a543ed85ea970bf93a35c019306356256bcdd72d4546a6402b5dda8f6"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs",
+      "bytes": 15346,
+      "sha256": "845a0d009093a0ac262174c7784401df32a66a6a1a1a65704ee56faa7013985e"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs",
+      "bytes": 23633,
+      "sha256": "249ae7f16313953a021745a8f13611fce35bcae719e94e421204aadf5270b276"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs",
+      "bytes": 5049,
+      "sha256": "c99945eb4fae208e4a6dbf8ce325d93bb35e317b3feeb78312c05bce008d7898"
+    },
+    {
+      "path": "hosted/geographic-releases.js",
+      "bytes": 17288,
+      "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+    },
+    {
+      "path": "scripts/check-prepared.mjs",
+      "bytes": 3133,
+      "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 23246,
+      "sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03"
+    },
+    {
+      "path": "scripts/native-ownership/compact-context-inputs.mjs",
+      "bytes": 2093,
+      "sha256": "bba188fcb97fadcce680959694c8b9617720b5fd30b68e42202611d5fac62bf2"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+    },
+    {
+      "path": "scripts/native-ownership/native-candidate-manifest.mjs",
+      "bytes": 5877,
+      "sha256": "2d27cc58e97f4337c3c81143ab3d95be12ab7094cf7163037c07ddff6a61b810"
+    },
+    {
+      "path": "scripts/native-ownership/native-only-inputs.mjs",
+      "bytes": 6822,
+      "sha256": "4599b7c42b248268c1e8a419857835e0e1ef336a4a260385630184cffc8e94d1"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371,
+      "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0"
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+    },
+    {
+      "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+      "bytes": 9713,
+      "sha256": "86d7cdda0bf3192c8ed8983619281041968e8be472c33ce80d6316b7adfd22a7"
+    },
+    {
+      "path": "scripts/native-ownership/validate-context-input-stage.mjs",
+      "bytes": 9478,
+      "sha256": "c8f993458f46ca21d5d10619ac1a77ec86ba45b7e5e8ab20b921fe0f8da0406f"
+    },
+    {
+      "path": "scripts/native-ownership/validate-context-migration.mjs",
+      "bytes": 5078,
+      "sha256": "34c94e25f8d17f424e82511ecaf85c4f1c0449579f90b218aba264a69b6c2bf0"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 1362,
+      "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7"
+    },
+    {
+      "path": "scripts/prepare-geographic-release.mjs",
+      "bytes": 47459,
+      "sha256": "dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2"
+    },
+    {
+      "path": "scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978,
+      "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486"
+    },
+    {
+      "path": "scripts/rebind-coverage-manifest.mjs",
+      "bytes": 5109,
+      "sha256": "ae3e018d202993df3a200f01d986cc8a90b548b6ab47d8d34b4b8be35d65a043"
+    },
+    {
+      "path": "src/coverage-classification.js",
+      "bytes": 7378,
+      "sha256": "469e64633f322c0610193f284ece49aea0671384a635a708fa27d69d1047b4c4"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+    },
+    {
+      "path": "src/pixel-grid.js",
+      "bytes": 3699,
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595"
+    },
+    {
+      "path": "src/pixel-ownership.js",
+      "bytes": 6134,
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f"
+    }
+  ],
+  "canonical_restoration": {
+    "index_sha256": "b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876",
+    "ordinary_path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/index.json",
+    "full_canonical_paths": 302,
+    "scientific_vintages_preserved": true,
+    "original_transport_index_sha256": "3a343812f25b02f4472dbe5338a72e9541e4de180b916e0cf8bbc9a00464f097",
+    "whole_original_and_current_byte_inverse": true,
+    "release_memberships": {
+      "index_sha256": "9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c",
+      "ordinary_path": "coordination/engineering/eastern-two-gap-repair-native-20261007/release-memberships/index.json",
+      "canonical_paths": 340,
+      "memberships": 84833,
+      "original_source_commit": "bad783529fa35d0bd45cd65ed899c02ea96c93b6",
+      "whole_original_bodies_modes_and_paths_preserved": true
+    }
+  }
+}
