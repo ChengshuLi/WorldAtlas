@@ -27,7 +27,7 @@ RUNTIME_PYTHON="/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/de
 
 ## Frozen resource bounds and forecast
 
-- Exact preflight on commit `c19518d6ce7032defeca3b5e55349ab7c51f2317` passed without geographic operations: 213,799,862 input bytes of 268,435,456 allowed; peak RSS 175,472,640 bytes; elapsed 61.1 s. This includes the JRC metadata/capture and cohort plan.
+- Exact preflight on commit `0b8380ce6af3205d8c170b5bcf5bf05c7cea096e` passed without geographic operations: 213,821,152 input bytes of 268,435,456 allowed; peak RSS 148,701,184 bytes; elapsed 59.1 s. This includes the JRC metadata/capture and cohort plan.
 - Producer ceiling per full source run: 1,200 seconds, 768 MiB peak RSS, 256 MiB pinned input, 12 MiB output. Two runs reserve up to 24 MiB. Two controls reserve 2 MiB, each capped at 1 MiB.
 - Current packet is admitted up to 1 GiB worktree; scratch cap 512 MiB; final evidence cap 512 MiB; disk admission reserves 2 GiB. Recheck free disk, all destinations and system memory in the assigned window before either run.
 - JRC metadata-only capture is 325,312 bytes; no raster pixel values have been read. The planned exact support covers 256 unique blocks / 687,297 encoded bytes / 67,108,864 decoded-byte upper bound after global deduplication. Ten separate cohorts represent 306 block memberships, 50 repeated memberships, 855,570 encoded bytes and 80,216,064 decoded-byte upper bound; each cohort is capped at 64 blocks / 16 MiB, with the largest currently 63 blocks / 15.75 MiB.
