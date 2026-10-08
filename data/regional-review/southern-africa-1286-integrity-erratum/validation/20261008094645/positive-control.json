@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "method_id": "southern-africa-1286-integrity",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "verified_at_utc": "2026-10-08T09:46:45.010Z",
+  "runs": [
+    {
+      "path": "data/regional-review/southern-africa-1286-integrity-erratum/vintages/verified-22e8f9d1-run1/validation.json",
+      "bytes": 3339,
+      "sha256": "35cc47b9c9970b6a6633d1eed5a6ab6c894aaccf58661fa8dd11319b26038462"
+    },
+    {
+      "path": "data/regional-review/southern-africa-1286-integrity-erratum/vintages/verified-22e8f9d1-run2/validation.json",
+      "bytes": 3339,
+      "sha256": "35cc47b9c9970b6a6633d1eed5a6ab6c894aaccf58661fa8dd11319b26038462"
+    }
+  ],
+  "source_artifact_sha256_by_country": {
+    "AGO": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404",
+    "MOZ": "5f04bb75bcb08092451f8626f7113830abfe726c1fad5309107309ab6cceab65",
+    "MWI": "5fe9b6313ee3eaf6d2b8a4579b7a7fa75dc1b16b9324a436f5a359da23527ea6"
+  },
+  "exact_subject_count": 223,
+  "assessment_classifications": {
+    "justified": 0,
+    "correction-needed": 1,
+    "insufficient-evidence": 222
+  }
+}
