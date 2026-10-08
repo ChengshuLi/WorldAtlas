@@ -91,7 +91,8 @@
       "evidence": {
         "baseline_feature_read": true,
         "required_block_read": true,
-        "no_spatial_fill_or_repair": false
+        "no_spatial_fill_or_repair": true,
+        "assertion_basis": "The findings method states no geometry repair or raster fill; the producer uses the exact baseline features, required retained block bytes, and zlib decode with size assertions. The no-pixel fallback claim is limited to this implementation and is not a physical fact."
       }
     },
     {
