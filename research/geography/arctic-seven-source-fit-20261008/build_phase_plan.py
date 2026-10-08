@@ -8,6 +8,7 @@ ROOT=Path(__file__).resolve().parents[3]
 PACKET=Path(__file__).resolve().parent
 PREFIX='research/geography/arctic-seven-source-fit-20261008/'
 BASELINE_SOURCE='960ba2f4fef0fc9881b8a106a944e6e3874e98c9'
+SCOPE_MANIFEST_COMMIT='66ceaf821ec2b9b6ed1bb25bc7ed31a2a2ab6ecf'
 SCOPE_MANIFEST_SHA256='573f4047e7e022e741c41acb35f5534ed7e25f5faf6801eb8e86f5c2aa70cc66'
 RUNTIME='research/geography/arctic-seven-source-fit-20261008/runtime-lock.json'
 NATIVE_RUNTIME='research/geography/arctic-seven-source-fit-20261008/native-tools-lock.json'
@@ -38,7 +39,7 @@ def descriptor(commit,path,expected=None,verify_materialized=False):
  return row
 def main():
  parser=argparse.ArgumentParser(); parser.add_argument('--execution-commit',required=True); args=parser.parse_args()
- manifest_raw=(PACKET/'evidence-quality.json').read_bytes()
+ manifest_raw=git('show',f'{SCOPE_MANIFEST_COMMIT}:{PREFIX}evidence-quality.json')
  if sha(manifest_raw)!=SCOPE_MANIFEST_SHA256:raise ValueError('Issue #1481 scope manifest whole-file pin mismatch')
  manifest=json.loads(manifest_raw)
  issue_pins={row['path']:row for row in manifest['baseline']['files']}
