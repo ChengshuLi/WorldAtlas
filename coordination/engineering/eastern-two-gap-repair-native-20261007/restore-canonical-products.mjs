@@ -174,6 +174,31 @@ function restoreByteDerivedObjects(canonical,prior,map,old,images) {
     all_original_image_whole_bodies_and_modes_verified:true,scientific_producers_invoked:false};
 }
 
+const membershipIndex = '9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c';
+function validateMembershipTail(directory,index) {
+  const paths=Array.from({length:340},(_,i)=>`data/geographic-releases/8-memberships-${i*250}.json.gz`).sort();
+  assert.deepEqual(index.files.map(p=>p.path).sort(),paths,'Complete v8 membership tail required');
+  const ids=new Set();
+  for(const pin of index.files) {
+    const binding=pin.original_binding;
+    assert.equal(binding.kind,'unaccepted-generated-v8-membership-output');
+    assert.equal(binding.commit,'bad783529fa35d0bd45cd65ed899c02ea96c93b6');
+    assert.equal(binding.scientific_records_recomputed,false);
+    for(const key of ['path','mode','bytes','sha256'])assert.equal(binding[key],pin[key]);
+    assert.equal(pin.mode,'100644');
+    const raw=read(directory,pin);
+    assert.equal(createHash('sha1').update(Buffer.from(`blob ${raw.length}\0`)).update(raw).digest('hex'),binding.blob);
+    assert(Number.isSafeInteger(binding.decoded_bytes)&&binding.decoded_bytes>0&&binding.decoded_bytes<=1024*1024);
+    const decoded=gunzipSync(raw,{maxOutputLength:1024*1024});
+    assert.equal(decoded.length,binding.decoded_bytes);assert.equal(sha(decoded),binding.decoded_sha256);
+    const body=JSON.parse(decoded);
+    assert.equal(body.release_id,'geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e');
+    assert(Array.isArray(body.memberships)&&body.memberships.length>0&&body.memberships.length<=250);
+    assert.equal(body.memberships.length,binding.memberships);
+    for(const row of body.memberships){assert(typeof row.entity_id==='string'&&!ids.has(row.entity_id));ids.add(row.entity_id);}
+  }
+  assert.equal(ids.size,84833);return ids.size;
+}
 const restored = new Map();
 export function restoreCanonicalProducts({root, temporaryRoot, mode = 'package'}) {
   assert(['package','checkout'].includes(mode),'Unknown canonical preparation boundary');
@@ -191,6 +216,11 @@ export function restoreCanonicalProducts({root, temporaryRoot, mode = 'package'}
   const canonical = path.join(temporary, 'canonical-objects');
   const prior = path.join(temporary, 'prior-objects');
   const priorImage = path.join(temporary, 'original-v1-image');
+  const memberships=path.join(temporary,'release-memberships');
+  const membershipImage=restoreWholeImage(path.join(root,namespace,'release-memberships'),memberships,{expectedIndexSha:membershipIndex});
+  validateMembershipTail(memberships,membershipImage);
+  // Authenticate every existing destination before any canonical activation.
+  for(const pin of membershipImage.files)if(fs.existsSync(ordinary(root,pin.path)))read(root,pin);
   const canonicalImage=restoreWholeImage(path.join(root, namespace, 'canonical-products'), canonical, {expectedIndexSha: canonicalIndex});
   const priorImageIndex=restoreWholeImage(path.join(root, namespace, 'prior-v1'), prior, {expectedIndexSha: priorIndex});
   const imageMember=(image,name)=>{const pins=image.files.filter(p=>p.path===name);assert.equal(pins.length,1);return pins[0];};
@@ -232,17 +262,20 @@ export function restoreCanonicalProducts({root, temporaryRoot, mode = 'package'}
     if (pin.shared_canonical_object) assert.deepEqual(canonicalObjects.get(object.path), object);
     copy(priorImage, pin.path, pin.shared_canonical_object ? canonical : prior, object);
   }
+  for(const pin of membershipImage.files)copy(root,pin.path,memberships,pin);
   const receipt = {version: 1, issue: 1295, canonical_paths: 302, prior_paths: 122,
     canonical_index_sha256: canonicalIndex, prior_index_sha256: priorIndex,
     original_prior_index_sha256: originalPriorIndex, byte_inverse:byteInverse, priorImage, temporary,
+    new_release_memberships:{index_sha256:membershipIndex,canonical_paths:340,memberships:84833,source_commit:'bad783529fa35d0bd45cd65ed899c02ea96c93b6',scientific_records_recomputed:false},
     scientific_producers_invoked: false, original_vintages_and_unknowns_preserved: true};
-  restored.set(root, {receipt, map, old});
+  restored.set(root, {receipt, map, old, membershipImage});
   // Stock readers use only the fully verified installed paths and priorImage.
   // Preserve those complete files; discard only this exclusive object's staging
   // copies after every current/prior whole body has been verified again.
   getRestoredCanonicalProducts(root);
   const released=[];
   for(const [directory,pins] of [
+    [memberships,membershipImage.files],
     [canonical,[...canonicalImage.files,...map.distinct_objects]],
     [prior,[...priorImageIndex.files,...old.logical_targets.filter(p=>!p.shared_canonical_object).map(p=>({...p,path:p.object}))]]
   ]) {
@@ -281,6 +314,7 @@ export function releaseVerifiedStagingObjects(directory,pins) {
 export function getRestoredCanonicalProducts(root) {
   const saved = restored.get(root);
   assert(saved, 'Canonical restoration must precede stock readers');
+  validateMembershipTail(root,saved.membershipImage);
   for (const pin of saved.map.logical_targets) read(root, {...pin, path: pin.target});
   for (const pin of saved.old.logical_targets) read(saved.receipt.priorImage, pin);
   return saved.receipt;
