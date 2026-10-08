@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "issue": 1459,
+  "method": "verify-integrity.mjs",
+  "validator_sha256": "0bdfc53134c000243ce578e126bfc0e28532d51d17c5f8e05e29f8754d5aff7d",
+  "reproduced_at_utc": "2026-10-08T09:36:39.867Z",
+  "prior_directed_control_count": 7,
+  "coherent_adversarial_control_count": 7,
+  "controls": [
+    {
+      "id": "missing-crosswalk-member",
+      "crosswalk_sha256": "aebe88277ce5c8eea37328b8d8c05f2315289af2be93253a37efec3da332d481",
+      "assessments_sha256": "1931b50cccfc86fc46e9cb3df8d8580f329e1f3c346b734f4887ff6f3732fdd4",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/retained-missing-crosswalk-member/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "10b9b055741a7df5c441dac28dd05f8c4e8429109e1fb2105316a74ac9845eb9",
+      "diagnostic": "/verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:67:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false
+    },
+    {
+      "id": "duplicate-crosswalk-member",
+      "crosswalk_sha256": "3efc1df487df54f0b76e63cd28a73056b9f8854bd3b6ef012cdc07fa8ba8ff39",
+      "assessments_sha256": "779f9fb596a05efdddacf970d78a52e7723caeb393f0fed594ccb62ecb9fbc04",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/retained-duplicate-crosswalk-member/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "8cdfc6b943de6173d4eedd3256215906ccc772bf8be73a598c974c95ea935b90",
+      "diagnostic": "/verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:69:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false
+    },
+    {
+      "id": "foreign-crosswalk-replacement",
+      "crosswalk_sha256": "05d28bb5fba95ff13c88577aa61f5e7b1a70edbfd5a923397aa7492239860292",
+      "assessments_sha256": "c00dbcc5cade77658baa94857cc52daccfc96e3d3db1a63f2ae8ed32de39793f",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/retained-foreign-crosswalk-replacement/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "d2265349f9d310eace2fbdd9b09e51f014337829f2911ae9a478a96f45df9433",
+      "diagnostic": "/verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:76:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false
+    },
+    {
+      "id": "extra-crosswalk-member",
+      "crosswalk_sha256": "0b8218aa3a5019c943360882397ce375d870a8b4dac5ed8ea927a2d6c10f45e3",
+      "assessments_sha256": "73d15a4406defc9ae59dbdd87ec866722e788ae93689dda4c34aeac0775c9298",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/retained-extra-crosswalk-member/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "10b9b055741a7df5c441dac28dd05f8c4e8429109e1fb2105316a74ac9845eb9",
+      "diagnostic": "/verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:67:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false
+    },
+    {
+      "id": "crosswalk-parent-mismatch",
+      "crosswalk_sha256": "936c32fc46ccf1202b41cd1948229156617e9349ad2c4215255c969c8ebfb0e3",
+      "assessments_sha256": "dfc5616be2c4bd23a052382dbd6056f6f92b60092ed35e238d783bf8404e34b7",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/retained-crosswalk-parent-mismatch/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "9de814e2f6627c72eee4d71af8bc219b9536599a1f49890507c79cddc4c9ba1a",
+      "diagnostic": "erify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:190:54\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false
+    },
+    {
+      "id": "assessment-native-source-mismatch",
+      "crosswalk_sha256": "cb0eebb69abbc384943a84ab01d15a78ae6b58de4f35ace46c8f8d910edba2da",
+      "assessments_sha256": "4b514564c2ad66bf0132a76d99b65ad3111f8198d77a9b24306d61f2d1bd3002",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/retained-assessment-native-source-mismatch/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "532caa87426aa140893a70889137b985f66c0899413b8e0527636de5fb71bd06",
+      "diagnostic": "erify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:223:56\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false
+    },
+    {
+      "id": "assessment-parent-mismatch",
+      "crosswalk_sha256": "cb0eebb69abbc384943a84ab01d15a78ae6b58de4f35ace46c8f8d910edba2da",
+      "assessments_sha256": "64c716ee7c9783f3afbabd789115428840d8595f8f3405687d854ac65d1bd5b6",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/retained-assessment-parent-mismatch/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "902beeb66ea5adc6245c5fd3f05894994f5eb8b10150d0d5f67f9b62214fb5a3",
+      "diagnostic": "erify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:223:56\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false
+    },
+    {
+      "id": "coherent-false-source-hash",
+      "crosswalk_sha256": "c25d95e262a0b4af28f03c8897066af06db10eaea3568d8444a367d928ee108c",
+      "assessments_sha256": "0857b8bbc2d68c86435540f4733b1a3f4f4d027735e04aea2201d2782b80aa40",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/coherent-false-source-hash/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "e43e53261f1737e4d1741906b9f6f3f7016e36652adf53e07ecf23f9d3e57cda",
+      "diagnostic": "erify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:223:56\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false,
+      "coherent_crosswalk_counts": true,
+      "coherent_assessment_hash": true
+    },
+    {
+      "id": "moved-scientific-disposition",
+      "crosswalk_sha256": "33695cb3bd14f9ce6d6b2fb8f574540b5cc447453c51120875512d7eadc9d762",
+      "assessments_sha256": "9ac68b67bb07c48b97227703904cbd541ce71556a20cdab76abd36c8e3d20c63",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/moved-scientific-disposition/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "cefc9358fcff56601dd07a53667e96736c691738cddb0315100ed092e4a7b350",
+      "diagnostic": "verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:228:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false,
+      "coherent_crosswalk_counts": true,
+      "coherent_assessment_hash": true
+    },
+    {
+      "id": "wrong-individual-source-descriptor",
+      "crosswalk_sha256": "33695cb3bd14f9ce6d6b2fb8f574540b5cc447453c51120875512d7eadc9d762",
+      "assessments_sha256": "5401484e0337b7cd4e9beaff8c6883f3fced56e9f0d32b96766f04e30d212409",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/wrong-individual-source-descriptor/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "e43e53261f1737e4d1741906b9f6f3f7016e36652adf53e07ecf23f9d3e57cda",
+      "diagnostic": "erify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:223:56\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false,
+      "coherent_crosswalk_counts": true,
+      "coherent_assessment_hash": true
+    },
+    {
+      "id": "wrong-individual-disposition",
+      "crosswalk_sha256": "33695cb3bd14f9ce6d6b2fb8f574540b5cc447453c51120875512d7eadc9d762",
+      "assessments_sha256": "9cdc9344f76129a4a127b3a7b23a597a9a6ff4748bb8477d56247433289ab157",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/wrong-individual-disposition/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "cefc9358fcff56601dd07a53667e96736c691738cddb0315100ed092e4a7b350",
+      "diagnostic": "verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:228:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false,
+      "coherent_crosswalk_counts": true,
+      "coherent_assessment_hash": true
+    },
+    {
+      "id": "coherent-missing-subject",
+      "crosswalk_sha256": "bee061f557f2b19ea695fbe77d1f3184f7edf9c57d05beb013f8c863004995fe",
+      "assessments_sha256": "0a0bf2be9e7c714c5639ed71ac21a7bb4e8bfad19e32d52c12a9e6aa497a53ab",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/coherent-missing-subject/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "049081381fbc81854a5254b7e6b4dc90f5fba0a106068e675b17a3f55da8fb8d",
+      "diagnostic": "/verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:66:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false,
+      "coherent_crosswalk_counts": true,
+      "coherent_assessment_hash": true
+    },
+    {
+      "id": "coherent-extra-subject",
+      "crosswalk_sha256": "11d9915ec42f4a76d10fe68a5d6f5a4f621684dc6f90ef549b38e7e841d6bbc7",
+      "assessments_sha256": "37bf65abd4cc51bc427834dbe42a1ec28e9fe4d85196b932cf2d7f8c7e05d64d",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/coherent-extra-subject/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "049081381fbc81854a5254b7e6b4dc90f5fba0a106068e675b17a3f55da8fb8d",
+      "diagnostic": "/verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:66:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false,
+      "coherent_crosswalk_counts": true,
+      "coherent_assessment_hash": true
+    },
+    {
+      "id": "coherent-duplicate-subject",
+      "crosswalk_sha256": "b1610799f2d2f2afee76d3a21bee19ce3af7dffe7a10fb18f5058180b42bdb1f",
+      "assessments_sha256": "0bae330c15db5e452871f75f972a56a50363b8ffecf51ed90f7f2b50b5ca7ea3",
+      "output_path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-r1/coherent-duplicate-subject/success-must-not-exist.json",
+      "outcome": "rejected-before-success-receipt",
+      "stderr_sha256": "049081381fbc81854a5254b7e6b4dc90f5fba0a106068e675b17a3f55da8fb8d",
+      "diagnostic": "/verify-integrity.mjs:45:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/southern-africa-1286-integrity-erratum/verify-integrity.mjs:66:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0",
+      "success_receipt_exists": false,
+      "coherent_crosswalk_counts": false,
+      "coherent_assessment_hash": true
+    }
+  ],
+  "interpretation": "The replacement validator rejected all seven retained directed mutations and seven newly generated false-hash, moved-disposition, incorrect-descriptor, incorrect-disposition, and coherently refreshed missing/extra/duplicate subject controls before creating any success receipt."
+}

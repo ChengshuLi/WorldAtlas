@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "issue": 1279,
+  "reviewed_issue": 411,
+  "baseline_commit": "bd2c2aeed9fcaa0b209a4bec1fe18b7129bb7f60",
+  "frozen_subject_count": 223,
+  "frozen_subjects_sha256": "2b32d599bf6249ac56744eff794e1c54d9f39017deae06efd475e056a088cd17",
+  "crosswalk": {
+    "path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-1791481490089-91615/coherent-false-source-hash/scope-reproduction.json",
+    "bytes": 259007,
+    "sha256": "c25d95e262a0b4af28f03c8897066af06db10eaea3568d8444a367d928ee108c",
+    "rows": 223,
+    "unique_ids": 223
+  },
+  "assessments": {
+    "path": "data/regional-review/southern-africa-1286-integrity-erratum/controls/2026-10-08-1791481490089-91615/coherent-false-source-hash/row-assessments.json",
+    "bytes": 485780,
+    "sha256": "0857b8bbc2d68c86435540f4733b1a3f4f4d027735e04aea2201d2782b80aa40",
+    "rows": 223
+  },
+  "source_subject_joins": {
+    "AGO": 157,
+    "MOZ": 38,
+    "MWI": 28
+  },
+  "assessment_classifications": {
+    "justified": 0,
+    "correction-needed": 1,
+    "insufficient-evidence": 222
+  },
+  "checked_baseline_files": [
+    "data/world-index.json",
+    "data/geography/part-16.json",
+    "data/geography/part-29.json",
+    "data/hierarchy.json",
+    "data/macro-foundation/regional-handoffs.json.gz",
+    "data/macro-foundation/current-membership-inventory.json.gz"
+  ],
+  "retained_geoboundaries_source_hashes": [
+    {
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-AGO-ADM2-2018.geojson",
+      "bytes": 3146775,
+      "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    },
+    {
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-MOZ-ADM2-2019.geojson",
+      "bytes": 24879690,
+      "sha256": "5f04bb75bcb08092451f8626f7113830abfe726c1fad5309107309ab6cceab65"
+    },
+    {
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-MWI-ADM2-2020.geojson",
+      "bytes": 5658560,
+      "sha256": "5fe9b6313ee3eaf6d2b8a4579b7a7fa75dc1b16b9324a436f5a359da23527ea6"
+    }
+  ],
+  "limitations": [
+    "This validates exact crosswalk and assessment membership/correlation against retained source bytes and the pinned Atlas baseline.",
+    "It does not establish current administrative legality, geographic accuracy, source completeness, neighboring granularity, topology, or regional approval.",
+    "Inherited official-source retrieval and license gaps remain those recorded in the original packet; this erratum makes no new source or territorial claim."
+  ]
+}
