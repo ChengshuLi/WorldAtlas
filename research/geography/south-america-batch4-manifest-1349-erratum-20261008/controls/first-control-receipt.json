@@ -1,0 +1,250 @@
+{
+  "controls": {
+    "changed_current_contract": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {},
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-contract-substitution/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-contract-substitution/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-contract-substitution/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 305, in build\n    raise ValueError(\"The accepted 215 IDs differ from current #1506 exact scope\")\nValueError: The accepted 215 IDs differ from current #1506 exact scope\n",
+      "stdout": ""
+    },
+    "controlled_partial_publication": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py",
+        "--test-fail-after-first-output"
+      ],
+      "exit_code": 1,
+      "outputs": {
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproducibility.json": {
+          "bytes": 2861,
+          "sha256": "671260480edb7792b693c493538ca164080c5b5528c7392a547eea44e92501e8"
+        }
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-controlled-partial/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-controlled-partial/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-controlled-partial/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 516, in build\n    raise RuntimeError(\"Controlled publication failure after first output; no success manifest was published\")\nRuntimeError: Controlled publication failure after first output; no success manifest was published\n",
+      "stdout": ""
+    },
+    "corrected_complete_positive_and_rerun": {
+      "first_exit_code": 0,
+      "outputs_after_rerun": {
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/evidence-quality.json": {
+          "bytes": 125662,
+          "sha256": "b71c2a679bfbc6edf09f369aa90e06217b3c50acf45f1dc1236630e3864064f3"
+        },
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/preservation.json": {
+          "bytes": 21621,
+          "sha256": "2474620905766ccde5d721c2faf13a0c1fbdb290d05c42610b5ecf426cf846fe"
+        },
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproducibility.json": {
+          "bytes": 2861,
+          "sha256": "671260480edb7792b693c493538ca164080c5b5528c7392a547eea44e92501e8"
+        }
+      },
+      "rerun_exit_code": 1
+    },
+    "first_output_collision": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproducibility.json": {
+          "bytes": 40,
+          "sha256": "388ca882944d9e31d1c7d6917eef377d837a84a33852fc0a1d889624a4439372"
+        }
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-first_output_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-first_output_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-first_output_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 224, in build\n    pre_admit_outputs(manifest_path, repro_path)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-first_output_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 86, in pre_admit_outputs\n    raise FileExistsError(\"Complete output set is not fresh; refusing all writes: \" + relative)\nFileExistsError: Complete output set is not fresh; refusing all writes: research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproducibility.json\n",
+      "stdout": ""
+    },
+    "helper_code_drift": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {},
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-helper-drift/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-helper-drift/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-helper-drift/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 285, in build\n    raise ValueError(\"Actually imported helper differs from authenticated bytes\")\nValueError: Actually imported helper differs from authenticated bytes\n",
+      "stdout": ""
+    },
+    "late_manifest_collision": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/evidence-quality.json": {
+          "bytes": 40,
+          "sha256": "388ca882944d9e31d1c7d6917eef377d837a84a33852fc0a1d889624a4439372"
+        }
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-late_manifest_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-late_manifest_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-late_manifest_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 224, in build\n    pre_admit_outputs(manifest_path, repro_path)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-late_manifest_collision/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 86, in pre_admit_outputs\n    raise FileExistsError(\"Complete output set is not fresh; refusing all writes: \" + relative)\nFileExistsError: Complete output set is not fresh; refusing all writes: research/geography/south-america-batch4-manifest-1349-erratum-20261008/evidence-quality.json\n",
+      "stdout": ""
+    },
+    "original_complete_positive": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py"
+      ],
+      "exit_code": 0,
+      "outputs": {
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json": {
+          "bytes": 85083,
+          "sha256": "cbab3413a6808f7dd3e06389b235f782ef2363a109b9397ebbc3d5ec8bc45aac"
+        },
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json": {
+          "bytes": 2441,
+          "sha256": "bd845629235f72a1fbc01c9bfcae6ba6b28e9cfbb40d696233be0d90e98a61d5"
+        }
+      },
+      "stderr": "",
+      "stdout": "{\n  \"baseline_files\": 54,\n  \"manifest\": \"research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json\",\n  \"outputs\": 64,\n  \"phase_bytes_before_runtime_reserve\": 215761032,\n  \"status\": \"complete\",\n  \"subject_count\": 215,\n  \"total_baseline_bytes\": 213843312,\n  \"total_candidate_output_bytes\": 1917720\n}\n"
+    },
+    "original_first_output_collision": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json": {
+          "bytes": 85083,
+          "sha256": "cbab3413a6808f7dd3e06389b235f782ef2363a109b9397ebbc3d5ec8bc45aac"
+        },
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json": {
+          "bytes": 2441,
+          "sha256": "bd845629235f72a1fbc01c9bfcae6ba6b28e9cfbb40d696233be0d90e98a61d5"
+        }
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/legacy-first-collision/research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py\", line 325, in <module>\n    build()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/legacy-first-collision/research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py\", line 141, in build\n    exclusive_write(REPRO, (json.dumps(reproducibility, ensure_ascii=False, indent=2, sort_keys=True) + \"\\n\").encode())\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/legacy-first-collision/research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py\", line 67, in exclusive_write\n    raise FileExistsError(\"Refusing to overwrite evidence: \" + path)\nFileExistsError: Refusing to overwrite evidence: research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json\n",
+      "stdout": ""
+    },
+    "original_late_manifest_collision": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json": {
+          "bytes": 34,
+          "sha256": "6a134bdc07d68ceb6a4ea8ba94ffe1820a3b96e95247c0acea44df0de1f24302"
+        },
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json": {
+          "bytes": 2441,
+          "sha256": "bd845629235f72a1fbc01c9bfcae6ba6b28e9cfbb40d696233be0d90e98a61d5"
+        }
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/legacy-late-collision/research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py\", line 325, in <module>\n    build()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/legacy-late-collision/research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py\", line 317, in build\n    exclusive_write(MANIFEST, raw)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/legacy-late-collision/research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py\", line 67, in exclusive_write\n    raise FileExistsError(\"Refusing to overwrite evidence: \" + path)\nFileExistsError: Refusing to overwrite evidence: research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json\n",
+      "stdout": ""
+    },
+    "original_valid_index_scope_substitution": {
+      "accepted_id_in_run_audit": true,
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py"
+      ],
+      "exit_code": 0,
+      "foreign_id_in_manifest": true,
+      "foreign_id_in_run_audit": false,
+      "outputs": {
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json": {
+          "bytes": 85114,
+          "sha256": "7c2b347238a61f5c6057b432b80abfa4c42972ec30d13cf8667d1c9c3f19c893"
+        },
+        "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json": {
+          "bytes": 2441,
+          "sha256": "bd845629235f72a1fbc01c9bfcae6ba6b28e9cfbb40d696233be0d90e98a61d5"
+        }
+      },
+      "stderr": "",
+      "stdout": "{\n  \"baseline_files\": 54,\n  \"manifest\": \"research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json\",\n  \"outputs\": 64,\n  \"phase_bytes_before_runtime_reserve\": 215761305,\n  \"status\": \"complete\",\n  \"subject_count\": 215,\n  \"total_baseline_bytes\": 213843312,\n  \"total_candidate_output_bytes\": 1917993\n}\n"
+    },
+    "producer_code_drift": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {},
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-producer-drift/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-producer-drift/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-producer-drift/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 349, in build\n    runs[run] = run_summary(run, root, ids, INPUTS)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-producer-drift/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 185, in run_summary\n    raise ValueError(\"Fresh run does not bind the exact consumed producer bytes: \" + name)\nValueError: Fresh run does not bind the exact consumed producer bytes: run-nine\n",
+      "stdout": ""
+    },
+    "run_audit_identity_substitution": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {},
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-run-audit-substitution/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-run-audit-substitution/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-run-audit-substitution/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 349, in build\n    runs[run] = run_summary(run, root, ids, INPUTS)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-run-audit-substitution/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 176, in run_summary\n    raise ValueError(\"Generated run identities do not exactly match accepted contract: \" + name)\nValueError: Generated run identities do not exactly match accepted contract: run-nine\n",
+      "stdout": ""
+    },
+    "symlink_destination": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py"
+      ],
+      "exit_code": 1,
+      "outputs": {},
+      "stderr": "54, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-output-symlink/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-output-symlink/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 224, in build\n    pre_admit_outputs(manifest_path, repro_path)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-output-symlink/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 84, in pre_admit_outputs\n    target = no_symlink_path(relative, allow_missing_leaf=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-output-symlink/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 69, in no_symlink_path\n    raise ValueError(\"Symlink in evidence path: \" + relative)\nValueError: Symlink in evidence path: research/geography/south-america-batch4-manifest-1349-erratum-20261008/evidence-quality.json\n",
+      "stdout": ""
+    },
+    "traversal_argument": {
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "-B",
+        "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py",
+        "--manifest-path",
+        "../escape.json"
+      ],
+      "exit_code": 1,
+      "outputs": {},
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-traversal-arg/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 554, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-traversal-arg/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 549, in main\n    build(manifest_path=args.manifest_path, repro_path=args.repro_path,\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-traversal-arg/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 224, in build\n    pre_admit_outputs(manifest_path, repro_path)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/research/geography/south-america-batch4-manifest-1349-erratum-20261008/.controls-scratch/fixed-traversal-arg/research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py\", line 79, in pre_admit_outputs\n    raise ValueError(\"Output paths must remain inside the exact issue-owned directory\")\nValueError: Output paths must remain inside the exact issue-owned directory\n",
+      "stdout": ""
+    }
+  },
+  "corrected_builder_sha256": "7858b5938b330ff5a64ea649dcbc030def526e790c52f52e9f0dab58fba78242",
+  "legacy_builder_sha256": "f45e1700d908291e9470698ff952b983eb21a17625723b41e1ee3d7c36c8251c",
+  "python": "Python 3.12.14",
+  "runner_sha256": "7f4089627dd7288ea4f988208fccb183f820b8d94a51d0b4f2889ddcac3841e2",
+  "scope": "Disposable complete packet copies only; no original, accepted historical run or source file was modified.",
+  "status": "passed",
+  "superseded_first_actual_builder_output": {
+    "files": [
+      {
+        "bytes": 125665,
+        "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-first-builder/evidence-quality.json",
+        "sha256": "7131115768259d76669d81817dbfcfa8d790a72bdde8c829ac60a7541ba73260"
+      },
+      {
+        "bytes": 21621,
+        "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-first-builder/preservation.json",
+        "sha256": "2474620905766ccde5d721c2faf13a0c1fbdb290d05c42610b5ecf426cf846fe"
+      },
+      {
+        "bytes": 2861,
+        "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-first-builder/reproducibility.json",
+        "sha256": "8bfa7d9e8a0119329301fe94c0cdf5ef712a634b2d904f7a22abd9067525dc14"
+      }
+    ],
+    "status": "preserved_schema_rejected_draft",
+    "validator_error": "Invalid metric identity/vintage"
+  },
+  "version": 1
+}
