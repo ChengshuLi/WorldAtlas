@@ -51,7 +51,7 @@ async function currentPositive(t){
  const execute=async(entry,{cwd,env})=>{
   const raw=await fs.readFile(path.join(cwd,env.WORLDATLAS_CURRENT_EXECUTION_PATH));
   assert.equal(createHash('sha256').update(raw).digest('hex'),env.WORLDATLAS_CURRENT_EXECUTION_SHA256);
-  const record=authenticateCurrentExecution(JSON.parse(raw),{root:cwd,executingRoot:root});requireCurrentExecution(record);
+  const record=authenticateCurrentExecution(JSON.parse(raw),{root:cwd,executingRoot:root,sourceRoot:root});requireCurrentExecution(record);
   await fs.mkdir(path.join(cwd,'dist'));await fs.writeFile(path.join(cwd,'dist/value'),'actual current execution');
  };
  const first=await runPackageBuild('static',{root,execute});
@@ -66,13 +66,14 @@ async function currentPositive(t){
 async function currentNegative(t){
  const {root,definition}=await executionFixture(t),stage=path.join(root,'test-stage');
  await materializePackageInputs({source:root,destination:stage,definition});
- const record=issueCurrentExecution({source:root,stage});authenticateCurrentExecution(record,{root:stage,executingRoot:root});requireCurrentExecution(record);
+ const record=issueCurrentExecution({source:root,stage});authenticateCurrentExecution(record,{root:stage,executingRoot:root,sourceRoot:root});requireCurrentExecution(record);
  assert.throws(()=>requireCurrentExecution(structuredClone(record)),/authenticated/);
- const badHead={...record,source_commit:'0'.repeat(40)};assert.throws(()=>authenticateCurrentExecution(badHead,{root:stage,executingRoot:root}),/HEAD/);
- assert.throws(()=>authenticateCurrentExecution({...record,source_root:stage},{root:stage,executingRoot:root}));
- const badRuntime=structuredClone(record);badRuntime.runtime.version='foreign';assert.throws(()=>authenticateCurrentExecution(badRuntime,{root:stage,executingRoot:root}));
- const omitted=structuredClone(record);omitted.files.pop();assert.throws(()=>authenticateCurrentExecution(omitted,{root:stage,executingRoot:root}));
- const overbound=structuredClone(record);overbound.files[0].bytes=32*1024*1024+1;assert.throws(()=>authenticateCurrentExecution(overbound,{root:stage,executingRoot:root}));
+ const badHead={...record,source_commit:'0'.repeat(40)};assert.throws(()=>authenticateCurrentExecution(badHead,{root:stage,executingRoot:root,sourceRoot:root}),/HEAD/);
+ assert.throws(()=>authenticateCurrentExecution({...record,source_root:stage},{root:stage,executingRoot:root,sourceRoot:root}));
+ const badRuntime=structuredClone(record);badRuntime.runtime.version='foreign';assert.throws(()=>authenticateCurrentExecution(badRuntime,{root:stage,executingRoot:root,sourceRoot:root}));
+ const omitted=structuredClone(record);omitted.files.pop();assert.throws(()=>authenticateCurrentExecution(omitted,{root:stage,executingRoot:root,sourceRoot:root}));
+ const overbound=structuredClone(record);overbound.files[0].bytes=32*1024*1024+1;assert.throws(()=>authenticateCurrentExecution(overbound,{root:stage,executingRoot:root,sourceRoot:root}));
+ const aggregate=structuredClone(record);aggregate.files=Array.from({length:9},()=>({...record.files[0],bytes:32*1024*1024}));assert.throws(()=>authenticateCurrentExecution(aggregate,{root:stage,executingRoot:root,sourceRoot:root}),/aggregate exceeds cap before reads/);
  await fs.chmod(path.join(stage,'scripts/evidence-quality.mjs'),0o755);assert.throws(()=>requireCurrentExecution(record));await fs.chmod(path.join(stage,'scripts/evidence-quality.mjs'),0o644);
  await fs.appendFile(path.join(stage,'scripts/evidence-quality.mjs'),"import './foreign.mjs';\n");assert.throws(()=>requireCurrentExecution(record));
  await fs.writeFile(path.join(stage,'scripts/evidence-quality.mjs'),'export const currentLibrary=1;\n');
@@ -95,7 +96,7 @@ async function authoredControls(t){
 }
 export async function runCurrentExecutionControls(){
  const cleanup=[];const t={after:callback=>cleanup.push(callback)};
- try{await currentPositive(t);await currentNegative(t);const historical=await authoredControls(t);return {historical,status:'PASS',real_plain_node:true,current_commit_drift_positive:true,authored_pins_unchanged:true,adverse_cases:['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','mode mutation','new import','uncommitted source','receipt mutation']};}
+ try{await currentPositive(t);await currentNegative(t);const historical=await authoredControls(t);return {historical,status:'PASS',real_plain_node:true,current_commit_drift_positive:true,authored_pins_unchanged:true,adverse_cases:['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','aggregate before source reads','mode mutation','new import','uncommitted source','receipt mutation']};}
  finally{for(const callback of cleanup.reverse())await callback();}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))console.log(JSON.stringify(await runCurrentExecutionControls()));

@@ -94,16 +94,18 @@ export async function runPackageBuild(kind, {root = repository, execute} = {}) {
     const env = {...process.env, WORLDATLAS_PACKAGE_STAGE: stage};
     delete env.WORLDATLAS_CURRENT_EXECUTION_PATH;
     delete env.WORLDATLAS_CURRENT_EXECUTION_SHA256;
+    delete env.WORLDATLAS_PACKAGE_SOURCE_ROOT;
     // Bind current checkout execution separately from immutable authored lineage.
     const contextPath=path.join(stage,'data/native-context-migration/manifest.json');
     const context=await fs.readFile(contextPath,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
     let currentExecution;
     if(context?.version===2&&context.kind==='retained-identity-context-continuation-v2'&&context.issue===1295){
-      currentExecution=issueCurrentExecution({source:root,stage});
-      authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root});
+      currentExecution=issueCurrentExecution({source:root,stage,entry:entries[kind]});
+      authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root,sourceRoot:root});
       const raw=Buffer.from(JSON.stringify(currentExecution)+'\n');
       await fs.mkdir(path.join(stage,'.cache'),{recursive:true});
       await fs.writeFile(path.join(stage,'.cache/current-context-execution.json'),raw,{flag:'wx'});
+      env.WORLDATLAS_PACKAGE_SOURCE_ROOT=root;
       env.WORLDATLAS_CURRENT_EXECUTION_PATH='.cache/current-context-execution.json';
       env.WORLDATLAS_CURRENT_EXECUTION_SHA256=createHash('sha256').update(raw).digest('hex');
     }

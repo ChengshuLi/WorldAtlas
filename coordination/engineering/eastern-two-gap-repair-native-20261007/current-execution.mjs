@@ -24,10 +24,16 @@ function body(root,p){
  }finally{fs.closeSync(fd);}
  return {raw,mode:(stat.mode&0o111)?'100755':'100644'};
 }
-export function currentExecutionClosure(root,entries=[ENTRY,SELF,'scripts/package-build.mjs']){
+const allowedEntries=new Set(['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/integration-producer.mjs']);
+export function currentExecutionClosure(root,entry='scripts/build-static-inner.mjs'){
+ assert(allowedEntries.has(entry),'Unsupported actual execution entry');
+ const entries=[ENTRY,SELF,'scripts/package-build.mjs',entry];
  const names=new Set(['package.json','.github/package-inputs.json']);
+ let admitted=0;
+ const admit=p=>{assert(safe(p));const file=path.join(root,p),stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size<=CAP);admitted+=stat.size;assert(admitted<=TOTAL,'Current import closure exceeds aggregate before read');};
+ for(const p of names)admit(p);
  function visit(p){
-  assert(safe(p));if(names.has(p))return;names.add(p);
+  assert(safe(p));if(names.has(p))return;names.add(p);assert(names.size<=512);admit(p);
   const {raw}=body(root,p);
   for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))
    if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));
@@ -48,9 +54,9 @@ function verifySource(record){
  assert.equal(git(['rev-parse','HEAD']),record.source_commit,'Actual source HEAD changed');
  assert.equal(git(['rev-parse','HEAD^{tree}']),record.source_tree,'Actual source tree changed');
  for(const pin of record.files)assert.equal(git(['ls-tree',record.source_commit,'--',pin.path]),`${pin.mode} blob ${pin.git_blob}\t${pin.path}`,'Source Git object binding changed');
- verifyFiles(record.source_root,record.files);
+ verifyFiles(record.source_root,record.files,record.entry_point);
 }
-function verifyFiles(root,files){
+function verifyFiles(root,files,entry){
  assert(Array.isArray(files)&&files.length>0&&files.length<=512);let total=0;const names=new Set();
  for(const pin of files){assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&pin.bytes<=CAP);total+=pin.bytes;assert(total<=TOTAL,'Current execution aggregate exceeds cap before reads');}total=0;
  for(const pin of files){
@@ -60,41 +66,42 @@ function verifyFiles(root,files){
   const {raw,mode}=body(root,pin.path);assert.equal(raw.length,pin.bytes);assert.equal(mode,pin.mode);assert.equal(sha(raw),pin.sha256);assert.equal(oid(raw),pin.git_blob);
   total+=raw.length;assert(total<=TOTAL);
  }
- assert.deepEqual(files.map(p=>p.path),currentExecutionClosure(root));return total;
+ assert.deepEqual(files.map(p=>p.path),currentExecutionClosure(root,entry));return total;
 }
-export function issueCurrentExecution({source,stage}){
+export function issueCurrentExecution({source,stage,entry='scripts/build-static-inner.mjs'}){
  plain();source=fs.realpathSync(source);stage=fs.realpathSync(stage);
  const git=args=>execFileSync('git',['-C',source,...args],{maxBuffer:CAP,encoding:'utf8'}).trim();
  const commit=git(['rev-parse','HEAD']),tree=git(['rev-parse','HEAD^{tree}']);
  assert(/^[a-f0-9]{40}$/.test(commit)&&/^[a-f0-9]{40}$/.test(tree));
- const files=currentExecutionClosure(source).map(p=>{
+ const files=currentExecutionClosure(source,entry).map(p=>{
   const {raw,mode}=body(source,p),row=git(['ls-tree',commit,'--',p]);
   assert.equal(row,`${mode} blob ${oid(raw)}\t${p}`,'Current executing body differs from immutable actual checkout');
   const copied=body(stage,p);assert.equal(copied.mode,mode);assert(copied.raw.equals(raw),'Materialized execution body differs from source');
   return {path:p,mode,bytes:raw.length,sha256:sha(raw),git_blob:oid(raw)};
  });
- const record={version:1,issue:1295,kind:'package-issued-current-execution',source_root:source,source_commit:commit,source_tree:tree,stage_root:stage,runtime:runtime(),files};
+ const record={version:1,issue:1295,kind:'package-issued-current-execution',entry_point:entry,source_root:source,source_commit:commit,source_tree:tree,stage_root:stage,runtime:runtime(),files};
  assert.equal(git(['rev-parse','HEAD']),commit,'Checkout changed while issuing execution binding');
- verifyFiles(stage,files);return record;
+ verifyFiles(stage,files,entry);return record;
 }
-export function authenticateCurrentExecution(record,{root,executingRoot=root}){
+export function authenticateCurrentExecution(record,{root,executingRoot=root,sourceRoot}){
  root=fs.realpathSync(root);executingRoot=fs.realpathSync(executingRoot);
+ assert.equal(record.source_root,fs.realpathSync(sourceRoot),'Wrong independently supplied source root');
  plain();assert.equal(record?.version,1);assert.equal(record.issue,1295);assert.equal(record.kind,'package-issued-current-execution');
  assert(/^[a-f0-9]{40}$/.test(record.source_commit)&&/^[a-f0-9]{40}$/.test(record.source_tree));
  assert.equal(record.stage_root,fs.realpathSync(root));assert.deepEqual(record.runtime,runtime());
  verifySource(record);
- verifyFiles(root,record.files);verifyFiles(executingRoot,record.files);
+ verifyFiles(root,record.files,record.entry_point);verifyFiles(executingRoot,record.files,record.entry_point);
  brands.set(record,{root:fs.realpathSync(root),executingRoot:fs.realpathSync(executingRoot),fingerprint:fingerprint(record)});return record;
 }
 export function requireCurrentExecution(record){
  const retained=brands.get(record);assert(retained,'Current execution must have an authenticated package-boundary binding');
  assert.equal(fingerprint(record),retained.fingerprint,'Current execution receipt changed');
- plain();assert.deepEqual(record.runtime,runtime());verifySource(record);verifyFiles(retained.root,record.files);verifyFiles(retained.executingRoot,record.files);
+ plain();assert.deepEqual(record.runtime,runtime());verifySource(record);verifyFiles(retained.root,record.files,record.entry_point);verifyFiles(retained.executingRoot,record.files,record.entry_point);
  return record;
 }
 export function readPackageCurrentExecution(root){
  const name=process.env.WORLDATLAS_CURRENT_EXECUTION_PATH,expected=process.env.WORLDATLAS_CURRENT_EXECUTION_SHA256;
  assert.equal(name,'.cache/current-context-execution.json','Missing actual package-issued current execution');
  assert(/^[a-f0-9]{64}$/.test(expected??''));const {raw}=body(fs.realpathSync(root),name);assert.equal(sha(raw),expected);
- return authenticateCurrentExecution(JSON.parse(raw),{root,executingRoot:path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..')});
+ return authenticateCurrentExecution(JSON.parse(raw),{root,sourceRoot:process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT,executingRoot:path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..')});
 }

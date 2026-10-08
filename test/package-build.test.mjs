@@ -25,7 +25,7 @@ async function fixture(t, {program, promoted = false} = {}) {
 
 test('current-execution real plain-child package positives and hostile boundaries',()=>{
  const raw=execFileSync(process.execPath,['coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution-controls.mjs'],{maxBuffer:32*1024*1024,env:{...process.env,NODE_OPTIONS:'',NODE_PATH:''}});
- const result=JSON.parse(raw);assert.equal(result.status,'PASS');assert.equal(result.authored_pins_unchanged,true);assert.equal(result.adverse_cases.length,11);
+ const result=JSON.parse(raw);assert.equal(result.status,'PASS');assert.equal(result.authored_pins_unchanged,true);assert.equal(result.adverse_cases.length,12);
 });
 
 test('only declared files enter the source image; unrelated research cannot alter artifact bytes', async t => {

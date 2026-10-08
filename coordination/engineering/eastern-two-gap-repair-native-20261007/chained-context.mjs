@@ -79,6 +79,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
   const raw=ordinary(pin.path,'candidate');assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);if(!seen.has(pin.path)){budget.add({bytes:raw.length});seen.set(pin.path,pin);}return raw;}
  requireCurrentExecution(currentExecution);
+ budget.add({bytes:Buffer.byteLength(JSON.stringify(currentExecution)+'\n')});
  for(const pin of currentExecution.files)budget.add({bytes:pin.bytes});
  // These authored sources are historical custody, not assertions about a
  // publisher's later merged checkout. Authenticate them against their fixed bank.
@@ -87,10 +88,11 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  assert.equal(sha(codeIndexRaw),'de4a8f7aac3380fc7c5f1cc06ac9bbf0d170c0921d7ef72d5e46187439a80be9');
  budget.add({bytes:codeIndexRaw.length});const codeIndex=JSON.parse(codeIndexRaw);
  for(const pin of codeIndex.parts)read({path:codeBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
+ for(const pin of codeIndex.files)budget.add({bytes:pin.bytes});
  const codeParent=path.join(root,'.cache');fs.mkdirSync(codeParent,{recursive:true});assert.equal(fs.realpathSync(codeParent),codeParent);
  const codeTemporary=fs.mkdtempSync(path.join(codeParent,'context-authored-code-'));
  const authored=path.join(codeTemporary,'image');restoreWholeImage(path.join(root,codeBase),authored,{expectedIndexSha:sha(codeIndexRaw)});
- verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles:currentExecution.files,charge:bytes=>budget.add({bytes})});
+ verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles:currentExecution.files});
  const imageIndexRaw=read(stage.prior_image),imageIndex=JSON.parse(imageIndexRaw),imageBase=path.posix.dirname(stage.prior_image.path);
  for(const pin of imageIndex.parts)read({path:imageBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
  const parent=path.join(root,'.cache');fs.mkdirSync(parent,{recursive:true});assert.equal(fs.realpathSync(parent),parent);
