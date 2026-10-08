@@ -1,0 +1,2630 @@
+{
+  "version": 1,
+  "issue": 1457,
+  "family_id": "gap-source-batch:0e8b7e76cd964d21746a40aa",
+  "subject_count": 15,
+  "contact": {
+    "id": "gb:SLB:ADM1:17018030B43755880178831",
+    "name": "Makira ADM1",
+    "role": "shared administrative context/contact for this family",
+    "feature_count": 1,
+    "relationship": "All 15 source-fitness subjects retain this single contact context; it is not an imagery source, boundary/ownership authority, or a pixel coverage assertion.",
+    "represented_year": 2021,
+    "effective_date": "unknown",
+    "source_authority": "unapproved",
+    "physical_authority": "unapproved",
+    "source_fitness": "unapproved-for-all-components"
+  },
+  "source_inventory": [
+    {
+      "id": "sprep",
+      "url": "https://solomonislands-data.sprep.org/resource/10-meter-rgb-satellite-imagery-san-cristobal-island-years-2019-2020",
+      "role": "Published RGB Sentinel-2 mosaic/catalog metadata for San Cristobal / Makira screening",
+      "vintage": "scene dates 2019-09-05, 2020-01-18 and 2020-04-07; published products N0213/N0214; resource says 10m RGB",
+      "license": {
+        "status": "unknown",
+        "terms": "Portal lists SPREP Public Licence, but exact derived asset/mosaic terms and the retained file lineage are unresolved; no ZIP or pixels retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Use the canonical SPREP resource and request exact underlying scene, processing lineage, asset checksum and licence terms for the distributed RGB product.",
+      "limit": "Metadata establishes a candidate resource only; exact member coverage, valid pixels, local cloud, positional fit, asset bytes and derivative rights are unknown."
+    },
+    {
+      "id": "cdse-stac",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/STAC.html",
+      "role": "Official CDSE STAC catalogue item metadata for six Sentinel-2 L2A items",
+      "vintage": "six N0500 items for the 2019-09-05, 2020-01-18 and 2020-04-07 acquisition windows; product processing timestamps in 2023",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying Sentinel data are open, but no exact raster asset bytes/checksum/lineage were retrieved. The 2020-01-18 exact product name has multiple recorded SHA-256 byte vintages and no populated input lineage; product ID does not uniquely bind raster bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat official STAC Item Search with item IDs, acquire each asset checksum/version metadata and source lineage before any use.",
+      "limit": "Native item geometry was not overlaid against exact member polygons. Item cloud fraction is tile-level; pixel validity, local cloud and component-level positional fit are unknown."
+    },
+    {
+      "id": "sentinel-product-spec",
+      "url": "https://sentinels.copernicus.eu/sentinel-data-access/sentinel-products/sentinel-2-data-products/collection-1-level-1c",
+      "role": "Sentinel-2 Collection 1 L1C reference characteristics",
+      "vintage": "published product specification consulted 2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official Sentinel product documentation; underlying Sentinel data terms apply. This is a specification citation, not a retained image asset."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Consult product specification and the exact product metadata for a selected native product.",
+      "limit": "Nominal 10m sampling and <12m absolute geolocation accuracy at 95.5% are an L1C reference, not proof of accuracy for the SPREP RGB derivative or any exact L2A asset; no component-level registration was measured."
+    },
+    {
+      "id": "oam",
+      "url": "https://docs.openaerialmap.org/api/api/",
+      "role": "OpenAerialMap legacy API and HOT OAM STAC full-family search",
+      "vintage": "metadata searches over full family extent; retrieval 2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No catalogue item was returned; no asset-specific reuse terms can be determined."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat OAM API and STAC searches with full exact polygon set and expanded date/collection filters if a subsequent review requires it.",
+      "limit": "Zero returned records mean catalogue_not_found within searched endpoints and query, not absence of aerial imagery."
+    },
+    {
+      "id": "spc-srtm",
+      "url": "https://www.pacific-r2r.org/sites/default/files/2022-10/SLB_R2R_Data_Sources_and_Methodology_Brief_2.pdf",
+      "role": "SPC Solomon Islands data-source methodology documenting SRTMGL1.003 30m elevation context",
+      "vintage": "methodology brief published 2022; SRTM source vintage not established per component",
+      "license": {
+        "status": "unknown",
+        "terms": "This metadata citation does not establish source asset reuse rights; no raster retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Consult the cited methodology and native SRTM source metadata before any permitted future use.",
+      "limit": "30m terrain model is not fine raw land/water observation evidence; exact native coverage and positional suitability were not checked."
+    },
+    {
+      "id": "mofr-lcm",
+      "url": "https://www.mofr.gov.sb/documents/ForestLCM/makira-land-cover-map-2020.pdf",
+      "role": "Solomon Islands Ministry of Forestry Makira 2020 classified land-cover map",
+      "vintage": "2020 map; source imagery Landsat-derived; effective-date semantics not verified",
+      "license": {
+        "status": "unknown",
+        "terms": "PDF/map asset reuse terms were not confirmed; no map pixels or data downloaded."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Seek original classification data, source scene metadata, accuracy assessment and reuse terms.",
+      "limit": "30m thematic classification is not raw observation evidence and cannot establish component-local land/water boundary accuracy."
+    },
+    {
+      "id": "ga-screen",
+      "url": "https://www.ga.gov.au/",
+      "role": "Geoscience Australia and Australian catalogue metadata screening for Makira/SLB aerial or LiDAR records",
+      "vintage": "search scope and retrieval 2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No Makira/SLB aerial or LiDAR record was identified; no asset licence can be assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat provider catalogue screening with provider-specific archive queries and exact geometry if needed.",
+      "limit": "Catalogue_not_found is bounded to the searches. Cocos LiDAR is unrelated; marine sonar/bathymetry does not demonstrate land/coastal component coverage."
+    },
+    {
+      "id": "arcgis-change",
+      "url": "https://www.arcgis.com/",
+      "role": "ArcGIS MakChange00to19 classified vegetation-change service screening",
+      "vintage": "change interval label 2000–2019; service processing/source dates not fully established",
+      "license": {
+        "status": "unknown",
+        "terms": "Service-specific derivative and export terms were not verified; no raster was accessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Inspect service metadata and original classification source only if a later task needs this historical thematic context.",
+      "limit": "Classified vegetation-change service is not raw imagery; map zoom scale does not establish ground sampling distance or exact member coverage."
+    }
+  ],
+  "source_assets": [
+    {
+      "id": "sprep-s2a-2019-09-05",
+      "provider": "SPREP Solomon Islands Environment Data Portal",
+      "native_item": "S2A_MSIL2A_20190905T233821_N0213_R087_T57LYJ_20190906T013545",
+      "acquisition_date": "2019-09-05",
+      "gsd_m": 10,
+      "cloud": "unknown in SPREP record",
+      "version": "N0213",
+      "url": "https://solomonislands-data.sprep.org/resource/10-meter-rgb-satellite-imagery-san-cristobal-island-years-2019-2020",
+      "license": "Portal lists SPREP Public Licence; exact derived ZIP/mosaic reuse terms unresolved; underlying Sentinel terms do not resolve derivative rights.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "sprep-s2b-2020-01-18",
+      "provider": "SPREP Solomon Islands Environment Data Portal",
+      "native_item": "S2B_MSIL2A_20200118T233809_N0213_R087_T57LZK_20200119T012832",
+      "acquisition_date": "2020-01-18",
+      "gsd_m": 10,
+      "cloud": "unknown in SPREP record",
+      "version": "N0213",
+      "url": "https://solomonislands-data.sprep.org/resource/10-meter-rgb-satellite-imagery-san-cristobal-island-years-2019-2020",
+      "license": "Portal lists SPREP Public Licence; exact derived ZIP/mosaic reuse terms unresolved; underlying Sentinel terms do not resolve derivative rights.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "sprep-s2b-2020-04-07",
+      "provider": "SPREP Solomon Islands Environment Data Portal",
+      "native_item": "S2B_MSIL2A_20200407T233809_N0214_R087_T57LZJ_20200408T014505",
+      "acquisition_date": "2020-04-07",
+      "gsd_m": 10,
+      "cloud": "unknown in SPREP record",
+      "version": "N0214",
+      "url": "https://solomonislands-data.sprep.org/resource/10-meter-rgb-satellite-imagery-san-cristobal-island-years-2019-2020",
+      "license": "Portal lists SPREP Public Licence; exact derived ZIP/mosaic reuse terms unresolved; underlying Sentinel terms do not resolve derivative rights.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "cdse-2019-09-05-t57lyj",
+      "provider": "Copernicus Data Space Ecosystem STAC",
+      "native_item": "S2A_MSIL2A_20190905T233821_N0500_R087_T57LYJ_20230505T082317",
+      "acquisition_date": "2019-09-05",
+      "gsd_m": 10,
+      "cloud_percent_item_level": 8.73,
+      "processing_version": "N0500",
+      "processed_at": "20230505T082317",
+      "url": "https://catalogue.dataspace.copernicus.eu/stac",
+      "license": "Underlying Sentinel-2 data is open under Copernicus/Sentinel terms; exact product/raster asset bytes, checksums and lineage were not retrieved. Item ID alone does not bind bytes.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "cdse-2019-09-05-t57lzj",
+      "provider": "Copernicus Data Space Ecosystem STAC",
+      "native_item": "S2A_MSIL2A_20190905T233821_N0500_R087_T57LZJ_20230505T082317",
+      "acquisition_date": "2019-09-05",
+      "gsd_m": 10,
+      "cloud_percent_item_level": 8.39,
+      "processing_version": "N0500",
+      "processed_at": "20230505T082317",
+      "url": "https://catalogue.dataspace.copernicus.eu/stac",
+      "license": "Underlying Sentinel-2 data is open under Copernicus/Sentinel terms; exact product/raster asset bytes, checksums and lineage were not retrieved. Item ID alone does not bind bytes.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "cdse-2020-01-18-t57lyj",
+      "provider": "Copernicus Data Space Ecosystem STAC",
+      "native_item": "S2B_MSIL2A_20200118T233809_N0500_R087_T57LYJ_20230504T211250",
+      "acquisition_date": "2020-01-18",
+      "gsd_m": 10,
+      "cloud_percent_item_level": 34.13,
+      "processing_version": "N0500",
+      "processed_at": "20230504T211250",
+      "url": "https://catalogue.dataspace.copernicus.eu/stac",
+      "license": "Underlying Sentinel-2 data is open under Copernicus/Sentinel terms; exact product/raster asset bytes, checksums and lineage were not retrieved. Item ID alone does not bind bytes.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "cdse-2020-01-18-t57lzj",
+      "provider": "Copernicus Data Space Ecosystem STAC",
+      "native_item": "S2B_MSIL2A_20200118T233809_N0500_R087_T57LZJ_20230504T211250",
+      "acquisition_date": "2020-01-18",
+      "gsd_m": 10,
+      "cloud_percent_item_level": 24.83,
+      "processing_version": "N0500",
+      "processed_at": "20230504T211250",
+      "url": "https://catalogue.dataspace.copernicus.eu/stac",
+      "license": "Underlying Sentinel-2 data is open under Copernicus/Sentinel terms; exact product/raster asset bytes, checksums and lineage were not retrieved. Item ID alone does not bind bytes.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "cdse-2020-04-07-t57lyj",
+      "provider": "Copernicus Data Space Ecosystem STAC",
+      "native_item": "S2B_MSIL2A_20200407T233809_N0500_R087_T57LYJ_20230505T045152",
+      "acquisition_date": "2020-04-07",
+      "gsd_m": 10,
+      "cloud_percent_item_level": 15.57,
+      "processing_version": "N0500",
+      "processed_at": "20230505T045152",
+      "url": "https://catalogue.dataspace.copernicus.eu/stac",
+      "license": "Underlying Sentinel-2 data is open under Copernicus/Sentinel terms; exact product/raster asset bytes, checksums and lineage were not retrieved. Item ID alone does not bind bytes.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    },
+    {
+      "id": "cdse-2020-04-07-t57lzj",
+      "provider": "Copernicus Data Space Ecosystem STAC",
+      "native_item": "S2B_MSIL2A_20200407T233809_N0500_R087_T57LZJ_20230505T045152",
+      "acquisition_date": "2020-04-07",
+      "gsd_m": 10,
+      "cloud_percent_item_level": 26.64,
+      "processing_version": "N0500",
+      "processed_at": "20230505T045152",
+      "url": "https://catalogue.dataspace.copernicus.eu/stac",
+      "license": "Underlying Sentinel-2 data is open under Copernicus/Sentinel terms; exact product/raster asset bytes, checksums and lineage were not retrieved. Item ID alone does not bind bytes.",
+      "position_accuracy": "not supplied for this exact asset; Sentinel-2 L1C published <12m at 95.5% is not transferred to the SPREP RGB derivative or the exact L2A item",
+      "coverage_status": "unknown for exact component pointsets; no overlay performed",
+      "asset_bytes": "not retrieved",
+      "asset_sha256": "unknown"
+    }
+  ],
+  "catalogue_and_rejected_sources": [
+    {
+      "id": "oam-no-catalogue-record",
+      "source_id": "oam",
+      "provider": "OpenAerialMap legacy API and HOT OAM STAC",
+      "native_item": "none returned",
+      "acquisition_date": "unknown",
+      "gsd_m": "unknown",
+      "position_accuracy": "unknown",
+      "coverage_status": "unknown; no result for searched query is not proof of absence",
+      "decision": "catalogue_not_found"
+    },
+    {
+      "id": "spc-srtmgl1-003",
+      "source_id": "spc-srtm",
+      "provider": "SPC / SRTM",
+      "native_item": "SRTMGL1.003",
+      "acquisition_date": "source vintage unknown for local cell",
+      "gsd_m": 30,
+      "position_accuracy": "unknown for component scale",
+      "coverage_status": "unknown",
+      "decision": "unsuitable_as_fine_raw_observation; 30m elevation product"
+    },
+    {
+      "id": "slb-mofr-makira-lcm-2020",
+      "source_id": "mofr-lcm",
+      "provider": "Solomon Islands Ministry of Forestry",
+      "native_item": "Makira Land Cover Map 2020",
+      "acquisition_date": "map vintage 2020; effective date unknown",
+      "gsd_m": 30,
+      "position_accuracy": "classification accuracy not established for these components",
+      "coverage_status": "unknown",
+      "decision": "unsuitable_as_raw_observation; 30m Landsat-derived classification"
+    },
+    {
+      "id": "ga-au-no-makira-scene",
+      "source_id": "ga-screen",
+      "provider": "Geoscience Australia / Australian catalogues",
+      "native_item": "none identified for Makira/SLB",
+      "acquisition_date": "unknown",
+      "gsd_m": "unknown",
+      "position_accuracy": "unknown",
+      "coverage_status": "unknown",
+      "decision": "catalogue_not_found_within_screened_queries"
+    },
+    {
+      "id": "arcgis-makchange-classified",
+      "source_id": "arcgis-change",
+      "provider": "ArcGIS MakChange00to19 service",
+      "native_item": "MakChange00to19",
+      "acquisition_date": "interval label 2000–2019; exact acquisitions unknown",
+      "gsd_m": "unknown; display zoom is not GSD",
+      "position_accuracy": "unknown",
+      "coverage_status": "unknown",
+      "decision": "unsuitable_as_raw_observation; thematic change classification"
+    }
+  ],
+  "components": [
+    {
+      "id": "physical-component:0009067d3f046760099093ffa957642c95f1a2e660b78bddf609d4d1fcfab1a5",
+      "original_feature_sha256": "1f6a74ee5f1c50030e7ffcfe6444106ff00dfda2caf4138bf5170c57eac311dc",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.717052,
+        -10.2313849,
+        161.7232587,
+        -10.2129537
+      ],
+      "approximate_bbox_span_m": [
+        680,
+        2052
+      ],
+      "existing_route_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:110e441169327a1bc96c96de0be8eaa5ef3eeb6872b90ade8c0d0d6495c277b2",
+      "original_feature_sha256": "c4dd5c2d6d72814bba9d06d7960aee779ca51ec402a3df0a42b68d114185dd4c",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.6954096,
+        -10.3853992,
+        161.7133361,
+        -10.3625664
+      ],
+      "approximate_bbox_span_m": [
+        1963,
+        2542
+      ],
+      "existing_route_prerequisite": "outside-source-domain-unclassified",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:1cd54a39b974f1a8ee305ab4a590cd9ef02a328d59b244bd1d909746ec39c7c5",
+      "original_feature_sha256": "7a443b6a4938f2c96d3581514215d5d9b8ed1865243a7b40ff0fa7aa335ec162",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.8352584,
+        -10.4475292,
+        161.8484007,
+        -10.4464969
+      ],
+      "approximate_bbox_span_m": [
+        1439,
+        115
+      ],
+      "existing_route_prerequisite": "engineering-numeric-closure-first",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:344d085c5ee3afb809660423e91634ed311f130763a5d2d4f9d6ea91cdd4d3e8",
+      "original_feature_sha256": "6aeb181cbfce2bd397f3837cba576b922b0bc0e02ccdddc8ca7e8066827a4795",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.465521,
+        -10.3473146,
+        161.4664077,
+        -10.3468515
+      ],
+      "approximate_bbox_span_m": [
+        97,
+        52
+      ],
+      "existing_route_prerequisite": "land-with-admin-partial-or-unbound-source-fitness-review",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": true,
+        "precision_result": "not_certified_as_boundary_fitness",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:3eb5716e1e821f25c85a494658b13bc8c3a57de6d6636b5323b5edfb25eca833",
+      "original_feature_sha256": "b1517bb90baa5fc316d390ad44cbf69a4aee95b3cc8df8180272ec3b1917c5f3",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        162.0639844,
+        -10.4758007,
+        162.0656852,
+        -10.4679356
+      ],
+      "approximate_bbox_span_m": [
+        186,
+        876
+      ],
+      "existing_route_prerequisite": "engineering-numeric-closure-first",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:3f8309e420055c726486ecdb318e368769eb52d038fcb6d8266106380217f8fd",
+      "original_feature_sha256": "c034f69376b4e7cea80636e41e13ee3ed8aae7789cdf137a4d7af26a42ef230e",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.6032282,
+        -10.3649,
+        161.6686012,
+        -10.3129364
+      ],
+      "approximate_bbox_span_m": [
+        7159,
+        5785
+      ],
+      "existing_route_prerequisite": "engineering-numeric-closure-first",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:5b687195caf6d9f5f011be6c6d8517152a2d78e2e5241463c99dac1d254c7d2b",
+      "original_feature_sha256": "99e10703a3664e1795ed550b3f01be6dedbf07f827450cac80b3c0645baf0b54",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.3673674,
+        -10.3308982,
+        161.3679815,
+        -10.3307891
+      ],
+      "approximate_bbox_span_m": [
+        67,
+        12
+      ],
+      "existing_route_prerequisite": "outside-source-domain-unclassified",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": true,
+        "precision_result": "not_certified_as_boundary_fitness",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:6deb3a8a2d72ba08aba2d63b73c89788f587ba5ab3bb56ea20f72bb1b538df43",
+      "original_feature_sha256": "1f742ce37601acbde2b732253141dc5e80106d4f1d57e737b6975ccd12626486",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.5866185,
+        -10.5700671,
+        161.5867,
+        -10.5699215
+      ],
+      "approximate_bbox_span_m": [
+        9,
+        16
+      ],
+      "existing_route_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": true,
+        "precision_result": "not_certified_as_boundary_fitness",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:6f31be024cca8bcc6ed65e7ee1ca2554d4f889b2be2ebcd0e5786ec801a99203",
+      "original_feature_sha256": "a267d358d646d92b2136ec68acc29fb15650a0c2f345efe2d09ff146a86a62ae",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.7174872,
+        -10.255946,
+        161.7314199,
+        -10.2317254
+      ],
+      "approximate_bbox_span_m": [
+        1526,
+        2696
+      ],
+      "existing_route_prerequisite": "land-with-admin-partial-or-unbound-source-fitness-review",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:8046202150652008b4d4fbd5867a9658375702506277ddc782da0e62e7fafafb",
+      "original_feature_sha256": "a47d6e1f1a6c746e65aca37ed38a74454d01f54dcd0c9df7ef7ac267fafbbaf2",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.499184,
+        -10.4400061,
+        161.5075,
+        -10.4231639
+      ],
+      "approximate_bbox_span_m": [
+        910,
+        1875
+      ],
+      "existing_route_prerequisite": "land-with-admin-partial-or-unbound-source-fitness-review",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:92137006e45c30dbd06cfb4eef3581c23248d8f0a6ca3ec339df668e268ff33e",
+      "original_feature_sha256": "9249071feb24cf8c4f5f786bcffb9386d178e565e8a3e9967d9dcf9cdf1f79e1",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.7306337,
+        -10.2102136,
+        161.734997,
+        -10.20672
+      ],
+      "approximate_bbox_span_m": [
+        478,
+        389
+      ],
+      "existing_route_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:bc9fe8b0910d6a40dc87ba199db3e3188979c46eba59a3eb7ca2e81e65d06bfe",
+      "original_feature_sha256": "e394a1ad844efec67de25b65c700f8795fb812bf0de855ef21417783460cf302",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.2849472,
+        -10.3353673,
+        161.303846,
+        -10.3239286
+      ],
+      "approximate_bbox_span_m": [
+        2070,
+        1273
+      ],
+      "existing_route_prerequisite": "land-with-admin-partial-or-unbound-source-fitness-review",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:df78f53425fab964dab064e6fc55437102e2f9ea5a40fc454a6e2fff3f277189",
+      "original_feature_sha256": "fdc4a7c4131e802ada5ce3581417380f383a90de57861168e109951169c5e777",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.586681,
+        -10.5848488,
+        161.5873144,
+        -10.5845783
+      ],
+      "approximate_bbox_span_m": [
+        69,
+        30
+      ],
+      "existing_route_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": true,
+        "precision_result": "not_certified_as_boundary_fitness",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:f93741afbb4a8200db773503c3080ea3e7b9280d8b70d5e85c2251c17dca4704",
+      "original_feature_sha256": "a271a8064bf5f9bc395366ac887ab0d50285b10aa565727d8f52efaa72fd11d5",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        162.1754477,
+        -10.5779791,
+        162.1917987,
+        -10.5347473
+      ],
+      "approximate_bbox_span_m": [
+        1789,
+        4813
+      ],
+      "existing_route_prerequisite": "outside-source-domain-unclassified",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    },
+    {
+      "id": "physical-component:fa280f14a18aa7559772a8854eb2d79ffbc402c9867d2289ed5bd48449c971ad",
+      "original_feature_sha256": "eeaae49089c93dd310a632fbab68bd2eb3aaa3ebdff8554c0db53d4d782c853e",
+      "bbox_lonlat_from_accepted_issue_scope": [
+        161.8874926,
+        -10.447,
+        161.9635637,
+        -10.43377
+      ],
+      "approximate_bbox_span_m": [
+        8328,
+        1473
+      ],
+      "existing_route_prerequisite": "mixed-support-retain-whole-source-fitness-review",
+      "source_fitness": "unresolved_no_qualifying_source_verified",
+      "physical_authority": "unapproved",
+      "coverage": {
+        "exact_item_footprint": "unknown",
+        "member_local_cloud": "unknown",
+        "valid_observation_pixels": "unknown",
+        "component_level_registration": "unknown"
+      },
+      "screening": {
+        "sentinel_10m_nominal_gsd": "potential_screening_only",
+        "short_span_below_100m": false,
+        "precision_result": "not_certified_without_asset_bound_accuracy_and_coverage",
+        "note": "Issue-scope bounding box and approximate span are locators/planning cues only; no overlap-to-coverage inference. Exact full pointset geometry was not re-read in this packet."
+      },
+      "candidate_evaluations": [
+        {
+          "candidate_id": "sprep-s2a-2019-09-05",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-01-18",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "sprep-s2b-2020-04-07",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2019-09-05-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-01-18-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lyj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "cdse-2020-04-07-t57lzj",
+          "decision": "potential_screening_only_not_qualified",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "unknown",
+          "positional_accuracy_for_this_exact_asset": "unknown; no component-level registration test",
+          "reason": "Catalogue item date and 10m GSD are metadata. No native footprint overlay, asset checksum/lineage binding, valid-pixel or component-local cloud assessment was performed."
+        },
+        {
+          "candidate_id": "oam-no-catalogue-record",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Two full-family catalog searches returned zero records; this is not proof that no imagery exists."
+        },
+        {
+          "candidate_id": "spc-srtmgl1-003",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m SRTM elevation is not a raw high-resolution land/water observation; exact member coverage is not established."
+        },
+        {
+          "candidate_id": "slb-mofr-makira-lcm-2020",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "30m Landsat-derived classified land-cover product is not a raw observation; effective date and exact member coverage are not established."
+        },
+        {
+          "candidate_id": "ga-au-no-makira-scene",
+          "decision": "catalogue_not_found",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Screening found no Makira/SLB aerial or LiDAR scene metadata; no coverage claim."
+        },
+        {
+          "candidate_id": "arcgis-makchange-classified",
+          "decision": "rejected_as_fine_observation",
+          "coverage_status": "unknown",
+          "exact_native_item_geometry_intersected_with_full_component": false,
+          "local_cloud_or_valid_pixels": "not_applicable_or_unknown",
+          "reason": "Classified vegetation-change service is not raw imagery; display zoom does not establish source GSD or coverage."
+        }
+      ]
+    }
+  ]
+}

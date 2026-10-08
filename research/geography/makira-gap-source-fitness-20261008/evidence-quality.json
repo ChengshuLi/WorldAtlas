@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "issue": 1457,
+  "lane": "geography",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "physical-component:0009067d3f046760099093ffa957642c95f1a2e660b78bddf609d4d1fcfab1a5",
+    "physical-component:110e441169327a1bc96c96de0be8eaa5ef3eeb6872b90ade8c0d0d6495c277b2",
+    "physical-component:1cd54a39b974f1a8ee305ab4a590cd9ef02a328d59b244bd1d909746ec39c7c5",
+    "physical-component:344d085c5ee3afb809660423e91634ed311f130763a5d2d4f9d6ea91cdd4d3e8",
+    "physical-component:3eb5716e1e821f25c85a494658b13bc8c3a57de6d6636b5323b5edfb25eca833",
+    "physical-component:3f8309e420055c726486ecdb318e368769eb52d038fcb6d8266106380217f8fd",
+    "physical-component:5b687195caf6d9f5f011be6c6d8517152a2d78e2e5241463c99dac1d254c7d2b",
+    "physical-component:6deb3a8a2d72ba08aba2d63b73c89788f587ba5ab3bb56ea20f72bb1b538df43",
+    "physical-component:6f31be024cca8bcc6ed65e7ee1ca2554d4f889b2be2ebcd0e5786ec801a99203",
+    "physical-component:8046202150652008b4d4fbd5867a9658375702506277ddc782da0e62e7fafafb",
+    "physical-component:92137006e45c30dbd06cfb4eef3581c23248d8f0a6ca3ec339df668e268ff33e",
+    "physical-component:bc9fe8b0910d6a40dc87ba199db3e3188979c46eba59a3eb7ca2e81e65d06bfe",
+    "physical-component:df78f53425fab964dab064e6fc55437102e2f9ea5a40fc454a6e2fff3f277189",
+    "physical-component:f93741afbb4a8200db773503c3080ea3e7b9280d8b70d5e85c2251c17dca4704",
+    "physical-component:fa280f14a18aa7559772a8854eb2d79ffbc402c9867d2289ed5bd48449c971ad"
+  ],
+  "subject_ids_sha256": "0d3f2f52793491c55e8fd5794f6ef1367c2808df0055d6adc5684bbb2c9d60b5",
+  "baseline": {
+    "commit": "5e633fcd53e8c4d987b69f419716704926f8b56e",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "bytes": 1046123,
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-008.json.gz",
+        "bytes": 1600795,
+        "sha256": "f4ecb53c8f78853d77bbc05ab184201fbf1a7087a38ae793353ed68406028a1c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8385545,
+        "uncompressed_sha256": "fb3eefa54184f81c5a397e67efec3d5ccdbae23038ad05e26ca5ded8caebf46d"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-009.json.gz",
+        "bytes": 1486084,
+        "sha256": "5a7c0702860b7d6713dfa847f8634b42afabb8e626b4dd7a491ff8541e170551",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8384903,
+        "uncompressed_sha256": "c6a7a2f11df97ed48cf03f9862c41f18daebd9d57231c2a53775fbfa0878371b"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-010.json.gz",
+        "bytes": 1210288,
+        "sha256": "07f327dc2a78b9b1ff9f44f0b96a10c54d52667826a177c6c5b9ea3bf049764a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6834240,
+        "uncompressed_sha256": "a06638da8991941a9f93509cf59ddb6203839c7aac26f49b9424890246443ed0"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SLB-ADM1-000.bin.gz",
+        "bytes": 33558,
+        "sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 93632,
+        "uncompressed_sha256": "418f5f1aeaab5f63d240219d1a78efda66e6ceb35ee1f35345d6e4e55fa0798c"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/00.bin",
+        "bytes": 33554432,
+        "sha256": "ddaa3533a37d73764aeae81068bf369d2fa81849901094655e06ee32a501408d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/01.bin",
+        "bytes": 33554432,
+        "sha256": "9f6fff8b9ca1b1d5bc234b11af33562e2769dd7a704e20c9630a0c2190310527",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/02.bin",
+        "bytes": 33554432,
+        "sha256": "2ddd98d3743cc8886b8b4d07c8e5cdd199503d0a48145bdb1f38a1ef49549a3d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/03.bin",
+        "bytes": 17953737,
+        "sha256": "4a44f7e0b83d840f94a71cf5961f7f214826d26e10aae2a47d1d6711db140f83",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/makira-gap-source-fitness-20261008/issue-contract-subjects.json",
+        "bytes": 1464,
+        "sha256": "9b6611b9e0401dd2ab4cebcd419e2131f1f26988429624f88c825a44f37fb307",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "routing_family_rows": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+      "family_components_008": "f4ecb53c8f78853d77bbc05ab184201fbf1a7087a38ae793353ed68406028a1c",
+      "family_components_009": "5a7c0702860b7d6713dfa847f8634b42afabb8e626b4dd7a491ff8541e170551",
+      "family_components_010": "07f327dc2a78b9b1ff9f44f0b96a10c54d52667826a177c6c5b9ea3bf049764a",
+      "makira_adm1_product": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "gshhg_archive_chunk_00": "ddaa3533a37d73764aeae81068bf369d2fa81849901094655e06ee32a501408d",
+      "gshhg_archive_chunk_01": "9f6fff8b9ca1b1d5bc234b11af33562e2769dd7a704e20c9630a0c2190310527",
+      "gshhg_archive_chunk_02": "2ddd98d3743cc8886b8b4d07c8e5cdd199503d0a48145bdb1f38a1ef49549a3d",
+      "gshhg_archive_chunk_03": "4a44f7e0b83d840f94a71cf5961f7f214826d26e10aae2a47d1d6711db140f83",
+      "issue_scope_roster": "9b6611b9e0401dd2ab4cebcd419e2131f1f26988429624f88c825a44f37fb307"
+    },
+    "pin_files": {
+      "routing_family_rows": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+      "family_components_008": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-008.json.gz",
+      "family_components_009": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-009.json.gz",
+      "family_components_010": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-010.json.gz",
+      "makira_adm1_product": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SLB-ADM1-000.bin.gz",
+      "gshhg_archive_chunk_00": "coordination/engineering/global-physical-sources-20261006/i/00.bin",
+      "gshhg_archive_chunk_01": "coordination/engineering/global-physical-sources-20261006/i/01.bin",
+      "gshhg_archive_chunk_02": "coordination/engineering/global-physical-sources-20261006/i/02.bin",
+      "gshhg_archive_chunk_03": "coordination/engineering/global-physical-sources-20261006/i/03.bin",
+      "issue_scope_roster": "research/geography/makira-gap-source-fitness-20261008/issue-contract-subjects.json"
+    },
+    "subject_inventory": {
+      "version": 1,
+      "basis": "prior-evidence",
+      "id_prefix": "physical-component:",
+      "source_property": "subject_id",
+      "json_pointer": "/subject_ids",
+      "source_id": "issue-scope-1457",
+      "path": "research/geography/makira-gap-source-fitness-20261008/issue-contract-subjects.json",
+      "registry_path": "research/geography/makira-gap-source-fitness-20261008/subject-registry.geojson"
+    }
+  },
+  "sources": [
+    {
+      "id": "issue-scope-1457",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1457",
+      "role": "Authoritative reviewed subject scope and issue-level locator metadata",
+      "vintage": "current issue contract as checked 2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "GitHub issue metadata is used only to bind the reviewed work scope; it is not geographic source geometry or a reusable image asset."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Compare this identity roster and locator metadata against the issue 1457 evidence_quality declaration and pinned source comparison records.",
+      "limit": "Identity-only prior-evidence projection. The scope snapshot does not independently validate original pointset membership, geometry, authority or imagery coverage."
+    },
+    {
+      "id": "sprep",
+      "url": "https://solomonislands-data.sprep.org/resource/10-meter-rgb-satellite-imagery-san-cristobal-island-years-2019-2020",
+      "role": "Published RGB Sentinel-2 mosaic/catalog metadata for San Cristobal / Makira screening",
+      "vintage": "scene dates 2019-09-05, 2020-01-18 and 2020-04-07; published products N0213/N0214; resource says 10m RGB",
+      "license": {
+        "status": "unknown",
+        "terms": "Portal lists SPREP Public Licence, but exact derived asset/mosaic terms and the retained file lineage are unresolved; no ZIP or pixels retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Use the canonical SPREP resource and request exact underlying scene, processing lineage, asset checksum and licence terms for the distributed RGB product.",
+      "limit": "Metadata establishes a candidate resource only; exact member coverage, valid pixels, local cloud, positional fit, asset bytes and derivative rights are unknown."
+    },
+    {
+      "id": "cdse-stac",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/STAC.html",
+      "role": "Official CDSE STAC catalogue item metadata for six Sentinel-2 L2A items",
+      "vintage": "six N0500 items for the 2019-09-05, 2020-01-18 and 2020-04-07 acquisition windows; product processing timestamps in 2023",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying Sentinel data are open, but no exact raster asset bytes/checksum/lineage were retrieved. The 2020-01-18 exact product name has multiple recorded SHA-256 byte vintages and no populated input lineage; product ID does not uniquely bind raster bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat official STAC Item Search with item IDs, acquire each asset checksum/version metadata and source lineage before any use.",
+      "limit": "Native item geometry was not overlaid against exact member polygons. Item cloud fraction is tile-level; pixel validity, local cloud and component-level positional fit are unknown."
+    },
+    {
+      "id": "sentinel-product-spec",
+      "url": "https://sentinels.copernicus.eu/sentinel-data-access/sentinel-products/sentinel-2-data-products/collection-1-level-1c",
+      "role": "Sentinel-2 Collection 1 L1C reference characteristics",
+      "vintage": "published product specification consulted 2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official Sentinel product documentation; underlying Sentinel data terms apply. This is a specification citation, not a retained image asset."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Consult product specification and the exact product metadata for a selected native product.",
+      "limit": "Nominal 10m sampling and <12m absolute geolocation accuracy at 95.5% are an L1C reference, not proof of accuracy for the SPREP RGB derivative or any exact L2A asset; no component-level registration was measured."
+    },
+    {
+      "id": "oam",
+      "url": "https://docs.openaerialmap.org/api/api/",
+      "role": "OpenAerialMap legacy API and HOT OAM STAC full-family search",
+      "vintage": "metadata searches over full family extent; retrieval 2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No catalogue item was returned; no asset-specific reuse terms can be determined."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat OAM API and STAC searches with full exact polygon set and expanded date/collection filters if a subsequent review requires it.",
+      "limit": "Zero returned records mean catalogue_not_found within searched endpoints and query, not absence of aerial imagery."
+    },
+    {
+      "id": "spc-srtm",
+      "url": "https://www.pacific-r2r.org/sites/default/files/2022-10/SLB_R2R_Data_Sources_and_Methodology_Brief_2.pdf",
+      "role": "SPC Solomon Islands data-source methodology documenting SRTMGL1.003 30m elevation context",
+      "vintage": "methodology brief published 2022; SRTM source vintage not established per component",
+      "license": {
+        "status": "unknown",
+        "terms": "This metadata citation does not establish source asset reuse rights; no raster retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Consult the cited methodology and native SRTM source metadata before any permitted future use.",
+      "limit": "30m terrain model is not fine raw land/water observation evidence; exact native coverage and positional suitability were not checked."
+    },
+    {
+      "id": "mofr-lcm",
+      "url": "https://www.mofr.gov.sb/documents/ForestLCM/makira-land-cover-map-2020.pdf",
+      "role": "Solomon Islands Ministry of Forestry Makira 2020 classified land-cover map",
+      "vintage": "2020 map; source imagery Landsat-derived; effective-date semantics not verified",
+      "license": {
+        "status": "unknown",
+        "terms": "PDF/map asset reuse terms were not confirmed; no map pixels or data downloaded."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Seek original classification data, source scene metadata, accuracy assessment and reuse terms.",
+      "limit": "30m thematic classification is not raw observation evidence and cannot establish component-local land/water boundary accuracy."
+    },
+    {
+      "id": "ga-screen",
+      "url": "https://www.ga.gov.au/",
+      "role": "Geoscience Australia and Australian catalogue metadata screening for Makira/SLB aerial or LiDAR records",
+      "vintage": "search scope and retrieval 2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No Makira/SLB aerial or LiDAR record was identified; no asset licence can be assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat provider catalogue screening with provider-specific archive queries and exact geometry if needed.",
+      "limit": "Catalogue_not_found is bounded to the searches. Cocos LiDAR is unrelated; marine sonar/bathymetry does not demonstrate land/coastal component coverage."
+    },
+    {
+      "id": "arcgis-change",
+      "url": "https://www.arcgis.com/",
+      "role": "ArcGIS MakChange00to19 classified vegetation-change service screening",
+      "vintage": "change interval label 2000–2019; service processing/source dates not fully established",
+      "license": {
+        "status": "unknown",
+        "terms": "Service-specific derivative and export terms were not verified; no raster was accessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Inspect service metadata and original classification source only if a later task needs this historical thematic context.",
+      "limit": "Classified vegetation-change service is not raw imagery; map zoom scale does not establish ground sampling distance or exact member coverage."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/README.md",
+      "bytes": 4062,
+      "sha256": "cc3cbb3916b1d7a9a6df90beb24c8f85b2783b852d3b7de907a0b5a56cf47e78",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/assessment.json",
+      "bytes": 3979,
+      "sha256": "eaef6d9420533c13bebf0a0bf1775a2fbc08b0c45541fbbc680cf9ae956eefc6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/source-register.json",
+      "bytes": 153148,
+      "sha256": "dbc862e6ee3277111352b85e4fd23dcee965ed5364c8dfa3ec4f49a07b3c3f02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/issue-contract-subjects.json",
+      "bytes": 1464,
+      "sha256": "9b6611b9e0401dd2ab4cebcd419e2131f1f26988429624f88c825a44f37fb307",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/subject-registry.geojson",
+      "bytes": 6414,
+      "sha256": "d172f577e3e04b4dbee065cb858142a420348256ce3f98fbe2e52893ffa1fa6b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "catalogue_metadata_review",
+      "description": "Read published provider/resource and official STAC metadata; no assets or pixels requested. Full component geometry was authenticated against the original custody payload, but no item geometry overlay or pixel review was done.",
+      "software": "manual metadata review; Node.js 24.19.0 for byte and roster extraction",
+      "units": "source metadata; approximate bbox spans in metres as inherited planning cues, no new geographic measurement"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "No reviewed source meets the evidence needed to qualify for any of the 15 Makira components; Sentinel records remain screening candidates only and all exact coverage, asset lineage, rights and component-level fitness are unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "sprep",
+        "cdse-stac",
+        "sentinel-product-spec",
+        "oam",
+        "spc-srtm",
+        "mofr-lcm",
+        "ga-screen",
+        "arcgis-change"
+      ]
+    },
+    {
+      "text": "The shared Makira ADM1 contact is contextual administrative association only; its effective date and authority are unapproved.",
+      "status": "unresolved",
+      "source_ids": [
+        "sprep"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "No raster pixels were requested, downloaded or inspected.",
+    "No GIS processing or spatial overlay was performed.",
+    "Evidence bytes were verified by scripts/evidence-quality.mjs."
+  ]
+}
