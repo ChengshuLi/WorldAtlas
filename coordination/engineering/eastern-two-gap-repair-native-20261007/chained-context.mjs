@@ -6,7 +6,7 @@ import{validateNativeSelectionReceipt}from'../../../scripts/native-ownership/req
 import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
 import{isDeepStrictEqual,promisify}from'node:util';
 import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs';
-import{requireCurrentExecution}from'./current-execution.mjs';
+import{requireCurrentExecution,admitCurrentExecution}from'./current-execution.mjs';
 const executeFile=promisify(execFile);
 // Preserve the replay boundary; bound only the original child old-space, not the plain outer Node.
 export async function replayOriginalV1(runner,image){
@@ -75,12 +75,13 @@ export function verifyAuthoredValidatorSources({stage,codeIndex,authored,current
 export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution}){
  requirePlainExecution();assert.equal(stage.version,2);assert.equal(stage.issue,1295);assert.equal(stage.kind,'retained-identity-context-continuation-v2');assert.equal(stage.lane,'engineering');
  assert.deepEqual(stage.subject_ids,[...TARGETS]);assert.equal(stage.prior_stage_sha256,FIXED_PRIOR_STAGE_SHA);
- const ordinary=readFile??repositoryReader(root),budget=candidateBudget([]),seen=new Map();budget.add({bytes:stageRaw.length});
+ const currentAdmission=admitCurrentExecution(currentExecution,[currentExecution.source_root,currentExecution.stage_root]);
+ const ordinary=readFile??repositoryReader(root),budget=candidateBudget([],{reserveBytes:currentAdmission.installed_runtime_bytes+131072}),seen=new Map();budget.add({bytes:stageRaw.length});
  function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
   const raw=ordinary(pin.path,'candidate');assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);if(!seen.has(pin.path)){budget.add({bytes:raw.length});seen.set(pin.path,pin);}return raw;}
  requireCurrentExecution(currentExecution);
  budget.add({bytes:Buffer.byteLength(JSON.stringify(currentExecution)+'\n')});
- for(const pin of currentExecution.files)budget.add({bytes:pin.bytes});
+ for(const physicalRoot of currentAdmission.current_code_physical_roots)for(const pin of currentExecution.files)budget.add({bytes:pin.bytes});
  // These authored sources are historical custody, not assertions about a
  // publisher's later merged checkout. Authenticate them against their fixed bank.
  const codeBase='coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code';
@@ -158,5 +159,5 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,current_execution:currentExecution,authored_validator_code_index_sha256:sha(codeIndexRaw),
   original_v1_replay:{actual_command:command,child_invocation:{executable:process.execPath,exec_argv:['--max-old-space-size=768'],cwd:image,max_buffer_bytes:32*1024*1024,timeout_ms:0,kill_signal:'SIGTERM',old_space_is_not_rss_cap:true},explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
    advertised_commit_matches_validator_closure:false,receipt_sha256:sha(priorRaw),receipt:prior,input_image_index_sha256:stage.prior_image.sha256},
-  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_transport:{index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:budget.snapshot(),scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
+  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_transport:{index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:{...budget.snapshot(),installed_runtime_bytes:currentAdmission.installed_runtime_bytes,reserved_review_bytes:131072,complete_phase_bytes:budget.snapshot().accounted_bytes+currentAdmission.installed_runtime_bytes+131072},scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
 }

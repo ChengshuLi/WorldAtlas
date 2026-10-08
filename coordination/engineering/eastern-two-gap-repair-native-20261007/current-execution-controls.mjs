@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import syncFs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -63,6 +64,21 @@ async function currentPositive(t){
  await assert.rejects(runPackageBuild('static',{root,execute:async(entry,{cwd})=>{await fs.appendFile(path.join(cwd,'scripts/evidence-quality.mjs'),'// midrun mutation');}}),/strictly equal|Expected values|SHA|length/i);
 }
 
+async function realInnerControls(t){
+ const ns='coordination/engineering/eastern-two-gap-repair-native-20261007';
+ const cases=[['positive',''],['missing',"delete process.env.WORLDATLAS_CURRENT_EXECUTION_PATH;"],['hash',"process.env.WORLDATLAS_CURRENT_EXECUTION_SHA256='0'.repeat(64);"],['root',"process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT=process.cwd();"],['path',"process.env.WORLDATLAS_CURRENT_EXECUTION_PATH='../foreign.json';"],['stale',"fs.appendFileSync('scripts/evidence-quality.mjs','// stale');"]];
+ for(const [name,mutation]of cases){
+  const {root,commit}=await executionFixture(t);
+  const program=`import fs from 'node:fs';import{readPackageCurrentExecution,requireCurrentExecution}from'../${ns}/current-execution.mjs';${mutation}
+const record=readPackageCurrentExecution(process.cwd());requireCurrentExecution(record);fs.mkdirSync('dist');fs.writeFileSync('dist/sentinel','authenticated actual child');
+`;
+  await fs.writeFile(path.join(root,'scripts/build-static-inner.mjs'),program);commit();
+  if(name==='positive'){const result=await runPackageBuild('static',{root});assert(result.current_context_execution);assert.equal(await fs.readFile(path.join(root,'dist/sentinel'),'utf8'),'authenticated actual child');}
+  else{await assert.rejects(runPackageBuild('static',{root}),/Package static build failed/);await assert.rejects(fs.stat(path.join(root,'dist/sentinel')),/ENOENT/);}
+ }
+ return {actual_spawn_without_execute_injection:true,actual_environment_boundary_cases:cases.map(([name])=>name)};
+}
+
 async function currentNegative(t){
  const {root,definition}=await executionFixture(t),stage=path.join(root,'test-stage');
  await materializePackageInputs({source:root,destination:stage,definition});
@@ -73,7 +89,7 @@ async function currentNegative(t){
  const badRuntime=structuredClone(record);badRuntime.runtime.version='foreign';assert.throws(()=>authenticateCurrentExecution(badRuntime,{root:stage,executingRoot:root,sourceRoot:root}));
  const omitted=structuredClone(record);omitted.files.pop();assert.throws(()=>authenticateCurrentExecution(omitted,{root:stage,executingRoot:root,sourceRoot:root}));
  const overbound=structuredClone(record);overbound.files[0].bytes=32*1024*1024+1;assert.throws(()=>authenticateCurrentExecution(overbound,{root:stage,executingRoot:root,sourceRoot:root}));
- const aggregate=structuredClone(record);aggregate.files=Array.from({length:9},()=>({...record.files[0],bytes:32*1024*1024}));assert.throws(()=>authenticateCurrentExecution(aggregate,{root:stage,executingRoot:root,sourceRoot:root}),/aggregate exceeds cap before reads/);
+ const aggregate=structuredClone(record);aggregate.files=Array.from({length:9},()=>({...record.files[0],bytes:32*1024*1024}));let runtimeOpens=0;const originalOpen=syncFs.openSync;syncFs.openSync=function(file,...args){if(String(file)===process.execPath)runtimeOpens++;return originalOpen.call(this,file,...args);};try{assert.throws(()=>authenticateCurrentExecution(aggregate,{root:stage,executingRoot:root,sourceRoot:root}),/aggregate exceeds cap before reads/);assert.equal(runtimeOpens,0,'Overbound combined closure must reject before runtime open');}finally{syncFs.openSync=originalOpen;}
  await fs.chmod(path.join(stage,'scripts/evidence-quality.mjs'),0o755);assert.throws(()=>requireCurrentExecution(record));await fs.chmod(path.join(stage,'scripts/evidence-quality.mjs'),0o644);
  await fs.appendFile(path.join(stage,'scripts/evidence-quality.mjs'),"import './foreign.mjs';\n");assert.throws(()=>requireCurrentExecution(record));
  await fs.writeFile(path.join(stage,'scripts/evidence-quality.mjs'),'export const currentLibrary=1;\n');
@@ -96,7 +112,7 @@ async function authoredControls(t){
 }
 export async function runCurrentExecutionControls(){
  const cleanup=[];const t={after:callback=>cleanup.push(callback)};
- try{await currentPositive(t);await currentNegative(t);const historical=await authoredControls(t);return {historical,status:'PASS',real_plain_node:true,current_commit_drift_positive:true,authored_pins_unchanged:true,adverse_cases:['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','aggregate before source reads','mode mutation','new import','uncommitted source','receipt mutation']};}
+ try{await currentPositive(t);await currentNegative(t);const actualInner=await realInnerControls(t);const historical=await authoredControls(t);return {actualInner,historical,status:'PASS',real_plain_node:true,current_commit_drift_positive:true,authored_pins_unchanged:true,adverse_cases:['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','aggregate before source reads','mode mutation','new import','uncommitted source','receipt mutation']};}
  finally{for(const callback of cleanup.reverse())await callback();}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))console.log(JSON.stringify(await runCurrentExecutionControls()));

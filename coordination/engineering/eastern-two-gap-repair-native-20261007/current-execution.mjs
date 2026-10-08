@@ -10,6 +10,18 @@ const CAP=32*1024*1024, TOTAL=256*1024*1024;
 const ENTRY='scripts/native-ownership/validate-build-context-stage.mjs';
 const SELF='coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 const brands=new WeakMap();
+const REVIEW_RESERVE=131072, HISTORICAL_CODE_RESERVE=424735+32203+113639;
+function runtimeStat(){const executable=fs.realpathSync(process.execPath),stat=fs.lstatSync(executable);assert(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0);return {executable,mode:stat.mode&0o777,bytes:stat.size};}
+export function admitCurrentExecution(record,roots){
+ const actual=runtimeStat();assert.deepEqual({executable:record.runtime.executable,mode:record.runtime.mode,bytes:record.runtime.bytes},actual,'Installed runtime stat binding changed');
+ assert(Array.isArray(record.files)&&record.files.length>0&&record.files.length<=512);
+ let code=0;for(const pin of record.files){assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&pin.bytes<=CAP);code+=pin.bytes;}
+ const physicalRoots=[...new Set(roots.map(p=>fs.realpathSync(p)))];
+ const metadata=Buffer.byteLength(JSON.stringify(record)+'\n');
+ const total=actual.bytes+code*physicalRoots.length+metadata+HISTORICAL_CODE_RESERVE+REVIEW_RESERVE;
+ assert(total<=TOTAL,'Current execution aggregate exceeds cap before reads');
+ return {installed_runtime_bytes:actual.bytes,current_code_bytes:code*physicalRoots.length,current_code_physical_roots:physicalRoots,metadata_bytes:metadata,historical_code_reserved_bytes:HISTORICAL_CODE_RESERVE,review_reserved_bytes:REVIEW_RESERVE,complete_phase_bytes:total};
+}
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const oid=raw=>createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
 const safe=p=>typeof p==='string'&&!path.isAbsolute(p)&&!p.includes('\\')&&p.split('/').every(x=>x&&x!=='.'&&x!=='..');
@@ -29,8 +41,8 @@ export function currentExecutionClosure(root,entry='scripts/build-static-inner.m
  assert(allowedEntries.has(entry),'Unsupported actual execution entry');
  const entries=[ENTRY,SELF,'scripts/package-build.mjs',entry];
  const names=new Set(['package.json','.github/package-inputs.json']);
- let admitted=0;
- const admit=p=>{assert(safe(p));const file=path.join(root,p),stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size<=CAP);admitted+=stat.size;assert(admitted<=TOTAL,'Current import closure exceeds aggregate before read');};
+ let admitted=runtimeStat().bytes+HISTORICAL_CODE_RESERVE+REVIEW_RESERVE;
+ const admit=p=>{assert(safe(p));const file=path.join(root,p),stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size<=CAP);admitted+=2*stat.size;assert(admitted<=TOTAL,'Current import closure exceeds aggregate before read');};
  for(const p of names)admit(p);
  function visit(p){
   assert(safe(p));if(names.has(p))return;names.add(p);assert(names.size<=512);admit(p);
@@ -42,8 +54,8 @@ export function currentExecutionClosure(root,entry='scripts/build-static-inner.m
  assert(names.size<=512);return [...names].sort();
 }
 function runtime(){
- const executable=fs.realpathSync(process.execPath),stat=fs.statSync(executable),hash=createHash('sha256'),fd=fs.openSync(executable,'r');
- try{const chunk=Buffer.alloc(1024*1024);let n,total=0;while((n=fs.readSync(fd,chunk,0,chunk.length,null))){hash.update(chunk.subarray(0,n));total+=n;}assert.equal(total,stat.size);}finally{fs.closeSync(fd);}
+ const before=runtimeStat(),{executable}=before,stat=fs.lstatSync(executable),hash=createHash('sha256'),fd=fs.openSync(executable,'r');
+ try{const chunk=Buffer.alloc(1024*1024);let n,total=0;while((n=fs.readSync(fd,chunk,0,chunk.length,null))){hash.update(chunk.subarray(0,n));total+=n;}assert.equal(total,stat.size);assert.deepEqual(runtimeStat(),before);assert.equal(fs.fstatSync(fd).size,stat.size);}finally{fs.closeSync(fd);}
  return {executable,mode:stat.mode&0o777,bytes:stat.size,sha256:hash.digest('hex'),version:process.version,versions:process.versions,platform:process.platform,arch:process.arch,exec_argv:process.execArgv};
 }
 function plain(){assert.equal(process.execArgv.length,0);assert(!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Current package execution must use plain Node');}
@@ -79,7 +91,8 @@ export function issueCurrentExecution({source,stage,entry='scripts/build-static-
   const copied=body(stage,p);assert.equal(copied.mode,mode);assert(copied.raw.equals(raw),'Materialized execution body differs from source');
   return {path:p,mode,bytes:raw.length,sha256:sha(raw),git_blob:oid(raw)};
  });
- const record={version:1,issue:1295,kind:'package-issued-current-execution',entry_point:entry,source_root:source,source_commit:commit,source_tree:tree,stage_root:stage,runtime:runtime(),files};
+ const record={version:1,issue:1295,kind:'package-issued-current-execution',entry_point:entry,source_root:source,source_commit:commit,source_tree:tree,stage_root:stage,runtime:runtimeStat(),files};
+ admitCurrentExecution(record,[source,stage]);record.runtime=runtime();
  assert.equal(git(['rev-parse','HEAD']),commit,'Checkout changed while issuing execution binding');
  verifyFiles(stage,files,entry);return record;
 }
@@ -88,15 +101,15 @@ export function authenticateCurrentExecution(record,{root,executingRoot=root,sou
  assert.equal(record.source_root,fs.realpathSync(sourceRoot),'Wrong independently supplied source root');
  plain();assert.equal(record?.version,1);assert.equal(record.issue,1295);assert.equal(record.kind,'package-issued-current-execution');
  assert(/^[a-f0-9]{40}$/.test(record.source_commit)&&/^[a-f0-9]{40}$/.test(record.source_tree));
- assert.equal(record.stage_root,fs.realpathSync(root));assert.deepEqual(record.runtime,runtime());
+ assert.equal(record.stage_root,fs.realpathSync(root));const admission=admitCurrentExecution(record,[sourceRoot,root,executingRoot]);assert.deepEqual(record.runtime,runtime());
  verifySource(record);
  verifyFiles(root,record.files,record.entry_point);verifyFiles(executingRoot,record.files,record.entry_point);
- brands.set(record,{root:fs.realpathSync(root),executingRoot:fs.realpathSync(executingRoot),fingerprint:fingerprint(record)});return record;
+ brands.set(record,{root:fs.realpathSync(root),executingRoot:fs.realpathSync(executingRoot),fingerprint:fingerprint(record),admission});return record;
 }
 export function requireCurrentExecution(record){
  const retained=brands.get(record);assert(retained,'Current execution must have an authenticated package-boundary binding');
  assert.equal(fingerprint(record),retained.fingerprint,'Current execution receipt changed');
- plain();assert.deepEqual(record.runtime,runtime());verifySource(record);verifyFiles(retained.root,record.files,record.entry_point);verifyFiles(retained.executingRoot,record.files,record.entry_point);
+ plain();admitCurrentExecution(record,[record.source_root,retained.root,retained.executingRoot]);assert.deepEqual(record.runtime,runtime());verifySource(record);verifyFiles(retained.root,record.files,record.entry_point);verifyFiles(retained.executingRoot,record.files,record.entry_point);
  return record;
 }
 export function readPackageCurrentExecution(root){
