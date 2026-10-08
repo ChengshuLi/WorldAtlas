@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "parent": {
+    "version": 1,
+    "components": 95173,
+    "report_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+    "roster_sha256": "ab1d9b3f9450805219a418c670278dd351b8b9b97b76ce2cd5164058dbf31224"
+  },
+  "requests": [
+    {
+      "run": 1,
+      "ordinal": 0,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parents/run1-group-0.json",
+      "sha256": "a2b3fcbae3f082b37485a2fe6dee0367426d994d32825f351059068087246fb6",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-parent0",
+      "source_shards": 8
+    },
+    {
+      "run": 2,
+      "ordinal": 0,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parents/run2-group-0.json",
+      "sha256": "c22bad8b2136b73ef2cd9e06c5642db2e2f1524c2240e2faa10a53e31e772ed8",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-parent0",
+      "source_shards": 8
+    }
+  ]
+}
