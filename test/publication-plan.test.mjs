@@ -7,7 +7,7 @@ const issue=n=>({number:n,title:'Fixture '+n,state:n===3?'closed':'open',html_ur
 function fixture(){
  const calls=[],routes=new Map([
   [root+'/commits/main',{sha:target}],
-  [root+'/deployments?environment='+publicationEnvironment+'&per_page=100&page=1',[]],
+  [root+'/deployments?per_page=100&page=1',[]],
   [root+'/issues?state=open&labels=publisher-needed&per_page=100&page=1',[issue(51)]],
   [root+'/compare/'+base+'...'+target+'?per_page=100&page=1',{status:'ahead',merge_base_commit:{sha:base},total_commits:1,commits:[{sha:target,commit:{message:'merged'}}]}],
   [root+'/commits/'+target+'/pulls?per_page=100&page=1',[{number:7,html_url:'pr7',body:'Refs #2, #3',merged_at:'2026-10-04',merge_commit_sha:target,base:{ref:'main',repo:{full_name:'ChengshuLi/WorldAtlas'}}}]],
@@ -45,11 +45,11 @@ test('paginates immutable commit and issue inventories beyond 100 without moving
 });
 function deployedFixture(){
  const f=fixture(),op={version:1,operation_id:'fixture-op',publisher_worker_id:'publisher',kind:'site',primary_commit:base,issues:[2],started_at:'2026-10-04T00:00:00Z',expires_at:'2026-10-04T00:30:00Z',rollback_url:'https://github.com/ChengshuLi/WorldAtlas/issues/6'};
- const deployment={id:1,sha:base,task:publicationTask,payload:{worldatlas_publication:op}};
+ const deployment={id:1,sha:base,environment:publicationEnvironment,task:publicationTask,payload:{worldatlas_publication:op}};
  const result={version:1,deployment_id:1,operation_id:op.operation_id,publisher_worker_id:op.publisher_worker_id,primary_commit:base,state:'verified',cleanup_confirmed:true,delivery:delivery(),issue_checks:[{issue:2,outcome:'failed',evidence_urls:['https://github.com/ChengshuLi/WorldAtlas/issues/2#issuecomment-5']}]};
  const url='https://github.com/ChengshuLi/WorldAtlas/issues/2#issuecomment-5';
  const comment=()=>({html_url:url,user:{type:'User'},author_association:'OWNER',body:'<!-- worldatlas-publication-result:v1\n'+JSON.stringify(result)+'\n-->'});
- f.routes.set(root+'/deployments?environment='+publicationEnvironment+'&per_page=100&page=1',[deployment]);
+ f.routes.set(root+'/deployments?per_page=100&page=1',[deployment]);
  f.routes.set(root+'/deployments/1/statuses?per_page=100&page=1',[{id:2,state:'success',log_url:url}]);
  f.routes.set(root+'/issues/comments/5',comment());
  return {...f,op,deployment,result,refresh:()=>f.routes.set(root+'/issues/comments/5',comment())};
@@ -72,11 +72,13 @@ for(const [label,change] of [
 test('unauthorized receipt fails closed',async()=>{const f=deployedFixture();f.routes.get(root+'/issues/comments/5').author_association='NONE';await assert.rejects(()=>readPublicationState(f.api));});
 
 test('a newer success cannot hide an older active operation and all status pages are read',async()=>{
- const f=deployedFixture(),old={...structuredClone(f.deployment),id:0};
- f.routes.set(root+'/deployments?environment='+publicationEnvironment+'&per_page=100&page=1',[f.deployment,old]);
- f.routes.set(root+'/deployments/0/statuses?per_page=100&page=1',Array.from({length:100},(_,i)=>({id:i+10,state:'in_progress'})));
- f.routes.set(root+'/deployments/0/statuses?per_page=100&page=2',[]);
- const s=await readPublicationState(f.api);assert.equal(s.delivery.primary_commit,base);assert.equal(s.unsettled.length,1);assert.ok(f.calls.includes(root+'/deployments/0/statuses?per_page=100&page=2'));
+ const f=deployedFixture(),old=structuredClone(f.deployment);
+ old.payload.worldatlas_publication.operation_id='older-operation';f.deployment.id=2;f.result.deployment_id=2;f.refresh();
+ f.routes.set(root+'/deployments/2/statuses?per_page=100&page=1',f.routes.get(root+'/deployments/1/statuses?per_page=100&page=1'));
+ f.routes.set(root+'/deployments?per_page=100&page=1',[f.deployment,old]);
+ f.routes.set(root+'/deployments/1/statuses?per_page=100&page=1',Array.from({length:100},(_,i)=>({id:i+10,state:'in_progress'})));
+ f.routes.set(root+'/deployments/1/statuses?per_page=100&page=2',[]);
+ const s=await readPublicationState(f.api);assert.equal(s.delivery.primary_commit,base);assert.equal(s.unsettled.length,1);assert.ok(f.calls.includes(root+'/deployments/1/statuses?per_page=100&page=2'));
 });
 test('verified Site operation without delivery identity is incoherent',async()=>{const f=deployedFixture();f.result.delivery=null;f.refresh();await assert.rejects(()=>readPublicationState(f.api));});
 test('concurrent main advance does not change pinned plan',async()=>{

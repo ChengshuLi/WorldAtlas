@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "primary_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344",
+  "worker_version": "f46f5cdd-58f5-41cd-abee-cb5b41c2106d",
+  "release_id": "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+  "package_inventory_sha256": "32f1ad3681d37560ee67d13e20e5ce608c19b7f468ca832fbcbee1c718a7f5b4",
+  "worker_sha256": "fc8fc6b6ffb12efec6fb8cb13094bff94341520a0ce2450eaf87a8e4d0c0df8a",
+  "config_sha256": "3b00198d0d3492f59c358e5fd1d46e0e5bb3f383cd196512e2536c25446bfb68",
+  "assets_sha256": "dcd6c48451bfe792d7001095b5f2a72673eedfd140ad96a147c5480a7ee79fdc",
+  "lookup_sha256": "e6dad491a14f1e7d989d002fcef20fec47ec28baf46c64d51679264226d7c9a5",
+  "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+  "footprint_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+  "catalog_sha256": "037677e0a754be6aae3322922afdac57cd85c46e4bb1d7b0f261d7314494f550",
+  "source_fingerprint": "24d30e1121e55fe6ef266be23fedb87e0fa072d4a973cf06a612007f32bc08a2",
+  "pin_definitions": {
+    "assets_sha256": "SHA-256 of UTF-8 JSON.stringify of the complete ordered files array in the exact retained package inventory",
+    "lookup_sha256": "Whole packaged atlas-geography.json file bytes",
+    "config_sha256": "Prior verified exact Cloudflare configuration bytes, retained package record",
+    "worker_sha256": "Whole deployed Worker bundle bytes, retained package record"
+  },
+  "retention_source": "98723b06c4d3d9cd9d59a7ae47b5c1cad2c67ac4:coordination/engineering/wheel-zoom-886-delivery/wheel-retry-package-inventory.json",
+  "limits": [
+    "Retention commit is not application delivery source",
+    "Provider unchanged-version delivery still requires fresh readback and served checks",
+    "No latest-main application deployment; #907 hold remains"
+  ]
+}

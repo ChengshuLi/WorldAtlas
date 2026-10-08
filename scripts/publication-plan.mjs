@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {githubPages} from './issue-claim-contract.mjs';
+import {validateCloudflareDelivery,validateCloudflareOperation,cloudflareResult} from './publication-cloudflare.mjs';
 
 export const publicationRepo='ChengshuLi/WorldAtlas';
 export const publicationEnvironment='worldatlas-production';
@@ -16,6 +17,8 @@ export function marker(body,name){
  need(matches.length===1,'Exactly one '+name+' record required');return JSON.parse(matches[0][1]);
 }
 export function validateDelivery(value){
+ if(value?.provider==='cloudflare')return validateCloudflareDelivery(value);
+ need(value?.provider===undefined||value.provider==='site','Unknown publication provider');
  need(value?.version===1&&sha(value.primary_commit)&&sha(value.source_commit),'Missing exact primary/mirror delivery identity');
  need(value.site?.project_id==='appgprj_6abdf87277c08191bce4a22b8dfb25db'&&positive(value.site.version)&&/^appgdep_/.test(value.site.deployment_id??''),'Missing Site delivery identity');
  need(typeof value.release_id==='string'&&value.release_id.length>0&&/^[a-f0-9]{64}$/.test(value.hierarchy_sha256??'')&&/^[a-f0-9]{64}$/.test(value.footprint_sha256??'')&&/^[a-f0-9]{64}$/.test(value.assets_sha256??''),'Missing release/data/assets delivery identity');
@@ -25,7 +28,7 @@ export function validateDelivery(value){
 export function validateOperation(deployment){
  const op=deployment.payload?.worldatlas_publication;
  need(op?.version===1&&op.operation_id&&op.publisher_worker_id&&['site','recovery'].includes(op.kind),'Malformed publisher operation');
- need(sha(deployment.sha)&&deployment.sha===op.primary_commit&&Array.isArray(op.issues)&&op.issues.every(positive),'Unpinned operation scope');
+ need(sha(deployment.sha)&&deployment.sha===op.primary_commit&&Array.isArray(op.issues)&&op.issues.length>0&&op.issues.every(positive)&&new Set(op.issues).size===op.issues.length,'Unpinned operation scope');
  need(Number.isFinite(Date.parse(op.started_at))&&Number.isFinite(Date.parse(op.expires_at))&&Date.parse(op.expires_at)>Date.parse(op.started_at)&&typeof op.rollback_url==='string'&&op.rollback_url.startsWith('https://github.com/'+publicationRepo+'/'),'Missing bounded operation/rollback');
  return op;
 }
@@ -47,22 +50,28 @@ async function resultReceipt(api,status,deployment,op){
  return receipt;
 }
 export async function readPublicationState(api){
- const deployments=await githubPages(api,root+'/deployments?environment='+publicationEnvironment);
- const deliveries=[],unsettled=[],checks=[];
+ // One complete registry inventory covers both hosts, staging and native recovery.
+ // A newer success never hides a different environment's unresolved operation.
+ const completeRegistry=await githubPages(api,root+'/deployments');
+ need(completeRegistry.every(row=>positive(row.id))&&new Set(completeRegistry.map(row=>row.id)).size===completeRegistry.length,'Invalid or duplicate complete operation inventory');
+ const deployments=completeRegistry.filter(row=>row.environment===publicationEnvironment||row.environment?.startsWith('worldatlas-cloudflare'));
+ const deliveries=[],unsettled=[],checks=[],operationIds=new Set();
  for(const deployment of deployments.sort((a,b)=>a.id-b.id)){
   // Other deployments in the reserved environment are visible blockers, not ignored.
-  need(deployment.task===publicationTask,'Unknown operation in publisher environment');
-  const op=validateOperation(deployment),statuses=await githubPages(api,root+'/deployments/'+deployment.id+'/statuses');
+  const cloudflare=deployment.environment?.startsWith('worldatlas-cloudflare');
+  if(!cloudflare)need(deployment.task===publicationTask,'Unknown operation in publisher environment');
+  const op=cloudflare?validateCloudflareOperation(deployment):validateOperation(deployment),statuses=await githubPages(api,root+'/deployments/'+deployment.id+'/statuses');
+  need(!operationIds.has(op.operation_id),'Duplicate operation identity across publication registry');operationIds.add(op.operation_id);
   need(new Set(statuses.map(row=>row.id)).size===statuses.length,'Duplicate deployment statuses');
   const latest=statuses.sort((a,b)=>b.id-a.id)[0];
   if(!latest||!['success','failure','error'].includes(latest.state)){unsettled.push({deployment_id:deployment.id,...op,reason:'No settled result; expiry does not establish cleanup'});continue;}
-  const receipt=await resultReceipt(api,latest,deployment,op);
+  const receipt=cloudflare?await cloudflareResult(api,latest,deployment,op):await resultReceipt(api,latest,deployment,op);
   if(receipt.state==='unsettled'){unsettled.push({deployment_id:deployment.id,...op,reason:'Explicitly unsettled'});continue;}
   need((receipt.state==='verified'&&latest.state==='success')||(receipt.state==='failed-settled'&&['failure','error'].includes(latest.state)),'Status/result settlement mismatch');
   if(receipt.delivery)deliveries.push(receipt.delivery);
   checks.push(...receipt.issue_checks.map(row=>({...row,operation_id:op.operation_id,result_url:latest.log_url})));
  }
- return {delivery:deliveries.at(-1)??null,deliveries,unsettled,checks};
+ return {delivery:deliveries.at(-1)??null,site_delivery:deliveries.filter(row=>row.provider!=='cloudflare').at(-1)??null,cloudflare_delivery:deliveries.filter(row=>row.provider==='cloudflare').at(-1)??null,operation_ids:deployments.map(row=>row.id),deliveries,unsettled,checks};
 }
 // Only explicit original-issue references count; incidental #PR mentions are not criteria.
 export function referencedIssues(body){
@@ -79,7 +88,7 @@ export async function publicationPlan(api,{bootstrap=null}={}){
  const target=(await api(root+'/commits/main')).sha;need(sha(target),'Invalid pinned main');
  const state=await readPublicationState(api);
  if(bootstrap)validateDelivery(bootstrap);
- const delivery=state.delivery??bootstrap;
+ const delivery=state.cloudflare_delivery??state.site_delivery??bootstrap;
  const labeled=(await githubPages(api,root+'/issues?state=open&labels=publisher-needed')).filter(issue=>!issue.pull_request);
  const pendingChecks=new Map();for(const check of state.checks)pendingChecks.set(check.issue,check);
  const residual=[...pendingChecks.values()].filter(row=>['failed','deferred'].includes(row.outcome));
@@ -101,8 +110,13 @@ export async function publicationPlan(api,{bootstrap=null}={}){
   }
   need(commits.length===total&&new Set(commits.map(c=>c.sha)).size===total&&commits.every(c=>sha(c.sha)),'Incomplete/duplicate commit inventory');
   // Check successive delivered receipts are monotone; a stale or divergent delivery cannot silently replace one.
-  const history=[...(bootstrap?[bootstrap]:[]),...state.deliveries];
-  for(let i=1;i<history.length;i++){
+  // Preserve each provider's independent boundary: a Site-only release never
+  // proves that its application delta reached Cloudflare (or vice versa).
+  const histories=[
+   [...(bootstrap&&bootstrap.provider!=='cloudflare'?[bootstrap]:[]),...state.deliveries.filter(row=>row.provider!=='cloudflare')],
+   [...(bootstrap?.provider==='cloudflare'?[bootstrap]:[]),...state.deliveries.filter(row=>row.provider==='cloudflare')]
+  ];
+  for(const history of histories)for(let i=1;i<history.length;i++){
    const previous=history[i-1].primary_commit,current=history[i].primary_commit;
    const relation=await api(root+'/compare/'+previous+'...'+current+'?per_page=1');
    need(['ahead','identical'].includes(relation.status)&&relation.merge_base_commit?.sha===previous,'Non-monotone delivered history');

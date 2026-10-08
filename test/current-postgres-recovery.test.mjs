@@ -6,6 +6,7 @@ import path from 'node:path';
 import {generateKeyPairSync,createHash} from 'node:crypto';
 import {nativeReadbackFailureCode,isolatedFilesystemUsage,loadRecoveryReservation,validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedDatabaseACLList,isolatedDatabaseACLSQL,isolatedRestoreSQL,isolatedOriginalChecks,verifyRecoveryHosting} from '../scripts/current-postgres-recovery.mjs';
 import {backupRecipientFingerprint} from '../scripts/recovery-backup-envelope.mjs';
+import {cloudflareFixture} from './fixtures/cloudflare-publication.mjs';
 import {storageExportV2Contract,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const now=Date.parse('2026-10-04T06:00:00Z'),head='a'.repeat(40),toolSHA='b'.repeat(64);
@@ -27,12 +28,14 @@ test('Cloudflare host mismatch stops verification before any public requests',as
 });
 function hostingFixture(){
  const w=cloudflareWindow(),host=w.hosting;
- const delivery={id:100,sha:head,environment:'worldatlas-cloudflare-public',task:'worldatlas-cloudflare-public',payload:{worldatlas_cloudflare:{operation_id:'delivered-cache-fix',primary_commit:head,package_inventory_sha256:host.package_inventory_sha256,read_only:true,public_reads:true,database_writes:false}}};
+ const cf=cloudflareFixture({primary:head,worker:host.worker_version});
+ host.acceptance_url=cf.url;
+ const delivery=cf.deployment;
  const native={id:101,sha:head,environment:'worldatlas-production',task:'worldatlas-publication',payload:{worldatlas_publication:{version:1,operation_id:w.operation_id,publisher_worker_id:w.operator_worker_id,primary_commit:head,kind:'recovery',issues:[51],started_at:w.observed_at_utc,expires_at:w.expires_at_utc,rollback_url:w.rollback_receipt_url}}};
- const result={deployment_id:100,operation_id:'delivered-cache-fix',primary_commit:head,worker_version:host.worker_version,state:'verified',cleanup_confirmed:true,public_reads:true,database_writes_enabled:false,acceptance_url:host.acceptance_url};
+ const result=cf.result;
  const deliveredStatus={id:20,state:'success',log_url:host.result_url},nativeStatus={id:21,state:'in_progress'};
  const data={w,delivery,native,result,deliveredStatus,nativeStatus,extra:[],observed:structuredClone(w.source_marker),mutation:503,requests:[]};
- data.api=async route=>{const url=new URL('https://fixture.invalid'+route),p=url.pathname;if(p.endsWith('/deployments/100'))return delivery;if(p.endsWith('/deployments/100/statuses'))return [deliveredStatus];if(p.endsWith('/deployments/101/statuses'))return [nativeStatus];if(p.endsWith('/deployments'))return url.searchParams.has('environment')?[native,...data.extra]:[delivery,native];if(p.endsWith('/issues/comments/99'))return {html_url:host.result_url,user:{type:'User'},author_association:'OWNER',body:'<!-- worldatlas-cloudflare-result:v1\n'+JSON.stringify(result)+'\n-->'};throw Error('unexpected fixture route '+p);};
+ data.api=async route=>{const url=new URL('https://fixture.invalid'+route),p=url.pathname;if(p.endsWith('/deployments/100'))return delivery;if(p.endsWith('/deployments/100/statuses'))return [deliveredStatus];if(p.endsWith('/deployments/101/statuses'))return [nativeStatus];if(p.endsWith('/deployments'))return [delivery,native,...data.extra];if(p.endsWith('/issues/comments/99'))return cf.receipt();throw Error('unexpected fixture route '+p);};
  data.fetcher=async(url,options)=>{data.requests.push({url,method:options.method??'GET'});return options.method?new Response('',{status:data.mutation}):new Response(JSON.stringify(data.observed));};
  return data;
 }

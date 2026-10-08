@@ -1,0 +1,500 @@
+{
+  "version": 1,
+  "issue": 846,
+  "lane": "engineering",
+  "worker_id": "01a10934-a3d2-74e0-84d8-366cc334bc7c",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "98723b06c4d3d9cd9d59a7ae47b5c1cad2c67ac4",
+    "files": [
+      {
+        "path": "docs/CLOUDFLARE_HOSTING.md",
+        "bytes": 6308,
+        "sha256": "c732b77b5b3a662dd73c0613680e5b41c9c7e29e124a401b7275420917460897",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ENGINEERING_HANDOFF.md",
+        "bytes": 10666,
+        "sha256": "804db452799fa94e3c99c0015f5dcb9a5765dc65c2896a296f57a5cfa5887595",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PUBLICATION_HANDOFF.md",
+        "bytes": 12352,
+        "sha256": "de80cfb66d0f93871f5d85f32bbc8e18c0286b1d60d3304af41a01f28f0dca48",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/PUBLISHER.txt",
+        "bytes": 7236,
+        "sha256": "df132b9ee73b48bb4c2d5b9cdea35e6ccb21ec79e9efa5573fba4112d8f1c02a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 49049,
+        "sha256": "fd9676268ab07a53a30a2738259d50e8b5b3bdb5492f5491bfd620b0f21696cb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/publication-plan.mjs",
+        "bytes": 11778,
+        "sha256": "182e58c26c26ec9a6a487d49b534aa7f6d5cf338c6712c2d31be53cb7e083593",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/current-postgres-recovery.test.mjs",
+        "bytes": 24271,
+        "sha256": "2b96e135a6457c545d5fa26f8849b4ad34bf47a6dc9aec8777eeccb86d08f8dc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/publication-plan.test.mjs",
+        "bytes": 9993,
+        "sha256": "446324ee970ab8ea025a2cdb801f5262bf83f47f53e15b3a8d8bc68b6988890c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 17819,
+        "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 7069,
+        "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/storage-export-v4-contract.js",
+        "bytes": 1259,
+        "sha256": "04dee2a99f2ba818b0698db7a6846561e35db372bf9ae33d5aec10cd7c6e9dba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/publication/bootstrap.json",
+        "bytes": 2345,
+        "sha256": "2a0d06c9a3c6e81ab7ab928569b34695704dc39026126b5eb5397bebceb1dcf1",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/CLOUDFLARE_HOSTING.md",
+      "bytes": 7046,
+      "sha256": "10ba13b18349a0aa951db6647c76254dcb632fa06c243cadeaeb061ecdaf4a0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "bytes": 10962,
+      "sha256": "a9cf373bb534b856124d3bcdeb2b46f652fb0e3df14d0f58571bb8962241787c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "bytes": 20425,
+      "sha256": "60e268e248c4e05bf77492b795ca572b6438b60ae13d861a141af67d4d0fb017",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 8341,
+      "sha256": "97c136e59f3e530d2f23ad98fcfe23fc8bec9f41314b7c66ff78d150426eb35a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 48867,
+      "sha256": "a3d56040f21f12123c5992246b4eee8cf7183587bb4798b3d0b38fffb45c89db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/publication-plan.mjs",
+      "bytes": 13586,
+      "sha256": "007985ecb007f69f5d253f8327f37537b966cc0cf651ebfe1ded9301891146bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 23758,
+      "sha256": "25f87aa66bb43f1e768ecaded6761312e9db88ebcb84c3b06df758a4013911a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/publication-plan.test.mjs",
+      "bytes": 10156,
+      "sha256": "45dd1f5a0b1d0e91e174557a61c53a2fd0a87628ba93f7496e12c30ddacc0891",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/README.md",
+      "bytes": 5643,
+      "sha256": "d63a47697b180474b3fe71c624e7e68f28e8921e5ebab1bca2b76b1fc0b93464",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/claim.json",
+      "bytes": 835,
+      "sha256": "8c56c8049763b448d546f37add022e85c42d6497030f5311925237c8c1daf9af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/cloudflare-acceptance-source.json",
+      "bytes": 34127,
+      "sha256": "78c4019e8df2cb3c4938b257bd21d8fa7ca781e5ac79f12e5f11cdf674f0395b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/current-runtime-pins.json",
+      "bytes": 1847,
+      "sha256": "a1fe52332f95ef67aaa856552ce8b652c1829709991c349edf91c5601df4ec19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/final-controls.json",
+      "bytes": 4353,
+      "sha256": "bfb739381d9145b4e4748364e6625618b35cca33c0d17077ddbc531408959c5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/human-delivery-hold.json",
+      "bytes": 2205,
+      "sha256": "5e4787fcfaa75fd37806a4cd2264d61453da635474229f9a97d0075264f38dba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/original-site-schedule-audit.json",
+      "bytes": 410,
+      "sha256": "b512b80572b2a4a8208864ee0327db2923b06a604912a00e3ac503b41da53d65",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/planner-code-bindings.json",
+      "bytes": 2263,
+      "sha256": "b2d98f4b33850d0d3d67df1cc1cee62f8126bdf751055cd8262f4911f931724b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-impact-classification.json",
+      "bytes": 1396430,
+      "sha256": "6fa06c8e3c9da31b44d9747e6cded3a1ba9f385e8178f537cb308cb67e5a999d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-current.json",
+      "bytes": 619661,
+      "sha256": "6eff71308f1ea7ab9454755477d1e911c657f906877a6ea83c0216c59d726e50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-reservation-fixed.json",
+      "bytes": 619661,
+      "sha256": "6eff71308f1ea7ab9454755477d1e911c657f906877a6ea83c0216c59d726e50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publisher-instructions-audit.json",
+      "bytes": 1258,
+      "sha256": "5bd308ce89c842412bfe0b9b867748cbe7978e9024b8e67a448f032e4f3e4ce7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/readiness.json",
+      "bytes": 4922,
+      "sha256": "d1001a7a6769f877a1956b9bdb930ccbd56a4008dff716b06075fdbb925eb877",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/registry-source.json",
+      "bytes": 217745,
+      "sha256": "5c97f174c1eed5023a7b7c0f71f98ffa7f8e7679441fdb8bca7041492a596432",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-marker-before.json",
+      "bytes": 13688,
+      "sha256": "54c38a9349daa541049e83b33132752bff550e3da03719e9b50e9ae3bc01850a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-package-source.json",
+      "bytes": 71837,
+      "sha256": "32f1ad3681d37560ee67d13e20e5ce608c19b7f468ca832fbcbee1c718a7f5b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-release-before.json",
+      "bytes": 4993,
+      "sha256": "14b9c50ebe5ca67e32644fce6dfb04ab55e02528abf0df9010e191ac2a70760b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-cli.log",
+      "bytes": 12743,
+      "sha256": "8dd5c5e16f8ae66077832a2d89b49b76c9d6e4ca2908b806fbb5dc07532d4826",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-marker-fixed.log",
+      "bytes": 14071,
+      "sha256": "5414387e1ff28c1ad00a75ce6704435bf045976234d5d4b04ab8805e9245afef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-provider-fixed.log",
+      "bytes": 13751,
+      "sha256": "d67e73967946340e22d5499c3df2de35592ae125ff425f3d3a8b08f4910bbd5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-reservation-fixed.log",
+      "bytes": 13507,
+      "sha256": "3deb091e45252d0b17ecd44dd9491960a240f5d33ac6255b4225158a4ddaeae0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests.log",
+      "bytes": 12651,
+      "sha256": "30855d981f60c797c7364e95d4c8e1b411fb62695775f627fcb1e434e28f454c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/publication/cloudflare-history.json",
+      "bytes": 4754,
+      "sha256": "f71fa8429944d5e8d9d358d3960c6b18448b7cdc08cc8149248cd0d0cac4575a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/cloudflare-republish.mjs",
+      "bytes": 12230,
+      "sha256": "f494593a456cff1f3b0a0ceb73380b9f0e4684af179518d139d256120a8de223",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/publication-cloudflare.mjs",
+      "bytes": 11094,
+      "sha256": "6d6bf9943fbe4ad1ad13a03d6c9fc07131e89b3b1b351fb1e463175218aeff9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/cloudflare-republish.test.mjs",
+      "bytes": 14271,
+      "sha256": "063e740b608fb0a87f119770056cc02d911fd8345c62476b0306310ad00c7261",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/cloudflare-publication.mjs",
+      "bytes": 2327,
+      "sha256": "050ee67977ddbd468882d9d1764ac3dc3e266845fd03a2212bf3a7f4e68f420c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/publication-cloudflare.test.mjs",
+      "bytes": 12536,
+      "sha256": "a3d90f363d17cdae556cbdaeec10843be1d063e98682206f78f40dd364a9a3bc",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "cloudflare-publication-controls",
+      "kind": "code",
+      "description": "Full reserved operation discovery, exact pinned legacy compatibility, independent CF delivery boundary, complete marker identity, canonical live authorization, bounded exact-version provider producer and preservation controls.",
+      "software": "Node v24.19.0; authenticated GitHub GET-only planner; credential-free native provider fixtures",
+      "units": "exact operation identities, byte descriptors, preservation and rejection behavior"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-reporter=spec test/cloudflare-republish.test.mjs test/publication-plan.test.mjs test/publication-cloudflare.test.mjs test/current-postgres-recovery.test.mjs",
+    "node scripts/publication-plan.mjs",
+    "node scripts/cloudflare-republish.mjs (hidden stdin JSON; actual live run only after review/merge/registration)"
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/CLOUDFLARE_HOSTING.md",
+      "status": "modified",
+      "original_sha256": "c732b77b5b3a662dd73c0613680e5b41c9c7e29e124a401b7275420917460897"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "804db452799fa94e3c99c0015f5dcb9a5765dc65c2896a296f57a5cfa5887595"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "de80cfb66d0f93871f5d85f32bbc8e18c0286b1d60d3304af41a01f28f0dca48"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "modified",
+      "original_sha256": "df132b9ee73b48bb4c2d5b9cdea35e6ccb21ec79e9efa5573fba4112d8f1c02a"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "fd9676268ab07a53a30a2738259d50e8b5b3bdb5492f5491bfd620b0f21696cb"
+    },
+    {
+      "path": "scripts/publication-plan.mjs",
+      "status": "modified",
+      "original_sha256": "182e58c26c26ec9a6a487d49b534aa7f6d5cf338c6712c2d31be53cb7e083593"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "status": "modified",
+      "original_sha256": "2b96e135a6457c545d5fa26f8849b4ad34bf47a6dc9aec8777eeccb86d08f8dc"
+    },
+    {
+      "path": "test/publication-plan.test.mjs",
+      "status": "modified",
+      "original_sha256": "446324ee970ab8ea025a2cdb801f5262bf83f47f53e15b3a8d8bc68b6988890c"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/cloudflare-acceptance-source.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/current-runtime-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/final-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/human-delivery-hold.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/original-site-schedule-audit.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/planner-code-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-impact-classification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-current.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-reservation-fixed.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/publisher-instructions-audit.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/readiness.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/registry-source.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-marker-before.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-package-source.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-release-before.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-cli.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-marker-fixed.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-provider-fixed.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-reservation-fixed.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/publication/cloudflare-history.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/cloudflare-republish.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/publication-cloudflare.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/cloudflare-republish.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/fixtures/cloudflare-publication.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/publication-cloudflare.test.mjs",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "validation": [
+    {
+      "method_id": "cloudflare-publication-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/cloudflare-publication-846-20261007/final-controls.json"
+    },
+    {
+      "method_id": "cloudflare-publication-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/cloudflare-publication-846-20261007/final-controls.json"
+    }
+  ]
+}

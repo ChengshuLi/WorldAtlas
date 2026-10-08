@@ -8,7 +8,7 @@ Give a future engineering thread this document and [its prompt](prompts/ENGINEER
 
 All geography, engineering and history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
 
-Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Site: https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [acceptance guidance](ENGINEERING_TODO.md), [HANDOFF_STATUS.md](HANDOFF_STATUS.md), [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) and `data/validation/neon-final-publication.json`. Recheck live capabilities rather than assuming old receipts are current.
+Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Ongoing public read-only host: https://worldatlas-explorer.chengshu-worldatlas.workers.dev/ . Preserve the original owner-private Site at https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/ and its source/storage as recovery history. Follow the Cloudflare-specific publication/discovery contract; no ordinary updates go to the old Site. Read `AGENTS.md`, [acceptance guidance](ENGINEERING_TODO.md), [HANDOFF_STATUS.md](HANDOFF_STATUS.md), [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) and `data/validation/neon-final-publication.json`. Recheck actual live capabilities and matching release pins rather than assuming old receipts are current.
 
 ## Architecture and preserved starting point
 
