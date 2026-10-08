@@ -1,0 +1,10 @@
+{
+  "method_id": "strict-world-proposal",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "actual_evidence_paths": [
+    "delivery/execution/controls-final-finish.json",
+    "delivery/execution/whole-pair-equality.json"
+  ],
+  "limit": "Guard controls and two full proposal runs; no activation or derived/native consumer completion."
+}
