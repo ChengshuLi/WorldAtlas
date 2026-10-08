@@ -127,7 +127,7 @@ def main() -> None:
         raise RuntimeError("Duplicate frozen input path")
     input_bytes = sum(item["bytes"] for item in inputs)
     storage_snapshot = json.loads((BASE / "workspace-storage-admission.json").read_text(encoding="utf-8"))
-    producer_hashes = {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "freeze_inputs.py", "record_workspace_storage.mjs"]}
+    producer_hashes = {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "verify_classification_runs.py", "freeze_inputs.py", "record_workspace_storage.mjs"]}
     runtime_body_total = 9_901_207 + 18_058_560 + 352_048 + 3_258_528 + 2_289_328
     producer_bytes = sum((BASE / name).stat().st_size for name in producer_hashes)
     static_phase_sum = input_bytes + range_manifest["selected_decoded_bytes"] + 932_627 + runtime_body_total + producer_bytes + 67_108_864

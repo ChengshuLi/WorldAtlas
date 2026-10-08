@@ -3,15 +3,15 @@
 ## Current checkpoint
 
 - Owned issue: #1234, exactly ten components and four recorded contact subjects; preserve both merged source packets and all original family/unknown records.
-- Owned branch: `geography/zmb-zwe-source-1234-r3-20261008`; current pushed code checkpoint before this handover: `307eaac2b550e2ae08ca6af5265a65bc330d942b`.
+- Owned branch: `geography/zmb-zwe-source-1234-r3-20261008`.
 - The current issue claim is active for worker `01a11551-68d1-7031-a9ac-715eb725a184`; this is the final authorized PR continuation.
 - Official ESA WorldCover 2021 v200 source bytes, whole-source limitations, 10 candidate geometries, 21 local contact intersections and two original fragments are retained and pinned. Existing complete comparison sources remain preserved.
-- The no-pixel preflight and classification/output-writer controls pass. The classifier path bug is fixed. Its output writer shards complete component/contact records, verifies all output file and bundle caps before writing, and refuses to overwrite prior results.
+- The no-pixel preflight, classification/output-writer controls, and synthetic two-run verifier controls pass. The classifier path bug is fixed. Its output writer shards complete component/contact records, verifies all output file and bundle caps before writing, and refuses to overwrite prior results. `verify_classification_runs.py` independently checks result receipts, complete component/contact rosters, immutable source pins, exact shard hashes, and two-run reproducibility without reading raster pixels.
 - No raster pixel has been classified. No actual classification run has started; there is no GIS window or result output yet.
 
 ## Admission and limits
 
-`frozen-inputs.json` records 74 pinned inputs / 11,652,764 bytes; per run, 4,074,286 encoded source bytes, 62,914,560 decoded original-block capacity and 932,627 decoded geometry bytes. The 47,518,164-byte source-window crop is theoretical; no crop file is created. The exact conservative one-run static accounting is 176,534,917 bytes against a 256 MiB budget, leaving 91,900,539 bytes for live GEOS/NumPy row geometry and allocator overhead. Loaded Python/GEOS/dyld bodies and the preflight process measurement are recorded there as well.
+`frozen-inputs.json` has SHA-256 `f9cd64303ee77baaeac34c13bc5c2cced8a7aae9aba39e67584d9da124354e07` and records 74 pinned inputs / 11,652,764 bytes; per run, 4,074,286 encoded source bytes, 62,914,560 decoded original-block capacity and 932,627 decoded geometry bytes. The 47,518,164-byte source-window crop is theoretical; no crop file is created. The exact conservative one-run static accounting is 176,549,698 bytes against a 256 MiB budget, leaving 91,885,758 bytes for live GEOS/NumPy row geometry and allocator overhead. Loaded Python/GEOS/dyld bodies and the preflight process measurement are recorded there as well.
 
 The current host reported 29% system-wide free memory, below the coordinator’s 40% GIS gate. The fresh storage check passed the checkout/free-space limits. Do not start raster decoding or classification until a fresh explicit window arrives and the live memory gate passes. If a window arrives, stop immediately if RSS exceeds the producer’s 700 MiB abort or any output/temp cap is breached.
 
@@ -26,4 +26,4 @@ WorldCover evidence is limited to its 2021 mapped land-cover classes. Class 80 m
 
 ## Coordinator reporting rule
 
-The human explicitly directed GEO workers to message the root coordinator chat `01a10893-2a57-72e0-aa08-5c36088d5206` before becoming idle. Send a concise update when work is complete or when waiting on a live resource/source/review condition. Include the issue/batch, concrete artifact and exact branch/PR/merge/cleanup state, the specific remaining blocker or live handle, and “ready for next batch” only after the assigned work is fully delivered. The human explicitly authorized this worker-to-root message.
+The human explicitly directed GEO workers to message the root coordinator chat `01a10893-2a57-72e0-aa08-5c36088d5206` after every assigned batch or subtask completes, and before becoming idle or waiting on a live resource/source/review condition. Include the issue/batch, concrete artifact and exact branch/PR/merge/cleanup state, specific remaining blocker or live handle, and next-stage readiness. Reporting does not end the persistent goal: continue executable assigned work, or request the next batch in the same message. The human explicitly authorized this worker-to-root message.
