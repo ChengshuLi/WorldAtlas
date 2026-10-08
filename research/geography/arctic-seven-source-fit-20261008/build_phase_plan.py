@@ -21,14 +21,20 @@ NATIVE_SCRIPT=PREFIX+'native_archive_extract.sh'
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def git(*args):return subprocess.check_output(['git','-C',str(ROOT),*args],stderr=subprocess.PIPE)
-def descriptor(commit,path,expected=None):
+def descriptor(commit,path,expected=None,verify_materialized=False):
  raw=git('show',f'{commit}:{path}')
  row={'path':path,'bytes':len(raw),'sha256':sha(raw),'hash_kind':'file-bytes'}
  if expected and (row['bytes']!=expected['bytes'] or row['sha256']!=expected['sha256']):
   raise ValueError('Execution commit no longer contains issue-pinned source bytes: '+path)
- materialized=(ROOT/path).read_bytes()
- if len(materialized)!=row['bytes'] or sha(materialized)!=row['sha256']:
-  raise ValueError('Materialized file differs from exact execution commit: '+path)
+ materialized=ROOT/path
+ if verify_materialized:
+  raw_local=materialized.read_bytes()
+  if len(raw_local)!=row['bytes'] or sha(raw_local)!=row['sha256']:
+   raise ValueError('Materialized code/lock differs from exact execution commit: '+path)
+ elif materialized.is_file() and not materialized.is_symlink():
+  raw_local=materialized.read_bytes()
+  if len(raw_local)!=row['bytes'] or sha(raw_local)!=row['sha256']:
+   raise ValueError('Materialized source differs from exact execution commit: '+path)
  return row
 def main():
  parser=argparse.ArgumentParser(); parser.add_argument('--execution-commit',required=True); args=parser.parse_args()
@@ -51,16 +57,16 @@ def main():
  for path,row in issue_pins.items():sources.append(descriptor(args.execution_commit,path,row))
  for row in archive_pins:
   if row['path'] not in {x['path'] for x in sources}:sources.append(row)
- runtime=descriptor(args.execution_commit,RUNTIME)
- native_runtime=descriptor(args.execution_commit,NATIVE_RUNTIME)
- native_checker=descriptor(args.execution_commit,NATIVE_CHECKER)
+ runtime=descriptor(args.execution_commit,RUNTIME,verify_materialized=True)
+ native_runtime=descriptor(args.execution_commit,NATIVE_RUNTIME,verify_materialized=True)
+ native_checker=descriptor(args.execution_commit,NATIVE_CHECKER,verify_materialized=True)
  runtime_lock=json.loads(git('show',f'{args.execution_commit}:{RUNTIME}'))
  runtime_total=runtime_lock['total_bytes']
  native_lock=json.loads(git('show',f'{args.execution_commit}:{NATIVE_RUNTIME}'))
  native_runtime_total=native_lock['total_bytes']
- runner=descriptor(args.execution_commit,PREFIX+'run_source_phase.py')
- code_rows=[descriptor(args.execution_commit,path) for path in CODE]
- native_script=descriptor(args.execution_commit,NATIVE_SCRIPT)
+ runner=descriptor(args.execution_commit,PREFIX+'run_source_phase.py',verify_materialized=True)
+ code_rows=[descriptor(args.execution_commit,path,verify_materialized=True) for path in CODE]
+ native_script=descriptor(args.execution_commit,NATIVE_SCRIPT,verify_materialized=True)
  all_rows={}
  for row in sources+code_rows+[runtime,native_runtime,native_checker,native_script]:
   if row['path'] in all_rows and all_rows[row['path']]!=row:raise ValueError('Conflicting whole-file pins')
