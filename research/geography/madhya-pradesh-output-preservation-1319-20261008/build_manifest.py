@@ -49,10 +49,10 @@ def main():
     branch_head = current_commit(REPO)
     if git(REPO, "merge-base", origin_main, branch_head).decode().strip() != origin_main:
         raise ValueError("The packet branch must descend from the verified origin/main base")
-    validation = json.loads((REPO / OWNED_PATH / "validation/adversarial-controls-head54def-r3.json").read_bytes())
-    if (validation.get("repository_head") != origin_main or
+    validation = json.loads((REPO / OWNED_PATH / "validation/adversarial-controls-head19ca-r1.json").read_bytes())
+    if (validation.get("repository_head") != branch_head or
             validation.get("output_safety_baseline") != origin_main):
-        raise ValueError("Final reproduction must be tied to the current origin/main base")
+        raise ValueError("Final reproduction must bind the exercised packet head to its current origin/main base")
     commit = origin_main
     if contract.get("owned_paths") != [OWNED_PATH] or contract.get("max_prs") != 2:
         raise ValueError("Current issue path or PR allowance differs from the reviewed contract")
@@ -231,9 +231,9 @@ def main():
             {"method_id": method_id, "kind": "reproducibility", "outcome": "passed",
              "evidence_path": OWNED_PATH + "vintages/controls-head54def-one/reproducibility.json"},
             {"method_id": method_id, "kind": "negative-control", "outcome": "passed",
-             "evidence_path": OWNED_PATH + "validation/adversarial-controls-head54def-r3.json"},
+             "evidence_path": OWNED_PATH + "validation/adversarial-controls-head19ca-r1.json"},
             {"method_id": "archived-writer-defect-reproduction", "kind": "negative-control", "outcome": "passed",
-             "evidence_path": OWNED_PATH + "validation/actual-controls-symlink-reproduction-r5.json"},
+             "evidence_path": OWNED_PATH + "validation/actual-controls-symlink-reproduction-r6.json"},
             {"method_id": "archived-writer-defect-reproduction", "kind": "negative-control", "outcome": "passed",
              "evidence_path": OWNED_PATH + "validation/historical-producer-guard-observation-r2.json"},
         ],
@@ -251,12 +251,12 @@ def main():
         ],
         "stages": {"research": "partial", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/producer_republish.py --run-id producer-head54def-one",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/producer_republish.py --run-id producer-head54def-two",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/control_writer.py --run-id controls-head54def-one",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/control_writer.py --run-id controls-head54def-two",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/test_output_safety.py --tag head54def-r3",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/reproduce_historical_controls.py --tag r5",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/producer_republish.py --run-id producer-head19ca-one",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/producer_republish.py --run-id producer-head19ca-two",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/control_writer.py --run-id controls-head19ca-one",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/control_writer.py --run-id controls-head19ca-two",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/test_output_safety.py --tag head19ca-r1",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/reproduce_historical_controls.py --tag r6",
             "node scripts/evidence-quality.mjs research/geography/madhya-pradesh-output-preservation-1319-20261008/evidence-quality.json",
         ],
     }

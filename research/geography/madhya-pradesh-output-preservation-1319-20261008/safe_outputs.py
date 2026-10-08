@@ -53,7 +53,9 @@ def load_contract(repo: Path) -> tuple[dict, dict]:
 
 
 def load_immutable_api(repo: Path):
-    commit = current_commit(repo)
+    # Reproduce the helper from the verified PR base, even when evidence is
+    # built on a branch that already contains earlier packet commits.
+    commit = git(repo, "rev-parse", "origin/main").decode().strip()
     source = git(repo, "show", f"{commit}:{IMMUTABLE_PATH}")
     if sha256(source) != IMMUTABLE_SHA256:
         raise ValueError("Shared immutable helper differs from its admitted whole-file pin")
