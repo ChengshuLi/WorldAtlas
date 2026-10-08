@@ -25,6 +25,11 @@ def main() -> int:
         raise SystemExit("suffix must contain only letters, numbers, and hyphens")
     root = run_safe.REPO_ROOT
     owned = run_safe.HERE
+    stem = f"{owned.relative_to(root).as_posix()}/execution/"
+    test_path = stem + f"test-run-{args.suffix}.json"
+    positive_path = stem + f"positive-control-{args.suffix}.json"
+    negative_path = stem + f"negative-control-{args.suffix}.json"
+    admission.admit_destinations(root, [test_path, positive_path, negative_path])
     _lock, actual, expected_outputs, receipts = run_safe.load_plan(root)
     lock_path = root / run_safe.PREDECESSOR / "frozen-execution.json"
     lock_raw = admission.read_regular(lock_path)
@@ -79,10 +84,6 @@ def main() -> int:
     if historical["product_count_per_run"] != 14 or historical["runs"][0]["products_sha256"] != historical["runs"][1]["products_sha256"]:
         raise admission.AdmissionError("Historical complete product controls failed")
 
-    stem = f"{owned.relative_to(root).as_posix()}/execution/"
-    test_path = stem + f"test-run-{args.suffix}.json"
-    positive_path = stem + f"positive-control-{args.suffix}.json"
-    negative_path = stem + f"negative-control-{args.suffix}.json"
     positive = {"method_id": METHOD_ID, "kind": "positive-control", "outcome": "passed",
                 "phase_limit_boundary_cases": boundary,
                 "predecessor_file_count": preservation["file_count"],

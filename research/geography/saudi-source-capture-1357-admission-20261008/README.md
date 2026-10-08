@@ -56,13 +56,13 @@ Run from the repository root with the bundled Python runtime. Use a fresh label
 for each control receipt set:
 
 ```sh
-python3 -B research/geography/saudi-source-capture-1357-admission-20261008/run_safe.py --run-id run-5 --repo .
-python3 -B research/geography/saudi-source-capture-1357-admission-20261008/freeze_safe.py --repo . --run-id freeze-retry-4
-python3 -B research/geography/saudi-source-capture-1357-admission-20261008/test_safety.py
-python3 -B research/geography/saudi-source-capture-1357-admission-20261008/reproduce_legacy_writers.py --output execution/legacy-writer-reproduction-retry.json
-python3 -B research/geography/saudi-source-capture-1357-admission-20261008/verify_historical_products.py --repo .
-python3 -B research/geography/saudi-source-capture-1357-admission-20261008/verify_predecessor.py --repo . --commit HEAD
-python3 -B research/geography/saudi-source-capture-1357-admission-20261008/write_control_receipts.py --suffix <fresh-label>
+/usr/local/bin/python3 -B research/geography/saudi-source-capture-1357-admission-20261008/run_safe.py --run-id run-5 --repo .
+/usr/local/bin/python3 -B research/geography/saudi-source-capture-1357-admission-20261008/freeze_safe.py --repo . --run-id freeze-retry-4
+/usr/local/bin/python3 -B research/geography/saudi-source-capture-1357-admission-20261008/test_safety.py
+/usr/local/bin/python3 -B research/geography/saudi-source-capture-1357-admission-20261008/reproduce_legacy_writers.py --output execution/legacy-writer-reproduction-retry.json
+/usr/local/bin/python3 -B research/geography/saudi-source-capture-1357-admission-20261008/verify_historical_products.py --repo .
+/usr/local/bin/python3 -B research/geography/saudi-source-capture-1357-admission-20261008/verify_predecessor.py --repo . --commit HEAD
+/usr/local/bin/python3 -B research/geography/saudi-source-capture-1357-admission-20261008/write_control_receipts.py --suffix <fresh-label>
 ```
 
 Each run/freeze/refusal/receipt and reproduction output name is exclusive. Use

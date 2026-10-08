@@ -15,6 +15,7 @@ from unittest.mock import patch
 import admission
 import freeze_safe
 import run_safe
+import write_control_receipts
 
 
 REPO = run_safe.REPO_ROOT
@@ -201,8 +202,9 @@ class DestinationTests(unittest.TestCase):
             self.assertTrue(receipt["complete_source_pass"])
 
             called[:] = []
-            collision = harness / "execution/freezes/existing/frozen-execution.json"
-            collision.parent.mkdir(parents=True)
+            collision_dir = harness / "execution/freezes/existing"
+            collision_dir.mkdir(parents=True)
+            collision = collision_dir / "stale-partial.json"
             collision.write_bytes(b"preserve")
             with patch.object(run_safe, "load_plan", return_value=({}, plan, {}, [])):
                 with self.assertRaises(FileExistsError):
@@ -244,6 +246,40 @@ class DestinationTests(unittest.TestCase):
             self.assertFalse((harness / "execution/freezes/refused/frozen-execution.json").exists())
         finally:
             run_safe.HERE = old_here
+
+    def test_control_receipt_entrypoint_preadmits_complete_output_set_before_tests(self):
+        old_root, old_here, old_argv = run_safe.REPO_ROOT, run_safe.HERE, sys.argv[:]
+        harness = self.root / "research/geography/saudi-source-capture-1357-admission-20261008"
+        execution = harness / "execution"
+        execution.mkdir(parents=True)
+        run_safe.REPO_ROOT, run_safe.HERE = self.root, harness
+        try:
+            (execution / "positive-control-occupied.json").write_bytes(b"preserve")
+            sys.argv = ["write_control_receipts.py", "--suffix", "occupied"]
+            with patch.object(run_safe, "load_plan", side_effect=AssertionError("plan ran before destination admission")):
+                with patch.object(write_control_receipts.subprocess, "run", side_effect=AssertionError("tests ran before destination admission")):
+                    with self.assertRaises(FileExistsError):
+                        write_control_receipts.main()
+            self.assertEqual((execution / "positive-control-occupied.json").read_bytes(), b"preserve")
+            self.assertFalse((execution / "test-run-occupied.json").exists())
+            self.assertFalse((execution / "negative-control-occupied.json").exists())
+
+            outside = self.root / "outside-control-receipts"
+            outside.mkdir()
+            (execution / "negative-control-parent").symlink_to(outside, target_is_directory=True)
+            # Point the real entrypoint at a fresh owned-prefix-shaped fixture with a symlinked execution parent.
+            linked = self.root / "research/geography/saudi-source-capture-1357-admission-20261008-linked"
+            linked.mkdir()
+            (linked / "execution").symlink_to(outside, target_is_directory=True)
+            run_safe.HERE = linked
+            sys.argv = ["write_control_receipts.py", "--suffix", "parent"]
+            with patch.object(run_safe, "load_plan", side_effect=AssertionError("plan ran before destination admission")):
+                with patch.object(write_control_receipts.subprocess, "run", side_effect=AssertionError("tests ran before destination admission")):
+                    with self.assertRaises(admission.AdmissionError):
+                        write_control_receipts.main()
+            self.assertEqual(list(outside.iterdir()), [])
+        finally:
+            run_safe.REPO_ROOT, run_safe.HERE, sys.argv = old_root, old_here, old_argv
 
     def test_new_wrapper_records_partial_failure_after_child_write(self):
         harness = OWNED / "test-harness"

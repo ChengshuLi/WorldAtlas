@@ -89,7 +89,7 @@ def run_freeze(repo_root: Path, run_id: str, derive_lock: Callable[[Path], dict]
     run_dir = f"{owned}/execution/freezes/{run_id}"
     lock_path = f"{run_dir}/frozen-execution.json"
     receipt_path = f"{run_dir}/execution.json"
-    admission.admit_destinations(root, [lock_path, receipt_path])
+    admission.admit_destinations(root, [lock_path, receipt_path], directory_paths=[run_dir])
     lock_admission = DestinationAdmission(root, lock_path, _SEAL)
     receipt_admission = DestinationAdmission(root, receipt_path, _SEAL)
     start = run_safe.utc_now()

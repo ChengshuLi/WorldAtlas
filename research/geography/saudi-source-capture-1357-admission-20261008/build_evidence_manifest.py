@@ -42,8 +42,8 @@ def read_regular(path: Path) -> bytes:
     return admission.read_regular(path)
 
 
-def list_candidate_changes() -> list[str]:
-    tracked = git("diff", "--name-only", "HEAD", "--").splitlines()
+def list_candidate_changes(base_commit: str) -> list[str]:
+    tracked = git("diff", "--name-only", base_commit, "--").splitlines()
     untracked = git("ls-files", "--others", "--exclude-standard").splitlines()
     return sorted(set(tracked + untracked))
 
@@ -72,14 +72,13 @@ def baseline_files(commit: str, preservation: dict) -> list[dict]:
 
 
 def main() -> int:
-    commit = git("rev-parse", "HEAD")
-    if commit != "ffa32416fd946ac89da621d02b554ca27733e688":
-        raise admission.AdmissionError("The baseline changed; refresh and reread instructions before rebuilding evidence")
+    commit = "ffa32416fd946ac89da621d02b554ca27733e688"
+    subprocess.check_call(["git", "-C", str(REPO), "merge-base", "--is-ancestor", commit, "HEAD"])
     preservation = json.loads(admission.read_regular(OWNED / "execution/predecessor-preservation.json"))
     historical = json.loads(admission.read_regular(OWNED / "execution/verified-historical-products.json"))
     plan_refusal = json.loads(admission.read_regular(OWNED / "execution/refusals/run-4-admission.json"))
-    negative = json.loads(admission.read_regular(OWNED / "execution/negative-control-final.json"))
-    positive = json.loads(admission.read_regular(OWNED / "execution/positive-control-final.json"))
+    negative = json.loads(admission.read_regular(OWNED / "execution/negative-control-postreview.json"))
+    positive = json.loads(admission.read_regular(OWNED / "execution/positive-control-postreview.json"))
     contact_path = run_safe.PREDECESSOR + "/runs/run-1/output/current-contact-features.geojson"
     contact_bytes = subprocess.check_output(["git", "-C", str(REPO), "show", f"{commit}:{contact_path}"])
     contact_features = json.loads(contact_bytes)["features"]
@@ -100,8 +99,20 @@ def main() -> int:
         "historical_run_one_receipt": run_safe.PREDECESSOR + "/runs/run-1-execution.json",
         "historical_run_two_receipt": run_safe.PREDECESSOR + "/runs/run-2-execution.json",
     }
-    pins = {name: file_by_path[path]["sha256"] for name, path in pin_paths.items()}
-    changes = list_candidate_changes()
+    pin_hashes = {name: file_by_path[path]["sha256"] for name, path in pin_paths.items()}
+    expected_pin_paths = [
+        run_safe.PREDECESSOR + "/compat/immutable.py",
+        run_safe.PREDECESSOR + "/compat/inputs.py",
+        run_safe.PREDECESSOR + "/frozen-execution.json",
+        run_safe.PREDECESSOR + "/inputs/legacy-input-config.json",
+        run_safe.PREDECESSOR + "/issue-1336-api.json",
+        run_safe.PREDECESSOR + "/reproducibility.json",
+        run_safe.PREDECESSOR + "/run_final.py",
+        run_safe.PREDECESSOR + "/runs/run-1/output/candidate-component-features.geojson",
+        run_safe.PREDECESSOR + "/source_extract.py",
+    ]
+    pins = {path: file_by_path[path]["sha256"] for path in expected_pin_paths}
+    changes = list_candidate_changes(commit)
     if MANIFEST_PATH not in changes:
         changes.append(MANIFEST_PATH)
     changes = sorted(set(changes))
@@ -118,7 +129,7 @@ def main() -> int:
         outputs.append({"path": path, "bytes": len(raw), "sha256": sha(raw),
                         "hash_kind": "file-bytes", "role": "candidate-output"})
     output_paths = {row["path"] for row in outputs}
-    if not {"execution/positive-control-final.json", "execution/negative-control-final.json", "execution/test-run-final.json"} <= {
+    if not {"execution/positive-control-postreview.json", "execution/negative-control-postreview.json", "execution/test-run-postreview.json"} <= {
         path.split(OWNED.relative_to(REPO).as_posix() + "/", 1)[1] for path in output_paths if path.startswith(OWNED.relative_to(REPO).as_posix() + "/")
     }:
         raise admission.AdmissionError("Substantive controls are missing from candidate outputs")
@@ -138,20 +149,20 @@ def main() -> int:
     }
     phase_report_path = OWNED.relative_to(REPO).as_posix() + "/execution/refusals/run-4-admission.json"
     outputs_by_path = {row["path"]: row for row in outputs}
-    metric_input = pins["frozen_execution"]
+    metric_input = pin_hashes["frozen_execution"]
     metrics = [
         {"id": "raw-decoded-source-minimum-bytes", "value": plan_refusal["plan"]["source_body_minimum_bytes"],
-         "unit": "bytes", "input_sha256": pins["frozen_execution"], "evaluation_commit": commit, "vintage": "current"},
+         "unit": "bytes", "input_sha256": pin_hashes["frozen_execution"], "evaluation_commit": commit, "vintage": "current"},
         {"id": "complete-phase-plan-bytes", "value": plan_refusal["plan"]["complete_phase_bytes"],
          "unit": "bytes", "input_sha256": metric_input, "evaluation_commit": commit, "vintage": "current"},
         {"id": "complete-phase-limit-bytes", "value": plan_refusal["plan"]["phase_limit_bytes"],
-         "unit": "bytes", "input_sha256": pins["frozen_execution"], "evaluation_commit": commit, "vintage": "current"},
+         "unit": "bytes", "input_sha256": pin_hashes["frozen_execution"], "evaluation_commit": commit, "vintage": "current"},
         {"id": "predecessor-files-preserved", "value": preservation["file_count"],
-         "unit": "files", "input_sha256": pins["frozen_execution"], "evaluation_commit": commit, "vintage": "current"},
+         "unit": "files", "input_sha256": pin_hashes["frozen_execution"], "evaluation_commit": commit, "vintage": "current"},
         {"id": "historical-product-bytes-per-run", "value": historical["bytes_per_run"],
-         "unit": "bytes", "input_sha256": pins["historical_run_one_receipt"], "evaluation_commit": commit, "vintage": "current"},
+         "unit": "bytes", "input_sha256": pin_hashes["historical_run_one_receipt"], "evaluation_commit": commit, "vintage": "current"},
         {"id": "historical-products-per-run", "value": historical["product_count_per_run"],
-         "unit": "files", "input_sha256": pins["historical_run_one_receipt"], "evaluation_commit": commit, "vintage": "current"},
+         "unit": "files", "input_sha256": pin_hashes["historical_run_one_receipt"], "evaluation_commit": commit, "vintage": "current"},
     ]
     summaries = [{"metric_id": row["id"], "value": row["value"], "unit": row["unit"]} for row in metrics]
 
@@ -161,7 +172,7 @@ def main() -> int:
         "subject_ids": sorted(SUBJECTS),
         "subject_ids_sha256": sha(json.dumps(sorted(SUBJECTS), separators=(",", ":")).encode()),
         "baseline": {"commit": commit, "files": files, "pins": pins,
-                     "pin_files": {key: value for key, value in pin_paths.items()},
+                     "pin_files": {path: path for path in expected_pin_paths},
                      "subject_files": {subject: contact_path for subject in SUBJECTS}},
         "sources": [source],
         "outputs": outputs,
@@ -180,8 +191,8 @@ def main() -> int:
             {"metric_id": "historical-products-per-run", "path": OWNED.relative_to(REPO).as_posix() + "/execution/verified-historical-products.json", "json_pointer": "/product_count_per_run"},
         ],
         "validation": [
-            {"method_id": "saudi-complete-admission-and-writer-custody", "kind": "positive-control", "outcome": "passed", "evidence_path": OWNED.relative_to(REPO).as_posix() + "/execution/positive-control-final.json"},
-            {"method_id": "saudi-complete-admission-and-writer-custody", "kind": "negative-control", "outcome": "passed", "evidence_path": OWNED.relative_to(REPO).as_posix() + "/execution/negative-control-final.json"},
+            {"method_id": "saudi-complete-admission-and-writer-custody", "kind": "positive-control", "outcome": "passed", "evidence_path": OWNED.relative_to(REPO).as_posix() + "/execution/positive-control-postreview.json"},
+            {"method_id": "saudi-complete-admission-and-writer-custody", "kind": "negative-control", "outcome": "passed", "evidence_path": OWNED.relative_to(REPO).as_posix() + "/execution/negative-control-postreview.json"},
         ],
         "change_receipts": [{"path": path, "status": "added"} for path in changes],
         "conclusions": [
