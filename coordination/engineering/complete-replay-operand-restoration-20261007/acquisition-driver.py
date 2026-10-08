@@ -174,6 +174,24 @@ def inventory_preview(adapter, pin):
     return inventory
 
 
+def admit_previews(adapter, pins, *, runtime_bytes, runtime_verified, output_reserve):
+    """Admit complete discovery inputs before opening predecessor inventories.
+
+    Selected predecessor products remain unknown here. The subsequent Phase
+    admits those additional whole products before consuming any of them.
+    """
+    need(runtime_verified is True and type(runtime_bytes) is int and runtime_bytes > 0,
+         'Frozen actual runtime admission required before inventory preview')
+    need(type(output_reserve) is int and output_reserve >= 0,
+         'Prospective output reserve required before inventory preview')
+    actual = unique(pins)
+    need(len(actual) < 512, 'Preview descriptor bound')
+    whole_cost = sum(adapter.cost(pin) for pin in actual)
+    need(whole_cost + runtime_bytes + output_reserve + adapter.RECEIPT <= adapter.PHASE,
+         'Complete prospective discovery exceeds encoded/decoded/runtime/output bound')
+    return whole_cost
+
+
 def predecessor_operation(name):
     exact = {'sources-complete': 'complete-original-source-authentication-reconciliation',
              'candidates-complete': 'complete-candidate-bindings', 'scope': 'scope-index',
@@ -204,6 +222,11 @@ def dispatch(adapter, repo, destination, job, campaign, metadata, modules, *, ru
     pairs = {}; previews = {}
     for dependency in job['dependencies']:
         pairs[dependency] = receipt_pins(adapter, campaign/dependency)
+    admit_previews(adapter, [*[sources[name] for name in job['source_paths']],
+                            *project_pins, *[pin for pair in pairs.values() for pin in pair]],
+                   runtime_bytes=runtime_bytes, runtime_verified=runtime_verified,
+                   output_reserve=job['output_reserve'])
+    for dependency in job['dependencies']:
         previews[dependency] = inventory_preview(adapter, pairs[dependency][1])
     def products(dependency, prefix):
         return [p for p in previews[dependency]['outputs'] if Path(p['path']).name.startswith(prefix)]
@@ -403,6 +426,10 @@ def main():
     else:
         plan_pin = freeze['plan_pin']
         need(str(args.plan) == plan_pin['path'], 'Wrong root-admitted actual plan path')
+        plan_stage = (freeze['plan_publication_pin'], freeze['plan_inventory_pin'])
+        dispatch_project = unique([*project, freeze_pin, plan_pin, *plan_stage])
+        admit_previews(adapter, dispatch_project, runtime_bytes=installed_bytes,
+                       runtime_verified=True, output_reserve=0)
         plan = inventory_preview(adapter, plan_pin)
         # This small original report is a complete captured plan product. It is
         # charged through the actual whole plan input, not reread covertly in
@@ -416,8 +443,6 @@ def main():
         job = matches[0]
         # Planning inputs and metadata source are consumed in each real worker,
         # even when this operation otherwise needs only scratch index products.
-        plan_stage = (freeze['plan_publication_pin'], freeze['plan_inventory_pin'])
-        dispatch_project = unique([*project, freeze_pin, plan_pin, *plan_stage])
         receipt = dispatch(adapter, repo, campaign/job['id'], job, campaign, metadata, modules,
                            runtime_bytes=installed_bytes, runtime_verified=True, project_pins=dispatch_project,
                            plan_stage=plan_stage, before_finish=runtime_guard)

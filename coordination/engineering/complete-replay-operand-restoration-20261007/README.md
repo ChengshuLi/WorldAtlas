@@ -4,6 +4,32 @@ Engineering work item #1394 supports global campaign #1202. This directory is
 an unfinished author draft. It does not contain completed scientific replays,
 repair approval, changed geography, or a deployed map correction.
 
+Checkpoint, 2026-10-07 (America/Los_Angeles): the actual cold plan at
+`efa8e3a547f1a785b75ed78ec097ca4894d24112`, all eight complete source
+authentication jobs, and the source reconciliation finished successfully.
+They authenticate all 202 original bodies (232,466,132 encoded and
+1,350,305,291 decoded bytes) in separate admitted phases. Complete contact
+and residue reconstructions also finished: 4,889 and 343 rows respectively.
+These executions retain their original freeze; later code is not their vintage.
+
+The coordinator, cohort planner and scientific join are now explicit bounded
+adapters. The coordinator's small controls reconcile the eleven retained job
+receipts and identify `components` as the next acquisition job. Its optional
+dispatch preserves actual command, interval, exit status and complete bounded
+stdout/stderr, including failed children. Eight directed preview-admission
+controls pass; the real cold entry rejects changed code under the old freeze.
+The scientific join's synthetic fixture passes, rejects sixteen adverse cases,
+and reconstructs three complete original gzip bodies from final objects. None
+of those fixture results is a full native/scientific execution.
+
+Still required: admit and execute the complete large-ledger/source pipeline,
+freeze the independent scientific scope and actual expected input rosters,
+connect full native/numerical worker entries, retain complete proof custody,
+run input-only validation and two complete qualifying scientific executions,
+then independently review, merge, read back and clean up. Qualifying complete
+scientific executions remain **0 of 2**. Do not launch the original monolithic
+`run.py` as an acquisition shortcut.
+
 The scope is every one of the 1,294 `original-replay-mismatch` observations in
 the retained complete numeric diagnosis, covering 494 families, 49 operational
 batches and 10,419 original ordered source queries. The selector comes from all
