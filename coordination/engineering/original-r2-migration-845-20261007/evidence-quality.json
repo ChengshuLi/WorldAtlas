@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "issue": 845,
+  "lane": "engineering",
+  "worker_id": "01a10934-a3d2-74e0-84d8-366cc334bc7c",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "de506f51100568e150e51f2926a5259b71e55272",
+    "files": [
+      {
+        "path": ".openai/hosting.json",
+        "bytes": 95,
+        "sha256": "cbccb25bdf53ffec8c31a48ab5ab45ba78916bc4993b8a1b9579299ca759b7a3",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "hosted/site-r2-export.js",
+      "bytes": 3502,
+      "sha256": "b2083bdd1f61c5e0ba6f88655b86e5ab8f52b27167b161a00f14b48463ce470c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/r2-migration-destination.js",
+      "bytes": 3094,
+      "sha256": "da431bbef25e3106331d8d9b900188a25ea5b40e1b487f8e4a370bc1ced87a73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/migrate-site-r2.mjs",
+      "bytes": 2133,
+      "sha256": "bc509f2a6bd99f30060af603c9ea38d12cf45aec0a185f7fbf349d69ea5a74c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/r2-reconcile.mjs",
+      "bytes": 7149,
+      "sha256": "55b61a16c5dd4960f73c63832db25108e972027d1f6d497068386664a6d905f0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/r2-migration-http.mjs",
+      "bytes": 1987,
+      "sha256": "8e8b3679de0d150970991b369b5cae2be003574b04a48bfe51115da03dfbd169",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/prepare-site-r2-export.mjs",
+      "bytes": 3894,
+      "sha256": "356a9ce0167a681aeff59815222054908f535045925ce0037c9290a10111e1e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/r2-migration.test.mjs",
+      "bytes": 7467,
+      "sha256": "08fbaa99b52dde074ef21d5ec03c1dc10e5a4c1e92cebab60c77a245a932588b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/site-r2-export.test.mjs",
+      "bytes": 3638,
+      "sha256": "51842dff6f05418441e765fcb16f3959fbe46eafc2596637fef6b0d9e88701e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/README.md",
+      "bytes": 5021,
+      "sha256": "2ab78d16609fdc924aba31e2113390ec5fdbc140b996a86fcfefce2b55f634d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/destination-inventory-before.json",
+      "bytes": 235812,
+      "sha256": "d2e872e8f5d104f24eab8ee207f74f0374a422667561db51b4cf4cef56639289",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/final-controls.json",
+      "bytes": 358,
+      "sha256": "89c37e3f0d26107930129e633660bab9df6b01d342c8b1572bc2e78cd4b8e2f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/negative-control.json",
+      "bytes": 410,
+      "sha256": "2401d79bcd25a0e4d6d50a6b97a1debe5e56004aaa83ec1dd30ee239a3050239",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888.md",
+      "bytes": 2205,
+      "sha256": "701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0.md",
+      "bytes": 4887,
+      "sha256": "9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2.md",
+      "bytes": 1822,
+      "sha256": "e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/positive-control.json",
+      "bytes": 347,
+      "sha256": "f8eb6a8b74421c115021e68c883db8a85f717e2d33b31e4eb0ec246b2de4cad5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/restored-owner-readback.json",
+      "bytes": 997,
+      "sha256": "16f998922418cb040562f125cdaa9cfe9a2d17dd44aca4167bb22c349919cfd8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-one.json",
+      "bytes": 100688,
+      "sha256": "0a50c293cd7c2c0374853d90bea7524b5d35f12aa298a4e95042204d3de4ef26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-two.json",
+      "bytes": 100688,
+      "sha256": "0a50c293cd7c2c0374853d90bea7524b5d35f12aa298a4e95042204d3de4ef26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-negative.json",
+      "bytes": 97,
+      "sha256": "15b83375f9c1c3bc6f0200c16a7abe9e6d76f2374f2fa2179a24fbdcf55b4bda",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package-second.json",
+      "bytes": 97600,
+      "sha256": "51a4953a63bb68035c3b70c95e53e9d7e566adf1e71c848b08bddcf2df36b5e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package.json",
+      "bytes": 97600,
+      "sha256": "51a4953a63bb68035c3b70c95e53e9d7e566adf1e71c848b08bddcf2df36b5e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-final.log",
+      "bytes": 1140,
+      "sha256": "ff475cec826cccfc5efb169548e28d47417ad881dba2f9b5489c3a65de9cc84a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests.log",
+      "bytes": 1028,
+      "sha256": "6f617f18c32707e1acdbb0b5201b02f40c5bddfe65603bb85bb73e740fb5fd4d",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "lossless-migration-controls",
+      "kind": "code",
+      "description": "Read-only source wrapper, create-only destination, complete bounded inventory, conditional full byte/metadata verification, original package preservation.",
+      "software": "Node24; esbuild from preserved Site dependency runtime",
+      "units": "object bytes, checksums, preservation controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/site-r2-export.test.mjs test/r2-migration.test.mjs",
+    "node scripts/prepare-site-r2-export.mjs ABSOLUTE_SITE_ROOT EXACT_SITE24_COMMIT ABSOLUTE_ESBUILD_MODULE FRESH_RECEIPT"
+  ],
+  "change_receipts": [
+    {
+      "path": "hosted/site-r2-export.js",
+      "status": "added"
+    },
+    {
+      "path": "hosted/r2-migration-destination.js",
+      "status": "added"
+    },
+    {
+      "path": "scripts/migrate-site-r2.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/r2-reconcile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/r2-migration-http.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/prepare-site-r2-export.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/r2-migration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/site-r2-export.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/destination-inventory-before.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/final-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/restored-owner-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package-second.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "validation": [
+    {
+      "method_id": "lossless-migration-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/original-r2-migration-845-20261007/final-controls.json"
+    },
+    {
+      "method_id": "lossless-migration-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/original-r2-migration-845-20261007/negative-control.json"
+    }
+  ]
+}

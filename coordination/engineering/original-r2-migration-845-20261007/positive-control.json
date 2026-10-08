@@ -1,0 +1,1 @@
+{"method_id":"lossless-migration-controls","kind":"positive-control","outcome":"passed","entry_points":["migrate-site-r2.run","prepare-site-r2-export.prepare","site-r2-export.fetch","r2-migration-destination.fetch"],"checks":"Nine fixture tests pass; two actual Site24 wrapper builds preserve 520 whole members and yield identical worker bytes."}
