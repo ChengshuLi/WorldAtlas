@@ -73,7 +73,8 @@ def main() -> None:
                      for identity, path in execution["subject_files"].items()}
 
     candidate_names = ["README.md", "admission.py", "run_controls.py", "preflight.py", "guarded_reproduce.py",
-                       "build_manifest.py", "admission-controls.json", "admission-assessment.json"]
+                       "build_manifest.py", "admission-controls.json", "admission-controls-final.json",
+                       "admission-assessment.json", "validation-positive.json", "validation-negative.json"]
     outputs = [descriptor(OWNED + name, (ROOT / OWNED / name).read_bytes()) for name in candidate_names]
 
     source_ids = ["geoBoundaries IND ADM3 2018", "Original Central India admission ledger",
@@ -173,6 +174,12 @@ def main() -> None:
         "methods": [{"id": "whole-input-admission-and-source-free-audit",
                      "description": "Re-read each declared encoded input by immutable Git path and hash; use only gzip trailer size and retained chunk receipt sizes for decoded-body arithmetic; run fail-closed synthetic input, aggregate, identity, output and preservation controls. The original gzip body is not decoded.",
                      "software": "Python standard library 3.x; Node.js evidence-quality validator at the checked repository head", "units": "bytes and scoped administrative record counts", "kind": "measurement"}],
+        "validation": [
+            {"method_id": "whole-input-admission-and-source-free-audit", "kind": kind,
+             "outcome": "passed", "evidence_path": OWNED + filename}
+            for kind, filename in [("positive-control", "validation-positive.json"),
+                                   ("negative-control", "validation-negative.json")]
+        ],
         "metrics": metrics, "summaries": summaries, "conclusions": conclusions,
         "stages": {"research": "partial", "implementation": "proposed", "geographic_approval": "unapproved"},
         "commands": ["python3 research/geography/central-india-admission-1339-20261008/run_controls.py",

@@ -11,6 +11,11 @@ import tempfile
 import types
 
 HERE = Path(__file__).resolve().parent
+METHOD_ID = "whole-input-admission-and-source-free-audit"
+CONTROL_FILES = {
+    "positive-control": HERE / "validation-positive.json",
+    "negative-control": HERE / "validation-negative.json",
+}
 import admission
 import preflight
 
@@ -88,6 +93,16 @@ def preflight_output_collision_control() -> dict:
         return {"control": "preflight-existing-assessment-collision-preserves-sentinel",
                 "passed": True, "sentinel_sha256_before_after": before,
                 "sentinel_preserved": True}
+
+
+def retain_exact_json(path: Path, value: dict) -> None:
+    raw = (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8")
+    try:
+        with path.open("xb") as stream:
+            stream.write(raw)
+    except FileExistsError:
+        if path.read_bytes() != raw:
+            raise RuntimeError(f"refusing to replace different retained control bytes: {path.name}")
 
 
 def run() -> dict:
@@ -190,4 +205,19 @@ def run() -> dict:
 
 
 if __name__ == "__main__":
-    print(json.dumps(run(), sort_keys=True, indent=2))
+    result = run()
+    control_by_id = {row["control"]: row for row in result["controls"]}
+    positive = control_by_id["whole-body-admitted-at-33554432"]
+    negative_ids = ["whole-body-refused-at-33554433", "source-plus-geography-single-phase-cap",
+                    "refusal-stops-producer-before-product-creation",
+                    "preflight-existing-assessment-collision-preserves-sentinel"]
+    receipts = {
+        "positive-control": {"method_id": METHOD_ID, "kind": "positive-control", "outcome": "passed",
+                             "control": positive},
+        "negative-control": {"method_id": METHOD_ID, "kind": "negative-control", "outcome": "passed",
+                             "controls": [control_by_id[name] for name in negative_ids]},
+    }
+    for kind, path in CONTROL_FILES.items():
+        retain_exact_json(path, receipts[kind])
+    retain_exact_json(HERE / "admission-controls-final.json", result)
+    print(json.dumps(result, sort_keys=True, indent=2))

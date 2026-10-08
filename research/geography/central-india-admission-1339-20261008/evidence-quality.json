@@ -1666,7 +1666,19 @@
       "status": "added"
     },
     {
+      "path": "research/geography/central-india-admission-1339-20261008/admission-controls-final.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/central-india-admission-1339-20261008/validation-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/central-india-admission-1339-20261008/validation-negative.json",
       "status": "added"
     },
     {
@@ -1743,8 +1755,8 @@
   "outputs": [
     {
       "path": "research/geography/central-india-admission-1339-20261008/README.md",
-      "bytes": 5959,
-      "sha256": "46c499e905338a5cf5f8392a948b81f3e8cf421664cbb4f3c34374dc1902c759",
+      "bytes": 6139,
+      "sha256": "3c5e3393390eedbdf6f7c72dad6708f729a1eec97a6c875c92e472997c088234",
       "hash_kind": "file-bytes"
     },
     {
@@ -1755,8 +1767,8 @@
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/run_controls.py",
-      "bytes": 10343,
-      "sha256": "486f78907bd5e2aab5943e2f6f6b4f98abaaef2ca30241c3378d45a689ed97ff",
+      "bytes": 11876,
+      "sha256": "dfe817afbf6971a4917ee85a69b6929950ae8a068cebf7ad247e3d96a1ee0c40",
       "hash_kind": "file-bytes"
     },
     {
@@ -1773,8 +1785,8 @@
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/build_manifest.py",
-      "bytes": 18142,
-      "sha256": "7271387dfc82308560f66307d391086f40376c9aea05330ce486a0a42f11a51e",
+      "bytes": 18615,
+      "sha256": "4188894a74e69325c6cc30122938400b62e18c137963903c631343984cd1bec5",
       "hash_kind": "file-bytes"
     },
     {
@@ -1784,9 +1796,27 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "research/geography/central-india-admission-1339-20261008/admission-controls-final.json",
+      "bytes": 2434,
+      "sha256": "a52c7684718cadd59b394c39b988f92f94bc8b97c6aaa5c36b5b0618910238ce",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
       "bytes": 33310,
       "sha256": "abf53880ac4cebac11ce5aaaee472f803393cd18947209cb24ea0ad492bd6ec9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-india-admission-1339-20261008/validation-positive.json",
+      "bytes": 207,
+      "sha256": "a099636a6d70e868db501bcb6218e140c8cfa5d1b1bcd98413816a9d42b81024",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-india-admission-1339-20261008/validation-negative.json",
+      "bytes": 670,
+      "sha256": "97964549ffb3582bde6efe8824d98e4714fdcf1aab72f9e558ef1ad920165e15",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1874,6 +1904,20 @@
       "software": "Python standard library 3.x; Node.js evidence-quality validator at the checked repository head",
       "units": "bytes and scoped administrative record counts",
       "kind": "measurement"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "whole-input-admission-and-source-free-audit",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/central-india-admission-1339-20261008/validation-positive.json"
+    },
+    {
+      "method_id": "whole-input-admission-and-source-free-audit",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/central-india-admission-1339-20261008/validation-negative.json"
     }
   ],
   "metrics": [
