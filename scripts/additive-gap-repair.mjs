@@ -534,7 +534,7 @@ function additiveProposalStage(repo,request) {
   const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:ruleSha,base_reference:baseReference,parent_inventory:request.parent,
     scope_ids:sourceRows.map(row=>row.component_id).sort(),assigned_cells:cells,rows:sourceRows.map(row=>row.component_id===selected.component_id?
       {component_id:row.component_id,disposition:cells?'assigned':'zero-cell',target_id:target.id,pixelIndex:owner.index,
-       base_geometry_sha256:footprintValueSha256(target.geometry),geometry:row.candidate,geometry_sha256:footprintValueSha256(row.candidate),
+       base_geometry:target.geometry,base_geometry_sha256:footprintValueSha256(target.geometry),geometry:row.candidate,geometry_sha256:footprintValueSha256(row.candidate),
        source_receipt_sha256:get(spec.facts_path).pin.sha256,native_cells:cells}:
       {component_id:row.component_id,disposition:'awaiting-evidence',source_compatible:row.source_compatible,source_limits:row.limits}).sort((a,b)=>a.component_id.localeCompare(b.component_id))};
   const ledgerBody=canonical(ledger),ledgerSha=sha(ledgerBody),feature={...target,pixelIndex:owner.index,additiveFootprint:{version:1,kind:'retained-base-plus-additions',
@@ -545,8 +545,8 @@ function additiveProposalStage(repo,request) {
   const boundsPin=get(spec.bounds_path).pin,encodedBounds=readPin(repo,Object.fromEntries(Object.entries(boundsPin).filter(([key])=>!['uncompressed_bytes','uncompressed_sha256'].includes(key))));
   const patchBody=canonical(patch),asset=(name,body)=>({path:'additive-repairs/'+name,bytes:body.length,sha256:sha(body)});
   const release={reference_release:effectiveReference,additiveRelease:{version:1,kind:'retained-native-base-plus-delta-v1',base_reference:baseReference,effective_reference:effectiveReference,
-    ledger:asset('ledger-add031.json',ledgerBody),patch:asset('patch-add031.json',patchBody),owner_roster:{...asset('owners-add031.json.gz',encodedBounds),encoding:'gzip',decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256}}};
-  const assets=[{name:'ledger-add031.json',body:ledgerBody},{name:'patch-add031.json',body:patchBody},{name:'feature.json',body:canonical(feature)},
+    base_manifest:asset('base-native-manifest.json',get(spec.manifest_path).body),ledger:asset('ledger-add031.json',ledgerBody),patch:asset('patch-add031.json',patchBody),owner_roster:{...asset('owners-add031.json.gz',encodedBounds),encoding:'gzip',decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256}}};
+  const assets=[{name:'base-native-manifest.json',body:get(spec.manifest_path).body},{name:'ledger-add031.json',body:ledgerBody},{name:'patch-add031.json',body:patchBody},{name:'feature.json',body:canonical(feature)},
     {name:'owners-add031.json.gz',body:encodedBounds,decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256},
     {name:'release-envelope.json',body:canonical(release)},{name:'owner-window.json',body:canonical(oldOwnerRows)}];
   return {rows:[{component_id:selected.component_id,target_id:target.id,native_cells:cells,effective_reference:effectiveReference,

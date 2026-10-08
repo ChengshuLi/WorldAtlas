@@ -129,9 +129,14 @@ The explicit selected release uses the distinct
 `worldatlas-effective-native-footprints:v1` domain. Its reference contains the
 literal complete base footprint hash and unchanged hierarchy hash; its effective
 hash includes every selected target, stable owner, complete primitive, rule and
-ledger binding. The normal loader independently streams the original legacy
-`[id, geometry]` hash over **all** loaded base features once, before exposing any
-addition. It then authenticates the whole selected ledger and patch and derives
+ledger binding. The initial native loader keeps unaffected catalog geometries null and does not
+fetch world polygons. It authenticates the whole independently selected native
+manifest and compares every actual decoded native word block against its original
+part hash, including repackaged startup transports. Selected targets retain their
+complete base geometry in the whole ledger. Geometry-dependent operations fetch
+and verify the complete unique original geometry roster and literal legacy
+`[id, geometry]` digest before use; partial/null scientific geometry rejects.
+The native loader authenticates the whole selected ledger and patch and derives
 the exact complete effective view. It reads the selected native manifest's whole
 original bounds gzip (encoded and decoded hashes), comparing every identity,
 owner and parent. The old native manifest remains unchanged; a verified view
