@@ -8,6 +8,7 @@ import hashlib
 import io
 import importlib.util
 import json
+import os
 import pathlib
 import re
 import resource
@@ -28,6 +29,12 @@ MAX_INPUT_BYTES = 256 * 1024 * 1024
 MAX_OUTPUT_BYTES = 12 * 1024 * 1024
 MAX_RSS_BYTES = 768 * 1024 * 1024
 MAX_SECONDS = 1200
+MIN_SYSTEM_FREE_PERCENT = 40
+WORKTREE_CAP_BYTES = 1024 * 1024 * 1024
+SCRATCH_CAP_BYTES = 512 * 1024 * 1024
+FINAL_EVIDENCE_CAP_BYTES = 512 * 1024 * 1024
+DISK_RESERVATION_BYTES = WORKTREE_CAP_BYTES + SCRATCH_CAP_BYTES + FINAL_EVIDENCE_CAP_BYTES
+MAX_CONTROL_OUTPUT_BYTES = 1 * 1024 * 1024
 RUNTIME_BUNDLE = OWNED + "inputs/runtime/runtime-bundle.tar.gz"
 _RUNTIME_TEMP_DIR = None
 CONTACTS = {
@@ -395,7 +402,81 @@ def output_product_context(baseline, products, catalogue, metadata, attribution,
     return output
 
 
-def run(repo, commit, vintage):
+def _directory_bytes(path):
+    total = 0
+    for root, directories, files in os.walk(path, followlinks=False):
+        for name in directories + files:
+            target = pathlib.Path(root) / name
+            if target.is_symlink():
+                raise ValueError(f"Symlink in admitted storage tree: {target}")
+            if target.is_file():
+                total += target.stat().st_size
+    return total
+
+
+def admit_run_capacity(repo, baseline, vintage, runtime_manifest, coordinated_window_id):
+    """Admit RAM, disk and every output destination before constructing geometry."""
+    if not isinstance(coordinated_window_id, str) or not re.fullmatch(r"[A-Za-z0-9._:-]{8,128}", coordinated_window_id):
+        raise ValueError("An explicit coordinator-issued GIS memory-window ID is required")
+    pressure = subprocess.check_output(["memory_pressure"], text=True, stderr=subprocess.STDOUT)
+    match = re.search(r"System-wide memory free percentage:\s*(\d+)%", pressure)
+    if match is None:
+        raise ValueError("Could not measure system-wide free memory before GIS")
+    free_percent = int(match.group(1))
+    if free_percent < MIN_SYSTEM_FREE_PERCENT:
+        raise ValueError("System-wide free memory is below the GIS admission threshold")
+    disk_free = shutil.disk_usage(repo).free
+    if disk_free < DISK_RESERVATION_BYTES:
+        raise ValueError("Free disk space is below the admitted worktree/scratch/evidence reserves")
+    worktree_bytes = _directory_bytes(pathlib.Path(repo) / OWNED)
+    output_reserve = 2 * MAX_OUTPUT_BYTES + 2 * MAX_CONTROL_OUTPUT_BYTES + 1024 * 1024
+    if worktree_bytes + output_reserve > WORKTREE_CAP_BYTES:
+        raise ValueError("Packet plus maximum run/control outputs exceeds its worktree cap")
+    evidence_bytes = _directory_bytes(pathlib.Path(repo) / OWNED / "vintages")
+    if evidence_bytes + output_reserve > FINAL_EVIDENCE_CAP_BYTES:
+        raise ValueError("Existing and reserved outputs exceed the final evidence cap")
+    runtime_scratch = int(runtime_manifest["captured_bytes"])
+    scratch_reserve = runtime_scratch + 128 * 1024 * 1024
+    if scratch_reserve > SCRATCH_CAP_BYTES:
+        raise ValueError("Captured runtime plus the scratch reserve exceeds the scratch cap")
+    phase_bytes = sum(baseline.consumed.values())
+    if phase_bytes + MAX_OUTPUT_BYTES + 4096 > baseline.max_phase_bytes:
+        raise ValueError("Complete input/runtime phase leaves insufficient room for the admitted run outputs")
+    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    rss_bytes = int(rss) if sys.platform == "darwin" else int(rss * 1024)
+    if rss_bytes > MAX_RSS_BYTES:
+        raise ValueError("Pre-GIS process RSS already exceeds its execution ceiling")
+    return {
+        "coordinated_window_id": coordinated_window_id,
+        "system_free_memory_percent": free_percent,
+        "minimum_system_free_memory_percent": MIN_SYSTEM_FREE_PERCENT,
+        "pre_geometry_max_rss_bytes": rss_bytes,
+        "process_rss_limit_bytes": MAX_RSS_BYTES,
+        "phase_consumed_bytes_before_geometry": phase_bytes,
+        "phase_byte_limit": baseline.max_phase_bytes,
+        "output_bytes_per_run_limit": MAX_OUTPUT_BYTES,
+        "two_run_output_reserve_bytes": 2 * MAX_OUTPUT_BYTES,
+        "two_control_output_reserve_bytes": 2 * MAX_CONTROL_OUTPUT_BYTES,
+        "current_packet_bytes": worktree_bytes,
+        "projected_worktree_bytes_with_outputs": worktree_bytes + output_reserve,
+        "worktree_cap_bytes": WORKTREE_CAP_BYTES,
+        "current_evidence_bytes": evidence_bytes,
+        "projected_evidence_bytes_with_outputs": evidence_bytes + output_reserve,
+        "final_evidence_cap_bytes": FINAL_EVIDENCE_CAP_BYTES,
+        "runtime_scratch_bytes": runtime_scratch,
+        "projected_scratch_bytes": scratch_reserve,
+        "scratch_cap_bytes": SCRATCH_CAP_BYTES,
+        "free_disk_bytes": disk_free,
+        "disk_reservation_bytes": DISK_RESERVATION_BYTES,
+        "destination_vintages": [
+            "source-fitness-run-01", "source-fitness-run-02",
+            "source-fitness-controls-01", "source-fitness-controls-02",
+        ],
+        "status": "admitted",
+    }
+
+
+def run(repo, commit, vintage, coordinated_window_id):
     started = time.monotonic()
     baseline, evidence, contract_helpers, config = bootstrap(repo, commit, phase="overlay")
     if sum(baseline.consumed.values()) > MAX_INPUT_BYTES:
@@ -405,6 +486,8 @@ def run(repo, commit, vintage):
     shapely, shape, runtime_manifest, runtime_manifest_sha256 = load_spatial_runtime(baseline, config)
     loaded = load_inputs(baseline, contract_helpers, config)
     pins, context, pointsets, products, contacts, catalogue, metadata, attribution = loaded
+    admission = admit_run_capacity(repo, baseline, vintage, runtime_manifest,
+                                   coordinated_window_id)
     component_geoms = {cid: shape(feature["geometry"]) for cid, feature in pointsets.items()}
     source_geoms = {source_id: [(f"{source_id}:{f['properties']['shapeID']}", f, shape(f["geometry"]))
                                 for f in product["features"]]
@@ -481,6 +564,7 @@ def run(repo, commit, vintage):
                     "captured_runtime_manifest_sha256": runtime_manifest_sha256,
                     "captured_runtime_bytes": runtime_manifest["captured_bytes"],
                     "captured_runtime_file_count": runtime_manifest["captured_file_count"]},
+        "precalculation_admission": admission,
         "helper_versions": {"immutable": evidence.VERSION, "record_contracts": "pinned scripts/evidence/contracts.py"},
         "execution_pins_sha256": sha(baseline.pinned_bytes(EXECUTION_PINS)),
         "input_pins_sha256": sha(baseline.pinned_bytes(INPUT_PINS)),
@@ -498,12 +582,14 @@ def run(repo, commit, vintage):
         "run-summary.json": canonical({"status": "complete", "elapsed_seconds": elapsed,
             "max_rss_bytes": rss_bytes, "input_bytes": sum(baseline.consumed.values()),
             "row_count": len(rows), "intersecting_pair_count": result["intersecting_pair_count"],
-            "source_fitness_sha256": sha(canonical(result))}),
+        "source_fitness_sha256": sha(canonical(result)),
+        "precalculation_admission": admission}),
     }
     if elapsed > MAX_SECONDS or rss_bytes > MAX_RSS_BYTES or sum(map(len, output_files.values())) > MAX_OUTPUT_BYTES:
         raise ValueError("admitted run resource bound exceeded before publication")
     published = run.publish_bytes(output_files)
-    print(json.dumps({"status": "complete", "vintage": vintage, "publication": published,
+    print(json.dumps({"status": "complete", "vintage": vintage,
+                      "coordinated_window_id": coordinated_window_id, "publication": published,
                       "elapsed_seconds": elapsed, "max_rss_bytes": rss_bytes,
                       "row_count": len(rows), "intersecting_pair_count": result["intersecting_pair_count"]}))
 
@@ -513,8 +599,10 @@ def main():
     parser.add_argument("--repo", required=True)
     parser.add_argument("--baseline-commit", required=True)
     parser.add_argument("--vintage", required=True)
+    parser.add_argument("--coordinated-window-id", required=True)
     args = parser.parse_args()
-    run(pathlib.Path(args.repo).resolve(), args.baseline_commit, args.vintage)
+    run(pathlib.Path(args.repo).resolve(), args.baseline_commit, args.vintage,
+        args.coordinated_window_id)
 
 
 if __name__ == "__main__":

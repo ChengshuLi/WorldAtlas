@@ -139,6 +139,8 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
             "The negative controls exercise exact-scope and source-join rejection paths; they do not authenticate scientific truth.",
         ],
     }
+    if len(producer.canonical(receipt)) > producer.MAX_CONTROL_OUTPUT_BYTES:
+        raise ValueError("Directed-control receipt exceeds its admitted output budget")
     publication = run.publish({"control-receipt.json": receipt})
     print(json.dumps({"status": "pass", "vintage": control_vintage,
                       "publication": publication}, sort_keys=True))
