@@ -3,13 +3,13 @@
   "status": "PASS",
   "scientific_operations_invoked": false,
   "cap_bytes": 268435456,
-  "complete_phase_bytes": 261735752,
-  "headroom_bytes": 6699704,
+  "complete_phase_bytes": 261736556,
+  "headroom_bytes": 6698900,
   "component_totals": {
     "encoded_source_bodies": 88964941,
     "decoded_native_source_bodies": 101279150,
     "imported_runtime_files_and_python_executable": 39345592,
-    "project_code_files": 146069,
+    "project_code_files": 146873,
     "selected_native_records_output": 0,
     "scratch_reservation": 8000000,
     "generated_output_reservation": 24000000
@@ -2319,8 +2319,8 @@
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
       "role": "project-code",
-      "bytes": 68647,
-      "sha256": "4f551abeb55a01f996fcfde4e7c9939db09af75eb21ecccb2fca26a52e858add"
+      "bytes": 69451,
+      "sha256": "08780762ee08515726a965a9b3e9b24324416892ad0b2884b6f17ac4036c6e36"
     },
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
@@ -2353,15 +2353,15 @@
   },
   "process_boundary": {
     "process_scan": "no active GSHHG, Alaska, Arctic, source-fit or named geometry process observed before admission",
-    "memory_pressure_free_percent": 35,
+    "memory_pressure_free_percent": 42,
     "rss_cap_bytes": 805306368,
     "wall_deadline_seconds": 900,
     "enforcement": "sampled/cooperative; record actual terminal state and peak RSS",
-    "host_free_disk_bytes": 27760771072,
-    "managed_workspace_free_bytes": 27760832512,
+    "host_free_disk_bytes": 27673174016,
+    "managed_workspace_free_bytes": 27673174016,
     "managed_workspace_minimum_free_bytes": 10737418240,
     "managed_workspace_floor_passed": true,
-    "managed_checkout_bytes": 42948020634,
+    "managed_checkout_bytes": 42949601690,
     "managed_worker": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
     "managed_reservation_bytes": 1073741824,
     "relevant_processes": []

@@ -857,12 +857,23 @@ def main() -> None:
     positive_union_old = atlas_geoms[first_target_id]
     positive_union_candidate = candidates[first_id]
     positive_union = unary_union([positive_union_old, positive_union_candidate])
+    positive_union_old_residual = positive_union_old.difference(positive_union)
     positive_union_gain = positive_union.difference(positive_union_old)
     positive_union_expected_gain = positive_union_candidate.difference(positive_union_old)
     positive_union_control = {"kind": "positive-control-genuine-gap-union",
         "component_id": first_id, "target_source_id": first_target_id,
         "expected": "union preserves the complete old target and adds exactly the previously uncovered supported candidate",
-        "old_target_preserved": bool(positive_union.covers(positive_union_old) and positive_union_old.difference(positive_union).is_empty),
+        "old_target_preserved": bool(positive_union.covers(positive_union_old) and positive_union_old_residual.is_empty),
+        "old_target_valid": bool(positive_union_old.is_valid),
+        "union_valid": bool(positive_union.is_valid),
+        "old_target_residual": {"geometry_type": positive_union_old_residual.geom_type,
+            "is_empty": bool(positive_union_old_residual.is_empty),
+            "is_valid": bool(positive_union_old_residual.is_valid),
+            "area_raw_square_degrees_exact": positive_union_old_residual.area,
+            "area_projected_m2_exact": transform(PROJECT, positive_union_old_residual).area,
+            "bounds": list(positive_union_old_residual.bounds),
+            "geometry_sha256": sha(canonical(mapping(positive_union_old_residual)))},
+        "old_target_covered": bool(positive_union.covers(positive_union_old)),
         "candidate_retained": bool(positive_union.covers(positive_union_candidate)),
         "gain_equals_candidate_minus_old_target": bool(positive_union_gain.equals(positive_union_expected_gain)
             and positive_union_gain.symmetric_difference(positive_union_expected_gain).is_empty),
