@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "at": "2026-10-08T02:56:15.389Z",
+  "local_automations": [
+    {
+      "path": "/Users/chengshuli/.codex/automations/worldatlas-worker-recovery/automation.toml",
+      "bytes": 2058,
+      "sha256": "33b71060c4ead9d6530c4db9043732299deeadc053df3c405a547f8d68d3ab6c",
+      "status": "\"PAUSED\"",
+      "publisher_reference": false,
+      "contents_inspected": true
+    },
+    {
+      "path": "/Users/chengshuli/.codex/automations/codex-low-quota-wind-down/automation.toml",
+      "bytes": 2788,
+      "sha256": "749a9f9f2f4e6197d2814c6af4be6798f1dc0a349c64740071bf1c997ead950a",
+      "status": "\"PAUSED\"",
+      "publisher_reference": false,
+      "contents_inspected": true
+    }
+  ],
+  "original_site_automations": [],
+  "original_site_automation_inspected_during_845": true,
+  "actions": "No publisher schedule found. No automation created or changed. Current migration publisher adopts the repository prompt; other chats are not messaged or rewritten.",
+  "limits": [
+    "Local configured automations and original Site inventory only; no claim of unobservable external schedulers",
+    "Repository prompt edits do not rewrite another chat saved instructions; each publisher must read current role prompt before operations"
+  ]
+}

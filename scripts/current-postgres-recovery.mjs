@@ -70,10 +70,8 @@ export async function verifyRecoveryHosting(window,api,fetcher=fetch){
  need(state.unsettled.length===1&&state.unsettled[0].deployment_id===window.registry_deployment_id,'overlapping-publisher-recovery');
  const registered=state.unsettled[0];
  need(registered.operation_id===window.operation_id&&registered.kind==='recovery'&&registered.publisher_worker_id===window.operator_worker_id&&registered.primary_commit===window.primary_main_commit&&registered.issues.includes(window.reservation_issue??51),'recovery-operation-mismatch');
- for(const other of (await githubPages(api,prefix+'/deployments')).filter(d=>d.environment.startsWith('worldatlas-cloudflare'))){
-  const states=(await githubPages(api,prefix+'/deployments/'+other.id+'/statuses')).sort((a,b)=>b.id-a.id);
-  need(['success','failure','error'].includes(states[0]?.state),'overlapping-cloudflare-operation');
- }
+ // readPublicationState checks every Cloudflare/staging/native operation and
+ // its authorized cleanup receipt; a terminal status alone cannot prove cleanup.
  const version=window.source_marker.version===4?4:2;
  const response=await fetcher(host.origin+'/api/storage/v'+version+'/export-marker',{redirect:'error',signal:AbortSignal.timeout(30000)});
  const observed=await boundedOwnerJSON(response);

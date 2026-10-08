@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37721003469",
+  "head": "8819e98f676c50c9bf90f6e46b8f36d2a86dbbc9",
+  "state": "failed",
+  "reason": "Native ACL fixture sparse checkout omitted the newly consumed coordination/publication/cloudflare-history.json; import rejected missing authenticated bytes.",
+  "repair": "Include exact publication inputs in native fixture checkout and trigger on their changes. Native runtime was not mutated; no successful fixture claim before fresh corrected run."
+}

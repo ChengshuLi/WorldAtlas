@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "method_id": "cloudflare-publication-controls",
+  "software": "Node v24.19.0",
+  "command": "node --test --test-reporter=spec test/cloudflare-republish.test.mjs test/publication-plan.test.mjs test/publication-cloudflare.test.mjs test/current-postgres-recovery.test.mjs",
+  "test_log": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-marker-fixed.log",
+  "tests": 192,
+  "passed": 192,
+  "failed": 0,
+  "skipped": 0,
+  "code_and_source_bindings": [
+    {
+      "path": "scripts/publication-cloudflare.mjs",
+      "bytes": 11094,
+      "sha256": "6d6bf9943fbe4ad1ad13a03d6c9fc07131e89b3b1b351fb1e463175218aeff9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/cloudflare-republish.mjs",
+      "bytes": 12230,
+      "sha256": "f494593a456cff1f3b0a0ceb73380b9f0e4684af179518d139d256120a8de223",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/publication-plan.mjs",
+      "bytes": 13586,
+      "sha256": "007985ecb007f69f5d253f8327f37537b966cc0cf651ebfe1ded9301891146bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 48867,
+      "sha256": "a3d56040f21f12123c5992246b4eee8cf7183587bb4798b3d0b38fffb45c89db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/storage-export-v4-contract.js",
+      "bytes": 1259,
+      "sha256": "04dee2a99f2ba818b0698db7a6846561e35db372bf9ae33d5aec10cd7c6e9dba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 17819,
+      "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 7069,
+      "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/cloudflare-republish.test.mjs",
+      "bytes": 14271,
+      "sha256": "063e740b608fb0a87f119770056cc02d911fd8345c62476b0306310ad00c7261",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/publication-cloudflare.test.mjs",
+      "bytes": 12536,
+      "sha256": "a3d90f363d17cdae556cbdaeec10843be1d063e98682206f78f40dd364a9a3bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/publication-plan.test.mjs",
+      "bytes": 10156,
+      "sha256": "45dd1f5a0b1d0e91e174557a61c53a2fd0a87628ba93f7496e12c30ddacc0891",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 23758,
+      "sha256": "25f87aa66bb43f1e768ecaded6761312e9db88ebcb84c3b06df758a4013911a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/cloudflare-publication.mjs",
+      "bytes": 2327,
+      "sha256": "050ee67977ddbd468882d9d1764ac3dc3e266845fd03a2212bf3a7f4e68f420c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/publication/cloudflare-history.json",
+      "bytes": 4754,
+      "sha256": "f71fa8429944d5e8d9d358d3960c6b18448b7cdc08cc8149248cd0d0cac4575a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "positive_controls": [
+    "Exact explicit CF provider identity; complete actual historical registry replay",
+    "Actual producer and documented stdin CLI with faithful credential-free provider/GitHub fixtures",
+    "Two fresh identical sanitized producer output bytes; per-provider delivery delta retained"
+  ],
+  "adverse_controls": [
+    "Actually consumed history byte drift",
+    "Duplicate raw registry and operation identities",
+    "Site-only release cannot advance CF boundary",
+    "Early/late blocker, mode, issue identity, ownership, scope, dependencies, readiness and expiry changes",
+    "Full marker missing counts/contract and changed counters with original fingerprint",
+    "Native provider ID/version drift before POST",
+    "Write guard, bounded response, uncertain single POST",
+    "Existing output/file/directory/broken symlink/symlink parent preserve originals before API",
+    "Malformed/oversize stdin secret never echoed"
+  ],
+  "limits": [
+    "No live provider mutation in review fixtures",
+    "Structural/code acceptance only; live served acceptance follows reviewed merge",
+    "Older logs bind their own earlier candidate execution and are not final controls"
+  ]
+}
