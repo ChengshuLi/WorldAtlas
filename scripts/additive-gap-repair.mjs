@@ -9,6 +9,7 @@ import verifiedCandidates from './native-ownership/verified-candidates.json' wit
 import {canonicalValue, footprintValueSha256, polygonParts} from '../src/effective-footprint.js';
 import {candidateBudget, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
 
+export const SOURCE_PREMISES_VERSION='retained-land-source-premises-v1';
 export const INVENTORY_VERSION = 'complete-source-relative-gap-inventory-v1';
 export const DISPOSITIONS = ['eligible', 'assigned', 'zero-cell', 'already-resolved', 'rejected', 'awaiting-evidence'];
 const categories = new Set(['mapped-land-support', 'mapped-inland-water-support', 'mixed-source-support', 'outside-mapped-L1-context', 'unknown']);
@@ -409,6 +410,53 @@ export function admitInventoryDestination(repo, destination) {
   return sourceRoot;
 }
 
+function sourcePremiseStage(repo,request,report) {
+  const rule=request.source_rule;
+  demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===8&&Array.isArray(rule.expected_ids)
+    &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length,'Incomplete independently frozen source-rule scope');
+  const bodies=new Map();
+  for(const pin of rule.inputs){demand(pin.kind===undefined&&!bodies.has(pin.path),'Foreign/duplicate source-rule input');bodies.set(pin.path,{pin,body:readPin(repo,pin)});}
+  const get=name=>{const value=bodies.get(name);demand(value,'Missing complete source-rule body');return value;};
+  const scope=JSON.parse(get(rule.cases_path).body),pilot=JSON.parse(get(rule.pilot_path).body);
+  const review=JSON.parse(get(rule.review_path).body);
+  demand(review.id===rule.review_comment_id&&sha(Buffer.from(review.body))===rule.review_body_sha256
+    &&review.html_url===`https://github.com/ChengshuLi/WorldAtlas/issues/1520#issuecomment-${rule.review_comment_id}`,'Independent source-rule provenance differs');
+  demand(Array.isArray(scope.results)&&scope.results.length===scope.component_count&&scope.results.length===rule.expected_ids.length
+    &&JSON.stringify(scope.results.map(row=>row.component_id))===JSON.stringify(rule.expected_ids),'Missing/duplicate/reordered full source cases');
+  const original=new Map();
+  for(const source of rule.original_products){
+    const {pin,body}=get(source.path),product=report.products.find(row=>row.path===source.original_product_path);
+    demand(product&&product.bytes===pin.bytes&&product.sha256===pin.sha256&&product.uncompressed_bytes===pin.uncompressed_bytes
+      &&product.uncompressed_sha256===pin.uncompressed_sha256,'Source-rule original product differs from independent complete report');
+    const lines=body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated whole original source-rule product');
+    for(let ordinal=0;ordinal<lines.length;ordinal++){
+      const row=JSON.parse(lines[ordinal]);if(!rule.expected_ids.includes(row.component_id))continue;
+      demand(!original.has(row.component_id),'Duplicate original source-rule component');
+      original.set(row.component_id,{row,alias:{source:pin,ordinal,row_sha256:sha(Buffer.from(lines[ordinal]+'\n'))}});
+    }
+  }
+  demand(original.size===rule.expected_ids.length,'Missing complete original source-rule component');
+  const bankPin=request.baseline.pins.find(pin=>pin.path===request.baseline.bank_path);
+  demand(bankPin,'Missing selected full target bank');const bank=JSON.parse(readPin(repo,bankPin));
+  demand(bank.type==='FeatureCollection'&&Array.isArray(bank.features),'Missing complete installed target bank');
+  const targets=new Map();for(const feature of bank.features){demand(!targets.has(feature.id),'Duplicate installed target identity');targets.set(feature.id,feature);}
+  const rows=scope.results.map(sourceCase=>{
+    const record=original.get(sourceCase.component_id),target=targets.get(sourceCase.atlas_target_id);
+    demand(target,'Source-rule target absent from authenticated installed bank');
+    if(sourceCase.component_id===pilot.component_id)demand(JSON.stringify(canonicalValue(target))===JSON.stringify(canonicalValue(pilot.before)),
+      'Pilot before image is stale against selected bank');
+    const premises=retainedLandSourcePremises({record:record.row,candidate:sourceCase.candidate_geometry,sourceCase,sourceScope:scope,target});
+    return {...premises,disposition:premises.source_compatible?'awaiting-native-exclusion':'awaiting-evidence',
+      candidate:sourceCase.candidate_geometry,candidate_feature_sha256:record.row.candidate_feature_sha256,
+      original_candidate_geometry_sha256:record.row.candidate_geometry_sha256,target_id:target.id,target_geometry_sha256:footprintValueSha256(target.geometry),
+      original_record:record.alias,source_case:{source:get(rule.cases_path).pin,ordinal:scope.results.indexOf(sourceCase),row_sha256:sha(canonical(sourceCase))}};
+  });
+  return {rows,facts:{version:1,operation:SOURCE_PREMISES_VERSION,parent:request.parent,components:rows.length,
+    source_compatible:rows.filter(row=>row.source_compatible).length,awaiting_native_exclusion:rows.filter(row=>row.source_compatible).length,
+    assigned_cells:0,source_rule:rule,limits:['Derived complete authenticated predecessor source premises; no new physical authority approval.',
+      'Current full native owner exclusion and explicit effective-release proof remain required. No cell assigned by this stage.']}};
+}
+
 // One genuine detached whole-shard acquisition per invocation. The parent
 // report supplies the complete denominator; an independently frozen scope
 // supplies exact selected IDs/ordered feature hashes. No all-world JSON lives
@@ -432,7 +480,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
   const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
   const request = JSON.parse(readPin(sourceRoot,requestPin));
-  demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION].includes(request.operation)
+  demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION,SOURCE_PREMISES_VERSION].includes(request.operation)
     && JSON.stringify(canonicalValue(request.executed_code)) === JSON.stringify(canonicalValue(project)),
     'Foreign request operation/head');
   demand(typeof destination === 'string' && destination === request.destination
@@ -448,9 +496,9 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     demand(stat.isFile() && !stat.isSymbolicLink() && fs.realpathSync(file) === file && stat.size === pin.bytes && sha(fs.readFileSync(file)) === pin.sha256,
       'Actual installed module drift');
   });
-  const stagePins=request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
+  const stagePins=request.operation===SOURCE_PREMISES_VERSION?request.source_rule?.inputs:request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
   demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
-  const baselinePins=request.operation===INVENTORY_VERSION?(request.baseline?.pins??[]):[];
+  const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
   const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
   const runtimeRead=()=>{
@@ -472,7 +520,10 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     && request.parent.roster_sha256 === report.complete_roster_sha256, 'Wrong complete original report');
   const resolutions=baselinePins.length?readBaselineResolutions(sourceRoot,request.baseline):undefined;
   let result;
-  if(request.operation===INVENTORY_VERSION){
+  if(request.operation===SOURCE_PREMISES_VERSION){
+    demand(resolutions,'Complete selected-bank reconciliation required');
+    result=sourcePremiseStage(sourceRoot,request,report);
+  }else if(request.operation===INVENTORY_VERSION){
   demand(/^components-[0-9]{3}\.jsonl\.gz$/.test(request.original_product_path), 'Only complete original component shards accepted');
   const product = report.products.find(pin=>pin.path === request.original_product_path);
   demand(product && ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>product[key] === request.source[key]),
