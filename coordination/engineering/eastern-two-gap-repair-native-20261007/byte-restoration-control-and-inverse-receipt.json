@@ -1,0 +1,515 @@
+{
+  "actual_entry_terminal_exit": 0,
+  "archived_actual_entry_source_directory": "coordination/engineering/eastern-two-gap-repair-native-20261007/vintages/byte-inverse-before-checkout",
+  "byte_controls": {
+    "controls": [
+      {
+        "case": "complete-byte-positive",
+        "status": "PASS"
+      },
+      {
+        "case": "ambiguous-copy-literal",
+        "status": "PASS"
+      },
+      {
+        "case": "unknown-operation",
+        "status": "PASS"
+      },
+      {
+        "case": "negative-offset",
+        "status": "PASS"
+      },
+      {
+        "case": "fractional-offset",
+        "status": "PASS"
+      },
+      {
+        "case": "boolean-offset",
+        "status": "PASS"
+      },
+      {
+        "case": "source-range-overrun",
+        "status": "PASS"
+      },
+      {
+        "case": "foreign-source",
+        "status": "PASS"
+      },
+      {
+        "case": "incomplete-output",
+        "status": "PASS"
+      },
+      {
+        "case": "source-byte-change",
+        "status": "PASS"
+      },
+      {
+        "case": "expected-hash-change",
+        "status": "PASS"
+      },
+      {
+        "case": "foreign-mode",
+        "status": "PASS"
+      },
+      {
+        "case": "oversized-target",
+        "status": "PASS"
+      },
+      {
+        "case": "noncanonical-base64-padding-bits",
+        "status": "PASS"
+      },
+      {
+        "case": "invalid-base64",
+        "status": "PASS"
+      },
+      {
+        "case": "copy-bound-before-source-operation",
+        "status": "PASS"
+      },
+      {
+        "case": "literal-bound-before-output-allocation",
+        "status": "PASS"
+      },
+      {
+        "case": "wrong-whole-body-binding",
+        "status": "PASS"
+      }
+    ],
+    "scope": "Actual byte inverse only; no source/geometry/stock-consumer generation",
+    "status": "PASS"
+  },
+  "checkout_and_lifetime_controls": {
+    "checks": [
+      {
+        "name": "absent-native-selection-explicit-legacy",
+        "status": "PASS"
+      },
+      {
+        "name": "different-native-selection-explicit-legacy",
+        "status": "PASS"
+      },
+      {
+        "name": "selected-v8-missing-restoration-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "selected-v8-foreign-prior-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-selected-native-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-selected-release-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "package-only-default-remains-strict",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-checkout-root-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "unknown-preparation-mode-rejects",
+        "status": "PASS"
+      },
+      {
+        "name": "checkout-cannot-spoof-package-stage",
+        "status": "PASS"
+      },
+      {
+        "name": "selection-symlink-rejected-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "oversized-metadata-rejected-before-read",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed-metadata-rejected-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "verified-staging-release-full-positive",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-staging-file-kept-on-rejection",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-empty-staging-directory-kept",
+        "status": "PASS"
+      },
+      {
+        "name": "missing-staging-file-rejects",
+        "status": "PASS"
+      },
+      {
+        "name": "same-size-changed-staging-body-kept",
+        "status": "PASS"
+      },
+      {
+        "name": "staging-leaf-symlink-kept",
+        "status": "PASS"
+      },
+      {
+        "name": "staging-path-traversal-before-removal",
+        "status": "PASS"
+      },
+      {
+        "name": "conflicting-staging-pins-before-removal",
+        "status": "PASS"
+      }
+    ],
+    "scope": "actual production boundary functions with tiny ordinary inputs; complete restoration positive retained separately; no package build/GIS",
+    "status": "PASS"
+  },
+  "checkout_controls": {
+    "checks": [
+      {
+        "name": "absent-native-selection-explicit-legacy",
+        "status": "PASS"
+      },
+      {
+        "name": "different-native-selection-explicit-legacy",
+        "status": "PASS"
+      },
+      {
+        "name": "selected-v8-missing-restoration-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "selected-v8-foreign-prior-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "package-only-default-remains-strict",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-checkout-root-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "unknown-preparation-mode-rejects",
+        "status": "PASS"
+      },
+      {
+        "name": "checkout-cannot-spoof-package-stage",
+        "status": "PASS"
+      },
+      {
+        "name": "selection-symlink-rejected-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "oversized-metadata-rejected-before-read",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed-metadata-rejected-before-write",
+        "status": "PASS"
+      }
+    ],
+    "scope": "actual production boundary functions with tiny ordinary inputs; complete restoration positive retained separately; no package build/GIS",
+    "status": "PASS"
+  },
+  "checkout_controls_after_exact_selection_guards": {
+    "checks": [
+      {
+        "name": "absent-native-selection-explicit-legacy",
+        "status": "PASS"
+      },
+      {
+        "name": "different-native-selection-explicit-legacy",
+        "status": "PASS"
+      },
+      {
+        "name": "selected-v8-missing-restoration-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "selected-v8-foreign-prior-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-selected-native-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-selected-release-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "package-only-default-remains-strict",
+        "status": "PASS"
+      },
+      {
+        "name": "foreign-checkout-root-rejects-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "unknown-preparation-mode-rejects",
+        "status": "PASS"
+      },
+      {
+        "name": "checkout-cannot-spoof-package-stage",
+        "status": "PASS"
+      },
+      {
+        "name": "selection-symlink-rejected-before-write",
+        "status": "PASS"
+      },
+      {
+        "name": "oversized-metadata-rejected-before-read",
+        "status": "PASS"
+      },
+      {
+        "name": "malformed-metadata-rejected-before-write",
+        "status": "PASS"
+      }
+    ],
+    "scope": "actual production boundary functions with tiny ordinary inputs; complete restoration positive retained separately; no package build/GIS",
+    "status": "PASS"
+  },
+  "complete_current_code_image_inverse": {
+    "all_whole_actual_code_and_original_git_bodies_modes_verified": true,
+    "encoded_bytes": 109692,
+    "files": 50,
+    "index_bytes": 31947,
+    "index_sha256": "d0fd2d31128181de9d4e2fd250744607f6251036019d81d2635138700734acb6",
+    "scope": "31 current context source bodies and19 immutable new-main dispatch/legacy helper bodies; no stock build or GIS",
+    "status": "PASS",
+    "whole_bytes": 410320
+  },
+  "complete_entry": {
+    "command": [
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/1295-byte-inverse-entry.mjs"
+    ],
+    "finished_at": "2026-10-08T02:41:57.810Z",
+    "receipt": {
+      "byte_inverse": {
+        "all_original_image_whole_bodies_and_modes_verified": true,
+        "current_context_members": 34,
+        "original_canonical_index_sha256": "3a343812f25b02f4472dbe5338a72e9541e4de180b916e0cf8bbc9a00464f097",
+        "original_prior_index_sha256": "7c555e617c6843b070a0799088420ff535f210c2cf8d795b437230d79402c916",
+        "original_world_files": 34,
+        "scientific_producers_invoked": false
+      },
+      "canonical_index_sha256": "1dad6b42f55a2291a6884f302b31308d9b4323daf4536fc93a41efc7dee1695d",
+      "canonical_paths": 302,
+      "issue": 1295,
+      "original_prior_index_sha256": "e34743a84df2aaaa668b4e7b23c4f6870379edfe7eb88a427d6005b47333a393",
+      "original_vintages_and_unknowns_preserved": true,
+      "priorImage": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/1295-byte-inverse-entry-current/.cache/1295-canonical-RqMRjN/original-v1-image",
+      "prior_index_sha256": "ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe",
+      "prior_paths": 122,
+      "scientific_producers_invoked": false,
+      "temporary": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/1295-byte-inverse-entry-current/.cache/1295-canonical-RqMRjN",
+      "version": 1
+    },
+    "scope": "actual complete production restoration entry on a private explicitly enumerated transport image; not normal package materialization/build",
+    "source_and_geometry_producers_invoked": false,
+    "source_files": [
+      {
+        "bytes": 71541,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/index.json",
+        "sha256": "1dad6b42f55a2291a6884f302b31308d9b4323daf4536fc93a41efc7dee1695d"
+      },
+      {
+        "bytes": 15995216,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-000.bin.gz",
+        "sha256": "f0baac8f5e9fba205833d504436c279f6b9aa7bd154e96fa3cdb13ca5b517589"
+      },
+      {
+        "bytes": 14069518,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-001.bin.gz",
+        "sha256": "2a3a8b2e2322b538aaffbe7d8fce643341d9c9ec6ef4fa088fb0e6e62547c9d2"
+      },
+      {
+        "bytes": 15161772,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-002.bin.gz",
+        "sha256": "d3e75169c42ef647fa5a7a0c02b183455f8ad20864760218bd26f60abdad76ef"
+      },
+      {
+        "bytes": 14433443,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-003.bin.gz",
+        "sha256": "e0845884817d4bdb1984f0c256f781ce76edd7aa88cd9354cbdd7fc40f51a7f9"
+      },
+      {
+        "bytes": 9571923,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-004.bin.gz",
+        "sha256": "49c5f751446dc646c410a7d2fa25b5688b1e52caa92843f7bc0e2aae8ea9a7fd"
+      },
+      {
+        "bytes": 10768353,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-005.bin.gz",
+        "sha256": "5c4fa437ac89857b1dffe3331e2fdbc3b93fb2c1d24162558bc0a65b00ec5642"
+      },
+      {
+        "bytes": 8874646,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-006.bin.gz",
+        "sha256": "d1b18e8d7fcfeff3b9cfb7ec2e6be9f87faa18b1bcd20b55699ad30b38e5bc33"
+      },
+      {
+        "bytes": 14171037,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-007.bin.gz",
+        "sha256": "ce34bfcbc6eeeb0bcce233730d85fff9fb347aa641540b998bc1eea52561f8ce"
+      },
+      {
+        "bytes": 7727109,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-008.bin.gz",
+        "sha256": "4fe9c8835533913294f691e28f39ff1f0daae7c29279af96be0f543de5633a36"
+      },
+      {
+        "bytes": 11180928,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-009.bin.gz",
+        "sha256": "d38fba1d6d1a478ff6532df21218abf550d4f5c79651bb1d47d7350b7453a1dd"
+      },
+      {
+        "bytes": 8243634,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-010.bin.gz",
+        "sha256": "c3e7b86d8b6aea53274726b08c7db66e2e221d5b7ce86bf7040bb58dbe90f0f4"
+      },
+      {
+        "bytes": 769271,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-011.bin.gz",
+        "sha256": "117f43b38a1bfda8c721378eace6bfe44832a3261c76c856d38786e2a14489f5"
+      },
+      {
+        "bytes": 27488,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/index.json",
+        "sha256": "ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe"
+      },
+      {
+        "bytes": 13727403,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/part-000.bin.gz",
+        "sha256": "bc436d19b3b36b745ae6cd28d270931189503425b6d0cd6fdb358ad50017d905"
+      },
+      {
+        "bytes": 9225158,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/part-001.bin.gz",
+        "sha256": "cef59838fe809b9f33e08af462e6c6afd558f874cb456733d27f5246bac49a67"
+      },
+      {
+        "bytes": 16546662,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/part-002.bin.gz",
+        "sha256": "be5ac3ff3ca5ce96fb06dd94a2ecba12bdc7a637d8fe4caf702032ac5f4d2906"
+      },
+      {
+        "bytes": 12409268,
+        "mode": "100644",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/part-003.bin.gz",
+        "sha256": "90da54c5c70c15c4ea2b304145288212e954aaaac4f929ae87e41b121e881160"
+      }
+    ],
+    "started_at": "2026-10-08T02:40:46.958Z",
+    "status": "PASS"
+  },
+  "earlier_current_code_image_inverse": {
+    "bytes": 249068,
+    "files": 31,
+    "full_actual_consumed_path_body_mode_git_object_equivalence": true,
+    "index_sha256": "d88ff1e96ca46f3b54dc0b37fd1ebcda36078bc51804b75c5f2458ae357d7563",
+    "scientific_producers_invoked": false,
+    "status": "PASS"
+  },
+  "entry_source_pins": {
+    "actual_invocation": 6326,
+    "pins": [
+      {
+        "bytes": 5049,
+        "path": "whole-image.mjs",
+        "sha256": "c99945eb4fae208e4a6dbf8ce325d93bb35e317b3feeb78312c05bce008d7898"
+      },
+      {
+        "bytes": 15126,
+        "path": "restore-canonical-products.mjs",
+        "sha256": "b9d541f82d55c833f3226517a14460b41100e46bed0ed490440c31f924d6b009"
+      },
+      {
+        "bytes": 1985,
+        "path": "entry-driver.mjs",
+        "sha256": "2502d6a4351399973adec18b9916bbc35c5281961d3bff352ca84e3bb0303139"
+      },
+      {
+        "bytes": 2810,
+        "path": "byte-patch.mjs",
+        "sha256": "d3f83b2667e1864b2654bd66edc1bdb2556760409e0783f76a7f3775e1e77c47"
+      }
+    ],
+    "scope": "pre-checkout-delta restorer recovered by exact reverse text transformation and matched recorded pre-invocation wholeSHA; unchanged three other actual source bodies retained",
+    "status": "PASS"
+  },
+  "entry_time_log": "       70.91 real        66.85 user         2.10 sys\n           572080128  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n              161040  page reclaims\n                 547  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                2908  voluntary context switches\n               62427  involuntary context switches\n        298895805080  instructions retired\n        210861536898  cycles elapsed\n           444293248  peak memory footprint\n",
+  "exact_current_checkout_helper_sha256": "56d1789d3d9070b0d0c6c46ecdb1bae46681c84a7b31564873e9f249709e6cb6",
+  "focused_runner_test_tap": "\u2714 every real full-suite file runs once, with heavy migration tests separate from packaged parity (4.305791ms)\n\u2714 inserting a new filename cannot move reserved heavy workloads or omit any discovered file (0.533375ms)\n\u2714 a partial or future inventory never invents a reserved test or omits an unknown file (0.227ms)\n\u2714 duplicate inventory entries are rejected by the exhaustive coverage control (0.888708ms)\n\u2714 test-runner edits and renames require actual full-suite validation (0.325833ms)\n\u2714 only staging-test shards prepare the immutable migration derivative (19.533875ms)\n\u2714 two reviewed PRs sharing a base integrate serially without changing authored head (5.189083ms)\n\u2714 conflicts and non-conflicting changes to reviewed bytes require intervention (0.478542ms)\n\u2714 stale merge object and truncated inventories fail closed (0.588417ms)\n\u2714 stale head or review and expired ownership prohibit integration (0.349291ms)\n\u2714 failed or skipped candidate tests never merge an open PR (0.305208ms)\n\u2714 base advances before or during final validation are retryable without branch updates (0.194083ms)\n\u2714 latest failed or pending check replaces old success (0.112ms)\n\u2714 workflow separates untrusted candidate tests from write credentials and serializes the lifecycle (0.337458ms)\n\u2714 commit status changing during final review prevents the merge (0.369125ms)\n\u2714 trusted profile uses focused invariants only for isolated evidence and docs (0.217417ms)\n\u2714 parallel full-regression shards cover each unit file once and focused profile retains core gates (12.19975ms)\n\u2714 prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread (1.337583ms)\n\u2714 failed proof reread and stale main prevent merge despite prior accepted proof (0.76425ms)\n\u2714 successful rerun after preparation invalidates the pinned attempt and refuses merge (0.671667ms)\n\u2714 late candidate fetch replaces initial stale metadata without branch writes (0.234666ms)\n\u2714 stale parents and unavailable candidates converge with revalidated authority (0.48425ms)\n\u2714 permanently stale candidates are bounded and retain exact IDs before tree work (0.278ms)\n\u2714 candidate polling stops at its deadline even before exhausting attempts (0.180375ms)\n\u2714 head/body changes and conflicts during refresh fail without integration or writes (0.454125ms)\n\u2714 main and evidence vintage advances are not silently adopted while refreshing (0.248541ms)\n\u2714 claim/check/review and issue authority is rechecked after waiting (0.868666ms)\n\u2714 only candidate-object 404 is refreshable; access failures stop immediately (0.812167ms)\n\u2714 post-wait main advance retains old expected and new observed base diagnostics (0.235208ms)\n\u2714 post-convergence head change retains the new head in rejection diagnostics (0.199833ms)\n\u2714 persistent automatic lag falls back to exact owned candidate without editing authored branches (0.794917ms)\n\u2714 isolated conflict or wrong parents is rejected and only the owned ref is deleted (0.206667ms)\n\u2714 fallback retains reviewed-byte and post-wait authority guards and cleans rejected candidates (0.461292ms)\n\u2714 cleanup refuses another request, main/worker refs and changed owned refs (0.12675ms)\n\u2714 failed cleanup retains its exact resource for inspection without hiding rejection (0.415542ms)\n\u2714 isolated candidate follows the existing final tests/main/head merge guards (1.406916ms)\n\u2714 unconfirmed ref creation identifies the resource without deleting a possible collision (0.145042ms)\n\u2714 merged head cleanup deletes only confirmed unchanged same-repository unused worker heads (0.539375ms)\n\u2714 unmerged, wrong head, fork, default, protected, advanced and shared heads are retained (0.84625ms)\n\u2714 head cleanup checks paginated open PRs and fails conservatively on unknown identities or API failures (0.658ms)\n\u2714 successful integration records cleanup separately, including deletion failure and replay (0.828375ms)\n\u2714 cleanup stops on time or inventory call budget without starting deletion after pending (1.529292ms)\n\u2714 fresh geography success is required even when application proof is reusable (1.633375ms)\n\u2714 fresh geography success is recorded against exact combined commits (0.227208ms)\n\u2714 green geography job cannot merge without its authenticated exact-combined report (0.3255ms)\n\u2714 raw unresolved findings cannot be relabeled as a successful geography check (0.156084ms)\n\u2714 trusted geography outputs bind attempted artifact digest through the privileged merge job (0.38775ms)\n\u2714 known stale tested base or head rejects before expensive evidence/tree inspection (0.320417ms)\n\u2714 candidate waiting rechecks changed claim/check/review/head after caching immutable evidence (0.939584ms)\n\u2139 tests 49\n\u2139 suites 0\n\u2139 pass 49\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 135.179958\n",
+  "issue": 1295,
+  "lifetime_controls_fixture_failure": "First new positive fixture supplied /var alias; actual realpath guard correctly rejected. Only fixture changed to physical path; final21 actual controls terminal exit0.",
+  "limits": [
+    "The full byte entry preceded the later explicit-checkout code delta. Its exact original source is separately preserved by the recorded whole-SHA reverse byte reconstruction.",
+    "The full normal package/materialized consumer and checkout positive are still required.",
+    "The broader sparse unit invocation failed on a missing original archived priority report, not an asserted full regression PASS."
+  ],
+  "normal_consumer_preparation": {
+    "code": "coordination/engineering/eastern-two-gap-repair-native-20261007/normal-consumer-proof.mjs",
+    "method": "unchanged one-image materializePackageInputs, full pinned original source including dependency inventory, complete immutable candidate overlays before unchanged hosted inner builder",
+    "remaining": "new immutable freeze, normal prospective storage and memory admission, actual materialization/fullconsumer terminal proof",
+    "sha256": "9a7a4618c11165cfa9dcb43c13c41b6769f9b394cd8fce2ba154cc49ef7545d1",
+    "status": "IMPLEMENTED_UNFROZEN_NOT_EXECUTED",
+    "tiny_actual_entry_controls": {
+      "case": "invalid immutable Git option/uppercase/missing commit rejected before Git",
+      "passed": 3
+    }
+  },
+  "owned_cache_preservation": {
+    "actual6326_duplicate_removal": "/Users/chengshuli/world-atlas-workspace/.cache/1295-final-byte-inverse-preservation-20261008/actual6326-whole-duplicate-removal.json",
+    "all_removed_members_have_verified_whole_body_mode_counterparts": true,
+    "earlier_prototypes": "/Users/chengshuli/world-atlas-workspace/.cache/1295-final-byte-inverse-preservation-20261008/earlier-prototype-whole-preservation-and-removal.json",
+    "receipt": "/Users/chengshuli/world-atlas-workspace/.cache/1295-final-byte-inverse-preservation-20261008/whole-preservation.json",
+    "unique_members_preserved": true
+  },
+  "runtime": {
+    "node_executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "version": "24.19.0"
+  },
+  "scope": "new byte-only inverse and explicit checkout boundary; accepted native/source/ownership/reference science retain their original execution vintages",
+  "storage_and_lifetime": {
+    "actual_build_status": "NOT_STARTED",
+    "complete_post_disposal_inverse_body_bound": 498378648,
+    "exact_release_roster_verified_against_actual6326": {
+      "bytes": 483096711,
+      "files": 437
+    },
+    "full_inverse_additional_peak_bound": 981475359,
+    "generated_output_and_database_reserve": 1500000000,
+    "input_only_external_materialization_authorized": "parent root explicit coordinated continuation; actual physical free/checkout guards and complete final source accounting remain required",
+    "original_source_image_remains_read_only": true,
+    "source_bytes_prospective_before_final_freeze": 2372668570,
+    "source_files": 7580
+  },
+  "version": 1
+}

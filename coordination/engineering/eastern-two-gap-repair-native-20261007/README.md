@@ -44,3 +44,32 @@ area recipe and all 478 unrounded Canadian before/after geometries, with unchang
 49,623 other rows and historical structural statuses. It is not a fresh complete
 scientific or factual audit. The accepted PR1 complete geography/hierarchy proof
 provides the structural reuse binding.
+
+
+Exact byte restoration and direct consumers
+-----------------------------------------
+
+The final transport uses bounded copy ranges and literal bytes to reconstruct
+complete original and current files. It changes no geometry, scientific value,
+identity, interval, source or evidence field. All 34 original world bodies, the
+34 current context gzip bodies, both exact current outer fragments and every
+original image index are verified in full after the inverse. The byte helper
+was adapted from root1394's uncommitted local preparation, not a previously
+accepted scientific run; the final review covers this new byte-only code.
+
+The packaged build restores the fixed 302 current paths and 122 prior paths
+before its existing readers. The integration runner invokes an explicit
+checkout preparation before unchanged checkout test readers. It never sets
+WORLDATLAS_PACKAGE_STAGE to disguise a checkout as a package image. For a
+standalone checkout, run the explicit preparation before the ordinary server,
+database or direct tests:
+
+    node --input-type=module -e "import {prepareCanonicalCheckout} from './coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs'; console.log(prepareCanonicalCheckout());"
+
+This prepares exact reviewed files in that checkout; it is not deployment.
+The complete normal package build and regression remain mandatory acceptance.
+The old complete-input-transport belonged to historical integration execution
+23e and remains available at immutable public c5ebd677. It is not read by the
+current package path and is not represented as a new scientific input here.
+
+The final normal-consumer proof uses one explicitly enumerated overlaid image, produced by the unchanged package materializer from the wholly authenticated preserved source. All frozen candidate input paths and complete original dependency entries are checked before the unchanged hosted builder runs. This is an explicit normal materialization proof, not a claim that the default wrapper was invoked. The input-only phase and the later build have separate actual storage checks. Verified temporary object copies are released only after all302 current and122 prior installed whole files reverify; the installed files, original prior image and complete immutable transport remain available to stock readers. Earlier complete restoration and scientific executions keep their original code vintages.

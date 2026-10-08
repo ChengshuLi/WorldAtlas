@@ -1,6 +1,6 @@
 // Exactly the approved unchanged v6→v7 stage, followed by the two-target v7→v8 stage.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFileSync}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
-import{restoreWholeImage}from'./whole-image.mjs';import{validateContextMigration}from'../../../scripts/native-ownership/validate-context-migration.mjs';
+import{restoreWholeImage}from'./whole-image.mjs';import{restoreCanonicalProducts,getRestoredCanonicalProducts}from'./restore-canonical-products.mjs';import{validateContextMigration}from'../../../scripts/native-ownership/validate-context-migration.mjs';
 import{candidateBudget,requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../../../scripts/evidence-quality.mjs';
 import{validateNativeSelectionReceipt}from'../../../scripts/native-ownership/require-verified-selection.mjs';
 import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
@@ -53,14 +53,20 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
   const raw=ordinary(pin.path,'candidate');assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);if(!seen.has(pin.path)){budget.add({bytes:raw.length});seen.set(pin.path,pin);}return raw;}
  const actualCodeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..'),required=new Set(['package.json']);
- function visit(p){if(required.has(p))return;required.add(p);const file=path.join(actualCodeRoot,p);assert(fs.realpathSync(file)===file&&fs.lstatSync(file).isFile());const raw=fs.readFileSync(file);assert(raw.length<=32*1024*1024);for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*)['"]([^'"]+)['"]/g))if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));}
+ function visit(p){if(required.has(p))return;required.add(p);const file=path.join(actualCodeRoot,p);assert(fs.realpathSync(file)===file&&fs.lstatSync(file).isFile());const raw=fs.readFileSync(file);assert(raw.length<=32*1024*1024);for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));}
  visit('scripts/native-ownership/validate-build-context-stage.mjs');assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...required].sort(),'Complete actual context validator import closure required');
  for(const pin of stage.validator_sources){const raw=read(pin);assert(raw.equals(fs.readFileSync(path.join(actualCodeRoot,pin.path))),'Declared validator differs from actual executed source');}
  const imageIndexRaw=read(stage.prior_image),imageIndex=JSON.parse(imageIndexRaw),imageBase=path.posix.dirname(stage.prior_image.path);
  for(const pin of imageIndex.parts)read({path:imageBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
  const parent=path.join(root,'.cache');fs.mkdirSync(parent,{recursive:true});assert.equal(fs.realpathSync(parent),parent);
- const temporary=fs.mkdtempSync(path.join(parent,'native-context-1295-')),image=path.join(temporary,'prior');
- restoreWholeImage(path.join(root,imageBase),image,{expectedIndexSha:stage.prior_image.sha256});
+ const temporary=fs.mkdtempSync(path.join(parent,'native-context-1295-'));
+ let image;
+ if(stage.prior_image.original_index_sha256){
+  assert.equal(stage.prior_image.original_index_sha256,'e34743a84df2aaaa668b4e7b23c4f6870379edfe7eb88a427d6005b47333a393');
+  const retained=restoreCanonicalProducts({root,temporaryRoot:parent});
+  assert.equal(retained.prior_index_sha256,stage.prior_image.sha256);
+  image=getRestoredCanonicalProducts(root).priorImage;
+ }else{image=path.join(temporary,'prior');restoreWholeImage(path.join(root,imageBase),image,{expectedIndexSha:stage.prior_image.sha256});}
  const oldStageRaw=fs.readFileSync(path.join(image,'data/native-context-migration/manifest.json'));assert.equal(sha(oldStageRaw),FIXED_PRIOR_STAGE_SHA);const oldStage=JSON.parse(oldStageRaw);
  assert.equal(oldStage.version,1);assert.equal(oldStage.kind,'retained-identity-context-migration-v1');assert.equal(oldStage.validator_sources.length,17);
  for(const pin of oldStage.validator_sources){safeEvidencePath(pin.path);const raw=fs.readFileSync(path.join(image,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);}

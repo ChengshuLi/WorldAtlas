@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ons:2021:TS030",
+    "name": "ONS Census 2021 TS030 Religious affiliation (England and Wales)",
+    "url": "https://www.nomisweb.co.uk/output/census/2021/census2021-ts030.zip",
+    "license": "Open Government Licence; Crown copyright",
+    "vintage": "2021-03-21; released 2022-11-29",
+    "supported_from": 2021,
+    "supported_to": 2022,
+    "status": "historical",
+    "metadata": {
+      "id": "ons:2021:TS030",
+      "url": "https://www.nomisweb.co.uk/output/census/2021/census2021-ts030.zip",
+      "sha256": "7b587bd7069030d96c1e7ce943cb5924c197e9e0420338967f6dda8cc29bb41a",
+      "bytes": 3560319,
+      "licence_evidence_url": "https://www.nomisweb.co.uk/home/copyright.asp",
+      "licence_evidence_sha256": "2ac1486ab204b813202dae46fb063d3173978ce601169c3b2b9046a3cb1b70d8",
+      "supported_interval": [
+        2021,
+        2022
+      ],
+      "support_precision": "Observation year only, no extrapolation",
+      "population_concept": "Usual residents, self-reported religious affiliation",
+      "staging_only": true
+    }
+  },
+  {
+    "id": "abs:2021:G14",
+    "name": "ABS Census 2021 G14 Religious affiliation (Australia)",
+    "url": "https://www.abs.gov.au/census/find-census-data/datapacks/download/2021_GCP_LGA_for_AUS_short-header.zip",
+    "license": "Creative Commons Attribution 4.0 International; Commonwealth of Australia, ABS",
+    "vintage": "2021-08-10; Census 2021 General Community Profile release",
+    "supported_from": 2021,
+    "supported_to": 2022,
+    "status": "historical",
+    "metadata": {
+      "id": "abs:2021:G14",
+      "url": "https://www.abs.gov.au/census/find-census-data/datapacks/download/2021_GCP_LGA_for_AUS_short-header.zip",
+      "sha256": "7d7f0132c73c42b23ebb28df85424f6483a5062f44f0233d2b60a499fbe71dd2",
+      "bytes": 13827380,
+      "licence_evidence_url": "https://www.abs.gov.au/website-privacy-copyright-and-disclaimer",
+      "licence_evidence_sha256": "6ed0a8f1e963c2f9422a1ce4bbdb87209fd70da8ea496d9895f27de96c9fcbb9",
+      "supported_interval": [
+        2021,
+        2022
+      ],
+      "geographic_source_url": "https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files/LGA_2021_AUST_GDA2020_SHP.zip",
+      "geographic_input_sha256": "3b42e527d3fb946fec937ed6f76b8cad9882047b46188295988c3bcaab90b99a",
+      "geographic_conversion": "node_modules/.bin/mapshaper INPUT.zip -simplify 2% keep-shapes -o format=geojson OUTPUT.geojson",
+      "geographic_comparison_sha256": "8e86ef0a92c4eb5eb4ec40bf5ac9711beb8ed4feebd497c4aa6b573a58640c17",
+      "support_precision": "Observation year only, no extrapolation",
+      "population_concept": "Usual residents, self-reported religious affiliation",
+      "staging_only": true
+    }
+  }
+]
