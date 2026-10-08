@@ -1,6 +1,6 @@
 {
   "schema": "worldatlas-1381-versioned-evidence-validation:v1",
-  "recorded_at_utc": "2026-10-08T04:30:20.598Z",
+  "recorded_at_utc": "2026-10-08T04:32:31.105Z",
   "issue": 1381,
   "manifest_path": "research/geography/coastal-publication-ownership-1227-erratum/evidence-quality.json",
   "manifest_version": 1,
@@ -45,8 +45,8 @@
   "candidate_sources_or_outputs_with_historical_commit": [],
   "declared_bytes": {
     "historical": 267542764,
-    "candidate_outputs": 369031,
-    "total": 267911795,
+    "candidate_outputs": 369259,
+    "total": 267912023,
     "limit": 268435456
   },
   "local_validation": {
@@ -68,7 +68,7 @@
   },
   "reproduction": {
     "new_current_main_run": "not-run",
-    "reason": "Required local-workspace admission failed; existing two actual fresh-main runs and pair were preserved. Current main changes affect the evidence validator, not the reproduced runner or its inputs."
+    "reason": "No new current-main CLI run was attempted because local-workspace storage admission failed. The current-main changes after the retained runs update the evidence validator and add an unrelated Texas evidence packet; the issue runner, exact source inputs and authored scope are unchanged."
   },
   "storage_admission": {
     "status": "failed",
@@ -85,5 +85,7 @@
     "geoBoundaries 2018 variant attribution and reuse terms remain unresolved.",
     "Coastal overlap differences do not identify water, marsh, island, generalization, or other causes.",
     "No regional approval, import, production acceptance, or publication is established."
-  ]
+  ],
+  "pr_base_commit": "f940742a97de5ebe631e44b763d38aaa319b7f05",
+  "trusted_validator_commit": "f940742a97de5ebe631e44b763d38aaa319b7f05"
 }
