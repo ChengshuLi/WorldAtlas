@@ -455,6 +455,7 @@ def main() -> None:
 
     input_paths = {
         "scope.json": PACKET / "scope.json",
+        "source-inventory.json": PACKET / "source-inventory.json",
         "parent_subject_inventory": inventory_path,
         "parent_sources_registry": source_registry_path,
         "parent_geometry_comparison": prior_geometry_path,
