@@ -52,6 +52,15 @@ def validate_run_record(record: dict, directory: Path, expected: dict) -> None:
         raise ValueError('run receipt source paths, vintages or exact hashes differ from the verified input map')
     if record.get('unique_original_bytes') != expected['unique_original_bytes']:
         raise ValueError('run receipt original-source budget differs from verified inputs')
+    admission = record.get('execution_admission')
+    if not isinstance(admission, dict) or admission.get('unique_original_bytes') != expected['unique_original_bytes'] or \
+       admission.get('decoded_xlsx_member_bytes') != expected['planned_decoded_xlsx_bytes'] or \
+       admission.get('additional_artifact_allowance_bytes') != reproduce.ADDITIONAL_ARTIFACT_ALLOWANCE or \
+       admission.get('admitted_total_bytes') != admission.get('unique_original_bytes') + \
+            admission.get('decoded_xlsx_member_bytes') + admission.get('additional_artifact_allowance_bytes') or \
+       admission.get('admitted_total_bytes') > reproduce.MAX_PHASE_BYTES or \
+       admission.get('limit_bytes') != reproduce.MAX_PHASE_BYTES:
+        raise ValueError('run receipt does not prove complete pre-computation phase admission')
     if record.get('runner') != expected['runner']:
         raise ValueError('run receipt does not bind the exact executing runner')
     for field, expected_value in (
@@ -89,6 +98,13 @@ def validate_run_record(record: dict, directory: Path, expected: dict) -> None:
     if any(not re.fullmatch(r'[a-f0-9]{64}', row.get('sha256', '')) or row.get('bytes', 0) < 0 or
            row.get('bytes', 0) > 32 * 1024 * 1024 for row in decoded):
         raise ValueError('run receipt has invalid decoded workbook member hashes or sizes')
+    names = [row.get('member') for row in decoded]
+    consumed = record.get('actually_consumed_xlsx_members')
+    member_hashes = {row['member']: row['sha256'] for row in decoded}
+    if len(names) != len(set(names)) or not isinstance(consumed, list) or not consumed or any(
+        row.get('member') not in member_hashes or member_hashes[row['member']] != row.get('sha256') for row in consumed
+    ):
+        raise ValueError('run receipt lacks a complete unique decoded member set or actual-use binding')
     outputs = record.get('outputs')
     if not isinstance(outputs, dict) or set(outputs) != set(reproduce.FILES):
         raise ValueError('run receipt must bind the exact complete report output set')
@@ -217,6 +233,37 @@ def path_and_writer_controls() -> dict:
             'sentinel_sha256': sentinel_hash, 'partial_output_sha256': partial_hash}
 
 
+def prior_table_evidence(expected: dict, run_id: str) -> tuple[dict, dict]:
+    """Load the exact pinned prior manifest/ledger and retarget only output names."""
+    prefix = 'data/regional-review/croatia-batch4-read-boundary-guard/'
+    manifest_path = prefix + 'evidence-quality.json'
+    ledger_path = prefix + 'evidence/validation/2026-10-06-final/rendered-table-ledger.json'
+    indexed = {(row['commit'], row['path']): row for row in expected['verified_sources']}
+    for path in (manifest_path, ledger_path):
+        matches = [row for row in indexed.values() if row['path'] == path]
+        if len(matches) != 1:
+            raise ValueError(f'prior generated-table provenance is not uniquely present in the complete input map: {path}')
+    manifest_pin = next(row for row in indexed.values() if row['path'] == manifest_path)
+    ledger_pin = next(row for row in indexed.values() if row['path'] == ledger_path)
+    prior_manifest_raw = reproduce.git_file(manifest_pin['commit'], manifest_path)
+    prior_ledger_raw = reproduce.git_file(ledger_pin['commit'], ledger_path)
+    if sha(prior_manifest_raw) != manifest_pin['sha256'] or sha(prior_ledger_raw) != ledger_pin['sha256']:
+        raise ValueError('prior metric/table evidence differs from the exact issue pin map')
+    prior_manifest, prior_ledger = json.loads(prior_manifest_raw), json.loads(prior_ledger_raw)
+    expected_ids = {metric['id'] for metric in prior_manifest.get('metrics', [])}
+    if len(expected_ids) != 232 or len(prior_ledger.get('rows', [])) != 464:
+        raise ValueError('prior result ledger no longer covers both complete retained report vintages')
+    old_prefix = prefix + 'evidence/runs/2026-10-06/'
+    new_prefix = str(OWNED.relative_to(ROOT)) + f'/evidence/runs/{run_id}/'
+    for row in prior_ledger['rows']:
+        if not row.get('path', '').startswith(old_prefix):
+            raise ValueError('prior table ledger points outside the retained run vintages')
+        row['path'] = new_prefix + row['path'][len(old_prefix):]
+    prior_ledger['issue'] = 1396
+    prior_ledger['method_id'] = 'croatia-run-provenance-controls'
+    return prior_manifest, prior_ledger
+
+
 def run_controls(run_id: str) -> dict:
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,62}', run_id):
         raise ValueError('run ID must use 1-63 ASCII letters, digits, underscores or hyphens')
@@ -257,6 +304,8 @@ def run_controls(run_id: str) -> dict:
                             'matches_retained_historical_run_1': True,
                             'matches_retained_historical_run_2': True}
 
+    prior_manifest, rendered_ledger = prior_table_evidence(expected, run_id)
+
     single_read = snapshot_mutation_control(run_id)
     malformed = altered_record_controls(one, one_dir, expected)
     path_controls = path_and_writer_controls()
@@ -271,6 +320,9 @@ def run_controls(run_id: str) -> dict:
         'control_runner': control_runner,
         'manifest_scope': 'exactly the 224 Croatia #1199 subjects; mechanical provenance only',
         'first_fresh_run_snapshot_read_count': len(snapshot_reads),
+        'prior_metric_inventory': {'metric_count': len(prior_manifest.get('metrics', [])),
+                                   'rendered_table_rows': len(rendered_ledger.get('rows', [])),
+                                   'evaluation_vintage': 'retained #1199/#1209 result values; baseline, not a new geographic finding'},
         'positive_runs': [one, two], 'historical_output_comparison': historical,
         'snapshot_mutation_control': single_read, 'malformed_receipt_controls': malformed,
         'path_and_writer_controls': path_controls,
@@ -293,6 +345,11 @@ def run_controls(run_id: str) -> dict:
         ]
     }
     validation.mkdir(parents=True, exist_ok=False)
+    ledger_raw = (json.dumps(rendered_ledger, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode()
+    ledger_path = validation / 'rendered-table-ledger.json'
+    write_exclusive(ledger_path, ledger_raw)
+    result['rendered_table_ledger'] = {'path': str(ledger_path.relative_to(ROOT)),
+                                       'bytes': len(ledger_raw), 'sha256': sha(ledger_raw)}
     for kind, record in result['validation_records'].items():
         write_exclusive(validation / f'{kind}.json',
                         (json.dumps(record, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode())

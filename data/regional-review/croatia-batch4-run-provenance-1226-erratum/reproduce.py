@@ -6,6 +6,7 @@ import argparse
 import csv
 import hashlib
 import importlib.util
+import io
 import json
 import os
 import re
@@ -46,6 +47,8 @@ FILES = ('assessment-summary.json', 'province-completeness.csv', 'scoped-locatio
 ISSUE_SCOPE_RE = re.compile(r'Machine-readable exact workload scope \(JSON;.*?\):\s*```json\s*(.*?)\s*```', re.S)
 WORK_RE = re.compile(r'<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->')
 INPUT_RE = re.compile(r'- `(?P<alias>input_\d{3})`: `(?P<path>[^`]+)` at `(?P<commit>[a-f0-9]{40})`; (?P<bytes>\d+) bytes; SHA-256 `(?P<sha>[a-f0-9]{64})`\.')
+MAX_PHASE_BYTES = 256 * 1024 * 1024
+ADDITIONAL_ARTIFACT_ALLOWANCE = 27 * 1024 * 1024
 
 
 def sha(raw: bytes) -> str:
@@ -239,6 +242,19 @@ def load_inputs(read_input=None) -> dict:
     input_records.append({'path': str(HELPER), 'commit': PINNED_COMMIT, 'sha256': sha(helper_bytes),
                           'bytes': len(helper_bytes), 'read_boundary': 'compiled from immutable Git blob'})
 
+    # Admit the complete phase before parsing/decompressing workbook members or
+    # running the historical generator. The 27 MiB reserve covers all candidate
+    # code, captures, controls, receipts, generated reports and other retained
+    # artifacts; it is deliberately conservative and never partitions the inputs.
+    with zipfile.ZipFile(io.BytesIO(frozen[str(SUMMARY)])) as workbook:
+        planned_members = [{'member': item.filename, 'bytes': item.file_size}
+                           for item in workbook.infolist()]
+    if any(row['bytes'] > 32 * 1024 * 1024 for row in planned_members):
+        raise ValueError('planned decoded XLSX member exceeds the per-file limit')
+    planned_decoded_bytes = sum(row['bytes'] for row in planned_members)
+    if original_phase_bytes + planned_decoded_bytes + ADDITIONAL_ARTIFACT_ALLOWANCE > MAX_PHASE_BYTES:
+        raise ValueError('complete raw, decoded and additional-artifact phase exceeds 256 MiB')
+
     # These two original inputs also occur in the 62-file #1194 source map.
     for path in (str(OLD_SCOPE), str(OLD_ISSUE_SNAPSHOT), str(DETAIL), str(SUMMARY), str(GEOMETRY)):
         key = f'{ORIGINAL_BASELINE}:{path}'
@@ -273,6 +289,9 @@ def load_inputs(read_input=None) -> dict:
             'issue_spec': job_spec, 'issue_pins': pins, 'historical_pins': prior_pins,
             'verified_sources': sorted(verified_sources.values(), key=lambda row: (row['commit'], row['path'])),
             'unique_original_bytes': original_phase_bytes,
+            'planned_decoded_xlsx_bytes': planned_decoded_bytes,
+            'additional_artifact_allowance_bytes': ADDITIONAL_ARTIFACT_ALLOWANCE,
+            'phase_limit_bytes': MAX_PHASE_BYTES,
             'frozen': frozen, 'inputs': input_records,
             'subjects': subjects, 'subject_count': len(subjects),
             'subject_ids_sha256': hashlib.sha256('\n'.join(sorted(subjects)).encode()).hexdigest(),
@@ -357,7 +376,19 @@ def build_private(frozen: dict, scratch: Path, subjects: list[str]) -> tuple[Pat
         module.build(ORIGINAL_BASELINE, output, geometry)
     finally:
         zipfile.ZipFile.read = original_read
-    decoded_total = sum(row['bytes'] for row in decoded_members.values())
+    consumed_members = sorted(decoded_members.values(), key=lambda row: row['member'])
+    archive_members = []
+    with zipfile.ZipFile(summary_path) as archive:
+        for info in archive.infolist():
+            raw = original_read(archive, info.filename)
+            if len(raw) != info.file_size:
+                raise ValueError('XLSX member size differs from its central directory')
+            archive_members.append({'path': str(SUMMARY), 'member': info.filename,
+                'bytes': len(raw), 'sha256': sha(raw), 'hash_kind': 'decoded-member-bytes'})
+    archive_names = {row['member'] for row in archive_members}
+    if any(row['member'] not in archive_names for row in consumed_members):
+        raise ValueError('actual XLSX reader consumed a member absent from the complete archive inventory')
+    decoded_total = sum(row['bytes'] for row in archive_members)
     if decoded_total > 32 * 1024 * 1024:
         raise ValueError('decoded workbook members exceed the per-file limit')
     produced = {path.name for path in output.iterdir() if path.is_file()}
@@ -373,7 +404,7 @@ def build_private(frozen: dict, scratch: Path, subjects: list[str]) -> tuple[Pat
         raise ValueError('generated output no longer has the exact 224 unique issue subjects')
     if summary_doc.get('metrics', {}).get('scoped_subject_count') != 224:
         raise ValueError('historical report subject count differs from the exact issue scope')
-    return output, sorted(decoded_members.values(), key=lambda row: row['member'])
+    return output, archive_members, consumed_members
 
 
 def write_exclusive(path: Path, raw: bytes) -> None:
@@ -402,7 +433,10 @@ def run(output: str | Path, read_input=None, interrupt_after: int | None = None)
     verified = load_inputs(read_input)
     # Validation and computation happen before creating the public destination.
     with tempfile.TemporaryDirectory(prefix='.read-boundary-', dir=OWNED) as temporary:
-        products, decoded_members = build_private(verified['frozen'], Path(temporary), verified['subjects'])
+        products, decoded_members, consumed_members = build_private(verified['frozen'], Path(temporary), verified['subjects'])
+        actual_decoded_bytes = sum(row['bytes'] for row in decoded_members)
+        if actual_decoded_bytes != verified['planned_decoded_xlsx_bytes']:
+            raise ValueError('decoded XLSX member inventory differs from its admitted central directory')
         destination = safe_destination(output)
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination = safe_destination(output)
@@ -426,6 +460,13 @@ def run(output: str | Path, read_input=None, interrupt_after: int | None = None)
             'verified_sources': verified['verified_sources'],
             'decoded_xlsx_members': decoded_members,
             'decoded_xlsx_bytes': sum(row['bytes'] for row in decoded_members),
+            'actually_consumed_xlsx_members': consumed_members,
+            'execution_admission': {'unique_original_bytes': verified['unique_original_bytes'],
+                'decoded_xlsx_member_bytes': actual_decoded_bytes,
+                'additional_artifact_allowance_bytes': verified['additional_artifact_allowance_bytes'],
+                'admitted_total_bytes': verified['unique_original_bytes'] + actual_decoded_bytes +
+                    verified['additional_artifact_allowance_bytes'],
+                'limit_bytes': verified['phase_limit_bytes']},
             'inputs': verified['inputs'],
             'factual_limit': 'This is a byte/read-boundary reproduction correction; it establishes no new territorial, parent, boundary, completeness, legal or licensing finding.'
         }
