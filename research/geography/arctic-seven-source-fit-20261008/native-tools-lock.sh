@@ -1,0 +1,43 @@
+#!/bin/bash
+NATIVE_TOOLS_TOTAL_BYTES=3179952
+NATIVE_TOOLS_LOCK_SHA256=1b43feeafdde53a0c6f7f9f87e0d3c8e21604845159abfb16ec553efada6666a
+NATIVE_SYSTEM=Darwin
+NATIVE_RELEASE=24.6.0
+NATIVE_MACHINE=arm64
+verify_native_tools() {
+  test "$(uname -s)" = "$NATIVE_SYSTEM"
+  test "$(uname -r)" = "$NATIVE_RELEASE"
+  test "$(uname -m)" = "$NATIVE_MACHINE"
+  actual_0=$(sha256sum /bin/bash)
+  test "${actual_0%% *}" = b46e8d4eac541d79f77000550b4254b47599df8dd8c52cc5b0f37cca1c3b02d4
+  actual_1=$(sha256sum /bin/mkdir)
+  test "${actual_1%% *}" = e0ebb9a221e2a70c43c887ee04c5e710faac4ec3bb8f43deb608074695364ccf
+  actual_2=$(sha256sum /bin/rmdir)
+  test "${actual_2%% *}" = 88c68b4542a6a6712b3c54e4143bd2db775fe3a136277be3e7f54bdd93559be5
+  actual_3=$(sha256sum /bin/sync)
+  test "${actual_3%% *}" = f71dbca841122263b9410ceb4ab888034071c1aa4932dd9345c189ab813e931f
+  actual_4=$(sha256sum /bin/unlink)
+  test "${actual_4%% *}" = 52664e60b8518927d414ae48d4ffd229d45d8845656f1d975f14181109a28ab6
+  actual_5=$(sha256sum /sbin/sha256sum)
+  test "${actual_5%% *}" = 911cfe6fc220c41ee02d18ea71c89f8ff788bdf8a6d4f0d6f94dc965aa18521f
+  actual_6=$(sha256sum /usr/bin/bsdtar)
+  test "${actual_6%% *}" = aa870c0534e2317cc62d228127e7af58582827f8380e16cb89c9454c1bc870d6
+  actual_7=$(sha256sum /usr/bin/cmp)
+  test "${actual_7%% *}" = 9db3988a2c1e1bba78256987a6d9bedc08816f290fb4d9655c985efa7f7605b8
+  actual_8=$(sha256sum /usr/bin/git)
+  test "${actual_8%% *}" = 7588ceab299393618d6f8861502ac0588d1594025f301d9a61a898215b5571d3
+  actual_9=$(sha256sum /usr/bin/grep)
+  test "${actual_9%% *}" = dd0998a8203835aec5d4dd61823f7b98b9e7b085c7f2728560feb94b9444bb9e
+  actual_10=$(sha256sum /usr/bin/mktemp)
+  test "${actual_10%% *}" = e9533f44792b1db75c36f3673eaec04467eb95b5d7121d5b40a0623f7229fe3a
+  actual_11=$(sha256sum /usr/bin/otool)
+  test "${actual_11%% *}" = 7588ceab299393618d6f8861502ac0588d1594025f301d9a61a898215b5571d3
+  actual_12=$(sha256sum /usr/bin/tee)
+  test "${actual_12%% *}" = 9f24a14c6c8c64463250337738fe748635157903e9176ba7d87625cfdd47149e
+  actual_13=$(sha256sum /usr/bin/tr)
+  test "${actual_13%% *}" = 46b6d01dfb4208edf512ade7cee49a34e50644b667ed1394e599cce71800926e
+  actual_14=$(sha256sum /usr/bin/uname)
+  test "${actual_14%% *}" = 8fc60d9639661172997e2036559c0e635fa127f9b84895115c36797cb23b52bf
+  actual_15=$(sha256sum /usr/bin/wc)
+  test "${actual_15%% *}" = 6dd1ce80825c439ef6dc4812cdb0711bf191446728b8a13ed655f22ce210aeee
+}
