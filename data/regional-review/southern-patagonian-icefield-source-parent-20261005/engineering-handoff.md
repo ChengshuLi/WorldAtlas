@@ -1,0 +1,14 @@
+# Engineering handoff — `country-SPI`
+
+This packet preserves the existing subject ID and core feature. Do not move the feature to Argentina or Chile, replace its geometry with the dated Natural Earth candidate, or treat inventory coverage as sovereignty evidence.
+
+## Findings requiring engineering disposition
+
+1. **Restore exact geometry provenance.** The Atlas feature records original geometry SHA-256 `285e80dadd61de9903bf3070b7a594e4009034d8b67adc304111328da53468ce`, but its metadata names only Natural Earth and an undated reference. The dated Natural Earth 5.1.0 `SPI` map-unit feature is public domain and has identity `NE_ID=1729635141`, yet its geometry hash is `08e44b0ec89bdfd84be2a604c01396778ac0130923676c67bd313ba0553f61f4`. Restore the historical Natural Earth release/source object that matches the stored hash if it can be identified; otherwise keep the mismatch explicit and decide whether to retain a new, clearly dated source vintage as a future candidate. Any new geometry or source metadata needs a separate reviewed change with original bytes, exact hashes, and neighbor/topology controls.
+2. **Review the province tier.** The only child is an ice field; the parent repeats its name, is typed `level=province`, and has `kind=geographic` with semantic review open. Decide whether the schema has a physical-feature or geographic-area tier that better expresses an ice field. Preserve `country-SPI` and the current geometry until source/restoration and neighboring-granularity review are complete. Do not choose a national parent from either inventory.
+3. **Keep treaty evidence separate from ice geometry.** The 1998 agreement and 2018 official statements show why inventory polygons cannot stand in for the agreed line. Obtain a current official bilateral commission record and the appropriate georeferenced treaty-section chart before making any boundary/ownership representation. The 2018 Section A/Section B status is historical evidence only.
+4. **Inspect current official inventories before a geometry proposal.** Retrieve the DGA IPG 2022 shapes and the current IANIGLA regional vector outputs through the official channels; inspect the license and package metadata first. Compare their source roles, dates, completeness, and glacier/body granularity. Do not merge their lines into a sovereign boundary or overwrite original sources.
+
+## Resume condition
+
+Resume exact source restoration when a versioned Natural Earth source file or upstream issue/release can be found whose `SPI` geometry matches the Atlas's recorded original hash (or when the earlier hash's computation method is established). Resume current boundary assessment when a post-2018 official bilateral record and chart for the relevant agreement sections are available. Any core hierarchy/geometry change needs the appropriate separate engineering/geography scope and gates.

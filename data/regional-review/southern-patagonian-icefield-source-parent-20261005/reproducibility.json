@@ -1,0 +1,21 @@
+{
+  "command": "python3 data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py",
+  "runtime": "Python 3.7.3, standard library only",
+  "runs": 2,
+  "results_path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json",
+  "results_sha256_each_run": "34ebfbf1ebce8b55314d16614aefbeb221a54891b47b5f710469a438359d6b40",
+  "byte_identical": true,
+  "checks_per_run": 19,
+  "evidence_adverse_control": {
+    "case": "Changed the README output SHA-256 in a temporary manifest copy while preserving the source bytes.",
+    "expected": "rejected",
+    "observed": "rejected",
+    "diagnostic": "Input bytes mismatch: candidate:data/regional-review/southern-patagonian-icefield-source-parent-20261005/README.md"
+  },
+  "scope_and_source": "The two runs checked all five issue-pinned baseline hashes, the exact one-subject roster and unique baseline/current feature, unique province parent with its declared one-child count, the retained Natural Earth v5.1.0 whole-file hash and official terms-page retrieval hash, the unique SPI source row, and the expected mismatch between candidate and recorded original geometry hashes. Four adverse controls injected duplicate and missing Atlas and Natural Earth identities; all were rejected by the exact-one selection rule.",
+  "limits": [
+    "This is deterministic provenance and identity reproduction, not a boundary accuracy test.",
+    "It does not execute downloads or rely on current web responses.",
+    "The exact historic source bytes matching the Atlas original geometry hash remain unresolved."
+  ]
+}

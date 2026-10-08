@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "baseline_commit": "27be77596f23304de6a720735538427e6d23e242",
+  "exact_subject_ids": [
+    "country-SPI"
+  ],
+  "subject_ids_sha256": "49549fc841215235fa4fb67326624f100a76a138fd2052cb73236c5b752b1de5",
+  "metrics": [
+    {
+      "id": "scope_subject_count",
+      "value": 1,
+      "unit": "features",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "vintage": "baseline"
+    },
+    {
+      "id": "province_parent_child_count",
+      "value": 1,
+      "unit": "children",
+      "input_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "vintage": "baseline"
+    }
+  ],
+  "candidate": {
+    "release_commit": "117488dc884bad03366ff727eca013e434615127",
+    "properties": {
+      "NAME": "Southern Patagonian Ice Field",
+      "ADM0_A3": "SPI",
+      "NE_ID": 1729635141,
+      "TYPE": "Indeterminate",
+      "NOTE_ADM0": "Disputed",
+      "NOTE_BRK": "Claimed by Chile and Argentina; under survey",
+      "ISO_A3": "-99"
+    },
+    "geometry_sha256": "08e44b0ec89bdfd84be2a604c01396778ac0130923676c67bd313ba0553f61f4",
+    "exterior_ring_coordinates": 40,
+    "recorded_original_geometry_sha256": "285e80dadd61de9903bf3070b7a594e4009034d8b67adc304111328da53468ce",
+    "matches_recorded_original_geometry": false
+  },
+  "baseline_subject": {
+    "id": "country-SPI",
+    "name": "Southern Patagonian Ice Field",
+    "parent_id": "framework:province:southern-patagonian-ice-field:7fa95a3f233f",
+    "source_name": "Natural Earth",
+    "source_id": "natural-earth",
+    "reference_year": "Undated modern reference",
+    "recorded_original_geometry_sha256": "285e80dadd61de9903bf3070b7a594e4009034d8b67adc304111328da53468ce",
+    "display_geometry_sha256": "c9431d27b90a4a3844bb33d3be7501ca647a66f9758d061be2f1568755d9a86a",
+    "display_exterior_ring_coordinates": 59
+  },
+  "parent": {
+    "id": "framework:province:southern-patagonian-ice-field:7fa95a3f233f",
+    "name": "Southern Patagonian Ice Field",
+    "level": "province",
+    "kind": "geographic",
+    "child_count": 1,
+    "semantic_action": "open",
+    "parent_id": "framework:area:argentina-south:240c9829681f"
+  },
+  "checks": [
+    {
+      "id": "pin:baseline-world-index",
+      "passed": true,
+      "expected_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "observed_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "bytes": 944
+    },
+    {
+      "id": "pin:baseline-hierarchy",
+      "passed": true,
+      "expected_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "observed_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "bytes": 10164089
+    },
+    {
+      "id": "pin:baseline-administrative-sources",
+      "passed": true,
+      "expected_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "observed_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "bytes": 661416
+    },
+    {
+      "id": "pin:baseline-macro-publication",
+      "passed": true,
+      "expected_sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "observed_sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "bytes": 2826
+    },
+    {
+      "id": "pin:baseline-icefield-subject",
+      "passed": true,
+      "expected_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "observed_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "bytes": 6613963
+    },
+    {
+      "id": "issue:exact-subject-roster",
+      "passed": true,
+      "subjects": [
+        "country-SPI"
+      ],
+      "subjects_sha256": "49549fc841215235fa4fb67326624f100a76a138fd2052cb73236c5b752b1de5"
+    },
+    {
+      "id": "baseline:subject-occurrence",
+      "passed": true,
+      "count": 1
+    },
+    {
+      "id": "baseline:parent-occurrence",
+      "passed": true,
+      "count": 1,
+      "parent_id": "framework:province:southern-patagonian-ice-field:7fa95a3f233f"
+    },
+    {
+      "id": "baseline:one-child-parent",
+      "passed": true,
+      "child_count": 1,
+      "level": "province",
+      "kind": "geographic",
+      "semantic_action": "open"
+    },
+    {
+      "id": "candidate:whole-file-sha256",
+      "passed": true,
+      "expected_sha256": "57da82be755f4afccd8f3b14251bb2752f5df1395f47d2d86f817470c4a48862",
+      "observed_sha256": "57da82be755f4afccd8f3b14251bb2752f5df1395f47d2d86f817470c4a48862",
+      "bytes": 13526439
+    },
+    {
+      "id": "candidate:license-terms-retrieval-pin",
+      "passed": true,
+      "expected_sha256": "22c3ffc04b4ccae8e99129fa6c5a546a2709c61af54d6304682da7fa1884a291",
+      "source_records": 1
+    },
+    {
+      "id": "candidate:SPI-row-occurrence",
+      "passed": true,
+      "count": 1
+    },
+    {
+      "id": "candidate:original-geometry-hash-match",
+      "passed": true,
+      "recorded_original_geometry_sha256": "285e80dadd61de9903bf3070b7a594e4009034d8b67adc304111328da53468ce",
+      "candidate_geometry_sha256": "08e44b0ec89bdfd84be2a604c01396778ac0130923676c67bd313ba0553f61f4",
+      "match": false
+    },
+    {
+      "id": "current:stable-subject-id",
+      "passed": true,
+      "count": 1
+    },
+    {
+      "id": "current:stable-parent-reference",
+      "passed": true,
+      "baseline_parent_id": "framework:province:southern-patagonian-ice-field:7fa95a3f233f",
+      "current_parent_id": "framework:province:southern-patagonian-ice-field:7fa95a3f233f"
+    },
+    {
+      "id": "negative-control:duplicate-baseline-subject",
+      "passed": true
+    },
+    {
+      "id": "negative-control:missing-baseline-subject",
+      "passed": true
+    },
+    {
+      "id": "negative-control:duplicate-Natural-Earth-SPI-row",
+      "passed": true
+    },
+    {
+      "id": "negative-control:missing-Natural-Earth-SPI-row",
+      "passed": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "duplicate-baseline-subject",
+      "expected": "reject zero or duplicate identities",
+      "rejected": true
+    },
+    {
+      "id": "missing-baseline-subject",
+      "expected": "reject zero or duplicate identities",
+      "rejected": true
+    },
+    {
+      "id": "duplicate-Natural-Earth-SPI-row",
+      "expected": "reject zero or duplicate identities",
+      "rejected": true
+    },
+    {
+      "id": "missing-Natural-Earth-SPI-row",
+      "expected": "reject zero or duplicate identities",
+      "rejected": true
+    }
+  ],
+  "limits": [
+    "The Natural Earth 5.1.0 SPI row is a dated identity and map-unit candidate but does not match the Atlas-recorded original geometry hash.",
+    "The official DGA IPG2022 shape package and complete current IANIGLA regional vector set were not retrieved or crosswalked.",
+    "The latest specific Chilean Section A/Section B demarcation statement found was dated 2018; current completion status is unknown.",
+    "No legal/administrative parent or sovereign owner is inferred from a glacier outline or inventory."
+  ]
+}
