@@ -61,6 +61,8 @@ All values below are bound to generated JSON values in `evidence-quality.json`; 
 
 ## Sources and method
 
+These retained complete geoBoundaries databases are identified by their upstream release metadata as Open Data Commons Open Database License (ODbL) 1.0. The [ODbL 1.0 license text and URI](https://opendatacommons.org/licenses/odbl/1-0/) accompany this source attribution for both retained products.
+
 - [geoBoundaries India ADM2 release](https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/IND/ADM2): retained complete simplified GeoJSON, represented year 2021, ODbL 1.0 per release metadata.
 - [geoBoundaries India ADM3 release](https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/IND/ADM3): retained complete simplified GeoJSON, represented year 2018, ODbL 1.0 per release metadata.
 
