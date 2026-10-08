@@ -1,0 +1,102 @@
+{
+  "status": "PASS_TINY_ORIGINAL_HELPER_CONTROLS_ONLY",
+  "code_sha256": "36529854ac47f8060d625c4482108aa561fe0454ad7abd21ca6e3666031c8698",
+  "node_version": "v24.19.0",
+  "node_executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "node_binary_sha256": "9caea9deafcb0c7f22fac3206c32f0dcaf8d1f13460b0be3017fa09e7a4be4f6",
+  "default_and_two_limits_identical_output_and_original_rejections": true,
+  "full_validator_or_build_executed": false,
+  "failures": [
+    {
+      "mode": "exit23",
+      "code": 23,
+      "signal": null
+    },
+    {
+      "mode": "signal",
+      "code": null,
+      "signal": "SIGTERM"
+    },
+    {
+      "mode": "overflow",
+      "code": "ERR_CHILD_PROCESS_STDIO_MAXBUFFER",
+      "signal": null
+    }
+  ],
+  "results": [
+    {
+      "requested_old_space_mib": null,
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/1295-child-heap-small-control.mjs",
+        "/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3"
+      ],
+      "result": {
+        "heap_limit_bytes": 2348810240,
+        "execArgv": [],
+        "plain_guard": "PASS",
+        "scientific_sha256": "e3dc009c2319f11be8563aca7215bf6896644bc2cf814e912daca9e1de521a07",
+        "project_modules": 17,
+        "fixture_rows": 128,
+        "actual_full_validator_executed": false,
+        "original_function_bodies_unchanged": true
+      }
+    },
+    {
+      "requested_old_space_mib": 1536,
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--max-old-space-size=1536",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/1295-child-heap-small-control.mjs",
+        "/Users/chengshuli/world-atlas-workspace/.cache/1295-pr2-offline-integration-review-20261007/original-v1-preserved-cache-7aa42015/original-v1-image-v3"
+      ],
+      "result": {
+        "heap_limit_bytes": 1811939328,
+        "execArgv": [
+          "--max-old-space-size=1536"
+        ],
+        "plain_guard": "Native preparation requires the reviewed plain Node launch without loaders/preloads",
+        "scientific_sha256": "e3dc009c2319f11be8563aca7215bf6896644bc2cf814e912daca9e1de521a07",
+        "project_modules": 17,
+        "fixture_rows": 128,
+        "actual_full_validator_executed": false,
+        "original_function_bodies_unchanged": true
+      }
+    }
+  ],
+  "source_commit": "b5846448ef7f01740d19dcf295f585c216638843",
+  "hosted_failure": {
+    "run": 37818669169,
+    "head": "0bd8db0b84ba71c08241b3d9c029851aeea0e5eb",
+    "child_old_space_mib": 768,
+    "signal": "SIGABRT",
+    "stdout_bytes": 0,
+    "reason": "Original unmodified v1 child reached V8 heap limit; no successful normal build claimed"
+  },
+  "child_invocation_old_space_mib": 1536,
+  "heap_limit_is_not_rss_proof": true,
+  "original_combined_process_ceiling_bytes": 3221225472,
+  "logs": [
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/1295-record-alias-hosted-package-failure.log.gz",
+      "bytes": 15510,
+      "sha256": "7a905336aa1332fbf70199957398962626c7c89bafd0b2364545a46d01e64e51",
+      "uncompressed_bytes": 117105,
+      "uncompressed_sha256": "a0c5efc215176b95e4610d12b7ba6fc7e4169419ef240bb4f1cc9d553d95c6c5"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/1295-child1536-focused-controls.log.gz",
+      "bytes": 2080,
+      "sha256": "cbe15fcd3c62364dfc48293bb2ae212ecf2f35955fc14d53704247bca3f2a527",
+      "uncompressed_bytes": 9736,
+      "uncompressed_sha256": "3b8f87663162668d4f7469ad9916bcc9fcffd657d6ae260b89988b9356f56bdb"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/1295-child1536-small-controls.log.gz",
+      "bytes": 983,
+      "sha256": "8f95d48638ee5a97be6034d3db3e942fe8048482b882bea65a354dce29f81b45",
+      "uncompressed_bytes": 2810,
+      "uncompressed_sha256": "3b300fbb7519cc44c3dee555e68248e42fb15ca36921f58af3ad189aec1622b7"
+    }
+  ]
+}
