@@ -311,8 +311,9 @@ def run(commit, output, input_only=False, *, code_source, code_source_sha, code_
              'prepared_domain': PREPARED_DOMAIN, 'limitations': plan['limitations'], 'admission': admission,
              'current_pointers_activated': False, 'full_geographic_audit_claimed': False})
     runtime = json.loads((HERE / 'runtime.json').read_bytes())
-    if loaded_runtime_paths() - {p['path'] for p in runtime['runtime_files']} or {name: callable_pin(value) for name, value in critical_callables().items()} != runtime['critical_callables']:
-        raise ValueError('Runtime or numerical callable drift after complete source operation')
+    if loaded_runtime_paths() - {p['path'] for p in runtime['runtime_files']}:
+        raise ValueError('Runtime roster drift after complete source operation')
+    require_callables(runtime)
     if code_guard(commit, json.loads(read(code_source, {'bytes': code_source_bytes, 'sha256': code_source_sha, 'mode': '100644'}))) != admission['executed_code']:
         raise ValueError('Executed project code drift after complete source operation')
     if max(map(len, (raw, encoded, proof))) > FILE_CAP or len(raw) + len(encoded) + len(proof) > OUTPUT_RESERVE:
