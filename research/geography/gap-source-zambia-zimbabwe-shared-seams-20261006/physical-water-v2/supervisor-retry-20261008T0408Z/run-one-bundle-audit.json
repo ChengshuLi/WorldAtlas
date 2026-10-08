@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "issue": 1234,
+  "run": "one",
+  "status": "complete; full single-run bundle audit passed",
+  "created_at_utc": "2026-10-08T04:09:03.878930+00:00",
+  "execution": {
+    "code_commit": "e19c6f429036925ed701a23b12065bfdd2ea2932",
+    "frozen_inputs_sha256": "b2a7e1e10a4b4b1e1b9a934060675d8838f8000a682bf66c3c703e3bd2576290",
+    "runtime": {
+      "python": "3.12.14",
+      "platform": "macOS-15.6.1-arm64-arm-64bit",
+      "numpy": "2.3.5",
+      "shapely": "2.1.2",
+      "geos": "3.13.1",
+      "zlib_compile": "1.2.12",
+      "zlib_runtime": "1.2.12",
+      "pypdf": "6.10.0"
+    },
+    "supervisor_pid": 33754,
+    "classifier_pid_and_process_group": 33766,
+    "exec_session_id": 8615,
+    "supervisor_elapsed_seconds": 26.829,
+    "supervisor_sample_count": 98,
+    "supervisor_max_sampled_process_group_rss_mib": 198.547,
+    "producer_lifetime_peak_rss_mib": 201.7,
+    "minimum_supervisor_host_free_percent": 46,
+    "initial_supervisor_host_free_percent": 48,
+    "rss_stop_mib": 640,
+    "producer_abort_mib": 700,
+    "requested_window_mib": 768,
+    "exit_code": 0,
+    "stop_reason": "producer-exit",
+    "wall_limit_seconds": 1800
+  },
+  "source": {
+    "id": "esa-worldcover-2021-v200-s18e027",
+    "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S18E027_Map.tif",
+    "product_version": "V2.0.0",
+    "classification_period_utc": [
+      "2021-01-01T00:00:00Z",
+      "2021-12-31T23:59:59Z"
+    ],
+    "crs": "EPSG:4326",
+    "pixel_scale_degrees": [
+      8.333333333333333e-05,
+      8.333333333333333e-05,
+      0.0
+    ],
+    "license": "CC BY 4.0",
+    "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+    "whole_object_bytes": 161671883,
+    "whole_object_sha256": null,
+    "selected_original_block_count": 60,
+    "selected_original_block_decoded_bytes": 62914560,
+    "encoded_block_bytes": 3943214
+  },
+  "scope": {
+    "component_count": 10,
+    "contact_subject_count": 4,
+    "local_contact_intersection_count": 21,
+    "point_fragment_count": 2,
+    "components": [
+      {
+        "component_id": "physical-component:087b8ed59af27e069111ed4388ae84383625b06dcaaf0a250c56b21b38a09412",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 369,
+          "20": 18,
+          "30": 205,
+          "50": 1,
+          "80": 10453,
+          "90": 10
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:1aaf0bcede4fa05f6a0e04291123eb68a618da7d181659dc81785f58f05ce624",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 380,
+          "20": 188,
+          "30": 8032,
+          "40": 282,
+          "60": 541,
+          "80": 34336,
+          "90": 4284
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:339d343f62afdbb94f6352a45d41c17acf0d1df65fed834c1a5e86154f31102f",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 126,
+          "30": 50,
+          "40": 1,
+          "80": 5671,
+          "90": 181
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:43d1a11315e3668e90ea91331a0857bbbe9d96984b212bf957653e616ee52cd8",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 3688,
+          "20": 402,
+          "30": 846,
+          "50": 93,
+          "60": 38,
+          "80": 1944
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:447b38afd61e5dfa559b901ab149a059a711d9e99af2e204ab5f88ec30552275",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 705,
+          "20": 3,
+          "80": 10403,
+          "90": 83
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:4e35c8d9131282023f3efb77bc9c166be31ead102344e44e307aa964b66dfdf3",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 3032,
+          "20": 98,
+          "30": 1673,
+          "40": 30,
+          "60": 1022,
+          "80": 24224,
+          "90": 442
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:87a14332b9a62f4a42282cf8a415c0b94c15091654aa05b1ac293ee2d4758b3f",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 2149,
+          "20": 39,
+          "30": 2457,
+          "40": 37,
+          "60": 5,
+          "80": 10005,
+          "90": 714
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:bb6382d696364f0b134a83c89a5fa36a479788538ec07a3696347056b63b7bae",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 12674,
+          "20": 783,
+          "30": 4089,
+          "40": 246,
+          "50": 5,
+          "60": 1015,
+          "80": 67429,
+          "90": 2340
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:e53af7b07bd3f726a90d31048953c13321f872340b2d7ab735d4bd4334faf782",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 73,
+          "30": 7,
+          "40": 1,
+          "80": 6735,
+          "90": 71
+        },
+        "closure_residual_degree_square": 0.0
+      },
+      {
+        "component_id": "physical-component:ed72aa6057af62a735ca5b0b3ad6cf79f8f8e96ca7ab15b7aa2e4b4d8c981827",
+        "map_class_summary": "mixed-mapped-water-and-land-cover",
+        "class_cell_counts": {
+          "10": 812,
+          "20": 20,
+          "30": 22,
+          "80": 69,
+          "90": 15
+        },
+        "closure_residual_degree_square": 0.0
+      }
+    ],
+    "contacts": {
+      "gb:ZMB:ADM2:96606910B35256638811207": {
+        "local_intersection_count": 2,
+        "status_counts": {
+          "local areal intersection split by mapped class": 2
+        },
+        "map_class_summary_counts": {
+          "mixed-mapped-water-and-land-cover": 2
+        }
+      },
+      "gb:ZMB:ADM2:96606910B48730551364911": {
+        "local_intersection_count": 3,
+        "status_counts": {
+          "local areal intersection split by mapped class": 3
+        },
+        "map_class_summary_counts": {
+          "mapped-water-observed": 1,
+          "mixed-mapped-water-and-land-cover": 2
+        }
+      },
+      "gb:ZMB:ADM2:96606910B70191271227661": {
+        "local_intersection_count": 6,
+        "status_counts": {
+          "local areal intersection split by mapped class": 5,
+          "empty-or-nonareal-contact; raster classes do not resolve point/line contact": 1
+        },
+        "map_class_summary_counts": {
+          "mixed-mapped-water-and-land-cover": 5,
+          "unresolved/nonareal": 1
+        }
+      },
+      "gb:ZWE:ADM2:62879985B85730198836463": {
+        "local_intersection_count": 10,
+        "status_counts": {
+          "empty-or-nonareal-contact; raster classes do not resolve point/line contact": 2,
+          "local areal intersection split by mapped class": 8
+        },
+        "map_class_summary_counts": {
+          "unresolved/nonareal": 2,
+          "mixed-mapped-water-and-land-cover": 6,
+          "mapped-water-observed": 2
+        }
+      }
+    },
+    "point_contact_fragments": [
+      {
+        "fragment_id": "physical-gap:617:52:32a189d6c70f1265e05e0fcad124e843b25c3ef05cf7aabef07f8bdc49910275",
+        "geometry_type": "Polygon",
+        "classification_status": "fragment area split by mapped class",
+        "class_codes": [
+          80
+        ]
+      },
+      {
+        "fragment_id": "physical-gap:617:53:451b0e380269c8ede553712986c4a566395901139c14a263d4133fb9705d5f5d",
+        "geometry_type": "Polygon",
+        "classification_status": "fragment area split by mapped class",
+        "class_codes": [
+          10,
+          20,
+          30,
+          50,
+          80,
+          90
+        ]
+      }
+    ],
+    "aggregate_class_cell_counts": {
+      "10": 24008,
+      "20": 1551,
+      "30": 17381,
+      "40": 597,
+      "50": 99,
+      "60": 2621,
+      "80": 171269,
+      "90": 8140
+    },
+    "aggregate_class_categories": {
+      "mapped-herbaceous-wetland-water-status-unresolved": 8140,
+      "mapped-nonwater-land-cover": 46257,
+      "mapped-permanent-water": 171269
+    }
+  },
+  "output": {
+    "bundle_bytes_including_receipt": 15615087,
+    "result_file_count": 13,
+    "largest_result_file_bytes": 5075881,
+    "result_index_sha256": "27d139ec7e5eedb94d6f9e17088cfa1b6e0034cdbba0c2449903111d16e86922",
+    "execution_receipt_sha256": "e04ffdbc0bb0d3ab1dcee21772a4c70a4a4a13ae2daf1fae4c28e962b2d5c1e8",
+    "producer_sha256": "295bac565ab3ca42b8c00ab2c5bcab2942ff011e0813ed8344f9e682d9f99e1a",
+    "file_receipts": [
+      {
+        "path": "component-results/0001.json",
+        "bytes": 641299,
+        "sha256": "7044d0007b1f67ece7ae4c64d4df691241c2698a76571aa83af6a21a016e0c70"
+      },
+      {
+        "path": "component-results/0002.json",
+        "bytes": 2771397,
+        "sha256": "552e1f824614d153fded483f27e1b81395c8b7238cdd0f6c6cc96c5b3e1a1383"
+      },
+      {
+        "path": "component-results/0003.json",
+        "bytes": 231964,
+        "sha256": "894c808eb8559549c524a6ae64ffb62729a5fcce256c8c908b13b573484a8dc4"
+      },
+      {
+        "path": "component-results/0004.json",
+        "bytes": 455188,
+        "sha256": "c87aab7fea0692172e90f6c6c596a0cc13fa278cecf3a7b52ac26d2258b99b6c"
+      },
+      {
+        "path": "component-results/0005.json",
+        "bytes": 655555,
+        "sha256": "df732293dad673a28338440495f3a5eb8450ee004355c1647f76fb7cd2a20c14"
+      },
+      {
+        "path": "component-results/0006.json",
+        "bytes": 1737158,
+        "sha256": "b2aac0aeac823648fb8f3ca79834174f2cd0c01f06c0f7be9d7381af565ead61"
+      },
+      {
+        "path": "component-results/0007.json",
+        "bytes": 927805,
+        "sha256": "43cc62e3f5408d8e3384767749213774bd11f86e1462dccefa3c519be596caf7"
+      },
+      {
+        "path": "component-results/0008.json",
+        "bytes": 5075881,
+        "sha256": "efa1d21dc84aa0a357a0fae1fcffcb57c8b292bded805f4bc10a208cbb4027fa"
+      },
+      {
+        "path": "component-results/0009.json",
+        "bytes": 392699,
+        "sha256": "d2ab7e930d33a0bbdbceea569c9500cc22dac2a15acc8ca58ab7e844ccad2875"
+      },
+      {
+        "path": "component-results/0010.json",
+        "bytes": 62677,
+        "sha256": "6619bd96f41e6bf052dff75d928ac76c49de255d0a8e5a4334df39d5025e20e0"
+      },
+      {
+        "path": "contact-fragments/0001.json",
+        "bytes": 1446,
+        "sha256": "1b5e8d5c5a7234deb320664f9bc200c15a405ef7356e3b7018a8593555847fda"
+      },
+      {
+        "path": "contact-fragments/0002.json",
+        "bytes": 640913,
+        "sha256": "036005f8cc4b924600d0418860837ed4ad2839edc7b40da405f0360517532b51"
+      },
+      {
+        "path": "worldcover-classification-index.json",
+        "bytes": 2018335,
+        "sha256": "27d139ec7e5eedb94d6f9e17088cfa1b6e0034cdbba0c2449903111d16e86922"
+      }
+    ]
+  },
+  "audit": {
+    "result": "passed",
+    "method": "The repository verifier was subsequently corrected to derive source_geometry_compressed_bytes_each from the complete pinned source gzip. The full run-one/run-two verifier passes against frozen-inputs-run-one-and-two.json; no production input or classifier was changed between the runs.",
+    "reconstructed_component_roster": "10/10 exact",
+    "contact_subject_roster": "4/4 exact",
+    "local_intersection_roster": "21/21 exact",
+    "point_fragment_roster": "2/2 exact",
+    "file_hashes_and_caps": "all listed output files matched receipt hashes/sizes; largest below 32 MiB; bundle below 64 MiB",
+    "partition_closure": "all ten candidate residuals are zero",
+    "paired_verification": "passed; all input pins, producer hash, 13 listed result-file hashes, component shards and fragment shards match run two."
+  },
+  "interpretation_limits": [
+    "ESA WorldCover 2021 v200 map classes describe its 2021 land-cover product only.",
+    "Class 80 means mapped permanent water; class 90 is herbaceous wetland and remains water-status unresolved. Other named classes are mapped non-water land cover, not proof of dry land.",
+    "The product has no candidate-specific accuracy or registration guarantee in the retained validation record; nominal 10 m spacing does not resolve thin shoreline or boundary placement.",
+    "These observations do not establish present-day water conditions, legal shoreline/boundary, political ownership, execution cause, or physical approval. Preserve unsupported parts unresolved.",
+    "The full four neighboring administrative polygons extend beyond this source window; only complete candidate footprints and their 21 local contact intersections were classified. Zero-area/empty contacts remain unresolved."
+  ]
+}

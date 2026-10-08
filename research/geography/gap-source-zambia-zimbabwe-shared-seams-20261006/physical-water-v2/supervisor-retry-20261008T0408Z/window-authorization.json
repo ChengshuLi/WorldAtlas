@@ -1,0 +1,16 @@
+{
+  "issue": 1234,
+  "authorized": true,
+  "requested_window_mib": 768,
+  "producer_abort_mib": 700,
+  "minimum_host_free_percent": 40,
+  "maximum_wall_seconds": 1800,
+  "authorization_source": "ENG gap closer chat 01a10893-2a57-72e0-aa08-5c36088d5206 issued one additional bounded classification-process authorization after the first process was stopped by its live host gate",
+  "authorized_scope": "one full ESA WorldCover 2021 v200 classification process for the original ten components, four contact subjects via all 21 local intersections, and two original point-contact fragments, subject to fresh checks",
+  "maximum_wall_seconds_basis": "worker-imposed 30-minute cap; root authorized a bounded process but supplied no duration",
+  "pinned_preflight_sha256": "b2a7e1e10a4b4b1e1b9a934060675d8838f8000a682bf66c3c703e3bd2576290",
+  "code_commit": "e19c6f429036925ed701a23b12065bfdd2ea2932",
+  "prelaunch_host_free_percent": 48,
+  "prelaunch_host_measurement_utc": "2026-10-08T04:08:22Z",
+  "first_attempt_history": "supervisor-run-one-20261008T0404Z stopped after host free fell below 40 percent; preserved separately"
+}

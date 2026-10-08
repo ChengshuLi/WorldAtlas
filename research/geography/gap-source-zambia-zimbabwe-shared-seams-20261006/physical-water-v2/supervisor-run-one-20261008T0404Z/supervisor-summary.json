@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "result": "stopped-or-failed",
+  "reason": "host-free-memory-below-40-percent",
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/d69cad0a30b838434c8a530bfb83e3b585a8d6ad8cf11c4d74190c94e41f2ac5/work/research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/classify_worldcover.py",
+    "--run",
+    "one"
+  ],
+  "started_at_utc": "2026-10-08T04:05:26.148193+00:00",
+  "elapsed_seconds": 5.019,
+  "exit_code": -15,
+  "maximum_sampled_process_group_rss_mib": 127.594,
+  "maximum_sampled_process_group_process_count": 1,
+  "initial_host_free_percent": 42,
+  "supervisor_stop_mib": 640,
+  "producer_abort_mib": 700,
+  "requested_window_mib": 768,
+  "minimum_host_free_percent": 40,
+  "maximum_bytes_per_producer_log": 1048576,
+  "poll_interval_seconds": 0.25,
+  "sampling_overshoot_limit": "A 250 ms poll interval is the nominal observation cadence, not a hard memory-growth or log-write bound. ps/memory_pressure calls, OS scheduling, and SIGTERM/SIGKILL delivery add latency; a fast allocation spike can exceed 640 MiB or 700 MiB between samples, and fast log output can cross 1 MiB between file-size checks. The producer's own 700 MiB checks remain enabled as a second guard.",
+  "termination": "SIGTERM",
+  "logs": {
+    "samples": "samples.jsonl",
+    "stdout": "producer.stdout.log",
+    "stderr": "producer.stderr.log"
+  }
+}

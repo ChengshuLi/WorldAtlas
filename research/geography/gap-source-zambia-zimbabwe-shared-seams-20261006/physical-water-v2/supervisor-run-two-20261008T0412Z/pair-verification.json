@@ -1,0 +1,40 @@
+{
+  "all_result_file_hashes_equal": true,
+  "bundle_files_per_run_including_execution_receipt": 14,
+  "checker_fix": "expected source_geometry_compressed_bytes_each derives from the complete pinned gzip bytes and is separately mutation-tested; no frozen production input or classifier code was changed between runs.",
+  "combined_bundle_bytes_including_receipts": 31230174,
+  "component_and_fragment_geometry_equal": true,
+  "components": 10,
+  "contact_subjects": 4,
+  "frozen_inputs_sha256": "b2a7e1e10a4b4b1e1b9a934060675d8838f8000a682bf66c3c703e3bd2576290",
+  "input_pins_equal": true,
+  "local_intersections": 21,
+  "method": "verify_classification_runs.py against preserved production freeze; raster pixels were not read during verification",
+  "point_fragments": 2,
+  "postrun_audit_freeze_sha256": "28bb7190f7aa603b1fedf72f13825a139a597c6bb05925114382d297315b4716",
+  "preserved_production_freeze": "frozen-inputs-run-one-and-two.json",
+  "preserved_production_freeze_sha256": "b2a7e1e10a4b4b1e1b9a934060675d8838f8000a682bf66c3c703e3bd2576290",
+  "producer_hash_equal": true,
+  "producer_sha256": "295bac565ab3ca42b8c00ab2c5bcab2942ff011e0813ed8344f9e682d9f99e1a",
+  "result": "passed",
+  "result_files_per_run_excluding_execution_receipt": 13,
+  "run_one": {
+    "bundle_bytes_including_receipt": 15615087,
+    "elapsed_seconds": 26.829,
+    "initial_host_free_percent": 48,
+    "observed_min_host_free_percent_from_samples": 46,
+    "producer_peak_rss_mib": 201.7,
+    "supervisor_max_sampled_group_rss_mib": 198.547
+  },
+  "run_two": {
+    "bundle_bytes_including_receipt": 15615087,
+    "elapsed_seconds": 27.661,
+    "initial_host_free_percent": 44,
+    "observed_min_host_free_percent_from_samples": 40,
+    "producer_peak_rss_mib": 181.1,
+    "supervisor_max_sampled_group_rss_mib": 170.016
+  },
+  "same_source_metadata_and_limits": true,
+  "source_contact_evidence": 1,
+  "source_pixels_read": false
+}

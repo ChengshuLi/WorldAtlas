@@ -1,0 +1,1733 @@
+{
+  "version": 1,
+  "acquisition_started_at": "2026-10-08T02:44:00.488405+00:00",
+  "acquisition_finished_at": "2026-10-08T02:44:47.115754+00:00",
+  "source": {
+    "id": "esa-worldcover-2021-v200-s18e027",
+    "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S18E027_Map.tif",
+    "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+    "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+    "whole_object_bytes": 161671883,
+    "whole_object_sha256": null,
+    "whole_object_sha256_note": "No whole-object digest was observed or computed; ETag is multipart and is not represented as a whole-file SHA-256.",
+    "classification_period_utc": [
+      "2021-01-01T00:00:00Z",
+      "2021-12-31T23:59:59Z"
+    ],
+    "product_version": "V2.0.0",
+    "crs": "EPSG:4326",
+    "pixel_scale_degrees": [
+      8.333333333333333e-05,
+      8.333333333333333e-05,
+      0.0
+    ],
+    "pixel_origin_lonlat": [
+      27.0,
+      -15.0
+    ],
+    "tile_bounds_lonlat": [
+      27.0,
+      -18.0,
+      30.0,
+      -15.0
+    ],
+    "tile_dimensions": [
+      36000,
+      36000
+    ],
+    "tile_pixels": "1-band 8-bit categorical map",
+    "compression": "TIFF Deflate; Predictor=1",
+    "class_80": "Permanent water bodies",
+    "class_90": "Herbaceous wetland; not automatically treated as open water",
+    "license": "CC BY 4.0",
+    "metadata_xml_sha256": "a2748a05bca8c2497b75f1dccec0af545dae4a6bd38b69168f1bf6ffdaa481e6",
+    "metadata_xml": "<GDALMetadata>\n  <Item name=\"algorithm_version\">V2.0.0</Item>\n  <Item name=\"copyright\">ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium</Item>\n  <Item name=\"creation_time\">2022-10-21 07:35:40.236136</Item>\n  <Item name=\"legend\">10  Tree cover\n20  Shrubland\n30  Grassland\n40  Cropland\n50  Built-up\n60  Bare/sparse vegetation\n70  Snow and ice\n80  Permanent water bodies\n90  Herbaceous wetland\n95  Mangroves\n100 Moss and lichen\n</Item>\n  <Item name=\"license\">CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/</Item>\n  <Item name=\"product_crs\">EPSG:4326</Item>\n  <Item name=\"product_grid\">3x3 degree tiling grid</Item>\n  <Item name=\"product_tile\">S18E027</Item>\n  <Item name=\"product_type\">LandCover Map</Item>\n  <Item name=\"product_version\">V2.0.0</Item>\n  <Item name=\"reference\">https://esa-worldcover.org</Item>\n  <Item name=\"time_end\">2021-12-31T23:59:59Z</Item>\n  <Item name=\"time_start\">2021-01-01T00:00:00Z</Item>\n  <Item name=\"title\">ESA WorldCover product at 10m resolution for year 2021</Item>\n</GDALMetadata>\n\u0000"
+  },
+  "issue_extent_lonlat": [
+    28.8483,
+    -16.0782,
+    29.617694117647066,
+    -15.64946701104665
+  ],
+  "complete_pixel_window": {
+    "columns_half_open": [
+      22179,
+      31413
+    ],
+    "rows_half_open": [
+      7793,
+      12939
+    ],
+    "dimensions": [
+      9234,
+      5146
+    ],
+    "decoded_bytes": 47518164
+  },
+  "tile_block_grid": {
+    "dimensions": [
+      36,
+      36
+    ],
+    "block_dimensions": [
+      1024,
+      1024
+    ]
+  },
+  "ifd_metadata_range": {
+    "request_range": "bytes=0-131071",
+    "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+    "status": 206,
+    "content_range": "bytes 0-131071/161671883",
+    "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+    "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+    "content_length": 131072,
+    "sha256": "791210a030c3f0ac76c47e3d49aa2a240f3df715dd6d679648de7e5971e5e074",
+    "file": "sources/worldcover-S18E027/ifd-range-0-131071.bin"
+  },
+  "head_before": {
+    "status": 200,
+    "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+    "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+    "content_length": 161671883,
+    "accept_ranges": "bytes"
+  },
+  "head_after": {
+    "status": 200,
+    "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+    "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+    "content_length": 161671883,
+    "accept_ranges": "bytes"
+  },
+  "selected_block_count": 60,
+  "selected_encoded_bytes": 3943214,
+  "selected_decoded_bytes": 62914560,
+  "blocks": [
+    {
+      "tile_index": 273,
+      "tile_row": 7,
+      "tile_column": 21,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        21504,
+        22528
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c21.bin",
+      "encoded_bytes": 113793,
+      "decoded_bytes": 1048576,
+      "sha256": "181ee9719fd7bb99e5c900e1762d61b01eaf7e6ba5562e455151f3f96f0fe64e",
+      "http": {
+        "request_range": "bytes=77849291-77963083",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 77849291-77963083/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 113793,
+        "sha256": "181ee9719fd7bb99e5c900e1762d61b01eaf7e6ba5562e455151f3f96f0fe64e"
+      }
+    },
+    {
+      "tile_index": 274,
+      "tile_row": 7,
+      "tile_column": 22,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        22528,
+        23552
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c22.bin",
+      "encoded_bytes": 73897,
+      "decoded_bytes": 1048576,
+      "sha256": "b46a421fc0d1ca889a5cf26563635146a90c1e8c9c2118e42dfb61f29cf2bc69",
+      "http": {
+        "request_range": "bytes=77963092-78036988",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 77963092-78036988/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 73897,
+        "sha256": "b46a421fc0d1ca889a5cf26563635146a90c1e8c9c2118e42dfb61f29cf2bc69"
+      }
+    },
+    {
+      "tile_index": 275,
+      "tile_row": 7,
+      "tile_column": 23,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        23552,
+        24576
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c23.bin",
+      "encoded_bytes": 31443,
+      "decoded_bytes": 1048576,
+      "sha256": "9e50e1238715fb2647d1273e2dbfaacabb8c33f929a302cafdfe72f9de0eea9c",
+      "http": {
+        "request_range": "bytes=78036997-78068439",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78036997-78068439/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 31443,
+        "sha256": "9e50e1238715fb2647d1273e2dbfaacabb8c33f929a302cafdfe72f9de0eea9c"
+      }
+    },
+    {
+      "tile_index": 276,
+      "tile_row": 7,
+      "tile_column": 24,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        24576,
+        25600
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c24.bin",
+      "encoded_bytes": 38042,
+      "decoded_bytes": 1048576,
+      "sha256": "292a4dbeeb9ded75824753d5e58a0e8b50b38df3c56620fc81748f7fb3fec517",
+      "http": {
+        "request_range": "bytes=78068448-78106489",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78068448-78106489/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 38042,
+        "sha256": "292a4dbeeb9ded75824753d5e58a0e8b50b38df3c56620fc81748f7fb3fec517"
+      }
+    },
+    {
+      "tile_index": 277,
+      "tile_row": 7,
+      "tile_column": 25,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        25600,
+        26624
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c25.bin",
+      "encoded_bytes": 59482,
+      "decoded_bytes": 1048576,
+      "sha256": "f002a344fb7b383df7cf59e9e63d604c37d79a2c306714833565dd8b604ea271",
+      "http": {
+        "request_range": "bytes=78106498-78165979",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78106498-78165979/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 59482,
+        "sha256": "f002a344fb7b383df7cf59e9e63d604c37d79a2c306714833565dd8b604ea271"
+      }
+    },
+    {
+      "tile_index": 278,
+      "tile_row": 7,
+      "tile_column": 26,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        26624,
+        27648
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c26.bin",
+      "encoded_bytes": 76945,
+      "decoded_bytes": 1048576,
+      "sha256": "be7c4224aeeac312c64706929d1c921ffe867c54ba202bc8d59f3c6572fdc925",
+      "http": {
+        "request_range": "bytes=78165988-78242932",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78165988-78242932/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 76945,
+        "sha256": "be7c4224aeeac312c64706929d1c921ffe867c54ba202bc8d59f3c6572fdc925"
+      }
+    },
+    {
+      "tile_index": 279,
+      "tile_row": 7,
+      "tile_column": 27,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        27648,
+        28672
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c27.bin",
+      "encoded_bytes": 61769,
+      "decoded_bytes": 1048576,
+      "sha256": "5f8dc766a2930824675d7480a6ad2faf56f03b9adee9be362c22d1268cbfb22e",
+      "http": {
+        "request_range": "bytes=78242941-78304709",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78242941-78304709/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 61769,
+        "sha256": "5f8dc766a2930824675d7480a6ad2faf56f03b9adee9be362c22d1268cbfb22e"
+      }
+    },
+    {
+      "tile_index": 280,
+      "tile_row": 7,
+      "tile_column": 28,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        28672,
+        29696
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c28.bin",
+      "encoded_bytes": 79379,
+      "decoded_bytes": 1048576,
+      "sha256": "ab2cb612bad8ad24d1b35ee572590953d398c0f0e8fea5634a76aa98da1f91c0",
+      "http": {
+        "request_range": "bytes=78304718-78384096",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78304718-78384096/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 79379,
+        "sha256": "ab2cb612bad8ad24d1b35ee572590953d398c0f0e8fea5634a76aa98da1f91c0"
+      }
+    },
+    {
+      "tile_index": 281,
+      "tile_row": 7,
+      "tile_column": 29,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        29696,
+        30720
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c29.bin",
+      "encoded_bytes": 76265,
+      "decoded_bytes": 1048576,
+      "sha256": "e6047b61ace035891cfd64235d52ade6548d830582ab3b39e6f579ffe7ad3980",
+      "http": {
+        "request_range": "bytes=78384105-78460369",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78384105-78460369/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 76265,
+        "sha256": "e6047b61ace035891cfd64235d52ade6548d830582ab3b39e6f579ffe7ad3980"
+      }
+    },
+    {
+      "tile_index": 282,
+      "tile_row": 7,
+      "tile_column": 30,
+      "pixel_rows": [
+        7168,
+        8192
+      ],
+      "pixel_columns": [
+        30720,
+        31744
+      ],
+      "file": "sources/worldcover-S18E027/block-r07-c30.bin",
+      "encoded_bytes": 75795,
+      "decoded_bytes": 1048576,
+      "sha256": "d2b0562f70b06a8f739e00cb338c046640672bb155320c7338d12619edae5f82",
+      "http": {
+        "request_range": "bytes=78460378-78536172",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 78460378-78536172/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 75795,
+        "sha256": "d2b0562f70b06a8f739e00cb338c046640672bb155320c7338d12619edae5f82"
+      }
+    },
+    {
+      "tile_index": 309,
+      "tile_row": 8,
+      "tile_column": 21,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        21504,
+        22528
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c21.bin",
+      "encoded_bytes": 61079,
+      "decoded_bytes": 1048576,
+      "sha256": "6aa6db11d72b93971bf02452e8844b9019313abb4df997e23152ea146325f10e",
+      "http": {
+        "request_range": "bytes=80115485-80176563",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80115485-80176563/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 61079,
+        "sha256": "6aa6db11d72b93971bf02452e8844b9019313abb4df997e23152ea146325f10e"
+      }
+    },
+    {
+      "tile_index": 310,
+      "tile_row": 8,
+      "tile_column": 22,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        22528,
+        23552
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c22.bin",
+      "encoded_bytes": 61968,
+      "decoded_bytes": 1048576,
+      "sha256": "183620b312798d6b3e0ca01d0333d7eaf1f7ad60f28cef93efdd80cb513af162",
+      "http": {
+        "request_range": "bytes=80176572-80238539",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80176572-80238539/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 61968,
+        "sha256": "183620b312798d6b3e0ca01d0333d7eaf1f7ad60f28cef93efdd80cb513af162"
+      }
+    },
+    {
+      "tile_index": 311,
+      "tile_row": 8,
+      "tile_column": 23,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        23552,
+        24576
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c23.bin",
+      "encoded_bytes": 40828,
+      "decoded_bytes": 1048576,
+      "sha256": "d8ca0bf0f4a6cd03cc5abbe5f9a7593945f704a144bd47671fa8bf874fe0972d",
+      "http": {
+        "request_range": "bytes=80238548-80279375",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80238548-80279375/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 40828,
+        "sha256": "d8ca0bf0f4a6cd03cc5abbe5f9a7593945f704a144bd47671fa8bf874fe0972d"
+      }
+    },
+    {
+      "tile_index": 312,
+      "tile_row": 8,
+      "tile_column": 24,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        24576,
+        25600
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c24.bin",
+      "encoded_bytes": 38041,
+      "decoded_bytes": 1048576,
+      "sha256": "1021ee7fbf65a1adbc31a3c39f898000419641533fd7910c0af24db11b350603",
+      "http": {
+        "request_range": "bytes=80279384-80317424",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80279384-80317424/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 38041,
+        "sha256": "1021ee7fbf65a1adbc31a3c39f898000419641533fd7910c0af24db11b350603"
+      }
+    },
+    {
+      "tile_index": 313,
+      "tile_row": 8,
+      "tile_column": 25,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        25600,
+        26624
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c25.bin",
+      "encoded_bytes": 54021,
+      "decoded_bytes": 1048576,
+      "sha256": "8d2b4db557420b723bef234cc19b593d137b7a4f930d89471fc40011aba549fe",
+      "http": {
+        "request_range": "bytes=80317433-80371453",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80317433-80371453/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 54021,
+        "sha256": "8d2b4db557420b723bef234cc19b593d137b7a4f930d89471fc40011aba549fe"
+      }
+    },
+    {
+      "tile_index": 314,
+      "tile_row": 8,
+      "tile_column": 26,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        26624,
+        27648
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c26.bin",
+      "encoded_bytes": 78499,
+      "decoded_bytes": 1048576,
+      "sha256": "e0e2a3d9fb2261be38da7f95a9f7ee773ef82978509e1b84d76d342a194cc179",
+      "http": {
+        "request_range": "bytes=80371462-80449960",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80371462-80449960/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 78499,
+        "sha256": "e0e2a3d9fb2261be38da7f95a9f7ee773ef82978509e1b84d76d342a194cc179"
+      }
+    },
+    {
+      "tile_index": 315,
+      "tile_row": 8,
+      "tile_column": 27,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        27648,
+        28672
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c27.bin",
+      "encoded_bytes": 91115,
+      "decoded_bytes": 1048576,
+      "sha256": "24d09cee8a31f64618fcce2dd3474fe76a75142a1a42a1f5c430a2816a2bca70",
+      "http": {
+        "request_range": "bytes=80449969-80541083",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80449969-80541083/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 91115,
+        "sha256": "24d09cee8a31f64618fcce2dd3474fe76a75142a1a42a1f5c430a2816a2bca70"
+      }
+    },
+    {
+      "tile_index": 316,
+      "tile_row": 8,
+      "tile_column": 28,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        28672,
+        29696
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c28.bin",
+      "encoded_bytes": 79330,
+      "decoded_bytes": 1048576,
+      "sha256": "c20acf482197fa2c816551fb3ada0f6d7f090d65677359f08a9512f4ff970fa2",
+      "http": {
+        "request_range": "bytes=80541092-80620421",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80541092-80620421/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 79330,
+        "sha256": "c20acf482197fa2c816551fb3ada0f6d7f090d65677359f08a9512f4ff970fa2"
+      }
+    },
+    {
+      "tile_index": 317,
+      "tile_row": 8,
+      "tile_column": 29,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        29696,
+        30720
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c29.bin",
+      "encoded_bytes": 68409,
+      "decoded_bytes": 1048576,
+      "sha256": "e3f21f6ae83c65843a236142d1dac8842e8b8f3305a7bb58be26f72e77bc1b42",
+      "http": {
+        "request_range": "bytes=80620430-80688838",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80620430-80688838/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 68409,
+        "sha256": "e3f21f6ae83c65843a236142d1dac8842e8b8f3305a7bb58be26f72e77bc1b42"
+      }
+    },
+    {
+      "tile_index": 318,
+      "tile_row": 8,
+      "tile_column": 30,
+      "pixel_rows": [
+        8192,
+        9216
+      ],
+      "pixel_columns": [
+        30720,
+        31744
+      ],
+      "file": "sources/worldcover-S18E027/block-r08-c30.bin",
+      "encoded_bytes": 59125,
+      "decoded_bytes": 1048576,
+      "sha256": "66d947518c38aaf783effdd94211a672bac81760cec2cda20c5648ce7f822e8f",
+      "http": {
+        "request_range": "bytes=80688847-80747971",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 80688847-80747971/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 59125,
+        "sha256": "66d947518c38aaf783effdd94211a672bac81760cec2cda20c5648ce7f822e8f"
+      }
+    },
+    {
+      "tile_index": 345,
+      "tile_row": 9,
+      "tile_column": 21,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        21504,
+        22528
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c21.bin",
+      "encoded_bytes": 87060,
+      "decoded_bytes": 1048576,
+      "sha256": "bc5c0f2b7534930e752339d7b79a9cfb09549a9a5b56e0ddc1ccc4395d639a5d",
+      "http": {
+        "request_range": "bytes=82536774-82623833",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 82536774-82623833/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 87060,
+        "sha256": "bc5c0f2b7534930e752339d7b79a9cfb09549a9a5b56e0ddc1ccc4395d639a5d"
+      }
+    },
+    {
+      "tile_index": 346,
+      "tile_row": 9,
+      "tile_column": 22,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        22528,
+        23552
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c22.bin",
+      "encoded_bytes": 103063,
+      "decoded_bytes": 1048576,
+      "sha256": "665c284f6cabad8f4e168655dab93b16e7d8abc1681c5d2918e17b15e264f890",
+      "http": {
+        "request_range": "bytes=82623842-82726904",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 82623842-82726904/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 103063,
+        "sha256": "665c284f6cabad8f4e168655dab93b16e7d8abc1681c5d2918e17b15e264f890"
+      }
+    },
+    {
+      "tile_index": 347,
+      "tile_row": 9,
+      "tile_column": 23,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        23552,
+        24576
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c23.bin",
+      "encoded_bytes": 102743,
+      "decoded_bytes": 1048576,
+      "sha256": "5b6bbf9235fc25a20d2dbf7a3f05802102c69517cea09d6e2af26a5f4288c095",
+      "http": {
+        "request_range": "bytes=82726913-82829655",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 82726913-82829655/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 102743,
+        "sha256": "5b6bbf9235fc25a20d2dbf7a3f05802102c69517cea09d6e2af26a5f4288c095"
+      }
+    },
+    {
+      "tile_index": 348,
+      "tile_row": 9,
+      "tile_column": 24,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        24576,
+        25600
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c24.bin",
+      "encoded_bytes": 93052,
+      "decoded_bytes": 1048576,
+      "sha256": "b03335ca12121e2d104812a503a1e6b055918642847e5c4d6142432d6ce77f57",
+      "http": {
+        "request_range": "bytes=82829664-82922715",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 82829664-82922715/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 93052,
+        "sha256": "b03335ca12121e2d104812a503a1e6b055918642847e5c4d6142432d6ce77f57"
+      }
+    },
+    {
+      "tile_index": 349,
+      "tile_row": 9,
+      "tile_column": 25,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        25600,
+        26624
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c25.bin",
+      "encoded_bytes": 89659,
+      "decoded_bytes": 1048576,
+      "sha256": "ea55803d128234ab0bdff90da0325497a93b298c5a0028d2c60dd2a3eb9d61c1",
+      "http": {
+        "request_range": "bytes=82922724-83012382",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 82922724-83012382/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 89659,
+        "sha256": "ea55803d128234ab0bdff90da0325497a93b298c5a0028d2c60dd2a3eb9d61c1"
+      }
+    },
+    {
+      "tile_index": 350,
+      "tile_row": 9,
+      "tile_column": 26,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        26624,
+        27648
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c26.bin",
+      "encoded_bytes": 69111,
+      "decoded_bytes": 1048576,
+      "sha256": "1e059cf06e9c86e7311075d3c14816548e9f8b6f725e5e40744824d36d3a5ed0",
+      "http": {
+        "request_range": "bytes=83012391-83081501",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 83012391-83081501/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 69111,
+        "sha256": "1e059cf06e9c86e7311075d3c14816548e9f8b6f725e5e40744824d36d3a5ed0"
+      }
+    },
+    {
+      "tile_index": 351,
+      "tile_row": 9,
+      "tile_column": 27,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        27648,
+        28672
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c27.bin",
+      "encoded_bytes": 82413,
+      "decoded_bytes": 1048576,
+      "sha256": "8973209fe985101d15c7e77743376539b1ee362eaadf813d155a44a6b8bb2fa0",
+      "http": {
+        "request_range": "bytes=83081510-83163922",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 83081510-83163922/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 82413,
+        "sha256": "8973209fe985101d15c7e77743376539b1ee362eaadf813d155a44a6b8bb2fa0"
+      }
+    },
+    {
+      "tile_index": 352,
+      "tile_row": 9,
+      "tile_column": 28,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        28672,
+        29696
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c28.bin",
+      "encoded_bytes": 63245,
+      "decoded_bytes": 1048576,
+      "sha256": "5ae879b61b4b5a387f45570b2f839d5c8afdfce7949e5d5e56a27e151ef83a97",
+      "http": {
+        "request_range": "bytes=83163931-83227175",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 83163931-83227175/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 63245,
+        "sha256": "5ae879b61b4b5a387f45570b2f839d5c8afdfce7949e5d5e56a27e151ef83a97"
+      }
+    },
+    {
+      "tile_index": 353,
+      "tile_row": 9,
+      "tile_column": 29,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        29696,
+        30720
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c29.bin",
+      "encoded_bytes": 41805,
+      "decoded_bytes": 1048576,
+      "sha256": "b03cc9e8b4240006fed614e9a1c2e6d9258ca4c95b381f723a3a929e0e4ce787",
+      "http": {
+        "request_range": "bytes=83227184-83268988",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 83227184-83268988/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 41805,
+        "sha256": "b03cc9e8b4240006fed614e9a1c2e6d9258ca4c95b381f723a3a929e0e4ce787"
+      }
+    },
+    {
+      "tile_index": 354,
+      "tile_row": 9,
+      "tile_column": 30,
+      "pixel_rows": [
+        9216,
+        10240
+      ],
+      "pixel_columns": [
+        30720,
+        31744
+      ],
+      "file": "sources/worldcover-S18E027/block-r09-c30.bin",
+      "encoded_bytes": 45727,
+      "decoded_bytes": 1048576,
+      "sha256": "49405d45261d344b41c52bb0aa4371ea8ada5fe6a9f546347d1305dc7b2735e8",
+      "http": {
+        "request_range": "bytes=83268997-83314723",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 83268997-83314723/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 45727,
+        "sha256": "49405d45261d344b41c52bb0aa4371ea8ada5fe6a9f546347d1305dc7b2735e8"
+      }
+    },
+    {
+      "tile_index": 381,
+      "tile_row": 10,
+      "tile_column": 21,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        21504,
+        22528
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c21.bin",
+      "encoded_bytes": 85022,
+      "decoded_bytes": 1048576,
+      "sha256": "5ed6b9cf959e431ac9ce9323a945c8274a02213eb230a3361dcf4b1a3321e982",
+      "http": {
+        "request_range": "bytes=85437788-85522809",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85437788-85522809/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 85022,
+        "sha256": "5ed6b9cf959e431ac9ce9323a945c8274a02213eb230a3361dcf4b1a3321e982"
+      }
+    },
+    {
+      "tile_index": 382,
+      "tile_row": 10,
+      "tile_column": 22,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        22528,
+        23552
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c22.bin",
+      "encoded_bytes": 84882,
+      "decoded_bytes": 1048576,
+      "sha256": "cb156265152d3043638ba055b912103a8e15918594d5e39b674145a5b55fc341",
+      "http": {
+        "request_range": "bytes=85522818-85607699",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85522818-85607699/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 84882,
+        "sha256": "cb156265152d3043638ba055b912103a8e15918594d5e39b674145a5b55fc341"
+      }
+    },
+    {
+      "tile_index": 383,
+      "tile_row": 10,
+      "tile_column": 23,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        23552,
+        24576
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c23.bin",
+      "encoded_bytes": 88643,
+      "decoded_bytes": 1048576,
+      "sha256": "7b3bdc4c7d55277e6a449173326016823f56115ec3c8f0b8093ea544673d20e5",
+      "http": {
+        "request_range": "bytes=85607708-85696350",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85607708-85696350/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 88643,
+        "sha256": "7b3bdc4c7d55277e6a449173326016823f56115ec3c8f0b8093ea544673d20e5"
+      }
+    },
+    {
+      "tile_index": 384,
+      "tile_row": 10,
+      "tile_column": 24,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        24576,
+        25600
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c24.bin",
+      "encoded_bytes": 70023,
+      "decoded_bytes": 1048576,
+      "sha256": "488e6065ed8a5602469ddcb87842478629c7117732ab48f14524988848096204",
+      "http": {
+        "request_range": "bytes=85696359-85766381",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85696359-85766381/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 70023,
+        "sha256": "488e6065ed8a5602469ddcb87842478629c7117732ab48f14524988848096204"
+      }
+    },
+    {
+      "tile_index": 385,
+      "tile_row": 10,
+      "tile_column": 25,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        25600,
+        26624
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c25.bin",
+      "encoded_bytes": 54237,
+      "decoded_bytes": 1048576,
+      "sha256": "3558be48509795ae39d62ce3e895476c31c1addbe0c870ca4e06bedfd654142f",
+      "http": {
+        "request_range": "bytes=85766390-85820626",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85766390-85820626/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 54237,
+        "sha256": "3558be48509795ae39d62ce3e895476c31c1addbe0c870ca4e06bedfd654142f"
+      }
+    },
+    {
+      "tile_index": 386,
+      "tile_row": 10,
+      "tile_column": 26,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        26624,
+        27648
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c26.bin",
+      "encoded_bytes": 68739,
+      "decoded_bytes": 1048576,
+      "sha256": "b222c9fdbb3667aea7c472a7d7c872403b11197eddb43b127b0bb2bb0935433f",
+      "http": {
+        "request_range": "bytes=85820635-85889373",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85820635-85889373/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 68739,
+        "sha256": "b222c9fdbb3667aea7c472a7d7c872403b11197eddb43b127b0bb2bb0935433f"
+      }
+    },
+    {
+      "tile_index": 387,
+      "tile_row": 10,
+      "tile_column": 27,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        27648,
+        28672
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c27.bin",
+      "encoded_bytes": 63270,
+      "decoded_bytes": 1048576,
+      "sha256": "735739daa95f91f66c657341283f33ca02d316e93ceb18f8a2b58d3aa85ee934",
+      "http": {
+        "request_range": "bytes=85889382-85952651",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85889382-85952651/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 63270,
+        "sha256": "735739daa95f91f66c657341283f33ca02d316e93ceb18f8a2b58d3aa85ee934"
+      }
+    },
+    {
+      "tile_index": 388,
+      "tile_row": 10,
+      "tile_column": 28,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        28672,
+        29696
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c28.bin",
+      "encoded_bytes": 35445,
+      "decoded_bytes": 1048576,
+      "sha256": "7664cbafee0cff0486bd2354eb66113d6c170cbb9e8dd6d3a2611156036e014d",
+      "http": {
+        "request_range": "bytes=85952660-85988104",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85952660-85988104/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 35445,
+        "sha256": "7664cbafee0cff0486bd2354eb66113d6c170cbb9e8dd6d3a2611156036e014d"
+      }
+    },
+    {
+      "tile_index": 389,
+      "tile_row": 10,
+      "tile_column": 29,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        29696,
+        30720
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c29.bin",
+      "encoded_bytes": 29183,
+      "decoded_bytes": 1048576,
+      "sha256": "f0d583ef80bd2d5a9bd7d8f2f82229cc0bc10d8c9e4133d95da7cec7eb0e97af",
+      "http": {
+        "request_range": "bytes=85988113-86017295",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 85988113-86017295/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 29183,
+        "sha256": "f0d583ef80bd2d5a9bd7d8f2f82229cc0bc10d8c9e4133d95da7cec7eb0e97af"
+      }
+    },
+    {
+      "tile_index": 390,
+      "tile_row": 10,
+      "tile_column": 30,
+      "pixel_rows": [
+        10240,
+        11264
+      ],
+      "pixel_columns": [
+        30720,
+        31744
+      ],
+      "file": "sources/worldcover-S18E027/block-r10-c30.bin",
+      "encoded_bytes": 41065,
+      "decoded_bytes": 1048576,
+      "sha256": "4d847776221eacb82d960ce5ac72b15e55307a890c2d78c67cb28e35cad16a77",
+      "http": {
+        "request_range": "bytes=86017304-86058368",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 86017304-86058368/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 41065,
+        "sha256": "4d847776221eacb82d960ce5ac72b15e55307a890c2d78c67cb28e35cad16a77"
+      }
+    },
+    {
+      "tile_index": 417,
+      "tile_row": 11,
+      "tile_column": 21,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        21504,
+        22528
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c21.bin",
+      "encoded_bytes": 108464,
+      "decoded_bytes": 1048576,
+      "sha256": "5728ed0d6dbf712e6876e3878a0099a0f095bfe01c740e3144555bdc4f8c9308",
+      "http": {
+        "request_range": "bytes=88216902-88325365",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88216902-88325365/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 108464,
+        "sha256": "5728ed0d6dbf712e6876e3878a0099a0f095bfe01c740e3144555bdc4f8c9308"
+      }
+    },
+    {
+      "tile_index": 418,
+      "tile_row": 11,
+      "tile_column": 22,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        22528,
+        23552
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c22.bin",
+      "encoded_bytes": 81631,
+      "decoded_bytes": 1048576,
+      "sha256": "87151806a5b6dbe75e77286531c48e164b3f024645d0330997b967fc3aa48db7",
+      "http": {
+        "request_range": "bytes=88325374-88407004",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88325374-88407004/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 81631,
+        "sha256": "87151806a5b6dbe75e77286531c48e164b3f024645d0330997b967fc3aa48db7"
+      }
+    },
+    {
+      "tile_index": 419,
+      "tile_row": 11,
+      "tile_column": 23,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        23552,
+        24576
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c23.bin",
+      "encoded_bytes": 44813,
+      "decoded_bytes": 1048576,
+      "sha256": "089f4725baa692c4508caa63109d623d2dd70edf89b32b7bf5098a8828e4fdad",
+      "http": {
+        "request_range": "bytes=88407013-88451825",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88407013-88451825/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 44813,
+        "sha256": "089f4725baa692c4508caa63109d623d2dd70edf89b32b7bf5098a8828e4fdad"
+      }
+    },
+    {
+      "tile_index": 420,
+      "tile_row": 11,
+      "tile_column": 24,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        24576,
+        25600
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c24.bin",
+      "encoded_bytes": 53443,
+      "decoded_bytes": 1048576,
+      "sha256": "a05609a133a54d2225d3ee4005a00e5a5c89656df430a3ddd74166426690eb33",
+      "http": {
+        "request_range": "bytes=88451834-88505276",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88451834-88505276/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 53443,
+        "sha256": "a05609a133a54d2225d3ee4005a00e5a5c89656df430a3ddd74166426690eb33"
+      }
+    },
+    {
+      "tile_index": 421,
+      "tile_row": 11,
+      "tile_column": 25,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        25600,
+        26624
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c25.bin",
+      "encoded_bytes": 59456,
+      "decoded_bytes": 1048576,
+      "sha256": "90fbfcd896a81247f6c091ca42b4b5153f539ebd013649bfe1e92c3db9bd6c82",
+      "http": {
+        "request_range": "bytes=88505285-88564740",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88505285-88564740/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 59456,
+        "sha256": "90fbfcd896a81247f6c091ca42b4b5153f539ebd013649bfe1e92c3db9bd6c82"
+      }
+    },
+    {
+      "tile_index": 422,
+      "tile_row": 11,
+      "tile_column": 26,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        26624,
+        27648
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c26.bin",
+      "encoded_bytes": 73276,
+      "decoded_bytes": 1048576,
+      "sha256": "c234f6e89678d0c557cc403147997867b7fe764f76d88a3b730f0b339a6c7937",
+      "http": {
+        "request_range": "bytes=88564749-88638024",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88564749-88638024/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 73276,
+        "sha256": "c234f6e89678d0c557cc403147997867b7fe764f76d88a3b730f0b339a6c7937"
+      }
+    },
+    {
+      "tile_index": 423,
+      "tile_row": 11,
+      "tile_column": 27,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        27648,
+        28672
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c27.bin",
+      "encoded_bytes": 66670,
+      "decoded_bytes": 1048576,
+      "sha256": "282f2c6b9fb5ba2da2157dd3b9c2809698da1eea840730fc740931ce7049067f",
+      "http": {
+        "request_range": "bytes=88638033-88704702",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88638033-88704702/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 66670,
+        "sha256": "282f2c6b9fb5ba2da2157dd3b9c2809698da1eea840730fc740931ce7049067f"
+      }
+    },
+    {
+      "tile_index": 424,
+      "tile_row": 11,
+      "tile_column": 28,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        28672,
+        29696
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c28.bin",
+      "encoded_bytes": 25356,
+      "decoded_bytes": 1048576,
+      "sha256": "66b54ce8629a9b399a425020708d7951a91a467e4d90fabd0fcc8b7aec522344",
+      "http": {
+        "request_range": "bytes=88704711-88730066",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88704711-88730066/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 25356,
+        "sha256": "66b54ce8629a9b399a425020708d7951a91a467e4d90fabd0fcc8b7aec522344"
+      }
+    },
+    {
+      "tile_index": 425,
+      "tile_row": 11,
+      "tile_column": 29,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        29696,
+        30720
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c29.bin",
+      "encoded_bytes": 30830,
+      "decoded_bytes": 1048576,
+      "sha256": "5999bda62740ea9068e4ac5031b93061ffddbb279502f41be1f50416bc9ac3d7",
+      "http": {
+        "request_range": "bytes=88730075-88760904",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88730075-88760904/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 30830,
+        "sha256": "5999bda62740ea9068e4ac5031b93061ffddbb279502f41be1f50416bc9ac3d7"
+      }
+    },
+    {
+      "tile_index": 426,
+      "tile_row": 11,
+      "tile_column": 30,
+      "pixel_rows": [
+        11264,
+        12288
+      ],
+      "pixel_columns": [
+        30720,
+        31744
+      ],
+      "file": "sources/worldcover-S18E027/block-r11-c30.bin",
+      "encoded_bytes": 40751,
+      "decoded_bytes": 1048576,
+      "sha256": "64a48ea3a7f27ecb974931b47a384ce6c10240bdbba6439eabc13371d0f6c1a5",
+      "http": {
+        "request_range": "bytes=88760913-88801663",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 88760913-88801663/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 40751,
+        "sha256": "64a48ea3a7f27ecb974931b47a384ce6c10240bdbba6439eabc13371d0f6c1a5"
+      }
+    },
+    {
+      "tile_index": 453,
+      "tile_row": 12,
+      "tile_column": 21,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        21504,
+        22528
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c21.bin",
+      "encoded_bytes": 99578,
+      "decoded_bytes": 1048576,
+      "sha256": "451834f83cabae883d7d28c9f4d336fc5f49963ed4c4014df5ddd307b16d0f4f",
+      "http": {
+        "request_range": "bytes=91088880-91188457",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91088880-91188457/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 99578,
+        "sha256": "451834f83cabae883d7d28c9f4d336fc5f49963ed4c4014df5ddd307b16d0f4f"
+      }
+    },
+    {
+      "tile_index": 454,
+      "tile_row": 12,
+      "tile_column": 22,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        22528,
+        23552
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c22.bin",
+      "encoded_bytes": 54236,
+      "decoded_bytes": 1048576,
+      "sha256": "40b574e390646c7b00c7832679316814178a8b510951d7d780f06c61190c9cb9",
+      "http": {
+        "request_range": "bytes=91188466-91242701",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91188466-91242701/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 54236,
+        "sha256": "40b574e390646c7b00c7832679316814178a8b510951d7d780f06c61190c9cb9"
+      }
+    },
+    {
+      "tile_index": 455,
+      "tile_row": 12,
+      "tile_column": 23,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        23552,
+        24576
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c23.bin",
+      "encoded_bytes": 41637,
+      "decoded_bytes": 1048576,
+      "sha256": "6e662e3720f3d73d8cdcd9f0a4658cdb9a741deb3c58d5a880c73ab3c22481bf",
+      "http": {
+        "request_range": "bytes=91242710-91284346",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91242710-91284346/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 41637,
+        "sha256": "6e662e3720f3d73d8cdcd9f0a4658cdb9a741deb3c58d5a880c73ab3c22481bf"
+      }
+    },
+    {
+      "tile_index": 456,
+      "tile_row": 12,
+      "tile_column": 24,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        24576,
+        25600
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c24.bin",
+      "encoded_bytes": 62143,
+      "decoded_bytes": 1048576,
+      "sha256": "02ff852baa74f5ac994020fcdda8272f1093d6aaf44a2ba999793f9a50591e87",
+      "http": {
+        "request_range": "bytes=91284355-91346497",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91284355-91346497/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 62143,
+        "sha256": "02ff852baa74f5ac994020fcdda8272f1093d6aaf44a2ba999793f9a50591e87"
+      }
+    },
+    {
+      "tile_index": 457,
+      "tile_row": 12,
+      "tile_column": 25,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        25600,
+        26624
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c25.bin",
+      "encoded_bytes": 58852,
+      "decoded_bytes": 1048576,
+      "sha256": "03fb1b63a31ba1a06725f6ad91a7fecfbf2901f2432d57ed802d288b8608e2c2",
+      "http": {
+        "request_range": "bytes=91346506-91405357",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91346506-91405357/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 58852,
+        "sha256": "03fb1b63a31ba1a06725f6ad91a7fecfbf2901f2432d57ed802d288b8608e2c2"
+      }
+    },
+    {
+      "tile_index": 458,
+      "tile_row": 12,
+      "tile_column": 26,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        26624,
+        27648
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c26.bin",
+      "encoded_bytes": 74661,
+      "decoded_bytes": 1048576,
+      "sha256": "4915467bb0738ff242230696e36d3feb135af0fa9604335b212fbe5475b45f1d",
+      "http": {
+        "request_range": "bytes=91405366-91480026",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91405366-91480026/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 74661,
+        "sha256": "4915467bb0738ff242230696e36d3feb135af0fa9604335b212fbe5475b45f1d"
+      }
+    },
+    {
+      "tile_index": 459,
+      "tile_row": 12,
+      "tile_column": 27,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        27648,
+        28672
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c27.bin",
+      "encoded_bytes": 80627,
+      "decoded_bytes": 1048576,
+      "sha256": "87c7514f0f22e7acb69743660af8f629e3de7a08b87d7b64470ed151311a9e42",
+      "http": {
+        "request_range": "bytes=91480035-91560661",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91480035-91560661/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 80627,
+        "sha256": "87c7514f0f22e7acb69743660af8f629e3de7a08b87d7b64470ed151311a9e42"
+      }
+    },
+    {
+      "tile_index": 460,
+      "tile_row": 12,
+      "tile_column": 28,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        28672,
+        29696
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c28.bin",
+      "encoded_bytes": 67258,
+      "decoded_bytes": 1048576,
+      "sha256": "2d8add8ca6f959d7a143f929ad132a17f530db060d1484a98dd63910feb7e384",
+      "http": {
+        "request_range": "bytes=91560670-91627927",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91560670-91627927/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 67258,
+        "sha256": "2d8add8ca6f959d7a143f929ad132a17f530db060d1484a98dd63910feb7e384"
+      }
+    },
+    {
+      "tile_index": 461,
+      "tile_row": 12,
+      "tile_column": 29,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        29696,
+        30720
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c29.bin",
+      "encoded_bytes": 49748,
+      "decoded_bytes": 1048576,
+      "sha256": "946e8f61461b6b36920ee504543a48e899ed0ea4a99c9e31402a40cb402b6b89",
+      "http": {
+        "request_range": "bytes=91627936-91677683",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91627936-91677683/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 49748,
+        "sha256": "946e8f61461b6b36920ee504543a48e899ed0ea4a99c9e31402a40cb402b6b89"
+      }
+    },
+    {
+      "tile_index": 462,
+      "tile_row": 12,
+      "tile_column": 30,
+      "pixel_rows": [
+        12288,
+        13312
+      ],
+      "pixel_columns": [
+        30720,
+        31744
+      ],
+      "file": "sources/worldcover-S18E027/block-r12-c30.bin",
+      "encoded_bytes": 52172,
+      "decoded_bytes": 1048576,
+      "sha256": "734eb44c4d5c4290ea26a531700c343198688dbda9007cc932c3b521f356c31d",
+      "http": {
+        "request_range": "bytes=91677692-91729863",
+        "if_match": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "status": 206,
+        "content_range": "bytes 91677692-91729863/161671883",
+        "etag": "\"3b512e03391fd7d7f63b217a5a31e895-20\"",
+        "last_modified": "Wed, 26 Oct 2022 12:46:55 GMT",
+        "content_length": 52172,
+        "sha256": "734eb44c4d5c4290ea26a531700c343198688dbda9007cc932c3b521f356c31d"
+      }
+    }
+  ],
+  "limits": [
+    "The retained blocks cover the full issue bounding box and must still be checked against every complete component and contact geometry before classification.",
+    "This retains the exact source byte ranges used for the bounded region, not the entire 3x3 degree COG or a whole-object checksum.",
+    "The mapped class and its published accuracy are not candidate-specific shoreline or registration accuracy.",
+    "Absence of permanent-water class does not prove dry land; herbaceous wetland remains a separate class."
+  ]
+}
