@@ -101,6 +101,48 @@ class BudgetedProducts:
         return self.actual.finish()
 
 
+def bounded_objects(objects_module, products, loaded, records, native_aliases):
+    """Initialize the unchanged literal object class with shorter scratch lifetime.
+
+    Every index selector, whole-byte inverse and inherited method is unchanged.
+    Only the temporary first mapping is released before its independent inverse.
+    """
+    objects_module.require(objects_module.Objects.__new__ is object.__new__,
+                           'Original Objects allocation binding differs')
+    self = objects_module.Objects.__new__(objects_module.Objects)
+    self.products, self.loaded, self.records = products, loaded, records
+    self.native_aliases = native_aliases
+    self.verified_aliases = {}
+    self.native = {}
+    self.component = {}
+    self.emitted = {}
+    self.kernel = loaded['modules']['kernel']
+    wanted = {(q['source_id'], q['periodic_offset']) for row, pin in
+              loaded['physical'].values() for q in row['query_relations']}
+    for identity, offset in sorted(wanted):
+        geometry = records[identity][1]
+        if geometry is None:
+            continue
+        shifted = objects_module.translate(geometry, xoff=offset) if offset else geometry
+        value = self.kernel.ordinary_mapping(shifted)
+        raw = objects_module.canonical(value)
+        del value
+        key = objects_module.sha(raw)
+        alias = {'kind': 'complete-native-record-geometry', 'source_id': identity,
+                 'periodic_offset': offset, 'original_native_record': native_aliases[identity],
+                 'decoder': 'literal original comparison.decode_record then original periodic translate',
+                 'whole_mapping_bytes': len(raw), 'whole_mapping_sha256': key}
+        self.verify_alias(alias, raw)
+        # The digest is a lookup index only. Every selected alias is resolved
+        # and compared with complete canonical bytes before use.
+        self.native.setdefault(key, []).append(alias)
+        # Reconstruction was checked in full above; native index retains only
+        # selectors/pins. Do not keep a second full source serialization.
+        self.verified_aliases.clear()
+        del raw, geometry, shifted
+    return self
+
+
 def replay(phase, operands, records, native_aliases, native_proof, *, acquisition,
            literal_products, objects_module, replay_module, scientific_modules,
            query_bind, project_guard):
@@ -121,10 +163,11 @@ def replay(phase, operands, records, native_aliases, native_proof, *, acquisitio
     loaded = dict(state=dict(candidates=candidates, routing=routing), physical=physical,
                   diagnoses=diagnoses, modules=scientific_modules)
     products = BudgetedProducts(phase, literal_products, acquisition)
-    objects = objects_module.Objects(products, loaded, records, native_aliases)
-    validity = scientific_modules['comparison'].ValidityCache()
-    shifted, counts, queries = {}, Counter(), 0
+    objects = bounded_objects(objects_module, products, loaded, records, native_aliases)
+    counts, queries = Counter(), 0
     for identity in sorted(subjects):
+        validity = scientific_modules['comparison'].ValidityCache()
+        shifted = {}
         objects.begin(identity)
         result = replay_module.execute(identity, loaded, records, validity, shifted)
         acquisition.require(result['component_id'] == identity and
@@ -135,8 +178,9 @@ def replay(phase, operands, records, native_aliases, native_proof, *, acquisitio
                       complete_original_diagnosis=objects.alias('diagnosis', identity, [], diagnoses[identity]))
         products.emit('components', objects.retain(result))
         queries += result['original_query_count']; counts[result['status']] += 1
-        # Shifted geometries and inverse-object verification caches are per cohort,
-        # never carried into another detached numerical job.
+        # Cache lifetime is one complete component; no scientific query/result
+        # or geometry is omitted. Do not retain prior result during the next call.
+        del result, validity, shifted
     outputs = products.finish()
     acquisition.require(sum(counts.values()) == len(subjects), 'Incomplete numerical cohort')
     project_guard()
