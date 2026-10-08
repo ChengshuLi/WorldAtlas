@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs} from './package-inputs.mjs';
+import {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 
 const entries = {static: 'scripts/build-static-inner.mjs', hosted: 'scripts/build-hosted-inner.mjs', cloudflare: 'scripts/build-cloudflare-inner.mjs'};
 const repository = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -91,12 +92,28 @@ export async function runPackageBuild(kind, {root = repository, execute} = {}) {
     const inventory = await materializePackageInputs({source: root, destination: stage, definition});
     await fs.symlink(dependencies, path.join(stage, 'node_modules'), 'dir');
     const env = {...process.env, WORLDATLAS_PACKAGE_STAGE: stage};
+    delete env.WORLDATLAS_CURRENT_EXECUTION_PATH;
+    delete env.WORLDATLAS_CURRENT_EXECUTION_SHA256;
+    // Bind current checkout execution separately from immutable authored lineage.
+    const contextPath=path.join(stage,'data/native-context-migration/manifest.json');
+    const context=await fs.readFile(contextPath,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
+    let currentExecution;
+    if(context?.version===2&&context.kind==='retained-identity-context-continuation-v2'&&context.issue===1295){
+      currentExecution=issueCurrentExecution({source:root,stage});
+      authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root});
+      const raw=Buffer.from(JSON.stringify(currentExecution)+'\n');
+      await fs.mkdir(path.join(stage,'.cache'),{recursive:true});
+      await fs.writeFile(path.join(stage,'.cache/current-context-execution.json'),raw,{flag:'wx'});
+      env.WORLDATLAS_CURRENT_EXECUTION_PATH='.cache/current-context-execution.json';
+      env.WORLDATLAS_CURRENT_EXECUTION_SHA256=createHash('sha256').update(raw).digest('hex');
+    }
     const run = execute ?? ((entry, options) => new Promise((resolve, reject) => {
       const child = spawn(process.execPath, [entry], {...options, stdio: 'inherit'});
       child.on('error', reject);
       child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
     }));
     await run(path.join(stage, entries[kind]), {cwd: stage, env});
+    if(currentExecution)requireCurrentExecution(currentExecution);
     // Only explicit generated outputs return to the caller. Source archives and
     // unpublished research never get copied back or altered by this wrapper.
     for (const output of definition.generated_outputs) {
@@ -117,6 +134,7 @@ export async function runPackageBuild(kind, {root = repository, execute} = {}) {
     const receipt = {version: 1, kind, input_definition_sha256: createHash('sha256').update(await fs.readFile(path.join(stage, '.github/package-inputs.json'))).digest('hex'), source_files: inventory.length,
       source_bytes: inventory.reduce((sum, row) => sum + row.bytes, 0), input_paths: definition.inputs,
       boundary: 'Build source contains only declared inputs and the installed dependencies; unpublished inputs are absent. This is not an OS security sandbox.'};
+    if(currentExecution)receipt.current_context_execution=currentExecution;
     await fs.writeFile(path.join(cache, 'package-input-build.json'), JSON.stringify(receipt, null, 2) + '\n');
     return receipt;
   } finally {

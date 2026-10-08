@@ -26,6 +26,7 @@ const {validateBuildContextStage: validateCurrentBuildContext,BUILD_CONTEXT_STAG
 const {packageNativeLatitudes} = await import('./package-native-latitudes.mjs');
 const {rebindCoverageManifest} = await import('./rebind-coverage-manifest.mjs');
 const {foldCoverageContinuation,selectBuildContextValidator} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs');
+const {readPackageCurrentExecution} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs');
 function releaseBuildContextBaselines(context) {
   const results=[context.geometryValidation,context.coverageContinuation.originalGeometryValidation];
   const expected=context.receipt.migration.locations;
@@ -64,7 +65,8 @@ if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicReleas
 const fixedGridPath=ownershipSelection.manifestPath;
 const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
 const fixedGrid=selectedGrid?.manifest;
-const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
+const currentExecution=contextStage?.version===2?readPackageCurrentExecution(process.cwd()):undefined;
+const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease,currentExecution}):null;
 const nativeContextInputStage=nativeBuildContext?.receipt??null;
 if(nativeBuildContext?.coverageContinuation)releaseBuildContextBaselines(nativeBuildContext);
 const db = openDatabase();

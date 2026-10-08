@@ -23,14 +23,14 @@ export const BUILD_CONTEXT_VALIDATOR_SOURCES=[
 ];
 const fail=(ok,message)=>{if(!ok)throw Error(message);};
 export async function validateBuildContextStage({root=process.cwd(),expectedReference,
- stagePath=BUILD_CONTEXT_STAGE_PATH,readFile}={}) {
+ stagePath=BUILD_CONTEXT_STAGE_PATH,readFile,currentExecution}={}) {
  safeEvidencePath(stagePath);
  if(!fs.existsSync(path.join(root,stagePath))&&!readFile){
   const receipt=await validateContextInputStage({root,expectedReference});
   return {receipt};
  }
  const ordinary=readFile??repositoryReader(root),stageRaw=ordinary(stagePath,'candidate'),stage=JSON.parse(stageRaw);
- if(stage.version===2)return validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile});
+ if(stage.version===2)return validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution});
  fail(stage.version===1&&Number.isSafeInteger(stage.issue)&&stage.issue>0&&stage.lane==='engineering'&&stage.kind==='retained-identity-context-migration-v1'&&!stage.input_stages,
   'Unsupported build context migration stage');
  fail(stage.original_stage?.path===CONTEXT_STAGE_PATH,'Wrong mandatory original context stage');
