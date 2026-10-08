@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "issue": 1527,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+    "files": [
+      {
+        "path": "scripts/final-capacity.mjs",
+        "bytes": 20323,
+        "sha256": "90542cc945e6a967c5da5daacf52ffcaff613e6f5ee0fdebf83c74f017c8e643",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/final-capacity.test.mjs",
+        "bytes": 21078,
+        "sha256": "b58901d99efe35cd7837bedd04919af2dc5bee6a32c07a4c193e370122408150",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 43232,
+        "sha256": "3d7ae9c697ea24457639a200d6b7a9c2e48dba906d49c70a8b52f716d69c5eba",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/final-capacity.mjs",
+      "bytes": 20807,
+      "sha256": "4097f13f424a542b09cd81cdffd79a553b32925c507b5bb01d98f8ec539c019c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "bytes": 26638,
+      "sha256": "867ef3ef61b37af0815db2a51be096dd5db8dba77e355e5cee2e3d39fece786d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 43533,
+      "sha256": "1352aa52a80a5f6c27edfa22b2d91737dc393602417f95e9e0dd7e4f519fd8ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/final-capacity-vintages-1527-20261008/README.md",
+      "bytes": 1666,
+      "sha256": "3347dc168abbf3a2865853de874422c0fbebb69ef1e684335728127593381646",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/final-capacity-vintages-1527-20261008/live-inventory-replay.json",
+      "bytes": 527,
+      "sha256": "e2bec4701a1b6b511b0c7331a8650eac94a4020ff1aafc09098b137448b1d207",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "capacity-vintage-controls",
+      "kind": "code",
+      "description": "Real inventory-boundary controls and read-only exact-head live replay; full evidence/merge authority remains separate",
+      "software": "Node 24.19.0",
+      "units": "pass/fail"
+    }
+  ],
+  "validation": [],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "commands": [
+    "node --test test/final-capacity.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs"
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "scripts/final-capacity.mjs",
+      "status": "modified",
+      "original_sha256": "90542cc945e6a967c5da5daacf52ffcaff613e6f5ee0fdebf83c74f017c8e643"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "status": "modified",
+      "original_sha256": "b58901d99efe35cd7837bedd04919af2dc5bee6a32c07a4c193e370122408150"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "3d7ae9c697ea24457639a200d6b7a9c2e48dba906d49c70a8b52f716d69c5eba"
+    },
+    {
+      "path": "coordination/engineering/final-capacity-vintages-1527-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/final-capacity-vintages-1527-20261008/live-inventory-replay.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/final-capacity-vintages-1527-20261008/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
