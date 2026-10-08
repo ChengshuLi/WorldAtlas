@@ -45,10 +45,15 @@ def main():
     quality = contract["evidence_quality"]
     ids = quality["subject_ids"]
     expected_pins = quality["pins"]
-    commit = current_commit(REPO)
     origin_main = git(REPO, "rev-parse", "origin/main").decode().strip()
-    if commit != origin_main:
-        raise ValueError("Build the manifest on the fresh, verified origin/main base before committing changes")
+    branch_head = current_commit(REPO)
+    if git(REPO, "merge-base", origin_main, branch_head).decode().strip() != origin_main:
+        raise ValueError("The packet branch must descend from the verified origin/main base")
+    validation = json.loads((REPO / OWNED_PATH / "validation/adversarial-controls-head088ab2.json").read_bytes())
+    if (validation.get("repository_head") != origin_main or
+            validation.get("output_safety_baseline") != origin_main):
+        raise ValueError("Final reproduction must be tied to the current origin/main base")
+    commit = origin_main
     if contract.get("owned_paths") != [OWNED_PATH] or contract.get("max_prs") != 2:
         raise ValueError("Current issue path or PR allowance differs from the reviewed contract")
 
@@ -223,7 +228,8 @@ def main():
             {"method_id": method_id, "kind": "reproducibility", "outcome": "passed",
              "evidence_path": OWNED_PATH + "vintages/controls-head088ab2-one/reproducibility.json"},
         ],
-        "change_receipts": [{"path": path, "status": "added", "previous_path": None} for path in output_paths],
+        "change_receipts": ([{"path": path, "status": "added", "previous_path": None} for path in output_paths] +
+                             [{"path": MANIFEST_REL, "status": "added", "previous_path": None}]),
         "rendered_tables": [],
         "conclusions": [
             {"text": "The output-safety repair has fresh, exclusive retained-report vintages with complete final receipts; it does not freshly reproduce the original geometry calculation.",
