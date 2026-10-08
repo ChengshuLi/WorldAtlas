@@ -18,12 +18,13 @@ function ordinary(file) {
 
 // All declared bodies, decoded products, code and whole installed runtime are
 // reserved before any body hash/read. No per-shard reset within a process.
-export function admitPhase({inputs, runtime, outputReserve, metadataBytes = 0}) {
+export function admitPhase({inputs, runtime, outputReserve, metadataBytes = 0, reservedInputBytes = 0}) {
   assert(Array.isArray(inputs) && inputs.length <= 512);
   assert(Number.isSafeInteger(outputReserve) && outputReserve >= 0);
   assert(Number.isSafeInteger(metadataBytes) && metadataBytes >= 0);
+  assert(Number.isSafeInteger(reservedInputBytes) && reservedInputBytes >= 0);
   const seen = new Set();
-  let bytes = outputReserve + metadataBytes;
+  let bytes = outputReserve + metadataBytes + reservedInputBytes;
   const records = [...inputs.map(pin => ({...pin, installed_runtime: false})),
     {...runtime, installed_runtime: true}];
   assert(records.length <= 512, 'Complete unique descriptor cap');
@@ -41,7 +42,26 @@ export function admitPhase({inputs, runtime, outputReserve, metadataBytes = 0}) 
     return {pin, identity: {dev: stat.dev, ino: stat.ino, size: stat.size, mode: stat.mode,
       mtimeMs: stat.mtimeMs, ctimeMs: stat.ctimeMs}};
   });
-  return {bytes, descriptors: records.length, outputReserve, metadataBytes, snapshots};
+  return {bytes, descriptors: records.length, outputReserve, metadataBytes, reservedInputBytes, snapshots};
+}
+
+export function authenticateAdmittedBody(admission, file) {
+  const snapshot = admission.snapshots.find(row => row.pin.path === file);
+  assert(snapshot, 'Unadmitted body authentication');
+  const before = ordinary(file), identity = snapshot.identity;
+  for (const field of Object.keys(identity)) assert.equal(before[field], identity[field], 'Body identity changed');
+  const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW);
+  try {
+    const hash = createHash('sha256'), buffer = Buffer.alloc(1024 * 1024); let bytes = 0;
+    while (bytes < snapshot.pin.bytes) {
+      const count = fs.readSync(fd, buffer, 0, Math.min(buffer.length, snapshot.pin.bytes - bytes), null);
+      assert(count > 0, 'Truncated admitted body'); hash.update(buffer.subarray(0, count)); bytes += count;
+    }
+    assert.equal(fs.readSync(fd, buffer, 0, 1, null), 0, 'Growing admitted body');
+    assert.equal(hash.digest('hex'), snapshot.pin.sha256);
+    const after = fs.fstatSync(fd);
+    for (const field of Object.keys(identity)) assert.equal(after[field], identity[field], 'Body changed while authenticated');
+  } finally { fs.closeSync(fd); }
 }
 
 export function readAdmittedBody(admission, file) {
