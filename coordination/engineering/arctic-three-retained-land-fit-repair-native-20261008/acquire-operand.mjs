@@ -123,6 +123,34 @@ export async function acquire(head, ordinal, outputValue) {
     const value = gunzipSync(raw, {maxOutputLength: bytes});
     assert.equal(value.length, bytes); assert.equal(sha(value), expected); return value;
   }
+  const targets = ['atlas:physical:CAN-15:NWT', 'atlas:physical:CAN-25:NUN'];
+  let targetCustody = null;
+  if (ordinal === 4) {
+    assert.equal(pin.path, 'context/part-6000.json.gz');
+    assert.equal(pin.sha256, 'aa2dc4ef06fba0f25a675c5c9d61ac6aeee95d766cc3c58055f837019e36a953');
+    const namespace = 'coordination/engineering/arctic-three-retained-land-fit-repair-20261008';
+    // Both COMPLETE proposal images leave scope BEFORE the full native source
+    // chunk is parsed. Retain only their complete consequential target records.
+    const old = (() => {
+      const before = JSON.parse(decoded(body(PROPOSAL, `${namespace}/current-v8-part29.json.gz`,
+        'fa286f44f47494cacab793e4109eb18db3e6016dc7103d930b9dff2dbf3573fb'), 12932407,
+        'c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8'));
+      const byId = new Map(before.features.map(feature => [feature.id, feature]));
+      assert.equal(before.features.length, 1500); assert.equal(byId.size, 1500);
+      for (const id of targets) assert(byId.has(id));
+      return {ids: [...byId.keys()], targets: new Map(targets.map(id => [id, byId.get(id)]))};
+    })();
+    const current = (() => {
+      const after = JSON.parse(decoded(body(PROPOSAL, `${namespace}/delivery/run-1/proposed-part-29.json.gz`,
+        '5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8'), 12932723,
+        '4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c'));
+      const byId = new Map(after.features.map(feature => [feature.id, feature]));
+      assert.equal(after.features.length, 1500); assert.equal(byId.size, 1500);
+      assert.deepEqual([...byId.keys()], old.ids, 'Complete proposal ID order changed');
+      return new Map(targets.map(id => [id, byId.get(id)]));
+    })();
+    targetCustody = {old: old.targets, current};
+  }
   let encoded = body(ORIGINAL, `data/canonical-grid/eastern-v8/${pin.path}`, pin.sha256);
   assert.equal(encoded.length, pin.bytes);
   let originalDecoded = decoded(encoded, pin.decoded_bytes, pin.decoded_sha256);
@@ -134,35 +162,14 @@ export async function acquire(head, ordinal, outputValue) {
     assert.equal(feature.pixelIndex, pin.first_owner + i);
   });
   const variants = [], appendProofs = [];
-  const targets = ['atlas:physical:CAN-15:NWT', 'atlas:physical:CAN-25:NUN'];
-  if (features.some(feature => targets.includes(feature.id))) {
-    const namespace = 'coordination/engineering/arctic-three-retained-land-fit-repair-20261008';
-    // Authenticate each COMPLETE proposal image, but never retain both 1500-feature
-    // graphs. Only the two consequential target rows survive this custody step.
-    const beforeIds = (() => {
-      const before = JSON.parse(decoded(body(PROPOSAL, `${namespace}/current-v8-part29.json.gz`,
-        'fa286f44f47494cacab793e4109eb18db3e6016dc7103d930b9dff2dbf3573fb'), 12932407,
-        'c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8'));
-      const byId = new Map(before.features.map(feature => [feature.id, feature]));
-      assert.equal(before.features.length, 1500); assert.equal(byId.size, 1500);
-      for (const feature of features) if (targets.includes(feature.id))
-        assert.deepEqual(feature.geometry, byId.get(feature.id).geometry, 'Installed current native geometry mismatch');
-      return [...byId.keys()];
-    })();
-    const newTargets = (() => {
-      const after = JSON.parse(decoded(body(PROPOSAL, `${namespace}/delivery/run-1/proposed-part-29.json.gz`,
-        '5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8'), 12932723,
-        '4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c'));
-      const byId = new Map(after.features.map(feature => [feature.id, feature]));
-      assert.equal(after.features.length, 1500); assert.equal(byId.size, 1500);
-      assert.deepEqual([...byId.keys()], beforeIds, 'Complete proposal ID order changed');
-      return new Map(targets.map(id => [id, byId.get(id)]));
-    })();
-    for (const feature of features) if (targets.includes(feature.id)) {
-      const geometry = newTargets.get(feature.id).geometry;
-      appendProofs.push({id: feature.id, ...proveCompletePolygonAppend(feature.geometry, geometry)});
-      variants.push({...feature, geometry});
-    }
+  const foundTargets = features.filter(feature => targets.includes(feature.id));
+  assert.equal(foundTargets.length, ordinal === 4 ? 2 : 0, 'Exact target chunk scope changed');
+  for (const feature of foundTargets) {
+    assert.deepEqual(feature.geometry, targetCustody.old.get(feature.id).geometry,
+      'Installed current native geometry mismatch');
+    const geometry = targetCustody.current.get(feature.id).geometry;
+    appendProofs.push({id: feature.id, ...proveCompletePolygonAppend(feature.geometry, geometry)});
+    variants.push({...feature, geometry});
   }
   function guardOperandSize(rows) {
     let bytes = 0;
