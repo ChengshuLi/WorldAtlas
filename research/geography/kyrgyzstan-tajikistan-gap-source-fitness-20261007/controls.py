@@ -65,10 +65,16 @@ def read_run_outputs(repo, run_dir, baseline):
     return result
 
 
-def read_supervision_receipt(repo, source_run, run_summary_raw, baseline_commit):
+def read_supervision_receipt(repo, source_run, run_summary_raw, baseline_commit, baseline):
     run_name = pathlib.Path(source_run).name
     root = pathlib.Path(repo) / OWNED / "vintages" / "process-supervision" / run_name
-    if root.is_symlink() or not root.is_dir():
+    repo_root = pathlib.Path(repo).resolve()
+    cursor = repo_root
+    for part in root.relative_to(repo_root).parts:
+        cursor = cursor / part
+        if cursor.is_symlink():
+            raise ValueError("Symlink ancestor in process-supervision receipt path")
+    if not root.is_dir():
         raise ValueError("Externally supervised process receipt is missing")
     for child in root.iterdir():
         if child.is_symlink() or not child.is_file():
@@ -121,13 +127,18 @@ def read_supervision_receipt(repo, source_run, run_summary_raw, baseline_commit)
     if source_run_publication.is_symlink() or not source_run_publication.is_file():
         raise ValueError("Supervised source-run publication is missing")
     if (receipt.get("version") != 1 or receipt.get("status") != "pass" or
+            receipt.get("exit_code") != 0 or receipt.get("stop_reason") is not None or
             receipt.get("baseline_commit") != baseline_commit or
             receipt.get("vintage") != run_name or
             receipt.get("source_run_summary_sha256") != producer.sha(run_summary_raw) or
             receipt.get("source_run_publication_sha256") != producer.sha(source_run_publication.read_bytes()) or
-            receipt.get("producer_ru_maxrss_bytes") != run_summary.get("max_rss_bytes") or
-            not isinstance(receipt.get("producer_ru_maxrss_bytes"), int) or
-            receipt.get("producer_ru_maxrss_bytes") > producer.MAX_RSS_BYTES or
+            receipt.get("producer_prepublication_ru_maxrss_bytes") != run_summary.get("prepublication_ru_maxrss_bytes") or
+            not isinstance(receipt.get("producer_prepublication_ru_maxrss_bytes"), int) or
+            receipt.get("producer_prepublication_ru_maxrss_bytes") > producer.MAX_RSS_BYTES or
+            not isinstance(receipt.get("terminal_child_lifetime_ru_maxrss_bytes"), int) or
+            receipt.get("terminal_child_lifetime_ru_maxrss_bytes") > producer.MAX_RSS_BYTES or
+            receipt.get("terminal_child_pid") != receipt.get("pid") or
+            receipt.get("no_live_descendants_after_reap") is not True or
             receipt.get("producer_rss_limit_bytes") != producer.MAX_RSS_BYTES or
             receipt.get("external_stop_bytes") != producer.EXTERNAL_RSS_STOP_BYTES or
             receipt.get("external_margin_below_768mib_bytes") != producer.EXTERNAL_RSS_MARGIN_BYTES or
@@ -164,7 +175,7 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
     outputs = read_run_outputs(repo, source_run, baseline)
     fitness_raw = outputs["source-fitness.json"]
     supervision = read_supervision_receipt(repo, source_run, outputs["run-summary.json"],
-                                           baseline_commit)
+                                           baseline_commit, baseline)
     fitness = json.loads(fitness_raw)
     component_ids = config["component_ids"]
     if fitness.get("scope", {}).get("component_ids") != component_ids:
@@ -271,7 +282,8 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
             "publication_sha256": supervision["publication_sha256"],
             "rss_samples_sha256": supervision["samples_sha256"],
             "maximum_sampled_process_tree_rss_bytes": supervision["sampled_process_tree_peak_bytes"],
-            "producer_ru_maxrss_bytes": supervision["receipt"]["producer_ru_maxrss_bytes"],
+            "producer_prepublication_ru_maxrss_bytes": supervision["receipt"]["producer_prepublication_ru_maxrss_bytes"],
+            "terminal_child_lifetime_ru_maxrss_bytes": supervision["receipt"]["terminal_child_lifetime_ru_maxrss_bytes"],
             "external_stop_bytes": producer.EXTERNAL_RSS_STOP_BYTES,
             "margin_below_768mib_bytes": producer.EXTERNAL_RSS_MARGIN_BYTES,
         },

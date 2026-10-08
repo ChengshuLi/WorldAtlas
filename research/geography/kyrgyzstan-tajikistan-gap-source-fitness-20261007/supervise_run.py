@@ -26,6 +26,34 @@ def canonical(value):
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
+def wait_child_nonblocking(child):
+    pid, status, usage = os.wait4(child.pid, os.WNOHANG)
+    if pid == 0:
+        return None, None
+    child.returncode = os.waitstatus_to_exitcode(status)
+    return child.returncode, usage
+
+def stop_and_reap_child(child):
+    try:
+        os.killpg(child.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        pass
+    deadline = time.monotonic() + 1.0
+    while child.returncode is None:
+        exit_code, usage = wait_child_nonblocking(child)
+        if exit_code is not None:
+            return exit_code, usage
+        if time.monotonic() >= deadline:
+            try:
+                os.killpg(child.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            pid, status, usage = os.wait4(child.pid, 0)
+            child.returncode = os.waitstatus_to_exitcode(status)
+            return child.returncode, usage
+        time.sleep(0.05)
+    raise RuntimeError("Child was reaped without retaining its wait4 resource record")
+
 def tree_rss_bytes(root_pid):
     raw = subprocess.check_output(["ps", "-axo", "pid=,ppid=,pgid=,rss="],
                                   text=True, stderr=subprocess.STDOUT)
@@ -51,6 +79,24 @@ def tree_rss_bytes(root_pid):
                 changed = True
     return sum(rows[pid][2] for pid in selected if pid in rows), sorted(selected)
 
+def require_contained_nonsymlink_path(repo, target):
+    repo = pathlib.Path(repo).resolve()
+    target = pathlib.Path(target)
+    if not target.is_absolute():
+        target = repo / target
+    try:
+        relative = target.relative_to(repo)
+    except ValueError as exc:
+        raise ValueError("Process-supervision destination escapes repository") from exc
+    cursor = repo
+    if cursor.is_symlink():
+        raise ValueError("Repository root is symlinked")
+    for part in relative.parts:
+        cursor = cursor / part
+        if cursor.is_symlink():
+            raise ValueError("Symlink ancestor in process-supervision destination")
+    return target
+
 def write_supervision(folder, receipt, stdout_path, stderr_path, samples_path):
     raw = canonical(receipt)
     if len(raw) > 32768:
@@ -74,8 +120,12 @@ def run(repo, baseline_commit, vintage, window_id):
         raise ValueError("An explicit coordinator-issued memory-window ID is required")
     # Verify this wrapper and all execution inputs against the exact immutable commit.
     producer.bootstrap(repo, baseline_commit, phase="overlay")
-    folder = repo / OWNED / "vintages" / "process-supervision" / vintage
-    folder.mkdir(parents=True, exist_ok=False)
+    folder = require_contained_nonsymlink_path(
+        repo, repo / OWNED / "vintages" / "process-supervision" / vintage)
+    folder.parent.mkdir(parents=True, exist_ok=True)
+    # Recheck after creating missing parents, then claim the entire vintage atomically.
+    require_contained_nonsymlink_path(repo, folder)
+    folder.mkdir(exist_ok=False)
     stdout_path, stderr_path = folder / "stdout.txt", folder / "stderr.txt"
     samples_path = folder / "rss-samples.jsonl"
     command = [sys.executable, str(repo / OWNED / "producer.py"), "--repo", str(repo),
@@ -88,11 +138,13 @@ def run(repo, baseline_commit, vintage, window_id):
     clock = time.monotonic()
     samples = []
     stop_reason = None
+    child_usage = None
+    exit_code = None
     with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
         child = subprocess.Popen(command, cwd=repo, stdin=subprocess.DEVNULL,
                                  stdout=stdout, stderr=stderr, env=env,
                                  start_new_session=True)
-        while True:
+        while child.returncode is None:
             now = datetime.datetime.now(datetime.timezone.utc).isoformat()
             try:
                 rss, pids = tree_rss_bytes(child.pid)
@@ -100,42 +152,63 @@ def run(repo, baseline_commit, vintage, window_id):
                 rss, pids = 0, []
                 stop_reason = "external process-tree RSS sampler failed: " + type(exc).__name__
             samples.append({"at": now, "process_tree_rss_bytes": rss, "pids": pids})
-            child_exit = child.poll()
-            if child_exit is not None and not pids and stop_reason is None:
+            exit_code, usage = wait_child_nonblocking(child)
+            if exit_code is not None:
+                child_usage = usage
                 break
-            if child_exit is not None and pids and stop_reason is None:
-                stop_reason = "child exited while process-group descendants remained"
             elapsed = time.monotonic() - clock
-            if stop_reason:
-                pass
-            elif rss >= producer.EXTERNAL_RSS_STOP_BYTES:
+            if stop_reason is None and rss >= producer.EXTERNAL_RSS_STOP_BYTES:
                 stop_reason = "external process-tree RSS stop threshold reached"
-            elif elapsed >= producer.MAX_SECONDS:
+            elif stop_reason is None and elapsed >= producer.MAX_SECONDS:
                 stop_reason = "external walltime limit reached"
-            elif len(samples) >= MAX_SAMPLES:
+            elif stop_reason is None and len(samples) >= MAX_SAMPLES:
                 stop_reason = "external RSS sample-count limit reached"
-            elif stdout_path.stat().st_size > MAX_LOG_BYTES or stderr_path.stat().st_size > MAX_LOG_BYTES:
+            elif stop_reason is None and (stdout_path.stat().st_size > MAX_LOG_BYTES or
+                                          stderr_path.stat().st_size > MAX_LOG_BYTES):
                 stop_reason = "child log byte cap reached"
             if stop_reason:
-                try:
-                    os.killpg(child.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    pass
-                try:
-                    child.wait(timeout=1.0)
-                except subprocess.TimeoutExpired:
-                    try:
-                        os.killpg(child.pid, signal.SIGKILL)
-                    except ProcessLookupError:
-                        pass
-                    child.wait()
-                try:
-                    os.killpg(child.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
+                exit_code, child_usage = stop_and_reap_child(child)
                 break
             time.sleep(producer.EXTERNAL_RSS_SAMPLE_SECONDS)
-        exit_code = child.wait()
+    if child_usage is None:
+        raise ValueError("OS wait4 did not return terminal child resource usage")
+    # Re-sample only after wait4 has reaped the leader, avoiding a stale ps row
+    # racing with child.poll() and distinguishing a real surviving descendant.
+    try:
+        terminal_tree_rss, terminal_pids = tree_rss_bytes(child.pid)
+        samples.append({"at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                        "process_tree_rss_bytes": terminal_tree_rss, "pids": terminal_pids,
+                        "after_child_reap": True})
+    except (OSError, subprocess.CalledProcessError) as exc:
+        terminal_tree_rss, terminal_pids = 0, []
+        stop_reason = stop_reason or ("post-reap process-tree RSS sampler failed: " + type(exc).__name__)
+    if terminal_pids:
+        stop_reason = stop_reason or "process-group descendants remained after child reap"
+        try:
+            os.killpg(child.pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+        time.sleep(0.1)
+        try:
+            os.killpg(child.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        cleanup_deadline = time.monotonic() + 2.0
+        while True:
+            try:
+                terminal_tree_rss, terminal_pids = tree_rss_bytes(child.pid)
+            except (OSError, subprocess.CalledProcessError):
+                terminal_pids = [-1]
+                break
+            samples.append({"at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                            "process_tree_rss_bytes": terminal_tree_rss, "pids": terminal_pids,
+                            "after_descendant_termination": True})
+            if not terminal_pids or time.monotonic() >= cleanup_deadline:
+                break
+            time.sleep(0.1)
+    if terminal_pids:
+        stop_reason = stop_reason or "process-group descendants remained after termination attempt"
+    terminal_child_rss = int(child_usage.ru_maxrss) if sys.platform == "darwin" else int(child_usage.ru_maxrss * 1024)
     samples_raw = b"".join(canonical(row) for row in samples)
     if len(samples_raw) > MAX_SAMPLE_LOG_BYTES:
         stop_reason = stop_reason or "external RSS sample-log byte cap reached"
@@ -150,9 +223,12 @@ def run(repo, baseline_commit, vintage, window_id):
     if summary_path.is_file() and not summary_path.is_symlink() and summary_path.stat().st_size <= 32768:
         producer_summary = json.loads(summary_path.read_bytes())
     sampled_peak = max((row["process_tree_rss_bytes"] for row in samples), default=0)
-    producer_peak = producer_summary.get("max_rss_bytes") if isinstance(producer_summary, dict) else None
+    producer_prepublication_peak = (producer_summary.get("prepublication_ru_maxrss_bytes")
+                                    if isinstance(producer_summary, dict) else None)
     qualified = (exit_code == 0 and stop_reason is None and
-                 isinstance(producer_peak, int) and producer_peak <= producer.MAX_RSS_BYTES and
+                 isinstance(producer_prepublication_peak, int) and
+                 producer_prepublication_peak <= producer.MAX_RSS_BYTES and
+                 terminal_child_rss <= producer.MAX_RSS_BYTES and
                  sampled_peak < producer.EXTERNAL_RSS_STOP_BYTES and
                  bool(samples) and
                  time.monotonic() - clock <= producer.MAX_SECONDS and
@@ -176,7 +252,10 @@ def run(repo, baseline_commit, vintage, window_id):
         "external_rss_measurement": "Sum of ps RSS bytes for producer and all observed descendants/process-group members; shared pages may be counted more than once.",
         "external_stop_bytes": producer.EXTERNAL_RSS_STOP_BYTES,
         "external_margin_below_768mib_bytes": producer.EXTERNAL_RSS_MARGIN_BYTES,
-        "producer_ru_maxrss_bytes": producer_peak,
+        "producer_prepublication_ru_maxrss_bytes": producer_prepublication_peak,
+        "terminal_child_lifetime_ru_maxrss_bytes": terminal_child_rss,
+        "terminal_child_pid": child.pid,
+        "no_live_descendants_after_reap": not bool(terminal_pids),
         "producer_rss_limit_bytes": producer.MAX_RSS_BYTES,
         "sample_count": len(samples),
         "samples_are_polling_not_a_kernel_hard_limit": True,
@@ -188,7 +267,8 @@ def run(repo, baseline_commit, vintage, window_id):
                       "supervision_path": str(folder.relative_to(repo)),
                       "pid": child.pid, "exit_code": exit_code,
                       "maximum_sampled_process_tree_rss_bytes": sampled_peak,
-                      "producer_ru_maxrss_bytes": producer_peak,
+                      "producer_prepublication_ru_maxrss_bytes": producer_prepublication_peak,
+                      "terminal_child_lifetime_ru_maxrss_bytes": terminal_child_rss,
                       "stop_reason": stop_reason}, sort_keys=True))
     if not qualified:
         raise SystemExit(exit_code or 1)

@@ -683,7 +683,7 @@ def run(repo, commit, vintage, coordinated_window_id):
     output_files = {
         "source-fitness.json": canonical(result),
         "run-summary.json": canonical({"status": "complete", "elapsed_seconds": elapsed,
-            "max_rss_bytes": rss_bytes, "input_bytes": sum(baseline.consumed.values()),
+            "prepublication_ru_maxrss_bytes": rss_bytes, "input_bytes": sum(baseline.consumed.values()),
             "row_count": len(rows), "intersecting_pair_count": result["intersecting_pair_count"],
             "source_fitness_sha256": sha(canonical(result)),
         "jrc_support": jrc_summary,
@@ -694,7 +694,7 @@ def run(repo, commit, vintage, coordinated_window_id):
     published = run.publish_bytes(output_files)
     print(json.dumps({"status": "complete", "vintage": vintage,
                       "coordinated_window_id": coordinated_window_id, "publication": published,
-                      "elapsed_seconds": elapsed, "max_rss_bytes": rss_bytes,
+                      "elapsed_seconds": elapsed, "prepublication_ru_maxrss_bytes": rss_bytes,
                       "row_count": len(rows), "intersecting_pair_count": result["intersecting_pair_count"]}))
 
 
