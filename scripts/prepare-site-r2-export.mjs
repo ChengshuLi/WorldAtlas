@@ -7,6 +7,8 @@ import {pathToFileURL} from 'node:url';
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 export async function prepare({root, originalCommit, esbuildModule, receipt}) {
   if(!path.isAbsolute(root)||!path.isAbsolute(esbuildModule)||!path.isAbsolute(receipt)||!/^[a-f0-9]{40}$/.test(originalCommit))throw Error('Use absolute paths and exact original commit');
+  let parent=path.dirname(receipt);
+  while(true){if((await fs.lstat(parent)).isSymbolicLink())throw Error('Symlink receipt parent refused');const next=path.dirname(parent);if(next===parent)break;parent=next;}
   // Fresh receipt reservation occurs before changing build output.
   const reserved=await fs.open(receipt,'wx',0o600);
   const git=(...args)=>execFileSync('git',['-C',root,...args],{maxBuffer:32*1024**2});
@@ -27,9 +29,9 @@ export async function prepare({root, originalCommit, esbuildModule, receipt}) {
     const original=git('show',originalCommit+':dist/server/index.js');
     const wrapper=await fs.readFile(path.join(root,'hosted/site-r2-export.js'));
     const {build}=await import(pathToFileURL(esbuildModule).href);
-    const result=await build({stdin:{contents:"import inner from 'worldatlas:original';import {readOnlyR2Export} from './hosted/site-r2-export.js';export default readOnlyR2Export(inner);",resolveDir:root,sourcefile:'migration-wrapper-entry.js'},
+    const result=await build({absWorkingDir:root,stdin:{contents:"import inner from 'worldatlas:original';import {readOnlyR2Export} from 'worldatlas:wrapper';export default readOnlyR2Export(inner);",resolveDir:root,sourcefile:'migration-wrapper-entry.js'},
       bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',minify:false,
-      plugins:[{name:'pinned-original-site-worker',setup(build){build.onResolve({filter:/^worldatlas:original$/},()=>({path:'original',namespace:'pinned'}));build.onLoad({filter:/.*/,namespace:'pinned'},()=>({contents:original.toString('utf8'),loader:'js'}));}}]});
+      plugins:[{name:'pinned-original-site-worker',setup(build){build.onResolve({filter:/^worldatlas:(original|wrapper)$/},args=>({path:args.path.slice(11),namespace:'pinned'}));build.onLoad({filter:/.*/,namespace:'pinned'},args=>({contents:(args.path==='original'?original:wrapper).toString('utf8'),loader:'js'}));}}]});
     if(result.outputFiles.length!==1)throw Error('Unexpected wrapper build outputs');
     const output=result.outputFiles[0].contents;
     await fs.writeFile(path.join(root,'dist/server/index.js'),output);

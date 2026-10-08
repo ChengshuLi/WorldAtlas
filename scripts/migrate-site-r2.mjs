@@ -6,13 +6,14 @@ import {httpBucket} from './r2-migration-http.mjs';
 
 export async function run(config, transport=fetch) {
   if (!path.isAbsolute(config.output) || typeof config.copy!=='boolean') throw Error('Absolute fresh output path and explicit copy boolean required');
+  if (!Array.isArray(config.requiredSourceKeys) || !config.requiredSourceKeys.length || config.requiredSourceKeys.length>20000 || new Set(config.requiredSourceKeys).size!==config.requiredSourceKeys.length || config.requiredSourceKeys.some(key=>typeof key!=='string'||!key||Buffer.byteLength(key)>1024)) throw Error('Independent known original keys are required');
   // Refuse symlink parents and a pre-existing run. No old receipt is replaced.
   let parent=path.dirname(config.output);
   while(true){if((await fs.lstat(parent)).isSymbolicLink())throw Error('Symlink output parent refused');const next=path.dirname(parent);if(next===parent)break;parent=next;}
   await fs.mkdir(config.output,{recursive:false});
   const proofs=await fs.open(path.join(config.output,'object-verification.jsonl'),'wx',0o600);
   try {
-    const result=await reconcile({source:httpBucket(config.source,transport),destination:httpBucket(config.destination,transport),copy:config.copy,
+    const result=await reconcile({source:httpBucket(config.source,transport),destination:httpBucket(config.destination,transport),copy:config.copy,requiredSourceKeys:config.requiredSourceKeys,
       onVerified:async row=>{await proofs.write(JSON.stringify(row)+'\n');await proofs.sync();}});
     await fs.writeFile(path.join(config.output,'reconciliation.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx',mode:0o600});
     return {output:config.output,source_objects:result.source.objects.length,verified_objects:result.proofs.length,

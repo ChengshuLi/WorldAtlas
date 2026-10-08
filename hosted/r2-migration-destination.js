@@ -39,6 +39,7 @@ export default {
       for(const chunk of chunks){body.set(chunk,offset);offset+=chunk.byteLength;}
       const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',body)),byte=>byte.toString(16).padStart(2,'0')).join('');
       if (digest!==expected) return json({error:'Checksum mismatch'},400);
+      if (!await migrationAuthorized(request,env)) return json({error:'Migration window expired'},404);
       const result=await env.BUCKET.put(key,body,{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:metadata.httpMetadata,
         customMetadata:metadata.customMetadata,storageClass:metadata.storageClass??'Standard'});
       return result ? json({key,size,sha256:digest},201) : json({error:'Object already exists'},409);

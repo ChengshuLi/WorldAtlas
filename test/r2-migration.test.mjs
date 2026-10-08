@@ -24,7 +24,7 @@ function fixtures(){const old=bucket([['unregistered/α.bin',Buffer.from([0,255,
  return {old,current,transport,source:{url:'https://source.test',token},destination:{url:'https://destination.test',token}};}
 test('actual HTTP wrappers and CLI run preserve binary unregistered originals, existing objects and metadata twice',async()=>{
  const scratch=await fs.mkdtemp(path.join(await fs.realpath(os.tmpdir()),'worldatlas-r2-fixture-'));
- try{let prior;for(const name of ['one','two']){const f=fixtures();const result=await run({source:f.source,destination:f.destination,copy:true,output:path.join(scratch,name)},f.transport);
+ try{let prior;for(const name of ['one','two']){const f=fixtures();const result=await run({source:f.source,destination:f.destination,requiredSourceKeys:['existing.txt'],copy:true,output:path.join(scratch,name)},f.transport);
  assert.equal(result.verified_objects,2);assert.equal(result.remaining_objects,0);assert.equal(result.metadata_discrepancies,0);
  const proof=JSON.parse(await fs.readFile(path.join(result.output,'reconciliation.json'),'utf8'));assert.equal(proof.database_access,false);
  assert.equal(f.current.calls.filter(call=>call[0]==='put').length,1);assert.equal(f.old.calls.filter(call=>call[0]==='put').length,0);
@@ -33,9 +33,9 @@ test('actual HTTP wrappers and CLI run preserve binary unregistered originals, e
 });
 test('actual CLI refuses conflicting existing bytes before any put and retains failure',async()=>{
  const scratch=await fs.mkdtemp(path.join(await fs.realpath(os.tmpdir()),'worldatlas-r2-fixture-'));try{const f=fixtures();f.current.stored.set('existing.txt',{...row('existing.txt','bad'),body:'bad'});
- await assert.rejects(run({source:f.source,destination:f.destination,copy:true,output:path.join(scratch,'collision')},f.transport),/Conflicting destination bytes/);
+ await assert.rejects(run({source:f.source,destination:f.destination,requiredSourceKeys:['existing.txt'],copy:true,output:path.join(scratch,'collision')},f.transport),/Conflicting destination bytes/);
  assert.equal(f.current.calls.filter(call=>call[0]==='put').length,0);assert.equal(JSON.parse(await fs.readFile(path.join(scratch,'collision/failure.json'),'utf8')).status,'failed');
- await assert.rejects(run({source:f.source,destination:f.destination,copy:true,output:path.join(scratch,'collision')},f.transport),/EEXIST/);
+ await assert.rejects(run({source:f.source,destination:f.destination,requiredSourceKeys:['existing.txt'],copy:true,output:path.join(scratch,'collision')},f.transport),/EEXIST/);
  }finally{await fs.rm(scratch,{recursive:true});}
 });
 test('pagination rejects duplicate actual keys, repeated cursors, excessive sizes and incomplete bodies',async()=>{
@@ -64,10 +64,25 @@ test('destination auth, declared length and actual digest controls run before pu
 test('metadata collisions are rejected while additional destination cache policy is preserved',async()=>{
  const scratch=await fs.mkdtemp(path.join(await fs.realpath(os.tmpdir()),'worldatlas-r2-fixture-'));
  try {const f=fixtures();f.current.stored.get('existing.txt').httpMetadata.contentType='text/html';
- await assert.rejects(run({source:f.source,destination:f.destination,copy:true,output:path.join(scratch,'bad-metadata')},f.transport),/Conflicting destination metadata/);
+ await assert.rejects(run({source:f.source,destination:f.destination,requiredSourceKeys:['existing.txt'],copy:true,output:path.join(scratch,'bad-metadata')},f.transport),/Conflicting destination metadata/);
  assert.equal(f.current.calls.filter(call=>call[0]==='put').length,0);
  const good=fixtures();good.current.stored.get('existing.txt').httpMetadata.cacheControl='immutable';
- const result=await run({source:good.source,destination:good.destination,copy:true,output:path.join(scratch,'extra-metadata')},good.transport);
+ const result=await run({source:good.source,destination:good.destination,requiredSourceKeys:['existing.txt'],copy:true,output:path.join(scratch,'extra-metadata')},good.transport);
  assert.equal(result.metadata_discrepancies,1);assert.equal(good.current.stored.get('existing.txt').httpMetadata.cacheControl,'immutable');
  }finally{await fs.rm(scratch,{recursive:true});}
+});
+test('empty/wrong source bindings and final disappearing transfers cannot produce completion',async()=>{
+ const empty={list:async()=>({objects:[],truncated:false})};
+ await assert.rejects(reconcile({source:empty,destination:empty,copy:true}),/Empty original/);
+ const original=row('new.bin','abc');const source={list:async()=>({objects:[original],truncated:false}),get:async()=>new Response('abc')};
+ await assert.rejects(reconcile({source,destination:empty,requiredSourceKeys:['independent-known-key'],copy:true}),/independent original/);
+ let created=false,afterLists=0;
+ const destination={list:async()=>({objects:created&&++afterLists===1?[original]:[],truncated:false}),createOnly:async()=>{created=true;},get:async()=>new Response('abc')};
+ await assert.rejects(reconcile({source,destination,copy:true}),/changed or disappeared/);
+});
+test('transferred storage class mismatch is an explicit metadata failure',async()=>{
+ const original={...row('cold.bin','abc'),storageClass:'InfrequentAccess'};let created=false;
+ const source={list:async()=>({objects:[original],truncated:false}),get:async()=>new Response('abc')};
+ const destination={list:async()=>({objects:created?[{...original,storageClass:'Standard'}]:[],truncated:false}),createOnly:async()=>{created=true;},get:async()=>new Response('abc')};
+ await assert.rejects(reconcile({source,destination,copy:true}),/metadata failed/);
 });

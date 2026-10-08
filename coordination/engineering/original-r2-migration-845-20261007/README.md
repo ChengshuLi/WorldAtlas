@@ -18,15 +18,15 @@ objects with conditional ETag reads, delegates existing routes, and never writes
 storage or Neon. Invalid/missing/expired credentials close the route before reads.
 `prepare-site-r2-export.mjs` consumes the exact Git blob of Site24's server and
 checks every other packaged original member (including drizzle). Two final builds
-are byte-identical. Earlier narrower build receipts are retained as earlier checks.
+are byte-identical. Review fixes supply captured wrapper bytes directly to esbuild; an actual source-path replacement during compilation cannot enter the output. Receipt parents reject symlinks. Earlier narrower build receipts are retained as earlier checks.
 The changed-frontend adverse control is rejected before server build output changes.
 
 The separate temporary destination Worker accepts authenticated, expiring,
 checksum-verified, bounded create-only uploads using R2's atomic conditional put.
 It is not the public atlas Worker. It refuses collisions and supports full readback.
 The reconciliation driver walks all pages, rejects duplicate keys/cursor loops and
-unadmitted sizes, rereads stable inventories, verifies every existing object's full
-bytes before writes, and verifies each new object's full bytes and metadata. It
+unadmitted sizes, rejects empty/wrong anchored source inventories, rereads stable inventories, verifies every existing object's full
+bytes before writes, and verifies each new object's full bytes, metadata/storage class and continued presence in the final inventory. It
 retains complete origin/destination metadata. Extra destination HTTP policy such as
 immutable caching is allowed only while every original metadata value is preserved;
 a differing original value blocks copying. Provider-specific versions, ETags and
@@ -35,10 +35,10 @@ than represented as identical new upload properties.
 
 Run `node --test test/site-r2-export.test.mjs test/r2-migration.test.mjs`.
 Run the provider driver by sending one JSON configuration object through stdin to
-`node scripts/migrate-site-r2.mjs`. Required keys: `source`, `destination`, `copy`
+`node scripts/migrate-site-r2.mjs`. Required keys: `source`, `destination`, `requiredSourceKeys` (nonempty independent known original keys), `copy`
 (boolean), and an absolute fresh owned `output` directory. Each endpoint specifies
 an HTTPS URL, token, and optional owner-authentication headers. Never put secrets in
-CLI arguments, committed receipts or disk configuration. The dry run uses
+CLI arguments, committed receipts or disk configuration. For #845 use the three recovered content-addressed original keys as independent anchors. The dry run uses
 `copy:false`; copying uses `copy:true` only inside the approved serialized operation.
 
 Equivalent operating safeguards are deliberately used instead of the scientific

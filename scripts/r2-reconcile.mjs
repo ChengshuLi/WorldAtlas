@@ -2,7 +2,7 @@ import {createHash} from 'node:crypto';
 
 // Explicit operational limits, independent of the premerge evidence limits.
 // Bodies are streamed for verification; only a missing object is buffered.
-export const limits = Object.freeze({objects: 20000, pages: 200, totalBytes: 1024 ** 3, objectBytes: 32 * 1024 ** 2});
+export const limits = Object.freeze({objects: 20000, pages: 200, totalBytes: 1024 ** 3, objectBytes: 32 * 1024 ** 2, metadataBytes:32*1024**2});
 export const canonical = value => JSON.stringify(normalize(value));
 function normalize(value) {
   if (Array.isArray(value)) return value.map(normalize);
@@ -11,14 +11,16 @@ function normalize(value) {
 }
 export async function inventory(list, bounds = limits) {
   const objects = [], keys = new Set(), cursors = new Set();
-  let cursor, bytes = 0;
+  let cursor, bytes = 0, metadataBytes=0;
   for (let pageNumber = 0; pageNumber < bounds.pages; pageNumber++) {
     const page = await list(cursor);
     if (!Array.isArray(page.objects) || typeof page.truncated !== 'boolean') throw Error('Invalid inventory page');
     for (const row of page.objects) {
       if (typeof row.key !== 'string' || !row.key || Buffer.byteLength(row.key) > 1024 || keys.has(row.key)) throw Error('Invalid or duplicate object key');
       if (!Number.isSafeInteger(row.size) || row.size < 0 || row.size > bounds.objectBytes) throw Error('Object size outside admitted bounds');
-      if (!row.httpMetadata || !row.customMetadata || typeof row.etag !== 'string') throw Error('Missing inventory metadata');
+      if (!row.httpMetadata || !row.customMetadata || typeof row.httpMetadata!=='object' || typeof row.customMetadata!=='object' || Array.isArray(row.httpMetadata) || Array.isArray(row.customMetadata) || typeof row.etag !== 'string' || !['Standard','InfrequentAccess'].includes(row.storageClass??'Standard')) throw Error('Missing or unsupported inventory metadata');
+      metadataBytes+=Buffer.byteLength(JSON.stringify(row));
+      if(metadataBytes>(bounds.metadataBytes??limits.metadataBytes))throw Error('Inventory metadata exceeds admitted bounds');
       keys.add(row.key); bytes += row.size; objects.push(row);
       if (objects.length > bounds.objects || bytes > bounds.totalBytes) throw Error('Inventory exceeds admitted bounds');
     }
@@ -53,12 +55,15 @@ export function assertStable(before, after) {
   if (canonical(before) !== canonical(after)) throw Error('Storage inventory changed during reconciliation');
 }
 function metadataPreserved(original, target) {
-  return ['httpMetadata','customMetadata'].every(kind=>Object.entries(original[kind]).every(([key,value])=>canonical(value)===canonical(target[kind][key])));
+  return (original.storageClass??'Standard')===(target.storageClass??'Standard') && ['httpMetadata','customMetadata'].every(kind=>Object.entries(original[kind]).every(([key,value])=>canonical(value)===canonical(target[kind][key])));
 }
 // Adapters must pin reads to listed ETags and implement an atomic create-only
 // put. No delete or overwrite callback exists in this interface.
-export async function reconcile({source, destination, copy = false, onVerified = async()=>{}}) {
+export async function reconcile({source, destination, copy = false, requiredSourceKeys = [], onVerified = async()=>{}}) {
   const initialSource = await inventory(source.list), initialDestination = await inventory(destination.list);
+  if (!initialSource.objects.length) throw Error('Empty original inventory cannot establish migration');
+  const sourceKeys=new Set(initialSource.objects.map(row=>row.key));
+  if (requiredSourceKeys.some(key=>!sourceKeys.has(key))) throw Error('Required independent original object missing from inventory');
   assertStable(initialSource, await inventory(source.list));
   const targets = new Map(initialDestination.objects.map(row => [row.key,row]));
   const proofs = [], missing = [];
@@ -91,7 +96,7 @@ export async function reconcile({source, destination, copy = false, onVerified =
     if (!target) throw Error('New object absent from readback inventory');
     const restored = await readObject(await destination.get(target), target);
     if (restored.bytes !== original.bytes || restored.sha256 !== sha256) throw Error('Transferred bytes failed verification');
-    if (canonical(row.httpMetadata) !== canonical(target.httpMetadata) || canonical(row.customMetadata) !== canonical(target.customMetadata)) throw Error('Transferred metadata failed verification');
+    if (!metadataPreserved(row,target) || canonical(row.httpMetadata) !== canonical(target.httpMetadata) || canonical(row.customMetadata) !== canonical(target.customMetadata)) throw Error('Transferred metadata failed verification');
     proofs.push({key: row.key, disposition: 'transferred', bytes: original.bytes, sha256,
       source_metadata: row, destination_metadata: target, metadata_equal: true, metadata_preserved:true});
     await onVerified(proofs.at(-1));
@@ -101,6 +106,15 @@ export async function reconcile({source, destination, copy = false, onVerified =
   for (const row of initialDestination.objects) {
     const final = finalDestination.objects.find(value=>value.key===row.key);
     if (canonical(row) !== canonical(final)) throw Error('Existing destination object changed');
+  }
+  if (copy && (proofs.length !== initialSource.objects.length || new Set(proofs.map(row=>row.key)).size !== sourceKeys.size || proofs.some(row=>!sourceKeys.has(row.key)))) throw Error('Incomplete source/proof coverage');
+  for (const proof of proofs) {
+    const final=finalDestination.objects.find(row=>row.key===proof.key);
+    if (!final || canonical(final)!==canonical(proof.destination_metadata)) throw Error('Verified destination object changed or disappeared');
+    if (proof.disposition==='transferred') {
+      const finalBytes=await readObject(await destination.get(final),final);
+      if(finalBytes.sha256!==proof.sha256)throw Error('Final transferred object failed byte verification');
+    }
   }
   return {version:1, mode:copy?'copy':'verify', source:initialSource, destination_before:initialDestination,
     destination_after:finalDestination, missing:copy?[]:missing.map(value=>({key:value.row.key,sha256:value.sha256})),
