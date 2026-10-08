@@ -23,6 +23,45 @@ Subject IDs are sorted before JSON serialization and hashing (`subjectsHash` in 
 
 The property list must exactly match each template placeholder once and in order. Every source feature must have a non-empty string value for each property, and the resulting identities must be unique; all declared subjects must resolve within the pinned file. Template strings are literal formatting only, never executable expressions. Subjects mapped to one file must use one identical binding. This verifies structural identity against retained bytes; it does not establish source authority, geometry accuracy or legal/geographic approval. Track containing paths as you read the world index; never infer filenames from an absent feature property. Regional frozen scopes, adjacent-tier chains and historical territorial applicability still need their existing release/certificate gates; this receipt does not replace those checks.
 
+## Complete original family records in gzip JSONL parts
+
+A mixed source-research scope can include an original family record alongside
+real component/contact features. Use a version 2 `gzip-jsonl-record` subject
+binding for a complete original `gap-source-batch:` record, while real GeoJSON
+subjects retain their existing direct/composed bindings. This is identity custody
+only; it does not approve source authority, geometry, physical class, dates,
+cause, rights, ownership or publication.
+
+```json
+"subject_files": {
+  "gap-source-batch:65911e15791d12ebb2ccacf5": {
+    "version": 2,
+    "kind": "gzip-jsonl-record",
+    "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+    "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
+    "record_offset": 2281306,
+    "record_bytes": 6281,
+    "record_sha256": "4b9610e86b7d6517b6c32fdead65bd6c3f73e868ac3413e6a506947071097c1b"
+  }
+}
+```
+
+The referenced `baseline.version: 2` file must declare its complete encoded and
+uncompressed byte lengths and SHA-256 values. The original commit must remain an
+ancestor of the actual PR base. Offsets and lengths refer to the decoded original
+bytes and include the final newline. The reader authenticates the entire source,
+then verifies the complete record's boundary, full bytes/hash and native `id`.
+It rejects duplicate family IDs among complete records in that containing part.
+Original leading/trailing stream fragments cannot bind a subject; this binding
+never certifies completeness of the larger concatenated source stream.
+
+The complete encoded baseline, retained-source and output inventory plus unique
+record-source decoded bytes must fit the 256 MiB budget before any body read or
+decompression. Each ordinary encoded/decoded file and record retains the 32 MiB
+limit. Later whole-file checks, exact accounting, 512 descriptors and the existing
+ancestry gate still apply. A small compressed body cannot waive the decoded cap.
+Candidate-generated registries cannot replace independent original source records.
+
 ## Historical files from multiple commits
 
 Use `baseline.version: 2` only when the original evidence requires files from
