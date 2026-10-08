@@ -52,6 +52,8 @@ if (sourceByPath.size !== 3) throw new Error('Expected the three retained countr
 
 const validatorPath = `${packet}/verify-integrity.mjs`;
 const validatorSha = sha(fs.readFileSync(path.join(root, validatorPath)));
+const controlRunnerPath = `${packet}/run-controls.mjs`;
+const controlRunnerSha = sha(fs.readFileSync(path.join(root, controlRunnerPath)));
 const controlFiles = [];
 function walk(directory) {
   for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
@@ -67,7 +69,7 @@ let controlPath;
 let controls;
 for (const name of controlResultPaths.sort().reverse()) {
   const candidate = readJSON(name);
-  if (candidate.validator_sha256 === validatorSha && candidate.controls?.length === 14 &&
+  if (candidate.validator_sha256 === validatorSha && candidate.control_runner_sha256 === controlRunnerSha && candidate.controls?.length === 15 &&
       candidate.original_validator_false_acceptances?.length === 2 && candidate.safe_destination_controls?.length === 5) {
     controlPath = name;
     controls = candidate;
@@ -209,7 +211,7 @@ const manifest = {
     {method_id: 'southern-africa-1286-integrity', kind: 'reproducibility', outcome: 'passed', evidence_path: `${proofRoot}/reproducibility.json`}
   ],
   conclusions: [
-    {text: 'The replacement validator authenticates each subject source hash against the actual retained native source bytes and preserves all 223 frozen original per-ID scientific dispositions, rationale and uncertainty. Two complete executions of the actual entry point are byte-identical; the 14 directed/adversarial controls reject before a success receipt.',
+    {text: 'The replacement validator authenticates each per-subject source hash and every country-summary source descriptor against the actual retained native source bytes and preserves all 223 frozen original per-ID scientific dispositions, rationale and uncertainty. Two complete executions of the actual entry point are byte-identical; the 15 directed/adversarial controls reject before a success receipt.',
       status: 'supported', source_ids: ['GB-AGO-2018', 'GB-MOZ-2019', 'GB-MWI-2020', 'issue-411-frozen-scope']},
     {text: 'This validator-integrity work does not establish present-day territorial meaning, legal parentage, boundary accuracy or completeness, neighboring granularity, or geographic approval. The original 0/1/222 decisions and every separate source follow-up remain unchanged.',
       status: 'unresolved', source_ids: ['GB-AGO-2018', 'GB-MOZ-2019', 'GB-MWI-2020', 'issue-411-frozen-scope']}

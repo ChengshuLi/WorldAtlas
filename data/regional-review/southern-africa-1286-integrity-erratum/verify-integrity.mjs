@@ -58,8 +58,10 @@ const canonicalName = value => String(value).normalize('NFKD').replace(/[\u0300-
 const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const originalEvidenceCommit = '762d7b5a568ca845d85a98a4d188678c126a5d58';
 const scopeSnapshot = JSON.parse(gitBytes(originalEvidenceCommit, `${originalPacket}/scope.json`).toString('utf8'));
-const reproduction = readJSON(crosswalkPath);
-const assessments = readJSON(assessmentPath);
+const crosswalkBytes = readBytes(crosswalkPath);
+const assessmentBytes = readBytes(assessmentPath);
+const reproduction = JSON.parse(crosswalkBytes.toString('utf8'));
+const assessments = JSON.parse(assessmentBytes.toString('utf8'));
 const sourceReview = JSON.parse(gitBytes(originalEvidenceCommit, `${originalPacket}/source-review.json`).toString('utf8'));
 const frozenAssessments = JSON.parse(gitBytes(originalEvidenceCommit, `${originalPacket}/row-assessments.json`).toString('utf8'));
 const ids = scopeSnapshot.scope?.member_location_ids;
@@ -89,7 +91,7 @@ check(assessedIds.length === ids.length && new Set(assessedIds).size === assesse
   'actual assessment rows must contain exactly 223 unique IDs');
 check(equal([...assessedIds].sort(), [...idSet].sort()), 'assessment IDs do not exactly equal the frozen scope');
 check(assessments.issue === 411, 'assessment issue mismatch');
-check(assessments.scope_reproduction_sha256 === sha(readBytes(crosswalkPath)),
+check(assessments.scope_reproduction_sha256 === sha(crosswalkBytes),
   'assessment does not bind the complete consumed crosswalk bytes');
 
 const baselineFiles = reproduction.baseline_files;
@@ -143,6 +145,12 @@ for (const source of sourceReview.sources) {
   }
 }
 check(retainedSourceByPath.size === 3, 'expected all three original source GeoJSON collections');
+check(equal(Object.keys(reproduction.country_summary ?? {}).sort(), ['AGO', 'MOZ', 'MWI']),
+  'country summary must contain exactly the three frozen native-source countries');
+for (const iso of ['AGO', 'MOZ', 'MWI']) {
+  check(equal(reproduction.country_summary[iso]?.source, sourceDescriptorByIso.get(iso)),
+    `country summary ${iso} source descriptor differs from the consumed immutable native bytes`);
+}
 const sourceById = new Map();
 for (const {source, features} of retainedSourceByPath.values()) {
   for (const feature of features) {
@@ -255,8 +263,8 @@ const result = {
   baseline_commit: scopeSnapshot.baseline_commit,
   frozen_subject_count: ids.length,
   frozen_subjects_sha256: sha(Buffer.from(JSON.stringify([...ids].sort()))),
-  crosswalk: {path: path.relative(root, crosswalkPath), bytes: readBytes(crosswalkPath).length, sha256: sha(readBytes(crosswalkPath)), rows: reproduction.rows.length, unique_ids: new Set(crosswalkIds).size},
-  assessments: {path: path.relative(root, assessmentPath), bytes: readBytes(assessmentPath).length, sha256: sha(readBytes(assessmentPath)), rows: assessments.rows.length},
+  crosswalk: {path: path.relative(root, crosswalkPath), bytes: crosswalkBytes.length, sha256: sha(crosswalkBytes), rows: reproduction.rows.length, unique_ids: new Set(crosswalkIds).size},
+  assessments: {path: path.relative(root, assessmentPath), bytes: assessmentBytes.length, sha256: sha(assessmentBytes), rows: assessments.rows.length},
   source_subject_joins: {AGO: countryCounts.AGO, MOZ: countryCounts.MOZ, MWI: countryCounts.MWI},
   assessment_classifications: classificationCounts,
   source_artifacts: Object.fromEntries([...sourceDescriptorByIso.entries()].sort(([a], [b]) => a.localeCompare(b))),

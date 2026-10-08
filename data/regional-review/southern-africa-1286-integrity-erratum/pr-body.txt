@@ -1,15 +1,16 @@
 ## Summary
 
 - Add an issue-owned verifier that pins its own exact code bytes and derives Angola, Mozambique, and Malawi source hashes from the retained native files.
-- Compare all 223 original per-ID dispositions, rationale, uncertainty, follow-up IDs, parent ambiguity, and evidence references with the frozen original assessment rows.
+- Compare complete assessment records for all 223 IDs with frozen originals, and authenticate country-summary plus per-row source descriptors against retained native source bytes.
+- Parse and hash each exact crosswalk/assessment byte buffer once so result digests describe the bytes actually validated.
 - Admit one fresh output directory before reading inputs; publish the result through exclusive, flushed bytes and an atomic hard link.
 - Preserve historical source vintages, dates, file hashes, license attribution, neighboring granularity, and unresolved legal/geographic findings.
 
 ## Reproduction and controls
 
 - Two full 223-subject runs produced byte-identical validation receipts.
-- The replacement entry point rejected seven retained directed controls plus seven coherent false-hash, disposition, descriptor, missing, extra, and duplicate-member cases.
-- The exact predecessor validator accepted both reported false cases, reproducing the source-hash and per-ID disposition defects.
+- The replacement entry point rejected seven retained directed controls plus eight coherent false-hash, country-summary descriptor, disposition, individual descriptor, missing, extra, and duplicate-member cases.
+- The exact predecessor validator accepted both reported false cases, reproducing the source-hash and per-ID disposition defects; the corrected verifier rejects a country-summary-only false digest as well.
 - Existing-file, existing-directory, symlink, traversal, and interrupted-output controls rejected without replacing sentinels or emitting success receipts.
 - `scripts/evidence-quality.mjs` and the premerge source/evidence review bind the actual input and output bytes.
 

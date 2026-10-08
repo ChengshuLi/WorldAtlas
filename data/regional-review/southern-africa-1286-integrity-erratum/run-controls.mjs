@@ -17,7 +17,11 @@ const sourceAssessments = JSON.parse(read(path.join(root, original, 'row-assessm
 const validator = path.join(root, packet, 'verify-integrity.mjs');
 const validatorSha = sha(fs.readFileSync(validator));
 const node = process.execPath;
-const validationOutput = name => path.join(root, packet, 'vintages', `control-${runTag}-${name}`, 'validation.json');
+const controlRunnerSha = sha(fs.readFileSync(new URL(import.meta.url)));
+const validationOutput = name => {
+  const slug = name === 'country-summary-source-descriptor-mismatch' ? 'summary-source' : name;
+  return path.join(root, packet, 'vintages', `control-${runTag}-${slug}`, 'validation.json');
+};
 const priorIds = [
   'missing-crosswalk-member', 'duplicate-crosswalk-member', 'foreign-crosswalk-replacement',
   'extra-crosswalk-member', 'crosswalk-parent-mismatch', 'assessment-native-source-mismatch',
@@ -98,6 +102,9 @@ const define = (id, mutate) => {
 define('coherent-false-source-hash', (crosswalk, assessments) => {
   crosswalk.country_summary.AGO.source.sha256 = '0'.repeat(64);
   for (const row of assessments.rows.filter(row => row.country === 'AGO')) row.source_artifact_sha256 = '0'.repeat(64);
+});
+define('country-summary-source-descriptor-mismatch', crosswalk => {
+  crosswalk.country_summary.AGO.source.sha256 = '0'.repeat(64);
 });
 define('moved-scientific-disposition', (crosswalk, assessments) => {
   const quela = assessments.rows.find(row => row.id === 'gb:AGO:ADM2:16411231B11923183554394');
@@ -212,15 +219,16 @@ const output = {
   issue: 1459,
   method: 'verify-integrity.mjs',
   validator_sha256: validatorSha,
+  control_runner_sha256: controlRunnerSha,
   reproduced_at_utc: new Date().toISOString(),
   prior_directed_control_count: priorIds.length,
-  coherent_adversarial_control_count: 7,
+  coherent_adversarial_control_count: 8,
   total_control_count: results.length,
   controls: results,
   original_validator_false_acceptances: legacy,
   safe_destination_control_count: safe.length,
   safe_destination_controls: safe,
-  interpretation: 'The replacement validator rejected all seven retained directed mutations and seven newly generated false-hash, moved-disposition, incorrect-descriptor, incorrect-disposition, and coherently refreshed missing/extra/duplicate subject controls before creating any success receipt. The exact prior validator accepted both independently reproduced false source-hash and moved-disposition pairs. Existing outputs, symlink/traversal paths and interrupted-output sentinels were preserved.'
+  interpretation: 'The replacement validator rejected all seven retained directed mutations and eight newly generated false-hash, candidate country-summary descriptor, moved-disposition, incorrect-descriptor, incorrect-disposition, and coherently refreshed missing/extra/duplicate subject controls before creating any success receipt. The exact prior validator accepted both independently reproduced false source-hash and moved-disposition pairs. Existing outputs, symlink/traversal paths and interrupted-output sentinels were preserved.'
 };
 writeJson(path.join(controlRoot, 'control-results.json'), output);
 console.log(JSON.stringify({issue: output.issue, controls: results.length,
