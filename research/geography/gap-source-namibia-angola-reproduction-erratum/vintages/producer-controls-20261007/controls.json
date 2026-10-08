@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "controls": [
+    {
+      "case": "duplicate-component",
+      "result": "rejected",
+      "error": "Missing or duplicate duplicate-component: 'a'"
+    },
+    {
+      "case": "duplicate-contact",
+      "result": "rejected",
+      "error": "Missing or duplicate duplicate-contact: 'a'"
+    },
+    {
+      "case": "missing-row",
+      "result": "rejected",
+      "error": "fixed complete-inventory count mismatch"
+    }
+  ],
+  "path_controls": {
+    "traversal_run_name": "rejected by allowed-character gate",
+    "output_collision": "rejected by exclusive directory creation"
+  },
+  "authentication_controls": "pinned inventory and exact membership are verified before publication; full products require 109 NAM and 161 AGO rows"
+}
