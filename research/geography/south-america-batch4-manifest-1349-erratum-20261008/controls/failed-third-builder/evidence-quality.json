@@ -869,6 +869,38 @@
         "commit": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7",
         "path": "data/hierarchy.json"
       },
+      "issue-1506-pin-1": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py"
+      },
+      "issue-1506-pin-2": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json"
+      },
+      "issue-1506-pin-3": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/issue-1332-contract.json"
+      },
+      "issue-1506-pin-4": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproduce.py"
+      },
+      "issue-1506-pin-5": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json"
+      },
+      "issue-1506-pin-6": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/audit.json"
+      },
+      "issue-1506-pin-7": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/publication.json"
+      },
+      "issue-1506-pin-8": {
+        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
+        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-six/publication.json"
+      },
       "original-area-roster": {
         "commit": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7",
         "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-review.csv"
@@ -909,38 +941,6 @@
         "commit": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7",
         "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/source/geoBoundaries-PRY-ADM2-metaData.json"
       },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py"
-      },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json"
-      },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/issue-1332-contract.json": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/issue-1332-contract.json"
-      },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproduce.py": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproduce.py"
-      },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json"
-      },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/audit.json": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/audit.json"
-      },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/publication.json": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/publication.json"
-      },
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-six/publication.json": {
-        "commit": "5fa15de475f17ff93e205b767857d1e41a30949e",
-        "path": "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-six/publication.json"
-      },
       "world-index": {
         "commit": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7",
         "path": "data/world-index.json"
@@ -954,6 +954,14 @@
       "audit-prevention-helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
       "chile-source-metadata": "658356bb413f8b284b260360d1309527781e1b0c46027e1ae0a4c58da1c99409",
       "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "issue-1506-pin-1": "f45e1700d908291e9470698ff952b983eb21a17625723b41e1ee3d7c36c8251c",
+      "issue-1506-pin-2": "cbab3413a6808f7dd3e06389b235f782ef2363a109b9397ebbc3d5ec8bc45aac",
+      "issue-1506-pin-3": "70e61fad77bb6b93376821cbe8b7c8c73439eac95ede07a45784758400ae23f6",
+      "issue-1506-pin-4": "887c647970cda1ce5c8ffe8462d4b25729cb2ee7a69198a0a9275cdf78620f8f",
+      "issue-1506-pin-5": "bd845629235f72a1fbc01c9bfcae6ba6b28e9cfbb40d696233be0d90e98a61d5",
+      "issue-1506-pin-6": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
+      "issue-1506-pin-7": "3f6cd398598bbd817590aa48aed9a8c9d4c755ef510a05432779b218823f4513",
+      "issue-1506-pin-8": "a7fae2583bb2ea214f0599f120d1313f0d8a95c57c1c345957cbf170a2be1c2d",
       "original-area-roster": "7971335af98f6c8be11ab8699caca7f698384b2dd871983f5059b66da3fad17a",
       "original-crosswalk": "7a48c634a5e9d817cd3da977e1a023c7ffe0cc88340811817e68333ea2683ece",
       "original-manifest": "85d43d138de43b4cde705217276e47716e835f5625263f75f9fc729be19d3aa0",
@@ -964,14 +972,6 @@
       "original-source-review": "916d0211429e3be1af1a1ca9284ae4292adb7320714bb8f47da5933e7ac63b06",
       "original-summary": "6a417f7419cbdf940aa6c84fe7e62504f2030e2c3399907a6d4ee39efdf3766b",
       "paraguay-source-metadata": "d78f4e8a966cf3b077e62a33e8544e8c4bc08aab269da52f3b8d3602875851aa",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/build_manifest.py": "f45e1700d908291e9470698ff952b983eb21a17625723b41e1ee3d7c36c8251c",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/evidence-quality.json": "cbab3413a6808f7dd3e06389b235f782ef2363a109b9397ebbc3d5ec8bc45aac",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/issue-1332-contract.json": "70e61fad77bb6b93376821cbe8b7c8c73439eac95ede07a45784758400ae23f6",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproduce.py": "887c647970cda1ce5c8ffe8462d4b25729cb2ee7a69198a0a9275cdf78620f8f",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/reproducibility.json": "bd845629235f72a1fbc01c9bfcae6ba6b28e9cfbb40d696233be0d90e98a61d5",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-five/publication.json": "3f6cd398598bbd817590aa48aed9a8c9d4c755ef510a05432779b218823f4513",
-      "research/geography/south-america-batch4-validator-integrity-erratum-2026/vintages/run-six/publication.json": "a7fae2583bb2ea214f0599f120d1313f0d8a95c57c1c345957cbf170a2be1c2d",
       "world-index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
     },
     "subject_files": {
@@ -1880,18 +1880,6 @@
       "status": "added"
     },
     {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-third-builder/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-third-builder/preservation.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-third-builder/reproducibility.json",
-      "status": "added"
-    },
-    {
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/first-builder-rejection.json",
       "status": "added"
     },
@@ -1905,14 +1893,6 @@
     },
     {
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/second-control-receipt.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/third-builder-rejection.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/third-control-receipt.json",
       "status": "added"
     },
     {
@@ -2123,7 +2103,6 @@
     "The retained Atlas subject index proves only exact stored identity and parent links; it does not prove current administrative truth.",
     "The second local manifest draft lacked explicit candidate input paths for repeated whole-file metric hashes and was rejected by the evidence validator; its exact three files are retained under controls/failed-second-builder/ and excluded from the accepted top-level outputs.",
     "The source register distinguishes exact Git vintages; no external authority, legal parentage, source completeness, boundary quality, positional accuracy or regional approval is established.",
-    "The third manifest draft used generated pin keys instead of the exact issue-declared paths and failed the trusted hosted evidence contract; its exact files and hosted failure are retained under controls/failed-third-builder/ and excluded from the accepted top-level outputs.",
     "This packet establishes a bounded builder custody repair only; it does not complete original #1120 or certify geographic approval, source rights, imports or publication.",
     "run-one and run-two are retained as earlier successful drafts; run-five and run-six are the final two reproducibility runs with complete historical execution-input inventories."
   ],
@@ -2228,18 +2207,18 @@
   ],
   "outputs": [
     {
-      "bytes": 3576,
+      "bytes": 3478,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/README.md",
       "role": "scope, methods and limits",
-      "sha256": "60adb00d1502254d806191bcf9b8e92c16c8f469ca5fe05e62909edbb0c2b76e"
+      "sha256": "17ad3353e306daacb7df32631fe64bcabafe74a3e6ff72d7bbbdb8f047ae3571"
     },
     {
-      "bytes": 37683,
+      "bytes": 36653,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py",
       "role": "corrected manifest builder CLI",
-      "sha256": "75a062f359aab1741e6552f02c1c81b9001d33486b7d0ac0a2e82596f299884c"
+      "sha256": "f4859a1712705a75c81a7254a202a5d6bda7f2bdcf0965104d81419323f0d943"
     },
     {
       "bytes": 947,
@@ -2249,11 +2228,11 @@
       "sha256": "f9910b66a0f61c60a70d9c463c3f17fbc65adfb0f1fb8bdc661a6bf115864692"
     },
     {
-      "bytes": 32077,
+      "bytes": 30888,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/cli-controls.json",
       "role": "whole-hash receipts for actual CLI positive/adverse controls",
-      "sha256": "cc3ed3975967dcb6aec7f6eba6dcd8dea9b5f65e88a247ec56899fa63a22891c"
+      "sha256": "ef6b596c8bde54487b8701d3d3d2b5c38c4b7574ccb135a559f3cc31abe7f20e"
     },
     {
       "bytes": 125665,
@@ -2298,27 +2277,6 @@
       "sha256": "006cd4919e02e463af4472cbd62466e248327b09a17e7d74f3a56552ba0ba217"
     },
     {
-      "bytes": 132320,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-third-builder/evidence-quality.json",
-      "role": "preserved issue-pin-binding-rejected third builder draft",
-      "sha256": "c712b3319939d8bbd11bb38345a5d3f0f803181ff28027035d5b94419104e4c4"
-    },
-    {
-      "bytes": 21621,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-third-builder/preservation.json",
-      "role": "preserved issue-pin-binding-rejected third builder draft",
-      "sha256": "2474620905766ccde5d721c2faf13a0c1fbdb290d05c42610b5ecf426cf846fe"
-    },
-    {
-      "bytes": 2861,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/failed-third-builder/reproducibility.json",
-      "role": "preserved issue-pin-binding-rejected third builder draft",
-      "sha256": "22f28a3e852902d19de01db55e5d3c5371a21efb33c30b85c7d7c620e61dae46"
-    },
-    {
       "bytes": 892,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/first-builder-rejection.json",
@@ -2345,20 +2303,6 @@
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/second-control-receipt.json",
       "role": "superseded second exact CLI control run",
       "sha256": "1a4fe66f87e0cb7aa01cddcf6d787c76f1b83cd33355c6413c551e88c62e7670"
-    },
-    {
-      "bytes": 1065,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/third-builder-rejection.json",
-      "role": "trusted baseline pin-binding failure receipt for retained third draft",
-      "sha256": "006b06ae5d174ce3c63a5de9ded0b85688c541ed19fdd6142549d9d7989053af"
-    },
-    {
-      "bytes": 32040,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/third-control-receipt.json",
-      "role": "superseded third exact CLI control run",
-      "sha256": "aaedd75895c735135c6dcb064cf090b58f3b835c7286adf7b80aac2baaa6850c"
     },
     {
       "bytes": 1460,
@@ -2393,14 +2337,14 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproducibility.json",
       "role": "two-run complete output comparison",
-      "sha256": "3d0a332a00623b0181a7e9a381684ee97c1b25c5f0007b13eb456c8b26b323b4"
+      "sha256": "22f28a3e852902d19de01db55e5d3c5371a21efb33c30b85c7d7c620e61dae46"
     },
     {
-      "bytes": 15034,
+      "bytes": 14242,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/verify_controls.py",
       "role": "reproducible legacy and corrected builder CLI controls",
-      "sha256": "9a8cab55fc3d9f654f6167a667ebaab1f6adca641828bd0d49ff66c5bb6b0dbe"
+      "sha256": "aabb2a11050ae7fa3214f48a002b1390b130d8f0fc37c2599453d509bcd2063a"
     },
     {
       "bytes": 206120,

@@ -265,10 +265,14 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     output_static.extend(OWNED + "controls/failed-second-builder/" + name for name in
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    output_static.extend(OWNED + "controls/failed-third-builder/" + name for name in
+                         ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     output_static.extend([OWNED + "controls/first-builder-rejection.json",
                           OWNED + "controls/second-builder-rejection.json",
+                          OWNED + "controls/third-builder-rejection.json",
                           OWNED + "controls/first-control-receipt.json",
-                          OWNED + "controls/second-control-receipt.json"])
+                          OWNED + "controls/second-control-receipt.json",
+                          OWNED + "controls/third-control-receipt.json"])
     output_candidate = list(output_static)
     for run in (*PRESERVED_RUN_NAMES, *RUN_NAMES):
         root = OWNED + "vintages/" + run + "/"
@@ -391,13 +395,12 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
     pins = dict(previous_baseline["pins"])
     pin_files = {name: {"path": path, "commit": BASELINE} for name, path in previous_baseline["pin_files"].items()}
     issue_pins = contract.get("evidence_quality", {}).get("pins", {})
-    for index, (path, expected) in enumerate(sorted(issue_pins.items()), 1):
+    for path, expected in sorted(issue_pins.items()):
         record = next((row for row in preservation if row["path"] == path), None)
         if record is None or record["sha256"] != expected:
             raise ValueError("Issue-declared historical pin changed: " + path)
-        name = "issue-1506-pin-" + str(index)
-        pins[name] = expected
-        pin_files[name] = {"path": path, "commit": PACKET_COMMIT}
+        pins[path] = expected
+        pin_files[path] = {"path": path, "commit": PACKET_COMMIT}
     subject_files = {identity: {"path": binding["path"], "commit": BASELINE} for identity, binding in containing.items()}
 
     new_paths = []
@@ -411,10 +414,14 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend((OWNED + "controls/failed-second-builder/" + name, "preserved metric-binding-rejected second builder draft")
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    static.extend((OWNED + "controls/failed-third-builder/" + name, "preserved issue-pin-binding-rejected third builder draft")
+                  for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend([(OWNED + "controls/first-builder-rejection.json", "validator failure receipt for retained first draft"),
                    (OWNED + "controls/second-builder-rejection.json", "validator failure receipt for retained second draft"),
+                   (OWNED + "controls/third-builder-rejection.json", "trusted baseline pin-binding failure receipt for retained third draft"),
                    (OWNED + "controls/first-control-receipt.json", "superseded initial exact CLI control run"),
-                   (OWNED + "controls/second-control-receipt.json", "superseded second exact CLI control run")])
+                   (OWNED + "controls/second-control-receipt.json", "superseded second exact CLI control run"),
+                   (OWNED + "controls/third-control-receipt.json", "superseded third exact CLI control run")])
     for run in PRESERVED_RUN_NAMES:
         root = OWNED + "vintages/" + run + "/"
         static.extend((root + name, "preserved earlier fresh producer evidence") for name in RUN_FILES)
@@ -476,6 +483,7 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
         "Original #935/#948/#1120 evidence, source hashes, rows and history are referenced read-only at their committed historical vintages.",
         "The first local manifest draft used an unsupported run-name metric vintage and was rejected by the evidence validator; its exact three files are retained under controls/failed-first-builder/ and excluded from the accepted top-level outputs.",
         "The second local manifest draft lacked explicit candidate input paths for repeated whole-file metric hashes and was rejected by the evidence validator; its exact three files are retained under controls/failed-second-builder/ and excluded from the accepted top-level outputs.",
+        "The third manifest draft used generated pin keys instead of the exact issue-declared paths and failed the trusted hosted evidence contract; its exact files and hosted failure are retained under controls/failed-third-builder/ and excluded from the accepted top-level outputs.",
         "This packet establishes a bounded builder custody repair only; it does not complete original #1120 or certify geographic approval, source rights, imports or publication."
     ]))
     manifest = {

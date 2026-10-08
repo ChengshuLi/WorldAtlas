@@ -217,12 +217,20 @@ def fixed_controls(parent):
     repo = copy_repo(parent, "fixed-rerun")
     result = run(repo, OWNED + "/build_manifest.py")
     first = output_hashes(repo, output_names)
+    completed = json.loads((repo / output_names[2]).read_bytes())
+    _, snapshot, issue, marker = issue_contract(repo, OWNED)
+    spec = json.loads(marker.group(1))
+    declared_pins = spec.get("evidence_quality", {}).get("pins", {})
+    for path, expected in declared_pins.items():
+        if completed["baseline"]["pins"].get(path) != expected or completed["baseline"]["pin_files"].get(path) != {"path": path, "commit": "5fa15de475f17ff93e205b767857d1e41a30949e"}:
+            raise AssertionError("Corrected manifest does not bind the exact issue-declared pin key/path: " + path)
     again = run(repo, OWNED + "/build_manifest.py")
     second = output_hashes(repo, output_names)
     if result["exit_code"] != 0 or again["exit_code"] == 0 or first != second or set(first) != set(output_names):
         raise AssertionError("Corrected builder positive/rerun behavior changed")
     results["corrected_complete_positive_and_rerun"] = {"first_exit_code": result["exit_code"],
-        "rerun_exit_code": again["exit_code"], "outputs_after_rerun": second}
+        "rerun_exit_code": again["exit_code"], "issue_pin_paths_verified": len(declared_pins),
+        "outputs_after_rerun": second}
     return results
 
 
@@ -248,6 +256,8 @@ def main():
             (directory / "controls/first-builder-rejection.json").read_bytes())
         receipt["superseded_second_actual_builder_output"] = json.loads(
             (directory / "controls/second-builder-rejection.json").read_bytes())
+        receipt["superseded_third_actual_builder_output"] = json.loads(
+            (directory / "controls/third-builder-rejection.json").read_bytes())
         receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
         print(json.dumps({"status": "passed", "controls": len(receipt["controls"]), "receipt_sha256": digest(receipt_path.read_bytes())}, indent=2))
     except Exception:
