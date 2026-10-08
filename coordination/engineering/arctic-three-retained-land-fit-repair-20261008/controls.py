@@ -50,12 +50,41 @@ def run():
         result.append(rejected(lambda: p.read(path, {'bytes':4, 'sha256':p.digest(b'body'), 'mode': '100755'}), 'wrong-original-mode'))
     runtime = json.loads((p.HERE / 'runtime.json').read_bytes())
     with unittest.mock.patch.object(pathlib.Path, 'open', side_effect=AssertionError('Body opened before complete phase admission')) as opened:
-        oversized = [{'bytes': p.FILE_CAP, 'sha256': '0'*64} for _ in range(9)]
+        oversized = [{'actual_path': '/bounded-fixture/' + str(i), 'bytes': p.FILE_CAP, 'sha256': '0'*64} for i in range(9)]
         result.append(rejected(lambda: p.phase_admission(oversized, runtime, []), 'complete-phase-overbudget-zero-runtime-source-opens'))
         assert opened.call_count == 0
     import kernel
     with unittest.mock.patch.object(kernel, 'exact_additions', lambda *a, **k: ({}, [])):
         result.append(rejected(lambda: p.require_callables(runtime), 'actual-imported-numerical-callable-mutation'))
+    for name in ('exact_additions', 'neighbor_relation', 'canonical_prepared_land', 'read'):
+        with unittest.mock.patch.object(p, name, lambda *a, **k: None):
+            result.append(rejected(lambda: p.require_callables(runtime), 'actual-producer-alias-or-callable-mutation-' + name))
+    world = json.loads(p.read(p.ROOT / plan['world_index']['path'], plan['world_index']))
+    p.validate_world_index(world, plan)
+    for label, parts in [('omitted-index-part', world['parts'][:-1]), ('reordered-index', list(reversed(world['parts']))), ('foreign-index-part', [*world['parts'][:-1], 'foreign.json'])]:
+        result.append(rejected(lambda: p.validate_world_index({'parts': parts}, plan), label))
+    with unittest.mock.patch.object(pathlib.Path, 'open', side_effect=AssertionError('Body opened before descriptor admission')) as opened:
+        records = [{'actual_path': '/bounded-fixture/' + str(i), 'bytes': 1} for i in range(513)]
+        result.append(rejected(lambda: p.phase_admission(records, {'runtime_files': []}, []), 'descriptor513-zero-body-opens'))
+        result.append(rejected(lambda: p.phase_admission([records[0], records[0]], {'runtime_files': []}, []), 'duplicate-actual-identity-zero-body-opens'))
+        assert opened.call_count == 0
+    import shapely
+    with unittest.mock.patch.object(shapely.lib, 'union', shapely.lib.intersection):
+        result.append(rejected(lambda: p.require_callables(runtime), 'actual-native-ufunc-identity-substitution'))
+    with unittest.mock.patch.object(pathlib.Path, 'open', side_effect=AssertionError('Opened before destination guard')) as opened:
+        result.append(rejected(lambda: p.safe_output(p.ROOT / '.cache' / '..' / '..' / 'outside'), 'lexical-output-traversal-zero-opens'))
+        result.append(rejected(lambda: p.safe_output(p.HERE / 'producer.py'), 'outside-owned-cache-output-zero-opens'))
+        assert opened.call_count == 0
+    with tempfile.TemporaryDirectory(dir=p.ROOT / '.cache') as directory:
+        parent = pathlib.Path(directory)
+        occupied = parent / 'occupied'; occupied.write_bytes(b'existing')
+        result.append(rejected(lambda: p.safe_output(occupied), 'existing-output'))
+        dangling = parent / 'dangling'; dangling.symlink_to(parent / 'missing')
+        result.append(rejected(lambda: p.safe_output(dangling / 'output'), 'dangling-parent-output'))
+    with unittest.mock.patch.object(pathlib.Path, 'open', side_effect=AssertionError('Opened before source identity guard')) as opened:
+        result.append(rejected(lambda: p.code_guard('a'*40, {'kind':'immutable-git-code-source-v1','head':'a'*40,'root':'/wrong-root'}), 'wrong-code-source-root-zero-opens'))
+        result.append(rejected(lambda: p.code_guard('a'*40, {'kind':'immutable-git-code-source-v1','head':'b'*40,'root':str(p.ROOT)}), 'wrong-code-source-head-zero-opens'))
+        assert opened.call_count == 0
     return {'stage': 'retained-target and real-function controls only; no full49625-world run', 'controls': result,
             'count': len(result), 'kernel_sha256': p.digest((p.HERE/'kernel.py').read_bytes()),
             'producer_sha256': p.digest((p.HERE/'producer.py').read_bytes()),

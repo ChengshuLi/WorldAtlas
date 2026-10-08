@@ -27,7 +27,7 @@ def callable_pin(value):
     def normalized(code):
         return code.replace(co_filename='', co_consts=tuple(normalized(c) if isinstance(c, types.CodeType) else c for c in code.co_consts))
     result = {'module': getattr(value, '__module__', None), 'qualname': getattr(value, '__qualname__', None),
-              'type': type(value).__name__}
+              'type': type(value).__name__, 'name': getattr(value, '__name__', None)}
     if hasattr(value, '__code__'):
         result['code_sha256'] = digest(marshal.dumps(normalized(value.__code__)))
     return result
@@ -39,6 +39,10 @@ def critical_callables():
     for name, value in vars(geometry).items():
         if callable(value) and getattr(value, '__module__', None) == 'evidence.geometry':
             result['evidence.geometry.' + name] = value
+    for name in ('exact_additions', 'neighbor_relation', 'canonical_prepared_land', 'canonical_json', 'deterministic_gzip',
+                 'digest', 'callable_pin', 'critical_callables', 'loaded_runtime_paths', 'ordinary', 'read', 'decoded',
+                 'code_guard', 'phase_admission', 'safe_output', 'authenticate_installed_runtime', 'validate_world_index', 'require_callables', 'preflight', 'run'):
+        result['producer.executed.' + name] = globals()[name]
     for name in ('union', 'difference', 'intersection', 'covers', 'equals', 'is_valid'):
         result['shapely.lib.' + name] = getattr(shapely.lib, name)
     return result
@@ -100,34 +104,32 @@ def decoded(raw, pin):
         raise ValueError('Whole decoded body differs')
     return result
 
-def code_guard(commit):
-    actual = subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip()
-    if actual != commit or len(commit) != 40:
-        raise ValueError('Exact immutable execution head required')
-    paths = {HERE / 'producer.py', HERE / 'kernel.py', HERE / 'input-plan.json', HERE / 'runtime.json'}
+def code_guard(commit, proof):
+    if proof.get('head') != commit or proof.get('root') != str(ROOT) or proof.get('kind') != 'immutable-git-code-source-v1':
+        raise ValueError('Wrong independently issued immutable code source/root/head')
+    paths = {HERE / 'producer.py', HERE / 'kernel.py', HERE / 'input-plan.json', HERE / 'runtime.json', HERE / 'capture-code.py'}
     for module in list(sys.modules.values()):
         f = getattr(module, '__file__', None)
         if f and pathlib.Path(f).resolve().is_relative_to(ROOT):
             paths.add(pathlib.Path(f).resolve())
-    rows = []
-    for path in sorted(paths):
-        ordinary(path)
-        relative = str(path.relative_to(ROOT))
-        fields = subprocess.check_output(['git', '-C', str(ROOT), 'ls-tree', '-l', commit, '--', relative], text=True).split(None, 4)
-        if len(fields) != 5 or fields[0] not in ('100644', '100755') or fields[1] != 'blob':
-            raise ValueError('Uncommitted executed dependency: ' + relative)
-        size = int(fields[3])
-        expected_mode = {'100644': 0o644, '100755': 0o755}[fields[0]]
-        if size > FILE_CAP or path.stat().st_size != size or path.stat().st_mode & 0o777 != expected_mode:
-            raise ValueError('Executed dependency stat/mode/size differs before read')
-        with path.open('rb') as stream:
-            raw = stream.read(size + 1)
-        if len(raw) != int(fields[3]) or hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest() != fields[2]:
-            raise ValueError('Executed dependency differs from Git')
-        rows.append({'path': relative, 'mode': fields[0], 'git_blob_oid': fields[2], 'bytes': len(raw), 'sha256': digest(raw)})
+    expected = {str(path.relative_to(ROOT)) for path in paths}
+    rows = proof.get('files', [])
+    if len(rows) != len(expected) or {pin['path'] for pin in rows} != expected:
+        raise ValueError('Complete executed/imported/issuer code roster differs')
+    for pin in rows:
+        raw = read(ROOT / pin['path'], pin)
+        if hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest() != pin['git_blob_oid']:
+            raise ValueError('Actual code does not equal original immutable Git body')
     return rows
 
+
 def phase_admission(inputs, runtime, code):
+    descriptors = [*inputs, *runtime['runtime_files'], *code]
+    if len(descriptors) > 512:
+        raise ValueError('Complete phase exceeds512 descriptors')
+    identities = [p.get('actual_path', p.get('path')) for p in descriptors]
+    if any(not isinstance(path, str) or not pathlib.Path(path).is_absolute() for path in identities) or len(set(identities)) != len(identities):
+        raise ValueError('Complete phase requires unique absolute actual source/runtime/code identities')
     for pin in [*inputs, *code]:
         if type(pin['bytes']) is not int or not 0 <= pin['bytes'] <= FILE_CAP:
             raise ValueError('Declared ordinary phase member exceeds cap')
@@ -143,28 +145,22 @@ def phase_admission(inputs, runtime, code):
         raise ValueError('Complete prospective encoded/decoded/runtime/output phase exceeds256MiB: ' + str(total))
     return source_bytes, runtime_bytes, total
 
+def validate_world_index(world, plan):
+    paths = ['data/' + name for name in world.get('parts', [])]
+    expected = [p['path'] for p in plan['current_world_inputs']]
+    if len(paths) != 36 or len(set(paths)) != 36 or paths != expected:
+        raise ValueError('Full immutable36-part world index differs from declared source roster')
+    return paths
+
 def require_callables(runtime):
+    current = critical_callables()
+    if set(current) != set(INITIAL_EXECUTED_CALLABLES) or any(current[name] is not value for name, value in INITIAL_EXECUTED_CALLABLES.items()):
+        raise ValueError('Captured actual numerical/imported callable identity changed')
     if {name: callable_pin(value) for name, value in critical_callables().items()} != runtime['critical_callables']:
         raise ValueError('Actual numerical callable changed before source consumer')
 
-def preflight(commit):
-    # Import/operator warming is a bounded runtime-preparation operation, not a source computation.
-    decoded(deterministic_gzip(b'[]\n'), {'decoded_bytes': 3, 'decoded_sha256': digest(b'[]\n')})
-    canonical_prepared_land(Polygon([(0, 0), (1, 0), (0, 1), (0, 0)]))
-    if sys.version_info[:3] != (3, 12, 14) or shapely.__version__ != '2.1.2' or shapely.geos_version_string != '3.13.1':
-        raise ValueError('Frozen numerical runtime required')
-    code = code_guard(commit)
-    plan = json.loads((HERE / 'input-plan.json').read_bytes())
-    runtime = json.loads((HERE / 'runtime.json').read_bytes())
-    inputs = [p for p in plan['current_world_inputs'] if p['role'] != 'historical-tracked-body-only']
-    inputs += [plan['current_part29'], plan['source_decisions'], plan['applicability_receipt']]
-    source_bytes, runtime_bytes, total = phase_admission(inputs, runtime, code)
-    if loaded_runtime_paths() - {p['path'] for p in runtime['runtime_files']}:
-        raise ValueError('Actual loaded runtime exceeds the admitted frozen roster')
-    if sys.flags.optimize or sys.flags.dont_write_bytecode != runtime['dont_write_bytecode'] or os.path.realpath(sys.executable) != runtime['executable']:
-        raise ValueError('Wrong actual interpreter invocation')
-    require_callables(runtime)
-    # All runtime sizes are admitted before runtime hashing and any geography body read.
+def authenticate_installed_runtime(runtime):
+    # Caller admits complete phase before this first runtime body operation.
     for pin in runtime['runtime_files']:
         path = ordinary(pin['path'])
         before = path.stat()
@@ -184,19 +180,57 @@ def preflight(commit):
         after_stat = path.stat()
         if consumed != pin['bytes'] or (after_stat.st_dev, after_stat.st_ino, after_stat.st_size, after_stat.st_mode, after_stat.st_mtime_ns) != (before.st_dev, before.st_ino, before.st_size, before.st_mode, before.st_mtime_ns) or h.hexdigest() != pin['sha256']:
             raise ValueError('Whole installed runtime changed')
+
+def preflight(commit, code_source, code_source_sha, code_source_bytes):
+    # Import/operator warming is a bounded runtime-preparation operation, not a source computation.
+    decoded(deterministic_gzip(b'[]\n'), {'decoded_bytes': 3, 'decoded_sha256': digest(b'[]\n')})
+    canonical_prepared_land(Polygon([(0, 0), (1, 0), (0, 1), (0, 0)]))
+    if sys.version_info[:3] != (3, 12, 14) or shapely.__version__ != '2.1.2' or shapely.geos_version_string != '3.13.1':
+        raise ValueError('Frozen numerical runtime required')
+    if type(code_source_bytes) is not int or not 0 < code_source_bytes <= 65536:
+        raise ValueError('Bounded independently issued code source required')
+    source_pin = {'bytes': code_source_bytes, 'sha256': code_source_sha, 'mode': '100644'}
+    proof = json.loads(read(code_source, source_pin))
+    code = code_guard(commit, proof)
+    plan = json.loads((HERE / 'input-plan.json').read_bytes())
+    runtime = json.loads((HERE / 'runtime.json').read_bytes())
+    inputs = [p for p in plan['current_world_inputs'] if p['role'] != 'historical-tracked-body-only']
+    inputs = [{**p, 'actual_path': str(ROOT / p['path'])} for p in inputs]
+    inputs += [{**plan['current_part29'], 'actual_path': str(HERE / plan['current_part29_local_alias'])},
+               {**plan['source_decisions'], 'actual_path': str(HERE / plan['source_decisions_local_alias'])},
+               {**plan['applicability_receipt'], 'actual_path': str(HERE / plan['applicability_receipt']['local_path'])},
+               {**plan['world_index'], 'actual_path': str(ROOT / plan['world_index']['path'])},
+               {**source_pin, 'actual_path': str(pathlib.Path(code_source).absolute())}]
+    admitted_code = [{**p, 'actual_path': str(ROOT / p['path'])} for p in code]
+    source_bytes, runtime_bytes, total = phase_admission(inputs, runtime, admitted_code)
+    if loaded_runtime_paths() - {p['path'] for p in runtime['runtime_files']}:
+        raise ValueError('Actual loaded runtime exceeds the admitted frozen roster')
+    if sys.flags.optimize or sys.flags.dont_write_bytecode != runtime['dont_write_bytecode'] or os.path.realpath(sys.executable) != runtime['executable']:
+        raise ValueError('Wrong actual interpreter invocation')
+    require_callables(runtime)
+    authenticate_installed_runtime(runtime)
     if plan['source_decisions']['sha256'] != SOURCE_DECISIONS_SHA or plan['current_part29']['decoded_sha256'] != CURRENT_PART29_SHA:
         raise ValueError('Wrong reviewed source or installedv8 baseline')
-    return plan, {'complete_phase_bytes': total, 'source_encoded_decoded_bytes': source_bytes,
+    world = json.loads(read(ROOT / plan['world_index']['path'], plan['world_index']))
+    validate_world_index(world, plan)
+    return plan, {'complete_phase_bytes': total, 'complete_phase_descriptors': len(inputs) + len(code) + len(runtime['runtime_files']), 'source_encoded_decoded_bytes': source_bytes,
                   'installed_runtime_bytes': runtime_bytes, 'output_reserve_bytes': OUTPUT_RESERVE,
                   'executed_code': code, 'source_count': len(inputs), 'runtime_count': len(runtime['runtime_files'])}
 
-def run(commit, output, input_only=False):
-    plan, admission = preflight(commit)
+def safe_output(output):
+    path = pathlib.Path(output)
+    if not path.is_absolute() or '..' in path.parts or any(p.is_symlink() for p in [path, *path.parents]):
+        raise ValueError('Absolute nontraversing ordinary owned-cache output required')
+    if not path.is_relative_to(ROOT / '.cache') or path.exists():
+        raise ValueError('Fresh exclusive owned-cache output required')
+    return path
+
+def run(commit, output, input_only=False, *, code_source, code_source_sha, code_source_bytes):
+    if not input_only:
+        output = safe_output(output)
+    plan, admission = preflight(commit, code_source, code_source_sha, code_source_bytes)
     if input_only:
         return {'status': 'input-plan/runtime admission PASS; no repair calculation', **admission}
-    output = pathlib.Path(output).absolute()
-    if output.exists() or not output.is_relative_to(ROOT / '.cache') or any(p.is_symlink() for p in [output, *output.parents]):
-        raise ValueError('Fresh exclusive owned-cache destination required')
     receipt = json.loads(read(HERE / plan['applicability_receipt']['local_path'], plan['applicability_receipt']))
     if receipt['id'] != plan['applicability_receipt']['comment_id'] or receipt['html_url'] != plan['pre_edit_review_url']:
         raise ValueError('Wrong independent posted applicability receipt')
@@ -259,7 +293,7 @@ def run(commit, output, input_only=False):
     runtime = json.loads((HERE / 'runtime.json').read_bytes())
     if loaded_runtime_paths() - {p['path'] for p in runtime['runtime_files']} or {name: callable_pin(value) for name, value in critical_callables().items()} != runtime['critical_callables']:
         raise ValueError('Runtime or numerical callable drift after complete source operation')
-    if code_guard(commit) != admission['executed_code']:
+    if code_guard(commit, json.loads(read(code_source, {'bytes': code_source_bytes, 'sha256': code_source_sha, 'mode': '100644'}))) != admission['executed_code']:
         raise ValueError('Executed project code drift after complete source operation')
     if max(map(len, (raw, encoded, proof))) > FILE_CAP or len(raw) + len(encoded) + len(proof) > OUTPUT_RESERVE:
         raise ValueError('Actual complete output exceeds admitted reserve')
@@ -270,10 +304,15 @@ def run(commit, output, input_only=False):
     return {'status': 'PASS', 'world_rows': len(seen), 'changed_targets': len(targets), 'source_eligible_components': 3, 'constructed_components': len(gaps),
             'output_bytes': len(raw) + len(encoded) + len(proof), 'after_part29_sha256': digest(raw), **admission}
 
+INITIAL_EXECUTED_CALLABLES = critical_callables()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--commit', required=True)
     parser.add_argument('--out')
     parser.add_argument('--input-only', action='store_true')
+    parser.add_argument('--code-source', required=True)
+    parser.add_argument('--code-source-sha', required=True)
+    parser.add_argument('--code-source-bytes', required=True, type=int)
     args = parser.parse_args()
-    print(json.dumps(run(args.commit, args.out, args.input_only), sort_keys=True))
+    print(json.dumps(run(args.commit, args.out, args.input_only, code_source=args.code_source, code_source_sha=args.code_source_sha, code_source_bytes=args.code_source_bytes), sort_keys=True))

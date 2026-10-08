@@ -11,3 +11,15 @@ The current before-image is the accepted installed v8 body: `current-v8-part29.j
 The producer authenticates whole current source bodies and actual runtime before source operations, admits the complete encoded/decoded/code/runtime/output budget, uses a fresh owned-cache output, and retains complete construction and neighbor witnesses. The two-target result is a proposal only. A later dependent delivery must supply coherent native, ownership, reference, pixel, content, certificate and offline release products through the existing strict normal consumer before counting repairs integrated.
 
 GSHHG 2.3.7 was released 2017-06-15; observations are heterogeneous. Its mapped-land overlays are source-relative, while water status and physical authority remain unverified/unapproved. Native AAFC and v2.2 are distinct generalized framework editions; native effective date is unknown. No result establishes legal boundary authority, historic cause, current water/ice status, seasonal wetness, channel width, precision, publication approval or production deployment. Retired administrative footprints remain contextual only.
+
+The immutable code source is prepared in a separate, bounded operation using the
+whole pinned absolute Git executable. That process authenticates the actual
+commit, root, modes, OIDs and complete code bodies, writes a small source proof,
+and exits before the repair process starts. The repair entry requires the exact
+proof bytes and hash supplied by that operation and verifies its actual executed
+project bodies before and after calculation. It does not invoke Git or charge an
+unexecuted Git tool as a scientific input. Both operations include their actual
+installed runtime, code and outputs in their own measured admission. The earlier
+ae6 input-only result is preserved as a limited plan/runtime observation: its
+subsequently demonstrated alias, index, descriptor and path guard gaps do not
+qualify a repair calculation.
