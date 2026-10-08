@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "issue": 913,
+  "subject_id": "gb:SLB:ADM1:17018030B19935783635883",
+  "claims": [
+    {
+      "id": "temotu-admin-tier",
+      "status": "supported",
+      "claim": "Temotu is an administrative province, not a geographic synonym for a single island.",
+      "evidence": ["mpgis-temotu-profile", "mpgis-provincial-government-act-1997"],
+      "limits": ["The posted consolidated Act's current amendment state should be confirmed with the Attorney General."]
+    },
+    {
+      "id": "historical-name-not-equivalence",
+      "status": "supported",
+      "claim": "The former provincial name Santa Cruz Islands Province does not, by itself, prove that the present Temotu province and the Atlas Santa Cruz Islands area are coextensive.",
+      "evidence": ["mpgis-temotu-profile", "solomon-delimitation-archipelagos-ln40-1979", "unesco-icomos-pacific-cultural-landscapes"],
+      "limits": ["The cited records use different legal, administrative, and cultural/physiographic scope concepts."]
+    },
+    {
+      "id": "atlas-parent-scope",
+      "status": "unresolved",
+      "claim": "The intended complete island membership and perimeter of the Atlas Santa Cruz Islands area are not established by the available sources; whole-Temotu parent correctness remains unresolved.",
+      "evidence": ["mpgis-temotu-profile", "mpgis-provincial-government-act-1997", "solomon-delimitation-archipelagos-ln40-1979", "unesco-icomos-pacific-cultural-landscapes", "solomon-natural-earth-adm1-retained-prior-evidence"],
+      "limits": ["No inspected source supplies an Atlas-area polygon and authoritative complete member roster."]
+    },
+    {
+      "id": "neighbor-scale",
+      "status": "supported",
+      "claim": "The pinned ten-feature ADM1 source combines nine province-named features with the distinct Capital Territory (Honiara); its generic ADM1 canonical label should not be read as proof that all ten are provinces.",
+      "evidence": ["mpgis-provincial-government-act-1997", "mpgis-provincial-governments-list", "solomon-natural-earth-adm1-retained-prior-evidence"],
+      "limits": ["The Natural Earth-derived source is generalized and does not certify exact provincial boundaries or offshore completeness."]
+    }
+  ],
+  "proposed_correction": null,
+  "engineering_handoff": {
+    "owner": "Geography integration/Main for area convention; Engineering only after a separate scoped authorization",
+    "action": "Define the intended Santa Cruz Islands area membership and whether Duff/Taumako and other Temotu groups belong. If the selected area excludes part of Temotu, scope a source-backed geographic-portion design rather than moving the whole province or inventing boundaries.",
+    "status": "unresolved; no production correction proposed"
+  }
+}
