@@ -30,7 +30,10 @@ def main():
  assert native_extraction['member_byte_identical_to_retained_file'] is True
  retired_receipt=predecessor_execution(PACKET/'retired-member-context-phase2.json')
  assert retired_receipt['phase']=='retired-context'
- assert any(x['path'].endswith('/r2-native-extract/native-archive-extraction.json') for x in retired_receipt['predecessors'])
+ plan=execution_plan()
+ native_phase=next(x for x in plan['phases'] if x['name']=='native-archive-extract')
+ native_output=f"{native_phase['owned_path']}vintages/{native_phase['vintage']}/native-archive-extraction.json"
+ assert any(x['path']==native_output for x in retired_receipt['predecessors'])
  atlas_features={f['id']:f for f in read_json(ROOT/'data/geography/part-29.json')['features']}
  hierarchy={x['id']:x for x in read_json(ROOT/'data/hierarchy.json')}
  native=read_json(PACKET/'sources/aafc-ecoregions.native.geojson')['features']
