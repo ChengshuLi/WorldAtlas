@@ -1,0 +1,1289 @@
+{
+  "version": 1,
+  "issue": 633,
+  "stage": "source-research-with-unresolved-completeness-and-crosswalk-questions",
+  "geographic_approval": "not-requested",
+  "subject_count": 24,
+  "subjects": [
+    {
+      "id": "atlas:coverage:ATF-5919",
+      "name": "Iles Eparses de l'ocean Indien",
+      "current_containing_file": "data/geography/part-28.json",
+      "current_geometry_type": "MultiPolygon",
+      "current_component_count": 7,
+      "administrative_or_physical_role": "Named territory",
+      "source_id": "natural-earth:ATF-5919",
+      "source_vintage": "Undated modern reference",
+      "source_license": "Public domain",
+      "source_geometry_component_count": 7,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 0.0042132568505189524,
+      "retained_parent_source_vs_current_relative_area_change_percent": -0.0001661852413960747,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:iles-eparses-de-l-ocean-indien:1900b2fa0555",
+          "level": "province",
+          "name": "Iles Eparses de l'ocean Indien"
+        },
+        {
+          "id": "framework:area:mozambique-channel-is:3a4f67a407f4",
+          "level": "area",
+          "name": "Mozambique Channel Islands"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Natural Earth 10m Public Domain source record natural-earth:ATF-5919 is reproduced by the current feature; the source/current overlay has 0.004213% symmetric difference. It is a named-territory/overseas-department feature source, not a geodetic completeness certificate.",
+      "settlement_locality_disposition": "The cited Natural Earth 10m record/source establishes a named island, department or territory unit; it is not a complete settlement gazetteer. This packet found no current official geocoded settlement source for the assigned entity. Settlement enumeration is not inferred from ownership or the absence of city subunits.",
+      "uncertainties": [
+        "The 7 current components belong to the Indian Ocean Iles Éparses source feature; Antarctic geography is excluded. Natural Earth supports feature identity, but a current official island/reef inventory is needed to exclude small omitted land and to avoid treating French ownership as physical-geography evidence."
+      ],
+      "physical_source_finding": "Natural Earth 1:10m named territory/dependency geometry reproduces the current feature closely but does not establish a current emergent-land or reef inventory. Shom/IGN Litto3D is a lawful scale-appropriate candidate; exact island/tile crosswalk is still required."
+    },
+    {
+      "id": "atlas:coverage:FRA-4601",
+      "name": "La Réunion",
+      "current_containing_file": "data/geography/part-28.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Overseas department",
+      "source_id": "natural-earth:FRA-4601",
+      "source_vintage": "Undated modern reference",
+      "source_license": "Public domain",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 0.00015361570700377452,
+      "retained_parent_source_vs_current_relative_area_change_percent": -1.9653892041466423e-05,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:la-reunion:31f4268e6f50",
+          "level": "province",
+          "name": "La Réunion"
+        },
+        {
+          "id": "framework:area:reunion:59f4b2b507fd",
+          "level": "area",
+          "name": "Réunion"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Natural Earth 10m Public Domain source record natural-earth:FRA-4601 is reproduced by the current feature; the source/current overlay has 0.000154% symmetric difference. It is a named-territory/overseas-department feature source, not a geodetic completeness certificate.",
+      "settlement_locality_disposition": "The cited Natural Earth 10m record/source establishes a named island, department or territory unit; it is not a complete settlement gazetteer. This packet found no current official geocoded settlement source for the assigned entity. Settlement enumeration is not inferred from ownership or the absence of city subunits.",
+      "uncertainties": [],
+      "physical_source_finding": "Natural Earth 1:10m named territory/dependency geometry reproduces the current feature closely but does not establish a current emergent-land or reef inventory. Shom/IGN Litto3D is a lawful scale-appropriate candidate; exact island/tile crosswalk is still required."
+    },
+    {
+      "id": "atlas:coverage:FRA-4602",
+      "name": "Mayotte",
+      "current_containing_file": "data/geography/part-28.json",
+      "current_geometry_type": "MultiPolygon",
+      "current_component_count": 2,
+      "administrative_or_physical_role": "Overseas department",
+      "source_id": "natural-earth:FRA-4602",
+      "source_vintage": "Undated modern reference",
+      "source_license": "Public domain",
+      "source_geometry_component_count": 2,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 0.0007514633825453639,
+      "retained_parent_source_vs_current_relative_area_change_percent": -1.3574225178789818e-05,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:mayotte:fa15b20853d8",
+          "level": "province",
+          "name": "Mayotte"
+        },
+        {
+          "id": "framework:area:mayotte:3cfd222e9e7c",
+          "level": "area",
+          "name": "Mayotte"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Natural Earth 10m Public Domain source record natural-earth:FRA-4602 is reproduced by the current feature; the source/current overlay has 0.000751% symmetric difference. It is a named-territory/overseas-department feature source, not a geodetic completeness certificate.",
+      "settlement_locality_disposition": "The cited Natural Earth 10m record/source establishes a named island, department or territory unit; it is not a complete settlement gazetteer. This packet found no current official geocoded settlement source for the assigned entity. Settlement enumeration is not inferred from ownership or the absence of city subunits.",
+      "uncertainties": [],
+      "physical_source_finding": "Natural Earth 1:10m named territory/dependency geometry reproduces the current feature closely but does not establish a current emergent-land or reef inventory. Shom/IGN Litto3D is a lawful scale-appropriate candidate; exact island/tile crosswalk is still required."
+    },
+    {
+      "id": "atlas:coverage:MUS-5180",
+      "name": "Agaléga",
+      "current_containing_file": "data/geography/part-28.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Dependency",
+      "source_id": "natural-earth:MUS-5180",
+      "source_vintage": "Undated modern reference",
+      "source_license": "Public domain",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 0.003562996329487525,
+      "retained_parent_source_vs_current_relative_area_change_percent": 0.002417873781493876,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:agalega:65fe675f0572",
+          "level": "province",
+          "name": "Agaléga"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Natural Earth 10m admin-1 record MUS-5180 is a Public Domain named dependency record, reproduced by the current footprint; Statistics Mauritius 2022 Table G1 enumerates Agalega separately with 330 residents.",
+      "settlement_locality_disposition": "The cited Natural Earth 10m record/source establishes a named island, department or territory unit; it is not a complete settlement gazetteer. This packet found no current official geocoded settlement source for the assigned entity. Settlement enumeration is not inferred from ownership or the absence of city subunits.",
+      "uncertainties": [
+        "The disjoint Natural Earth Agaléga record and OSM/Wambacher ADM1 Agaléga record have different footprints; GSHHG 2.3.7 does not intersect the Natural Earth footprint. Census population establishes inhabited island-group presence, not which source islands/rocks belong to each feature; request an official island-by-island crosswalk."
+      ],
+      "agalega_finding": "This Public Domain Natural Earth named dependency record remains distinct from the two-component ODbL/OSM geoBoundaries ADM1 record; it is not a substitute for reef/island completeness."
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B12885462064369",
+      "name": "St. Brandon",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 77.41952077707315,
+      "retained_parent_source_vs_current_relative_area_change_percent": -77.41877040372238,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:st-brandon:24ac7adfd8b8",
+          "level": "province",
+          "name": "St. Brandon"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [
+        "Source/current geometry has no intersection with GSHHG 2.3.7 level-1 land polygons. Coarse physical dataset non-detection does not demonstrate land absence; official island/reef-scale geometry reconciliation required.",
+        "Pinned source/current symmetric difference 77.420% needs higher-resolution authoritative island/shoreline reconciliation."
+      ],
+      "mauritius_geographical_crosswalk": "Outer-island/Rodrigues record; not one of the nine Mauritius Island districts",
+      "st_brandon_finding": "Official descriptions report a shifting reef with numerous low islets; the retained GSHHG non-intersection is not absence evidence. The exact geoBoundaries footprint-to-island/reef crosswalk is unresolved."
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B21568199301359",
+      "name": "Plaines Wilhems",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 6.137658523198101,
+      "retained_parent_source_vs_current_relative_area_change_percent": 1.7655444298662055,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:plaines-wilhems:7acf9d2b6455",
+          "level": "province",
+          "name": "Plaines Wilhems"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 6.138% needs higher-resolution authoritative island/shoreline reconciliation."
+      ],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B3325932502431",
+      "name": "Flacq",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 2,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 3.4024631748652054,
+      "retained_parent_source_vs_current_relative_area_change_percent": 0.5355311667928989,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:flacq:58f96c14996e",
+          "level": "province",
+          "name": "Flacq"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B37057547030311",
+      "name": "Rodrigues",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 8.77107712595569,
+      "retained_parent_source_vs_current_relative_area_change_percent": 0.2160190181974392,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:rodrigues:5771978b58f2",
+          "level": "province",
+          "name": "Rodrigues"
+        },
+        {
+          "id": "framework:area:rodrigues:23d7a7154873",
+          "level": "area",
+          "name": "Rodrigues"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota. Statistics Mauritius 2022 Census Volume III Table G1 identifies Island of Rodrigues and six local regions; Appendix IV enumerates localities for all six. This supports Rodrigues as a grouped inhabited island location, while its administrative components are not the Mauritius Island districts.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 8.771% needs higher-resolution authoritative island/shoreline reconciliation."
+      ],
+      "mauritius_geographical_crosswalk": "Outer-island/Rodrigues record; not one of the nine Mauritius Island districts"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B53255720811613",
+      "name": "Port Louis",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 8.962013368243092,
+      "retained_parent_source_vs_current_relative_area_change_percent": 1.8056240355660038,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:port-louis:0e2cdd4114d4",
+          "level": "province",
+          "name": "Port Louis"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 8.962% needs higher-resolution authoritative island/shoreline reconciliation."
+      ],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B64352145242214",
+      "name": "Moka",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 2.3040992764643766,
+      "retained_parent_source_vs_current_relative_area_change_percent": 0.8835845720933412,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:moka:5e53f0a17b1f",
+          "level": "province",
+          "name": "Moka"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B660734165567",
+      "name": "Grand Port",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 3.9778458193187887,
+      "retained_parent_source_vs_current_relative_area_change_percent": -0.2945497848186275,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:grand-port:79b8a188be70",
+          "level": "province",
+          "name": "Grand Port"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B83452679821580",
+      "name": "Agaléga",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "MultiPolygon",
+      "current_component_count": 2,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 2,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 23.33854147400042,
+      "retained_parent_source_vs_current_relative_area_change_percent": -17.771266135950825,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:agalega:acc988d45a6a",
+          "level": "province",
+          "name": "Agaléga"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [
+        "Source/current geometry has no intersection with GSHHG 2.3.7 level-1 land polygons. Coarse physical dataset non-detection does not demonstrate land absence; official island/reef-scale geometry reconciliation required.",
+        "Pinned source/current symmetric difference 23.339% needs higher-resolution authoritative island/shoreline reconciliation."
+      ],
+      "mauritius_geographical_crosswalk": "Outer-island/Rodrigues record; not one of the nine Mauritius Island districts",
+      "agalega_finding": "This ODbL/OSM ADM1 record is distinct from the disjoint single-component Natural Earth MUS-5180 named dependency record; the source-unit crosswalk between their coverage remains unresolved."
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B91551715822340",
+      "name": "Pamplemousses",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 4.402451037644538,
+      "retained_parent_source_vs_current_relative_area_change_percent": -2.454370540011608,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:pamplemousses:bfae589e0c33",
+          "level": "province",
+          "name": "Pamplemousses"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B93227578092779",
+      "name": "Rivière du Rempart",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 4.33177374192285,
+      "retained_parent_source_vs_current_relative_area_change_percent": -0.243680537367732,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:riviere-du-rempart:64cd705cd522",
+          "level": "province",
+          "name": "Rivière du Rempart"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B93866494923153",
+      "name": "Savanne",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 3.1423097619711404,
+      "retained_parent_source_vs_current_relative_area_change_percent": -0.19155254781956882,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:savanne:b695523401c5",
+          "level": "province",
+          "name": "Savanne"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:MUS:ADM1:65221844B99203907341133",
+      "name": "Black River",
+      "current_containing_file": "data/geography/part-16.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Districts and Outer Islands of Mauritius",
+      "source_id": "gb:MUS:ADM1",
+      "source_vintage": "2017",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 7.4232984799286825,
+      "retained_parent_source_vs_current_relative_area_change_percent": -3.3965693695582786,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:black-river:489c728e4bf8",
+          "level": "province",
+          "name": "Black River"
+        },
+        {
+          "id": "framework:area:mauritius:8cfda2299628",
+          "level": "area",
+          "name": "Mauritius"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "Pinned geoBoundaries ADM1 source metadata canonical role: “Districts and Outer Islands of Mauritius”; source vintage 2017 and ODbL 1.0. Statistics Mauritius 2022 census geography distinguishes Mauritius Island districts/Municipal or Village Council Areas and six Rodrigues local regions; source is a mixed administrative/outer-island collection, not a uniform ADM1 quota.",
+      "settlement_locality_disposition": "Statistics Mauritius 2022 Volume III Table G1 names the nine Mauritius Island districts and their municipal wards/Village Council Areas; Rodrigues has six local regions and Appendix IV lists 310 locality-name entries. These are administrative/census localities, not an exhaustive geocoded settlement layer. Official coordinate-level settlement coverage and exact source-to-unit crosswalk remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 7.423% needs higher-resolution authoritative island/shoreline reconciliation."
+      ],
+      "mauritius_geographical_crosswalk": "One of nine Mauritius Island geographical districts",
+      "official_onsdi_district_crosswalk": "normalized exact name; see district-comparison.json"
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B14018612202061",
+      "name": "West Mahe",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 18.600722937965834,
+      "retained_parent_source_vs_current_relative_area_change_percent": -0.03693351696682953,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:west-mahe:11db86531499",
+          "level": "province",
+          "name": "West Mahe"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region West Mahe, parent island Mahe, with 4 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 18.601% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "West Mahe",
+        "reference_island_parent": "Mahe",
+        "district_row_count": 4,
+        "current_parent_label_matches_2019_reference": true,
+        "current_parent_label": "West Mahe"
+      }
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B18865708954128",
+      "name": "La Digue",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 21.60333337816346,
+      "retained_parent_source_vs_current_relative_area_change_percent": -21.2212284612916,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:la-digue-a:fe6297df956d",
+          "level": "province",
+          "name": "La Digue a"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region La Digue, parent island La Digue, with 1 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Current parent label 'La Digue a' differs from NBS-provenance region name 'La Digue'; obtain current NBS legal region/district crosswalk before recommending parent label/role changes.",
+        "Pinned source/current symmetric difference 21.603% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "La Digue",
+        "reference_island_parent": "La Digue",
+        "district_row_count": 1,
+        "current_parent_label_matches_2019_reference": false,
+        "current_parent_label": "La Digue a"
+      }
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B27990728867894",
+      "name": "Central 1 Mahe",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 2,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 35.64747176438945,
+      "retained_parent_source_vs_current_relative_area_change_percent": -11.488082875321332,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:bel-air:10495555fee6",
+          "level": "province",
+          "name": "Bel Air"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region Central 1 Mahe, parent island Mahe, with 5 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Current parent label 'Bel Air' differs from NBS-provenance region name 'Central 1 Mahe'; obtain current NBS legal region/district crosswalk before recommending parent label/role changes.",
+        "Pinned source/current symmetric difference 35.647% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "Central 1 Mahe",
+        "reference_island_parent": "Mahe",
+        "district_row_count": 5,
+        "current_parent_label_matches_2019_reference": false,
+        "current_parent_label": "Bel Air"
+      }
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B38092183622343",
+      "name": "Central 2 Mahe",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 9,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 55.31178556137734,
+      "retained_parent_source_vs_current_relative_area_change_percent": -41.048620601151555,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:central-2-mahe:5d048c28461d",
+          "level": "province",
+          "name": "Central 2 Mahe"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region Central 2 Mahe, parent island Mahe, with 4 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 55.312% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "Central 2 Mahe",
+        "reference_island_parent": "Mahe",
+        "district_row_count": 4,
+        "current_parent_label_matches_2019_reference": true,
+        "current_parent_label": "Central 2 Mahe"
+      }
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B41664711494427",
+      "name": "North Mahe",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 15.525236842519297,
+      "retained_parent_source_vs_current_relative_area_change_percent": 4.612703921909442,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:north-mahe:2e5a35560c80",
+          "level": "province",
+          "name": "North Mahe"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region North Mahe, parent island Mahe, with 4 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 15.525% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "North Mahe",
+        "reference_island_parent": "Mahe",
+        "district_row_count": 4,
+        "current_parent_label_matches_2019_reference": true,
+        "current_parent_label": "North Mahe"
+      }
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B43978553392406",
+      "name": "Praslin",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 7,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 23.760685596760915,
+      "retained_parent_source_vs_current_relative_area_change_percent": -9.721694426858472,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:baie-saint:05a167f8ef7e",
+          "level": "province",
+          "name": "Baie Saint"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region Praslin, parent island Praslin, with 2 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Current parent label 'Baie Saint' differs from NBS-provenance region name 'Praslin'; obtain current NBS legal region/district crosswalk before recommending parent label/role changes.",
+        "Pinned source/current symmetric difference 23.761% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "Praslin",
+        "reference_island_parent": "Praslin",
+        "district_row_count": 2,
+        "current_parent_label_matches_2019_reference": false,
+        "current_parent_label": "Baie Saint"
+      }
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B49819614716360",
+      "name": "East Mahe",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "Polygon",
+      "current_component_count": 1,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 1,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 13.914510476783757,
+      "retained_parent_source_vs_current_relative_area_change_percent": -2.3218832660072057,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:east-mahe:51dca9c9723c",
+          "level": "province",
+          "name": "East Mahe"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region East Mahe, parent island Mahe, with 6 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Pinned source/current symmetric difference 13.915% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "East Mahe",
+        "reference_island_parent": "Mahe",
+        "district_row_count": 6,
+        "current_parent_label_matches_2019_reference": true,
+        "current_parent_label": "East Mahe"
+      }
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B54247629098598",
+      "name": "Other Islands",
+      "current_containing_file": "data/geography/part-23.json",
+      "current_geometry_type": "MultiPolygon",
+      "current_component_count": 7,
+      "administrative_or_physical_role": "Regions",
+      "source_id": "gb:SYC:ADM2",
+      "source_vintage": "2020",
+      "source_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_geometry_component_count": 1057,
+      "retained_parent_source_vs_current_symmetric_difference_percent": 34.03937647575226,
+      "retained_parent_source_vs_current_relative_area_change_percent": -27.444672628237548,
+      "current_parent_chain": [
+        {
+          "id": "framework:province:outer-isla:a6cf2e7c6ab6",
+          "level": "province",
+          "name": "Outer Isla"
+        },
+        {
+          "id": "framework:area:seychelles:322b66318f1d",
+          "level": "area",
+          "name": "Seychelles"
+        },
+        {
+          "id": "framework:region:western-indian-ocean:1393877a77f7",
+          "level": "region",
+          "name": "Western Indian Ocean"
+        },
+        {
+          "id": "framework:subcontinent:indian-ocean-islands:c690d017ad80",
+          "level": "subcontinent",
+          "name": "Western Indian Ocean Islands"
+        },
+        {
+          "id": "framework:continent:africa:d14fc0b285b2",
+          "level": "continent",
+          "name": "Africa"
+        }
+      ],
+      "retained_parent_assessment": "geoBoundaries ADM2 source canonical role “Regions” (2020); OCHA COD-PS using Seychelles NBS 2019 references matching region Other Islands, parent island Other Islands, with 1 ADM3 district rows.",
+      "settlement_locality_disposition": "OCHA COD-PS with NBS provenance crosswalks all 8 ADM2 regions and 27 ADM3 district rows (2019/2010 reference), but supplies no geocoded settlement gazetteer. Official NBS 2022 result page/download URLs found during this review returned 404 on 2026-10-03; current named-settlement coverage and island relationship remain unresolved for #633.",
+      "uncertainties": [
+        "Current parent label 'Outer Isla' differs from NBS-provenance region name 'Other Islands'; obtain current NBS legal region/district crosswalk before recommending parent label/role changes.",
+        "Grouped outer-island unit; source/current component counts 1057 / 7. GSHHG intersection is only coarse physical screening; authoritative current island inventory and scale-appropriate coastline crosswalk needed.",
+        "Pinned source/current symmetric difference 34.039% exceeds screening threshold; not interpreted as unilateral correction evidence."
+      ],
+      "2019_nbs_adm3_reference": {
+        "reference_region": "Other Islands",
+        "reference_island_parent": "Other Islands",
+        "district_row_count": 1,
+        "current_parent_label_matches_2019_reference": false,
+        "current_parent_label": "Outer Isla"
+      },
+      "outer_islands_granularity_finding": {
+        "retained_2019_source_components": 1057,
+        "current_components": 7,
+        "meaning": "Counts cannot be reconciled from GSHHG or the unlicensed MSP Atlas candidate without a named island-to-source-feature crosswalk."
+      }
+    }
+  ],
+  "mauritius_official_district_source": {
+    "crosswalk_count": 9,
+    "one_to_one_names": [
+      "Black River",
+      "Flacq",
+      "Grand Port",
+      "Moka",
+      "Pamplemousses",
+      "Plaines Wilhems",
+      "Port Louis",
+      "Riviere du Rempart",
+      "Savanne"
+    ],
+    "comparison_path": "district-comparison.json",
+    "interpretation": "The government source independently corroborates an exact nine-name administrative roster, but source date/legal lineage are not declared and measured geometry differences are not approval or automatic correction triggers."
+  },
+  "mauritius_protected_islet_point_screen": {
+    "feature_count": 8,
+    "features": [
+      {
+        "name": "Rocher des Oiseaux",
+        "longitude": 57.7897018,
+        "latitude": -20.3802518
+      },
+      {
+        "name": "Île d'Ambre",
+        "longitude": 57.695,
+        "latitude": -20.0336111
+      },
+      {
+        "name": "Île aux Flamants",
+        "longitude": 57.8172688,
+        "latitude": -20.3222841
+      },
+      {
+        "name": "Ile aux Oiseaux",
+        "longitude": 57.8142202,
+        "latitude": -20.3273594
+      },
+      {
+        "name": "Île aux Fouquets",
+        "longitude": 57.7776885,
+        "latitude": -20.3953836
+      },
+      {
+        "name": "Île aux Fous",
+        "longitude": 57.7878842,
+        "latitude": -20.3828876
+      },
+      {
+        "name": "Île aux Vacoas",
+        "longitude": 57.770278,
+        "latitude": -20.397778
+      },
+      {
+        "name": "Pigeon House Rock",
+        "longitude": 57.657187,
+        "latitude": -19.8627977
+      }
+    ],
+    "interpretation": "A protected-islet point subset near Mauritius Island, not a physical land inventory or evidence for St Brandon/Agaléga."
+  },
+  "seychelles_current_parent_mismatches_against_2019_reference": [
+    {
+      "id": "gb:SYC:ADM2:34574756B18865708954128",
+      "reference": "La Digue",
+      "current_parent": "La Digue a"
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B27990728867894",
+      "reference": "Central 1 Mahe",
+      "current_parent": "Bel Air"
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B43978553392406",
+      "reference": "Praslin",
+      "current_parent": "Baie Saint"
+    },
+    {
+      "id": "gb:SYC:ADM2:34574756B54247629098598",
+      "reference": "Other Islands",
+      "current_parent": "Outer Isla"
+    }
+  ],
+  "cross_scope_findings": [
+    "St Brandon and Natural Earth Agaléga GSHHG level-1 non-intersections are insufficient-resolution non-detections, not evidence of absence.",
+    "Natural Earth Agaléga MUS-5180 and the geoBoundaries Agaléga ADM1 are distinct disjoint records with different source roles. Keep both IDs and preserve their separate pins pending a physical island-to-record crosswalk.",
+    "The SeyMSP API count and grouped records are source lead observations, not island counts; underlying licenseInfo is blank and no polygons are retained.",
+    "No current official, licensed geocoded settlement inventory for the complete 24-subject scope was found. Census/statistical localities are names or administrative records, not complete settlement coordinate data.",
+    "Shom/IGN Litto3D is an openly licensed high-resolution source candidate for Eparses, Mayotte, and Réunion, but acquired tile footprints and individual island coverage remain unverified."
+  ],
+  "next_actions": [
+    "Crosswalk every Eparses, Mayotte, and Réunion target feature to licensed Shom/IGN tile footprints, source masks, acquisition dates, and emergent-land/reef records.",
+    "Obtain current Seychelles region-to-island and settlement crosswalks from NBS/Ministry with reusable physical-island geometry rights; resolve Other Islands source feature membership and parent labels.",
+    "Obtain current official St Brandon and Agaléga emergent-island/reef vectors or survey coverage metadata under usable reuse terms; compare complete neighbors before any correction recommendation.",
+    "Obtain a dated, licensed geocoded settlement/locality source for all assigned territories, or retain the explicit scoped no-source outcome."
+  ]
+}

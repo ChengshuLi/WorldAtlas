@@ -1,0 +1,359 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-07 America/Los_Angeles",
+  "sources": [
+    {
+      "id": "gb:MUS:ADM1",
+      "role": "mixed administrative and outer-island ADM1 boundary source; not twelve uniform districts",
+      "canonical_name": "Districts and Outer Islands of Mauritius",
+      "vintage": "2017 boundary reference; source metadata updated 2023-01-19; geoBoundaries build 2023-12-12",
+      "license": "Open Data Commons Open Database License 1.0; metadata also includes geoBoundaries CC BY 4.0 project/citation terms",
+      "geometry_sha256": "fd3c09513dba7df021ed0f7bd2b05d187932155c99027b4dcc1c90ef8ee554c3",
+      "geometry_bytes": 429365,
+      "metadata_sha256": "c307ecfca5f9484d49b91c078e086a07376d6ae5e96d1ff000bb8cbaf55e3c75",
+      "citation_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "canonical_release": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/MUS/ADM1",
+      "retained_at": "data/regional-review/regional-review-4f180b98473f1071/sources/geoBoundaries-MUS-ADM1-2017.geojson",
+      "retrieval_date": "2026-10-03",
+      "completeness_limit": "The source calls its 12 records districts and outer islands. It is not a physical island/reef catalogue; the issue scope includes nine Mauritius Island districts plus Rodrigues, St Brandon, and Agaléga."
+    },
+    {
+      "id": "gb:SYC:ADM2",
+      "role": "eight administrative regions",
+      "canonical_name": "Regions",
+      "vintage": "2020 boundary reference; source metadata updated 2023-01-19; geoBoundaries build 2023-12-12",
+      "license": "CC BY 4.0; retain upstream OCHA/NBS provenance and geoBoundaries citation terms",
+      "geometry_sha256": "fc53d69a99b7cadd481c2fa6bcabe36f7138172464ceadf83af382881e3f817a",
+      "geometry_bytes": 21057454,
+      "metadata_sha256": "d2b2c47a8e0a3a58172149a3f345fde57d58bda9b9755fbd264018c0ffbf8a0b",
+      "citation_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "canonical_release": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/SYC/ADM2",
+      "retained_at": "data/regional-review/regional-review-4f180b98473f1071/sources/geoBoundaries-SYC-ADM2-2020.geojson",
+      "retrieval_date": "2026-10-03",
+      "completeness_limit": "Administrative regions are not physical-island units. The 2019 OCHA/NBS-provenance district crosswalk is older than the current review; the Other Islands aggregation has a different component granularity from the current feature."
+    },
+    {
+      "id": "natural-earth:admin1-selected",
+      "role": "named dependency/territory reference at 1:10m; comparison source only",
+      "vintage": "Natural Earth snapshot commit ca96624a56bd078437bca8184e78163e5039ad19; underlying feature observation dates unspecified",
+      "license": "Public domain; source project requests attribution",
+      "extract_sha256": "eb0fac5a0668edd68e5fdf3700de3941ee98551bcf0c00b1eb33e334be7ac496",
+      "extract_bytes": 19491,
+      "retained_at": "data/regional-review/regional-review-4f180b98473f1071/sources/natural-earth-10m-admin1-selected.geojson",
+      "retrieval_date": "2026-10-03",
+      "restoration": "Fetch the Natural Earth admin-1 source members at the pinned repository commit and re-extract the four exact IDs ATF-5919, FRA-4601, FRA-4602, and MUS-5180.",
+      "completeness_limit": "A named 1:10m territory record does not certify a current or complete inventory of reefs, emergent cays, or settlement points."
+    },
+    {
+      "id": "Statistics-Mauritius:Census-2022-Vol-III",
+      "role": "administrative census crosswalk and named locality context; not physical coastline data or a settlement point gazetteer",
+      "vintage": "2022 Housing and Population Census, Volume III; methodology report issued for the 2022 census",
+      "license": "No explicit open redistribution license identified. Do not retain the report bytes; use the official restoration URL and cited tables only.",
+      "official_index": "https://statsmauritius.govmu.org/Pages/Censuses%20and%20Surveys/Census/census_2022.aspx",
+      "resource": "https://statsmauritius.govmu.org/Documents/Census_and_Surveys/Census2022/HPC_TR_Vol3_Geo_Migration_Yr22_%20120126.pdf",
+      "known_resource_sha256": "f4fe39658d5682df10d7dae5b7e3f641f7d366457d1cefff15bb65adbb7e0774",
+      "known_resource_bytes": null,
+      "prior_inspection_date": "2026-10-03",
+      "facts": "The census distinguishes nine Mauritius Island geographical districts from 12 administrative regions (five Municipal Council Areas and seven District Council Areas), 30 municipal wards, and 130 Village Council Areas; about 30 VCAs cross two or three geographical districts. Rodrigues has six local regions and named localities in Appendix IV. These are not geocoded settlement points. Census reported 330 people on Agaléga and no permanent St Brandon residents/count-only; population is not island evidence.",
+      "completeness_limit": "Administrative names and population totals do not prove settlement coordinates, coastlines, reef emergence, or current subunit boundaries."
+    },
+    {
+      "id": "Mauritius:National-Cartographic-Section",
+      "role": "official map and licensed GIS data access route",
+      "vintage": "Cartography Section page inspected 2026-10-07; maps and map products have multiple dates",
+      "license": "The ministry sells/controls its digital map products and states that reuse of its copyrighted maps requires permission. No open redistribution grant located for the requested district/outer-island vectors.",
+      "url": "https://housing.govmu.org/Pages/Dept%20and%20Org/Divisions/Survey/The-Cartographic-Section.aspx",
+      "retrieval_date": "2026-10-07",
+      "restoration": "Request current official vector district/outer-island data from the Cartographic Section and obtain the sale agreement/reuse terms; official chart catalogue includes St Brandon and Agaléga charts.",
+      "completeness_limit": "The page describes available product classes, not exact vector coverage, chart shoreline completeness, or a no-cost redistribution permission."
+    },
+    {
+      "id": "Mauritius:OIDC-outer-island-descriptions",
+      "role": "official island-name, place, and physical-context description",
+      "vintage": "Pages inspected 2026-10-07; some physical-count statements are variable/historical",
+      "license": "No explicit open content reuse license located; retain URL/hash restoration instructions, not page copies.",
+      "st_brandon_url": "https://oidc.govmu.org/oidc/?page_id=40",
+      "st_brandon_sha256": "6767ea272252da0a0ca2da4252c2b3854c767186bf0071db4e81c99c65c7467c",
+      "st_brandon_bytes": 84940,
+      "agalega_url": "https://ode.govmu.org/ode-data/agalega",
+      "agalega_sha256": "513c31a86baf41f3731f0e59f8d2e9a8e46cea8d0a2eaf55576bc10dbd4831d6",
+      "agalega_bytes": 36611,
+      "other_st_brandon_url": "https://ode.govmu.org/ode-data/chagos-archipelago-st-brandon",
+      "other_st_brandon_sha256": "d308da4a2a56ce0f9de97a55b666b3727349c51d9b6ef85a1c7101c889fdf337",
+      "other_st_brandon_bytes": 38349,
+      "facts": "Government text describes the Cargados Carajos reef as a variable group of roughly 40 low islets, coral reefs and shoals; different pages identify named islets and state that shifting sands/storms change counts. Agaléga is described as two main islands encircled by a reef."
+    },
+    {
+      "id": "Mauritius:ONSDI-districts",
+      "role": "official national geospatial portal administrative district polygons; cross-check only",
+      "vintage": "Portal record published 2022-11-23, last_updated 2022-11-23; survey/administrative observation vintage not stated",
+      "license": "Open Data Commons Open Database License 1.0 (portal dataset record license identifier odbl)",
+      "catalog_url": "https://geoportal.govmu.org/api/v2/datasets/6/",
+      "catalog_response_sha256": "5704c74e0018ff0fac70068e321fb5934bfcdebb74e8df7ba89c4a06d8c88e3f",
+      "catalog_response_bytes": 11914,
+      "service_url": "https://geoportal.govmu.org/geoserver/ows",
+      "service_capabilities_sha256": "e8a22c7c6babbef95aca6336c738f8510e1d5d4620ea136e4382d46830c00072",
+      "service_capabilities_bytes": 142369,
+      "layer": "geonode:districts",
+      "request": "service=WFS&version=2.0.0&request=GetFeature&typeNames=geonode:districts&outputFormat=application/json",
+      "native_crs": "EPSG:32740",
+      "source_response": "sources/mauritius_districts-20261008.geojson",
+      "sha256": "63f5c5c2660ff216a4429529814a3987ffa05e789bcbe889db520a74236b7540",
+      "bytes": 778323,
+      "features": 9,
+      "retrieval_date": "2026-10-07 America/Los_Angeles",
+      "restoration": "The retained WFS FeatureCollection is an exact response. Restore by issuing the exact WFS request at the GeoServer endpoint; recheck the portal record and layer metadata before reuse.",
+      "completeness_limit": "This layer covers only the nine Mauritius Island geographical districts. It does not cover Rodrigues, Agaléga, St Brandon, Seychelles, or any named settlements. Its own observation vintage is unstated; area/population attributes are not boundary provenance."
+    },
+    {
+      "id": "Mauritius:ONSDI-islet-national-parks",
+      "role": "official protected-islet park point list; partial physical-place context, not an island-outline or all-islets inventory",
+      "vintage": "Portal record published 2022-11-23, last_updated 2022-11-23; point observation dates unstated",
+      "license": "Open Data Commons Open Database License 1.0 (portal dataset record license identifier odbl)",
+      "catalog_url": "https://geoportal.govmu.org/api/v2/datasets/12/",
+      "catalog_response_sha256": "d16991f4978e44b775ad15fa69c354532296fd1bafe39f3b6c8ce994f8a8769f",
+      "catalog_response_bytes": 7382,
+      "service_url": "https://geoportal.govmu.org/geoserver/ows",
+      "layer": "geonode:islet_parks",
+      "request": "service=WFS&version=2.0.0&request=GetFeature&typeNames=geonode:islet_parks&outputFormat=application/json",
+      "native_crs": "EPSG:4326",
+      "source_response": "sources/mauritius_islet_parks-20261008.geojson",
+      "sha256": "cbefa4e20d77a48e96ed75ad48b2f69158750e52f2f363a42e6ae0797c84d94e",
+      "bytes": 2142,
+      "features": 8,
+      "retrieval_date": "2026-10-07 America/Los_Angeles",
+      "recorded_features": [
+        {
+          "name": "Rocher des Oiseaux",
+          "longitude": 57.7897018,
+          "latitude": -20.3802518
+        },
+        {
+          "name": "Île d'Ambre",
+          "longitude": 57.6949999999999,
+          "latitude": -20.0336111
+        },
+        {
+          "name": "Île aux Flamants",
+          "longitude": 57.8172688,
+          "latitude": -20.3222841
+        },
+        {
+          "name": "Ile aux Oiseaux",
+          "longitude": 57.8142202,
+          "latitude": -20.3273594
+        },
+        {
+          "name": "Île aux Fouquets",
+          "longitude": 57.7776885000001,
+          "latitude": -20.3953836
+        },
+        {
+          "name": "Île aux Fous",
+          "longitude": 57.7878842,
+          "latitude": -20.3828876
+        },
+        {
+          "name": "Île aux Vacoas",
+          "longitude": 57.770278,
+          "latitude": -20.397778
+        },
+        {
+          "name": "Pigeon House Rock",
+          "longitude": 57.657187,
+          "latitude": -19.8627977
+        }
+      ],
+      "restoration": "Restore from the exact ONSDI WFS request and preserve the ODbL attribution. Recheck the current portal record and exact response hash.",
+      "completeness_limit": "The layer title/abstract says it contains eight islet national parks, and its published footprint is around Mauritius Island. It is a protected-park POI subset; it cannot settle St Brandon or Agaléga islet membership or demonstrate island/settlement completeness."
+    },
+    {
+      "id": "Seychelles:2018-Regional-Councils",
+      "role": "administrative council-to-district grouping context; not a region-boundary source",
+      "vintage": "Official council launch announcement 2018",
+      "license": "No explicit open redistribution license found; restore by official URL and hash only.",
+      "url": "https://www.statehouse.gov.sc/news/4035/regional-councils-officially-launched",
+      "sha256": "fb3be69ae3dea5545eee63336c30b46204f5ff5c77547416562bbb0cff5063ea",
+      "bytes": 38215,
+      "retrieval_date": "2026-10-07",
+      "facts": "The announcement groups 25 named district administration areas into seven Regional Councils (North, Central 1, Central 2, East, South, West, Inner Islands). These seven councils are an administrative grouping level, not direct aliases for the eight geoBoundaries ADM2 `Regions`.",
+      "regional_council_groupings": {
+        "North": [
+          "Bel Ombre",
+          "Beau Vallon",
+          "Glacis",
+          "Anse Etoile"
+        ],
+        "Central 1": [
+          "St Louis",
+          "Bel Air",
+          "Mt Buxton",
+          "English River"
+        ],
+        "Central 2": [
+          "Mont Fleuri",
+          "Plaisance",
+          "Roche Caiman",
+          "Les Mamelles"
+        ],
+        "East": [
+          "Cascade",
+          "Pointe Larue",
+          "Anse Aux Pins"
+        ],
+        "South": [
+          "Aux Cap",
+          "Anse Royale",
+          "Takamaka"
+        ],
+        "West": [
+          "Baie Lazare",
+          "Anse Boileau",
+          "Grand Anse Mahe",
+          "Port Glaud"
+        ],
+        "Inner Islands": [
+          "La Digue",
+          "Grand Anse Praslin",
+          "Baie Ste Anne"
+        ]
+      },
+      "completeness_limit": "The council roster provides no polygons or current statutory Region-to-island crosswalk. It cannot decide the current parent-label differences."
+    },
+    {
+      "id": "Seychelles:2025-District-Administrators",
+      "role": "current named District Administrator list; administration identity context",
+      "vintage": "Revised 2025-03-04",
+      "license": "No explicit open redistribution license found; restore by official URL/hash only.",
+      "url": "https://www.statehouse.gov.sc/uploads/files/45_c1NWtyh0.pdf",
+      "sha256": "674271524de3be4cbd4297d492cb5bdde9dcf7ead63352d6466c1f5e3665214b",
+      "bytes": 1742210,
+      "retrieval_date": "2026-10-07",
+      "facts": "The PDF has 27 district-administrator entries. It includes names such as Grand Anse Praslin, Baie Ste Anne, and La Digue.",
+      "completeness_limit": "It is not a geocoded settlement list and does not define the legal or statistical parent-region polygons."
+    },
+    {
+      "id": "Seychelles:NBS-2022-census",
+      "role": "current census administration and population context; not geocoded settlement data",
+      "vintage": "2022 census report published 2024-03-21",
+      "license": "The page states no open license; original 10.5 MB PDF download flow reached an account/login wall in the prior check. No bytes retained.",
+      "url": "https://www.nbs.gov.sc/downloads/1555-seychelles-population-and-housing-census-2022",
+      "page_sha256": "5adda782b6c8061af9a8d7d14630e7fedf2837353451b9cdcaf9ae756f5d41d5",
+      "page_bytes": 168367,
+      "resource_name": "Seychelles Population and Housing Census 2022.pdf",
+      "resource_bytes": 10525457,
+      "retrieval_date": "2026-10-07",
+      "restoration": "Use the official NBS download link after an authorized account/access route is available; do not reuse or recirculate a gated copy.",
+      "completeness_limit": "Population tables or a current district roster would still not provide a complete geocoded settlement gazetteer."
+    },
+    {
+      "id": "Seychelles:MSP-Atlas-islands",
+      "role": "candidate contemporary physical-island and place-name source; license not established",
+      "vintage": "MSP Atlas final release v1.1 published in 2025; service created 2020-04-04 and modified 2023-11-20; Basemap_Islands DataLastEditDate 2023-11-18",
+      "license": "ArcGIS item licenseInfo is blank. Copyright text names Seychelles MEECC and TNC. Public queryability is not a reuse license; no geometry retained.",
+      "atlas_url": "https://seymsp.com/outputs/atlas/",
+      "service_url": "https://services.arcgis.com/F7DSX1DSNSiWmOqh/arcgis/rest/services/SEYMSP_ATLAS_BASE_MAP/FeatureServer",
+      "item_id": "79cb142504134dc2858bd5c2755ef379",
+      "item_metadata_sha256": "40646109c4ddd4aa1c3e4d6a494748050ac92332a4f29a9b37d5986ef50525b3",
+      "service_metadata_sha256": "7d68379ccb4deb0944e2995278885d94d168bc4f8a1532cbd0a95526525bb5d3",
+      "layer_metadata_sha256": "4e0691ed5cc1a943262a36fade470134051228cc45793ecae11e4811ef5c3573",
+      "layer": "Basemap_Islands (FeatureServer/7)",
+      "layer_role": "polygons depicting Seychelles islands and atolls; EPSG:3857; metadata has no scale statement",
+      "count_request": "FeatureServer/7/query?where=1%3D1&returnCountOnly=true&f=json",
+      "count_response": "{\"count\":1315}",
+      "count_response_sha256": "3ce9b4f6f1ed7a4222f84feda9b0a99f6c8614c25c8d6b8553982a260d3cc8dc",
+      "island_group_feature_record_counts": {
+        "Coetivy/Platte": 2,
+        "Assumption": 1,
+        "Farquhar Atoll": 1,
+        "Amirantes": 36,
+        "Aldabra": 1152,
+        "Astove": 18,
+        "Farquhar Island Group": 12,
+        "Inner Island Group": 60,
+        "Cosmoledo": 25,
+        "Providence": 8
+      },
+      "group_request": "FeatureServer/7/query?where=1%3D1&outStatistics=[count(OBJECTID)]&groupByFieldsForStatistics=ISLAND_GRO&f=json",
+      "group_response_sha256": "48a587ae51e6e47840f80af9ca799a2976387ae7656e5c1751ed545abab5bec9",
+      "gazetteer_count_request": "FeatureServer/6/query?where=1%3D1&returnCountOnly=true&f=json",
+      "gazetteer_count_response": "{\"count\":117}",
+      "gazetteer_count_response_sha256": "13698bf27b9585f0ecdd3458bc884193a170ae5bcfdad9d2772f1120af2b0635",
+      "retrieval_date": "2026-10-07",
+      "restoration": "Use the named service and exact read-only count/group-by REST queries above. Request rights confirmation from MEECC/TNC before retaining or using feature geometry.",
+      "completeness_limit": "The 1,315 value counts service polygon records, not islands. Group counts reflect stored features, not real-world island totals. The 117 gazetteer points are described as place names, not settlements. No licensed boundary-to-region crosswalk or scale-based completeness proof was available."
+    },
+    {
+      "id": "Shom:LitTo3D-Eparses-2012",
+      "role": "high-resolution coastal elevation (terrain/bathymetry) candidate for physical emergent-land and reef screening",
+      "vintage": "Litto3D Eparses 2012 edition, publication date 2012-03-01; terrain acquisition date by each tile/islet not yet checked",
+      "license": "Open Licence version 2.0; must cite source; not for navigation",
+      "record_url": "https://services.data.shom.fr/geonetwork/system/api/records/BATHYMETRIE_LITTO3D_EPARSES_2012.xml",
+      "record_response_sha256": "6f4d4d72f2f3e49ba4d29539ad7cdd95c422bd1757653a5ada0d979eedbe6825",
+      "record_response_bytes": 36408,
+      "record_read_date": "2026-10-07",
+      "survey_characteristics": "1 m grid metadata; a combined land/sea model using airborne topographic LiDAR and bathymetric LiDAR/multibeam with a 300 m overlap. The product-level bounds include Eparses but individual island/tile coverage has not yet been checked.",
+      "wms_endpoint": "https://services.data.shom.fr/INSPIRE/wms/r?request=GetCapabilities&service=WMS&version=1.3.0",
+      "wms_layer": "LITTO3D_EPARSES_2012_PYR_3857_WMSR",
+      "wms_capabilities_sha256": "ed53a1b8fb9ffa50b811e30fa65f5e498f1945153355f539fdeba1755495efbd",
+      "distribution_portal": "https://diffusion.shom.fr/ (observed sign-in/create-account requirement for distribution portal)",
+      "restoration": "Restore the exact metadata record, named WMS capabilities/layer, and per-island prepackages through Shom's distribution service; inspect actual tile metadata and original lawful source files before drawing any completeness conclusion.",
+      "completeness_limit": "Its official WMS metadata envelope excludes the western edge of the current ATF-5919 bounding box by about 0.6273 degrees longitude. This is a product-envelope warning, not proof of absent tile data; no exact tile/source-mask or full land/reef crosswalk was checked.",
+      "wms_capabilities_bytes": 312234,
+      "wms_reported_geographic_bbox_wgs84": {
+        "west": 40.320641309,
+        "east": 54.543871677,
+        "south": -22.411500985,
+        "north": -11.442670153
+      },
+      "wms_bbox_source": "EX_GeographicBoundingBox for the named layer in the exact retained-response hash above; bounding envelope, not per-tile data availability."
+    },
+    {
+      "id": "Shom:LitTo3D-Mayotte-2012",
+      "role": "high-resolution coast elevation candidate, not settlement inventory",
+      "vintage": "Litto3D Mayotte 2012 edition; acquisition dates per tile need checking",
+      "license": "Open Licence 2.0 stated in official record; source attribution required; not for navigation",
+      "record_url": "https://services.data.shom.fr/geonetwork/adm/api/records/BATHYMETRIE_LITTO3D_MAYOT_2012.xml",
+      "record_response_sha256": "c9919184eaf1548206e923b1139f727a9578cbbf8f637b02aeb0d487aab254ea",
+      "record_response_bytes": 37048,
+      "record_read_date": "2026-10-07",
+      "wms_layer": "LITTO3D_MAYOT_2012_PYR_3857_WMSR",
+      "completeness_limit": "The current FRA-4602 record bounding box is enclosed by the advertised WMS layer envelope, but the extent does not prove data pixels, per-island tile coverage, source acquisition dates, or a complete reef inventory.",
+      "wms_capabilities_sha256": "ed53a1b8fb9ffa50b811e30fa65f5e498f1945153355f539fdeba1755495efbd",
+      "wms_capabilities_bytes": 312234,
+      "wms_reported_geographic_bbox_wgs84": {
+        "west": 44.917122953,
+        "east": 45.31324406,
+        "south": -13.080131327,
+        "north": -12.51044844
+      },
+      "wms_bbox_source": "EX_GeographicBoundingBox for the named layer in the exact retained-response hash above; bounding envelope, not per-tile data availability."
+    },
+    {
+      "id": "Shom:LitTo3D-Reunion-2016",
+      "role": "high-resolution coastal elevation candidate; shoreline baseline only",
+      "vintage": "Litto3D Réunion 2016 edition; official metadata reports bathymetric surveys in 2009-2010 and topographic surveys in 2008-2009",
+      "license": "Open Licence 2.0 stated in official record; source attribution required; not for navigation",
+      "record_url": "https://services.data.shom.fr/geonetwork/system/api/records/BATHYMETRIE_LITTO3D_REUNION_2016.xml",
+      "record_response_sha256": "198837da9f3a10134b0290c5502d6547db83903749d191e0e0aff3d65aefb973",
+      "record_response_bytes": 36971,
+      "record_read_date": "2026-10-07",
+      "wms_layer": "LITTO3D_REUNION_2016_PYR_3857_WMSR",
+      "completeness_limit": "The official WMS metadata envelope ends about 0.0102 degrees west of the current FRA-4601 record bounding box. This is a product-envelope warning, not proof of absent tile data; survey footprints, source masks, and 2008-2010 acquisition epochs remain unverified.",
+      "wms_capabilities_sha256": "ed53a1b8fb9ffa50b811e30fa65f5e498f1945153355f539fdeba1755495efbd",
+      "wms_capabilities_bytes": 312234,
+      "wms_reported_geographic_bbox_wgs84": {
+        "west": 55.199844279,
+        "east": 55.844277697,
+        "south": -21.399809142,
+        "north": -20.847097483
+      },
+      "wms_bbox_source": "EX_GeographicBoundingBox for the named layer in the exact retained-response hash above; bounding envelope, not per-tile data availability."
+    }
+  ],
+  "sources_not_retained_due_to_reuse_or_scope": [
+    "No Natural Earth/geoBoundaries parent sources were changed; their retained original bytes and hashes remain in issue #482.",
+    "No Seychelles MSP polygon geometry, Seychelles NBS census PDF, Mauritius census PDF, government map products, or SHOM elevation tiles were copied into this packet. Their restoration URLs and response hashes are recorded above.",
+    "The ONSDI Mauritius open WFS district polygons and eight islet-park points are the only new original source geometries retained here; both portal records say ODbL."
+  ]
+}
