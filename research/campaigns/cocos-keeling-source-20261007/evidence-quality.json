@@ -1,0 +1,476 @@
+{
+  "version": 1,
+  "issue": 1453,
+  "lane": "source-only",
+  "worker_id": "01a11550-a19b-7330-955c-e56e90985bf3",
+  "subject_ids": [
+    "gap-source-batch:1e0d57dee3adecafc87c3bbe",
+    "physical-component:9d53e507a92cc13f65caf2dc51679708b3fee6e5b87a670c5d5179e40019dbbe",
+    "gb:AUS:ADM2:25037944B17338277063313"
+  ],
+  "subject_ids_sha256": "6fb3d8a1c6a1b19d62c74d84a870e8555c01642763ff4ce6f172de50cb37bbb7",
+  "baseline": {
+    "version": 2,
+    "commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7",
+    "files": [
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-043.jsonl.gz",
+        "commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7",
+        "bytes": 1013025,
+        "sha256": "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7436197,
+        "uncompressed_sha256": "69888f613738655b7f8c1731b1186fba06ca259233254e7309aebf8f3e93113e"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "commit": "e205b7427c006cfea9acb5435f0aa08aace22266",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "commit": "e205b7427c006cfea9acb5435f0aa08aace22266",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-020.json.gz",
+        "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+        "bytes": 1016322,
+        "sha256": "c7c667ae8876ecf746030663cd9d94ddbef08691925e905a5dfcd324071bd19e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8385883,
+        "uncompressed_sha256": "1f4d67b4c4f1f511f23ee637d3b97e356eafe11d7d17d59211df93ad84f474ed"
+      },
+      {
+        "path": "data/macro-improvements/macro-coverage-africa-americas/gshhg-source.json",
+        "commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7",
+        "bytes": 289,
+        "sha256": "4500d26339a7695c90f4cc5dce75f24c9bad5ac83dff46c127853ae543ee4eec",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "pointset_result_row_file": "95f70e6d579fcc9f1549e20835125026a922381c546830a03fc09cfa48a59e52",
+      "component_roster_custody_index_file": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "component_roster_payload_file": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "contact_context_chunk_file": "c7c667ae8876ecf746030663cd9d94ddbef08691925e905a5dfcd324071bd19e",
+      "gshhg_source_descriptor_file": "4500d26339a7695c90f4cc5dce75f24c9bad5ac83dff46c127853ae543ee4eec"
+    },
+    "pin_files": {
+      "pointset_result_row_file": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-043.jsonl.gz",
+        "commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+      },
+      "component_roster_custody_index_file": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "commit": "e205b7427c006cfea9acb5435f0aa08aace22266"
+      },
+      "component_roster_payload_file": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "commit": "e205b7427c006cfea9acb5435f0aa08aace22266"
+      },
+      "contact_context_chunk_file": {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/investigations-020.json.gz",
+        "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d"
+      },
+      "gshhg_source_descriptor_file": {
+        "path": "data/macro-improvements/macro-coverage-africa-americas/gshhg-source.json",
+        "commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "ga-2011-orthophoto-metadata",
+      "url": "https://www.ga.gov.au/static/cocos/metadata/co_orthophoto_2011.html",
+      "role": "Official source metadata page; metadata HTML only",
+      "vintage": "2011",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "redistributable",
+        "terms": "GA website material generally CC BY 4.0; product imagery has distinct NC4 terms and third-party exceptions."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "files": [
+        {
+          "path": "research/campaigns/cocos-keeling-source-20261007/sources/ga-2011-orthophoto-metadata.html",
+          "bytes": 13885,
+          "sha256": "eb8206361dc07089897d08604cd0726c4d521b8a7b6d592816d8caab08ad1f8a",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "ga-1987-orthophoto-metadata",
+      "url": "https://www.ga.gov.au/static/cocos/metadata/metaorth.html",
+      "role": "Official source metadata page; metadata HTML only",
+      "vintage": "1987",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "redistributable",
+        "terms": "GA website material generally CC BY 4.0; does not grant imagery reuse."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1987,
+        "to": 1988
+      },
+      "files": [
+        {
+          "path": "research/campaigns/cocos-keeling-source-20261007/sources/ga-1987-orthophoto-metadata.html",
+          "bytes": 12889,
+          "sha256": "defc97fd29256ecf4f17184ca72b5dd8085851c1bcdaef5a4f76f8a645c2510c",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "ga-website-copyright",
+      "url": "https://www.ga.gov.au/copyright",
+      "role": "Official general reuse notice",
+      "vintage": "Current as retrieved 2026-10-07",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "redistributable",
+        "terms": "GA web material generally CC BY 4.0 with product-specific/third-party exceptions."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/campaigns/cocos-keeling-source-20261007/sources/ga-copyright.html",
+          "bytes": 23968,
+          "sha256": "8b092a93cb7289fc4b1e0b70f78e32615afc35000524ecc6f98461b19230555e",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "datawa-coast-outline-2011",
+      "url": "https://catalogue.data.wa.gov.au/dataset/d2fdc6cb-369c-40a0-badf-f8384464aea6",
+      "role": "Small derived candidate coastline; source bytes retained",
+      "vintage": "2011",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "redistributable",
+        "terms": "DataWA item says CC BY 4.0; national mirror labels CC BY 3.0 Australia; source item license used. Derived from same DEM and not independent."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "files": [
+        {
+          "path": "research/campaigns/cocos-keeling-source-20261007/sources/cocos-coast-2011.zip",
+          "bytes": 67943,
+          "sha256": "a0f17a0ac7608ca8c377d0af4c418b558c011f3b48d889b03f48233e1e58290e",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "ga-2011-orthophoto-product",
+      "url": "https://catalogue.data.wa.gov.au/dataset/ecc7b5f1-a2b6-4134-bb64-afabfc47cd67",
+      "role": "Date-stamped orthophoto candidate; catalog metadata only",
+      "vintage": "2011-08-08/2011-08-16",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "restricted",
+        "terms": "DataWA item CC BY-NC 4.0; 1,194,672,655-byte package exceeds cap; product/third-party rights and exact target coverage unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "restoration": "Use the GA metadata and DataWA item record. Metadata says 1 km ECW/TIFF tiles and raw imagery may be requested from GA; do not request without separate authorization.",
+      "limit": "No pixels acquired. Target frame coverage, rights, low-tide variability and mosaic replacement effects unverified."
+    },
+    {
+      "id": "ga-2011-lidar-dem-product",
+      "url": "https://catalogue.data.wa.gov.au/dataset/a747dc79-a4ce-4a3d-87f3-80cbfe238b14",
+      "role": "LiDAR-derived DEM candidate; catalog metadata only",
+      "vintage": "2011-08-08/2011-08-16",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "restricted",
+        "terms": "DataWA item CC BY-NC4; data.gov.au mirror says CC BY-SA4 while API license_id says cc-nc; rights unresolved. 72,169,833-byte ZIP exceeds cap."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "restoration": "Revisit both official catalog records; seek rights resolution only under separate authorization.",
+      "limit": "No DEM/LiDAR pixels acquired; file over cap, license conflict and target coverage unresolved."
+    },
+    {
+      "id": "ga-2011-north-keeling-orthophoto-product",
+      "url": "https://catalogue.data.wa.gov.au/dataset/219dd6b4-dda1-4c33-b4b2-a672062b146a",
+      "role": "Separate North Keeling orthophoto inventory item",
+      "vintage": "2011-08-08/2011-08-16",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "restricted",
+        "terms": "DataWA item CC BY-NC4; 112,097,218-byte ZIP exceeds cap."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "restoration": "Revisit the official record at https://catalogue.data.wa.gov.au/dataset/219dd6b4-dda1-4c33-b4b2-a672062b146a; request data only through a separately authorized route.",
+      "limit": "No pixels acquired; this is not target coverage evidence."
+    },
+    {
+      "id": "ga-2011-frame-tide-table",
+      "url": "https://www.ga.gov.au/document/2011_aerial_survey_xmas_Cocos_Frames_Data_tides.xls",
+      "role": "Frame-level capture/tide metadata",
+      "vintage": "2011",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "unknown",
+        "terms": "Official URL returned HTTP 404; legacy package rights and original table bytes unavailable."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "restoration": "Retry the exact GA URL if restored; GA manual cites the table under legacy package height_data/source.",
+      "limit": "No frame-to-target coverage or per-photo tide observation verified."
+    },
+    {
+      "id": "ga-aam-survey-report",
+      "url": "https://www.ga.gov.au/document/AAM_aerial_survey_report_2011.pdf",
+      "role": "Contractor survey and accuracy report",
+      "vintage": "2011",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "unknown",
+        "terms": "Official URL returned HTTP 404; report rights and bytes unavailable."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "restoration": "Revisit the official record at https://www.ga.gov.au/document/AAM_aerial_survey_report_2011.pdf; request data only through a separately authorized route.",
+      "limit": "Detailed survey control/accuracy evidence unavailable."
+    },
+    {
+      "id": "ga-2012-cocos-gis-manual",
+      "url": "https://www.ga.gov.au/bigobj/GA21021.pdf",
+      "role": "Official inventory documentation; temporary copy reviewed and deleted",
+      "vintage": "2012",
+      "retrieved_at": "2026-10-08T05:57:42.253647Z (local file write time; measured fetch 2.47 s)",
+      "license": {
+        "status": "restricted",
+        "terms": "PDF footer says © 2012 Geoscience Australia, all rights reserved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use the direct GA URL for metadata-only inspection.",
+      "limit": "Citation and byte/hash receipt only; no PDF redistributed."
+    },
+    {
+      "id": "ga-1987-orthophoto-product",
+      "url": "https://www.ga.gov.au/static/cocos/metadata/metaorth.html",
+      "role": "Historical image described by official metadata; pixels not retained",
+      "vintage": "1987-04-05",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "unknown",
+        "terms": "Metadata gives access/contact constraint; product-specific reuse terms not found."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1987,
+        "to": 1988
+      },
+      "restoration": "Revisit the official record at https://www.ga.gov.au/static/cocos/metadata/metaorth.html; request data only through a separately authorized route.",
+      "limit": "No image acquired; target coverage/rights unknown; lagoon excluded."
+    },
+    {
+      "id": "datawa-cocos-contours-2011",
+      "url": "https://catalogue.data.wa.gov.au/dataset/3b154add-f281-47df-a9db-8bde3a7dca12",
+      "role": "Same-survey derived elevation alternative",
+      "vintage": "2011",
+      "retrieved_at": "2026-10-08T05:55:05Z/2026-10-08T05:55:14Z (bounded sequential recheck; see resource receipt)",
+      "license": {
+        "status": "redistributable",
+        "terms": "DataWA item says CC BY 4.0; 18,976,881-byte product not acquired."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "restoration": "Revisit the official record at https://catalogue.data.wa.gov.au/dataset/3b154add-f281-47df-a9db-8bde3a7dca12; request data only through a separately authorized route.",
+      "limit": "Derived from same DEM and repeats its inaccuracies; no independent observation."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/source-fitness-report.md",
+      "bytes": 11547,
+      "sha256": "6130ea43b61b91524264bdb26f4727667d8ec229baf18b5a0946a638c5d4fe22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/source-inventory.json",
+      "bytes": 9813,
+      "sha256": "fefd184cb8ab6497db251ee75a3267b0f65805748ffc66b86555da0581853e4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/resource-receipt.json",
+      "bytes": 4533,
+      "sha256": "28789ecd1e7a736d9bc5f6430399572babfd6abb58a901fe06b86279d5064d45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/aam-report-response-receipt.json",
+      "bytes": 382,
+      "sha256": "693d9959e58c8895a6cb9cf1c60387193061d1b28ede34f911420db9e906aa7e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/frame-tide-response-receipt.json",
+      "bytes": 400,
+      "sha256": "3628b1dbe03f94d8ca89695baca44ab6e12e702a6ad5c478cdcc849815019cc1",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "documentary-source-review",
+      "kind": "source",
+      "description": "Reviewed exact GA source metadata and official catalog statements, retrieved the licensed small derivative, and authenticated immutable baseline file bytes. No original imagery pixels or geometry were inspected; no physical classification was attempted.",
+      "software": "curl (bounded retrieval), Python 3.12.14, pypdf 6.10.0; pdftotext unavailable",
+      "units": "bytes, seconds, counts, categorical source fitness"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "GA metadata reports 15 cm ground pixel size, about 30 cm guide horizontal accuracy, 8–16 August 2011 acquisition and low-tide capture; these metadata statements do not establish target frame coverage or physical truth.",
+      "status": "supported",
+      "source_ids": [
+        "ga-2011-orthophoto-metadata"
+      ]
+    },
+    {
+      "text": "Whether the 2011 orthophoto or LiDAR products are fit for this exact component remains unresolved because target-frame coverage, pixels, frame tides, detailed AAM report, and product/third-party rights were not established.",
+      "status": "unresolved",
+      "source_ids": [
+        "ga-2011-orthophoto-product",
+        "ga-2011-lidar-dem-product",
+        "ga-2011-frame-tide-table",
+        "ga-aam-survey-report"
+      ]
+    },
+    {
+      "text": "The 1987 imagery is not corroboration because target coverage and product reuse terms remain unknown; the metadata says island coverage only and lagoon excluded.",
+      "status": "unresolved",
+      "source_ids": [
+        "ga-1987-orthophoto-metadata",
+        "ga-1987-orthophoto-product"
+      ]
+    },
+    {
+      "text": "The small retained Coast Outline is a CC BY 4.0 derivative of the same DEM; its metadata warns about low-tide sandbanks and sand-flat accuracy. It is not independent shoreline evidence.",
+      "status": "supported",
+      "source_ids": [
+        "datawa-coast-outline-2011"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "Verify exact pointset, roster, contact-context and GSHHG descriptor bytes with git show at the commits declared in baseline.files; gzip-decompress within 32 MiB limits.",
+    "Retrieve official metadata/catalog records sequentially with per-file transfer ceilings; retain only source bytes with an identified reusable license.",
+    "Review temporary official GA PDF with pypdf for metadata-only inventory pointers, then delete the all-rights-reserved copy after recording its URL/hash.",
+    "Run node scripts/evidence-quality.mjs research/campaigns/cocos-keeling-source-20261007/evidence-quality.json."
+  ],
+  "change_receipts": [
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/source-fitness-report.md",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/source-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/resource-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/aam-report-response-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/cocos-coast-2011.zip",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/frame-tide-response-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/ga-1987-orthophoto-metadata.html",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/ga-2011-orthophoto-metadata.html",
+      "status": "added"
+    },
+    {
+      "path": "research/campaigns/cocos-keeling-source-20261007/sources/ga-copyright.html",
+      "status": "added"
+    }
+  ]
+}
