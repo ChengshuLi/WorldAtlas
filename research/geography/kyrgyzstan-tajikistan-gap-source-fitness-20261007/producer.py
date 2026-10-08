@@ -281,6 +281,16 @@ def load_inputs(baseline, contract_helpers, config, *, require_custody=True,
                 custody.get("source_file_count") != config["source_file_count"] or
                 custody.get("runtime_artifact_count") != config["runtime_file_count"]):
             raise ValueError("whole-input custody preflight is bound to different whole-file inventory")
+        if (custody.get("baseline_commit") != config.get("custody_preflight_commit") or
+                custody.get("execution_pins_sha256") != config.get("custody_preflight_execution_pins_sha256")):
+            raise ValueError("whole-input custody preflight is bound to different code/input freeze")
+        code_bindings = custody.get("code_bindings", {})
+        for name, path in config["code_files"].items():
+            binding = code_bindings.get(name)
+            pin = baseline.pins.get(path)
+            if (not isinstance(binding, dict) or not pin or binding.get("path") != path or
+                    binding.get("bytes") != pin["bytes"] or binding.get("sha256") != pin["sha256"]):
+                raise ValueError(f"Preflight code binding differs from the exact execution code: {name}")
         publication = json.loads(baseline.pinned_bytes(CUSTODY_PUBLICATION))
         outputs = publication.get("outputs")
         if publication.get("status") != "complete" or not isinstance(outputs, list):
