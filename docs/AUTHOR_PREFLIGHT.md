@@ -56,6 +56,12 @@ suffix avoids one collision but does not make a rerun safe. Preservation checks
 must capture the original sentinel before execution, not hash it after a write.
 Test both the producer and its control writer when fixing output admission.
 
+When original inputs and later retained evidence require different Git commits,
+use the versioned historical-file format in EVIDENCE_QUALITY.md. Preserve every
+original pin; declare each file's commit and disambiguate repeated paths or input
+hashes. Bind subject lookups, prior rosters and record comparisons to their actual
+reference vintage. Local ancestry checks do not replace the hosted PR-base check.
+
 A retained helper is not necessarily the executed helper. Bind provenance to the
 bytes actually consumed or executed. If using a custom adapter instead of the
 shared helper, document and independently test its equivalent complete guarantees;

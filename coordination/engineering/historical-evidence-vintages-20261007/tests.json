@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "suite": "handoff ownership and evidence gate",
+  "command": "node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/geography-subject-binding.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs",
+  "tests": 104,
+  "passed": 104,
+  "failed": 0,
+  "limits": [
+    "Local tests do not establish hosted deployment, actual hosted #1381 acceptance or scientific approval."
+  ]
+}

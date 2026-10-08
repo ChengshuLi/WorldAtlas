@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "issue": 1448,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "2fa2572fcd009fcbf2a752994ee6d9dcbaaecf22",
+    "files": [
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 15247,
+        "sha256": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 21033,
+        "sha256": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/evidence-quality.test.mjs",
+        "bytes": 14771,
+        "sha256": "a6ccee6f79315ea4fa47c4f8bef359bc1a4dceb9180c1940298239e357a21e5d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 22314,
+        "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/EVIDENCE_QUALITY.md",
+        "bytes": 4969,
+        "sha256": "f794ac616ec8f20d868c84104de976a3cb99c7dce8ae5438c19ebda60c4b4f3b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/templates/evidence-v1.json",
+        "bytes": 1612,
+        "sha256": "5c7c93c151ee3ba9df7ce271191702827a307ecd5968f94ea8f566d4c0d8e6f3",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "scripts/evidence-quality.mjs": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52",
+      "scripts/premerge-evidence.mjs": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971",
+      "scripts/evidence-policy.mjs": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+      "test/evidence-quality.test.mjs": "a6ccee6f79315ea4fa47c4f8bef359bc1a4dceb9180c1940298239e357a21e5d",
+      "test/premerge-evidence.test.mjs": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
+      "docs/EVIDENCE_QUALITY.md": "f794ac616ec8f20d868c84104de976a3cb99c7dce8ae5438c19ebda60c4b4f3b",
+      "coordination/templates/evidence-v1.json": "5c7c93c151ee3ba9df7ce271191702827a307ecd5968f94ea8f566d4c0d8e6f3"
+    },
+    "pin_files": {
+      "scripts/evidence-quality.mjs": "scripts/evidence-quality.mjs",
+      "scripts/premerge-evidence.mjs": "scripts/premerge-evidence.mjs",
+      "scripts/evidence-policy.mjs": "scripts/evidence-policy.mjs",
+      "test/evidence-quality.test.mjs": "test/evidence-quality.test.mjs",
+      "test/premerge-evidence.test.mjs": "test/premerge-evidence.test.mjs",
+      "docs/EVIDENCE_QUALITY.md": "docs/EVIDENCE_QUALITY.md",
+      "coordination/templates/evidence-v1.json": "coordination/templates/evidence-v1.json"
+    }
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "bytes": 5253,
+      "sha256": "69fde03bef00ad07d646a84b0e8dfab4f1f4fc71722e678d6890ab0026609115",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/README.md",
+      "bytes": 1766,
+      "sha256": "1f4773f817d66f4d8e0ff412ab20804c43ad9d6265582e66784b417f4aefa59e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/check-1381.mjs",
+      "bytes": 3099,
+      "sha256": "269eb9347f0655db192ee0b3f14683536ba1826538f0d279e94fedfa0519eae6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/conformance-1381.json",
+      "bytes": 2879,
+      "sha256": "03df6ba328863c473e9f298c129477ee8b5b90b66a7c0df2005744cababfcc93",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/tests.json",
+      "bytes": 607,
+      "sha256": "32f585bf654d1931ed1de7571f75bfd4dfe6f075f14a40cdb132e4546d1492ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/AUTHOR_PREFLIGHT.md",
+      "bytes": 13687,
+      "sha256": "afe49d38de104a998cf0d1ed206fc0ec831cca7e7ffefa6fc559941a33f5f1eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/EVIDENCE_QUALITY.md",
+      "bytes": 9629,
+      "sha256": "b3c60f2f7a61b56cfc8108026023422615e1874edfb0b09f159c2032ada005de",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 19198,
+      "sha256": "1ca731bbc3146a7d13e2f9c726e9ef84f965a53bfbb5b9a626021845d0c54018",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "schemas/evidence-quality-v1.schema.json",
+      "bytes": 7245,
+      "sha256": "fea4db4a91825222e3b2a19a2b61423ed3dbe8f69e165d9fe76a8236b86a322c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 23246,
+      "sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "bytes": 21870,
+      "sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/historical-evidence-1381.json",
+      "bytes": 36167,
+      "sha256": "d9d443db12d6cd21e81fd4cc0616defd1db28782834a95ebb2ddde185541cd60",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/historical-evidence.test.mjs",
+      "bytes": 14693,
+      "sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "historical-reference-validation",
+      "kind": "code",
+      "description": "Focused validator regressions and read-only Git conformance; no candidate packet execution or scientific approval.",
+      "software": "Node 24",
+      "units": "count"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "gate:tests",
+      "value": 104,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+      "input_sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327"
+    },
+    {
+      "id": "gate:passed",
+      "value": 104,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+      "input_sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327"
+    },
+    {
+      "id": "gate:failed",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+      "input_sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327"
+    },
+    {
+      "id": "conformance:pins_checked",
+      "value": 121,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "c618e4411a21e9b57afbd704bab219e250662bfb",
+      "input_sha256": "d9d443db12d6cd21e81fd4cc0616defd1db28782834a95ebb2ddde185541cd60"
+    },
+    {
+      "id": "conformance:historical_descriptors",
+      "value": 122,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "c618e4411a21e9b57afbd704bab219e250662bfb",
+      "input_sha256": "d9d443db12d6cd21e81fd4cc0616defd1db28782834a95ebb2ddde185541cd60"
+    },
+    {
+      "id": "conformance:metrics_checked",
+      "value": 177,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "c618e4411a21e9b57afbd704bab219e250662bfb",
+      "input_sha256": "d9d443db12d6cd21e81fd4cc0616defd1db28782834a95ebb2ddde185541cd60"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "gate:tests",
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/tests.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "gate:passed",
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/tests.json",
+      "json_pointer": "/passed"
+    },
+    {
+      "metric_id": "gate:failed",
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/tests.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "conformance:pins_checked",
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/conformance-1381.json",
+      "json_pointer": "/pins_checked"
+    },
+    {
+      "metric_id": "conformance:historical_descriptors",
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/conformance-1381.json",
+      "json_pointer": "/historical_descriptors"
+    },
+    {
+      "metric_id": "conformance:metrics_checked",
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/conformance-1381.json",
+      "json_pointer": "/metrics_checked"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/geography-subject-binding.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "node coordination/engineering/historical-evidence-vintages-20261007/check-1381.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "status": "modified",
+      "original_sha256": "f1a862da12996e9524f0974a5c5f085443212c732b676e3fc0d9cf18f31a2e9f"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/check-1381.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/conformance-1381.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/tests.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/AUTHOR_PREFLIGHT.md",
+      "status": "modified",
+      "original_sha256": "1eeb2eb277a39df8ded19d3f2b5e5dcccf95c17943c91359eaa2c7474b7100e7"
+    },
+    {
+      "path": "docs/EVIDENCE_QUALITY.md",
+      "status": "modified",
+      "original_sha256": "96897c3438a12785c31a7c3e6f6f0e601761b18b669b5fbe19f50aa8733ae7ce"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "836180b9550112a83637712445d8c3d67a069dbe1a317a18a1a0b91613172a33"
+    },
+    {
+      "path": "schemas/evidence-quality-v1.schema.json",
+      "status": "modified",
+      "original_sha256": "6a2e9cb7f99a7e2b7ad3e5c3854b33e752908603f23134e3886638962d030e9f"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "status": "modified",
+      "original_sha256": "f882803cae564b9dc6351c180f035f888344dd8591090d2500d67e62e6cc2890"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "status": "modified",
+      "original_sha256": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971"
+    },
+    {
+      "path": "test/fixtures/historical-evidence-1381.json",
+      "status": "added"
+    },
+    {
+      "path": "test/historical-evidence.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/historical-evidence-vintages-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

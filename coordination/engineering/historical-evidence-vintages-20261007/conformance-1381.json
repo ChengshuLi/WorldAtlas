@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "issue": 1381,
+  "head": "d4602a499d515bf011edbaa394228f7481fac66e",
+  "pr_base": "c618e4411a21e9b57afbd704bab219e250662bfb",
+  "pins_checked": 121,
+  "historical_descriptors": 122,
+  "historical_commits": [
+    "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+    "a37ad37b94168f9b458617489a702bbb72afbd3d",
+    "de506f51100568e150e51f2926a5259b71e55272"
+  ],
+  "metrics_checked": 177,
+  "status": "limited",
+  "limits": [
+    "geoboundaries-usa-adm2-2018: The merged #981 packet records the full and simplified raw source hashes and crosswalk. This erratum binds its supporting metadata, notice, crosswalk and evidence manifest, but does not add the large source variants to this already near-limit input inventory or independently compare Atlas geometry to those variants. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+    "geoboundaries-usa-adm2-2018: factual verification incomplete",
+    "census-tigerweb-2018: Statistical/reference comparator; no legal adjudication. The full retained GeoJSON response is pinned in baseline.files; source metadata/receipt are linked as separate retained records. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+    "census-tigerweb-2025: TIGER/Line documentation describes the 2025 vintage and statistical/no-legal-line limitations. The full retained GeoJSON response is pinned in baseline.files; source metadata/receipt are linked separately. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+    "census-tigerweb-current-2026: Retained eight-feature and metadata response bytes are pinned in baseline.files. Metadata does not declare AREA field units; its raw-response byte identity differs from the normalized retained metadata file by one LF. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+    "census-tiger-authorities: Official documentation describes the 2025 source vintage, square-metre units for 2025 area fields, and statistical-use/no-legal-description limits; it does not declare 2026 area units or resolve coastal legal lines. Change notes are selected, not exhaustive. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory."
+  ],
+  "executed_helper": {
+    "path": "scripts/evidence/immutable.py",
+    "commit": "de506f51100568e150e51f2926a5259b71e55272",
+    "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+  },
+  "scope": "Local read-only representation conformance; original pins and packet bytes unchanged. Not a hosted gate, scientific review, execution reproduction or geography approval."
+}
