@@ -164,7 +164,7 @@ def main() -> None:
     decoded.append({"path": parent_pin["path"], "bytes": parent_pin["uncompressed_bytes"],
                     "sha256": parent_pin["uncompressed_sha256"], "role": "decoded-alaska-adm1-parent-source"})
 
-    current_scripts = [CAMPAIGN / name for name in ("phase_admission.py", "extract_native_records.py", "capture_alaska_parent.py", "capture_atlas_neighbors.py", "capture_original_fragment_contacts.py", "measure_alaska.py", "measurement_driver.py", "run_phase.py", "verify_extraction_replay.py")]
+    current_scripts = [CAMPAIGN / name for name in ("phase_admission.py", "extract_native_records.py", "capture_alaska_parent.py", "capture_atlas_neighbors.py", "capture_original_fragment_contacts.py", "measure_alaska.py", "measurement_driver.py", "run_phase.py", "verify_extraction_replay.py", "reproduce_union_control.py")]
     current_scripts.append(ROOT / "scripts/evidence/immutable.py")
     code = []
     for path in current_scripts:
