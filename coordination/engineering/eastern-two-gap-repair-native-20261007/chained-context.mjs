@@ -1,11 +1,17 @@
 // Exactly the approved unchanged v6→v7 stage, followed by the two-target v7→v8 stage.
-import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFileSync}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFile}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
 import{restoreWholeImage}from'./whole-image.mjs';import{restoreCanonicalProducts,getRestoredCanonicalProducts}from'./restore-canonical-products.mjs';import{validateContextMigration}from'../../../scripts/native-ownership/validate-context-migration.mjs';
 import{candidateBudget,requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../../../scripts/evidence-quality.mjs';
 import{validateNativeSelectionReceipt}from'../../../scripts/native-ownership/require-verified-selection.mjs';
 import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
-import{isDeepStrictEqual}from'node:util';
+import{isDeepStrictEqual,promisify}from'node:util';
 import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs';
+const executeFile=promisify(execFile);
+// Preserve the original replay boundary while allowing the parent event loop to run.
+export async function replayOriginalV1(runner,image){
+ const {stdout}=await executeFile(process.execPath,[runner],{cwd:image,env:{...process.env,WORLDATLAS_PACKAGE_STAGE:image},maxBuffer:32*1024*1024,encoding:'buffer'});
+ return stdout;
+}
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export function selectBuildContextValidator(stage,{legacy,current}){
  assert.equal(typeof legacy,'function');assert.equal(typeof current,'function');
@@ -88,7 +94,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const oldValidatorPath="./scripts/native-ownership/validate-build-context-stage.mjs";
  const command="import fs from 'node:fs';import{gunzipSync}from'node:zlib';import{validateBuildContextStage}from "+JSON.stringify(oldValidatorPath)+";const s=JSON.parse(fs.readFileSync('data/native-context-migration/manifest.json'));const r=JSON.parse(gunzipSync(fs.readFileSync(s.releases.path)));const result=await validateBuildContextStage({root:process.cwd(),expectedReference:r.releases.at(-1)});process.stdout.write(JSON.stringify(result.receipt));";
  const runner=path.join(image,'replay-original-v1.mjs');fs.writeFileSync(runner,command+'\n',{flag:'wx'});
- const priorRaw=execFileSync(process.execPath,[runner],{cwd:image,env:{...process.env,WORLDATLAS_PACKAGE_STAGE:image},maxBuffer:32*1024*1024});const prior=JSON.parse(priorRaw);
+ const priorRaw=await replayOriginalV1(runner,image);const prior=JSON.parse(priorRaw);
  assert.equal(prior.status,'verified');assert.equal(prior.migration.locations,49625);assert.equal(prior.migration.footprints_sha256,BEFORE);assert.equal(prior.migration.successor_release_id,predecessor.id);
  function legacyContext(pin){const index=JSON.parse(fs.readFileSync(path.join(image,pin.path))),rows=[];for(const p of index.parts){const base=p.reused_from??pin.path;const raw=fs.readFileSync(path.join(image,path.posix.dirname(base),p.path));assert.equal(raw.length,p.bytes);assert.equal(sha(raw),p.sha256);const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,p.uncompressed_bytes);assert.equal(sha(decoded),p.uncompressed_sha256);rows.push(...JSON.parse(decoded));}return {index,rows};}
  const before=legacyContext(oldStage.after_context),afterIndex=JSON.parse(read(stage.after_context)),after=[];

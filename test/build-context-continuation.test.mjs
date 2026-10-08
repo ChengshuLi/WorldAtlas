@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {foldCoverageContinuation,FIXED_MIDDLE_GRID_SHA,shareUnchangedContextGeometry,selectBuildContextValidator} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs';
+import {foldCoverageContinuation,FIXED_MIDDLE_GRID_SHA,shareUnchangedContextGeometry,selectBuildContextValidator,replayOriginalV1} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs';
 test('build context dispatch preserves original realm and exact two-target continuation',async()=>{
  const legacyToken={},currentToken={};let legacyCalls=0,currentCalls=0;
  const legacy=async()=>{legacyCalls++;return legacyToken;},current=async()=>{currentCalls++;return currentToken;};
@@ -67,4 +67,26 @@ test('memory sharing preserves exact geometry values/order and refuses signed-ze
  const changed=[feature(2)];assert.equal(shareUnchangedContextGeometry(changed,reference),0);
  const zero=structuredClone(reference);zero[0].geometry.coordinates[0][0][0]=-0;assert.equal(shareUnchangedContextGeometry(zero,reference),0);assert(Object.is(zero[0].geometry.coordinates[0][0][0],-0));
  const reordered=structuredClone(reference);reordered[0].geometry={coordinates:reordered[0].geometry.coordinates,type:'Polygon'};assert.equal(shareUnchangedContextGeometry(reordered,reference),0);
+});
+
+
+import os from 'node:os';
+import path from 'node:path';
+test('original replay awaits real child, retains binary output and rejects actual failures',async()=>{
+ const directory=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'1295-replay-control-')));
+ const runner=path.join(directory,'runner.mjs');
+ try{
+  await fs.writeFile(runner,`import fs from 'node:fs';if(process.argv.length!==2||process.cwd()!==process.env.WORLDATLAS_PACKAGE_STAGE)process.exit(19);setTimeout(()=>process.stdout.write(Buffer.from([0,255,195,169])),80);`);
+  let ticks=0;const timer=setInterval(()=>ticks++,5);timer.unref();let complete=false;
+  const pending=replayOriginalV1(runner,directory).then(raw=>{complete=true;return raw;});
+  await new Promise(resolve=>setTimeout(resolve,20));assert.equal(complete,false);
+  const raw=await pending;clearInterval(timer);assert(ticks>0);assert(Buffer.isBuffer(raw));assert.deepEqual(raw,Buffer.from([0,255,195,169]));
+  await fs.writeFile(runner,`process.stderr.write('literal failure');process.exit(23);`);
+  await assert.rejects(replayOriginalV1(runner,directory),error=>error.code===23&&Buffer.isBuffer(error.stderr)&&error.stderr.toString()==='literal failure');
+  await fs.writeFile(runner,`process.kill(process.pid,'SIGTERM');`);
+  await assert.rejects(replayOriginalV1(runner,directory),error=>error.signal==='SIGTERM');
+  await assert.rejects(replayOriginalV1(path.join(directory,'missing.mjs'),directory));
+  await fs.writeFile(runner,`process.stdout.write(Buffer.alloc(32*1024*1024+1));`);
+  await assert.rejects(replayOriginalV1(runner,directory),error=>error.code==='ERR_CHILD_PROCESS_STDIO_MAXBUFFER');
+ }finally{await fs.rm(directory,{recursive:true,force:true});}
 });
