@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "issue": 1229,
+  "scope": "Independent-reference fitness follow-up for the four frozen Nordic gap components only.",
+  "recorded_at": "2026-10-08",
+  "historical_packet": {
+    "baseline_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+    "prior_manifest_sha256": "38f526711d8085fb3dc6c79a6b80069a678710168316793bcc10d1f571020e87",
+    "prior_contributor_worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+    "prior_pr": "#1233",
+    "new_contributor_worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
+    "claim_branch": "geography/nordic-authority-1229-20261008"
+  },
+  "subjects": [
+    "physical-component:000bb4f5335601ba33572e2aca833ec87188059fcdd1f5d830826fa3783c2f05",
+    "physical-component:2b3823b49787cb624b7298ab8394ef521dd10a907c12c2a2b0249a6796970eb5",
+    "physical-component:4d6cbd694c671b2f56683e931c11b97522823512c0542a6aa7aaa73843ed078b",
+    "physical-component:9bdcd0999b59fbb4e5e8601729b4a4dadf0900ed8ead792d512aaa031e314ae9"
+  ],
+  "tested_reference": {
+    "name": "Natural Earth 10m Physical Vectors: land and lakes",
+    "pinned_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+    "commit_date": "2022-06-02",
+    "version_file": "5.2.0-pre",
+    "retrieved_at": "2026-10-05 (as recorded in the immutable issue manifest)",
+    "license": "Public domain",
+    "scale": "1:10,000,000 cartographic scale; “10m” is not 10-meter positional resolution",
+    "coordinate_reference": "OGC:CRS84, longitude-latitude; retained GeoJSON declares CRS84",
+    "source_files": [
+      {
+        "path": "natural-earth-land.geojson.gz.gz",
+        "bytes": 3570430,
+        "sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68"
+      },
+      {
+        "path": "natural-earth-lakes.geojson.gz",
+        "bytes": 1565161,
+        "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f"
+      }
+    ],
+    "source_urls": [
+      "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson",
+      "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson"
+    ],
+    "limits": [
+      "The source commit is dated 2022-06-02, later than the Norway 2013 and Sweden 2017 boundary vintages; it is not a historical land/water snapshot for those years.",
+      "The lake layer is generalized and incomplete for rivers, small water, seasonal water, and ice."
+    ]
+  },
+  "method": {
+    "source_result": "physical-reference-overlays.json",
+    "source_result_sha256": "f2b5f0108a18b3383ce762d2b24d8bdf6bf09608445a4622f2d3a8123ec38a68",
+    "subject_result_source": "source-and-candidate-comparison.json",
+    "subject_result_sha256": "a20495f6a86bb95a8b598789b5ed592ed1518b452c9f7b2e1ae2831a4955b6b3",
+    "engine": "GEOS/Shapely result already retained by PR #1233; this follow-up summarizes those exact result geometries and does not rerun or rewrite them.",
+    "operation": "Exact planar intersections and differences in OGC:CRS84; no transform, snap, buffer, simplify, make-valid, coordinate normalization, or area cutoff.",
+    "units": "square degrees only; not geodesic/physical area",
+    "distance": "none; no registration tolerance inferred"
+  },
+  "results": [
+    {
+      "component_id": "physical-component:000bb4f5335601ba33572e2aca833ec87188059fcdd1f5d830826fa3783c2f05",
+      "candidate_feature_pointer": "/full_product_overlays/0/full_candidate_feature",
+      "land_intersection_geometry_pointer": "/results/0/natural_earth_land_intersection_geometry",
+      "land_difference_geometry_pointer": "/results/0/natural_earth_land_difference_geometry",
+      "lakes_intersection_geometry_pointer": "/results/0/natural_earth_lakes_intersection_geometry",
+      "land_intersection_metric_id": "c000bb4f5-natural-earth-land-overlap",
+      "lakes_intersection_metric_id": "c000bb4f5-natural-earth-lakes-overlap",
+      "interpretation": "Exact retained overlay classifies the candidate as contained by the generalized land geometry and disjoint from mapped lakes; this does not prove historical dry land or absence of unmapped water/ice."
+    },
+    {
+      "component_id": "physical-component:2b3823b49787cb624b7298ab8394ef521dd10a907c12c2a2b0249a6796970eb5",
+      "candidate_feature_pointer": "/full_product_overlays/1/full_candidate_feature",
+      "land_intersection_geometry_pointer": "/results/1/natural_earth_land_intersection_geometry",
+      "land_difference_geometry_pointer": "/results/1/natural_earth_land_difference_geometry",
+      "lakes_intersection_geometry_pointer": "/results/1/natural_earth_lakes_intersection_geometry",
+      "land_intersection_metric_id": "c2b3823b4-natural-earth-land-overlap",
+      "lakes_intersection_metric_id": "c2b3823b4-natural-earth-lakes-overlap",
+      "interpretation": "Exact retained overlay classifies the candidate as contained by the generalized land geometry and disjoint from mapped lakes; this does not prove historical dry land or absence of unmapped water/ice."
+    },
+    {
+      "component_id": "physical-component:4d6cbd694c671b2f56683e931c11b97522823512c0542a6aa7aaa73843ed078b",
+      "candidate_feature_pointer": "/full_product_overlays/2/full_candidate_feature",
+      "land_intersection_geometry_pointer": "/results/2/natural_earth_land_intersection_geometry",
+      "land_difference_geometry_pointer": "/results/2/natural_earth_land_difference_geometry",
+      "lakes_intersection_geometry_pointer": "/results/2/natural_earth_lakes_intersection_geometry",
+      "land_intersection_metric_id": "c4d6cbd69-natural-earth-land-overlap",
+      "lakes_intersection_metric_id": "c4d6cbd69-natural-earth-lakes-overlap",
+      "interpretation": "Exact retained overlay classifies the candidate as contained by the generalized land geometry and disjoint from mapped lakes; this does not prove historical dry land or absence of unmapped water/ice."
+    },
+    {
+      "component_id": "physical-component:9bdcd0999b59fbb4e5e8601729b4a4dadf0900ed8ead792d512aaa031e314ae9",
+      "candidate_feature_pointer": "/full_product_overlays/3/full_candidate_feature",
+      "land_intersection_geometry_pointer": "/results/3/natural_earth_land_intersection_geometry",
+      "land_difference_geometry_pointer": "/results/3/natural_earth_land_difference_geometry",
+      "lakes_intersection_geometry_pointer": "/results/3/natural_earth_lakes_intersection_geometry",
+      "land_intersection_metric_id": "c9bdcd099-natural-earth-land-overlap",
+      "lakes_intersection_metric_id": "c9bdcd099-natural-earth-lakes-overlap",
+      "interpretation": "Exact retained overlay classifies the candidate as contained by the generalized land geometry and disjoint from mapped lakes; this does not prove historical dry land or absence of unmapped water/ice."
+    }
+  ],
+  "precision_and_registration": {
+    "input_crs": "RFC 7946 GeoJSON coordinates use WGS 84 longitude-latitude; the Natural Earth source declares OGC:CRS84. No reprojection was performed.",
+    "precision_result_binding": {
+      "path": "source-and-candidate-comparison.json",
+      "json_pointer": "/source_products/observed_coordinate_numeric_precision"
+    },
+    "interpretation": "Decimal digits are serialized numeric precision, not measurement accuracy. The retained Natural Earth record has no target-specific positional-accuracy declaration. The exact overlay uses no buffer or tolerance and provides no sub-grid registration or positional-error estimate.",
+    "official_product_accuracy_not_transferred": "Kartverket product documentation reports a broad 0.3–20 m accuracy range for its Administrative Units Norway product; Lantmäteriet states positional uncertainty varies by object and method. Neither figure is assigned to these candidates without retrieving and binding the exact relevant product/version/features."
+  },
+  "official_reference_leads_not_used_as_geometry": [
+    {
+      "id": "kartverket-n50-current",
+      "url": "https://kartkatalog.geonorge.no/metadata/uuid/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "source_owner": "Kartverket",
+      "metadata_observed_at": "2026-10-08",
+      "observed_metadata": "Metadata lists N50 Kartdata version 20260901, last dataset update 2026-10-03, weekly updates, mainland Norway coverage, 1:50,000 scale (general map range 1:25,000–1:100,000), CC BY 4.0, and EUREF89 UTM zones 32/33/35. Description includes water/land-cover and administrative themes.",
+      "availability": "Official catalog exposes download/API routes; source geometry was not retrieved or bound in this work. Not used for overlays."
+    },
+    {
+      "id": "kartverket-administrative-units",
+      "url": "https://kartverket.no/en/api-and-data/grensedata/",
+      "source_owner": "Kartverket",
+      "metadata_observed_at": "2026-10-08",
+      "observed_metadata": "Kartverket describes official municipal/county boundary data, free downloads, historical versions, and boundaries based on cadastral property geometry and official international borders.",
+      "availability": "Metadata only; no matching historical geometry/version was retrieved. Not used for an authority verdict."
+    },
+    {
+      "id": "lantmateriet-topography-10",
+      "url": "https://www.lantmateriet.se/globalassets/geodata/geodataprodukter/e-pb-topografi-10-nedladdning-vektor.pdf",
+      "source_owner": "Lantmäteriet",
+      "metadata_observed_at": "2026-10-08",
+      "observed_metadata": "Product description covers hydrography and land cover, nationwide, scale 1:5,000–1:20,000, SWEREF 99 TM, feature-level dates, weekly preproduced updates, and varying positional uncertainty/completeness.",
+      "availability": "Product bytes and exact product-specific reuse terms were not retrieved; not used for overlays."
+    },
+    {
+      "id": "lantmateriet-hydrography-download",
+      "url": "https://www.lantmateriet.se/en/geodata/our-products/product-list/hydrography-download-service/",
+      "source_owner": "Lantmäteriet",
+      "metadata_observed_at": "2026-10-08",
+      "observed_metadata": "Product description identifies hydrographic objects, networks, INSPIRE hydrography and Swedish water-standard content.",
+      "availability": "No geometry payload or product-specific reuse record retrieved; not used for overlays."
+    },
+    {
+      "id": "kartverket-administrative-units-product-sheet",
+      "url": "https://register.geonorge.no/data/documents/Administrative%20enheter%20Norge%202_Administrative_enheter_Norge-1.pdf",
+      "source_owner": "Kartverket",
+      "metadata_observed_at": "2026-10-08",
+      "observed_metadata": "Product sheet describes official country/county/municipal boundaries at 1:5,000 scale and reports stated positional accuracy spanning 0.3–20 m.",
+      "availability": "The product/version and actual boundary features were not retrieved; the range is not transferable to the four candidates and was not used in the overlay."
+    }
+  ],
+  "acquisition_attempts": [
+    {
+      "source": "Kartverket Administrative enheter WFS GetCapabilities",
+      "endpoint": "https://wfs.geonorge.no/skwms1/wfs.administrative_enheter?service=WFS&request=GetCapabilities",
+      "attempted_at": "2026-10-08",
+      "outcome": "HTTP client timed out after 20 seconds with zero response bytes.",
+      "meaning": "Unavailable in this client session; no source bytes, feature records, or geometry conclusions are claimed."
+    }
+  ],
+  "conclusion": "The only executed independent physical/water comparison is the pinned Natural Earth 2022-06-02 1:10m-scale context. It depicts each complete candidate as land and none as a mapped lake. This is consistent with a coarse modern land interpretation, but does not establish historical dry land, eliminate unrepresented streams/ponds/ice, identify the source of the gaps, establish an international boundary, or authorize assignment. Official higher-detail Norway and Sweden products are documented as promising follow-up references; their geometry and matching historical vintages remain uninspected.",
+  "readiness_snapshot": {
+    "reviewed_at": "2026-10-08T01:59:55.917Z",
+    "coverage": "complete",
+    "eligible": true,
+    "findings": [],
+    "decision_limit": "Mechanical issue eligibility only; does not certify source or scientific conclusions."
+  },
+  "current_claim_receipt": {
+    "issue": 1229,
+    "accepted": true,
+    "worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
+    "claim_id": "04db69c4-39ec-411b-8b5e-b5b31deb025e",
+    "request_id": "7c040d33-de3c-4638-a4db-241388b633e3",
+    "comment_id": 6050634195,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37715724447",
+    "branch": "geography/nordic-authority-1229-20261008",
+    "claimed_at": "2026-10-08T02:00:51.407Z",
+    "expires_at": "2026-10-09T02:00:51.407Z"
+  }
+}
