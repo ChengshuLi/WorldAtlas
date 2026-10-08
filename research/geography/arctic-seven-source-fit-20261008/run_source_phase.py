@@ -35,7 +35,7 @@ def bounded_file_read(path:Path,maximum:int,*,exact:bool=False)->bytes:
 
 def load_native_tools(plan):
  global GIT_EXECUTABLE,NATIVE_TOOLS_BYTES,NATIVE_TOOLS_LOCK_SHA256,NATIVE_TOOLS_LOCK_BYTES
- lock_path='research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r10.json'
+ lock_path='research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r11.json'
  lock_file=ROOT/lock_path
  if lock_file.is_symlink() or not lock_file.is_file():raise ValueError('Native tools lock must be an ordinary file')
  raw=bounded_file_read(lock_file,65536)
@@ -118,7 +118,7 @@ def main():
  parser.add_argument('phase')
  parser.add_argument('--baseline',required=True)
  parser.add_argument('--plan-sha256',required=True)
- parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r10.json')
+ parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r11.json')
  args=parser.parse_args()
  plan_path=args.phase_plan
  if Path(plan_path).is_absolute() or '\\' in plan_path or any(part in ('','.','..') for part in plan_path.split('/')):
@@ -140,7 +140,7 @@ def main():
  all_files={row['path']:row for row in plan['baseline_files']}
  runtime_lock_path=plan['runtime']['lock_path']; lock_desc=all_files[runtime_lock_path]
  runtime_total=int(phase['runtime_bytes'])
- native_lock_path='research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r10.json'
+ native_lock_path='research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r11.json'
  if native_lock_path not in all_files or all_files[native_lock_path]['bytes']!=NATIVE_TOOLS_LOCK_BYTES or all_files[native_lock_path]['sha256']!=plan['native_tools_lock_sha256']:
   raise ValueError('Native-tools lock is absent from or differs from the frozen baseline inventory')
  if NATIVE_TOOLS_BYTES!=phase['native_runtime_bytes'] or NATIVE_TOOLS_LOCK_BYTES!=phase['native_tools_lock_revalidation_bytes']:
@@ -205,8 +205,15 @@ def main():
  class CapturedBaseline(immutable.Baseline):
   """Cache authenticated Git blobs so repeated phase access reads each once."""
   def __init__(self,*args,**kwargs):
+   repo=args[0] if args else kwargs.get('repo')
+   if repo is None or Path(repo).resolve()!=ROOT.resolve():
+    raise ValueError('Captured baseline repository differs from the admitted checkout')
    self._captured={}
    super().__init__(*args,**kwargs)
+  def _git(self,*git_args):
+   if Path(self.repo).resolve()!=ROOT.resolve():
+    raise ValueError('Captured baseline repository changed after admission')
+   return git(*git_args)
   def read(self,name):
    if name not in self._captured:self._captured[name]=super().read(name)
    return self._captured[name]

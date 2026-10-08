@@ -13,7 +13,7 @@ def descriptor(path,kind):
  path=Path(path); raw=path.read_bytes()
  return {'path':str(path),'kind':kind,'bytes':len(raw),'sha256':sha(raw)}
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--vintage',default='r10');args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('--vintage',default='r11');args=parser.parse_args()
  binaries={}; resolution_shims={}
  for command in COMMANDS:
   if command in ('git','otool'):

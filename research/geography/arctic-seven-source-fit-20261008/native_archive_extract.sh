@@ -19,12 +19,12 @@ test "$("$BOOTSTRAP_SHA256SUM" "$BOOTSTRAP_WC")" = "$BOOTSTRAP_WC_SHA  $BOOTSTRA
 git() { "$BOOTSTRAP_GIT" "$@"; }
 ROOT=$(cd "${BASH_SOURCE[0]%/*}/../../.." && pwd -P)
 PACKET=$ROOT/research/geography/arctic-seven-source-fit-20261008
-PLAN=$PACKET/phase-plan-r10.json
+PLAN=$PACKET/phase-plan-r11.json
 SCRIPT_REL=research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh
-TOOLS_JSON=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r10.json
-TOOLS_SHELL=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r10.sh
+TOOLS_JSON=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r11.json
+TOOLS_SHELL=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r11.sh
 VINTAGES=$PACKET/vintages
-RUN=$VINTAGES/r10-native-extract
+RUN=$VINTAGES/r11-native-extract
 CAP=268435456
 DECODED=162109440
 MEMBER_BYTES=2756674
@@ -162,7 +162,7 @@ printf '{"version":1,"status":"complete","phase":"native-archive-extract","basel
   "$BASE" "$PLAN_SHA" "$TOOLS_SHA" "$NATIVE_TOOLS_TOTAL_BYTES" "$((INPUT_BYTES - native_size))" "$native_size" "$DECODED" "$SCRATCH_RESERVE" "$OUTPUT_RESERVE" "$PROSPECTIVE" > "$RUN/execution-receipt.json"
 EXECUTION_HASH=$(sha256sum "$RUN/execution-receipt.json"); EXECUTION_HASH=${EXECUTION_HASH%% *}
 EXECUTION_SIZE=$(wc -c < "$RUN/execution-receipt.json" | tr -d ' ')
-printf '{"version":1,"status":"complete","outputs":[{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r10-native-extract/native-archive-extraction.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"},{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r10-native-extract/execution-receipt.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"}]}\n' \
+printf '{"version":1,"status":"complete","outputs":[{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r11-native-extract/native-archive-extraction.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"},{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r11-native-extract/execution-receipt.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"}]}\n' \
   "$EXTRACTION_SIZE" "$EXTRACTION_HASH" "$EXECUTION_SIZE" "$EXECUTION_HASH" > "$RUN/.publication-incomplete"
 sync
 ln "$RUN/.publication-incomplete" "$RUN/publication.json"
