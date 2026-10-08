@@ -52,6 +52,17 @@ export function plan(commit) {
   for (const input of definition.inputs) if (!definition.optional_inputs.includes(input) && !rows.some(row => input.endsWith('/') ? row.path.startsWith(input) : row.path === input)) throw Error('Required frozen package input absent');
   return {commit, definition, definition_sha256: sha(definitionRaw), source_files: rows, source_bytes: rows.reduce((n, row) => n + row.bytes, 0)};
 }
+export function originalMaterializationView(original, source, candidate) {
+  validatePackageInputs(original);
+  const missing = original.inputs.filter(input => !fs.existsSync(path.join(source, input)));
+  const required = missing.filter(input => !original.optional_inputs.includes(input));
+  const allowed = 'coordination/engineering/eastern-two-gap-repair-native-20261007/native-proposal.json';
+  for (const input of required) {
+    if (input !== allowed || !candidate.source_files.some(row => row.path === input && row.type === 'blob' && ['100644', '100755'].includes(row.mode) && row.bytes > 0 && row.bytes <= 32 * 1024 * 1024 && /^[a-f0-9]{40}$/.test(row.git_blob))) throw Error('Unbound missing original package input');
+  }
+  const definition = validatePackageInputs({...original, inputs: original.inputs.filter(input => !required.includes(input))});
+  return {definition, original_inputs_missing: missing, required_candidate_restorations: required};
+}
 export async function run({commit, source, destination, receipt, execute = true}) {
   const started = new Date().toISOString(), p = plan(commit);
   if (process.env.WORLDATLAS_PACKAGE_STAGE) throw Error('Caller cannot spoof package stage');
@@ -62,6 +73,9 @@ export async function run({commit, source, destination, receipt, execute = true}
   source = path.resolve(source); destination = path.resolve(destination); ordinary(source, true);
   if ((!destination.startsWith(path.join(repo, '.cache') + path.sep) && path.dirname(destination) !== ownedExternalImages) || fs.existsSync(destination)) throw Error('Exclusive owned destination required');
   ordinary(path.dirname(destination), true);
+  const oldDefinitionRaw = fs.readFileSync(path.join(source, '.github/package-inputs.json'));
+  const oldDefinition = JSON.parse(oldDefinitionRaw);
+  const originalView = originalMaterializationView(oldDefinition, source, p);
   const preservationFile = `${source}-whole-preservation.json`;
   const preservationStat = ordinary(preservationFile);
   if (preservationStat.size > 4 * 1024 * 1024) throw Error('Original package preservation metadata bound');
@@ -85,9 +99,13 @@ export async function run({commit, source, destination, receipt, execute = true}
   authenticateOld();
   if (seen.size !== expected.size) throw Error('Original package source member omitted');
   const dependencies = await verifyPackageDependencies(path.join(source, 'node_modules'));
-  const oldDefinition = JSON.parse(fs.readFileSync(path.join(source, '.github/package-inputs.json')));
+  const missingRestorationPins = originalView.required_candidate_restorations.map(input => {
+    const row = p.source_files.find(row => row.path === input), raw = git('cat-file', 'blob', row.git_blob);
+    if (raw.length !== row.bytes || blob(raw) !== row.git_blob) throw Error('Missing original input candidate body differs');
+    return {...row, sha256: sha(raw), origin: 'explicit current immutable candidate; absent in original preserved source'};
+  });
   fs.mkdirSync(destination);
-  const materialized = await materializePackageInputs({source, destination, definition: oldDefinition});
+  const materialized = await materializePackageInputs({source, destination, definition: originalView.definition});
   const required = new Set(p.source_files.map(row => row.path));
   const removed = [];
   for (const file of files(destination)) if (!required.has(file)) { fs.unlinkSync(path.join(destination, file)); removed.push(file); }
@@ -114,6 +132,9 @@ export async function run({commit, source, destination, receipt, execute = true}
     method: 'unchanged FICLONE materializer once, explicit complete immutable candidate overlay, unchanged hosted inner builder',
     definition_sha256: p.definition_sha256, source, destination, original_materialized_count: materialized.length, removed,
     original_source_preservation_sha256: sha(preservationRaw), original_source_members_checked: seen.size,
+    original_definition_sha256: sha(oldDefinitionRaw), missing_original_input_whole_candidate_pins: missingRestorationPins,
+    original_materialization_definition_sha256: sha(Buffer.from(JSON.stringify(originalView.definition))),
+    original_inputs_missing: originalView.original_inputs_missing, required_candidate_restorations: originalView.required_candidate_restorations,
     source_files: actual, source_bytes: p.source_bytes, node: {version: process.version, executable: process.execPath, ...fingerprint(process.execPath)}, executed: false};
   fs.writeFileSync(receipt, JSON.stringify(inputProof, null, 2) + '\n', {flag: 'wx'});
   fs.symlinkSync(dependencies, path.join(destination, 'node_modules'), 'dir');
