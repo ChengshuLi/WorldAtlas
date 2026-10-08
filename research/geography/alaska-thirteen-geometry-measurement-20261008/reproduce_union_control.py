@@ -57,6 +57,15 @@ unionary = unary_union([old, candidate])
 union_method = old.union(candidate)
 old_minus_unionary = old.difference(unionary)
 boundary_minus_unionary = old.boundary.difference(unionary)
+old_parts = list(old.geoms) if old.geom_type == "MultiPolygon" else [old]
+part_failures = []
+for index, part in enumerate(old_parts):
+    part_difference = part.difference(unionary)
+    if not unionary.covers(part):
+        part_failures.append({"index": index, "part": describe(part),
+            "part_relation_to_union": part.relate(unionary),
+            "union_covers_part": bool(unionary.covers(part)),
+            "part_difference_union": describe(part_difference)})
 variants = {"unary_union_old_then_candidate": unionary,
             "old_union_candidate": union_method,
             "candidate_union_old": candidate.union(old)}
@@ -71,6 +80,11 @@ result = {
     "component_id": COMPONENT_ID,
     "old_target": describe(old),
     "candidate": describe(candidate),
+    "old_target_self_relation": old.relate(old),
+    "old_target_self_covers": bool(old.covers(old)),
+    "old_target_polygon_part_count": len(old_parts),
+    "old_target_polygon_part_cover_failure_count": len(part_failures),
+    "old_target_polygon_part_cover_failures": part_failures,
     "old_target_relation_to_unary_union": old.relate(unionary),
     "union_relation_to_old_target": unionary.relate(old),
     "unary_union": describe(unionary),
