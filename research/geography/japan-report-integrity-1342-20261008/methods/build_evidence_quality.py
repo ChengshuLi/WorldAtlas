@@ -64,7 +64,7 @@ for vintage in ('run-nine-20261008','run-ten-20261008'):
 # The trusted hosted premerge gate binds every PR path to the evidence manifest.
 # This packet is additive: all 23 non-manifest changed files are whole-file
 # outputs above, and the manifest itself is the remaining added path.
-m['change_receipts']=[{'path':path,'status':'added','previous_path':None}
+m['change_receipts']=[{'path':path,'status':'added'}
     for path in sorted([row['path'] for row in m['outputs']]+[OWN+'/evidence-quality.json'])]
 source_hash='2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804'
 validation=json.loads((ROOT/OWN/'vintages/run-nine-20261008/validation.json').read_text())
