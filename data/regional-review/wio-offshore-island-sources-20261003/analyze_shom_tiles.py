@@ -123,14 +123,18 @@ def authenticate_listings(listing_map):
     if None in expected_members or len(expected_members) != len(listing_map):
         raise ValueError("raw package-file listing member missing or duplicated")
     with ZipFile(LISTING_ARCHIVE) as archive:
-        if set(archive.namelist()) != expected_members:
-            raise ValueError("raw package-file listing archive membership mismatch")
+        validate_archive_members(archive.namelist(), expected_members)
         for key, row in listing_map.items():
             body=archive.read(row["raw_member"])
             if len(body) != row["bytes"] or sha256(body).hexdigest() != row["sha256"]:
                 raise ValueError("package-file listing body hash mismatch: "+str(key))
             if json.loads(body).get("downloadFiles", []) != row["files"]:
                 raise ValueError("parsed package-file listing differs from retained body: "+str(key))
+
+def validate_archive_members(actual_members, expected_members):
+    """Require exact one-to-one archive membership, including multiplicity."""
+    if len(actual_members) != len(expected_members) or set(actual_members) != expected_members:
+        raise ValueError("raw package-file listing archive membership mismatch")
 
 def screen_component_bbox(component, bbox_wgs84, buffer_m=1000):
     """Apply the declared lon/lat bbox screen to one feature component."""

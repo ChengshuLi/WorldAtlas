@@ -4,6 +4,7 @@ import copy
 import json
 import unittest
 from pathlib import Path
+from zipfile import ZipFile
 import analyze_shom_tiles as analysis
 from shapely.geometry import shape
 
@@ -44,6 +45,21 @@ class CaptureMembershipTest(unittest.TestCase):
         mutated[target].pop("raw_member",None)
         with self.assertRaisesRegex(ValueError,"raw package-file listing member missing"):
             analysis.authenticate_listings(mutated)
+
+    def test_actual_listing_archive_has_exact_unique_members(self):
+        _, listings=analysis.validate_capture_membership(self.capture)
+        analysis.authenticate_listings(listings)
+        with ZipFile(analysis.LISTING_ARCHIVE) as archive:
+            actual=archive.namelist()
+        expected={row["raw_member"] for row in listings.values()}
+        analysis.validate_archive_members(actual,expected)
+        self.assertEqual(len(actual),406)
+
+    def test_duplicate_archive_member_name_is_rejected(self):
+        members=["eparses/0255_8115.json","eparses/0255_8120.json"]
+        expected=set(members)
+        with self.assertRaisesRegex(ValueError,"archive membership mismatch"):
+            analysis.validate_archive_members(members+[members[0]],expected)
 
     def test_actual_eparses_tile_bbox_intersects_juan_component(self):
         records,_=analysis.validate_capture_membership(self.capture)
