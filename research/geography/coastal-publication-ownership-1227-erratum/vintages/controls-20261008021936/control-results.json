@@ -1,0 +1,75 @@
+{
+  "method_id": "coastal-integrity-adversarial-controls",
+  "kind": "code",
+  "outcome": "passed",
+  "issue": 1381,
+  "traversal_names_rejected": 6,
+  "changed_input_rejected_before_output": true,
+  "stale_registry_rejected": true,
+  "duplicate_identity_rejected": true,
+  "incomplete_roster_rejected": true,
+  "occupied_target_sentinel_preserved": true,
+  "replacement_directory_and_foreign_sentinel_preserved": true,
+  "ordinary_partial_write_removed_only_owned_output": true,
+  "partial_command_product_retained_in_moved_original_directory": true,
+  "directory_replacement_failure_evidence": {
+    "fault": "injected after actual first partial product write",
+    "owned_directory_identity_before_replacement": [
+      16777231,
+      185427888
+    ],
+    "replacement_directory_identity_after_cleanup": [
+      16777231,
+      185427890
+    ],
+    "replacement_directory_identity_before_cleanup": [
+      16777231,
+      185427890
+    ],
+    "replacement_sentinel": {
+      "path": "foreign-sentinel",
+      "bytes": 29,
+      "sha256": "4409f53a295b1a838f6e32b8f36718b4e7408989bafbab2bfec71a5386454d59",
+      "preserved": true
+    },
+    "ordinary_partial_write": {
+      "attempted_bytes": 16,
+      "attempted_sha256": "43132e6137dc686772bf6ee6da4d23a604608412328957f78c96af46f965c52b",
+      "own_output_removed": true
+    },
+    "moved_original_partial": {
+      "path": "original-owned-directory/partial-product.json",
+      "bytes": 16,
+      "sha256": "43132e6137dc686772bf6ee6da4d23a604608412328957f78c96af46f965c52b",
+      "hex": "6120626f756e64656420706172746961",
+      "preserved": true
+    }
+  },
+  "materialized_helper_drift_marker_present": true,
+  "altered_helper_fixture": {
+    "path": "research/geography/coastal-publication-ownership-1227-erratum/validation/fixtures/code-drift-checkout/scripts/evidence/geometry.py",
+    "bytes": 5320,
+    "sha256": "65f94d5a9b877075ad2e73c1d8cc02e268782907e3e45ca090b4cc432e28b831",
+    "pinned_executed_sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+  },
+  "executed_helper_is_pinned_git_blob": true,
+  "actual_positive_products_match_retained_baseline": true,
+  "scientific_negative_axis_control_in_retained_product": {
+    "method_id": "coastal-comparison-guarded-screen",
+    "kind": "negative-control",
+    "outcome": "passed",
+    "description": "Swapped longitude/latitude axis order is rejected by a >1,000 km projected-coordinate separation.",
+    "correct_xy_m": [
+      964862.802509,
+      5180102.328839
+    ],
+    "swapped_xy_m": [
+      4341882.61129,
+      1269436.743538
+    ],
+    "separation_m": 5166968.948
+  },
+  "limits": [
+    "The retained comparison remains a statistical screen; it does not establish legal boundaries or shoreline completeness."
+  ]
+}

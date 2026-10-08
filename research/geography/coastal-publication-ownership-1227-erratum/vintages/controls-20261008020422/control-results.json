@@ -1,0 +1,35 @@
+{
+  "method_id": "coastal-integrity-adversarial-controls",
+  "kind": "code",
+  "outcome": "passed",
+  "issue": 1381,
+  "traversal_names_rejected": 6,
+  "changed_input_rejected_before_output": true,
+  "stale_registry_rejected": true,
+  "duplicate_identity_rejected": true,
+  "incomplete_roster_rejected": true,
+  "occupied_target_sentinel_preserved": true,
+  "replacement_directory_and_foreign_sentinel_preserved": true,
+  "partial_command_product_retained_in_moved_original_directory": true,
+  "materialized_helper_drift_marker_present": true,
+  "executed_helper_is_pinned_git_blob": true,
+  "actual_positive_products_match_retained_baseline": true,
+  "scientific_negative_axis_control_in_retained_product": {
+    "method_id": "coastal-comparison-guarded-screen",
+    "kind": "negative-control",
+    "outcome": "passed",
+    "description": "Swapped longitude/latitude axis order is rejected by a >1,000 km projected-coordinate separation.",
+    "correct_xy_m": [
+      964862.802509,
+      5180102.328839
+    ],
+    "swapped_xy_m": [
+      4341882.61129,
+      1269436.743538
+    ],
+    "separation_m": 5166968.948
+  },
+  "limits": [
+    "The retained comparison remains a statistical screen; it does not establish legal boundaries or shoreline completeness."
+  ]
+}
