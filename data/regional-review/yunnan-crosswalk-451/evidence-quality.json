@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "issue": 914,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B22092438679853",
+    "gb:CHN:ADM2:17275852B6036299829891",
+    "gb:CHN:ADM2:17275852B42043031438117",
+    "gb:CHN:ADM2:17275852B47269106522129",
+    "gb:CHN:ADM2:17275852B72941365568170",
+    "gb:CHN:ADM2:17275852B76506385801060",
+    "gb:CHN:ADM2:17275852B98994351670446"
+  ],
+  "subject_ids_sha256": "8384175f05ae2636a5e18d92881f688082b2e611a0e0ce6dede8ac4712136d43",
+  "baseline": {
+    "commit": "6d15b0e12de2e65c84ceab334ebc3e78aa0b46cb",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "bytes": 7618692,
+        "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "baseline-hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline-world-index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "pin_files": {
+      "baseline-hierarchy": "data/hierarchy.json",
+      "baseline-world-index": "data/world-index.json"
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B22092438679853": {
+        "version": 1,
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "properties": [
+          "shapeID"
+        ],
+        "id_template": "gb:CHN:ADM2:{shapeID}"
+      },
+      "gb:CHN:ADM2:17275852B6036299829891": {
+        "version": 1,
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "properties": [
+          "shapeID"
+        ],
+        "id_template": "gb:CHN:ADM2:{shapeID}"
+      },
+      "gb:CHN:ADM2:17275852B42043031438117": {
+        "version": 1,
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "properties": [
+          "shapeID"
+        ],
+        "id_template": "gb:CHN:ADM2:{shapeID}"
+      },
+      "gb:CHN:ADM2:17275852B47269106522129": {
+        "version": 1,
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "properties": [
+          "shapeID"
+        ],
+        "id_template": "gb:CHN:ADM2:{shapeID}"
+      },
+      "gb:CHN:ADM2:17275852B72941365568170": {
+        "version": 1,
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "properties": [
+          "shapeID"
+        ],
+        "id_template": "gb:CHN:ADM2:{shapeID}"
+      },
+      "gb:CHN:ADM2:17275852B76506385801060": {
+        "version": 1,
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "properties": [
+          "shapeID"
+        ],
+        "id_template": "gb:CHN:ADM2:{shapeID}"
+      },
+      "gb:CHN:ADM2:17275852B98994351670446": {
+        "version": 1,
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "properties": [
+          "shapeID"
+        ],
+        "id_template": "gb:CHN:ADM2:{shapeID}"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-2017-chn-adm2",
+      "url": "https://www.geoboundaries.org/",
+      "role": "Original boundary dataset and metadata retained by ancestor packet #451; attribution/citation preserved there.",
+      "vintage": "Declared 2017 boundary year; upstream update 2023-01-19/build 2023-12-12 per retained metadata.",
+      "retrieved_at": "2026-10-08 (ancestor bytes; original retrieval documented in #451 source register)",
+      "license": {
+        "status": "redistributable",
+        "terms": "Retained metadata declares ODC PDDL 1.0; cite geoBoundaries and preserve source attribution. Upstream originating source/license chain is not independently verified."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read exact ancestor path data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson at baseline commit 6d15b0e12de2e65c84ceab334ebc3e78aa0b46cb; expected SHA-256 2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34. Do not replace source vintage.",
+      "limit": "No official codes or parent IDs in feature properties; legal origin and exact county-boundary accuracy remain unresolved.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "qujing-government-history",
+      "url": "https://www.qj.gov.cn/html/2013/qjdsj_0419/3135.html",
+      "role": "Municipal history of 1997 legal reorganization and township successor descriptions.",
+      "vintage": "Page dated 2013-04-19; describes 1997 and 1998 events.",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Government page; page-specific reuse terms not inspected. Cite only; original bytes not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "HTTP GET the exact URL; save response bytes, retrieval timestamp and SHA-256 before any redistribution.",
+      "limit": "Historical text supports entity succession but supplies no target feature polygon or contemporaneous legal boundary map.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1997,
+        "to": 1999
+      }
+    },
+    {
+      "id": "yunnan-mile-notice-2013-29",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/%E4%BA%91%E5%8D%97%E7%9C%81%E4%BA%BA%E6%B0%91%E6%94%BF%E5%BA%9C%E5%85%B3%E4%BA%8E%E6%92%A4%E9%94%80%E5%BC%A5%E5%8B%92%E5%8E%BF%E8%AE%BE%E7%AB%8B%E5%BC%A5%E5%8B%92%E5%B8%82%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+      "role": "Provincial legal notice establishing Mile City and explicitly assigning former county administrative area.",
+      "vintage": "Yunzhengfa [2013] 29; dated 2013-02-18.",
+      "retrieved_at": "2026-10-08 (PDF text inspected via indexed document; bytes not retained)",
+      "license": {
+        "status": "unknown",
+        "terms": "Government legal text; no document-specific reuse terms inspected. Request or restore original PDF and check terms before redistribution."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "GET the exact encoded PDF URL, retain unchanged PDF bytes and calculate SHA-256; inspect both pages including boundary-line clause.",
+      "limit": "Entity continuity is explicit; no comparison of target source geometry to legally delimited polygon/map.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2013,
+        "to": 2014
+      }
+    },
+    {
+      "id": "yunnan-civil-affairs-current-roster",
+      "url": "https://ynmz.yn.gov.cn/bmfw/xzqh/xzqhsz/",
+      "role": "Current county-level administrative roster and Qujing count.",
+      "vintage": "Page indexed as current 2025-09-30; direct retrieval timed out.",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Not established; retrieve page/attachments and inspect terms."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retry GET from official Yunnan Civil Affairs site, save complete page and linked tables with response headers/date and SHA-256.",
+      "limit": "Search indexing only; not relied on for an individual feature-to-code/map assignment.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "state-council-zhaotong-2001-gazette",
+      "url": "https://www.gov.cn/gongbao/2001/issue_67/",
+      "role": "Official Gazette issue index for 国函〔2001〕6号 successor crosswalk.",
+      "vintage": "2001 State Council approval; exact page/document not retrieved (403).",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Official Gazette reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore the exact 国函〔2001〕6号 page/PDF from the official Gazette archive or request from gov.cn; preserve bytes/hash and inspect the boundary/area text.",
+      "limit": "Index access failure means this work does not assert target polygon equals Zhaoyang District.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2001,
+        "to": 2002
+      }
+    },
+    {
+      "id": "wenshan-mengzi-2010-approvals",
+      "url": "https://ynmz.yn.gov.cn/bmfw/xzqh/qhdm/",
+      "role": "Official archive lead for current administrative names/codes and 2010 approvals.",
+      "vintage": "2010 approvals; current code page, direct retrieval timed out.",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Not established; inspect official archive and publication terms."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Request 民函〔2010〕295号 and 民函〔2010〕219号 and official code table from Yunnan Civil Affairs/State Council archives; save exact documents, dates, hashes and terms.",
+      "limit": "Only secondary transcription leads found; no primary text/map retained, so no official crosswalk is concluded.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2010,
+        "to": 2011
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/yunnan-crosswalk-451/README.md",
+      "bytes": 7669,
+      "sha256": "75e2e1065c8e5cd6f5816e63e38940d187083f7fb86a042c1f8e61ff61e4c75b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/yunnan-crosswalk-451/reproduce_crosswalk.py",
+      "bytes": 2728,
+      "sha256": "7d1df6dd37a0f0e3db801030cd3c0fd9a3124a6ac704223a69d2850733e61fac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/yunnan-crosswalk-451/source-findings.json",
+      "bytes": 12815,
+      "sha256": "75b854d235b75557acf91b0220f691c35b6c6d4dcde720175c10c8de5e94338b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-review",
+      "kind": "source",
+      "description": "Parse the retained geoBoundaries FeatureCollection; assert exact target IDs; compute each geometry validity/type/components/bounds and boundary intersections against all source features.",
+      "software": "Python 3; Shapely 2.x; standard-library json/hashlib",
+      "units": "source coordinate degrees for bounds and raw boundary intersection lengths; no geodesic interpretation"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "All seven requested native IDs occur once in the retained 2017 source; source-only geometry checks do not establish territorial identity or legal boundaries.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-2017-chn-adm2"
+      ]
+    },
+    {
+      "text": "Qujing historical restructuring explains the entity-level transition from county-level Qujing City to Qilin and Zhanyi, but source polygon correspondence to either successor or their union remains unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "qujing-government-history"
+      ]
+    },
+    {
+      "text": "Mile County to Mile City administrative-area continuity is stated in the 2013 provincial notice; polygon identity remains unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "yunnan-mile-notice-2013-29"
+      ]
+    },
+    {
+      "text": "The exact territorial crosswalk and legal boundary correctness of all seven source geometries remain unresolved pending primary codes and adequate official map/polygon evidence.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-2017-chn-adm2",
+        "yunnan-civil-affairs-current-roster",
+        "state-council-zhaotong-2001-gazette",
+        "wenshan-mengzi-2010-approvals"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python data/regional-review/yunnan-crosswalk-451/reproduce_crosswalk.py > /tmp/yunnan-crosswalk-914.json",
+    "cmp /tmp/yunnan-crosswalk-914.json data/regional-review/yunnan-crosswalk-451/source-findings.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/yunnan-crosswalk-451/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/yunnan-crosswalk-451/reproduce_crosswalk.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/yunnan-crosswalk-451/source-findings.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ]
+}
