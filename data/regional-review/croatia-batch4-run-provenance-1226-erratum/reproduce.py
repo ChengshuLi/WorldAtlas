@@ -89,7 +89,7 @@ def contract_snapshot(raw: bytes) -> tuple[dict, dict, dict[str, str]]:
         raise ValueError('captured issue ownership or geography mode changed')
     if spec.get('max_prs') != 1 or spec.get('depends_on') != [1194]:
         raise ValueError('captured issue PR budget or completed prerequisite changed')
-    if quality.get('manifest_path') != str(OWNED.relative_to(ROOT) / 'evidence-quality.json'):
+    if quality.get('manifest_path') != str(OLD_PACKET / 'evidence-quality.json'):
         raise ValueError('captured issue evidence manifest path changed')
     pins = quality.get('pins')
     if not isinstance(pins, dict) or len(pins) != 66:
@@ -438,7 +438,7 @@ def main() -> None:
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,62}', args.run_id):
         raise SystemExit('run ID must use 1-63 ASCII letters, digits, underscores or hyphens')
-    record = run(f'evidence/runs/2026-10-06/{args.run_id}')
+    record = run(f'evidence/runs/{args.run_id}')
     print(json.dumps(record, ensure_ascii=False, sort_keys=True))
 
 
