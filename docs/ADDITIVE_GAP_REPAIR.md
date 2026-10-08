@@ -71,3 +71,37 @@ inverses checked. That is an uncommitted module-harness compatibility check,
 **not** the cold frozen CLI, all-world processing, source approval, release or
 publication qualification. The focused issue is #1523; #1202 remains the global
 repair goal.
+
+## Current complete execution and sparse release boundary
+
+Two complete cold executions now process all 71 original shards and reconcile
+all 95,173 original ordered IDs through eight bounded groups per execution and
+a complete parent join. The original ordered ID/feature digest is
+`ab1d9b3f9450805219a418c670278dd351b8b9b97b76ce2cd5164058dbf31224`.
+Both inventories contain two already-resolved original #1295 components, 411
+source-relative water rejections, and 94,760 awaiting-evidence components. No
+new component is declared eligible or repaired. Every corresponding complete
+encoded and decoded inventory agrees between executions. The 160 actual jobs
+and their original executing commits are retained in
+`complete-inventory-operating-journals.json.gz`; decoded originals and full
+source inverses remain necessary for acceptance and delivery.
+
+A selected additive release uses `retained-native-base-plus-delta-v1`, with
+separate exact base and effective references and a whole-pinned bounded JSON
+patch asset. The effective source digest includes every complete base and
+addition primitive. `loadGeography` loads the original base assets against the
+base reference, authenticates the complete effective feature digest and patch,
+and exposes the effective native table only after all checks finish. Missing
+release metadata or an unsupported additive feature rejects rather than falling
+back to base geometry. `baseline_release_sha256` in a primitive binds the base
+footprint digest; immutable selection-manifest provenance is a separate producer
+input. The hierarchy and stable reference owner identities cannot change.
+
+The sparse patch lists only previously unassigned integer intervals. Conflicting
+or already-assigned cells reject; all other original packed words and owner cells
+remain unchanged. Rendering and picking use the same resulting standard packed
+native table. This consumer boundary authenticates a released patch; it does not
+approve its source evidence. The producer must still prove common-rule source
+eligibility, complete current owner exclusion, full addition pointsets, and
+explicit zero-cell/idempotent dispositions before creating a release. No current
+release is changed merely by adding these reader and control paths.

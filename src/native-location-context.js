@@ -158,7 +158,9 @@ export async function compileNativeLocationContext({referenceFeatures, features,
     });
     if (y % 4096 === 0) await yieldTask();
   }
-  return {grid: {version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
+  const effectiveDigest=context.features.some(feature=>Object.hasOwn(feature,'additiveFootprint'))
+    ?(await nativeSourceDigest(context.features,{signal,onProgress})).sha256:undefined;
+  return {grid: {...(effectiveDigest?{effective_footprint_sha256:effectiveDigest}:{}),version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
     context, accounting: {rows: base.size, recomputedRows, reusedRows: base.size - recomputedRows,
       sourceDigest, ownerMapping: context.owners, rule: 'exact-native-affected-rows-and-stable-reference-reuse-v1'}};
 }
