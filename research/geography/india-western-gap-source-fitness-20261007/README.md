@@ -74,9 +74,13 @@ The metadata’s advertised `admUnitCount` matches the corresponding `sourceData
 
 By source-name multiset, `Charki Dadri` is present in the ADM2 `sourceData` archive and absent from the retained ADM2 product. Fourteen ADM3 names present in the source archive are absent from the retained ADM3 product: `Bironkhal`, `Charakonda`, `Chilpched`, `Gadiguda`, `Kalol`, `Kaloor Thimmandoddi`, `Kilpennathur`, `Lm`, `Mamdot`, `Moosapet`, `Rajoli`, `Sanawad`, `Suangdoh`, and `Udainagar`.
 
-The `sourceData` ADM3 archive is a shapefile DBF with `Name` records, not stable release `shapeID` values. These comparisons therefore reconcile row counts and source-name multisets, not authoritative identity across datasets; repeated names may occur. The pinned artifacts establish the observed advertised-to-retained differences but do not document which processing operation explains them. No geometric or physical-surface inference follows from these count checks. See `feature-count-reconciliation/runs/reconciliation-20261008-03/report.json` for the bounded input admission, complete name deltas, and exact file inventory.
+The `sourceData` ADM3 archive is a shapefile DBF with `Name` records, not stable release `shapeID` values. These comparisons therefore reconcile row counts and source-name multisets, not authoritative identity across datasets; repeated names may occur. The pinned artifacts establish the observed advertised-to-retained differences but do not document which processing operation explains them. No geometric or physical-surface inference follows from these count checks. See `feature-count-reconciliation/runs/reconciliation-20261008-05/report.json` for the bounded input admission, complete name deltas, and exact file inventory.
 
 The comparisons use the [geoBoundaries India sourceData ADM2 archive](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/sourceData/gbOpen/IND_ADM2.zip) and [ADM3 archive](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/sourceData/gbOpen/IND_ADM3.zip). Both product metadata records the ODbL 1.0 license; the license text URI is listed above.
+
+## Inherited and recomputed coverage reconciliation
+
+The row-by-row [inherited-to-recomputed coverage reconciliation](vintages/coverage-screen-2026-10-08-04/inherited-recomputed-reconciliation.csv) joins all 18 inherited component records to exact-intersection observations from the recomputed ADM2 and ADM3 screens. Each row preserves inherited mapped-land support, physical status, and authority alongside the recomputed source feature IDs, names, and pair counts. Both products have at least one exact-intersection observation for every member. These coverage observations do not resolve inherited physical status, authority, observation date, or processing cause.
 
 ## Sources and method
 

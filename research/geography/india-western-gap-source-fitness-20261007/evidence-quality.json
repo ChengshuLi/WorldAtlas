@@ -744,8 +744,8 @@
   "outputs": [
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/README.md",
-      "bytes": 11654,
-      "sha256": "f5416391cffac85f097d67a41725760ed1689080974d60662f281035c3da4fa3",
+      "bytes": 12323,
+      "sha256": "0f071b0a535d12592e453692ccc1f7bd2ebb77c3985c06e06eb27e81109e9ce8",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     },
@@ -1182,29 +1182,36 @@
     },
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py",
-      "bytes": 20891,
-      "sha256": "2d7fa050858be47e692c16c835177e7bb61527120bc1fd48a764a94f2908e6e2",
+      "bytes": 20917,
+      "sha256": "fb21aea72238628f4b5de7177ac3e14e0263ae6b2ea6a998bd17f6d7d03eefc7",
       "hash_kind": "file-bytes",
       "role": "method-code"
     },
     {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/report.json",
       "bytes": 9411,
       "sha256": "d204241ef36a719d3f809bbedc28b7aae1f9b02fdb92fe6e61e41ca560c9edb0",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/publication.json",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/publication.json",
       "bytes": 305,
-      "sha256": "e315567935d3a6984dbd3a282f51dcdd89e41af3180aa0c8995ff71115412cb6",
+      "sha256": "b8c5f71f0d684c4acc494a653b3e4e0a28a6e21cc5dac5c84d35204199a38a7e",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/evidence-quality.json",
-      "bytes": 10939,
-      "sha256": "195360afbd8549397394cd5b2b38e180c81519220a87be8e2a4249f4489bbccb",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/evidence-quality.json",
+      "bytes": 11106,
+      "sha256": "fea9dea5e2f1e1b23360a3d82b438d974f668bc85a2a9368be02a167fb733bb1",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-04/inherited-recomputed-reconciliation.csv",
+      "bytes": 13352,
+      "sha256": "9d824fedf7839e32129222fd6c9498cf33df3ebd52b3baa8a466e7662d9e915e",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     }
@@ -1997,12 +2004,12 @@
     },
     {
       "metric_id": "adm2_sourceData_record_count",
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/report.json",
       "json_pointer": "/products/ADM2/sourceData_archive_record_count"
     },
     {
       "metric_id": "adm3_sourceData_record_count",
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/report.json",
       "json_pointer": "/products/ADM3/sourceData_archive_record_count"
     }
   ],
@@ -2036,7 +2043,7 @@
         },
         {
           "metric_id": "adm2_retained_feature_count",
-          "line": 32,
+          "line": 71,
           "template": "| India ADM2: Retained source features | {value} | features |",
           "decimals": 0
         },
@@ -2114,13 +2121,13 @@
         },
         {
           "metric_id": "adm3_retained_feature_count",
-          "line": 45,
+          "line": 73,
           "template": "| India ADM3: Retained source features | {value} | features |",
           "decimals": 0
         },
         {
           "metric_id": "adm3_advertised_feature_count",
-          "line": 46,
+          "line": 72,
           "template": "| India ADM3: Advertised source features | {value} | features |",
           "decimals": 0
         },
@@ -2222,19 +2229,19 @@
         },
         {
           "metric_id": "adm2_retained_feature_count",
-          "line": 72,
+          "line": 71,
           "template": "| ADM2 retained simplified GeoJSON | {value} | features |",
           "decimals": 0
         },
         {
           "metric_id": "adm3_advertised_feature_count",
-          "line": 73,
+          "line": 72,
           "template": "| ADM3 `sourceData` archive records | {value} | features |",
           "decimals": 0
         },
         {
           "metric_id": "adm3_retained_feature_count",
-          "line": 75,
+          "line": 73,
           "template": "| ADM3 retained simplified GeoJSON | {value} | features |",
           "decimals": 0
         },
@@ -2295,6 +2302,30 @@
     },
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-04/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-04/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-04/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/report.json",
       "status": "added"
     },
     {
@@ -2499,6 +2530,10 @@
     },
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-04/adm3-001.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-04/inherited-recomputed-reconciliation.csv",
       "status": "added"
     },
     {

@@ -14,6 +14,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 PACKET = HERE.parent
 ROOT = pathlib.Path(__file__).resolve().parents[4]
 SOURCES = HERE / 'sources'
+RUNS = HERE / 'runs'
 SCREEN = PACKET / 'vintages' / 'coverage-screen-2026-10-08-04'
 BASELINE = '64770c1a8c82c3626344d3d5ce322cdcb839ea2e'
 LFS = {
@@ -149,9 +150,8 @@ def main():
     parser.add_argument('--output-dir', required=True, help='New, nonexistent output directory under this packet')
     args = parser.parse_args()
     output_dir = pathlib.Path(args.output_dir).resolve()
-    if ROOT not in output_dir.parents or output_dir.exists():
-        raise ValueError('Output directory must be a fresh, nonexistent directory inside this packet')
-    output_dir.mkdir(parents=True, exist_ok=False)
+    if RUNS not in output_dir.parents or output_dir.exists():
+        raise ValueError('Output directory must be a fresh, nonexistent directory under this method’s runs directory')
     manifest = json.loads((PACKET / 'evidence-quality.json').read_text())
     source_manifest = manifest
     admin_raw, admin_desc = baseline_blob('data/administrative-sources.json', source_manifest)
@@ -186,6 +186,7 @@ def main():
     phase_total = admitted_raw + admitted_decoded
     if phase_total > 256 * 1024 * 1024:
         raise ValueError(f'Count reconciliation phase exceeds 256 MiB before reading inputs: {phase_total} bytes')
+    output_dir.mkdir(parents=True, exist_ok=False)
 
     for level in ('ADM2', 'ADM3'):
         archive_path = SOURCES / f'IND-{level}.zip'
@@ -288,7 +289,7 @@ def main():
       ],
       'outputs':outputs,
       'methods':[{'id':'release-count-reconciliation','kind':'source','description':report['method'],'software':'Python 3.12; gzip, zipfile, incremental JSON parser, SHA-256','units':'features or source rows; source-name multiset differences'}],
-      'commands':['python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py','node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/evidence-quality.json'],
+      'commands':[f'python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py --output-dir {output_dir.relative_to(ROOT)}',f'node scripts/evidence-quality.mjs {output_dir.relative_to(ROOT)}/evidence-quality.json'],
       'metrics':[
         {'id':'adm2_sourceData_record_count','value':product_rows['ADM2']['sourceData_archive_record_count'],'unit':'features','vintage':'baseline','input_sha256':source_paths['ADM2_source_archive'][0]['sha256'],'input_set_sha256':inputs_sha,'evaluation_commit':BASELINE,'title':'ADM2 sourceData archive features'},
         {'id':'adm3_sourceData_record_count','value':product_rows['ADM3']['sourceData_archive_record_count'],'unit':'features','vintage':'baseline','input_sha256':source_paths['ADM3_source_archive'][0]['sha256'],'input_set_sha256':inputs_sha,'evaluation_commit':BASELINE,'title':'ADM3 sourceData archive features'},
