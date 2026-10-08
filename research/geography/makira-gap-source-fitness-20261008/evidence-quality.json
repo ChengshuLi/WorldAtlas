@@ -392,7 +392,8 @@
       "id": "custodied_pointset_and_catalogue_metadata_review",
       "description": "Matched all 15 exact subject IDs exactly once to pinned original components-v3 GeoJSON FeatureCollections using the custody index; checked source payload raw and uncompressed bytes and compared each original pointset bbox with the issue locator. Reviewed published provider/resource and official STAC metadata. No candidate item footprint overlay or raster pixel review was performed.",
       "software": "manual metadata review; Node.js 24.19.0; scripts/evidence-quality.mjs read-only baseline byte verifier",
-      "units": "WGS84 lon/lat coordinate extents as extracted from original GeoJSON pointsets; approximate bbox spans in metres retained from the source scope as planning cues"
+      "units": "WGS84 lon/lat coordinate extents as extracted from original GeoJSON pointsets; approximate bbox spans in metres retained from the source scope as planning cues",
+      "kind": "source"
     }
   ],
   "metrics": [],
