@@ -44,6 +44,7 @@ The per-component geometry, exact residuals, full source contacts, historical bb
 - Current official geoBoundaries NOR ADM2, represented year 2013, 431 features, CC BY 4.0; API response and simplified GeoJSON bytes are retained and hash-bound.
 - Current official geoBoundaries NOR ADM1, represented year 2022, 11 features, CC BY 4.0; API response and simplified GeoJSON bytes are retained and hash-bound.
 - The exact current Atlas target members and their recorded source/parent metadata are from baseline commit `088ab05aeb16ddfa8f0c43e596533f3f11d5fcec`.
+- The issue’s evidence contract baseline-pins the pre-existing simplified ADM2 product. The simplified ADM1 product was newly captured here, so its bytes remain bound as a retained source rather than being misrepresented as a baseline-tree file; the exact issue-body contract correction and readback are preserved in `vintages/evidence-pin-contract-correction-20261008/`.
 - Parent linkage uses the issue’s recorded `framework:province:nordland:03c9b4c95d9e` and the unique ADM1 product feature named `Nordland`. The ADM2 simplified product has no parent property, so the linkage basis is explicitly recorded.
 - Runtime: Python 3.12.14, Shapely 2.1.2, GEOS 3.13.1. The overlay records the exact installed Shapely distribution and Python executable hashes.
 - Complete phase input plus output reserve: 104,428,543 bytes of a 268,435,456-byte cap. Maximum process RSS was 205,635,584 bytes; free storage at run admission was 15,496,110,080 bytes; host memory was 8 GiB. Local workspace admission passed before the run.

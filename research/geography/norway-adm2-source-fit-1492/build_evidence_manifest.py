@@ -202,7 +202,7 @@ def main():
         "version": 1, "issue": 1492, "lane": "geography", "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612",
         "subject_ids": selected_ids, "subject_ids_sha256": subjects_hash(selected_ids),
         "component_ids": selected_ids, "component_ids_sha256": subjects_hash(selected_ids),
-        "baseline": {"commit": COMMIT, "files": list(by_path.values()), "subject_files": subject_map},
+        "baseline": {"commit": COMMIT, "files": list(by_path.values()), "subject_files": subject_map, "pins": {"nor_adm2_simplified": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e"}, "pin_files": {"nor_adm2_simplified": "research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson"}},
         "sources": sources, "outputs": out_descriptors,
         "methods": [{"id": "norway-exact-component-source-overlay", "kind": "geography",
                      "description": "Exact source-subject, parent, current Atlas target, strict no-loss, and contact overlays for exactly 15 components. Full 400-member family and 36-neighbor IDs are preserved; no repair or tolerance is used.",
