@@ -232,7 +232,7 @@
   "outputs": [
     {"path":"research/geography/japan-report-integrity-1342-20261008/README.md","bytes":6718,"sha256":"0aca28322864b2625e6456962d4d88ec15e7bf7238e60c45470a4fcb5fbd2e07","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py","bytes":19295,"sha256":"2c611cb68c3e69a7a9a29640bc05f1bc4701d2b3641b7530729e84d72990242b","hash_kind":"file-bytes","role":"research-output"},
-    {"path":"research/geography/japan-report-integrity-1342-20261008/methods/build_evidence_quality.py","bytes":12066,"sha256":"27a1f6ea07922d9c207da0966c82bc270b878fa78a992cab004a96b3b3979fa7","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/methods/build_evidence_quality.py","bytes":12461,"sha256":"59b66851798baab20820168f5994c68fbbb415643bbaf596f110e474d118a0c2","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/tests/test_reconcile.py","bytes":8723,"sha256":"975cd88f526e6f32cb277e9548947769964253557423e1da70c4d7578502d7aa","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/two-run-equality.json","bytes":924,"sha256":"2ae63a08aa02b1ff833ad633b10c78c7b4869c6221c614170293e7561abfbb68","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/run-seven-eight-preliminary-equality.json","bytes":970,"sha256":"1eba33fba8e8c3709b2958063e52cf3a66de89d4722b8c306fb5068bb7b5222c","hash_kind":"file-bytes","role":"research-output"},
@@ -253,6 +253,128 @@
     {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/source-fitness-table.json","bytes":107649,"sha256":"eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/territorial-context.json","bytes":12963,"sha256":"f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/validation.json","bytes":1384,"sha256":"c9f68c91be32d18aab4aa60280f31d0a1240d0222507f0260f14141f84db89e9","hash_kind":"file-bytes","role":"research-output"}
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/methods/build_evidence_quality.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/final-two-run-equality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-final-stderr.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-final.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-pinned-helper-stderr.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-pinned-helper.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-stderr.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/run-seven-eight-preliminary-equality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/superseded-vintages.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/two-run-equality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/tests/test_reconcile.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/source-fitness-table.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/territorial-context.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/source-fitness-table.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/territorial-context.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/validation.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/superseded-history.json.gz",
+      "status": "added",
+      "previous_path": null
+    }
   ],
   "methods": [
     {

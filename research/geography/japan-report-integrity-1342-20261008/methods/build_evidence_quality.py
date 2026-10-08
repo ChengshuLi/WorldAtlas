@@ -61,6 +61,11 @@ for vintage in ('run-nine-20261008','run-ten-20261008'):
     d=ROOT/OWN/'vintages'/vintage
     if d.exists():
         for name in sorted(x.name for x in d.iterdir() if x.is_file()): m['outputs'].append(file_record(OWN+'/vintages/'+vintage+'/'+name))
+# The trusted hosted premerge gate binds every PR path to the evidence manifest.
+# This packet is additive: all 23 non-manifest changed files are whole-file
+# outputs above, and the manifest itself is the remaining added path.
+m['change_receipts']=[{'path':path,'status':'added','previous_path':None}
+    for path in sorted([row['path'] for row in m['outputs']]+[OWN+'/evidence-quality.json'])]
 source_hash='2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804'
 validation=json.loads((ROOT/OWN/'vintages/run-nine-20261008/validation.json').read_text())
 m['methods']=[{'id':'pinned-report-transfer','kind':'geography','description':'Authenticate original packet/scope/target geometry and complete retained overlay roster, then bind every MLIT component area by source code, record ordinal/number, component identity and intersection geometry hash. No native-source geometry recalculation.','software':'Python 3.7.3 runtime in this workspace; standard library JSON/hashlib/subprocess and baseline-pinned immutable.py; report-level assertions only.','units':'Exact retained source values in JGD2011 geographic square degrees; not square metres. Identity/count checks are counts, not geographic truth.','axis_order':'longitude-latitude','crs':'MLIT retained product EPSG:6668 JGD2011 geographic; no coordinate operation executed.','area_method':'Transfer of retained overlay intersection_area_jgd2011_degrees2 by exact source/target identity; no area recomputation.','distance_method':'Not calculated.'}]
