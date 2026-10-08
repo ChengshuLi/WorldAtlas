@@ -61,6 +61,8 @@ The machine-readable `r7-execution-budget.json` binds the recorded r7 phase char
 
 The manifest continues to report `limited` for the declared boundary-authority and undated-context gaps.
 
+This packet records one full source/GIS execution; a second full spatial replay was not performed, so cross-run repeatability is not claimed. The small reporting-writer preflight ran in a credential-free environment: `build_run_record.py` recreated the same retained record at a fresh output path, and both it and `build_manifest.py` rejected existing sentinel files, dangling-symlink destinations, and traversal paths without changing the sentinels. A fresh manifest output passed the local evidence-quality check. These writer checks do not independently re-establish the geographic result.
+
 ## Findings
 
 The qualified r10 result confirms all seven candidates are valid polygons, each wholly covered by exactly one named ecoregion in each edition: ECO15 “Banks Island Lowland” and ECO25 “Foxe Basin Plain.” The four authenticated neighbor scans cover 49,625 active features in four pairwise-disjoint ID rosters. The v2.2 and native source envelopes are not geometrically identical; their per-candidate symmetric differences are recorded. Coverage agreement does not prove that the two editions have the same coastline or date-specific authority.

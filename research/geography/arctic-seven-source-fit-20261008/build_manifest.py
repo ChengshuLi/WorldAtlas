@@ -1,11 +1,39 @@
 #!/usr/bin/env python3
 """Build the issue-1481 evidence manifest from its reviewed contract and packet bytes."""
-import hashlib,json,re,subprocess
+import argparse,hashlib,json,re,subprocess,os,stat
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]; P=Path(__file__).resolve().parent
 BASE='960ba2f4fef0fc9881b8a106a944e6e3874e98c9'
+OUTPUT_MAX=4*1024*1024
 GIT_EXECUTABLE=None
 def sha(b): return hashlib.sha256(b).hexdigest()
+def admit_output(value):
+ if not isinstance(value,str) or not value or Path(value).is_absolute() or '\\' in value or any(part in ('','.','..') for part in value.split('/')):
+  raise ValueError('Manifest output must be a contained relative path')
+ target=P/value
+ try:target.absolute().relative_to(P.absolute())
+ except ValueError:raise ValueError('Manifest output escapes the packet')
+ for ancestor in [target,*target.parents]:
+  if ancestor==P.parent:break
+  if ancestor.is_symlink():raise ValueError('Symlink in manifest output path')
+ if target.is_symlink():raise ValueError('Manifest destination cannot be a symlink')
+ if not target.exists():return target,None
+ if not target.is_file():raise ValueError('Manifest destination must be an ordinary file')
+ fd=os.open(target,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0))
+ with os.fdopen(fd,'rb') as stream:
+  info=os.fstat(stream.fileno())
+  if not stat.S_ISREG(info.st_mode) or info.st_size>OUTPUT_MAX:raise ValueError('Existing manifest output is not a bounded regular file')
+  existing=stream.read(OUTPUT_MAX+1)
+ if len(existing)>OUTPUT_MAX:raise ValueError('Existing manifest output exceeds its bound')
+ return target,existing
+def verify_unchanged(target,original):
+ if original is None:return
+ fd=os.open(target,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0))
+ with os.fdopen(fd,'rb') as stream:
+  info=os.fstat(stream.fileno())
+  if not stat.S_ISREG(info.st_mode) or info.st_size>OUTPUT_MAX:raise ValueError('Manifest output changed during computation')
+  current=stream.read(OUTPUT_MAX+1)
+ if current!=original:raise ValueError('Manifest output changed during computation')
 def git(*args):
  global GIT_EXECUTABLE
  if GIT_EXECUTABLE is None:
@@ -20,6 +48,8 @@ def desc(path,raw=None,decoded=None):
  d={'path':(Path('research/geography/arctic-seven-source-fit-20261008')/path).as_posix(),'bytes':len(raw),'sha256':sha(raw),'hash_kind':'file-bytes'}
  if decoded is not None:d.update(uncompressed_bytes=len(decoded),uncompressed_sha256=sha(decoded))
  return d
+parser=argparse.ArgumentParser();parser.add_argument('--output',default='evidence-quality.json');args=parser.parse_args()
+target,existing_output=admit_output(args.output)
 body=(P/'issue-contract.md').read_text()
 match=re.search(r'<!-- worldatlas-work:v1\s*(\{.*?\})\s*-->',body,re.S); assert match
 contract=json.loads(match.group(1)); spec=contract['evidence_quality']; pins=spec['pins']
@@ -65,6 +95,7 @@ output_paths += [f'vintages/r7-fit/{name}' for name in [
  'candidate-decisions.json','proposed-additions.geojson','positive-control.json','negative-control.json',
  'execution-receipt.json','publication.json']]
 output_paths += ['native-tools-lock-r8.json','native-tools-lock-r8.sh',
+ 'native-tools-lock-r9.json','native-tools-lock-r9.sh',
  'phase-plan-r10.json','native-tools-lock-r10.json','native-tools-lock-r10.sh','r10-execution-budget.json']
 output_paths += [f'vintages/r10-native-extract/{name}' for name in [
  'native-archive-extraction.json','execution-receipt.json','publication.json']]
@@ -130,5 +161,11 @@ manifest={'version':1,'issue':1481,'lane':'geography','worker_id':'01a112c1-ac99
   {'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','outcome':'passed','scope':'decision-gate-unit-check-plus-cross-group-source-envelope-check','adverse_input_fixture':False,'evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r10-fit/negative-control.json'}],
  'conclusions':conclusions,'stages':{'research':'partial','implementation':'proposed','geographic_approval':'unapproved'},
  'commands':['bash research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh EXECUTION_COMMIT PLAN_SHA256 NATIVE_TOOLS_LOCK_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-{a,b,c,d} --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/build_run_record.py','python research/geography/arctic-seven-source-fit-20261008/build_manifest.py','node scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json']}
-(P/'evidence-quality.json').write_text(json.dumps(manifest,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n')
-print(json.dumps({'pins':len(pins),'baseline_files':len(files),'sources':len(sources),'outputs':len(outputs),'bytes':sum(x['bytes'] for x in files+outputs+source_files),'subject_hash':subject_hash}))
+raw=(json.dumps(manifest,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()
+if existing_output is not None:
+ if existing_output!=raw:raise FileExistsError('Preserve existing evidence-quality manifest')
+ verify_unchanged(target,existing_output)
+else:
+ if len(raw)>OUTPUT_MAX:raise ValueError('Evidence-quality manifest exceeds its output bound')
+ with target.open('xb') as stream:stream.write(raw)
+print(json.dumps({'pins':len(pins),'baseline_files':len(files),'sources':len(sources),'outputs':len(outputs),'bytes':sum(x['bytes'] for x in files+outputs+source_files),'subject_hash':subject_hash,'output':str(target)}))

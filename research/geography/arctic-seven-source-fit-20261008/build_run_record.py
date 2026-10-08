@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Bind the completed Arctic r6 phase reservations and output receipts."""
+"""Bind the completed Arctic r10 phase reservations and output receipts."""
 from __future__ import annotations
-import argparse, hashlib, json
+import argparse, hashlib, json, os, stat
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
@@ -9,6 +9,7 @@ PACKET=Path(__file__).resolve().parent
 CAP=268435456
 RECEIPT_RESERVE=4096
 EXECUTION_RECEIPT_MAX=16384
+OUTPUT_MAX=1024*1024
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def read(path):
@@ -19,8 +20,39 @@ def descriptor_check(row):
  raw=read(row['path'])
  if len(raw)!=row['bytes'] or sha(raw)!=row['sha256']:raise ValueError('Published output drift: '+row['path'])
  return raw
+def output_target(value):
+ if not isinstance(value,str) or not value or Path(value).is_absolute() or '\\' in value or any(part in ('','.','..') for part in value.split('/')):
+  raise ValueError('Run-record output must be a contained relative path')
+ target=PACKET/value
+ try:target.absolute().relative_to(PACKET.absolute())
+ except ValueError:raise ValueError('Run-record output escapes the packet')
+ for ancestor in [target,*target.parents]:
+  if ancestor==PACKET.parent:break
+  if ancestor.is_symlink():raise ValueError('Symlink in run-record output path')
+ return target
+def admit_output(value):
+ target=output_target(value)
+ if target.is_symlink():raise ValueError('Run record destination cannot be a symlink')
+ if not target.exists():return target,None
+ if not target.is_file():raise ValueError('Run record destination must be an ordinary file')
+ fd=os.open(target,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0))
+ with os.fdopen(fd,'rb') as stream:
+  info=os.fstat(stream.fileno())
+  if not stat.S_ISREG(info.st_mode) or info.st_size>OUTPUT_MAX:raise ValueError('Existing run-record output is not a bounded regular file')
+  existing=stream.read(OUTPUT_MAX+1)
+ if len(existing)>OUTPUT_MAX:raise ValueError('Existing run-record output exceeds its bound')
+ return target,existing
+def verify_unchanged(target,original):
+ if original is None:return
+ fd=os.open(target,os.O_RDONLY|getattr(os,'O_NOFOLLOW',0))
+ with os.fdopen(fd,'rb') as stream:
+  info=os.fstat(stream.fileno())
+  if not stat.S_ISREG(info.st_mode) or info.st_size>OUTPUT_MAX:raise ValueError('Run-record output changed during computation')
+  current=stream.read(OUTPUT_MAX+1)
+ if current!=original:raise ValueError('Run-record output changed during computation')
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r10.json');parser.add_argument('--output',default='r10-execution-budget.json');args=parser.parse_args()
+ target,existing_output=admit_output(args.output)
  plan_raw=read(args.phase_plan)
  if len(plan_raw)>1024*1024:raise ValueError('Oversized frozen phase plan')
  plan=json.loads(plan_raw); plan_sha=sha(plan_raw)
@@ -93,11 +125,11 @@ def main():
   'active_feature_count':plan['candidate_scope']['active_feature_count'],'phases':rows,
   'all_phases_under_cap':all(row['actual_charged_bytes']<=CAP for row in rows)}
  raw=(json.dumps(result,sort_keys=True,ensure_ascii=False,separators=(',',':'))+'\n').encode()
- target=PACKET/args.output
- if target.is_symlink():raise ValueError('Run record destination cannot be a symlink')
- if target.exists():
-  if target.read_bytes()!=raw:raise FileExistsError('Preserve existing execution budget record')
+ if existing_output is not None:
+  if existing_output!=raw:raise FileExistsError('Preserve existing execution budget record')
+  verify_unchanged(target,existing_output)
  else:
+  if len(raw)>OUTPUT_MAX:raise ValueError('Execution budget record exceeds its output bound')
   with target.open('xb') as stream:stream.write(raw)
  print(json.dumps({'status':'run-record-built','path':str(target),'bytes':len(raw),'sha256':sha(raw),
   'phase_count':len(rows),'max_actual_bytes':max(row['actual_charged_bytes'] for row in rows)},sort_keys=True))
