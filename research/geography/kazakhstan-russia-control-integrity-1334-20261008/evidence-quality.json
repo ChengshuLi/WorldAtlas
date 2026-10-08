@@ -1,0 +1,873 @@
+{
+  "version": 1,
+  "issue": 1491,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:KAZ:ADM2:9891525B12497549856029",
+    "gb:KAZ:ADM2:9891525B14893672514077",
+    "gb:KAZ:ADM2:9891525B23450940169479",
+    "gb:KAZ:ADM2:9891525B23938329626938",
+    "gb:KAZ:ADM2:9891525B27039214711297",
+    "gb:KAZ:ADM2:9891525B29142320833271",
+    "gb:KAZ:ADM2:9891525B31322588303916",
+    "gb:KAZ:ADM2:9891525B3296579749596",
+    "gb:KAZ:ADM2:9891525B3707090472903",
+    "gb:KAZ:ADM2:9891525B44961106732022",
+    "gb:KAZ:ADM2:9891525B45366613377645",
+    "gb:KAZ:ADM2:9891525B48409861981673",
+    "gb:KAZ:ADM2:9891525B51280099986304",
+    "gb:KAZ:ADM2:9891525B55696019577443",
+    "gb:KAZ:ADM2:9891525B58334758086532",
+    "gb:KAZ:ADM2:9891525B63367051987895",
+    "gb:KAZ:ADM2:9891525B78781143088389",
+    "gb:KAZ:ADM2:9891525B88932935012165",
+    "gb:KAZ:ADM2:9891525B9195242261928",
+    "gb:RUS:ADM2:50074027B10943489160103",
+    "gb:RUS:ADM2:50074027B12125827466721",
+    "gb:RUS:ADM2:50074027B16928982325503",
+    "gb:RUS:ADM2:50074027B21488641063420",
+    "gb:RUS:ADM2:50074027B23416918655185",
+    "gb:RUS:ADM2:50074027B24150612748554",
+    "gb:RUS:ADM2:50074027B30404242802447",
+    "gb:RUS:ADM2:50074027B30455457019741",
+    "gb:RUS:ADM2:50074027B34363353646392",
+    "gb:RUS:ADM2:50074027B35283992627642",
+    "gb:RUS:ADM2:50074027B36737161681879",
+    "gb:RUS:ADM2:50074027B42915894018382",
+    "gb:RUS:ADM2:50074027B54335415117985",
+    "gb:RUS:ADM2:50074027B55370730174848",
+    "gb:RUS:ADM2:50074027B55874149600418",
+    "gb:RUS:ADM2:50074027B5850420655248",
+    "gb:RUS:ADM2:50074027B65250804095519",
+    "gb:RUS:ADM2:50074027B75775802654148",
+    "gb:RUS:ADM2:50074027B7598546692655",
+    "gb:RUS:ADM2:50074027B77832194224419",
+    "gb:RUS:ADM2:50074027B84484580118953",
+    "gb:RUS:ADM2:50074027B95632257634540"
+  ],
+  "subject_ids_sha256": "f9cfd7c8106b52a15b0603338a26b2381b3bedc60c0d8ff2d0bc293298624dd6",
+  "baseline": {
+    "commit": "016fa2c0cce935382d0995a503bfc09d3e7ac513",
+    "files": [
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/assessment_controls.py",
+        "bytes": 5217,
+        "sha256": "aa9f3474193c95726d628eed020534058e406d5b5cd399605c4df311a8d5634b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/build_assessment.py",
+        "bytes": 15531,
+        "sha256": "a9c6fa9fb93e3a045f60d8ed031e0f2205b8c890e65209fb71b9e3f2f4440b04",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/compare_source_ids.py",
+        "bytes": 4770,
+        "sha256": "8960a0c769e2ac107d474aac974f706cae0da0b87d18f8f846bdba0ef0ed4e44",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/negative-control.json",
+        "bytes": 721,
+        "sha256": "e11e9cadb897bf7ca6ba0f3ba7ea9f4865f7771e71e2b81b6442b09e2c3c9f06",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/output-comparison.json",
+        "bytes": 289,
+        "sha256": "21a337ccbe6ef30fb1926778c494b8c2f8c8a562ffeda0639bba69f6a5295f05",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/positive-control.json",
+        "bytes": 309,
+        "sha256": "d307e37f10d5ea1316c8179e5671585ec091c400d8a8f7bd661c8497e8a104fb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/reproducibility-control.json",
+        "bytes": 532,
+        "sha256": "ffd813e9bdaa2d3deb19f5c0eef8485a100282c6fe92b1334967ad894e874f6a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-1-receipt.json",
+        "bytes": 1297,
+        "sha256": "5992523496a94e4aba5afced0f4787d2526cc034319e947d280eca6932902db9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-1/candidate-assessment.jsonl",
+        "bytes": 167901,
+        "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-1/contact-lineage.json",
+        "bytes": 233591,
+        "sha256": "f5e13688c1db5e692c6746cf66c8dc2a94dc0d9d55885a7e159d73b8cacc914b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-1/family-reconciliation.json",
+        "bytes": 11970,
+        "sha256": "628d460e69c93ea9bc82a9b330d46b03e8bfa7cb4e6c3c40978aa376580ca426",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-1/output-manifest.json",
+        "bytes": 574,
+        "sha256": "bfa755cc6770c193e04b5704b04d13e7325e648458144f607f4345ee60abab89",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-1/source-products.json",
+        "bytes": 2268,
+        "sha256": "f0a0a90219199f092032b406799bd451845710efd6f3456610431574bc38e809",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-2-receipt.json",
+        "bytes": 1297,
+        "sha256": "9b271780e0d5beebd8e0cc2e04669d82afe370d03aaf00116058ebcd3da7e319",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-2/candidate-assessment.jsonl",
+        "bytes": 167901,
+        "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-2/contact-lineage.json",
+        "bytes": 233591,
+        "sha256": "f5e13688c1db5e692c6746cf66c8dc2a94dc0d9d55885a7e159d73b8cacc914b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-2/family-reconciliation.json",
+        "bytes": 11970,
+        "sha256": "628d460e69c93ea9bc82a9b330d46b03e8bfa7cb4e6c3c40978aa376580ca426",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-2/output-manifest.json",
+        "bytes": 574,
+        "sha256": "bfa755cc6770c193e04b5704b04d13e7325e648458144f607f4345ee60abab89",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/run-2/source-products.json",
+        "bytes": 2268,
+        "sha256": "f0a0a90219199f092032b406799bd451845710efd6f3456610431574bc38e809",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/source-id-comparison-receipt.json",
+        "bytes": 774,
+        "sha256": "cd61a7432218fb5f1169602510f98fac1209e25749238cdb7b04bbed675a31a6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/executions/source-id-comparison.json",
+        "bytes": 2990,
+        "sha256": "f62a135985e793364210c8c9d96cb1bad19fffd5e8911a97b8f0dd2ab30e38d0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/input-manifest.json",
+        "bytes": 31044,
+        "sha256": "b978741af412988f07f02de49bc6f54e18c68c2809008c63cab76955462ca0e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/complete-kazakhstan-russia-handoff.json",
+        "bytes": 651638,
+        "sha256": "2c6cae9dbf4ac28bfe623624a5eab92dcc70ca71d6decc36f6ec8ca204d4d550",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/geoboundaries-kaz-adm2-2017-full-source.geojson",
+        "bytes": 1031928,
+        "sha256": "b69520a12a7e3642c3ee48d6b2fcae0776c70fe5f757d6235beca3e9710833ae",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/geoboundaries-kaz-adm2-2017-simplified-full-source.geojson",
+        "bytes": 923186,
+        "sha256": "68868f08e28fa4b8510fa28db21b8432ad9c1539625b92842158a168edfd2efd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/geoboundaries-rus-adm2-2017-simplified-full-source.geojson",
+        "bytes": 26338801,
+        "sha256": "81dabf7930ff5e306e2423b586bcec14163fbd10481db6e49aab47273953b128",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/metadata/KAZ-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/metadata/KAZ-geoBoundaries-KAZ-ADM2-metaData.json",
+        "bytes": 859,
+        "sha256": "a088398833d004537b752fd547b04b490d7b38d3d53ad372a8927b69a1012026",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/metadata/RUS-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/metadata/RUS-geoBoundaries-RUS-ADM2-metaData.json",
+        "bytes": 815,
+        "sha256": "2064a236e3473d76adf00729b4482a22ffefae22a40364a4cfe78ef43ce3c672",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/source-freeze.json",
+        "bytes": 448,
+        "sha256": "35cc80da0260cfa933f0bf93197510807f73dc842866a5d9d2bafe8a38da38d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "shared_immutable_helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "original_assessment_producer": "a9c6fa9fb93e3a045f60d8ed031e0f2205b8c890e65209fb71b9e3f2f4440b04",
+      "original_input_manifest": "b978741af412988f07f02de49bc6f54e18c68c2809008c63cab76955462ca0e4",
+      "complete_assigned_handoff": "2c6cae9dbf4ac28bfe623624a5eab92dcc70ca71d6decc36f6ec8ca204d4d550"
+    },
+    "pin_files": {
+      "shared_immutable_helper": "scripts/evidence/immutable.py",
+      "original_assessment_producer": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/build_assessment.py",
+      "original_input_manifest": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/input-manifest.json",
+      "complete_assigned_handoff": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/complete-kazakhstan-russia-handoff.json"
+    },
+    "subject_files": {
+      "gb:KAZ:ADM2:9891525B12497549856029": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B14893672514077": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B23450940169479": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B23938329626938": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B27039214711297": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B29142320833271": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B31322588303916": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B3296579749596": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B3707090472903": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B44961106732022": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B45366613377645": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B48409861981673": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B51280099986304": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B55696019577443": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B58334758086532": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B63367051987895": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B78781143088389": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B88932935012165": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:KAZ:ADM2:9891525B9195242261928": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-12.json",
+      "gb:RUS:ADM2:50074027B10943489160103": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B12125827466721": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B16928982325503": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-20.json",
+      "gb:RUS:ADM2:50074027B21488641063420": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B23416918655185": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B24150612748554": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B30404242802447": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B30455457019741": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-20.json",
+      "gb:RUS:ADM2:50074027B34363353646392": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B35283992627642": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-20.json",
+      "gb:RUS:ADM2:50074027B36737161681879": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B42915894018382": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B54335415117985": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B55370730174848": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-20.json",
+      "gb:RUS:ADM2:50074027B55874149600418": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B5850420655248": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B65250804095519": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-20.json",
+      "gb:RUS:ADM2:50074027B75775802654148": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B7598546692655": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B77832194224419": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B84484580118953": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-21.json",
+      "gb:RUS:ADM2:50074027B95632257634540": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/atlas/part-20.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-kazakhstan-russia-assessment",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/016fa2c0cce935382d0995a503bfc09d3e7ac513/research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007",
+      "role": "Immutable #1334 source-fit context, scoped contact records and prior run products; not boundary authority",
+      "vintage": "Exact main commit 016fa2c0cce935382d0995a503bfc09d3e7ac513; original geoBoundaries source vintage 2017 represented year",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal repository evidence; underlying source terms are separately recorded in the retained packet and are not independently re-adjudicated here."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the exact pinned original packet at 016fa2c0cce935382d0995a503bfc09d3e7ac513:research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007; this PR intentionally retains references rather than copying source bytes.",
+      "limit": "The prior assessment and reports establish records/custody only. Source role, effective date, legal boundaries, completeness and current applicability remain unresolved."
+    },
+    {
+      "id": "geoboundaries-kazakhstan-2017-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KAZ/ADM2",
+      "role": "Full and simplified KAZ native products used only for a feature identity-set comparison",
+      "vintage": "2017 represented source; release commit 9469f09592ced973a3448cf66b6100b741b64c0d; metadata/citation bytes retained in prior packet",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries records gbOpen CC-BY 4.0 with attribution; retained country metadata records underlying ODbL 1.0. No independent legal opinion or geometry-equivalence finding."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read exact full/simplified KAZ products and attribution at 016fa2c0cce935382d0995a503bfc09d3e7ac513:research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/; source bytes remain in the original packet.",
+      "limit": "This control verifies 174 unique shapeID values per product and exact set agreement only; it does not compare geometry, prove national completeness, or establish current territorial correspondence."
+    },
+    {
+      "id": "geoboundaries-russia-2017-full-adm2",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson",
+      "role": "Previously captured full-resolution Russian source referenced by original identity comparison only",
+      "vintage": "2017 represented source; release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries gbOpen CC-BY 4.0 attribution; retained country metadata records underlying ODbL 1.0. No independent legal opinion."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Restore only from the exact URL above and verify 120,489,189 bytes and SHA-256 74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0 before any authorized partitioned review.",
+      "limit": "The file exceeds the 32 MiB per-file budget and is not loaded or replayed here. Prior identity-comparison receipt remains historical evidence, not a new validation."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/PR_DESCRIPTION.md",
+      "bytes": 1775,
+      "sha256": "b997699fb5b505e6737b2f253cf3669df4f8dce141f0693cb8e56437c21731ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/README.md",
+      "bytes": 4168,
+      "sha256": "4dd7ce3a5be8910c2f338f2846e76c89eba8b3ad425b697d74bb22c95ee44b9d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/build_evidence_manifest.py",
+      "bytes": 13037,
+      "sha256": "d5d3be0e64683ecc2377729cf08b0ddf3e60f5ab646191a2cb9b7f6c38db8ceb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/claim-receipt.json",
+      "bytes": 950,
+      "sha256": "57ddc806e067aacd43850ae565f60bde85c78537ddc0a0834371b16ace49da1c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/control_integrity.py",
+      "bytes": 18138,
+      "sha256": "8c20b15f293b1001dda86726a3a0c437edba5cbfa85a4ed16b8c13f18cdb2d6d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/issue-1491-current.json",
+      "bytes": 16578,
+      "sha256": "0b61ac1e68bfe8206e7de2b4bc5b195289cf6db2ae6e1fe0585cae0a7c162fd7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/test_control_integrity.py",
+      "bytes": 12174,
+      "sha256": "1716854c48efe3b92064ece62875b1edf7d9cbf9fabdfd957626b65179bbaf89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/negative-control.json",
+      "bytes": 780,
+      "sha256": "c6ada89fb59ee23c0679572186353b12733598ab6cf05482ca78ecdfc515589b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/positive-control.json",
+      "bytes": 597,
+      "sha256": "59a26bd6545e577697c8ee8a4c8006490b387f2fe8ecf63dcb2479c5121b14fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/publication.json",
+      "bytes": 782,
+      "sha256": "5839b667660219d19d8ac8d5a4a0704c7743344dccd91e14dc90b898293e5d18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/reproducibility-control.json",
+      "bytes": 724,
+      "sha256": "f539f4ee30064b847cbe9d07721737a2c8fb4719eaf4afb44308dfff499c90d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/negative-control.json",
+      "bytes": 780,
+      "sha256": "c6ada89fb59ee23c0679572186353b12733598ab6cf05482ca78ecdfc515589b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/positive-control.json",
+      "bytes": 597,
+      "sha256": "59a26bd6545e577697c8ee8a4c8006490b387f2fe8ecf63dcb2479c5121b14fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/publication.json",
+      "bytes": 782,
+      "sha256": "6ca0c8860366e7a397d0c3d31d4cf32c8994c963025672b6e95b7ca965c84a04",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/reproducibility-control.json",
+      "bytes": 724,
+      "sha256": "f539f4ee30064b847cbe9d07721737a2c8fb4719eaf4afb44308dfff499c90d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/negative-control.json",
+      "bytes": 780,
+      "sha256": "c6ada89fb59ee23c0679572186353b12733598ab6cf05482ca78ecdfc515589b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/positive-control.json",
+      "bytes": 476,
+      "sha256": "df261c79acbd0f0917c3c5825f55f8809bbc6ec41f1847c35b1937240d068b04",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/publication.json",
+      "bytes": 764,
+      "sha256": "6d6fa7fc9df3d275d86fd5ad0ce0f0d761b2b32697811d23114e23a085b913ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/reproducibility-control.json",
+      "bytes": 724,
+      "sha256": "f539f4ee30064b847cbe9d07721737a2c8fb4719eaf4afb44308dfff499c90d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/negative-control.json",
+      "bytes": 843,
+      "sha256": "38fe968f4fe575a6af298c49b80d9ac079e5cbf3a22055d13c018fe62dfdcf89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/positive-control.json",
+      "bytes": 597,
+      "sha256": "59a26bd6545e577697c8ee8a4c8006490b387f2fe8ecf63dcb2479c5121b14fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/publication.json",
+      "bytes": 791,
+      "sha256": "84834df9119a5ed1a9c24c24f9bc4f645fa59f20878d1715d7133614906c2aba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/reproducibility-control.json",
+      "bytes": 724,
+      "sha256": "f539f4ee30064b847cbe9d07721737a2c8fb4719eaf4afb44308dfff499c90d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/negative-control.json",
+      "bytes": 843,
+      "sha256": "38fe968f4fe575a6af298c49b80d9ac079e5cbf3a22055d13c018fe62dfdcf89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/positive-control.json",
+      "bytes": 597,
+      "sha256": "59a26bd6545e577697c8ee8a4c8006490b387f2fe8ecf63dcb2479c5121b14fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/publication.json",
+      "bytes": 791,
+      "sha256": "d75bf5f6438f60fd0c270adfda98cd4109166c4404919771e2c4121646043068",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/reproducibility-control.json",
+      "bytes": 724,
+      "sha256": "f539f4ee30064b847cbe9d07721737a2c8fb4719eaf4afb44308dfff499c90d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/negative-control.json",
+      "bytes": 780,
+      "sha256": "c6ada89fb59ee23c0679572186353b12733598ab6cf05482ca78ecdfc515589b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/positive-control.json",
+      "bytes": 476,
+      "sha256": "df261c79acbd0f0917c3c5825f55f8809bbc6ec41f1847c35b1937240d068b04",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/publication.json",
+      "bytes": 764,
+      "sha256": "62d882b6b8f7cfefd5c12eca664b1e91757327225919bd084f79d2fe97115be4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/reproducibility-control.json",
+      "bytes": 724,
+      "sha256": "f539f4ee30064b847cbe9d07721737a2c8fb4719eaf4afb44308dfff499c90d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-542278eff85b47ed80387fc206d50e50/.publication-incomplete",
+      "bytes": 578,
+      "sha256": "23c6cce8078111a8b4d7de1b046a11ea8c3a92f8b58438c34038f7ccc3c8da61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-542278eff85b47ed80387fc206d50e50/one.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-542278eff85b47ed80387fc206d50e50/two.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-6637897c8c8d43f398938f5355a05307/.publication-incomplete",
+      "bytes": 578,
+      "sha256": "b5709b52d4d5e9103f7a968ad06938688988565efa86cfcac62f34443fdca7d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-6637897c8c8d43f398938f5355a05307/one.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-6637897c8c8d43f398938f5355a05307/two.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-f127c03c13c742749b86c1410db0832e/.publication-incomplete",
+      "bytes": 578,
+      "sha256": "a0f8c191d1acf353145669e65b174d5a0192f144d3c1bf4ea734fe866ec8d8b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-f127c03c13c742749b86c1410db0832e/one.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-f127c03c13c742749b86c1410db0832e/two.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure/.publication-incomplete",
+      "bytes": 512,
+      "sha256": "890670a5917e290a8d7650d46b0328c214300fc3e5169420276d591962829fa5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure/one.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure/two.json",
+      "bytes": 12,
+      "sha256": "e5f1eb4d806641698a35efe20e098efd20d7d57a9b90ee69079d5bb650920726",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "control-integrity",
+      "kind": "code",
+      "description": "Validate exact original issue scope, authenticate the full input-manifest/source-freeze/producer hashes, preserve 28 compatible and 24 partial/unbound classifications from actual rows, join candidate/family/contact records to the immutable handoff, and verify both complete four-product reports against actual manifests and run receipts. Exercise parsed altered-product, scope and Kazakhstan source-ID negative fixtures and exclusive output admission.",
+      "software": "Python 3.12.14; pinned shared immutable helper; standard library",
+      "units": "whole-file SHA-256, bytes, IDs, records, families and contacts"
+    },
+    {
+      "id": "kazakhstan-source-identity",
+      "kind": "source",
+      "description": "Parse the complete pinned full and simplified Kazakhstan ADM2 FeatureCollections and compare unique properties.shapeID sets; no geometry equality claim.",
+      "software": "Python 3.12.14; standard library; control_integrity.py",
+      "units": "native feature IDs"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Both retained #1334 producer outputs are byte-authenticated against their complete manifests and original run receipts; actual candidate, family and contact identity joins match the retained handoff. This is custody/control evidence, not proof of the original scientific producer's current behavior.",
+      "status": "supported",
+      "source_ids": [
+        "retained-kazakhstan-russia-assessment"
+      ]
+    },
+    {
+      "text": "The two 2017 Kazakhstan source files contain identical unique shapeID sets. The underlying Russian full source, geometry equivalence, current boundary correspondence and legal/current completeness remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-kazakhstan-2017-adm2",
+        "geoboundaries-russia-2017-full-adm2"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3.12 research/geography/kazakhstan-russia-control-integrity-1334-20261008/control_integrity.py --baseline 016fa2c0cce935382d0995a503bfc09d3e7ac513 --vintage controls-reviewed-one",
+    "python3.12 research/geography/kazakhstan-russia-control-integrity-1334-20261008/control_integrity.py --baseline 016fa2c0cce935382d0995a503bfc09d3e7ac513 --vintage controls-reviewed-two",
+    "python3.12 research/geography/kazakhstan-russia-control-integrity-1334-20261008/test_control_integrity.py"
+  ],
+  "validation": [
+    {
+      "method_id": "control-integrity",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/positive-control.json"
+    },
+    {
+      "method_id": "control-integrity",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/negative-control.json"
+    },
+    {
+      "method_id": "control-integrity",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/reproducibility-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/PR_DESCRIPTION.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/build_evidence_manifest.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/control_integrity.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/issue-1491-current.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/test_control_integrity.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-one/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-final-two/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-one/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-one/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-reviewed-two/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/controls-two/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-542278eff85b47ed80387fc206d50e50/.publication-incomplete",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-542278eff85b47ed80387fc206d50e50/one.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-542278eff85b47ed80387fc206d50e50/two.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-6637897c8c8d43f398938f5355a05307/.publication-incomplete",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-6637897c8c8d43f398938f5355a05307/one.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-6637897c8c8d43f398938f5355a05307/two.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-f127c03c13c742749b86c1410db0832e/.publication-incomplete",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-f127c03c13c742749b86c1410db0832e/one.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure-f127c03c13c742749b86c1410db0832e/two.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure/.publication-incomplete",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure/one.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/kazakhstan-russia-control-integrity-1334-20261008/vintages/pytest-partial-failure/two.json",
+      "status": "added"
+    }
+  ]
+}
