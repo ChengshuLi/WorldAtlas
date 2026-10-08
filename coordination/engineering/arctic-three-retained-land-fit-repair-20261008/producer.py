@@ -26,7 +26,8 @@ def digest(raw):
 def callable_pin(value):
     def normalized(code):
         return code.replace(co_filename='', co_consts=tuple(normalized(c) if isinstance(c, types.CodeType) else c for c in code.co_consts))
-    result = {'module': getattr(value, '__module__', None), 'qualname': getattr(value, '__qualname__', None),
+    module = 'arctic_producer' if getattr(value, '__globals__', None) is globals() else getattr(value, '__module__', None)
+    result = {'module': module, 'qualname': getattr(value, '__qualname__', None),
               'type': type(value).__name__, 'name': getattr(value, '__name__', None)}
     if hasattr(value, '__code__'):
         result['code_sha256'] = digest(marshal.dumps(normalized(value.__code__)))
