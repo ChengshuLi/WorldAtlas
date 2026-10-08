@@ -52,6 +52,35 @@
         "scientific helper test: ModuleNotFoundError: No module named shapely"
       ],
       "remedy": "Shared admission test rerun with configured bundled Python passes; unrelated scientific helper/GIS experiment excluded from this narrow engineering scope. No failed outcome promoted to pass."
+    },
+    {
+      "kind": "formal-review-producer-boundary",
+      "commit": "e05fbed4ee5b35d8c71a3b9c33a5cb29f25f9a4c",
+      "status": "rejected",
+      "error": "existsSync treated dangling destination as absent; parent admission occurred after controls",
+      "independent_observed_source_reads": 1,
+      "independent_observed_gunzips": 24,
+      "remedy": "lstat no-entry and ordinary complete parent chain before Git/code/source reads;51 tests and corrected run03/04 pass"
+    },
+    {
+      "kind": "first-CLI-admission-instrumentation",
+      "status": "failed",
+      "error": "Instrumentation blocked Node internal module loader reads before entry",
+      "remedy": "Only Node getSourceSync executable-module loading is exempt; actual producer direct body reads/Git/gunzip remain zero and instrumented. Corrected actual CLI adverse controls pass."
+    },
+    {
+      "kind": "corrected-producer-committed-controls",
+      "commit": "411fed4a52f2c44de10413cef40f579930331da6",
+      "status": "passed",
+      "runs": [
+        "run-03",
+        "run-04"
+      ],
+      "counts": {
+        "actual_positive": 1,
+        "negative": 20
+      },
+      "scientific_qualification": false
     }
   ]
 }
