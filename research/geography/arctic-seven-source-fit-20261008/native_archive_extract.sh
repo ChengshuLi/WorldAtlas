@@ -11,17 +11,20 @@ BOOTSTRAP_GIT=/Library/Developer/CommandLineTools/usr/bin/git
 BOOTSTRAP_GIT_SHA=4c5ca299b5311572b4f948d11efd7c66dcadf30950fbf260688ee32f4a63f6a4
 BOOTSTRAP_SHA256SUM=/sbin/sha256sum
 BOOTSTRAP_SHA256SUM_SHA=911cfe6fc220c41ee02d18ea71c89f8ff788bdf8a6d4f0d6f94dc965aa18521f
+BOOTSTRAP_WC=/usr/bin/wc
+BOOTSTRAP_WC_SHA=6dd1ce80825c439ef6dc4812cdb0711bf191446728b8a13ed655f22ce210aeee
 test "$("$BOOTSTRAP_SHA256SUM" "$BOOTSTRAP_SHA256SUM")" = "$BOOTSTRAP_SHA256SUM_SHA  $BOOTSTRAP_SHA256SUM"
 test "$("$BOOTSTRAP_SHA256SUM" "$BOOTSTRAP_GIT")" = "$BOOTSTRAP_GIT_SHA  $BOOTSTRAP_GIT"
+test "$("$BOOTSTRAP_SHA256SUM" "$BOOTSTRAP_WC")" = "$BOOTSTRAP_WC_SHA  $BOOTSTRAP_WC"
 git() { "$BOOTSTRAP_GIT" "$@"; }
 ROOT=$(cd "${BASH_SOURCE[0]%/*}/../../.." && pwd -P)
 PACKET=$ROOT/research/geography/arctic-seven-source-fit-20261008
-PLAN=$PACKET/phase-plan-r9.json
+PLAN=$PACKET/phase-plan-r10.json
 SCRIPT_REL=research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh
-TOOLS_JSON=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r9.json
-TOOLS_SHELL=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r9.sh
+TOOLS_JSON=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r10.json
+TOOLS_SHELL=research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r10.sh
 VINTAGES=$PACKET/vintages
-RUN=$VINTAGES/r9-native-extract
+RUN=$VINTAGES/r10-native-extract
 CAP=268435456
 DECODED=162109440
 MEMBER_BYTES=2756674
@@ -33,12 +36,26 @@ test "$BASH" = /bin/bash
 test "$("$BOOTSTRAP_SHA256SUM" /bin/bash)" = "b46e8d4eac541d79f77000550b4254b47599df8dd8c52cc5b0f37cca1c3b02d4  /bin/bash"
 test "$(git -C "$ROOT" rev-parse HEAD)" = "$BASE"
 LC_ALL=C
+PLAN_SIZE=$("$BOOTSTRAP_WC" -c < "$PLAN")
+if [[ ! "$PLAN_SIZE" =~ ^[0-9]+$ ]] || (( PLAN_SIZE < 1 || PLAN_SIZE > 1048576 )); then
+  echo 'phase plan is empty or exceeds 1 MiB' >&2
+  exit 1
+fi
 PLAN_PREFIX=
-IFS= read -r -N 1048577 PLAN_PREFIX < "$PLAN" || true
-test "${#PLAN_PREFIX}" -le 1048576
+IFS= read -r -n "$PLAN_SIZE" PLAN_PREFIX < "$PLAN" || true
+if (( ${#PLAN_PREFIX} != PLAN_SIZE - 1 )); then
+  echo 'phase plan is not one bounded ASCII JSON line with a final newline' >&2
+  exit 1
+fi
 PLAN_ACTUAL=$("$BOOTSTRAP_SHA256SUM" "$PLAN"); test "${PLAN_ACTUAL%% *}" = "$PLAN_SHA"
-[[ "$PLAN_PREFIX" == *"\"execution_commit\":\"$BASE\""* ]]
-[[ "$PLAN_PREFIX" == *"\"native_tools_lock_sha256\":\"$TOOLS_SHA\""* ]]
+if [[ "$PLAN_PREFIX" != *"\"execution_commit\":\"$BASE\""* ]]; then
+  echo 'phase plan execution commit mismatch' >&2
+  exit 1
+fi
+if [[ "$PLAN_PREFIX" != *"\"native_tools_lock_sha256\":\"$TOOLS_SHA\""* ]]; then
+  echo 'phase plan native-tools lock mismatch' >&2
+  exit 1
+fi
 TOOLS_LOCK_ACTUAL=$("$BOOTSTRAP_GIT" -C "$ROOT" show "$BASE:$TOOLS_JSON" | "$BOOTSTRAP_SHA256SUM")
 test "${TOOLS_LOCK_ACTUAL%% *}" = "$TOOLS_SHA"
 TOOLS_LOCAL_ACTUAL=$("$BOOTSTRAP_SHA256SUM" "$ROOT/$TOOLS_JSON")
@@ -89,7 +106,7 @@ TOOLS_JSON_BYTES=$(git -C "$ROOT" cat-file -s "$BASE:$TOOLS_JSON")
 TOOLS_SHELL_BYTES=$(git -C "$ROOT" cat-file -s "$BASE:$TOOLS_SHELL")
 # Code and lock bytes are read from Git and from the materialized checkout.
 CODE_BYTES=$((SCRIPT_BYTES * 3 + TOOLS_JSON_BYTES * 2 + TOOLS_SHELL_BYTES * 3))
-PLAN_BYTES=$(( ${#PLAN_PREFIX} * 5 ))
+PLAN_BYTES=$(( PLAN_SIZE * 5 ))
 PROSPECTIVE=$((INPUT_BYTES + CODE_BYTES + PLAN_BYTES + NATIVE_TOOLS_TOTAL_BYTES + DECODED + SCRATCH_RESERVE + OUTPUT_RESERVE + RECEIPT_RESERVE))
 if (( PROSPECTIVE > CAP )); then
   echo "native extraction prospective charge exceeds 256 MiB: $PROSPECTIVE" >&2
@@ -144,7 +161,7 @@ printf '{"version":1,"status":"complete","phase":"native-archive-extract","basel
   "$BASE" "$PLAN_SHA" "$TOOLS_SHA" "$NATIVE_TOOLS_TOTAL_BYTES" "$((INPUT_BYTES - native_size))" "$native_size" "$DECODED" "$SCRATCH_RESERVE" "$OUTPUT_RESERVE" "$PROSPECTIVE" > "$RUN/execution-receipt.json"
 EXECUTION_HASH=$(sha256sum "$RUN/execution-receipt.json"); EXECUTION_HASH=${EXECUTION_HASH%% *}
 EXECUTION_SIZE=$(wc -c < "$RUN/execution-receipt.json" | tr -d ' ')
-printf '{"version":1,"status":"complete","outputs":[{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r9-native-extract/native-archive-extraction.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"},{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r9-native-extract/execution-receipt.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"}]}\n' \
+printf '{"version":1,"status":"complete","outputs":[{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r10-native-extract/native-archive-extraction.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"},{"path":"research/geography/arctic-seven-source-fit-20261008/vintages/r10-native-extract/execution-receipt.json","bytes":%s,"sha256":"%s","hash_kind":"file-bytes"}]}\n' \
   "$EXTRACTION_SIZE" "$EXTRACTION_HASH" "$EXECUTION_SIZE" "$EXECUTION_HASH" > "$RUN/.publication-incomplete"
 sync
 ln "$RUN/.publication-incomplete" "$RUN/publication.json"

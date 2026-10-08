@@ -20,7 +20,7 @@ def descriptor_check(row):
  if len(raw)!=row['bytes'] or sha(raw)!=row['sha256']:raise ValueError('Published output drift: '+row['path'])
  return raw
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json');parser.add_argument('--output',default='r9-execution-budget.json');args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r10.json');parser.add_argument('--output',default='r10-execution-budget.json');args=parser.parse_args()
  plan_raw=read(args.phase_plan)
  if len(plan_raw)>1024*1024:raise ValueError('Oversized frozen phase plan')
  plan=json.loads(plan_raw); plan_sha=sha(plan_raw)
@@ -51,7 +51,7 @@ def main():
   for descriptor in descriptors:descriptor_check(descriptor)
   unique_paths=set(phase['baseline_paths'])|set(phase['code_paths'])
   if phase.get('kind')=='native-shell':
-   native_lock=pins['research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r9.json']
+   native_lock=pins['research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r10.json']
    archive_paths=[f'data/semantic-evidence/part-{i:02}.bin' for i in range(6)]
    planned=(sum(pins[p]['bytes'] for p in unique_paths)+len(plan_raw)*5+
     phase['native_runtime_bytes']+phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+
