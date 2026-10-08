@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "issue": 1504,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
+    "files": [
+      {
+        "path": "docs/AUDIT_FAILURE_PREVENTION.md",
+        "bytes": 10800,
+        "sha256": "999111046f0637fc135f28f3e5ff9ddd07e24bbe26cb3bb420affe41c17b5236",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/AUTHOR_PREFLIGHT.md",
+        "bytes": 13687,
+        "sha256": "afe49d38de104a998cf0d1ed206fc0ec831cca7e7ffefa6fc559941a33f5f1eb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 19198,
+        "sha256": "1ca731bbc3146a7d13e2f9c726e9ef84f965a53bfbb5b9a626021845d0c54018",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/AUDITOR.txt",
+        "bytes": 10930,
+        "sha256": "4deccbde885b4bf923c3c4c6168c62c91ea078967b1dc252bc03c15e4cb0238a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 14215,
+        "sha256": "955e95b65f4cd9b71d937e49bbf7349530b1bf56d050701b9afcb2cb9e8386f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 11700,
+        "sha256": "4e59a89c8a23e0ef3dbf855e8ebc9534bb31176b0543e481a22465add883cd5f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 12545,
+        "sha256": "ce2d47753551123ae1987b4edd75856a8180a99ef57a4286194ee014b8276809",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/AUDIT_FAILURE_PREVENTION.md",
+      "bytes": 14366,
+      "sha256": "5bd4c7810efd70a21e2bee6b37d4d8ec479097ce0530d19bcc59d2a3714956f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/AUTHOR_PREFLIGHT.md",
+      "bytes": 14982,
+      "sha256": "d44309a38bb523c3fe92f571c728aec6a04e718ceab4f7118c6d045310e8792b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 20343,
+      "sha256": "2de386f7609a21e9a3842dfce3ba7e84e61e9e30123a382a971f34232308966e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 11413,
+      "sha256": "22151df870b98623ed2d5d66f7bf1f938a93b315785e406eff680aeb24a62e08",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 14945,
+      "sha256": "1f0fb8e7e9a166350e37880c12a006e6e5f5243b2630eb4885835acf8c696d22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 12430,
+      "sha256": "983fba274f28406bf7550aed8c0e2fba846825581e48a50a087a42efd81d8cf2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 13275,
+      "sha256": "be16bf5b30714379e71b3db909c4f8c73d61a8ff4953955764d15b6fa22bed58",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/boundary-review-20261008/CHECKPOINT.md",
+      "bytes": 1476,
+      "sha256": "06e3da162a74764f54bae6d437e6d998cb2a0732965fe645525388be690e4f61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/boundary-review-20261008/bounded-investigation.json",
+      "bytes": 21500,
+      "sha256": "6d0727d4e00d4756b2c80ae19814bfd64292f720417d49bc90d17aed4ab83729",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/boundary-review-20261008/verification.json",
+      "bytes": 272,
+      "sha256": "8b3156340f7534d71c2b43216d5e6429bbefb1c57658c22e84059a44906ac07f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/AUDIT_FAILURE_PREVENTION.md",
+      "status": "modified",
+      "original_sha256": "999111046f0637fc135f28f3e5ff9ddd07e24bbe26cb3bb420affe41c17b5236"
+    },
+    {
+      "path": "docs/AUTHOR_PREFLIGHT.md",
+      "status": "modified",
+      "original_sha256": "afe49d38de104a998cf0d1ed206fc0ec831cca7e7ffefa6fc559941a33f5f1eb"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "1ca731bbc3146a7d13e2f9c726e9ef84f965a53bfbb5b9a626021845d0c54018"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "modified",
+      "original_sha256": "4deccbde885b4bf923c3c4c6168c62c91ea078967b1dc252bc03c15e4cb0238a"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "955e95b65f4cd9b71d937e49bbf7349530b1bf56d050701b9afcb2cb9e8386f9"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "4e59a89c8a23e0ef3dbf855e8ebc9534bb31176b0543e481a22465add883cd5f"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "ce2d47753551123ae1987b4edd75856a8180a99ef57a4286194ee014b8276809"
+    },
+    {
+      "path": "coordination/engineering/boundary-review-20261008/CHECKPOINT.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/boundary-review-20261008/bounded-investigation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/boundary-review-20261008/verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/boundary-review-20261008/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "methods": [
+    {
+      "id": "boundary-instruction-review",
+      "kind": "code",
+      "description": "Instruction-only interface and historical bounded-experiment review; no new geographic computation",
+      "software": "Git and Python standard library; current shared interface inspection",
+      "units": "not applicable"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "metric_bindings": [],
+  "rendered_tables": [],
+  "validation": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "git diff --check",
+    "node scripts/evidence-quality.mjs coordination/engineering/boundary-review-20261008/evidence-quality.json"
+  ]
+}

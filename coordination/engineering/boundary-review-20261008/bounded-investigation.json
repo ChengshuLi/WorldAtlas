@@ -1,0 +1,585 @@
+{
+  "input_bytes_read": 24740333,
+  "results": [
+    {
+      "pr": 1329,
+      "case": "intact",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "pr": 1329,
+      "case": "false-control",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "observation": {
+        "method_id": "complete-france-source-fitness-reproduction",
+        "kind": "negative-control",
+        "outcome": "passed",
+        "evidence": {
+          "omission_rejected": false,
+          "duplicate_rejected": true,
+          "foreign_rejected": true,
+          "swapped_axis_candidate_envelope_hits": 0,
+          "negative_altered_whole_source_bytes_rejected": true,
+          "negative_incomplete_official_layer_rejected": true,
+          "negative_wrong_family_context_rejected": true,
+          "negative_wrong_full_geometry_has_no_intersection": true,
+          "negative_wrong_source_identity_rejected": true,
+          "negative_wrong_source_vintage_rejected": true,
+          "unobserved_surface_preserved_as_unknown": true,
+          "reordered_membership_is_canonically_invariant": true,
+          "raster_affine_nodata_applicability": "not-applicable: no raster input or raster transform was queried; coverage/NoData remain unresolved"
+        }
+      }
+    },
+    {
+      "pr": 1329,
+      "case": "empty-relations",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "observation": 42
+    },
+    {
+      "pr": 1329,
+      "case": "output-symlink",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "escaped_destination_written": true
+    },
+    {
+      "pr": 1334,
+      "case": "intact",
+      "exit": 0,
+      "stdout": "{\"artifacts\": 3, \"negative_controls\": 4, \"outcome\": \"passed\"}\n",
+      "stderr": "",
+      "reproducibility_outcome": "passed"
+    },
+    {
+      "pr": 1334,
+      "case": "changed-run-two",
+      "exit": 0,
+      "stdout": "{\"artifacts\": 3, \"negative_controls\": 4, \"outcome\": \"passed\"}\n",
+      "stderr": "",
+      "reproducibility_outcome": "passed"
+    },
+    {
+      "pr": 1334,
+      "case": "missing-contact",
+      "exit": 0,
+      "stdout": "{\"artifacts\": 3, \"negative_controls\": 4, \"outcome\": \"passed\"}\n",
+      "stderr": "",
+      "reproducibility_outcome": "passed"
+    },
+    {
+      "pr": 1342,
+      "case": "intact",
+      "exit": 0,
+      "stdout": "{\"components\": 28, \"families\": 9, \"contacts\": 21, \"dispositions\": {\"outside-source-domain-unclassified\": 4, \"land-plus-compatible-original-processing-reproduction-candidate\": 11, \"land-with-admin-partial-or-unbound-source-fitness-review\": 10, \"mixed-support-retain-whole-source-fitness-review\": 3}, \"",
+      "stderr": ""
+    },
+    {
+      "pr": 1342,
+      "case": "foreign-target",
+      "exit": 0,
+      "stdout": "{\"components\": 28, \"families\": 9, \"contacts\": 21, \"dispositions\": {\"outside-source-domain-unclassified\": 4, \"land-plus-compatible-original-processing-reproduction-candidate\": 11, \"land-with-admin-partial-or-unbound-source-fitness-review\": 10, \"mixed-support-retain-whole-source-fitness-review\": 3}, \"",
+      "stderr": ""
+    },
+    {
+      "pr": 1342,
+      "case": "output-symlink",
+      "exit": 0,
+      "stdout": "{\"components\": 28, \"families\": 9, \"contacts\": 21, \"dispositions\": {\"outside-source-domain-unclassified\": 4, \"land-plus-compatible-original-processing-reproduction-candidate\": 11, \"land-with-admin-partial-or-unbound-source-fitness-review\": 10, \"mixed-support-retain-whole-source-fitness-review\": 3}, \"",
+      "stderr": "",
+      "escaped_destination_written": true
+    }
+  ],
+  "scratch_file_hashes": [
+    {
+      "path": "escaped-japan.json",
+      "bytes": 107012,
+      "sha256": "72ce7765076eb94f195de4e3f80cd521528c12e14c63ffc92c040e4ab2d5484d"
+    },
+    {
+      "path": "escaped-france.json",
+      "bytes": 915,
+      "sha256": "b3a5075d385a3e977333f69836bbe70ef3ec50dc441abfa5e39eeb438b50c445"
+    },
+    {
+      "path": "1329-false-control/summary-metrics.json",
+      "bytes": 915,
+      "sha256": "b3a5075d385a3e977333f69836bbe70ef3ec50dc441abfa5e39eeb438b50c445"
+    },
+    {
+      "path": "1329-false-control/validation-negative.json",
+      "bytes": 869,
+      "sha256": "6bd6ef01546fefbc242529b4104d2c77ba50d0f98f83e8ce0ae18fcc4259f56f"
+    },
+    {
+      "path": "1329-false-control/summarize.py",
+      "bytes": 9547,
+      "sha256": "1669f9166118f09e6eac463299daea46a1f22fe51f0b67f153cb0cbc082696fa"
+    },
+    {
+      "path": "1329-false-control/validation-positive.json",
+      "bytes": 414,
+      "sha256": "9b850130087236a9fbdac0dae5b8b4a010c7b900a27c8e37bc965483df7667fc"
+    },
+    {
+      "path": "1329-false-control/candidate-findings.csv",
+      "bytes": 30716,
+      "sha256": "530c0fe37be9ee3669577a7924ac636620480283906e4e1b1ba943a7f3d180b2"
+    },
+    {
+      "path": "1329-false-control/validation-reproducibility.json",
+      "bytes": 310,
+      "sha256": "262b69c05648de84490f150ecec0f915f258c63f2eb918749219e88def932c17"
+    },
+    {
+      "path": "1329-false-control/contact-findings.csv",
+      "bytes": 6997,
+      "sha256": "cb5768f767091d3be6195b089bb08826815f0c1c7872241d8003dfd2dfdbb85b"
+    },
+    {
+      "path": "1329-false-control/family-findings.csv",
+      "bytes": 5447,
+      "sha256": "6ab8552b208fe98759dd2723f9cc1f22b1051ecd644dde5cc91a5efeafb728c2"
+    },
+    {
+      "path": "1329-false-control/verification/run-1.json",
+      "bytes": 861396,
+      "sha256": "03da0dde865d705fd8caa77d03e8c419cdf9ddb9782cf3caed6e3a00c58b6a43"
+    },
+    {
+      "path": "1329-false-control/verification/run-2.json",
+      "bytes": 861396,
+      "sha256": "03da0dde865d705fd8caa77d03e8c419cdf9ddb9782cf3caed6e3a00c58b6a43"
+    },
+    {
+      "path": "1334-missing-contact/assessment_controls.py",
+      "bytes": 5217,
+      "sha256": "aa9f3474193c95726d628eed020534058e406d5b5cd399605c4df311a8d5634b"
+    },
+    {
+      "path": "1334-missing-contact/executions/run-1-receipt.json",
+      "bytes": 1297,
+      "sha256": "5992523496a94e4aba5afced0f4787d2526cc034319e947d280eca6932902db9"
+    },
+    {
+      "path": "1334-missing-contact/executions/reproducibility-control.json",
+      "bytes": 532,
+      "sha256": "ffd813e9bdaa2d3deb19f5c0eef8485a100282c6fe92b1334967ad894e874f6a"
+    },
+    {
+      "path": "1334-missing-contact/executions/positive-control.json",
+      "bytes": 309,
+      "sha256": "d307e37f10d5ea1316c8179e5671585ec091c400d8a8f7bd661c8497e8a104fb"
+    },
+    {
+      "path": "1334-missing-contact/executions/output-comparison.json",
+      "bytes": 289,
+      "sha256": "21a337ccbe6ef30fb1926778c494b8c2f8c8a562ffeda0639bba69f6a5295f05"
+    },
+    {
+      "path": "1334-missing-contact/executions/negative-control.json",
+      "bytes": 721,
+      "sha256": "e11e9cadb897bf7ca6ba0f3ba7ea9f4865f7771e71e2b81b6442b09e2c3c9f06"
+    },
+    {
+      "path": "1334-missing-contact/executions/run-2-receipt.json",
+      "bytes": 1297,
+      "sha256": "9b271780e0d5beebd8e0cc2e04669d82afe370d03aaf00116058ebcd3da7e319"
+    },
+    {
+      "path": "1334-missing-contact/executions/source-id-comparison.json",
+      "bytes": 2990,
+      "sha256": "f62a135985e793364210c8c9d96cb1bad19fffd5e8911a97b8f0dd2ab30e38d0"
+    },
+    {
+      "path": "1334-missing-contact/executions/run-2/candidate-assessment.jsonl",
+      "bytes": 167901,
+      "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba"
+    },
+    {
+      "path": "1334-missing-contact/executions/run-1/candidate-assessment.jsonl",
+      "bytes": 167901,
+      "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba"
+    },
+    {
+      "path": "1334-missing-contact/executions/run-1/contact-lineage.json",
+      "bytes": 244764,
+      "sha256": "5a33358ad183bc7a4f97af16666f56ca6422bd02dd0322b8baa32f4ae7ba309d"
+    },
+    {
+      "path": "1334-missing-contact/executions/run-1/family-reconciliation.json",
+      "bytes": 11970,
+      "sha256": "628d460e69c93ea9bc82a9b330d46b03e8bfa7cb4e6c3c40978aa376580ca426"
+    },
+    {
+      "path": "1334-missing-contact/inputs/complete-kazakhstan-russia-handoff.json",
+      "bytes": 651638,
+      "sha256": "2c6cae9dbf4ac28bfe623624a5eab92dcc70ca71d6decc36f6ec8ca204d4d550"
+    },
+    {
+      "path": "1334-changed-run-two/assessment_controls.py",
+      "bytes": 5217,
+      "sha256": "aa9f3474193c95726d628eed020534058e406d5b5cd399605c4df311a8d5634b"
+    },
+    {
+      "path": "1334-changed-run-two/executions/run-1-receipt.json",
+      "bytes": 1297,
+      "sha256": "5992523496a94e4aba5afced0f4787d2526cc034319e947d280eca6932902db9"
+    },
+    {
+      "path": "1334-changed-run-two/executions/reproducibility-control.json",
+      "bytes": 532,
+      "sha256": "ffd813e9bdaa2d3deb19f5c0eef8485a100282c6fe92b1334967ad894e874f6a"
+    },
+    {
+      "path": "1334-changed-run-two/executions/positive-control.json",
+      "bytes": 309,
+      "sha256": "d307e37f10d5ea1316c8179e5671585ec091c400d8a8f7bd661c8497e8a104fb"
+    },
+    {
+      "path": "1334-changed-run-two/executions/output-comparison.json",
+      "bytes": 289,
+      "sha256": "21a337ccbe6ef30fb1926778c494b8c2f8c8a562ffeda0639bba69f6a5295f05"
+    },
+    {
+      "path": "1334-changed-run-two/executions/negative-control.json",
+      "bytes": 721,
+      "sha256": "e11e9cadb897bf7ca6ba0f3ba7ea9f4865f7771e71e2b81b6442b09e2c3c9f06"
+    },
+    {
+      "path": "1334-changed-run-two/executions/run-2-receipt.json",
+      "bytes": 1297,
+      "sha256": "9b271780e0d5beebd8e0cc2e04669d82afe370d03aaf00116058ebcd3da7e319"
+    },
+    {
+      "path": "1334-changed-run-two/executions/source-id-comparison.json",
+      "bytes": 2990,
+      "sha256": "f62a135985e793364210c8c9d96cb1bad19fffd5e8911a97b8f0dd2ab30e38d0"
+    },
+    {
+      "path": "1334-changed-run-two/executions/run-2/candidate-assessment.jsonl",
+      "bytes": 174219,
+      "sha256": "4da44a99f4b118cda691f948ca2fb4c2857f07d8d07922df43e1d498feea6424"
+    },
+    {
+      "path": "1334-changed-run-two/executions/run-1/candidate-assessment.jsonl",
+      "bytes": 167901,
+      "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba"
+    },
+    {
+      "path": "1334-changed-run-two/executions/run-1/contact-lineage.json",
+      "bytes": 233591,
+      "sha256": "f5e13688c1db5e692c6746cf66c8dc2a94dc0d9d55885a7e159d73b8cacc914b"
+    },
+    {
+      "path": "1334-changed-run-two/executions/run-1/family-reconciliation.json",
+      "bytes": 11970,
+      "sha256": "628d460e69c93ea9bc82a9b330d46b03e8bfa7cb4e6c3c40978aa376580ca426"
+    },
+    {
+      "path": "1334-changed-run-two/inputs/complete-kazakhstan-russia-handoff.json",
+      "bytes": 651638,
+      "sha256": "2c6cae9dbf4ac28bfe623624a5eab92dcc70ca71d6decc36f6ec8ca204d4d550"
+    },
+    {
+      "path": "1329-empty-relations/summary-metrics.json",
+      "bytes": 915,
+      "sha256": "b3a5075d385a3e977333f69836bbe70ef3ec50dc441abfa5e39eeb438b50c445"
+    },
+    {
+      "path": "1329-empty-relations/validation-negative.json",
+      "bytes": 868,
+      "sha256": "4edb091f4f01644e9c34c47f8d7963b24ca636eb3a44f43c01244a1cdaa6b40b"
+    },
+    {
+      "path": "1329-empty-relations/summarize.py",
+      "bytes": 9547,
+      "sha256": "1669f9166118f09e6eac463299daea46a1f22fe51f0b67f153cb0cbc082696fa"
+    },
+    {
+      "path": "1329-empty-relations/validation-positive.json",
+      "bytes": 414,
+      "sha256": "9b850130087236a9fbdac0dae5b8b4a010c7b900a27c8e37bc965483df7667fc"
+    },
+    {
+      "path": "1329-empty-relations/candidate-findings.csv",
+      "bytes": 30043,
+      "sha256": "313fafb1e413fd7e62aa40340a84fed2d159dba91648be2274945e5de00a8992"
+    },
+    {
+      "path": "1329-empty-relations/validation-reproducibility.json",
+      "bytes": 310,
+      "sha256": "3950bf6f68e7cc0c75282d24ead0a4b73fd42a95572aa1324c190e1faec080a9"
+    },
+    {
+      "path": "1329-empty-relations/contact-findings.csv",
+      "bytes": 6997,
+      "sha256": "cb5768f767091d3be6195b089bb08826815f0c1c7872241d8003dfd2dfdbb85b"
+    },
+    {
+      "path": "1329-empty-relations/family-findings.csv",
+      "bytes": 5447,
+      "sha256": "6ab8552b208fe98759dd2723f9cc1f22b1051ecd644dde5cc91a5efeafb728c2"
+    },
+    {
+      "path": "1329-empty-relations/verification/run-1.json",
+      "bytes": 850051,
+      "sha256": "b24342b28a7dbfe4e3a9ab32fb68e3368eab08d4bced4d9066de971322cd0ee8"
+    },
+    {
+      "path": "1329-empty-relations/verification/run-2.json",
+      "bytes": 850051,
+      "sha256": "b24342b28a7dbfe4e3a9ab32fb68e3368eab08d4bced4d9066de971322cd0ee8"
+    },
+    {
+      "path": "1334-intact/assessment_controls.py",
+      "bytes": 5217,
+      "sha256": "aa9f3474193c95726d628eed020534058e406d5b5cd399605c4df311a8d5634b"
+    },
+    {
+      "path": "1334-intact/executions/run-1-receipt.json",
+      "bytes": 1297,
+      "sha256": "5992523496a94e4aba5afced0f4787d2526cc034319e947d280eca6932902db9"
+    },
+    {
+      "path": "1334-intact/executions/reproducibility-control.json",
+      "bytes": 532,
+      "sha256": "ffd813e9bdaa2d3deb19f5c0eef8485a100282c6fe92b1334967ad894e874f6a"
+    },
+    {
+      "path": "1334-intact/executions/positive-control.json",
+      "bytes": 309,
+      "sha256": "d307e37f10d5ea1316c8179e5671585ec091c400d8a8f7bd661c8497e8a104fb"
+    },
+    {
+      "path": "1334-intact/executions/output-comparison.json",
+      "bytes": 289,
+      "sha256": "21a337ccbe6ef30fb1926778c494b8c2f8c8a562ffeda0639bba69f6a5295f05"
+    },
+    {
+      "path": "1334-intact/executions/negative-control.json",
+      "bytes": 721,
+      "sha256": "e11e9cadb897bf7ca6ba0f3ba7ea9f4865f7771e71e2b81b6442b09e2c3c9f06"
+    },
+    {
+      "path": "1334-intact/executions/run-2-receipt.json",
+      "bytes": 1297,
+      "sha256": "9b271780e0d5beebd8e0cc2e04669d82afe370d03aaf00116058ebcd3da7e319"
+    },
+    {
+      "path": "1334-intact/executions/source-id-comparison.json",
+      "bytes": 2990,
+      "sha256": "f62a135985e793364210c8c9d96cb1bad19fffd5e8911a97b8f0dd2ab30e38d0"
+    },
+    {
+      "path": "1334-intact/executions/run-2/candidate-assessment.jsonl",
+      "bytes": 167901,
+      "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba"
+    },
+    {
+      "path": "1334-intact/executions/run-1/candidate-assessment.jsonl",
+      "bytes": 167901,
+      "sha256": "820e5a1d6779a96b3a9d7d1ad4889e0de9ea2f7bd14266f78cdc8e31c7977eba"
+    },
+    {
+      "path": "1334-intact/executions/run-1/contact-lineage.json",
+      "bytes": 233591,
+      "sha256": "f5e13688c1db5e692c6746cf66c8dc2a94dc0d9d55885a7e159d73b8cacc914b"
+    },
+    {
+      "path": "1334-intact/executions/run-1/family-reconciliation.json",
+      "bytes": 11970,
+      "sha256": "628d460e69c93ea9bc82a9b330d46b03e8bfa7cb4e6c3c40978aa376580ca426"
+    },
+    {
+      "path": "1334-intact/inputs/complete-kazakhstan-russia-handoff.json",
+      "bytes": 651638,
+      "sha256": "2c6cae9dbf4ac28bfe623624a5eab92dcc70ca71d6decc36f6ec8ca204d4d550"
+    },
+    {
+      "path": "1342-output-symlink/methods/build_source_fitness_table.py",
+      "bytes": 11167,
+      "sha256": "1c867bd02cc1e42207ac0a7cddaf7b320be1b8eda292b7e4f61189c5a3c2535a"
+    },
+    {
+      "path": "1342-output-symlink/results/source-overlays.json",
+      "bytes": 4355038,
+      "sha256": "2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804"
+    },
+    {
+      "path": "1342-output-symlink/inputs/existing-physical-row-scope.json",
+      "bytes": 129526,
+      "sha256": "70c424d2ccd38442dceb4f585da08cc6bb4dd8e88d8af5bb849fc192120a6518"
+    },
+    {
+      "path": "1342-output-symlink/inputs/immutable-scope-and-inputs.json",
+      "bytes": 269440,
+      "sha256": "61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414"
+    },
+    {
+      "path": "1329-output-symlink/validation-negative.json",
+      "bytes": 868,
+      "sha256": "4edb091f4f01644e9c34c47f8d7963b24ca636eb3a44f43c01244a1cdaa6b40b"
+    },
+    {
+      "path": "1329-output-symlink/summarize.py",
+      "bytes": 9547,
+      "sha256": "1669f9166118f09e6eac463299daea46a1f22fe51f0b67f153cb0cbc082696fa"
+    },
+    {
+      "path": "1329-output-symlink/validation-positive.json",
+      "bytes": 414,
+      "sha256": "9b850130087236a9fbdac0dae5b8b4a010c7b900a27c8e37bc965483df7667fc"
+    },
+    {
+      "path": "1329-output-symlink/candidate-findings.csv",
+      "bytes": 30716,
+      "sha256": "530c0fe37be9ee3669577a7924ac636620480283906e4e1b1ba943a7f3d180b2"
+    },
+    {
+      "path": "1329-output-symlink/validation-reproducibility.json",
+      "bytes": 310,
+      "sha256": "f8957e8ff2dcd2c4379c27e7512706b0f95b8a27b245003797480e464fe18ceb"
+    },
+    {
+      "path": "1329-output-symlink/contact-findings.csv",
+      "bytes": 6997,
+      "sha256": "cb5768f767091d3be6195b089bb08826815f0c1c7872241d8003dfd2dfdbb85b"
+    },
+    {
+      "path": "1329-output-symlink/family-findings.csv",
+      "bytes": 5447,
+      "sha256": "6ab8552b208fe98759dd2723f9cc1f22b1051ecd644dde5cc91a5efeafb728c2"
+    },
+    {
+      "path": "1329-output-symlink/verification/run-1.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af"
+    },
+    {
+      "path": "1329-output-symlink/verification/run-2.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af"
+    },
+    {
+      "path": "1342-intact/methods/build_source_fitness_table.py",
+      "bytes": 11167,
+      "sha256": "1c867bd02cc1e42207ac0a7cddaf7b320be1b8eda292b7e4f61189c5a3c2535a"
+    },
+    {
+      "path": "1342-intact/results/source-overlays.json",
+      "bytes": 4355038,
+      "sha256": "2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804"
+    },
+    {
+      "path": "1342-intact/results/source-fitness-table.json",
+      "bytes": 107012,
+      "sha256": "72ce7765076eb94f195de4e3f80cd521528c12e14c63ffc92c040e4ab2d5484d"
+    },
+    {
+      "path": "1342-intact/inputs/existing-physical-row-scope.json",
+      "bytes": 129526,
+      "sha256": "70c424d2ccd38442dceb4f585da08cc6bb4dd8e88d8af5bb849fc192120a6518"
+    },
+    {
+      "path": "1342-intact/inputs/immutable-scope-and-inputs.json",
+      "bytes": 269440,
+      "sha256": "61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414"
+    },
+    {
+      "path": "1342-foreign-target/methods/build_source_fitness_table.py",
+      "bytes": 11167,
+      "sha256": "1c867bd02cc1e42207ac0a7cddaf7b320be1b8eda292b7e4f61189c5a3c2535a"
+    },
+    {
+      "path": "1342-foreign-target/results/source-overlays.json",
+      "bytes": 4707983,
+      "sha256": "83b5a442614b1e5c2bb607baf950ad03dd30ae5e6a9efd9b1bba301eeb1b6de2"
+    },
+    {
+      "path": "1342-foreign-target/results/source-fitness-table.json",
+      "bytes": 107012,
+      "sha256": "08864b548c1d18e23cb5e3dc895cf4fe378b3a76dd9fb393a69b781dadfa4b90"
+    },
+    {
+      "path": "1342-foreign-target/inputs/existing-physical-row-scope.json",
+      "bytes": 129526,
+      "sha256": "70c424d2ccd38442dceb4f585da08cc6bb4dd8e88d8af5bb849fc192120a6518"
+    },
+    {
+      "path": "1342-foreign-target/inputs/immutable-scope-and-inputs.json",
+      "bytes": 269440,
+      "sha256": "61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414"
+    },
+    {
+      "path": "1329-intact/summary-metrics.json",
+      "bytes": 915,
+      "sha256": "b3a5075d385a3e977333f69836bbe70ef3ec50dc441abfa5e39eeb438b50c445"
+    },
+    {
+      "path": "1329-intact/validation-negative.json",
+      "bytes": 868,
+      "sha256": "4edb091f4f01644e9c34c47f8d7963b24ca636eb3a44f43c01244a1cdaa6b40b"
+    },
+    {
+      "path": "1329-intact/summarize.py",
+      "bytes": 9547,
+      "sha256": "1669f9166118f09e6eac463299daea46a1f22fe51f0b67f153cb0cbc082696fa"
+    },
+    {
+      "path": "1329-intact/validation-positive.json",
+      "bytes": 414,
+      "sha256": "9b850130087236a9fbdac0dae5b8b4a010c7b900a27c8e37bc965483df7667fc"
+    },
+    {
+      "path": "1329-intact/candidate-findings.csv",
+      "bytes": 30716,
+      "sha256": "530c0fe37be9ee3669577a7924ac636620480283906e4e1b1ba943a7f3d180b2"
+    },
+    {
+      "path": "1329-intact/validation-reproducibility.json",
+      "bytes": 310,
+      "sha256": "f8957e8ff2dcd2c4379c27e7512706b0f95b8a27b245003797480e464fe18ceb"
+    },
+    {
+      "path": "1329-intact/contact-findings.csv",
+      "bytes": 6997,
+      "sha256": "cb5768f767091d3be6195b089bb08826815f0c1c7872241d8003dfd2dfdbb85b"
+    },
+    {
+      "path": "1329-intact/family-findings.csv",
+      "bytes": 5447,
+      "sha256": "6ab8552b208fe98759dd2723f9cc1f22b1051ecd644dde5cc91a5efeafb728c2"
+    },
+    {
+      "path": "1329-intact/verification/run-1.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af"
+    },
+    {
+      "path": "1329-intact/verification/run-2.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af"
+    }
+  ],
+  "scratch_removed": true,
+  "basis": "Main investigation before this instruction change; bounded retained-report/control execution, not full GIS or source verification. Original scratch was removed after retaining hashes.",
+  "limits": [
+    "Full source/GIS experiments were not executed for all six audit cases.",
+    "These results describe the reviewed historical heads, not current corrective PRs.",
+    "Instruction adoption by subsequent authors/reviewers remains unverified."
+  ],
+  "reviewed_heads": {
+    "1329": "9aa7d9efd51cd9eb8d6eb1026af63badd5e11314",
+    "1334": "0ea0b5524392aa7ad98d2f2f66b80e8ef1976376",
+    "1342": "57824d58a284e49ec037d47fa2dbf306baee51e9"
+  }
+}
