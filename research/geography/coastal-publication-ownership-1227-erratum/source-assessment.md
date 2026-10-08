@@ -1,0 +1,25 @@
+# Scoped source and territorial assessment
+
+Assessment date: 2026-10-07 America/Los_Angeles. Scope: the eight USA ADM2/Georgia county identities listed in `README.md`, as already recorded in the retained #980/#1160 source packets. This integrity erratum introduces no new source vintage or territorial claim.
+
+## Territorial meaning and parent relationships
+
+The inherited Atlas subjects are county-tier administrative entities, not subdivisions of a separate coastal region. Their retained Atlas metadata identifies USA ADM2, 2018 reference year, `gb:USA:ADM2` source identity and common Georgia parent `framework:province:georgia:99c5fb82481b`. The source comparisons join GEOID to the eight exact Atlas IDs and check Census state `13`, county name and LSAD `06`. The exact IDs, code/name mappings and result rows are retained in the prior `eight-county-comparison.json` evidence and reproduced byte-for-byte here.
+
+Five counties (Camden, Chatham, Glynn, Liberty, McIntosh) are used as coastal comparison screens; Pike, Schley and Terrell are interior controls. The roster has eight of eight requested subjects. It does not establish Georgia's complete county roster, adjacency, all coastal islands/water, or the neighboring states' granularity.
+
+## Source roles, vintage, completeness and reuse
+
+- **Atlas identity/source lineage:** geoBoundaries USA ADM2 identifies 2018 as its boundary year. Metadata, variants, attribution notice and crosswalk remain in the original #981/#1154 evidence. Which variant the Atlas footprints represent and the applicable derivative reuse terms remain unresolved. This packet did not inspect a new downloadable variant and makes no license conclusion.
+- **2018 Census comparator:** TIGERweb county/equivalent statistical geometry, retrieved 2026-10-05T14:21:09.552Z. The whole Georgia/Kentucky response is preserved in `data/regional-review/regional-review-528e53393a4376b4/source/census-2018/georgia-kentucky-counties.geojson`.
+- **2025 Census comparator:** January 1, 2025 TIGERweb county/equivalent statistical geometry, retrieved 2026-10-05T14:21:50.061Z. The retained technical documentation and County layer record support source vintage and county-tier interpretation. The Census [2025 TIGER/Line release page](https://www.census.gov/geographies/mapping-files/2025/geo/tiger-line-file.html) identifies the January 1, 2025 vintage and September 23, 2025 release.
+- **2026 Census comparator:** TIGERweb current layer 82 metadata identifies the January 1, 2026 “Counties (or statistically equivalent entities)” vintage. The exact eight-feature response and metadata were retrieved 2026-10-05T15:32:01.777Z and remain in `data/regional-review/coastal-reference-check-428/source/census-2026/`. The response hash is SHA-256 `c09e62479268b4ee8b986a66768d5dea821b4e667d9d446a78d5304076c2e717` (873,257 bytes). The metadata JSON is the already disclosed final-LF-normalized derivative; both original hashes and retrieval notes remain intact.
+- **Census classification and limitations:** retained 2025 TIGER/Line technical documentation and LSAD/county-code references are in `data/regional-review/coastal-reference-check-428/source/authorities/`. The [official 2025 documentation index](https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/tiger-geo-line/2025.html) supports its source role. TIGER/Line is statistical collection/tabulation material; the retained technical text disclaims positional/attribute accuracy and legal jurisdiction determination. The source is therefore an administrative/statistical comparator, not legal coastal evidence.
+
+Exact whole-file source lengths, hashes and retrieval records remain in the immutable original inventories. This erratum pins and reads original Git blobs rather than current mutable copies. It neither downloads later Census responses nor silently refreshes historical hashes.
+
+## Numerical limits and remaining findings
+
+The retained comparison uses EPSG:6933 with longitude/latitude source coordinates, in-memory-only `make_valid` for invalid Census geometries, and IoU/area calculations as statistical screens. Reproduction confirms identity with the prior outputs; it is not independent ground truth. The five coastal 2018 Atlas-versus-2026 comparisons remain lower than the three interior screens, but the evidence does not distinguish water extent, marsh, offshore islands, source generalization or other representation choices. AREAWATER is not documented with an established unit in the retained 2026 metadata, so its quotient remains conditional. No legal shoreline, full-state coverage, USA source-variant attribution, regional approval or production acceptance is established.
+
+The source inventories explicitly retain the uncertain geoBoundaries reuse terms and restoration references. No original source, release pin, subject ID, parent ID, or previous result was rewritten for this erratum. Any eventual line correction requires authoritative county/survey/legal evidence and neighboring-entity continuity review, outside this issue's owned scope.

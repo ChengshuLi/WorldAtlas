@@ -1,0 +1,69 @@
+{
+  "schema": "worldatlas-1381-evidence-baseline-compatibility:v1",
+  "recorded_at_utc": "2026-10-08T02:17:17Z",
+  "source_issue": 1381,
+  "candidate_baseline_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+  "fresh_main_commit": "97291daccaa44e9c67bba9ae87ceaada641226da",
+  "premerge_ancestry": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7 is an ancestor of fresh-main PR base 97291daccaa44e9c67bba9ae87ceaada641226da",
+  "issue_pin_accounting": {
+    "baseline_pin_count": 63,
+    "baseline_unique_hashes": 63,
+    "all_baseline_pins_match_retained_a37ad_inventory": true,
+    "original_1227_pin_count": 58,
+    "original_1227_unique_hashes": 30,
+    "github_pr_1227_changed_file_count": 58,
+    "original_1227_hash_multiset_matches_all_changed_files": true
+  },
+  "single_baseline_read": {
+    "at_original_source_commit": "a37ad37b94168f9b458617489a702bbb72afbd3d",
+    "all_63_source_pins_available": true,
+    "original_1227_outputs_available": false,
+    "reason": "The issue's original_1227 files first coexist with their source bytes at the later PR merge."
+  },
+  "single_baseline_read_at_pr_merge": {
+    "commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+    "original_1227_outputs_available": true,
+    "source_pin_mismatches": [
+      {
+        "path": "data/geography/part-11.json",
+        "issue_pin_sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "actual_sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "issue_pin_sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "actual_sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+      }
+    ]
+  },
+  "manifest_v1_contract_check": {
+    "no_file_reader_validation": "limited",
+    "issue_subjects_checked": 8,
+    "issue_pins_declared": 121,
+    "metric_rows_and_bindings": 177,
+    "meaning": "Schema, issue bindings, ledgers and declarations were checked without reading file bytes; this is not evidence-gate success."
+  },
+  "full_byte_validation": {
+    "status": "failed",
+    "first_error": "Input bytes mismatch: a1cf4cd86fd07d00ae592b4705e4b39f50628df7:data/geography/part-11.json",
+    "command": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/evidence-quality.mjs research/geography/coastal-publication-ownership-1227-erratum/evidence-quality.json"
+  },
+  "conclusion": "The current evidence-v1 contract pins cannot all bind to one ancestor commit. No history was repinned, no shared gate was changed, and no passing evidence result is claimed.",
+  "engineering_follow_up": "Add reviewed source-vintage-aware baseline pinning to the trusted evidence contract and hosted premerge validator, or authorize a precise issue-contract adjustment that preserves both historical vintages.",
+  "output_inventory": {
+    "outputs": 40,
+    "change_receipts": 41,
+    "candidate_owned_files": 41,
+    "manifest_is_self_excluded_from_outputs": true
+  },
+  "fresh_main_reproduction": {
+    "run_ids": [
+      "current-main-a",
+      "current-main-b"
+    ],
+    "pair_verification": "passed",
+    "controls_only": "passed",
+    "all_four_scientific_products_match_retained_original_bytes": true,
+    "runner_runtime": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2"
+  }
+}

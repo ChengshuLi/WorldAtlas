@@ -1,0 +1,52 @@
+{
+  "schema": "coastal-integrity-execution:v1",
+  "issue": 1381,
+  "run_id": "current-main-b",
+  "checkout_head": "97291daccaa44e9c67bba9ae87ceaada641226da",
+  "started_at": "2026-10-08T02:18:43.296499+00:00",
+  "command": "python3.12 research/geography/coastal-publication-ownership-1227-erratum/fresh_reproduce.py --run-id current-main-b",
+  "source_commit": "a37ad37b94168f9b458617489a702bbb72afbd3d",
+  "source_pin_inventory_sha256": "99d6b1ac1551160e46d58076dbfe0269973bc518e5037f371622e9903005b8c9",
+  "runner_sha256": "d974c2c4884bc0b16b778ef922bdf7686ba334866e58f75ffdd3986e0e1cb738",
+  "trusted_reader_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+  "executed_project_code": [
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/reproduce.py",
+      "bytes": 15859,
+      "sha256": "be7d84a1d75663c5169dca35cd530018f17d079b3f24e0527a08b190cb1c4493",
+      "loaded_from": "immutable Git object bytes"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "bytes": 5264,
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "loaded_from": "immutable Git object bytes"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "loaded_from": "immutable Git object bytes"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "loaded_from": "immutable Git object bytes"
+    }
+  ],
+  "loaded_module_sha256": {
+    "coastal_980_historical": "be7d84a1d75663c5169dca35cd530018f17d079b3f24e0527a08b190cb1c4493",
+    "scripts.evidence.geometry": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+    "ellipsoidal_area": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2"
+  },
+  "products_match_retained_run_one": true,
+  "limits": [
+    "The captured historical code is cooperatively executed, not sandboxed."
+  ]
+}
