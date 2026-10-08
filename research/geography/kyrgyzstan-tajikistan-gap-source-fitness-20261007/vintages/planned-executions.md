@@ -1,8 +1,19 @@
-# Prepared #1431 execution handoff
+# #1431 execution record and resource bounds
 
 Contract SHA-256: `2aa9ab4ea222fc7a00668e1306c9e4be15f15de943607979605d1d91068750b3`.
 
-The exact source overlay producer is bounded to the complete 15 local-family components against all 99 original simplified administrative features (1,485 pair rows), with all nine contacts retained as context. Two independent full-scope runs are prepared. The user/coordinator must supply a fresh coordinated memory-window ID after the current #1295 B build window releases; until then these commands are intentionally not runnable.
+The exact source overlay producer is bounded to the complete 15 local-family components against all 99 original simplified administrative features (1,485 pair rows), with all nine contacts retained as context. Two independent full-scope runs and their directed controls completed on frozen code/input head `b91d38254bc7fb901fefcb6112f5878fbc52d463` in coordinated window `root-1431-b91d3825-20261008-03`. No commit occurred between the runs. The run outputs, controls, RSS samples and supervisor receipts are retained under this directory's `vintages/`.
+
+The execution bindings are: custody vintage `custody-10`, preflight commit `dc95bba1a135ef52eb9bca95188583579278bf2a`, preflight execution-pins SHA-256 `72fc8fc16e4f7c60e9c8bf5c8fa0c0546cb3347fd0fb4fc63069674e6ff3d07a`, final execution-pins SHA-256 at the frozen run head `44277e23ed4ca052c681f92841a6b4b1f900e30a0cb45db376a491178bc3e9e4`, and input-pins SHA-256 `93467639bf9393aa36970ec5404fa695d3d7a4ae9f936013363cfb01ead8d539`. The custody preflight verified the 74 source/runtime inputs, 15 complete components, all 9 contact features, 41 KGZ and 58 TJK complete source features, runtime bundle and exact code bindings before any geographic operation. It used 213,863,483 of 268,435,456 phase bytes, reached 155,910,144 bytes RSS, and completed in 69.8 seconds with `geographic_operations: 0`.
+
+Both full runs completed 1,485 component/source rows and 27 intersecting pairs. All non-admission source-result fields match; the differing `precalculation_admission` objects preserve the distinct fresh per-run resource snapshots. Normalized source-result SHA-256 with only that per-run object removed: `ae443f40e0e2be0c0b2f7fb6f97a5e37192e6c4349c5774cc21877ed502adfe0`.
+
+| Run | Fresh input phase | Admission page-supply candidate | Pre-geometry RSS | Sampled tree peak | Producer prepublication RSS | OS child-lifetime RSS | Directed controls |
+|---|---:|---:|---:|---:|---:|---:|---|
+| `source-fitness-run-01` | 213,892,322 B | 1,473,216,512 B | 158,220,288 B | 149,127,168 B | 158,220,288 B | 158,220,288 B | pass |
+| `source-fitness-run-02` | 213,892,322 B | 1,366,654,976 B | 168,247,296 B | 166,313,984 B | 168,247,296 B | 168,247,296 B | pass |
+
+The unchanged admission floor was 1,342,177,280 candidate bytes (768 MiB process ceiling plus 512 MiB host reserve); each row's snapshot exceeded it. Both supervisor receipts report exit code 0, no stop reason, no live descendants after reap, and a 640 MiB sampled-tree stop threshold. Each control receipt records the positive exact-source predicate and passes all four negative controls. Source-product descriptor checks also reject wrong-prefix, foreign-origin, missing-product and reordered-product inputs. Per-run exact hashes and receipt values are in the respective `run-summary.json`, `control-receipt.json`, `supervision.json` and `publication.json` files.
 
 ```sh
 set -e
