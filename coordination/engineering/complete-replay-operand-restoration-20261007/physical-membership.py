@@ -33,7 +33,7 @@ def validate_spec(spec,context):
  need(context.get('scientific_execution_commit')==OLD and context.get('request_pin') and context.get('freeze_pin') and context.get('spec_pin'),'Explicit current request/freeze/spec custody required')
  need(context.get('current_project_pins') and all(p.get('commit')==head for p in context['current_project_pins']),'Actual separately frozen current project closure required')
  need(spec['prior_project_pins'] and all(p.get('commit')==OLD for p in spec['prior_project_pins']),'Original ce98 executed closure required')
- need(len(spec['physical'])==71 and len(spec['components']['outputs'])==7 and len(spec['routing'])==25,'Complete original71/7/25 stage roster required')
+ need(len(spec['physical'])==71 and len(product(spec['components'],'components-'))==7 and len(spec['routing'])==25,'Complete original71/7/25 stage roster required')
  for family in ('physical','routing'):
   need([s['ordinal'] for s in spec[family]]==list(range(len(spec[family]))),'Original source shard ordering differs')
 
