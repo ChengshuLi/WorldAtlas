@@ -79,8 +79,8 @@ if (!controls || controls.controls.some(item => item.outcome !== 'rejected-befor
     controls.safe_destination_controls.some(item => item.outcome !== 'rejected-before-success-receipt' || item.receipt_exists || item.preserved_sentinel === false)) {
   throw new Error('Control evidence does not establish all exact expected relations');
 }
-const run1Path = `${packet}/vintages/verified-22e8f9d1-run1/validation.json`;
-const run2Path = `${packet}/vintages/verified-22e8f9d1-run2/validation.json`;
+const run1Path = `${packet}/vintages/verified-${validatorSha.slice(0, 8)}-run1/validation.json`;
+const run2Path = `${packet}/vintages/verified-${validatorSha.slice(0, 8)}-run2/validation.json`;
 const run1 = readJSON(run1Path), run2 = readJSON(run2Path);
 const run1Bytes = fs.readFileSync(path.join(root, run1Path));
 const run2Bytes = fs.readFileSync(path.join(root, run2Path));

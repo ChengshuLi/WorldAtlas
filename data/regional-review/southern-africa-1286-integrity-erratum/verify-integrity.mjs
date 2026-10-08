@@ -237,6 +237,7 @@ for (const [id, crosswalk] of expectedCrosswalkRows) {
     'followup_issues', 'additional_parent_ambiguity', 'evidence_refs']) {
     check(equal(row[key], frozen[key]), `assessment ${key} differs from the pinned original per-ID disposition for ${id}`);
   }
+  check(equal(row, frozen), `complete assessment record differs from the pinned original row for ${id}`);
 }
 const classificationCounts = Object.fromEntries(['justified', 'correction-needed', 'insufficient-evidence']
   .map(key => [key, assessments.rows.filter(row => row.classification === key).length]));
