@@ -121,7 +121,7 @@ def main() -> None:
             results.append({"case": "control-dangling-link", "outcome": "rejected_preserving_symlink", "is_symlink": True, "target_exists": link.exists()})
         finally:
             subprocess.run(["git", "-C", str(ROOT), "worktree", "remove", "--force", str(repo)], check=True)
-    result = {"version": 1, "issue": 1365, "outcome": "passed", "baseline_commit": BASE, "python": sys.version.split()[0], "control_harness_sha256": sha(Path(__file__).read_bytes()), "cases": results, "runner_sha256": sha(original_script), "pin_ledger_sha256": sha(original_ledger), "issue_snapshot_sha256": sha(original_snapshot)}
+    result = {"version": 1, "issue": 1365, "method_id": "immutable-texas-erratum-join", "kind": "negative-control", "outcome": "passed", "baseline_commit": BASE, "python": sys.version.split()[0], "control_harness_sha256": sha(Path(__file__).read_bytes()), "cases": results, "runner_sha256": sha(original_script), "pin_ledger_sha256": sha(original_ledger), "issue_snapshot_sha256": sha(original_snapshot)}
     print(json.dumps(result, indent=2, sort_keys=True))
 
 

@@ -37,9 +37,12 @@ From repository root, run the corrected real producer twice with two fresh names
 ```sh
 python3.12 data/regional-review/texas-erratum-integrity-1144-followup/reproduce_immutable.py --vintage 2026-10-07-run-1
 python3.12 data/regional-review/texas-erratum-integrity-1144-followup/reproduce_immutable.py --vintage 2026-10-07-run-2
+python3.12 data/regional-review/texas-erratum-integrity-1144-followup/record_run_receipts.py
 ```
 
 These two final runs use Python 3.12.14 and are retained under `vintages/2026-10-07-run-1/` and `vintages/2026-10-07-run-2/`. Each validation record binds the execution runtime, exact producer/helper hashes and baseline commit. For every run the table is 309,836 bytes, SHA-256 `0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28`; the summary is 3,554 bytes, SHA-256 `31f533b2fb485f71beb34599b343ece2b769d9e0f12f7efc58c10385620bcb45`; and the per-run validation record confirms exact output equality with the retained originals. `publication.json` binds every product hash and is written last.
+
+`record_run_receipts.py` refuses to overwrite either receipt and uses exclusive creation. Its positive control binds the 254-subject scope, all four 254-row identity joins, the 313 CBF polygon components, and byte equality with the retained valid output. Its reproducibility control compares the ordered erratum table, summary, and validation bytes from both runs. The digest uses length-prefixed product names and bytes; the run-specific `publication.json` is listed separately because it includes a different vintage path in each run.
 
 Run the isolated real-entrypoint adverse controls:
 
@@ -47,7 +50,7 @@ Run the isolated real-entrypoint adverse controls:
 python3.12 data/regional-review/texas-erratum-integrity-1144-followup/verify_controls.py
 ```
 
-The controls use a temporary detached checkout at the exact baseline, copy only the owned runner and its retained acceptance/pin files, and remove the fixture checkout after the run. Swapped 2018/2025 GEOIDs, a changed 2018 request `outSR`, a missing GEOID on the last subject, a duplicated subject, and helper-code drift each fail before an output directory exists. Existing-output and interrupted-output sentinels remain unchanged; a dangling destination symlink remains in place and is rejected. The control receipt preserves changed-fixture hashes, restored source hashes, exact runner/pin/issue-snapshot hashes, and observed failure class. A failed experiment is not represented as a successful result.
+The controls use a temporary detached checkout at the exact baseline, copy only the owned runner and its retained acceptance/pin files, and remove the fixture checkout after the run. Swapped 2018/2025 GEOIDs, a changed 2018 request `outSR`, a missing GEOID on the last subject, a duplicated subject, and helper-code drift each fail before an output directory exists. Existing-output and interrupted-output sentinels remain unchanged; a dangling destination symlink remains in place and is rejected. The control receipt binds `method_id`, `kind: negative-control`, and `outcome: passed`, and preserves changed-fixture hashes, restored source hashes, exact runner/pin/issue-snapshot hashes, and observed failure class. A failed experiment is not represented as a successful result.
 
 ## Engineering handoff
 
