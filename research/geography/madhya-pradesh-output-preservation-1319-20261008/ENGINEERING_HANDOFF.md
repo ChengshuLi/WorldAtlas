@@ -4,7 +4,7 @@ Checkpoint: 2026-10-08 America/Los_Angeles. This is a geography-lane evidence ha
 
 ## Confirmed writer defect
 
-At current `origin/main` `54defba631914989b0b1ebef340ce0b04c39c430`, the original archived files under `data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/` are unchanged from the prior pinned vintage:
+At current `origin/main` `19ca4765a6de436f868742279f86f1f4e340e289`, the original archived files under `data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/` remain unchanged from the prior pinned vintage. The same CLI failure was reproduced at both `54defba631914989b0b1ebef340ce0b04c39c430` and the current base:
 
 | File | SHA-256 |
 | --- | --- |
@@ -13,7 +13,7 @@ At current `origin/main` `54defba631914989b0b1ebef340ce0b04c39c430`, the origina
 | `reproduce_integrity_erratum.py` | `a257f09860ca4db277cbc155e78c937a5a59953f9f3213d9e4c56d868e59e24f` |
 | `evaluation-inputs.json` | `e2f9c442883ea10768dd8ae4946061c9681cb3b9e15e4c1ff442f80c04e3a098` |
 
-`integrity_guards.py::require_new_output` uses `Path.exists()` (lines 16–19). It accepts dangling symlinks and dangling symlinked ancestors. The unchanged actual `validate_controls.py` was copied byte-for-byte with its complete retained inputs into a private mirror under this owned path and invoked twice with separate fresh run IDs. For both `erratum-summary-actual-summary-r3.json` and `correction-ledger-actual-ledger-r3.json`, the CLI exited 0, printed positive/negative/reproducibility `passed`, and created the previously absent target outside the output vintage. The ordinary pre-existing summary control exited nonzero before creating its run directory and preserved sentinel bytes. See `validation/actual-controls-symlink-reproduction-r3.json`; the earlier harness attempt and its artifacts remain under `negative-fixtures/actual-controls-r2` and are not counted as proof.
+`integrity_guards.py::require_new_output` uses `Path.exists()` (lines 16–19). It accepts dangling symlinks and dangling symlinked ancestors. The unchanged actual `validate_controls.py` was copied byte-for-byte with its complete retained inputs into a private mirror under this owned path and invoked twice with separate fresh run IDs. At current base, both dangling-link cases (summary and correction ledger) exit 0, print positive/negative/reproducibility `passed`, and create the previously absent target outside the output vintage. The ordinary pre-existing summary control exits nonzero before creating its run directory and preserves sentinel bytes. See `validation/actual-controls-symlink-reproduction-r7.json`; earlier harness attempts and their retained outputs remain separately labeled and are not counted as current proof.
 
 The exact shared guard used by `reproduce_integrity_erratum.py` was also exercised directly without mocks: dangling final output and dangling symlinked ancestor were accepted; live symlink and ordinary existing-file sentinels were rejected and preserved. See `validation/historical-producer-guard-observation-r2.json`.
 
