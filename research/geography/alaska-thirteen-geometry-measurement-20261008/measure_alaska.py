@@ -713,15 +713,14 @@ def main() -> None:
                 "intersection_area_projected_m2_exact": projected_intersection.area,
                 "same_county_target": case_geometry_by_id[left_id]["target_id"] == case_geometry_by_id[right_id]["target_id"]})
 
-    # Build an exact, minimal first-batch union from two same-county cases
-    # whose original candidate-to-Atlas relation has no positive-area overlap.
-    # Other cases remain fully measured and visible, but are not silently
-    # promoted by source metadata alone.
+    # Test every deterministic two- and three-case same-county subset with
+    # source and parent support. Preexisting target overlap is measured, not
+    # a pre-filter; exact gain, no-loss, retention and neighbor gates decide.
     batch_groups = {}
     for cid in IDS:
         item = case_geometry_by_id[cid]
         case_row = next(row for row in cases if row["component_id"] == cid)
-        if item["source_support_pass"] and item["parent_support_pass"] and not item["old_target_positive_overlap"]:
+        if item["source_support_pass"] and item["parent_support_pass"]:
             batch_groups.setdefault(item["target_id"], []).append(cid)
 
     batch_trials = []
@@ -773,6 +772,8 @@ def main() -> None:
                 batch_passed = bool(target_preserved and union_equals_expected_gain and actual_gain.area > 0
                     and all(candidates_retained.values()) and not new_neighbor_overlaps)
                 trial = {"target_source_id": target_id, "candidate_ids": candidate_ids,
+                    "preexisting_positive_area_target_overlap_component_ids": [cid for cid in candidate_ids
+                        if case_geometry_by_id[cid]["old_target_positive_overlap"]],
                     "old_target_geometry_sha256": sha(canonical(mapping(old_target))),
                     "proposed_target_geometry_sha256": sha(canonical(mapping(proposed_target))),
                     "added_gain_geometry_sha256": sha(canonical(mapping(actual_gain))),

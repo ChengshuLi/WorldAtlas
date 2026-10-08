@@ -7,7 +7,7 @@ import pathlib
 import struct
 import sys
 import shapely
-from shapely.geometry import shape
+from shapely.geometry import MultiPolygon, Polygon, shape
 from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
@@ -40,6 +40,13 @@ def pinned_bytes(path: str, role: str) -> bytes:
 
 def load_pinned(path: str, role: str):
     return json.loads(pinned_bytes(path, role))
+
+def polygon_parts(geom):
+    if geom.geom_type == "Polygon":
+        return [geom]
+    if geom.geom_type == "MultiPolygon":
+        return list(geom.geoms)
+    raise ValueError(f"expected Polygon/MultiPolygon input, found {geom.geom_type}")
 
 def describe(geom):
     return {
@@ -141,6 +148,21 @@ for finding in screen["findings"]:
     gain_match = bool(gain.equals(expected) and gain_residual.is_empty)
     retained = bool(proposed.covers(candidate_geom))
     preexisting_overlap = candidate_geom.intersection(old_geom)
+    assembled = MultiPolygon(polygon_parts(old_geom) + polygon_parts(candidate_geom))
+    assembled_loss = old_geom.difference(assembled)
+    assembled_gain = assembled.difference(old_geom)
+    assembled_expected_gain = candidate_geom.difference(old_geom)
+    assembled_gain_residual = assembled_gain.symmetric_difference(assembled_expected_gain)
+    assembly_neighbor_indices = {int(index) for index in neighbor_tree.query(assembled_gain)}
+    assembly_neighbor_indices.discard(target_neighbor_index)
+    assembly_neighbor_overlaps = []
+    for index in sorted(assembly_neighbor_indices):
+        if assembled_gain.intersection(neighbor_shapes[index]).area > 0:
+            assembly_neighbor_overlaps.append(neighbor_ids[index])
+    assembled_gate_pass = bool(assembled.is_valid and assembled.covers(old_geom)
+        and assembled_loss.is_empty and assembled.covers(candidate_geom)
+        and assembled_gain.equals(assembled_expected_gain) and assembled_gain_residual.is_empty
+        and assembled_gain.area > 0 and not assembly_neighbor_overlaps)
     single_candidate_trials.append({"component_id": cid, "target_source_id": "gb:USA:ADM2:" + target_id,
         "candidate_wkb_sha256": digest(candidate_geom.wkb), "old_target_wkb_sha256": digest(old_geom.wkb),
         "proposed_union_wkb_sha256": digest(proposed.wkb), "old_target_relation_to_union": old_geom.relate(proposed),
@@ -159,7 +181,16 @@ for finding in screen["findings"]:
         "neighbors_receiving_exact_overlay": len(possible_neighbor_indices),
         "added_neighbor_overlaps": added_neighbor_overlaps,
         "single_case_strict_geometry_gate_pass": bool(proposed.is_valid and preserved and retained
-            and gain_match and gain.area > 0 and not added_neighbor_overlaps)})
+            and gain_match and gain.area > 0 and not added_neighbor_overlaps),
+        "direct_assembly_valid": bool(assembled.is_valid),
+        "direct_assembly_target_relation": old_geom.relate(assembled),
+        "direct_assembly_preserves_old_target": bool(assembled.covers(old_geom) and assembled_loss.is_empty),
+        "direct_assembly_retains_candidate": bool(assembled.covers(candidate_geom)),
+        "direct_assembly_gain_equals_candidate_minus_old": bool(assembled_gain.equals(assembled_expected_gain)
+            and assembled_gain_residual.is_empty),
+        "direct_assembly_gain_symdiff_area_raw_exact": assembled_gain_residual.area,
+        "direct_assembly_added_neighbor_overlaps": assembly_neighbor_overlaps,
+        "direct_assembly_strict_geometry_gate_pass": assembled_gate_pass})
 
 variants = {"unary_union_old_then_candidate": unionary,
             "old_union_candidate": union_method,
@@ -168,6 +199,7 @@ CANDIDATE_GROUPS = {
     "52423323B46246640861022": [
         "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
         "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+        "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
     ],
     "52423323B16539688175930": [
         "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
@@ -182,6 +214,7 @@ CANDIDATE_GROUPS = {
 batch_diagnostics = []
 for target_id, candidate_ids in CANDIDATE_GROUPS.items():
     old_target = shape(features["gb:USA:ADM2:" + target_id]["geometry"])
+    target_neighbor_index = neighbor_ids.index("gb:USA:ADM2:" + target_id)
     for size in (2, 3):
         if len(candidate_ids) < size:
             continue
@@ -193,25 +226,26 @@ for target_id, candidate_ids in CANDIDATE_GROUPS.items():
             expected_gain = unary_union([geom.difference(old_target) for geom in added])
             old_loss = old_target.difference(proposed)
             gain_residual = actual_gain.symmetric_difference(expected_gain)
-            sequential = old_target
-            for geom in added:
-                sequential = sequential.union(geom)
+            possible = {int(index) for index in neighbor_tree.query(actual_gain)}
+            possible.discard(target_neighbor_index)
+            added_neighbor_overlaps = []
+            for index in sorted(possible):
+                if actual_gain.intersection(neighbor_shapes[index]).area > 0:
+                    added_neighbor_overlaps.append(neighbor_ids[index])
             batch_diagnostics.append({"target_source_id": "gb:USA:ADM2:" + target_id,
-                "candidate_ids": list(subset),
-                "old_target": describe(old_target),
-                "proposed_union": describe(proposed),
-                "old_target_relation_to_union": old_target.relate(proposed),
-                "old_target_covers_union": bool(old_target.covers(proposed)),
+                "candidate_ids": list(subset), "old_target_relation_to_union": old_target.relate(proposed),
                 "union_covers_old_target": bool(proposed.covers(old_target)),
-                "old_target_difference_union": describe(old_loss),
+                "old_target_loss_area_raw_exact": old_loss.area,
+                "old_target_loss_is_empty": bool(old_loss.is_empty),
                 "candidate_retained": {cid: bool(proposed.covers(geom)) for cid, geom in zip(subset, added)},
-                "actual_gain": describe(actual_gain),
-                "expected_gain": describe(expected_gain),
-                "gain_equals_expected": bool(actual_gain.equals(expected_gain)),
-                "gain_symmetric_difference": describe(gain_residual),
-                "sequential_union": describe(sequential),
-                "sequential_covers_old_target": bool(sequential.covers(old_target)),
-                "sequential_old_target_relation": old_target.relate(sequential)})
+                "actual_gain_area_raw_exact": actual_gain.area,
+                "expected_gain_area_raw_exact": expected_gain.area,
+                "gain_equals_expected": bool(actual_gain.equals(expected_gain) and gain_residual.is_empty),
+                "gain_symmetric_difference_area_raw_exact": gain_residual.area,
+                "gain_symmetric_difference_type": gain_residual.geom_type,
+                "gain_symmetric_difference_is_empty": bool(gain_residual.is_empty),
+                "added_neighbor_overlaps": added_neighbor_overlaps})
+
 result = {
     "status": "diagnostic-only-no-qualification",
     "single_candidate_trials": single_candidate_trials,
