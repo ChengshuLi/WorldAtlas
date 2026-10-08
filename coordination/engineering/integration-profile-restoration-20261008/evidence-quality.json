@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "issue": 1516,
+  "lane": "engineering",
+  "worker_id": "01a112b0-39fb-7f02-a3c7-d21d0916009f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 6760,
+        "sha256": "66183561ff47ff2a09aba703a56a12ca3104d78a6cc8ed8b80075834c9793e20",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 9253,
+        "sha256": "fb2545b2300f2d8f536eb278e6fb27c75bdfa0a09ff5aac168c1730ba844cc1b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs",
+        "bytes": 26158,
+        "sha256": "ca0c91cc93a66bb65db16b2fc91f79d88da97e479f37a2f4716046dc25e0d7c6",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "runner": "66183561ff47ff2a09aba703a56a12ca3104d78a6cc8ed8b80075834c9793e20",
+      "worker_workflow": "fb2545b2300f2d8f536eb278e6fb27c75bdfa0a09ff5aac168c1730ba844cc1b",
+      "canonical_helper": "ca0c91cc93a66bb65db16b2fc91f79d88da97e479f37a2f4716046dc25e0d7c6"
+    },
+    "pin_files": {
+      "runner": "scripts/run-integration-tests.mjs",
+      "worker_workflow": ".github/workflows/worker-merge.yml",
+      "canonical_helper": "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs"
+    },
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 6872,
+      "sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "bytes": 4580,
+      "sha256": "609e627e5c3a03494b92ca836c2425b5a504a3fa24a635cd5b9a4bd4de416529",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/README.md",
+      "bytes": 2033,
+      "sha256": "b5bafca314f03bbafee317f6c2da5dcf091f6665bdc19479b1d528c9f1684252",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/boundary-controls.log.gz",
+      "bytes": 418,
+      "sha256": "1efdf4ac5eb2c6e796d10cebb287dae89abbe0f27efccbed6543299fead262e8",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1309,
+      "uncompressed_sha256": "6d98c8c1c644fe2f20d32080a948171cc9c004d7126917155b62c8daa3e9cab6"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/negative-controls.json",
+      "bytes": 447,
+      "sha256": "7cac55e46f97315c043f98fbd4a39081d9816573ad1f4125e610c68034b4d692",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/original-queue-failure.log.gz",
+      "bytes": 1042,
+      "sha256": "3e09212c01b8708fd6fc3dd129a335568f4e2f863ac49ff1692292d2b33a823e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 6165,
+      "uncompressed_sha256": "d17702ef72785ae6d9b57c25ffbc98d3d6814a9a25aa404d3dfc924ab90a7d84"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/positive-controls.json",
+      "bytes": 447,
+      "sha256": "06436d9031e7b6ec7d50a835c97162567f7c96dedd27259e1ba3b84f98d016c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/preparation-helper.py.txt",
+      "bytes": 2448,
+      "sha256": "62ad7ccf0c148e47c5edfe2b80e379570cb75e2b66c6fd7eabbc4070120420d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/report.json",
+      "bytes": 2086,
+      "sha256": "9e2835bee5b6c11c2087bca11da9c37085e1fe9e2994dc78e56ce016c640cf61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/sparse-one.log.gz",
+      "bytes": 9532,
+      "sha256": "97d11de6a9ddfb07f051a415bb971d7a96fa50586fb04c38efa36c0e90ed698f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 47274,
+      "uncompressed_sha256": "5a834e8a5fed68cdac54ec3fc7ce7dd8d9bf6dd3bc2c9e36bd163ca70b043be3"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/sparse-source-image.json.gz",
+      "bytes": 2804679,
+      "sha256": "ffda82cf52beb803358ae64e57b840ea56c9926dbc2c6673d7ae9463594201a2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9333750,
+      "uncompressed_sha256": "135a2c2723bad9b64b0298d7b7cfb75f0097b317f69e4c81a792ec25f9b22307"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/sparse-two.log.gz",
+      "bytes": 9534,
+      "sha256": "4778c57174bcc2429411bb9097fe360c8df542be942cf53ac0b455c8718bc8a3",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 47276,
+      "uncompressed_sha256": "6880be6e9431e6a0d412a6560d6bd746615e9a9348ffe37384ef011737f11639"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/runtime-readback.json",
+      "bytes": 970,
+      "sha256": "a18827e62d8fa9cb5cb377168559e07697335ee24fc37d32608d540321e02dc0",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "profile-boundary",
+      "kind": "code",
+      "description": "Full-only canonical restoration; two real original evidence sparse entries and six real CLI boundary controls. No scientific algorithm change.",
+      "software": "Node v24.19.0; unchanged existing integration runner helpers",
+      "units": "tests and controls"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "focused-tests",
+      "value": 207,
+      "unit": "tests",
+      "vintage": "baseline",
+      "input_sha256": "9e2835bee5b6c11c2087bca11da9c37085e1fe9e2994dc78e56ce016c640cf61",
+      "evaluation_commit": "689fa0618ce61827adc8862c3e065bcfcf97417b"
+    },
+    {
+      "id": "focused-skips",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "baseline",
+      "input_sha256": "9e2835bee5b6c11c2087bca11da9c37085e1fe9e2994dc78e56ce016c640cf61",
+      "evaluation_commit": "689fa0618ce61827adc8862c3e065bcfcf97417b"
+    },
+    {
+      "id": "boundary-controls",
+      "value": 6,
+      "unit": "controls",
+      "vintage": "baseline",
+      "input_sha256": "9e2835bee5b6c11c2087bca11da9c37085e1fe9e2994dc78e56ce016c640cf61",
+      "evaluation_commit": "689fa0618ce61827adc8862c3e065bcfcf97417b"
+    },
+    {
+      "id": "source-image-files",
+      "value": 710,
+      "unit": "files",
+      "vintage": "baseline",
+      "input_sha256": "9e2835bee5b6c11c2087bca11da9c37085e1fe9e2994dc78e56ce016c640cf61",
+      "evaluation_commit": "689fa0618ce61827adc8862c3e065bcfcf97417b"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "focused-tests",
+      "path": "coordination/engineering/integration-profile-restoration-20261008/report.json",
+      "json_pointer": "/tests_per_run"
+    },
+    {
+      "metric_id": "focused-skips",
+      "path": "coordination/engineering/integration-profile-restoration-20261008/report.json",
+      "json_pointer": "/skipped_per_run"
+    },
+    {
+      "metric_id": "boundary-controls",
+      "path": "coordination/engineering/integration-profile-restoration-20261008/report.json",
+      "json_pointer": "/boundary_controls"
+    },
+    {
+      "metric_id": "source-image-files",
+      "path": "coordination/engineering/integration-profile-restoration-20261008/report.json",
+      "json_pointer": "/source_image_files"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "focused-tests",
+      "value": 207,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "focused-skips",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "boundary-controls",
+      "value": 6,
+      "unit": "controls"
+    },
+    {
+      "metric_id": "source-image-files",
+      "value": 710,
+      "unit": "files"
+    }
+  ],
+  "conclusions": [],
+  "validation": [
+    {
+      "method_id": "profile-boundary",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/integration-profile-restoration-20261008/positive-controls.json"
+    },
+    {
+      "method_id": "profile-boundary",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/integration-profile-restoration-20261008/negative-controls.json"
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node --test --test-reporter=tap test/integration-profile-restoration.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "66183561ff47ff2a09aba703a56a12ca3104d78a6cc8ed8b80075834c9793e20"
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/boundary-controls.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/original-queue-failure.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/preparation-helper.py.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/sparse-one.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/sparse-source-image.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/sparse-two.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/integration-profile-restoration-20261008/runtime-readback.json",
+      "status": "added"
+    }
+  ]
+}
