@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "issue": 1489,
+  "status": "failed-fixture-setup",
+  "attempted_at_utc": "2026-10-08T23:02:10.924839+00:00",
+  "entrypoint": "verify_controls.py --repo <checkout>",
+  "planned_control_run": "controls-run-02",
+  "failure": "The ordinary-destination collision fixture tried to mkdir vintages/corrected-run-03, which already exists as a preserved earlier positive run. The harness stopped before writing controls-run-02 or failed-publication-02; it did not modify the preserved corrected-run-03 directory.",
+  "preservation": "All earlier run vintages were retained byte-for-byte. The harness is being corrected to use a fresh control-only collision directory under vintages."
+}
