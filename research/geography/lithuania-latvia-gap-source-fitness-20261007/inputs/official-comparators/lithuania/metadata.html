@@ -1,0 +1,1256 @@
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+	
+	
+	<html>
+		<head>
+			<title>LEIP Metaduomenų Aplankas</title>
+			
+
+
+
+
+<!-- <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.5/js/dojo/dijit/themes/tundra/tundra.css" /> -->
+<link rel="stylesheet" type="text/css" href="/metadata-libs/jsapi/js/dojo/dijit/themes/tundra/tundra.css" />
+<link rel="stylesheet" type="text/css" href="/metadata-libs/jsapi/js/esri/css/esri.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/metadata-libs/jsapi/js/dojo/dojox/grid/resources/tundraGrid.css" />
+<link rel="stylesheet" type="text/css" href="/metadata-catalog/catalog/skins/themes/red/main.css"  />
+<link rel="stylesheet" type="text/css" href="/metadata-catalog/catalog/skins/themes/red/preview.css"  />
+<link rel="icon" type="image/x-icon"   href="/metadata-catalog/catalog/images/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/metadata-catalog/catalog/images/favicon.ico" />
+
+<script type="text/javascript">
+  djConfig = {
+          parseOnLoad: true, 
+          locale: 'lt',
+          baseUrl: "/metadata-catalog/catalog/js/",
+          packages: [{
+              name:"dojo",
+              location:"/metadata-libs/jsapi/js/dojo/dojo"
+          },{
+              name:"dijit",
+              location:"/metadata-libs/jsapi/js/dojo/dijit"
+          },{
+              name:"dojox",
+              location:"/metadata-libs/jsapi/js/dojo/dojox"
+          },{
+              name:"esri",
+              location:"/metadata-libs/jsapi/js/esri"
+          },{
+              name:"geoportal",
+              location:"/metadata-catalog/catalog/js/geoportal"
+          }]
+  };
+</script>
+<script type="text/javascript" src="/metadata-libs/jsapi"></script>
+<script type="text/javascript">
+  esri.config.defaults.io.proxyUrl = "/metadata-catalog/catalog/download/proxy.jsp";
+</script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1/GPTMapViewer.js"></script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1/jquery-1.2.3.pack.js"></script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1/ui.datepicker.packed.js"></script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1.2/gpt.js"></script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1/Utils.js"></script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1.2.3/livedata.js"></script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1/gpt-asn.js"></script>
+<script type="text/javascript" src="/metadata-catalog/catalog/js/v1.2.2/gpt-browse.js"></script>
+
+
+			
+
+
+
+
+
+<script type="text/javascript" language="javascript">/* Component id = cmPlGptMvsUrl*/var mainGptMvsUrl = "";</script>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="search" type="application/opensearchdescription+xml" 
+  title="Geoportalo paieška"
+  href="/metadata-catalog/openSearchDescription" />
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$("#cmPlPgpGptMessages span").each(function (i) {
+		var htmlStr = $(this).html();
+		$(this).html(htmlStr.replace(/&lt;br \/&gt;/g,'<br />'));
+	});
+});
+
+function openHelp(sTitle, sKey) {
+	var sUrl = "/metadata-catalog/webhelp/index.jsp";
+	var sLang= "en";
+	var sVers= "1.2.4";
+	if (sKey) sUrl += "?cmd="+sKey;
+	if (sLang) {
+	  if (sKey) {
+	    sUrl += "&";
+	  } else {
+	    sUrl += "?";
+	  }
+	  sUrl += "lang="+sLang;
+	}
+	if (sVers) {
+	  if (sKey || sLang) {
+	    sUrl += "&";
+	  } else {
+	    sUrl += "?";
+	  }
+	  sUrl += "vers="+sVers;
+	}
+	var sOpt = "left=10,top=10,width=770,height=450";
+	sOpt += ",toolbar=0,location=0,directories=0,status=0,resizable=yes,scrollbars=yes";
+	var winHelp = window.open(sUrl,sTitle,sOpt);
+	winHelp.focus();
+}
+
+function mainOpenHelp() {
+	openHelp("GPT_Help", "toc");
+}
+
+function mainOpenInternalLink(oLink,sHref) {
+	if (oLink && oLink.href && sHref) {
+		oLink.href = "/metadata-catalog/"+sHref;
+	}
+}
+
+function mainOpenPageHelp() {
+	openHelp("GPT_Context_Help", "catalog.search.resource.details");
+}
+// Global variable to be used for map viewer
+var mainGptMapViewer = new GptMapViewer(mainGptMvsUrl);
+
+/**
+ * Opens the map viewer
+ * @returns false always
+ */
+function mainOpenDefaultMapViewer() {
+	if(!GptUtils.exists(mainGptMapViewer) || !GptUtils.exists(mainGptMapViewer.openDefaultMap)) {
+		return false;
+	}
+	var win = mainGptMapViewer.openDefaultMap();
+	if(GptUtils.exists(win) && GptUtils.exists(win.focus)) {
+		win.focus();
+	}
+	return false;
+}
+
+</script>
+
+
+
+		</head>
+		
+		<body class="tundra">
+			<div id="gptMainWrap">
+				<div id="gptBody">
+					<div id="gptSecondaryNavigation">
+						
+
+
+
+
+
+	<script type="text/javascript" language="Javascript">
+	
+		/* help window open function */
+		function showHelp(){
+			var url = window.helpPage;
+			if(url && url.indexOf("???")==-1 ){
+				window.open(url, 'help', 'resizable=yes,status=no,location=yes,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=200,height=600,top=200');	
+			} else {
+				alert("Pagalba šiam puslapiui neegzistuoja");
+			}
+		}
+		
+	</script>
+
+	
+
+	<div style="width:100%; height:21px; background-color: white; border: 1px solid #F2F2F2">
+		
+	</div>
+	<div style="clear:both"></div>
+
+<!-- 	form:	styleClass="secondaryNavigationForm" -->
+	
+
+
+					</div>
+					
+					<h1>
+						<span id="cmPlPcCaption">.</span>
+					</h1>
+		  			
+		  			<table id="cmPlPgdNavMenuAndMainBody" class="pageContent" cellpadding="0" cellspacing="0" summary="This table is for design purposes only.">
+<tbody>
+<tr>
+<td><table id="cmPlPgdPageContentBody" class="pageContentRight" cellpadding="0" cellspacing="0" summary="This table is for design purposes only.">
+<tbody>
+<tr>
+<td><span id="cmPlPgpGptMessages"><div id="cmPlMsgsPageMessages"></div></span></td>
+</tr>
+<tr>
+<td><table id="cmPlPgdPageBody" class="pageBody" cellpadding="0" cellspacing="0" summary="This table is for design purposes only.">
+<tbody>
+<tr>
+<td><span id="cmPlPgpPageBody">
+				          			
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  var gptMapConfig = new GptMapConfig();
+  gptMapConfig.mapServiceURL = "https://www.geoportal.lt/mapproxy/gisc_pilkas/MapServer";
+  gptMapConfig.mapServiceType = "tiled";
+  gptMapConfig.geometryServiceURL = "https://www.geoportal.lt/mapproxy/geometry_server";
+  gptMapConfig.locatorURL = "";
+  gptMapConfig.locatorSingleFieldParameter = "city";
+  gptMapConfig.locatorGraphicURL = "/metadata-catalog/catalog/images/pushpin_red.gif";
+  gptMapConfig.mapVisibleLayers = "[]";
+</script>
+
+
+<form id="mdDetails" name="mdDetails" method="post" action="/metadata-catalog/catalog/search/resource/details.page;jsessionid=D52F60A6B7658072FE911579042ADB5D" class="mdDetails" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="mdDetails" value="mdDetails" />
+
+
+<script type="text/javascript">
+
+function MddMap() {
+  var _gptMap = null;
+  var _gptInpEnv = null;
+  
+  this.initialize = function initialize() {
+    var config = gptMapConfig;
+    config.mapElementId = "interactiveMap";
+    config.mapToolbarId = "mdDetails:mapToolbar";
+        
+    var elForm = mddFindForm();
+    if ((elForm != null) && (typeof(mdeEnvelopeIds) != 'undefined') && (mdeEnvelopeIds != null)) {
+      var sPfx = elForm.id+":";
+      config.inputEnvelopeXMinId = sPfx+mdeEnvelopeIds[0];
+      config.inputEnvelopeYMinId = sPfx+mdeEnvelopeIds[1];
+      config.inputEnvelopeXMaxId = sPfx+mdeEnvelopeIds[2];
+      config.inputEnvelopeYMaxId = sPfx+mdeEnvelopeIds[3];
+      var el = document.getElementById(config.inputEnvelopeXMinId);
+      if (el != null) el.value = el.innerHTML;
+      el = document.getElementById(config.inputEnvelopeYMinId);
+      if (el != null) el.value = el.innerHTML;
+      el = document.getElementById(config.inputEnvelopeXMaxId);
+      if (el != null) el.value = el.innerHTML;
+      el = document.getElementById(config.inputEnvelopeYMaxId);
+      if (el != null) el.value = el.innerHTML;
+    }
+      
+    _gptMap = new GptMap();
+    dojo.connect(_gptMap,"onMapLoaded",this,"onMapLoaded");
+
+    _gptInpEnv = new GptInputEnvelope();
+    _gptInpEnv.initialize(config,_gptMap);
+
+    _gptMap.initialize(config);
+  }
+
+  this.onMapLoaded = function() {
+      if (_gptInpEnv != null) {
+        _gptInpEnv.highlightInputEnvelope();
+        setTimeout(dojo.hitch(_gptInpEnv,"zoomToInputEnvelope"),1000);
+        _gptMap.getAgsMap().disableMapNavigation();
+        _gptMap.getAgsMap().disablePan();
+        _gptMap.getAgsMap().disableClickRecenter();
+        _gptMap.getAgsMap().disableDoubleClickZoom();
+        _gptMap.getAgsMap().disableRubberBandZoom();
+        _gptMap.getAgsMap().disableScrollWheelZoom();
+        _gptMap.getAgsMap().disableShiftDoubleClickZoom();
+        _gptMap.getAgsMap().hidePanArrows();
+        _gptMap.getAgsMap().hideZoomSlider();
+      }
+  }
+  
+  this.reposition = function reposition() {
+    if (_gptMap != null) _gptMap.reposition();
+  }
+};
+
+
+function mddFindForm(sBaseName) {
+  var elForm = null;
+  var aForms = document.getElementsByTagName("form");
+  if (aForms != null) {
+    if (sBaseName == null) sBaseName = "mdDetails";
+    for (var i=0;i<aForms.length;i++) {
+      var el = aForms[i];
+      if (el && el.id && (el.id.indexOf(sBaseName) != -1)) {
+        elForm = el;
+        break;
+      }
+    }
+  }
+  return elForm;
+};
+
+
+var mddMap = new MddMap();;
+if (typeof(dojo) != 'undefined') {
+  dojo.addOnLoad(mddMapInit);
+}
+
+function mddMapInit() {
+  var toolbar = dojo.byId("mdDetails:mapToolbar");
+  if (toolbar!=null) toolbar.style.display="none";
+  var elMap = document.getElementById("interactiveMap");
+  if (elMap != null) mddMap.initialize();
+  dojo.connect(window,"onresize",mddMap,"reposition");
+};
+
+function updateHeaderInfo(){
+	  //set information header
+	  var detailsHeader = "Šaltinio detalės";  
+	  dojo.byId("cmPlPcCaption").innerHTML = detailsHeader;	
+}
+
+dojo.addOnLoad(updateHeaderInfo);
+
+
+function mddOnSectionClicked(sSectionId) {
+  var elForm = mddFindForm();
+  if (elForm != null) {
+    var bDisplay = true;
+    var sFolder = "/metadata-catalog/catalog/images/";
+    var sSrc = sFolder+"section_open.gif";
+    var elImg = document.getElementById(elForm.id+":"+sSectionId+"-img");
+    if (elImg != null) {
+      if (elImg.src.indexOf("section_open.gif") != -1) {
+        sSrc = sFolder+"section_closed.gif";
+        bDisplay = false;
+      }
+      elImg.src = sSrc;
+      var elChk = document.getElementById(elForm.id+":"+sSectionId+"-chk");
+      if (elChk != null) elChk.checked = bDisplay;
+    }
+    var el = document.getElementById(elForm.id+":"+sSectionId+"-body");
+
+	if (el != null) {
+	  if (bDisplay) el.style.display = "block"; else el.style.display = "none";
+	  mddMap.reposition();
+	}      
+  }
+}
+
+</script>
+
+
+Profilis: Inspire (Duomenys)<br /><br /><span id="mdDetails:xsltBasedDetails"><!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml">
+   <head>
+      <meta content="text/html; charset=utf-8" http-equiv="Content-Type"></meta>
+      <title>Metaduomenų peržiūra / Metadata preview</title><style type="text/css">
+					BODY {
+					    font-family: Arial,Helvetica,sans-serif;
+					    font-size: 18px;
+					    font-weight: bold;
+					    color: #000000;
+					    background-color: #ffffff;
+					}
+					
+					TABLE {
+					    caption-side: top;
+					   	border: 1px solid #14689F;
+					
+					    font-family: Arial,Helvetica,sans-serif;
+					    font-size: 14px;
+					    font-weight: bold;
+					    color: #ffffff;
+					    text-align: left
+					    background-color: #14689F;
+					    width: 100%;
+					}
+					
+					TD {
+					    font-family: Arial,Helvetica,sans-serif;
+					    font-size: 12px;
+					    font-weight: bold;
+					    color: #000000;
+					    background-color: #ffffff;
+					}
+					
+					.value {
+					    font-family: Arial,Helvetica,sans-serif;
+					    font-size: 12px;
+					    font-weight: normal;
+					    color: #000000;
+					}
+					
+					
+					TH {
+					    background-color: #14689F;
+					    text-align: left;
+					}
+					TH h1{
+					    font-weight: bold;
+					    color: #ffffff;
+					    font-size: 12px;
+					    padding: 1px 3px 1px 3px;
+					    margin: 0px;
+					}
+					TH span{
+						display: block;
+						color: #ffffff;
+						font-size: 10px;
+						margin:0px;
+						padding: 1px 3px 2px 3px;
+					}
+					
+					CAPTION {
+					    font-weight: bold;
+					    color: #000000;
+					    text-align: left
+					    border: 1px solid black;
+					    font-size: 12px;
+					    text-align: left;
+					    background-color: #dddddd;
+					}
+					
+					#gptMainWrap {
+						min-width: 0 !important;
+					}
+				</style><style media="print" type="text/css">
+					TABLE {
+					   	border: 1px solid #666666;
+					    background-color: #666666;
+					}
+					
+					TH {
+					    background-color: #666666;
+					}
+				</style><link href="mailto:rkraujutis@hnit-baltic.lt" rel="made"></link>
+      <link href="mailto:info@sintagma.lt" rel="made"></link>
+   </head>
+   <body bgcolor="white">
+      <p>Annex I. Administraciniai vienetai (INSPIRE parsisiuntimo paslauga)<br xmlns="">Annex I. Administrative units (INSPIRE Download Service)
+      </p>
+      <table xmlns="" border="0">
+         <tbody>
+            <tr>
+               <th colspan="2">
+                  <h1>Metaduomenys (Metadata)</h1><span>Metaduomenys (Metadata)</span></th>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Bylos identifikatorius (File Identifier): </span><span class="value">{95C31E5D-A745-432D-9781-EC3690730897}</span></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Metaduomenų kalba (Metadata Language): </span><span class="value">
+                     		lit
+                     	</span></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Hierarchinis lygmuo (Hierarchy Level): </span><span class="value">Duomenų rinkinys (Dataset)</span></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Metaduomenų kūrėjo kontaktas (Metadata Contact): </span><table border="0">
+                     <tbody>
+                        <tr>
+                           <th colspan="2">
+                              <h1>Metaduomenų kūrėjo kontaktas (1) (Metadata Contact (1))</h1><span>Metaduomenys (Metadata) / Metaduomenų kūrėjo kontaktas (1) (Metadata Contact (1))</span></th>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Organizacijos pavadinimas (Organisation Name): </span><span class="value">Statybos sektoriaus vystymo agentūra, VšĮ (Construction Sector Development Agency, PE)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Vaidmuo (Role): </span><span class="value">Kontaktinis asmuo (Point of contact)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Kontaktinė informacija (Contact Information): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Kontaktinė informacija (Contact Information)</h1><span>Metaduomenys (Metadata) / Metaduomenų kūrėjo kontaktas (1) (Metadata Contact (1)) / Kontaktinė informacija (Contact Information)</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Adresas (Address): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Adresas (Address)</h1><span>Metaduomenys (Metadata) / Metaduomenų kūrėjo kontaktas (1) (Metadata Contact (1)) / Kontaktinė informacija (Contact Information)
+                                                         / Adresas (Address)</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Pristatymo vieta (Delivery point): </span><span class="value">Sėlių g. 66</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Miestas (City): </span><span class="value">Vilnius</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Pašto indeksas (Postal Code): </span><span class="value">08109</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Šalis (Country): </span><span class="value">Lietuva</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">El. paštas (Electronic Mail Address): </span><span class="value">pagalba@geoportal.lt</span></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Metaduomenų data (Date Stamp): </span><span class="value">
+                     		2026-09-03
+                     	</span></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Metaduomenų standarto pavadinimas (Metadata Standard Name): </span><span class="value">ISO19115</span></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Metaduomenų standarto versija (Metadata Standard Version): </span><span class="value">2003</span></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Kalbų nuostatos (Locale): </span><table border="0">
+                     <tbody>
+                        <tr>
+                           <th colspan="2">
+                              <h1>Kalbų nuostatos (1) (Locale (1))</h1><span>Metaduomenys (Metadata) / Kalbų nuostatos (1) (Locale (1))</span></th>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Papildomos kalbos kodas (Language Code): </span><span class="value">Anglų (English)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Simbolių koduotė (Character Encoding): </span><span class="value">utf8 (utf8)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Identifikatorius (ID) (Identifier (ID)): </span><span class="value">en</span></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Referencinės sistemos identifikatorius (Reference System Information): </span><span class="value">https://www.opengis.net/def/crs/EPSG/0/4258</span></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Duomenų identifikavimas (Identification Information): </span><table border="0">
+                     <tbody>
+                        <tr>
+                           <th colspan="2">
+                              <h1>Duomenų resursas (1) (Data Identification (1))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1))</span></th>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Aprašas (Citation): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Aprašas (Citation)</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Aprašas (Citation)</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Pavadinimas (Title): </span><span class="value">Annex I. Administraciniai vienetai (INSPIRE parsisiuntimo paslauga) (Annex I. Administrative units (INSPIRE Download Service))</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Data (1) (Date (1)): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Data (1) (Date (1))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Aprašas (Citation) / Data (1) (Date (1))</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Data (Date): </span><span class="value">
+                                                         								2015-05-15
+                                                         							</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Datos tipas (Date Type): </span><span class="value">Publikavimas (Publication)</span></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Data (2) (Date (2)): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Data (2) (Date (2))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Aprašas (Citation) / Data (2) (Date (2))</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Data (Date): </span><span class="value">
+                                                         								2026-09-03
+                                                         							</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Datos tipas (Date Type): </span><span class="value">Revizija (Revision)</span></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Unikalus ištekliaus identifikatorius (Unique Resource Identifier): </span><span class="value">{03E0987C-6943-492F-B8B0-E14DC49C1F0A}</span></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Duomenų resurso kalba (Dataset Language): </span><span class="value">
+                                 				eng
+                                 			</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Duomenų resurso tema (Topic Category): </span><span class="value">Administracinės ir politinės ribos (Administrative and Political Boundaries)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Erdvinė rezoliucija (Spatial Resolution): </span><span class="value">
+                                 								10000
+                                 							</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Santrauka (Abstract): </span><span class="value">INSPIRE temos „Administraciniai vienetai“ duomenų rinkinyje yra pateikiamos Lietuvos Respublikos seniūnijų, savivaldybių,
+                                 apskričių ir valstybės administracinės ribos. (INSPIRE Dataset for Administrative units theme contains  administrative boundaries
+                                 of elderships, municipalities, counties and  state borders of the Republic of Lithuania.)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Resurso kūrėjo kontaktas (Point of Contact): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Resurso kūrėjo kontaktas (1) (Point of Contact (1))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Resurso kūrėjo kontaktas (1) (Point of Contact
+                                             (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Organizacijos pavadinimas (Organisation Name): </span><span class="value">Statybos sektoriaus vystymo agentūra, VšĮ (Construction Sector Development Agency, PE)</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Vaidmuo (Role): </span><span class="value">Kontaktinis asmuo (Point of contact)</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Kontaktinė informacija (Contact Information): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Kontaktinė informacija (Contact Information)</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Resurso kūrėjo kontaktas (1) (Point of Contact
+                                                         (1)) / Kontaktinė informacija (Contact Information)</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Adresas (Address): </span><table border="0">
+                                                         <tbody>
+                                                            <tr>
+                                                               <th colspan="2">
+                                                                  <h1>Adresas (Address)</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Resurso kūrėjo kontaktas (1) (Point of Contact
+                                                                     (1)) / Kontaktinė informacija (Contact Information) / Adresas (Address)</span></th>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Pristatymo vieta (Delivery point): </span><span class="value">Sėlių g. 66</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Miestas (City): </span><span class="value">Vilnius</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Pašto indeksas (Postal Code): </span><span class="value">LT-08109</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Šalis (Country): </span><span class="value">Lietuva</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">El. paštas (Electronic Mail Address): </span><span class="value">pagalba@geoportal.lt</span></td>
+                                                            </tr>
+                                                         </tbody>
+                                                      </table>
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Tiesioginė prieiga (Online Resource): </span><span class="value">
+                                                         										<a href="http://www.ssva.lt" target="_blank">www.ssva.lt</a>
+                                                         									</span></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                              <table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Resurso kūrėjo kontaktas (2) (Point of Contact (2))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Resurso kūrėjo kontaktas (2) (Point of Contact
+                                             (2))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Organizacijos pavadinimas (Organisation Name): </span><span class="value">Registrų centras, VĮ (Centre of Registers, SE)</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Vaidmuo (Role): </span><span class="value">Kontaktinis asmuo (Point of contact)</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Kontaktinė informacija (Contact Information): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Kontaktinė informacija (Contact Information)</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Resurso kūrėjo kontaktas (2) (Point of Contact
+                                                         (2)) / Kontaktinė informacija (Contact Information)</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Adresas (Address): </span><table border="0">
+                                                         <tbody>
+                                                            <tr>
+                                                               <th colspan="2">
+                                                                  <h1>Adresas (Address)</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Resurso kūrėjo kontaktas (2) (Point of Contact
+                                                                     (2)) / Kontaktinė informacija (Contact Information) / Adresas (Address)</span></th>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Pristatymo vieta (Delivery point): </span><span class="value">Lvivo g. 25-101</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Miestas (City): </span><span class="value">Vilnius</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Pašto indeksas (Postal Code): </span><span class="value">LT-09320</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Šalis (Country): </span><span class="value">Lietuva</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">El. paštas (Electronic Mail Address): </span><span class="value">info@registrucentras.lt</span></td>
+                                                            </tr>
+                                                         </tbody>
+                                                      </table>
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Tiesioginė prieiga (Online Resource): </span><span class="value">
+                                                         										<a href="http://www.registrucentras.lt" target="_blank">www.registrucentras.lt</a>
+                                                         									</span></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Aprėptis (Extent): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Aprėptis (1) (Extent (1))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Aprėptis (1) (Extent (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Geografinis padengimas (Geographic Element): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Geografinis ribojantis karkasas (1) (Geographic Bounding Box (1))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Aprėptis (1) (Extent (1)) / Geografinis ribojantis
+                                                         karkasas (1) (Geographic Bounding Box (1))</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Vakarų ribojanti koordinatė (West Bound Longitude): </span><span class="value">
+                                                         								20.7201
+                                                         							</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Rytų ribojanti koordinatė (East Bound Longitude): </span><span class="value">
+                                                         								26.966
+                                                         							</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Pietų ribojanti koordinatė (South Bound Latitude): </span><span class="value">
+                                                         								53.7704
+                                                         							</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Šiaurės ribojanti koordinatė (North Bound Latitude): </span><span class="value">
+                                                         								56.5255
+                                                         							</span></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (1) (Descriptive Keywords (1)): </span><span class="value">Administraciniai vienetai (Administrative units)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (2) (Descriptive Keywords (2)): </span><span class="value">INSPIRE</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (3) (Descriptive Keywords (3)): </span><span class="value">Annex I</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (4) (Descriptive Keywords (4)): </span><span class="value">AU</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (5) (Descriptive Keywords (5)): </span><span class="value">elderships</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (6) (Descriptive Keywords (6)): </span><span class="value">municipalities</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (7) (Descriptive Keywords (7)): </span><span class="value">counties</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (8) (Descriptive Keywords (8)): </span><span class="value">Geospatial</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (9) (Descriptive Keywords (9)): </span><span class="value">High-value dataset</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (10) (Descriptive Keywords (10)): </span><span class="value">Lithuania</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (11) (Descriptive Keywords (11)): </span><span class="value">seniūnijos</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (12) (Descriptive Keywords (12)): </span><span class="value">savivaldybės</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (13) (Descriptive Keywords (13)): </span><span class="value">apskritys</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (14) (Descriptive Keywords (14)): </span><span class="value">Lietuva</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (15) (Descriptive Keywords (15)): </span><span class="value">didelės vertės rinkiniai</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (16) (Descriptive Keywords (16)): </span><span class="value">geoerdviniai duomenys</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžiai (17) (Descriptive Keywords (17)): </span><span class="value">open data</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžio Tipas (1) (Keyword Type (1)): </span><span class="value">Tema (Theme)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Raktažodžio Tipas (2) (Keyword Type (2)): </span><span class="value">Disciplina (Discipline)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Duomenų apribojimai (Resource Constraints): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Teisiniai apribojimai (1) (Legal Constraints (1))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Teisiniai apribojimai (1) (Legal Constraints (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Naudojimo ribotumas (Use Limitation): </span><span class="value">CC BY 4.0 (CC BY 4.0)</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Prieigos apribojimai (Access Constraints): </span><span class="value">Licencija (License)</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Naudojimo apribojimai (Use Constraints): </span><span class="value">Licencija (License)</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Kiti apribojimai (Other Constraints): </span><span class="value">- (-)</span></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Duomenų priežiūra (Resource Maintenance): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Duomenų priežiūra (1) (Resource Maintenance (1))</h1><span>Metaduomenys (Metadata) / Duomenų resursas (1) (Data Identification (1)) / Duomenų priežiūra (1) (Resource Maintenance (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Priežiūros ir atnaujinimo periodiškumas (Maintenance And Update Frequency): </span><span class="value">Kas mėnesį (Monthly)</span></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Duomenų platinimo informacija (Distribution Information): </span><table border="0">
+                     <tbody>
+                        <tr>
+                           <th colspan="2">
+                              <h1>Duomenų platinimo informacija (Distribution Information)</h1><span>Metaduomenys (Metadata) / Duomenų platinimo informacija (Distribution Information)</span></th>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Platinimo būdai (Transfer Options): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Platinimo būdai (1) (Transfer Options (1))</h1><span>Metaduomenys (Metadata) / Duomenų platinimo informacija (Distribution Information) / Platinimo būdai (1) (Transfer Options
+                                             (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Tiesioginė prieiga (On Line): </span><span class="value">
+                                             								<a href="https://inspire-geoportal.lt/resources/atom/au/data/AU_ADMINISTRATIVE_UNITS.zip" target="_blank">https://inspire-geoportal.lt/resources/atom/au/data/AU_ADMINISTRATIVE_UNITS.zip</a>
+                                             							</span></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Platinimo formatas (Distribution Format): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Platinimo formatas (1) (Distribution Format (1))</h1><span>Metaduomenys (Metadata) / Duomenų platinimo informacija (Distribution Information) / Platinimo formatas (1) (Distribution
+                                             Format (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Formatas (Format): </span><span class="value">GML (GML)</span></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Platintojas (Distributor): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Platintojas (1) (Distributor (1))</h1><span>Metaduomenys (Metadata) / Duomenų platinimo informacija (Distribution Information) / Platintojas (1) (Distributor (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Platintojo kontaktai (Distributor Contact): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Platintojo kontaktai (Distributor Contact)</h1><span>Metaduomenys (Metadata) / Duomenų platinimo informacija (Distribution Information) / Platintojas (1) (Distributor (1)) / Platintojo
+                                                         kontaktai (Distributor Contact)</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Organizacijos pavadinimas (Organisation Name): </span><span class="value">Statybos sektoriaus vystymo agentūra, VšĮ (Construction Sector Development Agency, PE)</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Vaidmuo (Role): </span><span class="value">Kontaktinis asmuo (Point of contact)</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Kontaktinė informacija (Contact Information): </span><table border="0">
+                                                         <tbody>
+                                                            <tr>
+                                                               <th colspan="2">
+                                                                  <h1>Kontaktinė informacija (Contact Information)</h1><span>Metaduomenys (Metadata) / Duomenų platinimo informacija (Distribution Information) / Platintojas (1) (Distributor (1)) / Platintojo
+                                                                     kontaktai (Distributor Contact) / Kontaktinė informacija (Contact Information)</span></th>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Adresas (Address): </span><table border="0">
+                                                                     <tbody>
+                                                                        <tr>
+                                                                           <th colspan="2">
+                                                                              <h1>Adresas (Address)</h1><span>Metaduomenys (Metadata) / Duomenų platinimo informacija (Distribution Information) / Platintojas (1) (Distributor (1)) / Platintojo
+                                                                                 kontaktai (Distributor Contact) / Kontaktinė informacija (Contact Information) / Adresas (Address)</span></th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           <td></td>
+                                                                           <td><span class="label">Miestas (City): </span><span class="value">Vilnius</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           <td></td>
+                                                                           <td><span class="label">Pašto indeksas (Postal Code): </span><span class="value">08109</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           <td></td>
+                                                                           <td><span class="label">Šalis (Country): </span><span class="value">Lietuva</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           <td></td>
+                                                                           <td><span class="label">El. paštas (Electronic Mail Address): </span><span class="value">pagalba@geoportal.lt</span></td>
+                                                                        </tr>
+                                                                     </tbody>
+                                                                  </table>
+                                                               </td>
+                                                            </tr>
+                                                         </tbody>
+                                                      </table>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><span class="label">Duomenų kokybės informacija (Data Quality Information): </span><table border="0">
+                     <tbody>
+                        <tr>
+                           <th colspan="2">
+                              <h1>Duomenų kokybės informacija (1) (Data Quality Information (1))</h1><span>Metaduomenys (Metadata) / Duomenų kokybės informacija (1) (Data Quality Information (1))</span></th>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Apimtis (Scope): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Apimtis (Scope)</h1><span>Metaduomenys (Metadata) / Duomenų kokybės informacija (1) (Data Quality Information (1)) / Apimtis (Scope)</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Apimties lygmuo (Level): </span><span class="value">Duomenų rinkinys (Dataset)</span></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Istorija (Lineage): </span><span class="value">INSPIRE temos „Administraciniai vienetai“ duomenų rinkinys yra sudarytas remiantis VĮ „Registrų centro“ publikuotų duomenų
+                                 rinkinio informacija, apimančia  Lietuvos Respublikos teritorijos, seniūnijų, savivaldybių ir apskričių administracines ribas.
+                                 
+                                 Išvestinio duomenų rinkinio autorius yra VšĮ Statybos sektoriaus vystymo agentūra. (INSPIRE dataset for Administrative units
+                                 theme is  created using the dataset which contains administrative boundaries of elderships, municipalities, counties and state
+                                 borders of the Republic of Lithuania. The dataset is provided by SE Centre of Registers.
+                                 The output data set is created by Construction Sector Development Agency, Lithuania.)</span></td>
+                        </tr>
+                        <tr>
+                           <td></td>
+                           <td><span class="label">Ataskaita (Report): </span><table border="0">
+                                 <tbody>
+                                    <tr>
+                                       <th colspan="2">
+                                          <h1>Srities nuoseklumas (1) (Domain consistency (1))</h1><span>Metaduomenys (Metadata) / Duomenų kokybės informacija (1) (Data Quality Information (1)) / Srities nuoseklumas (1) (Domain
+                                             consistency (1))</span></th>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <td><span class="label">Rezultatai (Result): </span><table border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <th colspan="2">
+                                                      <h1>Atitikimo rezultatai (1) (Conformance Result (1))</h1><span>Metaduomenys (Metadata) / Duomenų kokybės informacija (1) (Data Quality Information (1)) / Srities nuoseklumas (1) (Domain
+                                                         consistency (1)) / Atitikimo rezultatai (1) (Conformance Result (1))</span></th>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Specifikacija (Specification): </span><table border="0">
+                                                         <tbody>
+                                                            <tr>
+                                                               <th colspan="2">
+                                                                  <h1>Specifikacija (Specification)</h1><span>Metaduomenys (Metadata) / Duomenų kokybės informacija (1) (Data Quality Information (1)) / Srities nuoseklumas (1) (Domain
+                                                                     consistency (1)) / Atitikimo rezultatai (1) (Conformance Result (1)) / Specifikacija (Specification)</span></th>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Pavadinimas (Title): </span><span class="value">Komisijos reglamentas (EB) Nr. 976/2009 2009 m. spalio 19 d. kuriuo įgyvendinamos Europos Parlamento ir Tarybos direktyvos
+                                                                     2007/2/EB nuostatos dėl tinklo paslaugų https://eur-lex.europa.eu/eli/reg/2009/976 (Commission Regulation (EC) No 976/2009
+                                                                     of 19 October 2009 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards the Network Services
+                                                                     https://eur-lex.europa.eu/eli/reg/2009/976)</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td></td>
+                                                               <td><span class="label">Data (Date): </span><table border="0">
+                                                                     <tbody>
+                                                                        <tr>
+                                                                           <th colspan="2">
+                                                                              <h1>Data (Date)</h1><span>Metaduomenys (Metadata) / Duomenų kokybės informacija (1) (Data Quality Information (1)) / Srities nuoseklumas (1) (Domain
+                                                                                 consistency (1)) / Atitikimo rezultatai (1) (Conformance Result (1)) / Specifikacija (Specification) / Data (Date)</span></th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           <td></td>
+                                                                           <td><span class="label">Data (Date): </span><span class="value">
+                                                                                 												2009-10-19
+                                                                                 											</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           <td></td>
+                                                                           <td><span class="label">Datos tipas (Date Type): </span><span class="value">Publikavimas (Publication)</span></td>
+                                                                        </tr>
+                                                                     </tbody>
+                                                                  </table>
+                                                               </td>
+                                                            </tr>
+                                                         </tbody>
+                                                      </table>
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Paaiškinimas (Explanation): </span><span class="value">Paslauga atitinka reglamento nuostatas. (This service is conformant with the INSPIRE Implementing Rules for Network Services.)</span></td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td><span class="label">Patvirtinimas (Pass): </span><span class="value">
+                                                         								Taip (true)
+                                                         							</span></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </body>
+</html></span><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="-5265024831561288530:2255436927054801804" autocomplete="off" />
+</form></span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
+				</div>
+				<div style="clear:both"></div>
+			</div> <!-- gptMainWrap -->
+		</body>
+	</html>
+

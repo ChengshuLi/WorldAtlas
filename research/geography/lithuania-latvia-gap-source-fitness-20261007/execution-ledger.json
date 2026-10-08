@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "issue": 1426,
+  "worker_id": "01a11550-a19b-7330-955c-e56e90985bf3",
+  "baseline_commit": "69a5f97161c36611fc974b626c9666fdf2941a31",
+  "accepted_final_runs": {
+    "custody": [
+      "complete1",
+      "complete2"
+    ],
+    "routing": [
+      "complete1",
+      "complete2"
+    ],
+    "physical": [
+      "complete1",
+      "complete2"
+    ],
+    "assembly": [
+      "complete1",
+      "complete2"
+    ],
+    "gml-validation": [
+      "complete5",
+      "complete6"
+    ],
+    "source-fit": [
+      "complete11",
+      "complete12"
+    ]
+  },
+  "superseded_or_failed_attempts": [
+    {
+      "stage": "routing",
+      "vintage": "run1",
+      "outcome": "failed before publication",
+      "reason": "The custody JSONL part ended on a partial row at an arbitrary byte split; final complete-pair runner records the boundary fragment while requiring all complete rows to match the exact roster."
+    },
+    {
+      "stage": "gml-validation",
+      "vintage": "run1",
+      "outcome": "failed before publication",
+      "reason": "The initial comparison included a partition-receipt field that did not match the stream validation schema; the final complete pair verifies archive and decoded member byte hashes."
+    },
+    {
+      "stage": "source-fit",
+      "vintage": "results/source-fit.json",
+      "outcome": "exploratory and superseded",
+      "reason": "An earlier incomplete overlay result was replaced by final paired complete source-fit runs; it is not used for acceptance."
+    },
+    {
+      "stage": "custody/routing/physical",
+      "vintage": "prior run/final/retry outputs",
+      "outcome": "superseded provisional outputs",
+      "reason": "Earlier runs used an older runner revision or incomplete boundary accounting; removed from the candidate packet to satisfy the evidence byte budget. Final exact complete1/complete2 receipts remain."
+    },
+    {
+      "stage": "source-fit",
+      "vintage": "complete1/complete2",
+      "outcome": "superseded after source inventory revision",
+      "reason": "Final comparison omits the redundant full-resolution Latvia variant; original Atlas and official Latvia 2021/2026 products remain."
+    },
+    {
+      "stage": "source-fit",
+      "vintage": "complete3/complete4",
+      "outcome": "superseded after removing an unused Latvia full-resolution source pin",
+      "reason": "The runner and source pin inventory were aligned so every retained source pin refers to an included byte file; complete5/complete6 reproduce the final source set."
+    },
+    {
+      "stage": "source-fit",
+      "vintage": "complete5/complete6",
+      "outcome": "superseded after explicit per-component support/absence/unresolved status fields and corrected source overlap counts",
+      "reason": "Complete7/complete8 rerun the same six-source comparison with a member-level status taxonomy; they supersede the prior final pair while retaining its outputs as historical evidence."
+    },
+    {
+      "stage": "source-fit",
+      "vintage": "source-fit-source-fit-complete7",
+      "outcome": "successful redundant naming attempt, excluded from acceptance and removed",
+      "reason": "The runner was first invoked with a prefixed vintage name, producing duplicate outputs; the correctly named complete7/complete8 pair is the accepted final pair."
+    },
+    {
+      "stage": "gml-validation",
+      "vintage": "complete3/complete4",
+      "outcome": "superseded; their wrong-digest control claim was vacuous and is not relied on",
+      "reason": "The historical control only compared the actual nonzero digest to all zeroes and did not execute a rejection path. Complete5/complete6 exercise the same digest-check helper with a deliberately wrong expected digest and confirm ValueError rejection."
+    },
+    {
+      "stage": "source-fit",
+      "vintage": "complete7/complete8 and complete9/complete10",
+      "outcome": "superseded after GML control correction",
+      "reason": "Complete7/complete8 used the superseded complete3/complete4 GML validation receipts. Complete9/complete10 were a successful intermediate rerun before the source-fit runner selected complete5/complete6; those redundant outputs were removed to stay within the 256 MiB evidence budget. Complete11/complete12 use the corrected runner and the validated complete5/complete6 GML receipts."
+    }
+  ],
+  "limits": [
+    "Superseded provisional artifacts listed above were omitted; all final complete-pair receipts and the two distinct failed-stage diagnoses are preserved in this ledger.",
+    "Same-commit full-resolution Latvia geoBoundaries sensitivity product is omitted; original Atlas product and full official Latvia 2021 and 2026 products remain compared.",
+    "The redundant double-prefixed source-fit output was removed after its successful run was recorded above; complete5/complete6 outputs are retained as superseded historical evidence.",
+    "Historical gml-validation complete3/complete4 artifacts are retained for audit but their tautological wrong-digest control claim is explicitly superseded; only complete5/complete6 control results support acceptance.",
+    "Redundant successful source-fit complete9/complete10 intermediate outputs were removed and are not part of acceptance; the ledger records why they were superseded."
+  ]
+}
