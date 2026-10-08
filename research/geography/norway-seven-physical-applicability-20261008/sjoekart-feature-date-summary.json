@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "source_index_sha256": "21b801fa3bf58ad34364084e08a9e07e05d50580cf1fc472e996153ca609fb4f",
+  "interpretation": "Metadata-only inventory of XML feature attributes; no coordinates or geometry were read, compared, or measured.",
+  "date_fields": {
+    "førsteDatafangstdato": "feature first capture/observation date as reported by service",
+    "oppdateringsdato": "feature update date as reported by service",
+    "datauttaksdato": "service extraction/response timestamp, not a feature survey/update date"
+  },
+  "types": {
+    "app:Kystkontur": {
+      "response_files": 7,
+      "members_in_responses": 561,
+      "unique_gml_ids": 561,
+      "duplicate_gml_ids": 0,
+      "field_value_counts": {
+        "førstedatafangstdato": 533,
+        "oppdateringsdato": 561,
+        "datauttaksdato": 561
+      },
+      "date_field_ranges": {
+        "førstedatafangstdato": {
+          "min": "2001-04-02T22:00:00",
+          "max": "2004-02-22T23:00:00"
+        },
+        "oppdateringsdato": {
+          "min": "2001-04-02T22:00:00",
+          "max": "2025-03-04T23:00:00"
+        },
+        "datauttaksdato": {
+          "min": "2026-10-05T11:22:24",
+          "max": "2026-10-05T11:33:49"
+        }
+      },
+      "features_with_quality_property": 0,
+      "features_with_kysttype_property": 0,
+      "product_schema_versions": [
+        "20201001"
+      ]
+    },
+    "app:Landareal": {
+      "response_files": 7,
+      "members_in_responses": 97,
+      "unique_gml_ids": 97,
+      "duplicate_gml_ids": 0,
+      "field_value_counts": {
+        "førstedatafangstdato": 50,
+        "oppdateringsdato": 97,
+        "datauttaksdato": 97
+      },
+      "date_field_ranges": {
+        "førstedatafangstdato": {
+          "min": "2001-11-26T23:00:00",
+          "max": "2003-10-16T22:00:00"
+        },
+        "oppdateringsdato": {
+          "min": "2001-11-26T23:00:00",
+          "max": "2026-04-26T22:00:00"
+        },
+        "datauttaksdato": {
+          "min": "2026-10-05T11:35:27",
+          "max": "2026-10-05T11:42:24"
+        }
+      },
+      "features_with_quality_property": 0,
+      "features_with_kysttype_property": 0,
+      "product_schema_versions": [
+        "20201001"
+      ]
+    }
+  },
+  "limits": [
+    "Feature dates are metadata claims; no independent survey dates or positional accuracy were established.",
+    "Captured Kystkontur features contain no positional-quality or coastline-category property. Registration and positional accuracy remain unknown.",
+    "WFS response attributes numberMatched/numberReturned are inconsistent; complete member counts were cross-checked against prior resultType=hits counts.",
+    "WFS is dynamically served; each response is separately pinned by exact URL, retrieval timestamp, byte count and SHA-256."
+  ]
+}

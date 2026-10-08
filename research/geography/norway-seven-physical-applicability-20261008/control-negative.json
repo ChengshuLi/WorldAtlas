@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "method_id": "norway-physical-applicability-measurement",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    {
+      "mutation": "family_member_count=399",
+      "rejected": true,
+      "reason": "15/400/36 context mismatch"
+    },
+    {
+      "mutation": "remove_one_neighbor_relation",
+      "rejected": true,
+      "reason": "neighbor row population mismatch"
+    }
+  ],
+  "result_sha256": "90ce7d42ffb3d29d2eed7ed922cf65df004729354e708c18726a393bae2207a2"
+}

@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-08",
+  "source": "Kartverket Sj\u00f8kart - Dybdedata WFS",
+  "license": "CC BY 4.0 per current data.norge.no WFS API metadata; attribution required",
+  "items": [
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/dybdedata-capabilities-2.0.0.xml",
+      "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&request=GetCapabilities&version=2.0.0",
+      "final_url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&request=GetCapabilities&version=2.0.0",
+      "http_status": 200,
+      "content_type": "text/xml;charset=UTF-8",
+      "date": "Thu, 08 Oct 2026 19:20:42 GMT",
+      "bytes": 69145,
+      "sha256": "76f33f73ea645c0be7005bcc4053b0dd8e5388c3d8f59a51d7436a8db6157a44"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/describe-kystkontur.xsd",
+      "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=app%3AKystkontur",
+      "final_url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=app%3AKystkontur",
+      "http_status": 200,
+      "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+      "date": "Thu, 08 Oct 2026 19:20:43 GMT",
+      "bytes": 87354,
+      "sha256": "2b77f8de29132b36d594426c968dda96544a5f26152191aea965392fe9b1fc52"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/describe-landareal.xsd",
+      "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=app%3ALandareal",
+      "final_url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=app%3ALandareal",
+      "http_status": 200,
+      "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+      "date": "Thu, 08 Oct 2026 19:20:44 GMT",
+      "bytes": 87354,
+      "sha256": "2b77f8de29132b36d594426c968dda96544a5f26152191aea965392fe9b1fc52"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sample-kystkontur-one.gml",
+      "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=results&count=1&bbox=11.979015%2C65.062662886492%2C12.007449194452%2C65.105080041748%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&srsName=urn%3Aogc%3Adef%3Acrs%3AEPSG%3A%3A4258",
+      "final_url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=results&count=1&bbox=11.979015%2C65.062662886492%2C12.007449194452%2C65.105080041748%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&srsName=urn%3Aogc%3Adef%3Acrs%3AEPSG%3A%3A4258",
+      "http_status": 200,
+      "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+      "date": "Thu, 08 Oct 2026 19:20:45 GMT",
+      "bytes": 2981,
+      "sha256": "1a0b60727c4a5cb171d20a4f2422dd7e6ceab8c92ede1138ebac714e804b7396",
+      "limit": "one source feature only; no geometry processing"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sample-landareal-one.gml",
+      "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=results&count=1&bbox=11.979015%2C65.062662886492%2C12.007449194452%2C65.105080041748%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&srsName=urn%3Aogc%3Adef%3Acrs%3AEPSG%3A%3A4258",
+      "final_url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=results&count=1&bbox=11.979015%2C65.062662886492%2C12.007449194452%2C65.105080041748%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&srsName=urn%3Aogc%3Adef%3Acrs%3AEPSG%3A%3A4258",
+      "http_status": 200,
+      "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+      "date": "Thu, 08 Oct 2026 19:20:46 GMT",
+      "bytes": 225866,
+      "sha256": "ebea416da1368c3aef16a16d38338919ed20b864b4db784feadd8bc9943aae53",
+      "limit": "one source feature only; no geometry processing"
+    }
+  ]
+}

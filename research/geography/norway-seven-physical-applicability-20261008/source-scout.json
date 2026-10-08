@@ -1,0 +1,612 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-08",
+  "purpose": "Official source scouting, bounded source capture and byte custody only; no geometry comparison or GIS run.",
+  "sources": [
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/n50-product-sheet-20260901.pdf",
+      "url": "https://dokument.geonorge.no/produktark/n50-kartdata/20260901/produktark-n50-kartdata-20260901.pdf",
+      "final_url": "https://dokument.geonorge.no/produktark/n50-kartdata/20260901/produktark-n50-kartdata-20260901.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-10-08",
+      "bytes": 361851,
+      "sha256": "fb0af3777e9d84b3e605beb8909de857d022e2ef50ef01a766db1bfb9af9ec24"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/fkb-vann-product-sheet-20250107.pdf",
+      "url": "https://dokument.geonorge.no/produktark/fkb-vann/2025-01-07/fkb-vann.pdf",
+      "final_url": "https://dokument.geonorge.no/produktark/fkb-vann/2025-01-07/fkb-vann.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-10-08",
+      "bytes": 124678,
+      "sha256": "0e7148683596c23585d71fa505cc62b5d84ac726cd5ef216f9f03156b16babdf"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/fkb-vann-spec-5.1-20240701.html",
+      "url": "https://dokument.geonorge.no/produktspesifikasjoner/fkb-vann/Versjon%205.1/index.html",
+      "final_url": "https://dokument.geonorge.no/produktspesifikasjoner/fkb-vann/Versjon%205.1/index.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "retrieved_at": "2026-10-08",
+      "bytes": 421919,
+      "sha256": "b259122408f7a7add8e7c01c0db187d91003821eeba987682dffd40317c6adf6"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/n50-download-capabilities.json",
+      "url": "https://nedlasting.geonorge.no/api/capabilities/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "final_url": "https://nedlasting.geonorge.no/api/capabilities/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "retrieved_at": "2026-10-08",
+      "bytes": 998,
+      "sha256": "81220743ed52af029fb1dc8d2a7ba8c1f04fd6c8cef430dcb5c9d22a5484fcef"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/n50-download-areas.json",
+      "url": "https://nedlasting.geonorge.no/api/codelists/area/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "final_url": "https://nedlasting.geonorge.no/api/codelists/area/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "retrieved_at": "2026-10-08",
+      "bytes": 490805,
+      "sha256": "8e96588e4ea04b155e6ad97b21e727447de124604a1f092233aea588a0f432e3"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/n50-download-formats.json",
+      "url": "https://nedlasting.geonorge.no/api/codelists/format/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "final_url": "https://nedlasting.geonorge.no/api/codelists/format/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "retrieved_at": "2026-10-08",
+      "bytes": 1427,
+      "sha256": "53523833f7242a11b5fd2c0775baecc8f1356d5c3ce08fe4e0beef53c377bf37"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/n50-download-projections.json",
+      "url": "https://nedlasting.geonorge.no/api/codelists/projection/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "final_url": "https://nedlasting.geonorge.no/api/codelists/projection/ea192681-d039-42ec-b1bc-f3ce04c189ac",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "retrieved_at": "2026-10-08",
+      "bytes": 559,
+      "sha256": "d1c632ab9687607144a4dbcd656c03aa3fdec6cffce3e6938bf59b8ae23d7b5a"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/../GetCapabilities.xml",
+      "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&request=GetCapabilities&version=2.0.0",
+      "final_url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&request=GetCapabilities&version=2.0.0",
+      "http_status": 200,
+      "content_type": "text/xml;charset=UTF-8",
+      "retrieved_at": "2026-10-08",
+      "bytes": 69145,
+      "sha256": "76f33f73ea645c0be7005bcc4053b0dd8e5388c3d8f59a51d7436a8db6157a44"
+    },
+    {
+      "path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-api-metadata.html",
+      "url": "https://data.norge.no/en/data-services/df6a0e9b-6363-39cd-a86a-81f574267c9f/sjokart-dybdedata-wfs",
+      "final_url": "https://data.norge.no/en/data-services/df6a0e9b-6363-39cd-a86a-81f574267c9f/sjokart-dybdedata-wfs",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "date": "Thu, 08 Oct 2026 19:23:47 GMT",
+      "bytes": 104685,
+      "sha256": "1daa21746c1c37ef60230ed635b08fb32cb79935fd36ba34bdf690062091f145"
+    }
+  ],
+  "n50_download_selection": {
+    "supports_polygon_selection": true,
+    "nordland_area_options": [
+      {
+        "type": "fylke",
+        "name": "Nordland – Nordlánnda",
+        "code": "18",
+        "projections": [
+          {
+            "code": "25833",
+            "name": "EUREF89 UTM sone 33, 2d",
+            "codespace": "http://www.opengis.net/def/crs/EPSG/0/25833",
+            "formats": [
+              {
+                "name": "FGDB"
+              },
+              {
+                "name": "PostGIS"
+              }
+            ]
+          }
+        ],
+        "formats": [
+          {
+            "name": "FGDB",
+            "projections": [
+              {
+                "code": "25833",
+                "name": "EUREF89 UTM sone 33, 2d",
+                "codespace": "http://www.opengis.net/def/crs/EPSG/0/25833"
+              }
+            ]
+          },
+          {
+            "name": "PostGIS",
+            "projections": [
+              {
+                "code": "25833",
+                "name": "EUREF89 UTM sone 33, 2d",
+                "codespace": "http://www.opengis.net/def/crs/EPSG/0/25833"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "available_output_formats": [
+      "FGDB",
+      "GML",
+      "PostGIS",
+      "SOSI"
+    ],
+    "available_projection_codes": [
+      "25832",
+      "25833",
+      "25835"
+    ],
+    "nordland_area_code": "18",
+    "nordland_available_formats": [
+      {
+        "name": "FGDB",
+        "projections": [
+          {
+            "code": "25833",
+            "name": "EUREF89 UTM sone 33, 2d",
+            "codespace": "http://www.opengis.net/def/crs/EPSG/0/25833"
+          }
+        ]
+      },
+      {
+        "name": "PostGIS",
+        "projections": [
+          {
+            "code": "25833",
+            "name": "EUREF89 UTM sone 33, 2d",
+            "codespace": "http://www.opengis.net/def/crs/EPSG/0/25833"
+          }
+        ]
+      }
+    ],
+    "nordland_available_projections": [
+      {
+        "code": "25833",
+        "name": "EUREF89 UTM sone 33, 2d",
+        "codespace": "http://www.opengis.net/def/crs/EPSG/0/25833",
+        "formats": [
+          {
+            "name": "FGDB"
+          },
+          {
+            "name": "PostGIS"
+          }
+        ]
+      }
+    ],
+    "area_codelist_sha256": "8e96588e4ea04b155e6ad97b21e727447de124604a1f092233aea588a0f432e3",
+    "area_codelist_bytes": 490805
+  },
+  "interpretation": [
+    "Kartverket N50 product sheet says the product is generalized for 1:50,000 mapping and explicitly states it contains no sea information. It is open under CC BY 4.0 per the current product sheet summarized in the issue; it can be a land-side/coastline diagnostic but cannot alone classify sea status.",
+    "FKB-Vann current product sheet says it includes the topographic portion of coast and sea and that Primærdata Kystkontur matches its coastline; stated positional accuracy range is 0.2–2 m. It also says downloads are restricted to Norway Digital parties under the Norway Digital license. No access or downstream-use entitlement is assumed.",
+    "FKB-Vann specification 5.1 is owned/maintained by Geovekst and describes content/collection methods, but public specification access does not grant source data access.",
+    "Existing GSHHG custody in the #1492 packet is an independent coarse physical source with distributed vintage 2017, unresolved underlying observation dates, unknown registration/accuracy, an unresolved LICENSE.TXT versus README license-version conflict, and verification marked unverified. It cannot be promoted to authoritative shoreline or physical truth.",
+    "Kartverket Sjøkart - Dybdedata WFS is the strongest currently identified openly accessible official coastal source: the product defines Kystkontur as mean high water, its WFS is public and CC BY 4.0, and its Kystkontur plus Landareal features are retained for seven bounded windows. It is explicitly saltwater-related, not a navigational product; survey dates vary and the returned coastline features do not carry positional quality in the captured rows. No land/water result is inferred."
+  ],
+  "next": "Capture a lawful, immutable land/coast source product suitable for the seven added areas and verify exact source feature semantics, date, resolution/accuracy and access terms. If no suitable accessible dataset exists, retain physical applicability as unknown. Any source geometry comparison remains prohibited until separate GIS admission and ENG/root resource coordination.",
+  "sjoekart_dybdedata_wfs": {
+    "service_title": "Sjøkart - Dybdedata WFS",
+    "endpoint": "https://wfs.geonorge.no/skwms1/wfs.dybdedata",
+    "metadata_url": "https://data.norge.no/en/data-services/df6a0e9b-6363-39cd-a86a-81f574267c9f/sjokart-dybdedata-wfs",
+    "service_metadata_id": "9e01fc8e-e1d3-4d11-8b9d-22e1d132ddfe",
+    "official_product_sheet_url": "https://dokument.geonorge.no/produktark/dybdedata/20210204/produktark-sj%C3%B8kart-dybdedata-kartverket-20210204.pdf",
+    "reported_access": "Public WFS; official service record describes ungraded data for free use, CC BY 4.0",
+    "relevant_product_semantics": "Kystkontur, constructed coast and skerries referenced to mean high water; dataset only covers saltwater; source ages and quality vary, with CATZOC available as quality context; not a navigation product",
+    "source_retrieval": "GetCapabilities, DescribeFeatureType schemas, bounded resultType=hits checks, and fourteen bounded resultType=results GML responses; captured geometries are retained but have not been opened for comparison or measurement.",
+    "queries": [
+      {
+        "component_id": "physical-component:1f5426f5180aa4f5b7fd9991b5ae4816d56cb642c31d0937a4977da516f28f2b",
+        "target_id": "gb:NOR:ADM2:86288312B44883610080028",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          12.632849740953121,
+          66.07851576187974,
+          12.676912,
+          66.12571849873382
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Kystkontur",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=hits&bbox=12.632849740953%2C66.078515761880%2C12.676912000000%2C66.125718498734%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:19:59 GMT",
+        "service_timeStamp": "2026-10-08T19:19:59Z",
+        "numberMatched": "79",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/00-Kystkontur.xml",
+        "response_bytes": 350,
+        "response_sha256": "7fcc8317e9f439516b114a33652ad5ff0223355f5b423ce79438131c24d2ba23"
+      },
+      {
+        "component_id": "physical-component:1f5426f5180aa4f5b7fd9991b5ae4816d56cb642c31d0937a4977da516f28f2b",
+        "target_id": "gb:NOR:ADM2:86288312B44883610080028",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          12.632849740953121,
+          66.07851576187974,
+          12.676912,
+          66.12571849873382
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Landareal",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=hits&bbox=12.632849740953%2C66.078515761880%2C12.676912000000%2C66.125718498734%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:00 GMT",
+        "service_timeStamp": "2026-10-08T19:20:00Z",
+        "numberMatched": "13",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/01-Landareal.xml",
+        "response_bytes": 350,
+        "response_sha256": "d41b9bf759926d604069db30108b1cc41e5315d6a48bd79bee20c68177a48137"
+      },
+      {
+        "component_id": "physical-component:764b247eb21da38adac0b925bededbbb4dccaefa4b52b16976f20543a7ac3384",
+        "target_id": "gb:NOR:ADM2:86288312B55921880538341",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          15.88660149078544,
+          68.9257291733538,
+          15.929841,
+          68.97972587104582
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Kystkontur",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=hits&bbox=15.886601490785%2C68.925729173354%2C15.929841000000%2C68.979725871046%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:01 GMT",
+        "service_timeStamp": "2026-10-08T19:20:01Z",
+        "numberMatched": "50",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/02-Kystkontur.xml",
+        "response_bytes": 350,
+        "response_sha256": "51657f0936ea731ade1f993bbb0ac908f035c71152a3ae8eaf15dda91ff82543"
+      },
+      {
+        "component_id": "physical-component:764b247eb21da38adac0b925bededbbb4dccaefa4b52b16976f20543a7ac3384",
+        "target_id": "gb:NOR:ADM2:86288312B55921880538341",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          15.88660149078544,
+          68.9257291733538,
+          15.929841,
+          68.97972587104582
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Landareal",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=hits&bbox=15.886601490785%2C68.925729173354%2C15.929841000000%2C68.979725871046%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:01 GMT",
+        "service_timeStamp": "2026-10-08T19:20:01Z",
+        "numberMatched": "16",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/03-Landareal.xml",
+        "response_bytes": 350,
+        "response_sha256": "72849c3fb686839c9c9f9062893efab3686bef974ba2c2d5c876a863226f3610"
+      },
+      {
+        "component_id": "physical-component:7bad7bdf9b1203fe6c676eb2efde10b09ce394ad7d6d554eb557709d7704df35",
+        "target_id": "gb:NOR:ADM2:86288312B55953165899475",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          13.116567,
+          66.28312700000001,
+          13.164506967289404,
+          66.32769553979008
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Kystkontur",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=hits&bbox=13.116567000000%2C66.283127000000%2C13.164506967289%2C66.327695539790%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:02 GMT",
+        "service_timeStamp": "2026-10-08T19:20:02Z",
+        "numberMatched": "54",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/04-Kystkontur.xml",
+        "response_bytes": 350,
+        "response_sha256": "efb12c7d7a12f100a2bc4c7ef5309fd71fce69ca4acaa89cf4904e729e59eeeb"
+      },
+      {
+        "component_id": "physical-component:7bad7bdf9b1203fe6c676eb2efde10b09ce394ad7d6d554eb557709d7704df35",
+        "target_id": "gb:NOR:ADM2:86288312B55953165899475",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          13.116567,
+          66.28312700000001,
+          13.164506967289404,
+          66.32769553979008
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Landareal",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=hits&bbox=13.116567000000%2C66.283127000000%2C13.164506967289%2C66.327695539790%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:03 GMT",
+        "service_timeStamp": "2026-10-08T19:20:03Z",
+        "numberMatched": "3",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/05-Landareal.xml",
+        "response_bytes": 349,
+        "response_sha256": "26faccba2267dbe10bdaa9fb333768959c02edfb10a4340e9c5f662125de0c64"
+      },
+      {
+        "component_id": "physical-component:8fb9f3f0d7df1c96ac452792fd4a9dbc7a45a576437550dd5b198424ceca14a9",
+        "target_id": "gb:NOR:ADM2:86288312B75314465532393",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          13.448883614621321,
+          66.7471805323379,
+          13.491791083128208,
+          66.78917059573338
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Kystkontur",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=hits&bbox=13.448883614621%2C66.747180532338%2C13.491791083128%2C66.789170595733%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:03 GMT",
+        "service_timeStamp": "2026-10-08T19:20:03Z",
+        "numberMatched": "84",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/06-Kystkontur.xml",
+        "response_bytes": 350,
+        "response_sha256": "266c757b6376525b791f582a02a4e1f030fb609bcbde564fe91dd693fbcf533b"
+      },
+      {
+        "component_id": "physical-component:8fb9f3f0d7df1c96ac452792fd4a9dbc7a45a576437550dd5b198424ceca14a9",
+        "target_id": "gb:NOR:ADM2:86288312B75314465532393",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          13.448883614621321,
+          66.7471805323379,
+          13.491791083128208,
+          66.78917059573338
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Landareal",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=hits&bbox=13.448883614621%2C66.747180532338%2C13.491791083128%2C66.789170595733%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:04 GMT",
+        "service_timeStamp": "2026-10-08T19:20:04Z",
+        "numberMatched": "15",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/07-Landareal.xml",
+        "response_bytes": 350,
+        "response_sha256": "888381ae1c427495a69df8391eafe8817d95d5e29488c5f91a5de29e2d49272f"
+      },
+      {
+        "component_id": "physical-component:a92cac9c4c3d3a91286eca0e4890becd63441647c7fe7c4cdcc5e1aa167d4803",
+        "target_id": "gb:NOR:ADM2:86288312B80996435697818",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          13.584745205265925,
+          66.12544135265415,
+          13.647787714407489,
+          66.17467714096496
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Kystkontur",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=hits&bbox=13.584745205266%2C66.125441352654%2C13.647787714407%2C66.174677140965%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:05 GMT",
+        "service_timeStamp": "2026-10-08T19:20:05Z",
+        "numberMatched": "30",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/08-Kystkontur.xml",
+        "response_bytes": 350,
+        "response_sha256": "8cf80cd1b0caa0f214e3c94c78a2e8f60253014fc967cd01818b17b6b27617f6"
+      },
+      {
+        "component_id": "physical-component:a92cac9c4c3d3a91286eca0e4890becd63441647c7fe7c4cdcc5e1aa167d4803",
+        "target_id": "gb:NOR:ADM2:86288312B80996435697818",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          13.584745205265925,
+          66.12544135265415,
+          13.647787714407489,
+          66.17467714096496
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Landareal",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=hits&bbox=13.584745205266%2C66.125441352654%2C13.647787714407%2C66.174677140965%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:06 GMT",
+        "service_timeStamp": "2026-10-08T19:20:06Z",
+        "numberMatched": "2",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/09-Landareal.xml",
+        "response_bytes": 349,
+        "response_sha256": "715769b72aeebc0e1be2e990db340e7c20f09334908474ca98ac93613e2aa1d9"
+      },
+      {
+        "component_id": "physical-component:b6ba064b4525f0c75459a8d1aa05c25e9740cc46b9964f96983d61d6a9b4253a",
+        "target_id": "gb:NOR:ADM2:86288312B95964377762384",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          12.692087,
+          66.02242600000001,
+          12.735210848349732,
+          66.06655335492901
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Kystkontur",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=hits&bbox=12.692087000000%2C66.022426000000%2C12.735210848350%2C66.066553354929%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:06 GMT",
+        "service_timeStamp": "2026-10-08T19:20:06Z",
+        "numberMatched": "158",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/10-Kystkontur.xml",
+        "response_bytes": 351,
+        "response_sha256": "275d7eba405917aa9687dd36c8728f52a6f04ff6accb5cddc2da54857ed309e2"
+      },
+      {
+        "component_id": "physical-component:b6ba064b4525f0c75459a8d1aa05c25e9740cc46b9964f96983d61d6a9b4253a",
+        "target_id": "gb:NOR:ADM2:86288312B95964377762384",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          12.692087,
+          66.02242600000001,
+          12.735210848349732,
+          66.06655335492901
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Landareal",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=hits&bbox=12.692087000000%2C66.022426000000%2C12.735210848350%2C66.066553354929%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:07 GMT",
+        "service_timeStamp": "2026-10-08T19:20:07Z",
+        "numberMatched": "35",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/11-Landareal.xml",
+        "response_bytes": 350,
+        "response_sha256": "a7ddf987bf1941b37f884c3d8521609ca39694e3cd981ab9240156daf6886372"
+      },
+      {
+        "component_id": "physical-component:eb2b6c25d1a2b8ead2bcb67f7e0423b5f1cc5609ac3f600bb98cd6d5cb11db40",
+        "target_id": "gb:NOR:ADM2:86288312B90944773523196",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          12.607612244358712,
+          65.6641270554263,
+          12.656241,
+          65.7062174941696
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Kystkontur",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3AKystkontur&resultType=hits&bbox=12.607612244359%2C65.664127055426%2C12.656241000000%2C65.706217494170%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:08 GMT",
+        "service_timeStamp": "2026-10-08T19:20:08Z",
+        "numberMatched": "106",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/12-Kystkontur.xml",
+        "response_bytes": 351,
+        "response_sha256": "8d1f06fec99257c66aa1758eb3ad01dc92d94c4799b9f092c2c3f06e955d5ca1"
+      },
+      {
+        "component_id": "physical-component:eb2b6c25d1a2b8ead2bcb67f7e0423b5f1cc5609ac3f600bb98cd6d5cb11db40",
+        "target_id": "gb:NOR:ADM2:86288312B90944773523196",
+        "added_area_bbox_deg_with_0.02_context_margin": [
+          12.607612244358712,
+          65.6641270554263,
+          12.656241,
+          65.7062174941696
+        ],
+        "margin_degrees": 0.02,
+        "margin_role": "source request context only; not accuracy, tolerance, buffer for measurement, or applicability conclusion",
+        "type_name": "app:Landareal",
+        "url": "https://wfs.geonorge.no/skwms1/wfs.dybdedata?service=WFS&version=2.0.0&request=GetFeature&typeNames=app%3ALandareal&resultType=hits&bbox=12.607612244359%2C65.664127055426%2C12.656241000000%2C65.706217494170%2Curn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84",
+        "http_status": 200,
+        "content_type": "text/xml; subtype=gml/3.2.1;charset=UTF-8",
+        "http_date": "Thu, 08 Oct 2026 19:20:09 GMT",
+        "service_timeStamp": "2026-10-08T19:20:09Z",
+        "numberMatched": "13",
+        "numberReturned": "0",
+        "response_path": "research/geography/norway-seven-physical-applicability-20261008/sources/kartverket-metadata-20261008/sjoekart-dybdedata-wfs-bbox-hits/13-Landareal.xml",
+        "response_bytes": 350,
+        "response_sha256": "10d2f815b5b52829109170b365f31bbaf3c6bdec8a14c435e2b4734c38dc2ef0"
+      }
+    ],
+    "source_snapshot_index": "research/geography/norway-seven-physical-applicability-20261008/sources/sjoekart-dybdedata-wfs-20261008/source-snapshot-index.json",
+    "source_snapshot_index_sha256": "21b801fa3bf58ad34364084e08a9e07e05d50580cf1fc472e996153ca609fb4f",
+    "snapshot_feature_count_by_window_summary": {
+      "app:Kystkontur": {
+        "response_files": 7,
+        "members_in_responses": 561,
+        "unique_gml_ids": 561,
+        "duplicate_gml_ids": 0,
+        "field_value_counts": {
+          "førstedatafangstdato": 533,
+          "oppdateringsdato": 561,
+          "datauttaksdato": 561
+        },
+        "date_field_ranges": {
+          "førstedatafangstdato": {
+            "min": "2001-04-02T22:00:00",
+            "max": "2004-02-22T23:00:00"
+          },
+          "oppdateringsdato": {
+            "min": "2001-04-02T22:00:00",
+            "max": "2025-03-04T23:00:00"
+          },
+          "datauttaksdato": {
+            "min": "2026-10-05T11:22:24",
+            "max": "2026-10-05T11:33:49"
+          }
+        },
+        "features_with_quality_property": 0,
+        "features_with_kysttype_property": 0,
+        "product_schema_versions": [
+          "20201001"
+        ]
+      },
+      "app:Landareal": {
+        "response_files": 7,
+        "members_in_responses": 97,
+        "unique_gml_ids": 97,
+        "duplicate_gml_ids": 0,
+        "field_value_counts": {
+          "førstedatafangstdato": 50,
+          "oppdateringsdato": 97,
+          "datauttaksdato": 97
+        },
+        "date_field_ranges": {
+          "førstedatafangstdato": {
+            "min": "2001-11-26T23:00:00",
+            "max": "2003-10-16T22:00:00"
+          },
+          "oppdateringsdato": {
+            "min": "2001-11-26T23:00:00",
+            "max": "2026-04-26T22:00:00"
+          },
+          "datauttaksdato": {
+            "min": "2026-10-05T11:35:27",
+            "max": "2026-10-05T11:42:24"
+          }
+        },
+        "features_with_quality_property": 0,
+        "features_with_kysttype_property": 0,
+        "product_schema_versions": [
+          "20201001"
+        ]
+      }
+    },
+    "retained_raw_response_count": 14,
+    "retained_raw_response_bytes": 3066135,
+    "feature_date_summary": "research/geography/norway-seven-physical-applicability-20261008/sjoekart-feature-date-summary.json",
+    "limits": [
+      "The official product sheet describes the service as saltwater-only and non-navigation; product survey age and quality vary.",
+      "Feature first capture/observation, feature update, and service extraction timestamps are distinct fields and must not be conflated.",
+      "No positional-quality or coastline-category field appeared on captured Kystkontur features; registration uncertainty remains unknown.",
+      "WFS member-count attributes are inconsistent; response members were checked against resultType=hits counts.",
+      "No spatial comparison has run; physical applicability remains unresolved."
+    ],
+    "feature_date_summary_sha256": "fa70125d2c92e244f1419ff087f25af4514a3682bb6d1ab56fe8eb2b8ec1358e"
+  }
+}

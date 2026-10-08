@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "attempted_at": "2026-10-08T19:39:07.617211+00:00",
+  "status": "no-geometry-started; earlier-self-imposed-preflight-thresholds-corrected",
+  "reason": "Initial capture used df reported availability, which was about 1.1 GB lower than the workspace manager statfs and Python statvfs/shutil availability. The initial check denied a 64 MiB output + 64 MiB scratch reserve on df alone; the governed workspace-manager/statvfs check is authoritative and passed in subsequent fresh snapshots.",
+  "live_snapshot": {
+    "memory_free_percent": 31,
+    "physical_memory_bytes": 8589934592,
+    "filesystem_free_bytes": 10732781568,
+    "workspace_manager_free_bytes": 11806879744,
+    "workspace_manager_minimum_free_bytes": 10737418240,
+    "workspace_manager_headroom_bytes": 1069461504,
+    "checkout_bytes": 45256806400,
+    "required_output_reserve_bytes": 33554432,
+    "required_scratch_reserve_bytes": 33554432,
+    "combined_required_reserve_bytes": 67108864,
+    "reserve_shortfall_bytes": 0
+  },
+  "scope_not_started": {
+    "cases": 7,
+    "candidate_context": 15,
+    "family_members": 400,
+    "neighbors": 36
+  },
+  "producer_sha256": "9a4aa60d968f977a0d3a92987f4d82acc796556d83b57006d6fb8532df5ee6ce",
+  "plan_sha256": "a2df824695d113fdfb8866e8f25093321c6a519ab01464d4b77b55a26b9e5cda",
+  "preflight_script_sha256": "814d9c2642095d349c48a729fbb62d16a2ead1df04002e464761c24fb8183349",
+  "geometry_started": false,
+  "coordinator_requested": "brief no-new-disk-write window or release of at least 128 MiB safe owned scratch",
+  "correction": {
+    "determined_at": "2026-10-08T19:39:55.571552+00:00",
+    "authoritative_metric": "workspaceManager.check() (fs.statfs bavail*bsize), cross-checked by os.statvfs and shutil.disk_usage",
+    "no_geometry_started": true,
+    "preserve_df_as_diagnostic_only": true
+  },
+  "attempt_history": [
+    {
+      "attempted_at": "2026-10-08T19:40:23.764609+00:00",
+      "status": "denied-before-geometry",
+      "reason": "A second self-imposed 30% free-memory threshold was exceeded by a 28% snapshot. This was stricter than the actual reserved phase requirement. Revised live admission requires at least 25% system free, at least 2x the 805306368-byte phase RSS cap available at start, and a runtime abort guard below 20%."
+    },
+    {
+      "attempted_at": "2026-10-08T19:50:13.188584+00:00",
+      "status": "denied-before-geometry",
+      "reason": "The first repeated preflight temporarily counted its own Python/Shapely memory as a competing GIS process. No other geometry process was established. The corrected process inventory excludes only the preflight PID; any other GIS process remains a hard denial."
+    },
+    {
+      "attempted_at": "2026-10-08T19:50:36.659154+00:00",
+      "status": "bounded-run-terminal-before-result",
+      "reason": "Run003 met its RSS/time/process-group bounds but exited 1 before output. Traceback identified KeyError name: the pinned Atlas feature label is stored at properties.name. No geometry result was produced; receipt files geometry-run-admission/runtime/console-003 are preserved.",
+      "peak_sampled_process_group_rss_bytes": 164462592,
+      "elapsed_seconds": 0.877,
+      "terminal_process_group_empty": true,
+      "producer_sha256": "48fbca929010e984b4202c9f88d052e5bfda1631aee38d0afeba2f96277cef5f",
+      "admission_sha256": "f166697cb52553c0cef30ea61bd86dd4604991b8d43f8c874d9a80460b3536dd"
+    },
+    {
+      "attempted_at": "2026-10-08T19:51:50.107659+00:00",
+      "status": "measurement-terminal-with-failed-topology-predicates",
+      "reason": "Run004 completed within actual live admission bounds and reproduced all seven added-area receipts. Parent coverage against pinned simplified 2022 ADM1 is false for all seven; strict no-loss residuals are nonzero for Lur\u00f8y and Vefsn. These are retained as failures without tolerance or repair. Physical applicability remains unresolved.",
+      "peak_sampled_process_group_rss_bytes": 172687360,
+      "elapsed_seconds": 1.135,
+      "exit_code": 0,
+      "terminal_process_group_empty": true,
+      "admission_sha256": "4e0b12a48bbdc9b12c1943c450b77473469965d5e43e23fb6f9522822090220b",
+      "result": "physical-applicability-v1.json"
+    }
+  ]
+}
