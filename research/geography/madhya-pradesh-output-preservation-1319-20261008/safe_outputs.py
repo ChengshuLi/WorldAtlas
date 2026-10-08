@@ -12,7 +12,7 @@ import subprocess
 import types
 
 ISSUE = 1485
-WORKER_ID = "01a10947-b3d7-7812-8b2f-c5a47e88ccb2"
+WORKER_ID = "01a10948-7d38-75d0-bc01-4cc28ea41f49"
 ISSUE_SNAPSHOT = "research/geography/madhya-pradesh-output-preservation-1319-20261008/issue-1485-current.json"
 OWNED_PATH = "research/geography/madhya-pradesh-output-preservation-1319-20261008/"
 EVIDENCE_PATH = "data/regional-review/regional-review-0968ad79c26518d2/"
@@ -53,7 +53,9 @@ def load_contract(repo: Path) -> tuple[dict, dict]:
 
 
 def load_immutable_api(repo: Path):
-    commit = current_commit(repo)
+    # Reproduce the helper from the verified PR base, even when evidence is
+    # built on a branch that already contains earlier packet commits.
+    commit = git(repo, "rev-parse", "origin/main").decode().strip()
     source = git(repo, "show", f"{commit}:{IMMUTABLE_PATH}")
     if sha256(source) != IMMUTABLE_SHA256:
         raise ValueError("Shared immutable helper differs from its admitted whole-file pin")

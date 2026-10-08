@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "method": "Actual archived validate_controls.py and integrity_guards.py were copied byte-for-byte into a private issue-owned mirror. The mirror preserves the original assessments, both compressed retained runs, and all archived control inputs. Git history access remained read-only.",
+  "evaluation_commit": "cbb829672d18801e4310c30896a7ddb13a79b451",
+  "input_tree_relative_to_repo": "data/regional-review/regional-review-0968ad79c26518d2",
+  "results": [
+    {
+      "case": "dangling-summary",
+      "exit_code": 0,
+      "stdout": "{\n  \"positive\": \"passed\",\n  \"negative\": \"passed\",\n  \"reproducibility\": \"passed\",\n  \"field_updates\": 16,\n  \"original_sha256\": \"9c5a0cbc869918466c5162aead971a5ccedd72fe42cba007c2660bf120da21ad\"\n}\n",
+      "stderr": "",
+      "entrypoint_sha256": "a547f321341b1a00382fa44c33c63935f7e7520066dc67948e385c1b3a322aae",
+      "guard_sha256": "36358f235c6fa28e636217a3f0376f0fbca8729462f8c75d0700b4fa1784c5ef",
+      "link_was_dangling_before": true,
+      "link_remains_symlink": true,
+      "target_created": true,
+      "target_sha256": "3c87e6d7e63150485bc98029d1a15ee37ec0d2aad95679deeffaa3333f565da6",
+      "target_bytes": 334
+    },
+    {
+      "case": "dangling-ledger",
+      "exit_code": 0,
+      "stdout": "{\n  \"positive\": \"passed\",\n  \"negative\": \"passed\",\n  \"reproducibility\": \"passed\",\n  \"field_updates\": 16,\n  \"original_sha256\": \"9c5a0cbc869918466c5162aead971a5ccedd72fe42cba007c2660bf120da21ad\"\n}\n",
+      "stderr": "",
+      "entrypoint_sha256": "a547f321341b1a00382fa44c33c63935f7e7520066dc67948e385c1b3a322aae",
+      "guard_sha256": "36358f235c6fa28e636217a3f0376f0fbca8729462f8c75d0700b4fa1784c5ef",
+      "link_was_dangling_before": true,
+      "link_remains_symlink": true,
+      "target_created": true,
+      "target_sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84",
+      "target_bytes": 4574
+    },
+    {
+      "case": "ordinary-existing-summary",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/madhya-pradesh-output-preservation-1319-20261008/negative-fixtures/actual-controls-r3/repo/data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/validate_controls.py\", line 20, in <module>\n    require_new_output(destination)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/madhya-pradesh-output-preservation-1319-20261008/negative-fixtures/actual-controls-r3/repo/data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/integrity_guards.py\", line 19, in require_new_output\n    raise FileExistsError(f'Immutable erratum output already exists: {path}')\nFileExistsError: Immutable erratum output already exists: /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/madhya-pradesh-output-preservation-1319-20261008/negative-fixtures/actual-controls-r3/repo/data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/erratum-summary-actual-existing-sentinel-r3.json\n",
+      "entrypoint_sha256": "a547f321341b1a00382fa44c33c63935f7e7520066dc67948e385c1b3a322aae",
+      "sentinel_preserved": true,
+      "output_directory_absent": true
+    }
+  ],
+  "scope": "Publication-path behavior only; no source/legal/geographic conclusion."
+}
