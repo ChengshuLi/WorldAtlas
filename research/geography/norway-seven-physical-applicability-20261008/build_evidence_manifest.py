@@ -11,6 +11,7 @@ OUTPUT=ROOT/"evidence-quality.json"
 BASE_ISSUE=1510
 PREDECESSOR_COMMIT="515c6e66cea72f0f2357826950692b719d0c89ce"
 DATA_COMMIT="088ab05aeb16ddfa8f0c43e596533f3f11d5fcec"
+RUN_EVALUATION_BASE="689fa0618ce61827adc8862c3e065bcfcf97417b"
 BASE_MANIFEST_PATH="research/geography/norway-adm2-source-fit-1492/evidence-quality.json"
 METHOD="norway-physical-applicability-measurement"
 
@@ -158,7 +159,10 @@ def main() -> None:
     }
     units={k:"cases" if k in ("case_rows","physical_applicability_resolved_cases","cases_flagged_by_invalid_source_bbox","correction_proposals") else "rows" if "rows" in k or "relations" in k else "members" if k=="family_member_count" else "IDs" if k=="neighbor_id_count" else "features" if k=="invalid_landareal_features" else "components" for k in vals}
     for key,value in vals.items():
-        metrics.append({"id":key,"value":value,"unit":units[key],"input_sha256":result_sha,"input_file":{"path":result_path,"commit":"candidate"},"vintage":"current","evaluation_commit":base})
+        # Run 004 was evaluated before the PR base advanced. Preserve that
+        # original evaluation commit as archived evidence instead of labeling
+        # unchanged historical measurements as current on a later PR base.
+        metrics.append({"id":key,"value":value,"unit":units[key],"input_sha256":result_sha,"input_file":{"path":result_path,"commit":"candidate"},"vintage":"archived","evaluation_commit":RUN_EVALUATION_BASE})
         bindings.append({"metric_id":key,"path":metric_path,"json_pointer":"/values/"+key})
         summaries.append({"metric_id":key,"text":texts[key],"value":value,"unit":units[key]})
 
