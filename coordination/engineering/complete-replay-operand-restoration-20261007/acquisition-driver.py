@@ -292,7 +292,8 @@ def dispatch(adapter, repo, destination, job, campaign, metadata, modules, *, ru
     if operation == 'sources-complete':
         return adapter.reconcile_sources(phase, source_index_pin, list(pairs.values()))
     if operation == 'ledger':
-        return adapter.ledger(phase, args['ledger'], config, config_pin, original, inputs, immutable.canonical_json)
+        return adapter.ledger(phase, args['ledger'], config, config_pin, original, inputs,
+                              immutable.canonical_json, binding_guard=before_finish)
     if operation == 'candidate-join':
         return adapter.candidate_join(phase, *[read_products(k, k+'-') for k in ('components', 'fragments', 'contacts')])
     if operation == 'scope':

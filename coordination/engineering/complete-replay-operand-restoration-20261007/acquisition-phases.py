@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import types
 
 FILE = 33554432
 PHASE = 268435456
@@ -291,7 +292,128 @@ def original_alias(repo, descriptor, pin):
             (mode, blob) == (pin['mode'], pin['blob']), 'Actual original consumer mode/OID differs')
 
 
-def ledger(phase, kind, config, config_pin, original_pins, literal_inputs, canonical_json):
+class CanonicalStream:
+    """Deferred complete canonical encoding; the full source object remains."""
+    __slots__ = ('value',)
+
+    def __init__(self, value):
+        self.value = value
+
+
+def canonical_stream(value):
+    return CanonicalStream(value)
+
+
+def canonical_chunks(value):
+    encoder = json.JSONEncoder(sort_keys=True, separators=(',', ':'),
+                               ensure_ascii=False, allow_nan=False)
+    for text in encoder.iterencode(value):
+        # iterencode can create one whole escaped string token. Bound each UTF8
+        # encoding allocation without omitting a token, record or coordinate.
+        for offset in range(0, len(text), 65536):
+            yield text[offset:offset + 65536].encode()
+    yield b'\n'
+
+
+def canonical_digest(value):
+    if type(value) is not CanonicalStream:
+        return hashlib.sha256(value).hexdigest()
+    digest = hashlib.sha256()
+    for body in canonical_chunks(value.value):
+        digest.update(body)
+    return digest.hexdigest()
+
+
+def bounded_reconstruction(phase, reconstruct, contact_key, originals, delta,
+                           literal_inputs, canonical_json, code_receipt, binding_guard):
+    """Disclosed resource binding of EXACT original pure function code objects.
+
+    The original whole source and reconstruction receipt remain unchanged. The
+    new globals are private copies; neither literal functions nor modules change.
+    Live whole-project/callback authentication is mandatory before and after.
+    """
+    require(callable(binding_guard), 'Live canonical binding guard required')
+    binding_guard()
+    def custody(path):
+        matches = [p for p in phase.pins.values()
+                   if (phase.repo / p['path']).resolve() == Path(path).resolve()]
+        require(len(matches) == 1, 'Missing exact canonical callback whole-code input')
+        raw = phase.read(matches[0])
+        with Path(path).open('rb') as stream:
+            require(stream.read(len(raw) + 1) == raw, 'Actual canonical callback whole-code differs')
+        return matches[0]
+    adapter_pin = custody(__file__)
+    inputs_pin = custody(literal_inputs.__file__)
+    canonical_pin = custody(canonical_json.__code__.co_filename)
+    source_pins = [p for p in phase.pins.values()
+                   if p['sha256'] == code_receipt['whole_source_sha256']]
+    require(len(source_pins) == 1, 'Missing unique whole original reconstruction source')
+    expected_reconstruct, expected_contact, expected_receipt = literal_inputs.existing_reconstructor(
+        phase.read(source_pins[0]), code_receipt['whole_source_sha256'], canonical_json)
+    require(code_receipt == expected_receipt and reconstruct.__code__ == expected_reconstruct.__code__ and
+            contact_key.__code__ == expected_contact.__code__, 'Original pure source/function receipt differs')
+    for actual, expected in ((reconstruct, expected_reconstruct), (contact_key, expected_contact)):
+        require(actual.__closure__ is None and actual.__kwdefaults__ is None,
+                'Original pure function closure/default binding differs')
+        if expected.__defaults__ is None:
+            require(actual.__defaults__ is None, 'Original pure function defaults changed')
+        else:
+            defaults = actual.__defaults__
+            require(type(defaults) is tuple and len(defaults) == len(expected.__defaults__) and
+                    all(type(a) is types.FunctionType and a.__code__ == e.__code__ and
+                        a.__closure__ is None and a.__defaults__ is None and a.__kwdefaults__ is None and
+                        a.__globals__ is actual.__globals__ for a, e in zip(defaults, expected.__defaults__)),
+                    'Original pure function defaults changed')
+    original_globals = reconstruct.__globals__
+    require(contact_key.__globals__ is original_globals and
+            original_globals['canonical_json'] is canonical_json and
+            original_globals['digest'] is literal_inputs.digest and
+            original_globals['reconstruct'] is reconstruct and
+            original_globals['contact_key'] is contact_key,
+            'Original pure reconstruction callback binding differs')
+    namespace = dict(original_globals)
+    namespace.update(canonical_json=canonical_stream, digest=canonical_digest)
+    rebound = []
+    for original in (reconstruct, contact_key):
+        function = types.FunctionType(original.__code__, namespace, original.__name__,
+                                      original.__defaults__, original.__closure__)
+        function.__kwdefaults__ = original.__kwdefaults__
+        namespace[original.__name__] = function
+        rebound.append(function)
+    def check():
+        require(original_globals['canonical_json'] is canonical_json and
+                original_globals['digest'] is literal_inputs.digest and
+                original_globals['reconstruct'] is reconstruct and original_globals['contact_key'] is contact_key,
+                'Original callback environment changed')
+        require(namespace['canonical_json'] is canonical_stream and
+                namespace['digest'] is canonical_digest and
+                namespace['reconstruct'] is rebound[0] and
+                namespace['contact_key'] is rebound[1], 'Streamed callback binding changed')
+        for original, actual in zip((reconstruct, contact_key), rebound):
+            require(actual.__code__ is original.__code__ and
+                    actual.__defaults__ is original.__defaults__ and
+                    actual.__closure__ is original.__closure__ and
+                    actual.__kwdefaults__ is original.__kwdefaults__ and
+                    actual.__globals__ is namespace, 'Exact original function binding changed')
+    check()
+    result = rebound[0](originals, delta, lambda row: row['id'])
+    check()
+    binding_guard()
+    facts = {'version': 1, 'kind': 'complete-canonical-json-streamed-sha256',
+             'original_reconstruction': dict(code_receipt),
+             'original_source_pin': source_pins[0],
+             'adapter_pin': adapter_pin, 'literal_inputs_pin': inputs_pin,
+             'literal_canonical_pin': canonical_pin,
+             'callbacks': ['canonical_stream', 'canonical_chunks', 'canonical_digest'],
+             'json_settings': {'sort_keys': True, 'ensure_ascii': False,
+                              'separators': [',', ':'], 'allow_nan': False, 'newline': True},
+             'maximum_utf8_encoding_chunk_bytes': 262144,
+             'whole_string_token_limit': 'Original admitted source string; iterencode may escape one whole token.'}
+    return result, facts
+
+
+def ledger(phase, kind, config, config_pin, original_pins, literal_inputs, canonical_json,
+           binding_guard=None):
     """Invoke the authenticated existing pure reconstruct on one COMPLETE kind.
 
     Output aliases select actual whole containing source objects. Delta upserts
@@ -315,9 +437,11 @@ def ledger(phase, kind, config, config_pin, original_pins, literal_inputs, canon
             source = body
             continue
         value = json.loads(body)
+        del body
         if desc['kind'] == kind + '_delta':
             require(delta is None, 'Duplicate original ledger delta')
             delta = value; delta_index = input_index
+            del value
             continue
         rows = value['features'] if type(value) is dict else value
         require(type(rows) is list and rows, 'Empty/wrong original whole ledger')
@@ -327,10 +451,17 @@ def ledger(phase, kind, config, config_pin, original_pins, literal_inputs, canon
             locators[identity] = {'input_index': input_index,
                                   'selector': ['features', ordinal] if type(value) is dict else [ordinal]}
             originals.append(row)
+        del value, rows, row
     require(source is not None and delta is not None, 'Missing full original reconstruction dependency')
     reconstruct, contact_key, code_receipt = literal_inputs.existing_reconstructor(
         source, config['existing_reconstructor']['sha256'], canonical_json)
-    current = reconstruct(originals, delta, contact_key if kind == 'contacts' else lambda row: row['id'])
+    canonical_binding = None
+    if kind == 'fragments':
+        current, canonical_binding = bounded_reconstruction(
+            phase, reconstruct, contact_key, originals, delta, literal_inputs,
+            canonical_json, code_receipt, binding_guard)
+    else:
+        current = reconstruct(originals, delta, contact_key if kind == 'contacts' else lambda row: row['id'])
     # Literal reconstruction rejects a retained/upsert conflict; independently reject duplicate upserts too.
     upserts = set()
     for ordinal, row in enumerate(delta['upsert_records']):
@@ -358,9 +489,12 @@ def ledger(phase, kind, config, config_pin, original_pins, literal_inputs, canon
     if kind == 'components':
         require(count == config['current_components'] == 95173, 'Incomplete complete current component ledger')
     del current, originals, locators, delta
-    return phase.finish({'operation': 'literal-ledger-reconstruction', 'ledger': kind,
-                         'current_count': count, 'reconstruction': code_receipt,
-                         'containing_table_sha256': table_sha})
+    facts = {'operation': 'literal-ledger-reconstruction', 'ledger': kind,
+             'current_count': count, 'reconstruction': code_receipt,
+             'containing_table_sha256': table_sha}
+    if canonical_binding is not None:
+        facts['canonical_hash_binding'] = canonical_binding
+    return phase.finish(facts)
 
 
 def bind_alias(index_row, completed_ledger_inventory):
