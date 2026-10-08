@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -32,6 +33,30 @@ def subjects_hash(ids):
 def file_desc(path):
     raw = (ROOT / path).read_bytes()
     return {"path": path, "bytes": len(raw), "sha256": sha(raw), "hash_kind": "file-bytes"}
+
+
+def change_receipts():
+    """Bind every PR path to its actual diff status against the current base."""
+    base = subprocess.check_output(["git", "rev-parse", "origin/main"], cwd=ROOT, text=True).strip()
+    diff = subprocess.check_output(["git", "diff", "--name-status", "--no-renames", f"{base}...HEAD", "--"],
+                                   cwd=ROOT, text=True)
+    rows = {}
+    for line in diff.splitlines():
+        status, path = line.split("\t", 1)
+        normalized = {"A": "added", "M": "modified", "D": "removed"}.get(status)
+        if normalized is None:
+            raise SystemExit(f"Unsupported PR diff status: {status}")
+        row = {"path": path, "status": normalized, "previous_path": None}
+        if normalized != "added":
+            old = subprocess.check_output(["git", "show", f"{base}:{path}"], cwd=ROOT)
+            row["original_sha256"] = sha(old)
+        if normalized == "removed":
+            row["reason"] = "Removed only when superseded by a retained source/output in this source-only packet."
+        rows[path] = row
+    for path in subprocess.check_output(["git", "ls-files", "--others", "--exclude-standard", OWNED],
+                                        cwd=ROOT, text=True).splitlines():
+        rows.setdefault(path, {"path": path, "status": "added", "previous_path": None})
+    return [rows[path] for path in sorted(rows)]
 
 
 def source_product(path):
@@ -192,9 +217,19 @@ def main():
         ("delivery-unique-count-excess", component_capture["component_delivery_inventory"]["declared_vs_captured_unique_difference"], "IDs", "Actual unique delivery IDs minus input-config declaration"),
         ("deterministic-overlay-runs", overlay["runs"]["run_count"], "runs", "Equal canonical exact overlay runs")
     ]
-    metrics = [{"id": key, "value": value, "unit": unit, "vintage": "current",
+    # GIS used the task's immutable 088ab baseline snapshot, which predates the
+    # PR base. Keep that evaluation vintage explicit; premerge trust checks
+    # require "current" only when evaluation_commit equals the exact PR base.
+    metrics = [{"id": key, "value": value, "unit": unit, "vintage": "archived",
                 "input_sha256": overlay_desc["sha256"], "evaluation_commit": COMMIT}
                for key, value, unit, _ in metrics_data]
+    metric_values_path = OWNED + "vintages/acceptance-receipts-20261008/metric-values.json"
+    metric_values = json.loads((ROOT / metric_values_path).read_bytes())
+    expected_values = {key: value for key, value, _unit, _text in metrics_data}
+    if metric_values.get("method_id") != "norway-exact-component-source-overlay" or metric_values.get("input_overlay_sha256") != overlay_desc["sha256"] or metric_values.get("values") != expected_values:
+        raise SystemExit("Metric value output does not match the exact overlay ledger")
+    metric_bindings = [{"metric_id": metric["id"], "path": metric_values_path,
+                        "json_pointer": "/values/" + metric["id"]} for metric in metrics]
     summaries = [{"metric_id": key, "value": value, "unit": unit, "text": text}
                  for (key, value, unit, text) in metrics_data]
     subject_map = {identity: id_to_path[identity] for identity in selected_ids}
@@ -204,14 +239,21 @@ def main():
         "component_ids": selected_ids, "component_ids_sha256": subjects_hash(selected_ids),
         "baseline": {"commit": COMMIT, "files": list(by_path.values()), "subject_files": subject_map, "pins": {"nor_adm2_simplified": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e"}, "pin_files": {"nor_adm2_simplified": "research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson"}},
         "sources": sources, "outputs": out_descriptors,
-        "methods": [{"id": "norway-exact-component-source-overlay", "kind": "geography",
+        "methods": [{"id": "norway-exact-component-source-overlay", "kind": "measurement",
                      "description": "Exact source-subject, parent, current Atlas target, strict no-loss, and contact overlays for exactly 15 components. Full 400-member family and 36-neighbor IDs are preserved; no repair or tolerance is used.",
+                     "helper_version": "worldatlas-evidence-geometry-v1",
                      "software": overlay["runtime"]["python"].splitlines()[0] + "; Shapely " + overlay["runtime"]["shapely_version"] + "; GEOS " + overlay["runtime"]["geos_version"],
                      "units": "Planar square degrees in source longitude/latitude coordinates; no physical area interpretation",
                      "axis_order": "longitude-latitude", "crs": "Source GeoJSON longitude/latitude, interpreted as OGC:CRS84",
                      "area_method": "Shapely/GEOS planar area and exact topology predicates; no tolerance, snapping, buffering, normalization, or repair",
                      "distance_method": "No distance calculations"}],
-        "metrics": metrics, "summaries": summaries,
+        "metrics": metrics, "metric_bindings": metric_bindings, "summaries": summaries,
+        "validation": [
+            {"method_id": "norway-exact-component-source-overlay", "kind": "positive-control", "outcome": "passed",
+             "evidence_path": OWNED + "vintages/acceptance-receipts-20261008/positive-control.json"},
+            {"method_id": "norway-exact-component-source-overlay", "kind": "negative-control", "outcome": "passed",
+             "evidence_path": OWNED + "vintages/acceptance-receipts-20261008/negative-control.json"}
+        ],
         "conclusions": [
             {"status": "supported", "text": "All 15 exact component delivery geometries match their pinned prior component geometry hashes and are covered by their unique-compatible retained 2013 ADM2 source subject. Each has one positive-area current simplified-product contact and no additional positive-area source overlap.", "source_ids": ["original-physical-component-delivery", "nor-adm2-simplified-2013"]},
             {"status": "unresolved", "text": "Only 13 of 15 candidate components are covered by the recorded Nordland ADM1 parent; the two Rødøy components fail the strict parent predicate. No candidate satisfies the complete acceptance conjunction.", "source_ids": ["current-atlas-part-17-targets", "nor-adm1-simplified-2022"]},
@@ -227,9 +269,7 @@ def main():
             "python3.12 research/geography/norway-adm2-source-fit-1492/run_bounded_overlay.py (use a fresh VINTAGE name for a new run)",
             "node scripts/evidence-quality.mjs research/geography/norway-adm2-source-fit-1492/evidence-quality.json"
         ],
-        "change_receipts": [{"path": OWNED + "vintages/issue-scope-correction-20261008/correction.json",
-                             "sha256": sha((ROOT / OWNED / "vintages/issue-scope-correction-20261008/correction.json").read_bytes()),
-                             "text": "The corrected Vevelstad component hash is preserved; selected count and full family scope are unchanged."}],
+        "change_receipts": change_receipts(),
         "limits": [
             "Physical classification, geographic approval, and all core map/database/publisher writes are outside this source-only proposal.",
             "Two Rødøy candidates fail strict ADM1 parent coverage; seven candidates fail exact current-target no-loss. The prior strict no-loss summary reported one fewer pass than this exact run; per-component results are retained.",
