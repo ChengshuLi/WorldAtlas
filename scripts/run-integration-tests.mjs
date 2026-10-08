@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {spawnSync} from 'node:child_process';
+import {spawn, spawnSync} from 'node:child_process';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
@@ -56,6 +56,10 @@ export const MIGRATION_WORKER_TESTS = [
   'test/map-snapshots.test.mjs', 'test/install-reviewed-geography.test.mjs',
   'test/land-creations.test.mjs'
 ];
+// Run 37848776291: this file dominated shard 2 (417 s of 558 s).
+// Shard 1 had the shortest setup and test path (181 s of tests). Keep the
+// ordinary inventory index intact so moving this file does not move neighbors.
+export const COMPONENT_CONTROL_TEST = 'test/physical-component-evidence-controls.test.mjs';
 export function fullRegressionShard(inventory, shard) {
   const placement = new Map([
     ...PACKAGED_ASSET_TESTS.map(name => [name, 0]),
@@ -64,7 +68,8 @@ export function fullRegressionShard(inventory, shard) {
   ]);
   const reserved = inventory.filter(name => placement.has(name) && placement.get(name) === shard);
   const ordinary = inventory.filter(name => !placement.has(name));
-  return [...reserved, ...ordinary.filter((name, index) => index % 3 === shard)];
+  return [...reserved, ...ordinary.filter((name, index) =>
+    (name === COMPONENT_CONTROL_TEST ? 1 : index % 3) === shard)];
 }
 
 export function integrationTestFiles(profile, shard) {
@@ -89,6 +94,70 @@ export function prepareIntegrationTests(files) {
     compileHostedMigrations({input:'drizzle', output:'dist/drizzle'});
   }
 }
+
+// Stream diagnostics immediately; retain only a bounded tail for the final TAP
+// summary. Cancellation also reaches the test workers and their Python children.
+export async function streamTestProcess(args, {env = process.env,
+  stdout = process.stdout, stderr = process.stderr, maxBytes = 64 * 1024 * 1024} = {}) {
+  const grouped = process.platform !== 'win32';
+  const child = spawn(process.execPath, args, {env, detached: grouped, stdio: ['ignore', 'pipe', 'pipe']});
+  let tail = '', bytes = 0, failure, cancelled, escalation, orphaned = false;
+  let cleanup = Promise.resolve();
+  const stop = signal => {
+    try { grouped ? process.kill(-child.pid, signal) : child.kill(signal); }
+    catch (error) { if (error.code !== 'ESRCH') failure ??= error; }
+  };
+  const cancel = signal => {
+    if (cancelled) return;
+    cancelled = signal;
+    stop('SIGTERM');
+    escalation = setTimeout(() => stop('SIGKILL'), 1000);
+  };
+  const onInt = () => cancel('SIGINT'), onTerm = () => cancel('SIGTERM');
+  process.on('SIGINT', onInt); process.on('SIGTERM', onTerm);
+  child.stdout.setEncoding('utf8');
+  child.stdout.on('data', chunk => {
+    tail = (tail + chunk).slice(-64 * 1024);
+  });
+  for (const stream of [child.stdout, child.stderr]) {
+    stream.on('data', chunk => {
+      bytes += Buffer.byteLength(chunk);
+      if (bytes > maxBytes && !failure) {
+        failure = Error('Regression output exceeds unchanged 64 MiB bound');
+        cancel('output-limit');
+      }
+    });
+  }
+  // Exit precedes close: descendants may inherit output pipes and prevent
+  // close forever. Start cleanup as soon as the test runner itself exits.
+  child.once('exit', () => {
+    cleanup = (async () => {
+      if (!grouped) return;
+      try { process.kill(-child.pid, 0); orphaned = true; }
+      catch (error) { if (error.code !== 'ESRCH') failure ??= error; return; }
+      stop('SIGTERM');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      stop('SIGKILL');
+    })();
+  });
+  child.stdout.pipe(stdout, {end: false}); child.stderr.pipe(stderr, {end: false});
+  try {
+    const result = await new Promise(resolve => {
+      child.once('error', error => { failure = error; });
+      child.once('close', (status, signal) => resolve({status, signal}));
+    });
+    await cleanup;
+    if (failure) throw failure;
+    if (cancelled) return cancelled === 'SIGINT' ? 130 : 143;
+    if (result.status === 0 && orphaned) throw Error('Regression exited successfully with unfinished descendants');
+    if (result.status === 0 && !/^# skipped 0$/m.test(tail)) throw Error('Regression did not establish zero skipped tests');
+    if (result.status === 0 && /^# skipped [1-9]/m.test(tail)) throw Error('Skipped tests cannot establish regression coverage');
+    return result.status ?? 1;
+  } finally {
+    clearTimeout(escalation);
+    process.off('SIGINT', onInt); process.off('SIGTERM', onTerm);
+  }
+}
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const files = integrationTestFiles(profile, shard);
@@ -101,13 +170,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   }
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, shard, files}));
-  const result = spawnSync(process.execPath, ['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
-    encoding:'utf8', maxBuffer:64*1024*1024, env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1'}:{})}
+  process.exitCode = await streamTestProcess(['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
+    env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1'}:{})}
   });
-  process.stdout.write(result.stdout ?? '');
-  process.stderr.write(result.stderr ?? '');
-  if (result.status === 0 && !/^# skipped 0$/m.test(result.stdout ?? '')) throw Error('Regression did not establish zero skipped tests');
-  if (result.status === 0 && /^# skipped [1-9]/m.test(result.stdout ?? '')) throw Error('Skipped tests cannot establish regression coverage');
-  if (result.error) throw result.error;
-  process.exitCode = result.status ?? 1;
 }
