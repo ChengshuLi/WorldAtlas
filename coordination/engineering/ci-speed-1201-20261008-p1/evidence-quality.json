@@ -1,0 +1,423 @@
+{
+  "version": 1,
+  "issue": 1201,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 6872,
+        "sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/full-regression-shards.test.mjs",
+        "bytes": 2701,
+        "sha256": "d9231d1ea050d6695cba4bfe439104dfdbe76687c012eda9ee1490944372b49f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/physical-component-evidence-controls.py",
+        "bytes": 8532,
+        "sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/physical-component-evidence-controls.test.mjs",
+        "bytes": 527,
+        "sha256": "180e16d152415949be691883f20fba8f0e953843dd2ff06a69d4b8e92710c982",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/validate-physical-component-evidence.py",
+        "bytes": 17242,
+        "sha256": "4377aa20ed954b43d13d68b18ca25a0bc19ef0969746365ce3c486902951d9f5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/physical_component_custody.py",
+        "bytes": 10715,
+        "sha256": "13049e65a9319136179e6ed84700823d6cae8c6cbf8d51acc013a18bbfaeb5f1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/README.md",
+      "bytes": 4627,
+      "sha256": "70bb7a2a17547d11920e273e298f9ada04ce58cb4a80a326cc1b328202819169",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "bytes": 1746,
+      "sha256": "ee95d427fbb96a9ee43175dc8c2c02fdb8ce253034a5777a13c175629ec1deb1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile.jsonl",
+      "bytes": 1469,
+      "sha256": "5c6eb856e41bf04540162d41b2daf8f4991a2eda010ce65806cfc86785159334",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-tests.log",
+      "bytes": 501,
+      "sha256": "b56ff7c5dfbbad595cd530ea7066c5f9adee4bb542a40db9db0e705c7d195e15",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/focused-tests.log",
+      "bytes": 9752,
+      "sha256": "4dd62cf98d102804fd03e1e53b1a557644a5c0d0c54d8663376580df7f036bf5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "bytes": 6950,
+      "sha256": "d1741ad94add82a2ee3133452435e9e54fafda6e963b9227ec6c18e8c08a47d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/local-prototype-controls.log",
+      "bytes": 1740,
+      "sha256": "0e9c264230e213846f518e2a541fe4273a0040b6f2ae329878b4260652b6ded0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/profile_fixture.py",
+      "bytes": 2451,
+      "sha256": "92e6a532fed8d84c22798d4983ff1074ac9df2f9201add812e325a9040e7ec3d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/test-inventory.json",
+      "bytes": 44463,
+      "sha256": "e5aa1bdb7bbee3e9cc67b79248b0dec50e8e5ff0e6219631187797638712ff4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/CI_PERFORMANCE.md",
+      "bytes": 3683,
+      "sha256": "74bd2cb05eeec5740210520a8e901e324768a50998b00ed69f74c3adc5c00776",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 9243,
+      "sha256": "255d2f5a6645aadc4d932fe122aef3c8761b0381ad6a25c42ded9cee4f0eb4fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "bytes": 2893,
+      "sha256": "57a8c0e17f5f6bf1ab3a5aa5c1327eba0cab94d9b6d78e2797270887efd4a898",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-streaming.test.mjs",
+      "bytes": 4837,
+      "sha256": "b5fe8a5bdc0f7ae5398932814180c13876f503186b7ef398bba49aee45f0f234",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-component-controls-runner.test.mjs",
+      "bytes": 2200,
+      "sha256": "b92282440b3677bd9bded72546d19994ef4feb9581ba5381dfd4a1dd0cb63e53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-component-evidence-controls.py",
+      "bytes": 10548,
+      "sha256": "8f68ee3abb334133fe6ce677efc391448811caa3bb9bae427472ded5e99879e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-component-evidence-controls.test.mjs",
+      "bytes": 1280,
+      "sha256": "217c826adad1772d156ec30049751dba7a5c7058ee5b2db165b2bc91df23559a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-component-fixture.test.mjs",
+      "bytes": 527,
+      "sha256": "854c2064c7e7aa7420e02c13d60d30a24ebaee1e0419518c4f56de607b0cb94e",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "ci-control-and-runner-profiling",
+      "kind": "code",
+      "description": "Actual process and full-custody controls, whole-byte equivalent preparation profiling, exhaustive file/workflow selection inventory and historical hosted timing. Direct local scientific run was a prototype, not final hosted acceptance.",
+      "software": "Node24.19.0; Python3.12.14/Shapely2.1.2; macOS8GiB shared host; historical GitHub Ubuntu runners",
+      "units": "seconds and pass/fail"
+    }
+  ],
+  "validation": [],
+  "metrics": [
+    {
+      "id": "fixture-baseline-0",
+      "value": 17.164521874976344,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "evaluation_commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+      "input_sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9"
+    },
+    {
+      "id": "fixture-candidate-0",
+      "value": 0.0032904999679885805,
+      "unit": "seconds",
+      "vintage": "current",
+      "evaluation_commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+      "input_sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9"
+    },
+    {
+      "id": "fixture-baseline-1",
+      "value": 15.42553616699297,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "evaluation_commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+      "input_sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9"
+    },
+    {
+      "id": "fixture-candidate-1",
+      "value": 0.006256000022403896,
+      "unit": "seconds",
+      "vintage": "current",
+      "evaluation_commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+      "input_sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9"
+    },
+    {
+      "id": "fixture-baseline-2",
+      "value": 12.7480819170014,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "evaluation_commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+      "input_sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9"
+    },
+    {
+      "id": "fixture-candidate-2",
+      "value": 0.004069874994456768,
+      "unit": "seconds",
+      "vintage": "current",
+      "evaluation_commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+      "input_sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9"
+    },
+    {
+      "id": "hosted-before-shard-0-job_seconds",
+      "value": 747.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2"
+    },
+    {
+      "id": "hosted-before-shard-0-test_seconds",
+      "value": 235.98108478,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2"
+    },
+    {
+      "id": "hosted-before-shard-1-job_seconds",
+      "value": 588.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2"
+    },
+    {
+      "id": "hosted-before-shard-1-test_seconds",
+      "value": 180.531713016,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2"
+    },
+    {
+      "id": "hosted-before-shard-2-job_seconds",
+      "value": 1091.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2"
+    },
+    {
+      "id": "hosted-before-shard-2-test_seconds",
+      "value": 557.630358965,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "fixture-baseline-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "json_pointer": "/measurements/0/finalize_seconds"
+    },
+    {
+      "metric_id": "fixture-candidate-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "json_pointer": "/measurements/1/finalize_seconds"
+    },
+    {
+      "metric_id": "fixture-baseline-1",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "json_pointer": "/measurements/2/finalize_seconds"
+    },
+    {
+      "metric_id": "fixture-candidate-1",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "json_pointer": "/measurements/3/finalize_seconds"
+    },
+    {
+      "metric_id": "fixture-baseline-2",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "json_pointer": "/measurements/4/finalize_seconds"
+    },
+    {
+      "metric_id": "fixture-candidate-2",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "json_pointer": "/measurements/5/finalize_seconds"
+    },
+    {
+      "metric_id": "hosted-before-shard-0-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "json_pointer": "/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "hosted-before-shard-0-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "json_pointer": "/shards/0/test_seconds"
+    },
+    {
+      "metric_id": "hosted-before-shard-1-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "json_pointer": "/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "hosted-before-shard-1-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "json_pointer": "/shards/1/test_seconds"
+    },
+    {
+      "metric_id": "hosted-before-shard-2-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "json_pointer": "/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "hosted-before-shard-2-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "json_pointer": "/shards/2/test_seconds"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "commands": [
+    "node --test test/full-regression-shards.test.mjs test/integration-streaming.test.mjs test/integration-profile-restoration.test.mjs test/integration-proof.test.mjs test/physical-component-controls-runner.test.mjs test/merge-integration.test.mjs test/trusted-workflow-checkouts.test.mjs test/native-regression-inputs.test.mjs",
+    "python3 -B test/physical-component-evidence-controls.py FixtureBindingControls",
+    "TMPDIR=OWNED_SCRATCH python3 -B coordination/engineering/ci-speed-1201-20261008-p1/profile_fixture.py"
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-profile.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/fixture-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/focused-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/hosted-baseline.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/local-prototype-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/profile_fixture.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p1/test-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/CI_PERFORMANCE.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "status": "modified",
+      "original_sha256": "d9231d1ea050d6695cba4bfe439104dfdbe76687c012eda9ee1490944372b49f"
+    },
+    {
+      "path": "test/integration-streaming.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-component-controls-runner.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-component-evidence-controls.py",
+      "status": "modified",
+      "original_sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9"
+    },
+    {
+      "path": "test/physical-component-evidence-controls.test.mjs",
+      "status": "modified",
+      "original_sha256": "180e16d152415949be691883f20fba8f0e953843dd2ff06a69d4b8e92710c982"
+    },
+    {
+      "path": "test/physical-component-fixture.test.mjs",
+      "status": "added"
+    }
+  ]
+}

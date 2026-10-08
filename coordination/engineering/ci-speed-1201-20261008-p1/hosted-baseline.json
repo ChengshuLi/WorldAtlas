@@ -1,0 +1,182 @@
+{
+  "run": {
+    "conclusion": "success",
+    "event": "pull_request",
+    "head_sha": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+    "html_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291",
+    "id": 37848776291,
+    "path": ".github/workflows/merge-integration-checks.yml",
+    "run_attempt": 1
+  },
+  "shards": [
+    {
+      "job_id": 113556280410,
+      "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291/job/113556280410",
+      "started_at": "2026-10-08T21:43:54Z",
+      "completed_at": "2026-10-08T21:56:21Z",
+      "conclusion": "success",
+      "job_seconds": 747.0,
+      "test_seconds": 235.98108478,
+      "passed": 404,
+      "skipped": 0,
+      "raw_log_sha256": "ef24468f36742f951007090bd3d41cd3a9d9aaedca89784566db915d344dc01c",
+      "longest_tests": [
+        {
+          "name": "static and server exports resolve every active location identically, with examples on and off",
+          "duration_seconds": 83.86722348400001
+        },
+        {
+          "name": "whole-world physical components retain every original shape, relationship and unknown",
+          "duration_seconds": 68.382524462
+        },
+        {
+          "name": "complete worldwide priority inventory matches original source ledgers and exhaustive ranks",
+          "duration_seconds": 52.546103755
+        },
+        {
+          "name": "mandatory context stage rejects missing, tampered, stale and over-budget inputs",
+          "duration_seconds": 35.282754579
+        },
+        {
+          "name": "packaged coverage supports all modes, gap explanations and unavailable-reference policy",
+          "duration_seconds": 24.883550871
+        }
+      ]
+    },
+    {
+      "job_id": 113556280338,
+      "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291/job/113556280338",
+      "started_at": "2026-10-08T21:43:54Z",
+      "completed_at": "2026-10-08T21:53:42Z",
+      "conclusion": "success",
+      "job_seconds": 588.0,
+      "test_seconds": 180.531713016,
+      "passed": 636,
+      "skipped": 0,
+      "raw_log_sha256": "0eb95e2337e868e00a2868d997093c6762f68109cea3c89254c50de894320304",
+      "longest_tests": [
+        {
+          "name": "semantic replacements preserve source history and custom locations without transferring their values",
+          "duration_seconds": 79.32395806999999
+        },
+        {
+          "name": "Native grid has actual GPU/Canvas fill, picking, gap classification and GPU recovery",
+          "duration_seconds": 45.325721161000004
+        },
+        {
+          "name": "every generated hosted catalog batch imports through the actual service and generated D1 constraints",
+          "duration_seconds": 16.6420897
+        },
+        {
+          "name": "GPU and Canvas explain and render physical coverage without changing ownership",
+          "duration_seconds": 13.724725144
+        },
+        {
+          "name": "existing inherited, privileged, owning or broadly granted role is rejected without silent downgrade",
+          "duration_seconds": 13.498537137
+        }
+      ]
+    },
+    {
+      "job_id": 113556280372,
+      "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291/job/113556280372",
+      "started_at": "2026-10-08T21:43:55Z",
+      "completed_at": "2026-10-08T22:02:06Z",
+      "conclusion": "success",
+      "job_seconds": 1091.0,
+      "test_seconds": 557.630358965,
+      "passed": 476,
+      "skipped": 0,
+      "raw_log_sha256": "7c58df12052c702b4ef9d8195dd165fa95fff46a824fb502d627be3dad694629",
+      "longest_tests": [
+        {
+          "name": "complete world component evidence rejects rehashed identity, uncertainty and relationship omissions",
+          "duration_seconds": 417.368177482
+        },
+        {
+          "name": "topology migration retires duplicate coverage while preserving its imported history",
+          "duration_seconds": 53.784805171
+        },
+        {
+          "name": "retained worldwide physical audit restores every original and verifies all five complete vintages",
+          "duration_seconds": 46.317835695
+        },
+        {
+          "name": "legacy hierarchy migration preserves historical records and repairs skipped parents",
+          "duration_seconds": 45.744758035
+        },
+        {
+          "name": "actual main year selection joins native browser worker to GPU/Canvas and rejects stale contexts",
+          "duration_seconds": 18.076950927000002
+        }
+      ]
+    }
+  ],
+  "geography_baseline": {
+    "pr": 1512,
+    "head": "efd69befaddd8eb7c0141eab581b2de92d03e468",
+    "checks": [
+      {
+        "completedAt": "2026-10-08T20:51:56Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842574014/job/113535359498",
+        "name": "scope",
+        "startedAt": "2026-10-08T20:51:40Z",
+        "state": "SUCCESS"
+      },
+      {
+        "completedAt": "2026-10-08T20:52:46Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842574014/job/113535358867",
+        "name": "evidence",
+        "startedAt": "2026-10-08T20:51:38Z",
+        "state": "SUCCESS"
+      },
+      {
+        "completedAt": "2026-10-08T20:51:35Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842574014/job/113535362307",
+        "name": "initial-foundation",
+        "startedAt": "2026-10-08T20:51:36Z",
+        "state": "SKIPPED"
+      },
+      {
+        "completedAt": "2026-10-08T20:51:35Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842533968/job/113535314833",
+        "name": "package",
+        "startedAt": "2026-10-08T20:51:31Z",
+        "state": "SUCCESS"
+      },
+      {
+        "completedAt": "2026-10-08T20:51:43Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842534055/job/113535311398",
+        "name": "regression (0)",
+        "startedAt": "2026-10-08T20:51:31Z",
+        "state": "SUCCESS"
+      },
+      {
+        "completedAt": "2026-10-08T20:51:28Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842534055/job/113535223250",
+        "name": "profile",
+        "startedAt": "2026-10-08T20:51:19Z",
+        "state": "SUCCESS"
+      },
+      {
+        "completedAt": "2026-10-08T20:51:28Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842533968/job/113535222236",
+        "name": "classify",
+        "startedAt": "2026-10-08T20:51:18Z",
+        "state": "SUCCESS"
+      },
+      {
+        "completedAt": "2026-10-08T20:51:41Z",
+        "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842534055/job/113535223096",
+        "name": "geography",
+        "startedAt": "2026-10-08T20:51:18Z",
+        "state": "SUCCESS"
+      }
+    ]
+  },
+  "limits": [
+    "Historical hosted observations, not a same-host experiment.",
+    "API job times include setup; TAP test duration does not.",
+    "No provider workflow invoked."
+  ]
+}
