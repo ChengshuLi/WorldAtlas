@@ -9,7 +9,7 @@ def sha(b): return hashlib.sha256(b).hexdigest()
 def git(*args):
  global GIT_EXECUTABLE
  if GIT_EXECUTABLE is None:
-  lock=json.loads((P/'native-tools-lock-r8.json').read_text());GIT_EXECUTABLE=lock['commands']['git']
+  lock=json.loads((P/'native-tools-lock-r9.json').read_text());GIT_EXECUTABLE=lock['commands']['git']
   row=next(x for x in lock['files'] if x['path']==GIT_EXECUTABLE and x['kind']=='executable')
   executable=Path(GIT_EXECUTABLE)
   if executable.is_symlink() or not executable.is_file() or executable.stat().st_size!=row['bytes'] or sha(executable.read_bytes())!=row['sha256']:
@@ -64,30 +64,31 @@ for partition in 'abcd':
 output_paths += [f'vintages/r7-fit/{name}' for name in [
  'candidate-decisions.json','proposed-additions.geojson','positive-control.json','negative-control.json',
  'execution-receipt.json','publication.json']]
-output_paths += ['phase-plan-r8.json','native-tools-lock-r8.json','native-tools-lock-r8.sh','r8-execution-budget.json']
-output_paths += [f'vintages/r8-native-extract/{name}' for name in [
+output_paths += ['native-tools-lock-r8.json','native-tools-lock-r8.sh',
+ 'phase-plan-r9.json','native-tools-lock-r9.json','native-tools-lock-r9.sh','r9-execution-budget.json']
+output_paths += [f'vintages/r9-native-extract/{name}' for name in [
  'native-archive-extraction.json','execution-receipt.json','publication.json']]
-output_paths += [f'vintages/r8-retired/{name}' for name in [
+output_paths += [f'vintages/r9-retired/{name}' for name in [
  'source-custody-phase2.json','retired-member-context-phase2.json','execution-receipt.json','publication.json']]
 for partition in 'abcd':
- output_paths += [f'vintages/r8-scan-{partition}/{name}' for name in [
+ output_paths += [f'vintages/r9-scan-{partition}/{name}' for name in [
   f'neighbor-scan-{partition}.json','execution-receipt.json','publication.json']]
-output_paths += [f'vintages/r8-fit/{name}' for name in [
+output_paths += [f'vintages/r9-fit/{name}' for name in [
  'candidate-decisions.json','proposed-additions.geojson','positive-control.json','negative-control.json',
  'execution-receipt.json','publication.json']]
 output_paths += [str(path.relative_to(P)) for path in sorted((P/'exploratory').rglob('*')) if path.is_file()]
 outputs=[desc(x) for x in output_paths]
 output_by_name={Path(x['path']).name:x for x in outputs}
 subjects=spec['subject_ids']; subject_hash=sha(json.dumps(sorted(subjects),separators=(',',':')).encode())
-results=json.loads((P/'vintages/r8-fit/candidate-decisions.json').read_bytes())['results']
+results=json.loads((P/'vintages/r9-fit/candidate-decisions.json').read_bytes())['results']
 metrics=[
  {'id':'active-feature-count','value':49625,'unit':'features','vintage':'baseline','input_sha256':pins['world_index'],'evaluation_commit':BASE},
- {'id':'candidate-count','value':7,'unit':'components','vintage':'r8','input_sha256':sha((P/'vintages/r8-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'repair-ready-count','value':sum(r['decision']=='repair-ready-geometric-proposal' for r in results),'unit':'components','vintage':'r8','input_sha256':sha((P/'vintages/r8-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'unresolved-count','value':sum(r['decision']!='repair-ready-geometric-proposal' for r in results),'unit':'components','vintage':'r8','input_sha256':sha((P/'vintages/r8-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'exact-one-envelope-count','value':sum(r['exactly_one_covering_named_envelope_both_editions'] for r in results),'unit':'components','vintage':'r8','input_sha256':sha((P/'vintages/r8-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'native-ecoregion-feature-count','value':218,'unit':'features','vintage':'r8','input_sha256':sha((P/'vintages/r8-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'native-unique-ecoregion-id-count','value':194,'unit':'ids','vintage':'r8','input_sha256':sha((P/'vintages/r8-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
+ {'id':'candidate-count','value':7,'unit':'components','vintage':'r9','input_sha256':sha((P/'vintages/r9-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
+ {'id':'repair-ready-count','value':sum(r['decision']=='repair-ready-geometric-proposal' for r in results),'unit':'components','vintage':'r9','input_sha256':sha((P/'vintages/r9-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
+ {'id':'unresolved-count','value':sum(r['decision']!='repair-ready-geometric-proposal' for r in results),'unit':'components','vintage':'r9','input_sha256':sha((P/'vintages/r9-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
+ {'id':'exact-one-envelope-count','value':sum(r['exactly_one_covering_named_envelope_both_editions'] for r in results),'unit':'components','vintage':'r9','input_sha256':sha((P/'vintages/r9-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
+ {'id':'native-ecoregion-feature-count','value':218,'unit':'features','vintage':'r9','input_sha256':sha((P/'vintages/r9-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
+ {'id':'native-unique-ecoregion-id-count','value':194,'unit':'ids','vintage':'r9','input_sha256':sha((P/'vintages/r9-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
  {'id':'retired-reference-location-count','value':19050,'unit':'locations','vintage':'baseline','input_sha256':sha((P/'vintages/r7-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
 ]
 sources=[
@@ -123,8 +124,8 @@ manifest={'version':1,'issue':1481,'lane':'geography','worker_id':'01a112c1-ac99
   {'metric_id':'retired-reference-location-count','path':output_by_name['retired-member-context-phase2.json']['path'],'json_pointer':'/location_count'}],
  'change_receipts':change_receipts,
  'validation':[
- {'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-fit/positive-control.json'},
-  {'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','outcome':'passed','scope':'decision-gate-unit-check-plus-cross-group-source-envelope-check','adverse_input_fixture':False,'evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-fit/negative-control.json'}],
+ {'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r9-fit/positive-control.json'},
+  {'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','outcome':'passed','scope':'decision-gate-unit-check-plus-cross-group-source-envelope-check','adverse_input_fixture':False,'evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r9-fit/negative-control.json'}],
  'conclusions':conclusions,'stages':{'research':'partial','implementation':'proposed','geographic_approval':'unapproved'},
  'commands':['bash research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh EXECUTION_COMMIT PLAN_SHA256 NATIVE_TOOLS_LOCK_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-{a,b,c,d} --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/build_run_record.py','python research/geography/arctic-seven-source-fit-20261008/build_manifest.py','node scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json']}
 (P/'evidence-quality.json').write_text(json.dumps(manifest,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n')

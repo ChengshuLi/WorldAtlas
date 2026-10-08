@@ -4,25 +4,25 @@ This packet answers the bounded source-fit question in issue #1481 for exactly t
 
 ## Reproduction
 
-The original `r7` run and its receipts are preserved for audit, but an independent review found that its native commands were not bound to the executables whose hashes were recorded, its runner read two inputs before enforcing their size bounds, and its negative control overstated the scope of its decision-gate checks. Treat r7 results as recorded exploratory outputs, not qualified reproduced results. The corrected run uses new immutable `r8-*` vintages and a distinct `phase-plan-r8.json`; earlier files are not overwritten.
+The original `r7` run and its receipts are preserved for audit, but an independent review found that its native commands were not bound to the executables whose hashes were recorded, its runner read two inputs before enforcing their size bounds, and its negative control overstated the scope of its decision-gate checks. Treat r7 results as recorded exploratory outputs, not qualified reproduced results. The first corrected budget plan, r8, was rejected before execution: its source-fit reservation was 275,356,788 bytes, above the 268,435,456-byte cap. That plan is retained at `exploratory/phase-plan-r8-overbudget.json`. The current attempted reproduction uses new immutable `r9-*` vintages and a distinct `phase-plan-r9.json`; earlier files are not overwritten.
 
-The corrected rerun is tied to an immutable code commit. On the exact Python 3.12.14 / Shapely 2.1.2 environment recorded by `runtime-lock.json`, generate the r8 native executable lock, then commit the phase runner, source bridge, phase scripts, both locks, and builders. Use that exact commit as `EXECUTION_COMMIT`. The plan builder verifies the materialized sources and code against the commit and checks the issue-pinned inputs. It writes `phase-plan-r8.json` once; that plan is immutable for this run.
+The r9 rerun is tied to an immutable code commit. On the exact Python 3.12.14 / Shapely 2.1.2 environment recorded by `runtime-lock.json`, generate the r9 native executable lock, then commit the phase runner, source bridge, phase scripts, both locks, and builders. Use that exact commit as `EXECUTION_COMMIT`. The plan builder verifies the materialized sources and code against the commit and checks the issue-pinned inputs. It writes `phase-plan-r9.json` once; that plan is immutable for this run. Before execution, inspect every prospective charge and stop if any phase exceeds the cap. The r9 source-fit phase reserves 2 MiB for each neighbor-scan predecessor, above the observed r7 scan output sizes (about 0.35–0.52 MiB); the runner still enforces each bound and rejects an output that exceeds its declared reservation.
 
 ```sh
 PYTHON=/Users/chengshuli/.cache/worldatlas-evidence-python/f28ad176e64a6a5ea260-py3.12.14-arm64/bin/python
 NODE=/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_native_tools_lock.py --vintage r8
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_native_tools_lock.py --vintage r9
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_phase_plan.py --execution-commit "$EXECUTION_COMMIT"
-read -r PLAN_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json)
-read -r NATIVE_TOOLS_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r8.json)
+read -r PLAN_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json)
+read -r NATIVE_TOOLS_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r9.json)
 /bin/bash research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh "$EXECUTION_COMMIT" "$PLAN_SHA" "$NATIVE_TOOLS_SHA"
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-a --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-b --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-c --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-d --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_run_record.py --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json --output r8-execution-budget.json
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-a --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-b --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-c --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-d --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json
+"$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_run_record.py --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r9.json --output r9-execution-budget.json
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_manifest.py
 "$NODE" scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json
 ```
@@ -47,11 +47,11 @@ The preserved r7 attempt used execution commit `350643c19b5dd597f60acaa74b1c5fd0
 | Neighbor scan D | 241,004,023 | 27,431,433 |
 | Source fit and controls | 222,702,670 | 45,732,786 |
 
-The machine-readable `r7-execution-budget.json` binds the recorded r7 phase charges and output hashes. It is retained as historical evidence. The r8 run will be the packet's qualified reproduction; the manifest will continue to report `limited` for the declared boundary-authority and undated-context gaps.
+The machine-readable `r7-execution-budget.json` binds the recorded r7 phase charges and output hashes. It is retained as historical evidence. The r9 run is intended to be the packet's corrected reproduction if all phases complete under their declared reservations; the manifest will continue to report `limited` for the declared boundary-authority and undated-context gaps.
 
 ## Findings
 
-The preserved r7 result records all seven candidates as valid polygons, each wholly covered by exactly one named ecoregion in each edition: ECO15 “Banks Island Lowland” and ECO25 “Foxe Basin Plain.” It records each candidate intersecting only its intended Atlas target among the 49,625 active features. The v2.2 and native source envelopes are not geometrically identical; their per-candidate symmetric differences are recorded. Reconfirm these results from r8 before treating the counts below as qualified outputs. Coverage agreement does not prove that the two editions have the same coastline or date-specific authority.
+The preserved r7 result records all seven candidates as valid polygons, each wholly covered by exactly one named ecoregion in each edition: ECO15 “Banks Island Lowland” and ECO25 “Foxe Basin Plain.” It records each candidate intersecting only its intended Atlas target among the 49,625 active features. The v2.2 and native source envelopes are not geometrically identical; their per-candidate symmetric differences are recorded. Reconfirm these results from r9 before treating the counts below as qualified outputs. Coverage agreement does not prove that the two editions have the same coastline or date-specific authority.
 
 | Candidate | Retired cartographic reference context | Exact target union | Disposition |
 | --- | --- | --- | --- |
