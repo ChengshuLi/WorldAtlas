@@ -296,3 +296,31 @@ def materialize_selector(phase, shard_pin, ordinal, expected_sha256, selector_pl
     return phase.finish({'operation': 'complete-original-cohort-selector-materialization',
                          'cohort_ordinal': selector['cohort_ordinal'], 'whole_selector_sha256': expected_sha256,
                          'components': selector['components'], 'ordered_queries': selector['ordered_queries']})
+
+
+def materialize_all_selectors(phase, shard_pins, selector_plan_pair, acquisition):
+    """Publish all complete selector objects in one bounded metadata vintage."""
+    inventory = completed(phase, selector_plan_pair, 'complete-original-cohort-selector-plan', acquisition)
+    facts = inventory['facts']
+    acquisition.require(facts['components'] == 1294 and facts['families'] == 494 and
+                        facts['batches'] == 49 and facts['ordered_queries'] == 10419,
+                        'Incomplete global selector materialization scope')
+    actual_outputs(inventory, shard_pins, 'cohort-selectors-', acquisition)
+    subjects = set(); queries = 0; records = []
+    for pin in shard_pins:
+        for line in phase.read(pin).splitlines():
+            raw = line+b'\n'; selected = json.loads(raw); number = len(records)
+            ids = [row['id'] for row in selected['rows']]
+            acquisition.require(selected['kind'] == 'complete-original-numerical-cohort-selector' and
+                                selected['cohort_ordinal'] == number and ids and
+                                ids == sorted(set(ids)) and len(ids) == selected['components'] and
+                                not subjects.intersection(ids), 'Foreign/reordered/duplicate full selector')
+            subjects.update(ids); queries += selected['ordered_queries']
+            phase.output(f'selector-{number:03}.json', raw)
+            records.append({'cohort_ordinal':number,'whole_selector_sha256':acquisition.sha(raw),
+                            'components':selected['components'],'ordered_queries':selected['ordered_queries']})
+    acquisition.require(len(subjects) == 1294 and queries == 10419 and len(records) == facts['cohorts'],
+                        'Omitted complete selector subjects/queries')
+    return phase.finish({'operation':'complete-original-all-cohort-selector-materialization',
+                         'components':1294,'families':494,'batches':49,'ordered_queries':10419,
+                         'cohorts':len(records),'selectors':records})

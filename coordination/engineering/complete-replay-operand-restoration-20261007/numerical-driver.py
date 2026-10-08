@@ -18,7 +18,7 @@ import sys
 import types
 
 OWNED = 'coordination/engineering/complete-replay-operand-restoration-20261007/'
-METADATA_OPERATIONS = ('cohort-index-projection', 'cohort-selector-plan', 'cohort-selector-materialization')
+METADATA_OPERATIONS = ('cohort-index-projection', 'cohort-selector-plan', 'cohort-selector-materialization', 'cohort-selectors-materialization')
 OPERATIONS = ('native-metadata', 'source-cohort', 'numerical-cohort', *METADATA_OPERATIONS)
 ROOT_LIMIT = 1048576
 NODE = '/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node'
@@ -74,6 +74,9 @@ def dependency_inputs(operation, arguments, acquisition):
                        *arguments['query_pins']], acquisition)
     if operation == 'cohort-selector-materialization':
         return unique([arguments['predecessor_authorities_pin'], arguments['shard_pin'],
+                       *arguments['selector_plan_pair']], acquisition)
+    if operation == 'cohort-selectors-materialization':
+        return unique([arguments['predecessor_authorities_pin'], *arguments['shard_pins'],
                        *arguments['selector_plan_pair']], acquisition)
     if operation == 'source-cohort':
         return unique([arguments['selector_pin'], *arguments['selector_pair'],
@@ -197,16 +200,28 @@ def global_queries(phase, arguments, acquisition):
 
 
 def selector_authority(phase, arguments, acquisition):
-    inventory = completed_authority(phase, arguments['selector_pair'],
-            'complete-original-cohort-selector-materialization', arguments['selector_expected_inputs'],
-            arguments['selector_expected_runtime_bytes'], acquisition)
-    need(inventory['outputs'] == [arguments['selector_pin']], 'Changed whole materialized selector product')
+    operation = arguments.get('selector_operation','complete-original-cohort-selector-materialization')
+    need(operation in ('complete-original-cohort-selector-materialization',
+                       'complete-original-all-cohort-selector-materialization'), 'Unknown selector custody operation')
+    inventory = completed_authority(phase, arguments['selector_pair'],operation,
+            arguments['selector_expected_inputs'],arguments['selector_expected_runtime_bytes'],acquisition)
     raw = phase.read(arguments['selector_pin']); selected = json.loads(raw)
+    if operation == 'complete-original-all-cohort-selector-materialization':
+        facts = inventory['facts']; number = selected['cohort_ordinal']
+        need(facts['components']==1294 and facts['families']==494 and facts['batches']==49 and
+             facts['ordered_queries']==10419 and len(inventory['outputs'])==facts['cohorts']==len(facts['selectors']) and
+             type(number) is int and 0<=number<len(facts['selectors']), 'Incomplete all-selector authority')
+        need(inventory['outputs'][number]==arguments['selector_pin'] and
+             Path(arguments['selector_pin']['path']).name==f'selector-{number:03}.json', 'Foreign full selector output')
+        binding = facts['selectors'][number]
+    else:
+        need(inventory['outputs']==[arguments['selector_pin']], 'Changed whole materialized selector product')
+        binding = inventory['facts']
     need(selected.get('kind') == 'complete-original-numerical-cohort-selector' and
-         acquisition.sha(raw) == inventory['facts']['whole_selector_sha256'] and
-         selected['cohort_ordinal'] == inventory['facts']['cohort_ordinal'] and
-         selected['components'] == inventory['facts']['components'] and
-         selected['ordered_queries'] == inventory['facts']['ordered_queries'],
+         acquisition.sha(raw) == binding['whole_selector_sha256'] and
+         selected['cohort_ordinal'] == binding['cohort_ordinal'] and
+         selected['components'] == binding['components'] and
+         selected['ordered_queries'] == binding['ordered_queries'],
          'Changed complete independently materialized selector')
     ids = [row['id'] for row in selected['rows']]
     need(ids and ids == sorted(set(ids)) and len(ids) == selected['components'],
@@ -341,7 +356,7 @@ def metadata_pairs(operation, arguments):
         return [*arguments['projection_pairs'].values(),arguments['mismatch_pair'],
                 arguments['component_ledger_pair'],*arguments['physical_stage_pairs'],
                 arguments['physical_join_pair'],arguments['query_join_pair']]
-    need(operation == 'cohort-selector-materialization', 'Unknown metadata authority operation')
+    need(operation in ('cohort-selector-materialization','cohort-selectors-materialization'), 'Unknown metadata authority operation')
     return [arguments['selector_plan_pair']]
 
 
@@ -389,6 +404,9 @@ def execute(phase, request, modules, loaded, *, guard, baseline, runtime_guard, 
                     acquisition=acquisition,project_pins=project_pins,
                     runtime_bytes=request['expected_runtime_bytes'],
                     acquisition_output_reserve=arguments['acquisition_output_reserve'])
+        elif operation == 'cohort-selectors-materialization':
+            result = planner.materialize_all_selectors(phase,arguments['shard_pins'],
+                    arguments['selector_plan_pair'],acquisition)
         else:
             result = planner.materialize_selector(phase,arguments['shard_pin'],arguments['ordinal'],
                     arguments['expected_sha256'],arguments['selector_plan_pair'],acquisition)
