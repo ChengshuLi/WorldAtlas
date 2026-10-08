@@ -24,13 +24,28 @@ def digest(raw):
     return hashlib.sha256(raw).hexdigest()
 
 def callable_pin(value):
+    def constant(value):
+        if isinstance(value, types.CodeType):
+            return ['code', normalized(value)]
+        if isinstance(value, tuple):
+            return ['tuple', [constant(v) for v in value]]
+        if isinstance(value, frozenset):
+            rows = [constant(v) for v in value]
+            return ['frozenset', sorted(rows, key=lambda row: json.dumps(row, sort_keys=True))]
+        return [type(value).__name__, marshal.dumps(value).hex()]
     def normalized(code):
-        return code.replace(co_filename='', co_consts=tuple(normalized(c) if isinstance(c, types.CodeType) else c for c in code.co_consts))
+        return {'argcount': code.co_argcount, 'posonlyargcount': code.co_posonlyargcount,
+                'kwonlyargcount': code.co_kwonlyargcount, 'nlocals': code.co_nlocals,
+                'stacksize': code.co_stacksize, 'flags': code.co_flags, 'code': code.co_code.hex(),
+                'consts': [constant(v) for v in code.co_consts], 'names': code.co_names,
+                'varnames': code.co_varnames, 'freevars': code.co_freevars, 'cellvars': code.co_cellvars,
+                'name': code.co_name, 'qualname': code.co_qualname, 'firstlineno': code.co_firstlineno,
+                'linetable': code.co_linetable.hex(), 'exceptiontable': code.co_exceptiontable.hex()}
     module = 'arctic_producer' if getattr(value, '__globals__', None) is globals() else getattr(value, '__module__', None)
     result = {'module': module, 'qualname': getattr(value, '__qualname__', None),
               'type': type(value).__name__, 'name': getattr(value, '__name__', None)}
     if hasattr(value, '__code__'):
-        result['code_sha256'] = digest(marshal.dumps(normalized(value.__code__)))
+        result['code_sha256'] = digest(json.dumps(normalized(value.__code__), sort_keys=True, separators=(',', ':')).encode())
     return result
 
 def critical_callables():
