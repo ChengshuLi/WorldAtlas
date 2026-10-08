@@ -1,0 +1,25 @@
+{
+  "controls": [
+    {
+      "control": "whole-body-refused-at-33554433",
+      "passed": true
+    },
+    {
+      "control": "source-plus-geography-single-phase-cap",
+      "passed": true
+    },
+    {
+      "control": "refusal-stops-producer-before-product-creation",
+      "passed": true
+    },
+    {
+      "control": "preflight-existing-assessment-collision-preserves-sentinel",
+      "passed": true,
+      "sentinel_preserved": true,
+      "sentinel_sha256_before_after": "5a02ecf3822b4038044af648e60bc4204666d03d946b7f0960f8578d6f40a0f8"
+    }
+  ],
+  "kind": "negative-control",
+  "method_id": "whole-input-admission-and-source-free-audit",
+  "outcome": "passed"
+}

@@ -1,0 +1,840 @@
+{
+  "admission": {
+    "decoded_over_file_cap_bytes": 6485570,
+    "full_phase_plan": {
+      "complete_phase_bytes": 513856565,
+      "decoded_input_count": 1,
+      "input_bytes": 278971445,
+      "input_bytes_by_category": {
+        "code-runtime-input": 42128,
+        "decoded-source": 40040002,
+        "geography-and-context": 225092835,
+        "source": 13796480
+      },
+      "input_count": 56,
+      "limits": {
+        "completion_receipt_bytes": 4096,
+        "file_bytes": 33554432,
+        "phase_bytes": 268435456
+      },
+      "output_count": 7,
+      "reasons": [
+        {
+          "code": "input-not-authenticated",
+          "identity": "decoded:data/global-sources/IND-ADM3.geojson.gz"
+        },
+        {
+          "bytes": 40040002,
+          "code": "body-exceeds-file-limit",
+          "identity": "decoded:data/global-sources/IND-ADM3.geojson.gz"
+        },
+        {
+          "code": "runtime-closure-incomplete"
+        },
+        {
+          "bytes": 513856565,
+          "code": "complete-phase-exceeds-limit"
+        }
+      ],
+      "reserved_output_bytes": 234881024,
+      "runtime_complete": false,
+      "status": "refused",
+      "version": 1
+    },
+    "full_reproduction_authorized": false,
+    "minimum_over_phase_cap_bytes": 10535989,
+    "minimum_raw_plus_decoded_bytes": 278971445,
+    "output_reservation_bytes": 234881024,
+    "output_reservations": [
+      {
+        "max_bytes": 33554432,
+        "name": "report-run-1.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "report-run-2.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "comparison.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "execution.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "positive-control.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "negative-control.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "reproducibility-control.json"
+      }
+    ],
+    "outputs_reserved": true,
+    "runtime_closure_complete": false
+  },
+  "assessment": "refused-before-full-reproduction",
+  "base_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
+  "decoded_source_claim": {
+    "compressed_bytes": 13794274,
+    "compressed_sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+    "decoded_body_authenticated": false,
+    "decoded_content_crc_and_whole_digest_verified": false,
+    "gzip_footer_isize": 40040002,
+    "path": "data/global-sources/IND-ADM3.geojson.gz",
+    "retained_chunk_count": 10,
+    "retained_chunk_hashes": [
+      {
+        "chunk": 0,
+        "decoded_bytes": 4194304,
+        "sha256": "943bc6fa5fa3c944c704c8859de597c3214166d60180938a3cd29277b25ec351"
+      },
+      {
+        "chunk": 1,
+        "decoded_bytes": 4194304,
+        "sha256": "3044c77169116a9a9b7d278aa168d64053b45f14352a8bb1fc2e71215b75f5ef"
+      },
+      {
+        "chunk": 2,
+        "decoded_bytes": 4194304,
+        "sha256": "47e64e76bec09f1aa359c9ec1a78aaf1ce86961cd021a2f03e0d32564f4c1e62"
+      },
+      {
+        "chunk": 3,
+        "decoded_bytes": 4194304,
+        "sha256": "976e09d1f44f7770c49471e9de16f412bc63e88f15c91c0620a60e685ffa0dcf"
+      },
+      {
+        "chunk": 4,
+        "decoded_bytes": 4194304,
+        "sha256": "7368693bc0a990acc072bef1c05e359a000c04ebcc0a54be08f2a5f3933a4d12"
+      },
+      {
+        "chunk": 5,
+        "decoded_bytes": 4194304,
+        "sha256": "1e6d9419cce98a66cb084719a46db737ee9c2ce97b5f586a4e5cc5cda698423f"
+      },
+      {
+        "chunk": 6,
+        "decoded_bytes": 4194304,
+        "sha256": "8d1220dabdd4f248df03e5188b4d7fe36fbc6086fcdf293bfd8b0e81212d78bb"
+      },
+      {
+        "chunk": 7,
+        "decoded_bytes": 4194304,
+        "sha256": "aef23a1f5e4121fd193c27bb5553c70f3f60160ffc5365e25bd9632ea46238b2"
+      },
+      {
+        "chunk": 8,
+        "decoded_bytes": 4194304,
+        "sha256": "854087ff0b034ba8d860c1219798cf07a054a8abb25e240059621fcbc07ce9d0"
+      },
+      {
+        "chunk": 9,
+        "decoded_bytes": 2291266,
+        "sha256": "9f165896fdc657d42513e4fdf90486889438c0a2d0cafa555a336e98b8894fb5"
+      }
+    ],
+    "retained_chunk_size_sum": 40040002,
+    "retained_decoded_sha256_claim": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+    "source_body_was_not_decompressed": true
+  },
+  "execution_ledger": {
+    "bytes": 54755,
+    "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
+    "sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a"
+  },
+  "method_limits": [
+    "This is source-free admission evidence; no geography report or overlay was recomputed.",
+    "No decoded-source CRC or full decoded SHA-256 was checked; retained chunk hashes and gzip footer are claims/size receipts only.",
+    "No current legal boundary, parentage, source completeness, reuse-rights, or neighboring-granularity conclusion is established.",
+    "Installed runtime/library closure is not authenticated. All seven declared outputs are conservatively reserved at the per-file ceiling, and the phase remains over limit even before any runtime-specific additions."
+  ],
+  "original_data_commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40",
+  "raw_input_audit": {
+    "all_actual_git_bytes_match": true,
+    "bytes": 238931443,
+    "count": 55,
+    "distinct_paths": 55,
+    "distinct_sha256": 55,
+    "inputs": [
+      {
+        "bytes": 8539839,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-0.json",
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+      },
+      {
+        "bytes": 8060108,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-1.json",
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+      },
+      {
+        "bytes": 6259307,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-2.json",
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+      },
+      {
+        "bytes": 5153118,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-3.json",
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+      },
+      {
+        "bytes": 4835479,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-4.json",
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+      },
+      {
+        "bytes": 5226173,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-5.json",
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+      },
+      {
+        "bytes": 4607953,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-6.json",
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+      },
+      {
+        "bytes": 4257402,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-7.json",
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+      },
+      {
+        "bytes": 5097739,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-8.json",
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+      },
+      {
+        "bytes": 5729632,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-9.json",
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+      },
+      {
+        "bytes": 5144571,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-10.json",
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      {
+        "bytes": 5133018,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-11.json",
+        "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+      },
+      {
+        "bytes": 4489493,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-12.json",
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+      },
+      {
+        "bytes": 5709487,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-13.json",
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+      },
+      {
+        "bytes": 4355198,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-14.json",
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+      },
+      {
+        "bytes": 5180426,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-15.json",
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+      },
+      {
+        "bytes": 5213846,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-16.json",
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+      },
+      {
+        "bytes": 4948066,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-17.json",
+        "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+      },
+      {
+        "bytes": 4909063,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-18.json",
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+      },
+      {
+        "bytes": 4583022,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-19.json",
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      {
+        "bytes": 6570767,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-20.json",
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+      },
+      {
+        "bytes": 6737781,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-21.json",
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+      },
+      {
+        "bytes": 4746385,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      {
+        "bytes": 4962410,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-23.json",
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+      },
+      {
+        "bytes": 4816899,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-24.json",
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+      },
+      {
+        "bytes": 4525239,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-25.json",
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      },
+      {
+        "bytes": 4608983,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-26.json",
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      },
+      {
+        "bytes": 4863162,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-27.json",
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+      },
+      {
+        "bytes": 6613963,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 12932167,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-29.json",
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+      },
+      {
+        "bytes": 11979437,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-30.json",
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+      },
+      {
+        "bytes": 10086485,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-31.json",
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+      },
+      {
+        "bytes": 10211739,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-32.json",
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+      },
+      {
+        "bytes": 607984,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/part-33.json",
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+      },
+      {
+        "bytes": 1573576,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/source-restoration-additions.json",
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+      },
+      {
+        "bytes": 11393,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+      },
+      {
+        "bytes": 37959,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/issue-scope.json",
+        "sha256": "0ea46cd7b3f5ef7cd6befe73465de230ea188c412a0b24e8fd33ce5d6bb4ad35"
+      },
+      {
+        "bytes": 317824,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/assessments.json",
+        "sha256": "c75798226e31406dce51957fde90e1cc84ad234fedaaef0c4439b49b46376133"
+      },
+      {
+        "bytes": 11159,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/source-inventory.json",
+        "sha256": "411f8c4665f89943bf8bebe948e75bd50b712ff5bd8e084395221a829c463545"
+      },
+      {
+        "bytes": 9468,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/official-source-restoration.json",
+        "sha256": "163a9c813ae7d17115251ac9c3f23538a32759d97b3b20af69eb38d33b2f9c8a"
+      },
+      {
+        "bytes": 13915,
+        "category": "code-runtime-input",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/reproduce.py",
+        "sha256": "546b39315ed24ea5662c8fe99812dbea49217a1d555d78900b74057ec494a60a"
+      },
+      {
+        "bytes": 186340,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/reproduction-results.json",
+        "sha256": "4ae746ba0de2b22f42ce09f1843001c5ac00421e904023e0f682528653f54112"
+      },
+      {
+        "bytes": 42433,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/sources/live-issue-83.json",
+        "sha256": "124c7229df1883e16e343e56736fe6028c59ff3f0d8874b7744dc41b165be7d0"
+      },
+      {
+        "bytes": 15794,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/sources/mp-tehsil-rosters-recheck.json",
+        "sha256": "17919d229e69e81355c64b14ebbbc53eec40d53fc366cec11406eb22b2c42081"
+      },
+      {
+        "bytes": 13778,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/sources/mp-tehsil-rosters.json",
+        "sha256": "0673261f22a3196a88cab9b6f3d2dc004f0ec734cce857d03f47b6eea5a6a656"
+      },
+      {
+        "bytes": 16631,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/regional-review/regional-review-78f086631fc52a58/sources/up-tehsil-rosters.json",
+        "sha256": "23e01fcd5788cbc8edb2374e8cb62709e997c13859fa1179cf2dfddaa7f4e38e"
+      },
+      {
+        "bytes": 10723935,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/geographic-decisions/asia.json",
+        "sha256": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807"
+      },
+      {
+        "bytes": 10164089,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 944,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 271171,
+        "category": "geography-and-context",
+        "descriptor_matched": true,
+        "path": "data/canonical-grid/manifest.json",
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      },
+      {
+        "bytes": 8846,
+        "category": "code-runtime-input",
+        "descriptor_matched": true,
+        "path": "scripts/evidence/geometry.py",
+        "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+      },
+      {
+        "bytes": 1953,
+        "category": "code-runtime-input",
+        "descriptor_matched": true,
+        "path": "scripts/ellipsoidal_area.py",
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+      },
+      {
+        "bytes": 17414,
+        "category": "code-runtime-input",
+        "descriptor_matched": true,
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+      },
+      {
+        "bytes": 13794274,
+        "category": "source",
+        "descriptor_matched": true,
+        "path": "data/global-sources/IND-ADM3.geojson.gz",
+        "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301"
+      },
+      {
+        "bytes": 2206,
+        "category": "source",
+        "descriptor_matched": true,
+        "path": "data/global-sources/IND-ADM3-metadata.json",
+        "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33"
+      }
+    ]
+  },
+  "retrieved_at": "2026-10-08",
+  "runner": {
+    "observed_chunkwise_decoded_admission_at_lines": [
+      173,
+      187
+    ],
+    "observed_isolated_execution_at_lines": [
+      379,
+      403
+    ],
+    "observed_output_writer_geography_only_at_lines": [
+      418
+    ],
+    "observed_separate_baselines_at_lines": [
+      104,
+      153,
+      154
+    ],
+    "original_producer_path": "data/regional-review/regional-review-78f086631fc52a58/reproduce.py",
+    "original_producer_sha256": "546b39315ed24ea5662c8fe99812dbea49217a1d555d78900b74057ec494a60a",
+    "path": "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py",
+    "sha256": "453623c28a2b1c849aff000baf4ca2a01a0665c67a053977516578d8f0b39424"
+  },
+  "scope": {
+    "areas": [
+      {
+        "full_area": 422,
+        "name": "Madhya Pradesh",
+        "owned": 144,
+        "partial": true
+      },
+      {
+        "full_area": 244,
+        "name": "Uttar Pradesh",
+        "owned": 85,
+        "partial": true
+      }
+    ],
+    "province_count": 35,
+    "research_scope_only": true,
+    "subject_count": 229,
+    "subject_ids": [
+      "atlas:local:IND:7132399B1067413029079",
+      "atlas:local:IND:7132399B10925826512717",
+      "atlas:local:IND:7132399B11202245031586",
+      "atlas:local:IND:7132399B11398842930308",
+      "atlas:local:IND:7132399B11558330781253",
+      "atlas:local:IND:7132399B12193268435861",
+      "atlas:local:IND:7132399B1239543850595",
+      "atlas:local:IND:7132399B12465102087773",
+      "atlas:local:IND:7132399B13263884667682",
+      "atlas:local:IND:7132399B13289010205992",
+      "atlas:local:IND:7132399B13620009911770",
+      "atlas:local:IND:7132399B14071359775183",
+      "atlas:local:IND:7132399B14473254182535",
+      "atlas:local:IND:7132399B14559797994595",
+      "atlas:local:IND:7132399B14620106766641",
+      "atlas:local:IND:7132399B14767122063014",
+      "atlas:local:IND:7132399B15089706056448",
+      "atlas:local:IND:7132399B15487296145756",
+      "atlas:local:IND:7132399B15859726928489",
+      "atlas:local:IND:7132399B17043910309774",
+      "atlas:local:IND:7132399B1787801345782",
+      "atlas:local:IND:7132399B17911714038700",
+      "atlas:local:IND:7132399B19213109532578",
+      "atlas:local:IND:7132399B19304602092708",
+      "atlas:local:IND:7132399B1938454645039",
+      "atlas:local:IND:7132399B20153325106276",
+      "atlas:local:IND:7132399B20305853347923",
+      "atlas:local:IND:7132399B21267236895319",
+      "atlas:local:IND:7132399B21409712913560",
+      "atlas:local:IND:7132399B21528467534836",
+      "atlas:local:IND:7132399B21780117814024",
+      "atlas:local:IND:7132399B21908666041944",
+      "atlas:local:IND:7132399B21961777148708",
+      "atlas:local:IND:7132399B22850784965836",
+      "atlas:local:IND:7132399B23423372130836",
+      "atlas:local:IND:7132399B23620631128967",
+      "atlas:local:IND:7132399B24302184316149",
+      "atlas:local:IND:7132399B25382637686101",
+      "atlas:local:IND:7132399B25576595296213",
+      "atlas:local:IND:7132399B25597984069084",
+      "atlas:local:IND:7132399B25836114776255",
+      "atlas:local:IND:7132399B26549715889668",
+      "atlas:local:IND:7132399B26785479466444",
+      "atlas:local:IND:7132399B26887423220663",
+      "atlas:local:IND:7132399B28014549097508",
+      "atlas:local:IND:7132399B28338723926890",
+      "atlas:local:IND:7132399B2850405013701",
+      "atlas:local:IND:7132399B28763974393272",
+      "atlas:local:IND:7132399B28801969336354",
+      "atlas:local:IND:7132399B30516232056859",
+      "atlas:local:IND:7132399B30652520478246",
+      "atlas:local:IND:7132399B30763222196680",
+      "atlas:local:IND:7132399B32555983435451",
+      "atlas:local:IND:7132399B32612610174175",
+      "atlas:local:IND:7132399B32693835828691",
+      "atlas:local:IND:7132399B34173560021645",
+      "atlas:local:IND:7132399B34737413143838",
+      "atlas:local:IND:7132399B35257617037774",
+      "atlas:local:IND:7132399B3576865196704",
+      "atlas:local:IND:7132399B3745371620581",
+      "atlas:local:IND:7132399B37849301994448",
+      "atlas:local:IND:7132399B38044731444935",
+      "atlas:local:IND:7132399B38112485108763",
+      "atlas:local:IND:7132399B38456274371802",
+      "atlas:local:IND:7132399B38776901339777",
+      "atlas:local:IND:7132399B39195208740162",
+      "atlas:local:IND:7132399B39257835654681",
+      "atlas:local:IND:7132399B3933262245335",
+      "atlas:local:IND:7132399B3969792454163",
+      "atlas:local:IND:7132399B40007641588775",
+      "atlas:local:IND:7132399B40490400672116",
+      "atlas:local:IND:7132399B4081172799837",
+      "atlas:local:IND:7132399B40983756588739",
+      "atlas:local:IND:7132399B41036505406581",
+      "atlas:local:IND:7132399B41078306281201",
+      "atlas:local:IND:7132399B41139596130595",
+      "atlas:local:IND:7132399B41352637688179",
+      "atlas:local:IND:7132399B41498591460375",
+      "atlas:local:IND:7132399B41666022507641",
+      "atlas:local:IND:7132399B4222084021631",
+      "atlas:local:IND:7132399B4237956464433",
+      "atlas:local:IND:7132399B42763868887358",
+      "atlas:local:IND:7132399B42767926491551",
+      "atlas:local:IND:7132399B42828289601717",
+      "atlas:local:IND:7132399B42862297623575",
+      "atlas:local:IND:7132399B42928651852298",
+      "atlas:local:IND:7132399B43087608371580",
+      "atlas:local:IND:7132399B43339832980696",
+      "atlas:local:IND:7132399B44195246679207",
+      "atlas:local:IND:7132399B44223408475468",
+      "atlas:local:IND:7132399B44294223895439",
+      "atlas:local:IND:7132399B44305919881778",
+      "atlas:local:IND:7132399B45004897605303",
+      "atlas:local:IND:7132399B45398432295196",
+      "atlas:local:IND:7132399B45612828863454",
+      "atlas:local:IND:7132399B47533478691625",
+      "atlas:local:IND:7132399B47745850698128",
+      "atlas:local:IND:7132399B47862234035334",
+      "atlas:local:IND:7132399B4804658158660",
+      "atlas:local:IND:7132399B48283436920757",
+      "atlas:local:IND:7132399B48714571082772",
+      "atlas:local:IND:7132399B4917465254003",
+      "atlas:local:IND:7132399B49243836531958",
+      "atlas:local:IND:7132399B49304510268568",
+      "atlas:local:IND:7132399B49948452625643",
+      "atlas:local:IND:7132399B50726720159904",
+      "atlas:local:IND:7132399B5078343763199",
+      "atlas:local:IND:7132399B51495935221125",
+      "atlas:local:IND:7132399B5151751652384",
+      "atlas:local:IND:7132399B52255887408358",
+      "atlas:local:IND:7132399B5291734591224",
+      "atlas:local:IND:7132399B5381855176548",
+      "atlas:local:IND:7132399B54684309001182",
+      "atlas:local:IND:7132399B55502175044514",
+      "atlas:local:IND:7132399B56051181956705",
+      "atlas:local:IND:7132399B56836742843607",
+      "atlas:local:IND:7132399B57255809481642",
+      "atlas:local:IND:7132399B57369514987979",
+      "atlas:local:IND:7132399B57470156386602",
+      "atlas:local:IND:7132399B57687414430851",
+      "atlas:local:IND:7132399B58104429815016",
+      "atlas:local:IND:7132399B58184283112151",
+      "atlas:local:IND:7132399B58416471340545",
+      "atlas:local:IND:7132399B58857890513062",
+      "atlas:local:IND:7132399B59311410620088",
+      "atlas:local:IND:7132399B59481419621782",
+      "atlas:local:IND:7132399B5955428271133",
+      "atlas:local:IND:7132399B60566506282213",
+      "atlas:local:IND:7132399B61599524655211",
+      "atlas:local:IND:7132399B62039810825891",
+      "atlas:local:IND:7132399B62136402925820",
+      "atlas:local:IND:7132399B62349958398819",
+      "atlas:local:IND:7132399B62651068877589",
+      "atlas:local:IND:7132399B62747374784355",
+      "atlas:local:IND:7132399B62937942722266",
+      "atlas:local:IND:7132399B63566924045082",
+      "atlas:local:IND:7132399B64582647174228",
+      "atlas:local:IND:7132399B65058474963679",
+      "atlas:local:IND:7132399B65229574511543",
+      "atlas:local:IND:7132399B67067915348365",
+      "atlas:local:IND:7132399B6729585508296",
+      "atlas:local:IND:7132399B67374533130811",
+      "atlas:local:IND:7132399B68759797675871",
+      "atlas:local:IND:7132399B69057535882655",
+      "atlas:local:IND:7132399B69178265629862",
+      "atlas:local:IND:7132399B69711922030549",
+      "atlas:local:IND:7132399B70203076716529",
+      "atlas:local:IND:7132399B71049943352122",
+      "atlas:local:IND:7132399B71316064047090",
+      "atlas:local:IND:7132399B71736761540502",
+      "atlas:local:IND:7132399B72011195237718",
+      "atlas:local:IND:7132399B72236560531468",
+      "atlas:local:IND:7132399B72258819940000",
+      "atlas:local:IND:7132399B72631537021290",
+      "atlas:local:IND:7132399B7395459090579",
+      "atlas:local:IND:7132399B74013382383382",
+      "atlas:local:IND:7132399B74034962573858",
+      "atlas:local:IND:7132399B74756101443290",
+      "atlas:local:IND:7132399B75165800229865",
+      "atlas:local:IND:7132399B75520751822370",
+      "atlas:local:IND:7132399B76128567554742",
+      "atlas:local:IND:7132399B76295069007344",
+      "atlas:local:IND:7132399B77021349786405",
+      "atlas:local:IND:7132399B77028013926234",
+      "atlas:local:IND:7132399B77390870132716",
+      "atlas:local:IND:7132399B77539363195851",
+      "atlas:local:IND:7132399B77707630076842",
+      "atlas:local:IND:7132399B78006103224062",
+      "atlas:local:IND:7132399B78041941402038",
+      "atlas:local:IND:7132399B78129198408589",
+      "atlas:local:IND:7132399B78941227936341",
+      "atlas:local:IND:7132399B79203373115395",
+      "atlas:local:IND:7132399B80186009114473",
+      "atlas:local:IND:7132399B80214689382858",
+      "atlas:local:IND:7132399B8062042222672",
+      "atlas:local:IND:7132399B81972285306500",
+      "atlas:local:IND:7132399B82407068037281",
+      "atlas:local:IND:7132399B83071462288470",
+      "atlas:local:IND:7132399B83533024844883",
+      "atlas:local:IND:7132399B83534480644544",
+      "atlas:local:IND:7132399B83738181801170",
+      "atlas:local:IND:7132399B83773219080492",
+      "atlas:local:IND:7132399B83866296541442",
+      "atlas:local:IND:7132399B84163168754220",
+      "atlas:local:IND:7132399B84397368423448",
+      "atlas:local:IND:7132399B84764210577989",
+      "atlas:local:IND:7132399B84847606037017",
+      "atlas:local:IND:7132399B84960201589029",
+      "atlas:local:IND:7132399B85796662489051",
+      "atlas:local:IND:7132399B85999728450462",
+      "atlas:local:IND:7132399B86084348902117",
+      "atlas:local:IND:7132399B86817106840865",
+      "atlas:local:IND:7132399B87446050313904",
+      "atlas:local:IND:7132399B87509639767899",
+      "atlas:local:IND:7132399B87528004508469",
+      "atlas:local:IND:7132399B8778401498237",
+      "atlas:local:IND:7132399B87920453043126",
+      "atlas:local:IND:7132399B87937292763082",
+      "atlas:local:IND:7132399B88013629725878",
+      "atlas:local:IND:7132399B88244553703230",
+      "atlas:local:IND:7132399B88964613351782",
+      "atlas:local:IND:7132399B891541327439",
+      "atlas:local:IND:7132399B89878706867336",
+      "atlas:local:IND:7132399B89960445122566",
+      "atlas:local:IND:7132399B90080015115660",
+      "atlas:local:IND:7132399B90166320765591",
+      "atlas:local:IND:7132399B90178850580504",
+      "atlas:local:IND:7132399B90526734604600",
+      "atlas:local:IND:7132399B90714675228735",
+      "atlas:local:IND:7132399B90948575700734",
+      "atlas:local:IND:7132399B91463727245689",
+      "atlas:local:IND:7132399B91738510678198",
+      "atlas:local:IND:7132399B91756875795140",
+      "atlas:local:IND:7132399B92031835204528",
+      "atlas:local:IND:7132399B92428559983979",
+      "atlas:local:IND:7132399B92964508532657",
+      "atlas:local:IND:7132399B94431942622905",
+      "atlas:local:IND:7132399B94528183764677",
+      "atlas:local:IND:7132399B94650398259386",
+      "atlas:local:IND:7132399B9471036532460",
+      "atlas:local:IND:7132399B94810932908672",
+      "atlas:local:IND:7132399B95003934647927",
+      "atlas:local:IND:7132399B95604506688532",
+      "atlas:local:IND:7132399B9648135161270",
+      "atlas:local:IND:7132399B96858761931998",
+      "atlas:local:IND:7132399B97196591964703",
+      "atlas:local:IND:7132399B98556072569137",
+      "atlas:local:IND:7132399B98896589704638",
+      "atlas:local:IND:7132399B98935795866687"
+    ],
+    "subject_ids_sha256": "d283bef9ffb2f04977bdb715bfa85838605fac4725872e554116e0e2f9771d06"
+  },
+  "source_context": {
+    "boundary_vintage": "2018",
+    "completeness": "unresolved: 14-feature count discrepancy; decoded content was not authenticated.",
+    "declared_feature_count": 6836,
+    "license": "Publisher metadata asserts ODbL 1.0; no independent legal confirmation is claimed.",
+    "metadata_vintage": "metadata updated 2023-01-19; built 2023-12-12",
+    "neighboring_granularity": "This source is the retained Sub-District/ADM3 tier; no boundary or hierarchy comparison is certified by this admission packet.",
+    "retained_chunk_receipt_feature_count": 6822,
+    "retrieval_record": "The preserved source manifest records retrieval on 2026-10-06; the audit hashes repository Git bytes, not a new remote retrieval.",
+    "territorial_level": "Publisher metadata calls ADM3 Sub-District; this packet does not validate local legal units or parents.",
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson"
+  },
+  "version": 1
+}
