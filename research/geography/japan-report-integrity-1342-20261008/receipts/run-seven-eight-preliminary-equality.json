@@ -1,0 +1,29 @@
+{
+  "schema": "worldatlas-superseded-two-run-equality-v1",
+  "baseline_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+  "vintages": [
+    "run-seven-20261008",
+    "run-eight-20261008"
+  ],
+  "products": [
+    {
+      "path": "source-fitness-table.json",
+      "bytes": 107649,
+      "sha256": "eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee",
+      "identical": true
+    },
+    {
+      "path": "territorial-context.json",
+      "bytes": 12963,
+      "sha256": "f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0",
+      "identical": true
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1384,
+      "sha256": "cd3cd21e60e9e1bcaf5719e1c970088937a12c543744214d8d99fcf78a9dec26",
+      "identical": true
+    }
+  ],
+  "note": "Retained historical run-seven/eight comparison. Both products are preserved inside superseded-history.json.gz and excluded from final outputs because the helper import had not yet been pinned."
+}

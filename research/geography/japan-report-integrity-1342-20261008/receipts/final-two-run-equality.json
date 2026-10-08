@@ -1,0 +1,29 @@
+{
+  "schema": "worldatlas-final-two-run-byte-equality-v1",
+  "baseline_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+  "vintages": [
+    "run-nine-20261008",
+    "run-ten-20261008"
+  ],
+  "products": [
+    {
+      "path": "source-fitness-table.json",
+      "bytes": 107649,
+      "sha256": "eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee",
+      "identical": true
+    },
+    {
+      "path": "territorial-context.json",
+      "bytes": 12963,
+      "sha256": "f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0",
+      "identical": true
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1384,
+      "sha256": "c9f68c91be32d18aab4aa60280f31d0a1240d0222507f0260f14141f84db89e9",
+      "identical": true
+    }
+  ],
+  "note": "Both strict final CLI runs execute the immutable helper from its baseline Git blob. Their completed report, contact context and validation products match byte-for-byte; publication receipts are vintage-specific."
+}
