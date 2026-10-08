@@ -40,9 +40,19 @@ def frozen(commit):
     if len(commit) != 40 or any(c not in '0123456789abcdef' for c in commit) or \
             subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD']).decode().strip() != commit:
         raise ValueError('Exact current frozen execution commit required')
-    if not sys.flags.isolated:
-        raise ValueError('Use the isolated Python entry; no environment/project preloads')
+    if not (sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode):
+        raise ValueError('Use -I -S -B cold entry; no site/.pth/project/bytecode preloads')
+    cache = REPO / '.cache' / '1394-never-materialized-bytecode'
+    if sys.pycache_prefix != str(cache) or cache.exists() or cache.is_symlink():
+        raise ValueError('Use the fixed absent -X pycache_prefix for this author checkout')
     code_list = json.loads(blob(commit, OWNED + 'code-list.json'))
+    # Preserve the original code/config roster byte-for-byte. New acquisition
+    # adapters have a separate whole captured roster in the same frozen commit.
+    additions = json.loads(blob(commit, OWNED + 'acquisition-code-list.json'))
+    if type(additions) is not list or any(type(name) is not str for name in additions) or \
+            set(additions) & set(code_list) or 'acquisition-code-list.json' in additions:
+        raise ValueError('Conflicting acquisition code closure')
+    code_list = code_list + ['acquisition-code-list.json'] + additions
     if len(code_list) != len(set(code_list)) or 'run.py' not in code_list or 'code-list.json' not in code_list:
         raise ValueError('Incomplete/duplicate declared code closure')
     pins = []
@@ -70,23 +80,56 @@ def frozen(commit):
             blob(runtime_pin['shared_immutable_original_commit'], runtime_pin['shared_immutable_original_path']) != raws['methods/shared_immutable.py']:
         raise ValueError('Original shared immutable helper differs')
     guard.all_callables(shared, raws['methods/shared_immutable.py'])
+    runtime_index = json.loads(raws['runtime-custody-index.json'])
+    if hashlib.sha256(raws['runtime-custody-index.json']).hexdigest() != runtime_pin['custody_index_sha256']:
+        raise ValueError('Complete frozen runtime custody index differs')
+    # Runtime data are declared whole-file inputs, distinct from executable code.
+    # They are authenticated by the same actual frozen Baseline before decoding.
+    custody = runtime_index['shards'] + [runtime_pin['current_runtime_delta']]
+    for row in custody:
+        pins.append(dict(commit=commit, path=OWNED + row['path'],
+                         hash_kind='file-bytes', **{k: row[k] for k in
+                         ('bytes', 'sha256', 'uncompressed_bytes', 'uncompressed_sha256')}))
+    if len({p['path'] for p in pins}) != len(pins):
+        raise ValueError('Duplicate declared frozen code/runtime input path')
     baseline = shared.Baseline(REPO, commit, pins)
-    modules = baseline.load_modules({name: OWNED + name + '.py' for name in
-                                    ('source', 'objects', 'replay', 'products', 'runtime', 'controls')})
+    # The cold custody reader uses standard-library imports only. Scientific
+    # package search roots are exposed after every group and raw body validates.
+    modules = baseline.load_modules({'runtime': OWNED + 'runtime.py'})
+    guard.all_callables(modules['runtime'], raws['runtime.py'])
+    runtime = modules['runtime'].prepare(runtime_pin, raws['runtime-custody-index.json'], baseline, OWNED)
+    modules.update(baseline.load_modules({name: OWNED + name + '.py' for name in
+                                        ('source', 'objects', 'replay', 'products', 'controls')}))
     for name, module in modules.items():
         guard.all_callables(module, raws[name + '.py'])
-    runtime = modules['runtime'].cold(runtime_pin, guard, baseline, json.loads(raws['runtime-custody-index.json']), OWNED)
-    return pins, baseline, shared, guard, modules, runtime
+    runtime['actual_runtime_callables'] = modules['runtime'].callables(runtime_pin, guard)
+    runtime['cold_loaded_origins'] = modules['runtime'].loaded(
+        runtime_pin, runtime_index, repo=REPO, owned=OWNED, project_pins=pins)
+    return pins, baseline, shared, guard, modules, runtime, runtime_pin, runtime_index
+
+
+
+def complete_input_union(*rosters):
+    """Collapse only identical complete descriptors of the same commit/path."""
+    result = {}
+    for rows in rosters:
+        for row in rows:
+            identity = row['commit'], row['path']
+            previous = result.get(identity)
+            if previous is not None and previous != row:
+                raise ValueError('Conflicting duplicate actual input descriptor')
+            result[identity] = row
+    return list(result.values())
 
 
 def final_admission(complete_inputs, products):
-    # Whole final-deliverable reserve, before replay: two complete payloads and
-    # all metadata/code/control/report/manifest increments. The payload ceiling
-    # comes from the retained full failed run; actual outputs must still fit it.
-    final_reserve = 2 * 9163466 + 3 * 1024 * 1024
+    # Two fresh complete executions remain mandatory. One delivered payload is
+    # permitted only after whole encoded/decoded equality of both preserved trees.
+    # Reserve both original reports and all controls/history/manifest separately.
+    final_reserve = 9163466 + 3 * 1024 * 1024
     if sum(row['bytes'] for row in complete_inputs) + final_reserve > products.PHASE_LIMIT:
         raise ValueError('Complete final pair and evidence reserve exceeds ordinary admission')
-    if len(complete_inputs) + 24 + 64 > products.DESCRIPTOR_LIMIT:
+    if len(complete_inputs) + 12 + 64 > products.DESCRIPTOR_LIMIT:
         raise ValueError('Complete final pair and evidence descriptor reserve exceeds admission')
     return final_reserve
 
@@ -104,15 +147,18 @@ def main():
         raise ValueError('Fresh exclusive actual owned cache output required')
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     tick = time.monotonic()
-    pins, baseline, shared, guard, modules, runtime = frozen(args.commit)
+    pins, baseline, shared, guard, modules, runtime, runtime_pin, runtime_index = frozen(args.commit)
     callables = []
     def methods_guard(methods, code):
         callables.extend(guard.modules_guard(methods, code))
     controls = modules['controls'].run(guard, modules['objects'], modules['source'])
     loaded = modules['source'].load(REPO, baseline, shared, methods_guard)
     records, native_aliases, native_proof = modules['source'].native_operands(loaded, args.out.parent)
+    runtime['preoperator_loaded_origins'] = modules['runtime'].loaded(
+        runtime_pin, runtime_index, repo=REPO, owned=OWNED, project_pins=pins)
+    scientific_bindings = modules['runtime'].scientific_bindings(loaded['modules'])
     sources = loaded['source']
-    complete_inputs = sources.index['files'] + pins + runtime['whole_runtime_aliases']
+    complete_inputs = complete_input_union(sources.index['files'], pins, runtime['whole_runtime_aliases'])
     final_reserve = final_admission(complete_inputs, modules['products'])
     preflight = {'execution_commit': args.commit, 'actual_start_utc': started,
                  'command': sys.argv, 'preoperator_controls': controls,
@@ -123,7 +169,8 @@ def main():
                  'runtime': runtime, 'flat_inputs': complete_inputs,
                  'flat_input_bytes': sum(p['bytes'] for p in complete_inputs),
                  'final_pair_encoded_reserve_bytes': final_reserve,
-                 'final_pair_descriptor_reserve': 88}
+                 'final_pair_descriptor_reserve': 76,
+                 'single_payload_delivery_condition': 'two successful preserved full trees; independent whole encoded/decoded equality'}
     products = modules['products'].Products(args.out, complete_inputs, repo=REPO)
     if args.input_only:
         products.write('input-only.json', modules['source'].canonical(dict(preflight, mode='frozen input-only; no replay operators')))
@@ -153,6 +200,11 @@ def main():
     for identity, alias in sorted(native_aliases.items()):
         products.emit('native-record-aliases', dict(alias, source_id=identity, complete_original_metadata=records[identity][0]))
     outputs = products.finish()
+    modules['runtime'].require_scientific_bindings(loaded['modules'], scientific_bindings)
+    runtime['postoperator_project_callables'] = guard.modules_guard(loaded['modules'], baseline)
+    runtime['postoperator_runtime_callables'] = modules['runtime'].callables(runtime_pin, guard)
+    runtime['postoperator_loaded_origins'] = modules['runtime'].loaded(
+        runtime_pin, runtime_index, repo=REPO, owned=OWNED, project_pins=pins)
     if sum(row['bytes'] for row in outputs) > 9163466 or len(outputs) > 12:
         raise ValueError('Actual complete science exceeds preadmitted final-pair reserve; retain failure')
     report = {'mode': 'complete original-source nine-map recovery; not geography repair',

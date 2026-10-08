@@ -42,6 +42,36 @@ retain original container ancestry, record positions, integer source bytes,
 binary64 pointsets and permitted periodic frames. Identity, level and container
 bindings require actual integers, excluding Boolean or floating-point aliases.
 
+## Cold runtime custody
+
+The cold entry requires `-I -S -B` and `-X pycache_prefix=` followed by the
+absolute author-checkout path `.cache/1394-never-materialized-bytecode`, which
+must remain absent. Scientific package roots become visible only after whole
+custody authentication; site startup, `.pth` execution and cached bytecode are
+excluded. `runtime-custody-index.json` retains 303 original complete raw bodies
+in three bounded gzip/JSONL groups, with exact member offsets, raw hashes, modes
+and inverse membership. All four current transport files are declared frozen
+Baseline inputs separately from the executable code list.
+
+Three installed bodies changed after the historical capture: the interpreter
+and two NumPy native extensions. Their complete current bytes are reconstructed
+by the small copy-range/literal delta, authenticated against the original full
+raw bodies and the actual installed current bytes. The original 25 gzip aliases
+are preserved by exact deterministic whole-byte inverses **before** that delta
+is applied. The dependency version strings remained the same; numerical equality
+across those runtime vintages is unproven. Installed origins, module-name/path
+bindings, native images, PROJ data and scientific/project callables are checked
+at execution boundaries. Named OS shared-cache images remain explicit platform
+dependencies; these cooperative checks are not a security sandbox or an
+exhaustive native file-read monitor.
+
+The current bounded mutable-reader harness passes whole custody and adverse
+controls. It is not a qualifying frozen entry or scientific replay. The existing
+monolithic source acquisition consumes more than the shared encoded-plus-decoded
+phase cap. A real bounded acquisition lifecycle remains required before another
+full execution; separate Baseline objects or flat encoded admission alone do
+not resolve that obligation.
+
 ## Remaining acceptance work
 
 Complete actual input restoration is being exercised as an explicitly
@@ -56,3 +86,23 @@ Every remaining mismatch, invalid source, operator failure and physical/date
 uncertainty must stay unknown. Source-relative reproduction does not determine
 current land/water truth, authorize a provincial boundary, assign political
 affiliation, or permit filling a gap. The parent campaign remains unfinished.
+# Bounded acquisition continuation
+
+The original code roster and scientific methods remain unchanged. The new
+`acquisition-code-list.json` declares additional adapters in the exact same
+execution commit. `acquisition-driver.py` plans and dispatches 219 detached jobs
+covering every original source, complete reconstructed ledger, routing part,
+diagnosis file, physical restoration and ordered query join. Each real job must
+pass cold runtime verification and its actual complete input/output admission.
+Native metadata and numerical cohorts use `native-acquisition.py`,
+`cohort-acquisition.py` and `numerical-cohort.py`; these preserve full native
+authentication before the unchanged decoder/operators and keep ordinary flushed
+products readable by the original inverse-object checks.
+
+This continuation is not a successful complete audit. Do not launch the old
+monolithic `run.py` main path: it retains the documented oversized acquisition
+stage for historical reference. Parent integration must supply the complete
+cohort partition, actual frozen runtime and stage admission, final scientific
+reconciliation, two successful executions, and final whole-byte delivery proof.
+The root-issued driver freeze admits specific jobs; a plan-only execution grants
+no numerical, native or global-job authorization.
