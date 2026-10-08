@@ -1,0 +1,98 @@
+{
+  "captured_at_local": "2026-10-07T20:31:13-0700",
+  "host_memory_bytes": 8589934592,
+  "memory_pressure_raw": "The system has 8589934592 (2097152 pages with a page size of 4096).\n\nStats: \nPages free: 3808 \nPages purgeable: 0 \nPages purged: 76965900 \n\nSwap I/O:\nSwapins: 514791014 \nSwapouts: 529972620 \n\nPage Q counts:\nPages active: 71908 \nPages inactive: 67796 \nPages speculative: 3203 \nPages throttled: 0 \nPages wired down: 123336 \n\nCompressor Stats:\nPages used by compressor: 218460 \nPages decompressed: 4994225524 \nPages compressed: 5293977734 \n\nFile I/O:\nPageins: 427752295 \nPageouts: 8044131 \n\nSystem-wide memory free percentage: 29%\n",
+  "vm_stat_raw": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                3727.\nPages active:                             71298.\nPages inactive:                           66851.\nPages speculative:                         3711.\nPages throttled:                              0.\nPages wired down:                        125638.\nPages purgeable:                              0.\n\"Translation faults\":               16185117218.\nPages copy-on-write:                  642589535.\nPages zero filled:                   2969188370.\nPages reactivated:                   3651335600.\nPages purged:                          76965132.\nFile-backed pages:                        50937.\nAnonymous pages:                          90923.\nPages stored in compressor:             1061877.\nPages occupied by compressor:            217088.\nDecompressions:                      4994217446.\nCompressions:                        5293968215.\nPageins:                              427752200.\nPageouts:                               8044131.\nSwapins:                              514790191.\nSwapouts:                             529972188.\n",
+  "workspace_disk": {
+    "total_bytes": 494384795648,
+    "used_bytes": 481224192000,
+    "free_bytes": 13160603648
+  },
+  "allocation_limits": {
+    "minimumFree": 10737418240,
+    "maximumCheckouts": 53687091200
+  },
+  "managed_workspace_root_free_bytes": 14221606912,
+  "managed_checkouts_bytes": 51260946023,
+  "workspace_check_exit": 0,
+  "phase_limit_bytes": 268435456,
+  "max_source_file_bytes": 33554432,
+  "requested_raster_decode_before_admission": false,
+  "largest_processes": [
+    {
+      "pid": 3929,
+      "rss_kib": 626704,
+      "command": "Codex (Renderer)"
+    },
+    {
+      "pid": 3930,
+      "rss_kib": 306192,
+      "command": "codex"
+    },
+    {
+      "pid": 4662,
+      "rss_kib": 181168,
+      "command": "Codex (Renderer)"
+    },
+    {
+      "pid": 3780,
+      "rss_kib": 149296,
+      "command": "ChatGPT"
+    },
+    {
+      "pid": 537,
+      "rss_kib": 54544,
+      "command": "WindowServer"
+    },
+    {
+      "pid": 58082,
+      "rss_kib": 47136,
+      "command": "node"
+    },
+    {
+      "pid": 58964,
+      "rss_kib": 40896,
+      "command": "gh"
+    },
+    {
+      "pid": 58969,
+      "rss_kib": 38320,
+      "command": "gh"
+    },
+    {
+      "pid": 58966,
+      "rss_kib": 38288,
+      "command": "gh"
+    },
+    {
+      "pid": 58967,
+      "rss_kib": 37824,
+      "command": "gh"
+    },
+    {
+      "pid": 58965,
+      "rss_kib": 37024,
+      "command": "gh"
+    },
+    {
+      "pid": 3844,
+      "rss_kib": 34768,
+      "command": "Codex (Service)"
+    },
+    {
+      "pid": 3838,
+      "rss_kib": 33888,
+      "command": "Codex (Service)"
+    },
+    {
+      "pid": 898,
+      "rss_kib": 33152,
+      "command": "com.apple.DriverKit-AppleBCMWLAN"
+    },
+    {
+      "pid": 4665,
+      "rss_kib": 29952,
+      "command": "Codex (Renderer)"
+    }
+  ]
+}
