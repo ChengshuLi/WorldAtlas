@@ -81,7 +81,7 @@ manifest={'version':1,'issue':1481,'lane':'geography','worker_id':'01a112c1-ac99
   {'metric_id':'native-ecoregion-feature-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/native_feature_count'},
   {'metric_id':'native-unique-ecoregion-id-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/native_unique_ecoregion_id_count'},
   {'metric_id':'retired-reference-location-count','path':output_by_name['retired-member-context-phase2.json']['path'],'json_pointer':'/location_count'}],
- 'change_receipts':[{'path':x['path'],'status':'added','previous_path':None} for x in source_files+outputs if x['path']!='research/geography/arctic-seven-source-fit-20261008/evidence-quality.json'] + [{'path':'research/geography/arctic-seven-source-fit-20261008/evidence-quality.json','status':'added','previous_path':None}],
+ 'change_receipts':[{'path':x['path'],'status':'added'} for x in source_files+outputs if x['path']!='research/geography/arctic-seven-source-fit-20261008/evidence-quality.json'] + [{'path':'research/geography/arctic-seven-source-fit-20261008/evidence-quality.json','status':'added'}],
  'validation':[
   {'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/positive-control.json'},
   {'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/negative-control.json'}],
