@@ -1,0 +1,161 @@
+{
+  "schema": "worldatlas-569-current-coverage-v1",
+  "recorded_date": "2026-10-07",
+  "status": "indexed-overlap-recomputed; geography and hierarchy approval remain open",
+  "historical_comparison": {
+    "archive_report_commit": "4afe1cb250fe68f5c63022d9583b3b89b9e607a2",
+    "archive_report_commit_utc": "2026-10-02T22:03:05Z",
+    "archive_world_index_sha256": "59552ee8d7d8d0848df6e67fbd43a442e3d4769e6784df984556479c0ae55cf0",
+    "archived_osm_report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+    "archived_gshhg_report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+    "release_manifest_present_at_archive_report_commit": false,
+    "source_restoration_additions_present_at_archive_report_commit": false,
+    "interpretation": "The zero-overlap outputs are preserved measurements from this pre-restoration main-index snapshot. They do not describe current indexed coverage."
+  },
+  "current_snapshot": {
+    "baseline_commit": "9be99dfefb5871237ac464c6ef8a23e82be501f6",
+    "world_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "source_restoration_additions_sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "current_manifest_sha256": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178",
+    "current_release_path": "data/geographic-releases/releases-v7-repacked-gzip.json.gz",
+    "current_release_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7",
+    "indexed_part_path": "geography/source-restoration-additions.json"
+  },
+  "method": {
+    "crs": "EPSG:4326; longitude,latitude coordinate order",
+    "topology": "Shapely polygon intersection using shortest straight longitude/latitude edges; no snapping, buffering, repair, or source clipping",
+    "area": "WGS84 ellipsoid integral for straight source edges (scripts/ellipsoidal_area.py)",
+    "coverage_denominator": "union area of one named source family (OSM rings or GSHHG land polygons); each source component is also reported individually",
+    "limits": [
+      "OSM and GSHHG describe different source vintages, generalization and shoreline conventions.",
+      "Geometry overlap measures indexed representation only; it does not establish present-day coastline completeness, a legal boundary, or approval for imports.",
+      "The indexed restoration feature is not itself a hierarchy node. Its parent pointer and open semantic review are retained as unresolved engineering/integration work."
+    ]
+  },
+  "source_pins": {
+    "osm": {
+      "Nukunonu": {
+        "path": "data/macro-improvements/macro-coverage-oceania/osm-2af0d96ae4f6.xml.gz",
+        "retrieved": "2026-10-02",
+        "license": "Open Database License 1.0; © OpenStreetMap contributors",
+        "compressed_sha256": "ade053ac91d0f2f4b6d7a033bba95c3fd39c2468b55b58ab14b2120e8420fb07",
+        "decompressed_sha256": "0b150bc8b2675fceeca0fca17661d5c373cc1381c4c7667b92b0e8cb4e0dbad4",
+        "coastline_ring_count": 97
+      },
+      "Bounty Islands": {
+        "path": "data/macro-improvements/macro-coverage-oceania/osm-28c1ddf724e1.xml.gz",
+        "retrieved": "2026-10-02",
+        "license": "Open Database License 1.0; © OpenStreetMap contributors",
+        "compressed_sha256": "45545b5d4cdf82c3bcab305a437cdf0c388a515df9b6d20857a51ba04de7af18",
+        "decompressed_sha256": "9bb048bfe6efb335bffbe08bda484a0283571eb7b6f839e9e0e99268ca8f177c",
+        "coastline_ring_count": 27
+      }
+    },
+    "gshhg": {
+      "path": "data/macro-improvements/macro-coverage-oceania/gshhg-selected-full-records.bin.gz",
+      "release_date": "2017-06-15",
+      "license": "LGPLv3 or later",
+      "selected_records_compressed_sha256": "7e52c4c7c13ea3b2d35120cc0f1f6832007865750b98f42d5cd9c95162df1df4",
+      "selected_records_native_sha256": "a7c071d1e80655b7a929d9a0a3f694f915a224b59b449505560fd40433c71b51",
+      "extraction_manifest_sha256": "3d8404b40c2c9c6077b1343cb41f94e5dacdf4f5e83a1b1e182fda96cc2da757",
+      "selection_method": "Byte-for-byte complete native headers+coordinate records, source order retained, records selected by declared named-land domains; not source polygon editing"
+    }
+  },
+  "subjects": [
+    {
+      "name": "Bounty Islands",
+      "indexed_feature_id": "atlas:macro-coverage:location:73281d3672f84a47a770",
+      "indexed_feature_name": "Bounty Islands",
+      "parent_pointer": "atlas:macro-coverage:province:e97e94b1d0009c0b8cf4",
+      "parent_node_present_in_hierarchy": true,
+      "hierarchy_node_present_for_indexed_feature": false,
+      "semantic_review_status": "open",
+      "indexed_component_count": 27,
+      "indexed_feature_area_km2": 0.5015607806961826,
+      "osm_current_indexed_coverage": {
+        "source_component_count": 27,
+        "component_summed_source_area_km2": 0.5015607806961826,
+        "source_union_area_km2": 0.5015607806961826,
+        "source_union_covered_area_km2": 0.5015607806961826,
+        "source_union_covered_fraction": 1.0,
+        "components": [
+          {"source_component_id":"176112120","source_area_km2":0.023961400678644034,"covered_area_km2":0.023961400678644034,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":14,"intersection_area_km2":0.023961400678644034,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112200","source_area_km2":0.008639358070919442,"covered_area_km2":0.008639358070919442,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":25,"intersection_area_km2":0.008639358070919442,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112201","source_area_km2":8.285705717839658e-05,"covered_area_km2":8.285705717839658e-05,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":21,"intersection_area_km2":8.285705717839658e-05,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112228","source_area_km2":0.0037992737292139728,"covered_area_km2":0.0037992737292139728,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":23,"intersection_area_km2":0.0037992737292139728,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112229","source_area_km2":0.0028506149567242775,"covered_area_km2":0.002850614956724278,"source_component_covered_fraction":1.0000000000000002,"intersecting_indexed_components":[{"indexed_component":0,"intersection_area_km2":0.002850614956724278,"source_component_covered_fraction":1.0000000000000002}]},
+          {"source_component_id":"176112230","source_area_km2":0.027090871929581744,"covered_area_km2":0.027090871929581744,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":22,"intersection_area_km2":0.027090871929581744,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112231","source_area_km2":0.04792222994535138,"covered_area_km2":0.04792222994535138,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":26,"intersection_area_km2":0.04792222994535138,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112232","source_area_km2":0.012433334337376409,"covered_area_km2":0.012433334337376409,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":20,"intersection_area_km2":0.012433334337376409,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112233","source_area_km2":0.0005136915126673102,"covered_area_km2":0.0005136915126673102,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":18,"intersection_area_km2":0.0005136915126673102,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112234","source_area_km2":0.0009563499063738393,"covered_area_km2":0.0009563499063738394,"source_component_covered_fraction":1.0000000000000002,"intersecting_indexed_components":[{"indexed_component":19,"intersection_area_km2":0.0009563499063738394,"source_component_covered_fraction":1.0000000000000002}]},
+          {"source_component_id":"176112235","source_area_km2":0.007275743042256353,"covered_area_km2":0.007275743042256353,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":16,"intersection_area_km2":0.007275743042256353,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112236","source_area_km2":0.00011107173108504996,"covered_area_km2":0.00011107173108504996,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":24,"intersection_area_km2":0.00011107173108504996,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112237","source_area_km2":0.00039455739379798237,"covered_area_km2":0.00039455739379798237,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":17,"intersection_area_km2":0.00039455739379798237,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112238","source_area_km2":0.0015439904009294434,"covered_area_km2":0.0015439904009294434,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":15,"intersection_area_km2":0.0015439904009294434,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112262","source_area_km2":0.13043718683475083,"covered_area_km2":0.13043718683475083,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":6,"intersection_area_km2":0.13043718683475083,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112263","source_area_km2":0.0017343377002069908,"covered_area_km2":0.0017343377002069908,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":4,"intersection_area_km2":0.0017343377002069908,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112264","source_area_km2":0.05125536183958973,"covered_area_km2":0.05125536183958973,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":3,"intersection_area_km2":0.05125536183958973,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112265","source_area_km2":0.03378909304985916,"covered_area_km2":0.03378909304985915,"source_component_covered_fraction":0.9999999999999998,"intersecting_indexed_components":[{"indexed_component":8,"intersection_area_km2":0.03378909304985915,"source_component_covered_fraction":0.9999999999999998}]},
+          {"source_component_id":"176112266","source_area_km2":0.014116907310447194,"covered_area_km2":0.014116907310447195,"source_component_covered_fraction":1.0000000000000002,"intersecting_indexed_components":[{"indexed_component":5,"intersection_area_km2":0.014116907310447195,"source_component_covered_fraction":1.0000000000000002}]},
+          {"source_component_id":"176112267","source_area_km2":0.0550682992389753,"covered_area_km2":0.0550682992389753,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":2,"intersection_area_km2":0.0550682992389753,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112268","source_area_km2":0.004641632242013,"covered_area_km2":0.0046416322420130005,"source_component_covered_fraction":1.0000000000000002,"intersecting_indexed_components":[{"indexed_component":10,"intersection_area_km2":0.0046416322420130005,"source_component_covered_fraction":1.0000000000000002}]},
+          {"source_component_id":"176112269","source_area_km2":0.006683477457869676,"covered_area_km2":0.0066834774578696755,"source_component_covered_fraction":0.9999999999999999,"intersecting_indexed_components":[{"indexed_component":9,"intersection_area_km2":0.0066834774578696755,"source_component_covered_fraction":0.9999999999999999}]},
+          {"source_component_id":"176112270","source_area_km2":0.04129530491854028,"covered_area_km2":0.04129530491854028,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":11,"intersection_area_km2":0.04129530491854028,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112271","source_area_km2":0.017417845480738242,"covered_area_km2":0.017417845480738235,"source_component_covered_fraction":0.9999999999999998,"intersecting_indexed_components":[{"indexed_component":7,"intersection_area_km2":0.017417845480738235,"source_component_covered_fraction":0.9999999999999998}]},
+          {"source_component_id":"176112272","source_area_km2":0.0023151089816688167,"covered_area_km2":0.0023151089816688167,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":13,"intersection_area_km2":0.0023151089816688167,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112273","source_area_km2":0.0018239321010283687,"covered_area_km2":0.0018239321010283687,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":1,"intersection_area_km2":0.0018239321010283687,"source_component_covered_fraction":1.0}]},
+          {"source_component_id":"176112274","source_area_km2":0.0034069488483954194,"covered_area_km2":0.0034069488483954194,"source_component_covered_fraction":1.0,"intersecting_indexed_components":[{"indexed_component":12,"intersection_area_km2":0.0034069488483954194,"source_component_covered_fraction":1.0}]}
+        ]
+      },
+      "gshhg_current_indexed_coverage": {
+        "source_component_count": 14,
+        "component_summed_source_area_km2": 2.769638300030153,
+        "source_union_area_km2": 2.769638300030153,
+        "source_union_covered_area_km2": 0.0,
+        "source_union_covered_fraction": 0.0,
+        "components": [
+          {"source_component_id":"110472","source_area_km2":0.0656678080254335,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"127894","source_area_km2":0.04920950785416141,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"169979","source_area_km2":0.014352979397624414,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"170214","source_area_km2":0.013851004304313661,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"177591","source_area_km2":0.008845325666605366,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"24188","source_area_km2":0.8573075757266061,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"37709","source_area_km2":0.40742503273730246,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"39100","source_area_km2":0.38387566517172106,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"39257","source_area_km2":0.3811340359006017,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"70484","source_area_km2":0.14151266631474385,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"77827","source_area_km2":0.11957181773873937,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"78211","source_area_km2":0.11846299342192998,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"81061","source_area_km2":0.11191494597568996,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]},
+          {"source_component_id":"88568","source_area_km2":0.09650694179468054,"covered_area_km2":0.0,"source_component_covered_fraction":0.0,"intersecting_indexed_components":[]}
+        ]
+      },
+      "archived_comparison_values": {
+        "osm_pre_restoration_covered_fraction": 0.0,
+        "osm_pre_restoration_absent_component_count": 27,
+        "gshhg_pre_restoration_same_region_covered_fraction": 0.0
+      },
+      "coverage_controls": {
+        "positive_osm_ring_way_id": "176112120",
+        "positive_osm_ring_covered_fraction": 1.0,
+        "negative_control_omitted_component_indices": [
+          14
+        ],
+        "negative_control_covered_fraction_after_omission": 0.0
+      }
+    }
+  ],
+  "scope_control": {
+    "issue_owned_paths": [
+      "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/",
+      "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/"
+    ],
+    "generated_files": [
+      "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/current-coverage.json",
+      "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/current-coverage.json"
+    ],
+    "outside_owned_path_writes": false
+  }
+}
