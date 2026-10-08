@@ -99,7 +99,7 @@
     {
       "path": "coordination/engineering/historical-evidence-vintages-20261007/tests.json",
       "bytes": 607,
-      "sha256": "9ccb8b9e15ab64b8347f5eaf5c03c28e86bede063683b1d777dad42cdf0bad5e",
+      "sha256": "32f585bf654d1931ed1de7571f75bfd4dfe6f075f14a40cdb132e4546d1492ef",
       "hash_kind": "file-bytes"
     },
     {
@@ -128,8 +128,8 @@
     },
     {
       "path": "scripts/evidence-quality.mjs",
-      "bytes": 22568,
-      "sha256": "963392d1a6a659ad251b93450de8c32aa6890b3a81526f82a2c6063286fbc2c6",
+      "bytes": 23246,
+      "sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03",
       "hash_kind": "file-bytes"
     },
     {
@@ -146,8 +146,8 @@
     },
     {
       "path": "test/historical-evidence.test.mjs",
-      "bytes": 14041,
-      "sha256": "ce4ecad2911cdc445f1a3f3fcbdf46f38582ec9d75c93f72563007e4c2a60188",
+      "bytes": 14693,
+      "sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327",
       "hash_kind": "file-bytes"
     }
   ],
@@ -163,19 +163,19 @@
   "metrics": [
     {
       "id": "gate:tests",
-      "value": 103,
+      "value": 104,
       "unit": "count",
       "vintage": "archived",
       "evaluation_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
-      "input_sha256": "ce4ecad2911cdc445f1a3f3fcbdf46f38582ec9d75c93f72563007e4c2a60188"
+      "input_sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327"
     },
     {
       "id": "gate:passed",
-      "value": 103,
+      "value": 104,
       "unit": "count",
       "vintage": "archived",
       "evaluation_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
-      "input_sha256": "ce4ecad2911cdc445f1a3f3fcbdf46f38582ec9d75c93f72563007e4c2a60188"
+      "input_sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327"
     },
     {
       "id": "gate:failed",
@@ -183,7 +183,7 @@
       "unit": "count",
       "vintage": "archived",
       "evaluation_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
-      "input_sha256": "ce4ecad2911cdc445f1a3f3fcbdf46f38582ec9d75c93f72563007e4c2a60188"
+      "input_sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327"
     },
     {
       "id": "conformance:pins_checked",

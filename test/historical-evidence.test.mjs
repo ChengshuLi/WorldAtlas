@@ -136,3 +136,11 @@ test('composed geography identities select historical bytes while retaining exis
  binding.commit=later;assert.throws(()=>validate(f),/Composed subject missing/);
  binding.commit=old;binding.unrecognized=true;assert.throws(()=>validate(f),/Invalid versioned/);
 });
+
+test('local validation rejects excess descriptors and ignored source commit declarations before reading',()=>{
+ const f=fixture();for(let i=0;i<511;i++)f.manifest.baseline.files.push(desc(`extra-${i}`,Buffer.from('x'),old));
+ let reads=0;const reader=()=>{reads++;throw Error('Must not read');};reader.assertAncestor=()=>{reads++;};
+ assert.throws(()=>validateEvidence(f.manifest,{readFile:reader}),/inventory exceeds/);assert.equal(reads,0);
+ const g=fixture();g.manifest.sources=[{files:[desc('unretained.txt',Buffer.from('x'),old)],retention:'restoration-only'}];
+ assert.throws(()=>validate(g),/source file cannot declare historical commit/);
+});

@@ -192,6 +192,12 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     subjectsHash(ids) === manifest.subject_ids_sha256, 'Subject identity/digest mismatch');
   if (expectedSubjects) require(subjectsHash(expectedSubjects) === manifest.subject_ids_sha256,
     'Subjects disagree with reviewed scope');
+  require(Array.isArray(manifest.sources) && Array.isArray(manifest.outputs), 'Missing source/output inventory');
+  require(manifest.sources.every(source => source.files === undefined || Array.isArray(source.files)), 'Invalid source file inventory');
+  require(Array.isArray(manifest.baseline?.files) && manifest.baseline.files.length + manifest.outputs.length +
+    manifest.sources.flatMap(source => source.files ?? []).length <= 512, 'Evidence file inventory exceeds bounded review budget');
+  for (const source of manifest.sources) for (const file of source.files ?? [])
+    require(!Object.hasOwn(file, 'commit'), 'Candidate source file cannot declare historical commit');
   const historicalFiles = baselineFiles(manifest);
   if (readFile && manifest.baseline.version === 2) {
     require(typeof readFile.assertAncestor === 'function', 'Historical vintages require ancestry verification');
