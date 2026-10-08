@@ -45,3 +45,30 @@ test('record sources retain ancestry and declared whole decoded pins',()=>{
   f=fixture();delete f.file.uncompressed_sha256;delete f.file.uncompressed_bytes;assert.throws(()=>run(f),/whole decoded/);
   f=fixture();f.file.uncompressed_sha256='0'.repeat(64);assert.throws(()=>run(f),/Uncompressed bytes mismatch/);
 });
+
+test('actual control CLI rejects files, dangling destinations and symlink parents before source/control execution',async()=>{
+  const fs=(await import('node:fs')).default,path=(await import('node:path')).default,os=await import('node:os');
+  const {spawnSync}=await import('node:child_process');
+  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'family-record-admission-')));
+  const packet=path.join(root,'coordination/engineering/immutable-family-record-subject-bindings-20261008'),parent=path.join(packet,'vintages');
+  try{
+    fs.mkdirSync(packet,{recursive:true});fs.mkdirSync(path.join(root,'scripts'));fs.mkdirSync(parent);
+    fs.copyFileSync(new URL('../coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs',import.meta.url),path.join(packet,'verify-original-records.mjs'));
+    fs.copyFileSync(new URL('../scripts/evidence-quality.mjs',import.meta.url),path.join(root,'scripts/evidence-quality.mjs'));
+    const preload=path.join(root,'instrument.mjs'),receipt=path.join(root,'calls.json');
+    fs.writeFileSync(preload,`import fs from 'node:fs';import cp from 'node:child_process';import z from 'node:zlib';import {syncBuiltinESMExports} from 'node:module';const counts={git:0,body_reads:0,gunzips:0};const write=fs.writeFileSync,read=fs.readFileSync;cp.execFileSync=()=>{counts.git++;throw Error('Control executed Git before admission');};fs.readFileSync=(...args)=>{if(new Error().stack.includes('getSourceSync'))return read(...args);counts.body_reads++;throw Error('Control read body before admission');};z.gunzipSync=()=>{counts.gunzips++;throw Error('Control decoded before admission');};syncBuiltinESMExports();process.on('exit',()=>write(process.env.CONTROL_CALLS,JSON.stringify(counts)));`,{flag:'wx'});
+    const script=path.join(packet,'verify-original-records.mjs');
+    for(const kind of ['existing-file','dangling-destination','symlink-parent']){
+      const destination=path.join(parent,kind),sentinel=Buffer.from('unchanged source sentinel');
+      let before;
+      if(kind==='existing-file'){fs.writeFileSync(destination,sentinel,{flag:'wx'});before=sha256(fs.readFileSync(destination));}
+      if(kind==='dangling-destination')fs.symlinkSync(path.join(root,'missing'),destination);
+      if(kind==='symlink-parent'){fs.rmdirSync(parent);const real=path.join(root,'real-parent');fs.mkdirSync(real);fs.writeFileSync(path.join(real,'sentinel'),sentinel,{flag:'wx'});fs.symlinkSync(real,parent);before=sha256(fs.readFileSync(path.join(real,'sentinel')));}
+      const result=spawnSync(process.execPath,['--import',preload,script,destination,commit],{encoding:'utf8',timeout:10000,env:{...process.env,CONTROL_CALLS:receipt}});
+      assert.equal(result.error,undefined);assert.notEqual(result.status,0);assert.match(result.stderr,/Fresh destination entry already exists|Nonordinary owned destination parent/);assert.deepEqual(JSON.parse(fs.readFileSync(receipt)),{git:0,body_reads:0,gunzips:0});
+      if(kind==='existing-file'){assert.equal(sha256(fs.readFileSync(destination)),before);fs.unlinkSync(destination);}
+      if(kind==='dangling-destination'){assert.equal(fs.readlinkSync(destination),path.join(root,'missing'));fs.unlinkSync(destination);}
+      if(kind==='symlink-parent'){assert.equal(sha256(fs.readFileSync(path.join(root,'real-parent/sentinel'))),before);assert.equal(fs.existsSync(destination),false);assert.equal(fs.lstatSync(parent).isSymbolicLink(),true);}
+    }
+  }finally{fs.rmSync(root,{recursive:true,force:true});}
+});

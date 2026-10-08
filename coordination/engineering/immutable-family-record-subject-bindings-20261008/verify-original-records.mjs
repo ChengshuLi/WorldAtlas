@@ -5,9 +5,19 @@ import zlib, {gzipSync} from 'node:zlib';
 import {syncBuiltinESMExports} from 'node:module';
 import {validateEvidence,sha256,subjectsHash} from '../../../scripts/evidence-quality.mjs';
 const packet=new URL('.',import.meta.url).pathname;
-const repo=execFileSync('git',['rev-parse','--show-toplevel'],{cwd:packet,encoding:'utf8'}).trim();
 const [destination,base]=process.argv.slice(2);
-if(!destination||!/^([a-f0-9]{40})$/.test(base??'')||filesystemPath.resolve(destination)!==destination||filesystemPath.dirname(destination)!==packet+'vintages'||fs.existsSync(destination))throw Error('Fresh owned destination and exact original base required');
+if(!destination||!/^([a-f0-9]{40})$/.test(base??'')||filesystemPath.resolve(destination)!==destination||filesystemPath.dirname(destination)!==packet+'vintages')throw Error('Fresh owned destination and exact original base required');
+// Admit every existing ancestor and the final entry before any code/source read or control.
+const ownedRoot=filesystemPath.resolve(packet,'../../..');
+for(let parent=filesystemPath.dirname(destination);;parent=filesystemPath.dirname(parent)){
+  try {const stat=fs.lstatSync(parent);if(!stat.isDirectory()||stat.isSymbolicLink()||fs.realpathSync(parent)!==parent)throw Error('Nonordinary owned destination parent');}
+  catch(error){if(error.code!=='ENOENT')throw error;}
+  if(parent===ownedRoot)break;
+  if(parent===filesystemPath.dirname(parent)||!parent.startsWith(ownedRoot+'/'))throw Error('Destination escapes owned root');
+}
+try {fs.lstatSync(destination);throw Error('Fresh destination entry already exists');}
+catch(error){if(error.code!=='ENOENT')throw error;}
+const repo=execFileSync('git',['rev-parse','--show-toplevel'],{cwd:packet,encoding:'utf8'}).trim();
 const executionCommit=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const codeNames=['scripts/evidence-quality.mjs','coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs'];
 function codeGuard(){return codeNames.map(name=>{const raw=execFileSync('git',['-C',repo,'show',executionCommit+':'+name],{maxBuffer:32*1024*1024});const live=fs.readFileSync(repo+'/'+name);if(!raw.equals(live)||!fs.lstatSync(repo+'/'+name).isFile())throw Error('Executing code differs from immutable commit');return {commit:executionCommit,path:name,bytes:raw.length,sha256:sha256(raw),hash_kind:'file-bytes'};});}
