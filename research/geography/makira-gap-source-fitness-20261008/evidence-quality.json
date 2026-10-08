@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "issue": 1457,
+  "lane": "geography",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "physical-component:0009067d3f046760099093ffa957642c95f1a2e660b78bddf609d4d1fcfab1a5",
+    "physical-component:110e441169327a1bc96c96de0be8eaa5ef3eeb6872b90ade8c0d0d6495c277b2",
+    "physical-component:1cd54a39b974f1a8ee305ab4a590cd9ef02a328d59b244bd1d909746ec39c7c5",
+    "physical-component:344d085c5ee3afb809660423e91634ed311f130763a5d2d4f9d6ea91cdd4d3e8",
+    "physical-component:3eb5716e1e821f25c85a494658b13bc8c3a57de6d6636b5323b5edfb25eca833",
+    "physical-component:3f8309e420055c726486ecdb318e368769eb52d038fcb6d8266106380217f8fd",
+    "physical-component:5b687195caf6d9f5f011be6c6d8517152a2d78e2e5241463c99dac1d254c7d2b",
+    "physical-component:6deb3a8a2d72ba08aba2d63b73c89788f587ba5ab3bb56ea20f72bb1b538df43",
+    "physical-component:6f31be024cca8bcc6ed65e7ee1ca2554d4f889b2be2ebcd0e5786ec801a99203",
+    "physical-component:8046202150652008b4d4fbd5867a9658375702506277ddc782da0e62e7fafafb",
+    "physical-component:92137006e45c30dbd06cfb4eef3581c23248d8f0a6ca3ec339df668e268ff33e",
+    "physical-component:bc9fe8b0910d6a40dc87ba199db3e3188979c46eba59a3eb7ca2e81e65d06bfe",
+    "physical-component:df78f53425fab964dab064e6fc55437102e2f9ea5a40fc454a6e2fff3f277189",
+    "physical-component:f93741afbb4a8200db773503c3080ea3e7b9280d8b70d5e85c2251c17dca4704",
+    "physical-component:fa280f14a18aa7559772a8854eb2d79ffbc402c9867d2289ed5bd48449c971ad"
+  ],
+  "subject_ids_sha256": "0d3f2f52793491c55e8fd5794f6ef1367c2808df0055d6adc5684bbb2c9d60b5",
+  "baseline": {
+    "commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "bytes": 1046123,
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-008.json.gz",
+        "bytes": 1600795,
+        "sha256": "f4ecb53c8f78853d77bbc05ab184201fbf1a7087a38ae793353ed68406028a1c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8385545,
+        "uncompressed_sha256": "fb3eefa54184f81c5a397e67efec3d5ccdbae23038ad05e26ca5ded8caebf46d"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-009.json.gz",
+        "bytes": 1486084,
+        "sha256": "5a7c0702860b7d6713dfa847f8634b42afabb8e626b4dd7a491ff8541e170551",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8384903,
+        "uncompressed_sha256": "c6a7a2f11df97ed48cf03f9862c41f18daebd9d57231c2a53775fbfa0878371b"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-010.json.gz",
+        "bytes": 1210288,
+        "sha256": "07f327dc2a78b9b1ff9f44f0b96a10c54d52667826a177c6c5b9ea3bf049764a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6834240,
+        "uncompressed_sha256": "a06638da8991941a9f93509cf59ddb6203839c7aac26f49b9424890246443ed0"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SLB-ADM1-000.bin.gz",
+        "bytes": 33558,
+        "sha256": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 93632,
+        "uncompressed_sha256": "418f5f1aeaab5f63d240219d1a78efda66e6ceb35ee1f35345d6e4e55fa0798c"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/00.bin",
+        "bytes": 33554432,
+        "sha256": "ddaa3533a37d73764aeae81068bf369d2fa81849901094655e06ee32a501408d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/01.bin",
+        "bytes": 33554432,
+        "sha256": "9f6fff8b9ca1b1d5bc234b11af33562e2769dd7a704e20c9630a0c2190310527",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/02.bin",
+        "bytes": 33554432,
+        "sha256": "2ddd98d3743cc8886b8b4d07c8e5cdd199503d0a48145bdb1f38a1ef49549a3d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/i/03.bin",
+        "bytes": 17953737,
+        "sha256": "4a44f7e0b83d840f94a71cf5961f7f214826d26e10aae2a47d1d6711db140f83",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "routing_family_rows": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+      "family_components_008": "f4ecb53c8f78853d77bbc05ab184201fbf1a7087a38ae793353ed68406028a1c",
+      "family_components_009": "5a7c0702860b7d6713dfa847f8634b42afabb8e626b4dd7a491ff8541e170551",
+      "family_components_010": "07f327dc2a78b9b1ff9f44f0b96a10c54d52667826a177c6c5b9ea3bf049764a",
+      "makira_adm1_product": "bb5015f3111992aaed331dd9eecad792c611d5c6bd6513a7d1f3fd04f82d15c8",
+      "gshhg_archive_chunk_00": "ddaa3533a37d73764aeae81068bf369d2fa81849901094655e06ee32a501408d",
+      "gshhg_archive_chunk_01": "9f6fff8b9ca1b1d5bc234b11af33562e2769dd7a704e20c9630a0c2190310527",
+      "gshhg_archive_chunk_02": "2ddd98d3743cc8886b8b4d07c8e5cdd199503d0a48145bdb1f38a1ef49549a3d",
+      "gshhg_archive_chunk_03": "4a44f7e0b83d840f94a71cf5961f7f214826d26e10aae2a47d1d6711db140f83",
+      "component_v3_000": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+      "component_v3_001": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+      "component_v3_002": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+      "component_v3_003": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+      "component_v3_004": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "component_v3_005": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+      "component_v3_006": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "component_v3_007": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+      "component_v3_009": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+      "component_v3_010": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+      "component_custody_index": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+    },
+    "pin_files": {
+      "routing_family_rows": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+      "family_components_008": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-008.json.gz",
+      "family_components_009": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-009.json.gz",
+      "family_components_010": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-010.json.gz",
+      "makira_adm1_product": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SLB-ADM1-000.bin.gz",
+      "gshhg_archive_chunk_00": "coordination/engineering/global-physical-sources-20261006/i/00.bin",
+      "gshhg_archive_chunk_01": "coordination/engineering/global-physical-sources-20261006/i/01.bin",
+      "gshhg_archive_chunk_02": "coordination/engineering/global-physical-sources-20261006/i/02.bin",
+      "gshhg_archive_chunk_03": "coordination/engineering/global-physical-sources-20261006/i/03.bin",
+      "component_v3_000": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "component_v3_001": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "component_v3_002": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "component_v3_003": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "component_v3_004": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "component_v3_005": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "component_v3_006": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "component_v3_007": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "component_v3_009": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "component_v3_010": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "component_custody_index": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json"
+    },
+    "subject_files": {
+      "physical-component:0009067d3f046760099093ffa957642c95f1a2e660b78bddf609d4d1fcfab1a5": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:110e441169327a1bc96c96de0be8eaa5ef3eeb6872b90ade8c0d0d6495c277b2": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:1cd54a39b974f1a8ee305ab4a590cd9ef02a328d59b244bd1d909746ec39c7c5": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "physical-component:344d085c5ee3afb809660423e91634ed311f130763a5d2d4f9d6ea91cdd4d3e8": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:3eb5716e1e821f25c85a494658b13bc8c3a57de6d6636b5323b5edfb25eca833": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:3f8309e420055c726486ecdb318e368769eb52d038fcb6d8266106380217f8fd": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:5b687195caf6d9f5f011be6c6d8517152a2d78e2e5241463c99dac1d254c7d2b": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "physical-component:6deb3a8a2d72ba08aba2d63b73c89788f587ba5ab3bb56ea20f72bb1b538df43": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "physical-component:6f31be024cca8bcc6ed65e7ee1ca2554d4f889b2be2ebcd0e5786ec801a99203": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "physical-component:8046202150652008b4d4fbd5867a9658375702506277ddc782da0e62e7fafafb": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical-component:92137006e45c30dbd06cfb4eef3581c23248d8f0a6ca3ec339df668e268ff33e": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:bc9fe8b0910d6a40dc87ba199db3e3188979c46eba59a3eb7ca2e81e65d06bfe": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "physical-component:df78f53425fab964dab064e6fc55437102e2f9ea5a40fc454a6e2fff3f277189": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical-component:f93741afbb4a8200db773503c3080ea3e7b9280d8b70d5e85c2251c17dca4704": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "physical-component:fa280f14a18aa7559772a8854eb2d79ffbc402c9867d2289ed5bd48449c971ad": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin"
+    }
+  },
+  "sources": [
+    {
+      "id": "sprep",
+      "url": "https://solomonislands-data.sprep.org/resource/10-meter-rgb-satellite-imagery-san-cristobal-island-years-2019-2020",
+      "role": "Published RGB Sentinel-2 mosaic/catalog metadata for San Cristobal / Makira screening",
+      "vintage": "scene dates 2019-09-05, 2020-01-18 and 2020-04-07; published products N0213/N0214; resource says 10m RGB",
+      "license": {
+        "status": "unknown",
+        "terms": "Portal lists SPREP Public Licence, but exact derived asset/mosaic terms and the retained file lineage are unresolved; no ZIP or pixels retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Use the canonical SPREP resource and request exact underlying scene, processing lineage, asset checksum and licence terms for the distributed RGB product.",
+      "limit": "Metadata establishes a candidate resource only; exact member coverage, valid pixels, local cloud, positional fit, asset bytes and derivative rights are unknown."
+    },
+    {
+      "id": "cdse-stac",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/STAC.html",
+      "role": "Official CDSE STAC catalogue item metadata for six Sentinel-2 L2A items",
+      "vintage": "six N0500 items for the 2019-09-05, 2020-01-18 and 2020-04-07 acquisition windows; product processing timestamps in 2023",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying Sentinel data are open, but no exact raster asset bytes/checksum/lineage were retrieved. The 2020-01-18 exact product name has multiple recorded SHA-256 byte vintages and no populated input lineage; product ID does not uniquely bind raster bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat official STAC Item Search with item IDs, acquire each asset checksum/version metadata and source lineage before any use.",
+      "limit": "Native item geometry was not overlaid against exact member polygons. Item cloud fraction is tile-level; pixel validity, local cloud and component-level positional fit are unknown."
+    },
+    {
+      "id": "sentinel-product-spec",
+      "url": "https://sentinels.copernicus.eu/sentinel-data-access/sentinel-products/sentinel-2-data-products/collection-1-level-1c",
+      "role": "Sentinel-2 Collection 1 L1C reference characteristics",
+      "vintage": "published product specification consulted 2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official Sentinel product documentation; underlying Sentinel data terms apply. This is a specification citation, not a retained image asset."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Consult product specification and the exact product metadata for a selected native product.",
+      "limit": "Nominal 10m sampling and <12m absolute geolocation accuracy at 95.5% are an L1C reference, not proof of accuracy for the SPREP RGB derivative or any exact L2A asset; no component-level registration was measured."
+    },
+    {
+      "id": "oam",
+      "url": "https://docs.openaerialmap.org/api/api/",
+      "role": "OpenAerialMap legacy API and HOT OAM STAC full-family search",
+      "vintage": "metadata searches over full family extent; retrieval 2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No catalogue item was returned; no asset-specific reuse terms can be determined."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat OAM API and STAC searches with full exact polygon set and expanded date/collection filters if a subsequent review requires it.",
+      "limit": "Zero returned records mean catalogue_not_found within searched endpoints and query, not absence of aerial imagery."
+    },
+    {
+      "id": "spc-srtm",
+      "url": "https://www.pacific-r2r.org/sites/default/files/2022-10/SLB_R2R_Data_Sources_and_Methodology_Brief_2.pdf",
+      "role": "SPC Solomon Islands data-source methodology documenting SRTMGL1.003 30m elevation context",
+      "vintage": "methodology brief published 2022; SRTM source vintage not established per component",
+      "license": {
+        "status": "unknown",
+        "terms": "This metadata citation does not establish source asset reuse rights; no raster retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Consult the cited methodology and native SRTM source metadata before any permitted future use.",
+      "limit": "30m terrain model is not fine raw land/water observation evidence; exact native coverage and positional suitability were not checked."
+    },
+    {
+      "id": "mofr-lcm",
+      "url": "https://www.mofr.gov.sb/documents/ForestLCM/makira-land-cover-map-2020.pdf",
+      "role": "Solomon Islands Ministry of Forestry Makira 2020 classified land-cover map",
+      "vintage": "2020 map; source imagery Landsat-derived; effective-date semantics not verified",
+      "license": {
+        "status": "unknown",
+        "terms": "PDF/map asset reuse terms were not confirmed; no map pixels or data downloaded."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Seek original classification data, source scene metadata, accuracy assessment and reuse terms.",
+      "limit": "30m thematic classification is not raw observation evidence and cannot establish component-local land/water boundary accuracy."
+    },
+    {
+      "id": "ga-screen",
+      "url": "https://www.ga.gov.au/",
+      "role": "Geoscience Australia and Australian catalogue metadata screening for Makira/SLB aerial or LiDAR records",
+      "vintage": "search scope and retrieval 2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No Makira/SLB aerial or LiDAR record was identified; no asset licence can be assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Repeat provider catalogue screening with provider-specific archive queries and exact geometry if needed.",
+      "limit": "Catalogue_not_found is bounded to the searches. Cocos LiDAR is unrelated; marine sonar/bathymetry does not demonstrate land/coastal component coverage."
+    },
+    {
+      "id": "arcgis-change",
+      "url": "https://tiles.arcgis.com/tiles/B4MnusZHL3vmqU3t/arcgis/rest/services/MakChange00to19_coord/MapServer",
+      "role": "ArcGIS MakChange00to19_coord MapServer service metadata; public item 707bd27667a24eb98c6021b9f7ab2a4b",
+      "vintage": "change interval label 2000–2019; service processing/source dates not fully established",
+      "license": {
+        "status": "unknown",
+        "terms": "Service-specific derivative and export terms were not verified; no raster was accessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "retrieved_at": "2026-10-08",
+      "restoration": "Inspect service metadata and original classification source only if a later task needs this historical thematic context.",
+      "limit": "Classified vegetation-change service is not raw imagery; map zoom scale does not establish ground sampling distance or exact member coverage. Service metadata contains no licenseInfo.",
+      "item_id": "707bd27667a24eb98c6021b9f7ab2a4b",
+      "item_url": "https://www.arcgis.com/home/item.html?id=707bd27667a24eb98c6021b9f7ab2a4b"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/README.md",
+      "bytes": 4160,
+      "sha256": "22c10c886445a469c5ed965a9136ea35f87fcd06a9733ddc2886468c52c13469",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/assessment.json",
+      "bytes": 3979,
+      "sha256": "eaef6d9420533c13bebf0a0bf1775a2fbc08b0c45541fbbc680cf9ae956eefc6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/source-register.json",
+      "bytes": 156369,
+      "sha256": "6e868dde2264dce83070e31ac1eae93cea943510cd23b131ab5bc1bf10541bac",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "custodied_pointset_and_catalogue_metadata_review",
+      "description": "Matched all 15 exact subject IDs exactly once to pinned original components-v3 GeoJSON FeatureCollections using the custody index; checked source payload raw and uncompressed bytes and compared each original pointset bbox with the issue locator. Reviewed published provider/resource and official STAC metadata. No candidate item footprint overlay or raster pixel review was performed.",
+      "software": "manual metadata review; Node.js 24.19.0; scripts/evidence-quality.mjs read-only baseline byte verifier",
+      "units": "WGS84 lon/lat coordinate extents as extracted from original GeoJSON pointsets; approximate bbox spans in metres retained from the source scope as planning cues",
+      "kind": "source"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "No reviewed source meets the evidence needed to qualify for any of the 15 Makira components; Sentinel records remain screening candidates only and all exact coverage, asset lineage, rights and component-level fitness are unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "sprep",
+        "cdse-stac",
+        "sentinel-product-spec",
+        "oam",
+        "spc-srtm",
+        "mofr-lcm",
+        "ga-screen",
+        "arcgis-change"
+      ]
+    },
+    {
+      "text": "The shared Makira ADM1 contact is contextual administrative association only; its effective date and authority are unapproved.",
+      "status": "unresolved",
+      "source_ids": [
+        "sprep"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "Original component custody index and all ten containing GeoJSON shards were pinned and raw/decoded byte checked against their custody declarations.",
+    "No raster pixels were requested, downloaded or inspected.",
+    "No imagery footprint overlay, valid-pixel analysis or GIS processing was performed.",
+    "Evidence bytes and exact subject-to-containing-file bindings were verified by scripts/evidence-quality.mjs."
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/makira-gap-source-fitness-20261008/source-register.json",
+      "status": "added"
+    }
+  ]
+}
