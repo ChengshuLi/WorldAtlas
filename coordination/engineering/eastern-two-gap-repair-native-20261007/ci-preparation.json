@@ -2,7 +2,7 @@
   "version": 1,
   "issue": 1295,
   "pre_ci_head": "5dc616f5a2579308a361f1eff340d5fca0f350e2",
-  "normal_full_build_status": "first-hosted-attempt-failed-exact-gzip-body-check; corrected-byte-only-restoration-pending-next-existing-CI",
+  "normal_full_build_status": "second-hosted-attempt-failed-current-main-library-pin; complete31pin-refresh-pending-next-existing-CI",
   "source_image_head": "8a5a5ae365698990c3ec7bd5766e808f5abec19f",
   "source_image_proof_sha256": "8a8a6cca50890efbdc725c4a01cb35c0af692c491b0c0b3ab6b5592af5bcb0e7",
   "source_files": 7242,
@@ -33,5 +33,7 @@
     "node": "24.21.0",
     "python": "3.12.15",
     "status": "Exact encoded original body mismatch before original-v1 replay; correct strict rejection, no full build qualification."
-  }
+  },
+  "actual_second_merge_checkout": "ae5fd5b7de2ebe111ebe677046478a93ed61a3f4",
+  "actual_current_main_library_origin": "6d15b0e12de2e65c84ceab334ebc3e78aa0b46cb"
 }
