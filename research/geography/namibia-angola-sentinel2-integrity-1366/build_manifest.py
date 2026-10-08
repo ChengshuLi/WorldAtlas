@@ -63,9 +63,9 @@ def main():
         change.append({'path':rel,'status':'added'})
     change.append({'path':'research/geography/namibia-angola-sentinel2-integrity-1366/evidence-quality.json','status':'added'})
     selected=json.loads(blob(F513,OLD+'inputs/selected-sentinel2-items.json'))
-    result_paths=[f"research/geography/namibia-angola-sentinel2-integrity-1366/vintages/{v}/reconciliation.json" for v in ('reconciliation-20261008-213835465861','reconciliation-20261008-213841974785')]
-    report=json.loads((BASE/'vintages/reconciliation-20261008-213841974785/reconciliation.json').read_bytes())
-    metric_specs=[('component_count',21,'features',result_paths[1]),('source_contact_count',10,'source features',result_paths[1]),('scene_count',16,'scene items',result_paths[1]),('reconciled_observation_rows',496,'rows',result_paths[1]),('independently_checked_pixel_centers',1751344,'pixel centers',result_paths[1]),('issue_pins_verified',39,'whole-file SHA-256 pins',result_paths[1]),('membership_mismatches',0,'bit mismatches',result_paths[1]),('retained_measurement_mismatches',0,'row-field mismatches',result_paths[1])]
+    result_paths=[f"research/geography/namibia-angola-sentinel2-integrity-1366/vintages/{v}/reconciliation.json" for v in ('reconciliation-20261008-214856311814','reconciliation-20261008-214905424941')]
+    report=json.loads((BASE/'vintages/reconciliation-20261008-214905424941/reconciliation.json').read_bytes())
+    metric_specs=[('component_count',21,'features',result_paths[1]),('source_contact_count',10,'source features',result_paths[1]),('scene_count',16,'scene items',result_paths[1]),('reconciled_observation_rows',496,'rows',result_paths[1]),('independently_checked_pixel_centers',1751344,'pixel centers',result_paths[1]),('issue_pins_verified',39,'whole-file SHA-256 pins',result_paths[1]),('membership_mismatches',0,'bit mismatches',result_paths[1]),('retained_measurement_mismatches',0,'row-field mismatches',result_paths[1]),('aggregate_summaries_reconciled',31,'component and contact summaries',result_paths[1]),('aggregate_summary_mismatches',0,'summary mismatches',result_paths[1])]
     metrics=[]; bindings=[]
     for mid,value,unit,path in metric_specs:
         raw=(BASE/path.split('namibia-angola-sentinel2-integrity-1366/',1)[-1]).read_bytes()
@@ -73,7 +73,7 @@ def main():
         if path.startswith('research/geography/namibia-angola-sentinel2-integrity-1366/'):
             m['input_file']={'path':path,'commit':'candidate'}
         metrics.append(m)
-        pointer={'component_count':'/component_count','source_contact_count':'/contact_count','scene_count':'/selected_scene_count','reconciled_observation_rows':'/reconciled_observation_rows','independently_checked_pixel_centers':'/independent_geometry_membership/pixel_centers','issue_pins_verified':'/issue_pin_count','membership_mismatches':'/independent_geometry_membership/component_bit_mismatches','retained_measurement_mismatches':'/independent_measurements_match_retained_report/mismatches'}[mid]
+        pointer={'component_count':'/component_count','source_contact_count':'/contact_count','scene_count':'/selected_scene_count','reconciled_observation_rows':'/reconciled_observation_rows','independently_checked_pixel_centers':'/independent_geometry_membership/pixel_centers','issue_pins_verified':'/issue_pin_count','membership_mismatches':'/independent_geometry_membership/component_bit_mismatches','retained_measurement_mismatches':'/independent_measurements_match_retained_report/mismatches','aggregate_summaries_reconciled':'/aggregate_summaries_match_retained_report/total_summaries','aggregate_summary_mismatches':'/aggregate_summaries_match_retained_report/mismatches'}[mid]
         bindings.append({'metric_id':mid,'path':path,'json_pointer':pointer})
     subject_ids=old['subject_ids']; subj_sha=old['subject_ids_sha256']
     pins_map=dict(pins)

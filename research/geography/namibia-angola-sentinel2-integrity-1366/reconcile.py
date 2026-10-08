@@ -22,7 +22,7 @@ GEOM = "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
 MAX_FILE = 32 * 1024 * 1024
 MAX_TOTAL = 256 * 1024 * 1024
 EXPECTED_KEYS = {"col", "component_bits", "contact_bits", "green_dn_10m_2x2", "nir_dn_10m_2x2", "row", "scl_20m", "swir16_dn_20m"}
-SELF_PIN = '1ef4c38023d14ab6434ae02e6a4277fe497c34f2d5bacd8dceb999cc254a012f'
+SELF_PIN = 'd2de7d6e68258caf9714ba9ec5a9f001d4e3132bad6b373df5f66791b4ac9858'
 
 def blob(commit: str, path: str) -> bytes:
     return subprocess.run(["git", "show", f"{commit}:{path}"], cwd=REPO, check=True, stdout=subprocess.PIPE).stdout
@@ -124,6 +124,35 @@ def metrics(mask, a):
     hist={names[i]:int(np.count_nonzero(scl==i)) for i in range(12)}
     thresholds=(-0.1,0.0,0.1)
     return {'mask_center_pixels':n,'green_10m_subpixel_nodata_centers':int(np.count_nonzero(np.any(g==0,axis=1))),'nir_10m_subpixel_nodata_centers':int(np.count_nonzero(np.any(nr==0,axis=1))),'swir16_20m_nodata_centers':int(np.count_nonzero(sw==0)),'scl_20m_nodata_centers':int(np.count_nonzero(scl==0)),'all_band_valid_centers':int(np.count_nonzero(band)),'usable_index_pixels':int(np.count_nonzero(mv&nv)),'cloud_shadow_or_unclassified_centers':int(np.count_nonzero(np.isin(scl,[3,7,8,9,10]))),'saturated_or_defective_centers':int(np.count_nonzero(scl==1)),'dark_area_centers':int(np.count_nonzero(scl==2)),'snow_or_ice_centers':int(np.count_nonzero(scl==11)),'clear_fraction':round(float(np.count_nonzero(mv&nv)/n),8),'scl_histogram':hist,'scl_water_centers':int(np.count_nonzero(scl==6)),'mndwi_counts':{str(t):int(np.count_nonzero(mv&(m>=t))) for t in thresholds},'ndwi_counts':{str(t):int(np.count_nonzero(nv&(d>=t))) for t in thresholds},'mndwi_scl6_concordant':int(np.count_nonzero(mv&(scl==6)&(m>0))),'mndwi_median':round(float(np.median(m[mv])),8) if np.any(mv) else None,'ndwi_median':round(float(np.median(d[nv])),8) if np.any(nv) else None}
+
+def aggregate_summaries(rows,kind,subjects):
+    # Independently aggregate the admitted row ledger, then compare every field
+    # with the 21 component and 10 contact summaries in the retained report.
+    out=[]; windows=('2019-wet','2019-dry','2020-wet','2020-dry'); thresholds=('-0.1','0.0','0.1')
+    for subject in subjects:
+        selected=[r for r in rows if r['mask_kind']==kind and r['subject_id']==subject]
+        bywindow={}
+        for window in windows:
+            rs=[r for r in selected if r['window']==window]
+            bywindow[window]={'tile_observation_rows':len(rs),'center_pixels_across_tiles_nonadditive':sum(r['mask_center_pixels'] for r in rs),
+              'clear_index_pixels_across_tiles_nonadditive':sum(r['usable_index_pixels'] for r in rs),
+              'scl_water_centers_across_tiles_nonadditive':sum(r['scl_water_centers'] for r in rs),
+              'concordant_scl6_and_positive_mndwi_centers_across_tiles_nonadditive':sum(r['mndwi_scl6_concordant'] for r in rs),
+              'mndwi_nonnegative_centers_across_tiles_nonadditive':sum(r['mndwi_counts']['0.0'] for r in rs),
+              'mndwi_threshold_sensitivity_nonadditive':{t:sum(r['mndwi_counts'][t] for r in rs) for t in thresholds}}
+        scl=sum(r['scl_water_centers'] for r in selected); mndwi=sum(r['mndwi_counts']['0.0'] for r in selected)
+        concordant=sum(r['mndwi_scl6_concordant'] for r in selected)
+        if not sum(r['mask_center_pixels'] for r in selected): disposition='no-20m-pixel-center-samples; physical status unresolved at this resolution'
+        elif scl and mndwi and concordant: disposition='Concordant SCL water-class and positive-MNDWI pixels occur; see per-window counts and valid fractions; observational water-like signal only'
+        elif scl and mndwi: disposition='SCL water-class and nonnegative-MNDWI signals occur, but no positive-MNDWI SCL6 pixel is concordant; mixed optical evidence'
+        elif scl: disposition='SCL water-class signal occurs but MNDWI is not concordant across all sampled windows; mixed optical evidence'
+        elif mndwi: disposition='MNDWI water-like signal occurs without SCL water-class centers; ambiguous spectral response'
+        else: disposition='No SCL water-class or nonnegative MNDWI sample detected in these dates; this does not prove dry land or non-water status'
+        out.append({'subject_id':subject,'total_mask_centers_across_tiles_and_dates_nonadditive':sum(r['mask_center_pixels'] for r in selected),
+          'clear_index_centers_across_tiles_and_dates_nonadditive':sum(r['usable_index_pixels'] for r in selected),
+          'scl_water_centers_across_tiles_and_dates_nonadditive':scl,'mndwi_nonnegative_centers_across_tiles_and_dates_nonadditive':mndwi,
+          'concordant_scl6_and_positive_mndwi_centers_across_tiles_and_dates_nonadditive':concordant,'disposition':disposition,'seasonal_windows':bywindow})
+    return out
 
 def main():
     code_sha256=verify_self()
@@ -259,8 +288,12 @@ def main():
         old=oldrows[(r['mask_kind'],r['subject_id'],r['item_id'])]
         diffs=[k for k in checked_fields if r.get(k)!=old.get(k)]
         if diffs: raise ValueError('retained measurement differs from independent recomputation: '+r['item_id']+'/'+r['subject_id']+': '+','.join(diffs))
+    candidate_summary=aggregate_summaries(rows,'component',comp_ids)
+    contact_summary=aggregate_summaries(rows,'candidate-contact-overlap_union',contact_ids)
+    if candidate_summary!=oldrun['candidate_summaries'] or contact_summary!=oldrun['contact_overlap_summaries']:
+        raise ValueError('independent aggregate summaries differ from retained 21-component/10-contact summaries')
     attempts=read_candidate('attempts.json'); baseline.admit('candidate:attempts.json',len(attempts))
-    report={'version':1,'evidence_vintage':'2026-10-08; source files retrieved in their pinned historical vintages','issue_contract_snapshot':issue_contract_desc,'issue_pin_count':len(verified_issue_pins),'issue_whole_file_pins_verified':verified_issue_pins,'authenticated_commits':{'original_geometry':GEOM,'retained_packet':PACKET},'authenticated_files':[{'path':p,'commit':source_commits[p],'bytes':len(raw),'sha256':digest(raw)} for p,raw in sorted(source.items())],'executed_code_files':{name:{'bytes':len(raw),'sha256':digest(raw)} for name,raw in sorted(local_scripts.items())},'reconcile_executable_sha256':code_sha256,'reconcile_embedded_normalized_sha256':SELF_PIN,'attempts_sha256':digest(attempts),'negative_control_receipts':{'input_controls_path':str(input_control_path.relative_to(BASE)),'input_controls_sha256':digest(input_control_raw),'writer_controls_path':str(writer_control_path.relative_to(BASE)),'writer_controls_sha256':digest(writer_control_raw)},'authenticated_file_count':len(source),'authenticated_raw_bytes':sum(map(len,source.values())),'source_window_raw_bytes':bytes_total,'discovery_pages_checked':len(discovery_pages),'selected_scenes_exactly_reconciled_to_discovery_pages':len(ids),'native_scene_grids_reconciled':len(ids),'selected_scene_count':len(ids),'component_count':len(comp),'contact_count':len(contacts),'reconciled_observation_rows':len(rows),'exact_unique_identity_matrix':True,'independent_geometry_membership':{'pixel_centers':membership_checked,'component_bit_mismatches':0,'contact_bit_mismatches':0,'crs_handling':'WGS84 source geometry transformed to native UTM with pyproj always_xy=True; Shapely contains_xy at affine pixel centers'},'independent_measurements_match_retained_report':{'fields_per_row':checked_fields,'rows':len(rows),'mismatches':0},'sensing_time_reconciliation':{'per_scene_deltas_seconds':{r['item_id']:r['sensing_time_delta_seconds'] for r in rows if r['mask_kind']=='component' and r['subject_id']==comp_ids[0]},'over_one_second_count':sum(abs(x)>1 for x in delta_rows),'cause':'unresolved; both catalog and native values retained'},'scene_observations':rows}
+    report={'version':1,'evidence_vintage':'2026-10-08; source files retrieved in their pinned historical vintages','issue_contract_snapshot':issue_contract_desc,'issue_pin_count':len(verified_issue_pins),'issue_whole_file_pins_verified':verified_issue_pins,'authenticated_commits':{'original_geometry':GEOM,'retained_packet':PACKET},'authenticated_files':[{'path':p,'commit':source_commits[p],'bytes':len(raw),'sha256':digest(raw)} for p,raw in sorted(source.items())],'executed_code_files':{name:{'bytes':len(raw),'sha256':digest(raw)} for name,raw in sorted(local_scripts.items())},'reconcile_executable_sha256':code_sha256,'reconcile_embedded_normalized_sha256':SELF_PIN,'attempts_sha256':digest(attempts),'negative_control_receipts':{'input_controls_path':str(input_control_path.relative_to(BASE)),'input_controls_sha256':digest(input_control_raw),'writer_controls_path':str(writer_control_path.relative_to(BASE)),'writer_controls_sha256':digest(writer_control_raw)},'authenticated_file_count':len(source),'authenticated_raw_bytes':sum(map(len,source.values())),'source_window_raw_bytes':bytes_total,'discovery_pages_checked':len(discovery_pages),'selected_scenes_exactly_reconciled_to_discovery_pages':len(ids),'native_scene_grids_reconciled':len(ids),'selected_scene_count':len(ids),'component_count':len(comp),'contact_count':len(contacts),'reconciled_observation_rows':len(rows),'exact_unique_identity_matrix':True,'independent_geometry_membership':{'pixel_centers':membership_checked,'component_bit_mismatches':0,'contact_bit_mismatches':0,'crs_handling':'WGS84 source geometry transformed to native UTM with pyproj always_xy=True; Shapely contains_xy at affine pixel centers'},'independent_measurements_match_retained_report':{'fields_per_row':checked_fields,'rows':len(rows),'mismatches':0},'aggregate_summaries_match_retained_report':{'candidate_summaries':len(candidate_summary),'contact_overlap_summaries':len(contact_summary),'total_summaries':len(candidate_summary)+len(contact_summary),'mismatches':0},'candidate_summaries':candidate_summary,'contact_overlap_summaries':contact_summary,'sensing_time_reconciliation':{'per_scene_deltas_seconds':{r['item_id']:r['sensing_time_delta_seconds'] for r in rows if r['mask_kind']=='component' and r['subject_id']==comp_ids[0]},'over_one_second_count':sum(abs(x)>1 for x in delta_rows),'cause':'unresolved; both catalog and native values retained'},'scene_observations':rows}
     report['negative_control_receipts']['legacy_entrypoints_path']=str(legacy_control_path.relative_to(BASE))
     report['negative_control_receipts']['legacy_entrypoints_sha256']=digest(legacy_control_raw)
     out=json.dumps(report,sort_keys=True,indent=2).encode()+b'\n'
