@@ -65,7 +65,14 @@ for index, part in enumerate(old_parts):
         part_failures.append({"index": index, "part": describe(part),
             "part_relation_to_union": part.relate(unionary),
             "union_covers_part": bool(unionary.covers(part)),
-            "part_difference_union": describe(part_difference)})
+            "part_difference_union": describe(part_difference),
+            "part_relation_to_candidate": part.relate(candidate),
+            "candidate_relation_to_part": candidate.relate(part),
+            "part_intersection_candidate": describe(part.intersection(candidate)),
+            "part_difference_candidate": describe(part.difference(candidate)),
+            "part_union_candidate": describe(part.union(candidate)),
+            "part_union_candidate_covers_part": bool(part.union(candidate).covers(part)),
+            "part_union_candidate_relation_to_part": part.relate(part.union(candidate))})
 variants = {"unary_union_old_then_candidate": unionary,
             "old_union_candidate": union_method,
             "candidate_union_old": candidate.union(old)}

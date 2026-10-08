@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "pid": 46630,
+  "process_group": 46630,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "research/geography/alaska-thirteen-geometry-measurement-20261008/reproduce_union_control.py"
+  ],
+  "exit_code": 0,
+  "natural_terminal": true,
+  "owned_processes_absent_after_run": true,
+  "stop_reason": null,
+  "elapsed_seconds": 0.231,
+  "peak_sampled_group_rss_bytes": 15204352,
+  "final_sampled_group_rss_bytes": 15056896,
+  "rss_cap_bytes": 805306368,
+  "wall_deadline_seconds": 900,
+  "monitoring": "sampled/cooperative, not kernel-enforced",
+  "stdout": "{\"candidate\":{\"area\":1.9330363260441035e-06,\"bounds\":[-165.62613654146398,54.295815960736945,-165.62002881617434,54.296617],\"geometry_type\":\"Polygon\",\"is_empty\":false,\"is_valid\":true,\"length\":0.01244924776210695,\"wkb_sha256\":\"1a41abb41f9f46bdfa837a6bfdd625ae913f05d630892f3acd1aea46ebb584b9\"},\"component_id\":\"physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488\",\"old_boundary_difference_unary_union\":{\"area\":0.0,\"bounds\":null,\"geometry_type\":\"LineString\",\"is_empty\":true,\"is_valid\":true,\"length\":0.0,\"wkb_sha256\":\"76be601065f3569392b6737387eb10ae72031aaec89efa40513025627f1f9a42\"},\"old_target\":{\"area\":2.7152274193929977,\"bounds\":[-166.1971,53.9553,-158.8936,56.8512],\"geometry_type\":\"MultiPolygon\",\"is_empty\":false,\"is_valid\":true,\"length\":37.661530846877774,\"wkb_sha256\":\"e168513a1dc2c50c0f264bf1a1a7005f21bd19cb221e2f2b58ffd423b32f73a2\"},\"old_target_difference_unary_union\":{\"area\":0.0,\"bounds\":null,\"geometry_type\":\"Polygon\",\"is_empty\":true,\"is_valid\":true,\"length\":0.0,\"wkb_sha256\":\"e60dcba9c652b544bf3cedaec7717c107cced114bab8dddb58e6d5a0bae36572\"},\"old_target_relation_to_unary_union\":\"212111212\",\"predicates\":{\"boundary_difference_union_empty\":true,\"old_covers_unary_union\":false,\"old_difference_union_empty\":true,\"old_union_candidate_covers_old\":false,\"old_union_candidate_relation_to_old\":\"212111212\",\"unary_union_covers_old\":false,\"unary_union_equals_old_union_candidate\":true},\"runtime\":{\"geos\":\"3.13.1\",\"shapely\":\"2.1.2\"},\"source_pins\":[{\"bytes\":18192,\"path\":\"research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-components.geojson\",\"role\":\"exact-13-candidate-geometries\",\"sha256\":\"b24011f1acef059783ea61d96308f3b43ef0aabdbaf19f1fb7694b613a470b14\"},{\"bytes\":366513,\"path\":\"research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson\",\"role\":\"seven-atlas-target-geometries\",\"sha256\":\"0cfe5197d17fdd88fa4a13bbd1ac120a7cf195cc6ee7bf3b49dbd0303b86e326\"}],\"status\":\"diagnostic-only-no-qualification\",\"target_source_id\":\"gb:USA:ADM2:52423323B46246640861022\",\"unary_union\":{\"area\":2.7152293524293283,\"bounds\":[-166.1971,53.9553,-158.8936,56.8512],\"geometry_type\":\"MultiPolygon\",\"is_empty\":false,\"is_valid\":true,\"length\":37.661692326379935,\"wkb_sha256\":\"5ae0adae42bd160eab4d7630a1454277b68303c9539b50a97fd8c35a0568fa8b\"},\"union_relation_to_old_target\":\"212111212\",\"union_variants\":{\"candidate_union_old\":{\"area\":2.7152293524293243,\"bounds\":[-166.1971,53.9553,-158.8936,56.8512],\"geometry_type\":\"MultiPolygon\",\"is_empty\":false,\"is_valid\":true,\"length\":37.66169232637993,\"wkb_sha256\":\"47a8fbd98ee7c0155c3e7aa1afbf26e5eaa3357549b735fed63f2b5cbca324cc\"},\"old_union_candidate\":{\"area\":2.7152293524293243,\"bounds\":[-166.1971,53.9553,-158.8936,56.8512],\"geometry_type\":\"MultiPolygon\",\"is_empty\":false,\"is_valid\":true,\"length\":37.66169232637993,\"wkb_sha256\":\"f258cf3d028902101f356a99ae81340c3eead9acd3477244b74b80bf65f04a2b\"},\"unary_union_old_then_candidate\":{\"area\":2.7152293524293283,\"bounds\":[-166.1971,53.9553,-158.8936,56.8512],\"geometry_type\":\"MultiPolygon\",\"is_empty\":false,\"is_valid\":true,\"length\":37.661692326379935,\"wkb_sha256\":\"5ae0adae42bd160eab4d7630a1454277b68303c9539b50a97fd8c35a0568fa8b\"}}}\n",
+  "stderr": ""
+}

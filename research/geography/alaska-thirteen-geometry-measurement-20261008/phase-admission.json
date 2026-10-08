@@ -3,13 +3,13 @@
   "status": "PASS",
   "scientific_operations_invoked": false,
   "cap_bytes": 268435456,
-  "complete_phase_bytes": 261742676,
-  "headroom_bytes": 6692780,
+  "complete_phase_bytes": 261742399,
+  "headroom_bytes": 6693057,
   "component_totals": {
     "encoded_source_bodies": 88964941,
     "decoded_native_source_bodies": 101279150,
     "imported_runtime_files_and_python_executable": 39345622,
-    "project_code_files": 152963,
+    "project_code_files": 152686,
     "selected_native_records_output": 0,
     "scratch_reservation": 8000000,
     "generated_output_reservation": 24000000
@@ -2319,8 +2319,8 @@
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
       "role": "project-code",
-      "bytes": 70340,
-      "sha256": "d638d288bb6e44103a12c845614175f908aee78bdcc288a5fef1e078325dd8c0"
+      "bytes": 69521,
+      "sha256": "7f3c4c80307c399c7e7b650cbc912bf47f9e3f8cdf6a36d4941ff8a4aed12ea6"
     },
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
@@ -2343,8 +2343,8 @@
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/reproduce_union_control.py",
       "role": "project-code",
-      "bytes": 5171,
-      "sha256": "170f61aa748eda222af4dd01dc4ccf389f7d7229b3a7cfa8abe79825cca86003"
+      "bytes": 5713,
+      "sha256": "9f48235e1149d6f3504d4ea81f8d41912e7d25a96b9880a3bd57787d51f75660"
     },
     {
       "path": "scripts/evidence/immutable.py",
@@ -2359,15 +2359,15 @@
   },
   "process_boundary": {
     "process_scan": "no active GSHHG, Alaska, Arctic, source-fit or named geometry process observed before admission",
-    "memory_pressure_free_percent": 30,
+    "memory_pressure_free_percent": 45,
     "rss_cap_bytes": 805306368,
     "wall_deadline_seconds": 900,
     "enforcement": "sampled/cooperative; record actual terminal state and peak RSS",
-    "host_free_disk_bytes": 27592761344,
-    "managed_workspace_free_bytes": 27589406720,
+    "host_free_disk_bytes": 27876130816,
+    "managed_workspace_free_bytes": 27875127296,
     "managed_workspace_minimum_free_bytes": 10737418240,
     "managed_workspace_floor_passed": true,
-    "managed_checkout_bytes": 42995513754,
+    "managed_checkout_bytes": 42605518848,
     "managed_worker": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
     "managed_reservation_bytes": 1073741824,
     "relevant_processes": []

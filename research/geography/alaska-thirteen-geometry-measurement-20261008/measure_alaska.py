@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import itertools
 import json
 import math
 import pathlib
@@ -724,62 +725,64 @@ def main() -> None:
     selected_union = None
     selected_gain = None
     selected_target_id = None
-    for target_id, candidate_ids in batch_groups.items():
-        if len(candidate_ids) < 2:
+    for target_id, eligible_ids in batch_groups.items():
+        if len(eligible_ids) < 2:
             continue
-        candidate_ids = candidate_ids[:3]
         old_target = atlas_geoms[target_id]
-        proposed_target = unary_union([old_target] + [case_geometry_by_id[cid]["candidate"] for cid in candidate_ids])
-        expected_gain = unary_union([case_geometry_by_id[cid]["candidate"].difference(old_target) for cid in candidate_ids])
-        actual_gain = proposed_target.difference(old_target)
-        union_equals_expected_gain = bool(actual_gain.is_valid and expected_gain.is_valid and actual_gain.equals(expected_gain)
-                                          and actual_gain.symmetric_difference(expected_gain).is_empty)
-        target_preserved = bool(proposed_target.is_valid and proposed_target.covers(old_target)
-                                and old_target.difference(proposed_target).is_empty)
-        candidates_retained = {cid: bool(proposed_target.covers(case_geometry_by_id[cid]["candidate"])) for cid in candidate_ids}
-        neighbor_rows = []
-        new_neighbor_overlaps = []
-        for neighbor_source_id in EXPECTED_NEIGHBORS:
-            if neighbor_source_id == "gb:USA:ADM2:" + target_id:
-                continue
-            neighbor = neighbor_geoms[neighbor_source_id]
-            baseline_overlap = old_target.intersection(neighbor)
-            proposed_overlap = proposed_target.intersection(neighbor)
-            added_overlap = actual_gain.intersection(neighbor)
-            baseline_projected = transform(PROJECT, baseline_overlap)
-            proposed_projected = transform(PROJECT, proposed_overlap)
-            added_projected = transform(PROJECT, added_overlap)
-            positive_added = introduces_positive_area_gain_overlap(actual_gain, neighbor)
-            row = {"neighbor_source_id": neighbor_source_id,
-                "baseline_relation": relation_kind(baseline_overlap),
-                "proposed_relation": relation_kind(proposed_overlap),
-                "baseline_intersection_area_raw_square_degrees": baseline_overlap.area,
-                "baseline_intersection_area_projected_m2": baseline_projected.area,
-                "proposed_intersection_area_raw_square_degrees": proposed_overlap.area,
-                "proposed_intersection_area_projected_m2": proposed_projected.area,
-                "added_gain_intersection_area_raw_square_degrees": added_overlap.area,
-                "added_gain_intersection_area_projected_m2": added_projected.area,
-                "new_positive_area_overlap": positive_added}
-            neighbor_rows.append(row)
-            if positive_added:
-                new_neighbor_overlaps.append(neighbor_source_id)
-        batch_passed = bool(target_preserved and union_equals_expected_gain and actual_gain.area > 0
-            and all(candidates_retained.values()) and not new_neighbor_overlaps)
-        trial = {"target_source_id": target_id, "candidate_ids": candidate_ids,
-            "old_target_geometry_sha256": sha(canonical(mapping(old_target))),
-            "proposed_target_geometry_sha256": sha(canonical(mapping(proposed_target))),
-            "added_gain_geometry_sha256": sha(canonical(mapping(actual_gain))),
-            "target_preserved_without_loss": target_preserved,
-            "union_gain_equals_candidate_minus_old_target_union": union_equals_expected_gain,
-            "added_gain_area_raw_square_degrees": actual_gain.area,
-            "added_gain_area_projected_m2_epsg_3338": transform(PROJECT, actual_gain).area,
-            "every_candidate_retained": candidates_retained,
-            "neighbor_checks": neighbor_rows,
-            "new_positive_area_overlap_neighbor_ids": new_neighbor_overlaps,
-            "collective_union_pass": batch_passed}
-        batch_trials.append(trial)
-        if batch_passed and selected_batch is None:
-            selected_batch, selected_union, selected_gain, selected_target_id = candidate_ids, proposed_target, actual_gain, target_id
+        for batch_size in (2, 3):
+            for candidate_subset in itertools.combinations(eligible_ids, batch_size):
+                candidate_ids = list(candidate_subset)
+                proposed_target = unary_union([old_target] + [case_geometry_by_id[cid]["candidate"] for cid in candidate_ids])
+                expected_gain = unary_union([case_geometry_by_id[cid]["candidate"].difference(old_target) for cid in candidate_ids])
+                actual_gain = proposed_target.difference(old_target)
+                union_equals_expected_gain = bool(actual_gain.is_valid and expected_gain.is_valid and actual_gain.equals(expected_gain)
+                                                  and actual_gain.symmetric_difference(expected_gain).is_empty)
+                target_preserved = bool(proposed_target.is_valid and proposed_target.covers(old_target)
+                                        and old_target.difference(proposed_target).is_empty)
+                candidates_retained = {cid: bool(proposed_target.covers(case_geometry_by_id[cid]["candidate"])) for cid in candidate_ids}
+                neighbor_rows = []
+                new_neighbor_overlaps = []
+                for neighbor_source_id in EXPECTED_NEIGHBORS:
+                    if neighbor_source_id == "gb:USA:ADM2:" + target_id:
+                        continue
+                    neighbor = neighbor_geoms[neighbor_source_id]
+                    baseline_overlap = old_target.intersection(neighbor)
+                    proposed_overlap = proposed_target.intersection(neighbor)
+                    added_overlap = actual_gain.intersection(neighbor)
+                    baseline_projected = transform(PROJECT, baseline_overlap)
+                    proposed_projected = transform(PROJECT, proposed_overlap)
+                    added_projected = transform(PROJECT, added_overlap)
+                    positive_added = introduces_positive_area_gain_overlap(actual_gain, neighbor)
+                    row = {"neighbor_source_id": neighbor_source_id,
+                        "baseline_relation": relation_kind(baseline_overlap),
+                        "proposed_relation": relation_kind(proposed_overlap),
+                        "baseline_intersection_area_raw_square_degrees": baseline_overlap.area,
+                        "baseline_intersection_area_projected_m2": baseline_projected.area,
+                        "proposed_intersection_area_raw_square_degrees": proposed_overlap.area,
+                        "proposed_intersection_area_projected_m2": proposed_projected.area,
+                        "added_gain_intersection_area_raw_square_degrees": added_overlap.area,
+                        "added_gain_intersection_area_projected_m2": added_projected.area,
+                        "new_positive_area_overlap": positive_added}
+                    neighbor_rows.append(row)
+                    if positive_added:
+                        new_neighbor_overlaps.append(neighbor_source_id)
+                batch_passed = bool(target_preserved and union_equals_expected_gain and actual_gain.area > 0
+                    and all(candidates_retained.values()) and not new_neighbor_overlaps)
+                trial = {"target_source_id": target_id, "candidate_ids": candidate_ids,
+                    "old_target_geometry_sha256": sha(canonical(mapping(old_target))),
+                    "proposed_target_geometry_sha256": sha(canonical(mapping(proposed_target))),
+                    "added_gain_geometry_sha256": sha(canonical(mapping(actual_gain))),
+                    "target_preserved_without_loss": target_preserved,
+                    "union_gain_equals_candidate_minus_old_target_union": union_equals_expected_gain,
+                    "added_gain_area_raw_square_degrees": actual_gain.area,
+                    "added_gain_area_projected_m2_epsg_3338": transform(PROJECT, actual_gain).area,
+                    "every_candidate_retained": candidates_retained,
+                    "neighbor_checks": neighbor_rows,
+                    "new_positive_area_overlap_neighbor_ids": new_neighbor_overlaps,
+                    "collective_union_pass": batch_passed}
+                batch_trials.append(trial)
+                if batch_passed and selected_batch is None:
+                    selected_batch, selected_union, selected_gain, selected_target_id = candidate_ids, proposed_target, actual_gain, target_id
 
     if selected_batch is not None:
         for case_row in cases:
@@ -854,43 +857,25 @@ def main() -> None:
         "valid": bool(invalid_input.is_valid), "validity_reason": is_valid_reason(invalid_input),
         "expected": "invalid geometry remains rejected and un-repaired",
         "passed": (not invalid_input.is_valid and intersections(invalid_input, candidates[first_id])["status"] == "invalid-input")}
-    positive_union_old = atlas_geoms[first_target_id]
-    positive_union_candidate = candidates[first_id]
+    positive_union_old = Polygon([(0, 0), (1, 0), (1, 1), (0, 1), (0, 0)])
+    positive_union_candidate = Polygon([(1, 0), (2, 0), (2, 1), (1, 1), (1, 0)])
     positive_union = unary_union([positive_union_old, positive_union_candidate])
-    positive_union_old_residual = positive_union_old.difference(positive_union)
-    positive_union_old_boundary_residual = positive_union_old.boundary.difference(positive_union)
     positive_union_gain = positive_union.difference(positive_union_old)
     positive_union_expected_gain = positive_union_candidate.difference(positive_union_old)
-    positive_union_control = {"kind": "positive-control-genuine-gap-union",
-        "component_id": first_id, "target_source_id": first_target_id,
-        "expected": "union preserves the complete old target and adds exactly the previously uncovered supported candidate",
-        "old_target_preserved": bool(positive_union.covers(positive_union_old) and positive_union_old_residual.is_empty),
+    union_old_loss = positive_union_old.difference(positive_union)
+    positive_union_control = {"kind": "positive-control-exact-coordinate-union-fixture",
+        "input_class": "fixed fixture only; does not qualify any actual Alaska candidate or batch",
+        "coordinates": {"old_target": mapping(positive_union_old), "candidate": mapping(positive_union_candidate)},
+        "expected": "exact adjacent-square union preserves the complete old target and adds the full candidate",
         "old_target_valid": bool(positive_union_old.is_valid),
         "union_valid": bool(positive_union.is_valid),
-        "old_target_residual": {"geometry_type": positive_union_old_residual.geom_type,
-            "is_empty": bool(positive_union_old_residual.is_empty),
-            "is_valid": bool(positive_union_old_residual.is_valid),
-            "area_raw_square_degrees_exact": positive_union_old_residual.area,
-            "area_projected_m2_exact": (transform(PROJECT, positive_union_old_residual).area
-                if not positive_union_old_residual.is_empty else None),
-            "bounds": (list(positive_union_old_residual.bounds)
-                if not positive_union_old_residual.is_empty else None),
-            "geometry_wkb_sha256": sha(positive_union_old_residual.wkb)},
-        "old_target_covered": bool(positive_union.covers(positive_union_old)),
-        "old_target_union_de9im": positive_union_old.relate(positive_union),
-        "old_target_boundary_residual": {"geometry_type": positive_union_old_boundary_residual.geom_type,
-            "is_empty": bool(positive_union_old_boundary_residual.is_empty),
-            "is_valid": bool(positive_union_old_boundary_residual.is_valid),
-            "length_raw_degrees_exact": positive_union_old_boundary_residual.length,
-            "bounds": (list(positive_union_old_boundary_residual.bounds)
-                if not positive_union_old_boundary_residual.is_empty else None),
-            "geometry_wkb_sha256": sha(positive_union_old_boundary_residual.wkb)},
+        "old_target_preserved": bool(positive_union.covers(positive_union_old) and union_old_loss.is_empty),
         "candidate_retained": bool(positive_union.covers(positive_union_candidate)),
         "gain_equals_candidate_minus_old_target": bool(positive_union_gain.equals(positive_union_expected_gain)
             and positive_union_gain.symmetric_difference(positive_union_expected_gain).is_empty),
         "positive_gain_area_raw_square_degrees_exact": positive_union_gain.area,
         "passed": bool(positive_union.is_valid and positive_union_gain.is_valid
-            and positive_union.covers(positive_union_old) and positive_union_old.difference(positive_union).is_empty
+            and positive_union.covers(positive_union_old) and union_old_loss.is_empty
             and positive_union.covers(positive_union_candidate)
             and positive_union_gain.equals(positive_union_expected_gain)
             and positive_union_gain.area > 0)}
