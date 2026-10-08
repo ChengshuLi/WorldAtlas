@@ -37,13 +37,6 @@
     "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
     "files": [
       {
-        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/scope/subject-registry.geojson",
-        "bytes": 10012,
-        "sha256": "36b6227dd5591164f18991eed4d81f0911f3c5805db73d48a7825d7e37e53534",
-        "hash_kind": "file-bytes",
-        "commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463"
-      },
-      {
         "path": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
         "bytes": 90091,
         "sha256": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
@@ -200,6 +193,15 @@
         "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
         "uncompressed_bytes": 263687,
         "uncompressed_sha256": "deb8d8a6635585b6ad41fc5fe1c6351661cfcd23e8bede05c98709a916397cc8"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "bytes": 1026831,
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "hash_kind": "file-bytes",
+        "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
       }
     ],
     "pins": {
@@ -253,12 +255,22 @@
     },
     "subject_files": {
       "gap-source-batch:74be953b1fb31c15200742da": {
-        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/scope/subject-registry.geojson",
-        "commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463"
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
+        "record_offset": 8377128,
+        "record_bytes": 8380,
+        "record_sha256": "dd8da79354e25b034da7e739534be89c87bc15a2906a6924cf500eb579229610"
       },
       "gap-source-batch:65911e15791d12ebb2ccacf5": {
-        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/scope/subject-registry.geojson",
-        "commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463"
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
+        "record_offset": 2281306,
+        "record_bytes": 6281,
+        "record_sha256": "4b9610e86b7d6517b6c32fdead65bd6c3f73e868ac3413e6a506947071097c1b"
       },
       "physical-component:04431dc98d19b4236a143d2c0bb388fed2e41d4768356cf5a74ae4b9194fd9bf": {
         "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
