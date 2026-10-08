@@ -31,11 +31,16 @@ def pinned(path):
     return {"path": path, "bytes": len(raw), "sha256": sha(raw), "hash_kind": "file-bytes"}
 
 
-def issue_subjects():
+def issue_contract():
     issue = json.loads((ROOT / "issue-1491-current.json").read_text())
     match = re.search(r"<!-- worldatlas-work:v1\s*(\{[\s\S]*?\})\s*-->", issue["body"])
-    contract = json.loads(match.group(1))
-    return sorted(contract["evidence_quality"]["subject_ids"])
+    if not match:
+        raise ValueError("current issue snapshot lacks its reviewed work contract")
+    return json.loads(match.group(1))
+
+
+def issue_subjects():
+    return sorted(issue_contract()["evidence_quality"]["subject_ids"])
 
 
 def candidate_files():
@@ -84,6 +89,24 @@ def main():
         "output-comparison.json", "source-id-comparison.json", "source-id-comparison-receipt.json"))
     files = [pinned(path) for path in sorted(set(baseline_paths))]
     by_path = {row["path"]: row for row in files}
+    issue_pins = issue_contract()["evidence_quality"]["pins"]
+    pins = {
+        "shared_immutable_helper": by_path["scripts/evidence/immutable.py"]["sha256"],
+        "original_assessment_producer": by_path[f"{ORIGINAL}/build_assessment.py"]["sha256"],
+        "original_input_manifest": by_path[f"{ORIGINAL}/input-manifest.json"]["sha256"],
+        "complete_assigned_handoff": by_path[f"{ORIGINAL}/inputs/complete-kazakhstan-russia-handoff.json"]["sha256"],
+    }
+    pin_files = {
+        "shared_immutable_helper": "scripts/evidence/immutable.py",
+        "original_assessment_producer": f"{ORIGINAL}/build_assessment.py",
+        "original_input_manifest": f"{ORIGINAL}/input-manifest.json",
+        "complete_assigned_handoff": f"{ORIGINAL}/inputs/complete-kazakhstan-russia-handoff.json",
+    }
+    for path, digest in issue_pins.items():
+        if path not in by_path or by_path[path]["sha256"] != digest:
+            raise ValueError("original issue pin does not match exact baseline bytes: " + path)
+        pins[path] = digest
+        pin_files[path] = path
     part_paths = [f"{ORIGINAL}/inputs/atlas/part-{n}.json" for n in (12, 20, 21)]
     part_features = {}
     for path in part_paths:
@@ -100,18 +123,8 @@ def main():
     baseline = {
         "commit": BASE,
         "files": files,
-        "pins": {
-            "shared_immutable_helper": by_path[helper_path]["sha256"],
-            "original_assessment_producer": by_path[f"{ORIGINAL}/build_assessment.py"]["sha256"],
-            "original_input_manifest": by_path[f"{ORIGINAL}/input-manifest.json"]["sha256"],
-            "complete_assigned_handoff": by_path[f"{ORIGINAL}/inputs/complete-kazakhstan-russia-handoff.json"]["sha256"],
-        },
-        "pin_files": {
-            "shared_immutable_helper": helper_path,
-            "original_assessment_producer": f"{ORIGINAL}/build_assessment.py",
-            "original_input_manifest": f"{ORIGINAL}/input-manifest.json",
-            "complete_assigned_handoff": f"{ORIGINAL}/inputs/complete-kazakhstan-russia-handoff.json",
-        },
+        "pins": pins,
+        "pin_files": pin_files,
         "subject_files": {identity: part_features[identity] for identity in subjects},
     }
     outputs = []
