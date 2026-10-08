@@ -36,6 +36,22 @@
       "status": "corrected",
       "error": "Unverified data/geography/part-16 membership suggestion",
       "remedy": "All9 actual contacts remain in complete original1bf4 KGZ/TJK products through existing composed shapeID bindings; no family or source scope waived."
+    },
+    {
+      "kind": "additional-representative-suite-with-shell-default-python",
+      "status": "failed",
+      "actual_python": "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/Resources/Python.app/Contents/MacOS/Python",
+      "command": "node --test --test-concurrency=1 test/evidence-prevention.test.mjs test/premerge-evidence.test.mjs",
+      "actual_result": {
+        "tests": 19,
+        "pass": 17,
+        "fail": 2
+      },
+      "errors": [
+        "shared evidence test: spawnSync python3 ETIMEDOUT after30000ms",
+        "scientific helper test: ModuleNotFoundError: No module named shapely"
+      ],
+      "remedy": "Shared admission test rerun with configured bundled Python passes; unrelated scientific helper/GIS experiment excluded from this narrow engineering scope. No failed outcome promoted to pass."
     }
   ]
 }
