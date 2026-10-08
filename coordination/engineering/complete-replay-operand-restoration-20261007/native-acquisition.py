@@ -239,6 +239,107 @@ def acquire(phase, *, member_index_pin, part_pins, original_reader_pin,
     return phase.finish(facts)
 
 
+class NativeRecordLookup:
+    """One original decoded record retained; complete small provenance stays live.
+
+    Initialization checks EVERY selected record and query before the consumer.
+    Later lookup redecodes the same whole record with the literal decoder. Caller
+    scientific caches still own their original per-component lifetimes.
+    """
+    def __init__(self, image, index, selected, by_source, comparison, query_bind, proof):
+        require(selected == closure(set(by_source), index), 'Lazy native parent closure differs')
+        self.image = image
+        self.index = {identity: index[identity] for identity in sorted(selected)}
+        self.comparison, self.decoder = comparison, comparison.decode_record
+        self.decoder_code, self.decoder_defaults = self.decoder.__code__, self.decoder.__defaults__
+        self.by_source, self.query_bind = by_source, query_bind
+        self.query_code, self.query_defaults = query_bind.__code__, query_bind.__defaults__
+        self.metadata, self.aliases, self.alias_bytes = {}, {}, {}
+        self.cached_id, self.cached = None, None
+        self.active = True
+        for identity in self.index:
+            meta, geometry, body_sha = self._decode(identity)
+            self.metadata[identity] = canonical(meta)
+            offset, size, ordinal, _, _ = self.index[identity]
+            alias = {'kind': 'complete-original-native-record-alias',
+                'member_sha256': proof['member_sha256'], 'record_ordinal': ordinal,
+                'byte_offset': offset, 'record_bytes': size, 'record_sha256': body_sha,
+                'pointset_binary64_sha256': meta['decoded_pointset_binary64_sha256'],
+                'decoder_original_commit': '104091cfecd9c83a53f3e6e62f95b0a0c8074351',
+                'decoder': 'literal comparison.decode_record; original GMT longitude conversion'}
+            require(len(canonical({'source_id': identity, 'complete_original_metadata': meta,
+                                   'alias': alias})) <= ROW_BYTES,
+                    'Complete lazy native metadata row exceeds admitted bound')
+            self.aliases[identity], self.alias_bytes[identity] = alias, canonical(alias)
+            del meta, geometry
+
+    def _binding(self):
+        require(self.comparison.decode_record is self.decoder and
+                self.decoder.__code__ is self.decoder_code and
+                self.decoder.__defaults__ == self.decoder_defaults and
+                self.query_bind.__code__ is self.query_code and
+                self.query_bind.__defaults__ == self.query_defaults,
+                'Original lazy decoder/query callable binding differs')
+
+    def _decode(self, identity):
+        require(self.active and identity in self.index, 'Inactive or foreign lazy native record')
+        self._binding()
+        offset, size, ordinal, level, parent = self.index[identity]
+        self.image.seek(offset)
+        body = self.image.read(size)
+        require(len(body) == size, 'Complete lazy native record truncated')
+        body_sha = sha(body)
+        if identity in self.aliases:
+            require(body_sha == self.aliases[identity]['record_sha256'],
+                    'Complete lazy original native body changed')
+        meta, geometry = self.decoder(body[:44], body[44:], ordinal, offset)
+        require(meta['id'] == identity and meta['ordinal'] == ordinal and
+                meta['native_offset'] == offset and meta['native_record_bytes'] == size and
+                meta['record_sha256'] == body_sha and meta['level'] == level and
+                meta['container'] == parent, 'Complete lazy native metadata/source binding differs')
+        for query in self.by_source.get(identity, []):
+            self.query_bind(query['query'], meta)
+        if identity in self.metadata:
+            require(canonical(meta) == self.metadata[identity], 'Complete lazy native metadata changed')
+        return meta, geometry, body_sha
+
+    def __contains__(self, identity):
+        require(self.active, 'Inactive lazy native lookup')
+        return type(identity) is int and identity in self.index
+
+    def __iter__(self):
+        require(self.active, 'Inactive lazy native lookup')
+        return iter(self.index)
+
+    def __len__(self):
+        require(self.active, 'Inactive lazy native lookup')
+        return len(self.index)
+
+    def __getitem__(self, identity):
+        require(type(identity) is int and identity in self, 'Foreign lazy native lookup identity')
+        self._binding()
+        if identity != self.cached_id:
+            # Release the previous record BEFORE allocating the next full decode.
+            self.cached_id, self.cached = None, None
+            meta, geometry, _ = self._decode(identity)
+            self.cached_id, self.cached = identity, (meta, geometry)
+        require(canonical(self.cached[0]) == self.metadata[identity] and
+                canonical(self.aliases[identity]) == self.alias_bytes[identity],
+                'Lazy native metadata/alias mutated')
+        return self.cached
+
+    def close(self):
+        self.cached_id, self.cached = None, None
+        self.image = None
+        self.active = False
+
+    def verify_aliases(self):
+        self._binding()
+        require(set(self.aliases) == set(self.index) and
+                all(canonical(self.aliases[i]) == self.alias_bytes[i] for i in self.index),
+                'Complete lazy native inverse aliases changed')
+
+
 def consume_cohort(phase, *, member_index_pin, part_pins, original_reader_pin,
                    cohort_pins, cohort_publication_pin, cohort_inventory_pin,
                    acquisition, native_reader, comparison, query_bind,
@@ -293,30 +394,18 @@ def consume_cohort(phase, *, member_index_pin, part_pins, original_reader_pin,
         whole_headers = headers(image, comparison.HEADER, member_bytes=MEMBER_BYTES,
                                 expected_headers=HEADERS)
         selected = closure(wanted, whole_headers)
-        records, aliases = {}, {}
-        for identity in sorted(selected):
-            offset, size, ordinal, _, _ = whole_headers[identity]
-            image.seek(offset)
-            body = image.read(size)
-            require(len(body) == size, 'Complete cohort native record truncated')
-            meta, geometry = comparison.decode_record(body[:44], body[44:], ordinal, offset)
-            require(meta['id'] == identity and meta['record_sha256'] == sha(body),
-                    'Actual cohort native identity/body binding differs')
-            for query in by_source.get(identity, []):
-                query_bind(query['query'], meta)
-            records[identity] = (meta, geometry)
-            aliases[identity] = {'kind': 'complete-original-native-record-alias',
-                'member_sha256': proof['member_sha256'], 'record_ordinal': ordinal,
-                'byte_offset': offset, 'record_bytes': size, 'record_sha256': sha(body),
-                'pointset_binary64_sha256': meta['decoded_pointset_binary64_sha256'],
-                'decoder_original_commit': '104091cfecd9c83a53f3e6e62f95b0a0c8074351',
-                'decoder': 'literal comparison.decode_record; original GMT longitude conversion'}
-            del body
+        records = NativeRecordLookup(image, whole_headers, selected, by_source,
+                                     comparison, query_bind, proof)
+        aliases = records.aliases
         native_proof = dict(proof, complete_headers=HEADERS, contributing_ids=sorted(wanted),
                             complete_parent_closure_ids=sorted(selected))
         del whole_headers
-        consumer(phase, operands, records, aliases, native_proof)
-        project_guard()
+        try:
+            consumer(phase, operands, records, aliases, native_proof)
+            records.verify_aliases()
+            project_guard()
+        finally:
+            records.close()
         result = {'operation': 'complete-native-backed-numerical-cohort',
                   'component_ids': sorted(identities), 'ordered_queries': queries,
                   'complete_headers': HEADERS, 'full_native_source_before_consumer': True,
