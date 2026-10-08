@@ -1,0 +1,104 @@
+{
+  "as_of_utc": "2026-10-08T07:09:43Z",
+  "summary": "The official records expose no exact reuse license for either date-footprint source. They provide a generic License restriction only; the ArcGIS service iteminfo licenseInfo is empty. No terms were found that resolve offline research, vector retention, or redistribution of derived observations.",
+  "services": [
+    {
+      "name": "ORT_recent",
+      "product_metadata_id": "F366FCAE-897D-4874-B646-0391037A863C",
+      "service_metadata_id": "5E116F93-97ED-4F0C-AE22-8C0C71A51C54",
+      "arcgis_iteminfo_guid": "C683EFAA-7855-461C-BEF1-04047136EC8A",
+      "service_url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer",
+      "prior_layer_capture": "../lithuania-latvia-source-access-20261008/lt-ort-recent-layers.json",
+      "rights_fields": {
+        "catalog_use_constraint": "Licencija (License) / License; plain text, no linked license document or terms URL found",
+        "rest_licenseInfo": "empty string",
+        "copyright": "The Geoportal copyright page lists ORT10LT raster map copyright as National Land Service under Ministry of Environment; not a reuse license."
+      },
+      "service_description_exact_lt": "Dėl serviso naudojimo kitose informacinėse sistemose kreipkitės el. paštu: pagalba@geoportal.lt",
+      "translation": "For use of the service in other information systems, contact by email.",
+      "scope_note": "This is a service-level instruction. ORT_recent exposes date-footprint polygon layers within the same service; the text does not separately state vector-specific terms."
+    },
+    {
+      "name": "ORT10LT_2024_2026",
+      "service_metadata_id": "242F0DA8-39FE-4367-B648-7CF5D3EB5FDF",
+      "arcgis_iteminfo_guid": "FCF5FCD5-F972-4C08-AFDB-9EA61D1866E9",
+      "service_url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT10LT_2024_2026/MapServer",
+      "prior_layer_capture": "../lithuania-latvia-source-access-20261008/lt-ort-2024-2026-layers.json",
+      "rights_fields": {
+        "catalog_use_constraint": "Licencija (License) / License; plain text, no linked license document or terms URL found",
+        "rest_licenseInfo": "empty string",
+        "copyright": "Iteminfo credits NŽT and SSVA; no reuse license text."
+      },
+      "scope_note": "No service-level request-to-contact sentence for other information systems was established in the reviewed record; do not apply ORT_recent wording to this distinct service."
+    }
+  ],
+  "use_matrix": {
+    "viewing": "ORT_recent iteminfo calls it the public electronic viewing service; public viewing/access is evidenced. This is not an offline reuse grant.",
+    "offline_research": "No product-specific permission or prohibition for offline research appears in the reviewed terms/metadata; unresolved.",
+    "retaining_vector_metadata": "No explicit license clause covers copying or retaining the date-footprint polygon geometries. For ORT_recent, the service says to contact Geoportal for use in other information systems; this does not itself set a retention/reuse license. For ORT10LT_2024_2026 the records remain generic and inconclusive.",
+    "publishing_derived_observations": "No reviewed clause grants derivative publication or states attribution, modification, redistribution, or commercial-use conditions for derived observations; unresolved."
+  },
+  "other_official_sources": {
+    "geoportal_copyright": "https://www.geoportal.lt/geoportal/web/en/copyright lists ORT10LT and names National Land Service under the Ministry of Environment as copyright holder. It is a holder/attribution notice, not a license grant.",
+    "data_gov_lt": {
+      "attempts": [
+        "https://data.gov.lt/api/3/action/package_search?q=ORT_recent&rows=10",
+        "https://data.gov.lt/api/3/action/package_search?q=ORT10LT_2024_2026&rows=10",
+        "https://data.gov.lt/datasets?q=ORT_recent",
+        "https://data.gov.lt/dataset"
+      ],
+      "result": "All returned HTTP 500 with an upstream block page (“The URL you requested has been blocked”). No authoritative data.gov.lt dataset record or license could be retrieved; this is an access limitation, not evidence that no record exists."
+    },
+    "geoportal_service_registry": "NŽT Download/View services pages are public HTML shells embedding the official Metadata Discovery app. The app JS inspected does not itself supply license text. No separate license URL was located in those records."
+  },
+  "rights_conclusion": "Based only on retrieved official primary terms, it is possible to affirm public viewing and a generic License classification, but not offline reuse, retaining vector metadata, or publishing derived observations for either date layer source. Keep those activities unauthorized/unconfirmed until an authoritative product-specific license/terms document is located. Do not borrow a license from another product.",
+  "limitations": [
+    "Prior Geoportal product/service metadata and REST responses are preserved in the existing cache and referenced by path/hash below; their original HTTP response headers were not captured in that prior batch, and no known endpoint was re-requested because this task instructed not to repeat them.",
+    "Current data.gov.lt queries were blocked at the site edge; only the full block responses and headers are available.",
+    "No external contact, sign-in, geometry, imagery, or GIS was used."
+  ],
+  "prior_response_refs": [
+    [
+      "lt-ort-recent-product-metadata.html",
+      "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7BF366FCAE-897D-4874-B646-0391037A863C%7D",
+      71951,
+      "f4fed750890f01774abb59c68d5e90b0753dee85cdf454258a3c10eeaa454be8"
+    ],
+    [
+      "lt-ort-recent-service-metadata.html",
+      "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B5E116F93-97ED-4F0C-AE22-8C0C71A51C54%7D",
+      57456,
+      "b0cf54a5ea0a3027095667b10542652e68ca339c51f01fa83b4f6ee1c3d5eadb"
+    ],
+    [
+      "lt-ort-2024-2026-service-metadata.html",
+      "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B242F0DA8-39FE-4367-B648-7CF5D3EB5FDF%7D",
+      63797,
+      "327baf085d87cb47cd18e86122106faf201af59705e5a80126d0f6bc03d6e8ce"
+    ],
+    [
+      "lt-ort-recent-iteminfo.json",
+      "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer?f=pjson",
+      507,
+      "f2793e493a7132af6b197e1adef8f59b6499f17bc644aee7ae453d4c2bfbcb0b"
+    ],
+    [
+      "lt-ort-2024-2026-iteminfo.json",
+      "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT10LT_2024_2026/MapServer?f=pjson",
+      757,
+      "6f184603b8a28938a47ea7e2ca0793347d5b86c1882acfe717fbec6a72a99513"
+    ],
+    [
+      "lt-ort-recent-public-service.json",
+      "https://www.geoportal.lt/mapproxy/nzt_ort10lt_recent_public/MapServer?f=pjson",
+      4737,
+      "5a4e95862ae44e1fe776d9c8b3204bbadd848313581b5bb4d5aa22cc040a1317"
+    ],
+    [
+      "lt-copyright.html",
+      "https://www.geoportal.lt/geoportal/web/en/copyright",
+      54692,
+      "e3dc0279b4442c78b9666dae0f7b45d45445aca5bb593c40b4366024a5cfac98"
+    ]
+  ]
+}

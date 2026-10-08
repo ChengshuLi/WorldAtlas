@@ -37,6 +37,11 @@
       "id": "cycle6-metadata-review",
       "status": "complete-metadata-only",
       "detail": "Verified GEO5 capture files and archive/SHX catalogues; recorded CC BY 4.0 attribution, EPSG:3059 PRJ, 25 indexed records, DBF date-field conflicts, access failures, 108040732-byte decoded member cap, exact 19-subject scope and fresh preparation resource snapshot. Cycle 6 remains supplementary only; no geometry join."
+    },
+    {
+      "id": "lithuanian-date-rights-review",
+      "status": "complete-metadata-only",
+      "detail": "Reviewed exact official Geoportal product/service metadata and ArcGIS iteminfo for ORT_recent and ORT10LT_2024_2026. Generic License labels and empty licenseInfo do not establish offline reuse, date-footprint vector retention, or derived-observation publication. Public viewing and ORT_recent service-contact instruction recorded separately; no contact made."
     }
   ],
   "limits": [
@@ -48,7 +53,8 @@
     "Cycle 6 cannot fulfill the original cycle-8/physical-observation acceptance.",
     "The 108040732-byte PolygonZ member exceeds the shared 32MiB decoded-member limit; no waiver, extraction, simplification, or omitted-subject workaround is authorized.",
     "Current public REST alternatives returned 403/empty layers; the WMS endpoint failed normal TLS. GEO5 is investigating the original cycle-8 source; GEO3 owns any later GIS window.",
-    "A prior solid-RAR metadata extraction may have transiently materialized the oversized SHP without interpreting or retaining coordinates; this history is disclosed in the source note."
+    "A prior solid-RAR metadata extraction may have transiently materialized the oversized SHP without interpreting or retaining coordinates; this history is disclosed in the source note.",
+    "Lithuanian date-footprint reuse remains unresolved pending authoritative product-specific terms; metadata access is not treated as permission."
   ],
   "next_action": "After a separate root GIS/resource admission and any required licenses, join all 16 components and 3 contacts to exact source footprints/date layers; otherwise preserve unknowns."
 }

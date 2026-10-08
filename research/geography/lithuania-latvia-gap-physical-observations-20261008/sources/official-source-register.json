@@ -149,6 +149,32 @@
         "Cycle 6 is older contextual evidence and cannot satisfy the original cycle-8 or physical-observation acceptance.",
         "No image pixels or candidate geometry coordinates were interpreted or joined."
       ]
+    },
+    {
+      "id": "ltu-date-footprint-rights",
+      "jurisdiction": "Lithuania",
+      "source": "Geoportal product/service rights metadata for ORT_recent and ORT10LT_2024_2026 date-footprint layers",
+      "url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer",
+      "related_service_url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT10LT_2024_2026/MapServer",
+      "product_metadata_id": "F366FCAE-897D-4874-B646-0391037A863C",
+      "service_metadata_ids": [
+        "5E116F93-97ED-4F0C-AE22-8C0C71A51C54",
+        "242F0DA8-39FE-4367-B648-7CF5D3EB5FDF"
+      ],
+      "arcgis_iteminfo_guids": [
+        "C683EFAA-7855-461C-BEF1-04047136EC8A",
+        "FCF5FCD5-F972-4C08-AFDB-9EA61D1866E9"
+      ],
+      "retrieved": "2026-10-08",
+      "reuse": "Public viewing evidenced for ORT_recent; no product-specific grant found for offline research, date-footprint vector retention, or derived-observation publication. ORT10LT_2024_2026 remains generic License with empty REST licenseInfo.",
+      "verification": "Official catalog, ArcGIS iteminfo, Geoportal copyright/service pages, and blocked data.gov.lt retrievals reviewed; hashes and exact findings in sources/lithuanian-date-footprint-rights-findings.json.",
+      "known_limits": [
+        "Catalog use constraint is only “Licencija (License)” with no terms URL; both REST licenseInfo fields are empty.",
+        "ORT_recent says to contact Geoportal for use in other information systems; this is not itself a grant and is not applied to the distinct ORT10LT_2024_2026 service.",
+        "Geoportal copyright notice identifies a rights holder but does not grant reuse for date-footprint vectors.",
+        "Data.gov.lt returned HTTP 500 block pages; this does not establish absence of another catalog record.",
+        "Prior official metadata response headers were not retained in the earlier batch; no known endpoints were re-requested in the rights review."
+      ]
     }
   ]
 }

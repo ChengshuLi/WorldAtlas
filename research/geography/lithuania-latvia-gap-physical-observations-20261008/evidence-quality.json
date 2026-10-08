@@ -627,19 +627,35 @@
       "restoration": "Official source URL; compressed archive SHA-256 3cd0f617b674ac51dc1a1451cfb4475a620c533dbe47ffdc0f645b7ca1e3b4e6; raw response segments remain in ignored local cache.",
       "limit": "Supplementary older source only; not a substitute for cycle-8/physical-observation acceptance. No subject join. The decoded PolygonZ member is 108040732 bytes, above the current cap.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "ltu-date-footprint-rights",
+      "url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer",
+      "role": "official product/service rights metadata for Lithuanian date-footprint layers",
+      "vintage": "ORT_recent and ORT10LT_2024_2026 services; records reviewed 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Generic License constraint only; no product-specific reuse grant located. See rights findings."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Compact rights findings and response manifest included; response bodies remain in local ignored cache.",
+      "limit": "Public viewing is evidenced for ORT_recent. Offline research, retaining vector metadata, and publishing derived observations are unresolved; do not infer rights from public access or a copyright notice.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/README.md",
-      "bytes": 10958,
-      "sha256": "3754597223e6fc751c22d94b609a3a3595a6f7f53a4b87c153040825bae5810a",
+      "bytes": 11677,
+      "sha256": "feb56a23740ab6e55fea51a8d154498310dab25e870ece7f2a8e8e1d291917bc",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/official-source-register.json",
-      "bytes": 8023,
-      "sha256": "ca688c218da0314f06942544e2605e303870aea367055c307cea3f2296746b06",
+      "bytes": 9997,
+      "sha256": "88377bc6ed947835a5abc8e97a06aaeb12497fd880da4a0a3fc7e4090bf48065",
       "hash_kind": "file-bytes"
     },
     {
@@ -680,14 +696,14 @@
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/execution-ledger.json",
-      "bytes": 3224,
-      "sha256": "d76a23f75ab6ad6fed88e0f1eed04d1deabf1e4dfc1cd2bc8ffe5a19686cb860",
+      "bytes": 3851,
+      "sha256": "a92e1eb6559a204264255a1509b6a589e6d0159ffe929599d5b3fec5b6eabba5",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/reproducibility.json",
-      "bytes": 1152,
-      "sha256": "f4294e5bbcb0786875571072259fb147565c7e92c7b5929b617efb6d73d4472b",
+      "bytes": 1469,
+      "sha256": "8851fe540310b994d97ded98f2bdb60ffa145cf29413354d0ff0d9987fef8091",
       "hash_kind": "file-bytes"
     },
     {
@@ -700,6 +716,18 @@
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-date-operation-plan.md",
       "bytes": 31563,
       "sha256": "259b3303652f855e4ec73d2a40792e06fa5dde971dc56d34b4441ec687fad2a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-rights-findings.json",
+      "bytes": 7159,
+      "sha256": "b023a5ef7baf74da5f4075f53d08b6643bd7d360bf7064c561462aeed66e6e9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-capture-manifest.json",
+      "bytes": 7499,
+      "sha256": "a728f266c4db418f04f7f1e7badc5720548aa26d608e8df6daf31e1dec0878a8",
       "hash_kind": "file-bytes"
     }
   ],
@@ -869,6 +897,22 @@
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-date-operation-plan.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle6-source-note.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-rights-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lithuanian-date-footprint-capture-manifest.json",
       "status": "added"
     }
   ],
