@@ -4,7 +4,7 @@ This packet answers the bounded source-fit question in issue #1481 for exactly t
 
 ## Reproduction
 
-The original `r7` run and its receipts are preserved for audit, but an independent review found that its native commands were not bound to the executables whose hashes were recorded, its runner read two inputs before enforcing their size bounds, and its negative control overstated the scope of its decision-gate checks. Treat r7 results as recorded exploratory outputs, not qualified reproduced results. The first corrected budget plan, r8, was rejected before execution: its source-fit reservation was 275,356,788 bytes, above the 268,435,456-byte cap. The abbreviated-commit r9 plan was also rejected before execution. Its subsequent native extraction exposed a macOS Bash portability issue in the plan-size read, so its native receipt undercounted the charge; that output is preserved as exploratory evidence only. The r8 and r9 rejected artifacts are retained under `exploratory/`. The current attempted reproduction uses new immutable `r10-*` vintages and a distinct `phase-plan-r10.json`; earlier files are not overwritten.
+The original `r7` run and its receipts are preserved for audit, but an independent review found that its native commands were not bound to the executables whose hashes were recorded, its runner read two inputs before enforcing their size bounds, and its negative control overstated the scope of its decision-gate checks. Treat r7 results as recorded exploratory outputs, not qualified reproduced results. The first corrected budget plan, r8, was rejected before execution: its source-fit reservation was 275,356,788 bytes, above the 268,435,456-byte cap. The abbreviated-commit r9 plan was rejected before execution. Its subsequent native extraction exposed a macOS Bash portability issue in the plan-size read, so its native receipt undercounted the charge; that output is preserved as exploratory evidence only. The r8 and r9 rejected artifacts are retained under `exploratory/`. The qualified reproduction uses immutable `r10-*` vintages and the frozen `phase-plan-r10.json`.
 
 The r10 rerun is tied to an immutable code commit. On the exact Python 3.12.14 / Shapely 2.1.2 environment recorded by `runtime-lock.json`, generate the r10 native executable lock, then commit the phase runner, source bridge, phase scripts, both locks, and builders. Use that exact full 40-character commit SHA as `EXECUTION_COMMIT`. The plan builder verifies the materialized sources and code against the commit and checks the issue-pinned inputs. It writes `phase-plan-r10.json` once; that plan is immutable for this run. Before execution, inspect every prospective charge and stop if any phase exceeds the cap. The r10 source-fit phase reserves 2 MiB for each neighbor-scan predecessor, above the observed r7 scan output sizes (about 0.35–0.52 MiB); the runner still enforces each bound and rejects an output that exceeds its declared reservation.
 
@@ -47,11 +47,23 @@ The preserved r7 attempt used execution commit `350643c19b5dd597f60acaa74b1c5fd0
 | Neighbor scan D | 241,004,023 | 27,431,433 |
 | Source fit and controls | 222,702,670 | 45,732,786 |
 
-The machine-readable `r7-execution-budget.json` binds the recorded r7 phase charges and output hashes. It is retained as historical evidence. The r10 run is intended to be the packet's corrected reproduction if all phases complete under their declared reservations; the manifest will continue to report `limited` for the declared boundary-authority and undated-context gaps.
+The machine-readable `r7-execution-budget.json` binds the recorded r7 phase charges and output hashes. It is retained as historical evidence. The qualified r10 run is tied to execution commit `e829c5a8f5775431f84bdecba256d1a033f78af9` and phase-plan SHA-256 `b91feef5e62ff6b639a187ce53b97767930209ef8dcab19cbad4f4c11c766fa2`. Every phase completed below the 268,435,456-byte cap:
+
+| Phase | Charged bytes | Headroom |
+| --- | ---: | ---: |
+| Native archive extraction | 225,807,405 | 42,628,051 |
+| Retired-member context | 246,075,748 | 22,359,708 |
+| Neighbor scan A | 244,969,363 | 23,466,093 |
+| Neighbor scan B | 238,835,982 | 29,599,474 |
+| Neighbor scan C | 239,392,794 | 29,042,662 |
+| Neighbor scan D | 251,812,151 | 16,623,305 |
+| Source fit and controls | 233,512,588 | 34,922,868 |
+
+The manifest continues to report `limited` for the declared boundary-authority and undated-context gaps.
 
 ## Findings
 
-The preserved r7 result records all seven candidates as valid polygons, each wholly covered by exactly one named ecoregion in each edition: ECO15 “Banks Island Lowland” and ECO25 “Foxe Basin Plain.” It records each candidate intersecting only its intended Atlas target among the 49,625 active features. The v2.2 and native source envelopes are not geometrically identical; their per-candidate symmetric differences are recorded. Reconfirm these results from r10 before treating the counts below as qualified outputs. Coverage agreement does not prove that the two editions have the same coastline or date-specific authority.
+The qualified r10 result confirms all seven candidates are valid polygons, each wholly covered by exactly one named ecoregion in each edition: ECO15 “Banks Island Lowland” and ECO25 “Foxe Basin Plain.” The four authenticated neighbor scans cover 49,625 active features in four pairwise-disjoint ID rosters. The v2.2 and native source envelopes are not geometrically identical; their per-candidate symmetric differences are recorded. Coverage agreement does not prove that the two editions have the same coastline or date-specific authority.
 
 | Candidate | Retired cartographic reference context | Exact target union | Disposition |
 | --- | --- | --- | --- |

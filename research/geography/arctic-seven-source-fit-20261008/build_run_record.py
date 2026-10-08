@@ -56,7 +56,7 @@ def main():
    planned=(sum(pins[p]['bytes'] for p in unique_paths)+len(plan_raw)*5+
     phase['native_runtime_bytes']+phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+
     phase['output_reserved_bytes']+RECEIPT_RESERVE+
-    sum(pins[p]['bytes'] for p in archive_paths)+
+    (sum(pins[p]['bytes'] for p in archive_paths) if phase.get('archive_read_multiplicity')==2 else 0)+
     pins['data/semantic-sources.json']['bytes']*(phase['registry_read_multiplicity']-1)+
     2*sum(pins[p]['bytes'] for p in phase['code_paths'])+native_lock['bytes'])
   else:
