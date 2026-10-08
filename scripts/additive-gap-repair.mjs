@@ -412,7 +412,7 @@ export function admitInventoryDestination(repo, destination) {
 
 function sourcePremiseStage(repo,request,report) {
   const rule=request.source_rule;
-  demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===8&&Array.isArray(rule.expected_ids)
+  demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===12&&Array.isArray(rule.expected_ids)
     &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length,'Incomplete independently frozen source-rule scope');
   const bodies=new Map();
   for(const pin of rule.inputs){demand(pin.kind===undefined&&!bodies.has(pin.path),'Foreign/duplicate source-rule input');bodies.set(pin.path,{pin,body:readPin(repo,pin)});}
