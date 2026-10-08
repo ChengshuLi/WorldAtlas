@@ -1,0 +1,47 @@
+{
+  "builder_sha256": "7858b5938b330ff5a64ea649dcbc030def526e790c52f52e9f0dab58fba78242",
+  "comparison_policy": "Compare all six deterministic calculation/control outputs byte-for-byte; retain each fresh run's distinct metadata and publication receipt.",
+  "equal_deterministic_product_digest": true,
+  "immutable_helper_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+  "kind": "reproducibility",
+  "method_id": "south-america-batch4-manifest-1349-erratum",
+  "method_note": "Each fresh producer run admitted 214,557,427 whole input/fixture/output bytes, wrote seven outputs and published its complete receipt last.",
+  "outcome": "passed",
+  "producer_sha256": "92e59d0b3cbd14296f78a846cee9bbbaf6c07bf43c7a60eeedf7a94079f382d6",
+  "reserved_output_bytes": 1048576,
+  "run_metadata_differ": true,
+  "run_one": {
+    "metadata_sha256": "202451b71e907514acc46e2b54af61f1b61313e6960446e2bb43676ee0de5cbd",
+    "outputs": {
+      "audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
+      "child-roster-controls.json": "a114287faa2c9d613304c78b1fdcf99591cb868905871ebf9395d078fc86b4fd",
+      "execution-bindings.json": "c09f2bf60f7c73595b5bdf40b73de3d570699542429b7bac593fc6a9a07764ae",
+      "legacy-writer-control.json": "e74ae32b5336138a1b51e67954db3a15e27d2d4950a6bd181ee8461cd1f2aef2",
+      "negative-control.json": "732fd90d0cd65a0daaf226b13bf1e05a91bd843ad85b28dcdfd35bd07e583fdb",
+      "positive-control.json": "d48ce763ad8da62fd2c2f64b4bd7c60815c626e0be59075b6df6761afc26efa8"
+    },
+    "publication_sha256": "98f1934f0075b1aa37762dda2e1dc7a0fbd85323fd01bf1c8da1b1abef53c60c",
+    "vintage": "run-nine"
+  },
+  "run_one_sha256": "cb3daca733b812200fe19a292386ce052b87ee9498c6f8a4f5a7262f59e64790",
+  "run_two": {
+    "metadata_sha256": "74a6003bfd0d901994c019043b602d523d7ee9d52790a9871bd8cce096780b15",
+    "outputs": {
+      "audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
+      "child-roster-controls.json": "a114287faa2c9d613304c78b1fdcf99591cb868905871ebf9395d078fc86b4fd",
+      "execution-bindings.json": "c09f2bf60f7c73595b5bdf40b73de3d570699542429b7bac593fc6a9a07764ae",
+      "legacy-writer-control.json": "e74ae32b5336138a1b51e67954db3a15e27d2d4950a6bd181ee8461cd1f2aef2",
+      "negative-control.json": "732fd90d0cd65a0daaf226b13bf1e05a91bd843ad85b28dcdfd35bd07e583fdb",
+      "positive-control.json": "d48ce763ad8da62fd2c2f64b4bd7c60815c626e0be59075b6df6761afc26efa8"
+    },
+    "publication_sha256": "f6c510501d47682e09f8c8ed7b1d537eacacf220f9a71e47fab046b95b50c41f",
+    "vintage": "run-ten"
+  },
+  "run_two_sha256": "cb3daca733b812200fe19a292386ce052b87ee9498c6f8a4f5a7262f59e64790",
+  "runtime": {
+    "implementation": "cpython",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "python": "3.12.14"
+  },
+  "total_input_bytes": 218972565
+}

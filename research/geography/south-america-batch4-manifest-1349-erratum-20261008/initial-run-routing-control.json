@@ -1,0 +1,18 @@
+{
+  "cleanup": "Removed only the eight hash-verified files created by this command and its now-empty run-seven directory; no tracked or pre-existing file was touched.",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python3.12 -B research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproduce.py --vintage run-seven",
+  "created_files_sha256": {
+    "audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
+    "child-roster-controls.json": "a114287faa2c9d613304c78b1fdcf99591cb868905871ebf9395d078fc86b4fd",
+    "execution-bindings.json": "c09f2bf60f7c73595b5bdf40b73de3d570699542429b7bac593fc6a9a07764ae",
+    "legacy-writer-control.json": "e74ae32b5336138a1b51e67954db3a15e27d2d4950a6bd181ee8461cd1f2aef2",
+    "negative-control.json": "732fd90d0cd65a0daaf226b13bf1e05a91bd843ad85b28dcdfd35bd07e583fdb",
+    "positive-control.json": "d48ce763ad8da62fd2c2f64b4bd7c60815c626e0be59075b6df6761afc26efa8",
+    "publication.json": "f56f832013d323fd6ab7982f8c38f6fdf0cb69ce939d0b4da761ed88c558ea74",
+    "run-metadata.json": "3590b92c24b979adba3062f9f0345d23da3b76f01f241c95628a93e7a7b00fb1"
+  },
+  "producer_sha256": "887c647970cda1ce5c8ffe8462d4b25729cb2ee7a69198a0a9275cdf78620f8f",
+  "reason": "Copied producer retained its original hard-coded owned path and wrote outside issue #1506 ownership.",
+  "result": "rejected-and-restored",
+  "untracked_target_absent_at_base_commit": "5fa15de475f17ff93e205b767857d1e41a30949e"
+}
