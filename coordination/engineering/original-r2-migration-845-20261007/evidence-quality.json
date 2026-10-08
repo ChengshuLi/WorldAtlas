@@ -1,0 +1,425 @@
+{
+  "version": 1,
+  "issue": 845,
+  "lane": "engineering",
+  "worker_id": "01a10934-a3d2-74e0-84d8-366cc334bc7c",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "de506f51100568e150e51f2926a5259b71e55272",
+    "files": [
+      {
+        "path": ".openai/hosting.json",
+        "bytes": 95,
+        "sha256": "cbccb25bdf53ffec8c31a48ab5ab45ba78916bc4993b8a1b9579299ca759b7a3",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "hosted/site-r2-export.js",
+      "bytes": 3502,
+      "sha256": "b2083bdd1f61c5e0ba6f88655b86e5ab8f52b27167b161a00f14b48463ce470c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/r2-migration-destination.js",
+      "bytes": 3198,
+      "sha256": "6d15d2d098810d8b69e7bfcceacc71da23df71676e49ab03f4f4792bf312d0be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/migrate-site-r2.mjs",
+      "bytes": 2542,
+      "sha256": "16d1ceb813a192a86ea5b56fd5226033c9845f9ee7f725dc3f25629eb3e65822",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/r2-reconcile.mjs",
+      "bytes": 8771,
+      "sha256": "ca20723fa712ea6061f638f1b3bbc1506edf90b993e3749781624260ac5eb995",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/r2-migration-http.mjs",
+      "bytes": 1987,
+      "sha256": "8e8b3679de0d150970991b369b5cae2be003574b04a48bfe51115da03dfbd169",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/prepare-site-r2-export.mjs",
+      "bytes": 4171,
+      "sha256": "d67c4485bdbc07108584b737dd49775e1fb7f88b4bcacce0fff59edeface7c2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/r2-migration.test.mjs",
+      "bytes": 9042,
+      "sha256": "12d3607e5cef9342dd9b289e93dbce51b4c91614f47d92ef461e031758aceddc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/site-r2-export.test.mjs",
+      "bytes": 3638,
+      "sha256": "51842dff6f05418441e765fcb16f3959fbe46eafc2596637fef6b0d9e88701e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/README.md",
+      "bytes": 5456,
+      "sha256": "28abe86898d5b6dee66d3830404ec1a47b2d6d3cb67bc3543bb8962149108226",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/destination-inventory-before.json",
+      "bytes": 235812,
+      "sha256": "d2e872e8f5d104f24eab8ee207f74f0374a422667561db51b4cf4cef56639289",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/final-controls.json",
+      "bytes": 358,
+      "sha256": "89c37e3f0d26107930129e633660bab9df6b01d342c8b1572bc2e78cd4b8e2f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/negative-control.json",
+      "bytes": 410,
+      "sha256": "2401d79bcd25a0e4d6d50a6b97a1debe5e56004aaa83ec1dd30ee239a3050239",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888.md",
+      "bytes": 2205,
+      "sha256": "701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0.md",
+      "bytes": 4887,
+      "sha256": "9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2.md",
+      "bytes": 1822,
+      "sha256": "e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/positive-control.json",
+      "bytes": 347,
+      "sha256": "f8eb6a8b74421c115021e68c883db8a85f717e2d33b31e4eb0ec246b2de4cad5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/restored-owner-readback.json",
+      "bytes": 997,
+      "sha256": "16f998922418cb040562f125cdaa9cfe9a2d17dd44aca4167bb22c349919cfd8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-one.json",
+      "bytes": 100688,
+      "sha256": "0a50c293cd7c2c0374853d90bea7524b5d35f12aa298a4e95042204d3de4ef26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-two.json",
+      "bytes": 100688,
+      "sha256": "0a50c293cd7c2c0374853d90bea7524b5d35f12aa298a4e95042204d3de4ef26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-negative.json",
+      "bytes": 97,
+      "sha256": "15b83375f9c1c3bc6f0200c16a7abe9e6d76f2374f2fa2179a24fbdcf55b4bda",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package-second.json",
+      "bytes": 97600,
+      "sha256": "51a4953a63bb68035c3b70c95e53e9d7e566adf1e71c848b08bddcf2df36b5e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package.json",
+      "bytes": 97600,
+      "sha256": "51a4953a63bb68035c3b70c95e53e9d7e566adf1e71c848b08bddcf2df36b5e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-final.log",
+      "bytes": 1140,
+      "sha256": "ff475cec826cccfc5efb169548e28d47417ad881dba2f9b5489c3a65de9cc84a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests.log",
+      "bytes": 1028,
+      "sha256": "6f617f18c32707e1acdbb0b5201b02f40c5bddfe65603bb85bb73e740fb5fd4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/review-fixed-controls.json",
+      "bytes": 242,
+      "sha256": "b3f0b641847ee37d954932621a2fd2b00c4dee9b98432e8f7e7fdfed0f394779",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/review-fixed-negatives.json",
+      "bytes": 509,
+      "sha256": "22fcc1f566994fad161cf5ff54f76f253384401789fec98e35c15ebce91b3471",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-drift-control.json",
+      "bytes": 100688,
+      "sha256": "c8807a9fd6ab904cfa067449a3898ee7cfe889e07982c628afffb191d145aea4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-frozen-drift.json",
+      "bytes": 100688,
+      "sha256": "a98189116c230a2b0b6c3f446b589b171998ea86422b26c0c60240003e444cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-frozen-one.json",
+      "bytes": 100688,
+      "sha256": "a98189116c230a2b0b6c3f446b589b171998ea86422b26c0c60240003e444cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-frozen-two.json",
+      "bytes": 100688,
+      "sha256": "a98189116c230a2b0b6c3f446b589b171998ea86422b26c0c60240003e444cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-post-drift.json",
+      "bytes": 100688,
+      "sha256": "a98189116c230a2b0b6c3f446b589b171998ea86422b26c0c60240003e444cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-review-one.json",
+      "bytes": 100688,
+      "sha256": "a98189116c230a2b0b6c3f446b589b171998ea86422b26c0c60240003e444cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-review-two.json",
+      "bytes": 100688,
+      "sha256": "a98189116c230a2b0b6c3f446b589b171998ea86422b26c0c60240003e444cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-candidate.log",
+      "bytes": 1329,
+      "sha256": "3063e81835c51cc4f384a31695bfbe7b75e48b88695007aeb78b514a37b74380",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-review-fixed.log",
+      "bytes": 1331,
+      "sha256": "050b29c52eb06e99fbc498cd1d1e74e34b80978f230e6adfa07bf00cd648acc7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/wrapper-drift-esbuild-fixture.mjs",
+      "bytes": 753,
+      "sha256": "da53eee5cbfd69b67c0ff76b56e567821d5914239079825113a632422437f9ff",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "lossless-migration-controls",
+      "kind": "code",
+      "description": "Read-only source wrapper, create-only destination, complete bounded inventory, conditional full byte/metadata verification, original package preservation.",
+      "software": "Node24; esbuild from preserved Site dependency runtime",
+      "units": "object bytes, checksums, preservation controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/site-r2-export.test.mjs test/r2-migration.test.mjs",
+    "node scripts/prepare-site-r2-export.mjs ABSOLUTE_SITE_ROOT EXACT_SITE24_COMMIT ABSOLUTE_ESBUILD_MODULE FRESH_RECEIPT"
+  ],
+  "change_receipts": [
+    {
+      "path": "hosted/site-r2-export.js",
+      "status": "added"
+    },
+    {
+      "path": "hosted/r2-migration-destination.js",
+      "status": "added"
+    },
+    {
+      "path": "scripts/migrate-site-r2.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/r2-reconcile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/r2-migration-http.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/prepare-site-r2-export.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/r2-migration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/site-r2-export.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/destination-inventory-before.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/final-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/701cf42128a55ea764d2e09169018b85ae2b8d50d78920175e67f8d8c528a888.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/9c92f2b995c3c6ebf3cdbcf111cc947eaaeddd705aff97cc59320f4c6e5636d0.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/originals/e8af1149a4bdc7038b0f4432cb338efe761ad57445326b30e4eeb994be5989f2.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/restored-owner-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-final-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package-second.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/review-fixed-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/review-fixed-negatives.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-drift-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-frozen-drift.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-frozen-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-frozen-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-post-drift.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-review-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/site24-wrapper-review-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-candidate.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/targeted-tests-review-fixed.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/wrapper-drift-esbuild-fixture.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/original-r2-migration-845-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "validation": [
+    {
+      "method_id": "lossless-migration-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/original-r2-migration-845-20261007/review-fixed-controls.json"
+    },
+    {
+      "method_id": "lossless-migration-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/original-r2-migration-845-20261007/review-fixed-negatives.json"
+    }
+  ]
+}
