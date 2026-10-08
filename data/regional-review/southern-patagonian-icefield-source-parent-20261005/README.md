@@ -17,15 +17,15 @@ The Atlas `province` parent is a one-child `framework:province:southern-patagoni
 - `source-inventory.json` records official sources, dates, exact downloaded-byte hashes, reuse terms, and restoration instructions.
 - `findings.md` explains source meaning, vintage, completeness, license and limits, and the neighboring granularity assessment.
 - `engineering-handoff.md` gives the specific unresolved source and hierarchy decisions.
-- `reproduce.py` checks the exact pinned subject, all issue pins, the parent record, and the dated Natural Earth candidate against the declared hashes. Its four adverse controls confirm that duplicate or missing Atlas/Natural Earth identities are rejected.
+- `reproduce.py` is read-only and emits the deterministic reproduction JSON to stdout. Compare it against the retained `reproduction-results.json`; the entry point accepts no output path and cannot overwrite packet evidence. Its four adverse controls confirm that duplicate or missing Atlas/Natural Earth identities are rejected.
 - A corrupted output hash was also tested against the shared evidence validator; it rejected the packet with `Input bytes mismatch`.
 - `evidence-quality.json` binds the packet to issue #928's existing source-review contract.
 
 From the repository root run:
 
 ```sh
-python3 data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py
+python3 data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py | diff -u data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json -
 node scripts/evidence-quality.mjs data/regional-review/southern-patagonian-icefield-source-parent-20261005/evidence-quality.json
 ```
 
-The reproduction verifies identity and provenance statements only. It does not validate the icefield boundary, resolve territorial sovereignty, certify a province/area hierarchy, or approve the region.
+Run the `comparison command twice to verify byte-identical read-only output. It streams to a comparison process and creates no destination file. The reproduction verifies identity and provenance statements only. It does not validate the icefield boundary, resolve territorial sovereignty, certify a province/area hierarchy, or approve the region.

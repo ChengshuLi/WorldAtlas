@@ -159,8 +159,9 @@ def main():
             "No legal/administrative parent or sovereign owner is inferred from a glacier outline or inventory.",
         ],
     }
-    (PACKET / "reproduction-results.json").write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(json.dumps({"status": "passed", "results_path": str((PACKET / "reproduction-results.json").relative_to(ROOT)), "check_count": len(checks), "negative_control_count": len(controls), "failed": 0, "subject_ids": issue_subjects, "candidate_geometry_matches_original": candidate_matches_original, "parent_level": parent.get("level"), "parent_child_count": child_count}, indent=2))
+    # Keep the entry point read-only: callers capture/compare this deterministic
+    # stream without overwriting retained evidence or accepting a destination path.
+    print(json.dumps(output, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

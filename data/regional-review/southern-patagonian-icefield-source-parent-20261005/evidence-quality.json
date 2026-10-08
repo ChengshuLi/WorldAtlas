@@ -260,8 +260,8 @@
   "outputs": [
     {
       "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/README.md",
-      "bytes": 3641,
-      "sha256": "912cc79ba5a42229a71f0b00463c15c75c4c13b8e13d80b893cebb480802aab8",
+      "bytes": 3970,
+      "sha256": "c56b3374c7b22d0865d9ad37ca7e842481a770b78b509980e544c31f8f8de1e3",
       "hash_kind": "file-bytes"
     },
     {
@@ -290,14 +290,14 @@
     },
     {
       "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py",
-      "bytes": 10722,
-      "sha256": "421ce0db697982c75ec9334e43d1a9a8178f584c9887d6b5d5136ca2dee4a127",
+      "bytes": 10433,
+      "sha256": "1e4bbcf0a028389c09b8e6a5fbcc3f28df0ae013aa759979b9d5872102de7e27",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproducibility.json",
-      "bytes": 1621,
-      "sha256": "83ab2ddfbfbfdbce26a6cf8c9e33fbf3721d89d41012d00a61c6730522dca441",
+      "bytes": 1925,
+      "sha256": "61ebbcd4c48a14b5b7d738b31d8c19a78cab8d3cc9a3d7e679be9b19d0824a87",
       "hash_kind": "file-bytes"
     },
     {
@@ -323,7 +323,7 @@
     {
       "id": "pinned-roster-and-parent-check",
       "kind": "source",
-      "description": "Read immutable issue-pinned Git blobs; check whole-file hashes, one exact subject feature, its parent record and the declared child count.",
+      "description": "Read immutable issue-pinned Git blobs; check whole-file hashes, one exact subject feature, its parent record and the declared child count. Reproduction output is streamed to stdout; no file destination is opened or modified.",
       "software": "Python 3 standard library json, hashlib, pathlib, subprocess; git show",
       "units": "feature and hierarchy record counts; no area or distance calculation"
     },
@@ -413,7 +413,7 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python3 data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py",
+    "python3 data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py | diff -u data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json -",
     "node scripts/evidence-quality.mjs data/regional-review/southern-patagonian-icefield-source-parent-20261005/evidence-quality.json"
   ],
   "change_receipts": [
