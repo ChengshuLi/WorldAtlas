@@ -276,6 +276,10 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     output_static.extend(OWNED + "controls/failed-fourth-builder/" + name for name in
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    output_static.extend(OWNED + "controls/superseded-control-writer-review/" + name for name in
+                         ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    output_static.extend(OWNED + "controls/superseded-control-writer-review-v2/" + name for name in
+                         ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     output_static.extend([OWNED + "controls/first-builder-rejection.json",
                           OWNED + "controls/second-builder-rejection.json",
                           OWNED + "controls/third-builder-rejection.json",
@@ -283,7 +287,9 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                           OWNED + "controls/first-control-receipt.json",
                           OWNED + "controls/second-control-receipt.json",
                           OWNED + "controls/third-control-receipt.json",
-                          OWNED + "controls/fourth-control-receipt.json"])
+                          OWNED + "controls/fourth-control-receipt.json",
+                          OWNED + "controls/fifth-control-receipt.json",
+                          OWNED + "controls/sixth-control-receipt.json"])
     output_candidate = list(output_static)
     for run in (*PRESERVED_RUN_NAMES, *RUN_NAMES):
         root = OWNED + "vintages/" + run + "/"
@@ -429,6 +435,10 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend((OWNED + "controls/failed-fourth-builder/" + name, "preserved control-receipt-rejected fourth builder draft")
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    static.extend((OWNED + "controls/superseded-control-writer-review/" + name, "superseded pre-review control-writer manifest iteration")
+                  for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    static.extend((OWNED + "controls/superseded-control-writer-review-v2/" + name, "superseded manifest iteration after control-writer repair")
+                  for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend([(OWNED + "controls/first-builder-rejection.json", "validator failure receipt for retained first draft"),
                    (OWNED + "controls/second-builder-rejection.json", "validator failure receipt for retained second draft"),
                    (OWNED + "controls/third-builder-rejection.json", "trusted baseline pin-binding failure receipt for retained third draft"),
@@ -436,7 +446,9 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                    (OWNED + "controls/first-control-receipt.json", "superseded initial exact CLI control run"),
                    (OWNED + "controls/second-control-receipt.json", "superseded second exact CLI control run"),
                    (OWNED + "controls/third-control-receipt.json", "superseded third exact CLI control run"),
-                   (OWNED + "controls/fourth-control-receipt.json", "superseded fourth exact CLI control run")])
+                   (OWNED + "controls/fourth-control-receipt.json", "superseded fourth exact CLI control run"),
+                   (OWNED + "controls/fifth-control-receipt.json", "superseded fifth exact CLI control run"),
+                   (OWNED + "controls/sixth-control-receipt.json", "superseded sixth exact CLI control run")])
     for run in PRESERVED_RUN_NAMES:
         root = OWNED + "vintages/" + run + "/"
         role = "retained run with inherited #1332 method labels; not used as accepted control evidence" if run in ("run-nine", "run-ten") else "preserved earlier fresh producer evidence"
@@ -501,6 +513,8 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
         "The second local manifest draft lacked explicit candidate input paths for repeated whole-file metric hashes and was rejected by the evidence validator; its exact three files are retained under controls/failed-second-builder/ and excluded from the accepted top-level outputs.",
         "The third manifest draft used generated pin keys instead of the exact issue-declared paths and failed the trusted hosted evidence contract; its exact files and hosted failure are retained under controls/failed-third-builder/ and excluded from the accepted top-level outputs.",
         "The fourth manifest draft referenced inherited producer controls whose method_id still named #1332, so the trusted control receipt check rejected them; its exact files and hosted failure are retained under controls/failed-fourth-builder/ and excluded from accepted outputs.",
+        "The fifth manifest iteration was superseded after independent review found the control runner did not safely reject a dangling receipt symlink; its exact output trio is retained under controls/superseded-control-writer-review/ and excluded from accepted outputs.",
+        "The sixth manifest iteration is preserved after the README recorded the control-writer repair; its output hashes predate that documentation update and it is excluded from accepted outputs.",
         "Runs nine and ten retain useful generated rows/receipts and exact producer/helper hashes, but their inherited control method labels are retained as an explicitly nonaccepted vintage; only fresh run-eleven/run-twelve controls bind this repair method.",
         "This packet establishes a bounded builder custody repair only; it does not complete original #1120 or certify geographic approval, source rights, imports or publication."
     ]))

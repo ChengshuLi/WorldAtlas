@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import re
 import shutil
+import stat
 import subprocess
 import tempfile
 
@@ -20,6 +21,34 @@ MAX_BYTES = 32 * 1024 * 1024
 
 def digest(raw):
     return hashlib.sha256(raw).hexdigest()
+
+
+def open_new_receipt(path):
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    return os.fdopen(os.open(path, flags, 0o600), "w", encoding="utf-8", newline="\n")
+
+
+def receipt_path_matches(path, stream):
+    try:
+        path_stat = os.lstat(path)
+        fd_stat = os.fstat(stream.fileno())
+    except FileNotFoundError:
+        return False
+    return stat.S_ISREG(path_stat.st_mode) and (path_stat.st_dev, path_stat.st_ino) == (fd_stat.st_dev, fd_stat.st_ino)
+
+
+def write_open_receipt(path, stream, value):
+    if not receipt_path_matches(path, stream):
+        raise RuntimeError("Control receipt destination changed during execution")
+    stream.seek(0)
+    stream.truncate()
+    stream.write(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+    stream.flush()
+    os.fsync(stream.fileno())
+    if not receipt_path_matches(path, stream):
+        raise RuntimeError("Control receipt destination changed during execution")
 
 
 def copy_repo(parent, name):
@@ -136,6 +165,31 @@ def fixed_controls(parent):
     results = {}
     output_names = [OWNED + "/" + name for name in ("reproducibility.json", "preservation.json", "evidence-quality.json")]
 
+    repo = copy_repo(parent, "control-receipt-existing-file")
+    receipt_path = repo / OWNED / "cli-controls.json"
+    sentinel = b"preserve this control receipt destination\n"
+    receipt_path.write_bytes(sentinel)
+    result = run(repo, OWNED + "/verify_controls.py")
+    if (result["exit_code"] == 0 or receipt_path.read_bytes() != sentinel or
+            (repo / OWNED / ".controls-scratch").exists()):
+        raise AssertionError("Control receipt writer changed an existing file destination")
+    results["control_receipt_existing_file"] = {**result, "outputs": {},
+        "sentinel_sha256": digest(sentinel), "sentinel_preserved": True}
+
+    repo = copy_repo(parent, "control-receipt-dangling-symlink")
+    receipt_path = repo / OWNED / "cli-controls.json"
+    receipt_path.unlink()
+    outside = parent / "control-receipt-outside-target.json"
+    if outside.exists() or outside.is_symlink():
+        raise FileExistsError("Control receipt outside sentinel path already exists")
+    receipt_path.symlink_to(outside)
+    result = run(repo, OWNED + "/verify_controls.py")
+    if (result["exit_code"] == 0 or not receipt_path.is_symlink() or outside.exists() or
+            (repo / OWNED / ".controls-scratch").exists()):
+        raise AssertionError("Control receipt writer followed or changed a dangling symlink")
+    results["control_receipt_dangling_symlink"] = {**result, "outputs": {},
+        "symlink_preserved": True, "outside_target_created": False}
+
     for key, collision in (("first_output_collision", "reproducibility.json"), ("late_manifest_collision", "evidence-quality.json")):
         repo = copy_repo(parent, "fixed-" + key)
         sentinel = b"preserve this destination byte-for-byte\n"
@@ -240,10 +294,10 @@ def main():
     scratch.mkdir(exist_ok=False)
     placeholder = {"version": 1, "status": "control execution in progress"}
     receipt_path = directory / "cli-controls.json"
-    if receipt_path.exists():
-        raise FileExistsError("Refusing to overwrite an earlier controls receipt")
-    receipt_path.write_text(json.dumps(placeholder, indent=2, sort_keys=True) + "\n")
+    receipt_stream = None
     try:
+        receipt_stream = open_new_receipt(receipt_path)
+        write_open_receipt(receipt_path, receipt_stream, placeholder)
         legacy = legacy_controls(scratch)
         fixed = fixed_controls(scratch)
         receipt = {"version": 1, "status": "passed", "method_id": "south-america-batch4-manifest-1349-erratum",
@@ -262,12 +316,17 @@ def main():
             (directory / "controls/third-builder-rejection.json").read_bytes())
         receipt["superseded_fourth_actual_builder_output"] = json.loads(
             (directory / "controls/fourth-builder-rejection.json").read_bytes())
-        receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        receipt["superseded_previous_control_receipt"] = json.loads(
+            (directory / "controls/sixth-control-receipt.json").read_bytes())
+        write_open_receipt(receipt_path, receipt_stream, receipt)
         print(json.dumps({"status": "passed", "controls": len(receipt["controls"]), "receipt_sha256": digest(receipt_path.read_bytes())}, indent=2))
     except Exception:
-        receipt_path.unlink(missing_ok=True)
+        if receipt_stream is not None and receipt_path_matches(receipt_path, receipt_stream):
+            receipt_path.unlink()
         raise
     finally:
+        if receipt_stream is not None:
+            receipt_stream.close()
         shutil.rmtree(scratch)
 
 

@@ -1904,10 +1904,6 @@
       "status": "added"
     },
     {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/fifth-control-receipt.json",
-      "status": "added"
-    },
-    {
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/first-builder-rejection.json",
       "status": "added"
     },
@@ -1929,34 +1925,6 @@
     },
     {
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/second-control-receipt.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/sixth-control-receipt.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v2/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v2/preservation.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v2/reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/preservation.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/reproducibility.json",
       "status": "added"
     },
     {
@@ -2233,7 +2201,6 @@
     "Original #935/#948/#1120 evidence, source hashes, rows and history are referenced read-only at their committed historical vintages.",
     "Original #935/#948/#1120 evidence, source hashes, rows and history were read-only and remain unchanged.",
     "Runs nine and ten retain useful generated rows/receipts and exact producer/helper hashes, but their inherited control method labels are retained as an explicitly nonaccepted vintage; only fresh run-eleven/run-twelve controls bind this repair method.",
-    "The fifth manifest iteration was superseded after independent review found the control runner did not safely reject a dangling receipt symlink; its exact output trio is retained under controls/superseded-control-writer-review/ and excluded from accepted outputs.",
     "The final manifest is built after both safe completed vintages and is installed exclusively; it cannot certify its own bytes, so its whole-file hash is bound by Git/PR review.",
     "The first local manifest draft used an unsupported run-name metric vintage and was rejected by the evidence validator; its exact three files are retained under controls/failed-first-builder/ and excluded from the accepted top-level outputs.",
     "The fourth manifest draft referenced inherited producer controls whose method_id still named #1332, so the trusted control receipt check rejected them; its exact files and hosted failure are retained under controls/failed-fourth-builder/ and excluded from accepted outputs.",
@@ -2241,7 +2208,6 @@
     "The original 2022 Paraguay INE response bytes, response-level reuse terms and statistical-to-administrative relation were not rechecked.",
     "The retained Atlas subject index proves only exact stored identity and parent links; it does not prove current administrative truth.",
     "The second local manifest draft lacked explicit candidate input paths for repeated whole-file metric hashes and was rejected by the evidence validator; its exact three files are retained under controls/failed-second-builder/ and excluded from the accepted top-level outputs.",
-    "The sixth manifest iteration is preserved after the README recorded the control-writer repair; its output hashes predate that documentation update and it is excluded from accepted outputs.",
     "The source register distinguishes exact Git vintages; no external authority, legal parentage, source completeness, boundary quality, positional accuracy or regional approval is established.",
     "The third manifest draft used generated pin keys instead of the exact issue-declared paths and failed the trusted hosted evidence contract; its exact files and hosted failure are retained under controls/failed-third-builder/ and excluded from the accepted top-level outputs.",
     "This packet establishes a bounded builder custody repair only; it does not complete original #1120 or certify geographic approval, source rights, imports or publication.",
@@ -2348,18 +2314,18 @@
   ],
   "outputs": [
     {
-      "bytes": 4196,
+      "bytes": 3621,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/README.md",
       "role": "scope, methods and limits",
-      "sha256": "3077901963d01fe90a7526f676b02f8db4d3e9aaddfd1816c5590cad1e1c035b"
+      "sha256": "a168581981ff14dc8f07fe67bfd002c322089bd8dea01078898a24644ce4ea51"
     },
     {
-      "bytes": 41404,
+      "bytes": 39686,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py",
       "role": "corrected manifest builder CLI",
-      "sha256": "8347171094dff8d1cceb403d7e7a773986ad48f465a574f88b99f6b4548a70d0"
+      "sha256": "26eb2fd90ca12f5bf7b7ae7fb03cc16b6ad4a4b652ba0e08920b5e971a0c9b37"
     },
     {
       "bytes": 947,
@@ -2369,11 +2335,11 @@
       "sha256": "f9910b66a0f61c60a70d9c463c3f17fbc65adfb0f1fb8bdc661a6bf115864692"
     },
     {
-      "bytes": 111346,
+      "bytes": 33272,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/cli-controls.json",
       "role": "whole-hash receipts for actual CLI positive/adverse controls",
-      "sha256": "cf4f5fa93687f1efe89bb591c9dfdfb9b72415ca494142476931a9a5b2aa92d1"
+      "sha256": "da77994fc4072e17962a216e00ebfcd3a3b27248a304794561e22587d1be1823"
     },
     {
       "bytes": 125665,
@@ -2460,13 +2426,6 @@
       "sha256": "22f28a3e852902d19de01db55e5d3c5371a21efb33c30b85c7d7c620e61dae46"
     },
     {
-      "bytes": 33272,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/fifth-control-receipt.json",
-      "role": "superseded fifth exact CLI control run",
-      "sha256": "da77994fc4072e17962a216e00ebfcd3a3b27248a304794561e22587d1be1823"
-    },
-    {
       "bytes": 892,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/first-builder-rejection.json",
@@ -2507,55 +2466,6 @@
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/second-control-receipt.json",
       "role": "superseded second exact CLI control run",
       "sha256": "1a4fe66f87e0cb7aa01cddcf6d787c76f1b83cd33355c6413c551e88c62e7670"
-    },
-    {
-      "bytes": 71964,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/sixth-control-receipt.json",
-      "role": "superseded sixth exact CLI control run",
-      "sha256": "013bf9452dc2908a60a4501a61a7567abefb4f73e770157ae96e1c40c778dd12"
-    },
-    {
-      "bytes": 150716,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v2/evidence-quality.json",
-      "role": "superseded manifest iteration after control-writer repair",
-      "sha256": "3ea2ef8c0aa2696e465b2d2a033be27e233a48b9062fe533bc6676bf3b3cf4c7"
-    },
-    {
-      "bytes": 21621,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v2/preservation.json",
-      "role": "superseded manifest iteration after control-writer repair",
-      "sha256": "2474620905766ccde5d721c2faf13a0c1fbdb290d05c42610b5ecf426cf846fe"
-    },
-    {
-      "bytes": 2866,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v2/reproducibility.json",
-      "role": "superseded manifest iteration after control-writer repair",
-      "sha256": "1ef10e51abdae8392e3ac18d48531917928b2e564ad05d3c9589b17a56502170"
-    },
-    {
-      "bytes": 148269,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/evidence-quality.json",
-      "role": "superseded pre-review control-writer manifest iteration",
-      "sha256": "8f677a7ae07540bcc83d7314d315fd823ab67d4cd95507a6ebb4459aea1018e0"
-    },
-    {
-      "bytes": 21621,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/preservation.json",
-      "role": "superseded pre-review control-writer manifest iteration",
-      "sha256": "2474620905766ccde5d721c2faf13a0c1fbdb290d05c42610b5ecf426cf846fe"
-    },
-    {
-      "bytes": 2866,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/reproducibility.json",
-      "role": "superseded pre-review control-writer manifest iteration",
-      "sha256": "bf8c142ffa865e3128e61c6123e8b8099515236cf9214052883c80bff68c0718"
     },
     {
       "bytes": 1065,
@@ -2604,14 +2514,14 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproducibility.json",
       "role": "two-run complete output comparison",
-      "sha256": "93d7d2852a23e7eed74bf254ec921bf302dfaa32a06ca73935ebfabbd837982a"
+      "sha256": "bf8c142ffa865e3128e61c6123e8b8099515236cf9214052883c80bff68c0718"
     },
     {
-      "bytes": 18052,
+      "bytes": 15338,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/verify_controls.py",
       "role": "reproducible legacy and corrected builder CLI controls",
-      "sha256": "600f4afbf996283e73290a0da6ed9c301b2de77c6c91923bddbe4bce851a690f"
+      "sha256": "67f6ba909b7d74c7b4d6dd6b0185e134f05d37b9b8c7f18b072129bd9ff69a45"
     },
     {
       "bytes": 206120,
