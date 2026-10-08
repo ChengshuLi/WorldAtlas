@@ -1,0 +1,795 @@
+{
+  "version": 1,
+  "status": "verified",
+  "source_read_only": true,
+  "production_writes": 0,
+  "started_at_utc": "2026-10-05T04:50:21.176Z",
+  "window_comment_id": 5988306596,
+  "claim_id": "c8b42e81-ebf5-4bac-a77c-1e30e8d8bae0",
+  "reservation_issue": 864,
+  "source_marker": {
+    "version": 4,
+    "revision": 3051,
+    "counts": {
+      "sources": 385,
+      "entity_types": 16,
+      "entities": 86872,
+      "categories": 1457,
+      "records": 396,
+      "names": 3588,
+      "relationships": 0,
+      "media": 561,
+      "media_links": 6,
+      "retirements": 0,
+      "ingestions": 3051,
+      "geographic_releases": 6,
+      "geographic_memberships": 508777,
+      "geographic_changes": 3593,
+      "temporal_geography_validations": 0,
+      "geographic_membership_records": 0,
+      "geographic_existence_records": 0,
+      "temporal_geography_retirements": 0,
+      "footprint_versions": 0,
+      "footprint_version_objects": 0,
+      "footprint_selection_validations": 0,
+      "geographic_footprint_records": 0,
+      "footprint_retirements": 0
+    },
+    "geographic_releases_sha256": "4c867ee76eaa8817fa46a2f3758e65e5ca09d601acb9da0d3c36d5734a34c1eb",
+    "footprint_versions_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "catalog_sha256": "037677e0a754be6aae3322922afdac57cd85c46e4bb1d7b0f261d7314494f550",
+    "contract": {
+      "version": 4,
+      "base_contract": {
+        "version": 2,
+        "definitions": {
+          "sources": {
+            "table": "atlas_sources",
+            "columns": [
+              "id",
+              "name",
+              "url",
+              "license",
+              "vintage",
+              "supported_from",
+              "supported_to",
+              "status",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "entity_types": {
+            "table": "atlas_entity_types",
+            "columns": [
+              "id",
+              "name",
+              "geographic_level",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "entities": {
+            "table": "atlas_entities",
+            "columns": [
+              "id",
+              "kind",
+              "name",
+              "parent_id",
+              "valid_from",
+              "valid_to",
+              "source_id",
+              "reference_owner",
+              "is_example",
+              "active",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "categories": {
+            "table": "atlas_categories",
+            "columns": [
+              "id",
+              "kind",
+              "name",
+              "source_id",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "records": {
+            "table": "atlas_attribute_records",
+            "columns": [
+              "id",
+              "location_id",
+              "attribute",
+              "value",
+              "category_id",
+              "valid_from",
+              "valid_to",
+              "method",
+              "status",
+              "source_id",
+              "is_example",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "names": {
+            "table": "atlas_names",
+            "columns": [
+              "id",
+              "entity_id",
+              "name",
+              "language",
+              "role",
+              "valid_from",
+              "valid_to",
+              "source_id",
+              "is_example",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "relationships": {
+            "table": "atlas_relationships",
+            "columns": [
+              "id",
+              "source_entity_id",
+              "target_entity_id",
+              "relationship_type",
+              "valid_from",
+              "valid_to",
+              "source_id",
+              "is_example",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "media": {
+            "table": "atlas_media",
+            "columns": [
+              "id",
+              "object_key",
+              "sha256",
+              "bytes",
+              "mime",
+              "name",
+              "license",
+              "attribution",
+              "source_id",
+              "status",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "media_links": {
+            "table": "atlas_media_links",
+            "columns": [
+              "id",
+              "media_id",
+              "entity_id",
+              "role",
+              "caption",
+              "source_id",
+              "is_example",
+              "valid_from",
+              "valid_to",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "retirements": {
+            "table": "atlas_evidence_retirements",
+            "columns": [
+              "id",
+              "collection",
+              "target_id",
+              "source_id",
+              "reason",
+              "replacement_id",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "ingestions": {
+            "table": "atlas_ingestions",
+            "columns": [
+              "rowid",
+              "id",
+              "fingerprint",
+              "counts",
+              "created_at"
+            ],
+            "keys": [
+              "rowid"
+            ]
+          },
+          "geographic_releases": {
+            "table": "atlas_geographic_releases",
+            "columns": [
+              "id",
+              "source_id",
+              "version",
+              "reference_date",
+              "status",
+              "hierarchy_sha256",
+              "footprints_sha256",
+              "membership_sha256",
+              "location_ids_sha256",
+              "changes_sha256",
+              "expected_counts",
+              "metadata",
+              "published_at"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "geographic_memberships": {
+            "table": "atlas_geographic_memberships",
+            "columns": [
+              "release_id",
+              "entity_id",
+              "parent_id",
+              "reference_name",
+              "active",
+              "source_id",
+              "evidence"
+            ],
+            "keys": [
+              "release_id",
+              "entity_id"
+            ]
+          },
+          "geographic_changes": {
+            "table": "atlas_geographic_changes",
+            "columns": [
+              "id",
+              "release_id",
+              "old_entity_id",
+              "new_entity_id",
+              "change_type",
+              "source_id",
+              "evidence"
+            ],
+            "keys": [
+              "release_id",
+              "id"
+            ]
+          },
+          "temporal_geography_validations": {
+            "table": "atlas_temporal_geography_validations",
+            "columns": [
+              "id",
+              "ingestion_id",
+              "release_id",
+              "hierarchy_sha256",
+              "footprints_sha256",
+              "fingerprint",
+              "created_at"
+            ],
+            "keys": [
+              "id"
+            ],
+            "guard": "atlas_00_temporal_identity"
+          },
+          "geographic_membership_records": {
+            "table": "atlas_geographic_membership_records",
+            "columns": [
+              "id",
+              "entity_id",
+              "valid_from",
+              "valid_to",
+              "source_id",
+              "method",
+              "status",
+              "is_example",
+              "release_id",
+              "validation_id",
+              "metadata",
+              "parent_id"
+            ],
+            "keys": [
+              "id"
+            ],
+            "guard": "atlas_00_temporal_identity"
+          },
+          "geographic_existence_records": {
+            "table": "atlas_geographic_existence_records",
+            "columns": [
+              "id",
+              "entity_id",
+              "valid_from",
+              "valid_to",
+              "source_id",
+              "method",
+              "status",
+              "is_example",
+              "release_id",
+              "validation_id",
+              "metadata",
+              "value"
+            ],
+            "keys": [
+              "id"
+            ],
+            "guard": "atlas_00_temporal_identity"
+          },
+          "temporal_geography_retirements": {
+            "table": "atlas_temporal_geography_retirements",
+            "columns": [
+              "id",
+              "collection",
+              "target_id",
+              "replacement_id",
+              "source_id",
+              "reason",
+              "release_id",
+              "validation_id",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ],
+            "guard": "atlas_00_temporal_identity"
+          },
+          "footprint_versions": {
+            "table": "atlas_footprint_versions",
+            "columns": [
+              "id",
+              "release_id",
+              "source_id",
+              "supported_from",
+              "supported_to",
+              "manifest_media_id",
+              "receipt_media_id",
+              "footprints_sha256",
+              "location_ids_sha256",
+              "dictionary_sha256",
+              "grid_sha256",
+              "footprint_hash_algorithm",
+              "grid_size",
+              "location_count",
+              "object_count",
+              "producer_key_id",
+              "status",
+              "verified_receipt_sha256",
+              "published_at",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "footprint_version_objects": {
+            "table": "atlas_footprint_version_objects",
+            "columns": [
+              "version_id",
+              "media_id",
+              "role",
+              "sha256",
+              "bytes",
+              "offset",
+              "words",
+              "encoding",
+              "decoded_sha256",
+              "decoded_bytes"
+            ],
+            "keys": [
+              "version_id",
+              "media_id"
+            ]
+          },
+          "footprint_selection_validations": {
+            "table": "atlas_footprint_selection_validations",
+            "columns": [
+              "id",
+              "ingestion_id",
+              "release_id",
+              "hierarchy_sha256",
+              "footprints_sha256",
+              "fingerprint",
+              "created_at"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "geographic_footprint_records": {
+            "table": "atlas_geographic_footprint_records",
+            "columns": [
+              "id",
+              "version_id",
+              "release_id",
+              "valid_from",
+              "valid_to",
+              "source_id",
+              "method",
+              "status",
+              "is_example",
+              "validation_id",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          },
+          "footprint_retirements": {
+            "table": "atlas_footprint_retirements",
+            "columns": [
+              "id",
+              "target_id",
+              "replacement_id",
+              "source_id",
+              "reason",
+              "release_id",
+              "validation_id",
+              "metadata"
+            ],
+            "keys": [
+              "id"
+            ]
+          }
+        },
+        "d1_migrations": [
+          {
+            "path": "drizzle/0000_bizarre_sentry.sql",
+            "sha256": "a7d4945214a37835bc6cbe8c6c0bfe2073d15fbf76fa1c510e6db072b64ba699"
+          },
+          {
+            "path": "drizzle/0001_evidence_retirements.sql",
+            "sha256": "1f29f4af9eb41425dbd932b9d68e1c54406cb99221a02a2a1bc6b6cab2e3846f"
+          },
+          {
+            "path": "drizzle/0002_geographic_reference_releases.sql",
+            "sha256": "fc03e50b1c7053d9ffe89534395bcbb644e3192231122eca51a424fd14753c53"
+          },
+          {
+            "path": "drizzle/0003_unsettled_location_rank.sql",
+            "sha256": "dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d"
+          },
+          {
+            "path": "drizzle/0004_population_precision_guard.sql",
+            "sha256": "302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447"
+          },
+          {
+            "path": "drizzle/0005_population_source_class_guard.sql",
+            "sha256": "44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194"
+          },
+          {
+            "path": "drizzle/0006_unresolved_attribute_status_guard.sql",
+            "sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475"
+          },
+          {
+            "path": "drizzle/0007_fixed_environment_classifications.sql",
+            "sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b"
+          },
+          {
+            "path": "drizzle/0008_temporal_geography.sql",
+            "sha256": "a8cd574333d20891a94afac6a034576681fac2531545b761d4c4e609be452082"
+          },
+          {
+            "path": "drizzle/0009_footprint_versions.sql",
+            "sha256": "014c90d0f7cba3417480cefe3c20a97119237874098bcfb17b4be5120478a7f6"
+          }
+        ],
+        "postgres_migrations": [
+          {
+            "path": "postgres/schema.sql",
+            "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618"
+          },
+          {
+            "path": "postgres/migrations/0001_temporal_geography.sql",
+            "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd"
+          },
+          {
+            "path": "postgres/migrations/0002_footprint_versions.sql",
+            "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37"
+          }
+        ],
+        "d1_catalog_sha256": "6142b432f951fc8f3ee74941b74ad4efd7394d9f9aa2dd0192a72274fd2ff670",
+        "postgres_catalog_sha256": "9079e934e313d3f40a0f239664762d0d1053f020bfda4746b14ed56b155729db"
+      },
+      "membership_storage": "compact-membership-v1",
+      "profile": "compact-only",
+      "public_sha256": "84017ab14be0e5e7b5ad2abcc2914f9344d25989cc8e99d3c6e349bb8cf8ef2a",
+      "private_sha256": "b87bff13dce2d88aa9b49a0b27d70cfe7356509ccd93ee10d7e5e24752ca3690"
+    },
+    "fingerprint": "24d30e1121e55fe6ef266be23fedb87e0fa072d4a973cf06a612007f32bc08a2",
+    "backend": "postgres",
+    "read_only": true
+  },
+  "hosting": {
+    "kind": "cloudflare",
+    "origin": "https://worldatlas-explorer.chengshu-worldatlas.workers.dev",
+    "worker_version": "ec1f8278-3e1b-4532-b84b-79241459e54b",
+    "deployment_id": 6850977714,
+    "primary_commit": "303afe7c7b725611c06a922829bf402e0cc9cd2c",
+    "package_inventory_sha256": "73ef2cf17c881f37a835af8c89754c69d6b8e80c2d4d71638ad7ea7fa88e25ec",
+    "acceptance_url": "https://github.com/ChengshuLi/WorldAtlas/issues/849#issuecomment-5987855474",
+    "result_url": "https://github.com/ChengshuLi/WorldAtlas/issues/849#issuecomment-5987855778"
+  },
+  "github": {
+    "head": "18ef568a7bb990007aaa94be74d72b53abec292f",
+    "run_id": "37265153024",
+    "run_attempt": "1"
+  },
+  "hosting_start": {
+    "kind": "cloudflare",
+    "worker_version": "ec1f8278-3e1b-4532-b84b-79241459e54b",
+    "deployment_id": 6850977714,
+    "source_fingerprint": "24d30e1121e55fe6ef266be23fedb87e0fa072d4a973cf06a612007f32bc08a2",
+    "public_mutations_rejected": true
+  },
+  "project": {
+    "status": "verified",
+    "read_only": true,
+    "checked_at_utc": "2026-10-05T04:50:32.126Z",
+    "project": {
+      "id": "weathered-lab-37571695",
+      "configured_postgres_major": 18
+    },
+    "branch": {
+      "id": "br-summer-butterfly-ar8qikk5",
+      "name": "production",
+      "is_default": true
+    },
+    "databases": [
+      {
+        "name": "neondb",
+        "owner_name": "neondb_owner"
+      }
+    ],
+    "roles": [
+      {
+        "name": "neondb_owner"
+      },
+      {
+        "name": "worldatlas_app"
+      }
+    ],
+    "api_requests": 4,
+    "checks": {
+      "expected_project": true,
+      "production_branch": true,
+      "postgres_major_observed": true,
+      "database_owners_present": true
+    },
+    "limitations": [
+      "Management API metadata only; no SQL connection or schema verification.",
+      "No migration, data import, Neon Auth configuration or runtime binding change.",
+      "A repository Actions secret does not configure the private Site runtime."
+    ]
+  },
+  "source_lock": {
+    "key": [
+      807245315,
+      1
+    ],
+    "backend_pid": 1542,
+    "kind": "session-level; no open transaction"
+  },
+  "dump": {
+    "bytes": 15154075,
+    "sha256": "7236a17bf772981a3e27c9308f35bac09b7405bdae95632f4d0789df787eea48",
+    "duration_ms": 15931,
+    "owner_registry_included": true,
+    "acl_included": true,
+    "local_readback_verified": true
+  },
+  "encrypted_backup": {
+    "recipient_sha256": "211c3d71b295528e23f1251d3896e0a2760113255bd5baa23f6a94fde31e6bfd",
+    "ciphertext_bytes": 15154075,
+    "ciphertext_sha256": "1f5a0b2a9bcbd11d6e311b46b33a4a3d77ce76dc8121c05b77ecdc17b5c28eb1",
+    "envelope_sha256": "41627bf83704b7aa1c863d9c3bc98f799c181056e9893a45f9118c9cf4832f55",
+    "in_memory_aead_roundtrip_verified": true,
+    "ciphertext_disk_readback_verified": true,
+    "recipient_private_key_recovery_verified": false
+  },
+  "database_acl_recovery": {
+    "input": "unchanged-isolated-tmpfs-file",
+    "archive_bytes": 15154075,
+    "archive_sha256": "7236a17bf772981a3e27c9308f35bac09b7405bdae95632f4d0789df787eea48",
+    "archive_readback_verified": true
+  },
+  "isolated_original_checks_revalidated": true,
+  "restore_duration_ms": 6533,
+  "isolated_target_filesystem_before_readback": {
+    "capacity_bytes": 3221225472,
+    "used_bytes": 479318016,
+    "available_bytes": 2741907456
+  },
+  "hosting_end": {
+    "kind": "cloudflare",
+    "worker_version": "ec1f8278-3e1b-4532-b84b-79241459e54b",
+    "deployment_id": 6850977714,
+    "source_fingerprint": "24d30e1121e55fe6ef266be23fedb87e0fa072d4a973cf06a612007f32bc08a2",
+    "public_mutations_rejected": true
+  },
+  "collections": {
+    "sources": {
+      "count": 385,
+      "ordered_rows_sha256": "e8c5148f93f6d28c2de639e6fef72e8b935e646666062ff3747760dc76d0f7de"
+    },
+    "entity_types": {
+      "count": 16,
+      "ordered_rows_sha256": "d853335669547515b039192d32a0b64545c1b2949b73bccdcfb8a6c5fb6bf1cc"
+    },
+    "entities": {
+      "count": 86872,
+      "ordered_rows_sha256": "e9951cb0c35dad32abf8ce4fb472e2bd003fc594bc6d4e3342dd5cb4a0cb186e"
+    },
+    "categories": {
+      "count": 1457,
+      "ordered_rows_sha256": "eee86c200c260915a38d9193890b66e85fd1ef6a52b2227e7afc42938ffca798"
+    },
+    "records": {
+      "count": 396,
+      "ordered_rows_sha256": "aebf930586e329ce0eecfd0eac5dd6f6d5334fec7c7d9455ac3396b1a6f2c4f8"
+    },
+    "names": {
+      "count": 3588,
+      "ordered_rows_sha256": "8f9523ee61e974d0afd93f81707304ce477b343ec4e69d88d0ba66ce97c28b0b"
+    },
+    "relationships": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "media": {
+      "count": 561,
+      "ordered_rows_sha256": "5e6cec1fb67cef54734b2e486abf991c569ff610b99c6583c2d78224fecc3910"
+    },
+    "media_links": {
+      "count": 6,
+      "ordered_rows_sha256": "84c2d569224cb19cccbf2cf226d431ef2f4844bac95e6cf271b1d617b5935de1"
+    },
+    "retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ingestions": {
+      "count": 3051,
+      "ordered_rows_sha256": "6c96f0525f89a8ea1c568bfa892639b7396db54f57234abcc74f5cdc74f8261b"
+    },
+    "geographic_releases": {
+      "count": 6,
+      "ordered_rows_sha256": "4c867ee76eaa8817fa46a2f3758e65e5ca09d601acb9da0d3c36d5734a34c1eb"
+    },
+    "geographic_memberships": {
+      "count": 508777,
+      "ordered_rows_sha256": "7bfa5a7164cc826dda9954d7312d565163cecbf3798cd9c202242fef7d244102",
+      "hash_kind": "sha256-pg-json-text-row-digests-c-key-order-v1"
+    },
+    "geographic_changes": {
+      "count": 3593,
+      "ordered_rows_sha256": "c280e97f266662117cc922a4c3853cd12fb5244a40e88a57332ff83bde35c728"
+    },
+    "temporal_geography_validations": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_membership_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_existence_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "temporal_geography_retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_versions": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_version_objects": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_selection_validations": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_footprint_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "owner_registry_sha256": "a59230f18515007cd4a55b1f17b2b16eaa8dbcc767dd00b14a18626e32d58ea7",
+  "catalog_sha256": "037677e0a754be6aae3322922afdac57cd85c46e4bb1d7b0f261d7314494f550",
+  "owner_registry_private": true,
+  "compact_storage": {
+    "profile": "compact-only-v4-base2",
+    "public_sha256": "84017ab14be0e5e7b5ad2abcc2914f9344d25989cc8e99d3c6e349bb8cf8ef2a",
+    "private_sha256": "b87bff13dce2d88aa9b49a0b27d70cfe7356509ccd93ee10d7e5e24752ca3690",
+    "physical": {
+      "worldatlas_membership_release_keys": {
+        "count": 6,
+        "ordered_rows_sha256": "8e7345951a1afe14efd4d01edc6ea5d3a3744e583b170d23dfdad1eb2a6b2ba5",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_entity_keys": {
+        "count": 84833,
+        "ordered_rows_sha256": "e94d1a590a02be2bb4b33bb366faa43ccee6c8363e2f133a8efd09c3da1c4754",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_source_keys": {
+        "count": 6,
+        "ordered_rows_sha256": "00a959e4d5b0b5781c12aca7da1834302792dd2635f7c909f7238d6c4ac16ff4",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_evidence": {
+        "count": 44505,
+        "ordered_rows_sha256": "efe47ce5a9c9e66428e0e195f77d094a14938fd5731bf812e2e4829491833631",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_rows": {
+        "count": 508777,
+        "ordered_rows_sha256": "6d7147dc1b6485902b201c68f0cd1ef9e622386ddeaa844a5fb9dab015385626",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      }
+    },
+    "sequences": {
+      "worldatlas_membership_release_keys_key_seq": {
+        "last_value": 2549,
+        "is_called": true
+      },
+      "worldatlas_membership_entity_keys_key_seq": {
+        "last_value": 678585,
+        "is_called": true
+      },
+      "worldatlas_membership_source_keys_key_seq": {
+        "last_value": 2549,
+        "is_called": true
+      },
+      "worldatlas_membership_evidence_key_seq": {
+        "last_value": 103649,
+        "is_called": true
+      }
+    }
+  },
+  "source_lock_cleanup": "database-lock-absence-and-reader-removal-confirmed",
+  "isolated_target_filesystem_after_readback": {
+    "capacity_bytes": 3221225472,
+    "used_bytes": 482578432,
+    "available_bytes": 2738647040
+  },
+  "isolated_target_cleanup": "removed-and-absence-confirmed",
+  "duration_ms": 409818,
+  "completed_at_utc": "2026-10-05T04:57:10.994Z",
+  "limitations": [
+    "Logical public-schema recovery; not verified provider-managed backup or server-global recovery.",
+    "Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.",
+    "Isolated roles are NOLOGIN, with inert cloud_admin/neon_superuser placeholders and isolated neondb database; original owner/database/default ACL statements are restored as the isolated superuser; table owners/ACLs and effective table privileges are compared. Membership rows use a bounded native ordered row-digest inventory; original raw bytes are retained in the dump, not duplicated as an unbounded client JSON array. Public sequence/function owner ACLs and default/database ACLs are compared; compact dictionary sequence values, private DDL/ACLs and physical rows are compared under their exact profile. Server globals and provider role credentials remain excluded.",
+    "Historical Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Cloudflare windows additionally verify the actual public marker/mutation guards and retained successful delivery/result registry at start and end. Worker IDs are cooperative identities, not separate security principals.",
+    "Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.",
+    "Publisher must settle maintenance and prove restored writes separately; this tool never changes hosting/read-only state.",
+    "Artifacts/local copies have limited retention; preserve original dump/rows and receipts before expiry."
+  ]
+}
