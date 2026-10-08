@@ -45,9 +45,20 @@
       "recorded_at_utc": "2026-10-08T05:17:25Z",
       "reviewer": "independent_review_1460",
       "suite": "10 passed; evidence validator status limited"
+    },
+    {
+      "head_before_refresh": "237a6eb57dfa38f3e4b6fbedf0e1a3434ab37dd6",
+      "prior_queue_result": "terminal not-merged: evaluator requested renewed exact-head review after issue acceptance-contract binding mismatch; issue body and PR disposition were rechecked unchanged",
+      "new_base_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7",
+      "rebase_head_before_refresh": "c1b3b9876517920a81cc4f74dc2f0a4106e2c081",
+      "new_vintage": "2026-10-08-integrity-v7",
+      "outcome": "fresh two-run reproduction on the refreshed main base; both assessment and table outputs match each other and all four prior v6 raw outputs byte-for-byte; v6 reproducibility receipt retained and duplicate raw files pruned after comparison",
+      "assessment_sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5",
+      "table_sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23",
+      "recorded_at_utc": "2026-10-08T05:44:00Z"
     }
   ],
   "issue": 1356,
-  "recorded_at_utc": "2026-10-08T05:17:25Z",
+  "recorded_at_utc": "2026-10-08T05:44:00Z",
   "version": 1
 }

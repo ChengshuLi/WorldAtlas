@@ -9,7 +9,7 @@
   ],
   "assessment": {
     "bytes": 457671,
-    "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v6/run-1/geography-assessment.json",
+    "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v7/run-1/geography-assessment.json",
     "sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5"
   },
   "baseline_bytes": 264164863,
@@ -87,7 +87,7 @@
       "sha256": "30a2cc7c9d13a963a83c7d0dff858748857a33bf74e59241a30695ac2548ad27"
     }
   ],
-  "elapsed_seconds": 33.378,
+  "elapsed_seconds": 123.786,
   "environment": {
     "geos": "3.13.1",
     "node": "24.19.0",
@@ -96,7 +96,7 @@
     "python": "3.12.14",
     "shapely": "2.1.2"
   },
-  "final_reproducibility_sha256": "636b26bdbaea81b2e8a029cbcc9f1d7eb8dfc6b18654ed06c9c68d3baab29faa",
+  "final_reproducibility_sha256": "8d4089b3bd14012d691a4b7e5dccfe4b8369fdd1c19cbc6c9b6575e8b01e6cff",
   "issue": 1356,
   "legacy_false_positive": {
     "actual_feature_source_match_flag": true,
@@ -105,18 +105,19 @@
     "wrong_name": "AUDITOR WRONG PINNED NAME"
   },
   "legacy_writer_control_sha256": "74afbbe5eb63e048a9cb5be70ea9af91253aa3c9ca9c2b25adc30b267ded2111",
-  "recorded_at_utc": "2026-10-08 05:17:25 UTC",
+  "recorded_at_utc": "2026-10-08T05:52:25Z",
   "result": "passed",
   "runner_sha256": "8ebc8118c22ad9509f6612602f393928be03ecd152812c712c545ac73377b079",
   "suite": "research/geography/east-siberia-assessment-integrity-1130-erratum/reproduction/test_integrity.py",
-  "suite_sha256": "7430faed2769ed67b4b2b3c217016dd64f7b2cc467a817be1376433681f2797f",
+  "suite_sha256": "d1c63304310e8ba3fb75593f3072cd238bbe3b7913878edd2116d25aefd52ae6",
   "table": {
     "bytes": 138563,
-    "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v6/run-1/subject-assessments.tsv",
+    "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v7/run-1/subject-assessments.tsv",
     "sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23"
   },
   "tests_failed": 0,
   "tests_passed": 10,
   "tests_run": 10,
-  "version": 1
+  "version": 1,
+  "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
 }

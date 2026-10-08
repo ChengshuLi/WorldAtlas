@@ -23,7 +23,7 @@ ORIGINAL = Path("data/regional-review/regional-review-5cf69eed7fdff0b5")
 ANALYZER = ORIGINAL / "reproduction/analyze-geography.py"
 RENDERER = ORIGINAL / "reproduction/render-review-table.py"
 INVENTORY = ORIGINAL / "reproduction/scope-inventory.run-1.json"
-FINAL_VINTAGE = PACKET / "vintages/2026-10-08-integrity-v6"
+FINAL_VINTAGE = PACKET / "vintages/2026-10-08-integrity-v7"
 
 
 def sha(data: bytes) -> str:
