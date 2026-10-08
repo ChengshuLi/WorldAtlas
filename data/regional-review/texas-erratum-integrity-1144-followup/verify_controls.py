@@ -99,6 +99,39 @@ def main() -> None:
             ], 1):
                 results.append(run_case(repo, name, restore, mutate, f"control-drift-{i}"))
 
+            # Inject a real failure opening the second product after the first
+            # product was durably written. The producer must preserve the first
+            # bytes, record failed status, and withhold publication.json.
+            injection = Path(temp) / "failure-injection"
+            injection.mkdir()
+            sitecustomize_lines = [
+                "import io, os",
+                "_open = io.open",
+                "def _injected_open(file, mode='r', *args, **kwargs):",
+                "    if os.environ.get('WORLDATLAS_FAIL_SECOND_OUTPUT') and any(flag in mode for flag in 'wxa') and str(file).endswith('/reproduction-summary.json'):",
+                "        raise OSError('injected second-product write failure')",
+                "    return _open(file, mode, *args, **kwargs)",
+                "io.open = _injected_open",
+            ]
+            (injection / "sitecustomize.py").write_text(chr(10).join(sitecustomize_lines) + chr(10))
+            failed_vintage = "control-mid-write-failure"
+            env = dict(os.environ)
+            env["PYTHONPATH"] = str(injection)
+            env["WORLDATLAS_FAIL_SECOND_OUTPUT"] = "1"
+            proc = subprocess.run([sys.executable, SCRIPT, "--repo", str(repo), "--vintage", failed_vintage], cwd=repo, text=True, capture_output=True, env=env)
+            failed_dir = target / "vintages" / failed_vintage
+            failure_path = failed_dir / "failure.json"
+            if proc.returncode == 0 or not failure_path.is_file() or (failed_dir / "publication.json").exists():
+                raise AssertionError("mid-write failure was not preserved as failed without a completion receipt")
+            failure = json.loads(failure_path.read_bytes())
+            if failure.get("status") != "failed" or failure.get("publication_status") != "failed":
+                raise AssertionError("mid-write failure receipt does not state failed status")
+            observed = {item["path"]: item["state"] for item in failure.get("outputs", [])}
+            if observed.get("county-interpretation-erratum.jsonl") != "partial-or-written" or observed.get("reproduction-summary.json") != "absent" or observed.get("validation.json") != "absent":
+                raise AssertionError("mid-write failure receipt does not describe preserved partial products")
+            results.append({"case": failed_vintage, "outcome": "failed_receipt_preserved_partial_products", "failure_receipt_sha256": sha(failure_path.read_bytes()), "partial_output_sha256": failure["outputs"][0].get("sha256"), "publication_receipt_absent": True, "error": proc.stderr.strip().splitlines()[-1] if proc.stderr.strip() else "runner exited nonzero"})
+            shutil.rmtree(failed_dir)
+
             # The output writer itself must preserve both existing sentinels and
             # dangling symlinks; use the exact real entry point and fresh paths.
             for name in ("control-existing", "control-partial"):

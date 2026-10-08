@@ -7,6 +7,7 @@ import collections
 import hashlib
 import importlib.util
 import json
+import os
 import re
 import sys
 import types
@@ -29,6 +30,49 @@ HIERARCHY = "data/hierarchy.json"
 
 def fail(message: str) -> None:
     raise ValueError(message)
+
+
+def record_failed_run(vintage, filenames, error) -> None:
+    """Record an honest failure after the reserved run directory was created."""
+    root = vintage.root
+    if not root.exists():
+        return
+    if root.is_symlink() or not root.is_dir():
+        raise ValueError("Cannot record failure in an unsafe run directory") from error
+    failure_path = root / "failure.json"
+    if failure_path.exists() or failure_path.is_symlink():
+        raise FileExistsError("Failure receipt destination already exists") from error
+    observed = []
+    for name in filenames:
+        path = root / name
+        if path.is_symlink():
+            observed.append({"path": name, "state": "symlink"})
+        elif path.is_file():
+            raw = path.read_bytes()
+            observed.append({"path": name, "state": "partial-or-written", "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()})
+        else:
+            observed.append({"path": name, "state": "absent"})
+    receipt = {
+        "version": 1, "issue": 1365, "method_id": "immutable-texas-erratum-join",
+        "kind": "failed-run", "status": "failed", "publication_status": "failed",
+        "error_type": type(error).__name__, "error": str(error)[:1000],
+        "outputs": observed, "complete_publication_receipt_present": (root / "publication.json").exists(),
+    }
+    payload = (json.dumps(receipt, indent=2, sort_keys=True) + "\n").encode()
+    temporary = root / ".failure-incomplete"
+    try:
+        with temporary.open("xb") as stream:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.link(temporary, failure_path)
+        temporary.unlink()
+    except Exception:
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+        raise
 
 
 def main() -> None:
@@ -259,7 +303,11 @@ def main() -> None:
     if not validation["output_matches_retained_original"]:
         fail("Corrected outputs do not exactly preserve the retained valid-run results")
     validation_bytes = (json.dumps(validation, indent=2, sort_keys=True) + "\n").encode()
-    vintage.publish_bytes({"county-interpretation-erratum.jsonl": table, "reproduction-summary.json": summary_bytes, "validation.json": validation_bytes})
+    try:
+        vintage.publish_bytes({"county-interpretation-erratum.jsonl": table, "reproduction-summary.json": summary_bytes, "validation.json": validation_bytes})
+    except Exception as error:
+        record_failed_run(vintage, filenames, error)
+        raise
     print(json.dumps({"vintage": args.vintage, "rows": len(output), "scope_sha256": scope_hash, "table_sha256": hashlib.sha256(table).hexdigest(), "summary_sha256": hashlib.sha256(summary_bytes).hexdigest()}, sort_keys=True))
 
 

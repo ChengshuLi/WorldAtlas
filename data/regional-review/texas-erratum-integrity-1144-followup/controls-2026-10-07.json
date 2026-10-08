@@ -57,14 +57,6 @@
       "outcome": "rejected_before_output"
     },
     {
-      "case": "control-mid-write-failure",
-      "error": "OSError: injected second-product write failure",
-      "failure_receipt_sha256": "f7d2259f306fa6155fd3db51258c24028cdca565f04a3190dea48e7d792facad",
-      "outcome": "failed_receipt_preserved_partial_products",
-      "partial_output_sha256": "0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28",
-      "publication_receipt_absent": true
-    },
-    {
       "case": "control-existing",
       "error": "FileExistsError: Fresh run directory already exists",
       "outcome": "rejected_preserving_sentinel",
@@ -83,7 +75,7 @@
       "target_exists": false
     }
   ],
-  "control_harness_sha256": "b50cd91e58fa5c0759cc39d9932e6249787889064823762c9f9cd1536c79489b",
+  "control_harness_sha256": "72c1e20a6e4a6f594a5742db03c6e24d9d64259df1ed40b4dd2edc618eb6319c",
   "issue": 1365,
   "issue_snapshot_sha256": "132fee5a55e104451d37d714b681ff15f72c0db3bcea81123aadbfa721ba2c89",
   "kind": "negative-control",
@@ -91,6 +83,6 @@
   "outcome": "passed",
   "pin_ledger_sha256": "3527212b673a0fe2b5f9a9b306698241ee929c70258c6e77458034e90dd827aa",
   "python": "3.12.14",
-  "runner_sha256": "0ac8859d7c1ffac89e8f191bc4e1868f2ad7ca04e6cecde50ac0b85685d4bcfd",
+  "runner_sha256": "bdee1aba72ee0a33fc289bdac09ebd5e6f2423d1ffb180be2d4c2dd1bd698af7",
   "version": 1
 }

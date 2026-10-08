@@ -910,14 +910,20 @@
   "outputs": [
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/README.md",
-      "bytes": 9534,
-      "sha256": "44c611958adc4dbd32fd8bd4e1d6c7c3d4dd738937a8915db63fa9114e09eda9",
+      "bytes": 10221,
+      "sha256": "c9e1c9de4e8cf482a3aa4a3f0ed963ab5832399d3ef0a8e2898def0e2bc3c35f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/controls-2026-10-07.json",
+      "bytes": 4501,
+      "sha256": "3654e053a04b3eb4a5bc2e36f55816ac888b006289c219215eeb9485b6122c18",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/controls.json",
-      "bytes": 4501,
-      "sha256": "3654e053a04b3eb4a5bc2e36f55816ac888b006289c219215eeb9485b6122c18",
+      "bytes": 4924,
+      "sha256": "fa1b30f4305ef53a127926e8a69d7a1a0a2008c5988bb7b5c92a887d3f88b6fb",
       "hash_kind": "file-bytes"
     },
     {
@@ -933,6 +939,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
+      "bytes": 727,
+      "sha256": "609ccd492fbc58be15509901f6bda5fccf6c8db0bbd8618f4a869c97e3537e19",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
       "bytes": 727,
       "sha256": "0a2f038fe4233bbbe7153ebc717b7f72bbf292291541c07cd049a05bc34a631e",
@@ -940,14 +952,20 @@
     },
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/record_run_receipts.py",
-      "bytes": 3647,
-      "sha256": "7d8010fd45f1d0a642c1923eb12d57a48caead62c16ab4897f8dc6a2060aeb14",
+      "bytes": 3669,
+      "sha256": "b26ec1458fd9f9170ba28c086a6c0dd13f2f2656f8e3938e1cd112b7acef05f6",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/reproduce_immutable.py",
-      "bytes": 16367,
-      "sha256": "bdee1aba72ee0a33fc289bdac09ebd5e6f2423d1ffb180be2d4c2dd1bd698af7",
+      "bytes": 18301,
+      "sha256": "0ac8859d7c1ffac89e8f191bc4e1868f2ad7ca04e6cecde50ac0b85685d4bcfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/reproducibility-2026-10-08.json",
+      "bytes": 2588,
+      "sha256": "97a3ddfe3ee5cad767127c2ab99462abef7cb63fb8ad27714087732cfe0f1b78",
       "hash_kind": "file-bytes"
     },
     {
@@ -958,8 +976,8 @@
     },
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/verify_controls.py",
-      "bytes": 7861,
-      "sha256": "72c1e20a6e4a6f594a5742db03c6e24d9d64259df1ed40b4dd2edc618eb6319c",
+      "bytes": 10587,
+      "sha256": "b50cd91e58fa5c0759cc39d9932e6249787889064823762c9f9cd1536c79489b",
       "hash_kind": "file-bytes"
     },
     {
@@ -1008,6 +1026,54 @@
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-07-run-2/validation.json",
       "bytes": 1333,
       "sha256": "feed9c0efb5850586cf7e65aff70eb4d69ea00167d2fc8181f3948899bd8c95e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/county-interpretation-erratum.jsonl",
+      "bytes": 309836,
+      "sha256": "0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/publication.json",
+      "bytes": 756,
+      "sha256": "30338fc3f8f85130f68ff3a221c5df1ccf8b290e3500c41fc4ec3b058bd4574f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/reproduction-summary.json",
+      "bytes": 3554,
+      "sha256": "31f533b2fb485f71beb34599b343ece2b769d9e0f12f7efc58c10385620bcb45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/validation.json",
+      "bytes": 1333,
+      "sha256": "2fbbab03b4ad5ca8cdb1d0b3365cb41b75b4df03e73550d5ee3a89d253eabc4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/county-interpretation-erratum.jsonl",
+      "bytes": 309836,
+      "sha256": "0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/publication.json",
+      "bytes": 756,
+      "sha256": "1f67395bc6d6618235df1e6e6cc3da1e414e48145ef64ac26fefb9fad975c976",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/reproduction-summary.json",
+      "bytes": 3554,
+      "sha256": "31f533b2fb485f71beb34599b343ece2b769d9e0f12f7efc58c10385620bcb45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/validation.json",
+      "bytes": 1333,
+      "sha256": "2fbbab03b4ad5ca8cdb1d0b3365cb41b75b4df03e73550d5ee3a89d253eabc4f",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1165,32 +1231,32 @@
   "metric_bindings": [
     {
       "metric_id": "county-assessment-rows",
-      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
       "json_pointer": "/scope_count"
     },
     {
       "metric_id": "atlas-feature-identity-and-parent-joins",
-      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
       "json_pointer": "/identity_joins/atlas_features"
     },
     {
       "metric_id": "geoboundaries-shape-name-tier-joins",
-      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
       "json_pointer": "/identity_joins/geoBoundaries_shape_name_level"
     },
     {
       "metric_id": "census-2018-name-geoid-parent-vintage-joins",
-      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
       "json_pointer": "/identity_joins/census_2018_name_geoid_parent_vintage"
     },
     {
       "metric_id": "census-2025-name-geoid-parent-vintage-joins",
-      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
       "json_pointer": "/identity_joins/census_2025_name_geoid_parent_vintage"
     },
     {
       "metric_id": "cbf-polygon-components",
-      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
       "json_pointer": "/cbf_polygon_components"
     }
   ],
@@ -1199,7 +1265,7 @@
       "method_id": "immutable-texas-erratum-join",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json"
+      "evidence_path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json"
     },
     {
       "method_id": "immutable-texas-erratum-join",
@@ -1211,12 +1277,16 @@
       "method_id": "immutable-texas-erratum-join",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/texas-erratum-integrity-1144-followup/reproducibility.json"
+      "evidence_path": "data/regional-review/texas-erratum-integrity-1144-followup/reproducibility-2026-10-08.json"
     }
   ],
   "change_receipts": [
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/controls-2026-10-07.json",
       "status": "added"
     },
     {
@@ -1236,6 +1306,10 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control-2026-10-08.json",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/positive-control.json",
       "status": "added"
     },
@@ -1245,6 +1319,10 @@
     },
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/reproduce_immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/reproducibility-2026-10-08.json",
       "status": "added"
     },
     {
@@ -1285,6 +1363,38 @@
     },
     {
       "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-07-run-2/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/county-interpretation-erratum.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/reproduction-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/county-interpretation-erratum.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/reproduction-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/validation.json",
       "status": "added"
     }
   ]

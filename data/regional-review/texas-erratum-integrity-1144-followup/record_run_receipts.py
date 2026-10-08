@@ -22,7 +22,7 @@ def exclusive_json(path, value):
 
 
 def main():
-    targets = [PACKET / "positive-control.json", PACKET / "reproducibility.json"]
+    targets = [PACKET / "positive-control-2026-10-08.json", PACKET / "reproducibility-2026-10-08.json"]
     for target in targets:
         if target.exists() or target.is_symlink():
             raise FileExistsError("receipt destination already exists: " + str(target))
@@ -32,7 +32,7 @@ def main():
             if parent.is_symlink():
                 raise ValueError("symlink in receipt output path: " + str(parent))
     runs = []
-    for run_name in ("2026-10-07-run-1", "2026-10-07-run-2"):
+    for run_name in ("2026-10-08-run-1", "2026-10-08-run-2"):
         run_dir = PACKET / "vintages" / run_name
         files = []
         digest = hashlib.sha256()
@@ -49,7 +49,7 @@ def main():
         runs.append({"name": run_name, "sha256": digest.hexdigest(), "files": files})
     if [item["sha256"] for item in runs][0] != runs[1]["sha256"]:
         raise ValueError("two final producer runs differ in their ordered products")
-    validation = json.loads((PACKET / "vintages/2026-10-07-run-1/validation.json").read_bytes())
+    validation = json.loads((PACKET / "vintages/2026-10-08-run-1/validation.json").read_bytes())
     if not validation.get("output_matches_retained_original"):
         raise ValueError("producer result does not match retained originals")
     positive = {
