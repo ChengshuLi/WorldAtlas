@@ -9,6 +9,7 @@ import io
 import importlib.util
 import json
 import pathlib
+import re
 import resource
 import shutil
 import subprocess
@@ -23,8 +24,6 @@ INPUT_PINS = OWNED + "inputs/input-pins.json"
 RUNTIME_MANIFEST = OWNED + "inputs/runtime/runtime-manifest.json"
 RUNTIME_BUNDLE_REL = "inputs/runtime/runtime-bundle.tar.gz"
 CONTEXT = OWNED + "inputs/context/selected-routing-and-operational-context.json"
-CUSTODY_RECEIPT = OWNED + "vintages/custody-1/custody-preflight.json"
-CUSTODY_PUBLICATION = OWNED + "vintages/custody-1/publication.json"
 MAX_INPUT_BYTES = 256 * 1024 * 1024
 MAX_OUTPUT_BYTES = 12 * 1024 * 1024
 MAX_RSS_BYTES = 768 * 1024 * 1024
@@ -272,7 +271,12 @@ def load_inputs(baseline, contract_helpers, config, *, require_custody=True,
     input_manifest_sha = sha(baseline.pinned_bytes(INPUT_PINS))
     context = json.loads(baseline.pinned_bytes(CONTEXT))
     if require_custody:
-        custody_raw = baseline.pinned_bytes(CUSTODY_RECEIPT)
+        custody_vintage = config.get("custody_vintage")
+        if not isinstance(custody_vintage, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", custody_vintage):
+            raise ValueError("Exact custody-preflight vintage is missing from execution pins")
+        custody_receipt_path = OWNED + f"vintages/{custody_vintage}/custody-preflight.json"
+        custody_publication_path = OWNED + f"vintages/{custody_vintage}/publication.json"
+        custody_raw = baseline.pinned_bytes(custody_receipt_path)
         custody = json.loads(custody_raw)
         if custody.get("status") != "pass" or custody.get("context_sha256") != sha(canonical(context)):
             raise ValueError("whole-input custody preflight is absent or bound to different context")
@@ -291,12 +295,12 @@ def load_inputs(baseline, contract_helpers, config, *, require_custody=True,
             if (not isinstance(binding, dict) or not pin or binding.get("path") != path or
                     binding.get("bytes") != pin["bytes"] or binding.get("sha256") != pin["sha256"]):
                 raise ValueError(f"Preflight code binding differs from the exact execution code: {name}")
-        publication = json.loads(baseline.pinned_bytes(CUSTODY_PUBLICATION))
+        publication = json.loads(baseline.pinned_bytes(custody_publication_path))
         outputs = publication.get("outputs")
         if publication.get("status") != "complete" or not isinstance(outputs, list):
             raise ValueError("whole-input custody preflight publication is incomplete")
         records = {x.get("path"): x for x in outputs}
-        receipt_path = OWNED + "vintages/custody-1/custody-preflight.json"
+        receipt_path = custody_receipt_path
         if (len(records) != 2 or receipt_path not in records or
                 records[receipt_path].get("bytes") != len(custody_raw) or
                 records[receipt_path].get("sha256") != sha(custody_raw)):
@@ -480,7 +484,8 @@ def run(repo, commit, vintage):
         "helper_versions": {"immutable": evidence.VERSION, "record_contracts": "pinned scripts/evidence/contracts.py"},
         "execution_pins_sha256": sha(baseline.pinned_bytes(EXECUTION_PINS)),
         "input_pins_sha256": sha(baseline.pinned_bytes(INPUT_PINS)),
-        "custody_preflight_sha256": sha(baseline.pinned_bytes(CUSTODY_RECEIPT)),
+        "custody_preflight_sha256": sha(baseline.pinned_bytes(
+            OWNED + f"vintages/{config['custody_vintage']}/custody-preflight.json")),
     }
     contract_helpers.finite_metrics({"row_count": result["row_count"],
                                      "positive_area_pair_count": result["positive_area_pair_count"]},
