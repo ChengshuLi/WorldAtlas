@@ -1,0 +1,87 @@
+{
+  "artifact_archive": {
+    "canonical_identical_bytes": {
+      "assessment": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/geography-assessment.json",
+      "table": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/subject-assessments.tsv"
+    },
+    "reason": "Raw duplicate copies were removed after exact SHA-256 and byte equality with the final v4 products. The original v2/v3 receipts are preserved in controls/original-run-receipts.json."
+  },
+  "issue": 1356,
+  "limits": [
+    "The pinned GeoBoundaries 2017 administrative-role and completeness limits in the #393 packet remain unresolved.",
+    "The 185+8 source extraction lineage is not reauthenticated against the unavailable 120,489,189-byte country source.",
+    "Constitution Article 65 and Rosstat primary bytes remain unverified; this correction makes no legal, boundary, or semantic approval."
+  ],
+  "pairwise_identical": true,
+  "runs": [
+    {
+      "assessment": {
+        "byte_identical_copy_retained_at": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/geography-assessment.json",
+        "bytes": 457671,
+        "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v2/run-1/geography-assessment.json",
+        "sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5"
+      },
+      "baseline_commit": "90d5309c6497073a039099241360ba807d0c3722",
+      "current_consumed_features": [
+        "data/geography/part-20.json",
+        "data/geography/part-21.json"
+      ],
+      "inventory_join": "all 15 consumed current/source fields matched each pinned feature and parent record",
+      "outputs_fresh_before_run": true,
+      "preserved_assessment_statuses": {
+        "correction-needed": 22,
+        "insufficient-evidence": 185
+      },
+      "province_rows": 6,
+      "run": "run-1",
+      "scope_scan": "all 36 immutable indexed feature files scanned; each declared subject found exactly once",
+      "source_level_counts": {
+        "ADM2": 185,
+        "Named physical region portion": 22
+      },
+      "subjects": 207,
+      "table": {
+        "byte_identical_copy_retained_at": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/subject-assessments.tsv",
+        "bytes": 138563,
+        "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v2/run-1/subject-assessments.tsv",
+        "sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23"
+      }
+    },
+    {
+      "assessment": {
+        "byte_identical_copy_retained_at": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/geography-assessment.json",
+        "bytes": 457671,
+        "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v2/run-2/geography-assessment.json",
+        "sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5"
+      },
+      "baseline_commit": "90d5309c6497073a039099241360ba807d0c3722",
+      "current_consumed_features": [
+        "data/geography/part-20.json",
+        "data/geography/part-21.json"
+      ],
+      "inventory_join": "all 15 consumed current/source fields matched each pinned feature and parent record",
+      "outputs_fresh_before_run": true,
+      "preserved_assessment_statuses": {
+        "correction-needed": 22,
+        "insufficient-evidence": 185
+      },
+      "province_rows": 6,
+      "run": "run-2",
+      "scope_scan": "all 36 immutable indexed feature files scanned; each declared subject found exactly once",
+      "source_level_counts": {
+        "ADM2": 185,
+        "Named physical region portion": 22
+      },
+      "subjects": 207,
+      "table": {
+        "byte_identical_copy_retained_at": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/subject-assessments.tsv",
+        "bytes": 138563,
+        "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v2/run-2/subject-assessments.tsv",
+        "sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23"
+      }
+    }
+  ],
+  "status": "reproduced-with-limits",
+  "version": 1,
+  "work_item_scope": "mechanical provenance-field, consumed-input and safe-output correction for #393's exact 207 subjects"
+}
