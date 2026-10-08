@@ -232,7 +232,7 @@
   "outputs": [
     {"path":"research/geography/japan-report-integrity-1342-20261008/README.md","bytes":6718,"sha256":"0aca28322864b2625e6456962d4d88ec15e7bf7238e60c45470a4fcb5fbd2e07","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py","bytes":19295,"sha256":"2c611cb68c3e69a7a9a29640bc05f1bc4701d2b3641b7530729e84d72990242b","hash_kind":"file-bytes","role":"research-output"},
-    {"path":"research/geography/japan-report-integrity-1342-20261008/methods/build_evidence_quality.py","bytes":12440,"sha256":"39decad291a1c61f541c7b943e869f8a397df35b5c339318b9804b7936e85d7c","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/methods/build_evidence_quality.py","bytes":12651,"sha256":"fab4468b1accabd57c65eb6eecf8cfecc1f2e4eb336099d7f2efaaef4abfdbf5","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/tests/test_reconcile.py","bytes":8723,"sha256":"975cd88f526e6f32cb277e9548947769964253557423e1da70c4d7578502d7aa","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/two-run-equality.json","bytes":924,"sha256":"2ae63a08aa02b1ff833ad633b10c78c7b4869c6221c614170293e7561abfbb68","hash_kind":"file-bytes","role":"research-output"},
     {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/run-seven-eight-preliminary-equality.json","bytes":970,"sha256":"1eba33fba8e8c3709b2958063e52cf3a66de89d4722b8c306fb5068bb7b5222c","hash_kind":"file-bytes","role":"research-output"},
@@ -355,14 +355,11 @@
   "methods": [
     {
       "id": "pinned-report-transfer",
-      "kind": "geography",
-      "description": "Authenticate original packet/scope/target geometry and complete retained overlay roster, then bind every MLIT component area by source code, record ordinal/number, component identity and intersection geometry hash. No native-source geometry recalculation.",
+      "kind": "code",
+      "description": "Reporting code authenticates original packet/scope/target records and complete retained overlay report, then transfers each MLIT area by source code, record ordinal/number, target identity and intersection geometry hash. It does not calculate or alter geometry.",
       "software": "Python 3.7.3 runtime in this workspace; standard library JSON/hashlib/subprocess and baseline-pinned immutable.py; report-level assertions only.",
       "units": "Exact retained source values in JGD2011 geographic square degrees; not square metres. Identity/count checks are counts, not geographic truth.",
-      "axis_order": "longitude-latitude",
-      "crs": "MLIT retained product EPSG:6668 JGD2011 geographic; no coordinate operation executed.",
-      "area_method": "Transfer of retained overlay intersection_area_jgd2011_degrees2 by exact source/target identity; no area recomputation.",
-      "distance_method": "Not calculated."
+      "area_method": "Transfer of retained overlay intersection_area_jgd2011_degrees2 by exact source/target identity; no area recomputation."
     }
   ],
   "metrics": [
@@ -413,6 +410,38 @@
       "vintage": "baseline",
       "input_sha256": "2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804",
       "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "mlit_candidate_area_records",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "json_pointer": "/transfer/rows"
+    },
+    {
+      "metric_id": "components",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "json_pointer": "/scope/components"
+    },
+    {
+      "metric_id": "families",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "json_pointer": "/scope/families"
+    },
+    {
+      "metric_id": "current_contacts",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "json_pointer": "/scope/contacts"
+    },
+    {
+      "metric_id": "mlit_candidate_area_min",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "json_pointer": "/transfer/min"
+    },
+    {
+      "metric_id": "mlit_candidate_area_max",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "json_pointer": "/transfer/max"
     }
   ],
   "summaries": [
