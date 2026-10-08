@@ -80,7 +80,13 @@ def main() -> int:
         raise SystemExit("runtime, scratch and output reserve are incomplete")
     if sum(baseline.consumed.values()) + runtime_bytes + scratch_bytes + output_reserve > baseline.max_phase_bytes:
         raise SystemExit("complete immutable inputs, runtime, scratch and generated-output reserve exceed 256 MiB")
-    baseline.admit("runtime:scientific-python-and-proj", runtime_bytes)
+    runtime_remaining = runtime_bytes
+    runtime_chunk = 0
+    while runtime_remaining:
+        size = min(runtime_remaining, helper_module.MAX_FILE_BYTES)
+        baseline.admit(f"runtime:scientific-python-and-proj:{runtime_chunk}", size)
+        runtime_remaining -= size
+        runtime_chunk += 1
     baseline.admit("reserve:measurement-scratch", scratch_bytes)
 
     # This reserves the whole fresh output set before loading the pinned producer
