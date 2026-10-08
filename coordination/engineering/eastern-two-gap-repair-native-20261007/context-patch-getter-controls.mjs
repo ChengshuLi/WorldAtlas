@@ -1,5 +1,6 @@
 // Bounded replay of the exact production getter and its unchanged original readers.
 // Transparent private-restoration fixture; no normal-build qualification is implied.
+import{applyBytePatch,verifyWholeBytes}from'./byte-patch.mjs';import{acquireOriginalContextPair,constructAliasedContextChunk,readContextBody}from'./context-record-alias.mjs';
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{createHash}from'node:crypto';import{gunzipSync}from'node:zlib';import{execFileSync}from'node:child_process';
 const root=fs.realpathSync(process.argv[2]??process.cwd()),ns='coordination/engineering/eastern-two-gap-repair-native-20261007',name=ns+'/restore-canonical-products.mjs',source=fs.readFileSync(path.join(root,name),'utf8'),sha=b=>createHash('sha256').update(b).digest('hex');
 const prefix=source.slice(0,source.indexOf('function copy(')).replace(/^import .*;\n/gm,''),start=source.indexOf('export function restoredContextPatch('),end=source.indexOf('function checkoutMetadata',start),getter=source.slice(start,end).replace('export function','function');
@@ -13,4 +14,12 @@ for(const kind of ['wrong-mode','missing','changed','overcap','unrestored']){tes
  if(kind==='missing'){const original=f.lstatSync;f.lstatSync=(p,...a)=>{if(p===path.join(root,indexName)){const e=Error('missing');e.code='ENOENT';throw e;}return original(p,...a);};}
  if(kind==='changed'){const original=f.readSync;let changed=false;f.readSync=(fd,b,...a)=>{const n=original(fd,b,...a);if(n&&!changed){b[0]^=1;changed=true;}return n;};}
  }});assert.throws(test.run);if(['wrong-mode','missing','overcap','unrestored'].includes(kind))assert.equal(test.opens(),0);cases.push({kind,body_opens:test.opens()});}
-console.log(JSON.stringify({status:'PASS',source_sha256:sha(Buffer.from(source)),whole_original_patch_bytes:member.bytes,whole_original_patch_sha256:member.sha256,source_whole_git_mode_oid_pins:pins,complete_acquisition_budget:result.budget,negative_controls:cases,fixture_boundary:'Exact production getter/read functions with transparent private fixture; no complete restoration or scientific operators executed.'},null,2));
+let pipeline;
+if(process.argv[3]){const [a,b]=JSON.parse(fs.readFileSync(process.argv[3])),pin=p=>({bytes:p.encoded_bytes,sha256:p.encoded_sha256,decoded_bytes:p.decoded_bytes,decoded_sha256:p.decoded_sha256,mode:'100644'}),decodedBytes=result.raw.readUInt32LE(result.raw.length-4);
+ assert(result.budget.complete_phase_bytes+decodedBytes+2*(a.decoded_bytes+b.decoded_bytes)+a.encoded_bytes+b.encoded_bytes<=256*1024*1024,'Complete getter-to-pair phase before decoder');
+ const patch=JSON.parse(gunzipSync(result.raw,{maxOutputLength:32*1024*1024})),original=readContextBody(a.physical_path,pin(a));verifyWholeBytes(original,patch.original_source);assert.equal(patch.current_member.sha256,b.encoded_sha256);assert.equal(patch.current_member.mode,'100644');
+ const current=applyBytePatch(patch.commands,patch.current_member,name=>{assert.equal(name,'original');return original;}),pair=acquireOriginalContextPair({beforeFile:a.physical_path,beforePin:pin(a),afterPin:pin(b),afterRaw:current,runtimeBytes,codeBytes:args.codeBytes});
+ const reconstructed=constructAliasedContextChunk(gunzipSync(original),pair);assert.equal(reconstructed.whole_original_decoded_sha256,b.decoded_sha256);assert.equal(reconstructed.rows.length,1500);assert.equal(pair.changes.length,2);
+ pipeline={actual_getter_byte_patch_pair_and_complete_record_inverse:true,full_rows:1500,changed_full_rows:2,complete_phase_prospective_bytes:result.budget.complete_phase_bytes+decodedBytes+2*(a.decoded_bytes+b.decoded_bytes)+a.encoded_bytes+b.encoded_bytes};
+}
+console.log(JSON.stringify({status:'PASS',source_sha256:sha(Buffer.from(source)),pipeline,whole_original_patch_bytes:member.bytes,whole_original_patch_sha256:member.sha256,source_whole_git_mode_oid_pins:pins,complete_acquisition_budget:result.budget,negative_controls:cases,fixture_boundary:'Exact production getter/read functions with transparent private fixture; no complete restoration or scientific operators executed.'},null,2));
