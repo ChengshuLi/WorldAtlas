@@ -79,6 +79,12 @@
         "bytes": 2345,
         "sha256": "2a0d06c9a3c6e81ab7ab928569b34695704dc39026126b5eb5397bebceb1dcf1",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/native-recovery-fixture.yml",
+        "bytes": 848,
+        "sha256": "741b5478a5eedee4ece651ed48a8d39c219d5e793a088328ff5650f145c1e127",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {}
@@ -134,171 +140,15 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/README.md",
-      "bytes": 5643,
-      "sha256": "d63a47697b180474b3fe71c624e7e68f28e8921e5ebab1bca2b76b1fc0b93464",
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "bytes": 1022,
+      "sha256": "9f2a7f9185be0321de51c552dc7b41d4afaa9d9682504194f76c7566206c92d5",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/claim.json",
-      "bytes": 835,
-      "sha256": "8c56c8049763b448d546f37add022e85c42d6497030f5311925237c8c1daf9af",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/cloudflare-acceptance-source.json",
-      "bytes": 34127,
-      "sha256": "78c4019e8df2cb3c4938b257bd21d8fa7ca781e5ac79f12e5f11cdf674f0395b",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/current-runtime-pins.json",
-      "bytes": 1847,
-      "sha256": "a1fe52332f95ef67aaa856552ce8b652c1829709991c349edf91c5601df4ec19",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/final-controls.json",
-      "bytes": 4353,
-      "sha256": "bfb739381d9145b4e4748364e6625618b35cca33c0d17077ddbc531408959c5e",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/human-delivery-hold.json",
-      "bytes": 2205,
-      "sha256": "5e4787fcfaa75fd37806a4cd2264d61453da635474229f9a97d0075264f38dba",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/original-site-schedule-audit.json",
-      "bytes": 410,
-      "sha256": "b512b80572b2a4a8208864ee0327db2923b06a604912a00e3ac503b41da53d65",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/planner-code-bindings.json",
-      "bytes": 2263,
-      "sha256": "b2d98f4b33850d0d3d67df1cc1cee62f8126bdf751055cd8262f4911f931724b",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-impact-classification.json",
-      "bytes": 1396430,
-      "sha256": "6fa06c8e3c9da31b44d9747e6cded3a1ba9f385e8178f537cb308cb67e5a999d",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-current.json",
-      "bytes": 619661,
-      "sha256": "6eff71308f1ea7ab9454755477d1e911c657f906877a6ea83c0216c59d726e50",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-reservation-fixed.json",
-      "bytes": 619661,
-      "sha256": "6eff71308f1ea7ab9454755477d1e911c657f906877a6ea83c0216c59d726e50",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publisher-instructions-audit.json",
-      "bytes": 1258,
-      "sha256": "5bd308ce89c842412bfe0b9b867748cbe7978e9024b8e67a448f032e4f3e4ce7",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/readiness.json",
-      "bytes": 4922,
-      "sha256": "d1001a7a6769f877a1956b9bdb930ccbd56a4008dff716b06075fdbb925eb877",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/registry-source.json",
-      "bytes": 217745,
-      "sha256": "5c97f174c1eed5023a7b7c0f71f98ffa7f8e7679441fdb8bca7041492a596432",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-marker-before.json",
-      "bytes": 13688,
-      "sha256": "54c38a9349daa541049e83b33132752bff550e3da03719e9b50e9ae3bc01850a",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-package-source.json",
-      "bytes": 71837,
-      "sha256": "32f1ad3681d37560ee67d13e20e5ce608c19b7f468ca832fbcbee1c718a7f5b4",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-release-before.json",
-      "bytes": 4993,
-      "sha256": "14b9c50ebe5ca67e32644fce6dfb04ab55e02528abf0df9010e191ac2a70760b",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-cli.log",
-      "bytes": 12743,
-      "sha256": "8dd5c5e16f8ae66077832a2d89b49b76c9d6e4ca2908b806fbb5dc07532d4826",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-marker-fixed.log",
-      "bytes": 14071,
-      "sha256": "5414387e1ff28c1ad00a75ce6704435bf045976234d5d4b04ab8805e9245afef",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-provider-fixed.log",
-      "bytes": 13751,
-      "sha256": "d67e73967946340e22d5499c3df2de35592ae125ff425f3d3a8b08f4910bbd5f",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-reservation-fixed.log",
-      "bytes": 13507,
-      "sha256": "3deb091e45252d0b17ecd44dd9491960a240f5d33ac6255b4225158a4ddaeae0",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests.log",
-      "bytes": 12651,
-      "sha256": "30855d981f60c797c7364e95d4c8e1b411fb62695775f627fcb1e434e28f454c",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/publication/cloudflare-history.json",
-      "bytes": 4754,
-      "sha256": "f71fa8429944d5e8d9d358d3960c6b18448b7cdc08cc8149248cd0d0cac4575a",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "scripts/cloudflare-republish.mjs",
-      "bytes": 12230,
-      "sha256": "f494593a456cff1f3b0a0ceb73380b9f0e4684af179518d139d256120a8de223",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "scripts/publication-cloudflare.mjs",
-      "bytes": 11094,
-      "sha256": "6d6bf9943fbe4ad1ad13a03d6c9fc07131e89b3b1b351fb1e463175218aeff9a",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "test/cloudflare-republish.test.mjs",
-      "bytes": 14271,
-      "sha256": "063e740b608fb0a87f119770056cc02d911fd8345c62476b0306310ad00c7261",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "test/fixtures/cloudflare-publication.mjs",
-      "bytes": 2327,
-      "sha256": "050ee67977ddbd468882d9d1764ac3dc3e266845fd03a2212bf3a7f4e68f420c",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "test/publication-cloudflare.test.mjs",
-      "bytes": 12536,
-      "sha256": "a3d90f363d17cdae556cbdaeec10843be1d063e98682206f78f40dd364a9a3bc",
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/native-fixture-initial-failure.json",
+      "bytes": 546,
+      "sha256": "e3593f0d491a7690f40ab92971f3ce650936e8990d52e789f9053b77ce8b7c45",
       "hash_kind": "file-bytes"
     }
   ],
@@ -366,119 +216,16 @@
       "original_sha256": "446324ee970ab8ea025a2cdb801f5262bf83f47f53e15b3a8d8bc68b6988890c"
     },
     {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/README.md",
-      "status": "added"
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "status": "modified",
+      "original_sha256": "741b5478a5eedee4ece651ed48a8d39c219d5e793a088328ff5650f145c1e127"
     },
     {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/claim.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/cloudflare-acceptance-source.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/current-runtime-pins.json",
+      "path": "coordination/engineering/cloudflare-publication-846-20261007/native-fixture-initial-failure.json",
       "status": "added"
     },
     {
       "path": "coordination/engineering/cloudflare-publication-846-20261007/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/final-controls.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/human-delivery-hold.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/original-site-schedule-audit.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/planner-code-bindings.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-impact-classification.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-current.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publication-plan-reservation-fixed.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/publisher-instructions-audit.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/readiness.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/registry-source.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-marker-before.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-package-source.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/served-release-before.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-cli.log",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-marker-fixed.log",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-provider-fixed.log",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests-reservation-fixed.log",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/cloudflare-publication-846-20261007/targeted-tests.log",
-      "status": "added"
-    },
-    {
-      "path": "coordination/publication/cloudflare-history.json",
-      "status": "added"
-    },
-    {
-      "path": "scripts/cloudflare-republish.mjs",
-      "status": "added"
-    },
-    {
-      "path": "scripts/publication-cloudflare.mjs",
-      "status": "added"
-    },
-    {
-      "path": "test/cloudflare-republish.test.mjs",
-      "status": "added"
-    },
-    {
-      "path": "test/fixtures/cloudflare-publication.mjs",
-      "status": "added"
-    },
-    {
-      "path": "test/publication-cloudflare.test.mjs",
       "status": "added"
     }
   ],

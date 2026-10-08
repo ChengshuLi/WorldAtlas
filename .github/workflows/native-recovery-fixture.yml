@@ -5,6 +5,9 @@ on:
       - scripts/current-postgres-recovery.mjs
       - scripts/compact-recovery-profile.mjs
       - scripts/test-current-postgres-recovery-native.mjs
+      - scripts/publication-plan.mjs
+      - scripts/publication-cloudflare.mjs
+      - coordination/publication/cloudflare-history.json
       - .github/workflows/native-recovery-fixture.yml
 permissions:
   contents: read
@@ -22,6 +25,7 @@ jobs:
             src
             postgres
             data/observation-registry-history
+            coordination/publication
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
