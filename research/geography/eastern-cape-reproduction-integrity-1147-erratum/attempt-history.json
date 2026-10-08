@@ -1,0 +1,29 @@
+{
+  "attempts": [
+    {
+      "attempt": "run-01-initial-preflight",
+      "command": "python3 -B reproduce.py run --vintage run-01",
+      "date": "2026-10-07",
+      "error": "2026 attribute roster uses PROVINCE=\"Eastern Cape\" while the retained 2021 roster uses PROVINCE=\"EC\"; initial validator incorrectly required EC for both.",
+      "exit_code": 2,
+      "geometry_calculation_started": false,
+      "outcome": "failed-before-output-admission",
+      "output_vintage_created": false,
+      "resolution": "Validator now checks the exact vintage-specific source field value; rerun uses the same fresh run name because no destination was created.",
+      "source_data_modified": false
+    },
+    {
+      "attempt": "run-01-legacy-python-launcher",
+      "command": "python3 -B reproduce.py run --vintage run-01",
+      "date": "2026-10-07",
+      "error": "The system python3 is 3.7.3 and lacks importlib.metadata required by the authoring script. No script code, geometry, or output admission ran.",
+      "exit_code": 1,
+      "geometry_calculation_started": false,
+      "outcome": "failed-before-script-start",
+      "output_vintage_created": false,
+      "resolution": "Reran with the supplied Python 3.12.14 runtime; first successful run-01 publication was created by that runtime.",
+      "source_data_modified": false
+    }
+  ],
+  "version": 1
+}

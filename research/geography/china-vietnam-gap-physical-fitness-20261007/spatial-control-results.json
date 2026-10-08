@@ -1,0 +1,26 @@
+{
+  "control_scope": "synthetic helper controls only; no WorldCover raster blocks or candidate GIS input were read by this control runner.",
+  "geometry_helpers_extracted_from": "classify_worldcover_window.py",
+  "controls": [
+    {
+      "id": "directed-positive",
+      "outcome": "passed",
+      "detail": "A synthetic pixel-center point strictly inside a synthetic polygon is covered."
+    },
+    {
+      "id": "directed-negative",
+      "outcome": "passed",
+      "detail": "A synthetic point outside the same polygon is not covered."
+    },
+    {
+      "id": "altered-input",
+      "outcome": "passed",
+      "detail": "Shifting every polygon vertex by ten coordinate units changes the control point from covered to not covered."
+    },
+    {
+      "id": "missing-source",
+      "outcome": "passed",
+      "detail": "The producer required-read helper propagates FileNotFoundError; no pixel fill or substitute value is returned."
+    }
+  ]
+}

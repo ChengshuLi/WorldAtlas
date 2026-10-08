@@ -1,0 +1,533 @@
+{
+  "version": 1,
+  "issue": 1452,
+  "pr": 1466,
+  "assessment_head": "2c5bb20fcd72937cb33d876df3e85cb73a39710a",
+  "as_of_utc": "2026-10-08T07:21:44Z",
+  "method": "Bounded lawful metadata review only. No candidate coordinates/geometries were sent to services or interpreted; no source-feature request, spatial join, GIS, imagery pixels, WMS export, new archive decode, external contact, or license signing occurred.",
+  "scope": {
+    "subject_count": 19,
+    "subject_ids_sha256": "1add945db4e638b892566a417deac4ab13c448a343ebe65da8b4a3db897be94f",
+    "roster_source": "subjects/per-subject-source-status.json and immutable source-pins.json; exact retained subject roster preserved."
+  },
+  "source_level_assessment": [
+    {
+      "source_id": "ltu-ort10-2025-record",
+      "metadata_availability": "official metadata record reviewed",
+      "subject_result": "no subject/date/footprint join; Lithuanian and English descriptions conflict on year; generic license; coverage/date unknown"
+    },
+    {
+      "source_id": "ltu-ort-recent",
+      "metadata_availability": "official product/service and layer metadata previously reviewed; public viewing evidenced",
+      "subject_result": "date-footprint layers are leads only; rights for offline/vector reuse unresolved; no per-subject feature request or join; coverage/date unknown"
+    },
+    {
+      "source_id": "ltu-ort10-view-service",
+      "metadata_availability": "official service metadata and iteminfo reviewed",
+      "subject_result": "service provenance conflict; generic License and empty licenseInfo; no subject request/join; coverage/date unknown"
+    },
+    {
+      "source_id": "ltu-ort10-2024-record",
+      "metadata_availability": "official product metadata reviewed",
+      "subject_result": "metadata temporal extent is not a per-subject tile/date join; reuse terms unresolved; coverage/date unknown"
+    },
+    {
+      "source_id": "lva-cycle8-program",
+      "metadata_availability": "official program page and four GeoNetwork CSW records reviewed",
+      "subject_result": "metadata describes 2022–2024, nominal 20 cm RGBI/CIR; no sheet/date table or public vector/date-feature schema; coverage/date unknown"
+    },
+    {
+      "source_id": "lva-cycle8-wms",
+      "metadata_availability": "official service catalogue and CSW service records reviewed",
+      "subject_result": "cycle-8 WMS access requires signed client license; no license or authorized endpoint available; metadata connectPoint blank and access constraints conflict; no per-subject query; coverage/date unknown"
+    },
+    {
+      "source_id": "lva-cycle6-metadata",
+      "metadata_availability": "official licensed metadata archive headers/schema catalogued",
+      "subject_result": "older 2016–2018 context only; 108040732-byte PolygonZ member exceeds 32 MiB cap and must not be decoded/joined; not cycle-8 substitute; coverage/date unknown"
+    },
+    {
+      "source_id": "copernicus-wcd",
+      "metadata_availability": "official CLMS/CDSE product documentation and catalog responses hash-verified (22 captured files); no product raster or tile queried",
+      "subject_result": "Europe WCD 10 m yearly aggregate for hydrological years (Sep 1–Aug 31), Sentinel-1/2; CRS grids in metadata are EPSG:32625–32638 UTM or EPSG:3035 LAEA, 100 km tile grid. Product marked not validated; particular year/tile release not confirmed. Free for any purpose with DOI citation, but no exact observation dates, subject join, or precise shoreline evidence."
+    },
+    {
+      "source_id": "jrc-global-surface-water",
+      "metadata_availability": "official JRC product documentation/release metadata and headers hash-verified (22 captured files); no Earth Engine account, asset, raster, or tile accessed",
+      "subject_result": "v1.5 (updated 2026-08-26) covers 1984–2024 at 30 m; whole-record aggregates and 2022–2024 monthly/yearly history do not give acquisition-date shorelines. Collection 1/2 seam offsets are usually subpixel but can reach/exceed 30 m; backprocessing planned. CRS and absolute positional accuracy not established by reviewed metadata. Free use with dataset/paper citation and map attribution “Source: EC JRC/Google”; no subject query or precise microcomponent evidence."
+    },
+    {
+      "source_id": "water-context-findings",
+      "metadata_availability": "GEO5 supplementary source check completed; all 22 captured source response bodies/header files match byte counts and SHA-256 manifest",
+      "subject_result": "This provenance finding supports only source-level WCD/JRC metadata and limitations; it does not establish historical shoreline provenance or candidate-specific dates/coverage."
+    },
+    {
+      "source_id": "lva-cycle8-csw-metadata",
+      "metadata_availability": "public GeoNetwork CSW 2.0.2 capabilities and GetRecords/GetRecordById hash-captured; four exact cycle-8 records reviewed",
+      "subject_result": "metadata records contain no per-sheet date schema or feature/download endpoint; dataset abstracts say Kurzeme and 2022–2024, nominal 20 cm, LKS 92 TM; machine-readable access fields conflict with signed-client-license service abstracts; no subject applicability established"
+    }
+  ],
+  "subject_level_conclusion": "For every exact subject below, source metadata does not establish subject coverage, exact covering tile/footprint, acquisition date, partial/multiple/no-data status, applicable native CRS/transformation, achieved positional accuracy, or tile QA. Subject-level source availability remains unknown; inherited country/source-owner labels and national program statements were not used to infer coverage or jurisdiction.",
+  "subjects": [
+    {
+      "subject_id": "physical-component:00c5d50d6765602074625e006f08b1b58ac03cd3d9fc5b1a624bbf0158f18ae0",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:0882c7d92c696f53d8fe8bba690973c32788f2e51bd1ef6bd4c055dd13279056",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:14f6a86eac664f3256a633ae0f853360d63edb14be9c9811b450176f50ceab26",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:1a77c37a11f3d84b46d4651220599107401bc21d1536133fcc7618d66c0a49f5",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:294063970434d15f149c664633f64dba5411458cf843cd925e4e637dd3de51da",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:694a1cb53116d780f0ee776a0f3989edb0d74b01f4c5d89dc05911407407f69b",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:7929dff9531413d6e6a860bfffea697694d286b2797a1ff0664d71115d364316",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:9e0b3beac32b8398b3708a9918c9920a76917068d6711af5b02999314f6bea22",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:b3a2cc30d91e76ce3dedaa850d8382a882f76db28d279f8bb50d3f77777c1577",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:b4fd86a506640456d483a8f82a945463e084a45a73582b1010f2fea2f8967ca1",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:bc256ccd31a291bf847cee3b7dc1f1f37a9fa12e708f978d9dc452880d912e08",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:c167b7699ddfa22945201526da32448b3ecb1a33ac810ba5457693fb837e901a",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:e33456f199bc7c1cb595c3211a28fe42231252d4c0348acd321621878fe60eba",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:eaa5da8229b82a55de103a841fcc4ebb73c7f468f3dcffdb5c0e7171485b345f",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:ee9bc61cd9e2a907faa1f59362c07e036c2d4a5e499583f33f64c8f7887175e3",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "physical-component:f79b07eb63959b23c1477e235d7ecd86ff4a59f0b80fd1555e22c4a0ce723083",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "gb:LTU:ADM2:59024439B19575014620111",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "gb:LTU:ADM2:59024439B52033520810825",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    },
+    {
+      "subject_id": "gb:LVA:ADM1:71098776B71258051821866",
+      "subject_query": "not performed; metadata-only review",
+      "coverage": "unknown",
+      "observation_date": "unknown",
+      "tile_or_footprint_identity": "unknown",
+      "coverage_completeness_and_vintages": "unknown",
+      "native_crs_and_transformation": "unknown at subject layer",
+      "achieved_accuracy_and_tile_qa": "unknown",
+      "physical_status": "unknown",
+      "reviewed_source_ids": [
+        "ltu-ort10-2025-record",
+        "ltu-ort-recent",
+        "ltu-ort10-view-service",
+        "ltu-ort10-2024-record",
+        "lva-cycle8-program",
+        "lva-cycle8-wms",
+        "lva-cycle6-metadata",
+        "copernicus-wcd",
+        "jrc-global-surface-water",
+        "lva-cycle8-csw-metadata"
+      ]
+    }
+  ],
+  "acceptance_status": {
+    "item_1": "not proven for any of 19; zero source-to-subject coverage/date/accuracy/QA joins; metadata availability alone is insufficient.",
+    "item_2": "partially assessed with explicit unresolved blockers: Lithuania product-specific offline/vector reuse terms not found and year/provenance conflicts remain; Latvia cycle-8 WMS requires signed license, with no public date-feature schema/endpoint found in reviewed official metadata.",
+    "item_3": "not examined; no imagery was acquired or inspected and no physical classification is made.",
+    "item_4": "preserved: all 19 retain unknown coverage/date/physical status and exact missing facts."
+  },
+  "limits": [
+    "This is source availability at metadata level, not per-subject coverage.",
+    "Public metadata/service viewing does not establish reuse rights.",
+    "Copernicus WCD and JRC GSW remain temporal/generalized context and cannot establish candidate-specific observation dates or precise shoreline status.",
+    "No source was admitted for candidate-level GIS or imagery under this assessment.",
+    "WCD product DOI/citation and JRC dataset/paper/map attribution are recorded for any later source use; these terms do not cure their temporal/spatial unsuitability for acceptance.",
+    "Hash verification establishes capture integrity, not the factual truth of a source claim."
+  ],
+  "evidence_files": [
+    "sources/lva-cycle8-source-findings.json",
+    "sources/lva-cycle8-capture-manifest.json",
+    "sources/lithuanian-date-footprint-rights-findings.json",
+    "sources/lithuanian-date-footprint-capture-manifest.json",
+    "sources/official-source-register.json",
+    "sources/water-context-findings.json",
+    "sources/water-context-capture-manifest.json"
+  ]
+}

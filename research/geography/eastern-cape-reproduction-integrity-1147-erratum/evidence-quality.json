@@ -1,0 +1,870 @@
+{
+  "baseline": {
+    "commit": "de506f51100568e150e51f2926a5259b71e55272",
+    "files": [
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 6820,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/README.md",
+        "sha256": "ee4386f490adc9e55d3023efea1d97b4a05e8eed443a6678d004e245150337eb"
+      },
+      {
+        "bytes": 133124,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/evidence-quality.json",
+        "sha256": "11d6b1770a14df79b1823a7d42d53acde6c723213db1db127e0cb1a2614cbd7f"
+      },
+      {
+        "bytes": 19248,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json",
+        "sha256": "39c36e301e82035c7eb1736e4ef0cbf7de0861a90024c7c51b787abf88b52979"
+      },
+      {
+        "bytes": 382,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-negative-control.json",
+        "sha256": "fcb95e09eccb6bb9e453b6b5634ad8e065876cf3a33e62979af15575c3c3082a"
+      },
+      {
+        "bytes": 1288,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-positive-control.json",
+        "sha256": "73cfce1bf53048b1ed35bd22d3768f876dfe5f90b2ba200b9fc35cb2010b96f1"
+      },
+      {
+        "bytes": 40205,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/findings/mdb-crosswalk-and-reproduction.json",
+        "sha256": "25f97304c52c52c85cf2d1bc18c36ce35ef011c07cdd49bf19969f4f7bb143d0"
+      },
+      {
+        "bytes": 672,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/findings/measurement-inputs.json",
+        "sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e"
+      },
+      {
+        "bytes": 13239,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/findings/source-register.json",
+        "sha256": "841c31e655cbaf55e03e95a6b1df325928edb822a74f9a217a57de4913ba8688"
+      },
+      {
+        "bytes": 5363,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/measure_boundary_vintages.py",
+        "sha256": "40b8af8954c3cc3641575c9f5ba505363e76b1553ee8f2523e029d1608a8c62c"
+      },
+      {
+        "bytes": 24367,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/reproduce_source_audit.py",
+        "sha256": "3daa4c433c7a740756e27fc0de7a9a00c5581db6dcc64e8d8b4a07a85e266727"
+      },
+      {
+        "bytes": 10385,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-1137-api-snapshot.json",
+        "sha256": "e1071db7ec1b7dfed28dbfa1ae52902a3339218c8d150d006abbd20aa6337989"
+      },
+      {
+        "bytes": 17619,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-955-api-snapshot.json",
+        "sha256": "7644a280533b32c4bcd74faa3ece3d2af56beb1bf551084265762caecf8f007f"
+      },
+      {
+        "bytes": 11290,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-attribute-roster.json",
+        "sha256": "ffd8ae38ed99d2cb66b5d4c0cf3f74972de81ca8e4d02bb161eb59cf5e79dbd4"
+      },
+      {
+        "bytes": 10008353,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-boundaries.geojson",
+        "sha256": "d92db8c3ed9f508841336a68c8e3b94c7a5b9f031787884119d9575a95673eab"
+      },
+      {
+        "bytes": 11749,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-attribute-roster.json",
+        "sha256": "ef7fbf219bb3d33062cf78bd6e5b32b5f6fac687b576212d12320a005f7c2604"
+      },
+      {
+        "bytes": 9972867,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-boundaries.geojson",
+        "sha256": "f0069abf4892d52c4a8884f932c2e760e5663690c37204b91fa17a9ff3524147"
+      },
+      {
+        "bytes": 5127,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-item-metadata.json",
+        "sha256": "5476378615eb8094a045a346a3de1b0820c6b3b34ff10e320e3ccfea343a49e3"
+      },
+      {
+        "bytes": 15666,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-layer-metadata.json",
+        "sha256": "27a7b5c409efe59d20b60c1ac66d0edb65eb5404835a7fcb64aea550af687cb8"
+      },
+      {
+        "bytes": 5117,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-item-metadata.json",
+        "sha256": "2c09557bf368739c45e9823565563beb1f958f33fd8bacc4bdc6497fc27a0839"
+      },
+      {
+        "bytes": 14946,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-layer-metadata.json",
+        "sha256": "98afa9ea38849e32ac216b78cd82f0ca4737a201990bbef602584f9e2fcc5277"
+      },
+      {
+        "bytes": 18354,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json",
+        "sha256": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb"
+      },
+      {
+        "bytes": 25352714,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-001",
+        "role": "original-source",
+        "sha256": "a87211053b2a57f7948bf4c416655959cca91a720e35ca3a5aef5a891ac52433"
+      },
+      {
+        "bytes": 25352714,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-002",
+        "role": "original-source",
+        "sha256": "fa2143ac904ae38dd71793d9b520badccd79088735d1dd8082e72679494f1616"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 1953,
+        "hash_kind": "file-bytes",
+        "path": "scripts/ellipsoidal_area.py",
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+      },
+      {
+        "bytes": 8846,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/geometry.py",
+        "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+      },
+      {
+        "bytes": 17414,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+      }
+    ],
+    "pin_files": {
+      "baseline_1": "data/administrative-sources.json",
+      "baseline_2": "data/geography/part-28.json",
+      "baseline_3": "data/hierarchy.json",
+      "baseline_4": "data/world-index.json",
+      "baseline_5": "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json",
+      "baseline_6": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-001",
+      "baseline_7": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-002",
+      "original_1147_1": "data/regional-review/eastern-cape-source-restoration-435/README.md",
+      "original_1147_10": "data/regional-review/eastern-cape-source-restoration-435/reproduce_source_audit.py",
+      "original_1147_11": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-1137-api-snapshot.json",
+      "original_1147_12": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-955-api-snapshot.json",
+      "original_1147_13": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-attribute-roster.json",
+      "original_1147_14": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-boundaries.geojson",
+      "original_1147_15": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-attribute-roster.json",
+      "original_1147_16": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-boundaries.geojson",
+      "original_1147_17": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-item-metadata.json",
+      "original_1147_18": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-layer-metadata.json",
+      "original_1147_19": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-item-metadata.json",
+      "original_1147_2": "data/regional-review/eastern-cape-source-restoration-435/evidence-quality.json",
+      "original_1147_20": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-layer-metadata.json",
+      "original_1147_3": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json",
+      "original_1147_4": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-negative-control.json",
+      "original_1147_5": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-positive-control.json",
+      "original_1147_6": "data/regional-review/eastern-cape-source-restoration-435/findings/mdb-crosswalk-and-reproduction.json",
+      "original_1147_7": "data/regional-review/eastern-cape-source-restoration-435/findings/measurement-inputs.json",
+      "original_1147_8": "data/regional-review/eastern-cape-source-restoration-435/findings/source-register.json",
+      "original_1147_9": "data/regional-review/eastern-cape-source-restoration-435/measure_boundary_vintages.py",
+      "project_scripts_ellipsoidal_area_py": "scripts/ellipsoidal_area.py",
+      "project_scripts_evidence_geometry_py": "scripts/evidence/geometry.py",
+      "project_scripts_evidence_immutable_py": "scripts/evidence/immutable.py"
+    },
+    "pins": {
+      "baseline_1": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "baseline_2": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "baseline_3": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline_4": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "baseline_5": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb",
+      "baseline_6": "a87211053b2a57f7948bf4c416655959cca91a720e35ca3a5aef5a891ac52433",
+      "baseline_7": "fa2143ac904ae38dd71793d9b520badccd79088735d1dd8082e72679494f1616",
+      "original_1147_1": "ee4386f490adc9e55d3023efea1d97b4a05e8eed443a6678d004e245150337eb",
+      "original_1147_10": "3daa4c433c7a740756e27fc0de7a9a00c5581db6dcc64e8d8b4a07a85e266727",
+      "original_1147_11": "e1071db7ec1b7dfed28dbfa1ae52902a3339218c8d150d006abbd20aa6337989",
+      "original_1147_12": "7644a280533b32c4bcd74faa3ece3d2af56beb1bf551084265762caecf8f007f",
+      "original_1147_13": "ffd8ae38ed99d2cb66b5d4c0cf3f74972de81ca8e4d02bb161eb59cf5e79dbd4",
+      "original_1147_14": "d92db8c3ed9f508841336a68c8e3b94c7a5b9f031787884119d9575a95673eab",
+      "original_1147_15": "ef7fbf219bb3d33062cf78bd6e5b32b5f6fac687b576212d12320a005f7c2604",
+      "original_1147_16": "f0069abf4892d52c4a8884f932c2e760e5663690c37204b91fa17a9ff3524147",
+      "original_1147_17": "5476378615eb8094a045a346a3de1b0820c6b3b34ff10e320e3ccfea343a49e3",
+      "original_1147_18": "27a7b5c409efe59d20b60c1ac66d0edb65eb5404835a7fcb64aea550af687cb8",
+      "original_1147_19": "2c09557bf368739c45e9823565563beb1f958f33fd8bacc4bdc6497fc27a0839",
+      "original_1147_2": "11d6b1770a14df79b1823a7d42d53acde6c723213db1db127e0cb1a2614cbd7f",
+      "original_1147_20": "98afa9ea38849e32ac216b78cd82f0ca4737a201990bbef602584f9e2fcc5277",
+      "original_1147_3": "39c36e301e82035c7eb1736e4ef0cbf7de0861a90024c7c51b787abf88b52979",
+      "original_1147_4": "fcb95e09eccb6bb9e453b6b5634ad8e065876cf3a33e62979af15575c3c3082a",
+      "original_1147_5": "73cfce1bf53048b1ed35bd22d3768f876dfe5f90b2ba200b9fc35cb2010b96f1",
+      "original_1147_6": "25f97304c52c52c85cf2d1bc18c36ce35ef011c07cdd49bf19969f4f7bb143d0",
+      "original_1147_7": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "original_1147_8": "841c31e655cbaf55e03e95a6b1df325928edb822a74f9a217a57de4913ba8688",
+      "original_1147_9": "40b8af8954c3cc3641575c9f5ba505363e76b1553ee8f2523e029d1608a8c62c",
+      "project_scripts_ellipsoidal_area_py": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "project_scripts_evidence_geometry_py": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "project_scripts_evidence_immutable_py": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    "subject_files": {
+      "gb:ZAF:ADM3:15628383B16723794281290": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B24019341917361": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B24472250012031": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B28857154592205": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B33674951697181": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B35584475836677": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B36159893459203": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B46688478529811": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B4889923419833": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B56060894344771": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B59220525748831": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B67522024924235": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B78908098986015": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B80616091697700": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B88034979550306": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B92131487833225": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B99818150234159": "data/geography/part-28.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/attempt-history.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/bind_sources.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/engineering-handoff.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/source-lock.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/source-records/issue-contract-20261007.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/execution-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/identity-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/output-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/ambiguous-name-geometry-2021.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/duplicate-geometry-2021.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/fixtures.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/geometry-helper-altered.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/missing-geometry-2021.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/source-lock-substitution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/swapped-code-geometry-2021.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-01/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-01/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-01/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/legacy-result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/legacy-result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/result.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python3 -B reproduce.py run --vintage run-01",
+    "python3 -B reproduce.py run --vintage run-02",
+    "python3 -B reproduce.py fixtures --vintage fixtures-01",
+    "python3 -B reproduce.py controls --fixture-vintage fixtures-01 --run-one run-01 --attempt attempts-01 --report-vintage controls-01",
+    "python3 -B reproduce.py pair --run-one run-01 --run-two run-02 --controls-vintage controls-01 --report-vintage pair-02"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "mdb-2021-current-reference"
+      ],
+      "status": "supported",
+      "text": "All 33 2021 source district codes and names are preserved in the corrected report from actual fields DISTRICT and DISTRICT_N; 231 numeric values match the retained legacy result exactly across two fresh runs. This repairs reporting/reproduction integrity only."
+    },
+    {
+      "source_ids": [
+        "mdb-2021-current-reference",
+        "mdb-2026-prospective",
+        "geoboundaries-zaf-adm3-2020"
+      ],
+      "status": "unresolved",
+      "text": "MDB 2021/2026 served-response comparisons do not establish legal boundary correctness, detached territorial completeness, current legal effectiveness, or geoBoundaries identity equivalence; the prospective MDB 2026 vintage was not effective on retrieval date."
+    }
+  ],
+  "issue": 1371,
+  "lane": "geography",
+  "methods": [
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Execute the exact retained measurement entry point and pinned current-main geometry/ellipsoidal-area helpers against complete captured MDB 2021/2026 attribute and GeoJSON responses; redirect only input/output transport. Validate all 33 features and code/name/attribute/geometry joins. Derive district_2021 from DISTRICT and district_name_2021 from DISTRICT_N. Compare all numeric measures against the retained legacy result and two fresh output vintages.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "eastern-cape-measurement-integrity",
+      "kind": "geography",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; GEOS 3.13.1; pinned WorldAtlas source and helper bytes",
+      "units": "m2 and dimensionless fractions; 33 municipality records"
+    },
+    {
+      "description": "Run complete duplicate, missing, swapped code, ambiguous name, project-helper drift, source-lock substitution and existing-output collision controls against the actual CLI entry point.",
+      "id": "eastern-cape-integrity-controls",
+      "kind": "source",
+      "software": "Python 3.12.14; standard library; isolated owned output vintages",
+      "units": "control outcomes"
+    }
+  ],
+  "metric_bindings": [],
+  "metrics": [],
+  "outputs": [
+    {
+      "bytes": 1362,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/attempt-history.json",
+      "sha256": "bec506f578b3ae5d790aca7ac309ec4be29b802ae033ef3484419314b45d6e08"
+    },
+    {
+      "bytes": 5335,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/bind_sources.py",
+      "sha256": "c03c18236c61c75d3bde183300212f95480ca1555e390fae6e4fbbb8172bfee5"
+    },
+    {
+      "bytes": 2044,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/engineering-handoff.md",
+      "sha256": "8d4d9cd237d39adeaf34746c7cd96ace6771e2999c089400342c8e8ea10c0375"
+    },
+    {
+      "bytes": 40247,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/reproduce.py",
+      "sha256": "6c022631d12da6efb02bca0c2921358c1091922bf3e78b779d03390530405250"
+    },
+    {
+      "bytes": 16988,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/source-lock.json",
+      "sha256": "475283fffd4e507cb96c933aefbf3ddcfdfd82e5abcb2e74474110970651d377"
+    },
+    {
+      "bytes": 16327,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/source-records/issue-contract-20261007.md",
+      "sha256": "b1e95090949c9d058284bc58290e0fd9650ed94afc2aaa16eb607369c78cc916"
+    },
+    {
+      "bytes": 1440,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/execution-negative-control.json",
+      "sha256": "6d1dd08713eb7df995f099e697ce352f9b315ba9bb4756af981c7e55eb9e51f4"
+    },
+    {
+      "bytes": 4177,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/identity-negative-control.json",
+      "sha256": "415812d15cb57c63a66ca38dd22fb17e8d1e3e49a73501d9f5e524c04c4ae50e"
+    },
+    {
+      "bytes": 1155,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/output-negative-control.json",
+      "sha256": "dcc9e8a8f8346ddc0a9ad952bbced0cf2d24e424c28d1c86e60563465aa7b752"
+    },
+    {
+      "bytes": 780,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/controls-01/publication.json",
+      "sha256": "fd1f5a280a50c27f8f2cb0ae7c4c631fccf3cbb60a15300e8a02e22d9c6634d7"
+    },
+    {
+      "bytes": 10008351,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/ambiguous-name-geometry-2021.geojson",
+      "sha256": "f07f5c951760e8dce921075bc637a6ab5ee69d7bbab72bccb7abc448afe3ea1f"
+    },
+    {
+      "bytes": 10510018,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/duplicate-geometry-2021.geojson",
+      "sha256": "e1f58d5b82cd6486bc7dcf82f75b4aa22e79f8f5c85407d3a59792089d82706f"
+    },
+    {
+      "bytes": 2872,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/fixtures.json",
+      "sha256": "eda3d5842359d851a3e5512dec18726d74a78325659a2a2e549ebd6d3ee6aefc"
+    },
+    {
+      "bytes": 8854,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/geometry-helper-altered.py",
+      "sha256": "aab54ed914db7751850b34b82e4004be4824030d9289b32203be78989bd02d03"
+    },
+    {
+      "bytes": 9506690,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/missing-geometry-2021.geojson",
+      "sha256": "906cd40322cc895011c31704c4056e469195f5f587dee67b7c50d10d896f0dbe"
+    },
+    {
+      "bytes": 1765,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/publication.json",
+      "sha256": "4694120aad34ecdb12e8e6b06b62c4c437421f90295efbd95b87e5830eb81a8d"
+    },
+    {
+      "bytes": 16988,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/source-lock-substitution.json",
+      "sha256": "6285f306e8d44b89779c9617db083104ab6fcfc6998dca814141f591246ca529"
+    },
+    {
+      "bytes": 10008354,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/fixtures-01/swapped-code-geometry-2021.geojson",
+      "sha256": "18f69e0a54df3e9b983b73cf7779a45e45d96d71a8b02089314993132fcf289a"
+    },
+    {
+      "bytes": 809,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-01/positive-control.json",
+      "sha256": "30a391972b2c3729674ea0a4ffa22da82edddb4945135b7589df1ead6d16cc64"
+    },
+    {
+      "bytes": 507,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-01/publication.json",
+      "sha256": "5314af89de834ffe45e33d26b5f921f028c0369c26752a5fd79467167bad606e"
+    },
+    {
+      "bytes": 687,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-01/reproducibility.json",
+      "sha256": "60d5373d111d0b20dac8af85cbbaca0ceedb85ab241b2df6b2651f2427019fb2"
+    },
+    {
+      "bytes": 383,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/negative-control.json",
+      "sha256": "c2fcc1efc32f2384e3670d4a6ec4a313dd85dd177dd5b7aec3b94b9429d6bff7"
+    },
+    {
+      "bytes": 809,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/positive-control.json",
+      "sha256": "30a391972b2c3729674ea0a4ffa22da82edddb4945135b7589df1ead6d16cc64"
+    },
+    {
+      "bytes": 738,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/publication.json",
+      "sha256": "4f1d49c11a9771922e06602590683e41210d271f96a93694eed5b52cd50eb424"
+    },
+    {
+      "bytes": 687,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/reproducibility.json",
+      "sha256": "60d5373d111d0b20dac8af85cbbaca0ceedb85ab241b2df6b2651f2427019fb2"
+    },
+    {
+      "bytes": 4083,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/execution.json",
+      "sha256": "f6764574d256cfd3bee4ae96aeefb631ff1f3b3b298690ecb109f65a2551cc7f"
+    },
+    {
+      "bytes": 15169,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/legacy-result.json",
+      "sha256": "b69e0f34937067a5c1aec1cbc2e9aebf4528c4adda59120c0cce6a4a1192645d"
+    },
+    {
+      "bytes": 721,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/publication.json",
+      "sha256": "5cc7289ee8a73d32fced175b67a1a91068841fde9fbdf35a059e2dacd4029fc3"
+    },
+    {
+      "bytes": 17254,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-01/result.json",
+      "sha256": "70aebd647e100850624b113599bf7f0b924aff7c8416be27bc16a29058f69306"
+    },
+    {
+      "bytes": 4083,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/execution.json",
+      "sha256": "f6764574d256cfd3bee4ae96aeefb631ff1f3b3b298690ecb109f65a2551cc7f"
+    },
+    {
+      "bytes": 15169,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/legacy-result.json",
+      "sha256": "b69e0f34937067a5c1aec1cbc2e9aebf4528c4adda59120c0cce6a4a1192645d"
+    },
+    {
+      "bytes": 721,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/publication.json",
+      "sha256": "f4d65f0851f3ce77b0a54f2a1f7c762c8d86d66aa55e5ecca1e5e2bfd02b67a9"
+    },
+    {
+      "bytes": 17254,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/run-02/result.json",
+      "sha256": "70aebd647e100850624b113599bf7f0b924aff7c8416be27bc16a29058f69306"
+    }
+  ],
+  "sources": [
+    {
+      "id": "geoboundaries-zaf-adm3-2020",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 3.0 IGO; retain attribution to geoBoundaries (Runfola et al.) and commit 9469f09."
+      },
+      "limit": "This child does not duplicate the already-retained source. Exact original attribution and part/whole-file hashes are pinned and replayed; original geographic accuracy is not implied.",
+      "restoration": "The exact lawful original bytes are already preserved unchanged at the pinned ancestor-main paths listed as baseline role original-source and in the prior source register; reproduce from these files without making a duplicate.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "original source for the stable Atlas subject IDs and historical names",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZAF/ADM3/geoBoundaries-ZAF-ADM3.geojson",
+      "verification": "verified",
+      "vintage": "gbOpen ZAF ADM3 at release commit 9469f09; 2020 reference; original retrieval 2026-10-05, byte-identical parts copied 2026-10-06"
+    },
+    {
+      "id": "mdb-2021-current-reference",
+      "license": {
+        "status": "restricted",
+        "terms": "Attribution to MDB required. Research/publication/value-added use allowed; no sale/commercial use; do not alter original and pass to third parties as MDB product."
+      },
+      "limit": "Layer is based on MDB 2018, effective in 2021, last service edit December 2023. 2024 final decisions are later; legal effective date and complete/current footprint remain unresolved.",
+      "restoration": "The exact item, service metadata, and 2026-10-06 Eastern Cape REST response bytes and hashes are retained as research evidence in this packet; retrieve by REST URL parameters recorded in findings/source-register.json. Respect MDB attribution and restricted-use terms; this is not an unrestricted downstream redistribution grant.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDB 2021 item, layer metadata and Eastern Cape roster/geometry REST responses",
+      "temporal_status": "reference",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/27bbdd5b041b4ba6b5707dfed5aa3923?f=json",
+      "verification": "verified",
+      "vintage": "MDB Local Municipalities 2021; based on 2018 MDB product; service edited 2023-12-12"
+    },
+    {
+      "id": "mdb-2026-prospective",
+      "license": {
+        "status": "restricted",
+        "terms": "Attribution to MDB required. Research/publication/value-added use allowed; no sale/commercial use; do not alter original and pass to third parties as MDB product."
+      },
+      "limit": "Prospective on evaluation date; cannot establish effective/current geography as of 2026-10-06.",
+      "restoration": "The exact item, service metadata, and 2026-10-06 Eastern Cape REST response bytes and hashes are retained as research evidence in this packet; retrieve by REST URL parameters recorded in findings/source-register.json. Respect MDB attribution and restricted-use terms; this is not an unrestricted downstream redistribution grant.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "prospective MDB 2026 item, layer metadata and Eastern Cape roster/geometry REST responses",
+      "temporal_status": "reference",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/82c7a6d178454ddcb4dc1ef6bf2a4303?f=json",
+      "verification": "verified",
+      "vintage": "MDB Local Municipalities 2026; item created 2026-07-14; states effective 2026-11-04"
+    },
+    {
+      "id": "mdb-2024-gazette-5030",
+      "license": {
+        "status": "unknown",
+        "terms": "Official gazette PDF terms were not determined; no copy redistributed."
+      },
+      "limit": "DEM determination is not itself a section 23 effective-date notice.",
+      "restoration": "Retrieve official PDF from URL and inspect relevant DEM map sheets; direct fetch timed out, official search index returned notice/map text.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDB determination notices for DEM6500, DEM6506 and DEM6611",
+      "temporal_status": "reference",
+      "url": "https://www.demarcation.org.za/wp-content/uploads/2024/01/Eastern-Cape-S21-5030-08-01-2024.pdf",
+      "verification": "verified",
+      "vintage": "Eastern Cape Provincial Gazette 5030, PN763, 2024-01-08"
+    },
+    {
+      "id": "mdb-2024-gazette-5064",
+      "license": {
+        "status": "unknown",
+        "terms": "Official gazette PDF terms were not determined; no copy redistributed."
+      },
+      "limit": "Confirms final MDB decision only; not IEC materiality opinion or MEC effect date.",
+      "restoration": "Retrieve official PDF from URL; direct fetch returned 502, official search index returned confirmation table.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDB Section 21(5) confirmations for DEM6500, DEM6506 and DEM6611",
+      "temporal_status": "reference",
+      "url": "https://www.demarcation.org.za/wp-content/uploads/2024/03/EC_S21_5_5064-11-03-ECape.pdf",
+      "verification": "verified",
+      "vintage": "Eastern Cape Provincial Gazette 5064, PN805, 2024-03-11"
+    },
+    {
+      "id": "stats-sa-district-name",
+      "license": {
+        "status": "unknown",
+        "terms": "Official Stats SA web page; reuse terms not separately established."
+      },
+      "limit": "Supports Cacadu renamed Sarah Baartman in 2018; not boundary geometry.",
+      "restoration": "Retrieve page by URL. PDF report endpoint returned an Incapsula challenge, not a retained report.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Stats SA district-name context",
+      "temporal_status": "reference",
+      "url": "https://www.statssa.gov.za/?p=16760",
+      "verification": "verified",
+      "vintage": "Eastern Cape Census 2022 article posted 2023-10-23"
+    },
+    {
+      "id": "mda-effective-date-law",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legislation; terms not separately assessed."
+      },
+      "limit": "Specific legal effective date remains unresolved.",
+      "restoration": "Retrieve current official consolidated Act and source the specific IEC opinion and Eastern Cape MEC Gazette notices for DEM6500/6506/6611.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDA section 23 legal effective-date procedure",
+      "temporal_status": "reference",
+      "url": "https://www.gov.za/documents/local-government-municipal-demarcation-act",
+      "verification": "unverified",
+      "vintage": "Local Government: Municipal Demarcation Act 1998 as amended"
+    },
+    {
+      "id": "dr-ab-xuma-identity",
+      "license": {
+        "status": "unknown",
+        "terms": "Municipal website reuse terms not established."
+      },
+      "limit": "Supports present self-description, not legal name change instrument/date.",
+      "restoration": "Retrieve the municipal about page at URL.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "municipality self-description, category and Engcobo place distinction",
+      "temporal_status": "reference",
+      "url": "https://drabxumalm.gov.za/about/",
+      "verification": "verified",
+      "vintage": "Municipality page dated 2026-09-23"
+    },
+    {
+      "id": "issue-1137-scope-snapshot",
+      "license": {
+        "status": "unknown",
+        "terms": "Public issue metadata; no separate reuse analysis."
+      },
+      "limit": "Scope snapshot dates issue contents; live issue should be checked during PR/queue.",
+      "restoration": "Retrieve the public issue through GitHub API.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "exact scope, owned path and acceptance contract",
+      "temporal_status": "reference",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/1137",
+      "verification": "verified",
+      "vintage": "GitHub API snapshot retrieved 2026-10-06"
+    },
+    {
+      "id": "issue-955-sibling-scope",
+      "license": {
+        "status": "unknown",
+        "terms": "Public issue metadata; no separate reuse analysis."
+      },
+      "limit": "Exact disjointness uses the captured issue snapshot; check current sibling work before scope expansion.",
+      "restoration": "Retrieve the public issue through GitHub API.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "disjoint adjacent South Africa scope check",
+      "temporal_status": "reference",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/955",
+      "verification": "verified",
+      "vintage": "GitHub API snapshot retrieved 2026-10-06"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:ZAF:ADM3:15628383B16723794281290",
+    "gb:ZAF:ADM3:15628383B24019341917361",
+    "gb:ZAF:ADM3:15628383B24472250012031",
+    "gb:ZAF:ADM3:15628383B28857154592205",
+    "gb:ZAF:ADM3:15628383B33674951697181",
+    "gb:ZAF:ADM3:15628383B35584475836677",
+    "gb:ZAF:ADM3:15628383B36159893459203",
+    "gb:ZAF:ADM3:15628383B46688478529811",
+    "gb:ZAF:ADM3:15628383B4889923419833",
+    "gb:ZAF:ADM3:15628383B56060894344771",
+    "gb:ZAF:ADM3:15628383B59220525748831",
+    "gb:ZAF:ADM3:15628383B67522024924235",
+    "gb:ZAF:ADM3:15628383B78908098986015",
+    "gb:ZAF:ADM3:15628383B80616091697700",
+    "gb:ZAF:ADM3:15628383B88034979550306",
+    "gb:ZAF:ADM3:15628383B92131487833225",
+    "gb:ZAF:ADM3:15628383B99818150234159"
+  ],
+  "subject_ids_sha256": "ce6edf3e65f49cd452276fecd25a8e7ae449e55c7e4ec46e4357b9e14c96e0d5",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "eastern-cape-measurement-integrity",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "eastern-cape-measurement-integrity",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/eastern-cape-reproduction-integrity-1147-erratum/vintages/pair-02/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "eastern-cape-measurement-integrity",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc"
+}

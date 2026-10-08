@@ -23,12 +23,115 @@ function fileDescriptor(file) {
     Number.isSafeInteger(file.uncompressed_bytes) && file.uncompressed_bytes >= 0, 'Invalid uncompressed descriptor');
 }
 
+/** Baseline v2 authenticates explicit file vintages; the enclosing manifest stays v1. */
+export const MAX_BASELINE_COMMITS = 16;
+export function baselineFiles(manifest) {
+  const baseline = manifest.baseline;
+  require(/^[a-f0-9]{40}$/.test(baseline?.commit ?? '') &&
+    Array.isArray(baseline.files) && baseline.files.length > 0, 'Missing immutable baseline');
+  const version = baseline.version ?? 1;
+  require([1, 2].includes(version), 'Unsupported baseline version');
+  const seen = new Set();
+  const files = baseline.files.map(file => {
+    fileDescriptor(file);
+    require(version === 2 || !Object.hasOwn(file, 'commit'), 'Per-file commit requires baseline version 2');
+    const commit = version === 2 ? file.commit : baseline.commit;
+    require(/^[a-f0-9]{40}$/.test(commit ?? ''), 'Historical file requires an immutable commit');
+    const key = `${commit}:${file.path}`;
+    require(!seen.has(key), 'Duplicate historical file descriptor'); seen.add(key);
+    return {...file, commit};
+  });
+  require(new Set([baseline.commit, ...files.map(file => file.commit)]).size <= MAX_BASELINE_COMMITS,
+    'Historical commit inventory exceeds bounded review budget');
+  return files;
+}
+
+/** A path-only reference is permitted only when it names one exact file vintage. */
+export function baselineFile(manifest, reference) {
+  const name = typeof reference === 'string' ? reference : reference?.path;
+  safeEvidencePath(name);
+  const commit = typeof reference === 'string' ? undefined : reference.commit;
+  if (typeof reference !== 'string') require(commit !== undefined, 'Versioned reference needs an explicit commit');
+  if (commit !== undefined) {
+    require(manifest.baseline.version === 2, 'Versioned reference requires baseline version 2');
+    require(/^[a-f0-9]{40}$/.test(commit), 'Invalid historical reference commit');
+  }
+  const matches = baselineFiles(manifest).filter(file => file.path === name &&
+    (commit === undefined || file.commit === commit));
+  require(matches.length === 1, matches.length ? 'Ambiguous historical file reference' : 'Reference names unpinned file');
+  return matches[0];
+}
+
+export function metricInput(manifest, metric) {
+  const matches = [...baselineFiles(manifest), ...manifest.sources.filter(source => manifest.baseline.version !== 2 || source.retention === 'retained').flatMap(source => source.files ?? [])
+    .concat(manifest.outputs).map(file => ({...file, commit: 'candidate'}))]
+    .filter(file => file.sha256 === metric.input_sha256);
+  if (metric.input_file !== undefined) {
+    require(manifest.baseline.version === 2, 'Explicit metric input requires baseline version 2');
+    const ref = metric.input_file;
+    safeEvidencePath(ref?.path);
+    require(ref.commit === 'candidate' || /^[a-f0-9]{40}$/.test(ref.commit ?? ''), 'Invalid metric input commit');
+    require(matches.filter(file => file.path === ref.path && file.commit === ref.commit).length === 1,
+      'Metric input does not resolve to exact authenticated file');
+  } else if (manifest.baseline.version === 2) {
+    require(matches.length === 1, 'Ambiguous or missing metric input; declare input_file path and commit');
+  }
+  require(matches.length > 0, 'Metric references unlisted input');
+}
+
 // Subject JSON uses the same declared gzip transport as whole-file inspection.
 // Legacy .gz files remain supported; arbitrary binary files are never sniffed.
 function subjectJSON(file, name, vintage, readFile, maxFileBytes) {
   const raw = readFile(name, vintage);
   const compressed = file.uncompressed_sha256 !== undefined || name.endsWith('.gz');
   return JSON.parse(compressed ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw);
+}
+
+function subjectFileBinding(value, manifest) {
+  if (typeof value === 'string') return {path: safeEvidencePath(value), kind: 'direct'};
+  if (value && Object.keys(value).sort().join(',') === 'commit,path') {
+    const file = baselineFile(manifest, value);
+    return {path: file.path, commit: file.commit, kind: 'direct'};
+  }
+  const keys = Object.keys(value ?? {}).filter(key => key !== 'commit').sort().join(',');
+  require(value && typeof value === 'object' && !Array.isArray(value) && value.version === 1 &&
+    keys === 'id_template,path,properties,version' &&
+    (!Object.hasOwn(value, 'commit') || manifest.baseline.version === 2),
+  'Invalid versioned subject-file binding');
+  safeEvidencePath(value.path);
+  require(Array.isArray(value.properties) && value.properties.length > 0 && value.properties.length <= 8 &&
+    value.properties.every(key => typeof key === 'string' && /^[A-Za-z_][A-Za-z0-9_]*$/.test(key)) &&
+    new Set(value.properties).size === value.properties.length, 'Invalid subject identity properties');
+  require(typeof value.id_template === 'string' && value.id_template.length <= 512 && !/[\r\n]/.test(value.id_template),
+    'Invalid subject identity template');
+  const tokens = [...value.id_template.matchAll(/\{([^{}]+)\}/g)].map(match => match[1]);
+  require(value.id_template.replace(/\{[^{}]+\}/g, '').indexOf('{') === -1 &&
+    value.id_template.replace(/\{[^{}]+\}/g, '').indexOf('}') === -1 &&
+    tokens.length === value.properties.length && tokens.every((key, index) => key === value.properties[index]),
+  'Subject identity template must use each declared property exactly once in order');
+  return {path: value.path, ...(Object.hasOwn(value, 'commit') ? {commit: value.commit} : {}), kind: 'composed', properties: value.properties, id_template: value.id_template};
+}
+
+function composedSubjectIds(collection, binding) {
+  require(collection && collection.type === 'FeatureCollection' && Array.isArray(collection.features),
+    'Composed subject source must be a GeoJSON FeatureCollection');
+  const ids = new Set();
+  for (const feature of collection.features) {
+    require(feature?.type === 'Feature' && feature.properties && typeof feature.properties === 'object' &&
+      !Array.isArray(feature.properties), 'Composed subject source contains a malformed feature');
+    let index = 0;
+    const id = binding.id_template.replace(/\{([^{}]+)\}/g, (_token, key) => {
+      const value = feature.properties[key];
+      require(typeof value === 'string' && value.length > 0 && value === value.trim() && !/[\u0000-\u001f\u007f]/.test(value),
+        `Subject feature lacks a canonical string identity property: ${key}`);
+      index++;
+      return value;
+    });
+    require(index === binding.properties.length && id.trim().length > 0, 'Invalid composed subject identity');
+    require(!ids.has(id), `Duplicate composed subject identity: ${id}`);
+    ids.add(id);
+  }
+  return ids;
 }
 
 /** Identity-only projection from retained prior evidence, never a geometry/source certification. */
@@ -40,7 +143,7 @@ function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
     text(inventory.json_pointer) && inventory.json_pointer.startsWith('/') &&
     text(inventory.source_id), 'Invalid prior-evidence subject inventory');
   safeEvidencePath(inventory.path); safeEvidencePath(inventory.registry_path);
-  require(manifest.baseline.files.some(file => file.path === inventory.path), 'Subject inventory references unpinned baseline');
+  const historical = baselineFile(manifest, inventory.commit === undefined ? inventory.path : {path: inventory.path, commit: inventory.commit});
   require(manifest.outputs.some(file => file.path === inventory.registry_path), 'Subject registry must be a declared candidate output');
   require(manifest.sources.some(source => source.id === inventory.source_id), 'Subject inventory references unknown source');
   require(manifest.lane === 'geography' && manifest.stages?.geographic_approval !== 'approved',
@@ -51,7 +154,7 @@ function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
     const files = vintage === 'candidate' ? manifest.outputs : manifest.baseline.files;
     return subjectJSON(files.find(file => file.path === name), name, vintage, readFile, maxFileBytes);
   };
-  let values = decode(inventory.path, manifest.baseline.commit);
+  let values = subjectJSON(historical, historical.path, historical.commit, readFile, maxFileBytes);
   for (const key of inventory.json_pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
     require(values && Object.hasOwn(values, key), 'Subject inventory pointer does not resolve');
     values = values[key];
@@ -89,18 +192,31 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     subjectsHash(ids) === manifest.subject_ids_sha256, 'Subject identity/digest mismatch');
   if (expectedSubjects) require(subjectsHash(expectedSubjects) === manifest.subject_ids_sha256,
     'Subjects disagree with reviewed scope');
-  require(/^[a-f0-9]{40}$/.test(manifest.baseline?.commit ?? '') &&
-    Array.isArray(manifest.baseline.files) && manifest.baseline.files.length > 0, 'Missing immutable baseline');
+  require(Array.isArray(manifest.sources) && Array.isArray(manifest.outputs), 'Missing source/output inventory');
+  require(manifest.sources.every(source => source.files === undefined || Array.isArray(source.files)), 'Invalid source file inventory');
+  require(Array.isArray(manifest.baseline?.files) && manifest.baseline.files.length + manifest.outputs.length +
+    manifest.sources.flatMap(source => source.files ?? []).length <= 512, 'Evidence file inventory exceeds bounded review budget');
+  for (const source of manifest.sources) for (const file of source.files ?? [])
+    require(!Object.hasOwn(file, 'commit'), 'Candidate source file cannot declare historical commit');
+  const historicalFiles = baselineFiles(manifest);
+  if (readFile && manifest.baseline.version === 2) {
+    require(typeof readFile.assertAncestor === 'function', 'Historical vintages require ancestry verification');
+    for (const commit of new Set([manifest.baseline.commit, ...historicalFiles.map(file => file.commit)])) readFile.assertAncestor(commit);
+  }
   const pins = manifest.baseline.pins ?? {};
   for (const [key, value] of Object.entries(pins)) require(hash(value), `Malformed pin: ${key}`);
   for (const [key, value] of Object.entries(expectedPins ?? {})) require(pins[key] === value, `Baseline pin mismatch: ${key}`);
-  for (const [key, value] of Object.entries(pins)) require(manifest.baseline.files.some(f =>
-    f.path === manifest.baseline.pin_files?.[key] && f.sha256 === value), `Pin has no actual file binding: ${key}`);
+  for (const [key, value] of Object.entries(pins)) {
+    const reference = manifest.baseline.pin_files?.[key];
+    require(reference !== undefined, `Pin has no actual file binding: ${key}`);
+    require(baselineFile(manifest, reference).sha256 === value, `Pin has no actual file binding: ${key}`);
+  }
   const sources = manifest.sources;
   require(Array.isArray(sources) && new Set(sources.map(x => x.id)).size === sources.length, 'Duplicate/missing source inventory');
   const limits = [], checked = [], allPaths = new Set(); let total = 0;
   function inspect(file, vintage) {
     fileDescriptor(file);
+    require(vintage !== 'candidate' || !Object.hasOwn(file, 'commit'), 'Candidate file cannot declare historical commit');
     const key = `${vintage}:${file.path}`;
     require(!allPaths.has(key), 'Duplicate file descriptor'); allPaths.add(key);
     require(file.bytes <= maxFileBytes, 'Evidence file exceeds budget');
@@ -116,24 +232,31 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     }
     checked.push(key);
   }
-  for (const file of manifest.baseline.files) inspect(file, manifest.baseline.commit);
+  for (const file of historicalFiles) inspect(file, file.commit);
   require(!manifest.baseline.subject_inventory || manifest.lane === 'geography',
     'Prior-evidence inventory is only supported for geography research');
   if (manifest.lane === 'geography' && !manifest.baseline.subject_inventory) {
     const mappings = manifest.baseline.subject_files;
     require(mappings && subjectsHash(Object.keys(mappings)) === manifest.subject_ids_sha256,
       'Geography needs exact subject-to-containing-file inventory');
-    const parsed = new Map();
+    const bindings = new Map(), parsed = new Map(), composedIds = new Map();
     for (const id of ids) {
-      const name = mappings[id];
-      require(manifest.baseline.files.some(f => f.path === name), 'Subject references unpinned file');
+      const binding = subjectFileBinding(mappings[id], manifest);
+      const file = baselineFile(manifest, binding.commit === undefined ? binding.path : {path: binding.path, commit: binding.commit});
+      const key = `${file.commit}:${file.path}`;
+      if (bindings.has(key)) require(JSON.stringify(bindings.get(key)) === JSON.stringify(binding),
+        'Subjects sharing a source file must use one consistent identity binding');
+      else bindings.set(key, binding);
       if (readFile) {
-        if (!parsed.has(name)) {
-          const file = manifest.baseline.files.find(file => file.path === name);
-          parsed.set(name, subjectJSON(file, name, manifest.baseline.commit, readFile, maxFileBytes));
+        if (!parsed.has(key)) parsed.set(key, subjectJSON(file, file.path, file.commit, readFile, maxFileBytes));
+        if (binding.kind === 'direct') {
+          require(parsed.get(key).features?.some(f => (f.id ?? f.properties?.id) === id),
+            `Subject missing from claimed containing file: ${id}`);
+        } else {
+          if (!composedIds.has(key)) composedIds.set(key, composedSubjectIds(parsed.get(key), binding));
+          require(composedIds.get(key).has(id), `Composed subject missing from claimed containing file: ${id}`);
         }
-        require(parsed.get(name).features?.some(f => (f.id ?? f.properties?.id) === id),
-          `Subject missing from claimed containing file: ${id}`);
+
       }
     }
   }
@@ -179,8 +302,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
       /^[a-f0-9]{40}$/.test(m.evaluation_commit ?? ''), 'Invalid metric identity/vintage');
     if (m.vintage !== 'archived') require(m.evaluation_commit === manifest.baseline.commit,
       'Current/baseline result evaluated against a different vintage');
-    require([...manifest.baseline.files, ...sources.flatMap(s => s.files ?? []), ...manifest.outputs]
-      .some(f => f.sha256 === m.input_sha256), 'Metric references unlisted input');
+    metricInput(manifest, m);
     if (m.denominator !== undefined) require(Number.isFinite(m.numerator) && Number.isFinite(m.denominator) &&
       m.denominator > 0 && Math.abs(m.value - m.numerator / m.denominator) <= 1e-10, 'Metric denominator mismatch');
     metrics.set(m.id, m);
@@ -204,7 +326,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
 
 export function repositoryReader(root, {maxFileBytes = 32 * 1024 * 1024} = {}) {
   root = fs.realpathSync(root);
-  return (name, vintage) => {
+  const read = (name, vintage) => {
     safeEvidencePath(name);
     if (vintage !== 'candidate') {
       require(/^[a-f0-9]{40}$/.test(vintage), 'Unsafe baseline commit');
@@ -217,6 +339,12 @@ export function repositoryReader(root, {maxFileBytes = 32 * 1024 * 1024} = {}) {
     require(fs.statSync(target).size <= maxFileBytes, 'Candidate exceeds budget');
     return fs.readFileSync(target);
   };
+  read.assertAncestor = commit => {
+    require(/^[a-f0-9]{40}$/.test(commit ?? ''), 'Unsafe historical commit');
+    try { execFileSync('git', ['-C', root, 'merge-base', '--is-ancestor', commit, 'HEAD'], {stdio: 'pipe'}); }
+    catch { throw Error('Historical commit is missing or not an ancestor of checkout HEAD'); }
+  };
+  return read;
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [file, root = process.cwd()] = process.argv.slice(2);

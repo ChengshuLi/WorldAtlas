@@ -1,0 +1,33 @@
+{
+  "kind": "negative-control",
+  "limitation": "The legacy overwrite control redirects only the final writer to private owned sentinels. No legacy default output path was opened.",
+  "method_id": "corrected-provenance-field-reproduction",
+  "outcome": "passed",
+  "test_results_sha256": "487ae3e7dd2c0deb766e482b5d2c8d85b5a549ab066d660e4041bd223af6a51e",
+  "tests": {
+    "actual_legacy_name_false_positive": {
+      "actual_feature_source_match_flag": true,
+      "adapter_sha256": "df4ad4e8cb8ffd3567e83f7068266b864a87a4340653b04f45fde09c20a33830",
+      "output_sha256": "93b63b291982713d393d55cffed2c83f742dbc32ffb8012ea0f684d8ef068a5b",
+      "wrong_name": "AUDITOR WRONG PINNED NAME"
+    },
+    "all_original_sentinels_unchanged_by_guarded_entrypoint": true,
+    "guarded_entrypoint_rejections": [
+      "single current-name drift",
+      "duplicate subject identity",
+      "missing subject identity",
+      "parent identity drift",
+      "source-member drift",
+      "producer-code byte drift",
+      "source byte drift"
+    ],
+    "no_success_receipt_on_failed_preflight": true,
+    "safe_output_rejections": [
+      "existing output directory with sentinel",
+      "partial output conflict",
+      "broken symlink",
+      "escaped destination"
+    ]
+  },
+  "version": 1
+}

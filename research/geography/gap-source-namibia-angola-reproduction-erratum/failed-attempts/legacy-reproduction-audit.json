@@ -1,0 +1,599 @@
+{
+  "adversarial_runs": [
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "entrypoint_sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "error": {
+        "message": "",
+        "type": "AssertionError"
+      },
+      "fixture": {
+        "bytes": 24152,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/duplicate-final-component.geojson",
+        "sha256": "7370cecfe95aaabf2d0285d5f488d93a1eeb2ffb47be86302a678dd5151e5fe2"
+      },
+      "label": "duplicate-final-component-reproduce_source_geometry",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [],
+      "scenario": "duplicate-final-component",
+      "stdout": ""
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "entrypoint_sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "error": null,
+      "fixture": {
+        "bytes": 24152,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/duplicate-final-component.geojson",
+        "sha256": "7370cecfe95aaabf2d0285d5f488d93a1eeb2ffb47be86302a678dd5151e5fe2"
+      },
+      "label": "duplicate-final-component-reproduce_full_product_comparison",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [
+        {
+          "bytes": 6302501,
+          "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+          "sha256": "7876b77e399e446b911e9311d276ed88c0737d952adf5ccadc121d017798e659"
+        }
+      ],
+      "scenario": "duplicate-final-component",
+      "stdout": "{\"components\": 21, \"contact_geometries_topologically_different_from_full\": 10, \"contact_geometries_topologically_equal_to_full\": 0, \"contacts\": 10, \"full_candidate_positive_area_hits_ago\": 21, \"full_candidate_positive_area_hits_nam\": 20, \"pair_rows\": 210, \"pair_rows_with_intersection\": 49}"
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "entrypoint_sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "error": {
+        "message": "",
+        "type": "AssertionError"
+      },
+      "fixture": {
+        "bytes": 22923,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/missing-final-component.geojson",
+        "sha256": "ecac6543bf5e38b5dbed75744b7a8a21485ad889b53230815a0747d5d058f344"
+      },
+      "label": "missing-final-component-reproduce_source_geometry",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [],
+      "scenario": "missing-final-component",
+      "stdout": ""
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "entrypoint_sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "error": {
+        "message": "",
+        "type": "AssertionError"
+      },
+      "fixture": {
+        "bytes": 22923,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/missing-final-component.geojson",
+        "sha256": "ecac6543bf5e38b5dbed75744b7a8a21485ad889b53230815a0747d5d058f344"
+      },
+      "label": "missing-final-component-reproduce_full_product_comparison",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [],
+      "scenario": "missing-final-component",
+      "stdout": ""
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "entrypoint_sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "error": {
+        "message": "",
+        "type": "AssertionError"
+      },
+      "fixture": {
+        "bytes": 51186,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/duplicate-final-contact.geojson",
+        "sha256": "f7330f785c4b439f413defd29518e11c449c5c4f0329430a4f2c91f59f6294bf"
+      },
+      "label": "duplicate-final-contact-reproduce_source_geometry",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [],
+      "scenario": "duplicate-final-contact",
+      "stdout": ""
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "entrypoint_sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "error": null,
+      "fixture": {
+        "bytes": 51186,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/duplicate-final-contact.geojson",
+        "sha256": "f7330f785c4b439f413defd29518e11c449c5c4f0329430a4f2c91f59f6294bf"
+      },
+      "label": "duplicate-final-contact-reproduce_full_product_comparison",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [
+        {
+          "bytes": 6539254,
+          "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+          "sha256": "6304a5aec8b63ab415ff03e2f9336de387ab7f731816478b2256b6428b214148"
+        }
+      ],
+      "scenario": "duplicate-final-contact",
+      "stdout": "{\"components\": 21, \"contact_geometries_topologically_different_from_full\": 10, \"contact_geometries_topologically_equal_to_full\": 0, \"contacts\": 10, \"full_candidate_positive_area_hits_ago\": 21, \"full_candidate_positive_area_hits_nam\": 20, \"pair_rows\": 210, \"pair_rows_with_intersection\": 56}"
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "entrypoint_sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "error": {
+        "message": "",
+        "type": "AssertionError"
+      },
+      "fixture": {
+        "bytes": 44402,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/missing-final-contact.geojson",
+        "sha256": "08864e6455adf0db0e20f68cdc6a8747f683dbbbe1faf83057feffdc10b20009"
+      },
+      "label": "missing-final-contact-reproduce_source_geometry",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [],
+      "scenario": "missing-final-contact",
+      "stdout": ""
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "entrypoint_sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "error": {
+        "message": "",
+        "type": "AssertionError"
+      },
+      "fixture": {
+        "bytes": 44402,
+        "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/fixtures/missing-final-contact.geojson",
+        "sha256": "08864e6455adf0db0e20f68cdc6a8747f683dbbbe1faf83057feffdc10b20009"
+      },
+      "label": "missing-final-contact-reproduce_full_product_comparison",
+      "legacy_destination_hashes_after": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destination_hashes_before": {
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+      },
+      "legacy_destinations_preserved": true,
+      "outputs": [],
+      "scenario": "missing-final-contact",
+      "stdout": ""
+    }
+  ],
+  "environment": {
+    "geos": "3.13.1",
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "historical_outputs": {
+    "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json": {
+      "bytes": 6290740,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+    },
+    "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json": {
+      "bytes": 1264042,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "sha256": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+    }
+  },
+  "issue_body_sha256": "380c7a61e78319372ea00805ced0ab36370416f3b62b89f5d5fa1c994caf4e35",
+  "limits": [
+    "The old source-geometry command rejects duplicate raw component/contact IDs; the old full-product command is expected to accept a same-length duplicate because it checks only array counts.",
+    "A passing or failing legacy reproduction establishes no country assignment, boundary authority, parent hierarchy, currentness, license permission, or physical-water conclusion."
+  ],
+  "method": "Run unchanged issue-pinned legacy entrypoint bytes via runpy; supply source/code reads from exact declared Git blobs; redirect only fixed output writes into exclusively created owned captures. Control fixtures are complete in-memory input overlays saved under this issue-owned prefix.",
+  "pin_count": 46,
+  "pin_inventory_sha256": "a6aa58da227bb7e9f12b48839fd7299d64396e85b831205c97a1d608fdeb5216",
+  "pinned_input_bytes": 60711298,
+  "pins": [
+    {
+      "bytes": 4316,
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "bytes": 403376,
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "bytes": 195690,
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/complete-custody-validity.json",
+      "sha256": "8a16f5b2064f6c5fa76e5c899606bb40b6e9f38408a4a1ee5572e0607953327b"
+    },
+    {
+      "bytes": 806110,
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+      "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd"
+    },
+    {
+      "bytes": 236896,
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AGO-ADM2-000.bin.gz",
+      "sha256": "377b1a666f58c913dec27b7d4557d98041e4d590d6555a2cdbfe13527ac8e55f"
+    },
+    {
+      "bytes": 135327,
+      "commit": "1bf4bb01d76a76953d4a11308f5af2dd50fe3365",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NAM-ADM2-000.bin.gz",
+      "sha256": "5a04eb2e5ba43552d902d3bfdf8963f8261cee5b6ee333ddb09da451d4520cf9"
+    },
+    {
+      "bytes": 73547,
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+    },
+    {
+      "bytes": 661416,
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "path": "data/administrative-sources.json",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "bytes": 4849,
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "path": "data/semantic-sources.json",
+      "sha256": "287a7ae13787b9e9fb97051afb977c8ea054ca1a6fed389c6672d6455d24bf7e"
+    },
+    {
+      "bytes": 2608186,
+      "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-00.json.gz",
+      "sha256": "6c1716ffb456af088cd971bbfe458f25d27f32b42461ff86d75a2e6dfbd15309"
+    },
+    {
+      "bytes": 2611617,
+      "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-01.json.gz",
+      "sha256": "2d4c2e01e2901d80b161c94d58dbe8118396fbc2884f0d3f438831b766cd653f"
+    },
+    {
+      "bytes": 2610148,
+      "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-02.json.gz",
+      "sha256": "e7b13a079b9fefec1591a66c1e8bc29fc83b85e8dc7cd2d3db29135cc4bc3dd6"
+    },
+    {
+      "bytes": 2610902,
+      "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-03.json.gz",
+      "sha256": "2b3d6321ea37bad41251533288ad13314dd8bf1486c078da670425cfe913c8ea"
+    },
+    {
+      "bytes": 1980702,
+      "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-04.json.gz",
+      "sha256": "01c8e0b078d766194209774149fc63b69c4e8785c45550f70fe457a88b09a6a7"
+    },
+    {
+      "bytes": 2335,
+      "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/components-delta.json.gz",
+      "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460"
+    },
+    {
+      "bytes": 1674139,
+      "commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz",
+      "sha256": "7548a2b3ab10339e64ec6432afedda84e21502eb392ee94ace5b0e2f2e6e2de8"
+    },
+    {
+      "bytes": 103877,
+      "commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856"
+    },
+    {
+      "bytes": 121260,
+      "commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/report.json",
+      "sha256": "13f4ce3f8312eb735e2a5253340b018c2d577b4656e9576ec93da3ce15a6e16e"
+    },
+    {
+      "bytes": 1660397,
+      "commit": "a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-000.json.gz",
+      "sha256": "26e8bef1c066f00ad84a03a73505dba1daaeb65315de9419a24aaf9a6d08f722"
+    },
+    {
+      "bytes": 1674139,
+      "commit": "a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz",
+      "sha256": "7548a2b3ab10339e64ec6432afedda84e21502eb392ee94ace5b0e2f2e6e2de8"
+    },
+    {
+      "bytes": 1783037,
+      "commit": "a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-002.json.gz",
+      "sha256": "c5eadb68c3c9c03abf5568e7455777b9bea9774e13b9767da476bb8247bbe765"
+    },
+    {
+      "bytes": 1598911,
+      "commit": "a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-003.json.gz",
+      "sha256": "71ca9168a7c26f6aeee948f18600bbe00c2eeb5515ec22e0d8e9143551b4f7f7"
+    },
+    {
+      "bytes": 1694391,
+      "commit": "a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz",
+      "sha256": "1fd21e659e1bf23deab5f8970e0a1124ac3f3cf654e758f4a85eb27fba49fff6"
+    },
+    {
+      "bytes": 1029511,
+      "commit": "a26f8d8b50e7349054b86e70d1e6e552a9a2b0fd",
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-005.json.gz",
+      "sha256": "4802ca960cf92d1546ae4348abe86e4b5588056c8f1581d11afcea68cb35b4e8"
+    },
+    {
+      "bytes": 2080126,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d"
+    },
+    {
+      "bytes": 2081831,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609"
+    },
+    {
+      "bytes": 2080037,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411"
+    },
+    {
+      "bytes": 2074475,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014"
+    },
+    {
+      "bytes": 2085110,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156"
+    },
+    {
+      "bytes": 2085907,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187"
+    },
+    {
+      "bytes": 2079838,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f"
+    },
+    {
+      "bytes": 2081609,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b"
+    },
+    {
+      "bytes": 1714760,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a"
+    },
+    {
+      "bytes": 2080606,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf"
+    },
+    {
+      "bytes": 65206,
+      "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+      "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+    },
+    {
+      "bytes": 6958,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/analysis-input-set.json",
+      "sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8"
+    },
+    {
+      "bytes": 6290740,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+    },
+    {
+      "bytes": 49247,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/input-bindings.json",
+      "sha256": "35b2d1a9ad33c9f0ff3693e9bdb8dacb438df30e3ba028b6892f817363631fcc"
+    },
+    {
+      "bytes": 23958,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+    },
+    {
+      "bytes": 46722,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+      "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
+    },
+    {
+      "bytes": 18148,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/whole-input-pins.json",
+      "sha256": "c8f3394449dd1afccb9cfe4bc932c79cbf8c343030376e881ef243bcde1e4e83"
+    },
+    {
+      "bytes": 17642,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6"
+    },
+    {
+      "bytes": 13461,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de"
+    },
+    {
+      "bytes": 1264042,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json",
+      "sha256": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+    },
+    {
+      "bytes": 3146775,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-full-9469f09.geojson",
+      "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    },
+    {
+      "bytes": 3039021,
+      "commit": "de506f51100568e150e51f2926a5259b71e55272",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson",
+      "sha256": "602e48176ff563f029cd08a00b0f8177b47c46a3aad53b8f93659c816593a7f9"
+    }
+  ],
+  "runs": [
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "entrypoint_sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "error": null,
+      "label": "reproduce_source_geometry-one",
+      "legacy_destination_hashes_before_after": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818",
+      "legacy_destinations_preserved": true,
+      "matches_retained_historical_output": true,
+      "outputs": [
+        {
+          "bytes": 1264042,
+          "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/legacy-captures/reproduce_source_geometry-one/source-geometry-comparison.json",
+          "sha256": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+        }
+      ],
+      "stdout": "{\"angola_feature_count\": 161, \"candidate_count\": 21, \"candidate_count_covered_by_combined_source_union\": 2, \"candidate_count_intersecting_angola_by_positive_area\": 21, \"candidate_count_intersecting_namibia_by_positive_area\": 20, \"namibia_feature_count\": 109}"
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "entrypoint_sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "error": null,
+      "label": "reproduce_source_geometry-two",
+      "legacy_destination_hashes_before_after": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818",
+      "legacy_destinations_preserved": true,
+      "matches_retained_historical_output": true,
+      "outputs": [
+        {
+          "bytes": 1264042,
+          "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/legacy-captures/reproduce_source_geometry-two/source-geometry-comparison.json",
+          "sha256": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+        }
+      ],
+      "stdout": "{\"angola_feature_count\": 161, \"candidate_count\": 21, \"candidate_count_covered_by_combined_source_union\": 2, \"candidate_count_intersecting_angola_by_positive_area\": 21, \"candidate_count_intersecting_namibia_by_positive_area\": 20, \"namibia_feature_count\": 109}"
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "entrypoint_sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "error": null,
+      "label": "reproduce_full_product_comparison-one",
+      "legacy_destination_hashes_before_after": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+      "legacy_destinations_preserved": true,
+      "matches_retained_historical_output": true,
+      "outputs": [
+        {
+          "bytes": 6290740,
+          "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/legacy-captures/reproduce_full_product_comparison-one/full-product-comparison.json",
+          "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+        }
+      ],
+      "stdout": "{\"components\": 21, \"contact_geometries_topologically_different_from_full\": 10, \"contact_geometries_topologically_equal_to_full\": 0, \"contacts\": 10, \"full_candidate_positive_area_hits_ago\": 21, \"full_candidate_positive_area_hits_nam\": 20, \"pair_rows\": 210, \"pair_rows_with_intersection\": 49}"
+    },
+    {
+      "entrypoint": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "entrypoint_sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "error": null,
+      "label": "reproduce_full_product_comparison-two",
+      "legacy_destination_hashes_before_after": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+      "legacy_destinations_preserved": true,
+      "matches_retained_historical_output": true,
+      "outputs": [
+        {
+          "bytes": 6290740,
+          "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/legacy-captures/reproduce_full_product_comparison-two/full-product-comparison.json",
+          "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+        }
+      ],
+      "stdout": "{\"components\": 21, \"contact_geometries_topologically_different_from_full\": 10, \"contact_geometries_topologically_equal_to_full\": 0, \"contacts\": 10, \"full_candidate_positive_area_hits_ago\": 21, \"full_candidate_positive_area_hits_nam\": 20, \"pair_rows\": 210, \"pair_rows_with_intersection\": 49}"
+    }
+  ],
+  "source_scope_counts": {
+    "component_rows": 21,
+    "component_unique_ids": 21,
+    "contact_rows": 10,
+    "contact_unique_source_ids": 10
+  },
+  "version": 1
+}

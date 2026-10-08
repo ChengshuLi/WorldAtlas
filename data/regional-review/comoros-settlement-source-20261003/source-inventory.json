@@ -1,0 +1,186 @@
+{
+  "packet": "Comoros settlement/locality source search",
+  "issue": 634,
+  "scope_id": "atlas:territory:COM",
+  "retrieved_on_utc": "2026-10-08",
+  "source_access_method": "Public source websites and their official catalog metadata; no GitHub browser used.",
+  "subject_identity": {
+    "current_id": "atlas:territory:COM",
+    "current_name": "Comoros",
+    "source_member_ids": [
+      "gb:COM:ADM1:22816118B12510721755829",
+      "gb:COM:ADM1:22816118B92166148047088",
+      "gb:COM:ADM1:22816118B95538827312271"
+    ],
+    "note": "Identity is read from the pinned current feature and predecessor evidence packet. This records existing composite membership, not approval of political status, source boundaries or physical completeness."
+  },
+  "retained_source_bytes": [],
+  "sources": [
+    {
+      "id": "INSEED:RGPH-2017-catalog",
+      "url": "https://nada.inseed-comores.org/index.php/catalog/8",
+      "producer": "Institut National de la Statistique et des Études Économiques et Démographiques (INSEED)",
+      "reference": "DDI-COM-RPGH-2017; version 1.0 dated 2018-08-15; fieldwork 2017-12-16 through 2018-01-26",
+      "retrieved": "2026-10-08T06:19Z",
+      "http_status": 200,
+      "response_bytes": 50195,
+      "response_sha256": "2c5786b3e5f217988366e1db34c2f98997cfde1a88026402e64730c75d360c8b",
+      "observed_claims": [
+        "INSEED identifies this as a national population and housing census; its catalog says coverage is the national territory and the lowest geographic level covered by data is the Zone de Dénombrement (ZD).",
+        "The catalog requires bibliographic attribution and download-date/source citation. No open redistribution license was identified on the catalog page; it shows no explicit license grant."
+      ],
+      "use_and_limits": "Authoritative census context, but public metadata does not expose a geocoded village gazetteer. ZD coverage and population tabulations do not establish settlement coordinate completeness. Do not retrieve microdata without an authorized access basis."
+    },
+    {
+      "id": "INSEED:RGPH-2017-theme-8-report",
+      "catalog_url": "https://nada.inseed-comores.org/index.php/catalog/8/related-materials",
+      "restoration_url": "https://www.nada.inseed-comores.org/index.php/catalog/8/download/63",
+      "title": "RGPH04 - Rapport d'analyse - thème 8 : Migration et urbanisme",
+      "publisher_date": "2020-03",
+      "retrieved": "2026-10-08T06:19Z",
+      "http_status": 200,
+      "response_bytes": 1985274,
+      "response_sha256": "2e3d7fe0e206c87b6a50426b646476e7a7c0fcde824f9744a4f3953996f49cb0",
+      "content_type": "application/octet-stream (PDF magic bytes %PDF-1.7)",
+      "retained": false,
+      "reuse_terms": "No explicit open reuse license located in the catalog record; do not redistribute the PDF absent permission.",
+      "use_and_limits": "A reproducible official restoration endpoint is recorded. The original WordPress upload URL returned 404 during this review; the official NADA catalog download endpoint worked. The report PDF was not text-extracted in this packet, so no detailed count or political interpretation is asserted from it."
+    },
+    {
+      "id": "INSEED:EHCVM-2020-catalog",
+      "url": "https://nada.inseed-comores.org/index.php/catalog/9",
+      "producer": "INSEED",
+      "reference": "DDI-COM-EHCVM-2020; household living-conditions survey, 2020",
+      "retrieved": "2026-10-08T06:19Z",
+      "http_status": 200,
+      "response_bytes": 56516,
+      "response_sha256": "99be351fe040582105c3c1725ba0c964174ded11c69e7f5a07acf51384574be9",
+      "observed_claims": [
+        "Two-stage stratified sample from 380 of the 2017 census ZD; 5,624 households interviewed successfully.",
+        "The public variable dictionary for sID_comm_COM2020 includes village name, island/prefecture/commune, village latitude/longitude, accuracy, altitude, timestamp, and separate market coordinates.",
+        "The variable page reports 320 valid and 55 missing village latitude records (and the paired longitude variable reports the same counts)."
+      ],
+      "reuse_terms": "Portal footer states © Archive nationale de microdonnées, Tous droits réservés; no explicit open data license was identified.",
+      "use_and_limits": "A useful official point-source lead only. It is a household survey sample, not a complete settlement census; 55/375 village records lack coordinates, and the exact row-level data were not downloaded or retained. The survey's coordinates must not be repurposed as a complete gazetteer."
+    },
+    {
+      "id": "INSEED:EHCVM-2020-village-coordinate-variable",
+      "url": "https://nada.inseed-comores.org/index.php/catalog/9/variable/F47/V1799?name=village_gps__Latitude",
+      "retrieved": "2026-10-08T06:19Z",
+      "http_status": 200,
+      "response_bytes": 47317,
+      "response_sha256": "6657594a68b7290074eb4e2cb3af1d5efb8eca45e8869ef711a6000bdcc740ed",
+      "observed_claims": ["320 valid; 55 non-valid village latitude cases; range -12.37814606 to -11.3724041725415."],
+      "use_and_limits": "Summary metadata only; exact coordinate rows and names were not accessed. Coverage is tied to the survey sample, not all settlements."
+    },
+    {
+      "id": "INSEED:EHCVM-2020-community-dictionary",
+      "url": "https://nada.inseed-comores.org/index.php/catalog/9/data-dictionary/F47?file_name=sID_comm_COM2020",
+      "retrieved": "2026-10-08T06:19Z",
+      "http_status": 200,
+      "response_bytes": 90862,
+      "response_sha256": "dad010ebd8ddc3b9cb1b5cd80d66744c527ed22f193f91500923324c8f03c009",
+      "observed_claims": ["The questionnaire/community file exposes village names and parent fields alongside coordinate, accuracy, altitude and timestamp variable definitions."],
+      "use_and_limits": "Field dictionary does not prove a complete named-settlement roster or redistribution rights. No data rows were accessed."
+    },
+    {
+      "id": "INSEED:RGA2-2025-catalog",
+      "url": "https://www.nada.inseed-comores.org/index.php/catalog/16",
+      "producer": "INSEED with Direction Nationale de la Stratégie Agricole et de l'Élevage (DNSAE)",
+      "reference": "COM-INSEED-RGA2-2025-v1.0; agricultural campaign 2023-2024; metadata version dated 2026-04-15 and published/updated 2026-05-20",
+      "retrieved": "2026-10-08T06:19Z",
+      "http_status": 200,
+      "response_bytes": 119853,
+      "response_sha256": "7317fb218c1f10c9c899816234f6a54b99c17591c0a4f43749d4d32c3ecd3116",
+      "observed_claims": [
+        "The catalog describes island, prefecture, commune and village/locality fields, 964 ZD, and claims village/community coordinates were systematically collected.",
+        "The operation covers three islands under national administration; its stated population includes agricultural households and local communities, while the household sector is sampled.",
+        "Access requires a registered account, an access request describing research and affiliation, a confidentiality commitment and no onward sharing without INSEED permission. Geographic identifiers are said to be aggregated for anonymity. Copyright states Tous droits réservés."
+      ],
+      "use_and_limits": "The strongest recent official lead, but not presently a lawful reusable gazetteer: coordinate rows, exact locality roster, code lineage and spatial granularity are not public in the inspected metadata; terms are restricted/all-rights-reserved. Metadata wording about coordinates and aggregated identifiers needs source-owner clarification before use. No access request or redistribution was made."
+    },
+    {
+      "id": "OCHA:COD-AB-COM-2019",
+      "canonical_url": "https://data.humdata.org/dataset/cod-ab-com",
+      "publisher": "OCHA Field Information Services / HDX",
+      "valid_on": "2019-12-05",
+      "reviewed": "2025-10-30 (parent packet metadata snapshot)",
+      "license": "CC BY-IGO (as declared by parent packet HDX metadata; preserve attribution and any upstream terms)",
+      "resources": [
+        {
+          "url": "https://data.humdata.org/dataset/7f80a5d1-9f1a-462c-b298-338c7edc9224/resource/ce499503-58c7-4566-a578-c8738b2574d9/download/com_admin_boundaries.geojson.zip",
+          "retained_in_parent_packet": "data/regional-review/regional-review-4f180b98473f1071/sources/com_admin_boundaries.geojson.zip",
+          "bytes": 729049,
+          "sha256": "c094bd9fe28236deaf22403ad86c9d576cd8b0b087c8d7cb428bea44b47a4573"
+        },
+        {
+          "url": "https://data.humdata.org/dataset/7f80a5d1-9f1a-462c-b298-338c7edc9224/resource/d2c3b155-b85d-4ac6-8a0b-8d3354ecac1e/download/com_admin_boundaries.xlsx",
+          "retained_in_parent_packet": "data/regional-review/regional-review-4f180b98473f1071/sources/com_admin_boundaries.xlsx",
+          "bytes": 19702,
+          "sha256": "ca09a8bf4fbf6115f2baa71aa9b5acccdd22a916befc1059b3061d1becd90a43"
+        }
+      ],
+      "reported_levels": {"ADM1": 3, "ADM2": 17, "ADM3": 55},
+      "use_and_limits": "Reproduced administrative names, p-codes and parent fields. These are polygons for administrative units, not settlement points. No ADM4/ADM5 or locality coordinate layer is present in the retained package; structural 3/17/55 counts do not establish gazetteer completeness or current legal boundaries."
+    },
+    {
+      "id": "OCHA:COD-AB-specification",
+      "url": "https://ocha-dap.github.io/hdx-cod-ab-spec/",
+      "retrieved": "2026-10-08T06:19Z",
+      "http_status": 200,
+      "response_bytes": 43427,
+      "response_sha256": "6d15b490befba6567bf7a6074a2e4ceffea101d67af08adf2b0de0a5da7313d3",
+      "use_and_limits": "Specification treats each admin feature as one administrative polygon; local concepts vary by country. Village/locality is only a possible ADM5 concept when available. This is a data specification, not proof that Comoros has an ADM5 locality layer."
+    },
+    {
+      "id": "HOTOSM:COM-populated-places-OSM",
+      "canonical_url": "https://data.humdata.org/dataset/hotosm_com_populated_places",
+      "producer": "Humanitarian OpenStreetMap Team / OpenStreetMap contributors",
+      "reference_vintage": "OSM extract updated 2026-09-08; parent packet retrieved 2026-10-03",
+      "license": "ODbL 1.0; attribution/share-alike apply",
+      "retained_in_parent_packet": "data/regional-review/regional-review-4f180b98473f1071/sources/hotosm_com_populated_places_osm_geojson.zip",
+      "bytes": 247778,
+      "sha256": "5a581e5571a259ff5da303b31d050fc30d02858f4e0143ae9bb344371c349186",
+      "observed_counts": {"features": 565, "unnamed": 295},
+      "use_and_limits": "Volunteer candidate screen includes residential-area polygons and place points; no completeness, official authority, inhabited-place count or boundary claim. Keep as comparison only."
+    }
+  ],
+  "baseline": {
+    "repository_commit": "c90773357da171d97367332cb53154da95796bff",
+    "parent_evidence_issue": 482,
+    "parent_packet_path": "data/regional-review/regional-review-4f180b98473f1071/",
+    "pinned_inputs": [
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "use": "Confirm current composite feature ID and its three retained source-member IDs only."
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/sources.json",
+        "bytes": 28554,
+        "sha256": "051676a2ee7a398ae1b7204cf25d74333faf4cb4cedb837f07308d5ed270d569",
+        "use": "Previous source IDs, vintages, license notes, URLs and exact source hashes."
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/geometry-comparison.json",
+        "bytes": 121679,
+        "sha256": "f452d57ed94112b1e8c0f5e1eac9fc1200dec36302efcd2085dea7e354c140f8",
+        "use": "Prior three-island-to-composite area comparison; not coastline validation."
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/settlement-administration-review.json",
+        "bytes": 280454,
+        "sha256": "d55b07ec655b78bab31bb8d641a5e080a787fa5fb3a8ee2f3c5cdeacc6a3d1b0",
+        "use": "Prior HOTOSM feature counts and explicit candidate-screen limitation."
+      },
+      {
+        "path": "data/regional-review/regional-review-4f180b98473f1071/sources/com_admin_boundaries.geojson.zip",
+        "bytes": 729049,
+        "sha256": "c094bd9fe28236deaf22403ad86c9d576cd8b0b087c8d7cb428bea44b47a4573",
+        "use": "Reproduction input for the 2019 COD-AB source hierarchy and parent crosswalk."
+      }
+    ],
+    "preservation": "Parent files are read-only inputs. This packet adds no source copies, edits no source pins and changes no canonical geography."
+  }
+}

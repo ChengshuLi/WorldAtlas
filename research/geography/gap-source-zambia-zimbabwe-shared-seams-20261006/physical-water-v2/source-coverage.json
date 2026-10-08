@@ -1,0 +1,507 @@
+{
+  "version": 1,
+  "created_at": "2026-10-08T03:23:46.488252+00:00",
+  "method": "coordinate-envelope containment against COG source-window pixel support; no geometry operations",
+  "source_result": {
+    "path": "gap-source-zambia-zimbabwe-shared-seams-20261006/run-one/source-geometry-results.json.gz",
+    "compressed_bytes": 329369,
+    "sha256": "8a095d6c2c7ff0ba69138ecd6c2d581e55cb57a44485f9d3ce27b525dfb1475e",
+    "decoded_bytes": 932627
+  },
+  "source_window": {
+    "bbox_lonlat": [
+      28.8483,
+      -16.0782,
+      29.617694117647066,
+      -15.64946701104665
+    ],
+    "pixel_support_bounds_lonlat": [
+      28.84825,
+      -16.07825,
+      29.61775,
+      -15.649416666666667
+    ],
+    "pixel_window": {
+      "columns_half_open": [
+        22179,
+        31413
+      ],
+      "rows_half_open": [
+        7793,
+        12939
+      ],
+      "dimensions": [
+        9234,
+        5146
+      ],
+      "decoded_bytes": 47518164
+    },
+    "selected_block_count": 60,
+    "selected_block_rows": [
+      7,
+      12
+    ],
+    "selected_block_columns": [
+      21,
+      30
+    ]
+  },
+  "complete_components": {
+    "count": 10,
+    "ids": [
+      "physical-component:087b8ed59af27e069111ed4388ae84383625b06dcaaf0a250c56b21b38a09412",
+      "physical-component:1aaf0bcede4fa05f6a0e04291123eb68a618da7d181659dc81785f58f05ce624",
+      "physical-component:339d343f62afdbb94f6352a45d41c17acf0d1df65fed834c1a5e86154f31102f",
+      "physical-component:43d1a11315e3668e90ea91331a0857bbbe9d96984b212bf957653e616ee52cd8",
+      "physical-component:447b38afd61e5dfa559b901ab149a059a711d9e99af2e204ab5f88ec30552275",
+      "physical-component:4e35c8d9131282023f3efb77bc9c166be31ead102344e44e307aa964b66dfdf3",
+      "physical-component:87a14332b9a62f4a42282cf8a415c0b94c15091654aa05b1ac293ee2d4758b3f",
+      "physical-component:bb6382d696364f0b134a83c89a5fa36a479788538ec07a3696347056b63b7bae",
+      "physical-component:e53af7b07bd3f726a90d31048953c13321f872340b2d7ab735d4bd4334faf782",
+      "physical-component:ed72aa6057af62a735ca5b0b3ad6cf79f8f8e96ca7ab15b7aa2e4b4d8c981827"
+    ]
+  },
+  "contact_subjects": {
+    "count": 4,
+    "ids": [
+      "gb:ZMB:ADM2:96606910B35256638811207",
+      "gb:ZMB:ADM2:96606910B48730551364911",
+      "gb:ZMB:ADM2:96606910B70191271227661",
+      "gb:ZWE:ADM2:62879985B85730198836463"
+    ],
+    "local_candidate_intersection_bindings": {
+      "gb:ZMB:ADM2:96606910B35256638811207": {
+        "bindings": 2,
+        "nonempty": 2,
+        "empty": 0
+      },
+      "gb:ZWE:ADM2:62879985B85730198836463": {
+        "bindings": 10,
+        "nonempty": 9,
+        "empty": 1
+      },
+      "gb:ZMB:ADM2:96606910B70191271227661": {
+        "bindings": 6,
+        "nonempty": 5,
+        "empty": 1
+      },
+      "gb:ZMB:ADM2:96606910B48730551364911": {
+        "bindings": 3,
+        "nonempty": 3,
+        "empty": 0
+      }
+    },
+    "whole_administrative_subjects_included_in_window": false,
+    "scope_note": "The source window covers each complete candidate footprint and every local source intersection for the four subjects, not the full extent of the four neighboring administrative polygons."
+  },
+  "point_only_contact": {
+    "row_count": 1,
+    "fragment_feature_count": 2
+  },
+  "checked_geometries": 34,
+  "records": [
+    {
+      "id": "candidate:physical-component:087b8ed59af27e069111ed4388ae84383625b06dcaaf0a250c56b21b38a09412",
+      "coordinate_count": 9,
+      "bounds_lonlat": [
+        29.2503,
+        -15.7646,
+        29.3142,
+        -15.731
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:087b8ed59af27e069111ed4388ae84383625b06dcaaf0a250c56b21b38a09412:gb:ZMB:ADM2:96606910B70191271227661",
+      "coordinate_count": 9,
+      "bounds_lonlat": [
+        29.260775419864796,
+        -15.75508562782922,
+        29.3142,
+        -15.731
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:087b8ed59af27e069111ed4388ae84383625b06dcaaf0a250c56b21b38a09412:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 4,
+      "bounds_lonlat": [
+        29.2503,
+        -15.7646,
+        29.3142,
+        -15.731
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:1aaf0bcede4fa05f6a0e04291123eb68a618da7d181659dc81785f58f05ce624",
+      "coordinate_count": 13,
+      "bounds_lonlat": [
+        29.386801925722146,
+        -15.7113,
+        29.467840266222964,
+        -15.682
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:1aaf0bcede4fa05f6a0e04291123eb68a618da7d181659dc81785f58f05ce624:gb:ZMB:ADM2:96606910B48730551364911",
+      "coordinate_count": 5,
+      "bounds_lonlat": [
+        29.467422373866906,
+        -15.6868438916101,
+        29.467840266222964,
+        -15.686802054742879
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:1aaf0bcede4fa05f6a0e04291123eb68a618da7d181659dc81785f58f05ce624:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 13,
+      "bounds_lonlat": [
+        29.40363432762131,
+        -15.708138416783465,
+        29.453686694782203,
+        -15.686854679397129
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:339d343f62afdbb94f6352a45d41c17acf0d1df65fed834c1a5e86154f31102f",
+      "coordinate_count": 7,
+      "bounds_lonlat": [
+        28.8483,
+        -16.0782,
+        28.8582,
+        -16.0434
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:339d343f62afdbb94f6352a45d41c17acf0d1df65fed834c1a5e86154f31102f:gb:ZMB:ADM2:96606910B35256638811207",
+      "coordinate_count": 5,
+      "bounds_lonlat": [
+        28.84884569120065,
+        -16.074022835880438,
+        28.852978544850547,
+        -16.060134530153366
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:339d343f62afdbb94f6352a45d41c17acf0d1df65fed834c1a5e86154f31102f:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 11,
+      "bounds_lonlat": [
+        28.8483,
+        -16.0782,
+        28.8582,
+        -16.0434
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:43d1a11315e3668e90ea91331a0857bbbe9d96984b212bf957653e616ee52cd8",
+      "coordinate_count": 8,
+      "bounds_lonlat": [
+        28.9341,
+        -15.9418,
+        28.981437940026076,
+        -15.936113428943937
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:43d1a11315e3668e90ea91331a0857bbbe9d96984b212bf957653e616ee52cd8:gb:ZMB:ADM2:96606910B70191271227661",
+      "coordinate_count": 9,
+      "bounds_lonlat": [
+        28.9341,
+        -15.9418,
+        28.978174705585825,
+        -15.936542801896602
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:43d1a11315e3668e90ea91331a0857bbbe9d96984b212bf957653e616ee52cd8:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 8,
+      "bounds_lonlat": [
+        28.9341,
+        -15.9418,
+        28.96420582042397,
+        -15.938775458072264
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:447b38afd61e5dfa559b901ab149a059a711d9e99af2e204ab5f88ec30552275",
+      "coordinate_count": 10,
+      "bounds_lonlat": [
+        29.0207,
+        -15.9396,
+        29.0658,
+        -15.8822
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:447b38afd61e5dfa559b901ab149a059a711d9e99af2e204ab5f88ec30552275:gb:ZMB:ADM2:96606910B70191271227661",
+      "coordinate_count": 12,
+      "bounds_lonlat": [
+        29.0207,
+        -15.9396,
+        29.0657798619974,
+        -15.88221620629733
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:447b38afd61e5dfa559b901ab149a059a711d9e99af2e204ab5f88ec30552275:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 11,
+      "bounds_lonlat": [
+        29.0207,
+        -15.9396,
+        29.0658,
+        -15.8822
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:4e35c8d9131282023f3efb77bc9c166be31ead102344e44e307aa964b66dfdf3",
+      "coordinate_count": 10,
+      "bounds_lonlat": [
+        28.8813,
+        -16.0013,
+        28.904592008639305,
+        -15.962880777537801
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:4e35c8d9131282023f3efb77bc9c166be31ead102344e44e307aa964b66dfdf3:gb:ZMB:ADM2:96606910B35256638811207",
+      "coordinate_count": 16,
+      "bounds_lonlat": [
+        28.8813,
+        -16.0013,
+        28.904592008639305,
+        -15.962880777537801
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:4e35c8d9131282023f3efb77bc9c166be31ead102344e44e307aa964b66dfdf3:gb:ZMB:ADM2:96606910B70191271227661",
+      "coordinate_count": 0,
+      "bounds_lonlat": null,
+      "empty": true,
+      "inside_complete_issue_window": null
+    },
+    {
+      "id": "local-contact-intersection:physical-component:4e35c8d9131282023f3efb77bc9c166be31ead102344e44e307aa964b66dfdf3:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 8,
+      "bounds_lonlat": [
+        28.8842,
+        -16.0013,
+        28.90435371631786,
+        -15.96350033757356
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:87a14332b9a62f4a42282cf8a415c0b94c15091654aa05b1ac293ee2d4758b3f",
+      "coordinate_count": 8,
+      "bounds_lonlat": [
+        29.49545,
+        -15.6861,
+        29.537809461493918,
+        -15.66022932252461
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:87a14332b9a62f4a42282cf8a415c0b94c15091654aa05b1ac293ee2d4758b3f:gb:ZMB:ADM2:96606910B48730551364911",
+      "coordinate_count": 15,
+      "bounds_lonlat": [
+        29.49545,
+        -15.684559254451061,
+        29.537809461493918,
+        -15.66022932252461
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:87a14332b9a62f4a42282cf8a415c0b94c15091654aa05b1ac293ee2d4758b3f:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 8,
+      "bounds_lonlat": [
+        29.49545,
+        -15.685205599573422,
+        29.537809461493918,
+        -15.66022932252461
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:bb6382d696364f0b134a83c89a5fa36a479788538ec07a3696347056b63b7bae",
+      "coordinate_count": 14,
+      "bounds_lonlat": [
+        29.0974,
+        -15.8631,
+        29.2251,
+        -15.765
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:bb6382d696364f0b134a83c89a5fa36a479788538ec07a3696347056b63b7bae:gb:ZMB:ADM2:96606910B70191271227661",
+      "coordinate_count": 13,
+      "bounds_lonlat": [
+        29.0974,
+        -15.858661082023593,
+        29.210285492073965,
+        -15.770181897254542
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:bb6382d696364f0b134a83c89a5fa36a479788538ec07a3696347056b63b7bae:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 19,
+      "bounds_lonlat": [
+        29.097744148467214,
+        -15.8631,
+        29.2251,
+        -15.765
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:e53af7b07bd3f726a90d31048953c13321f872340b2d7ab735d4bd4334faf782",
+      "coordinate_count": 6,
+      "bounds_lonlat": [
+        29.58815090995788,
+        -15.662,
+        29.617694117647066,
+        -15.64946701104665
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:e53af7b07bd3f726a90d31048953c13321f872340b2d7ab735d4bd4334faf782:gb:ZMB:ADM2:96606910B48730551364911",
+      "coordinate_count": 4,
+      "bounds_lonlat": [
+        29.58815090995788,
+        -15.65605384171529,
+        29.600152338718537,
+        -15.64946701104665
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:e53af7b07bd3f726a90d31048953c13321f872340b2d7ab735d4bd4334faf782:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 10,
+      "bounds_lonlat": [
+        29.58815090995788,
+        -15.662,
+        29.617694117647066,
+        -15.64946701104665
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "candidate:physical-component:ed72aa6057af62a735ca5b0b3ad6cf79f8f8e96ca7ab15b7aa2e4b4d8c981827",
+      "coordinate_count": 5,
+      "bounds_lonlat": [
+        28.98200026889752,
+        -15.937577083160601,
+        28.993707337700027,
+        -15.9359
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:ed72aa6057af62a735ca5b0b3ad6cf79f8f8e96ca7ab15b7aa2e4b4d8c981827:gb:ZMB:ADM2:96606910B70191271227661",
+      "coordinate_count": 6,
+      "bounds_lonlat": [
+        28.984249265444785,
+        -15.937577083160601,
+        28.993707337700027,
+        -15.9359
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "local-contact-intersection:physical-component:ed72aa6057af62a735ca5b0b3ad6cf79f8f8e96ca7ab15b7aa2e4b4d8c981827:gb:ZWE:ADM2:62879985B85730198836463",
+      "coordinate_count": 0,
+      "bounds_lonlat": null,
+      "empty": true,
+      "inside_complete_issue_window": null
+    },
+    {
+      "id": "contact-fragment:physical-gap:617:52:32a189d6c70f1265e05e0fcad124e843b25c3ef05cf7aabef07f8bdc49910275",
+      "coordinate_count": 4,
+      "bounds_lonlat": [
+        29.3142,
+        -15.731,
+        29.315983378686468,
+        -15.730226976538944
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "contact-fragment:physical-gap:617:53:451b0e380269c8ede553712986c4a566395901139c14a263d4133fb9705d5f5d",
+      "coordinate_count": 9,
+      "bounds_lonlat": [
+        29.2503,
+        -15.7646,
+        29.3142,
+        -15.731
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    },
+    {
+      "id": "original-contact-row:0:point-only-ambiguous",
+      "coordinate_count": 1,
+      "bounds_lonlat": [
+        29.3142,
+        -15.731,
+        29.3142,
+        -15.731
+      ],
+      "empty": false,
+      "inside_complete_issue_window": true
+    }
+  ],
+  "result": "complete candidate footprints and local contact geometries are within the retained source window",
+  "limits": [
+    "Coordinate-envelope inclusion proves the source grid window covers these retained geometries; it does not establish physical classification or position accuracy.",
+    "The four full neighboring ADM2 polygons extend beyond this local water-classification window and are not claimed to be covered or classified."
+  ]
+}

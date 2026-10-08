@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "issue": 907,
+  "comment": {
+    "id": 5991419222,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/issues/907#issuecomment-5991419222",
+    "author_association": "OWNER",
+    "user_type": "User",
+    "body": "Progress 2026-10-05 (America/Los_Angeles): classification/display implementation is PR #921 at exact head `cf146c643c8cdd7eaeea3babe7973a906c9c0de0`. Independent substantive review accepted this head: https://github.com/ChengshuLi/WorldAtlas/pull/921#issuecomment-5991359630 . Reviewer independently reproduced all classification product bytes, passed 71 affected controls, built the real hosted package and verified that compressed recovery transport restores original bytes exactly. Full CI evidence/scope/package and regression shards 1/2 passed; shard 0 remains live, so no complete CI/merge claimed yet.\n\nThe implementation distinguishes coarse-reference possible land gaps from the water-looking background, explains coordinates/provenance on hover/click, and safely reports unknown coverage when classification assets fail. GPU/Canvas controls and actual built application with all 14 modes/years 1444, 2021, 2026 passed locally and independently. Source/hierarchy/canonical grid/release pins are verified; location IDs, ownership and geometry remain unchanged. This is diagnostic display, not a hydrological certificate or completed geography repair. The initial worldwide audit is already merged in #909.\n\nThe user explicitly deferred deployment and asked that no publisher thread be contacted. Production therefore remains unchanged; #907 stays open for deferred delivery/readback. Next independently authorized work is #920, differential regression checks plus enforcement against the exact combined integration candidate; confirmed source-backed joint boundary repairs remain outstanding under #7. Unique author scratch was preserved in a hash-verified local archive before cleaning this managed checkout; regenerable local build/seed databases contained zero attribute records, and no live database was touched.\n"
+  },
+  "decision": "Preserve explicit deferral. Bounded current-version migration run does not deploy the held current-main UI changes."
+}

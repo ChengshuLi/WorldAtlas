@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "at": "2026-10-08T03:44:31.707Z",
+  "primary_checkout_commit": "4b6fa1b74d88c3e89bd466e35eddcdbf510a6bba",
+  "consumed_code": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "sha256": "fd9676268ab07a53a30a2738259d50e8b5b3bdb5492f5491bfd620b0f21696cb",
+      "bytes": 49049
+    },
+    {
+      "path": "scripts/restore-postgres-storage-v2.mjs",
+      "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32",
+      "bytes": 20543
+    },
+    {
+      "path": "hosted/storage-export-v2-contract.js",
+      "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b",
+      "bytes": 7783
+    }
+  ],
+  "native_receipt_sha256": "a6ae908d9fa526b21a4267a1463b28782cab4c31d3c6273d814510bd5070a8b5",
+  "media_input_sha256": "435fad50f1df2cfa9b9a1e53fa0b7cfe1d1c30312631a52867a48feca2bcbb60",
+  "archive_proof_raw_sha256": "bd6cc9a4da3aeb2728f9c7581388c7fc970ad66650debfa17d5784083cd08f29",
+  "database": {
+    "role": "worldatlas_app",
+    "query_policy": "Sequential SELECT only, existing runtime credential, no connection URI printed or copied",
+    "member_hash_kind": "sha256-pg-json-text-row-digests-c-key-order-v1",
+    "other_collection_method": "tableReadSQL exact columns + C key order; checked integer-column transport conversion identical reviewed PostgreSQL restore; storageRowsHashV2Ordered; JSON TEXT unchanged",
+    "source_stability": "complete marker before=after=original native source marker; no single SQL transaction snapshot claimed"
+  },
+  "archive_downloads": {
+    "parallelism": 4,
+    "per_request_timeout_ms": 120000,
+    "redirect": "error",
+    "streamed_to_sha256": true,
+    "saved_bodies": false,
+    "all_expected_lengths_and_hashes_asserted": true,
+    "actual_observed_roster_sha256": "3e598f3b915b45781d410b8f1165778eb517bf2ec76ecd3730a1c87ddc83b8a8"
+  },
+  "limitations": [
+    "Read-only preparation; not #847 final acceptance.",
+    "Private physical dictionaries/sequence values/private migration registry remain previously restored, not freshly compared.",
+    "Full bucket metadata roster is preserved #845 native proof; current public media byte readback does not relabel it fresh native R2 inventory."
+  ]
+}

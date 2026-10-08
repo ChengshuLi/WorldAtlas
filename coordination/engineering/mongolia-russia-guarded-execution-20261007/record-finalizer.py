@@ -1,0 +1,12 @@
+"""Record the frozen metadata-only finalizer and its final manifest bindings."""
+import pathlib,json,hashlib,subprocess,datetime,time,sys
+N=pathlib.Path(__file__).absolute().parent;W=N.parents[2]
+def sha(b):return hashlib.sha256(b).hexdigest()
+head=subprocess.check_output(['git','-C',str(W),'rev-parse','HEAD'],text=True).strip()
+for name in ['finalize.py','record-finalizer.py']:
+ p=N/name;assert p.read_bytes()==subprocess.check_output(['git','-C',str(W),'show',head+':'+p.relative_to(W).as_posix()])
+command=[sys.executable,'-I','-S','-B',str(N/'finalize.py')];start=datetime.datetime.now(datetime.timezone.utc).isoformat();mono=time.monotonic_ns();process=subprocess.Popen(command,cwd=W,stdout=subprocess.PIPE,stderr=subprocess.PIPE);stdout,stderr=process.communicate();end=datetime.datetime.now(datetime.timezone.utc).isoformat()
+receipt=dict(status='PASS' if process.returncode==0 else 'FAIL',execution_commit=head,command=command,cwd=str(W),actual_start_utc=start,actual_end_utc=end,pid=process.pid,exit_code=process.returncode,elapsed_seconds=(time.monotonic_ns()-mono)/1e9,stdout=stdout.decode(),stderr=stderr.decode(),finalizer_sha256=sha((N/'finalize.py').read_bytes()),recorder_sha256=sha(pathlib.Path(__file__).read_bytes()),scope='Metadata-only retention/baseline issue pin/output inventory construction; neither source geometry nor scientific comparison executed.')
+if process.returncode:print(json.dumps(receipt));raise SystemExit(process.returncode)
+p=N/'v/finalizer-execution.json';p.write_bytes(json.dumps(receipt,sort_keys=True,indent=2).encode()+b'\n');m=json.loads((N/'evidence-quality.json').read_bytes());name=p.relative_to(W).as_posix();m['outputs'].append(dict(path=name,bytes=p.stat().st_size,sha256=sha(p.read_bytes()),hash_kind='file-bytes'));m['change_receipts'].append(dict(path=name,status='added'));m['commands'].append('Postprocessing freeze '+head+' executes the whole authenticated finalize.py through record-finalizer.py; actual terminal command/times/exit retained in v/finalizer-execution.json. Scientific freeze remains2c8ff13e141498887676b6983fff449d83e0d504.')
+(N/'evidence-quality.json').write_bytes(json.dumps(m,sort_keys=True,indent=2,ensure_ascii=False).encode()+b'\n');print(json.dumps(dict(status='PASS',postprocessing_commit=head,manifest_sha256=sha((N/'evidence-quality.json').read_bytes()),descriptors=len(m['baseline']['files'])+len(m['outputs']),encoded=sum(x['bytes']for x in m['baseline']['files']+m['outputs']),changed=len(m['change_receipts']))))

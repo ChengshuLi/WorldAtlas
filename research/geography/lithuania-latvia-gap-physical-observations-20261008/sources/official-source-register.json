@@ -1,0 +1,219 @@
+{
+  "as_of": "2026-10-08",
+  "sources": [
+    {
+      "id": "ltu-ort10-2025-record",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT 2025 metadata record",
+      "url": "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B7E08EDAD-FBD1-4E28-AEEA-691336E62B2D%7D",
+      "vintage": "title 2025; temporal extent 2024-04-25..2024-06-21",
+      "retrieved": "2026-10-08",
+      "reuse": "generic “License”; no pixel-retention permission established",
+      "verification": "official page reviewed; conflicting LT/EN descriptions",
+      "known_limits": [
+        "Lithuanian abstract: 2025 Apr–Jun, about one third national coverage, 0.2m GSD (some 0.25m), about 0.4m RMSE.",
+        "English abstract says 2024 Apr–Jun.",
+        "No per-subject date or footprint join."
+      ]
+    },
+    {
+      "id": "ltu-ort-recent",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT current mosaic and aerial-photography date layers",
+      "url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer",
+      "vintage": "current mosaic; date layers report spatially varying 2022–2025 imagery",
+      "retrieved": "2026-10-08",
+      "reuse": "not established for image retention",
+      "verification": "official service lead reviewed; no tile/date query performed",
+      "known_limits": [
+        "National mosaic description and date layers are leads only; no per-subject date/coverage join.",
+        "Mixed-vintage mosaic cannot be treated as one survey date."
+      ]
+    },
+    {
+      "id": "ltu-ort10-view-service",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT 2024–2026 ArcGIS MapServer, metadata and REST ItemInfo",
+      "url": "https://www.geoportal.lt/mapproxy/nzt_ort10lt_2024_2026/MapServer",
+      "vintage": "service metadata published 2024-10-07; states 2024–2026 aerial imagery plus 2025 satellite; ItemInfo says 2024 orthophoto material",
+      "retrieved": "2026-10-08",
+      "reuse": "generic License; REST licenseInfo empty",
+      "verification": "official service metadata and REST catalogue reviewed",
+      "crs": "EPSG:3346 / LKS94 TM reported in service metadata",
+      "known_limits": [
+        "Conflicting service provenance unresolved.",
+        "No per-subject date/coverage join.",
+        "No pixels downloaded or retained."
+      ]
+    },
+    {
+      "id": "ltu-ort10-2024-record",
+      "jurisdiction": "Lithuania",
+      "source": "ORT10LT 2024 metadata record",
+      "url": "https://www.geoportal.lt/metadata-catalog/catalog/search/resource/details.page?uuid=%7B4AE76165-1C49-4F53-ACC1-A1D75C14B6F1%7D",
+      "vintage": "2024-04-09..2024-07-10",
+      "retrieved": "2026-10-08",
+      "reuse": "generic License; pixel-retention terms not established",
+      "verification": "official metadata page reviewed",
+      "known_limits": [
+        "Service record is not per-subject coverage/date evidence."
+      ]
+    },
+    {
+      "id": "lva-cycle8-program",
+      "jurisdiction": "Latvia",
+      "source": "LGIA 8th cycle orthophoto program",
+      "url": "https://www.lgia.gov.lv/en/8-cikla-2022-2024-gads-ortofotokartes",
+      "vintage": "2022–2024 program; 20cm RGBI/CIR; eastern-border gaps supplemented by satellite",
+      "retrieved": "2026-10-08",
+      "reuse": "not established for cycle 8; no imagery retained",
+      "verification": "Official product page plus four public GeoNetwork CSW dataset/service records reviewed; exact metadata IDs and capture hashes in sources/lva-cycle8-source-findings.json.",
+      "known_limits": [
+        "Program scope does not prove any scoped subject coverage or date.",
+        "Cycle-8 achieved accuracy not stated in reviewed public pages.",
+        "Four cycle-8 records identify Kurzeme; dataset abstracts state 20 cm and LKS 92 TM for 2022–2024, but no sheet-level acquisition-date table or feature schema.",
+        "Official CSW exposes metadata only; service connectPoint is blank. The service abstract requires a signed client license, while machine-readable access fields are inconsistent.",
+        "Two public static JPG schemes were HEAD-checked only; bodies were not fetched and no separate reuse license was found. No official public queryable date-feature vector or provider-published member under 32 MiB was identified in reviewed sources."
+      ]
+    },
+    {
+      "id": "lva-cycle8-wms",
+      "jurisdiction": "Latvia",
+      "source": "LGIA WMS service catalogue",
+      "url": "https://www.lgia.gov.lv/en/wms-servisi",
+      "vintage": "2022–2024 cycle-8 RGB/CIR and aerial photography time map",
+      "retrieved": "2026-10-08",
+      "reuse": "free only after client signs license; no license evidence",
+      "verification": "LGIA service catalogue and public GeoNetwork CSW service records reviewed; no signed client license or authorized WMS endpoint.",
+      "known_limits": [
+        "No authorized endpoint accessed or per-subject join.",
+        "Cycle-8 WMS is described as free only after client signs a license; no license evidence.",
+        "CSW service operation URL/connectPoint is blank; machine-readable access/use constraints conflict with the explicit license requirement.",
+        "No per-sheet date schema or freely queryable footprint vector was found."
+      ]
+    },
+    {
+      "id": "lva-crs-transition",
+      "jurisdiction": "Latvia",
+      "source": "LGIA LKS-2020 transition notice",
+      "url": "https://www.lgia.gov.lv/en/node/1384",
+      "vintage": "effective 2026-10-01; legacy LKS-92 service through 2027-02-01 for existing users",
+      "retrieved": "2026-10-08",
+      "reuse": "not applicable",
+      "verification": "official notice reviewed",
+      "known_limits": [
+        "Reported 7–12cm coordinate shift; actual authorized endpoint/CRS/transformation unknown."
+      ]
+    },
+    {
+      "id": "copernicus-wcd",
+      "jurisdiction": "Europe",
+      "source": "Copernicus Water Cover Duration",
+      "url": "https://land.copernicus.eu/en/products/water-bodies/high-resolution-water-cover-duration",
+      "vintage": "2016-present, Europe yearly hydrological-year aggregate; 10m; Sentinel-1/2; gradual release; marked not validated",
+      "retrieved": "2026-10-08",
+      "reuse": "CDSE documentation says free for any purpose; cite product DOI 10.2909/39e1ff33-01d9-45c2-9edc-00924383f34f and CLMS data policy.",
+      "verification": "Official CLMS/CDSE product/docs/catalog captures reviewed and hash-verified; no product raster/tile acquired.",
+      "known_limits": [
+        "Hydrological year runs Sep 1–Aug 31; annual water-presence-day aggregation is not a dated shoreline or exact acquisition observation.",
+        "Europe product is 10m; metadata references Sentinel-2 UTM/WGS84 tiles EPSG:32625–32638 or LAEA/ETRS89 EPSG:3035 on a 100km grid.",
+        "Specific year/tile availability was not confirmed; product layers are released gradually.",
+        "CLMS marks product not validated; no quantitative positional accuracy was verified. Recent production notice notes false water detections and reprocessing.",
+        "No candidate-specific availability/date query; supplementary water context only."
+      ],
+      "product_doi": "10.2909/39e1ff33-01d9-45c2-9edc-00924383f34f",
+      "cdse_collection_uuid": "6cbd4f0b-834d-4e91-aa56-8c347b9cf971",
+      "capture_note": "sources/water-context-findings.json; 22 raw response/header files hash-verified in local cache."
+    },
+    {
+      "id": "jrc-global-surface-water",
+      "jurisdiction": "Global",
+      "source": "JRC Global Surface Water download and documentation",
+      "url": "https://global-surface-water.appspot.com/download",
+      "vintage": "Global Surface Water v1.5, updated 2026-08-26; 1984–2024; 30m Landsat-derived; new monthly/yearly history is 2022–2024",
+      "retrieved": "2026-10-08",
+      "reuse": "Free without restriction; publications/models/products cite the dataset and Pekel et al. (2016); map attribution “Source: EC JRC/Google”.",
+      "verification": "Official JRC product/docs/release metadata captured and hash-verified; no Earth Engine sign-in, asset, raster, or tile accessed.",
+      "known_limits": [
+        "Occurrence/recurrence/transitions/extent are aggregates over 1984–2024; monthly history records monthly water/not-water/no-observation, not acquisition date.",
+        "2022–2024 Collection 2 seam against Collection 1 typically subpixel but reaches/exceeds one 30m pixel in some WRS-2 path/rows; backprocessing planned.",
+        "Extensions were not subjected to original 1984–2015 validation and may contain artifacts.",
+        "Retrieved metadata did not provide a clear CRS identifier or quantitative absolute positional accuracy; pixel size is not positional accuracy.",
+        "Not precise shoreline, subject-date, or microcomponent adjudication evidence."
+      ],
+      "capture_note": "sources/water-context-findings.json; 22 raw response/header files hash-verified in local cache."
+    },
+    {
+      "id": "lva-cycle6-metadata",
+      "jurisdiction": "Latvia",
+      "source": "LGIA cycle-6 orthophoto metadata archive",
+      "url": "https://s3.storage.pub.lvdc.gov.lv/lgia-opendata/citi/kartes/Ortofoto_6_cikla_metadati.rar",
+      "product_url": "https://www.lgia.gov.lv/lv/aerofotografesanas-6-cikls-2016-2018-g",
+      "license_url": "https://www.lgia.gov.lv/sites/lgia/files/document/Atverto%20datu%20licence%20CC%20BY_0.pdf",
+      "vintage": "2016–2018; nominal 0.25m GSD; 25 DBF records, 2016-05-05..2018-09-19",
+      "retrieved": "2026-10-08",
+      "reuse": "Official open data under CC BY 4.0; attribution required",
+      "verification": "Official product/open-data/license metadata and cached capture hashes reviewed; full source bytes remain in local ignored cache, not this packet",
+      "archive_sha256": "3cd0f617b674ac51dc1a1451cfb4475a620c533dbe47ffdc0f645b7ca1e3b4e6",
+      "capture_manifest_sha256": "68418a844004dee73b9d9dcdcc3f01153a68cdad92ff245d7d28284dd992ef5e",
+      "archive_catalogue_sha256": "832e31bbe5ed15c3d0f8325bfbaabd8c03d75f64580d60f6ee438c7fab48b90a",
+      "known_limits": [
+        "Whole-country product scope does not establish coverage/date for any of the 19 exact subjects.",
+        "DBF rows 20 and 25 have conflicting Datums/FOTO_DAT values; retain both without choosing.",
+        "The metadata XML is stale relative to the packaged DBF schema.",
+        "The source PolygonZ SHP decodes to 108040732 bytes, over the current 32MiB member cap; no extraction or subject join is allowed under current guidance.",
+        "Cycle 6 is older contextual evidence and cannot satisfy the original cycle-8 or physical-observation acceptance.",
+        "No image pixels or candidate geometry coordinates were interpreted or joined."
+      ]
+    },
+    {
+      "id": "ltu-date-footprint-rights",
+      "jurisdiction": "Lithuania",
+      "source": "Geoportal product/service rights metadata for ORT_recent and ORT10LT_2024_2026 date-footprint layers",
+      "url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT_recent/MapServer",
+      "related_service_url": "https://www.geoportal.lt/arcgis/rest/services/NZT/ORT10LT_2024_2026/MapServer",
+      "product_metadata_id": "F366FCAE-897D-4874-B646-0391037A863C",
+      "service_metadata_ids": [
+        "5E116F93-97ED-4F0C-AE22-8C0C71A51C54",
+        "242F0DA8-39FE-4367-B648-7CF5D3EB5FDF"
+      ],
+      "arcgis_iteminfo_guids": [
+        "C683EFAA-7855-461C-BEF1-04047136EC8A",
+        "FCF5FCD5-F972-4C08-AFDB-9EA61D1866E9"
+      ],
+      "retrieved": "2026-10-08",
+      "reuse": "Public viewing evidenced for ORT_recent; no product-specific grant found for offline research, date-footprint vector retention, or derived-observation publication. ORT10LT_2024_2026 remains generic License with empty REST licenseInfo.",
+      "verification": "Official catalog, ArcGIS iteminfo, Geoportal copyright/service pages, and blocked data.gov.lt retrievals reviewed; hashes and exact findings in sources/lithuanian-date-footprint-rights-findings.json.",
+      "known_limits": [
+        "Catalog use constraint is only “Licencija (License)” with no terms URL; both REST licenseInfo fields are empty.",
+        "ORT_recent says to contact Geoportal for use in other information systems; this is not itself a grant and is not applied to the distinct ORT10LT_2024_2026 service.",
+        "Geoportal copyright notice identifies a rights holder but does not grant reuse for date-footprint vectors.",
+        "Data.gov.lt returned HTTP 500 block pages; this does not establish absence of another catalog record.",
+        "Prior official metadata response headers were not retained in the earlier batch; no known endpoints were re-requested in the rights review."
+      ]
+    },
+    {
+      "id": "lva-cycle8-csw-metadata",
+      "jurisdiction": "Latvia",
+      "source": "GeoNetwork CSW records for LGIA cycle-8 color and infrared datasets/services",
+      "url": "https://geolatvija.lv/geonetwork/srv/eng/csw",
+      "record_ids": [
+        "24311e07-09ac-42e4-834b-dd6e6d476c37",
+        "3f4641f6-b61a-414f-91eb-971a2af06c6d",
+        "aec4682b-8b6f-4593-9ebb-266198c55b65",
+        "f0f9bcec-0193-49e2-8251-07bd96232dc9"
+      ],
+      "vintage": "2022–2024; metadata publication/revision dates are not flight dates",
+      "retrieved": "2026-10-08",
+      "reuse": "Public metadata records retrieved; no image/vector reuse grant found. Underlying cycle-8 WMS requires client-signed license.",
+      "verification": "Four records obtained with CSW GetRecords/GetRecordById; exact findings and capture manifest in sources/lva-cycle8-source-findings.json and sources/lva-cycle8-capture-manifest.json.",
+      "known_limits": [
+        "Dataset abstracts specify Kurzeme, 20 cm, LKS 92 TM; this does not establish any of the 19 subject coverage.",
+        "No per-sheet date feature fields/schema, public vector footprint source, or online operation URL was published in reviewed records.",
+        "Machine-readable access limits conflict with service abstract and LGIA WMS catalogue signed-license requirement.",
+        "Static JPG schemes were HEAD checked only, not fetched or inspected; separate reuse license not found.",
+        "No achieved positional accuracy or tile-level QA was reported in reviewed records."
+      ]
+    }
+  ]
+}

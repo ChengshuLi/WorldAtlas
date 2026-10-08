@@ -1,0 +1,336 @@
+{
+  "caller_sha256": "15f0d51a1141dd5d726b242696729c60d646a2893a3186c8446a18b2851a7d25",
+  "controls": [
+    {
+      "full_tiny_result": {
+        "method": {
+          "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+          "axis_order": "longitude-latitude",
+          "crs": "EPSG:4326",
+          "distance_method": "WGS84 inverse geodesic; no distances calculated",
+          "helper_version": "worldatlas-evidence-geometry-v1",
+          "scope": "All 48 components in complete family; full retained source feature rosters.",
+          "source_geometry_policy": "Preserve source and target geometries as decoded; no repair, clipping, simplification or assignment. Shapely intersects predicates and topology intersections use decoded EPSG:4326 longitude-latitude coordinates; intersection area is measured with the pinned WGS84 straight-source-edge ellipsoidal integral helper. Only positive ellipsoidal polygon area is counted; line-only touch is excluded. These comparisons do not establish precision, authority, or physical land status."
+        },
+        "mris_mongolia_nso_adm2": {
+          "family_component_count": 1,
+          "feature_count": 1,
+          "positive_area_component_count": 1,
+          "relations": [
+            {
+              "component_area_m2_wgs84": 12308463893.975351,
+              "component_id": "tiny-complete-component",
+              "intersecting_feature_count": 1,
+              "overlaps": [
+                {
+                  "component_overlap_fraction": 1.0,
+                  "feature_index": 0,
+                  "intersection_area_m2_wgs84": 12308463893.975351,
+                  "properties": {
+                    "fixture": "whole tiny source"
+                  }
+                }
+              ]
+            }
+          ],
+          "response_sha256": "ac1071186e638b22f2a3ba74c797234712e382f8a8e1187585beb4fdd3202ab3"
+        },
+        "products": {
+          "geoBoundaries_MNG_ADM2": {
+            "family_component_count": 1,
+            "feature_count": 1,
+            "product": {
+              "advertised_feature_count": 1,
+              "feature_count": 1,
+              "key": "gb:MNG:ADM2",
+              "original_sha256": "ac1071186e638b22f2a3ba74c797234712e382f8a8e1187585beb4fdd3202ab3",
+              "parts": [
+                {
+                  "path": "MNG"
+                }
+              ]
+            },
+            "raw_bytes": 156,
+            "raw_sha256": "ac1071186e638b22f2a3ba74c797234712e382f8a8e1187585beb4fdd3202ab3",
+            "relations": [
+              {
+                "component_area_m2_wgs84": 12308463893.975351,
+                "component_geometry_sha256": "38dd61e0bcf58c66530ade27479fcb6de07c28ccd483aadf6a00e8d3b45f320d",
+                "component_id": "tiny-complete-component",
+                "intersecting_feature_count": 1,
+                "overlaps": [
+                  {
+                    "component_area_m2_wgs84": 12308463893.975351,
+                    "component_overlap_fraction": 1.0,
+                    "intersection_area_m2_wgs84": 12308463893.975351,
+                    "source_feature_index": 0,
+                    "source_properties": {
+                      "fixture": "whole tiny source"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "geoBoundaries_RUS_ADM2": {
+            "family_component_count": 1,
+            "feature_count": 1,
+            "product": {
+              "advertised_feature_count": 1,
+              "feature_count": 1,
+              "key": "gb:RUS:ADM2",
+              "original_sha256": "ac1071186e638b22f2a3ba74c797234712e382f8a8e1187585beb4fdd3202ab3",
+              "parts": [
+                {
+                  "path": "RUS"
+                }
+              ]
+            },
+            "raw_bytes": 156,
+            "raw_sha256": "ac1071186e638b22f2a3ba74c797234712e382f8a8e1187585beb4fdd3202ab3",
+            "relations": [
+              {
+                "component_area_m2_wgs84": 12308463893.975351,
+                "component_geometry_sha256": "38dd61e0bcf58c66530ade27479fcb6de07c28ccd483aadf6a00e8d3b45f320d",
+                "component_id": "tiny-complete-component",
+                "intersecting_feature_count": 1,
+                "overlaps": [
+                  {
+                    "component_area_m2_wgs84": 12308463893.975351,
+                    "component_overlap_fraction": 1.0,
+                    "intersection_area_m2_wgs84": 12308463893.975351,
+                    "source_feature_index": 0,
+                    "source_properties": {
+                      "fixture": "whole tiny source"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "result_counts": {
+          "complete_family_components": 1,
+          "geoboundaries_mng_positive_area_components": 1,
+          "geoboundaries_mng_source_features": 1,
+          "geoboundaries_rus_advertised_source_features": 1,
+          "geoboundaries_rus_positive_area_components": 1,
+          "geoboundaries_rus_source_features": 1,
+          "mris_nso_positive_area_components": 1,
+          "mris_nso_source_features": 1,
+          "positive_length_contacts": 0
+        }
+      },
+      "name": "same complete pointsets genuine positive",
+      "passed": true
+    },
+    {
+      "full_tiny_result": {
+        "method": {
+          "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+          "axis_order": "longitude-latitude",
+          "crs": "EPSG:4326",
+          "distance_method": "WGS84 inverse geodesic; no distances calculated",
+          "helper_version": "worldatlas-evidence-geometry-v1",
+          "scope": "All 48 components in complete family; full retained source feature rosters.",
+          "source_geometry_policy": "Preserve source and target geometries as decoded; no repair, clipping, simplification or assignment. Shapely intersects predicates and topology intersections use decoded EPSG:4326 longitude-latitude coordinates; intersection area is measured with the pinned WGS84 straight-source-edge ellipsoidal integral helper. Only positive ellipsoidal polygon area is counted; line-only touch is excluded. These comparisons do not establish precision, authority, or physical land status."
+        },
+        "mris_mongolia_nso_adm2": {
+          "family_component_count": 1,
+          "feature_count": 1,
+          "positive_area_component_count": 0,
+          "relations": [
+            {
+              "component_area_m2_wgs84": 12308463893.975351,
+              "component_id": "tiny-complete-component",
+              "intersecting_feature_count": 0,
+              "overlaps": []
+            }
+          ],
+          "response_sha256": "ccfabf11e356e1e63c5bc1b26fea3447ebc1a824e1c64b7df6aa0495ff122e56"
+        },
+        "products": {
+          "geoBoundaries_MNG_ADM2": {
+            "family_component_count": 1,
+            "feature_count": 1,
+            "product": {
+              "advertised_feature_count": 1,
+              "feature_count": 1,
+              "key": "gb:MNG:ADM2",
+              "original_sha256": "ccfabf11e356e1e63c5bc1b26fea3447ebc1a824e1c64b7df6aa0495ff122e56",
+              "parts": [
+                {
+                  "path": "MNG"
+                }
+              ]
+            },
+            "raw_bytes": 156,
+            "raw_sha256": "ccfabf11e356e1e63c5bc1b26fea3447ebc1a824e1c64b7df6aa0495ff122e56",
+            "relations": [
+              {
+                "component_area_m2_wgs84": 12308463893.975351,
+                "component_geometry_sha256": "38dd61e0bcf58c66530ade27479fcb6de07c28ccd483aadf6a00e8d3b45f320d",
+                "component_id": "tiny-complete-component",
+                "intersecting_feature_count": 0,
+                "overlaps": []
+              }
+            ]
+          },
+          "geoBoundaries_RUS_ADM2": {
+            "family_component_count": 1,
+            "feature_count": 1,
+            "product": {
+              "advertised_feature_count": 1,
+              "feature_count": 1,
+              "key": "gb:RUS:ADM2",
+              "original_sha256": "ccfabf11e356e1e63c5bc1b26fea3447ebc1a824e1c64b7df6aa0495ff122e56",
+              "parts": [
+                {
+                  "path": "RUS"
+                }
+              ]
+            },
+            "raw_bytes": 156,
+            "raw_sha256": "ccfabf11e356e1e63c5bc1b26fea3447ebc1a824e1c64b7df6aa0495ff122e56",
+            "relations": [
+              {
+                "component_area_m2_wgs84": 12308463893.975351,
+                "component_geometry_sha256": "38dd61e0bcf58c66530ade27479fcb6de07c28ccd483aadf6a00e8d3b45f320d",
+                "component_id": "tiny-complete-component",
+                "intersecting_feature_count": 0,
+                "overlaps": []
+              }
+            ]
+          }
+        },
+        "result_counts": {
+          "complete_family_components": 1,
+          "geoboundaries_mng_positive_area_components": 0,
+          "geoboundaries_mng_source_features": 1,
+          "geoboundaries_rus_advertised_source_features": 1,
+          "geoboundaries_rus_positive_area_components": 0,
+          "geoboundaries_rus_source_features": 1,
+          "mris_nso_positive_area_components": 0,
+          "mris_nso_source_features": 1,
+          "positive_length_contacts": 0
+        }
+      },
+      "name": "disjoint actual method",
+      "passed": true
+    },
+    {
+      "full_tiny_result": {
+        "method": {
+          "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+          "axis_order": "longitude-latitude",
+          "crs": "EPSG:4326",
+          "distance_method": "WGS84 inverse geodesic; no distances calculated",
+          "helper_version": "worldatlas-evidence-geometry-v1",
+          "scope": "All 48 components in complete family; full retained source feature rosters.",
+          "source_geometry_policy": "Preserve source and target geometries as decoded; no repair, clipping, simplification or assignment. Shapely intersects predicates and topology intersections use decoded EPSG:4326 longitude-latitude coordinates; intersection area is measured with the pinned WGS84 straight-source-edge ellipsoidal integral helper. Only positive ellipsoidal polygon area is counted; line-only touch is excluded. These comparisons do not establish precision, authority, or physical land status."
+        },
+        "mris_mongolia_nso_adm2": {
+          "family_component_count": 1,
+          "feature_count": 1,
+          "positive_area_component_count": 0,
+          "relations": [
+            {
+              "component_area_m2_wgs84": 12308463893.975351,
+              "component_id": "tiny-complete-component",
+              "intersecting_feature_count": 0,
+              "overlaps": []
+            }
+          ],
+          "response_sha256": "e97814816f376edfaee4e8d6df55ded2295532462d39ef55af73788fb3ba57d6"
+        },
+        "products": {
+          "geoBoundaries_MNG_ADM2": {
+            "family_component_count": 1,
+            "feature_count": 1,
+            "product": {
+              "advertised_feature_count": 1,
+              "feature_count": 1,
+              "key": "gb:MNG:ADM2",
+              "original_sha256": "e97814816f376edfaee4e8d6df55ded2295532462d39ef55af73788fb3ba57d6",
+              "parts": [
+                {
+                  "path": "MNG"
+                }
+              ]
+            },
+            "raw_bytes": 156,
+            "raw_sha256": "e97814816f376edfaee4e8d6df55ded2295532462d39ef55af73788fb3ba57d6",
+            "relations": [
+              {
+                "component_area_m2_wgs84": 12308463893.975351,
+                "component_geometry_sha256": "38dd61e0bcf58c66530ade27479fcb6de07c28ccd483aadf6a00e8d3b45f320d",
+                "component_id": "tiny-complete-component",
+                "intersecting_feature_count": 0,
+                "overlaps": []
+              }
+            ]
+          },
+          "geoBoundaries_RUS_ADM2": {
+            "family_component_count": 1,
+            "feature_count": 1,
+            "product": {
+              "advertised_feature_count": 1,
+              "feature_count": 1,
+              "key": "gb:RUS:ADM2",
+              "original_sha256": "e97814816f376edfaee4e8d6df55ded2295532462d39ef55af73788fb3ba57d6",
+              "parts": [
+                {
+                  "path": "RUS"
+                }
+              ]
+            },
+            "raw_bytes": 156,
+            "raw_sha256": "e97814816f376edfaee4e8d6df55ded2295532462d39ef55af73788fb3ba57d6",
+            "relations": [
+              {
+                "component_area_m2_wgs84": 12308463893.975351,
+                "component_geometry_sha256": "38dd61e0bcf58c66530ade27479fcb6de07c28ccd483aadf6a00e8d3b45f320d",
+                "component_id": "tiny-complete-component",
+                "intersecting_feature_count": 0,
+                "overlaps": []
+              }
+            ]
+          }
+        },
+        "result_counts": {
+          "complete_family_components": 1,
+          "geoboundaries_mng_positive_area_components": 0,
+          "geoboundaries_mng_source_features": 1,
+          "geoboundaries_rus_advertised_source_features": 1,
+          "geoboundaries_rus_positive_area_components": 0,
+          "geoboundaries_rus_source_features": 1,
+          "mris_nso_positive_area_components": 0,
+          "mris_nso_source_features": 1,
+          "positive_length_contacts": 0
+        }
+      },
+      "name": "line-only boundary actual method",
+      "passed": true
+    },
+    {
+      "error": "Actual in-memory project callable differs: ellipsoidal_area.area",
+      "name": "actual imported helper callable substitution",
+      "passed": true
+    },
+    {
+      "error": "Actual scientific callable or quadrature binding changed",
+      "name": "actual external scientific callable substitution",
+      "passed": true
+    },
+    {
+      "error": "Actual scientific callable or quadrature binding changed",
+      "name": "actual quadrature-global mutation",
+      "passed": true
+    }
+  ],
+  "count": 6,
+  "limits": [
+    "Three tiny complete synthetic source/target rectangles use literal comparison/predicate/ellipsoidal methods. No actual48-component sources, source extraction, acquisition or world graph are read. This is not either qualifying comparison run."
+  ],
+  "status": "PASS"
+}

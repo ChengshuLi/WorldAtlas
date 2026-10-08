@@ -1,0 +1,158 @@
+{
+  "review_scope": {
+    "family_id": "gap-source-batch:1e0d57dee3adecafc87c3bbe",
+    "component_ids": [
+      "physical-component:9d53e507a92cc13f65caf2dc51679708b3fee6e5b87a670c5d5179e40019dbbe"
+    ],
+    "contact_ids": [
+      "gb:AUS:ADM2:25037944B17338277063313"
+    ],
+    "component_count": 1,
+    "contact_count": 1,
+    "classification": "not-performed"
+  },
+  "assessment_date": "2026-10-07",
+  "sources": [
+    {
+      "id": "ga-cocos-orthophoto-2011",
+      "title": "Cocos Island - Orthophoto - 2011",
+      "agency": "Geoscience Australia / AAM Pty Ltd",
+      "official_metadata_url": "https://www.ga.gov.au/static/cocos/metadata/co_orthophoto_2011.html",
+      "catalog_item_url": "https://catalogue.data.wa.gov.au/dataset/ecc7b5f1-a2b6-4134-bb64-afabfc47cd67",
+      "resource_url": "https://catalogue.data.wa.gov.au/dataset/ecc7b5f1-a2b6-4134-bb64-afabfc47cd67/resource/9771f13b-d5ca-40ce-8ab1-541b3e42adad/download/cocos_2011_orth.zip",
+      "vintage": "2011-08-08/2011-08-16",
+      "role": "date-stamped orthophoto candidate",
+      "catalogue_size_bytes": 1194672655,
+      "catalogue_license": "CC BY-NC 4.0 (DataWA API item); no imagery bytes acquired because over 32 MiB",
+      "access_path": "Full mosaics in GIS package; GA metadata says 1 km ECW/TIFF tiles and raw imagery may be requested from GA. No request/contact made.",
+      "fitness": "Potential later source only; 15 cm pixel size and nominal 30 cm horizontal accuracy; low-tide exposure, 8-day collection window, mosaic color balance and alternate-frame replacement limit stable shoreline interpretation. Target frame coverage and exact product rights unverified."
+    },
+    {
+      "id": "ga-cocos-lidar-dem-2011",
+      "title": "Cocos Island - DEM - 2011",
+      "agency": "Geoscience Australia / AAM Pty Ltd",
+      "catalog_item_url": "https://catalogue.data.wa.gov.au/dataset/a747dc79-a4ce-4a3d-87f3-80cbfe238b14",
+      "resource_url": "https://catalogue.data.wa.gov.au/dataset/a747dc79-a4ce-4a3d-87f3-80cbfe238b14/resource/e23d7a69-433d-4feb-8714-627d0a6d0b4b/download/dem_colour_map_2011.zip",
+      "vintage": "2011-08-08/2011-08-16",
+      "role": "date-stamped elevation/laser survey candidate",
+      "catalogue_size_bytes": 72169833,
+      "catalogue_license": "DataWA API says CC BY-NC 4.0; data.gov.au mirror advertises CC BY-SA 4.0 while API license_id is cc-nc; rights unresolved, conservatively restricted",
+      "access_path": "Catalog ZIP exceeds 32 MiB. Manual says 1 m DEM derived from AAM classified ground/non-ground LiDAR; tiles joined into full-extent TIFF. No pixels acquired.",
+      "fitness": "Potentially informative independent elevation surface, but same survey/tide window; published guide accuracy is 15 cm vertical and 30 cm horizontal. Product terms and source frame coverage unresolved."
+    },
+    {
+      "id": "ga-north-keeling-orthophoto-2011",
+      "title": "North Keeling - Orthophoto - 2011",
+      "agency": "Geoscience Australia / AAM Pty Ltd",
+      "catalog_item_url": "https://catalogue.data.wa.gov.au/dataset/219dd6b4-dda1-4c33-b4b2-a672062b146a",
+      "resource_url": "https://catalogue.data.wa.gov.au/dataset/219dd6b4-dda1-4c33-b4b2-a672062b146a/resource/a38f47a6-cffd-4826-8451-ee17ab3bf1ec/download/n_keeling_2011_orth.zip",
+      "vintage": "2011-08-08/2011-08-16",
+      "role": "date-stamped orthophoto candidate",
+      "catalogue_size_bytes": 112097218,
+      "catalogue_license": "CC BY-NC 4.0 (DataWA API item); no imagery bytes acquired because over 32 MiB",
+      "access_path": "Separate North Keeling mosaic resource; not acquired.",
+      "fitness": "Not target-coverage evidence; retained only to document complete campaign inventory and avoid confusing the northern mosaic with the southern-atoll product."
+    },
+    {
+      "id": "ga-2011-frame-tide-table",
+      "title": "2011 aerial survey Cocos photo-frame/tide table",
+      "agency": "Geoscience Australia",
+      "url": "https://www.ga.gov.au/document/2011_aerial_survey_xmas_Cocos_Frames_Data_tides.xls",
+      "vintage": "2011",
+      "role": "frame-level time/tide metadata needed to resolve actual image capture conditions",
+      "access_status": "Repeated direct URL retrieval returned HTTP 404; GA 2012 system manual references a frame/tide table inside legacy package `height_data/source` but does not reproduce it.",
+      "license": "Unknown; file unavailable and no specific reuse terms located.",
+      "fitness": "Frame-to-target coverage and individual tide levels not verified."
+    },
+    {
+      "id": "ga-aam-2011-survey-report",
+      "title": "AAM aerial survey report 2011",
+      "agency": "Geoscience Australia / AAM Pty Ltd",
+      "url": "https://www.ga.gov.au/document/AAM_aerial_survey_report_2011.pdf",
+      "vintage": "2011",
+      "role": "contractor report for survey accuracy/processing details",
+      "access_status": "Repeated direct URL retrieval returned HTTP 404; GA 2012 system manual links to it without reproducing it.",
+      "license": "Unknown; file unavailable and no specific reuse terms located.",
+      "fitness": "Detailed control/accuracy/flight information remains unverified."
+    },
+    {
+      "id": "ga-cocos-gis-system-documentation-2012",
+      "title": "Cocos (Keeling) Islands GIS System Documentation",
+      "agency": "Geoscience Australia",
+      "url": "https://www.ga.gov.au/bigobj/GA21021.pdf",
+      "vintage": "2012",
+      "role": "official system documentation and inventory pointer",
+      "license": "Restricted: PDF footer says © 2012 Geoscience Australia, all rights reserved. Not retained in the repository.",
+      "retrieval_receipt": {
+        "retrieved_at": "2026-10-08T05:57:42.253Z",
+        "bytes": 18901495,
+        "sha256": "db846f3cdc245e667a7e4b703569bdda5e61c6f248702fcebf3e18cb669c5863",
+        "disposition": "temporarily inspected, then deleted; citation only"
+      },
+      "fitness": "Describes 2011 aerial campaign, source inventory and internal imagery/shapefile paths; it does not supply the missing frame/tide table or AAM report."
+    },
+    {
+      "id": "datawa-cocos-coast-outline-2011",
+      "title": "Cocos Coast Outline - 2011",
+      "agency": "Geoscience Australia, distributed by DataWA",
+      "catalog_item_url": "https://catalogue.data.wa.gov.au/dataset/d2fdc6cb-369c-40a0-badf-f8384464aea6",
+      "resource_url": "https://catalogue.data.wa.gov.au/dataset/d2fdc6cb-369c-40a0-badf-f8384464aea6/resource/8c8521df-b28d-4250-be5e-b0946f0b410a/download/cocos_coast_2011.zip",
+      "vintage": "2011",
+      "role": "small licensed derivative checked as a possible alternative",
+      "size_bytes": 67943,
+      "sha256": "a0f17a0ac7608ca8c377d0af4c418b558c011f3b48d889b03f48233e1e58290e",
+      "license": "CC BY 4.0 per original DataWA item; national data.gov.au mirror uses a different CC BY 3.0 Australia label.",
+      "retained_path": "sources/cocos-coast-2011.zip",
+      "archive_directory_only": {
+        "member_count": 6,
+        "uncompressed_member_bytes": 158676,
+        "members": [
+          {"name": "cocos_coast_2011.xml", "bytes": 479},
+          {"name": "cocos_coast_2011.dbf", "bytes": 1442},
+          {"name": "cocos_coast_2011.prj", "bytes": 452},
+          {"name": "cocos_coast_2011.qml", "bytes": 2887},
+          {"name": "cocos_coast_2011.shp", "bytes": 152804},
+          {"name": "cocos_coast_2011.shx", "bytes": 612}
+        ],
+        "inspection": "Directory listing only; no extraction or geometry inspection."
+      },
+      "fitness": "Derived by raster-to-polygon from the same 2011 DEM; metadata warns variable accuracy, shallow low-tide sandbanks and poor fit to land edge near sand flats. Not independent physical truth; geometry not inspected."
+    },
+    {
+      "id": "datawa-cocos-contours-2011",
+      "title": "Cocos Islands Contours 0.5m - 2011",
+      "agency": "Geoscience Australia, distributed by DataWA",
+      "catalog_item_url": "https://catalogue.data.wa.gov.au/dataset/3b154add-f281-47df-a9db-8bde3a7dca12",
+      "resource_url": "https://catalogue.data.wa.gov.au/dataset/3b154add-f281-47df-a9db-8bde3a7dca12/resource/a26bae2a-d7d7-4f70-b2c4-850b3390cc23/download/contours_cocos_0.5.zip",
+      "vintage": "2011",
+      "role": "same-survey derived elevation alternative",
+      "catalogue_size_bytes": 18976881,
+      "catalogue_license": "CC BY 4.0",
+      "access_status": "Not acquired",
+      "fitness": "Derived from the same DEM and repeats its inaccuracies; no independent observation."
+    },
+    {
+      "id": "ga-cocos-orthophoto-1987",
+      "title": "Orthophotography of Cocos (Keeling) Islands 1987",
+      "agency": "Geoscience Australia",
+      "official_metadata_url": "https://www.ga.gov.au/static/cocos/metadata/metaorth.html",
+      "vintage": "1987-04-05",
+      "role": "independently dated image candidate",
+      "metadata": "25 cm imagery; island coverage only, lagoon excluded; expected position within 1 m for main atoll and weaker for Horsburgh/North Keeling.",
+      "license": "No product-specific reuse license found; metadata states access/contact constraint. No image acquired.",
+      "fitness": "Coverage at the one target component is not established; not corroboration."
+    },
+    {
+      "id": "ga-general-web-copyright",
+      "title": "Geoscience Australia copyright notice",
+      "url": "https://www.ga.gov.au/copyright",
+      "license": "Website material generally CC BY 4.0, subject to product-specific and third-party exceptions; does not itself grant reuse rights for the 2011 imagery."
+    }
+  ],
+  "not_performed": [
+    "No third-party contact or imagery request",
+    "No orthophoto/DEM pixels acquired",
+    "No GIS, spatial overlay, geometry inspection, classification, or source-based land/water conclusion",
+    "No physical status or geometry mutation"
+  ]
+}

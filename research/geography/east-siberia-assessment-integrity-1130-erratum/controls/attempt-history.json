@@ -1,0 +1,70 @@
+{
+  "attempts": [
+    {
+      "failure": "The first corrected analysis and table ran, but the wrapper then rejected the existing vintages/ parent while admitting run-2. The files were not written to legacy paths. Their exact hashes matched final v4 run-1; duplicate copies were removed after verification.",
+      "identical_bytes_at": {
+        "assessment": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/geography-assessment.json",
+        "table": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v4/run-1/subject-assessments.tsv"
+      },
+      "outcome": "partial; no completion receipt",
+      "retained_output_hashes": {
+        "assessment": {
+          "bytes": 457671,
+          "sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5"
+        },
+        "table": {
+          "bytes": 138563,
+          "sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23"
+        }
+      },
+      "vintage": "2026-10-08-integrity-v1"
+    },
+    {
+      "artifacts": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/original-run-receipts.json",
+      "original_receipt_sha256": "6327e98c19e5c8800e3ae251c09b8ff8909a92735423269c5502dfb298ea6016",
+      "outcome": "two runs identical; superseded by stronger source-member validation",
+      "vintage": "2026-10-08-integrity-v2"
+    },
+    {
+      "artifacts": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/original-run-receipts.json",
+      "original_receipt_sha256": "2878c1145bb3a3b27014e5dcf6f4c2f11d36f13f1b300b9c03340a2b0734b40b",
+      "outcome": "two runs identical with exact overlay source-member joins; superseded by final v4 receipt",
+      "vintage": "2026-10-08-integrity-v3"
+    },
+    {
+      "outcome": "9 passed, writer-control test raised a harness NameError after both private sentinels were replaced; no original historical path was touched. Variable corrected; final full suite passed 10/10.",
+      "suite_attempt": "initial control-suite attempt"
+    },
+    {
+      "outcome": "prior-base reproducibility pair; all four assessment/table products byte-identical to v5 before raw-output pruning; see retained v4 receipt and v5 products",
+      "vintage": "2026-10-08-integrity-v4"
+    },
+    {
+      "head_reviewed": "85e3ef1b07e3045d52af2c5f0e35fa9fa748efad",
+      "outcome": "independent exact-head review found checkout-specific absolute paths in three retained legacy adapters; replaced with repository-relative paths, added a portability regression assertion, refreshed adapter receipt hashes, and reran the full 10-test suite successfully from repository root",
+      "recorded_at_utc": "2026-10-08T05:17:25Z",
+      "reviewer": "independent_review_1460",
+      "suite": "10 passed; evidence validator status limited"
+    },
+    {
+      "head_before_refresh": "237a6eb57dfa38f3e4b6fbedf0e1a3434ab37dd6",
+      "prior_queue_result": "terminal not-merged: evaluator requested renewed exact-head review after issue acceptance-contract binding mismatch; issue body and PR disposition were rechecked unchanged",
+      "new_base_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7",
+      "rebase_head_before_refresh": "c1b3b9876517920a81cc4f74dc2f0a4106e2c081",
+      "new_vintage": "2026-10-08-integrity-v7",
+      "outcome": "fresh two-run reproduction on the refreshed main base; both assessment and table outputs match each other and all four prior v6 raw outputs byte-for-byte; v6 reproducibility receipt retained and duplicate raw files pruned after comparison",
+      "assessment_sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5",
+      "table_sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23",
+      "recorded_at_utc": "2026-10-08T05:44:00Z"
+    },
+    {
+      "head_reviewed": "4e2e481465a777f005b715a8ba37e2e36db14981",
+      "outcome": "trusted hosted evidence job rejected the v7 reproducibility receipt because seven ledger bindings expected /run_count and the typed control envelope; no evidence or geography claim was accepted by that run",
+      "correction": "added method_id, kind, outcome, run_count and matching run hashes to the v7 receipt; refreshed all affected receipt/metric/output hashes and will rerun hosted evidence checks",
+      "recorded_at_utc": "2026-10-08T05:57:30Z"
+    }
+  ],
+  "issue": 1356,
+  "recorded_at_utc": "2026-10-08T05:57:30Z",
+  "version": 1
+}

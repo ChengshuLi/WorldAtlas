@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "recorded_local_date": "2026-10-07",
+  "authoritative_records": [
+    "legacy-reproduction-audit.json",
+    "vintages/successor-one-20261007/authenticated-matrix.json",
+    "vintages/successor-two-20261007/authenticated-matrix.json",
+    "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/producer-controls-20261007/controls.json",
+    "vintages/successor-final-one-20261007/authenticated-matrix.json",
+    "vintages/successor-final-two-20261007/authenticated-matrix.json",
+    "vintages/producer-controls-final-20261007/controls.json"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed-harness",
+      "summary": "A helper signature mismatch stopped the wrapper before adversarial controls. Baseline reproductions completed, but this attempt is not acceptance evidence. No original source or legacy destination was written."
+    },
+    {
+      "attempt": 2,
+      "status": "superseded-and-excluded",
+      "summary": "The read-text/read-bytes overlay priority was wrong, so duplicate-control output hashes reflected original source bytes instead of intended altered bytes. Captures and intermediate audit are retained under failed-attempts/ and excluded from authoritative findings."
+    },
+    {
+      "attempt": 3,
+      "status": "corrected-authoritative-legacy-audit",
+      "summary": "Fixed overlay priority for both Path.read_text and Path.read_bytes; reran each exact pinned legacy entry point twice and inventory adversarial controls. See legacy-reproduction-audit.json. Its duplicate outputs and hashes are authoritative for this worker's fixtures; they differ from the issue reporter's separately generated duplicate fixture hashes."
+    },
+    {
+      "attempt": 4,
+      "status": "superseded-output-schema",
+      "summary": "The first additive successor run correctly produced 210 pairs and 35 changed areas but reported differing contacts as a repeated pair count (210) rather than distinct source contacts. Output is retained under failed-attempts/producer-first-run/ and excluded. The field was corrected to count distinct contacts."
+    },
+    {
+      "attempt": 5,
+      "status": "corrected-authoritative-successor",
+      "summary": "Two fresh successor executions after the summary correction produced identical 101810-byte outputs (SHA-256 af573ff25ba961ea574ed08214ab9befbe95626d6b78977cc329c914222fc5de); each lists 210 unique pairs, 35 changed-area pairs, and 10 distinct contacts with non-equal full geometries."
+    },
+    {
+      "attempt": 6,
+      "status": "failed-control-harness-assertion",
+      "summary": "An initial control helper incorrectly expected the inventory indexer alone to detect a missing row; the indexer checks identity uniqueness, while complete row count is a separate producer invariant. The assertion aborted before writing a control receipt. The corrected receipt records duplicate identity rejection and the explicit complete-count guard; no source or existing evidence output was changed."
+    },
+    {
+      "attempt": 7,
+      "status": "corrected-authoritative-successor-and-controls",
+      "summary": "Added fail-closed geometry validity and output-root safety checks; reran two fresh successor vintages with identical output hashes. Probed empty/invalid geometry, path traversal, collision and symlinked output root; all rejected. Full control receipt is vintages/producer-controls-final-20261007/controls.json."
+    }
+  ],
+  "failed_artifacts": [
+    {
+      "path": "failed-attempts/legacy-reproduction-audit.json",
+      "bytes": 38310,
+      "sha256": "e5c3f7c15049bed81eecfceea23c1ff4c27f1072f62eb639e1048056e920ec86"
+    },
+    {
+      "path": "failed-attempts/legacy-controls-before-read-priority/duplicate-final-component-full-product-comparison.json",
+      "bytes": 6302501,
+      "sha256": "7876b77e399e446b911e9311d276ed88c0737d952adf5ccadc121d017798e659"
+    },
+    {
+      "path": "failed-attempts/legacy-controls-before-read-priority/duplicate-final-contact-full-product-comparison.json",
+      "bytes": 6539254,
+      "sha256": "6304a5aec8b63ab415ff03e2f9336de387ab7f731816478b2256b6428b214148"
+    },
+    {
+      "path": "failed-attempts/producer-first-run/vintages/run-one-20261007/authenticated-matrix.json",
+      "bytes": 101811,
+      "sha256": "3be9e4be3238b301f64e2f10b14811304142faae65c82116d6afc36c26bcb787"
+    }
+  ],
+  "control_receipt": {
+    "path": "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/producer-controls-20261007/controls.json",
+    "bytes": 751,
+    "sha256": "8532fe3d82b4682f3390b7e16757c28d2427872e088df029e15df71baed52ce6"
+  }
+}

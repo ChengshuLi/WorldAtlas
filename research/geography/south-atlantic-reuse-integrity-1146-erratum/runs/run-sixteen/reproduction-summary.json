@@ -1,0 +1,26 @@
+{
+  "affected_merge": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+  "baseline_commit": "dab6ef29468eb97226f642783127720444f299c9",
+  "census_archive_bytes": 11530479,
+  "census_archive_expanded_bytes": 17480047,
+  "census_archive_sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+  "census_dbf_rows": 3233,
+  "comparison": "byte-identical to exact retained PR #1146 crosswalk",
+  "integrity_reproducer_sha256": "3b3efcff41ee4229c393aeb019f29f130447995bd6edc67822af1dfed7285e7f",
+  "issue": 1369,
+  "limits": [
+    "This checks identity and source-vintage joins, not polygon equivalence or legal boundaries.",
+    "It does not establish current county validity or completeness beyond the exact 268-subject scope.",
+    "The exact scope, 2018 source vintage, and derivative-rights uncertainty are preserved."
+  ],
+  "python": "3.12.14",
+  "retained_crosswalk_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+  "run_id": "run-sixteen",
+  "scoped_unique_name_state_matches": 268,
+  "source_pin_inventory_sha256": "a6b40dd3f1161d32dea5d0559f517158b4a58af509a668539f514be007f4d2b2",
+  "subject_count": 268,
+  "unique_census_geoids": 268,
+  "unique_source_shape_ids": 268,
+  "unique_subject_count": 268,
+  "version": 1
+}

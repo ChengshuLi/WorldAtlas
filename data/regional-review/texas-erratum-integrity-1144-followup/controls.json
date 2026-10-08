@@ -1,0 +1,96 @@
+{
+  "baseline_commit": "6a1c3b5410587289285f31809312792f0f085e87",
+  "cases": [
+    {
+      "case": "swapped_census_geoids",
+      "changed_inputs": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl": "231d243b5aa15fbbacb25eb997eb9c973c3bb308736ee0b1485cc37e89bc47a3"
+      },
+      "error": "ValueError: Actually consumed materialized input/code drift: data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl",
+      "fixture_restored_sha256": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl": "cdaf1f6396aeda00adcc627a81a686a13206ee2f1f4782c61bdff2695970077a"
+      },
+      "outcome": "rejected_before_output"
+    },
+    {
+      "case": "changed_2018_outSR",
+      "changed_inputs": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/source/census-api-retrieval-manifest.json": "7d6f40df2fa75b0dabb8e4ac34d9c701b0aa39d1e4e377d19e8eb0460f7cf96e"
+      },
+      "error": "ValueError: Actually consumed materialized input/code drift: data/regional-review/regional-review-508c7e9f3a462f8f/source/census-api-retrieval-manifest.json",
+      "fixture_restored_sha256": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/source/census-api-retrieval-manifest.json": "6bc2da19ba18b49afd6cefdd336509e1eab7bb7991b7ce910d185e7309cadb5b"
+      },
+      "outcome": "rejected_before_output"
+    },
+    {
+      "case": "missing_lexicographically_last_geoid",
+      "changed_inputs": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl": "636ff6a5a21b1ed2875f1c669e320556feba7c3dc35cbaa350143d0e048d3063"
+      },
+      "error": "ValueError: Actually consumed materialized input/code drift: data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl",
+      "fixture_restored_sha256": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl": "cdaf1f6396aeda00adcc627a81a686a13206ee2f1f4782c61bdff2695970077a"
+      },
+      "outcome": "rejected_before_output"
+    },
+    {
+      "case": "duplicate_subject",
+      "changed_inputs": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl": "aea6030cd82c63d70b167c83f62dbdec77ad61296d57848264c7420e2e521e56"
+      },
+      "error": "ValueError: Actually consumed materialized input/code drift: data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl",
+      "fixture_restored_sha256": {
+        "data/regional-review/regional-review-508c7e9f3a462f8f/runs/twelve/county-assessments.jsonl": "cdaf1f6396aeda00adcc627a81a686a13206ee2f1f4782c61bdff2695970077a"
+      },
+      "outcome": "rejected_before_output"
+    },
+    {
+      "case": "shared_helper_code_drift",
+      "changed_inputs": {
+        "scripts/evidence/immutable.py": "05216f8609f480137416ee63eefa280000a2ee90b13d645c7b52a4dc5e21d66c"
+      },
+      "error": "ValueError: Shared immutable helper differs from reviewed bytes",
+      "fixture_restored_sha256": {
+        "scripts/evidence/immutable.py": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+      },
+      "outcome": "rejected_before_output"
+    },
+    {
+      "case": "control-mid-write-failure",
+      "error": "OSError: injected second-product write failure",
+      "failure_receipt_sha256": "f7d2259f306fa6155fd3db51258c24028cdca565f04a3190dea48e7d792facad",
+      "outcome": "failed_receipt_preserved_partial_products",
+      "partial_output_sha256": "0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28",
+      "publication_receipt_absent": true
+    },
+    {
+      "case": "control-existing",
+      "error": "FileExistsError: Fresh run directory already exists",
+      "outcome": "rejected_preserving_sentinel",
+      "sentinel_sha256": "c4c6a0f3974a34efdd3ec3ac21e371acfbabe805665e631cb415b35c5dddcc78"
+    },
+    {
+      "case": "control-partial",
+      "error": "FileExistsError: Fresh run directory already exists",
+      "outcome": "rejected_preserving_sentinel",
+      "sentinel_sha256": "c4c6a0f3974a34efdd3ec3ac21e371acfbabe805665e631cb415b35c5dddcc78"
+    },
+    {
+      "case": "control-dangling-link",
+      "is_symlink": true,
+      "outcome": "rejected_preserving_symlink",
+      "target_exists": false
+    }
+  ],
+  "control_harness_sha256": "b50cd91e58fa5c0759cc39d9932e6249787889064823762c9f9cd1536c79489b",
+  "issue": 1365,
+  "issue_snapshot_sha256": "132fee5a55e104451d37d714b681ff15f72c0db3bcea81123aadbfa721ba2c89",
+  "kind": "negative-control",
+  "method_id": "immutable-texas-erratum-join",
+  "outcome": "passed",
+  "pin_ledger_sha256": "3527212b673a0fe2b5f9a9b306698241ee929c70258c6e77458034e90dd827aa",
+  "python": "3.12.14",
+  "runner_sha256": "0ac8859d7c1ffac89e8f191bc4e1868f2ad7ca04e6cecde50ac0b85685d4bcfd",
+  "version": 1
+}

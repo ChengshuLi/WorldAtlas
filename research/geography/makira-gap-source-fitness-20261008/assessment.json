@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "issue": 1457,
+  "review_kind": "source",
+  "research_scope": "metadata-only source fitness for all exact 15 component pointsets and one shared Makira ADM1 contact",
+  "summary": {
+    "qualifying_sources": 0,
+    "potential_sentinel_screening_candidates": 9,
+    "exact_component_coverage_confirmed": 0,
+    "source_fitness": "unresolved/unapproved for all 15",
+    "physical_authority": "unapproved",
+    "pixels_accessed": false,
+    "paid_sources_accessed": false,
+    "gis_executed": false
+  },
+  "contact": {
+    "id": "gb:SLB:ADM1:17018030B43755880178831",
+    "name": "Makira ADM1",
+    "role": "shared administrative context/contact for this family",
+    "feature_count": 1,
+    "relationship": "All 15 source-fitness subjects retain this single contact context; it is not an imagery source, boundary/ownership authority, or a pixel coverage assertion.",
+    "represented_year": 2021,
+    "effective_date": "unknown",
+    "source_authority": "unapproved",
+    "physical_authority": "unapproved",
+    "source_fitness": "unapproved-for-all-components"
+  },
+  "component_ids": [
+    "physical-component:0009067d3f046760099093ffa957642c95f1a2e660b78bddf609d4d1fcfab1a5",
+    "physical-component:110e441169327a1bc96c96de0be8eaa5ef3eeb6872b90ade8c0d0d6495c277b2",
+    "physical-component:1cd54a39b974f1a8ee305ab4a590cd9ef02a328d59b244bd1d909746ec39c7c5",
+    "physical-component:344d085c5ee3afb809660423e91634ed311f130763a5d2d4f9d6ea91cdd4d3e8",
+    "physical-component:3eb5716e1e821f25c85a494658b13bc8c3a57de6d6636b5323b5edfb25eca833",
+    "physical-component:3f8309e420055c726486ecdb318e368769eb52d038fcb6d8266106380217f8fd",
+    "physical-component:5b687195caf6d9f5f011be6c6d8517152a2d78e2e5241463c99dac1d254c7d2b",
+    "physical-component:6deb3a8a2d72ba08aba2d63b73c89788f587ba5ab3bb56ea20f72bb1b538df43",
+    "physical-component:6f31be024cca8bcc6ed65e7ee1ca2554d4f889b2be2ebcd0e5786ec801a99203",
+    "physical-component:8046202150652008b4d4fbd5867a9658375702506277ddc782da0e62e7fafafb",
+    "physical-component:92137006e45c30dbd06cfb4eef3581c23248d8f0a6ca3ec339df668e268ff33e",
+    "physical-component:bc9fe8b0910d6a40dc87ba199db3e3188979c46eba59a3eb7ca2e81e65d06bfe",
+    "physical-component:df78f53425fab964dab064e6fc55437102e2f9ea5a40fc454a6e2fff3f277189",
+    "physical-component:f93741afbb4a8200db773503c3080ea3e7b9280d8b70d5e85c2251c17dca4704",
+    "physical-component:fa280f14a18aa7559772a8854eb2d79ffbc402c9867d2289ed5bd48449c971ad"
+  ],
+  "complete_member_preservation": {
+    "expected": 15,
+    "assessed": 15,
+    "subject_ids_sha256": "0d3f2f52793491c55e8fd5794f6ef1367c2808df0055d6adc5684bbb2c9d60b5",
+    "all_present_exactly_once": true
+  },
+  "known_unresolved": [
+    "Exact STAC item-footprint to component pointset coverage for every member",
+    "Local valid-pixel and cloud coverage for every member",
+    "Component-level registration and positional fit for every item",
+    "SPREP derived mosaic native scene and processing lineage",
+    "2020-01-18 SPREP T57LZK versus CDSE T57LYJ/T57LZJ tile identity mismatch",
+    "Two SHA256 byte vintages associated with 2020-01-18 CDSE T57LZJ product-name history; no populated input lineage; item ID does not uniquely bind bytes",
+    "SPREP derivative asset reuse terms and exact applied licence",
+    "Acquisition and effective-date semantics for classified/context products",
+    "Physical land, shoreline authority, legal boundary and ownership remain unapproved"
+  ],
+  "limits": [
+    "No raster assets or pixels downloaded or inspected",
+    "No GIS executed; no native item footprint overlay",
+    "No member-local cloud or valid-pixel computation",
+    "No item-specific positional registration or accuracy test",
+    "No asset checksums or complete lineage for catalogue items",
+    "Bounding boxes and catalogue footprints were not treated as proof of observation coverage",
+    "This packet does not propose/implement/publish geography or authorize attribute imports"
+  ]
+}

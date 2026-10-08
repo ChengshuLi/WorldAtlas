@@ -1,0 +1,180 @@
+{
+  "baseline_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+  "component_sources": {
+    "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa": {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+    },
+    "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91": {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+    }
+  },
+  "contact_source": {
+    "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+    "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+    "bytes": 1120843,
+    "commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+    "role": "contact context only"
+  },
+  "method": "Decode complete original ESA COG blocks with zlib and count native pixel centers covered by the exact restored component geometries. No reprojection, resampling, interpolation, geometry repair, or raster fill.",
+  "source_version": "ESA WorldCover 10m 2021 v200 Map",
+  "source_observation_period": [
+    "2021-01-01T00:00:00Z",
+    "2021-12-31T23:59:59Z"
+  ],
+  "source_license": "CC BY 4.0",
+  "source_crs": "EPSG:4326",
+  "source_embedded_metadata_checks": [
+    "license CC-BY 4.0",
+    "class 80 Permanent water bodies",
+    "class 90 Herbaceous wetland"
+  ],
+  "resolution_degrees": [
+    8.333333333333333e-05,
+    8.333333333333333e-05
+  ],
+  "worldcover_global_validation_accuracy": 0.767,
+  "global_validation_caveat": "Product-level overall accuracy; not an estimate for this footprint or these near-zero-area candidate pointsets.",
+  "source_object_bytes": 102974131,
+  "source_etag": "\"a0c724f8d28f1c4d198ac6f69ff4fded-13\"",
+  "source_last_modified": "Wed, 26 Oct 2022 12:47:57 GMT",
+  "block_decode_cost_bytes": 2097152,
+  "process_max_rss_bytes": 170262528,
+  "component_results": {
+    "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa": {
+      "geometry_type": "Polygon",
+      "geometry_area_square_degrees": 2.2737367544323206e-13,
+      "geometry_area_m2_reported": 2.1216020051895157e-07,
+      "candidate_geometry_id_hash": "002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+      "pixel_window": [
+        27271,
+        27412,
+        27283,
+        27391
+      ],
+      "pixel_center_count": 0,
+      "class_counts": {}
+    },
+    "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91": {
+      "geometry_type": "Polygon",
+      "geometry_area_square_degrees": 0,
+      "geometry_area_m2_reported": 1.5668344843788873e-06,
+      "candidate_geometry_id_hash": "4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "pixel_window": [
+        26258,
+        26665,
+        27201,
+        27500
+      ],
+      "pixel_center_count": 0,
+      "class_counts": {}
+    }
+  },
+  "contact_local_source_geometry": [
+    {
+      "contact_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "candidate_id": "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "MultiLineString",
+          "length_degrees": 0.01517307155019956,
+          "bounds": [
+            107.272656,
+            21.717495597674223,
+            107.2843,
+            21.7264
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "candidate_id": "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "LineString",
+          "length_degrees": 0.026155395891615987,
+          "bounds": [
+            107.20098339987445,
+            21.708341662525278,
+            107.22206263010429,
+            21.723826196330478
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:VNM:ADM2:81297802B22471082550929",
+      "candidate_id": "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "kind": "point-only-ambiguous",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "Point",
+          "length_degrees": 0.0,
+          "bounds": [
+            107.18820268817204,
+            21.733214744216358,
+            107.18820268817204,
+            21.733214744216358
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:VNM:ADM2:81297802B72919536287172",
+      "candidate_id": "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "MultiLineString",
+          "length_degrees": 0.015173071550204292,
+          "bounds": [
+            107.272656,
+            21.71749559767422,
+            107.2843,
+            21.7264
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:VNM:ADM2:81297802B72919536287172",
+      "candidate_id": "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "LineString",
+          "length_degrees": 0.04201387699875396,
+          "bounds": [
+            107.18820268817204,
+            21.708341662525278,
+            107.22206263010429,
+            21.733214744216358
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    }
+  ],
+  "contact_scope_note": "Exact source contact geometries from pinned candidate fragments; contacts are line or point context, not physical authority.",
+  "class_semantics": {
+    "80": "permanent water bodies",
+    "90": "herbaceous wetlands; not synonymous with open water",
+    "95": "mangroves",
+    "other_values": "WorldCover land-cover classes, not a legal shoreline delineation"
+  },
+  "fitness_decision": "WorldCover is not fit to adjudicate either exact restored component geometry as areal land/water: both contain zero native 10 m pixel centers. This is inability to evaluate these geometries, not evidence of land or water.",
+  "limits": [
+    "10 m land-cover raster cannot classify the two tiny component geometries.",
+    "Class 90 is wetlands, not an open-water finding.",
+    "Class 80 does not validate the boundary or gap geometry.",
+    "No source authority or release approval is implied."
+  ]
+}

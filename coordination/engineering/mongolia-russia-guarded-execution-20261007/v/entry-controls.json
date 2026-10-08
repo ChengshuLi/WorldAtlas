@@ -1,0 +1,99 @@
+{
+  "caller_sha256": "3e1b4af231c34c4da54a38efee58660d8fe6e238a40c763b1a00df749e2d7376",
+  "controls": [
+    {
+      "error": "Fresh owned absolute cache destination required",
+      "name": "relative",
+      "passed": true
+    },
+    {
+      "error": "Fresh owned absolute cache destination required",
+      "name": "outside owned cache",
+      "passed": true
+    },
+    {
+      "error": "Destination exists or has a nonordinary ancestor",
+      "name": "regular-file ancestor",
+      "passed": true
+    },
+    {
+      "error": "Destination exists or has a nonordinary ancestor",
+      "name": "missing parent",
+      "passed": true
+    },
+    {
+      "error": "Destination exists or has a nonordinary ancestor",
+      "name": "symlink ancestor",
+      "passed": true
+    },
+    {
+      "error": "Destination exists or has a nonordinary ancestor",
+      "name": "broken leaf",
+      "passed": true
+    },
+    {
+      "error": "Destination exists or has a nonordinary ancestor",
+      "name": "occupied output",
+      "passed": true
+    },
+    {
+      "error": "Fresh owned absolute cache destination required",
+      "name": "dotdot traversal",
+      "passed": true
+    },
+    {
+      "error": "fresh ordinary destination admitted exactly once",
+      "name": "fresh ordinary parent positive",
+      "passed": true
+    },
+    {
+      "error": "Exact lowercase execution commit required",
+      "name": "short execution commit",
+      "passed": true
+    },
+    {
+      "error": "Exact lowercase execution commit required",
+      "name": "Git option commit",
+      "passed": true
+    },
+    {
+      "error": "Unsafe frozen path",
+      "name": "unsafe frozen path",
+      "passed": true
+    },
+    {
+      "error": "Actually consumed code/config bytes differ",
+      "name": "actual helper byte drift",
+      "passed": true
+    },
+    {
+      "error": "Actually consumed code/config bytes differ",
+      "name": "actual materialized candidate byte drift",
+      "passed": true
+    },
+    {
+      "error": "Actually consumed code/config bytes differ",
+      "name": "actual materialized source byte drift",
+      "passed": true
+    },
+    {
+      "error": "Actually consumed code/config bytes differ",
+      "name": "actual execution body drift",
+      "passed": true
+    },
+    {
+      "error": "Incomplete executed inventory",
+      "name": "missing helper pin in coherent inventory",
+      "passed": true
+    }
+  ],
+  "count": 17,
+  "entry_sha256": "46f6fa92a3be5669e311d97b0da81fdc9b5a1821b42882c5a1d34c4ae61621ff",
+  "execution_commit": "2c8ff13e141498887676b6983fff449d83e0d504",
+  "limits": [
+    "Disposable materialized-body copy uses actual immutable Git authority; coherent missing-pin control injects only inventory getter bytes. No source/target geometry processing or scientific package import. Positive actual complete frozen input-only execution is recorded separately."
+  ],
+  "no_source_comparison": true,
+  "science_imports": false,
+  "status": "PASS"
+}

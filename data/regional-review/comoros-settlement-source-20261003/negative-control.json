@@ -1,0 +1,9 @@
+{
+  "method_id": "codab-admin-crosswalk",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "control": "A temporary copy of the pinned archive was altered by appending one byte; no repository source was changed.",
+  "expected": "Reproduction stops before parsing with a source hash mismatch.",
+  "observed": "test_negative_source_hash_control raised the expected source hash mismatch.",
+  "interpretation_limit": "This checks pin drift rejection, not administrative authority, source freshness or settlement completeness."
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "worldatlas-1381-versioned-evidence-validation:v1",
+  "recorded_at_utc": "2026-10-08T04:32:31.105Z",
+  "issue": 1381,
+  "manifest_path": "research/geography/coastal-publication-ownership-1227-erratum/evidence-quality.json",
+  "manifest_version": 1,
+  "baseline_version": 2,
+  "original_issue_pins_preserved": 121,
+  "per_file_references": 121,
+  "historical_descriptors": 122,
+  "descriptors_by_commit": {
+    "a37ad37b94168f9b458617489a702bbb72afbd3d": 63,
+    "a1cf4cd86fd07d00ae592b4705e4b39f50628df7": 58,
+    "de506f51100568e150e51f2926a5259b71e55272": 1
+  },
+  "commits_checked_as_ancestors": [
+    "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+    "a37ad37b94168f9b458617489a702bbb72afbd3d",
+    "de506f51100568e150e51f2926a5259b71e55272"
+  ],
+  "original_helper_pin": {
+    "path": "scripts/evidence/immutable.py",
+    "commit": "a37ad37b94168f9b458617489a702bbb72afbd3d"
+  },
+  "actual_executed_helper": {
+    "path": "scripts/evidence/immutable.py",
+    "commit": "de506f51100568e150e51f2926a5259b71e55272",
+    "bytes": 17414,
+    "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+  },
+  "archived_metrics": 177,
+  "metric_vintages": [
+    "archived"
+  ],
+  "metric_evaluation_commits": [
+    "72029cd16057199be441058c69dd783604541100"
+  ],
+  "metric_input_file_selections": [
+    {
+      "path": "data/regional-review/coastal-fresh-run-1160-erratum/runs/coastal-20261006-a/eight-county-comparison.json",
+      "commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7"
+    }
+  ],
+  "metric_values_changed": false,
+  "candidate_sources_or_outputs_with_historical_commit": [],
+  "declared_bytes": {
+    "historical": 267542764,
+    "candidate_outputs": 369259,
+    "total": 267912023,
+    "limit": 268435456
+  },
+  "local_validation": {
+    "status": "limited",
+    "checked_files": 179,
+    "limits": [
+      "geoboundaries-usa-adm2-2018: The merged #981 packet records the full and simplified raw source hashes and crosswalk. This erratum binds its supporting metadata, notice, crosswalk and evidence manifest, but does not add the large source variants to this already near-limit input inventory or independently compare Atlas geometry to those variants. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+      "geoboundaries-usa-adm2-2018: factual verification incomplete",
+      "census-tigerweb-2018: Statistical/reference comparator; no legal adjudication. The full retained GeoJSON response is pinned in baseline.files; source metadata/receipt are linked as separate retained records. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+      "census-tigerweb-2025: TIGER/Line documentation describes the 2025 vintage and statistical/no-legal-line limitations. The full retained GeoJSON response is pinned in baseline.files; source metadata/receipt are linked separately. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+      "census-tigerweb-current-2026: Retained eight-feature and metadata response bytes are pinned in baseline.files. Metadata does not declare AREA field units; its raw-response byte identity differs from the normalized retained metadata file by one LF. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory.",
+      "census-tiger-authorities: Official documentation describes the 2025 source vintage, square-metre units for 2025 area fields, and statistical-use/no-legal-description limits; it does not declare 2026 area units or resolve coastal legal lines. Change notes are selected, not exhaustive. This packet does not duplicate source bytes; its complete prior evidence remains bound by the immutable baseline inventory."
+    ],
+    "factual_validation": "Requires independent source/method review; hashes do not establish truth"
+  },
+  "hosted_validation": {
+    "status": "not-run-before-push",
+    "note": "Requires the refreshed exact PR head and trusted GitHub workflow."
+  },
+  "reproduction": {
+    "new_current_main_run": "not-run",
+    "reason": "No new current-main CLI run was attempted because local-workspace storage admission failed. The current-main changes after the retained runs update the evidence validator and add an unrelated Texas evidence packet; the issue runner, exact source inputs and authored scope are unchanged."
+  },
+  "storage_admission": {
+    "status": "failed",
+    "free_bytes": 10022297600,
+    "minimum_free_bytes": 10737418240,
+    "checkout_bytes": 55316348928,
+    "maximum_checkout_bytes": 53687091200
+  },
+  "geographic_and_source_limits": [
+    "Eight scoped county subjects are not a complete Georgia county roster.",
+    "Census comparisons are statistical screens, not legal boundary adjudication.",
+    "2026 AREAWATER unit remains conditional.",
+    "Invalid Census reference geometries were repaired only in memory.",
+    "geoBoundaries 2018 variant attribution and reuse terms remain unresolved.",
+    "Coastal overlap differences do not identify water, marsh, island, generalization, or other causes.",
+    "No regional approval, import, production acceptance, or publication is established."
+  ],
+  "pr_base_commit": "f940742a97de5ebe631e44b763d38aaa319b7f05",
+  "trusted_validator_commit": "f940742a97de5ebe631e44b763d38aaa319b7f05"
+}

@@ -1,0 +1,123 @@
+{
+  "assertions": [
+    "all 207 immutable identities unique and found once across 36 indexed files",
+    "all 15 current/source inventory fields joined exactly",
+    "source-level values independently joined for 185 direct and 22 overlay subjects",
+    "all non-provenance output fields and numeric values, 185/22 classifications, and six parent rows equal retained baseline",
+    "name, identity, missing roster, parent, source-member, code and source drift rejected before output admission",
+    "existing destination, broken symlink, partial conflict and path escape rejected without sentinel mutation"
+  ],
+  "assessment": {
+    "bytes": 457671,
+    "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v7/run-1/geography-assessment.json",
+    "sha256": "7c7eb062bd1cdf7b76e026ce2c18c3daa184e07e1e879854d38e05cf24701bf5"
+  },
+  "baseline_bytes": 264164863,
+  "baseline_commit": "90d5309c6497073a039099241360ba807d0c3722",
+  "baseline_file_count": 61,
+  "control_file_inventory": [
+    {
+      "bytes": 24256,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/analyze-geography-code-drift.py",
+      "sha256": "23019bedaafa3856b41a06d2701d2a452e2e08dafb2244269b6c332ea4ed9485"
+    },
+    {
+      "bytes": 2443,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/attempt-history.json",
+      "sha256": "0b356b0d3c1765416896a84df3f08e17b24add9dc1a359583254f133df16a305"
+    },
+    {
+      "bytes": 191851,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/inventory-duplicate-identity.json",
+      "sha256": "fec72e7c0aa919a7e9532abc923099fe7e731c53e4bc271e2ce15f40b4f390ad"
+    },
+    {
+      "bytes": 190832,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/inventory-missing-identity.json",
+      "sha256": "6cdc5c96e8fd6c81aaa0cd78da4614269090fbc58ac352aa07e7a20c13d4571a"
+    },
+    {
+      "bytes": 225040,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/inventory-name-drift.json",
+      "sha256": "ff2e7a7a3aaf82b669cc80d1f8470ebcfe9c94f0245413088f9ce899d8e71fb7"
+    },
+    {
+      "bytes": 191823,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/inventory-parent-drift.json",
+      "sha256": "5f7350701825a2336700f10bdfc960aef01bc4135a14f252d90a0182aa701f91"
+    },
+    {
+      "bytes": 191814,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/inventory-source-member-drift.json",
+      "sha256": "4411ea01f96d38da1d1ad95384470138fb401be341f35dae85dd3cf0bc67081c"
+    },
+    {
+      "bytes": 24317,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/legacy-analyzer-overwrite-adapter.py",
+      "sha256": "8decb4ad90423c938a74b2fa03cc0e4fe2833d7f1317f6501c94d1ba935b04db"
+    },
+    {
+      "bytes": 24379,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/legacy-false-positive-adapter.py",
+      "sha256": "cdf36b9516514ac01632cff689fd4c93c31c5a1b3c2d9e8e2eb99db78016f25e"
+    },
+    {
+      "bytes": 456711,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/legacy-false-positive-assessment.json",
+      "sha256": "93b63b291982713d393d55cffed2c83f742dbc32ffb8012ea0f684d8ef068a5b"
+    },
+    {
+      "bytes": 3143,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/legacy-renderer-overwrite-adapter.py",
+      "sha256": "435a9cdb26ecb270246aa7740edce77e4cd48d6db2ae73e6ba4f1bd30d8f62a7"
+    },
+    {
+      "bytes": 1874,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/legacy-writer-controls.json",
+      "sha256": "74afbbe5eb63e048a9cb5be70ea9af91253aa3c9ca9c2b25adc30b267ded2111"
+    },
+    {
+      "bytes": 10185,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/original-run-receipts.json",
+      "sha256": "f8ab42259e68ed358d7bfd7eb67c15857e22328b510252fed46594a9b82a4053"
+    },
+    {
+      "bytes": 815,
+      "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/controls/source-metadata-drift.json",
+      "sha256": "30a2cc7c9d13a963a83c7d0dff858748857a33bf74e59241a30695ac2548ad27"
+    }
+  ],
+  "elapsed_seconds": 123.786,
+  "environment": {
+    "geos": "3.13.1",
+    "node": "24.19.0",
+    "proj": "9.5.1",
+    "pyproj": "3.7.2",
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "final_reproducibility_sha256": "d99b02728ee23d5da1b81349b2c3b9f67d0e81d5501849d7d1de55613dbb099c",
+  "issue": 1356,
+  "legacy_false_positive": {
+    "actual_feature_source_match_flag": true,
+    "adapter_sha256": "cdf36b9516514ac01632cff689fd4c93c31c5a1b3c2d9e8e2eb99db78016f25e",
+    "output_sha256": "93b63b291982713d393d55cffed2c83f742dbc32ffb8012ea0f684d8ef068a5b",
+    "wrong_name": "AUDITOR WRONG PINNED NAME"
+  },
+  "legacy_writer_control_sha256": "74afbbe5eb63e048a9cb5be70ea9af91253aa3c9ca9c2b25adc30b267ded2111",
+  "recorded_at_utc": "2026-10-08T05:57:30Z",
+  "result": "passed",
+  "runner_sha256": "8ebc8118c22ad9509f6612602f393928be03ecd152812c712c545ac73377b079",
+  "suite": "research/geography/east-siberia-assessment-integrity-1130-erratum/reproduction/test_integrity.py",
+  "suite_sha256": "d1c63304310e8ba3fb75593f3072cd238bbe3b7913878edd2116d25aefd52ae6",
+  "table": {
+    "bytes": 138563,
+    "path": "research/geography/east-siberia-assessment-integrity-1130-erratum/vintages/2026-10-08-integrity-v7/run-1/subject-assessments.tsv",
+    "sha256": "ccce6b6032d07e02994b312c1603291ee7edcd7f0ce13e7121eedb9831142d23"
+  },
+  "tests_failed": 0,
+  "tests_passed": 10,
+  "tests_run": 10,
+  "version": 1,
+  "evaluation_commit": "e6a81f6ab6da318e015cd697f3b19956e8bb8cc7"
+}

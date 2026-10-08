@@ -27,3 +27,13 @@ Run `python3 reproduce_source_comparison.py` and `python3 reproduce_physical_ref
 - `scoped-original-components.geojson`, `scoped-original-fragments.geojson`, `scoped-original-atlas-subjects.geojson`, `scoped-consumed-source-subjects.geojson`: exact extracted feature rows; hashes are recorded in the comparison/evidence manifest.
 - `gb-NOR-ADM2-original-simplified.geojson`, `gb-SWE-ADM2-original-simplified.geojson`: complete consumed source products, preserved as retrieved upstream bytes.
 - `evidence-quality.json`: manifest of baseline and output byte hashes and the explicit unresolved authority/reproduction limits.
+
+## Independent physical/water-reference fitness follow-up
+
+`physical-reference-fit.json` records a source-fitness assessment for the same four frozen components, without changing the original geometry or overlay records. It binds the existing `physical-reference-overlays.json` and reports each candidate as fully covered by Natural Earth land and disjoint from the Natural Earth lakes layer in the exact planar CRS84 overlay. The overlay units are square degrees, not physical area.
+
+The retained Natural Earth land/lakes data are public domain and pinned to commit `ca96624a56bd078437bca8184e78163e5039ad19`, committed 2022-06-02; that commit's `VERSION` file says `5.2.0-pre`. “10m” is the 1:10,000,000 cartographic scale, not ten-meter positional resolution. This is a dated but generalized modern reference, later than the consumed Norway 2013 and Sweden 2017 boundary vintages. It cannot establish historic water, ice, or border authority. Its result says only that these polygons appear as land, and not as mapped lakes, in that generalized dataset.
+
+The follow-up records official Kartverket and Lantmäteriet product descriptions as reference leads. Norway's N50 metadata describes current CC BY 4.0 data at 1:50,000 scale with water/land-cover themes and EUREF89 UTM distribution zones. Lantmäteriet describes nationwide topography/hydrography products in SWEREF 99 TM with varying update and positional uncertainty. Their matching geometries were not retrieved here, so none of those official products is used to upgrade the fit or boundary conclusion. A Kartverket WFS capabilities request timed out with no response bytes; the report preserves that failed attempt.
+
+CRS84/WGS 84 longitude-latitude coordinates were overlaid without transformation or tolerance. The pinned source's decimal digits and the candidate ordinates are representation precision, not positional accuracy. No buffer, snap, or distance-based registration was applied. The report explicitly leaves higher-detail physical status, historical water/ice, full-source products, and the international boundary unresolved.

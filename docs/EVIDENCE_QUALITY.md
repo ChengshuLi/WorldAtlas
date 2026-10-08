@@ -8,7 +8,82 @@ New packets can copy `coordination/templates/evidence-v1.json`, replace every pl
 
 Record the exact baseline commit and actual containing file paths. Hash raw whole-file bytes with SHA-256; `hash_kind` must be `file-bytes`. Per-entry hashes are different evidence and must never substitute for file hashes. For compressed inputs record both compressed and uncompressed bytes/digests. `baseline.pins` maps named pins to hashes and `baseline.pin_files` binds every pin to an actual baseline file descriptor. The verifier reads baseline files from the immutable Git commit, not whatever main currently contains.
 
-Subject IDs are sorted before JSON serialization and hashing (`subjectsHash` in the shared module). Every geography subject additionally maps through `baseline.subject_files` to its actual containing GeoJSON file; the validator verifies presence there. Track containing paths as you read the world index; never infer filenames from an absent feature property. Regional frozen scopes, adjacent-tier chains and historical territorial applicability still need their existing release/certificate gates; this receipt does not replace those checks.
+Subject IDs are sorted before JSON serialization and hashing (`subjectsHash` in the shared module). Every geography subject additionally maps through `baseline.subject_files` to its actual containing GeoJSON file; the validator verifies presence there. A value may remain a path string when the source feature already has the canonical identity in `Feature.id` or `properties.id`. When an authentic source feature stores its identity in multiple string properties, use an explicit version 1 descriptor instead of rewriting the source row:
+
+```json
+"subject_files": {
+  "gb:AGO:ADM2:16411231B14510444140190": {
+    "version": 1,
+    "path": "research/geography/EXACT-PACKET/contacts.geojson",
+    "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+    "properties": ["shapeGroup", "shapeType", "shapeID"]
+  }
+}
+```
+
+The property list must exactly match each template placeholder once and in order. Every source feature must have a non-empty string value for each property, and the resulting identities must be unique; all declared subjects must resolve within the pinned file. Template strings are literal formatting only, never executable expressions. Subjects mapped to one file must use one identical binding. This verifies structural identity against retained bytes; it does not establish source authority, geometry accuracy or legal/geographic approval. Track containing paths as you read the world index; never infer filenames from an absent feature property. Regional frozen scopes, adjacent-tier chains and historical territorial applicability still need their existing release/certificate gates; this receipt does not replace those checks.
+
+## Historical files from multiple commits
+
+Use `baseline.version: 2` only when the original evidence requires files from
+more than one immutable commit. The enclosing manifest and issue evidence contract
+remain version 1. `baseline.commit` remains the evaluation snapshot; it does not
+select the bytes for version 2 file descriptors. Every `baseline.files` descriptor
+must additionally declare its own full 40-character `commit`. Preserve the original
+path, size, hash, compression descriptors and named pins.
+
+For example, this field fragment binds an old input and a later retained result
+without pretending they existed together. Replace the placeholders with verified
+commits and existing whole-file descriptors:
+
+```json
+"baseline": {
+  "version": 2,
+  "commit": "EVALUATION_COMMIT",
+  "files": [
+    {"path": "original-input.json", "commit": "ORIGINAL_COMMIT", "bytes": 123, "sha256": "ORIGINAL_SHA256", "hash_kind": "file-bytes"},
+    {"path": "retained-result.json", "commit": "LATER_COMMIT", "bytes": 456, "sha256": "RESULT_SHA256", "hash_kind": "file-bytes"}
+  ],
+  "pins": {"original": "ORIGINAL_SHA256", "retained": "RESULT_SHA256"},
+  "pin_files": {
+    "original": {"path": "original-input.json", "commit": "ORIGINAL_COMMIT"},
+    "retained": {"path": "retained-result.json", "commit": "LATER_COMMIT"}
+  }
+}
+```
+
+The example sizes are illustrative, not generated findings. A historical reference
+may remain a path string only when that path has exactly one declared vintage.
+For repeated paths, `pin_files` and `subject_files` use `{path, commit}` objects.
+A composed subject binding keeps its version, properties and identity template,
+and adds `commit` to select a historical file when needed.
+A prior-evidence `subject_inventory` selects its retained roster with `commit`;
+a structured `record_checks` row selects its reference with `reference_commit`.
+Missing, duplicate or ambiguous identities are errors. Candidate sources and
+outputs still use candidate bytes and must not declare historical commits.
+
+A metric's `input_sha256` authenticates its input independently of its
+`evaluation_commit`. In version 2, use `input_file: {path, commit}` when the same
+hash identifies multiple declared files. For a candidate input, the commit is the
+literal `candidate`; historical inputs use their immutable SHA. Unique hashes
+need no extra selector. Archived metrics keep their true evaluation vintage;
+current metrics still use the actual PR base. Do not refresh old results merely
+to satisfy a descriptor.
+
+All historical file commits and the evaluation snapshot must be ancestors of the
+actual PR base in the trusted hosted gate. The local reader checks ancestry against
+checkout HEAD; local validation alone cannot establish PR-base ancestry. Custom
+readers must provide a synchronous `assertAncestor(commit)` that throws on failure.
+There are at most 16 distinct historical/evaluation commits, with the existing file,
+phase and descriptor budgets unchanged. Verification never executes packet code.
+
+Without `baseline.version: 2`, files continue to come from the single baseline
+commit. Per-file commits, versioned references and explicit metric selectors are
+rejected rather than silently ignored. Valid legacy manifests remain supported.
+If a runner executes a newer helper than an original pinned helper, inventory the
+actual executed helper at its own commit as well; preserve the original helper pin
+and independently verify the execution binding. Two versions of the same path do
+not establish which one executed by themselves.
 
 ## Sources and methods
 

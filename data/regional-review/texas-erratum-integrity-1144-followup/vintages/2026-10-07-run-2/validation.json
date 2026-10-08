@@ -1,0 +1,41 @@
+{
+  "all_materialized_inputs_match": true,
+  "authenticated_baseline_files": 34,
+  "cbf_polygon_components": 313,
+  "cbf_record_types": {
+    "MultiPolygon": 11,
+    "Polygon": 243
+  },
+  "census_service_native_latest_wkid": [
+    102100,
+    3857
+  ],
+  "exact_issue_subjects": true,
+  "execution": {
+    "baseline_commit": "6a1c3b5410587289285f31809312792f0f085e87",
+    "python": "3.12.14",
+    "runner_sha256": "bdee1aba72ee0a33fc289bdac09ebd5e6f2423d1ffb180be2d4c2dd1bd698af7",
+    "shared_helper_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+  },
+  "identity_joins": {
+    "atlas_features": 254,
+    "census_2018_name_geoid_parent_vintage": 254,
+    "census_2025_name_geoid_parent_vintage": 254,
+    "geoBoundaries_shape_name_level": 254
+  },
+  "issue": 1365,
+  "output_matches_retained_original": true,
+  "parsed_outSR_4326": {
+    "2018": true,
+    "2025": true
+  },
+  "scope_count": 254,
+  "territorial_and_legal_limits": [
+    "Census TIGER statistical geography is not a legal boundary determination",
+    "No county boundary completeness or island completeness finding",
+    "Texas constitutional provision source bytes remain unavailable; original restoration-only limit preserved",
+    "No datum displacement was measured",
+    "No publication or geography approval"
+  ],
+  "version": 1
+}

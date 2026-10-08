@@ -1,0 +1,549 @@
+{
+  "version": 1,
+  "issue": 1450,
+  "lane": "geography",
+  "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
+  "subject_ids": [
+    "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+    "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91"
+  ],
+  "subject_ids_sha256": "1e89f0db4581d2b21beba6cb5baca6b3bb8846f4e7d56583744e8799c56406ba",
+  "baseline": {
+    "commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "bytes": 987691,
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+        "bytes": 433512,
+        "sha256": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+        "bytes": 8387182,
+        "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+        "bytes": 8388063,
+        "sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+        "bytes": 1120843,
+        "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/custody-restoration.json",
+        "bytes": 18576,
+        "sha256": "f978c8cdc56dc7eaa39c05a516f1c7c43001016739d0ed44e7b587de09843d1a",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "global_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "global_routing_family_shard_004": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+      "global_routing_land_source_fitness_output": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "priority_v3_report": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4",
+      "source_corpus_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "administrative_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "physical_gap_custody_index": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+    },
+    "pin_files": {
+      "global_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "global_routing_family_shard_004": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+      "global_routing_land_source_fitness_output": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+      "priority_v3_report": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+      "source_corpus_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "administrative_registry": "data/administrative-sources.json",
+      "physical_gap_custody_index": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json"
+    },
+    "subject_files": {
+      "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "atlas-restored-component-features",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/c9518bafefb0e7c4bd53842284e0208ab5223dc6/research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0",
+      "role": "Pinned complete restored component FeatureCollections; exact assessed geometries",
+      "vintage": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+      "retrieved_at": "2026-10-07T20:31:13-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository-restored evidence; underlying reuse terms are not established by this packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read exact component IDs from the two pinned full FeatureCollections listed in baseline.subject_files.",
+      "limit": "Custody restoration preserves the assessed geometry; it does not establish a dated physical surface observation."
+    },
+    {
+      "id": "detection-v4-contact-context",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/c9518bafefb0e7c4bd53842284e0208ab5223dc6/coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4",
+      "role": "Pinned source archive for fragment bindings and exact contact geometry context",
+      "vintage": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+      "retrieved_at": "2026-10-07T20:31:13-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository archive; underlying reuse terms for these derived contact records are not established here."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read candidates-007.geojson.gz from the pinned baseline commit.",
+      "limit": "Contact lines/point and administrative identifiers provide context only, not physical boundary authority."
+    },
+    {
+      "id": "esa-worldcover-2021-v200",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "role": "Independent global land-cover classification used for source-resolution fitness assessment",
+      "vintage": "2021 v200 map; COG object last modified 2022-10-26",
+      "retrieved_at": "2026-10-07T20:37:34-07:00",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0, as stated in embedded GeoTIFF metadata and the official data access page."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2021,
+        "to": 2022
+      },
+      "files": [
+        {
+          "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-ifd-range-0-131071.bin",
+          "bytes": 131072,
+          "sha256": "1fdcf9165b76f81cb86638062152f7a473fc17f415ed6feeae66751d440ff395",
+          "hash_kind": "file-bytes",
+          "role": "retained-original-worldcover-byte-range"
+        },
+        {
+          "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-25.bin",
+          "bytes": 45766,
+          "sha256": "7cac0ea4157568113abb819e6091f7e81efc6269d66d1980515104417e283845",
+          "hash_kind": "file-bytes",
+          "role": "retained-original-worldcover-byte-range"
+        },
+        {
+          "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-26.bin",
+          "bytes": 41048,
+          "sha256": "760e537a4d15b4466123f91587cf183d97dd81324635a6f021d8088872ffa878",
+          "hash_kind": "file-bytes",
+          "role": "retained-original-worldcover-byte-range"
+        }
+      ]
+    },
+    {
+      "id": "vnsdi-national-topographic-service",
+      "url": "https://vnsdi.mae.gov.vn/",
+      "role": "Access attempt for official national topographic map-sheet service at a candidate coordinate",
+      "vintage": "Catalog service query on 2026-10-07 local; returned HTTP 503",
+      "retrieved_at": "2026-10-07T20:30:09-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "No map sheet or service data was returned; reuse terms remain unknown."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Preserved query request and HTTP response are in sources/vnsdi-topomap-query.json and sources/vnsdi-topomap-query-headers.txt.",
+      "limit": "HTTP 503 access denied; no physical observation was obtained."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/README.md",
+      "bytes": 6196,
+      "sha256": "7dd5ef387c086feaa71ce526a44257b49ca49ee2e2df54df12fb2c9d29886420",
+      "hash_kind": "file-bytes",
+      "role": "research-document"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/classify_worldcover_window.py",
+      "bytes": 9025,
+      "sha256": "da8e51e116907ed9e6ebb0e639e640e876c594b45bb493106b122b1a032e4f33",
+      "hash_kind": "file-bytes",
+      "role": "research-code"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/member-dispositions.json",
+      "bytes": 7028,
+      "sha256": "30e12517d27c0b567100fb3f254b763a9dcebecaf39ab4a20e8ad6f2bd8b823a",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/packet-controls.json",
+      "bytes": 6320,
+      "sha256": "39c1dc9f89dd704ad2cad73fbac03bdd372189a137f110b4eca8d189a91f351c",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/plan_worldcover_blocks.py",
+      "bytes": 3949,
+      "sha256": "f573cdd18d6c046deb49b7eaab0df4662f07d7fb0c6f885f1f0f6f5457ddb03b",
+      "hash_kind": "file-bytes",
+      "role": "research-code"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/run_spatial_controls.py",
+      "bytes": 2162,
+      "sha256": "40a04db5a9fb129f3273befa5da839cd08edc39990741ad14f7ebc28060d444d",
+      "hash_kind": "file-bytes",
+      "role": "research-code"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/source-acquisition-receipts.json",
+      "bytes": 8281,
+      "sha256": "34ea51cbd1875096e3d12030b99b0f428a2cbfb7752439d528a8471cd120d686",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/WorldCover_PUM_V2.0.pdf",
+      "bytes": 4102952,
+      "sha256": "4301a3d95260d88bd4315f43ccf2a12ef74ad391109b9f36e22b6e51d8490107",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/WorldCover_PVR_V2.0.pdf",
+      "bytes": 2671365,
+      "sha256": "05700af5f1462beebf3007ead5b68bccc5f4c016a7bdb26d5c9b6e3db4a1f4a9",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-25-headers.txt",
+      "bytes": 492,
+      "sha256": "b210d6eb0388330bc3d2357d09558dc4357bb16e3727cc859d1560e3d992dedf",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-26-headers.txt",
+      "bytes": 492,
+      "sha256": "0195af491b32faa866bb56f0bb0ee2d47712416d7aadcf1adce2f8a468a82303",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/esa-worldcover-data-access.headers",
+      "bytes": 486,
+      "sha256": "9d09745afcde32fde166c6c6fa576723b2a72d5a1087f08bb6bc831df0b3fa8e",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/esa-worldcover-data-access.html",
+      "bytes": 49866,
+      "sha256": "7645b74f70102799bad26dc751706f630cfee7e3e3d60bc25f343053a7a57d5e",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/vnsdi-topomap-query-headers.txt",
+      "bytes": 280,
+      "sha256": "59894720a5ac3c10169c21b4c08abfc2732fdbce31d3b66b40f5d0a8cd53cfa5",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/vnsdi-topomap-query.json",
+      "bytes": 121,
+      "sha256": "8b9abb3a96677022fbf91cb60e3e3cffa96f8d0c17fa5df30109111ca0f8bf86",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-cog-head.headers.txt",
+      "bytes": 433,
+      "sha256": "90fb38d0ee4ab26990fc0e0259569ac458a645db5145de9bf7a93ecbfad7efb6",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-ifd-headers.txt",
+      "bytes": 484,
+      "sha256": "14760cb5b1509c6a649626395cee6e76743c6bc55ce2034e81c67cd5913fea2b",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-pum-headers.txt",
+      "bytes": 386,
+      "sha256": "d0a2c046c6cb63b66f86485aaf2c136b7a91d463ab6e47fb0be8bd52efb97442",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-pvr-headers.txt",
+      "bytes": 386,
+      "sha256": "ac6cf148b75abdb6db1752c1927c20935e14f00f6398d6411baa941ac4ba9ecd",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/spatial-control-results.json",
+      "bytes": 947,
+      "sha256": "b80f1caf8453f85d47096c66c4b2b427c5fdd9209d770be0fadad5099a986911",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/workspace-memory-admission.json",
+      "bytes": 3649,
+      "sha256": "c8eac38459dc4c3ff5ae47e4cf5f7924ce2271569b1c6f627ecc133b3b38f543",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/worldcover-block-plan.json",
+      "bytes": 2354,
+      "sha256": "8acb664e1934fc8035cf6772229256e3a19a7ba6a9e0dfcff628283645aec767",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/worldcover-window-findings.json",
+      "bytes": 6973,
+      "sha256": "0f208e09e279520e707f1b1290b0dec8f512495421a77c3de68909e40dcc47a3",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-fitness-assessment",
+      "kind": "source",
+      "description": "Assess whether the pinned dated land-cover source has native-grid support capable of resolving either exact restored component as an areal land/water observation; preserve source class semantics and all unknowns.",
+      "software": "Python 3, standard library gzip/json/struct/zlib/hashlib; scripts in this packet",
+      "units": "native pixel-center count per exact restored component; reported fragment-area aggregate in m\u00b2"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "ESA WorldCover 10 m 2021 v200 is not fit to adjudicate areal land or water for either exact restored component geometry at this scale; recorded native-grid pixel-center counts are zero.",
+      "source_ids": [
+        "atlas-restored-component-features",
+        "esa-worldcover-2021-v200"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Physical land/water status and any physical boundary for both components remain unknown; no independent fine-scale physical observation was returned.",
+      "source_ids": [
+        "atlas-restored-component-features",
+        "esa-worldcover-2021-v200",
+        "vnsdi-national-topographic-service"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "The VNSDI point query returned HTTP 503 access denied and supplied no map-sheet observation.",
+      "source_ids": [
+        "vnsdi-national-topographic-service"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "All three required contact IDs and their source contact geometries are retained as context only and do not certify physical authority.",
+      "source_ids": [
+        "detection-v4-contact-context"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/china-vietnam-gap-physical-fitness-20261007/plan_worldcover_blocks.py",
+    "python3 research/geography/china-vietnam-gap-physical-fitness-20261007/classify_worldcover_window.py",
+    "python3 research/geography/china-vietnam-gap-physical-fitness-20261007/run_spatial_controls.py"
+  ],
+  "validation": [
+    {
+      "method_id": "source-fitness-assessment",
+      "kind": "directed-positive",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-vietnam-gap-physical-fitness-20261007/spatial-control-results.json"
+    },
+    {
+      "method_id": "source-fitness-assessment",
+      "kind": "directed-negative",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-vietnam-gap-physical-fitness-20261007/spatial-control-results.json"
+    },
+    {
+      "method_id": "source-fitness-assessment",
+      "kind": "altered-input",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-vietnam-gap-physical-fitness-20261007/spatial-control-results.json"
+    },
+    {
+      "method_id": "source-fitness-assessment",
+      "kind": "missing-source",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-vietnam-gap-physical-fitness-20261007/spatial-control-results.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/classify_worldcover_window.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/member-dispositions.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/packet-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/plan_worldcover_blocks.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/run_spatial_controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/source-acquisition-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/WorldCover_PUM_V2.0.pdf",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/WorldCover_PVR_V2.0.pdf",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-25-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-25.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-26-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/block-26-26.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/esa-worldcover-data-access.headers",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/esa-worldcover-data-access.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/vnsdi-topomap-query-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/vnsdi-topomap-query.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-cog-head.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-ifd-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-ifd-range-0-131071.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-pum-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/sources/worldcover-pvr-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/spatial-control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/workspace-memory-admission.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/worldcover-block-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/worldcover-window-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-vietnam-gap-physical-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

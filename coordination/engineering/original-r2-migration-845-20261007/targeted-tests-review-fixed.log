@@ -1,0 +1,20 @@
+✔ actual HTTP wrappers and CLI run preserve binary unregistered originals, existing objects and metadata twice (56.986959ms)
+✔ actual CLI refuses conflicting existing bytes before any put and retains failure (3.380375ms)
+✔ pagination rejects duplicate actual keys, repeated cursors, excessive sizes and incomplete bodies (0.385042ms)
+✔ source drift and conditional destination collision stop the actual transfer boundary (0.682084ms)
+✔ destination auth, declared length and actual digest controls run before put (0.618292ms)
+✔ metadata collisions are rejected while additional destination cache policy is preserved (14.652417ms)
+✔ empty/wrong source bindings and final disappearing transfers cannot produce completion (0.530083ms)
+✔ transferred storage class mismatch is an explicit metadata failure (0.250333ms)
+✔ real wrapper rejects missing/wrong/expired auth before any storage call (20.650875ms)
+✔ complete enumeration includes unregistered keys and original metadata and cursor (1.831458ms)
+✔ opaque key read returns exact bytes and every write method is rejected (1.819334ms)
+✔ conditional read, missing body, provider failure and adjacent prefix preserve safe behavior (1.272042ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 130.916666

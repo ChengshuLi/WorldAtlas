@@ -1,0 +1,61 @@
+{
+  "actual_combined_input_encoded_plus_consumed_decoded": 236929033,
+  "actual_input_only_elapsed": 56.736913417,
+  "actual_input_only_exit": 0,
+  "actual_input_only_maxrss": 182124544,
+  "actual_input_stdout_bytes": 259963,
+  "caller_combined_plus_reserved": 262094857,
+  "complete_descriptor_forecast": 477,
+  "complete_publication_encoded_ceiling": 218959061,
+  "freeze": "2c8ff13e141498887676b6983fff449d83e0d504",
+  "future_complete_output_ceiling": 10125312,
+  "limits": [
+    "Prospective outputs are explicit file ceilings; actual pair/final admission still required. No source comparison in input-only/memory model."
+  ],
+  "memory_model": {
+    "actual_input_only_maximum_RSS": 152272896,
+    "additional_intersection_parser_array_scratch_reserve": 67108864,
+    "conservative_source_DOM_plus_native_reserve_RSS": 458329381,
+    "limit512MiB": 536870912,
+    "limits": [
+      "JSON object sizing and complete original coordinate counts only; no Shapely/GEOS import, geometry transformation/intersection or new scientific run. Recursive sizing deliberately counts shared primitives repeatedly. Geometry native reservation uses64B per coordinate pair plus1024B per feature; actual scientific maximum RSS still must be captured. MRIS stays alive while the larger RUS product is processed; MNG product is smaller and released before RUS."
+    ],
+    "source_measurements": [
+      {
+        "conservative_recursive_python_dom_bytes": 29634906,
+        "coordinate_pairs": 196198,
+        "decoded_bytes": 7206047,
+        "features": 339,
+        "geos_coordinate_and_structure_reserve": 12903808,
+        "source": "research/geography/mongolia-russia-gap-source-fitness-20261007/sources/mongolia-mris/mng-adm2-nso-featurelayer-full.geojson",
+        "whole_decoded_sha256": "c27ae477804c5954c4db7cec76093c62baea6c56c8f5aedf7ad95af165ad0e11"
+      },
+      {
+        "conservative_recursive_python_dom_bytes": 6304203,
+        "coordinate_pairs": 39974,
+        "decoded_bytes": 1756483,
+        "features": 339,
+        "geos_coordinate_and_structure_reserve": 2905472,
+        "source": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MNG-ADM2-000.bin.gz",
+        "whole_decoded_sha256": "c1b915d68f353cd8844cb8d70120cc97d76f1620200506b6b6fe7b892bf04e47"
+      },
+      {
+        "conservative_recursive_python_dom_bytes": 135695051,
+        "coordinate_pairs": 911422,
+        "decoded_bytes": 26338801,
+        "features": 2327,
+        "geos_coordinate_and_structure_reserve": 60713856,
+        "source": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-RUS-ADM2-000.bin.gz",
+        "whole_decoded_sha256": "81dabf7930ff5e306e2423b586bcec14163fbd10481db6e49aab47273953b128"
+      }
+    ],
+    "status": "MEASURED_READONLY_PROSPECTIVE_NOT_SCIENCE_RSS"
+  },
+  "no_deduplication": true,
+  "original_count": 125,
+  "original_encoded": 141174665,
+  "output_count": 18,
+  "own_count": 334,
+  "own_encoded": 67659084,
+  "updated_conservative_science_forecast": 488181029
+}

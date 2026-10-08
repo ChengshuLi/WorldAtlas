@@ -1,0 +1,152 @@
+{
+  "status": "reproduced",
+  "issue": 1469,
+  "reproduction": "The intact documented legacy default command exited zero and replaced both pre-existing marker files in a complete private packet mirror.",
+  "source_commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3",
+  "private_repo": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/original-overwrite-control/private-repo",
+  "git_directory_locator": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/.git/worktrees/work4",
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/original-overwrite-control/private-repo/data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/reproduce_current_coverage.py"
+  ],
+  "actual_exit_code": 0,
+  "stdout": {
+    "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/original-overwrite-control/legacy.stdout.bin",
+    "bytes": 209,
+    "sha256": "3f8394827222f136bad70182d14b981b0181492dea6ece0c62e411fa843ea43b"
+  },
+  "stderr": {
+    "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/original-overwrite-control/legacy.stderr.bin",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "marker": {
+    "bytes": 36,
+    "sha256": "c286341cb88a7f73b06738ecdf0ee37898b060fc3cd023097c47322778b67f12",
+    "copies": [
+      "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/original-overwrite-control/before-markers/nukunonu.current-coverage.json",
+      "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/original-overwrite-control/before-markers/bounty-islands.current-coverage.json"
+    ]
+  },
+  "original_outputs_before": {
+    "nukunonu": {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/current-coverage.json",
+      "bytes": 42874,
+      "sha256": "f8c0145f9bb44d7b6f1ee86e36bf1978583c27e9b682de8503b673b3a00031fb"
+    },
+    "bounty-islands": {
+      "path": "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/current-coverage.json",
+      "bytes": 17691,
+      "sha256": "8fbefcb22d5b6a8eba7ffda440ddb03266f2f1e7c44e438df079687bf4f07e13"
+    }
+  },
+  "private_outputs_after": {
+    "nukunonu": {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/current-coverage.json",
+      "bytes": 42874,
+      "sha256": "f8c0145f9bb44d7b6f1ee86e36bf1978583c27e9b682de8503b673b3a00031fb",
+      "replaced_marker": true,
+      "matches_exact_retained_report": true
+    },
+    "bounty-islands": {
+      "path": "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/current-coverage.json",
+      "bytes": 17691,
+      "sha256": "8fbefcb22d5b6a8eba7ffda440ddb03266f2f1e7c44e438df079687bf4f07e13",
+      "replaced_marker": true,
+      "matches_exact_retained_report": true
+    }
+  },
+  "original_outputs_after": {
+    "nukunonu": {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/current-coverage.json",
+      "bytes": 42874,
+      "sha256": "f8c0145f9bb44d7b6f1ee86e36bf1978583c27e9b682de8503b673b3a00031fb"
+    },
+    "bounty-islands": {
+      "path": "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/current-coverage.json",
+      "bytes": 17691,
+      "sha256": "8fbefcb22d5b6a8eba7ffda440ddb03266f2f1e7c44e438df079687bf4f07e13"
+    }
+  },
+  "copied_packet_files": [
+    {
+      "path": "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/README.md",
+      "bytes": 9277,
+      "sha256": "9247363ebf46f40c31cfad6606a9f5bd9a8cb0bd371a1de0bc61fdabc6a33f28",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/assessment.json",
+      "bytes": 43017,
+      "sha256": "6ac6260a6653b76f223955d43003736a15514de0e8079a3d7a8924834009ad69",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/current-coverage.json",
+      "bytes": 17691,
+      "sha256": "8fbefcb22d5b6a8eba7ffda440ddb03266f2f1e7c44e438df079687bf4f07e13",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/verify.py",
+      "bytes": 5117,
+      "sha256": "2c7a6a1ef4bd3f29f687de8dff2998f95af63a1b8f05566d95cd78c36a09d84c",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/README.md",
+      "bytes": 10232,
+      "sha256": "f9be204741c6ccf39d742eb57dd1443846af79cd1539e8d39047579b00ca6620",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/assessment.json",
+      "bytes": 106001,
+      "sha256": "5750873e10f94570189cfcaf50d58b4b63226d14c06a14b41fdd94db704b48ab",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/claim-receipt.json",
+      "bytes": 1013,
+      "sha256": "7f3dcb52f8ba244b3ef2a85f4f1e27a69d2659000f5ef4091c9a46f9072b5023",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/current-coverage.json",
+      "bytes": 42874,
+      "sha256": "f8c0145f9bb44d7b6f1ee86e36bf1978583c27e9b682de8503b673b3a00031fb",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/issue-contract-569.json",
+      "bytes": 3157,
+      "sha256": "6c94de355d2f7bd40210be916d61633cf447608007bd5101d13ea44a1be0c9a8",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/readiness-569.json",
+      "bytes": 3567,
+      "sha256": "a7366db2833f3dcb32f7c0236c9ab72b16c179798d89e8e5807ede794c2dadf5",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/reproduce_current_coverage.py",
+      "bytes": 23796,
+      "sha256": "b17cac03a8bc92c8a22e9198e8a17073e97fae222618c48f1b247ed73bb67187",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/verify.py",
+      "bytes": 2673,
+      "sha256": "6783023f108c777a9f6ad80da85d774b2d7751104c480ebc388477106da57a6e",
+      "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3"
+    }
+  ],
+  "area_helper": {
+    "path": "scripts/ellipsoidal_area.py",
+    "commit": "c3ac95a5d72258d46c85e94590c8168edf32a3e3",
+    "bytes": 1953,
+    "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+  },
+  "scope": "Private copied packets and outputs only; no source, producer or original output outside the declared issue-owned prefix was written."
+}

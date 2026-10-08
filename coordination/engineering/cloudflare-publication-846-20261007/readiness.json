@@ -1,0 +1,32 @@
+{
+  "issue": 846,
+  "coverage": "complete",
+  "eligible": true,
+  "findings": [],
+  "observed_at": "2026-10-08T02:29:49.856Z",
+  "snapshot": {
+    "number": 846,
+    "state": "open",
+    "body": "The public Cloudflare website is deployed and verified, but the ongoing publication planner/handoff still represents primary delivery using a ChatGPT Site-specific schema. The successful CF deployment must become a discoverable verified baseline for future compatible main changes; it must not be represented as a fabricated Site version.\n\nCurrent CF baseline: primary80fb0e7744809438d02881f8d3435d9efb71d2e8, native CF deployment6850090217, Worker7223b2fa-1a51-4a31-a34a-bdeb1b92bef4, published geographic6. Settlement https://github.com/ChengshuLi/WorldAtlas/issues/822#issuecomment-5987131945 ; acceptance https://github.com/ChengshuLi/WorldAtlas/issues/822#issuecomment-5987131625 . Existing Site delivery/history and native Neon operations remain immutable.\n\nAcceptance:\n- Review and implement explicit Cloudflare primary publication discovery, deployment and verified delivery receipts; retain readable historical Site/Neon/CF records. No blind bootstrap rewrite or fabricated delivery.\n- Pin main at run start; classify source-only research separately; deploy compatible code/assets against the matching published geographic release. Future updates must reach Cloudflare without reviving the static6/database5 mismatch.\n- Preserve serialized operations, exact reviewed source/data/lookup/asset pins, scope claims, independent premerge evidence review, CI, rollback and per-issue acceptance discovery.\n- Keep the existing Neon compact design, credentials hidden, public browsing without login and public mutations blocked. Publication control remains distinct from public website writes.\n- Update repository publisher handoff/role instructions. Inspect existing saved publisher instructions or schedules before changing them; if schedule updates are necessary, update existing authorized jobs rather than creating duplicate schedules. Never add new schedules just to satisfy this issue.\n- Verify through a bounded serialized Cloudflare publisher run and matching actual served/API/frontend checks; record the actual baseline and pending archive residuals honestly.\n\nRefs #822 for completed public hosting; #6 for geographic publication history. This task does not transfer inaccessible old archives or retire/delete the old Site.\n\n<!-- worldatlas-work:v1\n{\"max_prs\":2,\"depends_on\":[822],\"mode\":\"engineering\",\"scope\":\"Make ongoing primary publication and verified delivery discovery Cloudflare-aware, retaining historical Site and Neon records, serialization, matched code/data/assets and public read-only behavior.\",\"evidence_quality\":{\"version\":1,\"manifest_path\":\"coordination/engineering/{job}/evidence-quality.json\",\"subject_ids\":[],\"pins\":{},\"review_kind\":\"code\"}}\n-->\n",
+    "labels": [
+      "kind:work-item",
+      "status:ready",
+      "type:engineering"
+    ],
+    "updated_at": "2026-10-05T16:38:47Z"
+  },
+  "dependencies": [
+    {
+      "number": 822,
+      "state": "closed",
+      "body": "User explicitly requested public Cloudflare website without login after reporting historical content loading failure. Add an explicit public read-only hosting mode, retaining private fail-closed defaults and rejecting mutations even if write flag is enabled. Remove Access gate only after reviewed public package deploys. Verify anonymous assets/API and historical loader with matched published geography pins. Current static release6 versus Neon published5 mismatch must be coordinated with sole publisher; do not weaken pin validation. Preserve Neon compact design, originals, old Site and deferred archives.\n\nAcceptance: public website/assets/read APIs work without credentials; writes rejected; private default/malformed settings retain protection; actual browser-equivalent temporal hydration verified or original mismatch residual remains explicit.\n\n<!-- worldatlas-work:v1\n{\"max_prs\": 1, \"depends_on\": [792, 797], \"mode\": \"engineering\", \"scope\": \"Explicit opt-in public read-only Cloudflare hosting, preserve private default and existing data; verify combined temporal loader and record pending geography publication coordination. No old archive transfer or database migration.\", \"evidence_quality\": {\"version\": 1, \"manifest_path\": \"coordination/engineering/{job}/evidence-quality.json\", \"subject_ids\": [], \"pins\": {}, \"review_kind\": \"code\"}}\n-->\n",
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:engineering"
+      ],
+      "updated_at": "2026-10-05T03:00:51Z"
+    }
+  ],
+  "decision": "Mechanical eligibility only. Inspect original acceptance, waits and scientific/production evidence; reread issue, claim and dependencies immediately before a narrow mutation. No labels or claims changed."
+}

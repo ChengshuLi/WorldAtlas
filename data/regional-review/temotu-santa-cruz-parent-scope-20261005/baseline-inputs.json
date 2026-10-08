@@ -1,0 +1,119 @@
+{
+  "baseline": {
+    "commit": "e760d68ff48a679b08f6fbf0581d1035de35105d",
+    "files": [
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 4746385,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      {
+        "bytes": 2826,
+        "hash_kind": "file-bytes",
+        "path": "data/validation/macro-publication-v5.json",
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 215,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/current-manifest.json",
+        "sha256": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178"
+      },
+      {
+        "bytes": 2404397,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+      },
+      {
+        "bytes": 8044,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/scope.json",
+        "sha256": "0377ad3ad5af9ec45e233e9e62e5b958d3a3b81329aaf3fcc71b5222f02ada80"
+      },
+      {
+        "bytes": 9302,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json",
+        "sha256": "8ca953420a96d12200f4ca56d5b91abf5aafe276918a36c1745dae72bfd42d2c"
+      },
+      {
+        "bytes": 12015,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources.json",
+        "sha256": "36daeaef5331367bcd70679d8f860faf3b0f30d6c193fe879660d1d21d323ca1"
+      },
+      {
+        "bytes": 101513,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/solomon-islands-natural-earth-adm1.geojson",
+        "sha256": "bd22f4cdce1c19066950b8c384c4d484a21a0dcaee5f207e363179f68c58c69d"
+      },
+      {
+        "bytes": 17414,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+      },
+      {
+        "bytes": 23246,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence-quality.mjs",
+        "sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03"
+      }
+    ],
+    "pin_files": {
+      "current_membership_inventory": "data/macro-foundation/current-membership-inventory.json.gz",
+      "current_release": "data/geographic-releases/current-manifest.json",
+      "evidence_validator": "scripts/evidence-quality.mjs",
+      "geography_part_22": "data/geography/part-22.json",
+      "hierarchy": "data/hierarchy.json",
+      "immutable_helper": "scripts/evidence/immutable.py",
+      "macro_publication_v5": "data/validation/macro-publication-v5.json",
+      "parent_scope": "data/regional-review/regional-review-1aa97b490604ea4e/scope.json",
+      "parent_source_acquisition": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json",
+      "parent_sources": "data/regional-review/regional-review-1aa97b490604ea4e/sources.json",
+      "retained_natural_earth_adm1": "data/regional-review/regional-review-1aa97b490604ea4e/sources/solomon-islands-natural-earth-adm1.geojson",
+      "source_registry": "data/administrative-sources.json",
+      "world_index": "data/world-index.json"
+    },
+    "pins": {
+      "current_membership_inventory": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "current_release": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178",
+      "evidence_validator": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03",
+      "geography_part_22": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "immutable_helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "macro_publication_v5": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "parent_scope": "0377ad3ad5af9ec45e233e9e62e5b958d3a3b81329aaf3fcc71b5222f02ada80",
+      "parent_source_acquisition": "8ca953420a96d12200f4ca56d5b91abf5aafe276918a36c1745dae72bfd42d2c",
+      "parent_sources": "36daeaef5331367bcd70679d8f860faf3b0f30d6c193fe879660d1d21d323ca1",
+      "retained_natural_earth_adm1": "bd22f4cdce1c19066950b8c384c4d484a21a0dcaee5f207e363179f68c58c69d",
+      "source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  },
+  "subject_ids": [
+    "gb:SLB:ADM1:17018030B19935783635883"
+  ],
+  "version": 1
+}

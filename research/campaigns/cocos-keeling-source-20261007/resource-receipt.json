@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "limits": {
+    "per_file_encoded_bytes": 33554432,
+    "per_file_decoded_bytes": 33554432,
+    "phase_and_package_bytes": 268435456,
+    "file_descriptor_limit": 512
+  },
+  "phases": [
+    {
+      "id": "baseline-roster-pointset-contact-identity-closure",
+      "run_date": "2026-10-08",
+      "elapsed_seconds": 0.43,
+      "method": "Read immutable Git blobs and gzip-decompressed identity fields only; scanned the complete 8,734-feature roster, pointset JSONL rows and contact records. No geometry or coordinates were inspected.",
+      "encoded_input_bytes": 4115254,
+      "decoded_input_bytes": 24209955,
+      "peak_resident_bytes": 140427264,
+      "peak_memory_footprint_bytes": 119358848,
+      "swap_bytes": 0,
+      "temporary_storage_bytes": 0,
+      "result": "one target in complete feature roster; pointset row 313 once; one component contact record with exactly the target contact and positive-length relation",
+      "disposition": "Identity and scope closure only; no physical classification or spatial operation."
+    },
+    {
+      "id": "licensed-coastline-archive-directory-listing",
+      "elapsed_seconds": 0.0,
+      "method": "unzip -l; listed the archive directory only, did not extract members or inspect geometry.",
+      "archive_bytes": 67943,
+      "member_count": 6,
+      "uncompressed_member_bytes": 158676,
+      "peak_resident_bytes": 2293760,
+      "peak_memory_footprint_bytes": 1950272,
+      "swap_bytes": 0,
+      "disposition": "Confirmed every listed member remains below the 32 MiB decoded cap; no member bytes were unpacked."
+    },
+    {
+      "id": "metadata-and-small-alternative-retrieval-recheck",
+      "started_at": "2026-10-07T22:55:05-07:00",
+      "ended_at": "2026-10-07T22:55:14-07:00",
+      "elapsed_seconds": 8.78,
+      "method": "Sequential curl GETs with per-request maximum size of 32 MiB, except the coastline ZIP capped at 1 MiB; ulimit -n 512; failed response bodies discarded.",
+      "peak_resident_bytes": 6520832,
+      "peak_memory_footprint_bytes": 3933312,
+      "swap_bytes": 0,
+      "temporary_response_bytes": 168633,
+      "temporary_storage_du_kib": 232,
+      "disposition": "Raw catalog API snapshots and temporary duplicate downloads removed after findings were recorded; source pages, small licensed ZIP and scrubbed 404 receipts retained."
+    },
+    {
+      "id": "ga-cocos-gis-manual-temporary-fetch",
+      "started_at": "2026-10-08T05:57:39Z",
+      "ended_at": "2026-10-08T05:57:42.253647Z",
+      "elapsed_seconds": 2.47,
+      "method": "Single bounded HTTPS GET with --max-filesize 32 MiB; PDF examined for source inventory only.",
+      "downloaded_bytes": 18901495,
+      "sha256": "db846f3cdc245e667a7e4b703569bdda5e61c6f248702fcebf3e18cb669c5863",
+      "peak_resident_bytes": 6373376,
+      "peak_memory_footprint_bytes": 4080640,
+      "swap_bytes": 0,
+      "disposition": "PDF states © 2012 Geoscience Australia, all rights reserved; deleted after review, URL and hash retained here for citation/audit."
+    },
+    {
+      "id": "ga-manual-text-search",
+      "input_bytes": 18901495,
+      "elapsed_seconds": 3.03,
+      "method": "pypdf text extraction/search over 254 pages; no geometry or spatial processing. The system pdftotext utility was unavailable, and pypdf succeeded.",
+      "peak_resident_bytes": 82427904,
+      "peak_memory_footprint_bytes": 90359168,
+      "swap_bytes": 0,
+      "output_bytes": 0,
+      "disposition": "Search terms used only to identify documentary statements, legacy package paths and the missing table/report references."
+    },
+    {
+      "id": "evidence-manifest-validation",
+      "started_at": "2026-10-08T06:12:07Z",
+      "ended_at": "2026-10-08T06:12:08Z",
+      "elapsed_seconds": 0.45,
+      "method": "scripts/evidence-quality.mjs checked every immutable baseline descriptor, retained source file and declared output; it did not classify geography.",
+      "peak_resident_bytes": 97468416,
+      "peak_memory_footprint_bytes": 1114752,
+      "swap_bytes": 0,
+      "result": "limited; all declared bytes verified, factual validation requires independent review",
+      "disposition": "Measured final evidence-quality run after baseline roster, pointset and contact identity closure; all declared bytes and historical ancestor vintages checked. Expected factual limitations remain."
+    }
+  ],
+  "retained_source_file_bytes": 118685,
+  "retained_source_package_bytes": 118685,
+  "retained_original_files_over_32_mib": 0,
+  "gis_or_spatial_operations": false
+}

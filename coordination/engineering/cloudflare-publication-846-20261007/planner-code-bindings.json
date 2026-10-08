@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "execution": "publication-plan-reservation-fixed.json",
+  "bindings": [
+    {
+      "path": "scripts/publication-plan.mjs",
+      "bytes": 13586,
+      "sha256": "007985ecb007f69f5d253f8327f37537b966cc0cf651ebfe1ded9301891146bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/publication-cloudflare.mjs",
+      "bytes": 11094,
+      "sha256": "6d6bf9943fbe4ad1ad13a03d6c9fc07131e89b3b1b351fb1e463175218aeff9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 17819,
+      "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 7069,
+      "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence-policy.mjs",
+      "bytes": 2126,
+      "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/research-import-gate.mjs",
+      "bytes": 335,
+      "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "bytes": 1758,
+      "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "bytes": 4238,
+      "sha256": "c14b239a08d5b27f64253e164c8647b13ac0c593ffc21dc387982fbf11711a13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/publication/cloudflare-history.json",
+      "bytes": 4754,
+      "sha256": "f71fa8429944d5e8d9d358d3960c6b18448b7cdc08cc8149248cd0d0cac4575a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "limits": [
+    "Earlier publication-plan-current.json was an exploratory run before the independently repaired boundary/uniqueness safeguards; it is retained as an unbound earlier candidate observation, not final execution proof.",
+    "This read-only planner emits unreviewed eligibility; application readiness requires original-issue and human-hold inspection."
+  ]
+}
