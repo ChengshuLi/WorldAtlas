@@ -1,0 +1,76 @@
+{
+  "all_measurement_records_equal": true,
+  "all_published_output_hashes_equal": true,
+  "fresh_destinations": true,
+  "kind": "reproducibility",
+  "method_id": "alaska-thirteen-full-simplified-atlas-native-measurement-v1",
+  "outcome": "passed",
+  "output_bytes_per_run": 735528,
+  "run_one_sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5",
+  "run_two_sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5",
+  "runs": [
+    {
+      "name": "run-thirteen",
+      "operating_receipt": {
+        "elapsed_seconds": 33.652,
+        "exit_code": 0,
+        "natural_terminal": true,
+        "path": "execution/measure-alaska-run-thirteen-operating-receipt.json",
+        "peak_sampled_group_rss_bytes": 629178368,
+        "rss_cap_bytes": 805306368,
+        "wall_deadline_seconds": 900
+      },
+      "outputs": {
+        "measurement.json": {
+          "bytes": 734884,
+          "sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5"
+        },
+        "output-manifest.json": {
+          "bytes": 558,
+          "sha256": "16a143cff45316fb38d82f47165e43365087ac866bbe8d5dace1282a3bbeec79"
+        },
+        "proposal-gain-geometry.geojson": {
+          "bytes": 43,
+          "sha256": "6d6b80a88dc60e65991d34024fe7cf2eb86531ffba8b75efb697fe0a601f2799"
+        },
+        "proposal-geometry.geojson": {
+          "bytes": 43,
+          "sha256": "6d6b80a88dc60e65991d34024fe7cf2eb86531ffba8b75efb697fe0a601f2799"
+        }
+      },
+      "publication": "run-thirteen/publication.json"
+    },
+    {
+      "name": "run-fourteen",
+      "operating_receipt": {
+        "elapsed_seconds": 31.572,
+        "exit_code": 0,
+        "natural_terminal": true,
+        "path": "execution/measure-alaska-run-fourteen-operating-receipt.json",
+        "peak_sampled_group_rss_bytes": 661880832,
+        "rss_cap_bytes": 805306368,
+        "wall_deadline_seconds": 900
+      },
+      "outputs": {
+        "measurement.json": {
+          "bytes": 734884,
+          "sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5"
+        },
+        "output-manifest.json": {
+          "bytes": 558,
+          "sha256": "16a143cff45316fb38d82f47165e43365087ac866bbe8d5dace1282a3bbeec79"
+        },
+        "proposal-gain-geometry.geojson": {
+          "bytes": 43,
+          "sha256": "6d6b80a88dc60e65991d34024fe7cf2eb86531ffba8b75efb697fe0a601f2799"
+        },
+        "proposal-geometry.geojson": {
+          "bytes": 43,
+          "sha256": "6d6b80a88dc60e65991d34024fe7cf2eb86531ffba8b75efb697fe0a601f2799"
+        }
+      },
+      "publication": "run-fourteen/publication.json"
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,59 @@
+{
+  "kind": "negative-control",
+  "measurement_sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5",
+  "method_id": "alaska-thirteen-full-simplified-atlas-native-measurement-v1",
+  "negative_controls": [
+    {
+      "component_id": "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+      "expected": "disjoint candidate/admin source geometry",
+      "kind": "negative-control",
+      "measured_relation": {
+        "boundary_contact_only": false,
+        "candidate_area_projected_m2": 14008.630710615,
+        "candidate_coverage_ratio": 0.0,
+        "candidate_covered_exactly": false,
+        "candidate_uncovered_area_projected_m2": 14008.630710615,
+        "candidate_uncovered_area_projected_m2_exact": 14008.630710614638,
+        "intersection_area_projected_m2": 0.0,
+        "intersection_area_projected_m2_exact": 0.0,
+        "intersection_area_raw_square_degrees": 0.0,
+        "intersection_area_raw_square_degrees_exact": 0.0,
+        "intersection_geometry_type": "Polygon",
+        "intersects": false,
+        "positive_area_overlap": false,
+        "status": "measured"
+      },
+      "passed": true,
+      "remote_shape_id": "52423323B68557587713523",
+      "remote_shape_name": "New York"
+    },
+    {
+      "expected": "unknown target ID is rejected without fallback",
+      "kind": "negative-input-join-control",
+      "mutated_shape_id": "52423323B46246640861022-mutated",
+      "original_shape_id": "52423323B46246640861022",
+      "passed": true
+    },
+    {
+      "expected": "invalid geometry remains rejected and un-repaired",
+      "geometry_type": "Polygon",
+      "kind": "negative-invalid-geometry-control",
+      "passed": true,
+      "valid": false,
+      "validity_reason": "Self-intersection[0.5 0.5]"
+    },
+    {
+      "adverse_added_gain_overlap_area_raw_square_degrees_exact": 1.0445026740195902,
+      "baseline_overlap_area_raw_square_degrees_exact": 0.0,
+      "component_id": "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+      "expected": "the exact zero-tolerance gain/neighbor overlap predicate rejects an addition that creates positive area against an actual Atlas neighbor",
+      "kind": "negative-control-new-positive-area-neighbor-overlap",
+      "neighbor_source_id": "gb:USA:ADM2:52423323B13000193718373",
+      "passed": true,
+      "production_rejection_predicate": true,
+      "target_source_id": "52423323B46246640861022"
+    }
+  ],
+  "outcome": "passed",
+  "version": 1
+}
