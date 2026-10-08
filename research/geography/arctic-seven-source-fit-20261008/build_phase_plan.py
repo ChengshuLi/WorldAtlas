@@ -57,6 +57,9 @@ def main():
  for path,row in issue_pins.items():sources.append(descriptor(args.execution_commit,path,row))
  for row in archive_pins:
   if row['path'] not in {x['path'] for x in sources}:sources.append(row)
+ native_member=descriptor(args.execution_commit,PREFIX+'sources/aafc-ecoregions.native.geojson',
+  {'bytes':2756674,'sha256':'a565563a6aef794df831dc9251fb4108018e20a4f0172acbc36b599f9b7f4abf'})
+ if native_member['path'] not in {x['path'] for x in sources}:sources.append(native_member)
  runtime=descriptor(args.execution_commit,RUNTIME,verify_materialized=True)
  native_runtime=descriptor(args.execution_commit,NATIVE_RUNTIME,verify_materialized=True)
  native_checker=descriptor(args.execution_commit,NATIVE_CHECKER,verify_materialized=True)
