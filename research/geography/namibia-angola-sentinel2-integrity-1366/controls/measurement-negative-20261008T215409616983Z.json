@@ -1,0 +1,61 @@
+{
+  "checks": {
+    "input_controls": {
+      "coherent_altered_source_sha256": "be98eebf0fc13a60519041f14c3a976aad7d1fdb90fbcf6b19d6f842fd588dad",
+      "coherent_receipt_component_bit_corruption_rejected": true,
+      "coherent_receipt_contact_bit_corruption_rejected": true,
+      "control_symlink_parent_rejected": true,
+      "duplicate_scene_receipt_rejected": true,
+      "foreign_scene_receipt_rejected": true,
+      "missing_scene_receipt_rejected": true,
+      "modified_executable_bytes_rejected": true,
+      "source_window_raw_sha256": "3c6d94b2a890cebd264b5b76f21f7bc3c613dba06f61ae250f8067415615c349",
+      "stale_source_window_receipt_rejected": true,
+      "unaltered_executable_pin_accepted": true,
+      "wrong_10m_subpixel_shape_rejected": true
+    },
+    "legacy_defect_reproduction": {
+      "analysis": {
+        "complete_output_matches_retained_run_one": true,
+        "completion_receipt_present": false,
+        "dangling_symlink_followed": true,
+        "late_os_file_limit_exit": 1,
+        "normal_exit": 0,
+        "occupied_output_overwritten": true,
+        "outside_path_traversal_created": true,
+        "partial_result_bytes_after_os_failure": 1024,
+        "symlink_target_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41",
+        "traversal_result_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41"
+      },
+      "extractor_writer": {
+        "dangling_npz_symlink_followed": true,
+        "linked_target_sha256": "e18b22860c6e9f5f718aeba458b3eeee79ac6b0a9aee837ce4b3d87178748e63",
+        "occupied_npz_overwritten": true
+      },
+      "selection": {
+        "dangling_symlink_followed": true,
+        "normal_exit": 0,
+        "occupied_output_overwritten": true,
+        "selected_output_matches_retained_bytes": true,
+        "sentinel_copy_preserved": true,
+        "symlink_target_sha256": "14a7594d1900646470564f33b5a60b95c889b86404e373490eee845a1e5779ec"
+      }
+    },
+    "legacy_path_admission": {
+      "escaped_target_written": false,
+      "symlink_parent_rejected": true
+    },
+    "writer_controls": {
+      "completion_receipt_absent_after_failure": true,
+      "control_symlink_parent_rejected": true,
+      "late_os_write_failure": "OSError(27, 'File too large')",
+      "occupied_target_rejected": true,
+      "partial_result_bytes_after_failure": 1024,
+      "symlink_target_rejected": true,
+      "traversal_rejected": true
+    }
+  },
+  "kind": "negative-control",
+  "method_id": "retained-sentinel2-independent-reconciliation",
+  "outcome": "passed"
+}

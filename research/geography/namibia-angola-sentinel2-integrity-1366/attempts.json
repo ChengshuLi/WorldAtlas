@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "attempts": [
+    {
+      "path": "runs/run-20261008T211620371190Z/",
+      "status": "superseded",
+      "reason": "Initial reconciliation parser did not capture the native XML timestamp because the source tag has metadata attributes. The complete result omitted native times; no scientific conclusion was retained from it."
+    },
+    {
+      "path": "runs/run-20261008T211653589666Z/ and runs/run-20261008T211701847310Z/",
+      "status": "superseded",
+      "reason": "Native timestamp parsing was corrected and two identical measurements were produced, but these attempts preceded explicit issue-pin admission and used the initial direct result writer. Preserve them as historical attempts; use the later NewVintage runs as the reviewed results."
+    },
+    {
+      "path": "vintages/reconciliation-20261008-211812221223/ and vintages/reconciliation-20261008-211821401648/",
+      "status": "superseded",
+      "reason": "These helper-written complete runs preceded verification of every issue-declared whole-file pin. Their source measurements and timestamp comparison matched; the later 20261008-212021660646 run also binds all 39 issue pins."
+    },
+    {
+      "path": "vintages/probe-late-write-20261008/",
+      "status": "failed-control-preserved",
+      "reason": "A real OS file-size limit stopped the result after 1,024 bytes. No publication.json was installed."
+    },
+    {
+      "path": "vintages/probe-occupied-20261008/",
+      "status": "adverse-fixture-preserved",
+      "reason": "The occupied destination sentinel remains intact after writer rejection."
+    },
+    {
+      "path": "legacy-fixtures/ and controls/legacy-entrypoints-20261008T213337381377Z.json",
+      "status": "legacy-defects-reproduced-in-owned-fixture",
+      "reason": "The unchanged selector, full offline analysis CLI and exact retained NPZ writer were exercised on private copies. Occupied writes, symlink following, output traversal, and a 1,024-byte OS-limited partial analysis result were observed. No original source or other worker path was modified. The remote acquisition/extraction pipeline remains untested."
+    }
+  ],
+  "current_reproducibility_rule": "Use complete reconciliation vintages whose publication.json hash matches reconciliation.json and whose embedded executable hash matches the code descriptor in evidence-quality.json. Compare two such runs for byte-identical report SHA-256."
+}

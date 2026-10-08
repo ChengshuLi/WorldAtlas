@@ -1,0 +1,14 @@
+{
+  "fixture_scope": "research/geography/namibia-angola-sentinel2-integrity-1366/",
+  "results": {
+    "completion_receipt_absent_after_failure": true,
+    "control_symlink_parent_rejected": true,
+    "late_os_write_failure": "OSError(27, 'File too large')",
+    "occupied_target_rejected": true,
+    "partial_result_bytes_after_failure": 1024,
+    "symlink_target_rejected": true,
+    "traversal_rejected": true
+  },
+  "version": 1,
+  "writer": "authenticated scripts/evidence/immutable.py NewVintage"
+}
