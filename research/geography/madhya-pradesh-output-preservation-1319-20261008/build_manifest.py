@@ -228,8 +228,8 @@ def main():
             {"method_id": method_id, "kind": "reproducibility", "outcome": "passed",
              "evidence_path": OWNED_PATH + "vintages/controls-head088ab2-one/reproducibility.json"},
         ],
-        "change_receipts": ([{"path": path, "status": "added", "previous_path": None} for path in output_paths] +
-                             [{"path": MANIFEST_REL, "status": "added", "previous_path": None}]),
+        "change_receipts": ([{"path": path, "status": "added"} for path in output_paths] +
+                             [{"path": MANIFEST_REL, "status": "added"}]),
         "rendered_tables": [],
         "conclusions": [
             {"text": "The output-safety repair has fresh, exclusive retained-report vintages with complete final receipts; it does not freshly reproduce the original geometry calculation.",
