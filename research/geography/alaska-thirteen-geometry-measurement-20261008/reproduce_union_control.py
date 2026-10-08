@@ -69,17 +69,22 @@ for native_id in (2, 1083):
     header = struct.unpack(">11i", record[:44])
     coords = list(struct.iter_unpack(">2i", record[44:]))
     original_points = [(x * 1e-6, y * 1e-6) for x, y in coords]
+    normalized_points = [(lon - 360.0 if lon > 180.0 else lon, lat) for lon, lat in original_points]
+    normalized_binary64 = hashlib.sha256(b"".join(struct.pack(">2d", lon, lat) for lon, lat in normalized_points)).hexdigest()
     source_relation = next(rel for rel in first_physical["query_relations"] if rel["source_id"] == native_id)
     native_hash_rows.append({"native_id": native_id,
         "record_sha256_matches": hashlib.sha256(record).hexdigest() == source_relation["source_record_sha256"],
         "header_level_matches": (header[2] & 0xff) == source_relation["source_level"],
         "source_pointset_sha256": source_relation["source_pointset_sha256"],
-        "measurement_decoder_pointset_sha256": hashlib.sha256(canonical(original_points)).hexdigest(),
-        "pointset_hash_matches": hashlib.sha256(canonical(original_points)).hexdigest() == source_relation["source_pointset_sha256"],
+        "measurement_decoder_original_json_pointset_sha256": hashlib.sha256(canonical(original_points)).hexdigest(),
+        "measurement_decoder_normalized_binary64_pointset_sha256": normalized_binary64,
+        "pointset_hash_matches": normalized_binary64 == source_relation["source_pointset_sha256"],
         "original_relation": {key: source_relation[key] for key in ("source_covers_candidate", "candidate_covers_source", "disjoint", "witness")}})
 
 features = {}
 for path, role in INPUTS.items():
+    if not path.endswith(".geojson"):
+        continue
     fc = load_pinned(path, role)
     features.update((feature["id"], feature) for feature in fc["features"])
 old = shape(features[TARGET_ID]["geometry"])

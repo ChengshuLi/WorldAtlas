@@ -236,11 +236,15 @@ def load_native(record_receipt_path: pathlib.Path):
             raise ValueError(f"selected native ring is not byte-closed: {row['id']}")
         jumps = [abs(points[i][0] - points[i - 1][0]) for i in range(1, len(points))]
         geom = Polygon(points)
+        binary64_pointset_digest = hashlib.sha256()
+        for longitude, latitude in points:
+            binary64_pointset_digest.update(struct.pack(">2d", longitude, latitude))
         geometries[row["id"]] = geom
         metadata[row["id"]] = {**row, "original_point_count": len(original_points),
                                 "coordinate_int32_bytes_sha256": sha(coordinate_bytes),
                                 "original_decoder_convention": "signed int32 longitude,latitude multiplied by 1e-6",
                                 "original_pointset_sha256": sha(canonical(original_points)),
+                                "decoded_pointset_binary64_sha256": binary64_pointset_digest.hexdigest(),
                                 "normalized_pointset_sha256": sha(canonical(points)),
                                 "restored_pointset_sha256": sha(canonical(restored_points)),
                                 "longitude_branch_transform": "x>180: x-360; inverse x<0: x+360; y unchanged",
@@ -545,7 +549,7 @@ def main() -> None:
                     source_relation["disjoint"] == (not measured["intersects"]) and
                     source_relation["source_record_sha256"] == native_meta[native_id]["sha256"] and
                     source_relation["source_level"] == (native_meta[native_id]["header_int32"][2] & 0xff) and
-                    source_relation["source_pointset_sha256"] == native_meta[native_id]["original_pointset_sha256"])
+                    source_relation["source_pointset_sha256"] == native_meta[native_id]["decoded_pointset_binary64_sha256"])
             else:
                 relation_match = None
             item = {"component_id": cid, "target_source_id": target_id, "gshhg_native_id": native_id,
