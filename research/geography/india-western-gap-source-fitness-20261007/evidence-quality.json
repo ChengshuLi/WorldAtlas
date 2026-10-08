@@ -919,6 +919,13 @@
       "sha256": "f67163e9bd612b44fc0a23cfcc0bfb62a2951e429594552149cb2747ef85c15f",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-summary.json",
+      "bytes": 490,
+      "sha256": "e449a7b9a1280252592bc50c1986388533a6ccf5a803d573aff0a770269e8e63",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
     }
   ],
   "methods": [
@@ -1495,8 +1502,8 @@
     },
     {
       "metric_id": "family_universe",
-      "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-02/report.json",
-      "json_pointer": "/family/ranked_source_fitness_family_count"
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-summary.json",
+      "json_pointer": "/ranked_source_fitness_family_count"
     },
     {
       "metric_id": "source_fit_witnesses",
@@ -2054,6 +2061,10 @@
     },
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/inherited-claims-2026-10-08-01/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-summary.json",
       "status": "added"
     }
   ]
