@@ -20,11 +20,19 @@ def main(vintage, run_one_name, run_two_name, controls_name):
     run_two = (second / "reconciliation.json").read_bytes()
     if reproduce.sha(run_one) != reproduce.CURRENT_OUTPUT_SHA or run_one != run_two:
         raise ValueError("Two exact current-baseline outputs are required")
+    report = json.loads(run_one)
     control_report = json.loads((controls / "legacy-controls.json").read_text())
     if len(control_report["controls"]) != 16:
         raise ValueError("All legacy and guarded-runner controls plus partial-publication control are required")
+    guarded = [row for row in control_report["controls"]
+               if row.get("control", "").startswith("guarded-runner-rejects-")]
+    if len(guarded) != 6 or any(row.get("exit_code") != 1 or row.get("output_vintage_created") is not False
+                                for row in guarded):
+        raise ValueError("All six guarded mutation controls must reject before output creation")
+    if report.get("component_count") != 50 or report.get("contact_count") != 14:
+        raise ValueError("Positive reconstruction must preserve the complete declared roster")
     output = {
-        "method_id": "corrected-runner-reproducibility", "kind": "generator", "outcome": "passed",
+        "method_id": "guarded-reconstruction", "kind": "reproducibility", "outcome": "passed",
         "version": 1, "baseline_commit": reproduce.BASELINE_COMMIT,
         "run_one_sha256": reproduce.sha(run_one), "run_two_sha256": reproduce.sha(run_two),
         "run_one_bytes": len(run_one), "run_two_bytes": len(run_two),
@@ -37,6 +45,28 @@ def main(vintage, run_one_name, run_two_name, controls_name):
         "comparison": "The complete reports match the retained prior successful vintages after normalizing only their recorded main-head fields.",
         "limits": ["No GIS overlay, physical reexecution, authority determination, geographic approval, or import authorization.",
                    "Source applicability, county parent/date, precision, legal terms, current condition, and parent #1202 remain unresolved."],
+    }
+    positive = {
+        "method_id": "guarded-reconstruction", "kind": "positive-control", "outcome": "passed",
+        "version": 1, "baseline_commit": reproduce.BASELINE_COMMIT,
+        "run_one_sha256": reproduce.sha(run_one), "run_two_sha256": reproduce.sha(run_two),
+        "reports_identical": run_one == run_two, "component_count": report["component_count"],
+        "contact_count": report["contact_count"], "family_count": 2,
+        "available_numeric_sibling_bindings": 34,
+        "evidence": ["vintages/" + run_one_name + "/reconciliation.json",
+                     "vintages/" + run_two_name + "/reconciliation.json"],
+        "limits": ["Positive source-closure reconstruction does not validate legal boundaries, current geography, or physical conditions."],
+    }
+    negative = {
+        "method_id": "guarded-reconstruction", "kind": "negative-control", "outcome": "passed",
+        "version": 1,
+        "controls": [{"control": row["control"], "expected": row["expected"],
+                      "exit_code": row["exit_code"], "output_vintage_created": row["output_vintage_created"]}
+                     for row in guarded],
+        "source_control": "vintages/" + controls_name + "/legacy-controls.json",
+        "source_control_sha256": reproduce.sha((controls / "legacy-controls.json").read_bytes()),
+        "interpretation": "Each changed accepted input is rejected by the guarded runner before an output vintage is created.",
+        "limits": ["Mutation controls establish custody behavior only; they do not establish geographic truth or authority."],
     }
     controls_receipt = {
         "method_id": "legacy-cli-input-output-controls", "kind": "code", "outcome": "passed",
@@ -59,9 +89,12 @@ def main(vintage, run_one_name, run_two_name, controls_name):
         "scope": "The negative acceptance controls run only inside private fixtures under this issue-owned directory.",
     }
     writer = immutable.NewVintage(baseline, reproduce.OWNED, vintage,
-                                  ["reproducibility.json", "controls-validation.json"])
+                                  ["reproducibility.json", "controls-validation.json",
+                                   "positive-control.json", "negative-control.json"])
     payloads = {"reproducibility.json": immutable.canonical_json(output),
-                "controls-validation.json": immutable.canonical_json(controls_receipt)}
+                "controls-validation.json": immutable.canonical_json(controls_receipt),
+                "positive-control.json": immutable.canonical_json(positive),
+                "negative-control.json": immutable.canonical_json(negative)}
     published = writer.publish_bytes(payloads)
     for name, expected in payloads.items():
         if (writer.root / name).read_bytes() != expected:
@@ -69,7 +102,7 @@ def main(vintage, run_one_name, run_two_name, controls_name):
     receipt = json.loads((writer.root / "publication.json").read_bytes())
     if receipt.get("status") != "complete" or receipt.get("outputs") != published:
         raise ValueError("Validation publication receipt readback mismatch")
-    print(json.dumps({"vintage": vintage, "outputs": 2, "path": str(writer.root)}))
+    print(json.dumps({"vintage": vintage, "outputs": len(payloads), "path": str(writer.root)}))
 
 
 if __name__ == "__main__":
