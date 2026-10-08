@@ -10,8 +10,7 @@ const [destination,base]=process.argv.slice(2);
 if(!destination||!/^([a-f0-9]{40})$/.test(base??'')||filesystemPath.resolve(destination)!==destination||filesystemPath.dirname(destination)!==packet+'vintages'||fs.existsSync(destination))throw Error('Fresh owned destination and exact original base required');
 const executionCommit=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const codeNames=['scripts/evidence-quality.mjs','coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs'];
-function codeGuard(){return codeNames.map(name=>{if(file.bytes+file.uncompressed_bytes+codeBindings.reduce((n,x)=>n+x.bytes,0)+1048576+4096>268435456)throw Error('Prospective complete control phase exceeds budget');
-const raw=execFileSync('git',['-C',repo,'show',executionCommit+':'+name],{maxBuffer:32*1024*1024});const live=fs.readFileSync(repo+'/'+name);if(!raw.equals(live)||!fs.lstatSync(repo+'/'+name).isFile())throw Error('Executing code differs from immutable commit');return {commit:executionCommit,path:name,bytes:raw.length,sha256:sha256(raw),hash_kind:'file-bytes'};});}
+function codeGuard(){return codeNames.map(name=>{const raw=execFileSync('git',['-C',repo,'show',executionCommit+':'+name],{maxBuffer:32*1024*1024});const live=fs.readFileSync(repo+'/'+name);if(!raw.equals(live)||!fs.lstatSync(repo+'/'+name).isFile())throw Error('Executing code differs from immutable commit');return {commit:executionCommit,path:name,bytes:raw.length,sha256:sha256(raw),hash_kind:'file-bytes'};});}
 const codeBindings=codeGuard();
 const out=destination+'/';
 const commit='c9122b55d20c4992fca5b0332e4faacbc08b139a';
@@ -20,7 +19,7 @@ const ids=['gap-source-batch:65911e15791d12ebb2ccacf5','gap-source-batch:74be953
 const rows=[{record_offset:2281306,record_bytes:6281,record_sha256:'4b9610e86b7d6517b6c32fdead65bd6c3f73e868ac3413e6a506947071097c1b'},
 {record_offset:8377128,record_bytes:8380,record_sha256:'dd8da79354e25b034da7e739534be89c87bc15a2906a6924cf500eb579229610'}];
 const file={path,commit,bytes:1026831,sha256:'03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141',hash_kind:'file-bytes',uncompressed_bytes:8388608,uncompressed_sha256:'6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d'};
-function manifest(file,ids,rows){return {version:1,issue:1431,lane:'geography',worker_id:'01a112b9-e2b7-7d03-8000-eb2890649612',subject_ids:ids,subject_ids_sha256:subjectsHash(ids),baseline:{version:2,commit,files:[file],pins:{},subject_files:Object.fromEntries(ids.map((id,n)=>[id,{version:2,kind:'gzip-jsonl-record',path:file.path,commit:file.commit,...rows[n]}]))},sources:[],outputs:[],methods:[{id:'original-family-identity',kind:'source',description:'Whole original family record identity only',software:'Trusted whole gzip decoder and JSON reader',units:'Original bytes and native IDs'}],metrics:[],summaries:[],conclusions:[],stages:{research:'partial',implementation:'not-proposed',geographic_approval:'unapproved'},commands:['Metadata-only original source identity verification']};}
+function manifest(file,ids,rows){return {version:1,issue:1475,lane:'geography',worker_id:'01a11935-1ccd-7fa3-a01f-563ff29045ee',subject_ids:ids,subject_ids_sha256:subjectsHash(ids),baseline:{version:2,commit,files:[file],pins:{},subject_files:Object.fromEntries(ids.map((id,n)=>[id,{version:2,kind:'gzip-jsonl-record',path:file.path,commit:file.commit,...rows[n]}]))},sources:[],outputs:[],methods:[{id:'original-family-identity',kind:'source',description:'Whole original family record identity only',software:'Trusted whole gzip decoder and JSON reader',units:'Original bytes and native IDs'}],metrics:[],summaries:[],conclusions:[],stages:{research:'partial',implementation:'not-proposed',geographic_approval:'unapproved'},commands:['Metadata-only original source identity verification']};}
 const actual=manifest(file,ids,rows);
 if(file.bytes+file.uncompressed_bytes+codeBindings.reduce((n,x)=>n+x.bytes,0)+1048576+4096>268435456)throw Error('Prospective complete control phase exceeds budget');
 const raw=execFileSync('git',['-C',repo,'show',commit+':'+path],{maxBuffer:32*1024*1024});
@@ -28,7 +27,7 @@ const ancestors={original_commit:commit,pr_base:base,exit:0};
 execFileSync('git',['-C',repo,'merge-base','--is-ancestor',commit,base]);
 function ancestor(c){execFileSync('git',['-C',repo,'merge-base','--is-ancestor',c,base]);}
 const actualReader=Object.assign((p,c)=>{if(p!==path||c!==commit)throw Error('Wrong immutable origin');return raw;},{assertAncestor:ancestor});
-const actualResult=validateEvidence(actual,{readFile:actualReader,expectedIssue:1431,expectedLane:'geography',expectedSubjects:ids});
+const actualResult=validateEvidence(actual,{readFile:actualReader,expectedIssue:1475,expectedLane:'geography',expectedSubjects:ids});
 let passed=[];
 let deniedReads=0,deniedDecodes=0;const originalGunzip=zlib.gunzipSync;
 zlib.gunzipSync=(...args)=>{deniedDecodes++;return originalGunzip(...args)};syncBuiltinESMExports();
