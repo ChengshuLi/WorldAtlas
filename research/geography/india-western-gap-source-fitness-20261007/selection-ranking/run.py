@@ -119,7 +119,8 @@ def main():
     if len(set(tuples.values())) != len(families):
         raise ValueError('Family-best priority tuple ties need an explicit tie-break policy')
     ordered = sorted(families, key=lambda family: tuples[family])
-    if ordered.index(TARGET) + 1 != 8:
+    selected_rank = ordered.index(TARGET) + 1
+    if selected_rank != 8:
         raise ValueError('Selected family reconstructed rank differs from issue selection claim')
     if len(target_rows) != 2 or {row['component'] for row in target_rows} != set(SUBJECTS).intersection({row['component'] for row in source_rows}):
         raise ValueError('Selected family witness roster does not match pinned issue subjects')
@@ -139,7 +140,7 @@ def main():
         'target_component_count_in_source_slice': len(target_rows),
         'source_fit_slice_row_count': len(source_rows),
         'ranked_source_fitness_family_count': len(families),
-        'selected_family_rank': 8,
+        'selected_family_rank': selected_rank,
         'selected_family_best_rank_tuple': list(tuples[TARGET]),
         'rank_order': list(ORDER),
         'sort_direction': 'ascending lexicographic, matching the pinned priority ORDER_NAMES',
@@ -164,7 +165,7 @@ def main():
     source_id='pinned-routing-rank-inputs'
     metric_rows=[
       {'id':'ranked_source_fitness_family_count','value':len(families),'unit':'families','vintage':'baseline','input_sha256':slice_desc['sha256'],'input_set_sha256':selection_sha,'evaluation_commit':BASELINE,'title':'Unique complete families in pinned source-fitness slice'},
-      {'id':'selected_family_rank','value':8,'unit':'rank','vintage':'baseline','input_sha256':next(d['sha256'] for d in family_parts if d['path'].endswith('families-013.bin.gz')),'input_set_sha256':selection_sha,'evaluation_commit':BASELINE,'title':'Selected family rank by pinned priority tuple'},
+      {'id':'selected_family_rank','value':selected_rank,'unit':'rank','vintage':'baseline','input_sha256':next(d['sha256'] for d in family_parts if d['path'].endswith('families-013.bin.gz')),'input_set_sha256':selection_sha,'evaluation_commit':BASELINE,'title':'Selected family rank by pinned priority tuple'},
     ]
     evidence={
       'version':1,'issue':1432,'lane':'source-only','worker_id':'01a11522-1da9-75a1-8ecb-765bae224f1c',
@@ -181,7 +182,7 @@ def main():
       'stages':{'research':'complete','implementation':'not-proposed','geographic_approval':'unapproved'}
     }
     (HERE/'evidence-quality.json').write_text(json.dumps(evidence,indent=2)+'\n')
-    print(json.dumps({'status':report['status'],'families':len(families),'rank':8,'tuple':list(tuples[TARGET]),'selection_input_sha256':selection_sha,'rows':len(source_rows),'ties':0},indent=2))
+    print(json.dumps({'status':report['status'],'families':len(families),'rank':selected_rank,'tuple':list(tuples[TARGET]),'selection_input_sha256':selection_sha,'rows':len(source_rows),'ties':0},indent=2))
 
 
 if __name__ == '__main__':

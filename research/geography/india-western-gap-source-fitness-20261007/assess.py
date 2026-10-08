@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[3]
 PACKET = Path(__file__).resolve().parent
 MANIFEST_PATH = PACKET / 'evidence-quality.json'
 OWNED = 'research/geography/india-western-gap-source-fitness-20261007/'
-VINTAGE = 'coverage-screen-2026-10-08-03'
+VINTAGE = 'coverage-screen-2026-10-08-04'
 MAX_FILE_BYTES = 32 * 1024 * 1024
 
 
