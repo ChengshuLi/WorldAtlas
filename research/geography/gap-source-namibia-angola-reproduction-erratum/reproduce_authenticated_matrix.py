@@ -84,6 +84,13 @@ def full_index(raw, group, expected_count):
     return unique_index(selected, lambda r: r.get("properties", {}).get("shapeID"), f"{group} shapeID")
 
 
+def checked_shape(feature, label):
+    geom = shape(feature.get("geometry"))
+    if geom.is_empty or not geom.is_valid:
+        raise ValueError(f"Empty or invalid geometry: {label}")
+    return geom
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("run_name", help="fresh output directory name")
@@ -102,13 +109,13 @@ def main():
     matrix = []
     different = 0
     for component_id, candidate in sorted(component_rows.items()):
-        candidate_geom = shape(candidate["geometry"])
+        candidate_geom = checked_shape(candidate, component_id)
         for subject_id, contact in sorted(contact_rows.items()):
             props = contact["properties"]
             group, sid = props["shapeGroup"], props["shapeID"]
             same_id_full = (nam_full if group == "NAM" else ago_full)[sid]
-            consumed_geom = shape(contact["geometry"])
-            full_geom = shape(same_id_full["geometry"])
+            consumed_geom = checked_shape(contact, subject_id + " consumed")
+            full_geom = checked_shape(same_id_full, subject_id + " full")
             consumed_area = candidate_geom.intersection(consumed_geom).area
             full_area = candidate_geom.intersection(full_geom).area
             changed = consumed_area != full_area
@@ -132,8 +139,8 @@ def main():
         "inventory": {"components": len(component_rows), "contacts": len(contact_rows), "unique_pairs": len(matrix),
                       "full_product_rows": {"NAM": 109, "AGO": 161}},
         "different_contact_shapes": sum(
-            not shape(contact["geometry"]).equals(
-                shape((nam_full if contact["properties"]["shapeGroup"] == "NAM" else ago_full)[contact["properties"]["shapeID"]]["geometry"])
+            not checked_shape(contact, "contact topology control").equals(
+                checked_shape((nam_full if contact["properties"]["shapeGroup"] == "NAM" else ago_full)[contact["properties"]["shapeID"]], "full topology control")
             ) for contact in contact_rows.values()
         ),
         "pairs_with_different_intersection_area": different,
@@ -144,8 +151,12 @@ def main():
                    "No territorial, legal, water, parent, or physical-component assignment is made.",
                    "Source license labels and represented vintages are transcribed from pinned metadata; this run is not legal review."],
     }
-    outdir = OWNED / "vintages" / args.run_name
-    outdir.parent.mkdir(parents=True, exist_ok=True)
+    vintage_root = OWNED / "vintages"
+    if vintage_root.is_symlink() or not vintage_root.is_dir() or vintage_root.resolve() != vintage_root:
+        raise ValueError("Vintage output root must be an ordinary directory inside the owned packet")
+    outdir = vintage_root / args.run_name
+    if outdir.resolve(strict=False).parent != vintage_root:
+        raise ValueError("Output path escapes the owned vintage directory")
     outdir.mkdir(exist_ok=False)
     output = (json.dumps(report, sort_keys=True, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
     target = outdir / "authenticated-matrix.json"

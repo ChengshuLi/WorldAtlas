@@ -5,7 +5,10 @@
     "legacy-reproduction-audit.json",
     "vintages/successor-one-20261007/authenticated-matrix.json",
     "vintages/successor-two-20261007/authenticated-matrix.json",
-    "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/producer-controls-20261007/controls.json"
+    "research/geography/gap-source-namibia-angola-reproduction-erratum/vintages/producer-controls-20261007/controls.json",
+    "vintages/successor-final-one-20261007/authenticated-matrix.json",
+    "vintages/successor-final-two-20261007/authenticated-matrix.json",
+    "vintages/producer-controls-final-20261007/controls.json"
   ],
   "attempts": [
     {
@@ -37,6 +40,11 @@
       "attempt": 6,
       "status": "failed-control-harness-assertion",
       "summary": "An initial control helper incorrectly expected the inventory indexer alone to detect a missing row; the indexer checks identity uniqueness, while complete row count is a separate producer invariant. The assertion aborted before writing a control receipt. The corrected receipt records duplicate identity rejection and the explicit complete-count guard; no source or existing evidence output was changed."
+    },
+    {
+      "attempt": 7,
+      "status": "corrected-authoritative-successor-and-controls",
+      "summary": "Added fail-closed geometry validity and output-root safety checks; reran two fresh successor vintages with identical output hashes. Probed empty/invalid geometry, path traversal, collision and symlinked output root; all rejected. Full control receipt is vintages/producer-controls-final-20261007/controls.json."
     }
   ],
   "failed_artifacts": [

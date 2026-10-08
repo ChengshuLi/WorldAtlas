@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "controls": [
+    {
+      "case": "empty-geometry",
+      "result": "rejected",
+      "error": "ValueError"
+    },
+    {
+      "case": "invalid-self-crossing-geometry",
+      "result": "rejected",
+      "error": "Empty or invalid geometry: invalid-test"
+    },
+    {
+      "case": "path-traversal",
+      "result": "rejected",
+      "exit": 1
+    },
+    {
+      "case": "existing-output-collision",
+      "result": "rejected",
+      "exit": 1
+    },
+    {
+      "case": "symlink-output-root",
+      "result": "rejected",
+      "exit": 1
+    }
+  ],
+  "inventory_controls": {
+    "legacy_full_product_duplicate_same_length": "accepted and recorded in legacy-reproduction-audit.json",
+    "legacy_source_geometry_duplicate_or_missing": "rejected by exact identity checks",
+    "successor_inventory": "reads exact Git-pinned blobs only, verifies fixed issue/pin digests, unique 21 candidate IDs, exact 10 contact IDs, and 109/161 full product membership before writing"
+  },
+  "limitations": [
+    "Control probes exercise fail-closed geometry and output guards; they are not a complete malformed-input fuzz campaign."
+  ]
+}
