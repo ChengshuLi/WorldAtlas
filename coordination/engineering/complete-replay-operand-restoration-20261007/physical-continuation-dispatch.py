@@ -14,7 +14,7 @@ def dependencies(operation,spec,arguments,a,helper):
   p=arguments['physical'];j=arguments['join']
   return helper.unique([p['publication'],p['inventory'],*helper.product(p,'whole-original-physical.'),*helper.selected_stage(spec['mismatches'],'mismatch-index-'),*helper.stage_pins(j)],a)
  if operation=='query-join-continuation':
-  return helper.unique([*[pin for s in arguments['queries'] for pin in helper.selected_stage(s,'native-query-index-')],*[pin for s in spec['physical'] for pin in helper.selected_stage(s,'physical-index-')],*helper.selected_stage(spec['mismatches'],'mismatch-index-')],a)
+  return helper.unique([*[pin for s in arguments['queries'] for pin in helper.selected_stage(s,'native-query-index-')],*[pin for s in spec['physical'] for pin in helper.selected_stage(s,'physical-index-')],*helper.selected_stage(spec['mismatches'],'mismatch-index-'),*helper.stage_pins(arguments['join'])],a)
  raise ValueError('Unsupported exact continuation operation')
 
 def execute(operation,phase,*,spec,arguments,context,acquisition,helper,original_immutable,live_guard):
@@ -32,11 +32,21 @@ def execute(operation,phase,*,spec,arguments,context,acquisition,helper,original
   # operation facts; it must never relabel this execution as ce98.
   return a.query_part(phase,pins[0],helper.product(spec['mismatches'],'mismatch-index-'),original_immutable.canonical_json)
  if operation=='query-join-continuation':
+  helper.authorize_query(phase,join=arguments['join'],spec=spec,context=context,acquisition=a,live_guard=live_guard)
   qs=arguments['queries'];helper.need(len(qs)==71 and [s['ordinal'] for s in qs]==list(range(71)),'Complete original71 query stages required')
   for s in [*spec['physical'],spec['mismatches']]:helper.check_original(phase,s,spec,a)
   for s in qs:
    inv=a.completed_inventory(phase,s['publication'],s['inventory']);helper.exact(inv['outputs'],s['outputs'],a)
+   # Exact child requests/freezes come from the parent's root-issued request,
+   # captured before child launch, never from child producer facts.
+   expected=helper.unique([*context['bootstrap_project_pins'],s['request_pin'],s['freeze_pin'],
+      *helper.selected_stage(spec['physical'][s['ordinal']],'whole-original-physical.'),
+      *helper.selected_stage(spec['mismatches'],'mismatch-index-'),
+      *helper.stage_pins(arguments['join'])],a)
+   helper.exact(inv['input_descriptors'],expected,a)
+   helper.need(inv['runtime_bytes']==context['runtime_bytes'],'Actual query installed-runtime charge differs')
    f=inv['facts'];helper.need(f['operation']=='actual-original-native-query-containing-file' and f['scientific_execution_commit']==helper.OLD and f['execution_commit']==context['execution_commit'] and f['spec_pin']==context['spec_pin'],'Foreign query execution/helper vintage')
+   helper.need(f['request_pin']==s['request_pin'] and f['freeze_pin']==s['freeze_pin'],'Query request/freeze differs from root-issued launch')
    helper.need(f['whole_restored_physical_input']==helper.product(spec['physical'][s['ordinal']],'whole-original-physical.')[0],'Original query shard binding differs')
   return a.query_join(phase,[pin for s in qs for pin in helper.product(s,'native-query-index-')],helper.product(spec['mismatches'],'mismatch-index-'),[pin for s in spec['physical'] for pin in helper.product(s,'physical-index-')])
  raise ValueError('Unsupported exact continuation execution')

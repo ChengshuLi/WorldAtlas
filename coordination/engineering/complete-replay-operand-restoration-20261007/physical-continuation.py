@@ -258,7 +258,8 @@ def main():
              'Unsupported qualified continuation operation')
     context = {'execution_commit': head, 'scientific_execution_commit': OLD,
                'request_pin': request_pin, 'freeze_pin': freeze_pin, 'spec_pin': spec_pin,
-               'current_project_pins': current_project}
+               'current_project_pins': current_project, 'runtime_bytes': runtime_bytes,
+               'bootstrap_project_pins': modules['driver'].unique([*current_project, *distinct_prior, spec_pin, plan_pin])}
     arguments = request['arguments']
     if 'member' in arguments:
         context['membership_stage'] = arguments['member']
