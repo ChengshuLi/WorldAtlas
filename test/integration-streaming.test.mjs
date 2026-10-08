@@ -90,10 +90,11 @@ test('exited failures clean ignored/inherited-pipe descendants and successful or
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   for (const stdio of ['ignore',['ignore','inherit','inherit']]) for (const status of [7,0]) {
     const pidFile=path.join(root,`${Array.isArray(stdio)?'inherit':'ignore'}-${status}.pid`);
+    const childStdio=Array.isArray(stdio)?[...stdio,'ipc']:['ignore','ignore','ignore','ipc'];
     const source=`import {spawn} from 'node:child_process';import fs from 'node:fs';
-      const c=spawn(process.execPath,['-e',"process.on('SIGTERM',()=>{});setInterval(()=>{},1000)"],{stdio:${JSON.stringify(stdio)}});
+      const c=spawn(process.execPath,['-e',"process.on('SIGTERM',()=>{});process.send('ready');setInterval(()=>{},1000)"],{stdio:${JSON.stringify(childStdio)}});
       c.unref();fs.writeFileSync(${JSON.stringify(pidFile)},String(c.pid),{flag:'wx'});
-      setTimeout(()=>{console.log('# skipped 0');process.exit(${status});},150);`;
+      c.once('message',()=>{console.log('# skipped 0');process.exit(${status});});`;
     const pending=streamTestProcess(code(source),sinks());
     let watchdog;
     const bounded=Promise.race([pending,new Promise((_,reject)=>{

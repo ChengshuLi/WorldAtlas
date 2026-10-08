@@ -1,7 +1,10 @@
-test_changed_shared_payload_rebinds_complete_and_failed_receipts_without_touching_original (__main__.FixtureBindingControls.test_changed_shared_payload_rebinds_complete_and_failed_receipts_without_touching_original) ... ok
-test_unchanged_bad_descriptor_is_not_repaired_into_apparent_validity (__main__.FixtureBindingControls.test_unchanged_bad_descriptor_is_not_repaired_into_apparent_validity) ... ok
-
-----------------------------------------------------------------------
-Ran 2 tests in 23.865s
-
-OK
+✔ control fixture retains actual shared-output custody and refuses unchanged bad descriptors (17788.870375ms)
+✔ actual ephemeral component cache invalidates every input family and a fresh method (163.392584ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18023.701666

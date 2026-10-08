@@ -32,7 +32,11 @@ not repair them into apparent validity. `validate_science` authenticates every
 actual file through the complete custody validator before each required semantic
 rejection. The redundant preceding custody pass is removed. The separate positive
 world test remains uncached and unchanged; the existing narrowly input-keyed
-component reconstruction cache in the adverse controls is unchanged.
+component reconstruction cache in the adverse controls is unchanged. Actual
+cache-entry controls exercise unchanged hits, changed feature identity/roster,
+properties/geometry, blocked-tile identity/bounds and scope bounds. A fresh setup
+with a different counted kernel recomputes the same inputs; teardown deletes the
+old cache. These bounded controls test caching, not geographic reconstruction.
 
 The integration runner streams stdout/stderr while tests run, retains a bounded
 TAP tail and enforces the existing 64 MiB transcript limit and zero-skips condition.

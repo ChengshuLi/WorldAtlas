@@ -59,7 +59,10 @@ and final reconciliation of further opportunities. Use `Refs #1201` for this PR;
 these local results do not justify closing the original issue.
 
 Local verification: 105 runner/selection/proof/sparse-workflow controls pass with
-zero skips. The two whole-custody fixture tests pass. The complete seven-scenario
+zero skips. The two whole-custody fixture tests pass. An additional bounded actual-cache
+control proves unchanged hits, input-family invalidation and fresh-method setup;
+its counted kernel tests cache behavior, not scientific reconstruction. Fixture
+and cache runs use temporary output inside the managed slot. The complete seven-scenario
 local prototype run remains separate from exact-head hosted verification; its
 wrapper deadline is unchanged. The 40% threshold from individual geography
 packets is not applied to these CI tasks.
