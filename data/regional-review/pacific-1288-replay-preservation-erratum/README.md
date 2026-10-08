@@ -18,7 +18,7 @@ existing vintage is never reused. Scratch directories are private and removed
 only after attempt receipts and raw streams have been captured in the admitted
 vintage.
 
-The verified acceptance run is `vintages/replay-20261008-06/`. Earlier
+The verified acceptance run is `vintages/replay-20261008-07/`. Earlier
 vintages are retained as intermediate attempts; `RESEARCH.md` records their
 specific limitations.
 

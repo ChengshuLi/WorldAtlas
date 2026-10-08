@@ -1523,25 +1523,25 @@
     {
       "path": "data/regional-review/pacific-1288-replay-preservation-erratum/README.md",
       "bytes": 1578,
-      "sha256": "0193849594e4a541883be1128646cd2d77ac9a6bf7f1d4d4aa0cc3cde5770e16",
+      "sha256": "eceebafc6f82db71f9b051c2619553b39b2dd6738dd19f525c09b2fbf7b70379",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/pacific-1288-replay-preservation-erratum/RESEARCH.md",
-      "bytes": 5199,
-      "sha256": "2789b99d0f75d3868bb85f16054a7388ca3c8c9343838fdc6e39721cd3873206",
+      "bytes": 6024,
+      "sha256": "68252d5052f3b4825c53a44507a4c972eec733bba0abef6a0917871188730098",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/safe_replay.py",
+      "bytes": 24626,
+      "sha256": "cbec60eedb4f1711f5b030bf4a350b050cebef3b359bdaa58175eb17cc1d46d3",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/pacific-1288-replay-preservation-erratum/SOURCES.md",
       "bytes": 3314,
       "sha256": "ed142c824ebb759ef57390d0564d766a6286a28e59dcf79e202f54c28a06f1c1",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/safe_replay.py",
-      "bytes": 22240,
-      "sha256": "68a61aea5ee204143663a5917472ab7087c1cd7d3e5eea8c407d503b945967ce",
       "hash_kind": "file-bytes"
     },
     {
@@ -1730,6 +1730,41 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/attempts.json",
+      "bytes": 3720,
+      "sha256": "21182fd8746b937523fe5b67f8084aabde60ee9fc2f1fee8dd6693be79cb4468",
+      "hash_kind": "file-bytes",
+      "role": "failed-attempt-custody"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/case-changes.json",
+      "bytes": 798,
+      "sha256": "717d3b398a855da129e3baf3c7ae86f76415c3438b6acfa16cc4fe241d19f686",
+      "hash_kind": "file-bytes",
+      "role": "failed-attempt-custody"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/publication.json",
+      "bytes": 966,
+      "sha256": "58ce822dcd1ff18490f00ed3bdf9b977636a4996cd75375e0964da0bbbb584be",
+      "hash_kind": "file-bytes",
+      "role": "failed-attempt-custody"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/replay-summary.json",
+      "bytes": 603,
+      "sha256": "7f4a8ce04d350d6ef7457df990a4b570269f03488adae8027ce306e889af5b08",
+      "hash_kind": "file-bytes",
+      "role": "failed-attempt-custody"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/scope.json",
+      "bytes": 366,
+      "sha256": "af95e0a51350a55b8b438f34ba3ad7b98662c03f2a7bfd5e13fffa58729c57bc",
+      "hash_kind": "file-bytes",
+      "role": "failed-attempt-custody"
+    },
+    {
       "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008/attempts.json",
       "bytes": 17688,
       "sha256": "3af9b092fd3098f844bda38950ef2401b39fece50dc77c61b338af71ca10e667",
@@ -1833,23 +1868,29 @@
   "review_kind": "geometry",
   "change_receipts": [
     {
-      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/README.md",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/RESEARCH.md",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/SOURCES.md",
-      "status": "added"
-    },
-    {
       "path": "data/regional-review/pacific-1288-replay-preservation-erratum/evidence-quality.json",
       "status": "added"
     },
     {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/README.md",
+      "status": "added",
+      "bytes": 1578,
+      "sha256": "eceebafc6f82db71f9b051c2619553b39b2dd6738dd19f525c09b2fbf7b70379"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/RESEARCH.md",
+      "status": "added",
+      "bytes": 6024,
+      "sha256": "68252d5052f3b4825c53a44507a4c972eec733bba0abef6a0917871188730098"
+    },
+    {
       "path": "data/regional-review/pacific-1288-replay-preservation-erratum/safe_replay.py",
+      "status": "added",
+      "bytes": 24626,
+      "sha256": "cbec60eedb4f1711f5b030bf4a350b050cebef3b359bdaa58175eb17cc1d46d3"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/SOURCES.md",
       "status": "added"
     },
     {
@@ -1970,6 +2011,26 @@
     },
     {
       "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-07/scope.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/attempts.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/case-changes.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/replay-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/pacific-1288-replay-preservation-erratum/vintages/replay-20261008-08/scope.json",
       "status": "added"
     },
     {

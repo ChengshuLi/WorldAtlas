@@ -14,7 +14,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
 OWNED = "data/regional-review/pacific-1288-replay-preservation-erratum/"
-VINTAGE = "replay-20261008-07"
+VINTAGE = "replay-20261008-08"
 SOURCE = "7962b56b08e21c581b5d4034fe3616da5f87efd7"
 MERGE = "249e396178cfc160fd547ec4487c5d94832fc9af"
 BASE = "a57085b7a5cfdbe3c1e0e4b0cd2e07c6240899fc"
@@ -300,6 +300,7 @@ def main() -> None:
     # named products; raw attempt streams go in per-attempt JSONL envelopes.
     vintage = NewVintage(immutable, OWNED, VINTAGE, files)
     scratch_root = Path(tempfile.mkdtemp(prefix=".replay-scratch-", dir=ROOT))
+    published = False
     try:
         expected_packet = {p: contents[p] for p in tree_paths(SOURCE, OLD)}
         cases, payloads, all_attempts = [], {}, []
@@ -309,16 +310,43 @@ def main() -> None:
             capture = area / "captured"
             attempt = run_legacy(repo, capture, label=label, markers=has_markers)
             all_attempts.append(attempt)
-            if attempt["returncode"] != 0:
-                raise RuntimeError(f"Historical CLI returned {attempt['returncode']} in {label}: {attempt['failure_stderr']} {attempt['failure_stdout']}")
-            if len(attempt["verifier_attempts"]) != 3:
-                raise RuntimeError(f"Expected exactly three actual original verifier processes in {label}")
+            # Copy actual streams into memory before any branch can raise and
+            # before scratch cleanup. A nonzero historical command is itself
+            # useful replay evidence and must leave a durable, hash-bound run.
+            for suffix, filename in (("stdout", f"{label}-stdout.bin"), ("stderr", f"{label}-stderr.bin")):
+                payloads[attempt[f"{suffix}_path"]] = (capture / filename).read_bytes()
             for item in attempt["verifier_attempts"]:
                 for suffix in ("stdout", "stderr"):
-                    target = capture / (Path(item[suffix + "_path"]).name)
+                    target = capture / Path(item[suffix + "_path"]).name
                     payloads[item[suffix + "_path"]] = target.read_bytes()
-            payloads[attempt["stdout_path"]] = (capture / f"{label}-stdout.bin").read_bytes()
-            payloads[attempt["stderr_path"]] = (capture / f"{label}-stderr.bin").read_bytes()
+            if attempt["returncode"] != 0:
+                from base64 import b64encode
+                from evidence.immutable import canonical_json
+                failure_summary = {
+                    "issue": 1463, "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+                    "status": "replay_failed_after_capturing_actual_attempt",
+                    "failed_label": label, "failed_returncode": attempt["returncode"],
+                    "runner_code": {"path": str(Path(__file__).resolve().relative_to(REPO)), "bytes": len(Path(__file__).read_bytes()), "sha256": sha(Path(__file__).read_bytes())},
+                    "source_commit": SOURCE, "affected_merge": MERGE, "baseline_commit": BASE,
+                    "geographic_approval": "unapproved; replay is mechanical only",
+                }
+                attempt_bundle = {
+                    "version": 1, "attempts": all_attempts, "scope_validator_cli": [],
+                    "raw_streams": {name: b64encode(raw).decode("ascii") for name, raw in payloads.items()},
+                }
+                empty_cases = {"version": 1, "cases": [], "original_input_count": len(expected_packet),
+                    "destination_controls": safe_destination_checks, "raw_changed_files": {}}
+                failure_values = {
+                    "attempts.json": canonical_json(attempt_bundle),
+                    "case-changes.json": canonical_json(empty_cases),
+                    "replay-summary.json": canonical_json(failure_summary),
+                    "scope.json": canonical_json({"subject_ids": json.loads(contents[f"{OLD}/inputs/expected-subjects.json"]), "count": 23, "vintage": VINTAGE}),
+                }
+                vintage.publish_bytes(failure_values)
+                published = True
+                raise RuntimeError(f"Historical CLI returned {attempt['returncode']} in {label}; actual streams were preserved in {VINTAGE}")
+            if len(attempt["verifier_attempts"]) != 3:
+                raise RuntimeError(f"Expected exactly three actual original verifier processes in {label}")
             if has_markers:
                 overwritten = {}
                 for rel, sentinel in MARKERS.items():
@@ -371,7 +399,7 @@ def main() -> None:
             "inventory_file_count": len(pins), "inventory_raw_bytes": sum(x["bytes"] for x in pins),
             "actual_attempt_count": sum(len(a["verifier_attempts"]) for a in all_attempts) + len(scope_cli_results),
             "full_cli_executions": 3, "complete_report_sets": 6,
-            "runner_code": {"path": str(Path(__file__).relative_to(REPO)), "bytes": len(Path(__file__).read_bytes()), "sha256": sha(Path(__file__).read_bytes())},
+            "runner_code": {"path": str(Path(__file__).resolve().relative_to(REPO)), "bytes": len(Path(__file__).read_bytes()), "sha256": sha(Path(__file__).read_bytes())},
             "orchestrator_python": sys.version.split()[0],
             "legacy_python_runtime": json.loads(subprocess.check_output([PYTHON, "-c", "import json,sys,numpy,shapely,pyproj; print(json.dumps({'python':sys.version.split()[0],'numpy':numpy.__version__,'shapely':shapely.__version__,'pyproj':pyproj.__version__}))"], cwd=REPO)),
             "original_marker_overwrite_reproduced_in_private_copy": True,
@@ -393,9 +421,16 @@ def main() -> None:
             "scope.json": canonical_json({"subject_ids": json.loads(contents[f"{OLD}/inputs/expected-subjects.json"]), "count": 23, "vintage": VINTAGE}),
         }
         records = vintage.publish_bytes(values)
+        published = True
         print(json.dumps({"status": "complete", "vintage": VINTAGE, "outputs": records, "attempts": summary["actual_attempt_count"]}, sort_keys=True))
     finally:
-        shutil.rmtree(scratch_root)
+        # If output publication itself failed, retain the raw scratch evidence
+        # for recovery. Remove the large private mirror only after durable
+        # publication (including the explicit failed-attempt bundle above).
+        if published:
+            shutil.rmtree(scratch_root)
+        else:
+            print(f"Unpublished replay evidence retained at {scratch_root}", file=sys.stderr)
 
 
 if __name__ == "__main__":
