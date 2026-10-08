@@ -94,7 +94,53 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
             positive_rows[0].get("source_feature_covers_component") is True):
         raise ValueError("Positive control did not retain the expected exact source-product relation")
 
-    _, context, pointsets_by_id, *_ = producer.load_inputs(baseline, contract_helpers, config)
+    (input_pins, context, pointsets_by_id, products, _, catalogue, metadata,
+     attribution) = producer.load_inputs(baseline, contract_helpers, config)
+    actual_product_context = producer.output_product_context(
+        baseline, products, catalogue, metadata, attribution, input_pins
+    )
+    if actual_product_context != fitness.get("source_products"):
+        raise ValueError("Positive control did not reproduce the retained source-product context")
+
+    source_product_indices = [
+        index for index, item in enumerate(input_pins["files"])
+        if item.get("kind") == "whole-simplified-source-product"
+    ]
+    if len(source_product_indices) != 2:
+        raise ValueError("Pinned whole-file inventory does not contain the two expected source products")
+
+    def source_context_rejects(candidate, label):
+        try:
+            producer.output_product_context(
+                baseline, products, catalogue, metadata, attribution, candidate
+            )
+        except ValueError:
+            return True
+        raise ValueError(f"Source-product context accepted {label}")
+
+    wrong_prefix = json.loads(json.dumps(input_pins))
+    wrong_prefix["files"][source_product_indices[0]]["path"] = (
+        "foreign-prefix/" + wrong_prefix["files"][source_product_indices[0]]["path"]
+    )
+    wrong_prefix_rejected = source_context_rejects(wrong_prefix, "a wrong-prefix descriptor")
+
+    foreign_origin = json.loads(json.dumps(input_pins))
+    foreign_origin["files"][source_product_indices[0]]["source_commit"] = "0" * 40
+    foreign_origin_rejected = source_context_rejects(foreign_origin, "a foreign source origin")
+
+    missing_product = json.loads(json.dumps(input_pins))
+    del missing_product["files"][source_product_indices[0]]
+    missing_product_rejected = source_context_rejects(missing_product, "a missing source product")
+
+    reordered_products = json.loads(json.dumps(input_pins))
+    left, right = source_product_indices
+    reordered_products["files"][left], reordered_products["files"][right] = (
+        reordered_products["files"][right], reordered_products["files"][left]
+    )
+    reordered_products_rejected = source_context_rejects(
+        reordered_products, "reordered source-product descriptors"
+    )
+
     try:
         contract_helpers.exact_rows(
             [dict(feature, id=identity) for identity, feature in pointsets_by_id.items()
@@ -129,6 +175,13 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
             "intersects": positive_rows[0]["intersects"],
             "positive_area_intersection": positive_rows[0]["positive_area_intersection"],
             "source_feature_covers_component": positive_rows[0]["source_feature_covers_component"],
+        },
+        "source_product_context_controls": {
+            "positive_real_context_sha256": producer.sha(producer.canonical(actual_product_context)),
+            "wrong_prefix_rejected": wrong_prefix_rejected,
+            "foreign_origin_rejected": foreign_origin_rejected,
+            "missing_product_rejected": missing_product_rejected,
+            "reordered_products_rejected": reordered_products_rejected,
         },
         "negative_controls": {
             "missing_actual_component_record_rejected": missing_subject_rejected,

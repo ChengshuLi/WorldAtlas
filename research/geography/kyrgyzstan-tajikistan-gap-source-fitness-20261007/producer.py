@@ -380,7 +380,51 @@ def load_inputs(baseline, contract_helpers, config, *, require_custody=True,
     return pins, context, pointsets_by_id, products, contact_features, catalogue, metadata, attribution
 
 
-def output_product_context(baseline, products, catalogue, metadata, attribution, staged):
+def source_product_staged_descriptors(input_pins, catalogue):
+    """Return only exact, ordered whole-product descriptors after origin checks."""
+    expected = [
+        ("gb:KGZ:ADM2", "inputs/sources/gb-KGZ-ADM2-000.bin.gz"),
+        ("gb:TJK:ADM2", "inputs/sources/gb-TJK-ADM2-000.bin.gz"),
+    ]
+    files = input_pins.get("files") if isinstance(input_pins, dict) else None
+    if not isinstance(files, list):
+        raise ValueError("Source-product context requires the pinned whole-file inventory")
+    paths = [item.get("path") for item in files if isinstance(item, dict)]
+    if len(paths) != len(files) or len(paths) != len(set(paths)):
+        raise ValueError("Source-product inventory contains malformed or duplicate paths")
+    expected_names = {pathlib.PurePosixPath(path).name for _, path in expected}
+    candidates = [
+        item for item in files
+        if item.get("kind") == "whole-simplified-source-product" or
+        pathlib.PurePosixPath(str(item.get("path", ""))).name in expected_names
+    ]
+    if [item.get("path") for item in candidates] != [path for _, path in expected]:
+        raise ValueError("Source-product descriptors must be complete, exact-path and in declared order")
+    catalogue_by_key = {item.get("key"): item for item in catalogue.get("products", [])}
+    source_commit = input_pins.get("source_corpus_commit")
+    result = {}
+    for source_id, relative_path in expected:
+        item = candidates[0] if source_id == "gb:KGZ:ADM2" else candidates[1]
+        product = catalogue_by_key.get(source_id)
+        parts = product.get("parts") if isinstance(product, dict) else None
+        if not isinstance(parts, list) or len(parts) != 1:
+            raise ValueError(f"Catalogue source product must have exactly one retained part: {source_id}")
+        part = parts[0]
+        if (item.get("path") != relative_path or
+                item.get("kind") != "whole-simplified-source-product" or
+                item.get("source_commit") != source_commit or
+                item.get("source_path") != part.get("path") or
+                item.get("bytes") != part.get("bytes") or
+                item.get("sha256") != part.get("sha256") or
+                item.get("decoded_bytes") != part.get("uncompressed_bytes") or
+                item.get("decoded_sha256") != part.get("uncompressed_sha256")):
+            raise ValueError(f"Source-product descriptor differs from its exact retained catalogue origin: {source_id}")
+        result[OWNED + relative_path] = item
+    return result
+
+
+def output_product_context(baseline, products, catalogue, metadata, attribution, input_pins):
+    staged = source_product_staged_descriptors(input_pins, catalogue)
     output = {}
     for source_id, product in products.items():
         source = next(x for x in catalogue["products"] if x["key"] == source_id)
@@ -533,7 +577,7 @@ def run(repo, commit, vintage, coordinated_window_id):
     rows.sort(key=lambda r: (r["component_id"], r["source_id"], r["source_feature_id"]))
     component_ids = sorted(component_geoms)
     product_context = output_product_context(baseline, products, catalogue, metadata, attribution,
-                                             {x["path"]: x for x in pins["files"]})
+                                             pins)
     result = {
         "version": 1,
         "scope": {"families": sorted(FAMILIES), "component_ids": component_ids,
