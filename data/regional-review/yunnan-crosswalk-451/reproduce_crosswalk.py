@@ -4,6 +4,7 @@ Requires Python 3.11+ and Shapely 2.x. Does not compare to legal boundaries.
 """
 from __future__ import annotations
 import hashlib, json
+from collections import Counter
 from pathlib import Path
 from shapely.geometry import shape
 
@@ -25,8 +26,11 @@ for f in doc["features"]:
     fid=str(p.get("shapeID", ""))
     all_features.append((fid,p,shape(f["geometry"])))
 selected=[x for x in all_features if x[0] in TARGETS]
-if {x[0] for x in selected} != set(TARGETS):
-    raise SystemExit("target source roster mismatch")
+counts=Counter(x[0] for x in selected)
+if set(counts) != set(TARGETS) or any(counts[fid] != 1 for fid in TARGETS):
+    raise SystemExit("target source IDs must each occur exactly once")
+if any(p.get("shapeName") != TARGETS[fid] for fid,p,g in selected):
+    raise SystemExit("source feature name does not match reviewed target roster")
 rows=[]
 for fid,p,g in sorted(selected):
     neighbors=[]
