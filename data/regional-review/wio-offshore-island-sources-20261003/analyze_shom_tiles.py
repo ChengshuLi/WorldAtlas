@@ -108,10 +108,33 @@ def validate_capture_membership(cap):
         raise ValueError("catalog metadata/listing membership mismatch")
     return record_map,listing_map
 
+def authenticate_listings(listing_map):
+    """Verify every saved package-list response and its parsed listing fields."""
+    for key, row in listing_map.items():
+        rel = row.get("raw_path")
+        if not rel:
+            raise ValueError("raw package-file listing body missing: "+str(key))
+        path = CATALOG / rel
+        body = path.read_bytes()
+        if len(body) != row["bytes"] or sha256(body).hexdigest() != row["sha256"]:
+            raise ValueError("package-file listing body hash mismatch: "+str(key))
+        if json.loads(body).get("downloadFiles", []) != row["files"]:
+            raise ValueError("parsed package-file listing differs from retained body: "+str(key))
+
+def screen_component_bbox(component, bbox_wgs84, buffer_m=1000):
+    """Apply the declared lon/lat bbox screen to one feature component."""
+    project = Transformer.from_crs(4326,6933,always_xy=True).transform
+    component_m = transform(project, component)
+    bbox_m = transform(project, box(*bbox_wgs84))
+    return {"direct_intersection":bbox_m.intersects(component_m),
+            "within_buffer":bbox_m.intersects(component_m.buffer(buffer_m)),
+            "buffer_m":buffer_m,"analysis_crs":"EPSG:6933"}
+
 def main():
     cap=json.loads(CAPTURE.read_text())
     # Verify the retained original group-response bodies and exact inventory membership.
     records,listing=validate_capture_membership(cap)
+    authenticate_listings(listing)
     parsed={}
     for key,rec in records.items():
         row=parse_metadata(rec)
@@ -172,6 +195,9 @@ def main():
         "method":{"geometry":"transform each metadata EX_GeographicBoundingBox polygon and pinned feature components from WGS84 to EPSG:6933; count direct intersections and intersections with a 1,000 m buffer",
           "interpretation":"Catalog-bbox proximity only. An XML bbox is a rectangular catalog footprint and does not establish raster mask coverage, valid source pixels, island occurrence, coast accuracy, completeness, datum, or legal boundary. Absence of a nearby listed tile is only a candidate-source catalog gap.",
           "license":"Catalog XMLs and parsed file listings identify terms per package; attribution and reuse terms must be respected. Shom says not for navigation in product metadata."}}
+    for row in cap["package_file_listings"]:
+        path=CATALOG/row["raw_path"]
+        out["input_files"][str(path.relative_to(ROOT))]=file_hash(path)
     with OUT.open("w",encoding="utf-8") as f:
         f.write(json.dumps(out,indent=2,ensure_ascii=False)+"\n")
     print(json.dumps({"output":str(OUT.relative_to(ROOT)),"output_sha256":file_hash(OUT)["sha256"],
