@@ -352,13 +352,14 @@
   },
   "audit": {
     "result": "passed",
-    "method": "verify_classification_runs.audit_bundle after adding the producer-emitted source_geometry_compressed_bytes_each pin to the helper expected-input map. Without that one supplemental field, the repository verifier fails equality because its expected map omits this valid producer pin; all other pins matched exactly. No verifier/frozen producer code was changed after the classification run.",
+    "method": "The repository verifier was subsequently corrected to derive source_geometry_compressed_bytes_each from the complete pinned source gzip. The full run-one/run-two verifier passes against frozen-inputs-run-one-and-two.json; no production input or classifier was changed between the runs.",
     "reconstructed_component_roster": "10/10 exact",
     "contact_subject_roster": "4/4 exact",
     "local_intersection_roster": "21/21 exact",
     "point_fragment_roster": "2/2 exact",
     "file_hashes_and_caps": "all listed output files matched receipt hashes/sizes; largest below 32 MiB; bundle below 64 MiB",
-    "partition_closure": "all ten candidate residuals are zero"
+    "partition_closure": "all ten candidate residuals are zero",
+    "paired_verification": "passed; all input pins, producer hash, 13 listed result-file hashes, component shards and fragment shards match run two."
   },
   "interpretation_limits": [
     "ESA WorldCover 2021 v200 map classes describe its 2021 land-cover product only.",

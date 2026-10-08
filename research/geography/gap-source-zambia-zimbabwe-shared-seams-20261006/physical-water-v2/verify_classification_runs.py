@@ -23,7 +23,7 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def expected_inventory(geometry_path: Path) -> dict:
+def expected_inventory(geometry_path: Path, frozen_manifest_path: Path | None = None) -> dict:
     geometry_gzip = geometry_path.read_bytes()
     geometry_decoded = gzip.decompress(geometry_gzip)
     data = json.loads(geometry_decoded)
@@ -45,7 +45,7 @@ def expected_inventory(geometry_path: Path) -> dict:
     range_raw = range_path.read_bytes()
     range_manifest = json.loads(range_raw)
     ifd_path = BASE / range_manifest["ifd_metadata_range"]["file"]
-    frozen_path = BASE / "frozen-inputs.json"
+    frozen_path = frozen_manifest_path or (BASE / "frozen-inputs.json")
     frozen_raw = frozen_path.read_bytes()
     coverage_raw = (BASE / "source-coverage.json").read_bytes()
     geometry_two_raw = (PACKET / "run-two/source-geometry-results.json.gz").read_bytes()
@@ -62,6 +62,7 @@ def expected_inventory(geometry_path: Path) -> dict:
             "source_coverage_sha256": sha256(coverage_raw),
             "source_geometry_run_one_sha256": sha256(geometry_gzip),
             "source_geometry_run_two_sha256": sha256(geometry_two_raw),
+            "source_geometry_compressed_bytes_each": len(geometry_gzip),
             "source_geometry_uncompressed_bytes": len(geometry_decoded),
             "source_geometry_uncompressed_sha256": sha256(geometry_decoded),
         },
@@ -221,7 +222,7 @@ def controls_only() -> dict:
             "point_only_contact_evidence": [{"geometry_sha256": "synthetic-point-hash"}],
             "point_contact_fragments": [{"fragment_id": "synthetic-fragment"}],
         },
-        "input_pins": {"frozen_inputs_sha256": "f" * 64, "range_manifest_sha256": "r" * 64, "tiff_ifd_range_sha256": "i" * 64, "source_coverage_sha256": "c" * 64, "source_geometry_run_one_sha256": "1" * 64, "source_geometry_run_two_sha256": "2" * 64, "source_geometry_uncompressed_bytes": 123, "source_geometry_uncompressed_sha256": "u" * 64},
+        "input_pins": {"frozen_inputs_sha256": "f" * 64, "range_manifest_sha256": "r" * 64, "tiff_ifd_range_sha256": "i" * 64, "source_coverage_sha256": "c" * 64, "source_geometry_run_one_sha256": "1" * 64, "source_geometry_run_two_sha256": "2" * 64, "source_geometry_compressed_bytes_each": 123, "source_geometry_uncompressed_bytes": 123, "source_geometry_uncompressed_sha256": "u" * 64},
         "component_results": [{"component_id": "synthetic-component"}],
     }
     expected = {"component_ids": {"synthetic-component"}, "subject_ids": {"synthetic-subject"}, "contact_pairs": {("synthetic-component", "synthetic-subject")}, "fragment_ids": {"synthetic-fragment"}, "original_source_contact_geometry_hashes": ["synthetic-point-hash"], "expected_input_pins": synthetic["input_pins"], "expected_producer_sha256": "p" * 64}
@@ -241,20 +242,31 @@ def controls_only() -> dict:
             pass
         else:
             raise RuntimeError("Verifier adverse control accepted a mutated shard")
-    return {"result": "passed", "synthetic_two_run_reproducibility": report["result_files_sha256_equal"], "exact_roster_checks": "passed", "mutation_rejected": True, "source_pixels_read": False}
+        wrong_pin = dict(expected)
+        wrong_pin["expected_input_pins"] = dict(expected["expected_input_pins"])
+        wrong_pin["expected_input_pins"]["source_geometry_compressed_bytes_each"] += 1
+        try:
+            audit_bundle(one_dir, "one", wrong_pin)
+        except RuntimeError as exc:
+            if "input pins" not in str(exc):
+                raise
+        else:
+            raise RuntimeError("Verifier adverse control accepted an incorrect compressed-geometry byte pin")
+    return {"result": "passed", "synthetic_two_run_reproducibility": report["result_files_sha256_equal"], "exact_roster_checks": "passed", "mutation_rejected": True, "compressed_geometry_pin_mutation_rejected": True, "source_pixels_read": False}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--controls-only", action="store_true", help="test the verifier against synthetic complete bundles; no raster data is read")
     parser.add_argument("--inventory-only", action="store_true", help="verify expected rosters from preserved vector inputs; no raster data is read")
+    parser.add_argument("--frozen-inputs", type=Path, help="use a preserved exact frozen-input manifest, e.g. the manifest recorded in completed run receipts")
     args = parser.parse_args()
     if args.controls_only and args.inventory_only:
         parser.error("--controls-only and --inventory-only are mutually exclusive")
     if args.controls_only:
         print(json.dumps(controls_only(), sort_keys=True, indent=2))
         return
-    expected = expected_inventory(PACKET / "run-one/source-geometry-results.json.gz")
+    expected = expected_inventory(PACKET / "run-one/source-geometry-results.json.gz", args.frozen_inputs)
     if args.inventory_only:
         if (len(expected["component_ids"]), len(expected["subject_ids"]), len(expected["contact_pairs"]), len(expected["fragment_ids"])) != (10, 4, 21, 2):
             raise RuntimeError("Preserved source comparison does not match the complete #1234 subject roster")
