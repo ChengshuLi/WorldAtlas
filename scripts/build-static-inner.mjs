@@ -4,6 +4,7 @@ import { build } from 'vite';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import { createHash } from 'node:crypto';
 import {assertPackageStage} from './package-build.mjs';
+import {requireValidatedGeometryMigrations} from './prepare-geographic-release.mjs';
 assertPackageStage();
 import {restoreCanonicalProducts} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
 await fs.mkdir('.cache',{recursive:true});
@@ -25,6 +26,21 @@ const {validateBuildContextStage: validateCurrentBuildContext,BUILD_CONTEXT_STAG
 const {packageNativeLatitudes} = await import('./package-native-latitudes.mjs');
 const {rebindCoverageManifest} = await import('./rebind-coverage-manifest.mjs');
 const {foldCoverageContinuation,selectBuildContextValidator} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs');
+function releaseBuildContextBaselines(context) {
+  const results=[context.geometryValidation,context.coverageContinuation.originalGeometryValidation];
+  const expected=context.receipt.migration.locations;
+  if(!Number.isSafeInteger(expected)||expected<=0||new Set(results).size!==2)throw Error('Complete distinct context validation results required');
+  for(const result of results){
+    requireValidatedGeometryMigrations(result);
+    if(!Array.isArray(result.baselineFeatures)||result.baselineFeatures.length!==expected)throw Error('Complete validated baseline work arrays required');
+  }
+  // These full rows have already passed both complete validations. This builder
+  // consumes only the live branded proofs and disposition sets in coverage folds.
+  // General validators and their other callers keep their own baselineFeatures.
+  for(const result of results)result.baselineFeatures=null;
+  for(const result of results)requireValidatedGeometryMigrations(result);
+  return {results:2,released_baseline_feature_references:expected*2,proofs_and_dispositions_retained:true};
+}
 const contextStage=await fs.readFile(BUILD_CONTEXT_STAGE_PATH,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
 const validateBuildContextStage=selectBuildContextValidator(contextStage,{legacy:validateOriginalBuildContext,current:validateCurrentBuildContext});
 const {readGeographicReleaseManifest,decodeGeographicReleaseBatch} = await import('./read-geographic-release-manifest.mjs');
@@ -50,6 +66,7 @@ const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership(
 const fixedGrid=selectedGrid?.manifest;
 const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
 const nativeContextInputStage=nativeBuildContext?.receipt??null;
+if(nativeBuildContext?.coverageContinuation)releaseBuildContextBaselines(nativeBuildContext);
 const db = openDatabase();
 try {
   seedDatabase(db);

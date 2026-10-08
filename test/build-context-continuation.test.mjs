@@ -14,7 +14,12 @@ test('build context dispatch preserves original realm and exact two-target conti
  assert.equal(legacyCalls,1);assert.equal(currentCalls,1);
  assert.throws(()=>selectBuildContextValidator({version:2,kind:'retained-identity-context-continuation-v2',issue:1295},{legacy,current:{}}));
 });
-import {validateGeometryMigrations} from '../scripts/prepare-geographic-release.mjs';
+import {validateGeometryMigrations,requireValidatedGeometryMigrations} from '../scripts/prepare-geographic-release.mjs';
+import vm from 'node:vm';
+const builder=await fs.readFile('scripts/build-static-inner.mjs','utf8');
+const releaseSource=builder.match(/function releaseBuildContextBaselines\(context\) \{[\s\S]*?\n}/)[0];
+const realm=vm.createContext({requireValidatedGeometryMigrations,Number,Set,Array,Error});
+vm.runInContext(releaseSource+';globalThis.release=releaseBuildContextBaselines;',realm);
 import {footprintHash} from '../scripts/check-prepared.mjs';
 const digest=b=>createHash('sha256').update(b).digest('hex');
 const physical=JSON.parse(await fs.readFile('data/coverage-classification/manifest.json'));
@@ -37,6 +42,16 @@ test('strict ordered two-step fold retains all physical fields and both actual m
    steps.push({originalGrid:grids[i],originalGridSha256:gridHashes[i],selectedGrid:grids[i+1],selectedGridSha256:gridHashes[i+1],predecessorRelease:releases[i],release:releases[i+1],geometryValidation});
   }
   const source={...physical,footprints_sha256:releases[0].footprints_sha256},args={originalGrid:grids[0],originalGridSha256:gridHashes[0],selectedGrid:grids[2],selectedGridSha256:gridHashes[2],release:releases[2],steps};
+  const beforeRelease=JSON.stringify(foldCoverageContinuation(source,args));
+  const proofsBefore=steps.map(step=>JSON.stringify({...step.geometryValidation,baselineFeatures:null}));
+  assert.throws(()=>realm.release({receipt:{migration:{locations:1}},geometryValidation:structuredClone(steps[1].geometryValidation),coverageContinuation:{originalGeometryValidation:steps[0].geometryValidation}}),/complete geometry migration validation/);
+  assert.throws(()=>realm.release({receipt:{migration:{locations:2}},geometryValidation:steps[1].geometryValidation,coverageContinuation:{originalGeometryValidation:steps[0].geometryValidation}}),/baseline work arrays/);
+  assert(steps.every(step=>step.geometryValidation.baselineFeatures.length===1));
+  const released=realm.release({receipt:{migration:{locations:1}},geometryValidation:steps[1].geometryValidation,coverageContinuation:{originalGeometryValidation:steps[0].geometryValidation}});
+  assert.equal(released.released_baseline_feature_references,2);
+  for(let i=0;i<2;i++){requireValidatedGeometryMigrations(steps[i].geometryValidation);assert.equal(steps[i].geometryValidation.baselineFeatures,null);assert.equal(JSON.stringify(steps[i].geometryValidation),proofsBefore[i]);}
+  assert.equal(JSON.stringify(foldCoverageContinuation(source,args)),beforeRelease,'Both real branded coverage folds are byte-identical after releasing unused work arrays');
+  const pair=steps[1].geometryValidation.pairs[0],previous=pair.history_transfer;pair.history_transfer='forged';assert.throws(()=>foldCoverageContinuation(source,args),/complete geometry migration validation/);pair.history_transfer=previous;
   const out=foldCoverageContinuation(source,args),restored=structuredClone(out);delete restored.ownership_binding;
   for(const key of ['release_id','footprints_sha256','canonical_grid_sha256'])restored[key]=source[key];
   assert.deepEqual(restored,source);assert.equal(out.ownership_binding.previous_associations.length,1);assert.equal(out.ownership_binding.previous_associations[0].geometry_migration.predecessor_release_id,releases[0].id);assert.equal(out.ownership_binding.geometry_migration.successor_release_id,releases[2].id);
