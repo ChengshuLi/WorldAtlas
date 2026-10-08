@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[3]
 PACKET = Path(__file__).resolve().parent
 MANIFEST_PATH = PACKET / 'evidence-quality.json'
 OWNED = 'research/geography/india-western-gap-source-fitness-20261007/'
-VINTAGE = 'coverage-screen-2026-10-08-02'
+VINTAGE = 'coverage-screen-2026-10-08-03'
 MAX_FILE_BYTES = 32 * 1024 * 1024
 
 
@@ -352,8 +352,8 @@ def main():
         'baseline_commit': manifest['baseline']['commit'],
         'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'runtime': {'python': sys.version.split()[0], 'shapely': __import__('shapely').__version__, 'geos': __import__('shapely').geos_version_string},
-        'family': {'id': 'gap-source-batch:ff84042d9e10553c98925ed5', 'selected_rank_of_711': 8, 'complete_member_count': len(subject_ids), 'subject_ids_sha256': manifest['subject_ids_sha256']},
-        'selection': {'collision_context_issue': 111, 'collision_interpretation': 'contact-only context; no exact member subject match found', 'priority_rank_reconstruction': 'retained rank selection artifacts pinned; rank not recomputed in this source-coverage run'},
+        'family': {'id': 'gap-source-batch:ff84042d9e10553c98925ed5', 'complete_member_count': len(subject_ids), 'subject_ids_sha256': manifest['subject_ids_sha256']},
+        'selection': {'collision_context_issue': 111, 'collision_interpretation': 'contact-only context; no exact member subject match found', 'priority_rank_reconstruction': 'reproduced in the separately bounded selection-ranking report using all 14 family output shards and the complete source-fitness slice'},
         'input_accounting': {'baseline_files': len(manifest['baseline']['files']), 'baseline_phase_consumed_bytes_including_decoded_parts': sum(baseline.consumed.values()), 'source_reconstruction': 'All compressed parts independently authenticated, decoded per part, concatenated only into a streaming digest/feature parser; ADM3 original exceeds the per-file decoded limit and was never materialized as a single file.', 'source_originals': original_product_hashes},
         'products': source_summaries,
         'physical_interpretation': {'independent_dated_land_water_evidence_found': False, 'physical_authority': 'unapproved', 'interpretation': 'ADM2 and ADM3 are administrative reference products. Their overlaps or containment can describe source-relative administrative coverage only; they do not establish dated dry-land versus inland-water truth for any candidate.', 'missing_fact': 'An independent, authoritative physical-surface observation with a date and resolution suitable for each of the 18 candidate pointsets, specifically distinguishing dry land from inland water where relevant.', 'geometry_repairs': 'none', 'area_or_distance_measurements': 'none'},
@@ -374,6 +374,20 @@ def main():
     )
     report['selection_input_sha256'] = hashlib.sha256(canonical({
         key: manifest['baseline']['pins'][key] for key in selection_pin_keys
+    })).hexdigest()
+    rank_report_path = PACKET / 'selection-ranking' / 'report.json'
+    rank_report_raw = rank_report_path.read_bytes()
+    rank_report = json.loads(rank_report_raw)
+    if rank_report.get('baseline_commit') != manifest['baseline']['commit'] or rank_report.get('target_family_id') != 'gap-source-batch:ff84042d9e10553c98925ed5':
+        raise ValueError('Selection rank report does not match this coverage-screen baseline/family')
+    report['selection']['rank_report_path'] = str(rank_report_path.relative_to(ROOT))
+    report['selection']['rank_report_sha256'] = hashlib.sha256(rank_report_raw).hexdigest()
+    report['selection']['reconstructed_rank'] = rank_report['selected_family_rank']
+    report['selection']['reconstructed_rank_denominator'] = rank_report['ranked_source_fitness_family_count']
+    report['selection_input_sha256'] = hashlib.sha256(canonical({
+        'coverage_pins': {key: manifest['baseline']['pins'][key] for key in selection_pin_keys},
+        'selection_rank_input_sha256': rank_report['selection_input_sha256'],
+        'selection_rank_report_sha256': report['selection']['rank_report_sha256'],
     })).hexdigest()
     source_fitness_witnesses = sorted(
         sid for sid, record in fit_rows.items()

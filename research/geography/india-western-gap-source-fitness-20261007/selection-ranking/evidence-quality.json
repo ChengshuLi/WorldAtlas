@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "issue": 1432,
+  "lane": "source-only",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "physical-component:000f8ceae5d2a99223959081d563a10b524519680b495e98e0ab26acf5feafe7",
+    "physical-component:0b0f4f8da263777fd7e59ebfd90ba6545811dd8014832cf1a91fc10ad2a78194",
+    "physical-component:158d29fe97181ce35bcbee0548005905634f6dfae7083fde2346a0f8a1d88bf5",
+    "physical-component:16a15562778f813213a723286dc05b997683ea5d6c88e421bd533dda812875da",
+    "physical-component:300746aaaeeeaf86e3782f48d123d367aab071fabc57d87028d897ed444184b5",
+    "physical-component:36ffb10735d8d7d402912f989ff500524a686e86a2f636efc100acc56b9d2ba0",
+    "physical-component:4c9fc7c98e4c74fba00b685e964f1082726a32488d14987811702efabc6947ac",
+    "physical-component:777631d5e6656693b99bbebff66787db117ac0e7595fb8b80d5d032ac0659038",
+    "physical-component:87d5810b83156c3f47cd05e5221d064dbf80622f98706a593ec08548d1588364",
+    "physical-component:9bfcc12c85f301e0745895e459345d8f81a1abe87b317188d1fc4c82c5989477",
+    "physical-component:9db43066a4445eede1df1316d18dd6ff40393734a09a720207c5f14685487a2c",
+    "physical-component:a1238cf0d19f4b0a045b41418061764b2ffa076128c4d7718a4a0b6693be1d7c",
+    "physical-component:a5caa084567455808fecd8aec8f98eff8eb24e41498c28eff9b740962c505401",
+    "physical-component:c9ab9d9b1f31057510a02095d979ec7126cd62fd780793d5c2bba7a775759989",
+    "physical-component:d5085885c61def27a4994e0603af5328dc208c342ad9787a1b4d1f98e45cfb0b",
+    "physical-component:d8a7c45330ea4f423c70a95cd8bb8a510225b04bcea292ffb5574e19d323d1ca",
+    "physical-component:e547c85631bb512b40659a4fbb669c704379bd7a2422ac1cf6ed837c2af171b9",
+    "physical-component:f39a89a7d4dd30b99fcd8f6f98b0394c5a17d4e406144262e63c2d0b549df746"
+  ],
+  "subject_ids_sha256": "37dd61b45ab3a5b85e65456f3f9b8e1aa0544ab026118de72e213ca91c14cde5",
+  "baseline": {
+    "commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+    "files": [
+      {
+        "path": "scripts/physical_gap_priority.py",
+        "bytes": 17403,
+        "sha256": "26ff1467cef85a0a30c21334ad9c2a6be4a0d635bae50ca4940086853773ab28",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1730300,
+        "uncompressed_sha256": "e189f3ca731cf87433e423f88debce44e666e838fea1a8e57560b1f47f54422c"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "bytes": 1046123,
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "bytes": 1003990,
+        "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "947627e169a22ca6a4f877f7ea192467c150fcc43d4fad4d99d3599702029a75"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "bytes": 1001586,
+        "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "dbe45982cb0fbe54d9c8b61e0189a3f6a2093c407849326b250305723a49c0f0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "bytes": 1063935,
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "bytes": 987691,
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "3d329a587e2e06a426dc802e04abfe01726d86657acfc469287cfe668c8102a8"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "bytes": 1026831,
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "bytes": 1493537,
+        "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8d270e713aa1ec33b8b279ae71224b7c2996053e1c2aced441723df8e82c80bb"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "bytes": 962830,
+        "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1e9358bfccab1b75a7073f63d8b84d65f64b064244a1fdad76669378204d1fc0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "bytes": 1043652,
+        "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e354113a88c2d3deb64a327a469bcbca7c248b17083b3d739c18445b7b8c23df"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "bytes": 998433,
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "049ab5f591d9821e7279c6c7afccfc0b55ed5a9f81976edfe969315ee25df079"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "bytes": 1039493,
+        "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "23d37fcd6c369a1dca6ba0fbccea55bc40bbeb74a340b4cca6752ca0d78cf231"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "bytes": 1081053,
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "bytes": 965771,
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a1663477a0e01de8bb56736262b57e95c3c49647d54db95c4d2fd6d86600c328"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "bytes": 247084,
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2171381,
+        "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f"
+      }
+    ],
+    "pins": {
+      "priority_order_code": "26ff1467cef85a0a30c21334ad9c2a6be4a0d635bae50ca4940086853773ab28",
+      "routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "source_fit_slice": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "routing_families_000": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+      "routing_families_001": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+      "routing_families_002": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+      "routing_families_003": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "routing_families_004": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+      "routing_families_005": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+      "routing_families_006": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+      "routing_families_007": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+      "routing_families_008": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+      "routing_families_009": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+      "routing_families_010": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+      "routing_families_011": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+      "routing_families_012": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+      "routing_families_013": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac"
+    },
+    "pin_files": {
+      "priority_order_code": "scripts/physical_gap_priority.py",
+      "routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "source_fit_slice": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+      "routing_families_000": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+      "routing_families_001": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+      "routing_families_002": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+      "routing_families_003": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+      "routing_families_004": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+      "routing_families_005": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+      "routing_families_006": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+      "routing_families_007": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+      "routing_families_008": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+      "routing_families_009": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+      "routing_families_010": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+      "routing_families_011": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+      "routing_families_012": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+      "routing_families_013": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz"
+    }
+  },
+  "sources": [
+    {
+      "id": "pinned-routing-rank-inputs",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/64770c1a8c82c3626344d3d5ce322cdcb839ea2e/coordination/engineering/global-actionability-routing-20261007/results",
+      "role": "Pinned complete family ranking outputs and source-fitness slice",
+      "vintage": "2026-10-07 actionability routing snapshot",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal repository evidence; redistribution terms are not assessed in this source-ranking packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore the exact pinned Git blobs from the baseline commit listed in this manifest.",
+      "limit": "This source packet verifies selection accounting only; it does not establish geographic source fitness or physical surface."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-ranking/run.py",
+      "bytes": 12523,
+      "sha256": "6fa24d96d4cd68dfefeea39cd1ba5fc3cf82c80982f64a8dc69a39382c311595",
+      "hash_kind": "file-bytes",
+      "role": "method-code"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-ranking/report.json",
+      "bytes": 6409,
+      "sha256": "e881b2f314f975520aa485b2525595fcf0d8913e0a0ce085d8d52474c0dde14b",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-ranking/publication.json",
+      "bytes": 262,
+      "sha256": "cac384796cc86bebeb6be63a311f3950332f9908097ba96eeea58b25de6194a3",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "complete-family-rank-reconstruction",
+      "kind": "source",
+      "description": "Count unique families in the complete source-fitness slice; retrieve each family best-rank tuple from the complete immutable family shards; sort by the pinned ORDER_NAMES in ascending lexicographic order and locate the selected family.",
+      "software": "Python 3.12.14; gzip; standard-library JSON and SHA-256",
+      "units": "families and one-based ordinal rank"
+    }
+  ],
+  "commands": [
+    "python3 research/geography/india-western-gap-source-fitness-20261007/selection-ranking/run.py",
+    "node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/selection-ranking/evidence-quality.json"
+  ],
+  "metrics": [
+    {
+      "id": "ranked_source_fitness_family_count",
+      "value": 711,
+      "unit": "families",
+      "vintage": "baseline",
+      "input_sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "input_set_sha256": "289d819fc81e9781e69352b4a05dd8b3db44a7b8927d25979d4a5d68ae996309",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Unique complete families in pinned source-fitness slice"
+    },
+    {
+      "id": "selected_family_rank",
+      "value": 8,
+      "unit": "rank",
+      "vintage": "baseline",
+      "input_sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+      "input_set_sha256": "289d819fc81e9781e69352b4a05dd8b3db44a7b8927d25979d4a5d68ae996309",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "Selected family rank by pinned priority tuple"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "ranked_source_fitness_family_count",
+      "value": 711,
+      "unit": "families"
+    },
+    {
+      "metric_id": "selected_family_rank",
+      "value": 8,
+      "unit": "rank"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "ranked_source_fitness_family_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-ranking/report.json",
+      "json_pointer": "/ranked_source_fitness_family_count"
+    },
+    {
+      "metric_id": "selected_family_rank",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/selection-ranking/report.json",
+      "json_pointer": "/selected_family_rank"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The selected family is rank 8 among 711 families in the pinned source-fitness slice under the pinned priority tuple order.",
+      "source_ids": [
+        "pinned-routing-rank-inputs"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  }
+}
