@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "issue": 1509,
+  "method_id": "madagascar-source-handoff-correction",
+  "baseline_commit": "6f11174dd6206be6787959c323f7ff94e8bb811b",
+  "executed_reproducer_sha256": "8b4fb13f89178aa4e762812a1e72b56f8013da72a977225e8a8d4f538f020d04",
+  "source_hashes_verified": {
+    "law_2021_sha256": "bdb238f48484e8ddaa189c6d29c4be76ed27c2ff8aeb3eead192eda68b592210",
+    "law_2023_sha256": "15821ddd4a6012f2c3819baae2d00ae481ddac0cb17e139e10bc48390a9936a0",
+    "portal_sha256": "36da6e340125dec13607989fdb45252fbceed261a6222124327ef92a8a5f4477"
+  },
+  "legal_citations": [
+    {
+      "source_id": "MDG-LAW-2021-012",
+      "effect_article": 4,
+      "journal_article": 5,
+      "passed": true
+    },
+    {
+      "source_id": "MDG-LAW-2023-012",
+      "effect_article": 5,
+      "journal_article": 6,
+      "passed": true
+    }
+  ],
+  "scope": {
+    "subject_count": 119,
+    "parent_group_count": 22
+  },
+  "historical_district_metrics": {
+    "mananjary_symmetric_difference_percent_of_union": 0.741515803,
+    "manakara_symmetric_difference_percent_of_union": 1.049105499,
+    "source_file": "data/regional-review/madagascar-codab-followup-20261003/vintages/2026-10-07-v1-run-14/adm2-crosswalk-and-geometry.csv",
+    "source_commit": "af355b897c9e3607de610549cfffb890c8e43378",
+    "source_sha256": "7b2345ba194ecdf8c2831ce1361f28475a114bef99e8a644112b55f269051a34",
+    "interpretation_limit": "These archived whole-district comparisons do not test the Namorona commune transfer."
+  },
+  "namorona": {
+    "old_commune_code": "MG23209490",
+    "old_district": "Mananjary",
+    "old_district_code": "MG23209",
+    "old_region": "Vatovavy Fitovinany",
+    "old_region_code": "MG23",
+    "legal_new_parent": "Manakara district",
+    "old_adm3_file_rows": 1579,
+    "old_adm3_matching_records": 1,
+    "current_district_ids": [
+      "gb:MDG:ADM2:10022922B52512193010711",
+      "gb:MDG:ADM2:10022922B29911348985828"
+    ],
+    "current_district_parent": "framework:province:vatovavy-fitovinany:fd10ec52071e",
+    "codab_metadata": "Dataset reviewed 2026-07-06; source boundary creation 2009-08-01; valid_on 2018-08-10; version v01; package modified 2026-08-14. OCHA COD-AB specification defines valid_on as a dataset-version update date, not legal creation/effect date.",
+    "polygon_incorporation_of_transfer": "unknown",
+    "post_transfer_commune_code_or_territory_continuity": "unknown"
+  },
+  "portal": {
+    "table_rows": 114,
+    "unique_region_names": 23,
+    "missing_district_ids": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "antanimora_row_present": false,
+    "relevant_rows": [
+      [
+        "ANALANJIROFO",
+        87,
+        "MANANARA-NORD"
+      ],
+      [
+        "ANALANJIROFO",
+        88,
+        "MAROANTSETRA"
+      ],
+      [
+        "FITOVINANY",
+        55,
+        "IKONGO"
+      ],
+      [
+        "FITOVINANY",
+        56,
+        "MANAKARA"
+      ],
+      [
+        "FITOVINANY",
+        59,
+        "VOHIPENO"
+      ],
+      [
+        "VATOVAVY",
+        54,
+        "IFANADIANA"
+      ],
+      [
+        "VATOVAVY",
+        57,
+        "MANANJARY"
+      ],
+      [
+        "VATOVAVY",
+        58,
+        "NOSY VARIKA"
+      ]
+    ],
+    "title": "Régions et districts | Torolalana",
+    "description_claimed_regions": 23,
+    "description_claimed_districts": 119,
+    "response_bytes": 96340,
+    "response_sha256": "36da6e340125dec13607989fdb45252fbceed261a6222124327ef92a8a5f4477"
+  },
+  "historical_handoff": {
+    "original_1352_readme": {
+      "commit": "af355b897c9e3607de610549cfffb890c8e43378",
+      "path": "data/regional-review/madagascar-codab-followup-20261003/README.md",
+      "bytes": 11454,
+      "sha256": "ab53b394ec1b3031210eb47d6cdcc1be7893dce12083e1903581c9536e011141"
+    },
+    "original_1352_source_restoration": {
+      "commit": "af355b897c9e3607de610549cfffb890c8e43378",
+      "path": "data/regional-review/madagascar-codab-followup-20261003/source-restoration.json",
+      "bytes": 8501,
+      "sha256": "6f71c038b1e4a22f07ee9d957a6dad35783861a9ca90d9ef03b15f6985a94e9f"
+    },
+    "later_1368_readme": {
+      "commit": "839883ae281af7bf012f694698624a7ec77275e1",
+      "path": "data/regional-review/madagascar-codab-followup-20261003/README.md",
+      "bytes": 17205,
+      "sha256": "1151537aadcf4f374e828b79342cf216e47a25c40583fde9cb8a11f95ebb50a0"
+    },
+    "later_1368_source_restoration": {
+      "commit": "839883ae281af7bf012f694698624a7ec77275e1",
+      "path": "data/regional-review/madagascar-codab-followup-20261003/source-restoration.json",
+      "bytes": 17815,
+      "sha256": "456ef9a4248aa536b57b72629a2d8e617630ab25c36c5bf6b3f0f5b23d7468e3"
+    },
+    "source_restoration_has_article_7_claim_in_both_vintages": true,
+    "readmes_omit_namorona_transfer": true,
+    "later_readme_has_outdated_portal_wording": true
+  },
+  "issue_pins": {
+    "data/geography/part-13.json": {
+      "commit": "b765c34077b6d7c5745c7285f08e954edd62144a",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    "data/hierarchy.json": {
+      "commit": "b765c34077b6d7c5745c7285f08e954edd62144a",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "data/regional-review/regional-review-4f180b98473f1071/issue-scope.json": {
+      "commit": "b765c34077b6d7c5745c7285f08e954edd62144a",
+      "bytes": 24182,
+      "sha256": "0eff6bea634c5a22f46449409d401ab5f4fafd01b3d502e6e19d4e607af6f506"
+    },
+    "data/regional-review/regional-review-4f180b98473f1071/sources.json": {
+      "commit": "b765c34077b6d7c5745c7285f08e954edd62144a",
+      "bytes": 28554,
+      "sha256": "051676a2ee7a398ae1b7204cf25d74333faf4cb4cedb837f07308d5ed270d569"
+    },
+    "data/regional-review/regional-review-4f180b98473f1071/sources/mdg_admpop_adm3_2018.csv": {
+      "commit": "b765c34077b6d7c5745c7285f08e954edd62144a",
+      "bytes": 233690,
+      "sha256": "e099269fe3de11229b35bf332014b5c02c0bc77110768e9424265457dcace4e3"
+    },
+    "data/regional-review/madagascar-codab-followup-20261003/reproduction/reproduce_codab.py": {
+      "commit": "af355b897c9e3607de610549cfffb890c8e43378",
+      "bytes": 36369,
+      "sha256": "0057b3efb2df4de4d77d54f6d82d8667bb12b59bcdd3913a99ee8fc76c54242b"
+    },
+    "data/regional-review/madagascar-codab-followup-20261003/README.md": {
+      "commit": "839883ae281af7bf012f694698624a7ec77275e1",
+      "bytes": 17205,
+      "sha256": "1151537aadcf4f374e828b79342cf216e47a25c40583fde9cb8a11f95ebb50a0"
+    },
+    "data/regional-review/madagascar-codab-followup-20261003/source-restoration.json": {
+      "commit": "839883ae281af7bf012f694698624a7ec77275e1",
+      "bytes": 17815,
+      "sha256": "456ef9a4248aa536b57b72629a2d8e617630ab25c36c5bf6b3f0f5b23d7468e3"
+    }
+  },
+  "limits": [
+    "Preserve original 632/1352 and 1368 packets, their IDs, 22 parent groups, source bytes, results, metrics, failed attempts, and legal/source unknowns.",
+    "The exact broadcast, posting, and Journal Officiel publication dates for the two laws were not located.",
+    "The 2018 Namorona code and parent do not establish its post-transfer code or territory continuity.",
+    "The 2020 Atlas district polygons and 2018 OCHA reference do not establish whether either polygon incorporates the commune transfer.",
+    "The Torolalana page has no visible update date; its 119-district description conflicts with the 114 rows in the captured rendered table and missing IDs 8-12.",
+    "No current complete national administrative boundary inventory, commune-level geometry, legal/geographic approval, import authorization, or publication authorization is established here."
+  ],
+  "inherited_followups": [
+    "Restore a lawful, lineage-documented present-day district/commune boundary source and resolve Antanimora Sud commune membership against the decree and operational notice before any geographic correction is proposed.",
+    "Restore the former BNGRC predecessor archive from an authoritative source or leave the exact predecessor boundary lineage unresolved.",
+    "Obtain the exact statutory radio/television publication dates; promulgation dates are not substituted.",
+    "Resolve whether retained district polygons incorporate Namorona transfer from commune-level evidence; district comparisons alone cannot answer it.",
+    "Original #632 predecessor, source-lineage, rights and regional questions remain with their existing owner; this erratum does not claim the broader audit or region is complete."
+  ]
+}
