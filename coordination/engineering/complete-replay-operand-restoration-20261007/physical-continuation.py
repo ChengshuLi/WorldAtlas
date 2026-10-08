@@ -161,6 +161,16 @@ def main():
     exec(compile(run_raw, entry.__file__, 'exec'), entry.__dict__)
     pins, baseline, shared, guard, loaded, runtime, runtime_pin, runtime_index = entry.frozen(head)
     own_raw = baseline.pinned_bytes(OWNED + 'physical-continuation.py')
+    own_module = sys.modules[__name__]
+    def own_globals():
+        return {key: (json.dumps(value, sort_keys=True) if type(value) in
+                      (dict, list, int, float, str, bool, type(None)) else value)
+                for key, value in vars(own_module).items() if not key.startswith('__')}
+    own_snapshot = own_globals()
+    own_defaults = {key: repr((value.__defaults__, value.__kwdefaults__))
+                    for key, value in vars(own_module).items()
+                    if isinstance(value, types.FunctionType) and value.__module__ == __name__}
+    pin_snapshot = json.dumps([head, spec_pin, request_pin, freeze], sort_keys=True)
     guard.all_callables(sys.modules[__name__], own_raw)
     names = {'acquisition': OWNED + 'acquisition-phases.py',
              'driver': OWNED + 'acquisition-driver.py',
@@ -200,6 +210,15 @@ def main():
     local_callables = types.SimpleNamespace()
     setattr(local_proxy.main, '<locals>', local_callables)
     def live_guard():
+        need(own_globals() == own_snapshot, 'Own module global/function identity changed')
+        need({key: repr((value.__defaults__, value.__kwdefaults__))
+              for key, value in vars(own_module).items()
+              if isinstance(value, types.FunctionType) and value.__module__ == __name__} == own_defaults,
+             'Own function defaults changed')
+        need(json.dumps([head, spec_pin, request_pin, freeze], sort_keys=True) == pin_snapshot,
+             'Completion source/request/freeze closure binding changed')
+        need(live_guard.__defaults__ is None and live_guard.__kwdefaults__ is None,
+             'Actual live guard defaults changed')
         guard.callable_guard(local_proxy, own_raw, ['main.<locals>.live_guard'] +
                              (['main.<locals>.guarded_finish'] if finish_callback is not None else []))
         loaded['runtime'].loaded(runtime_pin, runtime_index, repo=repo, owned=OWNED, project_pins=pins)
@@ -223,7 +242,10 @@ def main():
                         need(repr((function.__defaults__, function.__kwdefaults__)) == class_defaults[name][(key, method_name)],
                              'Live method defaults changed')
         if finish_callback is not None:
-            need(phase.finish is finish_callback, 'Actual Phase completion callback changed')
+            need(phase.finish is finish_callback and finish_callback.__defaults__ is None and
+                 finish_callback.__kwdefaults__ is None and finish.__self__ is phase and
+                 finish.__func__ is modules['acquisition'].Phase.finish,
+                 'Actual Phase completion callback/default/closure changed')
     local_callables.live_guard = live_guard
     live_guard()
     adapter = modules['acquisition']
