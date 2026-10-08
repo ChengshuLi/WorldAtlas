@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "pid": 17672,
+  "process_group": 17672,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+    "run-four"
+  ],
+  "exit_code": 1,
+  "natural_terminal": true,
+  "owned_processes_absent_after_run": true,
+  "stop_reason": null,
+  "elapsed_seconds": 5.046,
+  "peak_sampled_group_rss_bytes": 124436480,
+  "final_sampled_group_rss_bytes": 13434880,
+  "rss_cap_bytes": 805306368,
+  "wall_deadline_seconds": 900,
+  "monitoring": "sampled/cooperative, not kernel-enforced",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py\", line 100, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py\", line 70, in main\n    encoded = baseline.materialized_bytes(row[\"path\"])\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/scripts/evidence/immutable.py\", line 109, in materialized_bytes\n    expected = self.pinned_bytes(name)\n               ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/scripts/evidence/immutable.py\", line 101, in pinned_bytes\n    raise ValueError('Consumed input/code lacks reviewed whole-file pin: ' + name)\nValueError: Consumed input/code lacks reviewed whole-file pin: native-00.bin.gz\n"
+}

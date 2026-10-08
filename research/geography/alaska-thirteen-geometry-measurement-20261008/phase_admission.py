@@ -142,7 +142,8 @@ def main() -> None:
             or parent_capture_receipt.get("selected_parent", {}).get("bytes") != parent_capture["bytes"]):
         raise ValueError("retained Alaska parent feature differs from its source-capture receipt")
     inputs.extend([parent_capture, file(CAMPAIGN / "sources/alaska-adm1-parent/receipt.json", "parent-feature-capture-receipt")])
-    decoded = [{"path": pin["path"], "bytes": pin["uncompressed_bytes"],
+    decoded = [{"path": (CUSTODY / "results" / pin["path"]).relative_to(ROOT).as_posix(),
+                "bytes": pin["uncompressed_bytes"],
                 "sha256": pin["uncompressed_sha256"], "role": "decoded-native-alias"}
                for pin in index["parts"]]
     decoded.append({"path": parent_pin["path"], "bytes": parent_pin["uncompressed_bytes"],
