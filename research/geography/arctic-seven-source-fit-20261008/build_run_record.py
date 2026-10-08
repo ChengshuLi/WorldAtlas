@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bind the completed Arctic r11 phase reservations and output receipts."""
+"""Bind the completed Arctic r12 phase reservations and output receipts."""
 from __future__ import annotations
 import argparse, hashlib, json, os, stat
 from pathlib import Path
@@ -51,7 +51,7 @@ def verify_unchanged(target,original):
   current=stream.read(OUTPUT_MAX+1)
  if current!=original:raise ValueError('Run-record output changed during computation')
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r11.json');parser.add_argument('--output',default='r11-execution-budget.json');args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json');parser.add_argument('--output',default='r12-execution-budget.json');args=parser.parse_args()
  target,existing_output=admit_output(args.output)
  plan_raw=read(args.phase_plan)
  if len(plan_raw)>1024*1024:raise ValueError('Oversized frozen phase plan')
@@ -83,7 +83,7 @@ def main():
   for descriptor in descriptors:descriptor_check(descriptor)
   unique_paths=set(phase['baseline_paths'])|set(phase['code_paths'])
   if phase.get('kind')=='native-shell':
-   native_lock=pins['research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r11.json']
+   native_lock=pins['research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r12.json']
    archive_paths=[f'data/semantic-evidence/part-{i:02}.bin' for i in range(6)]
    planned=(sum(pins[p]['bytes'] for p in unique_paths)+len(plan_raw)*5+
     phase['native_runtime_bytes']+phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+

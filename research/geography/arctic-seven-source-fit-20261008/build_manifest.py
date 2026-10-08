@@ -37,7 +37,7 @@ def verify_unchanged(target,original):
 def git(*args):
  global GIT_EXECUTABLE
  if GIT_EXECUTABLE is None:
-  lock=json.loads((P/'native-tools-lock-r11.json').read_text());GIT_EXECUTABLE=lock['commands']['git']
+  lock=json.loads((P/'native-tools-lock-r12.json').read_text());GIT_EXECUTABLE=lock['commands']['git']
   row=next(x for x in lock['files'] if x['path']==GIT_EXECUTABLE and x['kind']=='executable')
   executable=Path(GIT_EXECUTABLE)
   if executable.is_symlink() or not executable.is_file() or executable.stat().st_size!=row['bytes'] or sha(executable.read_bytes())!=row['sha256']:
@@ -97,33 +97,41 @@ output_paths += [f'vintages/r7-fit/{name}' for name in [
 output_paths += ['native-tools-lock-r8.json','native-tools-lock-r8.sh',
  'native-tools-lock-r9.json','native-tools-lock-r9.sh',
  'native-tools-lock-r10.json','native-tools-lock-r10.sh',
- 'phase-plan-r11.json','native-tools-lock-r11.json','native-tools-lock-r11.sh','r11-execution-budget.json']
-output_paths += [f'vintages/r11-native-extract/{name}' for name in [
+ 'native-tools-lock-r11.json','native-tools-lock-r11.sh',
+ 'phase-plan-r12.json','native-tools-lock-r12.json','native-tools-lock-r12.sh','r12-execution-budget.json']
+output_paths += [f'vintages/r12-native-extract/{name}' for name in [
  'native-archive-extraction.json','execution-receipt.json','publication.json']]
-output_paths += [f'vintages/r11-retired/{name}' for name in [
+output_paths += [f'vintages/r12-retired/{name}' for name in [
  'source-custody-phase2.json','retired-member-context-phase2.json','execution-receipt.json','publication.json']]
 for partition in 'abcd':
- output_paths += [f'vintages/r11-scan-{partition}/{name}' for name in [
+ output_paths += [f'vintages/r12-scan-{partition}/{name}' for name in [
   f'neighbor-scan-{partition}.json','execution-receipt.json','publication.json']]
-output_paths += [f'vintages/r11-fit/{name}' for name in [
+output_paths += [f'vintages/r12-fit/{name}' for name in [
  'candidate-decisions.json','proposed-additions.geojson','positive-control.json','negative-control.json',
  'execution-receipt.json','publication.json']]
 output_paths += [str(path.relative_to(P)) for path in sorted((P/'exploratory').rglob('*')) if path.is_file()]
 outputs=[desc(x) for x in output_paths]
-output_by_name={Path(x['path']).name:x for x in outputs}
+output_by_path={x['path']:x for x in outputs}
 subjects=spec['subject_ids']; subject_hash=sha(json.dumps(sorted(subjects),separators=(',',':')).encode())
-results=json.loads((P/'vintages/r11-fit/candidate-decisions.json').read_bytes())['results']
-retired_context_raw=(P/'vintages/r11-retired/retired-member-context-phase2.json').read_bytes()
+fit_path='research/geography/arctic-seven-source-fit-20261008/vintages/r12-fit/candidate-decisions.json'
+retired_path='research/geography/arctic-seven-source-fit-20261008/vintages/r12-retired/retired-member-context-phase2.json'
+fit_raw=(ROOT/fit_path).read_bytes(); fit_output=json.loads(fit_raw)
+results=fit_output['results']
+retired_context_raw=(ROOT/retired_path).read_bytes()
 retired_context=json.loads(retired_context_raw)
+fit_evaluation_commit=json.loads((P/'vintages/r12-fit/execution-receipt.json').read_bytes())['baseline_commit']
+def archived_metric(metric_id,value,unit,path,raw):
+ return {'id':metric_id,'value':value,'unit':unit,'vintage':'archived','input_sha256':sha(raw),
+  'evaluation_commit':fit_evaluation_commit,'input_file':{'path':path,'commit':'candidate'}}
 metrics=[
  {'id':'active-feature-count','value':49625,'unit':'features','vintage':'baseline','input_sha256':pins['world_index'],'evaluation_commit':BASE},
- {'id':'candidate-count','value':7,'unit':'components','vintage':'current','input_sha256':sha((P/'vintages/r11-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'repair-ready-count','value':sum(r['decision']=='repair-ready-geometric-proposal' for r in results),'unit':'components','vintage':'current','input_sha256':sha((P/'vintages/r11-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'unresolved-count','value':sum(r['decision']!='repair-ready-geometric-proposal' for r in results),'unit':'components','vintage':'current','input_sha256':sha((P/'vintages/r11-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'exact-one-envelope-count','value':sum(r['exactly_one_covering_named_envelope_both_editions'] for r in results),'unit':'components','vintage':'current','input_sha256':sha((P/'vintages/r11-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'native-ecoregion-feature-count','value':218,'unit':'features','vintage':'current','input_sha256':sha((P/'vintages/r11-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'native-unique-ecoregion-id-count','value':194,'unit':'ids','vintage':'current','input_sha256':sha((P/'vintages/r11-fit/candidate-decisions.json').read_bytes()),'evaluation_commit':BASE},
- {'id':'retired-reference-location-count','value':retired_context['location_count'],'unit':'locations','vintage':'current','input_sha256':sha(retired_context_raw),'evaluation_commit':BASE},
+ archived_metric('candidate-count',fit_output['component_count'],'components',fit_path,fit_raw),
+ archived_metric('repair-ready-count',fit_output['repair_ready_count'],'components',fit_path,fit_raw),
+ archived_metric('unresolved-count',fit_output['unresolved_count'],'components',fit_path,fit_raw),
+ archived_metric('exact-one-envelope-count',fit_output['exactly_one_covering_named_envelope_count'],'components',fit_path,fit_raw),
+ archived_metric('native-ecoregion-feature-count',fit_output['native_feature_count'],'features',fit_path,fit_raw),
+ archived_metric('native-unique-ecoregion-id-count',fit_output['native_unique_ecoregion_id_count'],'ids',fit_path,fit_raw),
+ archived_metric('retired-reference-location-count',retired_context['location_count'],'locations',retired_path,retired_context_raw),
 ]
 sources=[
  {'id':'aafc-native-ecoregions','url':'https://www.arcgis.com/home/item.html?id=ee462b0692cc4005aefee69dc44f010d','role':'Exact original AAFC native ecoregion source member; ECO15/ECO25 coverage','vintage':'Registered source archive member retrieved 2026-10-01; underlying effective date not established','retrieved_at':'2026-10-01','license':{'status':'redistributable','terms':'Open Government Licence – Canada as stated by linked AAFC source item'},'retention':'retained','verification':'verified','temporal_status':'unknown','files':[source_files[0]]},
@@ -148,18 +156,18 @@ manifest={'version':1,'issue':1481,'lane':'geography','worker_id':'01a112c1-ac99
  'methods':[{'id':'exact-aafc-envelope-and-topology','kind':'geography','helper_version':'worldatlas-evidence-geometry-v1','description':'GEOS/Shapely exact coverage, intersection, union, difference, validity, and equality predicates on stored GeoJSON coordinate values; geodesic candidate-area diagnostics use the pinned shared WGS84 helper. No snapping, buffering, repair, or tolerance is used for acceptance.','software':'Python 3.12; Shapely 2.1.2 / GEOS 3.13.1; pyproj WGS84 helper','units':'m2 for candidate area; square degrees for exact planar residuals; degrees for coordinate contact length','axis_order':'longitude-latitude','crs':'EPSG:4326','area_method':'WGS84 straight-source-edge ellipsoidal integral','distance_method':'WGS84 inverse geodesic'}],
  'metrics':metrics,'summaries':[{'metric_id':'candidate-count','value':7,'unit':'components'},{'metric_id':'repair-ready-count','value':3,'unit':'components'},{'metric_id':'unresolved-count','value':4,'unit':'components'},{'metric_id':'exact-one-envelope-count','value':7,'unit':'components'},{'metric_id':'active-feature-count','value':49625,'unit':'features'}],
  'metric_bindings':[
-  {'metric_id':'active-feature-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/active_feature_count'},
-  {'metric_id':'candidate-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/component_count'},
-  {'metric_id':'repair-ready-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/repair_ready_count'},
-  {'metric_id':'unresolved-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/unresolved_count'},
-  {'metric_id':'exact-one-envelope-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/exactly_one_covering_named_envelope_count'},
-  {'metric_id':'native-ecoregion-feature-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/native_feature_count'},
-  {'metric_id':'native-unique-ecoregion-id-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/native_unique_ecoregion_id_count'},
-  {'metric_id':'retired-reference-location-count','path':output_by_name['retired-member-context-phase2.json']['path'],'json_pointer':'/location_count'}],
+  {'metric_id':'active-feature-count','path':fit_path,'json_pointer':'/active_feature_count'},
+  {'metric_id':'candidate-count','path':fit_path,'json_pointer':'/component_count'},
+  {'metric_id':'repair-ready-count','path':fit_path,'json_pointer':'/repair_ready_count'},
+  {'metric_id':'unresolved-count','path':fit_path,'json_pointer':'/unresolved_count'},
+  {'metric_id':'exact-one-envelope-count','path':fit_path,'json_pointer':'/exactly_one_covering_named_envelope_count'},
+  {'metric_id':'native-ecoregion-feature-count','path':fit_path,'json_pointer':'/native_feature_count'},
+  {'metric_id':'native-unique-ecoregion-id-count','path':fit_path,'json_pointer':'/native_unique_ecoregion_id_count'},
+  {'metric_id':'retired-reference-location-count','path':retired_path,'json_pointer':'/location_count'}],
  'change_receipts':change_receipts,
  'validation':[
- {'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r11-fit/positive-control.json'},
-  {'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','outcome':'passed','scope':'decision-gate-unit-check-plus-cross-group-source-envelope-check','adverse_input_fixture':False,'evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r11-fit/negative-control.json'}],
+ {'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r12-fit/positive-control.json'},
+  {'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','outcome':'passed','scope':'decision-gate-unit-check-plus-cross-group-source-envelope-check','adverse_input_fixture':False,'evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r12-fit/negative-control.json'}],
  'conclusions':conclusions,'stages':{'research':'partial','implementation':'proposed','geographic_approval':'unapproved'},
  'commands':['bash research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh EXECUTION_COMMIT PLAN_SHA256 NATIVE_TOOLS_LOCK_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-{a,b,c,d} --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline EXECUTION_COMMIT --plan-sha256 PLAN_SHA256','python research/geography/arctic-seven-source-fit-20261008/build_run_record.py','python research/geography/arctic-seven-source-fit-20261008/build_manifest.py','node scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json']}
 raw=(json.dumps(manifest,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()
