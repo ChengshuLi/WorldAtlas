@@ -9,9 +9,9 @@ The predecessor producer source and immutable helper are authenticated from thei
 From the repository root with CPython 3.12.14 (substitute your installed `python3.12` executable):
 
 ```sh
-python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --vintage run-20261008-a1
-python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --vintage run-20261008-a2
-python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --compare run-20261008-a1 run-20261008-a2 --vintage compare-20261008-a1
+python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --vintage run-20261008-b1
+python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --vintage run-20261008-b2
+python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --compare run-20261008-b1 run-20261008-b2 --vintage compare-20261008-b1
 python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/test_publication.py
 node scripts/evidence-quality.mjs research/geography/chn-tjk-publication-integrity-1354/evidence-quality.json
 ```
