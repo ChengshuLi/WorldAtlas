@@ -1,6 +1,6 @@
 {
   "schema": "worldatlas-1381-evidence-baseline-compatibility:v1",
-  "recorded_at_utc": "2026-10-08T02:17:17Z",
+  "recorded_at_utc": "2026-10-08T02:22:00Z",
   "source_issue": 1381,
   "candidate_baseline_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
   "fresh_main_commit": "97291daccaa44e9c67bba9ae87ceaada641226da",
@@ -65,5 +65,12 @@
     "controls_only": "passed",
     "all_four_scientific_products_match_retained_original_bytes": true,
     "runner_runtime": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2"
+  },
+  "pr_base_commit": "bb0e027b40fffadb5ac29d70221d7635d336c9d3",
+  "reproduction_base_commit": "97291daccaa44e9c67bba9ae87ceaada641226da",
+  "intervening_main_commit": {
+    "sha": "bb0e027b40fffadb5ac29d70221d7635d336c9d3",
+    "scope": "Separate Nordic physical-reference research packet only",
+    "reproduction_inputs_or_runner_changed": false
   }
 }
