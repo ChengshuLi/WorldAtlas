@@ -88,6 +88,17 @@ function subjectJSON(file, name, vintage, readFile, maxFileBytes) {
 }
 
 function subjectFileBinding(value, manifest) {
+  if (value?.version === 2 && value.kind === 'gzip-jsonl-record') {
+    require(manifest.baseline.version === 2 &&
+      Object.keys(value).sort().join(',') === 'commit,kind,path,record_bytes,record_offset,record_sha256,version' &&
+      Number.isSafeInteger(value.record_offset) && value.record_offset >= 0 &&
+      Number.isSafeInteger(value.record_bytes) && value.record_bytes > 1 && hash(value.record_sha256),
+      'Invalid gzip JSONL record binding');
+    const file = baselineFile(manifest, {path: value.path, commit: value.commit});
+    require(file.uncompressed_sha256 !== undefined, 'Record needs whole decoded source pin');
+    return {...value};
+  }
+
   if (typeof value === 'string') return {path: safeEvidencePath(value), kind: 'direct'};
   if (value && Object.keys(value).sort().join(',') === 'commit,path') {
     const file = baselineFile(manifest, value);
@@ -132,6 +143,39 @@ function composedSubjectIds(collection, binding) {
     ids.add(id);
   }
   return ids;
+}
+
+// Original routing .bin.gz bodies are gzip JSONL byte-stream parts. Only complete
+// family records inside one authenticated part are eligible; split edge fragments
+// are never a subject reference. This is identity custody, not geographic approval.
+function familyRecordPart(file, readFile, maxFileBytes) {
+  require(file.bytes <= maxFileBytes && file.uncompressed_bytes <= maxFileBytes,
+    'Family record source exceeds ordinary decoded budget');
+  const raw = Buffer.from(readFile(file.path, file.commit));
+  require(raw.length === file.bytes && sha256(raw) === file.sha256,
+    'Family record whole encoded source drift');
+  const body = gunzipSync(raw, {maxOutputLength: maxFileBytes});
+  require(body.length === file.uncompressed_bytes && sha256(body) === file.uncompressed_sha256,
+    'Family record whole decoded source drift');
+  const records = new Map(), ids = new Set();
+  let start = 0;
+  while (start < body.length) {
+    const end = body.indexOf(10, start);
+    if (end < 0) break; // Original final split fragment cannot bind any subject.
+    const bytes = body.subarray(start, end + 1);
+    let row;
+    try { row = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(bytes)); }
+    catch (error) {
+      require(start === 0, 'Malformed complete family JSONL record');
+      start = end + 1; continue; // Original leading split fragment, never admitted.
+    }
+    require(row && !Array.isArray(row) && /^gap-source-batch:[a-f0-9]{24}$/.test(row.id ?? ''),
+      'Foreign/non-family original JSONL record');
+    require(!ids.has(row.id), 'Duplicate original family record identity'); ids.add(row.id);
+    records.set(start, {id: row.id, bytes: bytes.length, sha256: sha256(bytes)});
+    start = end + 1;
+  }
+  return records;
 }
 
 /** Identity-only projection from retained prior evidence, never a geometry/source certification. */
@@ -203,6 +247,27 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     require(typeof readFile.assertAncestor === 'function', 'Historical vintages require ancestry verification');
     for (const commit of new Set([manifest.baseline.commit, ...historicalFiles.map(file => file.commit)])) readFile.assertAncestor(commit);
   }
+  // Plan the complete encoded inventory and unique family decodes before the
+  // generic inspector can read or gunzip any body. Later inspection still checks
+  // every actual body, ordinary bound, descriptor identity and exact total.
+  if (manifest.lane === 'geography' && !manifest.baseline.subject_inventory &&
+    Object.values(manifest.baseline.subject_files ?? {}).some(value => value?.kind === 'gzip-jsonl-record')) {
+    const decoded = new Map();
+    for (const value of Object.values(manifest.baseline.subject_files)) {
+      const binding = subjectFileBinding(value, manifest);
+      if (binding.kind !== 'gzip-jsonl-record') continue;
+      const file = baselineFile(manifest, {path: binding.path, commit: binding.commit});
+      require(file.uncompressed_bytes <= maxFileBytes, 'Family record source exceeds ordinary decoded budget');
+      decoded.set(`${file.commit}:${file.path}`, file.uncompressed_bytes);
+    }
+    const completeFiles = [...historicalFiles, ...manifest.sources.filter(source => source.retention === 'retained')
+      .flatMap(source => source.files ?? []), ...manifest.outputs];
+    require(completeFiles.every(file => Number.isSafeInteger(file.bytes) && file.bytes >= 0 && file.bytes <= maxFileBytes),
+      'Complete record phase has invalid/oversized encoded descriptor');
+    require(completeFiles.reduce((sum, file) => sum + file.bytes, 0) +
+      [...decoded.values()].reduce((sum, bytes) => sum + bytes, 0) <= maxTotalBytes,
+      'Complete original family record phase exceeds byte budget');
+  }
   const pins = manifest.baseline.pins ?? {};
   for (const [key, value] of Object.entries(pins)) require(hash(value), `Malformed pin: ${key}`);
   for (const [key, value] of Object.entries(expectedPins ?? {})) require(pins[key] === value, `Baseline pin mismatch: ${key}`);
@@ -239,14 +304,34 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     const mappings = manifest.baseline.subject_files;
     require(mappings && subjectsHash(Object.keys(mappings)) === manifest.subject_ids_sha256,
       'Geography needs exact subject-to-containing-file inventory');
-    const bindings = new Map(), parsed = new Map(), composedIds = new Map();
+    const bindings = new Map(), parsed = new Map(), composedIds = new Map(), recordParts = new Map();
     for (const id of ids) {
       const binding = subjectFileBinding(mappings[id], manifest);
       const file = baselineFile(manifest, binding.commit === undefined ? binding.path : {path: binding.path, commit: binding.commit});
       const key = `${file.commit}:${file.path}`;
-      if (bindings.has(key)) require(JSON.stringify(bindings.get(key)) === JSON.stringify(binding),
+      if (bindings.has(key)) require(binding.kind === 'gzip-jsonl-record' ?
+        bindings.get(key).kind === binding.kind : JSON.stringify(bindings.get(key)) === JSON.stringify(binding),
         'Subjects sharing a source file must use one consistent identity binding');
       else bindings.set(key, binding);
+      if (binding.kind === 'gzip-jsonl-record') {
+        require(/^gap-source-batch:[a-f0-9]{24}$/.test(id), 'Family record binding cannot replace a geographic feature');
+        require(binding.record_bytes <= maxFileBytes &&
+          binding.record_offset + binding.record_bytes <= file.uncompressed_bytes,
+          'Family record range exceeds whole source/ordinary budget');
+        if (readFile) {
+          if (!recordParts.has(key)) {
+            require(total + file.uncompressed_bytes <= maxTotalBytes, 'Complete original family record phase exceeds byte budget');
+            total += file.uncompressed_bytes;
+            recordParts.set(key, familyRecordPart(file, readFile, maxFileBytes));
+          }
+          const record = recordParts.get(key).get(binding.record_offset);
+          require(record && record.id === id && record.bytes === binding.record_bytes &&
+            record.sha256 === binding.record_sha256,
+            'Missing/partial/foreign/drifted complete original family record');
+        }
+        limits.push(`${id}: immutable original family record authenticates identity only; physical class and geography remain unapproved`);
+        continue;
+      }
       if (readFile) {
         if (!parsed.has(key)) parsed.set(key, subjectJSON(file, file.path, file.commit, readFile, maxFileBytes));
         if (binding.kind === 'direct') {

@@ -1,0 +1,472 @@
+{
+  "version": 1,
+  "issue": 1475,
+  "lane": "engineering",
+  "worker_id": "01a11935-1ccd-7fa3-a01f-563ff29045ee",
+  "subject_ids": [
+    "gap-source-batch:74be953b1fb31c15200742da",
+    "gap-source-batch:65911e15791d12ebb2ccacf5",
+    "physical-component:04431dc98d19b4236a143d2c0bb388fed2e41d4768356cf5a74ae4b9194fd9bf",
+    "physical-component:0467413184087c1282e0b20ec7252d8dfe7e393e674b1902f9d2f8e5f10eeadd",
+    "physical-component:0bf1093e551def6fa258252e87e67ca4c4dd1a3847416a39164226514713e842",
+    "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276",
+    "physical-component:1d82eb920d887e65e0b7feace4b6ce606ba72f0dd4b64d8872bc6ff17594c52c",
+    "physical-component:29c61a4079291f4cf9fa96ca41c3561405cef2d2ad8afe80aa526904848969c2",
+    "physical-component:7450c83fcd14661b0c9115f0075f703ac96c64ea65ec0caa86702a1ef00db81e",
+    "physical-component:804dfb19fcd6f3fc68de442ae08f4ca553de8687df65d70b72dc1a3fae258eb9",
+    "physical-component:a133c2293fb153cd6628eb43b7518e55ea7db7f6c7f74178b854fd9641be86c5",
+    "physical-component:bee4ff4185a3775db6d8c51fdc2da0b0674b7629615933378147c6d0b4e778d4",
+    "physical-component:ca9c5207e4e4202ea32bd39636020e8f898783d03802fb3507efb816d2e525a3",
+    "physical-component:d461dff8a46f322a5c4d5aa7c7ddaaaee64f4c205227d09feeb3b93420f33fa8",
+    "physical-component:0b1a9310b0717d791b33e315035e22e83362b4b461283df57e6267d3d1d6c015",
+    "physical-component:658f2e100dd572e26c264f47481759420a413e73978799a8792e203637b3854b",
+    "physical-component:d76b0c2c3c68c11f128e13ad2a3528ae9bd624dedaed581e305431462cbfe7f9",
+    "gb:KGZ:ADM2:92254566B28866404519709",
+    "gb:KGZ:ADM2:92254566B65149347501284",
+    "gb:KGZ:ADM2:92254566B65536554507768",
+    "gb:TJK:ADM2:16282066B17537121350265",
+    "gb:TJK:ADM2:16282066B25952413622692",
+    "gb:TJK:ADM2:16282066B48594859138803",
+    "gb:TJK:ADM2:16282066B4928854450407",
+    "gb:TJK:ADM2:16282066B70669453487294",
+    "gb:TJK:ADM2:16282066B88100265425771"
+  ],
+  "subject_ids_sha256": "57a282cef985ac267dd8c58bf45669df6821c3f839e2801bfe8b2d30ca1fb119",
+  "baseline": {
+    "version": 2,
+    "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+    "files": [
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 23246,
+        "sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "docs/EVIDENCE_QUALITY.md",
+        "bytes": 9629,
+        "sha256": "b3c60f2f7a61b56cfc8108026023422615e1874edfb0b09f159c2032ada005de",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "test/evidence-quality.test.mjs",
+        "bytes": 14771,
+        "sha256": "a6ccee6f79315ea4fa47c4f8bef359bc1a4dceb9180c1940298239e357a21e5d",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "test/historical-evidence.test.mjs",
+        "bytes": 14693,
+        "sha256": "90d9e021d9f2f1ce917604a554ec9278693bb011c3be2119f4c09598e3420327",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 21870,
+        "sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 17819,
+        "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/github-quota.mjs",
+        "bytes": 1758,
+        "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/job-deadline.mjs",
+        "bytes": 4238,
+        "sha256": "c14b239a08d5b27f64253e164c8647b13ac0c593ffc21dc387982fbf11711a13",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 7069,
+        "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/research-import-gate.mjs",
+        "bytes": 335,
+        "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 22314,
+        "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "scripts/immutable-git-blobs.mjs",
+        "bytes": 2368,
+        "sha256": "36aeb2bc33eceb3782982b63e8d02199fd65893c0bc52781b7907f6915645645",
+        "hash_kind": "file-bytes",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "role": "original-code"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
+        "bytes": 1026831,
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "trusted_original_checker": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03",
+      "original_family_part": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141"
+    },
+    "pin_files": {
+      "trusted_original_checker": {
+        "path": "scripts/evidence-quality.mjs",
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6"
+      },
+      "original_family_part": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "original-family-records",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/c9122b55d20c4992fca5b0332e4faacbc08b139a/coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+      "role": "Original immutable family-routing source; identity only, not physical class or authority",
+      "vintage": "Original ancestor c9122b55d20c4992fca5b0332e4faacbc08b139a",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Original repository evidence; source rights compatibility remains unresolved and no permission is broadened"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the whole pinned original Git blob at the exact commit/path; authenticate full encoded and decoded hashes before selecting complete rows. Source already exists in original repository history.",
+      "limit": "Whole bytes/native family identity checked; geometry, physical class, authority, dates, cause, rights and ownership remain unapproved. No candidate registry or ancestry bypass."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/EVIDENCE_QUALITY.md",
+      "bytes": 11689,
+      "sha256": "738e4477862f9c52732e4582f4be190a21465e1a62f0457daf7cf14827714054",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/evidence-family-record-binding.test.mjs",
+      "bytes": 8556,
+      "sha256": "8127c85a11c79c6a3d265163452a877ac2a34c3e59cbb1c5e8d3f412fdca3222",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/README.md",
+      "bytes": 3391,
+      "sha256": "25ec9f02242f7e66f2088cc7d530a28ff075659ee130121db6139e9d94240045",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/attempt-history.json",
+      "bytes": 3918,
+      "sha256": "7c22d211f95742669c68301e9c39b54d3ef1bc6f43fbadfde2aa1719ec4f2cf3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-test-receipt.json",
+      "bytes": 1657,
+      "sha256": "979f1c9c5599aab5bf6500706cd13c244a231f6c80d7f51992f8fa67860a679c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-tests-after-review.json",
+      "bytes": 1893,
+      "sha256": "30457d49af0dbc8a6b38835ff5ce0d104ca5add96e1f7a72e2ed5b19f758e185",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-tests-after-review.txt",
+      "bytes": 5385,
+      "sha256": "2e37ad35a4e96809c6995cde7ccaea14392c74bcf7b9424a651d62e590750ae6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-tests.txt",
+      "bytes": 5252,
+      "sha256": "329fba04dc8e0b03d774395455699e6db03155220eea33088de9866cb529bd25",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/supplemental-admission-test.json",
+      "bytes": 527,
+      "sha256": "809ea921f538b37efbcd30dcf2ce0dafbd272413755cd6a821724365ee754b2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs",
+      "bytes": 10012,
+      "sha256": "f0c499f9d481b2daf7ed4fefe5aa71cebbcaa25b3b4ca6ff0a68f53ffd48b6b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-01/publication.json",
+      "bytes": 353,
+      "sha256": "8021e8a9289c8637dd468582c62661374855ce959879c1882f3c0b5f9a54f284",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-01/record-binding-controls.json",
+      "bytes": 7609,
+      "sha256": "cf6bf155527e78bf3bfc6f282f8755497e092f8d66ea0708fc78b123647578ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-02/publication.json",
+      "bytes": 353,
+      "sha256": "38ea9fadbc35a7060e60f033b82b152c72e49a525d616102e59347cdfb2150cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-02/record-binding-controls.json",
+      "bytes": 7162,
+      "sha256": "32d595497b62abb14090f45da6e6ac140bd19296012f3dfd58007f50194f8be2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/publication.json",
+      "bytes": 353,
+      "sha256": "4dd95d8c5cf88db7eb94a51cd4643a02e4f92fa9f6bc70e6ff64df0b423a80b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/record-binding-controls.json",
+      "bytes": 7164,
+      "sha256": "ba61ec186ed53a109854bd1bdd1c5e8450336af2ce74013b548a467da626bf89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-04/publication.json",
+      "bytes": 353,
+      "sha256": "a2113b842bb29c84ff8722bea4fe590724f2ae4b083de36480e0005424d2373c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-04/record-binding-controls.json",
+      "bytes": 7164,
+      "sha256": "ba61ec186ed53a109854bd1bdd1c5e8450336af2ce74013b548a467da626bf89",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "trusted-source-record-reader",
+      "kind": "code",
+      "description": "Authenticate complete immutable original family record bytes and actual native IDs; reject changed ancestry, source/record/scope/boundaries and prospective complete encoded+decoded operating limits; preserve existing GeoJSON paths.",
+      "software": "Actual Node24.19.0 versions recorded in both committed control receipts; original and current executing project bodies pinned. Native runtime/kernel bodies not retained or scientifically certified.",
+      "units": "Whole-file bytes, native IDs and engineering control outcomes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "actual-family-entry-positive",
+      "value": 1,
+      "unit": "full reader entry",
+      "vintage": "archived",
+      "input_sha256": "ba61ec186ed53a109854bd1bdd1c5e8450336af2ce74013b548a467da626bf89",
+      "input_file": {
+        "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/record-binding-controls.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "411fed4a52f2c44de10413cef40f579930331da6"
+    },
+    {
+      "id": "targeted-negative-controls",
+      "value": 20,
+      "unit": "rejections",
+      "vintage": "archived",
+      "input_sha256": "ba61ec186ed53a109854bd1bdd1c5e8450336af2ce74013b548a467da626bf89",
+      "input_file": {
+        "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/record-binding-controls.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "411fed4a52f2c44de10413cef40f579930331da6"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "actual-family-entry-positive",
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/record-binding-controls.json",
+      "json_pointer": "/counts/actual_positive"
+    },
+    {
+      "metric_id": "targeted-negative-controls",
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/record-binding-controls.json",
+      "json_pointer": "/counts/negative"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "actual-family-entry-positive",
+      "value": 1,
+      "unit": "full reader entry"
+    },
+    {
+      "metric_id": "targeted-negative-controls",
+      "value": 20,
+      "unit": "rejections"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The actual two complete original family records pass the corrected committed trusted control producer;20 targeted source/record negatives reject and51 focused tests pass. Three real CLI output-admission fixtures additionally reject before producer body reads/Git/decompression, preserving original sentinels. Existing direct/composed/ancestry behavior remains tested.",
+      "source_ids": [
+        "original-family-records"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "This checker integration does not accept the complete GEO3 packet, establish physical/geographic facts or close #1431/#1202. Native runtime/kernel bodies are not retained; both control runs pass but their raw ancestry diagnostics differ only in Git housekeeping stderr, so whole-output equality is not claimed.",
+      "source_ids": [
+        "original-family-records"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs \"$PWD/coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/FRESH_RUN\" 12e90af4ff876e619a8eb0e6c1445821573500e6",
+    "node --test --test-concurrency=1 test/evidence-family-record-binding.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/premerge-evidence.test.mjs"
+  ],
+  "validation": [],
+  "change_receipts": [
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "status": "modified",
+      "original_sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03"
+    },
+    {
+      "path": "docs/EVIDENCE_QUALITY.md",
+      "status": "modified",
+      "original_sha256": "b3c60f2f7a61b56cfc8108026023422615e1874edfb0b09f159c2032ada005de"
+    },
+    {
+      "path": "test/evidence-family-record-binding.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/attempt-history.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-test-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-tests-after-review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-tests-after-review.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/focused-tests.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/supplemental-admission-test.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-01/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-01/record-binding-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-02/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-02/record-binding-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-03/record-binding-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-04/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/vintages/run-04/record-binding-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

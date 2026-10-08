@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "status": "passed",
+  "command": "WORLDATLAS_TEST_PYTHON=/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 node --test --test-name-pattern=shared evidence execution/admission test/evidence-prevention.test.mjs",
+  "tests": 1,
+  "pass": 1,
+  "fail": 0,
+  "inner_python_tests": 7,
+  "runtime": "Configured bundled Python3.12 and Node24.19",
+  "limit": "Shared admission safeguard regression only; unrelated scientific helper test not rerun or claimed passing."
+}

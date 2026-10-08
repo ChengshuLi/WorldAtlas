@@ -1,0 +1,189 @@
+{
+  "scope": "Bounded source-record schema proposal only; no GIS, author edits, hosted ancestry bypass or full PR acceptance",
+  "actual_original_two_family_records": {
+    "status": "limited",
+    "checked": [
+      "c9122b55d20c4992fca5b0332e4faacbc08b139a:coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz"
+    ],
+    "limits": [
+      "gap-source-batch:65911e15791d12ebb2ccacf5: immutable original family record authenticates identity only; physical class and geography remain unapproved",
+      "gap-source-batch:74be953b1fb31c15200742da: immutable original family record authenticates identity only; physical class and geography remain unapproved"
+    ],
+    "factual_validation": "Requires independent source/method review; hashes do not establish truth"
+  },
+  "original_ancestry": {
+    "original_commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
+    "pr_base": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+    "exit": 0
+  },
+  "negative_controls": [
+    {
+      "name": "complete-phase-reject-before-any-read-or-gunzip",
+      "rejection": "Complete original family record phase exceeds byte budget",
+      "body_reads": 0,
+      "gunzips": 0
+    },
+    {
+      "name": "whole-encoded-plus-decoded-phase-over-cap",
+      "rejection": "Complete original family record phase exceeds byte budget"
+    },
+    {
+      "name": "missing-original-subject-binding",
+      "rejection": "Geography needs exact subject-to-containing-file inventory"
+    },
+    {
+      "name": "interior-record-offset",
+      "rejection": "Missing/partial/foreign/drifted complete original family record"
+    },
+    {
+      "name": "truncated-complete-record",
+      "rejection": "Missing/partial/foreign/drifted complete original family record"
+    },
+    {
+      "name": "changed-record-byte-hash",
+      "rejection": "Missing/partial/foreign/drifted complete original family record"
+    },
+    {
+      "name": "duplicate-record-for-distinct-family",
+      "rejection": "Missing/partial/foreign/drifted complete original family record"
+    },
+    {
+      "name": "record-range-escape",
+      "rejection": "Family record range exceeds whole source/ordinary budget"
+    },
+    {
+      "name": "over-cap-record",
+      "rejection": "Family record range exceeds whole source/ordinary budget"
+    },
+    {
+      "name": "changed-whole-decoded-binding",
+      "rejection": "Uncompressed bytes mismatch: c9122b55d20c4992fca5b0332e4faacbc08b139a:coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz"
+    },
+    {
+      "name": "missing-whole-decoded-source-pin",
+      "rejection": "Record needs whole decoded source pin"
+    },
+    {
+      "name": "over-cap-whole-decoded-source",
+      "rejection": "Family record source exceeds ordinary decoded budget"
+    },
+    {
+      "name": "foreign-unpinned-vintage",
+      "rejection": "Reference names unpinned file"
+    },
+    {
+      "name": "candidate-branch-is-not-base-ancestor",
+      "rejection": "Command failed: git -C /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work merge-base --is-ancestor b91d38254bc7fb901fefcb6112f5878fbc52d463 12e90af4ff876e619a8eb0e6c1445821573500e6"
+    },
+    {
+      "name": "altered-whole-encoded-source",
+      "rejection": "Input bytes mismatch: c9122b55d20c4992fca5b0332e4faacbc08b139a:coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz"
+    },
+    {
+      "name": "duplicate-native-original-family-rows",
+      "rejection": "Duplicate original family record identity"
+    },
+    {
+      "name": "foreign-original-record-type",
+      "rejection": "Foreign/non-family original JSONL record"
+    },
+    {
+      "name": "wrong-original-family-ID",
+      "rejection": "Missing/partial/foreign/drifted complete original family record"
+    },
+    {
+      "name": "unterminated-partial-record",
+      "rejection": "Missing/partial/foreign/drifted complete original family record"
+    },
+    {
+      "name": "malformed-interior-complete-record",
+      "rejection": "Malformed complete family JSONL record"
+    }
+  ],
+  "counts": {
+    "actual_positive": 1,
+    "negative": 20
+  },
+  "executing_reader_sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+  "execution_commit": "780afd4e71deffb0b7f3f3a6bfc4044b0659aec5",
+  "code_bindings": [
+    {
+      "commit": "780afd4e71deffb0b7f3f3a6bfc4044b0659aec5",
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "780afd4e71deffb0b7f3f3a6bfc4044b0659aec5",
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs",
+      "bytes": 9270,
+      "sha256": "b725d7138d395927b93998236e3f7680849519c85d8dcf0731fad0dc307821f8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "runtime": {
+    "node": "v24.19.0",
+    "versions": {
+      "node": "24.19.0",
+      "acorn": "8.17.0",
+      "ada": "3.4.4",
+      "amaro": "1.1.10",
+      "ares": "1.34.6",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.3",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "137",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.69.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "3.5.7",
+      "simdjson": "4.6.4",
+      "simdutf": "6.4.0",
+      "sqlite": "3.53.3",
+      "tz": "2026b",
+      "undici": "7.29.0",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "13.6.233.17-node.51",
+      "zlib": "1.3.2.1-motley-3246f1b",
+      "zstd": "1.5.7"
+    },
+    "platform": "darwin",
+    "architecture": "arm64",
+    "proof_scope": "Actual runtime version metadata; native runtime/kernel bodies are not retained or scientifically certified"
+  },
+  "geographic_operations": 0,
+  "complete_original_source": {
+    "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+    "commit": "c9122b55d20c4992fca5b0332e4faacbc08b139a",
+    "bytes": 1026831,
+    "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+    "hash_kind": "file-bytes",
+    "uncompressed_bytes": 8388608,
+    "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
+  },
+  "decoded_phase_charge": 9415439,
+  "postexecution_code_bindings": [
+    {
+      "commit": "780afd4e71deffb0b7f3f3a6bfc4044b0659aec5",
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "780afd4e71deffb0b7f3f3a6bfc4044b0659aec5",
+      "path": "coordination/engineering/immutable-family-record-subject-bindings-20261008/verify-original-records.mjs",
+      "bytes": 9270,
+      "sha256": "b725d7138d395927b93998236e3f7680849519c85d8dcf0731fad0dc307821f8",
+      "hash_kind": "file-bytes"
+    }
+  ]
+}
