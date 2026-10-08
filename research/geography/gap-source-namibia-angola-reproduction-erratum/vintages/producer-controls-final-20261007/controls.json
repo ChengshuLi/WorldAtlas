@@ -34,5 +34,8 @@
   },
   "limitations": [
     "Control probes exercise fail-closed geometry and output guards; they are not a complete malformed-input fuzz campaign."
-  ]
+  ],
+  "method_id": "authenticated-matrix",
+  "kind": "negative-control",
+  "outcome": "passed"
 }
