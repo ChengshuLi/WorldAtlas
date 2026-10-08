@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "stage": "source-fit",
+  "runs": [
+    {
+      "path": "research/geography/lithuania-latvia-gap-source-fitness-20261007/vintages/source-fit-complete11/result.json",
+      "sha256": "4d26c32f28b54d9472608aa327bf5ce5a53ec6ba2b5cdfbb415c931906060428",
+      "publication_sha256": "896ec896e3f753a8b6075fd1d8bbfbdcc7a7db4666cc06e67f50e11020b940df"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-source-fitness-20261007/vintages/source-fit-complete12/result.json",
+      "sha256": "553bf4e82eb1aa522ad004513ddb59ac7d4e19d2c9c50667e3391d3071fab4e8",
+      "publication_sha256": "fdd8db3ac069723c2411cbceb1f2f9903d9fcd8723d905fd0fd6ca8e8bbd98c9"
+    }
+  ],
+  "identical_result_bytes": false,
+  "identical_scientific_payload_after_excluding_phase_input_pins": true,
+  "scientific_payload_canonical_sha256": "14469524b66035f1678134490fe038e2756458dbafd7f985693f477549c2330c",
+  "excluded_fields": [
+    "phase_input_pins"
+  ],
+  "note": "Final paired complete runs; whole result bytes differ only in phase_input_pins, which records each run-specific assembly path and receipt hash. Canonical scientific payloads are identical. Superseded pairs and failures are summarized in execution-ledger.json."
+}
