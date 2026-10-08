@@ -244,6 +244,8 @@ def run(repo, commit, vintage):
     receipt = {
         "version": 1,
         "status": "pass",
+        "baseline_commit": commit,
+        "execution_pins_sha256": producer.sha(baseline.pinned_bytes(producer.EXECUTION_PINS)),
         "context_sha256": producer.sha(producer.canonical(context)),
         "input_pins_sha256": producer.sha(source_manifest_raw),
         "input_file_count": len(source_pins["files"]),
@@ -281,6 +283,12 @@ def run(repo, commit, vintage):
             "captured_bytes": runtime_manifest["captured_bytes"],
             "captured_file_count": runtime_manifest["captured_file_count"],
             "proj_used": False,
+        },
+        "code_bindings": {
+            name: {"path": path,
+                  "bytes": baseline.pins[path]["bytes"],
+                  "sha256": producer.sha(baseline.pinned_bytes(path))}
+            for name, path in sorted(config["code_files"].items())
         },
         "limits": [
             "This preflight verifies bytes, identities and source-row joins before geographic operations; it establishes no source authority or physical land/water truth.",
