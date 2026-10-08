@@ -1,0 +1,481 @@
+{
+  "version": 1,
+  "issue": 928,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "country-SPI"
+  ],
+  "subject_ids_sha256": "49549fc841215235fa4fb67326624f100a76a138fd2052cb73236c5b752b1de5",
+  "baseline": {
+    "commit": "27be77596f23304de6a720735538427e6d23e242",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/macro-publication-v5.json",
+        "bytes": 2826,
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "baseline-world-index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "baseline-hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline-administrative-sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "baseline-macro-publication": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "baseline-icefield-subject": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    "pin_files": {
+      "baseline-world-index": "data/world-index.json",
+      "baseline-hierarchy": "data/hierarchy.json",
+      "baseline-administrative-sources": "data/administrative-sources.json",
+      "baseline-macro-publication": "data/validation/macro-publication-v5.json",
+      "baseline-icefield-subject": "data/geography/part-28.json"
+    },
+    "subject_files": {
+      "country-SPI": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "natural-earth-5.1.0-admin0-map-units",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/117488dc884bad03366ff727eca013e434615127/geojson/ne_10m_admin_0_map_units.geojson",
+      "role": "Dated 1:10m cartographic Admin-0 map-unit identity candidate",
+      "vintage": "Natural Earth v5.1.0 source file at packaging commit 117488dc884bad03366ff727eca013e434615127 dated 2022-05-05",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth official terms page states its vector and raster data are public domain; exact page retrieval bytes and restoration instructions are recorded separately."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/sources/ne_10m_admin_0_map_units-v5.1.0.geojson",
+          "bytes": 13526439,
+          "sha256": "57da82be755f4afccd8f3b14251bb2752f5df1395f47d2d86f817470c4a48862",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Fetch the exact immutable raw GeoJSON and verify its whole-file hash in source-inventory.json before use.",
+      "limit": "Its SPI feature supports the source identity/map-unit description only. Its candidate geometry hash differs from the Atlas original_geometry_sha256, so exact original geometry provenance remains unresolved.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "argentina-chile-1998-boundary-agreement",
+      "url": "https://tratados.cancilleria.gob.ar/tratado_archivo.php?caso=pdf&id=kqSrmw%3D%3D&tipo=kg%3D%3D&tratados_id=kqOkmJo%3D",
+      "role": "Bilateral legal boundary agreement",
+      "vintage": "Signed 1998; retrieved official treaty PDF 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located. Official treaty citation and restoration instructions retained; PDF not included."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact official PDF URL and verify SHA-256 c29a05138447ea20153b95be7c267618ed05edd85c334275efd70dbac8ae2239 and 191319 bytes.",
+      "limit": "Describes a boundary route and annexed charts, not an icefield polygon. Georeferenced chart extraction and current section completion were not verified.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "argentina-chile-1996-additional-protocol",
+      "url": "https://tratados.cancilleria.gob.ar/tratado_archivo.php?caso=pdf&id=kqWnlw%3D%3D&tipo=kg%3D%3D&tratados_id=kp%2Brm5w%3D",
+      "role": "Bilateral legal protocol on the boundary agreement",
+      "vintage": "Additional protocol signed 1996; retrieved official PDF 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located. Official treaty citation and restoration instructions retained; PDF not included."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact official PDF URL and verify SHA-256 cfab3e2e9e8cc7b4d2ae2949bcf4f5112fc471fda444c7b7600c9773f69afa71 and 213548 bytes.",
+      "limit": "Does not define the icefield outline or current completion status.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "argentina-2018-glacier-inventory-boundary-statement",
+      "url": "https://cancilleria.gob.ar/es/actualidad/noticias/inventario-nacional-de-glaciares-en-la-zona-de-hielos-continentales",
+      "role": "Argentina Foreign Ministry statement on glacier inventory cartography",
+      "vintage": "2018 statement; retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located; page citation and exact restoration instructions retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact official URL and verify SHA-256 5d0e86b6094239c21cff9127c8c831f44c05ec8146c13459cf329a3ee996f017 and 43866 bytes.",
+      "limit": "Historical 2018 statement; not current operational demarcation status.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      }
+    },
+    {
+      "id": "chile-2018-glacier-inventory-boundary-statement",
+      "url": "https://www.minrel.gob.cl/sala-de-prensa/comunicado-por-inventario-nacional-de-glaciares-de-argentina",
+      "role": "Chile Foreign Ministry statement on glacier inventory and boundary sections",
+      "vintage": "2018 statement; retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located; page citation and exact restoration instructions retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact official URL and verify SHA-256 1e0522f90bbdd12c38182b5fda6ca0b0bfd6948d21ad3f8821b9c8f64f512f5b and 35938 bytes.",
+      "limit": "Historical 2018 statement; no later specific section-status source was found.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      }
+    },
+    {
+      "id": "argentina-ianigla-south-patagonia-region",
+      "url": "https://www.glaciaresargentinos.gob.ar/?page_id=193",
+      "role": "National glacier inventory regional classification and summary statistics",
+      "vintage": "Current official page retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located; official page citation/restoration instructions retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch exact page URL and verify SHA-256 5947a793f06be8e9de39b267178796c2b72488988faceaa60fb0eccb523fa8e9 and 65161 bytes.",
+      "limit": "Summary and area statistics, not a versioned cross-border geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "argentina-ianigla-santa-cruz-2018-map",
+      "url": "https://www.glaciaresargentinos.gob.ar/wp-content/uploads/provincias/Santa_Cruz/docs/mapas/mapa_final_vueltas-tunel_09-05-2018.pdf",
+      "role": "Regional watershed/subwatershed glacier inventory map",
+      "vintage": "May 2018 published map; retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located; do not redistribute the 18,954,899-byte PDF from this packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch exact official PDF URL and verify SHA-256 5269088fcc1b25dfbda25a8bb45e7c5426ca5cd686fa557dd5c51b0b10781121 and 18954899 bytes.",
+      "limit": "Partial Santa Cruz subbasins only; not a current complete cross-border outline.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      }
+    },
+    {
+      "id": "argentina-ianigla-2024-update-notice",
+      "url": "https://www.glaciaresargentinos.gob.ar/?p=3691",
+      "role": "National glacier inventory update notice",
+      "vintage": "Published 2024; retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located; official page citation/restoration instructions retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch exact page and verify SHA-256 e529d11aab026e0930c29f1690395aa47b837730e8a677a16830293f2cfe1b3c and 73593 bytes.",
+      "limit": "Notice covers the first updated results in Desert Andes provinces; it does not establish southern-region update status.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "chile-dga-public-glacier-inventory-2022-page",
+      "url": "https://dga.mop.gob.cl/inventario-publico-glaciares/",
+      "role": "Official Chilean glacier inventory page",
+      "vintage": "DGA IPG2022; page retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located for the linked shape package; package terms must be inspected before retention."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch official page and verify SHA-256 d93321cd4c2b4c57afbb11b26518c6dacd693a7e21d1090434137802d39900ab and 145316 bytes. It links to the shape package URL recorded in source-inventory.json.",
+      "limit": "Page summary and package link only; shape package/feature rows were not retrieved.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "chile-dga-2024-campos-de-hielo-sur-context",
+      "url": "https://dga.mop.gob.cl/dga-magallanes-amplia-red-de-refugios-para-el-estudio-de-glaciares-en-campos-de-hielo-sur/",
+      "role": "DGA regional glacier monitoring and inventory context",
+      "vintage": "DGA article 2024; retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse license located; page citation/restoration instructions retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch exact official page and verify SHA-256 5cd482687e47ee392c1789bc2b6355edb3072125b5f867ef95c24e36f6579458 and 300012 bytes.",
+      "limit": "Regional inventory statistics, not the icefield geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "chile-dga-ipg2022-shape-package",
+      "url": "https://dga.mop.gob.cl/uploads/sites/13/2024/07/Glaciares-1.zip",
+      "role": "Official DGA 2022 glacier shape archive",
+      "vintage": "IPG2022 archive linked from official DGA page; not retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown until package metadata/terms are inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "The official DGA page links this URL. Retrieve the archive with bounded storage, inspect metadata and legal terms, then record archive/extracted sizes and exact hashes before analysis.",
+      "limit": "No archive bytes or archive hash are available in this packet; no claim is made from the unretrieved data.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/README.md",
+      "bytes": 3969,
+      "sha256": "ec2ca585059a006216562667de2396ca15b8b3e6c0a0a80e2eb34c157f462790",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/baseline-files.json",
+      "bytes": 1068,
+      "sha256": "80fcdce9bd9e54119504f3328c544a57c207a7810e1fcd7228bc4e66d4e717a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/claim-receipt.json",
+      "bytes": 515,
+      "sha256": "44de88c38aeb2982da5d43fd3ef0c4d8e0f85ba5a6d9e2fd3da4b9276d5c3fdb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/engineering-handoff.md",
+      "bytes": 2875,
+      "sha256": "168cdd8b592950b702c67406b37107fd61f583f3df54dc761c46d5ef237ac6a5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/findings.md",
+      "bytes": 8193,
+      "sha256": "5723a3bf3ed09dfed020d2098386c7aee7205636c4257e8d294036512679f6b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py",
+      "bytes": 10433,
+      "sha256": "1e4bbcf0a028389c09b8e6a5fbcc3f28df0ae013aa759979b9d5872102de7e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproducibility.json",
+      "bytes": 1925,
+      "sha256": "61ebbcd4c48a14b5b7d738b31d8c19a78cab8d3cc9a3d7e679be9b19d0824a87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json",
+      "bytes": 7213,
+      "sha256": "34ebfbf1ebce8b55314d16614aefbeb221a54891b47b5f710469a438359d6b40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/scope.json",
+      "bytes": 937,
+      "sha256": "9175b8b6733bd7841a4ac3552f78cde3f28b8d7615c531dec9bd3dca5d982040",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/source-inventory.json",
+      "bytes": 13687,
+      "sha256": "a7c4e0b9ed14a35893c440a9fb7e7224c3722912aeedfd43dc5e0f1b648f99cd",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "pinned-roster-and-parent-check",
+      "kind": "source",
+      "description": "Read immutable issue-pinned Git blobs; check whole-file hashes, one exact subject feature, its parent record and the declared child count. Reproduction output is streamed to stdout; no file destination is opened or modified.",
+      "software": "Python 3 standard library json, hashlib, pathlib, subprocess; git show",
+      "units": "feature and hierarchy record counts; no area or distance calculation"
+    },
+    {
+      "id": "dated-natural-earth-candidate-check",
+      "kind": "source",
+      "description": "Hash and parse the retained immutable Natural Earth v5.1.0 GeoJSON, find ADM0_A3 SPI exactly once, and compute SHA-256 of canonical feature geometry using sorted-key compact UTF-8 JSON. Compare to the Atlas stored original_geometry_sha256 without normalizing or asserting equivalence.",
+      "software": "Python 3 standard library json and hashlib",
+      "units": "whole-file bytes, feature count, exterior-ring coordinate count, canonical JSON geometry SHA-256"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "scope_subject_count",
+      "value": 1,
+      "unit": "features",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "vintage": "baseline"
+    },
+    {
+      "id": "province_parent_child_count",
+      "value": 1,
+      "unit": "children",
+      "input_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "vintage": "baseline"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "scope_subject_count",
+      "value": 1,
+      "unit": "features"
+    },
+    {
+      "metric_id": "province_parent_child_count",
+      "value": 1,
+      "unit": "children"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The dated Natural Earth v5.1.0 candidate contains the unique SPI map-unit identity and explicitly classifies it as indeterminate/disputed; it is not verified as the exact geometry used for the Atlas feature because its geometry hash differs from the stored original hash.",
+      "status": "supported",
+      "source_ids": [
+        "natural-earth-5.1.0-admin0-map-units"
+      ]
+    },
+    {
+      "text": "The physical role is supported at aggregate ice-field scale, while the exact perimeter and Atlas province-tier interpretation are not established by the reviewed glacier inventories.",
+      "status": "supported",
+      "source_ids": [
+        "argentina-ianigla-south-patagonia-region",
+        "chile-dga-public-glacier-inventory-2022-page",
+        "chile-dga-2024-campos-de-hielo-sur-context"
+      ]
+    },
+    {
+      "text": "The dated Natural Earth 5.1.0 source is the exact original geometry source used by Atlas.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-5.1.0-admin0-map-units"
+      ]
+    },
+    {
+      "text": "The current demarcation status and the exact present-day sovereign side of each icefield polygon coordinate are established by the 1998 agreement and glacier inventories.",
+      "status": "unresolved",
+      "source_ids": [
+        "argentina-chile-1998-boundary-agreement",
+        "argentina-2018-glacier-inventory-boundary-statement",
+        "chile-2018-glacier-inventory-boundary-statement"
+      ]
+    },
+    {
+      "text": "The same-name one-child province tier represents a source-supported administrative province rather than a physical feature grouping.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-5.1.0-admin0-map-units",
+        "argentina-ianigla-south-patagonia-region"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py | diff -u data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json -",
+    "node scripts/evidence-quality.mjs data/regional-review/southern-patagonian-icefield-source-parent-20261005/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/baseline-files.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/engineering-handoff.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/scope.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/source-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/sources/ne_10m_admin_0_map_units-v5.1.0.geojson",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "scope_subject_count",
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json",
+      "json_pointer": "/metrics/0/value"
+    },
+    {
+      "metric_id": "province_parent_child_count",
+      "path": "data/regional-review/southern-patagonian-icefield-source-parent-20261005/reproduction-results.json",
+      "json_pointer": "/metrics/1/value"
+    }
+  ]
+}
