@@ -47,6 +47,59 @@ Passing these checks grants no scientific approval, import or publication author
 New exact heads, evidence or substantive acceptance/disposition changes require renewed
 relevant review under the existing receipt binding; progress comments do not.
 
+## Follow a claim through the final evidence
+
+A valid computation can still feed an incorrect report or a control that never
+checks it. For each consequential changed claim, trace the actual consumed input
+through the computation, intermediate records, report/control writer and final
+claimed evidence. Include reused results when the PR relies on them. This is a
+review method, not a new form: explain the relevant paths and observations in the
+existing PR description and review domain scope.
+
+At each applicable boundary, compare actual records with independently read
+references before trusting hashes or summaries. Select bounded probes that can
+expose the particular loss, substitution or false success:
+
+- **Report transfer:** follow a required measured field from the intermediate
+  record into the final row, including identity, units, CRS and vintage. A renamed
+  field must not silently become null/zero or disappear. Try a missing required
+  field, foreign identity or duplicate while keeping the rest of the fixture
+  coherent. Document permitted unknowns separately from required measurements.
+- **Controls and comparisons:** read both runs' actual products and derive counts
+  and success from their records. Alter one comparison product or remove a real
+  contact/row; a stored equality hash, hard-coded count or unconditional `passed`
+  must not hide the change. A control may report that a probe was rejected, but
+  must actually invoke the claimed rejection path.
+- **Every output writer:** inspect reporting and control writers as well as the
+  main producer. Test their existing-file and dangling-symlink destinations with
+  sentinels captured before execution. Successful producer admission does not
+  cover a later standalone writer; retained evidence must remain unchanged.
+- **Complete resource accounting:** inspect the union of actual inputs, decoded
+  representations and outputs across all reader/helper instances in the same
+  execution phase. Splitting a file into chunks or assigning another reader does
+  not reset the phase or decoded-file limit. A lightweight size inventory can
+  establish a budget violation without rerunning the expensive computation.
+- **Inherited results and citations:** distinguish new computation from copied
+  predecessor rows. A repaired helper does not validate results produced by the
+  old helper. Check the actual cited content and distinguish printed page numbers
+  from PDF indices; a declared page list must cover the supporting content.
+
+Unavailable full sources, GIS dependencies or memory admission limit those
+experiments, not every experiment. Independently check small retained JSON/CSV
+reporting and control boundaries when they faithfully exercise the claim; a
+synthetic fixture proves only that boundary, not the original geographic result.
+Keep these limits distinct in the review. If required proof remains unavailable,
+use the existing partial-work disposition or request changes rather than claiming
+completion. Source-only work with no executable/reporting claim does not acquire
+irrelevant reproduction requirements.
+
+The later #726 findings illustrate the boundaries: #1489 (report/control truth),
+#1491 (actual comparison products), #1401 (output inventory/writer), #1496 (measured
+field transfer), #1497 (combined budgets), and #1499/#1462 (citations/inherited
+results). These links identify reported defects and existing repair owners; they
+are not blanket independent confirmation of every scientific finding. Review
+current fixes before repeating a historical failure claim.
+
 ## Shared execution tools
 
 New evidence producers use these shared helpers for applicable invariants. Review any

@@ -22,6 +22,18 @@ Choose only the checks implicated by those claims and changed behavior:
 | Changing a wrapper, importer, retry or cleanup operation | Trace the producer and consumer together. Check row and byte bounds, the remaining deadline and complete inventories. A correction must cover adjacent entry points, not just one reported example. |
 | Documentation or instructions only | Check the referenced interfaces, commands and responsibilities against actual code. Do not manufacture scientific experiments for unchanged behavior. |
 
+Before choosing tests, follow each consequential changed claim through its actual
+inputs, computation, intermediate records, report/control writer and final evidence.
+Use the boundary examples in [AUDIT_FAILURE_PREVENTION.md](AUDIT_FAILURE_PREVENTION.md#follow-a-claim-through-the-final-evidence).
+Check that measured fields, identities and units survive into the final table;
+controls read actual comparison products; all writers preserve prior evidence;
+and multiple readers share a complete execution budget. Separate copied results
+from new computation and verify the actual supporting citation. Prepare bounded
+actual-input changes at the implicated boundary before requesting review. Missing
+full GIS/source access does not excuse executable small reporting/control checks;
+those checks do not establish the unavailable geographic result. Describe this in
+the existing PR explanation, without a new checklist or manifest schema.
+
 Use Baseline.pinned_bytes/materialized_bytes and declared load_modules for
 consumed project inputs; consume the returned bytes rather than reopening a
 checked path. load_modules requires explicitly named pinned project modules, rejects
@@ -197,3 +209,9 @@ Source-only research keeps its focused CI. Obtain a distinct review of the exact
 final head, use the normal queue, reconcile the issue/dependents and release the
 owned checkout afterward. This refresh changes neither scope nor scientific or
 publication authority.
+
+For existing chats, also refresh the final-evidence boundary guidance: prepare
+applicable report/control, combined-budget and inherited-citation checks before
+review. Preserve ownership/checkpoints; select faithful bounded probes rather than
+rerunning every geography computation. Reviewers record observed checks and limits
+in their existing domain scopes.
