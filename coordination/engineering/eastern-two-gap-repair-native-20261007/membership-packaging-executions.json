@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "issue": 1295,
+  "actual_runs": [
+    {
+      "run": "one",
+      "code_head": "6d55e956e6850f3baff097836bf138c02e3f731b",
+      "source_commit": "bad783529fa35d0bd45cd65ed899c02ea96c93b6",
+      "started_at": "2026-10-08T05:48:16.105661+00:00",
+      "finished_at": "2026-10-08T05:50:24.419156+00:00",
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/eastern-two-gap-repair-native-20261007/package-release-memberships.mjs",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work",
+        "/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/release-memberships-wire-one",
+        "/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008"
+      ],
+      "exit_code": 0,
+      "code_files": [
+        {
+          "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/package-release-memberships.mjs",
+          "sha256": "ad1b4ba081a3c4eed6d1e41c1b0767e36ce39219f1d88a3bbad44f5e695b0d32"
+        },
+        {
+          "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs",
+          "sha256": "c99945eb4fae208e4a6dbf8ce325d93bb35e317b3feeb78312c05bce008d7898"
+        }
+      ],
+      "stdout": {
+        "bytes": 765,
+        "sha256": "107e8ed7243a45155730b59666820469fed4a963b97c5ad374207944e41413f4",
+        "literal_text": "{\"version\":1,\"issue\":1295,\"kind\":\"whole-encoded-membership-tail-custody\",\"source_commit\":\"bad783529fa35d0bd45cd65ed899c02ea96c93b6\",\"files\":340,\"memberships\":84833,\"encoded_original_bytes\":3756863,\"index_sha256\":\"9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c\",\"transport_bytes\":3902331,\"source\":\"/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/1295-release-memberships-source-LqD3OX\",\"inverse\":\"/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/1295-release-memberships-inverse-1295-release-memberships-source-LqD3OX\",\"scientific_records_recomputed\":false,\"all_original_paths_modes_and_encoded_decoded_bodies_preserved\":true,\"node\":\"v24.19.0\",\"execArgv\":[]}\n"
+      },
+      "stderr": {
+        "bytes": 777,
+        "sha256": "c143aab28c799f9ce09773124389dec95c527fe66bbe3fd81f5e3ba80d18eb14",
+        "literal_text": "      128.17 real        48.28 user        16.29 sys\n           207273984  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n             1494308  page reclaims\n                6706  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                 386  messages sent\n                 348  messages received\n                   0  signals received\n                5091  voluntary context switches\n              669172  involuntary context switches\n         11275803376  instructions retired\n          8359140778  cycles elapsed\n           120028032  peak memory footprint\n"
+      }
+    },
+    {
+      "run": "two",
+      "code_head": "6d55e956e6850f3baff097836bf138c02e3f731b",
+      "source_commit": "bad783529fa35d0bd45cd65ed899c02ea96c93b6",
+      "started_at": "2026-10-08T05:50:24.495862+00:00",
+      "finished_at": "2026-10-08T05:52:15.232183+00:00",
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/eastern-two-gap-repair-native-20261007/package-release-memberships.mjs",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work",
+        "/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/release-memberships-wire-two",
+        "/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008"
+      ],
+      "exit_code": 0,
+      "code_files": [
+        {
+          "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/package-release-memberships.mjs",
+          "sha256": "ad1b4ba081a3c4eed6d1e41c1b0767e36ce39219f1d88a3bbad44f5e695b0d32"
+        },
+        {
+          "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs",
+          "sha256": "c99945eb4fae208e4a6dbf8ce325d93bb35e317b3feeb78312c05bce008d7898"
+        }
+      ],
+      "stdout": {
+        "bytes": 765,
+        "sha256": "54a06da491c37c2a3426deaaf84720036777515f18f2207d02e17df0a73d3fc5",
+        "literal_text": "{\"version\":1,\"issue\":1295,\"kind\":\"whole-encoded-membership-tail-custody\",\"source_commit\":\"bad783529fa35d0bd45cd65ed899c02ea96c93b6\",\"files\":340,\"memberships\":84833,\"encoded_original_bytes\":3756863,\"index_sha256\":\"9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c\",\"transport_bytes\":3902331,\"source\":\"/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/1295-release-memberships-source-XJY9Wa\",\"inverse\":\"/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/1295-release-memberships-inverse-1295-release-memberships-source-XJY9Wa\",\"scientific_records_recomputed\":false,\"all_original_paths_modes_and_encoded_decoded_bodies_preserved\":true,\"node\":\"v24.19.0\",\"execArgv\":[]}\n"
+      },
+      "stderr": {
+        "bytes": 777,
+        "sha256": "efe448b1d5342e33280f0ecb0438aa7c6bbb50d989ef8a018f6cf7e2b272064c",
+        "literal_text": "      110.55 real        44.55 user        15.65 sys\n           218284032  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n             1450281  page reclaims\n                6737  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                 386  messages sent\n                 346  messages received\n                   0  signals received\n                5615  voluntary context switches\n              745929  involuntary context switches\n         11614110225  instructions retired\n          8014050509  cycles elapsed\n           111837120  peak memory footprint\n"
+      }
+    }
+  ],
+  "whole_body_source_vintage": "bad783529fa35d0bd45cd65ed899c02ea96c93b6",
+  "scientific_records_recomputed": false
+}
