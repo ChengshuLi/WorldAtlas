@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "method_id": "madagascar-source-handoff-correction",
+  "positive_control": {
+    "outcome": "passed",
+    "exact_issue_scope": {
+      "subject_count": 119,
+      "parent_group_count": 22
+    },
+    "legal_citations": [
+      {
+        "source_id": "MDG-LAW-2021-012",
+        "effect_article": 4,
+        "journal_article": 5,
+        "passed": true
+      },
+      {
+        "source_id": "MDG-LAW-2023-012",
+        "effect_article": 5,
+        "journal_article": 6,
+        "passed": true
+      }
+    ],
+    "portal_rows": 114
+  },
+  "negative_controls": [
+    {
+      "case": "wrong statutory conditional-effect article",
+      "outcome": "passed",
+      "observed_refusal": "wrong article references for MDG-LAW-2021-012: (7, 5)"
+    },
+    {
+      "case": "removed portal table record",
+      "outcome": "passed",
+      "observed_refusal": "portal rendered table row count changed: 113"
+    },
+    {
+      "case": "modified captured portal bytes",
+      "outcome": "passed",
+      "observed_refusal": "portal response bytes/hash do not match the recorded 2026-10-08 vintage"
+    },
+    {
+      "case": "rebound historical Namorona parent",
+      "outcome": "passed",
+      "observed_refusal": "Namorona source row has wrong ADM2_EN: 'Fakeanjary'"
+    },
+    {
+      "case": "missing historical Namorona row",
+      "outcome": "passed",
+      "observed_refusal": "expected one Namorona row in the complete 1,579-row 2018 ADM3 file; got 0 of 1578"
+    },
+    {
+      "case": "rebound current affected-district parent",
+      "outcome": "passed",
+      "observed_refusal": "current identity/parent changed for gb:MDG:ADM2:10022922B52512193010711"
+    }
+  ],
+  "limits": [
+    "PDF page interpretation is independently reviewable; script verifies recorded page/article findings, not PDF glyph extraction.",
+    "No commune-level geometry was available; polygon incorporation remains unknown."
+  ]
+}

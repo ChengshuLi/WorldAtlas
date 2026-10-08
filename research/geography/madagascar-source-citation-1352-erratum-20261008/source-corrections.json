@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "issue": 1509,
+  "original_audit_issue": 632,
+  "retrieved_at": "2026-10-08",
+  "verified_at": "2026-10-08T19:25:44Z",
+  "disposition": "source-citation-and-handoff-erratum; no geographic approval",
+  "legal_sources": [
+    {
+      "source_id": "MDG-LAW-2021-012",
+      "title": "Madagascar Law 2021-012",
+      "url": "https://cnlegis.gov.mg/uploads/L2021-012-VF.pdf",
+      "role": "Official national statute; legal administrative roster, not geometry",
+      "bytes": 52879,
+      "sha256": "bdb238f48484e8ddaa189c6d29c4be76ed27c2ff8aeb3eead192eda68b592210",
+      "vintage": "Promulgated 2021-08-11; official PDF retrieved 2026-10-08",
+      "license": "No explicit reuse license located on the official PDF. Full body is not redistributed; restore privately from the canonical URL and verify exact byte length and SHA-256 before inspection or reuse.",
+      "inspection": {
+        "pdf_pages": 5,
+        "promulgation": {
+          "article": null,
+          "printed_page": 3,
+          "pdf_page": 3,
+          "date": "2021-08-11"
+        },
+        "conditional_effect": {
+          "article": 4,
+          "printed_pages": [
+            2,
+            3
+          ],
+          "pdf_pages": [
+            2,
+            3
+          ],
+          "fact": "The law says it enters immediately into force after publication by radio/television broadcast or posting."
+        },
+        "journal_publication": {
+          "article": 5,
+          "printed_page": 3,
+          "pdf_page": 3,
+          "fact": "The law says it shall be published in the Journal Officiel."
+        },
+        "territorial_transfer": {
+          "article": 1,
+          "printed_page": 1,
+          "pdf_page": 1,
+          "fact": "Namorona commune is to be attached to Manakara district, while other commune attachments remain unchanged."
+        },
+        "annex": {
+          "printed_page": 4,
+          "pdf_page": 4,
+          "fact": "Namorona appears in the commune list for Manakara district."
+        },
+        "exact_broadcast_posting_and_journal_publication_dates": "unknown"
+      },
+      "lawful_restoration": "GET the canonical URL to a private file; require 52,879 complete bytes and the recorded SHA-256. Do not commit the PDF without an explicit reuse license."
+    },
+    {
+      "source_id": "MDG-LAW-2023-012",
+      "title": "Madagascar Law 2023-012",
+      "url": "https://cnlegis.gov.mg/uploads/L2023-012_VF.pdf",
+      "role": "Official national statute; legal administrative roster, not geometry",
+      "bytes": 129279,
+      "sha256": "15821ddd4a6012f2c3819baae2d00ae481ddac0cb17e139e10bc48390a9936a0",
+      "vintage": "Promulgated 2023-08-11; official PDF retrieved 2026-10-08",
+      "license": "No explicit reuse license located on the official PDF. Full body is not redistributed; restore privately from the canonical URL and verify exact byte length and SHA-256 before inspection or reuse.",
+      "inspection": {
+        "pdf_pages": 4,
+        "promulgation": {
+          "article": null,
+          "printed_page": 3,
+          "pdf_page": 3,
+          "date": "2023-08-11"
+        },
+        "conditional_effect": {
+          "article": 5,
+          "printed_page": 3,
+          "pdf_page": 3,
+          "fact": "The law says it enters immediately into force after publication by radio/television broadcast or posting."
+        },
+        "journal_publication": {
+          "article": 6,
+          "printed_page": 3,
+          "pdf_page": 3,
+          "fact": "The law says it shall be published in the Journal Officiel."
+        },
+        "exact_broadcast_posting_and_journal_publication_dates": "unknown"
+      },
+      "lawful_restoration": "GET the canonical URL to a private file; require 129,279 complete bytes and the recorded SHA-256. Do not commit the PDF without an explicit reuse license."
+    }
+  ],
+  "portal_observation": {
+    "source_id": "TOROLALANA-REGIONS-DISTRICTS-20261008",
+    "title": "Régions et districts | Torolalana",
+    "url": "https://torolalana.gov.mg/fr/services/regions-et-districts/",
+    "role": "Government service directory observation; not a statute or boundary source",
+    "retrieved_at": "2026-10-08",
+    "observed_at": "2026-10-08T19:23:40Z",
+    "http_status": 200,
+    "bytes": 96340,
+    "sha256": "36da6e340125dec13607989fdb45252fbceed261a6222124327ef92a8a5f4477",
+    "license": "No explicit reuse license was identified on the captured page; the full response is not redistributed. Rights remain unverified.",
+    "claims_and_rows": {
+      "description_claim": "The page description says Madagascar has 23 regions and 119 districts.",
+      "rendered_table_rows_excluding_header": 114,
+      "rendered_table_unique_district_ids": 114,
+      "rendered_table_id_range_claimed": [
+        1,
+        119
+      ],
+      "missing_table_ids": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "unique_region_names_in_rendered_rows": 23,
+      "antanimora_row_present": false,
+      "relevant_rows": [
+        {
+          "region": "VATOVAVY",
+          "district_id": 54,
+          "district": "IFANADIANA"
+        },
+        {
+          "region": "FITOVINANY",
+          "district_id": 55,
+          "district": "IKONGO"
+        },
+        {
+          "region": "FITOVINANY",
+          "district_id": 56,
+          "district": "MANAKARA"
+        },
+        {
+          "region": "VATOVAVY",
+          "district_id": 57,
+          "district": "MANANJARY"
+        },
+        {
+          "region": "VATOVAVY",
+          "district_id": 58,
+          "district": "NOSY VARIKA"
+        },
+        {
+          "region": "FITOVINANY",
+          "district_id": 59,
+          "district": "VOHIPENO"
+        },
+        {
+          "region": "ANALANJIROFO",
+          "district_id": 87,
+          "district": "MANANARA-NORD"
+        },
+        {
+          "region": "ANALANJIROFO",
+          "district_id": 88,
+          "district": "MAROANTSETRA"
+        }
+      ],
+      "visible_update_date": "not found"
+    },
+    "lawful_restoration": "GET the exact canonical URL privately. The reproduction requires the captured 96,340-byte response and recorded SHA-256; a changed response is a new source vintage and must not be relabeled as this observation.",
+    "interpretation_limit": "The page is incomplete as captured (114 table records despite a 119-district description), undated, and contradicted by the later statute/decree record for some units. Do not treat it as a complete current administrative roster or boundary evidence."
+  },
+  "territorial_trace": {
+    "legal_source": "MDG-LAW-2021-012, Article 1 explanatory text and annex",
+    "old_adm3_source": {
+      "path": "data/regional-review/regional-review-4f180b98473f1071/sources/mdg_admpop_adm3_2018.csv",
+      "commit": "b765c34077b6d7c5745c7285f08e954edd62144a",
+      "bytes": 233690,
+      "sha256": "e099269fe3de11229b35bf332014b5c02c0bc77110768e9424265457dcace4e3",
+      "row_count": 1579,
+      "matching_rows": 1,
+      "commune": "Namorona",
+      "commune_code": "MG23209490",
+      "old_district": "Mananjary",
+      "old_district_code": "MG23209",
+      "old_region": "Vatovavy Fitovinany",
+      "old_region_code": "MG23",
+      "role_and_limit": "2018 administrative/statistical code listing at ADM3 commune level; it is not boundary geometry and predates the 2021 transfer."
+    },
+    "source_comparison": {
+      "path": "data/regional-review/madagascar-codab-followup-20261003/vintages/2026-10-07-v1-run-14/adm2-crosswalk-and-geometry.csv",
+      "commit": "af355b897c9e3607de610549cfffb890c8e43378",
+      "bytes": 59123,
+      "sha256": "7b2345ba194ecdf8c2831ce1361f28475a114bef99e8a644112b55f269051a34",
+      "role_and_limit": "Retained ADM2 name crosswalk and district-polygon comparison; it is not a Namorona commune boundary comparison or proof that a polygon implements the transfer.",
+      "mananjary_source_pcode": "MG26209",
+      "mananjary_current_id": "gb:MDG:ADM2:10022922B52512193010711",
+      "mananjary_current_parent": "framework:province:vatovavy-fitovinany:fd10ec52071e",
+      "mananjary_symmetric_difference_percent_of_union": 0.741515803,
+      "manakara_source_pcode": "MG27210",
+      "manakara_current_name": "Manakara Atsimo",
+      "manakara_current_id": "gb:MDG:ADM2:10022922B29911348985828",
+      "manakara_current_parent": "framework:province:vatovavy-fitovinany:fd10ec52071e",
+      "manakara_symmetric_difference_percent_of_union": 1.049105499,
+      "atlas_boundary_reference_year": 2020,
+      "post_transfer_commune_code_or_territory": "unknown",
+      "whether_either_retained_polygon_incorporates_transfer": "unknown"
+    },
+    "source_completeness_and_vintage": {
+      "old_codps": "2018 ADM3 roster; complete retained file has 1,579 rows, but the row's source level is commune and its codes are historical.",
+      "codab": "OCHA COD-AB v01; source metadata distinguishes boundary creation 2009-08-01 from valid_on 2018-08-10 and review on 2026-07-06. The valid_on field is a data-version date, not a legal effect date.",
+      "atlas_reference": "geoBoundaries gbOpen district polygons dated 2020. A district comparison cannot locate or validate an ADM3 commune movement.",
+      "neighboring_granularity": "The legal change is one commune (ADM3) between Mananjary and Manakara districts (ADM2). The retained measurements compare whole ADM2 polygons."
+    }
+  },
+  "historical_claims": {
+    "pr1352_merge": "af355b897c9e3607de610549cfffb890c8e43378",
+    "pr1368_merge": "839883ae281af7bf012f694698624a7ec77275e1",
+    "original_1352_readme": {
+      "bytes": 11454,
+      "sha256": "ab53b394ec1b3031210eb47d6cdcc1be7893dce12083e1903581c9536e011141"
+    },
+    "original_1352_source_restoration": {
+      "bytes": 8501,
+      "sha256": "6f71c038b1e4a22f07ee9d957a6dad35783861a9ca90d9ef03b15f6985a94e9f"
+    },
+    "later_1368_readme": {
+      "bytes": 17205,
+      "sha256": "1151537aadcf4f374e828b79342cf216e47a25c40583fde9cb8a11f95ebb50a0"
+    },
+    "later_1368_source_restoration": {
+      "bytes": 17815,
+      "sha256": "456ef9a4248aa536b57b72629a2d8e617630ab25c36c5bf6b3f0f5b23d7468e3"
+    },
+    "observed_defect": "Both source-restoration vintages attribute the radio/television/posting effect clause to nonexistent Article 7 in each law. The later README says the portal gives older Vatovavy-Fitovinany context, but its source-restoration ledger and this captured portal identify Vatovavy and Fitovinany separately. The README's engineering handoff also omits the explicit Namorona exception when summarizing the 2021 district reorganization."
+  },
+  "scope_and_unknowns": [
+    "Preserve original 632/1352 and 1368 packets, their IDs, 22 parent groups, source bytes, results, metrics, failed attempts, and legal/source unknowns.",
+    "The exact broadcast, posting, and Journal Officiel publication dates for the two laws were not located.",
+    "The 2018 Namorona code and parent do not establish its post-transfer code or territory continuity.",
+    "The 2020 Atlas district polygons and 2018 OCHA reference do not establish whether either polygon incorporates the commune transfer.",
+    "The Torolalana page has no visible update date; its 119-district description conflicts with the 114 rows in the captured rendered table and missing IDs 8-12.",
+    "No current complete national administrative boundary inventory, commune-level geometry, legal/geographic approval, import authorization, or publication authorization is established here."
+  ],
+  "related_inherited_evidence": {
+    "immutable_reference": {
+      "path": "data/regional-review/madagascar-codab-followup-20261003/source-restoration.json",
+      "commit": "839883ae281af7bf012f694698624a7ec77275e1",
+      "bytes": 17815,
+      "sha256": "456ef9a4248aa536b57b72629a2d8e617630ab25c36c5bf6b3f0f5b23d7468e3",
+      "inspection_status": "This erratum preserves the already-recorded source interpretations below; it does not claim a new independent inspection of those source bodies."
+    },
+    "antanimora_legal_and_operational_difference": {
+      "decree_source_id": "MDG-DECREE-2024-480",
+      "decree_url": "https://cnlegis.gov.mg/uploads/D2024-480-VF.pdf",
+      "decree_bytes": 306676,
+      "decree_sha256": "cc44602d79ef541b65032452be76ebc65d3f8feb652c9c3fce902b65d3204180",
+      "decree_recorded_finding": "Article 1 schedules Antanimora Sud under Ambovombe prefecture with eight named communes: Antanimora Sud, Ampamata, Andalatanosy, Imanombo, Jafaro, Marovato Befeno, Andragnanivo and Andoharano. Article 3 makes effect contingent on radio/television publication; the exact broadcast/publication date remains unknown.",
+      "operational_source_id": "INSTAT-ANTANIMORA-2026-04",
+      "operational_url": "https://www.instat.mg/recrutement/avis-dappel-a-manifestation-dinteret-rsue-fokontany-poste-de-chef-dequipe-amboasary-atsimo-antalaha-antanimora-sud-vatomandry",
+      "operational_recorded_finding": "The 2026 INSTAT operational notice names four communes (Ampamata, Imanombo, Jafaro and Andoharano). Its operational purpose does not repeal or redefine the decree roster; the four-versus-eight difference and polygon implications remain unresolved.",
+      "handoff": "Do not use the operational notice to infer a legal repeal, complete commune list, district boundary, or effective date."
+    },
+    "mapaction_secondary_lead": {
+      "source_id": "MAPACTION-AMBOVOMBE-2022",
+      "url": "https://maps.mapaction.org/dataset/cabf8c3e-922a-4dca-8852-7b624bbae5d9/resource/08637b63-0f45-46cd-93df-6a3ad4e0c529/download/ma025-v01-madagascar-series-with-admin-2-and-3-boundaries-mapbook_ambovombe-androy.pdf",
+      "recorded_role": "Secondary lead only. The retained source note says the mapbook lists BNGRC, GADM and OSM inputs and depicts Antanimora Atsimo as commune MG52516130 under Ambovombe-Androy.",
+      "limit": "It does not establish legal continuity or polygon identity. The original BNGRC predecessor archive remains unrestored; the former 2018 OCHA/HDX resource returned 404 in the prior investigation. No predecessor geometry finding is made here."
+    },
+    "remaining_work": [
+      "Restore a lawful, lineage-documented present-day district/commune boundary source and resolve Antanimora Sud commune membership against the decree and operational notice before any geographic correction is proposed.",
+      "Restore the former BNGRC predecessor archive from an authoritative source or leave the exact predecessor boundary lineage unresolved.",
+      "Obtain the exact statutory radio/television publication dates; promulgation dates are not substituted.",
+      "Resolve whether retained district polygons incorporate Namorona transfer from commune-level evidence; district comparisons alone cannot answer it.",
+      "Original #632 predecessor, source-lineage, rights and regional questions remain with their existing owner; this erratum does not claim the broader audit or region is complete."
+    ]
+  }
+}
