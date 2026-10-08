@@ -33,6 +33,8 @@ The later retained source ledger records Decree 2024-480 as scheduling Antanimor
 
 The retained MapAction 2022 mapbook is only a secondary lead: its source note says it lists BNGRC, GADM and OSM inputs and depicts Antanimora Atsimo as commune `MG52516130` under Ambovombe-Androy. It does not establish legal continuity or polygon identity. The original BNGRC predecessor archive remains unrestored, and the former 2018 OCHA/HDX resource returned 404 in the prior investigation. `source-corrections.json` binds these inherited findings to the exact later source-restoration file and lists the remaining source, predecessor, legal-date and Namorona-boundary work with its existing owner. This erratum does not complete the broader #632 audit.
 
+The reproducer uses the committed `issue-1509-api.json` as an immutable snapshot of the acceptance contract, subject IDs and source pins. Its recorded `state: open` is the API observation on 2026-10-08, not a live-state assertion; the snapshot is deliberately not refreshed when this issue closes. The reproducer therefore remains usable offline after merge.
+
 ## Reproduction and limitations
 
 The one-command reproduction uses the issue-pinned Git baseline and the exact private source snapshots from the retrieval recorded in `source-corrections.json`. Restore the two laws and page to private files, check the byte lengths and hashes, then run:
