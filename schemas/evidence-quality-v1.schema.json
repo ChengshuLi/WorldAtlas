@@ -80,16 +80,121 @@
         "pin_files": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/$defs/historicalReference"
           }
         },
         "subject_files": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "oneOf": [
+              {
+                "$ref": "#/$defs/historicalReference"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "version",
+                  "path",
+                  "properties",
+                  "id_template"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "version": {
+                    "const": 1
+                  },
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "commit": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{40}$"
+                  },
+                  "properties": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 8,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+                    }
+                  },
+                  "id_template": {
+                    "type": "string",
+                    "maxLength": 512
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "version": {
+          "enum": [
+            1,
+            2
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "version"
+            ],
+            "properties": {
+              "version": {
+                "const": 2
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "files": {
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/file"
+                    },
+                    {
+                      "required": [
+                        "commit"
+                      ],
+                      "properties": {
+                        "commit": {
+                          "type": "string",
+                          "pattern": "^[a-f0-9]{40}$"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "files": {
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/file"
+                    },
+                    {
+                      "not": {
+                        "required": [
+                          "commit"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
-      }
+      ]
     },
     "outputs": {
       "type": "array",
@@ -199,6 +304,32 @@
           "pattern": "^[a-f0-9]{64}$"
         }
       }
+    },
+    "historicalReference": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "required": [
+            "path",
+            "commit"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
     }
   }
 }

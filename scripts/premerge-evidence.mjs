@@ -1,5 +1,5 @@
 import {gunzipSync} from 'node:zlib';
-import {sha256, validateEvidence, safeEvidencePath} from './evidence-quality.mjs';
+import {sha256, validateEvidence, safeEvidencePath, baselineFiles, baselineFile} from './evidence-quality.mjs';
 import {githubPages, workSpec} from './issue-claim-contract.mjs';
 import {validateLanePaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement, loadEvidencePolicy} from './evidence-policy.mjs';
@@ -40,7 +40,9 @@ export function validateRecordChecks(manifest, readFile) {
       'Record check requires generated output and independently pinned baseline reference');
     need(!manifest.outputs.some(file => file.path === check.reference_path), 'Candidate output cannot be its own reference');
     const actual = rows(at(check.path, check.json_pointer, 'candidate'), check.id_key);
-    const expected = rows(at(check.reference_path, check.reference_json_pointer, manifest.baseline.commit), check.reference_id_key);
+    const reference = manifest.baseline.version === 2 ? baselineFile(manifest, check.reference_commit === undefined ? check.reference_path : {path: check.reference_path, commit: check.reference_commit}) : {path: check.reference_path, commit: manifest.baseline.commit};
+    need(manifest.baseline.version === 2 || check.reference_commit === undefined, 'Versioned reference requires baseline version 2');
+    const expected = rows(at(reference.path, check.reference_json_pointer, reference.commit), check.reference_id_key);
     need(actual.size === expected.size && [...expected.keys()].every(id => actual.has(id)), 'Missing or fabricated records in exact reference scope');
     for (const [id, row] of actual) for (const [field, referenceField] of Object.entries(check.fields)) {
       need(typeof referenceField === 'string' && referenceField && Object.hasOwn(row, field) && Object.hasOwn(expected.get(id), referenceField) &&
@@ -186,12 +188,15 @@ export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, file
 }
 
 async function remoteReader(api, repo, commits) {
-  const trees = new Map(), cache = new Map();
+  const trees = new Map(), cache = new Map(), commitTrees = new Map();
   for (const [vintage, commit] of Object.entries(commits)) {
-    const object = await api(`/repos/${repo}/git/commits/${commit}`);
-    const tree = await api(`/repos/${repo}/git/trees/${object.tree.sha}?recursive=1`);
-    need(!tree.truncated && Array.isArray(tree.tree), 'Incomplete repository tree; cannot verify evidence');
-    trees.set(vintage, new Map(tree.tree.map(file => [file.path, file])));
+    if (!commitTrees.has(commit)) {
+      const object = await api(`/repos/${repo}/git/commits/${commit}`);
+      const tree = await api(`/repos/${repo}/git/trees/${object.tree.sha}?recursive=1`);
+      need(!tree.truncated && Array.isArray(tree.tree), 'Incomplete repository tree; cannot verify evidence');
+      commitTrees.set(commit, new Map(tree.tree.map(file => [file.path, file])));
+    }
+    trees.set(vintage, commitTrees.get(commit));
   }
   let total = 0;
   async function load(name, vintage, max = MAX_FILE) {
@@ -231,10 +236,16 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
       manifest.baseline.files.length + manifest.outputs.length + manifest.sources.flatMap(source => source.files ?? []).length <= 512,
       'Invalid or oversized evidence inventory');
     need(/^[a-f0-9]{40}$/.test(manifest.baseline?.commit ?? ''), 'Invalid evidence baseline');
-    const comparison = await api(`/repos/${repo}/compare/${manifest.baseline.commit}...${pr.base.sha}`);
-    need(['ahead', 'identical'].includes(comparison.status), 'Baseline is not an ancestor of PR base');
-    const reader = await remoteReader(api, repo, {candidate: pr.head.sha, base: pr.base.sha, [manifest.baseline.commit]: manifest.baseline.commit});
-    const loads = [...manifest.baseline.files.map(file => [file.path, manifest.baseline.commit]),
+    const historical = baselineFiles(manifest);
+    const commits = [...new Set([manifest.baseline.commit, ...historical.map(file => file.commit)])];
+    for (const commit of commits) {
+      const comparison = await api(`/repos/${repo}/compare/${commit}...${pr.base.sha}`);
+      need(['ahead', 'identical'].includes(comparison.status), 'Baseline is not an ancestor of PR base');
+    }
+    const reader = await remoteReader(api, repo, {candidate: pr.head.sha, base: pr.base.sha,
+      ...Object.fromEntries(commits.map(commit => [commit, commit]))});
+    reader.read.assertAncestor = commit => need(commits.includes(commit), 'Historical commit ancestry was not verified');
+    const loads = [...historical.map(file => [file.path, file.commit]),
       ...manifest.sources.flatMap(source => source.files ?? []).map(file => [file.path, 'candidate']), ...manifest.outputs.map(file => [file.path, 'candidate']),
       ...files.filter(file => file.status !== 'added').map(file => [file.previous_filename ?? file.filename, 'base'])];
     await reader.prefetch(loads);

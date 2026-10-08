@@ -30,6 +30,19 @@ Start with `coordination/templates/evidence-v1.json`, replace placeholders, and 
 
 The gate checks hashes, files, subjects, supported vintages, method policy, change accounting and result bindings. Ordinary input/decompressed files are bounded to 32 MiB, declared bytes to 256 MiB and descriptors to 512; remote Git trees must be complete. Larger datasets need reviewed partitioning rather than disabled checks. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
 
+### Multiple historical file vintages
+
+For an immutable packet whose original inputs and later retained evidence cannot
+be represented by one commit, use the opt-in `baseline.version: 2` format in
+[EVIDENCE_QUALITY.md](EVIDENCE_QUALITY.md#historical-files-from-multiple-commits).
+The trusted gate verifies each distinct commit against the actual PR base before
+loading its files. Review the original issue pins, exact `(commit, path)` bindings,
+subject/record references and metric input selectors separately from evaluation
+vintages. Preserve the old helper and additionally inventory actual executed code;
+a descriptor alone does not prove execution. Missing ancestry, ambiguous bindings
+or an unlisted executed helper must be repaired without replacing original pins.
+This changes evidence representation only, not scientific or production approval.
+
 ### Identity-only source subjects already recorded in prior evidence
 
 For a geography reproduction packet scoped to native source IDs, a new registry must not
