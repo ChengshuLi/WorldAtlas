@@ -32,6 +32,10 @@ def callable_pin(value):
         if isinstance(value, frozenset):
             rows = [constant(v) for v in value]
             return ['frozenset', sorted(rows, key=lambda row: json.dumps(row, sort_keys=True))]
+        if value is None or type(value) in (str, int, bool):
+            return [type(value).__name__, value]
+        if isinstance(value, bytes):
+            return ['bytes', value.hex()]
         return [type(value).__name__, marshal.dumps(value).hex()]
     def normalized(code):
         return {'argcount': code.co_argcount, 'posonlyargcount': code.co_posonlyargcount,
