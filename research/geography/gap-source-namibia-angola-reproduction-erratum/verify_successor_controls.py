@@ -98,6 +98,12 @@ def main():
                 return replace_features(path, transform)
             cases.append(run(mode, label, mutate))
     for mode in ENTRYPOINTS:
+        helper = PACKET / "authenticated_successors.py"
+        cases.append(run(mode, "changed-shared-code",
+                         lambda p=helper: (p, p.read_bytes() + b"\n# deliberate uncommitted shared-code drift\n")))
+        inventory = PACKET / "source-pin-inventory.json"
+        cases.append(run(mode, "changed-pin-inventory",
+                         lambda p=inventory: (p, p.read_bytes() + b"\n")))
         cases.append(run(mode, "changed-source-bytes",
                          lambda: (REPO / "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson",
                                   (REPO / "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson").read_bytes() + b" ")))
@@ -112,7 +118,7 @@ def main():
     result = {"issue": 1437, "verified_at": "2026-10-08", "controls": cases,
               "all_rejected_without_valid_output": True,
               "note": "Input/code edits were temporary in this isolated checkout and restored byte-for-byte in finally blocks."}
-    out = PACKET / "vintages/standalone-controls-20261008"
+    out = PACKET / "vintages/standalone-controls-final-20261008"
     out.mkdir(exist_ok=False)
     target = out / "control-results.json"
     target.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
