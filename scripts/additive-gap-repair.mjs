@@ -87,7 +87,11 @@ export function joinInventoryFacts(children, parent) {
 }
 
 function pinCost(pin) {
-  demand(/^[a-f0-9]{40}$/.test(pin?.commit ?? '') && safe(pin.path) && ['100644','100755'].includes(pin.mode)
+  if(pin?.kind === 'original-report-product'){
+    demand(safe(pin.path) && pin.path.startsWith('.cache/additive-native-gap-repair/') && pin.mode === '100644'
+      && hex(pin.report_sha256) && hex(pin.sha256) && Number.isSafeInteger(pin.uncompressed_bytes)
+      && hex(pin.uncompressed_sha256) && /^components-[0-9]{3}\.jsonl\.gz$/.test(pin.original_product_path), 'Invalid whole report product binding');
+  } else demand(/^[a-f0-9]{40}$/.test(pin?.commit ?? '') && safe(pin.path) && ['100644','100755'].includes(pin.mode)
     && /^[a-f0-9]{40}$/.test(pin.blob ?? '') && hex(pin.sha256), 'Missing whole immutable input descriptor');
   demand(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && pin.bytes <= 32*1024*1024, 'Ordinary input exceeds cap');
   if (pin.uncompressed_bytes !== undefined) demand(Number.isSafeInteger(pin.uncompressed_bytes)
@@ -96,6 +100,23 @@ function pinCost(pin) {
 }
 function readPin(repo, pin) {
   pinCost(pin);
+  if(pin.kind === 'original-report-product'){
+    const file=path.join(fs.realpathSync(repo),pin.path);
+    let current=fs.realpathSync(repo);
+    for(const part of pin.path.split('/')){
+      current=path.join(current,part);const stat=fs.lstatSync(current);
+      demand(!stat.isSymbolicLink() && (current===file?stat.isFile():stat.isDirectory()) && fs.realpathSync(current)===current, 'Nonordinary original product path');
+    }
+    const fd=fs.openSync(file,'r');
+    try{
+      const before=fs.fstatSync(fd);demand(before.size===pin.bytes && (before.mode&0o777)===0o644, 'Original product mode/size drift');
+      const raw=fs.readFileSync(fd),after=fs.fstatSync(fd);
+      demand(before.ino===after.ino && before.dev===after.dev && before.size===after.size && sha(raw)===pin.sha256, 'Original product whole encoded drift');
+      const decoded=gunzipSync(raw,{maxOutputLength:pin.uncompressed_bytes+1});
+      demand(decoded.length===pin.uncompressed_bytes && sha(decoded)===pin.uncompressed_sha256, 'Original product whole decoded drift');
+      return decoded;
+    }finally{fs.closeSync(fd);}
+  }
   const tree = execFileSync('git',['-C',repo,'ls-tree','-z',pin.commit,'--',pin.path],{encoding:'utf8'});
   demand(tree === `${pin.mode} blob ${pin.blob}\t${pin.path}\0`, 'Immutable input mode/blob differs');
   const bytes = Number(execFileSync('git',['-C',repo,'cat-file','-s',pin.blob],{encoding:'utf8'}));
@@ -169,7 +190,10 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...pinCost(request.source)];
   const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
   verifyModules();
+  demand(requestPin.kind === undefined && request.report.kind === undefined, 'Report/request must be independently immutable Git bodies');
   const report = JSON.parse(readPin(sourceRoot,request.report));
+  if(request.source.kind === 'original-report-product')demand(request.source.report_sha256 === request.report.sha256
+    && request.source.original_product_path === request.original_product_path, 'Foreign report-product source authority');
   demand(request.parent.report_sha256 === request.report.sha256 && request.parent.components === report.component_count
     && request.parent.roster_sha256 === report.complete_roster_sha256, 'Wrong complete original report');
   demand(/^components-[0-9]{3}\.jsonl\.gz$/.test(request.original_product_path), 'Only complete original component shards accepted');
