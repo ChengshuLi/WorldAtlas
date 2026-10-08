@@ -105,10 +105,13 @@ async function authoredControls(t){
  const stage=JSON.parse(await fs.readFile(base+'/../../../data/native-context-migration/manifest.json'));
  const currentFiles=stage.validator_sources.map(p=>({...p,mode:codeIndex.files.find(f=>f.path===p.path).mode}));
  const args={stage,codeIndex,authored,currentFiles},result=verifyAuthoredValidatorSources(args);assert.equal(result.authored_files,31);
+ const extensionName='coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs',actualRoot=path.resolve(base,'../../..'),extensionRaw=await fs.readFile(path.join(actualRoot,extensionName)),extended=structuredClone(currentFiles),extendedPin=extended.find(p=>p.path===extensionName);extendedPin.bytes=extensionRaw.length;extendedPin.sha256=createHash('sha256').update(extensionRaw).digest('hex');verifyAuthoredValidatorSources({...args,currentFiles:extended,currentRoot:actualRoot});
+ const adverseRoot=path.join(scratch,'extension-adverse');await fs.mkdir(path.dirname(path.join(adverseRoot,extensionName)),{recursive:true});
+ for(const [before,after]of [['Complete canonical inverse must precede patch selection','Foreign inverse may precede patch selection'],['const restored = new Map();','const restored = new Map();/* altered original */']]){const changed=Buffer.from(extensionRaw.toString().replace(before,after));assert(!changed.equals(extensionRaw));await fs.writeFile(path.join(adverseRoot,extensionName),changed);const rebound=structuredClone(extended);rebound.find(p=>p.path===extensionName).bytes=changed.length;rebound.find(p=>p.path===extensionName).sha256=createHash('sha256').update(changed).digest('hex');assert.throws(()=>verifyAuthoredValidatorSources({...args,currentFiles:rebound,currentRoot:adverseRoot}));}
  const omitted=structuredClone(stage);omitted.validator_sources.pop();assert.throws(()=>verifyAuthoredValidatorSources({...args,stage:omitted}));
  for(const name of ['scripts/native-ownership/compile-native-ownership.mjs','scripts/native-ownership/validate-context-migration.mjs','scripts/check-prepared.mjs']){const changed=structuredClone(currentFiles);changed.find(p=>p.path===name).sha256='0'.repeat(64);assert.throws(()=>verifyAuthoredValidatorSources({...args,currentFiles:changed}),/algorithm changed/);}
  const changed=structuredClone(stage);changed.validator_sources[0].sha256='0'.repeat(64);assert.throws(()=>verifyAuthoredValidatorSources({...args,stage:changed}));
- return {...result,all_50_authored_whole_bodies_restored:true,immutable_historical_source_and_numerical_negatives:5};
+ return {...result,all_50_authored_whole_bodies_restored:true,immutable_historical_source_and_numerical_negatives:7,exact_additive_restoration_extension:true};
 }
 export async function runCurrentExecutionControls(){
  const cleanup=[];const t={after:callback=>cleanup.push(callback)};

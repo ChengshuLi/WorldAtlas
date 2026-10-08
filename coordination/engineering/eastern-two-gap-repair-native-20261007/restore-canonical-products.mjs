@@ -330,6 +330,32 @@ export function getRestoredCanonicalProducts(root) {
   return saved.receipt;
 }
 
+// Select an exact member of the already authenticated complete inverse. The
+// receiving phase still admits and reads its complete ordinary body itself.
+export function restoredContextMember(root,name,{prior=false}={}) {
+  const saved=restored.get(root);assert(saved,'Complete canonical restoration must precede context selection');
+  assert(safe(name));
+  const pin=(prior?saved.old.logical_targets:saved.map.logical_targets).find(p=>(prior?p.path:p.target)===name);
+  assert(pin,'Context input is absent from the complete restored original roster');
+  const base=prior?saved.receipt.priorImage:root;
+  return {file:ordinary(base,name),pin:{path:name,bytes:pin.bytes,sha256:pin.sha256,mode:pin.mode},
+    original_index_sha256:prior?originalPriorIndex:canonicalIndex,complete_inverse_preserved:true};
+}
+
+export function restoredContextPatch(root,{runtimeBytes,codeBytes}) {
+  const saved=restored.get(root);assert(saved,'Complete canonical inverse must precede patch selection');
+  const base=namespace+'/canonical-products',indexBytes=fs.statSync(ordinary(root,base+'/index.json')).size;assert(Number.isSafeInteger(runtimeBytes+codeBytes+indexBytes+131072)&&runtimeBytes+codeBytes+indexBytes+131072<=256*1024*1024,'Bounded authenticated index-discovery phase');
+  const indexRaw=read(root,{path:base+'/index.json',sha256:canonicalIndex,bytes:indexBytes});
+  const index=JSON.parse(indexRaw),member=index.files.find(p=>p.path==='current-context-byte-patch.json.gz');assert(member&&member.mode==='100644');
+  const parts=index.parts.filter(p=>p.offset<member.offset+member.bytes&&p.offset+p.decoded_bytes>member.offset);
+  let total=runtimeBytes+codeBytes+131072+indexRaw.length+member.bytes;
+  for(const p of parts)total+=p.bytes+p.decoded_bytes;
+  assert(Number.isSafeInteger(total)&&total<=256*1024*1024,'Complete patch acquisition budget before source opens');
+  const pieces=[];for(const p of parts){const encoded=read(root,{...p,path:base+'/'+p.path}),decoded=gunzipSync(encoded,{maxOutputLength:CAP});assert.equal(decoded.length,p.decoded_bytes);assert.equal(sha(decoded),p.decoded_sha256);pieces.push(decoded.subarray(Math.max(0,member.offset-p.offset),Math.min(decoded.length,member.offset+member.bytes-p.offset)));}
+  const raw=Buffer.concat(pieces);assert.equal(raw.length,member.bytes);assert.equal(sha(raw),member.sha256);
+  return {raw,pin:member,budget:{complete_phase_bytes:total,installed_runtime_bytes:runtimeBytes,source_parts:parts.map(p=>({...p,path:base+'/'+p.path}))}};
+}
+
 function checkoutMetadata(root,relative) {
   const file=ordinary(root,relative),stat=fs.lstatSync(file);
   assert(stat.isFile()&&stat.size>0&&stat.size<=1024*1024,'Bounded checkout metadata required');
