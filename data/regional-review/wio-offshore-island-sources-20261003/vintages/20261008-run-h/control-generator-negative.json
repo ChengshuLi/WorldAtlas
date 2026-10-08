@@ -1,0 +1,13 @@
+{
+  "method_id": "wio-run-generation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "adverse_tests": [
+    "test_broken_symlink_run_is_rejected_without_following_it",
+    "test_existing_ordinary_run_is_preserved",
+    "test_failure_after_calculation_has_no_output_vintage_or_receipt",
+    "test_parent_roster_uses_authenticated_reader_bytes",
+    "test_path_traversal_is_rejected"
+  ],
+  "no_partial_receipt": true
+}
