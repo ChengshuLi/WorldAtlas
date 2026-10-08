@@ -3,13 +3,13 @@
   "status": "PASS",
   "scientific_operations_invoked": false,
   "cap_bytes": 268435456,
-  "complete_phase_bytes": 261742399,
-  "headroom_bytes": 6693057,
+  "complete_phase_bytes": 261745039,
+  "headroom_bytes": 6690417,
   "component_totals": {
     "encoded_source_bodies": 88964941,
     "decoded_native_source_bodies": 101279150,
     "imported_runtime_files_and_python_executable": 39345622,
-    "project_code_files": 152686,
+    "project_code_files": 155326,
     "selected_native_records_output": 0,
     "scratch_reservation": 8000000,
     "generated_output_reservation": 24000000
@@ -2343,8 +2343,8 @@
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/reproduce_union_control.py",
       "role": "project-code",
-      "bytes": 5713,
-      "sha256": "9f48235e1149d6f3504d4ea81f8d41912e7d25a96b9880a3bd57787d51f75660"
+      "bytes": 8353,
+      "sha256": "76375a40294608cdbdb08fa08ee2b3180f1d84ff6da3fc4b688f729c7f65c78b"
     },
     {
       "path": "scripts/evidence/immutable.py",
@@ -2359,15 +2359,15 @@
   },
   "process_boundary": {
     "process_scan": "no active GSHHG, Alaska, Arctic, source-fit or named geometry process observed before admission",
-    "memory_pressure_free_percent": 45,
+    "memory_pressure_free_percent": 38,
     "rss_cap_bytes": 805306368,
     "wall_deadline_seconds": 900,
     "enforcement": "sampled/cooperative; record actual terminal state and peak RSS",
-    "host_free_disk_bytes": 27876130816,
-    "managed_workspace_free_bytes": 27875127296,
+    "host_free_disk_bytes": 27768471552,
+    "managed_workspace_free_bytes": 27768459264,
     "managed_workspace_minimum_free_bytes": 10737418240,
     "managed_workspace_floor_passed": true,
-    "managed_checkout_bytes": 42605518848,
+    "managed_checkout_bytes": 42680516608,
     "managed_worker": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
     "managed_reservation_bytes": 1073741824,
     "relevant_processes": []
