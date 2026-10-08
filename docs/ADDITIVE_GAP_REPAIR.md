@@ -124,3 +124,47 @@ literal-append / failed old floating-union construction evidence. Water, foreign
 identity, missing context, conflict and even a tiny nonzero original residual
 reject. The independent source product includes 19,050 retired locations;
 36 is its active part count, not its retired-location denominator.
+
+The explicit selected release uses the distinct
+`worldatlas-effective-native-footprints:v1` domain. Its reference contains the
+literal complete base footprint hash and unchanged hierarchy hash; its effective
+hash includes every selected target, stable owner, complete primitive, rule and
+ledger binding. The normal loader independently streams the original legacy
+`[id, geometry]` hash over **all** loaded base features once, before exposing any
+addition. It then authenticates the whole selected ledger and patch and derives
+the exact complete effective view. It reads the selected native manifest's whole
+original bounds gzip (encoded and decoded hashes), comparing every identity,
+owner and parent. The old native manifest remains unchanged; a verified view
+receives the missing leaf-owner checksum. Foreign, omitted or duplicate owners,
+parents, primitives, rules or base geometry reject. Unsupported geometry-only
+scientific/prepared/content readers must fail closed on the distinct new digest.
+Dated/subset display contexts have a separate
+`worldatlas-display-context-footprints:v1` hash and retain their authenticated
+reference digest; they do not claim to hash the full selected world.
+
+The frozen `unactivated-additive-native-release-v1` producer authenticates a
+qualified complete source-premise predecessor against its original issued
+request, code/input/runtime closure and operating receipt. It authenticates the
+selected base and complete native row/run containers before running the unchanged
+native predicate over the candidate's bounded latitude window. Any previously
+assigned cell rejects, irrespective of owner. It emits a complete scoped ledger,
+sparse patch, unchanged target plus full addition, original owner roster and
+explicit release envelope. Zero-cell geometry remains in the effective digest
+but contributes zero native repairs. The complete original 95,173-component
+inventory denominator and all selected source cases remain visible.
+
+The actual add031 proposal at `824e99a1` passed: all 13 rows `[61359, 61372)` and
+1,678 original owner intervals are preserved; seven new cells belong to owner
+6757 (`atlas:physical:CAN-25:NUN`), with zero removals or reassignments. Its complete
+prospective phase was 214,754,769 bytes; lifetime RSS was 398,196,736 bytes under
+the 512 MiB operating limit. Root independently checked the full window and every
+cell against the original selected v8 containers. The renderer/picker control is
+explicitly a **13-row view fixture**, not a reconstructed full world bank; its
+non-target geometries are models while the owner roster, original intervals,
+target and addition are actual authenticated originals.
+
+This proposal is **unactivated**. The strict N2 two-repair bank must be selected
+first; final add031 activation requires rebinding to that actual selected bank
+and reading its 13 complete current owner rows again. No website deployment,
+new source authority approval, historical affiliation transfer or full global
+repair claim is implied by this proposal.

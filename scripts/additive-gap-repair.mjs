@@ -45,6 +45,7 @@ export function retainedLandSourcePremises({record,candidate,sourceCase,sourceSc
   const emptyKeys=['mapped_inland_water_support','outside_mapped_L1_context','contradictory_land_water_support','missing_reconstruction','extra_reconstruction'];
   const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0&&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
   const failures=[];const premise=(name,value)=>{if(!value)failures.push(name);};
+  premise('original-candidate-valid',sourceCase.candidate_valid===true);
   premise('retained-whole-land-pointset',record.status==='mapped-land-support'&&support.mapped_land_support?.kind==='whole-operation-pointset'
     &&wholePrimitivePointsetEqual(candidate,support.mapped_land_support.geometry));
   for(const key of emptyKeys)premise(key,empty(support[key]));
@@ -484,6 +485,11 @@ function additiveProposalStage(repo,request) {
   demand(equal(sourceRows.map(row=>row.component_id),issued.source_rule.expected_ids)&&sourceRows.length===facts.components,'Omitted/foreign source premise');
   const selected=sourceRows.find(row=>row.component_id===spec.component_id);
   demand(selected?.source_compatible===true&&selected.disposition==='awaiting-native-exclusion','Candidate has no complete retained-land premises');
+  const casePin=selected.source_case?.source;
+  demand(casePin&&spec.inputs.some(pin=>equal(pin,casePin)),'Original complete source-case input omitted');
+  const sourceCase=json(casePin.path).results[selected.source_case.ordinal];
+  demand(sourceCase?.component_id===selected.component_id&&sha(canonical(sourceCase))===selected.source_case.row_sha256
+    &&sourceCase.candidate_valid===true&&wholePrimitivePointsetEqual(sourceCase.candidate_geometry,selected.candidate),'Original candidate validity/whole case drift');
   const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),bank=json(request.baseline.bank_path);
   const baseReference={id:manifest.geographic_release,footprints_sha256:manifest.footprints_sha256,hierarchy_sha256:manifest.hierarchy_sha256};
   const target=bank.features.find(feature=>feature.id===selected.target_id),owner=bounds.find(row=>row.id===selected.target_id);

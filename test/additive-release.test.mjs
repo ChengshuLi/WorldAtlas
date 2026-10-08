@@ -4,7 +4,7 @@ import {applyAdditiveNativePatch,loadAdditiveNativePatch,footprintValueSha256 as
 import {packOwnership,pickOwnership,samplePackedOwnership} from '../src/pixel-ownership.js';
 import {nativeSourceDigest} from '../src/native-source-digest.js';
 import {createHash} from 'node:crypto';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 const rectangle=(a,b,c,d)=>({type:'Polygon',coordinates:[[[a,b],[c,b],[c,d],[a,d],[a,b]]]});
 function fixture(){
  const rows=Array.from({length:262166},()=>new Uint32Array());rows[3]=Uint32Array.from([1,3,1,8,10,2]);
@@ -68,4 +68,41 @@ test('real bounded asset load authenticates whole patch and complete effective d
  const staleBase=structuredClone(options.features);staleBase[1].geometry=rectangle(2,0,4,1);
  await assert.rejects(loadAdditiveNativePatch(data,staleBase,base,{fetcher,effectiveDigest:digest}),/original base/);
  await assert.rejects(loadAdditiveNativePatch({reference_release:options.baseReference},options.features,base),/explicit/);
+});
+
+test('actual frozen add031 full-owner window draws and picks exactly seven gained cells; no other cell changes',async()=>{
+ const {default:fs}=await import('node:fs');
+ const p='coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/';
+ const publication=JSON.parse(fs.readFileSync(p+'publication.json'));
+ const read=name=>{const descriptor=publication.assets.find(row=>row.path===name),raw=fs.readFileSync(p+name);
+  assert.equal(raw.length,descriptor.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),descriptor.sha256);return JSON.parse(raw);};
+ const patch=read('patch-add031.json'),feature=read('feature.json'),window=read('owner-window.json');
+ assert.equal(window.length,13);assert.equal(window[0].y,61359);assert.equal(window.at(-1).y,61371);
+ const rows=Array.from({length:262166},()=>new Uint32Array());
+ for(const row of window)rows[row.y]=Uint32Array.from(row.complete_owner_intervals.flat());
+ // This is a declared 13-row view fixture of complete ACTUAL owner rows, not a
+ // reconstructed complete world bank. Both renderer/picker are production code.
+ const boundsRaw=gunzipSync(fs.readFileSync(p+'owners-add031.json.gz'));
+ const boundsDescriptor=publication.assets.find(row=>row.path==='owners-add031.json.gz');
+ assert.equal(boundsRaw.length,boundsDescriptor.uncompressed_bytes);assert.equal(createHash('sha256').update(boundsRaw).digest('hex'),boundsDescriptor.uncompressed_sha256);
+ const bounds=JSON.parse(boundsRaw),modelGeometry=rectangle(0,0,1,1);
+ // Non-target geometry is explicitly a model: only the full authentic owner
+ // roster and 13-row native window are under test; no world-geometry claim.
+ const ownerFeatures=bounds.map(row=>row.id===feature.id?feature:{id:row.id,pixelIndex:row.index,geometry:modelGeometry});
+ const base={...packOwnership({size:262166,rows}),method:'native-linear-evenodd-first-owner-v1',geographic_release:patch.base_reference.id,...patch.base_reference,
+  reference_owner_sha256:createHash('sha256').update(JSON.stringify(bounds.map(row=>[row.index,row.id]).sort((a,b)=>a[0]-b[0]))).digest('hex')};
+ const out=applyAdditiveNativePatch(base,patch,{baseReference:patch.base_reference,effectiveReference:patch.effective_reference,features:ownerFeatures});
+ const before=samplePackedOwnership(base,{x:0,y:61359,width:262166,height:13}),after=samplePackedOwnership(out,{x:0,y:61359,width:262166,height:13});
+ let added=0,existing=0;for(let i=0;i<before.length;i++){
+  if(before[i]){assert.equal(after[i],before[i]);existing++;}
+  else if(after[i]){assert.equal(after[i],6757);added++;}
+ }
+ assert.equal(added,7);assert.ok(existing>0);
+ for(const row of patch.rows)for(const [start,end,owner]of row.runs)for(let x=start;x<end;x++){
+  assert.equal(pickOwnership(base,x,row.y),0);assert.equal(pickOwnership(out,x,row.y),owner);
+  assert.equal(after[(row.y-61359)*262166+x],pickOwnership(out,x,row.y));
+ }
+ assert.equal(out.additive_added_cells,7);
+ const drift=structuredClone(patch);drift.rows[0].runs[0][0]=window[0].complete_owner_intervals[0][0];drift.rows[0].runs[0][1]=drift.rows[0].runs[0][0]+1;drift.rows[0].y=window[0].y;
+ assert.throws(()=>applyAdditiveNativePatch(base,drift,{baseReference:patch.base_reference,effectiveReference:patch.effective_reference,features:ownerFeatures}),/assigned/);
 });

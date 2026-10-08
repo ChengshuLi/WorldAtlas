@@ -102,7 +102,7 @@ test('actual whole source-supported shared-edge pilot derives source premises wi
  const facts=retainedLandSourcePremises(input);assert.equal(facts.source_compatible,true);assert.equal(facts.authority,'unapproved');assert.equal(facts.status,record.physical_status);
  const originalGeometry=JSON.stringify(pilot.before.geometry);assert.equal(wholePrimitivePointsetEqual(record.complete_support.mapped_land_support.geometry,pilot.candidate),true);
  for(const alter of [x=>x.record.status='mapped-inland-water-support',x=>x.record.complete_support.mapped_inland_water_support.geometry={type:'Polygon',coordinates:pilot.candidate.coordinates},
-  x=>x.sourceScope.active_feature_count--,x=>x.sourceCase.native_covering_named_envelopes.push(x.sourceCase.native_covering_named_envelopes[0]),
+  x=>x.sourceCase.candidate_valid=false,x=>x.sourceScope.active_feature_count--,x=>x.sourceCase.native_covering_named_envelopes.push(x.sourceCase.native_covering_named_envelopes[0]),
   x=>x.sourceCase.new_neighbor_intersections=[{id:'foreign',geometry:pilot.candidate}],x=>x.target.properties.parent_id='foreign',
   x=>x.sourceCase.retired_administrative_reference_context.pop(),x=>x.sourceCase.gain_candidate_symmetric_difference_area_deg2=1e-16]){
   const changed=structuredClone(input);alter(changed);assert.equal(retainedLandSourcePremises(changed).source_compatible,false);
