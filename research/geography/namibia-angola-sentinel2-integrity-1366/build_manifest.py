@@ -57,7 +57,7 @@ def main():
             src['limit']='Original STAC pages, raw source-window NPZs, source metadata, object HEAD records and byte-range log remain available as hash-bound historical Git objects; no whole COG object or independent mirror terms are retained or claimed.'
     outputs=[]; change=[]
     for p in sorted(BASE.rglob('*')):
-        if not p.is_file() or p.name=='evidence-quality.json' or '__pycache__' in p.parts: continue
+        if not p.is_file() or p==BASE/'evidence-quality.json' or '__pycache__' in p.parts: continue
         rel=str(p.relative_to(REPO)); d=desc(rel,p.read_bytes())
         outputs.append(d|{'role':'evidence-output'})
         change.append({'path':rel,'status':'added'})
