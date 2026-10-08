@@ -7,13 +7,22 @@
   "github_issue": 1488,
   "date_timezone": "America/Los_Angeles",
   "scope": {
-    "geographies": ["Alaska"],
-    "attributes": ["native source identity", "source fitness", "physical support limits"],
+    "geographies": [
+      "Alaska"
+    ],
+    "attributes": [
+      "native source identity",
+      "source fitness",
+      "physical support limits"
+    ],
     "supported_from": null,
     "supported_to": null,
-    "sources": ["geoBoundaries USA ADM2 2018", "GSHHG 2.3.7"]
+    "sources": [
+      "geoBoundaries USA ADM2 2018",
+      "GSHHG 2.3.7"
+    ]
   },
-  "updated_at_utc": "2026-10-08T10:15:00Z",
+  "updated_at_utc": "2026-10-08T17:41:55Z",
   "geographic_release": null,
   "input_paths": [
     "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
@@ -27,6 +36,7 @@
   ],
   "bundle_paths": [
     "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/next-measurement-spec.json",
     "research/geography/alaska-thirteen-source-fitness-20261008/sources/complete-native-family-record.jsonl",
     "research/geography/alaska-thirteen-source-fitness-20261008/sources/gshhg-native-query-records.json",
     "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
@@ -44,13 +54,13 @@
     "complete 995-component family record preserved as read-only context"
   ],
   "source_gaps": [
-    "exact simplified/non-simplified geometry variant equivalence and candidate-fragment-to-target-boundary lineage",
-    "whether the intended physical target is the recorded county target or a separate physical/ecological region",
-    "per-feature GSHHG observation dates, target-specific shoreline accuracy and repair authority"
+    "candidate-specific exact geometry, no-loss, source-variant and neighbor predicates comparing the retained simplified source variant with the Atlas-recorded county target",
+    "per-feature GSHHG observation dates, target-specific shoreline accuracy and repair authority for any physical-boundary reconstruction",
+    "separate byte-retained raw full geoBoundaries USA ADM2 input is unavailable in this packet; the Atlas target geometry is retained but must not be described as unmodified raw-source bytes"
   ],
   "blockers": [],
-  "next_action": "Submit the validated source-only evidence packet as the one allowed PR, then obtain exact-head independent source review.",
-  "pull_request": null,
+  "next_action": "Submit corrected source-only packet and bounded next-measurement specification for exact-head independent review; do not run GIS unless scope is explicitly amended.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/1495",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }

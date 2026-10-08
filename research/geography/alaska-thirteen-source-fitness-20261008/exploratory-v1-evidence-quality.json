@@ -1014,7 +1014,7 @@
       "retention": "restoration-only",
       "verification": "unverified",
       "restoration": "Use sources/selected-2018-usa-adm2-features.geojson and sources/usa-adm2-source-metadata.json; original retained product is pinned in the baseline corpus.",
-      "limit": "Native county target identity and role are supported; exact simplified/non-simplified geometry applicability, candidate-specific no-loss predicates, and shoreline-sensitive applicability remain unresolved.",
+      "limit": "County subject identity is supported; exact simplified/non-simplified geometry applicability, physical-region authority, and target-specific effective use remain unresolved.",
       "temporal_status": "reference"
     },
     {
@@ -1046,21 +1046,21 @@
       "retention": "restoration-only",
       "verification": "unverified",
       "restoration": "See sources/native-atlas-target-features.geojson and its pinned source parts.",
-      "limit": "Confirms the native Atlas target source identity, role, edition and parent joins; does not authorize exact geometry changes or repair.",
+      "limit": "Confirms recorded Atlas metadata and identity joins only; does not settle target intent or authorize boundaries.",
       "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/README.md",
-      "bytes": 5585,
-      "sha256": "4b19b06eb2e2bad782169421df2ad2d9cbe53f1a2b5fb8f94aeaee176cec80c4",
+      "bytes": 5701,
+      "sha256": "fd7b60b9bb8036c8225c696ac355f321f1194616670acafa701d77811ed6254e",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/build_evidence.py",
-      "bytes": 42895,
-      "sha256": "753d43c0b1c25f520ed66ffd4872ae28eba3078c32c851adf20b8bcdf0ef161a",
+      "bytes": 41502,
+      "sha256": "969a13d05dec42cb1de39e84535a32cd068a67dfab7d04b8e85467af734f37cc",
       "hash_kind": "file-bytes"
     },
     {
@@ -1070,141 +1070,15 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-evidence-quality.json",
-      "bytes": 80153,
-      "sha256": "3a84b9078e5861d061150aa06596a6ba4e087aefcb86a0bfaabae3e8101d2005",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/README.md",
-      "bytes": 537,
-      "sha256": "eb0fdbc598c12e8ec5495919665ae0ebbe9a13b859f1d6f0f93b0b5f36591ff1",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/build-receipt.json",
-      "bytes": 9296,
-      "sha256": "431f6925cd6b0f64e8e3c3c96da6da62dd57b84cb416997aeca88b0077eb8f21",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/candidate-components.geojson",
-      "bytes": 18192,
-      "sha256": "b24011f1acef059783ea61d96308f3b43ef0aabdbaf19f1fb7694b613a470b14",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/candidate-source-screen.json",
-      "bytes": 168063,
-      "sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/complete-native-family-record.jsonl",
-      "bytes": 226731,
-      "sha256": "5c79b82588ff5c8f3c1e6305e4c1bcd565b7e379203b95bc2c09322f30f18119",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-packet-generator-negative-control.json",
-      "bytes": 202,
-      "sha256": "4d0efe1789a8a5e5cd7efe8544c9931ba1eeff8bb9d103bcd8298f2f5d36c226",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-packet-generator-positive-control.json",
-      "bytes": 200,
-      "sha256": "7d119e2ffb09c3d0ad4d9dc93640bc653cd2566567cffa54da6470b5ab1455a6",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-reproducibility.json",
-      "bytes": 266,
-      "sha256": "3616df32ae5222efd64bdcbd03fc899dfea2d8dbe87e8d9019f22d78f1fca7b7",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-source-identity-negative-control.json",
-      "bytes": 201,
-      "sha256": "1f73d83a83b9de25eef8d8a92579ed1d9a38e6836515fac1843dbdcd5bbe0ff5",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-source-identity-positive-control.json",
-      "bytes": 199,
-      "sha256": "4548d1213b2159118bfa61c4e3200d3f11708b7c84678282770d63d446ddd2d5",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/geoBoundaries-derivative-use-terms.txt",
-      "bytes": 4316,
-      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/gshhg-native-query-records.json",
-      "bytes": 18640,
-      "sha256": "d978c4e92bdcbff3ece9f4f798ea977ed21a4d709ef5598fed5bde71a7130783",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/input-receipts.json",
-      "bytes": 37147,
-      "sha256": "8093d12606e1ef14adf44aa86153fdeef2c28fc4f0386e08cd2f1f50b3121428",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/native-atlas-target-features.geojson",
-      "bytes": 366513,
-      "sha256": "0cfe5197d17fdd88fa4a13bbd1ac120a7cf195cc6ee7bf3b49dbd0303b86e326",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/physical-query-rows.jsonl",
-      "bytes": 38656,
-      "sha256": "e36d6319cd9d23c4c8d508415f8af7965e069928e5e1206faac3d50cbd5ece50",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/selected-2018-usa-adm2-features.geojson",
-      "bytes": 608036,
-      "sha256": "02427b560826d51ab275e3df6f8fa3d4629dd762733f5c4c69b1a8f2ee8e44b5",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/selection-ranking.json",
-      "bytes": 2751,
-      "sha256": "fb2f69feabc3673f5fa1f064b6ea6ac07974177eb06898b796e296804a385ef0",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/usa-adm2-attribution.json",
-      "bytes": 2949,
-      "sha256": "6236712dd0cf23fd258ce7e4a39412e7652be7d2a3c4db2b3e83ddbd4a60c8cd",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/usa-adm2-source-metadata.json",
-      "bytes": 5084,
-      "sha256": "88dcd7f581d5b8d2b5f5003cf4cd7b39310b8bc52c96e8371d55c92559dd2258",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/research-progress.json",
-      "bytes": 3495,
-      "sha256": "1cfe993ac910652c8d6054b3a7b16d90a95304ede702e01f0c46a72337bbd2c6",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/run_reproducibility.py",
-      "bytes": 4932,
-      "sha256": "4ca58242ef569e68ed75fe72a6cef50708b3d2c09995669f27613d9c75f2b518",
+      "bytes": 3070,
+      "sha256": "b821038491b768b1b3dd2b20652cc14896056c67f26a1ce0cf26681d8c533436",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/build-receipt.json",
-      "bytes": 9822,
-      "sha256": "ed3997dd48b0826b3c46b7e3e7f7bf0bf55553983d2012f3c31652e6a6600fb6",
+      "bytes": 9296,
+      "sha256": "431f6925cd6b0f64e8e3c3c96da6da62dd57b84cb416997aeca88b0077eb8f21",
       "hash_kind": "file-bytes"
     },
     {
@@ -1215,8 +1089,8 @@
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
-      "bytes": 166310,
-      "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "bytes": 168063,
+      "sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "hash_kind": "file-bytes"
     },
     {
@@ -1227,32 +1101,32 @@
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/control-packet-generator-negative-control.json",
-      "bytes": 307,
-      "sha256": "12f4731c2323184f3345bec38766671a0239951cec679928fe2d779b35e3dff1",
+      "bytes": 202,
+      "sha256": "4d0efe1789a8a5e5cd7efe8544c9931ba1eeff8bb9d103bcd8298f2f5d36c226",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/control-packet-generator-positive-control.json",
-      "bytes": 254,
-      "sha256": "db809639116b4196fe7d68f024180ea04a6892972dfb326739d8def9e5f7aa16",
+      "bytes": 200,
+      "sha256": "7d119e2ffb09c3d0ad4d9dc93640bc653cd2566567cffa54da6470b5ab1455a6",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/control-reproducibility.json",
-      "bytes": 458,
-      "sha256": "b8d1de8e2fdd19319eb11424283fab89e671bde38740d8687a5d864b7b2f7a0f",
+      "bytes": 266,
+      "sha256": "3616df32ae5222efd64bdcbd03fc899dfea2d8dbe87e8d9019f22d78f1fca7b7",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/control-source-identity-negative-control.json",
-      "bytes": 236,
-      "sha256": "50eac1e41eb493ccc938b0f477485c13a03038106ad2f5480380fed573751154",
+      "bytes": 201,
+      "sha256": "1f73d83a83b9de25eef8d8a92579ed1d9a38e6836515fac1843dbdcd5bbe0ff5",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/control-source-identity-positive-control.json",
-      "bytes": 253,
-      "sha256": "78b926299ca60f3f4a09f9cbb3a93a131ac708f9ab14050d01a19b6ca107aa45",
+      "bytes": 199,
+      "sha256": "4548d1213b2159118bfa61c4e3200d3f11708b7c84678282770d63d446ddd2d5",
       "hash_kind": "file-bytes"
     },
     {
@@ -1269,8 +1143,8 @@
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/input-receipts.json",
-      "bytes": 37148,
-      "sha256": "6c6593688dd8ae65083cd57878f44f449898eab0060febbbddfc5c030589503d",
+      "bytes": 37147,
+      "sha256": "8093d12606e1ef14adf44aa86153fdeef2c28fc4f0386e08cd2f1f50b3121428",
       "hash_kind": "file-bytes"
     },
     {
@@ -1283,18 +1157,6 @@
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
       "bytes": 38656,
       "sha256": "e36d6319cd9d23c4c8d508415f8af7965e069928e5e1206faac3d50cbd5ece50",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/reproducibility-run-one.json",
-      "bytes": 529,
-      "sha256": "756d25ff5f66cab3dbeacec2e3686e5e69db2a66a3a2d8efae7d9afed2e17b3f",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/reproducibility-run-two.json",
-      "bytes": 529,
-      "sha256": "91fddc51f067230a64aec68f143d1ba72e421e8937500a671f7ea01d875f6fd4",
       "hash_kind": "file-bytes"
     },
     {
@@ -1400,7 +1262,7 @@
       "id": "scoped_candidate_count",
       "value": 13,
       "unit": "components",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1412,7 +1274,7 @@
       "id": "candidate_component_feature_binding_count",
       "value": 13,
       "unit": "features",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1424,7 +1286,7 @@
       "id": "source_subject_identity_fit_count",
       "value": 13,
       "unit": "components",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1436,7 +1298,7 @@
       "id": "exact_geometry_variant_unresolved_count",
       "value": 13,
       "unit": "components",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1445,10 +1307,10 @@
       "vintage": "baseline"
     },
     {
-      "id": "recorded_target_identity_unresolved_count",
-      "value": 0,
+      "id": "physical_region_target_unresolved_count",
+      "value": 13,
       "unit": "components",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1460,7 +1322,7 @@
       "id": "family_native_component_count",
       "value": 995,
       "unit": "components",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1472,7 +1334,7 @@
       "id": "native_atlas_target_record_count",
       "value": 7,
       "unit": "features",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1484,7 +1346,7 @@
       "id": "gshhg_native_source_record_count",
       "value": 11,
       "unit": "records",
-      "input_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "input_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
       "input_file": {
         "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
         "commit": "candidate"
@@ -1525,8 +1387,8 @@
       "unit": "components"
     },
     {
-      "metric_id": "recorded_target_identity_unresolved_count",
-      "value": 0,
+      "metric_id": "physical_region_target_unresolved_count",
+      "value": 13,
       "unit": "components"
     },
     {
@@ -1577,9 +1439,9 @@
       "json_pointer": "/exact_geometry_variant_unresolved_count"
     },
     {
-      "metric_id": "recorded_target_identity_unresolved_count",
+      "metric_id": "physical_region_target_unresolved_count",
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
-      "json_pointer": "/recorded_target_identity_unresolved_count"
+      "json_pointer": "/physical_region_target_unresolved_count"
     },
     {
       "metric_id": "family_native_component_count",
@@ -1607,8 +1469,8 @@
       ]
     },
     {
-      "text": "The named 2018 geoBoundaries subject and Counties/ADM2 source role match the native Atlas target record for all 13 candidates.",
-      "status": "supported",
+      "text": "The administrative source is not fit as authority for a distinct ecological or physical-region target; the intended physical target is not recorded in retained references.",
+      "status": "unresolved",
       "source_ids": [
         "geoboundaries-usa-adm2-2018",
         "atlas-recorded-usa-adm2-targets"
@@ -1622,7 +1484,7 @@
       ]
     },
     {
-      "text": "The retained simplified and Atlas-recorded non-simplified geometry variants do not have an established exact applicability or transformation for these candidates; candidate-specific exact geometry and no-loss predicates remain unmeasured.",
+      "text": "The retained simplified and Atlas-recorded non-simplified geometry variants do not have an established exact applicability or transformation for these candidates.",
       "status": "unresolved",
       "source_ids": [
         "geoboundaries-usa-adm2-2018",
@@ -1636,7 +1498,7 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "Run run_reproducibility.py with the repository Python 3.12 runtime from the repository root; it executes the pinned producer twice in fresh vintages and compares output inventories.",
+    "Run the packet source extractor with the repository Python 3.12 runtime from the repository root; it verifies immutable input blobs and produces only source evidence.",
     "Run scripts/evidence-quality.mjs against this manifest for byte and identity validation."
   ],
   "change_receipts": [
@@ -1653,91 +1515,7 @@
       "status": "added"
     },
     {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/README.md",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/build-receipt.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/candidate-components.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/candidate-source-screen.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/complete-native-family-record.jsonl",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-packet-generator-negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-packet-generator-positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-source-identity-negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/control-source-identity-positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/geoBoundaries-derivative-use-terms.txt",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/gshhg-native-query-records.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/input-receipts.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/native-atlas-target-features.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/physical-query-rows.jsonl",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/selected-2018-usa-adm2-features.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/selection-ranking.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/usa-adm2-attribution.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/exploratory-v1-sources/usa-adm2-source-metadata.json",
-      "status": "added"
-    },
-    {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/research-progress.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/run_reproducibility.py",
       "status": "added"
     },
     {
@@ -1794,14 +1572,6 @@
     },
     {
       "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/reproducibility-run-one.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/reproducibility-run-two.json",
       "status": "added"
     },
     {

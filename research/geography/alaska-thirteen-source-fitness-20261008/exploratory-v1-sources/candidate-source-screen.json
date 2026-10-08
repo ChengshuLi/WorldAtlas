@@ -71,16 +71,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
         "atlas_target_id": "gb:USA:ADM2:52423323B46246640861022",
         "atlas_target_original_id": "52423323B46246640861022",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -104,9 +102,10 @@
       "current_geometry_sha256": "f6f8b48a2f3d31bc50ea73d20075f5cb7dacb17266ae3ad8e3897abd45565614",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -164,9 +163,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
@@ -324,16 +323,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
         "atlas_target_id": "gb:USA:ADM2:52423323B16539688175930",
         "atlas_target_original_id": "52423323B16539688175930",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -357,9 +354,10 @@
       "current_geometry_sha256": "d07064e1716715618bf6b0ddb7f313bafc26acc0d11ff250d094b71b91b10120",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -417,9 +415,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
@@ -577,16 +575,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
         "atlas_target_id": "gb:USA:ADM2:52423323B80008995120080",
         "atlas_target_original_id": "52423323B80008995120080",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -610,9 +606,10 @@
       "current_geometry_sha256": "41d44c7ab86d4681528f4d4a4d506f65b3a780412729685c96141ec8256cc98d",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -670,9 +667,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
@@ -840,16 +837,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "8d53f7cb32e41314956b6eb6e5beef9bfc4cf8097bf7fd035001b2566768fa37",
         "atlas_target_id": "gb:USA:ADM2:52423323B64721050065013",
         "atlas_target_original_id": "52423323B64721050065013",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -873,9 +868,10 @@
       "current_geometry_sha256": "907c83f85d8cf18610a1122270e4fdac03104017b0e5237dee17b6c8c74695ad",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -933,9 +929,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
@@ -1093,16 +1089,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
         "atlas_target_id": "gb:USA:ADM2:52423323B16539688175930",
         "atlas_target_original_id": "52423323B16539688175930",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -1126,9 +1120,10 @@
       "current_geometry_sha256": "33655bbd4900f942bd4bd4fae9066bad21fe0a51d75484c9a006210a59b0b503",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -1186,9 +1181,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
@@ -1346,16 +1341,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
         "atlas_target_id": "gb:USA:ADM2:52423323B80008995120080",
         "atlas_target_original_id": "52423323B80008995120080",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -1379,9 +1372,10 @@
       "current_geometry_sha256": "3e1ac087fab9421cc3640d3b8a34ba29d9ccec237266cc0da3d63df6832ec35a",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -1439,9 +1433,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
@@ -1599,16 +1593,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
         "atlas_target_id": "gb:USA:ADM2:52423323B16539688175930",
         "atlas_target_original_id": "52423323B16539688175930",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -1632,9 +1624,10 @@
       "current_geometry_sha256": "80690097e995ab6c26d1447c7fc57d0190001d41ceca58cce24476b12550e295",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -1692,9 +1685,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
@@ -1852,16 +1845,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
         "atlas_target_id": "gb:USA:ADM2:52423323B46246640861022",
         "atlas_target_original_id": "52423323B46246640861022",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -1885,9 +1876,10 @@
       "current_geometry_sha256": "17ef6c1e9f81fa0ccebb0d6c9bb44753d0935bf3b50464f5f213937d6e3ecd47",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -1945,9 +1937,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
@@ -2105,16 +2097,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
         "atlas_target_id": "gb:USA:ADM2:52423323B46246640861022",
         "atlas_target_original_id": "52423323B46246640861022",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -2138,9 +2128,10 @@
       "current_geometry_sha256": "dec957bf2af7f3cb3756e99fb862e4c92b7d84c10cd5837f9c12b441400055d8",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -2198,9 +2189,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
@@ -2348,16 +2339,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "c8fb533dceaa473b61a699ca9e1aff98cdd355cc6049a1c3fd154cbf7eca4ac0",
         "atlas_target_id": "gb:USA:ADM2:52423323B57268278189593",
         "atlas_target_original_id": "52423323B57268278189593",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -2381,9 +2370,10 @@
       "current_geometry_sha256": "e8008a38d7471bb24692375751c6e6671e47332b2cc52c472158c2686afdd59e",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -2441,9 +2431,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
@@ -2601,16 +2591,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
         "atlas_target_id": "gb:USA:ADM2:52423323B80008995120080",
         "atlas_target_original_id": "52423323B80008995120080",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -2634,9 +2622,10 @@
       "current_geometry_sha256": "bf950debb709d2d8bcf564abb052c11c517b462184bae13f2df1c9c83ce77a8c",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -2694,9 +2683,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
@@ -2844,16 +2833,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "494670081e6e5ab1612048fba046a1b272b6d86eb98b199918df648e58bf8f51",
         "atlas_target_id": "gb:USA:ADM2:52423323B82121365400499",
         "atlas_target_original_id": "52423323B82121365400499",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -2877,9 +2864,10 @@
       "current_geometry_sha256": "94ea7b1ce6a9fba2d85df60d3601fcf67a5e766d371bdbc85816591aa88731d8",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -2937,9 +2925,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
@@ -3087,16 +3075,14 @@
     {
       "admin_context": {
         "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09",
-        "atlas_target_administrative_level": "ADM2",
         "atlas_target_geometry_sha256": "a56aab74d5b70ad0c95a353353a9689cbba11b14bfc5ceb33278f83b0fdaedf8",
         "atlas_target_id": "gb:USA:ADM2:52423323B55198873775030",
         "atlas_target_original_id": "52423323B55198873775030",
         "atlas_target_parent_id": "framework:province:alaska:4057e2fddbc5",
         "atlas_target_recorded_year": "2018",
         "atlas_target_source_id": "gb:USA:ADM2",
-        "atlas_target_source_role": "Counties",
         "atlas_target_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-        "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved",
+        "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target",
         "represented_year": "2018",
         "retained_product_geometry_matches_atlas_geometry": false,
         "retained_product_geometry_matches_route_geometry_hash": false,
@@ -3120,9 +3106,10 @@
       "current_geometry_sha256": "96fac28646b8469ca0fa115c7bb9def542d10af7177181bc7315af3a667c92cf",
       "decision": {
         "coarse_land_support": "fit-source-relative-only",
+        "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved",
         "exact_geometry_variant_fit": "unresolved",
         "historical_cause_or_repair_authority": "unresolved",
-        "recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target"
+        "source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target"
       },
       "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
       "gshhg_covering_records": [
@@ -3180,9 +3167,9 @@
       ],
       "missing_facts": [
         "the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry",
-        "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary",
-        "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel",
-        "an authorized repair decision"
+        "whether the intended repair target is this named county boundary or a separate physical/ecological region",
+        "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation",
+        "the original processing history explaining the current candidate boundary and an authorized repair decision"
       ],
       "original_component_record": {
         "component": "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9",
@@ -3350,8 +3337,8 @@
   ],
   "gshhg_native_source_record_count": 11,
   "native_target_record_count": 7,
-  "recorded_target_identity_unresolved_count": 0,
+  "physical_region_target_unresolved_count": 13,
   "source_subject_identity_fit_count": 13,
-  "tracker_head": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+  "tracker_head": "c8df65e1d5c4d235c33e2f488c3e29d26223860",
   "version": 1
 }

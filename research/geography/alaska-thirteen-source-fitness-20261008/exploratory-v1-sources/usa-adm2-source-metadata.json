@@ -1,0 +1,107 @@
+{
+  "catalogue": {
+    "advertised_feature_count": 3233,
+    "cohort": "administrative-registry",
+    "feature_count": 3233,
+    "key": "gb:USA:ADM2",
+    "metadata_sha256": "52c9da4222df0f4997e544db39bfcd2952c47d38f58924041d743b8d25aa6518",
+    "original_bytes": 7938450,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 2476897,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+        "sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9",
+        "uncompressed_bytes": 7938450,
+        "uncompressed_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+    "recorded_license": "Public Domain",
+    "source_represented_year_claim": "2018"
+  },
+  "payload": {
+    "bytes": 2476897,
+    "decoded_bytes": 7938450,
+    "decoded_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+    "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+    "sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9"
+  },
+  "registry": {
+    "Continent": "Northern America",
+    "UNSDG-region": "Europe and Northern America",
+    "UNSDG-subregion": "Undefined",
+    "admUnitCount": "3233",
+    "boundaryCanonical": "Counties",
+    "boundaryID": "USA-ADM2-52423323",
+    "boundaryISO": "USA",
+    "boundaryLicense": "Public Domain",
+    "boundaryName": "United States of America",
+    "boundarySource": "United States Census Bureau, MAF/TIGER Database",
+    "boundarySourceURL": "www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html",
+    "boundaryType": "ADM2",
+    "boundaryYearRepresented": "2018",
+    "buildDate": "Dec 12, 2023",
+    "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+    "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2-PREVIEW.png",
+    "licenseDetail": "nan",
+    "licenseSource": "www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+    "maxAreaSqKM": "383020.8965249841",
+    "maxPerimeterLengthKM": "6866.256080304761",
+    "maxVertices": "1425",
+    "meanAreaSqKM": "2897.1533621620965",
+    "meanPerimeterLengthKM": "267.6991427790131",
+    "meanVertices": "67.0",
+    "minAreaSqKM": "3.544545242092387",
+    "minPerimeterLengthKM": "7.1756875911853815",
+    "minVertices": "5",
+    "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+    "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2-all.zip",
+    "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.topojson",
+    "worldBankIncomeGroup": "High-income Countries"
+  },
+  "source_features": [
+    {
+      "canonical_feature_sha256": "fcc0a7bc525440fa1e9dcc39b18467ca0e5534f538ea4a3850321d9d5614f0f9",
+      "shapeID": "52423323B57268278189593",
+      "shapeName": "Kusilvak"
+    },
+    {
+      "canonical_feature_sha256": "73319a4a9dd01edf7a7fc4dc0854fc3a68bb5994f54c2d8b96426c0d7c6c5878",
+      "shapeID": "52423323B82121365400499",
+      "shapeName": "Hoonah-Angoon"
+    },
+    {
+      "canonical_feature_sha256": "17bb9d2e8a0453f3da83e259133fcf5901f9cd19003a0691e017e895a57eda6b",
+      "shapeID": "52423323B55198873775030",
+      "shapeName": "Prince of Wales-Hyder"
+    },
+    {
+      "canonical_feature_sha256": "e07fb24c46de4478e67bac577456c4f414b441191d00308bc51abd18302c0cd8",
+      "shapeID": "52423323B16539688175930",
+      "shapeName": "Valdez-Cordova"
+    },
+    {
+      "canonical_feature_sha256": "295ed44e82fab0ece60663f7485b1a4779b6ce48ab98636d08e6084964b75d4c",
+      "shapeID": "52423323B46246640861022",
+      "shapeName": "Aleutians East"
+    },
+    {
+      "canonical_feature_sha256": "ceb9c93e1c45301469fdeebd94343fb61fadcacb0173738ee8d6aee675b04d99",
+      "shapeID": "52423323B80008995120080",
+      "shapeName": "Kodiak Island"
+    },
+    {
+      "canonical_feature_sha256": "8b45d9889496aff5afbe1629a01f109c125fb9e004daa0b1b5316a91fd538e6a",
+      "shapeID": "52423323B64721050065013",
+      "shapeName": "Kenai Peninsula"
+    }
+  ]
+}

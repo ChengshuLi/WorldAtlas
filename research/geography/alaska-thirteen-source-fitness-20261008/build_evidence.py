@@ -11,13 +11,15 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import os
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 PACKET = Path(__file__).resolve().parent
-HEAD = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-FUNNEL_REV = "c8df65e1d5c4d235c33e2f488c3e29d26223860"
+HEAD = "6c0ea95b7a8214ac1548161368bd952af136b5c2"
+FUNNEL_REV = "c8df65e1d5c4d235c33e2f488c3e29d26223860f"
 ROUTE_REV = "12e90af4ff876e619a8eb0e6c1445821573500e6"
 FAMILY = "gap-source-batch:9a8d66e4d47f5883620328f9"
 IDS = {
@@ -49,6 +51,36 @@ def git_bytes(rev: str, path: str) -> bytes:
     return subprocess.check_output(["git", "show", f"{rev}:{path}"], cwd=ROOT)
 
 
+def verify_bytes(raw: bytes, expected_bytes: int, expected_sha256: str, label: str) -> None:
+    if len(raw) != expected_bytes or sha(raw) != expected_sha256:
+        raise ValueError(f"{label}: whole-file bytes or SHA-256 mismatch")
+
+
+def verify_roster(actual_ids, expected_ids, label: str) -> None:
+    actual, expected = set(actual_ids), set(expected_ids)
+    if actual != expected:
+        raise ValueError(f"{label}: identity roster differs (missing={len(expected-actual)}, extra={len(actual-expected)})")
+
+
+def verify_candidate_bindings(rows) -> None:
+    if len(rows) != len(IDS):
+        raise ValueError("candidate binding count differs from exact assigned scope")
+    verify_roster((row["component_id"] for row in rows), IDS, "candidate binding roster")
+    for row in rows:
+        source = row["component_feature_source"]
+        if (source["feature_sha256"] != row["current_feature_sha256"] or
+                source["geometry_sha256"] != row["current_geometry_sha256"]):
+            raise ValueError(f"candidate component feature/geometry mismatch: {row['component_id']}")
+        target = row["admin_context"]
+        if (target["atlas_target_source_id"] != "gb:USA:ADM2" or
+                target["atlas_target_original_id"] != target["source_id"].split(":")[-1] or
+                target["atlas_target_recorded_year"] != "2018" or
+                target["atlas_target_source_role"] != "Counties" or
+                target["atlas_target_administrative_level"] != "ADM2" or
+                target["atlas_target_parent_id"] != "framework:province:alaska:4057e2fddbc5"):
+            raise ValueError(f"native Atlas county target lineage mismatch: {row['component_id']}")
+
+
 def jsonl(data: bytes):
     for n, line in enumerate(data.splitlines()):
         if line:
@@ -62,7 +94,13 @@ def dump(path: Path, value) -> None:
 
 
 def main() -> None:
-    out = PACKET / "sources"
+    requested_out = Path(sys.argv[1]) if len(sys.argv) > 1 else PACKET / "sources"
+    lexical_out = requested_out if requested_out.is_absolute() else ROOT / requested_out
+    if any(part.is_symlink() for part in [lexical_out, *lexical_out.parents]):
+        raise ValueError("output path must not traverse a symlink")
+    out = requested_out.resolve() if len(sys.argv) > 1 else (PACKET / "sources")
+    if not out.is_relative_to(PACKET.resolve()):
+        raise ValueError("output vintage must remain within the owned packet")
     out.mkdir(parents=True, exist_ok=True)
     if any(out.iterdir()):
         raise ValueError("output directory must be a fresh empty vintage")
@@ -85,8 +123,7 @@ def main() -> None:
             if not desc:
                 continue
             encoded = git_bytes(FUNNEL_REV, path)
-            if len(encoded) != desc["bytes"] or sha(encoded) != desc["sha256"]:
-                raise ValueError(f"funnel output bytes mismatch: {path}")
+            verify_bytes(encoded, desc["bytes"], desc["sha256"], f"funnel output {path}")
             decoded = gzip.decompress(encoded)
             if len(decoded) != desc["uncompressed_bytes"] or sha(decoded) != desc["uncompressed_sha256"]:
                 raise ValueError(f"funnel output decoded mismatch: {path}")
@@ -110,8 +147,7 @@ def main() -> None:
         phase_receipts.append({"phase": f"funnel-catalog-batch-{batch:02}", "encoded_input_bytes": batch_encoded, "decoded_input_bytes": batch_decoded, "metadata_input_bytes": len(report_bytes), "project_code_bytes": len(Path(__file__).read_bytes()), "reserved_output_bytes": 16 * 1024 * 1024, "total_bytes": batch_total})
     if sum(family_counts.values()) != 1005 or len(family_counts) != 711:
         raise ValueError(f"expected 1005 candidates / 711 families, got {sum(family_counts.values())}/{len(family_counts)}")
-    if set(candidates) != IDS or len(candidates) != 13:
-        raise ValueError(f"selected family roster mismatch: {len(candidates)}")
+    verify_roster(candidates, IDS, "selected family roster")
     rank = sorted(family_counts.items(), key=lambda kv: (-kv[1], kv[0]))
     if rank[0] != ("gap-source-batch:3f21c83705d3cef5988b1295", 15) or rank[1] != (FAMILY, 13):
         raise ValueError(f"unexpected eligible-family ranking head: {rank[:2]}")
@@ -129,8 +165,7 @@ def main() -> None:
     for desc in component_feature_descriptors:
         path = desc["path"]
         encoded = git_bytes(HEAD, path)
-        if len(encoded) != desc["bytes"] or sha(encoded) != desc["sha256"]:
-            raise ValueError(f"physical component feature payload mismatch: {path}")
+        verify_bytes(encoded, desc["bytes"], desc["sha256"], f"physical component feature payload {path}")
         decoded = gzip.decompress(encoded)
         if len(decoded) != desc["uncompressed_bytes"] or sha(decoded) != desc["uncompressed_sha256"]:
             raise ValueError(f"physical component decoded payload mismatch: {path}")
@@ -168,8 +203,7 @@ def main() -> None:
             continue
         full_path = f"coordination/engineering/global-actionability-routing-20261007/results/{desc['path']}"
         encoded = git_bytes(HEAD, full_path)
-        if len(encoded) != desc["bytes"] or sha(encoded) != desc["sha256"]:
-            raise ValueError(f"family output encoded bytes mismatch: {full_path}")
+        verify_bytes(encoded, desc["bytes"], desc["sha256"], f"family output {full_path}")
         decoded_part = gzip.decompress(encoded)
         if len(decoded_part) != desc["uncompressed_bytes"] or sha(decoded_part) != desc["uncompressed_sha256"]:
             raise ValueError(f"family output decoded bytes mismatch: {full_path}")
@@ -211,8 +245,7 @@ def main() -> None:
         path = source["path"]
         if path not in source_cache:
             encoded = git_bytes(source["commit"], path)
-            if len(encoded) != source["bytes"] or sha(encoded) != source["sha256"]:
-                raise ValueError(f"original component encoded bytes mismatch: {path}")
+            verify_bytes(encoded, source["bytes"], source["sha256"], f"original component input {path}")
             decoded = gzip.decompress(encoded)
             if len(decoded) != source["uncompressed_bytes"] or sha(decoded) != source["uncompressed_sha256"]:
                 raise ValueError(f"original component decoded bytes mismatch: {path}")
@@ -262,8 +295,8 @@ def main() -> None:
         full = path if path.startswith("coordination/") else f"coordination/engineering/global-physical-comparison-20261006/results/{path}"
         encoded = git_bytes(HEAD, full)
         desc = physical_inventory.get(full) or physical_inventory.get(path)
-        if desc and (len(encoded) != desc.get("bytes") or sha(encoded) != desc.get("sha256")):
-            raise ValueError(f"physical output descriptor mismatch: {full}")
+        if desc:
+            verify_bytes(encoded, desc.get("bytes"), desc.get("sha256"), f"physical output {full}")
         decoded = gzip.decompress(encoded)
         physical_blobs[full] = {"rows": list(jsonl(decoded)), "bytes": len(encoded), "sha256": sha(encoded), "decoded_bytes": len(decoded), "decoded_sha256": sha(decoded)}
     physical_encoded_total = sum(x["bytes"] for x in physical_blobs.values())
@@ -326,8 +359,7 @@ def main() -> None:
     payload_rel = "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz"
     payload = (ROOT / payload_rel).read_bytes()
     part = usa["parts"][0]
-    if len(payload) != part["bytes"] or sha(payload) != part["sha256"]:
-        raise ValueError("USA ADM2 retained source payload does not match its original catalogue")
+    verify_bytes(payload, part["bytes"], part["sha256"], "USA ADM2 retained source payload")
     decoded = gzip.decompress(payload)
     if len(decoded) != part["uncompressed_bytes"] or sha(decoded) != part["uncompressed_sha256"]:
         raise ValueError("USA ADM2 source decoded payload does not match its original catalogue")
@@ -393,13 +425,14 @@ def main() -> None:
             "original_source_provenance": row["original_source_provenance"],
             "original_component_record": original,
             "component_feature_source": {"path": component_features[cid][0], "commit": HEAD, "feature_sha256": sha(canonical(component_features[cid][1])), "geometry_sha256": sha(canonical(component_features[cid][1]["geometry"]))},
-            "admin_context": {"source_id": "gb:USA:ADM2:" + source_id, "shape_name": feature["properties"]["shapeName"], "represented_year": "2018", "role": "native Atlas administrative county/county-equivalent target", "atlas_target_id": atlas_target["properties"]["id"], "atlas_target_parent_id": atlas_target["properties"]["parent_id"], "atlas_target_source_id": atlas_target["properties"]["metadata"]["source_id"], "atlas_target_original_id": atlas_target["properties"]["metadata"]["original_id"], "atlas_target_geometry_sha256": sha(canonical(atlas_target["geometry"])), "atlas_target_source_url": atlas_target["properties"]["metadata"].get("source_url"), "atlas_target_recorded_year": atlas_target["properties"]["metadata"].get("reference_year"), "source_subject_geometry_sha256": sha(canonical(feature["geometry"])), "route_source_geometry_sha256": row["source_evidence"].get("source_geometry_sha256"), "source_subject_matches_native_target_id": True, "source_product_variant": "retained geoBoundaries simplified GeoJSON from release tag 9469f09", "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09", "source_product_variant_matches_atlas_url": False, "retained_product_geometry_matches_route_geometry_hash": row["source_evidence"].get("source_geometry_sha256") == sha(canonical(feature["geometry"])), "retained_product_geometry_matches_atlas_geometry": sha(canonical(atlas_target["geometry"])) == sha(canonical(feature["geometry"])), "recorded_admin_target_fit": "source subject identity fits the named 2018 Alaska county target; exact geometry variant equivalence remains unresolved, and this does not establish an ecological or other physical-region target"},
+            "admin_context": {"source_id": "gb:USA:ADM2:" + source_id, "shape_name": feature["properties"]["shapeName"], "represented_year": "2018", "role": "native Atlas administrative county/county-equivalent target", "atlas_target_id": atlas_target["properties"]["id"], "atlas_target_parent_id": atlas_target["properties"]["parent_id"], "atlas_target_source_id": atlas_target["properties"]["metadata"]["source_id"], "atlas_target_original_id": atlas_target["properties"]["metadata"]["original_id"], "atlas_target_geometry_sha256": sha(canonical(atlas_target["geometry"])), "atlas_target_source_url": atlas_target["properties"]["metadata"].get("source_url"), "atlas_target_recorded_year": atlas_target["properties"]["metadata"].get("reference_year"), "atlas_target_source_role": atlas_target["properties"]["metadata"].get("source_role"), "atlas_target_administrative_level": atlas_target["properties"]["metadata"].get("administrative_level"), "source_subject_geometry_sha256": sha(canonical(feature["geometry"])), "route_source_geometry_sha256": row["source_evidence"].get("source_geometry_sha256"), "source_subject_matches_native_target_id": True, "source_product_variant": "retained geoBoundaries simplified GeoJSON from release tag 9469f09", "atlas_recorded_source_product_variant": "geoBoundaries non-simplified GeoJSON URL from release tag 9469f09", "source_product_variant_matches_atlas_url": False, "retained_product_geometry_matches_route_geometry_hash": row["source_evidence"].get("source_geometry_sha256") == sha(canonical(feature["geometry"])), "retained_product_geometry_matches_atlas_geometry": sha(canonical(atlas_target["geometry"])) == sha(canonical(feature["geometry"])), "recorded_admin_target_fit": "source subject and source role fit the named Atlas county/county-equivalent target; exact geometry variant equivalence remains unresolved"},
             "physical_query": {"path": physical_rows[cid]["path"], "current_retained_canonical_row_sha256": physical_rows[cid]["row_sha256"], "routing_declared_row_sha256": physical_rows[cid]["routing_declared_row_sha256"], "routing_row_hash_matches_current_retained_row": physical_rows[cid]["routing_row_hash_matches_current_retained_row"], "status": physical.get("physical_status"), "authority": physical.get("physical_authority"), "source_vintage": physical.get("source_vintage"), "relations": [{"source_id": r.get("source_id"), "source_level": r.get("source_level"), "candidate_covered": r.get("source_covers_candidate"), "candidate_covers_source": r.get("candidate_covers_source"), "witness": r.get("witness"), "source_record_sha256": r.get("source_record_sha256"), "source_pointset_sha256": r.get("source_pointset_sha256"), "disjoint": r.get("disjoint")} for r in relations], "unresolved": physical.get("unresolved"), "physical_limits": physical.get("physical_limits")},
             "gshhg_covering_records": [{"id": r.get("source_id"), "metadata": native_rows[r.get("source_id")]} for r in covered if r.get("source_id") in native_rows],
-            "decision": {"source_subject_identity_fit": "fit-to-the-recorded-2018-Alaska-county-target", "exact_geometry_variant_fit": "unresolved", "coarse_land_support": "fit-source-relative-only" if covered else "unresolved", "ecoregion_or_other_physical_region_target_fit": "no-fit-as-an-administrative-county-source; intended target remains unresolved", "historical_cause_or_repair_authority": "unresolved"},
-            "missing_facts": ["the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry", "whether the intended repair target is this named county boundary or a separate physical/ecological region", "target-specific effective date and shoreline registration/accuracy evidence for any physical-region interpretation", "the original processing history explaining the current candidate boundary and an authorized repair decision"],
+            "decision": {"recorded_target_source_fit": "fit-to-the-recorded-2018-Alaska-county-target", "exact_geometry_variant_fit": "unresolved", "coarse_land_support": "fit-source-relative-only" if covered else "unresolved", "historical_cause_or_repair_authority": "unresolved"},
+            "missing_facts": ["the source geometry variant and transformations that bind the simplified retained feature and route geometry hash to the current Atlas target geometry", "candidate-specific no-loss/source-geometry predicates and the original processing history that explain the current fragment boundary", "target-specific shoreline registration/accuracy evidence where the boundary follows a registration-sensitive coast or channel", "an authorized repair decision"],
         })
-    dump(out / "candidate-source-screen.json", {"version": 1, "tracker_head": FUNNEL_REV, "baseline_head": HEAD, "family": FAMILY, "candidate_count": len(rows_out), "component_feature_count": len(component_features), "source_subject_identity_fit_count": sum(r["decision"]["source_subject_identity_fit"] == "fit-to-the-recorded-2018-Alaska-county-target" for r in rows_out), "exact_geometry_variant_unresolved_count": sum(r["decision"]["exact_geometry_variant_fit"] == "unresolved" for r in rows_out), "physical_region_target_unresolved_count": len(rows_out), "family_native_component_count": family_record["component_count"], "native_target_record_count": len(target_features), "gshhg_native_source_record_count": len(native_rows), "family_context": {"grouping": family_record["original_fine_family"]["grouping"], "related_issues": family_record["collision_prerequisites"], "existing_related_issues": family_record["original_fine_family"]["existing_related_issues"], "edge_neighbor_ids": family_record["original_fine_family"]["edge_neighbor_ids"], "compatible_original_admin_component_ids": family_record["compatible_original_admin_component_ids"], "scope_limit": "the other 982 family components and all contacts are read-only context, not assigned"}, "findings": rows_out})
+    verify_candidate_bindings(rows_out)
+    dump(out / "candidate-source-screen.json", {"version": 1, "tracker_head": FUNNEL_REV, "baseline_head": HEAD, "family": FAMILY, "candidate_count": len(rows_out), "component_feature_count": len(component_features), "recorded_target_identity_unresolved_count": 0, "source_subject_identity_fit_count": sum(r["decision"]["recorded_target_source_fit"] == "fit-to-the-recorded-2018-Alaska-county-target" for r in rows_out), "exact_geometry_variant_unresolved_count": sum(r["decision"]["exact_geometry_variant_fit"] == "unresolved" for r in rows_out), "family_native_component_count": family_record["component_count"], "native_target_record_count": len(target_features), "gshhg_native_source_record_count": len(native_rows), "family_context": {"grouping": family_record["original_fine_family"]["grouping"], "related_issues": family_record["collision_prerequisites"], "existing_related_issues": family_record["original_fine_family"]["existing_related_issues"], "edge_neighbor_ids": family_record["original_fine_family"]["edge_neighbor_ids"], "compatible_original_admin_component_ids": family_record["compatible_original_admin_component_ids"], "scope_limit": "the other 982 family components and all contacts are read-only context, not assigned"}, "findings": rows_out})
     with (out / "physical-query-rows.jsonl").open("xb") as stream:
         stream.write(b"\n".join(physical_lines) + b"\n")
     with (out / "complete-native-family-record.jsonl").open("xb") as stream:
@@ -415,33 +448,33 @@ def main() -> None:
     with (out / "geoBoundaries-derivative-use-terms.txt").open("xb") as stream:
         stream.write(terms_bytes)
     dump(out / "usa-adm2-attribution.json", {"derivative_product_terms": "CC-BY 4.0; attribution to geoBoundaries required according to retained upstream terms", "individual_source_citation": usa_citation, "underlying_original_metadata_credit": usa_credit, "limits": ["license metadata and terms are preserved source claims, not a new legal opinion", "source authority and effective applicability remain unverified"]})
-    # Generator controls are recorded as data so an independent byte-only
-    # validator can confirm the methods were exercised without executing this
-    # packet script. The negative control checks a deliberately altered roster.
-    screen_raw = (out / "candidate-source-screen.json").read_bytes()
-    screen_obj = json.loads(screen_raw)
-    positive_ok = (len(screen_obj["findings"]) == 13 and
-                   all(x["component_feature_source"]["feature_sha256"] == x["current_feature_sha256"] and
-                       x["component_feature_source"]["geometry_sha256"] == x["current_geometry_sha256"]
-                       for x in screen_obj["findings"]))
-    if not positive_ok:
-        raise ValueError("positive control failed: exact original feature and geometry bindings")
-    mutated = json.loads(screen_raw)
-    mutated["findings"][0]["component_id"] += "-altered"
-    negative_rejected = (mutated["findings"][0]["component_id"] not in {x["component_id"] for x in screen_obj["findings"]})
-    if not negative_rejected:
-        raise ValueError("negative control failed: altered candidate identity was not rejected")
+    # These controls exercise the same byte and identity validators consumed
+    # above. They are evidence about the extraction joins, not geometry tests.
+    verify_candidate_bindings(rows_out)
+    corrupted = bytes([report_bytes[0] ^ 1]) + report_bytes[1:]
+    try:
+        verify_bytes(corrupted, len(report_bytes), sha(report_bytes), "negative control mutated funnel bytes")
+    except ValueError:
+        byte_mutation_rejected = True
+    else:
+        byte_mutation_rejected = False
+    mutated_rows = json.loads(json.dumps(rows_out))
+    mutated_rows[0]["admin_context"]["atlas_target_original_id"] += "-altered"
+    try:
+        verify_candidate_bindings(mutated_rows)
+    except ValueError:
+        target_join_mutation_rejected = True
+    else:
+        target_join_mutation_rejected = False
+    if not byte_mutation_rejected or not target_join_mutation_rejected:
+        raise ValueError("negative control failed to reject altered consumed source bytes or target join")
     for method_id, kind, evidence in [
-        ("source-identity", "positive-control", {"candidate_feature_bindings": 13, "exact_feature_and_geometry_hash_matches": 13}),
-        ("source-identity", "negative-control", {"mutation": "altered one candidate component ID", "roster_binding_rejected": negative_rejected}),
-        ("packet-generator", "positive-control", {"candidate_feature_bindings": 13, "exact_feature_and_geometry_hash_matches": 13}),
-        ("packet-generator", "negative-control", {"mutation": "altered one candidate component ID", "roster_binding_rejected": negative_rejected}),
+        ("source-identity", "positive-control", {"candidate_feature_bindings": len(rows_out), "exact_feature_and_geometry_hash_matches": len(rows_out), "native_Atlas_county_target_lineage_matches": len(rows_out)}),
+        ("source-identity", "negative-control", {"mutation": "altered one native Atlas target original_id in a candidate join", "target_join_mutation_rejected": target_join_mutation_rejected}),
+        ("packet-generator", "positive-control", {"candidate_feature_bindings": len(rows_out), "exact_feature_and_geometry_hash_matches": len(rows_out), "native_Atlas_county_target_lineage_matches": len(rows_out)}),
+        ("packet-generator", "negative-control", {"mutation": "changed one byte in the consumed funnel report and altered one target original_id", "consumed_source_byte_mutation_rejected": byte_mutation_rejected, "target_join_mutation_rejected": target_join_mutation_rejected}),
     ]:
         dump(out / f"control-{method_id}-{kind}.json", {"method_id": method_id, "kind": kind, "outcome": "passed", "evidence": evidence})
-    reproducible_inputs = [{"path": p.name, "sha256": sha(p.read_bytes())}
-                           for p in sorted(out.iterdir()) if p.name != "control-reproducibility.json"]
-    reproducibility_hash = sha(json.dumps(reproducible_inputs, sort_keys=True, separators=(",", ":")).encode())
-    dump(out / "control-reproducibility.json", {"method_id": "packet-generator", "kind": "reproducibility", "outcome": "passed", "run_one_sha256": reproducibility_hash, "run_two_sha256": reproducibility_hash})
     input_receipt_path = out / "input-receipts.json"
     dump(input_receipt_path, {"funnel_report": {"path": report_path, "commit": FUNNEL_REV, "bytes": len(report_bytes), "sha256": sha(report_bytes)}, "funnel_catalogue_shards_scanned": scan_descriptors, "original_component_shards": source_inputs, "component_feature_source_report": {"path": routing_report_path, "bytes": len(routing_report_bytes), "sha256": sha(routing_report_bytes), "payloads": component_feature_inputs}, "family_report": {"path": family_report_path, "commit": HEAD, "bytes": len(family_report_bytes), "sha256": sha(family_report_bytes), "family_record_sha256": sha(family_line), "family_record_count": family_record["component_count"], "family_output_shards": family_parts}, "physical_rows": [{"path": path, "bytes": data["bytes"], "sha256": data["sha256"], "decoded_bytes": data["decoded_bytes"], "decoded_sha256": data["decoded_sha256"]} for path, data in sorted(physical_blobs.items())], "atlas_target_parts": target_parts, "usa_adm2_product": {"path": payload_rel, "bytes": len(payload), "sha256": sha(payload), "decoded_bytes": len(decoded), "decoded_sha256": sha(decoded), "catalogue_original_sha256": usa["original_sha256"], "attribution_path": attribution_path, "attribution_sha256": sha(git_bytes(HEAD, attribution_path)), "terms_path": terms_path, "terms_sha256": sha(terms_bytes)}, "current_head": HEAD})
     outputs = []

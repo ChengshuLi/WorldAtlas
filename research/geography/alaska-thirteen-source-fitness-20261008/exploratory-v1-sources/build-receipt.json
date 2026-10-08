@@ -5,63 +5,63 @@
       "encoded_input_bytes": 3037720,
       "metadata_input_bytes": 18639,
       "phase": "funnel-catalog-batch-01",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 68296654
+      "total_bytes": 68295261
     },
     {
       "decoded_input_bytes": 48419197,
       "encoded_input_bytes": 3045496,
       "metadata_input_bytes": 18639,
       "phase": "funnel-catalog-batch-02",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 68303443
+      "total_bytes": 68302050
     },
     {
       "decoded_input_bytes": 48426940,
       "encoded_input_bytes": 3041098,
       "metadata_input_bytes": 18639,
       "phase": "funnel-catalog-batch-03",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 68306788
+      "total_bytes": 68305395
     },
     {
       "decoded_input_bytes": 48469180,
       "encoded_input_bytes": 3036162,
       "metadata_input_bytes": 18639,
       "phase": "funnel-catalog-batch-04",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 68344092
+      "total_bytes": 68342699
     },
     {
       "decoded_input_bytes": 48457587,
       "encoded_input_bytes": 3042563,
       "metadata_input_bytes": 18639,
       "phase": "funnel-catalog-batch-05",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 68338900
+      "total_bytes": 68337507
     },
     {
       "decoded_input_bytes": 48481317,
       "encoded_input_bytes": 3037234,
       "metadata_input_bytes": 18639,
       "phase": "funnel-catalog-batch-06",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 68357301
+      "total_bytes": 68355908
     },
     {
       "decoded_input_bytes": 22193476,
       "encoded_input_bytes": 1393594,
       "metadata_input_bytes": 18639,
       "phase": "funnel-catalog-batch-07",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 40425820
+      "total_bytes": 40424427
     },
     {
       "component_payload_count": 11,
@@ -69,45 +69,45 @@
       "encoded_input_bytes": 22523564,
       "metadata_input_bytes": 174829,
       "phase": "original-component-geojson-subjects",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 130307396
+      "total_bytes": 130306003
     },
     {
       "decoded_input_bytes": 111223285,
       "encoded_input_bytes": 13962009,
       "metadata_input_bytes": 174829,
       "phase": "complete-native-family-context",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 142180234
+      "total_bytes": 142178841
     },
     {
       "decoded_input_bytes": 100663296,
       "encoded_input_bytes": 12677495,
       "metadata_input_bytes": 31962,
       "phase": "original-component-records",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 130192864
+      "total_bytes": 130191471
     },
     {
       "decoded_input_bytes": 96665820,
       "encoded_input_bytes": 13251792,
       "metadata_input_bytes": 57840,
       "phase": "candidate-physical-query-rows",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 126795563
+      "total_bytes": 126794170
     },
     {
       "decoded_input_bytes": 134315528,
       "encoded_input_bytes": 28548747,
       "metadata_input_bytes": 0,
       "phase": "gshhg-native-record-metadata",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 179684386
+      "total_bytes": 179682993
     },
     {
       "decoded_input_bytes": 0,
@@ -131,9 +131,9 @@
         }
       ],
       "phase": "native-atlas-target-reference-parts-25-to-27",
-      "project_code_bytes": 42895,
+      "project_code_bytes": 41502,
       "reserved_output_bytes": 16777216,
-      "total_bytes": 30817495
+      "total_bytes": 30816102
     }
   ],
   "limits": {
@@ -146,7 +146,7 @@
     "All files are source-only evidence; no GIS, production, source download, or geometry mutation was performed.",
     "Every output was exclusively created, then byte-readback hashed."
   ],
-  "output_total_bytes": 1497892,
+  "output_total_bytes": 1498146,
   "outputs": [
     {
       "bytes": 18192,
@@ -155,10 +155,10 @@
       "sha256": "b24011f1acef059783ea61d96308f3b43ef0aabdbaf19f1fb7694b613a470b14"
     },
     {
-      "bytes": 166310,
+      "bytes": 168063,
       "path": "sources/candidate-source-screen.json",
-      "readback_sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
-      "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867"
+      "readback_sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b",
+      "sha256": "c997ab5c85191b2e0c1b9458c78608d04dfa641777c8584e7b2bba4b9e35f64b"
     },
     {
       "bytes": 226731,
@@ -167,34 +167,34 @@
       "sha256": "5c79b82588ff5c8f3c1e6305e4c1bcd565b7e379203b95bc2c09322f30f18119"
     },
     {
-      "bytes": 307,
+      "bytes": 202,
       "path": "sources/control-packet-generator-negative-control.json",
-      "readback_sha256": "12f4731c2323184f3345bec38766671a0239951cec679928fe2d779b35e3dff1",
-      "sha256": "12f4731c2323184f3345bec38766671a0239951cec679928fe2d779b35e3dff1"
+      "readback_sha256": "4d0efe1789a8a5e5cd7efe8544c9931ba1eeff8bb9d103bcd8298f2f5d36c226",
+      "sha256": "4d0efe1789a8a5e5cd7efe8544c9931ba1eeff8bb9d103bcd8298f2f5d36c226"
     },
     {
-      "bytes": 254,
+      "bytes": 200,
       "path": "sources/control-packet-generator-positive-control.json",
-      "readback_sha256": "db809639116b4196fe7d68f024180ea04a6892972dfb326739d8def9e5f7aa16",
-      "sha256": "db809639116b4196fe7d68f024180ea04a6892972dfb326739d8def9e5f7aa16"
+      "readback_sha256": "7d119e2ffb09c3d0ad4d9dc93640bc653cd2566567cffa54da6470b5ab1455a6",
+      "sha256": "7d119e2ffb09c3d0ad4d9dc93640bc653cd2566567cffa54da6470b5ab1455a6"
     },
     {
-      "bytes": 458,
+      "bytes": 266,
       "path": "sources/control-reproducibility.json",
-      "readback_sha256": "b8d1de8e2fdd19319eb11424283fab89e671bde38740d8687a5d864b7b2f7a0f",
-      "sha256": "b8d1de8e2fdd19319eb11424283fab89e671bde38740d8687a5d864b7b2f7a0f"
+      "readback_sha256": "3616df32ae5222efd64bdcbd03fc899dfea2d8dbe87e8d9019f22d78f1fca7b7",
+      "sha256": "3616df32ae5222efd64bdcbd03fc899dfea2d8dbe87e8d9019f22d78f1fca7b7"
     },
     {
-      "bytes": 236,
+      "bytes": 201,
       "path": "sources/control-source-identity-negative-control.json",
-      "readback_sha256": "50eac1e41eb493ccc938b0f477485c13a03038106ad2f5480380fed573751154",
-      "sha256": "50eac1e41eb493ccc938b0f477485c13a03038106ad2f5480380fed573751154"
+      "readback_sha256": "1f73d83a83b9de25eef8d8a92579ed1d9a38e6836515fac1843dbdcd5bbe0ff5",
+      "sha256": "1f73d83a83b9de25eef8d8a92579ed1d9a38e6836515fac1843dbdcd5bbe0ff5"
     },
     {
-      "bytes": 253,
+      "bytes": 199,
       "path": "sources/control-source-identity-positive-control.json",
-      "readback_sha256": "78b926299ca60f3f4a09f9cbb3a93a131ac708f9ab14050d01a19b6ca107aa45",
-      "sha256": "78b926299ca60f3f4a09f9cbb3a93a131ac708f9ab14050d01a19b6ca107aa45"
+      "readback_sha256": "4548d1213b2159118bfa61c4e3200d3f11708b7c84678282770d63d446ddd2d5",
+      "sha256": "4548d1213b2159118bfa61c4e3200d3f11708b7c84678282770d63d446ddd2d5"
     },
     {
       "bytes": 4316,
@@ -209,10 +209,10 @@
       "sha256": "d978c4e92bdcbff3ece9f4f798ea977ed21a4d709ef5598fed5bde71a7130783"
     },
     {
-      "bytes": 37148,
+      "bytes": 37147,
       "path": "sources/input-receipts.json",
-      "readback_sha256": "6c6593688dd8ae65083cd57878f44f449898eab0060febbbddfc5c030589503d",
-      "sha256": "6c6593688dd8ae65083cd57878f44f449898eab0060febbbddfc5c030589503d"
+      "readback_sha256": "8093d12606e1ef14adf44aa86153fdeef2c28fc4f0386e08cd2f1f50b3121428",
+      "sha256": "8093d12606e1ef14adf44aa86153fdeef2c28fc4f0386e08cd2f1f50b3121428"
     },
     {
       "bytes": 366513,
@@ -225,18 +225,6 @@
       "path": "sources/physical-query-rows.jsonl",
       "readback_sha256": "e36d6319cd9d23c4c8d508415f8af7965e069928e5e1206faac3d50cbd5ece50",
       "sha256": "e36d6319cd9d23c4c8d508415f8af7965e069928e5e1206faac3d50cbd5ece50"
-    },
-    {
-      "bytes": 529,
-      "path": "sources/reproducibility-run-one.json",
-      "readback_sha256": "756d25ff5f66cab3dbeacec2e3686e5e69db2a66a3a2d8efae7d9afed2e17b3f",
-      "sha256": "756d25ff5f66cab3dbeacec2e3686e5e69db2a66a3a2d8efae7d9afed2e17b3f"
-    },
-    {
-      "bytes": 529,
-      "path": "sources/reproducibility-run-two.json",
-      "readback_sha256": "91fddc51f067230a64aec68f143d1ba72e421e8937500a671f7ea01d875f6fd4",
-      "sha256": "91fddc51f067230a64aec68f143d1ba72e421e8937500a671f7ea01d875f6fd4"
     },
     {
       "bytes": 608036,
