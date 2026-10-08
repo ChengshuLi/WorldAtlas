@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "alaska-thirteen-source-fitness-20261008",
+  "branch": "geography/alaska-thirteen-source-fitness-20261008-r1",
+  "base_main_commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+  "github_issue": 1488,
+  "date_timezone": "America/Los_Angeles",
+  "scope": {
+    "geographies": ["Alaska"],
+    "attributes": ["native source identity", "source fitness", "physical support limits"],
+    "supported_from": null,
+    "supported_to": null,
+    "sources": ["geoBoundaries USA ADM2 2018", "GSHHG 2.3.7"]
+  },
+  "updated_at_utc": "2026-10-08T10:15:00Z",
+  "geographic_release": null,
+  "input_paths": [
+    "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+    "coordination/engineering/global-actionability-routing-20261007/results/",
+    "coordination/engineering/global-physical-comparison-20261006/results/",
+    "coordination/engineering/gshhg-native-member-custody-20261007/results/",
+    "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+    "data/geography/part-25.json",
+    "data/geography/part-26.json",
+    "data/geography/part-27.json"
+  ],
+  "bundle_paths": [
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/complete-native-family-record.jsonl",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/gshhg-native-query-records.json",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/selected-2018-usa-adm2-features.geojson"
+  ],
+  "import_receipt_paths": [],
+  "readback_paths": [
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/build-receipt.json",
+    "research/geography/alaska-thirteen-source-fitness-20261008/sources/input-receipts.json"
+  ],
+  "coverage_achieved": [
+    "13 exact components from one ranked 13-candidate family",
+    "13/13 geoBoundaries subject IDs joined to seven native Atlas county/county-equivalent target features by exact original ID and parent",
+    "13/13 retained GSHHG query rows plus 11 native GSHHG source metadata records",
+    "complete 995-component family record preserved as read-only context"
+  ],
+  "source_gaps": [
+    "exact simplified/non-simplified geometry variant equivalence and candidate-fragment-to-target-boundary lineage",
+    "whether the intended physical target is the recorded county target or a separate physical/ecological region",
+    "per-feature GSHHG observation dates, target-specific shoreline accuracy and repair authority"
+  ],
+  "blockers": [],
+  "next_action": "Submit the validated source-only evidence packet as the one allowed PR, then obtain exact-head independent source review.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

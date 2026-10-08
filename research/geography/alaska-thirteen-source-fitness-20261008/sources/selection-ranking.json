@@ -1,0 +1,107 @@
+{
+  "complete_families": 711,
+  "exclusions": {
+    "active_exact_component_claims": "none found for these 13; #1295, #1431, #1481 exact scopes remain excluded",
+    "rank_1_nordic": "family excluded by existing #1229/#1483 routing decision"
+  },
+  "ranked_largest_families": [
+    {
+      "candidate_count": 15,
+      "family": "gap-source-batch:3f21c83705d3cef5988b1295",
+      "rank": 1,
+      "source_cohorts": {
+        "('gb:NOR:ADM2', '2013')": 15
+      }
+    },
+    {
+      "candidate_count": 13,
+      "family": "gap-source-batch:9a8d66e4d47f5883620328f9",
+      "rank": 2,
+      "source_cohorts": {
+        "('gb:USA:ADM2', '2018')": 13
+      }
+    },
+    {
+      "candidate_count": 9,
+      "family": "gap-source-batch:3f720fcaef56025032fc164f",
+      "rank": 3,
+      "source_cohorts": {
+        "('gb:NOR:ADM2', '2013')": 9
+      }
+    },
+    {
+      "candidate_count": 9,
+      "family": "gap-source-batch:d51952b9c4975b10fca77834",
+      "rank": 4,
+      "source_cohorts": {
+        "('gb:AGO:ADM2;gb:COG:ADM2', '2007')": 9
+      }
+    },
+    {
+      "candidate_count": 7,
+      "family": "gap-source-batch:77b69b77c58c26029b4bdf23",
+      "rank": 5,
+      "source_cohorts": {
+        "('gb:IDN:ADM2;gb:MYS:ADM2', '2020')": 7
+      }
+    },
+    {
+      "candidate_count": 6,
+      "family": "gap-source-batch:6533b7f1dd7a60ccf1744455",
+      "rank": 6,
+      "source_cohorts": {
+        "('gb:SLB:ADM1', '2021')": 6
+      }
+    },
+    {
+      "candidate_count": 6,
+      "family": "gap-source-batch:8ff059a7136051325f014a36",
+      "rank": 7,
+      "source_cohorts": {
+        "('gb:NOR:ADM2', '2013')": 6
+      }
+    },
+    {
+      "candidate_count": 5,
+      "family": "gap-source-batch:0b3c87c78648da3a74187cad",
+      "rank": 8,
+      "source_cohorts": {
+        "('gb:PHL:ADM3', '2020')": 5
+      }
+    },
+    {
+      "candidate_count": 5,
+      "family": "gap-source-batch:567580618864e721b1cdc85d",
+      "rank": 9,
+      "source_cohorts": {
+        "('gb:SLB:ADM1', '2021')": 5
+      }
+    },
+    {
+      "candidate_count": 5,
+      "family": "gap-source-batch:7187ecf66d511a80d27c76ad",
+      "rank": 10,
+      "source_cohorts": {
+        "('gb:SLB:ADM1', '2021')": 5
+      }
+    },
+    {
+      "candidate_count": 5,
+      "family": "gap-source-batch:864616e00a750f314021a997",
+      "rank": 11,
+      "source_cohorts": {
+        "('gb:USA:ADM2', '2018')": 5
+      }
+    },
+    {
+      "candidate_count": 5,
+      "family": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "rank": 12,
+      "source_cohorts": {
+        "('gb:GRL:ADM1', '2020')": 5
+      }
+    }
+  ],
+  "selection": "largest eligible family after Nordic exclusion: 13 USA ADM2 candidates, represented year 2018",
+  "total_land_plus_unique_candidates": 1005
+}
