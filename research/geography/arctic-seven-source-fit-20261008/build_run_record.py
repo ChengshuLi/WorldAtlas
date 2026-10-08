@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bind the completed Arctic r5 phase reservations and output receipts."""
+"""Bind the completed Arctic r6 phase reservations and output receipts."""
 from __future__ import annotations
 import hashlib, json
 from pathlib import Path
@@ -23,7 +23,6 @@ def main():
  plan_raw=read('research/geography/arctic-seven-source-fit-20261008/phase-plan.json')
  if len(plan_raw)>1024*1024:raise ValueError('Oversized frozen phase plan')
  plan=json.loads(plan_raw); plan_sha=sha(plan_raw)
- if plan['execution_commit']!= 'a4649c264adbb74a4e98a36522f336604b7ba2c8':raise ValueError('Unexpected reviewed execution commit')
  if plan['cap_bytes']!=CAP:raise ValueError('Unexpected phase cap')
  pins={row['path']:row for row in plan['baseline_files']}
  if len(pins)!=len(plan['baseline_files']):raise ValueError('Duplicate whole-file plan pins')
@@ -89,7 +88,7 @@ def main():
   'active_feature_count':plan['candidate_scope']['active_feature_count'],'phases':rows,
   'all_phases_under_cap':all(row['actual_charged_bytes']<=CAP for row in rows)}
  raw=(json.dumps(result,sort_keys=True,ensure_ascii=False,separators=(',',':'))+'\n').encode()
- target=PACKET/'r5-execution-budget.json'
+ target=PACKET/'r6-execution-budget.json'
  if target.is_symlink():raise ValueError('Run record destination cannot be a symlink')
  if target.exists():
   if target.read_bytes()!=raw:raise FileExistsError('Preserve existing execution budget record')

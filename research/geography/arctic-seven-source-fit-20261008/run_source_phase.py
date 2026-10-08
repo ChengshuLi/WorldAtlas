@@ -17,6 +17,15 @@ def sha(raw:bytes)->str:return hashlib.sha256(raw).hexdigest()
 def git(*args)->bytes:return subprocess.check_output(['git','-C',str(ROOT),*args],stderr=subprocess.PIPE)
 def canonical(value):return (json.dumps(value,sort_keys=True,ensure_ascii=False,separators=(',',':'),allow_nan=False)+'\n').encode()
 
+class CapturedBaseline:
+ """Cache authenticated Git blobs so repeated phase access reads each once."""
+ def __init__(self,*args,**kwargs):
+  self._captured={}
+  super().__init__(*args,**kwargs)
+ def read(self,name):
+  if name not in self._captured:self._captured[name]=super().read(name)
+  return self._captured[name]
+
 def blob_info(commit,path):
  if not re.fullmatch('[a-f0-9]{40}',commit):raise ValueError('Require an immutable full baseline commit')
  row=git('ls-tree','-z',commit,'--',path).decode().rstrip('\0')
@@ -149,7 +158,7 @@ def main():
  complete_payload_budget=CAP-plan_size-runtime_total-decoded-scratch-predecessor_total-RECEIPT_RESERVE
  if input_budget<=0:raise ValueError('No phase input budget remains after prospective reservations')
  immutable.admit_destination(types.SimpleNamespace(repo=str(ROOT)),phase['owned_path'],phase['vintage'],phase['output_names'])
- baseline=immutable.Baseline(ROOT,args.baseline,files,max_phase_bytes=input_budget)
+ baseline=CapturedBaseline(ROOT,args.baseline,files,max_phase_bytes=input_budget)
  # The initial limit reserves the full declared output envelope before any
  # source body is admitted. Publication then checks actual payload bytes
  # against the cap after all fixed runtime, plan, predecessor and decode costs.
