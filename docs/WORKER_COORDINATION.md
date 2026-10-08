@@ -304,7 +304,10 @@ It never assumes a fixed installation quota or reserves shared capacity.
 A zero or insufficient observation waits inside the same live FIFO run.
 
 A complete fresh metadata inventory binds manifest descriptors and all nonadded
-originals to current complete Git trees, ordinary paths, vintages and OIDs. Only
+originals to current complete Git trees, ordinary paths, vintages and OIDs. Historical descriptors use the same version-1/version-2 parser as the evidence
+gate: each exact commit is checked against the PR base and each file is resolved
+from its own complete tree. Same-path historical vintages retain separate byte
+accounting; only immutable OID reuse reduces transport calls. Only
 verified immutable OID reuse tightens the blob estimate. Review, claim, checks,
 proof jobs, artifact pagination and applicable source authority remain fresh.
 The estimate includes repeated metadata passes and 48 additional calls: 16 for

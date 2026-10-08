@@ -1,6 +1,6 @@
 import {copyAPIFeatures,quotaDelay} from './github-quota.mjs';
 import {performance} from 'node:perf_hooks';
-import {safeEvidencePath, sha256} from './evidence-quality.mjs';
+import {baselineFiles, safeEvidencePath, sha256} from './evidence-quality.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {githubPages, workSpec} from './issue-claim-contract.mjs';
 import {validateReviewReceipt, reviewBindingRequired} from './premerge-evidence.mjs';
@@ -18,14 +18,17 @@ export async function inventoryFinalEvidence({api, repo, pr, issue, reservation,
   const requirement = evidenceRequirement(issue, workSpec(issue.body), policy, pr.head.ref);
   if (!requirement.required) return {blob_calls: 0, water: false, proof_calls: 0, descriptor_count: 0, original_count: 0};
   const root = `/repos/${repo}`;
+  const trees = new Map();
   const readTree = async commit => {
     need(commitID(commit), 'Capacity inventory needs an exact commit');
+    if (trees.has(commit)) return trees.get(commit);
     const object = await api(`${root}/git/commits/${commit}`);
     need(commitID(object?.tree?.sha), 'Capacity inventory needs an exact tree');
     const tree = await api(`${root}/git/trees/${object.tree.sha}?recursive=1`);
     need(tree?.truncated === false && Array.isArray(tree.tree), 'Capacity inventory needs complete trees');
     const entries = new Map(tree.tree.map(row => [row.path, row]));
     need(entries.size === tree.tree.length, 'Capacity inventory has duplicate tree paths');
+    trees.set(commit, entries);
     return entries;
   };
   const entries = await readTree(pr.head.sha);
@@ -49,9 +52,17 @@ export async function inventoryFinalEvidence({api, repo, pr, issue, reservation,
   })];
   need(descriptors.length <= 512 && files.length === pr.changed_files && files.length <= 10000,
     'Capacity inventory exceeds existing descriptor/change limits');
-  const baseline = await readTree(manifest.baseline.commit), base = await readTree(pr.base.sha);
+  const historical = baselineFiles(manifest);
+  const commits = [...new Set([manifest.baseline.commit, ...historical.map(file => file.commit)])];
+  for (const commit of commits) {
+    const comparison = await api(`${root}/compare/${commit}...${pr.base.sha}`);
+    need(['ahead', 'identical'].includes(comparison?.status), 'Capacity baseline is not an ancestor of PR base');
+    await readTree(commit);
+  }
+  const base = await readTree(pr.base.sha);
   const loads = [[requirement.manifestPath, pr.head.sha, manifestEntry]];
-  for (const descriptor of manifest.baseline.files) loads.push([descriptor.path, manifest.baseline.commit, entry(baseline, descriptor.path)]);
+  for (const descriptor of historical)
+    loads.push([descriptor.path, descriptor.commit, entry(trees.get(descriptor.commit), descriptor.path)]);
   for (const descriptor of [...manifest.outputs, ...manifest.sources.flatMap(source => source.files ?? [])])
     loads.push([descriptor.path, pr.head.sha, entry(entries, descriptor.path)]);
   const originals = files.filter(file => file.status !== 'added');

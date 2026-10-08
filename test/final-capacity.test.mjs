@@ -138,6 +138,104 @@ test('real tree/path/vintage inventory includes nonadded originals and verified 
   f.truncated = true;
   await assert.rejects(inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files, reservation: {worker_id: 'author'}}), /complete trees/);
 });
+// Different bytes at the same path, plus a path absent from the default baseline,
+// exercise the actual inventory boundary rather than a version flag alone.
+function historicalFixture() {
+  const f = fixture(), old = 'd'.repeat(40), oldTree = '3'.repeat(40);
+  const otherRaw = Buffer.from('older README with distinct bytes\n');
+  const nativeRaw = Buffer.from('original-only input\n');
+  const row = (path, raw) => {
+    const sha = createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    f.blobs.set(sha, {sha, size: raw.length, encoding: 'base64', content: raw.toString('base64')});
+    return {path, sha, size: raw.length, type: 'blob', mode: '100644'};
+  };
+  const desc = (path, raw, commit) => ({path, commit, bytes: raw.length, sha256: sha256(raw), hash_kind: 'file-bytes'});
+  f.manifest.baseline = {version: 2, commit: f.base, files: [
+    {...f.manifest.baseline.files[0], commit: f.base},
+    desc('README.md', otherRaw, old), desc('original-only.json', nativeRaw, old)]};
+  f.historical = [row('README.md', otherRaw), row('original-only.json', nativeRaw)];
+  f.old = old;
+  f.refreshManifest = () => {
+    const raw = Buffer.from(JSON.stringify(f.manifest));
+    Object.assign(f.authored.find(entry => entry.path.endsWith('evidence-quality.json')),
+      row('coordination/engineering/capacity-fixture/evidence-quality.json', raw));
+    f.review.manifest_sha256 = sha256(raw);
+    f.review.evidence_hashes = [...new Set([...f.manifest.baseline.files.map(file => file.sha256), ...f.manifest.outputs.map(file => file.sha256)])];
+    return raw;
+  };
+  f.refreshManifest();
+  const original = f.api;
+  f.api = async (route, ...args) => {
+    if (route === `/repos/${f.repo}/git/commits/${old}`) return {tree: {sha: oldTree}};
+    if (route === `/repos/${f.repo}/git/trees/${oldTree}?recursive=1`)
+      return {truncated: f.historicalTruncated ?? false, tree: f.historical};
+    if (route === `/repos/${f.repo}/compare/${old}...${f.base}`)
+      return {status: f.historicalStatus ?? 'ahead'};
+    return original(route, ...args);
+  };
+  f.inventory = () => inventoryFinalEvidence({...f.options(), pr: f.pr, issue: f.issue,
+    files: f.files, reservation: f.claim});
+  return f;
+}
+
+test('final capacity resolves each v2 historical path at its own ancestor commit and counts distinct bytes', async () => {
+  const f = historicalFixture();
+  const inventory = await f.inventory();
+  assert.equal(inventory.descriptor_count, 4);
+  assert.equal(inventory.immutable_oids, 5);
+  assert.equal(inventory.blob_calls, 5);
+  assert.equal(inventory.cache_fit, true);
+  assert.equal(f.writes.length, 0);
+  // The default/base tree is reused only inside this fresh inventory call.
+  assert.equal(f.calls.filter(row => row.route.endsWith(`/git/commits/${f.base}`)).length, 1);
+});
+
+for (const status of ['behind', 'diverged', undefined]) test(`historical ancestry rejects ${status}`, async () => {
+  const f = historicalFixture();
+  const original = f.api;
+  f.api = (route, ...args) => route.includes(`/compare/${f.old}...`) ? Promise.resolve({status}) : original(route, ...args);
+  await assert.rejects(f.inventory(), /not an ancestor/);
+  assert.equal(f.writes.length, 0);
+});
+
+for (const kind of ['unsupported-version', 'missing-commit', 'v1-per-file', 'duplicate', 'too-many-commits', 'truncated', 'symlink', 'missing-path', 'large-file'])
+test(`historical capacity rejects ${kind} before publication`, async () => {
+  const f = historicalFixture();
+  const expected = {
+    'unsupported-version': /Unsupported baseline version/, 'missing-commit': /immutable commit/,
+    'v1-per-file': /requires baseline version 2/, duplicate: /Duplicate historical/,
+    'too-many-commits': /commit inventory exceeds/, truncated: /complete trees/,
+    symlink: /invalid file binding/, 'missing-path': /invalid file binding/, 'large-file': /invalid file binding/
+  };
+  if (kind === 'unsupported-version') f.manifest.baseline.version = 3;
+  if (kind === 'missing-commit') delete f.manifest.baseline.files[1].commit;
+  if (kind === 'v1-per-file') f.manifest.baseline.version = 1;
+  if (kind === 'duplicate') f.manifest.baseline.files.push({...f.manifest.baseline.files[1]});
+  if (kind === 'too-many-commits') f.manifest.baseline.files = Array.from({length: 17}, (_, i) =>
+    ({...f.manifest.baseline.files[0], commit: (i + 1).toString(16).padStart(40, '0')}));
+  if (kind === 'truncated') f.historicalTruncated = true;
+  if (kind === 'symlink') f.historical[0].mode = '120000';
+  if (kind === 'missing-path') f.historical.pop();
+  if (kind === 'large-file') f.historical[0].size = 32 * 1024 * 1024 + 1;
+  f.refreshManifest();
+  await assert.rejects(f.inventory(), expected[kind]);
+  assert.equal(f.writes.length, 0);
+});
+
+test('same-path historical vintages retain the aggregate remote-byte limit', async () => {
+  const f = historicalFixture();
+  const paths = Array.from({length: 9}, (_, i) => `bounded-${i}.json`);
+  f.manifest.baseline.files = paths.flatMap((path, i) => [{...f.manifest.baseline.files[0], path, commit: f.base},
+    {...f.manifest.baseline.files[1], path, commit: f.old}]);
+  const entries = (commit) => paths.map((path, i) => ({path, sha: (i + (commit === f.base ? 100 : 200)).toString(16).padStart(40, '0'),
+    type: 'blob', mode: '100644', size: 16 * 1024 * 1024}));
+  f.baseline.splice(0, f.baseline.length, ...entries(f.base));
+  f.historical.splice(0, f.historical.length, ...entries(f.old));
+  f.refreshManifest();
+  await assert.rejects(f.inventory(), /remote byte budget/);
+  assert.equal(f.writes.length, 0);
+});
+
 test('costly evidence inventory requires current issue and disposition bindings after activation', async () => {
   const f = fixture(), options = f.options();
   f.pr.created_at = '2026-10-07T00:00:00Z';
