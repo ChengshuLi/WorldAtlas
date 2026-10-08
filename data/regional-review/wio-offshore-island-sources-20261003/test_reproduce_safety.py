@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -80,6 +82,25 @@ class ReproductionAdmissionTests(unittest.TestCase):
                                 cwd=ROOT, capture_output=True, text=True, check=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertFalse((PACKET.parent / self.prefix).exists())
+
+    def test_parent_roster_uses_authenticated_reader_bytes(self):
+        spec = importlib.util.spec_from_file_location("wio_reproduce_under_test", SCRIPT)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        identity = "gb:MUS:ADM1:65221844B12885462064369"
+        captured = (json.dumps({"id": identity, "sentinel": "authenticated snapshot"}) + "\n").encode()
+
+        class CapturedBaseline:
+            def materialized_bytes(self, _path):
+                return captured
+
+        previous = module.BASELINE
+        module.BASELINE = CapturedBaseline()
+        try:
+            rows = module.parent_inventory_for_scope(PACKET.parent / "regional-review-4f180b98473f1071" / "subject-inventory.jsonl", {identity})
+        finally:
+            module.BASELINE = previous
+        self.assertEqual(rows[identity]["sentinel"], "authenticated snapshot")
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@ import hashlib
 import argparse
 import json
 import re
+import subprocess
 import unicodedata
 from pathlib import Path
 
@@ -49,6 +50,28 @@ def norm(value: str) -> str:
     return " ".join("".join(c for c in value if not unicodedata.combining(c)).replace(".", "").split())
 
 
+def overlay_metrics(a, b):
+    union_area = a.union(b).area
+    require(union_area > 0, "overlay control requires a positive-area union")
+    return {
+        "symmetric_difference_percent_of_union": 100 * a.symmetric_difference(b).area / union_area,
+        "relative_area_change_percent": 100 * (b.area / a.area - 1),
+    }
+
+
+def parent_inventory_for_scope(path: Path, expected_subjects: set[str]):
+    raw = input_bytes(path)
+    rows = {}
+    for line in raw.decode("utf-8").splitlines():
+        row = json.loads(line)
+        if row["id"] in expected_subjects:
+            require(row["id"] not in rows, f"duplicate parent inventory ID: {row['id']}")
+            rows[row["id"]] = row
+    require(set(rows) == expected_subjects,
+            "parent #482 evidence must include every exact #633 subject and no additional scope row")
+    return rows
+
+
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise SystemExit(f"FAIL: {message}")
@@ -59,6 +82,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--vintage", required=True,
                         help="fresh lower-case run name under this packet's vintages/ directory")
+    parser.add_argument("--compare-vintage",
+                        help="prior complete run name for an exact reproducibility comparison")
     parser.add_argument("--simulate-post-computation-failure", action="store_true",
                         help=argparse.SUPPRESS)
     args = parser.parse_args()
@@ -119,9 +144,32 @@ def main() -> None:
     require(SCOPE["baseline_commit"] == BASELINE.commit,
             "scope evaluation commit differs from the immutable baseline")
 
-    writer = namespace["NewVintage"](
-        BASELINE, SCOPE["owned_path"], args.vintage,
-        ["subject-findings.json", "district-comparison.json", "results.json"])
+    output_names = ["subject-findings.json", "district-comparison.json", "results.json"]
+    control_names = [
+        "control-generator-positive.json", "control-generator-negative.json",
+        "control-generator-reproducibility.json", "control-overlay-positive.json",
+        "control-overlay-negative.json", "control-shom-positive.json",
+        "control-shom-negative.json",
+    ]
+    if args.compare_vintage:
+        require(args.compare_vintage != args.vintage and re.fullmatch(r"[a-z0-9][a-z0-9._-]{0,63}", args.compare_vintage),
+                "comparison must name a distinct valid prior run")
+        for name in [*output_names, "publication.json"]:
+            descriptor = next((row for row in manifest["outputs"] if row["path"].endswith(
+                f"/vintages/{args.compare_vintage}/{name}")), None)
+            require(descriptor is not None, f"comparison vintage is not inventoried: {args.compare_vintage}/{name}")
+            admit_candidate(descriptor)
+        prior_receipt_descriptor = next(row for row in manifest["outputs"] if row["path"].endswith(
+            f"/vintages/{args.compare_vintage}/publication.json"))
+        prior_receipt = json.loads(CANDIDATE_BYTES[prior_receipt_descriptor["path"]])
+        require(prior_receipt.get("version") == 1 and prior_receipt.get("status") == "complete" and
+                len(prior_receipt.get("outputs", [])) == len(output_names) and
+                {Path(row["path"]).name: row["sha256"] for row in prior_receipt["outputs"]} == {
+                    name: next(row["sha256"] for row in manifest["outputs"] if row["path"].endswith(
+                        f"/vintages/{args.compare_vintage}/{name}")) for name in output_names},
+                "prior vintage receipt does not bind the exact complete product set")
+        output_names += control_names
+    writer = namespace["NewVintage"](BASELINE, SCOPE["owned_path"], args.vintage, output_names)
 
     inventory_path = PARENT / "subject-inventory.jsonl"
     source_registry_path = PARENT / "sources.json"
@@ -137,14 +185,9 @@ def main() -> None:
             settlement_review["settlement_disposition"]["Mauritius"],
             "prior Mauritius source outcome must distinguish census/locality counts from coordinates")
 
-    parent_inventory = {}
-    for line in inventory_path.read_text(encoding="utf-8").splitlines():
-        row = json.loads(line)
-        if row["id"] in EXPECTED_SUBJECTS:
-            require(row["id"] not in parent_inventory, f"duplicate parent inventory ID: {row['id']}")
-            parent_inventory[row["id"]] = row
-    require(set(parent_inventory) == EXPECTED_SUBJECTS,
-            "parent #482 evidence must include every exact #633 subject and no additional scope row")
+    # Parse exactly the authenticated byte snapshot materialized_bytes checked.
+    # Do not consume roster values from the mutable checkout before authentication.
+    parent_inventory = parent_inventory_for_scope(inventory_path, EXPECTED_SUBJECTS)
 
     current = {}
     containing_paths = {
@@ -353,19 +396,13 @@ def main() -> None:
         require(all(g.is_valid and g.area > 0 for g in (gov_shape, source_shape, current_shape)),
                 f"invalid/non-area geometry in district comparison for {name}")
 
-        def metrics(a, b):
-            return {
-                "symmetric_difference_percent_of_union": 100 * a.symmetric_difference(b).area / a.union(b).area,
-                "relative_area_change_percent": 100 * (b.area / a.area - 1),
-            }
-
         district_rows.append({
             "name": gov_feature["properties"]["name"],
             "issue_subject_id": current_feature["properties"]["id"],
             "govmu_wfs_fid": gov_feature.get("id"),
             "crosswalk": "unique accent/case/punctuation-normalized exact name",
-            "govmu_against_2017_geoboundaries": metrics(gov_shape, source_shape),
-            "current_atlas_against_govmu": metrics(gov_shape, current_shape),
+            "govmu_against_2017_geoboundaries": overlay_metrics(gov_shape, source_shape),
+            "current_atlas_against_govmu": overlay_metrics(gov_shape, current_shape),
             "invalid_geometries": 0,
         })
 
@@ -476,19 +513,106 @@ def main() -> None:
         "park_points": parks,
         "shom_wms_extent_screen": shom_extent_screen,
     }
+    eparses = next(row for row in shom_extent_screen if row["subject_id"] == "atlas:coverage:ATF-5919")
+    reunion = next(row for row in shom_extent_screen if row["subject_id"] == "atlas:coverage:FRA-4601")
+    district_document["metrics"] = {
+        "ONSDI-vs-2017-min": min(row["govmu_against_2017_geoboundaries"]["symmetric_difference_percent_of_union"] for row in district_rows),
+        "ONSDI-vs-2017-max": max(row["govmu_against_2017_geoboundaries"]["symmetric_difference_percent_of_union"] for row in district_rows),
+        "Atlas-vs-ONSDI-min": min(row["current_atlas_against_govmu"]["symmetric_difference_percent_of_union"] for row in district_rows),
+        "Atlas-vs-ONSDI-max": max(row["current_atlas_against_govmu"]["symmetric_difference_percent_of_union"] for row in district_rows),
+        "Shom-Eparses-product-envelope-west-excess": eparses["record_bbox_outside_edges_degrees"]["west_degrees"],
+        "Shom-Reunion-product-envelope-east-excess": reunion["record_bbox_outside_edges_degrees"]["east_degrees"],
+        "Shom-product-envelope-contained-targets": sum(row["record_bbox_inside_wms_envelope"] for row in shom_extent_screen),
+    }
     district_bytes = (json.dumps(district_document, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     comparison["output_sha256"] = {
         "subject-findings.json": hashlib.sha256(findings_bytes).hexdigest(),
         "district-comparison.json": hashlib.sha256(district_bytes).hexdigest(),
     }
     results_bytes = (json.dumps(comparison, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-    if args.simulate_post_computation_failure:
-        raise SystemExit("SIMULATED: failed after computation and before publication")
-    records = writer.publish_bytes({
+    output_payload = {
         "subject-findings.json": findings_bytes,
         "district-comparison.json": district_bytes,
         "results.json": results_bytes,
-    })
+    }
+    if args.compare_vintage:
+        prior = args.compare_vintage
+        reproduced = {}
+        new_products = {
+            "subject-findings.json": findings_bytes,
+            "district-comparison.json": district_bytes,
+            "results.json": results_bytes,
+        }
+        for name, new_bytes in new_products.items():
+            old_descriptor = next(row for row in manifest["outputs"] if row["path"].endswith(
+                f"/vintages/{prior}/{name}"))
+            old_bytes = CANDIDATE_BYTES[old_descriptor["path"]]
+            reproduced[name] = hashlib.sha256(old_bytes).hexdigest() == hashlib.sha256(new_bytes).hexdigest()
+        require(all(reproduced.values()), "Fresh runs differ in one or more complete result products")
+
+        # Known projected squares exercise the same measurement used by all overlays.
+        from shapely.geometry import box
+        identical = overlay_metrics(box(0, 0, 2, 2), box(0, 0, 2, 2))
+        offset = overlay_metrics(box(0, 0, 2, 2), box(1, 0, 3, 2))
+        require(identical["symmetric_difference_percent_of_union"] == 0.0,
+                "positive overlay control failed")
+        require(abs(offset["symmetric_difference_percent_of_union"] - (200 / 3)) < 1e-12,
+                "negative overlay control failed")
+
+        mayotte = next(row for row in shom_extent_screen if row["subject_id"] == "atlas:coverage:FRA-4602")
+        mismatches = [row for row in shom_extent_screen if not row["record_bbox_inside_wms_envelope"]]
+        require(mayotte["record_bbox_inside_wms_envelope"] and len(mismatches) == 2 and
+                eparses["record_bbox_outside_edges_degrees"].get("west_degrees", 0) > 0.6 and
+                reunion["record_bbox_outside_edges_degrees"].get("east_degrees", 0) > 0.01,
+                "positive/negative Shom envelope controls failed")
+
+        expected_tests = [
+            "test_broken_symlink_run_is_rejected_without_following_it",
+            "test_existing_ordinary_run_is_preserved",
+            "test_failure_after_calculation_has_no_output_vintage_or_receipt",
+            "test_parent_roster_uses_authenticated_reader_bytes",
+            "test_path_traversal_is_rejected",
+        ]
+        safety = subprocess.run([__import__("sys").executable, str(PACKET / "test_reproduce_safety.py")],
+                                cwd=ROOT, capture_output=True, text=True, check=False)
+        require(safety.returncode == 0 and all(name in safety.stderr for name in expected_tests) and
+                "Ran 5 tests" in safety.stderr and "OK" in safety.stderr,
+                "reproduction adverse-control suite did not complete every expected test")
+
+        def control(method_id, kind, **fields):
+            value = {"method_id": method_id, "kind": kind, "outcome": "passed", **fields}
+            return (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+        prior_product_bytes = {
+            name: CANDIDATE_BYTES[next(row["path"] for row in manifest["outputs"] if row["path"].endswith(
+                f"/vintages/{prior}/{name}"))] for name in new_products
+        }
+        run_one_digest = hashlib.sha256(b"".join(name.encode() + b"\0" + prior_product_bytes[name]
+                                                  for name in sorted(new_products))).hexdigest()
+        run_two_digest = hashlib.sha256(b"".join(name.encode() + b"\0" + new_products[name]
+                                                  for name in sorted(new_products))).hexdigest()
+        require(run_one_digest == run_two_digest, "complete two-run product digests differ")
+        output_payload.update({
+            "control-generator-positive.json": control("wio-run-generation", "positive-control",
+                complete_receipt=True, resolved_subjects=len(current), joined_districts=len(district_rows),
+                valid_geometry_comparisons=27),
+            "control-generator-negative.json": control("wio-run-generation", "negative-control",
+                adverse_tests=expected_tests, no_partial_receipt=True),
+            "control-generator-reproducibility.json": control("wio-run-generation", "reproducibility",
+                run_one_sha256=run_one_digest, run_two_sha256=run_two_digest,
+                compared_products=reproduced),
+            "control-overlay-positive.json": control("mauritius-equal-area-overlay", "positive-control",
+                fixture="identical projected 2x2 squares", symmetric_difference_percent=identical["symmetric_difference_percent_of_union"]),
+            "control-overlay-negative.json": control("mauritius-equal-area-overlay", "negative-control",
+                fixture="projected 2x2 squares offset by 1 unit", symmetric_difference_percent=offset["symmetric_difference_percent_of_union"]),
+            "control-shom-positive.json": control("shom-wms-envelope-screen", "positive-control",
+                subject_id=mayotte["subject_id"], enclosed=True),
+            "control-shom-negative.json": control("shom-wms-envelope-screen", "negative-control",
+                subjects=[row["subject_id"] for row in mismatches], outside_edges=[row["record_bbox_outside_edges_degrees"] for row in mismatches]),
+        })
+    if args.simulate_post_computation_failure:
+        raise SystemExit("SIMULATED: failed after computation and before publication")
+    records = writer.publish_bytes(output_payload)
     receipt_path = writer.root / "publication.json"
     receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
     require(receipt.get("version") == 1 and receipt.get("status") == "complete" and
