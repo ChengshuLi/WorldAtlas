@@ -2,7 +2,7 @@
   "admission": {
     "decoded_over_file_cap_bytes": 6485570,
     "full_phase_plan": {
-      "complete_phase_bytes": 278975541,
+      "complete_phase_bytes": 513856565,
       "decoded_input_count": 1,
       "input_bytes": 278971445,
       "input_bytes_by_category": {
@@ -17,7 +17,7 @@
         "file_bytes": 33554432,
         "phase_bytes": 268435456
       },
-      "output_count": 0,
+      "output_count": 7,
       "reasons": [
         {
           "code": "input-not-authenticated",
@@ -32,11 +32,11 @@
           "code": "runtime-closure-incomplete"
         },
         {
-          "bytes": 278975541,
+          "bytes": 513856565,
           "code": "complete-phase-exceeds-limit"
         }
       ],
-      "reserved_output_bytes": 0,
+      "reserved_output_bytes": 234881024,
       "runtime_complete": false,
       "status": "refused",
       "version": 1
@@ -44,11 +44,42 @@
     "full_reproduction_authorized": false,
     "minimum_over_phase_cap_bytes": 10535989,
     "minimum_raw_plus_decoded_bytes": 278971445,
-    "outputs_reserved": false,
+    "output_reservation_bytes": 234881024,
+    "output_reservations": [
+      {
+        "max_bytes": 33554432,
+        "name": "report-run-1.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "report-run-2.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "comparison.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "execution.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "positive-control.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "negative-control.json"
+      },
+      {
+        "max_bytes": 33554432,
+        "name": "reproducibility-control.json"
+      }
+    ],
+    "outputs_reserved": true,
     "runtime_closure_complete": false
   },
   "assessment": "refused-before-full-reproduction",
-  "base_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+  "base_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
   "decoded_source_claim": {
     "compressed_bytes": 13794274,
     "compressed_sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
@@ -122,7 +153,7 @@
     "This is source-free admission evidence; no geography report or overlay was recomputed.",
     "No decoded-source CRC or full decoded SHA-256 was checked; retained chunk hashes and gzip footer are claims/size receipts only.",
     "No current legal boundary, parentage, source completeness, reuse-rights, or neighboring-granularity conclusion is established.",
-    "Installed runtime/library closure and all output reservations are not yet authenticated; the known input-only minimum already exceeds the phase cap."
+    "Installed runtime/library closure is not authenticated. All seven declared outputs are conservatively reserved at the per-file ceiling, and the phase remains over limit even before any runtime-specific additions."
   ],
   "original_data_commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40",
   "raw_input_audit": {
@@ -524,6 +555,10 @@
     "observed_chunkwise_decoded_admission_at_lines": [
       173,
       187
+    ],
+    "observed_isolated_execution_at_lines": [
+      379,
+      403
     ],
     "observed_output_writer_geography_only_at_lines": [
       418

@@ -1,17 +1,17 @@
 """Verify bounded admission facts without decoding or reproducing the source."""
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 
 import admission
 
 ROOT = Path(__file__).resolve().parents[3]
 OUT = Path(__file__).resolve().parent / "admission-assessment.json"
-BASE_COMMIT = "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+BASE_COMMIT = "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
 DATA_COMMIT = "950eb2188e5b66d88ea47a679936a02fe3eb1c40"
 EXECUTION_PATH = "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json"
 EXECUTION_SHA256 = "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a"
@@ -74,6 +74,20 @@ def run() -> dict:
     if source_claim["decoded_sha256"] != "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb":
         raise ValueError("retained decoded-source digest claim changed")
 
+    runner_path = "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py"
+    runner_raw = git_bytes(BASE_COMMIT, runner_path)
+    runner_text = runner_raw.decode("utf-8")
+    reports_match = re.search(r"(?m)^RUN_REPORTS\s*=\s*\(([^)]*)\)", runner_text)
+    outputs_match = re.search(r"(?m)^RESULT_NAMES\s*=\s*\(\*RUN_REPORTS,([^)]*)\)", runner_text)
+    if not reports_match or not outputs_match:
+        raise ValueError("pinned producer output inventory could not be read")
+    run_reports = re.findall(r"['\"]([^'\"]+)['\"]", reports_match.group(1))
+    result_names = run_reports + re.findall(r"['\"]([^'\"]+)['\"]", outputs_match.group(1))
+    if result_names != ["report-run-1.json", "report-run-2.json", "comparison.json", "execution.json",
+                        "positive-control.json", "negative-control.json", "reproducibility-control.json"]:
+        raise ValueError("pinned producer output inventory changed or could not be read")
+    output_reservations = [{"name": name, "max_bytes": admission.MAX_FILE_BYTES} for name in result_names]
+
     scope_path = "data/regional-review/regional-review-78f086631fc52a58/issue-scope.json"
     scope_raw = git_bytes(DATA_COMMIT, scope_path)
     scope = json.loads(scope_raw)["workload_scope"]
@@ -96,7 +110,7 @@ def run() -> dict:
                           "authenticated": False}
     expected_ids = [row["identity"] for row in raw_inputs] + [decoded_descriptor["identity"]]
     plan = admission.evaluate_phase(raw_inputs=raw_inputs, decoded_inputs=[decoded_descriptor],
-                                    output_reservations=[], expected_input_identities=expected_ids,
+                                    output_reservations=output_reservations, expected_input_identities=expected_ids,
                                     runtime_complete=False)
     if plan["status"] != "refused":
         raise AssertionError("known over-limit input closure was not refused")
@@ -111,12 +125,12 @@ def run() -> dict:
         "base_commit": BASE_COMMIT,
         "original_data_commit": DATA_COMMIT,
         "execution_ledger": {"path": EXECUTION_PATH, "bytes": len(execution_raw), "sha256": hash_bytes(execution_raw)},
-        "runner": {"path": "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py",
-                   "sha256": hash_bytes(git_bytes(BASE_COMMIT, "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py")),
+        "runner": {"path": runner_path, "sha256": hash_bytes(runner_raw),
                    "original_producer_path": "data/regional-review/regional-review-78f086631fc52a58/reproduce.py",
                    "original_producer_sha256": next(row["sha256"] for row in descriptors if row["path"] == "data/regional-review/regional-review-78f086631fc52a58/reproduce.py"),
                    "observed_separate_baselines_at_lines": [104, 153, 154],
                    "observed_chunkwise_decoded_admission_at_lines": [173, 187],
+                   "observed_isolated_execution_at_lines": [379, 403],
                    "observed_output_writer_geography_only_at_lines": [418]},
         "raw_input_audit": {"count": len(rows), "distinct_paths": len(seen_paths),
                             "distinct_sha256": len(seen_digests), "bytes": raw_bytes,
@@ -138,8 +152,10 @@ def run() -> dict:
         "admission": {"minimum_raw_plus_decoded_bytes": raw_bytes + decoded_size,
                       "minimum_over_phase_cap_bytes": raw_bytes + decoded_size - admission.MAX_PHASE_BYTES,
                       "decoded_over_file_cap_bytes": decoded_size - admission.MAX_FILE_BYTES,
+                      "output_reservations": output_reservations,
+                      "output_reservation_bytes": sum(row["max_bytes"] for row in output_reservations),
                       "full_phase_plan": plan,
-                      "outputs_reserved": False,
+                      "outputs_reserved": True,
                       "runtime_closure_complete": False,
                       "full_reproduction_authorized": False},
         "source_context": {
@@ -158,7 +174,7 @@ def run() -> dict:
             "This is source-free admission evidence; no geography report or overlay was recomputed.",
             "No decoded-source CRC or full decoded SHA-256 was checked; retained chunk hashes and gzip footer are claims/size receipts only.",
             "No current legal boundary, parentage, source completeness, reuse-rights, or neighboring-granularity conclusion is established.",
-            "Installed runtime/library closure and all output reservations are not yet authenticated; the known input-only minimum already exceeds the phase cap."
+            "Installed runtime/library closure is not authenticated. All seven declared outputs are conservatively reserved at the per-file ceiling, and the phase remains over limit even before any runtime-specific additions."
         ]
     }
 

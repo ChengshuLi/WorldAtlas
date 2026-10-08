@@ -237,7 +237,7 @@
   "subject_ids_sha256": "d283bef9ffb2f04977bdb715bfa85838605fac4725872e554116e0e2f9771d06",
   "baseline": {
     "version": 2,
-    "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+    "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
     "files": [
       {
         "bytes": 8539839,
@@ -629,14 +629,14 @@
         "bytes": 54755,
         "sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a",
         "hash_kind": "file-bytes",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
       {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py",
         "bytes": 29453,
         "sha256": "453623c28a2b1c849aff000baf4ca2a01a0665c67a053977516578d8f0b39424",
         "hash_kind": "file-bytes",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       }
     ],
     "pins": {
@@ -652,7 +652,7 @@
     "pin_files": {
       "execution-ledger": {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
       "native-source-compressed": {
         "path": "data/global-sources/IND-ADM3.geojson.gz",
@@ -668,7 +668,7 @@
       },
       "scoped-reproducer": {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
       "original-producer": {
         "path": "data/regional-review/regional-review-78f086631fc52a58/reproduce.py",
@@ -1621,9 +1621,9 @@
     },
     {
       "id": "Original Central India admission ledger",
-      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/d2e4261462ee1d322cec61c29595d78c6f1b2a8e/research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/41ed5e819702fde5cd89445eb09b6d4cefa07bf1/research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
       "role": "immutable ledger for the exact 55 source/input descriptors, prior decoded chunk receipts, scope and reproduction controls",
-      "vintage": "retained execution ledger at d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "vintage": "retained execution ledger at 41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "retrieved_at": "2026-10-08",
       "license": {
         "status": "unknown",
@@ -1632,7 +1632,7 @@
       "retention": "restoration-only",
       "verification": "verified",
       "temporal_status": "reference",
-      "restoration": "Read research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json at d2e4261462ee1d322cec61c29595d78c6f1b2a8e, SHA-256 e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a; verify each of its 55 path/size/hash descriptors against commit 950eb2188e5b66d88ea47a679936a02fe3eb1c40.",
+      "restoration": "Read research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json at 41ed5e819702fde5cd89445eb09b6d4cefa07bf1, SHA-256 e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a; verify each of its 55 path/size/hash descriptors against commit 950eb2188e5b66d88ea47a679936a02fe3eb1c40.",
       "limit": "The chunk hashes and declared decoded hash are historical receipts; the full decoded gzip body was not re-authenticated."
     },
     {
@@ -1671,8 +1671,8 @@
   "outputs": [
     {
       "path": "research/geography/central-india-admission-1339-20261008/README.md",
-      "bytes": 4935,
-      "sha256": "c6b4003171bc9e9d29cfce6ecd7e614fee91fd83d2484c09ca1ae0dd4b227935",
+      "bytes": 5980,
+      "sha256": "e324976651a15e626f6f91d982bf4aa120933cdc952645b2cfbc8bfcccea6dd1",
       "hash_kind": "file-bytes"
     },
     {
@@ -1683,32 +1683,38 @@
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/run_controls.py",
-      "bytes": 8311,
-      "sha256": "22f6771980b015b3142379d5c506929e2a86efa8f10582c6362e0674a0676e44",
+      "bytes": 9278,
+      "sha256": "37de39e05cdc598661fc0a069f8921476d9335a770e34b41a670fc01fe9f2140",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/preflight.py",
-      "bytes": 11549,
-      "sha256": "d3f477234285011ec323447ce48dcc44c10c20996041a00747ea9ba210a4c83d",
+      "bytes": 12737,
+      "sha256": "c6ac858f3d6d82387a2c5476334123eaffb72579fb3f8c673374dad71372b621",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-india-admission-1339-20261008/guarded_reproduce.py",
+      "bytes": 1681,
+      "sha256": "8cafa95f58536043190bc88ae07f186b550cd01e9c76ac35564fdf4fc69853fc",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/build_manifest.py",
-      "bytes": 14094,
-      "sha256": "3afe8c1a2059f63620325e8556a3903d0be68fcd93c70f07885a4d6c7b2074a7",
+      "bytes": 15215,
+      "sha256": "bee80cf93c497ec492db39c27cc94be89b31b35569d3b9574c986799f5a1cc3e",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/admission-controls.json",
-      "bytes": 1987,
-      "sha256": "6533c49251708f429de5bb652b490dba106b2e481daf91cbce75c63d6e506a29",
+      "bytes": 2181,
+      "sha256": "e5c9bdc924e842716b8603cb6d4b52da754e5a4f6618192218f7128e8562fc7f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
-      "bytes": 32485,
-      "sha256": "b53835125d437031bf86e82785b546bf2f9aa17be562e2a264f77f5cbe4e27de",
+      "bytes": 33310,
+      "sha256": "abf53880ac4cebac11ce5aaaee472f803393cd18947209cb24ea0ad492bd6ec9",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1727,9 +1733,9 @@
       "input_sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a",
       "input_file": {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 238931443,
       "unit": "bytes"
@@ -1739,9 +1745,9 @@
       "input_sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a",
       "input_file": {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 40040002,
       "unit": "bytes"
@@ -1751,21 +1757,57 @@
       "input_sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a",
       "input_file": {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 278971445,
       "unit": "bytes"
     },
     {
+      "id": "seven_output_reservations",
+      "input_sha256": "453623c28a2b1c849aff000baf4ca2a01a0665c67a053977516578d8f0b39424",
+      "input_file": {
+        "path": "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py",
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
+      },
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
+      "vintage": "baseline",
+      "value": 7,
+      "unit": "output files"
+    },
+    {
+      "id": "output_reservation_bytes",
+      "input_sha256": "453623c28a2b1c849aff000baf4ca2a01a0665c67a053977516578d8f0b39424",
+      "input_file": {
+        "path": "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py",
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
+      },
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
+      "vintage": "baseline",
+      "value": 234881024,
+      "unit": "bytes"
+    },
+    {
+      "id": "complete_phase_reserved_bytes",
+      "input_sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a",
+      "input_file": {
+        "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
+      },
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
+      "vintage": "baseline",
+      "value": 513856565,
+      "unit": "bytes"
+    },
+    {
       "id": "complete_phase_limit",
-      "input_sha256": "b53835125d437031bf86e82785b546bf2f9aa17be562e2a264f77f5cbe4e27de",
+      "input_sha256": "abf53880ac4cebac11ce5aaaee472f803393cd18947209cb24ea0ad492bd6ec9",
       "input_file": {
         "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
         "commit": "candidate"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 268435456,
       "unit": "bytes"
@@ -1775,21 +1817,21 @@
       "input_sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a",
       "input_file": {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 10535989,
       "unit": "bytes"
     },
     {
       "id": "whole_source_body_file_limit",
-      "input_sha256": "b53835125d437031bf86e82785b546bf2f9aa17be562e2a264f77f5cbe4e27de",
+      "input_sha256": "abf53880ac4cebac11ce5aaaee472f803393cd18947209cb24ea0ad492bd6ec9",
       "input_file": {
         "path": "research/geography/central-india-admission-1339-20261008/admission-assessment.json",
         "commit": "candidate"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 33554432,
       "unit": "bytes"
@@ -1801,7 +1843,7 @@
         "path": "data/regional-review/regional-review-78f086631fc52a58/issue-scope.json",
         "commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 229,
       "unit": "subjects"
@@ -1813,7 +1855,7 @@
         "path": "data/regional-review/regional-review-78f086631fc52a58/issue-scope.json",
         "commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 35,
       "unit": "provinces"
@@ -1825,7 +1867,7 @@
         "path": "data/regional-review/regional-review-78f086631fc52a58/issue-scope.json",
         "commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 144,
       "unit": "subjects"
@@ -1837,7 +1879,7 @@
         "path": "data/regional-review/regional-review-78f086631fc52a58/issue-scope.json",
         "commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 85,
       "unit": "subjects"
@@ -1847,9 +1889,9 @@
       "input_sha256": "e584de2d73fc207d50da94947582600ec7cc6deb5ae9804b51bef72ddff4f52a",
       "input_file": {
         "path": "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/execution.json",
-        "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+        "commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 6822,
       "unit": "features"
@@ -1861,7 +1903,7 @@
         "path": "data/global-sources/IND-ADM3-metadata.json",
         "commit": "950eb2188e5b66d88ea47a679936a02fe3eb1c40"
       },
-      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+      "evaluation_commit": "41ed5e819702fde5cd89445eb09b6d4cefa07bf1",
       "vintage": "baseline",
       "value": 6836,
       "unit": "features"
@@ -1881,6 +1923,21 @@
     {
       "metric_id": "minimum_raw_plus_decoded_bytes",
       "value": 278971445,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "seven_output_reservations",
+      "value": 7,
+      "unit": "output files"
+    },
+    {
+      "metric_id": "output_reservation_bytes",
+      "value": 234881024,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "complete_phase_reserved_bytes",
+      "value": 513856565,
       "unit": "bytes"
     },
     {
@@ -1958,6 +2015,13 @@
       "source_ids": [
         "Original Central India admission ledger"
       ],
+      "text": "The pinned producer declares seven outputs. Reserving all seven at 33,554,432 bytes each and the 4,096-byte completion receipt produces a conservative complete-phase reservation of 513,856,565 bytes; runtime closure also remains incomplete."
+    },
+    {
+      "status": "supported",
+      "source_ids": [
+        "Original Central India admission ledger"
+      ],
       "text": "The issue-scope partition remains exactly 229 unique subjects across 35 provinces: 144/422 partial Madhya Pradesh and 85/244 partial Uttar Pradesh. This verifies the declared work roster only."
     },
     {
@@ -1977,6 +2041,7 @@
   "commands": [
     "python3 research/geography/central-india-admission-1339-20261008/run_controls.py",
     "python3 research/geography/central-india-admission-1339-20261008/preflight.py",
+    "python3 research/geography/central-india-admission-1339-20261008/guarded_reproduce.py",
     "python3 research/geography/central-india-admission-1339-20261008/build_manifest.py",
     "node scripts/evidence-quality.mjs research/geography/central-india-admission-1339-20261008/evidence-quality.json"
   ]

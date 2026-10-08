@@ -112,6 +112,11 @@ def run() -> dict:
     distinct = admission.evaluate_phase(raw_inputs=[desc("logical:a", 20, "b" * 64), desc("logical:b", 20, "b" * 64)],
                                         decoded_inputs=[], output_reservations=[], receipt_bytes=0)
     rows.append(check(distinct["input_count"] == 2 and distinct["input_bytes"] == 40, "distinct-identities-count-same-bytes-separately"))
+    product_marker: list[str] = []
+    admitted = admission.evaluate_phase(raw_inputs=[desc("bounded", 1)], decoded_inputs=[],
+                                        output_reservations=[{"name": "report.json", "max_bytes": 1}], receipt_bytes=0)
+    result = admission.run_if_admitted(admitted, lambda: product_marker.append("producer-ran") or "done")
+    rows.append(check(result == "done" and product_marker == ["producer-ran"], "admitted-plan-invokes-producer"))
 
     output_over = admission.evaluate_phase(raw_inputs=[desc("input", phase - 10)], decoded_inputs=[],
                                            output_reservations=[{"name": "report.json", "max_bytes": 11}], receipt_bytes=0)
@@ -132,6 +137,14 @@ def run() -> dict:
     else:
         raise AssertionError("refused plan invoked its producer")
     rows.append(check(products == [], "refusal-stops-producer-before-product-creation"))
+
+    guarded = subprocess.run(["python3", str(HERE / "guarded_reproduce.py")], cwd=HERE.parents[2],
+                             check=True, capture_output=True, text=True)
+    guarded_result = json.loads(guarded.stdout)
+    rows.append(check(guarded_result.get("status") == "refused" and
+                      guarded_result.get("producer_started") is False and
+                      not (HERE / "vintages").exists(),
+                      "guarded-reproduction-refuses-before-geography-products"))
 
     runtime = admission.evaluate_phase(raw_inputs=[desc("input", 1)], decoded_inputs=[], output_reservations=[],
                                        runtime_complete=False, receipt_bytes=0)
