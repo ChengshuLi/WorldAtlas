@@ -113,6 +113,7 @@ def main() -> None:
         BASE / "worldcover-source-ranges.json",
         BASE / "worldcover-range-integrity.json",
         BASE / "source-coverage.json",
+        BASE / "classification-memory-admission.json",
         BASE / "sources/WorldCover_PUM_V2.0.pdf",
         BASE / "sources/WorldCover_PUM_V2.0.headers",
         BASE / "sources/WorldCover_PVR_V2.0.pdf",
@@ -127,7 +128,7 @@ def main() -> None:
         raise RuntimeError("Duplicate frozen input path")
     input_bytes = sum(item["bytes"] for item in inputs)
     storage_snapshot = json.loads((BASE / "workspace-storage-admission.json").read_text(encoding="utf-8"))
-    producer_hashes = {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "verify_classification_runs.py", "freeze_inputs.py", "record_workspace_storage.mjs"]}
+    producer_hashes = {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "verify_classification_runs.py", "inspect_classification_allocations.py", "supervise_classification.py", "freeze_inputs.py", "record_workspace_storage.mjs"]}
     runtime_body_total = 9_901_207 + 18_058_560 + 352_048 + 3_258_528 + 2_289_328
     producer_bytes = sum((BASE / name).stat().st_size for name in producer_hashes)
     static_phase_sum = input_bytes + range_manifest["selected_decoded_bytes"] + 932_627 + runtime_body_total + producer_bytes + 67_108_864
@@ -172,7 +173,7 @@ def main() -> None:
             "pixel_decode_runs": 2,
             "per_run_full_block_decode_capacity_bytes": range_manifest["selected_decoded_bytes"],
             "geometry_partition": "bounded per candidate and per source row; no raster-wide in-memory array",
-            "measurement": "After window authorization, capture /usr/bin/time -l plus output file sizes; stop if process RSS exceeds 700 MiB, temporary storage exceeds 64 MiB, or either result exceeds its 64 MiB half of the combined output cap.",
+            "measurement": "Use supervise_classification.py after explicit root window authorization. It samples process-group RSS and system free memory every 250 ms, stops at 640 MiB to retain 60 MiB below the producer's unchanged 700 MiB abort, enforces the unchanged 40% host-free gate and authorized wall-time, and records JSONL/stdout/stderr/summary logs with a 1 MiB per producer log-file limit. The report explicitly discloses sampler latency/overshoot. Keep existing 32 MiB ordinary-file, 64 MiB per-run, 128 MiB paired-output, 256 MiB phase-accounting, and storage caps.",
         },
         "measured_preflight": {
             "scope": "No-pixel preflight only; this does not authorize or measure a GIS classification run.",

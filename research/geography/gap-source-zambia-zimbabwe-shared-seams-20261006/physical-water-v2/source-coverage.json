@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-08T02:58:06.197484+00:00",
+  "created_at": "2026-10-08T03:23:46.488252+00:00",
   "method": "coordinate-envelope containment against COG source-window pixel support; no geometry operations",
   "source_result": {
     "path": "gap-source-zambia-zimbabwe-shared-seams-20261006/run-one/source-geometry-results.json.gz",
@@ -70,11 +70,6 @@
       "gb:ZWE:ADM2:62879985B85730198836463"
     ],
     "local_candidate_intersection_bindings": {
-      "gb:ZMB:ADM2:96606910B48730551364911": {
-        "bindings": 3,
-        "nonempty": 3,
-        "empty": 0
-      },
       "gb:ZMB:ADM2:96606910B35256638811207": {
         "bindings": 2,
         "nonempty": 2,
@@ -89,6 +84,11 @@
         "bindings": 6,
         "nonempty": 5,
         "empty": 1
+      },
+      "gb:ZMB:ADM2:96606910B48730551364911": {
+        "bindings": 3,
+        "nonempty": 3,
+        "empty": 0
       }
     },
     "whole_administrative_subjects_included_in_window": false,
