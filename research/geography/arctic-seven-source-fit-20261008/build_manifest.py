@@ -112,6 +112,15 @@ output_paths += [f'vintages/r12-fit/{name}' for name in [
 output_paths += [str(path.relative_to(P)) for path in sorted((P/'exploratory').rglob('*')) if path.is_file()]
 outputs=[desc(x) for x in output_paths]
 output_by_path={x['path']:x for x in outputs}
+readme_path='research/geography/arctic-seven-source-fit-20261008/README.md'
+output_by_path[readme_path]['role']='generated-table'
+rendered_tables=[{'path':readme_path,'rows':[
+ {'metric_id':'active-feature-count','line':51,'template':'| Active features | {value} | features |','decimals':0},
+ {'metric_id':'candidate-count','line':52,'template':'| Candidates | {value} | components |','decimals':0},
+ {'metric_id':'repair-ready-count','line':53,'template':'| Repair-ready geometric proposals | {value} | components |','decimals':0},
+ {'metric_id':'unresolved-count','line':54,'template':'| Unresolved candidates | {value} | components |','decimals':0},
+ {'metric_id':'exact-one-envelope-count','line':55,'template':'| Exact one-envelope matches | {value} | components |','decimals':0},
+]}]
 subjects=spec['subject_ids']; subject_hash=sha(json.dumps(sorted(subjects),separators=(',',':')).encode())
 fit_path='research/geography/arctic-seven-source-fit-20261008/vintages/r12-fit/candidate-decisions.json'
 retired_path='research/geography/arctic-seven-source-fit-20261008/vintages/r12-retired/retired-member-context-phase2.json'
@@ -120,18 +129,18 @@ results=fit_output['results']
 retired_context_raw=(ROOT/retired_path).read_bytes()
 retired_context=json.loads(retired_context_raw)
 fit_evaluation_commit=json.loads((P/'vintages/r12-fit/execution-receipt.json').read_bytes())['baseline_commit']
-def archived_metric(metric_id,value,unit,path,raw):
+def archived_metric(metric_id,value,unit,raw):
  return {'id':metric_id,'value':value,'unit':unit,'vintage':'archived','input_sha256':sha(raw),
-  'evaluation_commit':fit_evaluation_commit,'input_file':{'path':path,'commit':'candidate'}}
+  'evaluation_commit':fit_evaluation_commit}
 metrics=[
  {'id':'active-feature-count','value':49625,'unit':'features','vintage':'baseline','input_sha256':pins['world_index'],'evaluation_commit':BASE},
- archived_metric('candidate-count',fit_output['component_count'],'components',fit_path,fit_raw),
- archived_metric('repair-ready-count',fit_output['repair_ready_count'],'components',fit_path,fit_raw),
- archived_metric('unresolved-count',fit_output['unresolved_count'],'components',fit_path,fit_raw),
- archived_metric('exact-one-envelope-count',fit_output['exactly_one_covering_named_envelope_count'],'components',fit_path,fit_raw),
- archived_metric('native-ecoregion-feature-count',fit_output['native_feature_count'],'features',fit_path,fit_raw),
- archived_metric('native-unique-ecoregion-id-count',fit_output['native_unique_ecoregion_id_count'],'ids',fit_path,fit_raw),
- archived_metric('retired-reference-location-count',retired_context['location_count'],'locations',retired_path,retired_context_raw),
+ archived_metric('candidate-count',fit_output['component_count'],'components',fit_raw),
+ archived_metric('repair-ready-count',fit_output['repair_ready_count'],'components',fit_raw),
+ archived_metric('unresolved-count',fit_output['unresolved_count'],'components',fit_raw),
+ archived_metric('exact-one-envelope-count',fit_output['exactly_one_covering_named_envelope_count'],'components',fit_raw),
+ archived_metric('native-ecoregion-feature-count',fit_output['native_feature_count'],'features',fit_raw),
+ archived_metric('native-unique-ecoregion-id-count',fit_output['native_unique_ecoregion_id_count'],'ids',fit_raw),
+ archived_metric('retired-reference-location-count',retired_context['location_count'],'locations',retired_context_raw),
 ]
 sources=[
  {'id':'aafc-native-ecoregions','url':'https://www.arcgis.com/home/item.html?id=ee462b0692cc4005aefee69dc44f010d','role':'Exact original AAFC native ecoregion source member; ECO15/ECO25 coverage','vintage':'Registered source archive member retrieved 2026-10-01; underlying effective date not established','retrieved_at':'2026-10-01','license':{'status':'redistributable','terms':'Open Government Licence – Canada as stated by linked AAFC source item'},'retention':'retained','verification':'verified','temporal_status':'unknown','files':[source_files[0]]},
@@ -164,6 +173,7 @@ manifest={'version':1,'issue':1481,'lane':'geography','worker_id':'01a112c1-ac99
   {'metric_id':'native-ecoregion-feature-count','path':fit_path,'json_pointer':'/native_feature_count'},
   {'metric_id':'native-unique-ecoregion-id-count','path':fit_path,'json_pointer':'/native_unique_ecoregion_id_count'},
   {'metric_id':'retired-reference-location-count','path':retired_path,'json_pointer':'/location_count'}],
+ 'rendered_tables':rendered_tables,
  'change_receipts':change_receipts,
  'validation':[
  {'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/vintages/r12-fit/positive-control.json'},

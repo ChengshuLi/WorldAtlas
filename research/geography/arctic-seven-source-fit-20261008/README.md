@@ -4,7 +4,7 @@ This packet answers the bounded source-fit question in issue #1481 for exactly t
 
 ## Reproduction
 
-The original `r7` run and its receipts are preserved for audit, but an independent review found that its native commands were not bound to the executables whose hashes were recorded, its runner read two inputs before enforcing their size bounds, and its negative control overstated the scope of its decision-gate checks. Treat r7 results as recorded exploratory outputs, not qualified reproduced results. The first corrected budget plan, r8, was rejected before execution: its source-fit reservation was 275,356,788 bytes, above the 268,435,456-byte cap. The abbreviated-commit r9 plan was rejected before execution. Its subsequent native extraction exposed a macOS Bash portability issue in the plan-size read, so its native receipt undercounted the charge; that output is preserved as exploratory evidence only. The r8 and r9 rejected artifacts are retained under `exploratory/`. The r10 run completed, but independent review found its baseline blob reads could resolve Git through `PATH` rather than the pinned absolute executable. Treat all r10 results as unqualified exploratory evidence; they are preserved under `exploratory/r10-path-git-unbound/`. The first r12 qualification attempt completed native extraction, then stopped before source reads because the platform fingerprint differed at the interpreter processor-alias field. Its plan and native output are preserved under `exploratory/r11-platform-admission-mismatch/`. The r12 runner checks the stable system, OS release, and machine fields individually; the current qualification attempt uses fresh immutable `r12-*` vintages and a frozen `phase-plan-r12.json`.
+The original `r7` run and its receipts are preserved for audit, but an independent review found that its native commands were not bound to the executables whose hashes were recorded, its runner read two inputs before enforcing their size bounds, and its negative control overstated the scope of its decision-gate checks. Treat r7 results as recorded exploratory outputs, not qualified reproduced results. The first corrected budget plan, r8, was rejected before execution: its source-fit reservation was 275,356,788 bytes, above the 268,435,456-byte cap. The abbreviated-commit r9 plan was rejected before execution. Its subsequent native extraction exposed a macOS Bash portability issue in the plan-size read, so its native receipt undercounted the charge; that output is preserved as exploratory evidence only. The r8 and r9 rejected artifacts are retained under `exploratory/`. The r10 run completed, but independent review found its baseline blob reads could resolve Git through `PATH` rather than the pinned absolute executable. Treat all r10 results as unqualified exploratory evidence; they are preserved under `exploratory/r10-path-git-unbound/`. The first r11 qualification attempt completed native extraction, then stopped before source reads because the platform fingerprint differed at the interpreter processor-alias field. Its plan and native output are preserved under `exploratory/r11-platform-admission-mismatch/`. The r12 runner checks the stable system, OS release, and machine fields individually; the current qualification attempt uses fresh immutable `r12-*` vintages and a frozen `phase-plan-r12.json`.
 
 The r12 rerun is tied to an immutable code commit. Its baseline blob and tree reads use the exact absolute Git executable admitted by the native-tools lock, including reads through the inherited immutable baseline API. On the exact Python 3.12.14 / Shapely 2.1.2 environment recorded by `runtime-lock.json`, generate the r12 native executable lock, then commit the phase runner, source bridge, phase scripts, both locks, and builders. Use that exact full 40-character commit SHA as `EXECUTION_COMMIT`. The plan builder verifies the materialized sources and code against the commit and checks the issue-pinned inputs. It writes `phase-plan-r12.json` once; that plan is immutable for this run. Before execution, inspect every prospective charge and stop if any phase exceeds the cap. The r12 source-fit phase reserves 2 MiB for each neighbor-scan predecessor, above the observed r7 scan output sizes (about 0.35–0.52 MiB); the runner still enforces each bound and rejects an output that exceeds its declared reservation.
 
@@ -16,12 +16,12 @@ NODE=/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/
 read -r PLAN_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json)
 read -r NATIVE_TOOLS_SHA _ < <(sha256sum research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r12.json)
 /bin/bash research/geography/arctic-seven-source-fit-20261008/native_archive_extract.sh "$EXECUTION_COMMIT" "$PLAN_SHA" "$NATIVE_TOOLS_SHA"
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-a --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-b --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-c --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-d --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
-"$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
+PYTHONEXECUTABLE="$PYTHON" "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py retired-context --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
+PYTHONEXECUTABLE="$PYTHON" "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-a --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
+PYTHONEXECUTABLE="$PYTHON" "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-b --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
+PYTHONEXECUTABLE="$PYTHON" "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-c --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
+PYTHONEXECUTABLE="$PYTHON" "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py neighbor-scan-d --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
+PYTHONEXECUTABLE="$PYTHON" "$PYTHON" research/geography/arctic-seven-source-fit-20261008/run_source_phase.py source-fit --baseline "$EXECUTION_COMMIT" --plan-sha256 "$PLAN_SHA" --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_run_record.py --phase-plan research/geography/arctic-seven-source-fit-20261008/phase-plan-r12.json --output r12-execution-budget.json
 "$PYTHON" research/geography/arctic-seven-source-fit-20261008/build_manifest.py
 "$NODE" scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json
@@ -35,49 +35,28 @@ The enforced cap is 268,435,456 bytes (256 MiB) per phase, including input bytes
 
 The final `candidate-decisions.json` retains each candidate geometry, target union, gain/loss and candidate/gain symmetric-difference geometries, the full active-feature contact list, source-version coverage, parent-source comparison, retired-member comparison, all ten decision premises, and candidate-specific missing premises. `proposed-additions.geojson` contains only the three strict exact-addition outputs. New fit products are emitted into the fit vintage, never over the preserved root outputs.
 
-The preserved r7 attempt used execution commit `350643c19b5dd597f60acaa74b1c5fd0a7c5e295` and phase-plan SHA-256 `65fbeeafc75f66d929b6b039abb97f7ba286685e9e0ee55bf5e0efbddae13d26`. It recorded these charges, all below the 268,435,456-byte cap, but does not qualify as a reproduced run:
-
-| Phase | Charged bytes | Headroom |
-| --- | ---: | ---: |
-| Native archive extraction | 263,776,415 | 4,659,041 |
-| Retired-member context | 235,267,587 | 33,167,869 |
-| Neighbor scan A | 234,161,235 | 34,274,221 |
-| Neighbor scan B | 228,027,854 | 40,407,602 |
-| Neighbor scan C | 228,584,666 | 39,850,790 |
-| Neighbor scan D | 241,004,023 | 27,431,433 |
-| Source fit and controls | 222,702,670 | 45,732,786 |
-
-The machine-readable `r7-execution-budget.json` binds the recorded r7 phase charges and output hashes. It is retained as historical evidence. The r10 charges below are retained as historical, unqualified evidence because its baseline reads were not bound to the admitted Git executable. The r12 charge table will be added after the fresh run.
-
-| Phase | Charged bytes | Headroom |
-| --- | ---: | ---: |
-| Native archive extraction | 225,807,405 | 42,628,051 |
-| Retired-member context | 246,075,748 | 22,359,708 |
-| Neighbor scan A | 244,969,363 | 23,466,093 |
-| Neighbor scan B | 238,835,982 | 29,599,474 |
-| Neighbor scan C | 239,392,794 | 29,042,662 |
-| Neighbor scan D | 251,812,151 | 16,623,305 |
-| Source fit and controls | 233,512,588 | 34,922,868 |
+The r7 charge record and the unqualified r10 charge record remain available with their original receipts. The qualified r12 run used the same seven-phase plan and completed every phase below the 268,435,456-byte cap. `r12-execution-budget.json` records each planned maximum, actual charge, output hash, and headroom; the largest actual charge was 251,812,591 bytes (neighbor scan D), and source-fit charged 233,513,028 bytes.
 
 The manifest continues to report `limited` for the declared boundary-authority and undated-context gaps.
 
-This packet currently retains the unqualified r10 source/GIS execution. A fresh r12 run must complete before any result can be called qualified; cross-run repeatability is not claimed. The small reporting-writer preflight ran in a credential-free environment: `build_run_record.py` recreated the same retained record at a fresh output path, and both it and `build_manifest.py` rejected existing sentinel files, dangling-symlink destinations, and traversal paths without changing the sentinels. A fresh manifest output passed the local evidence-quality check. These writer checks do not independently re-establish the geographic result.
+The qualified r12 source/GIS execution is complete. Its candidate decisions, proposed additions, and both control files are byte-identical to the preserved unqualified r10 outputs. The r10 execution remains unqualified, so cross-run repeatability is not claimed. The small reporting-writer preflight ran in a credential-free environment: `build_run_record.py` recreated the same retained record at a fresh output path, and both it and `build_manifest.py` rejected existing sentinel files, dangling-symlink destinations, and traversal paths without changing the sentinels. A fresh manifest output passed the local evidence-quality check. These writer checks do not independently re-establish the geographic result.
 
 ## Findings
 
-The r10 result recorded all seven candidates are valid polygons, each wholly covered by exactly one named ecoregion in each edition: ECO15 “Banks Island Lowland” and ECO25 “Foxe Basin Plain.” The four authenticated neighbor scans cover 49,625 active features in four pairwise-disjoint ID rosters. The v2.2 and native source envelopes are not geometrically identical; their per-candidate symmetric differences are recorded. Coverage agreement does not prove that the two editions have the same coastline or date-specific authority.
+The qualified r12 result confirms all seven candidates are valid polygons, each wholly covered by exactly one named ecoregion in each edition: ECO15 “Banks Island Lowland” and ECO25 “Foxe Basin Plain.” The four authenticated neighbor scans cover 49,625 active features in four pairwise-disjoint ID rosters. The v2.2 and native source envelopes are not geometrically identical; their per-candidate symmetric differences are recorded. Coverage agreement does not prove that the two editions have the same coastline or date-specific authority.
 
-| Candidate | Retired cartographic reference context | Exact target union | Disposition |
-| --- | --- | --- | --- |
-| `12c9ec981349…` ECO15 | Candidate contained by Region 1, Unorganized; Sachs Harbour is disjoint | Valid, zero target loss, full candidate gain, no new positive-area neighbor overlap | Repair-ready geometric proposal |
-| `52452c5923a0…` ECO15 | Line contact with Region 1, Unorganized; Sachs Harbour is disjoint | Nonempty target residual, `1.9737900550098608e-16` square degrees; candidate gain otherwise preserved | Unresolved: strict zero-loss topology predicate fails at a tiny residual; retained residual coordinates are in JSON |
-| `add031b71953…` ECO25 | Line contact with Baffin, Unorganized; Hall Beach and Igloolik are disjoint | Valid, zero target loss, full candidate gain, no new positive-area neighbor overlap | Repair-ready geometric proposal |
-| `2aca267603c8…` ECO25 | Positive-area overlap with Baffin, Unorganized; Hall Beach and Igloolik are disjoint | Target overlap is `1.000117608858264e-18` square degrees; union gain and candidate differ by a nonempty line-only GEOS symmetric difference, although its planar area is zero | Unresolved: the candidate is not wholly new, so the exact-addition predicate fails; overlap and symmetric-difference coordinates are retained |
-| `265c983a6123…` ECO25 | Line contact with Baffin, Unorganized; Hall Beach and Igloolik are disjoint | Nonempty target residual, `2.5685191484904345e-17` square degrees; candidate gain otherwise preserved | Unresolved: strict zero-loss topology predicate fails at a tiny residual; retained residual coordinates are in JSON |
-| `17bb5b7f043b…` ECO25 | Candidate contained by Baffin, Unorganized; Hall Beach and Igloolik are disjoint | Valid, zero target loss, full candidate gain, no new positive-area neighbor overlap | Repair-ready geometric proposal |
-| `54dc96cd3d0e…` ECO25 | Line contact with Baffin, Unorganized; Hall Beach and Igloolik are disjoint | Nonempty target residual, `1.0722759485881639e-16` square degrees; candidate-target overlap is `1.0473876316424694e-17` square degrees; exact union gain and candidate differ by `1.314106384930676e-16` square degrees | Unresolved: strict zero-loss and full-gain predicates fail; retained residual and symmetric-difference coordinates are in JSON |
 
-For ECO15, the current target is Banks Island Lowland under Victoria Lowlands; its source IDs and member IDs are consistent with the retained hierarchy and retired context. For ECO25, the current target is Foxe Basin Plain under Foxe–Boothia Lowlands; all five candidates are covered by the source parent feature `ECOPROVINCE_ID=2.7` (piece/object 63). These checks establish consistency with retained source and hierarchy records, not boundary authority. The current parent hierarchy entries remain open/retained-reference records; this packet shows compatible parent identity, not semantic approval of the hierarchy or any member boundary.
+| Measure | Value | Unit |
+| --- | ---: | --- |
+| Active features | 49625 | features |
+| Candidates | 7 | components |
+| Repair-ready geometric proposals | 3 | components |
+| Unresolved candidates | 4 | components |
+| Exact one-envelope matches | 7 | components |
+
+The seven detailed candidate rows and their exact residual measurements are in `vintages/r12-fit/candidate-decisions.json`. In summary, candidates `12c9ec981349…` (ECO15), `add031b71953…` (ECO25), and `17bb5b7f043b…` (ECO25) pass the exact additive predicates. Candidates `52452c5923a0…`, `2aca267603c8…`, `265c983a6123…`, and `54dc96cd3d0e…` remain unresolved under the strict zero-loss/full-gain predicates; their residuals and symmetric-difference geometries remain in the JSON.
+
+For ECO15, the retained target is Banks Island Lowland under Victoria Lowlands; its source IDs and member IDs are consistent with the retained hierarchy and retired context. For ECO25, the retained target is Foxe Basin Plain under Foxe–Boothia Lowlands; all five candidates are covered by the source parent feature `ECOPROVINCE_ID=2.7` (piece/object 63). These checks establish consistency with retained source and hierarchy records, not boundary authority. The retained parent hierarchy entries remain open/retained-reference records; this packet shows compatible parent identity, not semantic approval of the hierarchy or any member boundary.
 
 ## Source, version, and interpretation limits
 
