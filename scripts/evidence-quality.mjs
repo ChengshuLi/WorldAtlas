@@ -31,6 +31,47 @@ function subjectJSON(file, name, vintage, readFile, maxFileBytes) {
   return JSON.parse(compressed ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw);
 }
 
+function subjectFileBinding(value) {
+  if (typeof value === 'string') return {path: safeEvidencePath(value), kind: 'direct'};
+  require(value && typeof value === 'object' && !Array.isArray(value) && value.version === 1 &&
+    Object.keys(value).sort().join(',') === 'id_template,path,properties,version',
+  'Invalid versioned subject-file binding');
+  safeEvidencePath(value.path);
+  require(Array.isArray(value.properties) && value.properties.length > 0 && value.properties.length <= 8 &&
+    value.properties.every(key => typeof key === 'string' && /^[A-Za-z_][A-Za-z0-9_]*$/.test(key)) &&
+    new Set(value.properties).size === value.properties.length, 'Invalid subject identity properties');
+  require(typeof value.id_template === 'string' && value.id_template.length <= 512 && !/[\r\n]/.test(value.id_template),
+    'Invalid subject identity template');
+  const tokens = [...value.id_template.matchAll(/\{([^{}]+)\}/g)].map(match => match[1]);
+  require(value.id_template.replace(/\{[^{}]+\}/g, '').indexOf('{') === -1 &&
+    value.id_template.replace(/\{[^{}]+\}/g, '').indexOf('}') === -1 &&
+    tokens.length === value.properties.length && tokens.every((key, index) => key === value.properties[index]),
+  'Subject identity template must use each declared property exactly once in order');
+  return {path: value.path, kind: 'composed', properties: value.properties, id_template: value.id_template};
+}
+
+function composedSubjectIds(collection, binding) {
+  require(collection && collection.type === 'FeatureCollection' && Array.isArray(collection.features),
+    'Composed subject source must be a GeoJSON FeatureCollection');
+  const ids = new Set();
+  for (const feature of collection.features) {
+    require(feature?.type === 'Feature' && feature.properties && typeof feature.properties === 'object' &&
+      !Array.isArray(feature.properties), 'Composed subject source contains a malformed feature');
+    let index = 0;
+    const id = binding.id_template.replace(/\{([^{}]+)\}/g, (_token, key) => {
+      const value = feature.properties[key];
+      require(typeof value === 'string' && value.length > 0 && value === value.trim() && !/[\u0000-\u001f\u007f]/.test(value),
+        `Subject feature lacks a canonical string identity property: ${key}`);
+      index++;
+      return value;
+    });
+    require(index === binding.properties.length && id.trim().length > 0, 'Invalid composed subject identity');
+    require(!ids.has(id), `Duplicate composed subject identity: ${id}`);
+    ids.add(id);
+  }
+  return ids;
+}
+
 /** Identity-only projection from retained prior evidence, never a geometry/source certification. */
 function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
   const inventory = manifest.baseline.subject_inventory;
@@ -123,17 +164,25 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     const mappings = manifest.baseline.subject_files;
     require(mappings && subjectsHash(Object.keys(mappings)) === manifest.subject_ids_sha256,
       'Geography needs exact subject-to-containing-file inventory');
-    const parsed = new Map();
+    const bindings = new Map(), parsed = new Map(), composedIds = new Map();
     for (const id of ids) {
-      const name = mappings[id];
-      require(manifest.baseline.files.some(f => f.path === name), 'Subject references unpinned file');
+      const binding = subjectFileBinding(mappings[id]);
+      require(manifest.baseline.files.some(f => f.path === binding.path), 'Subject references unpinned file');
+      if (bindings.has(binding.path)) require(JSON.stringify(bindings.get(binding.path)) === JSON.stringify(binding),
+        'Subjects sharing a source file must use one consistent identity binding');
+      else bindings.set(binding.path, binding);
       if (readFile) {
-        if (!parsed.has(name)) {
-          const file = manifest.baseline.files.find(file => file.path === name);
-          parsed.set(name, subjectJSON(file, name, manifest.baseline.commit, readFile, maxFileBytes));
+        if (!parsed.has(binding.path)) {
+          const file = manifest.baseline.files.find(file => file.path === binding.path);
+          parsed.set(binding.path, subjectJSON(file, binding.path, manifest.baseline.commit, readFile, maxFileBytes));
         }
-        require(parsed.get(name).features?.some(f => (f.id ?? f.properties?.id) === id),
-          `Subject missing from claimed containing file: ${id}`);
+        if (binding.kind === 'direct') {
+          require(parsed.get(binding.path).features?.some(f => (f.id ?? f.properties?.id) === id),
+            `Subject missing from claimed containing file: ${id}`);
+        } else {
+          if (!composedIds.has(binding.path)) composedIds.set(binding.path, composedSubjectIds(parsed.get(binding.path), binding));
+          require(composedIds.get(binding.path).has(id), `Composed subject missing from claimed containing file: ${id}`);
+        }
       }
     }
   }

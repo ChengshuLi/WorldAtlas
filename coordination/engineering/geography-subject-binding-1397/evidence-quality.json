@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "issue": 1435,
+  "lane": "engineering",
+  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "de506f51100568e150e51f2926a5259b71e55272",
+    "files": [
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 15247,
+        "sha256": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 21033,
+        "sha256": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 286,
+        "sha256": "ea67d5b8cea88fb6aa5e48366923e06cc06f10977ba320684e8fd04a21d659c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+        "bytes": 46722,
+        "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "scripts/evidence-quality.mjs": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52",
+      "scripts/premerge-evidence.mjs": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971",
+      "scripts/evidence-policy.mjs": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+      ".github/evidence-policy.json": "ea67d5b8cea88fb6aa5e48366923e06cc06f10977ba320684e8fd04a21d659c2"
+    },
+    "pin_files": {
+      "scripts/evidence-quality.mjs": "scripts/evidence-quality.mjs",
+      "scripts/premerge-evidence.mjs": "scripts/premerge-evidence.mjs",
+      "scripts/evidence-policy.mjs": "scripts/evidence-policy.mjs",
+      ".github/evidence-policy.json": ".github/evidence-policy.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-parent-contact-input",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/de506f51100568e150e51f2926a5259b71e55272/research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+      "role": "Pinned parent source-feature GeoJSON, used to exercise canonical contact ID extraction only.",
+      "vintage": "Parent evidence bytes at de506f51100568e150e51f2926a5259b71e55272; upstream geoBoundaries products have their own recorded represented years.",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Upstream source terms remain as recorded in parent evidence; this validator change does not redistribute or make an authority claim."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the whole-file bytes at de506f51100568e150e51f2926a5259b71e55272:research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson; verify the declared SHA-256 in baseline.files.",
+      "limit": "This input tests identity binding only. It does not establish source authority, geometry accuracy, boundary membership or legal status.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "docs/EVIDENCE_QUALITY.md",
+      "bytes": 6079,
+      "sha256": "96897c3438a12785c31a7c3e6f6f0e601761b18b669b5fbe19f50aa8733ae7ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 18464,
+      "sha256": "f882803cae564b9dc6351c180f035f888344dd8591090d2500d67e62e6cc2890",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geography-subject-binding.test.mjs",
+      "bytes": 7195,
+      "sha256": "97a7b4077c0bea896ec1d334158b0f43f57d5ebd69a4246d9bda35a945de6099",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "subject-binding",
+      "kind": "code",
+      "description": "Validate a versioned, declarative ID template against pinned GeoJSON string properties, preserving direct feature IDs and prior-evidence inventory behavior. Templates are data only; submitted code is not executed.",
+      "software": "Node.js 24.19.0",
+      "units": "Exact canonical identifier strings"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "A reviewed geography subject ID may be checked against an authentic pinned GeoJSON row using an explicit property template when that row has no direct id field.",
+      "status": "supported",
+      "source_ids": [
+        "retained-parent-contact-input"
+      ]
+    },
+    {
+      "text": "A structural source-row identity match does not establish source authority, geometry accuracy or legal geography.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-parent-contact-input"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/evidence-quality.test.mjs test/geography-subject-binding.test.mjs test/premerge-evidence.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/geography-subject-binding-1397/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/EVIDENCE_QUALITY.md",
+      "status": "modified",
+      "original_sha256": "f794ac616ec8f20d868c84104de976a3cb99c7dce8ae5438c19ebda60c4b4f3b"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "status": "modified",
+      "original_sha256": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52"
+    },
+    {
+      "path": "test/geography-subject-binding.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-subject-binding-1397/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}

@@ -8,7 +8,20 @@ New packets can copy `coordination/templates/evidence-v1.json`, replace every pl
 
 Record the exact baseline commit and actual containing file paths. Hash raw whole-file bytes with SHA-256; `hash_kind` must be `file-bytes`. Per-entry hashes are different evidence and must never substitute for file hashes. For compressed inputs record both compressed and uncompressed bytes/digests. `baseline.pins` maps named pins to hashes and `baseline.pin_files` binds every pin to an actual baseline file descriptor. The verifier reads baseline files from the immutable Git commit, not whatever main currently contains.
 
-Subject IDs are sorted before JSON serialization and hashing (`subjectsHash` in the shared module). Every geography subject additionally maps through `baseline.subject_files` to its actual containing GeoJSON file; the validator verifies presence there. Track containing paths as you read the world index; never infer filenames from an absent feature property. Regional frozen scopes, adjacent-tier chains and historical territorial applicability still need their existing release/certificate gates; this receipt does not replace those checks.
+Subject IDs are sorted before JSON serialization and hashing (`subjectsHash` in the shared module). Every geography subject additionally maps through `baseline.subject_files` to its actual containing GeoJSON file; the validator verifies presence there. A value may remain a path string when the source feature already has the canonical identity in `Feature.id` or `properties.id`. When an authentic source feature stores its identity in multiple string properties, use an explicit version 1 descriptor instead of rewriting the source row:
+
+```json
+"subject_files": {
+  "gb:AGO:ADM2:16411231B14510444140190": {
+    "version": 1,
+    "path": "research/geography/EXACT-PACKET/contacts.geojson",
+    "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+    "properties": ["shapeGroup", "shapeType", "shapeID"]
+  }
+}
+```
+
+The property list must exactly match each template placeholder once and in order. Every source feature must have a non-empty string value for each property, and the resulting identities must be unique; all declared subjects must resolve within the pinned file. Template strings are literal formatting only, never executable expressions. Subjects mapped to one file must use one identical binding. This verifies structural identity against retained bytes; it does not establish source authority, geometry accuracy or legal/geographic approval. Track containing paths as you read the world index; never infer filenames from an absent feature property. Regional frozen scopes, adjacent-tier chains and historical territorial applicability still need their existing release/certificate gates; this receipt does not replace those checks.
 
 ## Sources and methods
 
