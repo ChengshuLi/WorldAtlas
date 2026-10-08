@@ -1,0 +1,445 @@
+{
+  "version": 1,
+  "created_at": "2026-10-08T03:00:51.536751+00:00",
+  "issue": 1234,
+  "classification_source": "ESA WorldCover 2021 v200 (2021 product vintage)",
+  "geometry_baseline": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+  "source_comparison_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+  "author_branch_base_commit": "6a1c3b5410587289285f31809312792f0f085e87",
+  "input_files": [
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/evidence-quality.json",
+      "bytes": 36007,
+      "sha256": "2fb8c8f8e5f04a5621561a8c45dd3b8190a8a6bd368a11a456b1a2ae00df2822"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/README.md",
+      "bytes": 5584,
+      "sha256": "5c42b719099672a97804aecd34cecb0193872caf9078b4ebfe6c411f568d9624"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/source-coverage.json",
+      "bytes": 16145,
+      "sha256": "205f008a819647bdc405f9f8891a71c9150dcdae3d77d722e72b830c8ae6ddbf"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/WorldCover_PUM_V2.0.headers",
+      "bytes": 366,
+      "sha256": "2618c44ec1f2245f7e94ab4e75670563893ef3ae95b148d16b85412d2ead9421"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/WorldCover_PUM_V2.0.pdf",
+      "bytes": 4102952,
+      "sha256": "4301a3d95260d88bd4315f43ccf2a12ef74ad391109b9f36e22b6e51d8490107"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/WorldCover_PVR_V2.0.headers",
+      "bytes": 386,
+      "sha256": "08db894c83945143dee1ea6d6fbcbb35d55c54bcf376944887fd92ebb049e5b4"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/WorldCover_PVR_V2.0.pdf",
+      "bytes": 2671365,
+      "sha256": "05700af5f1462beebf3007ead5b68bccc5f4c016a7bdb26d5c9b6e3db4a1f4a9"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/esa-worldcover-data-access.headers",
+      "bytes": 486,
+      "sha256": "9d09745afcde32fde166c6c6fa576723b2a72d5a1087f08bb6bc831df0b3fa8e"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/esa-worldcover-data-access.html",
+      "bytes": 49866,
+      "sha256": "7645b74f70102799bad26dc751706f630cfee7e3e3d60bc25f343053a7a57d5e"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c21.bin",
+      "bytes": 113793,
+      "sha256": "181ee9719fd7bb99e5c900e1762d61b01eaf7e6ba5562e455151f3f96f0fe64e"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c22.bin",
+      "bytes": 73897,
+      "sha256": "b46a421fc0d1ca889a5cf26563635146a90c1e8c9c2118e42dfb61f29cf2bc69"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c23.bin",
+      "bytes": 31443,
+      "sha256": "9e50e1238715fb2647d1273e2dbfaacabb8c33f929a302cafdfe72f9de0eea9c"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c24.bin",
+      "bytes": 38042,
+      "sha256": "292a4dbeeb9ded75824753d5e58a0e8b50b38df3c56620fc81748f7fb3fec517"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c25.bin",
+      "bytes": 59482,
+      "sha256": "f002a344fb7b383df7cf59e9e63d604c37d79a2c306714833565dd8b604ea271"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c26.bin",
+      "bytes": 76945,
+      "sha256": "be7c4224aeeac312c64706929d1c921ffe867c54ba202bc8d59f3c6572fdc925"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c27.bin",
+      "bytes": 61769,
+      "sha256": "5f8dc766a2930824675d7480a6ad2faf56f03b9adee9be362c22d1268cbfb22e"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c28.bin",
+      "bytes": 79379,
+      "sha256": "ab2cb612bad8ad24d1b35ee572590953d398c0f0e8fea5634a76aa98da1f91c0"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c29.bin",
+      "bytes": 76265,
+      "sha256": "e6047b61ace035891cfd64235d52ade6548d830582ab3b39e6f579ffe7ad3980"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r07-c30.bin",
+      "bytes": 75795,
+      "sha256": "d2b0562f70b06a8f739e00cb338c046640672bb155320c7338d12619edae5f82"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c21.bin",
+      "bytes": 61079,
+      "sha256": "6aa6db11d72b93971bf02452e8844b9019313abb4df997e23152ea146325f10e"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c22.bin",
+      "bytes": 61968,
+      "sha256": "183620b312798d6b3e0ca01d0333d7eaf1f7ad60f28cef93efdd80cb513af162"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c23.bin",
+      "bytes": 40828,
+      "sha256": "d8ca0bf0f4a6cd03cc5abbe5f9a7593945f704a144bd47671fa8bf874fe0972d"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c24.bin",
+      "bytes": 38041,
+      "sha256": "1021ee7fbf65a1adbc31a3c39f898000419641533fd7910c0af24db11b350603"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c25.bin",
+      "bytes": 54021,
+      "sha256": "8d2b4db557420b723bef234cc19b593d137b7a4f930d89471fc40011aba549fe"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c26.bin",
+      "bytes": 78499,
+      "sha256": "e0e2a3d9fb2261be38da7f95a9f7ee773ef82978509e1b84d76d342a194cc179"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c27.bin",
+      "bytes": 91115,
+      "sha256": "24d09cee8a31f64618fcce2dd3474fe76a75142a1a42a1f5c430a2816a2bca70"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c28.bin",
+      "bytes": 79330,
+      "sha256": "c20acf482197fa2c816551fb3ada0f6d7f090d65677359f08a9512f4ff970fa2"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c29.bin",
+      "bytes": 68409,
+      "sha256": "e3f21f6ae83c65843a236142d1dac8842e8b8f3305a7bb58be26f72e77bc1b42"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r08-c30.bin",
+      "bytes": 59125,
+      "sha256": "66d947518c38aaf783effdd94211a672bac81760cec2cda20c5648ce7f822e8f"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c21.bin",
+      "bytes": 87060,
+      "sha256": "bc5c0f2b7534930e752339d7b79a9cfb09549a9a5b56e0ddc1ccc4395d639a5d"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c22.bin",
+      "bytes": 103063,
+      "sha256": "665c284f6cabad8f4e168655dab93b16e7d8abc1681c5d2918e17b15e264f890"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c23.bin",
+      "bytes": 102743,
+      "sha256": "5b6bbf9235fc25a20d2dbf7a3f05802102c69517cea09d6e2af26a5f4288c095"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c24.bin",
+      "bytes": 93052,
+      "sha256": "b03335ca12121e2d104812a503a1e6b055918642847e5c4d6142432d6ce77f57"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c25.bin",
+      "bytes": 89659,
+      "sha256": "ea55803d128234ab0bdff90da0325497a93b298c5a0028d2c60dd2a3eb9d61c1"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c26.bin",
+      "bytes": 69111,
+      "sha256": "1e059cf06e9c86e7311075d3c14816548e9f8b6f725e5e40744824d36d3a5ed0"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c27.bin",
+      "bytes": 82413,
+      "sha256": "8973209fe985101d15c7e77743376539b1ee362eaadf813d155a44a6b8bb2fa0"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c28.bin",
+      "bytes": 63245,
+      "sha256": "5ae879b61b4b5a387f45570b2f839d5c8afdfce7949e5d5e56a27e151ef83a97"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c29.bin",
+      "bytes": 41805,
+      "sha256": "b03cc9e8b4240006fed614e9a1c2e6d9258ca4c95b381f723a3a929e0e4ce787"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r09-c30.bin",
+      "bytes": 45727,
+      "sha256": "49405d45261d344b41c52bb0aa4371ea8ada5fe6a9f546347d1305dc7b2735e8"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c21.bin",
+      "bytes": 85022,
+      "sha256": "5ed6b9cf959e431ac9ce9323a945c8274a02213eb230a3361dcf4b1a3321e982"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c22.bin",
+      "bytes": 84882,
+      "sha256": "cb156265152d3043638ba055b912103a8e15918594d5e39b674145a5b55fc341"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c23.bin",
+      "bytes": 88643,
+      "sha256": "7b3bdc4c7d55277e6a449173326016823f56115ec3c8f0b8093ea544673d20e5"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c24.bin",
+      "bytes": 70023,
+      "sha256": "488e6065ed8a5602469ddcb87842478629c7117732ab48f14524988848096204"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c25.bin",
+      "bytes": 54237,
+      "sha256": "3558be48509795ae39d62ce3e895476c31c1addbe0c870ca4e06bedfd654142f"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c26.bin",
+      "bytes": 68739,
+      "sha256": "b222c9fdbb3667aea7c472a7d7c872403b11197eddb43b127b0bb2bb0935433f"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c27.bin",
+      "bytes": 63270,
+      "sha256": "735739daa95f91f66c657341283f33ca02d316e93ceb18f8a2b58d3aa85ee934"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c28.bin",
+      "bytes": 35445,
+      "sha256": "7664cbafee0cff0486bd2354eb66113d6c170cbb9e8dd6d3a2611156036e014d"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c29.bin",
+      "bytes": 29183,
+      "sha256": "f0d583ef80bd2d5a9bd7d8f2f82229cc0bc10d8c9e4133d95da7cec7eb0e97af"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r10-c30.bin",
+      "bytes": 41065,
+      "sha256": "4d847776221eacb82d960ce5ac72b15e55307a890c2d78c67cb28e35cad16a77"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c21.bin",
+      "bytes": 108464,
+      "sha256": "5728ed0d6dbf712e6876e3878a0099a0f095bfe01c740e3144555bdc4f8c9308"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c22.bin",
+      "bytes": 81631,
+      "sha256": "87151806a5b6dbe75e77286531c48e164b3f024645d0330997b967fc3aa48db7"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c23.bin",
+      "bytes": 44813,
+      "sha256": "089f4725baa692c4508caa63109d623d2dd70edf89b32b7bf5098a8828e4fdad"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c24.bin",
+      "bytes": 53443,
+      "sha256": "a05609a133a54d2225d3ee4005a00e5a5c89656df430a3ddd74166426690eb33"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c25.bin",
+      "bytes": 59456,
+      "sha256": "90fbfcd896a81247f6c091ca42b4b5153f539ebd013649bfe1e92c3db9bd6c82"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c26.bin",
+      "bytes": 73276,
+      "sha256": "c234f6e89678d0c557cc403147997867b7fe764f76d88a3b730f0b339a6c7937"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c27.bin",
+      "bytes": 66670,
+      "sha256": "282f2c6b9fb5ba2da2157dd3b9c2809698da1eea840730fc740931ce7049067f"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c28.bin",
+      "bytes": 25356,
+      "sha256": "66b54ce8629a9b399a425020708d7951a91a467e4d90fabd0fcc8b7aec522344"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c29.bin",
+      "bytes": 30830,
+      "sha256": "5999bda62740ea9068e4ac5031b93061ffddbb279502f41be1f50416bc9ac3d7"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r11-c30.bin",
+      "bytes": 40751,
+      "sha256": "64a48ea3a7f27ecb974931b47a384ce6c10240bdbba6439eabc13371d0f6c1a5"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c21.bin",
+      "bytes": 99578,
+      "sha256": "451834f83cabae883d7d28c9f4d336fc5f49963ed4c4014df5ddd307b16d0f4f"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c22.bin",
+      "bytes": 54236,
+      "sha256": "40b574e390646c7b00c7832679316814178a8b510951d7d780f06c61190c9cb9"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c23.bin",
+      "bytes": 41637,
+      "sha256": "6e662e3720f3d73d8cdcd9f0a4658cdb9a741deb3c58d5a880c73ab3c22481bf"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c24.bin",
+      "bytes": 62143,
+      "sha256": "02ff852baa74f5ac994020fcdda8272f1093d6aaf44a2ba999793f9a50591e87"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c25.bin",
+      "bytes": 58852,
+      "sha256": "03fb1b63a31ba1a06725f6ad91a7fecfbf2901f2432d57ed802d288b8608e2c2"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c26.bin",
+      "bytes": 74661,
+      "sha256": "4915467bb0738ff242230696e36d3feb135af0fa9604335b212fbe5475b45f1d"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c27.bin",
+      "bytes": 80627,
+      "sha256": "87c7514f0f22e7acb69743660af8f629e3de7a08b87d7b64470ed151311a9e42"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c28.bin",
+      "bytes": 67258,
+      "sha256": "2d8add8ca6f959d7a143f929ad132a17f530db060d1484a98dd63910feb7e384"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c29.bin",
+      "bytes": 49748,
+      "sha256": "946e8f61461b6b36920ee504543a48e899ed0ea4a99c9e31402a40cb402b6b89"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/block-r12-c30.bin",
+      "bytes": 52172,
+      "sha256": "734eb44c4d5c4290ea26a531700c343198688dbda9007cc932c3b521f356c31d"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/sources/worldcover-S18E027/ifd-range-0-131071.bin",
+      "bytes": 131072,
+      "sha256": "791210a030c3f0ac76c47e3d49aa2a240f3df715dd6d679648de7e5971e5e074"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/worldcover-range-integrity.json",
+      "bytes": 13391,
+      "sha256": "e8893fd2e8585acdea252cf485a06dcbd5b8b20b9ade6fa2277b23816d432481"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/physical-water-v2/worldcover-source-ranges.json",
+      "bytes": 57116,
+      "sha256": "0448fc191e02c446c708440caa7134e8dab9c33cfa5ccba617be956cfba734d3"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/reproducibility.json",
+      "bytes": 520,
+      "sha256": "160711b9afef8b920087c396571d797f1593890064c867fea5cde1f7123efa79"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/run-one/source-geometry-results.json.gz",
+      "bytes": 329369,
+      "sha256": "8a095d6c2c7ff0ba69138ecd6c2d581e55cb57a44485f9d3ce27b525dfb1475e"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/run-two/source-geometry-results.json.gz",
+      "bytes": 329369,
+      "sha256": "8a095d6c2c7ff0ba69138ecd6c2d581e55cb57a44485f9d3ce27b525dfb1475e"
+    },
+    {
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/source-provenance.json",
+      "bytes": 7147,
+      "sha256": "54594a504345c7100c553c8a8ebff226420b4242c3cd1bafa254c6d1cc51f34c"
+    }
+  ],
+  "input_file_count": 76,
+  "input_bytes": 11694355,
+  "retained_worldcover_range_bytes": 4074286,
+  "worldcover_selected_decoded_block_capacity_bytes": 62914560,
+  "worldcover_issue_pixel_window_bytes": 47518164,
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "numpy": "2.3.5",
+    "shapely": "2.1.2",
+    "geos": "3.13.1",
+    "zlib_compile": "1.2.12",
+    "zlib_runtime": "1.2.12",
+    "pypdf": "6.10.0"
+  },
+  "producer_and_checker_hashes": {
+    "classify_worldcover.py": "f40f79b05fc09d3ce104f526d4ceb8f6116fb86681e4ab2527efe4a6808a2e6b",
+    "verify_worldcover_ranges.py": "abcba49d3df597908753de3583737cdad7f072e14f5275b951d71ad6c3306fc6",
+    "verify_source_coverage.py": "c061f1adb7e2823e43d2158e9ce6525800f0329aef608fc48f9bf8237f7140eb",
+    "freeze_inputs.py": "f347ee323be7416b83991fd02e1900184ba6ec3806575433855647a044c6b801",
+    "record_workspace_storage.mjs": "9ee29e4cacaca27fc8393383d29cf9e9510072ea0d700fef4cc4adee4254c1ec"
+  },
+  "storage_snapshot": {
+    "version": 1,
+    "observed_at": "2026-10-08T03:00:47.344Z",
+    "free_bytes": 16610271232,
+    "repository_checkout_bytes": 50796807291,
+    "checkout_limit_bytes": 53687091200,
+    "minimum_free_bytes": 10737418240,
+    "current_author_worktree_bytes": 41795584,
+    "planned_two_run_result_cap_bytes": 134217728,
+    "planned_temporary_storage_cap_bytes": 67108864,
+    "projected_checkout_bytes_at_output_cap": 50931025019,
+    "projected_free_bytes_after_output_cap": 16476053504
+  },
+  "resource_admission": {
+    "gis_window_requested_mib": 768,
+    "process_abort_threshold_mib": 700,
+    "expected_peak_rss_mib": 256,
+    "max_result_bytes_total_both_runs": 134217728,
+    "temporary_storage_cap_bytes": 67108864,
+    "source_input_bytes": 11694355,
+    "no_full_cog_download": true,
+    "pixel_decode_runs": 2,
+    "per_run_full_block_decode_capacity_bytes": 62914560,
+    "geometry_partition": "bounded per candidate and per source row; no raster-wide in-memory array",
+    "measurement": "After window authorization, capture /usr/bin/time -l plus output file sizes; stop if process RSS exceeds 700 MiB, temporary storage exceeds 64 MiB, or either result exceeds its 64 MiB half of the combined output cap."
+  },
+  "limits": [
+    "The acquisition and comparison outputs are pinned as exact files; the original complete geoBoundaries source comparisons remain in both prior runs and are not replaced.",
+    "The product COG reports a multipart ETag; no whole-object SHA-256 is claimed.",
+    "Source class evidence does not establish candidate-specific accuracy, legal shoreline, political ownership, or processing cause.",
+    "This manifest is a pre-execution input/runtime/storage admission; measured actual runtime/RSS/output are added only after the authorized GIS executions."
+  ]
+}

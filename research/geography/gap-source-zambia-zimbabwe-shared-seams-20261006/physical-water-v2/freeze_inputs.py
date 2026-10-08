@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Freeze exact inputs/runtime and a bounded execution admission record."""
+
+from __future__ import annotations
+
+import hashlib
+import importlib.metadata
+import json
+import platform
+import sys
+import zlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+import numpy
+import shapely
+
+
+BASE = Path(__file__).resolve().parent
+PACKET = BASE.parent
+REPO = PACKET.parents[2]
+OUTPUT = BASE / "frozen-inputs.json"
+
+
+def digest(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def descriptor(path: Path) -> dict:
+    return {"path": str(path.relative_to(REPO)), "bytes": path.stat().st_size, "sha256": digest(path)}
+
+
+def main() -> None:
+    range_manifest = json.loads((BASE / "worldcover-source-ranges.json").read_text(encoding="utf-8"))
+    range_files = [BASE / row["file"] for row in [range_manifest["ifd_metadata_range"], *range_manifest["blocks"]]]
+    named = [
+        PACKET / "run-one/source-geometry-results.json.gz",
+        PACKET / "run-two/source-geometry-results.json.gz",
+        PACKET / "source-provenance.json",
+        PACKET / "reproducibility.json",
+        PACKET / "evidence-quality.json",
+        BASE / "worldcover-source-ranges.json",
+        BASE / "worldcover-range-integrity.json",
+        BASE / "source-coverage.json",
+        BASE / "README.md",
+        BASE / "sources/WorldCover_PUM_V2.0.pdf",
+        BASE / "sources/WorldCover_PUM_V2.0.headers",
+        BASE / "sources/WorldCover_PVR_V2.0.pdf",
+        BASE / "sources/WorldCover_PVR_V2.0.headers",
+        BASE / "sources/esa-worldcover-data-access.html",
+        BASE / "sources/esa-worldcover-data-access.headers",
+    ]
+    inputs = [descriptor(path) for path in [*named, *range_files]]
+    inputs.sort(key=lambda item: item["path"])
+    unique = {item["path"] for item in inputs}
+    if len(unique) != len(inputs):
+        raise RuntimeError("Duplicate frozen input path")
+    input_bytes = sum(item["bytes"] for item in inputs)
+    storage_snapshot = json.loads((BASE / "workspace-storage-admission.json").read_text(encoding="utf-8"))
+
+    packet_id = "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006"
+    report = {
+        "version": 1,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "issue": 1234,
+        "classification_source": "ESA WorldCover 2021 v200 (2021 product vintage)",
+        "geometry_baseline": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "source_comparison_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "author_branch_base_commit": "6a1c3b5410587289285f31809312792f0f085e87",
+        "input_files": inputs,
+        "input_file_count": len(inputs),
+        "input_bytes": input_bytes,
+        "retained_worldcover_range_bytes": range_manifest["selected_encoded_bytes"] + range_manifest["ifd_metadata_range"]["content_length"],
+        "worldcover_selected_decoded_block_capacity_bytes": range_manifest["selected_decoded_bytes"],
+        "worldcover_issue_pixel_window_bytes": range_manifest["complete_pixel_window"]["decoded_bytes"],
+        "runtime": {
+            "python": sys.version.split()[0],
+            "platform": platform.platform(),
+            "numpy": numpy.__version__,
+            "shapely": shapely.__version__,
+            "geos": shapely.geos_version_string,
+            "zlib_compile": zlib.ZLIB_VERSION,
+            "zlib_runtime": zlib.ZLIB_RUNTIME_VERSION,
+            "pypdf": importlib.metadata.version("pypdf"),
+        },
+        "producer_and_checker_hashes": {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "freeze_inputs.py", "record_workspace_storage.mjs"]},
+        "storage_snapshot": storage_snapshot,
+        "resource_admission": {
+            "gis_window_requested_mib": 768,
+            "process_abort_threshold_mib": 700,
+            "expected_peak_rss_mib": 256,
+            "max_result_bytes_total_both_runs": 134_217_728,
+            "temporary_storage_cap_bytes": 67_108_864,
+            "source_input_bytes": input_bytes,
+            "no_full_cog_download": True,
+            "pixel_decode_runs": 2,
+            "per_run_full_block_decode_capacity_bytes": range_manifest["selected_decoded_bytes"],
+            "geometry_partition": "bounded per candidate and per source row; no raster-wide in-memory array",
+            "measurement": "After window authorization, capture /usr/bin/time -l plus output file sizes; stop if process RSS exceeds 700 MiB, temporary storage exceeds 64 MiB, or either result exceeds its 64 MiB half of the combined output cap.",
+        },
+        "limits": [
+            "The acquisition and comparison outputs are pinned as exact files; the original complete geoBoundaries source comparisons remain in both prior runs and are not replaced.",
+            "The product COG reports a multipart ETag; no whole-object SHA-256 is claimed.",
+            "Source class evidence does not establish candidate-specific accuracy, legal shoreline, political ownership, or processing cause.",
+            "This manifest is a pre-execution input/runtime/storage admission; measured actual runtime/RSS/output are added only after the authorized GIS executions.",
+        ],
+    }
+    OUTPUT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"frozen_input_files": len(inputs), "input_bytes": input_bytes, "worldcover_range_bytes": report["retained_worldcover_range_bytes"], "decoded_selected_block_capacity_bytes": report["worldcover_selected_decoded_block_capacity_bytes"], "window_pixel_bytes": report["worldcover_issue_pixel_window_bytes"], "gis_window_requested_mib": 768, "expected_peak_rss_mib": 256, "result_cap_bytes_both_runs": 134217728, "manifest": str(OUTPUT)}, indent=2))
+
+
+if __name__ == "__main__":
+    main()
