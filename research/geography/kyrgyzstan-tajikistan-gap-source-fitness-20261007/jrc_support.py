@@ -49,6 +49,11 @@ def load_and_validate(baseline, config, component_ids, contact_ids):
         if descriptor is None or descriptor["sha256"] != digest:
             raise ValueError(f"JRC source feature input hash is not pinned: {path}")
     feature_by_id = {x["id"]: x for x in exact["features"]}
+    cross_tile_id = "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276"
+    cross_tile = feature_by_id.get(cross_tile_id)
+    expected_cross_tile = {"60E_40N": [73], "60E_50N": [6156, 6235]}
+    if not cross_tile or cross_tile.get("exact_closed_block_indices_by_tile") != expected_cross_tile:
+        raise ValueError("JRC cross-tile positive support example differs from the frozen exact manifest")
     expected_status = {"water_status": "unverified", "administrative_assignment": None,
                        "cause_status": "unknown", "physical_authority": "unapproved",
                        "source_fitness": "unapproved-for-all-components"}
@@ -88,6 +93,8 @@ def load_and_validate(baseline, config, component_ids, contact_ids):
         "scope": {"candidates": 15, "contacts_context_only": 9, "complete_source_features": 24},
         "cohorts": 10,
         "per_cohort_cap": {"blocks": 64, "decoded_bytes": 16777216},
+        "positive_cross_tile_support": {"component_id": cross_tile_id,
+                                        "block_indices_by_tile": expected_cross_tile},
         "block_work_totals": EXPECTED,
         "metadata_range_bytes": 325312,
         "source_role": "long-period occurrence frequency context; not current water truth or boundary authority",

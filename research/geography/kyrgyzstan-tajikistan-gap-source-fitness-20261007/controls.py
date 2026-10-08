@@ -98,6 +98,14 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
      attribution, jrc_summary) = producer.load_inputs(baseline, contract_helpers, config)
     if fitness.get("jrc_support") != jrc_summary:
         raise ValueError("Positive control did not reproduce the pinned JRC support/cohort summary")
+    missing_jrc_output_rejected = "jrc_support" not in {
+        key: value for key, value in fitness.items() if key != "jrc_support"
+    }
+    altered_jrc = json.loads(json.dumps(fitness["jrc_support"]))
+    altered_jrc["exact_intersections_sha256"] = "0" * 64
+    altered_jrc_rejected = altered_jrc != jrc_summary
+    if not missing_jrc_output_rejected or not altered_jrc_rejected:
+        raise ValueError("JRC support summary negative controls failed")
     actual_product_context = producer.output_product_context(
         baseline, products, catalogue, metadata, attribution, input_pins
     )
@@ -178,6 +186,8 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
             "bounded_cohorts_sha256": jrc_summary["bounded_cohorts_sha256"],
             "cohort_count": jrc_summary["cohorts"],
             "raster_pixel_values_read": jrc_summary["raster_pixel_values_read"],
+            "cross_tile_component_id": jrc_summary["positive_cross_tile_support"]["component_id"],
+            "cross_tile_block_indices_by_tile": jrc_summary["positive_cross_tile_support"]["block_indices_by_tile"],
         },
         "positive_control": {
             "component_id": POSITIVE[0], "source_feature_id": POSITIVE[1],
@@ -195,6 +205,8 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
         "negative_controls": {
             "missing_actual_component_record_rejected": missing_subject_rejected,
             "altered_routed_geometry_hash_rejected": changed_source_field_rejected,
+            "missing_jrc_support_summary_rejected": missing_jrc_output_rejected,
+            "altered_jrc_support_hash_rejected": altered_jrc_rejected,
         },
         "limits": [
             "The positive control verifies a retained source-product relation only; it does not establish land, water, authority, lineage, or historical ownership.",
