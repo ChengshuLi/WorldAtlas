@@ -289,7 +289,7 @@ def main():
       ],
       'outputs':outputs,
       'methods':[{'id':'release-count-reconciliation','kind':'source','description':report['method'],'software':'Python 3.12; gzip, zipfile, incremental JSON parser, SHA-256','units':'features or source rows; source-name multiset differences'}],
-      'commands':[f'python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py --output-dir {output_dir.relative_to(ROOT)}',f'node scripts/evidence-quality.mjs {output_dir.relative_to(ROOT)}/evidence-quality.json'],
+      'commands':['run_id=reconciliation-$(date -u +%Y%m%dT%H%M%SZ); python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py --output-dir research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/$run_id && node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/$run_id/evidence-quality.json'],
       'metrics':[
         {'id':'adm2_sourceData_record_count','value':product_rows['ADM2']['sourceData_archive_record_count'],'unit':'features','vintage':'baseline','input_sha256':source_paths['ADM2_source_archive'][0]['sha256'],'input_set_sha256':inputs_sha,'evaluation_commit':BASELINE,'title':'ADM2 sourceData archive features'},
         {'id':'adm3_sourceData_record_count','value':product_rows['ADM3']['sourceData_archive_record_count'],'unit':'features','vintage':'baseline','input_sha256':source_paths['ADM3_source_archive'][0]['sha256'],'input_set_sha256':inputs_sha,'evaluation_commit':BASELINE,'title':'ADM3 sourceData archive features'},

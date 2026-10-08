@@ -124,8 +124,8 @@
   "outputs": [
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py",
-      "bytes": 20917,
-      "sha256": "fb21aea72238628f4b5de7177ac3e14e0263ae6b2ea6a998bd17f6d7d03eefc7",
+      "bytes": 21110,
+      "sha256": "344ad9172da162a734c499221c6388b49ae0d7bacb1565173e19a0b3408fc295",
       "hash_kind": "file-bytes",
       "role": "method-code"
     },
@@ -154,8 +154,7 @@
     }
   ],
   "commands": [
-    "python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py --output-dir research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05",
-    "node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/evidence-quality.json"
+    "run_id=reconciliation-$(date -u +%Y%m%dT%H%M%SZ); python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py --output-dir research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/$run_id && node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/$run_id/evidence-quality.json"
   ],
   "metrics": [
     {
