@@ -1045,14 +1045,21 @@
   "methods": [
     {
       "id": "frozen-1292-overlap-replay",
-      "description": "Execute the exact pinned #1292 producer and area helper against immutable index, source and archived-report blobs; redirect its fixed writes into a private, newly admitted output stage; compare the resulting whole reports against the retained #1292 outputs.",
+      "description": "Code-preservation method: execute the exact pinned #1292 producer and area helper against immutable index, source and archived-report blobs; redirect its fixed writes into a private, newly admitted output stage; compare the resulting whole reports against retained #1292 outputs. The historical geographic method is inherited unchanged and remains an archived overlap measurement, not a new current-coastline claim.",
       "software": "CPython 3.12.14; NumPy 2.3.5; Shapely 2.1.2; GEOS 3.13.1; shared WorldAtlas NewVintage v1",
       "units": "EPSG:4326 longitude,latitude; WGS84 ellipsoid area in km²; fractions are covered/source union area or component counts",
-      "kind": "geography",
+      "kind": "code",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326",
       "area_method": "WGS84 ellipsoid integral for straight longitude/latitude edges using the pinned scripts/ellipsoidal_area.py; no snapping, buffering, repair or clipping",
       "distance_method": "Not computed"
+    },
+    {
+      "id": "derived-metric-ledger",
+      "description": "Read-only reducer validates the final replay receipt, parses its embedded report bytes, counts the recorded component fractions, and materializes the six archived metrics for direct output binding; it performs no geometry operation.",
+      "software": "CPython 3.12 standard library",
+      "units": "Fractions and component counts copied or derived from authenticated replay report fields",
+      "kind": "code"
     }
   ],
   "metrics": [
