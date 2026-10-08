@@ -888,7 +888,9 @@ def main() -> None:
     controls = [positive_control, negative_control, join_control, invalid_control,
                 positive_union_control, negative_overlap_control]
     if not all(row["passed"] for row in controls):
-        raise RuntimeError("one or more nonvacuous geometry/input controls failed")
+        failed = [row for row in controls if not row["passed"]]
+        raise RuntimeError("one or more nonvacuous geometry/input controls failed; failed="
+                           + json.dumps(failed, sort_keys=True, allow_nan=False))
 
     parents = {feature["id"]: screen_by_id[feature["id"]]["admin_context"]["atlas_target_original_id"]
                for feature in candidate_fc["features"]}

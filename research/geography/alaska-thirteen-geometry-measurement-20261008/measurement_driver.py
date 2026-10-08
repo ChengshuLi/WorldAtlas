@@ -5,6 +5,8 @@ import gzip
 import hashlib
 import json
 import pathlib
+import hashlib
+import stat
 import subprocess
 import sys
 import types
@@ -80,19 +82,50 @@ def main() -> int:
         raise SystemExit("runtime, scratch and output reserve are incomplete")
     if sum(baseline.consumed.values()) + runtime_bytes + scratch_bytes + output_reserve > baseline.max_phase_bytes:
         raise SystemExit("complete immutable inputs, runtime, scratch and generated-output reserve exceed 256 MiB")
-    runtime_remaining = runtime_bytes
-    runtime_chunk = 0
-    while runtime_remaining:
-        size = min(runtime_remaining, helper_module.MAX_FILE_BYTES)
-        baseline.admit(f"runtime:scientific-python-and-proj:{runtime_chunk}", size)
-        runtime_remaining -= size
-        runtime_chunk += 1
+    runtime_closure = phase.get("runtime_file_closure", [])
+    if not runtime_closure:
+        raise SystemExit("complete runtime file closure is absent from phase admission")
+    verified_runtime = set()
+    for row in runtime_closure:
+        path = pathlib.Path(row["path"])
+        realpath = path.resolve(strict=True)
+        if str(realpath) != row.get("realpath") or not realpath.is_file():
+            raise SystemExit(f"runtime path identity changed: {path}")
+        raw = realpath.read_bytes()
+        mode = stat.S_IMODE(realpath.stat().st_mode)
+        if (len(raw) != row.get("bytes") or hashlib.sha256(raw).hexdigest() != row.get("sha256")
+                or mode != row.get("mode")):
+            raise SystemExit(f"runtime file bytes or mode changed: {realpath}")
+        if str(realpath) in verified_runtime:
+            raise SystemExit(f"duplicate runtime realpath: {realpath}")
+        verified_runtime.add(str(realpath))
+        baseline.admit("runtime:" + str(realpath), len(raw))
+    if sum(row["bytes"] for row in runtime_closure) != runtime_bytes:
+        raise SystemExit("runtime closure byte total differs from phase admission")
     baseline.admit("reserve:measurement-scratch", scratch_bytes)
 
     # This reserves the whole fresh output set before loading the pinned producer
     # or performing a single geometry predicate.
     vintage = helper_module.NewVintage(baseline, OWNED_PATH, run_name, OUTPUTS)
     modules = baseline.load_modules({"alaska_measurement": OWNED_PATH + "measure_alaska.py"})
+    repo_root = pathlib.Path(ROOT).resolve()
+    for module in tuple(sys.modules.values()):
+        name = getattr(module, "__file__", None)
+        if not name:
+            continue
+        path = pathlib.Path(name).resolve()
+        try:
+            path.relative_to(repo_root)
+            continue
+        except ValueError:
+            pass
+        if str(path) not in verified_runtime:
+            raise SystemExit(f"loaded external module is outside admitted runtime closure: {path}")
+        row = next(item for item in runtime_closure if item["realpath"] == str(path))
+        raw = path.read_bytes()
+        if (len(raw) != row["bytes"] or hashlib.sha256(raw).hexdigest() != row["sha256"]
+                or stat.S_IMODE(path.stat().st_mode) != row["mode"]):
+            raise SystemExit(f"loaded runtime file changed after admission: {path}")
     producer = modules["alaska_measurement"]
     producer.BASELINE = baseline
     producer.VINTAGE = vintage

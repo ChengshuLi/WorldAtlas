@@ -8,6 +8,7 @@ import json
 import os
 import pathlib
 import re
+import stat
 import subprocess
 import sys
 
@@ -41,7 +42,8 @@ def main() -> None:
     shapely = importlib.import_module("shapely")
     pyproj = importlib.import_module("pyproj")
     importlib.import_module("numpy")
-    for module in ("shapely.geometry", "shapely.ops", "shapely.strtree", "pyproj.crs", "pyproj.transformer"):
+    for module in ("argparse", "builtins", "gzip", "importlib.util", "io", "math", "signal", "struct", "tempfile", "time", "types",
+                   "shapely.geometry", "shapely.ops", "shapely.strtree", "pyproj.crs", "pyproj.transformer"):
         importlib.import_module(module)
     imported = {}
     for module in tuple(sys.modules.values()):
@@ -59,6 +61,19 @@ def main() -> None:
     proj_db = pathlib.Path(pyproj.datadir.get_data_dir()) / "proj.db"
     if not proj_db.is_file():
         raise ValueError("PROJ database is missing")
+    runtime_files = []
+    for name in sorted(imported):
+        path = pathlib.Path(name).resolve(strict=True)
+        raw = path.read_bytes()
+        runtime_files.append({"path": str(path), "realpath": str(path), "bytes": len(raw),
+            "sha256": sha(path), "mode": stat.S_IMODE(path.stat().st_mode)})
+    proj_path = proj_db.resolve(strict=True)
+    proj_raw = proj_path.read_bytes()
+    runtime_files.append({"path": str(proj_path), "realpath": str(proj_path), "bytes": len(proj_raw),
+        "sha256": hashlib.sha256(proj_raw).hexdigest(), "mode": stat.S_IMODE(proj_path.stat().st_mode)})
+    runtime_files.sort(key=lambda row: row["realpath"])
+    if len({row["realpath"] for row in runtime_files}) != len(runtime_files):
+        raise ValueError("duplicate runtime file realpath")
 
     memory_text = subprocess.run(["memory_pressure", "-Q"], capture_output=True,
                                  text=True, check=True).stdout
@@ -188,6 +203,7 @@ def main() -> None:
             "imported_files": len(imported),
             "imported_file_bytes": sum(imported.values()),
         },
+        "runtime_file_closure": runtime_files,
         "inputs": inputs,
         "decoded_aliases": decoded,
         "project_code": code,
