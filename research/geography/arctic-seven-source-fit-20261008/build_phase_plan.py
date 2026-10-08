@@ -50,6 +50,8 @@ def descriptor(commit,path,expected=None,verify_materialized=False):
 def main():
  parser=argparse.ArgumentParser(); parser.add_argument('--execution-commit',required=True)
  parser.add_argument('--plan-output',default=PREFIX+'phase-plan-r9.json'); args=parser.parse_args()
+ if not __import__('re').fullmatch('[a-f0-9]{40}',args.execution_commit):
+  raise ValueError('Execution commit must be a full immutable 40-character Git SHA')
  manifest_raw=git('show',f'{SCOPE_MANIFEST_COMMIT}:{PREFIX}evidence-quality.json')
  if sha(manifest_raw)!=SCOPE_MANIFEST_SHA256:raise ValueError('Issue #1481 scope manifest whole-file pin mismatch')
  manifest=json.loads(manifest_raw)
