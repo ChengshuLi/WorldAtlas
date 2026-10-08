@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from control_writer import PRODUCTS as CONTROL_PRODUCTS, compare_retained_reports
 from producer_republish import PRODUCTS as PRODUCER_PRODUCTS, produce_vintage
 from safe_outputs import (
-    EVIDENCE_PATH, OWNED_PATH, admitted_baseline, current_commit,
+    EVIDENCE_PATH, OWNED_PATH, WORKER_ID, admitted_baseline, current_commit,
     exercise_preflight_controls, safe_output_root,
 )
 
@@ -234,7 +234,7 @@ def main(argv=None):
 
     result = {
         "version": 1, "issue": 1485, "status": "passed",
-        "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+        "worker_id": WORKER_ID,
         "tested_at_utc": datetime.now(timezone.utc).isoformat(),
         "repository_head": current_commit(REPO), "output_safety_baseline": commit,
         "actual_entry_points": ["producer_republish.py", "control_writer.py"],

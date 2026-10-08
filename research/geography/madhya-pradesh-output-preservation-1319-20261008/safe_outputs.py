@@ -12,7 +12,7 @@ import subprocess
 import types
 
 ISSUE = 1485
-WORKER_ID = "01a10947-b3d7-7812-8b2f-c5a47e88ccb2"
+WORKER_ID = "01a10948-7d38-75d0-bc01-4cc28ea41f49"
 ISSUE_SNAPSHOT = "research/geography/madhya-pradesh-output-preservation-1319-20261008/issue-1485-current.json"
 OWNED_PATH = "research/geography/madhya-pradesh-output-preservation-1319-20261008/"
 EVIDENCE_PATH = "data/regional-review/regional-review-0968ad79c26518d2/"
