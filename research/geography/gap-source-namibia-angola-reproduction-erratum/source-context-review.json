@@ -151,5 +151,13 @@
     "issue_body_sha256": "380c7a61e78319372ea00805ced0ab36370416f3b62b89f5d5fa1c994caf4e35",
     "pin_inventory_sha256": "a6aa58da227bb7e9f12b48839fd7299d64396e85b831205c97a1d608fdeb5216",
     "legacy_audit_sha256": "f97fe0afb7462bcb3143cb36aaa12712a610a6412bc694909b8da11e9f1a60e3"
+  },
+  "atlas_subject_membership": {
+    "baseline_commit": "6a1c3b5410587289285f31809312792f0f085e87",
+    "native_feature_paths": {
+      "NAM": "data/geography/part-16.json",
+      "AGO": "data/geography/part-29.json"
+    },
+    "check": "All ten issue-declared gb:* subject IDs occur as feature id and properties.id in the corresponding immutable main-commit GeoJSON. This authenticates identity membership only; it does not validate geometry/source authority or parent relationships."
   }
 }
