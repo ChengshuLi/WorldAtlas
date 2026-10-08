@@ -38,8 +38,9 @@ for p in ['scripts/evidence/geometry.py','scripts/ellipsoidal_area.py']:
 source_manifest=json.loads((ROOT/'data/regional-review/regional-review-a9f03b364bdefa4a/sources-manifest.json').read_bytes())
 citations={x['path'].removeprefix('sources/'):x for x in source_manifest['sources'] if isinstance(x.get('path'),str)}
 source_files=[desc('sources/aafc-ecoregions.native.geojson')]
-output_paths=['source-custody.json','retired-member-context.json','candidate-decisions.json','proposed-additions.geojson','positive-control.json','negative-control.json','README.md','issue-contract.md','prepare_sources.py','reproduce_fit.py','build_manifest.py','exploratory/first-pass-candidate-decisions.json','exploratory/first-pass-source-copy-descriptors.json','exploratory/first-pass-proposed-additions.geojson','exploratory/first-pass-evidence-quality.json']
+output_paths=['source-custody.json','retired-member-context.json','source-custody-phase2.json','retired-member-context-phase2.json','native-archive-verification.json','neighbor-scan-a.json','neighbor-scan-b.json','execution-budget.json','candidate-decisions.json','proposed-additions.geojson','positive-control.json','negative-control.json','README.md','issue-contract.md','prepare_sources.py','scan_neighbors.py','verify_native_member.sh','reproduce_fit.py','build_manifest.py','exploratory/phase2-initial-source-custody.json','exploratory/first-pass-candidate-decisions.json','exploratory/first-pass-source-copy-descriptors.json','exploratory/first-pass-proposed-additions.geojson','exploratory/first-pass-evidence-quality.json']
 outputs=[desc(x) for x in output_paths]
+output_by_name={Path(x['path']).name:x for x in outputs}
 subjects=spec['subject_ids']; subject_hash=sha(json.dumps(sorted(subjects),separators=(',',':')).encode())
 results=json.loads((P/'candidate-decisions.json').read_bytes())['results']
 metrics=[
@@ -69,17 +70,17 @@ for r in results:
 manifest={'version':1,'issue':1481,'lane':'geography','worker_id':'01a112c1-ac99-74b1-9047-a1da2dd0e245','subject_ids':subjects,'subject_ids_sha256':subject_hash,
  'baseline':{'version':1,'commit':BASE,'files':files,'pins':pins,'pin_files':pin_files,'subject_files':{sid:'data/geography/part-29.json' for sid in subjects}},
  'sources':sources,'outputs':outputs,
- 'methods':[{'id':'exact-aafc-envelope-and-topology','kind':'geography','helper_version':'worldatlas-evidence-geometry-v1','description':'GEOS/Shapely exact coverage, intersection, union, difference, validity, and equality predicates on stored GeoJSON coordinate values; geodesic candidate-area diagnostics use the pinned shared WGS84 helper. No snapping, buffering, repair, or tolerance is used for acceptance.','software':'Python 3.12; Shapely 2.1.2 / GEOS 3.13.1; pyproj WGS84 helper','units':'m2 for candidate area; square degrees for exact planar residuals; degrees for coordinate contact length','axis_order':'longitude-latitude','crs':'EPSG:4326','area_method':'WGS84 straight-source-edge ellipsoidal integral','distance_method':'WGS84 inverse geodesic; no distance threshold is used.'}],
+ 'methods':[{'id':'exact-aafc-envelope-and-topology','kind':'geography','helper_version':'worldatlas-evidence-geometry-v1','description':'GEOS/Shapely exact coverage, intersection, union, difference, validity, and equality predicates on stored GeoJSON coordinate values; geodesic candidate-area diagnostics use the pinned shared WGS84 helper. No snapping, buffering, repair, or tolerance is used for acceptance.','software':'Python 3.12; Shapely 2.1.2 / GEOS 3.13.1; pyproj WGS84 helper','units':'m2 for candidate area; square degrees for exact planar residuals; degrees for coordinate contact length','axis_order':'longitude-latitude','crs':'EPSG:4326','area_method':'WGS84 straight-source-edge ellipsoidal integral','distance_method':'WGS84 inverse geodesic'}],
  'metrics':metrics,'summaries':[{'metric_id':'candidate-count','value':7,'unit':'components'},{'metric_id':'repair-ready-count','value':3,'unit':'components'},{'metric_id':'unresolved-count','value':4,'unit':'components'},{'metric_id':'exact-one-envelope-count','value':7,'unit':'components'},{'metric_id':'active-feature-count','value':49625,'unit':'features'}],
  'metric_bindings':[
-  {'metric_id':'active-feature-count','path':outputs[2]['path'],'json_pointer':'/active_feature_count'},
-  {'metric_id':'candidate-count','path':outputs[2]['path'],'json_pointer':'/component_count'},
-  {'metric_id':'repair-ready-count','path':outputs[2]['path'],'json_pointer':'/repair_ready_count'},
-  {'metric_id':'unresolved-count','path':outputs[2]['path'],'json_pointer':'/unresolved_count'},
-  {'metric_id':'exact-one-envelope-count','path':outputs[2]['path'],'json_pointer':'/exactly_one_covering_named_envelope_count'},
-  {'metric_id':'native-ecoregion-feature-count','path':outputs[2]['path'],'json_pointer':'/native_feature_count'},
-  {'metric_id':'native-unique-ecoregion-id-count','path':outputs[2]['path'],'json_pointer':'/native_unique_ecoregion_id_count'},
-  {'metric_id':'retired-reference-location-count','path':outputs[1]['path'],'json_pointer':'/location_count'}],
+  {'metric_id':'active-feature-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/active_feature_count'},
+  {'metric_id':'candidate-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/component_count'},
+  {'metric_id':'repair-ready-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/repair_ready_count'},
+  {'metric_id':'unresolved-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/unresolved_count'},
+  {'metric_id':'exact-one-envelope-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/exactly_one_covering_named_envelope_count'},
+  {'metric_id':'native-ecoregion-feature-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/native_feature_count'},
+  {'metric_id':'native-unique-ecoregion-id-count','path':output_by_name['candidate-decisions.json']['path'],'json_pointer':'/native_unique_ecoregion_id_count'},
+  {'metric_id':'retired-reference-location-count','path':output_by_name['retired-member-context-phase2.json']['path'],'json_pointer':'/location_count'}],
  'change_receipts':[{'path':x['path'],'status':'added','previous_path':None} for x in source_files+outputs if x['path']!='research/geography/arctic-seven-source-fit-20261008/evidence-quality.json'] + [{'path':'research/geography/arctic-seven-source-fit-20261008/evidence-quality.json','status':'added','previous_path':None}],
  'validation':[
   {'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed','evidence_path':'research/geography/arctic-seven-source-fit-20261008/positive-control.json'},

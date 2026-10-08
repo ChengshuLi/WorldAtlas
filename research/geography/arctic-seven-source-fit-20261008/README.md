@@ -4,18 +4,33 @@ This packet answers the bounded source-fit question in issue #1481 for exactly t
 
 ## Reproduction
 
-From the repository root, with Shapely 2.1.2 available:
+From the repository root, with the pinned Python 3.12 / Shapely 2.1.2 runtime available:
 
 ```sh
+bash research/geography/arctic-seven-source-fit-20261008/verify_native_member.sh
 python research/geography/arctic-seven-source-fit-20261008/prepare_sources.py
+python research/geography/arctic-seven-source-fit-20261008/scan_neighbors.py a
+python research/geography/arctic-seven-source-fit-20261008/scan_neighbors.py b
 python research/geography/arctic-seven-source-fit-20261008/reproduce_fit.py
 python research/geography/arctic-seven-source-fit-20261008/build_manifest.py
 node scripts/evidence-quality.mjs research/geography/arctic-seven-source-fit-20261008/evidence-quality.json
 ```
 
-Phase 1, `prepare_sources.py`, reconstructs the registered 45,601,680-byte AAFC semantic archive on a temporary file from its six immutable baseline Git blobs, verifies archive SHA-256 `9ed454c129cc92cd999dae6877587997c25cec47bdfdc35a8b3f20863858430e`, extracts the exact `aafc-ecoregions.geojson` member and proves it equals the retained native file byte for byte. It reads the complete official AAFC v2.2 and baseline ArcGIS ecoprovinces sources directly from their pinned baseline paths, avoiding duplicate copies. It authenticates all seven retired-archive parts before decoding, enforces a combined encoded-plus-decoded phase cap of 65 MiB, streams those parts to a temporary file, verifies the reconstructed archive digest and extracts only the five exact retired location records. It writes `source-custody.json` and `retired-member-context.json` as immutable phase outputs.
+`execution-budget.json` records the pre-run cumulative byte admission, then the observed per-phase charges. The cap is 268,435,456 bytes per processing phase, including source bytes, decoded source bytes, code, installed runtime, temporary outputs, final outputs, and receipts. It is a cumulative byte budget, not a memory estimate. Native archive custody runs separately in `verify_native_member.sh`; it reconstructs the registered 45,601,680-byte AAFC semantic archive from six immutable baseline Git blobs, verifies archive SHA-256 `9ed454c129cc92cd999dae6877587997c25cec47bdfdc35a8b3f20863858430e`, extracts the exact `aafc-ecoregions.geojson` member, and compares it byte for byte with the retained native file. Its charge conservatively includes the full 162,109,440-byte decompressed tar stream, the temporary archive, the extracted member, all source inputs, the script and installed command runtime.
 
-`build_manifest.py` writes the geography-lane evidence manifest against the ready issue’s 51 actual file pins. Phase 2, `reproduce_fit.py`, checks each candidate against both complete ecoregion editions, all named source envelopes, its exact current Atlas target, all 36 active geometry files (49,625 features), the relevant parent ecoprovince records, the complete 64-component/four-family context, and five exact retired administrative reference records from phase 1. It processes one active geometry part at a time and admits no more than the current part plus the seven candidate shapes. It uses Shapely/GEOS exact predicates and union operations on stored longitude/latitude coordinates. No snapping, buffering, repair, or tolerance is used. `candidate-decisions.json` retains each candidate geometry, target union, gain/loss and candidate/gain symmetric-difference geometries, full active-feature contact list, source-version coverage, parent-source comparison, retired-member comparison, all ten decision premises, and the candidate-specific missing premises. The scripts refuse to overwrite a different prior output; the first exploratory result files are preserved under `exploratory/`. `proposed-additions.geojson` contains only the three strict exact-addition outputs.
+Observed cumulative phase charges, including exact code/runtime and outputs/receipts, were:
+
+| Phase | Charge | Headroom under 256 MiB |
+| --- | ---: | ---: |
+| Native archive member verification | 262,537,608 bytes | 5,897,848 bytes |
+| Retired-member context extraction | 192,076,655 bytes | 76,358,801 bytes |
+| Active-neighbor scan A (18 parts) | 219,703,332 bytes | 48,732,124 bytes |
+| Active-neighbor scan B (18 parts) | 227,103,737 bytes | 41,331,719 bytes |
+| Source-fit, conservation, and controls | 169,194,766 bytes | 99,240,690 bytes |
+
+`prepare_sources.py` is a separate bounded phase. It authenticates all seven retired-archive parts before decoding, streams their 56,672,580 decoded bytes to a temporary file, verifies the reconstructed digest, and extracts only the five exact retired location records. It writes `source-custody-phase2.json` and `retired-member-context-phase2.json`. The earlier `source-custody.json` and `retired-member-context.json` are retained as prior-vintage outputs for comparison; an initial phase-2 custody receipt is preserved under `exploratory/` as well.
+
+The 36 active geometry parts are split into two disjoint 18-part scans. `scan_neighbors.py a` and `scan_neighbors.py b` each record their exact path/hash roster, feature count, and all candidate intersections. They cover 27,000 and 22,625 features respectively. The final `reproduce_fit.py` phase proves the two rosters are disjoint and together equal the full world index, then consumes the scan receipts alongside both complete ecoregion editions, the target geometry, hierarchy, parent ecoprovinces, four-family context, and five retired reference records. It uses Shapely/GEOS exact predicates and union operations on stored longitude/latitude coordinates. No snapping, buffering, repair, or tolerance is used. `candidate-decisions.json` retains each candidate geometry, target union, gain/loss and candidate/gain symmetric-difference geometries, the full active-feature contact list, source-version coverage, parent-source comparison, retired-member comparison, all ten decision premises, and candidate-specific missing premises. Scripts refuse to overwrite a differing prior output; the first exploratory result files remain under `exploratory/`. `proposed-additions.geojson` contains only the three strict exact-addition outputs.
 
 ## Findings
 

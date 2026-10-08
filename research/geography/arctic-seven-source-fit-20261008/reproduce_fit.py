@@ -27,13 +27,12 @@ def write_packet_output(path:Path,raw:bytes):
 def main():
  ctx=json.loads(gzip.decompress(CONTEXT.read_bytes()))
  comps={x['id']:x for x in ctx['components']}
- idx=read_json(ROOT/'data/world-index.json')
  atlas_features={f['id']:f for f in read_json(ROOT/'data/geography/part-29.json')['features']}
  hierarchy={x['id']:x for x in read_json(ROOT/'data/hierarchy.json')}
  native=read_json(PACKET/'sources/aafc-ecoregions.native.geojson')['features']
  v22=read_json(ROOT/'data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-terrestrial-ecoregions-v2.2.geojson')['features']
  provinces=read_json(ROOT/'data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-ecoprovinces-baseline-arcgis-layer0.geojson')['features']
- retired=read_json(PACKET/'retired-member-context.json')
+ retired=read_json(PACKET/'retired-member-context-phase2.json')
  assert retired['location_count']==19050 and retired['archive_sha256']=='c072bbe6e7f96789e3a6165e9075eb3271050e1e1614f2923f03169480537184'
  retired_ids={
   'ECO15':['gb:CAN:ADM3:43193130B40321569586625','gb:CAN:ADM3:43193130B96648191896746'],
@@ -44,21 +43,20 @@ def main():
  candidate_geometries={cid:shape(comps[cid]['geometry']) for cid,*_ in CANDIDATES}
  hits_by={cid:[] for cid,*_ in CANDIDATES}; neighbors_by={cid:[] for cid,*_ in CANDIDATES}
  target_ids={cid:target for cid,_eid,target,_admin,_parent in CANDIDATES}
- active_feature_count=0
- # Phase 2 streams one indexed part at a time; it never holds the 49,625
- # active geometries together in memory.
- for rel in idx['parts']:
-  part=read_json(ROOT/'data'/rel)
-  for feature in part['features']:
-   active_feature_count+=1; fid=feature.get('id') or feature.get('properties',{}).get('id'); geometry=shape(feature['geometry'])
-   for cid,candidate in candidate_geometries.items():
-    if geometry.intersects(candidate):
-     inter=geometry.intersection(candidate)
-     hits_by[cid].append({'id':fid,'dimension':'area' if inter.area>0 else ('line' if inter.length>0 else 'point'),'area_deg2':inter.area,'length_degrees':inter.length})
-     if fid!=target_ids[cid] and inter.area>0:
-      neighbors_by[cid].append({'id':fid,'dimension':'area','area_deg2':inter.area,'length_degrees':inter.length,'geometry':mapping(inter)})
-  del part
+ scan_paths=['neighbor-scan-a.json','neighbor-scan-b.json']
+ idx=read_json(ROOT/'data/world-index.json')
+ active_feature_count=0; active_part_count=0; scanned_paths=[]
+ for scan_name in scan_paths:
+  scan=read_json(PACKET/scan_name)
+  active_feature_count+=scan['active_feature_count']; active_part_count+=scan['active_part_count']
+  assert scan['candidate_ids']==sorted(candidate_geometries)
+  scanned_paths.extend(row['path'].removeprefix('data/') for row in scan['roster'])
+  for cid in candidate_geometries:
+   hits_by[cid].extend(scan['hits_by_candidate'][cid])
+   neighbors_by[cid].extend(scan['neighbors_by_candidate'][cid])
  assert active_feature_count==49625, active_feature_count
+ assert active_part_count==36, active_part_count
+ assert len(scanned_paths)==len(set(scanned_paths))==len(idx['parts']) and set(scanned_paths)==set(idx['parts'])
  results=[]
  for cid,eid,target_id,admin,parent in CANDIDATES:
   candidate=shape(comps[cid]['geometry']); target=shape(atlas_features[target_id]['geometry'])
@@ -145,7 +143,7 @@ def main():
    'strict_lossless_addition':strict,
    'decision':decision})
  ready_count=sum(r['decision']=='repair-ready-geometric-proposal' for r in results)
- out={'method':'GEOS/Shapely topological predicates and union; square-degree values are planar residual diagnostics; candidate physical areas use the shared WGS84 source-edge helper.','geography_method_id':'exact-aafc-envelope-and-topology','active_feature_count':active_feature_count,'active_part_count':len(idx['parts']),'component_count':len(results),'repair_ready_count':ready_count,'unresolved_count':len(results)-ready_count,'exactly_one_covering_named_envelope_count':sum(r['exactly_one_covering_named_envelope_both_editions'] for r in results),'native_feature_count':len(native),'native_unique_ecoregion_id_count':len({f['properties'].get('ECOREGION_ID') for f in native}),'retired_archive_sha256':retired['archive_sha256'],'retired_location_count':retired['location_count'],'retired_archive_decoded_bytes':retired['decoded_input_bytes'],'results':results,
+ out={'method':'GEOS/Shapely topological predicates and union; square-degree values are planar residual diagnostics; candidate physical areas use the shared WGS84 source-edge helper.','geography_method_id':'exact-aafc-envelope-and-topology','active_feature_count':active_feature_count,'active_part_count':active_part_count,'component_count':len(results),'repair_ready_count':ready_count,'unresolved_count':len(results)-ready_count,'exactly_one_covering_named_envelope_count':sum(r['exactly_one_covering_named_envelope_both_editions'] for r in results),'native_feature_count':len(native),'native_unique_ecoregion_id_count':len({f['properties'].get('ECOREGION_ID') for f in native}),'retired_archive_sha256':retired['archive_sha256'],'retired_location_count':retired['location_count'],'retired_archive_decoded_bytes':retired['decoded_input_bytes'],'results':results,
       'limitations':['Geometric source fit does not establish historical cause, land/water status, boundary authority, or approval.','Native AAFC and v2.2 are distinct editions; coverage is reported separately.']}
  raw=(json.dumps(out,sort_keys=True,separators=(',',':'))+'\n').encode(); write_packet_output(PACKET/'candidate-decisions.json',raw)
  write_packet_output(PACKET/'proposed-additions.geojson',(json.dumps(geojson,sort_keys=True,separators=(',',':'))+'\n').encode())
