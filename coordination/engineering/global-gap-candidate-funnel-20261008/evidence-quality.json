@@ -3617,5 +3617,12 @@
       "path": "coordination/engineering/global-gap-candidate-funnel-20261008/evidence-quality.json",
       "status": "added"
     }
+  ],
+  "commands": [
+    "At each original execution vintage, retain or create the ordinary owned vintages directory first; source and output namespaces remain distinct. See README.md for full immutable predecessor bindings.",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/producer.py scope --head 99235a447eb7f0e2af77b15dabee3be04f78d869 --destination FRESH_SCOPE_NAME",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/producer.py leaf --head 431b4a1c --scope-head 7b95cfc2d811cc39697f9090ffb18c8d5d5b91cc --scope-path coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/scope.jsonl.gz --index 1 --destination FRESH_LEAF_NAME (replace abbreviated head by the full execution_commit in the existing leaf publication; repeat indices1\u20137)",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/producer.py parent --head 436574ba9769e02f779d6ec8d8423dbfa1e520e8 --destination FRESH_REPORT_NAME",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/control_runner.py FRESH_CONTROL_NAME"
   ]
 }
