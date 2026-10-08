@@ -11,13 +11,14 @@ CANDIDATE_BYTES={}
 PREDECESSOR_RECEIPTS={}
 PREDECESSOR_EXECUTIONS={}
 PLAN={}
+PLAN_SHA256=None
 OUTPUTS={}
 
-def configure(*,root,packet,phase,baseline,candidate_bytes,predecessor_receipts,predecessor_executions,plan):
- global ROOT,PACKET,PHASE,BASELINE,CANDIDATE_BYTES,PREDECESSOR_RECEIPTS,PREDECESSOR_EXECUTIONS,PLAN,OUTPUTS
+def configure(*,root,packet,phase,baseline,candidate_bytes,predecessor_receipts,predecessor_executions,plan,plan_sha256):
+ global ROOT,PACKET,PHASE,BASELINE,CANDIDATE_BYTES,PREDECESSOR_RECEIPTS,PREDECESSOR_EXECUTIONS,PLAN,PLAN_SHA256,OUTPUTS
  ROOT=Path(root); PACKET=Path(packet); PHASE=phase; BASELINE=baseline
  CANDIDATE_BYTES=dict(candidate_bytes); PREDECESSOR_RECEIPTS=dict(predecessor_receipts)
- PREDECESSOR_EXECUTIONS=dict(predecessor_executions); PLAN=plan; OUTPUTS={}
+ PREDECESSOR_EXECUTIONS=dict(predecessor_executions); PLAN=plan; PLAN_SHA256=plan_sha256; OUTPUTS={}
 
 def require_phase(name):
  if PHASE is None or PHASE.get('name')!=name:
@@ -57,6 +58,9 @@ def predecessor_execution(path):
 
 def execution_plan():
  return PLAN
+
+def execution_plan_sha256():
+ return PLAN_SHA256
 
 def sha(raw):
  return hashlib.sha256(raw).hexdigest()

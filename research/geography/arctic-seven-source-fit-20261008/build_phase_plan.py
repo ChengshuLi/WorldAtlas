@@ -11,8 +11,8 @@ BASELINE_SOURCE='960ba2f4fef0fc9881b8a106a944e6e3874e98c9'
 SCOPE_MANIFEST_COMMIT='66ceaf821ec2b9b6ed1bb25bc7ed31a2a2ab6ecf'
 SCOPE_MANIFEST_SHA256='573f4047e7e022e741c41acb35f5534ed7e25f5faf6801eb8e86f5c2aa70cc66'
 RUNTIME='research/geography/arctic-seven-source-fit-20261008/runtime-lock.json'
-NATIVE_RUNTIME='research/geography/arctic-seven-source-fit-20261008/native-tools-lock.json'
-NATIVE_CHECKER='research/geography/arctic-seven-source-fit-20261008/native-tools-lock.sh'
+NATIVE_RUNTIME='research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r8.json'
+NATIVE_CHECKER='research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r8.sh'
 CODE=[
  'scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py',
  PREFIX+'source_phase_runtime.py',PREFIX+'prepare_sources.py',PREFIX+'scan_neighbors.py',
@@ -21,7 +21,17 @@ CODE=[
 NATIVE_SCRIPT=PREFIX+'native_archive_extract.sh'
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
-def git(*args):return subprocess.check_output(['git','-C',str(ROOT),*args],stderr=subprocess.PIPE)
+GIT_EXECUTABLE=None
+def git(*args):
+ global GIT_EXECUTABLE
+ if GIT_EXECUTABLE is None:
+  lock=json.loads((ROOT/NATIVE_RUNTIME).read_text())
+  GIT_EXECUTABLE=lock['commands']['git']
+  row=next(x for x in lock['files'] if x['path']==GIT_EXECUTABLE and x['kind']=='executable')
+  path=Path(GIT_EXECUTABLE)
+  if path.is_symlink() or not path.is_file() or path.stat().st_size!=row['bytes'] or sha(path.read_bytes())!=row['sha256']:
+   raise ValueError('Pinned native Git executable drift')
+ return subprocess.check_output([GIT_EXECUTABLE,'-C',str(ROOT),*args],stderr=subprocess.PIPE)
 def descriptor(commit,path,expected=None,verify_materialized=False):
  raw=git('show',f'{commit}:{path}')
  row={'path':path,'bytes':len(raw),'sha256':sha(raw),'hash_kind':'file-bytes'}
@@ -38,7 +48,8 @@ def descriptor(commit,path,expected=None,verify_materialized=False):
    raise ValueError('Materialized source differs from exact execution commit: '+path)
  return row
 def main():
- parser=argparse.ArgumentParser(); parser.add_argument('--execution-commit',required=True); args=parser.parse_args()
+ parser=argparse.ArgumentParser(); parser.add_argument('--execution-commit',required=True)
+ parser.add_argument('--plan-output',default=PREFIX+'phase-plan-r8.json'); args=parser.parse_args()
  manifest_raw=git('show',f'{SCOPE_MANIFEST_COMMIT}:{PREFIX}evidence-quality.json')
  if sha(manifest_raw)!=SCOPE_MANIFEST_SHA256:raise ValueError('Issue #1481 scope manifest whole-file pin mismatch')
  manifest=json.loads(manifest_raw)
@@ -80,37 +91,39 @@ def main():
  code_paths=[x['path'] for x in code_rows]
  def phase(name,vintage,entry,args,base_paths,out_names,decoded=0,scratch=0,out_reserve=1_000_000,predecessors=(),candidate_paths=(),required=()):
   return {'name':name,'vintage':vintage,'owned_path':'research/geography/arctic-seven-source-fit-20261008/',
-   'entry_module':entry,'entry_args':args,'baseline_paths':list(dict.fromkeys(base_paths+[RUNTIME])),
+   'entry_module':entry,'entry_args':args,'baseline_paths':list(dict.fromkeys(base_paths+[RUNTIME,NATIVE_RUNTIME])),
    'code_paths':code_paths,'modules':{'source_phase_runtime':PREFIX+'source_phase_runtime.py',
     'prepare_sources':PREFIX+'prepare_sources.py','scan_neighbors':PREFIX+'scan_neighbors.py',
    'reproduce_fit':PREFIX+'reproduce_fit.py','evidence.geometry':'scripts/evidence/geometry.py',
     'ellipsoidal_area':'scripts/ellipsoidal_area.py'},
    'required_import_roots':list(required),'decoded_source_bytes':decoded,
+   'native_runtime_bytes':native_runtime_total,'runtime_bytes':runtime_total,
+   'native_tools_lock_revalidation_bytes':native_runtime['bytes'],
    'scratch_reserved_bytes':scratch,'output_reserved_bytes':out_reserve,
    'output_names':list(out_names)+['execution-receipt.json'],'predecessors':list(predecessors),
    'candidate_paths':list(candidate_paths), 'kind':'python'}
  # Streamed native extraction has a smaller, separately pinned native runtime.
- native_phase={'name':'native-archive-extract','kind':'native-shell','vintage':'r7-native-extract',
+ native_phase={'name':'native-archive-extract','kind':'native-shell','vintage':'r8-native-extract',
   'owned_path':'research/geography/arctic-seven-source-fit-20261008/',
   'baseline_paths':archive_paths+['data/semantic-sources.json',PREFIX+'sources/aafc-ecoregions.native.geojson',NATIVE_RUNTIME],
   'code_paths':[NATIVE_SCRIPT,NATIVE_CHECKER],
   'decoded_source_bytes':162109440,'scratch_reserved_bytes':4*1024*1024,
   'output_reserved_bytes':65536,'output_names':['native-archive-extraction.json','execution-receipt.json'],
-  'native_runtime_bytes':native_runtime_total,'archive_read_multiplicity':2,'registry_read_multiplicity':10}
+  'native_runtime_bytes':native_runtime_total,'archive_read_multiplicity':1,'registry_read_multiplicity':10}
  phases=[native_phase,
-  phase('retired-context','r7-retired','prepare_sources',[],
+  phase('retired-context','r8-retired','prepare_sources',[],
    ['data/semantic-sources.json','coordination/engineering/eastern-two-gap-repair-20261007/input-index.json']+
    [f'coordination/engineering/eastern-two-gap-repair-20261007/inputs/i{i:03}.bin.gz' for i in range(47,54)]+
    [PREFIX+'sources/aafc-ecoregions.native.geojson'],
    ['source-custody-phase2.json','retired-member-context-phase2.json'],
    decoded=56672580,scratch=56672580,out_reserve=2*1024*1024,
-   predecessors=[{'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r7-native-extract/native-archive-extraction.json','alias':PREFIX+'native-archive-extraction.json','phase':'native-archive-extract','max_bytes':65536}],
+   predecessors=[{'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-native-extract/native-archive-extraction.json','alias':PREFIX+'native-archive-extraction.json','phase':'native-archive-extract','max_bytes':65536}],
    required=['gzip']),
  ]
  index=json.loads(git('show',f'{args.execution_commit}:data/world-index.json'))
  if len(index['parts'])!=36 or len(set(index['parts']))!=36:raise ValueError('Expected the complete 36-part immutable world index')
  for label,selected in zip('abcd',[index['parts'][i*9:(i+1)*9] for i in range(4)]):
-  phases.append(phase('neighbor-scan-'+label,'r7-scan-'+label,'scan_neighbors',[label],
+  phases.append(phase('neighbor-scan-'+label,'r8-scan-'+label,'scan_neighbors',[label],
    ['data/world-index.json','coordination/engineering/eastern-two-gap-repair-20261007/run-two/full-four-family-context.json.gz']+
    ['data/'+x for x in selected],['neighbor-scan-'+label+'.json'],
    decoded=383582,scratch=64*1024*1024,out_reserve=8*1024*1024,required=['shapely']))
@@ -119,16 +132,16 @@ def main():
   'data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-ecoprovinces-baseline-arcgis-layer0.geojson',
   'coordination/engineering/eastern-two-gap-repair-20261007/run-two/full-four-family-context.json.gz',
   PREFIX+'sources/aafc-ecoregions.native.geojson']
- phases.append(phase('source-fit','r7-fit','reproduce_fit',[],fit_base,
+ phases.append(phase('source-fit','r8-fit','reproduce_fit',[],fit_base,
   ['candidate-decisions.json','proposed-additions.geojson','positive-control.json','negative-control.json'],
   decoded=383582,scratch=40*1024*1024,out_reserve=24*1024*1024,
   predecessors=[
-   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r7-native-extract/native-archive-extraction.json','alias':PREFIX+'native-archive-extraction.json','phase':'native-archive-extract','max_bytes':65536},
-   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r7-retired/retired-member-context-phase2.json','alias':PREFIX+'retired-member-context-phase2.json','phase':'retired-context','max_bytes':2*1024*1024},
-   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r7-scan-a/neighbor-scan-a.json','alias':PREFIX+'neighbor-scan-a.json','phase':'neighbor-scan-a','max_bytes':10*1024*1024},
-   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r7-scan-b/neighbor-scan-b.json','alias':PREFIX+'neighbor-scan-b.json','phase':'neighbor-scan-b','max_bytes':10*1024*1024},
-   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r7-scan-c/neighbor-scan-c.json','alias':PREFIX+'neighbor-scan-c.json','phase':'neighbor-scan-c','max_bytes':10*1024*1024},
-   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r7-scan-d/neighbor-scan-d.json','alias':PREFIX+'neighbor-scan-d.json','phase':'neighbor-scan-d','max_bytes':10*1024*1024}],
+   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-native-extract/native-archive-extraction.json','alias':PREFIX+'native-archive-extraction.json','phase':'native-archive-extract','max_bytes':65536},
+   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-retired/retired-member-context-phase2.json','alias':PREFIX+'retired-member-context-phase2.json','phase':'retired-context','max_bytes':2*1024*1024},
+   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-scan-a/neighbor-scan-a.json','alias':PREFIX+'neighbor-scan-a.json','phase':'neighbor-scan-a','max_bytes':10*1024*1024},
+   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-scan-b/neighbor-scan-b.json','alias':PREFIX+'neighbor-scan-b.json','phase':'neighbor-scan-b','max_bytes':10*1024*1024},
+   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-scan-c/neighbor-scan-c.json','alias':PREFIX+'neighbor-scan-c.json','phase':'neighbor-scan-c','max_bytes':10*1024*1024},
+   {'path':'research/geography/arctic-seven-source-fit-20261008/vintages/r8-scan-d/neighbor-scan-d.json','alias':PREFIX+'neighbor-scan-d.json','phase':'neighbor-scan-d','max_bytes':10*1024*1024}],
   required=['shapely','pyproj','numpy']))
  plan={'version':1,'baseline_source_commit':BASELINE_SOURCE,'execution_commit':args.execution_commit,
   'cap_bytes':256*1024*1024,'receipt_reserve_bytes':4096,
@@ -138,7 +151,7 @@ def main():
   'runner':runner,'candidate_scope':{'component_count':7,'world_index_part_count':36,'active_feature_count':49625},
   'phases':phases}
  raw=(json.dumps(plan,sort_keys=True,ensure_ascii=False,separators=(',',':'))+'\n').encode()
- target=PACKET/'phase-plan.json'
+ target=ROOT/args.plan_output
  if target.is_symlink():raise ValueError('Phase plan destination must be ordinary')
  if target.exists():
   if target.read_bytes()!=raw:raise FileExistsError('Frozen phase plan differs; preserve it and use a fresh reviewed execution vintage')
@@ -146,7 +159,7 @@ def main():
  print(json.dumps({'status':'phase-plan-built','execution_commit':args.execution_commit,'sha256':sha(raw),
   'baseline_pins':len(all_rows),'phase_count':len(phases),'phase_prospective_bytes':{
   p['name']:(sum(all_rows[x]['bytes'] for x in p['baseline_paths']+p['code_paths'])+
-  len(raw)*(5 if p.get('kind')=='native-shell' else 1)+(p.get('native_runtime_bytes',runtime_total))+p['decoded_source_bytes']+
+  len(raw)*(5 if p.get('kind')=='native-shell' else 1)+p.get('native_tools_lock_revalidation_bytes',0)+p.get('runtime_bytes',0)+p.get('native_runtime_bytes',0)+p['decoded_source_bytes']+
     p['scratch_reserved_bytes']+p['output_reserved_bytes']+
     sum(x.get('max_bytes',0)+20480 for x in p.get('predecessors',[]))+4096+
     (sum(all_rows[x]['bytes'] for x in archive_paths) if p.get('archive_read_multiplicity')==2 else 0)+

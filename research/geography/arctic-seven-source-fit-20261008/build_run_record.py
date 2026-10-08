@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bind the completed Arctic r6 phase reservations and output receipts."""
 from __future__ import annotations
-import hashlib, json
+import argparse, hashlib, json
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
@@ -20,7 +20,8 @@ def descriptor_check(row):
  if len(raw)!=row['bytes'] or sha(raw)!=row['sha256']:raise ValueError('Published output drift: '+row['path'])
  return raw
 def main():
- plan_raw=read('research/geography/arctic-seven-source-fit-20261008/phase-plan.json')
+ parser=argparse.ArgumentParser();parser.add_argument('--phase-plan',default='research/geography/arctic-seven-source-fit-20261008/phase-plan-r8.json');parser.add_argument('--output',default='r8-execution-budget.json');args=parser.parse_args()
+ plan_raw=read(args.phase_plan)
  if len(plan_raw)>1024*1024:raise ValueError('Oversized frozen phase plan')
  plan=json.loads(plan_raw); plan_sha=sha(plan_raw)
  if plan['cap_bytes']!=CAP:raise ValueError('Unexpected phase cap')
@@ -39,6 +40,10 @@ def main():
    raise ValueError('Incomplete phase output: '+phase['name'])
   if exe.get('baseline_commit')!=plan['execution_commit'] or exe.get('plan_sha256')!=plan_sha:
    raise ValueError('Execution provenance mismatch: '+phase['name'])
+  if exe.get('native_tools_lock_sha256')!=plan['native_tools_lock_sha256'] or exe.get('native_runtime_bytes')!=phase['native_runtime_bytes']:
+   raise ValueError('Native executable closure differs from its frozen reservation: '+phase['name'])
+  if phase.get('kind')=='python' and exe.get('native_tools_lock_revalidation_bytes')!=phase['native_tools_lock_revalidation_bytes']:
+   raise ValueError('Native lock revalidation charge differs from its frozen reservation: '+phase['name'])
   descriptors=pub.get('outputs',[])
   expected_names=set(phase['output_names'])
   if {Path(row['path']).name for row in descriptors}!=expected_names or len(descriptors)!=len(expected_names):
@@ -46,7 +51,7 @@ def main():
   for descriptor in descriptors:descriptor_check(descriptor)
   unique_paths=set(phase['baseline_paths'])|set(phase['code_paths'])
   if phase.get('kind')=='native-shell':
-   native_lock=pins['research/geography/arctic-seven-source-fit-20261008/native-tools-lock.json']
+   native_lock=pins['research/geography/arctic-seven-source-fit-20261008/native-tools-lock-r8.json']
    archive_paths=[f'data/semantic-evidence/part-{i:02}.bin' for i in range(6)]
    planned=(sum(pins[p]['bytes'] for p in unique_paths)+len(plan_raw)*5+
     phase['native_runtime_bytes']+phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+
@@ -56,8 +61,8 @@ def main():
     2*sum(pins[p]['bytes'] for p in phase['code_paths'])+native_lock['bytes'])
   else:
    unique_paths.add(plan['runtime']['lock_path'])
-   planned=(sum(pins[p]['bytes'] for p in unique_paths)+len(plan_raw)+runtime_total+
-    phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+phase['output_reserved_bytes']+
+   planned=(sum(pins[p]['bytes'] for p in unique_paths)+phase['native_tools_lock_revalidation_bytes']+len(plan_raw)+runtime_total+
+    phase['native_runtime_bytes']+phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+phase['output_reserved_bytes']+
     sum(x['max_bytes']+RECEIPT_RESERVE+EXECUTION_RECEIPT_MAX for x in phase.get('predecessors',[]))+
     RECEIPT_RESERVE)
   actual=exe['prospective_charge_bytes']
@@ -77,8 +82,8 @@ def main():
    'publication_receipt':{'path':prefix+'publication.json','bytes':len(publication_raw),'sha256':sha(publication_raw)},
    'output_count':len(descriptors),'outputs':[{'path':x['path'],'bytes':x['bytes'],'sha256':x['sha256']} for x in descriptors]})
   if phase.get('kind')=='python':
-   reproduced=(sum(pins[p]['bytes'] for p in unique_paths)+len(plan_raw)+runtime_total+
-    phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+phase['output_reserved_bytes']+
+   reproduced=(sum(pins[p]['bytes'] for p in unique_paths)+phase['native_tools_lock_revalidation_bytes']+len(plan_raw)+runtime_total+
+    phase['native_runtime_bytes']+phase['decoded_source_bytes']+phase['scratch_reserved_bytes']+phase['output_reserved_bytes']+
     predecessor_charge+
     RECEIPT_RESERVE)
    if actual!=reproduced:raise ValueError('Observed phase accounting is not reproducible from admitted receipts: '+phase['name'])
@@ -88,7 +93,7 @@ def main():
   'active_feature_count':plan['candidate_scope']['active_feature_count'],'phases':rows,
   'all_phases_under_cap':all(row['actual_charged_bytes']<=CAP for row in rows)}
  raw=(json.dumps(result,sort_keys=True,ensure_ascii=False,separators=(',',':'))+'\n').encode()
- target=PACKET/'r7-execution-budget.json'
+ target=PACKET/args.output
  if target.is_symlink():raise ValueError('Run record destination cannot be a symlink')
  if target.exists():
   if target.read_bytes()!=raw:raise FileExistsError('Preserve existing execution budget record')

@@ -5,7 +5,7 @@ import gzip, hashlib, json, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 PACKET=Path(__file__).resolve().parent
-from source_phase_runtime import require_phase, read_bytes, read_json, write_packet_output, predecessor_execution, execution_plan
+from source_phase_runtime import require_phase, read_bytes, read_json, write_packet_output, predecessor_execution, execution_plan, execution_plan_sha256
 CONTEXT=ROOT/'coordination/engineering/eastern-two-gap-repair-20261007/run-two/full-four-family-context.json.gz'
 CANDIDATES=[
  ('physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a',15,'atlas:physical:CAN-15:NWT','Sachs Harbour','Victoria Lowlands'),
@@ -61,7 +61,7 @@ def main():
   assert scan_receipt['phase']=='neighbor-scan-'+scan['partition'].lower()
   plan=execution_plan()
   assert scan_receipt['baseline_commit']==plan['execution_commit']
-  assert scan_receipt['plan_sha256']==sha((PACKET/'phase-plan.json').read_bytes())
+  assert scan_receipt['plan_sha256']==execution_plan_sha256()
   scan_inputs={row['path']:row for row in scan_receipt['baseline_inputs']}
   expected_pins={row['path']:row for row in plan['baseline_files']}
   for path,row in scan_inputs.items():
@@ -178,13 +178,13 @@ def main():
  raw=(json.dumps(out,sort_keys=True,separators=(',',':'))+'\n').encode(); write_packet_output(PACKET/'candidate-decisions.json',raw)
  write_packet_output(PACKET/'proposed-additions.geojson',(json.dumps(geojson,sort_keys=True,separators=(',',':'))+'\n').encode())
  positive=next(r for r in results if r['component_id'].endswith('12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a'))
- pos={'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','outcome':'passed' if disposition(positive['repair_ready_criteria'])=='repair-ready-geometric-proposal' and all(positive['repair_ready_criteria'].values()) else 'failed','component_id':positive['component_id'],'criteria':positive['repair_ready_criteria'],'decision':positive['decision']}
+ pos={'method_id':'exact-aafc-envelope-and-topology','kind':'positive-control','scope':'full-candidate-fit-result','outcome':'passed' if disposition(positive['repair_ready_criteria'])=='repair-ready-geometric-proposal' and all(positive['repair_ready_criteria'].values()) else 'failed','component_id':positive['component_id'],'criteria':positive['repair_ready_criteria'],'decision':positive['decision']}
  flipped=[]
  for premise in positive['repair_ready_criteria']:
   altered=dict(positive['repair_ready_criteria']); altered[premise]=False
   flipped.append({'premise':premise,'criteria':altered,'decision':disposition(altered),'rejected':disposition(altered)=='unresolved-topology-or-neighbor-condition'})
  cross_group={r['component_id']:r['cross_group_adverse_control'] for r in results}
- neg={'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','outcome':'passed' if all(row['rejected'] for row in flipped) and all(not row['native_wrong_region_covers_candidate'] and not row['v22_wrong_region_covers_candidate'] for row in cross_group.values()) else 'failed','independent_premise_flips':flipped,'cross_group_covers':cross_group}
+ neg={'method_id':'exact-aafc-envelope-and-topology','kind':'negative-control','scope':'decision-gate-unit-check-plus-cross-group-source-envelope-check','adverse_input_fixture':False,'interpretation':'Independent premise flips exercise only the disposition gate. Cross-group checks are actual geometric comparisons against the retained native and v2.2 source envelopes; this record is not a full pipeline adverse-input fixture.','outcome':'passed' if all(row['rejected'] for row in flipped) and all(not row['native_wrong_region_covers_candidate'] and not row['v22_wrong_region_covers_candidate'] for row in cross_group.values()) else 'failed','independent_premise_flips':flipped,'cross_group_covers':cross_group}
  write_packet_output(PACKET/'positive-control.json',(json.dumps(pos,sort_keys=True,separators=(',',':'))+'\n').encode())
  write_packet_output(PACKET/'negative-control.json',(json.dumps(neg,sort_keys=True,separators=(',',':'))+'\n').encode())
  print(json.dumps({'status':'reproduced','components':len(results),'active_features':active_feature_count,'decisions':[{'id':r['component_id'],'decision':r['decision']} for r in results],'sha256':sha(raw)},sort_keys=True))
