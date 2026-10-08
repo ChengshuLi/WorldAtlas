@@ -1,0 +1,54 @@
+{
+  "algorithm": "SHA-256 over the ordered products; for each product, append 8-byte big-endian UTF-8 product-name length, product-name bytes, 8-byte big-endian payload length, then exact payload bytes. Product order: erratum JSONL, reproduction summary JSON, validation JSON. Publication receipt is excluded because it contains run-specific vintage paths.",
+  "issue": 1365,
+  "kind": "reproducibility",
+  "method_id": "immutable-texas-erratum-join",
+  "outcome": "passed",
+  "run_one_sha256": "68424a5d819fafbf46469c6195a4121443655a67fd84973203faaf81f98c5de2",
+  "run_two_sha256": "68424a5d819fafbf46469c6195a4121443655a67fd84973203faaf81f98c5de2",
+  "runs": [
+    {
+      "files": [
+        {
+          "bytes": 309836,
+          "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/county-interpretation-erratum.jsonl",
+          "sha256": "0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28"
+        },
+        {
+          "bytes": 3554,
+          "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/reproduction-summary.json",
+          "sha256": "31f533b2fb485f71beb34599b343ece2b769d9e0f12f7efc58c10385620bcb45"
+        },
+        {
+          "bytes": 1333,
+          "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-1/validation.json",
+          "sha256": "2fbbab03b4ad5ca8cdb1d0b3365cb41b75b4df03e73550d5ee3a89d253eabc4f"
+        }
+      ],
+      "name": "2026-10-08-run-1",
+      "sha256": "68424a5d819fafbf46469c6195a4121443655a67fd84973203faaf81f98c5de2"
+    },
+    {
+      "files": [
+        {
+          "bytes": 309836,
+          "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/county-interpretation-erratum.jsonl",
+          "sha256": "0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28"
+        },
+        {
+          "bytes": 3554,
+          "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/reproduction-summary.json",
+          "sha256": "31f533b2fb485f71beb34599b343ece2b769d9e0f12f7efc58c10385620bcb45"
+        },
+        {
+          "bytes": 1333,
+          "path": "data/regional-review/texas-erratum-integrity-1144-followup/vintages/2026-10-08-run-2/validation.json",
+          "sha256": "2fbbab03b4ad5ca8cdb1d0b3365cb41b75b4df03e73550d5ee3a89d253eabc4f"
+        }
+      ],
+      "name": "2026-10-08-run-2",
+      "sha256": "68424a5d819fafbf46469c6195a4121443655a67fd84973203faaf81f98c5de2"
+    }
+  ],
+  "version": 1
+}

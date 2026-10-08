@@ -1,0 +1,22 @@
+{
+  "cbf_polygon_components": 313,
+  "identity_joins": {
+    "atlas_features": 254,
+    "census_2018_name_geoid_parent_vintage": 254,
+    "census_2025_name_geoid_parent_vintage": 254,
+    "geoBoundaries_shape_name_level": 254
+  },
+  "issue": 1365,
+  "kind": "positive-control",
+  "method_id": "immutable-texas-erratum-join",
+  "outcome": "passed",
+  "output_matches_retained_original": true,
+  "runtime": {
+    "baseline_commit": "6a1c3b5410587289285f31809312792f0f085e87",
+    "python": "3.12.14",
+    "runner_sha256": "bdee1aba72ee0a33fc289bdac09ebd5e6f2423d1ffb180be2d4c2dd1bd698af7",
+    "shared_helper_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+  },
+  "scope_count": 254,
+  "version": 1
+}
