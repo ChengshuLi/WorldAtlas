@@ -28,4 +28,4 @@ python3 data/regional-review/southern-patagonian-icefield-source-parent-20261005
 node scripts/evidence-quality.mjs data/regional-review/southern-patagonian-icefield-source-parent-20261005/evidence-quality.json
 ```
 
-Run the `comparison command twice to verify byte-identical read-only output. It streams to a comparison process and creates no destination file. The reproduction verifies identity and provenance statements only. It does not validate the icefield boundary, resolve territorial sovereignty, certify a province/area hierarchy, or approve the region.
+Run the comparison command twice to verify byte-identical read-only output. It streams to a comparison process and creates no destination file. The reproduction verifies identity and provenance statements only. It does not validate the icefield boundary, resolve territorial sovereignty, certify a province/area hierarchy, or approve the region.
