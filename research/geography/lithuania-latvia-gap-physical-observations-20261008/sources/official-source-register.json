@@ -126,6 +126,29 @@
         "Aggregated products, collection transition, and variable co-registration offsets (typically subpixel, occasionally >=30m).",
         "Yearly/monthly history 2022–24 requires asset merge; monthly recurrence known issue. Not a precise shoreline or adjudication source."
       ]
+    },
+    {
+      "id": "lva-cycle6-metadata",
+      "jurisdiction": "Latvia",
+      "source": "LGIA cycle-6 orthophoto metadata archive",
+      "url": "https://s3.storage.pub.lvdc.gov.lv/lgia-opendata/citi/kartes/Ortofoto_6_cikla_metadati.rar",
+      "product_url": "https://www.lgia.gov.lv/lv/aerofotografesanas-6-cikls-2016-2018-g",
+      "license_url": "https://www.lgia.gov.lv/sites/lgia/files/document/Atverto%20datu%20licence%20CC%20BY_0.pdf",
+      "vintage": "2016–2018; nominal 0.25m GSD; 25 DBF records, 2016-05-05..2018-09-19",
+      "retrieved": "2026-10-08",
+      "reuse": "Official open data under CC BY 4.0; attribution required",
+      "verification": "Official product/open-data/license metadata and cached capture hashes reviewed; full source bytes remain in local ignored cache, not this packet",
+      "archive_sha256": "3cd0f617b674ac51dc1a1451cfb4475a620c533dbe47ffdc0f645b7ca1e3b4e6",
+      "capture_manifest_sha256": "68418a844004dee73b9d9dcdcc3f01153a68cdad92ff245d7d28284dd992ef5e",
+      "archive_catalogue_sha256": "832e31bbe5ed15c3d0f8325bfbaabd8c03d75f64580d60f6ee438c7fab48b90a",
+      "known_limits": [
+        "Whole-country product scope does not establish coverage/date for any of the 19 exact subjects.",
+        "DBF rows 20 and 25 have conflicting Datums/FOTO_DAT values; retain both without choosing.",
+        "The metadata XML is stale relative to the packaged DBF schema.",
+        "The source PolygonZ SHP decodes to 108040732 bytes, over the current 32MiB member cap; no extraction or subject join is allowed under current guidance.",
+        "Cycle 6 is older contextual evidence and cannot satisfy the original cycle-8 or physical-observation acceptance.",
+        "No image pixels or candidate geometry coordinates were interpreted or joined."
+      ]
     }
   ]
 }

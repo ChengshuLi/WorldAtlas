@@ -32,14 +32,23 @@
       "id": "classification",
       "status": "not-run",
       "detail": "Physical status, historic water/ice, processing cause, and authority remain unresolved."
+    },
+    {
+      "id": "cycle6-metadata-review",
+      "status": "complete-metadata-only",
+      "detail": "Verified GEO5 capture files and archive/SHX catalogues; recorded CC BY 4.0 attribution, EPSG:3059 PRJ, 25 indexed records, DBF date-field conflicts, access failures, 108040732-byte decoded member cap, exact 19-subject scope and fresh preparation resource snapshot. Cycle 6 remains supplementary only; no geometry join."
     }
   ],
   "limits": [
-    "No source pixels or GIS data acquired.",
+    "No raster/source imagery pixels were accessed; cached cycle-6 metadata headers/schema were assessed, but no candidate coordinates were interpreted, transformed, or joined.",
     "No spatial join, overlay, raster inspection or geometry transformation.",
     "No per-subject observation date, coverage, QA, or positional accuracy established.",
-    "No external image retention/reuse permission established.",
-    "No independent authority or legal-boundary conclusion."
+    "No source imagery pixels were inspected or retained; Lithuania/cycle-8 reuse terms remain unresolved. Cycle-6 metadata is licensed CC BY 4.0, but no source geometry was joined.",
+    "No independent authority or legal-boundary conclusion.",
+    "Cycle 6 cannot fulfill the original cycle-8/physical-observation acceptance.",
+    "The 108040732-byte PolygonZ member exceeds the shared 32MiB decoded-member limit; no waiver, extraction, simplification, or omitted-subject workaround is authorized.",
+    "Current public REST alternatives returned 403/empty layers; the WMS endpoint failed normal TLS. GEO5 is investigating the original cycle-8 source; GEO3 owns any later GIS window.",
+    "A prior solid-RAR metadata extraction may have transiently materialized the oversized SHP without interpreting or retaining coordinates; this history is disclosed in the source note."
   ],
   "next_action": "After a separate root GIS/resource admission and any required licenses, join all 16 components and 3 contacts to exact source footprints/date layers; otherwise preserve unknowns."
 }

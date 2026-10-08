@@ -1,0 +1,410 @@
+{
+  "as_of_utc": "2026-10-08T07:00Z",
+  "candidate_input_pins": {
+    "source-pins.json": {
+      "bytes": 31735,
+      "hash_kind": "file-bytes",
+      "sha256": "ff57bf9785a2760aa144811f28f8211feb95dfdab7c9f5fa035a15a122e12417"
+    },
+    "subjects/components.geojson": {
+      "bytes": 13741,
+      "hash_kind": "file-bytes",
+      "sha256": "07ec5ce9e9f4926063206e8858652814ba9700db1c40b84aa50fab8f190d4cfc"
+    },
+    "subjects/contacts.geojson": {
+      "bytes": 18426,
+      "hash_kind": "file-bytes",
+      "sha256": "3bb358bcdf677d0bf5a41a31b7e5c788d770aecd759187fafe233027ce94c46d"
+    }
+  },
+  "exact_subject_scope": {
+    "components": 16,
+    "contacts": 3,
+    "count": 19,
+    "inclusion_basis": "complete pinned feature roster; source-owner/country labels are context only and were not used to include or exclude candidates",
+    "subjects": [
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/contacts.geojson",
+        "feature_sha256": "7974d6e2fac301511524ee8e228ab3a6c4c7e03f6270542d1200b3e22f7eafbb",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "gb:LTU:ADM2:59024439B19575014620111"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/contacts.geojson",
+        "feature_sha256": "3c3647e5c279ba28a367ac1d9232953e44cbe14bac5731d417add101923f5085",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "gb:LTU:ADM2:59024439B52033520810825"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/contacts.geojson",
+        "feature_sha256": "e0a7abe1fd908d34a6a0e50770e1cf7f33dbff67285b15d318659f861bc8510b",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "gb:LVA:ADM1:71098776B71258051821866"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "32c0151a6cafa5deb259c38344e48ecd4386e0542e0ae4b43c155ec4351f27de",
+        "geometry_sha256": "9b533609e3f3b16d7589df1ea8f7391dbad19f534b39230cc33f223c3f4e6df7",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:00c5d50d6765602074625e006f08b1b58ac03cd3d9fc5b1a624bbf0158f18ae0"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "eb110bec271c1ab34ae8ea189fe2c56c47973b4e8de1f6ad346569b676df9f70",
+        "geometry_sha256": "a614d03f2071cf9a28fa0ee73f3bd1a568f0e175a12032e13ead10f95d98f38f",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:0882c7d92c696f53d8fe8bba690973c32788f2e51bd1ef6bd4c055dd13279056"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "b92023d4da4151dd988a633b7c003d4fc107d3bed6a045180f8c1dbc28e2fb5c",
+        "geometry_sha256": "d86e5b17717d6aca9107de0a2c9f25d0bed8b7a1e90de96370f82085acbc0279",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:14f6a86eac664f3256a633ae0f853360d63edb14be9c9811b450176f50ceab26"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "7cba3c02ecad974d41eb1f9655b678ef70e465a30177a6386460aa9848311071",
+        "geometry_sha256": "47b3b9da2a7613792e77cc1c44e1c94c05b99af413fb6c82127482cbf14da93b",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:1a77c37a11f3d84b46d4651220599107401bc21d1536133fcc7618d66c0a49f5"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "ed5fc370028aa80185e3c59b778337143da641eba6ec0767da43296c76c65714",
+        "geometry_sha256": "ea36dfc2aba8d5bc33ba258558fb6a27c5a502e83c2761401d74aa415e86f44d",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:294063970434d15f149c664633f64dba5411458cf843cd925e4e637dd3de51da"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "fb5d20b84d3771a2aba16045c86269294bd3b41c9d364ff490b2c3574905bc14",
+        "geometry_sha256": "5fdbb86beba36fa4b840be5d85c9c80c10d37f348c0d4baa78fe977fcc970134",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:694a1cb53116d780f0ee776a0f3989edb0d74b01f4c5d89dc05911407407f69b"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "d90d45a298c552a7e15b8c7807b79de849452402cb8e7f761da7b1aa83a2c62d",
+        "geometry_sha256": "07b7e160fa00808cbf71673f2b1ee208eb990f7f7ea3ee7ccb02377abf6290b3",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:7929dff9531413d6e6a860bfffea697694d286b2797a1ff0664d71115d364316"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "323911692099c441c8a5229dbbe73ae04f5c625dc141248dfe7542e5273ef0c4",
+        "geometry_sha256": "56f3590d4b57954a4c0754855f3621000af0fad13cd3b3243461217e754c9549",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:9e0b3beac32b8398b3708a9918c9920a76917068d6711af5b02999314f6bea22"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "ce7d73ec94337944be0f2b44f3156b4dd8de0c9e2b12aba722e76b21ee9ecc27",
+        "geometry_sha256": "f31044dd91c4ef12bd540f0aa876c5e38f6429aba3748c93e0870d525f7ef1c1",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:b3a2cc30d91e76ce3dedaa850d8382a882f76db28d279f8bb50d3f77777c1577"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "c61234877573d777a0e9e9e4988ecc62ad6e5a0b307564d1c3cfb337526ffca9",
+        "geometry_sha256": "50d18d0117de7350c91f4431c8b3f6db34ded4cf4aeae5ba5e9eb46d7ba068ed",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:b4fd86a506640456d483a8f82a945463e084a45a73582b1010f2fea2f8967ca1"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "ff9dbd2d6d946590065e6e20fc8dd1cbbd85025c55d7521a8fcf58a171c9b770",
+        "geometry_sha256": "2c93b568dd3691b2599b3357b35aed7d41d42decbfe92491170c0fd46c57a890",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:bc256ccd31a291bf847cee3b7dc1f1f37a9fa12e708f978d9dc452880d912e08"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "6799ce7bab385ca610663360965b950162b5a497ea1ffa722d4a76171bdd0656",
+        "geometry_sha256": "cacb5192dcec4b977f88baced2f3bbc00663ef002aed6882f3e43f0391cb64e4",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:c167b7699ddfa22945201526da32448b3ecb1a33ac810ba5457693fb837e901a"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "e1f536b7cf343c2c51cdbc8fc3b9a27eaf79ecf62aea60cbda404edfb39df852",
+        "geometry_sha256": "89afed4c2a38997e3953861541519aec07655cb5ab056c8111f5104f697e6e68",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:e33456f199bc7c1cb595c3211a28fe42231252d4c0348acd321621878fe60eba"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "c7bde0014098c3f6f29796eb3da2b8a3412ae22219a17dc8c07011084a786f47",
+        "geometry_sha256": "43c5b8e24845594a1e0b2ee6f4a645e14a29bf982fd60185db623cf3a4c37866",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:eaa5da8229b82a55de103a841fcc4ebb73c7f468f3dcffdb5c0e7171485b345f"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "e3a70370cfe187151fd30f5610b5df3553940cdd534b1ac56b12e4a58b912857",
+        "geometry_sha256": "5c5645218670f0f9cc17f974a316c0ae465fa490473804cd74a7720934ebbcb3",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:ee9bc61cd9e2a907faa1f59362c07e036c2d4a5e499583f33f64c8f7887175e3"
+      },
+      {
+        "coverage": "unknown; no candidate overlay",
+        "cycle6_role": "older licensed context only; does not satisfy original cycle-8/physical-observation acceptance",
+        "feature_path": "subjects/components.geojson",
+        "feature_sha256": "3c9e777b0cdbb142a2df8f59560340440b72e3b25ab1ddbe341e19b76a954856",
+        "geometry_sha256": "ec8ca47f15670a1d948193fd2c8adc5e8f4b4c9394ed67fbe4b759aeabd70d83",
+        "join_status": "not-run; no serialized root GIS window",
+        "observation_date": "unknown; no subject-source join",
+        "subject_id": "physical-component:f79b07eb63959b23c1477e235d7ecd86ff4a59f0b80fd1555e22c4a0ce723083"
+      }
+    ]
+  },
+  "family_id": "gap-source-batch:d6347433d050d025e6e082c0",
+  "gates": [
+    "Cycle-6 cannot replace the original requested cycle-8/physical-observation acceptance.",
+    "Engineering rejected source-member cap waiver/extraction and is reviewing the allowed source path.",
+    "GEO5 is investigating cycle-8 dates and lawful official alternatives; GEO3 owns any future GIS window.",
+    "Lithuania feature-geometry reuse/retention terms remain unresolved.",
+    "No source geometry decode or candidate overlay is authorized by this metadata-only note."
+  ],
+  "issue": 1452,
+  "producer_status": {
+    "cycle6_join_producer": "not implemented or authorized; the source feature path is blocked by the 32MiB decoded-member limit and no API alternative was found",
+    "cycle8_join_producer": "not implemented; GEO5 is still recovering the original source metadata/access path",
+    "root_window": "not present; GEO3 owns any later GIS window",
+    "tests": "no source producer or GIS tests run"
+  },
+  "runtime_and_resource_snapshot": {
+    "bsdtar": "3.5.3 / libarchive 3.7.4",
+    "filesystem_free_bytes": 20709728256,
+    "local_workspace_check": "passed with bundled Node 24.19.0",
+    "lsar": "1.10.7",
+    "managed_checkout_bytes": 40725197620,
+    "managed_checkout_headroom_bytes": 12961893580,
+    "managed_checkout_limit_bytes": 53687091200,
+    "node": "24.19.0",
+    "operational_status": "preparation-only; refresh immediately before operation; no root window or GIS authorization is recorded",
+    "physical_ram_bytes": 8589934592,
+    "pyproj": "3.7.2",
+    "python": "3.12.14",
+    "python_path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "shapely": "2.1.2",
+    "snapshot_utc": "2026-10-08T07:00Z",
+    "system_memory_free_percent": 32,
+    "unar": "1.10.7 (not for future source-member extraction pending engineering direction)"
+  },
+  "source": {
+    "access_findings": {
+      "WMS_capabilities": "Expired TLS certificate; normal verification failed; no bypass",
+      "cycle8": "Original requested source remains gated and is the relevant source-recovery target",
+      "open_metadata_REST": "Service exists with EPSG:3059 but has no layers or tables",
+      "public_ORtO_v6_REST": "Transport 200, ArcGIS response 403; no public feature query path"
+    },
+    "archive": {
+      "bytes": 14506864,
+      "content_range_header_limit": "Original Content-Range response lines were not retained; interval contiguity, lengths, archive hash/MD5 and RAR EOF are recorded instead.",
+      "observed_etag_md5": "1bff4378cb4b8f691580846c6b3396ee",
+      "raw_range_capture": "Seven verified range-response body files in the ignored local cache; no assembled archive or source payload committed to this PR packet",
+      "sha256": "3cd0f617b674ac51dc1a1451cfb4475a620c533dbe47ffdc0f645b7ca1e3b4e6"
+    },
+    "archive_url": "https://s3.storage.pub.lvdc.gov.lv/lgia-opendata/citi/kartes/Ortofoto_6_cikla_metadati.rar",
+    "capture_pins": {
+      "archive_catalogue_cache_path": "/Users/chengshuli/world-atlas-workspace/.cache/geo5-missing-slot-independent-review-20261007/lv-cycle6-endpoint-batch-20261008/archive-catalogue.json",
+      "archive_catalogue_sha256": "832e31bbe5ed15c3d0f8325bfbaabd8c03d75f64580d60f6ee438c7fab48b90a",
+      "capture_body_verification": "22 cache entries passed declared byte-length/SHA checks; no new network calls in this batch",
+      "manifest_cache_path": "/Users/chengshuli/world-atlas-workspace/.cache/geo5-missing-slot-independent-review-20261007/lv-cycle6-endpoint-batch-20261008/capture-manifest.json",
+      "manifest_sha256": "68418a844004dee73b9d9dcdcc3f01153a68cdad92ff245d7d28284dd992ef5e",
+      "shx_verification_cache_path": "/Users/chengshuli/world-atlas-workspace/.cache/geo5-missing-slot-independent-review-20261007/lv-cycle6-endpoint-batch-20261008/shx-index-verification.json",
+      "shx_verification_sha256": "b29659d8c513ba94bea61adad1300379971573aee3ec5ab7688e56152cb1d820",
+      "whole_archive_reconstructed_from_cached_segments": "yes, only in a temporary directory to verify the whole archive hash; temporary directory removed"
+    },
+    "dbf_schema": {
+      "conflicts": [
+        {
+          "Datums": "2017-06-16",
+          "FOTO_DAT": "16.05.2017",
+          "row": 20
+        },
+        {
+          "Datums": "2018-08-09",
+          "FOTO_DAT": "09.08.2017",
+          "row": 25
+        }
+      ],
+      "date_range": [
+        "2016-05-05",
+        "2018-09-19"
+      ],
+      "fields": [
+        {
+          "name": "Datums",
+          "type": "Date",
+          "width": 8
+        },
+        {
+          "decimals": 11,
+          "name": "Shape_Leng",
+          "type": "Float",
+          "width": 19
+        },
+        {
+          "decimals": 11,
+          "name": "Shape_Area",
+          "type": "Float",
+          "width": 19
+        },
+        {
+          "name": "FOTO_DAT",
+          "type": "String",
+          "width": 15
+        }
+      ],
+      "interpretation": "Keep both fields and both conflicting rows; do not select one field or silently normalize.",
+      "record_count": 25
+    },
+    "geometry_processing": {
+      "archive_extraction_history": "GEO5 archive catalogue reports an earlier metadata extraction transiently materialized the oversized SHP due solid-RAR side effects; not retained or interpreted. This checkout made a targeted 408-byte PRJ extraction request with unar; because the archive is solid it may also have transiently decompressed SHP bytes. Temporary directory was removed. No candidate coordinates were read.",
+      "candidate_coordinates_read": false,
+      "raster_pixels_read": false,
+      "source_country_label_used_for_filter": false,
+      "subject_overlay_run": false
+    },
+    "id": "lva-cycle6-metadata",
+    "license": "CC BY 4.0; attribution required",
+    "license_url": "https://www.lgia.gov.lv/sites/lgia/files/document/Atverto%20datu%20licence%20CC%20BY_0.pdf",
+    "members": [
+      {
+        "crc32Header": "b4b58b51",
+        "decodedBytes": 1712,
+        "method": "0x33 Normal",
+        "name": "Metadati_ortofoto_6_cikls.dbf",
+        "packedBytes": 709
+      },
+      {
+        "crc32Header": "28c7f01e",
+        "decodedBytes": 408,
+        "method": "0x33 Normal",
+        "name": "Metadati_ortofoto_6_cikls.prj",
+        "packedBytes": 282
+      },
+      {
+        "crc32Header": "ae7b6d40",
+        "decodedBytes": 388,
+        "method": "0x33 Normal",
+        "name": "Metadati_ortofoto_6_cikls.sbn",
+        "packedBytes": 279
+      },
+      {
+        "crc32Header": "9d41e7c2",
+        "decodedBytes": 148,
+        "method": "0x33 Normal",
+        "name": "Metadati_ortofoto_6_cikls.sbx",
+        "packedBytes": 101
+      },
+      {
+        "crc32Header": "d9d223cf",
+        "decodedBytes": 108040732,
+        "method": "0x33 Normal",
+        "name": "Metadati_ortofoto_6_cikls.shp",
+        "packedBytes": 14501938
+      },
+      {
+        "crc32Header": "9c8b1a37",
+        "decodedBytes": 10762,
+        "method": "0x33 Normal",
+        "name": "Metadati_ortofoto_6_cikls.shp.xml",
+        "packedBytes": 2707
+      },
+      {
+        "crc32Header": "cc9c25ed",
+        "decodedBytes": 300,
+        "method": "0x33 Normal",
+        "name": "Metadati_ortofoto_6_cikls.shx",
+        "packedBytes": 284
+      },
+      {
+        "crc32Header": "0e813c50",
+        "decodedBytes": 5,
+        "method": "0x30 Stored",
+        "name": "Metadati_ortofoto_6_cikls.cpg",
+        "packedBytes": 5
+      }
+    ],
+    "open_data_url": "https://www.lgia.gov.lv/en/atvertie-dati",
+    "product_facts": {
+      "country_scope_statement": "whole Latvia; not candidate coverage evidence",
+      "nominal_gsd_m": 0.25,
+      "program_vintage": "2016–2018",
+      "sheet_scheme": "TKS-93 1:5000",
+      "source_crs": "EPSG:3059 / LKS_1992_Latvia_TM from PRJ"
+    },
+    "product_url": "https://www.lgia.gov.lv/lv/aerofotografesanas-6-cikls-2016-2018-g",
+    "role": "older licensed orthophoto metadata context; not a replacement for the required cycle-8 source or physical-observation evidence",
+    "shape_index": {
+      "cap_exceeded": true,
+      "decoded_shp_bytes": 108040732,
+      "decoded_shx_bytes": 300,
+      "largest_record_bytes": 9599904,
+      "max_decoded_member_bytes": 33554432,
+      "record_count": 25,
+      "shape_type": "PolygonZ",
+      "shp_crc32": "not recomputed; member decoding prohibited under current cap",
+      "smallest_record_bytes": 409120
+    }
+  },
+  "status": "metadata-only; cycle-6 is supplementary and cannot satisfy original acceptance",
+  "version": 1
+}

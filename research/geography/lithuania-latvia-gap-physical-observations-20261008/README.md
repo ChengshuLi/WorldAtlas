@@ -26,6 +26,14 @@ The official [WMS service catalogue](https://www.lgia.gov.lv/en/wms-servisi) lis
 
 LGIA's [LKS-2020 transition notice](https://www.lgia.gov.lv/en/node/1384) states that cycle 8 orthophoto datasets are issued in LKS-2020 from 2026-10-01. New web-service users receive LKS-2020 only; prior LKS-92 web services remain available to existing users through 2027-02-01. The notice reports a 7–12 cm coordinate shift between the systems. Any later overlay must pin the actual authorized endpoint, CRS, and transformation path. LGIA's published [2012 orthophoto accuracy annex](https://www.lgia.gov.lv/sites/lgia/files/document/ortofoto_not_1piel.pdf) is not treated as evidence of achieved accuracy for the 2022–2024 deliveries. Cycle-8 positional accuracy remains unverified.
 
+## Latvia cycle-6 metadata review (2026-10-08)
+
+GEO5 found an official LGIA cycle-6 metadata archive under CC BY 4.0 (attribution required). Its product page describes a 2016–2018, 0.25 m, whole-Latvia program in LKS-92 TM / TKS-93 sheets. That national program statement is not evidence of coverage or dates for any candidate. All 16 components and all three contacts remain in the original exact roster; inherited country and source-owner labels do not filter or explain coverage.
+
+The archive hash is `3cd0f617b674ac51dc1a1451cfb4475a620c533dbe47ffdc0f645b7ca1e3b4e6` (14,506,864 bytes). Its DBF has 25 rows with `Datums` and `FOTO_DAT`; rows 20 and 25 conflict. The PRJ identifies EPSG:3059 / LKS_1992_Latvia_TM; the XML metadata is stale. The indexed source member is PolygonZ and decodes to 108,040,732 bytes, exceeding the current 32 MiB decoded-member limit. Public REST returned ArcGIS 403, the open metadata service has no layers, and the WMS capabilities endpoint failed normal TLS verification; no bypass was attempted.
+
+Cycle 6 is older contextual evidence and cannot replace the original cycle-8/physical-observation acceptance. No candidate coverage/date join or image inspection is reported. GEO5’s capture, archive and SHX hashes, exact all-19 subject roster, current resource snapshot, and size/access limits are recorded in `sources/lva-cycle6-source-note.json`; raw source segments remain in an ignored local cache, not this packet. A prior solid-archive metadata extraction may have transiently materialized the oversized SHP without interpreting coordinates; the history and uncertainty are preserved. No extractor will be used again pending engineering direction.
+
 ## Remaining evidence
 
 - Intersect all 16 exact candidate geometries and all three contact subjects with the Lithuania 2024/2025 date footprints and any authorized Latvia cycle-8 coverage/date layer; preserve zero, partial, and multiple-vintage results without snapping or geometry repair.
@@ -49,8 +57,8 @@ No source raster, licensed imagery, or restricted download is retained. This pac
 
 ## Acceptance status: items 1–3 incomplete, item 4 preserved
 
-This is not a physical-status determination. Acceptance item 1 is incomplete: for each of the 16 components and 3 contacts, the packet lacks the exact covering official tile/footprint identity, per-tile acquisition date, complete/partial/multiple-vintage/no-data status, layer-specific CRS/datum/axis order and transformation, achieved positional accuracy, and tile-level QA. No per-subject source join was run.
+This is not a physical-status determination. Acceptance item 1 is incomplete: for each of the 16 components and 3 contacts, the packet lacks an exact covering official tile/footprint identity, per-tile acquisition date, complete/partial/multiple-vintage/no-data status, layer-specific CRS/datum/axis order and transformation, achieved positional accuracy, and tile-level QA. Cycle-6 is not joined and cannot replace original acceptance. No per-subject source join was run.
 
-Acceptance item 2 is incomplete: the conflicting Lithuania 2025 abstract/2024 temporal extent and current mosaic provenance remain unresolved against official sheet records. The Latvia cycle-8 date service was not accessed because it requires a signed client license; no signed license or image-retention permission is evidenced. No pixels were retained.
+Acceptance item 2 is incomplete: the conflicting Lithuania 2025 abstract/2024 temporal extent, current mosaic provenance, and Lithuania date-feature reuse/retention remain unresolved. Cycle-6 DBF fields conflict in two rows; the original cycle-8 source recovery remains open. No pixels were inspected or retained.
 
 Acceptance item 3 was not performed: no imagery was inspected, so no dry/water/mixed/ambiguous/unknown observation-date disposition is assigned. The physical status of every component and contact remains unknown. Acceptance item 4 is preserved explicitly in the per-subject status file with the missing facts listed for every row. These limits do not support a physical, historic water/ice, processing-cause, source-authority, or legal-boundary conclusion.

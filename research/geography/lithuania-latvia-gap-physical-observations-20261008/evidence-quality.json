@@ -611,19 +611,35 @@
       "restoration": "Open official download page; no data downloaded",
       "limit": "Aggregated product; collection transition and spatially variable co-registration; not precise shoreline/adjudication evidence.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "lva-cycle6-metadata",
+      "url": "https://s3.storage.pub.lvdc.gov.lv/lgia-opendata/citi/kartes/Ortofoto_6_cikla_metadati.rar",
+      "role": "older licensed Latvia cycle-6 orthophoto metadata context",
+      "vintage": "2016–2018; 25 records; Datums and FOTO_DAT span 2016-05-05..2018-09-19 with two conflicts",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official open data under CC BY 4.0; attribution required."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Official source URL; compressed archive SHA-256 3cd0f617b674ac51dc1a1451cfb4475a620c533dbe47ffdc0f645b7ca1e3b4e6; raw response segments remain in ignored local cache.",
+      "limit": "Supplementary older source only; not a substitute for cycle-8/physical-observation acceptance. No subject join. The decoded PolygonZ member is 108040732 bytes, above the current cap.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/README.md",
-      "bytes": 9246,
-      "sha256": "a74653eef85922d9847c5edf16ae86dc3de52c6007a4517733266ec7e3fbf4d7",
+      "bytes": 10958,
+      "sha256": "3754597223e6fc751c22d94b609a3a3595a6f7f53a4b87c153040825bae5810a",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/official-source-register.json",
-      "bytes": 6218,
-      "sha256": "e0be7515d0feb8ebe2ed676ff6451c18defee960fbf576ceaf562968a2304855",
+      "bytes": 8023,
+      "sha256": "ca688c218da0314f06942544e2605e303870aea367055c307cea3f2296746b06",
       "hash_kind": "file-bytes"
     },
     {
@@ -664,14 +680,26 @@
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/execution-ledger.json",
-      "bytes": 1908,
-      "sha256": "a35364c70e5fbc7ab4133066b11ee8d96e309cd757bfb649f58014a38c16f3d3",
+      "bytes": 3224,
+      "sha256": "d76a23f75ab6ad6fed88e0f1eed04d1deabf1e4dfc1cd2bc8ffe5a19686cb860",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/reproducibility.json",
-      "bytes": 733,
-      "sha256": "6ff37b9aa4eb5e8dc0f97e436f17a72b7d180bbd93287da31fcb741e767dccbc",
+      "bytes": 1152,
+      "sha256": "f4294e5bbcb0786875571072259fb147565c7e92c7b5929b617efb6d73d4472b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/sources/lva-cycle6-source-note.json",
+      "bytes": 21783,
+      "sha256": "0978d3bced9766402aba404a763408a439ba34d6ae8dca87e504edfe3527f5c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/lithuania-latvia-gap-physical-observations-20261008/source-date-operation-plan.md",
+      "bytes": 31563,
+      "sha256": "259b3303652f855e4ec73d2a40792e06fa5dde971dc56d34b4441ec687fad2a7",
       "hash_kind": "file-bytes"
     }
   ],
