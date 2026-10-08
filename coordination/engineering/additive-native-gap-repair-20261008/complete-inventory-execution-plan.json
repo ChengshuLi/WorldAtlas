@@ -1,0 +1,1151 @@
+{
+  "version": 1,
+  "operation": "two-complete-original-inventory-runs",
+  "parent": {
+    "version": 1,
+    "components": 95173,
+    "report_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+    "roster_sha256": "ab1d9b3f9450805219a418c670278dd351b8b9b97b76ce2cd5164058dbf31224"
+  },
+  "source_shards": 71,
+  "components": 95173,
+  "requests": [
+    {
+      "run": 1,
+      "ordinal": 0,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-000.json",
+      "sha256": "629b6036f7c2bbea5249c006c347561ae73d969791c8ad00b0130c55ae429ac3",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard000",
+      "whole_source_encoded_and_decoded_bytes": 9603428
+    },
+    {
+      "run": 2,
+      "ordinal": 0,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-000.json",
+      "sha256": "e4c394d3c710c63a7129e87d0d6995699c73cd03a04c1cf2ecd320c81bd74a23",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard000",
+      "whole_source_encoded_and_decoded_bytes": 9603428
+    },
+    {
+      "run": 1,
+      "ordinal": 1,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-001.json",
+      "sha256": "96be4ae196453520f9199cd163040229f384e91af3c90f59cce039be22b0022a",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard001",
+      "whole_source_encoded_and_decoded_bytes": 9588521
+    },
+    {
+      "run": 2,
+      "ordinal": 1,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-001.json",
+      "sha256": "60a2ac73bb82b4d84f3ab959a85d26c04088b6a0e8f14b55f6026723424c3eac",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard001",
+      "whole_source_encoded_and_decoded_bytes": 9588521
+    },
+    {
+      "run": 1,
+      "ordinal": 2,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-002.json",
+      "sha256": "7a81e4212bc22d1b7acd90425168abee50a10f27061f4ebf79b38fa99772a172",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard002",
+      "whole_source_encoded_and_decoded_bytes": 9588452
+    },
+    {
+      "run": 2,
+      "ordinal": 2,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-002.json",
+      "sha256": "cab48edb6a8dd7f30e70b163dff4a083be4454c9ceebb3340e364c45f6545075",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard002",
+      "whole_source_encoded_and_decoded_bytes": 9588452
+    },
+    {
+      "run": 1,
+      "ordinal": 3,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-003.json",
+      "sha256": "d20657f677347fd3c18cec0635c3afdf3610b49198f816647aef344ea14b0d62",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard003",
+      "whole_source_encoded_and_decoded_bytes": 9579332
+    },
+    {
+      "run": 2,
+      "ordinal": 3,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-003.json",
+      "sha256": "dff72c85519ae59264242266c9d5d516405165007abbe3608e8115e7bbaf8900",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard003",
+      "whole_source_encoded_and_decoded_bytes": 9579332
+    },
+    {
+      "run": 1,
+      "ordinal": 4,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-004.json",
+      "sha256": "a8b9150136a1eb3bde5bd3ad3dbecfaf5976c837572870b182b9364ccc59ec50",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard004",
+      "whole_source_encoded_and_decoded_bytes": 9588189
+    },
+    {
+      "run": 2,
+      "ordinal": 4,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-004.json",
+      "sha256": "b49b74af649f029584baf51648a4269670ca830cfb4f1402203b90b5727dbf9f",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard004",
+      "whole_source_encoded_and_decoded_bytes": 9588189
+    },
+    {
+      "run": 1,
+      "ordinal": 5,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-005.json",
+      "sha256": "d6499456e73fb37735177dc457ed53901109feb72bf26c78c126170df9242cd6",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard005",
+      "whole_source_encoded_and_decoded_bytes": 9610831
+    },
+    {
+      "run": 2,
+      "ordinal": 5,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-005.json",
+      "sha256": "7452ded18ceec8c417494ff6d11d93f42fbfa52edc0beb09d157eb0f5dd2ee93",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard005",
+      "whole_source_encoded_and_decoded_bytes": 9610831
+    },
+    {
+      "run": 1,
+      "ordinal": 6,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-006.json",
+      "sha256": "1096817e98227e52d7da2238621d59bd2a41cc20a7a21c0cccdda8b1b8d13864",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard006",
+      "whole_source_encoded_and_decoded_bytes": 9601656
+    },
+    {
+      "run": 2,
+      "ordinal": 6,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-006.json",
+      "sha256": "56b6a099d4174ba9bca71b9cc2b9c2b1a8f620d81e6365028c78dbcd7cdae328",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard006",
+      "whole_source_encoded_and_decoded_bytes": 9601656
+    },
+    {
+      "run": 1,
+      "ordinal": 7,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-007.json",
+      "sha256": "5ae8709aff6f23acc695f5efc5bd13e6edd23e3e0e0d892413e51a346860bc81",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard007",
+      "whole_source_encoded_and_decoded_bytes": 9574989
+    },
+    {
+      "run": 2,
+      "ordinal": 7,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-007.json",
+      "sha256": "2fe2c70b0bfc8a30fb14a5d164ff3223d949eb7271237ee8ea9c62a17e60fedd",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard007",
+      "whole_source_encoded_and_decoded_bytes": 9574989
+    },
+    {
+      "run": 1,
+      "ordinal": 8,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-008.json",
+      "sha256": "f50c85dc9431c1f002c622bbf7e3fe897b97ee344fe9289a3ae605439db0977c",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard008",
+      "whole_source_encoded_and_decoded_bytes": 9573785
+    },
+    {
+      "run": 2,
+      "ordinal": 8,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-008.json",
+      "sha256": "5c9fd06114a90413ad74ca1ae77bf5f21de246c7f1f6309388b0830b4959eb7b",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard008",
+      "whole_source_encoded_and_decoded_bytes": 9573785
+    },
+    {
+      "run": 1,
+      "ordinal": 9,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-009.json",
+      "sha256": "a320a0f62eed73b09f7d768ca3ce16b53da339877597c7a95576fff2f8379a54",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard009",
+      "whole_source_encoded_and_decoded_bytes": 9569442
+    },
+    {
+      "run": 2,
+      "ordinal": 9,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-009.json",
+      "sha256": "7f8df29faabe72fd8019e0ad6aab33f906fe9b89a34924f185ee4655b69b88fe",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard009",
+      "whole_source_encoded_and_decoded_bytes": 9569442
+    },
+    {
+      "run": 1,
+      "ordinal": 10,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-010.json",
+      "sha256": "7d5e15f120e1f42349a8c95f2baa92c9b03fd72999c0a213659ec732a8e0daaa",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard010",
+      "whole_source_encoded_and_decoded_bytes": 9569939
+    },
+    {
+      "run": 2,
+      "ordinal": 10,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-010.json",
+      "sha256": "12fcbeb62da2e268b649ade3929755d99bad38698078cb2940a653732119e5e0",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard010",
+      "whole_source_encoded_and_decoded_bytes": 9569939
+    },
+    {
+      "run": 1,
+      "ordinal": 11,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-011.json",
+      "sha256": "57fc48f6ddacaad666ba7ff7b862848db07925dc13b0a61c19e752f164750d48",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard011",
+      "whole_source_encoded_and_decoded_bytes": 9588603
+    },
+    {
+      "run": 2,
+      "ordinal": 11,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-011.json",
+      "sha256": "6f1277a6997a7e193fbcb0d6c69cbc2f0403214eea0531e3605223e35fabf990",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard011",
+      "whole_source_encoded_and_decoded_bytes": 9588603
+    },
+    {
+      "run": 1,
+      "ordinal": 12,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-012.json",
+      "sha256": "05b44e9b2c15c777a964dbddf38b88867a17df165e090636e4e7cf1b1c1e6342",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard012",
+      "whole_source_encoded_and_decoded_bytes": 9570464
+    },
+    {
+      "run": 2,
+      "ordinal": 12,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-012.json",
+      "sha256": "c935ac44fa069fcb9cc6b8ec761d6f0bee201d0dc2c6de5fcf90be3caee5f9dc",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard012",
+      "whole_source_encoded_and_decoded_bytes": 9570464
+    },
+    {
+      "run": 1,
+      "ordinal": 13,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-013.json",
+      "sha256": "0181964782a6d8913109592ecda8ff4113cfa6f125c327ff522f8f4729a3cb36",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard013",
+      "whole_source_encoded_and_decoded_bytes": 9603649
+    },
+    {
+      "run": 2,
+      "ordinal": 13,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-013.json",
+      "sha256": "2bc7494f78fea6e600e40eecc63f199fa307f857c7aaaae840058b10d852610d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard013",
+      "whole_source_encoded_and_decoded_bytes": 9603649
+    },
+    {
+      "run": 1,
+      "ordinal": 14,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-014.json",
+      "sha256": "4e24f437560abeccf10b591f0c2c951aa6cd60daeaf1da1adec1965e0f51ce71",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard014",
+      "whole_source_encoded_and_decoded_bytes": 9573780
+    },
+    {
+      "run": 2,
+      "ordinal": 14,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-014.json",
+      "sha256": "00bb36d286a013f545ed9d8fbf104b68aa533fb8a3589875b9b8f25ec3af34cd",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard014",
+      "whole_source_encoded_and_decoded_bytes": 9573780
+    },
+    {
+      "run": 1,
+      "ordinal": 15,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-015.json",
+      "sha256": "3f2d8ecfc1907a4ff2996ec488bf532b7e0ecaf5925538a12bd074e7aca5481f",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard015",
+      "whole_source_encoded_and_decoded_bytes": 9571284
+    },
+    {
+      "run": 2,
+      "ordinal": 15,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-015.json",
+      "sha256": "c6fa1992ed723350c918742b8e7279ffe96cc1cdc3b6504e9824449f8c8696e0",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard015",
+      "whole_source_encoded_and_decoded_bytes": 9571284
+    },
+    {
+      "run": 1,
+      "ordinal": 16,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-016.json",
+      "sha256": "5f74ddf4e115cc27274ef0aeb6fb08011de1fec101997a93fba8a84240e14dd2",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard016",
+      "whole_source_encoded_and_decoded_bytes": 9622928
+    },
+    {
+      "run": 2,
+      "ordinal": 16,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-016.json",
+      "sha256": "90eaa2d2408f4ea870ae73146dc39220b0240ddb3f88f73ab44b53714af18935",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard016",
+      "whole_source_encoded_and_decoded_bytes": 9622928
+    },
+    {
+      "run": 1,
+      "ordinal": 17,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-017.json",
+      "sha256": "3c794eb0d9f47e07fde92f3b0681ea1c1f27df98f309f363c1919e9ff951712a",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard017",
+      "whole_source_encoded_and_decoded_bytes": 9574940
+    },
+    {
+      "run": 2,
+      "ordinal": 17,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-017.json",
+      "sha256": "d8f95c34ea5aa7b173ea73ce7248d7d6adbadb5af4931c45801054b458f57ea5",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard017",
+      "whole_source_encoded_and_decoded_bytes": 9574940
+    },
+    {
+      "run": 1,
+      "ordinal": 18,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-018.json",
+      "sha256": "a8758e4b3b9f8fc873d2d4bfb555c41212070b1971716f5e0f3be6c9bc307647",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard018",
+      "whole_source_encoded_and_decoded_bytes": 9577365
+    },
+    {
+      "run": 2,
+      "ordinal": 18,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-018.json",
+      "sha256": "43a63682b341199fd28c56d7f422a48bb53b7d3f3d40b3c414745f5fbbda00cb",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard018",
+      "whole_source_encoded_and_decoded_bytes": 9577365
+    },
+    {
+      "run": 1,
+      "ordinal": 19,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-019.json",
+      "sha256": "45c2cf00ccb9c35d5a1803f078f0867e84b2d060099ebe710f0b389a81e0ce0c",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard019",
+      "whole_source_encoded_and_decoded_bytes": 9590956
+    },
+    {
+      "run": 2,
+      "ordinal": 19,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-019.json",
+      "sha256": "55b8b3b5a8e1c947112c801631d01d55ebfa138385f1a64a50cf9c908ff92af7",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard019",
+      "whole_source_encoded_and_decoded_bytes": 9590956
+    },
+    {
+      "run": 1,
+      "ordinal": 20,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-020.json",
+      "sha256": "fcfe5e801917ac25ba5c36703cda25a21c9a564913e31eeec8a4eb8924e2d864",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard020",
+      "whole_source_encoded_and_decoded_bytes": 9578398
+    },
+    {
+      "run": 2,
+      "ordinal": 20,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-020.json",
+      "sha256": "f17c52b78fb4b14b42277814d49ebf35ee8fb7ce806f5ef23a56301ef558f979",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard020",
+      "whole_source_encoded_and_decoded_bytes": 9578398
+    },
+    {
+      "run": 1,
+      "ordinal": 21,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-021.json",
+      "sha256": "dbd159bcdf721581464d0aceba6b1cb258d56e7145c5f0989c545fe7b2dee50a",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard021",
+      "whole_source_encoded_and_decoded_bytes": 9641512
+    },
+    {
+      "run": 2,
+      "ordinal": 21,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-021.json",
+      "sha256": "5cb8fc244544d1d54cbd827242a7507de6b507f6274f8ae9ad01b00d90be144c",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard021",
+      "whole_source_encoded_and_decoded_bytes": 9641512
+    },
+    {
+      "run": 1,
+      "ordinal": 22,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-022.json",
+      "sha256": "782bbd6198df628036bc8dc35dff91d92af95bb375363bd391e89521e45801d2",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard022",
+      "whole_source_encoded_and_decoded_bytes": 9589139
+    },
+    {
+      "run": 2,
+      "ordinal": 22,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-022.json",
+      "sha256": "5f805bc45d5ea3e144248c000b3bb1be37fc2dccc4c8f62c8742a262827dadd3",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard022",
+      "whole_source_encoded_and_decoded_bytes": 9589139
+    },
+    {
+      "run": 1,
+      "ordinal": 23,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-023.json",
+      "sha256": "df1c12f4630651c442946d08f7d9c640c6e3ef17aa06578183a5a699fe9ebcf3",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard023",
+      "whole_source_encoded_and_decoded_bytes": 9615985
+    },
+    {
+      "run": 2,
+      "ordinal": 23,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-023.json",
+      "sha256": "612a52cd0a1363aad268101309b31980dce5e69933a8c5c212091a46183528bc",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard023",
+      "whole_source_encoded_and_decoded_bytes": 9615985
+    },
+    {
+      "run": 1,
+      "ordinal": 24,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-024.json",
+      "sha256": "9529c520bad85f5ebc3bd153d735f9e49058ad6a4865decaf30195758ba2a98d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard024",
+      "whole_source_encoded_and_decoded_bytes": 9621870
+    },
+    {
+      "run": 2,
+      "ordinal": 24,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-024.json",
+      "sha256": "0171d822d6b2f6042a85961eeae50fa1525fbe313a3b09dbfa0056239505055c",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard024",
+      "whole_source_encoded_and_decoded_bytes": 9621870
+    },
+    {
+      "run": 1,
+      "ordinal": 25,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-025.json",
+      "sha256": "f0a070d097571151ea4dd2aabca7082a6c767b0e8c789cefd5200c69add7dc79",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard025",
+      "whole_source_encoded_and_decoded_bytes": 9580173
+    },
+    {
+      "run": 2,
+      "ordinal": 25,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-025.json",
+      "sha256": "bec966238e20569811c651d4591d07ace0ce91cf89d99b3db62e50acabff2616",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard025",
+      "whole_source_encoded_and_decoded_bytes": 9580173
+    },
+    {
+      "run": 1,
+      "ordinal": 26,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-026.json",
+      "sha256": "edf949608a4f4e2db0fe1bead8f7c50140e8c6f17096fa45284cfa10c637d65f",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard026",
+      "whole_source_encoded_and_decoded_bytes": 9537948
+    },
+    {
+      "run": 2,
+      "ordinal": 26,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-026.json",
+      "sha256": "15a9bc5a51c1dc31c02a06cc517af7a9069898b9aa4b857b82c3c283c8bb5a80",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard026",
+      "whole_source_encoded_and_decoded_bytes": 9537948
+    },
+    {
+      "run": 1,
+      "ordinal": 27,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-027.json",
+      "sha256": "34c8a10d5a70443b175c6ab3476bd133cc014ef20bbcdb77036a223dcd1b24c5",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard027",
+      "whole_source_encoded_and_decoded_bytes": 9569200
+    },
+    {
+      "run": 2,
+      "ordinal": 27,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-027.json",
+      "sha256": "de9d73db380cd1137596c535da86711e54c971eebb98d35909cf5a26dd05727f",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard027",
+      "whole_source_encoded_and_decoded_bytes": 9569200
+    },
+    {
+      "run": 1,
+      "ordinal": 28,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-028.json",
+      "sha256": "5c4201d233ddeb277ed1f1f0c240d5dba7ef6bf626c87456a8316c581827d6de",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard028",
+      "whole_source_encoded_and_decoded_bytes": 9593170
+    },
+    {
+      "run": 2,
+      "ordinal": 28,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-028.json",
+      "sha256": "0f7c4a581633c2e79b9a6ddd639d69338f64ce095117f4dc98e943dded48f651",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard028",
+      "whole_source_encoded_and_decoded_bytes": 9593170
+    },
+    {
+      "run": 1,
+      "ordinal": 29,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-029.json",
+      "sha256": "f5a3c12f6bede004b0814ec0bd283f9ae670708fd356fa837e9492f2a49b3165",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard029",
+      "whole_source_encoded_and_decoded_bytes": 9567310
+    },
+    {
+      "run": 2,
+      "ordinal": 29,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-029.json",
+      "sha256": "e03bacd4872c8d637eeeee81469cc786a802b6ca4c7f7af9fdc01ab364473ec9",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard029",
+      "whole_source_encoded_and_decoded_bytes": 9567310
+    },
+    {
+      "run": 1,
+      "ordinal": 30,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-030.json",
+      "sha256": "f6b0af5a1698915ecc43d579f96b0fd429e1959f40d1ab74289d32f421a227e9",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard030",
+      "whole_source_encoded_and_decoded_bytes": 9572713
+    },
+    {
+      "run": 2,
+      "ordinal": 30,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-030.json",
+      "sha256": "7d4cd9dc5e56d6011ae1e987785376e381cd7b1733bda87f4cee090c4b2b3917",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard030",
+      "whole_source_encoded_and_decoded_bytes": 9572713
+    },
+    {
+      "run": 1,
+      "ordinal": 31,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-031.json",
+      "sha256": "67e6e7df3f879f8b34601b25348de368fffff4384d41ea8215c62595b88dd0fb",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard031",
+      "whole_source_encoded_and_decoded_bytes": 9589733
+    },
+    {
+      "run": 2,
+      "ordinal": 31,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-031.json",
+      "sha256": "a519c1541695c8295ac3824a6dfdab910f8866251c899c1b7b4334885c281627",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard031",
+      "whole_source_encoded_and_decoded_bytes": 9589733
+    },
+    {
+      "run": 1,
+      "ordinal": 32,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-032.json",
+      "sha256": "638460a32b968904f663ebac3709faeb8cfbad084642866d749ba78be80badd1",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard032",
+      "whole_source_encoded_and_decoded_bytes": 9577754
+    },
+    {
+      "run": 2,
+      "ordinal": 32,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-032.json",
+      "sha256": "84f1d00b2cc827ba16f363fc0ef5789ac1660e07f6940d592a56654448d74450",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard032",
+      "whole_source_encoded_and_decoded_bytes": 9577754
+    },
+    {
+      "run": 1,
+      "ordinal": 33,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-033.json",
+      "sha256": "8ba4d0d845fcefb5f7d74fd8bb3826f5b70dfc993eca84ced0123904b4a7bef8",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard033",
+      "whole_source_encoded_and_decoded_bytes": 9582055
+    },
+    {
+      "run": 2,
+      "ordinal": 33,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-033.json",
+      "sha256": "0dd9111252e718a6198167cae4055ffc08f946793c870fb042a9c9fc858449b7",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard033",
+      "whole_source_encoded_and_decoded_bytes": 9582055
+    },
+    {
+      "run": 1,
+      "ordinal": 34,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-034.json",
+      "sha256": "4951f0217120e4f134140d2487d16fe6df490086ab7c57bda170eb9f868cd238",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard034",
+      "whole_source_encoded_and_decoded_bytes": 9591316
+    },
+    {
+      "run": 2,
+      "ordinal": 34,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-034.json",
+      "sha256": "74e40876b0ffcbd0c1d22849edede36b8656fd018be03c9248a3cfff6b159e29",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard034",
+      "whole_source_encoded_and_decoded_bytes": 9591316
+    },
+    {
+      "run": 1,
+      "ordinal": 35,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-035.json",
+      "sha256": "ee7048addda8946f95e0986d84336408c25ff39bb720e28d596100538e4e17a1",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard035",
+      "whole_source_encoded_and_decoded_bytes": 9628079
+    },
+    {
+      "run": 2,
+      "ordinal": 35,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-035.json",
+      "sha256": "2a14489f35d59384c10c2fe8b12037572b3a8e388abcf06a77b989e5620b7b17",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard035",
+      "whole_source_encoded_and_decoded_bytes": 9628079
+    },
+    {
+      "run": 1,
+      "ordinal": 36,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-036.json",
+      "sha256": "ab5cd9750a1e34134137f74baf548e3af1674ee7c9fc38594e30fa47314210e9",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard036",
+      "whole_source_encoded_and_decoded_bytes": 9581048
+    },
+    {
+      "run": 2,
+      "ordinal": 36,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-036.json",
+      "sha256": "adb7e2704ed06e1f2d71354fd9d5f97f971dad8d4a1213d87cbd7534c1a03a91",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard036",
+      "whole_source_encoded_and_decoded_bytes": 9581048
+    },
+    {
+      "run": 1,
+      "ordinal": 37,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-037.json",
+      "sha256": "c36b010ea89b3e39d9e25710ca9dc61cfd3ba0d58e633130f6065dec11d8ec1d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard037",
+      "whole_source_encoded_and_decoded_bytes": 9582196
+    },
+    {
+      "run": 2,
+      "ordinal": 37,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-037.json",
+      "sha256": "b07d7338d20a8e9b049595a2552a86461340997e751eb160ee93147cec1bdc6a",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard037",
+      "whole_source_encoded_and_decoded_bytes": 9582196
+    },
+    {
+      "run": 1,
+      "ordinal": 38,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-038.json",
+      "sha256": "da6facdf540a5b7f5e939f73d72175e1f21e309a4d3ffacb06831e3bad2f7646",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard038",
+      "whole_source_encoded_and_decoded_bytes": 9577702
+    },
+    {
+      "run": 2,
+      "ordinal": 38,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-038.json",
+      "sha256": "4a5e2eeee96b2a7e3a404e00cb18782c789846a8a9dbfcc10aa978911b95018d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard038",
+      "whole_source_encoded_and_decoded_bytes": 9577702
+    },
+    {
+      "run": 1,
+      "ordinal": 39,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-039.json",
+      "sha256": "42b7b715aa4bc822222f8747fd172f4c5ff06d1c68b4a294a9b771946b0767f8",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard039",
+      "whole_source_encoded_and_decoded_bytes": 9573939
+    },
+    {
+      "run": 2,
+      "ordinal": 39,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-039.json",
+      "sha256": "e8ebd465afa0f6a81fc23b16a3def51cea4eae956c99801f5cc3f1315c3ad8ab",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard039",
+      "whole_source_encoded_and_decoded_bytes": 9573939
+    },
+    {
+      "run": 1,
+      "ordinal": 40,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-040.json",
+      "sha256": "193d9cfbb8a32c4897971fcd38fdef0d8d6a65abed29fdb9b5dbdad4864069f2",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard040",
+      "whole_source_encoded_and_decoded_bytes": 9611748
+    },
+    {
+      "run": 2,
+      "ordinal": 40,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-040.json",
+      "sha256": "d2529cdb7795f7527d8cc563d33baff30fc932898133fa957619777559c35d9f",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard040",
+      "whole_source_encoded_and_decoded_bytes": 9611748
+    },
+    {
+      "run": 1,
+      "ordinal": 41,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-041.json",
+      "sha256": "ddfe2953761ee551759f78f3365d3046178698e09b8226a85423a6a44ad48e5a",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard041",
+      "whole_source_encoded_and_decoded_bytes": 9585088
+    },
+    {
+      "run": 2,
+      "ordinal": 41,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-041.json",
+      "sha256": "2b486c3b77dea549bbadff1f3200b19d6233a0f9295576885f549ccc9c9dacd5",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard041",
+      "whole_source_encoded_and_decoded_bytes": 9585088
+    },
+    {
+      "run": 1,
+      "ordinal": 42,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-042.json",
+      "sha256": "dc0a4e59c73994dad42e54fde913aa0cbb7d81819886066247d88c59b084eed1",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard042",
+      "whole_source_encoded_and_decoded_bytes": 9583551
+    },
+    {
+      "run": 2,
+      "ordinal": 42,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-042.json",
+      "sha256": "b9eacdfcf4c7c39f30159cc8832e7dde9b0feb6f81d56edb2b7b6e00e458a221",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard042",
+      "whole_source_encoded_and_decoded_bytes": 9583551
+    },
+    {
+      "run": 1,
+      "ordinal": 43,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-043.json",
+      "sha256": "a50437537f14f5397eb6366ef567c272855d10da8e880127543efefb03895b9d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard043",
+      "whole_source_encoded_and_decoded_bytes": 9607570
+    },
+    {
+      "run": 2,
+      "ordinal": 43,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-043.json",
+      "sha256": "07d4cb54ce227e78163a7d5170f971ce880a14a85752c3dd23b8ba005b7b723b",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard043",
+      "whole_source_encoded_and_decoded_bytes": 9607570
+    },
+    {
+      "run": 1,
+      "ordinal": 44,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-044.json",
+      "sha256": "5123e075c3f75f3bde78f44182e062bc3000906c4be10d56bcac4c7d3f12477d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard044",
+      "whole_source_encoded_and_decoded_bytes": 9486301
+    },
+    {
+      "run": 2,
+      "ordinal": 44,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-044.json",
+      "sha256": "b68d79564c29843fc37695a78b8776d007c1b29067fc6fdd747378163f28a8bc",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard044",
+      "whole_source_encoded_and_decoded_bytes": 9486301
+    },
+    {
+      "run": 1,
+      "ordinal": 45,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-045.json",
+      "sha256": "e1a678792444f4c218f4adbbba0885fa4b0ee9ae828541f71dbb3e4e67c6e832",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard045",
+      "whole_source_encoded_and_decoded_bytes": 9591437
+    },
+    {
+      "run": 2,
+      "ordinal": 45,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-045.json",
+      "sha256": "4f4fd7f801148022ebebbe4286dfb01a4ee5f823e8a81d38695f487bf95cd618",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard045",
+      "whole_source_encoded_and_decoded_bytes": 9591437
+    },
+    {
+      "run": 1,
+      "ordinal": 46,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-046.json",
+      "sha256": "0a7e18b9ac510d21763d7a8128542d1b632d4054580acb576afda886ee3669eb",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard046",
+      "whole_source_encoded_and_decoded_bytes": 9551326
+    },
+    {
+      "run": 2,
+      "ordinal": 46,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-046.json",
+      "sha256": "26a2e4972f003a5c1197f89cdf0ab277c68c3c564a90841bc134480159af7b02",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard046",
+      "whole_source_encoded_and_decoded_bytes": 9551326
+    },
+    {
+      "run": 1,
+      "ordinal": 47,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-047.json",
+      "sha256": "fdd67b740d3ab62c1689a997d661b5c47afb3aa779ab25ed21af7f6b8e87ac96",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard047",
+      "whole_source_encoded_and_decoded_bytes": 9571785
+    },
+    {
+      "run": 2,
+      "ordinal": 47,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-047.json",
+      "sha256": "94609882dd3ed47073f4e7465a2dec1018fc2148a7fce5683b3477e2e11ea165",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard047",
+      "whole_source_encoded_and_decoded_bytes": 9571785
+    },
+    {
+      "run": 1,
+      "ordinal": 48,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-048.json",
+      "sha256": "21f578961884f4dc523501ec61be9b4963048f0f0b94cb9c0cfa929d156763a8",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard048",
+      "whole_source_encoded_and_decoded_bytes": 9603588
+    },
+    {
+      "run": 2,
+      "ordinal": 48,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-048.json",
+      "sha256": "5e3946c47cdf5f4f268f7c0dda7a7cf17bbedb95d4539c39eacdf91dcc628137",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard048",
+      "whole_source_encoded_and_decoded_bytes": 9603588
+    },
+    {
+      "run": 1,
+      "ordinal": 49,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-049.json",
+      "sha256": "5b119b706d7825e64d1eb584d5b9154daaa34ae00c0f7165a9389471983fac29",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard049",
+      "whole_source_encoded_and_decoded_bytes": 9601438
+    },
+    {
+      "run": 2,
+      "ordinal": 49,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-049.json",
+      "sha256": "0a10fdcd6b7c7c3a3ee0f9418cff5a7926cab8ff8017c10d8d0a393ddc336f48",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard049",
+      "whole_source_encoded_and_decoded_bytes": 9601438
+    },
+    {
+      "run": 1,
+      "ordinal": 50,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-050.json",
+      "sha256": "de3e81377ed13f01608f13aaa195aefc5540d24b877138e4fca9515efea89729",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard050",
+      "whole_source_encoded_and_decoded_bytes": 9595525
+    },
+    {
+      "run": 2,
+      "ordinal": 50,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-050.json",
+      "sha256": "ee444f372855faad8aa68f0e4d1c42bc77da76812b993eca54af8f47ebc2c639",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard050",
+      "whole_source_encoded_and_decoded_bytes": 9595525
+    },
+    {
+      "run": 1,
+      "ordinal": 51,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-051.json",
+      "sha256": "485f24f1b282a1e314911085d8bc51a7a5d6d609f13bf7979ea234c3a2d6e5b9",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard051",
+      "whole_source_encoded_and_decoded_bytes": 9622824
+    },
+    {
+      "run": 2,
+      "ordinal": 51,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-051.json",
+      "sha256": "16b6b43ea69aa3ae0c2912880defcb9e1348d1e11c82260a9b6dc0aaaabb0f6c",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard051",
+      "whole_source_encoded_and_decoded_bytes": 9622824
+    },
+    {
+      "run": 1,
+      "ordinal": 52,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-052.json",
+      "sha256": "e8aa272e3e0dcda1ba7287f95ad87107cc3ff83071c5b4f61ad2c8e2f820dc1b",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard052",
+      "whole_source_encoded_and_decoded_bytes": 9546258
+    },
+    {
+      "run": 2,
+      "ordinal": 52,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-052.json",
+      "sha256": "eb796517faaa62535f2d5c3d9e18f64bd0da66c63dca788807c3889385cee647",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard052",
+      "whole_source_encoded_and_decoded_bytes": 9546258
+    },
+    {
+      "run": 1,
+      "ordinal": 53,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-053.json",
+      "sha256": "dceafbbfa4978b532dc9934878f3a8f19bd59454316d8702eefa0b4dc0d651a7",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard053",
+      "whole_source_encoded_and_decoded_bytes": 9594549
+    },
+    {
+      "run": 2,
+      "ordinal": 53,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-053.json",
+      "sha256": "7bbffe3ba17100c0609b3b5413431ae5580d666e2ce28ca97be45f3119cbadd5",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard053",
+      "whole_source_encoded_and_decoded_bytes": 9594549
+    },
+    {
+      "run": 1,
+      "ordinal": 54,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-054.json",
+      "sha256": "dbf1556ba5697c740ec4da12911ccdd4a1e21357356deec195de3435c464465b",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard054",
+      "whole_source_encoded_and_decoded_bytes": 9584855
+    },
+    {
+      "run": 2,
+      "ordinal": 54,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-054.json",
+      "sha256": "7457202475f9f86f57243baa1126d400258e36b9ead345c1927ad05720012675",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard054",
+      "whole_source_encoded_and_decoded_bytes": 9584855
+    },
+    {
+      "run": 1,
+      "ordinal": 55,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-055.json",
+      "sha256": "5bf5829f6eb83fa47e67209268d2f22adaf1e3f3236f908c1cdd4f67b0d02682",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard055",
+      "whole_source_encoded_and_decoded_bytes": 9556252
+    },
+    {
+      "run": 2,
+      "ordinal": 55,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-055.json",
+      "sha256": "195709260a21ec9121c758980c3bb8e2e460866a596888923830cbac363b57e8",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard055",
+      "whole_source_encoded_and_decoded_bytes": 9556252
+    },
+    {
+      "run": 1,
+      "ordinal": 56,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-056.json",
+      "sha256": "15db01a1092a674e076efe997fd29c499ea1a4bd53160a488466839b18e40f1b",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard056",
+      "whole_source_encoded_and_decoded_bytes": 9564756
+    },
+    {
+      "run": 2,
+      "ordinal": 56,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-056.json",
+      "sha256": "3ca604394ca5f749479e37a08a9690d7b85eb6221e1296bddd631aec524a08eb",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard056",
+      "whole_source_encoded_and_decoded_bytes": 9564756
+    },
+    {
+      "run": 1,
+      "ordinal": 57,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-057.json",
+      "sha256": "63af5698dfae26c082e9ec02ee81038b630d50e2f0a9cfb0ca1237d6160edd1e",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard057",
+      "whole_source_encoded_and_decoded_bytes": 9788170
+    },
+    {
+      "run": 2,
+      "ordinal": 57,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-057.json",
+      "sha256": "957a2c8ebc0558ad2cc8b51c841a4397fee4a0665985b43983992caccaec3e0b",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard057",
+      "whole_source_encoded_and_decoded_bytes": 9788170
+    },
+    {
+      "run": 1,
+      "ordinal": 58,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-058.json",
+      "sha256": "6cc5c668edf31f2780e4a7523ddfed566ee087e0b89cdf44ee036b527ec1d17b",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard058",
+      "whole_source_encoded_and_decoded_bytes": 9575280
+    },
+    {
+      "run": 2,
+      "ordinal": 58,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-058.json",
+      "sha256": "e9f7aab5fad3b0054790fe8310b7df9c6753a97e82cce850207f9321c9387e65",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard058",
+      "whole_source_encoded_and_decoded_bytes": 9575280
+    },
+    {
+      "run": 1,
+      "ordinal": 59,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-059.json",
+      "sha256": "264f1dcf6c6927aa92bdaef42dbb50df02d30c64af2b1d00ce643db3c563a13d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard059",
+      "whole_source_encoded_and_decoded_bytes": 9656206
+    },
+    {
+      "run": 2,
+      "ordinal": 59,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-059.json",
+      "sha256": "7ce5b55d8b5d997fce6a4f268daac1262f123b0e1f03cd7079f1fd9aed423dd5",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard059",
+      "whole_source_encoded_and_decoded_bytes": 9656206
+    },
+    {
+      "run": 1,
+      "ordinal": 60,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-060.json",
+      "sha256": "cfcdc347002d437762a0dc83f7ead0ccc7e906786e4a33d61f56764564585c84",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard060",
+      "whole_source_encoded_and_decoded_bytes": 9576973
+    },
+    {
+      "run": 2,
+      "ordinal": 60,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-060.json",
+      "sha256": "99bf2f64368ebfea42f2e0526eceb5dd43ae7443ca29fd4d3da7a06cad14571c",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard060",
+      "whole_source_encoded_and_decoded_bytes": 9576973
+    },
+    {
+      "run": 1,
+      "ordinal": 61,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-061.json",
+      "sha256": "a4bdf2d03ffa7ed5a6d653b495997f821c248ab4206a68f1962cbba9966cd7f4",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard061",
+      "whole_source_encoded_and_decoded_bytes": 9591076
+    },
+    {
+      "run": 2,
+      "ordinal": 61,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-061.json",
+      "sha256": "709ed29469dbcf5fc54a1688db3cc322afd2cb6121db8220eec147daa547846e",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard061",
+      "whole_source_encoded_and_decoded_bytes": 9591076
+    },
+    {
+      "run": 1,
+      "ordinal": 62,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-062.json",
+      "sha256": "06ef4a958a06e254c497ca4d09e838a68b80debc7a4c03ce9f050a20750977eb",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard062",
+      "whole_source_encoded_and_decoded_bytes": 9569854
+    },
+    {
+      "run": 2,
+      "ordinal": 62,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-062.json",
+      "sha256": "4f13491798f97d87228c3005bab6b149b61eebaed5799586ed7659ad22c7a205",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard062",
+      "whole_source_encoded_and_decoded_bytes": 9569854
+    },
+    {
+      "run": 1,
+      "ordinal": 63,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-063.json",
+      "sha256": "3fa2dfd6fd54e904255fb1fe213154d620d24bb641d2197982863db02c132298",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard063",
+      "whole_source_encoded_and_decoded_bytes": 9584533
+    },
+    {
+      "run": 2,
+      "ordinal": 63,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-063.json",
+      "sha256": "951412580311e13d3e54bf3049669756a269160f94d0d4fd3207ca2ce0ce81eb",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard063",
+      "whole_source_encoded_and_decoded_bytes": 9584533
+    },
+    {
+      "run": 1,
+      "ordinal": 64,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-064.json",
+      "sha256": "004cbf2015fb53958cb9cfa0b98a8e88bfcdf82b536dcbceaa9bd32c118393db",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard064",
+      "whole_source_encoded_and_decoded_bytes": 9568687
+    },
+    {
+      "run": 2,
+      "ordinal": 64,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-064.json",
+      "sha256": "da41355146fef4421a39ebf69296bd80f681ce264fd71b5bb9e9b6854897c380",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard064",
+      "whole_source_encoded_and_decoded_bytes": 9568687
+    },
+    {
+      "run": 1,
+      "ordinal": 65,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-065.json",
+      "sha256": "582ab78b51059b7d0da91cd0dc726e1c2f36d0a32e95fd29b3b6f4665e32136d",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard065",
+      "whole_source_encoded_and_decoded_bytes": 9567651
+    },
+    {
+      "run": 2,
+      "ordinal": 65,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-065.json",
+      "sha256": "f61606f5051c92dcd5421401c0f972f3a2a5d91065eabcfa7ea494b740af2f11",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard065",
+      "whole_source_encoded_and_decoded_bytes": 9567651
+    },
+    {
+      "run": 1,
+      "ordinal": 66,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-066.json",
+      "sha256": "0edd66210040bea94cc62249078112aaa38c27fa512626b16d4ed9eb8116f3f9",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard066",
+      "whole_source_encoded_and_decoded_bytes": 9600868
+    },
+    {
+      "run": 2,
+      "ordinal": 66,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-066.json",
+      "sha256": "cc95d7f265f0823cf60cbd1a513c39e8e2597144e4c4ed616a4d98617cd6ffad",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard066",
+      "whole_source_encoded_and_decoded_bytes": 9600868
+    },
+    {
+      "run": 1,
+      "ordinal": 67,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-067.json",
+      "sha256": "9d820fec497f9daf07716b6283538371ab1ef16edba630f879ff7b5ce18c2802",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard067",
+      "whole_source_encoded_and_decoded_bytes": 9645513
+    },
+    {
+      "run": 2,
+      "ordinal": 67,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-067.json",
+      "sha256": "02a600d5ba5069a5406bae7551018569083a9c0488fe1cf684ba06661af45582",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard067",
+      "whole_source_encoded_and_decoded_bytes": 9645513
+    },
+    {
+      "run": 1,
+      "ordinal": 68,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-068.json",
+      "sha256": "9e3d5727be4a879e7dbde8a4d97f986a663aa86217da2dd75a8e75829cdd754e",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard068",
+      "whole_source_encoded_and_decoded_bytes": 9598840
+    },
+    {
+      "run": 2,
+      "ordinal": 68,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-068.json",
+      "sha256": "0bbb3a8b68704ff173f3f3625604f2887088aa74e743882e225e80ee5451f3ae",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard068",
+      "whole_source_encoded_and_decoded_bytes": 9598840
+    },
+    {
+      "run": 1,
+      "ordinal": 69,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-069.json",
+      "sha256": "3efc504f92b5f9efed2e96497ef4839a339f0355d2ab5e8ee22c7d32d88e4100",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard069",
+      "whole_source_encoded_and_decoded_bytes": 9579095
+    },
+    {
+      "run": 2,
+      "ordinal": 69,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-069.json",
+      "sha256": "0a8ad8d5bf3f7cb8d29ce30f3b5b4772d1c188dbfe88019908ba73dc74265ab0",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard069",
+      "whole_source_encoded_and_decoded_bytes": 9579095
+    },
+    {
+      "run": 1,
+      "ordinal": 70,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-070.json",
+      "sha256": "ac37452137a89bffc90c5f6ac5f005a9fa685d8b04724c0af96cddc591217bc6",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run1-shard070",
+      "whole_source_encoded_and_decoded_bytes": 7507050
+    },
+    {
+      "run": 2,
+      "ordinal": 70,
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-070.json",
+      "sha256": "cdc713267b75e1b493a0935ccef0e974894f4618f4c9ed28ba24f5c2ab3786c1",
+      "destination": ".cache/native-grid-candidates/gap-inventory-v2-run2-shard070",
+      "whole_source_encoded_and_decoded_bytes": 7507050
+    }
+  ],
+  "scope": "two metadata-only inventory executions; no new approval or ownership changes"
+}
