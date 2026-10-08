@@ -32,11 +32,15 @@ def main() -> None:
     helper_path = "scripts/evidence/immutable.py"
     runner_path = "research/geography/central-india-batch3-reproduction-erratum-2026/reproduce.py"
     producer_path = "data/regional-review/regional-review-78f086631fc52a58/reproduce.py"
+    previous_manifest_path = "research/geography/central-india-batch3-reproduction-erratum-2026/evidence-quality.json"
+    previous_report_path = "research/geography/central-india-batch3-reproduction-erratum-2026/vintages/original-20261007-f/report-run-1.json"
 
     files = [{**row, "commit": DATA} for row in execution["baseline_files"]]
     execution_descriptor = {**descriptor(EXEC_PATH, git_bytes(BASE, EXEC_PATH)), "commit": BASE}
     runner_descriptor = {**descriptor(runner_path, git_bytes(BASE, runner_path)), "commit": BASE}
-    files.extend([execution_descriptor, runner_descriptor])
+    previous_manifest_descriptor = {**descriptor(previous_manifest_path, git_bytes(BASE, previous_manifest_path)), "commit": BASE}
+    previous_report_descriptor = {**descriptor(previous_report_path, git_bytes(BASE, previous_report_path)), "commit": BASE}
+    files.extend([execution_descriptor, runner_descriptor, previous_manifest_descriptor, previous_report_descriptor])
     pins = {
         "execution-ledger": execution_descriptor["sha256"],
         "native-source-compressed": next(row["sha256"] for row in execution["baseline_files"] if row["path"] == source_path),
@@ -46,6 +50,10 @@ def main() -> None:
         "original-producer": next(row["sha256"] for row in execution["baseline_files"] if row["path"] == producer_path),
         "original-report": next(row["sha256"] for row in execution["baseline_files"] if row["path"] == report_path),
         "pinned-output-helper": next(row["sha256"] for row in execution["baseline_files"] if row["path"] == helper_path),
+        previous_manifest_path: "f640a065d847cae43cd2d1bef39944d88447da828a77551a77bccb2496d46795",
+        runner_path: runner_descriptor["sha256"],
+        EXEC_PATH: execution_descriptor["sha256"],
+        previous_report_path: "4ae746ba0de2b22f42ce09f1843001c5ac00421e904023e0f682528653f54112",
     }
     pin_paths = {
         "execution-ledger": {"path": EXEC_PATH, "commit": BASE},
@@ -56,6 +64,10 @@ def main() -> None:
         "original-producer": {"path": producer_path, "commit": DATA},
         "original-report": {"path": report_path, "commit": DATA},
         "pinned-output-helper": {"path": helper_path, "commit": DATA},
+        previous_manifest_path: {"path": previous_manifest_path, "commit": BASE},
+        runner_path: {"path": runner_path, "commit": BASE},
+        EXEC_PATH: {"path": EXEC_PATH, "commit": BASE},
+        previous_report_path: {"path": previous_report_path, "commit": BASE},
     }
     subject_files = {identity: {"path": path, "commit": DATA}
                      for identity, path in execution["subject_files"].items()}
@@ -134,6 +146,8 @@ def main() -> None:
         "subject_ids_sha256": audit["scope"]["subject_ids_sha256"],
         "baseline": {"version": 2, "commit": BASE, "files": files, "pins": pins, "pin_files": pin_paths,
                      "subject_files": subject_files},
+        "change_receipts": [{"path": OWNED + name, "status": "added"}
+                            for name in candidate_names + ["evidence-quality.json"]],
         "sources": sources, "outputs": outputs,
         "methods": [{"id": "whole-input-admission-and-source-free-audit",
                      "description": "Re-read each declared encoded input by immutable Git path and hash; use only gzip trailer size and retained chunk receipt sizes for decoded-body arithmetic; run fail-closed synthetic input, aggregate, identity, output and preservation controls. The original gzip body is not decoded.",
