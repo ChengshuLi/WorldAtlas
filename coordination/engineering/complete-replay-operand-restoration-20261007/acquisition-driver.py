@@ -111,7 +111,7 @@ def build_plan(adapter, source_index, config, reader_index, physical_report, *,
         stage = f'diagnoses-{number:03}'
         add(stage, 'diagnosis-part', [source_pins[name]], ['routing-complete'], 2*1048576)
         diagnosis_jobs.append(stage)
-    add('mismatches-complete', 'diagnosis-join', dependencies=[*diagnosis_jobs, *routing])
+    add('mismatches-complete', 'diagnosis-join', dependencies=[*diagnosis_jobs, *routing], reserve=2*1048576)
     original_products = {p['path']: p for p in physical_report['products']}
     physical_parts = sorted((name, pin) for name, pin in reader.items()
                             if name.startswith(PHYSICAL+'results/components-') and name.endswith('.jsonl.gz'))
