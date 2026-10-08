@@ -3,13 +3,13 @@
   "status": "PASS",
   "scientific_operations_invoked": false,
   "cap_bytes": 268435456,
-  "complete_phase_bytes": 261736688,
-  "headroom_bytes": 6698768,
+  "complete_phase_bytes": 261737445,
+  "headroom_bytes": 6698011,
   "component_totals": {
     "encoded_source_bodies": 88964941,
     "decoded_native_source_bodies": 101279150,
     "imported_runtime_files_and_python_executable": 39345592,
-    "project_code_files": 147005,
+    "project_code_files": 147762,
     "selected_native_records_output": 0,
     "scratch_reservation": 8000000,
     "generated_output_reservation": 24000000
@@ -2319,8 +2319,8 @@
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
       "role": "project-code",
-      "bytes": 69583,
-      "sha256": "4674dd282266db10be54e8f6c9ad7e8132a6510bf822c0fd681f14aafd8a5ba2"
+      "bytes": 70340,
+      "sha256": "d638d288bb6e44103a12c845614175f908aee78bdcc288a5fef1e078325dd8c0"
     },
     {
       "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
@@ -2357,11 +2357,11 @@
     "rss_cap_bytes": 805306368,
     "wall_deadline_seconds": 900,
     "enforcement": "sampled/cooperative; record actual terminal state and peak RSS",
-    "host_free_disk_bytes": 27726376960,
-    "managed_workspace_free_bytes": 27726151680,
+    "host_free_disk_bytes": 27725991936,
+    "managed_workspace_free_bytes": 27725959168,
     "managed_workspace_minimum_free_bytes": 10737418240,
     "managed_workspace_floor_passed": true,
-    "managed_checkout_bytes": 42949712282,
+    "managed_checkout_bytes": 42949941658,
     "managed_worker": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
     "managed_reservation_bytes": 1073741824,
     "relevant_processes": []

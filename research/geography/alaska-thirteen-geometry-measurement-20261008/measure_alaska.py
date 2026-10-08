@@ -858,6 +858,7 @@ def main() -> None:
     positive_union_candidate = candidates[first_id]
     positive_union = unary_union([positive_union_old, positive_union_candidate])
     positive_union_old_residual = positive_union_old.difference(positive_union)
+    positive_union_old_boundary_residual = positive_union_old.boundary.difference(positive_union)
     positive_union_gain = positive_union.difference(positive_union_old)
     positive_union_expected_gain = positive_union_candidate.difference(positive_union_old)
     positive_union_control = {"kind": "positive-control-genuine-gap-union",
@@ -876,6 +877,14 @@ def main() -> None:
                 if not positive_union_old_residual.is_empty else None),
             "geometry_wkb_sha256": sha(positive_union_old_residual.wkb)},
         "old_target_covered": bool(positive_union.covers(positive_union_old)),
+        "old_target_union_de9im": positive_union_old.relate(positive_union),
+        "old_target_boundary_residual": {"geometry_type": positive_union_old_boundary_residual.geom_type,
+            "is_empty": bool(positive_union_old_boundary_residual.is_empty),
+            "is_valid": bool(positive_union_old_boundary_residual.is_valid),
+            "length_raw_degrees_exact": positive_union_old_boundary_residual.length,
+            "bounds": (list(positive_union_old_boundary_residual.bounds)
+                if not positive_union_old_boundary_residual.is_empty else None),
+            "geometry_wkb_sha256": sha(positive_union_old_boundary_residual.wkb)},
         "candidate_retained": bool(positive_union.covers(positive_union_candidate)),
         "gain_equals_candidate_minus_old_target": bool(positive_union_gain.equals(positive_union_expected_gain)
             and positive_union_gain.symmetric_difference(positive_union_expected_gain).is_empty),

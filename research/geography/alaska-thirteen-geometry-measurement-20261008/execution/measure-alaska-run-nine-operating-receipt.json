@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "pid": 41316,
+  "process_group": 41316,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+    "run-nine"
+  ],
+  "exit_code": 1,
+  "natural_terminal": true,
+  "owned_processes_absent_after_run": true,
+  "stop_reason": null,
+  "elapsed_seconds": 28.239,
+  "peak_sampled_group_rss_bytes": 696123392,
+  "final_sampled_group_rss_bytes": 13500416,
+  "rss_cap_bytes": 805306368,
+  "wall_deadline_seconds": 900,
+  "monitoring": "sampled/cooperative, not kernel-enforced",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py\", line 139, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py\", line 134, in main\n    producer.main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py\", line 905, in main\n    raise RuntimeError(\"one or more nonvacuous geometry/input controls failed; failed=\"\nRuntimeError: one or more nonvacuous geometry/input controls failed; failed=[{\"candidate_retained\": true, \"component_id\": \"physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488\", \"expected\": \"union preserves the complete old target and adds exactly the previously uncovered supported candidate\", \"gain_equals_candidate_minus_old_target\": true, \"kind\": \"positive-control-genuine-gap-union\", \"old_target_covered\": false, \"old_target_preserved\": false, \"old_target_residual\": {\"area_projected_m2_exact\": null, \"area_raw_square_degrees_exact\": 0.0, \"bounds\": null, \"geometry_type\": \"Polygon\", \"geometry_wkb_sha256\": \"e60dcba9c652b544bf3cedaec7717c107cced114bab8dddb58e6d5a0bae36572\", \"is_empty\": true, \"is_valid\": true}, \"old_target_valid\": true, \"passed\": false, \"positive_gain_area_raw_square_degrees_exact\": 1.9330363260441035e-06, \"target_source_id\": \"52423323B46246640861022\", \"union_valid\": true}]\n"
+}
