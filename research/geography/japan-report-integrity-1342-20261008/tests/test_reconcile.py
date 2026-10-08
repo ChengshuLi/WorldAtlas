@@ -6,6 +6,8 @@ import tempfile
 import subprocess
 import sys
 import hashlib
+import os
+import shutil
 import unittest
 from types import SimpleNamespace
 
@@ -96,6 +98,58 @@ class ActualCliFailureTests(unittest.TestCase):
         (receipts/'late-failure-pinned-helper-stderr.txt').write_bytes(result.stderr)
         payload={'schema':'worldatlas-late-failure-control-v1','command':'reconcile_source_fitness_table.py --vintage '+vintage+' --fail-after-compute','exit_code':result.returncode,'stdout_bytes':len(result.stdout),'stderr_sha256':hashlib.sha256(result.stderr).hexdigest(),'publication_directory_exists':destination.exists(),'status':'expected failure before output admission/publication'}
         (receipts/'late-failure-pinned-helper.json').write_text(json.dumps(payload,indent=2)+'\n')
+
+    def test_actual_cli_writer_io_failure_after_first_product_has_no_completion_receipt(self):
+        owned=ROOT/'research/geography/japan-report-integrity-1342-20261008'
+        vintage='late-writer-io-failure-20261008'
+        destination=owned/'vintages'/vintage
+        self.assertFalse(destination.exists())
+        baseline=OLD/'results/source-fitness-table.json'
+        baseline_hash_before=hashlib.sha256(baseline.read_bytes()).hexdigest()
+        with tempfile.TemporaryDirectory() as hook_dir:
+            hook=Path(hook_dir)/'sitecustomize.py'
+            hook.write_text('''import pathlib\n_original_open=pathlib.Path.open\ndef _faulting_open(self, mode="r", *args, **kwargs):\n    if self.name == "territorial-context.json" and mode == "xb":\n        raise OSError("injected storage failure opening second admitted product")\n    return _original_open(self, mode, *args, **kwargs)\npathlib.Path.open=_faulting_open\n''')
+            env=os.environ.copy();env['PYTHONPATH']=hook_dir
+            result=subprocess.run([sys.executable,str(MODULE),'--repo',str(ROOT),'--vintage',vintage],cwd=str(ROOT),env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        first=destination/'source-fitness-table.json'
+        expected=owned/'vintages/run-eleven-20261008/source-fitness-table.json'
+        expected_hash=hashlib.sha256(expected.read_bytes()).hexdigest()
+        try:
+            self.assertNotEqual(result.returncode,0)
+            self.assertEqual(result.stdout,b'')
+            self.assertIn(b'injected storage failure opening second admitted product',result.stderr)
+            self.assertTrue(first.is_file())
+            self.assertEqual(hashlib.sha256(first.read_bytes()).hexdigest(),expected_hash)
+            self.assertEqual({p.name for p in destination.iterdir()},{'source-fitness-table.json'})
+            self.assertFalse((destination/'publication.json').exists())
+            self.assertEqual(hashlib.sha256(baseline.read_bytes()).hexdigest(),baseline_hash_before)
+            receipts=owned/'receipts';receipts.mkdir(exist_ok=True)
+            (receipts/'writer-io-failure-stderr.txt').write_bytes(result.stderr)
+            payload={'schema':'worldatlas-writer-io-failure-v1','command':'reconcile_source_fitness_table.py --vintage '+vintage,'fault_boundary':'actual CLI second output exclusive-open after complete first product write','fault':'injected OSError at filesystem open boundary','exit_code':result.returncode,'stdout_bytes':len(result.stdout),'stderr_sha256':hashlib.sha256(result.stderr).hexdigest(),'partial_product':{'path':'source-fitness-table.json','bytes':first.stat().st_size,'sha256':hashlib.sha256(first.read_bytes()).hexdigest(),'matches_successful_run_eleven':expected_hash},'context_written':(destination/'territorial-context.json').exists(),'validation_written':(destination/'validation.json').exists(),'completion_receipt_written':(destination/'publication.json').exists(),'original_table_sha256_before':baseline_hash_before,'original_table_sha256_after':hashlib.sha256(baseline.read_bytes()).hexdigest(),'status':'expected writer I/O failure; first new product matches retained successful output and no complete receipt exists'}
+            (receipts/'writer-io-failure.json').write_text(json.dumps(payload,indent=2)+'\n')
+        finally:
+            if destination.exists(): shutil.rmtree(destination)
+
+    def test_actual_cli_occupied_destination_preserves_sentinel(self):
+        owned=ROOT/'research/geography/japan-report-integrity-1342-20261008'
+        vintage='occupied-destination-control-20261008'
+        destination=owned/'vintages'/vintage
+        destination.mkdir(parents=True)
+        sentinel=destination/'sentinel.txt';sentinel.write_bytes(b'preserve this pre-existing evidence')
+        before=hashlib.sha256(sentinel.read_bytes()).hexdigest()
+        result=subprocess.run([sys.executable,str(MODULE),'--repo',str(ROOT),'--vintage',vintage],cwd=str(ROOT),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        try:
+            self.assertNotEqual(result.returncode,0)
+            self.assertEqual(result.stdout,b'')
+            self.assertIn(b'Fresh run directory already exists',result.stderr)
+            self.assertEqual({p.name for p in destination.iterdir()},{'sentinel.txt'})
+            self.assertEqual(hashlib.sha256(sentinel.read_bytes()).hexdigest(),before)
+            receipts=owned/'receipts';receipts.mkdir(exist_ok=True)
+            (receipts/'collision-sentinel-stderr.txt').write_bytes(result.stderr)
+            payload={'schema':'worldatlas-cli-collision-sentinel-v1','command':'reconcile_source_fitness_table.py --vintage '+vintage,'sentinel_sha256_before':before,'sentinel_sha256_after':hashlib.sha256(sentinel.read_bytes()).hexdigest(),'stdout_bytes':len(result.stdout),'stderr_sha256':hashlib.sha256(result.stderr).hexdigest(),'completion_receipt_written':(destination/'publication.json').exists(),'status':'actual CLI rejected occupied destination and preserved sentinel'}
+            (receipts/'collision-sentinel.json').write_text(json.dumps(payload,indent=2)+'\n')
+        finally:
+            if destination.exists(): shutil.rmtree(destination)
 
 class DestinationAdmissionTests(unittest.TestCase):
     def test_existing_symlink_and_ancestor_symlink_rejected(self):

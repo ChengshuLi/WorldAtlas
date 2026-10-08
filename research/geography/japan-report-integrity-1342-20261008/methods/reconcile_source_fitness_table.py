@@ -186,6 +186,10 @@ def report_context(scope,subjects,hierarchy,overlay):
 
 def execute(repo,vintage,fail=False):
     immutable,base=make_baseline(repo)
+    # Reserve the complete fresh destination before reading/computing the report.
+    # publish() rechecks the same full set immediately before its first write.
+    files=['source-fitness-table.json','territorial-context.json','validation.json']
+    run=immutable.NewVintage(base,OWNED,vintage,files)
     def material(p): return load(base,p)
     scope=material(OLD+'inputs/immutable-scope-and-inputs.json')
     physical=material(OLD+'inputs/existing-physical-row-scope.json')
@@ -199,8 +203,6 @@ def execute(repo,vintage,fail=False):
     context=report_context(scope,subjects,hierarchy,overlay)
     if fail: raise RuntimeError('intentional late failure before publication')
     manifest={'schema':'worldatlas-mlit-report-integrity-v1','baseline_commit':BASELINE,'original_packet_roster':{'files':ROSTER_COUNT,'encoded_bytes':ROSTER_BYTES,'canonical_descriptor_sha256':ROSTER_SHA256},'scope':{'components':28,'families':9,'contacts':21},'transfer':{'rows':len(transferred),'area_field':'intersection_area_jgd2011_degrees2','unit':'square degrees (JGD2011 geographic/angular)','min':min(v for _,v in transferred),'max':max(v for _,v in transferred)},'source_overlay_sha256':FIXED[OLD+'results/source-overlays.json'],'report_method_sha256':sha(Path(__file__).read_bytes()),'report_method_path':'research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py','old_table_sha256':FIXED[OLD+'results/source-fitness-table.json'],'limitations':context['limits']}
-    files=['source-fitness-table.json','territorial-context.json','validation.json']
-    run=immutable.NewVintage(base,OWNED,vintage,files)
     run.publish({'source-fitness-table.json':copied,'territorial-context.json':context,'validation.json':manifest})
     return manifest
 
