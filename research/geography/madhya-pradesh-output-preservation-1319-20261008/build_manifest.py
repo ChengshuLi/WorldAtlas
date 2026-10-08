@@ -287,7 +287,14 @@ def main():
         changed[MANIFEST_REL] = "added"
     else:
         changed[MANIFEST_REL] = "modified"
-    manifest["change_receipts"] = [{"path": path, "status": changed[path]} for path in sorted(changed)]
+    receipts = []
+    for path in sorted(changed):
+        row = {"path": path, "status": changed[path]}
+        if changed[path] == "modified":
+            original = git(REPO, "show", f"{origin_main}:{path}")
+            row["original_sha256"] = hashlib.sha256(original).hexdigest()
+        receipts.append(row)
+    manifest["change_receipts"] = receipts
 
     output = REPO / MANIFEST_REL
     raw = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode()
