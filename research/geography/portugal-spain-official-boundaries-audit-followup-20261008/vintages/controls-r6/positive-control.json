@@ -1,0 +1,105 @@
+{
+  "checks": [
+    {
+      "component_ids": [
+        "physical-component:137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a",
+        "physical-component:188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70",
+        "physical-component:3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e",
+        "physical-component:a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c"
+      ],
+      "components": 4,
+      "distinct_contact_subjects": 4,
+      "families": 2,
+      "family_contact_incidences": 5,
+      "id": "exact-complete-scope",
+      "moura_family_appearances": 2,
+      "outcome": "passed"
+    },
+    {
+      "id": "complete-consumed-source-reconstruction",
+      "outcome": "passed",
+      "products": {
+        "gb:ESP:ADM3": {
+          "bytes": 18613175,
+          "feature_count": 8205,
+          "sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862"
+        },
+        "gb:PRT:ADM2": {
+          "bytes": 387331,
+          "feature_count": 311,
+          "sha256": "f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac"
+        }
+      },
+      "whole_component_shard_verification_count": 4
+    },
+    {
+      "id": "official-whole-feature-and-crs-custody",
+      "official_boundary_items": {
+        "ign-encinasola-portugal-5679963": {
+          "geometry_type": "LineString",
+          "native_id": 5679963,
+          "whole_response_bytes": 39972,
+          "whole_response_sha256": "7d19b4307691b959f514374e1b5577489515d4c2e00cd762dd250889ed77fd6c"
+        },
+        "ign-rosal-portugal-5671403": {
+          "geometry_type": "LineString",
+          "native_id": 5671403,
+          "whole_response_bytes": 93835,
+          "whole_response_sha256": "b12acf2cdafdb2331d10e31116f6d6a18dfa0eafc90ce16b71617a9b55d92b54"
+        }
+      },
+      "official_municipal_items": {
+        "dgt-barrancos-0204": {
+          "geometry_type": "MultiPolygon",
+          "native_id": "0204",
+          "whole_response_bytes": 492214,
+          "whole_response_sha256": "1863c1a2984e1d2d747983493e59962b675699cc52173aae603cdeacfc35b468"
+        },
+        "dgt-moura-0210": {
+          "geometry_type": "MultiPolygon",
+          "native_id": "0210",
+          "whole_response_bytes": 866981,
+          "whole_response_sha256": "2825a5eb72020b3a9b16784faea3e8d15028b2f6e2411c76a05495f510ada0a2"
+        },
+        "ign-encinasola-1166667": {
+          "geometry_type": "MultiPolygon",
+          "native_id": 1166667,
+          "whole_response_bytes": 119156,
+          "whole_response_sha256": "8010006e52e9cbb36cb09d4a5a0b1431612ab033cca04425e2ef31a1feffd9c6"
+        },
+        "ign-rosal-1166698": {
+          "geometry_type": "MultiPolygon",
+          "native_id": 1166698,
+          "whole_response_bytes": 186305,
+          "whole_response_sha256": "462b4c332e5221aabc2aba1de30bcd250642a18fee47489b41e9d869bf11bc43"
+        }
+      },
+      "outcome": "passed"
+    },
+    {
+      "half_fraction": 0.5,
+      "id": "mixed-polygon-line-point-residue",
+      "line_contact_m": 11097.857964140114,
+      "line_geometry_type": "LineString",
+      "outcome": "passed",
+      "point_contact_count": 1,
+      "point_geometry_type": "Point",
+      "polygon_area_m2": 49359578.14513299
+    },
+    {
+      "id": "uncovered-residual-preserved",
+      "outcome": "passed",
+      "residual_area_m2": 49359578.14513299,
+      "residual_type": "Polygon"
+    }
+  ],
+  "corrected_control_sha256": "905a57de703ee82157b248eba458b3ffcbe590b6cd24ec0032237bbe145715d6",
+  "kind": "positive-control",
+  "limits": [
+    "Positive custody and geometric controls validate the evidence path, not ownership, land/water status, history, or legal authority."
+  ],
+  "method_id": "official-source-geography-v1",
+  "outcome": "passed",
+  "producer_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+  "version": 1
+}

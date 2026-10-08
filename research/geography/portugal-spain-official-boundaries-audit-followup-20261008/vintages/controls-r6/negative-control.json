@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "exception": "ValueError",
+      "id": "wrong-native-identity",
+      "outcome": "rejected-as-expected",
+      "reason": "Unexpected item identity: dgt-barrancos-0204"
+    },
+    {
+      "exception": "FileNotFoundError",
+      "id": "wrong-product-vintage",
+      "outcome": "rejected-as-expected",
+      "reason": "[Errno 2] No such file or directory: '/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1482-controls-_nxjobwm/sources/official/dgt-caop2025-collection.body'"
+    },
+    {
+      "exception": "ValueError",
+      "id": "duplicate-and-missing-subject",
+      "outcome": "rejected-as-expected",
+      "reason": "Duplicate or missing scoped source subject"
+    },
+    {
+      "exception": "ValueError",
+      "id": "wrong-subject-parent",
+      "outcome": "rejected-as-expected",
+      "reason": "Wrong pinned parent relationship: gb:PRT:ADM2:2272694B82300393258858"
+    },
+    {
+      "exception": "FileNotFoundError",
+      "id": "swapped-crs84-axis-order",
+      "outcome": "rejected-as-expected",
+      "reason": "[Errno 2] No such file or directory: '/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1482-controls-_nxjobwm/sources/official/ign-encinasola-1166667.body'"
+    },
+    {
+      "exception": "ValueError",
+      "id": "invalid-geometry-not-repaired",
+      "outcome": "rejected-as-expected",
+      "reason": "Invalid input polygon; do not MakeValid"
+    },
+    {
+      "exception": "FileNotFoundError",
+      "id": "modified-whole-source-response",
+      "outcome": "rejected-as-expected",
+      "reason": "[Errno 2] No such file or directory: '/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1482-controls-_nxjobwm/sources/official/dgt-barrancos-0204.body'"
+    }
+  ],
+  "corrected_control_sha256": "905a57de703ee82157b248eba458b3ffcbe590b6cd24ec0032237bbe145715d6",
+  "kind": "negative-control",
+  "limits": [
+    "Each perturbed case must fail closed; these controls do not determine political identity, authority, or physical class."
+  ],
+  "method_id": "official-source-geography-v1",
+  "outcome": "passed",
+  "producer_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+  "version": 1
+}
