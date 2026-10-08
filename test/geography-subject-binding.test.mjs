@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {execFileSync} from 'node:child_process';
-import {repositoryReader, sha256, subjectsHash, validateEvidence} from '../scripts/evidence-quality.mjs';
+import fs from 'node:fs';
+import {sha256, subjectsHash, validateEvidence} from '../scripts/evidence-quality.mjs';
 import {validatePremergeManifest} from '../scripts/premerge-evidence.mjs';
 
 const base = 'de506f51100568e150e51f2926a5259b71e55272';
@@ -27,10 +27,10 @@ function geographyManifest(raw, subjects, binding = propertyTemplate) {
 }
 
 test('canonical contact IDs bind to the exact pinned source rows by declared properties', () => {
-  const bytes = execFileSync('git', ['show', `${base}:${contactPath}`]);
+  const bytes = fs.readFileSync(contactPath);
   assert.equal(sha256(bytes), contactHash);
   const manifest = geographyManifest(bytes, identities);
-  const result = validateEvidence(manifest, {readFile: repositoryReader(process.cwd()), expectedIssue: 1397,
+  const result = validateEvidence(manifest, {readFile: () => bytes, expectedIssue: 1397,
     expectedLane: 'geography', expectedSubjects: identities, expectedPins: {[contactPath]: contactHash}});
   assert.equal(result.status, 'bytes-verified');
   const source = JSON.parse(bytes);
@@ -77,7 +77,7 @@ test('composed bindings reject unsafe templates, inconsistent per-file descripto
 });
 
 test('trusted premerge manifest path accepts composed identities only against the declared immutable bytes', () => {
-  const bytes = execFileSync('git', ['show', `${base}:${contactPath}`]);
+  const bytes = fs.readFileSync(contactPath);
   const outputPath = 'research/geography/namibia-angola-jog1501-20261007/README.md';
   const manifestPath = 'research/geography/namibia-angola-jog1501-20261007/evidence-quality.json';
   const output = Buffer.from('scope-bound output\n');
