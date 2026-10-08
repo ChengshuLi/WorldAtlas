@@ -30,6 +30,15 @@ def open_new_receipt(path):
     return os.fdopen(os.open(path, flags, 0o600), "w", encoding="utf-8", newline="\n")
 
 
+def require_absent(path, description):
+    """Pre-admit a fresh destination without following dangling symlinks."""
+    try:
+        os.lstat(path)
+    except FileNotFoundError:
+        return
+    raise FileExistsError(description + " already exists: " + str(path))
+
+
 def receipt_path_matches(path, stream):
     try:
         path_stat = os.lstat(path)
@@ -72,6 +81,26 @@ def run(repo, script, *, args=(), env=None):
     result = subprocess.run(command, cwd=repo, capture_output=True, text=True, env=env)
     return {"command": [PYTHON, "-B", script, *args], "exit_code": result.returncode,
             "stdout": result.stdout[-2000:], "stderr": result.stderr[-2000:]}
+
+
+def run_with_scratch_mkdir_audit(repo, script, parent):
+    """Run the actual CLI and record any attempt to create its scratch directory."""
+    audit_dir = parent / ("mkdir-audit-" + repo.name)
+    audit_dir.mkdir()
+    marker = audit_dir / "scratch-mkdir-attempted"
+    (audit_dir / "sitecustomize.py").write_text(
+        "import os, sys\n"
+        "def audit(event, args):\n"
+        "    if event == 'os.mkdir' and os.path.basename(os.fspath(args[0])) == '.controls-scratch':\n"
+        "        with open(os.environ['WORLDATLAS_SCRATCH_MKDIR_AUDIT'], 'a') as f: f.write('attempt\\n')\n"
+        "sys.addaudithook(audit)\n",
+        encoding="utf-8")
+    env = dict(os.environ)
+    prior = env.get("PYTHONPATH")
+    env["PYTHONPATH"] = str(audit_dir) + (os.pathsep + prior if prior else "")
+    env["WORLDATLAS_SCRATCH_MKDIR_AUDIT"] = str(marker)
+    result = run(repo, script, env=env)
+    return result, marker.exists()
 
 
 def output_hashes(repo, paths):
@@ -169,12 +198,13 @@ def fixed_controls(parent):
     receipt_path = repo / OWNED / "cli-controls.json"
     sentinel = b"preserve this control receipt destination\n"
     receipt_path.write_bytes(sentinel)
-    result = run(repo, OWNED + "/verify_controls.py")
+    result, scratch_attempted = run_with_scratch_mkdir_audit(repo, OWNED + "/verify_controls.py", parent)
     if (result["exit_code"] == 0 or receipt_path.read_bytes() != sentinel or
-            (repo / OWNED / ".controls-scratch").exists()):
+            (repo / OWNED / ".controls-scratch").exists() or scratch_attempted):
         raise AssertionError("Control receipt writer changed an existing file destination")
     results["control_receipt_existing_file"] = {**result, "outputs": {},
-        "sentinel_sha256": digest(sentinel), "sentinel_preserved": True}
+        "sentinel_sha256": digest(sentinel), "sentinel_preserved": True,
+        "scratch_mkdir_attempted": scratch_attempted}
 
     repo = copy_repo(parent, "control-receipt-dangling-symlink")
     receipt_path = repo / OWNED / "cli-controls.json"
@@ -183,12 +213,28 @@ def fixed_controls(parent):
     if outside.exists() or outside.is_symlink():
         raise FileExistsError("Control receipt outside sentinel path already exists")
     receipt_path.symlink_to(outside)
-    result = run(repo, OWNED + "/verify_controls.py")
+    result, scratch_attempted = run_with_scratch_mkdir_audit(repo, OWNED + "/verify_controls.py", parent)
     if (result["exit_code"] == 0 or not receipt_path.is_symlink() or outside.exists() or
-            (repo / OWNED / ".controls-scratch").exists()):
+            (repo / OWNED / ".controls-scratch").exists() or scratch_attempted):
         raise AssertionError("Control receipt writer followed or changed a dangling symlink")
     results["control_receipt_dangling_symlink"] = {**result, "outputs": {},
-        "symlink_preserved": True, "outside_target_created": False}
+        "symlink_preserved": True, "outside_target_created": False,
+        "scratch_mkdir_attempted": scratch_attempted}
+
+    repo = copy_repo(parent, "control-scratch-existing-directory")
+    receipt_path = repo / OWNED / "cli-controls.json"
+    receipt_path.unlink()
+    scratch = repo / OWNED / ".controls-scratch"
+    scratch.mkdir()
+    preserved = scratch / "worker-data"
+    preserved.write_bytes(b"preserve pre-existing scratch destination\n")
+    result, scratch_attempted = run_with_scratch_mkdir_audit(repo, OWNED + "/verify_controls.py", parent)
+    if (result["exit_code"] == 0 or receipt_path.exists() or receipt_path.is_symlink() or
+            preserved.read_bytes() != b"preserve pre-existing scratch destination\n" or scratch_attempted):
+        raise AssertionError("Control runner changed state after finding a pre-existing scratch destination")
+    results["control_scratch_existing_directory"] = {**result, "outputs": {},
+        "preexisting_file_preserved": True, "receipt_created": False,
+        "scratch_mkdir_attempted": scratch_attempted}
 
     for key, collision in (("first_output_collision", "reproducibility.json"), ("late_manifest_collision", "evidence-quality.json")):
         repo = copy_repo(parent, "fixed-" + key)
@@ -291,12 +337,18 @@ def fixed_controls(parent):
 def main():
     directory = ROOT / OWNED
     scratch = directory / ".controls-scratch"
-    scratch.mkdir(exist_ok=False)
-    placeholder = {"version": 1, "status": "control execution in progress"}
     receipt_path = directory / "cli-controls.json"
+    require_absent(scratch, "Control scratch destination")
+    placeholder = {"version": 1, "status": "control execution in progress"}
     receipt_stream = None
+    scratch_identity = None
     try:
         receipt_stream = open_new_receipt(receipt_path)
+        scratch.mkdir(exist_ok=False)
+        scratch_stat = os.lstat(scratch)
+        if not stat.S_ISDIR(scratch_stat.st_mode):
+            raise RuntimeError("Control scratch destination changed during creation")
+        scratch_identity = (scratch_stat.st_dev, scratch_stat.st_ino)
         write_open_receipt(receipt_path, receipt_stream, placeholder)
         legacy = legacy_controls(scratch)
         fixed = fixed_controls(scratch)
@@ -327,7 +379,14 @@ def main():
     finally:
         if receipt_stream is not None:
             receipt_stream.close()
-        shutil.rmtree(scratch)
+        if scratch_identity is not None:
+            try:
+                current = os.lstat(scratch)
+            except FileNotFoundError:
+                current = None
+            if (current is not None and stat.S_ISDIR(current.st_mode) and
+                    (current.st_dev, current.st_ino) == scratch_identity):
+                shutil.rmtree(scratch)
 
 
 if __name__ == "__main__":

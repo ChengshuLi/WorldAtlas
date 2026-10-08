@@ -1948,22 +1948,6 @@
       "status": "added"
     },
     {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/cli-controls.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/preservation.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/reproducibility.json",
-      "status": "added"
-    },
-    {
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/evidence-quality.json",
       "status": "added"
     },
@@ -2257,7 +2241,6 @@
     "The original 2022 Paraguay INE response bytes, response-level reuse terms and statistical-to-administrative relation were not rechecked.",
     "The retained Atlas subject index proves only exact stored identity and parent links; it does not prove current administrative truth.",
     "The second local manifest draft lacked explicit candidate input paths for repeated whole-file metric hashes and was rejected by the evidence validator; its exact three files are retained under controls/failed-second-builder/ and excluded from the accepted top-level outputs.",
-    "The seventh manifest iteration is preserved after independent review found that the control CLI created its scratch directory before rejecting an occupied or dangling receipt destination; the exact trio and receipt are retained under controls/superseded-control-writer-review-v3/ and excluded from accepted outputs. The repaired runner pre-admits the scratch path without following symlinks, reserves its receipt exclusively before creating scratch, and records actual-CLI audit-hook controls proving no scratch mkdir attempt for existing-file, dangling-link or pre-existing-scratch collisions.",
     "The sixth manifest iteration is preserved after the README recorded the control-writer repair; its output hashes predate that documentation update and it is excluded from accepted outputs.",
     "The source register distinguishes exact Git vintages; no external authority, legal parentage, source completeness, boundary quality, positional accuracy or regional approval is established.",
     "The third manifest draft used generated pin keys instead of the exact issue-declared paths and failed the trusted hosted evidence contract; its exact files and hosted failure are retained under controls/failed-third-builder/ and excluded from the accepted top-level outputs.",
@@ -2365,18 +2348,18 @@
   ],
   "outputs": [
     {
-      "bytes": 4718,
+      "bytes": 4196,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/README.md",
       "role": "scope, methods and limits",
-      "sha256": "e2e19f78626ba20244a9aac6b8fa84382bfedf4c667c94377714c951f073a96f"
+      "sha256": "3077901963d01fe90a7526f676b02f8db4d3e9aaddfd1816c5590cad1e1c035b"
     },
     {
-      "bytes": 42660,
+      "bytes": 41404,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py",
       "role": "corrected manifest builder CLI",
-      "sha256": "7af78b271439f1e4701c2e4323f97a9203318342df2a6469a1c907ff18e01ea8"
+      "sha256": "8347171094dff8d1cceb403d7e7a773986ad48f465a574f88b99f6b4548a70d0"
     },
     {
       "bytes": 947,
@@ -2386,11 +2369,11 @@
       "sha256": "f9910b66a0f61c60a70d9c463c3f17fbc65adfb0f1fb8bdc661a6bf115864692"
     },
     {
-      "bytes": 115509,
+      "bytes": 111346,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/cli-controls.json",
       "role": "whole-hash receipts for actual CLI positive/adverse controls",
-      "sha256": "11c410486c3452528b0a75a4d7dc5792e9590c503144d0df9f13d8bd187062bf"
+      "sha256": "cf4f5fa93687f1efe89bb591c9dfdfb9b72415ca494142476931a9a5b2aa92d1"
     },
     {
       "bytes": 125665,
@@ -2554,34 +2537,6 @@
       "sha256": "1ef10e51abdae8392e3ac18d48531917928b2e564ad05d3c9589b17a56502170"
     },
     {
-      "bytes": 111346,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/cli-controls.json",
-      "role": "exact prior control receipt before scratch-destination admission repair",
-      "sha256": "cf4f5fa93687f1efe89bb591c9dfdfb9b72415ca494142476931a9a5b2aa92d1"
-    },
-    {
-      "bytes": 153114,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/evidence-quality.json",
-      "role": "superseded manifest iteration before scratch-destination admission repair",
-      "sha256": "625144143b27c4f67af6c7b04c2e2b7b7fd56ca01e9464797cbe9f63c9b451e3"
-    },
-    {
-      "bytes": 21621,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/preservation.json",
-      "role": "superseded manifest iteration before scratch-destination admission repair",
-      "sha256": "2474620905766ccde5d721c2faf13a0c1fbdb290d05c42610b5ecf426cf846fe"
-    },
-    {
-      "bytes": 2866,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review-v3/reproducibility.json",
-      "role": "superseded manifest iteration before scratch-destination admission repair",
-      "sha256": "93d7d2852a23e7eed74bf254ec921bf302dfaa32a06ca73935ebfabbd837982a"
-    },
-    {
       "bytes": 148269,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/controls/superseded-control-writer-review/evidence-quality.json",
@@ -2649,14 +2604,14 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproducibility.json",
       "role": "two-run complete output comparison",
-      "sha256": "b54daa18e5b2bd8d5a2c19fa4674e1c7be964850de13873da5188ebbd7f1e0aa"
+      "sha256": "93d7d2852a23e7eed74bf254ec921bf302dfaa32a06ca73935ebfabbd837982a"
     },
     {
-      "bytes": 21117,
+      "bytes": 18052,
       "hash_kind": "file-bytes",
       "path": "research/geography/south-america-batch4-manifest-1349-erratum-20261008/verify_controls.py",
       "role": "reproducible legacy and corrected builder CLI controls",
-      "sha256": "698bafc6b922a672a590f6ea4ce684e1ded1c78cce85ae41839adf13a8ea7d56"
+      "sha256": "600f4afbf996283e73290a0da6ed9c301b2de77c6c91923bddbe4bce851a690f"
     },
     {
       "bytes": 206120,

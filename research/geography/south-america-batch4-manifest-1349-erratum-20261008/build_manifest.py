@@ -280,6 +280,8 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     output_static.extend(OWNED + "controls/superseded-control-writer-review-v2/" + name for name in
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    output_static.extend(OWNED + "controls/superseded-control-writer-review-v3/" + name for name in
+                         ("evidence-quality.json", "preservation.json", "reproducibility.json", "cli-controls.json"))
     output_static.extend([OWNED + "controls/first-builder-rejection.json",
                           OWNED + "controls/second-builder-rejection.json",
                           OWNED + "controls/third-builder-rejection.json",
@@ -439,6 +441,8 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend((OWNED + "controls/superseded-control-writer-review-v2/" + name, "superseded manifest iteration after control-writer repair")
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    static.extend((OWNED + "controls/superseded-control-writer-review-v3/" + name, "superseded manifest iteration before scratch-destination admission repair")
+                  for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend([(OWNED + "controls/first-builder-rejection.json", "validator failure receipt for retained first draft"),
                    (OWNED + "controls/second-builder-rejection.json", "validator failure receipt for retained second draft"),
                    (OWNED + "controls/third-builder-rejection.json", "trusted baseline pin-binding failure receipt for retained third draft"),
@@ -448,7 +452,8 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                    (OWNED + "controls/third-control-receipt.json", "superseded third exact CLI control run"),
                    (OWNED + "controls/fourth-control-receipt.json", "superseded fourth exact CLI control run"),
                    (OWNED + "controls/fifth-control-receipt.json", "superseded fifth exact CLI control run"),
-                   (OWNED + "controls/sixth-control-receipt.json", "superseded sixth exact CLI control run")])
+                   (OWNED + "controls/sixth-control-receipt.json", "superseded sixth exact CLI control run"),
+                   (OWNED + "controls/superseded-control-writer-review-v3/cli-controls.json", "exact prior control receipt before scratch-destination admission repair")])
     for run in PRESERVED_RUN_NAMES:
         root = OWNED + "vintages/" + run + "/"
         role = "retained run with inherited #1332 method labels; not used as accepted control evidence" if run in ("run-nine", "run-ten") else "preserved earlier fresh producer evidence"
@@ -515,6 +520,7 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
         "The fourth manifest draft referenced inherited producer controls whose method_id still named #1332, so the trusted control receipt check rejected them; its exact files and hosted failure are retained under controls/failed-fourth-builder/ and excluded from accepted outputs.",
         "The fifth manifest iteration was superseded after independent review found the control runner did not safely reject a dangling receipt symlink; its exact output trio is retained under controls/superseded-control-writer-review/ and excluded from accepted outputs.",
         "The sixth manifest iteration is preserved after the README recorded the control-writer repair; its output hashes predate that documentation update and it is excluded from accepted outputs.",
+        "The seventh manifest iteration is preserved after independent review found that the control CLI created its scratch directory before rejecting an occupied or dangling receipt destination; the exact trio and receipt are retained under controls/superseded-control-writer-review-v3/ and excluded from accepted outputs. The repaired runner pre-admits the scratch path without following symlinks, reserves its receipt exclusively before creating scratch, and records actual-CLI audit-hook controls proving no scratch mkdir attempt for existing-file, dangling-link or pre-existing-scratch collisions.",
         "Runs nine and ten retain useful generated rows/receipts and exact producer/helper hashes, but their inherited control method labels are retained as an explicitly nonaccepted vintage; only fresh run-eleven/run-twelve controls bind this repair method.",
         "This packet establishes a bounded builder custody repair only; it does not complete original #1120 or certify geographic approval, source rights, imports or publication."
     ]))
