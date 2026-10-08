@@ -37,6 +37,7 @@ test "$("$BOOTSTRAP_SHA256SUM" /bin/bash)" = "b46e8d4eac541d79f77000550b4254b475
 test "$(git -C "$ROOT" rev-parse HEAD)" = "$BASE"
 LC_ALL=C
 PLAN_SIZE=$("$BOOTSTRAP_WC" -c < "$PLAN")
+PLAN_SIZE=$(( PLAN_SIZE ))
 if [[ ! "$PLAN_SIZE" =~ ^[0-9]+$ ]] || (( PLAN_SIZE < 1 || PLAN_SIZE > 1048576 )); then
   echo 'phase plan is empty or exceeds 1 MiB' >&2
   exit 1
