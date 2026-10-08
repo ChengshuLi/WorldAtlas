@@ -42,11 +42,9 @@ def main() -> None:
         PACKET / "run-two/source-geometry-results.json.gz",
         PACKET / "source-provenance.json",
         PACKET / "reproducibility.json",
-        PACKET / "evidence-quality.json",
         BASE / "worldcover-source-ranges.json",
         BASE / "worldcover-range-integrity.json",
         BASE / "source-coverage.json",
-        BASE / "README.md",
         BASE / "sources/WorldCover_PUM_V2.0.pdf",
         BASE / "sources/WorldCover_PUM_V2.0.headers",
         BASE / "sources/WorldCover_PVR_V2.0.pdf",
@@ -61,6 +59,7 @@ def main() -> None:
         raise RuntimeError("Duplicate frozen input path")
     input_bytes = sum(item["bytes"] for item in inputs)
     storage_snapshot = json.loads((BASE / "workspace-storage-admission.json").read_text(encoding="utf-8"))
+    producer_hashes = {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "freeze_inputs.py", "record_workspace_storage.mjs"]}
 
     packet_id = "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006"
     report = {
@@ -87,7 +86,7 @@ def main() -> None:
             "zlib_runtime": zlib.ZLIB_RUNTIME_VERSION,
             "pypdf": importlib.metadata.version("pypdf"),
         },
-        "producer_and_checker_hashes": {name: digest(BASE / name) for name in ["classify_worldcover.py", "verify_worldcover_ranges.py", "verify_source_coverage.py", "freeze_inputs.py", "record_workspace_storage.mjs"]},
+        "producer_and_checker_hashes": producer_hashes,
         "storage_snapshot": storage_snapshot,
         "resource_admission": {
             "gis_window_requested_mib": 768,
@@ -101,6 +100,36 @@ def main() -> None:
             "per_run_full_block_decode_capacity_bytes": range_manifest["selected_decoded_bytes"],
             "geometry_partition": "bounded per candidate and per source row; no raster-wide in-memory array",
             "measurement": "After window authorization, capture /usr/bin/time -l plus output file sizes; stop if process RSS exceeds 700 MiB, temporary storage exceeds 64 MiB, or either result exceeds its 64 MiB half of the combined output cap.",
+        },
+        "measured_preflight": {
+            "scope": "No-pixel preflight only; this does not authorize or measure a GIS classification run.",
+            "command": "bundled Python 3.12.14 classify_worldcover.py --preflight-only under /usr/bin/time -l",
+            "result": "passed",
+            "source_pixels_read": False,
+            "elapsed_seconds": 0.37,
+            "process_peak_rss_bytes": 45498368,
+            "measured_at_utc": "2026-10-08T03:07:42Z",
+            "pinned_project_input_files": len(inputs),
+            "pinned_project_input_bytes": input_bytes,
+            "owned_producer_and_checker_files": len(producer_hashes),
+            "owned_producer_and_checker_bytes": sum((BASE / name).stat().st_size for name in producer_hashes),
+            "loaded_runtime_module_files": 236,
+            "loaded_runtime_module_file_bytes": 9901207,
+            "python_executable_bytes": 18058560,
+            "preflight_wrapper_open_descriptor_snapshot": 4,
+            "runtime_body_measurement_note": "Module and executable byte counts were measured in a second preflight-only process using the same bundled runtime and entry point; descriptor count is a point-in-time wrapper snapshot including the /dev/fd listing handle, not an estimate for classification.",
+            "per_classification_run_encoded_source_bytes": range_manifest["selected_encoded_bytes"] + range_manifest["ifd_metadata_range"]["content_length"],
+            "per_classification_run_decoded_original_block_capacity_bytes": range_manifest["selected_decoded_bytes"],
+            "per_classification_run_geometry_compressed_bytes": (PACKET / "run-one/source-geometry-results.json.gz").stat().st_size,
+            "per_classification_run_geometry_decoded_bytes": 932627,
+            "issue_window_pixel_bytes_theoretical_only": range_manifest["complete_pixel_window"]["decoded_bytes"],
+            "raster_crop_files_or_crop_intermediates": 0,
+            "crop_handling": "No 47,518,164-byte crop file is created. The producer decodes the 60 pinned original TIFF blocks and uses row-bounded candidate/cell intersections; no raster-wide crop array is materialized.",
+            "per_run_result_output_cap_bytes": 67108864,
+            "two_run_result_output_cap_bytes": 134217728,
+            "planned_temporary_file_bytes": 0,
+            "storage_snapshot": storage_snapshot,
+            "classification_peak_rss": "not yet measured; only eligible after explicit GIS-window authorization; stop above 700 MiB",
         },
         "limits": [
             "The acquisition and comparison outputs are pinned as exact files; the original complete geoBoundaries source comparisons remain in both prior runs and are not replaced.",
