@@ -1,0 +1,2817 @@
+{
+  "contract_sha256": "2aa9ab4ea222fc7a00668e1306c9e4be15f15de943607979605d1d91068750b3",
+  "cohort_builder_script_sha256": "d7d4fe6f87baef141315724c72102cd9b38fa49aab06fe9cc388d0f01441ad88",
+  "block_intersection_manifest_sha256": "0526129fd4a61dab4127dd6d675eef8249ba304f8a7926ae89303e70bacced61",
+  "scope": {
+    "complete_candidate_ids": [
+      "physical-component:04431dc98d19b4236a143d2c0bb388fed2e41d4768356cf5a74ae4b9194fd9bf",
+      "physical-component:0467413184087c1282e0b20ec7252d8dfe7e393e674b1902f9d2f8e5f10eeadd",
+      "physical-component:0b1a9310b0717d791b33e315035e22e83362b4b461283df57e6267d3d1d6c015",
+      "physical-component:0bf1093e551def6fa258252e87e67ca4c4dd1a3847416a39164226514713e842",
+      "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276",
+      "physical-component:1d82eb920d887e65e0b7feace4b6ce606ba72f0dd4b64d8872bc6ff17594c52c",
+      "physical-component:29c61a4079291f4cf9fa96ca41c3561405cef2d2ad8afe80aa526904848969c2",
+      "physical-component:658f2e100dd572e26c264f47481759420a413e73978799a8792e203637b3854b",
+      "physical-component:7450c83fcd14661b0c9115f0075f703ac96c64ea65ec0caa86702a1ef00db81e",
+      "physical-component:804dfb19fcd6f3fc68de442ae08f4ca553de8687df65d70b72dc1a3fae258eb9",
+      "physical-component:a133c2293fb153cd6628eb43b7518e55ea7db7f6c7f74178b854fd9641be86c5",
+      "physical-component:bee4ff4185a3775db6d8c51fdc2da0b0674b7629615933378147c6d0b4e778d4",
+      "physical-component:ca9c5207e4e4202ea32bd39636020e8f898783d03802fb3507efb816d2e525a3",
+      "physical-component:d461dff8a46f322a5c4d5aa7c7ddaaaee64f4c205227d09feeb3b93420f33fa8",
+      "physical-component:d76b0c2c3c68c11f128e13ad2a3528ae9bd624dedaed581e305431462cbfe7f9"
+    ],
+    "complete_contact_ids": [
+      "gb:KGZ:ADM2:92254566B28866404519709",
+      "gb:KGZ:ADM2:92254566B65149347501284",
+      "gb:KGZ:ADM2:92254566B65536554507768",
+      "gb:TJK:ADM2:16282066B17537121350265",
+      "gb:TJK:ADM2:16282066B25952413622692",
+      "gb:TJK:ADM2:16282066B48594859138803",
+      "gb:TJK:ADM2:16282066B4928854450407",
+      "gb:TJK:ADM2:16282066B70669453487294",
+      "gb:TJK:ADM2:16282066B88100265425771"
+    ],
+    "candidate_unique_count": 15,
+    "contact_unique_count": 9
+  },
+  "selected_family_unknowns": [
+    {
+      "family_id": "gap-source-batch:65911e15791d12ebb2ccacf5",
+      "component_count": 3,
+      "complete_component_ids": [
+        "physical-component:0b1a9310b0717d791b33e315035e22e83362b4b461283df57e6267d3d1d6c015",
+        "physical-component:658f2e100dd572e26c264f47481759420a413e73978799a8792e203637b3854b",
+        "physical-component:d76b0c2c3c68c11f128e13ad2a3528ae9bd624dedaed581e305431462cbfe7f9"
+      ],
+      "cause_status": "unknown per original task record (no causal adjudication)",
+      "physical_authority": "unapproved",
+      "source_fitness": "unapproved-for-all-components",
+      "dispatch_ready": false,
+      "boundary_length_m": null
+    },
+    {
+      "family_id": "gap-source-batch:74be953b1fb31c15200742da",
+      "component_count": 12,
+      "complete_component_ids": [
+        "physical-component:04431dc98d19b4236a143d2c0bb388fed2e41d4768356cf5a74ae4b9194fd9bf",
+        "physical-component:0467413184087c1282e0b20ec7252d8dfe7e393e674b1902f9d2f8e5f10eeadd",
+        "physical-component:0bf1093e551def6fa258252e87e67ca4c4dd1a3847416a39164226514713e842",
+        "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276",
+        "physical-component:1d82eb920d887e65e0b7feace4b6ce606ba72f0dd4b64d8872bc6ff17594c52c",
+        "physical-component:29c61a4079291f4cf9fa96ca41c3561405cef2d2ad8afe80aa526904848969c2",
+        "physical-component:7450c83fcd14661b0c9115f0075f703ac96c64ea65ec0caa86702a1ef00db81e",
+        "physical-component:804dfb19fcd6f3fc68de442ae08f4ca553de8687df65d70b72dc1a3fae258eb9",
+        "physical-component:a133c2293fb153cd6628eb43b7518e55ea7db7f6c7f74178b854fd9641be86c5",
+        "physical-component:bee4ff4185a3775db6d8c51fdc2da0b0674b7629615933378147c6d0b4e778d4",
+        "physical-component:ca9c5207e4e4202ea32bd39636020e8f898783d03802fb3507efb816d2e525a3",
+        "physical-component:d461dff8a46f322a5c4d5aa7c7ddaaaee64f4c205227d09feeb3b93420f33fa8"
+      ],
+      "cause_status": "unknown per original task record (no causal adjudication)",
+      "physical_authority": "unapproved",
+      "source_fitness": "unapproved-for-all-components",
+      "dispatch_ready": false,
+      "boundary_length_m": null
+    }
+  ],
+  "cohort_policy": {
+    "cohort_subject_types": [
+      "candidate",
+      "contact"
+    ],
+    "partition_keys": [
+      "tile",
+      "subject_type"
+    ],
+    "max_unique_base_blocks_per_cohort": 64,
+    "max_full_block_decode_upper_bound_bytes": 16777216,
+    "geometry_handling": "Each cohort references the full original feature from its complete source file. No geometry is clipped or rewritten. A cross-tile feature appears in each relevant tile cohort with its exact block-index support; global subject coverage remains deduplicated by stable ID.",
+    "source_observation_support": "JRC occurrence is an aggregate frequency product; block intersection is spatial support only and does not establish physical class or water presence."
+  },
+  "cohorts": [
+    {
+      "cohort_id": "candidate-60E_40N-01",
+      "subject_type": "candidate",
+      "tile": "60E_40N",
+      "max_unique_blocks": 64,
+      "member_count": 5,
+      "members": [
+        {
+          "id": "physical-component:04431dc98d19b4236a143d2c0bb388fed2e41d4768356cf5a74ae4b9194fd9bf",
+          "source_ref": "inputs/component-pointsets/components-000.json.gz",
+          "block_indices_row_major": [
+            310
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:0bf1093e551def6fa258252e87e67ca4c4dd1a3847416a39164226514713e842",
+          "source_ref": "inputs/component-pointsets/components-000.json.gz",
+          "block_indices_row_major": [
+            73
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276",
+          "source_ref": "inputs/component-pointsets/components-001.json.gz",
+          "block_indices_row_major": [
+            73
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:29c61a4079291f4cf9fa96ca41c3561405cef2d2ad8afe80aa526904848969c2",
+          "source_ref": "inputs/component-pointsets/components-001.json.gz",
+          "block_indices_row_major": [
+            74
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:ca9c5207e4e4202ea32bd39636020e8f898783d03802fb3507efb816d2e525a3",
+          "source_ref": "inputs/component-pointsets/components-008.json.gz",
+          "block_indices_row_major": [
+            310
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        }
+      ],
+      "unique_block_count": 3,
+      "block_indices_row_major": [
+        73,
+        74,
+        310
+      ],
+      "encoded_base_block_bytes": 6941,
+      "decoded_full_block_upper_bound_bytes": 786432,
+      "conditional_range_windows_inclusive": [
+        [
+          6012317,
+          6015314
+        ],
+        [
+          6015323,
+          6015389
+        ],
+        [
+          7069123,
+          7072998
+        ]
+      ],
+      "conditional_range_window_count": 3,
+      "complete_source_files": [
+        {
+          "path": "inputs/component-pointsets/components-000.json.gz",
+          "bytes": 2080037,
+          "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411"
+        },
+        {
+          "path": "inputs/component-pointsets/components-001.json.gz",
+          "bytes": 2081609,
+          "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b"
+        },
+        {
+          "path": "inputs/component-pointsets/components-008.json.gz",
+          "bytes": 2085110,
+          "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156"
+        }
+      ],
+      "referenced_complete_source_bytes": 6246756
+    },
+    {
+      "cohort_id": "contact-60E_40N-01",
+      "subject_type": "contact",
+      "tile": "60E_40N",
+      "max_unique_blocks": 64,
+      "member_count": 5,
+      "members": [
+        {
+          "id": "gb:KGZ:ADM2:92254566B28866404519709",
+          "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            309,
+            310,
+            311,
+            312,
+            313,
+            314,
+            315
+          ],
+          "block_count": 28,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B17537121350265",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            72,
+            73
+          ],
+          "block_count": 2,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B25952413622692",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            73,
+            74
+          ],
+          "block_count": 2,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B4928854450407",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            309,
+            310,
+            311,
+            312,
+            313,
+            314,
+            315,
+            387,
+            388,
+            389,
+            390,
+            391,
+            392,
+            393,
+            394,
+            466,
+            467,
+            468,
+            469,
+            470,
+            471,
+            472,
+            473,
+            549
+          ],
+          "block_count": 24,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B70669453487294",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            70,
+            71,
+            72,
+            73,
+            148,
+            149,
+            150,
+            151,
+            227,
+            228,
+            229,
+            230,
+            231,
+            305,
+            306,
+            307,
+            308,
+            309,
+            310,
+            384,
+            385,
+            386,
+            387,
+            388
+          ],
+          "block_count": 24,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        }
+      ],
+      "unique_block_count": 60,
+      "block_indices_row_major": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        549
+      ],
+      "encoded_base_block_bytes": 94995,
+      "decoded_full_block_upper_bound_bytes": 15728640,
+      "conditional_range_windows_inclusive": [
+        [
+          6010002,
+          6010057
+        ],
+        [
+          6010066,
+          6011776
+        ],
+        [
+          6011785,
+          6012308
+        ],
+        [
+          6012317,
+          6015314
+        ],
+        [
+          6015323,
+          6015389
+        ],
+        [
+          6015398,
+          6015663
+        ],
+        [
+          6015672,
+          6016176
+        ],
+        [
+          6016185,
+          6017379
+        ],
+        [
+          6017388,
+          6017412
+        ],
+        [
+          6447753,
+          6447833
+        ],
+        [
+          6447842,
+          6450682
+        ],
+        [
+          6450691,
+          6450799
+        ],
+        [
+          6450808,
+          6454181
+        ],
+        [
+          6454190,
+          6454328
+        ],
+        [
+          6454337,
+          6454449
+        ],
+        [
+          6454458,
+          6454482
+        ],
+        [
+          6454491,
+          6455148
+        ],
+        [
+          6455157,
+          6455472
+        ],
+        [
+          6455481,
+          6455505
+        ],
+        [
+          6768992,
+          6769034
+        ],
+        [
+          6769043,
+          6769067
+        ],
+        [
+          6769076,
+          6769652
+        ],
+        [
+          6769661,
+          6771338
+        ],
+        [
+          6771347,
+          6771805
+        ],
+        [
+          6771814,
+          6772328
+        ],
+        [
+          6772337,
+          6773547
+        ],
+        [
+          6773556,
+          6774196
+        ],
+        [
+          6774205,
+          6776009
+        ],
+        [
+          6776018,
+          6776159
+        ],
+        [
+          7064524,
+          7064776
+        ],
+        [
+          7064785,
+          7064983
+        ],
+        [
+          7064992,
+          7065429
+        ],
+        [
+          7065438,
+          7067524
+        ],
+        [
+          7067533,
+          7069114
+        ],
+        [
+          7069123,
+          7072998
+        ],
+        [
+          7073007,
+          7077157
+        ],
+        [
+          7077166,
+          7079483
+        ],
+        [
+          7079492,
+          7081319
+        ],
+        [
+          7081328,
+          7084871
+        ],
+        [
+          7084880,
+          7085045
+        ],
+        [
+          7433959,
+          7436262
+        ],
+        [
+          7436271,
+          7438381
+        ],
+        [
+          7438390,
+          7440335
+        ],
+        [
+          7440344,
+          7442052
+        ],
+        [
+          7442061,
+          7444068
+        ],
+        [
+          7444077,
+          7448388
+        ],
+        [
+          7448397,
+          7454702
+        ],
+        [
+          7454711,
+          7460797
+        ],
+        [
+          7460806,
+          7468468
+        ],
+        [
+          7468477,
+          7476739
+        ],
+        [
+          7476748,
+          7477669
+        ],
+        [
+          7885532,
+          7886005
+        ],
+        [
+          7886014,
+          7887474
+        ],
+        [
+          7887483,
+          7888339
+        ],
+        [
+          7888348,
+          7889697
+        ],
+        [
+          7889706,
+          7890954
+        ],
+        [
+          7890963,
+          7892468
+        ],
+        [
+          7892477,
+          7893972
+        ],
+        [
+          7893981,
+          7894133
+        ],
+        [
+          8315824,
+          8316075
+        ]
+      ],
+      "conditional_range_window_count": 60,
+      "complete_source_files": [
+        {
+          "path": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "bytes": 107705,
+          "sha256": "2cc773a83be00a215dcf3c5a02acc98f86b217e391212e85693e58ae6afc8586"
+        },
+        {
+          "path": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "bytes": 78012,
+          "sha256": "38a2cd94e84637ef2c726c36b21df2c9467b73aeffdbee765fab40224f8789f0"
+        }
+      ],
+      "referenced_complete_source_bytes": 185717
+    },
+    {
+      "cohort_id": "candidate-70E_40N-01",
+      "subject_type": "candidate",
+      "tile": "70E_40N",
+      "max_unique_blocks": 64,
+      "member_count": 9,
+      "members": [
+        {
+          "id": "physical-component:0b1a9310b0717d791b33e315035e22e83362b4b461283df57e6267d3d1d6c015",
+          "source_ref": "inputs/component-pointsets/components-000.json.gz",
+          "block_indices_row_major": [
+            491
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:65911e15791d12ebb2ccacf5"
+        },
+        {
+          "id": "physical-component:1d82eb920d887e65e0b7feace4b6ce606ba72f0dd4b64d8872bc6ff17594c52c",
+          "source_ref": "inputs/component-pointsets/components-001.json.gz",
+          "block_indices_row_major": [
+            162,
+            241
+          ],
+          "block_count": 2,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:658f2e100dd572e26c264f47481759420a413e73978799a8792e203637b3854b",
+          "source_ref": "inputs/component-pointsets/components-004.json.gz",
+          "block_indices_row_major": [
+            411
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:65911e15791d12ebb2ccacf5"
+        },
+        {
+          "id": "physical-component:7450c83fcd14661b0c9115f0075f703ac96c64ea65ec0caa86702a1ef00db81e",
+          "source_ref": "inputs/component-pointsets/components-004.json.gz",
+          "block_indices_row_major": [
+            237
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:804dfb19fcd6f3fc68de442ae08f4ca553de8687df65d70b72dc1a3fae258eb9",
+          "source_ref": "inputs/component-pointsets/components-005.json.gz",
+          "block_indices_row_major": [
+            242
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:a133c2293fb153cd6628eb43b7518e55ea7db7f6c7f74178b854fd9641be86c5",
+          "source_ref": "inputs/component-pointsets/components-006.json.gz",
+          "block_indices_row_major": [
+            237,
+            238
+          ],
+          "block_count": 2,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:bee4ff4185a3775db6d8c51fdc2da0b0674b7629615933378147c6d0b4e778d4",
+          "source_ref": "inputs/component-pointsets/components-008.json.gz",
+          "block_indices_row_major": [
+            4
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:d461dff8a46f322a5c4d5aa7c7ddaaaee64f4c205227d09feeb3b93420f33fa8",
+          "source_ref": "inputs/component-pointsets/components-008.json.gz",
+          "block_indices_row_major": [
+            240
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        },
+        {
+          "id": "physical-component:d76b0c2c3c68c11f128e13ad2a3528ae9bd624dedaed581e305431462cbfe7f9",
+          "source_ref": "inputs/component-pointsets/components-009.json.gz",
+          "block_indices_row_major": [
+            328,
+            329
+          ],
+          "block_count": 2,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:65911e15791d12ebb2ccacf5"
+        }
+      ],
+      "unique_block_count": 11,
+      "block_indices_row_major": [
+        4,
+        162,
+        237,
+        238,
+        240,
+        241,
+        242,
+        328,
+        329,
+        411,
+        491
+      ],
+      "encoded_base_block_bytes": 55821,
+      "decoded_full_block_upper_bound_bytes": 2883584,
+      "conditional_range_windows_inclusive": [
+        [
+          8511035,
+          8512383
+        ],
+        [
+          9007756,
+          9008574
+        ],
+        [
+          9504248,
+          9507006
+        ],
+        [
+          9507015,
+          9514099
+        ],
+        [
+          9517631,
+          9521594
+        ],
+        [
+          9521603,
+          9523932
+        ],
+        [
+          9523941,
+          9525266
+        ],
+        [
+          10032764,
+          10033955
+        ],
+        [
+          10033964,
+          10036418
+        ],
+        [
+          10437186,
+          10438198
+        ],
+        [
+          10807998,
+          10839526
+        ]
+      ],
+      "conditional_range_window_count": 11,
+      "complete_source_files": [
+        {
+          "path": "inputs/component-pointsets/components-000.json.gz",
+          "bytes": 2080037,
+          "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411"
+        },
+        {
+          "path": "inputs/component-pointsets/components-001.json.gz",
+          "bytes": 2081609,
+          "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b"
+        },
+        {
+          "path": "inputs/component-pointsets/components-004.json.gz",
+          "bytes": 2074475,
+          "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014"
+        },
+        {
+          "path": "inputs/component-pointsets/components-005.json.gz",
+          "bytes": 2080606,
+          "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf"
+        },
+        {
+          "path": "inputs/component-pointsets/components-006.json.gz",
+          "bytes": 2085907,
+          "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187"
+        },
+        {
+          "path": "inputs/component-pointsets/components-008.json.gz",
+          "bytes": 2085110,
+          "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156"
+        },
+        {
+          "path": "inputs/component-pointsets/components-009.json.gz",
+          "bytes": 2079838,
+          "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f"
+        }
+      ],
+      "referenced_complete_source_bytes": 14567582
+    },
+    {
+      "cohort_id": "contact-70E_40N-01",
+      "subject_type": "contact",
+      "tile": "70E_40N",
+      "max_unique_blocks": 64,
+      "member_count": 2,
+      "members": [
+        {
+          "id": "gb:KGZ:ADM2:92254566B28866404519709",
+          "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            0,
+            79,
+            80,
+            158,
+            237
+          ],
+          "block_count": 5,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:KGZ:ADM2:92254566B65149347501284",
+          "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            321,
+            322,
+            323,
+            324
+          ],
+          "block_count": 50,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        }
+      ],
+      "unique_block_count": 50,
+      "block_indices_row_major": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        321,
+        322,
+        323,
+        324
+      ],
+      "encoded_base_block_bytes": 93225,
+      "decoded_full_block_upper_bound_bytes": 13107200,
+      "conditional_range_windows_inclusive": [
+        [
+          8509420,
+          8509486
+        ],
+        [
+          8509495,
+          8509519
+        ],
+        [
+          8509528,
+          8509793
+        ],
+        [
+          8509802,
+          8511026
+        ],
+        [
+          8511035,
+          8512383
+        ],
+        [
+          8512392,
+          8517256
+        ],
+        [
+          8517265,
+          8517295
+        ],
+        [
+          8517304,
+          8517328
+        ],
+        [
+          8517337,
+          8520315
+        ],
+        [
+          8520324,
+          8520925
+        ],
+        [
+          8608638,
+          8608971
+        ],
+        [
+          8608980,
+          8609175
+        ],
+        [
+          8609184,
+          8610025
+        ],
+        [
+          8610034,
+          8610838
+        ],
+        [
+          8610847,
+          8611687
+        ],
+        [
+          8611696,
+          8612073
+        ],
+        [
+          8612082,
+          8612262
+        ],
+        [
+          8612271,
+          8613134
+        ],
+        [
+          8613143,
+          8615337
+        ],
+        [
+          8615346,
+          8615574
+        ],
+        [
+          8615583,
+          8615937
+        ],
+        [
+          9003984,
+          9004495
+        ],
+        [
+          9004504,
+          9005065
+        ],
+        [
+          9005074,
+          9006544
+        ],
+        [
+          9006553,
+          9007747
+        ],
+        [
+          9007756,
+          9008574
+        ],
+        [
+          9008583,
+          9009536
+        ],
+        [
+          9009545,
+          9010225
+        ],
+        [
+          9010234,
+          9012670
+        ],
+        [
+          9012679,
+          9015514
+        ],
+        [
+          9015523,
+          9018476
+        ],
+        [
+          9018485,
+          9020015
+        ],
+        [
+          9020024,
+          9021461
+        ],
+        [
+          9021470,
+          9022041
+        ],
+        [
+          9504248,
+          9507006
+        ],
+        [
+          9507015,
+          9514099
+        ],
+        [
+          9514108,
+          9517622
+        ],
+        [
+          9517631,
+          9521594
+        ],
+        [
+          9521603,
+          9523932
+        ],
+        [
+          9523941,
+          9525266
+        ],
+        [
+          9525275,
+          9531070
+        ],
+        [
+          9531079,
+          9539065
+        ],
+        [
+          9539074,
+          9544155
+        ],
+        [
+          9544164,
+          9546922
+        ],
+        [
+          9546931,
+          9549031
+        ],
+        [
+          9549040,
+          9549667
+        ],
+        [
+          10017905,
+          10018711
+        ],
+        [
+          10018720,
+          10020970
+        ],
+        [
+          10020979,
+          10023980
+        ],
+        [
+          10023989,
+          10029205
+        ]
+      ],
+      "conditional_range_window_count": 50,
+      "complete_source_files": [
+        {
+          "path": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "bytes": 107705,
+          "sha256": "2cc773a83be00a215dcf3c5a02acc98f86b217e391212e85693e58ae6afc8586"
+        }
+      ],
+      "referenced_complete_source_bytes": 107705
+    },
+    {
+      "cohort_id": "contact-70E_40N-02",
+      "subject_type": "contact",
+      "tile": "70E_40N",
+      "max_unique_blocks": 64,
+      "member_count": 2,
+      "members": [
+        {
+          "id": "gb:KGZ:ADM2:92254566B65536554507768",
+          "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            91,
+            92,
+            93,
+            98,
+            99,
+            100,
+            101,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            328,
+            329,
+            330,
+            331,
+            332,
+            333,
+            334,
+            335,
+            336,
+            337,
+            338,
+            408,
+            409,
+            410,
+            411,
+            412,
+            413,
+            414,
+            415,
+            416,
+            417,
+            491
+          ],
+          "block_count": 53,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B48594859138803",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            3,
+            4,
+            5,
+            83,
+            84
+          ],
+          "block_count": 5,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        }
+      ],
+      "unique_block_count": 58,
+      "block_indices_row_major": [
+        3,
+        4,
+        5,
+        83,
+        84,
+        91,
+        92,
+        93,
+        98,
+        99,
+        100,
+        101,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        491
+      ],
+      "encoded_base_block_bytes": 122477,
+      "decoded_full_block_upper_bound_bytes": 15204352,
+      "conditional_range_windows_inclusive": [
+        [
+          8509802,
+          8511026
+        ],
+        [
+          8511035,
+          8512383
+        ],
+        [
+          8512392,
+          8517256
+        ],
+        [
+          8610847,
+          8611687
+        ],
+        [
+          8611696,
+          8612073
+        ],
+        [
+          8616186,
+          8616604
+        ],
+        [
+          8616613,
+          8617417
+        ],
+        [
+          8617426,
+          8618376
+        ],
+        [
+          8628049,
+          8630085
+        ],
+        [
+          8630094,
+          8630977
+        ],
+        [
+          8630986,
+          8632211
+        ],
+        [
+          8632220,
+          8632829
+        ],
+        [
+          9020024,
+          9021461
+        ],
+        [
+          9021470,
+          9022041
+        ],
+        [
+          9022050,
+          9022360
+        ],
+        [
+          9022369,
+          9023090
+        ],
+        [
+          9023099,
+          9023867
+        ],
+        [
+          9023876,
+          9024277
+        ],
+        [
+          9024286,
+          9025074
+        ],
+        [
+          9025083,
+          9025304
+        ],
+        [
+          9025313,
+          9025582
+        ],
+        [
+          9025591,
+          9027018
+        ],
+        [
+          9027027,
+          9032403
+        ],
+        [
+          9032412,
+          9037024
+        ],
+        [
+          9549040,
+          9549667
+        ],
+        [
+          9549676,
+          9549902
+        ],
+        [
+          9549911,
+          9550108
+        ],
+        [
+          9550117,
+          9550253
+        ],
+        [
+          9550262,
+          9553944
+        ],
+        [
+          9553953,
+          9560718
+        ],
+        [
+          9560727,
+          9566977
+        ],
+        [
+          9566986,
+          9571800
+        ],
+        [
+          9571809,
+          9575047
+        ],
+        [
+          9575056,
+          9576509
+        ],
+        [
+          9576518,
+          9576567
+        ],
+        [
+          9576576,
+          9577824
+        ],
+        [
+          10032764,
+          10033955
+        ],
+        [
+          10033964,
+          10036418
+        ],
+        [
+          10036427,
+          10044951
+        ],
+        [
+          10044960,
+          10048026
+        ],
+        [
+          10048035,
+          10048523
+        ],
+        [
+          10048532,
+          10050387
+        ],
+        [
+          10050396,
+          10050493
+        ],
+        [
+          10050502,
+          10050904
+        ],
+        [
+          10050913,
+          10051090
+        ],
+        [
+          10051099,
+          10051870
+        ],
+        [
+          10051879,
+          10052604
+        ],
+        [
+          10436179,
+          10436276
+        ],
+        [
+          10436285,
+          10436643
+        ],
+        [
+          10436652,
+          10437177
+        ],
+        [
+          10437186,
+          10438198
+        ],
+        [
+          10438207,
+          10438934
+        ],
+        [
+          10438943,
+          10440591
+        ],
+        [
+          10440600,
+          10443199
+        ],
+        [
+          10443208,
+          10444342
+        ],
+        [
+          10444351,
+          10445419
+        ],
+        [
+          10445428,
+          10446237
+        ],
+        [
+          10807998,
+          10839526
+        ]
+      ],
+      "conditional_range_window_count": 58,
+      "complete_source_files": [
+        {
+          "path": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "bytes": 107705,
+          "sha256": "2cc773a83be00a215dcf3c5a02acc98f86b217e391212e85693e58ae6afc8586"
+        },
+        {
+          "path": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "bytes": 78012,
+          "sha256": "38a2cd94e84637ef2c726c36b21df2c9467b73aeffdbee765fab40224f8789f0"
+        }
+      ],
+      "referenced_complete_source_bytes": 185717
+    },
+    {
+      "cohort_id": "contact-70E_40N-03",
+      "subject_type": "contact",
+      "tile": "70E_40N",
+      "max_unique_blocks": 64,
+      "member_count": 2,
+      "members": [
+        {
+          "id": "gb:TJK:ADM2:16282066B4928854450407",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            162,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            316,
+            317,
+            318,
+            319,
+            320,
+            321,
+            395,
+            396
+          ],
+          "block_count": 15,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B88100265425771",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            245,
+            246,
+            247,
+            248,
+            249,
+            324,
+            325,
+            326,
+            327,
+            328,
+            329,
+            330,
+            331,
+            332,
+            403,
+            404,
+            405,
+            406,
+            407,
+            408,
+            409,
+            410,
+            411,
+            412,
+            481,
+            482,
+            483,
+            484,
+            485,
+            486,
+            487,
+            488,
+            489,
+            490,
+            491,
+            562,
+            563,
+            564,
+            565,
+            566,
+            567,
+            568,
+            569,
+            644,
+            645,
+            646,
+            647,
+            648
+          ],
+          "block_count": 48,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        }
+      ],
+      "unique_block_count": 63,
+      "block_indices_row_major": [
+        162,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        245,
+        246,
+        247,
+        248,
+        249,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        395,
+        396,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        644,
+        645,
+        646,
+        647,
+        648
+      ],
+      "encoded_base_block_bytes": 248166,
+      "decoded_full_block_upper_bound_bytes": 16515072,
+      "conditional_range_windows_inclusive": [
+        [
+          9007756,
+          9008574
+        ],
+        [
+          9504248,
+          9507006
+        ],
+        [
+          9507015,
+          9514099
+        ],
+        [
+          9514108,
+          9517622
+        ],
+        [
+          9517631,
+          9521594
+        ],
+        [
+          9521603,
+          9523932
+        ],
+        [
+          9523941,
+          9525266
+        ],
+        [
+          9539074,
+          9544155
+        ],
+        [
+          9544164,
+          9546922
+        ],
+        [
+          9546931,
+          9549031
+        ],
+        [
+          9549040,
+          9549667
+        ],
+        [
+          9549676,
+          9549902
+        ],
+        [
+          9989026,
+          9994487
+        ],
+        [
+          9994496,
+          10001748
+        ],
+        [
+          10001757,
+          10010365
+        ],
+        [
+          10010374,
+          10016169
+        ],
+        [
+          10016178,
+          10017896
+        ],
+        [
+          10017905,
+          10018711
+        ],
+        [
+          10023989,
+          10029205
+        ],
+        [
+          10029214,
+          10030839
+        ],
+        [
+          10030848,
+          10031311
+        ],
+        [
+          10031320,
+          10032755
+        ],
+        [
+          10032764,
+          10033955
+        ],
+        [
+          10033964,
+          10036418
+        ],
+        [
+          10036427,
+          10044951
+        ],
+        [
+          10044960,
+          10048026
+        ],
+        [
+          10048035,
+          10048523
+        ],
+        [
+          10406784,
+          10407485
+        ],
+        [
+          10407494,
+          10408491
+        ],
+        [
+          10414128,
+          10415005
+        ],
+        [
+          10415014,
+          10419271
+        ],
+        [
+          10419280,
+          10426232
+        ],
+        [
+          10426241,
+          10435201
+        ],
+        [
+          10435210,
+          10436170
+        ],
+        [
+          10436179,
+          10436276
+        ],
+        [
+          10436285,
+          10436643
+        ],
+        [
+          10436652,
+          10437177
+        ],
+        [
+          10437186,
+          10438198
+        ],
+        [
+          10438207,
+          10438934
+        ],
+        [
+          10734387,
+          10746646
+        ],
+        [
+          10746655,
+          10764235
+        ],
+        [
+          10764244,
+          10777038
+        ],
+        [
+          10777047,
+          10783049
+        ],
+        [
+          10783058,
+          10787106
+        ],
+        [
+          10787115,
+          10790305
+        ],
+        [
+          10790314,
+          10792837
+        ],
+        [
+          10792846,
+          10795765
+        ],
+        [
+          10795774,
+          10800459
+        ],
+        [
+          10800468,
+          10807989
+        ],
+        [
+          10807998,
+          10839526
+        ],
+        [
+          11296197,
+          11298182
+        ],
+        [
+          11298191,
+          11299093
+        ],
+        [
+          11299102,
+          11299659
+        ],
+        [
+          11299668,
+          11299964
+        ],
+        [
+          11299973,
+          11301199
+        ],
+        [
+          11301208,
+          11301697
+        ],
+        [
+          11301706,
+          11302962
+        ],
+        [
+          11302971,
+          11305067
+        ],
+        [
+          11699656,
+          11710219
+        ],
+        [
+          11710228,
+          11712672
+        ],
+        [
+          11712681,
+          11713202
+        ],
+        [
+          11713211,
+          11715558
+        ],
+        [
+          11715567,
+          11720831
+        ]
+      ],
+      "conditional_range_window_count": 63,
+      "complete_source_files": [
+        {
+          "path": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "bytes": 78012,
+          "sha256": "38a2cd94e84637ef2c726c36b21df2c9467b73aeffdbee765fab40224f8789f0"
+        }
+      ],
+      "referenced_complete_source_bytes": 78012
+    },
+    {
+      "cohort_id": "candidate-60E_50N-01",
+      "subject_type": "candidate",
+      "tile": "60E_50N",
+      "max_unique_blocks": 64,
+      "member_count": 1,
+      "members": [
+        {
+          "id": "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276",
+          "source_ref": "inputs/component-pointsets/components-001.json.gz",
+          "block_indices_row_major": [
+            6156,
+            6235
+          ],
+          "block_count": 2,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        }
+      ],
+      "unique_block_count": 2,
+      "block_indices_row_major": [
+        6156,
+        6235
+      ],
+      "encoded_base_block_bytes": 5016,
+      "decoded_full_block_upper_bound_bytes": 524288,
+      "conditional_range_windows_inclusive": [
+        [
+          63231548,
+          63235788
+        ],
+        [
+          63276219,
+          63276993
+        ]
+      ],
+      "conditional_range_window_count": 2,
+      "complete_source_files": [
+        {
+          "path": "inputs/component-pointsets/components-001.json.gz",
+          "bytes": 2081609,
+          "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b"
+        }
+      ],
+      "referenced_complete_source_bytes": 2081609
+    },
+    {
+      "cohort_id": "contact-60E_50N-01",
+      "subject_type": "contact",
+      "tile": "60E_50N",
+      "max_unique_blocks": 64,
+      "member_count": 4,
+      "members": [
+        {
+          "id": "gb:KGZ:ADM2:92254566B28866404519709",
+          "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            6079,
+            6080,
+            6081,
+            6082,
+            6156,
+            6157,
+            6158,
+            6159,
+            6160,
+            6161,
+            6235,
+            6236,
+            6237,
+            6238,
+            6239,
+            6240
+          ],
+          "block_count": 16,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B17537121350265",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            5997,
+            5998,
+            6075,
+            6076,
+            6077,
+            6154,
+            6155,
+            6156,
+            6234,
+            6235
+          ],
+          "block_count": 10,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B25952413622692",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            6077,
+            6078,
+            6079,
+            6156,
+            6157,
+            6235,
+            6236
+          ],
+          "block_count": 7,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B70669453487294",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            6153,
+            6154,
+            6155,
+            6232,
+            6233,
+            6234
+          ],
+          "block_count": 6,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        }
+      ],
+      "unique_block_count": 28,
+      "block_indices_row_major": [
+        5997,
+        5998,
+        6075,
+        6076,
+        6077,
+        6078,
+        6079,
+        6080,
+        6081,
+        6082,
+        6153,
+        6154,
+        6155,
+        6156,
+        6157,
+        6158,
+        6159,
+        6160,
+        6161,
+        6232,
+        6233,
+        6234,
+        6235,
+        6236,
+        6237,
+        6238,
+        6239,
+        6240
+      ],
+      "encoded_base_block_bytes": 146397,
+      "decoded_full_block_upper_bound_bytes": 7340032,
+      "conditional_range_windows_inclusive": [
+        [
+          62683356,
+          62686305
+        ],
+        [
+          62686314,
+          62686550
+        ],
+        [
+          62896891,
+          62908016
+        ],
+        [
+          62908025,
+          62929076
+        ],
+        [
+          62929085,
+          62961419
+        ],
+        [
+          62961428,
+          62988603
+        ],
+        [
+          62988612,
+          62994843
+        ],
+        [
+          62994852,
+          63008771
+        ],
+        [
+          63008780,
+          63025236
+        ],
+        [
+          63025245,
+          63026836
+        ],
+        [
+          63225513,
+          63225550
+        ],
+        [
+          63225559,
+          63225618
+        ],
+        [
+          63225627,
+          63231539
+        ],
+        [
+          63231548,
+          63235788
+        ],
+        [
+          63235797,
+          63235966
+        ],
+        [
+          63235975,
+          63236838
+        ],
+        [
+          63236847,
+          63237710
+        ],
+        [
+          63237719,
+          63237743
+        ],
+        [
+          63237752,
+          63237776
+        ],
+        [
+          63276120,
+          63276144
+        ],
+        [
+          63276153,
+          63276177
+        ],
+        [
+          63276186,
+          63276210
+        ],
+        [
+          63276219,
+          63276993
+        ],
+        [
+          63277002,
+          63277026
+        ],
+        [
+          63277035,
+          63277059
+        ],
+        [
+          63277068,
+          63277237
+        ],
+        [
+          63277246,
+          63277270
+        ],
+        [
+          63277279,
+          63277303
+        ]
+      ],
+      "conditional_range_window_count": 28,
+      "complete_source_files": [
+        {
+          "path": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "bytes": 107705,
+          "sha256": "2cc773a83be00a215dcf3c5a02acc98f86b217e391212e85693e58ae6afc8586"
+        },
+        {
+          "path": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "bytes": 78012,
+          "sha256": "38a2cd94e84637ef2c726c36b21df2c9467b73aeffdbee765fab40224f8789f0"
+        }
+      ],
+      "referenced_complete_source_bytes": 185717
+    },
+    {
+      "cohort_id": "candidate-70E_50N-01",
+      "subject_type": "candidate",
+      "tile": "70E_50N",
+      "max_unique_blocks": 64,
+      "member_count": 1,
+      "members": [
+        {
+          "id": "physical-component:0467413184087c1282e0b20ec7252d8dfe7e393e674b1902f9d2f8e5f10eeadd",
+          "source_ref": "inputs/component-pointsets/components-000.json.gz",
+          "block_indices_row_major": [
+            6087
+          ],
+          "block_count": 1,
+          "status_snapshot": {
+            "water_status": "unverified",
+            "administrative_assignment": null,
+            "cause_status": "unknown",
+            "physical_authority": "unapproved",
+            "source_fitness": "unapproved-for-all-components"
+          },
+          "family_id": "gap-source-batch:74be953b1fb31c15200742da"
+        }
+      ],
+      "unique_block_count": 1,
+      "block_indices_row_major": [
+        6087
+      ],
+      "encoded_base_block_bytes": 599,
+      "decoded_full_block_upper_bound_bytes": 262144,
+      "conditional_range_windows_inclusive": [
+        [
+          38387925,
+          38388523
+        ]
+      ],
+      "conditional_range_window_count": 1,
+      "complete_source_files": [
+        {
+          "path": "inputs/component-pointsets/components-000.json.gz",
+          "bytes": 2080037,
+          "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411"
+        }
+      ],
+      "referenced_complete_source_bytes": 2080037
+    },
+    {
+      "cohort_id": "contact-70E_50N-01",
+      "subject_type": "contact",
+      "tile": "70E_50N",
+      "max_unique_blocks": 64,
+      "member_count": 3,
+      "members": [
+        {
+          "id": "gb:KGZ:ADM2:92254566B28866404519709",
+          "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            6004,
+            6005,
+            6083,
+            6084,
+            6085,
+            6162
+          ],
+          "block_count": 6,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:KGZ:ADM2:92254566B65149347501284",
+          "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            5932,
+            5933,
+            6010,
+            6011,
+            6012,
+            6083,
+            6084,
+            6085,
+            6086,
+            6087,
+            6088,
+            6089,
+            6090,
+            6091,
+            6162,
+            6163,
+            6164,
+            6165,
+            6166,
+            6167,
+            6168,
+            6169,
+            6170
+          ],
+          "block_count": 23,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        },
+        {
+          "id": "gb:TJK:ADM2:16282066B48594859138803",
+          "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "block_indices_row_major": [
+            5929,
+            6006,
+            6007,
+            6008,
+            6009,
+            6010,
+            6011,
+            6085,
+            6086,
+            6087,
+            6088,
+            6089,
+            6166,
+            6167
+          ],
+          "block_count": 14,
+          "status_snapshot": {
+            "role": "administrative contact context only",
+            "physical_class": "unknown",
+            "rights_or_ownership": "unknown"
+          }
+        }
+      ],
+      "unique_block_count": 30,
+      "block_indices_row_major": [
+        5929,
+        5932,
+        5933,
+        6004,
+        6005,
+        6006,
+        6007,
+        6008,
+        6009,
+        6010,
+        6011,
+        6012,
+        6083,
+        6084,
+        6085,
+        6086,
+        6087,
+        6088,
+        6089,
+        6090,
+        6091,
+        6162,
+        6163,
+        6164,
+        6165,
+        6166,
+        6167,
+        6168,
+        6169,
+        6170
+      ],
+      "encoded_base_block_bytes": 81933,
+      "decoded_full_block_upper_bound_bytes": 7864320,
+      "conditional_range_windows_inclusive": [
+        [
+          38150720,
+          38151811
+        ],
+        [
+          38180109,
+          38211457
+        ],
+        [
+          38211466,
+          38225607
+        ],
+        [
+          38310763,
+          38319411
+        ],
+        [
+          38319420,
+          38326958
+        ],
+        [
+          38326967,
+          38327024
+        ],
+        [
+          38327033,
+          38327090
+        ],
+        [
+          38327099,
+          38327711
+        ],
+        [
+          38327720,
+          38327744
+        ],
+        [
+          38327753,
+          38328254
+        ],
+        [
+          38328263,
+          38328475
+        ],
+        [
+          38328484,
+          38337534
+        ],
+        [
+          38387591,
+          38387615
+        ],
+        [
+          38387624,
+          38387822
+        ],
+        [
+          38387831,
+          38387883
+        ],
+        [
+          38387892,
+          38387916
+        ],
+        [
+          38387925,
+          38388523
+        ],
+        [
+          38388532,
+          38388598
+        ],
+        [
+          38388607,
+          38388721
+        ],
+        [
+          38388730,
+          38388754
+        ],
+        [
+          38388763,
+          38393760
+        ],
+        [
+          38504787,
+          38504844
+        ],
+        [
+          38504853,
+          38504894
+        ],
+        [
+          38504903,
+          38504927
+        ],
+        [
+          38504936,
+          38504960
+        ],
+        [
+          38504969,
+          38505214
+        ],
+        [
+          38505223,
+          38505881
+        ],
+        [
+          38505890,
+          38505945
+        ],
+        [
+          38505954,
+          38505984
+        ],
+        [
+          38505993,
+          38507386
+        ]
+      ],
+      "conditional_range_window_count": 30,
+      "complete_source_files": [
+        {
+          "path": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+          "bytes": 107705,
+          "sha256": "2cc773a83be00a215dcf3c5a02acc98f86b217e391212e85693e58ae6afc8586"
+        },
+        {
+          "path": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+          "bytes": 78012,
+          "sha256": "38a2cd94e84637ef2c726c36b21df2c9467b73aeffdbee765fab40224f8789f0"
+        }
+      ],
+      "referenced_complete_source_bytes": 185717
+    }
+  ],
+  "coverage": {
+    "all_15_candidate_ids_present": true,
+    "all_9_contact_ids_present": true,
+    "candidate_unique_count": 15,
+    "contact_unique_count": 9,
+    "candidate_tile_memberships": 16,
+    "contact_tile_memberships": 18
+  },
+  "block_work_totals": {
+    "deduplicated_tile_union_blocks": 256,
+    "sum_of_per_cohort_unique_block_memberships": 306,
+    "repeated_block_memberships_across_cohorts": 50,
+    "sum_of_cohort_encoded_bytes": 855570,
+    "sum_of_cohort_decoded_upper_bound_bytes": 80216064,
+    "candidate_unique_blocks": 17,
+    "contact_unique_blocks": 256,
+    "candidate_blocks_without_contact_block_overlap": 0
+  },
+  "limits": [
+    "All original members and family unknowns are retained; each cohort references a whole source feature, and tile-specific support contains only exact intersected block indices.",
+    "The method uses vector-to-block geometry only. No TIFF block bytes were downloaded or decoded; no pixel values were classified.",
+    "Candidate/contact block overlap reflects shared grid cells only; it is not independent negative/control evidence.",
+    "Water presence/absence, physical class, effective date, boundary authority, rights/ownership, cause, registration accuracy, and source geometry accuracy remain unknown or unapproved."
+  ],
+  "source_files": [
+    {
+      "path": "inputs/component-pointsets/components-000.json.gz",
+      "bytes": 2080037,
+      "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411"
+    },
+    {
+      "path": "inputs/component-pointsets/components-001.json.gz",
+      "bytes": 2081609,
+      "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b"
+    },
+    {
+      "path": "inputs/component-pointsets/components-004.json.gz",
+      "bytes": 2074475,
+      "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014"
+    },
+    {
+      "path": "inputs/component-pointsets/components-005.json.gz",
+      "bytes": 2080606,
+      "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf"
+    },
+    {
+      "path": "inputs/component-pointsets/components-006.json.gz",
+      "bytes": 2085907,
+      "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187"
+    },
+    {
+      "path": "inputs/component-pointsets/components-008.json.gz",
+      "bytes": 2085110,
+      "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156"
+    },
+    {
+      "path": "inputs/component-pointsets/components-009.json.gz",
+      "bytes": 2079838,
+      "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f"
+    },
+    {
+      "path": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+      "bytes": 107705,
+      "sha256": "2cc773a83be00a215dcf3c5a02acc98f86b217e391212e85693e58ae6afc8586"
+    },
+    {
+      "path": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+      "bytes": 78012,
+      "sha256": "38a2cd94e84637ef2c726c36b21df2c9467b73aeffdbee765fab40224f8789f0"
+    }
+  ]
+}

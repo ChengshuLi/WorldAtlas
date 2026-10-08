@@ -102,6 +102,7 @@ def bootstrap(repo, commit, phase=None):
     modules = bootstrap_baseline.load_modules({
         "evidence.immutable": helper_path,
         "evidence.contracts": "scripts/evidence/contracts.py",
+        "jrc_support": config["code_files"]["jrc_support"],
     })
     evidence = modules["evidence.immutable"]
     baseline = evidence.Baseline(repo, commit, files)
@@ -377,7 +378,18 @@ def load_inputs(baseline, contract_helpers, config, *, require_custody=True,
     family_contacts = {x for row in families.values() for x in row["original_fine_family"]["contact_ids"]}
     if family_contacts != CONTACTS:
         raise ValueError("selected complete family contacts differ from exact issue scope")
-    return pins, context, pointsets_by_id, products, contact_features, catalogue, metadata, attribution
+    jrc_summary = modules_for_jrc(baseline, config, pointsets_by_id)
+    return pins, context, pointsets_by_id, products, contact_features, catalogue, metadata, attribution, jrc_summary
+
+
+def modules_for_jrc(baseline, config, pointsets_by_id):
+    """Load the pinned metadata-only JRC validator from this immutable baseline."""
+    path = config["code_files"]["jrc_support"]
+    raw = baseline.pinned_bytes(path)
+    namespace = {"__name__": "_pinned_jrc_support", "__file__": path}
+    exec(compile(raw, path, "exec"), namespace)
+    return namespace["load_and_validate"](baseline, config,
+                                           config["component_ids"], config["contact_ids"])
 
 
 def source_product_staged_descriptors(input_pins, catalogue):
@@ -529,7 +541,7 @@ def run(repo, commit, vintage, coordinated_window_id):
                               ["source-fitness.json", "run-summary.json"])
     shapely, shape, runtime_manifest, runtime_manifest_sha256 = load_spatial_runtime(baseline, config)
     loaded = load_inputs(baseline, contract_helpers, config)
-    pins, context, pointsets, products, contacts, catalogue, metadata, attribution = loaded
+    pins, context, pointsets, products, contacts, catalogue, metadata, attribution, jrc_summary = loaded
     admission = admit_run_capacity(repo, baseline, vintage, runtime_manifest,
                                    coordinated_window_id)
     component_geoms = {cid: shape(feature["geometry"]) for cid, feature in pointsets.items()}
@@ -584,6 +596,7 @@ def run(repo, commit, vintage, coordinated_window_id):
                   "contact_ids": sorted(CONTACTS), "operational_batch_families": 85,
                   "operational_batch_components": 441},
         "source_products": product_context,
+        "jrc_support": jrc_summary,
         "complete_contact_feature_sha256": {c: sha(canonical(f)) for c, f in sorted(contacts.items())},
         "complete_contact_features": contacts,
         "selected_family_rows": context["selected_families_source_rows"],
@@ -626,7 +639,8 @@ def run(repo, commit, vintage, coordinated_window_id):
         "run-summary.json": canonical({"status": "complete", "elapsed_seconds": elapsed,
             "max_rss_bytes": rss_bytes, "input_bytes": sum(baseline.consumed.values()),
             "row_count": len(rows), "intersecting_pair_count": result["intersecting_pair_count"],
-        "source_fitness_sha256": sha(canonical(result)),
+            "source_fitness_sha256": sha(canonical(result)),
+        "jrc_support": jrc_summary,
         "precalculation_admission": admission}),
     }
     if elapsed > MAX_SECONDS or rss_bytes > MAX_RSS_BYTES or sum(map(len, output_files.values())) > MAX_OUTPUT_BYTES:

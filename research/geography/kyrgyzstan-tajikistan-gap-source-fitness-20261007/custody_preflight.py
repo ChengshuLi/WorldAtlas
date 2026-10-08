@@ -234,7 +234,7 @@ def run(repo, commit, vintage):
     spatial_runtime, _, runtime_manifest, runtime_manifest_sha = producer.load_spatial_runtime(baseline, config)
     loaded = producer.load_inputs(baseline, helpers, config, require_custody=False,
                                   inventory_preverified=True)
-    pins, context, pointsets, products, contacts, catalogue, metadata, attribution = loaded
+    pins, context, pointsets, products, contacts, catalogue, metadata, attribution, jrc_summary = loaded
 
     if len(pointsets) != 15 or len(contacts) != 9:
         raise ValueError("Complete pointset/contact source scope differs from exact issue roster")
@@ -274,6 +274,7 @@ def run(repo, commit, vintage):
             "physical_record_count": len(context["physical_records"]),
             "contact_feature_count": len(contacts),
             "complete_source_feature_counts": product_counts,
+            "jrc_support": jrc_summary,
         },
         "runtime": {
             "captured_manifest_sha256": runtime_manifest_sha,

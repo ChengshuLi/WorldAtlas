@@ -95,7 +95,9 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
         raise ValueError("Positive control did not retain the expected exact source-product relation")
 
     (input_pins, context, pointsets_by_id, products, _, catalogue, metadata,
-     attribution) = producer.load_inputs(baseline, contract_helpers, config)
+     attribution, jrc_summary) = producer.load_inputs(baseline, contract_helpers, config)
+    if fitness.get("jrc_support") != jrc_summary:
+        raise ValueError("Positive control did not reproduce the pinned JRC support/cohort summary")
     actual_product_context = producer.output_product_context(
         baseline, products, catalogue, metadata, attribution, input_pins
     )
@@ -170,6 +172,13 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
             "source_fitness_sha256": producer.sha(fitness_raw),
         },
         "scope_component_count": len(component_ids),
+        "jrc_support_positive_control": {
+            "validated": True,
+            "exact_intersections_sha256": jrc_summary["exact_intersections_sha256"],
+            "bounded_cohorts_sha256": jrc_summary["bounded_cohorts_sha256"],
+            "cohort_count": jrc_summary["cohorts"],
+            "raster_pixel_values_read": jrc_summary["raster_pixel_values_read"],
+        },
         "positive_control": {
             "component_id": POSITIVE[0], "source_feature_id": POSITIVE[1],
             "intersects": positive_rows[0]["intersects"],

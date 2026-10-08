@@ -1,0 +1,1408 @@
+{
+  "contract_sha256": "2aa9ab4ea222fc7a00668e1306c9e4be15f15de943607979605d1d91068750b3",
+  "intersection_script_sha256": "7f3a9e9bf7e4d675163d98ce183089ab6ba2242d9ec516e6eef48a6e1d51c959",
+  "method": "Exact closed polygon/ring against closed 512x512 block-square intersection using rational pixel coordinates from full input decimals; includes boundary-only touches and hole boundaries; no clipping.",
+  "scope": {
+    "complete_candidate_pointsets": 15,
+    "complete_contact_features": 9,
+    "feature_count": 24
+  },
+  "input_gzip_sha256": {
+    "inputs/component-pointsets/components-000.json.gz": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+    "inputs/component-pointsets/components-001.json.gz": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+    "inputs/component-pointsets/components-004.json.gz": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+    "inputs/component-pointsets/components-005.json.gz": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+    "inputs/component-pointsets/components-006.json.gz": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+    "inputs/component-pointsets/components-008.json.gz": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+    "inputs/component-pointsets/components-009.json.gz": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+    "inputs/sources/gb-KGZ-ADM2-000.bin.gz": "2cc773a83be00a215dcf3c5a02acc98f86b217e391212e85693e58ae6afc8586",
+    "inputs/sources/gb-TJK-ADM2-000.bin.gz": "38a2cd94e84637ef2c726c36b21df2c9467b73aeffdbee765fab40224f8789f0"
+  },
+  "raster_grid": {
+    "crs": "EPSG:4326 / WGS84",
+    "pixel_area": true,
+    "pixel_scale_degrees": [
+      0.00025,
+      0.00025
+    ],
+    "dimensions": [
+      40000,
+      40000
+    ],
+    "sample": "UInt8",
+    "blocks": [
+      512,
+      512
+    ],
+    "tile_naming": "suffix is north edge"
+  },
+  "tiles": {
+    "60E_40N": {
+      "content_length_bytes": 20517553,
+      "etag": "cb0202baa8a76a36c9087be3047525ff-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:40:06Z",
+      "candidate_unique_exact_blocks": 3,
+      "contact_unique_exact_blocks": 60,
+      "union_unique_exact_blocks": 60,
+      "union_base_encoded_bytes": 94995,
+      "union_full_decoded_block_upper_bound_bytes": 15728640,
+      "union_row_major_block_indices": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        549
+      ],
+      "union_block_index_sha256": "841edf016569e8eae85f15924f39a0040556f9e87b6055aadc4c0e62d118855a"
+    },
+    "70E_40N": {
+      "content_length_bytes": 32461641,
+      "etag": "ca3a75120e8cb7367b90bb2ff6e15d33-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:41:04Z",
+      "candidate_unique_exact_blocks": 11,
+      "contact_unique_exact_blocks": 138,
+      "union_unique_exact_blocks": 138,
+      "union_base_encoded_bytes": 363972,
+      "union_full_decoded_block_upper_bound_bytes": 36175872,
+      "union_row_major_block_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        91,
+        92,
+        93,
+        98,
+        99,
+        100,
+        101,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        395,
+        396,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        644,
+        645,
+        646,
+        647,
+        648
+      ],
+      "union_block_index_sha256": "139e4013d855ce6ecffb962d94000b488717cc067017113e091436843dcf6445"
+    },
+    "60E_50N": {
+      "content_length_bytes": 63277308,
+      "etag": "f065d7a2ab19495f4d9467028be8abb0-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:40:25Z",
+      "candidate_unique_exact_blocks": 2,
+      "contact_unique_exact_blocks": 28,
+      "union_unique_exact_blocks": 28,
+      "union_base_encoded_bytes": 146397,
+      "union_full_decoded_block_upper_bound_bytes": 7340032,
+      "union_row_major_block_indices": [
+        5997,
+        5998,
+        6075,
+        6076,
+        6077,
+        6078,
+        6079,
+        6080,
+        6081,
+        6082,
+        6153,
+        6154,
+        6155,
+        6156,
+        6157,
+        6158,
+        6159,
+        6160,
+        6161,
+        6232,
+        6233,
+        6234,
+        6235,
+        6236,
+        6237,
+        6238,
+        6239,
+        6240
+      ],
+      "union_block_index_sha256": "8fb0ac9ad85c618e026b115a19f6e4ca181b6ade775c6a792d97f6b658105b32"
+    },
+    "70E_50N": {
+      "content_length_bytes": 38518800,
+      "etag": "46aab89d1ff3d3fca1d87edc691588f2-1",
+      "etag_is_sha256": false,
+      "last_modified": "2026-07-01T10:41:21Z",
+      "candidate_unique_exact_blocks": 1,
+      "contact_unique_exact_blocks": 30,
+      "union_unique_exact_blocks": 30,
+      "union_base_encoded_bytes": 81933,
+      "union_full_decoded_block_upper_bound_bytes": 7864320,
+      "union_row_major_block_indices": [
+        5929,
+        5932,
+        5933,
+        6004,
+        6005,
+        6006,
+        6007,
+        6008,
+        6009,
+        6010,
+        6011,
+        6012,
+        6083,
+        6084,
+        6085,
+        6086,
+        6087,
+        6088,
+        6089,
+        6090,
+        6091,
+        6162,
+        6163,
+        6164,
+        6165,
+        6166,
+        6167,
+        6168,
+        6169,
+        6170
+      ],
+      "union_block_index_sha256": "5a1daae5ee6e8431a3bd0c7a9d986beca8ba9c4a7edcfbc04e39d3983db9ca40"
+    }
+  },
+  "features": [
+    {
+      "kind": "candidate",
+      "id": "physical-component:04431dc98d19b4236a143d2c0bb388fed2e41d4768356cf5a74ae4b9194fd9bf",
+      "source_ref": "inputs/component-pointsets/components-000.json.gz",
+      "source_properties_id": "physical-component:04431dc98d19b4236a143d2c0bb388fed2e41d4768356cf5a74ae4b9194fd9bf",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "43364/625",
+        "39537/1000",
+        "138793/2000",
+        "39557/1000"
+      ],
+      "coordinate_pairs": 4,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          310
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:0467413184087c1282e0b20ec7252d8dfe7e393e674b1902f9d2f8e5f10eeadd",
+      "source_ref": "inputs/component-pointsets/components-000.json.gz",
+      "source_properties_id": "physical-component:0467413184087c1282e0b20ec7252d8dfe7e393e674b1902f9d2f8e5f10eeadd",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "352641/5000",
+        "100099/2500",
+        "705543/10000",
+        "20023901315789473/500000000000000"
+      ],
+      "coordinate_pairs": 7,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_50N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_50N": [
+          6087
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:0b1a9310b0717d791b33e315035e22e83362b4b461283df57e6267d3d1d6c015",
+      "source_ref": "inputs/component-pointsets/components-000.json.gz",
+      "source_properties_id": "physical-component:0b1a9310b0717d791b33e315035e22e83362b4b461283df57e6267d3d1d6c015",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "9027/125",
+        "1959498973188819/50000000000000",
+        "7221767427267541/100000000000000",
+        "196033679080179/5000000000000"
+      ],
+      "coordinate_pairs": 6,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          491
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:0bf1093e551def6fa258252e87e67ca4c4dd1a3847416a39164226514713e842",
+      "source_ref": "inputs/component-pointsets/components-000.json.gz",
+      "source_properties_id": "physical-component:0bf1093e551def6fa258252e87e67ca4c4dd1a3847416a39164226514713e842",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "694479/10000",
+        "7987/200",
+        "347287/5000",
+        "399369/10000"
+      ],
+      "coordinate_pairs": 4,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          73
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276",
+      "source_ref": "inputs/component-pointsets/components-001.json.gz",
+      "source_properties_id": "physical-component:181f705ac58d42ae49ea4d70c75df34928b7c26a46e8b7ccc30895eee2455276",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "693469/10000",
+        "99929/2500",
+        "693591/10000",
+        "400177/10000"
+      ],
+      "coordinate_pairs": 7,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 1,
+        "60E_50N": 2
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          73
+        ],
+        "60E_50N": [
+          6156,
+          6235
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 3
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:1d82eb920d887e65e0b7feace4b6ce606ba72f0dd4b64d8872bc6ff17594c52c",
+      "source_ref": "inputs/component-pointsets/components-001.json.gz",
+      "source_properties_id": "physical-component:1d82eb920d887e65e0b7feace4b6ce606ba72f0dd4b64d8872bc6ff17594c52c",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "705249/10000",
+        "98991/2500",
+        "7056371783295711/100000000000000",
+        "396221/10000"
+      ],
+      "coordinate_pairs": 7,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 2
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          162,
+          241
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 2
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:29c61a4079291f4cf9fa96ca41c3561405cef2d2ad8afe80aa526904848969c2",
+      "source_ref": "inputs/component-pointsets/components-001.json.gz",
+      "source_properties_id": "physical-component:29c61a4079291f4cf9fa96ca41c3561405cef2d2ad8afe80aa526904848969c2",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "347491/5000",
+        "399417/10000",
+        "347677/5000",
+        "99881/2500"
+      ],
+      "coordinate_pairs": 4,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          74
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:658f2e100dd572e26c264f47481759420a413e73978799a8792e203637b3854b",
+      "source_ref": "inputs/component-pointsets/components-004.json.gz",
+      "source_properties_id": "physical-component:658f2e100dd572e26c264f47481759420a413e73978799a8792e203637b3854b",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "144307/2000",
+        "196339/5000",
+        "721739/10000",
+        "196367/5000"
+      ],
+      "coordinate_pairs": 4,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          411
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:7450c83fcd14661b0c9115f0075f703ac96c64ea65ec0caa86702a1ef00db81e",
+      "source_ref": "inputs/component-pointsets/components-004.json.gz",
+      "source_properties_id": "physical-component:7450c83fcd14661b0c9115f0075f703ac96c64ea65ec0caa86702a1ef00db81e",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "87531/1250",
+        "395623/10000",
+        "1752604178743961/25000000000000",
+        "494837782055153/12500000000000"
+      ],
+      "coordinate_pairs": 8,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          237
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:804dfb19fcd6f3fc68de442ae08f4ca553de8687df65d70b72dc1a3fae258eb9",
+      "source_ref": "inputs/component-pointsets/components-005.json.gz",
+      "source_properties_id": "physical-component:804dfb19fcd6f3fc68de442ae08f4ca553de8687df65d70b72dc1a3fae258eb9",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "70673/1000",
+        "395307/10000",
+        "44179/625",
+        "197803/5000"
+      ],
+      "coordinate_pairs": 4,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          242
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:a133c2293fb153cd6628eb43b7518e55ea7db7f6c7f74178b854fd9641be86c5",
+      "source_ref": "inputs/component-pointsets/components-006.json.gz",
+      "source_properties_id": "physical-component:a133c2293fb153cd6628eb43b7518e55ea7db7f6c7f74178b854fd9641be86c5",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "3506152516904583/50000000000000",
+        "197857/5000",
+        "350723/5000",
+        "39589/1000"
+      ],
+      "coordinate_pairs": 7,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 2
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          237,
+          238
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 2
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:bee4ff4185a3775db6d8c51fdc2da0b0674b7629615933378147c6d0b4e778d4",
+      "source_ref": "inputs/component-pointsets/components-008.json.gz",
+      "source_properties_id": "physical-component:bee4ff4185a3775db6d8c51fdc2da0b0674b7629615933378147c6d0b4e778d4",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "1764031755536627/25000000000000",
+        "99893/2500",
+        "7056673072847683/100000000000000",
+        "3996314402044293/100000000000000"
+      ],
+      "coordinate_pairs": 6,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          4
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:ca9c5207e4e4202ea32bd39636020e8f898783d03802fb3507efb816d2e525a3",
+      "source_ref": "inputs/component-pointsets/components-008.json.gz",
+      "source_properties_id": "physical-component:ca9c5207e4e4202ea32bd39636020e8f898783d03802fb3507efb816d2e525a3",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "69345432806961/1000000000000",
+        "395211/10000",
+        "693617/10000",
+        "19768905494682567/500000000000000"
+      ],
+      "coordinate_pairs": 5,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          310
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:d461dff8a46f322a5c4d5aa7c7ddaaaee64f4c205227d09feeb3b93420f33fa8",
+      "source_ref": "inputs/component-pointsets/components-008.json.gz",
+      "source_properties_id": "physical-component:d461dff8a46f322a5c4d5aa7c7ddaaaee64f4c205227d09feeb3b93420f33fa8",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "140883/2000",
+        "395823/10000",
+        "352459/5000",
+        "24754/625"
+      ],
+      "coordinate_pairs": 5,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 1
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          240
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 1
+    },
+    {
+      "kind": "candidate",
+      "id": "physical-component:d76b0c2c3c68c11f128e13ad2a3528ae9bd624dedaed581e305431462cbfe7f9",
+      "source_ref": "inputs/component-pointsets/components-009.json.gz",
+      "source_properties_id": "physical-component:d76b0c2c3c68c11f128e13ad2a3528ae9bd624dedaed581e305431462cbfe7f9",
+      "status_snapshot": {
+        "water_status": "unverified",
+        "administrative_assignment": null,
+        "cause_status": "unknown",
+        "physical_authority": "unapproved",
+        "source_fitness": "unapproved-for-all-components"
+      },
+      "bbox_wgs84_lonlat": [
+        "357763/5000",
+        "394399/10000",
+        "717069/10000",
+        "197363/5000"
+      ],
+      "coordinate_pairs": 12,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 2
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          328,
+          329
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 2
+    },
+    {
+      "kind": "contact",
+      "id": "gb:KGZ:ADM2:92254566B65536554507768",
+      "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+      "source_properties_id": "92254566B65536554507768",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "893734573750001/12500000000000",
+        "19586369100000013/500000000000000",
+        "72923126900000057/1000000000000000",
+        "9965044275000011/250000000000000"
+      ],
+      "coordinate_pairs": 489,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 53
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          91,
+          92,
+          93,
+          98,
+          99,
+          100,
+          101,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          248,
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          255,
+          256,
+          257,
+          258,
+          259,
+          328,
+          329,
+          330,
+          331,
+          332,
+          333,
+          334,
+          335,
+          336,
+          337,
+          338,
+          408,
+          409,
+          410,
+          411,
+          412,
+          413,
+          414,
+          415,
+          416,
+          417,
+          491
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 53
+    },
+    {
+      "kind": "contact",
+      "id": "gb:KGZ:ADM2:92254566B65149347501284",
+      "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+      "source_properties_id": "92254566B65149347501284",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "17504343710750021/250000000000000",
+        "39381690100000071/1000000000000000",
+        "7153801720000007/100000000000000",
+        "20160626800000017/500000000000000"
+      ],
+      "coordinate_pairs": 518,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 50,
+        "70E_50N": 23
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          321,
+          322,
+          323,
+          324
+        ],
+        "70E_50N": [
+          5932,
+          5933,
+          6010,
+          6011,
+          6012,
+          6083,
+          6084,
+          6085,
+          6086,
+          6087,
+          6088,
+          6089,
+          6090,
+          6091,
+          6162,
+          6163,
+          6164,
+          6165,
+          6166,
+          6167,
+          6168,
+          6169,
+          6170
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 73
+    },
+    {
+      "kind": "contact",
+      "id": "gb:KGZ:ADM2:92254566B28866404519709",
+      "source_ref": "inputs/sources/gb-KGZ-ADM2-000.bin.gz",
+      "source_properties_id": "92254566B28866404519709",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "69264952300000061/1000000000000000",
+        "39520877/1000000",
+        "70291961100000037/1000000000000000",
+        "20117338150000023/500000000000000"
+      ],
+      "coordinate_pairs": 293,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 28,
+        "70E_40N": 5,
+        "60E_50N": 16,
+        "70E_50N": 6
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          309,
+          310,
+          311,
+          312,
+          313,
+          314,
+          315
+        ],
+        "70E_40N": [
+          0,
+          79,
+          80,
+          158,
+          237
+        ],
+        "60E_50N": [
+          6079,
+          6080,
+          6081,
+          6082,
+          6156,
+          6157,
+          6158,
+          6159,
+          6160,
+          6161,
+          6235,
+          6236,
+          6237,
+          6238,
+          6239,
+          6240
+        ],
+        "70E_50N": [
+          6004,
+          6005,
+          6083,
+          6084,
+          6085,
+          6162
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 55
+    },
+    {
+      "kind": "contact",
+      "id": "gb:TJK:ADM2:16282066B48594859138803",
+      "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+      "source_properties_id": "16282066B48594859138803",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "703536301/10000000",
+        "39778113/1000000",
+        "141966643/2000000",
+        "201563339/5000000"
+      ],
+      "coordinate_pairs": 175,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 5,
+        "70E_50N": 14
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          3,
+          4,
+          5,
+          83,
+          84
+        ],
+        "70E_50N": [
+          5929,
+          6006,
+          6007,
+          6008,
+          6009,
+          6010,
+          6011,
+          6085,
+          6086,
+          6087,
+          6088,
+          6089,
+          6166,
+          6167
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 19
+    },
+    {
+      "kind": "contact",
+      "id": "gb:TJK:ADM2:16282066B4928854450407",
+      "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+      "source_properties_id": "16282066B4928854450407",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "691292457/10000000",
+        "196151853/5000000",
+        "70713112900000013/1000000000000000",
+        "198110423/5000000"
+      ],
+      "coordinate_pairs": 251,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 24,
+        "70E_40N": 15
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          309,
+          310,
+          311,
+          312,
+          313,
+          314,
+          315,
+          387,
+          388,
+          389,
+          390,
+          391,
+          392,
+          393,
+          394,
+          466,
+          467,
+          468,
+          469,
+          470,
+          471,
+          472,
+          473,
+          549
+        ],
+        "70E_40N": [
+          162,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          316,
+          317,
+          318,
+          319,
+          320,
+          321,
+          395,
+          396
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 39
+    },
+    {
+      "kind": "contact",
+      "id": "gb:TJK:ADM2:16282066B17537121350265",
+      "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+      "source_properties_id": "16282066B17537121350265",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "69211326600000021/1000000000000000",
+        "199608317/5000000",
+        "17367788325000003/250000000000000",
+        "40312561/1000000"
+      ],
+      "coordinate_pairs": 110,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 2,
+        "60E_50N": 10
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          72,
+          73
+        ],
+        "60E_50N": [
+          5997,
+          5998,
+          6075,
+          6076,
+          6077,
+          6154,
+          6155,
+          6156,
+          6234,
+          6235
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 12
+    },
+    {
+      "kind": "contact",
+      "id": "gb:TJK:ADM2:16282066B70669453487294",
+      "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+      "source_properties_id": "16282066B70669453487294",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "344123459/5000000",
+        "394108963/10000000",
+        "69359887799999981/1000000000000000",
+        "200668659/5000000"
+      ],
+      "coordinate_pairs": 157,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 24,
+        "60E_50N": 6
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          70,
+          71,
+          72,
+          73,
+          148,
+          149,
+          150,
+          151,
+          227,
+          228,
+          229,
+          230,
+          231,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          384,
+          385,
+          386,
+          387,
+          388
+        ],
+        "60E_50N": [
+          6153,
+          6154,
+          6155,
+          6232,
+          6233,
+          6234
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 30
+    },
+    {
+      "kind": "contact",
+      "id": "gb:TJK:ADM2:16282066B25952413622692",
+      "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+      "source_properties_id": "16282066B25952413622692",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "34717310850000011/500000000000000",
+        "15966327/400000",
+        "348062401/5000000",
+        "402486877/10000000"
+      ],
+      "coordinate_pairs": 60,
+      "exact_closed_block_intersections_by_tile": {
+        "60E_40N": 2,
+        "60E_50N": 7
+      },
+      "exact_closed_block_indices_by_tile": {
+        "60E_40N": [
+          73,
+          74
+        ],
+        "60E_50N": [
+          6077,
+          6078,
+          6079,
+          6156,
+          6157,
+          6235,
+          6236
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 9
+    },
+    {
+      "kind": "contact",
+      "id": "gb:TJK:ADM2:16282066B88100265425771",
+      "source_ref": "inputs/sources/gb-TJK-ADM2-000.bin.gz",
+      "source_properties_id": "16282066B88100265425771",
+      "status_snapshot": {
+        "role": "administrative contact context only",
+        "physical_class": "unknown",
+        "rights_or_ownership": "unknown"
+      },
+      "bbox_wgs84_lonlat": [
+        "709430389/10000000",
+        "388971367/10000000",
+        "361139759/5000000",
+        "396136217/10000000"
+      ],
+      "coordinate_pairs": 165,
+      "exact_closed_block_intersections_by_tile": {
+        "70E_40N": 48
+      },
+      "exact_closed_block_indices_by_tile": {
+        "70E_40N": [
+          245,
+          246,
+          247,
+          248,
+          249,
+          324,
+          325,
+          326,
+          327,
+          328,
+          329,
+          330,
+          331,
+          332,
+          403,
+          404,
+          405,
+          406,
+          407,
+          408,
+          409,
+          410,
+          411,
+          412,
+          481,
+          482,
+          483,
+          484,
+          485,
+          486,
+          487,
+          488,
+          489,
+          490,
+          491,
+          562,
+          563,
+          564,
+          565,
+          566,
+          567,
+          568,
+          569,
+          644,
+          645,
+          646,
+          647,
+          648
+        ]
+      },
+      "unique_exact_blocks_across_tiles": 48
+    }
+  ],
+  "limits": [
+    "No TIFF pixel blocks were read, decoded, or classified.",
+    "This is vector geometry-to-block support only; it makes no claim about any pixel value, physical class, water, ownership, boundary authority, effective date, or positional accuracy.",
+    "The polygon/block test uses the exact decimal coordinates retained in the pinned gzip sources; source geometry accuracy remains unestablished."
+  ],
+  "totals": {
+    "unique_exact_blocks": 256,
+    "encoded_base_block_bytes": 687297,
+    "decoded_full_block_upper_bound_bytes": 67108864,
+    "candidate_contact_union_block_sum_not_global_deduped": 273
+  }
+}
