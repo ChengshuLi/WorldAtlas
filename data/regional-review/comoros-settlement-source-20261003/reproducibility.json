@@ -1,0 +1,9 @@
+{
+  "method_id": "codab-admin-crosswalk",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "f4ed997eedbb899ead810bd41ef375e9d46b2f11b37e2e7ca9bda244755d490e",
+  "run_two_sha256": "f4ed997eedbb899ead810bd41ef375e9d46b2f11b37e2e7ca9bda244755d490e",
+  "method": "test_two_renderings_are_byte_identical ran the source reader and renderer twice under Python 3.12; both results matched the checked-in CSV.",
+  "interpretation_limit": "Deterministic extraction does not validate the source's legal status or geographic correctness."
+}

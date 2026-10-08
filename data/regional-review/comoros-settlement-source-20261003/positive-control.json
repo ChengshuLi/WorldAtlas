@@ -1,0 +1,20 @@
+{
+  "method_id": "codab-admin-crosswalk",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "source_sha256": "c094bd9fe28236deaf22403ad86c9d576cd8b0b087c8d7cb428bea44b47a4573",
+  "counts": {
+    "ADM1_island": 3,
+    "ADM2_prefecture": 17,
+    "ADM3_commune": 55,
+    "total_administrative_rows": 75
+  },
+  "crosswalk_sha256": "f4ed997eedbb899ead810bd41ef375e9d46b2f11b37e2e7ca9bda244755d490e",
+  "assertions": [
+    "source archive whole-file SHA-256 matched the immutable parent packet pin",
+    "each ADM2 row matched an ADM1 p-code parent",
+    "each ADM3 row matched its ADM2 and ADM1 p-code chain",
+    "rendered CSV exactly matched the retained candidate bytes"
+  ],
+  "interpretation_limit": "Administrative identity/parent checks only; no settlement feature or geographic correctness is inferred."
+}
