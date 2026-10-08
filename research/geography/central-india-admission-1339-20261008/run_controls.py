@@ -12,6 +12,7 @@ import types
 
 HERE = Path(__file__).resolve().parent
 import admission
+import preflight
 
 
 def desc(identity: str, size: int, digest: str = "a" * 64, category: str = "input") -> dict:
@@ -65,7 +66,28 @@ def output_preservation_control() -> dict:
             "helper_sha256": hashlib.sha256(helper_bytes).hexdigest(),
             "sentinel_sha256_before_after": before,
             "sentinel_preserved": True,
-        }
+    }
+
+
+def preflight_output_collision_control() -> dict:
+    with tempfile.TemporaryDirectory(prefix="wa-preflight-output-collision-") as temp:
+        sentinel = Path(temp) / "admission-assessment.json"
+        original = b"retain this pre-existing assessment byte-for-byte\n"
+        sentinel.write_bytes(original)
+        before = hashlib.sha256(original).hexdigest()
+        try:
+            preflight.main(sentinel)
+        except FileExistsError:
+            pass
+        else:
+            raise AssertionError("preflight accepted an existing output path")
+        after_bytes = sentinel.read_bytes()
+        after = hashlib.sha256(after_bytes).hexdigest()
+        if after_bytes != original or after != before:
+            raise AssertionError("preflight changed existing assessment bytes")
+        return {"control": "preflight-existing-assessment-collision-preserves-sentinel",
+                "passed": True, "sentinel_sha256_before_after": before,
+                "sentinel_preserved": True}
 
 
 def run() -> dict:
@@ -160,6 +182,7 @@ def run() -> dict:
         raise AssertionError("conflicting logical identity descriptors were accepted")
 
     rows.append(output_preservation_control())
+    rows.append(preflight_output_collision_control())
     return {"version": 1, "status": "passed", "controls": rows,
             "limits": {"file_bytes": limit, "phase_bytes": phase,
                        "receipt_bytes": admission.MAX_RECEIPT_BYTES},

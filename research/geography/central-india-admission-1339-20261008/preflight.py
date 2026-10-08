@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import sys
 
 import admission
 
@@ -179,13 +180,19 @@ def run() -> dict:
     }
 
 
-if __name__ == "__main__":
+def main(output_path: Path = OUT) -> None:
     result = run()
-    OUT.write_text(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    # Exclusive creation preserves an existing assessment or caller sentinel.
+    with output_path.open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + "\n")
     print(json.dumps({"assessment": result["assessment"], "raw_input_count": result["raw_input_audit"]["count"],
                       "raw_bytes": result["raw_input_audit"]["bytes"],
                       "minimum_raw_plus_decoded_bytes": result["admission"]["minimum_raw_plus_decoded_bytes"],
                       "minimum_over_cap_bytes": result["admission"]["minimum_over_phase_cap_bytes"],
                       "scope_subject_count": result["scope"]["subject_count"],
-                      "source_body_was_not_decompressed": result["decoded_source_claim"]["source_body_was_not_decompressed"]},
+                     "source_body_was_not_decompressed": result["decoded_source_claim"]["source_body_was_not_decompressed"]},
                      sort_keys=True, indent=2))
+
+
+if __name__ == "__main__":
+    main(Path(sys.argv[1]) if len(sys.argv) > 1 else OUT)

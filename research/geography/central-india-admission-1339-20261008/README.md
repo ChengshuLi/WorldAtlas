@@ -14,7 +14,7 @@ The assessment records the exact 229-subject, 35-province partial scope: Madhya 
 
 `admission.py` provides a fail-closed complete-operation planner. It counts exact logical identities once only when duplicate descriptors agree, retains distinct identities even when bytes hash identically, requires an expected inventory when supplied, counts decoded bodies and output reservations in the same phase, and refuses missing authentication, per-file overflow, incomplete runtime closure or total overflow. `decode_gzip_bounded` stops at limit plus one byte and does not return a partial body as success.
 
-`run_controls.py` executes the actual admission entrypoint with synthetic bounded fixtures covering below/at/above the body limit, compressed-small/decoded-large data, combined source and geography inputs, duplicate identity behavior, output-inclusive overflow, missing descriptors, incomplete runtime, descriptor conflicts and an existing-output collision. The collision control executes the exact `NewVintage` helper bytes pinned at commit `950eb2188e5b66d88ea47a679936a02fe3eb1c40` in a disposable repository and confirms the existing sentinel bytes survive.
+`run_controls.py` executes the actual admission entrypoint with synthetic bounded fixtures covering below/at/above the body limit, compressed-small/decoded-large data, combined source and geography inputs, duplicate identity behavior, output-inclusive overflow, missing descriptors, incomplete runtime and descriptor conflicts. Its preservation controls exercise both the pinned `NewVintage` helper and the direct preflight writer, confirming that existing sentinel bytes survive each collision.
 
 `preflight.py` rechecks all 55 immutable Git blobs, the exact scope partition, the retained execution ledger, gzip footer and chunk-receipt byte sum. It reads the compressed source bytes for hashing and footer inspection only. It never decompresses them. The resulting `admission-assessment.json` is a refusal receipt, not a successful science run.
 
@@ -24,7 +24,7 @@ Reproduce from repository root:
 
 ```sh
 python3 research/geography/central-india-admission-1339-20261008/run_controls.py
-python3 research/geography/central-india-admission-1339-20261008/preflight.py
+python3 research/geography/central-india-admission-1339-20261008/preflight.py /tmp/central-india-admission-assessment.json
 python3 research/geography/central-india-admission-1339-20261008/guarded_reproduce.py
 node scripts/evidence-quality.mjs research/geography/central-india-admission-1339-20261008/evidence-quality.json
 node scripts/check-handoff-scope.mjs --issue-file /tmp/worldatlas-1497-issue.json --pr-body-file /tmp/worldatlas-1497-pr-body.txt

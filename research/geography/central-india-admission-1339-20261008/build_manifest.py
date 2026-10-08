@@ -155,7 +155,7 @@ def main() -> None:
         "metrics": metrics, "summaries": summaries, "conclusions": conclusions,
         "stages": {"research": "partial", "implementation": "proposed", "geographic_approval": "unapproved"},
         "commands": ["python3 research/geography/central-india-admission-1339-20261008/run_controls.py",
-                      "python3 research/geography/central-india-admission-1339-20261008/preflight.py",
+                      "python3 research/geography/central-india-admission-1339-20261008/preflight.py /tmp/central-india-admission-assessment.json",
                       "python3 research/geography/central-india-admission-1339-20261008/guarded_reproduce.py",
                       "python3 research/geography/central-india-admission-1339-20261008/build_manifest.py",
                       "node scripts/evidence-quality.mjs research/geography/central-india-admission-1339-20261008/evidence-quality.json"]

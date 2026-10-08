@@ -1743,8 +1743,8 @@
   "outputs": [
     {
       "path": "research/geography/central-india-admission-1339-20261008/README.md",
-      "bytes": 5980,
-      "sha256": "e324976651a15e626f6f91d982bf4aa120933cdc952645b2cfbc8bfcccea6dd1",
+      "bytes": 5959,
+      "sha256": "46c499e905338a5cf5f8392a948b81f3e8cf421664cbb4f3c34374dc1902c759",
       "hash_kind": "file-bytes"
     },
     {
@@ -1755,14 +1755,14 @@
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/run_controls.py",
-      "bytes": 9278,
-      "sha256": "37de39e05cdc598661fc0a069f8921476d9335a770e34b41a670fc01fe9f2140",
+      "bytes": 10343,
+      "sha256": "486f78907bd5e2aab5943e2f6f6b4f98abaaef2ca30241c3378d45a689ed97ff",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/preflight.py",
-      "bytes": 12737,
-      "sha256": "c6ac858f3d6d82387a2c5476334123eaffb72579fb3f8c673374dad71372b621",
+      "bytes": 12972,
+      "sha256": "00c8da58a13b4f7df5135d9d0a89b1c43eb0a0db1b95ac8fb7d76814f3e929e7",
       "hash_kind": "file-bytes"
     },
     {
@@ -1773,8 +1773,8 @@
     },
     {
       "path": "research/geography/central-india-admission-1339-20261008/build_manifest.py",
-      "bytes": 16521,
-      "sha256": "0eb9f9007dc32a90ff7716426aae1770166841b849f224cd65577fded2e1c309",
+      "bytes": 16566,
+      "sha256": "56e4de945d302a3248ed699e725db08e5f31c95418cfd1187123392e340af67d",
       "hash_kind": "file-bytes"
     },
     {
@@ -2112,7 +2112,7 @@
   },
   "commands": [
     "python3 research/geography/central-india-admission-1339-20261008/run_controls.py",
-    "python3 research/geography/central-india-admission-1339-20261008/preflight.py",
+    "python3 research/geography/central-india-admission-1339-20261008/preflight.py /tmp/central-india-admission-assessment.json",
     "python3 research/geography/central-india-admission-1339-20261008/guarded_reproduce.py",
     "python3 research/geography/central-india-admission-1339-20261008/build_manifest.py",
     "node scripts/evidence-quality.mjs research/geography/central-india-admission-1339-20261008/evidence-quality.json"
