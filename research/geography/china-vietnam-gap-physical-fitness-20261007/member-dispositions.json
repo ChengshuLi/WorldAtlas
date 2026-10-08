@@ -1,0 +1,185 @@
+{
+  "issue": 1450,
+  "scope": {
+    "family_id": "gap-source-batch:538034df5f9296418b2325ce",
+    "component_ids": [
+      "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+      "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91"
+    ],
+    "contact_ids": [
+      "gb:CHN:ADM2:17275852B24445486288332",
+      "gb:VNM:ADM2:81297802B22471082550929",
+      "gb:VNM:ADM2:81297802B72919536287172"
+    ]
+  },
+  "member_dispositions": [
+    {
+      "component_id": "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+      "fragment_id": "physical-gap:1209:217:028bd47648ec7f25603ea996f687a78431b6c7bed8e2cd4e694f13d2bdb4e5d4",
+      "component_file": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "component_file_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+      "reported_fragment_area_sum_m2": 2.1216020051895157e-07,
+      "input_water_status": "unverified",
+      "input_positive_area_overlap": false,
+      "worldcover_2021_v200": {
+        "feature_binding": "exact restored feature geometry",
+        "pixel_center_count": 0,
+        "class_counts": {},
+        "fitness": "not-fit-to-adjudicate-areal-land-water-at-this-footprint",
+        "reason": "No native 10 m pixel center is covered; the component is too small/degenerate for categorical land-cover classification.",
+        "observation_period": [
+          "2021-01-01T00:00:00Z",
+          "2021-12-31T23:59:59Z"
+        ],
+        "license": "CC BY 4.0"
+      },
+      "vnsdi_topographic_service": {
+        "query_status": 503,
+        "physical_observation_returned": false,
+        "disposition": "unavailable; no source feature or map sheet acquired"
+      },
+      "physical_surface_disposition": "unresolved / unknown",
+      "not_inferred": [
+        "land",
+        "water",
+        "shoreline position",
+        "physical boundary",
+        "legal status",
+        "political affiliation"
+      ]
+    },
+    {
+      "component_id": "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "fragment_id": "physical-gap:1209:215:51b716544421fbf2635ace1b0ec4e341aa96c69c082fe26075cbd60863ad5372",
+      "component_file": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "component_file_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85",
+      "reported_fragment_area_sum_m2": 1.5668344843788873e-06,
+      "input_water_status": "unverified",
+      "input_positive_area_overlap": false,
+      "worldcover_2021_v200": {
+        "feature_binding": "exact restored feature geometry",
+        "pixel_center_count": 0,
+        "class_counts": {},
+        "fitness": "not-fit-to-adjudicate-areal-land-water-at-this-footprint",
+        "reason": "No native 10 m pixel center is covered; the component is too small/degenerate for categorical land-cover classification.",
+        "observation_period": [
+          "2021-01-01T00:00:00Z",
+          "2021-12-31T23:59:59Z"
+        ],
+        "license": "CC BY 4.0"
+      },
+      "vnsdi_topographic_service": {
+        "query_status": 503,
+        "physical_observation_returned": false,
+        "disposition": "unavailable; no source feature or map sheet acquired"
+      },
+      "physical_surface_disposition": "unresolved / unknown",
+      "not_inferred": [
+        "land",
+        "water",
+        "shoreline position",
+        "physical boundary",
+        "legal status",
+        "political affiliation"
+      ]
+    }
+  ],
+  "contact_relationships": [
+    {
+      "contact_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "candidate_id": "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "MultiLineString",
+          "length_degrees": 0.01517307155019956,
+          "bounds": [
+            107.272656,
+            21.717495597674223,
+            107.2843,
+            21.7264
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "candidate_id": "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "LineString",
+          "length_degrees": 0.026155395891615987,
+          "bounds": [
+            107.20098339987445,
+            21.708341662525278,
+            107.22206263010429,
+            21.723826196330478
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:VNM:ADM2:81297802B22471082550929",
+      "candidate_id": "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "kind": "point-only-ambiguous",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "Point",
+          "length_degrees": 0.0,
+          "bounds": [
+            107.18820268817204,
+            21.733214744216358,
+            107.18820268817204,
+            21.733214744216358
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:VNM:ADM2:81297802B72919536287172",
+      "candidate_id": "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "MultiLineString",
+          "length_degrees": 0.015173071550204292,
+          "bounds": [
+            107.272656,
+            21.71749559767422,
+            107.2843,
+            21.7264
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    },
+    {
+      "contact_id": "gb:VNM:ADM2:81297802B72919536287172",
+      "candidate_id": "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91",
+      "kind": "positive-length-boundary",
+      "exact_contact_geometry_parts": [
+        {
+          "type": "LineString",
+          "length_degrees": 0.04201387699875396,
+          "bounds": [
+            107.18820268817204,
+            21.708341662525278,
+            107.22206263010429,
+            21.733214744216358
+          ],
+          "areal_pixel_sampling_applicable": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "WorldCover is a 2021 land-cover classification and not a cadastral, hydrographic, legal boundary, or local positional-accuracy survey.",
+    "The VNSDI national topographic map service denied this query; its catalog entry is not evidence.",
+    "The exact tiny component geometries and fragment-area aggregates are preserved as input; no repair or fill is proposed.",
+    "This is a source fitness result only; physical status remains unknown."
+  ]
+}

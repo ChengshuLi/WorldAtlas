@@ -1,0 +1,74 @@
+{
+  "baseline_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+  "component_sources": {
+    "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa": {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+    },
+    "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91": {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+    }
+  },
+  "candidate_ids": [
+    "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+    "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91"
+  ],
+  "candidate_reported_areas_m2": {
+    "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa": 2.1216020051895157e-07,
+    "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91": 1.5668344843788873e-06
+  },
+  "candidate_geometry_bbox": [
+    107.18820268817204,
+    21.708341662525278,
+    107.2843,
+    21.733214744216358
+  ],
+  "source": "ESA WorldCover 10m 2021 v200 Map COG N21E105",
+  "source_object_bytes": 102974131,
+  "etag": "\"a0c724f8d28f1c4d198ac6f69ff4fded-13\"",
+  "last_modified": "Wed, 26 Oct 2022 12:47:57 GMT",
+  "tile_origin": [
+    105.0,
+    24.0
+  ],
+  "pixel_scale_degrees": [
+    8.333333333333333e-05,
+    8.333333333333333e-05
+  ],
+  "tile_pixels": [
+    36000,
+    36000
+  ],
+  "block_pixels": [
+    1024,
+    1024
+  ],
+  "pixel_window": [
+    26258,
+    27412,
+    27201,
+    27500
+  ],
+  "selected_complete_original_blocks": [
+    {
+      "row": 26,
+      "column": 25,
+      "tile_index": 961,
+      "offset": 85653494,
+      "byte_count": 45766
+    },
+    {
+      "row": 26,
+      "column": 26,
+      "tile_index": 962,
+      "offset": 85699268,
+      "byte_count": 41048
+    }
+  ],
+  "compressed_bytes": 86814,
+  "decoded_bytes": 2097152,
+  "max_individual_source_file_bytes": 33554432,
+  "phase_limit_bytes": 268435456,
+  "method": "complete native source blocks covering complete restored component geometries; no raster resampling or fill"
+}

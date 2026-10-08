@@ -1,0 +1,132 @@
+{
+  "issue": 1450,
+  "checks": [
+    {
+      "id": "complete-subject-roster",
+      "outcome": "passed",
+      "method": "Compare assessed component IDs across plan, findings, and member dispositions.",
+      "evidence": {
+        "expected_component_ids": [
+          "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+          "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91"
+        ],
+        "plan_component_ids": [
+          "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+          "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91"
+        ],
+        "findings_component_ids": [
+          "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+          "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91"
+        ],
+        "disposition_component_ids": [
+          "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa",
+          "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91"
+        ]
+      }
+    },
+    {
+      "id": "complete-contact-roster",
+      "outcome": "passed",
+      "method": "Compare all contact IDs represented in exact contact-geometry output with the issue roster.",
+      "evidence": {
+        "expected_contact_ids": [
+          "gb:CHN:ADM2:17275852B24445486288332",
+          "gb:VNM:ADM2:81297802B22471082550929",
+          "gb:VNM:ADM2:81297802B72919536287172"
+        ],
+        "observed_contact_ids": [
+          "gb:CHN:ADM2:17275852B24445486288332",
+          "gb:VNM:ADM2:81297802B22471082550929",
+          "gb:VNM:ADM2:81297802B72919536287172"
+        ]
+      }
+    },
+    {
+      "id": "unknown-status-preserved",
+      "outcome": "passed",
+      "method": "Check both per-member dispositions retain water status as unverified and physical surface as unresolved.",
+      "evidence": {
+        "member_water_statuses": [
+          "unverified",
+          "unverified"
+        ],
+        "physical_surface_dispositions": [
+          "unresolved / unknown",
+          "unresolved / unknown"
+        ]
+      }
+    },
+    {
+      "id": "land-cover-class-semantics",
+      "outcome": "passed",
+      "method": "Check packet labels WorldCover class 80 as permanent water bodies and class 90 as herbaceous wetland, not open water.",
+      "evidence": {
+        "class_80": "permanent water bodies",
+        "class_90": "herbaceous wetlands; not synonymous with open water"
+      }
+    },
+    {
+      "id": "altered-source-pin-guard",
+      "outcome": "passed-static-guard",
+      "method": "Static inspection confirms the producer compares each baseline component file SHA-256 with pinned constants before selecting the exact feature; no mutation run performed.",
+      "evidence": {
+        "baseline_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+        "component_source_pins": {
+          "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa": {
+            "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+            "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+          },
+          "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91": {
+            "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+            "sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+          }
+        },
+        "producer_contains_digest_assertion": true
+      }
+    },
+    {
+      "id": "missing-source-guard",
+      "outcome": "passed-static-guard",
+      "method": "Static inspection confirms a missing baseline feature or required native block raises an error on source access; producer has no generated pixel fallback or geometry repair path.",
+      "evidence": {
+        "baseline_feature_read": true,
+        "required_block_read": true,
+        "no_spatial_fill_or_repair": false
+      }
+    },
+    {
+      "id": "synthetic-spatial-helper-controls",
+      "outcome": "passed",
+      "method": "Run the classifier\u2019s exact ring/polygon coverage helpers on small synthetic positive, negative, and shifted-input fixtures; simulate an absent source path through the exact required-read helper. No raster pixel blocks or candidate GIS inputs are read.",
+      "evidence_path": "spatial-control-results.json",
+      "evidence": {
+        "control_scope": "synthetic helper controls only; no WorldCover raster blocks or candidate GIS input were read by this control runner.",
+        "geometry_helpers_extracted_from": "classify_worldcover_window.py",
+        "controls": [
+          {
+            "id": "directed-positive",
+            "outcome": "passed",
+            "detail": "A synthetic pixel-center point strictly inside a synthetic polygon is covered."
+          },
+          {
+            "id": "directed-negative",
+            "outcome": "passed",
+            "detail": "A synthetic point outside the same polygon is not covered."
+          },
+          {
+            "id": "altered-input",
+            "outcome": "passed",
+            "detail": "Shifting every polygon vertex by ten coordinate units changes the control point from covered to not covered."
+          },
+          {
+            "id": "missing-source",
+            "outcome": "passed",
+            "detail": "The producer required-read helper propagates FileNotFoundError; no pixel fill or substitute value is returned."
+          }
+        ]
+      }
+    }
+  ],
+  "scope_note": "These packet integrity and source-semantic checks do not replace a directed runtime control suite for spatial pixel classification. No physical fact is inferred from the source limitations.",
+  "overall": "limited; synthetic helper controls passed; no physical observation established"
+}

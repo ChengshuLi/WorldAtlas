@@ -1,0 +1,210 @@
+{
+  "issue": 1450,
+  "owned_path": "china-vietnam-gap-physical-fitness-20261007",
+  "baseline_subject_sources": {
+    "baseline_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+    "component_files": {
+      "physical-component:002641892e7354093a13a207fc47deb3141691473079e89537752c78dc5a92fa": {
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+        "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      "physical-component:4716f097520ef2f6a7cecc0a5d7b4d00e4066aaa1252765726fa5a244a4b0b91": {
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+        "sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      }
+    },
+    "contact_source": {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+      "bytes": 1120843,
+      "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+      "commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+      "record_hashes_are_within_archive": true
+    }
+  },
+  "esa_worldcover": {
+    "product": "ESA WorldCover 10m 2021 v200 Map",
+    "observation_period": [
+      "2021-01-01T00:00:00Z",
+      "2021-12-31T23:59:59Z"
+    ],
+    "license": "CC BY 4.0",
+    "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N21E105_Map.tif",
+    "object_length_bytes": 102974131,
+    "etag": "\"a0c724f8d28f1c4d198ac6f69ff4fded-13\"",
+    "last_modified": "Wed, 26 Oct 2022 12:47:57 GMT",
+    "full_object_sha256": "not computed; multipart object and only exact requested ranges retained",
+    "ifd_range": {
+      "range": "bytes=0-131071",
+      "status": 206,
+      "content_range": "bytes 0-131071/102974131",
+      "sha256": "1fdcf9165b76f81cb86638062152f7a473fc17f415ed6feeae66751d440ff395"
+    },
+    "blocks": [
+      {
+        "range": "bytes=85653494-85699259",
+        "row": 26,
+        "column": 25,
+        "bytes": 45766,
+        "sha256": "7cac0ea4157568113abb819e6091f7e81efc6269d66d1980515104417e283845"
+      },
+      {
+        "range": "bytes=85699268-85740315",
+        "row": 26,
+        "column": 26,
+        "bytes": 41048,
+        "sha256": "760e537a4d15b4466123f91587cf183d97dd81324635a6f021d8088872ffa878"
+      }
+    ],
+    "total_retained_range_bytes": 217886,
+    "decoded_complete_block_bytes": 2097152,
+    "source_metadata": "TIFF tags: 36,000 x 36,000; 8-bit; Deflate; 1 band; 1024 x 1024 tiles; EPSG:4326; 1/12000 degree pixel; N21E105; CC-BY 4.0; class 80 permanent water bodies; class 90 herbaceous wetland"
+  },
+  "official_references": {
+    "data_access": "https://esa-worldcover.org/en/data-access",
+    "pum": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/docs/WorldCover_PUM_V2.0.pdf",
+    "pvr": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/docs/WorldCover_PVR_V2.0.pdf",
+    "vietnam_national_topographic_data_portal": "https://vnsdi.mae.gov.vn/",
+    "vietnam_official_map_catalog_service": "https://vnsdi.mae.gov.vn/server/rest/services/BangChap/BangChapBDDH2000/MapServer/0"
+  },
+  "alternative_source_attempt": {
+    "query_file": "sources/vnsdi-topomap-query.json",
+    "status": 503,
+    "reason": "Access denied by service",
+    "purchase_status": "No paid data was purchased or downloaded",
+    "query_file_sha256": "8b9abb3a96677022fbf91cb60e3e3cffa96f8d0c17fa5df30109111ca0f8bf86"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 6196,
+      "sha256": "7dd5ef387c086feaa71ce526a44257b49ca49ee2e2df54df12fb2c9d29886420"
+    },
+    {
+      "path": "classify_worldcover_window.py",
+      "bytes": 9025,
+      "sha256": "da8e51e116907ed9e6ebb0e639e640e876c594b45bb493106b122b1a032e4f33"
+    },
+    {
+      "path": "member-dispositions.json",
+      "bytes": 7028,
+      "sha256": "30e12517d27c0b567100fb3f254b763a9dcebecaf39ab4a20e8ad6f2bd8b823a"
+    },
+    {
+      "path": "packet-controls.json",
+      "bytes": 6023,
+      "sha256": "822a458373fc5d16ca161d5e5da93127c06e3598915bdc23d8928fe83007b760"
+    },
+    {
+      "path": "plan_worldcover_blocks.py",
+      "bytes": 3949,
+      "sha256": "f573cdd18d6c046deb49b7eaab0df4662f07d7fb0c6f885f1f0f6f5457ddb03b"
+    },
+    {
+      "path": "run_spatial_controls.py",
+      "bytes": 2162,
+      "sha256": "40a04db5a9fb129f3273befa5da839cd08edc39990741ad14f7ebc28060d444d"
+    },
+    {
+      "path": "sources/WorldCover_PUM_V2.0.pdf",
+      "bytes": 4102952,
+      "sha256": "4301a3d95260d88bd4315f43ccf2a12ef74ad391109b9f36e22b6e51d8490107"
+    },
+    {
+      "path": "sources/WorldCover_PVR_V2.0.pdf",
+      "bytes": 2671365,
+      "sha256": "05700af5f1462beebf3007ead5b68bccc5f4c016a7bdb26d5c9b6e3db4a1f4a9"
+    },
+    {
+      "path": "sources/block-26-25-headers.txt",
+      "bytes": 492,
+      "sha256": "b210d6eb0388330bc3d2357d09558dc4357bb16e3727cc859d1560e3d992dedf"
+    },
+    {
+      "path": "sources/block-26-25.bin",
+      "bytes": 45766,
+      "sha256": "7cac0ea4157568113abb819e6091f7e81efc6269d66d1980515104417e283845"
+    },
+    {
+      "path": "sources/block-26-26-headers.txt",
+      "bytes": 492,
+      "sha256": "0195af491b32faa866bb56f0bb0ee2d47712416d7aadcf1adce2f8a468a82303"
+    },
+    {
+      "path": "sources/block-26-26.bin",
+      "bytes": 41048,
+      "sha256": "760e537a4d15b4466123f91587cf183d97dd81324635a6f021d8088872ffa878"
+    },
+    {
+      "path": "sources/esa-worldcover-data-access.headers",
+      "bytes": 486,
+      "sha256": "9d09745afcde32fde166c6c6fa576723b2a72d5a1087f08bb6bc831df0b3fa8e"
+    },
+    {
+      "path": "sources/esa-worldcover-data-access.html",
+      "bytes": 49866,
+      "sha256": "7645b74f70102799bad26dc751706f630cfee7e3e3d60bc25f343053a7a57d5e"
+    },
+    {
+      "path": "sources/vnsdi-topomap-query-headers.txt",
+      "bytes": 280,
+      "sha256": "59894720a5ac3c10169c21b4c08abfc2732fdbce31d3b66b40f5d0a8cd53cfa5"
+    },
+    {
+      "path": "sources/vnsdi-topomap-query.json",
+      "bytes": 121,
+      "sha256": "8b9abb3a96677022fbf91cb60e3e3cffa96f8d0c17fa5df30109111ca0f8bf86"
+    },
+    {
+      "path": "sources/worldcover-cog-head.headers.txt",
+      "bytes": 433,
+      "sha256": "90fb38d0ee4ab26990fc0e0259569ac458a645db5145de9bf7a93ecbfad7efb6"
+    },
+    {
+      "path": "sources/worldcover-ifd-headers.txt",
+      "bytes": 484,
+      "sha256": "14760cb5b1509c6a649626395cee6e76743c6bc55ce2034e81c67cd5913fea2b"
+    },
+    {
+      "path": "sources/worldcover-ifd-range-0-131071.bin",
+      "bytes": 131072,
+      "sha256": "1fdcf9165b76f81cb86638062152f7a473fc17f415ed6feeae66751d440ff395"
+    },
+    {
+      "path": "sources/worldcover-pum-headers.txt",
+      "bytes": 386,
+      "sha256": "d0a2c046c6cb63b66f86485aaf2c136b7a91d463ab6e47fb0be8bd52efb97442"
+    },
+    {
+      "path": "sources/worldcover-pvr-headers.txt",
+      "bytes": 386,
+      "sha256": "ac6cf148b75abdb6db1752c1927c20935e14f00f6398d6411baa941ac4ba9ecd"
+    },
+    {
+      "path": "spatial-control-results.json",
+      "bytes": 947,
+      "sha256": "b80f1caf8453f85d47096c66c4b2b427c5fdd9209d770be0fadad5099a986911"
+    },
+    {
+      "path": "workspace-memory-admission.json",
+      "bytes": 3649,
+      "sha256": "c8eac38459dc4c3ff5ae47e4cf5f7924ce2271569b1c6f627ecc133b3b38f543"
+    },
+    {
+      "path": "worldcover-block-plan.json",
+      "bytes": 2354,
+      "sha256": "8acb664e1934fc8035cf6772229256e3a19a7ba6a9e0dfcff628283645aec767"
+    },
+    {
+      "path": "worldcover-window-findings.json",
+      "bytes": 6973,
+      "sha256": "0f208e09e279520e707f1b1290b0dec8f512495421a77c3de68909e40dcc47a3"
+    }
+  ],
+  "candidate_source_pin": {
+    "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+    "source_baseline_commit": "c9518bafefb0e7c4bd53842284e0208ab5223dc6",
+    "bytes": 1120843,
+    "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+    "note": "Contact context is read from the pinned baseline archive; record hashes are archive members, not standalone-file hashes. Full physical-component subject geometries are mapped to their pinned restoration FeatureCollections."
+  }
+}
