@@ -12,13 +12,14 @@ The 21 candidate geometries are source products whose 2018 Angola and 2007 Namib
 
 ## Reproduction and checks
 
-Run with Python 3.12, NumPy 2.3.5, Shapely 2.1.2 and pyproj 3.7.2. These commands use the bundled Python runtime used for the retained runs:
+Run with Python 3.12, NumPy 2.3.5, Shapely 2.1.2 and pyproj 3.7.2. Run the three control commands first so their fresh receipts are fixed inputs, then run reconciliation twice without rerunning controls between the two complete runs. These commands use the bundled Python runtime used for the retained runs:
 
 ```sh
-/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/reconcile.py
 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/input_controls.py
 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/writer_controls.py
 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/legacy_entrypoint_controls.py
+/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/reconcile.py
+/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/reconcile.py
 ```
 
 `reconcile.py` reads original bytes from immutable Git objects, checks the declared source and issue pins, decodes the 16 NPZ files under per-file and aggregate byte caps, verifies their array inventory and scene roster, and independently rebuilds all component/contact membership bits from the original geometries and native pixel-center affine transforms. It then recomputes each measurement with the retained method and compares every inherited measurement field against run one. It preserves both catalog `datetime` and native granule `SENSING_TIME`. Full result sets are published to fresh exclusive vintages through the authenticated shared `NewVintage` writer, with a completion receipt installed last.

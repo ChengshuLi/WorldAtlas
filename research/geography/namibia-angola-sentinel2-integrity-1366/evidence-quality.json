@@ -1018,6 +1018,22 @@
       "status": "added"
     },
     {
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-negative-20261008T215308721327Z.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-negative-20261008T215409616983Z.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-positive-20261008T215308721327Z.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-positive-20261008T215409616983Z.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/writer-probes-20261008-212825723273.json",
       "status": "added"
     },
@@ -1543,10 +1559,11 @@
     }
   ],
   "commands": [
-    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/reconcile.py",
     "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/input_controls.py",
     "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/writer_controls.py",
-    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/legacy_entrypoint_controls.py"
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/legacy_entrypoint_controls.py",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/reconcile.py",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/namibia-angola-sentinel2-integrity-1366/reconcile.py"
   ],
   "conclusions": [
     {
@@ -1579,7 +1596,7 @@
     {
       "description": "Authenticate exact issue pins, historical whole-file sources, scene/window receipts, bounded NPZ members, array types and dimensions; reconcile every selected item against eight pinned discovery pages and all native band grids; independently recompute 31-mask × 16-scene membership from the unchanged WGS84 geometries and native affine pixel centers; recompute all original measurement fields and reconcile catalog/native sensing times. Actual unchanged selector/analysis entrypoints and the extractor NPZ writer are also exercised in owned fixtures to preserve engineering defect evidence.",
       "id": "retained-sentinel2-independent-reconciliation",
-      "kind": "integrity-reproduction",
+      "kind": "measurement",
       "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; pinned scripts/evidence/immutable.py NewVintage writer",
       "units": "Pixel-center membership counts and inherited spectral measurements; counts are nonadditive across dates and intersecting masks."
     }
@@ -1760,11 +1777,11 @@
   ],
   "outputs": [
     {
-      "bytes": 7701,
+      "bytes": 8034,
       "hash_kind": "file-bytes",
       "path": "research/geography/namibia-angola-sentinel2-integrity-1366/README.md",
       "role": "evidence-output",
-      "sha256": "48055b0a663a856fd7c8aad3c5a13d93c195c75e228137c07af09ffde4e69aa2"
+      "sha256": "9cfc0986710d7af981110b4811ec21011004ba481969784ebf4b56d02c1edea5"
     },
     {
       "bytes": 2423,
@@ -1774,11 +1791,11 @@
       "sha256": "3a622017e2c8eac5f877989ab16d24ba9fad8d57f00977a03e7737abf32fce16"
     },
     {
-      "bytes": 10777,
+      "bytes": 14020,
       "hash_kind": "file-bytes",
       "path": "research/geography/namibia-angola-sentinel2-integrity-1366/build_manifest.py",
       "role": "evidence-output",
-      "sha256": "a30424913347682cfb4faea556eec3882f6103a77c2e784a5ffeb35435e20658"
+      "sha256": "6327f3b3355b0e560e4f78a71fa9ef9c490894f5a75ed5122e84a603fad67787"
     },
     {
       "bytes": 645,
@@ -1863,6 +1880,34 @@
       "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/legacy-entrypoints-20261008T214840078085Z.json",
       "role": "evidence-output",
       "sha256": "02776ac889677891d7ea11d40ec5ad862da11cb5989cef92d8e836c888ad6abf"
+    },
+    {
+      "bytes": 2568,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-negative-20261008T215308721327Z.json",
+      "role": "evidence-output",
+      "sha256": "33176a4a916581cd9bc8ef94f9c4ace7353e49f281ecdf8a04727954f9356486"
+    },
+    {
+      "bytes": 2568,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-negative-20261008T215409616983Z.json",
+      "role": "evidence-output",
+      "sha256": "33176a4a916581cd9bc8ef94f9c4ace7353e49f281ecdf8a04727954f9356486"
+    },
+    {
+      "bytes": 472,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-positive-20261008T215308721327Z.json",
+      "role": "evidence-output",
+      "sha256": "3e945cb0d767455758546135afa4a8bddff26eb0b2fc2c8c9c008fcc8d997c48"
+    },
+    {
+      "bytes": 472,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-positive-20261008T215409616983Z.json",
+      "role": "evidence-output",
+      "sha256": "3e945cb0d767455758546135afa4a8bddff26eb0b2fc2c8c9c008fcc8d997c48"
     },
     {
       "bytes": 460,
@@ -2900,6 +2945,18 @@
     }
   ],
   "validation": [
+    {
+      "evidence_path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-positive-20261008T215409616983Z.json",
+      "kind": "positive-control",
+      "method_id": "retained-sentinel2-independent-reconciliation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/namibia-angola-sentinel2-integrity-1366/controls/measurement-negative-20261008T215409616983Z.json",
+      "kind": "negative-control",
+      "method_id": "retained-sentinel2-independent-reconciliation",
+      "outcome": "passed"
+    },
     {
       "evidence_path": "research/geography/namibia-angola-sentinel2-integrity-1366/vintages/reconciliation-20261008-214905424941/reconciliation.json",
       "kind": "complete-reproduction",
