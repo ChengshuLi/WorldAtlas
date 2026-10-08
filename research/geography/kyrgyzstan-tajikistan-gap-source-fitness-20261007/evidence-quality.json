@@ -1165,9 +1165,10 @@
     },
     {
       "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/planned-executions.md",
-      "bytes": 7611,
-      "sha256": "0e8cebc3d2c7884f393bad11da13b18383df0004a3055d8970b302e06a882050",
-      "hash_kind": "file-bytes"
+      "bytes": 8027,
+      "sha256": "195124ceacf08c9209c07f16036a4b0a60c26cce01b23eab5d518d29be643be5",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
     },
     {
       "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-01/publication.json",
@@ -1325,9 +1326,276 @@
       "units": "Feature count, represented-year claim, source metadata, and qualitative limits."
     }
   ],
-  "metrics": [],
-  "metric_bindings": [],
-  "summaries": [],
+  "metrics": [
+    {
+      "id": "run-01-input_bytes",
+      "value": 213892322,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "7e0e0b1597c05d4ef69227b2df7997505b8afb92278640a5f0496ad6ff702879",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-01-admission_page_supply",
+      "value": 1473216512,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "7e0e0b1597c05d4ef69227b2df7997505b8afb92278640a5f0496ad6ff702879",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-01-pre_geometry_rss",
+      "value": 158220288,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "7e0e0b1597c05d4ef69227b2df7997505b8afb92278640a5f0496ad6ff702879",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-01-sampled_tree_peak",
+      "value": 149127168,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "9c6877eee73fc106db2cf14ec55e2592c43a72b30e8c09e670527cde054fd028",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-01/supervision.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-01-prepublication_rss",
+      "value": 158220288,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "7e0e0b1597c05d4ef69227b2df7997505b8afb92278640a5f0496ad6ff702879",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-01-child_lifetime_rss",
+      "value": 158220288,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "9c6877eee73fc106db2cf14ec55e2592c43a72b30e8c09e670527cde054fd028",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-01/supervision.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-input_bytes",
+      "value": 213892322,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "81efd2a0144b01f6d85aa077b71fa04c99f485aacd2ffb294cc942acf4a4f49b",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-admission_page_supply",
+      "value": 1366654976,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "81efd2a0144b01f6d85aa077b71fa04c99f485aacd2ffb294cc942acf4a4f49b",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-pre_geometry_rss",
+      "value": 168247296,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "81efd2a0144b01f6d85aa077b71fa04c99f485aacd2ffb294cc942acf4a4f49b",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-sampled_tree_peak",
+      "value": 166313984,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "45a207862da4c7bd651200263a6f369961b69dc195066b867c1a8ead450c9e92",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-02/supervision.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-prepublication_rss",
+      "value": 168247296,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "81efd2a0144b01f6d85aa077b71fa04c99f485aacd2ffb294cc942acf4a4f49b",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "run-02-child_lifetime_rss",
+      "value": 168247296,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "b91d38254bc7fb901fefcb6112f5878fbc52d463",
+      "input_sha256": "45a207862da4c7bd651200263a6f369961b69dc195066b867c1a8ead450c9e92",
+      "input_file": {
+        "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-02/supervision.json",
+        "commit": "candidate"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "run-01-input_bytes",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+      "json_pointer": "/input_bytes"
+    },
+    {
+      "metric_id": "run-01-admission_page_supply",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+      "json_pointer": "/precalculation_admission/fixed_memory_snapshot/free_inactive_speculative_candidate_bytes"
+    },
+    {
+      "metric_id": "run-01-pre_geometry_rss",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+      "json_pointer": "/precalculation_admission/pre_geometry_max_rss_bytes"
+    },
+    {
+      "metric_id": "run-01-sampled_tree_peak",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-01/supervision.json",
+      "json_pointer": "/maximum_sampled_process_tree_rss_bytes"
+    },
+    {
+      "metric_id": "run-01-prepublication_rss",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-01/run-summary.json",
+      "json_pointer": "/prepublication_ru_maxrss_bytes"
+    },
+    {
+      "metric_id": "run-01-child_lifetime_rss",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-01/supervision.json",
+      "json_pointer": "/terminal_child_lifetime_ru_maxrss_bytes"
+    },
+    {
+      "metric_id": "run-02-input_bytes",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+      "json_pointer": "/input_bytes"
+    },
+    {
+      "metric_id": "run-02-admission_page_supply",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+      "json_pointer": "/precalculation_admission/fixed_memory_snapshot/free_inactive_speculative_candidate_bytes"
+    },
+    {
+      "metric_id": "run-02-pre_geometry_rss",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+      "json_pointer": "/precalculation_admission/pre_geometry_max_rss_bytes"
+    },
+    {
+      "metric_id": "run-02-sampled_tree_peak",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-02/supervision.json",
+      "json_pointer": "/maximum_sampled_process_tree_rss_bytes"
+    },
+    {
+      "metric_id": "run-02-prepublication_rss",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/source-fitness-run-02/run-summary.json",
+      "json_pointer": "/prepublication_ru_maxrss_bytes"
+    },
+    {
+      "metric_id": "run-02-child_lifetime_rss",
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/process-supervision/source-fitness-run-02/supervision.json",
+      "json_pointer": "/terminal_child_lifetime_ru_maxrss_bytes"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "run-01-input_bytes",
+      "value": 213892322,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-01-admission_page_supply",
+      "value": 1473216512,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-01-pre_geometry_rss",
+      "value": 158220288,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-01-sampled_tree_peak",
+      "value": 149127168,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-01-prepublication_rss",
+      "value": 158220288,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-01-child_lifetime_rss",
+      "value": 158220288,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-02-input_bytes",
+      "value": 213892322,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-02-admission_page_supply",
+      "value": 1366654976,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-02-pre_geometry_rss",
+      "value": 168247296,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-02-sampled_tree_peak",
+      "value": 166313984,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-02-prepublication_rss",
+      "value": 168247296,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "run-02-child_lifetime_rss",
+      "value": 168247296,
+      "unit": "bytes"
+    }
+  ],
   "conclusions": [
     {
       "text": "Both full runs covered all 15 complete components against all 99 features in the two complete simplified products (1,485 pairs per run; 27 intersecting pairs), and the retained positive and negative controls passed. These are source-product diagnostics, not physical land/water or rightful-boundary findings.",
@@ -2137,6 +2405,85 @@
       "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/evidence-quality.json",
       "status": "added",
       "previous_path": null
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/vintages/planned-executions.md",
+      "rows": [
+        {
+          "metric_id": "run-01-input_bytes",
+          "line": 13,
+          "template": "| source-fitness-run-01 | Fresh input phase (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-01-admission_page_supply",
+          "line": 14,
+          "template": "| source-fitness-run-01 | Admission page-supply candidate (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-01-pre_geometry_rss",
+          "line": 15,
+          "template": "| source-fitness-run-01 | Pre-geometry RSS (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-01-sampled_tree_peak",
+          "line": 16,
+          "template": "| source-fitness-run-01 | Sampled tree peak RSS (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-01-prepublication_rss",
+          "line": 17,
+          "template": "| source-fitness-run-01 | Producer prepublication RSS (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-01-child_lifetime_rss",
+          "line": 18,
+          "template": "| source-fitness-run-01 | OS child-lifetime RSS (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-02-input_bytes",
+          "line": 19,
+          "template": "| source-fitness-run-02 | Fresh input phase (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-02-admission_page_supply",
+          "line": 20,
+          "template": "| source-fitness-run-02 | Admission page-supply candidate (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-02-pre_geometry_rss",
+          "line": 21,
+          "template": "| source-fitness-run-02 | Pre-geometry RSS (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-02-sampled_tree_peak",
+          "line": 22,
+          "template": "| source-fitness-run-02 | Sampled tree peak RSS (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-02-prepublication_rss",
+          "line": 23,
+          "template": "| source-fitness-run-02 | Producer prepublication RSS (bytes) | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "run-02-child_lifetime_rss",
+          "line": 24,
+          "template": "| source-fitness-run-02 | OS child-lifetime RSS (bytes) | {value} |",
+          "decimals": 0
+        }
+      ]
     }
   ]
 }

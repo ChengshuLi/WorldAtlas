@@ -8,10 +8,20 @@ The execution bindings are: custody vintage `custody-10`, preflight commit `dc95
 
 Both full runs completed 1,485 component/source rows and 27 intersecting pairs. All non-admission source-result fields match; the differing `precalculation_admission` objects preserve the distinct fresh per-run resource snapshots. Normalized source-result SHA-256 with only that per-run object removed: `ae443f40e0e2be0c0b2f7fb6f97a5e37192e6c4349c5774cc21877ed502adfe0`.
 
-| Run | Fresh input phase | Admission page-supply candidate | Pre-geometry RSS | Sampled tree peak | Producer prepublication RSS | OS child-lifetime RSS | Directed controls |
-|---|---:|---:|---:|---:|---:|---:|---|
-| `source-fitness-run-01` | 213,892,322 B | 1,473,216,512 B | 158,220,288 B | 149,127,168 B | 158,220,288 B | 158,220,288 B | pass |
-| `source-fitness-run-02` | 213,892,322 B | 1,366,654,976 B | 168,247,296 B | 166,313,984 B | 168,247,296 B | 168,247,296 B | pass |
+| Run | Measure | Value |
+|---|---|---:|
+| source-fitness-run-01 | Fresh input phase (bytes) | 213892322 |
+| source-fitness-run-01 | Admission page-supply candidate (bytes) | 1473216512 |
+| source-fitness-run-01 | Pre-geometry RSS (bytes) | 158220288 |
+| source-fitness-run-01 | Sampled tree peak RSS (bytes) | 149127168 |
+| source-fitness-run-01 | Producer prepublication RSS (bytes) | 158220288 |
+| source-fitness-run-01 | OS child-lifetime RSS (bytes) | 158220288 |
+| source-fitness-run-02 | Fresh input phase (bytes) | 213892322 |
+| source-fitness-run-02 | Admission page-supply candidate (bytes) | 1366654976 |
+| source-fitness-run-02 | Pre-geometry RSS (bytes) | 168247296 |
+| source-fitness-run-02 | Sampled tree peak RSS (bytes) | 166313984 |
+| source-fitness-run-02 | Producer prepublication RSS (bytes) | 168247296 |
+| source-fitness-run-02 | OS child-lifetime RSS (bytes) | 168247296 |
 
 The unchanged admission floor was 1,342,177,280 candidate bytes (768 MiB process ceiling plus 512 MiB host reserve); each row's snapshot exceeded it. Both supervisor receipts report exit code 0, no stop reason, no live descendants after reap, and a 640 MiB sampled-tree stop threshold. Each control receipt records the positive exact-source predicate and passes all four negative controls. Source-product descriptor checks also reject wrong-prefix, foreign-origin, missing-product and reordered-product inputs. Per-run exact hashes and receipt values are in the respective `run-summary.json`, `control-receipt.json`, `supervision.json` and `publication.json` files.
 
