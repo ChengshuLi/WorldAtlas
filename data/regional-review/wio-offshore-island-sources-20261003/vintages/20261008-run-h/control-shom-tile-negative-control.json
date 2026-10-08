@@ -1,0 +1,31 @@
+{
+  "method_id": "shom-tile-metadata-bbox-screen",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "subject_id": "atlas:coverage:ATF-5919#component-0",
+  "package_id": "0230_8245",
+  "input_evidence": {
+    "feature_path": "data/geography/part-16.json",
+    "feature_sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+    "metadata_path": "data/regional-review/wio-offshore-island-sources-20261003/sources/shom_litto3d_catalog_20261008/raw/eparses/0230_8245.xml",
+    "metadata_sha256": "374501e2c0497a1a57ccd7137f357bbbfaa2c61b6c00e81938b67b62110fd229",
+    "source_bbox_wgs84": [
+      54.4783282,
+      -15.9050337,
+      54.525546,
+      -15.8593352
+    ],
+    "bbox_source_crs": "EPSG:4326"
+  },
+  "expected": {
+    "direct_intersection": false,
+    "within_1000m": false
+  },
+  "observed": {
+    "direct_intersection": false,
+    "within_buffer": false,
+    "buffer_m": 1000,
+    "analysis_crs": "EPSG:6933"
+  },
+  "basis": "real captured Eparses catalog package metadata; positive nearby Juan-tile pairing or negative Tromelin-tile pairing against the separately pinned first ATF-5919 component"
+}
