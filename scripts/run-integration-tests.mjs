@@ -101,7 +101,8 @@ export async function streamTestProcess(args, {env = process.env,
   stdout = process.stdout, stderr = process.stderr, maxBytes = 64 * 1024 * 1024} = {}) {
   const grouped = process.platform !== 'win32';
   const child = spawn(process.execPath, args, {env, detached: grouped, stdio: ['ignore', 'pipe', 'pipe']});
-  let tail = '', bytes = 0, failure, cancelled, escalation;
+  let tail = '', bytes = 0, failure, cancelled, escalation, orphaned = false;
+  let cleanup = Promise.resolve();
   const stop = signal => {
     try { grouped ? process.kill(-child.pid, signal) : child.kill(signal); }
     catch (error) { if (error.code !== 'ESRCH') failure ??= error; }
@@ -127,26 +128,25 @@ export async function streamTestProcess(args, {env = process.env,
       }
     });
   }
+  // Exit precedes close: descendants may inherit output pipes and prevent
+  // close forever. Start cleanup as soon as the test runner itself exits.
+  child.once('exit', () => {
+    cleanup = (async () => {
+      if (!grouped) return;
+      try { process.kill(-child.pid, 0); orphaned = true; }
+      catch (error) { if (error.code !== 'ESRCH') failure ??= error; return; }
+      stop('SIGTERM');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      stop('SIGKILL');
+    })();
+  });
   child.stdout.pipe(stdout, {end: false}); child.stderr.pipe(stderr, {end: false});
   try {
     const result = await new Promise(resolve => {
       child.once('error', error => { failure = error; });
       child.once('close', (status, signal) => resolve({status, signal}));
     });
-    // Keep the escalation alive after the parent exits: a descendant can still
-    // hold the original process group even after its test worker has terminated.
-    let orphaned = false;
-    if (grouped) {
-      try { process.kill(-child.pid, 0); orphaned = true; }
-      catch (error) { if (error.code !== 'ESRCH') throw error; }
-    }
-    // Even an exited test can leave stdio-detached native children behind.
-    // The group is exclusively owned by this invocation, never another worker.
-    if (orphaned) {
-      stop('SIGTERM');
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      stop('SIGKILL');
-    }
+    await cleanup;
     if (failure) throw failure;
     if (cancelled) return cancelled === 'SIGINT' ? 130 : 143;
     if (result.status === 0 && orphaned) throw Error('Regression exited successfully with unfinished descendants');

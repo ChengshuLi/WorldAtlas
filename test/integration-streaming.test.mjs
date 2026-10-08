@@ -63,7 +63,7 @@ test('cancellation terminates the actual test process group, including a descend
   const pidFile=path.join(root,'descendant.pid');
   const runner=new URL('../scripts/run-integration-tests.mjs',import.meta.url).href;
   const childSource=`import {spawn} from 'node:child_process';import fs from 'node:fs';
-    const c=spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{stdio:'ignore'});
+    const c=spawn(process.execPath,['-e',"process.on('SIGTERM',()=>{});setInterval(()=>{},1000)"],{stdio:['ignore','inherit','inherit']});
     fs.writeFileSync(${JSON.stringify(pidFile)},String(c.pid),{flag:'wx'});
     console.log('ready');setInterval(()=>{},1000);`;
   const parent=spawn(process.execPath,code(`import {streamTestProcess} from ${JSON.stringify(runner)};
@@ -85,18 +85,25 @@ test('cancellation terminates the actual test process group, including a descend
   assert.ok(absent,'cancelled descendant must be reaped');
 });
 
-test('exited failures clean detached-stdio descendants and successful orphans reject', {skip:process.platform==='win32'}, async t=>{
+test('exited failures clean ignored/inherited-pipe descendants and successful orphans reject', {skip:process.platform==='win32'}, async t=>{
   const root=fs.mkdtempSync(path.join(process.cwd(),'.cache/integration-orphan-'));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
-  for (const status of [7,0]) {
-    const pidFile=path.join(root,`${status}.pid`);
+  for (const stdio of ['ignore',['ignore','inherit','inherit']]) for (const status of [7,0]) {
+    const pidFile=path.join(root,`${Array.isArray(stdio)?'inherit':'ignore'}-${status}.pid`);
     const source=`import {spawn} from 'node:child_process';import fs from 'node:fs';
-      const c=spawn(process.execPath,['-e',"process.on('SIGTERM',()=>{});setInterval(()=>{},1000)"],{stdio:'ignore'});
+      const c=spawn(process.execPath,['-e',"process.on('SIGTERM',()=>{});setInterval(()=>{},1000)"],{stdio:${JSON.stringify(stdio)}});
       c.unref();fs.writeFileSync(${JSON.stringify(pidFile)},String(c.pid),{flag:'wx'});
       setTimeout(()=>{console.log('# skipped 0');process.exit(${status});},150);`;
     const pending=streamTestProcess(code(source),sinks());
-    if(status===0) await assert.rejects(pending,/unfinished descendants/);
-    else assert.equal(await pending,7);
+    let watchdog;
+    const bounded=Promise.race([pending,new Promise((_,reject)=>{
+      watchdog=setTimeout(()=>reject(Error('exited runner cleanup did not finish')),5000);
+    })]);
+    t.after(()=>{try{process.kill(Number(fs.readFileSync(pidFile,'utf8')),'SIGKILL');}catch{}});
+    try {
+      if(status===0) await assert.rejects(bounded,/unfinished descendants/);
+      else assert.equal(await bounded,7);
+    } finally { clearTimeout(watchdog); }
     const descendant=Number(fs.readFileSync(pidFile,'utf8'));
     t.after(()=>{try{process.kill(descendant,'SIGKILL');}catch{}});
     let absent=false;
