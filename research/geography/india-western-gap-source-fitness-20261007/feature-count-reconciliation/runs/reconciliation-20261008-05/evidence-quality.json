@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "issue": 1432,
+  "lane": "source-only",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "physical-component:000f8ceae5d2a99223959081d563a10b524519680b495e98e0ab26acf5feafe7",
+    "physical-component:0b0f4f8da263777fd7e59ebfd90ba6545811dd8014832cf1a91fc10ad2a78194",
+    "physical-component:158d29fe97181ce35bcbee0548005905634f6dfae7083fde2346a0f8a1d88bf5",
+    "physical-component:16a15562778f813213a723286dc05b997683ea5d6c88e421bd533dda812875da",
+    "physical-component:300746aaaeeeaf86e3782f48d123d367aab071fabc57d87028d897ed444184b5",
+    "physical-component:36ffb10735d8d7d402912f989ff500524a686e86a2f636efc100acc56b9d2ba0",
+    "physical-component:4c9fc7c98e4c74fba00b685e964f1082726a32488d14987811702efabc6947ac",
+    "physical-component:777631d5e6656693b99bbebff66787db117ac0e7595fb8b80d5d032ac0659038",
+    "physical-component:87d5810b83156c3f47cd05e5221d064dbf80622f98706a593ec08548d1588364",
+    "physical-component:9bfcc12c85f301e0745895e459345d8f81a1abe87b317188d1fc4c82c5989477",
+    "physical-component:9db43066a4445eede1df1316d18dd6ff40393734a09a720207c5f14685487a2c",
+    "physical-component:a1238cf0d19f4b0a045b41418061764b2ffa076128c4d7718a4a0b6693be1d7c",
+    "physical-component:a5caa084567455808fecd8aec8f98eff8eb24e41498c28eff9b740962c505401",
+    "physical-component:c9ab9d9b1f31057510a02095d979ec7126cd62fd780793d5c2bba7a775759989",
+    "physical-component:d5085885c61def27a4994e0603af5328dc208c342ad9787a1b4d1f98e45cfb0b",
+    "physical-component:d8a7c45330ea4f423c70a95cd8bb8a510225b04bcea292ffb5574e19d323d1ca",
+    "physical-component:e547c85631bb512b40659a4fbb669c704379bd7a2422ac1cf6ed837c2af171b9",
+    "physical-component:f39a89a7d4dd30b99fcd8f6f98b0394c5a17d4e406144262e63c2d0b549df746"
+  ],
+  "subject_ids_sha256": "37dd61b45ab3a5b85e65456f3f9b8e1aa0544ab026118de72e213ca91c14cde5",
+  "baseline": {
+    "commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/global-sources/IND-ADM3-metadata.json",
+        "bytes": 2206,
+        "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-ind-sourceData-archives",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/sourceData/gbOpen",
+      "role": "Original India ADM2 GeoJSON and ADM3 shapefile sourceData archives used to reconcile the advertised unit counts.",
+      "vintage": "geoBoundaries commit 9469f09",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries India release metadata declares ODbL 1.0; license URI https://opendatacommons.org/licenses/odbl/1-0/."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Exact Git LFS objects from sourceData/gbOpen/IND_ADM2.zip and IND_ADM3.zip at commit 9469f09; whole archive bytes match LFS SHA-256 IDs.",
+      "files": [
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/IND-ADM2.zip",
+          "bytes": 18533869,
+          "sha256": "de31379da90a382fc595d05ea71df8742ac01da04fc7fbad5775b3b8d90a6915",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/IND-ADM3.zip",
+          "bytes": 28025198,
+          "sha256": "322f8689cbdf274bbf6477158904e68aa292b4603c1a035ed7b7e92833f8a0ef",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_status": "reference",
+      "limit": "SourceData counts and name multisets explain observed retained-count differences, but repository artifacts do not identify the processing operation."
+    },
+    {
+      "id": "geoboundaries-ind-retained-simplified-products",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/IND",
+      "role": "Complete retained simplified India ADM2 and ADM3 products compared with the sourceData records.",
+      "vintage": "geoBoundaries commit 9469f09",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries India release metadata declares ODbL 1.0; license URI https://opendatacommons.org/licenses/odbl/1-0/."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Exact compressed retained-product partitions in coverage-screen-2026-10-08-04; decoded hashes match the source-corpus catalogue.",
+      "files": [
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-04/adm2-000.bin.gz",
+          "bytes": 2210535,
+          "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 7979916,
+          "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db"
+        },
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-04/adm3-000.bin.gz",
+          "bytes": 11542134,
+          "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 33554432,
+          "uncompressed_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+        },
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/vintages/coverage-screen-2026-10-08-04/adm3-001.bin.gz",
+          "bytes": 2253028,
+          "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 6485570,
+          "uncompressed_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+        }
+      ],
+      "temporal_status": "reference",
+      "limit": "Name multisets are not a stable identifier join; no geometry, physical surface or processing cause is inferred."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py",
+      "bytes": 21110,
+      "sha256": "344ad9172da162a734c499221c6388b49ae0d7bacb1565173e19a0b3408fc295",
+      "hash_kind": "file-bytes",
+      "role": "method-code"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/report.json",
+      "bytes": 9411,
+      "sha256": "d204241ef36a719d3f809bbedc28b7aae1f9b02fdb92fe6e61e41ca560c9edb0",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/publication.json",
+      "bytes": 305,
+      "sha256": "b8c5f71f0d684c4acc494a653b3e4e0a28a6e21cc5dac5c84d35204199a38a7e",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "release-count-reconciliation",
+      "kind": "source",
+      "description": "Compare pinned geoBoundaries metadata counts and SourceData archive records to retained simplified-product counts. Compare source names as multisets only; sourceData records do not carry release shapeIDs. Do not use geometry predicates or interpret physical surface.",
+      "software": "Python 3.12; gzip, zipfile, incremental JSON parser, SHA-256",
+      "units": "features or source rows; source-name multiset differences"
+    }
+  ],
+  "commands": [
+    "run_id=reconciliation-$(date -u +%Y%m%dT%H%M%SZ); python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py --output-dir research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/$run_id && node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/$run_id/evidence-quality.json"
+  ],
+  "metrics": [
+    {
+      "id": "adm2_sourceData_record_count",
+      "value": 736,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "de31379da90a382fc595d05ea71df8742ac01da04fc7fbad5775b3b8d90a6915",
+      "input_set_sha256": "6bf390f71b01f07cbbc595ba325f6fd295cfae4c5b0400c3df659f8f41076c44",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "ADM2 sourceData archive features"
+    },
+    {
+      "id": "adm3_sourceData_record_count",
+      "value": 6836,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "322f8689cbdf274bbf6477158904e68aa292b4603c1a035ed7b7e92833f8a0ef",
+      "input_set_sha256": "6bf390f71b01f07cbbc595ba325f6fd295cfae4c5b0400c3df659f8f41076c44",
+      "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
+      "title": "ADM3 sourceData archive features"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "adm2_sourceData_record_count",
+      "value": 736,
+      "unit": "features"
+    },
+    {
+      "metric_id": "adm3_sourceData_record_count",
+      "value": 6836,
+      "unit": "features"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "adm2_sourceData_record_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/report.json",
+      "json_pointer": "/products/ADM2/sourceData_archive_record_count"
+    },
+    {
+      "metric_id": "adm3_sourceData_record_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-05/report.json",
+      "json_pointer": "/products/ADM3/sourceData_archive_record_count"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The advertised counts match the inspected SourceData archive row counts (736 ADM2; 6836 ADM3). The retained simplified products have 735 ADM2 and 6822 ADM3 features. The archive-to-retained count differences and exact source-name multisets are reproducible; the repository artifacts do not identify why those records are absent. Source-name equality is not a stable identity join.",
+      "source_ids": [
+        "geoboundaries-ind-sourceData-archives",
+        "geoboundaries-ind-retained-simplified-products"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  }
+}
