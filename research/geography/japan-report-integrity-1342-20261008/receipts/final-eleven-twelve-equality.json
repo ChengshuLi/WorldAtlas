@@ -1,0 +1,31 @@
+{
+  "schema": "worldatlas-final-two-run-byte-equality-v1",
+  "baseline_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+  "vintages": [
+    "run-eleven-20261008",
+    "run-twelve-20261008"
+  ],
+  "report_method_sha256": "9b2de49eeb0af4cde394c3019ffdf7278f0740aca93811272c597a008abeb3fe",
+  "products": [
+    {
+      "path": "source-fitness-table.json",
+      "bytes": 107649,
+      "sha256": "eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee",
+      "identical": true
+    },
+    {
+      "path": "territorial-context.json",
+      "bytes": 12963,
+      "sha256": "f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0",
+      "identical": true
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1384,
+      "sha256": "df67956ab97b3f7363c8891bed1930fb59b5def4a00cdb884d2b699941c2618b",
+      "identical": true
+    }
+  ],
+  "publication_receipt_last": true,
+  "note": "Both strict CLI runs reserve the complete fresh destination before reading/calculating, execute the immutable helper from the baseline Git blob, and publish the completion receipt last. Table, contact context and validation match byte-for-byte; publication receipts are vintage-specific."
+}

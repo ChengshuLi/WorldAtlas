@@ -1,0 +1,21 @@
+{
+  "schema": "worldatlas-writer-io-failure-v1",
+  "command": "reconcile_source_fitness_table.py --vintage late-writer-io-failure-20261008",
+  "fault_boundary": "actual CLI second output exclusive-open after complete first product write",
+  "fault": "injected OSError at filesystem open boundary",
+  "exit_code": 1,
+  "stdout_bytes": 0,
+  "stderr_sha256": "c9f9e90a82cb14502df13fb95134a296cc39671e21bcf9722607b8f7c0a25e2c",
+  "partial_product": {
+    "path": "source-fitness-table.json",
+    "bytes": 107649,
+    "sha256": "eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee",
+    "matches_successful_run_eleven": "eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee"
+  },
+  "context_written": false,
+  "validation_written": false,
+  "completion_receipt_written": false,
+  "original_table_sha256_before": "72ce7765076eb94f195de4e3f80cd521528c12e14c63ffc92c040e4ab2d5484d",
+  "original_table_sha256_after": "72ce7765076eb94f195de4e3f80cd521528c12e14c63ffc92c040e4ab2d5484d",
+  "status": "expected writer I/O failure; first new product matches retained successful output and no complete receipt exists"
+}

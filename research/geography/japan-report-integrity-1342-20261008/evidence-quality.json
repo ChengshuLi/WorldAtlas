@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "issue": 1496,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:JPN:ADM2:22064153B10464594987148",
+    "gb:JPN:ADM2:22064153B14063031562338",
+    "gb:JPN:ADM2:22064153B18374709515284",
+    "gb:JPN:ADM2:22064153B20086130003796",
+    "gb:JPN:ADM2:22064153B28818453738247",
+    "gb:JPN:ADM2:22064153B51662529993673",
+    "gb:JPN:ADM2:22064153B52868042497281",
+    "gb:JPN:ADM2:22064153B53045263163046",
+    "gb:JPN:ADM2:22064153B54573279257236",
+    "gb:JPN:ADM2:22064153B55014741833430",
+    "gb:JPN:ADM2:22064153B5531323380958",
+    "gb:JPN:ADM2:22064153B55931345507884",
+    "gb:JPN:ADM2:22064153B56242014914717",
+    "gb:JPN:ADM2:22064153B64476610605868",
+    "gb:JPN:ADM2:22064153B72338395356904",
+    "gb:JPN:ADM2:22064153B75016173897449",
+    "gb:JPN:ADM2:22064153B75857834624428",
+    "gb:JPN:ADM2:22064153B88065808639443",
+    "gb:JPN:ADM2:22064153B92731111025148",
+    "gb:JPN:ADM2:22064153B92910812775945",
+    "gb:JPN:ADM2:22064153B98075236396986"
+  ],
+  "subject_ids_sha256": "c2793183edf15362245e804fa3b18884e01ab1e0ba4ab39d6e07c48aaae89f94",
+  "baseline": {
+    "commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e",
+    "files": [
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/README.md","bytes":9106,"sha256":"a8477c9b28ceb26a8bf15b62bcd49295a5a5f7b0c8c731022f8f5654606ba3c7","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/evidence-quality.json","bytes":88412,"sha256":"1d483923650561a6bb6721ea4bf11d04c8fada3eb0bb06f42e79edf344efcca6","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/claim-receipt.json","bytes":945,"sha256":"493ded351442f86a9459f7dccf8982256b7ba2747953f2bd1c127fe5c781d568","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/existing-physical-row-scope.json","bytes":129526,"sha256":"70c424d2ccd38442dceb4f585da08cc6bb4dd8e88d8af5bb849fc192120a6518","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/immutable-scope-and-inputs.json","bytes":269440,"sha256":"61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/issue-snapshot.json","bytes":14977,"sha256":"95c7e61f8e7d2a34ef59bf2d62f1ce8030312450c6bd50da6924ee32cee0fa33","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/root-proposal-proof.json","bytes":264204,"sha256":"d50f3f78181b28c3fa1694123add3861bd93fd793ea227a28fa0d1266ca76f73","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/runtime-freeze.json","bytes":189522,"sha256":"547fb73c9e70b2033ad810d88a8a4125c14a88f33718684ff36421d4550f04b1","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/authenticate_geoboundaries.py","bytes":5996,"sha256":"535a0f3ca26a3b65b6b38d8631edfaebfc5512d38923517d2634ae2658c5673f","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/authenticate_inputs.py","bytes":14481,"sha256":"807f7f28d3eed5575a5087284db1afe414370ef3207a7d62c73da838baff714f","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/build_evidence_quality.py","bytes":14383,"sha256":"8a49fdfd5c50f825ade05c0e0d7820ef809206b7b05cfd6fba9217fc8ec240af","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/build_source_fitness_table.py","bytes":11167,"sha256":"1c867bd02cc1e42207ac0a7cddaf7b320be1b8eda292b7e4f61189c5a3c2535a","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/freeze_closure.py","bytes":7214,"sha256":"02011c8f392919a74addec05514dd4b7d4b2e072517d02037c20a44525a110b2","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/inspect_mlit_source.py","bytes":3792,"sha256":"18282acde00f9007e7cb562041c4eacf7e608e150f432ae242b43bfbf3fbddd3","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/mlit_shapefile.py","bytes":6177,"sha256":"d561ee840ac03ff37ae5c4963b7f10fdfd34faf6ed2cce290928d79741a086bc","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/producer.py","bytes":15468,"sha256":"0cefe940cd39ad5f2717710dd976ec124927f7a10c4fd4f7ace63d02b3642f59","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/producer_controls.py","bytes":5241,"sha256":"ef123586c3fba74c8af810c71564aa02774331c93ec0aa76b4408110335e1940","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/restore_mlit_source.py","bytes":3068,"sha256":"ee22b4ca754e94ddfefb897c69971227fb36e7ea8b5ff3fb8cb41735cf8918dd","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/reuse_physical_rows.py","bytes":1979,"sha256":"beb3f6a2f3414581776e722bff18ee18d833a2ee1577b458812780ea0981e0b5","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/methods/run_once.py","bytes":7260,"sha256":"334904f5be1510de0b378139fe662ce76bce2ee16e03e1066e83a0f9e6c69ec9","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/geoboundaries-input-authentication.json","bytes":75681,"sha256":"be3554c8e99ba37b2f60bf6fbf8a59b506a06adb486a665d9a26843a8b4ad70d","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/input-authentication.json","bytes":27776,"sha256":"af1bc5604e22a04a837c34f59aa8ffa50963c78337cb6e187abc13555bb52abe","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/mlit-archive-restoration.json","bytes":1371,"sha256":"1070178d0657fb4ddcfc599dd6fef61b9620974a8080250a535e1c7bf54e569f","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/mlit-source-authentication.json","bytes":3023,"sha256":"7308ccb95e5eea62d252b33c601b082d3b093dc4c81d413fff99032567c8cd19","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-negative-validation.json","bytes":1138,"sha256":"456217b1273d14d031b8786d21672975439f59a153c078a9e025185baddea95e","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-positive-validation.json","bytes":793,"sha256":"259dae5f886fbd245aba096e1cccf73738440d466dfc3cf101c56623aee96745","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-reproducibility-validation.json","bytes":484,"sha256":"feae98ff83952b380e39903b00e14754e50b1a04f1cd243cdae0e0c32538a977","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/producer-negative-control.json","bytes":693,"sha256":"b04fa63287d773a099ff83a7b47de7e96c67e601634665dbd627e414dfd6a733","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/producer-positive-control.json","bytes":391,"sha256":"93ea0a2941446514b613992ce855c14bbe3dffcdf6ab06c7c2c8a8ebc02801f1","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/two-run-equality.json","bytes":443,"sha256":"9aafe1cc04f4218f3e65a00d048b93cbde0e2114c4d4cbaa7ccd571a6dbf6f13","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-fitness-table.json","bytes":107012,"sha256":"72ce7765076eb94f195de4e3f80cd521528c12e14c63ffc92c040e4ab2d5484d","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-overlays.json","bytes":4355038,"sha256":"2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one-attempt-2.json","bytes":3155,"sha256":"ba73d2f2a10384a463e0da3209650669282731b155e7625bd8d34688f09336c3","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one-attempt-2.log","bytes":25352,"sha256":"ac64f3d82630c17f36b91b89eccf3201932a3aa34e74cfa6abb58f8b4d832014","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one.json","bytes":3075,"sha256":"1734123c492be621b62f9c095409f6655d20f2011b28e317132c25ae7f0487bb","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one.log","bytes":1004,"sha256":"39434c3b9b276a06cf14bbebdb66ebdc3629fe43a98bd11370e54aed0f800960","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-two.json","bytes":3059,"sha256":"bab909f3debef68ecf1bc68c0bb7aa6a80756fb98bc248e37c5c168b5404e1ce","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-two.log","bytes":25352,"sha256":"ac64f3d82630c17f36b91b89eccf3201932a3aa34e74cfa6abb58f8b4d832014","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries-full-product.headers","bytes":899,"sha256":"d8bfbf795325fd47f729677419ae80eed803c61a9c33cf81475fc0308455b70c","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries-full-product.pointer","bytes":133,"sha256":"457fbd89bb485e3faf3de4eb1d5b1bbd5b5e6eb12c5b76aff24fb768ab7539d2","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/CITATION-AND-USE-geoBoundaries.original.txt","bytes":4316,"sha256":"f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/CITATION-AND-USE-geoBoundaries.txt","bytes":129,"sha256":"1036efd533332c7eed31d4b26c176a559f9742ef849cffd4488b5cd75fa5dbbb","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/citation-original.headers","bytes":955,"sha256":"51957242d097ce5c016ce564d94449758f52f6a7ca41114906500477d1eea64e","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/citation.headers","bytes":898,"sha256":"4ed8418611f092bcb2b4414f39dcac6ef10c3ed8531a9de3712a1441a5e868f1","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/full-product.geojson","bytes":10897321,"sha256":"27a0a8fa84fdab6d56b2da1c295b3c71090190d155f6b463bfd5c47beffba972","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/full-product.headers","bytes":972,"sha256":"8d5ddd5baca6a32fed662c7ebaa2caaf702ae4153592e3cbb92c9d4a02e2e722","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/full-product.pointer","bytes":133,"sha256":"457fbd89bb485e3faf3de4eb1d5b1bbd5b5e6eb12c5b76aff24fb768ab7539d2","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/metadata-json.headers","bytes":968,"sha256":"7f39003a3812f8c967f3a2010a7f632e27bc2fa9e812e1324ddd0d402f10deb6","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/metadata-pointer.headers","bytes":898,"sha256":"748c3a9e2be12c8887df106be76e7ef9543b222f9acfd78fe9bb8e0e2ced3192","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/metadata.json","bytes":827,"sha256":"292087a9608c34243c8a64f21575866b76a3343d14c36270741610ed2c84904d","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/metadata.pointer","bytes":128,"sha256":"ddb996c182b0f48a24cf2ced32c1c30ea3d502d1374e38c50ea6922523dd88d6","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/simplified-pointer.headers","bytes":898,"sha256":"0fbedaff2fe0d63c75ff048faf47c94ad7b5b037a108a5d54d810bcfd3fb2d81","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/simplified-product.geojson.gz","bytes":1591349,"sha256":"2edae45c237a87f8b2b8477f32840c6d1ce21105d6c6040cda2bf0cf6ed1cf7f","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/geoboundaries/simplified-product.pointer","bytes":132,"sha256":"97f6b340ec5577ba4c81b037b40aedc603fb8c3b5c217d490111c10d833a0d92","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/gsi/digital-map-200000.headers","bytes":345,"sha256":"df09d384832604b65b6084cb320f2949873a71eaa71f28b9f217baed0614180a","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/gsi/digital-map-200000.html","bytes":27712,"sha256":"a8011b3a97bf38fc836b6000773901461d3e54a880f0fc59b83a5a9d549105c8","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/gsi/kiban-app.headers","bytes":85,"sha256":"a3b59c29c7b0e8c5547f047bf7d3007ab961f1c78bbcebbe3798b38d026925ad","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/gsi/kiban-app.html","bytes":93,"sha256":"0d3e98ca727fc1201b436170af5a63f23348aaf146a3ac6234f6c4da283e8b34","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/gsi/kiban-map.headers","bytes":85,"sha256":"a3b59c29c7b0e8c5547f047bf7d3007ab961f1c78bbcebbe3798b38d026925ad","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/gsi/kiban-map.html","bytes":93,"sha256":"0d3e98ca727fc1201b436170af5a63f23348aaf146a3ac6234f6c4da283e8b34","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/KS-META-N03-17_170101.xml","bytes":16226,"sha256":"89166a5c9ec400e349f58b9bdeb7600a0981012f4b6af88ed585583f5d1d2051","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/N03-17_170101.prj","bytes":221,"sha256":"f68d9dd64784938c42d8d459468631e52c358d51b6090d86b46d6ff87a1b9738","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-2017-download.headers","bytes":443,"sha256":"f9323590f30cd34bab1b2ecda777ec2be4b0fc5c291dc6a103e122186fc8e4d2","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-2017-retrieval-started-at.txt","bytes":21,"sha256":"c7f920c4080ca9a4a806c542ea5c4dc69a2d5226a0ca73b5183f51edb777bdf2","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-2017-retrieved-at.txt","bytes":21,"sha256":"09c4bd7681f0c16465aae3463677b0f490e48f3c9e0f7b59cce68322d5d213fc","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-2017-source-manifest.json","bytes":4723,"sha256":"3733bd2ae0e4f484abc4d91cd5d9981472633b737531c491370be1d8fe7e886a","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-2024-list.headers","bytes":429,"sha256":"29c95c8b24c3f46aaa193c8bffe081e4fbae59c7b09a0ad87e3b2caf6125d4a2","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-2024-list.html","bytes":2379631,"sha256":"61f8e2b28b9e4e1de575d128a4736cf20f4588c62d43c1163a6a5a3bbd2c49a2","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-v2_3-spec.headers","bytes":438,"sha256":"006956a45a7f400ad7959c47c525c339d288a62599b267d7bcfeddc60963ca73","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-v2_3-spec.pdf","bytes":292621,"sha256":"8e3b5484f5122c75bd8cb6628bd05722ef05c5e48e924173a5b2e80104dfe1de","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-v2_3.headers","bytes":429,"sha256":"75a5184c68322ac34fe56fb3e0251f10fa1edee463daf2e8f9ed3da82a6f2aa0","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/n03-v2_3.html","bytes":1080998,"sha256":"2dc1a44224bee8fb79a13ae023737a7b0644521285bf3e1be5fcb75f67372b43","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/terms-legacy.headers","bytes":429,"sha256":"3e4c6ce7d99196e653d89bab83aad8d0389e5ef9876959f4ac9a08c8dd732104","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/mlit/terms-legacy.html","bytes":62499,"sha256":"5e5b06a9731123e72dec2f497122363de5e2e003b7c37b41963159f967baefa7","hash_kind":"file-bytes"},
+      {"path":"research/geography/japan-nine-gap-family-source-fitness-20261007/sources/source-provenance.json","bytes":7128,"sha256":"5f44b12cb616c8f4849a079a9977311d01ede2b188d8285cd6b7662a0b16add0","hash_kind":"file-bytes"},
+      {"path":"data/world-index.json","bytes":944,"sha256":"a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-0.json","bytes":8539839,"sha256":"bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-1.json","bytes":8060108,"sha256":"4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-2.json","bytes":6259307,"sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-3.json","bytes":5153118,"sha256":"e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-4.json","bytes":4835479,"sha256":"e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-5.json","bytes":5226173,"sha256":"20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-6.json","bytes":4607953,"sha256":"dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-7.json","bytes":4257402,"sha256":"1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-8.json","bytes":5097739,"sha256":"2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-9.json","bytes":5729632,"sha256":"9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-10.json","bytes":5144571,"sha256":"ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-11.json","bytes":5133018,"sha256":"d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-12.json","bytes":4489493,"sha256":"24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-13.json","bytes":5709487,"sha256":"90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-14.json","bytes":4355198,"sha256":"c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-15.json","bytes":5180426,"sha256":"6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-16.json","bytes":5213846,"sha256":"b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-17.json","bytes":4948066,"sha256":"1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-18.json","bytes":4909063,"sha256":"ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-19.json","bytes":4583022,"sha256":"baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-20.json","bytes":6570767,"sha256":"9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-21.json","bytes":6737781,"sha256":"d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-22.json","bytes":4746385,"sha256":"f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-23.json","bytes":4962410,"sha256":"d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-24.json","bytes":4816899,"sha256":"b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-25.json","bytes":4525239,"sha256":"dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-26.json","bytes":4608983,"sha256":"44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-27.json","bytes":4863162,"sha256":"e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-28.json","bytes":6613963,"sha256":"2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-29.json","bytes":12932167,"sha256":"077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-30.json","bytes":11979437,"sha256":"d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-31.json","bytes":10086485,"sha256":"44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-32.json","bytes":10211739,"sha256":"00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64","hash_kind":"file-bytes"},
+      {"path":"data/geography/part-33.json","bytes":607984,"sha256":"d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe","hash_kind":"file-bytes"},
+      {"path":"data/geography/source-restoration-additions.json","bytes":1573576,"sha256":"04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9","hash_kind":"file-bytes"},
+      {"path":"data/geography/macro-loose-ends-v5-additions.json","bytes":11393,"sha256":"8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1","hash_kind":"file-bytes"},
+      {"path":"data/hierarchy.json","bytes":10164089,"sha256":"568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b","hash_kind":"file-bytes"},
+      {"path":"scripts/evidence/immutable.py","bytes":17414,"sha256":"a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46","hash_kind":"file-bytes"}
+    ],
+    "pins": {
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/immutable-scope-and-inputs.json": "61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/existing-physical-row-scope.json": "70c424d2ccd38442dceb4f585da08cc6bb4dd8e88d8af5bb849fc192120a6518",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-overlays.json": "2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-fitness-table.json": "72ce7765076eb94f195de4e3f80cd521528c12e14c63ffc92c040e4ab2d5484d",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/methods/build_source_fitness_table.py": "1c867bd02cc1e42207ac0a7cddaf7b320be1b8eda292b7e4f61189c5a3c2535a",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/runtime-freeze.json": "547fb73c9e70b2033ad810d88a8a4125c14a88f33718684ff36421d4550f04b1",
+      "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "scoped_part_11": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02",
+      "scoped_part_12": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+      "report_immutable_helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "report_hierarchy_snapshot": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/immutable-scope-and-inputs.json": "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/immutable-scope-and-inputs.json",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/existing-physical-row-scope.json": "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/existing-physical-row-scope.json",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-overlays.json": "research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-overlays.json",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-fitness-table.json": "research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-fitness-table.json",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/methods/build_source_fitness_table.py": "research/geography/japan-nine-gap-family-source-fitness-20261007/methods/build_source_fitness_table.py",
+      "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/runtime-freeze.json": "research/geography/japan-nine-gap-family-source-fitness-20261007/inputs/runtime-freeze.json",
+      "audited_world_index": "data/world-index.json",
+      "scoped_part_11": "data/geography/part-11.json",
+      "scoped_part_12": "data/geography/part-12.json",
+      "report_immutable_helper": "scripts/evidence/immutable.py",
+      "report_hierarchy_snapshot": "data/hierarchy.json"
+    },
+    "subject_files": {
+      "gb:JPN:ADM2:22064153B10464594987148": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B14063031562338": "data/geography/part-11.json",
+      "gb:JPN:ADM2:22064153B18374709515284": "data/geography/part-11.json",
+      "gb:JPN:ADM2:22064153B20086130003796": "data/geography/part-11.json",
+      "gb:JPN:ADM2:22064153B28818453738247": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B51662529993673": "data/geography/part-11.json",
+      "gb:JPN:ADM2:22064153B52868042497281": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B53045263163046": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B54573279257236": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B55014741833430": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B5531323380958": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B55931345507884": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B56242014914717": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B64476610605868": "data/geography/part-11.json",
+      "gb:JPN:ADM2:22064153B72338395356904": "data/geography/part-11.json",
+      "gb:JPN:ADM2:22064153B75016173897449": "data/geography/part-11.json",
+      "gb:JPN:ADM2:22064153B75857834624428": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B88065808639443": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B92731111025148": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B92910812775945": "data/geography/part-12.json",
+      "gb:JPN:ADM2:22064153B98075236396986": "data/geography/part-12.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "mlit-n03-2017",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2017/N03-170101_GML.zip",
+      "role": "Nationwide Japanese administrative/coastline source; used here only through the complete retained PR #1342 overlay report.",
+      "vintage": "N03 v2.3, 2017-01-01 reference",
+      "retrieved_at": "2026-10-07T06:54:39Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Prior packet captured the product-specific 2017 commercial-use indication and legacy terms allowing attributed copying/redistribution subject to stated limitations; no broader present-day or underlying third-party rights determination."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "The original nationwide ZIP is 242211059 bytes; retrieve from the official URL and verify SHA256 a649b4099c1b0df80a6fb9ed087b594ed75ae9a92e9511cecdb6463d1480c6fb before native-source reanalysis. This repair consumes the pinned retained overlay report instead.",
+      "limit": "Native source archive exceeds the file cap and was not freshly read/recomputed; results are authenticated as retained report values only."
+    },
+    {
+      "id": "geoboundaries-jpn-adm2-products",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/JPN/ADM2",
+      "role": "Current Atlas identity/geometry records and the prior packet source comparison context; no new native geoBoundaries measurements here.",
+      "vintage": "2017 metadata label; source update 2023-01-19 and build 2023-12-12 in prior packet",
+      "retrieved_at": "2026-10-06T23:40:00Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Prior packet retains attribution/per-feature citations and source license metadata; this repair does not redistribute a new source copy."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Use the complete retained source products, pointers and citations in the original Japan source-fitness packet.",
+      "limit": "Metadata year does not prove effective geometry date, positional accuracy or legal authority."
+    }
+  ],
+  "outputs": [
+    {"path":"research/geography/japan-report-integrity-1342-20261008/README.md","bytes":7600,"sha256":"5f301249f4130e4924e14f6537e16681463908ba5d4dc66ffb5b77e4adda8fc5","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py","bytes":19456,"sha256":"9b2de49eeb0af4cde394c3019ffdf7278f0740aca93811272c597a008abeb3fe","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/methods/build_evidence_quality.py","bytes":12921,"sha256":"b60eeb823fd40ee3c9a61cb0de7458fb60e413445cc123d0e471c3aa4f621563","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/tests/test_reconcile.py","bytes":13905,"sha256":"a4f944a907eb884765709a39624441ddba4d5c3c32c3c7eeb970c40c3470fa16","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/two-run-equality.json","bytes":924,"sha256":"2ae63a08aa02b1ff833ad633b10c78c7b4869c6221c614170293e7561abfbb68","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/run-seven-eight-preliminary-equality.json","bytes":970,"sha256":"1eba33fba8e8c3709b2958063e52cf3a66de89d4722b8c306fb5068bb7b5222c","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/final-two-run-equality.json","bytes":986,"sha256":"1a3d1f839a1ff03f44ed3d1b15b70ed46bce37ca601aa8ca11dc770dc21e5552","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/final-eleven-twelve-equality.json","bytes":1197,"sha256":"b0c605eeb898874667e01b85034d0fbbbd1c97bdc8a036c3408fc31597d56e2e","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/superseded-vintages.json","bytes":10500,"sha256":"bb0f1a3a017d723f6fe3a4b64a41efa027d557a5fb88fe3e87832a290c2dd6fa","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/late-failure.json","bytes":399,"sha256":"215cf1353664df349449e2971e378bb0c289745e780a723e2e47d2ab68e1e4c5","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-stderr.txt","bytes":1211,"sha256":"766a7c9cc67456d505c7922186d90f6596c977533a2c8814b8cc3bd5f96aa81c","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-final.json","bytes":405,"sha256":"f11bf1c67b61dd4c3f902b59e785eaabb1a4efa81a2d333fb22d96d251eaafc6","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-final-stderr.txt","bytes":1103,"sha256":"fe67fa366dd5810f4771d794786d1709aa378264971232df87cb64d0a75633bd","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-pinned-helper.json","bytes":413,"sha256":"870b449db1a68dffa65d2b0bcdf3734e2ffffda273ece9a8736fef0e8ec276e9","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-pinned-helper-stderr.txt","bytes":1211,"sha256":"5eb2ae78d7ba6979f8cfbaf9f64db51078947c9f65a13dcf9fe04a2e40ea2c6b","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/writer-io-failure.json","bytes":1130,"sha256":"70889c36dc5ebece0acbce9a87ac55441f5886645c8ce6ed63a2149c666d77a0","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/writer-io-failure-stderr.txt","bytes":1954,"sha256":"c9f9e90a82cb14502df13fb95134a296cc39671e21bcf9722607b8f7c0a25e2c","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/collision-sentinel.json","bytes":570,"sha256":"b58f72392137758e61dd5fdbadbb9b95d1e1140300f8e9b71f84572312c519ba","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/receipts/collision-sentinel-stderr.txt","bytes":1457,"sha256":"2f94db1542e7d1b84b35573e0b3e499dddbe55e706cab20f38f9d041ecd058f0","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/superseded-history.json.gz","bytes":275833,"sha256":"52f11670049f58c637ca36a68cd60588dc5dc1f399cf85f0bc22f1134bf04dd6","hash_kind":"file-bytes","role":"research-output","uncompressed_bytes":1313533,"uncompressed_sha256":"ef900ccc03b1e274ea5ce783b1ac19802629c69e76eaae914f474a94d5239d65"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/publication.json","bytes":740,"sha256":"cd56479dbeb79cd860d6738659dec950e3a4857a30ecceb964abb18066a60ea4","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/source-fitness-table.json","bytes":107649,"sha256":"eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/territorial-context.json","bytes":12963,"sha256":"f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json","bytes":1384,"sha256":"c9f68c91be32d18aab4aa60280f31d0a1240d0222507f0260f14141f84db89e9","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/publication.json","bytes":737,"sha256":"ce79d3cd44f831068a33129730560efc223b9a760fed481e57bba4f81caaff74","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/source-fitness-table.json","bytes":107649,"sha256":"eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/territorial-context.json","bytes":12963,"sha256":"f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/validation.json","bytes":1384,"sha256":"c9f68c91be32d18aab4aa60280f31d0a1240d0222507f0260f14141f84db89e9","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/publication.json","bytes":746,"sha256":"29a75bf57e98e8c9a2f48bb4e44a53598521bcf5382f6d8ef4073cd135cc6309","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/source-fitness-table.json","bytes":107649,"sha256":"eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/territorial-context.json","bytes":12963,"sha256":"f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json","bytes":1384,"sha256":"df67956ab97b3f7363c8891bed1930fb59b5def4a00cdb884d2b699941c2618b","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/publication.json","bytes":746,"sha256":"dc05cf9d7c1bc550c29a34547ebac7bd1b16ffaca401808960d97c39a8c32cf7","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/source-fitness-table.json","bytes":107649,"sha256":"eb65d865cd6610342bed5c7c86cc03fd5efd8a56264d2d897961609e25db8bee","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/territorial-context.json","bytes":12963,"sha256":"f14317540f1c60b8cb81d75d5da7c792ae3b0c048e088f2b151a8d8970e956c0","hash_kind":"file-bytes","role":"research-output"},
+    {"path":"research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/validation.json","bytes":1384,"sha256":"df67956ab97b3f7363c8891bed1930fb59b5def4a00cdb884d2b699941c2618b","hash_kind":"file-bytes","role":"research-output"}
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/methods/build_evidence_quality.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/collision-sentinel-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/collision-sentinel.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/final-eleven-twelve-equality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/final-two-run-equality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-final-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-final.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-pinned-helper-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-pinned-helper.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/late-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/run-seven-eight-preliminary-equality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/superseded-vintages.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/two-run-equality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/writer-io-failure-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/receipts/writer-io-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/tests/test_reconcile.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/source-fitness-table.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/territorial-context.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/source-fitness-table.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/territorial-context.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-nine-20261008/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/source-fitness-table.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/territorial-context.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-ten-20261008/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/source-fitness-table.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/territorial-context.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-twelve-20261008/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/superseded-history.json.gz",
+      "status": "added"
+    }
+  ],
+  "methods": [
+    {
+      "id": "pinned-report-transfer",
+      "kind": "code",
+      "description": "Reporting code authenticates original packet/scope/target records and complete retained overlay report, then transfers each MLIT area by source code, record ordinal/number, target identity and intersection geometry hash. It does not calculate or alter geometry.",
+      "software": "Python 3.7.3 runtime in this workspace; standard library JSON/hashlib/subprocess and baseline-pinned immutable.py; report-level assertions only.",
+      "units": "Exact retained source values in JGD2011 geographic square degrees; not square metres. Identity/count checks are counts, not geographic truth.",
+      "area_method": "Transfer of retained overlay intersection_area_jgd2011_degrees2 by exact source/target identity; no area recomputation."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "mlit_candidate_area_records",
+      "value": 37,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804",
+      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+    },
+    {
+      "id": "components",
+      "value": 28,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414",
+      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+    },
+    {
+      "id": "families",
+      "value": 9,
+      "unit": "families",
+      "vintage": "baseline",
+      "input_sha256": "61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414",
+      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+    },
+    {
+      "id": "current_contacts",
+      "value": 21,
+      "unit": "contacts",
+      "vintage": "baseline",
+      "input_sha256": "61069cc6d7727238c552c4f25de9cfa1e7fec7608dc74bcb84605de1620e6414",
+      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+    },
+    {
+      "id": "mlit_candidate_area_min",
+      "value": 1.3893469838618924e-10,
+      "unit": "square degrees",
+      "vintage": "baseline",
+      "input_sha256": "2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804",
+      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+    },
+    {
+      "id": "mlit_candidate_area_max",
+      "value": 9.862325845267497e-06,
+      "unit": "square degrees",
+      "vintage": "baseline",
+      "input_sha256": "2c326ee027c6b4f5ea196e39daca657b493a51f9cf7834bee46a4ca7a9973804",
+      "evaluation_commit": "d2e4261462ee1d322cec61c29595d78c6f1b2a8e"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "mlit_candidate_area_records",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json",
+      "json_pointer": "/transfer/rows"
+    },
+    {
+      "metric_id": "components",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json",
+      "json_pointer": "/scope/components"
+    },
+    {
+      "metric_id": "families",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json",
+      "json_pointer": "/scope/families"
+    },
+    {
+      "metric_id": "current_contacts",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json",
+      "json_pointer": "/scope/contacts"
+    },
+    {
+      "metric_id": "mlit_candidate_area_min",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json",
+      "json_pointer": "/transfer/min"
+    },
+    {
+      "metric_id": "mlit_candidate_area_max",
+      "path": "research/geography/japan-report-integrity-1342-20261008/vintages/run-eleven-20261008/validation.json",
+      "json_pointer": "/transfer/max"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "mlit_candidate_area_records",
+      "value": 37,
+      "unit": "records",
+      "text": "All retained candidate MLIT area rows transferred after exact identity binding."
+    },
+    {
+      "metric_id": "components",
+      "value": 28,
+      "unit": "components",
+      "text": "Complete detector-component scope."
+    },
+    {
+      "metric_id": "families",
+      "value": 9,
+      "unit": "families",
+      "text": "Complete source-fitness family scope."
+    },
+    {
+      "metric_id": "current_contacts",
+      "value": 21,
+      "unit": "contacts",
+      "text": "Complete current Atlas ADM2 contact scope."
+    },
+    {
+      "metric_id": "mlit_candidate_area_min",
+      "value": 1.3893469838618924e-10,
+      "unit": "square degrees",
+      "text": "Smallest retained positive angular area, not a physical-area measurement."
+    },
+    {
+      "metric_id": "mlit_candidate_area_max",
+      "value": 9.862325845267497e-06,
+      "unit": "square degrees",
+      "text": "Largest retained positive angular area, not a physical-area measurement."
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The prior table drops the complete retained MLIT angular area field on all 37 candidate intersections; the new table copies the corresponding source report values while preserving the other table fields.",
+      "status": "supported",
+      "source_ids": [
+        "mlit-n03-2017"
+      ]
+    },
+    {
+      "text": "The reported areas are in square degrees in a JGD2011 geographic CRS and must not be interpreted as square metres.",
+      "status": "supported",
+      "source_ids": [
+        "mlit-n03-2017"
+      ]
+    },
+    {
+      "text": "The retained MLIT measurements have not been freshly authenticated against the oversized native source archive in this repair.",
+      "status": "unresolved",
+      "source_ids": [
+        "mlit-n03-2017"
+      ]
+    },
+    {
+      "text": "Administrative intersections do not establish physical classification, cause, legal ownership, territorial approval or permission to publish/import geometry.",
+      "status": "unresolved",
+      "source_ids": [
+        "mlit-n03-2017",
+        "geoboundaries-jpn-adm2-products"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py --vintage run-eleven-20261008",
+    "python3 research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py --vintage run-twelve-20261008",
+    "python3 -m unittest discover -s research/geography/japan-report-integrity-1342-20261008/tests -v",
+    "node scripts/evidence-quality.mjs research/geography/japan-report-integrity-1342-20261008/evidence-quality.json"
+  ]
+}

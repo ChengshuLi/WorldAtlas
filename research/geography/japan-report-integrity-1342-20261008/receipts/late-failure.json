@@ -1,0 +1,9 @@
+{
+  "schema": "worldatlas-late-failure-control-v1",
+  "command": "reconcile_source_fitness_table.py --vintage late-failure-control-20261008 --fail-after-compute",
+  "exit_code": 1,
+  "stdout_bytes": 0,
+  "stderr_sha256": "766a7c9cc67456d505c7922186d90f6596c977533a2c8814b8cc3bd5f96aa81c",
+  "publication_directory_exists": false,
+  "status": "expected failure before output admission/publication"
+}

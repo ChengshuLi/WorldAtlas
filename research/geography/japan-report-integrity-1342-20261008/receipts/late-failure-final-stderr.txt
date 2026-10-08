@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py", line 205, in <module>
+    return manifest
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py", line 204, in main
+    run.publish({'source-fitness-table.json':copied,'territorial-context.json':context,'validation.json':manifest})
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/research/geography/japan-report-integrity-1342-20261008/methods/reconcile_source_fitness_table.py", line 195, in execute
+    subjects,_=base.subjects(SUBJECTS)
+RuntimeError: intentional late failure before publication
