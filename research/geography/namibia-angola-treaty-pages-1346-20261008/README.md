@@ -21,13 +21,15 @@ The context IDs in the issue are 10 retained ADM2 features: three Angola municip
 From the repository root, run the additive validator twice with two unused run names, for example:
 
 ```sh
-python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --run-id treaty-page-audit-3
-python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --run-id treaty-page-audit-4
-python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --compare-runs treaty-page-audit-3 treaty-page-audit-4
+python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --run-id treaty-page-audit-5
+python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --run-id treaty-page-audit-6
+python3 research/geography/namibia-angola-treaty-pages-1346-20261008/validate_treaty_pages.py --compare-runs treaty-page-audit-5 treaty-page-audit-6
 node scripts/evidence-quality.mjs research/geography/namibia-angola-treaty-pages-1346-20261008/evidence-quality.json
 ```
 
-Each execution reads authenticated immutable baseline bytes, scans the complete pinned world-index part inventory for all 10 declared context IDs, authenticates the complete treaty volume, extracts and checks the mapped pages, and checks all three false historical locator records plus the incomplete claim range. It writes a fresh exclusive `vintages/<run-id>/` only after `NewVintage` has admitted the complete destination. The output controls exercise altered, missing, and truncated treaty bytes, a correct in-memory fixture, and a pre-existing destination sentinel. `--compare-runs` authenticates each full publication receipt and emits the reproducibility record only when both distinct runs used this exact validator source and their semantic output hashes match. These are bounded reporting/citation checks; neither reruns nor validates the prior 21-candidate raster analysis.
+Each execution reads authenticated immutable baseline bytes, scans the complete pinned world-index part inventory for all 10 declared context IDs, authenticates the complete treaty volume, extracts and checks the mapped pages, and checks all three false historical locator records plus the incomplete claim range. The exact production admission function is also exercised with altered, missing, and truncated source bytes. Each run writes a fresh exclusive vintage through `NewVintage`; controls also validate a correct in-memory fixture and preserve an occupied destination sentinel. `--compare-runs` first authenticates both complete publication receipts and their controls, then chooses a fresh comparison vintage derived from the run pair. It emits the reproducibility record only when both distinct runs used this exact validator source and their semantic output hashes match. These are bounded reporting/citation checks; neither reruns nor validates the prior 21-candidate raster analysis.
+
+The earlier `treaty-page-audit-3`, `treaty-page-audit-4`, and `treaty-page-audit-repro-1` publications are retained as superseded preliminary work. Independent review found their byte-drift fixtures duplicated the hash predicate rather than exercising the shared production admission function, and their comparison output used a fixed vintage. The final acceptance executions are runs 5 and 6 with the later, reviewed method hash and fresh-pair comparison receipt.
 
 ## Findings kept unresolved
 

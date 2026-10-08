@@ -53,6 +53,13 @@ def text_page(reader: PdfReader, number: int) -> str:
     return " ".join((reader.pages[number - 1].extract_text() or "").split())
 
 
+def authenticated_treaty_reader(raw: bytes | None) -> tuple[bytes, PdfReader]:
+    """Production source admission used by both the real run and drift controls."""
+    if raw is None or len(raw) != EXPECTED_PDF_BYTES or sha256(raw) != EXPECTED_PDF_SHA:
+        fail("Treaty source bytes failed the pinned size/SHA-256 admission")
+    return raw, PdfReader(io.BytesIO(raw), strict=True)
+
+
 def scan_historical_record(report: dict) -> list[str]:
     """Return the specific false bindings required to be exposed by this audit."""
     findings = []
@@ -235,10 +242,7 @@ def run(run_id: str) -> Path:
     context = context_findings(baseline)
 
     page_map = json.loads(PAGE_MAP.read_text(encoding="utf-8"))
-    pdf_bytes = baseline.pinned_bytes(PDF_PATH)
-    if len(pdf_bytes) != EXPECTED_PDF_BYTES or sha256(pdf_bytes) != EXPECTED_PDF_SHA:
-        fail("Full treaty volume does not match its original size/hash")
-    reader = PdfReader(io.BytesIO(pdf_bytes), strict=True)
+    pdf_bytes, reader = authenticated_treaty_reader(baseline.pinned_bytes(PDF_PATH))
     source_observations = verify_page_map(page_map, reader)
 
     historical = []
@@ -274,15 +278,12 @@ def run(run_id: str) -> Path:
         fail("Fresh fixture fails to map English beacons 36–47")
 
     # Both modified and truncated bytes must be rejected by the real hash/size gate.
-    def authenticate(raw: bytes | None) -> None:
-        if raw is None or len(raw) != EXPECTED_PDF_BYTES or sha256(raw) != EXPECTED_PDF_SHA:
-            raise ValueError("treaty source bytes failed pinned size/hash")
     altered = pdf_bytes[:-1] + bytes([pdf_bytes[-1] ^ 1])
     truncated = pdf_bytes[:-1]
     rejects = []
     for label, candidate in (("source_absent", None), ("one_byte_changed", altered), ("one_byte_missing", truncated)):
         try:
-            authenticate(candidate)
+            authenticated_treaty_reader(candidate)
         except ValueError:
             rejects.append(label)
     if rejects != ["source_absent", "one_byte_changed", "one_byte_missing"]:
@@ -350,8 +351,6 @@ def compare_runs(run_one: str, run_two: str) -> Path:
     baseline.materialized_bytes(helper)
     if run_one == run_two:
         fail("Two distinct fresh run IDs are required")
-    output_vintage = "treaty-page-audit-repro-1"
-    destination = NewVintage(baseline, OWNED, output_vintage, ["reproducibility.json"])
     runs = []
     for run_id in (run_one, run_two):
         folder = ROOT / OWNED / "vintages" / run_id
@@ -380,6 +379,9 @@ def compare_runs(run_one: str, run_two: str) -> Path:
                      "findings_sha256": outputs["findings.json"]["sha256"]})
     if runs[0]["semantic_result_sha256"] != runs[1]["semantic_result_sha256"]:
         fail("Independent bounded executions disagree")
+    pair_key = (run_one + "\0" + run_two).encode("utf-8")
+    output_vintage = "treaty-page-repro-" + hashlib.sha256(pair_key).hexdigest()[:12]
+    destination = NewVintage(baseline, OWNED, output_vintage, ["reproducibility.json"])
     value = {"method_id": "treaty-page-locator-audit", "kind": "reproducibility",
              "outcome": "passed", "run_one_sha256": runs[0]["semantic_result_sha256"],
              "run_two_sha256": runs[1]["semantic_result_sha256"], "runs": runs,
