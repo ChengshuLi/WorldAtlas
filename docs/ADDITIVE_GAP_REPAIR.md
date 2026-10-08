@@ -105,3 +105,22 @@ approve its source evidence. The producer must still prove common-rule source
 eligibility, complete current owner exclusion, full addition pointsets, and
 explicit zero-cell/idempotent dispositions before creating a release. No current
 release is changed merely by adding these reader and control paths.
+
+`retainedLandSourcePremises` derives mechanically checkable source-class
+premises from the full original support operations and the complete retained
+named-envelope/source-fit product. It compares whole coordinate rings, permitting
+only an exact closed-ring cyclic origin change; exterior and hole roles remain
+separate. Empty operations require complete empty geometry, kind and both zero
+areas. Full active-world and retired-source context, unique envelope identities,
+full parent/member joins and original residual geometries are required. Small
+nonzero residuals remain failures. This is a predicate report, not an authority
+brand or repair permit: cold input/provenance authentication and current native
+ownership exclusion still precede cell assignment. The preserved source-relative
+unknowns remain unknown.
+
+The actual add031 shared-edge control reads its complete public predecessor
+products and passes these source premises while retaining its original invalid
+literal-append / failed old floating-union construction evidence. Water, foreign
+identity, missing context, conflict and even a tiny nonzero original residual
+reject. The independent source product includes 19,050 retired locations;
+36 is its active part count, not its retired-location denominator.

@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync, gzipSync} from 'node:zlib';
 import {validateNativeSelectionReceipt} from './native-ownership/require-verified-selection.mjs';
 import verifiedCandidates from './native-ownership/verified-candidates.json' with {type:'json'};
-import {canonicalValue, footprintValueSha256} from '../src/effective-footprint.js';
+import {canonicalValue, footprintValueSha256, polygonParts} from '../src/effective-footprint.js';
 import {candidateBudget, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
 
 export const INVENTORY_VERSION = 'complete-source-relative-gap-inventory-v1';
@@ -17,6 +17,59 @@ const canonical = value => Buffer.from(JSON.stringify(canonicalValue(value)) + '
 const hex = value => /^[a-f0-9]{64}$/.test(value ?? '');
 function demand(value, message) { if (!value) throw Error(message); }
 function safe(name) { return typeof name === 'string' && /^[a-zA-Z0-9_.\/-]+$/.test(name) && name.split('/').every(p => p && p !== '.' && p !== '..'); }
+
+// These predicates consume full authenticated predecessor operation products.
+// Their result alone is not a custody/source-authority brand or release permit.
+export function wholePrimitivePointsetEqual(a,b) {
+  const normalize=g=>polygonParts(g).map(polygon=>polygon.map(ring=>{
+    const points=ring.slice(0,-1),strings=points.map(point=>JSON.stringify(point));
+    let first=0;for(let i=1;i<strings.length;i++)if(strings[i]<strings[first])first=i;
+    return JSON.stringify([...points.slice(first),...points.slice(0,first)]);
+  })).map(rings=>JSON.stringify([rings[0],...rings.slice(1).sort()])).sort();
+  return JSON.stringify(normalize(a))===JSON.stringify(normalize(b));
+}
+function completeEmptyGeometry(geometry) {
+  return geometry===null || geometry?.type==='GeometryCollection'&&Array.isArray(geometry.geometries)&&geometry.geometries.length===0
+    || ['Polygon','MultiPolygon'].includes(geometry?.type)&&Array.isArray(geometry.coordinates)&&geometry.coordinates.length===0;
+}
+export function retainedLandSourcePremises({record,candidate,sourceCase,sourceScope,target}) {
+  demand(record?.component_id===sourceCase?.component_id&&typeof record.component_id==='string','Source evidence component join differs');
+  polygonParts(candidate);polygonParts(target.geometry);
+  const support=record.complete_support;
+  demand(support&&support.hierarchy_disagreements,'Incomplete original support operation roster');
+  const emptyKeys=['mapped_inland_water_support','outside_mapped_L1_context','contradictory_land_water_support','missing_reconstruction','extra_reconstruction'];
+  const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0&&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
+  const failures=[];const premise=(name,value)=>{if(!value)failures.push(name);};
+  premise('retained-whole-land-pointset',record.status==='mapped-land-support'&&support.mapped_land_support?.kind==='whole-operation-pointset'
+    &&wholePrimitivePointsetEqual(candidate,support.mapped_land_support.geometry));
+  for(const key of emptyKeys)premise(key,empty(support[key]));
+  for(const key of ['L2-outside-L1','L3-outside-L2','L4-outside-L3'])premise(key,empty(support.hierarchy_disagreements[key]));
+  premise('complete-original-source-context',sourceScope?.active_feature_count===49625&&sourceScope.active_part_count===36
+    &&sourceScope.retired_location_count===19050&&sourceScope.native_feature_count===218&&sourceScope.native_unique_ecoregion_id_count===194);
+  premise('full-candidate-source-join',wholePrimitivePointsetEqual(candidate,sourceCase.candidate_geometry));
+  premise('retained-target-context',target.id===sourceCase.atlas_target_id&&target.properties?.parent_id===sourceCase.atlas_target_parent_id
+    &&target.properties?.name===sourceCase.atlas_target_name);
+  const native=sourceCase.native_covering_named_envelopes,v22=sourceCase.v22_covering_named_envelopes;
+  premise('unique-original-named-envelopes',native?.length===1&&v22?.length===1&&native[0].id===sourceCase.source_ecoregion_id
+    &&v22[0].id===native[0].id&&native[0].name===target.properties.name&&v22[0].name===target.properties.name
+    &&sourceCase.native_source_properties?.ECOREGION_ID===native[0].id&&sourceCase.v22_source_properties?.ECOREGION_ID===native[0].id);
+  premise('both-original-source-predicates',sourceCase.native_source_covers_candidate===true&&sourceCase.v22_source_covers_candidate===true);
+  const parents=sourceCase.source_parent_coverage_records;
+  premise('complete-source-parent-context',Array.isArray(parents)&&parents.length>0&&parents.some(row=>row.covers===true&&row.name===sourceCase.source_parent)
+    &&sourceCase.atlas_parent_hierarchy_record?.id===target.properties.parent_id&&sourceCase.atlas_parent_hierarchy_record?.name===sourceCase.source_parent);
+  const retired=sourceCase.retired_administrative_reference_context,ids=sourceCase.atlas_target_source_member_ids;
+  premise('full-retired-member-context',Array.isArray(retired)&&Array.isArray(ids)&&ids.length>0&&new Set(ids).size===ids.length
+    &&retired.length===ids.length&&JSON.stringify(retired.map(row=>row.id).sort())===JSON.stringify([...ids].sort())
+    &&retired.every(row=>Array.isArray(row.parent_chain)&&row.parent_chain.length===5));
+  premise('complete-other-owner-exclusion',Array.isArray(sourceCase.active_feature_hits)&&sourceCase.active_feature_hits.every(hit=>hit.id===target.id)
+    &&Array.isArray(sourceCase.new_neighbor_intersections)&&sourceCase.new_neighbor_intersections.length===0);
+  premise('literal-old-loss-and-full-gain',sourceCase.union_loss_area_deg2===0&&completeEmptyGeometry(sourceCase.loss_geometry)
+    &&sourceCase.gain_candidate_symmetric_difference_area_deg2===0&&completeEmptyGeometry(sourceCase.gain_candidate_symmetric_difference_geometry)
+    &&sourceCase.candidate_not_added_area_deg2===0&&completeEmptyGeometry(sourceCase.candidate_not_added_geometry)
+    &&wholePrimitivePointsetEqual(candidate,sourceCase.gain_geometry));
+  return {component_id:record.component_id,source_compatible:failures.length===0,failed_premises:failures,
+    representation:'retained-base-plus-additions',authority:record.physical_authority,status:record.physical_status,limits:record.physical_limits};
+}
 
 const resolutionBrands = new WeakSet();
 // A reconciliation, not permission for a new repair. The caller authenticates
