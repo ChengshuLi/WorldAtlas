@@ -2,7 +2,7 @@
   "version": 1,
   "issue": 1229,
   "lane": "geography",
-  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
   "subject_ids": [
     "gb:NOR:ADM2:86288312B50158709887361",
     "gb:NOR:ADM2:86288312B64496782861055",
@@ -398,7 +398,7 @@
       "id": "natural-earth-land-reference",
       "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson",
       "role": "Generalized modern land reference used only for diagnostic overlay",
-      "vintage": "Natural Earth pinned commit ca96624a56bd078437bca8184e78163e5039ad19; detector retained release dated 2026-10-01",
+      "vintage": "Natural Earth source commit ca96624a56bd078437bca8184e78163e5039ad19, committed 2022-06-02; VERSION file 5.2.0-pre; retrieved 2026-10-05.",
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "redistributable",
@@ -407,7 +407,7 @@
       "retention": "retained",
       "verification": "verified",
       "restoration": "Original double-gzip file bytes preserved in the packet; source release/path is also pinned at geometry baseline.",
-      "limit": "Diagnostic context only; does not establish water, ice, sovereignty, coastline date, or boundary authority.",
+      "limit": "Generalized 1:10,000,000-scale modern land context; no target-specific positional accuracy or historical land/water assertion.",
       "temporal_status": "reference",
       "files": [
         {
@@ -422,7 +422,7 @@
       "id": "natural-earth-lakes-reference",
       "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson",
       "role": "Generalized major-lakes reference; not a complete water inventory",
-      "vintage": "Natural Earth pinned commit ca96624a56bd078437bca8184e78163e5039ad19; not year-specific hydrology",
+      "vintage": "Natural Earth source commit ca96624a56bd078437bca8184e78163e5039ad19, committed 2022-06-02; VERSION file 5.2.0-pre; retrieved 2026-10-05; not year-specific hydrology.",
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "redistributable",
@@ -431,7 +431,7 @@
       "retention": "retained",
       "verification": "verified",
       "restoration": "Original compressed lake file bytes preserved in the packet; the decoded source is bound by the pinned source receipt.",
-      "limit": "Major lakes/reservoirs only; does not cover all rivers or small water and does not establish historic water/ice or territory.",
+      "limit": "Generalized incomplete lake/reservoir layer; absence of intersection does not exclude small water, rivers, seasonal water, ice, or historical water.",
       "temporal_status": "reference",
       "files": [
         {
@@ -526,20 +526,44 @@
   "outputs": [
     {
       "path": "research/geography/gap-source-nordic-shared-seams-20261006/README.md",
-      "bytes": 6481,
-      "sha256": "8b1511e2e1cc3b75794053f7f514e3400d0df34dd2ec203ed883999e5625c3e4",
+      "bytes": 8587,
+      "sha256": "deeb3d7923ad3d10aa3a051b5cbca5cc206370ebd60b10ecf2f7fc0fe997cc34",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/source-and-candidate-comparison.json",
-      "bytes": 140112,
-      "sha256": "a20495f6a86bb95a8b598789b5ed592ed1518b452c9f7b2e1ae2831a4955b6b3",
+      "path": "research/geography/gap-source-nordic-shared-seams-20261006/physical-reference-fit.json",
+      "bytes": 12843,
+      "sha256": "f033c8ad7199826f5413945b61196b7b8efdcc9d2743870a978f187e5b1aed3a",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-nordic-shared-seams-20261006/physical-reference-overlays.json",
       "bytes": 5382,
       "sha256": "f2b5f0108a18b3383ce762d2b24d8bdf6bf09608445a4622f2d3a8123ec38a68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_physical_reference_overlay.py",
+      "bytes": 2880,
+      "sha256": "b01cfd198117137ebdf4e15293af9477073ed1c0d1726833edb9ee2df9edd66a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_source_comparison.py",
+      "bytes": 13824,
+      "sha256": "4fbae5c96877995dc5df97bec42bdbc769f6b44937998ffef91d1963f9f680bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-consumed-source-subjects.geojson",
+      "bytes": 29279,
+      "sha256": "ff1575cf01715366895b6fb9e1a982923f00875d55cb0d4da9fe0f4a52a96ba3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-atlas-subjects.geojson",
+      "bytes": 20876,
+      "sha256": "8766e34825f8f3cb3341f9000f6cf24b5c769c585264b11dc6b329b3c3b1c472",
       "hash_kind": "file-bytes"
     },
     {
@@ -555,27 +579,9 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-atlas-subjects.geojson",
-      "bytes": 20876,
-      "sha256": "8766e34825f8f3cb3341f9000f6cf24b5c769c585264b11dc6b329b3c3b1c472",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-consumed-source-subjects.geojson",
-      "bytes": 29279,
-      "sha256": "ff1575cf01715366895b6fb9e1a982923f00875d55cb0d4da9fe0f4a52a96ba3",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_source_comparison.py",
-      "bytes": 13824,
-      "sha256": "4fbae5c96877995dc5df97bec42bdbc769f6b44937998ffef91d1963f9f680bc",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_physical_reference_overlay.py",
-      "bytes": 2880,
-      "sha256": "b01cfd198117137ebdf4e15293af9477073ed1c0d1726833edb9ee2df9edd66a",
+      "path": "research/geography/gap-source-nordic-shared-seams-20261006/source-and-candidate-comparison.json",
+      "bytes": 140112,
+      "sha256": "a20495f6a86bb95a8b598789b5ed592ed1518b452c9f7b2e1ae2831a4955b6b3",
       "hash_kind": "file-bytes"
     }
   ],
@@ -597,6 +603,14 @@
       "description": "Whole source and baseline file hashes, decoded compressed bytes, canonical feature hashes, and component/fragment/contact bindings; source products compared by stable shapeID.",
       "software": "SHA-256; canonical sorted JSON; git immutable object store",
       "units": "bytes and SHA-256 digests"
+    },
+    {
+      "id": "physical-reference-fitness-follow-up",
+      "kind": "source",
+      "description": "Bounded fitness interpretation of the already-retained full-geometry Natural Earth land/lakes overlays; independently records the exact dataset commit date/version/license and national mapping-agency reference availability/CRS/scale/accuracy limits. No new geometry overlay or geometry edit.",
+      "software": "Python 3.12 standard-library summary; retained GEOS/Shapely output is the tested geometry source.",
+      "units": "Planar square degrees only; coordinate decimal places are not positional accuracy.",
+      "crs": "OGC:CRS84 longitude-latitude; no reprojection or positional tolerance."
     }
   ],
   "metrics": [
@@ -1286,58 +1300,14 @@
   "change_receipts": [
     {
       "path": "research/geography/gap-source-nordic-shared-seams-20261006/README.md",
-      "status": "added"
+      "status": "modified"
     },
     {
       "path": "research/geography/gap-source-nordic-shared-seams-20261006/evidence-quality.json",
-      "status": "added"
+      "status": "modified"
     },
     {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/gb-SWE-ADM2-original-simplified.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/natural-earth-lakes.geojson.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/natural-earth-land.geojson.gz.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/physical-reference-overlays.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_physical_reference_overlay.py",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/reproduce_source_comparison.py",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-consumed-source-subjects.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-atlas-subjects.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-components.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/scoped-original-fragments.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-nordic-shared-seams-20261006/source-and-candidate-comparison.json",
+      "path": "research/geography/gap-source-nordic-shared-seams-20261006/physical-reference-fit.json",
       "status": "added"
     }
   ],
@@ -1401,5 +1371,10 @@
       "bytes": 1565161,
       "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f"
     }
+  },
+  "prior_packet_contributor": {
+    "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+    "pr": "#1233",
+    "prior_manifest_sha256": "38f526711d8085fb3dc6c79a6b80069a678710168316793bcc10d1f571020e87"
   }
 }
