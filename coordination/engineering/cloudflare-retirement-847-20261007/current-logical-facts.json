@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "started_at": "2026-10-08T03:30:54.453Z",
+  "completed_at": "2026-10-08T03:31:16.457Z",
+  "role": "worldatlas_app",
+  "source_writes": 0,
+  "collections": {
+    "sources": {
+      "count": 385,
+      "ordered_rows_sha256": "e8c5148f93f6d28c2de639e6fef72e8b935e646666062ff3747760dc76d0f7de"
+    },
+    "entity_types": {
+      "count": 16,
+      "ordered_rows_sha256": "d853335669547515b039192d32a0b64545c1b2949b73bccdcfb8a6c5fb6bf1cc"
+    },
+    "entities": {
+      "count": 86872,
+      "ordered_rows_sha256": "e9951cb0c35dad32abf8ce4fb472e2bd003fc594bc6d4e3342dd5cb4a0cb186e"
+    },
+    "categories": {
+      "count": 1457,
+      "ordered_rows_sha256": "eee86c200c260915a38d9193890b66e85fd1ef6a52b2227e7afc42938ffca798"
+    },
+    "records": {
+      "count": 396,
+      "ordered_rows_sha256": "aebf930586e329ce0eecfd0eac5dd6f6d5334fec7c7d9455ac3396b1a6f2c4f8"
+    },
+    "names": {
+      "count": 3588,
+      "ordered_rows_sha256": "8f9523ee61e974d0afd93f81707304ce477b343ec4e69d88d0ba66ce97c28b0b"
+    },
+    "relationships": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "media": {
+      "count": 561,
+      "ordered_rows_sha256": "5e6cec1fb67cef54734b2e486abf991c569ff610b99c6583c2d78224fecc3910"
+    },
+    "media_links": {
+      "count": 6,
+      "ordered_rows_sha256": "84c2d569224cb19cccbf2cf226d431ef2f4844bac95e6cf271b1d617b5935de1"
+    },
+    "retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ingestions": {
+      "count": 3051,
+      "ordered_rows_sha256": "6c96f0525f89a8ea1c568bfa892639b7396db54f57234abcc74f5cdc74f8261b"
+    },
+    "geographic_releases": {
+      "count": 6,
+      "ordered_rows_sha256": "4c867ee76eaa8817fa46a2f3758e65e5ca09d601acb9da0d3c36d5734a34c1eb"
+    },
+    "geographic_memberships": {
+      "count": 508777,
+      "ordered_rows_sha256": "7bfa5a7164cc826dda9954d7312d565163cecbf3798cd9c202242fef7d244102",
+      "hash_kind": "sha256-pg-json-text-row-digests-c-key-order-v1"
+    },
+    "geographic_changes": {
+      "count": 3593,
+      "ordered_rows_sha256": "c280e97f266662117cc922a4c3853cd12fb5244a40e88a57332ff83bde35c728"
+    },
+    "temporal_geography_validations": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_membership_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_existence_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "temporal_geography_retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_versions": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_version_objects": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_selection_validations": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_footprint_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "marker_fingerprint": "24d30e1121e55fe6ef266be23fedb87e0fa072d4a973cf06a612007f32bc08a2",
+  "marker_revision": 3051,
+  "marker_complete_before_after_and_original_equal": true,
+  "all23_equal_to_native_receipt": true,
+  "limits": [
+    "Fresh public fact view digests; private compact tables and registry remain inaccessible to this role and are not represented as freshly read."
+  ],
+  "driver_normalization": "Same exact checked integer-column scalar conversion used by reviewed PostgreSQL restore; JSON TEXT and other strings unchanged."
+}

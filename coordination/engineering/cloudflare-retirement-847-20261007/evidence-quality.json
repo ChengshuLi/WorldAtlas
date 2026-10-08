@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "issue": 847,
+  "lane": "engineering",
+  "worker_id": "01a10934-a3d2-74e0-84d8-366cc334bc7c",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "6b4f3739ad6d0e219f49caa8ef2da47be6b521e9",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 9674,
+        "sha256": "f4610111c7c5878a46dfe242728c278f6dd0f8bf3e99a41870a139873c7a6ab6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 42868,
+        "sha256": "24d0362091130994584f404f4fcf1748e629e9c6aeb3f56efa87a228ed280a0e",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 9830,
+      "sha256": "64953543690fdc547fa4b5c3401d8f4c58ce438f4b903aa1a25eb64e8646458c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 43232,
+      "sha256": "3d7ae9c697ea24457639a200d6b7a9c2e48dba906d49c70a8b52f716d69c5eba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/CLOUDFLARE_RECOVERY_HANDOFF.md",
+      "bytes": 8072,
+      "sha256": "3bea537cce1e7aef7defe136d7deaabf677bc9864b327748b292d6298ba70ca2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/README.md",
+      "bytes": 2744,
+      "sha256": "0a19df24fa1e557c64d372ffa4d54e3ac1f9cd0d58702c99291693a30f6138a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/cloudflare-actual-publication-proof.json",
+      "bytes": 32175,
+      "sha256": "216f9d72a9b1e3044e25ac92091183bcbb27d347b5b7207e9d322c440c2b61c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-catalog.json",
+      "bytes": 360878,
+      "sha256": "a5e381a52e950a9965d7fa5fbabea06d1ecf00386770f2e087f204f38896a22c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-logical-facts.json",
+      "bytes": 4233,
+      "sha256": "9e6b826051f08b9c90c524d660a20f1695c4ad781e5fc53e35345d80b7b57fea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-media-bytes.json",
+      "bytes": 190338,
+      "sha256": "d6c98a7e9b35e56ab3d8e37d54e7c21ca01a8cf5a4d0799d1b2b1f278047fd91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/native-tested-restore-receipt.json",
+      "bytes": 26476,
+      "sha256": "a6ae908d9fa526b21a4267a1463b28782cab4c31d3c6273d814510bd5070a8b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/original-archive-complete-proof.json",
+      "bytes": 1613428,
+      "sha256": "bd6cc9a4da3aeb2728f9c7581388c7fc970ad66650debfa17d5784083cd08f29",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/preparation-provenance.json",
+      "bytes": 2219,
+      "sha256": "37e33216ebc99f490786e78ec583d25ea6d1f73dfd415509d1cf442df3c24421",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/private-custody-descriptors.json",
+      "bytes": 16252,
+      "sha256": "5f37fdf16feecc99d1893236d4d825cc1c63d92e8228f755e35ad1078415c133",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/recipient-access.json",
+      "bytes": 623,
+      "sha256": "2e010214cfce2d32240b0338f18e90da680942c5bb2d800a9f6a9b4d7088ec60",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/registered-media-roster.json",
+      "bytes": 458084,
+      "sha256": "435fad50f1df2cfa9b9a1e53fa0b7cfe1d1c30312631a52867a48feca2bcbb60",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/retained-site-audit.json",
+      "bytes": 1589,
+      "sha256": "9d989d0fdbb956cd73ab34d10ed19f18e0c884e0219eda0a8dd35c71f879e88b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retirement-documentation-and-retained-evidence",
+      "kind": "source",
+      "description": "Inspect actual native restore, archive migration and current Cloudflare receipts; retain full raw read-only preparation observations at their execution vintage; verify documented interfaces and preserve private-physical freshness limits. Documentation only; native title operation remains post-merge acceptance.",
+      "software": "Git immutable blobs; Node v24.19.0; native connector/API read observations",
+      "units": "whole-file byte identity and explicit operator responsibilities"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "fresh_media_object_count",
+      "value": 561,
+      "unit": "objects",
+      "input_sha256": "435fad50f1df2cfa9b9a1e53fa0b7cfe1d1c30312631a52867a48feca2bcbb60",
+      "evaluation_commit": "4b6fa1b74d88c3e89bd466e35eddcdbf510a6bba",
+      "vintage": "archived"
+    },
+    {
+      "id": "fresh_media_total_bytes",
+      "value": 381283566,
+      "unit": "bytes",
+      "input_sha256": "435fad50f1df2cfa9b9a1e53fa0b7cfe1d1c30312631a52867a48feca2bcbb60",
+      "evaluation_commit": "4b6fa1b74d88c3e89bd466e35eddcdbf510a6bba",
+      "vintage": "archived"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node scripts/evidence-quality.mjs coordination/engineering/cloudflare-retirement-847-20261007/evidence-quality.json",
+    "node scripts/check-handoff-scope.mjs --branch engineering/cloudflare-retirement-847-20261007 --base 6b4f3739ad6d0e219f49caa8ef2da47be6b521e9 --pr-body-file PATH_TO_PR_BODY"
+  ],
+  "change_receipts": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "original_sha256": "f4610111c7c5878a46dfe242728c278f6dd0f8bf3e99a41870a139873c7a6ab6"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "24d0362091130994584f404f4fcf1748e629e9c6aeb3f56efa87a228ed280a0e"
+    },
+    {
+      "path": "docs/CLOUDFLARE_RECOVERY_HANDOFF.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/cloudflare-actual-publication-proof.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-catalog.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-logical-facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-media-bytes.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/native-tested-restore-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/original-archive-complete-proof.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/preparation-provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/private-custody-descriptors.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/recipient-access.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/registered-media-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/retained-site-audit.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "fresh_media_object_count",
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-media-bytes.json",
+      "json_pointer": "/objects"
+    },
+    {
+      "metric_id": "fresh_media_total_bytes",
+      "path": "coordination/engineering/cloudflare-retirement-847-20261007/current-media-bytes.json",
+      "json_pointer": "/bytes"
+    }
+  ]
+}

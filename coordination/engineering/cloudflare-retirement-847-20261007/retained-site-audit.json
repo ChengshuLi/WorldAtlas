@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "at": "2026-10-08T03:40:24.303Z",
+  "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+  "title": "WorldAtlas",
+  "status": "active",
+  "live_url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "current_user_role": "owner",
+  "access_mode": "custom",
+  "owner_only_users": true,
+  "allowed_users": 1,
+  "external_visitors": 0,
+  "allowed_account_users": 1,
+  "allowed_workspace_groups": 0,
+  "allowed_tenant_groups": 0,
+  "automations": [],
+  "source_write_credential_present": false,
+  "environment_revision": 7,
+  "environment": [
+    {
+      "key": "ATLAS_CONTENT_BACKEND",
+      "is_secret": false,
+      "value": "postgres"
+    },
+    {
+      "key": "ATLAS_DATABASE_BUDGET_BYTES",
+      "is_secret": false,
+      "value": "800000000"
+    },
+    {
+      "key": "ATLAS_READ_ONLY",
+      "is_secret": false,
+      "value": "1"
+    },
+    {
+      "key": "DATABASE_URL",
+      "is_secret": true,
+      "value": "[redacted]"
+    }
+  ],
+  "limits": [
+    "Read-only original Site audit; no retirement change made. Omitted MCP settings are not evidence of absence of an integration."
+  ],
+  "local_automations": [
+    {
+      "id": "codex-low-quota-wind-down",
+      "status": "PAUSED",
+      "raw_sha256": "749a9f9f2f4e6197d2814c6af4be6798f1dc0a349c64740071bf1c997ead950a",
+      "old_site_destination_reference": false
+    },
+    {
+      "id": "worldatlas-worker-recovery",
+      "status": "PAUSED",
+      "raw_sha256": "33b71060c4ead9d6530c4db9043732299deeadc053df3c405a547f8d68d3ab6c",
+      "old_site_destination_reference": false
+    }
+  ]
+}
