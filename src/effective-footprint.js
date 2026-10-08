@@ -150,6 +150,9 @@ export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveRefe
       allowed.add(feature.pixelIndex);
     }
   }
+  const mapping=features.map(feature=>[feature.pixelIndex,feature.id]).sort((a,b)=>a[0]-b[0]);
+  const ownerDigest=Array.from(sha256(new TextEncoder().encode(JSON.stringify(mapping))),byte=>byte.toString(16).padStart(2,'0')).join('');
+  require(base.reference_owner_sha256===ownerDigest,'Native additive owner roster differs from selected base');
   require(allowed.size>0&&Array.isArray(patch.rows),'Missing additive primitives / native rows');
   if(base.additive_patch_sha256!==undefined) {
     const proof=installedPatches.get(base);
@@ -191,7 +194,7 @@ export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveRefe
   }
   require(base.rows.at(-2)+base.rows.at(-1)===base.runs.length/2&&cursor===count,'Unreferenced native base/output runs');
   const output={...base,rows,runs,runWords:runs.length,geographic_release:effectiveReference.id,footprints_sha256:effectiveReference.footprints_sha256,
-    effective_footprint_sha256:effectiveReference.footprints_sha256,additive_patch_sha256:digest,additive_ledger_sha256:patch.ledger_sha256,additive_rule_sha256:patch.rule_sha256,additive_added_cells:addedCells};
+    effective_footprint_sha256:effectiveReference.footprints_sha256,effective_footprint_domain:'worldatlas-effective-native-footprints:v1',additive_base_reference:{...baseReference},additive_patch_sha256:digest,additive_ledger_sha256:patch.ledger_sha256,additive_rule_sha256:patch.rule_sha256,additive_added_cells:addedCells};
   installedPatches.set(output,{patch:digest,rows:wordDigest(rows),runs:wordDigest(runs)});
   return output;
 }
@@ -199,30 +202,152 @@ export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveRefe
 export function additiveBaseReference(data) {
   if(data.additiveRelease===undefined)return data.reference_release;
   const release=data.additiveRelease;
-  exactKeys(release,['version','kind','base_reference','effective_reference','patch'],'Additive release');
+  exactKeys(release,['version','kind','base_reference','effective_reference','patch','ledger','owner_roster'],'Additive release');
   require(release.version===1&&release.kind==='retained-native-base-plus-delta-v1','Unsupported additive release');
   require(JSON.stringify(canonicalValue(release.effective_reference))===JSON.stringify(canonicalValue(data.reference_release)),'Selected additive reference mismatch');
-  exactKeys(release.patch,['path','bytes','sha256'],'Native patch asset');
-  require(/^additive-repairs\/[a-zA-Z0-9_-]+\.json$/.test(release.patch.path)&&Number.isSafeInteger(release.patch.bytes)
-    &&release.patch.bytes>0&&release.patch.bytes<=32*1024*1024&&hex.test(release.patch.sha256),'Unsafe/oversized native patch asset');
+  for(const asset of [release.patch,release.ledger,release.owner_roster]){
+    exactKeys(asset,asset===release.owner_roster?['path','bytes','sha256','encoding','decoded_bytes','decoded_sha256']:['path','bytes','sha256'],'Native additive asset');
+    require(/^additive-repairs\/[a-zA-Z0-9_-]+\.json(?:\.gz)?$/.test(asset.path)&&Number.isSafeInteger(asset.bytes)
+      &&asset.bytes>0&&asset.bytes<=32*1024*1024&&hex.test(asset.sha256),'Unsafe/oversized native additive asset');
+  }
+  require(release.owner_roster.encoding==='gzip'&&Number.isSafeInteger(release.owner_roster.decoded_bytes)&&release.owner_roster.decoded_bytes>0&&release.owner_roster.decoded_bytes<=32*1024*1024&&hex.test(release.owner_roster.decoded_sha256),'Incomplete whole decoded native owner roster');
+  require(new Set([release.patch.path,release.ledger.path,release.owner_roster.path]).size===3,'Duplicate native additive assets');
   return release.base_reference;
+}
+
+export function verifyAdditiveLedgerSelection(ledger,features,patch) {
+  require(ledger?.version===1&&ledger.kind==='native-additive-repair-ledger-v1'&&hex.test(ledger.rule_sha256),'Unsupported additive selection ledger');
+  require(JSON.stringify(canonicalValue(ledger.base_reference))===JSON.stringify(canonicalValue(patch.base_reference))&&ledger.rule_sha256===patch.rule_sha256,'Selected ledger source/rule differs from patch');
+  require(Number.isSafeInteger(ledger.parent_inventory?.components)&&ledger.parent_inventory.components>=ledger.rows?.length
+    &&hex.test(ledger.parent_inventory?.report_sha256)&&hex.test(ledger.parent_inventory?.roster_sha256),'Missing complete inventory denominator');
+  require(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length
+    &&new Set(ledger.scope_ids).size===ledger.scope_ids.length,'Missing/duplicate declared ledger scope');
+  const wanted=new Map();let previous='';
+  for(let i=0;i<ledger.rows.length;i++) {
+    const row=ledger.rows[i];require(row.component_id===ledger.scope_ids[i]&&row.component_id>previous,'Foreign/unordered ledger component');previous=row.component_id;
+    require(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),'Unknown additive ledger disposition');
+    if(!['assigned','zero-cell'].includes(row.disposition))continue;
+    require(typeof row.target_id==='string'&&Number.isInteger(row.pixelIndex)&&row.pixelIndex>0&&hex.test(row.base_geometry_sha256)
+      &&hex.test(row.geometry_sha256)&&hex.test(row.source_receipt_sha256)&&Number.isSafeInteger(row.native_cells)&&row.native_cells>=0
+      &&(row.disposition==='assigned'?row.native_cells>0:row.native_cells===0),'Incomplete native ledger contribution');
+    polygonParts(row.geometry);require(footprintValueSha256(row.geometry)===row.geometry_sha256,'Ledger whole primitive changed');
+    wanted.set(row.component_id,row);
+  }
+  const seen=new Set();
+  for(const feature of features)if(Object.hasOwn(feature,'additiveFootprint')) {
+    effectivePrimitiveGeometries(feature);
+    for(const addition of feature.additiveFootprint.additions) {
+      const row=wanted.get(addition.component_id);require(row&&!seen.has(addition.component_id)&&row.target_id===feature.id&&row.pixelIndex===feature.pixelIndex
+        &&row.base_geometry_sha256===feature.additiveFootprint.base_geometry_sha256&&row.geometry_sha256===addition.geometry_sha256
+        &&row.source_receipt_sha256===addition.source_receipt_sha256&&JSON.stringify(canonicalValue(row.geometry))===JSON.stringify(canonicalValue(addition.geometry)),'Foreign/duplicate/changed selected primitive');
+      seen.add(addition.component_id);
+    }
+  }
+  require(seen.size===wanted.size,'Selected effective footprint omitted a declared primitive');
+  const allowed=new Set([...wanted.values()].filter(row=>row.disposition==='assigned').map(row=>row.pixelIndex));
+  require(patch.rows.every(row=>row.runs.every(run=>allowed.has(run[2]))),'Native cells assigned to zero-cell/unselected ledger owner');
+  const cells=patch.rows.reduce((n,row)=>n+row.runs.reduce((sum,run)=>sum+run[1]-run[0],0),0);
+  require(cells===ledger.assigned_cells,'Native assigned-cell total differs from complete ledger');
+  return {selected_components:wanted.size,assigned_cells:cells};
+}
+
+async function readWholeAdditiveAsset(asset,fetcher,label) {
+  const response=await fetcher('./'+asset.path);require(response.ok&&response.body,label+' could not load');
+  const reader=response.body.getReader(),chunks=[];let length=0;
+  try{while(true){const {done,value}=await reader.read();if(done)break;length+=value.byteLength;require(length<=asset.bytes,label+' exceeds declared whole bytes');chunks.push(value);}}
+  catch(error){await reader.cancel().catch(()=>{});throw error;}finally{reader.releaseLock();}
+  require(length===asset.bytes,'Incomplete '+label);const raw=new Uint8Array(length);let offset=0;
+  for(const chunk of chunks){raw.set(chunk,offset);offset+=chunk.length;}
+  require(Array.from(sha256(raw),byte=>byte.toString(16).padStart(2,'0')).join('')===asset.sha256,label+' whole checksum mismatch');
+  let decoded=raw;
+  if(asset.encoding==='gzip'){
+    const stream=new Response(raw).body.pipeThrough(new DecompressionStream('gzip')),reader=stream.getReader(),parts=[];let bytes=0;
+    try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;require(bytes<=asset.decoded_bytes,label+' exceeds declared whole decoded bytes');parts.push(value);}}
+    catch(error){await reader.cancel().catch(()=>{});throw error;}finally{reader.releaseLock();}
+    require(bytes===asset.decoded_bytes,'Incomplete decoded '+label);decoded=new Uint8Array(bytes);let at=0;for(const part of parts){decoded.set(part,at);at+=part.length;}
+    require(Array.from(sha256(decoded),byte=>byte.toString(16).padStart(2,'0')).join('')===asset.decoded_sha256,label+' whole decoded checksum mismatch');
+  }
+  return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(decoded));
+}
+
+export function loadedBaseFootprintSha256(features) {
+  require(Array.isArray(features)&&features.length>0,'Missing complete loaded base features');
+  const ids=new Set(),ordered=[...features].sort((a,b)=>a.id.localeCompare(b.id)),hash=sha256.create(),encoder=new TextEncoder();
+  try{hash.update(encoder.encode('['));for(let i=0;i<ordered.length;i++){
+    const feature=ordered[i];require(typeof feature.id==='string'&&feature.id&&!ids.has(feature.id),'Duplicate/missing loaded base identity');ids.add(feature.id);
+    if(i)hash.update(encoder.encode(','));hash.update(encoder.encode(JSON.stringify([feature.id,feature.geometry])));
+  }hash.update(encoder.encode(']'));return Array.from(hash.digest(),byte=>byte.toString(16).padStart(2,'0')).join('');}
+  finally{hash.destroy();}
 }
 
 export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,effectiveDigest}={}) {
   const hasAdditions=features.some(feature=>Object.hasOwn(feature,'additiveFootprint'));
   if(data.additiveRelease===undefined){require(!hasAdditions,'Effective footprint requires an explicit selected additive release');return base;}
+  const originalFeatures=features;features=[...features];
   const baseReference=additiveBaseReference(data),release=data.additiveRelease;
-  require(hasAdditions&&effectiveDigest===data.reference_release.footprints_sha256,'Selected effective footprint digest mismatch');
-  const response=await fetcher('./'+release.patch.path);
-  require(response.ok&&response.body,'Native additive patch could not load');
-  const reader=response.body.getReader(),chunks=[];let length=0;
-  try {
-    while(true){const {done,value}=await reader.read();if(done)break;length+=value.byteLength;
-      require(length<=release.patch.bytes,'Native patch exceeds declared whole bytes');chunks.push(value);}
-  }catch(error){await reader.cancel().catch(()=>{});throw error;}finally{reader.releaseLock();}
-  require(length===release.patch.bytes,'Incomplete native patch asset');
-  const raw=new Uint8Array(length);let offset=0;for(const chunk of chunks){raw.set(chunk,offset);offset+=chunk.length;}
-  require(Array.from(sha256(raw),byte=>byte.toString(16).padStart(2,'0')).join('')===release.patch.sha256,'Native patch whole checksum mismatch');
-  const patch=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(raw));
-  return applyAdditiveNativePatch(base,patch,{baseReference,effectiveReference:data.reference_release,features});
+  require(effectiveDigest===undefined||effectiveDigest===data.reference_release.footprints_sha256,'Selected effective footprint digest mismatch');
+  require(loadedBaseFootprintSha256(features)===baseReference.footprints_sha256,'Complete loaded original base footprint differs from selected additive bank');
+  const ledger=await readWholeAdditiveAsset(release.ledger,fetcher,'Native ledger'),patch=await readWholeAdditiveAsset(release.patch,fetcher,'Native patch');
+  require(patch.ledger_sha256===release.ledger.sha256,'Native patch differs from selected whole ledger');
+  // Existing whole base catalog parts stay literal. The explicit selected
+  // ledger supplies every new primitive to a cloned effective feature view.
+  if(!hasAdditions){
+    const groups=new Map();
+    for(const row of ledger.rows??[])if(['assigned','zero-cell'].includes(row.disposition)){
+      if(!groups.has(row.target_id))groups.set(row.target_id,[]);groups.get(row.target_id).push(row);
+    }
+    require(groups.size>0,'Selected additive ledger has no effective primitives');
+    for(const [id,rows]of groups){
+      const index=features.findIndex(feature=>feature.id===id);require(index>=0,'Selected primitive target absent from complete base');
+      const feature=features[index];
+      require(rows.every(row=>row.pixelIndex===feature.pixelIndex&&row.base_geometry_sha256===footprintValueSha256(feature.geometry)),'Selected primitive has foreign base owner/geometry');
+      features[index]={...feature,additiveFootprint:{version:1,kind:EFFECTIVE_FOOTPRINT_KIND,baseline_release_sha256:baseReference.footprints_sha256,
+        base_geometry_sha256:footprintValueSha256(feature.geometry),ledger_sha256:release.ledger.sha256,rule_sha256:ledger.rule_sha256,
+        additions:rows.map(row=>({component_id:row.component_id,geometry:row.geometry,geometry_sha256:row.geometry_sha256,source_receipt_sha256:row.source_receipt_sha256}))}};
+    }
+  }
+  const actualEffectiveDigest=additiveReleaseFootprintDigest(baseReference,features);
+  require(actualEffectiveDigest===data.reference_release.footprints_sha256,'Explicit additive footprint domain differs from selected release');
+  verifyAdditiveLedgerSelection(ledger,features,patch);
+  // The immutable native manifest predates the explicit leaf-owner binding.
+  // Authenticate the WHOLE selected original bounds roster, never a target-only
+  // assertion or an inferred nearest owner, before adding metadata to its view.
+  const roster=await readWholeAdditiveAsset(release.owner_roster,fetcher,'Native owner roster');
+  require(Array.isArray(roster)&&roster.length===features.length,'Incomplete selected native owner roster');
+  const byId=new Map(features.map(feature=>[feature.id,feature])),indices=new Set(),ids=new Set();
+  for(const row of roster){
+    const feature=byId.get(row.id);
+    require(feature&&!ids.has(row.id)&&Number.isInteger(row.index)&&row.index>0&&!indices.has(row.index)
+      &&feature.pixelIndex===row.index&&feature.properties?.parent_id===row.province_id,'Foreign/duplicate/changed selected native owner or parent');
+    ids.add(row.id);indices.add(row.index);
+  }
+  const mapping=roster.map(row=>[row.index,row.id]).sort((a,b)=>a[0]-b[0]);
+  const ownerDigest=Array.from(sha256(new TextEncoder().encode(JSON.stringify(mapping))),byte=>byte.toString(16).padStart(2,'0')).join('');
+  require(base.reference_owner_sha256===undefined||base.reference_owner_sha256===ownerDigest,'Existing native owner binding differs from selected whole roster');
+  const boundBase={...base,reference_owner_sha256:ownerDigest,reference_owner_source_sha256:release.owner_roster.sha256};
+  const installed=applyAdditiveNativePatch(boundBase,patch,{baseReference,effectiveReference:data.reference_release,features});
+  for(let i=0;i<features.length;i++)originalFeatures[i]=features[i];
+  return installed;
+}
+
+// Explicit release domain: producer authenticates immutable whole base custody;
+// the consumer separately rehashes ALL loaded base identities/geometries. This
+// digest does not assert that the producer reread the entire world geometry.
+export function additiveReleaseFootprintDigest(baseReference,features) {
+  exactKeys(baseReference,['id','footprints_sha256','hierarchy_sha256'],'Additive base reference');
+  require(hex.test(baseReference.footprints_sha256)&&hex.test(baseReference.hierarchy_sha256)&&baseReference.id.startsWith('geography:'),'Incomplete additive digest base');
+  const additions=features.filter(feature=>Object.hasOwn(feature,'additiveFootprint')).sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+  require(additions.length>0,'Explicit additive digest requires complete additions');
+  const ids=new Set(),owners=new Set();let ledger,rule;
+  for(const feature of additions) {
+    effectivePrimitiveGeometries(feature);
+    require(!ids.has(feature.id)&&Number.isInteger(feature.pixelIndex)&&feature.pixelIndex>0&&feature.pixelIndex<2**26&&!owners.has(feature.pixelIndex),'Duplicate/missing additive digest owner/identity');
+    ids.add(feature.id);owners.add(feature.pixelIndex);
+    const value=feature.additiveFootprint;
+    require(value.baseline_release_sha256===baseReference.footprints_sha256,'Stale additive digest baseline');
+    if(ledger===undefined){ledger=value.ledger_sha256;rule=value.rule_sha256;}
+    require(value.ledger_sha256===ledger&&value.rule_sha256===rule,'Incomplete mixed-rule/ledger additive digest');
+  }
+  return footprintValueSha256({domain:'worldatlas-effective-native-footprints:v1',base_reference:baseReference,
+    additions:additions.map(feature=>({id:feature.id,pixelIndex:feature.pixelIndex,footprint:feature.additiveFootprint}))});
 }

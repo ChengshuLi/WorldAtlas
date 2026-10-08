@@ -12,7 +12,6 @@ import {loadOwnershipAssets} from './ownership-assets.js';
 import {loadNativeLatitudes} from './native-latitudes.js';
 import {NATIVE_METHOD} from './ownership-method.js';
 import {additiveBaseReference,loadAdditiveNativePatch} from './effective-footprint.js';
-import {nativeSourceDigest} from './native-source-digest.js';
 import { validYear } from './model.js';
 import { validateHierarchy } from './hierarchy.js';
 
@@ -235,8 +234,9 @@ export async function loadGeography(initialSelection) {
    data.nativeLatitudes=nativeLatitudes;
    if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
    if(features){
-    const effectiveDigest=data.additiveRelease?(await nativeSourceDigest(features)).sha256:undefined;
-    ownership=await loadAdditiveNativePatch(data,features,ownership,{effectiveDigest});
+    // The loader verifies the complete original base and explicit new domain
+    // once, before any overlay is exposed. No saved digest substitutes for it.
+    ownership=await loadAdditiveNativePatch(data,features,ownership);
     if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
     data.features=features;data.ownership=ownership;
    }

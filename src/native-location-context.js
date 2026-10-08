@@ -55,7 +55,7 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   const raw = new Uint8Array(latitudes.length * 8), tableView = new DataView(raw.buffer);
   latitudes.forEach((value, y) => tableView.setFloat64(y * 8, value, true));
   if (await digest(raw) !== LATITUDE_DIGEST) throw Error('Native context latitude rule changed');
-  const sourceDigest = await nativeSourceDigest(referenceFeatures, {signal, onProgress});
+  const sourceDigest = await nativeSourceDigest(referenceFeatures, {signal, onProgress,additiveBaseReference:base.additive_base_reference});
   if (sourceDigest.sha256 !== base.footprints_sha256)
     throw Error('Native context reference source bytes changed');
   const referenceOwners = referenceFeatures.map(f => [f.pixelIndex, f.id]).sort((a, b) => a[0] - b[0]);
@@ -160,7 +160,7 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   }
   const effectiveDigest=context.features.some(feature=>Object.hasOwn(feature,'additiveFootprint'))
     ?(await nativeSourceDigest(context.features,{signal,onProgress})).sha256:undefined;
-  return {grid: {...(effectiveDigest?{effective_footprint_sha256:effectiveDigest}:{}),version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
+  return {grid: {...(effectiveDigest?{context_footprints_sha256:effectiveDigest,context_footprint_domain:'worldatlas-display-context-footprints:v1',reference_footprints_sha256:sourceDigest.sha256}:{}),version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
     context, accounting: {rows: base.size, recomputedRows, reusedRows: base.size - recomputedRows,
       sourceDigest, ownerMapping: context.owners, rule: 'exact-native-affected-rows-and-stable-reference-reuse-v1'}};
 }

@@ -21,7 +21,7 @@ function rgb(css){
 export class PixelCanvasLayer extends L.Layer {
   constructor(features,options){super();
     const composite=features.some(feature=>Object.hasOwn(feature,'additiveFootprint'));
-    if(composite && (options.ownership?.method!==NATIVE_GRID_METHOD || !/^[a-f0-9]{64}$/.test(options.ownership.effective_footprint_sha256??'')))
+    if(composite && (options.ownership?.method!==NATIVE_GRID_METHOD || !((options.ownership.effective_footprint_domain==='worldatlas-effective-native-footprints:v1'&&/^[a-f0-9]{64}$/.test(options.ownership.effective_footprint_sha256??''))||(options.ownership.context_footprint_domain==='worldatlas-display-context-footprints:v1'&&/^[a-f0-9]{64}$/.test(options.ownership.context_footprints_sha256??'')&&/^[a-f0-9]{64}$/.test(options.ownership.reference_footprints_sha256??'')))))
       throw Error('Additive footprints require the authenticated native grid; projected fallback is unsupported');
     this.index=createGridIndex(features,{ordered:options.orderedOwners===true});
     if(composite)for(const item of this.index){

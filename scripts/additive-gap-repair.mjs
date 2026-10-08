@@ -6,9 +6,13 @@ import {createHash} from 'node:crypto';
 import {gunzipSync, gzipSync} from 'node:zlib';
 import {validateNativeSelectionReceipt} from './native-ownership/require-verified-selection.mjs';
 import verifiedCandidates from './native-ownership/verified-candidates.json' with {type:'json'};
-import {canonicalValue, footprintValueSha256, polygonParts} from '../src/effective-footprint.js';
+import {canonicalValue, footprintValueSha256, polygonParts, additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
 import {candidateBudget, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
 
+import {nativePolygonIntervals} from '../src/native-grid.js';
+import {nativeRuntimeIndex} from '../src/native-runtime.js';
+import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
+export const ADDITIVE_PROPOSAL_VERSION='unactivated-additive-native-release-v1';
 export const SOURCE_PREMISES_VERSION='retained-land-source-premises-v1';
 export const INVENTORY_VERSION = 'complete-source-relative-gap-inventory-v1';
 export const DISPOSITIONS = ['eligible', 'assigned', 'zero-cell', 'already-resolved', 'rejected', 'awaiting-evidence'];
@@ -457,6 +461,97 @@ function sourcePremiseStage(repo,request,report) {
       'Current full native owner exclusion and explicit effective-release proof remain required. No cell assigned by this stage.']}};
 }
 
+// A detached, unactivated release proposal: whole predecessor source receipts
+// and whole current owner containers are mandatory. No global recomputation.
+function additiveProposalStage(repo,request) {
+  const spec=request.additive,inputs=new Map();
+  for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate additive input');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
+  const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete additive operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
+  const json=name=>JSON.parse(get(name).body),pub=json(spec.publication_path),facts=json(spec.facts_path),issued=json(spec.source_request_path),operating=json(spec.operating_path);
+  const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  demand(pub.complete===true&&pub.facts.bytes===get(spec.facts_path).pin.bytes&&pub.facts.sha256===get(spec.facts_path).pin.sha256
+    &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>pub.inventory[key]===get(spec.inventory_path).pin[key]),'Incomplete/drifted source predecessor');
+  demand(facts.operation===SOURCE_PREMISES_VERSION&&facts.execution_commit===spec.source_execution_commit
+    &&equal(facts.request,get(spec.source_request_path).pin)&&equal(facts.executed_code,issued.executed_code)
+    &&equal(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])
+    &&equal(facts.runtime,spec.source_runtime)&&equal(facts.installed_modules,issued.installed_modules)
+    &&equal(facts.parent,request.parent)&&equal(issued.baseline,request.baseline),'Wrong source predecessor closure/vintage');
+  demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0
+    &&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null
+    &&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Source predecessor lacks qualified operating proof');
+  const lines=get(spec.inventory_path).body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated source premise roster');
+  const sourceRows=lines.map(line=>JSON.parse(line));
+  demand(equal(sourceRows.map(row=>row.component_id),issued.source_rule.expected_ids)&&sourceRows.length===facts.components,'Omitted/foreign source premise');
+  const selected=sourceRows.find(row=>row.component_id===spec.component_id);
+  demand(selected?.source_compatible===true&&selected.disposition==='awaiting-native-exclusion','Candidate has no complete retained-land premises');
+  const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),bank=json(request.baseline.bank_path);
+  const baseReference={id:manifest.geographic_release,footprints_sha256:manifest.footprints_sha256,hierarchy_sha256:manifest.hierarchy_sha256};
+  const target=bank.features.find(feature=>feature.id===selected.target_id),owner=bounds.find(row=>row.id===selected.target_id);
+  demand(bounds.length===49625&&new Set(bounds.map(row=>row.id)).size===49625&&new Set(bounds.map(row=>row.index)).size===49625
+    &&target&&owner&&target.properties.parent_id===owner.province_id&&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale/foreign target or full owner roster');
+  demand(equal(manifest.original_assets.bounds,spec.original_bounds)&&get(spec.bounds_path).pin.sha256===manifest.original_assets.bounds.sha256,'Bounds source is not selected native original roster');
+  const latitudeBody=get(spec.latitudes_path).body;
+  demand(latitudeBody.length===262166*8&&sha(latitudeBody)==='66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23','Changed literal native latitude rule');
+  const latitudes=Float64Array.from({length:262166},(_,y)=>latitudeBody.readDoubleLE(y*8)),size=262166;
+  const candidateIndex=nativeRuntimeIndex([{id:target.id,pixelIndex:owner.index,geometry:selected.candidate}]);
+  const coordinates=polygonParts(selected.candidate).flat(2),max=Math.max(...coordinates.map(point=>point[1])),min=Math.min(...coordinates.map(point=>point[1]));
+  const first=Math.max(0,latitudes.findIndex(value=>value<=max)-1),stop=latitudes.findIndex(value=>value<min),end=stop<0?size:Math.min(size,stop+1);
+  demand(first>=0&&end>first&&end-first<=4096,'Candidate requires another bounded whole-row window');
+  const native=nativePolygonIntervals(candidateIndex,{size,latitudes,rowStart:first,rowEnd:end}),containers=[];
+  for(const body of spec.owner_parts){
+    const descriptor=manifest.parts.find(part=>part.path===body.manifest_path),entry=get(body.path);
+    demand(descriptor&&equal(descriptor,body.manifest_descriptor)&&descriptor.encoding==='byte-shuffle'
+      &&entry.pin.sha256===descriptor.sha256&&entry.pin.bytes===descriptor.bytes,'Foreign current native owner container');
+    const words=unshuffleOwnershipBytes(entry.body,descriptor.words);
+    demand(words.byteLength===descriptor.decoded_bytes&&sha(Buffer.from(words.buffer))===descriptor.decoded_sha256,'Whole original native words changed');
+    containers.push({descriptor,words});
+  }
+  const rowsContainer=containers.find(value=>value.descriptor.kind==='rows'&&value.descriptor.offset===0);
+  demand(rowsContainer&&rowsContainer.words.length===size*2,'Complete current native row table required');
+  const rows=[],oldOwnerRows=[];let cells=0;
+  for(let y=first;y<end;y++){
+    const offset=rowsContainer.words[y*2],count=rowsContainer.words[y*2+1],old=[];
+    for(let n=offset;n<offset+count;n++){
+      const source=containers.find(value=>value.descriptor.kind==='runs'&&n*2>=value.descriptor.offset&&n*2+1<value.descriptor.offset+value.words.length);
+      demand(source,'Missing complete containing run asset');const i=n*2-source.descriptor.offset,a=source.words[i],b=source.words[i+1];
+      old.push([a%2**19,b%2**19+1,Math.floor(a/2**19)+Math.floor(b/2**19)*2**13]);
+    }
+    let previous=0;for(const [start,end,id]of old){demand(start>=previous&&end>start&&end<=size&&id>0,'Corrupt native owner row');previous=end;}
+    const runs=[];for(const span of native.rows.get(y)??[]){
+      const start=span.start,end=span.end;demand(!old.some(run=>Math.max(start,run[0])<Math.min(end,run[1])),'Candidate native cell already assigned to an owner');
+      runs.push([start,end,owner.index]);cells+=end-start;
+    }
+    if(runs.length)rows.push({y,runs});oldOwnerRows.push({y,complete_owner_intervals:old});
+  }
+  // Exact source/candidate addition remains meaningful even at zero native cells.
+  const ruleSha=sha(canonical({version:2,source_rule_body_sha256:issued.source_rule.review_body_sha256,representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code}));
+  const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:ruleSha,base_reference:baseReference,parent_inventory:request.parent,
+    scope_ids:sourceRows.map(row=>row.component_id).sort(),assigned_cells:cells,rows:sourceRows.map(row=>row.component_id===selected.component_id?
+      {component_id:row.component_id,disposition:cells?'assigned':'zero-cell',target_id:target.id,pixelIndex:owner.index,
+       base_geometry_sha256:footprintValueSha256(target.geometry),geometry:row.candidate,geometry_sha256:footprintValueSha256(row.candidate),
+       source_receipt_sha256:get(spec.facts_path).pin.sha256,native_cells:cells}:
+      {component_id:row.component_id,disposition:'awaiting-evidence',source_compatible:row.source_compatible,source_limits:row.limits}).sort((a,b)=>a.component_id.localeCompare(b.component_id))};
+  const ledgerBody=canonical(ledger),ledgerSha=sha(ledgerBody),feature={...target,pixelIndex:owner.index,additiveFootprint:{version:1,kind:'retained-base-plus-additions',
+    baseline_release_sha256:baseReference.footprints_sha256,base_geometry_sha256:footprintValueSha256(target.geometry),ledger_sha256:ledgerSha,rule_sha256:ruleSha,
+    additions:[{component_id:selected.component_id,geometry:selected.candidate,geometry_sha256:footprintValueSha256(selected.candidate),source_receipt_sha256:get(spec.facts_path).pin.sha256}]}};
+  const effectiveReference={...baseReference,id:'geography:additive:'+ledgerSha,footprints_sha256:additiveReleaseFootprintDigest(baseReference,[feature])};
+  const patch={version:1,kind:'unassigned-native-cells-v1',base_reference:baseReference,effective_reference:effectiveReference,ledger_sha256:ledgerSha,rule_sha256:ruleSha,rows};
+  const boundsPin=get(spec.bounds_path).pin,encodedBounds=readPin(repo,Object.fromEntries(Object.entries(boundsPin).filter(([key])=>!['uncompressed_bytes','uncompressed_sha256'].includes(key))));
+  const patchBody=canonical(patch),asset=(name,body)=>({path:'additive-repairs/'+name,bytes:body.length,sha256:sha(body)});
+  const release={reference_release:effectiveReference,additiveRelease:{version:1,kind:'retained-native-base-plus-delta-v1',base_reference:baseReference,effective_reference:effectiveReference,
+    ledger:asset('ledger-add031.json',ledgerBody),patch:asset('patch-add031.json',patchBody),owner_roster:{...asset('owners-add031.json.gz',encodedBounds),encoding:'gzip',decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256}}};
+  const assets=[{name:'ledger-add031.json',body:ledgerBody},{name:'patch-add031.json',body:patchBody},{name:'feature.json',body:canonical(feature)},
+    {name:'owners-add031.json.gz',body:encodedBounds,decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256},
+    {name:'release-envelope.json',body:canonical(release)},{name:'owner-window.json',body:canonical(oldOwnerRows)}];
+  return {rows:[{component_id:selected.component_id,target_id:target.id,native_cells:cells,effective_reference:effectiveReference,
+      baseline_reference:baseReference,activation:false,source_authority_approved:false}],assets,
+    facts:{version:1,operation:ADDITIVE_PROPOSAL_VERSION,parent:request.parent,component_id:selected.component_id,
+      source_predecessor:spec,assigned_cells:cells,removed_cells:0,reassigned_cells:0,complete_owner_window:[first,end],
+      retained_base_geometry_sha256:footprintValueSha256(target.geometry),effective_reference:effectiveReference,
+      limits:['Unactivated source-supported retained-base-plus-addition proposal; not an OGC dissolved polygon or new physical authority approval.',
+        'N2 strict two-repair selection must precede final current-bank rebind and activation.']}};
+}
+
 // One genuine detached whole-shard acquisition per invocation. The parent
 // report supplies the complete denominator; an independently frozen scope
 // supplies exact selected IDs/ordered feature hashes. No all-world JSON lives
@@ -470,7 +565,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   demand(runtimeStat.isFile() && !runtimeStat.isSymbolicLink(), 'Installed runtime must be an ordinary whole executable');
   const codeNames = ['package.json','scripts/additive-gap-repair.mjs','src/effective-footprint.js',
     'scripts/native-ownership/native-preparation-guards.mjs','src/native-runtime.js',
-    'scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs',
+    'scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','src/ownership-codec.js','scripts/audit-grid-intervals.mjs',
     'scripts/native-ownership/require-verified-selection.mjs','scripts/native-ownership/read-pinned-build-file.mjs',
     'scripts/native-ownership/verified-candidates.json','scripts/evidence-quality.mjs','src/ownership-method.js',
     'node_modules/@noble/hashes/package.json'];
@@ -480,7 +575,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
   const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
   const request = JSON.parse(readPin(sourceRoot,requestPin));
-  demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION,SOURCE_PREMISES_VERSION].includes(request.operation)
+  demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION].includes(request.operation)
     && JSON.stringify(canonicalValue(request.executed_code)) === JSON.stringify(canonicalValue(project)),
     'Foreign request operation/head');
   demand(typeof destination === 'string' && destination === request.destination
@@ -496,9 +591,9 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     demand(stat.isFile() && !stat.isSymbolicLink() && fs.realpathSync(file) === file && stat.size === pin.bytes && sha(fs.readFileSync(file)) === pin.sha256,
       'Actual installed module drift');
   });
-  const stagePins=request.operation===SOURCE_PREMISES_VERSION?request.source_rule?.inputs:request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
+  const stagePins=request.operation===ADDITIVE_PROPOSAL_VERSION?request.additive?.inputs:request.operation===SOURCE_PREMISES_VERSION?request.source_rule?.inputs:request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
   demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
-  const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
+  const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
   const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
   const runtimeRead=()=>{
@@ -520,7 +615,9 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     && request.parent.roster_sha256 === report.complete_roster_sha256, 'Wrong complete original report');
   const resolutions=baselinePins.length?readBaselineResolutions(sourceRoot,request.baseline):undefined;
   let result;
-  if(request.operation===SOURCE_PREMISES_VERSION){
+  if(request.operation===ADDITIVE_PROPOSAL_VERSION){
+    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveProposalStage(sourceRoot,request);
+  }else if(request.operation===SOURCE_PREMISES_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');
     result=sourcePremiseStage(sourceRoot,request,report);
   }else if(request.operation===INVENTORY_VERSION){
@@ -546,15 +643,17 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const facts = canonical({...result.facts,execution_commit:commit,executed_code:project,request:requestPin,
     input_descriptors:[request.report,...stagePins,...baselinePins],baseline:request.baseline??null,runtime:{bytes:runtimeStat.size,sha256:runtimeSha},
     installed_modules:request.installed_modules, admission:budget.snapshot(), request_admission:requestBudget.snapshot()});
-  demand(body.length <= 32*1024*1024 && encoded.length <= 32*1024*1024 && body.length+encoded.length+facts.length <= outputReserve,
+  demand(body.length <= 32*1024*1024 && encoded.length <= 32*1024*1024 && body.length+encoded.length+facts.length+(result.assets??[]).reduce((n,asset)=>n+asset.body.length+(asset.decoded_bytes??0),0) <= outputReserve,
     'Complete outputs exceed prospective reserve');
   demand(runtimeRead() === runtimeSha, 'Installed runtime drift');
   verifyModules();
   committedPreparationFiles(sourceRoot,commit,project.map(pin=>pin.path));
+  for(const asset of result.assets??[])demand(/^[a-z0-9-]+\.json(?:\.gz)?$/.test(asset.name)&&asset.body.length<=32*1024*1024,'Foreign/oversized release asset');
   const output = createNativeCandidateOutput(sourceRoot,destination);
   fs.writeFileSync(path.join(output,'inventory.jsonl.gz'),encoded,{flag:'wx'});
   fs.writeFileSync(path.join(output,'facts.json'),facts,{flag:'wx'});
-  const publication = {version:1,complete:true,facts:{bytes:facts.length,sha256:sha(facts)},
+  for(const asset of result.assets??[]){demand(/^[a-z0-9-]+\.json(?:\.gz)?$/.test(asset.name)&&asset.body.length<=32*1024*1024,'Foreign/oversized release asset');fs.writeFileSync(path.join(output,asset.name),asset.body,{flag:'wx'});}
+  const publication = {version:1,complete:true,...(result.assets?{assets:result.assets.map(asset=>({path:asset.name,bytes:asset.body.length,sha256:sha(asset.body),...(asset.decoded_bytes?{uncompressed_bytes:asset.decoded_bytes,uncompressed_sha256:asset.decoded_sha256}:{})}))}:{}),facts:{bytes:facts.length,sha256:sha(facts)},
     inventory:{bytes:encoded.length,sha256:sha(encoded),uncompressed_bytes:body.length,uncompressed_sha256:sha(body)}};
   fs.writeFileSync(path.join(output,'publication.json'),canonical(publication),{flag:'wx'});
   return publication;

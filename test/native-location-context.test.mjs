@@ -93,4 +93,8 @@ test('same retained geometry object with a new additive ledger recomputes native
  const expected=await compileEffectiveNativeRuntime(result.context.features.map((f,i)=>({...f,pixelIndex:i+1})),{size,latitudes});
  assert.deepEqual(result.grid.rows,expected.rows);assert.deepEqual(result.grid.runs,expected.runs);
  assert.ok(result.accounting.recomputedRows>0);assert.equal(changed.geometry,old.geometry);
+ assert.equal(result.grid.context_footprint_domain,'worldatlas-display-context-footprints:v1');
+ assert.match(result.grid.context_footprints_sha256,/^[0-9a-f]{64}$/);
+ assert.equal(result.grid.reference_footprints_sha256,base.footprints_sha256);
+ assert.equal(result.grid.effective_footprint_sha256,undefined);
 });
