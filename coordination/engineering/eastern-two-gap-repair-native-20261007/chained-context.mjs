@@ -7,6 +7,15 @@ import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
 import{isDeepStrictEqual}from'node:util';
 import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
+export function selectBuildContextValidator(stage,{legacy,current}){
+ assert.equal(typeof legacy,'function');assert.equal(typeof current,'function');
+ if(stage?.version===2){
+  assert.equal(stage.kind,'retained-identity-context-continuation-v2');
+  assert.equal(stage.issue,1295);
+  return current;
+ }
+ return legacy;
+}
 export const FIXED_PRIOR_STAGE_SHA='471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765';
 export const FIXED_NATIVE_COMPARISON_SHA='3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28';
 export const FIXED_PRIOR_VALIDATOR_SHA='5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7';
