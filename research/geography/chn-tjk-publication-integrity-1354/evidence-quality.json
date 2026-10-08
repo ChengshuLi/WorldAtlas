@@ -1,0 +1,639 @@
+{
+  "version": 1,
+  "issue": 1513,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B723995182906",
+    "gb:CHN:ADM2:17275852B99352197075157",
+    "gb:TJK:ADM2:16282066B16686410577714"
+  ],
+  "subject_ids_sha256": "d4131c2f029c2d3d5ca266411f1691cce52d5d2906fbdf8be22e20b5a292daa8",
+  "baseline": {
+    "version": 2,
+    "commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+    "files": [
+      {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/tajik-stat-admin-units-2025.xlsx",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 11242,
+        "sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/source-inventory.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 8168,
+        "sha256": "9ff39b033b63ad7f10e2b7a5fec8ecb025f99d65c54365224d77d30e54169f6a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 4947,
+        "sha256": "3bd574fa5ec541348f37673243702cdf92cacc46072aff410e2bae6488865a8b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/evidence-quality.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 24472,
+        "sha256": "c9e0961cc6483acbe13d98bb4a2dc25596563a44ca7b1ad7ad276b0739c3986a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/reproduce.py",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+        "bytes": 15019,
+        "sha256": "e05ae6e04bb1d609142c26b3cc01c4eb77c47e0cb642da755ab88ce1bb35749d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/evidence-quality.json",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+        "bytes": 16606,
+        "sha256": "5228274c845062d831bae749f00dc6836c4da29a13b8945d5c97d667d4118d3a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-07/publication.json",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+        "bytes": 961,
+        "sha256": "7bb250bd28e130415c0a8e443268988d44fb32678c69be2f00e77ce5864c358a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-08/publication.json",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae",
+        "bytes": 961,
+        "sha256": "a92472d432503fc925cdeff4ebcdc651dffa699ea622a4c59332c911a7012110",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/tajik-stat-admin-units-2025.xlsx": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/source-inventory.json": "9ff39b033b63ad7f10e2b7a5fec8ecb025f99d65c54365224d77d30e54169f6a",
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py": "3bd574fa5ec541348f37673243702cdf92cacc46072aff410e2bae6488865a8b",
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/evidence-quality.json": "c9e0961cc6483acbe13d98bb4a2dc25596563a44ca7b1ad7ad276b0739c3986a",
+      "scripts/evidence/immutable.py": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/geography/part-3.json": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+      "data/geography/part-23.json": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/reproduce.py": "e05ae6e04bb1d609142c26b3cc01c4eb77c47e0cb642da755ab88ce1bb35749d",
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/evidence-quality.json": "5228274c845062d831bae749f00dc6836c4da29a13b8945d5c97d667d4118d3a",
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-07/publication.json": "7bb250bd28e130415c0a8e443268988d44fb32678c69be2f00e77ce5864c358a",
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-08/publication.json": "a92472d432503fc925cdeff4ebcdc651dffa699ea622a4c59332c911a7012110"
+    },
+    "pin_files": {
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/tajik-stat-admin-units-2025.xlsx": {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/tajik-stat-admin-units-2025.xlsx",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/source-inventory.json": {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/source-inventory.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py": {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "research/geography/shared-seam-chn-tjk-admin-reference-20261006/evidence-quality.json": {
+        "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/evidence-quality.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "scripts/evidence/immutable.py": {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "data/world-index.json": {
+        "path": "data/world-index.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "data/geography/part-3.json": {
+        "path": "data/geography/part-3.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "data/geography/part-23.json": {
+        "path": "data/geography/part-23.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/reproduce.py": {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/reproduce.py",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+      },
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/evidence-quality.json": {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/evidence-quality.json",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+      },
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-07/publication.json": {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-07/publication.json",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+      },
+      "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-08/publication.json": {
+        "path": "research/geography/chn-tjk-workbook-inventory-1127-erratum/vintages/run-20261007-08/publication.json",
+        "commit": "c53f0aa473eb32c07a5cf4f57df3a86663a625ae"
+      }
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B723995182906": {
+        "path": "data/geography/part-3.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "gb:CHN:ADM2:17275852B99352197075157": {
+        "path": "data/geography/part-3.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      },
+      "gb:TJK:ADM2:16282066B16686410577714": {
+        "path": "data/geography/part-23.json",
+        "commit": "432c5b8e0ac9b9597738a31f5386569312c75966"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "predecessor-comparison-code",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/c53f0aa473eb32c07a5cf4f57df3a86663a625ae/research/geography/chn-tjk-workbook-inventory-1127-erratum/reproduce.py",
+      "role": "Authenticated predecessor producer code and retained publication receipts; inspected for comparison custody only.",
+      "vintage": "Affected PR #1354 merge c53f0aa473eb32c07a5cf4f57df3a86663a625ae.",
+      "retrieved_at": "2026-10-08; exact bytes re-read from immutable Git objects.",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository reuse terms were not reviewed for this task."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore the pinned code from commit c53f0aa473eb32c07a5cf4f57df3a86663a625ae at research/geography/chn-tjk-workbook-inventory-1127-erratum/reproduce.py; expected SHA-256 e05ae6e04bb1d609142c26b3cc01c4eb77c47e0cb642da755ab88ce1bb35749d. The two historical publication receipt paths and hashes are separately pinned in baseline v2.",
+      "limit": "Code bytes establish which comparison behavior was inspected, not the correctness of source geography or authorization to publish it.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "tajik-stat-admin-units-2025",
+      "url": "https://www.stat.tj/wp-content/uploads/2026/06/administrative-area_units-2.xlsx",
+      "role": "Retained administrative-count workbook cited only as source context for the existing three-subject research scope; not used to claim boundary correctness.",
+      "vintage": "Counts stated as of 2025-01-01; prior packet noted Last-Modified 2026-06-18.",
+      "retrieved_at": "2026-10-06 in prior packet; authenticated at immutable baseline commit 432c5b8e0ac9b9597738a31f5386569312c75966",
+      "license": {
+        "status": "unknown",
+        "terms": "Prior packet reports CC BY 4.0, but this work does not independently adjudicate source page or license scope."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore exact source bytes from immutable commit 432c5b8e0ac9b9597738a31f5386569312c75966 at research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/tajik-stat-admin-units-2025.xlsx; expected 11,242 bytes and SHA-256 c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40.",
+      "limit": "No official page or license review performed here. Workbook counts do not establish present territorial meaning, parent relationships, boundaries, completeness or neighboring granularity.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/README.md",
+      "bytes": 3314,
+      "sha256": "f581fb9b9d3fcdd774de5cf51d93ae4fc3cc6637c95541d543af9d7d7a3fa15e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/reproduce.py",
+      "bytes": 9020,
+      "sha256": "4f3495ed600a327129e94399affdb1f8040438e95ef18e8afe34569b6f547807",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/test_publication.py",
+      "bytes": 6936,
+      "sha256": "073a3c91e6b2bacfa4240225e55c1bb3eae7956af375fe493e0e9de059436191",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/validation/black-box-tests.json",
+      "bytes": 601,
+      "sha256": "9b546d7d7ee005faa3148ac64bea1a509bceb31be93856562f0e4edcd7aad18b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/validation/publication-negative-control.json",
+      "bytes": 842,
+      "sha256": "5931f093cadaf14e05897966197b99c5a7e40e630db65d3cacdb244d5f94e916",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/validation/publication-positive-control.json",
+      "bytes": 406,
+      "sha256": "a888ae827b932aece1abe6fe1f2f53134dd47e5ce58a81a1178ec1da0b8463f4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-a1/publication.json",
+      "bytes": 275,
+      "sha256": "0688dba22b5419d53910302a08a5d0f332dbd40d2efe3481732f3d757c23edc3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-a1/reproducibility.json",
+      "bytes": 1406,
+      "sha256": "faf317119349fe08b724906f3fe68ca15c15cc04a18e215c055177bcbc3b2e44",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-b1/publication.json",
+      "bytes": 275,
+      "sha256": "35d99fd9778b3155b9e2b7c1919dc793421cd84dd48f8837c76eaa12f78622e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-b1/reproducibility.json",
+      "bytes": 1406,
+      "sha256": "6010473c4a9e446ef15764d02aa682e87e9cd902d1f89baa97f238bf29e95939",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/execution.json",
+      "bytes": 1825,
+      "sha256": "111633d6fd08f7ae75d3a8879841973254d236248fa9b0b3e6e0928c3e6422bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/member-inventory.json",
+      "bytes": 1519,
+      "sha256": "147219e9bb374a60dc81b9b78e96e26c226783f5385e5ceca583ec0d1d7b5d40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/negative-control.json",
+      "bytes": 568,
+      "sha256": "e269b62dc024942aa4b89241ce07c33820412f50ad75ab87547c35eabf100714",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/positive-control.json",
+      "bytes": 265,
+      "sha256": "e4029faafce00034641f6d311c9473f4d866aa9aa7748dbb506190aa0dd08ac5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/publication.json",
+      "bytes": 941,
+      "sha256": "d81fe632f6c1d2018fbaccabc1f600f2918124eee3aa73c4d666bb872f73b170",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/execution.json",
+      "bytes": 1825,
+      "sha256": "111633d6fd08f7ae75d3a8879841973254d236248fa9b0b3e6e0928c3e6422bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/member-inventory.json",
+      "bytes": 1519,
+      "sha256": "147219e9bb374a60dc81b9b78e96e26c226783f5385e5ceca583ec0d1d7b5d40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/negative-control.json",
+      "bytes": 568,
+      "sha256": "e269b62dc024942aa4b89241ce07c33820412f50ad75ab87547c35eabf100714",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/positive-control.json",
+      "bytes": 265,
+      "sha256": "e4029faafce00034641f6d311c9473f4d866aa9aa7748dbb506190aa0dd08ac5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/publication.json",
+      "bytes": 941,
+      "sha256": "3def09b6fe73bf352b21ace803461e12c9dbef7fdcd32a91725f0de5fad86ff9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/execution.json",
+      "bytes": 1827,
+      "sha256": "109647ebe64d394abd00eb9af75c5f2e44ba6c55e02bef42b169ec94e163b125",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/member-inventory.json",
+      "bytes": 1519,
+      "sha256": "147219e9bb374a60dc81b9b78e96e26c226783f5385e5ceca583ec0d1d7b5d40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/negative-control.json",
+      "bytes": 568,
+      "sha256": "e269b62dc024942aa4b89241ce07c33820412f50ad75ab87547c35eabf100714",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/positive-control.json",
+      "bytes": 265,
+      "sha256": "e4029faafce00034641f6d311c9473f4d866aa9aa7748dbb506190aa0dd08ac5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/publication.json",
+      "bytes": 941,
+      "sha256": "7d2a8479a63ab13b84914fe52751e4513efdf7d970c349d6df1f463cb5d1bda0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/execution.json",
+      "bytes": 1827,
+      "sha256": "109647ebe64d394abd00eb9af75c5f2e44ba6c55e02bef42b169ec94e163b125",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/member-inventory.json",
+      "bytes": 1519,
+      "sha256": "147219e9bb374a60dc81b9b78e96e26c226783f5385e5ceca583ec0d1d7b5d40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/negative-control.json",
+      "bytes": 568,
+      "sha256": "e269b62dc024942aa4b89241ce07c33820412f50ad75ab87547c35eabf100714",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/positive-control.json",
+      "bytes": 265,
+      "sha256": "e4029faafce00034641f6d311c9473f4d866aa9aa7748dbb506190aa0dd08ac5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/publication.json",
+      "bytes": 941,
+      "sha256": "42e7cdde03253322372b1e64510361e474231c6dbd5096ddbade0d8081752a73",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "zip-member-inventory",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Execute authenticated predecessor producer functions in memory using the historical immutable helper; require both complete publications to have version 1, status complete, exactly four unique exact run-relative output paths, ordinary product files and exact whole-file byte descriptors; compare actual full product bytes. Actual CLI controls exercise invalid status/version, duplicate and foreign paths, missing and changed files; writer destinations and failed final receipt installation are adversarially checked.",
+      "software": "Python 3.12.14 standard library; pinned predecessor producer SHA-256 e05ae6e04bb1d609142c26b3cc01c4eb77c47e0cb642da755ab88ce1bb35749d; pinned helper SHA-256 a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "units": "Exact whole-file bytes and SHA-256; publication schema fields and unique path inventory"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "publication_cli_test_count",
+      "value": 8,
+      "unit": "black-box test cases",
+      "vintage": "current",
+      "evaluation_commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+      "input_sha256": "9b546d7d7ee005faa3148ac64bea1a509bceb31be93856562f0e4edcd7aad18b",
+      "input_file": {
+        "path": "research/geography/chn-tjk-publication-integrity-1354/validation/black-box-tests.json",
+        "commit": "candidate"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "publication_cli_test_count",
+      "path": "research/geography/chn-tjk-publication-integrity-1354/validation/black-box-tests.json",
+      "json_pointer": "/test_count"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "publication_cli_test_count",
+      "value": 8,
+      "unit": "black-box test cases"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "zip-member-inventory",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/chn-tjk-publication-integrity-1354/validation/publication-positive-control.json"
+    },
+    {
+      "method_id": "zip-member-inventory",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/chn-tjk-publication-integrity-1354/validation/publication-negative-control.json"
+    },
+    {
+      "method_id": "zip-member-inventory",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-b1/reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/reproduce.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/test_publication.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/validation/black-box-tests.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/validation/publication-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/validation/publication-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-a1/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-a1/reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-b1/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/compare-20261008-b1/reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/execution.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/member-inventory.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a1/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/execution.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/member-inventory.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-a2/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/execution.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/member-inventory.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b1/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/execution.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/member-inventory.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/vintages/run-20261008-b2/publication.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/chn-tjk-publication-integrity-1354/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "predecessor-comparison-code"
+      ],
+      "status": "supported",
+      "text": "The additive successor rejects incomplete or misdirected publication custody before producing a successful reproducibility receipt, and two fresh intact runs publish byte-identical complete payloads under the bounded comparison method."
+    },
+    {
+      "source_ids": [
+        "tajik-stat-admin-units-2025"
+      ],
+      "status": "unresolved",
+      "text": "This mechanical custody correction does not verify original administrative counts, source authority or license, territorial meaning, parent relationships, boundary placement, geometry completeness, present-day status, or neighboring administrative granularity for the three subjects."
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --vintage run-20261008-b1",
+    "python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --vintage run-20261008-b2",
+    "python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/reproduce.py --compare run-20261008-b1 run-20261008-b2 --vintage compare-20261008-b1",
+    "python3.12 -I -B research/geography/chn-tjk-publication-integrity-1354/test_publication.py",
+    "node scripts/evidence-quality.mjs research/geography/chn-tjk-publication-integrity-1354/evidence-quality.json"
+  ]
+}

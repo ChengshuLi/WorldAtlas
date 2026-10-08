@@ -1,0 +1,17 @@
+{
+  "method_id": "zip-member-inventory",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "runs": [
+    "run-20261008-b1",
+    "run-20261008-b2"
+  ],
+  "checks": {
+    "complete_publication_receipts": true,
+    "exact_four_output_inventory": true,
+    "run_relative_paths": true,
+    "ordinary_products": true,
+    "whole_file_size_and_sha256": true,
+    "actual_complete_payloads_equal": true
+  }
+}
