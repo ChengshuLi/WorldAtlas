@@ -93,9 +93,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const files = integrationTestFiles(profile, shard);
   console.log(JSON.stringify({native_inputs:prepareNativeRegressionInputs(profile)}));
-  // Restore the committed exact products before unchanged checkout test readers.
-  const {prepareCanonicalCheckout}=await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs');
-  console.log(JSON.stringify({canonical_checkout:prepareCanonicalCheckout()}));
+  // Only full checkout readers consume canonical products. The focused evidence
+  // profile deliberately has no canonical namespace in its sparse checkout.
+  if (profile === 'full') {
+    const {prepareCanonicalCheckout}=await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs');
+    console.log(JSON.stringify({canonical_checkout:prepareCanonicalCheckout()}));
+  }
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, shard, files}));
   const result = spawnSync(process.execPath, ['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
