@@ -1,0 +1,27 @@
+# Kyrgyzstan–Tajikistan source fitness packet
+
+This packet covers the complete 12-component family `gap-source-batch:74be953b1fb31c15200742da` and the complete 3-component family `gap-source-batch:65911e15791d12ebb2ccacf5`, plus all nine named complete KGZ/TJK ADM2 contacts. The two families are subsets of operational batch `gap-operational-batch:1df1240f1cba596d821d83f5`; the full 85-family/441-component membership and selected families' complete neighbor context are retained in `inputs/context/selected-routing-and-operational-context.json`.
+
+## Input custody
+
+`inputs/input-pins.json` inventories each whole staged input file. The source components are the complete unchanged feature bodies from the retained `components-v3` archive. All 15 full feature and geometry hashes match their exact current-context route descriptors. The 13 physical-comparison shards contain all 15 referenced component rows; each row matches its route-bound hash under the producer's canonical JSON encoding, including the terminal newline. All 25 complete actionability stream parts are retained, including arbitrary byte-fragment boundaries; preflight concatenates them before parsing and checks the complete 15-row selection. Whole batch and family source records preserve complete memberships and context.
+
+The source products are the original simplified files actually consumed by the pinned `scripts/administrative.py` recipe. The KGZ file is the complete 41-feature product (379,772 decoded bytes; SHA-256 `d59b89a8b6814ee4a5b52300aff23cf9cf5e3c652f9cf55898b3cf9e7902bb97`); the TJK file is the complete 58-feature product (263,687 decoded bytes; SHA-256 `deb8d8a6635585b6ad41fc5fe1c6351661cfcd23e8bede05c98709a916397cc8`). The packet verifies all nine contacts by full `shapeID` and keeps every source feature available for whole-product comparison.
+
+The runtime capture retains the Python 3.12.14 interpreter, its standard-library/configuration and native runtime files, the full Shapely 2.1.2 package, GEOS 3.13.1 native libraries, and package metadata. The captured runtime contains 70,022,430 raw bytes across 1,414 files, stored in a 26,412,225-byte deterministic tar-gzip bundle with per-file hashes in the separately pinned runtime manifest. The producer checks every body against both the bundle and installed runtime, then imports Shapely from the extracted retained copy. The recorded macOS system libraries remain host-supplied. PROJ is not used: coordinates remain literal GeoJSON longitude/latitude values.
+
+The retained metadata records represented-year claims of 2010 (KGZ) and 2017 (TJK). It records underlying original metadata license claims of CC BY-SA 3.0 Unported (KGZ) and ODbL 1.0 (TJK), while the retained geoBoundaries derivative-product statement separately declares CC BY 4.0 with attribution. These claims are preserved as recorded; this packet does not broaden or reapprove them. Source authority, effective dates, source lineage, candidate-scale registration and accuracy, coordinate precision, rights, and ownership remain unresolved.
+
+## Measurement policy
+
+`producer.py` compares each complete component with every feature in both complete simplified products. It reports exact feature hashes, intersections, coverage predicates, and intersection area/length in literal longitude/latitude coordinate units. It retains the complete original feature files and pair-level measurements; it does not persist newly derived intersection geometries. The producer performs no projection, clipping, geometry repair, buffering, snapping, simplification, or mutation. Coordinate-unit overlays are source-product diagnostics; they do not establish physical land, water, rightful province, historical ownership, or a processing cause.
+
+No complete official candidate-scale reference with dated geometry, registration/accuracy, and reusable source bytes is retained for this cohort. The inherited physical comparison records cite GSHHG 2.3.7 / 2017-06-15 with heterogeneous observation dates, but their support summaries do not provide the complete independent physical/water source geometry or candidate-level accuracy needed to settle narrow shoreline/channel truth. Those limits remain explicit; missing water evidence is not treated as dry land.
+
+## Reproduction and controls
+
+The producer binds all staged whole-file inputs, exact 26-subject scope, component and physical row identities, both complete products, and the 85/441 operational batch. The directed positive control checks one exact component/source overlap in a published complete run. Negative controls remove an actual component record and alter a routed geometry hash; the production exact-scope and source-join guards must reject both cases.
+
+Runtime: Python 3.12.14, Shapely 2.1.2, GEOS 3.13.1. Each run has a 768 MiB RSS ceiling, 1,200-second ceiling, and 12 MiB total output ceiling. The shared immutable-evidence writer also enforces a 256 MiB complete phase budget, including raw and decoded inputs, captured runtime/code and outputs. Only the 15 local-family components are eligible for calculation; no worldwide component graph is constructed. Run directories must be new and distinct.
+
+Issue #1431 acceptance criterion 5 was updated to require an explicitly coordinated memory window without concurrent substantial root-global GIS. No GIS is eligible until the complete input/runtime/output/storage/RAM admission passes and the reserved window is confirmed. The source packet and preflight remain separate from the later geometry runs.
