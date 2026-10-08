@@ -1,5 +1,5 @@
 {
-  "builder_sha256": "75a062f359aab1741e6552f02c1c81b9001d33486b7d0ac0a2e82596f299884c",
+  "builder_sha256": "26eb2fd90ca12f5bf7b7ae7fb03cc16b6ad4a4b652ba0e08920b5e971a0c9b37",
   "comparison_policy": "Compare all six deterministic calculation/control outputs byte-for-byte; retain each fresh run's distinct metadata and publication receipt.",
   "equal_deterministic_product_digest": true,
   "immutable_helper_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
@@ -7,41 +7,41 @@
   "method_id": "south-america-batch4-manifest-1349-erratum",
   "method_note": "Each fresh producer run admitted 214,557,427 whole input/fixture/output bytes, wrote seven outputs and published its complete receipt last.",
   "outcome": "passed",
-  "producer_sha256": "92e59d0b3cbd14296f78a846cee9bbbaf6c07bf43c7a60eeedf7a94079f382d6",
+  "producer_sha256": "980aa5c20c1f1ed39a82a7efca1bfa17e53784977a5b3e165fe8ee1e8010d1f5",
   "reserved_output_bytes": 1048576,
   "run_metadata_differ": true,
   "run_one": {
-    "metadata_sha256": "202451b71e907514acc46e2b54af61f1b61313e6960446e2bb43676ee0de5cbd",
+    "metadata_sha256": "bc62b716404198f2355f9520f320ad51f968c3a04d8236807bacf04a39f7b28d",
     "outputs": {
       "audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
-      "child-roster-controls.json": "a114287faa2c9d613304c78b1fdcf99591cb868905871ebf9395d078fc86b4fd",
+      "child-roster-controls.json": "dad47cf2171dfc9d1ef3a01f97d97de21ef83a25cafc69f8d5e1a659dc87be80",
       "execution-bindings.json": "c09f2bf60f7c73595b5bdf40b73de3d570699542429b7bac593fc6a9a07764ae",
-      "legacy-writer-control.json": "e74ae32b5336138a1b51e67954db3a15e27d2d4950a6bd181ee8461cd1f2aef2",
-      "negative-control.json": "732fd90d0cd65a0daaf226b13bf1e05a91bd843ad85b28dcdfd35bd07e583fdb",
-      "positive-control.json": "d48ce763ad8da62fd2c2f64b4bd7c60815c626e0be59075b6df6761afc26efa8"
+      "legacy-writer-control.json": "f6b8e15ee8e0203c6c8176fa4ddba58c63d281177afac688a8384e87825eae68",
+      "negative-control.json": "55f51a84d2e698d7b1ccf07c720c989b7a0a0a1cc3c1b902de83c0bab4223830",
+      "positive-control.json": "41d92a6025ad53800f573da8851da40629e6924c9d70ff5b95213858d253557e"
     },
-    "publication_sha256": "98f1934f0075b1aa37762dda2e1dc7a0fbd85323fd01bf1c8da1b1abef53c60c",
-    "vintage": "run-nine"
+    "publication_sha256": "b59a06126f7bd35dfa96a2b0b907a2aab75c6e548f3d8f9b5d3efd0d7dcbb28a",
+    "vintage": "run-eleven"
   },
-  "run_one_sha256": "cb3daca733b812200fe19a292386ce052b87ee9498c6f8a4f5a7262f59e64790",
+  "run_one_sha256": "77b7d957091ab614dd6ec1ab95e742aa80d180400b073ddc588002a179ef3029",
   "run_two": {
-    "metadata_sha256": "74a6003bfd0d901994c019043b602d523d7ee9d52790a9871bd8cce096780b15",
+    "metadata_sha256": "dc4ce7a17a77793cc665dd03e7c00ded484eebb4325d1706aad2f3b9358e99f5",
     "outputs": {
       "audit.json": "8dc1633d561c44c88d92c5edcd810c9fc256ead885a0cb0b7f2a7679149821e6",
-      "child-roster-controls.json": "a114287faa2c9d613304c78b1fdcf99591cb868905871ebf9395d078fc86b4fd",
+      "child-roster-controls.json": "dad47cf2171dfc9d1ef3a01f97d97de21ef83a25cafc69f8d5e1a659dc87be80",
       "execution-bindings.json": "c09f2bf60f7c73595b5bdf40b73de3d570699542429b7bac593fc6a9a07764ae",
-      "legacy-writer-control.json": "e74ae32b5336138a1b51e67954db3a15e27d2d4950a6bd181ee8461cd1f2aef2",
-      "negative-control.json": "732fd90d0cd65a0daaf226b13bf1e05a91bd843ad85b28dcdfd35bd07e583fdb",
-      "positive-control.json": "d48ce763ad8da62fd2c2f64b4bd7c60815c626e0be59075b6df6761afc26efa8"
+      "legacy-writer-control.json": "f6b8e15ee8e0203c6c8176fa4ddba58c63d281177afac688a8384e87825eae68",
+      "negative-control.json": "55f51a84d2e698d7b1ccf07c720c989b7a0a0a1cc3c1b902de83c0bab4223830",
+      "positive-control.json": "41d92a6025ad53800f573da8851da40629e6924c9d70ff5b95213858d253557e"
     },
-    "publication_sha256": "f6c510501d47682e09f8c8ed7b1d537eacacf220f9a71e47fab046b95b50c41f",
-    "vintage": "run-ten"
+    "publication_sha256": "82f29207fe738b8fdd2bf96360e07882fb72eeb865b6f8f514147e6761bd5bc4",
+    "vintage": "run-twelve"
   },
-  "run_two_sha256": "cb3daca733b812200fe19a292386ce052b87ee9498c6f8a4f5a7262f59e64790",
+  "run_two_sha256": "77b7d957091ab614dd6ec1ab95e742aa80d180400b073ddc588002a179ef3029",
   "runtime": {
     "implementation": "cpython",
     "platform": "macOS-15.6.1-arm64-arm-64bit",
     "python": "3.12.14"
   },
-  "total_input_bytes": 219536520
+  "total_input_bytes": 220222838
 }

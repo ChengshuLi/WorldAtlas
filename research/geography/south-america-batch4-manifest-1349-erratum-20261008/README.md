@@ -9,13 +9,13 @@ The earlier #1332 packet remains intact. Its 65 original files, six historical v
 
 The inherited geography claims remain limited to retained Atlas identities, candidate crosswalk rows and parent/area rosters. Current source authority, original geometry, license/reuse, legal meaning, completeness, adjacent granularity and boundary quality remain unverified. No source acquisition, approval, import or deployment is part of this repair.
 
-The actual producer writes run-nine/run-ten after binding each run to the exact producer script and captured immutable-helper hashes. Earlier run-seven/run-eight evidence is preserved unchanged. The corrected builder authenticates the accepted contract and reconciles every generated subject identity before preparing results. It validates every input and output destination before computation, holds every final result in memory, and publishes the success manifest last. The original builder and packet remain immutable historical evidence.
+The actual producer writes run-eleven/run-twelve with this repair's method ID, exact producer script hash and captured immutable-helper hash. Earlier run-seven through run-ten evidence is preserved unchanged; run-nine/run-ten retain inherited #1332 method labels and are not used as accepted control evidence. The corrected builder authenticates the accepted contract and reconciles every generated subject identity before preparing results. It validates every input and output destination before computation, holds every final result in memory, and publishes the success manifest last. The original builder and packet remain immutable historical evidence.
 
 Run with the pinned Python runtime and from repository root:
 
 ```sh
-PYTHONDONTWRITEBYTECODE=1 python3.12 -B research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproduce.py --vintage run-nine
-PYTHONDONTWRITEBYTECODE=1 python3.12 -B research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproduce.py --vintage run-ten
+PYTHONDONTWRITEBYTECODE=1 python3.12 -B research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproduce.py --vintage run-eleven
+PYTHONDONTWRITEBYTECODE=1 python3.12 -B research/geography/south-america-batch4-manifest-1349-erratum-20261008/reproduce.py --vintage run-twelve
 PYTHONDONTWRITEBYTECODE=1 python3.12 -B research/geography/south-america-batch4-manifest-1349-erratum-20261008/verify_controls.py
 PYTHONDONTWRITEBYTECODE=1 python3.12 -B research/geography/south-america-batch4-manifest-1349-erratum-20261008/build_manifest.py
 node scripts/evidence-quality.mjs research/geography/south-america-batch4-manifest-1349-erratum-20261008/evidence-quality.json
@@ -23,4 +23,4 @@ node scripts/evidence-quality.mjs research/geography/south-america-batch4-manife
 
 These checks establish only reproducible custody/integrity for the bounded repair; they do not certify source truth or the South America region.
 
-The first actual builder output was rejected because its metric vintage used a producer run name instead of the required baseline/current/archived value. The second was rejected because metric hashes repeated across vintages without exact `input_file` paths. The third failed the trusted gate because the generated pin keys did not exactly match the issue-declared pin paths. All three exact drafts and findings are retained under `controls/failed-*-builder/`; they are described as failed drafts and are not accepted outputs. `cli-controls.json` keeps the original-builder reproductions and corrected CLI adverse controls. Earlier exact control receipts are preserved at `controls/first-control-receipt.json`, `controls/second-control-receipt.json` and `controls/third-control-receipt.json` as the final suite is rerun.
+The first actual builder output was rejected because its metric vintage used a producer run name instead of the required baseline/current/archived value. The second was rejected because metric hashes repeated across vintages without exact `input_file` paths. The third failed the trusted gate because generated pin keys did not exactly match the issue-declared pin paths. The fourth failed because the producer's inherited control method IDs still named #1332. All four exact drafts and findings are retained under `controls/failed-*-builder/`; they are failed drafts, not accepted outputs. `cli-controls.json` keeps the original-builder reproductions and corrected CLI adverse controls. Earlier control receipts are preserved under `controls/`.

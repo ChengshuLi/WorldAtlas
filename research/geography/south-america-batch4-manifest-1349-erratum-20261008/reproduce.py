@@ -42,7 +42,7 @@ REPRODUCER = ORIGINAL + "/findings/reproduce.py"
 VERIFIER = AFFECTED + "/verify-packet.py"
 BUILDER = AFFECTED + "/build-manifest.py"
 IMMUTABLE = "scripts/evidence/immutable.py"
-METHOD = "south-america-batch4-validator-integrity-erratum"
+METHOD = "south-america-batch4-manifest-1349-erratum"
 SUBJECT_SNAPSHOT_SHA256 = "70e61fad77bb6b93376821cbe8b7c8c73439eac95ede07a45784758400ae23f6"
 ISSUE_PINS = {
     "world-index": ("data/world-index.json", "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"),

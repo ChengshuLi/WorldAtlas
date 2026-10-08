@@ -35,8 +35,8 @@ RUN_FILES = ["audit.json", "positive-control.json", "negative-control.json",
              "child-roster-controls.json", "execution-bindings.json",
              "legacy-writer-control.json", "run-metadata.json", "publication.json"]
 COMPARE_FILES = [name for name in RUN_FILES if name not in ("run-metadata.json", "publication.json")]
-RUN_NAMES = ("run-nine", "run-ten")
-PRESERVED_RUN_NAMES = ("run-seven", "run-eight")
+RUN_NAMES = ("run-eleven", "run-twelve")
+PRESERVED_RUN_NAMES = ("run-seven", "run-eight", "run-nine", "run-ten")
 
 
 def sha(raw):
@@ -169,6 +169,13 @@ def run_summary(name, root, ids, inputs):
     if set(actual_rows) != expected:
         raise ValueError("Run receipt omits or adds a result: " + name)
     audit = json.loads(docs["audit.json"])
+    for filename, kind in (("positive-control.json", "positive-control"),
+                            ("negative-control.json", "negative-control"),
+                            ("child-roster-controls.json", "negative-control"),
+                            ("legacy-writer-control.json", "negative-control")):
+        control = json.loads(docs[filename])
+        if control.get("method_id") != "south-america-batch4-manifest-1349-erratum" or control.get("kind") != kind or control.get("outcome") != "passed":
+            raise ValueError("Fresh producer control does not bind the #1506 method: " + root + filename)
     subject_rows = audit.get("subject_rows", [])
     found = [row.get("subject_id") for row in subject_rows]
     digest = sha(json.dumps(sorted(ids), separators=(",", ":")).encode())
@@ -267,12 +274,16 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     output_static.extend(OWNED + "controls/failed-third-builder/" + name for name in
                          ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    output_static.extend(OWNED + "controls/failed-fourth-builder/" + name for name in
+                         ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     output_static.extend([OWNED + "controls/first-builder-rejection.json",
                           OWNED + "controls/second-builder-rejection.json",
                           OWNED + "controls/third-builder-rejection.json",
+                          OWNED + "controls/fourth-builder-rejection.json",
                           OWNED + "controls/first-control-receipt.json",
                           OWNED + "controls/second-control-receipt.json",
-                          OWNED + "controls/third-control-receipt.json"])
+                          OWNED + "controls/third-control-receipt.json",
+                          OWNED + "controls/fourth-control-receipt.json"])
     output_candidate = list(output_static)
     for run in (*PRESERVED_RUN_NAMES, *RUN_NAMES):
         root = OWNED + "vintages/" + run + "/"
@@ -416,15 +427,20 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend((OWNED + "controls/failed-third-builder/" + name, "preserved issue-pin-binding-rejected third builder draft")
                   for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
+    static.extend((OWNED + "controls/failed-fourth-builder/" + name, "preserved control-receipt-rejected fourth builder draft")
+                  for name in ("evidence-quality.json", "preservation.json", "reproducibility.json"))
     static.extend([(OWNED + "controls/first-builder-rejection.json", "validator failure receipt for retained first draft"),
                    (OWNED + "controls/second-builder-rejection.json", "validator failure receipt for retained second draft"),
                    (OWNED + "controls/third-builder-rejection.json", "trusted baseline pin-binding failure receipt for retained third draft"),
+                   (OWNED + "controls/fourth-builder-rejection.json", "trusted control-envelope failure receipt for retained fourth draft"),
                    (OWNED + "controls/first-control-receipt.json", "superseded initial exact CLI control run"),
                    (OWNED + "controls/second-control-receipt.json", "superseded second exact CLI control run"),
-                   (OWNED + "controls/third-control-receipt.json", "superseded third exact CLI control run")])
+                   (OWNED + "controls/third-control-receipt.json", "superseded third exact CLI control run"),
+                   (OWNED + "controls/fourth-control-receipt.json", "superseded fourth exact CLI control run")])
     for run in PRESERVED_RUN_NAMES:
         root = OWNED + "vintages/" + run + "/"
-        static.extend((root + name, "preserved earlier fresh producer evidence") for name in RUN_FILES)
+        role = "retained run with inherited #1332 method labels; not used as accepted control evidence" if run in ("run-nine", "run-ten") else "preserved earlier fresh producer evidence"
+        static.extend((root + name, role) for name in RUN_FILES)
     for run in RUN_NAMES:
         root = OWNED + "vintages/" + run + "/"
         static.extend((root + name, "fresh generated producer evidence with exact code bindings") for name in RUN_FILES)
@@ -443,10 +459,10 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
         output_rows.append({"path": path, "bytes": len(raw), "sha256": sha(raw), "hash_kind": "file-bytes", "role": role})
     output_rows.sort(key=lambda row: row["path"])
 
-    audit_path = OWNED + "vintages/run-nine/audit.json"
-    positive_path = OWNED + "vintages/run-nine/positive-control.json"
-    negative_path = OWNED + "vintages/run-nine/negative-control.json"
-    audit = runs["run-nine"]["audit"]
+    audit_path = OWNED + "vintages/run-eleven/audit.json"
+    positive_path = OWNED + "vintages/run-eleven/positive-control.json"
+    negative_path = OWNED + "vintages/run-eleven/negative-control.json"
+    audit = runs["run-eleven"]["audit"]
     positive = json.loads(INPUTS[positive_path])
     negative = json.loads(INPUTS[negative_path])
     metrics = [
@@ -484,6 +500,8 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
         "The first local manifest draft used an unsupported run-name metric vintage and was rejected by the evidence validator; its exact three files are retained under controls/failed-first-builder/ and excluded from the accepted top-level outputs.",
         "The second local manifest draft lacked explicit candidate input paths for repeated whole-file metric hashes and was rejected by the evidence validator; its exact three files are retained under controls/failed-second-builder/ and excluded from the accepted top-level outputs.",
         "The third manifest draft used generated pin keys instead of the exact issue-declared paths and failed the trusted hosted evidence contract; its exact files and hosted failure are retained under controls/failed-third-builder/ and excluded from the accepted top-level outputs.",
+        "The fourth manifest draft referenced inherited producer controls whose method_id still named #1332, so the trusted control receipt check rejected them; its exact files and hosted failure are retained under controls/failed-fourth-builder/ and excluded from accepted outputs.",
+        "Runs nine and ten retain useful generated rows/receipts and exact producer/helper hashes, but their inherited control method labels are retained as an explicitly nonaccepted vintage; only fresh run-eleven/run-twelve controls bind this repair method.",
         "This packet establishes a bounded builder custody repair only; it does not complete original #1120 or certify geographic approval, source rights, imports or publication."
     ]))
     manifest = {
@@ -501,18 +519,17 @@ def build(*, manifest_path=None, repro_path=None, fault_after_first=False):
         "validation": [
             {"method_id": "south-america-batch4-manifest-1349-erratum", "kind": "positive-control", "outcome": "passed", "evidence_path": positive_path},
             {"method_id": "south-america-batch4-manifest-1349-erratum", "kind": "negative-control", "outcome": "passed", "evidence_path": negative_path},
-            {"method_id": "south-america-batch4-manifest-1349-erratum", "kind": "negative-control", "outcome": "passed", "evidence_path": OWNED + "cli-controls.json"},
             {"method_id": "south-america-batch4-manifest-1349-erratum", "kind": "reproducibility", "outcome": "passed", "evidence_path": OWNED + "reproducibility.json"}],
         "change_receipts": [{"path": path, "status": "added"} for path in sorted([row["path"] for row in output_rows] + [OWNED + "evidence-quality.json"])],
         "conclusions": [
-            {"text": "The current #1506 exact 215-ID scope equals the whole accepted #1332 snapshot and every identity in both fresh run-nine/run-ten producer audits; the 36-part pinned index resolves all subjects.", "status": "supported", "source_ids": ["github-issue-1332", "github-issue-1506", "worldatlas-baseline-e919"]},
+            {"text": "The current #1506 exact 215-ID scope equals the whole accepted #1332 snapshot and every identity in both fresh run-eleven/run-twelve producer audits; the 36-part pinned index resolves all subjects.", "status": "supported", "source_ids": ["github-issue-1332", "github-issue-1506", "worldatlas-baseline-e919"]},
             {"text": "Both fresh producer runs retain 39 exact parent joins and five inherited area records, with all six deterministic calculation/control files identical and per-run metadata/receipts distinct.", "status": "supported", "source_ids": ["github-issue-1506", "worldatlas-baseline-e919"]},
             {"text": "The original #1349 manifest builder and prior 65-file packet remain byte/mode-preserved at their immutable merge commit; source authority, legal parentage, geometry, currency, completeness, neighboring granularity and reuse terms remain unresolved.", "status": "unresolved", "source_ids": ["github-issue-1332", "github-issue-1506", "worldatlas-baseline-e919"]}
         ],
         "stages": {"research": "complete", "implementation": "proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "PYTHONDONTWRITEBYTECODE=1 python3.12 -B " + OWNED + "reproduce.py --vintage run-nine",
-            "PYTHONDONTWRITEBYTECODE=1 python3.12 -B " + OWNED + "reproduce.py --vintage run-ten",
+            "PYTHONDONTWRITEBYTECODE=1 python3.12 -B " + OWNED + "reproduce.py --vintage run-eleven",
+            "PYTHONDONTWRITEBYTECODE=1 python3.12 -B " + OWNED + "reproduce.py --vintage run-twelve",
             "PYTHONDONTWRITEBYTECODE=1 python3.12 -B " + OWNED + "verify_controls.py",
             "PYTHONDONTWRITEBYTECODE=1 python3.12 -B " + OWNED + "build_manifest.py",
             "node scripts/evidence-quality.mjs " + OWNED + "evidence-quality.json"],

@@ -163,7 +163,7 @@ def fixed_controls(parent):
     results["producer_code_drift"] = {**result, "outputs": {}}
 
     repo = copy_repo(parent, "fixed-run-audit-substitution")
-    audit_path = repo / OWNED / "vintages/run-nine/audit.json"
+    audit_path = repo / OWNED / "vintages/run-eleven/audit.json"
     audit = json.loads(audit_path.read_bytes())
     for row in audit["subject_rows"]:
         if row["subject_id"] == ACCEPTED_ID:
@@ -172,7 +172,7 @@ def fixed_controls(parent):
     audit["subject_ids_sha256"] = digest(json.dumps(sorted(row["subject_id"] for row in audit["subject_rows"]), separators=(",", ":")).encode())
     audit_raw = (json.dumps(audit, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
     audit_path.write_bytes(audit_raw)
-    receipt_path = repo / OWNED / "vintages/run-nine/publication.json"
+    receipt_path = repo / OWNED / "vintages/run-eleven/publication.json"
     receipt = json.loads(receipt_path.read_bytes())
     for row in receipt["outputs"]:
         if row["path"].endswith("/audit.json"):
@@ -246,7 +246,9 @@ def main():
     try:
         legacy = legacy_controls(scratch)
         fixed = fixed_controls(scratch)
-        receipt = {"version": 1, "status": "passed", "python": subprocess.check_output([PYTHON, "--version"], text=True).strip(),
+        receipt = {"version": 1, "status": "passed", "method_id": "south-america-batch4-manifest-1349-erratum",
+                   "kind": "negative-control", "outcome": "passed",
+                   "python": subprocess.check_output([PYTHON, "--version"], text=True).strip(),
                    "runner_sha256": digest(Path(__file__).read_bytes()),
                    "legacy_builder_sha256": digest((ROOT / SOURCE / "build_manifest.py").read_bytes()),
                    "corrected_builder_sha256": digest((ROOT / OWNED / "build_manifest.py").read_bytes()),
@@ -258,6 +260,8 @@ def main():
             (directory / "controls/second-builder-rejection.json").read_bytes())
         receipt["superseded_third_actual_builder_output"] = json.loads(
             (directory / "controls/third-builder-rejection.json").read_bytes())
+        receipt["superseded_fourth_actual_builder_output"] = json.loads(
+            (directory / "controls/fourth-builder-rejection.json").read_bytes())
         receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
         print(json.dumps({"status": "passed", "controls": len(receipt["controls"]), "receipt_sha256": digest(receipt_path.read_bytes())}, indent=2))
     except Exception:
