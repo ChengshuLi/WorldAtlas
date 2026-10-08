@@ -235,11 +235,13 @@ def build_result(pins: dict, checked: dict[str, bytes], module, run_name: str):
         ],
     }
     summary_bytes = (json.dumps(summary, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode()
-    positive = {"issue": 1369, "kind": "positive-control", "outcome": "passed",
+    positive = {"method_id": "exact-source-crosswalk-integrity", "issue": 1369,
+                "kind": "positive-control", "outcome": "passed",
                 "subjects": 268, "source_matches": 268, "census_matches": 268,
                 "archive_pin_checked_before_output_creation": True,
                 "crosswalk_matches_retained": True}
-    negative = {"issue": 1369, "kind": "negative-controls", "outcome": "passed",
+    negative = {"method_id": "exact-source-crosswalk-integrity", "issue": 1369,
+                "kind": "negative-control", "outcome": "passed",
                 "wrong_archive_bytes_rejected_before_join": True,
                 "same_state_geoid_swap_rejected_by_archive_pin": True,
                 "archive_comment_drift_rejected_by_archive_pin": True,

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "issue": 1369,
+  "method_id": "exact-source-crosswalk-integrity",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "evidence_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/reproducibility.json",
+  "run_one_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-thirteen/subject-source-crosswalk.jsonl",
+  "run_two_path": "research/geography/south-atlantic-reuse-integrity-1146-erratum/runs/run-fourteen/subject-source-crosswalk.jsonl",
+  "run_one_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+  "run_two_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+  "compared_outputs": [
+    "subject-source-crosswalk.jsonl"
+  ],
+  "interpretation": "Two separate Python 3.12.14 executions recomputed the exact 268-row source crosswalk and each byte-matched the immutable retained PR #1146 crosswalk."
+}
