@@ -1,0 +1,1054 @@
+{
+  "version": 1,
+  "issue": 1501,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B12997706676088",
+    "gb:CHN:ADM2:17275852B18968160632662",
+    "gb:CHN:ADM2:17275852B24476472807157",
+    "gb:CHN:ADM2:17275852B26462026898013",
+    "gb:CHN:ADM2:17275852B28680875187505",
+    "gb:CHN:ADM2:17275852B32574814957612",
+    "gb:CHN:ADM2:17275852B36539700725824",
+    "gb:CHN:ADM2:17275852B49602881017994",
+    "gb:CHN:ADM2:17275852B620737032798",
+    "gb:CHN:ADM2:17275852B66176667563352",
+    "gb:CHN:ADM2:17275852B77518624384720",
+    "gb:CHN:ADM2:17275852B79149802712659",
+    "gb:CHN:ADM2:17275852B83272093468807",
+    "gb:CHN:ADM2:17275852B8642781403558"
+  ],
+  "subject_ids_sha256": "8facba1790de68cbddaa0f80d12dc961fb8ea661ad2937df56eb56899f8052b5",
+  "baseline": {
+    "commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+    "files": [
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "7f16c1c4aa7d11ddf25c6a6434630272a4c45459",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+        "bytes": 806110,
+        "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "d84c203f19506d0552ca3cad1efcf9a8b8a5cfde",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+        "bytes": 2096437,
+        "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+        "role": "original-source",
+        "uncompressed_bytes": 7018287,
+        "uncompressed_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "2747b845f0c5654765da3b951c9074e52f220077",
+        "role": "current-input"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "e41c8f549f1cb2162f5adb30029bf4800e86c848",
+        "role": "current-input"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+        "role": "current-input"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/claim-receipt.json",
+        "bytes": 963,
+        "sha256": "17db1841d18d140d6e4a5e2c9cb0e0a7d7637cc4f6fc6e7746fdc1cd284dac13",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "7a80b630550c9b465709d99b581f89c17d4c69bf",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/evidence-quality.json",
+        "bytes": 35930,
+        "sha256": "bd5da8346d8caff021f489e889ca85487ad5b192b09516f7ab02b0c4b702d8aa",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "d590bd0ac6d1b68cb756055d83e729f9fd3ad7a9",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/goal-tool-response.json",
+        "bytes": 839,
+        "sha256": "1065de1ee330f1ef63f1f3c8f463e44c16d4896886d9428c20611c9216f9b9c3",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "df419d5a7ee52ca008589c5b7284648aab812daa",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json",
+        "bytes": 1898,
+        "sha256": "74c472f546642bb61a6f68695f17f8d47fbabc6fa20c3d5cad32327a8fc82015",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "2e697853aa8d237dd4b72af908daea84ced1dc38",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json",
+        "bytes": 393708,
+        "sha256": "76a236f6354fa3cba4cec1bc2a5717e4aa66ce9842e108c6c1769e41b73c52ae",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "8f6076abbeb149f10217c6475278b9567ce6f270",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json",
+        "bytes": 20333,
+        "sha256": "058eefa94ab2de9db7b114771ae877f4b0769b3c0b0134d7acb229a536129fe2",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "5a42b33a8832811d6db93567a6c16eba1952df3e",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-failed-vintage-e919.json",
+        "bytes": 6148,
+        "sha256": "e9fe3c8f753de74223ccbaa5160f1525312a44e9c439918e05f6f2797c37a79f",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "85f31c1cd7331a1b8558e6d782fa39f5fb74d0fc",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-superseded-e376.json",
+        "bytes": 5243,
+        "sha256": "52f4aa313b4e601d8562b249c2feb3de4ebf60b0bf11b76fe06d7853bb965ee0",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "2dbd3ed2c1a59997e98d943fadbfcef424efe9c8",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-v2-e919.json",
+        "bytes": 5988,
+        "sha256": "d77bb300b0441c4c99c08802ad9b87dd6513c14c7ec201e50b53048f426b33fa",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "bc8b5be08f360a640794afffad4a46ae6889ca04",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-vintage-correction.json",
+        "bytes": 3833,
+        "sha256": "8dc4f41b15f3fb5f021becb9fe95a1ec3fe16c2634877d0323042a272144dd9a",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "2b02786de5458fb6684a2b4b16a0f1d8c8c8cf6d",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/attempt-1-failure.json",
+        "bytes": 976,
+        "sha256": "9b133726e8e057fcaf278cf3786ede95531d05e96e5640fa807a9693ae0c80ba",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "a66cdae2e11fe4d22ada6b8de768abdd1f582f7c",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1-execution.json",
+        "bytes": 821,
+        "sha256": "89ece5c623dc7402573f092acf5985bd0e0eaafed18689124153413f4730664c",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "45aaa374ceb4f36eab8eb9ad3e42fdf70cbe46ef",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.json",
+        "bytes": 633213,
+        "sha256": "ea270f3be4fe993dbe5e9d1d567d8efef4348f3ea1a27505b91b762ea8505340",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "4651388ee103afdc78a0b6295a97b6490c24defa",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.stdout",
+        "bytes": 414,
+        "sha256": "ef91f0abf57e1a96d4a06470d7818187797911bac4b84c5231d9d6d3f31171ee",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "de871a6259759a0e29571fb339b3a9778b1ec802",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2-execution.json",
+        "bytes": 821,
+        "sha256": "b23b7b7461746d1925bbe43e21b76e11fd1471201f209dfa8f64e55c45f53f63",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "b16cb96efd539e6c58e95e3fa28778bf1913162f",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.json",
+        "bytes": 633213,
+        "sha256": "ea270f3be4fe993dbe5e9d1d567d8efef4348f3ea1a27505b91b762ea8505340",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "4651388ee103afdc78a0b6295a97b6490c24defa",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.stdout",
+        "bytes": 414,
+        "sha256": "92f604cb9b5eccea53951978d52c10ea2cddf50e500e37b178c095e9c89567af",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "51c454425bc753b4f234bfe0f8baf382acf14f2b",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/negative-controls.json",
+        "bytes": 621,
+        "sha256": "b9cade2b91fa3366124780198367a04760d2055adad90ebb80c883aefa5760c5",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "9aececf4b4effd5fdbac03f5c1b5490433ff811c",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/output-comparison.json",
+        "bytes": 1881,
+        "sha256": "4369445962cb54143183c9e0babf409fe112c71739d719434efe846fb2baa5ee",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "81355d127ea81b89ce6db6c7b299102e699503a7",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/positive-control.json",
+        "bytes": 450,
+        "sha256": "5813cfecd9da86cd6097d38a01a83ca1fda4db41d1bcac50e2b005771644cd99",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "eb3ae48066a2070413c8e43b3a3ffcb489492972",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/producer-controls.tap",
+        "bytes": 1359,
+        "sha256": "90e131049ee5a3d5a5e1b00213953cfb3e9392666feb4a01838bf47696eb23f1",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "42bc462f9ce4a43bd14b040017a1a90c6abae18f",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/reproducibility.json",
+        "bytes": 565,
+        "sha256": "8e538347ad943f3aa6371b0352b4d923547465e85a9a354e0e38b2a20cb2b810",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "23f60f781b62e1146e7f9af80c083a4aa266f53e",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/source-fitness.md",
+        "bytes": 13190,
+        "sha256": "398ec98b2499f854cc9983a275c7598336f4faeb4794b517f919132a6789002c",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "6b9e95fca9bcc0cc24c6320fd579fc04bfd91f3a",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs",
+        "bytes": 15356,
+        "sha256": "daeb6cb71fdb0f8d9b9938bf61259513670204e713214ff542f7f5bd753e5aaa",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "2ef3e509d0399c1414060a675d5310c53e6d9b92",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.test.mjs",
+        "bytes": 3400,
+        "sha256": "8120d8f422c09ef4620a0966dd52c664726adab2ec63b3b907a1309aa7630dad",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "91ace8dfb1bd723e63f03384f2a0af4a214f9e56",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/worker-checkpoint.md",
+        "bytes": 1641,
+        "sha256": "71d7260cda2ba89e4b17e72bf627c65a7446d07437ad46d6a6174bc9f6dd1a9c",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "ec6e27c48bea239eedfeb28efc9566c9a890a89e",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes",
+        "mode": "100644",
+        "git_oid": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+        "role": "current-input"
+      }
+    ],
+    "pins": {
+      "accepted_handoff": "76a236f6354fa3cba4cec1bc2a5717e4aa66ce9842e108c6c1769e41b73c52ae",
+      "candidate_contract": "74c472f546642bb61a6f68695f17f8d47fbabc6fa20c3d5cad32327a8fc82015",
+      "frozen_input_lock": "058eefa94ab2de9db7b114771ae877f4b0769b3c0b0134d7acb229a536129fe2",
+      "original_assembler": "daeb6cb71fdb0f8d9b9938bf61259513670204e713214ff542f7f5bd753e5aaa",
+      "immutable_helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json": "74c472f546642bb61a6f68695f17f8d47fbabc6fa20c3d5cad32327a8fc82015",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json": "76a236f6354fa3cba4cec1bc2a5717e4aa66ce9842e108c6c1769e41b73c52ae",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json": "058eefa94ab2de9db7b114771ae877f4b0769b3c0b0134d7acb229a536129fe2",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs": "daeb6cb71fdb0f8d9b9938bf61259513670204e713214ff542f7f5bd753e5aaa"
+    },
+    "pin_files": {
+      "accepted_handoff": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json",
+      "candidate_contract": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json",
+      "frozen_input_lock": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json",
+      "original_assembler": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs",
+      "immutable_helper": "scripts/evidence/immutable.py",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json",
+      "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs"
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B12997706676088": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B18968160632662": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B24476472807157": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B26462026898013": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B28680875187505": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B32574814957612": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B36539700725824": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B49602881017994": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B620737032798": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B66176667563352": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B77518624384720": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B79149802712659": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B83272093468807": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B8642781403558": "data/geography/part-3.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-chn-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2_simplified.geojson",
+      "role": "Actually consumed simplified CHN ADM2 source and metadata",
+      "vintage": "Boundary year represented 2017; metadata integration 2023-01-19 and build 2023-12-12; source commit 9469f09",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "Pinned metadata claims PDDL v1.0 for boundaries. Separate citation text says geoBoundaries code and derivative works are CC BY 4.0 with attribution. Applicability to these features is unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz from baseline 06471b85b8cf2b2ae1ef3046f3f816e45558567b; verify encoded SHA-256 7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30 and decoded SHA-256 8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303.",
+      "limit": "Generalized 2017 ADM2 reference, not local county authority, precise current line, ownership, accuracy, or per-feature observation date.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "china-boundary-regulation",
+      "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=593",
+      "role": "Administrative boundary management regulation cited by retained source-fitness review",
+      "vintage": "As cited; current legal status not re-determined",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Revisit the Ministry of Justice page and confirm current official text and effective date before local use.",
+      "limit": "No applicable county agreement, approved map, marker record, or local change notice for this scope was available in the packet.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "china-map-regulation",
+      "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=421",
+      "role": "Map management regulation cited by retained source-fitness review",
+      "vintage": "As cited; current legal status not re-determined",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Revisit the Ministry of Justice page and confirm current official text before local use.",
+      "limit": "No applicable approved map for these components was available.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "china-public-map-specification",
+      "url": "https://zrzyt.hunan.gov.cn/zrzyt/chglln/202302/t20230214_29246255.html",
+      "role": "Public map specification cited by retained source-fitness review",
+      "vintage": "2023 edition as cited; current status not re-determined",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Revisit official publication and confirm applicable edition.",
+      "limit": "General depiction rules do not replace a local approved boundary instrument.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "china-nbs-codes-2020",
+      "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202104/t20210401_1815920.html",
+      "role": "NBS clarification of 2020 county-level administrative codes cited by retained review",
+      "vintage": "Code list current through 2020-06-30",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Revisit NBS page and retrieve the exact dated code list for any parent/name check.",
+      "limit": "Statistical identity aid only; no geometry or coastal/island extent.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2020,
+        "to": 2021
+      }
+    },
+    {
+      "id": "rfc7946",
+      "url": "https://www.rfc-editor.org/rfc/rfc7946",
+      "role": "GeoJSON coordinate representation standard cited in retained review",
+      "vintage": "RFC 7946 (2016)",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "Not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve cited RFC for coordinate interpretation if future work uses coordinates.",
+      "limit": "Coordinate encoding only; no accuracy or legal boundary evidence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gshhg-237",
+      "url": "https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html",
+      "role": "Inherited global shoreline and lake screening source",
+      "vintage": "GSHHG 2.3.7 released 2017-06-15; heterogeneous dates",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "No license conclusion in this correction."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use prior packet restoration instructions and retain exact source version and resolution.",
+      "limit": "Generalized physical screening only; not legal boundary, local water state, or island registration.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "jrc-gsw-v14",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_Metadata",
+      "role": "Inherited Landsat-derived surface-water history",
+      "vintage": "JRC Global Surface Water v1.4, 1984-2021 at 30 m",
+      "retrieved_at": "2026-10-07; carried forward from the pinned #1337 packet, not re-fetched for this correction",
+      "license": {
+        "status": "unknown",
+        "terms": "No license conclusion in this correction."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "No raster retained or processed here; retrieve exact assets and terms before future use.",
+      "limit": "Not ownership, local boundary authority, current condition, or proof of narrow-channel suitability.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1984,
+        "to": 2022
+      }
+    },
+    {
+      "id": "accepted-1337-handoff",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1337",
+      "role": "Accepted original candidate/contact/family custody source",
+      "vintage": "Original handoff SHA-256 76a236f6354fa3cba4cec1bc2a5717e4aa66ce9842e108c6c1769e41b73c52ae",
+      "retrieved_at": "2026-10-08 via GitHub API/CLI; original packet retrieved 2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No repository use-rights conclusion."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json at 06471b85b8cf2b2ae1ef3046f3f816e45558567b and verify its exact SHA-256.",
+      "limit": "Source-fitness custody only; does not approve geography or a repair.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/README.md",
+      "bytes": 9401,
+      "sha256": "6c7668495cf8e0f3cc4a46578e51e14c92c7b764c20c90843afb12ee89d5eb71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tests/test_reproduce.py",
+      "bytes": 9527,
+      "sha256": "52ea4a7eb4e3c4451b6959f406fd2e8b900091f782cbf9782e9c834969ed44fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tools/finalize_evidence.py",
+      "bytes": 7959,
+      "sha256": "10b769cdac214ac615e88c6564fe38b05be8ba9ea9b1678f274d4a82ade5caf6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tools/legacy_controls.py",
+      "bytes": 16257,
+      "sha256": "0795665296206bf804a1ddc86a01146eed8faee7f2e4926cb7a274dbfc818b77",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tools/reproduce.py",
+      "bytes": 13466,
+      "sha256": "c8950eb06d8eef18a1cd0f4e4275ed1a1098498efcdf11a38e6138256b74ca5c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "bytes": 4703,
+      "sha256": "a79d0848e29cc081075950bc27a97f7ff9efce2e662eb88fb3b526dd3b8d6b83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/publication.json",
+      "bytes": 501,
+      "sha256": "68bd1355e2c0f25c3dd6a015ca318527762ab1d0ce4e37d22d941dc12f70226c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/reconciliation.json",
+      "bytes": 633213,
+      "sha256": "d463962c395377be47ce76b8a35d7bdcf8f2eb98e16b620e6a27a87f69f3a55f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-6/execution.json",
+      "bytes": 4703,
+      "sha256": "c083d8735a16c5fb928f6e13c1a8483301b06d637bc066b973739303952d5255",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-6/publication.json",
+      "bytes": 501,
+      "sha256": "16155c4ffea423bb4b5c7aa98cb9f1457345b10e7efca1b787dc1d90c4acdd05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-6/reconciliation.json",
+      "bytes": 633213,
+      "sha256": "d463962c395377be47ce76b8a35d7bdcf8f2eb98e16b620e6a27a87f69f3a55f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4/legacy-controls.json",
+      "bytes": 17940,
+      "sha256": "539a16aa8cd0f8b79e7035d3771adad138c53c34d1ea7cf25ec536981fc0f797",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4/publication.json",
+      "bytes": 283,
+      "sha256": "0c5b51e42e19f72eeb9e1844aa702822d779938fcfbd9b52fc5f692901b1208e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4-partial-failure/.publication-incomplete",
+      "bytes": 525,
+      "sha256": "b69c6137ec89090e9c9d2c42534b02b650824b52074141d127821523b7be5def",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4-partial-failure/first.json",
+      "bytes": 6,
+      "sha256": "b640e840b19d378660b32fb51ae18d67dccb4a8596a29e7bd72c1b2ae5928f41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4-partial-failure/second.json",
+      "bytes": 7,
+      "sha256": "480c2336b410f1ad5f8bf1b28944490255804b65350c527787e74ebdd511e3a4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v3/controls-validation.json",
+      "bytes": 1604,
+      "sha256": "a6c0c4ef297b419d0d1aac57e9110134e1c1509b75fd05d03a83b5af69c786a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v3/publication.json",
+      "bytes": 512,
+      "sha256": "fb16df3ec22d1c72a14674612922f970d92b13a53f97ea78791ece0c3b461a4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v3/reproducibility.json",
+      "bytes": 1210,
+      "sha256": "28d87c3c29d06d107ba49a08c3dbc0f46b5d3c77aaba087a343adf0f9305434c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/controls-validation.json",
+      "bytes": 1604,
+      "sha256": "ac04eb7614af76a8f1510e599abd6b5055d84e48844fa88653d8fe3861b9b5f8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/positive-control.json",
+      "bytes": 679,
+      "sha256": "bf6c8d53cc7113ea38da5b3b63920434c24d89c6a73370813311c9edd45618f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/negative-control.json",
+      "bytes": 1432,
+      "sha256": "234b32a75599c78ffee7b13a937e1b760b7503671497d4a19be35479f5eb19fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/reproducibility.json",
+      "bytes": 1206,
+      "sha256": "fbaaa3cb19b7aa82e75f8636d56d12d26be59a14bc16001b1aff6f5310172493",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/publication.json",
+      "bytes": 975,
+      "sha256": "64be179fff6e52e9c08fd62b6bc435485e2f121b7ab484ed2b2d172f96653122",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/controls-validation.json",
+      "bytes": 1604,
+      "sha256": "19dbce7975f828e18566c9b5533d5c7666e6b2774768d54388756c616f71e9ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/positive-control.json",
+      "bytes": 679,
+      "sha256": "bf6c8d53cc7113ea38da5b3b63920434c24d89c6a73370813311c9edd45618f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/negative-control.json",
+      "bytes": 1432,
+      "sha256": "234b32a75599c78ffee7b13a937e1b760b7503671497d4a19be35479f5eb19fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/reproducibility.json",
+      "bytes": 1206,
+      "sha256": "fbaaa3cb19b7aa82e75f8636d56d12d26be59a14bc16001b1aff6f5310172493",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/publication.json",
+      "bytes": 975,
+      "sha256": "2ac55df53ecad44d6eb399a8d847af7778332e81cf187f2c1f2df13b3fc9480b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tests/test_reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tools/finalize_evidence.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tools/legacy_controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/tools/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-6/execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-6/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-6/reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4/legacy-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4-partial-failure/.publication-incomplete",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4-partial-failure/first.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/legacy-controls-v4-partial-failure/second.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v3/controls-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v3/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v3/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/controls-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v4/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/controls-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/publication.json",
+      "status": "added"
+    }
+  ],
+  "methods": [
+    {
+      "id": "legacy-cli-fixtures",
+      "kind": "code",
+      "description": "Run the pinned original assembler entry point against immutable originals and controlled fixture mutations; all writes stay within this issue-owned tree.",
+      "software": "Node.js v24.19.0 SHA-256 9caea9deafcb0c7f22fac3206c32f0dcaf8d1f13460b0be3017fa09e7a4be4f6; original assembler SHA-256 daeb6cb71fdb0f8d9b9938bf61259513670204e713214ff542f7f5bd753e5aaa; Python 3.7.3 executable SHA-256 b27e4ef865657c9a8ce607da7cee3a3971170ebd8560675164a17c2c8e40a82a",
+      "units": "exit status, whole-file bytes/SHA-256 and complete source-fitness rosters"
+    },
+    {
+      "id": "guarded-reconstruction",
+      "kind": "generator",
+      "description": "Bind accepted inputs to the immutable baseline, admit the complete output vintage, run the original CLI in a private Git fixture, read back all products, and publish the receipt last.",
+      "software": "Python 3.7.3 executable SHA-256 b27e4ef865657c9a8ce607da7cee3a3971170ebd8560675164a17c2c8e40a82a; scripts/evidence/immutable.py SHA-256 a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46 at 06471b85b8cf2b2ae1ef3046f3f816e45558567b; Node.js v24.19.0 executable SHA-256 9caea9deafcb0c7f22fac3206c32f0dcaf8d1f13460b0be3017fa09e7a4be4f6",
+      "units": "exact bytes, whole-file hashes, identity counts, publication status",
+      "helper_version": "worldatlas-evidence-preparation-v1"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "legacy-cli-fixtures",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v3/controls-validation.json"
+    },
+    {
+      "method_id": "guarded-reconstruction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/positive-control.json"
+    },
+    {
+      "method_id": "guarded-reconstruction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/negative-control.json"
+    },
+    {
+      "method_id": "guarded-reconstruction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/validation-v5/reproducibility.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "complete_candidate_components",
+      "value": 50,
+      "unit": "candidate component records",
+      "vintage": "baseline",
+      "evaluation_commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+      "input_sha256": "d463962c395377be47ce76b8a35d7bdcf8f2eb98e16b620e6a27a87f69f3a55f",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/reconciliation.json",
+      "json_pointer": "/component_count"
+    },
+    {
+      "id": "complete_contact_features",
+      "value": 14,
+      "unit": "full contact features",
+      "vintage": "baseline",
+      "evaluation_commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+      "input_sha256": "d463962c395377be47ce76b8a35d7bdcf8f2eb98e16b620e6a27a87f69f3a55f",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/reconciliation.json",
+      "json_pointer": "/contact_count"
+    },
+    {
+      "id": "complete_families",
+      "value": 2,
+      "unit": "whole source-fitness families",
+      "vintage": "baseline",
+      "evaluation_commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+      "input_sha256": "a79d0848e29cc081075950bc27a97f7ff9efce2e662eb88fb3b526dd3b8d6b83",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "json_pointer": "/roster/families"
+    },
+    {
+      "id": "available_numeric_sibling_bindings",
+      "value": 34,
+      "unit": "diagnostic bindings",
+      "vintage": "baseline",
+      "evaluation_commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+      "input_sha256": "a79d0848e29cc081075950bc27a97f7ff9efce2e662eb88fb3b526dd3b8d6b83",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "json_pointer": "/roster/available_numeric_sibling_bindings"
+    },
+    {
+      "id": "corrected_output_bytes",
+      "value": 633213,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "evaluation_commit": "06471b85b8cf2b2ae1ef3046f3f816e45558567b",
+      "input_sha256": "a79d0848e29cc081075950bc27a97f7ff9efce2e662eb88fb3b526dd3b8d6b83",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "json_pointer": "/output/bytes"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "complete_candidate_components",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/reconciliation.json",
+      "json_pointer": "/component_count"
+    },
+    {
+      "metric_id": "complete_contact_features",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/reconciliation.json",
+      "json_pointer": "/contact_count"
+    },
+    {
+      "metric_id": "complete_families",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "json_pointer": "/roster/families"
+    },
+    {
+      "metric_id": "available_numeric_sibling_bindings",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "json_pointer": "/roster/available_numeric_sibling_bindings"
+    },
+    {
+      "metric_id": "corrected_output_bytes",
+      "path": "research/geography/china-source-closure-1345-erratum-20261008/vintages/correction-5/execution.json",
+      "json_pointer": "/output/bytes"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "complete_candidate_components",
+      "value": 50,
+      "unit": "candidate component records"
+    },
+    {
+      "metric_id": "complete_contact_features",
+      "value": 14,
+      "unit": "full contact features"
+    },
+    {
+      "metric_id": "complete_families",
+      "value": 2,
+      "unit": "whole source-fitness families"
+    },
+    {
+      "metric_id": "available_numeric_sibling_bindings",
+      "value": 34,
+      "unit": "diagnostic bindings"
+    },
+    {
+      "metric_id": "corrected_output_bytes",
+      "value": 633213,
+      "unit": "bytes"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The accepted source packet contains two complete families, 50 candidate components, 14 contacts and 34 available numeric sibling bindings; both corrected runs preserve the substantive complete report.",
+      "status": "supported",
+      "source_ids": [
+        "accepted-1337-handoff",
+        "geoboundaries-chn-adm2"
+      ]
+    },
+    {
+      "text": "The source is labeled CHN ADM2 / County Level with boundary year represented 2017 and 2,391 features; this generalized historical source does not establish current local county lines.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-chn-adm2"
+      ]
+    },
+    {
+      "text": "Applicable local boundary instruments, dated parent relationships, exact county lines, precision, current validity and ownership remain unresolved for the complete scope.",
+      "status": "unresolved",
+      "source_ids": [
+        "china-boundary-regulation",
+        "china-map-regulation",
+        "china-public-map-specification",
+        "china-nbs-codes-2020",
+        "geoboundaries-chn-adm2"
+      ]
+    },
+    {
+      "text": "Pinned source metadata and separate geoBoundaries citation terms state different license claims; applicability to these derivative features is undetermined.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-chn-adm2"
+      ]
+    },
+    {
+      "text": "No physical overlay was run and this correction does not clear a geographic, import, production or publication gate; parent #1202 remains unfinished.",
+      "status": "unresolved",
+      "source_ids": [
+        "accepted-1337-handoff",
+        "gshhg-237",
+        "jrc-gsw-v14"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/china-source-closure-1345-erratum-20261008/tools/reproduce.py correction-5",
+    "python3 research/geography/china-source-closure-1345-erratum-20261008/tools/reproduce.py correction-6",
+    "python3 research/geography/china-source-closure-1345-erratum-20261008/tools/legacy_controls.py legacy-controls-v4",
+    "python3 research/geography/china-source-closure-1345-erratum-20261008/tools/finalize_evidence.py validation-v3 correction-5 correction-6 legacy-controls-v4",
+    "python3 research/geography/china-source-closure-1345-erratum-20261008/tests/test_reproduce.py",
+    "node scripts/evidence-quality.mjs research/geography/china-source-closure-1345-erratum-20261008/evidence-quality.json ."
+  ]
+}
