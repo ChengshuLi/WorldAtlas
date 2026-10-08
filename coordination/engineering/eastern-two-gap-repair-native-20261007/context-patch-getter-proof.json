@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "source_sha256": "ca0c91cc93a66bb65db16b2fc91f79d88da97e479f37a2f4716046dc25e0d7c6",
+  "whole_original_patch_bytes": 2308221,
+  "whole_original_patch_sha256": "3f79b55c05df2c6602ee9388acbaf47c96f68f37925c35e73e2f10cc0f35d304",
+  "source_whole_git_mode_oid_pins": [
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/index.json",
+      "mode": "100644",
+      "bytes": 71758,
+      "sha256": "b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876",
+      "git_blob": "aa24c9e42cab95cb8964c78df14db97f9a3227d3"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-000.bin.gz",
+      "mode": "100644",
+      "bytes": 16024224,
+      "sha256": "7ba43916183cc22035b3209840da3451f27df40097817c30653a14bb4ff44ef9",
+      "git_blob": "174a801489d7f8f2ab960c9174a855d63e39150e"
+    }
+  ],
+  "complete_acquisition_budget": {
+    "complete_phase_bytes": 158714123,
+    "installed_runtime_bytes": 121304480,
+    "source_parts": [
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-000.bin.gz",
+        "offset": 0,
+        "bytes": 16024224,
+        "sha256": "7ba43916183cc22035b3209840da3451f27df40097817c30653a14bb4ff44ef9",
+        "decoded_bytes": 16777216,
+        "decoded_sha256": "39acc14d53c3dd69a683cd107c3e3a8a28529fcececa7686a5aef4d65b14a43a"
+      }
+    ]
+  },
+  "negative_controls": [
+    {
+      "kind": "wrong-mode",
+      "body_opens": 0
+    },
+    {
+      "kind": "missing",
+      "body_opens": 0
+    },
+    {
+      "kind": "changed",
+      "body_opens": 1
+    },
+    {
+      "kind": "overcap",
+      "body_opens": 0
+    },
+    {
+      "kind": "unrestored",
+      "body_opens": 0
+    }
+  ],
+  "fixture_boundary": "Exact production getter/read functions with transparent private fixture; no complete restoration or scientific operators executed.",
+  "source_commit": "b5d3bbc70519fd5fa119b11f42d6aefee689d78b",
+  "extension_bytes": 2525,
+  "extension_sha256": "6563ec0357559af17da4d14de887e9f06426a73a5e67392cc739aac4188e7e6b",
+  "entire_original_module_bytes": 23633,
+  "entire_original_module_sha256": "249ae7f16313953a021745a8f13611fce35bcae719e94e421204aadf5270b276",
+  "preserved_failure_run": 37819888084,
+  "normal_build_status": "pending-next-existing-hosted-run",
+  "pipeline": {
+    "actual_getter_byte_patch_pair_and_complete_record_inverse": true,
+    "full_rows": 1500,
+    "changed_full_rows": 2,
+    "complete_phase_prospective_bytes": 223432163
+  }
+}
