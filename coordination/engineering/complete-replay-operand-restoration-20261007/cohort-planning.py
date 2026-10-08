@@ -13,7 +13,8 @@ from pathlib import Path
 
 
 OPERATIONS = {
-    'physical': 'complete-original-physical-query-join',
+    'physical': ('complete-original-physical-query-join',
+                 'complete-original-physical-query-join-via-membership-v1'),
     'query': 'complete-actual-native-query-join',
     'candidate': 'complete-candidate-bindings',
     'routing': 'complete-routing-candidate-join',
@@ -22,7 +23,7 @@ OPERATIONS = {
 
 def completed(phase, pair, operation, acquisition):
     inventory = acquisition.completed_inventory(phase, pair[0], pair[1])
-    acquisition.require(inventory['facts']['operation'] == operation, 'Wrong original cohort predecessor operation')
+    acquisition.require(inventory['facts']['operation'] in ((operation,) if isinstance(operation,str) else operation), 'Wrong original cohort predecessor operation')
     return inventory
 
 

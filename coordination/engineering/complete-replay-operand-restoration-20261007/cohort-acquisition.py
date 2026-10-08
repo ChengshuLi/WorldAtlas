@@ -36,7 +36,8 @@ def extract(phase, selector_pin, *, acquisition, canonical_json):
     inventory = acquisition.completed_inventory(phase, join['publication'], join['inventory'])
     facts = inventory['facts']
     acquisition.require(selected['campaign_join_sha256'] == join['inventory']['sha256'] and
-                        facts.get('operation') == 'complete-original-physical-query-join' and
+                        facts.get('operation') in ('complete-original-physical-query-join',
+                                                  'complete-original-physical-query-join-via-membership-v1') and
                         facts.get('complete') == 95173 and facts.get('mismatches') == 1294 and
                         facts.get('ordered_queries') == 10419,
                         'Missing/changed complete campaign join binding')
