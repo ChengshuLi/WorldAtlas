@@ -170,7 +170,7 @@ def main():
     own_defaults = {key: repr((value.__defaults__, value.__kwdefaults__))
                     for key, value in vars(own_module).items()
                     if isinstance(value, types.FunctionType) and value.__module__ == __name__}
-    pin_snapshot = json.dumps([head, spec_pin, request_pin, freeze], sort_keys=True)
+    pin_snapshot = json.dumps([head, spec_pin, request_pin, freeze, spec, request], sort_keys=True)
     guard.all_callables(sys.modules[__name__], own_raw)
     names = {'acquisition': OWNED + 'acquisition-phases.py',
              'driver': OWNED + 'acquisition-driver.py',
@@ -215,11 +215,12 @@ def main():
               for key, value in vars(own_module).items()
               if isinstance(value, types.FunctionType) and value.__module__ == __name__} == own_defaults,
              'Own function defaults changed')
-        need(json.dumps([head, spec_pin, request_pin, freeze], sort_keys=True) == pin_snapshot,
+        need(json.dumps([head, spec_pin, request_pin, freeze, spec, request], sort_keys=True) == pin_snapshot,
              'Completion source/request/freeze closure binding changed')
-        need(live_guard.__defaults__ is None and live_guard.__kwdefaults__ is None,
+        need(own_globals.__defaults__ is None and own_globals.__kwdefaults__ is None and
+             live_guard.__defaults__ is None and live_guard.__kwdefaults__ is None,
              'Actual live guard defaults changed')
-        guard.callable_guard(local_proxy, own_raw, ['main.<locals>.live_guard'] +
+        guard.callable_guard(local_proxy, own_raw, ['main.<locals>.live_guard', 'main.<locals>.own_globals'] +
                              (['main.<locals>.guarded_finish'] if finish_callback is not None else []))
         loaded['runtime'].loaded(runtime_pin, runtime_index, repo=repo, owned=OWNED, project_pins=pins)
         guard.all_callables(sys.modules[__name__], own_raw)
@@ -247,6 +248,7 @@ def main():
                  finish.__func__ is modules['acquisition'].Phase.finish,
                  'Actual Phase completion callback/default/closure changed')
     local_callables.live_guard = live_guard
+    local_callables.own_globals = own_globals
     live_guard()
     adapter = modules['acquisition']
     custody = {p['path'] for p in runtime['whole_runtime_aliases']}
