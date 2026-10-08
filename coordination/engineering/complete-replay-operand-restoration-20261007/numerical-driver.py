@@ -18,7 +18,8 @@ import sys
 import types
 
 OWNED = 'coordination/engineering/complete-replay-operand-restoration-20261007/'
-OPERATIONS = ('native-metadata', 'source-cohort', 'numerical-cohort')
+METADATA_OPERATIONS = ('cohort-index-projection', 'cohort-selector-plan', 'cohort-selector-materialization')
+OPERATIONS = ('native-metadata', 'source-cohort', 'numerical-cohort', *METADATA_OPERATIONS)
 ROOT_LIMIT = 1048576
 NODE = '/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node'
 
@@ -60,6 +61,20 @@ def authority_inputs(arguments):
 
 def dependency_inputs(operation, arguments, acquisition):
     need(operation in OPERATIONS and type(arguments) is dict, 'Unknown numerical operation')
+    if operation == 'cohort-index-projection':
+        return projection_dependency_inputs(arguments, acquisition)
+    if operation == 'cohort-selector-plan':
+        return unique([arguments['predecessor_authorities_pin'],
+                       *[p for values in arguments['projected_pins'].values() for p in values],
+                       *[p for pair in arguments['projection_pairs'].values() for p in pair],
+                       *arguments['mismatch_pins'], *arguments['mismatch_pair'],
+                       *arguments['component_ledger_pair'], arguments['candidate_table_pin'],
+                       *[p for pair in arguments['physical_stage_pairs'] for p in pair],
+                       *arguments['physical_join_pair'], *arguments['query_join_pair'],
+                       *arguments['query_pins']], acquisition)
+    if operation == 'cohort-selector-materialization':
+        return unique([arguments['predecessor_authorities_pin'], arguments['shard_pin'],
+                       *arguments['selector_plan_pair']], acquisition)
     if operation == 'source-cohort':
         return unique([arguments['selector_pin'], *arguments['selector_pair'],
                        *arguments['source_inputs']], acquisition)
@@ -70,6 +85,15 @@ def dependency_inputs(operation, arguments, acquisition):
                        *arguments['mismatch_pair'], *arguments['mismatch_pins']], acquisition)
     return unique([*native, *authority_inputs(arguments), *arguments['cohort_pair'],
                    *arguments['cohort_pins']], acquisition)
+
+
+def projection_dependency_inputs(arguments, acquisition):
+    # Descriptor-only equivalent of the frozen planner's projection_dependencies;
+    # importing or previewing predecessor bodies before Phase is forbidden.
+    return unique([arguments['predecessor_authorities_pin'],
+                   *arguments['index_pins'], *arguments['mismatch_pins'],
+                   *arguments['mismatch_pair'], *arguments['physical_join_pair'],
+                   *[p for pair in arguments['index_stage_pairs'] for p in pair]], acquisition)
 
 
 def read_root(path, digest, repo):
@@ -310,6 +334,17 @@ def source_authority(phase, arguments, modules, acquisition):
     return selected
 
 
+def metadata_pairs(operation, arguments):
+    if operation == 'cohort-index-projection':
+        return [*arguments['index_stage_pairs'],arguments['mismatch_pair'],arguments['physical_join_pair']]
+    if operation == 'cohort-selector-plan':
+        return [*arguments['projection_pairs'].values(),arguments['mismatch_pair'],
+                arguments['component_ledger_pair'],*arguments['physical_stage_pairs'],
+                arguments['physical_join_pair'],arguments['query_join_pair']]
+    need(operation == 'cohort-selector-materialization', 'Unknown metadata authority operation')
+    return [arguments['selector_plan_pair']]
+
+
 def scientific_names():
     names = {'reader': OWNED+'methods/reader-acquisition.py', 'kernel': OWNED+'methods/kernel.py',
              'exact_predicates': OWNED+'methods/exact_predicates.py', 'trace': OWNED+'methods/trace.py',
@@ -323,6 +358,42 @@ def execute(phase, request, modules, loaded, *, guard, baseline, runtime_guard, 
     """Actual admitted dispatch; scientific producer objects stay in callback."""
     acquisition = modules['acquisition']; arguments = request['arguments']; operation = request['operation']
     runtime_guard()
+    if operation in METADATA_OPERATIONS:
+        # Root expectations are committed in the independently admitted request.
+        # Every predecessor is a whole actually consumed publication/inventory.
+        authorities = json.loads(phase.read(arguments['predecessor_authorities_pin']))
+        need(type(authorities) is list and authorities, 'Independent metadata predecessor authority required')
+        declared_pairs = metadata_pairs(operation, arguments)
+        expected_pairs = {tuple((p.get('commit'),p['path']) for p in pair)
+                          for pair in declared_pairs}
+        need(len(expected_pairs) == len(declared_pairs), 'Duplicate declared metadata predecessor pair')
+        actual_pairs = set()
+        for authority in authorities:
+            pair = authority['pair']; key = tuple((p.get('commit'),p['path']) for p in pair)
+            need(key not in actual_pairs, 'Duplicate metadata predecessor authority')
+            actual_pairs.add(key)
+            completed_authority(phase,pair,authority['operation'],authority['expected_inputs'],
+                                authority['runtime_bytes'],acquisition)
+        need(actual_pairs == expected_pairs, 'Missing/foreign metadata predecessor authority')
+        planner = modules['planner']
+        if operation == 'cohort-index-projection':
+            result = planner.prepare_index(phase,arguments['kind'],arguments['index_pins'],
+                    arguments['mismatch_pins'],index_stage_pairs=arguments['index_stage_pairs'],
+                    mismatch_pair=arguments['mismatch_pair'],physical_join_pair=arguments['physical_join_pair'],
+                    acquisition=acquisition)
+        elif operation == 'cohort-selector-plan':
+            keys = ('projected_pins','projection_pairs','mismatch_pins','mismatch_pair',
+                    'component_ledger_pair','candidate_table_pin','physical_stage_pairs',
+                    'physical_join_pair','query_join_pair','query_pins')
+            result = planner.selectors(phase,**{k:arguments[k] for k in keys},
+                    acquisition=acquisition,project_pins=project_pins,
+                    runtime_bytes=request['expected_runtime_bytes'],
+                    acquisition_output_reserve=arguments['acquisition_output_reserve'])
+        else:
+            result = planner.materialize_selector(phase,arguments['shard_pin'],arguments['ordinal'],
+                    arguments['expected_sha256'],arguments['selector_plan_pair'],acquisition)
+        runtime_guard()
+        return result
     if operation == 'source-cohort':
         source_authority(phase, arguments, modules, acquisition)
         return modules['cohort'].extract(phase, arguments['selector_pin'], acquisition=acquisition,
