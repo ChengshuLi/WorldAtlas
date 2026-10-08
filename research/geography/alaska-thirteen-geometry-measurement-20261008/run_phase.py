@@ -97,6 +97,8 @@ def main() -> int:
         stdout, stderr = process.communicate()
         stop_reason = stop_reason or "terminal_process_timeout"
     elapsed = round(time.monotonic() - start, 3)
+    if process.returncode is not None and process.returncode < 0 and stop_reason is None:
+        stop_reason = "external_signal_" + signal.Signals(-process.returncode).name
     terminal = process.poll() is not None
     final_rss, members = group_state(group, os.getpid()) if terminal else (None, None)
     if members:

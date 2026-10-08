@@ -9,6 +9,7 @@ import sys
 import shapely
 from shapely.geometry import shape
 from shapely.ops import unary_union
+from shapely.strtree import STRtree
 
 ROOT = pathlib.Path(__file__).resolve().parents[3]
 CAMPAIGN = ROOT / "research/geography/alaska-thirteen-geometry-measurement-20261008"
@@ -114,6 +115,9 @@ for index, part in enumerate(old_parts):
 screen = load_pinned("research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json", "scope-and-join-contract")
 neighbors_fc = load_pinned("research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/features.geojson", "17-original-atlas-neighbor-features")
 neighbor_geoms = {feature["id"]: shape(feature["geometry"]) for feature in neighbors_fc["features"]}
+neighbor_ids = sorted(neighbor_geoms)
+neighbor_shapes = [neighbor_geoms[identity] for identity in neighbor_ids]
+neighbor_tree = STRtree(neighbor_shapes)
 single_candidate_trials = []
 for finding in screen["findings"]:
     cid = finding["component_id"]
@@ -124,30 +128,39 @@ for finding in screen["findings"]:
     loss = old_geom.difference(proposed)
     gain = proposed.difference(old_geom)
     expected = candidate_geom.difference(old_geom)
+    possible_neighbor_indices = {int(index) for index in neighbor_tree.query(gain)}
+    target_neighbor_index = neighbor_ids.index("gb:USA:ADM2:" + target_id)
+    possible_neighbor_indices.discard(target_neighbor_index)
     added_neighbor_overlaps = []
-    neighbor_results = []
-    for neighbor_id, neighbor_geom in sorted(neighbor_geoms.items()):
-        if neighbor_id == "gb:USA:ADM2:" + target_id:
-            continue
-        overlap = gain.intersection(neighbor_geom)
-        is_positive = bool(overlap.area > 0)
-        neighbor_results.append({"neighbor_source_id": neighbor_id,
-            "gain_intersection": describe(overlap), "new_positive_area_overlap": is_positive})
-        if is_positive:
-            added_neighbor_overlaps.append(neighbor_id)
+    for index in sorted(possible_neighbor_indices):
+        overlap = gain.intersection(neighbor_shapes[index])
+        if overlap.area > 0:
+            added_neighbor_overlaps.append(neighbor_ids[index])
     preserved = bool(proposed.covers(old_geom) and loss.is_empty)
-    gain_match = bool(gain.equals(expected) and gain.symmetric_difference(expected).is_empty)
+    gain_residual = gain.symmetric_difference(expected)
+    gain_match = bool(gain.equals(expected) and gain_residual.is_empty)
     retained = bool(proposed.covers(candidate_geom))
+    preexisting_overlap = candidate_geom.intersection(old_geom)
     single_candidate_trials.append({"component_id": cid, "target_source_id": "gb:USA:ADM2:" + target_id,
-        "candidate": describe(candidate_geom), "old_target": describe(old_geom),
-        "proposed_union": describe(proposed), "old_target_relation_to_union": old_geom.relate(proposed),
-        "old_target_preserved_without_loss": preserved, "old_target_loss": describe(loss),
-        "candidate_retained": retained, "actual_gain": describe(gain),
-        "expected_gain": describe(expected), "gain_equals_candidate_minus_old_target": gain_match,
+        "candidate_wkb_sha256": digest(candidate_geom.wkb), "old_target_wkb_sha256": digest(old_geom.wkb),
+        "proposed_union_wkb_sha256": digest(proposed.wkb), "old_target_relation_to_union": old_geom.relate(proposed),
+        "old_target_preserved_without_loss": preserved, "old_target_loss_area_raw_exact": loss.area,
+        "old_target_loss_is_empty": bool(loss.is_empty), "candidate_retained": retained,
+        "preexisting_candidate_target_overlap_area_raw_exact": preexisting_overlap.area,
+        "preexisting_candidate_target_positive_area_overlap": bool(preexisting_overlap.area > 0),
+        "actual_gain_wkb_sha256": digest(gain.wkb), "actual_gain_area_raw_exact": gain.area,
+        "expected_gain_wkb_sha256": digest(expected.wkb), "expected_gain_area_raw_exact": expected.area,
+        "gain_equals_candidate_minus_old_target": gain_match,
+        "gain_symmetric_difference_area_raw_exact": gain_residual.area,
+        "gain_symmetric_difference_type": gain_residual.geom_type,
+        "gain_symmetric_difference_is_empty": bool(gain_residual.is_empty),
+        "neighbor_count_in_declared_roster": len(neighbor_ids) - 1,
+        "neighbors_proven_envelope_disjoint": (len(neighbor_ids) - 1 - len(possible_neighbor_indices)),
+        "neighbors_receiving_exact_overlay": len(possible_neighbor_indices),
         "added_neighbor_overlaps": added_neighbor_overlaps,
-        "neighbor_checks": neighbor_results,
         "single_case_strict_geometry_gate_pass": bool(proposed.is_valid and preserved and retained
             and gain_match and gain.area > 0 and not added_neighbor_overlaps)})
+
 variants = {"unary_union_old_then_candidate": unionary,
             "old_union_candidate": union_method,
             "candidate_union_old": candidate.union(old)}
