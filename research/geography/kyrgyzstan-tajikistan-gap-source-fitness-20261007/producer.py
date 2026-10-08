@@ -21,6 +21,7 @@ OWNED = "research/geography/kyrgyzstan-tajikistan-gap-source-fitness-20261007/"
 EXECUTION_PINS = OWNED + "execution-pins.json"
 INPUT_PINS = OWNED + "inputs/input-pins.json"
 RUNTIME_MANIFEST = OWNED + "inputs/runtime/runtime-manifest.json"
+RUNTIME_BUNDLE_REL = "inputs/runtime/runtime-bundle.tar.gz"
 CONTEXT = OWNED + "inputs/context/selected-routing-and-operational-context.json"
 CUSTODY_RECEIPT = OWNED + "vintages/custody-1/custody-preflight.json"
 CUSTODY_PUBLICATION = OWNED + "vintages/custody-1/publication.json"
@@ -119,7 +120,7 @@ def load_spatial_runtime(baseline, config):
     if not isinstance(files, list) or not files:
         raise ValueError("Runtime body inventory is empty")
     bundle = manifest.get("bundle")
-    if (not isinstance(bundle, dict) or bundle.get("path") != RUNTIME_BUNDLE or
+    if (not isinstance(bundle, dict) or bundle.get("path") != RUNTIME_BUNDLE_REL or
             not isinstance(bundle.get("bytes"), int) or
             not isinstance(bundle.get("sha256"), str)):
         raise ValueError("Runtime bundle descriptor is missing or malformed")
