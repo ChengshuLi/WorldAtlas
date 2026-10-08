@@ -41,6 +41,15 @@ for(const [file,expected] of Object.entries(audit.input_sha256)){
 
 // A read-only export of the current database, suitable for a private hosted preview.
 const preparedEvidence=ownershipSelection.requireNative?await readPreparedEvidenceBundle():prepareEvidenceBundle();
+// Validate the complete retained context chain before allocating application geography.
+const releaseManifest=readGeographicReleaseManifest('data/geographic-releases');
+const geographicRelease=releaseManifest.releases.at(-1);
+if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
+const fixedGridPath=ownershipSelection.manifestPath;
+const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
+const fixedGrid=selectedGrid?.manifest;
+const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
+const nativeContextInputStage=nativeBuildContext?.receipt??null;
 const db = openDatabase();
 try {
   seedDatabase(db);
@@ -48,16 +57,8 @@ try {
   const pixelAudit=JSON.parse(await fs.readFile('data/pixel-audit.json','utf8'));
   reference.pixelMissing=pixelAudit.missing.map(f=>f.id);
   checkPrepared(reference.features);
-  const releaseManifest=readGeographicReleaseManifest('data/geographic-releases');
-  const geographicRelease=releaseManifest.releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
   validatePreparedEvidenceIndex(preparedEvidence,geographicRelease);
-  if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
-  const fixedGridPath=ownershipSelection.manifestPath;
-  const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
-  const fixedGrid=selectedGrid?.manifest;
-  const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
-  const nativeContextInputStage=nativeBuildContext?.receipt??null;
   const boundarySourceReviews={};
   if(nativeContextInputStage?.migration){
     const sources=[];
