@@ -1,0 +1,40 @@
+{
+  "execution_commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+  "checks": [
+    {
+      "case": "prospective-overcap",
+      "reject": "Complete prospective input/code/output budget",
+      "git_calls": 0
+    },
+    {
+      "case": "existing-destination",
+      "reject": "Fresh whole run destination required",
+      "git_calls": 0
+    },
+    {
+      "case": "dangling-destination",
+      "reject": "Ordinary contained path required",
+      "git_calls": 0
+    },
+    {
+      "case": "whole-publication-readback",
+      "status": "PASS",
+      "receipt": {
+        "complete_phase_bytes": 14980,
+        "facts": {
+          "kind": "metadata-io-control"
+        },
+        "inventory": {
+          "bytes": 354,
+          "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/io-control-97fc024922354cf08f56be53117035cb/inventory.json.gz",
+          "sha256": "79459e3a9128cef23ff623ecb84c665fdafd74dfb026a98cf4fb565b64f28c88",
+          "uncompressed_bytes": 591,
+          "uncompressed_sha256": "4a2c0a538d489e543f885dd0206aa8f6e72bfef11cd0c17298dc3d97cb69b779"
+        },
+        "output_descriptor_count": 2,
+        "status": "complete",
+        "version": 1
+      }
+    }
+  ]
+}

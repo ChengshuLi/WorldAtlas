@@ -1,0 +1,65 @@
+{
+  "execution_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+  "executed_catalog_sha256": "28cf18af11b82121bb7265c2a1a5b1299065a7ce1faec543c2318b696cc09ead",
+  "scope": "Synthetic schema/join/transition controls only, not full catalog production or physical approval",
+  "positives": 3,
+  "negatives": [
+    {
+      "name": "raw-duplicate-ID",
+      "rejection": "Duplicate original component ID"
+    },
+    {
+      "name": "missing-full-ID",
+      "rejection": "Missing complete original catalog identity"
+    },
+    {
+      "name": "foreign-full-ID",
+      "rejection": "Missing/duplicate/foreign catalog identity"
+    },
+    {
+      "name": "stale-whole-geometry-decision",
+      "rejection": "Foreign/stale decision identity/geometry"
+    },
+    {
+      "name": "coherently-stale-decision-ref",
+      "rejection": "Unverified/coherently foreign accepted decision"
+    },
+    {
+      "name": "implemented-is-not-integrated",
+      "rejection": "Candidate transition lacks actual evidence"
+    },
+    {
+      "name": "invalid-integration-transition",
+      "rejection": "Unverified/coherently foreign transition evidence"
+    },
+    {
+      "name": "integration-is-not-delivery",
+      "rejection": "Candidate transition lacks actual evidence"
+    },
+    {
+      "name": "555-nested-membership-drift",
+      "rejection": "Historical555 must remain within1391"
+    },
+    {
+      "name": "coherent-task-foreign-issue",
+      "rejection": "Foreign/stale task scope reference"
+    },
+    {
+      "name": "stale-task-scope-hash",
+      "rejection": "Foreign/stale task scope reference"
+    },
+    {
+      "name": "coherently-wrong-approved-component",
+      "rejection": "Unverified/coherently foreign accepted decision"
+    },
+    {
+      "name": "adjacent-summary-invalid-transition",
+      "rejection": "Report implementation precedes readiness"
+    },
+    {
+      "name": "adjacent-summary-foreign-final-class",
+      "rejection": "Unknown final class"
+    }
+  ],
+  "negative_count": 14
+}

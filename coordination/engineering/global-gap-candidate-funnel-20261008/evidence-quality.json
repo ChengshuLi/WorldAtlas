@@ -1,0 +1,3628 @@
+{
+  "version": 1,
+  "issue": 1478,
+  "lane": "engineering",
+  "worker_id": "01a119de-e3de-7860-aa56-0484afa8a261",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "6d15b0e12de2e65c84ceab334ebc3e78aa0b46cb",
+    "files": [
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+        "bytes": 1056877,
+        "sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-001.bin.gz",
+        "bytes": 1055138,
+        "sha256": "039c1c64d81c73a01a57cc9549d84b085b7d5f943eb0c93f888d5868e23a0a2e",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a9b44b74dcca0a37191e10cbe1f08fbf98e460610f5cab441768e044f37c6b34",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-002.bin.gz",
+        "bytes": 1056628,
+        "sha256": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "9de1ea80581fe6f4445108c0c49b68e78bdbd0e2f288d80716ca337c5c2d8561",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-003.bin.gz",
+        "bytes": 1057266,
+        "sha256": "c1f4128e05d2147936bc76d773110572fa4d85f112acf9fa6023fc1e8af948ee",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "ab35a3bd7f4064d7ef3ad1d37edcb1b1b1b35db2232b026f1322dbbc74b7bacb",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-004.bin.gz",
+        "bytes": 1056615,
+        "sha256": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "651b27a01f11f6b7328ce866abe1c0918ed858e8ab7fc1dac76e2697e9037866",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-005.bin.gz",
+        "bytes": 1055630,
+        "sha256": "fc45ee3c6e2c9aa6671e9e31453673227de9d36298ca44962795302c00ef58e2",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "7f8d2ab0ce1f0047f30dcd9d97549386fa8f8aa6d252bc96df73f57343ca7d95",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-006.bin.gz",
+        "bytes": 1056046,
+        "sha256": "c5521f8a382f45e6b7febdd7616d407cbe1a41ad1bcd685fbe59dd49cc91f2ee",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "4b92cb5e1e63dda727254e08b28784fa7ef387d1f946569ea25189bb51607720",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-007.bin.gz",
+        "bytes": 1056202,
+        "sha256": "5f4240fb226c6bd06e42a72000c3d4e89525e3cf5f1e4ae48f5d90d03834b297",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "228541ac222e9bf1927699c71e2adbb1ba194fa6ddba0d9b70aa500f1c50caf5",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-008.bin.gz",
+        "bytes": 1056508,
+        "sha256": "efcf3436ed85a990a4ac4716caf967e2480c1b5eaa2e3047ffc412d9341273eb",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "30ed065c87e4a11f3039a3ce1e8a917d1c4ce324b70d08e81a08911bda36f7b0",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-009.bin.gz",
+        "bytes": 1055685,
+        "sha256": "6b91eea504ecf337a7b4c2d727a42ebf1fc153c4b4340708458003e4563b79ee",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "59429efa412c896af9347049b579293fc9d05b80e950b5640d6e510e46e87ace",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-010.bin.gz",
+        "bytes": 1054508,
+        "sha256": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "7889ff3e15b041a666f0394c9647835fd89b7ac489075831ed47745be2e83071",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-011.bin.gz",
+        "bytes": 1056946,
+        "sha256": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1ff9b2ea435250fbf47c36e203bc95ca99efeadcc43f4b9052d8aaeea12e100e",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-012.bin.gz",
+        "bytes": 1056866,
+        "sha256": "0cbfd374a2f1fde800ee8a14ad81aec01f55e5ab46d3de4f9f82d92d233533c3",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "48cb9ea6bf7baedefea4391bd3be8aa0564e98c5a4f72c93e9fcf9112d014408",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-013.bin.gz",
+        "bytes": 1060324,
+        "sha256": "42081c1b1bb00fb8a97f7d238a8c17bd9ac421d6b4e7507c56629ed0fe2e5682",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8cf5b9d3c11815a5fe548e12d03edd5ef2689ac7627067ec34ffab75dc23ec9e",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-014.bin.gz",
+        "bytes": 1055098,
+        "sha256": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d1e3acfb2623dc398ec5266a1a3f2154a958ba0ebc0cf0ad3d3fb108ef555ba9",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-015.bin.gz",
+        "bytes": 1056340,
+        "sha256": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8336e041079ab4cdaeee76442c40fb9f6e69bdb24ead60ef170010b8c1169c8b",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-016.bin.gz",
+        "bytes": 1056102,
+        "sha256": "fcf08ffe589c2cbd4543fa8d2525ee70d44b4aa3d3a3811f40f71c1e1b60420b",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "504dc711ab22b934f2e47f0546e54f6f4f3352a0589fb47b9ae12348067adc9f",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-017.bin.gz",
+        "bytes": 1057188,
+        "sha256": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "ff1fd84298383e79f20f27a865ff1d72ba36856a1decc521cc3c460ead16f492",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-018.bin.gz",
+        "bytes": 1058049,
+        "sha256": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "0445faa56bff82aa5d0b98c78c420bb2f83671aa289bda55dfb71283e3673c8c",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-019.bin.gz",
+        "bytes": 1056760,
+        "sha256": "fe00f2750343c55b0b21a8ae21934321252dff58235a0b4e5fbdd3fd8235c999",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a54ed7e781d10fbd6403572826bcc801118e78b290c74b9aea56095a7a34c882",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-020.bin.gz",
+        "bytes": 1054653,
+        "sha256": "f3a284602b62d1fb63b2f18dc478afe366be58837a8c5a30eb87bae939ed8e10",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "2d284aa2cb981e01d9d3ae65458ae97a0bceeeb8b41154adeb90e56b919a91b3",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-021.bin.gz",
+        "bytes": 1057471,
+        "sha256": "9aed3f2e504a3a5799b39a8a92661d6496b85b853ba2adb4fb84f2e92bef8753",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "bfe35843058aa894e6806f0799bd151ed484efb638f20ad0d8af565e641497a6",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-022.bin.gz",
+        "bytes": 1057293,
+        "sha256": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "146a652d7cead31fc783d93423b74cb52691cf2eded8de39f4272a1e6cb2250f",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-023.bin.gz",
+        "bytes": 1055293,
+        "sha256": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "12be08c70304f2c808f53d74ef350c0d302def8e53568922c1734c7bfd06dee9",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-024.bin.gz",
+        "bytes": 890162,
+        "sha256": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+        "uncompressed_bytes": 7065187,
+        "uncompressed_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-000.bin.gz",
+        "bytes": 1423781,
+        "sha256": "fa75a261900a8daecaf79d5ec52ff98c558c75113f125ce37b3a6cd823884e84",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-001.bin.gz",
+        "bytes": 1425093,
+        "sha256": "1ef86a2583ec6abfd84f58d443c31b4884c567be263cdbb39de0e80cd2f8849f",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "0b45b984c5c4636f622ff4f04d2b7174e8cf6c30d70bab63ddf9e2f25dc982c1",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-002.bin.gz",
+        "bytes": 1423887,
+        "sha256": "47b3065edc3da9872679100c070f27054d197833b66e423b35325c41dc66ef80",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a170b28d3a86f5ed30ec5c537c3f846baeb04412e20814310ddf4cd7e29b3b9b",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-003.bin.gz",
+        "bytes": 1424763,
+        "sha256": "281c330f5f7f5727709bdce4c3e662c313e080178d52a5e9f8a0a41c585b0a86",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d89f2e8f8267493aa9e9ca614fcf401d343b8c4b03dc511bbc1acc036c118a3d",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-004.bin.gz",
+        "bytes": 1423919,
+        "sha256": "733c6f92ae1a0975c18b64ab9b12fe63b2f7429d876e986c9dde53c453c273d0",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6289b606b922d8c01ca231ede71a349da841b98b713c372dc4123893945d2a8b",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-005.bin.gz",
+        "bytes": 1425720,
+        "sha256": "7f1ba06f6b035c9efa1a940bab789b6032bfbcee6425f9a06693db3e9cb11b6b",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "2a8bb616b56839ee1e7c21d95443555194de318393bf489818703c014b745aab",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-006.bin.gz",
+        "bytes": 1424087,
+        "sha256": "4385d260ee3161c97a44a2bf53c342b79e2d9712083de969bbc965b950ebbd4c",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "9fdca5fb279d413251803a00736ff0b2573eca815effb8a3e24c42f4630ca00f",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-007.bin.gz",
+        "bytes": 1424128,
+        "sha256": "06389d188e7b544f187a471c4ebfba937d8f07ccbfadba68d5f302888304b81f",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e1f9dad27239a5d5f8dd38c0132bc08ea28e8482d394a3fee9eb53ebdfcf30b6",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-008.bin.gz",
+        "bytes": 158811,
+        "sha256": "57a60c413f397633712a7f20663c4423cc4ab1abfb0f597790c66d385da72dc8",
+        "uncompressed_bytes": 932144,
+        "uncompressed_sha256": "91fe1012b01980cbcfc0f309f5d3fbfc321b0135c80a103f1dd5210c1a7a78db",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-000.jsonl.gz",
+        "bytes": 592180,
+        "sha256": "777c0a0c47ed65d400b7a7eb8463969cf957be45d8c5b1c6dcf1dd253b948e57",
+        "uncompressed_bytes": 8380665,
+        "uncompressed_sha256": "9cbc55aac66a726de690c6360db1e17496cbb9b27bdfabcc6d52a9c70df493da",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-001.jsonl.gz",
+        "bytes": 592105,
+        "sha256": "3d461427b0bedf10fb40b16a7f35951f2e5f9c67801b0b3142d41c4302da1aeb",
+        "uncompressed_bytes": 8380025,
+        "uncompressed_sha256": "c719f4271dfe03ca19513929892b50afde88aa0dadba6f0475a9e91fe7a7458d",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-002.jsonl.gz",
+        "bytes": 598845,
+        "sha256": "e1e1b3d181eca59d44c9e5c5a1f677b162fdea7893e504220c7d876986b68c0a",
+        "uncompressed_bytes": 8379129,
+        "uncompressed_sha256": "e37423962ae7429e05ed892579fc71151f725c76ab48339a766495cbbe13a5c2",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-003.jsonl.gz",
+        "bytes": 584160,
+        "sha256": "f78556d672164e02e41959d032fb6cadfd2d1ea5f559ade2dd5f8746ec58b364",
+        "uncompressed_bytes": 8384755,
+        "uncompressed_sha256": "7bfd5060419aee509d9dbe48ea41f9ea17c104277cfd3ce04a7f285720a8c470",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-004.jsonl.gz",
+        "bytes": 597536,
+        "sha256": "fcab0f4a769b8aa026fd374ec7b1b6105af3e1069260cd17cb342f5e5019b709",
+        "uncompressed_bytes": 8383293,
+        "uncompressed_sha256": "1184be2b9f9fe408ce32c05e497ad261653f2b6ad74cec9edc10a4c0e8122ad3",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-005.jsonl.gz",
+        "bytes": 597988,
+        "sha256": "b7b3e2350a1b49a2269432ac522bb2fb80132079731e5c67e1668d5573d55a8f",
+        "uncompressed_bytes": 8386210,
+        "uncompressed_sha256": "5edddaaaacc95409ec8214046456aead7a3d781b45b391ddbc8efb2c86cd8035",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-006.jsonl.gz",
+        "bytes": 600744,
+        "sha256": "6491a4dacb3df4648dbf66de743b0134e64f56af15184a846539800c3adbff74",
+        "uncompressed_bytes": 8380429,
+        "uncompressed_sha256": "ade83d58e0f1239b12be4912f8ab1d8da3a5eed79d64551582d3da1e04f2454d",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-007.jsonl.gz",
+        "bytes": 595205,
+        "sha256": "e002be2082c70647535bed55dd5e65b15a964521116c447b0fb2c727aaab9a2d",
+        "uncompressed_bytes": 8377965,
+        "uncompressed_sha256": "2b5f9beaf66788614ee09c11c45daf5084014b6d109ff0922cc6788972141345",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-008.jsonl.gz",
+        "bytes": 607568,
+        "sha256": "d8c22c06dd2982a023237fec400cc166a4025ea8f21b69114db5d0f8661f7ef3",
+        "uncompressed_bytes": 8383173,
+        "uncompressed_sha256": "be5d6782822be8b8304865b02bfdc15e3124ddf46d1f1d05a6d43dd3d4dc49a8",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-009.jsonl.gz",
+        "bytes": 617901,
+        "sha256": "1d23e9241730943ef0a2a1f447afe00c6ecd44d5d4b33fdbb6d3222385b5b1c0",
+        "uncompressed_bytes": 8381199,
+        "uncompressed_sha256": "6309be62338ae96de55d2fa5751cff178bac99a107be5ef6ebc5451a0008996c",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-010.jsonl.gz",
+        "bytes": 595984,
+        "sha256": "3b3459257eaf024a5f24dbd3c4efe9ef36547b399057e913728c84aefb064538",
+        "uncompressed_bytes": 8383422,
+        "uncompressed_sha256": "dfcf5f2edf096b24dfc10fb80b598bfdb13f7e6c06c4504862cd5ee1cdbe3015",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-011.jsonl.gz",
+        "bytes": 597250,
+        "sha256": "7ea1a5cb42f36c2e52b62adf58d66ecd1d505c9150dc08eb4a89a53b60344275",
+        "uncompressed_bytes": 8385482,
+        "uncompressed_sha256": "7490c56e28e2e46fd05f0a1fe883d4a578e6f43eca316e03f9dc2c176f5ed39d",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-012.jsonl.gz",
+        "bytes": 598540,
+        "sha256": "780d428750e8ec3ad323b3e1bd287889796467d5cc3c0dbb5912c39d85f1ac53",
+        "uncompressed_bytes": 8382121,
+        "uncompressed_sha256": "31a866e31d8ac8cd955ecdf2c924afb155bb9550a6877eb5dbffdfe49e00d5ea",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-013.jsonl.gz",
+        "bytes": 586718,
+        "sha256": "38625ee8cdf9ec7c2db5be6dfd8c5ddbf192879feddf294f21e4a69e927e04eb",
+        "uncompressed_bytes": 8380847,
+        "uncompressed_sha256": "cb45901c2cb8091cd13ce93e1a3ed0e3d61cbfebb46decf8599513f38ce87045",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-014.jsonl.gz",
+        "bytes": 598169,
+        "sha256": "f7c4f568ecea602dca764138be0ca3b26a7aeb7cc7365bf0b664fa1ccd7f03ce",
+        "uncompressed_bytes": 8379081,
+        "uncompressed_sha256": "34705acb4f0ced7403e445f7504b93ad9bccc03f77ab3cf4b1adbfc96640871e",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-015.jsonl.gz",
+        "bytes": 596283,
+        "sha256": "067040edfac5599de6003a4962730a5af9db1618f66f3159137958cf9152bede",
+        "uncompressed_bytes": 8383140,
+        "uncompressed_sha256": "f9c50ec8c07fe2f200e53a5c92b01d88608d10ecdf07990e855fd283224ea478",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-016.jsonl.gz",
+        "bytes": 595328,
+        "sha256": "31fe79a78dc8670d7e87be09a352527abd2d1861e0f136ad495cc4ba9d4afe1c",
+        "uncompressed_bytes": 8387401,
+        "uncompressed_sha256": "148dd66a6a23a16fcafce2b971e7d78ee8c6378e60d1b462afe6c0d8c8b28f4d",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-017.jsonl.gz",
+        "bytes": 593967,
+        "sha256": "e9c3ae5a5e53d63802c32e53558095c25f3fd8b2b5400dca1eb369f876325936",
+        "uncompressed_bytes": 8385690,
+        "uncompressed_sha256": "f8ba7996c3212ff3b4a8de8e742700d7183223367aeabd817e24299be336a46b",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-018.jsonl.gz",
+        "bytes": 591597,
+        "sha256": "d9f367098b1fa9f779bdc8ba49923a5c310b75311563b59973794f062d88d4de",
+        "uncompressed_bytes": 8381957,
+        "uncompressed_sha256": "6a4048140cd1da9f87e90f658abc2009f490d16ef06ed7b5785f738ba0a458b5",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-019.jsonl.gz",
+        "bytes": 598034,
+        "sha256": "7c6206dc96ccd1756ff297496bb47bfc65cb93dd6fb8a82590500cc1e472f556",
+        "uncompressed_bytes": 8387785,
+        "uncompressed_sha256": "9109d60c9f63ec5296f430983c4134874fb62eeec26431b6c9c2983ddc193616",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-020.jsonl.gz",
+        "bytes": 596090,
+        "sha256": "d5db10b267387c69f075108079bf378faa0f82c2306d811dc90ca84cec6d48fd",
+        "uncompressed_bytes": 8384227,
+        "uncompressed_sha256": "83b1f5ccdd6ec516a3b42d5a755568fd0c5f8bac629baa7fefe687218f33b04d",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-021.jsonl.gz",
+        "bytes": 597804,
+        "sha256": "2fce03d438d1c78544bae23ce56a0711962a5861fb8f18bcb862c5aef7d1e326",
+        "uncompressed_bytes": 8388231,
+        "uncompressed_sha256": "bb3427096a76945009ff717849fda49477a6c1064744741acb31a51a455f8a2a",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-022.jsonl.gz",
+        "bytes": 593080,
+        "sha256": "bfe58ede5ec8514cf3929cd1796c33a164681ff1b46664e58db32961966f7327",
+        "uncompressed_bytes": 8383637,
+        "uncompressed_sha256": "49b1bd0f75b670d9e4900ae3346ca5fb3b81c1ce25a4009a866bd6a49a020686",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-023.jsonl.gz",
+        "bytes": 588777,
+        "sha256": "4fb824811113e5deb1fd1c233137a65e1d83b1172f1a27d8153a78129516edf7",
+        "uncompressed_bytes": 8385487,
+        "uncompressed_sha256": "75054366df92e5e36ee986f6a373510b98fd9ae70564121690269a9ab76f1eac",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-024.jsonl.gz",
+        "bytes": 589239,
+        "sha256": "1f477f8517231e1e039bd2d378853f8692f14cffe35c3faac04350625b4a83db",
+        "uncompressed_bytes": 8383081,
+        "uncompressed_sha256": "4bb2c3f0a5bcfdd479f0501bfaabf20a559203d31a009792549763f7eb7c01db",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-025.jsonl.gz",
+        "bytes": 586893,
+        "sha256": "862566cc24748391f741f055447ab342f36d420bbff05e00c0554c4c1d50a663",
+        "uncompressed_bytes": 8382120,
+        "uncompressed_sha256": "b49916a8358aa2d07bfa25e6f7515e790e0bbe69617d8424711864d318ae3de3",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-026.jsonl.gz",
+        "bytes": 615171,
+        "sha256": "1e2aa3ff3207c27eafd89c4f48e7bd36699c32d0106045e539bf1f1aca986b5d",
+        "uncompressed_bytes": 8385810,
+        "uncompressed_sha256": "71e09356909334dbf59c203be4ab5adbfad07e84f92315face5c1062cc539cc7",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-027.jsonl.gz",
+        "bytes": 598510,
+        "sha256": "ce8e24ec43d5566e51c57145cc3ef546805d9dcfd059aa06da09001df13ced63",
+        "uncompressed_bytes": 8386234,
+        "uncompressed_sha256": "958195d196f078753220370bb9e311154a9a84a8a00232a5d83755bfd57accb9",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-028.jsonl.gz",
+        "bytes": 590053,
+        "sha256": "1bb036ad73dc4a271871bb3b46d560998e993ea3da625d0e7f56f89259a97f7b",
+        "uncompressed_bytes": 8386157,
+        "uncompressed_sha256": "1adb574da43bd6f2472f9a46661f31013e2bd025c3ff62e469b3030097f09e09",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-029.jsonl.gz",
+        "bytes": 602140,
+        "sha256": "e5147018d195ca519b3ad73fd317b862fa3847dcab8511784b7d1868271ea725",
+        "uncompressed_bytes": 8382349,
+        "uncompressed_sha256": "9dd1e354ea31a1a85da316628261707237f3305945d975374d9150538e917af7",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-030.jsonl.gz",
+        "bytes": 594599,
+        "sha256": "2ea43447508c342c79bf1561d401ad7a12fc1baaef926fb18f1f8b830ce9d03e",
+        "uncompressed_bytes": 8381833,
+        "uncompressed_sha256": "239a0d3e54f9d59bba9ef9220de219703a61287cda1e3f9443dcd3b3c9d4d4bb",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/diagnoses-031.jsonl.gz",
+        "bytes": 79727,
+        "sha256": "b26872795e3be7e77a3f7e3b33458188f0bc8fdab9080b814c796eb616aed30f",
+        "uncompressed_bytes": 1074590,
+        "uncompressed_sha256": "18c0c60ea740ff88b059fee793e5e221901600bb14a659d78ef5234970ee2a93",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "uncompressed_bytes": 1730300,
+        "uncompressed_sha256": "e189f3ca731cf87433e423f88debce44e666e838fea1a8e57560b1f47f54422c",
+        "role": "retained-original-observation",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes",
+        "role": "evidence-artifact",
+        "commit": "0198938719a5666b6726fb6a1e45779926eefeb2"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "bytes": 94693,
+        "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+        "hash_kind": "file-bytes",
+        "role": "evidence-artifact",
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+        "uncompressed_bytes": 320200,
+        "uncompressed_sha256": "897ca97928956c190fb4b1a25f0364333528b8d789f5e9f60f345f9299803e3e"
+      }
+    ],
+    "pins": {
+      "original_complete_scope_report": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0"
+    },
+    "pin_files": {
+      "original_complete_scope_report": {
+        "commit": "0198938719a5666b6726fb6a1e45779926eefeb2",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "prior-global-observations",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1202",
+      "role": "Original immutable audit/routing/numeric metadata; source-relative observations only",
+      "vintage": "Original archive/base12e90, independent physical report019893 and correctionb4b7",
+      "retrieved_at": "2026-10-08 (immutable product byte readback; original preparation vintages retained)",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source rights and physical authority are retained as uncertain; no source geometry is newly redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Use the exact baseline commits/path/whole encoded+decoded pins and original-source-catalog.json; retained observation preparation is separately limited.",
+      "limit": "No physical/source/date/cause/rights/native-runtime/RSS/production approval. Earlier direct-source preparation539MB aggregate is not one256MiB qualified phase."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/README.md",
+      "bytes": 6937,
+      "sha256": "2eb6e5c00352726ab4f7909e61b152d4196906e750a4b3172e41e610e9e41ce0",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/bounded_io.py",
+      "bytes": 6044,
+      "sha256": "1db2e3fd1ee52d14bf9b7de16e1786db40a75e9414bf0281c891d7c0e43c27f8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/catalog.py",
+      "bytes": 9936,
+      "sha256": "28cf18af11b82121bb7265c2a1a5b1299065a7ce1faec543c2318b696cc09ead",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/control_runner.py",
+      "bytes": 4978,
+      "sha256": "b196cf1c548a402237fa2f5fde454c48b28c00f1a08e35ff47f726a873c323bf",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/controls.py",
+      "bytes": 4870,
+      "sha256": "668ac82cf9b23ec53860ea54c19c9658690c012a1f101a659c22bd1b3037b371",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-01.jsonl.gz",
+      "bytes": 673553,
+      "sha256": "307eea6b194b6f349d7ef0b2c835e4c5345edf4726699b7383995971b00e7617",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388179,
+      "uncompressed_sha256": "a397f60dce0e00023a83c9dc891c34140b920c17deff30b0e937ee01bd7a68c8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-02.jsonl.gz",
+      "bytes": 669020,
+      "sha256": "d59499bcb6802b86dcefe64738dab501f59254445b9b427167b7d8d719a1eaeb",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388290,
+      "uncompressed_sha256": "c4744d8ea2436d84366ff373b02da38a658c640391e45233e1691ce45e084539"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-03.jsonl.gz",
+      "bytes": 669046,
+      "sha256": "8c8ab24040d144a4453ee3c9f8b2ad6349c1cf70a0a2d812a82fe7e0c8a4043d",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388484,
+      "uncompressed_sha256": "72abd6c9c541e9fc10e239f37524bbeb1b45f4ce6f383e31956c199c5a2aa369"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-04.jsonl.gz",
+      "bytes": 670817,
+      "sha256": "23e26ee961ddf71fba040db71d301263f59b6bae0b6c3ba41672ebdbce040748",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388262,
+      "uncompressed_sha256": "7a858fb9a749f44c20934767c5286b32af0a75dae5fa30b20a49de94881f4da0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-05.jsonl.gz",
+      "bytes": 667999,
+      "sha256": "38f2fc515fcfd6087629291569187051e6d92a572d7bafa22be3334833966e24",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388131,
+      "uncompressed_sha256": "4fbea725a5c9d7b98ea24efc7bc96f39f8accb0947e8d6b79d3fee83f60dada7"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-06.jsonl.gz",
+      "bytes": 670288,
+      "sha256": "16eebd90e6d9b9d26288c8cc4d1ffd85769a3c6918057c0f9971b297ef76b4fa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388247,
+      "uncompressed_sha256": "ab3e1732f04cec2c3ebdda948010dde02b8105aba5d61e9455d60f07da143594"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-07.jsonl.gz",
+      "bytes": 668269,
+      "sha256": "024cd9854407f9c7ec5b871b76bfb62ae886728b1a9a2445bd903ebd52b9785b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387699,
+      "uncompressed_sha256": "7ebd5eb45b59217de4c5d0516864b37858709bd6d97e0ea11c1c399a95563971"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-08.jsonl.gz",
+      "bytes": 668082,
+      "sha256": "49f0662dd26c9f58eaa5277f64019b9e9853ffee45be75c161542818d0559e22",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388042,
+      "uncompressed_sha256": "0c143034c7799c1a9028d325d5fcc65823591a3675d2a1b9dd01608e105a2b1c"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-09.jsonl.gz",
+      "bytes": 108480,
+      "sha256": "60f1834d5c0813840f1ac5d2f5de80c59cb45a9d4d074ee7eb2824a36f0e334e",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 1348067,
+      "uncompressed_sha256": "6539a09e132b2a6a4c90242eec9355c4ede37fd6fb9c683cf7998b81a6620dbc"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-01.csv.gz",
+      "bytes": 2110652,
+      "sha256": "2f59d54e19f2b6bb6ba3dc408ff468b1c91d0d6d081135c68d970faec8f1446c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388231,
+      "uncompressed_sha256": "83de891f73bc4210e75ac7882928a7755ae7a3eec543860bc202835a60ef99f2"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-02.csv.gz",
+      "bytes": 2112190,
+      "sha256": "2c08fbefc93b0d3f74cc9ee223a7c5f58268efb457e06cd8bc196bdcd615a321",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388270,
+      "uncompressed_sha256": "f98947701ab954de94863558fabe68f277928b136505f2b417dd3dfb05fee8f6"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-03.csv.gz",
+      "bytes": 2110684,
+      "sha256": "e7fcc3c55e325aed1659c0cd5d968a948bf2393f87b5bc478f7297be9fe733de",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388549,
+      "uncompressed_sha256": "e4641bbb38e0ac23d7625f04dfea2cbdebc47bded32fb0e5bd4871eda7c13520"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-04.csv.gz",
+      "bytes": 2111276,
+      "sha256": "7bc3d53c58b90b9fb7d09bc382b30084f9b2ac1a474966a188677a66760408ec",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388206,
+      "uncompressed_sha256": "bb8a928a6aa73ac4d0bdca4919ae4af79ec40e766ee88060ef76dbef398150cf"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-05.csv.gz",
+      "bytes": 2111534,
+      "sha256": "1e323c1938ed4cb8bae91cd0b9e2c7c90a9d44ba6cfda87e8a40cd03aac34fd8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388404,
+      "uncompressed_sha256": "ff40aa9b35b69cc08b5fd736f1801a128abd10e8a0697e5366dc30ff5c10944b"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-06.csv.gz",
+      "bytes": 2109919,
+      "sha256": "8ec3d43cf69db5cd4afeabb38fd0ada6a41b6d4e3c3531ecaf6365bb984931ec",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388452,
+      "uncompressed_sha256": "c2c526465257bcc7b6b6ef116aada5869b5af0ba762058505bde017bccacfdfc"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-07.csv.gz",
+      "bytes": 970354,
+      "sha256": "4b236a599b92d3aed5b79315b27abe6ce2839ac49752bea2a48a8957eac53304",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 3846213,
+      "uncompressed_sha256": "bfc3f6e5260aea2164d462bf0ee700e66ea075d43843d2b8eb109aea3e222640"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/control-pins.json",
+      "bytes": 829,
+      "sha256": "0c15cb2d9bd9f48bd36fc8d79484059e1cbc2e7098f57d8c788e42614fd8693c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/direct-source-preparation.py",
+      "bytes": 26246,
+      "sha256": "1f6321667c73f1f045af8c756ff86062fd22343876e3d60373f4faef1b74ac86",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/direct-source-summary.json",
+      "bytes": 46210,
+      "sha256": "bf0584f30dfe986207c464e431778123093ed9649ecd1ca79894fc2ec0e8a14d",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1295-capture.json",
+      "bytes": 43054,
+      "sha256": "a658b6269bcdaa136399985f9cf2c0c5c282d5d5e60e12bdbac9b749fc26c4c0",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1394-capture.json",
+      "bytes": 15081,
+      "sha256": "6c3f952db0bef92f22b3db013ba80eda3c0a4bde476ccd2d5f14ea12e4ef00c8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1431-capture.json",
+      "bytes": 18282,
+      "sha256": "46ad97342faacc3db0497c4af10a74427fd098336b9bfe01bca6eb1b2908fd88",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1481-capture.json",
+      "bytes": 11733,
+      "sha256": "a823da89875187aec1af95ebd59b0aeb77109244c3df8c54ae7e3a4104d9e270",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/original-source-catalog.json",
+      "bytes": 31962,
+      "sha256": "591879a3fd93fbb8aa87ba9ec2f16be99f7a44de1cca287c4fd2fc7403172349",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/parent-pins.json",
+      "bytes": 6303,
+      "sha256": "0e4793a75ed8562271b3b247372228b6e8cca5a42388024c6a3a5b884602f2ca",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/pins.json",
+      "bytes": 6742,
+      "sha256": "d5d8fedf6e8ff17e37d653a8b671c27776f14c2f63439de6dcb1575ab82de5e0",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/scope-pin.json",
+      "bytes": 396,
+      "sha256": "20253324d423121ef10a2777f002137982543b5987ffda50588c22d8d5d77ec5",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/producer.py",
+      "bytes": 18709,
+      "sha256": "8e20627f9b731e9c9665498ecb7cf113e81e4f42f678d9e03546425369e7fec6",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/contract-controls.json",
+      "bytes": 1998,
+      "sha256": "06f8a442e38c1a9eb0859bfec3ff938f8677a0b1585a9a59b4df21c6b93166c8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/history.json",
+      "bytes": 1017,
+      "sha256": "a0d09c197844096e342ac6bc10e79a9d69e5790fcb0dc8adb04ef2146c935a2b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/io-controls.json",
+      "bytes": 1218,
+      "sha256": "395c284931ae4f5ebeb8643a7e8b1a8bd47bf148ec266a2c9e0374d96f993494",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/negative-control.json",
+      "bytes": 457,
+      "sha256": "03ba8498f6755345b0fa321e17fd3a839894523dd66e78b69eafa30413341323",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/positive-control.json",
+      "bytes": 329,
+      "sha256": "7c9ec51ac32e008c25131a232cdf378801b78f5b114574c47fb44c1375ac989e",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/reproducibility.json",
+      "bytes": 396,
+      "sha256": "0231ef087e0d0da7f47783619497232962dde353169352c1389e74f532388448",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-00.jsonl.gz",
+      "bytes": 526542,
+      "sha256": "cb29c1d4bf43b4c0b0596cd6bbb86435f0d48e07de666597d47d2f1e92bfbcdb",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386838,
+      "uncompressed_sha256": "0e41158367ccce79d970a5f1802fc508af2baba5e8b834313858d9f816f1237e"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-01.jsonl.gz",
+      "bytes": 525776,
+      "sha256": "3458b4b7daefbd753fcac7cf0dd6a464b23e13cf543c5e588ec9024e8c6a1524",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386346,
+      "uncompressed_sha256": "6f172231dbeae60932d5fe1a46b88d944607af709e4bb846eabc4c6f17dd78cd"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-02.jsonl.gz",
+      "bytes": 524729,
+      "sha256": "fe35315706a18ded37c26c528bc1ae4c9ace1f2947a929aa2730a8bf1d424a0a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386364,
+      "uncompressed_sha256": "15eb3ceaab3f4dc751964697f449e505ff9fd6eaa461d3696634970a0a4b9de0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-03.jsonl.gz",
+      "bytes": 528177,
+      "sha256": "d796fbe78c00202cabe1f898f201035f202f891cb4af2a099eae90aab2107781",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387948,
+      "uncompressed_sha256": "196c5d360828c22de6a7abf5fee6ed8120b4c0d489971cb7211eb60425c8c5a3"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-04.jsonl.gz",
+      "bytes": 525059,
+      "sha256": "54c94826b9f3370c9dd4473a78d4fa28a26b15342b3180f61ce7d18dd19befff",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388457,
+      "uncompressed_sha256": "858fd7e1f52bff31631a4de23f577221a916d0d07ac7ce36a1f837f777217d23"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-05.jsonl.gz",
+      "bytes": 407437,
+      "sha256": "4db1436e3dfdc71e5644c582935ff4a1426d3064f27d95a493f3277f4e24c901",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6484231,
+      "uncompressed_sha256": "40fb6e698c55c76ebb40c719c6459ea572ddf1631778e7f358ece920839feb63"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/inventory.json.gz",
+      "bytes": 3012,
+      "sha256": "274cf4a6f9723900b399a3c5eb50de25548b342c77835fbf24f6f5ab980cf765",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "72fa247cb519566d8aa66f1bd6188aa5553ab88853e56749e7c8310a25b4c036"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/membership-metrics.jsonl.gz",
+      "bytes": 621535,
+      "sha256": "b696df0684a87a405e884d47040f3045d881ec5ba85b57dbaa388244450f5547",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9919848,
+      "uncompressed_sha256": "180a7e268b1f9164430a79a175160e0242c983c9a9f9d9e5f2019bd091b5c367"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/publication.json",
+      "bytes": 834,
+      "sha256": "2eff164749bc04feb849f49526ebd2b81f2fca9e997a1e9ac7248a6b25f03089",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/summary.json",
+      "bytes": 1477,
+      "sha256": "5ab7c0fbb6a80ea129cf6752b74fe83504354ea77c462c6ffbd8e40a5820e93c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-00.jsonl.gz",
+      "bytes": 528005,
+      "sha256": "106bfd22e415e51a62f05a6cc6ad3087b046b99f1804e3e9ee05b2d6c8397ad9",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385493,
+      "uncompressed_sha256": "5367c15be79322d5b4c920e734a17b91e6ec4361d1bc983908323aeff4133921"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-01.jsonl.gz",
+      "bytes": 526771,
+      "sha256": "94127586c44c3be54000b94eb4ec5f3231fe48b725cdad0b0321953ca7f0b846",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388274,
+      "uncompressed_sha256": "4229921710ecab2fd7ce72ed687e6a16db39f0e78948cf5eabf5be51382de455"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-02.jsonl.gz",
+      "bytes": 526420,
+      "sha256": "d7b07505036bdd4faa031c50e65d9cdbe45b948480ca93b9eec17f9c6506aa20",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387339,
+      "uncompressed_sha256": "978f3a09267097772b20acc5124ce24d0b125930317c226d0e65504ed0b61541"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-03.jsonl.gz",
+      "bytes": 526796,
+      "sha256": "083256c56716d5e7b1719e861273ee4fabfee9e5c9d64509c84ea3bfeb985749",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385811,
+      "uncompressed_sha256": "23a72e2ccd79aae59c395a9cf10fbfe4c7ae76adde98afe4a07f14497728eafb"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-04.jsonl.gz",
+      "bytes": 529347,
+      "sha256": "a1df4261ab0d8319bd0d0f6325ef3d401d73be946af712b019940ac01f68ad99",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386405,
+      "uncompressed_sha256": "b1904d3f763d8338a37ebb8228420c50580065400b23fe1f52f7eaf292541c9d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-05.jsonl.gz",
+      "bytes": 408157,
+      "sha256": "d7d8f73434e787fe08436a7bbd9a405fe4c1dead01868d4c63c290df7c2f057a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6485875,
+      "uncompressed_sha256": "f6992a9bfdcdcb446c143e5f07a9b0545b94d015617c2d3f2c3fd79bfcf259ce"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/inventory.json.gz",
+      "bytes": 3025,
+      "sha256": "1a66f86a312432109e3714ab4e7b993e76104611ccc039d942a1bfb69ac38b0e",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "e90fa8f4d83fcdc88933084b3b50a47538f2b4be8332a48c01b035e6b7105648"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/membership-metrics.jsonl.gz",
+      "bytes": 620328,
+      "sha256": "a0f7785ce55449c691b7a1d3194b461d99dca4e2d5681da33088aeab867398d2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9903592,
+      "uncompressed_sha256": "dfc39e9e53825c834c18caf32f84915066a273798f368d923fe03e8a4c5391cf"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/publication.json",
+      "bytes": 834,
+      "sha256": "c63e4c4b7df54574f4ae323055a6470f7b82298a0e5b305f3aa98d3f45cea9db",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/summary.json",
+      "bytes": 1382,
+      "sha256": "8cdd45668c834a354faae1f850fe33e38d1a84df77d63fc3bf92f3804d79ec0f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-00.jsonl.gz",
+      "bytes": 524595,
+      "sha256": "f2a879d120295cd5656a06a2ab780619de508af9b424b6cd25061adc48749ae5",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385158,
+      "uncompressed_sha256": "251cb24f37aaaf881172b27bdfb8ddcd85b51b79a86e9f180cd8546861fb429b"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-01.jsonl.gz",
+      "bytes": 523234,
+      "sha256": "d2e158b582738dac678ca39f85153abce967778ab2ef0a9bc1c486e1ac26c8a2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387757,
+      "uncompressed_sha256": "4eb073843e3f697027fdbb60190d1e758a4b9642d37ae9a307b9c73dd8b251fb"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-02.jsonl.gz",
+      "bytes": 528042,
+      "sha256": "98163ae6f018065704efca1a9f69f34a96c304b0ad205306323a6112d1da26a2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388395,
+      "uncompressed_sha256": "d15763aeb49419c09ad05f4ed65b97d39e8c28753005ddf5b65647f8bd667fd2"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-03.jsonl.gz",
+      "bytes": 528272,
+      "sha256": "1323f741fc48de9bea737d022bfe05f75424307d2b019d76da2a9c592db6d829",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387084,
+      "uncompressed_sha256": "e7ab3328656a8852743330096ec916daf0af1e323f7bc3b359ba0de4ada0e09b"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-04.jsonl.gz",
+      "bytes": 527033,
+      "sha256": "d8bc146302ecd36d71d263caa66682466610611e5a796e3f6eef0bfcd18ba4aa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385547,
+      "uncompressed_sha256": "ae12ec7323dab54d1deb3fe956e7cd295d1879f27c30f8d9f56e5adae7cf6283"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-05.jsonl.gz",
+      "bytes": 409922,
+      "sha256": "fddad80392d69a52cd6948257bf2fdaf62c926db035ba5afc8a20a2a5539406a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6492999,
+      "uncompressed_sha256": "81c90928a652b7874a63f1d771e22c82e0964f706797e250441551033e601a7f"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/inventory.json.gz",
+      "bytes": 3019,
+      "sha256": "0da424b01367198643af703bb34302b59cf7ea420d3264b7e48196aeeea2a603",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "5ef69e8a08d5fcc082141b6276b46dea8ba2eda24160e79ef83ef434830b91bb"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/membership-metrics.jsonl.gz",
+      "bytes": 620888,
+      "sha256": "f4601dc1a717f05da9d96dae9af004adc47d6e8d244519d2e8189a9723ef486c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9909872,
+      "uncompressed_sha256": "1bfbbdfe91c7e44b33493338a32e6c993b49f417047a1b37c3c900c9b9d88c7f"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/publication.json",
+      "bytes": 834,
+      "sha256": "2402a679fd907ccfba75f8e34eca27084a9de00c3d5de3e8f8fd68379c4dfaa6",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/summary.json",
+      "bytes": 1363,
+      "sha256": "d8261930800d6dd33745bf7fa494eaf56cccfbebc2767a687b7c2b761df7f490",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-00.jsonl.gz",
+      "bytes": 525988,
+      "sha256": "053074d99e457fe65dcb2694ffcaa2e39e83a324b23f6094d3ac1226449aa2c3",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385443,
+      "uncompressed_sha256": "bbd64d246c531fbf1516284efe8f8949b09bdb21fe153711978a5b63a9c77c86"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-01.jsonl.gz",
+      "bytes": 523853,
+      "sha256": "6024d6f207f47f93a6f0e206ac44e7f4a9eecc6cb082938309f898e4a2b5475a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386086,
+      "uncompressed_sha256": "d7ed834c89f2ebbe3e6de33a66d323e78c8f4917a864f1fd5facac736c5afb14"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-02.jsonl.gz",
+      "bytes": 524810,
+      "sha256": "5823ab581fbf9fb3e886abccf14816496ff6ce76bc959d69653f62ddeb909bc3",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386307,
+      "uncompressed_sha256": "0a650c66269fa0831eff84e9188a4f978c5e809e8f5d5276756332adf593cba0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-03.jsonl.gz",
+      "bytes": 525570,
+      "sha256": "adf6d2700efd292b8a200a1dc5c99c85468ee9027a32ca278bfff6046353fc69",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388251,
+      "uncompressed_sha256": "aaff17bc72b255f006b12645ebad2b85b59ddbc1dbc676775c8e857c6397f1fa"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-04.jsonl.gz",
+      "bytes": 525858,
+      "sha256": "99a085e94e2cc172cc4ef56619914fe8f40cd77db1a058158bfefe984af2f266",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388199,
+      "uncompressed_sha256": "7c44c2c6445fca48dc5b33f6cc3a54e932a33a3de3786d8d9b9044f7e811d06d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-05.jsonl.gz",
+      "bytes": 410083,
+      "sha256": "17dcad2ce00899bc496c7bf6d20187189bc138006563524f8eb92367624b9a2c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6534894,
+      "uncompressed_sha256": "2e0039bbd59076735d1e3a612187e483c7eaace4b36db043b3608b62537da239"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/inventory.json.gz",
+      "bytes": 3013,
+      "sha256": "677b466b7d3308cba691c51017676bb48fb267573d7eea4264f1589ae60eaa58",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "490b63775d3c8cbad7cbcfb284a9aaa3f9fc033c62b18af44918eba1287285ed"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/membership-metrics.jsonl.gz",
+      "bytes": 620868,
+      "sha256": "09121d07b02a94f2959bb513f7a11ddfee5df3c991ddb882255cb618d905db4a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9908149,
+      "uncompressed_sha256": "06e57241944877746e91b69d3af8bb8a283a9544eb126cd9f9d92ce1940219f8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/publication.json",
+      "bytes": 834,
+      "sha256": "b99922b8d57688ffe8a4db002a89933aaaf25e908ed280077f93d84785e09e07",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/summary.json",
+      "bytes": 1374,
+      "sha256": "1d0cc2a00ac5736a8aa906f1124c05501bdbc0c07422c3585ff276e257aed401",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-00.jsonl.gz",
+      "bytes": 525212,
+      "sha256": "b4044fe7680ff4a48f97c54172dd06750ce0435a84ae678b92ca0324533e1311",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385584,
+      "uncompressed_sha256": "4a22055bde6df150629aaa6592ca948e5f908d22164a9f88b0d2813daf51d205"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-01.jsonl.gz",
+      "bytes": 527162,
+      "sha256": "35030b13ddfc6b772fe5c4cdfb412be09c0e02e2a8b9a2a2739abe57fe9ec542",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385976,
+      "uncompressed_sha256": "0b51efad2d5d302c7e1a3d20adbc96929b7830f57c29161c0472ef49bd52a10d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-02.jsonl.gz",
+      "bytes": 528688,
+      "sha256": "9f282637a1d95cfade4727ffc1ca4a7c816958af0a06d63520b9b2d16fa9ce4f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386699,
+      "uncompressed_sha256": "e03c4e7f61b86569ef886d810d9d18034cc3f959d0f27cf158c0461aca9e564e"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-03.jsonl.gz",
+      "bytes": 524094,
+      "sha256": "447da5f27e0cf05f4726bd643e33046e14872ca1197952f324ade413608e12aa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386355,
+      "uncompressed_sha256": "9c39845339933e4c15b5e721d140e0edf777821ac7659112092927cfef5e4a8d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-04.jsonl.gz",
+      "bytes": 525972,
+      "sha256": "0a79334210429c07d42ee5dcd24167cc0557a40d572841e252f106e0997e856e",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388013,
+      "uncompressed_sha256": "014b7abfb122c2143df01a67ba01b57c16f58158c5ddb91e292a628028a1dc15"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-05.jsonl.gz",
+      "bytes": 411435,
+      "sha256": "119f5b7c5e4956f098d86f2a1f4b2a2572b29cace31903930eeda7c2a887bfe4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6524960,
+      "uncompressed_sha256": "ea31650453ee299f174593cbd9190e80be2e8e599b2b51205c6bb219d21225a0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/inventory.json.gz",
+      "bytes": 3012,
+      "sha256": "1f23ced66649a27d1133819a54bc1b08dbd0c48fe057f808db30135964a88ac0",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "963dc807a317510589ba9c74d3846837575f2545934182e16a427a336f44adc9"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/membership-metrics.jsonl.gz",
+      "bytes": 620480,
+      "sha256": "510d5c085ba0fcf8b265aa77bb23a64c70c280178bc7890519dc9b03dde4e6e4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9903475,
+      "uncompressed_sha256": "454a303e783e417b68c36c078241e0af3dba4e70a31fb141fa7245069aa11aee"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/publication.json",
+      "bytes": 834,
+      "sha256": "8c53cc721c3f3110d2127d552981d7afda9048f3638f2ecdd5f293adfd3981da",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/summary.json",
+      "bytes": 1466,
+      "sha256": "2721a615a68b6ffb3e52fcbfa9c1f10751166a64b688f9c6beaa5d1289d57e2d",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-00.jsonl.gz",
+      "bytes": 525388,
+      "sha256": "d833624179a6d16beb72d5770b908bc4258a2d7c2b770e6cd2c12b33b30953a5",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387583,
+      "uncompressed_sha256": "797cbcda427b80a1207bd2770d20f15f9d409b91ca2c03e7164f280e51ac8393"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-01.jsonl.gz",
+      "bytes": 525979,
+      "sha256": "e1ac46a23355fb6fff996f8276ff51513cb2198f0ecf8d4afad54495c2e8c8b8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388414,
+      "uncompressed_sha256": "7df6271e6024b7a3d8abc9fd6383bb3ed2caec77976b775eb97ddd81ce87246c"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-02.jsonl.gz",
+      "bytes": 525546,
+      "sha256": "c4ed7e7059193537d70fd99e99f01dde5087d3d27712dd6e7efc31ae0f133e66",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385862,
+      "uncompressed_sha256": "b979163a7c924854c31eecaa7dfa702331cec5f92d8e7a98bea3c9bed1e1d563"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-03.jsonl.gz",
+      "bytes": 526076,
+      "sha256": "1536610f2446d68617cd8f1f39059f7491068b84112003ab656b90fcc153ebaf",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386485,
+      "uncompressed_sha256": "984c07fc9ace10ae4f19e24cd86d01932d1ea08514d642b4212c0f6f0ee1c4d0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-04.jsonl.gz",
+      "bytes": 524135,
+      "sha256": "37ed4644e4fa010dc252ce0b3da390b57d77df3572e646db0376188882472d1b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385258,
+      "uncompressed_sha256": "0b040f79edfabcf93bddc9c3b41f6d0dcd67d4ac84e961f18bd05bd8ab2452f2"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-05.jsonl.gz",
+      "bytes": 410110,
+      "sha256": "b0c32613db8ca8383a5b9329402a579bb34dda917a92f49501530bee3e42d6a6",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6547715,
+      "uncompressed_sha256": "12d9ae5d97cdc40755d0002d2858cfe6faade58c45515ec764c0fbbbf5bfd7a6"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/inventory.json.gz",
+      "bytes": 3025,
+      "sha256": "9e15696d021d8a74022c79b860a2237b69e5aa5447c04c5b57393690f6b23c87",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "a25da069575d26bb3883786978893c04ae20c3a0a690cb8ccd11441f961172bf"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/membership-metrics.jsonl.gz",
+      "bytes": 621081,
+      "sha256": "55338f9945b71072e386903884e9598c37f76ee6491d84a5ebda6ffca1bc3b27",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9912837,
+      "uncompressed_sha256": "c59c19fd1639454c67811880cc63237fd5353049cd69a82c8a3c13f5e57578e8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/publication.json",
+      "bytes": 834,
+      "sha256": "9144f4eb3e306cbce8a0c61d95f0c78648ba098ad5d87289457380811028ff0d",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/summary.json",
+      "bytes": 1356,
+      "sha256": "2a9b8bf804a240afbf66fc6cc0d91c426d0070aeca7c80c7ade7ab51ab467596",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/catalog-00.jsonl.gz",
+      "bytes": 524051,
+      "sha256": "1b17ccea6e51eebb7f8f77dca33de2737571f9baa1dac5c0b0b0f977e9917c23",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385661,
+      "uncompressed_sha256": "c5c274ba1628f9e0718180f63fc13a25fab85d0b5432c661a3f872a039795571"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/catalog-01.jsonl.gz",
+      "bytes": 528545,
+      "sha256": "977d8e521b092203c09055074f457040b8588ca47e1208823330431c683d8d22",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387399,
+      "uncompressed_sha256": "13fb1f7fdbd957a5a11171fcf972101cb3c15035f93f83af8b5f4270ea958275"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/catalog-02.jsonl.gz",
+      "bytes": 340998,
+      "sha256": "6882787d0c9b73cdff55221ff8f38159464588c9b5144168a78824b8c2c557fa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 5420416,
+      "uncompressed_sha256": "ea223ce885d8e7e6236ada68a5d5386b7f327a9546888134d343ac444d4f99b2"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/inventory.json.gz",
+      "bytes": 2729,
+      "sha256": "9b0c4922e6ef9f4cd68305274140ce8ed7d5c6b9809f9d5744957c8b2441e091",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8841,
+      "uncompressed_sha256": "ce3d4706cf1327a48c9891d70a22e58325e839ef7158c311c44d83f1a0c6259d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/membership-metrics.jsonl.gz",
+      "bytes": 285100,
+      "sha256": "f8895b532a92746571446b6c51b939f0b88f84f819fe60bc970cf43d11e11a5c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 4541416,
+      "uncompressed_sha256": "b3cfe1fbbfd5959a88df7c7ce856cefc3566e40b8d467a99af60c9ae0963deef"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/publication.json",
+      "bytes": 833,
+      "sha256": "1f291176b2ee4b9f31240b8d0196094d76b17f9feb77b8ee3aa87245929100d4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/summary.json",
+      "bytes": 1339,
+      "sha256": "256f9a1202982847a74260a8a0840b6962ad5ef9c8ef18f4f7d6f30904e7a613",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-00.jsonl.gz",
+      "bytes": 526542,
+      "sha256": "cb29c1d4bf43b4c0b0596cd6bbb86435f0d48e07de666597d47d2f1e92bfbcdb",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386838,
+      "uncompressed_sha256": "0e41158367ccce79d970a5f1802fc508af2baba5e8b834313858d9f816f1237e"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-01.jsonl.gz",
+      "bytes": 525776,
+      "sha256": "3458b4b7daefbd753fcac7cf0dd6a464b23e13cf543c5e588ec9024e8c6a1524",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386346,
+      "uncompressed_sha256": "6f172231dbeae60932d5fe1a46b88d944607af709e4bb846eabc4c6f17dd78cd"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-02.jsonl.gz",
+      "bytes": 524729,
+      "sha256": "fe35315706a18ded37c26c528bc1ae4c9ace1f2947a929aa2730a8bf1d424a0a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386364,
+      "uncompressed_sha256": "15eb3ceaab3f4dc751964697f449e505ff9fd6eaa461d3696634970a0a4b9de0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-03.jsonl.gz",
+      "bytes": 528177,
+      "sha256": "d796fbe78c00202cabe1f898f201035f202f891cb4af2a099eae90aab2107781",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387948,
+      "uncompressed_sha256": "196c5d360828c22de6a7abf5fee6ed8120b4c0d489971cb7211eb60425c8c5a3"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-04.jsonl.gz",
+      "bytes": 525059,
+      "sha256": "54c94826b9f3370c9dd4473a78d4fa28a26b15342b3180f61ce7d18dd19befff",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388457,
+      "uncompressed_sha256": "858fd7e1f52bff31631a4de23f577221a916d0d07ac7ce36a1f837f777217d23"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-05.jsonl.gz",
+      "bytes": 407437,
+      "sha256": "4db1436e3dfdc71e5644c582935ff4a1426d3064f27d95a493f3277f4e24c901",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6484231,
+      "uncompressed_sha256": "40fb6e698c55c76ebb40c719c6459ea572ddf1631778e7f358ece920839feb63"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/inventory.json.gz",
+      "bytes": 3011,
+      "sha256": "cdb9b4f6075a2b886101d1039ec25ac171bf44238089dff8b93e3e44c1a8d4af",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "6eb37ea53bddfa9076dc9a61e722be0da74c52dd2e7ac108a1249ab92551531c"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/membership-metrics.jsonl.gz",
+      "bytes": 621535,
+      "sha256": "b696df0684a87a405e884d47040f3045d881ec5ba85b57dbaa388244450f5547",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9919848,
+      "uncompressed_sha256": "180a7e268b1f9164430a79a175160e0242c983c9a9f9d9e5f2019bd091b5c367"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/publication.json",
+      "bytes": 834,
+      "sha256": "bd76db9e7efeca75325df15ed1db5e0b4fd8bbaffd3e85dce9be6d316f622bc7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/summary.json",
+      "bytes": 1477,
+      "sha256": "5ab7c0fbb6a80ea129cf6752b74fe83504354ea77c462c6ffbd8e40a5820e93c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-00.jsonl.gz",
+      "bytes": 528005,
+      "sha256": "106bfd22e415e51a62f05a6cc6ad3087b046b99f1804e3e9ee05b2d6c8397ad9",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385493,
+      "uncompressed_sha256": "5367c15be79322d5b4c920e734a17b91e6ec4361d1bc983908323aeff4133921"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-01.jsonl.gz",
+      "bytes": 526771,
+      "sha256": "94127586c44c3be54000b94eb4ec5f3231fe48b725cdad0b0321953ca7f0b846",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388274,
+      "uncompressed_sha256": "4229921710ecab2fd7ce72ed687e6a16db39f0e78948cf5eabf5be51382de455"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-02.jsonl.gz",
+      "bytes": 526420,
+      "sha256": "d7b07505036bdd4faa031c50e65d9cdbe45b948480ca93b9eec17f9c6506aa20",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387339,
+      "uncompressed_sha256": "978f3a09267097772b20acc5124ce24d0b125930317c226d0e65504ed0b61541"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-03.jsonl.gz",
+      "bytes": 526796,
+      "sha256": "083256c56716d5e7b1719e861273ee4fabfee9e5c9d64509c84ea3bfeb985749",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385811,
+      "uncompressed_sha256": "23a72e2ccd79aae59c395a9cf10fbfe4c7ae76adde98afe4a07f14497728eafb"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-04.jsonl.gz",
+      "bytes": 529347,
+      "sha256": "a1df4261ab0d8319bd0d0f6325ef3d401d73be946af712b019940ac01f68ad99",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386405,
+      "uncompressed_sha256": "b1904d3f763d8338a37ebb8228420c50580065400b23fe1f52f7eaf292541c9d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-05.jsonl.gz",
+      "bytes": 408157,
+      "sha256": "d7d8f73434e787fe08436a7bbd9a405fe4c1dead01868d4c63c290df7c2f057a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6485875,
+      "uncompressed_sha256": "f6992a9bfdcdcb446c143e5f07a9b0545b94d015617c2d3f2c3fd79bfcf259ce"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/inventory.json.gz",
+      "bytes": 3025,
+      "sha256": "55278d3213a8610a5009eb38fc115dd7b8b0f44519811e0d3a36e9006834013f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "95056e7bbdab3e23d8d95e37648990bd7c485fa6921d0d919801dc5f66a583e6"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/membership-metrics.jsonl.gz",
+      "bytes": 620328,
+      "sha256": "a0f7785ce55449c691b7a1d3194b461d99dca4e2d5681da33088aeab867398d2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9903592,
+      "uncompressed_sha256": "dfc39e9e53825c834c18caf32f84915066a273798f368d923fe03e8a4c5391cf"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/publication.json",
+      "bytes": 834,
+      "sha256": "678dc1e9932c17957093ff7c3d5da4c8508bcc7346d099e674624885db4aacbc",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/summary.json",
+      "bytes": 1382,
+      "sha256": "8cdd45668c834a354faae1f850fe33e38d1a84df77d63fc3bf92f3804d79ec0f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-00.jsonl.gz",
+      "bytes": 524595,
+      "sha256": "f2a879d120295cd5656a06a2ab780619de508af9b424b6cd25061adc48749ae5",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385158,
+      "uncompressed_sha256": "251cb24f37aaaf881172b27bdfb8ddcd85b51b79a86e9f180cd8546861fb429b"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-01.jsonl.gz",
+      "bytes": 523234,
+      "sha256": "d2e158b582738dac678ca39f85153abce967778ab2ef0a9bc1c486e1ac26c8a2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387757,
+      "uncompressed_sha256": "4eb073843e3f697027fdbb60190d1e758a4b9642d37ae9a307b9c73dd8b251fb"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-02.jsonl.gz",
+      "bytes": 528042,
+      "sha256": "98163ae6f018065704efca1a9f69f34a96c304b0ad205306323a6112d1da26a2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388395,
+      "uncompressed_sha256": "d15763aeb49419c09ad05f4ed65b97d39e8c28753005ddf5b65647f8bd667fd2"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-03.jsonl.gz",
+      "bytes": 528272,
+      "sha256": "1323f741fc48de9bea737d022bfe05f75424307d2b019d76da2a9c592db6d829",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387084,
+      "uncompressed_sha256": "e7ab3328656a8852743330096ec916daf0af1e323f7bc3b359ba0de4ada0e09b"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-04.jsonl.gz",
+      "bytes": 527033,
+      "sha256": "d8bc146302ecd36d71d263caa66682466610611e5a796e3f6eef0bfcd18ba4aa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385547,
+      "uncompressed_sha256": "ae12ec7323dab54d1deb3fe956e7cd295d1879f27c30f8d9f56e5adae7cf6283"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-05.jsonl.gz",
+      "bytes": 409922,
+      "sha256": "fddad80392d69a52cd6948257bf2fdaf62c926db035ba5afc8a20a2a5539406a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6492999,
+      "uncompressed_sha256": "81c90928a652b7874a63f1d771e22c82e0964f706797e250441551033e601a7f"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/inventory.json.gz",
+      "bytes": 3018,
+      "sha256": "15797d09bf469f0a81f8f84fca039490d792510b3e49b3e48c307dffd3bda9c2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "45b8d4b224541afafa789d042549c6f912c94383082bc9304dae6283af2822f8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/membership-metrics.jsonl.gz",
+      "bytes": 620888,
+      "sha256": "f4601dc1a717f05da9d96dae9af004adc47d6e8d244519d2e8189a9723ef486c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9909872,
+      "uncompressed_sha256": "1bfbbdfe91c7e44b33493338a32e6c993b49f417047a1b37c3c900c9b9d88c7f"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/publication.json",
+      "bytes": 834,
+      "sha256": "5f396e29fcf61eaf7d196f2772ae1915f494f1ab7d7f9d6c6de8b378608504a4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/summary.json",
+      "bytes": 1363,
+      "sha256": "d8261930800d6dd33745bf7fa494eaf56cccfbebc2767a687b7c2b761df7f490",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-00.jsonl.gz",
+      "bytes": 525988,
+      "sha256": "053074d99e457fe65dcb2694ffcaa2e39e83a324b23f6094d3ac1226449aa2c3",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385443,
+      "uncompressed_sha256": "bbd64d246c531fbf1516284efe8f8949b09bdb21fe153711978a5b63a9c77c86"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-01.jsonl.gz",
+      "bytes": 523853,
+      "sha256": "6024d6f207f47f93a6f0e206ac44e7f4a9eecc6cb082938309f898e4a2b5475a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386086,
+      "uncompressed_sha256": "d7ed834c89f2ebbe3e6de33a66d323e78c8f4917a864f1fd5facac736c5afb14"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-02.jsonl.gz",
+      "bytes": 524810,
+      "sha256": "5823ab581fbf9fb3e886abccf14816496ff6ce76bc959d69653f62ddeb909bc3",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386307,
+      "uncompressed_sha256": "0a650c66269fa0831eff84e9188a4f978c5e809e8f5d5276756332adf593cba0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-03.jsonl.gz",
+      "bytes": 525570,
+      "sha256": "adf6d2700efd292b8a200a1dc5c99c85468ee9027a32ca278bfff6046353fc69",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388251,
+      "uncompressed_sha256": "aaff17bc72b255f006b12645ebad2b85b59ddbc1dbc676775c8e857c6397f1fa"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-04.jsonl.gz",
+      "bytes": 525858,
+      "sha256": "99a085e94e2cc172cc4ef56619914fe8f40cd77db1a058158bfefe984af2f266",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388199,
+      "uncompressed_sha256": "7c44c2c6445fca48dc5b33f6cc3a54e932a33a3de3786d8d9b9044f7e811d06d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-05.jsonl.gz",
+      "bytes": 410083,
+      "sha256": "17dcad2ce00899bc496c7bf6d20187189bc138006563524f8eb92367624b9a2c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6534894,
+      "uncompressed_sha256": "2e0039bbd59076735d1e3a612187e483c7eaace4b36db043b3608b62537da239"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/inventory.json.gz",
+      "bytes": 3013,
+      "sha256": "a8e0d85f1283f735b166286947b4f7b61b25e0f5250eb297ea39174eb2561313",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "fd051db1e508f6ef6fb55734a8fa6742c8d22b9db17aac346f4cbdacbcd38ab8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/membership-metrics.jsonl.gz",
+      "bytes": 620868,
+      "sha256": "09121d07b02a94f2959bb513f7a11ddfee5df3c991ddb882255cb618d905db4a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9908149,
+      "uncompressed_sha256": "06e57241944877746e91b69d3af8bb8a283a9544eb126cd9f9d92ce1940219f8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/publication.json",
+      "bytes": 834,
+      "sha256": "4f4a861602d05ece897a42b414e1a5926b3f658361685b237f5af1aa9d36aa0a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/summary.json",
+      "bytes": 1374,
+      "sha256": "1d0cc2a00ac5736a8aa906f1124c05501bdbc0c07422c3585ff276e257aed401",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-00.jsonl.gz",
+      "bytes": 525212,
+      "sha256": "b4044fe7680ff4a48f97c54172dd06750ce0435a84ae678b92ca0324533e1311",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385584,
+      "uncompressed_sha256": "4a22055bde6df150629aaa6592ca948e5f908d22164a9f88b0d2813daf51d205"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-01.jsonl.gz",
+      "bytes": 527162,
+      "sha256": "35030b13ddfc6b772fe5c4cdfb412be09c0e02e2a8b9a2a2739abe57fe9ec542",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385976,
+      "uncompressed_sha256": "0b51efad2d5d302c7e1a3d20adbc96929b7830f57c29161c0472ef49bd52a10d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-02.jsonl.gz",
+      "bytes": 528688,
+      "sha256": "9f282637a1d95cfade4727ffc1ca4a7c816958af0a06d63520b9b2d16fa9ce4f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386699,
+      "uncompressed_sha256": "e03c4e7f61b86569ef886d810d9d18034cc3f959d0f27cf158c0461aca9e564e"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-03.jsonl.gz",
+      "bytes": 524094,
+      "sha256": "447da5f27e0cf05f4726bd643e33046e14872ca1197952f324ade413608e12aa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386355,
+      "uncompressed_sha256": "9c39845339933e4c15b5e721d140e0edf777821ac7659112092927cfef5e4a8d"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-04.jsonl.gz",
+      "bytes": 525972,
+      "sha256": "0a79334210429c07d42ee5dcd24167cc0557a40d572841e252f106e0997e856e",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388013,
+      "uncompressed_sha256": "014b7abfb122c2143df01a67ba01b57c16f58158c5ddb91e292a628028a1dc15"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-05.jsonl.gz",
+      "bytes": 411435,
+      "sha256": "119f5b7c5e4956f098d86f2a1f4b2a2572b29cace31903930eeda7c2a887bfe4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6524960,
+      "uncompressed_sha256": "ea31650453ee299f174593cbd9190e80be2e8e599b2b51205c6bb219d21225a0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/inventory.json.gz",
+      "bytes": 3011,
+      "sha256": "b3be9bbd1e4efba913327107604f672ab19735e5e6cb38018c09d2c90565f0ec",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "5db0ab48d8751cc08cbd56cc6acec24dd38c383d25f1a2b5a372aa61a2a8c058"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/membership-metrics.jsonl.gz",
+      "bytes": 620480,
+      "sha256": "510d5c085ba0fcf8b265aa77bb23a64c70c280178bc7890519dc9b03dde4e6e4",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9903475,
+      "uncompressed_sha256": "454a303e783e417b68c36c078241e0af3dba4e70a31fb141fa7245069aa11aee"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/publication.json",
+      "bytes": 834,
+      "sha256": "9c83c61d04b29afb5e39406f16d1fac8c6f74179eac464f60931727faa644d4b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/summary.json",
+      "bytes": 1466,
+      "sha256": "2721a615a68b6ffb3e52fcbfa9c1f10751166a64b688f9c6beaa5d1289d57e2d",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-00.jsonl.gz",
+      "bytes": 525388,
+      "sha256": "d833624179a6d16beb72d5770b908bc4258a2d7c2b770e6cd2c12b33b30953a5",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387583,
+      "uncompressed_sha256": "797cbcda427b80a1207bd2770d20f15f9d409b91ca2c03e7164f280e51ac8393"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-01.jsonl.gz",
+      "bytes": 525979,
+      "sha256": "e1ac46a23355fb6fff996f8276ff51513cb2198f0ecf8d4afad54495c2e8c8b8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8388414,
+      "uncompressed_sha256": "7df6271e6024b7a3d8abc9fd6383bb3ed2caec77976b775eb97ddd81ce87246c"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-02.jsonl.gz",
+      "bytes": 525546,
+      "sha256": "c4ed7e7059193537d70fd99e99f01dde5087d3d27712dd6e7efc31ae0f133e66",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385862,
+      "uncompressed_sha256": "b979163a7c924854c31eecaa7dfa702331cec5f92d8e7a98bea3c9bed1e1d563"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-03.jsonl.gz",
+      "bytes": 526076,
+      "sha256": "1536610f2446d68617cd8f1f39059f7491068b84112003ab656b90fcc153ebaf",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8386485,
+      "uncompressed_sha256": "984c07fc9ace10ae4f19e24cd86d01932d1ea08514d642b4212c0f6f0ee1c4d0"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-04.jsonl.gz",
+      "bytes": 524135,
+      "sha256": "37ed4644e4fa010dc252ce0b3da390b57d77df3572e646db0376188882472d1b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385258,
+      "uncompressed_sha256": "0b040f79edfabcf93bddc9c3b41f6d0dcd67d4ac84e961f18bd05bd8ab2452f2"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-05.jsonl.gz",
+      "bytes": 410110,
+      "sha256": "b0c32613db8ca8383a5b9329402a579bb34dda917a92f49501530bee3e42d6a6",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 6547715,
+      "uncompressed_sha256": "12d9ae5d97cdc40755d0002d2858cfe6faade58c45515ec764c0fbbbf5bfd7a6"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/inventory.json.gz",
+      "bytes": 3024,
+      "sha256": "792b45b6c43f57b8f06ecb1c166142bdcea4de5e6d26bb36710f29f1b051662c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9821,
+      "uncompressed_sha256": "b2a5e94da12fdc4024737ac3f061a5aa26acc327e6fab141455755ac71ce50d5"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/membership-metrics.jsonl.gz",
+      "bytes": 621081,
+      "sha256": "55338f9945b71072e386903884e9598c37f76ee6491d84a5ebda6ffca1bc3b27",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 9912837,
+      "uncompressed_sha256": "c59c19fd1639454c67811880cc63237fd5353049cd69a82c8a3c13f5e57578e8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/publication.json",
+      "bytes": 834,
+      "sha256": "e93cf2bf662276776575149b7d72bf80d2cb8526e1abda57edb8b5e02e910c32",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/summary.json",
+      "bytes": 1356,
+      "sha256": "2a9b8bf804a240afbf66fc6cc0d91c426d0070aeca7c80c7ade7ab51ab467596",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-00.jsonl.gz",
+      "bytes": 524051,
+      "sha256": "1b17ccea6e51eebb7f8f77dca33de2737571f9baa1dac5c0b0b0f977e9917c23",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8385661,
+      "uncompressed_sha256": "c5c274ba1628f9e0718180f63fc13a25fab85d0b5432c661a3f872a039795571"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-01.jsonl.gz",
+      "bytes": 528545,
+      "sha256": "977d8e521b092203c09055074f457040b8588ca47e1208823330431c683d8d22",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8387399,
+      "uncompressed_sha256": "13fb1f7fdbd957a5a11171fcf972101cb3c15035f93f83af8b5f4270ea958275"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-02.jsonl.gz",
+      "bytes": 340998,
+      "sha256": "6882787d0c9b73cdff55221ff8f38159464588c9b5144168a78824b8c2c557fa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 5420416,
+      "uncompressed_sha256": "ea223ce885d8e7e6236ada68a5d5386b7f327a9546888134d343ac444d4f99b2"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/inventory.json.gz",
+      "bytes": 2728,
+      "sha256": "efded5a65721ede853816459495cf718c5a88a4a8cfb7ff6326e2be1f790f174",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 8841,
+      "uncompressed_sha256": "2672c80fbfe68ce86349e79c5d21239ae6d60775e4240c57b063532ee630fa55"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/membership-metrics.jsonl.gz",
+      "bytes": 285100,
+      "sha256": "f8895b532a92746571446b6c51b939f0b88f84f819fe60bc970cf43d11e11a5c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 4541416,
+      "uncompressed_sha256": "b3cfe1fbbfd5959a88df7c7ce856cefc3566e40b8d467a99af60c9ae0963deef"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/publication.json",
+      "bytes": 833,
+      "sha256": "657e8693eca70c9c0c488c5972fde5a5584470add79e0fee902a96026f2eaedd",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/summary.json",
+      "bytes": 1339,
+      "sha256": "256f9a1202982847a74260a8a0840b6962ad5ef9c8ef18f4f7d6f30904e7a613",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/contract-controls.json",
+      "bytes": 1513,
+      "sha256": "8375fa0f5d651f2400fee52a08c86599f51fbd3f9a32f71d696b20f8095fdd98",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/inventory.json.gz",
+      "bytes": 1031,
+      "sha256": "61932b38e5858c4d9847b51e6444e40da391ab75899915449a4edf12aaee282a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 3258,
+      "uncompressed_sha256": "fbd0a043b79c5cea32fbe018fdff07601871a6fa72b7b9d3db2b1430e66274e7"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/io-controls.json",
+      "bytes": 436,
+      "sha256": "5035b3e2c5ac0055f58adb3e9c8fcc45d1034e35ad709b113f47860dca8c18f7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/negative-control.json",
+      "bytes": 240,
+      "sha256": "3a108561747941098fd9d61c3941297ed700178f0f301082a66aca8c1ce29063",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/positive-control.json",
+      "bytes": 196,
+      "sha256": "8e735b6d6ca8bc5261cd61ee125472b6e9a1a98c8fc4fc1f9c590013ba38378b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/publication.json",
+      "bytes": 662,
+      "sha256": "75a7910f366271518ef51bf6db09536cf780545a8cdf68adb66ef1d15bb25f47",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/reproducibility.json",
+      "bytes": 1092,
+      "sha256": "2916503a01defe8f44c27d92606ff593a09c0e8397347c72525e6eb7be335eb1",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/contract-controls.json",
+      "bytes": 1513,
+      "sha256": "8375fa0f5d651f2400fee52a08c86599f51fbd3f9a32f71d696b20f8095fdd98",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/inventory.json.gz",
+      "bytes": 1031,
+      "sha256": "3d4c195dd8bc541e7500888926c19a79e4c46e7d1df0880e002d1a59ef3e8b34",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 3258,
+      "uncompressed_sha256": "5b51ec55a71da5d6cb474634cb7b6dd67dfe0c8ca637609e337b2dd33e33d082"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/io-controls.json",
+      "bytes": 436,
+      "sha256": "5035b3e2c5ac0055f58adb3e9c8fcc45d1034e35ad709b113f47860dca8c18f7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/negative-control.json",
+      "bytes": 240,
+      "sha256": "3a108561747941098fd9d61c3941297ed700178f0f301082a66aca8c1ce29063",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/positive-control.json",
+      "bytes": 196,
+      "sha256": "8e735b6d6ca8bc5261cd61ee125472b6e9a1a98c8fc4fc1f9c590013ba38378b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/publication.json",
+      "bytes": 662,
+      "sha256": "e6d064ac3fecb85b86fec88bb0c2924ed4398a2a438da0347ca35e1f9ceb2ce3",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/reproducibility.json",
+      "bytes": 1092,
+      "sha256": "2916503a01defe8f44c27d92606ff593a09c0e8397347c72525e6eb7be335eb1",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/io-control-97fc024922354cf08f56be53117035cb/inventory.json.gz",
+      "bytes": 354,
+      "sha256": "79459e3a9128cef23ff623ecb84c665fdafd74dfb026a98cf4fb565b64f28c88",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 591,
+      "uncompressed_sha256": "4a2c0a538d489e543f885dd0206aa8f6e72bfef11cd0c17298dc3d97cb69b779"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/io-control-97fc024922354cf08f56be53117035cb/publication.json",
+      "bytes": 488,
+      "sha256": "4282b1164ab73637af20ef26d7dbcf8c5fee5f1b5d768743e9b744d3170b1d92",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/io-control-97fc024922354cf08f56be53117035cb/tiny.json",
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/pair-readback.json",
+      "bytes": 1129,
+      "sha256": "cac40039e5d5942a31f68e0610b7c6e6368217c561cc3b01c05c6dde2c83ffaf",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/inventory.json.gz",
+      "bytes": 2225,
+      "sha256": "8f2c7c9c1af9909551cb6ca18e69b4e173690adf752a681aa7a41ab99111f860",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 7514,
+      "uncompressed_sha256": "cf8334e34f7efda1140cbd40c0926bd39bdf7d5369d4e0c17470763879943f80"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/publication.json",
+      "bytes": 622,
+      "sha256": "89623e6bc6b6d7ca54b64c3ea5661539f3f7f1a453e4706de4e0d1e29143ece1",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "bytes": 18639,
+      "sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.md",
+      "bytes": 694,
+      "sha256": "641c469c731edd48500017c94ec697187cd744c66807e61361e37de0ca3197ef",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/inventory.json.gz",
+      "bytes": 2226,
+      "sha256": "a6e1b8c2abeded3015af9997b9b4e056243d38bcd48b9822bead38d9dd56c37b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 7514,
+      "uncompressed_sha256": "0363fc3897da1cd35d0e8673b40c3f23d72adc25b1d1c89c18822b6e4987220b"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/publication.json",
+      "bytes": 622,
+      "sha256": "7708acc577ab6f0caa5ea7dd416abacfc0600698681bd175cdb33bc83fd32a07",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/report.json",
+      "bytes": 18639,
+      "sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/report.md",
+      "bytes": 694,
+      "sha256": "641c469c731edd48500017c94ec697187cd744c66807e61361e37de0ca3197ef",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/inventory.json.gz",
+      "bytes": 1607,
+      "sha256": "387d871827b011fce0450bcce97ae8df4ab16bbc4143726e88bf57e162c8591e",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 4747,
+      "uncompressed_sha256": "a84abcf589a498bd31d39d6c40640baece002b0fb47be59b008ffee9d5843f8f"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/publication.json",
+      "bytes": 822,
+      "sha256": "0d7905e9f260599cb9d1a4aa8c328ccecd694882a5732a670da9971375b33ca2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/scope.jsonl.gz",
+      "bytes": 11159162,
+      "sha256": "94d3b9521c0f5fdbb3e11dec6f72a964c364130c8607dc341e25a0eef5fdd654",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 25887056,
+      "uncompressed_sha256": "b4aa07b0fb8f08b4c2c152e3710120a238755d16283356868107df3e49bf5f15"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-two/inventory.json.gz",
+      "bytes": 1607,
+      "sha256": "a10afdb4dbaa1a53a284e321c8dd461f7ad2f34092da259b742389dfb7b599e1",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 4747,
+      "uncompressed_sha256": "dd8aae2d0c393f4df57725528f99263bbe4a5c0619ed628c55649291aa87fa74"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-two/publication.json",
+      "bytes": 822,
+      "sha256": "43bf248fda9895226a2f38308dfa3529bb5793999cb5ad8a074e8e0b67784412",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-two/scope.jsonl.gz",
+      "bytes": 11159162,
+      "sha256": "94d3b9521c0f5fdbb3e11dec6f72a964c364130c8607dc341e25a0eef5fdd654",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 25887056,
+      "uncompressed_sha256": "b4aa07b0fb8f08b4c2c152e3710120a238755d16283356868107df3e49bf5f15"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-candidate-funnel",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Bounded metadata scope/leaf/report preparation; custom multi-vintage whole-byte adapter provides declared prospective data/project-code/output bounds, exclusive publication and full readback. It performs no GIS/source science.",
+      "software": "Python3.12 stdlib and Git; exact project code/execution commits in every stage inventory",
+      "units": "original candidate counts and data/project-code/output bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "candidate-component_count",
+      "value": 95173,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-unresolved",
+      "value": 95171,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-accepted_classifications",
+      "value": 2,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-delivered",
+      "value": 0,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-fully_integrated",
+      "value": 0,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-historical_555_witness",
+      "value": 555,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-implemented",
+      "value": 2,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-land_plus_unique_route_1005",
+      "value": 1005,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-nordic_geometric_mismatch_observation",
+      "value": 4,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-numerical_diagnosis",
+      "value": 26276,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-provisional_land_or_water",
+      "value": 42823,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-repair_ready",
+      "value": 2,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-source_comparison",
+      "value": 57785,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    },
+    {
+      "id": "candidate-unique_source_witness_1391",
+      "value": 1391,
+      "unit": "original candidates",
+      "vintage": "archived",
+      "evaluation_commit": "436574ba9769e02f779d6ec8d8423dbfa1e520e8",
+      "input_sha256": "66ea6f04bd90afa4965a670bb7bc7ccd6681aae9bc45f4d9989ddc5e59a6f083",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "candidate-component_count",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/component_count"
+    },
+    {
+      "metric_id": "candidate-unresolved",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/classes/unresolved"
+    },
+    {
+      "metric_id": "candidate-accepted_classifications",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/accepted_classifications"
+    },
+    {
+      "metric_id": "candidate-delivered",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/delivered"
+    },
+    {
+      "metric_id": "candidate-fully_integrated",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/fully_integrated"
+    },
+    {
+      "metric_id": "candidate-historical_555_witness",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/historical_555_witness"
+    },
+    {
+      "metric_id": "candidate-implemented",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/implemented"
+    },
+    {
+      "metric_id": "candidate-land_plus_unique_route_1005",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/land_plus_unique_route_1005"
+    },
+    {
+      "metric_id": "candidate-nordic_geometric_mismatch_observation",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/nordic_geometric_mismatch_observation"
+    },
+    {
+      "metric_id": "candidate-numerical_diagnosis",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/numerical_diagnosis"
+    },
+    {
+      "metric_id": "candidate-provisional_land_or_water",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/provisional_land_or_water"
+    },
+    {
+      "metric_id": "candidate-repair_ready",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/repair_ready"
+    },
+    {
+      "metric_id": "candidate-source_comparison",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/source_comparison"
+    },
+    {
+      "metric_id": "candidate-unique_source_witness_1391",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "json_pointer": "/counts/unique_source_witness_1391"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "candidate-component_count",
+      "value": 95173,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-unresolved",
+      "value": 95171,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-accepted_classifications",
+      "value": 2,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-delivered",
+      "value": 0,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-fully_integrated",
+      "value": 0,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-historical_555_witness",
+      "value": 555,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-implemented",
+      "value": 2,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-land_plus_unique_route_1005",
+      "value": 1005,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-nordic_geometric_mismatch_observation",
+      "value": 4,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-numerical_diagnosis",
+      "value": 26276,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-provisional_land_or_water",
+      "value": 42823,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-repair_ready",
+      "value": 2,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-source_comparison",
+      "value": 57785,
+      "unit": "original candidates"
+    },
+    {
+      "metric_id": "candidate-unique_source_witness_1391",
+      "value": 1391,
+      "unit": "original candidates"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Complete95173 original IDs are conserved; provisional observations are distinct from two narrowly approved implemented proposals and zero fully integrated/delivered repairs.",
+      "status": "supported",
+      "source_ids": [
+        "prior-global-observations"
+      ]
+    },
+    {
+      "text": "95171 physical classifications and final worldwide repair/integration remain unresolved; earlier source preparation is not globally phase-qualified.",
+      "status": "unresolved",
+      "source_ids": [
+        "prior-global-observations"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "validation": [
+    {
+      "method_id": "bounded-candidate-funnel",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/positive-control.json"
+    },
+    {
+      "method_id": "bounded-candidate-funnel",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/negative-control.json"
+    },
+    {
+      "method_id": "bounded-candidate-funnel",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/reproducibility.json"
+    }
+  ],
+  "record_checks": [],
+  "rendered_tables": [],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/bounded_io.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/catalog.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/control_runner.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-06.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-07.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-08.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-09.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-01.csv.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-02.csv.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-03.csv.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-04.csv.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-05.csv.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-06.csv.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-07.csv.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/control-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/direct-source-preparation.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/direct-source-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1295-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1394-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1431-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1481-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/original-source-catalog.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/parent-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/pins.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/scope-pin.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/producer.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/contract-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/history.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/io-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/validation/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-01/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-02/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-03/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-04/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-05/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-06/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-one-07/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-03.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-04.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-05.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-00.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-01.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-02.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/membership-metrics.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/contract-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/io-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-one/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/contract-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/io-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/controls-two/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/io-control-97fc024922354cf08f56be53117035cb/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/io-control-97fc024922354cf08f56be53117035cb/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/io-control-97fc024922354cf08f56be53117035cb/tiny.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/pair-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-one/report.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/report-two/report.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/scope.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-two/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-two/scope.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "At each original execution vintage, retain or create the ordinary owned vintages directory first; source and output namespaces remain distinct. See README.md for full immutable predecessor bindings.",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/producer.py scope --head 99235a447eb7f0e2af77b15dabee3be04f78d869 --destination FRESH_SCOPE_NAME",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/producer.py leaf --head 431b4a1c --scope-head 7b95cfc2d811cc39697f9090ffb18c8d5d5b91cc --scope-path coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/scope.jsonl.gz --index 1 --destination FRESH_LEAF_NAME (replace abbreviated head by the full execution_commit in the existing leaf publication; repeat indices1\u20137)",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/producer.py parent --head 436574ba9769e02f779d6ec8d8423dbfa1e520e8 --destination FRESH_REPORT_NAME",
+    "python3.12 -B coordination/engineering/global-gap-candidate-funnel-20261008/control_runner.py FRESH_CONTROL_NAME"
+  ]
+}
