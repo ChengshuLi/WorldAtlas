@@ -14,7 +14,7 @@ SCRIPT_REL=research/geography/arctic-seven-source-fit-20261008/native_archive_ex
 TOOLS_JSON=research/geography/arctic-seven-source-fit-20261008/native-tools-lock.json
 TOOLS_SHELL=research/geography/arctic-seven-source-fit-20261008/native-tools-lock.sh
 VINTAGES=$PACKET/vintages
-RUN=$VINTAGES/r2-native-extract
+RUN=$VINTAGES/r3-native-extract
 CAP=268435456
 DECODED=162109440
 MEMBER_BYTES=2756674
@@ -75,7 +75,7 @@ TOOLS_JSON_BYTES=$(git cat-file -s "$BASE:$TOOLS_JSON")
 TOOLS_SHELL_BYTES=$(git cat-file -s "$BASE:$TOOLS_SHELL")
 # Code and lock bytes are read from Git and from the materialized checkout.
 CODE_BYTES=$((SCRIPT_BYTES * 3 + TOOLS_JSON_BYTES * 2 + TOOLS_SHELL_BYTES * 3))
-PLAN_BYTES=$(( $(wc -c < "$PLAN" | tr -d ' ') * 4 ))
+PLAN_BYTES=$(( $(wc -c < "$PLAN" | tr -d ' ') * 5 ))
 PROSPECTIVE=$((INPUT_BYTES + CODE_BYTES + PLAN_BYTES + NATIVE_TOOLS_TOTAL_BYTES + DECODED + SCRATCH_RESERVE + OUTPUT_RESERVE + RECEIPT_RESERVE))
 if (( PROSPECTIVE > CAP )); then
   echo "native extraction prospective charge exceeds 256 MiB: $PROSPECTIVE" >&2

@@ -4,7 +4,7 @@ This packet answers the bounded source-fit question in issue #1481 for exactly t
 
 ## Reproduction
 
-The files at the packet root are the preserved earlier vintage. Their `execution-budget.json` and phase outputs predate the admission controls described here and do not constitute a qualified rerun. New phase products are written only to fresh `vintages/r2-*` directories.
+The files at the packet root are the preserved earlier vintage. Their `execution-budget.json` and phase outputs predate the admission controls described here and do not constitute a qualified rerun. New phase products are written only to fresh `vintages/r3-*` directories.
 
 The admitted rerun is tied to an immutable code commit. On the exact Python 3.12.14 / Shapely 2.1.2 environment recorded by `runtime-lock.json`, first commit the phase runner, its source bridge, phase scripts, native tool lock, runtime lock, and lock builders. Then use that exact commit as `EXECUTION_COMMIT` below. The plan builder verifies that all materialized source and code files match the commit and that the issue-pinned inputs retain their original hashes. It creates `phase-plan.json` once; the plan is immutable for the run. If the runtime or code changes, preserve the plan and start a separately reviewed execution vintage.
 
