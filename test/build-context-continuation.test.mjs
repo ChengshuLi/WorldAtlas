@@ -74,13 +74,14 @@ import os from 'node:os';
 import path from 'node:path';
 test('original replay awaits real child, retains binary output and rejects actual failures',async()=>{
  const directory=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'1295-replay-control-')));
- const runner=path.join(directory,'runner.mjs');
+ const runner=path.join(directory,'runner.mjs'),outerArgs=[...process.execArgv];
  try{
-  await fs.writeFile(runner,`import fs from 'node:fs';if(process.argv.length!==2||process.cwd()!==process.env.WORLDATLAS_PACKAGE_STAGE)process.exit(19);setTimeout(()=>process.stdout.write(Buffer.from([0,255,195,169])),80);`);
+  await fs.writeFile(runner,`import fs from 'node:fs';fs.writeFileSync('actual-child-argv.json',JSON.stringify({execArgv:process.execArgv,argv:process.argv,cwd:process.cwd(),stage:process.env.WORLDATLAS_PACKAGE_STAGE}));if(process.argv.length!==2||JSON.stringify(process.execArgv)!==JSON.stringify(['--max-old-space-size=768'])||process.cwd()!==process.env.WORLDATLAS_PACKAGE_STAGE)process.exit(19);setTimeout(()=>process.stdout.write(Buffer.from([0,255,195,169])),80);`);
   let ticks=0;const timer=setInterval(()=>ticks++,5);timer.unref();let complete=false;
   const pending=replayOriginalV1(runner,directory).then(raw=>{complete=true;return raw;});
   await new Promise(resolve=>setTimeout(resolve,20));assert.equal(complete,false);
   const raw=await pending;clearInterval(timer);assert(ticks>0);assert(Buffer.isBuffer(raw));assert.deepEqual(raw,Buffer.from([0,255,195,169]));
+  const actualLaunch=JSON.parse(await fs.readFile(path.join(directory,'actual-child-argv.json')));assert.deepEqual(actualLaunch.execArgv,['--max-old-space-size=768']);assert.deepEqual(actualLaunch.argv,[process.execPath,runner]);assert.equal(actualLaunch.cwd,directory);assert.equal(actualLaunch.stage,directory);assert.deepEqual(process.execArgv,outerArgs,'Replay does not change outer runtime arguments');
   await fs.writeFile(runner,`process.stderr.write('literal failure');process.exit(23);`);
   await assert.rejects(replayOriginalV1(runner,directory),error=>error.code===23&&Buffer.isBuffer(error.stderr)&&error.stderr.toString()==='literal failure');
   await fs.writeFile(runner,`process.kill(process.pid,'SIGTERM');`);

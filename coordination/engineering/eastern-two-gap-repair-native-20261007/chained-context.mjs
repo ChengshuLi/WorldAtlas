@@ -7,9 +7,9 @@ import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
 import{isDeepStrictEqual,promisify}from'node:util';
 import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs';
 const executeFile=promisify(execFile);
-// Preserve the original replay boundary while allowing the parent event loop to run.
+// Preserve the replay boundary; bound only the original child old-space, not the plain outer Node.
 export async function replayOriginalV1(runner,image){
- const {stdout}=await executeFile(process.execPath,[runner],{cwd:image,env:{...process.env,WORLDATLAS_PACKAGE_STAGE:image},maxBuffer:32*1024*1024,encoding:'buffer'});
+ const {stdout}=await executeFile(process.execPath,['--max-old-space-size=768',runner],{cwd:image,env:{...process.env,WORLDATLAS_PACKAGE_STAGE:image},maxBuffer:32*1024*1024,encoding:'buffer'});
  return stdout;
 }
 const sha=b=>createHash('sha256').update(b).digest('hex');
@@ -133,7 +133,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const migration=validateContextMigration({original:before.rows,migrated:after,candidates,predecessorRelease:predecessor,release,migrationManifestFile:path.join(root,stage.geometry_manifest.path)});
  assert.equal(migration.owner_sha256,prior.migration.owner_sha256);const {geometryValidation,...compact}=migration;
  return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,
-  original_v1_replay:{actual_command:command,explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
+  original_v1_replay:{actual_command:command,child_invocation:{executable:process.execPath,exec_argv:['--max-old-space-size=768'],cwd:image,max_buffer_bytes:32*1024*1024,timeout_ms:0,kill_signal:'SIGTERM',old_space_is_not_rss_cap:true},explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
    advertised_commit_matches_validator_closure:false,receipt_sha256:sha(priorRaw),receipt:prior,input_image_index_sha256:stage.prior_image.sha256},
   physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_transport:{index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:budget.snapshot(),scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
 }
