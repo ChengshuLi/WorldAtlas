@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "pid": 59952,
+  "process_group": 59952,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+    "run-twelve"
+  ],
+  "exit_code": 0,
+  "natural_terminal": true,
+  "owned_processes_absent_after_run": true,
+  "stop_reason": null,
+  "elapsed_seconds": 34.546,
+  "peak_sampled_group_rss_bytes": 599408640,
+  "final_sampled_group_rss_bytes": 13418496,
+  "rss_cap_bytes": 805306368,
+  "wall_deadline_seconds": 900,
+  "monitoring": "sampled/cooperative, not kernel-enforced",
+  "stdout": "{\"status\": \"measured\", \"component_count\": 13, \"physical_relations\": 25, \"native_record_pairs\": 143, \"admin_neighbor_pairs\": 13, \"qualifying_candidates\": 0, \"output_bytes\": 709574, \"output_manifest_sha256\": \"25d2cb9b522ddbde3511e16f47d5179687ff642545cf2287f68229fc920bfcaa\", \"published_outputs\": [{\"path\": \"research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-twelve/measurement.json\", \"bytes\": 708930, \"sha256\": \"8fef16c4b8b5dad8d50d12de50b466af8ee8c424ca5498c8d9f914872d5479d1\", \"hash_kind\": \"file-bytes\"}, {\"path\": \"research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-twelve/proposal-geometry.geojson\", \"bytes\": 43, \"sha256\": \"6d6b80a88dc60e65991d34024fe7cf2eb86531ffba8b75efb697fe0a601f2799\", \"hash_kind\": \"file-bytes\"}, {\"path\": \"research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-twelve/proposal-gain-geometry.geojson\", \"bytes\": 43, \"sha256\": \"6d6b80a88dc60e65991d34024fe7cf2eb86531ffba8b75efb697fe0a601f2799\", \"hash_kind\": \"file-bytes\"}, {\"path\": \"research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-twelve/output-manifest.json\", \"bytes\": 558, \"sha256\": \"25d2cb9b522ddbde3511e16f47d5179687ff642545cf2287f68229fc920bfcaa\", \"hash_kind\": \"file-bytes\"}], \"publication_receipt\": \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-twelve/publication.json\", \"controls_passed\": 6}\n",
+  "stderr": ""
+}

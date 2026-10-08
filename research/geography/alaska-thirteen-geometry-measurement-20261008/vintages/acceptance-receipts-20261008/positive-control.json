@@ -1,0 +1,85 @@
+{
+  "kind": "positive-control",
+  "measurement_sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5",
+  "method_id": "alaska-thirteen-full-simplified-atlas-native-measurement-v1",
+  "outcome": "passed",
+  "positive_controls": [
+    {
+      "candidate_intersection_raw_square_degrees": 1.933e-06,
+      "component_id": "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+      "expected": "positive-area candidate/full-county intersection",
+      "kind": "positive-control",
+      "passed": true,
+      "target_source_id": "52423323B46246640861022"
+    },
+    {
+      "candidate_retained": true,
+      "coordinates": {
+        "candidate": {
+          "coordinates": [
+            [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                2.0,
+                0.0
+              ],
+              [
+                2.0,
+                1.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                1.0,
+                0.0
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "old_target": {
+          "coordinates": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        }
+      },
+      "expected": "exact adjacent-square union preserves the complete old target and adds the full candidate",
+      "gain_equals_candidate_minus_old_target": true,
+      "input_class": "fixed fixture only; does not qualify any actual Alaska candidate or batch",
+      "kind": "positive-control-exact-coordinate-union-fixture",
+      "old_target_preserved": true,
+      "old_target_valid": true,
+      "passed": true,
+      "positive_gain_area_raw_square_degrees_exact": 1.0,
+      "union_valid": true
+    }
+  ],
+  "version": 1
+}

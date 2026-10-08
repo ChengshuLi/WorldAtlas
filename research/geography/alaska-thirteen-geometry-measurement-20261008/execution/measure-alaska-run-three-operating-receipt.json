@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "pid": 71957,
+  "process_group": 71957,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
+    "--output-dir",
+    "results/run-three"
+  ],
+  "exit_code": 0,
+  "natural_terminal": true,
+  "owned_processes_absent_after_run": true,
+  "stop_reason": null,
+  "elapsed_seconds": 15.607,
+  "peak_sampled_group_rss_bytes": 605700096,
+  "final_sampled_group_rss_bytes": 12386304,
+  "rss_cap_bytes": 805306368,
+  "wall_deadline_seconds": 900,
+  "monitoring": "sampled/cooperative, not kernel-enforced",
+  "stdout": "{\"status\": \"measured\", \"component_count\": 13, \"physical_relations\": 25, \"native_record_pairs\": 143, \"admin_neighbor_pairs\": 13, \"qualifying_candidates\": 0, \"output_bytes\": 492207, \"output_manifest_sha256\": \"268f965891a3fcd458733ee7fa92029b794190e8cffe9b777bceb183fb7b6c21\", \"controls_passed\": 4}\n",
+  "stderr": ""
+}

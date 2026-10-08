@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "status": "interrupted-diagnostic-no-result",
+  "operating_receipt_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/execution/alaska-all-unions-diagnostic-operating-receipt.json",
+  "operating_receipt_sha256": "ae3552de8ea9c0ec167652ecc48ab08d09b24042905ddf0f565bb2e049ceb370",
+  "observed_exit_code": -15,
+  "runner_reported_natural_terminal": true,
+  "corrected_natural_terminal": false,
+  "corrected_stop_reason": "external_signal_SIGTERM",
+  "external_intervention": {
+    "signal": "SIGTERM",
+    "reason": "the diagnostic completed its geometry calculations but blocked while writing more than the 65,536-byte stdout pipe capacity; the parent runner reads stdout only after child termination",
+    "sent_to_pid": 66487,
+    "stdout_bytes_captured": 65536,
+    "stdout_json_complete": false
+  },
+  "qualification": "none; truncated diagnostic output is not evidence of any candidate passing or failing"
+}

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "status": "byte-identical",
+  "whole_native_member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+  "whole_native_member_bytes": 95809336,
+  "records_authenticated_per_run": 188612,
+  "selected_record_count": 11,
+  "run_one": {
+    "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/records.bin",
+    "bytes": 7168404,
+    "sha256": "9f4833fdac3cbebb9e60d413f469570453b1bad177892b9227702125728b99d5"
+  },
+  "run_two": {
+    "receipt_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/execution/native-extraction-run-two.json",
+    "original_scratch_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/.scratch/native-selected-replay/records.bin",
+    "bytes": 7168404,
+    "sha256": "9f4833fdac3cbebb9e60d413f469570453b1bad177892b9227702125728b99d5",
+    "fresh_destination": true,
+    "whole_file_verified": true
+  },
+  "scratch_cleanup": {
+    "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/.scratch/native-selected-replay",
+    "bytes_removed": 7182895,
+    "removed_after_byte_equality": true
+  }
+}
