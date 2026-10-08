@@ -1,0 +1,83 @@
+{
+  "compared_files": [
+    {
+      "bytes": 1011527,
+      "path": "boundary-line-overlays.json",
+      "sha256": "0af9f512b1617042496a46e2aab64a61b442b51cd08493814e6862684455a4ca"
+    },
+    {
+      "bytes": 1085,
+      "path": "component-01-coverage-summary.json",
+      "sha256": "b1b75db7df61df26e594e10991e718811f3870d6744b5eb431ff949e55a71497"
+    },
+    {
+      "bytes": 25656,
+      "path": "component-01-polygon-overlays.json",
+      "sha256": "e907d9e5c374e4ef6c8d09a903ac9dc95bbc1958e73d905577135f540566571f"
+    },
+    {
+      "bytes": 4732,
+      "path": "component-02-coverage-summary.json",
+      "sha256": "67620029a194c09885f85b124e1463cd573f8624820feea17522544a9f3d752f"
+    },
+    {
+      "bytes": 43119,
+      "path": "component-02-polygon-overlays.json",
+      "sha256": "c151e394f881b9387ee83b7e1b93d2ab5bd8616695d56c709e4b0c938d8b021a"
+    },
+    {
+      "bytes": 3702,
+      "path": "component-03-coverage-summary.json",
+      "sha256": "c5c3de5070bb68af676690fa89a88e7a2d20bc5a283a7a4c89cd7ea8809fff9b"
+    },
+    {
+      "bytes": 41455,
+      "path": "component-03-polygon-overlays.json",
+      "sha256": "801de2da2c53c879921ab77d5b4acf2611d2b0a80b45fe0eaf9a6c1e21de0297"
+    },
+    {
+      "bytes": 10495,
+      "path": "component-04-coverage-summary.json",
+      "sha256": "925c74628530fa39dfa43ed0d4fc13f410e674284697d0f4caac6c9cf1c459c9"
+    },
+    {
+      "bytes": 84985,
+      "path": "component-04-polygon-overlays.json",
+      "sha256": "cb2cb1a9e7802d90a903e0598bb45269f674cd4b0740fb2f825cc94cee817129"
+    },
+    {
+      "bytes": 20851,
+      "path": "identity-and-vintage.json",
+      "sha256": "e09090a3df01db29d136eae652689143e9921c7b1ddd9446c5c440ab6219fba2"
+    },
+    {
+      "bytes": 3246426,
+      "path": "identity-geometry-comparisons.json",
+      "sha256": "f77ee817f1a849dfbdce08435a7531ab72071734991d6d15395d205a303fc4c4"
+    },
+    {
+      "bytes": 3458,
+      "path": "source-vintage-crs-and-terms-assessment.json",
+      "sha256": "a7afc006a08254e5869e20d3300d27d2545b9085d86ee5dd291c3dd6f535f7e9"
+    },
+    {
+      "bytes": 26762,
+      "path": "summary.json",
+      "sha256": "e3f6cc791141ac6a4a025db834b367054317bc36cc9f68bb095cc4e855e8bbcb"
+    }
+  ],
+  "corrected_control_sha256": "905a57de703ee82157b248eba458b3ffcbe590b6cd24ec0032237bbe145715d6",
+  "kind": "reproducibility",
+  "limits": [
+    "Execution times are recorded separately; identical science result files are compared byte-for-byte."
+  ],
+  "method_id": "official-source-geography-v1",
+  "outcome": "passed",
+  "producer_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+  "run_one": "runs/run-01",
+  "run_one_sha256": "7f6fc0beb82fff8038d7d5aee1de8d23ef625ef7cd589e21b6e6610e6ca71ca6",
+  "run_two": "runs/run-02",
+  "run_two_sha256": "7f6fc0beb82fff8038d7d5aee1de8d23ef625ef7cd589e21b6e6610e6ca71ca6",
+  "source_capture_index_sha256": "f63611c528ff85074b1e527e95d1647778d06473cb663b10fd1be5320f377f6d",
+  "version": 1
+}
