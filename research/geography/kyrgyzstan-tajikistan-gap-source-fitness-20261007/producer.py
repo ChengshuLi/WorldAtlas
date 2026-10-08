@@ -29,12 +29,18 @@ MAX_INPUT_BYTES = 256 * 1024 * 1024
 MAX_OUTPUT_BYTES = 12 * 1024 * 1024
 MAX_RSS_BYTES = 768 * 1024 * 1024
 MAX_SECONDS = 1200
-MIN_SYSTEM_FREE_PERCENT = 40
+HOST_MEMORY_RESERVE_BYTES = 512 * 1024 * 1024
+EXTERNAL_RSS_STOP_BYTES = 640 * 1024 * 1024
+EXTERNAL_RSS_MARGIN_BYTES = MAX_RSS_BYTES - EXTERNAL_RSS_STOP_BYTES
+EXTERNAL_RSS_SAMPLE_SECONDS = 0.1
+SUPERVISION_ENV = "WORLDATLAS_SOURCE_FITNESS_SUPERVISOR"
+SUPERVISION_ENV_VALUE = "process-tree-rss-v1"
 WORKTREE_CAP_BYTES = 1024 * 1024 * 1024
 SCRATCH_CAP_BYTES = 512 * 1024 * 1024
 FINAL_EVIDENCE_CAP_BYTES = 512 * 1024 * 1024
 DISK_RESERVATION_BYTES = WORKTREE_CAP_BYTES + SCRATCH_CAP_BYTES + FINAL_EVIDENCE_CAP_BYTES
 MAX_CONTROL_OUTPUT_BYTES = 1 * 1024 * 1024
+MAX_EXTERNAL_SUPERVISION_BYTES = 6 * 1024 * 1024 + 36 * 1024
 RUNTIME_BUNDLE = OWNED + "inputs/runtime/runtime-bundle.tar.gz"
 _RUNTIME_TEMP_DIR = None
 CONTACTS = {
@@ -470,22 +476,52 @@ def _directory_bytes(path):
     return total
 
 
+def fixed_memory_snapshot():
+    """Return exact macOS VM page counts; inactive/speculative pages are estimates, not guarantees."""
+    snapshot_started = time.monotonic()
+    physical_raw = subprocess.check_output(["sysctl", "-n", "hw.memsize"], text=True).strip()
+    if not physical_raw.isdigit():
+        raise ValueError("Could not read the physical-memory byte count")
+    vm = subprocess.check_output(["vm_stat"], text=True, stderr=subprocess.STDOUT)
+    page_match = re.search(r"page size of ([0-9]+) bytes", vm)
+    if page_match is None:
+        raise ValueError("Could not read the VM page size")
+    page_size = int(page_match.group(1))
+    counts = {}
+    for label in ("Pages free", "Pages inactive", "Pages speculative"):
+        match = re.search(r"^" + re.escape(label) + r":\s*([0-9,]+)", vm, re.MULTILINE)
+        if match is None:
+            raise ValueError(f"Could not read the VM statistic: {label}")
+        counts[label] = int(match.group(1).replace(",", ""))
+    free_bytes = counts["Pages free"] * page_size
+    candidate_bytes = sum(counts.values()) * page_size
+    return {
+        "physical_memory_bytes": int(physical_raw),
+        "snapshot_elapsed_seconds": time.monotonic() - snapshot_started,
+        "page_size_bytes": page_size,
+        "page_counts": {key: counts[key] for key in sorted(counts)},
+        "free_page_bytes": free_bytes,
+        "free_inactive_speculative_candidate_bytes": candidate_bytes,
+        "candidate_includes_reclaimable_pages": True,
+        "candidate_is_guaranteed_available_memory": False,
+    }
+
+
 def admit_run_capacity(repo, baseline, vintage, runtime_manifest, coordinated_window_id):
     """Admit RAM, disk and every output destination before constructing geometry."""
     if not isinstance(coordinated_window_id, str) or not re.fullmatch(r"[A-Za-z0-9._:-]{8,128}", coordinated_window_id):
         raise ValueError("An explicit coordinator-issued GIS memory-window ID is required")
-    pressure = subprocess.check_output(["memory_pressure"], text=True, stderr=subprocess.STDOUT)
-    match = re.search(r"System-wide memory free percentage:\s*(\d+)%", pressure)
-    if match is None:
-        raise ValueError("Could not measure system-wide free memory before GIS")
-    free_percent = int(match.group(1))
-    if free_percent < MIN_SYSTEM_FREE_PERCENT:
-        raise ValueError("System-wide free memory is below the GIS admission threshold")
+    memory = fixed_memory_snapshot()
+    required_candidate_bytes = MAX_RSS_BYTES + HOST_MEMORY_RESERVE_BYTES
+    candidate_bytes = memory["free_inactive_speculative_candidate_bytes"]
+    if candidate_bytes < required_candidate_bytes:
+        raise ValueError("Fixed-byte VM page-supply estimate is below the process cap plus host reserve")
     disk_free = shutil.disk_usage(repo).free
     if disk_free < DISK_RESERVATION_BYTES:
         raise ValueError("Free disk space is below the admitted worktree/scratch/evidence reserves")
     worktree_bytes = _directory_bytes(pathlib.Path(repo) / OWNED)
-    output_reserve = 2 * MAX_OUTPUT_BYTES + 2 * MAX_CONTROL_OUTPUT_BYTES + 1024 * 1024
+    output_reserve = (2 * MAX_OUTPUT_BYTES + 2 * MAX_CONTROL_OUTPUT_BYTES +
+                      2 * MAX_EXTERNAL_SUPERVISION_BYTES + 1024 * 1024)
     if worktree_bytes + output_reserve > WORKTREE_CAP_BYTES:
         raise ValueError("Packet plus maximum run/control outputs exceeds its worktree cap")
     evidence_bytes = _directory_bytes(pathlib.Path(repo) / OWNED / "vintages")
@@ -496,7 +532,7 @@ def admit_run_capacity(repo, baseline, vintage, runtime_manifest, coordinated_wi
     if scratch_reserve > SCRATCH_CAP_BYTES:
         raise ValueError("Captured runtime plus the scratch reserve exceeds the scratch cap")
     phase_bytes = sum(baseline.consumed.values())
-    if phase_bytes + MAX_OUTPUT_BYTES + 4096 > baseline.max_phase_bytes:
+    if phase_bytes + MAX_OUTPUT_BYTES + MAX_EXTERNAL_SUPERVISION_BYTES + 4096 > baseline.max_phase_bytes:
         raise ValueError("Complete input/runtime phase leaves insufficient room for the admitted run outputs")
     rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     rss_bytes = int(rss) if sys.platform == "darwin" else int(rss * 1024)
@@ -504,14 +540,20 @@ def admit_run_capacity(repo, baseline, vintage, runtime_manifest, coordinated_wi
         raise ValueError("Pre-GIS process RSS already exceeds its execution ceiling")
     return {
         "coordinated_window_id": coordinated_window_id,
-        "system_free_memory_percent": free_percent,
-        "minimum_system_free_memory_percent": MIN_SYSTEM_FREE_PERCENT,
+        "fixed_memory_snapshot": memory,
+        "estimated_page_supply_required_bytes": required_candidate_bytes,
+        "host_memory_reserve_bytes": HOST_MEMORY_RESERVE_BYTES,
         "pre_geometry_max_rss_bytes": rss_bytes,
         "process_rss_limit_bytes": MAX_RSS_BYTES,
+        "external_process_tree_rss_stop_bytes": EXTERNAL_RSS_STOP_BYTES,
+        "external_process_tree_rss_margin_bytes": EXTERNAL_RSS_MARGIN_BYTES,
+        "external_process_tree_rss_sample_seconds": EXTERNAL_RSS_SAMPLE_SECONDS,
         "phase_consumed_bytes_before_geometry": phase_bytes,
         "phase_byte_limit": baseline.max_phase_bytes,
         "output_bytes_per_run_limit": MAX_OUTPUT_BYTES,
+        "external_supervision_bytes_per_run_limit": MAX_EXTERNAL_SUPERVISION_BYTES,
         "two_run_output_reserve_bytes": 2 * MAX_OUTPUT_BYTES,
+        "two_run_supervision_reserve_bytes": 2 * MAX_EXTERNAL_SUPERVISION_BYTES,
         "two_control_output_reserve_bytes": 2 * MAX_CONTROL_OUTPUT_BYTES,
         "current_packet_bytes": worktree_bytes,
         "projected_worktree_bytes_with_outputs": worktree_bytes + output_reserve,
@@ -527,12 +569,16 @@ def admit_run_capacity(repo, baseline, vintage, runtime_manifest, coordinated_wi
         "destination_vintages": [
             "source-fitness-run-01", "source-fitness-run-02",
             "source-fitness-controls-01", "source-fitness-controls-02",
+            "process-supervision/source-fitness-run-01",
+            "process-supervision/source-fitness-run-02",
         ],
         "status": "admitted",
     }
 
 
 def run(repo, commit, vintage, coordinated_window_id):
+    if os.environ.get(SUPERVISION_ENV) != SUPERVISION_ENV_VALUE:
+        raise ValueError("Source overlays must run under the pinned external RSS supervisor")
     started = time.monotonic()
     baseline, evidence, contract_helpers, config = bootstrap(repo, commit, phase="overlay")
     if sum(baseline.consumed.values()) > MAX_INPUT_BYTES:

@@ -65,6 +65,91 @@ def read_run_outputs(repo, run_dir, baseline):
     return result
 
 
+def read_supervision_receipt(repo, source_run, run_summary_raw, baseline_commit):
+    run_name = pathlib.Path(source_run).name
+    root = pathlib.Path(repo) / OWNED / "vintages" / "process-supervision" / run_name
+    if root.is_symlink() or not root.is_dir():
+        raise ValueError("Externally supervised process receipt is missing")
+    for child in root.iterdir():
+        if child.is_symlink() or not child.is_file():
+            raise ValueError("Unsafe entry in process-supervision receipt")
+    publication_path = root / "publication.json"
+    if not publication_path.is_file() or publication_path.stat().st_size > 4096:
+        raise ValueError("Process-supervision publication receipt is missing or oversized")
+    publication = json.loads(publication_path.read_bytes())
+    records = publication.get("outputs")
+    expected = {"supervision.json", "stdout.txt", "stderr.txt", "rss-samples.jsonl"}
+    if publication.get("status") != "complete" or not isinstance(records, list):
+        raise ValueError("Process-supervision publication is incomplete")
+    by_path = {item.get("path"): item for item in records if isinstance(item, dict)}
+    if len(by_path) != 4 or set(by_path) != expected or len(records) != 4:
+        raise ValueError("Process-supervision publication has a non-exact output set")
+    if {path.name for path in root.iterdir()} != expected | {"publication.json"}:
+        raise ValueError("Process-supervision folder has unlisted or missing files")
+    bodies = {}
+    for name, item in by_path.items():
+        path = root / name
+        raw = path.read_bytes()
+        limit = (4 * 1024 * 1024 if name == "rss-samples.jsonl" else
+                 1 * 1024 * 1024 if name in ("stdout.txt", "stderr.txt") else 32768)
+        if len(raw) != item.get("bytes") or len(raw) > limit or producer.sha(raw) != item.get("sha256"):
+            raise ValueError("Process-supervision output differs from its publication descriptor")
+        baseline.admit("process-supervision:" + name, len(raw))
+        bodies[name] = raw
+    receipt = json.loads(bodies["supervision.json"])
+    samples = [json.loads(line) for line in bodies["rss-samples.jsonl"].splitlines() if line]
+    sampled_peak = max((x.get("process_tree_rss_bytes", -1) for x in samples), default=-1)
+    run_summary = json.loads(run_summary_raw)
+    admission = run_summary.get("precalculation_admission", {})
+    memory = admission.get("fixed_memory_snapshot", {})
+    page_counts = memory.get("page_counts", {})
+    candidate_memory = memory.get("free_inactive_speculative_candidate_bytes")
+    required_memory = producer.MAX_RSS_BYTES + producer.HOST_MEMORY_RESERVE_BYTES
+    fixed_memory_valid = (
+        isinstance(candidate_memory, int) and candidate_memory >= required_memory and
+        candidate_memory <= memory.get("physical_memory_bytes", -1) and
+        memory.get("candidate_is_guaranteed_available_memory") is False and
+        memory.get("candidate_includes_reclaimable_pages") is True and
+        memory.get("page_size_bytes", 0) > 0 and
+        candidate_memory == sum(page_counts.values()) * memory.get("page_size_bytes", 0) and
+        memory.get("free_page_bytes") == page_counts.get("Pages free", -1) * memory.get("page_size_bytes", 0)
+    )
+    source_run_dir = pathlib.Path(source_run)
+    if not source_run_dir.is_absolute():
+        source_run_dir = pathlib.Path(repo) / source_run_dir
+    source_run_publication = source_run_dir.resolve() / "publication.json"
+    if source_run_publication.is_symlink() or not source_run_publication.is_file():
+        raise ValueError("Supervised source-run publication is missing")
+    if (receipt.get("version") != 1 or receipt.get("status") != "pass" or
+            receipt.get("baseline_commit") != baseline_commit or
+            receipt.get("vintage") != run_name or
+            receipt.get("source_run_summary_sha256") != producer.sha(run_summary_raw) or
+            receipt.get("source_run_publication_sha256") != producer.sha(source_run_publication.read_bytes()) or
+            receipt.get("producer_ru_maxrss_bytes") != run_summary.get("max_rss_bytes") or
+            not isinstance(receipt.get("producer_ru_maxrss_bytes"), int) or
+            receipt.get("producer_ru_maxrss_bytes") > producer.MAX_RSS_BYTES or
+            receipt.get("producer_rss_limit_bytes") != producer.MAX_RSS_BYTES or
+            receipt.get("external_stop_bytes") != producer.EXTERNAL_RSS_STOP_BYTES or
+            receipt.get("external_margin_below_768mib_bytes") != producer.EXTERNAL_RSS_MARGIN_BYTES or
+            receipt.get("maximum_sampled_process_tree_rss_bytes") != sampled_peak or
+            receipt.get("external_rss_measurement") != "Sum of ps RSS bytes for producer and all observed descendants/process-group members; shared pages may be counted more than once." or
+            receipt.get("sample_count") != len(samples) or
+            receipt.get("samples_are_polling_not_a_kernel_hard_limit") is not True or
+            receipt.get("elapsed_seconds", producer.MAX_SECONDS + 1) > producer.MAX_SECONDS or
+            run_summary.get("status") != "complete" or
+            run_summary.get("elapsed_seconds", producer.MAX_SECONDS + 1) > producer.MAX_SECONDS or
+            not fixed_memory_valid or
+            sampled_peak >= producer.EXTERNAL_RSS_STOP_BYTES or
+            receipt.get("coordinated_window_id") != admission.get("coordinated_window_id")):
+        raise ValueError("External process lifetime RSS evidence does not qualify the exact source run")
+    if not samples or any(not isinstance(x.get("process_tree_rss_bytes"), int) or
+                          x["process_tree_rss_bytes"] < 0 for x in samples):
+        raise ValueError("Process-supervision RSS samples are absent or malformed")
+    return {"receipt": receipt, "publication_sha256": producer.sha(publication_path.read_bytes()),
+            "samples_sha256": producer.sha(bodies["rss-samples.jsonl"]),
+            "sampled_process_tree_peak_bytes": sampled_peak}
+
+
 def run_controls(repo, baseline_commit, source_run, control_vintage):
     repo = pathlib.Path(repo).resolve()
     baseline, evidence, contract_helpers, config = producer.bootstrap(
@@ -78,6 +163,8 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
 
     outputs = read_run_outputs(repo, source_run, baseline)
     fitness_raw = outputs["source-fitness.json"]
+    supervision = read_supervision_receipt(repo, source_run, outputs["run-summary.json"],
+                                           baseline_commit)
     fitness = json.loads(fitness_raw)
     component_ids = config["component_ids"]
     if fitness.get("scope", {}).get("component_ids") != component_ids:
@@ -178,6 +265,15 @@ def run_controls(repo, baseline_commit, source_run, control_vintage):
         "source_run": {
             "path": str(pathlib.Path(source_run).resolve().relative_to(repo)),
             "source_fitness_sha256": producer.sha(fitness_raw),
+        },
+        "external_process_supervision": {
+            "path": (OWNED + "vintages/process-supervision/" + pathlib.Path(source_run).name),
+            "publication_sha256": supervision["publication_sha256"],
+            "rss_samples_sha256": supervision["samples_sha256"],
+            "maximum_sampled_process_tree_rss_bytes": supervision["sampled_process_tree_peak_bytes"],
+            "producer_ru_maxrss_bytes": supervision["receipt"]["producer_ru_maxrss_bytes"],
+            "external_stop_bytes": producer.EXTERNAL_RSS_STOP_BYTES,
+            "margin_below_768mib_bytes": producer.EXTERNAL_RSS_MARGIN_BYTES,
         },
         "scope_component_count": len(component_ids),
         "jrc_support_positive_control": {
