@@ -34,19 +34,19 @@ The enforced cap is 268,435,456 bytes (256 MiB) per phase, including input bytes
 
 The final `candidate-decisions.json` retains each candidate geometry, target union, gain/loss and candidate/gain symmetric-difference geometries, the full active-feature contact list, source-version coverage, parent-source comparison, retired-member comparison, all ten decision premises, and candidate-specific missing premises. `proposed-additions.geojson` contains only the three strict exact-addition outputs. New fit products are emitted into the fit vintage, never over the preserved root outputs.
 
-The completed run uses execution commit `a4649c264adbb74a4e98a36522f336604b7ba2c8` and phase-plan SHA-256 `7db470923274a09477023def89ce55562c8165479c921ecfbc10ca0a2ca55224`. Every phase stayed below the 268,435,456-byte cap:
+The completed run uses execution commit `350643c19b5dd597f60acaa74b1c5fd0a7c5e295` and phase-plan SHA-256 `65fbeeafc75f66d929b6b039abb97f7ba286685e9e0ee55bf5e0efbddae13d26`. Every phase stayed below the 268,435,456-byte cap:
 
 | Phase | Charged bytes | Headroom |
 | --- | ---: | ---: |
 | Native archive extraction | 263,776,415 | 4,659,041 |
-| Retired-member context | 235,267,399 | 33,168,057 |
-| Neighbor scan A | 234,161,047 | 34,274,409 |
-| Neighbor scan B | 228,027,666 | 40,407,790 |
-| Neighbor scan C | 228,584,478 | 39,850,978 |
-| Neighbor scan D | 241,003,835 | 27,431,621 |
-| Source fit and controls | 222,702,482 | 45,732,974 |
+| Retired-member context | 235,267,587 | 33,167,869 |
+| Neighbor scan A | 234,161,235 | 34,274,221 |
+| Neighbor scan B | 228,027,854 | 40,407,602 |
+| Neighbor scan C | 228,584,666 | 39,850,790 |
+| Neighbor scan D | 241,004,023 | 27,431,433 |
+| Source fit and controls | 222,702,670 | 45,732,786 |
 
-The machine-readable `r7-execution-budget.json` binds each phase’s plan maximum, observed charge, predecessor receipts, publication receipt, and output hashes. The packet manifest checks 143 file bodies and reports `limited` for the declared boundary-authority and undated-context gaps. It does not report a schema, hash, or byte-inventory failure.
+The machine-readable `r7-execution-budget.json` binds each phase’s plan maximum, observed charge, predecessor receipts, publication receipt, and output hashes. The packet manifest checks all listed file bodies and reports `limited` for the declared boundary-authority and undated-context gaps. It does not report a schema, hash, or byte-inventory failure.
 
 ## Findings
 
