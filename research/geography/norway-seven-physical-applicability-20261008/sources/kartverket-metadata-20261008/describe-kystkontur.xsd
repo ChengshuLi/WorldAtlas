@@ -1,0 +1,3350 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Dybdedata/20201001" xmlns:gml="http://www.opengis.net/gml/3.2" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Dybdedata/20201001" version="20201001">
+  
+  <annotation>
+    
+    <documentation>Ugraderte dybdedata til fri bruk. Dybdeinformasjonen er referert til sjøkartnull.Kystkontur, konstruert kyst og skjær er referert til middel høyvann.Dybdedata gjelder kun saltvann.</documentation>
+  
+  </annotation>
+  
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  
+  <element name="BygningsmessigAnleggVann" substitutionGroup="app:FellesegenskaperDybdedata" type="app:BygningsmessigAnleggVannType">
+    
+    <annotation>
+      
+      <documentation>BuildingRelatedFacilityWater: beskrivende linje for  bygningsmessige anlegg ved sjø og vassdrag, uspesifisert
+
+
+-- Definition -- 
+descriptive line for building-related facility by the sea or a watercourse, unspecified</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="BygningsmessigAnleggVannType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>centerline: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+cource follwed by the central part of the object</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="BygningsmessigAnleggVannPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:BygningsmessigAnleggVann"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Bølgebryter" substitutionGroup="app:FellesegenskaperDybdedata" type="app:BølgebryterType">
+    
+    <annotation>
+      
+      <documentation>Breakwater: konstruksjon som beskytter et kystområde-,havn/havnebasseng eller ankringsområde mot bølger
+Merknad: Forskjell fra molo, ikke brukbar til fortøyning av båter.
+
+
+-- Definition -- 
+construction protecting a coastal area, a harbour/harbour basin or anchorages against waves</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="BølgebryterType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>centerline: forløp som følger objektets sentrale del
+
+-- Definition -- 
+cource follwed by the central part of the object</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="BølgebryterPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Bølgebryter"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Dataavgrensning" substitutionGroup="app:FellesegenskaperDybdedata" type="app:DataavgrensningType">
+    
+    <annotation>
+      
+      <documentation>generell avgrensningslinje, f.eks. mellom datasett med ulik kvalitet, innhold eller detaljering</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="DataavgrensningType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>forløp som følger overgang mellom ulike fenomener</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="DataavgrensningPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Dataavgrensning"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Datakvalitet" substitutionGroup="app:FellesegenskaperDybdedata" type="app:DatakvalitetType"/>
+  
+  <complexType name="DatakvalitetType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="catzoc" type="gml:CodeType"/>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="DatakvalitetPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Datakvalitet"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Datakvalitetgrense" substitutionGroup="app:FellesegenskaperFiktivDelelinje" type="app:DatakvalitetgrenseType"/>
+  
+  <complexType name="DatakvalitetgrenseType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperFiktivDelelinjeType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>forløp som følger overgang mellom ulike fenomener</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="DatakvalitetgrensePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Datakvalitetgrense"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Dike" substitutionGroup="app:FellesegenskaperDybdedata" type="app:DikeType">
+    
+    <annotation>
+      
+      <documentation>Dike: byggverk som skal hindre ukontrollert gjennomstrømming av vann fra hav
+
+
+-- Definition -- 
+construction which is to prevent an uncontrolled flow of water from the sea</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="DikeType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="DikePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Dike"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Dybdeareal" substitutionGroup="app:FellesegenskaperDybdedata" type="app:DybdearealType">
+    
+    <annotation>
+      
+      <documentation>DepthArea: sjøområde der alle dybdene er innenfor et angitt dybdeintervall
+
+Merknad:
+Tilsvarer DEPARE i S-57
+
+
+-- Definition -- 
+sea area where all of the depths are within a designated depth interval Note: Corresponds to DEPARE in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="DybdearealType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="minimumsdybde" type="double">
+            
+            <annotation>
+              
+              <documentation>depthRangeValue1: minste dybde innen et område
+
+-- Definition -- 
+the minimum (shoalest) value of a depth range.  Note:  S-57 DRVAL1</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="maksimumsdybde" type="double">
+            
+            <annotation>
+              
+              <documentation>depthRangeValue2: største dybde innen et område
+
+-- Definition -- 
+the maximum (deepest) value of a depth range.  Note:  S-57 DRVAL2</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="DybdearealPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Dybdeareal"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Dybdekurve" substitutionGroup="app:FellesegenskaperDybdedata" type="app:DybdekurveType">
+    
+    <annotation>
+      
+      <documentation>Depth contour: linje mellom punkt med samme dybde i forhold til angitt referansenivå
+
+Merknad:
+Tilsvarer DEPCNT i S-57
+
+
+-- Definition -- 
+line between points with the same depth in relation to designated reference level Note: Corresponds to DEPCNT in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="DybdekurveType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="dybde" type="integer">
+            
+            <annotation>
+              
+              <documentation>depth: loddrett avstand fra et gitt referansenivå ned til bunnen eller annet objekt
+
+-- Definition -- 
+vertical distance from a given reference level down to the bottom or another object??</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="DybdekurvePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Dybdekurve"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Dybdepunkt" substitutionGroup="app:FellesegenskaperDybdedata" type="app:DybdepunktType">
+    
+    <annotation>
+      
+      <documentation>DepthPoint: punkt i vann (ferskvann/saltvann) med verdi (z-verdi) som angir dybden på et sted i forhold til angitt referansenivå
+
+
+-- Definition -- 
+a point in water (freshwater/saltwater) with a value (z value) which indicates the depth at a specific point in relation to the designated  reference level</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="DybdepunktType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="posisjon" type="gml:PointPropertyType">
+            
+            <annotation>
+              
+              <documentation>position: sted som objektet eksisterer på
+
+-- Definition -- 
+location where the object exists</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="dybde" type="double">
+            
+            <annotation>
+              
+              <documentation>depth: loddrett avstand fra et gitt referansenivå ned til bunnen eller annet objekt
+
+-- Definition -- 
+vertical distance from a given reference level down to the bottom or another object??</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element minOccurs="0" name="dybdetype" type="app:DybdetypeType">
+            
+            <annotation>
+              
+              <documentation>depthType: type dybdepunkt
+
+-- Definition -- 
+type of depth point</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="DybdepunktPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Dybdepunkt"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <simpleType name="DybdetypeType">
+    
+    <annotation>
+      
+      <documentation>DepthType: klassifisering av dybdepunkt
+
+
+-- Definition - - 
+classification of DepthPoint (not S-57)</documentation>
+    
+    </annotation>
+    
+    <union memberTypes="app:DybdetypeEnumerationType app:DybdetypeOtherType"/>
+  
+  </simpleType>
+  
+  <simpleType name="DybdetypeEnumerationType">
+    
+    <annotation>
+      
+      <documentation>DepthType: klassifisering av dybdepunkt
+
+
+-- Definition - - 
+classification of DepthPoint (not S-57)</documentation>
+    
+    </annotation>
+    
+    <restriction base="string">
+      
+      <enumeration value="1"/>
+      
+      <enumeration value="2"/>
+      
+      <enumeration value="3"/>
+      
+      <enumeration value="4"/>
+      
+      <enumeration value="5"/>
+      
+      <enumeration value="6"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <simpleType name="DybdetypeOtherType">
+    
+    <restriction base="string">
+      
+      <pattern value="other: \w{2,}"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <element name="Fareområde" substitutionGroup="app:FellesegenskaperDybdedata" type="app:FareområdeType">
+    
+    <annotation>
+      
+      <documentation>DangerArea: generell fare, slaggrunn (eldre begrep for område nær land der sjøen slår, altså der det kan forekomme slag mot grunnen).
+
+Merknad:
+Tilsvarer OBSTRN i S-57
+
+
+-- Definition -- 
+general hazard, wave breaking slope (old term for area near land where the waves break, i.e. where the force of the sea may strike against the seafloor). Note: Corresponds to OBSTRN in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="FareområdeType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="FareområdePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Fareområde"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Fareområdegrense" substitutionGroup="app:FellesegenskaperDybdedata" type="app:FareområdegrenseType">
+    
+    <annotation>
+      
+      <documentation>DangerAreaBoundary: grense for generell fare eller slaggrunn (eldre begrep for område nær land der sjøen slår, altså der det kan forekomme slag mot grunnen)
+
+
+-- Definition -- 
+boundary for general hazard or wave breaking slope (old term for area near land where the waves break, i.e. where the force of the sea may strike against the seafloor)</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="FareområdegrenseType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="FareområdegrensePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Fareområdegrense"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element abstract="true" name="FellesegenskaperDybdedata" substitutionGroup="gml:AbstractFeature" type="app:FellesegenskaperDybdedataType">
+    
+    <annotation>
+      
+      <documentation>abstrakt objekt som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper
+
+Merknad:
+Spesielt i produktspesifikasjonsarbeid vil en velge egenskaper og av grensningslinjer fra denne klassen.</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType abstract="true" name="FellesegenskaperDybdedataType">
+    
+    <complexContent>
+      
+      <extension base="gml:AbstractFeatureType">
+        
+        <sequence>
+          
+          <element name="identifikasjon" type="app:IdentifikasjonPropertyType">
+            
+            <annotation>
+              
+              <documentation>unik identifikasjon av et objekt</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element minOccurs="0" name="førsteDatafangstdato" type="dateTime">
+            
+            <annotation>
+              
+              <documentation>dato når data ble registrert/observert/målt første gang, som utgangspunkt for første digitalisering
+
+Merknad:
+førsteDatafangstdato brukes hvis det er av interesse å forvalte informasjon om når en ble klar over objektet. Dette kan for eksempel gjelde datoen for første flybilde som var utgangspunkt for registrering i en database.</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="oppdateringsdato" type="dateTime">
+            
+            <annotation>
+              
+              <documentation>dato for siste endring på objektetdataene 
+
+Merknad: 
+Oppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).
+
+-Definition-
+Date and time at which this version of the spatial object was inserted or changed in the spatial data set.</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="datauttaksdato" type="dateTime">
+            
+            <annotation>
+              
+              <documentation>dato for uttak fra en database
+
+Merknad:
+Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element minOccurs="0" name="kvalitet" type="app:PosisjonskvalitetPropertyType">
+            
+            <annotation>
+              
+              <documentation>beskrivelse av kvaliteten på stedfestingen
+
+Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="FellesegenskaperDybdedataPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:FellesegenskaperDybdedata"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element abstract="true" name="FellesegenskaperFiktivDelelinje" substitutionGroup="gml:AbstractFeature" type="app:FellesegenskaperFiktivDelelinjeType">
+    
+    <annotation>
+      
+      <documentation>abstrakt objekt som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper
+
+Merknad:
+Spesielt i produktspesifikasjonsarbeid vil en velge egenskaper og av grensningslinjer fra denne klassen.</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType abstract="true" name="FellesegenskaperFiktivDelelinjeType">
+    
+    <complexContent>
+      
+      <extension base="gml:AbstractFeatureType">
+        
+        <sequence>
+          
+          <element name="identifikasjon" type="app:IdentifikasjonPropertyType">
+            
+            <annotation>
+              
+              <documentation>unik identifikasjon av et objekt</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element minOccurs="0" name="førsteDatafangstdato" type="dateTime">
+            
+            <annotation>
+              
+              <documentation>dato når data ble registrert/observert/målt første gang, som utgangspunkt for første digitalisering
+
+Merknad:
+førsteDatafangstdato brukes hvis det er av interesse å forvalte informasjon om når en ble klar over objektet. Dette kan for eksempel gjelde datoen for første flybilde som var utgangspunkt for registrering i en database.</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+            
+            <annotation>
+              
+              <documentation>dato for siste endring på objektetdataene 
+
+Merknad: 
+Oppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).
+
+-Definition-
+Date and time at which this version of the spatial object was inserted or changed in the spatial data set.</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="datauttaksdato" type="dateTime">
+            
+            <annotation>
+              
+              <documentation>dato for uttak fra en database
+
+Merknad:
+Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element minOccurs="0" name="kvalitet" type="app:PosisjonskvalitetPropertyType">
+            
+            <annotation>
+              
+              <documentation>beskrivelse av kvaliteten på stedfestingen
+
+Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="FellesegenskaperFiktivDelelinjePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:FellesegenskaperFiktivDelelinje"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="FiktivDelelinje" substitutionGroup="app:FellesegenskaperFiktivDelelinje" type="app:FiktivDelelinjeType">
+    
+    <annotation>
+      
+      <documentation>linje for å dele opp store flateobjekter
+
+Merknad: 
+En del produktspesifikasjoner benytter spesifikke fiktive delelinjer.</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="FiktivDelelinjeType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperFiktivDelelinjeType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>forløp som følger overgang mellom ulike fenomener</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="FiktivDelelinjePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:FiktivDelelinje"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Flytedokk" substitutionGroup="app:FellesegenskaperDybdedata" type="app:FlytedokkType">
+    
+    <annotation>
+      
+      <documentation>FloatingDock: flytene kunstig basseng avstengt med sluseport- der vannet kan pumpes ut slik at skip inne til overhaling blir stående tørt
+
+
+-- Definition -- 
+floating, artificial basin closed off by sluice gates - where the water can be pumped out so that ships which are in for overhauling stand high and dry</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="FlytedokkType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="FlytedokkPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Flytedokk"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="FlytedokkKant" substitutionGroup="app:FellesegenskaperDybdedata" type="app:FlytedokkKantType">
+    
+    <annotation>
+      
+      <documentation>FloatingDockEdge: avgrensning av flytedokk
+
+
+-- Definition -- 
+delimitation of floating dock</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="FlytedokkKantType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="FlytedokkKantPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:FlytedokkKant"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Grunne" substitutionGroup="app:FellesegenskaperDybdedata" type="app:GrunneType">
+    
+    <annotation>
+      
+      <documentation>UnderwaterRock: forhøyning på bunnen som skiller seg vesentlig fra høyden på bunnen omkring (SKSK ordbok)
+
+Omfatter de tidligere objektklassene Båe, Skjær_tidvis_tørt, Skvalpeskjær og Loddskudd med DYBDETYPE=2."
+Merknad:
+Tilsvarer UWTROC i S-57
+
+
+-- Definition -- 
+a rise in the seafloor which differs significantly from the depth of the surroundings (NHS dictionary). Comprising the former object classes UnderwaterRock, RockIntermittentlyDry, RockAwash and SoundingShot with (depth type) DYBDTYP=2. Note: Corresponds to UWTROC in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="GrunneType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="posisjon" type="gml:PointPropertyType">
+            
+            <annotation>
+              
+              <documentation>position: sted som objektet eksisterer på
+
+-- Definition -- 
+location where the object exists</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="dybde" type="double">
+            
+            <annotation>
+              
+              <documentation>depth: loddrett avstand fra et gitt referansenivå ned til bunnen eller annet objekt
+
+-- Definition -- 
+vertical distance from a given reference level down to the bottom or another object??</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="GrunnePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Grunne"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="HavElvSperre" substitutionGroup="app:FellesegenskaperDybdedata" type="app:HavElvSperreType">
+    
+    <annotation>
+      
+      <documentation>SeaRiverDelineation: en fiktiv linje som definerer grensa mellom sjø og elv, i samme nivå som kystKontur (middel høyvann) 
+
+Merknad:
+Denne er identisk med samme linje nevnt under kapitlet Innsjøer og vassdrag).
+
+
+-- Definition -- 
+a fictitious line which defines the border between sea and river at the same level as coastline (mean high water) Note: This is identical to the same line referred to in the chapter on Lakes and watercourses).</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="HavElvSperreType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="HavElvSperrePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:HavElvSperre"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="app:IdentifikasjonType">
+    
+    <annotation>
+      
+      <documentation>Identification: Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet. 
+
+NOTE1 Denne eksterne objektidentifikasjonen må ikke forveksles med en tematisk objektidentifikasjon, slik som f.eks bygningsnummer. 
+
+NOTE 2 Denne unike identifikatoren vil ikke endres i løpet av objektets levetid.</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="IdentifikasjonType">
+    
+    <sequence>
+      
+      <element name="lokalId" type="string">
+        
+        <annotation>
+          
+          <documentation>localId: lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.
+
+NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet.</documentation>
+        
+        </annotation>
+      
+      </element>
+      
+      <element name="navnerom" type="string">
+        
+        <annotation>
+          
+          <documentation>namespace: navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  ("_") dersom data produsenten ikke er assosiert med bare et land.
+
+NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i "INSPIRE external  Object Identifier Namespaces Register"
+
+Eksempel: NO for Norge.</documentation>
+        
+        </annotation>
+      
+      </element>
+      
+      <element name="versjonId" type="string">
+        
+        <annotation>
+          
+          <documentation>versionId: identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. 
+
+NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  "2007-02-12T12:12:12+05:30" som versjonId.</documentation>
+        
+        </annotation>
+      
+      </element>
+    
+    </sequence>
+  
+  </complexType>
+  
+  <complexType name="IdentifikasjonPropertyType">
+    
+    <sequence>
+      
+      <element ref="app:Identifikasjon"/>
+    
+    </sequence>
+  
+  </complexType>
+  
+  <element name="IkkeKartlagtSjømåltGrense" substitutionGroup="app:FellesegenskaperDybdedata" type="app:IkkeKartlagtSjømåltGrenseType">
+    
+    <annotation>
+      
+      <documentation>UnchartedOceanSurveyedBoundary: grense mot ikke kartlagt eller sjømålt område
+
+
+-- Definition -- 
+boundary against an uncharted/non-surveyed  area</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="IkkeKartlagtSjømåltGrenseType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="IkkeKartlagtSjømåltGrensePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:IkkeKartlagtSjømåltGrense"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="IkkeKartlagtSjømåltOmr" substitutionGroup="app:FellesegenskaperDybdedata" type="app:IkkeKartlagtSjømåltOmrType">
+    
+    <annotation>
+      
+      <documentation>UnchartedOceanSurveyedArea: ikke kartlagt eller sjømålt område
+
+
+-- Definition -- 
+area which is uncharted or which has not been surveyed</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="IkkeKartlagtSjømåltOmrType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="IkkeKartlagtSjømåltOmrPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:IkkeKartlagtSjømåltOmr"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="KaiBrygge" substitutionGroup="app:FellesegenskaperDybdedata" type="app:KaiBryggeType">
+    
+    <annotation>
+      
+      <documentation>QuayWharf: angivelse av  innretninger som er satt opp for å betjene båter ved lasting- lossing og landligge
+Merknad: Kai er utvidet til også å kunne være bare et fortøyningsanlegg- f.eks. enkeltstående metallring for fastgjøring av skip.
+
+
+-- Definition -- 
+indication of facilities set up to serve boats during loading, unloading and docking</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="KaiBryggeType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>centerline: forløp som følger objektets sentrale del
+
+-- Definition -- 
+cource follwed by the central part of the object</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="KaiBryggePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:KaiBrygge"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <simpleType name="KystkonstruksjonstypeType">
+    
+    <annotation>
+      
+      <documentation>CategoryOfShorelineConstruction: angivelse av kystkonturens konstruksjon
+
+
+-- Definition - - 
+the category of the usage of the shoreline construction.  Note:  S-57 CATSLC</documentation>
+    
+    </annotation>
+    
+    <union memberTypes="app:KystkonstruksjonstypeEnumerationType app:KystkonstruksjonstypeOtherType"/>
+  
+  </simpleType>
+  
+  <simpleType name="KystkonstruksjonstypeEnumerationType">
+    
+    <annotation>
+      
+      <documentation>CategoryOfShorelineConstruction: angivelse av kystkonturens konstruksjon
+
+
+-- Definition - - 
+the category of the usage of the shoreline construction.  Note:  S-57 CATSLC</documentation>
+    
+    </annotation>
+    
+    <restriction base="string">
+      
+      <enumeration value="1"/>
+      
+      <enumeration value="2"/>
+      
+      <enumeration value="3"/>
+      
+      <enumeration value="4"/>
+      
+      <enumeration value="5"/>
+      
+      <enumeration value="6"/>
+      
+      <enumeration value="7"/>
+      
+      <enumeration value="8"/>
+      
+      <enumeration value="11"/>
+      
+      <enumeration value="12"/>
+      
+      <enumeration value="13"/>
+      
+      <enumeration value="50"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <simpleType name="KystkonstruksjonstypeOtherType">
+    
+    <restriction base="string">
+      
+      <pattern value="other: \w{2,}"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <element name="Kystkontur" substitutionGroup="app:FellesegenskaperDybdedata" type="app:KystkonturType">
+    
+    <annotation>
+      
+      <documentation>Coastline: grense mellom land og sjø, definert som midlere høyvannslinje
+
+Merknad:
+Tilsvarer COALNE i S-57
+
+
+-- Definition -- 
+boundary between land and sea, defined as the mean high water line Note: Corresponds to COALNE in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="KystkonturType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element minOccurs="0" name="kysttype" type="app:KysttypeType">
+            
+            <annotation>
+              
+              <documentation>categoryOfCoastline: kategori av kyst
+
+-- Definition -- 
+the category of the coastline.  Note:  S-57 CATCOA</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="KystkonturPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Kystkontur"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <simpleType name="KystreferanseType">
+    
+    <annotation>
+      
+      <documentation>CoastalReferenceLevel: kystkonturens referansenivå
+
+
+-- Definition - - 
+the coastline's reference level.  Note:  not S-57's VERDAT but distantly related</documentation>
+    
+    </annotation>
+    
+    <union memberTypes="app:KystreferanseEnumerationType app:KystreferanseOtherType"/>
+  
+  </simpleType>
+  
+  <simpleType name="KystreferanseEnumerationType">
+    
+    <annotation>
+      
+      <documentation>CoastalReferenceLevel: kystkonturens referansenivå
+
+
+-- Definition - - 
+the coastline's reference level.  Note:  not S-57's VERDAT but distantly related</documentation>
+    
+    </annotation>
+    
+    <restriction base="string">
+      
+      <enumeration value="FOTOV"/>
+      
+      <enumeration value="K0"/>
+      
+      <enumeration value="MHV"/>
+      
+      <enumeration value="USIKR"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <simpleType name="KystreferanseOtherType">
+    
+    <restriction base="string">
+      
+      <pattern value="other: \w{2,}"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <simpleType name="KysttypeType">
+    
+    <annotation>
+      
+      <documentation>CategoryOfCoastline: kategori av kyst
+
+
+-- Definition - - 
+the category of the coastline.  Note:  S-57 CATCOA</documentation>
+    
+    </annotation>
+    
+    <union memberTypes="app:KysttypeEnumerationType app:KysttypeOtherType"/>
+  
+  </simpleType>
+  
+  <simpleType name="KysttypeEnumerationType">
+    
+    <annotation>
+      
+      <documentation>CategoryOfCoastline: kategori av kyst
+
+
+-- Definition - - 
+the category of the coastline.  Note:  S-57 CATCOA</documentation>
+    
+    </annotation>
+    
+    <restriction base="string">
+      
+      <enumeration value="1"/>
+      
+      <enumeration value="2"/>
+      
+      <enumeration value="3"/>
+      
+      <enumeration value="4"/>
+      
+      <enumeration value="6"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <simpleType name="KysttypeOtherType">
+    
+    <restriction base="string">
+      
+      <pattern value="other: \w{2,}"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <element name="Landareal" substitutionGroup="app:FellesegenskaperDybdedata" type="app:LandarealType">
+    
+    <annotation>
+      
+      <documentation>LandArea: området på "land"-siden av kystkonturen, begrenset av kyst, kai og data-avgrensningslinjer
+
+Merknad:
+Tilsvarer LNDARE i S-57
+
+
+-- Definition -- 
+the area on the "land" side of the coastline, quay and data delineation lines Note: Corresponds to LNDARE in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="LandarealType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="LandarealPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Landareal"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Molo" substitutionGroup="app:FellesegenskaperDybdedata" type="app:MoloType">
+    
+    <annotation>
+      
+      <documentation>Mole: kunstig eller naturlig oppbygning som demper eller tilintetgjør bølgebevegelser i sjøen
+
+
+-- Definition -- 
+artificial or natural structure which reduces or eliminates waves in the sea</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="MoloType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>centerline: forløp som følger objektets sentrale del
+
+-- Definition -- 
+cource follwed by the central part of the object</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="MoloPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Molo"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="MudretOmråde" substitutionGroup="app:FellesegenskaperDybdedata" type="app:MudretOmrådeType">
+    
+    <annotation>
+      
+      <documentation>DredgedArea: oppmudret anlegg eller område med regelmessig opprettholdt dybde
+
+Merknad:
+Tilsvarer DRGARE i S-57
+
+
+-- Definition -- 
+dredged facility or area with a continuously maintained depth Note: Corresponds to DRGARE in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="MudretOmrådeType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="minimumsdybde" type="double">
+            
+            <annotation>
+              
+              <documentation>depthRangeValue1: minste dybde innen et område
+
+-- Definition -- 
+the minimum (shoalest) value of a depth range.  Note:  S-57 DRVAL1</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="maksimumsdybde" type="double">
+            
+            <annotation>
+              
+              <documentation>depthRangeValue2: største dybde innen et område
+
+-- Definition -- 
+the maximum (deepest) value of a depth range.  Note:  S-57 DRVAL2</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="MudretOmrådePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:MudretOmråde"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="MudretOmrådegrense" substitutionGroup="app:FellesegenskaperDybdedata" type="app:MudretOmrådegrenseType">
+    
+    <annotation>
+      
+      <documentation>DredgedAreaBoundary: grense for oppmudret anlegg eller område med regelmessig opprettholdt dybde
+
+
+-- Definition -- 
+boundary for dredged facility or area with a continuously maintained depth</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="MudretOmrådegrenseType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="MudretOmrådegrensePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:MudretOmrådegrense"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <simpleType name="MålemetodeType">
+    
+    <annotation>
+      
+      <documentation>MeasuringMethod: metode som ligger til grunn for registrering av posisjon
+
+
+-- Definition - - 
+method on which registration of position is based</documentation>
+    
+    </annotation>
+    
+    <union memberTypes="app:MålemetodeEnumerationType app:MålemetodeOtherType"/>
+  
+  </simpleType>
+  
+  <simpleType name="MålemetodeEnumerationType">
+    
+    <annotation>
+      
+      <documentation>MeasuringMethod: metode som ligger til grunn for registrering av posisjon
+
+
+-- Definition - - 
+method on which registration of position is based</documentation>
+    
+    </annotation>
+    
+    <restriction base="string">
+      
+      <enumeration value="10">
+        
+        <annotation>
+          
+          <documentation>Measured in terrain: Målt i terrenget , uspesifisert metode/måleinstrument</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="31">
+        
+        <annotation>
+          
+          <documentation>Scannet from pencilled original: Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er blyantoriginal</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="32">
+        
+        <annotation>
+          
+          <documentation>Scanned from ??scribing folio: Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er rissefolie</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="33">
+        
+        <annotation>
+          
+          <documentation>Scanned from transparency folio - good quality: Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av  god kvalitet.</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="34">
+        
+        <annotation>
+          
+          <documentation>Scanned from transparency folio - inferior quality: Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av mindre god kvalitet</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="35">
+        
+        <annotation>
+          
+          <documentation>Scannet from paper / hard copy: Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er papirkopi.</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="36">
+        
+        <annotation>
+          
+          <documentation>Airbourne laser scanner: Målt med laserskanner fra fly</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="37">
+        
+        <annotation>
+          
+          <documentation>Målt med laserskanner plassert i kjøretøy</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="38">
+        
+        <annotation>
+          
+          <documentation>brukes for objekter som er stedfestet med lineær referanse, enten disse leveres med stedfesting kun som lineære referanser, eller med koordinatgeometri avledet fra lineære referanser</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="40">
+        
+        <annotation>
+          
+          <documentation>Digitised on dig.table from orthophoto/aerial photo: Geometri overført fra ortofoto eller flybilde ved hjelp av manuell registrering på et digitaliseringsbord, uspesifisert bildemedium</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="41">
+        
+        <annotation>
+          
+          <documentation>Digitised from orthophoto - film: Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="42">
+        
+        <annotation>
+          
+          <documentation>Digitised from orthophoto - photocopy: Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="43">
+        
+        <annotation>
+          
+          <documentation>Digitised from aerial photo - mono-digitised from film: Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="44">
+        
+        <annotation>
+          
+          <documentation>Digitised from aerial photo - mono-digitised from photocopy: Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="45">
+        
+        <annotation>
+          
+          <documentation>Digitised from orthophoto: Geometri overført fra ortofoto ved hjelp av manuell registrering på skjerm</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="46">
+        
+        <annotation>
+          
+          <documentation>Digitised on screen from satellite photo: Geometri overført fra satellittbilde ved hjelp av manuell registrering på skjerm</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="47"/>
+      
+      <enumeration value="48"/>
+      
+      <enumeration value="49">
+        
+        <annotation>
+          
+          <documentation>Vektorisering fra laserdata, brukes også der vektoriseringen støttes av ortofoto</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="50">
+        
+        <annotation>
+          
+          <documentation>Digitised on dig.table from line-map: Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord, medium uspesifisert</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="51">
+        
+        <annotation>
+          
+          <documentation>Digitised on dig.table from pencilled original: Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er blyantoriginal</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="52">
+        
+        <annotation>
+          
+          <documentation>Digitised on dig.table from ??scribing folio: Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er rissefolie</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="53">
+        
+        <annotation>
+          
+          <documentation>Digitised on dig.table from transparency film - good quality: Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av god kvalitet, samkopi</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="54">
+        
+        <annotation>
+          
+          <documentation>Digitised on dig.table from transparency film - lower quality: Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av mindre god kvalitet, samkopi</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="55">
+        
+        <annotation>
+          
+          <documentation>Digitised on dig.table from paper copy: Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er papirkopi</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="56">
+        
+        <annotation>
+          
+          <documentation>Digitised on screen from scanned photographic combination: Geometri overført fra kart ved hjelp av manuell registrering på skjerm, medium skannet kart (raster), samkopi</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="60">
+        
+        <annotation>
+          
+          <documentation>Generated data (interpolation): Genererte data, interpolasjonsmetode. Ikke nærmere spesifisert</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="61">
+        
+        <annotation>
+          
+          <documentation>Generated in terrain model: Genererte data, interpolasjonsmetode, fra terrengmodell</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="62">
+        
+        <annotation>
+          
+          <documentation>Weighted mean: Genererte data, interpolasjonsmetode, vektet middel</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="63">
+        
+        <annotation>
+          
+          <documentation>Generated circular geometry: Genererte data: Sirkelgeometri, korridor eller annen geometri generert ut fra f.eks et punkt eller en linje (f.eks midtlinje veg)</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="64">
+        
+        <annotation>
+          
+          <documentation>Generalised: Genererte data: Generalisering</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="65">
+        
+        <annotation>
+          
+          <documentation>Generated central point: Genererte data: Sentralpunkt</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="66">
+        
+        <annotation>
+          
+          <documentation>Connection point/edge point: Genererte data: Sammenknytningspunkt (f.eks mellom ulike kartlegginger), randpunkt (f.eks mellom ulike kilder til kart)</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="67">
+        
+        <annotation>
+          
+          <documentation>Coordinates retrieved from GAB: Koordinater hentet fra GAB, forløperen til registerdelen av matrikkelen</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="68">
+        
+        <annotation>
+          
+          <documentation>Coordinates retrieved from JREG: Koordinater hentet fra JREG, jordregisteret</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="69">
+        
+        <annotation>
+          
+          <documentation>Calculated: Beregnet, uspesifisert hvordan</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="70">
+        
+        <annotation>
+          
+          <documentation>Special methods: Spesielle metoder, uspesifisert</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="71">
+        
+        <annotation>
+          
+          <documentation>Measured with range pole: Spesielle metoder: Målt med stikkstang</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="72">
+        
+        <annotation>
+          
+          <documentation>Measured with: Spesielle metoder: Målt med waterstang</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="73">
+        
+        <annotation>
+          
+          <documentation>Measured with measuring wheel: Spesielle metoder: Målt med målehjul</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="74">
+        
+        <annotation>
+          
+          <documentation>Measured with rate of climb indicator: Spesielle metoder: Målt med stigningsmåler</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="77">
+        
+        <annotation>
+          
+          <documentation>Punkt fastsatt ut fra et grunnlag (kart, bilde), f.eks ved partenes enighet ved en oppmålingsforretning</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="78">
+        
+        <annotation>
+          
+          <documentation>Stipulated by court decision or royal decree: Geometri fastsatt ved dom, lov, traktat eller kongelig resolusjon</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="79">
+        
+        <annotation>
+          
+          <documentation>????: Annet (spesifiseres i filhode)</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="80">
+        
+        <annotation>
+          
+          <documentation>Free-hand drawing: Digitalisert ut fra frihåndstegning.  Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="81">
+        
+        <annotation>
+          
+          <documentation>Digitised from sketching on map: Digitalisert fra krokering på kart, dvs grovt skissert på kart</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="82">
+        
+        <annotation>
+          
+          <documentation>Directly input on screen: Digitalisert ut fra frihåndstegning (direkte på skjerm). Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="90">
+        
+        <annotation>
+          
+          <documentation>Inertial ??positioning/localization: Treghetsstedfesting</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="91">
+        
+        <annotation>
+          
+          <documentation>GPS code measurement, relatively measurements: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, relative målinger.</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="92">
+        
+        <annotation>
+          
+          <documentation>GPS code measurement, individual measurements: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, enkle målinger.</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="93">
+        
+        <annotation>
+          
+          <documentation>GPS phase measurement, static measurement: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling statisk måling.</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="94">
+        
+        <annotation>
+          
+          <documentation>GPS phase measurement, other methods: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling andre metoder.</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="95">
+        
+        <annotation>
+          
+          <documentation>Combination of GPS/Inertia: Kombinasjon av GPS/Treghet</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="96">
+        
+        <annotation>
+          
+          <documentation>GPS phase measurement RTK: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO).: Fasemåling RTK (realtids kinematisk måling)</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="97">
+        
+        <annotation>
+          
+          <documentation>GPS phase measurement, float solution: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO). Fasemåling float-løsning</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+      
+      <enumeration value="99">
+        
+        <annotation>
+          
+          <documentation>Unknown measurement method: Målemetode er ukjent</documentation>
+        
+        </annotation>
+      
+      </enumeration>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <simpleType name="MålemetodeOtherType">
+    
+    <restriction base="string">
+      
+      <pattern value="other: \w{2,}"/>
+    
+    </restriction>
+  
+  </simpleType>
+  
+  <element name="Pir" substitutionGroup="app:FellesegenskaperDybdedata" type="app:PirType">
+    
+    <annotation>
+      
+      <documentation>Pier: markert utstikkende brygge, normalt med vann under, i sjø
+
+
+-- Definition -- 
+marked protruding pier, normally with water underneath, in the sea</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="PirType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="PirPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Pir"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="PirKant" substitutionGroup="app:FellesegenskaperDybdedata" type="app:PirKantType">
+    
+    <annotation>
+      
+      <documentation>EdgeOfPier: avgrensning av pir
+
+
+-- Definition -- 
+delimitation of pier</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="PirKantType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="PirKantPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:PirKant"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="app:PosisjonskvalitetType">
+    
+    <annotation>
+      
+      <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="PosisjonskvalitetType">
+    
+    <sequence>
+      
+      <element name="målemetode" type="app:MålemetodeType">
+        
+        <annotation>
+          
+          <documentation>metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss</documentation>
+        
+        </annotation>
+      
+      </element>
+      
+      <element minOccurs="0" name="nøyaktighet" type="integer">
+        
+        <annotation>
+          
+          <documentation>punktstandardavviket i grunnriss for punkter samt tverravvik for linjer
+
+Merknad:
+Oppgitt i cm</documentation>
+        
+        </annotation>
+      
+      </element>
+    
+    </sequence>
+  
+  </complexType>
+  
+  <complexType name="PosisjonskvalitetPropertyType">
+    
+    <sequence>
+      
+      <element ref="app:Posisjonskvalitet"/>
+    
+    </sequence>
+  
+  </complexType>
+  
+  <element name="Rampe" substitutionGroup="app:FellesegenskaperDybdedata" type="app:RampeType">
+    
+    <annotation>
+      
+      <documentation>Ramp: fast skrånende struktur som kan brukes som landingsplass for fartøy ved varierende vannstand
+Merknad: Dette er fritt oversatt etter S57: 'A sloping structure that can either be used as a landing place at variable water levels, for small vessels, landing ships, or a ferry boat, or for hauling a cradle carrying a vessel. (IHO Dictionary, S-32, 4th Edition)'.
+
+
+-- Definition -- 
+permanent sloping structure which can be used as a landing place for vessels at variable water levels</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="RampeType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="RampePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Rampe"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Skjær" substitutionGroup="app:FellesegenskaperDybdedata" type="app:SkjærType">
+    
+    <annotation>
+      
+      <documentation>Rock: generalisert punktobjekt for små øyer eller landareal
+
+
+-- Definition -- 
+generalised point object for small islands or land area</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="SkjærType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="posisjon" type="gml:PointPropertyType">
+            
+            <annotation>
+              
+              <documentation>position: sted som objektet eksisterer på
+
+-- Definition -- 
+location where the object exists</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="SkjærPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Skjær"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Slipp" substitutionGroup="app:FellesegenskaperDybdedata" type="app:SlippType">
+    
+    <annotation>
+      
+      <documentation>Slipway: bane som mindre og middelstore fartøyer kan hales opp ved landsetting, bedding
+Merknad: I S57 defineres slipp som: 'The prepared, and usually reinforced, inclined surface on which keel- and bilge-blocks are laid for supporting a vessel under construction. (IHO Dictionary, S-32, 4th Edition).
+Slipp brukes normalt som en linje (symboliseres som to parallelle linjer) på tvers av kystkonturen, som angir banen. Linjene stiples utenfor kystkonturen for å indikere at de er under vann. I stor målestokk kan kystkonturen der banen ligger også angis som slipp.
+
+
+-- Definition -- 
+slipway where small and medium-sized vessels can be hauled up, slip</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="SlippType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="SlippPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Slipp"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Spuntvegger" substitutionGroup="app:FellesegenskaperDybdedata" type="app:SpuntveggerType">
+    
+    <annotation>
+      
+      <documentation>Sheet piling: forstøtningsmur eller lede-molo som skal dirigere eller begrense strøm i elv eller tidevann
+
+
+-- Definition -- 
+retaining wall or breakwater guide which guides or reduce currents in rivers or tidal waters</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="SpuntveggerType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>centerline: forløp som følger objektets sentrale del
+
+-- Definition -- 
+cource follwed by the central part of the object</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="SpuntveggerPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Spuntvegger"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Strømbryter" substitutionGroup="app:FellesegenskaperDybdedata" type="app:StrømbryterType">
+    
+    <annotation>
+      
+      <documentation>CurrentBreaker: lav veggliknende konstruksjon, tidvis under vann, som strekker seg ut fra kysten for å beskytte kysten eller tvinge vannstrømmer inn i en kanal eller lignende
+
+
+-- Definition -- 
+low wall-like construction, sporadically underwater, which extends from the coast to protect the coast or force currents into a channel, etc.</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="StrømbryterType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>centerline: forløp som følger objektets sentrale del
+
+-- Definition -- 
+cource follwed by the central part of the object</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="StrømbryterPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Strømbryter"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Tørrdokk" substitutionGroup="app:FellesegenskaperDybdedata" type="app:TørrdokkType">
+    
+    <annotation>
+      
+      <documentation>DryDock: kunstig basseng på land avstengt med sluseport- der vannet kan pumpes ut slik at skip inne til overhaling blir stående tørt
+
+
+-- Definition -- 
+artificial basin on land closed off by sluice gates - where the water can be pumped out so that ships which are in for overhauling stand high and dry</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="TørrdokkType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="TørrdokkPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Tørrdokk"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="TørrdokkKant" substitutionGroup="app:FellesegenskaperDybdedata" type="app:TørrdokkKantType">
+    
+    <annotation>
+      
+      <documentation>DryDockEdge: avgrensning av tørrdokk
+
+
+-- Definition -- 
+delimitation of dry dock</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="TørrdokkKantType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="TørrdokkKantPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:TørrdokkKant"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Tørrfall" substitutionGroup="app:FellesegenskaperDybdedata" type="app:TørrfallType">
+    
+    <annotation>
+      
+      <documentation>IntertidalArea: tørrfall kalles den del av sjøbunnen som strekker seg fra 0.5 meter under sjøkartnull og opp til kystkonturen 
+
+Merknad:
+Tørrfallsområdet avgrenses av kystkontur og tørrfallslinjen, som er nivålinjen 0.5 m under sjøkartnull.
+Tilsvarer DEPARE i S-57
+
+
+-- Definition -- 
+that part of the seafloor which extends from 0.5 metres below chart zero up to the coastline Note: The area is delimited by the coastline and the zero meter contour, which is the line at the 0.5 m level below chart zero. Corresponds to DEPARE in S-57</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="TørrfallType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="område" type="gml:SurfacePropertyType">
+            
+            <annotation>
+              
+              <documentation>extent: objektets utstrekning
+
+-- Definition -- 
+area over which an object extends</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="TørrfallPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Tørrfall"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Tørrfallsgrense" substitutionGroup="app:FellesegenskaperDybdedata" type="app:TørrfallsgrenseType">
+    
+    <annotation>
+      
+      <documentation>ZeroMeterContour: grense for tørrfallsområde, kurve med dybdeverdi 0.5 m under K0, sjøkartets nullnivå
+
+Merknad:
+Tilsvarer DEPCNT i S-57 med standard dybdeverdi på 0,5
+
+
+-- Definition -- 
+boundary for intertidal area, curve with depth value of 0.5 m below K0, the zero level of the nautical chart  Note: Corresponds to DEPCNT in S-57 -57 with standard depth value of 0.5 (m)</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="TørrfallsgrenseType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="grense" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>border: forløp som følger overgang mellom ulike fenomener
+
+-- Definition -- 
+course follwing the transition between different real world phenomena</documentation>
+            
+            </annotation>
+          
+          </element>
+          
+          <element name="dybde" type="double">
+            
+            <annotation>
+              
+              <documentation>depth: loddrett avstand fra et gitt referansenivå ned til bunnen eller annet objekt [H]
+
+-- Definition -- 
+the depth of an object.  Note:  S-57 uses a 3-D encoding of the depth on the geometry.     Compatible with DYBDE from the SOSI 4.0 chapter about General Types?</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="TørrfallsgrensePropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Tørrfallsgrense"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+  
+  <element name="Utstikker" substitutionGroup="app:FellesegenskaperDybdedata" type="app:UtstikkerType">
+    
+    <annotation>
+      
+      <documentation>Wharf: flytelignende småbåtutstikkere som benyttes for plassering av båt, av/påstigning i båt. Gjerne utformet med flere tverrgående utstikkere knyttet til en samleutstikker
+
+
+-- Definition -- 
+float-like small boat piers which are used for mooring boats and embarking/disembarking. Often designed with a number of transverse finger quays connected to a main pier</documentation>
+    
+    </annotation>
+  
+  </element>
+  
+  <complexType name="UtstikkerType">
+    
+    <complexContent>
+      
+      <extension base="app:FellesegenskaperDybdedataType">
+        
+        <sequence>
+          
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            
+            <annotation>
+              
+              <documentation>centerline: forløp som følger objektets sentrale del
+
+-- Definition -- 
+cource follwed by the central part of the object</documentation>
+            
+            </annotation>
+          
+          </element>
+        
+        </sequence>
+      
+      </extension>
+    
+    </complexContent>
+  
+  </complexType>
+  
+  <complexType name="UtstikkerPropertyType">
+    
+    <sequence minOccurs="0">
+      
+      <element ref="app:Utstikker"/>
+    
+    </sequence>
+    
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  
+  </complexType>
+
+</schema>

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-08T19:22:31.242978+00:00",
+  "attempt": 1,
+  "action": "bounded WFS resultType=results request for the first D\u00f8nna Kystkontur envelope",
+  "expected_member_count_from_prior_hits": 79,
+  "WFS_numberMatched_attribute": "unknown",
+  "WFS_numberReturned_attribute": "0",
+  "actual_members_parsed_before_abort": 79,
+  "outcome": "The local capture script rejected the service response because it incorrectly required numberMatched and numberReturned to agree with the prior hits count. The service response included the expected 79 feature members. This was a client-side validation rejection, not an upstream missing-data result.",
+  "raw_response_retained": false,
+  "reason_raw_not_retained": "The script exited before writing the response after the over-strict count-attribute assertion. The same request will be repeated and the complete response retained under a corrected validation rule.",
+  "correction": "Use actual wfs:member count matched to resultType=hits, require unique gml:id values, preserve the inconsistent WFS response count attributes verbatim."
+}

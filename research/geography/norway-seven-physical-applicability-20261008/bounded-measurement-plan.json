@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "status": "prepared-awaiting-serial-resource-window",
+  "issue": 1510,
+  "scope": {
+    "cases": 7,
+    "original_candidates": 15,
+    "family_members": 400,
+    "positive_length_neighbors": 36,
+    "candidate_ids": [
+      "physical-component:1f5426f5180aa4f5b7fd9991b5ae4816d56cb642c31d0937a4977da516f28f2b",
+      "physical-component:764b247eb21da38adac0b925bededbbb4dccaefa4b52b16976f20543a7ac3384",
+      "physical-component:7bad7bdf9b1203fe6c676eb2efde10b09ce394ad7d6d554eb557709d7704df35",
+      "physical-component:8fb9f3f0d7df1c96ac452792fd4a9dbc7a45a576437550dd5b198424ceca14a9",
+      "physical-component:a92cac9c4c3d3a91286eca0e4890becd63441647c7fe7c4cdcc5e1aa167d4803",
+      "physical-component:b6ba064b4525f0c75459a8d1aa05c25e9740cc46b9964f96983d61d6a9b4253a",
+      "physical-component:eb2b6c25d1a2b8ead2bcb67f7e0423b5f1cc5609ac3f600bb98cd6d5cb11db40"
+    ]
+  },
+  "measurement_inputs": {
+    "candidate_source": "#1492 exact pinned source component features, source file and feature hashes",
+    "target_source": "#1492 exact pinned current Atlas target features, source file and feature hashes",
+    "shoreline_source": "sources/sjoekart-dybdedata-wfs-20261008/*.gml; 561 Kystkontur + 97 Landareal members; 3,066,135 bytes; seven bounded windows for each feature class",
+    "shoreline_index_sha256": "21b801fa3bf58ad34364084e08a9e07e05d50580cf1fc472e996153ca609fb4f",
+    "shoreline_product_semantics": "Kystkontur mean-high-water coastline; saltwater-only product; dynamically served snapshot",
+    "additional_support": "#1492 pinned GSHHG v2.3.7 original nested features, separately labelled coarse and vintage/registration limited",
+    "source_geometry_crs": "GeoBoundaries simplified feature product and Atlas feature geometries use WGS84 longitude/latitude; WFS GML advertises EPSG:4258 and sample coordinate sequences are ordered latitude, longitude.",
+    "pins": {
+      "baseline_commit": "088ab05aeb16ddfa8f0c43e596533f3f11d5fcec",
+      "candidate_delivery_commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d",
+      "exact_candidate_geometries": {
+        "path": "research/geography/norway-adm2-source-fit-1492/vintages/component-geometries-20261008/selected-components.json",
+        "bytes": 22258,
+        "sha256": "6ca95508f9c14dc6a7f5839e4680dee25d48232d90b43b70fe983a7da754e5c0",
+        "selection_count": 15
+      },
+      "measured_candidate_minus_target_receipts": {
+        "path": "research/geography/norway-adm2-source-fit-1492/vintages/exact-overlay-acceptance-20261008/overlay-v1.json",
+        "bytes": 193231,
+        "sha256": "3bb69e040b98e6a14f1b6a91deec73543a9b82cb94a4b893d3b401e69395fe8f",
+        "selected_cases": 7
+      },
+      "family_context": {
+        "path": "research/geography/norway-adm2-source-fit-1492/vintages/family-scope-corrected-20261008/family-scope.json",
+        "bytes": 141817,
+        "sha256": "8e8aa9f8725e2c8dd43ab9843b9372b0ccdfed2a9068f40078289075a529c134",
+        "members": 400,
+        "positive_length_neighbors": 36
+      },
+      "pinned_administrative_product": {
+        "path": "research/geography/norway-adm2-source-fit-1492/vintages/official-source-capture-20261008/adm2-simplified.geojson",
+        "bytes": 4724258,
+        "sha256": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e",
+        "features": 431,
+        "represented_year": "2013"
+      },
+      "pinned_atlas_target_context": {
+        "path": "data/geography/part-17.json",
+        "bytes": 4948066,
+        "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+      },
+      "pinned_administrative_source_registry": {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      "selected_source_row_manifest": {
+        "path": "research/geography/norway-adm2-source-fit-1492/vintages/official-source-capture-20261008/selected-source-rows.json",
+        "bytes": 142756,
+        "sha256": "af4d0927d2e9eb8c9053ccf13969b1205b91cc1df3ed799190210f4a717ce12e"
+      },
+      "pinned_administrative_parent_product": {
+        "path": "research/geography/norway-adm2-source-fit-1492/vintages/official-source-capture-20261008/adm1-simplified.geojson",
+        "bytes": 3216652,
+        "sha256": "a24bd867e42c8f2d7bdd07e723594f2d55736d50de8cf1e92062ae443a0f0f72",
+        "features": 11
+      }
+    }
+  },
+  "method": {
+    "candidate_extra_area": "C_i minus T_i from exact #1492 feature geometries; do not substitute geometries or simplify/snap/repair",
+    "shoreline": "Transform only as required to suitable metric CRS with recorded axis order/datum; separately measure added-area intersection with Kystkontur and Landareal; compare full original 15/400/36 relational context; report feature-level contacts and distances only as diagnostics, not truth labels absent accuracy",
+    "topology": "test parent containment/coverage, strict no-loss, all 36 neighbors/contact relations, and candidate/target validity; record precision, area units, exact source geometries and diagnostics",
+    "controls": [
+      "verify input file and feature hashes before geometry",
+      "positive closure on unchanged exact #1492 relations",
+      "negative controls for deliberate source/identity or relation perturbations",
+      "preserve unmodified source geometries; do not apply unapproved repairs"
+    ],
+    "interpretation": "geometry predicates are source-specific diagnostics. Applicability, land/water, class, water/ice, territorial authority, history, cause, rights and ownership remain unknown absent adequate evidence.",
+    "coordinate_handling": "Parse GML axis order from the declared CRS/schema (EPSG:4258 latitude,longitude); explicitly reorder to longitude,latitude before pyproj always_xy transformation into EPSG:4326 for source-relative geographic identity checks. For metric area and distance diagnostics transform a copy to ETRS89 / UTM zone 33N (EPSG:25833), suitable for this seven-case Northland extent. Record installed Python/Shapely/GEOS/pyproj versions and transform operation; if axis/CRS metadata is ambiguous or transform unavailable, stop rather than assume.",
+    "area_distance": "Planar overlay/predicate area in EPSG:25833 square metres; distance diagnostics in metres in EPSG:25833. Report source CRS and transformations. Do not treat projected measures as positional accuracy or as physical applicability by themselves."
+  },
+  "admission": {
+    "status": "not-admitted",
+    "actual_free_memory": "recheck immediately before launch",
+    "actual_free_storage": "recheck immediately before launch",
+    "live_process_state": "awaiting GEO5 Alaska extraction and root numerical001lazy terminal; use only live state at admission",
+    "input_bytes": 3066135,
+    "output_reserve_bytes": "calculate from exact inputs and chosen output format before launch",
+    "scratch_reserve_bytes": "calculate from exact inputs and chosen engine before launch",
+    "expected_peak_rss_bytes": "measure during run; do not infer from data size",
+    "runtime_seconds": "record during run",
+    "no_gis_started": true,
+    "serial_window": "next after GEO5 Alaska extraction and root numerical001lazy terminal; then confirm combined RAM/storage reserve with ENG",
+    "exact_input_bytes_before_unpack_and_runtime": 17116589,
+    "source_geometry_inputs_bytes": 17116589,
+    "expected_process_rss_bytes": "not estimated from serialized byte count; obtain fresh prospective admission and record actual sampled peak RSS",
+    "planned_output_reserve_bytes": 33554432,
+    "planned_scratch_reserve_bytes": 33554432,
+    "phase_peak_rss_cap_bytes": 805306368,
+    "phase_time_limit_seconds": 900,
+    "minimum_system_free_percent": 25,
+    "minimum_available_memory_bytes": 1610612736,
+    "runtime_abort_if_system_free_percent_below": 20,
+    "source_geometry_validation_note": "The first admitted producer attempt parsed one Landareal feature as invalid (self-intersection); source was not repaired. The next run records invalid feature identity and uses only its bounding box to flag potential case relevance while excluding the invalid polygon."
+  }
+}
