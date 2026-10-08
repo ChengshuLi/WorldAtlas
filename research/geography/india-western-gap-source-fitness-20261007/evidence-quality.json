@@ -720,36 +720,32 @@
         "status": "redistributable",
         "terms": "geoBoundaries India release metadata declares ODbL 1.0; license URI https://opendatacommons.org/licenses/odbl/1-0/."
       },
-      "retention": "restoration-only",
+      "retention": "retained",
       "verification": "verified",
-      "restoration": "Retained and byte-verified in feature-count-reconciliation/evidence-quality.json; submanifest budgets these shared source bytes once.",
-      "files": [],
+      "restoration": "Exact Git LFS objects from sourceData/gbOpen/IND_ADM2.zip and IND_ADM3.zip at commit 9469f09; whole archive bytes match LFS SHA-256 IDs.",
+      "files": [
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/IND-ADM2.zip",
+          "bytes": 18533869,
+          "sha256": "de31379da90a382fc595d05ea71df8742ac01da04fc7fbad5775b3b8d90a6915",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/IND-ADM3.zip",
+          "bytes": 28025198,
+          "sha256": "322f8689cbdf274bbf6477158904e68aa292b4603c1a035ed7b7e92833f8a0ef",
+          "hash_kind": "file-bytes"
+        }
+      ],
       "temporal_status": "reference",
-      "limit": "Archive counts corroborate the metadata, but the difference from ReleaseData outputs is not attributed to a specific pipeline operation."
-    },
-    {
-      "id": "geoboundaries-ind-releaseData-full-resolution",
-      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/IND",
-      "role": "Full-resolution India ADM2 and ADM3 ReleaseData GeoJSON products used to locate the count discrepancies by release stage.",
-      "vintage": "geoBoundaries commit 9469f09",
-      "retrieved_at": "2026-10-08",
-      "license": {
-        "status": "redistributable",
-        "terms": "geoBoundaries India release metadata declares ODbL 1.0; license URI https://opendatacommons.org/licenses/odbl/1-0/."
-      },
-      "retention": "restoration-only",
-      "verification": "verified",
-      "restoration": "Retained and byte-verified in feature-count-reconciliation/evidence-quality.json; submanifest budgets these shared source bytes once.",
-      "files": [],
-      "temporal_status": "reference",
-      "limit": "Full-resolution products are still administrative outputs; counts/name differences do not establish physical facts or explain all processing causes."
+      "limit": "SourceData counts and name multisets explain observed retained-count differences, but repository artifacts do not identify the processing operation."
     }
   ],
   "outputs": [
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/README.md",
-      "bytes": 12629,
-      "sha256": "f90d7b937508adf96057061c891bbea70184560a0524c9f6d7878bd5acb438ec",
+      "bytes": 11654,
+      "sha256": "f5416391cffac85f097d67a41725760ed1689080974d60662f281035c3da4fa3",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     },
@@ -1186,31 +1182,31 @@
     },
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py",
-      "bytes": 22678,
-      "sha256": "1e4ad5d7b26721d07d8effa4f81ce58ee109e5c681e79db416f6b0fe2c18bc34",
+      "bytes": 20891,
+      "sha256": "2d7fa050858be47e692c16c835177e7bb61527120bc1fd48a764a94f2908e6e2",
       "hash_kind": "file-bytes",
       "role": "method-code"
     },
     {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/report.json",
-      "bytes": 104882,
-      "sha256": "f81a46be83d7969c3cdde9b3d3dc2c6ee003925dec4eb632edba1e36c5c9a3bc",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
+      "bytes": 9411,
+      "sha256": "d204241ef36a719d3f809bbedc28b7aae1f9b02fdb92fe6e61e41ca560c9edb0",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/publication.json",
-      "bytes": 275,
-      "sha256": "658afa81254b13dc162da6c263afe4c54103a4ffd20c76cba8de43a6a0181277",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/publication.json",
+      "bytes": 305,
+      "sha256": "e315567935d3a6984dbd3a282f51dcdd89e41af3180aa0c8995ff71115412cb6",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/evidence-quality.json",
-      "bytes": 15191,
-      "sha256": "3dadff11853a4b6a4e291ad188649822d9e5648e8ef3b17f3f06c85f482634a7",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/evidence-quality.json",
+      "bytes": 10939,
+      "sha256": "195360afbd8549397394cd5b2b38e180c81519220a87be8e2a4249f4489bbccb",
       "hash_kind": "file-bytes",
-      "role": "manifest"
+      "role": "generated-evidence"
     }
   ],
   "methods": [
@@ -1303,7 +1299,7 @@
       "value": 736,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "f81a46be83d7969c3cdde9b3d3dc2c6ee003925dec4eb632edba1e36c5c9a3bc",
+      "input_sha256": "d204241ef36a719d3f809bbedc28b7aae1f9b02fdb92fe6e61e41ca560c9edb0",
       "input_set_sha256": "eab8f383c183aaa00befac34c3cf41bc22bd98efd3c95d1176172ead86efda28",
       "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
       "title": "India ADM2: Advertised source features"
@@ -1313,7 +1309,7 @@
       "value": 1,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "f81a46be83d7969c3cdde9b3d3dc2c6ee003925dec4eb632edba1e36c5c9a3bc",
+      "input_sha256": "d204241ef36a719d3f809bbedc28b7aae1f9b02fdb92fe6e61e41ca560c9edb0",
       "input_set_sha256": "eab8f383c183aaa00befac34c3cf41bc22bd98efd3c95d1176172ead86efda28",
       "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
       "title": "India ADM2: Advertised minus retained features"
@@ -1433,7 +1429,7 @@
       "value": 6836,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "f81a46be83d7969c3cdde9b3d3dc2c6ee003925dec4eb632edba1e36c5c9a3bc",
+      "input_sha256": "d204241ef36a719d3f809bbedc28b7aae1f9b02fdb92fe6e61e41ca560c9edb0",
       "input_set_sha256": "eab8f383c183aaa00befac34c3cf41bc22bd98efd3c95d1176172ead86efda28",
       "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
       "title": "India ADM3: Advertised source features"
@@ -1443,7 +1439,7 @@
       "value": 14,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "f81a46be83d7969c3cdde9b3d3dc2c6ee003925dec4eb632edba1e36c5c9a3bc",
+      "input_sha256": "d204241ef36a719d3f809bbedc28b7aae1f9b02fdb92fe6e61e41ca560c9edb0",
       "input_set_sha256": "eab8f383c183aaa00befac34c3cf41bc22bd98efd3c95d1176172ead86efda28",
       "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
       "title": "India ADM3: Advertised minus retained features"
@@ -1589,24 +1585,24 @@
       "title": "Inherited physical authority unapproved"
     },
     {
-      "id": "adm2_release_full_resolution_feature_count",
-      "value": 735,
+      "id": "adm2_sourceData_record_count",
+      "value": 736,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "f81a46be83d7969c3cdde9b3d3dc2c6ee003925dec4eb632edba1e36c5c9a3bc",
-      "input_set_sha256": "0c3fa1c46971cea693378cad471756c44d1e4f4f57c12bfb23ff7f5d025bfb68",
+      "input_sha256": "de31379da90a382fc595d05ea71df8742ac01da04fc7fbad5775b3b8d90a6915",
+      "input_set_sha256": "6bf390f71b01f07cbbc595ba325f6fd295cfae4c5b0400c3df659f8f41076c44",
       "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
-      "title": "ADM2 ReleaseData full-resolution features"
+      "title": "ADM2 sourceData archive records"
     },
     {
-      "id": "adm3_release_full_resolution_feature_count",
-      "value": 6824,
+      "id": "adm3_sourceData_record_count",
+      "value": 6836,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "f81a46be83d7969c3cdde9b3d3dc2c6ee003925dec4eb632edba1e36c5c9a3bc",
-      "input_set_sha256": "0c3fa1c46971cea693378cad471756c44d1e4f4f57c12bfb23ff7f5d025bfb68",
+      "input_sha256": "322f8689cbdf274bbf6477158904e68aa292b4603c1a035ed7b7e92833f8a0ef",
+      "input_set_sha256": "6bf390f71b01f07cbbc595ba325f6fd295cfae4c5b0400c3df659f8f41076c44",
       "evaluation_commit": "64770c1a8c82c3626344d3d5ce322cdcb839ea2e",
-      "title": "ADM3 ReleaseData full-resolution features"
+      "title": "ADM3 sourceData archive records"
     }
   ],
   "summaries": [
@@ -1781,23 +1777,24 @@
       "unit": "components"
     },
     {
-      "metric_id": "adm2_release_full_resolution_feature_count",
-      "value": 735,
+      "metric_id": "adm2_sourceData_record_count",
+      "value": 736,
       "unit": "features"
     },
     {
-      "metric_id": "adm3_release_full_resolution_feature_count",
-      "value": 6824,
+      "metric_id": "adm3_sourceData_record_count",
+      "value": 6836,
       "unit": "features"
     }
   ],
   "conclusions": [
     {
       "status": "supported",
-      "text": "The retained ADM2 and ADM3 product feature counts differ from their version-locked metadata claims; retained shapeID values are present and unique. The responsible cause and missing units are not identified by the retained products.",
+      "text": "The advertised ADM2/ADM3 counts match the pinned sourceData archive record counts (736/6,836), while retained simplified products contain 735/6,822 features. Source-name differences are recorded; the processing cause remains unidentified.",
       "source_ids": [
         "geoboundaries-ind-adm2",
-        "geoboundaries-ind-adm3"
+        "geoboundaries-ind-adm3",
+        "geoboundaries-ind-sourceData-archives"
       ]
     },
     {
@@ -1823,7 +1820,9 @@
     "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/india-western-gap-source-fitness-20261007/assess.py",
     "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/india-western-gap-source-fitness-20261007/extract_inherited.py",
     "node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/evidence-quality.json",
-    "node scripts/check-handoff-scope.mjs --branch geography/india-western-gap-source-fitness-20261007 --base origin/main --pr-body-file /tmp/india-pr-body.md --issue-file /tmp/india-issue.json"
+    "node scripts/check-handoff-scope.mjs --branch geography/india-western-gap-source-fitness-20261007 --base origin/main --pr-body-file /tmp/india-pr-body.md --issue-file /tmp/india-issue.json",
+    "python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py --output-dir research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/<fresh-id>",
+    "node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/<fresh-id>/evidence-quality.json"
   ],
   "metric_bindings": [
     {
@@ -1997,24 +1996,14 @@
       "json_pointer": "/physical_authority_counts/unapproved"
     },
     {
-      "metric_id": "adm2_release_full_resolution_feature_count",
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/report.json",
-      "json_pointer": "/products/ADM2/releaseData_full_resolution_feature_count"
+      "metric_id": "adm2_sourceData_record_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
+      "json_pointer": "/products/ADM2/sourceData_archive_record_count"
     },
     {
-      "metric_id": "adm3_release_full_resolution_feature_count",
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/report.json",
-      "json_pointer": "/products/ADM3/releaseData_full_resolution_feature_count"
-    },
-    {
-      "metric_id": "adm2_release_full_resolution_feature_count",
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/report.json",
-      "json_pointer": "/products/ADM2/releaseData_full_resolution_feature_count"
-    },
-    {
-      "metric_id": "adm3_release_full_resolution_feature_count",
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/report.json",
-      "json_pointer": "/products/ADM3/releaseData_full_resolution_feature_count"
+      "metric_id": "adm3_sourceData_record_count",
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
+      "json_pointer": "/products/ADM3/sourceData_archive_record_count"
     }
   ],
   "rendered_tables": [
@@ -2232,12 +2221,6 @@
           "decimals": 0
         },
         {
-          "metric_id": "adm2_release_full_resolution_feature_count",
-          "line": 71,
-          "template": "| ADM2 full-resolution `releaseData` GeoJSON | {value} | features |",
-          "decimals": 0
-        },
-        {
           "metric_id": "adm2_retained_feature_count",
           "line": 72,
           "template": "| ADM2 retained simplified GeoJSON | {value} | features |",
@@ -2250,15 +2233,21 @@
           "decimals": 0
         },
         {
-          "metric_id": "adm3_release_full_resolution_feature_count",
-          "line": 74,
-          "template": "| ADM3 full-resolution `releaseData` GeoJSON | {value} | features |",
-          "decimals": 0
-        },
-        {
           "metric_id": "adm3_retained_feature_count",
           "line": 75,
           "template": "| ADM3 retained simplified GeoJSON | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm2_sourceData_record_count",
+          "line": 70,
+          "template": "| ADM2 `sourceData` archive records | {value} | features |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "adm3_sourceData_record_count",
+          "line": 72,
+          "template": "| ADM3 `sourceData` archive records | {value} | features |",
           "decimals": 0
         }
       ]
@@ -2293,19 +2282,19 @@
       "status": "added"
     },
     {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/report.json",
-      "status": "added"
-    },
-    {
       "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/runs/reconciliation-20261008-03/report.json",
       "status": "added"
     },
     {
@@ -2314,30 +2303,6 @@
     },
     {
       "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/IND-ADM3.zip",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/high-resolution/high-resolution-IND-ADM2-000.bin.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/high-resolution/high-resolution-IND-ADM2-001.bin.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/high-resolution/high-resolution-IND-ADM3-000.bin.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/high-resolution/high-resolution-IND-ADM3-001.bin.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/high-resolution/high-resolution-IND-ADM3-002.bin.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/sources/high-resolution/high-resolution-IND-ADM3-003.bin.gz",
       "status": "added"
     },
     {

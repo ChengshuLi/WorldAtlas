@@ -8,7 +8,7 @@ This is source-only research. All inherited physical statuses remain unknown and
 
 ## Findings
 
-The complete retained India ADM2 and ADM3 administrative products were authenticated from the geoBoundaries release at commit `9469f09`. The advertised-versus-retained count differences were reconciled against the matching `sourceData` archives and the release’s full-resolution GeoJSON. This identifies which stage contains the observed name-count gaps; the repository does not state why the release products differ from their source archives. Details and exact inputs are in the count-reconciliation section and manifest. Each candidate component intersects at least one feature in each retained product; this is administrative coverage evidence only. It cannot establish dated dry land versus inland water, legal boundary authority, or processing cause.
+The complete retained India ADM2 and ADM3 administrative products were authenticated from the geoBoundaries release at commit `9469f09`. The advertised-versus-retained count differences were reconciled against the matching `sourceData` archives. This identifies the archive-to-retained name gaps; the repository does not state which processing operation explains them. Details and exact inputs are in the count-reconciliation section and manifest. Each candidate component intersects at least one feature in each retained product; this is administrative coverage evidence only. It cannot establish dated dry land versus inland water, legal boundary authority, or processing cause.
 
 The complete-family rank is reproducible from the pinned source-fitness slice and all 14 immutable family output shards. The slice contains 1,005 rows for 711 unique families; the selected family is present in the full family outputs. Using the pinned priority code order `source_locator_readiness`, `coordination_complexity`, then `measured_impact`, its tuple `(22, 51987, 93320)` sorts to rank 8 of 711, with no tie. The method and exact input hashes are recorded in `selection-ranking/report.json`; this is selection accounting only.
 
@@ -63,24 +63,20 @@ All values below are bound to generated JSON values in `evidence-quality.json`; 
 
 ### Release count reconciliation
 
-The metadata’s advertised `admUnitCount` matches the corresponding `sourceData` archive row count for both products. The counts diverge in the `releaseData` outputs as follows:
+The metadata’s advertised `admUnitCount` matches the corresponding `sourceData` archive row count for both products. The counts diverge in the retained simplified `releaseData` products as follows:
 
 | Product stage | Value | Unit |
 |---|---:|---|
 | ADM2 `sourceData` archive records | 736 | features |
-| ADM2 full-resolution `releaseData` GeoJSON | 735 | features |
 | ADM2 retained simplified GeoJSON | 735 | features |
 | ADM3 `sourceData` archive records | 6836 | features |
-| ADM3 full-resolution `releaseData` GeoJSON | 6824 | features |
 | ADM3 retained simplified GeoJSON | 6822 | features |
 
-By source-name multiset, `Charki Dadri` is present in the ADM2 `sourceData` archive and absent from both ADM2 `releaseData` GeoJSON files. Twelve ADM3 names present in the source archive are absent from the full-resolution release: `Bironkhal`, `Charakonda`, `Chilpched`, `Kalol`, `Kaloor Thimmandoddi`, `Khoupum`, `Kilpennathur`, `Mamdot`, `Rajoli`, `Sanawad`, `Suangdoh`, and `Udainagar`. Fourteen source names are absent from the simplified ADM3 product: those twelve except `Khoupum`, plus `Gadiguda`, `Lm`, and `Moosapet`.
+By source-name multiset, `Charki Dadri` is present in the ADM2 `sourceData` archive and absent from the retained ADM2 product. Fourteen ADM3 names present in the source archive are absent from the retained ADM3 product: `Bironkhal`, `Charakonda`, `Chilpched`, `Gadiguda`, `Kalol`, `Kaloor Thimmandoddi`, `Kilpennathur`, `Lm`, `Mamdot`, `Moosapet`, `Rajoli`, `Sanawad`, `Suangdoh`, and `Udainagar`.
 
-The ADM3 full-resolution and simplified files also differ by `shapeID`: three full-resolution IDs (`7132399B10679805821500` / `Gadiguda`, `7132399B78300861263339` / `Moosapet`, and `7132399B97254734508703` / `Lm`) are absent from the simplified file, while the simplified file has `7132399B4028970572101` / `Khoupum`, which is absent from the full-resolution file. That is a net reduction of two records. ADM2 has the same `shapeID` set in full-resolution and simplified outputs.
+The `sourceData` ADM3 archive is a shapefile DBF with `Name` records, not stable release `shapeID` values. These comparisons therefore reconcile row counts and source-name multisets, not authoritative identity across datasets; repeated names may occur. The pinned artifacts establish the observed advertised-to-retained differences but do not document which processing operation explains them. No geometric or physical-surface inference follows from these count checks. See `feature-count-reconciliation/runs/reconciliation-20261008-03/report.json` for the bounded input admission, complete name deltas, and exact file inventory.
 
-The `sourceData` ADM3 archive is a shapefile DBF with `Name` records, not stable release `shapeID` values. These comparisons therefore reconcile row counts and source-name multisets, not authoritative identity across datasets; repeated names may occur. The pinned repository artifacts establish the observed release-stage differences but do not document why those records are absent or why the ADM3 ID set changes. No geometric or physical-surface inference follows from these count checks. See `feature-count-reconciliation/report.json` for part hashes, the complete name deltas, and the exact file inventory.
-
-The comparisons use the [geoBoundaries India sourceData ADM2 archive](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/sourceData/gbOpen/IND_ADM2.zip), [ADM3 archive](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/sourceData/gbOpen/IND_ADM3.zip), and the corresponding [full-resolution ADM2](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson) and [ADM3](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3.geojson) release files. Both product metadata records the ODbL 1.0 license; the license text URI is listed above.
+The comparisons use the [geoBoundaries India sourceData ADM2 archive](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/sourceData/gbOpen/IND_ADM2.zip) and [ADM3 archive](https://github.com/wmgeolab/geoBoundaries/blob/9469f09/sourceData/gbOpen/IND_ADM3.zip). Both product metadata records the ODbL 1.0 license; the license text URI is listed above.
 
 ## Sources and method
 
@@ -97,11 +93,11 @@ For each numeric metric, `input_sha256` identifies a registered immutable source
 
 ## Limits and next action
 
-The source-feature count differences are now reconciled by release stage and source name, but the upstream processing cause remains undocumented. This comparison does not establish whether the retained extracts are current-complete. No independent dated physical-surface source was found. The precise missing evidence is a dated, authoritative observation at adequate resolution for each candidate, distinguishing dry land from inland water where relevant. Keep all subjects unresolved pending that evidence. Engineering may use this packet for later source review; it does not authorize a boundary edit or regional approval.
+The advertised-to-retained source-feature count differences are now reconciled by source name, but the upstream processing cause remains undocumented. This comparison does not establish whether the retained extracts are current-complete. No independent dated physical-surface source was found. The precise missing evidence is a dated, authoritative observation at adequate resolution for each candidate, distinguishing dry land from inland water where relevant. Keep all subjects unresolved pending that evidence. Engineering may use this packet for later source review; it does not authorize a boundary edit or regional approval.
 
 Runs `coverage-screen-2026-10-07-03` and `coverage-screen-2026-10-07-04` are retained as superseded complete attempts. The earlier uncommitted attempts did not publish receipts. Run `coverage-screen-2026-10-07-05` was superseded after corrections to inherited-status reporting and input-byte accounting. Run `coverage-screen-2026-10-08-01` was superseded by explicit source-fitness witness reporting. The current complete screen is `coverage-screen-2026-10-08-04`; `inherited-claims-2026-10-08-01` is the current inherited-row projection. Every run has its own immutable completion receipt.
 
 
 To reproduce the family rank and validate its bounded manifest, run `python3 research/geography/india-western-gap-source-fitness-20261007/selection-ranking/run.py` followed by `node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/selection-ranking/evidence-quality.json`. The full geography screen can be rerun with `python3 research/geography/india-western-gap-source-fitness-20261007/assess.py`; validate the packet with `node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/evidence-quality.json`.
 
-To reproduce the release-count reconciliation and validate its bounded manifest, run `python3 research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/run.py` followed by `node scripts/evidence-quality.mjs research/geography/india-western-gap-source-fitness-20261007/feature-count-reconciliation/evidence-quality.json`.
+To reproduce the release-count reconciliation without overwriting existing evidence, choose a new output directory under `feature-count-reconciliation/runs/` and pass it with `--output-dir`. The runner refuses an existing directory, records raw-plus-decoded input admission, and writes a self-contained report and manifest into that fresh directory. Validate it with `node scripts/evidence-quality.mjs <new-output-directory>/evidence-quality.json`.
