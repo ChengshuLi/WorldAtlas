@@ -19,7 +19,7 @@ spec = importlib.util.spec_from_file_location('component_validator', ROOT / 'scr
 validator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(validator)
 from evidence.immutable import canonical_json, descriptor, sha256
-from physical_component_custody import describe, validate as validate_custody
+from physical_component_custody import describe
 
 
 class Fixture:
@@ -57,7 +57,11 @@ class Fixture:
         for prefix, report in self.reports.items():
             for entries in report['outputs'].values():
                 for number, entry in enumerate(entries):
-                    entries[number] = describe(entry['path'], self.raw(entry['path']))
+                    # Preserve original descriptors for unchanged payloads. The
+                    # real scientific validator still authenticates every
+                    # byte; fixture construction only rebinds altered outputs.
+                    if self.aliases[entry['path']]['payload'] in self.changed:
+                        entries[number] = describe(entry['path'], self.raw(entry['path']))
             self.changed[self.aliases[prefix + '/report.json']['payload']] = canonical_json(report)
         # A shared payload may also belong to the preserved failed trial. Its
         # immutable trial receipt must accurately reflect the changed control.
@@ -67,6 +71,8 @@ class Fixture:
             path = generation['prefix'] + '/incomplete-export-receipt.json'
             receipt = json.loads(self.raw(path))
             for number, entry in enumerate(receipt['outputs_preserved']):
+                if self.aliases[entry['path']]['payload'] not in self.changed:
+                    continue
                 row = describe(entry['path'], self.raw(entry['path']))
                 if 'uncompressed_sha256' not in entry:
                     row = {k: v for k, v in row.items() if not k.startswith('uncompressed_')}
@@ -85,7 +91,32 @@ class Fixture:
         path = self.root / validator.INDEX
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(canonical_json(self.index))
-        validate_custody(self.root, self.index)  # prove the control got past custody
+
+
+class FixtureBindingControls(unittest.TestCase):
+    def test_changed_shared_payload_rebinds_complete_and_failed_receipts_without_touching_original(self):
+        from physical_component_custody import validate
+        with tempfile.TemporaryDirectory(prefix='physical-fixture-binding-') as directory:
+            f = Fixture(pathlib.Path(directory))
+            f.alter_rows('new_contacts', lambda rows: rows.clear())
+            changed = next(iter(f.changed))
+            original = (ROOT / changed).read_bytes()
+            f.finalize()
+            self.assertEqual((ROOT / changed).read_bytes(), original)
+            self.assertNotEqual((f.root / changed).read_bytes(), original)
+            # Real whole-byte validation checks every alias and both successful
+            # runs, plus any shared payload in the preserved failed trial.
+            validate(f.root, f.index)
+
+    def test_unchanged_bad_descriptor_is_not_repaired_into_apparent_validity(self):
+        from physical_component_custody import validate
+        with tempfile.TemporaryDirectory(prefix='physical-fixture-rejection-') as directory:
+            f = Fixture(pathlib.Path(directory))
+            entry = next(iter(next(iter(f.reports.values()))['outputs'].values()))[0]
+            entry['sha256'] = '0' * 64
+            f.finalize()
+            with self.assertRaisesRegex(ValueError, 'Missing or changed original output'):
+                validate(f.root, f.index)
 
 
 class Controls(unittest.TestCase):
@@ -122,6 +153,9 @@ class Controls(unittest.TestCase):
             previous = validator.ROOT
             try:
                 validator.ROOT = fixture.root
+                # validate_science starts with the complete real custody check.
+                # Requiring the particular scientific rejection proves custody
+                # succeeded, without authenticating the entire fixture twice.
                 with self.assertRaisesRegex(ValueError, message):
                     validator.validate_science()
             finally:
@@ -170,4 +204,4 @@ class Controls(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2, failfast=True)
+    unittest.main(defaultTest='Controls', verbosity=2, failfast=True)
