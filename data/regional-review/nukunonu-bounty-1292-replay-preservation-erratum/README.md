@@ -64,6 +64,7 @@ PYTHONDONTWRITEBYTECODE=1 python3.12 data/regional-review/regional-supplement-e5
 PYTHONDONTWRITEBYTECODE=1 python3.12 data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/verify.py
 PYTHONDONTWRITEBYTECODE=1 python3.12 data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/reproduce_current_coverage.py --check
 PYTHONDONTWRITEBYTECODE=1 python3.12 data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/test_safe_coverage_cli.py
+PYTHONDONTWRITEBYTECODE=1 python3.12 data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/derive_metrics.py
 node scripts/evidence-quality.mjs data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/evidence-quality.json
 ~~~
 

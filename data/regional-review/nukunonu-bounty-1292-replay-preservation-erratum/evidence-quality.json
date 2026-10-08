@@ -821,8 +821,14 @@
   "outputs": [
     {
       "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/README.md",
-      "bytes": 8320,
-      "sha256": "fed1ebaf3e54552e47b8383fbd526f33270f0a130121fb65718e765497168f2e",
+      "bytes": 8445,
+      "sha256": "48a020b556e06b51db3a3b44f4b4956227c1e229d45e4da01cb08363899577e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/derive_metrics.py",
+      "bytes": 5353,
+      "sha256": "8141f0f7c6aa042b47cd705eaad357c6fa19c069cb8cc10e070a02fe32a8e435",
       "hash_kind": "file-bytes"
     },
     {
@@ -1009,6 +1015,12 @@
       "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/attempt.json",
       "bytes": 129949,
       "sha256": "8d4a7898e4458b8b81059b1823af4739470e905d9f465fc08f5231da5fe6b2c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "bytes": 1507,
+      "sha256": "ec37b4c25d55f356f0d474b61053ff22b5b18ad22610d3be1b1528517c36edb6",
       "hash_kind": "file-bytes"
     },
     {
@@ -1200,6 +1212,10 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/derive_metrics.py",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/evidence-quality.json",
       "status": "added"
     },
@@ -1328,6 +1344,10 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/publication.json",
       "status": "added"
     },
@@ -1338,6 +1358,38 @@
     {
       "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-b/publication.json",
       "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "nukunonu_osm_full_component_fraction",
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "json_pointer": "/metrics/nukunonu_osm_full_component_fraction/value"
+    },
+    {
+      "metric_id": "nukunonu_gshhg_positive_component_fraction",
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "json_pointer": "/metrics/nukunonu_gshhg_positive_component_fraction/value"
+    },
+    {
+      "metric_id": "nukunonu_gshhg_union_coverage_fraction",
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "json_pointer": "/metrics/nukunonu_gshhg_union_coverage_fraction/value"
+    },
+    {
+      "metric_id": "bounty_osm_full_component_fraction",
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "json_pointer": "/metrics/bounty_osm_full_component_fraction/value"
+    },
+    {
+      "metric_id": "bounty_gshhg_positive_component_fraction",
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "json_pointer": "/metrics/bounty_gshhg_positive_component_fraction/value"
+    },
+    {
+      "metric_id": "bounty_gshhg_union_coverage_fraction",
+      "path": "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/vintages/final-verified-a/metrics.json",
+      "json_pointer": "/metrics/bounty_gshhg_union_coverage_fraction/value"
     }
   ]
 }
