@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-08",
+  "retention_policy": "No restricted or unlicensed source bytes are retained. Raw responses were hashed in the owned scratch directory and removed; restoration URLs and exact retrieval hashes remain here. The Natural Earth-derived source remains retained, unchanged, in the parent #454 packet.",
+  "acquisitions": [
+    {
+      "source_id": "mpgis-temotu-profile",
+      "url": "https://www.mpgis.gov.sb/temotu.html",
+      "final_url": "https://www.mpgis.gov.sb/temotu.html",
+      "retrieved_at": "2026-10-08",
+      "content_type": "text/html",
+      "bytes": 141006,
+      "sha256": "ab05f408d8698ed8b078048a388f0e73bea7a340061bc281e8c58806a9a94da8",
+      "retention": "restoration-only; source page/file license not established",
+      "content_check": "HTML text extracted locally; page states former name, two scattered chains, and Santa Cruz/Nendo is largest island",
+      "previous_retrieval": {
+        "retrieved_at": "2026-10-05",
+        "bytes": 141006,
+        "sha256": "a59de8274a0024b42a59c88a035a35060cab9cc3b3b18c5372014c434746f87b",
+        "reference": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json"
+      },
+      "limit": "Response bytes differ from the 2026-10-05 retrieval despite equal length; exact earlier bytes are not retained and the live URL may change."
+    },
+    {
+      "source_id": "mpgis-provincial-government-act-1997",
+      "url": "https://www.mpgis.gov.sb/legislation/6-provincial-government-act-1997/file.html",
+      "final_url": "https://www.mpgis.gov.sb/legislation/6-provincial-government-act-1997/file.html",
+      "retrieved_at": "2026-10-08",
+      "content_type": "application/pdf",
+      "bytes": 378126,
+      "sha256": "21834dddd2e3e45b3e0124de82724ca11394cfa5e2b24aa09cd00a5420f5516a",
+      "retention": "restoration-only; source page/file license not established",
+      "content_check": "official hosted PDF text inspected through web extraction; sections 3 and Schedule 1 Temotu boundary read",
+      "limit": "Current amendment status and Gazette concordance remain to be confirmed with the Attorney General."
+    },
+    {
+      "source_id": "solomon-national-education-action-plan-2022-2026",
+      "url": "https://parliament.gov.sb/sites/default/files/manual_upload/2023/comsec/Final%20National%20Education%20Action%20Plan%202022%20-%202026.pdf",
+      "final_url": "https://parliament.gov.sb/sites/default/files/manual_upload/2023/comsec/Final%20National%20Education%20Action%20Plan%202022%20-%202026.pdf",
+      "retrieved_at": "2026-10-08",
+      "content_type": "application/pdf",
+      "bytes": 14730544,
+      "sha256": "2a6e3b32338b827b4ea430ee917b2ecffa87a4fbf4895639fc288e76ee36a8b7",
+      "retention": "restoration-only; source page/file license not established",
+      "content_check": "search-indexed PDF text only; local text extraction unavailable",
+      "limit": "Unverified contextual lead; not used as conclusive evidence of Temotu member islands."
+    },
+    {
+      "source_id": "unesco-icomos-pacific-cultural-landscapes",
+      "url": "https://whc.unesco.org/document/10061",
+      "final_url": "https://whc.unesco.org/document/10061",
+      "retrieved_at": "2026-10-08",
+      "content_type": "application/pdf",
+      "retention": "restoration-only; source page/file license not established",
+      "retrieval_method": "PDF text extraction via web source reader; direct curl returned HTTP 403",
+      "content_check": "printed page 99 / lines 3868-3882; study scope limitations at lines 4604-4619",
+      "limit": "No raw response hash; exact restoration URL retained. Cultural landscape does not supply a legal or Atlas polygon."
+    },
+    {
+      "source_id": "solomon-delimitation-archipelagos-ln40-1979",
+      "url": "https://faolex.fao.org/docs/pdf/sol21415.pdf",
+      "final_url": "https://faolex.fao.org/docs/pdf/sol21415.pdf",
+      "retrieved_at": "2026-10-08",
+      "content_type": "application/pdf",
+      "retention": "restoration-only; source page/file license not established",
+      "retrieval_method": "FAOLEX PDF text extraction via web source reader",
+      "content_check": "full two-page PDF text; LN 40/1979 separately lists Santa Cruz and Duff archipelagos",
+      "limit": "No raw response hash; copy not checked against the Gazette."
+    },
+    {
+      "source_id": "mpgis-provincial-governments-list",
+      "url": "https://mpgis.gov.sb/provincial-governments.html",
+      "final_url": "https://mpgis.gov.sb/provincial-governments.html",
+      "retrieved_at": "2026-10-05",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 96894,
+      "sha256": "678e491316bdea8697893c576b2c5ac0da46f9dd155fbbcc735d44e88f7ff2ad",
+      "retention": "restoration-only; source page/file license not established",
+      "content_check": "prior packet records this exact response; current Ministry listing independently found through indexed page",
+      "limit": "No source bytes retained; roster page does not define the Atlas geographic area."
+    },
+    {
+      "source_id": "solomon-natural-earth-adm1-retained-prior-evidence",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+      "final_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+      "retrieved_at": "2026-10-05",
+      "content_type": "application/geo+json",
+      "bytes": 101513,
+      "sha256": "bd22f4cdce1c19066950b8c384c4d484a21a0dcaee5f207e363179f68c58c69d",
+      "retention": "retained in parent #454 evidence; Public Domain",
+      "limit": "Generalized administrative reference only; source can be restored from immutable geoBoundaries release URL."
+    }
+  ]
+}

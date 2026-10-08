@@ -1,0 +1,360 @@
+{
+  "baseline": {
+    "commit": "e760d68ff48a679b08f6fbf0581d1035de35105d",
+    "files": [
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 4746385,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      {
+        "bytes": 2826,
+        "hash_kind": "file-bytes",
+        "path": "data/validation/macro-publication-v5.json",
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 215,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/current-manifest.json",
+        "sha256": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178"
+      },
+      {
+        "bytes": 2404397,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+      },
+      {
+        "bytes": 8044,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/scope.json",
+        "sha256": "0377ad3ad5af9ec45e233e9e62e5b958d3a3b81329aaf3fcc71b5222f02ada80"
+      },
+      {
+        "bytes": 9302,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json",
+        "sha256": "8ca953420a96d12200f4ca56d5b91abf5aafe276918a36c1745dae72bfd42d2c"
+      },
+      {
+        "bytes": 12015,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources.json",
+        "sha256": "36daeaef5331367bcd70679d8f860faf3b0f30d6c193fe879660d1d21d323ca1"
+      },
+      {
+        "bytes": 101513,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/solomon-islands-natural-earth-adm1.geojson",
+        "sha256": "bd22f4cdce1c19066950b8c384c4d484a21a0dcaee5f207e363179f68c58c69d"
+      },
+      {
+        "bytes": 17414,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+      },
+      {
+        "bytes": 23246,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence-quality.mjs",
+        "sha256": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03"
+      }
+    ],
+    "pin_files": {
+      "current_membership_inventory": "data/macro-foundation/current-membership-inventory.json.gz",
+      "current_release": "data/geographic-releases/current-manifest.json",
+      "evidence_validator": "scripts/evidence-quality.mjs",
+      "geography_part_22": "data/geography/part-22.json",
+      "hierarchy": "data/hierarchy.json",
+      "immutable_helper": "scripts/evidence/immutable.py",
+      "macro_publication_v5": "data/validation/macro-publication-v5.json",
+      "parent_scope": "data/regional-review/regional-review-1aa97b490604ea4e/scope.json",
+      "parent_source_acquisition": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json",
+      "parent_sources": "data/regional-review/regional-review-1aa97b490604ea4e/sources.json",
+      "retained_natural_earth_adm1": "data/regional-review/regional-review-1aa97b490604ea4e/sources/solomon-islands-natural-earth-adm1.geojson",
+      "source_registry": "data/administrative-sources.json",
+      "world_index": "data/world-index.json"
+    },
+    "pins": {
+      "current_membership_inventory": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "current_release": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178",
+      "evidence_validator": "e68d2606953ae84145288ddce7537bbde2dd867f410c81e81a2e8207a3236e03",
+      "geography_part_22": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "immutable_helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "macro_publication_v5": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "parent_scope": "0377ad3ad5af9ec45e233e9e62e5b958d3a3b81329aaf3fcc71b5222f02ada80",
+      "parent_source_acquisition": "8ca953420a96d12200f4ca56d5b91abf5aafe276918a36c1745dae72bfd42d2c",
+      "parent_sources": "36daeaef5331367bcd70679d8f860faf3b0f30d6c193fe879660d1d21d323ca1",
+      "retained_natural_earth_adm1": "bd22f4cdce1c19066950b8c384c4d484a21a0dcaee5f207e363179f68c58c69d",
+      "source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "subject_files": {
+      "gb:SLB:ADM1:17018030B19935783635883": "data/geography/part-22.json"
+    }
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 data/regional-review/temotu-santa-cruz-parent-scope-20261005/reproduce.py --check --vintage source-review-20261008",
+    "node scripts/evidence-quality.mjs data/regional-review/temotu-santa-cruz-parent-scope-20261005/evidence-quality.json"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "mpgis-temotu-profile",
+        "mpgis-provincial-government-act-1997",
+        "solomon-natural-earth-adm1-retained-prior-evidence"
+      ],
+      "status": "supported",
+      "text": "The exact subject resolves to Temotu at the Solomon Islands ADM1/province reporting tier; the generalized reference does not prove legal exact boundaries or completeness."
+    },
+    {
+      "source_ids": [
+        "mpgis-temotu-profile",
+        "solomon-delimitation-archipelagos-ln40-1979",
+        "unesco-icomos-pacific-cultural-landscapes"
+      ],
+      "status": "supported",
+      "text": "A historical provincial name alone does not establish present equivalence between the whole Temotu province and the Atlas Santa Cruz Islands area."
+    },
+    {
+      "source_ids": [
+        "mpgis-provincial-government-act-1997",
+        "solomon-delimitation-archipelagos-ln40-1979",
+        "unesco-icomos-pacific-cultural-landscapes",
+        "solomon-natural-earth-adm1-retained-prior-evidence"
+      ],
+      "status": "unresolved",
+      "text": "The intended complete perimeter and island membership of the Atlas Santa Cruz Islands area, and therefore the correct whole-Temotu parent, remain unresolved."
+    },
+    {
+      "source_ids": [
+        "mpgis-provincial-government-act-1997",
+        "solomon-natural-earth-adm1-retained-prior-evidence",
+        "mpgis-provincial-governments-list"
+      ],
+      "status": "supported",
+      "text": "The retained ten-feature ADM1 reference includes nine province-named features and the distinct Capital Territory (Honiara); its generic ADM1 label does not make every feature a province."
+    }
+  ],
+  "issue": 913,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Read the issue-pinned immutable source registry, index, geographic feature, release/membership inventory, and retained Natural Earth-derived original; compare inspected legal, administrative, statutory-archipelago, and ICOMOS geographic meanings. No new geometry or distance measure is computed.",
+      "id": "pinned-source-and-membership-review",
+      "software": "Python 3.12.14; Node.js 24.19.0; worldatlas-evidence-preparation-v1",
+      "units": "whole-file bytes and exact string IDs; source scope summarized qualitatively"
+    }
+  ],
+  "metrics": [],
+  "outputs": [
+    {
+      "bytes": 3766,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/README.md",
+      "sha256": "9a916b85eff47c91cedd7539aba93c06524a66ce337aeb00c97e5e7d043c4866"
+    },
+    {
+      "bytes": 5458,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/baseline-inputs.json",
+      "sha256": "0bf52295bcfab9652e3b6e509f5b4c863c7e48e83ff728f5f1a3c75e76a21be9"
+    },
+    {
+      "bytes": 5575,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/findings.md",
+      "sha256": "0927561ef45072fa0def8a6d6bc03fc3eac430656819170515b070fe429af376"
+    },
+    {
+      "bytes": 11421,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/reproduce.py",
+      "sha256": "3a8e96023069a228266e10d06999cfc350873cb6fa70331e2e6d15f7fda6dc6f"
+    },
+    {
+      "bytes": 1036,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/scope.json",
+      "sha256": "3bc76d07659c687cbde3f7d7609a77aacd763da56212a2d0fd1b6cf5ac5144c2"
+    },
+    {
+      "bytes": 5790,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/source-acquisition.json",
+      "sha256": "1387c7c0d88cccc3411033c7bd1b926368019fa59b7204fb19e0529f66a9cc48"
+    },
+    {
+      "bytes": 2771,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/source-review.json",
+      "sha256": "a0291ff88a421b73ee5c6a822de494ad8c64f377306aa27bafb27564be890743"
+    },
+    {
+      "bytes": 7497,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/sources.json",
+      "sha256": "d6389fe75a76bcda991c8a5bfcbf6c64a1c0cf6a3db5d2f8d55def4eebbb14d0"
+    },
+    {
+      "bytes": 282,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/vintages/source-review-20261008/publication.json",
+      "sha256": "b9af4e0c8d3524f7e46bd723e66933ec8865833fe01274724b6a8fb767dbbcc1"
+    },
+    {
+      "bytes": 2991,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/vintages/source-review-20261008/reproduction.json",
+      "sha256": "b3352bb78b5ecf37727445b81c03bcc9127a75338949627136a97b5c770bf517"
+    }
+  ],
+  "sources": [
+    {
+      "id": "mpgis-temotu-profile",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse/license status is unknown; no bytes retained."
+      },
+      "limit": "HTML text was inspected; profile does not enumerate all constituent islands or define the Atlas area.",
+      "restoration": "Restore only from this exact HTTPS URL; for retained prior evidence also verify the baseline whole-file hash recorded in source-acquisition.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-08",
+      "role": "Official Temotu provincial profile; administrative identity, former name, scattered island chains, and largest island.",
+      "temporal_status": "unknown",
+      "url": "https://www.mpgis.gov.sb/temotu.html",
+      "verification": "verified",
+      "vintage": "2018-09-04 page; response retrieved 2026-10-08; exact response hash in source-acquisition.json."
+    },
+    {
+      "id": "mpgis-provincial-government-act-1997",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse/license status is unknown; no bytes retained."
+      },
+      "limit": "Posted copy is restoration-only; confirm amendment status/Gazette concordance with the Attorney General. Legal administrative extent does not define Atlas-area meaning.",
+      "restoration": "Restore only from this exact HTTPS URL; for retained prior evidence also verify the baseline whole-file hash recorded in source-acquisition.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-08",
+      "role": "Official legal provincial tier and Temotu boundary description in section 3 and Schedule 1.",
+      "temporal_status": "unknown",
+      "url": "https://www.mpgis.gov.sb/legislation/6-provincial-government-act-1997/file.html",
+      "verification": "verified",
+      "vintage": "Act No. 7 of 1997; posted consolidated copy retrieved 2026-10-08; exact response hash in source-acquisition.json."
+    },
+    {
+      "id": "solomon-delimitation-archipelagos-ln40-1979",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse/license status is unknown; no bytes retained."
+      },
+      "limit": "Restoration copy not authenticated against Gazette; statutory groups do not define the Atlas area.",
+      "restoration": "Restore only from this exact HTTPS URL; for retained prior evidence also verify the baseline whole-file hash recorded in source-acquisition.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-08",
+      "role": "Subsidiary legislation lists Solomon Islands archipelago groups for marine-waters purposes.",
+      "temporal_status": "unknown",
+      "url": "https://faolex.fao.org/docs/pdf/sol21415.pdf",
+      "verification": "verified",
+      "vintage": "Chapter 95, LN 40/1979 dated 1979-08-31; text inspected 2026-10-08."
+    },
+    {
+      "id": "unesco-icomos-pacific-cultural-landscapes",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse/license status is unknown; no bytes retained."
+      },
+      "limit": "No raw hash; exact restoration URL retained. Cultural study is not a legal or Atlas membership boundary.",
+      "restoration": "Restore only from this exact HTTPS URL; for retained prior evidence also verify the baseline whole-file hash recorded in source-acquisition.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-08",
+      "role": "ICOMOS Pacific cultural-landscape account of the Reef Santa Cruz Islands group.",
+      "temporal_status": "unknown",
+      "url": "https://whc.unesco.org/document/10061",
+      "verification": "verified",
+      "vintage": "Thematic study cataloged circa 2008; page 99 / lines 3868-3882 inspected 2026-10-08."
+    },
+    {
+      "id": "solomon-national-education-action-plan-2022-2026",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse/license status is unknown; no bytes retained."
+      },
+      "limit": "Search-index text only; PDF was not independently text-extracted and is not used as conclusive member evidence.",
+      "restoration": "Restore only from this exact HTTPS URL; for retained prior evidence also verify the baseline whole-file hash recorded in source-acquisition.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-08",
+      "role": "Government-published provincial island roster lead, not boundary law.",
+      "temporal_status": "unknown",
+      "url": "https://parliament.gov.sb/sites/default/files/manual_upload/2023/comsec/Final%20National%20Education%20Action%20Plan%202022%20-%202026.pdf",
+      "verification": "unverified",
+      "vintage": "2022-2026 plan; response retrieved and hashed 2026-10-08."
+    },
+    {
+      "id": "solomon-natural-earth-adm1-retained-prior-evidence",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain per pinned administrative-source registry and Natural Earth."
+      },
+      "limit": "Public domain per pinned registry/Natural Earth; generalized source does not establish legal boundaries, island completeness, or parent meaning.",
+      "restoration": "Restore only from this exact HTTPS URL; for retained prior evidence also verify the baseline whole-file hash recorded in source-acquisition.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-08",
+      "role": "Generalized administrative reference for source ID/name and neighboring-unit granularity.",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+      "verification": "verified",
+      "vintage": "Natural Earth-derived 2021 reference; retrieved 2026-10-05 and retained in parent #454; exact source hash in baseline inputs/source-acquisition."
+    },
+    {
+      "id": "mpgis-provincial-governments-list",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse/license status is unknown; no bytes retained."
+      },
+      "limit": "The nine-province roster and separate Honiara role do not define the Atlas Santa Cruz area or Temotu island-level boundaries.",
+      "restoration": "Restore only from this exact HTTPS URL; compare against the prior retrieval hash recorded in source-acquisition.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-08",
+      "role": "official neighboring administrative-tier roster",
+      "temporal_status": "unknown",
+      "url": "https://mpgis.gov.sb/provincial-governments.html",
+      "verification": "verified",
+      "vintage": "Ministry page retrieved 2026-10-05; live listing checked through web search 2026-10-08"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:SLB:ADM1:17018030B19935783635883"
+  ],
+  "subject_ids_sha256": "08315912ad2fce8f10ccc19a1b7fcbe3c7d84caf92dd9f39bae1c087472ee3fa",
+  "summaries": [],
+  "version": 1,
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc"
+}
