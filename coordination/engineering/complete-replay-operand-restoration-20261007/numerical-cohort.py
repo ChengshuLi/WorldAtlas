@@ -140,6 +140,23 @@ def bounded_objects(objects_module, products, loaded, records, native_aliases):
         # selectors/pins. Do not keep a second full source serialization.
         self.verified_aliases.clear()
         del raw, geometry, shifted
+    # The literal recursive retain remains the only inverse/object writer.
+    # Drop completed validation bodies before the next sibling; selectors,
+    # component indexes, emitted full bodies and inverse checks stay unchanged.
+    literal_retain = self.retain
+    def retain(value):
+        objects_module.require(self.retain is retain and
+                               literal_retain.__self__ is self and
+                               literal_retain.__func__ is objects_module.Objects.retain,
+                               'Literal recursive retain binding differs')
+        answer = literal_retain(value)
+        objects_module.require(self.retain is retain and
+                               literal_retain.__self__ is self and
+                               literal_retain.__func__ is objects_module.Objects.retain,
+                               'Literal recursive retain binding changed')
+        self.verified_aliases.clear()
+        return answer
+    self.retain = retain
     return self
 
 
