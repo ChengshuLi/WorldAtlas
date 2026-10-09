@@ -691,17 +691,17 @@
     {
       "id": "cq-updated-standard-maps-2026",
       "url": "https://ghzrzyj.cq.gov.cn/zwxx_186/bmdt/202602/t20260212_15440345_wap.html",
-      "role": "Locator for standard-map depictions updated after Chongqing administrative adjustment; possible display-boundary reference only.",
-      "vintage": "Update announcement 2026-02-12; individual map vintages unknown.",
+      "role": "Official locator for current standard-map display products; a directly retrieved raster map shows the 2026 Chongqing county-level depiction and Liangjiang administrative area.",
+      "vintage": "Retrieved citywide and Liangjiang sheets print 2026-01, approval 渝S(2025)130号. Catalog data/qh.js says 2024-06, conflicting with image vintages. 大足区 sheet prints 2026-01 but approval 渝S(2024)029号. Per-file metadata and hashes are in findings/retrieval-log.json.",
       "retrieved_at": "2026-10-09",
       "license": {
         "status": "unknown",
-        "terms": "Individual map approval and reuse terms not inspected."
+        "terms": "Official announcement offers downloads/use; no repository redistribution or digitization license found. Original JPEGs are not committed."
       },
       "retention": "restoration-only",
-      "verification": "unverified",
-      "restoration": "Retrieve relevant originals and approval IDs, vintage, scale, coverage and terms from the official Chongqing map module; assess suitability before any comparison.",
-      "limit": "Original page/map bytes were not retained; indexed discovery is not map evidence. See findings/retrieval-log.json.",
+      "verification": "verified",
+      "restoration": "Download the exact artifact URLs and verify the byte lengths, hashes, Last-Modified values and printed approvals/vintages recorded in findings/retrieval-log.json. Check each map's terms before reproducing it. For legal boundaries, obtain an authorized versioned boundary result rather than digitizing these sheets.",
+      "limit": "The map footer states internal lines are not a basis for boundary demarcation. Raster display maps are generalized and do not establish row identity, legal boundary geometry, islands, topology, completeness or the Liangjiang-to-historical-ID crosswalk.",
       "temporal_status": "reference"
     },
     {
@@ -759,19 +759,19 @@
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-summary.json",
       "bytes": 1953,
-      "sha256": "cb269c355a9031bb6e8a2f9722b7380500395997d6bfede74869710b0426e5c2",
+      "sha256": "b00307bbe12fd49ce72e89821b6ffeda743b9f4877a8b90e4fd4879d87981d89",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/retrieval-log.json",
-      "bytes": 20110,
-      "sha256": "682d9d9f5a23c75b16e9900f9c249283d2f137df89e9c29d2b1b84b030579194",
+      "bytes": 27485,
+      "sha256": "32b29bed4d6e981d185239a0f9108052b823a2b8c78f11d535bdd9c1c5209463",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
-      "bytes": 10588,
-      "sha256": "05e93f70648e42428320606a9184e76cdd9af776014a155eaf9c737bd89e91d6",
+      "bytes": 11757,
+      "sha256": "350631aa219282551c24ab8689bfe0edf8b4ac9186a257252323a0da7871ff32",
       "hash_kind": "file-bytes"
     },
     {

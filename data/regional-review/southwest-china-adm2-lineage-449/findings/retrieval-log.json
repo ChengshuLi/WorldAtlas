@@ -3,7 +3,7 @@
   "retrieval_date": "2026-10-09",
   "timezone": "UTC",
   "scope": "Original current administrative rosters and legally authoritative polygon evidence for the issue's exact 228 Chongqing, Guizhou and Sichuan county-level subjects; current boundary-source custodians and public-map suitability leads",
-  "result": "Historical lineage and transformation observations are reproducible. First-party current roster/map sources and a likely Chongqing boundary-data custodian are now identified, but original current roster/polygon/map bytes were not retained; no current row-level or boundary-completeness claim is verified.",
+  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established.",
   "direct_access_retry": {
     "attempted_at": "2026-10-09 UTC",
     "method": "curl via direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
@@ -238,6 +238,97 @@
       "terms": "No boundary data or permission retrieved. Access must follow the lawful custodial channel and applicable controls.",
       "restoration": "Retrieve the official reply and ask the authorized data custodian, through the proper project/issue owner channel, whether a permitted, versioned boundary extract can be supplied for research; retain any returned source terms and metadata.",
       "limit": "Identifies a possible custodian/handoff route only. It does not disclose coordinates, prove access rights, or verify any of the 33 Chongqing subjects."
+    },
+    {
+      "source_id": "cq-standard-map-service-2026-retrieved",
+      "publisher": "Chongqing Planning and Natural Resources Bureau; map sheets credit the bureau and Chongqing Civil Affairs Bureau",
+      "title": "重庆市标准地图服务 — 重庆市地图（行政区划） and 两江新区行政区划图",
+      "url": "https://yuditu.com/bzdt/",
+      "official_locator": "https://ghzrzyj.cq.gov.cn/zwxx_186/bmdt/202602/t20260212_15440345_wap.html",
+      "observed_at": "2026-10-09 UTC",
+      "source_vintage": "Retrieved map sheet print date 2026-01; map approval 渝S(2025)130号. Catalog data/qh.js labels map entries 2024年06月, which conflicts with the downloaded sheets' printed date and HTTP Last-Modified. Record both; sheet dates/approval marks take precedence for the image itself.",
+      "access": "Direct HTTPS returned the catalog and downloadable JPEG originals. The official 2026-02-12 bureau announcement names the service module as its download location. The map notes state 图内界线不作为划界依据 (map lines are not a basis for boundary demarcation). The municipal overview has a 75 km scale bar; the Liangjiang sheet has a 6 km scale bar. These are current approved display depictions, not a legal-boundary GIS dataset.",
+      "catalog": {
+        "url": "https://yuditu.com/bzdt/data/qh.js",
+        "retrieved_at": "2026-10-09 UTC",
+        "bytes": 26455,
+        "sha256": "411057c63d7a78bce13e7ef628f673e651991c5ac7f92aa4d5dd0391439be844",
+        "catalog_time_for_city_and_county_maps": "2024年06月"
+      },
+      "artifacts": [
+        {
+          "title": "重庆市地图（行政区划1）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%921%29.jpg",
+          "bytes": 2107542,
+          "sha256": "2bb00c7f995b391554385bb64e79ff5038428aad50e2eb8e53abf19848775148",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": true
+        },
+        {
+          "title": "重庆市地图（行政区划2）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%922%29.jpg",
+          "bytes": 1319632,
+          "sha256": "7de5b1a2823046117bdcfeaa663b98b4a9ac830dca38e6239009ae3bd8b99e40",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": true
+        },
+        {
+          "title": "重庆市地图（行政区划3）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%923%29.jpg",
+          "bytes": 1485722,
+          "sha256": "7ae6a1395b4a97061424d7d040b901d6f6e4ff879f9317df39aff31c3790b7bc",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "重庆市地图（行政区划4）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%924%29.jpg",
+          "bytes": 856629,
+          "sha256": "faa3533a994d19188f65f1b71999635479be0eaaf5f721ea0d4a6cd0886b4c46",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "重庆市地图（行政区划5）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%925%29.jpg",
+          "bytes": 1310683,
+          "sha256": "a1671dd82ff05f2e58225e675cc6ef3d8b47a9863e1ab5b70d93f94d0da1adc3",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "重庆市地图（行政区划6）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%926%29.jpg",
+          "bytes": 779429,
+          "sha256": "35fc08c521cf01c5730dc4b0707bf8af2031f859034300684325ed9e3cc33139",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "两江新区行政区划图",
+          "url": "https://yuditu.com/bzdt/data/%E4%B8%A4%E6%B1%9F%E6%96%B0%E5%8C%BA%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92.jpg",
+          "bytes": 2275181,
+          "sha256": "937de9e12344427704d9376342e4105f95fc511ad121e98dedbcd28720a92a21",
+          "last_modified": "2026-06-18T10:01:58Z",
+          "visually_checked": true
+        },
+        {
+          "title": "大足区行政区划",
+          "url": "https://yuditu.com/bzdt/data/%E5%A4%A7%E8%B6%B3%E5%8C%BA%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92.jpg",
+          "bytes": 1555186,
+          "sha256": "e647cc3840b64599bb77f440af4b82975e41346f267b07e42d67c25ce0d31bd6",
+          "last_modified": "2026-01-26T09:35:39Z",
+          "visually_checked": true
+        }
+      ],
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "terms": "The official 2026 announcement says the standard-map module offers the maps for download/use, but no per-map redistribution or adaptation license was found. Preserve exact URL/hash restoration instructions; do not check copyrighted JPEGs into this repository or digitize them without verifying applicable reuse conditions.",
+      "restoration": "Download each exact artifact URL above. Verify byte length and SHA-256, record response Last-Modified and local retrieval timestamp, inspect the approval code and printed vintage, and review reuse terms before retaining or adapting any image. For identity completeness obtain the 2025-12 roster; for legal geometry use a suitable authorized boundary-result source. The Liangjiang map is an explicit 2026 entity-level lead, not a crosswalk for the 33 historical Atlas shapes.",
+      "limit": "The overview and county images depict map cartography, not an ungeneralized polygon database. Their internal-line warning disclaims boundary-demarcation use, the map catalog vintage fields are stale/conflicting, and no per-Atlas-feature row crosswalk or exact geometry comparison was performed. They cannot settle islands, shared-edge topology, legal transfers, coverage/completeness, or the 2025 Liangjiang relationship.",
+      "license_review": "No express license permitting repository redistribution or digitization was found on retrieved pages. Public download/use and map approval are not treated as an open-data license.",
+      "finding": "A current first-party display-map artifact was directly retrieved and visually inspected, materially improving on the prior search-index-only lead. It carries approval 渝S(2025)130号 and a 2026-01 print date; Liangjiang is shown as a named unit with township/street divisions and neighboring county labels. The explicit map warning and scale/generalization prevent interpreting it as legal boundary evidence.",
+      "next_action": "Request or retrieve, through authorized channels, the approved current county-level boundary result shared with Chongqing Planning and Natural Resources Bureau; separately obtain the dated official roster and map-use terms. Do not infer a geometry correction from these display sheets."
     },
     {
       "source_id": "gz-standard-map-2024-suitability",
