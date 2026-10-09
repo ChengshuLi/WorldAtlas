@@ -115,5 +115,3 @@ complete report reproducibility. `validation/` preserves earlier preparatory
 controls and failures; `vintages/controls-*` is the actual bounded control-writer
 receipt. Whole leaf catalogs, metrics and summaries agree between both runs.
 No production database or map data was changed.
-
-The original catalog and all vintages above remain immutable. The 9 October2026 refresh is in `../global-gap-candidate-refresh-20261009/`. Its separate source-relative authority domain and exclusive pipeline status reconcile subsequently accepted repair evidence without promoting provisional observations to physical truth or replaying source science.
