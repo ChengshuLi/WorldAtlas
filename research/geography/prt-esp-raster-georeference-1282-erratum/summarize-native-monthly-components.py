@@ -217,7 +217,8 @@ def component_phase(commit: str, phase: str, component: dict, geometry: dict, ca
                     planned.append((asset, ds.transform, br, bc))
     baseline.admit("planned-output-reserve:component-month-summary.json", OUTPUT_RESERVE)
 
-    vintage = f"jrc-2024-{phase}-{sha(component_id.encode())[:12]}"
+    runner_sha = sha(git_bytes(commit, SCRIPT_REL))[:12]
+    vintage = f"jrc-2024-{phase}-{runner_sha}-{sha(component_id.encode())[:12]}"
     writer = evidence.NewVintage(baseline, OWN_REL, vintage, ["component-month-summary.json"])
     month_counts = {f"2024-{m:02d}": collections.Counter() for m in range(1, 13)}
     month_samples = collections.Counter()

@@ -54,8 +54,8 @@ def load_helper(commit: str, paths: list[str]):
     return module, baseline, pins
 
 
-def component_path(phase: str, component_id: str) -> str:
-    return OWN + f"vintages/jrc-2024-{phase}-{sha(component_id.encode())[:12]}/component-month-summary.json"
+def component_path(phase: str, component_id: str, runner_sha: str) -> str:
+    return OWN + f"vintages/jrc-2024-{phase}-{runner_sha}-{sha(component_id.encode())[:12]}/component-month-summary.json"
 
 
 def publication_path(result_path: str) -> str:
@@ -76,6 +76,7 @@ def verify_publication(baseline, summary_path: str, publication_pathname: str, r
 
 def run() -> None:
     commit = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"]).decode().strip()
+    runner_sha = sha(git_bytes(commit, RUNNER))[:12]
     # Discover all phase outputs from the immutable expected 23-subject roster.
     audit = json.loads(git_bytes(commit, AUDIT))
     matrix = json.loads(git_bytes(commit, MATRIX))
@@ -94,7 +95,7 @@ def run() -> None:
     result_paths = {}
     for phase in ("run-1", "run-2"):
         for component_id in covered_ids:
-            path = component_path(phase, component_id)
+            path = component_path(phase, component_id, runner_sha)
             if path in result_paths.values():
                 raise ValueError("Duplicate component result path")
             result_paths[(phase, component_id)] = path
