@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build exact-ID joins from immutable retained evidence; no GIS or downloads."""
-import gzip, hashlib, json, pathlib, subprocess
+import gzip, hashlib, json, os, pathlib, subprocess
 
 BASE = "d07f64b2feab45f4eb2583743da74de91f8bbcce"
 OWNED = pathlib.Path("research/geography/melanesia-gap-batch-241e2ce0-20261009")
@@ -46,8 +46,37 @@ def readbase(path):
     return subprocess.check_output(["git","show",f"{BASE}:{path.as_posix()}"],cwd=ROOT)
 def sha(raw): return hashlib.sha256(raw).hexdigest()
 def canon(x): return json.dumps(x,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()
+def safe_create(path, raw):
+    """Create once; identical reruns are no-ops and collisions fail closed."""
+    if path.parent.is_symlink() or not path.parent.is_dir():
+        raise RuntimeError(f"Unsafe output directory: {path.parent}")
+    if path.is_symlink():
+        raise RuntimeError(f"Refusing symlink output: {path}")
+    if path.exists():
+        if not path.is_file():
+            raise RuntimeError(f"Refusing non-file output: {path}")
+        if path.read_bytes() == raw:
+            return False
+        raise FileExistsError(f"Refusing to replace differing output: {path}")
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    fd = os.open(path, flags, 0o644)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+    except BaseException:
+        try: path.unlink()
+        except FileNotFoundError: pass
+        raise
+    return True
 def write(name, raw):
-    p=ROOT/OWNED/name; p.parent.mkdir(parents=True,exist_ok=True); p.write_bytes(raw)
+    path = ROOT / OWNED / name
+    if path.parent != ROOT / OWNED:
+        raise RuntimeError(f"Unexpected output path: {path}")
+    safe_create(path, raw)
 def json_bytes(x): return json.dumps(x,sort_keys=True,indent=2,ensure_ascii=False).encode()+b"\n"
 def jsonl_bytes(rows): return b"".join(canon(x)+b"\n" for x in rows)
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Create the issue-1643 v1 evidence manifest from exact pinned inputs/outputs."""
-import gzip, hashlib, json, pathlib, subprocess
+import gzip, hashlib, json, os, pathlib, subprocess, tempfile
+import assemble
 
 BASE = "d07f64b2feab45f4eb2583743da74de91f8bbcce"
 ROOT = pathlib.Path(__file__).resolve().parents[3]
@@ -52,7 +53,27 @@ def outdesc(name):
     path=OWNED/name; raw=(ROOT/path).read_bytes()
     return {"path":path.as_posix(),"bytes":len(raw),"sha256":sha(raw),"hash_kind":"file-bytes"}
 
+def safe_replace_manifest(path, raw):
+    if path.parent.is_symlink() or not path.parent.is_dir():
+        raise RuntimeError(f"Unsafe manifest directory: {path.parent}")
+    if path.is_symlink() or (path.exists() and not path.is_file()):
+        raise RuntimeError(f"Refusing unsafe manifest target: {path}")
+    fd, temp_path = tempfile.mkstemp(prefix=".evidence-quality-", dir=path.parent)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+        if path.is_symlink():
+            raise RuntimeError(f"Refusing symlink manifest target: {path}")
+        os.replace(temp_path, path)
+    finally:
+        try: os.unlink(temp_path)
+        except FileNotFoundError: pass
+
 def main():
+    # Rebuild or verify all packet outputs before binding their hashes.
+    assemble.main()
     out=json.loads((ROOT/OWNED/"component-outcomes.jsonl").read_text().splitlines()[0])
     rows=[json.loads(x) for x in (ROOT/OWNED/"component-outcomes.jsonl").read_text().splitlines()]
     assert len(rows)==25 and {x["component_id"] for x in rows}==set(IDS)
@@ -105,9 +126,9 @@ def main():
         {"text":"Physical authority, source observation dates, legal boundary, ownership, and processing cause remain unresolved or unapproved.","status":"unresolved","source_ids":["GSHHG-2.3.7","gb:SLB:ADM1"]}
       ],
       "stages":{"research":"complete","implementation":"not-proposed","geographic_approval":"unapproved"},
-      "commands":["python3 research/geography/melanesia-gap-batch-241e2ce0-20261009/assemble.py","python3 research/geography/melanesia-gap-batch-241e2ce0-20261009/finalize_manifest.py"]
+      "commands":["python3 research/geography/melanesia-gap-batch-241e2ce0-20261009/finalize_manifest.py"]
     }
     p=ROOT/OWNED/"evidence-quality.json"
-    p.write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n")
+    safe_replace_manifest(p,(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n").encode())
     print(json.dumps({"manifest":p.as_posix(),"baseline_files":len(baseline_files),"baseline_bytes":sum(x["bytes"] for x in baseline_files),"outputs":len(output_names),"subject_count":len(IDS),"native_ready_rows":5},indent=2))
 if __name__=="__main__": main()
