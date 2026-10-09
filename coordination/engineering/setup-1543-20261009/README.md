@@ -1,0 +1,70 @@
+# CI setup restoration and remaining adjudication transport
+
+This packet advances issue #1543. It preserves the original restoration code and
+retained transport under the eastern-two-gap-repair packet. Current operational
+routing uses shared restoration helpers; scientific methods, original products,
+whole-world obligations and the source-only research profile remain unchanged.
+
+The original inverse repeatedly authenticated the same private decoded source
+for individual copy commands. The replacement authenticates each consumed
+encoded and decoded body once per fresh patch, admits the complete acquisition
+budget, validates command bindings before and after loading, assembles one
+private target, and authenticates its entire body before returning it. It keeps
+no successful scientific verdict or cross-run source cache.
+
+Stage profiling also found that the original whole-image loader retained every
+decoded fragment and then concatenated another complete image. The replacement
+admits complete part/member inventories, assembles one private image, and checks
+all encoded fragments, decoded fragments, whole bytes, individual members and
+modes before creating its destination. Original aggregate, part and file caps
+remain enforced. The original producer and scientific imports remain retained.
+
+The standalone geographic-adjudication entry now uses the existing exact Git
+blob transport when adjudication is requested, retaining fresh mutable authority
+reads and request accounting. Ordinary source-only packets allocate no transport
+store. An incomplete fetch returns no authority and cleans its owned store.
+
+## Measured evidence and limits
+
+The original-cold-3 and captured-single-image-10 reports contain the complete
+current and prior file identities, exact source-body hashes and peak-memory
+observations. Every current and prior byte and executable mode agrees. Earlier
+captured trials were rejected for increased peak memory; their reports and the
+memory-stage diagnostic remain retained as failed-trial/diagnostic evidence.
+The captured-output-warm-11 and original-output-warm-12 reports explicitly record
+existing destinations. These are independent process executions, not reused
+success receipts.
+
+All measurements use a local existing Git source store on the author's macOS
+ARM64 host with Node 24. Outputs described as cold were initially absent; source,
+OS and network caches were not purged. Concurrent host work affects elapsed
+measurements. The instrumented memory diagnostic is not a production runtime
+comparison. Local results do not establish hosted critical-path speedups.
+Separate Git command/elapsed counters and bounded setup events keep unmeasured
+HTTP observation and transport quota sleep unknown; they do not infer zero.
+
+The operational routing controls exercise original replay failure, geometric
+brand/disposition preservation, focused evidence routing, complete image
+restoration, changed bodies, omitted/duplicate rosters, traversal, symlinks,
+collisions, command mutation and preserved original sentinels. Native
+adjudication controls use the existing local Python environment with the exact
+numpy/Shapely/pyproj pins needed by those controls; this is not a claim that all
+current Python requirements were installed locally.
+
+Independent exact-head review, full hosted PR/queue checks, actual-main readback
+and hosted timing comparison are still required. This packet does not close
+#1543 before those checks or fulfill the separate scientific-kernel scope of
+#1544. No provider/database operation, deployment, geographic approval, full
+research regression, new scheduler or routine development throttle is added.
+
+## Reproduction
+
+Use the existing managed-workspace admission and a checkout containing the
+original retained image parts. From the checkout root, run the packet's
+profile-restoration.mjs with variant original or captured and a fresh output
+name inside this packet. It refuses existing result/checkpoint/lease paths,
+records initial destination states before restoration, and retains exact outputs
+for independent verification. Preserve pre-existing files and verify whole-byte
+identities before releasing generated files; do not delete a shared cache or
+another worker's checkout. Full package/browser validation belongs to the normal
+hosted engineering path when the local slot cannot admit the complete package.

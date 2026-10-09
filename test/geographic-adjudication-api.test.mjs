@@ -28,7 +28,7 @@ const repo='owner/repo', head='b'.repeat(40), base='a'.repeat(40), branch='engin
 const packet='coordination/engineering/authority-fixture/', manifestPath=packet+'evidence-quality.json', dossierPath=packet+'dossier.json';
 const sourcePath='coordination/engineering/retained-fixture/water.geojson';
 const desc=(path,raw)=>({path,bytes:raw.length,sha256:sha256(raw),hash_kind:'file-bytes'});
-function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeContract=false, nativeControl=null}={}) {
+function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeContract=false, nativeControl=null,requested=true}={}) {
  const sourceRaw=nativeControl ? Buffer.from(nativeControl.source_base64,'base64') : Buffer.from(JSON.stringify({type:'FeatureCollection',features:[{type:'Feature',properties:{native_id:1,kind:'Lake'},geometry:{type:'Polygon',coordinates:[[[-1,-1],[4,-1],[4,4],[-1,4],[-1,-1]]]}}]}));
  const retainedPath=nativeControl?.dossier.source_refs[0].path??sourcePath;
  const sourceFile={...desc(retainedPath,sourceRaw),...(nativeControl?{uncompressed_sha256:nativeControl.decoded_sha256,uncompressed_bytes:gunzipSync(sourceRaw).length}:{})}, source={id:'synthetic-native-water',url:'https://example.org/synthetic-transport-fixture',role:'physical-surface-water',vintage:'Synthetic fixture only',retrieved_at:'2026-10-05',license:{status:'redistributable',terms:'Synthetic test data'},retention:'retained',verification:'verified',temporal_status:'reference',files:[sourceFile]};
@@ -47,7 +47,7 @@ function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeC
  mutation({source,manifest,decision,dossier,receipt,issue,claim,pr});
  Object.assign(receipt,reviewContractBinding(issue,pr));
  const dossierRaw=nativeControl?Buffer.from(nativeControl.dossier_base64,'base64'):Buffer.from(JSON.stringify(dossier));decision.dossier_sha256=sha256(dossierRaw);
- manifest.outputs=[desc(dossierPath,dossierRaw)];manifest.geographic_adjudications=[{path:dossierPath,sha256:sha256(dossierRaw)}];
+ manifest.outputs=[desc(dossierPath,dossierRaw)];manifest.geographic_adjudications=requested?[{path:dossierPath,sha256:sha256(dossierRaw)}]:[];
  const manifestRaw=Buffer.from(JSON.stringify(manifest));receipt.manifest_sha256=sha256(manifestRaw);receipt.evidence_hashes=[...new Set([...manifest.baseline.files,...manifest.outputs,...manifest.sources.flatMap(row=>row.files??[])].map(row=>row.sha256))];receipt.geographic_adjudications={version:1,decisions:[decision]};
  const files=[{filename:dossierPath,status:'added'},{filename:manifestPath,status:'added'}];
  const candidate=new Map([['README.md',baselineRaw],[retainedPath,sourceRaw],[dossierPath,dossierRaw],[manifestPath,manifestRaw]]), baseline=new Map([['README.md',baselineRaw],[retainedPath,sourceRaw]]);
@@ -71,7 +71,7 @@ function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeC
   const oid=name.split('/git/blobs/')[1];if(oid&&blobs.has(oid))return {sha:oid,size:blobs.get(oid).length,encoding:'base64',content:blobs.get(oid).toString('base64')};
   throw Error(`Unexpected synthetic API route ${route}`);
  };
- return {api,calls,pr,manifest,receipt,dossier,decision,run:()=>collectGeographicApproval({api,repo,number:32,expectedHead:head})};
+ return {api,calls,pr,manifest,receipt,dossier,decision,blobs,run:()=>collectGeographicApproval({api,repo,number:32,expectedHead:head})};
 }
 
 test('actual evidence/claim/review validators produce bounded read-only authority carrier',async()=>{
@@ -157,4 +157,47 @@ for(const change of ['none','withdraw','replace-limits']) test(`final merge rech
   geographyReportLoader:async()=>report});
  if(change==='none'){assert.equal((await run()).accepted,true);assert.equal(writes.length,1);}
  else {await assert.rejects(run,change==='withdraw'?/Unresolved/:/source decision changed/);assert.equal(writes.length,0);}
+});
+
+import os from 'node:os';
+import {execFileSync} from 'node:child_process';
+import {githubAPI} from '../scripts/issue-claim-contract.mjs';
+import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
+import {runGeographicApproval} from '../scripts/check-geographic-adjudications.mjs';
+test('real adjudication entry uses exact Git blobs and retains authority rechecks',async()=>{
+ const plain=fixture(),expected=await plain.run(),f=fixture();
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'adjudication-transport-'));let fetches=0;
+ try{
+  const result=await runGeographicApproval({repo,number:32,expectedHead:head,token:'synthetic-read-only-token',directory,
+   apiFactory:(token,options)=>githubAPI(token,{...options,fetchImpl:async(url,init)=>{
+    const u=new URL(url),value=await f.api(u.pathname+u.search,init.method);
+    return new Response(JSON.stringify(value),{status:200,headers:{'content-type':'application/json','x-ratelimit-resource':'core','x-ratelimit-limit':'5000','x-ratelimit-remaining':'4900','x-ratelimit-reset':String(Math.floor(Date.now()/1000)+3600)}});
+   }}),
+   transportFactory:(api,options)=>gitBlobTransport(api,{...options,execute:(command,args,settings)=>{
+    if(args.includes('fetch')){fetches++;for(const raw of f.blobs.values())execFileSync('git',[args[0],'hash-object','-w','--stdin'],{input:raw,env:settings.env});return Buffer.alloc(0);}
+    return execFileSync(command,args,settings);
+   }})});
+  assert.equal(result.status,'reviewed');assert.deepEqual(result.authority,expected.authority);assert.deepEqual(result.dossiers,expected.dossiers);
+  const oldBlobs=plain.calls.filter(r=>r.route.includes('/git/blobs/')).length,newBlobs=f.calls.filter(r=>r.route.includes('/git/blobs/')).length;
+  assert(newBlobs<oldBlobs);assert(fetches>0);assert(result.immutable_transport.length>0);
+  assert(f.calls.filter(r=>r.route===`/repos/${repo}/pulls/32`).length>=3,'fresh final PR reads remain');
+  assert(result.request_accounting.actual_http_attempts>0);assert.equal(fs.readdirSync(directory).length,0);
+ }finally{fs.rmSync(directory,{recursive:true,force:true});}
+});
+test('not-requested entry never allocates immutable transport',async()=>{
+ let stores=0;
+ const f=fixture({requested:false});
+ const result=await runGeographicApproval({repo,number:32,expectedHead:head,token:'synthetic',apiFactory:()=>f.api,transportFactory:()=>{stores++;assert.fail('unnecessary store');}});
+ assert.equal(result.status,'not-requested');assert.equal(stores,0);
+});
+test('failed adjudication fetch publishes no authority and cleans its owned store',async()=>{
+ const f=fixture(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'adjudication-denied-'));
+ try{
+  const result=await runGeographicApproval({repo,number:32,expectedHead:head,token:'synthetic',directory,apiFactory:()=>f.api,
+   transportFactory:(api,options)=>gitBlobTransport(api,{...options,execute:(command,args,settings)=>{
+    if(args.includes('fetch'))throw Error('private transport detail');return execFileSync(command,args,settings);
+   }})});
+  assert.equal(result.status,'blocked');assert.equal(result.authority,undefined);assert(!result.reason.includes('private transport detail'));
+  assert.equal(fs.readdirSync(directory).length,0);
+ }finally{fs.rmSync(directory,{recursive:true,force:true});}
 });
