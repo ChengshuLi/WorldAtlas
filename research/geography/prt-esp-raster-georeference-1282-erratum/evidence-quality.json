@@ -1436,7 +1436,7 @@
         "jrc-access"
       ],
       "status": "supported",
-      "text": "The two named JRC 2024 raster tiles use actual native north edges 30\u00b0N and 40\u00b0N; all 24 streamed source files match their previously retained byte counts and whole-file SHA-256 values. The former inferred edges are displaced by 10\u00b0."
+      "text": "The two named JRC 2024 raster tiles use actual native north edges 30°N and 40°N; all 24 streamed source files match their previously retained byte counts and whole-file SHA-256 values. The former inferred edges are displaced by 10°."
     },
     {
       "source_ids": [
@@ -1444,7 +1444,7 @@
         "atlas-scope"
       ],
       "status": "supported",
-      "text": "All three January control pixel values are present at their exact native row/column, but each formerly claimed center is 10\u00b0 north of the true pixel center and outside the pinned component; the previous validator false-passed these controls."
+      "text": "All three January control pixel values are present at their exact native row/column, but each formerly claimed center is 10° north of the true pixel center and outside the pinned component; the previous validator false-passed these controls."
     },
     {
       "source_ids": [
@@ -1506,22 +1506,22 @@
     {
       "json_pointer": "/summary/components_with_native_tile_coverage",
       "metric_id": "components-tile-covered",
-      "path": "runs/run-1/native-coverage-audit.json"
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/runs/run-1/native-coverage-audit.json"
     },
     {
       "json_pointer": "/summary/components_with_partial_native_tile_coverage",
       "metric_id": "components-tile-partial",
-      "path": "runs/run-1/native-coverage-audit.json"
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/runs/run-1/native-coverage-audit.json"
     },
     {
       "json_pointer": "/summary/components_with_full_native_tile_coverage",
       "metric_id": "components-tile-full",
-      "path": "runs/run-1/native-coverage-audit.json"
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/runs/run-1/native-coverage-audit.json"
     },
     {
       "json_pointer": "/summary/components_with_no_native_tile_coverage",
       "metric_id": "components-no-tile-coverage",
-      "path": "runs/run-1/native-coverage-audit.json"
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/runs/run-1/native-coverage-audit.json"
     }
   ],
   "metrics": [
@@ -1653,7 +1653,7 @@
       "temporal_status": "reference",
       "url": "https://s3.waw4-1.cloudferro.com/swift/v1/global-surface-water/download2024/monthlyhistory/VER1-5/2024/",
       "verification": "verified",
-      "vintage": "2024 monthly tiles; product history extension 2022\u20132024"
+      "vintage": "2024 monthly tiles; product history extension 2022–2024"
     },
     {
       "id": "jrc-access",
@@ -1765,7 +1765,7 @@
       "temporal_status": "reference",
       "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer",
       "verification": "verified",
-      "vintage": "2015\u20132021 planning context per inherited capture"
+      "vintage": "2015–2021 planning context per inherited capture"
     },
     {
       "id": "miteco-phc",
@@ -1777,11 +1777,11 @@
       "restoration": "Official page, endpoint responses and headers are retained under research/geography/portugal-spain-gap-source-families-20261007/sources/miteco at the pinned baseline.",
       "retention": "restoration-only",
       "retrieved_at": "2026-10-07T02:15:06.822227+00:00",
-      "role": "official 2022\u20132027 hydrological planning-data download page; no vectors acquired",
+      "role": "official 2022–2027 hydrological planning-data download page; no vectors acquired",
       "temporal_status": "reference",
       "url": "https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua/masas-de-agua-phc-2022-2027.html",
       "verification": "verified",
-      "vintage": "2022\u20132027 planning period"
+      "vintage": "2022–2027 planning period"
     }
   ],
   "stages": {
