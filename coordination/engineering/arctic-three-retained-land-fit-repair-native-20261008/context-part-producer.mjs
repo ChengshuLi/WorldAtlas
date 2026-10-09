@@ -56,7 +56,7 @@ export function produceContextPart(plan, outputValue) {
   const encoded = git(['cat-file', 'blob', pin.oid]); assert.equal(encoded.length, pin.bytes); assert.equal(sha(encoded), pin.sha256);
   const decoded = gunzipSync(encoded, {maxOutputLength: pin.decoded_bytes});
   assert.equal(decoded.length, pin.decoded_bytes); assert.equal(sha(decoded), pin.decoded_sha256);
-  const before = JSON.parse(decoded), continuation = continueContextPart(before, changed, pin);
+  const before = JSON.parse(decoded), continuation = continueContextPart(before, changed, {firstOwner: pin.first_owner, owners: pin.owners});
   const currentDecoded = Buffer.from(JSON.stringify(continuation.after) + '\n');
   assert(currentDecoded.length <= MAX);
   const currentEncoded = gzipSync(currentDecoded, {level: 9, mtime: 0});

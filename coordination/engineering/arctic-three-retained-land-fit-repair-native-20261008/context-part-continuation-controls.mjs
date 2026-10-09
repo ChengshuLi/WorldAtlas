@@ -3,7 +3,10 @@ import {continueContextPart,continueContextIndex} from './context-part-continuat
 const ids=['atlas:physical:CAN-15:NWT','atlas:physical:CAN-25:NUN','unchanged'];
 const before=ids.map((id,i)=>({id,pixelIndex:i+1,properties:{parent_id:'parent'},geometry:{type:'Polygon',coordinates:[[[i,0],[i+1,0],[i,1],[i,0]]]}}));
 const changed=before.slice(0,2).map(row=>({...row,geometry:{...row.geometry,coordinates:[...row.geometry.coordinates,[[9,0],[10,0],[9,1],[9,0]]]}}));
-const result=continueContextPart(before,changed,{firstOwner:1,owners:3});
+const descriptor={first_owner:1,owners:3};
+const result=continueContextPart(before,changed,{firstOwner:descriptor.first_owner,owners:descriptor.owners});
+rejectDescriptor();
+function rejectDescriptor(){assert.throws(()=>continueContextPart(before,changed,descriptor));}
 assert.equal(result.after[2],before[2]); assert.equal(result.unchanged_full_rows,1);
 assert.deepEqual(result.after.map(row=>{const {geometry,...metadata}=row;return metadata;}),before.map(row=>{const {geometry,...metadata}=row;return metadata;}));
 let negatives=0;function reject(fn){assert.throws(fn);negatives++;}
@@ -25,4 +28,4 @@ reject(()=>continueContextIndex({...index,footprints_sha256:'0'.repeat(64)},next
 reject(()=>continueContextIndex({...index,owner_sha256:'0'.repeat(64)},nextPart,footprints));
 reject(()=>continueContextIndex({...index,locations:49624},nextPart,footprints));
 reject(()=>continueContextIndex(index,{...nextPart,path:'foreign'},footprints));
-console.log(JSON.stringify({positive:3,negative:negatives,unchanged_row_identity:true,successor_index_metadata:true}));
+console.log(JSON.stringify({positive:3,negative:negatives,unchanged_row_identity:true,successor_index_metadata:true,actual_snake_case_descriptor_mapping:true,unmapped_descriptor_rejected:true}));
