@@ -6,8 +6,8 @@ const spec={mode:'engineering',scope:'bounded repair',max_prs:1,depends_on:[2]};
 const issue=s=>({number:1,state:'open',created_at:'2026-10-01T00:00:00Z',updated_at:'before',labels:['type:engineering','kind:work-item','status:ready'],body:`Acceptance: repair safely\n<!-- worldatlas-work:v1\n${JSON.stringify(s??spec)}\n-->`});
 const request={action:'claim',worker_id:'author',claim_id:'claim-aaaaaaaaaaaaaaaa',request_id:'request-aaaaaaaaaaaaaaa',branch:'engineering/repair'};
 const deps=[{number:2,state:'closed'}];
-test('readiness and claiming reject the same invalid contracts, dependencies, budgets and evidence',()=>{
- for(const change of [x=>x.issue.body='malformed',x=>x.dependencies[0].state='open',x=>x.prs=[{merged_at:'now'}],x=>x.issue=issue({...spec,evidence_quality:{version:1,pins:{bad:'not-a-hash'},subject_ids:[],review_kind:'code',manifest_path:'coordination/engineering/{job}/evidence-quality.json'}})]){
+test('readiness and claiming reject the same invalid contracts, dependencies and evidence',()=>{
+ for(const change of [x=>x.issue.body='malformed',x=>x.dependencies[0].state='open',x=>x.issue=issue({...spec,evidence_quality:{version:1,pins:{bad:'not-a-hash'},subject_ids:[],review_kind:'code',manifest_path:'coordination/engineering/{job}/evidence-quality.json'}})]){
   const x={issue:issue(),dependencies:structuredClone(deps),prs:[],comments:[]};change(x);
   let reason;try{assertIssueReadiness({...x,branch:request.branch,requireReady:false});}catch(e){reason=e.message;}
   assert(reason);assert.throws(()=>transitionClaim({...x,request}),e=>e.message===reason);
@@ -51,7 +51,7 @@ test('an explicit blocker must be resolved for readiness and claiming; ordinary 
  x.comments.push({id:3,body:'<!-- worldatlas-blocker:v1\n{"id":"input","active":false,"reason":"Retrieved source"}\n-->'});assertIssueReadiness({...x,branch:request.branch});
 });
 
-test('a linked PR merging during preflight cannot leave a complete eligible exhausted issue',async()=>{
+test('a linked PR merging during preflight invalidates the previously read checkpoint',async()=>{
  let reads=0;const value=issue({...spec,depends_on:[]});
  const api=async route=>{
   const u=new URL('https://example.test'+route);
@@ -62,7 +62,7 @@ test('a linked PR merging during preflight cannot leave a complete eligible exha
   throw Error('Unexpected '+route);
  };
  const result=await reviewIssueReadiness({api,repo:'owner/repo',number:1});
- assert.equal(result.coverage,'incomplete');assert.equal(result.eligible,false);assert.match(result.findings.join(),/PR budget/);
+ assert.equal(result.coverage,'incomplete');assert.equal(result.eligible,false);assert.match(result.findings.join(),/PR state/);
 });
 test('a conflicting geography owner added during preflight cannot be reported eligible',async()=>{
  let lists=0;const geo={...spec,depends_on:[],mode:'geography',owned_paths:['data/regional-review/packet/']};
@@ -87,4 +87,13 @@ test('narrow geography scopes remain disjoint but conflict with enclosing reserv
  assertIssueReadiness(x);transitionClaim({...x,request:{...request,branch:x.branch}});
  other.body=`<!-- worldatlas-work:v1\n${JSON.stringify({...geo,owned_paths:['data/regional-review/packet/']})}\n-->`;
  assert.throws(()=>assertIssueReadiness(x),/ownership conflicts/);assert.throws(()=>transitionClaim({...x,request:{...request,branch:x.branch}}),/ownership conflicts/);
+});
+
+test('readiness and claim agree that merged count is not an eligibility gate',()=>{
+ const x={issue:issue(),dependencies:deps,prs:Array.from({length:4},()=>({state:'closed',merged_at:'now'})),comments:[]};
+ assertIssueReadiness({...x,branch:request.branch});
+ assert.equal(transitionClaim({...x,request}).claim.worker_id,request.worker_id);
+ x.dependencies=[{number:2,state:'open'}];
+ assert.throws(()=>assertIssueReadiness({...x,branch:request.branch}),/dependency/);
+ assert.throws(()=>transitionClaim({...x,request}),/dependency/);
 });

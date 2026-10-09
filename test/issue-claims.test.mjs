@@ -38,9 +38,9 @@ test('renewal, rotation and reassignment retain one canonical comment ID',()=>{
  assert.equal(reassigned.comment_id,101);
  assert.equal(renderClaim(renewed).includes('comment_id'),false);
 });
-test('umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed',()=>{
+test('umbrella, blocked, malformed and unresolved dependency scopes cannot be claimed',()=>{
  for(const labels of [['type:engineering','kind:umbrella','status:ready'],['type:engineering','kind:work-item','status:ready','status:blocked'],['type:engineering','kind:work-item']])assert.throws(()=>transitionClaim({issue:issue({labels}),comments:[],request:request(),now}));
- for(const max_prs of [0,4,30])assert.throws(()=>workSpec(`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,max_prs})}\n-->`));
+ for(const max_prs of [0,-1,1.5,"3",null,Number.MAX_SAFE_INTEGER+1])assert.throws(()=>workSpec(`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,max_prs})}\n-->`));
  assert.throws(()=>transitionClaim({issue:issue({body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,depends_on:[7]})}\n-->`}),comments:[],request:request(),dependencies:[{number:7,state:'open'}],now}),/dependency/);
 });
 test('expired reservations cannot silently discard branches or active PR/live operations',()=>{
@@ -78,8 +78,17 @@ test('location-content claims wait for worldwide approval while source-only work
  assert.throws(()=>assertResearchImportsReady({version:1,ready_for_location_attributes:false}),/paused/);
  assert.throws(()=>execFileSync(process.execPath,['scripts/import-research-bundle.mjs','https://example.com','unused-bundle'],{stdio:'pipe'}),error=>error.stderr.toString().includes('Research imports are paused'));
 });
-test('the PR budget cannot be bypassed by claiming another part indefinitely',()=>{
- assert.throws(()=>transitionClaim({issue:issue(),comments:[],request:request(),prs:[{merged_at:'a'},{merged_at:'b'},{merged_at:'c'}],now}),/budget exhausted/);
+test('in-scope continuation beyond the estimate claims, rotates and merges under the same ownership rules',()=>{
+ const prs=Array.from({length:6},(_,i)=>({number:i+100,state:'closed',merged_at:'2026-10-02',head:{ref:'engineering/previous'}}));
+ const held=transitionClaim({issue:issue(),comments:[],request:request(),prs,now}).claim;
+ const rotated=transitionClaim(next({comments:[comment(held)],prs,request:request({action:'renew',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss',branch:'engineering/next'})})).claim;
+ assert.equal(rotated.claim_id,held.claim_id);
+ assert.equal(verifyClaimForPR({issue:issue(),comments:[comment(rotated)],prs,branch:rotated.branch,now}).worker_id,held.worker_id);
+ assert.throws(()=>transitionClaim(next({comments:[comment(held)],prs:[...prs,{state:'open',head:{ref:held.branch}}],request:request({action:'renew',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss',branch:'engineering/next'})})),/previous PR/);
+ assert.throws(()=>verifyClaimForPR({issue:issue(),comments:[comment(rotated)],prs,branch:'engineering/foreign',now}),/exact branch/);
+ const larger=issue({body:'<!-- worldatlas-work:v1\n'+JSON.stringify({...spec,max_prs:10})+'\n-->'});
+ assert.equal(workSpec(larger.body).max_prs,10);
+ assert.equal(transitionClaim({issue:larger,comments:[],request:request(),prs,now}).claim.max_prs,10);
 });
 test('pagination inspects later pages rather than assuming only the first page exists',async()=>{
  let pages=0;const rows=await githubPages(async()=>{pages++;return pages===1?Array.from({length:100},(_,id)=>({id})):[{id:101}];},'/comments');

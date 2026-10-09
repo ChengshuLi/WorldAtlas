@@ -87,7 +87,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
    if(blocks.length!==1)throw Error(`A reviewed ${lane} work scope is required`);
    const spec=JSON.parse(blocks[0][1]);
    if(spec.mode!==lane)throw Error(`Issue ownership requires ${lane} mode`);
-   if(lane==='engineering'&&(!Number.isInteger(spec.max_prs)||spec.max_prs<1||spec.max_prs>3||!Array.isArray(spec.depends_on)||spec.depends_on.some(n=>!Number.isSafeInteger(n)||n<1)||typeof spec.scope!=='string'||!spec.scope))throw Error('Engineering work items need bounded scope, 1–3 PRs and explicit dependency issue numbers');
+   if(lane==='engineering'&&(!Number.isSafeInteger(spec.max_prs)||spec.max_prs<1||!Array.isArray(spec.depends_on)||spec.depends_on.some(n=>!Number.isSafeInteger(n)||n<1)||typeof spec.scope!=='string'||!spec.scope))throw Error('Engineering work items need bounded scope, a positive PR estimate and explicit dependency issue numbers');
    options.ownedPaths=lane==='geography'?validateGeographyOwnedPaths(spec.owned_paths):validateEngineeringOwnedPaths(spec.owned_paths);
   }
   if(options.prBody&&validateIssuePRBody(options.prBody).github_issue!==issue.number)throw Error('Issue ownership file must match the PR issue');

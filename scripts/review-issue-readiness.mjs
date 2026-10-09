@@ -33,7 +33,7 @@ export async function reviewIssueReadiness({api,repo,number,branch,evidencePolic
   const [after,afterComments,afterDependencies,afterPRs,afterOtherIssues]=await Promise.all([api(`${base}/issues/${number}`),
    githubPages(api,`${base}/issues/${number}/comments`),Promise.all(ids.map(id=>api(`${base}/issues/${id}`))),linkedPulls(api,repo,number),
    spec.mode==='geography'?githubPages(api,`${base}/issues?state=open&labels=type%3Ageography`):[]]);
-  if(hash(prs)!==hash(afterPRs)||hash(otherIssues.map(readinessSnapshot))!==hash(afterOtherIssues.map(readinessSnapshot)))throw Error('Linked PR budget or geography ownership changed during readiness review; reread before acting');
+  if(hash(prs)!==hash(afterPRs)||hash(otherIssues.map(readinessSnapshot))!==hash(afterOtherIssues.map(readinessSnapshot)))throw Error('Linked PR state or geography ownership changed during readiness review; reread before acting');
   if(hash(comments)!==hash(afterComments)||hash(dependencies.map(readinessSnapshot))!==hash(afterDependencies.map(readinessSnapshot)))throw Error('Ownership, issue history or dependencies changed during readiness review; reread before acting');
   if(hash(readinessSnapshot(issue))!==hash(readinessSnapshot(after)))throw Error('Issue changed during readiness review; reread before acting');
   result.snapshot=readinessSnapshot(after);result.dependencies=dependencies.map(readinessSnapshot);

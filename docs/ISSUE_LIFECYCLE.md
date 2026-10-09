@@ -9,7 +9,7 @@ handoff form is required. Readiness is reviewed eligibility, not scientific appr
 
 Run `node scripts/review-issue-readiness.mjs ChengshuLi/WorldAtlas NUMBER OUTPUT [BRANCH]`
 with the read-only GitHub token in GH_TOKEN. This shares mechanical contract, lane,
-evidence-declaration, dependency, budget and geography-owned-path checks with claims.
+evidence-declaration, dependency and geography-owned-path checks with claims.
 Its output explains rejection reasons and incomplete reads. It never changes labels,
 claims, approvals or production. A ready label remains required for an actual claim.
 The command examines unready issues so it can be used before adding ready.
@@ -42,12 +42,12 @@ explicit unknowns where its original promise permits that; correction or approva
 work cannot close merely because the uncertainty was documented. No closure grants
 geography approval, publication or import permission.
 
-Before the last allowed partial PR, review all remaining obligations. Continue on the
-original issue while implementation allowance remains. After exhaustion, reuse an
-existing bounded follow-up or create one for a genuinely distinct unfinished task;
-an explicit external/production wait can stay on the original issue. Do not force
-duplicates, silently increase the budget or close just because the allowance ended.
-An issue requiring no additional implementation can be reconciled without another PR.
+Continue unfinished in-scope work on the original issue, regardless of merged PR
+count. The legacy `max_prs` field is a positive planning estimate, not an allowance.
+No budget bump or successor issue is needed. Review remaining obligations after
+meaningful results; split only for a distinct deliverable, ownership or genuine wait.
+Reuse an existing follow-up before creating another. Do not silently expand acceptance
+or close merely because an estimate was exceeded. Explicit human limits still apply.
 Follow-ups belong to their lane/role, not permanently to the creating chat.
 
 Substantive issue-contract, acceptance or PR-disposition changes require renewed
@@ -64,7 +64,7 @@ Preserve original evidence, dates, source bytes, closed repairs and human deferr
 
 The worker changing dependencies updates readiness at the same time. When completing
 an issue, inspect its direct dependents, including other lanes. Check all remaining
-dependencies, evidence, ownership, scope and budget before marking ready. Reopened
+dependencies, evidence, ownership and scope before marking ready. Reopened
 dependencies or invalidated evidence require readiness reconsideration. Routine
 unclaimed metadata repairs are local; cross-lane scientific/ownership decisions go
 to the responsible role. Do not grant another lane's scientific approval.
@@ -86,10 +86,10 @@ a completed historical repair just because its old blocker appears in a report.
 
 ## Between jobs and instruction adoption
 
-Before selecting the next implementation, inspect up to three neglected unclaimed
+For general queue work, inspect up to three neglected unclaimed
 same-lane issues with apparently finished dependencies or previously discovered
 readiness problems. Include blocked/missing-ready work, not only the ready queue.
-Prefer older last relevant issue review/checkpoints and avoid repeatedly examining
+During an assigned delivery campaign, limit this maintenance to encountered issues and direct dependencies; do not interrupt batch delivery with a general queue sweep. Prefer older last relevant issue review/checkpoints and avoid repeatedly examining
 unchanged documented blockers. Handle routine repairs on original issues; do not
 create another queue/table. If all relevant workers are inactive, maintenance waits.
 The manual queue audit can support an explicit investigation; there is no hourly
