@@ -1,0 +1,44 @@
+✖ genuine ordinary Git cold sources bind acknowledged whole inventory without inventing a SHA pin (1448.885458ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1538.653041
+
+✖ failing tests:
+
+test at test/selected-continuous-lifecycle.test.mjs:147:1
+✖ genuine ordinary Git cold sources bind acknowledged whole inventory without inventing a SHA pin (1448.885458ms)
+  AssertionError [ERR_ASSERTION]: file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-vS3q0U/scripts/check-effective-geographic-regression.mjs:13
+  const demand=(v,m)=>{if(!v)throw Error(m);};
+                                   ^
+  
+  Error: Selected continuous source transport unsupported; explicit release binding required
+      at demand (file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-vS3q0U/scripts/check-effective-geographic-regression.mjs:13:34)
+      at new SelectedGeometrySources (file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-vS3q0U/scripts/check-effective-geographic-regression.mjs:158:7)
+      at coordinateStage (file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-vS3q0U/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:37:43)
+      at async file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-vS3q0U/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:175:48
+  
+  Node.js v24.19.0
+  
+  
+  1 !== 0
+  
+      at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/selected-continuous-lifecycle.test.mjs:87:229
+      at Array.map (<anonymous>)
+      at issueStages (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/selected-continuous-lifecycle.test.mjs:87:27)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/selected-continuous-lifecycle.test.mjs:149:185)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

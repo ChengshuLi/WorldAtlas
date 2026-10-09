@@ -1,0 +1,38 @@
+{
+  "kind": "actual-installed-v8-two-record-lookup-fixture",
+  "source": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/image-e079-async/data/pixel-audit.json",
+    "bytes": 14323438,
+    "sha256": "a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8",
+    "records": 49625,
+    "native_manifest_sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+  },
+  "captured_at": "2026-10-09T01:26:27.387391+00:00",
+  "records": [
+    {
+      "id": "atlas:physical:CAN-15:NWT",
+      "name": "Banks Island Lowland",
+      "owner": "Canada",
+      "cells": 25131612,
+      "status": "represented",
+      "reason": null,
+      "source_wgs84_area_m2": 49378339706.06795,
+      "grid_wgs84_area_m2": 49378254863.090775,
+      "source_area_cells": null,
+      "relative_area_error": -1.7182225582335064e-06
+    },
+    {
+      "id": "atlas:physical:CAN-25:NUN",
+      "name": "Foxe Basin Plain",
+      "owner": "Canada",
+      "cells": 15853829,
+      "status": "represented",
+      "reason": null,
+      "source_wgs84_area_m2": 55998704133.20146,
+      "grid_wgs84_area_m2": 55998446845.38144,
+      "source_area_cells": null,
+      "relative_area_error": -4.5945316772266764e-06
+    }
+  ],
+  "limit": "Complete real target records extracted after whole-source authentication; lookup boundary only, not a full-world join result"
+}

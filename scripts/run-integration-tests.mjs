@@ -173,6 +173,13 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       return prepareCanonicalCheckout();
     });
     console.log(JSON.stringify({canonical_checkout:canonicalCheckout}));
+    if ([0,1,2].includes(shard)) {
+      const selectedCheckout=await observeSetupPhase('canonical-checkout',async()=>{
+        const {prepareModelReaderCheckout}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs');
+        return prepareModelReaderCheckout({root:process.cwd(),profile,shard});
+      });
+      console.log(JSON.stringify({selected_model_reader_checkout:selectedCheckout}));
+    }
   }
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, shard, files}));

@@ -86,15 +86,15 @@ test('full changes include rename/deletion originals; immutable original-source 
   assert.throws(() => validate(f), /original-source/);
   f.manifest.change_receipts.pop(); assert.throws(() => validate(f), /Incomplete/);
 });
-test('coordinate/helper policies require positive and negative controls; generators need reproducibility', () => {
+test('coordinate/helper policies remain enforced without ceremonial control files', () => {
   const f = fixture(); f.manifest.methods[0] = {id: 'area', kind: 'geography', description: 'Scientific control', software: 'pyproj 3.7.2', units: 'm2',
     helper_version: GEOMETRY_VERSION, axis_order: 'latitude-longitude', crs: 'EPSG:4326',
     area_method: 'WGS84 straight-source-edge ellipsoidal integral', distance_method: 'WGS84 inverse geodesic'};
   assert.throws(() => validate(f), /geographic|geography/i);
-  f.manifest.methods[0].axis_order = 'longitude-latitude'; assert.throws(() => validate(f), /positive-control/);
+  f.manifest.methods[0].axis_order = 'longitude-latitude'; validate(f);
   f.manifest.methods[0].helper_version = 'unreviewed'; assert.throws(() => validate(f), /Unsupported/);
   f.manifest.methods[0] = {id: 'gen', kind: 'generator', description: 'Two-run control', software: 'Python 3.12', units: 'bytes', helper_version: 'worldatlas-evidence-preparation-v1'};
-  assert.throws(() => validate(f), /positive-control/);
+  validate(f);
 });
 test('generator controls bind actual positive, negative and equal two-run output bytes', () => {
   const f = fixture(), bytes = new Map([['baseline.txt', baseline], [outputPath, output]]);
@@ -364,4 +364,42 @@ test('normal remote comment route admits a complete compact review beyond litera
   await assert.rejects(() => run([comment(omitted)]), /commitment differs/);
   const stale = {...value, head_sha: commit};
   await assert.rejects(() => run([comment(stale)]), /Missing independent/);
+});
+
+test('minimal manifests reuse Git change inventory but preserve evidence and independent review',()=>{
+ const f=fixture();delete f.manifest.change_receipts;
+ f.files.push({filename:'scripts/repair.mjs',status:'modified'});
+ f.pr.changed_files=f.files.length;
+ validate(f);
+ const r=receipt(f);review(f,r);
+ r.inspected_files.pop();assert.throws(()=>review(f,r),/inventory|files/i);
+ f.manifest.outputs[0].sha256='c'.repeat(64);assert.throws(()=>validate(f),/hash|bytes/i);
+});
+test('omitting duplicate change receipts does not authorize replacing original scientific evidence',()=>{
+ for(const status of ['modified','removed','renamed']){
+  const f=fixture();delete f.manifest.change_receipts;
+  f.manifest.baseline.files[0].role='original-source';
+  f.files.push({filename:status==='renamed'?'moved.txt':'baseline.txt',status,...(status==='renamed'?{previous_filename:'baseline.txt'}:{})});
+  assert.throws(()=>validate(f),/original-source/);
+ }
+ const f=fixture();delete f.manifest.change_receipts;
+ f.files.push({filename:'../escape',status:'added'});
+ assert.throws(()=>validate(f),/Unsafe/);
+});
+test('declared controls remain checked, not accepted merely because controls are optional',()=>{
+ const f=fixture();
+ f.manifest.validation=[{method_id:'missing',kind:'positive-control',outcome:'passed',evidence_path:outputPath}];
+ assert.throws(()=>validate(f),/declared control/);
+ f.manifest.validation[0].method_id='synthetic';
+ assert.throws(()=>validate(f),/Control bytes/);
+});
+test('remote minimal manifests need no base-body copies for unrelated code changes',async()=>{
+ const f=fixture();delete f.manifest.change_receipts;
+ f.files.push({filename:'scripts/repair.mjs',status:'modified'});f.pr.changed_files=f.files.length;
+ const r=receipt(f),remote=remoteFixture(f);r.manifest_sha256=sha256(remote.bytes);
+ const check=remoteFixture(f,[{id:1,author_association:'OWNER',body:`<!-- worldatlas-review:v1\n${JSON.stringify(r)}\n-->`}]);
+ const result=await checkPremergeEvidence({...f,api:check.api,repo:'test/repo',policy,review:true});
+ assert.equal(result.review.reviewer,'reviewer');
+ f.manifest.metrics[0].value=2;
+ await assert.rejects(checkPremergeEvidence({...f,api:remoteFixture(f).api,repo:'test/repo',policy,review:false}),/Generated result|summary/i);
 });

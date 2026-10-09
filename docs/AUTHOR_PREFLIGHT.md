@@ -165,7 +165,7 @@ Do not silently inherit unrelated parent obligations into the correction or trea
 an integrity check as scientific approval. Required province assessments, sources
 or production acceptance on the owning issue still prevent its completion. If the
 contract and continuation disagree, resolve that on the original issue before
-requesting closure or consuming its final PR allowance.
+requesting closure or expanding scope.
 
 ## When review finds a problem
 
@@ -215,3 +215,18 @@ applicable report/control, combined-budget and inherited-citation checks before
 review. Preserve ownership/checkpoints; select faithful bounded probes rather than
 rerunning every geography computation. Reviewers record observed checks and limits
 in their existing domain scopes.
+
+## Avoid repeated proof and paperwork
+
+Apply WORKER_COORDINATION.md's delivery policy. Use the smallest evidence manifest
+that binds the actual inputs and results being claimed. Changed code, tests and docs
+are already in Git's exact diff; no duplicate change_receipts or output descriptors
+are required just because those files changed. Keep actual metric, source and
+preservation bindings. Cite test logs directly instead of writing new passed-control
+JSON. If such receipts are retained, they must still agree with their actual bytes.
+
+Before an expensive repeat, identify what changed or which acceptance requirement
+needs the run. An unchanged producer does not need another two-run demonstration for
+each batch or reviewer. Verify new batch results and current selected ownership;
+reuse applicable prior source/method and safety tests with their limits. Do not relabel
+changed inputs as unchanged or remove a failing declared control to claim success.

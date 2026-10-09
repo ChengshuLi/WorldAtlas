@@ -61,23 +61,25 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
     expectedLane: spec.mode, expectedSubjects: quality.subject_ids, expectedPins: quality.pins});
   const recordChecks = validateRecordChecks(manifest, readFile);
   const receipts = manifest.change_receipts;
-  need(Array.isArray(receipts) && receipts.length === files.length && new Set(receipts.map(row => row.path)).size === receipts.length,
+  // Git's complete immutable diff and exact-head review already bind code changes.
+  // Retained legacy receipts remain checked when supplied, but need not be recopied.
+  if (receipts !== undefined) need(Array.isArray(receipts) && receipts.length === files.length && new Set(receipts.map(row => row.path)).size === receipts.length,
     'Incomplete changed-file receipts');
   const descriptors = [...manifest.baseline.files, ...manifest.sources.flatMap(source => source.files ?? []), ...manifest.outputs];
   const outputs = new Set(manifest.outputs.map(file => file.path));
   const retained = new Set(manifest.sources.flatMap(source => source.files?.map(file => file.path) ?? []));
   for (const file of files) {
-    const row = receipts.find(row => row.path === file.filename);
-    need(row?.status === file.status && row.previous_path === file.previous_filename, `Change receipt mismatch: ${file.filename}`);
+    const row = receipts?.find(row => row.path === file.filename);
+    if (receipts !== undefined) need(row?.status === file.status && row.previous_path === file.previous_filename, `Change receipt mismatch: ${file.filename}`);
     for (const name of [file.filename, file.previous_filename].filter(Boolean)) safeEvidencePath(name);
-    if (file.status !== 'added') {
+    if (receipts !== undefined && file.status !== 'added') {
       const original = file.previous_filename ?? file.filename;
       need(/^[a-f0-9]{64}$/.test(row.original_sha256) && sha256(readFile(original, 'base')) === row.original_sha256,
         `Original change bytes mismatch: ${original}`);
     }
-    if (file.status === 'removed') need(typeof row.reason === 'string' && row.reason.trim(), 'Deletion needs a preservation explanation');
-    else if (file.filename !== manifestPath) need(outputs.has(file.filename) || retained.has(file.filename),
-      `Changed file lacks whole-file output/source descriptor: ${file.filename}`);
+    if (receipts !== undefined && file.status === 'removed') need(typeof row.reason === 'string' && row.reason.trim(), 'Deletion needs a preservation explanation');
+    // Scientific inputs/results remain bound by descriptors, metric and record checks.
+    // Unrelated implementation/docs do not become scientific outputs merely by changing.
     need(!(file.status !== 'added' && (retained.has(file.filename) || retained.has(file.previous_filename))),
       'Refresh must retain original source bytes in a new vintage');
     // Baseline source descriptors explicitly identify immutable originals, including deleted/renamed paths.
@@ -122,17 +124,21 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
         'Unsupported geographic helper/coordinate/method policy');
     }
     if (method.kind === 'generator') need(method.helper_version === PREPARATION_VERSION, 'Unsupported immutable preparation helper');
-    if (['geography', 'generator', 'measurement'].includes(method.kind)) {
-      const controls = manifest.validation ?? [];
-      const kinds = ['positive-control', 'negative-control', ...(method.kind === 'generator' ? ['reproducibility'] : [])];
-      for (const kind of kinds) {
-        const control = controls.find(row => row.method_id === method.id && row.kind === kind);
-        need(control?.outcome === 'passed' && outputs.has(control.evidence_path), `Missing ${kind} result for ${method.id}`);
-        const evidence = JSON.parse(readFile(control.evidence_path, 'candidate'));
-        need(evidence.method_id === method.id && evidence.kind === kind && evidence.outcome === 'passed', 'Control bytes do not match receipt');
-        if (kind === 'reproducibility') need(evidence.run_one_sha256 === evidence.run_two_sha256 && /^[a-f0-9]{64}$/.test(evidence.run_one_sha256), 'Two-run reproducibility hashes differ');
-      }
-    }
+  }
+  // Actual tests and independent review establish applicable safeguards. A copied
+  // "passed" JSON file is not an additional test. Check claims that are supplied;
+  // do not demand new control files or another full run for every batch/review.
+  if (manifest.validation !== undefined) need(Array.isArray(manifest.validation), 'Invalid validation inventory');
+  const controlKeys = new Set();
+  for (const control of manifest.validation ?? []) {
+    const key = JSON.stringify([control.method_id, control.kind]);
+    need(!controlKeys.has(key) && manifest.methods.some(method => method.id === control.method_id) &&
+      ['positive-control', 'negative-control', 'reproducibility'].includes(control.kind) &&
+      control.outcome === 'passed' && outputs.has(control.evidence_path), 'Invalid declared control');
+    controlKeys.add(key);
+    const evidence = JSON.parse(readFile(control.evidence_path, 'candidate'));
+    need(evidence.method_id === control.method_id && evidence.kind === control.kind && evidence.outcome === 'passed', 'Control bytes do not match receipt');
+    if (control.kind === 'reproducibility') need(evidence.run_one_sha256 === evidence.run_two_sha256 && /^[a-f0-9]{64}$/.test(evidence.run_one_sha256), 'Two-run reproducibility hashes differ');
   }
   if (result.limits.length) need(manifest.stages.geographic_approval !== 'approved', 'Limited source evidence cannot approve geography');
   need(manifest.stages.geographic_approval !== 'approved' && manifest.stages.implementation !== 'published',
@@ -284,7 +290,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
     reader.read.assertAncestor = commit => need(commits.includes(commit), 'Historical commit ancestry was not verified');
     const loads = [...historical.map(file => [file.path, file.commit]),
       ...manifest.sources.flatMap(source => source.files ?? []).map(file => [file.path, 'candidate']), ...manifest.outputs.map(file => [file.path, 'candidate']),
-      ...files.filter(file => file.status !== 'added').map(file => [file.previous_filename ?? file.filename, 'base'])];
+      ...(manifest.change_receipts === undefined ? [] : files.filter(file => file.status !== 'added').map(file => [file.previous_filename ?? file.filename, 'base']))];
     await reader.prefetch(loads);
     for (const [name, vintage] of loads) await reader.load(name, vintage);
     const checked = validatePremergeManifest(manifest, {readFile: reader.read, files, manifestPath: requirement.manifestPath,

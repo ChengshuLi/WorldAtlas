@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {prepareGeometryReceipt} from './geometry-receipt.mjs';
+const d=JSON.parse(fs.readFileSync(process.argv[2]));
+const inputs={owners:d.owners,originalTargets:d.originalTargets,currentTargets:d.currentTargets,geometryProof:d.geometryProof,sourceEvidence:d.sourceEvidence};
+const receipt=prepareGeometryReceipt(inputs);assert.equal(receipt.reused_ids.length,49623);assert.equal(receipt.archives.length,2);assert.equal(receipt.relationships.length,2);assert.equal(receipt.historical_claims_transferred,false);
+let negative=0;const reject=patch=>{assert.throws(()=>prepareGeometryReceipt({...inputs,...patch}));negative++;};
+reject({owners:inputs.owners.slice(1)});const dup=structuredClone(inputs.owners);dup[1]=dup[0];reject({owners:dup});
+reject({originalTargets:inputs.originalTargets.toReversed()});reject({currentTargets:inputs.currentTargets.slice(0,1)});
+reject({geometryProof:{...inputs.geometryProof,current_pointers_activated:true}});reject({geometryProof:{...inputs.geometryProof,changed_ids:['foreign']}});
+const bad=structuredClone(inputs.geometryProof);bad.exact_constructions[0].loss_empty=false;reject({geometryProof:bad});
+const drift=structuredClone(inputs.currentTargets);drift[0].properties.parent_id='foreign';reject({currentTargets:drift});
+reject({sourceEvidence:[{url:'file:///foreign',source_sha256:'0'.repeat(64)}]});
+console.log(JSON.stringify({positive:1,negative,full_owner_roster:49625,reused_ids:49623,actual_original_and_current_target_geometry:true,limits:'Actual prior proof structural continuation; whole issuing-body guard and normal full-context brand remain required'}));

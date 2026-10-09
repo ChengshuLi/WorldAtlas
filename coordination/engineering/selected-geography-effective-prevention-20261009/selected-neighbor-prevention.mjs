@@ -116,9 +116,20 @@ export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve
 // live trusted child acknowledgement, plus the actual selected resolver. The
 // acknowledgement is issued by the parent invocation, never read from candidate
 // files or inferred from the product's own facts.
+// Pure body/inventory join; does not issue a selected snapshot or certificate.
+export function validateColdSourceBody(input,expected,facts){
+  if(expected.kind==='ordinary-immutable-git-source'&&!hash(expected.sha256)){
+   const consumed=facts.inputs?.filter(row=>row.commit===expected.commit&&row.path===expected.path);
+   demand(Array.isArray(consumed)&&consumed.length===1,'Missing or duplicate genuine whole ordinary source inventory');
+   const row=consumed[0];demand(row.mode===expected.mode&&row.git_blob_oid===expected.git_blob_oid&&row.bytes===expected.bytes&&row.whole_body_consumed===true&&hash(row.sha256)&&input.whole_body_sha256===row.sha256&&input.bytes===row.bytes,'Whole ordinary source differs from independently selected Git identity and acknowledged consumption');
+  }else{
+  const rawHash=expected.decoded_sha256??expected.sha256,rawBytes=expected.decoded_bytes??expected.bytes;demand(input.whole_body_sha256===rawHash&&input.bytes===rawBytes,'Whole cold selected source body differs from independent source bank');
+  }
+}
 export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expectedPublication,publication,encoded_sha256,decoded_sha256}) {
  demand(resolver instanceof SelectedGeometrySources&&same(publication,expectedPublication)&&publication.complete===true&&publication.kind==='trusted-selected-coordinate-stage-v1','Missing actual issued cold-stage acknowledgement');
  demand(encoded_sha256===publication.certificate.sha256&&decoded_sha256===publication.certificate.decoded_sha256,'Cold complete certificate bytes differ');
+ demand(publication.facts&&valueSha(facts)===publication.facts.sha256,'Cold facts differ from genuine acknowledged publication');
  demand(facts.kind===publication.kind&&facts.selected_commit===resolver.reader.version&&facts.candidate_code_executed===false&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Foreign cold certificate execution/input');
  demand(same(certificate.binding.selection,resolver.snapshot.selection)&&same(certificate.binding.release,resolver.release)&&same(certificate.binding.sources,resolver.sources)&&certificate.binding.owners_sha256===valueSha(resolver.snapshot.owners)&&same(facts.binding,certificate.binding),'Cold certificate selected source/owner binding differs');
  bindCoordinateRows(certificate);
@@ -126,7 +137,7 @@ export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expe
  demand(Array.isArray(certificate.inputs)&&certificate.inputs.length===paths.size&&Array.isArray(certificate.entries)&&certificate.entries.length===owners.size,'Incomplete cold source/owner certificate');
  for(let i=0;i<certificate.inputs.length;i++){const input=certificate.inputs[i],expected=resolver.sources[i];
   demand(input.path===resolver.paths[i]&&!sources.has(input.path)&&sources.add(input.path)&&same(input.source,{...expected,...(input.source?.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})})&&hash(input.whole_body_sha256)&&Number.isSafeInteger(input.bytes)&&input.bytes>0&&input.bytes<=FILE,'Foreign/duplicate/reordered/drifted complete cold source');
-  const rawHash=expected.decoded_sha256??expected.sha256,rawBytes=expected.decoded_bytes??expected.bytes;demand(input.whole_body_sha256===rawHash&&input.bytes===rawBytes,'Whole cold selected source body differs from independent source bank');
+  validateColdSourceBody(input,expected,facts);
  }
  for(let i=0;i<certificate.entries.length;i++){const row=certificate.entries[i],owner=owners.get(row.id);demand(row.id===resolver.snapshot.owners[i].id&&owner&&!seen.has(row.id)&&seen.add(row.id)&&row.index===owner.index&&row.parent_id===owner.province_id&&row.parent_index===owner.province_index&&paths.has(row.source)&&Number.isSafeInteger(row.ordinal)&&row.ordinal>=0&&hash(row.whole_feature_sha256)&&hash(row.geometry_sha256)&&hash(row.effective_geometry_sha256)&&Array.isArray(row.boxes)&&row.boxes.length>0,'Foreign/duplicate/drifted cold owner record');
   const additions=(resolver.snapshot.additive?.normalized_rows??[]).filter(r=>r.target_id===row.id);
@@ -134,7 +145,32 @@ export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expe
   for(const box of row.boxes)demand(Array.isArray(box)&&box.length===4&&box.every(Number.isFinite)&&box[0]>=-180&&box[2]<=180&&box[1]>=-90&&box[3]<=90&&box[0]<=box[2]&&box[1]<=box[3],'Invalid complete coordinate exclusion bound');
  }
  demand(facts.complete_owners===owners.size&&facts.complete_sources===paths.size,'Cold scope denominator differs');
- freeze(certificate);certificates.set(certificate,{binding:certificate.binding,resolver});return certificate;
+ freeze(certificate);certificates.set(certificate,{binding:certificate.binding,resolver,accepted:{publication_sha256:valueSha(publication),facts_sha256:valueSha(facts),encoded_sha256,decoded_sha256}});return certificate;
+}
+
+// A persisted receipt is issued only after the genuine resolver has validated
+// every complete source/owner row. It holds custody, never the resolver, native
+// image, camera roster, or live certificate. Reopening requires the exact whole
+// originally validated product; a serializable copy cannot issue this authority.
+const coldReceipts=new WeakMap();
+export function sealColdCoordinateCertificate(certificate,product) {
+ const proof=certificates.get(certificate);
+ demand(proof?.resolver instanceof SelectedGeometrySources&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Require genuine complete cold validation before detachment');
+ demand(proof.accepted&&valueSha(product.publication)===proof.accepted.publication_sha256&&valueSha(product.facts)===proof.accepted.facts_sha256&&product.encoded_sha256===proof.accepted.encoded_sha256&&product.decoded_sha256===proof.accepted.decoded_sha256,'Persisted custody differs from privately accepted whole product');
+ demand(valueSha(certificate)===product.decoded_sha256&&same(product.publication.certificate,{path:'certificate.json.gz',bytes:product.publication.certificate.bytes,sha256:product.encoded_sha256,decoded_bytes:product.publication.certificate.decoded_bytes,decoded_sha256:product.decoded_sha256})&&valueSha(product.facts)===product.publication.facts.sha256,'Validated persisted cold product changed');
+ const inventory=[...proof.resolver.reader.inventory.values()],completePhaseBytes=proof.resolver.reader.used;
+ demand(Array.isArray(inventory)&&Number.isSafeInteger(completePhaseBytes)&&completePhaseBytes>0&&completePhaseBytes<=PHASE,'Missing complete persisted cold acquisition custody');
+ const receipt=JSON.parse(valueBytes({version:1,kind:'privately-validated-persisted-coordinate-receipt-v1',binding:certificate.binding,publication:product.publication,facts:product.facts,inventory,complete_phase_bytes:completePhaseBytes,effective_additions:proof.resolver.snapshot.additive?.normalized_rows??[]}));
+ demand(valueBytes(receipt).length<=FILE,'Complete persisted cold custody exceeds member bound');
+ freeze(receipt);coldReceipts.set(receipt,{decoded_sha256:product.decoded_sha256,encoded_sha256:product.encoded_sha256});
+ // Shard proofs retain their resolver identity. Only the fully validated cold
+// certificate proof relinquishes the selected snapshot after its helper ends.
+ certificates.set(certificate,{binding:certificate.binding,persisted:true});return receipt;
+}
+export function reopenColdCoordinateCertificate(receipt,product) {
+ const proof=coldReceipts.get(receipt);
+ demand(proof&&same(product.publication,receipt.publication)&&same(product.facts,receipt.facts)&&product.encoded_sha256===proof.encoded_sha256&&product.decoded_sha256===proof.decoded_sha256&&valueSha(product.certificate)===proof.decoded_sha256&&same(product.certificate.binding,receipt.binding),'Missing private persisted custody or changed whole cold product');
+ bindCoordinateRows(product.certificate);freeze(product.certificate);certificates.set(product.certificate,{binding:receipt.binding,persisted:true});return product.certificate;
 }
 
 export function selectedCertificateAffectedPlan(before,after) {

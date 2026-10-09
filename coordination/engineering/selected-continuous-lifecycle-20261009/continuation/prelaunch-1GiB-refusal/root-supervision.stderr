@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-continuation-a7ec-20261009/supervise.py", line 27, in <module>
+    assert supply>=contract['maximum_RSS_bytes']+contract['minimum_host_reserve_bytes'],'Prospective host supply refusal before child launch'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Prospective host supply refusal before child launch

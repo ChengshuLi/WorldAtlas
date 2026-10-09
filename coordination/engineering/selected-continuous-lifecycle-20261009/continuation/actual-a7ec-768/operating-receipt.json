@@ -1,0 +1,874 @@
+{
+  "kind": "actual-full-selected-native-comparison-operating-receipt",
+  "code_head": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+  "baseline": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "candidate": "9d096bc93a055578cef4b895b942ef44e2e8333a",
+  "issued_command_sha256": "4f350a588190222c4d916699921937a797d2f595dd6352b3b3e718016a333f03",
+  "contract": {
+    "issued_command_sha256": "4f350a588190222c4d916699921937a797d2f595dd6352b3b3e718016a333f03",
+    "supervisor_sha256": "44d8d62fd96ce39cd8a180d156178b4dc2858dc0647fcede481a3351cff9b1e1",
+    "maximum_RSS_bytes": 805306368,
+    "minimum_host_reserve_bytes": 402653184,
+    "sample_margin_bytes": 33554432,
+    "maximum_wall_seconds": 1200,
+    "maximum_new_storage_bytes": 67108864,
+    "maximum_result_bytes": 4194304,
+    "maximum_stderr_bytes": 40960,
+    "termination_helper_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/1394-physical-continuation-e9b03/owned-child-termination-00c6028d.py",
+    "termination_helper_sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+    "scope": "Current consumer acceptance only. Original417 completed child return VALUES reconstructed from independently reviewed original execution and whole products; raw stdout not retained. Original parent stays failed. No unchanged source certificate generation or original polygon operator. Fresh stricter768MiB/384MiB/32MiB margin/1200s/64MiB storage/4MiB stdout/40KiB stderr;256MiB/32MiB/512 data caps unchanged.",
+    "reviewer": "01a10893-2a57-72e0-aa08-5c36088d5206",
+    "no_automatic_envelope_increase_or_started_retry": true
+  },
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-continuation-a7ec-768-20261009/continuation-plan.json",
+    "57d5e0755cdf29563e337071dfb412a1bffe7fd4d7ca5e3d6f2d9bdc40cc051e"
+  ],
+  "started_at": "2026-10-09T21:07:25.000107+00:00",
+  "finished_at": "2026-10-09T21:07:42.190269+00:00",
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_s": 17.189672000007704,
+  "actual_external_lifetime_process_peak_RSS_bytes": 489046016,
+  "max_sampled_group_RSS_bytes": 469663744,
+  "VM_supply_upper_estimate_before_launch": 1305772032,
+  "operating_admission_qualified": true,
+  "natural_terminal_owned_processes_absent": true,
+  "new_storage_bytes": 786433,
+  "samples": [
+    {
+      "elapsed_s": 0.06501341698458418,
+      "group_RSS_bytes": 49414144,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 0.6032001670100726,
+      "group_RSS_bytes": 156663808,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.144070875016041,
+      "group_RSS_bytes": 155467776,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3462": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:26 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.6875672499882057,
+      "group_RSS_bytes": 128253952,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3597": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:26 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.2556367500219494,
+      "group_RSS_bytes": 388677632,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.839057417004369,
+      "group_RSS_bytes": 341098496,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3684": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:27 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.3810876670177095,
+      "group_RSS_bytes": 288538624,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3774": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:28 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.9352131669875234,
+      "group_RSS_bytes": 135184384,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3840": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:28 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 4.475618458003737,
+      "group_RSS_bytes": 350076928,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 5.014228750020266,
+      "group_RSS_bytes": 459816960,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 5.55758333299309,
+      "group_RSS_bytes": 469663744,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 6.094384792027995,
+      "group_RSS_bytes": 305676288,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3936": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:31 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 6.629200208000839,
+      "group_RSS_bytes": 269074432,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3998": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:31 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 7.161935375013854,
+      "group_RSS_bytes": 338313216,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4065": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:32 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 7.705563625029754,
+      "group_RSS_bytes": 333791232,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4137": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:32 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 8.305529124976601,
+      "group_RSS_bytes": 261324800,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4219": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:33 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 8.848272417031694,
+      "group_RSS_bytes": 314032128,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 9.384825124987401,
+      "group_RSS_bytes": 335364096,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4326": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:34 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 9.925318541994784,
+      "group_RSS_bytes": 315932672,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4421": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:34 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 10.465359083027579,
+      "group_RSS_bytes": 350978048,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 11.014350957993884,
+      "group_RSS_bytes": 334987264,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4573": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:35 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 11.558837625023443,
+      "group_RSS_bytes": 236945408,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4679": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:36 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 12.104524541995488,
+      "group_RSS_bytes": 186400768,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4826": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:37 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 12.641819583019242,
+      "group_RSS_bytes": 328613888,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "4945": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:37 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 13.21250541700283,
+      "group_RSS_bytes": 247103488,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "5080": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:38 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 13.77733683300903,
+      "group_RSS_bytes": 202997760,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "5147": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:38 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 14.33317870798055,
+      "group_RSS_bytes": 58048512,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "5195": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:39 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 14.870906750031281,
+      "group_RSS_bytes": 281313280,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 15.408156374993268,
+      "group_RSS_bytes": 349569024,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 15.94550099998014,
+      "group_RSS_bytes": 353435648,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "5415": {
+          "ppid": 3332,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:40 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 16.47960629197769,
+      "group_RSS_bytes": 358301696,
+      "members": {
+        "3330": {
+          "ppid": 3228,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        },
+        "3332": {
+          "ppid": 3330,
+          "pgid": 3330,
+          "started": "Fri Oct 9 14:07:25 2026"
+        }
+      }
+    }
+  ],
+  "termination_events": [],
+  "whole_output_pins": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-continuation-a7ec-768-20261009/checker.stdout",
+      "bytes": 1256,
+      "sha256": "b27813fae91bc7494275a48592a0079be6057de1a09862009a2ae68ec13873c5"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-continuation-a7ec-768-20261009/checker.stderr",
+      "bytes": 777,
+      "sha256": "8b2edaa53498fc9be70c9dc926884e79a8c437de5b89b63a511f410306d96b6d"
+    }
+  ],
+  "source_pre_use": [
+    {
+      "path": "package.json",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/package.json"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "09015e2d1e179b6856b6b9e51d51e3ea77d7b2fd",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "539636ee1a6d9c719ab6e20c7b7f822cc66e0833",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/run-geographic-check.py"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "a9f221d139a019a5240b3f4d45249226ae49f3c4",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-geographic-regression.py"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/immutable.py"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "f1c2f3206bc5698201441a775b8bf8560977368d",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/geometry.py"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "518dcaada9e94907d7d886636dcbf928bd0788fa",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/ellipsoidal_area.py"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/src/ownership-codec.js"
+    },
+    {
+      "path": "requirements.txt",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "a51a1fe5d483cadf8c6bbfb8390f8c5bbad61f9c",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/requirements.txt"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "853e7463484fe94b14788d41db1a65c21dfe078a",
+      "bytes": 68447,
+      "sha256": "3c1b5510b80c5e23f2eb019a21dfb28b95dbb9b5ba33dc9945d74175b51a9943",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "62360c01972b47499e3b39734783c6b07729dbd4",
+      "bytes": 20850,
+      "sha256": "2b1abb25712cfb233aba0c6eef8b2581e35fc5a99f00e7bd161c6dcd8ecf6292",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "96f096bc22cdfcec2e565036c0354869dd766d25",
+      "bytes": 8375,
+      "sha256": "893907fe457e181ce17b87298f4708188202227b59943b405c79eb20b13bf194",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs"
+    }
+  ],
+  "source_post_use": [
+    {
+      "path": "package.json",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/package.json"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "09015e2d1e179b6856b6b9e51d51e3ea77d7b2fd",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "539636ee1a6d9c719ab6e20c7b7f822cc66e0833",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/run-geographic-check.py"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "a9f221d139a019a5240b3f4d45249226ae49f3c4",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-geographic-regression.py"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/immutable.py"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "f1c2f3206bc5698201441a775b8bf8560977368d",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/geometry.py"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "518dcaada9e94907d7d886636dcbf928bd0788fa",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/ellipsoidal_area.py"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/src/ownership-codec.js"
+    },
+    {
+      "path": "requirements.txt",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "a51a1fe5d483cadf8c6bbfb8390f8c5bbad61f9c",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/requirements.txt"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "853e7463484fe94b14788d41db1a65c21dfe078a",
+      "bytes": 68447,
+      "sha256": "3c1b5510b80c5e23f2eb019a21dfb28b95dbb9b5ba33dc9945d74175b51a9943",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "62360c01972b47499e3b39734783c6b07729dbd4",
+      "bytes": 20850,
+      "sha256": "2b1abb25712cfb233aba0c6eef8b2581e35fc5a99f00e7bd161c6dcd8ecf6292",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+      "commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "mode": "100644",
+      "git_blob_oid": "96f096bc22cdfcec2e565036c0354869dd766d25",
+      "bytes": 8375,
+      "sha256": "893907fe457e181ce17b87298f4708188202227b59943b405c79eb20b13bf194",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs"
+    }
+  ],
+  "global_scientific_executions": 0
+}

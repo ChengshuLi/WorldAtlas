@@ -197,3 +197,15 @@ N2 successor selection before any current-bank rebind and release activation.
 See the packet's original requests, full source/native inputs, repeated whole
 outputs, operating receipts and executed-code custody; earlier checkpoint limits
 above retain their original vintage. No new worldwide audit was performed.
+
+## Routine batch delivery
+
+Use WORKER_COORDINATION.md's delivery policy. After the current path is admitted,
+subsequent supported batches use it with new candidate/source bindings, assignments
+and selected-release inputs. Keep whole current-bank conservation, source authority,
+and actual drawing/picking/selected-output checks. Reuse unchanged source research,
+producer safety and repeatability evidence; do not repeat the full-world inventory or
+create batch-specific certificate/helper frameworks by default. Deliver independent
+supported cases now; unresolved source/target cases retain their existing owners and
+do not become prerequisites for unrelated repairs. Report actual integrated gaps and
+cells separately from proposed fragments and remaining candidates on the existing issue.

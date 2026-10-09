@@ -57,3 +57,8 @@ test('failed reads preserve checkpoint and never report false resolutions',async
  assert.equal(r.status,'incomplete');assert.equal(r.last_successful_coverage,'earlier');assert.equal(r.resolved_findings.length,0);
  await assert.rejects(auditQueue({api:f.api,repo:'a/b',previous:{...prev,repository:'wrong/repo'}}),/checkpoint/);
 });
+
+test('manual readiness audit does not manufacture exhaustion blockers',()=>{
+ const row=assessIssue(issue(1,['type:engineering','kind:work-item','status:ready']),{prs:Array.from({length:8},()=>({state:'closed',merged_at:'now'}))});
+ assert.deepEqual(codes(row),[]);
+});

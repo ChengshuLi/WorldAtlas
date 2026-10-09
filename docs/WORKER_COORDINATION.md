@@ -12,9 +12,9 @@ Active legacy work keeps its recorded worker ID only for finishing, renewing and
 
 ## Small, reviewed work items
 
-Each worker holds at most one active work item; do not mass-reserve the queue. Actionable issues have exactly one type label, `kind:work-item`, `status:ready`, an explicit scope and a **1–3 PR budget**. Larger objectives are `kind:umbrella`, cannot be claimed and are decomposed into bounded child issues. An umbrella can have many children, while each child normally completes in one PR and at most three. Open dependencies or `status:blocked` prevent claims. Completing a child does not close its parent.
+Each worker holds at most one active work item; do not mass-reserve the queue. Actionable issues have exactly one type label, `kind:work-item`, `status:ready`, an explicit bounded scope and a positive PR planning estimate (`max_prs`, retained for v1 compatibility). Larger objectives are `kind:umbrella`, cannot be claimed and are decomposed by independently deliverable scope or ownership. The estimate does not block readiness, claims, branch rotation or merging; exceeding it does not require another issue or a contract edit. Review why work is growing and finish the existing promise instead of mechanically creating a successor. Open dependencies or `status:blocked` prevent claims. Completing a child does not close its parent.
 
-At each new claim, choose eligible `urgent` issues in your own lane first, then other `follow-up` issues, then other ready work. Eligible means an open, unclaimed, unblocked `kind:work-item` labeled `status:ready`, with satisfied dependencies and authorized scope. Preserve the existing regional approval and import gates. Finish or safely hand over your current claim; do not abandon it to preempt another worker. Urgency never bypasses readiness, ownership, review or publication/import rules. If urgent candidates are all blocked, already claimed or outside your lane, continue another eligible item and record why they were unavailable in your issue checkpoint.
+Within a human-assigned delivery goal, choose the next eligible work that most directly finishes that outcome: integrate a supported batch or fix its demonstrated blocker before unrelated housekeeping or speculative hardening. A newly found incident threatening data, service availability or correctness of that delivery takes priority according to its demonstrated impact. For general unassigned queue work, choose eligible urgent items, then follow-ups, then other ready work. A label alone does not establish impact. Finish or safely hand over the current claim; preserve readiness, lane, ownership and scientific/publication rules.
 
 The issue-creation thread reviews scope, dependencies and overlap before marking ready. Include one machine-readable block in the issue body (GitHub is its sole authority):
 
@@ -40,9 +40,57 @@ A ready label is a reviewed decision, not an automatic conclusion from complete 
 
 Geography proposals → bounded engineering corrections/integration → complete validated published regional branch → permitted historical imports. Independent UI/performance/infrastructure engineering and source-only historical collection may run in parallel throughout. Inter-region inconsistencies require a coordinated issue covering all affected neighbors; no unilateral boundary or certificate edits. After a published boundary change, engineering revalidates affected release pins, complete-branch certificates and content scopes while retaining earlier records/evidence.
 
+## Deliver results with proportionate verification
+
+For a delivery campaign, work backwards from the next integrated useful batch.
+Use the existing issue for the batch's expected result, actual outcome and next
+step. No new status form, tracker, audit sweep or performance report is required.
+Count repaired gaps separately from native cells, researched candidates and valid
+exclusions. Supporting code, evidence and merged PRs are means, not delivered repairs.
+Production-deferred work reports verified selected/offline integration separately.
+
+- Batch independent cases that share an admitted rule and delivery path. Deliver
+  supported cases without waiting for unresolved cases that cannot affect them.
+  Batch size follows actual source, integration and resource boundaries, not an
+  arbitrary tiny count. Keep partial remainders and uncertain cases explicit.
+- Reuse the current inventory, source findings, admitted producer and consumer.
+  Ordinary subsequent batches should change inputs, assignments and release selection,
+  not invent another helper, certificate or audit. A different rule/source may need
+  new science; it must not hold already-supported cases hostage.
+- A supporting change must remove a demonstrated obstruction to that batch. Repair
+  the existing path where possible, then return to delivery. If the same phase fails
+  again after a repair, or two consecutive work steps add support without advancing
+  acceptance, stop expanding the approach: identify the actual bottleneck and change
+  the design. Escalate only the decision that exceeds your authority, with a concrete
+  alternative. This is a course correction, not a quota, automatic pause or new issue.
+- Keep retained scientific results when their consumed inputs, code, parameters and
+  relevant runtime assumptions are unchanged and the previous result was not invalidated.
+  Inspect that applicability and reference the existing evidence; do not copy it into
+  another packet or call it a new execution. Recompute only affected results. Changes
+  to selection still require current-baseline conservation and actual selected-output
+  verification. Unrelated main commits do not alone require repeating source research.
+- Test changed logic with meaningful positive/adverse cases and run required focused CI.
+  New exact heads require renewed relevant review, not automatic full reruns by author,
+  reviewer and Auditor. Repeat expensive executions only for a changed repeatability
+  claim, a relevant input/method/runtime change, a suspect earlier result or an explicit
+  acceptance requirement. Equal runs are not independent correctness evidence.
+- Git and the exact-head review own changed-code identity and the complete diff.
+  The evidence manifest binds scientific inputs/results; do not duplicate code/docs
+  hashes or Git's change list in it. Existing optional receipts remain checked when
+  supplied. Do not generate custom JSON saying tests passed merely to satisfy a form.
+  Cite actual test output and substantive checks in the existing PR/review.
+- Keep real resource admission and safe cleanup. Use the documented operation-specific
+  bounds; a large GIS experiment's memory gate does not prohibit editing, reading small
+  files or running focused tests. Do not invent global free-memory thresholds, repeatedly
+  poll unchanged resource conditions, or duplicate whole datasets for reviews.
+
+No current acceptance, scientific authority or explicit human constraint is weakened
+by this policy. A demonstrated wrong result or unsafe operation still blocks the
+corresponding delivery. An optional improvement is not a new acceptance criterion.
+
 ## PR review size
 
-Keep PRs focused on one issue or a coherent part. Aim for fewer than 1,000 changed non-test lines as a soft review target, not a hard cutoff. Larger focused PRs are allowed when splitting would make implementation, migration or validation harder to review safely; explain the reason in the PR description. Report generated-data changes separately. Do not compress code or documentation merely to meet a line budget. The soft target does not change issue PR budgets, lane ownership, required checks or serialized squash merges. Split oversized issue scopes into bounded children when needed, rather than fragmenting one coherent change just to meet a line count.
+Keep PRs focused on one issue or a coherent part. Aim for fewer than 1,000 changed non-test lines as a soft review target, not a hard cutoff. Larger focused PRs are allowed when splitting would make implementation, migration or validation harder to review safely; explain the reason in the PR description. Report generated-data changes separately. Do not compress code or documentation merely to meet a line budget. The soft target does not change lane ownership, required checks or serialized squash merges. Split oversized issue scopes into bounded children when needed, rather than fragmenting one coherent change just to meet a line count.
 
 ## Claim before implementation
 

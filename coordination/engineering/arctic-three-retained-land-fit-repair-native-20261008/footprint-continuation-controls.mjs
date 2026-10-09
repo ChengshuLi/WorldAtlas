@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {footprintContinuation} from './footprint-continuation.mjs';
+const geometry = n => ({type:'Polygon',coordinates:[[[n,0],[n+1,0],[n,1],[n,0]]]});
+const ids = ['atlas:physical:CAN-15:NWT','atlas:physical:CAN-25:NUN','atlas:physical:AAA'];
+const before = ids.map((id,i) => ({id,pixelIndex:i+1,properties:{parent_id:'parent'},geometry:geometry(i)}));
+const changed = before.slice(0,2).map(row => ({...row,geometry:geometry(row.pixelIndex+10)}));
+const stock = features => createHash('sha256').update(JSON.stringify(features.map(f=>[f.id,f.geometry]).sort((a,b)=>a[0].localeCompare(b[0])))).digest('hex');
+const continuation = footprintContinuation(3,changed);
+continuation.add(before.slice(0,2),1,2); continuation.add(before.slice(2),3,1);
+const result = continuation.finish();
+assert.equal(result.original_footprints_sha256,stock(before));
+assert.equal(result.current_footprints_sha256,stock([...changed,before[2]]));
+let negatives=0;
+function reject(callback) { assert.throws(callback); negatives++; }
+reject(()=>footprintContinuation(3,changed.slice(0,1)));
+reject(()=>{const p=footprintContinuation(3,changed);p.add(before.slice(0,2),1,2);p.finish();});
+reject(()=>{const p=footprintContinuation(3,changed);p.add(before,1,3);p.add(before,1,3);});
+reject(()=>{const p=footprintContinuation(3,changed);p.add(before,2,3);});
+reject(()=>{const p=footprintContinuation(3,changed.map(r=>({...r,properties:{parent_id:'wrong'}})));p.add(before,1,3);});
+reject(()=>{const p=footprintContinuation(3,[before[0],changed[1]]);p.add(before,1,3);});
+console.log(JSON.stringify({positive:2,negative:negatives,exact_stock_bytes:true}));

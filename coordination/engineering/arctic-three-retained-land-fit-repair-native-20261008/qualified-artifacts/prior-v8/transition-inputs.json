@@ -1,0 +1,167 @@
+{
+  "kind": "existing-integrated-transition-input-capture",
+  "merge_commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+  "rows": [
+    {
+      "component_id": "physical-component:bb4a3e58a98cdc2a589c2e0d8bc2e8172e3147d7bc68fe755a0f1fc2df713121",
+      "original_geometry_sha256": "b8b357848262d2ccb59b0e9823439c76f329e5dc9baa7678fa0e5bdfb23b1265",
+      "proposal_ref": {
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "mode": "100644",
+        "blob": "0c4b1e6924e07a48c662dc58a0c3fb2e48bef3f8",
+        "bytes": 94693,
+        "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+        "uncompressed_bytes": 320200,
+        "uncompressed_sha256": "897ca97928956c190fb4b1a25f0364333528b8d789f5e9f60f345f9299803e3e",
+        "pointer": "/0"
+      },
+      "approval_ref": {
+        "commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1295-capture.json",
+        "mode": "100644",
+        "blob": "1e7ef2a269edaffd15cf0eb147eb785c6ab559b9",
+        "bytes": 43054,
+        "sha256": "a658b6269bcdaa136399985f9cf2c0c5c282d5d5e60e12bdbac9b749fc26c4c0",
+        "pointer": "/body"
+      },
+      "installed_migration_ref": {
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+        "path": "data/reference-migrations/eastern-two-gap-repair-20261006/index.json",
+        "mode": "100644",
+        "blob": "afe398963087209091a15be9571d02234cd83257",
+        "bytes": 1765,
+        "sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef",
+        "pointer": "/activation"
+      },
+      "normal_build_ref": {
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/hosted-normal-build-qualification.json",
+        "mode": "100644",
+        "blob": "d04152fcff25b623f6b7ac7a6ab3103dfec6ac03",
+        "bytes": 2425,
+        "sha256": "f82665815350abeab07f9d787fc4c05fc9b82e6569c8cd3d155c154932baf970",
+        "pointer": "/"
+      },
+      "fully_integrated_offline": true,
+      "production_delivered": false
+    },
+    {
+      "component_id": "physical-component:1d458ddaf986b7485036312676a27f99539ecb743c8e093805cf4d4f49c55ed8",
+      "original_geometry_sha256": "172a25d939353bed6168c950cb0f9aaba75e7ff770aad053c7e36c963a6dc98e",
+      "proposal_ref": {
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "mode": "100644",
+        "blob": "0c4b1e6924e07a48c662dc58a0c3fb2e48bef3f8",
+        "bytes": 94693,
+        "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+        "uncompressed_bytes": 320200,
+        "uncompressed_sha256": "897ca97928956c190fb4b1a25f0364333528b8d789f5e9f60f345f9299803e3e",
+        "pointer": "/1"
+      },
+      "approval_ref": {
+        "commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1295-capture.json",
+        "mode": "100644",
+        "blob": "1e7ef2a269edaffd15cf0eb147eb785c6ab559b9",
+        "bytes": 43054,
+        "sha256": "a658b6269bcdaa136399985f9cf2c0c5c282d5d5e60e12bdbac9b749fc26c4c0",
+        "pointer": "/body"
+      },
+      "installed_migration_ref": {
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+        "path": "data/reference-migrations/eastern-two-gap-repair-20261006/index.json",
+        "mode": "100644",
+        "blob": "afe398963087209091a15be9571d02234cd83257",
+        "bytes": 1765,
+        "sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef",
+        "pointer": "/activation"
+      },
+      "normal_build_ref": {
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/hosted-normal-build-qualification.json",
+        "mode": "100644",
+        "blob": "d04152fcff25b623f6b7ac7a6ab3103dfec6ac03",
+        "bytes": 2425,
+        "sha256": "f82665815350abeab07f9d787fc4c05fc9b82e6569c8cd3d155c154932baf970",
+        "pointer": "/"
+      },
+      "fully_integrated_offline": true,
+      "production_delivered": false
+    }
+  ],
+  "whole_git_input_pins": [
+    {
+      "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+      "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+      "mode": "100644",
+      "blob": "0c4b1e6924e07a48c662dc58a0c3fb2e48bef3f8",
+      "bytes": 94693,
+      "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+      "uncompressed_bytes": 320200,
+      "uncompressed_sha256": "897ca97928956c190fb4b1a25f0364333528b8d789f5e9f60f345f9299803e3e"
+    },
+    {
+      "commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/issue1295-capture.json",
+      "mode": "100644",
+      "blob": "1e7ef2a269edaffd15cf0eb147eb785c6ab559b9",
+      "bytes": 43054,
+      "sha256": "a658b6269bcdaa136399985f9cf2c0c5c282d5d5e60e12bdbac9b749fc26c4c0"
+    },
+    {
+      "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/index.json",
+      "mode": "100644",
+      "blob": "afe398963087209091a15be9571d02234cd83257",
+      "bytes": 1765,
+      "sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef"
+    },
+    {
+      "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "blob": "dfe03a27e795f2e08e2273cf01bf52a2d3c010d7",
+      "bytes": 298,
+      "sha256": "e00f6a6e02661e60085688ff336c91001f3c691bf2694dd336fa7a18e357a876"
+    },
+    {
+      "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+      "path": "data/canonical-grid/eastern-v8/manifest.json",
+      "mode": "100644",
+      "blob": "5dae8a4aaca806af67bbd6fbffc34a0fb69c6a8c",
+      "bytes": 251732,
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+    },
+    {
+      "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/hosted-normal-build-qualification.json",
+      "mode": "100644",
+      "blob": "d04152fcff25b623f6b7ac7a6ab3103dfec6ac03",
+      "bytes": 2425,
+      "sha256": "f82665815350abeab07f9d787fc4c05fc9b82e6569c8cd3d155c154932baf970"
+    }
+  ],
+  "queue_snapshot": {
+    "path": "queue-snapshot.json",
+    "bytes": 32346,
+    "sha256": "6fa35d42bec8d1ca4f4e826f35bf19bc1c34d5a7de701e947d757f8b13674612",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1480#issuecomment-6067665152",
+    "pointer": "/body"
+  },
+  "selected_release": "geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e",
+  "selected_native_manifest_ref": {
+    "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+    "path": "data/canonical-grid/eastern-v8/manifest.json",
+    "mode": "100644",
+    "blob": "5dae8a4aaca806af67bbd6fbffc34a0fb69c6a8c",
+    "bytes": 251732,
+    "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+  },
+  "limits": [
+    "Metadata extraction only; original scientific and independent whole-body readbacks remain separate prerequisites.",
+    "No new physical or geographic authority; no current-production delivery claim.",
+    "Cache capture must reach ordinary immutable Git custody and refresh review before catalog transition consumption."
+  ]
+}

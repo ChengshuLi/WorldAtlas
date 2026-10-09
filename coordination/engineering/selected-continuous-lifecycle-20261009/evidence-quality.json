@@ -1,0 +1,1363 @@
+{
+  "version": 1,
+  "issue": 1627,
+  "lane": "engineering",
+  "worker_id": "01a11935-1ccd-7fa3-a01f-563ff29045ee",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "b220e43f837ed1895f13956764214dfb921c7b6b",
+    "files": [
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+        "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+        "bytes": 15768,
+        "sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+        "bytes": 64248,
+        "sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "trusted_continuous_entry_sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb",
+      "trusted_neighbor_helper_sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca"
+    },
+    "pin_files": {
+      "trusted_continuous_entry_sha256": {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+        "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+      },
+      "trusted_neighbor_helper_sha256": {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+      }
+    },
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "original-and-current-whole-operating-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "role": "Retained original trusted code/input/output custody and current consumer operating qualification; engineering only",
+      "vintage": "6951 / original417 / currenta7ec, retained explicitly",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing physical source reuse/authority remains separately unresolved; no new approval."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore the whole original code objects and exact issued product/body pins in this packet; original whole source and runtime inventories preserve their qualified immutable provenance. Current ordinary consumer reconstructs no old scientific outputs.",
+      "limit": "Physical source authority, water/shoreline/date/history remain unapproved. Original417 parent remains failed; completed children retain producer417 and reconstructed return-value provenance, not retained stdout. Current consumer a7ec qualifies operands only. Actual strict polygon integration, native successor geography gate and normal final CI/review/queue remain required. No native/additive activation, deployment or worldwide repair-completion claim.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 20850,
+      "sha256": "2b1abb25712cfb233aba0c6eef8b2581e35fc5a99f00e7bd161c6dcd8ecf6292",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 115653,
+      "sha256": "6365d009d90fe991d8ae618c60034297e80dd75824dfb829c4fea99e38d96ac7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/selected-continuous-lifecycle.test.mjs",
+      "bytes": 22514,
+      "sha256": "43c468d425f30538ec2e1d13d7a080743e86eb8795f78c24d453940b81de0538",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/README.md",
+      "bytes": 3484,
+      "sha256": "0408645178ccb0c411ff62f1f3cad2003270e8b74385f339d12425e12365ad10",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/checker.stderr",
+      "bytes": 2710,
+      "sha256": "715b40ff4403d63823eff3d9a53fb90704b1fb86d00a930a527715a7f0c0e74c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/checker.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/baseline/certificate.json.gz",
+      "bytes": 7513603,
+      "sha256": "e32aae1eb4dda816d5b979f1d2a27765212ac1b2924388f41c103cdf9528d9e3",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 18406343,
+      "uncompressed_sha256": "c022c5d6e48eba341307c6908c4d129dc68e6a7246d92d2c832d67a4eef96f5c"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/baseline/facts.json",
+      "bytes": 44057,
+      "sha256": "232d6be2951da69c52f7c9a727409fb94b82921d274a6570b4c0e9836a05e397",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/baseline/publication.json",
+      "bytes": 442,
+      "sha256": "8870d2167c3ce644d9929eaf1bce3ba01f19f2b0d951225d6675ec05fda7cccf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/candidate/certificate.json.gz",
+      "bytes": 7515130,
+      "sha256": "ee8638145feaa008e1692b0f01f5c2c9d5615b3e8c78f9f949c26d02459273ba",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 18414208,
+      "uncompressed_sha256": "3890199e48b9b243cfa0d6157723e5c06a6b062afcc9de51d685c4882fa9a723"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/candidate/facts.json",
+      "bytes": 56230,
+      "sha256": "cb6bac9f768e10392954983de119e557d135b4f66014f229ca07ef49a6bc157f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/candidate/publication.json",
+      "bytes": 442,
+      "sha256": "14891490037288b4316aea0580b8883ff15f20698811ab2f229c61e1cc970f5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/consumed-source-prelaunch.json",
+      "bytes": 6237,
+      "sha256": "006459b1a9d0e79105d7c1108ac171d783304fb9e4f34a9999c5bd29243c50aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/launch-guard-controls.json",
+      "bytes": 794,
+      "sha256": "41bf8d00c7957a48fb7cc3f172943b00b68f5e719f748cf9922478ab2a6a1c48",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/launch-guard-controls.py",
+      "bytes": 2393,
+      "sha256": "21be651254319ca82083d7cc929a655f810e11af866c910a46dd5afa3aff0707",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/operating-contract.json",
+      "bytes": 1221,
+      "sha256": "eadd648b74c3ec7b0781d3ee2451ef95622215ee3379359daca693978eacff17",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/operating-receipt.json",
+      "bytes": 55321,
+      "sha256": "4ae1c6b8e3cb6c0bb0555c18a7ee1eea96c921d661894549643f32fe87ff49a1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/preservation.json",
+      "bytes": 7587,
+      "sha256": "4ec97fab3345e0ec771374f5e661f3088fa0c01fbaf0d406135479c25accb34a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 20843,
+      "sha256": "d250fdc7bb3800628fb65f119b348134565bce8cef4ff31c457521a87634baab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 67468,
+      "sha256": "776f010db97d101e458a29e6d0b58245a9bec2e9be5e54fcd0ff3ca6e88940aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/issued-command.json",
+      "bytes": 7927,
+      "sha256": "27411ae78e960bb9e4401335775b59ad957b50b20f991834569d17fd4ee86714",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/check-effective-geographic-regression.mjs",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/check-geographic-regression.py",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/run-geographic-check.py",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/prospective-plan.json",
+      "bytes": 3809,
+      "sha256": "57dff1d9350b35cff586c1122873dbb959d7fcc7692faf976ba18ed672d3fd13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/stage-status.json",
+      "bytes": 852,
+      "sha256": "3ce1421335196213ad417063955a62001c80853630036d819c3340175ef3c8bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/supervise-before-launch-guard.py",
+      "bytes": 5079,
+      "sha256": "b55acb0c42d2f6bd3011d21513f73d6514b55c2a2bdb0a0314f81cbec0c4edf8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/supervise.py",
+      "bytes": 6568,
+      "sha256": "44d8d62fd96ce39cd8a180d156178b4dc2858dc0647fcede481a3351cff9b1e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/checker.stderr",
+      "bytes": 777,
+      "sha256": "dce89e2259953f3a79c1035e550b1aa5c512869b8010f2cfecc6256942e5915c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/checker.stdout",
+      "bytes": 1549,
+      "sha256": "278211a6f2fda4c6596719485d07890a19fae13a9551f19f6c0fec81176452b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/operating-contract.json",
+      "bytes": 1090,
+      "sha256": "6086277850e6a71f3356a8cf431ea24d1803d379d2c46fbc2574a5193980b11b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/operating-receipt.json",
+      "bytes": 7392,
+      "sha256": "f30a4987261e4314115d2b98166971112b3a96c5ec59eff6b251eafb81d4244f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 15768,
+      "sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 64248,
+      "sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/diagnose-metadata.mjs",
+      "bytes": 3123,
+      "sha256": "85eee8a49b6b8e1bc48dc26d972548bcbf59cb555d5bd4ab2827eecc078ad6c6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/issued-command.json",
+      "bytes": 7790,
+      "sha256": "dfe7250920c9933e7f72b990dec515cf3eb52f230996174ec6d31632ac8e9a9e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/check-effective-geographic-regression.mjs",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/check-geographic-regression.py",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/run-geographic-check.py",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/supervise.py",
+      "bytes": 5036,
+      "sha256": "7133f9fd81eabf3470be284fd57d2771a9398e7ac60604b94fdc7c72cfddd873",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/allocator1627.json",
+      "bytes": 693,
+      "sha256": "e8684259e1ff31477b4badd2bb6deda07765de555a9bb7b1c587501d042948b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/claim1627.json",
+      "bytes": 1477,
+      "sha256": "5dbdb2c4a1a16f67bd98dff15dde5e2217c2ffa1fffae2c4a59e7e2dbb854525",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/checker.stderr",
+      "bytes": 777,
+      "sha256": "8b2edaa53498fc9be70c9dc926884e79a8c437de5b89b63a511f410306d96b6d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/checker.stdout",
+      "bytes": 1256,
+      "sha256": "b27813fae91bc7494275a48592a0079be6057de1a09862009a2ae68ec13873c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/facts.json",
+      "bytes": 300709,
+      "sha256": "3ade39c1ebafde6c9585035f4d9102572b28421773d84629b488090f19f3cb71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/operands.json.gz",
+      "bytes": 483251,
+      "sha256": "87dbbc341765c2d09ac9d181eb801ea54d336e7bd4bd2083e5bf1ecff1534e41",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1429051,
+      "uncompressed_sha256": "6132c40121184573a36dc521c112009cca748bb39ee1a294a2c5da255996bb9b"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/publication.json",
+      "bytes": 440,
+      "sha256": "c755cbeff67e692f271f087ceaaf8d16c2e0e4cb84c7dc1b08e5e10bbed4776f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/continuation-plan.json",
+      "bytes": 12499,
+      "sha256": "57d5e0755cdf29563e337071dfb412a1bffe7fd4d7ca5e3d6f2d9bdc40cc051e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/independent-issuance-review.json",
+      "bytes": 2086,
+      "sha256": "3c61b455c9661283351af6ae07218e30cd4fa25ef57ec9ad8f96e79f8962ec4b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/operating-contract.json",
+      "bytes": 1335,
+      "sha256": "4cab4b7b741bf02a445016f96f3c4d919df031172949b3bdaf966167b10ad531",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/operating-receipt.json",
+      "bytes": 30869,
+      "sha256": "36acca357a329234409a2a8b8cf905bece928d865eb23a76536659a47a02c545",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+      "bytes": 8375,
+      "sha256": "893907fe457e181ce17b87298f4708188202227b59943b405c79eb20b13bf194",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 20850,
+      "sha256": "2b1abb25712cfb233aba0c6eef8b2581e35fc5a99f00e7bd161c6dcd8ecf6292",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 68447,
+      "sha256": "3c1b5510b80c5e23f2eb019a21dfb28b95dbb9b5ba33dc9945d74175b51a9943",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/issued-command.json",
+      "bytes": 8280,
+      "sha256": "4f350a588190222c4d916699921937a797d2f595dd6352b3b3e718016a333f03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/check-effective-geographic-regression.mjs",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/check-geographic-regression.py",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/run-geographic-check.py",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/prospective-plan.json",
+      "bytes": 3353,
+      "sha256": "d054a3f631b2888a951488f48d48bba33ed8ae0324378634d227d3a9633caf40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/root-supervision.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/root-supervision.stdout",
+      "bytes": 13676,
+      "sha256": "9d2b22e31bef595b64cd5b0a9b0e1bb01fd202378b8c0c22473796b648fe894f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/stage-status.json",
+      "bytes": 525,
+      "sha256": "343dafe6fe485728d154a141e392d9c01fb82dd8a7693f916733d77795bbacd7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/supervise.py",
+      "bytes": 6568,
+      "sha256": "44d8d62fd96ce39cd8a180d156178b4dc2858dc0647fcede481a3351cff9b1e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+      "bytes": 8375,
+      "sha256": "893907fe457e181ce17b87298f4708188202227b59943b405c79eb20b13bf194",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/independent-child-reuse-review.json",
+      "bytes": 4504,
+      "sha256": "b3460df1ccdceee7b2e8886bdb1ee9538f9dc9e807b9b0047096a47368410c70",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/continuation-plan.json",
+      "bytes": 12495,
+      "sha256": "b7f9255c41900220d511dd85eeead424e5b9ad1bf76e81a664697540912d12b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/operating-contract.json",
+      "bytes": 1324,
+      "sha256": "20f7a971b9c6cc99422fc0cfd80645dd069f413387859bc4aa05387b16d358ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/prospective-plan.json",
+      "bytes": 2944,
+      "sha256": "74404c7479b769d8d31c8496e8114dea3e01553021f9dbae4fc0632b149fb0b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/root-supervision.stderr",
+      "bytes": 581,
+      "sha256": "ccf0d56184b8a106226143b6cce9dc2efc25f44c45e4dc6e47a2025f759f93a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/actual-controls.json",
+      "bytes": 1456,
+      "sha256": "e19e72fa39ba4e6fc3b9f008a99ab8cf71d0feb40a870dd4c38aeb5321f1a185",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/final-six-control-source-receipt.json",
+      "bytes": 995,
+      "sha256": "c52295817b3d1e66685d8e73b9ece52d08ce3f5c5eca3ef81aa5645a70c9c435",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/frozen-source417-body-pins.json",
+      "bytes": 741,
+      "sha256": "0ca19f0e1fd638521ca72f058f13ddb4039ffd5eec505e38c80cc55927f410b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-adjacent-controls.log",
+      "bytes": 354,
+      "sha256": "b3cb49643975d8a81dc48dcd0a762c4eab6f6d6e97828e9a39ddbc94e7ac7750",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-controls-first.log",
+      "bytes": 452,
+      "sha256": "71f3aa06a44831078d523dae51318818394f64dc257dbf678bf5fe1dd65143fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-controls-second.log",
+      "bytes": 568,
+      "sha256": "52c672482dafab91e610dffde5e9b4549accac20b4c4c769a18e48cc3359f9ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-final-source-controls.log",
+      "bytes": 769,
+      "sha256": "e3b408b26e338876856c5c71c0a98ad1a6852b4989b6130d097427e58e113377",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/main-merge-function-invariance.json",
+      "bytes": 2587,
+      "sha256": "7fbbdd80e2f0f3c08da8020ceb1a7efaa0f78cb2e738bafb3adf37418a585b55",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/ordinary-source-binding-controls-v2.log",
+      "bytes": 1196,
+      "sha256": "199cd66348420cb13e2d0f425ccd454cb3faed5a11d695635831005dc04a37a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/ordinary-source-binding-controls-v3.log",
+      "bytes": 314,
+      "sha256": "41ca6d5f1edb471946a56adf95103ad44866df24142a37dab3b7b22a104d8878",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/ordinary-source-binding-controls.log",
+      "bytes": 2778,
+      "sha256": "90c340b4ff6a7594353ed905185ad87420460ab0288cbea104e417cde5aed042",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/original-executing-code-custody.json.gz",
+      "bytes": 174240,
+      "sha256": "a00c1ea97f7de815d6c37175021c790df2694d6e0808730daff591b4ad4566ee",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 521646,
+      "uncompressed_sha256": "3102aee91ad67bc2f593600e5506aa0851084655d63c7cbac1bfe0c838158b02"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/finding.json",
+      "bytes": 3278,
+      "sha256": "a312493f6546afc63dd38fa89fdad8e125f462375af0268d72ca6241382c9cab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/issue1627-whole-get.json",
+      "bytes": 8486,
+      "sha256": "9d575dd885022b57f0ae15f6b17f331aac885665799ee9622abf5809f44d29c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/checker.stderr",
+      "bytes": 777,
+      "sha256": "353fe5e478f730a9617a7c88df3a177312f5f09c6a2f699f0a11231fc3e0b82f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/checker.stdout",
+      "bytes": 1331,
+      "sha256": "c22eeaee0d042292823202f408d8d959ad2f7f405da5a1ad6840e08c9dd5f3cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/operating-contract.json",
+      "bytes": 1103,
+      "sha256": "e3ca47bd822fd8603603e6c3576abdaef9c619a00fc90c30fa5a96ff9bb3d428",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/operating-receipt.json",
+      "bytes": 6406,
+      "sha256": "289a26417ad73660c8d002a17b4c66c506b22b6e122e971b9d8945746d834ca9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 15768,
+      "sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 64248,
+      "sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/diagnose-metadata.mjs",
+      "bytes": 2179,
+      "sha256": "9dcbe1340bbe524daf3ad9554286248fc94446edaa653da40f7479c5a95401a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/issued-command.json",
+      "bytes": 7778,
+      "sha256": "006555d42ed2342e4576b8f4afc9d0782733053e173b80743f73f642c736ebbb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/check-effective-geographic-regression.mjs",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/check-geographic-regression.py",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/run-geographic-check.py",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/supervise.py",
+      "bytes": 5036,
+      "sha256": "7133f9fd81eabf3470be284fd57d2771a9398e7ac60604b94fdc7c72cfddd873",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/readiness1627.json",
+      "bytes": 12428,
+      "sha256": "1899655725cd275ea5aa0bdea038de63f51974e70d2fa9d3a4a6a949d87f29d7",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "genuine-private-cold-custody-lifecycle",
+      "description": "Separate genuine snapshot validation, private accepted full facts/publication custody, complete whole-product reopen and both-vintage exclusion plan; ordinary Git exact inventory join; original comparator unchanged.",
+      "software": "Node24.19.0/Python3.12 frozen whole runtime/code identities; actual source vintages in receipts",
+      "units": "bytes, complete owners, tests",
+      "kind": "code"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "final-focused-controls-passed",
+      "value": 6,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "5a82425efee3d45b69a2e722eaaff354238986ac",
+      "input_sha256": "c52295817b3d1e66685d8e73b9ece52d08ce3f5c5eca3ef81aa5645a70c9c435",
+      "input_file": {
+        "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/final-six-control-source-receipt.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "complete-neighbor-plan-phase-bytes",
+      "value": 263033863,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+      "input_sha256": "3ade39c1ebafde6c9585035f4d9102572b28421773d84629b488090f19f3cb71",
+      "input_file": {
+        "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/facts.json",
+        "commit": "candidate"
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "final-focused-controls-passed",
+      "value": 6,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "complete-neighbor-plan-phase-bytes",
+      "value": 263033863,
+      "unit": "bytes"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Focused actual controls and independently supervised complete current consumer acquisition support the bounded lifetime correction; original pointsets/strict comparator/caps are preserved.",
+      "status": "supported",
+      "source_ids": [
+        "original-and-current-whole-operating-custody"
+      ]
+    },
+    {
+      "text": "Physical source authority, water/shoreline/date/history remain unapproved. Original417 parent remains failed; completed children retain producer417 and reconstructed return-value provenance, not retained stdout. Current consumer a7ec qualifies operands only. Actual strict polygon integration, native successor geography gate and normal final CI/review/queue remain required. No native/additive activation, deployment or worldwide repair-completion claim.",
+      "status": "unresolved",
+      "source_ids": [
+        "original-and-current-whole-operating-custody"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-continuous-lifecycle.test.mjs",
+    "Read the archived exact original-issued and fresh independently reviewed continuation plans and operating contracts before any reproduction; archived absolute paths are provenance, not silently relocated executing entries."
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "status": "modified",
+      "original_sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "status": "modified",
+      "original_sha256": "166aa5fff94a73211c9728a3e8fbec61fa7aa803483ea64cb0bcd48d7780a433"
+    },
+    {
+      "path": "test/selected-continuous-lifecycle.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/checker.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/checker.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/baseline/certificate.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/baseline/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/baseline/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/candidate/certificate.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/candidate/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/complete/candidate/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/consumed-source-prelaunch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/launch-guard-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/launch-guard-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/operating-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/preservation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/issued-command.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/requirements.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/check-effective-geographic-regression.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/check-geographic-regression.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/ellipsoidal_area.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/evidence/geometry.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/evidence/immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/scripts/run-geographic-check.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/program/src/ownership-codec.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/prospective-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/stage-status.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/supervise-before-launch-guard.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/actual-selected-proof/supervise.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/checker.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/checker.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/operating-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/diagnose-metadata.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/issued-command.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/requirements.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/check-effective-geographic-regression.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/check-geographic-regression.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/ellipsoidal_area.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/evidence/geometry.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/evidence/immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/scripts/run-geographic-check.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/program/src/ownership-codec.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/admission-only/supervise.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/allocator1627.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/claim1627.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/checker.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/checker.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/operands.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/continuation-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/independent-issuance-review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/operating-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/issued-command.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/requirements.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/check-effective-geographic-regression.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/check-geographic-regression.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/ellipsoidal_area.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/evidence/geometry.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/evidence/immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/scripts/run-geographic-check.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/program/src/ownership-codec.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/prospective-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/root-supervision.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/root-supervision.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/stage-status.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/supervise.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/independent-child-reuse-review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/continuation-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/operating-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/prospective-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/prelaunch-1GiB-refusal/root-supervision.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/actual-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/final-six-control-source-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/frozen-source417-body-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-adjacent-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-controls-first.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-controls-second.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/lifecycle-final-source-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/main-merge-function-invariance.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/ordinary-source-binding-controls-v2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/ordinary-source-binding-controls-v3.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/ordinary-source-binding-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/original-executing-code-custody.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/finding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/issue1627-whole-get.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/checker.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/checker.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/operating-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/diagnose-metadata.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/issued-command.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/requirements.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/check-effective-geographic-regression.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/check-geographic-regression.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/ellipsoidal_area.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/evidence/geometry.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/evidence/immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/scripts/run-geographic-check.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/program/src/ownership-codec.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/metadata-only/supervise.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/readiness1627.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "final-focused-controls-passed",
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/controls/final-six-control-source-receipt.json",
+      "json_pointer": "/pass"
+    },
+    {
+      "metric_id": "complete-neighbor-plan-phase-bytes",
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/actual-a7ec-768/complete/facts.json",
+      "json_pointer": "/lifecycle/2/complete_phase_bytes"
+    }
+  ]
+}

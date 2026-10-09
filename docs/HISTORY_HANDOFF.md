@@ -4,7 +4,7 @@ This lane researches dated attributes for approved territories. Boundary/hierarc
 
 Give a Luna thread this document and [its prompt](prompts/LUNA_HISTORY.txt). They explain research contracts, import commands and safe concurrency. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open historical-research issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Ahistory-research). This document contains no live task checklist.
 
-M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
+M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready bounded work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
 
 Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Site: https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [scope guidance](HISTORICAL_RESEARCH_TODO.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md), [ATTRIBUTE_CONTRACT.md](ATTRIBUTE_CONTRACT.md) and [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md).
 

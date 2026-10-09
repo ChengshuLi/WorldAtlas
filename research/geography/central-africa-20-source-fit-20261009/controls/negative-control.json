@@ -1,0 +1,14 @@
+{
+  "method_id": "simplified-source-fit",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "control": "foreign source feature cannot satisfy the exact candidate-to-source identity/coverage predicate",
+  "component_id": "physical-component:03f6ccdfef23d7f3e030650e71c57224ff986471f131563b9020b6b325674785",
+  "expected_source_shapeID": "1427508B96128266527522",
+  "wrong_source_shapeID": "1427508B92601755498307",
+  "wrong_source_feature_sha256": "2390fbcf6eeedc68ad764191946a21dae8e8e1784cad02dcbf2279a383c11e09",
+  "wrong_source_covers_component": false,
+  "component_geometry_sha256": "8c900c9d2a5c6f5e18ff551781c54dd4f43988af0c780acf7397ece45fe76998",
+  "assertion": true,
+  "limit": "negative identity/coverage control only; does not establish physical class or source truth"
+}
