@@ -35,7 +35,9 @@ class Fixture:
         self.git('config', 'user.name', 'synthetic-control')
         for name in ['scripts/check-geographic-regression.py', 'scripts/evidence/immutable.py',
                      'scripts/evidence/geometry.py', 'scripts/ellipsoidal_area.py', 'requirements.txt',
-                     'package.json', '.github/evidence-policy.json', 'src/regional-import-gate.js']:
+                     'package.json', '.github/evidence-policy.json', 'src/regional-import-gate.js',
+                     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
+                     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs']:
             target = self.repo / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / name, target)

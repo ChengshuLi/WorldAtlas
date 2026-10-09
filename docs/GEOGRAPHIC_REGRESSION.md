@@ -161,3 +161,42 @@ finding. New overlaps and invalid geometry cannot receive this exception. This
 does not establish global hydrology or approve administrative ownership. Existing source,
 identity, crosswalk, regional certificate, content and publication requirements
 remain in force.
+
+### Complete selected-source prevention certificate
+
+The selected continuous gate reads complete ordinary source bodies from the
+committed world index and any explicit, whole-byte selected overrides. Its
+`complete-selected-source-pointsets:v1` certificate covers the full unique owner
+roster, original record order, containing-body hashes, complete per-record
+geometry hashes and coordinate-derived conservative exclusion bounds. Camera
+bounds cannot exclude a neighbor. Both baseline and candidate certificates are
+required; changed targets are compared against each other and every possible
+unchanged neighbor using complete original pointsets.
+
+The geographic release's previously qualified footprint digest is separately
+recorded as historical authority with `recomputed:false`. Source-file traversal
+is not the legacy global `localeCompare` digest order. The certificate does not
+claim to recompute that scientific output; it authenticates the whole selected
+source bank and every actual pointset under its own explicit domain. Altered,
+omitted, duplicated or misjoined source bodies fail closed. This separates
+once-qualified scientific custody from normal provenance enforcement.
+
+A future committed `additive_release` hook names one whole typed sidecar, never
+scans proposal files. It preserves the complete native base selection and binds
+the exact runtime envelope, ordinary ledger/delta/owner assets and append-only
+original authority registry. Each authority retains its original issued source
+and native requests, preimage, complete publications/inventories, operating
+receipts and code/runtime/input provenance. Batch hashes are not stable policy
+identities. Per-component authority and zero-cell geometry must remain unchanged
+when additional independently authenticated authorities are appended.
+
+Effective coverage means literal BASE OR complete ADDITION primitives. The
+trusted wrapper passes those separate, unchanged polygons to the original
+preparation/comparison functions; it does not persist a dissolved OGC polygon,
+round coordinates, use MakeValid or suppress coverage loss. Internal intersections
+between primitives of the same stable owner are not competing-owner overlap.
+All other loss/overlap/invalid-geometry findings remain failures. Native checks
+compare virtual combined rows against every original owner and reject delta
+cells that were previously assigned. No repair or release is activated by this
+checker, and source-relative qualification does not establish physical water,
+administrative or historical truth.

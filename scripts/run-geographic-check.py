@@ -108,6 +108,74 @@ def verify_trusted_checkout(repo, baseline):
     return hashlib.sha256((json.dumps(expected, sort_keys=True, separators=(',', ':')) + '\n').encode()).hexdigest()
 
 
+def compare_effective_primitives(detector, before, after, additions, base_hashes=None):
+    """Literal BASE OR complete ADDITION sets; never persist a dissolved polygon.
+
+    Original prepare/compare operates on each unchanged complete primitive.
+    Multiple primitives with one stable owner are one ownership set, so their
+    internal intersections are not competing-location overlap. Coverage-loss
+    findings are never filtered. The original geometry routines stay literal.
+    """
+    if not any(additions.values()):
+        return detector.compare(before, after)
+    owners, primitives = {}, {}
+    for vintage, features in [('baseline', before), ('candidate', after)]:
+        values = {}
+        for identity, feature in features.items():
+            key = json.dumps([identity, 'base'], ensure_ascii=False, separators=(',', ':'))
+            owners[key] = identity
+            values[key] = {**feature, 'id': key}
+        seen = set()
+        for row in additions[vintage]:
+            identity, component = row['target_id'], row['component_id']
+            if identity not in features:
+                continue  # Whole additions outside the certified affected set.
+            if component in seen or row['base_geometry_sha256'] != (base_hashes[vintage][identity] if base_hashes is not None else detector.geometry_hash(features[identity])):
+                raise ValueError('Foreign/duplicate/stale complete effective primitive')
+            seen.add(component)
+            key = json.dumps([identity, component], ensure_ascii=False, separators=(',', ':'))
+            if key in values:
+                raise ValueError('Effective primitive identity collision')
+            owners[key] = identity
+            values[key] = {'type': 'Feature', 'id': key, 'properties': {'id': key}, 'geometry': row['geometry']}
+        primitives[vintage] = values
+    result = detector.compare(primitives['baseline'], primitives['candidate'])
+    changed = sorted({owners[key] for key in result['changed_location_ids']})
+    findings = []
+    for feature in result['findings']['features']:
+        props = feature['properties']
+        identities = sorted({owners[key] for key in props['location_ids']})
+        if props['kind'] == 'new-pair-overlap' and len(identities) == 1:
+            continue
+        props['location_ids'] = identities
+        props['changed_location_ids'] = sorted(set(identities) & set(changed))
+        for vintage in ['before', 'after']:
+            for row in props[vintage]:
+                row['primitive_id'] = row['location_id']
+                row['location_id'] = owners[row['location_id']]
+        findings.append(feature)
+    for feature in result['coverage_gained']['features']:
+        props = feature['properties']
+        props['location_ids'] = sorted({owners[key] for key in props['location_ids']})
+        props['changed_location_ids'] = sorted(set(props['location_ids']) & set(changed))
+        for vintage in ['before', 'after']:
+            for row in props[vintage]:
+                row['primitive_id'] = row['location_id']
+                row['location_id'] = owners[row['location_id']]
+    for error in result['geometry_errors']:
+        error['primitive_id'] = error['location_id']
+        error['location_id'] = owners[error['location_id']]
+    result['changed_primitive_ids'] = result['changed_location_ids']
+    result['changed_location_ids'] = changed
+    result['affected_neighbor_ids'] = sorted({owners[key] for key in result['affected_neighbor_ids']} - set(changed))
+    result['findings']['features'] = findings
+    if result['regressions'] is not None:
+        result['regressions'] = len(findings)
+        result['status'] = 'regressions-found' if findings else 'no-new-regression'
+    result['effective_set_domain'] = 'literal-base-or-complete-additions:v2'
+    return result
+
+
 def selected_continuous(repo, baseline, candidate, detector):
     import sys
     env = dict(os.environ)
@@ -170,7 +238,18 @@ def selected_continuous(repo, baseline, candidate, detector):
         ids = plan['required_ids']
         if ids != sorted(set(ids)) or sorted(operands['baseline']) != ids or sorted(operands['candidate']) != ids or plan['changed_ids'] != issued['changed_ids']:
             raise ValueError('Selected affected operand closure omitted/reordered owners')
-        result = detector.compare(operands['baseline'], operands['candidate'])
+        additions = operands.get('effective_additions', {'baseline': [], 'candidate': []})
+        if sorted(additions) != ['baseline', 'candidate'] or any(not isinstance(v, list) for v in additions.values()):
+            raise ValueError('Incomplete effective primitive operand domain')
+        base_hashes = {'baseline': {}, 'candidate': {}}
+        for row in facts['inverse']:
+            vintage, identity = row['vintage'], row['id']
+            if vintage not in base_hashes or identity in base_hashes[vintage] or not re.fullmatch('[a-f0-9]{64}', row['geometry_sha256']):
+                raise ValueError('Foreign/duplicate complete source geometry inverse')
+            base_hashes[vintage][identity] = row['geometry_sha256']
+        if any(sorted(v) != ids for v in base_hashes.values()):
+            raise ValueError('Complete source geometry inverse scope differs')
+        result = compare_effective_primitives(detector, operands['baseline'], operands['candidate'], additions, base_hashes)
         if result['changed_location_ids'] != plan['changed_ids']:
             raise ValueError('Original polygon operator changed-ID closure differs from complete certificate')
         return {'version': 1, 'kind': 'trusted-selected-continuous-comparison-v1',

@@ -29,15 +29,16 @@ export async function coordinateStage(repo,trusted,selected,destination,parentRu
  startup.beforeReader.outputBytes=FILE;startup.beforeReader.phase();
  const snapshot=native.loadSelection(startup.beforeReader);demand(snapshot,'Selected continuous certificate requires a committed native selection');
  const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot),shards=[];
- const footprint=createHash('sha256');footprint.update('[');let lastId=null,footprintRows=0;
- const onFeature=feature=>{const id=feature.id??feature.properties?.id;demand(lastId===null||lastId.localeCompare(id)<0,'Complete selected source order differs from legacy footprint digest; bounded sorted acquisition required');if(footprintRows)footprint.update(',');footprint.update(JSON.stringify([id,feature.geometry]));lastId=id;footprintRows++;};
- for(const name of resolver.paths)shards.push(helper.selectedCoordinateShard(resolver,[name],{priorShards:shards,onFeature}));
- footprint.update(']');const actualFootprints=footprint.digest('hex');demand(footprintRows===snapshot.owners.length&&actualFootprints===resolver.release.footprints_sha256,'Complete actual selected pointsets differ from issued legacy footprint digest');
+ // The issued footprint value is once-qualified historical authority. This
+ // separate certificate authenticates every actual selected whole source body,
+ // full unique owner roster and per-record pointsets; it does not recompute the
+ // legacy world digest using a source traversal that was never its method.
+ for(const name of resolver.paths)shards.push(helper.selectedCoordinateShard(resolver,[name],{priorShards:shards}));
  const certificate=helper.joinSelectedCoordinateCertificate(resolver,shards),decoded=helper.valueBytes(certificate);
  demand(decoded.length<=FILE,'Complete certificate ordinary decoded cap');
  const encoded=gzipSync(decoded,{level:9,mtime:0});
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',executing_commit:trusted,selected_commit:selected,execution_code:code,
-  runtime:startup.identities,actual_footprints_sha256:actualFootprints,binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:resolver.paths.length,
+  runtime:startup.identities,source_certificate_domain:'complete-selected-source-pointsets:v1',historical_footprint_authority:{value:resolver.release.footprints_sha256,release:resolver.release,recomputed:false},binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:resolver.paths.length,
   inputs:[...startup.beforeReader.inventory.values()],acquisition_phases:shards.flatMap(s=>s.phases),join_phase_bytes:certificate.complete_phase_bytes,
   limits:certificate.limitations,candidate_code_executed:false};
  const factsBody=helper.valueBytes(facts),publication={version:1,complete:true,kind:facts.kind,
@@ -66,7 +67,7 @@ export async function continuousOperandsStage(repo,trusted,baseline,candidate,de
  demand(before,'Selected baseline removed or unsupported');startup.afterReader.metadataBytes=8388608+2*before.metadataBytes;startup.afterReader.phase();let after=native.loadSelection(startup.afterReader);demand(after,'Selected candidate removed or unsupported');
  let oldResolver=before.geometrySources??new native.SelectedGeometrySources(before),newResolver=after.geometrySources??new native.SelectedGeometrySources(after);
  const normal=r=>r.sources.map(p=>({path:p.logical_path??p.path,mode:p.mode,bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256??p.git_blob_oid}));
- if(helper.valueSha(normal(oldResolver))===helper.valueSha(normal(newResolver))&&helper.valueSha(before.owners)===helper.valueSha(after.owners))return {version:1,kind:'trusted-selected-continuous-comparison-v1',status:'selected-sources-unchanged',changed_ids:[],complete_owners:before.owners.length,candidate_code_executed:false};
+ if(!before.additive&&!after.additive&&helper.valueSha(normal(oldResolver))===helper.valueSha(normal(newResolver))&&helper.valueSha(before.owners)===helper.valueSha(after.owners))return {version:1,kind:'trusted-selected-continuous-comparison-v1',status:'selected-sources-unchanged',changed_ids:[],complete_owners:before.owners.length,candidate_code_executed:false};
  // The bootstrap metadata is discarded before independent cold acquisitions.
  // Only the issued child acknowledgements survive, not a global geometry image.
  before=null;after=null;oldResolver=null;newResolver=null;startup=null;
@@ -92,7 +93,8 @@ export async function continuousOperandsStage(repo,trusted,baseline,candidate,de
   }
   demand(Object.keys(outputs[vintage]).sort().join('\0')===plan.required_ids.join('\0'),'Affected operand closure omitted owner');
  }
- const operands=helper.valueBytes({version:1,kind:'complete-selected-continuous-operands-v1',plan,...outputs}),encoded=gzipSync(operands,{level:9,mtime:0});
+ const effective_additions={baseline:before.additive?.normalized_rows??[],candidate:after.additive?.normalized_rows??[]};
+ const operands=helper.valueBytes({version:1,kind:'complete-selected-continuous-operands-v1',plan,effective_additions,...outputs}),encoded=gzipSync(operands,{level:9,mtime:0});
  const facts=helper.valueBytes({version:1,kind:'trusted-selected-continuous-comparison-v1',executing_commit:trusted,baseline_commit:baseline,candidate_commit:candidate,execution_code:code,runtime:startup.identities,source_stages:ack.map(a=>a.publication),plan,inverse,candidate_code_executed:false});
  demand(operands.length+encoded.length+2*facts.length<FILE,'Complete affected output reserve exceeded; no scope clipping');guard(repo,trusted);
  for(const [name,body]of [['operands.json.gz',encoded],['facts.json',facts]])fs.writeFileSync(path.join(destination,name),body,{flag:'wx',mode:0o644});

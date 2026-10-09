@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex'),root=process.cwd();
 const retained=process.env.WORLDATLAS_PREVENTION_CONTROLS;
@@ -201,6 +201,16 @@ test('selected continuous source consumes exact encoded override and rejects inc
   const emitted=invoke(cold);assert.equal(emitted.status,0,emitted.stderr);assert.equal(JSON.parse(emitted.stdout).complete_owners,2);
   const publication=JSON.parse(fs.readFileSync(path.join(cold,'publication.json'))),facts=fs.readFileSync(path.join(cold,'facts.json'));
   assert.equal(sha(facts),publication.facts.sha256);assert.equal(JSON.parse(facts).candidate_code_executed,false);
+  const fullFacts=JSON.parse(facts),completeCertificate=JSON.parse(gunzipSync(fs.readFileSync(path.join(cold,'certificate.json.gz'))));
+  assert.equal(fullFacts.source_certificate_domain,'complete-selected-source-pointsets:v1');assert.equal(fullFacts.historical_footprint_authority.recomputed,false);assert.equal(fullFacts.historical_footprint_authority.value,footprint);
+  const accept=value=>acceptColdCoordinateCertificate(snapshot.geometrySources,value,{facts:fullFacts,expectedPublication:publication,publication,encoded_sha256:publication.certificate.sha256,decoded_sha256:publication.certificate.decoded_sha256});
+  assert.equal(accept(structuredClone(completeCertificate)).entries.length,2);
+  const altered=structuredClone(completeCertificate);altered.inputs[0].whole_body_sha256='0'.repeat(64);assert.throws(()=>accept(altered),/source body differs/);
+  const omitted=structuredClone(completeCertificate);omitted.inputs=[];assert.throws(()=>accept(omitted),/Incomplete cold/);
+  const reordered=structuredClone(completeCertificate);reordered.entries.reverse();assert.throws(()=>accept(reordered),/cold owner record/);
+  const rebound=structuredClone(completeCertificate);rebound.inputs[0].source.sha256='0'.repeat(64);assert.throws(()=>accept(rebound),/drifted complete cold source/);
+  const wrongEffective=structuredClone(completeCertificate);wrongEffective.entries[0].effective_geometry_sha256='0'.repeat(64);assert.throws(()=>accept(wrongEffective),/effective primitive set/);
+
   const collision=invoke(cold);assert.notEqual(collision.status,0);assert.match(collision.stderr,/already exists/);assert.equal(sha(fs.readFileSync(path.join(cold,'facts.json'))),publication.facts.sha256);
   const dangling=path.join(f.repo,'dangling-coordinate-control');fs.symlinkSync('/nonexistent-coordinate-fixture',dangling);const link=invoke(dangling);assert.notEqual(link.status,0);assert.match(link.stderr,/already exists/);assert.equal(fs.readlinkSync(dangling),'/nonexistent-coordinate-fixture');fs.unlinkSync(dangling);
   fs.rmSync(cold,{recursive:true});
@@ -286,13 +296,13 @@ test('cold selected continuous operands preserve complete neighbors and original
   const lost=install(features(rect(0,.5)),'geography:review:loss'),negative=run(lost,'loss');assert.deepEqual(negative.ack.changed_ids,['old-owner']);
   const overlap=install(features(rect(0,2.5)),'geography:review:overlap'),conflict=run(overlap,'overlap');assert.deepEqual(conflict.ack.affected_ids,['old-owner','other-owner']);assert.deepEqual(conflict.operands.plan.pairs,[['old-owner','other-owner']]);
   // Invoke the actual trusted Python caller, not a duplicated polygon algorithm.
-  const python=process.env.WORLDATLAS_TEST_PYTHON??'/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12';
-  assert.ok(fs.existsSync(python),'Actual original Python operator runtime is required for this control');
+  const python=process.env.WORLDATLAS_TEST_PYTHON??process.env.PYTHON??(process.platform==='darwin'?'/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12':'python3');
+  if(path.isAbsolute(python))assert.ok(fs.existsSync(python),'Actual original Python operator runtime is required for this control');
   {
    const driver="import importlib.util,json,pathlib,sys\nsys.path[:0]=json.loads(sys.argv[3])\nsys.path.insert(0,str(pathlib.Path(sys.argv[1])/'scripts'))\ns=importlib.util.spec_from_file_location('original',str(pathlib.Path(sys.argv[1])/'scripts/check-geographic-regression.py'));m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nv=json.load(open(sys.argv[2]));print(json.dumps(m.compare(v['baseline'],v['candidate'])))";
-   for(const [stage,expected]of [[positive,'no-new-regression'],[negative,'regressions-found'],[conflict,'regressions-found']]){const source=path.join(stage.destination,'plain-control.json');fs.writeFileSync(source,JSON.stringify(stage.operands));const result=spawnSync(python,['-I','-B','-c',driver,f.repo,source,JSON.stringify((process.env.WORLDATLAS_TEST_PYTHON_SITE_PATHS??'/Users/chengshuli/.local/lib/python3.12/site-packages:/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages').split(path.delimiter))],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.equal(JSON.parse(result.stdout).status,expected);}
+   for(const [stage,expected]of [[positive,'no-new-regression'],[negative,'regressions-found'],[conflict,'regressions-found']]){const source=path.join(stage.destination,'plain-control.json');fs.writeFileSync(source,JSON.stringify(stage.operands));const result=spawnSync(python,['-I','-B','-c',driver,f.repo,source,JSON.stringify((process.env.WORLDATLAS_TEST_PYTHON_SITE_PATHS??(process.platform==='darwin'?'/Users/chengshuli/.local/lib/python3.12/site-packages:/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages':'')).split(path.delimiter).filter(Boolean))],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.equal(JSON.parse(result.stdout).status,expected);}
    const wrapper="import importlib.util,json,pathlib,sys\nsys.path[:0]=json.loads(sys.argv[4]);sys.path.insert(0,str(pathlib.Path(sys.argv[1])/'scripts'))\ndef load(n,p):\n s=importlib.util.spec_from_file_location(n,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m\nd=load('original',str(pathlib.Path(sys.argv[1])/'scripts/check-geographic-regression.py'));w=load('wrapper',str(pathlib.Path(sys.argv[1])/'scripts/run-geographic-check.py'));print(json.dumps(w.selected_continuous(pathlib.Path(sys.argv[1]),sys.argv[2],sys.argv[3],d)))";
-   const sites=(process.env.WORLDATLAS_TEST_PYTHON_SITE_PATHS??'/Users/chengshuli/.local/lib/python3.12/site-packages:/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages').split(path.delimiter);
+   const sites=(process.env.WORLDATLAS_TEST_PYTHON_SITE_PATHS??(process.platform==='darwin'?'/Users/chengshuli/.local/lib/python3.12/site-packages:/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages':'')).split(path.delimiter).filter(Boolean);
    const result=spawnSync(python,['-I','-B','-c',wrapper,f.repo,baseline,overlap,JSON.stringify(sites)],{encoding:'utf8',env:{...process.env,NODE:process.execPath}});assert.equal(result.status,0,result.stderr);const enforced=JSON.parse(result.stdout);assert.equal(enforced.status,'regressions-found');assert.deepEqual(enforced.required_ids,['old-owner','other-owner']);assert.equal(enforced.candidate_code_executed,false);
 
   }

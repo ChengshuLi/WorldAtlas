@@ -26,6 +26,62 @@ def features(**geometries):
         for identity, geometry in geometries.items()}
 
 
+class EffectivePrimitiveControls(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec = importlib.util.spec_from_file_location('effective_wrapper', ROOT / 'scripts/run-geographic-check.py')
+        cls.wrapper = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.wrapper)
+
+    def addition(self, geometry, component='addition', target='land', base=None):
+        base = base or features(land=box(0, 0, 1, 1))
+        return {'component_id': component, 'target_id': target,
+                'base_geometry_sha256': gate.geometry_hash(base[target]), 'geometry': mapping(geometry)}
+
+    def test_shared_edge_literal_set_preserves_original_base(self):
+        base = features(land=box(0, 0, 1, 1), neighbor=box(3, 0, 4, 1))
+        self.assertFalse(MultiPolygon([box(0, 0, 1, 1), box(1, 0, 2, 1)]).is_valid)
+        before = copy.deepcopy(base)
+        result = self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [self.addition(box(1, 0, 2, 1), base=base)]})
+        self.assertEqual(result['status'], 'no-new-regression')
+        self.assertEqual(result['effective_set_domain'], 'literal-base-or-complete-additions:v2')
+        self.assertEqual(base, before)
+
+    def test_zero_cell_primitive_loss_is_not_hidden_by_native_conservation(self):
+        base = features(land=box(0, 0, 1, 1))
+        addition = self.addition(box(1, 0, 2, 1), base=base)
+        result = self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [addition], 'candidate': []})
+        self.assertEqual(result['status'], 'regressions-found')
+        self.assertTrue(any(f['properties']['kind'] == 'lost-previous-coverage'
+                            for f in result['findings']['features']))
+
+    def test_other_owner_overlap_is_rejected_but_internal_same_owner_is_not(self):
+        base = features(land=box(0, 0, 1, 1), neighbor=box(2, 0, 3, 1))
+        conflicting = self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [self.addition(box(1, 0, 2.5, 1), base=base)]})
+        self.assertEqual(conflicting['status'], 'regressions-found')
+        self.assertTrue(any(f['properties']['kind'] == 'new-pair-overlap'
+                            for f in conflicting['findings']['features']))
+        internal = self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [self.addition(box(.5, 0, 1.5, 1), base=base)]})
+        self.assertEqual(internal['status'], 'no-new-regression')
+
+    def test_duplicate_stale_and_invalid_complete_primitive_rejected(self):
+        base = features(land=box(0, 0, 1, 1)); addition = self.addition(box(1, 0, 2, 1), base=base)
+        with self.assertRaisesRegex(ValueError, 'duplicate'):
+            self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [addition, addition]})
+        with self.assertRaisesRegex(ValueError, 'stale'):
+            self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [{**addition, 'base_geometry_sha256': '0' * 64}]})
+        invalid = Polygon([(1, 0), (2, 1), (1, 1), (2, 0), (1, 0)])
+        result = self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [self.addition(invalid, base=base)]})
+        self.assertEqual(result['status'], 'blocked-invalid-or-unsupported-geometry')
+
+
 class RegressionControls(unittest.TestCase):
     def test_prepared_invalid_actual_translation(self):
         from unittest.mock import patch
