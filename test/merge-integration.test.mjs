@@ -113,7 +113,7 @@ test('workflow separates untrusted candidate tests from write credentials and se
   assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
   assert.doesNotMatch(integration,/GH_TOKEN|secrets\.|contents: write|issues: write|pull-requests: write/);
-  assert.match(integration,/persist-credentials: false/);assert.match(integration,/node scripts\/run-integration-tests.mjs/);assert.match(integration,/run: npm run build:hosted/);
+  assert.match(integration,/persist-credentials: false/);assert.match(integration,/node scripts\/run-integration-tests.mjs/);assert.match(integration,/run: npm run build:cloudflare/);assert.doesNotMatch(integration,/WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
   assert.match(yaml,/needs: \[prepare, integration, geography\]/);
 });
 

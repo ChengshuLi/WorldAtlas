@@ -1,0 +1,77 @@
+✔ worker-merge.yml: actual geographic checkout imports its complete trusted closure (280.106625ms)
+✔ merge-integration-checks.yml: actual geographic checkout imports its complete trusted closure (173.47375ms)
+✔ negative control: old geographic sparse tree omits mandatory coordinator bodies (127.066375ms)
+✖ issue-claims.yml: actual sparse declarations include trusted module dependencies (86.050167ms)
+✖ worker-merge.yml: actual sparse declarations include trusted module dependencies (505.816041ms)
+✖ merge-integration-checks.yml: actual sparse declarations include trusted module dependencies (549.215416ms)
+✔ queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies (121.136916ms)
+✔ merge-scheduler.yml: actual sparse declarations include trusted module dependencies (256.106792ms)
+✔ negative control: old scripts-only tree cannot load relocated regional gate (114.632583ms)
+✔ sparse candidate still detects changes and rename sources outside the working tree (402.773334ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 7
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2670.106333
+
+✖ failing tests:
+
+test at test/trusted-workflow-checkouts.test.mjs:50:3
+✖ issue-claims.yml: actual sparse declarations include trusted module dependencies (86.050167ms)
+  Error: ENOENT: no such file or directory, lstat '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/data/research-geography-gate.json'
+      at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+      at Object.cpSync (node:fs:3219:3)
+      at probe (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-workflow-checkouts.test.mjs:22:10)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-workflow-checkouts.test.mjs:56:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'lstat',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/data/research-geography-gate.json'
+  }
+
+test at test/trusted-workflow-checkouts.test.mjs:50:3
+✖ worker-merge.yml: actual sparse declarations include trusted module dependencies (505.816041ms)
+  Error: ENOENT: no such file or directory, lstat '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/data/research-geography-gate.json'
+      at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+      at Object.cpSync (node:fs:3219:3)
+      at probe (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-workflow-checkouts.test.mjs:22:10)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-workflow-checkouts.test.mjs:56:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'lstat',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/data/research-geography-gate.json'
+  }
+
+test at test/trusted-workflow-checkouts.test.mjs:50:3
+✖ merge-integration-checks.yml: actual sparse declarations include trusted module dependencies (549.215416ms)
+  Error: ENOENT: no such file or directory, lstat '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/data/research-geography-gate.json'
+      at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+      at Object.cpSync (node:fs:3219:3)
+      at probe (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-workflow-checkouts.test.mjs:22:10)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-workflow-checkouts.test.mjs:56:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'lstat',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/data/research-geography-gate.json'
+  }

@@ -222,7 +222,7 @@ NODE_OPTIONS/NODE_PATH are refused, and trusted callers clear those variables.
 The optional `artifact_consumption` selection binds an ordinary whole qualified
 product certificate and an independently registered whole review API capture.
 The renewed Arctic interface includes a complete gzip release-product catalogue:
-137 inline roles plus 343 ordinary product roles, with unique space/path keys and
+the complete certificate's inline roles plus 343 ordinary product roles, with unique space/path keys and
 ordered registry path, compressed hash and decoded payload hash joins. Both full
 catalogue and registry inputs are prospectively admitted before decompression.
 This authenticates the once-qualified application provenance; the prevention gate
@@ -230,3 +230,38 @@ still reads its own selected native/source inputs and never executes a candidate
 installer or claims it has installed all catalogue products. Original authority
 captures remain historical evidence; each renewed certificate needs its actual
 independent review binding.
+
+Role counts are derived from that authenticated union, rather than fixed to an
+older certificate. The original registered interface has 137 inline roles (480
+total); the independently registered application-representation successor has
+190 inline roles (533 total). Its ordinary descriptors without a `space` field
+retain the original consumer's root-space interpretation. Explicit `prior` and
+`image` references remain distinct. These are custody references, not a claim
+that the prevention gate opened or executed 533 files. The same 512 actual-input,
+32 MiB whole encoded/decoded member and 256 MiB complete-phase caps still apply.
+
+The gate also admits and reads both complete code and qualification inventories
+before validating their source-policy and original operating joins. Historical
+grouped entry declarations stay historical; newer shared and entry-specific
+critical pins must match the complete application input roster. All entry
+profiles remain source custody here: the trusted prevention reader executes no
+candidate code and does not label another application's entry as its own
+execution. Actual application callers still authenticate their current execution
+closure separately. This compatibility change neither repeats scientific
+qualification nor approves source facts, selection activation or deployment.
+
+
+The normal PR and combined-tree package checks target Cloudflare through literal
+`npm run build:cloudflare` workflow commands. This target is immutable workflow
+content, so an unbound repository variable cannot change the target after a
+successful proof. The separate deployment-budget workflow keeps the explicit
+Site builder and its existing reserve gate. The historical `Build hosted assets`
+step name remains for the unchanged integration-proof contract; it does not
+claim a live-host migration or deployment. The earlier mutable package-profile
+routing draft was superseded before publication.
+
+An independently registered authority may explicitly declare the fourth
+`build-cloudflare-inner.mjs` entry profile. Its complete critical custody and
+entry-wrapper roster must be authenticated alongside the existing profiles.
+Historical authorities retain their exact two- or three-entry schemas; no new
+review anchor is inferred from a draft certificate.

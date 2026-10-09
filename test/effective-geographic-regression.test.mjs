@@ -6,7 +6,7 @@ import path from 'node:path';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue} from '../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -331,11 +331,13 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
   [(c,p)=>p.products[0].decoded_sha256='0'.repeat(64),/encoded\/payload/],
   [(c,p)=>delete p.products[0].decoded_bytes,/Incomplete whole/],
   [(c,p)=>p.products[0].decoded_bytes=33554433,/decoded role/],
-  [(c)=>c.application_inputs.pop(),/exact inline/],
+  [(c)=>c.application_inputs=c.application_inputs.filter(p=>p.path!==c.release_product_catalogue.path),/exact inline/],
   [(c)=>c.application_inputs[1]=structuredClone(c.application_inputs[0]),/Duplicate/]
  ]) {const c=structuredClone(certificate),p=structuredClone(catalogue);change(c,p);assert.throws(()=>validateReleaseCatalogue(c,p,registry),pattern);}
  const f=fixture();try{
-  for(const p of rows)f.write(p.path,read(p.copy));const head=f.commit();
+  for(const p of rows)f.write(p.path,read(p.copy));
+  const original=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/original-999');
+  for(const p of JSON.parse(fs.readFileSync(path.join(original,'original-inputs.json'))).pins)f.write(p.path,fs.readFileSync(path.join(original,p.copy)));const head=f.commit();
   const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
   const open=()=>new ImmutableReader(f.repo,head);
   const positive=readArtifactConsumption(open(),selection,manifest);assert.equal(positive.review_id,6079096820);assert.equal(positive.releaseCatalogue.complete_roles,480);
@@ -350,5 +352,126 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
    [s=>s.release_id='geography:foreign',/native\/release/],
    [s=>s.artifact_consumption.approved=true,/Unsupported artifact-consumption/]
   ]){const s=structuredClone(selection);change(s);assert.throws(()=>readArtifactConsumption(open(),s,manifest),pattern);}
+ }finally{f.cleanup();}
+});
+
+test('registered 533-role authority derives complete custody without raising actual read caps',()=>{
+ const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177');
+ const read=name=>fs.readFileSync(path.join(directory,name));
+ const rows=JSON.parse(read('original-inputs.json')).pins;
+ for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
+ const certificate=JSON.parse(read('certificate.json')),code=JSON.parse(read('code.json')),qualification=JSON.parse(gunzipSync(read('qualification.json.gz'))),catalogue=JSON.parse(gunzipSync(read('catalogue.json.gz'))),registry=JSON.parse(gunzipSync(read('registry.json.gz')));
+ assert.deepEqual(validateReleaseCatalogue(certificate,catalogue,registry),{inline_roles:190,release_products:343,complete_roles:533});
+ const custody=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true});
+ assert.equal(custody.source_critical_roles,33);assert.equal(custody.candidate_code_executed,false);
+ assert.equal(custody.entry_profiles['scripts/run-integration-tests.mjs'].entry_critical_roles,1);
+ for(const [change,pattern]of [
+  [(c,a)=>a.critical_files[1]=structuredClone(a.critical_files[0]),/duplicate critical/],
+  [(c,a)=>a.critical_files[0].sha256='0'.repeat(64),/omitted\/rebound/],
+  [(c,a)=>delete a.entry_roles['scripts/run-integration-tests.mjs'],/actual entry profile/],
+  [(c,a)=>delete a.entry_critical_files['scripts/build-static-inner.mjs'],/entry-specific source/],
+  [(c,a)=>a.entry_critical_files['scripts/build-hosted-inner.mjs'][0].bytes++,/omitted\/rebound/],
+  [(c,a)=>a.entry_roles['scripts/run-integration-tests.mjs'].actual_current_execution_wrappers.push('../foreign'),/wrapper profile/],
+  [(c,a,q)=>q.source_policy.water_status='approved',/source policy/],
+  [(c,a,q)=>q.complete_phase_inventory[0].runs.pop(),/qualification runs/],
+  [(c,a,q)=>q.complete_phase_inventory[0].runs[0].actual_terminal.qualified=false,/Unqualified/],
+  [(c)=>c.application_inputs=c.application_inputs.filter(p=>p.path!==code.critical_files[0].path),/omitted\/rebound/]
+ ]){const c=structuredClone(certificate),a=structuredClone(code),q=structuredClone(qualification);change(c,a,q);assert.throws(()=>validateArtifactSourceMetadata(c,a,q,{entryProfiles:true}),pattern);}
+ const f=fixture();try{
+  for(const p of rows)f.write(p.path,read(p.copy));let head=f.commit();
+  const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
+  const reader=new ImmutableReader(f.repo,head),result=readArtifactConsumption(reader,selection,manifest);
+  assert.equal(result.review_id,6080211722);assert.equal(result.releaseCatalogue.complete_roles,533);assert.equal(result.sourceCustody.source_critical_roles,33);
+  assert.equal(reader.charged.size,6);assert.ok(reader.used<=256*1024*1024);
+  // The original whole certificate/GET binds all inline metadata. Coherently
+  // editing a metadata body cannot mint a new accepted certificate authority.
+  for(const [copy,change]of [
+   ['certificate.json',c=>c.application_inputs.pop()],
+   ['certificate.json',c=>c.application_inputs[1]=structuredClone(c.application_inputs[0])],
+   ['certificate.json',c=>c.application_inputs[1].sha256='0'.repeat(64)],
+   ['code.json',c=>c.critical_files.pop()],
+   ['code.json',c=>delete c.entry_critical_files['scripts/run-integration-tests.mjs']],
+   ['review.json',c=>c.user.id++],
+  ]){const pin=rows.find(p=>p.copy===copy),value=JSON.parse(read(copy));change(value);f.write(pin.path,value);head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/differs/);f.write(pin.path,read(copy));head=f.commit();}
+  const codePin=rows.find(p=>p.copy==='code.json');fs.unlinkSync(path.join(f.repo,codePin.path));head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/whole ordinary Git input/);f.write(codePin.path,read('code.json'));head=f.commit();
+  // All complete source metadata is prospectively charged before code or
+  // qualification body reads; distinguish declarations from actual opens.
+  const limited=new ImmutableReader(f.repo,head);const original=limited.git.bind(limited);let sourceOpens=0;
+  limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
+  limited.used=256*1024*1024-5*1024*1024;
+  assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
+ }finally{f.cleanup();}
+});
+
+
+test('Cloudflare fourth entry is explicit and cannot reinterpret historical profile shapes',()=>{
+ const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177');
+ const read=name=>fs.readFileSync(path.join(directory,name));
+ const certificate=JSON.parse(read('certificate.json')),code=JSON.parse(read('code.json')),qualification=JSON.parse(gunzipSync(read('qualification.json.gz')));
+ const cloudflare='scripts/build-cloudflare-inner.mjs';
+ // Model schema control only: the final registered authority must supply its
+ // actual complete Cloudflare closure; this does not mint a review or source.
+ code.entry_roles[cloudflare]=structuredClone(code.entry_roles['scripts/build-static-inner.mjs']);
+ code.entry_critical_files[cloudflare]=structuredClone(code.entry_critical_files['scripts/build-static-inner.mjs']);
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true}),/actual entry profile/);
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{cloudflareProfile:true}),/explicit entry-specific/);
+ const result=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true,cloudflareProfile:true});
+ assert.equal(result.candidate_code_executed,false);assert.ok(result.entry_profiles[cloudflare]);
+ delete code.entry_critical_files[cloudflare];
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true,cloudflareProfile:true}),/entry-specific source/);
+});
+
+
+test('genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles',()=>{
+ const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354');
+ const read=name=>fs.readFileSync(path.join(directory,name));
+ const rows=JSON.parse(read('original-inputs.json')).pins;
+ for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
+ const certificate=JSON.parse(read('certificate.json')),code=JSON.parse(read('code.json')),qualification=JSON.parse(gunzipSync(read('qualification.json.gz'))),catalogue=JSON.parse(gunzipSync(read('catalogue.json.gz'))),registry=JSON.parse(gunzipSync(read('registry.json.gz')));
+ assert.deepEqual(validateReleaseCatalogue(certificate,catalogue,registry),{inline_roles:190,release_products:343,complete_roles:533});
+ const custody=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true,cloudflareProfile:true});
+ assert.equal(custody.entry_profiles['scripts/build-cloudflare-inner.mjs'].entry_critical_roles,3);
+ assert.equal(custody.entry_profiles['scripts/build-cloudflare-inner.mjs'].declared_current_role_groups.actual_current_execution_wrappers.length,58);
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true}),/actual entry profile/);
+ assert.equal(custody.source_critical_roles,33);assert.equal(custody.candidate_code_executed,false);
+ assert.equal(custody.entry_profiles['scripts/run-integration-tests.mjs'].entry_critical_roles,1);
+ for(const [change,pattern]of [
+  [(c,a)=>a.critical_files[1]=structuredClone(a.critical_files[0]),/duplicate critical/],
+  [(c,a)=>a.critical_files[0].sha256='0'.repeat(64),/omitted\/rebound/],
+  [(c,a)=>delete a.entry_roles['scripts/run-integration-tests.mjs'],/actual entry profile/],
+  [(c,a)=>delete a.entry_roles['scripts/build-cloudflare-inner.mjs'],/actual entry profile/],
+  [(c,a)=>delete a.entry_critical_files['scripts/build-cloudflare-inner.mjs'],/entry-specific source/],
+  [(c,a)=>a.entry_roles['scripts/build-cloudflare-inner.mjs'].actual_current_execution_wrappers.push('../foreign'),/wrapper profile/],
+  [(c,a)=>delete a.entry_critical_files['scripts/build-static-inner.mjs'],/entry-specific source/],
+  [(c,a)=>a.entry_critical_files['scripts/build-hosted-inner.mjs'][0].bytes++,/omitted\/rebound/],
+  [(c,a)=>a.entry_roles['scripts/run-integration-tests.mjs'].actual_current_execution_wrappers.push('../foreign'),/wrapper profile/],
+  [(c,a,q)=>q.source_policy.water_status='approved',/source policy/],
+  [(c,a,q)=>q.complete_phase_inventory[0].runs.pop(),/qualification runs/],
+  [(c,a,q)=>q.complete_phase_inventory[0].runs[0].actual_terminal.qualified=false,/Unqualified/],
+  [(c)=>c.application_inputs=c.application_inputs.filter(p=>p.path!==code.critical_files[0].path),/omitted\/rebound/]
+ ]){const c=structuredClone(certificate),a=structuredClone(code),q=structuredClone(qualification);change(c,a,q);assert.throws(()=>validateArtifactSourceMetadata(c,a,q,{entryProfiles:true,cloudflareProfile:true}),pattern);}
+ const f=fixture();try{
+  for(const p of rows)f.write(p.path,read(p.copy));let head=f.commit();
+  const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
+  const reader=new ImmutableReader(f.repo,head),result=readArtifactConsumption(reader,selection,manifest);
+  assert.equal(result.review_id,6081097955);assert.equal(result.releaseCatalogue.complete_roles,533);assert.equal(result.sourceCustody.source_critical_roles,33);
+  assert.equal(reader.charged.size,6);assert.ok(reader.used<=256*1024*1024);
+  // The original whole certificate/GET binds all inline metadata. Coherently
+  // editing a metadata body cannot mint a new accepted certificate authority.
+  for(const [copy,change]of [
+   ['certificate.json',c=>c.application_inputs.pop()],
+   ['certificate.json',c=>c.application_inputs[1]=structuredClone(c.application_inputs[0])],
+   ['certificate.json',c=>c.application_inputs[1].sha256='0'.repeat(64)],
+   ['code.json',c=>c.critical_files.pop()],
+   ['code.json',c=>delete c.entry_critical_files['scripts/run-integration-tests.mjs']],
+   ['review.json',c=>c.user.id++],
+  ]){const pin=rows.find(p=>p.copy===copy),value=JSON.parse(read(copy));change(value);f.write(pin.path,value);head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/differs/);f.write(pin.path,read(copy));head=f.commit();}
+  const codePin=rows.find(p=>p.copy==='code.json');fs.unlinkSync(path.join(f.repo,codePin.path));head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/whole ordinary Git input/);f.write(codePin.path,read('code.json'));head=f.commit();
+  // All complete source metadata is prospectively charged before code or
+  // qualification body reads; distinguish declarations from actual opens.
+  const limited=new ImmutableReader(f.repo,head);const original=limited.git.bind(limited);let sourceOpens=0;
+  limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
+  limited.used=256*1024*1024-5*1024*1024;
+  assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
  }finally{f.cleanup();}
 });
