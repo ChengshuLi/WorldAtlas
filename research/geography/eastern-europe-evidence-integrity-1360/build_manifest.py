@@ -206,9 +206,22 @@ def main() -> None:
         raise EvidenceError("a complete successful control receipt set is missing")
     if generated.get("status") != "passed" or generated.get("comparison", {}).get("identical") is not True:
         raise EvidenceError("two-run success receipt does not verify actual complete products")
+    workflow_code = generated.get("workflow_code")
+    if (not isinstance(workflow_code, dict) or workflow_code.get("unchanged_during_execution") is not True or
+            workflow_code.get("before_execution") != workflow_code.get("after_execution")):
+        raise EvidenceError("fresh execution receipt does not bind stable orchestration source bytes")
+    wrapper = workflow_code["before_execution"]
+    wrapper_raw = require_regular(PACKET / "safe_workflow.py")
+    if (wrapper.get("path") != f"{OWNED}/safe_workflow.py" or wrapper.get("bytes") != len(wrapper_raw) or
+            wrapper.get("sha256") != sha(wrapper_raw)):
+        raise EvidenceError("executed orchestration source does not match the final safe_workflow.py blob")
+    if (load_json(controls_dir / "producer-negative-control.json").get("workflow_code") != workflow_code or
+            writer_controls.get("workflow_code") != workflow_code or
+            load_json(EXEC / "history/two-run-summary.json").get("workflow_code") != workflow_code):
+        raise EvidenceError("fresh, control, and summary receipts do not bind the same orchestration source")
 
     methods = [
-        {"id": "frozen-producer", "kind": "source", "description": "Run the exact pinned #1344 producer against the exact source-custody input tree in two fresh admitted namespaces; compare all actual products to their declared actual summaries and historical whole-file pins.", "software": "Python 3.12.14; NumPy 2.3.5; pyproj 3.7.2; Shapely 2.1.2; GEOS 3.13.1", "units": "whole-file bytes and SHA-256; no new geographic unit or measurement"},
+        {"id": "frozen-producer", "kind": "source", "description": "Run the exact pinned #1344 producer and hash-bind the safe_workflow.py orchestration source against its final manifest blob; compare all actual products to their declared actual summaries and historical whole-file pins.", "software": "Python 3.12.14; NumPy 2.3.5; pyproj 3.7.2; Shapely 2.1.2; GEOS 3.13.1", "units": "whole-file bytes and SHA-256; no new geographic unit or measurement"},
         {"id": "safe-writers", "kind": "code", "description": "Exercise exclusive complete-set staging/receipt admission, transactional rollback after a real late collision, the actual producer's six rejection branches, and changed/missing/false actual-output controls with sentinel preservation.", "software": "Python 3.12.14; standard library", "units": "file existence, byte lengths, SHA-256, exit status, and exact rejection reason"},
     ]
     validation = [

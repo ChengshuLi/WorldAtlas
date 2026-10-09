@@ -1,0 +1,8 @@
+{
+  "correction": "Replay-08 records safe_workflow.py path, exact byte length and SHA-256 before and after both fresh and controls commands; each command rejects if bytes differ. build_manifest verifies all receipts match the final wrapper blob.",
+  "finding": "Prior execution receipts did not hash-bind safe_workflow.py, the actual orchestration entry point. The independent exact-head reviewer withheld acceptance under PREMERGE_EVIDENCE_REVIEW.md lines 41-43.",
+  "prior_head": "1d9c7ec3c195c7ae29d1b67b1016e32483138013",
+  "prior_manifest_sha256": "5185c03ed1d9a93b690ce81a385d1d803e39d4fd2d8c2f83a3fa4fe82746d618",
+  "replacement_workspace": "execution-replay-08",
+  "review_receipt_posted": false
+}

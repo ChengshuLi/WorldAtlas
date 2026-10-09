@@ -24,6 +24,7 @@ PACKET = Path(__file__).resolve().parent
 REPO = PACKET.parents[2]
 ORIGINAL = REPO / "research/geography/eastern-europe-border-source-fitness-20261007"
 EXEC = PACKET / "execution"
+WORKFLOW_PATH = PACKET / "safe_workflow.py"
 BASELINE = "432c5b8e0ac9b9597738a31f5386569312c75966"
 ORIGINAL_MERGE = "0c30d0bf9cee9a8c300c7e3c8f45720b471a74ff"
 CUSTODY_SHA = "db511bb8db98154ea189e6c0f8e3a6551277e68873084e0148e875a46e8cb01f"
@@ -127,6 +128,21 @@ def require_regular(path: Path) -> bytes:
     if len(raw) != info.st_size:
         fail(f"file changed while read: {path}")
     return raw
+
+
+def workflow_code_descriptor() -> dict:
+    """Identify the orchestration source bytes executed by this entry point."""
+    raw = require_regular(WORKFLOW_PATH)
+    return {"path": WORKFLOW_PATH.relative_to(REPO).as_posix(),
+            "bytes": len(raw), "sha256": sha(raw)}
+
+
+def bind_workflow_code(before: dict) -> dict:
+    after = workflow_code_descriptor()
+    if before != after:
+        fail("safe_workflow.py changed while the entry point was running")
+    return {"before_execution": before, "after_execution": after,
+            "unchanged_during_execution": True}
 
 
 def preadmit_fresh(root: Path, relative_files: list[Path]) -> list[Path]:
@@ -701,7 +717,7 @@ def build_numeric_summary(inputs: Path) -> dict:
                       "contact_total": "contacts"}}
 
 
-def write_final_receipts(comparison: dict, numeric_summary: dict) -> list[dict]:
+def write_final_receipts(comparison: dict, numeric_summary: dict, workflow_code: dict) -> list[dict]:
     controls = EXEC / "controls"
     if not os.path.lexists(controls):
         mkdir_fresh(controls)
@@ -710,6 +726,7 @@ def write_final_receipts(comparison: dict, numeric_summary: dict) -> list[dict]:
     summary_path = EXEC / "history/two-run-summary.json"
     aggregate = sha(canonical(comparison["run_one"]))
     full = {"version": 1, **comparison, "producer_sha256": CODE_PINS["produce.py"],
+            "workflow_code": workflow_code,
             "python": platform.python_version(), "platform": platform.platform()}
     positive = {"version": 1, "method_id": "frozen-producer", "kind": "positive-control", "outcome": "passed",
                 "scope": {"family_id": "gap-source-batch:70c8e23708e01b28b207d2e8",
@@ -949,6 +966,7 @@ def main() -> None:
     mode.add_argument("--controls", action="store_true", help="run actual producer negatives and positive-output tamper probes")
     parser.add_argument("--workspace", default="execution", help="fresh directory under this owned packet")
     args = parser.parse_args()
+    workflow_before = workflow_code_descriptor()
     global EXEC
     EXEC = PACKET / safe_relative(Path(args.workspace), PACKET)
     if args.fresh:
@@ -966,10 +984,11 @@ def main() -> None:
         write_exclusive(crosswalk_path, canonical(crosswalk))
         numeric_summary = build_numeric_summary(input_root)
         numeric_path = EXEC / "numeric-summary.json"
-        receipts = write_final_receipts(compared, numeric_summary)
+        workflow_code = bind_workflow_code(workflow_before)
+        receipts = write_final_receipts(compared, numeric_summary, workflow_code)
         result = {"status": "passed", "staged_input_count": len(staged), "staged_input_bytes": sum(x["bytes"] for x in staged),
                   "stage_admission": stage_admission,
-                  "code": code, "runs": [a, b], "comparison": compared,
+                  "code": code, "workflow_code": workflow_code, "runs": [a, b], "comparison": compared,
                   "subject_crosswalk": {"path": crosswalk_path.relative_to(PACKET).as_posix(), "subject_count": crosswalk["subject_count"], "sha256": sha(require_regular(crosswalk_path))},
                   "numeric_summary": {"path": numeric_path.relative_to(PACKET).as_posix(), "sha256": sha(require_regular(numeric_path)),
                                       "overlay_rows": numeric_summary["overlay_row_count"], "contact_total": numeric_summary["contact_total"]},
@@ -989,6 +1008,8 @@ def main() -> None:
         _, checked = verify_inputs(input_root)
         actual = run_negative_controls(input_root, code_dir)
         actual["method_id"] = "frozen-producer"
+        workflow_code = bind_workflow_code(workflow_before)
+        actual["workflow_code"] = workflow_code
         out_actual = EXEC / "controls/producer-negative-control.json"
         write_control_receipts({out_actual: canonical(actual)})
         results = writer_self_tests()
@@ -996,7 +1017,7 @@ def main() -> None:
                     comparison_probe("missing-actual-product", "remove-product"),
                     comparison_probe("false-actual-run-summary", "false-summary-status")]
         out = EXEC / "controls/writer-and-comparison-controls.json"
-        write_control_receipts({out: canonical({"version": 1, "method_id": "safe-writers", "kind": "negative-control", "outcome": "passed", "staged_input_files": len(checked), "cases": results})})
+        write_control_receipts({out: canonical({"version": 1, "method_id": "safe-writers", "kind": "negative-control", "outcome": "passed", "staged_input_files": len(checked), "workflow_code": workflow_code, "cases": results})})
         print(json.dumps({"status": "passed", "producer_negative_cases": len(actual["controls"]), "writer_and_comparison_cases": len(results)}, sort_keys=True))
     else:
         parser.error("choose --fresh or --controls")
