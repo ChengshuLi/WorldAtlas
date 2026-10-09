@@ -3,7 +3,7 @@
   "retrieval_date": "2026-10-09",
   "timezone": "UTC",
   "scope": "Original current administrative rosters and legally authoritative polygon evidence for the issue's exact 228 Chongqing, Guizhou and Sichuan county-level subjects; current boundary-source custodians and public-map suitability leads",
-  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established. A Guangyuan Municipal Civil Affairs Bureau listing and HTTP 302 now identify the exact Sichuan provincial year-end roster URL; the provincial target still timed out, so no table bytes or row comparison were obtained.",
+  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established. A Guangyuan Municipal Civil Affairs Bureau listing and HTTP 302 now identify the exact Sichuan provincial year-end roster URL; following its HTTP Location timed out, and a separate HTTPS retry of the provincial path also timed out, so no table bytes or row comparison were obtained.",
   "direct_access_retry": {
     "attempted_at": "2026-10-09 UTC",
     "method": "curl via direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
@@ -377,7 +377,7 @@
     {
       "observed_at": "2026-10-09T05:01:06Z",
       "source_id": "sc-2025-roster-exact-notice-locator",
-      "method": "Direct HTTPS retrieval of the municipal civil-affairs listing and its linked notice; notice request stopped at the returned redirect. Direct provincial HTTPS retry was attempted separately and timed out.",
+      "method": "Direct retrieval of the municipal civil-affairs listing and linked notice. The linked notice returned a literal HTTP Location; following that redirect over HTTP timed out, and a separate HTTPS retry of the same target path also timed out.",
       "listing": {
         "publisher": "Guangyuan Municipal Civil Affairs Bureau",
         "url": "https://mzj.cngy.gov.cn/New/List/20191217140324736.html?page=3",
@@ -397,8 +397,10 @@
         "interpretation": "Municipal-government listing exposes the exact notice link and redirects to the provincial civil-affairs article. The redirect identifies the exact locator but provides no roster content."
       },
       "official_target_attempt": {
+        "http_url": "http://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/1/28/fccc0ed4b8fe4655a3b946c6d8e9e1ed.shtml",
+        "http_result": "Following the literal HTTP Location from the 302; connection timeout to port 80 after 5 seconds, HTTP status 000, zero source bytes, no hash.",
         "https_url": "https://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/1/28/fccc0ed4b8fe4655a3b946c6d8e9e1ed.shtml",
-        "result": "Connection timeout before response; HTTP status 000; zero source bytes; no hash."
+        "https_result": "Separate HTTPS retry of the same path; connection timeout to port 443 after 5 seconds, HTTP status 000, zero source bytes, no hash."
       },
       "terms": "No reuse terms for the roster were inspected; do not redistribute the listing or roster and do not assert an extraction license.",
       "restoration": "Retry the exact provincial URL in an authorized accessible environment. Preserve the original notice/table bytes, response metadata, retrieval time and hashes; inspect reuse terms; then compare all 113 scoped Sichuan rows.",
