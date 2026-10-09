@@ -6,7 +6,7 @@ import path from 'node:path';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers} from '../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -312,4 +312,42 @@ test('cold selected continuous operands preserve complete neighbors and original
 
   }
  }finally{fs.rmSync(coldRoot,{recursive:true,force:true});f.cleanup();}
+});
+
+
+test('renewed immutable artifact entry binds complete catalogue and independent authority',()=>{
+ const directory=path.join(root,'coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls');
+ const rows=JSON.parse(fs.readFileSync(path.join(directory,'original-inputs.json'))).pins;
+ const read=name=>fs.readFileSync(path.join(directory,name));
+ for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
+ const certificate=JSON.parse(read('certificate.json')),catalogue=JSON.parse(gunzipSync(read('catalogue.json.gz'))),registry=JSON.parse(gunzipSync(read('registry.json.gz')));
+ assert.deepEqual(validateReleaseCatalogue(certificate,catalogue,registry),{inline_roles:137,release_products:343,complete_roles:480});
+ for(const [change,pattern]of [
+  [(c,p)=>p.products.pop(),/Incomplete qualified/],
+  [(c,p)=>p.products[1]=structuredClone(p.products[0]),/Duplicate/],
+  [(c,p)=>p.products[0].path='foreign/product.gz',/ordered path/],
+  [(c,p)=>[p.products[0],p.products[1]]=[p.products[1],p.products[0]],/ordered path/],
+  [(c,p)=>p.products[0].sha256='0'.repeat(64),/encoded\/payload/],
+  [(c,p)=>p.products[0].decoded_sha256='0'.repeat(64),/encoded\/payload/],
+  [(c,p)=>delete p.products[0].decoded_bytes,/Incomplete whole/],
+  [(c,p)=>p.products[0].decoded_bytes=33554433,/decoded role/],
+  [(c)=>c.application_inputs.pop(),/exact inline/],
+  [(c)=>c.application_inputs[1]=structuredClone(c.application_inputs[0]),/Duplicate/]
+ ]) {const c=structuredClone(certificate),p=structuredClone(catalogue);change(c,p);assert.throws(()=>validateReleaseCatalogue(c,p,registry),pattern);}
+ const f=fixture();try{
+  for(const p of rows)f.write(p.path,read(p.copy));const head=f.commit();
+  const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
+  const open=()=>new ImmutableReader(f.repo,head);
+  const positive=readArtifactConsumption(open(),selection,manifest);assert.equal(positive.review_id,6078884054);assert.equal(positive.releaseCatalogue.complete_roles,480);
+  for(const [change,pattern]of [
+   [s=>s.artifact_consumption.certificate.sha256='0'.repeat(64),/differs/],
+   [s=>s.artifact_consumption.review.sha256='0'.repeat(64),/independently registered/],
+   [s=>s.artifact_consumption.certificate.mode='100755',/whole artifact authority pin/],
+   [s=>s.artifact_consumption.certificate.bytes--,/whole mode\/size differs/],
+   [s=>s.sha256='0'.repeat(64),/Typed independent/],
+   [s=>s.selected_geography.sha256='0'.repeat(64),/Selected source\/policy/],
+   [s=>s.release_id='geography:foreign',/native\/release/],
+   [s=>s.artifact_consumption.approved=true,/Unsupported artifact-consumption/]
+  ]){const s=structuredClone(selection);change(s);assert.throws(()=>readArtifactConsumption(open(),s,manifest),pattern);}
+ }finally{f.cleanup();}
 });

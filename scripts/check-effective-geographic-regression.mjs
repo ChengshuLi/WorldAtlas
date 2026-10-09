@@ -252,14 +252,84 @@ function validateParts(manifest) {
   for(const kind of ['rows','runs']){let offset=0;const parts=manifest.parts.filter(p=>p.kind===kind);demand(parts.length>0,'Missing native '+kind);for(const p of parts){demand(safe(p.path)&&!names.has(p.path)&&p.offset===offset&&Number.isSafeInteger(p.words)&&p.words>0&&p.words%2===0&&p.encoding==='byte-shuffle'&&p.decoded_bytes===p.words*4&&p.decoded_bytes<=FILE&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256)&&hash(p.decoded_sha256),'Invalid complete native partition');names.add(p.path);offset+=p.words;}demand(offset===(kind==='rows'?manifest.size*2:manifest.runWords),'Native partition omitted words');}
 }
 
+// Independently accepted immutable scientific artifacts are consumed as data.
+// This exact registered authority preserves original scientific qualification;
+// it never imports the proposed consumer or fabricates a scientific brand.
+const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
+  // Retained original acceptance. New independent decisions append their whole
+  // GET hash here after ordinary trusted-code review; candidate data cannot mint
+  // a reviewer identity or approval boolean as an authority.
+  '79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd':Object.freeze({review_id:6078458358,github_user_id:6732996,issue:1520}),
+  '5d6758debd9c2e141b83c40594486939f6fa2fd819816070957bbc4b0f1075c2':Object.freeze({review_id:6078884054,github_user_id:6732996,issue:1520,releaseCatalogue:true})
+});
+// Validate the complete ordered installer catalogue as immutable provenance.
+// Reading these descriptors does not claim this gate installs their payloads.
+export function validateReleaseCatalogue(certificate,catalogue,registry) {
+  const pin=certificate.release_product_catalogue,inline=certificate.application_inputs;
+  demand(catalogue?.version===1&&catalogue.kind==='qualified-arctic-release-product-roster-v1'&&catalogue.issue===1520&&same(Object.keys(catalogue).sort(),['issue','kind','products','version'])&&Array.isArray(catalogue.products)&&catalogue.products.length===343,'Incomplete qualified release product catalogue');
+  demand(Array.isArray(inline)&&inline.length===137&&same(inline.find(p=>p.space==='root'&&p.path===pin.path),{space:'root',...pin}),'Release catalogue is not the exact inline application input');
+  const seen=new Set();
+  function descriptor(p,space) {
+    demand(['root','prior','image'].includes(space)&&safe(p.path)&&p.mode==='100644'&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256),'Invalid complete application role');
+    if(p.decoded_bytes!==undefined)demand(Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>0&&p.decoded_bytes<=FILE&&hash(p.decoded_sha256),'Invalid full application decoded role');
+    const key=space+':'+p.path;demand(!seen.has(key),'Duplicate/overlapping complete application role');seen.add(key);
+  }
+  for(const p of inline)descriptor(p,p.space);
+  const directory=path.posix.dirname(certificate.selected_artifact_bindings.registry.path);
+  demand(Array.isArray(registry?.batches)&&registry.batches.length>=343,'Missing complete release registry product roster');
+  const rows=registry.batches.slice(-343);
+  for(let i=0;i<catalogue.products.length;i++) {
+    const p=catalogue.products[i],row=rows[i];
+    demand(same(Object.keys(p).sort(),['bytes','decoded_bytes','decoded_sha256','mode','path','sha256']),'Incomplete whole release product descriptor');descriptor(p,'root');
+    demand(safe(row.path)&&p.path===path.posix.join(directory,row.path)&&row.encoding==='gzip'&&row.sha256===p.sha256&&row.payload_sha256===p.decoded_sha256,'Release catalogue ordered path/encoded/payload join differs');
+  }
+  demand(seen.size===480,'Incomplete expanded application closure');
+  return {inline_roles:137,release_products:343,complete_roles:480};
+}
+function readArtifactGzip(reader,pin) {
+  demand(pin&&safe(pin.path)&&pin.mode==='100644'&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=FILE&&hash(pin.sha256)&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=FILE&&hash(pin.decoded_sha256),'Unbounded artifact gzip pin');
+  const actual=reader.descriptor(pin.path);demand(actual.bytes===pin.bytes&&actual.mode===pin.mode,'Artifact gzip whole mode/size differs');reader.admit(actual,pin.decoded_bytes);
+  const encoded=reader.read(pin.path,{expected:pin.sha256,decoded:pin.decoded_bytes});demand(encoded.readUInt32LE(encoded.length-4)===pin.decoded_bytes,'Artifact decoded size differs before inflate');
+  const body=gunzipSync(encoded,{maxOutputLength:pin.decoded_bytes});demand(body.length===pin.decoded_bytes&&sha(body)===pin.decoded_sha256,'Artifact whole decoded body differs');return JSON.parse(body);
+}
+export function readArtifactConsumption(reader,selection,manifest) {
+  const hook=selection.artifact_consumption;if(hook===undefined)return null;
+  demand(hook&&same(Object.keys(hook).sort(),['certificate','review']),'Unsupported artifact-consumption selector');
+  const registration=REGISTERED_ARTIFACT_REVIEW_GETS[hook.review?.sha256];
+  demand(registration,'Missing independently registered artifact authority');
+  for(const pin of [hook.certificate,hook.review]){
+    demand(pin&&same(Object.keys(pin).sort(),['bytes','mode','path','sha256'])&&pin.mode==='100644'&&safe(pin.path)&&hash(pin.sha256)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=FILE,'Unsupported whole artifact authority pin');
+    const actual=reader.descriptor(pin.path);demand(actual.mode===pin.mode&&actual.bytes===pin.bytes,'Artifact authority whole mode/size differs');reader.admit(actual);
+  }
+  const certificate=reader.json(hook.certificate.path,{expected:hook.certificate.sha256}),review=reader.json(hook.review.path,{expected:hook.review.sha256});
+  demand(review.id===registration.review_id&&review.user?.id===registration.github_user_id&&typeof review.body==='string','Artifact authority is not the independently retained review GET');
+  const block=review.body.match(/<!-- worldatlas-qualified-artifact-consumption:v1\s*([\s\S]*?)\s*-->/);demand(block,'Missing typed artifact review');const accepted=JSON.parse(block[1]);
+  demand(accepted.version===1&&accepted.issue===registration.issue&&accepted.decision==='accept-qualified-artifact-consumption'&&accepted.certificate_sha256===hook.certificate.sha256&&accepted.certificate_bytes===hook.certificate.bytes&&accepted.native_manifest_sha256===selection.sha256,'Typed independent artifact authority differs');
+  demand(certificate.version===1&&certificate.kind==='qualified-arctic-immutable-product-certificate-v1'&&certificate.issue===registration.issue&&certificate.native_manifest_sha256===accepted.native_manifest_sha256&&selection.sha256===accepted.native_manifest_sha256&&certificate.complete_locations===49625,'Unsupported qualified artifact domain');
+  const bindings=certificate.selected_artifact_bindings,last=certificate.steps?.at(-1),declared=bindings?.native_manifest,actual=reader.descriptor(selection.manifest_path);
+  demand(declared?.path===selection.manifest_path&&declared.bytes===actual.bytes&&declared.sha256===selection.sha256&&last?.successor_release_id===selection.release_id&&last.selected_grid.path===declared.path&&last.selected_grid.sha256===declared.sha256&&last.selected_grid.bytes===declared.bytes,'Selected native/release is not the qualified artifact');
+  demand(same(bindings.selected_geography,selection.selected_geography)&&certificate.source_policy.sha256===accepted.source_policy_sha256&&certificate.application_consumer_code.sha256===accepted.application_consumer_code_sha256&&certificate.qualification_inventory.sha256===accepted.qualification_inventory_sha256,'Selected source/policy/qualification binding differs');
+  demand(Array.isArray(certificate.application_inputs)&&certificate.application_inputs.length>0&&certificate.steps.length===3&&certificate.limits.science_reexecuted_for_application===false&&manifest.geographic_release===selection.release_id,'Incomplete original artifact-consumption closure');
+  let releaseCatalogue=null;
+  if(registration.releaseCatalogue){
+    const cataloguePin=certificate.release_product_catalogue,registryPin={mode:'100644',...bindings.registry};
+    // Admit BOTH complete gzip bodies before reading either one.
+    for(const pin of [cataloguePin,registryPin]){demand(pin&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=FILE,'Missing bounded complete release catalogue');const d=reader.descriptor(pin.path);demand(d.bytes===pin.bytes&&d.mode===pin.mode,'Complete release catalogue pin differs');reader.admit(d,pin.decoded_bytes);}
+    releaseCatalogue=validateReleaseCatalogue(certificate,readArtifactGzip(reader,cataloguePin),readArtifactGzip(reader,registryPin));
+  }
+  return freezeJson({releaseCatalogue,certificate_pin:hook.certificate,review_pin:hook.review,certificate,review_id:review.id,limits:accepted.limits,
+    scope:'Once-qualified immutable artifact provenance only. This gate independently consumes actual selected native/source products; no source authority, activation or production approval.'});
+}
+
 function loadBaseSelection(reader) {
   const has=reader.git('ls-tree','-z',reader.version,'--','data/ownership-selection.json').length;
   if(!has)return null;
   const selection=reader.json('data/ownership-selection.json');
-  const selectionKeys=['manifest_path','method','release_id','sha256','version',...(selection.selected_geography?['selected_geography']:[]),...(Object.hasOwn(selection,'additive_release')?['additive_release']:[])].sort();
+  const selectionKeys=['manifest_path','method','release_id','sha256','version',...(selection.selected_geography?['selected_geography']:[]),...(Object.hasOwn(selection,'additive_release')?['additive_release']:[]),...(Object.hasOwn(selection,'artifact_consumption')?['artifact_consumption']:[])].sort();
   demand(same(Object.keys(selection).sort(),selectionKeys),'Unsupported committed additive/ownership selection; no proposal scanning');
   demand(selection.version===1&&selection.method==='native-linear-evenodd-first-owner-v1'&&safe(selection.manifest_path)&&hash(selection.sha256),'Unsupported ownership selection');
   const manifest=reader.json(selection.manifest_path,{expected:selection.sha256});validateParts(manifest);
+  const artifactConsumption=readArtifactConsumption(reader,selection,manifest);
   demand(selection.release_id===manifest.geographic_release,'Selected reference differs from native bank');
   const bounds=manifest.original_assets?.bounds;
   demand(bounds?.role==='original-identity-parent-camera-context'&&commit(bounds.commit)&&bounds.path==='data/canonical-grid/bounds.json.gz'&&bounds.sha256===manifest.bounds?.sha256,'Missing independent original native owner roster');
@@ -287,7 +357,8 @@ function loadBaseSelection(reader) {
     if(reader.git('ls-tree','-z',reader.version,'--',name).length)reader.descriptor(name);
     else{if(image instanceof NativeAssetImage){demand(image.index.files.some(p=>p.path===part.path&&p.bytes===part.bytes&&p.sha256===part.sha256),'Missing selected native transport asset');}else{demand(selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');image??=new StockImage(reader);const target=image.map.logical_targets.find(p=>p.target===name);demand(target&&target.bytes===part.bytes&&target.sha256===part.sha256,'Selected native asset absent from complete bank');}}}
   if(image instanceof StockImage)for(const part of image.index.parts){const actual=reader.descriptor(NS+'/'+part.path);demand(actual.bytes===part.bytes,'Whole selected container length differs');}
-  const snapshot={selection,manifest,owners,image,receiptProvenance,metadataBytes:decoded.length+Buffer.byteLength(JSON.stringify(manifest))+(image instanceof StockImage?Buffer.byteLength(JSON.stringify(image.map))+Buffer.byteLength(JSON.stringify(image.index)):image?Buffer.byteLength(JSON.stringify(image.index)):0),acquisition_buffer_bytes:rawBounds.length+decoded.length,reader};
+  const snapshot={selection,manifest,owners,image,receiptProvenance,artifactConsumption,metadataBytes:decoded.length+Buffer.byteLength(JSON.stringify(manifest))+(image instanceof StockImage?Buffer.byteLength(JSON.stringify(image.map))+Buffer.byteLength(JSON.stringify(image.index)):image?Buffer.byteLength(JSON.stringify(image.index)):0),acquisition_buffer_bytes:rawBounds.length+decoded.length,reader};
+  if(artifactConsumption)snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(artifactConsumption));
   selectedSnapshots.set(snapshot,{selection:JSON.stringify(selection),manifest:JSON.stringify(manifest)});
   if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
   return snapshot;

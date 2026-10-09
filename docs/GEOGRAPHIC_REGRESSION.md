@@ -218,3 +218,15 @@ parent, source ordinal and full feature/base/effective hash. This is compact
 metadata representation, not source sampling or a change to geometry methods.
 Cold coordinate children admit exactly `--expose-gc`; extra preload flags or
 NODE_OPTIONS/NODE_PATH are refused, and trusted callers clear those variables.
+
+The optional `artifact_consumption` selection binds an ordinary whole qualified
+product certificate and an independently registered whole review API capture.
+The renewed Arctic interface includes a complete gzip release-product catalogue:
+137 inline roles plus 343 ordinary product roles, with unique space/path keys and
+ordered registry path, compressed hash and decoded payload hash joins. Both full
+catalogue and registry inputs are prospectively admitted before decompression.
+This authenticates the once-qualified application provenance; the prevention gate
+still reads its own selected native/source inputs and never executes a candidate
+installer or claims it has installed all catalogue products. Original authority
+captures remain historical evidence; each renewed certificate needs its actual
+independent review binding.
