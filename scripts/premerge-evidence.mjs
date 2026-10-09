@@ -156,6 +156,46 @@ export function reviewBindingRequired(pr,policy){
  return created>=activation;
 }
 
+// Canonical inventory bytes are UTF-8 JSON.stringify(sorted unique strings),
+// without a trailing newline. Expectations always come from complete trusted
+// GitHub changes and authenticated evidence, never the reviewer's abbreviated list.
+export function reviewInventoryCommitment({files, manifest}) {
+  const summarize = values => {
+    const sorted = [...new Set(values)].sort();
+    return {count: sorted.length, sha256: sha256(JSON.stringify(sorted))};
+  };
+  return {version: 1,
+    inspected_files: summarize(files.flatMap(file => [file.filename, file.previous_filename].filter(Boolean))),
+    evidence_hashes: summarize([...manifest.baseline.files, ...manifest.outputs,
+      ...manifest.sources.flatMap(source => source.files ?? [])].map(file => file.sha256))};
+}
+
+function validateReviewInventory(receipt, files, manifest) {
+  if (Object.hasOwn(receipt, 'inventory_commitment')) {
+    need(!Object.hasOwn(receipt, 'inspected_files') && !Object.hasOwn(receipt, 'evidence_hashes'),
+      'Review inventory cannot mix literal arrays and a commitment');
+    const actual = receipt.inventory_commitment;
+    const keys = (value, expected) => value && typeof value === 'object' && !Array.isArray(value) &&
+      JSON.stringify(Object.keys(value).sort()) === JSON.stringify(expected.sort());
+    need(keys(actual, ['version', 'inspected_files', 'evidence_hashes']) && actual.version === 1,
+      'Unsupported or partial review inventory commitment');
+    const expected = reviewInventoryCommitment({files, manifest});
+    for (const name of ['inspected_files', 'evidence_hashes']) {
+      const value = actual[name];
+      need(keys(value, ['count', 'sha256']) && Number.isSafeInteger(value.count) && value.count >= 0 &&
+        /^[a-f0-9]{64}$/.test(value.sha256 ?? ''), 'Malformed review inventory commitment');
+      need(value.count === expected[name].count && value.sha256 === expected[name].sha256,
+        `Review ${name} commitment differs from complete trusted inventory`);
+    }
+    return;
+  }
+  // Preserve the original literal receipt behavior.
+  const expectedFiles = [...new Set(files.flatMap(file => [file.filename, file.previous_filename].filter(Boolean)))].sort();
+  need(JSON.stringify([...(receipt.inspected_files ?? [])].sort()) === JSON.stringify(expectedFiles), 'Review omitted changed/renamed files');
+  const hashes = [...new Set([...manifest.baseline.files, ...manifest.outputs, ...manifest.sources.flatMap(source => source.files ?? [])].map(file => file.sha256))].sort();
+  need(JSON.stringify([...(receipt.evidence_hashes ?? [])].sort()) === JSON.stringify(hashes), 'Review evidence hashes differ');
+}
+
 /** Cooperative worker identities, not a security boundary between shared-account operators. */
 export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, files, limits, author, reviewKind = 'code', issue, requireContractBinding = false}) {
   need(receipt?.version === 1 && receipt.pr_number === pr.number && receipt.head_sha === pr.head.sha &&
@@ -168,10 +208,7 @@ export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, file
     need(receipt.issue_contract_sha256===binding.issue_contract_sha256&&receipt.pr_body_sha256===binding.pr_body_sha256,
       'Issue acceptance contract or PR disposition changed; obtain renewed exact-head review');
   }
-  const expectedFiles = [...new Set(files.flatMap(file => [file.filename, file.previous_filename].filter(Boolean)))].sort();
-  need(JSON.stringify([...(receipt.inspected_files ?? [])].sort()) === JSON.stringify(expectedFiles), 'Review omitted changed/renamed files');
-  const hashes = [...new Set([...manifest.baseline.files, ...manifest.outputs, ...manifest.sources.flatMap(source => source.files ?? [])].map(file => file.sha256))].sort();
-  need(JSON.stringify([...(receipt.evidence_hashes ?? [])].sort()) === JSON.stringify(hashes), 'Review evidence hashes differ');
+  validateReviewInventory(receipt, files, manifest);
   need(receipt.outcome === 'accepted' && Array.isArray(receipt.limits) && limits.every(limit => receipt.limits.includes(limit)), 'Review rejected work or omitted verification limits');
   const required = ['implementation'];
   if (reviewKind !== 'code') required.push(reviewKind === 'source' ? 'source' : reviewKind);

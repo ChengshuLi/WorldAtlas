@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "issue": 1596,
+  "lane": "engineering",
+  "worker_id": "01a119de-e3de-7860-aa56-0484afa8a261",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "f0c44a8c2e6bdf11fa83286c463709c69fa61c3d",
+    "files": [
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 21870,
+        "sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+        "hash_kind": "file-bytes",
+        "commit": "f0c44a8c2e6bdf11fa83286c463709c69fa61c3d"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 22314,
+        "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
+        "hash_kind": "file-bytes",
+        "commit": "f0c44a8c2e6bdf11fa83286c463709c69fa61c3d"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 20343,
+        "sha256": "2de386f7609a21e9a3842dfce3ba7e84e61e9e30123a382a971f34232308966e",
+        "hash_kind": "file-bytes",
+        "commit": "f0c44a8c2e6bdf11fa83286c463709c69fa61c3d"
+      }
+    ],
+    "pins": {},
+    "version": 2
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/README.md",
+      "bytes": 2247,
+      "sha256": "76e0f493fe41cb6dd71e69273d173caf47c95191f82942bb1c665fefa13229a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/execution.json",
+      "bytes": 2427,
+      "sha256": "a9ca2f6d2d7c253ea7f83fac0fb1a3cc7f1f96e82b7d56463c7e34eaff639c6b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/run-one.log",
+      "bytes": 2383,
+      "sha256": "f36f6ee0ff1c5e54f034584c50739e7522b8044c80173f47e505121531e22841",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/run-two.log",
+      "bytes": 2383,
+      "sha256": "ac761fc8efeb41c87efcca318c25727e50d89f91c3063e3971d1b027951ce932",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/measure.mjs",
+      "bytes": 4272,
+      "sha256": "f77f853884237cc32f76b5c2e34f307b880c2741c97df5cddf7f26f78b4dcabe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/files1593-pages.json",
+      "bytes": 1362712,
+      "sha256": "ee80e3eb7567a88bb8971b9d7d5b649260ff8be42ddfbbd6ab7ffa6d0d0d17fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/input-pins.json",
+      "bytes": 1032,
+      "sha256": "3585eb8b86519ea657a400f81650885d67e017aa2872037ed3f636a907f82437",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/manifest1593.json",
+      "bytes": 230484,
+      "sha256": "942425f4ee8dd6020cbfd99f3f9f11c468727e2637d81bc1feebd5907c47464f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/pr1593.json",
+      "bytes": 18286,
+      "sha256": "f9cb57f909579252be6b5e4c22ed05801d4d25ff567f9f4790fe86c89c9390d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-one/measurement.json",
+      "bytes": 1404,
+      "sha256": "aa47e54fece5d8a85d20c873f3aa08915484334514a5022db974f1757e758ee0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-two/measurement.json",
+      "bytes": 1404,
+      "sha256": "aa47e54fece5d8a85d20c873f3aa08915484334514a5022db974f1757e758ee0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 22153,
+      "sha256": "2eb001f2df26a133b19ae2b81d2ebefa12622940b3e4cfc1f7422ffd81b4658c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "bytes": 23988,
+      "sha256": "7eda8972e90888d4ee897c970815af596319bea3c2e2c0210a838199a4b545de",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 27859,
+      "sha256": "c83d7359e6355dac6fdbd7810ee48830210f08440edfc27706431b1d85a4bb22",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "complete-review-inventory",
+      "kind": "code",
+      "description": "Exact complete inventory count/hash validation through existing normal independent-review consumer; no geography or scientific calculation.",
+      "software": "Node v24.19.0",
+      "units": "unique paths, whole hashes and UTF-8 canonical JSON characters"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "changed_files",
+      "value": 470,
+      "unit": "paths",
+      "vintage": "archived",
+      "evaluation_commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "input_sha256": "942425f4ee8dd6020cbfd99f3f9f11c468727e2637d81bc1feebd5907c47464f",
+      "input_file": {
+        "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/manifest1593.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "unique_evidence_hashes",
+      "value": 481,
+      "unit": "whole file hashes",
+      "vintage": "archived",
+      "evaluation_commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "input_sha256": "942425f4ee8dd6020cbfd99f3f9f11c468727e2637d81bc1feebd5907c47464f",
+      "input_file": {
+        "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/manifest1593.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "literal_inventory_characters",
+      "value": 87288,
+      "unit": "characters",
+      "vintage": "archived",
+      "evaluation_commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "input_sha256": "942425f4ee8dd6020cbfd99f3f9f11c468727e2637d81bc1feebd5907c47464f",
+      "input_file": {
+        "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/manifest1593.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "compact_inventory_characters",
+      "value": 254,
+      "unit": "characters",
+      "vintage": "archived",
+      "evaluation_commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "input_sha256": "942425f4ee8dd6020cbfd99f3f9f11c468727e2637d81bc1feebd5907c47464f",
+      "input_file": {
+        "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/manifest1593.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "passed_tests_per_run",
+      "value": 21,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "input_sha256": "c83d7359e6355dac6fdbd7810ee48830210f08440edfc27706431b1d85a4bb22",
+      "input_file": {
+        "path": "test/premerge-evidence.test.mjs",
+        "commit": "candidate"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "changed_files",
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-one/measurement.json",
+      "json_pointer": "/changed_files"
+    },
+    {
+      "metric_id": "unique_evidence_hashes",
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-one/measurement.json",
+      "json_pointer": "/unique_evidence_hashes"
+    },
+    {
+      "metric_id": "literal_inventory_characters",
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-one/measurement.json",
+      "json_pointer": "/literal_inventory_characters"
+    },
+    {
+      "metric_id": "compact_inventory_characters",
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-one/measurement.json",
+      "json_pointer": "/compact_inventory_characters"
+    },
+    {
+      "metric_id": "passed_tests_per_run",
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/execution.json",
+      "json_pointer": "/test_runs/0/passed"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Optional exact complete inventory commitments preserve existing authority and legacy receipt behavior; real PR1593 normal admission awaits its independent completed review and required checks.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/premerge-evidence.test.mjs",
+    "node coordination/engineering/compact-review-inventory-20261009/measure.mjs fresh-run"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/run-one.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/run-two.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/measure.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/files1593-pages.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/input-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/manifest1593.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/original-inputs/pr1593.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-one/measurement.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/run-two/measurement.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "2de386f7609a21e9a3842dfce3ba7e84e61e9e30123a382a971f34232308966e"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "status": "modified",
+      "original_sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13"
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

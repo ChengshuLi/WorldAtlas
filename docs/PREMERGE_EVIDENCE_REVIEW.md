@@ -153,6 +153,39 @@ Post one `worldatlas-review:v1` JSON comment on the PR, using the template below
 
 Only needed domains are required; do not claim a review you did not perform. The latest receipt from each worker for the current head is authoritative; any unresolved changes-requested outcome blocks. New commits invalidate reviews even if they only update main. The queue rereads the head, current checks, issue contract, actual files/bytes and receipts before a SHA-guarded squash merge. It preserves the soft 1,000 non-test-line review target. No provider changes, token rotation, deployment or live import occurs as part of this gate.
 
+### Complete inventory commitments for large reviews
+
+When the two literal inventory arrays would exceed GitHub's comment limit, omit
+both `inspected_files` and `evidence_hashes` and provide this optional field:
+
+```json
+"inventory_commitment": {
+  "version": 1,
+  "inspected_files": {"count": 470, "sha256": "REPLACE_WITH_COMPLETE_PATH_LIST_SHA256"},
+  "evidence_hashes": {"count": 481, "sha256": "REPLACE_WITH_COMPLETE_EVIDENCE_HASH_LIST_SHA256"}
+}
+```
+
+These counts are examples, not an allowed scope. For each list, deduplicate the
+strings, sort them with JavaScript's default `.sort()`, and hash the UTF-8 bytes of
+`JSON.stringify(sortedUniqueStrings)` with SHA-256, without a trailing newline.
+The path list includes every complete GitHub changed filename and every rename's
+`previous_filename`. The evidence list includes every unique raw-file SHA-256 in
+the authenticated manifest's baseline files, outputs and source files. Counts
+are the respective unique list lengths. `reviewInventoryCommitment({files,
+manifest})` computes this format from those complete trusted inputs.
+
+The reviewer must still actually inspect every changed file, renamed original
+and evidence body and write the same substantive domain review and limitations.
+A commitment is compact accounting, not proof of inspection or approval. Never
+derive it from an author's abbreviated roster or an external mutable review
+artifact. The normal premerge and queue validator derives both complete lists
+independently and requires exact count/hash equality. Mixed literal/commitment
+forms, partial fields and unsupported versions are rejected. Existing literal
+receipts keep their behavior; exact head, distinct identity, acceptance/body
+bindings, unresolved-review refusal, evidence budgets and all domain/limit gates
+remain unchanged.
+
 ## Activation proof and limitations
 
 Activation must follow a merged reporting implementation, actual hosted report results, positive and negative real-format fixtures, and an inventory of current claimed/open work. Record the timestamp, decision and checks in the activation PR; the earlier implementation PR uses `Refs #627`. The final activation PR may use `Closes #627` only after these checks. Unit tests use synthetic data and mocked read-only API responses, never production merge mutations. Neither this gate nor moderator review eliminates all factual errors: unavailable sources and unexecuted reproduction remain explicit limitations.
