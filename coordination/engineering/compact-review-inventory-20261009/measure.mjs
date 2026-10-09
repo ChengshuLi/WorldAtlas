@@ -17,7 +17,11 @@ if(pins.version!==1||pins.files.length!==3)throw Error('Incomplete inputs');
 let complete=fs.statSync(process.execPath).size+1048576+fs.statSync(pinsPath).size;
 for(const p of pins.files){if(!/^[a-z0-9-]+\.json$/.test(p.path)||!Number.isSafeInteger(p.bytes)||p.bytes<=0||p.bytes>33554432)throw Error('Invalid input descriptor');const s=fs.lstatSync(path.join(root,'original-inputs',p.path));if(!s.isFile()||s.isSymbolicLink()||s.size!==p.bytes)throw Error('Input stat differs');complete+=p.bytes;}
 // Metadata measurement only; reserve the complete small executing module closure.
-const closureBytes=1024*1024;complete+=closureBytes;
+const codeRoot=path.resolve(root,'../../..');
+const closure=["scripts/check-handoff-scope.mjs", "scripts/evidence-policy.mjs", "scripts/evidence-quality.mjs", "scripts/github-quota.mjs", "scripts/github-snapshots.mjs", "scripts/issue-claim-contract.mjs", "scripts/job-deadline.mjs", "scripts/premerge-evidence.mjs", "scripts/research-import-gate.mjs", "src/regional-import-gate.js"];
+let closureBytes=fs.lstatSync(fileURLToPath(import.meta.url)).size;
+for(const name of closure){const s=fs.lstatSync(path.join(codeRoot,name));if(!s.isFile()||s.isSymbolicLink()||s.size>33554432)throw Error('Nonordinary executing code');closureBytes+=s.size;}
+complete+=closureBytes;
 if(complete>268435456)throw Error('Complete metadata phase over bound');
 const values=new Map();const sha=b=>createHash('sha256').update(b).digest('hex');
 for(const p of pins.files){const b=fs.readFileSync(path.join(root,'original-inputs',p.path));if(b.length!==p.bytes||sha(b)!==p.sha256)throw Error('Whole input differs');values.set(p.path,JSON.parse(b));}
