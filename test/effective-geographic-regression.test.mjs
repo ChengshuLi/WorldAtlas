@@ -316,7 +316,7 @@ test('cold selected continuous operands preserve complete neighbors and original
 
 
 test('renewed immutable artifact entry binds complete catalogue and independent authority',()=>{
- const directory=path.join(root,'coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls');
+ const directory=path.join(root,'coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db');
  const rows=JSON.parse(fs.readFileSync(path.join(directory,'original-inputs.json'))).pins;
  const read=name=>fs.readFileSync(path.join(directory,name));
  for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
@@ -338,7 +338,7 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
   for(const p of rows)f.write(p.path,read(p.copy));const head=f.commit();
   const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
   const open=()=>new ImmutableReader(f.repo,head);
-  const positive=readArtifactConsumption(open(),selection,manifest);assert.equal(positive.review_id,6078884054);assert.equal(positive.releaseCatalogue.complete_roles,480);
+  const positive=readArtifactConsumption(open(),selection,manifest);assert.equal(positive.review_id,6079096820);assert.equal(positive.releaseCatalogue.complete_roles,480);
   for(const [change,pattern]of [
    [s=>s.artifact_consumption.certificate.sha256='0'.repeat(64),/differs/],
    [s=>s.artifact_consumption.review.sha256='0'.repeat(64),/independently registered/],
