@@ -1,0 +1,21 @@
+# Melanesia operational gap batch — issue #1626
+
+This is one 363-candidate assignment: batch `gap-operational-batch:37ed51b2c2eac38570c40a87`, covering Fiji, Indonesia, Papua New Guinea, Solomon Islands, and Vanuatu. There are no per-country subbatches or new subissues. Candidate feature capture is complete; source-fit processing is active.
+
+## Completed checkpoint
+
+`vintages/candidate-capture-001/` preserves exact full component features for all 363 assigned IDs from the retained component-v3 custody payloads. The assignment itself is copied byte-for-byte into the vintage. The capture used the pinned repository `Baseline` and exclusive `NewVintage` helpers, admitted 113,447,026 input bytes, and published a final completion receipt. Its complete exact coordinates and feature/geometry hashes are available for downstream source fitting and native-grid assignment.
+
+`vintages/choiseul-six/README.md` and `vintages/choiseul-six-exact-003/` contain the first six source-fit results. Two meet strict source-relative target-gain equality, no-loss, and complete-neighbor exclusion. Four retain source-supported original candidate geometries for additive native-grid checking while preserving existing assignments; their exact overlay differences are not forced through snapping or tolerance.
+
+## Existing catalog snapshot, not new decisions
+
+The previously retained complete catalog joins all 363 IDs. Its rows remain unresolved and report 298 `evidence-ready`, 65 `awaiting-evidence`, zero source-relative decisions, zero accepted repairs, and zero deliveries. Source comparison states are 60 uniquely covered by one compatible recorded subject, 195 positive but mixed/partial/unresolved coverage, 21 no source intersection in the literal domain, and 87 outside that earlier comparison cohort. These catalog values describe the earlier routing evidence; they are not the result of this packet’s new source-fit analysis.
+
+Original next-prerequisite counts are 26 land plus compatible processing-reproduction candidate; 71 land with partial/unbound administrative evidence; 29 land without administrative comparison or source custody; 61 mixed support; 89 outside source domain; and 87 numeric closure first. Assignment of source-supported land to an existing stable reference location follows the current coverage objective; unresolved current legal status, historical cause, and hierarchy semantics are not automatic blockers. Source fitness, unique compatible location binding, genuine candidate coverage, and preserving all existing assignments remain necessary.
+
+## Limits and continuation
+
+Source years are represented reference years, not effective dates or present-day ground truth. Historic water or ice, physical truth, processing cause, legal boundary authority, and publication approval remain unresolved unless independently evidenced. A source-relative fit is a geographic coverage proposal, not political or legal affiliation.
+
+Continue the 357 remaining candidate source-fit cases and document exact payloads or the specific unavailable source/binding fact for each. Preserve the whole-batch scope and original candidate geometries. Do not repeat existing global audits or unchanged GIS runs. Native-grid assignment must inspect currently unowned cells and retain every pre-existing assignment.
