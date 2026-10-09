@@ -92,22 +92,36 @@ export function authenticateSuccessorContextInventory(indexRaw,imageIndex,compar
   assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
  }return index;
 }
-export function verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles,currentRoot,charge=()=>{}}){
+export function verifyRegistryContinuation(originalRaw,currentRaw,binding){
+ assert(binding&&/^[a-f0-9]{64}$/.test(binding.manifest_sha256),'Explicit successor registry binding required');
+ const original=JSON.parse(originalRaw),current=JSON.parse(currentRaw);
+ assert.equal(original.version,1);assert.equal(current.version,1);assert.deepEqual(Object.keys(current).sort(),Object.keys(original).sort());
+ const expected={...original,candidates:{...original.candidates,[binding.manifest_sha256]:binding.pin}};
+ assert(!Object.hasOwn(original.candidates,binding.manifest_sha256),'Successor must be a new immutable manifest');
+ assert(/^[a-f0-9]{40}$/.test(binding.pin?.commit));assert(/^[a-f0-9]{64}$/.test(binding.pin?.sha256));
+ assert.equal(binding.pin.path,'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json');
+ assert.equal(binding.pin.role,'reviewed-exhaustive-native-rule-comparison');assert.equal(binding.pin.installation_approval,false);
+ assert.deepEqual(current,expected,'Entire original registry must remain exact; only one bound successor allowed');
+ return {original_entries:Object.keys(original.candidates).length,added_entries:1,manifest_sha256:binding.manifest_sha256};
+}
+export function verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles,currentRoot,registryContinuation,charge=()=>{}}){
  const required=new Set(['package.json']);
  function visit(p){if(required.has(p))return;required.add(p);safeEvidencePath(p);const raw=fs.readFileSync(path.join(authored,p));for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));}
  visit('scripts/native-ownership/validate-build-context-stage.mjs');assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...required].sort(),'Complete authored validator import closure required');
  const wrappers=new Set(['package.json','scripts/evidence-quality.mjs','scripts/native-ownership/validate-build-context-stage.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs']);
  for(const pin of stage.validator_sources){const member=codeIndex.files.find(p=>p.path===pin.path);assert(member);assert.equal(member.bytes,pin.bytes);assert.equal(member.sha256,pin.sha256);const raw=fs.readFileSync(path.join(authored,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);charge(raw.length);
-  if(!wrappers.has(pin.path)){const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
+  if(!wrappers.has(pin.path)){const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path==='scripts/native-ownership/verified-candidates.json'&&current.sha256!==pin.sha256){
+   assert(currentRoot);const extended=fs.readFileSync(path.join(currentRoot,pin.path));assert.equal(extended.length,current.bytes);assert.equal(sha(extended),current.sha256);verifyRegistryContinuation(raw,extended,registryContinuation);
+  }else if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
    assert(currentRoot,'Exact current restoration extension source required');const extended=fs.readFileSync(path.join(currentRoot,pin.path));assert.equal(sha(extended),current.sha256);
    const start=extended.indexOf(Buffer.from('// Select an exact member')),end=extended.indexOf(Buffer.from('function checkoutMetadata'),start);assert(start>=0&&end>start);
    assert.equal(sha(extended.subarray(start,end)),'6563ec0357559af17da4d14de887e9f06426a73a5e67392cc739aac4188e7e6b','Only the exact reviewed selected-member extension is allowed');
    assert.equal(sha(Buffer.concat([extended.subarray(0,start),extended.subarray(end)])),pin.sha256,'Entire original restoration module must remain byte-identical');
-  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+(current.sha256===pin.sha256?0:2525));assert.equal(current.mode,member.mode);}
+  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');if(pin.path!=='scripts/native-ownership/verified-candidates.json')assert.equal(current.bytes,pin.bytes+(current.sha256===pin.sha256?0:2525));assert.equal(current.mode,member.mode);}
  }
- return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)).length};
+ return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)&&p.path!=='scripts/native-ownership/verified-candidates.json').length,registry_continuation_requested:registryContinuation!==undefined};
 }
-export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution,retainContextForContinuation=false}){
+export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution,retainContextForContinuation=false,registryContinuation}){
  requirePlainExecution();assert.equal(stage.version,2);assert.equal(stage.issue,1295);assert.equal(stage.kind,'retained-identity-context-continuation-v2');assert.equal(stage.lane,'engineering');
  assert.deepEqual(stage.subject_ids,[...TARGETS]);assert.equal(stage.prior_stage_sha256,FIXED_PRIOR_STAGE_SHA);
  const currentAdmission=admitCurrentExecution(currentExecution,[currentExecution.source_root,currentExecution.stage_root]);
@@ -129,7 +143,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const codeParent=path.join(root,'.cache');fs.mkdirSync(codeParent,{recursive:true});assert.equal(fs.realpathSync(codeParent),codeParent);
  const codeTemporary=fs.mkdtempSync(path.join(codeParent,'context-authored-code-'));
  const authored=path.join(codeTemporary,'image');restoreWholeImage(path.join(root,codeBase),authored,{expectedIndexSha:sha(codeIndexRaw)});
- verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles:currentExecution.files,currentRoot:root});
+ verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles:currentExecution.files,currentRoot:root,registryContinuation:retainContextForContinuation?registryContinuation:undefined});
  const imageIndexRaw=read(stage.prior_image),imageIndex=JSON.parse(imageIndexRaw),imageBase=path.posix.dirname(stage.prior_image.path);
  // Complete original transport lineage remains pinned; the prior image was already restored and authenticated before stock readers.
  const parent=path.join(root,'.cache');fs.mkdirSync(parent,{recursive:true});assert.equal(fs.realpathSync(parent),parent);
