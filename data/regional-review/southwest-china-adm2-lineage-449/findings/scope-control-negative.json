@@ -1,0 +1,11 @@
+{
+  "method_id": "scope-and-source-lineage",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "duplicate scope fixture rejected",
+    "duplicate expected-subject fixture rejected",
+    "missing subject fixture rejected",
+    "foreign subject fixture rejected"
+  ]
+}
