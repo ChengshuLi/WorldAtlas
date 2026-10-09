@@ -10,11 +10,18 @@
       "git_blob": "728039a5cefbf93deffcdd7850804130ab763769"
     },
     {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs",
+      "mode": "100644",
+      "bytes": 5707,
+      "sha256": "750318fbc5c577cf2e8d257875cb02e3ce8790415a00279b857690ab3dbfeeec",
+      "git_blob": "9feb8c3a8a54a61283f299fcb9f81ee049e57603"
+    },
+    {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs",
       "mode": "100644",
-      "bytes": 11498,
-      "sha256": "f9db419a187d9a3d9bf3b0b5fd9847ddb80d53e8bf7c738ecafe40c924f8e560",
-      "git_blob": "0121e8798fdb5c0149a054440ce1c6b6c042da42"
+      "bytes": 12284,
+      "sha256": "d8b19f8d6f6b59bdc22e20361eeb00ae7f6870dfd6dfd097b188f4512ee6e13d",
+      "git_blob": "e9735b190dd59ce85e395e0290843fd75c0e5437"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-association.mjs",
@@ -26,9 +33,9 @@
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs",
       "mode": "100644",
-      "bytes": 33470,
-      "sha256": "d4565565eb56bcfa560f55e77db2145875d26a2adfff8d97df0e28739fb51871",
-      "git_blob": "651fb37c82714db8a1ca2cacbf304b76156cb23f"
+      "bytes": 35613,
+      "sha256": "c4af4bc0d3d46b3a27718f725afb47e3924505343131a592f22f96f904e744b6",
+      "git_blob": "46f406950864569832ce1d67116db682411b6b2d"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-product-inputs.mjs",
@@ -43,13 +50,6 @@
       "bytes": 2589,
       "sha256": "e5c8f0fd2c581193a6cbf22f3bfd375333fc41021d8a3e8eb8fe384465d2a5b7",
       "git_blob": "9610c50cadb5bc75c68b4b073687aeec9f822ab0"
-    },
-    {
-      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs",
-      "mode": "100644",
-      "bytes": 2465,
-      "sha256": "710f7c342f98e275f077c50fc7028271166861551757437ad3564f9d3bbcf1f9",
-      "git_blob": "73fa6ef08230944f6ba7562b1698e7512b98ae86"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/temporal-runtime-binding.mjs",
@@ -122,13 +122,6 @@
       "git_blob": "0c73282307526101812f25e3fabb5fca68d8acf0"
     },
     {
-      "path": "scripts/package-startup-ownership.mjs",
-      "mode": "100644",
-      "bytes": 4093,
-      "sha256": "a088c1296be000afdbc6ee1b8d51e12946ac1b90beb18be15a05decfec7293fc",
-      "git_blob": "0ed65ad3e1f3aaffc0bb20987021d134a3817b8f"
-    },
-    {
       "path": "scripts/prepare-geographic-release.mjs",
       "mode": "100644",
       "bytes": 47459,
@@ -178,13 +171,6 @@
       "git_blob": "b742ff4778deb48200007150c77b1f533f8bec41"
     },
     {
-      "path": "src/ownership-assets.js",
-      "mode": "100644",
-      "bytes": 4437,
-      "sha256": "7bc1938dbc3b1215a2c1a378c1bc4f85ee191a9d5c6779db91549e3d2b34dcba",
-      "git_blob": "f574fab74d46576c4ef835ec22b2e2d0fd42f5c3"
-    },
-    {
       "path": "src/ownership-codec.js",
       "mode": "100644",
       "bytes": 2948,
@@ -220,64 +206,113 @@
       "git_blob": "30b219d288d09c2f6bb866477788119476fbb989"
     }
   ],
+  "entry_critical_files": {
+    "scripts/build-static-inner.mjs": [
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs",
+        "mode": "100644",
+        "bytes": 2465,
+        "sha256": "710f7c342f98e275f077c50fc7028271166861551757437ad3564f9d3bbcf1f9",
+        "git_blob": "73fa6ef08230944f6ba7562b1698e7512b98ae86"
+      },
+      {
+        "path": "scripts/package-startup-ownership.mjs",
+        "mode": "100644",
+        "bytes": 4093,
+        "sha256": "a088c1296be000afdbc6ee1b8d51e12946ac1b90beb18be15a05decfec7293fc",
+        "git_blob": "0ed65ad3e1f3aaffc0bb20987021d134a3817b8f"
+      },
+      {
+        "path": "src/ownership-assets.js",
+        "mode": "100644",
+        "bytes": 4437,
+        "sha256": "7bc1938dbc3b1215a2c1a378c1bc4f85ee191a9d5c6779db91549e3d2b34dcba",
+        "git_blob": "f574fab74d46576c4ef835ec22b2e2d0fd42f5c3"
+      }
+    ],
+    "scripts/build-hosted-inner.mjs": [
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs",
+        "mode": "100644",
+        "bytes": 2465,
+        "sha256": "710f7c342f98e275f077c50fc7028271166861551757437ad3564f9d3bbcf1f9",
+        "git_blob": "73fa6ef08230944f6ba7562b1698e7512b98ae86"
+      },
+      {
+        "path": "scripts/package-startup-ownership.mjs",
+        "mode": "100644",
+        "bytes": 4093,
+        "sha256": "a088c1296be000afdbc6ee1b8d51e12946ac1b90beb18be15a05decfec7293fc",
+        "git_blob": "0ed65ad3e1f3aaffc0bb20987021d134a3817b8f"
+      },
+      {
+        "path": "src/ownership-assets.js",
+        "mode": "100644",
+        "bytes": 4437,
+        "sha256": "7bc1938dbc3b1215a2c1a378c1bc4f85ee191a9d5c6779db91549e3d2b34dcba",
+        "git_blob": "f574fab74d46576c4ef835ec22b2e2d0fd42f5c3"
+      }
+    ],
+    "scripts/run-integration-tests.mjs": [
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs",
+        "mode": "100644",
+        "bytes": 2069,
+        "sha256": "ca588adfa1eac6ac5ca62878b33c43c5b4d3d3fd065636661e0776cfa22bb7c8",
+        "git_blob": "f5dc9e2516e166f92d4fa53a12a24afb3eb575e9"
+      }
+    ]
+  },
   "entry_roles": {
     "scripts/build-static-inner.mjs": {
-      "current_package_metadata": [
+      "actual_current_execution_wrappers": [
         ".github/package-inputs.json",
-        "package.json"
-      ],
-      "current_package_and_application_entry": [
-        "scripts/build-static-inner.mjs",
-        "scripts/package-build.mjs"
-      ],
-      "current_loaded_legacy_validation_not_invoked_by_artifact_route": [
+        "attribute-records.mjs",
         "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs",
         "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/predecessor-context-v9.mjs",
         "coordination/engineering/eastern-two-gap-repair-native-20261007/context-record-alias.mjs",
         "coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs",
-        "scripts/audit-grid-intervals.mjs",
-        "scripts/native-ownership/compact-context-inputs.mjs",
-        "scripts/native-ownership/compile-native-ownership.mjs",
-        "scripts/native-ownership/native-candidate-manifest.mjs",
-        "scripts/native-ownership/native-preparation-guards.mjs",
-        "scripts/native-ownership/validate-context-migration.mjs",
-        "scripts/rebind-coverage-manifest.mjs",
-        "src/native-grid.js",
-        "src/native-runtime.js"
-      ],
-      "current_registered_selection_data": [
-        "scripts/native-ownership/verified-candidates.json"
-      ],
-      "current_application_and_output_wrappers": [
-        "attribute-records.mjs",
         "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
         "data/observation-registry-history/base-v1.json",
         "database.mjs",
         "derived.mjs",
         "geographic-archive.mjs",
         "hierarchy.mjs",
+        "package.json",
         "prepared-evidence.mjs",
         "reference-archive.mjs",
         "reference.mjs",
+        "scripts/audit-grid-intervals.mjs",
+        "scripts/build-static-inner.mjs",
         "scripts/canonical-restoration.mjs",
         "scripts/ci-setup-observations.mjs",
         "scripts/evidence/captured-byte-patch.mjs",
         "scripts/evidence/restore-whole-image.mjs",
         "scripts/native-ownership/chained-build-context.mjs",
+        "scripts/native-ownership/compact-context-inputs.mjs",
+        "scripts/native-ownership/compile-native-ownership.mjs",
+        "scripts/native-ownership/native-candidate-manifest.mjs",
         "scripts/native-ownership/native-only-inputs.mjs",
+        "scripts/native-ownership/native-preparation-guards.mjs",
         "scripts/native-ownership/validate-build-context-stage.mjs",
         "scripts/native-ownership/validate-context-input-stage.mjs",
+        "scripts/native-ownership/validate-context-migration.mjs",
+        "scripts/native-ownership/verified-candidates.json",
+        "scripts/package-build.mjs",
         "scripts/package-inputs.mjs",
         "scripts/package-native-latitudes.mjs",
         "scripts/package-ownership-history.mjs",
         "scripts/package-reference-bundle.mjs",
         "scripts/prepare-evidence-bundle.mjs",
+        "scripts/rebind-coverage-manifest.mjs",
         "scripts/select-build-ownership.mjs",
         "src/attributes.js",
         "src/derived-records.js",
         "src/evidence-priority.js",
         "src/hierarchy.js",
         "src/json-contract.js",
+        "src/native-grid.js",
+        "src/native-runtime.js",
         "src/observation-modules.js",
         "src/observation-registry.js",
         "src/reference-context.js",
@@ -291,44 +326,26 @@
       ]
     },
     "scripts/build-hosted-inner.mjs": {
-      "current_package_metadata": [
+      "actual_current_execution_wrappers": [
         ".github/package-inputs.json",
-        "package.json"
-      ],
-      "current_package_and_application_entry": [
-        "scripts/build-hosted-inner.mjs",
-        "scripts/build-static-inner.mjs",
-        "scripts/package-build.mjs"
-      ],
-      "current_loaded_legacy_validation_not_invoked_by_artifact_route": [
+        "attribute-records.mjs",
         "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs",
         "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/predecessor-context-v9.mjs",
         "coordination/engineering/eastern-two-gap-repair-native-20261007/context-record-alias.mjs",
         "coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs",
-        "scripts/audit-grid-intervals.mjs",
-        "scripts/native-ownership/compact-context-inputs.mjs",
-        "scripts/native-ownership/compile-native-ownership.mjs",
-        "scripts/native-ownership/native-candidate-manifest.mjs",
-        "scripts/native-ownership/native-preparation-guards.mjs",
-        "scripts/native-ownership/validate-context-migration.mjs",
-        "scripts/rebind-coverage-manifest.mjs",
-        "src/native-grid.js",
-        "src/native-runtime.js"
-      ],
-      "current_registered_selection_data": [
-        "scripts/native-ownership/verified-candidates.json"
-      ],
-      "current_application_and_output_wrappers": [
-        "attribute-records.mjs",
         "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
         "data/observation-registry-history/base-v1.json",
         "database.mjs",
         "derived.mjs",
         "geographic-archive.mjs",
         "hierarchy.mjs",
+        "package.json",
         "prepared-evidence.mjs",
         "reference-archive.mjs",
         "reference.mjs",
+        "scripts/audit-grid-intervals.mjs",
+        "scripts/build-hosted-inner.mjs",
+        "scripts/build-static-inner.mjs",
         "scripts/canonical-restoration.mjs",
         "scripts/ci-setup-observations.mjs",
         "scripts/compile-hosted-migrations.mjs",
@@ -336,20 +353,30 @@
         "scripts/evidence/captured-byte-patch.mjs",
         "scripts/evidence/restore-whole-image.mjs",
         "scripts/native-ownership/chained-build-context.mjs",
+        "scripts/native-ownership/compact-context-inputs.mjs",
+        "scripts/native-ownership/compile-native-ownership.mjs",
+        "scripts/native-ownership/native-candidate-manifest.mjs",
         "scripts/native-ownership/native-only-inputs.mjs",
+        "scripts/native-ownership/native-preparation-guards.mjs",
         "scripts/native-ownership/validate-build-context-stage.mjs",
         "scripts/native-ownership/validate-context-input-stage.mjs",
+        "scripts/native-ownership/validate-context-migration.mjs",
+        "scripts/native-ownership/verified-candidates.json",
+        "scripts/package-build.mjs",
         "scripts/package-inputs.mjs",
         "scripts/package-native-latitudes.mjs",
         "scripts/package-ownership-history.mjs",
         "scripts/package-reference-bundle.mjs",
         "scripts/prepare-evidence-bundle.mjs",
+        "scripts/rebind-coverage-manifest.mjs",
         "scripts/select-build-ownership.mjs",
         "src/attributes.js",
         "src/derived-records.js",
         "src/evidence-priority.js",
         "src/hierarchy.js",
         "src/json-contract.js",
+        "src/native-grid.js",
+        "src/native-runtime.js",
         "src/observation-modules.js",
         "src/observation-registry.js",
         "src/reference-context.js",
@@ -361,7 +388,32 @@
         "temporal.mjs",
         "topology.mjs"
       ]
+    },
+    "scripts/run-integration-tests.mjs": {
+      "actual_current_execution_wrappers": [
+        "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs",
+        "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/predecessor-context-v9.mjs",
+        "coordination/engineering/eastern-two-gap-repair-native-20261007/context-record-alias.mjs",
+        "coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs",
+        "package.json",
+        "scripts/audit-grid-intervals.mjs",
+        "scripts/canonical-restoration.mjs",
+        "scripts/ci-setup-observations.mjs",
+        "scripts/compile-hosted-migrations.mjs",
+        "scripts/evidence/captured-byte-patch.mjs",
+        "scripts/evidence/restore-whole-image.mjs",
+        "scripts/native-ownership/compact-context-inputs.mjs",
+        "scripts/native-ownership/compile-native-ownership.mjs",
+        "scripts/native-ownership/native-candidate-manifest.mjs",
+        "scripts/native-ownership/native-preparation-guards.mjs",
+        "scripts/native-ownership/validate-context-migration.mjs",
+        "scripts/native-ownership/verified-candidates.json",
+        "scripts/rebind-coverage-manifest.mjs",
+        "scripts/run-integration-tests.mjs",
+        "src/native-grid.js",
+        "src/native-runtime.js"
+      ]
     }
   },
-  "semantics": "Exact critical consumer/helper byte bindings; every other explicit role uses independently issued complete current source/stage/code/runtime/head pins. No historical scientific compatibility is inferred from wrapper changes."
+  "semantics": "Exact shared and entry-specific critical bodies; disjoint/full actual executed closure for each genuine package or model-reader entry. Other entries critical bodies are authenticated source custody, never labelled executed here."
 }
