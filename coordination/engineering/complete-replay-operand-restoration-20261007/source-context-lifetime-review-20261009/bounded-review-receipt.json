@@ -1,0 +1,39 @@
+{
+  "disposition": "ACCEPTED_BOUNDED_PROTOTYPE",
+  "proposal_sha256": "2c73a112ffb33687382c31c808b02b5969c9758d2e4b2bebe33108fd4e4de13c",
+  "original_adapter_head": "9df3ee336d60ce56b813e0ae42fe5a5315d3e10c",
+  "changed_functions": [
+    "bounded_fresh_queries",
+    "replay"
+  ],
+  "whole_current_literal_dependencies": [
+    {
+      "path": "coordination/engineering/complete-replay-operand-restoration-20261007/methods/trace.py",
+      "bytes": 8317,
+      "sha256": "fa9a30d0826a96cb53a0fb330a92ad72fa0efad720e5ae8eb3cb100b195e9aee"
+    },
+    {
+      "path": "coordination/engineering/complete-replay-operand-restoration-20261007/replay.py",
+      "bytes": 2779,
+      "sha256": "93b8a993b890884072940f07128524c9550bbaa1f8a1d1d19177aa863017c0ee"
+    },
+    {
+      "path": "coordination/engineering/complete-replay-operand-restoration-20261007/objects.py",
+      "bytes": 11669,
+      "sha256": "fbc6311af427dc70b399e34cf9eb2810b65a576445e6a66734d09f54c5df87e0"
+    },
+    {
+      "path": "coordination/engineering/complete-replay-operand-restoration-20261007/native-acquisition.py",
+      "bytes": 22753,
+      "sha256": "9abf6758705feddde1ab8349215b2202a1300d81dc3030541c806d507950feec"
+    }
+  ],
+  "controls": "independent-lazy-observer-PASS.json",
+  "complete_adapter_controls": "controls.json",
+  "dataflow": "Literal fresh_queries computes relation and levels before serializing source context. Replay stores that context and later invokes original recursive retain; numerical operators and all nine mapping operations use the original kernel. Read-through sources observes exact literal tuple without probe reads. Component aliases retain precedence and full inverse bytes are compared.",
+  "limits": [
+    "No installation or full native/cohort execution was performed.",
+    "Tiny Python allocation reduction does not establish RSS/cap qualification; real failed cohort must independently qualify under unchanged caps.",
+    "Rejected eligibility scan5546 remains a defect, not accepted evidence."
+  ]
+}

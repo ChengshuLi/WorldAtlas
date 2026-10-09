@@ -298,26 +298,6 @@ def bounded_fresh_queries(trace, kernel, require, *, context_objects=None):
     def fresh_queries(*args, **kwargs):
         binding()
         last_ref, last_value = None, None
-        source_identity, source_geometry = None, None
-        call_args, call_kwargs = list(args), dict(kwargs)
-        if context_objects is not None:
-            actual_sources = call_args[2] if len(call_args) >= 3 else call_kwargs['sources']
-            require(actual_sources is context_objects.records,
-                    'Query source reader differs from authenticated inverse reader')
-            zero_sources = {alias['source_id'] for aliases in context_objects.native.values()
-                            for alias in aliases if alias['periodic_offset'] == 0}
-            class SourceIdentity:
-                def __getitem__(self, identity):
-                    nonlocal source_identity, source_geometry
-                    record = actual_sources[identity]
-                    # Observe the exact body read by the literal query, without
-                    # probing or evicting the real one-entry NativeRecordLookup.
-                    source_identity, source_geometry = identity, record[1]
-                    return record
-            if len(call_args) >= 3:
-                call_args[2] = SourceIdentity()
-            else:
-                call_kwargs['sources'] = SourceIdentity()
 
         def mapping(geometry):
             nonlocal last_ref, last_value
@@ -335,7 +315,10 @@ def bounded_fresh_queries(trace, kernel, require, *, context_objects=None):
             # retain routine still performs complete inverse byte comparison and
             # gives component aliases their original precedence.
             if context_objects is not None:
-                eligible = source_identity in zero_sources and source_geometry is geometry
+                eligible = any(
+                    alias['periodic_offset'] == 0 and
+                    context_objects.records[alias['source_id']][1] is geometry
+                    for aliases in context_objects.native.values() for alias in aliases)
                 if eligible:
                     value = context_objects.retain(value)
                     require(type(value) is dict and set(value) == {'complete_inverse_alias'},
@@ -349,12 +332,11 @@ def bounded_fresh_queries(trace, kernel, require, *, context_objects=None):
         globals_copy['kernel'] = proxy
         literal = FunctionType(code, globals_copy, original.__name__, defaults, closure)
         try:
-            answer = literal(*call_args, **call_kwargs)
+            answer = literal(*args, **kwargs)
             binding()
             return answer
         finally:
             last_ref, last_value = None, None
-            source_identity, source_geometry = None, None
 
     binding()
     return fresh_queries

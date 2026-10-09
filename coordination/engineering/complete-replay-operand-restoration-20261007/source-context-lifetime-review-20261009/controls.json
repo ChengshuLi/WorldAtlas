@@ -1,0 +1,52 @@
+{
+  "kind": "bounded-actual-original-query-mapping-adapter-controls",
+  "actual_complete_adapter_entry_equal": true,
+  "actual_complete_adapter_product_count": 1,
+  "adapter_sha256": "2c73a112ffb33687382c31c808b02b5969c9758d2e4b2bebe33108fd4e4de13c",
+  "original_objects_products_whole_retained_encoded_and_inverse_bytes_equal": true,
+  "whole_product_count": 1,
+  "complete_seven_ordered_query_and_nine_mapping_result_bytes_equal": true,
+  "old_shift_entries": 5,
+  "new_shift_entries": 1,
+  "old_validity_entries": 6,
+  "new_validity_entries": 1,
+  "negative_controls": [
+    {
+      "name": "bool source key",
+      "error": "Bounded original replay cache binding/type differs"
+    },
+    {
+      "name": "foreign periodic frame",
+      "error": "Bounded original replay cache binding/type differs"
+    },
+    {
+      "name": "ordinary mapping instead geometry",
+      "error": "Bounded original replay cache binding/type differs"
+    },
+    {
+      "name": "invalid validity identity",
+      "error": "Bounded original replay cache binding/type differs"
+    },
+    {
+      "name": "nonboolean certificate",
+      "error": "Bounded original replay cache binding/type differs"
+    },
+    {
+      "name": "original callable mutation",
+      "error": "Bounded original replay cache binding/type differs"
+    },
+    {
+      "name": "foreign validity storage",
+      "error": "Bounded original replay cache binding/type differs"
+    },
+    {
+      "name": "foreign original source pin",
+      "error": "Source record/container/level/native-frame binding differs"
+    }
+  ],
+  "invalid_geometry_remains_invalid": true,
+  "limits": [
+    "Tiny actual original comparison/trace/kernel/replay methods only; no full native/cohort execution or RSS qualification.",
+    "Original full mapping outputs preserved; validity check/hit counters differ and are not serialized by replay."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "prototype_sha256": "2c73a112ffb33687382c31c808b02b5969c9758d2e4b2bebe33108fd4e4de13c",
+  "actual_lookup_method": "unchanged NativeRecordLookup.__getitem__/__contains__ with tiny fresh-GEOS decoder seam",
+  "actual_query_decode_order": [
+    0,
+    1,
+    2,
+    0,
+    1
+  ],
+  "no_identity_scan_decodes": true,
+  "full_seven_query_context_inverse_equal": true,
+  "early_alias_contexts": 12,
+  "nonzero_shift_fallback": true,
+  "component_alias_precedence": true,
+  "negative_controls": [
+    {
+      "name": "foreign source reader",
+      "error": "Query source reader differs from authenticated inverse reader"
+    },
+    {
+      "name": "bool source ID",
+      "error": "Foreign lazy native lookup identity"
+    },
+    {
+      "name": "mapping binding mutation",
+      "error": "Original complete mapping callable changed"
+    },
+    {
+      "name": "native inverse pin mutation",
+      "error": "Native inverse alias record binding differs"
+    }
+  ],
+  "limits": [
+    "Tiny actual adapter/lazy lookup controls only; no full cohort/RSS qualification or installation."
+  ]
+}

@@ -1,0 +1,5 @@
+# Source context lifetime correction
+
+The literal query still evaluates its full native geometry operands and original numerical methods. Its output-only source mappings can now undergo the original complete inverse retention before the remaining query contexts accumulate. Exact source identity is observed through the literal source tuple read; there is no scan of the one-entry native reader. Original component-alias precedence and full byte comparisons remain.
+
+Whole output and inverse controls, actual lazy-reader controls and independent bounded review are retained here. The first scan-based prototype is rejected and preserved. Python allocation measurements are not full-cohort RSS qualification. Original scientific methods, 000–083 completed cohorts and failed084 receipts are unchanged. Resume numerical084 under the original operating caps with new execution-code custody, reusing its already qualified source operands. No new full-cohort execution or repair integration is claimed by this commit.
