@@ -131,12 +131,6 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log",
-      "bytes": 3176,
-      "sha256": "66a50350d407bdea62e78399934fd5c5e7abbde74a5e916f852155e862ddeab1",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "coordination/engineering/setup-1543-20261009/captured-cold-1.json.gz",
       "bytes": 38932,
       "sha256": "615aad4314514cbc0414e5ccb33bd0d6e7a70672fe8f976e3a14330810c2fc0c",
@@ -366,14 +360,8 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/retained-report-index.json",
-      "bytes": 12201,
-      "sha256": "85e9f19db674f7e5eefd884249e26c3c27e25781df4d3e98e33c758bc95cd7f3",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log",
-      "bytes": 22971,
-      "sha256": "bcbead3b00c39872679f32f273f9a9487201030adc1ae2f5c98f1aea503f1570",
+      "bytes": 12956,
+      "sha256": "9a00226048205bef0fbb8318876e472798cc1d196e08a6d121bd99b412939160",
       "hash_kind": "file-bytes"
     },
     {
@@ -477,6 +465,18 @@
       "bytes": 919,
       "sha256": "bceb6284f560e6204fb94b691bc10626c5edbe362ad5d362efbc5e9725f49d0a",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
+      "bytes": 1279,
+      "sha256": "0dccf590c1d1cd06ee84943caa841e9629360d1e3f1fb6f1f8c23ceea48cbd87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
+      "bytes": 1918,
+      "sha256": "7f3413aab3f2cf3d77fa2feb6e9fcb79c09567736bfebd1753975e5ab2539631",
+      "hash_kind": "file-bytes"
     }
   ],
   "change_receipts": [
@@ -491,10 +491,6 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log",
       "status": "added"
     },
     {
@@ -654,10 +650,6 @@
       "status": "added"
     },
     {
-      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log",
-      "status": "added"
-    },
-    {
       "path": "scripts/build-static-inner.mjs",
       "status": "modified",
       "original_sha256": "8d0d4176ff2dd432e478e063b6437886c972d7b20bbd173a59ff152fe591470a"
@@ -730,6 +722,14 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
       "status": "added"
     }
   ],

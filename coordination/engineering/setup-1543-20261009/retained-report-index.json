@@ -256,6 +256,22 @@
       "retained_path": "original-output-warm-12.json.initial.json.gz",
       "retained_bytes": 67588,
       "retained_sha256": "08e3e661b2c4b06cd14c802216ad477cdfb3fbeb898dc3cb279f4839957c8c19"
+    },
+    {
+      "original_path": "actual-adjudication-controls-final.log",
+      "original_bytes": 3176,
+      "original_sha256": "66a50350d407bdea62e78399934fd5c5e7abbde74a5e916f852155e862ddeab1",
+      "retained_path": "actual-adjudication-controls-final.log.gz",
+      "retained_bytes": 1279,
+      "retained_sha256": "0dccf590c1d1cd06ee84943caa841e9629360d1e3f1fb6f1f8c23ceea48cbd87"
+    },
+    {
+      "original_path": "whole-image-controls.log",
+      "original_bytes": 22971,
+      "original_sha256": "bcbead3b00c39872679f32f273f9a9487201030adc1ae2f5c98f1aea503f1570",
+      "retained_path": "whole-image-controls.log.gz",
+      "retained_bytes": 1918,
+      "retained_sha256": "7f3413aab3f2cf3d77fa2feb6e9fcb79c09567736bfebd1753975e5ab2539631"
     }
   ],
   "preservation": "Each decompressed body is byte-identical to the original local report. Compression changes neither measurement nor recorded identity."
