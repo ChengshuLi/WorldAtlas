@@ -1,6 +1,6 @@
 # Melanesia operational gap batch — issue #1626
 
-This is one 363-candidate assignment: batch `gap-operational-batch:37ed51b2c2eac38570c40a87`, covering Fiji, Indonesia, Papua New Guinea, Solomon Islands, and Vanuatu. There are no per-country subbatches or new subissues. Candidate feature capture is complete; source-fit processing is active.
+This is one 363-candidate assignment: batch `gap-operational-batch:37ed51b2c2eac38570c40a87`, covering Fiji, Indonesia, Papua New Guinea, Solomon Islands, and Vanuatu. There are no per-country subbatches or new subissues. Candidate capture and source-fit triage are complete; native evaluation, remainder resolution and repair delivery remain open.
 
 ## Completed checkpoint
 
@@ -21,6 +21,8 @@ Among the 126 previously mapped-land cases, retained source comparisons show 26 
 `vintages/targeted-source-match-029-001/` checked the 29 missing comparisons against the five retained Melanesia geoBoundaries products. Its zero hits were a geographic-scope result: the 29 candidates are around New Caledonia, outside those five products. They were then checked against the retained New Caledonia GeoReP-2024 province geometries, which produced 19 unique positive-area source-to-location matches and 10 candidates with no positive-area match. The GeoReP source is generalized (maximum allowable offset 0.00005 degrees; geometry precision 6), not the full-resolution administrative database.
 
 `vintages/native-payloads-110-001/` binds 110 candidates to 33 unique current stable locations: the 91 retained geoBoundaries cases and the 19 New Caledonia matches. It carries only the positive-area source-supported intersection fragments; the 65 partial geoBoundaries remainders and any other unsupported candidate remainder are excluded. The other 253 IDs are counted by held-out reason in the payload (10 NCL no match, one multi-subject ambiguity, five without a positive-area source subject, 58 outside the prior comparison cohort and not land-supported, and 179 routing-only without land support).
+
+`vintages/batch-outcomes-363-001/` lists every assigned component ID, exact candidate feature/geometry hash and full candidate feature. It joins the source comparison and targeted NCL results to the 110 prepared payloads and the 253 specific held outcomes. The 26 complete and 65 partial source cases remain distinct; the NCL source match preserves per-candidate source coverage fractions rather than treating every hit as a full-component repair.
 
 These are additive geometry/target payloads, not accepted edits. Current native-grid unowned-cell verification and complete conservation of every pre-existing native assignment remain required before acceptance. No assignment has been changed.
 
