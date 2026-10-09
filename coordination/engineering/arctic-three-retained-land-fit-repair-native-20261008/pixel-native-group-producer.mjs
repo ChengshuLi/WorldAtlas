@@ -45,6 +45,9 @@ export function producePixelNativeGroup(plan,outputValue) {
  const execution=Buffer.from(JSON.stringify({kind:plan.kind,source_head:plan.source_head,started_at:started,completed_at:new Date().toISOString(),
   phase_bytes:admission.bytes,descriptors:admission.descriptors,scientific_outputs:bodies.map(b=>({path:b.name,bytes:b.raw.length,sha256:sha(b.raw)})),metadata_sha256:sha(metadata),grid_rows_computed:0,activated:false})+'\n');
  assert(outputBytes+execution.length<=plan.output_reserve);
+ const remaining=Number(process.env.WORLDATLAS_NATIVE_ACCOUNTING_OUTPUT_REMAINING);
+ assert(Number.isSafeInteger(remaining)&&remaining>=0&&outputBytes+execution.length+131072<=remaining,
+  'Complete retained output allowance must cover this writer before writes');
  fs.mkdirSync(output,{recursive:true});for(const body of bodies)fs.writeFileSync(path.join(output,body.name),body.raw,{flag:'wx',mode:0o644});fs.writeFileSync(path.join(output,'group-index.json'),metadata,{flag:'wx',mode:0o644});
  fs.writeFileSync(path.join(output,'execution.json'),execution,{flag:'wx',mode:0o644});return JSON.parse(execution);
 }
