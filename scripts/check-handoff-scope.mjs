@@ -19,7 +19,7 @@ export function validateEngineeringOwnedPaths(ownedPaths){
  for(const owned of ownedPaths){
   if(typeof owned!=='string'||!owned||owned.length>512)throw Error('Engineering owned_paths must be literal safe repository paths');
   const prefix=owned.endsWith('/'),parts=(prefix?owned.slice(0,-1):owned).split('/');
-  if(parts.some(part=>! /^[a-zA-Z0-9_-][a-zA-Z0-9_.-]*$/.test(part)||part==='.'||part==='..')||
+  if(parts.some(part=>! /^[a-zA-Z0-9_.-]+$/.test(part)||part==='.'||part==='..')||
    prefix&&parts.length<2||['coordination/engineering','coordination/engineering/'].includes(owned)||
    ['research/campaigns','research/geography','data/regional-review'].some(root=>owned===root||owned.startsWith(root+'/')))
    throw Error('Engineering owned_paths cannot grant unsafe paths, namespace roots or research/geography evidence');
