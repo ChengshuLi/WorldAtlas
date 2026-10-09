@@ -173,7 +173,7 @@ def run(run_id: str, fixture: Path | None = None) -> dict:
         return original_read_bytes(self, *args, **kwargs)
 
     def redirected_read_text(self, *args, **kwargs):
-        if fixture is not None and Path(self).resolve() == ledger_path.resolve():
+        if Path(self).resolve() == ledger_path.resolve():
             return source_raw.decode("utf-8")
         return original_read_text(self, *args, **kwargs)
 

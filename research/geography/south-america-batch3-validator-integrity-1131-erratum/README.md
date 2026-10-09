@@ -36,13 +36,14 @@ Failed runs remain without a success receipt.
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/south-america-batch3-validator-integrity-1131-erratum/controls.py
+PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/south-america-batch3-validator-integrity-1131-erratum/ledger_binding_control.py
 PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/south-america-batch3-validator-integrity-1131-erratum/partial_write_control.py
 PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/south-america-batch3-validator-integrity-1131-erratum/pair_failure_controls.py
 PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/south-america-batch3-validator-integrity-1131-erratum/compare_runs.py --pair-id <fresh-lowercase-slug>
 node scripts/evidence-quality.mjs research/geography/south-america-batch3-validator-integrity-1131-erratum/evidence-quality.json .
 ```
 
-The `verified-pair-07` run starts two separate Python processes against the same
+The `verified-pair-08` run starts two separate Python processes against the same
 unchanged source and ledger. Each run has a unique execution ID, UTC timestamp,
 code SHA-256, complete source-ledger SHA-256, Python/Shapely/GEOS versions, seven
 product hashes and an exclusive publication receipt. All seven products matched byte-for-byte. Only
@@ -52,7 +53,7 @@ six regenerated products. The original generated one-run reproducibility file
 is retained inside each raw run directory for audit, but is not the pair's
 passed receipt.
 The earlier complete `verified-pair-03` reproduction is retained as a prior
-paired run; `verified-pair-07` also records the GEOS runtime explicitly.
+paired run; `verified-pair-08` also records the GEOS runtime explicitly.
 
 `pointer-destination-controls.json` records actual CLI rejection for duplicate
 records at the first, middle and last positions; missing and foreign IDs; wrong
@@ -62,7 +63,7 @@ directories. The retained exact duplicate-last fixture is 7,992 bytes with
 SHA-256 `e7c9001573ce8657a3fac4c1e52d993f9aca48d66af5a5e3ca1b1dde10278c01`.
 The partial-write control injects a failure in the actual exclusive publisher
 after the first product: the partial file remains, and no success receipt is
-published. The full entry point also retains the original false-parent control
+published. `ledger_binding_control.py` runs the normal six-row path while making any second filesystem read of the pointer ledger raise; the actual entry point completes and records the same validated ledger SHA-256. The full entry point also retains the original false-parent control
 (old checker accepts; current validator rejects) and all nine existing
 meaningful negative controls. `pair-failure-controls.json` additionally drives
 the actual pair orchestration through a failed second-process result and a
