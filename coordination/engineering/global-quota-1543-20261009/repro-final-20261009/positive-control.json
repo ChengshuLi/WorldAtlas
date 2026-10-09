@@ -1,0 +1,11 @@
+{
+  "method_id": "demand-aggregation",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "checks": [
+    "complete retained inventories reproduce reported totals"
+  ],
+  "limits": [
+    "Historical log extraction remains a separate provenance step. Inferred floors are not actual request telemetry; missing traffic remains unknown."
+  ]
+}

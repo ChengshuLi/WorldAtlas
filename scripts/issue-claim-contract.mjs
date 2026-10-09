@@ -1,5 +1,6 @@
 import {quotaDelay,completeReads} from './github-quota.mjs';
 import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
+import {conditionalSnapshots} from './github-snapshots.mjs';
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
@@ -132,24 +133,80 @@ export async function linkedPulls(api,repo,number){
  for(const event of timeline){const source=event.source?.issue;if(!source?.pull_request)continue;try{if(validateIssuePRBody(source.body??'').github_issue===number)ids.add(source.number);}catch{}}
  return completeReads([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
-export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining} = {}){
+export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining,
+ conditionalReads = true, snapshotBytes = 64 * 1024 * 1024, snapshotEntries = 128,
+ minimumRemaining = process.env.GITHUB_ACTIONS==='true'&&[process.env.GH_TOKEN,process.env.GITHUB_TOKEN].includes(token)?16:0} = {}){
  if(!token)throw Error('Read/write GitHub token required');
+ if(!Number.isSafeInteger(minimumRemaining)||minimumRemaining<0)throw Error('Invalid core recovery floor');
  if(deadlineRemaining!==undefined&&typeof deadlineRemaining!=='function')throw Error('Invalid job deadline');
  const remaining=()=>{const value=deadlineRemaining?deadlineRemaining():Infinity;if(deadlineRemaining&&!Number.isFinite(value))throw Error('Invalid job deadline');return value;};
  const admit=()=>{if(remaining()<=HTTP_ATTEMPT_MS)throw Object.assign(Error('Job deadline cannot admit another bounded HTTP attempt'),{jobDeadline:true});};
  const apiStarted=now();let httpAdmission=null;
- const request = async(route,method='GET',body,observeCapacity=()=>{},capacityProbe=false)=>{
+ const snapshots=conditionalSnapshots({maxBytes:snapshotBytes,maxEntries:snapshotEntries});
+ let capacityState,initialRequest,recoveryAttempts=0;
+ const refuse=(floor=minimumRemaining)=>Object.assign(Error('GitHub request deferred to preserve core recovery capacity'),{
+  quotaAdmission:{...capacityState,minimum_remaining:floor}});
+ const performRequest = async(route,method='GET',body,observeCapacity=()=>{},capacityProbe=false,artifactRedirect=false,recovery=false)=>{
   admit();
+  const floor=recovery?0:minimumRemaining;
+  if(minimumRemaining>0){
+   if(capacityState?.remaining<=floor){
+    if(now()<capacityState.reset*1000)throw refuse(floor);
+    // Reset time alone never grants capacity. Probe the actual repository first.
+    const repository=/^\/repos\/([\w.-]+\/[\w.-]+)(?:\/|\?|$)/.exec(route)?.[1];
+    if(!repository)throw refuse(floor);
+    if(!capacityProbe){
+     await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery);
+     if(capacityState.remaining<=floor)throw refuse(floor);
+    }
+   }else if(!capacityState&&method!=='GET'&&!capacityProbe){
+    const repository=/^\/repos\/([\w.-]+\/[\w.-]+)(?:\/|\?|$)/.exec(route)?.[1];
+    if(!repository)throw Error('Cannot authenticate write capacity outside a repository');
+    await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery);
+    if(capacityState.remaining<=floor)throw refuse(floor);
+   }
+  }
   httpAdmission?.({route,method,capacityProbe});
   admit();
+  const usesRecovery=recovery&&minimumRemaining>0&&capacityState?.remaining<=minimumRemaining;
+  if(usesRecovery&&recoveryAttempts>=4)throw Object.assign(Error('Bounded recovery allocation exhausted; preserve pending cleanup'),{recoveryBudget:true});
+  // Immutable blobs already have independently bounded custody/transport caches.
+  const conditional=!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&!capacityProbe&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
+  const snapshot=conditional?snapshots.get(route):undefined;
+  // Charge the possible paid attempt conservatively. A genuine 304 refunds it;
+  // stale/higher response counters cannot repeatedly mint new request capacity.
+  if(minimumRemaining>0&&capacityState)capacityState={...capacityState,remaining:Math.max(0,capacityState.remaining-1)};
   let response;
-  try {response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS)});}
+  if(usesRecovery)recoveryAttempts++;
+  try {response=await fetchImpl('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(snapshot?{'If-None-Match':snapshot.etag}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS),redirect:artifactRedirect?'manual':'error'});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
   const headerNumber = name => {const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
   const capacity={limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')};
   onRequest({route,method,status:response.status,capacity});
   observeCapacity(capacity);
+  if(minimumRemaining>0){
+   const valid=capacity.resource==='core'&&['limit','remaining','reset'].every(key=>Number.isSafeInteger(capacity[key]))&&
+    capacity.limit>0&&capacity.remaining>=0&&capacity.remaining<=capacity.limit&&capacity.reset>0;
+   if(valid){
+    const predicted=capacityState&&response.status===304?{...capacityState,remaining:Math.min(capacityState.limit,capacityState.remaining+1)}:capacityState;
+    capacityState=!predicted||now()>=predicted.reset*1000?capacity:{...predicted,
+     remaining:Math.min(predicted.remaining,capacity.remaining)};
+   }else if(response.ok||artifactRedirect&&response.status===302){
+    await response.body?.cancel();throw Error('Missing actual core capacity headers; no further work admitted');
+   }
+  }
+  if(artifactRedirect&&response.status===302){
+   if(remaining()<=0){await response.body?.cancel();throw Object.assign(Error('Job deadline exhausted during artifact redirect'),{jobDeadline:true});}
+   await response.body?.cancel();
+   return response;
+  }
+  if(response.status===304){
+   if(!conditional||!snapshot)throw Error('Unrequested conditional GitHub response');
+   if(remaining()<=0)throw Object.assign(Error('Job deadline exhausted during conditional revalidation'),{jobDeadline:true});
+   return snapshots.revalidated(snapshot,response.headers.get('etag'));
+  }
   if(!response.ok){
+   snapshots.invalidate(route);
    const error=Error(`GitHub ${method} ${route} failed (HTTP ${response.status})`);
    let payload;try{payload=await response.json();}catch{/* Keep the actual HTTP rejection even without a JSON message. */}
    const numeric=name=>{const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?value:undefined;};
@@ -165,6 +222,7 @@ export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Da
   const finish=payload=>{if(remaining()<=0)throw Object.assign(Error('Job deadline exhausted while consuming HTTP response'),{jobDeadline:true});return payload;};
   if(response.status===204)return finish(null);
   const payload=await response.json();
+  if(conditional)snapshots.retain(route,response.headers.get('etag'),payload);
   if(route==='/rate_limit'){
    const numeric=name=>{const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
    const capacity_headers={limit:numeric('x-ratelimit-limit'),remaining:numeric('x-ratelimit-remaining'),reset:numeric('x-ratelimit-reset')};
@@ -173,6 +231,20 @@ export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Da
    return finish({...payload,capacity_headers});
   }
   return finish(payload);
+ };
+ // Establish capacity through the first already-required request. Once known,
+ // independent reads run concurrently: no fixed sleeps or routine FIFO gate.
+ // Concurrent attempts reserve their possible charge synchronously above; 304
+ // refunds exactly its own reservation, never another in-flight read's charge.
+ const request=async(...args)=>{
+  if(minimumRemaining>0&&!capacityState){
+   if(initialRequest)await initialRequest;
+   else {
+    const pending=performRequest(...args);initialRequest=pending;
+    try{return await pending;}finally{if(initialRequest===pending)initialRequest=undefined;}
+   }
+  }
+  return performRequest(...args);
  };
  const api = async(route, method='GET', body) => {
   let lastQuota;
@@ -191,6 +263,23 @@ export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Da
     await sleep(delay);
    }
   }
+ };
+ // Only a fixed artifact API route can expose redirect headers. Delivery is
+ // handled separately without credentials; no signed URL enters accounting.
+ api.artifactRedirect=route=>{
+  if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/artifacts\/[1-9]\d*\/zip$/.test(route??''))throw Error('Invalid artifact redirect route');
+  return request(route,'GET',undefined,()=>{},false,true);
+ };
+ // The protected floor is usable only for bounded owned-candidate cleanup
+ // and durable merge-result notification, not additional implementation reads.
+ // Callers must prove exact ref ownership/SHA before deleting (cleanupCandidate).
+ api.recovery=(route,method='GET',body)=>{
+  const candidate=/^\/repos\/[\w.-]+\/[\w.-]+\/git\/(ref|refs)\/heads\/worldatlas-integration\/pr-[1-9]\d*-[-a-zA-Z0-9]{16,160}$/.exec(route??'');
+  const notification=/^\/repos\/[\w.-]+\/[\w.-]+\/issues\/[1-9]\d*\/comments$/.test(route??'')&&method==='POST'&&
+   typeof body?.body==='string'&&body.body.startsWith('**Merge result:**')&&body.body.includes('<!-- worldatlas-merge-result:v1');
+  if(!(candidate&&body===undefined&&((candidate[1]==='ref'&&method==='GET')||(candidate[1]==='refs'&&method==='DELETE'))||notification))
+   throw Error('Request is outside bounded merge recovery');
+  return request(route,method,body,()=>{},false,false,true);
  };
  api.setHTTPAdmission=handler=>{
   if(handler!==null&&typeof handler!=='function')throw Error('Invalid HTTP admission hook');

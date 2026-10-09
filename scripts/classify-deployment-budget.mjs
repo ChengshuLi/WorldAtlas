@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {githubAPI} from './issue-claim-contract.mjs';
 import {quotaDelay,requestAccounting} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -75,31 +76,16 @@ export async function deploymentBudgetProfile({event, eventName, repository, api
   }
 }
 
-export async function githubBudgetAPI(route, {token = process.env.GH_TOKEN, fetchImpl = fetch, onRequest=()=>{}} = {}) {
-  if (!token) throw Error('Read-only GitHub token unavailable');
-  let response;try{response = await fetchImpl(`https://api.github.com${route}`, {
-    headers: {Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'},
-    signal: AbortSignal.timeout(15000),
-  });}catch(error){onRequest({route,method:'GET',status:'transport-error'});throw error;}
-  const numeric=name=>{const value=response.headers?.get(name);return /^\d{1,13}$/.test(value??'')?value:undefined;};
-  onRequest({route,method:'GET',status:response.status,capacity:{resource:response.headers?.get('x-ratelimit-resource'),
-    limit:Number(numeric('x-ratelimit-limit')),remaining:Number(numeric('x-ratelimit-remaining')),reset:Number(numeric('x-ratelimit-reset'))}});
-  if (!response.ok) {
-    const error=Error(`GitHub inventory HTTP ${response.status}`);
-    const requestId=response.headers?.get('x-github-request-id');
-    error.github={http_status:response.status,...(/^[a-fA-F0-9:]{1,100}$/.test(requestId??'')?{request_id:requestId}:{}),...Object.fromEntries([
-      ['rate_remaining',numeric('x-ratelimit-remaining')],['rate_reset',numeric('x-ratelimit-reset')],
-      ['retry_after',numeric('retry-after')]].filter(([,value])=>value!==undefined))};
-    throw error;
-  }
-  return response.json();
+export async function githubBudgetAPI(route, {token = process.env.GH_TOKEN, fetchImpl = fetch, onRequest = () => {}} = {}) {
+  return githubAPI(token, {fetchImpl, onRequest})(route);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   let result;const accounting=requestAccounting('deployment-classifier');
+  const api = process.env.GH_TOKEN ? githubAPI(process.env.GH_TOKEN, {onRequest: accounting.observe}) : undefined;
   try {
     result = await deploymentBudgetProfile({event: JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')),
-      eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: route=>githubBudgetAPI(route,{onRequest:accounting.observe})});
+      eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: api ?? (() => {throw Error('Read-only GitHub token unavailable');})});
   } catch { result = {version: 2, full: true, reason: 'Classifier inputs unavailable', paths: [], fallback: true}; }
   fs.mkdirSync('.cache', {recursive: true});
   fs.writeFileSync('.cache/deployment-budget-scope.json', JSON.stringify(result, null, 2) + '\n');

@@ -1,7 +1,8 @@
 import {githubPages} from './issue-claim-contract.mjs';
 
 export const PROOF_PATHS = ['.github/workflows/merge-integration-checks.yml',
-  'scripts/run-integration-tests.mjs', 'scripts/integration-profile.mjs', 'scripts/check-integration-profile.mjs'];
+  'scripts/run-integration-tests.mjs', 'scripts/integration-profile.mjs', 'scripts/check-integration-profile.mjs',
+  'scripts/check-pr-gates.mjs'];
 export const WORKFLOW_PATH = PROOF_PATHS[0];
 const prefix = repo => `/repos/${repo}`;
 

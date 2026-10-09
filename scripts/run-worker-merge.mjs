@@ -73,7 +73,7 @@ console.log(JSON.stringify(result));
 transport.close();
 // Preserve the decision before attempting its remote notification. A comment
 // permission/network failure must not discard the original result or reason.
-try { await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)}); }
+try { await (api.recovery ?? api)(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)}); }
 catch (error) {
   result.notification_error = error.message;
   if (error.github) result.notification_api_error = error.github;

@@ -1,0 +1,62 @@
+{
+  "period": {
+    "from": "2026-10-08T02:05:00+00:00",
+    "through": "2026-10-09T02:05:00+00:00",
+    "selection": "workflow created-at; not request billing timestamps"
+  },
+  "complete_run_inventory": 1243,
+  "measurement_coverage": {
+    "merge_and_scheduler_logs": 210,
+    "evidence_workflow_logs": 337,
+    "claim_workflow_logs": 189
+  },
+  "ranked_findings": [
+    {
+      "activity": "Premerge evidence file downloads",
+      "requests": 21454,
+      "basis": "Code-derived lower bound from 171 authenticated successful receipts; excludes failed scans, metadata and comparison originals.",
+      "existing_repair": "PR1556 adds exact-OID Git batching; older pinned PR bases still run old client."
+    },
+    {
+      "activity": "Merge preparation and finalization",
+      "requests": 13987,
+      "basis": "Actual completed HTTP accounting across all 91 attempts.",
+      "breakdown": {
+        "immutable_metadata": 4532,
+        "mutable_authority_and_other": 9455
+      }
+    },
+    {
+      "activity": "Registration and scheduling",
+      "requests": 1873,
+      "basis": "Actual HTTP accounting in 118/119 runs; one missing count unknown."
+    },
+    {
+      "activity": "Claim operations",
+      "requests": 1515,
+      "basis": "Code-derived lower bound for 158 accepted transitions; 31 refusals and dynamic dependencies/PRs/pages excluded."
+    }
+  ],
+  "unmeasured_or_inferred": [
+    "Historical PR profile/classifier/linked-issue reads have no complete request receipts.",
+    "GitHub action-internal requests and local-worker direct CLI/API reads lack historical endpoint telemetry.",
+    "Provider/publication workflows had no executions in this 24-hour window; callable routes still require coverage.",
+    "Runs cross hour boundaries; created-at hour sums do not prove exact hourly rate billing.",
+    "Runtime and repository transfer costs are distinct from REST quota."
+  ],
+  "required_global_resolution": [
+    "Measure current trusted execution and both local/workflow credential scopes separately.",
+    "Retain batching for the largest old file-read class and verify adoption on fresh trusted baselines.",
+    "Reduce repeated merge metadata and authority costs without skipping fresh checks; test conditional HTTP requests rather than reusing mutable authority blindly.",
+    "Apply safe capacity admission to every controlled API consumer, including burst/race, fallback, retry and deadline behavior.",
+    "Preserve mutation reconciliation, ownership, exact-head review and focused research CI.",
+    "Validate mixed representative and peak workload, not just one successful checker."
+  ],
+  "partial_merge_verified": {
+    "PR": 1556,
+    "commit": "29912bc929969bab8553c4f6c2f227ac7e61f657",
+    "reviewed_changed_files_match": 28,
+    "owned_checkout_released": true
+  },
+  "global_quota_prevention_complete": false
+}

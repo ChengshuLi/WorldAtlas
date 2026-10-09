@@ -7,7 +7,7 @@ import {spawnSync, execFileSync} from 'node:child_process';
 import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
-const workflows = ['issue-claims.yml', 'worker-merge.yml', 'handoff-scope.yml', 'queue-readiness-audit.yml', 'merge-scheduler.yml'];
+const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-checks.yml', 'queue-readiness-audit.yml', 'merge-scheduler.yml'];
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
@@ -22,7 +22,7 @@ function probe(directories) {
       fs.cpSync(source, destination, {recursive: true});
     }
     return spawnSync(process.execPath, ['--input-type=module', '-e',
-      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs');"],
+      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs'); await import('./scripts/check-pr-gates.mjs');"],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 }
