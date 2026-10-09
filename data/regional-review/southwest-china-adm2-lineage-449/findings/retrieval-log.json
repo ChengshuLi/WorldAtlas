@@ -3,7 +3,7 @@
   "retrieval_date": "2026-10-09",
   "timezone": "UTC",
   "scope": "Original current administrative rosters and legally authoritative polygon evidence for the issue's exact 228 Chongqing, Guizhou and Sichuan county-level subjects; current boundary-source custodians and public-map suitability leads",
-  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established. A Guangyuan Municipal Civil Affairs Bureau listing and HTTP 302 now identify the exact Sichuan provincial year-end roster URL; following its HTTP Location timed out, and a separate HTTPS retry of the provincial path also timed out, so no table bytes or row comparison were obtained.",
+  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established. A Guangyuan Municipal Civil Affairs Bureau listing and HTTP 302 now identify the exact Sichuan provincial year-end roster URL; following its HTTP Location timed out, and a separate HTTPS retry of the provincial path also timed out, so no table bytes or row comparison were obtained. An official 2025 Sichuan place-name mapping standard was located through the official search index; it identifies the approved standard-map, boundary-adjustment and demarcation materials needed for review, but the original PDF was not retrieved and it supplies no row-level geometry.",
   "direct_access_retry": {
     "attempted_at": "2026-10-09 UTC",
     "method": "curl via direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
@@ -343,6 +343,21 @@
       "terms": "Announcement says public downloads are offered; each original map and approval/attribution terms still need inspection.",
       "restoration": "Retrieve the ten map originals and metadata only if useful as provincial context; seek more detailed current approved county boundary evidence for subject-level geometry review.",
       "limit": "The stated small-scale thematic package is not suitable evidence for county polygon completeness, small detached pieces, islands or shared-edge topology."
+    },
+    {
+      "source_id": "sc-boundary-depiction-and-demarcation-standard-2025",
+      "publisher": "Sichuan Provincial Civil Affairs Department",
+      "title": "四川省民政厅关于印发《四川省地名方案编制规范（试行）》的通知",
+      "document_number": "川民发〔2025〕5号",
+      "url": "https://mzt.sc.gov.cn/scmzt/qitawenjian2023/2025/2/6/a1cc4a2f741b4fb3a32c87fad2a69c26/files/%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E5%9B%9B%E5%B7%9D%E7%9C%81%E5%9C%B0%E5%90%8D%E6%96%B9%E6%A1%88%E7%BC%96%E5%88%B6%E8%A7%84%E8%8C%83%EF%BC%88%E8%AF%95%E8%A1%8C%EF%BC%89%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+      "observed_at": "2026-10-09 UTC",
+      "source_vintage": "Official standard notice/file dated 2025-02-06; trial standard",
+      "access": "Official search index exposed the clause requiring administrative boundary depictions in place-name plans to follow the latest approved standard depiction map, check against latest approved boundary-adjustment documents and latest demarcation results, and obtain Civil Affairs review of administrative-division information. The original PDF was not retrieved or hashed.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "terms": "No reuse or redistribution terms were inspected; this standard is cited as a process/source locator only.",
+      "restoration": "Retrieve the exact official PDF URL and hash the original bytes; verify the document status and complete clause. Request the applicable approved standard map, boundary-adjustment approvals and latest demarcation results from the authorized Sichuan Civil Affairs and surveying/mapping custodians, retaining provenance and reuse terms.",
+      "limit": "The standard describes evidence to use for mapping plans but contains no scoped subject geometry. It does not establish access rights, current polygon completeness, or correctness for any of the 113 Sichuan subjects."
     }
   ],
   "archive_retry": {

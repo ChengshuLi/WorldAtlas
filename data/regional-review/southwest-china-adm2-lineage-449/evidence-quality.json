@@ -751,6 +751,22 @@
       "restoration": "Follow the recorded HTTP 302 to https://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/1/28/fccc0ed4b8fe4655a3b946c6d8e9e1ed.shtml; retrieve the actual notice/table bytes and inspect terms before any row extraction.",
       "limit": "The municipal page and redirect verify a source route only. Provincial source bytes, all 113 scoped row identities and any geographic boundary claims remain unverified.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "sc-boundary-depiction-and-demarcation-standard-2025",
+      "url": "https://mzt.sc.gov.cn/scmzt/qitawenjian2023/2025/2/6/a1cc4a2f741b4fb3a32c87fad2a69c26/files/%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E5%9B%9B%E5%B7%9D%E7%9C%81%E5%9C%B0%E5%90%8D%E6%96%B9%E6%A1%88%E7%BC%96%E5%88%B6%E8%A7%84%E8%8C%83%EF%BC%88%E8%AF%95%E8%A1%8C%EF%BC%89%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+      "role": "Verification-standard locator specifying latest approved standard maps, approved adjustments and current demarcation results for boundary depictions; Civil Affairs reviews administrative-division information.",
+      "vintage": "Official notice/file dated 2025-02-06; trial standard.",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Original PDF and reuse terms were not retrieved; locator text is not redistributed as source evidence."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve and hash the exact official PDF; verify current validity and its complete clause. Then obtain the referenced latest approved boundary map, adjustment approvals and demarcation result from authorized custodians with provenance and reuse terms.",
+      "limit": "Official search-index text only; original PDF and legal status were not verified. This process standard supplies no geometry or row-level facts for the 113 Sichuan subjects.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
@@ -780,14 +796,14 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/retrieval-log.json",
-      "bytes": 30485,
-      "sha256": "b858b9153feacda6bfb8c8c9b69b7dc97daea1786a52d1662e6b3118118493c5",
+      "bytes": 32715,
+      "sha256": "28167a6a03269c05f5a9cf2fa49298b62835e4c6924d233b7cbb555a76704ac0",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
-      "bytes": 12250,
-      "sha256": "d3f9a7a16bcfd12c4a2d4499ae020bae0faa0545b1febfebabc997cdbfb6736b",
+      "bytes": 12805,
+      "sha256": "3c46449efdd86d043dfab988a1bb081ea4a87f8a9ae0b6282cdf0b794d01ef6b",
       "hash_kind": "file-bytes"
     },
     {
