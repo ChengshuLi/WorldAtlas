@@ -119,9 +119,12 @@ def inspect(repo, baseline, candidate):
                    for version in [baseline, candidate])
     if selected:
         import sys
+        env = dict(os.environ)
+        for name in ['NODE_OPTIONS', 'NODE_PATH']:
+            env.pop(name, None)
         native_raw = subprocess.check_output([
             os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
-            str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE)
+            str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
         if len(native_raw) > MAX_BYTES:
             raise ValueError('Selected native report exceeds bounded output')
         native = json.loads(native_raw)

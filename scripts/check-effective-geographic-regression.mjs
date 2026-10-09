@@ -7,7 +7,7 @@ import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 
-const FILE=32*1024*1024, PHASE=256*1024*1024;
+const FILE=32*1024*1024, PHASE=256*1024*1024, OUTPUT=4*1024*1024;
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const demand=(v,m)=>{if(!v)throw Error(m);};
 const hash=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
@@ -27,14 +27,14 @@ const NS='coordination/engineering/eastern-two-gap-repair-native-20261007/canoni
 const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
 
 export class ImmutableReader {
-  constructor(repo,version,{runtimeBytes=fs.statSync(process.execPath).size,metadataBytes=8*1024*1024,budget}={}) {
+  constructor(repo,version,{runtimeBytes=fs.statSync(process.execPath).size,metadataBytes=8*1024*1024,executionBytes=0,outputBytes=OUTPUT,gitExecutable='git',budget}={}) {
     demand(commit(version),'Require immutable input commit');
     this.repo=repo;this.version=version;this.runtimeBytes=runtimeBytes;this.metadataBytes=metadataBytes;
-    this.inventory=new Map();this.budget=budget??{};if(!budget)this.phase();
+    this.executionBytes=executionBytes;this.outputBytes=outputBytes;this.gitExecutable=gitExecutable;this.inventory=new Map();this.budget=budget??{};if(!budget)this.phase();
   }
   get used(){return this.budget.used;} set used(value){this.budget.used=value;}
   get charged(){return this.budget.charged;} set charged(value){this.budget.charged=value;}
-  git(...args){return execFileSync('git',['-c','core.hooksPath=/dev/null','-C',this.repo,...args],{maxBuffer:FILE+1,stdio:['ignore','pipe','pipe']});}
+  git(...args){return execFileSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],{maxBuffer:FILE+1,stdio:['ignore','pipe','pipe']});}
   descriptor(name,version=this.version) {
     demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
     const row=this.git('ls-tree','-z',version,'--',name).toString();
@@ -46,7 +46,7 @@ export class ImmutableReader {
     if(previous){demand(previous.git_blob_oid===blob&&previous.bytes===bytes&&previous.mode===mode,'Immutable descriptor drift');return previous;}
     this.inventory.set(key,pin);return pin;
   }
-  phase(){this.used=this.runtimeBytes+this.metadataBytes;this.charged=new Map();demand(this.used<PHASE,'Installed runtime/metadata exceeds complete phase');}
+  phase(){this.used=this.runtimeBytes+this.executionBytes+this.metadataBytes+this.outputBytes;this.charged=new Map();demand(this.used<PHASE,'Installed runtime/metadata exceeds complete phase');}
   admit(pin,decoded=0) {
     demand(Number.isSafeInteger(decoded)&&decoded>=0&&decoded<=FILE,'Whole decoded member exceeds ordinary cap');
     const key=pin.commit+':'+pin.path,prior=this.charged.get(key);
@@ -175,9 +175,24 @@ export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
 }
 
 export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
-  const runtimeBytes=fs.statSync(process.execPath).size+(parentRuntimePath?fs.statSync(fs.realpathSync(parentRuntimePath)).size:0);
-  const beforeReader=new ImmutableReader(repo,baseline,{runtimeBytes}),afterReader=new ImmutableReader(repo,candidate,{runtimeBytes,budget:beforeReader.budget});
-  const runtime=runtimeIdentity(),callerRuntime=parentRuntimePath?runtimeIdentity(parentRuntimePath):null;
+  const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
+  const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+  const codePaths=['scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
+  const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&stat.size<=FILE,'Nonordinary/oversized trusted execution code');return {name,file,stat};});
+  const executionBytes=codeStats.reduce((n,p)=>n+p.stat.size,0);
+  const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
+  demand(launchGit,'Missing installed Git');runtimePaths.push(fs.realpathSync(launchGit));
+  const admittedRuntime=()=>[...new Set(runtimePaths)].reduce((n,p)=>{const stat=fs.statSync(p);demand(stat.isFile()&&stat.size>0,'Nonordinary installed execution runtime');return n+stat.size;},0);
+  demand(admittedRuntime()+executionBytes+8*1024*1024+OUTPUT<PHASE,'Complete bootstrap exceeds prospective phase before runtime/code opens');
+  // Resolve the full Git implementation (including macOS command-line shim)
+  // only after admitting the launcher and its bounded metadata reply.
+  const execPath=execFileSync(runtimePaths.at(-1),['--exec-path'],{maxBuffer:4096}).toString().trim();
+  const gitExecutable=fs.realpathSync(path.resolve(execPath,'../../bin/git'));runtimePaths.push(gitExecutable);
+  const runtimeBytes=admittedRuntime();
+  const beforeReader=new ImmutableReader(repo,baseline,{runtimeBytes,executionBytes,gitExecutable}),afterReader=new ImmutableReader(repo,candidate,{runtimeBytes,executionBytes,gitExecutable,budget:beforeReader.budget});
+  const identities=[...new Set(runtimePaths)].map(p=>runtimeIdentity(p));
+  const runtime=identities.find(p=>p.path===fs.realpathSync(process.execPath)),callerRuntime=parentRuntimePath?identities.find(p=>p.path===fs.realpathSync(parentRuntimePath)):null;
+  const executionCode=codeStats.map(({name,file,stat})=>{const body=fs.readFileSync(file);demand(body.length===stat.size,'Trusted execution code changed during whole read');return {path:name,bytes:body.length,mode:stat.mode&0o777,sha256:sha(body)};});
   const before=loadSelection(beforeReader),after=loadSelection(afterReader);
   if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
   demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
@@ -196,7 +211,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   // Both complete row tables and both complete reconstructed interval rows stay
   // live while containing run cohorts are consumed; they are not free aliases.
   beforeReader.metadataBytes=afterReader.metadataBytes=metadataBytes+oldRows.byteLength+newRows.byteLength+largestRow*24;
-  demand(beforeReader.runtimeBytes+beforeReader.metadataBytes<PHASE,'Retained metadata/whole interval rows exceed phase cap');
+  demand(beforeReader.runtimeBytes+beforeReader.executionBytes+beforeReader.metadataBytes+beforeReader.outputBytes<PHASE,'Retained metadata/whole interval rows exceed phase cap');
   const runs=snapshot=>snapshot.manifest.parts.filter(p=>p.kind==='runs');
   const oldParts=runs(before),newParts=runs(after);
   let offset=0;for(let y=0;y<a.size;y++){demand(oldRows[y*2]===offset,'Baseline row partition incomplete');offset+=oldRows[y*2+1];}demand(offset*2===a.runWords,'Baseline rows omitted runs');
@@ -212,9 +227,9 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   const losses=[];let lostCells=0;
   for(const y of affected){const roster=[...needed(before,oldRows,y).map(p=>({snapshot:before,p})),...needed(after,newRows,y).map(p=>({snapshot:after,p}))];const key=JSON.stringify(roster.map(({snapshot,p})=>[snapshot.reader.version,p.path]));if(key!==cacheKey){cache.clear();beforeReader.phase();cacheKey=key;for(const {snapshot,p}of roster)cache.set(snapshot.reader.version+':'+p.path,asset(snapshot,p));phases.push({first_row:y,input_bytes:beforeReader.used,descriptors:beforeReader.charged.size});}const previous=row(before,oldRows,y),next=row(after,newRows,y);const found=compareIntervals(previous,next,{row:y,ownersBefore:before.owners,ownersAfter:after.owners});for(const loss of found){lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);}}
   cache.clear();
-  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Explicit additive selection is unsupported until its normal activation contract is integrated; proposal files never select a release.']};
+  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Explicit additive selection is unsupported until its normal activation contract is integrated; proposal files never select a release.']};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
-  const [repo,baseline,candidate,parentRuntimePath]=process.argv.slice(2);const result=inspectSelected(repo,baseline,candidate,{parentRuntimePath});process.stdout.write(JSON.stringify(result)+'\n');
+  const [repo,baseline,candidate,parentRuntimePath]=process.argv.slice(2);const result=inspectSelected(repo,baseline,candidate,{parentRuntimePath});const body=JSON.stringify(result)+'\n';demand(Buffer.byteLength(body)<=OUTPUT,'Generated selected-native receipt exceeds admitted output reserve');process.stdout.write(body);
 }

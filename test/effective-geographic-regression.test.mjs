@@ -60,7 +60,9 @@ test('actual immutable entry rejects owner loss/reassignment with rawworld geome
   const transferred=f.select([[[0,2,2]],[[1,3,2]],[],[]]);assert.equal(inspectSelected(f.repo,base,transferred).lost_or_reassigned_cells,2);
   f.git('checkout',base,'--','scripts/native-ownership/verified-candidates.json');f.git('reset','--hard',base);
   const command=[path.join(f.repo,'scripts/run-geographic-check.py'),'-I'];
-  const result=spawnSync(process.env.WORLDATLAS_TEST_PYTHON??'python3',['-I','-B',command[0],'--repo',f.repo,'--baseline',base,'--candidate',lost,'--out',path.join(f.repo,'blocked.json')],{encoding:'utf8',env:{...process.env,NODE:process.execPath}});
+  const preload=path.join(f.repo,'untrusted-preload.cjs'),preloadSentinel=path.join(f.repo,'preload-executed');fs.writeFileSync(preload,`require('node:fs').writeFileSync(${JSON.stringify(preloadSentinel)},'executed');`);
+  const result=spawnSync(process.env.WORLDATLAS_TEST_PYTHON??'python3',['-I','-B',command[0],'--repo',f.repo,'--baseline',base,'--candidate',lost,'--out',path.join(f.repo,'blocked.json')],{encoding:'utf8',env:{...process.env,NODE:process.execPath,NODE_OPTIONS:'--require='+preload,NODE_PATH:f.repo}});
+  assert.equal(fs.existsSync(preloadSentinel),false,'actual trusted child must not execute an inherited preload');
   assert.equal(result.status,1,result.stderr);assert.ok(fs.existsSync(path.join(f.repo,'blocked.json')),result.stderr);const actual=JSON.parse(fs.readFileSync(path.join(f.repo,'blocked.json')));assert.equal(actual.status,'native-regressions-found');assert.equal(actual.candidate_code_executed,false);assert.equal(actual.selected_native_report.lost_or_reassigned_cells,1);
   const sentinel=fs.readFileSync(path.join(f.repo,'blocked.json'));
   fs.appendFileSync(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'),'\n// Deliberate current checkout drift');
@@ -107,4 +109,12 @@ test('aggregate admission rejects before any actual body read',()=>{
  reader.descriptor=()=>({commit:'1'.repeat(40),path:'input',bytes:101});reader.git=()=>{bodies++;return Buffer.alloc(101);};
  assert.throws(()=>reader.read('input'),/prospective cap/);assert.equal(bodies,0);
  assert.throws(()=>reader.admit({commit:'1'.repeat(40),path:'input',bytes:1},32*1024*1024+1),/decoded member/);assert.equal(bodies,0);
+});
+
+
+test('complete bootstrap admission precedes runtime opens and trusted code reads',()=>{
+ const stat=fs.statSync,open=fs.openSync,read=fs.readFileSync;let opens=0,reads=0;const node=fs.realpathSync(process.execPath);
+ try{fs.statSync=(name,...args)=>{const value=stat(name,...args);return name===node?new Proxy(value,{get:(target,key)=>key==='size'?256*1024*1024-100:typeof target[key]==='function'?target[key].bind(target):target[key]}):value;};fs.openSync=(...args)=>{opens++;return open(...args);};fs.readFileSync=(...args)=>{reads++;return read(...args);};
+  assert.throws(()=>inspectSelected('.', '1'.repeat(40),'1'.repeat(40)),/bootstrap exceeds prospective phase/);assert.equal(opens,0);assert.equal(reads,0);
+ }finally{fs.statSync=stat;fs.openSync=open;fs.readFileSync=read;}
 });
