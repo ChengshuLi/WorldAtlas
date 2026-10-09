@@ -141,3 +141,31 @@ assert.equal(weakSnapshot.deref(),undefined,'Private proof kept old selected sna
   const file=path.join(f.repo,'weak-lifetime.mjs');fs.writeFileSync(file,code);const result=spawnSync(process.execPath,['--expose-gc',file,f.repo,before,state.stagePaths[0]],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/actually|actual snapshot\/resolver collected/);
  }finally{f.cleanup();}
 });
+
+
+test('ordinary Git source join authenticates whole-consumed inventory without inventing a SHA pin',()=>{
+ const f=fixture();try{
+  const name='source/ordinary.json',body=f.write(name,{type:'FeatureCollection',features:[{type:'Feature',id:'ordinary',properties:{},geometry:{type:'Point',coordinates:[0,0]}}]}),head=f.commit();
+  const reader=new native.ImmutableReader(f.repo,head,{runtimeBytes:0,executionBytes:0}),expected={...reader.descriptor(name),kind:'ordinary-immutable-git-source'};
+  assert.equal(expected.sha256,undefined);const actual=reader.read(name);assert.deepEqual(actual,body);
+  const input={path:name,source:expected,bytes:actual.length,whole_body_sha256:sha(actual)},facts={inputs:[...reader.inventory.values()]};
+  assert.doesNotThrow(()=>helper.validateColdSourceBody(input,expected,facts));
+  for(const kind of ['missing-inventory','duplicate-inventory','wrong-inventory-OID','changed-SHA','not-whole']){
+   const changed=structuredClone(facts);
+   if(kind==='missing-inventory')changed.inputs=[];
+   if(kind==='duplicate-inventory')changed.inputs.push(changed.inputs[0]);
+   if(kind==='wrong-inventory-OID')changed.inputs[0].git_blob_oid='0'.repeat(40);
+   if(kind==='changed-SHA')changed.inputs[0].sha256='0'.repeat(64);
+   if(kind==='not-whole')changed.inputs[0].whole_body_consumed=false;
+   assert.throws(()=>helper.validateColdSourceBody(input,expected,changed),/Missing or duplicate|Whole ordinary source/,kind);
+  }
+ }finally{f.cleanup();}
+});
+
+test('genuine acknowledged cold facts refuse coherent source SHA rebinding',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,1.2),rect(2,3),'after'),state=issueStages(f,before,after),startup=native.selectedBootstrap(f.repo,before,after),snapshot=native.loadSelection(startup.beforeReader),resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot),original=product(state.stagePaths[0],state.ack[0]);
+  const changed=structuredClone(original);changed.certificate.inputs[0].whole_body_sha256='0'.repeat(64);changed.facts.inputs[0].sha256='0'.repeat(64);
+  assert.throws(()=>helper.acceptColdCoordinateCertificate(resolver,changed.certificate,{...changed,expectedPublication:state.ack[0].publication}),/Cold facts differ from genuine acknowledged publication/);
+ }finally{f.cleanup();}
+});

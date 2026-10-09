@@ -115,9 +115,20 @@ export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve
 // live trusted child acknowledgement, plus the actual selected resolver. The
 // acknowledgement is issued by the parent invocation, never read from candidate
 // files or inferred from the product's own facts.
+// Pure body/inventory join; does not issue a selected snapshot or certificate.
+export function validateColdSourceBody(input,expected,facts){
+  if(expected.kind==='ordinary-immutable-git-source'&&!hash(expected.sha256)){
+   const consumed=facts.inputs?.filter(row=>row.commit===expected.commit&&row.path===expected.path);
+   demand(Array.isArray(consumed)&&consumed.length===1,'Missing or duplicate genuine whole ordinary source inventory');
+   const row=consumed[0];demand(row.mode===expected.mode&&row.git_blob_oid===expected.git_blob_oid&&row.bytes===expected.bytes&&row.whole_body_consumed===true&&hash(row.sha256)&&input.whole_body_sha256===row.sha256&&input.bytes===row.bytes,'Whole ordinary source differs from independently selected Git identity and acknowledged consumption');
+  }else{
+  const rawHash=expected.decoded_sha256??expected.sha256,rawBytes=expected.decoded_bytes??expected.bytes;demand(input.whole_body_sha256===rawHash&&input.bytes===rawBytes,'Whole cold selected source body differs from independent source bank');
+  }
+}
 export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expectedPublication,publication,encoded_sha256,decoded_sha256}) {
  demand(resolver instanceof SelectedGeometrySources&&same(publication,expectedPublication)&&publication.complete===true&&publication.kind==='trusted-selected-coordinate-stage-v1','Missing actual issued cold-stage acknowledgement');
  demand(encoded_sha256===publication.certificate.sha256&&decoded_sha256===publication.certificate.decoded_sha256,'Cold complete certificate bytes differ');
+ demand(publication.facts&&valueSha(facts)===publication.facts.sha256,'Cold facts differ from genuine acknowledged publication');
  demand(facts.kind===publication.kind&&facts.selected_commit===resolver.reader.version&&facts.candidate_code_executed===false&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Foreign cold certificate execution/input');
  demand(same(certificate.binding.selection,resolver.snapshot.selection)&&same(certificate.binding.release,resolver.release)&&same(certificate.binding.sources,resolver.sources)&&certificate.binding.owners_sha256===valueSha(resolver.snapshot.owners)&&same(facts.binding,certificate.binding),'Cold certificate selected source/owner binding differs');
  bindCoordinateRows(certificate);
@@ -125,7 +136,7 @@ export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expe
  demand(Array.isArray(certificate.inputs)&&certificate.inputs.length===paths.size&&Array.isArray(certificate.entries)&&certificate.entries.length===owners.size,'Incomplete cold source/owner certificate');
  for(let i=0;i<certificate.inputs.length;i++){const input=certificate.inputs[i],expected=resolver.sources[i];
   demand(input.path===resolver.paths[i]&&!sources.has(input.path)&&sources.add(input.path)&&same(input.source,{...expected,...(input.source?.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})})&&hash(input.whole_body_sha256)&&Number.isSafeInteger(input.bytes)&&input.bytes>0&&input.bytes<=FILE,'Foreign/duplicate/reordered/drifted complete cold source');
-  const rawHash=expected.decoded_sha256??expected.sha256,rawBytes=expected.decoded_bytes??expected.bytes;demand(input.whole_body_sha256===rawHash&&input.bytes===rawBytes,'Whole cold selected source body differs from independent source bank');
+  validateColdSourceBody(input,expected,facts);
  }
  for(let i=0;i<certificate.entries.length;i++){const row=certificate.entries[i],owner=owners.get(row.id);demand(row.id===resolver.snapshot.owners[i].id&&owner&&!seen.has(row.id)&&seen.add(row.id)&&row.index===owner.index&&row.parent_id===owner.province_id&&row.parent_index===owner.province_index&&paths.has(row.source)&&Number.isSafeInteger(row.ordinal)&&row.ordinal>=0&&hash(row.whole_feature_sha256)&&hash(row.geometry_sha256)&&hash(row.effective_geometry_sha256)&&Array.isArray(row.boxes)&&row.boxes.length>0,'Foreign/duplicate/drifted cold owner record');
   const additions=(resolver.snapshot.additive?.normalized_rows??[]).filter(r=>r.target_id===row.id);
