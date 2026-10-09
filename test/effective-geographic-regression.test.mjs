@@ -402,3 +402,21 @@ test('registered 533-role authority derives complete custody without raising act
   assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
  }finally{f.cleanup();}
 });
+
+
+test('Cloudflare fourth entry is explicit and cannot reinterpret historical profile shapes',()=>{
+ const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177');
+ const read=name=>fs.readFileSync(path.join(directory,name));
+ const certificate=JSON.parse(read('certificate.json')),code=JSON.parse(read('code.json')),qualification=JSON.parse(gunzipSync(read('qualification.json.gz')));
+ const cloudflare='scripts/build-cloudflare-inner.mjs';
+ // Model schema control only: the final registered authority must supply its
+ // actual complete Cloudflare closure; this does not mint a review or source.
+ code.entry_roles[cloudflare]=structuredClone(code.entry_roles['scripts/build-static-inner.mjs']);
+ code.entry_critical_files[cloudflare]=structuredClone(code.entry_critical_files['scripts/build-static-inner.mjs']);
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true}),/actual entry profile/);
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{cloudflareProfile:true}),/explicit entry-specific/);
+ const result=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true,cloudflareProfile:true});
+ assert.equal(result.candidate_code_executed,false);assert.ok(result.entry_profiles[cloudflare]);
+ delete code.entry_critical_files[cloudflare];
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true,cloudflareProfile:true}),/entry-specific source/);
+});

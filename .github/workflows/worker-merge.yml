@@ -22,6 +22,8 @@ permissions: {}
 concurrency:
   group: worldatlas-main-integrate
   cancel-in-progress: false
+# The intended normal package target is Cloudflare; the separate Site gate is retained.
+
 jobs:
   prepare:
     if: github.ref == 'refs/heads/main'
@@ -179,7 +181,7 @@ jobs:
           fi
       - name: Build the combined application once before asset-dependent tests
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0
-        run: npm run build:hosted
+        run: npm run build:cloudflare
       - name: Test applicable combined-tree invariants without publishing or live imports
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}

@@ -11,6 +11,8 @@ concurrency:
   # Body edits and draft readiness refresh authority without canceling code work.
   group: worldatlas-regression-pr-${{ github.event.pull_request.number }}-${{ (github.event.action == 'edited' || github.event.action == 'ready_for_review') && 'metadata' || 'code' }}
   cancel-in-progress: true
+# The intended normal package target is Cloudflare; the separate Site gate is retained.
+
 jobs:
   profile:
     runs-on: ubuntu-latest
@@ -339,7 +341,7 @@ jobs:
           fi
       - name: Build hosted assets
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
-        run: npm run build:hosted
+        run: npm run build:cloudflare
       - name: Complete regression shard
         env:
           INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}
@@ -383,7 +385,7 @@ jobs:
         if: needs.profile.outputs.full != 'false'
       - name: Build and enforce archive/file reserves without publishing
         if: needs.profile.outputs.full != 'false'
-        run: npm run build:hosted
+        run: npm run build:cloudflare
       - name: Record package rebuild inapplicability
         if: needs.profile.outputs.full == 'false'
         run: echo 'No declared package input or verification path changed; package unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"

@@ -90,3 +90,23 @@ test('sparse candidate still detects changes and rename sources outside the work
     assert.throws(() => checkGitScope({branch: 'research/example', base, run}), /Research changes/);
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 });
+
+
+for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worker-merge.yml', 1]]) {
+  test(`${workflow}: immutable normal routes build Cloudflare and retain the separate Site gate`, () => {
+    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
+    const routes = [...source.matchAll(/^        run: (npm run build:cloudflare)$/gm)];
+    assert.equal(routes.length, expected, 'all actual package/shard routes must be covered');
+    assert.doesNotMatch(source, /WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
+    const site = fs.readFileSync(path.join(root, '.github/workflows/deployment-budget.yml'), 'utf8');
+    assert.match(site, /run: npm run build:hosted/);
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-package-routing-'));
+    try {
+      fs.writeFileSync(path.join(directory, 'npm'), '#!/bin/sh\nprintf "%s\\n" "$*"\n', {mode: 0o755});
+      for (const route of routes) {
+        const result = spawnSync('/bin/bash', ['-c', route[1]], {encoding: 'utf8', env: {PATH: directory, WORLDATLAS_PACKAGE_PROFILE: 'foreign'}});
+        assert.equal(result.status, 0, result.stderr);assert.equal(result.stdout.trim(), 'run build:cloudflare');
+      }
+    } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+  });
+}

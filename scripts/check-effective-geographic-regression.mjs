@@ -297,7 +297,7 @@ function readArtifactGzip(reader,pin) {
 // Code inventories are source custody. This trusted reader executes none of
 // these candidate bodies; actual application entries authenticate their own
 // current execution closure separately from shared and other-entry critical code.
-export function validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles=false}={}) {
+export function validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles=false,cloudflareProfile=false}={}) {
   const pins=new Map(certificate.application_inputs.map(p=>[(p.space??'root')+':'+p.path,p]));
   const whole=p=>p&&safe(p.path)&&p.mode==='100644'&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256);
   demand(code?.version===1&&code.kind==='qualified-artifact-application-code-closure-v1'&&Array.isArray(code.critical_files)&&code.critical_files.length>0&&typeof code.semantics==='string','Incomplete application code source custody');
@@ -307,7 +307,8 @@ export function validateArtifactSourceMetadata(certificate,code,qualification,{e
     if(entryProfiles){const input=pins.get('root:'+p.path);demand(input&&['mode','bytes','sha256'].every(k=>input[k]===p[k]),'Critical source role omitted/rebound in complete application inputs');}
   }
   for(const p of code.critical_files)critical(p,shared);
-  const allowed=['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs',...(entryProfiles?['scripts/run-integration-tests.mjs']:[])];
+  demand(!cloudflareProfile||entryProfiles,'Cloudflare requires explicit entry-specific source custody');
+  const allowed=['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs',...(entryProfiles?['scripts/run-integration-tests.mjs']:[]),...(cloudflareProfile?['scripts/build-cloudflare-inner.mjs']:[])];
   demand(same(Object.keys(code.entry_roles??{}).sort(),allowed.toSorted()),'Missing/foreign actual entry profile');
   if(entryProfiles)demand(same(Object.keys(code.entry_critical_files??{}).sort(),allowed.toSorted()),'Missing/foreign entry-specific source custody');
   else demand(code.entry_critical_files===undefined,'Unsupported historical entry-specific profile');
@@ -359,7 +360,7 @@ export function readArtifactConsumption(reader,selection,manifest) {
   // before either body opens. Descriptor references never masquerade as reads.
   for(const p of [codePin,qualificationPin]){demand(p&&safe(p.path)&&p.mode==='100644'&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE,'Incomplete source custody metadata pin');const d=reader.descriptor(p.path);demand(d.mode===p.mode&&d.bytes===p.bytes,'Source custody metadata mode/size differs');reader.admit(d,p.decoded_bytes??0);}
   const code=reader.json(codePin.path,{expected:codePin.sha256}),qualification=readArtifactGzip(reader,qualificationPin);
-  const sourceCustody=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:registration.entryProfiles===true});
+  const sourceCustody=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:registration.entryProfiles===true,cloudflareProfile:registration.cloudflareProfile===true});
   return freezeJson({releaseCatalogue,sourceCustody,certificate_pin:hook.certificate,review_pin:hook.review,certificate,review_id:review.id,limits:accepted.limits,
     scope:'Once-qualified immutable artifact provenance only. This gate independently consumes actual selected native/source products; no source authority, activation or production approval.'});
 }

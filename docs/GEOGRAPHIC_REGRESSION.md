@@ -249,3 +249,19 @@ candidate code and does not label another application's entry as its own
 execution. Actual application callers still authenticate their current execution
 closure separately. This compatibility change neither repeats scientific
 qualification nor approves source facts, selection activation or deployment.
+
+
+The normal PR and combined-tree package checks target Cloudflare through literal
+`npm run build:cloudflare` workflow commands. This target is immutable workflow
+content, so an unbound repository variable cannot change the target after a
+successful proof. The separate deployment-budget workflow keeps the explicit
+Site builder and its existing reserve gate. The historical `Build hosted assets`
+step name remains for the unchanged integration-proof contract; it does not
+claim a live-host migration or deployment. The earlier mutable package-profile
+routing draft was superseded before publication.
+
+An independently registered authority may explicitly declare the fourth
+`build-cloudflare-inner.mjs` entry profile. Its complete critical custody and
+entry-wrapper roster must be authenticated alongside the existing profiles.
+Historical authorities retain their exact two- or three-entry schemas; no new
+review anchor is inferred from a draft certificate.
