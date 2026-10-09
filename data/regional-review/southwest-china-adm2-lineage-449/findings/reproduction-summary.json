@@ -1,0 +1,50 @@
+{
+  "issue": 917,
+  "issue_snapshot_retrieved_at": "2026-10-09T04:29:49Z",
+  "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+  "subject_count": 228,
+  "subject_ids_sorted_json_sha256": "3a7066b127b015f7f9c4d33ee2470049ed20ce866bb5b7e9badd696c9ddef9de",
+  "area_counts": {
+    "Chongqing": 33,
+    "Guizhou": 82,
+    "Sichuan": 113
+  },
+  "source": {
+    "boundaryID": "CHN-ADM2-17275852",
+    "boundaryYear": "2017",
+    "boundaryType": "ADM2",
+    "boundaryCanonical": "County Level",
+    "admUnitCount": 2391,
+    "source_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+    "metadata_sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a"
+  },
+  "matched_unique_source_shapes": 228,
+  "source_name_matches": 228,
+  "source_type_counts": {
+    "ADM2": 228
+  },
+  "geometry_type_pairs": {
+    "Polygon->Polygon": 228
+  },
+  "source_vertices_total": 14634,
+  "atlas_vertices_total": 12905,
+  "net_vertex_reduction": 1729,
+  "rows_with_fewer_atlas_vertices": 225,
+  "rows_matching_after_source_rounding_to_4dp": 3,
+  "rounding_precision_match_counts": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 3,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0
+  },
+  "all_per_feature_transform_origins": "unresolved; individual counts and IDs are in feature-lineage.csv",
+  "current_official_row_crosswalk": "unresolved for all 228; official web discovery snippets are not originals or row evidence",
+  "current_legal_boundary_and_completeness": "unresolved for all 228; no retained suitable authoritative current polygon source",
+  "adjacent_granularity": "pinned source labels each of the 228 as ADM2 / County Level; this historical label is not current legal identity proof",
+  "parent_evidence": "all Atlas parent fields separately cite gbHumanitarian/HDX China ADM2 2020 greatest-overlap matching; the 2017 gbOpen source carries no parent code; current parents remain unresolved"
+}

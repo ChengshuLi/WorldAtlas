@@ -1,0 +1,12 @@
+{
+  "method_id": "scope-and-source-lineage",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "checks": [
+    "positive exact-coverage fixture accepted",
+    "duplicate scope fixture rejected",
+    "duplicate expected-subject fixture rejected",
+    "missing subject fixture rejected",
+    "foreign subject fixture rejected"
+  ]
+}

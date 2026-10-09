@@ -1,0 +1,18 @@
+{
+  "method_id": "scope-and-source-lineage",
+  "command": "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-lineage.py",
+  "run_one_sha256": "26f70c0a68ea95050952e31f88221eeac5d94793e24096ef1b9f660a573ef8c9",
+  "run_two_sha256": "26f70c0a68ea95050952e31f88221eeac5d94793e24096ef1b9f660a573ef8c9",
+  "per_output_sha256_run_one": {
+    "findings/feature-lineage.csv": "03c1321a29fc006b0798354191c38c4d17c0502df73ab1715de2229f05799cd7",
+    "findings/reproduction-summary.json": "cb269c355a9031bb6e8a2f9722b7380500395997d6bfede74869710b0426e5c2"
+  },
+  "per_output_sha256_run_two": {
+    "findings/feature-lineage.csv": "03c1321a29fc006b0798354191c38c4d17c0502df73ab1715de2229f05799cd7",
+    "findings/reproduction-summary.json": "cb269c355a9031bb6e8a2f9722b7380500395997d6bfede74869710b0426e5c2"
+  },
+  "outputs_identical": true,
+  "script_sha256": "b8c990849655cb9abc35db48b1d42865706c7b12103451648afdbaac97ceec32",
+  "executed_at": "2026-10-09 UTC",
+  "scope": "228 issue-declared feature identities joined to immutable baseline Atlas parts and the retained #449 geoBoundaries source"
+}
