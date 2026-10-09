@@ -1,0 +1,528 @@
+{
+  "version": 1,
+  "issue": 1559,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:NOR:ADM2:86288312B50158709887361",
+    "gb:NOR:ADM2:86288312B64496782861055",
+    "gb:NOR:ADM2:86288312B82966611739072",
+    "gb:SWE:ADM2:70781695B94600430897975"
+  ],
+  "subject_ids_sha256": "375c256e87d635c9c28bfb8335912c973a3b9d03a2d0a3cedc531e2524db6ea5",
+  "baseline": {
+    "version": 2,
+    "commit": "4f8516f03f988d4657a053df3df610857fcedd40",
+    "files": [
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/README.md",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 8137,
+        "sha256": "ce27fbe3fa4661b516ab42c57168d4085e3bfe78fde0562bdfb3c0b1d104d78f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/evidence-quality.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 78433,
+        "sha256": "d7ac3a7f080025208fd8cc9d7db3e781faddf0bba8a5ee822b43f86b95070b8a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 1827,
+        "sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 44535,
+        "sha256": "2c9e90bc16a3d54fe2729ea629283e3d0703a98bf25345ec38128610b60e3890",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 907,
+        "sha256": "76c4bff7b025105a7af83a4399ff3884dacfde2f8917f90ec721136e7dc11ac4",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/source-lock.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 44637,
+        "sha256": "b59c618cc31cdd02a4d7f6b8b204a0466349de775981feb816e514fb99cbdf8f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/validation-controls.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 1903,
+        "sha256": "f3add13fdb08a2a57b5d0cc1cfbf4156116edcf5193766db5d7a0f2711bd2d85",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/authentication-and-phase-accounting.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 3316661,
+        "sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/authentication-and-phase-accounting.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 3316661,
+        "sha256": "8913542cdb56c62af045a3e09c225bfa687b345360519759904f16795f1425e5",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "e1647090c3ae45b77dd6c3b5b621c6918baca087",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/native-context-migration/snapshots/data/geography/part-17.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "input_00": "ce27fbe3fa4661b516ab42c57168d4085e3bfe78fde0562bdfb3c0b1d104d78f",
+      "input_01": "d7ac3a7f080025208fd8cc9d7db3e781faddf0bba8a5ee822b43f86b95070b8a",
+      "input_02": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+      "input_03": "2c9e90bc16a3d54fe2729ea629283e3d0703a98bf25345ec38128610b60e3890",
+      "input_04": "76c4bff7b025105a7af83a4399ff3884dacfde2f8917f90ec721136e7dc11ac4",
+      "input_05": "b59c618cc31cdd02a4d7f6b8b204a0466349de775981feb816e514fb99cbdf8f",
+      "input_06": "f3add13fdb08a2a57b5d0cc1cfbf4156116edcf5193766db5d7a0f2711bd2d85",
+      "input_07": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "input_08": "8913542cdb56c62af045a3e09c225bfa687b345360519759904f16795f1425e5"
+    },
+    "pin_files": {
+      "input_00": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/README.md",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_01": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/evidence-quality.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_02": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_03": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_04": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_05": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/source-lock.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_06": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/validation-controls.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_07": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/authentication-and-phase-accounting.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "input_08": {
+        "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/authentication-and-phase-accounting.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      }
+    },
+    "subject_files": {
+      "gb:NOR:ADM2:86288312B50158709887361": {
+        "path": "data/native-context-migration/snapshots/data/geography/part-17.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "gb:NOR:ADM2:86288312B64496782861055": {
+        "path": "data/native-context-migration/snapshots/data/geography/part-17.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "gb:NOR:ADM2:86288312B82966611739072": {
+        "path": "data/native-context-migration/snapshots/data/geography/part-17.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      },
+      "gb:SWE:ADM2:70781695B94600430897975": {
+        "path": "data/geography/part-22.json",
+        "commit": "643e4123ce9881a9d07f564166edae34aec7aa08"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "accepted-v14-report-evidence",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/643e4123ce9881a9d07f564166edae34aec7aa08/research/geography/nordic-reproduction-integrity-1233-erratum",
+      "role": "Authenticated retained measurement/report artifacts for a bounded accounting correction; not primary territorial or legal-boundary authority",
+      "vintage": "Accepted v14 pair, exact retained whole-file hashes at the pinned baseline",
+      "retrieved_at": "2026-10-08 (America/Los_Angeles), read from immutable Git objects",
+      "license": {
+        "status": "unknown",
+        "terms": "No new upstream-source reuse or license audit was performed. This correction retains only existing repository evidence and does not relicense the original source content."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore every accepted report, source lock, runner and metric input from its declared whole-file descriptor and commit in baseline.files; verify the listed SHA-256 before use.",
+      "limit": "Hash verification supports byte identity and the reported accounting comparison only. Original source authority, full license terms, source completeness, legal/current boundaries and territorial meaning remain unresolved with their existing owners.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/claim-receipt.json",
+      "bytes": 941,
+      "sha256": "327c86c29ee8f616beacb3cd24e95664dfe8c9e301d10f98a39c6e4c055992e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/README.md",
+      "bytes": 3764,
+      "sha256": "625f22804e99039d16a2280248b6cb5e481fe5bef87a3f2fd5001def3c150d8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py",
+      "bytes": 26375,
+      "sha256": "599579a6c965d0c6ce6bd072079e3734f3dfb88d25cf8f4c512ef81a1369642c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "bytes": 6717,
+      "sha256": "25794685370e102d15adb03e33c64451c58cc41b163234349756cfa97cbeb9e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/publication.json",
+      "bytes": 277,
+      "sha256": "58c360d1de60f3e246cfbbe0aee29f173f04fa75ffc70591ba5d3b4e171605d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-two-20261009/report.json",
+      "bytes": 6286,
+      "sha256": "7391a15f0eab1a838d2e82b434aebd62e85ed17f47ee7b62c1173f77d25c4449",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-two-20261009/publication.json",
+      "bytes": 277,
+      "sha256": "abc76c6ee34b87c34d269dfceb94703f41b27be0ce714819c41af107c7b662cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/pairwise-reproducibility.json",
+      "bytes": 1357,
+      "sha256": "b4f36410e7939020d94debe34db6565c5f57c1d93f2570635cdc296d02fb6e43",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/positive-controls.json",
+      "bytes": 293,
+      "sha256": "b4143bc3fa2331ad356df5c9e63ef7d4782c5bb27d12f33fc18239bef02506a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/negative-controls.json",
+      "bytes": 2781,
+      "sha256": "6b7b0a24dfabe9a4f503c562c91199e43ed7ebd1df297d49265e699a944541dd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/publication.json",
+      "bytes": 790,
+      "sha256": "8de83692ef5fb3767166372c64294e3b90cc81ca3f690814099465e7f257a300",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "correct-v14-recorded-phase-maximum",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Authenticates the exact issue-pinned v14 report pair and prior output bindings, recursively enumerates all phase_bytes JSON pointers, rejects incomplete/extended rosters and stale or altered inputs, derives the numeric maximum independently from both reports, and publishes exclusive fresh result vintages with completion receipts written last.",
+      "software": "Python 3.12.14; executed helper scripts/evidence/immutable.py at e1647090c3ae45b77dd6c3b5b621c6918baca087, SHA-256 a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "units": "Whole-file byte counts from retained JSON phase_bytes members; not process RSS or newly measured memory."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "corrected_recorded_phase_maximum",
+      "value": 157860872,
+      "unit": "bytes",
+      "input_sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+      "evaluation_commit": "4f8516f03f988d4657a053df3df610857fcedd40",
+      "vintage": "current"
+    },
+    {
+      "id": "prior_published_phase_maximum",
+      "value": 157734275,
+      "unit": "bytes",
+      "input_sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+      "evaluation_commit": "4f8516f03f988d4657a053df3df610857fcedd40",
+      "vintage": "current"
+    },
+    {
+      "id": "reported_maximum_correction_delta",
+      "value": 126597,
+      "unit": "bytes",
+      "input_sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+      "evaluation_commit": "4f8516f03f988d4657a053df3df610857fcedd40",
+      "vintage": "current"
+    },
+    {
+      "id": "recorded_phase_limit",
+      "value": 268435456,
+      "unit": "bytes",
+      "input_sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+      "evaluation_commit": "4f8516f03f988d4657a053df3df610857fcedd40",
+      "vintage": "current"
+    },
+    {
+      "id": "remaining_recorded_phase_headroom",
+      "value": 110574584,
+      "unit": "bytes",
+      "input_sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+      "evaluation_commit": "4f8516f03f988d4657a053df3df610857fcedd40",
+      "vintage": "current"
+    },
+    {
+      "id": "complete_phase_pointer_count",
+      "value": 12,
+      "unit": "phase pointers",
+      "input_sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
+      "evaluation_commit": "4f8516f03f988d4657a053df3df610857fcedd40",
+      "vintage": "current"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "corrected_recorded_phase_maximum",
+      "value": 157860872,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "prior_published_phase_maximum",
+      "value": 157734275,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "reported_maximum_correction_delta",
+      "value": 126597,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "recorded_phase_limit",
+      "value": 268435456,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "remaining_recorded_phase_headroom",
+      "value": 110574584,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "complete_phase_pointer_count",
+      "value": 12,
+      "unit": "phase pointers"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "corrected_recorded_phase_maximum",
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "json_pointer": "/assessment/maximum_recorded_phase_bytes"
+    },
+    {
+      "metric_id": "prior_published_phase_maximum",
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "json_pointer": "/assessment/prior_published_maximum_bytes"
+    },
+    {
+      "metric_id": "reported_maximum_correction_delta",
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "json_pointer": "/assessment/correction_delta_bytes"
+    },
+    {
+      "metric_id": "recorded_phase_limit",
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "json_pointer": "/assessment/phase_limit_bytes"
+    },
+    {
+      "metric_id": "remaining_recorded_phase_headroom",
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "json_pointer": "/assessment/remaining_below_limit_bytes"
+    },
+    {
+      "metric_id": "complete_phase_pointer_count",
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "json_pointer": "/assessment/phase_count"
+    }
+  ],
+  "rendered_tables": [],
+  "record_checks": [
+    {
+      "version": 1,
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "json_pointer": "/input_reports",
+      "id_key": "run_id",
+      "reference_path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
+      "reference_commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+      "reference_json_pointer": "/runs",
+      "reference_id_key": "run_id",
+      "fields": {
+        "run_id": "run_id",
+        "path": "report_path",
+        "sha256": "report_sha256"
+      }
+    },
+    {
+      "version": 1,
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-two-20261009/report.json",
+      "json_pointer": "/input_reports",
+      "id_key": "run_id",
+      "reference_path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
+      "reference_commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+      "reference_json_pointer": "/runs",
+      "reference_id_key": "run_id",
+      "fields": {
+        "run_id": "run_id",
+        "path": "report_path",
+        "sha256": "report_sha256"
+      }
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Both accepted v14 reports contain the same exact 12 complete phase-byte records. Their maximum is 157860872 bytes, correcting the previously published 157734275-byte maximum by 126597 bytes.",
+      "status": "supported",
+      "source_ids": [
+        "accepted-v14-report-evidence"
+      ]
+    },
+    {
+      "text": "The corrected recorded maximum remains below the retained 268435456-byte phase cap, but this does not newly certify the original end-to-end raw/decoded/runtime resource budget.",
+      "status": "supported",
+      "source_ids": [
+        "accepted-v14-report-evidence"
+      ]
+    },
+    {
+      "text": "Source authority and license terms, territorial and legal-boundary meaning, neighboring granularity, physical/hydrology interpretation and geography approval remain unresolved and outside this report-only correction.",
+      "status": "unresolved",
+      "source_ids": [
+        "accepted-v14-report-evidence"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --run-id report-correction-one-20261009",
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --run-id report-correction-two-20261009",
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --compare-runs report-correction-one-20261009 report-correction-two-20261009 --summary-id report-correction-summary-20261009"
+  ],
+  "validation": [
+    {
+      "method_id": "correct-v14-recorded-phase-maximum",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/positive-controls.json"
+    },
+    {
+      "method_id": "correct-v14-recorded-phase-maximum",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/negative-controls.json"
+    },
+    {
+      "method_id": "correct-v14-recorded-phase-maximum",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/pairwise-reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-one-20261009/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-two-20261009/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-two-20261009/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/pairwise-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/vintages/report-correction-summary-20261009/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-final-evidence-1409-erratum/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
