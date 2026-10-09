@@ -1,0 +1,1034 @@
+{
+  "version": 1,
+  "issue": 1553,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:GHA:ADM2:2480657B35240131522033",
+    "gb:GHA:ADM2:2480657B47242267083805",
+    "gb:TGO:ADM2:56601680B4042875560778",
+    "gb:TGO:ADM2:56601680B98633254865748"
+  ],
+  "subject_ids_sha256": "d7586fa34fcb9f77545db79e244ac996744aadb2ec4c1f9bbad42e3f9bfb7131",
+  "baseline": {
+    "version": 2,
+    "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+    "files": [
+      {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/README.md",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 2622,
+        "sha256": "ea54758f2272a7d7836dce8ba191c996694bca8e4af8eb0604eee72bc31c7710",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/claim-receipt.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 955,
+        "sha256": "8733a89e5579437cb98ff70cb04fdc9ea762a589af77cb7538179835eb249934",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/evidence-quality.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 23166,
+        "sha256": "07643c6f699e343c707b9b9a5738f9c9998c75e3bdbc39d39193ee6e7ec5b8c7",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/family-handoff.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 91951,
+        "sha256": "b95293cd0a6b2afd062fc0fda8121f6098c0e7e10250af563b35d840c91c373e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/selection-audit.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 2862,
+        "sha256": "200c18840963a6cabfd81c96b085dccf80b721902c65764fe2471a3c1cfe3787",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-000.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 1554642,
+        "sha256": "da5ea9cb223174c090947785f5ec1c84ba2f72fa3bcad85bdaa9f3409640ec54",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388378,
+        "uncompressed_sha256": "85b8690fde222ac0ecdae2f4b87004b341d9535a7553f941a03b0727c8b22b3a"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-001.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 1551573,
+        "sha256": "af3d28d483b9eb01d1c7c4db51e699ae32bba03bad2938ff6d723f419335e2a4",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388375,
+        "uncompressed_sha256": "09ba4a5acccb718c50505f4b9cc14d46b5a3db3224bb565dd0cb1db902dcf0ad"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-002.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 1551282,
+        "sha256": "5e45d4924be44c9d0ab5d619db94a8a65940967554f4d809de6deb034d1ea81a",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388456,
+        "uncompressed_sha256": "1c0115d6dc5e3ef914ec3e03bafb9403131a0ae7a9a7efc0ce269712c98ee3e0"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-003.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 1549664,
+        "sha256": "6d6b5dec8b4650a67ab8abbff80619d14023278a42ba98fce01e8ac0f76c6b3a",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388406,
+        "uncompressed_sha256": "13a3756e40e8bf066e090fd4fc611384d49c56e528ab55a0112480dfab9d1139"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-004.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 77825,
+        "sha256": "bcf7bde1699392d69dc4b6e4dc92de5043312773be05d065f36f4d38d151ac98",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 417411,
+        "uncompressed_sha256": "e695bfdb5514d1de577053cde1819f97fac3d9e42c2196f08cea9b45de10e6ad"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/evidence-quality.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 171747,
+        "sha256": "b1069d432b21146451a560dd75c152968274af683cf551e2f65ae03395096384",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 1730300,
+        "uncompressed_sha256": "e189f3ca731cf87433e423f88debce44e666e838fea1a8e57560b1f47f54422c"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1046123,
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1003990,
+        "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "947627e169a22ca6a4f877f7ea192467c150fcc43d4fad4d99d3599702029a75"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1001586,
+        "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "dbe45982cb0fbe54d9c8b61e0189a3f6a2093c407849326b250305723a49c0f0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1063935,
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 987691,
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "3d329a587e2e06a426dc802e04abfe01726d86657acfc469287cfe668c8102a8"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1026831,
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1493537,
+        "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8d270e713aa1ec33b8b279ae71224b7c2996053e1c2aced441723df8e82c80bb"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 962830,
+        "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1e9358bfccab1b75a7073f63d8b84d65f64b064244a1fdad76669378204d1fc0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1043652,
+        "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e354113a88c2d3deb64a327a469bcbca7c248b17083b3d739c18445b7b8c23df"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 998433,
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "049ab5f591d9821e7279c6c7afccfc0b55ed5a9f81976edfe969315ee25df079"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1039493,
+        "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "23d37fcd6c369a1dca6ba0fbccea55bc40bbeb74a340b4cca6752ca0d78cf231"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 1081053,
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 965771,
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a1663477a0e01de8bb56736262b57e95c3c49647d54db95c4d2fd6d86600c328"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 247084,
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 2171381,
+        "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 1730300,
+        "uncompressed_sha256": "e189f3ca731cf87433e423f88debce44e666e838fea1a8e57560b1f47f54422c"
+      },
+      {
+        "path": "scripts/physical_gap_priority.py",
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "bytes": 17403,
+        "sha256": "26ff1467cef85a0a30c21334ad9c2a6be4a0d635bae50ca4940086853773ab28",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "7110932cd2bcab7c2e03cadcda8eb02aa118eb9b",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+        "bytes": 103877,
+        "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "input_00": "ea54758f2272a7d7836dce8ba191c996694bca8e4af8eb0604eee72bc31c7710",
+      "input_01": "8733a89e5579437cb98ff70cb04fdc9ea762a589af77cb7538179835eb249934",
+      "input_02": "07643c6f699e343c707b9b9a5738f9c9998c75e3bdbc39d39193ee6e7ec5b8c7",
+      "input_03": "b95293cd0a6b2afd062fc0fda8121f6098c0e7e10250af563b35d840c91c373e",
+      "input_04": "200c18840963a6cabfd81c96b085dccf80b721902c65764fe2471a3c1cfe3787",
+      "input_05": "da5ea9cb223174c090947785f5ec1c84ba2f72fa3bcad85bdaa9f3409640ec54",
+      "input_06": "af3d28d483b9eb01d1c7c4db51e699ae32bba03bad2938ff6d723f419335e2a4",
+      "input_07": "5e45d4924be44c9d0ab5d619db94a8a65940967554f4d809de6deb034d1ea81a",
+      "input_08": "6d6b5dec8b4650a67ab8abbff80619d14023278a42ba98fce01e8ac0f76c6b3a",
+      "input_09": "bcf7bde1699392d69dc4b6e4dc92de5043312773be05d065f36f4d38d151ac98",
+      "input_10": "b1069d432b21146451a560dd75c152968274af683cf551e2f65ae03395096384",
+      "input_11": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "input_12": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "input_13": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "family_stream_000": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+      "family_stream_001": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+      "family_stream_002": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+      "family_stream_003": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "family_stream_004": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+      "family_stream_005": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+      "family_stream_006": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+      "family_stream_007": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+      "family_stream_008": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+      "family_stream_009": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+      "family_stream_010": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+      "family_stream_011": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+      "family_stream_012": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+      "family_stream_013": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+      "land_roster_routing": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "native_ranker_code": "26ff1467cef85a0a30c21334ad9c2a6be4a0d635bae50ca4940086853773ab28",
+      "native_ranker_helper": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+      "reproduction_helper": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "native_execution_report": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856"
+    },
+    "pin_files": {
+      "input_00": {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/README.md",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_01": {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/claim-receipt.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_02": {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/evidence-quality.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_03": {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/family-handoff.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_04": {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/selection-audit.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_05": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-000.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_06": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-001.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_07": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-002.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_08": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-003.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_09": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-004.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_10": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/evidence-quality.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_11": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_12": {
+        "path": "data/geography/part-9.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "input_13": {
+        "path": "data/geography/part-23.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "family_stream_000": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_001": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_002": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_003": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_004": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_005": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_006": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_007": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_008": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_009": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_010": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_011": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_012": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "family_stream_013": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "land_roster_routing": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "native_ranker_code": {
+        "path": "scripts/physical_gap_priority.py",
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1"
+      },
+      "native_ranker_helper": {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1"
+      },
+      "reproduction_helper": {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "7110932cd2bcab7c2e03cadcda8eb02aa118eb9b"
+      },
+      "native_execution_report": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      }
+    },
+    "subject_files": {
+      "gb:GHA:ADM2:2480657B35240131522033": "data/geography/part-9.json",
+      "gb:GHA:ADM2:2480657B47242267083805": "data/geography/part-9.json",
+      "gb:TGO:ADM2:56601680B4042875560778": "data/geography/part-23.json",
+      "gb:TGO:ADM2:56601680B98633254865748": "data/geography/part-23.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-project-records",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1403",
+      "role": "Retained routing, native-rank, and original scope records for a mechanical ranking correction; not geographic authority",
+      "vintage": "Issue input 4a78e95a96a3a12f3baca85f948eb67a5f924b1f; routing source stream d51c43e878c797d215ba5bd8285571fa14add443; native rank producer file bytes pinned at cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1; retained report names c9be3365bec68b553e1c003f5efc44d945dab2b6 (non-ancestor lineage unverified)",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying Ghana and Togo source reuse terms remain exactly as reported in the preserved #1403 packet; this erratum does not newly authenticate them."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore the exact whole files by the commits and SHA-256 descriptors in baseline.files; no third-party dataset copy is added by this erratum.",
+      "limit": "Verified hashes establish retained-record identity and ranking arithmetic only; they do not establish source authority, territorial accuracy, source completeness, legal reuse, physical surface, or cause.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/README.md",
+      "bytes": 6075,
+      "sha256": "b0330199d0fbee33051f4c2a8d9ceb0e3ee5ebdcd11c7f4dcd1c657eab670a02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py",
+      "bytes": 32054,
+      "sha256": "45d1b413459b08bce445bf3bb5ab0bc82d2671cab2bdf051c3748b238ee52916",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-one/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-one/publication.json",
+      "bytes": 501,
+      "sha256": "f4007adc85b2bf259493bf66a8c5fb4fb42e3c2c142e6b43c6f9bb2424df23ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-one/selection-reproduction.json",
+      "bytes": 14814,
+      "sha256": "a2fe75c820def0333c2f74d434b1be188c87d113807bbf99e1ebec04f230f6c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-two/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-two/publication.json",
+      "bytes": 501,
+      "sha256": "9a4e0528ad96128be43462d56e4d6e9c7bd4cbead080aec1b695f5e8e3b3a495",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-two/selection-reproduction.json",
+      "bytes": 14814,
+      "sha256": "a2fe75c820def0333c2f74d434b1be188c87d113807bbf99e1ebec04f230f6c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-one/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-one/publication.json",
+      "bytes": 501,
+      "sha256": "b28907d64b7d584cec2b49d05c9d0fe8ed558b64c8e4d1902a4fffbdd049fccf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-one/selection-reproduction.json",
+      "bytes": 15282,
+      "sha256": "dba7589ffe65d5b43c7e6ae55a1cfb2e1f8ac0878517dea79d54af68fd3614ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-two/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-two/publication.json",
+      "bytes": 501,
+      "sha256": "9490e0a2b238716a50d9419cb0bb41cd996d6c0b4708b4e9656c806d81fa54fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-two/selection-reproduction.json",
+      "bytes": 15282,
+      "sha256": "dba7589ffe65d5b43c7e6ae55a1cfb2e1f8ac0878517dea79d54af68fd3614ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/publication.json",
+      "bytes": 501,
+      "sha256": "d362246949ee41a2fd53e280b5ede7508bc260f166c216714e50da03d490f22c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "bytes": 15318,
+      "sha256": "c7bc765e86fdb7c3763140ce60cf3717e6626d8f8503d0cc9318aacaedf001fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-two/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-two/publication.json",
+      "bytes": 501,
+      "sha256": "3f387452cb64413e04961ece57ef883969adedac15425549c383412b54be8b40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-two/selection-reproduction.json",
+      "bytes": 15318,
+      "sha256": "c7bc765e86fdb7c3763140ce60cf3717e6626d8f8503d0cc9318aacaedf001fd",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "complete-native-eligible-family-ranking",
+      "description": "Authenticate the complete 95,173-component native rank inventory and all five rank files; join every one of the 1,005 pinned land-source-fitness rows by component and family; take each eligible family minimum in source_locator_readiness, measured_impact, coordination_complexity order; sort family minima with deterministic component/family ID tie-breaks. Verify the full original 15,610-row concatenated fine-family stream for the target family record and broader best-rank tuple.",
+      "software": "Python 3.12.14 standard library; current shared scripts/evidence/immutable.py at 7110932cd2bcab7c2e03cadcda8eb02aa118eb9b; native rank producer scripts/physical_gap_priority.py at cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1 (whole-file hashes match; run report names non-ancestor c9be3365bec68b553e1c003f5efc44d945dab2b6); no external packages.",
+      "units": "zero-based native component-rank positions; one-based family-list position; count of eligibility rows, families, and native components.",
+      "kind": "code"
+    },
+    {
+      "id": "contact-identity-retention",
+      "description": "Resolve all four issue-declared contact IDs to their exact pinned atlas feature parts and compare their IDs, names, and recorded parent IDs to the full original family record. This is an identity/recorded-parent check, not source-based administrative verification.",
+      "software": "Python 3.12.14 standard-library JSON; immutable Git blobs at the issue baseline.",
+      "units": "four contact identities; recorded parent IDs.",
+      "kind": "code"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "eligible_rows",
+      "value": 1005,
+      "unit": "source-match eligibility rows",
+      "vintage": "baseline",
+      "input_sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "input_file": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "eligible_families",
+      "value": 711,
+      "unit": "fine families",
+      "vintage": "baseline",
+      "input_sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+      "input_file": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "native_rank_components",
+      "value": 95173,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "b1069d432b21146451a560dd75c152968274af683cf551e2f65ae03395096384",
+      "input_file": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/evidence-quality.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "selected_readiness_rank",
+      "value": 2457,
+      "unit": "zero-based source-locator-readiness position",
+      "vintage": "baseline",
+      "input_sha256": "da5ea9cb223174c090947785f5ec1c84ba2f72fa3bcad85bdaa9f3409640ec54",
+      "input_file": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-000.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "selected_current_impact_rank",
+      "value": 94832,
+      "unit": "zero-based measured-impact position",
+      "vintage": "baseline",
+      "input_sha256": "da5ea9cb223174c090947785f5ec1c84ba2f72fa3bcad85bdaa9f3409640ec54",
+      "input_file": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-000.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "selected_complexity_rank",
+      "value": 52630,
+      "unit": "zero-based coordination-complexity position",
+      "vintage": "baseline",
+      "input_sha256": "da5ea9cb223174c090947785f5ec1c84ba2f72fa3bcad85bdaa9f3409640ec54",
+      "input_file": {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-rank-positions-000.json.gz",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "family_position_one_based",
+      "value": 30,
+      "unit": "one-based fine-family position",
+      "vintage": "baseline",
+      "input_sha256": "200c18840963a6cabfd81c96b085dccf80b721902c65764fe2471a3c1cfe3787",
+      "input_file": {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/selection-audit.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "original_reported_impact_rank",
+      "value": 94833,
+      "unit": "zero-based position in retained original selection audit",
+      "vintage": "baseline",
+      "input_sha256": "200c18840963a6cabfd81c96b085dccf80b721902c65764fe2471a3c1cfe3787",
+      "input_file": {
+        "path": "research/geography/ghana-togo-complete-family-source-fitness-20261007/selection-audit.json",
+        "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "original_family_best_readiness",
+      "value": 619,
+      "unit": "zero-based broader fine-family best position",
+      "vintage": "baseline",
+      "input_sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+      "input_file": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "original_family_best_impact",
+      "value": 69149,
+      "unit": "zero-based broader fine-family best position",
+      "vintage": "baseline",
+      "input_sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+      "input_file": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    },
+    {
+      "id": "original_family_best_complexity",
+      "value": 52146,
+      "unit": "zero-based broader fine-family best position",
+      "vintage": "baseline",
+      "input_sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+      "input_file": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
+      },
+      "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
+      "output_vintage": "rank-v3-one"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "eligible_rows",
+      "value": 1005,
+      "unit": "source-match eligibility rows"
+    },
+    {
+      "metric_id": "eligible_families",
+      "value": 711,
+      "unit": "fine families"
+    },
+    {
+      "metric_id": "native_rank_components",
+      "value": 95173,
+      "unit": "components"
+    },
+    {
+      "metric_id": "selected_readiness_rank",
+      "value": 2457,
+      "unit": "zero-based source-locator-readiness position"
+    },
+    {
+      "metric_id": "selected_current_impact_rank",
+      "value": 94832,
+      "unit": "zero-based measured-impact position"
+    },
+    {
+      "metric_id": "selected_complexity_rank",
+      "value": 52630,
+      "unit": "zero-based coordination-complexity position"
+    },
+    {
+      "metric_id": "family_position_one_based",
+      "value": 30,
+      "unit": "one-based fine-family position"
+    },
+    {
+      "metric_id": "original_reported_impact_rank",
+      "value": 94833,
+      "unit": "zero-based position in retained original selection audit"
+    },
+    {
+      "metric_id": "original_family_best_readiness",
+      "value": 619,
+      "unit": "zero-based broader fine-family best position"
+    },
+    {
+      "metric_id": "original_family_best_impact",
+      "value": 69149,
+      "unit": "zero-based broader fine-family best position"
+    },
+    {
+      "metric_id": "original_family_best_complexity",
+      "value": 52146,
+      "unit": "zero-based broader fine-family best position"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "For the pinned current native rank and eligibility records, the selected Ghana–Togo eligible component tuple is (2457, 94832, 52630) and the fine family remains at one-based position 30 of 711. This corrects the retained original report value 94833 for measured impact at this rank vintage.",
+      "status": "supported",
+      "source_ids": [
+        "retained-project-records"
+      ]
+    },
+    {
+      "text": "The broader original fine-family best tuple (619, 69149, 52146) is authenticated in the complete original family record and is a different statistic from the eligible-component tuple.",
+      "status": "supported",
+      "source_ids": [
+        "retained-project-records"
+      ]
+    },
+    {
+      "text": "Current legal boundary authority, source completeness, source-vintage license applicability, physical surface, and cause remain unresolved as recorded in #1403; this numerical erratum does not re-adjudicate them.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-project-records"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py --repo . --vintage rank-v3-one",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py --repo . --vintage rank-v3-two",
+    "node scripts/evidence-quality.mjs research/geography/ghana-togo-selection-provenance-1405/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-one/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-one/selection-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-two/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v1-two/selection-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-one/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-one/selection-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-two/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v2-two/selection-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-two/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-two/selection-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "eligible_rows",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/ranking/eligible_row_count"
+    },
+    {
+      "metric_id": "eligible_families",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/ranking/eligible_family_count"
+    },
+    {
+      "metric_id": "native_rank_components",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/ranking/native_rank_component_count"
+    },
+    {
+      "metric_id": "selected_readiness_rank",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/ranking/selected/rank_tuple/0"
+    },
+    {
+      "metric_id": "selected_current_impact_rank",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/ranking/selected/rank_tuple/1"
+    },
+    {
+      "metric_id": "selected_complexity_rank",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/ranking/selected/rank_tuple/2"
+    },
+    {
+      "metric_id": "family_position_one_based",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/ranking/selected/family_position_one_based"
+    },
+    {
+      "metric_id": "original_reported_impact_rank",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/original_selection_audit/previous_eligible_tuple/1"
+    },
+    {
+      "metric_id": "original_family_best_readiness",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/original_selection_audit/broader_original_family_best_rank/source_locator_readiness"
+    },
+    {
+      "metric_id": "original_family_best_impact",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/original_selection_audit/broader_original_family_best_rank/measured_impact"
+    },
+    {
+      "metric_id": "original_family_best_complexity",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "json_pointer": "/original_selection_audit/broader_original_family_best_rank/coordination_complexity"
+    }
+  ]
+}
