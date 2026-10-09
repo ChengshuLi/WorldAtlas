@@ -6,6 +6,8 @@ This is one 363-candidate assignment: batch `gap-operational-batch:37ed51b2c2eac
 
 `vintages/candidate-capture-001/` preserves exact full component features for all 363 assigned IDs from the retained component-v3 custody payloads. The assignment itself is copied byte-for-byte into the vintage. The capture used the pinned repository `Baseline` and exclusive `NewVintage` helpers, admitted 113,447,026 input bytes, and published a final completion receipt. Its complete exact coordinates and feature/geometry hashes are available for downstream source fitting and native-grid assignment.
 
+`vintages/catalog-route-l01/` through `catalog-route-l07/` capture exactly the assigned rows from the seven whole corrected-catalog leaves. Each leaf uses its own bounded, admitted vintage rather than reading the 336 MB decoded catalog phase at once. Together they account for all 363 assigned rows without duplicates and preserve their prior source-product, physical-support, prerequisite, and pipeline-status records. These are routing evidence only; later source-fit results may promote or refuse work based on current exact bindings.
+
 `vintages/choiseul-six/README.md` and `vintages/choiseul-six-exact-003/` contain the first six source-fit results. Two meet strict source-relative target-gain equality, no-loss, and complete-neighbor exclusion. Four retain source-supported original candidate geometries for additive native-grid checking while preserving existing assignments; their exact overlay differences are not forced through snapping or tolerance.
 
 ## Existing catalog snapshot, not new decisions
