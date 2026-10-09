@@ -122,6 +122,12 @@
         "bytes": 4813,
         "sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/deployment-budget-scope.test.mjs",
+        "bytes": 12122,
+        "sha256": "bd7d346c6ee6ed9734f0afbb58a69460b279e6343d444e1124991c1fb3ba19a1",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {},
@@ -137,15 +143,27 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 19633,
+      "sha256": "1a073b4d919b24c34f4d0ab210554c5c4ef8d3a2f1af104a712402f9b40b648e",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/README.md",
-      "bytes": 6038,
-      "sha256": "13b9b3c4751bd8f9fd7c75ad97b6136b9885de3de16855f2864f243a1ac11378",
+      "bytes": 6464,
+      "sha256": "0071a5c8ddeb2179bc4684e9f5809fe871c3ad90abaee183304d5372dfba9a95",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
       "bytes": 1702,
       "sha256": "3998262f8aa956b001d2b66e4b0f97c2c94232171af7f63b1fd543031b1a88ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
+      "bytes": 1279,
+      "sha256": "0dccf590c1d1cd06ee84943caa841e9629360d1e3f1fb6f1f8c23ceea48cbd87",
       "hash_kind": "file-bytes"
     },
     {
@@ -317,6 +335,24 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "bytes": 6031,
+      "sha256": "6ac4d8c6b3404b3bb775d5c32d19835c91d3d506650c1b09082aa63f36d9c225",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-package-controls-final.log",
+      "bytes": 7139,
+      "sha256": "aecde2e8f4045f5d2261007e55afea3bfde344cf79f5d13e1a56230f0ceed2dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
+      "bytes": 1920,
+      "sha256": "5649c401dcce0a1ed9bae321ee9e4e8a7606fe00b56d20af021b99a862241c2a",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/operational-image-routing-controls.log",
       "bytes": 3901,
       "sha256": "1b3061f24cb5b2cf454c413aaab598cf587bb4dc15402aa5c55621ea8674bbbf",
@@ -371,6 +407,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
+      "bytes": 1517,
+      "sha256": "5c83dfd7cfd2dfe531186e821f1714c11fbbba5acd0c53f47ffa2a5a4d6e2738",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/profile-restoration.mjs",
       "bytes": 6435,
       "sha256": "9beea035648d7381f14575662944e0c029ca519ead16fe4a979df3e2837b8262",
@@ -380,6 +422,24 @@
       "path": "coordination/engineering/setup-1543-20261009/retained-report-index.json",
       "bytes": 12956,
       "sha256": "9a00226048205bef0fbb8318876e472798cc1d196e08a6d121bd99b412939160",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
+      "bytes": 4239,
+      "sha256": "735bfdd20ed8c7db4910f5d919e3988174279fdb16a6058e8df7e41cdf4c65b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
+      "bytes": 1918,
+      "sha256": "7f3413aab3f2cf3d77fa2feb6e9fcb79c09567736bfebd1753975e5ab2539631",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "bytes": 5271,
+      "sha256": "a6f6c561cdfb96a801ba17b780c9dc9cbc36f4592c81465abb418e841e6b8cbd",
       "hash_kind": "file-bytes"
     },
     {
@@ -455,6 +515,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 12175,
+      "sha256": "e6cfa191c1af9204901070a4983b87da32e183024ba260935679ad2373075c46",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/geographic-adjudication-api.test.mjs",
       "bytes": 19437,
       "sha256": "5e866cb0a40e7f20db96fab7ca5d66431d66979e4d60e03b23376809fe4198b8",
@@ -467,63 +533,15 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "test/restore-whole-image.test.mjs",
-      "bytes": 6113,
-      "sha256": "619e4ccb7a88828e4c5a595d6560707805ecfc34a6e5b37702536f5f058e773e",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
-      "bytes": 1323,
-      "sha256": "b07330a321f86832ce14e85728220d022e2844b454b70d008251319a9a8b95b3",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
-      "bytes": 1726,
-      "sha256": "bf40eb07afe1080f1759ac7264887cc1d6a3d67c291269e0889f732afd7f6d30",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
-      "bytes": 1279,
-      "sha256": "0dccf590c1d1cd06ee84943caa841e9629360d1e3f1fb6f1f8c23ceea48cbd87",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
-      "bytes": 1918,
-      "sha256": "7f3413aab3f2cf3d77fa2feb6e9fcb79c09567736bfebd1753975e5ab2539631",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
-      "bytes": 4239,
-      "sha256": "735bfdd20ed8c7db4910f5d919e3988174279fdb16a6058e8df7e41cdf4c65b2",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": ".github/workflows/merge-integration-checks.yml",
-      "bytes": 19633,
-      "sha256": "1a073b4d919b24c34f4d0ab210554c5c4ef8d3a2f1af104a712402f9b40b648e",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "test/pr-gates.test.mjs",
       "bytes": 19296,
       "sha256": "ec96aad46e31eb6b4de867164c6031a5c8ebce645cded9627a52a19aed40fb74",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "docs/MERGE_QUEUE_CLIENT.md",
-      "bytes": 5271,
-      "sha256": "a6f6c561cdfb96a801ba17b780c9dc9cbc36f4592c81465abb418e841e6b8cbd",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
-      "bytes": 6031,
-      "sha256": "6ac4d8c6b3404b3bb775d5c32d19835c91d3d506650c1b09082aa63f36d9c225",
+      "path": "test/restore-whole-image.test.mjs",
+      "bytes": 6113,
+      "sha256": "619e4ccb7a88828e4c5a595d6560707805ecfc34a6e5b37702536f5f058e773e",
       "hash_kind": "file-bytes"
     }
   ],
@@ -534,11 +552,20 @@
       "original_sha256": "117299e90acdf9518f0bdb84511334bbd28c932b4504b5cc652e89c0945f8e9f"
     },
     {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "e36c2f9b54a92e8ab7d926b2601bdc823d8ffab93d159fa422ae93986afc47c4"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/README.md",
       "status": "added"
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
       "status": "added"
     },
     {
@@ -650,7 +677,23 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/setup-1543-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/memory-diagnostic.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-package-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
       "status": "added"
     },
     {
@@ -690,12 +733,29 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/profile-restoration.mjs",
       "status": "added"
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/retained-report-index.json",
       "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "status": "modified",
+      "original_sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758"
     },
     {
       "path": "scripts/build-static-inner.mjs",
@@ -751,6 +811,11 @@
       "status": "added"
     },
     {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "bd7d346c6ee6ed9734f0afbb58a69460b279e6343d444e1124991c1fb3ba19a1"
+    },
+    {
       "path": "test/geographic-adjudication-api.test.mjs",
       "status": "modified",
       "original_sha256": "aee05daafed344f4312ed6eaff7fa8d411a0bc01b515c207108bd56398865523"
@@ -761,50 +826,12 @@
       "original_sha256": "609e627e5c3a03494b92ca836c2425b5a504a3fa24a635cd5b9a4bd4de416529"
     },
     {
-      "path": "test/restore-whole-image.test.mjs",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": ".github/workflows/merge-integration-checks.yml",
-      "status": "modified",
-      "original_sha256": "e36c2f9b54a92e8ab7d926b2601bdc823d8ffab93d159fa422ae93986afc47c4"
-    },
-    {
       "path": "test/pr-gates.test.mjs",
       "status": "modified",
       "original_sha256": "1e14acd61d4c7553a052fe2f1493b2f6de8ff76459e7f8560c09a9b9826b9ed3"
     },
     {
-      "path": "docs/MERGE_QUEUE_CLIENT.md",
-      "status": "modified",
-      "original_sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758"
-    },
-    {
-      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "path": "test/restore-whole-image.test.mjs",
       "status": "added"
     }
   ],
