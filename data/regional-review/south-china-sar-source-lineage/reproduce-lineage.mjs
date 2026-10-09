@@ -8,6 +8,10 @@ const bytes = (p) => readFileSync(p);
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const json = (p) => JSON.parse(bytes(p));
 const baseline = 'd43cce74959376d8ef052afd3fd09e875bb08938';
+const historicalMethodCommit = '4bdba3d40acc2d725e4aeb54c3b9aab559a91469';
+const historicalMethodSha256 = 'ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a';
+const historicalMethodBytes = execFileSync('git', ['show', `${historicalMethodCommit}:scripts/semantic-locations.py`], {maxBuffer: 2 * 1024 * 1024});
+if (sha(historicalMethodBytes) !== historicalMethodSha256) throw new Error('Historical aggregation source hash mismatch');
 const atlasBytes = execFileSync('git', ['show', `${baseline}:data/geography/part-28.json`], {maxBuffer: 32 * 1024 * 1024});
 const atlasDoc = JSON.parse(atlasBytes);
 const atlas = new Map(atlasDoc.features.map(f => [f.properties.id, f]));
@@ -119,6 +123,7 @@ const gbNegativeRejected = gb.features.filter(f => f.properties.shapeID === 'CON
 const result = {
   schema_version: 1,
   baseline_commit: baseline,
+  historical_aggregate_method: {status:'located',path:'scripts/semantic-locations.py',commit:historicalMethodCommit,sha256:historicalMethodSha256,operation:'polygon(make_valid(union_all([geoms[i] for i in indices])))',historical_preaggregation_input:'data/.cache/semantic/input.geojson was untracked at the historical run and is absent from its parent snapshot; retained input-byte identity cannot be restored'},
   subjects: {
     'atlas:territory:HKG': {
       atlas_name: hkgAtlas.properties.name,
@@ -156,7 +161,8 @@ const result = {
     mac_absent_native_id_negative: {outcome:gbNegativeRejected?'passed':'failed',expected:'absent sentinel has zero ShapeID matches'},
   },
   unverified: [
-    'No original import/aggregation implementation or executable recipe was found in retained source packet or reachable git history searched for the aggregate/native IDs. The outputs permit exact member-ID joins; they do not establish how source geometry was unioned, clipped, simplified, projected or assigned to Atlas IDs.',
+    'The historical aggregation implementation is pinned and its union operation is replayed in original-union-results.json, but the historical pre-aggregation input cache was untracked and is unavailable. Exact original input bytes and whether other preceding transformations affected these subjects cannot be verified.',
+    'The replay reconstructs Natural Earth shapefile polygons from ESRI ring orientation and point-in-ring shell/hole assignment; this adapter was not compared against the unavailable historical GeoJSON input. Geometry differences therefore include possible source-reader/serialization uncertainty.',
     'No GIS topology/overlay was run. Polygon counts, coordinate counts and rounded direct-source comparisons do not establish legal boundary correctness, gaps, overlaps, islands, coastline, maritime coverage or neighbors.',
     'Natural Earth package declares its vector data public domain; upstream authority and rights for its source contributors remain unverified. geoBoundaries predecessor terms/citation chain remain unresolved in retained malformed source URLs.',
   ],

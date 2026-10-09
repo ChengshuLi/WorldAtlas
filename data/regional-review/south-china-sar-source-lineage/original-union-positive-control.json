@@ -1,0 +1,19 @@
+{
+  "method_id": "historical-aggregate-replay",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "id": "HKG member roster and valid replay",
+      "expected_members": 18,
+      "actual_members": 18,
+      "valid": true
+    },
+    {
+      "id": "MAC two-source-member roster and valid replay",
+      "expected_members": 2,
+      "actual_members": 2,
+      "valid": true
+    }
+  ]
+}

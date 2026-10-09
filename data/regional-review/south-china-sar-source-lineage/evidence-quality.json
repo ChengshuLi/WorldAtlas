@@ -389,38 +389,52 @@
   "outputs": [
     {
       "path": "data/regional-review/south-china-sar-source-lineage/README.md",
-      "bytes": 10720,
-      "sha256": "39d85a5162309668b17074b47ebdc6a3a9cead32f8f69672ef741ac38a009213",
+      "bytes": 11012,
+      "sha256": "75728e6943a3c4dd2d9c226405916e902568ac0fda428a4174294d5761924a56",
       "hash_kind": "file-bytes",
       "role": "research-report"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/reproduce-lineage.mjs",
-      "bytes": 12397,
-      "sha256": "131e2e848ae9549541669b9412f18744eab52f094afa9019fcb50eae38a4b8e3",
+      "bytes": 13553,
+      "sha256": "9a9df009bf849e994cabceff2540592a4bab1be2be4bc08d0d5f573da2ddf981",
       "hash_kind": "file-bytes",
       "role": "method-code"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/reproduce-original-union.py",
-      "bytes": 7398,
-      "sha256": "ae726f9d60e772493e09d194bbcfdf9fe6b9f03797231c46eab50952cb14e928",
+      "bytes": 9231,
+      "sha256": "f62af755e6695db132980a74d3ca39f1c9f9c941be2f5f46614c2e80f10abc2c",
       "hash_kind": "file-bytes",
       "role": "source-register"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
-      "bytes": 10588,
-      "sha256": "0a1b14f915bba2afa7a77cd0226d942254525f1ff71835f6065342d4f56f8fd9",
+      "bytes": 11414,
+      "sha256": "a57681ed68be62f1aca7db7638856253d65dff3c307f7129a5fefa80bee09afd",
       "hash_kind": "file-bytes",
       "role": "generated-result"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/original-union-results.json",
-      "bytes": 5909,
-      "sha256": "ab4a0c0d011e2c5e00e125226594c8a8ed70ff56df15c80aa4a941f5e4d97ac7",
+      "bytes": 6232,
+      "sha256": "ec489b97ee1277b18951b658486cc9cc82fd73137179bb4a470db6103e554157",
       "hash_kind": "file-bytes",
       "role": "source-register"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-positive-control.json",
+      "bytes": 410,
+      "sha256": "1527238017ce2ad100cf830d7b39949a243abf87117ebec2ef05ccfe86f89a56",
+      "hash_kind": "file-bytes",
+      "role": "control-output"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-negative-control.json",
+      "bytes": 375,
+      "sha256": "3ebce4ba6ce5b9dbfe57a05958e7070ee2af9cc08442457872d4170f4f9e55a1",
+      "hash_kind": "file-bytes",
+      "role": "control-output"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/positive-control.json",
@@ -549,7 +563,13 @@
       "method_id": "historical-aggregate-replay",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/south-china-sar-source-lineage/original-union-results.json"
+      "evidence_path": "data/regional-review/south-china-sar-source-lineage/original-union-positive-control.json"
+    },
+    {
+      "method_id": "historical-aggregate-replay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-china-sar-source-lineage/original-union-negative-control.json"
     },
     {
       "method_id": "sar-source-identity-reproduction",
@@ -661,63 +681,59 @@
   "change_receipts": [
     {
       "path": "data/regional-review/south-china-sar-source-lineage/README.md",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/evidence-quality.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/negative-control.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-positive-control.json",
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/original-union-results.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/positive-control.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/reproduce-lineage.mjs",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/reproduce-original-union.py",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/source-register.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-boundaries.geojson",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-layer.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-service.json",
-      "status": "added",
-      "previous_path": null
+      "status": "added"
     }
   ]
 }

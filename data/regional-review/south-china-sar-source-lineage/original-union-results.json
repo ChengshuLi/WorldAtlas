@@ -7,6 +7,7 @@
     "merge_operation": "polygon(make_valid(union_all([geoms[i] for i in indices])))"
   },
   "source_vintage_limit": "The historical cache input.geojson used by CODE_COMMIT was untracked and is not present in the parent commit. This bounded replay uses retained Natural Earth shapefile source and retained 2017 geoBoundaries bytes; it does not claim byte-identical historical inputs.",
+  "geometry_reader_limit": "Natural Earth polygons are reconstructed from ESRI ring orientation and point-in-ring shell/hole assignment. The reconstructed geometry was not crosschecked against the unavailable historical GeoJSON cache, so shapefile reader/serialization differences may contribute to measured differences.",
   "runtime": {
     "python": "3.12.14",
     "shapely": "2.1.2"

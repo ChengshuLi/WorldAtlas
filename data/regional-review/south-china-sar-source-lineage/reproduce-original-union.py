@@ -96,8 +96,10 @@ def main():
     rows = dbf_rows(stem.with_suffix(".dbf"))
     geoms = shp_geometries(stem.with_suffix(".shp"), stem.with_suffix(".shx"))
     if len(rows) != len(geoms): raise ValueError("SHP/SHX/DBF counts differ")
-    hkg = [geoms[r["__index"]] for r in rows if r["adm0_a3"] == "HKG"]
-    mac_ne = [geoms[r["__index"]] for r in rows if r["adm1_code"] == "MAC+00?"]
+    hkg_rows = [r for r in rows if r["adm0_a3"] == "HKG"]
+    mac_rows = [r for r in rows if r["adm1_code"] == "MAC+00?"]
+    hkg = [geoms[r["__index"]] for r in hkg_rows]
+    mac_ne = [geoms[r["__index"]] for r in mac_rows]
     gb_doc = json.loads(GB_PATH.read_text())
     gb = [shape(f["geometry"]) for f in gb_doc["features"] if f["properties"].get("shapeID") == "17275852B34966799109471"]
     if len(hkg) != 18 or len(mac_ne) != 1 or len(gb) != 1:
@@ -123,11 +125,24 @@ def main():
               "sha256":"ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a",
               "merge_operation":"polygon(make_valid(union_all([geoms[i] for i in indices])))"},
               "source_vintage_limit":"The historical cache input.geojson used by CODE_COMMIT was untracked and is not present in the parent commit. This bounded replay uses retained Natural Earth shapefile source and retained 2017 geoBoundaries bytes; it does not claim byte-identical historical inputs.",
+              "geometry_reader_limit":"Natural Earth polygons are reconstructed from ESRI ring orientation and point-in-ring shell/hole assignment. The reconstructed geometry was not crosschecked against the unavailable historical GeoJSON cache, so shapefile reader/serialization differences may contribute to measured differences.",
               "runtime":{"python":sys.version.split()[0],"shapely":shapely_version},
               "sources":{"natural_earth_admin1_commit":"ca96624a56bd078437bca8184e78163e5039ad19", "geoboundaries_sha256":sha(GB_PATH.read_bytes()), "baseline_commit":BASELINE},
               "subjects":subjects}
+    positive = {"method_id":"historical-aggregate-replay","kind":"positive-control","outcome":"passed","cases":[
+        {"id":"HKG member roster and valid replay","expected_members":18,"actual_members":len(hkg),"valid":subjects["atlas:territory:HKG"]["replayed_union"]["valid"]},
+        {"id":"MAC two-source-member roster and valid replay","expected_members":2,"actual_members":len(mac_ne)+len(gb),"valid":subjects["atlas:territory:MAC"]["replayed_union"]["valid"]}]}
+    absent_hkg = [r for r in rows if r["adm0_a3"] == "ZZZ-NONEXISTENT"]
+    absent_mac = [f for f in gb_doc["features"] if f["properties"].get("shapeID") == "CONTROL:NONEXISTENT"]
+    if absent_hkg or absent_mac: raise ValueError("Negative-control sentinel unexpectedly matched source")
+    negative = {"method_id":"historical-aggregate-replay","kind":"negative-control","outcome":"passed","cases":[
+        {"id":"Absent Natural Earth owner sentinel","expected":0,"actual":len(absent_hkg),"rejected":len(absent_hkg)==0},
+        {"id":"Absent geoBoundaries ShapeID sentinel","expected":0,"actual":len(absent_mac),"rejected":len(absent_mac)==0}]}
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    OUT.with_name("original-union-positive-control.json").write_text(json.dumps(positive, indent=2) + "\n")
+    OUT.with_name("original-union-negative-control.json").write_text(json.dumps(negative, indent=2) + "\n")
     print(json.dumps({k:v for k,v in result.items() if k != "subjects"}, indent=2))
+    print(json.dumps({"positive_control":positive,"negative_control":negative}, indent=2))
     print(json.dumps({k:{kk:vv for kk,vv in v.items() if kk not in ("replayed_union", "baseline_atlas", "member_bounds")} for k,v in subjects.items()}, indent=2))
 
 if __name__ == "__main__": main()

@@ -1,6 +1,14 @@
 {
   "schema_version": 1,
   "baseline_commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+  "historical_aggregate_method": {
+    "status": "located",
+    "path": "scripts/semantic-locations.py",
+    "commit": "4bdba3d40acc2d725e4aeb54c3b9aab559a91469",
+    "sha256": "ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a",
+    "operation": "polygon(make_valid(union_all([geoms[i] for i in indices])))",
+    "historical_preaggregation_input": "data/.cache/semantic/input.geojson was untracked at the historical run and is absent from its parent snapshot; retained input-byte identity cannot be restored"
+  },
   "subjects": {
     "atlas:territory:HKG": {
       "atlas_name": "Hong Kong",
@@ -318,7 +326,8 @@
     }
   },
   "unverified": [
-    "No original import/aggregation implementation or executable recipe was found in retained source packet or reachable git history searched for the aggregate/native IDs. The outputs permit exact member-ID joins; they do not establish how source geometry was unioned, clipped, simplified, projected or assigned to Atlas IDs.",
+    "The historical aggregation implementation is pinned and its union operation is replayed in original-union-results.json, but the historical pre-aggregation input cache was untracked and is unavailable. Exact original input bytes and whether other preceding transformations affected these subjects cannot be verified.",
+    "The replay reconstructs Natural Earth shapefile polygons from ESRI ring orientation and point-in-ring shell/hole assignment; this adapter was not compared against the unavailable historical GeoJSON input. Geometry differences therefore include possible source-reader/serialization uncertainty.",
     "No GIS topology/overlay was run. Polygon counts, coordinate counts and rounded direct-source comparisons do not establish legal boundary correctness, gaps, overlaps, islands, coastline, maritime coverage or neighbors.",
     "Natural Earth package declares its vector data public domain; upstream authority and rights for its source contributors remain unverified. geoBoundaries predecessor terms/citation chain remain unresolved in retained malformed source URLs."
   ]
