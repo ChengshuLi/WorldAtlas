@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import re
@@ -168,6 +169,32 @@ def snapshot_mutation_control(run_id: str) -> dict:
     raise AssertionError('complete changed issue snapshot unexpectedly passed authentication')
 
 
+def subject_scope_controls(directory: Path, expected: dict) -> list[dict]:
+    table = directory / reproduce.FILES[2]
+    original_hash = sha(table.read_bytes())
+    with table.open(encoding='utf-8', newline='') as stream:
+        ids = [row['id'] for row in csv.DictReader(stream)]
+    if len(ids) != 224 or len(set(ids)) != 224 or sorted(ids) != sorted(expected['subjects']):
+        raise AssertionError('fresh report output did not satisfy exact subject scope before mutation probes')
+    cases = []
+    fixtures = [
+        ('duplicate-subject', ids[:-1] + [ids[0]]),
+        ('missing-subject', ids[:-1]),
+        ('fabricated-output-subject', ids[:-1] + ['gb:HRV:ADM2:unissued-fabricated-id']),
+    ]
+    for label, fixture in fixtures:
+        try:
+            reproduce.validate_scoped_subject_ids(fixture, expected['subjects'])
+        except ValueError as error:
+            cases.append({'id': label, 'outcome': 'passed', 'rejection': str(error),
+                          'fixture_sha256': sha(('\n'.join(fixture) + '\n').encode())})
+        else:
+            raise AssertionError(f'actual output-scope validator accepted {label}')
+    if sha(table.read_bytes()) != original_hash:
+        raise AssertionError('subject mutation fixtures modified the authenticated fresh report')
+    return cases
+
+
 def path_and_writer_controls() -> dict:
     with tempfile.TemporaryDirectory(prefix='.controls-', dir=EVIDENCE) as temporary:
         root = Path(temporary)
@@ -195,6 +222,33 @@ def path_and_writer_controls() -> dict:
             raise AssertionError('traversal or malformed output path was accepted')
         ordinary = root / 'ordinary-file'
         ordinary.write_text('not a directory')
+        ordinary_hash = sha(ordinary.read_bytes())
+        ordinary_parent = (root.relative_to(OWNED) / ordinary.name / 'child').as_posix()
+        try:
+            reproduce.safe_destination(ordinary_parent)
+        except ValueError:
+            ordinary_rejected = True
+        else:
+            raise AssertionError('ordinary-file output parent was accepted')
+
+        dangling = root / 'dangling-parent'
+        dangling.symlink_to(root / 'missing-target', target_is_directory=True)
+        try:
+            reproduce.safe_destination((dangling.relative_to(OWNED) / 'child').as_posix())
+        except ValueError:
+            dangling_rejected = True
+        else:
+            raise AssertionError('broken-symlink output parent was accepted')
+
+        escaped = root / 'escaping-parent'
+        escaped.symlink_to(Path(tempfile.gettempdir()), target_is_directory=True)
+        try:
+            reproduce.safe_destination((escaped.relative_to(OWNED) / 'child').as_posix())
+        except ValueError:
+            escaped_rejected = True
+        else:
+            raise AssertionError('escaping-symlink output parent was accepted')
+
         link = OWNED / 'evidence' / f'.control-symlink-{root.name}'
         if link.exists() or link.is_symlink():
             raise FileExistsError('symlink control path already exists')
@@ -230,10 +284,15 @@ def path_and_writer_controls() -> dict:
             raise AssertionError('interrupted output name was overwritten')
         if sha(first.read_bytes()) != partial_hash:
             raise AssertionError('interrupted output bytes changed during retry')
+        if sha(ordinary.read_bytes()) != ordinary_hash or sha(sentinel.read_bytes()) != sentinel_hash:
+            raise AssertionError('path admission controls changed an existing sentinel')
     return {'outcome': 'passed', 'existing_output_preserved': True,
-            'unsafe_paths_rejected': rejected, 'symlink_parent_rejected': True,
+            'unsafe_paths_rejected': rejected, 'ordinary_file_parent_rejected': ordinary_rejected,
+            'broken_symlink_parent_rejected': dangling_rejected,
+            'escaping_symlink_parent_rejected': escaped_rejected, 'symlink_parent_rejected': True,
             'partial_failure_preserved': True, 'retry_refused': True,
-            'sentinel_sha256': sentinel_hash, 'partial_output_sha256': partial_hash}
+            'sentinel_sha256': sentinel_hash, 'ordinary_file_sha256': ordinary_hash,
+            'partial_output_sha256': partial_hash}
 
 
 def prior_table_evidence(expected: dict, run_id: str) -> tuple[dict, dict]:
@@ -340,6 +399,7 @@ def run_controls(run_id: str) -> dict:
 
     single_read = snapshot_mutation_control(run_id)
     malformed = altered_record_controls(one, one_dir, expected)
+    subject_controls = subject_scope_controls(one_dir, expected)
     path_controls = path_and_writer_controls()
     combined_one = sha(b''.join((one_dir / name).read_bytes() for name in reproduce.FILES))
     combined_two = sha(b''.join((two_dir / name).read_bytes() for name in reproduce.FILES))
@@ -357,15 +417,17 @@ def run_controls(run_id: str) -> dict:
                                    'evaluation_vintage': 'retained #1199/#1209 result values; baseline, not a new geographic finding'},
         'positive_runs': [one, two], 'historical_output_comparison': historical,
         'snapshot_mutation_control': single_read, 'malformed_receipt_controls': malformed,
-        'path_and_writer_controls': path_controls,
+        'subject_scope_mutation_controls': subject_controls, 'path_and_writer_controls': path_controls,
         'validation_records': {
             'positive-control': {'method_id': 'croatia-run-provenance-controls', 'kind': 'positive-control',
                                  'outcome': 'passed', 'fresh_run_count': 2,
                                  'complete_report_receipts': True},
             'negative-control': {'method_id': 'croatia-run-provenance-controls', 'kind': 'negative-control',
                                  'outcome': 'passed', 'altered_record_case_count': len(malformed) + 1,
+                                 'subject_scope_case_count': len(subject_controls),
                                  'source_snapshot_mutation_rejected': True,
-                                 'unsafe_and_interrupted_outputs_preserved': True},
+                                 'unsafe_and_interrupted_outputs_preserved': True,
+                                 'ordinary_broken_escape_admission_rejected': True},
             'reproducibility': {'method_id': 'croatia-run-provenance-controls', 'kind': 'reproducibility',
                                 'outcome': 'passed', 'run_one_sha256': combined_one,
                                 'run_two_sha256': combined_two}

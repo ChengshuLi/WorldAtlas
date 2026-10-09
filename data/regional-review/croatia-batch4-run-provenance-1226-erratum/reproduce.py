@@ -340,6 +340,16 @@ def install_verified_helper(source: bytes) -> None:
     exec(compile(source, helper.__file__, 'exec'), helper.__dict__)
 
 
+def validate_scoped_subject_ids(ids: list[str], subjects: list[str]) -> None:
+    """Require exact, unique output identities for the captured issue scope."""
+    if len(ids) != 224:
+        raise ValueError('generated output has a missing or extra issue subject')
+    if len(set(ids)) != 224:
+        raise ValueError('generated output contains duplicate issue subjects')
+    if sorted(ids) != sorted(subjects):
+        raise ValueError('generated output contains a missing or fabricated issue subject')
+
+
 def build_private(frozen: dict, scratch: Path, subjects: list[str]) -> tuple[Path, list[dict]]:
     private_packet = scratch / 'packet'
     (private_packet / 'source').mkdir(parents=True)
@@ -400,8 +410,7 @@ def build_private(frozen: dict, scratch: Path, subjects: list[str]) -> tuple[Pat
     summary_doc = json.loads((output / FILES[0]).read_bytes())
     rows = list(csv.DictReader((output / FILES[2]).open(encoding='utf-8', newline='')))
     ids = [row['id'] for row in rows]
-    if len(ids) != 224 or len(set(ids)) != 224 or sorted(ids) != sorted(subjects):
-        raise ValueError('generated output no longer has the exact 224 unique issue subjects')
+    validate_scoped_subject_ids(ids, subjects)
     if summary_doc.get('metrics', {}).get('scoped_subject_count') != 224:
         raise ValueError('historical report subject count differs from the exact issue scope')
     return output, archive_members, consumed_members
