@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {authenticateInstalledCheckoutExecutable,checkoutExecutionClosure} from './artifact-checkout-execution.mjs';
 const destination=path.resolve(process.argv[2]);
 assert(destination.includes('/.cache/'));assert(!fs.existsSync(destination));
 fs.mkdirSync(path.join(destination,'scripts'),{recursive:true});
@@ -29,9 +30,14 @@ fs.writeFileSync(path.join(destination,'scripts/wrong-entry.mjs'),entry);
 const git=process.platform==='darwin'?'/Library/Developer/CommandLineTools/usr/bin/git':'/usr/bin/git';
 function run(command,args,env={}){const result=spawnSync(command,args,{cwd:destination,encoding:'utf8',env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',...env},maxBuffer:4*1024*1024});assert.equal(result.status,0,result.stderr);return result.stdout;}
 run(git,['init','--quiet']);run(git,['add','.']);run(git,['-c','user.name=Boundary fixture','-c','user.email=fixture@example.invalid','commit','--quiet','-m','Complete tiny execution fixture']);
+const installedFixture=path.join(destination,'installed-executable');fs.writeFileSync(installedFixture,'#!/bin/sh\nexit 0\n');fs.chmodSync(installedFixture,0o777);
+const installed777=authenticateInstalledCheckoutExecutable(installedFixture);assert.equal(installed777.mode,0o777);
+fs.chmodSync(installedFixture,0o644);assert.throws(()=>authenticateInstalledCheckoutExecutable(installedFixture));
+fs.chmodSync(path.join(destination,'scripts/artifact-checkout-execution.mjs'),0o777);assert.throws(()=>checkoutExecutionClosure(destination));
+fs.chmodSync(path.join(destination,'scripts/artifact-checkout-execution.mjs'),0o644);
 const positive=JSON.parse(run(process.execPath,['scripts/run-integration-tests.mjs'],{INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'2'}));
 const refusals=[];
 for(const [script,profile,shard] of [['scripts/wrong-entry.mjs','full','2'],['scripts/run-integration-tests.mjs','evidence','2'],['scripts/run-integration-tests.mjs','full','0']])
   refusals.push(JSON.parse(run(process.execPath,[script],{INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,CONTROL_REFUSAL:'1'})));
-console.log(JSON.stringify({kind:'actual-checkout-execution-boundary-controls',production_module_sha256:createHash('sha256').update(source).digest('hex'),fixture:destination,positive,zero_open_entry_refusals:refusals,
+console.log(JSON.stringify({kind:'actual-checkout-execution-boundary-controls',production_module_sha256:createHash('sha256').update(source).digest('hex'),fixture:destination,installed_executable_0777:installed777,non_executable_and_source_0777_refusals:2,positive,zero_open_entry_refusals:refusals,
   limitation:'Fixture runner differs from the production runner; final production closure and actual selected-product checkout remain required.'},null,2));
