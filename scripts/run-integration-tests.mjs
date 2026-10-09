@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
+import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
@@ -161,12 +162,17 @@ export async function streamTestProcess(args, {env = process.env,
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const files = integrationTestFiles(profile, shard);
-  console.log(JSON.stringify({native_inputs:prepareNativeRegressionInputs(profile)}));
+  const git=measuredGitSetup();
+  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(profile,{run:git.run}),{counters:git.snapshot});
+  console.log(JSON.stringify({native_inputs:nativeInputs}));
   // Only full checkout readers consume canonical products. The focused evidence
   // profile deliberately has no canonical namespace in its sparse checkout.
   if (profile === 'full') {
-    const {prepareCanonicalCheckout}=await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs');
-    console.log(JSON.stringify({canonical_checkout:prepareCanonicalCheckout()}));
+    const canonicalCheckout=await observeSetupPhase('canonical-checkout',async()=>{
+      const {prepareCanonicalCheckout}=await import('./canonical-restoration.mjs');
+      return prepareCanonicalCheckout();
+    });
+    console.log(JSON.stringify({canonical_checkout:canonicalCheckout}));
   }
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, shard, files}));

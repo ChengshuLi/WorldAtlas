@@ -1,0 +1,1024 @@
+{
+  "version": 1,
+  "issue": 1543,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+    "files": [
+      {
+        "path": ".github/package-inputs.json",
+        "bytes": 10212,
+        "sha256": "117299e90acdf9518f0bdb84511334bbd28c932b4504b5cc652e89c0945f8e9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-static-inner.mjs",
+        "bytes": 22031,
+        "sha256": "8d0d4176ff2dd432e478e063b6437886c972d7b20bbd173a59ff152fe591470a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-geographic-adjudications.mjs",
+        "bytes": 1374,
+        "sha256": "c1047ff3b45572ef4a668ab41360201b98e4eedff6f6553940b0c75a89f7da86",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+        "bytes": 9747,
+        "sha256": "d7882c4c7d3fa52f305bbb4e089b05f8934b2e8312f725943f7f1c8b5012600c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 9645,
+        "sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/build-context-continuation.test.mjs",
+        "bytes": 11135,
+        "sha256": "e7d2ea651db7d7cf7b756562d53511b06e37b4909cda7ab8231207dc3490ff5f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/geographic-adjudication-api.test.mjs",
+        "bytes": 16099,
+        "sha256": "aee05daafed344f4312ed6eaff7fa8d411a0bc01b515c207108bd56398865523",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/integration-profile-restoration.test.mjs",
+        "bytes": 4580,
+        "sha256": "609e627e5c3a03494b92ca836c2425b5a504a3fa24a635cd5b9a4bd4de416529",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs",
+        "bytes": 26158,
+        "sha256": "ca0c91cc93a66bb65db16b2fc91f79d88da97e479f37a2f4716046dc25e0d7c6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs",
+        "bytes": 5049,
+        "sha256": "c99945eb4fae208e4a6dbf8ce325d93bb35e317b3feeb78312c05bce008d7898",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs",
+        "bytes": 2810,
+        "sha256": "d3f83b2667e1864b2654bd66edc1bdb2556760409e0783f76a7f3775e1e77c47",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs",
+        "bytes": 27170,
+        "sha256": "152d57a5ba6b4775f4e6b800ffd971bf2e1f43387c02b230f1cccd836ba0ebf6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/index.json",
+        "bytes": 71758,
+        "sha256": "b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/index.json",
+        "bytes": 27488,
+        "sha256": "ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/release-memberships/index.json",
+        "bytes": 235002,
+        "sha256": "9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 19446,
+        "sha256": "e36c2f9b54a92e8ab7d926b2601bdc823d8ffab93d159fa422ae93986afc47c4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/pr-gates.test.mjs",
+        "bytes": 17308,
+        "sha256": "1e14acd61d4c7553a052fe2f1493b2f6de8ff76459e7f8560c09a9b9826b9ed3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/MERGE_QUEUE_CLIENT.md",
+        "bytes": 4813,
+        "sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/deployment-budget-scope.test.mjs",
+        "bytes": 12122,
+        "sha256": "bd7d346c6ee6ed9734f0afbb58a69460b279e6343d444e1124991c1fb3ba19a1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-pr-gates.mjs",
+        "bytes": 10066,
+        "sha256": "795697c2a180629c168fd5afcf0a0325de13943988c7591997027871f26ac3d6",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 10448,
+      "sha256": "24cddab53701dbaeca873408e092e14cc7cb778aab14a89d55c381af86d5ad91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 19633,
+      "sha256": "1a073b4d919b24c34f4d0ab210554c5c4ef8d3a2f1af104a712402f9b40b648e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/README.md",
+      "bytes": 7547,
+      "sha256": "d9c02d8863cebd9a7e389992708ae05ae5748e1dcc1783162329216f132cf168",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
+      "bytes": 1702,
+      "sha256": "3998262f8aa956b001d2b66e4b0f97c2c94232171af7f63b1fd543031b1a88ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
+      "bytes": 1279,
+      "sha256": "0dccf590c1d1cd06ee84943caa841e9629360d1e3f1fb6f1f8c23ceea48cbd87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-1.json.gz",
+      "bytes": 38932,
+      "sha256": "615aad4314514cbc0414e5ccb33bd0d6e7a70672fe8f976e3a14330810c2fc0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-1.json.initial.json.gz",
+      "bytes": 41897,
+      "sha256": "02322fa0213b01ae194628cabc17aeefb4a4d5f20bb9870cc7a420ce06381da9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-2.json.gz",
+      "bytes": 38939,
+      "sha256": "10b2f701577f37b3de019757694ae8700d758b1ff707a1655bf3be048eeb0a1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-2.json.initial.json.gz",
+      "bytes": 41897,
+      "sha256": "9b4e41e7bd6cbeaaa43fb5e335388537ad2a970b96ffcf208f57f1f2d9646ff6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-3.json.gz",
+      "bytes": 38934,
+      "sha256": "0daecb4fd845ebd4340b95dbac699ab7bb70f98bdc926aa38ccf50b94a2a0517",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-3.json.initial.json.gz",
+      "bytes": 41913,
+      "sha256": "7946324e40dd04a04e24552d2b0d828b9472e92aadc709f41b1581ac46b25b50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-4.json.gz",
+      "bytes": 38936,
+      "sha256": "6862895a860b036081fa5e1d3f8897e5315c9e9bec08d458a47a8cf693771932",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-4.json.initial.json.gz",
+      "bytes": 41915,
+      "sha256": "5c6662c820a8d0cd938d72aae6ccc1eb6ad5b6b11c6844cd5ea18c5ff5d6a421",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-5.json.gz",
+      "bytes": 39072,
+      "sha256": "31396053e73acfd7508d6cdf81709d51e9c4fcde265b16421af61581adf8cdad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-5.json.initial.json.gz",
+      "bytes": 41917,
+      "sha256": "4e857243da1cf546d42b2cc2a718c99fc1f31b1d1402307311c01128313117b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-6.json.gz",
+      "bytes": 39075,
+      "sha256": "ca82014a16e2636377fb488bf95d951a9bb52dcdfda047b7774c0f966d83c930",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-6.json.initial.json.gz",
+      "bytes": 41913,
+      "sha256": "d416311703774a7352acc02da748c5fa0eaf6b468c78bbc361dd2c9fe9371838",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-8.json.gz",
+      "bytes": 39078,
+      "sha256": "8cf3d01e09402d9268d63536aa384b118917cb88fa3a534a3261ca2573f1ce69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-8.json.initial.json.gz",
+      "bytes": 41914,
+      "sha256": "1a6acf398e1231ca293a12f09d08cce90dd25ac7114e3945a091ac83cdecc8f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-9.json.gz",
+      "bytes": 39071,
+      "sha256": "08dc031f06da1411dcbb9801f856925c719876501fc1ca62ae90419852263aff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-9.json.initial.json.gz",
+      "bytes": 41913,
+      "sha256": "363ffe6e7b3b64dc64e27945409096ba9168591dd5bdb1463b2998f18974a306",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-gc-7.json.gz",
+      "bytes": 39082,
+      "sha256": "e7464be5b9a17a086a34293c276fd29dac9b12c781c6d0e5b22e2e74271e45d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-gc-7.json.initial.json.gz",
+      "bytes": 67551,
+      "sha256": "2afeab0032086707dd3b5f2fafb38ad6242cd1c8ffd984dd7283db4a2b974228",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-memory-diagnostic.json.gz",
+      "bytes": 39185,
+      "sha256": "a56cc7e7679afd6ca6c42929c335fcb371ec68a1ac8c0fc53461da27f6f78ae1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-memory-diagnostic.json.initial.json.gz",
+      "bytes": 42012,
+      "sha256": "bab591e35fb05bde6361191fca3788c7db55a264d7e176c15e948b667d34b533",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-output-warm-11.json.gz",
+      "bytes": 39133,
+      "sha256": "aaf9f7fabff002a9e65a757b3f16f4b5c78fc01e0debc1edac98da86d7c123a4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-output-warm-11.json.initial.json.gz",
+      "bytes": 67611,
+      "sha256": "f5674abb3ccead8516be3c53dd552a296a7fe3f5afc883724acdb39dacfe5dfe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-single-image-10.json.gz",
+      "bytes": 39139,
+      "sha256": "5a64266012c11f336f0a2dbfcbc4b75c52dd8ca419b5aa2ed4f349a38bba58a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-single-image-10.json.initial.json.gz",
+      "bytes": 41963,
+      "sha256": "185859ebda02c7ae1834a8abf3938badb00356fa575e0205a3fe2a155544ae5d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-controls-final.log",
+      "bytes": 9588,
+      "sha256": "2e2e33688c9628d667c8629efa286a1ee3d50c8e6e818a80faa0b70703f0708a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-old-path-rejected.log",
+      "bytes": 1333,
+      "sha256": "fc4a64d7ce4baf1f8cf1cdf14dd756e9c74d52eeedcc3944377436dd210eca54",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/instrumented-capture.mjs.txt",
+      "bytes": 7683,
+      "sha256": "46219c328c84b25ba8cc54125018508b6678742ea5455c46760dd57c98be428e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/instrumented-restoration.mjs.txt",
+      "bytes": 27052,
+      "sha256": "70c6425c591c899c2b8dbfab74ce1660bb0f3d4dd9a3c5caca344143a5b34f91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/profile-memory.mjs.txt",
+      "bytes": 6484,
+      "sha256": "27f058c1605c2710e2365bc286785f81cea2042479d3913a84eed843b115e408",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/memory-diagnostic.log",
+      "bytes": 35246,
+      "sha256": "a9f91d328989748c07d34cadcdb10990bef7cedbfa01172513e986e79853973b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "bytes": 6031,
+      "sha256": "6ac4d8c6b3404b3bb775d5c32d19835c91d3d506650c1b09082aa63f36d9c225",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-package-controls-final.log",
+      "bytes": 7139,
+      "sha256": "aecde2e8f4045f5d2261007e55afea3bfde344cf79f5d13e1a56230f0ceed2dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
+      "bytes": 2119,
+      "sha256": "54fc68667775a9ff00bd1d43c46dfd1f4195ea15b7d264c00f0bd95ad3ba3699",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/operational-image-routing-controls.log",
+      "bytes": 3901,
+      "sha256": "1b3061f24cb5b2cf454c413aaab598cf587bb4dc15402aa5c55621ea8674bbbf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-1.json.gz",
+      "bytes": 38947,
+      "sha256": "bf7dabb7e36a74ace3b2ad11b8b4c8ba707e03ed27c6ff3cbabbe191bd870399",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-1.json.initial.json.gz",
+      "bytes": 41722,
+      "sha256": "eeb48fc992fb4e843611416bc91f4872bd0d259932b558cc53fb40ea30771ffb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-2.json.gz",
+      "bytes": 38948,
+      "sha256": "5f5fcf53fa3a15c9b79aba7f5be83c298da10c4116442468a8ac72651d78ceed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-2.json.initial.json.gz",
+      "bytes": 41926,
+      "sha256": "acfe4edf4a5775309cc79fd34375b4c808a4b6215c018815a05eb04c7e9d74bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-3.json.gz",
+      "bytes": 39100,
+      "sha256": "4ff624583add4bebd0e18163444ae1a2b0549567be57ff7b957b51b6646e894d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-3.json.initial.json.gz",
+      "bytes": 41924,
+      "sha256": "5e6b2c64cb3abaff56b560a1f7ec56a281531598bad3d3199ab58fe16bc36561",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-output-warm-12.json.gz",
+      "bytes": 39114,
+      "sha256": "31c1d295e3230cb69f9a79302fa2bdb23f8f89d0367fae3dfb044c8a301d966e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-output-warm-12.json.initial.json.gz",
+      "bytes": 67588,
+      "sha256": "08e3e661b2c4b06cd14c802216ad477cdfb3fbeb898dc3cb279f4839957c8c19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
+      "bytes": 1713,
+      "sha256": "298f0e0a90726aa9b9718c381976e2c2452a6c6790119d468de8e1dbf1b02d91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/profile-restoration.mjs",
+      "bytes": 6435,
+      "sha256": "9beea035648d7381f14575662944e0c029ca519ead16fe4a979df3e2837b8262",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/retained-report-index.json",
+      "bytes": 12956,
+      "sha256": "9a00226048205bef0fbb8318876e472798cc1d196e08a6d121bd99b412939160",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
+      "bytes": 4239,
+      "sha256": "735bfdd20ed8c7db4910f5d919e3988174279fdb16a6058e8df7e41cdf4c65b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
+      "bytes": 1918,
+      "sha256": "7f3413aab3f2cf3d77fa2feb6e9fcb79c09567736bfebd1753975e5ab2539631",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "bytes": 5271,
+      "sha256": "a6f6c561cdfb96a801ba17b780c9dc9cbc36f4592c81465abb418e841e6b8cbd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "bytes": 22025,
+      "sha256": "db6d42a29eccd7c40325b31618bb7c3d7e1617a87d7d6e4e4676b7cf681f12ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/canonical-restoration.mjs",
+      "bytes": 26096,
+      "sha256": "5be4dc458a8c12fe3d9c09272a7ed1ed5caa4e0e361b49810af1bd8063e4e627",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-geographic-adjudications.mjs",
+      "bytes": 3023,
+      "sha256": "41870c7097e569f184b15b30b2edc5adb60c97a590ce1c4af4c38331929de630",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-pr-gates.mjs",
+      "bytes": 10269,
+      "sha256": "7ba570fa29ccaddbdf1942f0fb6b2848d17778f460e2a4f21f47dcec748b6452",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/ci-setup-observations.mjs",
+      "bytes": 1997,
+      "sha256": "2aa2f144a90dc13d264201e7b83c83cb399358ee683e7e44c544e7c8d4eb3672",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence/captured-byte-patch.mjs",
+      "bytes": 7286,
+      "sha256": "771fe2b1b81cb27582a083c7433dc3015d23be5c667a8289b454ef71d5a921f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence/restore-whole-image.mjs",
+      "bytes": 5781,
+      "sha256": "48c1d9aaf58ba8ed880353d70d4b03a06b8c931e9f2d656ad58b3227160cef13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/chained-build-context.mjs",
+      "bytes": 27413,
+      "sha256": "f20f0d67cf5d68754adf2c4345a4dc5ae6b5d42fdc490a81ce622a76397995a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+      "bytes": 9685,
+      "sha256": "3e69d53fb9b1e7ec6efcb83101633acc1e47332b957260df641cd13ee1bad5a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 9945,
+      "sha256": "08f39443f6ddbcc66f9e7cda69f9df88c59c98c0351baa9f66deb2970203f2c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/build-context-continuation.test.mjs",
+      "bytes": 11102,
+      "sha256": "e16e1d746b3ecb564c6b8dacb284ddd8cb15f99012fca7dfae1315a95111e80e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/captured-byte-patch.test.mjs",
+      "bytes": 6916,
+      "sha256": "b05d42a0b097ca38ae177ca046c59779add586f1df17736d46b6fa8e8781c8ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/ci-setup-observations.test.mjs",
+      "bytes": 1803,
+      "sha256": "cac965910148c53d312dfd65abcdc76386cd0122e6dc03af15aa936a068440d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 12175,
+      "sha256": "e6cfa191c1af9204901070a4983b87da32e183024ba260935679ad2373075c46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "bytes": 19437,
+      "sha256": "5e866cb0a40e7f20db96fab7ca5d66431d66979e4d60e03b23376809fe4198b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "bytes": 4555,
+      "sha256": "568df399587ed5b238690b8cb6ba779eeea0a50df0bcfbb5c7433f7540a2943d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/pr-gates.test.mjs",
+      "bytes": 23394,
+      "sha256": "3e36f474c403d0fb37a0de7a1525d573fd6bf8c193b12fb94357203049a051f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/restore-whole-image.test.mjs",
+      "bytes": 6113,
+      "sha256": "619e4ccb7a88828e4c5a595d6560707805ecfc34a6e5b37702536f5f058e773e",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/package-inputs.json",
+      "status": "modified",
+      "original_sha256": "117299e90acdf9518f0bdb84511334bbd28c932b4504b5cc652e89c0945f8e9f"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "e36c2f9b54a92e8ab7d926b2601bdc823d8ffab93d159fa422ae93986afc47c4"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-1.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-2.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-3.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-3.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-4.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-4.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-5.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-5.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-6.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-6.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-8.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-8.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-9.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-cold-9.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-gc-7.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-gc-7.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-memory-diagnostic.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-memory-diagnostic.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-output-warm-11.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-output-warm-11.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-single-image-10.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/captured-single-image-10.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-old-path-rejected.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/instrumented-capture.mjs.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/instrumented-restoration.mjs.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/profile-memory.mjs.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/memory-diagnostic.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-package-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/operational-image-routing-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-1.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-2.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-3.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-3.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-output-warm-12.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/original-output-warm-12.json.initial.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/profile-restoration.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/retained-report-index.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/whole-image-controls.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "status": "modified",
+      "original_sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "status": "modified",
+      "original_sha256": "8d0d4176ff2dd432e478e063b6437886c972d7b20bbd173a59ff152fe591470a"
+    },
+    {
+      "path": "scripts/canonical-restoration.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/check-geographic-adjudications.mjs",
+      "status": "modified",
+      "original_sha256": "c1047ff3b45572ef4a668ab41360201b98e4eedff6f6553940b0c75a89f7da86"
+    },
+    {
+      "path": "scripts/check-pr-gates.mjs",
+      "status": "modified",
+      "original_sha256": "795697c2a180629c168fd5afcf0a0325de13943988c7591997027871f26ac3d6"
+    },
+    {
+      "path": "scripts/ci-setup-observations.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/evidence/captured-byte-patch.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/evidence/restore-whole-image.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/chained-build-context.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/validate-build-context-stage.mjs",
+      "status": "modified",
+      "original_sha256": "d7882c4c7d3fa52f305bbb4e089b05f8934b2e8312f725943f7f1c8b5012600c"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb"
+    },
+    {
+      "path": "test/build-context-continuation.test.mjs",
+      "status": "modified",
+      "original_sha256": "e7d2ea651db7d7cf7b756562d53511b06e37b4909cda7ab8231207dc3490ff5f"
+    },
+    {
+      "path": "test/captured-byte-patch.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/ci-setup-observations.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "bd7d346c6ee6ed9734f0afbb58a69460b279e6343d444e1124991c1fb3ba19a1"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "status": "modified",
+      "original_sha256": "aee05daafed344f4312ed6eaff7fa8d411a0bc01b515c207108bd56398865523"
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "status": "modified",
+      "original_sha256": "609e627e5c3a03494b92ca836c2425b5a504a3fa24a635cd5b9a4bd4de416529"
+    },
+    {
+      "path": "test/pr-gates.test.mjs",
+      "status": "modified",
+      "original_sha256": "1e14acd61d4c7553a052fe2f1493b2f6de8ff76459e7f8560c09a9b9826b9ed3"
+    },
+    {
+      "path": "test/restore-whole-image.test.mjs",
+      "status": "added"
+    }
+  ],
+  "methods": [
+    {
+      "id": "restoration-controls",
+      "kind": "code",
+      "description": "Real original-producer, actual current operational-routing and native adjudication positive/adverse controls; full profile whole-byte/mode equality. Archived local profiles bind base checkout and uncommitted operational source-body hashes, not a hosted final-head claim.",
+      "software": "Node 24; native fixtures Python 3.12 with numpy 2.3.5/Shapely 2.1.2/pyproj 3.7.2; macOS ARM64",
+      "units": "whole-file bytes, modes, tests, elapsed milliseconds and process high-water RSS"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "restoration-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/setup-1543-20261009/positive-control.json"
+    },
+    {
+      "method_id": "restoration-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/setup-1543-20261009/negative-control.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "original-cold-3-elapsed_ms",
+      "value": 120048.427334,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "4ff624583add4bebd0e18163444ae1a2b0549567be57ff7b957b51b6646e894d",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    },
+    {
+      "id": "original-cold-3-restoration_peak_rss_bytes",
+      "value": 432046080,
+      "unit": "bytes-process-high-water",
+      "vintage": "archived",
+      "input_sha256": "4ff624583add4bebd0e18163444ae1a2b0549567be57ff7b957b51b6646e894d",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    },
+    {
+      "id": "captured-single-image-10-elapsed_ms",
+      "value": 34940.255084000004,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "5a64266012c11f336f0a2dbfcbc4b75c52dd8ca419b5aa2ed4f349a38bba58a8",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    },
+    {
+      "id": "captured-single-image-10-restoration_peak_rss_bytes",
+      "value": 396066816,
+      "unit": "bytes-process-high-water",
+      "vintage": "archived",
+      "input_sha256": "5a64266012c11f336f0a2dbfcbc4b75c52dd8ca419b5aa2ed4f349a38bba58a8",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    },
+    {
+      "id": "original-output-warm-12-elapsed_ms",
+      "value": 301289.53870800004,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "31c1d295e3230cb69f9a79302fa2bdb23f8f89d0367fae3dfb044c8a301d966e",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    },
+    {
+      "id": "original-output-warm-12-restoration_peak_rss_bytes",
+      "value": 442515456,
+      "unit": "bytes-process-high-water",
+      "vintage": "archived",
+      "input_sha256": "31c1d295e3230cb69f9a79302fa2bdb23f8f89d0367fae3dfb044c8a301d966e",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    },
+    {
+      "id": "captured-output-warm-11-elapsed_ms",
+      "value": 56602.732291,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "aaf9f7fabff002a9e65a757b3f16f4b5c78fc01e0debc1edac98da86d7c123a4",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    },
+    {
+      "id": "captured-output-warm-11-restoration_peak_rss_bytes",
+      "value": 356581376,
+      "unit": "bytes-process-high-water",
+      "vintage": "archived",
+      "input_sha256": "aaf9f7fabff002a9e65a757b3f16f4b5c78fc01e0debc1edac98da86d7c123a4",
+      "evaluation_commit": "7319f888aa203228c4990c479d7291b1b78e262f"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "original-cold-3-elapsed_ms",
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-3.json.gz",
+      "json_pointer": "/elapsed_ms"
+    },
+    {
+      "metric_id": "original-cold-3-restoration_peak_rss_bytes",
+      "path": "coordination/engineering/setup-1543-20261009/original-cold-3.json.gz",
+      "json_pointer": "/restoration_peak_rss_bytes"
+    },
+    {
+      "metric_id": "captured-single-image-10-elapsed_ms",
+      "path": "coordination/engineering/setup-1543-20261009/captured-single-image-10.json.gz",
+      "json_pointer": "/elapsed_ms"
+    },
+    {
+      "metric_id": "captured-single-image-10-restoration_peak_rss_bytes",
+      "path": "coordination/engineering/setup-1543-20261009/captured-single-image-10.json.gz",
+      "json_pointer": "/restoration_peak_rss_bytes"
+    },
+    {
+      "metric_id": "original-output-warm-12-elapsed_ms",
+      "path": "coordination/engineering/setup-1543-20261009/original-output-warm-12.json.gz",
+      "json_pointer": "/elapsed_ms"
+    },
+    {
+      "metric_id": "original-output-warm-12-restoration_peak_rss_bytes",
+      "path": "coordination/engineering/setup-1543-20261009/original-output-warm-12.json.gz",
+      "json_pointer": "/restoration_peak_rss_bytes"
+    },
+    {
+      "metric_id": "captured-output-warm-11-elapsed_ms",
+      "path": "coordination/engineering/setup-1543-20261009/captured-output-warm-11.json.gz",
+      "json_pointer": "/elapsed_ms"
+    },
+    {
+      "metric_id": "captured-output-warm-11-restoration_peak_rss_bytes",
+      "path": "coordination/engineering/setup-1543-20261009/captured-output-warm-11.json.gz",
+      "json_pointer": "/restoration_peak_rss_bytes"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Independent exact-head review, hosted full PR/queue checks, actual-main readback and hosted timing remain required. This does not establish scientific approval or fulfill #1544.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/restore-whole-image.test.mjs test/captured-byte-patch.test.mjs test/ci-setup-observations.test.mjs test/integration-profile-restoration.test.mjs test/build-context-continuation.test.mjs test/package-inputs.test.mjs",
+    "PYTHON=/path/to/qualified-python node --test test/geographic-adjudication-api.test.mjs",
+    "node coordination/engineering/setup-1543-20261009/profile-restoration.mjs captured coordination/engineering/setup-1543-20261009/fresh-unique-result.json"
+  ]
+}

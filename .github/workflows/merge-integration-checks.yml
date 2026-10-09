@@ -8,8 +8,8 @@ permissions:
   pull-requests: read
 # Only superseded read-only heads are canceled; mutation workflows stay separate.
 concurrency:
-  # Body edits refresh authority without canceling unchanged-head test work.
-  group: worldatlas-regression-pr-${{ github.event.pull_request.number }}-${{ github.event.action == 'edited' && 'metadata' || 'code' }}
+  # Body edits and draft readiness refresh authority without canceling code work.
+  group: worldatlas-regression-pr-${{ github.event.pull_request.number }}-${{ (github.event.action == 'edited' || github.event.action == 'ready_for_review') && 'metadata' || 'code' }}
   cancel-in-progress: true
 jobs:
   profile:
@@ -213,7 +213,7 @@ jobs:
         run: node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs
   geography:
     needs: profile
-    if: github.event.action != 'edited'
+    if: github.event.action != 'edited' && github.event.action != 'ready_for_review'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -284,7 +284,7 @@ jobs:
           retention-days: 30
   regression:
     needs: profile
-    if: github.event.action != 'edited'
+    if: github.event.action != 'edited' && github.event.action != 'ready_for_review'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -347,7 +347,7 @@ jobs:
   package:
     needs: profile
     # Failed trusted metadata stays failed; it cannot launch a doomed build.
-    if: needs.profile.result == 'success' && github.event.action != 'edited'
+    if: needs.profile.result == 'success' && github.event.action != 'edited' && github.event.action != 'ready_for_review'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:

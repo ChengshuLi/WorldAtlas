@@ -1,0 +1,39 @@
+{
+  "method_id": "restoration-controls",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "evidence": [
+    {
+      "path": "coordination/engineering/setup-1543-20261009/operational-image-routing-controls.log",
+      "sha256": "1b3061f24cb5b2cf454c413aaab598cf587bb4dc15402aa5c55621ea8674bbbf"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
+      "sha256": "3998262f8aa956b001d2b66e4b0f97c2c94232171af7f63b1fd543031b1a88ae"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
+      "sha256": "735bfdd20ed8c7db4910f5d919e3988174279fdb16a6058e8df7e41cdf4c65b2"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "sha256": "6ac4d8c6b3404b3bb775d5c32d19835c91d3d506650c1b09082aa63f36d9c225"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-package-controls-final.log",
+      "sha256": "aecde2e8f4045f5d2261007e55afea3bfde344cf79f5d13e1a56230f0ceed2dc"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-old-path-rejected.log",
+      "sha256": "fc4a64d7ce4baf1f8cf1cdf14dd756e9c74d52eeedcc3944377436dd210eca54"
+    }
+  ],
+  "checks": [
+    "Wrong encoded/decoded/whole/member hashes, omitted and duplicate inventories, traversal, linked sources, destination collisions, accessors and loader mutation are rejected; incomplete adjudication fetch grants no authority.",
+    "Dangling image destination and profiler result/checkpoint/lease links reject before missing source reads, leaving only the original symlink and no new output.",
+    "Actual workflow event predicates preserve code runs for opened/synchronize/reopened, separate readiness/edited cancellation, and always refresh profile/evidence/scope; original integration proof rejects absent, wrong or unsuccessful validation."
+  ],
+  "limits": [
+    "Local controls do not establish hosted current-head full regression, scientific approval, publication or global quota margin."
+  ]
+}

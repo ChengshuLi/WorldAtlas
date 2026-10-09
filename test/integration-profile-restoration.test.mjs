@@ -9,11 +9,11 @@ const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const focused=['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
   'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
   'merge-integration-client','merge-integration-entrypoint','integration-proof'];
-const helper='coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
+const helper='scripts/canonical-restoration.mjs';
 
 function fixture(t,{full=false,helperBody,skip=false}={}) {
   // This is a tiny actual runner boundary fixture, not a scientific restoration.
-  const sources=['scripts/run-integration-tests.mjs','scripts/compile-hosted-migrations.mjs'];
+  const sources=['scripts/run-integration-tests.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
     assert.ok(s.isFile()&&!s.isSymbolicLink()&&s.size<64*1024);

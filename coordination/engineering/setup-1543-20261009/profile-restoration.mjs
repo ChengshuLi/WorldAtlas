@@ -1,0 +1,53 @@
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';import {gunzipSync} from 'node:zlib';import {execFileSync} from 'node:child_process';
+const [variant,output]=process.argv.slice(2);
+assert(['original','captured'].includes(variant)&&typeof output==='string');
+const root=fs.realpathSync(process.cwd()),owned='coordination/engineering/setup-1543-20261009/';
+assert(output.startsWith(owned)&&!output.includes('..')&&!path.isAbsolute(output));
+function absent(file){try{fs.lstatSync(file);return false;}catch(error){if(error.code==='ENOENT')return true;throw error;}}
+assert(absent(output)&&absent(output+'.initial.json')&&absent(output+'.lease')&&fs.realpathSync(path.dirname(path.join(root,output)))===path.dirname(path.join(root,output)),'Fresh ordinary profile output required');
+assert(!process.env.GH_TOKEN&&!process.env.GITHUB_TOKEN&&!process.env.NODE_OPTIONS);
+const sha=raw=>createHash('sha256').update(raw).digest('hex');
+const namespace='coordination/engineering/eastern-two-gap-repair-native-20261007';
+function read(relative){const file=path.join(root,relative),stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size<=32*1024*1024);return fs.readFileSync(file);}
+function member(base,name,indexSha){
+ const wire=read(base+'/index.json');assert.equal(sha(wire),indexSha);const index=JSON.parse(wire),pin=index.files.find(p=>p.path===name);assert(pin);
+ const pieces=[];let admitted=wire.length+pin.bytes;
+ for(const part of index.parts.filter(p=>p.offset<pin.offset+pin.bytes&&p.offset+p.decoded_bytes>pin.offset)){
+  admitted+=part.bytes+part.decoded_bytes;assert(admitted<=256*1024*1024);
+  const encoded=read(base+'/'+part.path);assert.equal(encoded.length,part.bytes);assert.equal(sha(encoded),part.sha256);
+  const raw=gunzipSync(encoded,{maxOutputLength:16*1024*1024});assert.equal(raw.length,part.decoded_bytes);assert.equal(sha(raw),part.decoded_sha256);
+  pieces.push(raw.subarray(Math.max(0,pin.offset-part.offset),Math.min(raw.length,pin.offset+pin.bytes-part.offset)));
+ }
+ const result=Buffer.concat(pieces);assert.equal(result.length,pin.bytes);assert.equal(sha(result),pin.sha256);return JSON.parse(result);
+}
+const canonicalIndex='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876',priorIndex='ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe';
+const map=member(namespace+'/canonical-products','canonical-path-map.json',canonicalIndex),prior=member(namespace+'/prior-v1','prior-path-map.json',priorIndex);
+const membershipRaw=read(namespace+'/release-memberships/index.json');assert.equal(sha(membershipRaw),'9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c');
+const memberships=JSON.parse(membershipRaw).files;
+const pins=[...map.logical_targets.map(p=>({...p,path:p.target})),...memberships];
+const originalStates=pins.map(pin=>({path:pin.path,exists:fs.existsSync(path.join(root,pin.path)),...fs.existsSync(path.join(root,pin.path))?{sha256:sha(read(pin.path)),mode:fs.statSync(path.join(root,pin.path)).mode&0o777}:{}}));
+const existingDirs=new Set();for(const p of pins){let d=path.dirname(path.join(root,p.path));while(d!==root){if(fs.existsSync(d))existingDirs.add(d);d=path.dirname(d);}}
+const commit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+const modulePath=variant==='original'?namespace+'/restore-canonical-products.mjs':'scripts/canonical-restoration.mjs';
+const code={whole_image_helper_sha256:variant==='captured'?sha(read('scripts/evidence/restore-whole-image.mjs')):null,module:modulePath,sha256:sha(read(modulePath)),capture_helper_sha256:variant==='captured'?sha(read('scripts/evidence/captured-byte-patch.mjs')):null};
+const checkpoint={commit,code,originalStates,existingDirs:[...existingDirs],status:'admitted-before-restoration'};
+const lease=fs.openSync(output+'.lease','wx',0o600);fs.closeSync(lease);
+fs.writeFileSync(output+'.initial.json',JSON.stringify(checkpoint,null,2)+'\n',{flag:'wx'});
+fs.mkdirSync('.cache',{recursive:true});assert.equal(fs.realpathSync('.cache'),root+'/.cache');
+const {prepareCanonicalCheckout}=await import('../../../'+modulePath);
+const beforeRestorationResource=process.memoryUsage();
+const started=performance.now(),receipt=prepareCanonicalCheckout(),elapsedMs=performance.now()-started;
+const restorationPeakRss=process.resourceUsage().maxRSS*1024,afterRestorationResource=process.memoryUsage();
+assert(receipt.applicable);const r=receipt.receipt;
+function inspect(base,pin){const file=path.join(base,pin.path),stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size===pin.bytes);const raw=fs.readFileSync(file);assert.equal(sha(raw),pin.sha256);const mode=(stat.mode&0o111)?'100755':'100644';assert.equal(mode,pin.mode);return {path:pin.path,bytes:raw.length,sha256:sha(raw),mode};}
+const current=pins.map(p=>inspect(root,p)),original=prior.logical_targets.map(p=>inspect(r.priorImage,p));
+const result={variant,commit,code,elapsed_ms:elapsedMs,restoration_peak_rss_bytes:restorationPeakRss,before_restoration_resource:beforeRestorationResource,after_restoration_resource:afterRestorationResource,peak_rss_bytes:process.resourceUsage().maxRSS*1024,scope:'complete actual checkout restoration before unchanged readers',current,original,receipt:r,rest_attempts:null,git_transport_requests:null,http_observation_ms:null,quota_deficit_sleep_ms:null,limits:['Profile is local existing-source Git store, not hosted cold network/build proof. Network counters are not instrumented; no zero inferred.']};
+
+// Keep materialized outputs for independent inspection. A separate authenticated
+// cleanup step preserves/restores originals using the recorded pre-run states.
+fs.writeFileSync(output+'.initial.json.completed',JSON.stringify({...checkpoint,status:'restored-and-verified',current,prior:original,receipt:r},null,2)+'\n',{flag:'wx'});
+fs.renameSync(output+'.initial.json.completed',output+'.initial.json');
+fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+fs.unlinkSync(output+'.lease');
+console.log(JSON.stringify({variant,elapsed_ms:elapsedMs,restoration_peak_rss_bytes:restorationPeakRss,before_restoration_resource:beforeRestorationResource,after_restoration_resource:afterRestorationResource,peak_rss_bytes:result.peak_rss_bytes,current_files:current.length,prior_files:original.length,result_path:output}));

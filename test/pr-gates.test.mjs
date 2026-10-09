@@ -46,6 +46,57 @@ function fixture(lane = 'engineering') {
   f.run = () => checkPRGates({event: f.event, repo, token: 'fixture', api: f.api});
   return f;
 }
+test('composed evidence keeps bulk transport, authenticates bytes and rechecks mutable authority', async () => {
+  const exercise = async altered => {
+    const f = fixture(), manifestPath = 'coordination/engineering/bounded-job/evidence-quality.json';
+    const outputPath = 'coordination/engineering/bounded-job/result.json';
+    const baseline = Buffer.from('independent original\n'), output = Buffer.from('{"valid":true}\n');
+    const digest = raw => createHash('sha256').update(raw).digest('hex');
+    const descriptor = (path, raw) => ({path, bytes: raw.length, sha256: digest(raw), hash_kind: 'file-bytes'});
+    const spec = JSON.parse(f.issue.body.match(/\n(.+)\n/)[1]);
+    spec.evidence_quality = {version: 1, manifest_path: manifestPath, subject_ids: [], pins: {}, review_kind: 'code'};
+    f.issue.created_at = '2026-10-09T00:00:00Z';
+    f.issue.body = '<!-- worldatlas-work:v1\n' + JSON.stringify(spec) + '\n-->';
+    f.files.splice(0, f.files.length, {filename: outputPath, status: 'added'}, {filename: manifestPath, status: 'added'});
+    f.pr.changed_files = 2;
+    const manifest = {version: 1, issue: 10, lane: 'engineering', worker_id: 'author', subject_ids: [],
+      subject_ids_sha256: digest('[]'), baseline: {commit: f.pr.base.sha, files: [descriptor('baseline.txt', baseline)], pins: {}},
+      sources: [], outputs: [descriptor(outputPath, output)], methods: [{id: 'control', kind: 'code',
+        description: 'Independent whole-byte control', software: 'Node 24', units: 'bytes'}], metrics: [], summaries: [],
+      conclusions: [], stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'},
+      commands: ['node --test test/pr-gates.test.mjs'], change_receipts: structuredClone(f.files).map(x => ({path: x.filename, status: x.status})),
+      metric_bindings: []};
+    const blobs = new Map(), row = (path, raw) => {
+      const sha = createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+      blobs.set(sha, raw); return {path, sha, size: raw.length, type: 'blob', mode: '100644'};
+    };
+    const original = row('baseline.txt', baseline), result = row(outputPath, output), declaration = row(manifestPath, Buffer.from(JSON.stringify(manifest)));
+    const known = new Set(); let paidBlobs = 0, batches = 0;
+    const authority = f.api;
+    const api = async route => {
+      if (route.startsWith(f.root + '/git/commits/')) return {tree: {sha: route.endsWith(f.pr.head.sha) ? 'c'.repeat(40) : 'd'.repeat(40)}};
+      if (route.startsWith(f.root + '/git/trees/')) return {truncated: false, tree: route.includes('c'.repeat(40)) ? [declaration, result] : [original]};
+      if (route.startsWith(f.root + '/compare/')) return {status: 'identical'};
+      if (route.startsWith(f.root + '/git/blobs/')) {
+        const sha = route.split('/').at(-1); if (!known.has(sha)) paidBlobs++;
+        const raw = altered && sha === result.sha ? Buffer.from('{"valid":null}\n') : blobs.get(sha);
+        return {sha, encoding: 'base64', content: raw.toString('base64')};
+      }
+      return authority(route);
+    };
+    api.prefetchGitBlobs = async (repo, rows) => {
+      assert.equal(repo, f.repo); assert.equal(rows.length, 2); batches++;
+      for (const r of rows) {assert.equal(blobs.get(r.sha).length, r.size); known.add(r.sha);}
+    };
+    const outcome = await runPRGates({event: f.event, env: {GITHUB_REPOSITORY: f.repo, GH_TOKEN: 'fixture'},
+      phase: 'evidence', apiFactory: () => api, transportFactory: api => ({api, close() {}})});
+    assert.equal(batches, 1); assert.equal(paidBlobs, 1, 'Only the initial manifest should use REST; declared bodies use bulk transport');
+    if (altered) {assert.equal(outcome.status, 'incomplete-or-invalid'); assert.match(outcome.reason, /Incomplete Git blob bytes|hash|bytes/i);}
+    else {assert.equal(outcome.status, 'checked'); assert.equal(outcome.evidence.change_files_checked, 2);
+      assert(f.calls.filter(x => x === f.root + '/pulls/20').length >= 2, 'Fresh final PR authority is required');}
+  };
+  await exercise(false); await exercise(true);
+});
 for (const lane of ['engineering', 'geography', 'research']) test(`real composed gates retain ${lane} focused selection without factual approval`, async () => {
   const f = fixture(lane), result = await f.run();
   assert.equal(result.status, 'checked'); assert.equal(result.profile, 'evidence');
@@ -214,7 +265,7 @@ test('workflow starts real evidence independently, preserves test parallelism an
     assert.match(block, /needs: profile/);
     assert.doesNotMatch(block, /needs: evidence/);
   }
-  assert.match(source, /github.event.action == 'edited' && 'metadata' \|\| 'code'/);
+  assert.match(source, /\(github.event.action == 'edited' \|\| github.event.action == 'ready_for_review'\) && 'metadata' \|\| 'code'/);
 });
 
 test('parallel evidence phase binds its own actual job start and deadline', async () => {
@@ -258,4 +309,28 @@ test('real split gates reduce paid metadata repeats against independent old read
     assert(split.paid < old.paid, 'Consolidation must earn its additional reconciliation reads');
     assert(split.attempts <= old.attempts + 4, 'Only the independent final authority passes may add requests');
   } finally {globalThis.fetch = original;}
+});
+
+// Evaluate the actual workflow predicates for every declared PR event rather
+// than asserting only that a desired substring exists in the configuration.
+test('metadata-only draft readiness preserves code work and cannot replace its tests', () => {
+  const source = fs.readFileSync('.github/workflows/merge-integration-checks.yml', 'utf8');
+  const events = source.match(/types: \[([^\]]+)\]/)[1].split(',').map(x=>x.trim());
+  const groupLine = source.split('\n').find(line=>line.trim().startsWith('group:'));
+  const expression = [...groupLine.matchAll(/\$\{\{ (.*?) \}\}/g)].at(-1)[1];
+  const evaluate = (predicate, action) => Function('action', `return (${predicate.replaceAll('github.event.action','action')});`)(action);
+  const groups = Object.fromEntries(events.map(action=>[action,evaluate(expression,action)]));
+  assert.equal(groups.opened, 'code');assert.equal(groups.synchronize, 'code');assert.equal(groups.reopened, 'code');
+  assert.equal(groups.edited, 'metadata');assert.equal(groups.ready_for_review, 'metadata');
+  assert.notEqual(groups.opened,groups.ready_for_review,'readiness must not cancel an unfinished opening run');
+  for (const name of ['geography','regression','package']) {
+    const start=source.indexOf(`  ${name}:`), tail=source.slice(start), next=tail.slice(3).search(/\n  [a-z]+:/);
+    const block=next<0?tail:tail.slice(0,next+3), predicate=block.match(/^    if: (.+)$/m)[1];
+    const active=predicate.replace("needs.profile.result == 'success' && ",'');
+    for(const action of events)assert.equal(evaluate(active,action),!['edited','ready_for_review'].includes(action),`${name}/${action}`);
+  }
+  for(const name of ['profile','evidence','scope']) {
+    const start=source.indexOf(`  ${name}:`),tail=source.slice(start),next=tail.slice(3).search(/\n  [a-z]+:/);
+    const block=next<0?tail:tail.slice(0,next+3);assert.doesNotMatch(block,/^    if: /m,`${name} must refresh authority`);
+  }
 });

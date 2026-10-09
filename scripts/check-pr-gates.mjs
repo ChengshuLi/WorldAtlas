@@ -11,7 +11,7 @@ import {checkLinkedIssue} from './check-linked-github-issue.mjs';
 import {selectIntegrationProfile} from './check-integration-profile.mjs';
 import {deploymentBudgetProfile} from './classify-deployment-budget.mjs';
 import {gitBlobTransport} from './git-blob-transport.mjs';
-import {completeReads, quotaDelay, requestAccounting} from './github-quota.mjs';
+import {completeReads, copyAPIFeatures, quotaDelay, requestAccounting} from './github-quota.mjs';
 import {loadJobDeadline, HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 
 export async function readPRGateWorkflow({api, event, env}) {
@@ -54,6 +54,9 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
       return JSON.parse(text);
     } catch (error) {captured.delete(route); throw error;}
   };
+  // Sharing fresh authority records must preserve the authenticated immutable
+  // transport and its admission controls across the composed evidence path.
+  copyAPIFeatures(read, api);
   const prRoute = `${root}/pulls/${scheduled.number}`;
   const current = await read(prRoute);
   const assertHead = pr => {

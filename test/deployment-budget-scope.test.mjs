@@ -174,6 +174,6 @@ test('only read-only superseded PR work is cancelled; main package and merge sch
  assert.match(budget,/group: worldatlas-package-main-\$\{\{ github\.sha \}\}/);
  assert.match(budget,/cancel-in-progress: false/);
  assert.match(regression,/concurrency:[\s\S]*?github\.event\.pull_request\.number[\s\S]*?cancel-in-progress: true/);
- assert.match(regression,/github\.event\.action == 'edited' && 'metadata' \|\| 'code'/);
+ assert.match(regression,/\(github\.event\.action == 'edited' \|\| github\.event\.action == 'ready_for_review'\) && 'metadata' \|\| 'code'/);
  assert.doesNotMatch(budget,/^  pull_request:/m);
 });

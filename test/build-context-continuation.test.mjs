@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {foldCoverageContinuation,FIXED_MIDDLE_GRID_SHA,shareUnchangedContextGeometry,selectBuildContextValidator,replayOriginalV1} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs';
+import {foldCoverageContinuation,FIXED_MIDDLE_GRID_SHA,shareUnchangedContextGeometry,selectBuildContextValidator,replayOriginalV1} from '../scripts/native-ownership/chained-build-context.mjs';
 test('build context dispatch preserves original realm and exact two-target continuation',async()=>{
  const legacyToken={},currentToken={};let legacyCalls=0,currentCalls=0;
  const legacy=async()=>{legacyCalls++;return legacyToken;},current=async()=>{currentCalls++;return currentToken;};

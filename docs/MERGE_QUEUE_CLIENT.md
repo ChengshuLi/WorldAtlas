@@ -79,3 +79,5 @@ Scheduler admission checks out the executing `github.workflow_sha`, binds its
 commit and workflow path/ref to GitHub’s current job environment, and reads the
 timeout from that immutable Git blob. A newer main commit cannot extend an
 already-running job’s timeout; mixed-vintage checkouts refuse before API work.
+
+Draft readiness is a metadata transition. It refreshes current ownership, contract, evidence and scope without canceling or repeating the unchanged head's code tests. Opening, synchronizing or reopening still starts code validation. Before submission, verify the head's code checks and independent review are complete; a successful metadata run does not replace missing or failed code proof. The queue continues to validate the exact integration candidate.
