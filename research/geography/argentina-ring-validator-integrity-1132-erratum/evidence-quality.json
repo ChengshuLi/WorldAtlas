@@ -1223,19 +1223,22 @@
       "description": "Authenticate immutable inputs/code; execute unchanged captured original renderer twice in private packet-owned staging; compare all seven outputs; exclusively publish the complete new-vintage inventory.",
       "id": "guarded-renderer",
       "software": "Python 3.7.3 standard library; immutable.py pinned at 63c51738fc38f0024c024fc0f3fae6278c3a75b3",
-      "units": "Whole-file bytes and SHA-256; two fresh actual renderer CLI executions."
+      "units": "Whole-file bytes and SHA-256; two fresh actual renderer CLI executions.",
+      "kind": "code"
     },
     {
       "description": "Count coordinate interior rings directly for each Polygon/MultiPolygon and enforce exact native shapeID joins to the 214 issue IDs.",
       "id": "interior-ring-count",
       "software": "Captured corrected-renderer.py; Python standard library; GeoJSON coordinate arrays.",
-      "units": "Interior rings per source feature."
+      "units": "Interior rings per source feature.",
+      "kind": "code"
     },
     {
       "description": "Compare output with pinned pre-correction overlay table by exact IDs; verify full summary row and all non-target detail cells unchanged.",
       "id": "table-preservation",
       "software": "Python csv.DictReader and immutable baseline bytes.",
-      "units": "Detail rows and serialized table cells."
+      "units": "Detail rows and serialized table cells.",
+      "kind": "code"
     }
   ],
   "metric_bindings": [
