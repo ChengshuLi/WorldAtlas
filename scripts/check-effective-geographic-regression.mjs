@@ -119,14 +119,15 @@ export function loadSelection(reader) {
   const rawBounds=reader.read(bounds.path,{version:bounds.commit,expected:bounds.sha256,decoded:manifest.bounds.decoded_bytes??FILE});
   const decoded=gunzipSync(rawBounds,{maxOutputLength:FILE});
   const owners=JSON.parse(decoded),ids=new Set();
-  demand(Array.isArray(owners)&&owners.length>0&&owners.every((p,i)=>p.index===i+1&&typeof p.id==='string'&&!ids.has(p.id)&&ids.add(p.id)),'Incomplete/duplicate stable native owner roster');
+  demand(Array.isArray(owners)&&owners.length>0&&owners.every((p,i)=>p.index===i+1&&typeof p.id==='string'&&p.id.length>0&&!ids.has(p.id)&&ids.add(p.id)),'Incomplete/duplicate stable native owner roster');
   const registry=reader.json('scripts/native-ownership/verified-candidates.json');
   const proof=registry.candidates?.[selection.sha256];
   demand(registry.version===1&&proof?.role==='reviewed-exhaustive-native-rule-comparison'&&proof.installation_approval===false&&commit(proof.commit)&&safe(proof.path)&&hash(proof.sha256),'Missing registered complete native comparison');
   const receipt=reader.json(proof.path,{version:proof.commit,expected:proof.sha256});
-  demand(receipt.method===manifest.method&&receipt.checked_rows===manifest.size&&receipt.checked_cells===manifest.size**2&&receipt.unchecked_cells===0&&receipt.checked_runs*2===manifest.runWords&&receipt.installation_ready===false,'Native registered comparison differs');
+  demand(receipt.method===manifest.method&&receipt.baseline_commit===manifest.provenance?.baseline_commit&&receipt.preparation_commit===manifest.provenance?.evaluation_commit&&receipt.owned_cells===manifest.accounting?.owned_cells&&receipt.owners===manifest.accounting?.owners&&receipt.checked_rows===manifest.size&&receipt.checked_cells===manifest.size**2&&receipt.unchecked_cells===0&&receipt.checked_runs*2===manifest.runWords&&receipt.installation_ready===false,'Native registered comparison differs');
   const products=receipt.products;
-  demand(Array.isArray(products)&&new Set(products.map(p=>p.path)).size===products.length&&receipt.two_run_products===products.length&&receipt.run_one_sha256===sha(Buffer.from(JSON.stringify(products)))&&receipt.run_two_sha256===receipt.run_one_sha256&&products.find(p=>p.path==='manifest.json')?.sha256===selection.sha256,'Incomplete two-run native comparison');
+  demand(Array.isArray(products)&&products.length>0&&products.length<=512&&products.every(p=>safe(p.path)&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&p.bytes<=FILE)&&new Set(products.map(p=>p.path)).size===products.length&&receipt.two_run_products===products.length&&receipt.run_one_sha256===sha(Buffer.from(JSON.stringify(products)))&&receipt.run_two_sha256===receipt.run_one_sha256&&products.find(p=>p.path==='manifest.json')?.sha256===selection.sha256,'Incomplete two-run native comparison');
+  demand(products.filter(p=>p.path.startsWith('native-v1/ownership/')).length===manifest.parts.length,'Comparison contains foreign/missing native assets');
   for(const part of manifest.parts)demand(products.some(p=>p.path===part.path&&p.sha256===part.sha256&&p.bytes===part.bytes),'Comparison omitted selected native asset');
   let image;
   for(const part of manifest.parts){const name=path.posix.join(path.posix.dirname(selection.manifest_path),part.path);
