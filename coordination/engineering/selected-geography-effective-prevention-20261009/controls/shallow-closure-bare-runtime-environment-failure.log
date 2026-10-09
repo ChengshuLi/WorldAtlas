@@ -1,0 +1,172 @@
+test_candidate_cannot_disable_gap_detection (__main__.TrustedCheckControls.test_candidate_cannot_disable_gap_detection) ... ERROR
+test_candidate_part_symlink_is_rejected (__main__.TrustedCheckControls.test_candidate_part_symlink_is_rejected) ... ok
+test_existing_invalid_geometry_is_checked_on_metadata_part_change (__main__.TrustedCheckControls.test_existing_invalid_geometry_is_checked_on_metadata_part_change) ... ERROR
+test_external_package_and_policy_tampering_is_rejected (__main__.TrustedCheckControls.test_external_package_and_policy_tampering_is_rejected) ... ok
+test_external_src_code_tampering_is_rejected (__main__.TrustedCheckControls.test_external_src_code_tampering_is_rejected) ... ok
+test_metadata_only_part_change_still_validates (__main__.TrustedCheckControls.test_metadata_only_part_change_still_validates) ... FAIL
+test_missing_or_symlinked_external_input_is_rejected (__main__.TrustedCheckControls.test_missing_or_symlinked_external_input_is_rejected) ... ok
+test_release_pointer_mismatch_is_not_inapplicable (__main__.TrustedCheckControls.test_release_pointer_mismatch_is_not_inapplicable) ... ok
+test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code (__main__.TrustedCheckControls.test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code) ... FAIL
+test_source_only_candidate_cannot_execute_its_script (__main__.TrustedCheckControls.test_source_only_candidate_cannot_execute_its_script) ... FAIL
+test_two_individually_valid_proposals_fail_when_combined (__main__.TrustedCheckControls.test_two_individually_valid_proposals_fail_when_combined) ... FAIL
+test_unfixed_commit_and_existing_report_fail_closed (__main__.TrustedCheckControls.test_unfixed_commit_and_existing_report_fail_closed) ... FAIL
+test_untracked_import_shadow_files_are_rejected (__main__.TrustedCheckControls.test_untracked_import_shadow_files_are_rejected) ... ok
+test_untracked_src_import_shadow_is_rejected (__main__.TrustedCheckControls.test_untracked_src_import_shadow_is_rejected) ... ok
+test_untrusted_checkout_cannot_run (__main__.TrustedCheckControls.test_untrusted_checkout_cannot_run) ... ok
+test_valid_joint_move_is_allowed (__main__.TrustedCheckControls.test_valid_joint_move_is_allowed) ... FAIL
+test_working_tree_checker_change_cannot_run (__main__.TrustedCheckControls.test_working_tree_checker_change_cannot_run) ... ok
+
+======================================================================
+ERROR: test_candidate_cannot_disable_gap_detection (__main__.TrustedCheckControls.test_candidate_cannot_disable_gap_detection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 202, in test_candidate_cannot_disable_gap_detection
+    self.assertEqual(report['status'], 'regressions-found')
+                     ~~~~~~^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_existing_invalid_geometry_is_checked_on_metadata_part_change (__main__.TrustedCheckControls.test_existing_invalid_geometry_is_checked_on_metadata_part_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 290, in test_existing_invalid_geometry_is_checked_on_metadata_part_change
+    self.assertEqual(report['status'], 'blocked-invalid-or-unsupported-geometry')
+                     ~~~~~~^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+FAIL: test_metadata_only_part_change_still_validates (__main__.TrustedCheckControls.test_metadata_only_part_change_still_validates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 257, in test_metadata_only_part_change_still_validates
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpprrhnz5v/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpprrhnz5v/scripts/run-geographic-check.py", line 387, in main
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpprrhnz5v/scripts/run-geographic-check.py", line 297, in inspect
+    spec.loader.exec_module(detector)
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpprrhnz5v/scripts/check-geographic-regression.py", line 17, in <module>
+    import shapely
+ModuleNotFoundError: No module named 'shapely'
+
+
+======================================================================
+FAIL: test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code (__main__.TrustedCheckControls.test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 159, in test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code
+    self.assertTrue(output.is_file(), result.stderr)
+AssertionError: False is not true : Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpvoyqmb95/isolated-fetch-control/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpvoyqmb95/isolated-fetch-control/scripts/run-geographic-check.py", line 387, in main
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpvoyqmb95/isolated-fetch-control/scripts/run-geographic-check.py", line 297, in inspect
+    spec.loader.exec_module(detector)
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpvoyqmb95/isolated-fetch-control/scripts/check-geographic-regression.py", line 17, in <module>
+    import shapely
+ModuleNotFoundError: No module named 'shapely'
+
+
+======================================================================
+FAIL: test_source_only_candidate_cannot_execute_its_script (__main__.TrustedCheckControls.test_source_only_candidate_cannot_execute_its_script)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 190, in test_source_only_candidate_cannot_execute_its_script
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_87x333w/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_87x333w/scripts/run-geographic-check.py", line 387, in main
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_87x333w/scripts/run-geographic-check.py", line 297, in inspect
+    spec.loader.exec_module(detector)
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_87x333w/scripts/check-geographic-regression.py", line 17, in <module>
+    import shapely
+ModuleNotFoundError: No module named 'shapely'
+
+
+======================================================================
+FAIL: test_two_individually_valid_proposals_fail_when_combined (__main__.TrustedCheckControls.test_two_individually_valid_proposals_fail_when_combined)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 268, in test_two_individually_valid_proposals_fail_when_combined
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpdbtk091q/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpdbtk091q/scripts/run-geographic-check.py", line 387, in main
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpdbtk091q/scripts/run-geographic-check.py", line 297, in inspect
+    spec.loader.exec_module(detector)
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpdbtk091q/scripts/check-geographic-regression.py", line 17, in <module>
+    import shapely
+ModuleNotFoundError: No module named 'shapely'
+
+
+======================================================================
+FAIL: test_unfixed_commit_and_existing_report_fail_closed (__main__.TrustedCheckControls.test_unfixed_commit_and_existing_report_fail_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 179, in test_unfixed_commit_and_existing_report_fail_closed
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpisixb4z2/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpisixb4z2/scripts/run-geographic-check.py", line 387, in main
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpisixb4z2/scripts/run-geographic-check.py", line 297, in inspect
+    spec.loader.exec_module(detector)
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpisixb4z2/scripts/check-geographic-regression.py", line 17, in <module>
+    import shapely
+ModuleNotFoundError: No module named 'shapely'
+
+
+======================================================================
+FAIL: test_valid_joint_move_is_allowed (__main__.TrustedCheckControls.test_valid_joint_move_is_allowed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 213, in test_valid_joint_move_is_allowed
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpzyl2oole/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpzyl2oole/scripts/run-geographic-check.py", line 387, in main
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpzyl2oole/scripts/run-geographic-check.py", line 297, in inspect
+    spec.loader.exec_module(detector)
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmpzyl2oole/scripts/check-geographic-regression.py", line 17, in <module>
+    import shapely
+ModuleNotFoundError: No module named 'shapely'
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 15.932s
+
+FAILED (failures=6, errors=2)

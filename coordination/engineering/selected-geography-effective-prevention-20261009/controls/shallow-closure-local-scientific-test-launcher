@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 -I -B -c 'import sys,runpy;sys.path[:0]=["/Users/chengshuli/.local/lib/python3.12/site-packages","/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages"];a=sys.argv[1:];a=[v for v in a if v not in ["-I","-B"]];sys.argv=a;runpy.run_path(a[0],run_name="__main__")' "$@"

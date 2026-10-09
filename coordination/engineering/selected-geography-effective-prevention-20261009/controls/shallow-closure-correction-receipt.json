@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "source_head": "9d8750a4b893e5fe05835523a1c46e0cdbb470a9",
+  "test_sha256": "4ea6d92cbcddf08c87938f707f10f1bf6082b0855451355a2fe531fe60c84a6f",
+  "original_head": "dc7a4435806e927f478ab61c6eb7736d5156f766",
+  "original_request_id": "966cdb01-eaa7-4e10-9060-ba5d8815cae2",
+  "original_worker_run": 37919839939,
+  "terminal_result_comment": 6079583969,
+  "original_accepted": false,
+  "original_merged": false,
+  "failure": "Shallow fixture omitted complete trusted coordination helper namespace; wrapper refused before report",
+  "correction": "Sparse checkout exact trusted helper directory and assert report exists with child stderr",
+  "corrected_controls": {
+    "tests": 17,
+    "passed": 17,
+    "skipped": 0,
+    "seconds": 25.696
+  },
+  "local_environment_attempt": "Bare bundled Python lacked Shapely; failed attempt retained; existing scientific fixture launcher used without installation",
+  "production_or_scientific_code_changed": false,
+  "scientific_qualification_reexecuted": false,
+  "activation": false
+}
