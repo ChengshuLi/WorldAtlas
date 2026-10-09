@@ -14,6 +14,9 @@ CONTROL_PATHS = (
     OWN / "controls/native-footprint-positive.json",
     OWN / "controls/native-footprint-negative.json",
 )
+MAX_FILE_BYTES = 32 * 1024 * 1024
+MAX_PHASE_BYTES = 256 * 1024 * 1024
+DECODED_AND_OUTPUT_RESERVE = 66 * 1024 * 1024
 
 
 def digest(data: bytes) -> str:
@@ -41,6 +44,22 @@ def admit_destinations(paths: tuple[Path, ...]) -> None:
     for path in paths:
         assert path.parent == directory and OWN in path.parent.resolve().parents
         assert not os.path.lexists(path), f"Refuse existing output: {path}"
+
+
+def admit_operation() -> None:
+    """Admit all inputs, code, decoded headroom, and outputs before reading."""
+    admit_destinations(CONTROL_PATHS)
+    inputs = tuple(OWN / "runs" / name / "native-coverage-audit.json" for name in RUNS)
+    code = Path(__file__).resolve()
+    paths = (*inputs, code)
+    sizes = []
+    for path in paths:
+        assert OWN in path.resolve().parents and path.resolve() == path
+        assert not path.is_symlink() and path.is_file()
+        size = path.stat().st_size
+        assert size <= MAX_FILE_BYTES
+        sizes.append(size)
+    assert sum(sizes) + DECODED_AND_OUTPUT_RESERVE <= MAX_PHASE_BYTES
 
 
 def write_admitted(rows: list[tuple[Path, dict]]) -> None:
@@ -82,7 +101,7 @@ def write_admitted(rows: list[tuple[Path, dict]]) -> None:
 def main() -> None:
     # The complete output set and its upper-bound reserve are checked before any
     # source JSON is read or any result is computed. Existing targets stop early.
-    admit_destinations(CONTROL_PATHS)
+    admit_operation()
     runs = [load_run(name) for name in RUNS]
     hashes = [digest(raw) for raw, _ in runs]
     assert hashes[0] == hashes[1], "The two original audit runs must remain byte-identical"
