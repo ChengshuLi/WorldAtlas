@@ -1,0 +1,18 @@
+{
+  "issue": 1048,
+  "observed_date_utc": "2026-10-09",
+  "required_issue_pin": {
+    "name": "pinned_geoboundaries_2020_roster",
+    "sha256": "ff4a4c8a92f7416b8457f423b339f2623b10f59410339911a0427fcee8434f17",
+    "source_path": "data/regional-review/regional-review-f4badb23f78b69b7/source/geoboundaries/ZMB/geoBoundaries-ZMB-ADM2.geojson",
+    "bytes": 35998492
+  },
+  "gate_limit": {
+    "max_ordinary_file_bytes": 33554432,
+    "oversize_by_bytes": 2444060,
+    "source_pin_requires_whole_file_descriptor": true
+  },
+  "why_no_manifest_or_pr": "The issue contract requires the original full-source SHA-256. The active evidence validator rejects an ordinary input above 32 MiB and requires each named baseline pin to bind to an actual whole-file descriptor whose file SHA-256 equals the pin. A derived roster, compressed replacement, source note, or omitted descriptor cannot satisfy both constraints without changing or weakening a gate.",
+  "engineering_handoff": "Extend the evidence format/validator to support reviewed bounded partitioning of oversized original GeoJSON while retaining the exact full-source hash, retrieval identity, ancestry, record coverage, and per-part byte limits. Do not raise the ordinary per-file limit globally, disable validation, or repin this issue to a derived subset.",
+  "geographic_status": "No geography corrected, approved, imported, or published. FEATURE_TY meaning and Area_km method remain unresolved."
+}

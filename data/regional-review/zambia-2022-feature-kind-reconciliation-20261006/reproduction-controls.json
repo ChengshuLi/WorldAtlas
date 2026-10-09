@@ -1,0 +1,18 @@
+{
+  "status": "not-a-validation-receipt",
+  "observed_in_one_source_comparison": {
+    "osg_feature_count": 116,
+    "geoBoundaries_feature_count": 116,
+    "crosswalk_rows": 116,
+    "unique_native_ids": 116,
+    "category_counts": {
+      "City": 4,
+      "District Tiwn": 1,
+      "District Town": 100,
+      "Provincial Town": 11
+    }
+  },
+  "negative_controls": "not executed",
+  "two_run_reproducibility": "not executed",
+  "reason": "The original issue-required geoBoundaries source pin exceeds the evidence validator's per-file limit; no evidence manifest, validated producer run, or PR is claimed."
+}
