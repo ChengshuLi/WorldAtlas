@@ -50,6 +50,13 @@ def run(plan,output,guard_only=False):
     # this complete admitted body guard repeats before source consumers.
     for pin in plan['runtime_files']: admitted_read(pin,True)
     for pin in plan['code']: admitted_read(pin)
+    # Isolated Python excludes user-site discovery. Admit and authenticate exact
+    # installed package bodies first, then expose only their declared roots.
+    for package in ('numpy','shapely'):
+        initializers=[pin for pin in plan['runtime_files'] if pathlib.Path(pin['path']).parts[-2:]==(package,'__init__.py')]
+        assert len(initializers)==1
+        package_root=pathlib.Path(initializers[0]['path']).parent.parent
+        ordinary(initializers[0]['path']);sys.path.insert(0,str(package_root))
     sys.path.insert(0,str(ROOT/'scripts'))
     import numpy,shapely,ellipsoidal_area
     import shapely.geometry
