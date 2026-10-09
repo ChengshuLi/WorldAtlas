@@ -1,0 +1,52 @@
+{
+  "accepted": true,
+  "request_id": "d0529b63-4dab-4c71-8d1d-fd6b2bf987dd",
+  "issue_number": 1622,
+  "claim": {
+    "comment_id": 6088014751,
+    "version": 1,
+    "active": false,
+    "worker_id": "01a1222d-b893-7861-9c9c-8b8daa788d16",
+    "claim_id": "dcb2a743-f0eb-4f83-89c1-8a2f9c7eb0fc",
+    "branch": "engineering/engineering-owned-scope-routing-20261009",
+    "request_id": "d0529b63-4dab-4c71-8d1d-fd6b2bf987dd",
+    "issue_number": 1622,
+    "claimed_at": "2026-10-09T20:03:26.212Z",
+    "updated_at": "2026-10-09T20:03:26.212Z",
+    "expires_at": "2026-10-10T20:03:26.212Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 1,
+    "released_at": "2026-10-09T20:08:15.880Z"
+  },
+  "replayed": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6088417139,
+  "logical_observation_reads": 1,
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 3,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 1
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4962,
+        "reset": 1791579934
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4959,
+        "reset": 1791579934
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4959,
+        "reset": 1791579934
+      }
+    }
+  }
+}

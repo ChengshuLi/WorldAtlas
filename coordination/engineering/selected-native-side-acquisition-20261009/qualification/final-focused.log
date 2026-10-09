@@ -1,0 +1,142 @@
+✔ actual immutable entry rejects owner loss/reassignment with rawworld geometry unchanged (19566.522417ms)
+✔ missing native selection, dishonest row partition and unsupported additive hook fail closed (3829.236208ms)
+✔ changed actual asset body cannot hide behind an unchanged manifest descriptor (2180.049459ms)
+✔ full stable owner identity detects coherent index relabel and boundary-sized gaps (0.224291ms)
+✔ full ledger comparison retains zero-cell primitives and rejects coherent omission/source drift (0.349083ms)
+✔ aggregate admission rejects before any actual body read (0.158292ms)
+✔ complete bootstrap admission precedes runtime opens and trusted code reads (0.441208ms)
+✔ missing original proof object uses only the exact whole same-path retained receipt (2446.230458ms)
+✔ manifest-bound immutable native transport restores full cross-fragment original members (1956.023375ms)
+✔ actual selected entry compares typed whole native bank against ordinary predecessor (5015.779709ms)
+✔ selected continuous source consumes exact encoded override and rejects incomplete or stale maps (7270.695958ms)
+✔ explicit v2 authority conservation permits append but preserves every original zero-cell primitive (1.450625ms)
+✔ whole original rule custody derives actual issued preimage and refuses rebinding before selection (3660.519792ms)
+✔ cold selected continuous operands preserve complete neighbors and original loss/overlap comparisons (26036.578ms)
+✖ renewed immutable artifact entry binds complete catalogue and independent authority (2753.045584ms)
+✖ registered 533-role authority derives complete custody without raising actual read caps (6714.25875ms)
+✔ Cloudflare fourth entry is explicit and cannot reinterpret historical profile shapes (52.308167ms)
+✖ genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles (6728.937709ms)
+✔ separate authenticated native stages preserve all rows and relinquish containing buffers (4511.831584ms)
+✔ actual whole-part acquisition reads once for several rows and rejects incomplete or forged carry (2895.862833ms)
+✔ complete side runtime and carried projection admission refuses before whole body opens (2469.346833ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 18
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98222.179958
+
+✖ failing tests:
+
+test at test/effective-geographic-regression.test.mjs:318:1
+✖ renewed immutable artifact entry binds complete catalogue and independent authority (2753.045584ms)
+  Error: spawnSync git ENOBUFS
+      at Object.spawnSync (node:internal/child_process:1160:20)
+      at spawnSync (node:child_process:928:24)
+      at execFileSync (node:child_process:971:15)
+      at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:173
+      at Array.map (<anonymous>)
+      at Object.cleanup (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:122)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:355:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    errno: -55,
+    code: 'ENOBUFS',
+    syscall: 'spawnSync git',
+    path: 'git',
+    spawnargs: [ '-C', '/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-0654YR', 'cat-file', 'blob', '309f2c201423ffa35f838af1eb5f027a8552a151' ],
+    error: Error: spawnSync git ENOBUFS
+        at Object.spawnSync (node:internal/child_process:1160:20)
+        at spawnSync (node:child_process:928:24)
+        at execFileSync (node:child_process:971:15)
+        at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:173
+        at Array.map (<anonymous>)
+        at Object.cleanup (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:122)
+        at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:355:13)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:960:18),
+    status: null,
+    signal: 'SIGTERM',
+    output: [ null, <Buffer 1f 8b 08 00 00 00 00 00 02 ff ec bd 69 73 63 c7 91 36 fa dd bf 02 b7 27 e2 c6 3b 33 0d b2 f6 a5 fb ce bd d1 96 64 59 11 b6 ac b1 e4 f1 9d 79 e5 80 6b ... 1064910 more bytes>, <Buffer > ],
+    pid: 82576,
+    stdout: <Buffer 1f 8b 08 00 00 00 00 00 02 ff ec bd 69 73 63 c7 91 36 fa dd bf 02 b7 27 e2 c6 3b 33 0d b2 f6 a5 fb ce bd d1 96 64 59 11 b6 ac b1 e4 f1 9d 79 e5 80 6b ... 1064910 more bytes>,
+    stderr: <Buffer >
+  }
+
+test at test/effective-geographic-regression.test.mjs:358:1
+✖ registered 533-role authority derives complete custody without raising actual read caps (6714.25875ms)
+  Error: spawnSync git ENOBUFS
+      at Object.spawnSync (node:internal/child_process:1160:20)
+      at spawnSync (node:child_process:928:24)
+      at execFileSync (node:child_process:971:15)
+      at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:173
+      at Array.map (<anonymous>)
+      at Object.cleanup (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:122)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:403:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    errno: -55,
+    code: 'ENOBUFS',
+    syscall: 'spawnSync git',
+    path: 'git',
+    spawnargs: [ '-C', '/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-nhtoRY', 'cat-file', 'blob', '309f2c201423ffa35f838af1eb5f027a8552a151' ],
+    error: Error: spawnSync git ENOBUFS
+        at Object.spawnSync (node:internal/child_process:1160:20)
+        at spawnSync (node:child_process:928:24)
+        at execFileSync (node:child_process:971:15)
+        at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:173
+        at Array.map (<anonymous>)
+        at Object.cleanup (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:122)
+        at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:403:13)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:960:18),
+    status: null,
+    signal: 'SIGTERM',
+    output: [ null, <Buffer 1f 8b 08 00 00 00 00 00 02 ff ec bd 69 73 63 c7 91 36 fa dd bf 02 b7 27 e2 c6 3b 33 0d b2 f6 a5 fb ce bd d1 96 64 59 11 b6 ac b1 e4 f1 9d 79 e5 80 6b ... 1064910 more bytes>, <Buffer > ],
+    pid: 83637,
+    stdout: <Buffer 1f 8b 08 00 00 00 00 00 02 ff ec bd 69 73 63 c7 91 36 fa dd bf 02 b7 27 e2 c6 3b 33 0d b2 f6 a5 fb ce bd d1 96 64 59 11 b6 ac b1 e4 f1 9d 79 e5 80 6b ... 1064910 more bytes>,
+    stderr: <Buffer >
+  }
+
+test at test/effective-geographic-regression.test.mjs:425:1
+✖ genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles (6728.937709ms)
+  Error: spawnSync git ENOBUFS
+      at Object.spawnSync (node:internal/child_process:1160:20)
+      at spawnSync (node:child_process:928:24)
+      at execFileSync (node:child_process:971:15)
+      at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:173
+      at Array.map (<anonymous>)
+      at Object.cleanup (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:122)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:476:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    errno: -55,
+    code: 'ENOBUFS',
+    syscall: 'spawnSync git',
+    path: 'git',
+    spawnargs: [ '-C', '/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/selected-geography-fixture-Obke6O', 'cat-file', 'blob', '309f2c201423ffa35f838af1eb5f027a8552a151' ],
+    error: Error: spawnSync git ENOBUFS
+        at Object.spawnSync (node:internal/child_process:1160:20)
+        at spawnSync (node:child_process:928:24)
+        at execFileSync (node:child_process:971:15)
+        at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:173
+        at Array.map (<anonymous>)
+        at Object.cleanup (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:58:122)
+        at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:476:13)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:960:18),
+    status: null,
+    signal: 'SIGTERM',
+    output: [ null, <Buffer 1f 8b 08 00 00 00 00 00 02 ff ec bd 69 73 63 c7 91 36 fa dd bf 02 b7 27 e2 c6 3b 33 0d b2 f6 a5 fb ce bd d1 96 64 59 11 b6 ac b1 e4 f1 9d 79 e5 80 6b ... 1064910 more bytes>, <Buffer > ],
+    pid: 85427,
+    stdout: <Buffer 1f 8b 08 00 00 00 00 00 02 ff ec bd 69 73 63 c7 91 36 fa dd bf 02 b7 27 e2 c6 3b 33 0d b2 f6 a5 fb ce bd d1 96 64 59 11 b6 ac b1 e4 f1 9d 79 e5 80 6b ... 1064910 more bytes>,
+    stderr: <Buffer >
+  }

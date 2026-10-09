@@ -1,0 +1,297 @@
+﻿2026-10-09T19:48:57.3474031Z Current runner version: '2.337.0'
+2026-10-09T19:48:57.3507103Z ##[group]Runner Image Provisioner
+2026-10-09T19:48:57.3507627Z Hosted Compute Agent
+2026-10-09T19:48:57.3507966Z Version: 20261002.596
+2026-10-09T19:48:57.3508397Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-09T19:48:57.3508831Z Build Date: 2026-10-02T22:28:27Z
+2026-10-09T19:48:57.3509291Z Worker ID: {e43262f3-c3cb-4572-95dc-4e2e452b57b1}
+2026-10-09T19:48:57.3509752Z Region: centralus
+2026-10-09T19:48:57.3510072Z Cloud: Azure
+2026-10-09T19:48:57.3510441Z ##[endgroup]
+2026-10-09T19:48:57.3511189Z ##[group]Operating System
+2026-10-09T19:48:57.3511616Z Ubuntu
+2026-10-09T19:48:57.3511943Z 24.04.5
+2026-10-09T19:48:57.3512250Z LTS
+2026-10-09T19:48:57.3512637Z ##[endgroup]
+2026-10-09T19:48:57.3512968Z ##[group]Runner Image
+2026-10-09T19:48:57.3513349Z Image: ubuntu-24.04
+2026-10-09T19:48:57.3513758Z Version: 20261004.327.1
+2026-10-09T19:48:57.3514459Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-09T19:48:57.3515383Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-09T19:48:57.3515969Z ##[endgroup]
+2026-10-09T19:48:57.3516946Z ##[group]GITHUB_TOKEN Permissions
+2026-10-09T19:48:57.3518345Z Actions: read
+2026-10-09T19:48:57.3518703Z Contents: read
+2026-10-09T19:48:57.3519069Z Issues: read
+2026-10-09T19:48:57.3519435Z Metadata: read
+2026-10-09T19:48:57.3519778Z PullRequests: read
+2026-10-09T19:48:57.3520103Z ##[endgroup]
+2026-10-09T19:48:57.3521402Z Secret source: Actions
+2026-10-09T19:48:57.3521962Z Cache mode: write
+2026-10-09T19:48:57.3522427Z Prepare workflow directory
+2026-10-09T19:48:57.3757179Z Prepare all required actions
+2026-10-09T19:48:57.3789295Z Getting action download info
+2026-10-09T19:48:57.6281109Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+2026-10-09T19:48:58.0365910Z Download action repository 'actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+2026-10-09T19:48:58.3536064Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-09T19:48:58.9156824Z Complete job name: profile
+2026-10-09T19:48:58.9977927Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-10-09T19:48:58.9978938Z with:
+2026-10-09T19:48:58.9979534Z   ref: d416ec3fa35b94d114aa42bd858317504e50923f
+2026-10-09T19:48:58.9980302Z   persist-credentials: false
+2026-10-09T19:48:58.9980984Z   sparse-checkout: scripts
+src
+.github
+
+2026-10-09T19:48:58.9981722Z   repository: ChengshuLi/WorldAtlas
+2026-10-09T19:48:58.9986608Z   token: ***
+2026-10-09T19:48:58.9987148Z   ssh-strict: true
+2026-10-09T19:48:58.9987705Z   ssh-user: git
+2026-10-09T19:48:58.9988238Z   clean: true
+2026-10-09T19:48:58.9988810Z   sparse-checkout-cone-mode: true
+2026-10-09T19:48:58.9989465Z   fetch-depth: 1
+2026-10-09T19:48:58.9990034Z   fetch-tags: false
+2026-10-09T19:48:58.9990598Z   show-progress: true
+2026-10-09T19:48:58.9991168Z   lfs: false
+2026-10-09T19:48:58.9991684Z   submodules: false
+2026-10-09T19:48:58.9992256Z   set-safe-directory: true
+2026-10-09T19:48:58.9992901Z   allow-unsafe-pr-checkout: false
+2026-10-09T19:48:58.9993674Z ##[endgroup]
+2026-10-09T19:48:59.1007961Z Syncing repository: ChengshuLi/WorldAtlas
+2026-10-09T19:48:59.1009651Z ##[group]Getting Git version info
+2026-10-09T19:48:59.1010532Z Working directory is '/home/runner/work/WorldAtlas/WorldAtlas'
+2026-10-09T19:48:59.1011801Z [command]/usr/bin/git version
+2026-10-09T19:48:59.1681710Z git version 2.55.0
+2026-10-09T19:48:59.1697261Z ##[endgroup]
+2026-10-09T19:48:59.1709339Z Temporarily overriding HOME='/home/runner/work/_temp/5e34363c-b1f7-4168-ad1b-2da37f0ef471' before making global git config changes
+2026-10-09T19:48:59.1711897Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T19:48:59.1714083Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-09T19:48:59.2111229Z Deleting the contents of '/home/runner/work/WorldAtlas/WorldAtlas'
+2026-10-09T19:48:59.2114294Z ##[group]Determining repository object format
+2026-10-09T19:48:59.2116022Z ##[endgroup]
+2026-10-09T19:48:59.2117587Z ##[group]Initializing the repository
+2026-10-09T19:48:59.2119324Z [command]/usr/bin/git init /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-09T19:48:59.2815175Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-09T19:48:59.2816823Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-09T19:48:59.2818259Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-09T19:48:59.2819373Z hint: call:
+2026-10-09T19:48:59.2820133Z hint:
+2026-10-09T19:48:59.2821104Z hint: 	git config --global init.defaultBranch <name>
+2026-10-09T19:48:59.2822297Z hint:
+2026-10-09T19:48:59.2823408Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-09T19:48:59.2825216Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-09T19:48:59.2826791Z hint:
+2026-10-09T19:48:59.2827591Z hint: 	git branch -m <name>
+2026-10-09T19:48:59.2828471Z hint:
+2026-10-09T19:48:59.2829650Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-09T19:48:59.2831569Z Initialized empty Git repository in /home/runner/work/WorldAtlas/WorldAtlas/.git/
+2026-10-09T19:48:59.2843039Z [command]/usr/bin/git remote add origin https://github.com/ChengshuLi/WorldAtlas
+2026-10-09T19:48:59.3114748Z ##[endgroup]
+2026-10-09T19:48:59.3116004Z ##[group]Disabling automatic garbage collection
+2026-10-09T19:48:59.3117743Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-09T19:48:59.3704982Z ##[endgroup]
+2026-10-09T19:48:59.3705489Z ##[group]Setting up auth
+2026-10-09T19:48:59.3705979Z Removing SSH command configuration
+2026-10-09T19:48:59.3710993Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T19:48:59.3738889Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T19:48:59.4159915Z Removing HTTP extra header
+2026-10-09T19:48:59.4163350Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T19:48:59.4190943Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T19:48:59.4366227Z Removing includeIf entries pointing to credentials config files
+2026-10-09T19:48:59.4370964Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T19:48:59.4398211Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T19:48:59.4571172Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-09T19:48:59.4895241Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:48:59.5570181Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:48:59.6725244Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:48:59.6798054Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:48:59.6871655Z ##[endgroup]
+2026-10-09T19:48:59.6872136Z ##[group]Fetching the repository
+2026-10-09T19:48:59.6872645Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none --depth=1 origin d416ec3fa35b94d114aa42bd858317504e50923f
+2026-10-09T19:49:00.4014552Z From https://github.com/ChengshuLi/WorldAtlas
+2026-10-09T19:49:00.4014893Z  * branch            d416ec3fa35b94d114aa42bd858317504e50923f -> FETCH_HEAD
+2026-10-09T19:49:00.4023152Z [command]/usr/bin/git rev-parse --verify --quiet d416ec3fa35b94d114aa42bd858317504e50923f^{object}
+2026-10-09T19:49:00.4048446Z d416ec3fa35b94d114aa42bd858317504e50923f
+2026-10-09T19:49:00.4051459Z ##[endgroup]
+2026-10-09T19:49:00.4051800Z ##[group]Determining the checkout info
+2026-10-09T19:49:00.4052483Z ##[endgroup]
+2026-10-09T19:49:00.4052804Z ##[group]Setting up sparse checkout
+2026-10-09T19:49:00.4055743Z [command]/usr/bin/git sparse-checkout set scripts src .github
+2026-10-09T19:49:00.4095514Z ##[endgroup]
+2026-10-09T19:49:00.4095867Z ##[group]Checking out the ref
+2026-10-09T19:49:00.4098577Z [command]/usr/bin/git checkout --progress --force d416ec3fa35b94d114aa42bd858317504e50923f
+2026-10-09T19:49:01.0798281Z Note: switching to 'd416ec3fa35b94d114aa42bd858317504e50923f'.
+2026-10-09T19:49:01.0798585Z 
+2026-10-09T19:49:01.0798784Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-09T19:49:01.0799285Z changes and commit them, and you can discard any commits you make in this
+2026-10-09T19:49:01.0799701Z state without impacting any branches by switching back to a branch.
+2026-10-09T19:49:01.0800001Z 
+2026-10-09T19:49:01.0800208Z If you want to create a new branch to retain commits you create, you may
+2026-10-09T19:49:01.0800593Z do so (now or later) by using -c with the switch command. Example:
+2026-10-09T19:49:01.0800807Z 
+2026-10-09T19:49:01.0800908Z   git switch -c <new-branch-name>
+2026-10-09T19:49:01.0801080Z 
+2026-10-09T19:49:01.0801210Z Or undo this operation with:
+2026-10-09T19:49:01.0801349Z 
+2026-10-09T19:49:01.0801425Z   git switch -
+2026-10-09T19:49:01.0801549Z 
+2026-10-09T19:49:01.0801735Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-09T19:49:01.0802000Z 
+2026-10-09T19:49:01.0802432Z HEAD is now at d416ec3 Admit complete registered artifact authority role unions
+2026-10-09T19:49:01.0811267Z ##[endgroup]
+2026-10-09T19:49:01.0912621Z [command]/usr/bin/git log -1 --format=%H
+2026-10-09T19:49:01.0918447Z d416ec3fa35b94d114aa42bd858317504e50923f
+2026-10-09T19:49:01.0919403Z ##[group]Removing auth
+2026-10-09T19:49:01.0919634Z Removing SSH command configuration
+2026-10-09T19:49:01.0926386Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T19:49:01.0927352Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T19:49:01.1124109Z Removing HTTP extra header
+2026-10-09T19:49:01.1127243Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T19:49:01.1155314Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T19:49:01.1348203Z Removing includeIf entries pointing to credentials config files
+2026-10-09T19:49:01.1350924Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T19:49:01.1376592Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+2026-10-09T19:49:01.1377217Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+2026-10-09T19:49:01.1377735Z includeif.gitdir:/github/workspace/.git.path
+2026-10-09T19:49:01.1378120Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-09T19:49:01.1384759Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+2026-10-09T19:49:01.1406050Z /home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1413569Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1443787Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+2026-10-09T19:49:01.1464240Z /home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1470497Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1499446Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-09T19:49:01.1519720Z /github/runner_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1525527Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1560306Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-09T19:49:01.1581222Z /github/runner_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1589261Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config
+2026-10-09T19:49:01.1618022Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T19:49:01.1802875Z Removing credentials config '/home/runner/work/_temp/git-credentials-1db24f85-d159-498e-b038-a4bca098fb1a.config'
+2026-10-09T19:49:01.1810312Z ##[endgroup]
+2026-10-09T19:49:01.1994467Z ##[group]Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+2026-10-09T19:49:01.1994682Z with:
+2026-10-09T19:49:01.1994801Z   node-version: 24
+2026-10-09T19:49:01.1994927Z   check-latest: false
+2026-10-09T19:49:01.1996158Z   token: ***
+2026-10-09T19:49:01.1996511Z   package-manager-cache: true
+2026-10-09T19:49:01.1996661Z ##[endgroup]
+2026-10-09T19:49:01.2887024Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+2026-10-09T19:49:01.2889778Z ##[group]Environment details
+2026-10-09T19:49:01.5971800Z node: v24.21.0
+2026-10-09T19:49:01.5972074Z npm: 11.19.0
+2026-10-09T19:49:01.5972241Z yarn: 1.22.22
+2026-10-09T19:49:01.5972805Z ##[endgroup]
+2026-10-09T19:49:01.6097694Z ##[group]Run if test -f scripts/check-pr-gates.mjs; then
+2026-10-09T19:49:01.6097997Z [36;1mif test -f scripts/check-pr-gates.mjs; then[0m
+2026-10-09T19:49:01.6098212Z [36;1m  node scripts/check-pr-gates.mjs[0m
+2026-10-09T19:49:01.6098365Z [36;1melse[0m
+2026-10-09T19:49:01.6098551Z [36;1m  # Bounded activation compatibility: all existing trusted checks run.[0m
+2026-10-09T19:49:01.6098816Z [36;1m  # No candidate helper is substituted for absent baseline code.[0m
+2026-10-09T19:49:01.6099073Z [36;1m  test "$GITHUB_HEAD_REF" = engineering/global-quota-1543-20261009[0m
+2026-10-09T19:49:01.6099313Z [36;1m  node --input-type=module <<'NODE'[0m
+2026-10-09T19:49:01.6099480Z [36;1mimport fs from 'node:fs';[0m
+2026-10-09T19:49:01.6099678Z [36;1mimport {githubAPI} from './scripts/issue-claim-contract.mjs';[0m
+2026-10-09T19:49:01.6099955Z [36;1mimport {checkLinkedIssue} from './scripts/check-linked-github-issue.mjs';[0m
+2026-10-09T19:49:01.6100312Z [36;1mimport {selectIntegrationProfile} from './scripts/check-integration-profile.mjs';[0m
+2026-10-09T19:49:01.6100655Z [36;1mimport {deploymentBudgetProfile} from './scripts/classify-deployment-budget.mjs';[0m
+2026-10-09T19:49:01.6101136Z [36;1mconst event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));[0m
+2026-10-09T19:49:01.6101487Z [36;1mconst repo = process.env.GITHUB_REPOSITORY, token = process.env.GH_TOKEN, api = githubAPI(token);[0m
+2026-10-09T19:49:01.6101830Z [36;1mconst pr = await api(`/repos/${repo}/pulls/${event.pull_request.number}`);[0m
+2026-10-09T19:49:01.6102219Z [36;1mif (pr.head.sha !== event.pull_request.head.sha || pr.head.ref !== process.env.GITHUB_HEAD_REF) throw Error('Activation head changed');[0m
+2026-10-09T19:49:01.6102749Z [36;1mconst linked = await checkLinkedIssue({branch: pr.head.ref, event: {...event, pull_request: {...event.pull_request, body: pr.body}}, token, api, checkClaim: true});[0m
+2026-10-09T19:49:01.6103188Z [36;1mconst regression = await selectIntegrationProfile({event, repo, api});[0m
+2026-10-09T19:49:01.6103554Z [36;1mconst packageProfile = await deploymentBudgetProfile({event, eventName: 'pull_request', repository: repo, api});[0m
+2026-10-09T19:49:01.6103969Z [36;1mif (packageProfile.blocked) throw Error('Activation package classification is quota-blocked');[0m
+2026-10-09T19:49:01.6104639Z [36;1mfs.appendFileSync(process.env.GITHUB_OUTPUT, `profile=${regression.profile}\nshards=${JSON.stringify(regression.shards)}\nowned_paths=${JSON.stringify(linked.owned_paths ?? [])}\npr_body=${JSON.stringify(pr.body ?? '')}\nfull=${packageProfile.full}\nblocked=false\n`);[0m
+2026-10-09T19:49:01.6105193Z [36;1mNODE[0m
+2026-10-09T19:49:01.6105306Z [36;1mfi[0m
+2026-10-09T19:49:01.6337748Z shell: /usr/bin/bash -e {0}
+2026-10-09T19:49:01.6337904Z env:
+2026-10-09T19:49:01.6339257Z   GH_TOKEN: ***
+2026-10-09T19:49:01.6339382Z   PR_GATE_PHASE: metadata
+2026-10-09T19:49:01.6339517Z ##[endgroup]
+2026-10-09T19:49:02.2775307Z {"status":"incomplete-or-invalid","head_sha":"36d83c7449b138cc0ed2264a37181426696d0959","reason":"Job metadata does not bind the executing phase","retryable":false,"limits":["Trusted metadata/evidence gates remain unverified; no success or applicability skip is claimed"],"elapsed_ms":601,"request_accounting":{"phase":"pr-gates","actual_http_attempts":2,"counts":{"GET:repository-authority:200":1,"GET:actions:200":1},"observed_repository_core":{"first":{"limit":5000,"remaining":4804,"reset":1791577961},"last":{"limit":5000,"remaining":4959,"reset":1791577962},"lowest_remaining":{"limit":5000,"remaining":4804,"reset":1791577961}}},"immutable_transport":[]}
+2026-10-09T19:49:02.2847333Z ##[error]Process completed with exit code 1.
+2026-10-09T19:49:02.2889285Z ##[group]Run node --input-type=module <<'DIAGNOSTIC'
+2026-10-09T19:49:02.2889541Z [36;1mnode --input-type=module <<'DIAGNOSTIC'[0m
+2026-10-09T19:49:02.2889851Z [36;1mconst repo = process.env.DIAGNOSTIC_REPO, number = process.env.DIAGNOSTIC_PR, token = process.env.GH_TOKEN;[0m
+2026-10-09T19:49:02.2890140Z [36;1mconst safe = value => {[0m
+2026-10-09T19:49:02.2890297Z [36;1m  let text = String(value ?? '');[0m
+2026-10-09T19:49:02.2890492Z [36;1m  if (token) text = text.split(token).join('[redacted]');[0m
+2026-10-09T19:49:02.2890771Z [36;1m  return text.replace(/(?:github_pat_|gh[pousr]_)[A-Za-z0-9_]+/g, '[redacted]')[0m
+2026-10-09T19:49:02.2891201Z [36;1m    .replace(/Bearer\s+\S+/gi, '***').replace(/[\x00-\x1f\x7f]/g, ' ').slice(0, 512);[0m
+2026-10-09T19:49:02.2891420Z [36;1m};[0m
+2026-10-09T19:49:02.2891633Z [36;1mconst result = {phase: 'failed-profile-job-api-probe', validation_bypassed: false};[0m
+2026-10-09T19:49:02.2891872Z [36;1mtry {[0m
+2026-10-09T19:49:02.2892139Z [36;1m  if (!/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') || !/^[1-9]\d*$/.test(number ?? '') || !token) throw Error('Invalid diagnostic context');[0m
+2026-10-09T19:49:02.2892516Z [36;1m  const response = await fetch(`https://api.github.com/repos/${repo}/pulls/${number}`, {[0m
+2026-10-09T19:49:02.2892925Z [36;1m    headers: {Authorization: `*** Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'},[0m
+2026-10-09T19:49:02.2893224Z [36;1m    signal: AbortSignal.timeout(20000)[0m
+2026-10-09T19:49:02.2893516Z [36;1m  });[0m
+2026-10-09T19:49:02.2893649Z [36;1m  result.http_status = response.status;[0m
+2026-10-09T19:49:02.2894003Z [36;1m  for (const [key, header] of [['rate_remaining', 'x-ratelimit-remaining'], ['rate_reset', 'x-ratelimit-reset'], ['retry_after', 'retry-after']]) {[0m
+2026-10-09T19:49:02.2894453Z [36;1m    const value = response.headers.get(header); if (/^\d{1,13}$/.test(value ?? '')) result[key] = safe(value);[0m
+2026-10-09T19:49:02.2894713Z [36;1m  }[0m
+2026-10-09T19:49:02.2894886Z [36;1m  const request = response.headers.get('x-github-request-id');[0m
+2026-10-09T19:49:02.2895163Z [36;1m  if (/^[a-fA-F0-9:]{1,100}$/.test(request ?? '')) result.request_id = safe(request);[0m
+2026-10-09T19:49:02.2895390Z [36;1m  if (!response.ok) {[0m
+2026-10-09T19:49:02.2895631Z [36;1m    let body; try { body = await response.json(); } catch { /* HTTP denial remains visible. */ }[0m
+2026-10-09T19:49:02.2895944Z [36;1m    if (typeof body?.message === 'string') result.message = safe(body.message);[0m
+2026-10-09T19:49:02.2896183Z [36;1m  } else await response.body?.cancel();[0m
+2026-10-09T19:49:02.2896511Z [36;1m} catch (error) { result.diagnostic_error = safe(error.message); }[0m
+2026-10-09T19:49:02.2896731Z [36;1mconsole.log(JSON.stringify(result));[0m
+2026-10-09T19:49:02.2896892Z [36;1mDIAGNOSTIC[0m
+2026-10-09T19:49:02.2951627Z shell: /usr/bin/bash -e {0}
+2026-10-09T19:49:02.2951774Z env:
+2026-10-09T19:49:02.2953074Z   GH_TOKEN: ***
+2026-10-09T19:49:02.2953210Z   DIAGNOSTIC_REPO: ChengshuLi/WorldAtlas
+2026-10-09T19:49:02.2953366Z   DIAGNOSTIC_PR: 1623
+2026-10-09T19:49:02.2953491Z ##[endgroup]
+2026-10-09T19:49:02.8279111Z {"phase":"failed-profile-job-api-probe","validation_bypassed":false,"http_status":200,"rate_remaining":"4803","rate_reset":"1791577961","request_id":"804A:355530:2024C40:689689E:6AC9452E"}
+2026-10-09T19:49:02.9130631Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-10-09T19:49:02.9130875Z with:
+2026-10-09T19:49:02.9131051Z   name: trusted-pr-gates-1623-36d83c7449b138cc0ed2264a37181426696d0959
+2026-10-09T19:49:02.9131274Z   path: pr-gates.json
+evidence-check.json
+
+2026-10-09T19:49:02.9131438Z   if-no-files-found: ignore
+2026-10-09T19:49:02.9131572Z   retention-days: 30
+2026-10-09T19:49:02.9131693Z   compression-level: 6
+2026-10-09T19:49:02.9131813Z   overwrite: false
+2026-10-09T19:49:02.9131937Z   include-hidden-files: false
+2026-10-09T19:49:02.9132073Z ##[endgroup]
+2026-10-09T19:49:03.0145490Z (node:2242) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-09T19:49:03.0145945Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-09T19:49:03.0178252Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-09T19:49:03.0179566Z The least common ancestor is /home/runner/work/WorldAtlas/WorldAtlas. This will be the root directory of the artifact
+2026-10-09T19:49:03.0180195Z With the provided path, there will be 1 file uploaded
+2026-10-09T19:49:03.0183308Z Artifact name is valid!
+2026-10-09T19:49:03.0183873Z Root directory input is valid!
+2026-10-09T19:49:03.2749331Z Beginning upload of artifact content to blob storage
+2026-10-09T19:49:03.2857273Z (node:2242) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-09T19:49:03.4217469Z Uploaded bytes 561
+2026-10-09T19:49:03.4608031Z Finished uploading artifact content to blob storage!
+2026-10-09T19:49:03.4608675Z SHA256 digest of uploaded artifact zip is bca470c6c8c968712770c9d0048a9a844fb3648ca78c4e8188c9ed305e2e885f
+2026-10-09T19:49:03.4610381Z Finalizing artifact upload
+2026-10-09T19:49:03.6946071Z Artifact trusted-pr-gates-1623-36d83c7449b138cc0ed2264a37181426696d0959.zip successfully finalized. Artifact ID 11642001150
+2026-10-09T19:49:03.6947396Z Artifact trusted-pr-gates-1623-36d83c7449b138cc0ed2264a37181426696d0959 has been successfully uploaded! Final size is 561 bytes. Artifact ID is 11642001150
+2026-10-09T19:49:03.6951885Z Artifact download URL: https://github.com/ChengshuLi/WorldAtlas/actions/runs/37982780945/artifacts/11642001150
+2026-10-09T19:49:03.7123256Z Post job cleanup.
+2026-10-09T19:49:03.7668851Z [command]/usr/bin/git version
+2026-10-09T19:49:03.7697786Z git version 2.55.0
+2026-10-09T19:49:03.7724964Z Temporarily overriding HOME='/home/runner/work/_temp/839414e9-41ae-47f9-bbfb-64361dc7515a' before making global git config changes
+2026-10-09T19:49:03.7725699Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T19:49:03.7729000Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-09T19:49:03.7753917Z Removing SSH command configuration
+2026-10-09T19:49:03.7758402Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T19:49:03.7785468Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T19:49:03.8000285Z Removing HTTP extra header
+2026-10-09T19:49:03.8005351Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T19:49:03.8038370Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T19:49:03.8247743Z Removing includeIf entries pointing to credentials config files
+2026-10-09T19:49:03.8254103Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T19:49:03.8283715Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T19:49:03.8592452Z Evaluate and set job outputs
+2026-10-09T19:49:03.8598505Z Cleaning up orphan processes
+2026-10-09T19:49:03.8789667Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

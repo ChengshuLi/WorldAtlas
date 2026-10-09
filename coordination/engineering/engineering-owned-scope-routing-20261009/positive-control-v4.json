@@ -1,0 +1,16 @@
+{
+  "method_id": "engineering-owned-scope-routing",
+  "kind": "positive",
+  "outcome": "passed",
+  "executed_command": "node --test --test-reporter=tap test/handoff-scope.test.mjs test/engineering-owned-scope-routing.test.mjs test/issue-claims.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs",
+  "evidence_path": "coordination/engineering/engineering-owned-scope-routing-20261009/organized-final-caller.tap",
+  "controls": [
+    "actual CLI extra declared composition namespace and exact helper",
+    "branch namespace fallback",
+    "linked-issue git scope propagation",
+    "verified canonical reservation propagation",
+    "unchanged geography worker claim-mode and scope compatibility",
+    "existing cold-checkout caller controls using required P2 namespace",
+    "substantive routing controls organized once in dedicated regression file; both required sparse callers remain complete"
+  ]
+}

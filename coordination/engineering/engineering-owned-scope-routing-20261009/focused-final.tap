@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: lane IDs must be explicit and safe
+ok 1 - lane IDs must be explicit and safe
+  ---
+  duration_ms: 2.87625
+  type: 'test'
+  ...
+# Subtest: research owns only campaign files, excluding shared handovers and other campaigns
+ok 2 - research owns only campaign files, excluding shared handovers and other campaigns
+  ---
+  duration_ms: 0.211625
+  type: 'test'
+  ...
+# Subtest: engineering preserves research and other engineering progress
+ok 3 - engineering preserves research and other engineering progress
+  ---
+  duration_ms: 0.139875
+  type: 'test'
+  ...
+# Subtest: partial and final PRs link one issue without needing a document tracker ID
+ok 4 - partial and final PRs link one issue without needing a document tracker ID
+  ---
+  duration_ms: 1.116209
+  type: 'test'
+  ...
+# Subtest: PR policy rejects ambiguous issue links and accidental additional closures
+ok 5 - PR policy rejects ambiguous issue links and accidental additional closures
+  ---
+  duration_ms: 0.19675
+  type: 'test'
+  ...
+# Subtest: GitHub issue type agrees with its lane and references an open issue
+ok 6 - GitHub issue type agrees with its lane and references an open issue
+  ---
+  duration_ms: 0.183792
+  type: 'test'
+  ...
+# Subtest: real git diff checks rename source paths, not only allowed destinations
+ok 7 - real git diff checks rename source paths, not only allowed destinations
+  ---
+  duration_ms: 195.224125
+  type: 'test'
+  ...
+# Subtest: another lane advancing work is not mistaken for this branch changing its files
+ok 8 - another lane advancing work is not mistaken for this branch changing its files
+  ---
+  duration_ms: 262.252125
+  type: 'test'
+  ...
+# Subtest: remote issue validation reads only the event repository and requires successful labeled issue metadata
+ok 9 - remote issue validation reads only the event repository and requires successful labeled issue metadata
+  ---
+  duration_ms: 6.698833
+  type: 'test'
+  ...
+# Subtest: geography may own narrower subdirectories without acquiring sibling or parent files
+ok 10 - geography may own narrower subdirectories without acquiring sibling or parent files
+  ---
+  duration_ms: 0.328583
+  type: 'test'
+  ...
+# Subtest: engineering literal grants retain branch fallback, exact-file and directory boundaries
+ok 11 - engineering literal grants retain branch fallback, exact-file and directory boundaries
+  ---
+  duration_ms: 0.353667
+  type: 'test'
+  ...
+# Subtest: actual CLI consumes only valid matched engineering issue grants
+ok 12 - actual CLI consumes only valid matched engineering issue grants
+  ---
+  duration_ms: 1564.853625
+  type: 'test'
+  ...
+# Subtest: actual linked-issue reader passes engineering grants to git scope and rejects foreign declarations
+ok 13 - actual linked-issue reader passes engineering grants to git scope and rejects foreign declarations
+  ---
+  duration_ms: 0.685792
+  type: 'test'
+  ...
+# Subtest: serialized contenders on one issue have exactly one holder even under the same GitHub account
+ok 14 - serialized contenders on one issue have exactly one holder even under the same GitHub account
+  ---
+  duration_ms: 7.546208
+  type: 'test'
+  ...
+# Subtest: renewal and release require the actual worker plus ownership nonce
+ok 15 - renewal and release require the actual worker plus ownership nonce
+  ---
+  duration_ms: 0.518834
+  type: 'test'
+  ...
+# Subtest: an idempotent lost-response retry retains original ownership
+ok 16 - an idempotent lost-response retry retains original ownership
+  ---
+  duration_ms: 0.191208
+  type: 'test'
+  ...
+# Subtest: renewal, rotation and reassignment retain one canonical comment ID
+ok 17 - renewal, rotation and reassignment retain one canonical comment ID
+  ---
+  duration_ms: 0.359708
+  type: 'test'
+  ...
+# Subtest: umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed
+ok 18 - umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed
+  ---
+  duration_ms: 0.2605
+  type: 'test'
+  ...
+# Subtest: expired reservations cannot silently discard branches or active PR/live operations
+ok 19 - expired reservations cannot silently discard branches or active PR/live operations
+  ---
+  duration_ms: 0.39975
+  type: 'test'
+  ...
+# Subtest: multiple PRs retain ownership and rotate branches only after previous work completes
+ok 20 - multiple PRs retain ownership and rotate branches only after previous work completes
+  ---
+  duration_ms: 0.398625
+  type: 'test'
+  ...
+# Subtest: canonical comments cannot be impersonated or ambiguous
+ok 21 - canonical comments cannot be impersonated or ambiguous
+  ---
+  duration_ms: 0.250916
+  type: 'test'
+  ...
+# Subtest: PR validation uses current exact-branch ownership and rejects expired or blocked claims
+ok 22 - PR validation uses current exact-branch ownership and rejects expired or blocked claims
+  ---
+  duration_ms: 0.578
+  type: 'test'
+  ...
+# Subtest: location-content claims wait for worldwide approval while source-only work can start
+ok 23 - location-content claims wait for worldwide approval while source-only work can start
+  ---
+  duration_ms: 45.365291
+  type: 'test'
+  ...
+# Subtest: the PR budget cannot be bypassed by claiming another part indefinitely
+ok 24 - the PR budget cannot be bypassed by claiming another part indefinitely
+  ---
+  duration_ms: 0.398667
+  type: 'test'
+  ...
+# Subtest: pagination inspects later pages rather than assuming only the first page exists
+ok 25 - pagination inspects later pages rather than assuming only the first page exists
+  ---
+  duration_ms: 0.187209
+  type: 'test'
+  ...
+# Subtest: claim lock keys use canonical issue numbers so aliases cannot acquire independent locks
+ok 26 - claim lock keys use canonical issue numbers so aliases cannot acquire independent locks
+  ---
+  duration_ms: 0.348667
+  type: 'test'
+  ...
+# Subtest: approved research is bound to all three geographic pins and ordinary bot audit text is not authority
+ok 27 - approved research is bound to all three geographic pins and ordinary bot audit text is not authority
+  ---
+  duration_ms: 0.226291
+  type: 'test'
+  ...
+# Subtest: production-only child is reserved by its publisher, not an ordinary implementer
+ok 28 - production-only child is reserved by its publisher, not an ordinary implementer
+  ---
+  duration_ms: 0.259167
+  type: 'test'
+  ...
+# Subtest: production child accepts only original-issue or legacy tracking and designated publisher
+ok 29 - production child accepts only original-issue or legacy tracking and designated publisher
+  ---
+  duration_ms: 0.296208
+  type: 'test'
+  ...
+# Subtest: verified engineering reservation carries only safe actual work declarations
+ok 30 - verified engineering reservation carries only safe actual work declarations
+  ---
+  duration_ms: 0.789709
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2100.930125

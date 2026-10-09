@@ -265,3 +265,28 @@ An independently registered authority may explicitly declare the fourth
 entry-wrapper roster must be authenticated alongside the existing profiles.
 Historical authorities retain their exact two- or three-entry schemas; no new
 review anchor is inferred from a draft certificate.
+
+
+### Whole native side acquisitions
+
+The trusted selected-native comparison acquires baseline and candidate containing
+parts in separate completed helper frames, including independent whole-member
+frames within each side. A row crossing a native-part boundary joins exact interval
+ordinals from both whole members without retaining both native buffers. Each frame
+authenticates whole ordinary
+or packed transport files, encoded/decoded pins and canonical unshuffled words.
+It returns a compact, complete ordered interval projection for the admitted rows,
+plus their whole input custody. It returns no containing transport or whole native
+word buffers. The candidate phase charges that entire baseline projection together
+with both selected metadata views, rowtables, code, installed runtimes, custody and
+output reserve before opening candidate bodies. The original interval conservation
+function then compares every admitted row.
+
+Rows sharing both containing-part rosters are grouped. If a group cannot fit the
+complete prospective side/carry cost, it is split into smaller exact row groups;
+repeated whole-part acquisitions are recorded in their genuine phases. No affected
+row is omitted or compared twice. An individually oversized complete row refuses.
+All 32 MiB whole encoded/decoded member, 256 MiB phase and 512 opened descriptor
+limits remain. A prior oversized paired attempt stays refused. This changes buffer
+lifetime and admission, not scientific geometry/native reconstruction, ownership
+selection, source approval or activation.
