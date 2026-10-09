@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "method": "Imported the exact historical integrity_guards.py file by path and exercised require_new_output directly against private issue-owned sentinels. No producer computation or mocks.",
+  "entrypoint_path": "data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/integrity_guards.py",
+  "entrypoint_sha256": "36358f235c6fa28e636217a3f0376f0fbca8729462f8c75d0700b4fa1784c5ef",
+  "cases": [
+    {
+      "case": "dangling-symlink",
+      "guard_result": "accepted",
+      "target_still_absent": true
+    },
+    {
+      "case": "live-symlink",
+      "guard_result": "rejected",
+      "target_sha256_preserved": "9caddbc7a0ebccedd7e6eb7bce98f3bc5cc35c3df11b0b8292854da64c0c4f40"
+    },
+    {
+      "case": "dangling-symlinked-ancestor",
+      "guard_result": "accepted",
+      "target_directory_still_absent": true
+    },
+    {
+      "case": "ordinary-existing-file",
+      "guard_result": "rejected",
+      "sentinel_preserved": true
+    }
+  ],
+  "producer_cli_execution": "not run: its complete 16-file evaluation phase includes geojson source declared decoded at 40,040,002 bytes, exceeding the 32 MiB evidence-file admission limit; no partial/fragment replay was substituted."
+}

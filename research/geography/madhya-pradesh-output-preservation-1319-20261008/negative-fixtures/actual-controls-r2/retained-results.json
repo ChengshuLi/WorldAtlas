@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "source_mirror_removed_after_capture": true,
+  "source_restoration": "Use the byte-pinned current source tree at data/regional-review/regional-review-0968ad79c26518d2; exact CLI, guard and full mirror reproduction are retained under actual-controls-r5.",
+  "files": [
+    {
+      "path": "retained-results/controls/run-actual-summary-r2/negative-control.json",
+      "bytes": 322,
+      "sha256": "5f9e6097e270d49774bf2afaa1ab6954411f930a5373cee268d676b1e579ee4b"
+    },
+    {
+      "path": "retained-results/controls/run-actual-summary-r2/positive-control.json",
+      "bytes": 269,
+      "sha256": "aef71110b57d3a4a6dc28034f4e601c893ea06b48952233320b0645b7c7911c5"
+    },
+    {
+      "path": "retained-results/controls/run-actual-summary-r2/reproducibility.json",
+      "bytes": 552,
+      "sha256": "ec369ea3e1b8c8615bc02b11b95b0475761a3ba77411efc94835ec1c86dfb650"
+    },
+    {
+      "path": "retained-results/controls/run-actual-ledger-r2/negative-control.json",
+      "bytes": 322,
+      "sha256": "5f9e6097e270d49774bf2afaa1ab6954411f930a5373cee268d676b1e579ee4b"
+    },
+    {
+      "path": "retained-results/controls/run-actual-ledger-r2/positive-control.json",
+      "bytes": 269,
+      "sha256": "aef71110b57d3a4a6dc28034f4e601c893ea06b48952233320b0645b7c7911c5"
+    },
+    {
+      "path": "retained-results/controls/run-actual-ledger-r2/reproducibility.json",
+      "bytes": 552,
+      "sha256": "ec369ea3e1b8c8615bc02b11b95b0475761a3ba77411efc94835ec1c86dfb650"
+    },
+    {
+      "path": "escaped-targets/summary.json",
+      "bytes": 334,
+      "sha256": "3c87e6d7e63150485bc98029d1a15ee37ec0d2aad95679deeffaa3333f565da6"
+    },
+    {
+      "path": "escaped-targets/ledger.json",
+      "bytes": 4574,
+      "sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84"
+    }
+  ]
+}

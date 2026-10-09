@@ -49,10 +49,20 @@ def main():
     branch_head = current_commit(REPO)
     if git(REPO, "merge-base", origin_main, branch_head).decode().strip() != origin_main:
         raise ValueError("The packet branch must descend from the verified origin/main base")
-    validation = json.loads((REPO / OWNED_PATH / "validation/adversarial-controls-head088ab2.json").read_bytes())
-    if (validation.get("repository_head") != origin_main or
-            validation.get("output_safety_baseline") != origin_main):
-        raise ValueError("Final reproduction must be tied to the current origin/main base")
+    validation = json.loads((REPO / OWNED_PATH / "validation/adversarial-controls-head19ca-r2.json").read_bytes())
+    exercised_head = validation.get("repository_head")
+    ancestry = subprocess.run(["git", "-C", str(REPO), "merge-base", "--is-ancestor", exercised_head or "", branch_head],
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if (not re.fullmatch(r"[0-9a-f]{40}", exercised_head or "") or
+            validation.get("output_safety_baseline") != origin_main or ancestry.returncode != 0):
+        raise ValueError("Final reproduction must bind the exercised packet head to its current origin/main base")
+    tested_code = ("producer_republish.py", "control_writer.py", "safe_outputs.py",
+                   "test_output_safety.py", "reproduce_historical_controls.py")
+    for name in tested_code:
+        relative = OWNED_PATH + name
+        exercised = git(REPO, "show", f"{exercised_head}:{relative}")
+        if hashlib.sha256(exercised).hexdigest() != hashlib.sha256((REPO / relative).read_bytes()).hexdigest():
+            raise ValueError(f"Candidate code changed after its recorded safety test: {relative}")
     commit = origin_main
     if contract.get("owned_paths") != [OWNED_PATH] or contract.get("max_prs") != 2:
         raise ValueError("Current issue path or PR allowance differs from the reviewed contract")
@@ -211,9 +221,12 @@ def main():
         "outputs": outputs,
         "methods": [
             {"id": method_id, "kind": "generator", "helper_version": "worldatlas-evidence-preparation-v1",
-             "description": "Complete output-set preflight plus immutable shared-helper publication and receipt-last control. The producer CLI republishes complete retained report bytes only; the control CLI independently compares every retained subject row and province assessment.",
+             "description": "Evidence adapters perform complete output-set preflight and immutable shared-helper publication with a receipt last. The producer adapter republishes retained report bytes only; it does not rerun geometry science. The adapter control writer compares every retained subject row and province assessment. Separate execution of the unchanged archived control CLI confirms dangling summary/ledger symlinks are followed and passed receipts can be written outside the vintage.",
              "software": "Python 3.12.14; pinned scripts/evidence/immutable.py SHA-256 " + IMMUTABLE_SHA256,
              "units": "whole-file bytes, SHA-256 digests, 224 subject rows, 27 province groups and changed fields"},
+            {"id": "archived-writer-defect-reproduction", "kind": "code",
+             "description": "Unchanged archived control CLI is executed from a byte-identical private mirror against complete retained control inputs. Dangling summary and ledger links each create an outside-vintage target with exit 0. The producer's exact shared guard is separately exercised; full producer execution is unverified because the complete decoded source exceeds the 32 MiB file admission limit.",
+             "software": "Python 3.12.14; archived validate_controls.py and integrity_guards.py pinned by whole-file SHA-256", "units": "exit status, created target bytes and SHA-256"},
             {"id": "retained-row-comparison", "kind": "code",
              "description": "Complete join of the retained original and corrected 224-row reports, preserving row order and all 27 province-level assessments; no geometry or source-currentness inference.",
              "software": "Python 3.12.14; control_writer.py", "units": "rows, groups and field values"},
@@ -222,17 +235,18 @@ def main():
         "metric_bindings": metric_bindings,
         "validation": [
             {"method_id": method_id, "kind": "positive-control", "outcome": "passed",
-             "evidence_path": OWNED_PATH + "vintages/controls-head088ab2-one/positive-control.json"},
+             "evidence_path": OWNED_PATH + "vintages/controls-head19ca-r2-one/positive-control.json"},
             {"method_id": method_id, "kind": "negative-control", "outcome": "passed",
-             "evidence_path": OWNED_PATH + "vintages/controls-head088ab2-one/negative-control.json"},
+             "evidence_path": OWNED_PATH + "vintages/controls-head19ca-r2-one/negative-control.json"},
             {"method_id": method_id, "kind": "reproducibility", "outcome": "passed",
-             "evidence_path": OWNED_PATH + "vintages/controls-head088ab2-one/reproducibility.json"},
+             "evidence_path": OWNED_PATH + "vintages/controls-head19ca-r2-one/reproducibility.json"},
+            {"method_id": method_id, "kind": "negative-control", "outcome": "passed",
+             "evidence_path": OWNED_PATH + "validation/adversarial-controls-head19ca-r2.json"},
         ],
-        "change_receipts": ([{"path": path, "status": "added"} for path in output_paths] +
-                             [{"path": MANIFEST_REL, "status": "added"}]),
+        "change_receipts": [],
         "rendered_tables": [],
         "conclusions": [
-            {"text": "The output-safety repair has fresh, exclusive retained-report vintages with complete final receipts; it does not freshly reproduce the original geometry calculation.",
+            {"text": "The evidence adapters create fresh exclusive retained-report vintages with complete final receipts, but do not repair the original archived writer entry points or freshly reproduce the geometry calculation.",
              "status": "supported", "source_ids": ["geoBoundaries-IND-ADM3-2018"]},
             {"text": "The 2018 subdistrict data boundary meaning, current legal correspondence, completeness, reuse applicability and adjacent granularity remain unresolved.",
              "status": "unresolved", "source_ids": ["geoBoundaries-IND-ADM3-2018"]},
@@ -243,14 +257,44 @@ def main():
         ],
         "stages": {"research": "partial", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/producer_republish.py --run-id producer-head088ab2-one",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/producer_republish.py --run-id producer-head088ab2-two",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/control_writer.py --run-id controls-head088ab2-one",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/control_writer.py --run-id controls-head088ab2-two",
-            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/test_output_safety.py --tag head088ab2",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/test_output_safety.py --tag head19ca-r2",
+            "python3.12 -B research/geography/madhya-pradesh-output-preservation-1319-20261008/reproduce_historical_controls.py --tag r7",
             "node scripts/evidence-quality.mjs research/geography/madhya-pradesh-output-preservation-1319-20261008/evidence-quality.json",
         ],
     }
+
+    # Bind change receipts to this PR's actual candidate diff against its fresh
+    # origin/main base. Earlier merged packet files remain evidence, not new PR
+    # changes. The manifest itself must have an added/modified receipt.
+    changed = {}
+    for path in sorted((REPO / OWNED_PATH).rglob("*")):
+        if not path.is_file() or path.is_symlink():
+            continue
+        relative = path.relative_to(REPO).as_posix()
+        if relative == MANIFEST_REL:
+            continue
+        raw = path.read_bytes()
+        try:
+            previous = git(REPO, "show", f"{origin_main}:{relative}")
+        except subprocess.CalledProcessError:
+            changed[relative] = "added"
+        else:
+            if previous != raw:
+                changed[relative] = "modified"
+    try:
+        git(REPO, "show", f"{origin_main}:{MANIFEST_REL}")
+    except subprocess.CalledProcessError:
+        changed[MANIFEST_REL] = "added"
+    else:
+        changed[MANIFEST_REL] = "modified"
+    receipts = []
+    for path in sorted(changed):
+        row = {"path": path, "status": changed[path]}
+        if changed[path] == "modified":
+            original = git(REPO, "show", f"{origin_main}:{path}")
+            row["original_sha256"] = hashlib.sha256(original).hexdigest()
+        receipts.append(row)
+    manifest["change_receipts"] = receipts
 
     output = REPO / MANIFEST_REL
     raw = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode()
