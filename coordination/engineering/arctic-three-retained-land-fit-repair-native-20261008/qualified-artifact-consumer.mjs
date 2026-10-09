@@ -1,3 +1,4 @@
+import {completeReleaseProductInputs} from './release-product-inputs.mjs';
 // Distinct application-consumption authority for immutable, qualified products.
 // Scientific validation brands remain private to their original validators.
 import assert from 'node:assert/strict';
@@ -114,6 +115,30 @@ export function validateRetainedRegistryPrefixes(registry, originalRegistry) {
     assert(registry[key].length >= originalRegistry[key].length);
     assert.deepEqual(registry[key].slice(0, originalRegistry[key].length), originalRegistry[key]);
   }
+}
+
+// The stock registry carries encoded/payload hashes, not file lengths. Bind
+// its actual final343 descriptors to independently qualified ordinary pins.
+export function normalizedReleaseProductPins(registry, products) {
+  assert(Array.isArray(registry.batches) && registry.batches.length >= 343);
+  assert(Array.isArray(products) && products.length === 343);
+  const descriptors = registry.batches.slice(-343);
+  assert.equal(new Set(descriptors.map(row => row.path)).size, 343);
+  assert.equal(new Set(products.map(pin => pin.path)).size, 343);
+  return descriptors.map((row, ordinal) => {
+    assert.equal(row.encoding, 'gzip');
+    assert(typeof row.path === 'string' && !path.isAbsolute(row.path) && !row.path.includes('\\'));
+    assert(row.path.split('/').every(piece => piece && piece !== '.' && piece !== '..'));
+    const pin = products[ordinal];
+    assert.equal(pin.space ?? 'root', 'root');
+    assert.equal(pin.path, 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/' + row.path);
+    assert.equal(pin.mode, '100644');
+    assert(Number.isSafeInteger(pin.bytes) && pin.bytes > 0 && pin.bytes <= MEMBER_CAP);
+    assert(Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0 && pin.decoded_bytes <= MEMBER_CAP);
+    assert.equal(pin.sha256, row.sha256);
+    assert.equal(pin.decoded_sha256, row.payload_sha256);
+    return pin;
+  });
 }
 
 // Preserve the actual launch protocol. These earlier producers had no phase
@@ -270,6 +295,9 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
     assert(!ledger.declarations.has(key), 'Duplicate input role');
     ledger.declarations.set(key, declared);
   }
+  const releaseCatalogue=JSON.parse(read(certificate.release_product_catalogue));
+  const completeInputs=completeReleaseProductInputs(certificate,releaseCatalogue);
+  for(const pin of completeInputs){const declared=descriptor(pin),key=declarationKey(declared);if(ledger.declarations.has(key))assert.deepEqual(ledger.declarations.get(key),declared);else ledger.declarations.set(key,declared);}
   // Complete qualification inventories remain whole immutable source custody.
   // Ordinary application consumption verifies these records and delivered
   // artifacts; it does not relabel historical inputs as freshly executed.
@@ -393,6 +421,8 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
   const registry = JSON.parse(read(certificate.registry));
   const originalRegistry = JSON.parse(read(certificate.predecessor_registry));
   validateRetainedRegistryPrefixes(registry, originalRegistry);
+  const releaseProducts = normalizedReleaseProductPins(registry, releaseCatalogue.products);
+  for (const pin of releaseProducts) read(pin);
   const steps = certificate.steps.map(item => {
     const predecessor = registry.releases.find(release => release.id === item.predecessor_release_id);
     const release = registry.releases.find(release => release.id === item.successor_release_id);
@@ -494,10 +524,10 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
         full_code_closure: issued.files, critical_consumer_code_sha256: certificate.application_consumer_code.sha256},
       consumed_input_bytes: {encoded: ledger.encoded_read_bytes, decoded: ledger.decoded_read_bytes},
       qualification_inventory_sha256: certificate.qualification_inventory.sha256},
-    predecessorRelease: steps.at(-1).predecessor,
+    releaseProducts, predecessorRelease: steps.at(-1).predecessor,
     sourceAssociations: steps.slice(1).map(step => ({release: step.release, changed_ids: step.receipt.changed_ids}))};
   consumed.set(context, {currentExecution: issued, fingerprint: authorityFingerprint(context), nativeImage: image,
-    manifest_sha256: MANIFEST, release_id: manifest.geographic_release,
+    releaseProducts, manifest_sha256: MANIFEST, release_id: manifest.geographic_release,
     certificate_sha256: certificatePin.sha256});
   return context;
 }

@@ -1,3 +1,5 @@
+import {gunzipSync} from 'node:zlib';
+import {completeReleaseProductInputs} from './release-product-inputs.mjs';
 // Complete source preadmission for the original numerical phase plus the third
 // continuation. Package-issued code authority remains independent of this data.
 import assert from 'node:assert/strict';
@@ -25,6 +27,14 @@ function boundedMetadataBytes(root,relative,bytes){
  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
  try{same(stat,fs.fstatSync(fd));raw=fs.readFileSync(fd);same(stat,fs.fstatSync(fd));}finally{fs.closeSync(fd)}
  same(stat,fs.lstatSync(file));assert.equal(raw.length,bytes);return raw;
+}
+export function authenticateReleaseCatalogueMetadata(root,pin){
+ assert(pin.bytes<=131072&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=131072);
+ const {file,stat}=ordinary(root,pin),fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
+ try{same(stat,fs.fstatSync(fd));raw=fs.readFileSync(fd);same(stat,fs.fstatSync(fd));same(stat,fs.lstatSync(file));}finally{fs.closeSync(fd);}
+ assert.equal(raw.length,pin.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
+ const decoded=gunzipSync(raw,{maxOutputLength:pin.decoded_bytes});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(createHash('sha256').update(decoded).digest('hex'),pin.decoded_sha256);
+ return JSON.parse(decoded);
 }
 function metadata(root,pin){assert(pin.bytes<=131072);const file=authenticate(root,pin);return JSON.parse(fs.readFileSync(file));}
 export function preflightArcticPackage({root,stageRaw,stage,priorImage}){
@@ -63,7 +73,9 @@ export function preflightArtifactPackage({source, stage, sidecar}) {
  assert.equal(certificate.kind,'qualified-arctic-immutable-product-certificate-v1');
  assert.equal(certificate.issue,1520);
  assert(Array.isArray(certificate.application_inputs)&&certificate.application_inputs.length>0);
- const pins=[certificatePin,sidecar.artifact_consumption.review,...certificate.application_inputs];
+ const catalogue=authenticateReleaseCatalogueMetadata(stage,certificate.release_product_catalogue);
+ const completeInputs=completeReleaseProductInputs(certificate,catalogue);
+ const pins=[certificatePin,sidecar.artifact_consumption.review,...completeInputs];
  const physical=new Map();let encoded=0,decoded=0;
  for(const root of new Set([source,stage]))for(const pin of pins){
   assert(['root','prior','image'].includes(pin.space??'root'));
@@ -82,6 +94,7 @@ export function preflightArtifactPackage({source, stage, sidecar}) {
  assert(Number.isSafeInteger(encoded+decoded));
  return {version:1,kind:'qualified-artifact-normal-package-stat-admission',
   numerical_producers_invoked:false,numerical_aggregate_cap_applied:false,
+  release_catalogue_discovery_encoded_bytes:certificate.release_product_catalogue.bytes,release_catalogue_discovery_decoded_bytes:certificate.release_product_catalogue.decoded_bytes,complete_expanded_application_roles:completeInputs.length,
   encoded_input_bytes:encoded,decoded_input_bytes:decoded,
   distinct_physical_members:physical.size,
   declared_reconstructed_members:certificate.application_inputs.filter(pin=>['prior','image'].includes(pin.space)).length,

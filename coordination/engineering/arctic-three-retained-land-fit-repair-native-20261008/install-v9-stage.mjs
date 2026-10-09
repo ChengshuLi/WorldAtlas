@@ -8,7 +8,7 @@ import {continueTemporalBucket} from './temporal-runtime-binding.mjs';
 import {continueRetainedProductIndex} from './retained-product-binding.mjs';
 import {readPreparedEvidenceBundle} from '../../../scripts/read-prepared-evidence-bundle.mjs';
 import {requireArcticContinuation} from './arctic-context.mjs';
-import {requireConsumedArcticArtifacts} from './qualified-artifact-consumer.mjs';
+import {requireConsumedArcticArtifacts, normalizedReleaseProductPins} from './qualified-artifact-consumer.mjs';
 const N='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 function body(root,pin){
@@ -24,6 +24,13 @@ function write(root,relative,raw){
  assert(!path.isAbsolute(relative)&&relative.split('/').every(s=>s&&s!=='.'&&s!=='..'));assert(raw.length<=32*1024*1024);const file=path.join(root,relative);
  for(let p=path.dirname(file);;p=path.dirname(p)){try{const stat=fs.lstatSync(p);assert(stat.isDirectory()&&!stat.isSymbolicLink());}catch(error){if(error.code!=='ENOENT')throw error;}if(p===path.dirname(p))break}
  fs.mkdirSync(path.dirname(file),{recursive:true});const temporary=file+'.n2-install';for(const target of [temporary,file]){let existing;try{existing=fs.lstatSync(target)}catch(error){if(error.code!=='ENOENT')throw error;}if(target===temporary)assert(!existing,'Fresh installer temporary entry required');else if(existing)assert(existing.isFile()&&!existing.isSymbolicLink()&&(existing.mode&511)===420);} fs.writeFileSync(temporary,raw,{flag:'wx',mode:0o644});fs.renameSync(temporary,file);assert.equal(sha(fs.readFileSync(file)),sha(raw));
+}
+// Actual installation boundary: no registry descriptor is assumed to carry
+// bytes. Every declared whole qualified product is authenticated before writes.
+export function authenticateReleaseProducts(root, registry, products) {
+ const pins=normalizedReleaseProductPins(registry,products);
+ for(const pin of pins)body(root,pin);
+ return pins;
 }
 export async function installV9Stage({root,stage,context}){
  assert.equal(process.env.WORLDATLAS_PACKAGE_STAGE,root);assert.equal(fs.realpathSync(root),root);assert.notEqual(root,fs.realpathSync(process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT));
@@ -54,7 +61,12 @@ export async function installV9Stage({root,stage,context}){
  const pixel=body(root,pixelPin),compressed=body(root,proposed);const geometry=gunzipSync(compressed,{maxOutputLength:12932723});assert.equal(geometry.length,12932723);assert.equal(sha(geometry),'4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c');
  const registry=JSON.parse(gunzipSync(body(root,stage.registry),{maxOutputLength:stage.registry.decoded_bytes}));
  const releases=registry.batches.slice(-343);assert.equal(releases.length,343);
- for(const p of releases)body(root,{path:N+'/release-v9/'+p.path,bytes:p.bytes,sha256:p.sha256});
+ // Historical V3 live-installer draft remains unqualified for this actual
+ // registry schema (no bytes fields). Only the explicit reviewed artifact
+ // route below is submitted for normal execution qualification.
+ const releasePins=artifact?authenticateReleaseProducts(root,registry,success.releaseProducts):releases.map(p=>({path:N+'/release-v9/'+p.path,bytes:p.bytes,sha256:p.sha256}));
+ assert.equal(releasePins.length,343);
+ if(!artifact)for(const pin of releasePins)body(root,pin);
  // Every original gzip stays immutable; restore authentic full compressed
  // native assets into a FRESH temporary tree then install the56 exact files.
  let image;
@@ -74,6 +86,6 @@ export async function installV9Stage({root,stage,context}){
  write(root,'.cache/n2-temporal-header-continuation.json',Buffer.from(JSON.stringify({version:1,issue:1520,old_source_index_sha256:ownerPin.sha256,new_source_index_sha256:nextOwnerSha,all_original_paths_retained:true,proofs:temporalProofs})+'\n'));
  for(let i=0;i<retainedPins.length;i++){write(root,'.cache/n2-preserved-v8/'+retainedPins[i].path,body(root,retainedPins[i]));write(root,retainedPins[i].path,Buffer.from(JSON.stringify(continuedIndices[i])+'\n'));}
  write(root,'data/geography/part-29.json',geometry);write(root,'data/pixel-audit.json',pixel);write(root,'data/granularity-audit.json',Buffer.from(JSON.stringify(audit)+'\n'));
- for(const p of releases)write(root,'data/geographic-releases/'+p.path,body(root,{path:N+'/release-v9/'+p.path,bytes:p.bytes,sha256:p.sha256}));
- return {kind:artifact?'ephemeral-after-qualified-artifact-consumption':'ephemeral-after-three-live-validations',native_parts:56,old_native_urls_preserved:true,release_products:343,old_global_bodies_preserved:oldPins.map(p=>({...p,path:'.cache/n2-preserved-v8/'+p.path})),scientific_producers_invoked:false,normal_package_aggregate_cap_invented:false};
+ for(let i=0;i<releases.length;i++)write(root,'data/geographic-releases/'+releases[i].path,body(root,releasePins[i]));
+ return {kind:artifact?'ephemeral-after-qualified-artifact-consumption':'ephemeral-after-three-live-validations',native_parts:56,old_native_urls_preserved:true,release_products:343,additional_release_installation_encoded_read_bytes:releasePins.reduce((sum,pin)=>sum+2*pin.bytes,0),old_global_bodies_preserved:oldPins.map(p=>({...p,path:'.cache/n2-preserved-v8/'+p.path})),scientific_producers_invoked:false,normal_package_aggregate_cap_invented:false};
 }
