@@ -1,0 +1,51 @@
+{
+  "schema": "central-africa-additive-proposal-v1",
+  "issue": 1629,
+  "batch_id": "09022872285309274891eb98",
+  "baseline_commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+  "proposal_count": 9,
+  "proposal_geojson": {
+    "path": "research/geography/central-africa-20-source-fit-20261009/proposals/additive-proposals.geojson",
+    "bytes": 22745,
+    "sha256": "811d7aa339a6c05dda03af975e74f2a508343c4e3199d5ed243733580094d1d7"
+  },
+  "decision_table": {
+    "path": "research/geography/central-africa-20-source-fit-20261009/results/per-id-decisions.csv",
+    "bytes": 7057,
+    "sha256": "75f43b18e163be94dcc33ced1837e37df2b129d4dfbb9502e5b44c220447a476"
+  },
+  "fit_result": {
+    "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+    "bytes": 317967,
+    "sha256": "e1c5e2af0c6f6a13b5d20f3059471c3e2fa16a5ae57e2aa8988a66236ecfa398"
+  },
+  "gshhg_custody": {
+    "path": "research/geography/central-africa-20-source-fit-20261009/gshhg-custody.json",
+    "bytes": 14517,
+    "sha256": "d00ee2f510e20cbef7eae3182a83f1dc17f140146053ddb543acfef37f829e51"
+  },
+  "proposal_ids": [
+    "physical-component:03f6ccdfef23d7f3e030650e71c57224ff986471f131563b9020b6b325674785",
+    "physical-component:0481dc6542faa251f7c384985ec16385c65add1df7c7483b737ffcfb2b7a018e",
+    "physical-component:374a9667e997a8a54961870ed7b765bbfff64320addb3828b98e9a8eb37ec3f5",
+    "physical-component:a3fb71ee49fa32d2dd3b19d640b456c80e914211587c382a04e10941420246f2",
+    "physical-component:ab2e9995f89c6ab263f586b833c8837b8cd354697336131f95d95f41be341f53",
+    "physical-component:d0cef00e196c2e9d07ea72d885832473a568b6e655ac9155a29846ae8dfb7c97",
+    "physical-component:dd7afea067487d39e9fdcee006e1f7849d7f01729d9ecd8c71f1fb572718cea2",
+    "physical-component:e868c1bab3c756b332c31657004f6000a61615329fad661d582f03b0226f5075",
+    "physical-component:eb90996750fe4e3aa4113edcef86d316cfbfdad41fd84d0481efa74fa39b6861"
+  ],
+  "exclusions": {
+    "source-unique-water-support": 1,
+    "mixed-or-partial": 7,
+    "contact-only": 2,
+    "unique-land-source-but-exact-fit-refused": 1
+  },
+  "physical_class": "unknown for every candidate",
+  "integration_status": "not implemented; no core geography files changed",
+  "limitations": [
+    "GeoBoundaries source-relative fit is not legal/current authority or historical truth",
+    "GSHHG byte records were chosen by bounding-box overlap only; geometry validity was not evaluated",
+    "No present land/water/ice, causal class, or publication approval is asserted"
+  ]
+}

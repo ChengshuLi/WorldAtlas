@@ -1,0 +1,22 @@
+{
+  "method_id": "simplified-source-fit",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "control": "known exact source-supported additive candidate remains admitted",
+  "fit_result": {
+    "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+    "sha256": "e1c5e2af0c6f6a13b5d20f3059471c3e2fa16a5ae57e2aa8988a66236ecfa398"
+  },
+  "component_id": "physical-component:03f6ccdfef23d7f3e030650e71c57224ff986471f131563b9020b6b325674785",
+  "target_id": "gb:COG:ADM2:1427508B96128266527522",
+  "source_target_id": "gb:COG:ADM2:1427508B96128266527522",
+  "conditions": {
+    "simplified_source_target_covers_component": true,
+    "only_source_target_has_positive_area_hit": true,
+    "current_target_missing_component": true,
+    "current_target_union_has_zero_loss": true,
+    "current_target_union_gain_equals_component": true,
+    "no_positive_area_overlap_with_other_current_five_country_features": true
+  },
+  "assertion": true
+}
