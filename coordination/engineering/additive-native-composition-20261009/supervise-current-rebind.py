@@ -1,7 +1,22 @@
 """Two fresh separately invoked Mac cold jobs; literal accepted owned cleanup."""
-import pathlib,sys,json,os,time,re,subprocess,importlib.util
+import pathlib,sys,json,os,time,re,subprocess,importlib.util,signal
 HERE=pathlib.Path(__file__).resolve().parent
 spec=importlib.util.spec_from_file_location('rebind_execution_contract',HERE/'execution-contract.py');contract=importlib.util.module_from_spec(spec);exec(compile((HERE/'execution-contract.py').read_bytes(),str(HERE/'execution-contract.py'),'exec'),contract.__dict__)
+
+def own_launched_process(process,termination,owned_group):
+ try:
+  identity=termination.snapshot().get(process.pid)
+  assert identity and identity['pgid']==process.pid
+  return identity,owned_group.OwnedGroup(process,identity)
+ except BaseException:
+  # This exact Popen created the fresh session. No foreign PID lookup grants
+  # authority; reap the owned launch even when its first snapshot is unavailable.
+  for sig in (signal.SIGTERM,signal.SIGKILL):
+   try:os.killpg(process.pid,sig)
+   except ProcessLookupError:pass
+   if sig==signal.SIGTERM:time.sleep(.05)
+  process.wait(timeout=5)
+  raise
 
 def supervise(issued_path,issued_sha,operation):
  assert issued_path.is_absolute() and '..' not in issued_path.parts
@@ -50,19 +65,22 @@ def supervise(issued_path,issued_sha,operation):
  start=time.monotonic();peak=0;reason=None;events=[]
  with stdout.open('xb') as out,stderr.open('xb') as err,samples.open('x') as sample:
   p=subprocess.Popen(cmd,cwd=root,env=env,stdout=out,stderr=err,start_new_session=True)
-  identity=termination.snapshot().get(p.pid);assert identity and identity['pgid']==p.pid
-  authority=owned_group.OwnedGroup(p,identity)
-  (operation/'launch.json').write_bytes(contract.canonical({'execution_commit':head,'command':cmd,'pid':p.pid,'identity':identity}))
-  while p.poll() is None:
-   rows=usage(p.pid);rss=sum(r['rss_bytes'] for r in rows);peak=max(peak,rss)
-   sample.write(json.dumps({'elapsed_seconds':time.monotonic()-start,'rss_bytes':rss,'processes':rows})+'\n');sample.flush()
-   if not logs():reason='whole raw log/sample bound'
-   elif rss>=limits['sampled_stop_bytes']:reason='sampled owned process group bound'
-   elif time.monotonic()-start>limits['wall_seconds']:reason='wall deadline'
-   elif retained()>contract.OUTPUT:reason='complete retained output/log bound'
-   if reason:events=authority.cleanup();break
-   time.sleep(.25)
-  exit_code=p.wait()
+  identity,authority=own_launched_process(p,termination,owned_group)
+  try:
+   (operation/'launch.json').write_bytes(contract.canonical({'execution_commit':head,'command':cmd,'pid':p.pid,'identity':identity}))
+   while p.poll() is None:
+    rows=usage(p.pid);rss=sum(r['rss_bytes'] for r in rows);peak=max(peak,rss)
+    sample.write(json.dumps({'elapsed_seconds':time.monotonic()-start,'rss_bytes':rss,'processes':rows})+'\n');sample.flush()
+    if not logs():reason='whole raw log/sample bound'
+    elif rss>=limits['sampled_stop_bytes']:reason='sampled owned process group bound'
+    elif time.monotonic()-start>limits['wall_seconds']:reason='wall deadline'
+    elif retained()>contract.OUTPUT:reason='complete retained output/log bound'
+    if reason:events=authority.cleanup();break
+    time.sleep(.25)
+   exit_code=p.wait()
+  except BaseException:
+   authority.cleanup();p.wait(timeout=5)
+   raise
  survivors=[{'pid':pid,**row} for pid,row in termination.snapshot().items() if row['pgid']==p.pid]
  if survivors:events+=authority.cleanup();reason=reason or 'owned descendants after natural exit';survivors=[{'pid':pid,**row} for pid,row in termination.snapshot().items() if row['pgid']==p.pid]
  assert logs(),'Terminal log bounds';after=contract.capture(root,head,pre)

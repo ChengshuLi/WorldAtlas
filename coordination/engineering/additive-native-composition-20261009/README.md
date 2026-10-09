@@ -49,3 +49,11 @@ responses. Original native proof controls inspect the complete retained output,
 without executing its kernel. Earlier control results and failed diagnostic
 vintages remain retained. These controls establish source-introduction behavior,
 not a successful issuer/supervisor invocation against the selected successor bank.
+
+The final supervisor correction also rejects a missing first process snapshot or
+failed authority construction while terminating and reaping the newly created
+owned session. Three real tiny subprocess controls, including ignored TERM,
+ended with no survivors. Report/sampling exceptions invoke the existing owned
+cleanup before rethrow. `launch-cleanup-correction-controls.json` binds this
+changed source and its actual controls; the earlier source/control vintage remains
+in Git history.
