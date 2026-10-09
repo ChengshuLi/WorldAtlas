@@ -31,6 +31,34 @@
         "commit": "381d8733e2f105ac16e764c20bb800c40cafea3a"
       },
       {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 19633,
+        "sha256": "1a073b4d919b24c34f4d0ab210554c5c4ef8d3a2f1af104a712402f9b40b648e",
+        "hash_kind": "file-bytes",
+        "commit": "381d8733e2f105ac16e764c20bb800c40cafea3a"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 9253,
+        "sha256": "fb2545b2300f2d8f536eb278e6fb27c75bdfa0a09ff5aac168c1730ba844cc1b",
+        "hash_kind": "file-bytes",
+        "commit": "381d8733e2f105ac16e764c20bb800c40cafea3a"
+      },
+      {
+        "path": "test/trusted-workflow-checkouts.test.mjs",
+        "bytes": 4329,
+        "sha256": "d6eb617f1329042aea61b5492838bc7e377fc0c4c7c041665235380aca5593fd",
+        "hash_kind": "file-bytes",
+        "commit": "381d8733e2f105ac16e764c20bb800c40cafea3a"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 39654,
+        "sha256": "dc77e9a279f1887ede11d3d23552e3d09521d28b868228be2ca4b202fbfbd9c5",
+        "hash_kind": "file-bytes",
+        "commit": "381d8733e2f105ac16e764c20bb800c40cafea3a"
+      },
+      {
         "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/manifest.json",
         "bytes": 252447,
         "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
@@ -52,9 +80,9 @@
   "sources": [
     {
       "id": "retained-qualified-application-metadata",
-      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1520#issuecomment-6080211722",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1520#issuecomment-6081097955",
       "role": "Whole original registered metadata and source custody; independently accepted application provenance only",
-      "vintage": "e3690f5c81b400e4f1a4d78a85df9a1e1a863ec1 and original63e4a2b1",
+      "vintage": "b57f0bb19fcce4a5816449051e5e554e263508bf, preserved e3690f5c81b400e4f1a4d78a85df9a1e1a863ec1 and original63e4a2b1",
       "retrieved_at": "2026-10-09",
       "license": {
         "status": "unknown",
@@ -79,8 +107,8 @@
   "outputs": [
     {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/REPRODUCTION.md",
-      "bytes": 1351,
-      "sha256": "382aa724417fa8bb13e5b0f3eaa6ea7891e46e866f2aa41b639b7733591b4a40",
+      "bytes": 1820,
+      "sha256": "74630fea1d44c0bb0c24893d546d6fa33f4dfc498c11021f5b02e33c8c771b10",
       "hash_kind": "file-bytes"
     },
     {
@@ -90,33 +118,162 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/checkout-controls-complete.log",
+      "bytes": 1149,
+      "sha256": "fa443266f4a3cc8326794072f5e1f92891d3f3cabe9e43b86e7ee735cfd3af2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/checkout-controls-original-sparse-fixture-failure.log",
+      "bytes": 5980,
+      "sha256": "13e6e2c5be6176020b4c6c8d3e548c7b453b7f4fa433aaeaed538a523dbeb626",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-four-profile-actual-controls.log",
+      "bytes": 2015,
+      "sha256": "eabf043c2b0f52396e5d0a337b6a3cca85a01f813e1ee20aaa62808c8830117f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/first-geography-checkout-failure.log",
+      "bytes": 31007,
+      "sha256": "b2a5213ed16a6a91efedc182c8dafc7126a17ecccc447483d3c3656f81e5b31c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fourth-profile-model-controls.log",
+      "bytes": 217,
+      "sha256": "6e645150d94193c0531d665bbac38445cf42fa425e6c4262d8eff9158e8231b6",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/full-focused-controls.log",
       "bytes": 1805,
       "sha256": "bb6daff317fd816c462344208a3cc99ba9d05d6ded34a22077c62c4647739af3",
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/literal-cloudflare-routing-controls.log",
+      "bytes": 5619,
+      "sha256": "fda6a86f14b68cfe4bd9f27f3478eea362fc215ca4de186f5f7b9d1b33961e75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/stock-fixture-materialization.json",
+      "bytes": 302,
+      "sha256": "60b828733b51218c5c6c33697d1cac3f69c9ba02668a6bddfdfe4bbb683ed0fd",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/validation-results.json",
-      "bytes": 668,
-      "sha256": "f4f594f6a2b9b53c6be9fa90a5b4ebcc775e44b8d5560886536a174fb00173b0",
+      "bytes": 852,
+      "sha256": "9b59427127369f65917d63b666ff2408b2f0b7443583cf8731f43f83f4462f50",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/check-effective-geographic-regression.mjs",
-      "bytes": 60387,
-      "sha256": "263d3a3ecd57574bcca7e115015ba97c2f710c83a086a05193f49b0552461273",
+      "bytes": 60844,
+      "sha256": "02ff5dea739a8acc98db0c5b1061394b9745b482520aee1773e0940dbfb1c02f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/effective-geographic-regression.test.mjs",
-      "bytes": 49059,
-      "sha256": "74a56b29357a56182176df1f721bb0bf9445f1fcd4413c14d61c84baf58d1df3",
+      "bytes": 56048,
+      "sha256": "39a58bd692547b4d7e9f2ae6210b6c8365aec65d97fb2f14421cea664e26d8fd",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/GEOGRAPHIC_REGRESSION.md",
-      "bytes": 16043,
-      "sha256": "d86235cc18d5e18bacc6800bfa43b9c0666f9928aa7bb9b0090c124f3a072139",
+      "bytes": 17001,
+      "sha256": "533a31ebc7158d794a1bb2c24a6d084aae4032b328e86f15020d5f6bc1b7fbfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 19816,
+      "sha256": "247fc4848d4685e22640bc2d140d6a7bd1655327ae2c1aa33d6d01ceff405559",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 9432,
+      "sha256": "cb1967ef610601761afcd7cf40718e457439421fb5c68aaf33dc7b43fbe5f629",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "bytes": 7016,
+      "sha256": "aa8c1f603222b57302bd0c146b5617c3ff7008f4a5f9abf1ce71b16816f9f6af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 39746,
+      "sha256": "ec28f608643688aeac16bf134620f393cbae680559f848fe114370d0eabf3e77",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/catalogue.json.gz",
+      "bytes": 32082,
+      "sha256": "d1d4e039b468b0dd460a803e4469e93e266633e3e01a96f0d78e3f7d8d9f261b",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 117061,
+      "uncompressed_sha256": "f45c64324d821763cb3faa1c76bd6bdee62b2f508ad891deab9839d20b3cc5d4"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/certificate.json",
+      "bytes": 68158,
+      "sha256": "3b6c63641b82eef58a037456a2e42bbd8a4d5ed17672a3c67a6c41b4cc916a77",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/code.json",
+      "bytes": 21685,
+      "sha256": "b88b63767e89ef6b7b703e27f9c205c4e41c68ba33a4f5505ab6fea4ce9a4e4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/original-inputs.json",
+      "bytes": 3448,
+      "sha256": "19c3b807aa7b85f1e345e58d2d353ed7e3899399aa1ec73cddc21d826896c283",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/qualification.json.gz",
+      "bytes": 1142795,
+      "sha256": "d298552dca773e992d78cf1deaefa1f7f33e53c20804bf0e1576af325861d93a",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 11431701,
+      "uncompressed_sha256": "302d60928b8d8d7f9bb21cf094e99f4c76ac1bda5463c81bafb385ecb1224285"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/registry.json.gz",
+      "bytes": 237425,
+      "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 745951,
+      "uncompressed_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/review.json",
+      "bytes": 8186,
+      "sha256": "7158e9be36852eb4c2997309cf3d3818bcf46f67034f625dc9f57b67afb53d62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/selection.json",
+      "bytes": 1361,
+      "sha256": "f59a0ba838ceab5fe57c4842071ceb083acad84d2f78bfd66389b893162e4559",
       "hash_kind": "file-bytes"
     },
     {
@@ -210,8 +367,8 @@
       "value": 480,
       "unit": "unique complete metadata roles",
       "vintage": "archived",
-      "evaluation_commit": "8b2ed50254678235072fbcb069dd63d059547f18",
-      "input_sha256": "f4f594f6a2b9b53c6be9fa90a5b4ebcc775e44b8d5560886536a174fb00173b0",
+      "evaluation_commit": "2df0aa3153fc5078c8c456ebe4dc74148b8b85f9",
+      "input_sha256": "9b59427127369f65917d63b666ff2408b2f0b7443583cf8731f43f83f4462f50",
       "input_file": {
         "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/validation-results.json",
         "commit": "candidate"
@@ -222,8 +379,8 @@
       "value": 533,
       "unit": "unique complete metadata roles",
       "vintage": "archived",
-      "evaluation_commit": "8b2ed50254678235072fbcb069dd63d059547f18",
-      "input_sha256": "f4f594f6a2b9b53c6be9fa90a5b4ebcc775e44b8d5560886536a174fb00173b0",
+      "evaluation_commit": "2df0aa3153fc5078c8c456ebe4dc74148b8b85f9",
+      "input_sha256": "9b59427127369f65917d63b666ff2408b2f0b7443583cf8731f43f83f4462f50",
       "input_file": {
         "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/validation-results.json",
         "commit": "candidate"
@@ -262,6 +419,16 @@
   ],
   "change_receipts": [
     {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "1a073b4d919b24c34f4d0ab210554c5c4ef8d3a2f1af104a712402f9b40b648e"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "fb2545b2300f2d8f536eb278e6fb27c75bdfa0a09ff5aac168c1730ba844cc1b"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/REPRODUCTION.md",
       "status": "added"
     },
@@ -270,7 +437,59 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/checkout-controls-complete.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/checkout-controls-original-sparse-fixture-failure.log",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-four-profile-actual-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/first-geography-checkout-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/catalogue.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/certificate.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/code.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/original-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/qualification.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/registry.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/selection.json",
       "status": "added"
     },
     {
@@ -322,7 +541,19 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/fourth-profile-model-controls.log",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/full-focused-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/literal-cloudflare-routing-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/stock-fixture-materialization.json",
       "status": "added"
     },
     {
@@ -343,6 +574,16 @@
       "path": "test/effective-geographic-regression.test.mjs",
       "status": "modified",
       "original_sha256": "1014ea58ae82de4d8ae5b0175dee0217fa4183f8cfcc3c446c62ebe34e0ccccc"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "dc77e9a279f1887ede11d3d23552e3d09521d28b868228be2ca4b202fbfbd9c5"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "status": "modified",
+      "original_sha256": "d6eb617f1329042aea61b5492838bc7e377fc0c4c7c041665235380aca5593fd"
     }
   ]
 }
