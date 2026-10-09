@@ -1,7 +1,7 @@
 {
-  "version": 3,
+  "version": 4,
   "issue": 1520,
-  "kind": "arctic-retained-land-context-continuation-v3",
+  "kind": "arctic-qualified-artifact-application-consumption-v1",
   "subjects": [
     "atlas:physical:CAN-15:NWT",
     "atlas:physical:CAN-25:NUN"
@@ -78,5 +78,25 @@
       "role": "reviewed-exhaustive-native-rule-comparison",
       "installation_approval": false
     }
+  },
+  "artifact_consumption": {
+    "certificate": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+      "mode": "100644",
+      "bytes": 43178,
+      "sha256": "dd6f0de69cbe16a70743d8c590cb2c7ccbb82fc01090422b60d78b362a460fb6"
+    },
+    "review": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review.json",
+      "mode": "100644",
+      "bytes": 5468,
+      "sha256": "79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd"
+    }
+  },
+  "pixelAudit": {
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/pixel-audit-v9.json",
+    "mode": "100644",
+    "bytes": 14325660,
+    "sha256": "fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda"
   }
 }
