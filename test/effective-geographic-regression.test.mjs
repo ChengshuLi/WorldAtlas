@@ -342,6 +342,7 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
   for(const [change,pattern]of [
    [s=>s.artifact_consumption.certificate.sha256='0'.repeat(64),/differs/],
    [s=>s.artifact_consumption.review.sha256='0'.repeat(64),/independently registered/],
+   [s=>s.artifact_consumption.review.sha256='79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd',/Historical artifact authority/],
    [s=>s.artifact_consumption.certificate.mode='100755',/whole artifact authority pin/],
    [s=>s.artifact_consumption.certificate.bytes--,/whole mode\/size differs/],
    [s=>s.sha256='0'.repeat(64),/Typed independent/],

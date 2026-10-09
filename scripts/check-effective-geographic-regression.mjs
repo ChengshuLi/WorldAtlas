@@ -259,7 +259,7 @@ const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
   // Retained original acceptance. New independent decisions append their whole
   // GET hash here after ordinary trusted-code review; candidate data cannot mint
   // a reviewer identity or approval boolean as an authority.
-  '79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd':Object.freeze({review_id:6078458358,github_user_id:6732996,issue:1520}),
+  '79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd':Object.freeze({review_id:6078458358,github_user_id:6732996,issue:1520,retired:true}),
   '5d6758debd9c2e141b83c40594486939f6fa2fd819816070957bbc4b0f1075c2':Object.freeze({review_id:6078884054,github_user_id:6732996,issue:1520,releaseCatalogue:true})
 });
 // Validate the complete ordered installer catalogue as immutable provenance.
@@ -297,6 +297,7 @@ export function readArtifactConsumption(reader,selection,manifest) {
   demand(hook&&same(Object.keys(hook).sort(),['certificate','review']),'Unsupported artifact-consumption selector');
   const registration=REGISTERED_ARTIFACT_REVIEW_GETS[hook.review?.sha256];
   demand(registration,'Missing independently registered artifact authority');
+  demand(!registration.retired,'Historical artifact authority cannot select the superseded application closure');
   for(const pin of [hook.certificate,hook.review]){
     demand(pin&&same(Object.keys(pin).sort(),['bytes','mode','path','sha256'])&&pin.mode==='100644'&&safe(pin.path)&&hash(pin.sha256)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=FILE,'Unsupported whole artifact authority pin');
     const actual=reader.descriptor(pin.path);demand(actual.mode===pin.mode&&actual.bytes===pin.bytes,'Artifact authority whole mode/size differs');reader.admit(actual);
