@@ -182,6 +182,23 @@ def run() -> None:
         raise ValueError("Family roster hash mismatch")
     if sha(("\n".join(sorted(contact_ids)) + "\n").encode()) != CONTACT_ROSTER:
         raise ValueError("Contact roster hash mismatch")
+    matrix_families = {row["family_id"]: row for row in matrix_data["families"]}
+    if set(matrix_families) != family_ids:
+        raise ValueError("Original acceptance family IDs differ from the independent source matrix")
+    family_components = set()
+    family_contacts = set()
+    for family in index_families:
+        fid = family["id"]
+        reference = matrix_families[fid]
+        if set(family["component_ids"]) != set(reference["component_ids"]) or set(family["contact_ids"]) != set(reference["contact_ids"]):
+            raise ValueError("Original family-to-component/contact crosswalk differs from the source matrix: " + fid)
+        family_components.update(family["component_ids"])
+        family_contacts.update(family["contact_ids"])
+    if family_components != component_ids or family_contacts != contact_ids:
+        raise ValueError("Family memberships do not exactly cover the original component/contact rosters")
+    for component_id, row in matrix_components.items():
+        if set(row["family_ids"]) != set(coverage[component_id]["family_ids"]) or set(row["contact_ids"]) != set(coverage[component_id]["contact_ids"]):
+            raise ValueError("Independent component source matrix crosswalk mismatch: " + component_id)
 
     components = []
     for component_id in sorted(component_ids):
