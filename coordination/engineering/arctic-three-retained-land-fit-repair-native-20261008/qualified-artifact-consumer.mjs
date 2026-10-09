@@ -99,6 +99,23 @@ export function requireConsumedArcticArtifacts(context) {
   return saved;
 }
 
+export function validateRetainedRegistryPrefixes(registry, originalRegistry) {
+  assert(Array.isArray(registry.releases) && Array.isArray(originalRegistry.releases));
+  assert.equal(registry.releases.length, originalRegistry.releases.length + 1);
+  assert.deepEqual(registry.releases.slice(0, -1), originalRegistry.releases);
+  for (const key of ['batches', 'sources_batches', 'memberships_batches']) {
+    const originalHas = Object.hasOwn(originalRegistry, key);
+    assert.equal(Object.hasOwn(registry, key), originalHas, 'Original registry field presence changed');
+    if (!originalHas) {
+      assert.equal(key, 'memberships_batches', 'Required original registry array absent');
+      continue;
+    }
+    assert(Array.isArray(originalRegistry[key]) && Array.isArray(registry[key]));
+    assert(registry[key].length >= originalRegistry[key].length);
+    assert.deepEqual(registry[key].slice(0, originalRegistry[key].length), originalRegistry[key]);
+  }
+}
+
 // Preserve the actual launch protocol. These earlier producers had no phase
 // plan argument; their qualified command and pre-import code proof are the
 // original authority, rather than a retrospectively invented plan.
@@ -351,16 +368,31 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
   assert.equal(priorTransition.merge_commit, '689fa0618ce61827adc8862c3e065bcfcf97417b');
   assert.equal(priorTransition.selected_native_manifest_ref.sha256, 'a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885');
   assert.equal(priorTransition.rows.length, 2);
+  assert.deepEqual(qualification.precise_registry_completion_readbacks.map(item => item.phase),
+    ['registry-issuer-ff95d34d-attempt2', 'registry-encoding-ae42e1e9']);
+  const registryReadbacks = qualification.precise_registry_completion_readbacks.map(item => {
+    const actual = JSON.parse(read(item.pin));
+    assert.deepEqual(actual, item.whole_readback);
+    for (const key of ['mode', 'bytes', 'sha256']) assert.equal(item.pin[key], item.original_retained_pin[key]);
+    return actual;
+  });
+  assert.equal(registryReadbacks[0].complete_old_release_objects_preserved, 8);
+  assert.equal(registryReadbacks[0].complete_old_batch_descriptors_preserved, 3042);
+  assert.equal(registryReadbacks[0].new_complete_product_descriptors, 343);
+  assert.equal(registryReadbacks[0].original_membership_records_reused, 84833);
+  assert.equal(registryReadbacks[1].actual_complete_qualified_encoding, true);
+  assert.equal(registryReadbacks[1].whole_raw_source_object_equal, true);
+  assert.equal(registryReadbacks[1].encoded_and_decoded_whole_original_codec_equal, true);
+  const encodedRegistry = registryReadbacks[1].wholeproducts.find(pin => pin.sha256 === certificate.registry.sha256);
+  assert(encodedRegistry);
+  for (const key of ['mode', 'bytes', 'sha256']) assert.equal(encodedRegistry[key], certificate.registry[key] ?? (key === 'mode' ? '100644' : undefined));
   assert.equal(qualification.limits.historical_runtime_unknown, true);
   assert.equal(qualification.limits.current_old_source_area_recomputation_pass, false);
   assert.equal(qualification.limits.new_geographic_approval, false);
   assert.equal(qualification.limits.science_reexecuted_for_this_inventory, false);
   const registry = JSON.parse(read(certificate.registry));
   const originalRegistry = JSON.parse(read(certificate.predecessor_registry));
-  assert.deepEqual(registry.releases.slice(0, -1), originalRegistry.releases);
-  for (const key of ['batches', 'memberships_batches', 'sources_batches']) {
-    assert.deepEqual(registry[key].slice(0, originalRegistry[key].length), originalRegistry[key]);
-  }
+  validateRetainedRegistryPrefixes(registry, originalRegistry);
   const steps = certificate.steps.map(item => {
     const predecessor = registry.releases.find(release => release.id === item.predecessor_release_id);
     const release = registry.releases.find(release => release.id === item.successor_release_id);

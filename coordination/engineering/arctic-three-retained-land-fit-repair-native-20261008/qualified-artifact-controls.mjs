@@ -5,8 +5,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 import {validateOriginalQualificationInvocation, requireConsumedArcticArtifacts,
-  consumeQualifiedArcticArtifacts} from './qualified-artifact-consumer.mjs';
+  consumeQualifiedArcticArtifacts, validateRetainedRegistryPrefixes} from './qualified-artifact-consumer.mjs';
 const directory=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(directory,'../../..');
 const inventory=JSON.parse(gunzipSync(fs.readFileSync(path.join(directory,'qualified-artifacts/inventory.json.gz'))));
@@ -16,6 +17,23 @@ for(const phase of inventory.complete_phase_inventory) for(const run of phase.ru
   originalInvocations++;if(!run.complete_original_plans.length)planless++;
 }
 assert.equal(originalInvocations,171);assert.equal(planless,70);
+const certificate=JSON.parse(fs.readFileSync(path.join(directory,'qualified-artifacts/consumption-certificate.json')));
+const registryBody=pin=>{
+  const raw=fs.readFileSync(path.join(root,pin.path));
+  assert.equal(raw.length,pin.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
+  const decoded=gunzipSync(raw);assert.equal(decoded.length,pin.decoded_bytes);
+  assert.equal(createHash('sha256').update(decoded).digest('hex'),pin.decoded_sha256);
+  return JSON.parse(decoded);
+};
+const registry=registryBody(certificate.registry),originalRegistry=registryBody(certificate.predecessor_registry);
+validateRetainedRegistryPrefixes(registry,originalRegistry);
+let registryRejections=0;
+for(const change of [r=>r.memberships_batches=[],r=>delete r.sources_batches,r=>r.batches.shift(),
+  r=>r.releases.shift(),r=>r.releases[0].id='foreign',r=>r.sources_batches[0]='foreign',
+  r=>r.batches[0].sha256='0'.repeat(64),r=>r.sources_batches=null]){
+  const changed=structuredClone(registry);change(changed);
+  assert.throws(()=>validateRetainedRegistryPrefixes(changed,originalRegistry));registryRejections++;
+}
 for(const forged of [{},{kind:'authenticated-qualified-artifact-consumption-v1'},
   {kind:'authenticated-qualified-artifact-consumption-v1',issue:1520,steps:[{receipt:{geometry_stage_validated:true}}]}]) {
   assert.throws(()=>requireConsumedArcticArtifacts(forged));rejected++;
@@ -39,5 +57,6 @@ try {
   fs.rmdirSync(source);
 }
 console.log(JSON.stringify({actual_imported_invocations:originalInvocations,planless_originals:planless,
+  actual_complete_registry_positive:1,registry_mutation_rejections:registryRejections,
   actual_private_identity_and_entry_rejections:rejected,invalid_entry_body_opens:opens,
   scientific_producers_invoked:false,actual_complete_normal_caller_executed:false}));
