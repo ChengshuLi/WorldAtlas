@@ -674,8 +674,7 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
         "stages": {"research": "complete", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": ["python3 research/geography/melanesia-full-batch-327-20261009/assemble.py --work-index .cache/global-gap-work-index-20261009/geo4-next-full-batch-327.json",
                      "Assembly validates recorded whole-byte and row-hash relationships, extracts retained features/rows, and performs no new geometry operation.",
-                     "No browser/provider calls, native evaluation, production writes, or source/GIS replay were run."],
-        "change_receipts": [{"path": path.relative_to(ROOT).as_posix(), "status": "added"} for path in sorted(out.iterdir()) if path.is_file() and path.name != "evidence-quality.json"]}
+                     "No browser/provider calls, native evaluation, production writes, or source/GIS replay were run."]}
     write_json(out / "evidence-quality.json", manifest)
 
 
