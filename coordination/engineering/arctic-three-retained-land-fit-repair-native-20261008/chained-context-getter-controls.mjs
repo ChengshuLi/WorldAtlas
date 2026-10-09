@@ -7,7 +7,7 @@ import {validateGeometryMigrations,requireValidatedGeometryMigrations} from '../
 import {footprintHash} from '../../../scripts/check-prepared.mjs';
 const source=fs.readFileSync(new URL('../eastern-two-gap-repair-native-20261007/chained-context.mjs',import.meta.url),'utf8');
 const block=source.slice(source.indexOf('const successfulContexts=new WeakMap();'),source.indexOf('const executeFile='));
-assert(block&&source.includes('return retainSuccessfulContext({receipt:')&&source.includes('}},after,afterIndex);'));
+assert(block&&source.includes('return retainSuccessfulContext({receipt:')&&source.includes('}},after,afterIndex,retainContextForContinuation);'));
 const sha=body=>createHash('sha256').update(body).digest('hex');
 const feature=right=>({id:'fixture',properties:{id:'fixture',parent_id:'fixture-parent'},geometry:{type:'Polygon',coordinates:[[[0,0],[right,0],[right,1],[0,1],[0,0]]]}});
 const before=[feature(1)],after=[feature(2)],oldHash=footprintHash(before),currentHash=footprintHash(after);
@@ -25,15 +25,15 @@ try {
  const rows=Array.from({length:49625},(_,i)=>({id:'fixture-'+i,pixelIndex:i+1,geometry:after[0].geometry}));
  const index={locations:49625,footprints_sha256:currentHash,owner_sha256:'1'.repeat(64)};
  const result={receipt:{status:'verified',migration:{owner_sha256:index.owner_sha256}},geometryValidation:brand,coverageContinuation:{originalGeometryValidation:brand}};
- assert.throws(()=>realm.get(result));assert.throws(()=>realm.get({}));
- assert.throws(()=>realm.keep({...result,geometryValidation:structuredClone(brand)},rows,index));
- assert.throws(()=>realm.keep(result,rows.slice(1),index));
- assert.throws(()=>realm.keep(result,rows,{...index,footprints_sha256:oldHash}));
- assert.strictEqual(realm.keep(result,rows,index),result);
+ assert.strictEqual(realm.keep(result,rows,index),result);assert.throws(()=>realm.get(result));assert(!Object.isFrozen(rows));assert.throws(()=>realm.get({}));
+ assert.throws(()=>realm.keep({...result,geometryValidation:structuredClone(brand)},rows,index,true));
+ assert.throws(()=>realm.keep(result,rows.slice(1),index,true));
+ assert.throws(()=>realm.keep(result,rows,{...index,footprints_sha256:oldHash},true));
+ assert.strictEqual(realm.keep(result,rows,index,true),result);
  const actual=realm.get(result);assert.strictEqual(actual.rows,rows);assert.strictEqual(actual.index,index);
  assert(Object.isFrozen(actual.rows)&&Object.isFrozen(actual.rows[0].geometry)&&Object.isFrozen(actual.index));
  assert.throws(()=>realm.get(structuredClone(result)));result.receipt.status='forged';assert.throws(()=>realm.get(result));result.receipt.status='verified';
  assert.strictEqual(realm.get(result).rows,rows);requireValidatedGeometryMigrations(brand);
- console.log(JSON.stringify({positive:2,negative:7,actual_geometry_brand:true,
+ console.log(JSON.stringify({positive:3,negative:7,actual_geometry_brand:true,ordinary_build_retention:false,
   fixture:'exact-extracted-private-return-getter-boundary; synthetic rows, not full context replay'}));
 } finally {fs.rmSync(directory,{recursive:true,force:true});}

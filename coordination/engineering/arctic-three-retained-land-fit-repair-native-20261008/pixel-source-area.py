@@ -24,7 +24,14 @@ def admitted_read(pin,installed=False):
         assert getattr(before,field)==getattr(held,field)==getattr(after,field)
     return raw
 
-def run(plan,output):
+def require_area_globals(module,np,math_module):
+    flattening=1/298.257223563
+    e2=flattening*(2-flattening)
+    expected={'A':6378137.0,'FLATTENING':flattening,'E2':e2,'E':math.sqrt(e2),'C':6378137.0**2*(1-e2)/2}
+    assert module.np is np and module.math is math_module
+    assert all(getattr(module,key)==value for key,value in expected.items())
+
+def run(plan,output,guard_only=False):
     output=pathlib.Path(output)
     assert output.is_absolute() and '..' not in output.parts and output.is_relative_to(ROOT/'.cache')
     for parent in [output,*output.parents]: assert not parent.is_symlink()
@@ -64,7 +71,7 @@ def run(plan,output):
             if os.path.isfile(file) and not file.startswith(('/System/','/usr/lib/')):
                 assert file in allowed,'Unadmitted loaded native image: '+file
     loaded_guard()
-    functions=[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape,run,ordinary,admitted_read]
+    functions=[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape,run,ordinary,admitted_read,require_area_globals]
     algorithm=[pin for pin in plan['code'] if pin['path']==str(ROOT/'scripts/ellipsoidal_area.py')]
     assert len(algorithm)==1 and algorithm[0]['sha256']==plan['area_algorithm_sha256']=='4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12'
     # Match actual loaded mathematical function bodies to independently pinned
@@ -73,7 +80,7 @@ def run(plan,output):
     expected={code.co_name:code for code in compiled.co_consts if hasattr(code,'co_code')}
     for function in [ellipsoidal_area.area,ellipsoidal_area.ring_area]:
         assert marshal.dumps(function.__code__)==marshal.dumps(expected[function.__name__])
-    for function in [shape,run,ordinary,admitted_read]:
+    for function in [shape,run,ordinary,admitted_read,require_area_globals]:
         filename=os.path.realpath(function.__code__.co_filename)
         pins=[pin for pin in allpins if pin['path']==filename];assert len(pins)==1
         source=admitted_read(pins[0],pins[0] in plan['runtime_files'])
@@ -85,16 +92,20 @@ def run(plan,output):
     math_operators={name:getattr(math,name) for name in ('fsum','sin','cos','isfinite')}
     quadrature=[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
     def guard():
+        require_area_globals(ellipsoidal_area,numpy,math)
         assert functions[:3]==[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape]
         assert shape is shapely.geometry.shape
-        assert functions[3:]==[run,ordinary,admitted_read]
+        assert functions[3:]==[run,ordinary,admitted_read,require_area_globals]
         assert all(getattr(numpy,name) is value for name,value in operators.items())
         assert all(getattr(math,name) is value for name,value in math_operators.items())
         assert signatures==[hashlib.sha256(marshal.dumps(f.__code__)).hexdigest() for f in functions]
         assert shapely.lib.is_valid is native
         assert quadrature==[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
         assert ellipsoidal_area.ring_area.__defaults__==(ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS)
-    guard();started=datetime.datetime.now(datetime.timezone.utc).isoformat()
+    guard()
+    if guard_only:
+        loaded_guard();return {'guard_only':True,'source_body_reads':0,'source_areas_computed':0,'phase_bytes':cost}
+    started=datetime.datetime.now(datetime.timezone.utc).isoformat()
     pin=plan['original_context'];wire=admitted_read(pin)
     with gzip.GzipFile(fileobj=__import__('io').BytesIO(wire)) as stream:
         decoded=stream.read(pin['decoded_bytes']+1);assert len(decoded)==pin['decoded_bytes'] and not stream.read(1)
@@ -134,4 +145,4 @@ def run(plan,output):
 if __name__=='__main__':
     file=pathlib.Path(sys.argv[1]);assert ordinary(file).st_size<=262144
     raw=file.read_bytes();assert hashlib.sha256(raw).hexdigest()==os.environ['WORLDATLAS_SELECTED_NATIVE_PLAN_RAW_SHA256']
-    print(json.dumps(run(json.loads(raw),sys.argv[2])))
+    print(json.dumps(run(json.loads(raw),sys.argv[2],guard_only=len(sys.argv)==4 and sys.argv[3]=='--guard-only')))

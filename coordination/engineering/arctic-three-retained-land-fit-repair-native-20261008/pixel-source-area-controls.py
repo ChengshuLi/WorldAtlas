@@ -27,5 +27,15 @@ try:
     reject(lambda:module.run({},root/'foreign-output'))
     reject(lambda:module.run({},module.ROOT/'.cache'/'..'/'escaped'))
     assert calls==[];module.admitted_read=original
-    print({'positive':1,'negative':negatives,'source_body_opens_on_bad_destination':0,'source_areas_computed':0})
+    import sys,math
+    sys.path.insert(0,str(module.ROOT/'scripts'))
+    import numpy,ellipsoidal_area
+    module.require_area_globals(ellipsoidal_area,numpy,math)
+    for name in ('A','FLATTENING','E2','E','C'):
+        original=getattr(ellipsoidal_area,name);setattr(ellipsoidal_area,name,original+1)
+        reject(lambda:module.require_area_globals(ellipsoidal_area,numpy,math));setattr(ellipsoidal_area,name,original)
+    for name in ('np','math'):
+        original=getattr(ellipsoidal_area,name);setattr(ellipsoidal_area,name,object())
+        reject(lambda:module.require_area_globals(ellipsoidal_area,numpy,math));setattr(ellipsoidal_area,name,original)
+    print({'positive':2,'negative':negatives,'source_body_opens_on_bad_destination':0,'source_areas_computed':0})
 finally:shutil.rmtree(root)
