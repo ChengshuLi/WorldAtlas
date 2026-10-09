@@ -1,0 +1,30 @@
+✔ actual immutable entry rejects owner loss/reassignment with rawworld geometry unchanged (17159.633167ms)
+✔ missing native selection, dishonest row partition and unsupported additive hook fail closed (1087.725708ms)
+✔ changed actual asset body cannot hide behind an unchanged manifest descriptor (570.64625ms)
+✔ full stable owner identity detects coherent index relabel and boundary-sized gaps (0.214125ms)
+✔ full ledger comparison retains zero-cell primitives and rejects coherent omission/source drift (1.204667ms)
+✖ aggregate admission rejects before any actual body read (0.1805ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18889.58125
+
+✖ failing tests:
+
+test at test/effective-geographic-regression.test.mjs:107:1
+✖ aggregate admission rejects before any actual body read (0.1805ms)
+  Error: Installed runtime/metadata exceeds complete phase
+      at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:12:34)
+      at ImmutableReader.phase (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:49:118)
+      at new ImmutableReader (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:33:166)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:108:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
