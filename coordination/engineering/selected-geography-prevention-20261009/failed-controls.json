@@ -1,0 +1,22 @@
+{
+  "attempts": [
+    {
+      "name": "first",
+      "passed": 4,
+      "failed": 1,
+      "frozen": false,
+      "failure": "fixture used symlinked macOS /var temporary path; actual report writer refused it",
+      "qualification": "not final checker proof"
+    },
+    {
+      "name": "second",
+      "passed": 4,
+      "failed": 1,
+      "frozen": false,
+      "failure": "same report parent symlink refusal, stderr captured after improving diagnostic assertion",
+      "qualification": "not final checker proof"
+    }
+  ],
+  "correction": "fixture directory canonicalized with realpath; original report symlink refusal preserved",
+  "source_and_science_runs": 0
+}

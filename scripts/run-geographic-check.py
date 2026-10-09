@@ -11,6 +11,7 @@ import subprocess
 
 MAX_BYTES = 32 * 1024 * 1024
 TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
+                 'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt']
 PIN_PATHS = ['data/hierarchy.json', 'data/canonical-grid/manifest.json',
@@ -114,6 +115,20 @@ def inspect(repo, baseline, candidate):
               'candidate_code_executed': False,
               'baseline_input_inventory': before, 'candidate_input_inventory': after,
               'published': False, 'source_approval': False}
+    selected = any(git(repo, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
+                   for version in [baseline, candidate])
+    if selected:
+        native_raw = subprocess.check_output([
+            os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
+            str(repo), baseline, candidate], stderr=subprocess.PIPE)
+        if len(native_raw) > MAX_BYTES:
+            raise ValueError('Selected native report exceeds bounded output')
+        native = json.loads(native_raw)
+        report['selected_native_report'] = native
+        if native['status'] == 'native-regressions-found':
+            return {**report, 'status': 'native-regressions-found',
+                    'regressions': len(native['intervals']),
+                    'limits': ['Existing owner loss/reassignment has no automatic water or political exception. The raw polygon gate is preserved.']}
     if before == after:
         return {**report, 'status': 'not-applicable', 'regressions': None,
                 'limits': ['Live geography input blobs are unchanged; this is applicability evidence, not fresh polygon validation or a global gap clearance.']}
@@ -189,6 +204,14 @@ def main():
     args = parser.parse_args()
     immutable_sha(args.baseline)
     immutable_sha(args.candidate)
+    # Refuse collisions and symlink/dangling ancestors before any code or data
+    # reads; the final exclusive open still handles a later destination race.
+    if any(p.is_symlink() for p in [args.out, *args.out.absolute().parents]):
+        raise ValueError('Symlink report path forbidden')
+    if args.out.exists():
+        raise ValueError('Report destination already exists')
+    if not args.out.absolute().parent.is_dir():
+        raise ValueError('Report parent must be an existing ordinary directory')
     repo = args.repo.resolve()
     verify_trusted_checkout(repo, args.baseline)
     if args.fetch:
