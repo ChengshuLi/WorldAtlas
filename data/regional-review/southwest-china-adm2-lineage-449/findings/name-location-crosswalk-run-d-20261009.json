@@ -1,0 +1,77 @@
+{
+  "issue": 917,
+  "assessment": "candidate-name-location-discrepancy; not a verified identity or boundary correction",
+  "subject_id": "gb:CHN:ADM2:17275852B74051544695436",
+  "source_shape_id": "17275852B74051544695436",
+  "source_name": "Dazhuxian",
+  "atlas_name": "Dazhuxian",
+  "atlas_parent_id": "framework:province:chongqing-municipality:840dd0059ac9",
+  "historical_geometry": {
+    "source": "retained #449 geoBoundaries CHN ADM2 original",
+    "source_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+    "source_feature_geometry_sha256_canonical_json": "333546d5d1b4964fb70f98f27eb3e9b0d0d5a527d9150ef7e0e1d7612218c64f",
+    "atlas_part": "data/geography/part-3.json at pinned baseline",
+    "atlas_part_sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+    "atlas_feature_geometry_sha256_canonical_json": "09c323bc1ee51d8224f339e355265e3261efc4a97f509fd9ba2eff57102e8edd",
+    "source_bbox_lon_lat": [
+      105.47230899000004,
+      29.34947385600003,
+      106.03418346600006,
+      29.83062368900005
+    ],
+    "source_coordinate_pair_count": 45,
+    "atlas_bbox_lon_lat": [
+      105.4723,
+      29.3495,
+      106.0342,
+      29.8306
+    ],
+    "atlas_coordinate_pair_count": 40
+  },
+  "official_reported_extents_lon_lat": {
+    "dazhu_county_dazhou_sichuan": {
+      "degrees_minutes": "106°59′–107°32′ E, 30°20′–31°00′ N",
+      "decimal_bbox": [
+        106.98333333333333,
+        30.333333333333332,
+        107.53333333333333,
+        31.0
+      ],
+      "publisher": "Dazhu County People's Government",
+      "url": "https://www.dazhu.gov.cn/uploadfile/1/Attachment/b28c3b3063.pdf",
+      "source_role": "official reported location extent; not boundary geometry",
+      "direct_original_retrieval": "connection timeout after three attempts; HTTP 000, zero body bytes, no source hash",
+      "reuse_terms": "not retrieved; no source redistribution or extraction permission asserted"
+    },
+    "dazu_district_chongqing": {
+      "degrees_minutes": "105°28′–106°02′ E, 29°23′–29°52′ N",
+      "decimal_bbox": [
+        105.46666666666667,
+        29.383333333333333,
+        106.03333333333333,
+        29.866666666666667
+      ],
+      "publisher": "Dazu District People's Government",
+      "url": "https://www.dazu.gov.cn/qzfbm/qjjxxw/zwxx_53317/gzdt_53319/202211/t20221130_11345280.html",
+      "source_role": "official reported location extent; not boundary geometry",
+      "direct_original_retrieval": "connection timeout after three attempts; HTTP 000, zero body bytes, no source hash",
+      "reuse_terms": "not retrieved; no source redistribution or extraction permission asserted"
+    }
+  },
+  "reproduced_comparisons": {
+    "source_bbox_intersects_officially_reported_dazhu_county_extent": false,
+    "source_bbox_intersects_officially_reported_dazu_district_extent": true,
+    "overlapping_extent_control_detected": true,
+    "interpretation": "The source geometry footprint is spatially incompatible with the official reported extent of Dazhu County and overlaps the reported location extent of Dazu District. Extent rectangles are not polygons; overlap is not boundary identity proof."
+  },
+  "summary_metrics": {
+    "dazhu_reported_extent_disjoint_scoped_features": 1,
+    "dazu_reported_extent_overlapping_scoped_features": 1
+  },
+  "engineering_handoff": "Check the original-language name/code attached to the retained geoBoundaries shapeID and Atlas history. Determine whether Dazhuxian is a source-label/transliteration defect for Chongqing Dazu or another documented identity. Preserve the native ID and original source; make no rename, parent, geometry or release change from this lead alone.",
+  "uncertainty": [
+    "Both government location extents were obtained from indexed official-page text; the original pages/PDFs were not retained or hashed.",
+    "Bounding rectangles do not test polygon boundaries, neighboring topology, completeness, components, coastline or legal boundary role.",
+    "The indexed official sources do not provide a Chinese source name/code for this geoBoundaries shapeID; candidate identity remains unresolved."
+  ]
+}

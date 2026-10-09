@@ -1,0 +1,20 @@
+{
+  "method_id": "name-location-extent-crosswalk",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "actual_cases": [
+    "Existing regular output rejected without changing its pre-run SHA-256.",
+    "Dangling symlink output rejected and remained a symlink; no target was created.",
+    "Synthetic symlinks at data/, data/regional-review/, owned packet directory and findings/ directory were rejected before output creation."
+  ],
+  "existing_file_preserved_sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+  "dangling_symlink_preserved": true,
+  "published": false,
+  "ancestor_symlink_locations_rejected": [
+    "data",
+    "data/regional-review",
+    "data/regional-review/southwest-china-adm2-lineage-449",
+    "data/regional-review/southwest-china-adm2-lineage-449/findings"
+  ],
+  "sentinel_sha256_after_tests": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c"
+}

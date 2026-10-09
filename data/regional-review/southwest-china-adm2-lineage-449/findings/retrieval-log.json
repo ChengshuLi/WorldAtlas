@@ -3,7 +3,7 @@
   "retrieval_date": "2026-10-09",
   "timezone": "UTC",
   "scope": "Original current administrative rosters and legally authoritative polygon evidence for the issue's exact 228 Chongqing, Guizhou and Sichuan county-level subjects; current boundary-source custodians and public-map suitability leads",
-  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established. A Guangyuan Municipal Civil Affairs Bureau listing and HTTP 302 now identify the exact Sichuan provincial year-end roster URL; following its HTTP Location timed out, and a separate HTTPS retry of the provincial path also timed out, so no table bytes or row comparison were obtained. An official 2025 Sichuan place-name mapping standard was located through the official search index; it identifies the approved standard-map, boundary-adjustment and demarcation materials needed for review, but the original PDF was not retrieved and it supplies no row-level geometry.",
+  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established. A Guangyuan Municipal Civil Affairs Bureau listing and HTTP 302 now identify the exact Sichuan provincial year-end roster URL; following its HTTP Location timed out, and a separate HTTPS retry of the provincial path also timed out, so no table bytes or row comparison were obtained. An official 2025 Sichuan place-name mapping standard was located through the official search index; it identifies the approved standard-map, boundary-adjustment and demarcation materials needed for review, but the original PDF was not retrieved and it supplies no row-level geometry. A bounded location-range comparison for one Chongqing-parented subject found its 2017 source geometry extent is disjoint from the official indexed location extent of Sichuan Dazhu County but overlaps the indexed reported location extent of Chongqing Dazu District. This is a candidate source-name/identity discrepancy only; official source originals and Chinese identity code/name are not retained, so no correction is proposed.",
   "direct_access_retry": {
     "attempted_at": "2026-10-09 UTC",
     "method": "curl via direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
@@ -158,6 +158,34 @@
       "terms": "Portal use instructions and each map's approval/attribution terms must be inspected before use.",
       "restoration": "Locate province/county map products for all three provinces, save approved original artifacts and approval identifiers; establish whether map scale/generalization is adequate before any comparison.",
       "limit": "Raster/EPS public map display is not assumed to be polygon GIS or a complete high-resolution boundary reference."
+    },
+    {
+      "source_id": "dazhu-county-reported-location-extent",
+      "publisher": "Dazhu County People's Government",
+      "title": "Official government PDF; indexed excerpt from page 2 (document title and publication date not exposed by the search result)",
+      "url": "https://www.dazhu.gov.cn/uploadfile/1/Attachment/b28c3b3063.pdf",
+      "source_vintage": "Not established from the indexed result; official reported extent was retrieved 2026-10-09 UTC.",
+      "access": "Official-domain search result states Dazhu County is in eastern Sichuan, southern Dazhou, with reported longitude 106°59′–107°32′ E and latitude 30°20′–31°00′ N. The official PDF original was not retained.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not inspected. No redistribution, extraction or boundary-use permission is asserted.",
+      "restoration": "Retrieve the exact PDF from the official Dazhu County Government URL, record its original bytes, HTTP/retrieval timestamp, SHA-256, document title/date and reuse terms. Verify the quoted location range and its intended reference object in the source document.",
+      "limit": "Indexed location text is not the source PDF and supplies no geospatial boundary. It supports a disjoint-location check only; it does not establish the identity or class of the geoBoundaries subject."
+    },
+    {
+      "source_id": "dazu-district-reported-location-extent",
+      "publisher": "Dazu District People's Government",
+      "title": "Official location-description page, published 2022-11-30",
+      "url": "https://www.dazu.gov.cn/qzfbm/qjjxxw/zwxx_53317/gzdt_53319/202211/t20221130_11345280.html",
+      "source_vintage": "Page dated 2022-11-30; location extent as published there; current status/validity not independently established.",
+      "access": "Official-domain indexed page text gives Dazu District as 105°28′–106°02′ E and 29°23′–29°52′ N. The official page original was not retained.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not inspected. No redistribution, extraction or boundary-use permission is asserted.",
+      "restoration": "Retrieve the exact official page from the Dazu District Government URL; record original HTML, HTTP/retrieval timestamp, SHA-256, publication/update date and reuse terms. Confirm the range describes the current administrative territory and not an approximate planning extent.",
+      "limit": "Indexed text supplies a reported location rectangle, not a boundary polygon. Its overlap with the feature extent cannot prove name, identity, current parent or legal geometry."
     }
   ],
   "environment_limits": [
@@ -421,5 +449,28 @@
       "restoration": "Retry the exact provincial URL in an authorized accessible environment. Preserve the original notice/table bytes, response metadata, retrieval time and hashes; inspect reuse terms; then compare all 113 scoped Sichuan rows.",
       "limit": "This municipal listing and HTTP redirect establish a first-party route to the provincial notice, not the notice contents, current county identities, codes, parent relationships, geographic boundaries or completeness."
     }
-  ]
+  ],
+  "name_location_crosswalk_retry": {
+    "attempted_at": "2026-10-09 UTC",
+    "method": "Direct HTTPS curl to each official original, 6 second connect timeout, 28 second per-attempt maximum, two retries spaced 3 seconds apart.",
+    "results": [
+      {
+        "url": "https://www.dazhu.gov.cn/uploadfile/1/Attachment/b28c3b3063.pdf",
+        "attempts": 3,
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://www.dazu.gov.cn/qzfbm/qjjxxw/zwxx_53317/gzdt_53319/202211/t20221130_11345280.html",
+        "attempts": 3,
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      }
+    ],
+    "interpretation": "The source geometry could be compared reproducibly with coordinate ranges visible in indexed first-party government text. The original government pages/PDFs could not be fetched or hashed. Do not represent the indexed facts as retained source evidence."
+  }
 }

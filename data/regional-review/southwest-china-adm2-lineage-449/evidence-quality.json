@@ -692,7 +692,7 @@
       "id": "cq-updated-standard-maps-2026",
       "url": "https://ghzrzyj.cq.gov.cn/zwxx_186/bmdt/202602/t20260212_15440345_wap.html",
       "role": "Official locator for current standard-map display products; a directly retrieved raster map shows the 2026 Chongqing county-level depiction and Liangjiang administrative area.",
-      "vintage": "Retrieved citywide and Liangjiang sheets print 2026-01, approval 渝S(2025)130号. Catalog data/qh.js says 2024-06, conflicting with image vintages. 大足区 sheet prints 2026-01 but approval 渝S(2024)029号. Per-file metadata and hashes are in findings/retrieval-log.json.",
+      "vintage": "Retrieved citywide and Liangjiang sheets print 2026-01, approval \u6e1dS(2025)130\u53f7. Catalog data/qh.js says 2024-06, conflicting with image vintages. \u5927\u8db3\u533a sheet prints 2026-01 but approval \u6e1dS(2024)029\u53f7. Per-file metadata and hashes are in findings/retrieval-log.json.",
       "retrieved_at": "2026-10-09",
       "license": {
         "status": "unknown",
@@ -767,6 +767,38 @@
       "restoration": "Retrieve and hash the exact official PDF; verify current validity and its complete clause. Then obtain the referenced latest approved boundary map, adjustment approvals and demarcation result from authorized custodians with provenance and reuse terms.",
       "limit": "Official search-index text only; original PDF and legal status were not verified. This process standard supplies no geometry or row-level facts for the 113 Sichuan subjects.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "dazhu-county-reported-location-extent",
+      "url": "https://www.dazhu.gov.cn/uploadfile/1/Attachment/b28c3b3063.pdf",
+      "role": "Official reported-location comparator for distinguishing the source name Dazhuxian from Sichuan Dazhu County; location bounds only, not legal boundary evidence.",
+      "vintage": "Not established from the indexed official result; location statement retrieved 2026-10-09.",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "The original PDF and its reuse terms were not retrieved; no redistribution, extraction or boundary-use permission is asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve the exact PDF from this official Dazhu County Government URL, preserve/identify the original file, record an exact retrieval timestamp and SHA-256, and inspect its title/date and reuse terms. Verify the reported extent text in context.",
+      "limit": "Only indexed official text was available; direct original retrieval timed out. Reported location extent is not a polygon and cannot establish identity, class, parent or legal boundary.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "dazu-district-reported-location-extent",
+      "url": "https://www.dazu.gov.cn/qzfbm/qjjxxw/zwxx_53317/gzdt_53319/202211/t20221130_11345280.html",
+      "role": "Official reported-location comparator for the Chongqing Dazu candidate; location bounds only, not legal boundary evidence.",
+      "vintage": "Official page dated 2022-11-30; current validity was not independently established.",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "The original page and its reuse terms were not retrieved; no redistribution, extraction or boundary-use permission is asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve the exact page from this official Dazu District Government URL, preserve/identify the original HTML, record an exact retrieval timestamp and SHA-256, and inspect its update history and reuse terms. Verify the geographic extent statement in context.",
+      "limit": "Only indexed official text was available; direct original retrieval timed out. Reported location extent is not a polygon; rectangle overlap does not prove identity or boundary match.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
@@ -796,14 +828,14 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/retrieval-log.json",
-      "bytes": 32715,
-      "sha256": "28167a6a03269c05f5a9cf2fa49298b62835e4c6924d233b7cbb555a76704ac0",
+      "bytes": 36935,
+      "sha256": "7245f17d35e26b473a2baed421d6c98075278a0e64f56b42c59bc22392265bbe",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
-      "bytes": 12805,
-      "sha256": "3c46449efdd86d043dfab988a1bb081ea4a87f8a9ae0b6282cdf0b794d01ef6b",
+      "bytes": 15355,
+      "sha256": "7c6adda36a3fe2818f47bbd1f1df5b00b50d36bcb3dbd88c5efbbe9bddf62a49",
       "hash_kind": "file-bytes"
     },
     {
@@ -820,8 +852,56 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-runs.json",
-      "bytes": 1110,
-      "sha256": "36a49c31f34eb81f26f489e40824f736e2dcc8e8ebf7e06fabce3f68cf2f4792",
+      "bytes": 5191,
+      "sha256": "0af12a35a48db24e13d155f712fe732e47f352eea2283f9e18422676acd06760",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py",
+      "bytes": 10382,
+      "sha256": "c9f36945287997e139ed8d38571985d1177784341691d96cab72f871a5f89c63",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-a-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-b-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-positive-control.json",
+      "bytes": 826,
+      "sha256": "22a27bb29e105454ce58485e3a929492831ec3c778609d63ce7be2f1f2ec222e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json",
+      "bytes": 921,
+      "sha256": "fa48e3d9f1ceb2393821e3c3882f9a293aab844cadc16909245fc807c1c4d3e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-c-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-d-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
       "hash_kind": "file-bytes"
     }
   ],
@@ -839,6 +919,13 @@
       "description": "Attempt direct official URL retrieval and preserve exact restoration instructions; indexed discovery is not substituted for originals or row-level evidence.",
       "software": "GitHub API/connector, web search/open and Python urllib; 2026-10-09 UTC",
       "units": "URL, source vintage, byte retrieval status, license uncertainty and scope consequence."
+    },
+    {
+      "id": "name-location-extent-crosswalk",
+      "kind": "measurement",
+      "description": "Join one issue-scoped feature through exact source shapeID; hash pinned source and Atlas files; compute native source/Atlas coordinate extents; convert two official indexed degree-minute location ranges to decimal degrees and compare bounding rectangles. The output is a candidate location/name discrepancy only. Output creation is exclusive, requires a fresh filename under the owned findings directory, and rejects symlink ancestors.",
+      "software": "Python 3 standard library; reproducible entry point data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py; pinned baseline 696d1eadd9afdff8267ef3166c4c6b8b849011f5.",
+      "units": "Coordinate longitude/latitude degrees from GeoJSON; official published degrees/minutes converted arithmetically. Rectangle intersection only, not polygon area, overlap or legal boundary measurement."
     }
   ],
   "metrics": [
@@ -961,6 +1048,36 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5"
+    },
+    {
+      "id": "dazhu-reported-extent-disjoint-scoped-features",
+      "value": 1,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "additional_input_files": [
+        {
+          "path": "data/geography/part-3.json",
+          "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+          "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5"
+    },
+    {
+      "id": "dazu-reported-extent-overlapping-scoped-features",
+      "value": 1,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "additional_input_files": [
+        {
+          "path": "data/geography/part-3.json",
+          "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+          "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5"
     }
   ],
   "summaries": [
@@ -992,6 +1109,16 @@
     {
       "metric_id": "source-round4-geometry-matches",
       "value": 3,
+      "unit": "features"
+    },
+    {
+      "metric_id": "dazhu-reported-extent-disjoint-scoped-features",
+      "value": 1,
+      "unit": "features"
+    },
+    {
+      "metric_id": "dazu-reported-extent-overlapping-scoped-features",
+      "value": 1,
       "unit": "features"
     }
   ],
@@ -1031,6 +1158,15 @@
         "cq-2025-roster",
         "tianditu-standard-maps"
       ]
+    },
+    {
+      "text": "For one scoped subject only, the retained Dazhuxian source geometry extent is disjoint from the indexed official Dazhu County reported-location rectangle and intersects the indexed official Dazu District reported-location rectangle. This supports a source name/location inconsistency lead; because official originals and the original-language name/code for the shapeID were not verified, canonical identity, current parent and legal boundaries remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "gbopen-chn-adm2-2017",
+        "dazhu-county-reported-location-extent",
+        "dazu-district-reported-location-extent"
+      ]
     }
   ],
   "stages": {
@@ -1040,7 +1176,8 @@
   },
   "commands": [
     "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-lineage.py",
-    "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-lineage.py --self-test"
+    "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-lineage.py --self-test",
+    "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py --output-name <fresh-findings-filename>.json"
   ],
   "validation": [
     {
@@ -1054,47 +1191,71 @@
       "kind": "negative-control",
       "outcome": "passed",
       "evidence_path": "data/regional-review/southwest-china-adm2-lineage-449/findings/scope-control-negative.json"
+    },
+    {
+      "method_id": "name-location-extent-crosswalk",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-positive-control.json"
+    },
+    {
+      "method_id": "name-location-extent-crosswalk",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json"
     }
   ],
   "change_receipts": [
     {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/source/issue-contract-917.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/reproduce-lineage.py",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/feature-lineage.csv",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-summary.json",
-      "status": "added"
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
+      "status": "modified",
+      "original_sha256": "3c46449efdd86d043dfab988a1bb081ea4a87f8a9ae0b6282cdf0b794d01ef6b"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/retrieval-log.json",
+      "status": "modified",
+      "original_sha256": "28167a6a03269c05f5a9cf2fa49298b62835e4c6924d233b7cbb555a76704ac0"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/evidence-quality.json",
+      "status": "modified",
+      "original_sha256": "f23d0bfe4cfced689261d07f73f8e0299e2ffc1e0d16791799597a5aba295634"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py",
       "status": "added"
     },
     {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/scope-control-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/scope-control-negative.json",
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json",
       "status": "added"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-runs.json",
+      "status": "modified",
+      "original_sha256": "36a49c31f34eb81f26f489e40824f736e2dcc8e8ebf7e06fabce3f68cf2f4792"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-a-20261009.json",
       "status": "added"
     },
     {
-      "path": "data/regional-review/southwest-china-adm2-lineage-449/evidence-quality.json",
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-b-20261009.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-c-20261009.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-d-20261009.json",
       "status": "added"
     }
   ],
@@ -1128,6 +1289,16 @@
       "metric_id": "source-round4-geometry-matches",
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-summary.json",
       "json_pointer": "/rows_matching_after_source_rounding_to_4dp"
+    },
+    {
+      "metric_id": "dazhu-reported-extent-disjoint-scoped-features",
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json",
+      "json_pointer": "/summary_metrics/dazhu_reported_extent_disjoint_scoped_features"
+    },
+    {
+      "metric_id": "dazu-reported-extent-overlapping-scoped-features",
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json",
+      "json_pointer": "/summary_metrics/dazu_reported_extent_overlapping_scoped_features"
     }
   ]
 }
