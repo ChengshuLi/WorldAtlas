@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "execution_commit": "e59c03b3f025c220206bfbcaa53d65933de5cdea",
+  "request_sha256": "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f",
+  "destination": ".cache/native-grid-candidates/alaska13-source-premises-v1",
+  "qualified": true,
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "owned_processes_remaining": [],
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/additive-gap-repair.mjs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work",
+    "e59c03b3f025c220206bfbcaa53d65933de5cdea",
+    "coordination/engineering/additive-native-gap-batch-20261008/source-premises-request-v1.json",
+    "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f",
+    ".cache/native-grid-candidates/alaska13-source-premises-v1"
+  ],
+  "owned_root_identity": {
+    "ppid": 70184,
+    "pgid": 70187,
+    "started": "Thu Oct 8 18:40:34 2026"
+  },
+  "elapsed_seconds": 5.290227458055597,
+  "rss_cap_bytes": 536870912,
+  "wall_deadline_seconds": 600,
+  "peak_sampled_group_rss_bytes": 344932352,
+  "time_lifetime_max_rss_bytes": 343638016,
+  "termination_events": [],
+  "monitoring_limits": "Sampled complete process group plus time child lifetime maximum; not a kernel-enforced memory ceiling.",
+  "supervisor": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/additive-native-gap-batch-20261008/supervise.py",
+    "sha256": "3ecc68e62f1b75f9b4a9140ca84dd3f8de6093546723d0632406b34c93642b5e",
+    "helper_sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+    "python_executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "python_bytes": 18058560
+  }
+}
