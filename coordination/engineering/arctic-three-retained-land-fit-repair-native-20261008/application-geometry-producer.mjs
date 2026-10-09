@@ -43,11 +43,10 @@ export function issueApplicationGeometry(plan, destination) {
   const ids = changedRows.map(row => row.id);
   assert.equal(ids.length, plan.changedCount);
   const result = serializeQualifiedGeometryChanges(original, qualified, ids);
-  const features = JSON.parse(result.output).features;
   for (const row of changedRows) {
-    const matches = features.filter(feature => feature.id === row.id);
+    const matches = result.qualified_geometry_json.filter(feature => feature.id === row.id);
     assert.equal(matches.length, 1);
-    assert.equal(JSON.stringify(matches[0].geometry), JSON.stringify(row.geometry));
+    assert.equal(matches[0].geometry_json, JSON.stringify(row.geometry));
   }
   assert(restoreOriginalGeometrySerialization(result.output, result.inverse).equals(original));
   const compressed = gzipSync(result.output, {level: 9});
