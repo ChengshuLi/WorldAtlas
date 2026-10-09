@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "repository": "ChengshuLi/WorldAtlas",
+  "captured_at": "2026-10-09T22:52:37.367796Z",
+  "scope_component_ids": [
+    "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+    "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+    "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+    "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+    "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064"
+  ],
+  "issues": [
+    {
+      "number": 1202,
+      "title": "Resolve geographic coverage gaps globally: inventory, classification, repairs and prevention",
+      "state": "OPEN",
+      "updated_at": "2026-10-09T22:33:45Z",
+      "labels": [
+        "kind:umbrella",
+        "type:engineering"
+      ],
+      "assignees": [],
+      "body_sha256": "5b264bbb6e08365dc58dc0ffc9e58b8d4ba35a0af5328e8c0ceb80350be24e8c",
+      "body_comment_component_id_count": 15,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    },
+    {
+      "number": 1630,
+      "title": "[GEO5] Reconcile complete North America operational gap batch",
+      "state": "OPEN",
+      "updated_at": "2026-10-09T20:52:15Z",
+      "labels": [
+        "kind:work-item",
+        "status:claimed",
+        "status:ready",
+        "type:geography"
+      ],
+      "assignees": [],
+      "body_sha256": "32bbe486f582809b94b2bd6207ba78bc70b1d97d583ca7df68308b809ad69d48",
+      "body_comment_component_id_count": 0,
+      "exact_five_component_ids_present": [],
+      "active_claims": [
+        {
+          "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
+          "claim_id": "ce5413b9-7fa3-4282-9d13-40cbdbedb5a9",
+          "branch": "geography/north-america-gap-batch-20261009",
+          "issue_number": 1630,
+          "expires_at": "2026-10-10T20:52:13.174Z",
+          "live_work": false,
+          "mode": "geography"
+        }
+      ]
+    },
+    {
+      "number": 1394,
+      "title": "Recover original source operands for all 1,294 global replay mismatches",
+      "state": "OPEN",
+      "updated_at": "2026-10-09T19:36:23Z",
+      "labels": [
+        "kind:work-item",
+        "priority:urgent",
+        "status:claimed",
+        "status:ready",
+        "type:engineering"
+      ],
+      "assignees": [],
+      "body_sha256": "ffde9c04ae41ff587e06e010885078cf18987290cf6816b0843fe0f773ba2685",
+      "body_comment_component_id_count": 0,
+      "exact_five_component_ids_present": [],
+      "active_claims": [
+        {
+          "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206",
+          "claim_id": "67512015-4d03-458f-a2fb-72009062210b",
+          "branch": "engineering/complete-replay-operand-restoration-20261007",
+          "issue_number": 1394,
+          "expires_at": "2026-10-10T10:43:47.272Z",
+          "live_work": false,
+          "mode": "engineering"
+        }
+      ]
+    },
+    {
+      "number": 457,
+      "title": "Review Arctic and Subarctic America interior batch 1: Greenland, Northwest Territories, Nunavut + 1 more existing areas",
+      "state": "CLOSED",
+      "updated_at": "2026-10-05T06:24:49Z",
+      "labels": [
+        "kind:work-item",
+        "type:geography"
+      ],
+      "assignees": [],
+      "body_sha256": "64ed00e324511ec79bc5fc17adbcac7bf88002c047045cd78ae6cd8797c3420c",
+      "body_comment_component_id_count": 0,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    },
+    {
+      "number": 888,
+      "title": "Find authoritative Greenland physical sources north of 70\u00b0N",
+      "state": "OPEN",
+      "updated_at": "2026-10-06T07:34:18Z",
+      "labels": [
+        "follow-up",
+        "kind:work-item",
+        "status:blocked",
+        "type:geography",
+        "urgent"
+      ],
+      "assignees": [],
+      "body_sha256": "a3196d660be48b266e397320f62646d092dd5e870f2fc88be262f3715f8b396c",
+      "body_comment_component_id_count": 0,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    },
+    {
+      "number": 1377,
+      "title": "Assess source fitness for the complete 31-component USA ADM2 gap family",
+      "state": "CLOSED",
+      "updated_at": "2026-10-07T11:53:57Z",
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography"
+      ],
+      "assignees": [],
+      "body_sha256": "000b6c677cf8cef26425041f27f3d4f85185cf7622c2382eaf5554c06d7a15b1",
+      "body_comment_component_id_count": 31,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    },
+    {
+      "number": 1362,
+      "title": "Assess source fitness for the complete 43-component British Columbia gap family",
+      "state": "CLOSED",
+      "updated_at": "2026-10-07T11:18:31Z",
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography"
+      ],
+      "assignees": [],
+      "body_sha256": "71b4f70c3e70e7c150042a9dd6b12890259065400c882de8dbf4773bb0d3cad7",
+      "body_comment_component_id_count": 43,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    },
+    {
+      "number": 1488,
+      "title": "Assess native physical-source fitness for 13 Alaska gap components",
+      "state": "CLOSED",
+      "updated_at": "2026-10-09T19:22:00Z",
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography"
+      ],
+      "assignees": [],
+      "body_sha256": "eb6d1a372d5cafe1358e7bc66e0cab8423af9bfccd33c0cbfe0b8f684cb85629",
+      "body_comment_component_id_count": 13,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    },
+    {
+      "number": 1508,
+      "title": "Measure 13 Alaska candidate components against county and native coastline geometry",
+      "state": "CLOSED",
+      "updated_at": "2026-10-08T21:07:21Z",
+      "labels": [
+        "follow-up",
+        "kind:work-item",
+        "status:ready",
+        "type:geography",
+        "urgent"
+      ],
+      "assignees": [],
+      "body_sha256": "d0a8319d851193072505adbb9c9a34600d6821156790b428fb891af1962f9160",
+      "body_comment_component_id_count": 13,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    },
+    {
+      "number": 1620,
+      "title": "Bound complete Alaska #1495 source-fitness reproduction before input reads",
+      "state": "OPEN",
+      "updated_at": "2026-10-09T19:20:48Z",
+      "labels": [
+        "bug",
+        "follow-up",
+        "kind:work-item",
+        "status:ready",
+        "type:engineering",
+        "urgent"
+      ],
+      "assignees": [],
+      "body_sha256": "c14eab89b92f9e724e95c2ecb59f5da769b86d2b7badb98a1f476fb4d5bb68d5",
+      "body_comment_component_id_count": 13,
+      "exact_five_component_ids_present": [],
+      "active_claims": []
+    }
+  ],
+  "limits": [
+    "The live issue bodies/comments are read-only snapshots; absence of an exact component ID does not prove absence from an owner's private work files.",
+    "#1394 records active 97-subject ownership in #1630 context, but its live body/comments do not publish those exact IDs."
+  ]
+}

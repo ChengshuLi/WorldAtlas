@@ -1,0 +1,739 @@
+{
+  "kind": "exact-five-greenland-pinned-funnel-and-routing-dispositions",
+  "version": 1,
+  "issue_context": {
+    "umbrella": 1202,
+    "batch_issue": 1630,
+    "operational_batch": "gap-operational-batch:a10b27469a42da1ecbfe0956"
+  },
+  "source_index": "input-index.json",
+  "candidate_dispositions_source": "candidate-dispositions.jsonl from the complete 4,674-candidate derivation; exact rows selected by full component ID",
+  "candidate_count": 5,
+  "rows": [
+    {
+      "component_id": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "operational_batch": "gap-operational-batch:a10b27469a42da1ecbfe0956",
+      "funnel": {
+        "class": "unresolved",
+        "decision": null,
+        "provisional_support": "land",
+        "repair_ready": false,
+        "implemented": false,
+        "fully_integrated": false,
+        "delivered": false,
+        "next_work": {
+          "missing_facts": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ],
+          "original_next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "tasks": [],
+          "unassigned_requirements": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ]
+        }
+      },
+      "source_binding": {
+        "current_feature_sha256": "bad6d4e0b61a4ff6386184a0b06e9642caf72a05a09ff700f0be74bb7b2072df",
+        "current_geometry_sha256": "66ac86a9c5e49c5718320cd2c152df1141b803d8e55b9cd34eed27f23bad0b06",
+        "source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+          "source_products": "gb:GRL:ADM1",
+          "source_reference_year": "2020",
+          "unique_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751"
+        },
+        "source_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "source_record": {
+          "bytes": 2110652,
+          "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+          "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-01.csv.gz",
+          "pointer": "/records/1551",
+          "sha256": "2f59d54e19f2b6bb6ba3dc408ff468b1c91d0d6d081135c68d970faec8f1446c",
+          "uncompressed_bytes": 8388231,
+          "uncompressed_sha256": "83de891f73bc4210e75ac7882928a7755ae7a3eec543860bc202835a60ef99f2"
+        },
+        "original_source_provenance": {
+          "record": {
+            "admin_comparison_record": {
+              "decoded_stream_byte_offset": 1126548,
+              "descriptor_decoded_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86",
+              "product_prefix": "admin-bindings-",
+              "record_ordinal": 957,
+              "starts_in_descriptor": "admin-bindings-000.bin.gz"
+            },
+            "component_id": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+            "component_record": {
+              "decoded_stream_byte_offset": 3403104,
+              "descriptor_decoded_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415",
+              "product_prefix": "components-",
+              "record_ordinal": 1551,
+              "starts_in_descriptor": "components-000.bin.gz"
+            },
+            "decision_capture": null,
+            "historical_555_record": null,
+            "land_source_fitness_record": {
+              "json_array_record_ordinal": 16,
+              "product": "land-source-fitness-000.bin.gz"
+            },
+            "numeric_diagnosis_record": null
+          },
+          "reference": {
+            "bytes": 673553,
+            "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+            "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-01.jsonl.gz",
+            "pointer": "/records/1551",
+            "sha256": "307eea6b194b6f349d7ef0b2c835e4c5345edf4726699b7383995971b00e7617",
+            "uncompressed_bytes": 8388179,
+            "uncompressed_sha256": "a397f60dce0e00023a83c9dc891c34140b920c17deff30b0e937ee01bd7a68c8"
+          }
+        }
+      },
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "linked_work": {
+        "route_collision_issue_ids": [
+          457,
+          888
+        ],
+        "exact_roster_issue_ids": [],
+        "related_issue_status": {
+          "457": {
+            "state": "CLOSED",
+            "title": "Review Arctic and Subarctic America interior batch 1: Greenland, Northwest Territories, Nunavut + 1 more existing areas",
+            "labels": [
+              "kind:work-item",
+              "type:geography"
+            ],
+            "active_claims": []
+          },
+          "888": {
+            "state": "OPEN",
+            "title": "Find authoritative Greenland physical sources north of 70\u00b0N",
+            "labels": [
+              "kind:work-item",
+              "status:blocked",
+              "type:geography",
+              "urgent",
+              "follow-up"
+            ],
+            "active_claims": []
+          }
+        },
+        "family_dispatch_status": null
+      },
+      "provenance": {
+        "funnel_pin": "funnel_catalog_01_00",
+        "funnel_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-00.jsonl.gz",
+        "funnel_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+        "funnel_row_ordinal": 5095070,
+        "route_pin": "route_family_010",
+        "route_path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "route_commit": "43b064f0fb7a6711489d2a075a748aec596491d4",
+        "family_record_offset": 5744107,
+        "family_record_bytes": 31480,
+        "family_record_sha256": "6eeec174ae0fe61abcbfb39a6588f85837cbbc5fbbf7ee44845bc7315e02556a"
+      }
+    },
+    {
+      "component_id": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "operational_batch": "gap-operational-batch:a10b27469a42da1ecbfe0956",
+      "funnel": {
+        "class": "unresolved",
+        "decision": null,
+        "provisional_support": "land",
+        "repair_ready": false,
+        "implemented": false,
+        "fully_integrated": false,
+        "delivered": false,
+        "next_work": {
+          "missing_facts": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ],
+          "original_next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "tasks": [],
+          "unassigned_requirements": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ]
+        }
+      },
+      "source_binding": {
+        "current_feature_sha256": "a16725365ea9466517770d6709fc2db1206a494f8044c3d3862959b63000dd8f",
+        "current_geometry_sha256": "2f9994ccc55f2a008fd1847c8ee673b43029d9364de74f291661161b0c1918b0",
+        "source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+          "source_products": "gb:GRL:ADM1",
+          "source_reference_year": "2020",
+          "unique_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751"
+        },
+        "source_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "source_record": {
+          "bytes": 2110652,
+          "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+          "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-01.csv.gz",
+          "pointer": "/records/2738",
+          "sha256": "2f59d54e19f2b6bb6ba3dc408ff468b1c91d0d6d081135c68d970faec8f1446c",
+          "uncompressed_bytes": 8388231,
+          "uncompressed_sha256": "83de891f73bc4210e75ac7882928a7755ae7a3eec543860bc202835a60ef99f2"
+        },
+        "original_source_provenance": {
+          "record": {
+            "admin_comparison_record": {
+              "decoded_stream_byte_offset": 1967261,
+              "descriptor_decoded_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86",
+              "product_prefix": "admin-bindings-",
+              "record_ordinal": 1670,
+              "starts_in_descriptor": "admin-bindings-000.bin.gz"
+            },
+            "component_id": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+            "component_record": {
+              "decoded_stream_byte_offset": 5998059,
+              "descriptor_decoded_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415",
+              "product_prefix": "components-",
+              "record_ordinal": 2738,
+              "starts_in_descriptor": "components-000.bin.gz"
+            },
+            "decision_capture": null,
+            "historical_555_record": null,
+            "land_source_fitness_record": {
+              "json_array_record_ordinal": 38,
+              "product": "land-source-fitness-000.bin.gz"
+            },
+            "numeric_diagnosis_record": null
+          },
+          "reference": {
+            "bytes": 673553,
+            "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+            "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-01.jsonl.gz",
+            "pointer": "/records/2738",
+            "sha256": "307eea6b194b6f349d7ef0b2c835e4c5345edf4726699b7383995971b00e7617",
+            "uncompressed_bytes": 8388179,
+            "uncompressed_sha256": "a397f60dce0e00023a83c9dc891c34140b920c17deff30b0e937ee01bd7a68c8"
+          }
+        }
+      },
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "linked_work": {
+        "route_collision_issue_ids": [
+          457,
+          888
+        ],
+        "exact_roster_issue_ids": [],
+        "related_issue_status": {
+          "457": {
+            "state": "CLOSED",
+            "title": "Review Arctic and Subarctic America interior batch 1: Greenland, Northwest Territories, Nunavut + 1 more existing areas",
+            "labels": [
+              "kind:work-item",
+              "type:geography"
+            ],
+            "active_claims": []
+          },
+          "888": {
+            "state": "OPEN",
+            "title": "Find authoritative Greenland physical sources north of 70\u00b0N",
+            "labels": [
+              "kind:work-item",
+              "status:blocked",
+              "type:geography",
+              "urgent",
+              "follow-up"
+            ],
+            "active_claims": []
+          }
+        },
+        "family_dispatch_status": null
+      },
+      "provenance": {
+        "funnel_pin": "funnel_catalog_01_01",
+        "funnel_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-01.jsonl.gz",
+        "funnel_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+        "funnel_row_ordinal": 598856,
+        "route_pin": "route_family_010",
+        "route_path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "route_commit": "43b064f0fb7a6711489d2a075a748aec596491d4",
+        "family_record_offset": 5744107,
+        "family_record_bytes": 31480,
+        "family_record_sha256": "6eeec174ae0fe61abcbfb39a6588f85837cbbc5fbbf7ee44845bc7315e02556a"
+      }
+    },
+    {
+      "component_id": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "operational_batch": "gap-operational-batch:a10b27469a42da1ecbfe0956",
+      "funnel": {
+        "class": "unresolved",
+        "decision": null,
+        "provisional_support": "land",
+        "repair_ready": false,
+        "implemented": false,
+        "fully_integrated": false,
+        "delivered": false,
+        "next_work": {
+          "missing_facts": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ],
+          "original_next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "tasks": [],
+          "unassigned_requirements": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ]
+        }
+      },
+      "source_binding": {
+        "current_feature_sha256": "04b1ada328d83aa7f45b886740848fcdbbdbfab8848e24e81851ea0987ec16cc",
+        "current_geometry_sha256": "168084d703a5d6ec89711bb63e649e1ebdd8e76a96dc3c476531c1b7b6bc7f5d",
+        "source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+          "source_products": "gb:GRL:ADM1",
+          "source_reference_year": "2020",
+          "unique_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751"
+        },
+        "source_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "source_record": {
+          "bytes": 2110652,
+          "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+          "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-01.csv.gz",
+          "pointer": "/records/14602",
+          "sha256": "2f59d54e19f2b6bb6ba3dc408ff468b1c91d0d6d081135c68d970faec8f1446c",
+          "uncompressed_bytes": 8388231,
+          "uncompressed_sha256": "83de891f73bc4210e75ac7882928a7755ae7a3eec543860bc202835a60ef99f2"
+        },
+        "original_source_provenance": {
+          "record": {
+            "admin_comparison_record": {
+              "decoded_stream_byte_offset": 10312005,
+              "descriptor_decoded_sha256": "0b45b984c5c4636f622ff4f04d2b7174e8cf6c30d70bab63ddf9e2f25dc982c1",
+              "product_prefix": "admin-bindings-",
+              "record_ordinal": 8759,
+              "starts_in_descriptor": "admin-bindings-001.bin.gz"
+            },
+            "component_id": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+            "component_record": {
+              "decoded_stream_byte_offset": 31976646,
+              "descriptor_decoded_sha256": "ab35a3bd7f4064d7ef3ad1d37edcb1b1b1b35db2232b026f1322dbbc74b7bacb",
+              "product_prefix": "components-",
+              "record_ordinal": 14602,
+              "starts_in_descriptor": "components-003.bin.gz"
+            },
+            "decision_capture": null,
+            "historical_555_record": null,
+            "land_source_fitness_record": {
+              "json_array_record_ordinal": 156,
+              "product": "land-source-fitness-000.bin.gz"
+            },
+            "numeric_diagnosis_record": null
+          },
+          "reference": {
+            "bytes": 669020,
+            "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+            "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-02.jsonl.gz",
+            "pointer": "/records/2847",
+            "sha256": "d59499bcb6802b86dcefe64738dab501f59254445b9b427167b7d8d719a1eaeb",
+            "uncompressed_bytes": 8388290,
+            "uncompressed_sha256": "c4744d8ea2436d84366ff373b02da38a658c640391e45233e1691ce45e084539"
+          }
+        }
+      },
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "linked_work": {
+        "route_collision_issue_ids": [
+          457,
+          888
+        ],
+        "exact_roster_issue_ids": [],
+        "related_issue_status": {
+          "457": {
+            "state": "CLOSED",
+            "title": "Review Arctic and Subarctic America interior batch 1: Greenland, Northwest Territories, Nunavut + 1 more existing areas",
+            "labels": [
+              "kind:work-item",
+              "type:geography"
+            ],
+            "active_claims": []
+          },
+          "888": {
+            "state": "OPEN",
+            "title": "Find authoritative Greenland physical sources north of 70\u00b0N",
+            "labels": [
+              "kind:work-item",
+              "status:blocked",
+              "type:geography",
+              "urgent",
+              "follow-up"
+            ],
+            "active_claims": []
+          }
+        },
+        "family_dispatch_status": null
+      },
+      "provenance": {
+        "funnel_pin": "funnel_catalog_01_05",
+        "funnel_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-05.jsonl.gz",
+        "funnel_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+        "funnel_row_ordinal": 5992022,
+        "route_pin": "route_family_010",
+        "route_path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "route_commit": "43b064f0fb7a6711489d2a075a748aec596491d4",
+        "family_record_offset": 5744107,
+        "family_record_bytes": 31480,
+        "family_record_sha256": "6eeec174ae0fe61abcbfb39a6588f85837cbbc5fbbf7ee44845bc7315e02556a"
+      }
+    },
+    {
+      "component_id": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "operational_batch": "gap-operational-batch:a10b27469a42da1ecbfe0956",
+      "funnel": {
+        "class": "unresolved",
+        "decision": null,
+        "provisional_support": "land",
+        "repair_ready": false,
+        "implemented": false,
+        "fully_integrated": false,
+        "delivered": false,
+        "next_work": {
+          "missing_facts": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ],
+          "original_next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "tasks": [],
+          "unassigned_requirements": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ]
+        }
+      },
+      "source_binding": {
+        "current_feature_sha256": "1b273c9d80002039709d9526cbbcebbff67719a08dc83fbc2991c147743e3796",
+        "current_geometry_sha256": "8ec268d0b79cde04b823045dd53717bd6d9fd61142c5dfd47ae75a787789a974",
+        "source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+          "source_products": "gb:GRL:ADM1",
+          "source_reference_year": "2020",
+          "unique_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751"
+        },
+        "source_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "source_record": {
+          "bytes": 970354,
+          "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+          "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-07.csv.gz",
+          "pointer": "/records/3854",
+          "sha256": "4b236a599b92d3aed5b79315b27abe6ce2839ac49752bea2a48a8957eac53304",
+          "uncompressed_bytes": 3846213,
+          "uncompressed_sha256": "bfc3f6e5260aea2164d462bf0ee700e66ea075d43843d2b8eb109aea3e222640"
+        },
+        "original_source_provenance": {
+          "record": {
+            "admin_comparison_record": {
+              "decoded_stream_byte_offset": 65969801,
+              "descriptor_decoded_sha256": "e1f9dad27239a5d5f8dd38c0132bc08ea28e8482d394a3fee9eb53ebdfcf30b6",
+              "product_prefix": "admin-bindings-",
+              "record_ordinal": 56029,
+              "starts_in_descriptor": "admin-bindings-007.bin.gz"
+            },
+            "component_id": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+            "component_record": {
+              "decoded_stream_byte_offset": 202043819,
+              "descriptor_decoded_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a",
+              "product_prefix": "components-",
+              "record_ordinal": 92272,
+              "starts_in_descriptor": "components-024.bin.gz"
+            },
+            "decision_capture": null,
+            "historical_555_record": null,
+            "land_source_fitness_record": {
+              "json_array_record_ordinal": 969,
+              "product": "land-source-fitness-000.bin.gz"
+            },
+            "numeric_diagnosis_record": null
+          },
+          "reference": {
+            "bytes": 668082,
+            "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+            "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-08.jsonl.gz",
+            "pointer": "/records/10618",
+            "sha256": "49f0662dd26c9f58eaa5277f64019b9e9853ffee45be75c161542818d0559e22",
+            "uncompressed_bytes": 8388042,
+            "uncompressed_sha256": "0c143034c7799c1a9028d325d5fcc65823591a3675d2a1b9dd01608e105a2b1c"
+          }
+        }
+      },
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "linked_work": {
+        "route_collision_issue_ids": [
+          457,
+          888
+        ],
+        "exact_roster_issue_ids": [],
+        "related_issue_status": {
+          "457": {
+            "state": "CLOSED",
+            "title": "Review Arctic and Subarctic America interior batch 1: Greenland, Northwest Territories, Nunavut + 1 more existing areas",
+            "labels": [
+              "kind:work-item",
+              "type:geography"
+            ],
+            "active_claims": []
+          },
+          "888": {
+            "state": "OPEN",
+            "title": "Find authoritative Greenland physical sources north of 70\u00b0N",
+            "labels": [
+              "kind:work-item",
+              "status:blocked",
+              "type:geography",
+              "urgent",
+              "follow-up"
+            ],
+            "active_claims": []
+          }
+        },
+        "family_dispatch_status": null
+      },
+      "provenance": {
+        "funnel_pin": "funnel_catalog_07_01",
+        "funnel_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-01.jsonl.gz",
+        "funnel_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+        "funnel_row_ordinal": 4279813,
+        "route_pin": "route_family_010",
+        "route_path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "route_commit": "43b064f0fb7a6711489d2a075a748aec596491d4",
+        "family_record_offset": 5744107,
+        "family_record_bytes": 31480,
+        "family_record_sha256": "6eeec174ae0fe61abcbfb39a6588f85837cbbc5fbbf7ee44845bc7315e02556a"
+      }
+    },
+    {
+      "component_id": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "operational_batch": "gap-operational-batch:a10b27469a42da1ecbfe0956",
+      "funnel": {
+        "class": "unresolved",
+        "decision": null,
+        "provisional_support": "land",
+        "repair_ready": false,
+        "implemented": false,
+        "fully_integrated": false,
+        "delivered": false,
+        "next_work": {
+          "missing_facts": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ],
+          "original_next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "tasks": [],
+          "unassigned_requirements": [
+            "accepted-physical-class",
+            "source-fitness-and-date",
+            "cause-and-repair-authority"
+          ]
+        }
+      },
+      "source_binding": {
+        "current_feature_sha256": "c8bcaaf52f807ddd8a161841ea0967af5c7253e30f68b4e4bae7ffb68aecb2d5",
+        "current_geometry_sha256": "eead7d06948c96497211c3de7f9ff27074085e81a4a57ed6f37c9ebebbb2997a",
+        "source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+          "source_products": "gb:GRL:ADM1",
+          "source_reference_year": "2020",
+          "unique_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751"
+        },
+        "source_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "source_record": {
+          "bytes": 970354,
+          "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+          "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/components-07.csv.gz",
+          "pointer": "/records/6526",
+          "sha256": "4b236a599b92d3aed5b79315b27abe6ce2839ac49752bea2a48a8957eac53304",
+          "uncompressed_bytes": 3846213,
+          "uncompressed_sha256": "bfc3f6e5260aea2164d462bf0ee700e66ea075d43843d2b8eb109aea3e222640"
+        },
+        "original_source_provenance": {
+          "record": {
+            "admin_comparison_record": {
+              "decoded_stream_byte_offset": 67872700,
+              "descriptor_decoded_sha256": "91fe1012b01980cbcfc0f309f5d3fbfc321b0135c80a103f1dd5210c1a7a78db",
+              "product_prefix": "admin-bindings-",
+              "record_ordinal": 57643,
+              "starts_in_descriptor": "admin-bindings-008.bin.gz"
+            },
+            "component_id": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+            "component_record": {
+              "decoded_stream_byte_offset": 207891781,
+              "descriptor_decoded_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a",
+              "product_prefix": "components-",
+              "record_ordinal": 94944,
+              "starts_in_descriptor": "components-024.bin.gz"
+            },
+            "decision_capture": null,
+            "historical_555_record": null,
+            "land_source_fitness_record": {
+              "json_array_record_ordinal": 1000,
+              "product": "land-source-fitness-000.bin.gz"
+            },
+            "numeric_diagnosis_record": null
+          },
+          "reference": {
+            "bytes": 108480,
+            "commit": "431b4a1c47d8f6d0b238f6df41fd0f32085aeebe",
+            "path": "coordination/engineering/global-gap-candidate-funnel-20261008/inputs/component-provenance-09.jsonl.gz",
+            "pointer": "/records/1647",
+            "sha256": "60f1834d5c0813840f1ac5d2f5de80c59cb45a9d4d074ee7eb2824a36f0e334e",
+            "uncompressed_bytes": 1348067,
+            "uncompressed_sha256": "6539a09e132b2a6a4c90242eec9355c4ede37fd6fb9c683cf7998b81a6620dbc"
+          }
+        }
+      },
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "linked_work": {
+        "route_collision_issue_ids": [
+          457,
+          888
+        ],
+        "exact_roster_issue_ids": [],
+        "related_issue_status": {
+          "457": {
+            "state": "CLOSED",
+            "title": "Review Arctic and Subarctic America interior batch 1: Greenland, Northwest Territories, Nunavut + 1 more existing areas",
+            "labels": [
+              "kind:work-item",
+              "type:geography"
+            ],
+            "active_claims": []
+          },
+          "888": {
+            "state": "OPEN",
+            "title": "Find authoritative Greenland physical sources north of 70\u00b0N",
+            "labels": [
+              "kind:work-item",
+              "status:blocked",
+              "type:geography",
+              "urgent",
+              "follow-up"
+            ],
+            "active_claims": []
+          }
+        },
+        "family_dispatch_status": null
+      },
+      "provenance": {
+        "funnel_pin": "funnel_catalog_07_02",
+        "funnel_path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-02.jsonl.gz",
+        "funnel_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
+        "funnel_row_ordinal": 4666511,
+        "route_pin": "route_family_010",
+        "route_path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "route_commit": "43b064f0fb7a6711489d2a075a748aec596491d4",
+        "family_record_offset": 5744107,
+        "family_record_bytes": 31480,
+        "family_record_sha256": "6eeec174ae0fe61abcbfb39a6588f85837cbbc5fbbf7ee44845bc7315e02556a"
+      }
+    }
+  ],
+  "limits": [
+    "Funnel/catalog and route facts are pinned evidence, not physical approval.",
+    "Current main selected-release delta at d07f64b2 contains no transitions for these five.",
+    "All remain unresolved and ineligible pending accepted physical class, source fitness/date, and cause/repair authority."
+  ]
+}

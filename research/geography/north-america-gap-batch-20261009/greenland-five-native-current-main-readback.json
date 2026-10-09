@@ -1,0 +1,569 @@
+{
+  "kind": "current-main-native-input-readback-after-v9-selected-release-merge",
+  "current_main_ref": "origin/main",
+  "current_main_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+  "diagnostic_selected_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+  "prior_diagnostic_selected_native": {
+    "version": 1,
+    "method": "native-linear-evenodd-first-owner-v1",
+    "manifest_path": "data/canonical-grid/eastern-v8/manifest.json",
+    "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+    "release_id": "geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e"
+  },
+  "current_selected_native": {
+    "version": 1,
+    "method": "native-linear-evenodd-first-owner-v1",
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "selected_geography": {
+      "version": 1,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    "artifact_consumption": {
+      "certificate": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+        "mode": "100644",
+        "bytes": 68158,
+        "sha256": "2e2c9f87e238b4a96e02f14fbd7ebf076c5314e4d7af0a43f20ac3841195667a"
+      },
+      "review": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review-e1775233.json",
+        "mode": "100644",
+        "bytes": 8189,
+        "sha256": "d75f436320deff42c9ecac8dfff46da252ebbdfeef69cec0ce633620a87184f3"
+      }
+    }
+  },
+  "input_count": 57,
+  "byte_and_blob_identical_count": 54,
+  "changed_input_count": 3,
+  "all_inputs_byte_and_blob_identical": false,
+  "rows": [
+    {
+      "path": "data/ownership-selection.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 298,
+      "pinned_git_blob_oid": "dfe03a27e795f2e08e2273cf01bf52a2d3c010d7",
+      "current_bytes": 1361,
+      "current_git_blob_oid": "87362082e3699e078e8beaf55ae50ee7025ab850",
+      "status": "changed-in-current-selected-release"
+    },
+    {
+      "path": "data/canonical-grid/eastern-v8/manifest.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 251732,
+      "pinned_git_blob_oid": "5dae8a4aaca806af67bbd6fbffc34a0fb69c6a8c",
+      "current_bytes": 251732,
+      "current_git_blob_oid": "5dae8a4aaca806af67bbd6fbffc34a0fb69c6a8c",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/canonical-grid/bounds.json.gz",
+      "pinned_commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "pinned_bytes": 2663523,
+      "pinned_git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "current_bytes": 2663523,
+      "current_git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 1362,
+      "pinned_git_blob_oid": "6be387f2c2a5f349d52957cdd476bbf87780b8c1",
+      "current_bytes": 1810,
+      "current_git_blob_oid": "adcbc4ffdd7b0d443371f959a6e3f31fed148178",
+      "status": "changed-in-current-selected-release"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+      "pinned_commit": "90cd1d5bfd8207a569d8acaa61c777ff63b0241b",
+      "pinned_bytes": 13848,
+      "pinned_git_blob_oid": "3156149ab3ef835c2795912ace4399ab224cd5ba",
+      "current_bytes": 13848,
+      "current_git_blob_oid": "3156149ab3ef835c2795912ace4399ab224cd5ba",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/index.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 71758,
+      "pinned_git_blob_oid": "aa24c9e42cab95cb8964c78df14db97f9a3227d3",
+      "current_bytes": 71758,
+      "current_git_blob_oid": "aa24c9e42cab95cb8964c78df14db97f9a3227d3",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-000.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 16024224,
+      "pinned_git_blob_oid": "174a801489d7f8f2ab960c9174a855d63e39150e",
+      "current_bytes": 16024224,
+      "current_git_blob_oid": "174a801489d7f8f2ab960c9174a855d63e39150e",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-001.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 14062423,
+      "pinned_git_blob_oid": "ba414faa2dd5deb8e787832566322464872bfde7",
+      "current_bytes": 14062423,
+      "current_git_blob_oid": "ba414faa2dd5deb8e787832566322464872bfde7",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-002.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 15694914,
+      "pinned_git_blob_oid": "6d4d24fcf390a5cc46c0a500ed335024a9f90874",
+      "current_bytes": 15694914,
+      "current_git_blob_oid": "6d4d24fcf390a5cc46c0a500ed335024a9f90874",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-003.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 13768388,
+      "pinned_git_blob_oid": "ecd15e3157c972e429e31c3eda7ab5c75b387568",
+      "current_bytes": 13768388,
+      "current_git_blob_oid": "ecd15e3157c972e429e31c3eda7ab5c75b387568",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-004.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 11418313,
+      "pinned_git_blob_oid": "3182f6084e2655e0463f753fada3fc699510a4ed",
+      "current_bytes": 11418313,
+      "current_git_blob_oid": "3182f6084e2655e0463f753fada3fc699510a4ed",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-005.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 9469312,
+      "pinned_git_blob_oid": "59e0151741d26231c65a746421c3deab8851acf7",
+      "current_bytes": 9469312,
+      "current_git_blob_oid": "59e0151741d26231c65a746421c3deab8851acf7",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-006.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 9967721,
+      "pinned_git_blob_oid": "6c911b4b174e69f137cfed1bae2922161d3bb14a",
+      "current_bytes": 9967721,
+      "current_git_blob_oid": "6c911b4b174e69f137cfed1bae2922161d3bb14a",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-007.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 12554456,
+      "pinned_git_blob_oid": "4a58ea9c5c76c588fc3dabaff68be7eabc6c52dc",
+      "current_bytes": 12554456,
+      "current_git_blob_oid": "4a58ea9c5c76c588fc3dabaff68be7eabc6c52dc",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-008.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 9749048,
+      "pinned_git_blob_oid": "597fab2bfd1519caf4750e2f62c8f4a8469ac6c0",
+      "current_bytes": 9749048,
+      "current_git_blob_oid": "597fab2bfd1519caf4750e2f62c8f4a8469ac6c0",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-009.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 11220397,
+      "pinned_git_blob_oid": "096dffb8a5d9e4ff94cd4bcf344ea69a839d2ec8",
+      "current_bytes": 11220397,
+      "current_git_blob_oid": "096dffb8a5d9e4ff94cd4bcf344ea69a839d2ec8",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-010.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 6315721,
+      "pinned_git_blob_oid": "1b10b7eaea7c9529e08bc36c4b5b947fa379fdfa",
+      "current_bytes": 6315721,
+      "current_git_blob_oid": "1b10b7eaea7c9529e08bc36c4b5b947fa379fdfa",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-011.bin.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 2977849,
+      "pinned_git_blob_oid": "9f5a6537bb1ccb483b6b806f58b9bcd48d12fd55",
+      "current_bytes": 2977849,
+      "current_git_blob_oid": "9f5a6537bb1ccb483b6b806f58b9bcd48d12fd55",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "pinned_commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "pinned_bytes": 1851757,
+      "pinned_git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "current_bytes": 1851757,
+      "current_git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geographic-releases/current-manifest.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 201,
+      "pinned_git_blob_oid": "c043039f950b0f50765159f0e307209a02eb7e8a",
+      "current_bytes": 201,
+      "current_git_blob_oid": "3653196289ab988ec577723c0b177fbc49351b4d",
+      "status": "changed-in-current-selected-release"
+    },
+    {
+      "path": "data/geographic-releases/releases-v8.json.gz",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 195488,
+      "pinned_git_blob_oid": "3526f4e9463b2c0edbe1ae7d747261ed62c0d859",
+      "current_bytes": 195488,
+      "current_git_blob_oid": "3526f4e9463b2c0edbe1ae7d747261ed62c0d859",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/world-index.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 944,
+      "pinned_git_blob_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+      "current_bytes": 944,
+      "current_git_blob_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 8539839,
+      "pinned_git_blob_oid": "85bdc3171a740db0bc756460dab5a50c6c54518d",
+      "current_bytes": 8539839,
+      "current_git_blob_oid": "85bdc3171a740db0bc756460dab5a50c6c54518d",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-1.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 8060108,
+      "pinned_git_blob_oid": "471e45dcd13904489bc434ae5115105fadba7ab9",
+      "current_bytes": 8060108,
+      "current_git_blob_oid": "471e45dcd13904489bc434ae5115105fadba7ab9",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-2.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 6259307,
+      "pinned_git_blob_oid": "389e463dd5e44894fd221f53db584f55fff330d1",
+      "current_bytes": 6259307,
+      "current_git_blob_oid": "389e463dd5e44894fd221f53db584f55fff330d1",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-3.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5153118,
+      "pinned_git_blob_oid": "e41c8f549f1cb2162f5adb30029bf4800e86c848",
+      "current_bytes": 5153118,
+      "current_git_blob_oid": "e41c8f549f1cb2162f5adb30029bf4800e86c848",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-4.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4835479,
+      "pinned_git_blob_oid": "ccdefbb55c62b317f11e6078cd9291dae5339693",
+      "current_bytes": 4835479,
+      "current_git_blob_oid": "ccdefbb55c62b317f11e6078cd9291dae5339693",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-5.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5226173,
+      "pinned_git_blob_oid": "cf59e69b02ab2c9ad7344ddbf309a221a8be587b",
+      "current_bytes": 5226173,
+      "current_git_blob_oid": "cf59e69b02ab2c9ad7344ddbf309a221a8be587b",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-6.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4607953,
+      "pinned_git_blob_oid": "4be02d1d055a66c4e1606bab4f23ecda90350f34",
+      "current_bytes": 4607953,
+      "current_git_blob_oid": "4be02d1d055a66c4e1606bab4f23ecda90350f34",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-7.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4257402,
+      "pinned_git_blob_oid": "c88539c7899a0c257c48fc1a555895904832f0cc",
+      "current_bytes": 4257402,
+      "current_git_blob_oid": "c88539c7899a0c257c48fc1a555895904832f0cc",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-8.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5097739,
+      "pinned_git_blob_oid": "eec7163a536245c0249d1821fe81590aba2a1ded",
+      "current_bytes": 5097739,
+      "current_git_blob_oid": "eec7163a536245c0249d1821fe81590aba2a1ded",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-9.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5729632,
+      "pinned_git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61",
+      "current_bytes": 5729632,
+      "current_git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-10.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5144571,
+      "pinned_git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "current_bytes": 5144571,
+      "current_git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-11.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5133018,
+      "pinned_git_blob_oid": "fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8",
+      "current_bytes": 5133018,
+      "current_git_blob_oid": "fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-12.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4489493,
+      "pinned_git_blob_oid": "e8360aa55a8398d0fa841b5331febcabdc8588a2",
+      "current_bytes": 4489493,
+      "current_git_blob_oid": "e8360aa55a8398d0fa841b5331febcabdc8588a2",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5709487,
+      "pinned_git_blob_oid": "44f886df47aa3e313f0c2ce98faea045e2eba8ed",
+      "current_bytes": 5709487,
+      "current_git_blob_oid": "44f886df47aa3e313f0c2ce98faea045e2eba8ed",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-14.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4355198,
+      "pinned_git_blob_oid": "2cd05a870d730c598eb463ac8be2300ca5be6e66",
+      "current_bytes": 4355198,
+      "current_git_blob_oid": "2cd05a870d730c598eb463ac8be2300ca5be6e66",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-15.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5180426,
+      "pinned_git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "current_bytes": 5180426,
+      "current_git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-16.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 5213846,
+      "pinned_git_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+      "current_bytes": 5213846,
+      "current_git_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-17.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4948066,
+      "pinned_git_blob_oid": "a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a",
+      "current_bytes": 4948066,
+      "current_git_blob_oid": "a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-18.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4909063,
+      "pinned_git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "current_bytes": 4909063,
+      "current_git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-19.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4583022,
+      "pinned_git_blob_oid": "306125db7012a9ac927bb4a169dea5166ef126e7",
+      "current_bytes": 4583022,
+      "current_git_blob_oid": "306125db7012a9ac927bb4a169dea5166ef126e7",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-20.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 6570767,
+      "pinned_git_blob_oid": "efda4099740c3ef131ef631cdc6b6ecf345f226a",
+      "current_bytes": 6570767,
+      "current_git_blob_oid": "efda4099740c3ef131ef631cdc6b6ecf345f226a",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-21.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 6737781,
+      "pinned_git_blob_oid": "28619c3c39b5808aae4b3f459b97c39de8b073b2",
+      "current_bytes": 6737781,
+      "current_git_blob_oid": "28619c3c39b5808aae4b3f459b97c39de8b073b2",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4746385,
+      "pinned_git_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "current_bytes": 4746385,
+      "current_git_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-23.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4962410,
+      "pinned_git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "current_bytes": 4962410,
+      "current_git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-24.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4816899,
+      "pinned_git_blob_oid": "4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb",
+      "current_bytes": 4816899,
+      "current_git_blob_oid": "4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-25.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4525239,
+      "pinned_git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+      "current_bytes": 4525239,
+      "current_git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4608983,
+      "pinned_git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341",
+      "current_bytes": 4608983,
+      "current_git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 4863162,
+      "pinned_git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "current_bytes": 4863162,
+      "current_git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 6613963,
+      "pinned_git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "current_bytes": 6613963,
+      "current_git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 11979437,
+      "pinned_git_blob_oid": "0deb9748357a854c5e7e6179f42d77a47a09ca9a",
+      "current_bytes": 11979437,
+      "current_git_blob_oid": "0deb9748357a854c5e7e6179f42d77a47a09ca9a",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 10086485,
+      "pinned_git_blob_oid": "1b89d7aef660ba0536acdb9b9f7a574b028ea01a",
+      "current_bytes": 10086485,
+      "current_git_blob_oid": "1b89d7aef660ba0536acdb9b9f7a574b028ea01a",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 10211739,
+      "pinned_git_blob_oid": "6cf41fabbeddb18bbe426038251b86171c715ef7",
+      "current_bytes": 10211739,
+      "current_git_blob_oid": "6cf41fabbeddb18bbe426038251b86171c715ef7",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 607984,
+      "pinned_git_blob_oid": "e8a8a8e8015cfc31005e85daa49fc2552ef1df9e",
+      "current_bytes": 607984,
+      "current_git_blob_oid": "e8a8a8e8015cfc31005e85daa49fc2552ef1df9e",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/source-restoration-additions.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 1573576,
+      "pinned_git_blob_oid": "18989f4f6b2789057a00eeda6c5c7e51f06e3caf",
+      "current_bytes": 1573576,
+      "current_git_blob_oid": "18989f4f6b2789057a00eeda6c5c7e51f06e3caf",
+      "status": "byte-and-blob-identical"
+    },
+    {
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "pinned_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+      "pinned_bytes": 11393,
+      "pinned_git_blob_oid": "8f0e144d92e52ea473eecc7c2358c3464c648009",
+      "current_bytes": 11393,
+      "current_git_blob_oid": "8f0e144d92e52ea473eecc7c2358c3464c648009",
+      "status": "byte-and-blob-identical"
+    }
+  ],
+  "changed_rows": [
+    "data/ownership-selection.json",
+    "scripts/native-ownership/verified-candidates.json",
+    "data/geographic-releases/current-manifest.json"
+  ],
+  "limits": [
+    "The prior 38-cell diagnostic was computed against v8, not the currently selected v9 bank.",
+    "Three changed pins include the ownership selection, verified-candidate allowlist, and current release manifest. The v9 exact-five measurement attempt failed its unchanged 256 MiB complete-phase cap before producing rows."
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "kind": "greenland-five-current-main-binding-and-decision-readback",
+  "captured_at": "2026-10-09T22:52:37.367796Z",
+  "current_main_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+  "component_ids": [
+    "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+    "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+    "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+    "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+    "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064"
+  ],
+  "catalog_states": [
+    {
+      "component_id": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "class": "unresolved",
+      "decision": null,
+      "repair_ready": false,
+      "implemented": false,
+      "fully_integrated": false,
+      "delivered": false,
+      "missing_facts": [
+        "accepted-physical-class",
+        "source-fitness-and-date",
+        "cause-and-repair-authority"
+      ],
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "catalog_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f"
+    },
+    {
+      "component_id": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "class": "unresolved",
+      "decision": null,
+      "repair_ready": false,
+      "implemented": false,
+      "fully_integrated": false,
+      "delivered": false,
+      "missing_facts": [
+        "accepted-physical-class",
+        "source-fitness-and-date",
+        "cause-and-repair-authority"
+      ],
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "catalog_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f"
+    },
+    {
+      "component_id": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "class": "unresolved",
+      "decision": null,
+      "repair_ready": false,
+      "implemented": false,
+      "fully_integrated": false,
+      "delivered": false,
+      "missing_facts": [
+        "accepted-physical-class",
+        "source-fitness-and-date",
+        "cause-and-repair-authority"
+      ],
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "catalog_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f"
+    },
+    {
+      "component_id": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "class": "unresolved",
+      "decision": null,
+      "repair_ready": false,
+      "implemented": false,
+      "fully_integrated": false,
+      "delivered": false,
+      "missing_facts": [
+        "accepted-physical-class",
+        "source-fitness-and-date",
+        "cause-and-repair-authority"
+      ],
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "catalog_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f"
+    },
+    {
+      "component_id": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "class": "unresolved",
+      "decision": null,
+      "repair_ready": false,
+      "implemented": false,
+      "fully_integrated": false,
+      "delivered": false,
+      "missing_facts": [
+        "accepted-physical-class",
+        "source-fitness-and-date",
+        "cause-and-repair-authority"
+      ],
+      "source_fitness": {
+        "route_requires_review": true,
+        "route_decision": "unapproved-for-all-components",
+        "source_fitness_status": "unapproved"
+      },
+      "catalog_commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f"
+    }
+  ],
+  "current_selected_target": {
+    "source_file": "data/geography/part-9.json",
+    "source_file_bytes": 5729632,
+    "source_file_sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+    "original_source_id": "42512837B82481266018751",
+    "match_count": 1,
+    "properties": {
+      "id": "gb:GRL:ADM1:42512837B82481266018751",
+      "name": "Qeqertalik",
+      "parent_id": "framework:province:qeqertalik:321d544aeeb4",
+      "reference_owner": "Greenland",
+      "metadata": {
+        "source_id": "gb:GRL:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRL/ADM1/geoBoundaries-GRL-ADM1.geojson",
+        "license": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+        "reference_year": "2020",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "granularity_version": 3,
+        "source_role": "Municipalities",
+        "selection_reason": "Named municipalities are source coverage only; enormous ice-sheet districts require physical-geography review.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "42512837B82481266018751",
+        "representative_point": [
+          -47.91119626352164,
+          68.25055
+        ],
+        "hierarchy_version": 4,
+        "hierarchy_source": "gb:GRL:ADM1",
+        "hierarchy_overlap": 0.994856,
+        "topology_version": 1,
+        "reference_version": 3,
+        "geographic_area_code": "GNL",
+        "geographic_region_code": 70,
+        "geographic_match": "largest source overlap",
+        "geographic_overlap": 0.95532,
+        "coverage_version": 1,
+        "semantic_version": 1,
+        "remote_version": 1,
+        "search_aliases": [
+          "Qasigiannguit"
+        ],
+        "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+        "framework_match": {
+          "source": "Natural Earth",
+          "id": "GRL-2743",
+          "overlap": 0.980769
+        },
+        "regional_match": {
+          "reference_iso": "GRL",
+          "source_id": "GRL-2743",
+          "overlap": 0.980769,
+          "method": "reference-territory-constrained overlap"
+        },
+        "reference_owner_id": "owner:Q35",
+        "reference_polity": "Denmark",
+        "reference_polity_status": "reference",
+        "reference_polity_evidence": {
+          "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "reference_territory": "Greenland",
+          "classification": "Country",
+          "note": null,
+          "uncertainty": false
+        },
+        "semantic_review": {
+          "status": "open",
+          "continent": "North America",
+          "decision_index": 130,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    }
+  },
+  "current_native_selection": {
+    "version": 1,
+    "method": "native-linear-evenodd-first-owner-v1",
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "selected_geography": {
+      "version": 1,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    "artifact_consumption": {
+      "certificate": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+        "mode": "100644",
+        "bytes": 68158,
+        "sha256": "2e2c9f87e238b4a96e02f14fbd7ebf076c5314e4d7af0a43f20ac3841195667a"
+      },
+      "review": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review-e1775233.json",
+        "mode": "100644",
+        "bytes": 8189,
+        "sha256": "d75f436320deff42c9ecac8dfff46da252ebbdfeef69cec0ce633620a87184f3"
+      }
+    }
+  },
+  "selected_release_progress_delta": {
+    "path": ".cache/global-gap-work-index-20261009/selected-release-decisions.json",
+    "bytes": 2416,
+    "sha256": "8bbb3420d167471647e4593d045e85c04b2368797c637ead3d77aca4b2b59a1a",
+    "selected_merge": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+    "repaired_updates": [
+      {
+        "component_id": "physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a",
+        "batch_id": "gap-operational-batch:596e1d071f5d90be10e3e8ed",
+        "previous_state": "eligible-source-relative-rule",
+        "state": "repaired-verified-selected-release",
+        "assigned_native_pixels": 140,
+        "evidence": {
+          "pr": 1593,
+          "merge": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+          "changed_output_readback_sha256": "b56184be65346870e528d1286cf2fd0a5a747127dca63b28638f178fb7341a3f"
+        },
+        "remaining_missing_fact": null,
+        "production_delivered": false
+      },
+      {
+        "component_id": "physical-component:17bb5b7f043b0fb2b447b8ccef216e530fed4595da1aec0feb1dea235bed0dbd",
+        "batch_id": "gap-operational-batch:da7e01fd9a715c338247a0ea",
+        "previous_state": "eligible-source-relative-rule",
+        "state": "repaired-verified-selected-release",
+        "assigned_native_pixels": 1,
+        "evidence": {
+          "pr": 1593,
+          "merge": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+          "changed_output_readback_sha256": "b56184be65346870e528d1286cf2fd0a5a747127dca63b28638f178fb7341a3f"
+        },
+        "remaining_missing_fact": null,
+        "production_delivered": false
+      }
+    ],
+    "greenland_five_affected": false
+  },
+  "limits": [
+    "Catalog funnel rows remain the pinned accepted-funnel evidence; current selected-release delta records only two unrelated component transitions and preserves other baseline states.",
+    "Administrative target identity does not prove candidate geometry overlap or physical-source acceptance.",
+    "Current v9 native exact-five metrics are unavailable: bounded attempt failed unchanged phase cap and produced no output."
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "status": "exact-original-pointsets-bound",
+  "scope": "five Greenland candidate features; exact whole-file ID lookup only",
+  "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+  "restoration_receipt": {
+    "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/custody-restoration.json",
+    "bytes": 18576,
+    "sha256": "f978c8cdc56dc7eaa39c05a516f1c7c43001016739d0ed44e7b587de09843d1a",
+    "source_commit": "450126d04c7e6bf85c8763c9bb6949c1fac68000",
+    "authenticated_candidate_commit": "efa2e50fa6a40a7be5004d55bca3ff1653ca0dfe",
+    "custody_index": {
+      "bytes": 117156,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+    },
+    "method": "Exact gzip decompression of each entire custody-v3 components-v3 payload; no filtering, recoding, geometry rewrite, or repair."
+  },
+  "source_files": {
+    "components-000.json": {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "bytes": 8387182,
+      "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+      "feature_count": 8790
+    },
+    "components-001.json": {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-001.json",
+      "bytes": 8388214,
+      "sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a",
+      "feature_count": 8766
+    },
+    "components-010.json": {
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json",
+      "bytes": 6909917,
+      "sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025",
+      "feature_count": 7231
+    }
+  },
+  "candidates": [
+    {
+      "component_id": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "source_file": "components-000.json",
+      "feature_ordinal_zero_based": 1551,
+      "original_feature": {
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                -50.456695,
+                67.858547
+              ],
+              [
+                -50.45572677635122,
+                67.86112269206878
+              ],
+              [
+                -50.45452731523313,
+                67.85797656454592
+              ],
+              [
+                -50.456695,
+                67.858547
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "id": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+        "properties": {
+          "administrative_assignment": null,
+          "dateline_connected": false,
+          "diagnostic_nearby_locations": [],
+          "fragment_bindings": [
+            {
+              "feature_sha256": "903382b3a69d1de069659b61842d76739e8b10be20dbed380497302b9834c66c",
+              "id": "physical-gap:1825:136:66ac86a9c5e49c5718320cd2c152df1141b803d8e55b9cd34eed27f23bad0b06"
+            }
+          ],
+          "measured_fragment_area_sum_m2": 14396.690117798198,
+          "measured_fragment_count": 1,
+          "positive_area_input_overlap": false,
+          "touches_blocked_tile": false,
+          "touches_domain_boundary": false,
+          "touches_reference_shore": true,
+          "unmeasured_fragment_ids": [],
+          "water_status": "unverified"
+        },
+        "type": "Feature"
+      }
+    },
+    {
+      "component_id": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "source_file": "components-000.json",
+      "feature_ordinal_zero_based": 2738,
+      "original_feature": {
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                -52.294993,
+                67.85578
+              ],
+              [
+                -52.29273049812316,
+                67.85616357331634
+              ],
+              [
+                -52.297308200088054,
+                67.85451205372125
+              ],
+              [
+                -52.294993,
+                67.85578
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "id": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+        "properties": {
+          "administrative_assignment": null,
+          "dateline_connected": false,
+          "diagnostic_nearby_locations": [],
+          "fragment_bindings": [
+            {
+              "feature_sha256": "0aec6b5a0ff0af24af396c90d10618b914a07548c54b81481f3e8ec4fd1d60d1",
+              "id": "physical-gap:1825:157:2f9994ccc55f2a008fd1847c8ee673b43029d9364de74f291661161b0c1918b0"
+            }
+          ],
+          "measured_fragment_area_sum_m2": 4648.252722218826,
+          "measured_fragment_count": 1,
+          "positive_area_input_overlap": false,
+          "touches_blocked_tile": false,
+          "touches_domain_boundary": false,
+          "touches_reference_shore": true,
+          "unmeasured_fragment_ids": [],
+          "water_status": "unverified"
+        },
+        "type": "Feature"
+      }
+    },
+    {
+      "component_id": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "source_file": "components-001.json",
+      "feature_ordinal_zero_based": 5813,
+      "original_feature": {
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                -53.284006,
+                68.130072
+              ],
+              [
+                -53.28818813920164,
+                68.13197297236438
+              ],
+              [
+                -53.27784379475369,
+                68.13137263094552
+              ],
+              [
+                -53.284006,
+                68.130072
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "id": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+        "properties": {
+          "administrative_assignment": null,
+          "dateline_connected": false,
+          "diagnostic_nearby_locations": [],
+          "fragment_bindings": [
+            {
+              "feature_sha256": "2756034a3af08ea72fa2317065fba2bf265f83867fe71388a616c92874424fff",
+              "id": "physical-gap:1825:181:168084d703a5d6ec89711bb63e649e1ebdd8e76a96dc3c476531c1b7b6bc7f5d"
+            }
+          ],
+          "measured_fragment_area_sum_m2": 39781.39825279684,
+          "measured_fragment_count": 1,
+          "positive_area_input_overlap": false,
+          "touches_blocked_tile": false,
+          "touches_domain_boundary": false,
+          "touches_reference_shore": true,
+          "unmeasured_fragment_ids": [],
+          "water_status": "unverified"
+        },
+        "type": "Feature"
+      }
+    },
+    {
+      "component_id": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "source_file": "components-010.json",
+      "feature_ordinal_zero_based": 4329,
+      "original_feature": {
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                -51.292144,
+                68.748603
+              ],
+              [
+                -51.291920116311886,
+                68.74889109321428
+              ],
+              [
+                -51.29122297278915,
+                68.74862364685006
+              ],
+              [
+                -51.292144,
+                68.748603
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "id": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+        "properties": {
+          "administrative_assignment": null,
+          "dateline_connected": false,
+          "diagnostic_nearby_locations": [],
+          "fragment_bindings": [
+            {
+              "feature_sha256": "97192601f473696959229b71da0c2095ff14c99a3aa999115720d38877ff402f",
+              "id": "physical-gap:1825:258:8ec268d0b79cde04b823045dd53717bd6d9fd61142c5dfd47ae75a787789a974"
+            }
+          ],
+          "measured_fragment_area_sum_m2": 588.4273064282306,
+          "measured_fragment_count": 1,
+          "positive_area_input_overlap": false,
+          "touches_blocked_tile": false,
+          "touches_domain_boundary": false,
+          "touches_reference_shore": true,
+          "unmeasured_fragment_ids": [],
+          "water_status": "unverified"
+        },
+        "type": "Feature"
+      }
+    },
+    {
+      "component_id": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "source_file": "components-010.json",
+      "feature_ordinal_zero_based": 7002,
+      "original_feature": {
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                -51.848297,
+                67.735053
+              ],
+              [
+                -51.84176611070163,
+                67.73885555082754
+              ],
+              [
+                -51.84483330916231,
+                67.73347291823477
+              ],
+              [
+                -51.848297,
+                67.735053
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "id": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+        "properties": {
+          "administrative_assignment": null,
+          "dateline_connected": false,
+          "diagnostic_nearby_locations": [],
+          "fragment_bindings": [
+            {
+              "feature_sha256": "f0c2f57274ba04ed84325157402ca6cd02d35b81170a5b58fd606a179d97d297",
+              "id": "physical-gap:1825:154:eead7d06948c96497211c3de7f9ff27074085e81a4a57ed6f37c9ebebbb2997a"
+            }
+          ],
+          "measured_fragment_area_sum_m2": 55408.42728967843,
+          "measured_fragment_count": 1,
+          "positive_area_input_overlap": false,
+          "touches_blocked_tile": false,
+          "touches_domain_boundary": false,
+          "touches_reference_shore": true,
+          "unmeasured_fragment_ids": [],
+          "water_status": "unverified"
+        },
+        "type": "Feature"
+      }
+    }
+  ],
+  "limits": [
+    "The original candidate features above are authoritative pointset inputs for engineering measurement.",
+    "The existing target-overlay report used retained GSHHG mapped-land support geometry, not these original candidate pointsets.",
+    "No spatial operation was performed by this binding step.",
+    "Original water_status is unverified; physical authority, cause, and repair readiness remain unresolved."
+  ]
+}

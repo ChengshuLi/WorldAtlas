@@ -1,0 +1,624 @@
+{
+  "kind": "actual-full-selected-native-comparison-operating-receipt",
+  "scope": "Five entire original Greenland pointsets at committed59ac/v8,one target/33 complete native rows; native prospects only",
+  "selected_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+  "issued_command_sha256": "d73a57f0498ce7187853efb81d804a50db851908b4718bce66fddcf424b726cf",
+  "contract": {
+    "issued_command_sha256": "d73a57f0498ce7187853efb81d804a50db851908b4718bce66fddcf424b726cf",
+    "supervisor_sha256": "532e444f089e47bcc094857b46e0e6182267934cbc3bc23ee791007df64567f6",
+    "maximum_RSS_bytes": 536870912,
+    "minimum_host_reserve_bytes": 402653184,
+    "sample_margin_bytes": 33554432,
+    "maximum_wall_seconds": 300,
+    "maximum_new_storage_bytes": 67108864,
+    "maximum_result_bytes": 4194304,
+    "maximum_stderr_bytes": 40960,
+    "termination_helper_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/1394-physical-continuation-e9b03/owned-child-termination-00c6028d.py",
+    "termination_helper_sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+    "scope": "Five entire original Greenland pointsets at committed59ac/v8,one target/33 complete native rows; native prospects only; unchanged32MiB member/256MiB phase/512 descriptor caps; no scientific source operators",
+    "no_automatic_envelope_increase_or_started_retry": true
+  },
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-greenland-five-native-7c80-20261009/program/measure.mjs"
+  ],
+  "started_at": "2026-10-09T22:16:23.912349+00:00",
+  "finished_at": "2026-10-09T22:16:28.612907+00:00",
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_s": 4.700485499983188,
+  "actual_external_lifetime_process_peak_RSS_bytes": 178962432,
+  "max_sampled_group_RSS_bytes": 178929664,
+  "VM_supply_upper_estimate_before_launch": 1335623680,
+  "operating_admission_qualified": true,
+  "natural_terminal_owned_processes_absent": true,
+  "new_storage_bytes": 191050,
+  "samples": [
+    {
+      "elapsed_s": 0.049190625024493784,
+      "group_RSS_bytes": 46661632,
+      "members": {
+        "96779": {
+          "ppid": 96612,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96781": {
+          "ppid": 96779,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 0.5960787090007216,
+      "group_RSS_bytes": 141983744,
+      "members": {
+        "96779": {
+          "ppid": 96612,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96781": {
+          "ppid": 96779,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96809": {
+          "ppid": 96781,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:24 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.1330294589861296,
+      "group_RSS_bytes": 152764416,
+      "members": {
+        "96779": {
+          "ppid": 96612,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96781": {
+          "ppid": 96779,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96845": {
+          "ppid": 96781,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.6686709999921732,
+      "group_RSS_bytes": 150831104,
+      "members": {
+        "96779": {
+          "ppid": 96612,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96781": {
+          "ppid": 96779,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96887": {
+          "ppid": 96781,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.2046260840143077,
+      "group_RSS_bytes": 169525248,
+      "members": {
+        "96779": {
+          "ppid": 96612,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96781": {
+          "ppid": 96779,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96925": {
+          "ppid": 96781,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:26 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.743271959014237,
+      "group_RSS_bytes": 128532480,
+      "members": {
+        "96779": {
+          "ppid": 96612,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96781": {
+          "ppid": 96779,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96975": {
+          "ppid": 96781,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:26 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.2999041249859147,
+      "group_RSS_bytes": 178929664,
+      "members": {
+        "96779": {
+          "ppid": 96612,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "96781": {
+          "ppid": 96779,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:23 2026"
+        },
+        "97081": {
+          "ppid": 96781,
+          "pgid": 96779,
+          "started": "Fri Oct 9 15:16:27 2026"
+        }
+      }
+    }
+  ],
+  "termination_events": [],
+  "whole_output_pins": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-greenland-five-native-7c80-20261009/checker.stdout",
+      "bytes": 190273,
+      "sha256": "9005025f24336bf5368937b772904760ecebd0401cb05672afc4b1ba1661b353"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-greenland-five-native-7c80-20261009/checker.stderr",
+      "bytes": 777,
+      "sha256": "ace6a63a988543aa28ad983d9f124cc32212fa00e96cb642cfb71e1ac6685cdc"
+    }
+  ],
+  "source_pre_use": [
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/evaluate-native-candidates.mjs",
+      "bytes": 6833,
+      "sha256": "dab91018eb0cca304812056a16512580c0995e6713ba895eba623a9f1d61a6d5",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-activation-20261009/evaluate-native-candidates.mjs",
+        "kind": "canonical-frozen-evaluator"
+      }
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "git_tree": "100644 blob 09015e2d1e179b6856b6b9e51d51e3ea77d7b2fd\tscripts/check-effective-geographic-regression.mjs"
+      }
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 115653,
+      "sha256": "6365d009d90fe991d8ae618c60034297e80dd75824dfb829c4fea99e38d96ac7",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "git_tree": "100644 blob 7d511601e4bd651aafb8f0d589c3b236ab1dedf8\tcoordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+      }
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/ownership-codec.js",
+        "git_tree": "100644 blob 03eacc9bcb1bff03723a93c248ea6de5f2fed5e4\tsrc/ownership-codec.js"
+      }
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 95874,
+      "sha256": "5bda202160724a6128cc891d9770b799c205c9fe99b9d2d4c8794b46b00e610c",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/additive-gap-repair.mjs",
+        "git_tree": "100644 blob 21327de015b1b4d6f68235a325e385922d2cee10\tscripts/additive-gap-repair.mjs"
+      }
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/native-runtime.js",
+        "git_tree": "100644 blob a4f8432ac213c5d489db07249d403f7ef91c1296\tsrc/native-runtime.js"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "git_tree": "100644 blob cafd0a7efa72b682a46ece67a654d191b029ef9c\tscripts/native-ownership/compile-native-ownership.mjs"
+      }
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/audit-grid-intervals.mjs",
+        "git_tree": "100644 blob 78fcf8ab2ef8c7b67652e18a43654c6b4dcdd094\tscripts/audit-grid-intervals.mjs"
+      }
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/native-grid.js",
+        "git_tree": "100644 blob bc5619798e88b1d2abd4bd11e3fba3b7dd18cf12\tsrc/native-grid.js"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371,
+      "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "git_tree": "100644 blob a858fd5fc2f0405f12341171d4a64b0aa5aff350\tscripts/native-ownership/native-preparation-guards.mjs"
+      }
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 42446,
+      "sha256": "0d20d47ae37da3fe820ab350f8c3492e341aad8b856384ad81de20905dc68218",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/effective-footprint.js",
+        "git_tree": "100644 blob 3e092b9ac2df384134e2d1e43d07c7cda8021724\tsrc/effective-footprint.js"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/package.json",
+      "bytes": 2799,
+      "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/package.json",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/utils.js",
+      "bytes": 9356,
+      "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/utils.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/_u64.js",
+      "bytes": 3081,
+      "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/_u64.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/_md.js",
+      "bytes": 5615,
+      "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/_md.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha2.js",
+      "bytes": 16773,
+      "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/sha2.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 1362,
+      "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "git_tree": "100644 blob 6be387f2c2a5f349d52957cdd476bbf87780b8c1\tscripts/native-ownership/verified-candidates.json"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/require-verified-selection.mjs",
+        "git_tree": "100644 blob 0c73282307526101812f25e3fabb5fca68d8acf0\tscripts/native-ownership/require-verified-selection.mjs"
+      }
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/ownership-method.js",
+        "git_tree": "100644 blob 839abe54e65a98d7be47f7e6d8d58eda0b5a7abe\tsrc/ownership-method.js"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+        "git_tree": "100644 blob a6d60162cd4ee51bb90bed913110b8fe2b323521\tscripts/native-ownership/read-pinned-build-file.mjs"
+      }
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/evidence-quality.mjs",
+        "git_tree": "100644 blob 3f8980f573af0a9fb48b763ed875026f0ce99199\tscripts/evidence-quality.mjs"
+      }
+    },
+    {
+      "path": "measure.mjs",
+      "bytes": 6560,
+      "sha256": "6b490da55cd844bff6fd2eaee7af8a6164bf556f7600decae4bbdc9b057d6f0d",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-greenland-five-native-7c80-20261009/program/measure.mjs"
+      }
+    }
+  ],
+  "source_post_use": [
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/evaluate-native-candidates.mjs",
+      "bytes": 6833,
+      "sha256": "dab91018eb0cca304812056a16512580c0995e6713ba895eba623a9f1d61a6d5",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-activation-20261009/evaluate-native-candidates.mjs",
+        "kind": "canonical-frozen-evaluator"
+      }
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "git_tree": "100644 blob 09015e2d1e179b6856b6b9e51d51e3ea77d7b2fd\tscripts/check-effective-geographic-regression.mjs"
+      }
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 115653,
+      "sha256": "6365d009d90fe991d8ae618c60034297e80dd75824dfb829c4fea99e38d96ac7",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "git_tree": "100644 blob 7d511601e4bd651aafb8f0d589c3b236ab1dedf8\tcoordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+      }
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/ownership-codec.js",
+        "git_tree": "100644 blob 03eacc9bcb1bff03723a93c248ea6de5f2fed5e4\tsrc/ownership-codec.js"
+      }
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 95874,
+      "sha256": "5bda202160724a6128cc891d9770b799c205c9fe99b9d2d4c8794b46b00e610c",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/additive-gap-repair.mjs",
+        "git_tree": "100644 blob 21327de015b1b4d6f68235a325e385922d2cee10\tscripts/additive-gap-repair.mjs"
+      }
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/native-runtime.js",
+        "git_tree": "100644 blob a4f8432ac213c5d489db07249d403f7ef91c1296\tsrc/native-runtime.js"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "git_tree": "100644 blob cafd0a7efa72b682a46ece67a654d191b029ef9c\tscripts/native-ownership/compile-native-ownership.mjs"
+      }
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/audit-grid-intervals.mjs",
+        "git_tree": "100644 blob 78fcf8ab2ef8c7b67652e18a43654c6b4dcdd094\tscripts/audit-grid-intervals.mjs"
+      }
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/native-grid.js",
+        "git_tree": "100644 blob bc5619798e88b1d2abd4bd11e3fba3b7dd18cf12\tsrc/native-grid.js"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371,
+      "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "git_tree": "100644 blob a858fd5fc2f0405f12341171d4a64b0aa5aff350\tscripts/native-ownership/native-preparation-guards.mjs"
+      }
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 42446,
+      "sha256": "0d20d47ae37da3fe820ab350f8c3492e341aad8b856384ad81de20905dc68218",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/effective-footprint.js",
+        "git_tree": "100644 blob 3e092b9ac2df384134e2d1e43d07c7cda8021724\tsrc/effective-footprint.js"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/package.json",
+      "bytes": 2799,
+      "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/package.json",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/utils.js",
+      "bytes": 9356,
+      "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/utils.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/_u64.js",
+      "bytes": 3081,
+      "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/_u64.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/_md.js",
+      "bytes": 5615,
+      "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/_md.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha2.js",
+      "bytes": 16773,
+      "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/node_modules/@noble/hashes/sha2.js",
+        "kind": "installed-module"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 1362,
+      "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "git_tree": "100644 blob 6be387f2c2a5f349d52957cdd476bbf87780b8c1\tscripts/native-ownership/verified-candidates.json"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/require-verified-selection.mjs",
+        "git_tree": "100644 blob 0c73282307526101812f25e3fabb5fca68d8acf0\tscripts/native-ownership/require-verified-selection.mjs"
+      }
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "src/ownership-method.js",
+        "git_tree": "100644 blob 839abe54e65a98d7be47f7e6d8d58eda0b5a7abe\tsrc/ownership-method.js"
+      }
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+        "git_tree": "100644 blob a6d60162cd4ee51bb90bed913110b8fe2b323521\tscripts/native-ownership/read-pinned-build-file.mjs"
+      }
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "origin": {
+        "commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+        "path": "scripts/evidence-quality.mjs",
+        "git_tree": "100644 blob 3f8980f573af0a9fb48b763ed875026f0ce99199\tscripts/evidence-quality.mjs"
+      }
+    },
+    {
+      "path": "measure.mjs",
+      "bytes": 6560,
+      "sha256": "6b490da55cd844bff6fd2eaee7af8a6164bf556f7600decae4bbdc9b057d6f0d",
+      "origin": {
+        "consumed_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-greenland-five-native-7c80-20261009/program/measure.mjs"
+      }
+    }
+  ],
+  "global_scientific_executions": 0
+}

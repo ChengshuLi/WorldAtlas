@@ -1,0 +1,724 @@
+{
+  "version": 1,
+  "status": "admin-subject-mapping-with-source-support-overlay-only",
+  "scope": "five Greenland components only; source-only evidence; no production writes",
+  "source_commit": "59acfabec9a22acebdb312010d37a43c8956ba8f",
+  "geometry_method": {
+    "helper_version": "worldatlas-evidence-geometry-v1",
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m",
+    "topology_operation": "Shapely 2.1.2 intersection/covers in WGS84 longitude-latitude coordinates",
+    "overlay_scope": "retained GSHHG mapped-land support geometries against current selected geography; not exact original-candidate overlays",
+    "identity_limit": "source_covers_candidate=true proves source-relative coverage, not point-for-point equality with the whole candidate pointset",
+    "measurement_geometry": "GSHHG mapped-land support; whole original candidate pointsets are separately bound in greenland-five-pointset-bindings.json"
+  },
+  "software": {
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "source_input_files": {
+    "data/location-policy.json": {
+      "bytes": 69433,
+      "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9"
+    },
+    "data/administrative-sources.json": {
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "data/geography/part-9.json": {
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    "data/regional-review/regional-review-a9f03b364bdefa4a/sources/geoboundaries-GRL-ADM1-9469f09.geojson": {
+      "bytes": 1758212,
+      "sha256": "a3132d9511f99c11a70aa40969567e29aa6f12d347117286025f87c6cdde86b0"
+    }
+  },
+  "selected_geography_parts": [
+    {
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "path": "data/geography/part-1.json",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "path": "data/geography/part-10.json",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "path": "data/geography/part-11.json",
+      "bytes": 5133018,
+      "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+    },
+    {
+      "path": "data/geography/part-12.json",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "path": "data/geography/part-14.json",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "path": "data/geography/part-15.json",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "path": "data/geography/part-16.json",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "path": "data/geography/part-17.json",
+      "bytes": 4948066,
+      "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+    },
+    {
+      "path": "data/geography/part-18.json",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "path": "data/geography/part-19.json",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "path": "data/geography/part-20.json",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "path": "data/geography/part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "path": "data/geography/part-24.json",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "path": "data/geography/part-25.json",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "path": "data/geography/part-3.json",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "path": "data/geography/part-4.json",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "path": "data/geography/part-6.json",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "path": "data/geography/part-7.json",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "path": "data/geography/part-8.json",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "path": "data/geography/source-restoration-additions.json",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    }
+  ],
+  "source_metadata": {
+    "product_id": "gb:GRL:ADM1",
+    "reference_year": "2020",
+    "administrative_level": "ADM1",
+    "canonical_role": "Municipalities",
+    "source_lineage": "GeoBoundaries, Wikipedia",
+    "license": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "license_detail": "Creative Commons Attribution-ShareAlike 3.0 Germany",
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRL/ADM1/geoBoundaries-GRL-ADM1.geojson",
+    "source_file_sha256": "a3132d9511f99c11a70aa40969567e29aa6f12d347117286025f87c6cdde86b0",
+    "consumed_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+    "consumed_subject_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53"
+  },
+  "selected_target": {
+    "id": "gb:GRL:ADM1:42512837B82481266018751",
+    "name": "Qeqertalik",
+    "parent_id": "framework:province:qeqertalik:321d544aeeb4",
+    "source_id": "gb:GRL:ADM1",
+    "original_id": "42512837B82481266018751",
+    "source_role": "Municipalities",
+    "reference_year": "2020",
+    "selection_reason": "Named municipalities are source coverage only; enormous ice-sheet districts require physical-geography review.",
+    "hierarchy_overlap": 0.994856,
+    "geographic_overlap": 0.95532,
+    "same_source_product_selected_locations": [
+      {
+        "id": "gb:GRL:ADM1:42512837B15316814347491",
+        "name": "Northeast Greenland National Park",
+        "original_id": "42512837B15316814347491"
+      },
+      {
+        "id": "gb:GRL:ADM1:42512837B82481266018751",
+        "name": "Qeqertalik",
+        "original_id": "42512837B82481266018751"
+      }
+    ],
+    "same_source_subject_target_count": 1
+  },
+  "current_source_policy": {
+    "level": "ADM1",
+    "role": "Municipalities",
+    "reason": "Named municipal / national-park source coverage is refined on published physical boundaries by the global remote-area audit.",
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRL/ADM1/geoBoundaries-GRL-ADM1.geojson"
+  },
+  "physical_comparison_shards": {
+    "coordination/engineering/global-physical-comparison-20261006/results/components-001.jsonl.gz": {
+      "encoded_bytes": 978433,
+      "encoded_sha256": "516f23d0d48752b91cec80f245f49ea6f8ceff0f9b804ace46fd46f78d32faaf",
+      "decoded_bytes": 7367004,
+      "decoded_sha256": "bae1e4f36090a32a42fd406178e9ab21e5d4fbfe893c36d3f7abbb1bd564ca4f"
+    },
+    "coordination/engineering/global-physical-comparison-20261006/results/components-002.jsonl.gz": {
+      "encoded_bytes": 992979,
+      "encoded_sha256": "ae72b98588ea16ca58bd73bc6349fd497b813154d5a452dae881501dd28504a5",
+      "decoded_bytes": 7422166,
+      "decoded_sha256": "b63f7b7a0675b9cbf8d2f7d5e7ee317497a5a63e8e70a41af5155dc36fce43bc"
+    },
+    "coordination/engineering/global-physical-comparison-20261006/results/components-010.jsonl.gz": {
+      "encoded_bytes": 966679,
+      "encoded_sha256": "3bc42aca221488b5974803e82a4b6746291b4694acab5f61d4912e4849169416",
+      "decoded_bytes": 7358889,
+      "decoded_sha256": "fce4e059f37697591a0bdf6259a46cdb2cdc1125c5c4c422d859aaa1ac284599"
+    },
+    "coordination/engineering/global-physical-comparison-20261006/results/components-068.jsonl.gz": {
+      "encoded_bytes": 1009610,
+      "encoded_sha256": "174658349676fc4be49a24013712c99a336280582d4a98d1693d3938939b482a",
+      "decoded_bytes": 7422396,
+      "decoded_sha256": "f6eaf06605d49883fc07f879f57d25c7d37f664f62180f3a56376c93b7b46746"
+    },
+    "coordination/engineering/global-physical-comparison-20261006/results/components-070.jsonl.gz": {
+      "encoded_bytes": 760287,
+      "encoded_sha256": "e86af0a7da7736ee728bceb856a7277becbbb93235d8785d23f416e90b82f47e",
+      "decoded_bytes": 5800627,
+      "decoded_sha256": "e4e7add1fe4ee69e767cb710ede5075d6152ed4aa26aeb28e72e296e738a53dd"
+    }
+  },
+  "admin_comparison_commit": "12e90af4ff876e619a8eb0e6c1445821573500e6",
+  "admin_comparison_shards": {
+    "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-000.bin.gz": {
+      "encoded_bytes": 1423781,
+      "encoded_sha256": "fa75a261900a8daecaf79d5ec52ff98c558c75113f125ce37b3a6cd823884e84",
+      "decoded_bytes": 8388608,
+      "decoded_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86"
+    },
+    "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-001.bin.gz": {
+      "encoded_bytes": 1425093,
+      "encoded_sha256": "1ef86a2583ec6abfd84f58d443c31b4884c567be263cdbb39de0e80cd2f8849f",
+      "decoded_bytes": 8388608,
+      "decoded_sha256": "0b45b984c5c4636f622ff4f04d2b7174e8cf6c30d70bab63ddf9e2f25dc982c1"
+    },
+    "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-007.bin.gz": {
+      "encoded_bytes": 1424128,
+      "encoded_sha256": "06389d188e7b544f187a471c4ebfba937d8f07ccbfadba68d5f302888304b81f",
+      "decoded_bytes": 8388608,
+      "decoded_sha256": "e1f9dad27239a5d5f8dd38c0132bc08ea28e8482d394a3fee9eb53ebdfcf30b6"
+    },
+    "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-008.bin.gz": {
+      "encoded_bytes": 158811,
+      "encoded_sha256": "57a60c413f397633712a7f20663c4423cc4ab1abfb0f597790c66d385da72dc8",
+      "decoded_bytes": 932144,
+      "decoded_sha256": "91fe1012b01980cbcfc0f309f5d3fbfc321b0135c80a103f1dd5210c1a7a78db"
+    }
+  },
+  "candidate_rows": [
+    {
+      "component_id": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "unique_recorded_source_product": "gb:GRL:ADM1",
+      "unique_recorded_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "source_reference_year": "2020",
+      "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+      "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "gshhg_mapped_land_support_area_m2": 14396.690117798198,
+      "physical_route_status": "mapped-land-support",
+      "physical_comparison_status": "unknown-source-fitness-and-observation-date",
+      "physical_authority": "unapproved",
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "retained_physical_comparison": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-001.jsonl.gz",
+        "ordinal_in_decoded_shard": 250,
+        "row_sha256": "0f235d89e2bd5b7c7ec1c3d2b3a64d20b292462873ee36a2eddd881fafb7e70d",
+        "source_covers_candidate": true
+      },
+      "retained_admin_source_comparison": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-000.bin.gz",
+        "ordinal_in_decoded_shard": 957,
+        "row_sha256": "22fb6b35113d1b1e1e54195eb57f0abdb35b94c1ecf05ef2e25e2dcbd12bf926",
+        "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+        "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+        "source_products": [
+          "gb:GRL:ADM1"
+        ],
+        "unique_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+        "unique_subject_feature_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+        "source_reference_year": "2020",
+        "source_parent_id": "framework:province:qeqertalik:321d544aeeb4",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unknowns": [],
+        "current_feature_sha256": "bad6d4e0b61a4ff6386184a0b06e9642caf72a05a09ff700f0be74bb7b2072df",
+        "current_geometry_sha256": "66ac86a9c5e49c5718320cd2c152df1141b803d8e55b9cd34eed27f23bad0b06"
+      },
+      "geometry_helper_mapped_land_support_area_m2": 14396.690117798198,
+      "mapped_land_support_target_intersection_area_m2": 0.0,
+      "mapped_land_support_target_intersection_fraction": 0.0,
+      "mapped_land_support_positive_area_targets": [],
+      "mapped_land_support_boundary_contacts": [
+        {
+          "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+          "name": "Qeqertalik",
+          "intersection_area_m2": 0.0,
+          "mapped_land_support_area_fraction": 0.0
+        }
+      ],
+      "candidate_target_overlap_status": "not-computed-from-original-candidate-pointset",
+      "original_candidate_pointset_binding": {
+        "source_file": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+        "source_file_bytes": 8387182,
+        "source_file_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+        "feature_ordinal_zero_based": 1551,
+        "fragment_bindings": [
+          {
+            "feature_sha256": "903382b3a69d1de069659b61842d76739e8b10be20dbed380497302b9834c66c",
+            "id": "physical-gap:1825:136:66ac86a9c5e49c5718320cd2c152df1141b803d8e55b9cd34eed27f23bad0b06"
+          }
+        ],
+        "water_status": "unverified",
+        "geometry_from_full_feature": true,
+        "binding_output_sha256": "0ea30ab7bc2e7265e5d4a77342d5797caa3e7291580c19f0d774c78cbbfba0dd"
+      }
+    },
+    {
+      "component_id": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "unique_recorded_source_product": "gb:GRL:ADM1",
+      "unique_recorded_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "source_reference_year": "2020",
+      "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+      "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "gshhg_mapped_land_support_area_m2": 4648.252722218826,
+      "physical_route_status": "mapped-land-support",
+      "physical_comparison_status": "unknown-source-fitness-and-observation-date",
+      "physical_authority": "unapproved",
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "retained_physical_comparison": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-002.jsonl.gz",
+        "ordinal_in_decoded_shard": 34,
+        "row_sha256": "229e82e6121c8b707c959ccc201c548428f8cadfa9dbe6d320e1d4c4a99c264b",
+        "source_covers_candidate": true
+      },
+      "retained_admin_source_comparison": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-000.bin.gz",
+        "ordinal_in_decoded_shard": 1670,
+        "row_sha256": "f44efe8af63e4e5a9c98c32190f34670cf7b6f76b4d0da857154943e1b6c8227",
+        "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+        "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+        "source_products": [
+          "gb:GRL:ADM1"
+        ],
+        "unique_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+        "unique_subject_feature_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+        "source_reference_year": "2020",
+        "source_parent_id": "framework:province:qeqertalik:321d544aeeb4",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unknowns": [],
+        "current_feature_sha256": "a16725365ea9466517770d6709fc2db1206a494f8044c3d3862959b63000dd8f",
+        "current_geometry_sha256": "2f9994ccc55f2a008fd1847c8ee673b43029d9364de74f291661161b0c1918b0"
+      },
+      "geometry_helper_mapped_land_support_area_m2": 4648.252722218826,
+      "mapped_land_support_target_intersection_area_m2": 6.270989221900748e-08,
+      "mapped_land_support_target_intersection_fraction": 1.349106771222911e-11,
+      "mapped_land_support_positive_area_targets": [
+        {
+          "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+          "name": "Qeqertalik",
+          "intersection_area_m2": 6.270989221900748e-08,
+          "mapped_land_support_area_fraction": 1.349106771222911e-11
+        }
+      ],
+      "mapped_land_support_boundary_contacts": [],
+      "candidate_target_overlap_status": "not-computed-from-original-candidate-pointset",
+      "original_candidate_pointset_binding": {
+        "source_file": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+        "source_file_bytes": 8387182,
+        "source_file_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+        "feature_ordinal_zero_based": 2738,
+        "fragment_bindings": [
+          {
+            "feature_sha256": "0aec6b5a0ff0af24af396c90d10618b914a07548c54b81481f3e8ec4fd1d60d1",
+            "id": "physical-gap:1825:157:2f9994ccc55f2a008fd1847c8ee673b43029d9364de74f291661161b0c1918b0"
+          }
+        ],
+        "water_status": "unverified",
+        "geometry_from_full_feature": true,
+        "binding_output_sha256": "0ea30ab7bc2e7265e5d4a77342d5797caa3e7291580c19f0d774c78cbbfba0dd"
+      }
+    },
+    {
+      "component_id": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "unique_recorded_source_product": "gb:GRL:ADM1",
+      "unique_recorded_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "source_reference_year": "2020",
+      "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+      "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "gshhg_mapped_land_support_area_m2": 39781.39825279684,
+      "physical_route_status": "mapped-land-support",
+      "physical_comparison_status": "unknown-source-fitness-and-observation-date",
+      "physical_authority": "unapproved",
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "retained_physical_comparison": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-010.jsonl.gz",
+        "ordinal_in_decoded_shard": 1121,
+        "row_sha256": "6ca6cf98c5a5717c4cb2525cf9e93e017fdf5959889f4b707484da204ded1f8a",
+        "source_covers_candidate": true
+      },
+      "retained_admin_source_comparison": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-001.bin.gz",
+        "ordinal_in_decoded_shard": 1636,
+        "row_sha256": "98cd09b03e7d3fc1fb0f6dbb970ec755d998a6fe7756fc767856eea3d4801643",
+        "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+        "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+        "source_products": [
+          "gb:GRL:ADM1"
+        ],
+        "unique_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+        "unique_subject_feature_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+        "source_reference_year": "2020",
+        "source_parent_id": "framework:province:qeqertalik:321d544aeeb4",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unknowns": [],
+        "current_feature_sha256": "04b1ada328d83aa7f45b886740848fcdbbdbfab8848e24e81851ea0987ec16cc",
+        "current_geometry_sha256": "168084d703a5d6ec89711bb63e649e1ebdd8e76a96dc3c476531c1b7b6bc7f5d"
+      },
+      "geometry_helper_mapped_land_support_area_m2": 39781.39825279684,
+      "mapped_land_support_target_intersection_area_m2": 0.0,
+      "mapped_land_support_target_intersection_fraction": 0.0,
+      "mapped_land_support_positive_area_targets": [],
+      "mapped_land_support_boundary_contacts": [
+        {
+          "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+          "name": "Qeqertalik",
+          "intersection_area_m2": 0.0,
+          "mapped_land_support_area_fraction": 0.0
+        }
+      ],
+      "candidate_target_overlap_status": "not-computed-from-original-candidate-pointset",
+      "original_candidate_pointset_binding": {
+        "source_file": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-001.json",
+        "source_file_bytes": 8388214,
+        "source_file_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a",
+        "feature_ordinal_zero_based": 5813,
+        "fragment_bindings": [
+          {
+            "feature_sha256": "2756034a3af08ea72fa2317065fba2bf265f83867fe71388a616c92874424fff",
+            "id": "physical-gap:1825:181:168084d703a5d6ec89711bb63e649e1ebdd8e76a96dc3c476531c1b7b6bc7f5d"
+          }
+        ],
+        "water_status": "unverified",
+        "geometry_from_full_feature": true,
+        "binding_output_sha256": "0ea30ab7bc2e7265e5d4a77342d5797caa3e7291580c19f0d774c78cbbfba0dd"
+      }
+    },
+    {
+      "component_id": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "unique_recorded_source_product": "gb:GRL:ADM1",
+      "unique_recorded_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "source_reference_year": "2020",
+      "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+      "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "gshhg_mapped_land_support_area_m2": 588.4273064282306,
+      "physical_route_status": "mapped-land-support",
+      "physical_comparison_status": "unknown-source-fitness-and-observation-date",
+      "physical_authority": "unapproved",
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "retained_physical_comparison": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-068.jsonl.gz",
+        "ordinal_in_decoded_shard": 923,
+        "row_sha256": "8f296801df040f7eb04d0b2a0560de06ceb7665c5841e2a19d513a90193efa93",
+        "source_covers_candidate": true
+      },
+      "retained_admin_source_comparison": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-007.bin.gz",
+        "ordinal_in_decoded_shard": 6159,
+        "row_sha256": "e9361aef72a6de668d0299f2133ffae4a09e78aa4a616438030bb67ab89b113d",
+        "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+        "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+        "source_products": [
+          "gb:GRL:ADM1"
+        ],
+        "unique_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+        "unique_subject_feature_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+        "source_reference_year": "2020",
+        "source_parent_id": "framework:province:qeqertalik:321d544aeeb4",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unknowns": [],
+        "current_feature_sha256": "1b273c9d80002039709d9526cbbcebbff67719a08dc83fbc2991c147743e3796",
+        "current_geometry_sha256": "8ec268d0b79cde04b823045dd53717bd6d9fd61142c5dfd47ae75a787789a974"
+      },
+      "geometry_helper_mapped_land_support_area_m2": 588.4273064282306,
+      "mapped_land_support_target_intersection_area_m2": 3.8396344242782465e-09,
+      "mapped_land_support_target_intersection_fraction": 6.525248543588042e-12,
+      "mapped_land_support_positive_area_targets": [
+        {
+          "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+          "name": "Qeqertalik",
+          "intersection_area_m2": 3.8396344242782465e-09,
+          "mapped_land_support_area_fraction": 6.525248543588042e-12
+        }
+      ],
+      "mapped_land_support_boundary_contacts": [],
+      "candidate_target_overlap_status": "not-computed-from-original-candidate-pointset",
+      "original_candidate_pointset_binding": {
+        "source_file": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json",
+        "source_file_bytes": 6909917,
+        "source_file_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025",
+        "feature_ordinal_zero_based": 4329,
+        "fragment_bindings": [
+          {
+            "feature_sha256": "97192601f473696959229b71da0c2095ff14c99a3aa999115720d38877ff402f",
+            "id": "physical-gap:1825:258:8ec268d0b79cde04b823045dd53717bd6d9fd61142c5dfd47ae75a787789a974"
+          }
+        ],
+        "water_status": "unverified",
+        "geometry_from_full_feature": true,
+        "binding_output_sha256": "0ea30ab7bc2e7265e5d4a77342d5797caa3e7291580c19f0d774c78cbbfba0dd"
+      }
+    },
+    {
+      "component_id": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "family_id": "gap-source-batch:cc585007c02df55450a8c0e6",
+      "unique_recorded_source_product": "gb:GRL:ADM1",
+      "unique_recorded_source_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "source_reference_year": "2020",
+      "source_geometry_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+      "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+      "gshhg_mapped_land_support_area_m2": 55408.42728967843,
+      "physical_route_status": "mapped-land-support",
+      "physical_comparison_status": "unknown-source-fitness-and-observation-date",
+      "physical_authority": "unapproved",
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "retained_physical_comparison": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-070.jsonl.gz",
+        "ordinal_in_decoded_shard": 841,
+        "row_sha256": "35bdbe16e853e4376062ce19e346fa3b399882de7d9f29049e2320469eecde8e",
+        "source_covers_candidate": true
+      },
+      "retained_admin_source_comparison": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-008.bin.gz",
+        "ordinal_in_decoded_shard": 649,
+        "row_sha256": "a721dfce51688e605a05acb8e185eaf9c69d29176cedb4dae32e14731d3ede3e",
+        "source_comparison_packet": "global-source-comparisons-a-001-20261006",
+        "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+        "source_products": [
+          "gb:GRL:ADM1"
+        ],
+        "unique_subject_id": "gb:GRL:ADM1:42512837B82481266018751",
+        "unique_subject_feature_sha256": "a66112308aa6b1ef4316884ab61c55c18c98ae65c902169be659fb816c9eef53",
+        "source_reference_year": "2020",
+        "source_parent_id": "framework:province:qeqertalik:321d544aeeb4",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unknowns": [],
+        "current_feature_sha256": "c8bcaaf52f807ddd8a161841ea0967af5c7253e30f68b4e4bae7ffb68aecb2d5",
+        "current_geometry_sha256": "eead7d06948c96497211c3de7f9ff27074085e81a4a57ed6f37c9ebebbb2997a"
+      },
+      "geometry_helper_mapped_land_support_area_m2": 55408.42728967843,
+      "mapped_land_support_target_intersection_area_m2": 0.0,
+      "mapped_land_support_target_intersection_fraction": 0.0,
+      "mapped_land_support_positive_area_targets": [],
+      "mapped_land_support_boundary_contacts": [
+        {
+          "selected_target_id": "gb:GRL:ADM1:42512837B82481266018751",
+          "name": "Qeqertalik",
+          "intersection_area_m2": 0.0,
+          "mapped_land_support_area_fraction": 0.0
+        }
+      ],
+      "candidate_target_overlap_status": "not-computed-from-original-candidate-pointset",
+      "original_candidate_pointset_binding": {
+        "source_file": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json",
+        "source_file_bytes": 6909917,
+        "source_file_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025",
+        "feature_ordinal_zero_based": 7002,
+        "fragment_bindings": [
+          {
+            "feature_sha256": "f0c2f57274ba04ed84325157402ca6cd02d35b81170a5b58fd606a179d97d297",
+            "id": "physical-gap:1825:154:eead7d06948c96497211c3de7f9ff27074085e81a4a57ed6f37c9ebebbb2997a"
+          }
+        ],
+        "water_status": "unverified",
+        "geometry_from_full_feature": true,
+        "binding_output_sha256": "0ea30ab7bc2e7265e5d4a77342d5797caa3e7291580c19f0d774c78cbbfba0dd"
+      }
+    }
+  ],
+  "limits": [
+    "The unique admin-source witness identifies one stable existing administrative target; it does not approve this source as physical boundary authority.",
+    "The saved target scan uses source-relative mapped-land support geometries, not the whole original candidate pointsets.",
+    "Candidate-to-target overlap and pairwise candidate geometry relations remain unestablished by this scan.",
+    "Mapped-land comparison geometry is source-relative to GSHHG 2.3.7; observation dates are heterogeneous and authority remains unapproved.",
+    "No exact candidate-target overlay or native-cell measurement was performed; no repair geometry was proposed or written.",
+    "This scan is source-support geometry only, not candidate conservation, fresh source coverage, or land/water adjudication."
+  ],
+  "mapped_land_support_pairwise_intersections": [
+    {
+      "left": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "right": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "right": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "right": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
+      "right": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "right": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "right": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
+      "right": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "right": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
+      "right": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "intersection_area_m2": 0.0
+    },
+    {
+      "left": "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
+      "right": "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064",
+      "intersection_area_m2": 0.0
+    }
+  ]
+}
