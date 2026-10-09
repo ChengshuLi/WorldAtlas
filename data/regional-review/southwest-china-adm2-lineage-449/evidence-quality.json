@@ -834,8 +834,8 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
-      "bytes": 15314,
-      "sha256": "475d32edeb3b9ea44ab852a330c2aa9f1d8803327a3063f745599e0ead2bbeab",
+      "bytes": 15355,
+      "sha256": "7c6adda36a3fe2818f47bbd1f1df5b00b50d36bcb3dbd88c5efbbe9bddf62a49",
       "hash_kind": "file-bytes"
     },
     {
@@ -852,14 +852,14 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-runs.json",
-      "bytes": 3707,
-      "sha256": "8b04f66676f775a13bb7acc17d6a047a8931148bf0a58b1430b7f989a5143cb6",
+      "bytes": 5191,
+      "sha256": "0af12a35a48db24e13d155f712fe732e47f352eea2283f9e18422676acd06760",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py",
-      "bytes": 10047,
-      "sha256": "e68511f7901e2b598b874ddcd4e09fc6c00d632e425b95dda7ac5248bc11f80b",
+      "bytes": 10382,
+      "sha256": "c9f36945287997e139ed8d38571985d1177784341691d96cab72f871a5f89c63",
       "hash_kind": "file-bytes"
     },
     {
@@ -888,8 +888,20 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json",
-      "bytes": 458,
-      "sha256": "3f4a4b831ecff51f4cc04cce590f0224dfa0cf242c5aa9a3d78ca052ec657861",
+      "bytes": 921,
+      "sha256": "fa48e3d9f1ceb2393821e3c3882f9a293aab844cadc16909245fc807c1c4d3e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-c-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-d-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
       "hash_kind": "file-bytes"
     }
   ],
@@ -911,7 +923,7 @@
     {
       "id": "name-location-extent-crosswalk",
       "kind": "measurement",
-      "description": "Join one issue-scoped feature through exact source shapeID; hash pinned source and Atlas files; compute native source/Atlas coordinate extents; convert two official indexed degree-minute location ranges to decimal degrees and compare bounding rectangles. The output is a candidate location/name discrepancy only.",
+      "description": "Join one issue-scoped feature through exact source shapeID; hash pinned source and Atlas files; compute native source/Atlas coordinate extents; convert two official indexed degree-minute location ranges to decimal degrees and compare bounding rectangles. The output is a candidate location/name discrepancy only. Output creation is exclusive, requires a fresh filename under the owned findings directory, and rejects symlink ancestors.",
       "software": "Python 3 standard library; reproducible entry point data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py; pinned baseline 696d1eadd9afdff8267ef3166c4c6b8b849011f5.",
       "units": "Coordinate longitude/latitude degrees from GeoJSON; official published degrees/minutes converted arithmetically. Rectangle intersection only, not polygon area, overlap or legal boundary measurement."
     }
@@ -1236,6 +1248,14 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-c-20261009.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-d-20261009.json",
       "status": "added"
     }
   ],

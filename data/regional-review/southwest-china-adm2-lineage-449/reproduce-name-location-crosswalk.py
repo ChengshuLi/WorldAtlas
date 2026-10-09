@@ -67,17 +67,26 @@ def intersects(left: list[float], right: list[float]) -> bool:
     return left[0] <= right[2] and right[0] <= left[2] and left[1] <= right[3] and right[1] <= left[3]
 
 
+def safe_output_path(root: Path, output_name: str) -> Path:
+    if (not output_name or Path(output_name).name != output_name
+            or output_name in {".", ".."} or not output_name.endswith(".json")):
+        raise ValueError("--output-name must be a simple .json filename")
+    owned = root / "data/regional-review/southwest-china-adm2-lineage-449"
+    output_dir = owned / "findings"
+    for directory in (root / "data", root / "data/regional-review", owned, output_dir):
+        if directory.is_symlink():
+            raise ValueError("Owned output path ancestors must not be symlinks")
+    if not output_dir.is_dir():
+        raise ValueError("Owned findings directory must be a real directory")
+    return output_dir / output_name
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-name", required=True,
                         help="new JSON filename created exclusively inside this packet's findings directory")
     args = parser.parse_args()
-    if (not args.output_name or Path(args.output_name).name != args.output_name
-            or args.output_name in {".", ".."} or not args.output_name.endswith(".json")):
-        raise ValueError("--output-name must be a simple .json filename")
-    if OWNED.is_symlink() or OUTPUT_DIR.is_symlink() or not OUTPUT_DIR.is_dir():
-        raise ValueError("Owned findings directory must be a real directory, not a symlink")
-    output = OUTPUT_DIR / args.output_name
+    output = safe_output_path(ROOT, args.output_name)
     source_bytes = SOURCE.read_bytes()
     atlas_bytes = ATLAS.read_bytes()
     if sha256(source_bytes) != SOURCE_SHA256:
