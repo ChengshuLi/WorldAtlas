@@ -58,8 +58,12 @@ export async function issueSuccessorRelease(plan,outputValue){
  const changedBatch=decode(plan.changes);assert.equal(changedBatch.release_id,old.id);
  const originalChangePin=registry.batches.find(pin=>pin.path==='8-changes-0.json.gz');
  assert.equal(originalChangePin.sha256,plan.changes.sha256);assert.equal(originalChangePin.payload_sha256,plan.changes.decoded_sha256);
- const geometryInputs=JSON.parse(readAdmittedBody(admission,plan.geometry_inputs.path));
- const receipt=prepareGeometryReceipt(geometryInputs),receiptBody=Buffer.from(JSON.stringify(receipt)+'\n');
+ const owners=plan.owner_structures.flatMap(pin=>JSON.parse(readAdmittedBody(admission,pin.path)).owners);
+ const originalContext=decode(plan.original_context);assert.equal(originalContext.length,1500);
+ const currentTargets=JSON.parse(readAdmittedBody(admission,plan.current_targets.path));
+ const geometryProof=JSON.parse(readAdmittedBody(admission,plan.geometry_proof.path));
+ const originalTargets=currentTargets.map(after=>{const found=originalContext.filter(before=>before.id===after.id);assert.equal(found.length,1);return found[0];});
+ const receipt=prepareGeometryReceipt({owners,originalTargets,currentTargets,geometryProof,sourceEvidence:plan.source_evidence}),receiptBody=Buffer.from(JSON.stringify(receipt)+'\n');
  const result=await continueRelease({registry,memberships,changes:changedBatch.changes,migrationReceipt:receipt,
   receiptSha:sha(receiptBody),proposalCommit:plan.proposal_commit,predecessorManifestSha:plan.registry.sha256,referenceDate:plan.reference_date});
  assert.equal(result.memberships,memberships);
