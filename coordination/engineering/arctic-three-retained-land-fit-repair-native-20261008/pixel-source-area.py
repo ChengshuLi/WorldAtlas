@@ -31,6 +31,11 @@ def require_area_globals(module,np,math_module):
     assert module.np is np and module.math is math_module
     assert all(getattr(module,key)==value for key,value in expected.items())
 
+def source_area(geometry):
+    # Literal original audit-grid-resolutions Python source-area call boundary.
+    import ellipsoidal_area,majority
+    return ellipsoidal_area.area(majority.canonical(geometry))
+
 def run(plan,output,guard_only=False):
     output=pathlib.Path(output)
     assert output.is_absolute() and '..' not in output.parts and output.is_relative_to(ROOT/'.cache')
@@ -58,7 +63,7 @@ def run(plan,output,guard_only=False):
         package_root=pathlib.Path(initializers[0]['path']).parent.parent
         ordinary(initializers[0]['path']);sys.path.insert(0,str(package_root))
     sys.path.insert(0,str(ROOT/'scripts'))
-    import numpy,shapely,ellipsoidal_area
+    import numpy,shapely,ellipsoidal_area,majority
     import shapely.geometry
     from shapely.geometry import shape
     assert numpy.__version__=='2.3.5' and shapely.__version__=='2.1.2' and shapely.geos_version_string=='3.13.1'
@@ -78,7 +83,7 @@ def run(plan,output,guard_only=False):
             if os.path.isfile(file) and not file.startswith(('/System/','/usr/lib/')):
                 assert file in allowed,'Unadmitted loaded native image: '+file
     loaded_guard()
-    functions=[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape,run,ordinary,admitted_read,require_area_globals]
+    functions=[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape,run,ordinary,admitted_read,require_area_globals,source_area,majority.canonical,majority.polygons]
     algorithm=[pin for pin in plan['code'] if pin['path']==str(ROOT/'scripts/ellipsoidal_area.py')]
     assert len(algorithm)==1 and algorithm[0]['sha256']==plan['area_algorithm_sha256']=='4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12'
     # Match actual loaded mathematical function bodies to independently pinned
@@ -87,14 +92,16 @@ def run(plan,output,guard_only=False):
     expected={code.co_name:code for code in compiled.co_consts if hasattr(code,'co_code')}
     for function in [ellipsoidal_area.area,ellipsoidal_area.ring_area]:
         assert function.__code__==expected[function.__name__]
-    for function in [shape,run,ordinary,admitted_read,require_area_globals]:
+    for function in [shape,run,ordinary,admitted_read,require_area_globals,source_area,majority.canonical,majority.polygons]:
         filename=os.path.realpath(function.__code__.co_filename)
         pins=[pin for pin in allpins if pin['path']==filename];assert len(pins)==1
         source=admitted_read(pins[0],pins[0] in plan['runtime_files'])
         codes={code.co_name:code for code in compile(source,filename,'exec').co_consts if hasattr(code,'co_code')}
         assert function.__code__==codes[function.__name__],function.__name__
     captured_codes=[f.__code__ for f in functions]
-    native=shapely.lib.is_valid
+    native={name:getattr(shapely.lib,name) for name in ('is_valid','make_valid','unary_union','intersection')}
+    canonical_aliases={name:getattr(majority,name) for name in ('make_valid','union_all','Polygon','box','translate')}
+    canonical_functions=[majority.canonical,majority.polygons]
     operators={name:getattr(numpy,name) for name in ('sin','cos','arctanh','deg2rad','dot','asarray')}
     math_operators={name:getattr(math,name) for name in ('fsum','sin','cos','isfinite','sqrt')}
     quadrature=[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
@@ -103,11 +110,15 @@ def run(plan,output,guard_only=False):
         require_area_globals(ellipsoidal_area,numpy,math)
         assert functions[:3]==[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape]
         assert shape is shapely.geometry.shape
-        assert functions[3:]==[run,ordinary,admitted_read,require_area_globals]
+        assert functions[3:]==[run,ordinary,admitted_read,require_area_globals,source_area,majority.canonical,majority.polygons]
         assert all(getattr(numpy,name) is value for name,value in operators.items())
         assert all(getattr(math,name) is value for name,value in math_operators.items())
         assert all(f.__code__ is code for f,code in zip(functions,captured_codes))
-        assert shapely.lib.is_valid is native
+        assert all(getattr(shapely.lib,name) is value for name,value in native.items())
+        assert all(getattr(majority,name) is value for name,value in canonical_aliases.items())
+        assert canonical_functions==[majority.canonical,majority.polygons]
+        assert majority.make_valid is shapely.make_valid and majority.union_all is shapely.union_all
+        assert majority.math is math and majority.area is ellipsoidal_area.area
         assert quadrature==[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
         assert ellipsoidal_area.ring_area.__defaults__==(ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS)
     guard()
@@ -132,14 +143,14 @@ def run(plan,output,guard_only=False):
         values=[]
         for row in [old,new]:
             geometry=shape(row['geometry']);assert geometry.is_valid and not geometry.is_empty
-            value=ellipsoidal_area.area(geometry);assert math.isfinite(value) and value>0;values.append(value)
+            value=source_area(geometry);assert math.isfinite(value) and value>0;values.append(value)
         stored=[row for row in installed['records'] if row['id']==identity];assert len(stored)==1
         assert values[0]==stored[0]['source_wgs84_area_m2'],'Original source area must match installed exact recipe'
         records.append({'id':identity,'original_source_wgs84_area_m2':values[0],'current_source_wgs84_area_m2':values[1]})
     guard()
     for pin in allpins: admitted_read(pin,pin in plan['runtime_files'])
     loaded_guard()
-    result={'version':1,'kind':plan['kind'],'records':records,'area_method':'unchanged ellipsoidal_area.area',
+    result={'version':1,'kind':plan['kind'],'records':records,'area_method':'unchanged original audit recipe ellipsoidal_area.area(majority.canonical(shape(geometry)))',
         'area_algorithm_sha256':plan['area_algorithm_sha256'],'physical_approval':False,'activated':False}
     raw=(json.dumps(result,separators=(',',':'))+'\n').encode()
     execution=(json.dumps({'source_head':plan['source_head'],'started_at':started,'completed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),

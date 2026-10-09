@@ -41,5 +41,9 @@ try:
     math.sqrt=lambda value:2.0;ellipsoidal_area.E=2.0
     reject(lambda:module.require_area_globals(ellipsoidal_area,numpy,math))
     math.sqrt=original_sqrt;ellipsoidal_area.E=original_e
-    print({'positive':2,'negative':negatives,'source_body_opens_on_bad_destination':0,'source_areas_computed':0})
+    import majority
+    from shapely.geometry import Polygon
+    for geometry in (Polygon([(0,0),(1,0),(1,1),(0,1),(0,0)]),Polygon([(179,0),(-179,0),(-179,1),(179,1),(179,0)])):
+        assert module.source_area(geometry)==ellipsoidal_area.area(majority.canonical(geometry))
+    print({'positive':4,'negative':negatives,'source_body_opens_on_bad_destination':0,'source_areas_computed':0})
 finally:shutil.rmtree(root)
