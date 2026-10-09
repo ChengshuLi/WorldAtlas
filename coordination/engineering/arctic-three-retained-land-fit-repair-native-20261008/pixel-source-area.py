@@ -86,13 +86,13 @@ def run(plan,output,guard_only=False):
     compiled=compile(admitted_read(algorithm[0]),algorithm[0]['path'],'exec')
     expected={code.co_name:code for code in compiled.co_consts if hasattr(code,'co_code')}
     for function in [ellipsoidal_area.area,ellipsoidal_area.ring_area]:
-        assert marshal.dumps(function.__code__)==marshal.dumps(expected[function.__name__])
+        assert function.__code__==expected[function.__name__]
     for function in [shape,run,ordinary,admitted_read,require_area_globals]:
         filename=os.path.realpath(function.__code__.co_filename)
         pins=[pin for pin in allpins if pin['path']==filename];assert len(pins)==1
         source=admitted_read(pins[0],pins[0] in plan['runtime_files'])
         codes={code.co_name:code for code in compile(source,filename,'exec').co_consts if hasattr(code,'co_code')}
-        assert marshal.dumps(function.__code__)==marshal.dumps(codes[function.__name__])
+        assert function.__code__==codes[function.__name__],function.__name__
     signatures=[hashlib.sha256(marshal.dumps(f.__code__)).hexdigest() for f in functions]
     native=shapely.lib.is_valid
     operators={name:getattr(numpy,name) for name in ('sin','cos','arctanh','deg2rad','dot','asarray')}
