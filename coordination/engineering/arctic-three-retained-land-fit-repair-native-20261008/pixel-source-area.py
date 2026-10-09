@@ -36,14 +36,38 @@ def source_area(geometry):
     import ellipsoidal_area,majority
     return ellipsoidal_area.area(majority.canonical(geometry))
 
+def historical_source_area(identity, before, installed, historical, caches):
+    """Versioned original-cache evidence; this is not current recomputation."""
+    assert identity in TARGETS
+    old=[row for row in historical['features'] if row['id']==identity]
+    assert len(old)==1 and old[0]['geometry']==before['geometry']
+    stored=[row for row in installed['records'] if row['id']==identity]
+    assert len(stored)==1
+    assert [cache['footprints_sha256'] for cache in caches]==['2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286','711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338']
+    values=[]
+    for cache in caches:
+        assert cache['algorithms']==[
+            {'file':'scripts/majority.py','sha256':'59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405'},
+            {'file':'scripts/ellipsoidal_area.py','sha256':'4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12'}]
+        assert identity not in cache.get('incremental_reuse',{}).get('recomputed_ids',[])
+        value=cache['areas'][identity]
+        assert isinstance(value,(int,float)) and not isinstance(value,bool) and math.isfinite(value) and value>0
+        values.append(value)
+    assert len(values)==2 and values[0]==values[1]==stored[0]['source_wgs84_area_m2']
+    return values[0]
+
 def run(plan,output,guard_only=False):
     output=pathlib.Path(output)
     assert output.is_absolute() and '..' not in output.parts and output.is_relative_to(ROOT/'.cache')
     for parent in [output,*output.parents]: assert not parent.is_symlink()
     assert not output.exists()
-    assert plan['kind']=='complete-old-new-two-target-source-area'
+    assert plan['kind']=='historical-cache-original-and-current-two-target-source-area'
     assert plan['source_head']==os.environ['WORLDATLAS_SELECTED_NATIVE_HEAD']
     assert sys.version_info[:3]==(3,12,14) and os.path.realpath(sys.executable)==plan['executable']
+    assert len(plan['historical_caches'])==2
+    assert all(pin in plan['inputs'] for pin in [plan['original_context'],plan['current_rows'],plan['original_pixel'],plan['historical_geometry'],*plan['historical_caches']])
+    assert plan['historical_geometry']['commit']=='1451fb0788892ff9db6415e6ce6704bdd13d8f9a'
+    assert plan['historical_geometry']['relative']=='data/geography/part-29.json'
     allpins=[*plan['inputs'],*plan['code'],*plan['runtime_files']]
     assert len(allpins)<=512 and len({p['path'] for p in allpins})==len(allpins)
     cost=sum(p['bytes']+p.get('decoded_bytes',0) for p in allpins)+plan['output_reserve']+plan['metadata_bytes']
@@ -83,7 +107,7 @@ def run(plan,output,guard_only=False):
             if os.path.isfile(file) and not file.startswith(('/System/','/usr/lib/')):
                 assert file in allowed,'Unadmitted loaded native image: '+file
     loaded_guard()
-    functions=[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape,run,ordinary,admitted_read,require_area_globals,source_area,majority.canonical,majority.polygons]
+    functions=[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape,run,ordinary,admitted_read,require_area_globals,source_area,historical_source_area,majority.canonical,majority.polygons]
     algorithm=[pin for pin in plan['code'] if pin['path']==str(ROOT/'scripts/ellipsoidal_area.py')]
     assert len(algorithm)==1 and algorithm[0]['sha256']==plan['area_algorithm_sha256']=='4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12'
     # Match actual loaded mathematical function bodies to independently pinned
@@ -92,7 +116,7 @@ def run(plan,output,guard_only=False):
     expected={code.co_name:code for code in compiled.co_consts if hasattr(code,'co_code')}
     for function in [ellipsoidal_area.area,ellipsoidal_area.ring_area]:
         assert function.__code__==expected[function.__name__]
-    for function in [shape,run,ordinary,admitted_read,require_area_globals,source_area,majority.canonical,majority.polygons]:
+    for function in [shape,run,ordinary,admitted_read,require_area_globals,source_area,historical_source_area,majority.canonical,majority.polygons]:
         filename=os.path.realpath(function.__code__.co_filename)
         pins=[pin for pin in allpins if pin['path']==filename];assert len(pins)==1
         source=admitted_read(pins[0],pins[0] in plan['runtime_files'])
@@ -117,7 +141,7 @@ def run(plan,output,guard_only=False):
         require_area_globals(ellipsoidal_area,numpy,math)
         assert functions[:3]==[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape]
         assert shape is shapely.geometry.shape
-        assert functions[3:]==[run,ordinary,admitted_read,require_area_globals,source_area,majority.canonical,majority.polygons]
+        assert functions[3:]==[run,ordinary,admitted_read,require_area_globals,source_area,historical_source_area,majority.canonical,majority.polygons]
         assert all(getattr(numpy,name) is value for name,value in operators.items())
         assert all(getattr(math,name) is value for name,value in math_operators.items())
         assert all(f.__code__ is code for f,code in zip(functions,captured_codes))
@@ -149,6 +173,20 @@ def run(plan,output,guard_only=False):
     del original,decoded,wire
     after=json.loads(admitted_read(plan['current_rows']));assert len(after)==2 and {row['id'] for row in after}==set(TARGETS)
     installed=json.loads(admitted_read(plan['original_pixel']));assert len(installed['records'])==49625
+    historical_all=json.loads(admitted_read(plan['historical_geometry']))
+    assert historical_all['type']=='FeatureCollection'
+    assert len({row['id'] for row in historical_all['features']})==len(historical_all['features'])
+    historical={'features':[row for row in historical_all['features'] if row['id'] in TARGETS]}
+    assert len(historical['features'])==2
+    del historical_all
+    caches=[]
+    for cache_pin in plan['historical_caches']:
+        wire=admitted_read(cache_pin)
+        with gzip.GzipFile(fileobj=__import__('io').BytesIO(wire)) as stream:
+            decoded=stream.read(cache_pin['decoded_bytes']+1)
+            assert len(decoded)==cache_pin['decoded_bytes'] and not stream.read(1)
+        assert hashlib.sha256(decoded).hexdigest()==cache_pin['decoded_sha256']
+        caches.append(json.loads(decoded))
     records=[]
     for identity in TARGETS:
         old=next(row for row in before if row['id']==identity);new=next(row for row in after if row['id']==identity)
@@ -158,12 +196,18 @@ def run(plan,output,guard_only=False):
             geometry=shape(row['geometry']);assert geometry.is_valid and not geometry.is_empty
             value=source_area(geometry);assert math.isfinite(value) and value>0;values.append(value)
         stored=[row for row in installed['records'] if row['id']==identity];assert len(stored)==1
-        assert values[0]==stored[0]['source_wgs84_area_m2'],'Original source area must match installed exact recipe'
-        records.append({'id':identity,'original_source_wgs84_area_m2':values[0],'current_source_wgs84_area_m2':values[1]})
+        historical_value=historical_source_area(identity,old,installed,historical,caches)
+        records.append({'id':identity,'original_source_wgs84_area_m2':historical_value,
+            'current_source_wgs84_area_m2':values[1],'current_runtime_original_recomputation':values[0],
+            'current_runtime_original_recomputation_hex':values[0].hex(),
+            'historical_original_hex':float(historical_value).hex(),
+            'original_recomputation_matches_historical':values[0]==historical_value})
     guard()
     for pin in allpins: admitted_read(pin,pin in plan['runtime_files'])
     loaded_guard()
     result={'version':1,'kind':plan['kind'],'records':records,'area_method':'unchanged original audit recipe ellipsoidal_area.area(majority.canonical(shape(geometry)))',
+        'original_evidence':'two whole authenticated versioned historical caches and exact historical/current geometry lineage',
+        'historical_runtime':'not recorded; numerical discrepancy cause unknown; current-old recomputation is not qualified as historical reproduction',
         'area_algorithm_sha256':plan['area_algorithm_sha256'],'physical_approval':False,'activated':False}
     raw=(json.dumps(result,separators=(',',':'))+'\n').encode()
     execution=(json.dumps({'source_head':plan['source_head'],'started_at':started,'completed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),
