@@ -1,7 +1,8 @@
 """Bounded bridge to the unchanged complete nine-map replay and object writer.
 
 The caller authenticates a full native image and all cohort inputs before this
-consumer. This module changes acquisition and output admission only. Each cohort
+consumer. This module changes acquisition, temporary serialization lifetime and
+output admission only. Each cohort
 keeps all original query objects and unknowns. Campaign completion still requires
 the complete, duplicate-free 1,294-subject reconciliation and two full runs.
 """
@@ -11,6 +12,8 @@ import hashlib
 import io
 import json
 import re
+from types import FunctionType, SimpleNamespace
+import weakref
 from shapely.geometry.base import BaseGeometry
 
 
@@ -263,6 +266,68 @@ def bounded_replay_caches(comparison):
     binding()
     return (BoundedValidity(), OneEntry('shift'))
 
+def bounded_fresh_queries(trace, kernel, require):
+    """Share an identical immutable-source mapping inside literal query code.
+
+    At zero offset the literal source and shifted source are the same GEOS
+    object. Serializing both into separate coordinate lists needlessly doubles
+    their retained size. One weak-identity entry avoids that second graph; a
+    distinct geometry still runs the complete unchanged original serializer.
+    Original module globals are never changed, and the memo ends with the call.
+    """
+    original, serialize = trace.fresh_queries, kernel.ordinary_mapping
+    code, defaults, closure = original.__code__, original.__defaults__, original.__closure__
+    serialize_code, serialize_defaults = serialize.__code__, serialize.__defaults__
+    serialize_closure = serialize.__closure__
+    original_globals = dict(original.__globals__)
+    serialize_globals = dict(serialize.__globals__)
+
+    def binding():
+        require(trace.fresh_queries is original and original.__code__ is code and
+                original.__defaults__ == defaults and original.__closure__ is closure,
+                'Original fresh query callable changed')
+        require(kernel.ordinary_mapping is serialize and serialize.__code__ is serialize_code and
+                serialize.__defaults__ == serialize_defaults and
+                serialize.__closure__ is serialize_closure,
+                'Original complete mapping callable changed')
+        for function, expected in ((original, original_globals), (serialize, serialize_globals)):
+            require(set(function.__globals__) == set(expected) and
+                    all(function.__globals__[key] is value for key, value in expected.items()),
+                    'Original query or mapping globals changed')
+
+    def fresh_queries(*args, **kwargs):
+        binding()
+        last_ref, last_value = None, None
+
+        def mapping(geometry):
+            nonlocal last_ref, last_value
+            binding()
+            require(isinstance(geometry, BaseGeometry), 'Original query geometry type differs')
+            if last_ref is not None and last_ref() is geometry:
+                return last_value
+            # Evict before allocating the next complete coordinate graph.
+            last_ref, last_value = None, None
+            value = serialize(geometry)
+            binding()
+            last_ref, last_value = weakref.ref(geometry), value
+            return value
+
+        proxy = SimpleNamespace(**vars(kernel))
+        proxy.ordinary_mapping = mapping
+        globals_copy = dict(original_globals)
+        globals_copy['kernel'] = proxy
+        literal = FunctionType(code, globals_copy, original.__name__, defaults, closure)
+        try:
+            answer = literal(*args, **kwargs)
+            binding()
+            return answer
+        finally:
+            last_ref, last_value = None, None
+
+    binding()
+    return fresh_queries
+
+
 def replay(phase, operands, records, native_aliases, native_proof, *, acquisition,
            literal_products, objects_module, replay_module, scientific_modules,
            query_bind, project_guard):
@@ -280,8 +345,14 @@ def replay(phase, operands, records, native_aliases, native_proof, *, acquisitio
         for query in row['physical']['query_relations']:
             acquisition.require(query['source_id'] in records, 'Missing whole native query operand')
             query_bind(query, records[query['source_id']][0])
+    # The literal replay consumes this local trace proxy. All original modules,
+    # methods and their guarded globals remain intact for project_guard().
+    trace = SimpleNamespace(**vars(scientific_modules['trace']))
+    trace.fresh_queries = bounded_fresh_queries(scientific_modules['trace'],
+                                               scientific_modules['kernel'], acquisition.require)
+    execution_modules = dict(scientific_modules, trace=trace)
     loaded = dict(state=dict(candidates=candidates, routing=routing), physical=physical,
-                  diagnoses=diagnoses, modules=scientific_modules)
+                  diagnoses=diagnoses, modules=execution_modules)
     products = BudgetedProducts(phase, literal_products, acquisition)
     objects = bounded_objects(objects_module, products, loaded, records, native_aliases)
     counts, queries = Counter(), 0
