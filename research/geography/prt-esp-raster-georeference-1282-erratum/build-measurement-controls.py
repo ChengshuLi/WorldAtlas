@@ -10,6 +10,10 @@ from pathlib import Path
 OWN = Path(__file__).resolve().parent
 METHOD = "native-geotiff-coverage-and-pixel-controls"
 RUNS = ("run-1", "run-2")
+CONTROL_PATHS = (
+    OWN / "controls/native-footprint-positive.json",
+    OWN / "controls/native-footprint-negative.json",
+)
 
 
 def digest(data: bytes) -> str:
@@ -25,21 +29,29 @@ def load_run(name: str) -> tuple[bytes, dict]:
     return data, document
 
 
-def write_admitted(rows: list[tuple[Path, dict]]) -> None:
-    """Admit every result and its aggregate bytes before exclusive creation."""
-    encoded = [(path, (json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
-               for path, value in rows]
-    assert len({path for path, _ in encoded}) == len(encoded)
-    assert sum(len(data) for _, data in encoded) <= 2 * 1024 * 1024
+def admit_destinations(paths: tuple[Path, ...]) -> None:
+    """Reserve the complete bounded destination set before reading inputs."""
+    assert len(set(paths)) == len(paths)
+    assert sum(1024 * 1024 for _ in paths) <= 2 * 1024 * 1024
     directory = OWN / "controls"
     assert directory.parent.resolve() == OWN.resolve()
     assert not directory.is_symlink()
     if os.path.lexists(directory):
         assert directory.is_dir()
-    for path, data in encoded:
+    for path in paths:
         assert path.parent == directory and OWN in path.parent.resolve().parents
-        assert len(data) <= 1024 * 1024
         assert not os.path.lexists(path), f"Refuse existing output: {path}"
+
+
+def write_admitted(rows: list[tuple[Path, dict]]) -> None:
+    """Recheck admitted targets and create them exclusively without following links."""
+    encoded = [(path, (json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+               for path, value in rows]
+    paths = tuple(path for path, _ in encoded)
+    assert sum(len(data) for _, data in encoded) <= 2 * 1024 * 1024
+    assert all(len(data) <= 1024 * 1024 for _, data in encoded)
+    admit_destinations(paths)
+    directory = OWN / "controls"
     if not directory.exists():
         directory.mkdir(mode=0o755)
 
@@ -68,6 +80,9 @@ def write_admitted(rows: list[tuple[Path, dict]]) -> None:
 
 
 def main() -> None:
+    # The complete output set and its upper-bound reserve are checked before any
+    # source JSON is read or any result is computed. Existing targets stop early.
+    admit_destinations(CONTROL_PATHS)
     runs = [load_run(name) for name in RUNS]
     hashes = [digest(raw) for raw, _ in runs]
     assert hashes[0] == hashes[1], "The two original audit runs must remain byte-identical"
@@ -126,10 +141,7 @@ def main() -> None:
         "rejected_adversarial_fixtures": adverse,
         "interpretation": "Every shifted, wrong-CRS, flipped-row, out-of-coverage, and refreshed-hash false-location control was rejected.",
     }
-    write_admitted([
-        (OWN / "controls/native-footprint-positive.json", positive),
-        (OWN / "controls/native-footprint-negative.json", negative),
-    ])
+    write_admitted(list(zip(CONTROL_PATHS, (positive, negative))))
     print(json.dumps({"status": "passed", "runs": dict(zip(RUNS, hashes)), "controls": [
         "controls/native-footprint-positive.json", "controls/native-footprint-negative.json"]}, indent=2))
 
