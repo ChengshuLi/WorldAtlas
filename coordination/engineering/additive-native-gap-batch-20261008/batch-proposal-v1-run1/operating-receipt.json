@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "execution_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb",
+  "request_sha256": "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72",
+  "destination": ".cache/native-grid-candidates/alaska13-batch-v1-run1",
+  "qualified": true,
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "owned_processes_remaining": [],
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/additive-gap-repair.mjs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work",
+    "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb",
+    "coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run1.json",
+    "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72",
+    ".cache/native-grid-candidates/alaska13-batch-v1-run1"
+  ],
+  "owned_root_identity": {
+    "pid": 78550,
+    "ppid": 78540,
+    "pgid": 78550,
+    "rss_bytes": 1032192,
+    "started": "Thu Oct 8 18:47:15 2026"
+  },
+  "elapsed_seconds": 6.035,
+  "rss_cap_bytes": 536870912,
+  "wall_deadline_seconds": 600,
+  "peak_sampled_group_rss_bytes": 339935232,
+  "time_lifetime_max_rss_bytes": 365756416,
+  "peak_supervisor_rss_bytes": 54558720,
+  "conservative_lifetime_and_supervisor_bound_bytes": 420315136,
+  "termination_events": [],
+  "monitoring_limits": "Complete isolated group samples plus time child lifetime and conservative separate supervisor peak; not kernel enforcement.",
+  "supervisor": {
+    "path": "coordination/engineering/additive-native-gap-batch-20261008/supervise.mjs",
+    "bytes": 6321,
+    "sha256": "d552b4d16a9aa4cba0edcc527be55eff481015fbd84cb1abed7bc7bd136c706a",
+    "runtime_shared_with_child": true
+  }
+}

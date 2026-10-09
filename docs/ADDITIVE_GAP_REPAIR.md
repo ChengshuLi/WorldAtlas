@@ -173,3 +173,27 @@ first; final add031 activation requires rebinding to that actual selected bank
 and reading its 13 complete current owner rows again. No website deployment,
 new source authority approval, historical affiliation transfer or full global
 repair claim is implied by this proposal.
+
+## Shared multi-component batch continuation
+
+The second #1523 packet is
+`coordination/engineering/additive-native-gap-batch-20261008/`. The existing
+source-premise entry dispatches a narrowly typed retained ADM2 Counties 2018
+profile. The batch proposal entry consumes the complete frozen case roster and
+source decisions in one invocation, aggregates all primitives per stable owner,
+and combines one sparse ledger/patch. Cross-owner native or continuous conflicts
+reject all involved candidates symmetrically; same-owner shared cells count once.
+Every case gets an assigned, zero-cell, source-exception or native-conflict row.
+Zero native cells never count as a repaired pixel even when geometry is retained.
+
+The initial actual thirteen-case batch completed twice at one frozen head:
+eleven source-compatible components contribute 134 unowned cells across six
+owners; two original parent failures remain exceptions. No assigned owner is
+removed or transferred. Complete base words stay literal; resultant virtual row
+intervals carry the overlay. Actual bounded draw/pick checks conserve all existing
+owners across the 125 observed rows. Original source authority/date/shoreline and
+physical unknowns remain. These proposals are unactivated and require the agreed
+N2 successor selection before any current-bank rebind and release activation.
+See the packet's original requests, full source/native inputs, repeated whole
+outputs, operating receipts and executed-code custody; earlier checkpoint limits
+above retain their original vintage. No new worldwide audit was performed.

@@ -1,0 +1,1878 @@
+{
+  "version": 1,
+  "issue": 1523,
+  "lane": "engineering",
+  "worker_id": "01a11935-1ccd-7fa3-a01f-563ff29045ee",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "f2b129423c04d32b4b47ea36abae198651c50dae",
+    "files": [
+      {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+        "bytes": 166310,
+        "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "bytes": 94693,
+        "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+        "uncompressed_bytes": 320200,
+        "uncompressed_sha256": "897ca97928956c190fb4b1a25f0364333528b8d789f5e9f60f345f9299803e3e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+        "bytes": 13848,
+        "sha256": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "merged_alaska_source_only_delivery": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "accepted1295_original_pointset_packet": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+      "accepted1295_offline_delivery": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28"
+    },
+    "pin_files": {
+      "merged_alaska_source_only_delivery": {
+        "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "accepted1295_original_pointset_packet": {
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4"
+      },
+      "accepted1295_offline_delivery": {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-county-source-and-native-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1508",
+      "role": "Existing immutable source-relative premise and ownership custody; not contemporary land/water authority",
+      "vintage": "Original Alaska source measurement ffa32416; actual source e59 and batch bf223 executing vintages; independently selected immutablev8 native predecessor",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source reuse/fitness caveats remain; no new rights grant or physical approval"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Full original immutable source/record/native/context bodies remain necessary; exact whole source input/code/runtime and original Merkle/request custody retained. Actual completed stage files and operating evidence are retained whole in this packet.",
+      "limit": "Unactivated combined proposal only. Retained ADM2 Counties represented2018 and GSHHG source-relative fitness/date/water/admin/historical authority remain unapproved. Two parent source exceptions retained. Actual bounded125 observed-row draw/pick proof is not a full-world native bank upload or activation. N2 successor selection/current-bank rebind and normal integration remain required."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/README.md",
+      "bytes": 5927,
+      "sha256": "62127cb492beca99695ac38786f033675b0e3a69cf01f975b8fdfdf4319fb802",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/base-native-manifest.json",
+      "bytes": 251732,
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "bytes": 43144,
+      "sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/features.json",
+      "bytes": 84814,
+      "sha256": "8ef197b38090c50ef3981aad85d5b1d2a9589a84ccac717339d8e737b4b906cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/inventory.jsonl.gz",
+      "bytes": 888,
+      "sha256": "3d721de158597c787d4d64d48c9058eed5348722afbb90df78903958ca316ba1",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3973,
+      "uncompressed_sha256": "92d7bff340a02b54c6c7e20676823a5de4dcc01a309416243e57716105973b55"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/ledger-batch.json",
+      "bytes": 157584,
+      "sha256": "d5eda4b890a45a61d8bcf916f8cc07c01515af33812612dab63bb885af1a6c74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-receipt.json",
+      "bytes": 1857,
+      "sha256": "ee0b3d23727e8cb98e176f0d3967ac9a10acaead88d7f2ce6eeca13f0470cf44",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-samples.json",
+      "bytes": 14266,
+      "sha256": "c276824d14ec9b0e498aafd70ce602853af3073e93e5edceec68f1bddc0f9e87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-stderr.txt",
+      "bytes": 777,
+      "sha256": "f99bc9aa953b66fb9dce2e785fb3842ac34851649ac985dbc68349e75236b819",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-stdout.txt",
+      "bytes": 1451,
+      "sha256": "ef7aedcac9eb83fe58105915778db2449cffe85ad8c86ebd5c24fff7897234d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owner-window.json",
+      "bytes": 538270,
+      "sha256": "9b74b8761827b31640cd1939f17c8e2c917e81f3ea21c7079f387fef40a52e4e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/patch-batch.json",
+      "bytes": 3457,
+      "sha256": "6b2bbe36158e56814e0b6d82083b105a5788cf0a89dc2a36f6e56ff2ecbb785b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/publication.json",
+      "bytes": 1451,
+      "sha256": "167f77655bc21c5ee4ffc2de34876d243d8e30b4081808252879195fe4a49ba8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/release-envelope.json",
+      "bytes": 1665,
+      "sha256": "365436d7118ca45f2475cda57d537ce558f6257629f1cba7b6a33c690e789b37",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/virtual-owner-window.json",
+      "bytes": 350938,
+      "sha256": "627cad856d39826606a531563cbe3b0a6c77e1969700d6c6e3a0585ee56e52a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/base-native-manifest.json",
+      "bytes": 251732,
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/facts.json",
+      "bytes": 43144,
+      "sha256": "e38e639d40da440f64278382729dc420e365a5bfc959862f7a4faa4079437331",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/features.json",
+      "bytes": 84814,
+      "sha256": "8ef197b38090c50ef3981aad85d5b1d2a9589a84ccac717339d8e737b4b906cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/inventory.jsonl.gz",
+      "bytes": 888,
+      "sha256": "3d721de158597c787d4d64d48c9058eed5348722afbb90df78903958ca316ba1",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3973,
+      "uncompressed_sha256": "92d7bff340a02b54c6c7e20676823a5de4dcc01a309416243e57716105973b55"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/ledger-batch.json",
+      "bytes": 157584,
+      "sha256": "d5eda4b890a45a61d8bcf916f8cc07c01515af33812612dab63bb885af1a6c74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-receipt.json",
+      "bytes": 1857,
+      "sha256": "977973e73d6e1b0d5da92e8b20d4f895cc6da01907e6524955b78b51cb58dcf3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-samples.json",
+      "bytes": 13600,
+      "sha256": "3133e14eb418eed4146e4fed7cc430872ad6d0ddaa7a0fc73488587e663b7057",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-stderr.txt",
+      "bytes": 777,
+      "sha256": "70366f1b088ca263cde88d8cb4c7cf1f204b91b4709777148fedcc474d85a399",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-stdout.txt",
+      "bytes": 1451,
+      "sha256": "30ce7b03f2c2d7ab59540745fdaab429ea0f2ce001e6a4766993319b7bb34612",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/owner-window.json",
+      "bytes": 538270,
+      "sha256": "9b74b8761827b31640cd1939f17c8e2c917e81f3ea21c7079f387fef40a52e4e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/patch-batch.json",
+      "bytes": 3457,
+      "sha256": "6b2bbe36158e56814e0b6d82083b105a5788cf0a89dc2a36f6e56ff2ecbb785b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/publication.json",
+      "bytes": 1451,
+      "sha256": "3040c26f89b3060cbeaff609df9c9a75971f96bed8e2b00969a4e4f89b8847e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/release-envelope.json",
+      "bytes": 1665,
+      "sha256": "365436d7118ca45f2475cda57d537ce558f6257629f1cba7b6a33c690e789b37",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/virtual-owner-window.json",
+      "bytes": 350938,
+      "sha256": "627cad856d39826606a531563cbe3b0a6c77e1969700d6c6e3a0585ee56e52a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run1.json",
+      "bytes": 26159,
+      "sha256": "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run2.json",
+      "bytes": 26159,
+      "sha256": "1a6bb0f5001b3c43ac84517300efe699adc742bcda71f3e062585fe2fe0712cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/bounded-mechanism-control.json",
+      "bytes": 4134,
+      "sha256": "d368dcda1a519f87e2044d6fa1326353cb6389a368c659a56261f62d7ae8786e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/check-execution-custody.mjs",
+      "bytes": 2827,
+      "sha256": "53092f37bce6e0255f0f4183033233969cd14adfcf9c8c76f580c18f7a449766",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/check-native-batch.mjs",
+      "bytes": 4865,
+      "sha256": "e523ea8e895b60586ce869639b3368d75e6d45767af349e0685a926bee151adb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/assistance-manifest.json",
+      "bytes": 7220,
+      "sha256": "39b882bcc61be7a9c219f8b76b0a92de152295f2ad40daa2f8de013ab5ac0233",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/bounds.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/complete-owner-rows.json",
+      "bytes": 670359,
+      "sha256": "7a7685e1dc4679d8629a6db0e0ae8dd57514210e94fde6eeee70f33b8e34b7a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-index.json",
+      "bytes": 9411,
+      "sha256": "2a1ba93fcdfc81da3247e6abacb49a5df6284d6c1ffd2b2a73f4e84c3b760716",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-owner-proof.json",
+      "bytes": 7993,
+      "sha256": "2201b6ef13903232f1a0f33267773b0bd92fd9b33a237af3eccb1c5821848099",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-proof.py",
+      "bytes": 5274,
+      "sha256": "c4d824b0d8a8e3f9869f0ffe00ab8277585203590ebe22bb4d772e01c20615d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-transport-index.json",
+      "bytes": 19250,
+      "sha256": "3a5c1023ec6ed0df2c8393bb0398f9b9452e1e6e3d6de03e794bccb5825f1d15",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-43500.json.gz",
+      "bytes": 479228,
+      "sha256": "8c0bf41e765ad3c291bff0735fd89e83c378cdfcb59e1398156970cc24400b1a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1618234,
+      "uncompressed_sha256": "19f0792f121b824f444d096c6269acfafb13cae9d35ae91aa9f7de1680e955ed"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-45000.json.gz",
+      "bytes": 376329,
+      "sha256": "895ea07b762e61431128cc62325569e29c5aa227bfc5132d97cd551c75f537b4",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1291015,
+      "uncompressed_sha256": "b6311abf37f44fee86e7c4dcfb73651e6a2787d393c62f74f7404fc401e626ff"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-46500.json.gz",
+      "bytes": 444860,
+      "sha256": "8da9ad7e913b25cf2517540e3762b2e129595a897673c87788ba114c14308569",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1491917,
+      "uncompressed_sha256": "3964508432d1d22766ef3ecadb683830f39b6f788e60925a00f231acaee459bb"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/extract.py",
+      "bytes": 5003,
+      "sha256": "9f79384d14b645d53fd6b450a76d31158b6ead05ce49ba06b28046ef882052a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/official-reader-receipt.json",
+      "bytes": 175,
+      "sha256": "4c37c1538675bd37712acab2b13c2dd7f645cd8322342767012cf5ec6456a014",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/official-reader.mjs",
+      "bytes": 1650,
+      "sha256": "f90b0b247a4493ae82b4d4fbb3c520094abc9786169e180eefeeed2a60eb0d79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-44705.json",
+      "bytes": 12701,
+      "sha256": "850cc6dabdf72ea78a74a2dec851dc1cd9af2c786851765d6d88cad71aef265d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-45711.json",
+      "bytes": 15811,
+      "sha256": "1e6510a1a5926ffd3f85b9a2b928c102fa71ca9746927cf4921ad66e6a75c8bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46045.json",
+      "bytes": 12335,
+      "sha256": "72ad0a5bcb427672dd285433bd82641ec81479a2396523e9bc83afb8e939df40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46121.json",
+      "bytes": 5334,
+      "sha256": "23fdf9a7a609b526e5f50318ea62103e53e0cef507996635f43ab13ba084e778",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46395.json",
+      "bytes": 11014,
+      "sha256": "bbee70d3e0623c4b2cbc09c35b59274d868ab4ebb259259f50bda67366a7ed11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46957.json",
+      "bytes": 14725,
+      "sha256": "9b1133a5c0a7adcfa8623c9fc5b71f8a5988106e24efd5eb913113c697b68cda",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-47017.json",
+      "bytes": 10527,
+      "sha256": "40d888260d558a734e6718a9a89d983cf0d82b3099a77c39239bd73f915b8d99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/part-001.bin.gz",
+      "bytes": 16073125,
+      "sha256": "c2386b2c41f5169e06a43c54302395bd22f961fd0b3bdfe16ad5d92e0acb93b2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16068270,
+      "uncompressed_sha256": "075c0216ace96a82d5cc427c1bd0cc2f2e4fac88ba7bb79a3dae28c783853be1"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/pixel-grid.js",
+      "bytes": 3699,
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/pixel-ownership.js",
+      "bytes": 6134,
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/receipt.json",
+      "bytes": 19326,
+      "sha256": "c782f6eda87cac2df12c3965d8b4b6b0db6c9801e1c4ba8c37515481dc623fbb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/rows-0.bin.gz",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2097328,
+      "uncompressed_sha256": "2b8878f53c7389e0ca1c675023a0ff1a0172fb2d3ac37d3d731d89b303aa045c"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-10485760.bin.gz",
+      "bytes": 855339,
+      "sha256": "41573aead112141c0dd904c33f1b9c47074d93b7c8dd68da0184bf6f297c80ca",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "f903f7139d9f4fcd2c695cd3db49799dd62d4239c512f03703590d251f0661d0"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-11534336.bin.gz",
+      "bytes": 874119,
+      "sha256": "c8b834faad9825db2b50b579cfb1e49dbd31698adfb5dfc7dd6a1eae015d536a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "307c34bc64d87718b26730331f78c8273dfab44e95509a79030b665a03a46e7e"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-12582912.bin.gz",
+      "bytes": 878294,
+      "sha256": "ad248445d13714a5aeb9f4dd371b330d1b6443293f1e0f55a2767d66294a1717",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "8ab6a09c06ea043da15f501050bb3b6c49b3f44e09ec7ec9e25edf47ae271e1e"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-6291456.bin.gz",
+      "bytes": 851783,
+      "sha256": "eca1667dfc637570231ba2a1174e8cc52f34e599a35259915145ebe1045e4663",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "508743b2afd7612a1adc6c5ee047521ef81568e41c0b7cdad221129362e26b69"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-7340032.bin.gz",
+      "bytes": 847665,
+      "sha256": "237e70f2c59d54b80c55e274338a2e1b8e0cf0d9d9356bf861f14a362594cbc7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "b0bd2f0f36f0c2facb88e4dd99498cd915d7c3cfea6eec83737dd7dcee8e4c74"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-8388608.bin.gz",
+      "bytes": 851524,
+      "sha256": "564ac30f9675984701481cf8e6277c43252ed1c02f16245b87536fa64befc221",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "5b00009e3450f33b40249b37ff43344339d1da3c5ef1653b3810362d06cd5fb7"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-9437184.bin.gz",
+      "bytes": 850915,
+      "sha256": "573f2e8baaf7364810038e67f02c883c4d8661a521d015fcc4b8d674be3d4856",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "22e1548196acc2ed2629d24331aa181677fd07b68fd18986608c0abce6f0b0b7"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/execution-custody-readback.json",
+      "bytes": 123,
+      "sha256": "bf9e44105ea509630175ac7208e42cb02d99717a0389721dd704794efa60e452",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-focused-controls.json",
+      "bytes": 739,
+      "sha256": "87343eeff1a582e77eb0641b16607734c8649394f47b97b61fc1ad85a123a660",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-focused-tests.log",
+      "bytes": 3640,
+      "sha256": "2241860a66e7dc7a48ace1f2342bedfc28b31a5704bd585feec7eedc1c37e3ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-negative-control.json",
+      "bytes": 1227,
+      "sha256": "e34c5d5c0a6374c2b76c40c368e7cf1f3b5693607b405a1bb8846672c1c9d9c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-positive-control.json",
+      "bytes": 1227,
+      "sha256": "43f68a3bedabbd0da2205ae8efe38794304eda7f7051a6b7f8540ace09d26508",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-reproducibility.json",
+      "bytes": 976,
+      "sha256": "c900a7b85c58ad24b7500b93abfbad335b9fdac7302e9c65da65e48a7cea2b76",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/batch-request-v1-run1.json",
+      "bytes": 26159,
+      "sha256": "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/batch-request-v1-run2.json",
+      "bytes": 26159,
+      "sha256": "1a6bb0f5001b3c43ac84517300efe699adc742bcda71f3e062585fe2fe0712cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/059062d321204290561bc757873848efab818f6d",
+      "bytes": 1452,
+      "sha256": "080fb082fe5bf6dea79ffe6dab940334237dcde1a840282eed41c10bdb9a1a89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/061fa05406f3058fcd186dee7f83897a2d0552a8",
+      "bytes": 1452,
+      "sha256": "ba9dce718e73f2335b5a7206fbe5b5ffab39031c7eb015ff2c7d493303fea5be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/0c73282307526101812f25e3fabb5fca68d8acf0",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/2028448b752955e02e3c535ef36593214557c357",
+      "bytes": 26159,
+      "sha256": "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/21327de015b1b4d6f68235a325e385922d2cee10",
+      "bytes": 95874,
+      "sha256": "5bda202160724a6128cc891d9770b799c205c9fe99b9d2d4c8794b46b00e610c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/23e1dcc6f4ff44c2ee2d101af33aa44a85460ecd",
+      "bytes": 72,
+      "sha256": "c30ea5f8cae2179fc1896bb1817fc7db337497a81d6a18d72dba17c481d67804",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/35051fc1e9bc4d0595bb28f76f952b6349683bb5",
+      "bytes": 17817,
+      "sha256": "02dd7388192b0da2d4ce8a4f49d903f6aff44e17498552694da7e91be946c2be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/3703dbca77a991f5771d0dd98f97ecce109fe4e6",
+      "bytes": 10573,
+      "sha256": "689e58437e7ac1364f2e897626b0c2af1bf255f271715a0d2947341626c66d68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/3d820f04ba33fc7d1054442a473eeae1ca0cea47",
+      "bytes": 647,
+      "sha256": "b0b8ab0f04e80044826c79c8c4527906154a94fc937130cf47670381e4a7cde3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/3f8980f573af0a9fb48b763ed875026f0ce99199",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/500fbdf1e5a703aeb34dc539f8e2ff756daa6d14",
+      "bytes": 5061,
+      "sha256": "c79bb234817875a06db935e6f8c99ea1a81a06dbc5bf054f4fd585699bbdaaa9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/5118cc760e61c1081a4cedf3f3f21df4f33fe6aa",
+      "bytes": 15703,
+      "sha256": "1c63e0e7a0f5e33173a6c68e7002a09164a05a35bdd404ef7a46afa38407dedd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/54cf2745c10a61436aced33f4190b775aef7e93e",
+      "bytes": 5908,
+      "sha256": "2e6c1e4a4d7069794a0c007af1f12d412e1d7a74668d5ff498346805d0aeeab7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/54cfd5f745a8608ab5ea5cdb758929a806512e0f",
+      "bytes": 4710,
+      "sha256": "3ecc68e62f1b75f9b4a9140ca84dd3f8de6093546723d0632406b34c93642b5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/5f3bca9d47e73715637ba29113c8fdc613fc0d70",
+      "bytes": 2596,
+      "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/68fa9e4b004126fd9b2be952055c6d2f8cce991f",
+      "bytes": 894,
+      "sha256": "78f04c4a2a1250aae03be43e95d01d41adfdd6685221ded98075b81895d7e266",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/6be387f2c2a5f349d52957cdd476bbf87780b8c1",
+      "bytes": 1362,
+      "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/760000bff46acf8f7dd988fe167c509a2cc16544",
+      "bytes": 7767,
+      "sha256": "71cb8eec99e12db668d6beff156ab4003bcd07ee1ace157fe4286890f429b3f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/78fcf8ab2ef8c7b67652e18a43654c6b4dcdd094",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/7d4ddf6ffe096699431e731783e8902ccc114ace",
+      "bytes": 26535,
+      "sha256": "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/82dfd09d6d1b89aa0e155c0557299fd70427657f",
+      "bytes": 69925,
+      "sha256": "59553c3dd787925f9aef3e6654c060acbb43b33d4b0463ebd992c93f84516f41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/839abe54e65a98d7be47f7e6d8d58eda0b5a7abe",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/8556e1f4ce450bcd2d482e8785dabaecfbdc0f3c",
+      "bytes": 15703,
+      "sha256": "605c325910e0d3fbeef077fb05b66ee7175fabdb660149534273525c3c4b55cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/86f70e03855340a83d3abfadf4943a08088842d1",
+      "bytes": 30650,
+      "sha256": "aca206b6c253e3bc7291bd27ce932747c279a09832b285ddb875e806703b05ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/89612d7cd22a887c5657bc140cba33f10fbb63ae",
+      "bytes": 246591,
+      "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/8dc2d80e110d32d796d3468beefa435ae126a98a",
+      "bytes": 6321,
+      "sha256": "d552b4d16a9aa4cba0edcc527be55eff481015fbd84cb1abed7bc7bd136c706a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/97e66b8d924d5022b80cb63d38ab5c713ca760fd",
+      "bytes": 15652,
+      "sha256": "890b43fadb6f37a63b5af14319299a1dd71f5943eba73888f9ac2c3680f1bfc6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/9b71559fef4a5394bb1e1e534479bdbd751c027b",
+      "bytes": 112,
+      "sha256": "3e24900390b24ca998489b03d9b07148cb00ae29027b018416c17c0879c6055d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/9c9487bde05494a53b64ec3d287d1361d7243f08",
+      "bytes": 1452,
+      "sha256": "a7cd3ad8db56653b338402e6042db0bc4b95c8f3660e29a7619fe3aff3ca6577",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a0c412e3ad0216312913a24dc09b3d11a314ce1f",
+      "bytes": 2552,
+      "sha256": "2ed8e7b3f63997ae13d1398497ad05cb0defb871abf1d531604fd29b2eeaca47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a4c6f558efe3f2720f2916624f2d7d4175f492a1",
+      "bytes": 247,
+      "sha256": "518d84ccf8eed773690866f6acaa63010889fceb407fdec37ab3b4cc51fb77c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a4f8432ac213c5d489db07249d403f7ef91c1296",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a6d60162cd4ee51bb90bed913110b8fe2b323521",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a7cff4940e085a588d415e66784a3f8fa23feae9",
+      "bytes": 13816,
+      "sha256": "d619a0413f750939732fa2be969f29d74e18060c1eb10f7e5e42e9a6889e6da2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a858fd5fc2f0405f12341171d4a64b0aa5aff350",
+      "bytes": 6371,
+      "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a8c561484725a3b3c39973cc60b638244c956464",
+      "bytes": 7177,
+      "sha256": "9903d31a80a946936f575733e079c083da1ffe3734615aeec5536725a5c0aa7f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/bc5619798e88b1d2abd4bd11e3fba3b7dd18cf12",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb",
+      "bytes": 284,
+      "sha256": "27829883240d3b5e0447b91db0d4be201b077900c875d18ac9fde52499266267",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/bf45916269e5cc73d9a2c1e5494ef45456e9583a",
+      "bytes": 4160,
+      "sha256": "d8b235d2970aca2defc55fb7f39ba60d57d5c46a2cfaeaaba50f9cc40a378312",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/c5cbd906c999c7a13095846d9cbab16bddcff910",
+      "bytes": 26159,
+      "sha256": "1a6bb0f5001b3c43ac84517300efe699adc742bcda71f3e062585fe2fe0712cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/cafd0a7efa72b682a46ece67a654d191b029ef9c",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/cc484fcebcd22a44089d96deecefb5fc83600f1a",
+      "bytes": 389,
+      "sha256": "41e2749172f146927f03b19aa1d6429754a8859b61861297333423bf2c133bed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/de0dab2ce5647c718fbe7beeb4062908b0046094",
+      "bytes": 10573,
+      "sha256": "03483fe439793656342bb1ab15b24f77d0fafb5039ded476dbbf00ff6fe050b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/e59c03b3f025c220206bfbcaa53d65933de5cdea",
+      "bytes": 259,
+      "sha256": "964bfdbf01e0e34133de87560bf51e5f965577ce26552176a5cd4780e6c3b6f7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/ed85fe9ad89284c93bc63b1630d09161d05638e5",
+      "bytes": 6241,
+      "sha256": "efdb3446ab35af320060403337c0ddb16b921fe04f027dbc81850f9c5d4a84f0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/f346966fd4f21909db97407140bf1287ad2d12b0",
+      "bytes": 93926,
+      "sha256": "64a05191c5ab32a0c930591f170552feab95a5836f0b185b692d5701a1b8f521",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/f4029c16f7ccfbca822978e7b2408695f77df4b2",
+      "bytes": 889,
+      "sha256": "4d2d0de07065a0b5bbd7722bf3181fed55891eb8f46dfef62762a24fe3baaf65",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/f6dc54852a7dda788c718287c8a3bc497691c893",
+      "bytes": 12014,
+      "sha256": "070d0682c6726cf8d75592d659cf882c48ca1dce9ff9f33d6c541daa09a3420f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/fb6e620d129019616910b50595747948ab03c382",
+      "bytes": 3976,
+      "sha256": "50be53c56ba1eba2f63d7fea1a11c5dc1c7e99c2c2a7899827276f3edaa4879e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/fd4b1aa9a8c628e170d3ad88d45988491d0c1acb",
+      "bytes": 112,
+      "sha256": "0413449a3d4a58f08da0714c6311e9e670b640fa40ec66ccc65ac21ee4f6a7bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 2988,
+      "sha256": "be2559dcaef67d97b5e38bdba1b6d5c6b2b3c7a94bc2329aab9643f4fc7c6839",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/receipt-v2.json",
+      "bytes": 40839,
+      "sha256": "a75f4631e8f48285473bd4558d1804bf9f6cd87eddaa462a1cad41cb04fce308",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/receipt.json",
+      "bytes": 39520,
+      "sha256": "f72e3a9d325774debc541b5c64254ded59c169273be37ef95ebcda4ba1a7be06",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/source-premises-request-v1.json",
+      "bytes": 26535,
+      "sha256": "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/owned_child_termination.py",
+      "bytes": 2596,
+      "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/prepare-batch-requests.mjs",
+      "bytes": 5114,
+      "sha256": "b8312ce26b0062d8a5be9dc4b198211da2c955dfe0c31387bdb4ac02bc71a5b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/prepare-source-request.mjs",
+      "bytes": 4727,
+      "sha256": "49f1f7af179a205da7192e285d847b792a75fe085117e2c211f4152e4983db5c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
+      "bytes": 46507,
+      "sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/inventory.jsonl.gz",
+      "bytes": 3750,
+      "sha256": "11f606a55edc925d1d2384a63c3767d31e2c14efa0673d4a8fbf6b04b83942a9",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 23635,
+      "uncompressed_sha256": "87ffcc97dfa2ab3881d03cd3563653c4af8f7062f5d2cf43a22fc237b711f00c"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-receipt.json",
+      "bytes": 2048,
+      "sha256": "872ef3fe69a01ca7165487e1fc82c9ff150253442de6713d1d893a125218a725",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-samples.json",
+      "bytes": 14918,
+      "sha256": "b8a607d5e0f710c5b24c846390431faf083145d496ae5b78a83f7ca84011f3fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-stderr.txt",
+      "bytes": 777,
+      "sha256": "0b8c5343157841b6639d3338c620f1f97f42848c456ec6e49a2aab222441d100",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-stdout.txt",
+      "bytes": 349,
+      "sha256": "9ade6bd00a4ab533a44302cec47d400c6cdd733bff408827573e88f3de742d0f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/publication.json",
+      "bytes": 349,
+      "sha256": "6975d1e8b99aa81868d3221dfd265fce433eccb3dcb17a26bdd11e4ed9626b9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/source-premises-request-v1.json",
+      "bytes": 26535,
+      "sha256": "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/supervise.mjs",
+      "bytes": 6321,
+      "sha256": "d552b4d16a9aa4cba0edcc527be55eff481015fbd84cb1abed7bc7bd136c706a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/supervise.py",
+      "bytes": 4710,
+      "sha256": "3ecc68e62f1b75f9b4a9140ca84dd3f8de6093546723d0632406b34c93642b5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/two-cold-batch-runs.json",
+      "bytes": 6658,
+      "sha256": "0b47fd6aacc3dadce8c913f95fe2d52f26ed4bdbd0837045b7edb7834508bfb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ADDITIVE_GAP_REPAIR.md",
+      "bytes": 13118,
+      "sha256": "1a92db7ded7a45be1ddaa6c195b87519eb8d2b7fcacfe63c9108d3215322f5e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 95874,
+      "sha256": "5bda202160724a6128cc891d9770b799c205c9fe99b9d2d4c8794b46b00e610c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/additive-gap-repair.test.mjs",
+      "bytes": 17984,
+      "sha256": "259f38dc95c810fe2ed629ce06f23fd56d56ba29f940bf517e8455f0f5f8ec6e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/additive-release.test.mjs",
+      "bytes": 22612,
+      "sha256": "d5ad48e9dbef5d4a5a4d590e999bd16fb902ae1d29723b1fe693b1b3454cac76",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "explicit-retained-base-or-additions-native-v1",
+      "description": "Typed retained ADM2 Counties2018 full original source rule, complete thirteen-ID source decisions and combined deterministic sparse native overlay. Unchanged whole pointsets/native even-odd operator, complete all-owner exclusion, cross-owner native/continuous conflicts refused symmetrically; same-owner primitives aggregated without double-counting. No union/epsilon/simplification or ownership transfer.",
+      "software": "Node24.19.0 and immutable actual installed imports/executable; full exact code/request/runtime and operating receipts retained",
+      "units": "canonical native cells and complete source-relative records",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "unactivated-batch-components",
+      "value": 13,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    },
+    {
+      "id": "unactivated-batch-assigned_components",
+      "value": 11,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    },
+    {
+      "id": "unactivated-batch-assigned_cells",
+      "value": 134,
+      "unit": "canonical cells",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    },
+    {
+      "id": "unactivated-batch-source_exceptions",
+      "value": 2,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    },
+    {
+      "id": "unactivated-batch-native_conflicts",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    },
+    {
+      "id": "unactivated-batch-removed_cells",
+      "value": 0,
+      "unit": "canonical cells",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    },
+    {
+      "id": "unactivated-batch-reassigned_cells",
+      "value": 0,
+      "unit": "canonical cells",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    },
+    {
+      "id": "unactivated-batch-zero_cell_components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "unactivated-batch-components",
+      "value": 13,
+      "unit": "components"
+    },
+    {
+      "metric_id": "unactivated-batch-assigned_components",
+      "value": 11,
+      "unit": "components"
+    },
+    {
+      "metric_id": "unactivated-batch-assigned_cells",
+      "value": 134,
+      "unit": "canonical cells"
+    },
+    {
+      "metric_id": "unactivated-batch-source_exceptions",
+      "value": 2,
+      "unit": "components"
+    },
+    {
+      "metric_id": "unactivated-batch-native_conflicts",
+      "value": 0,
+      "unit": "components"
+    },
+    {
+      "metric_id": "unactivated-batch-removed_cells",
+      "value": 0,
+      "unit": "canonical cells"
+    },
+    {
+      "metric_id": "unactivated-batch-reassigned_cells",
+      "value": 0,
+      "unit": "canonical cells"
+    },
+    {
+      "metric_id": "unactivated-batch-zero_cell_components",
+      "value": 0,
+      "unit": "components"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Two complete same-frozen-head combined batch executions retain all13 original IDs and full original source/base pointsets;11 source-compatible components across6 stable owners add134 unowned cells,2 original parent exceptions remain, with0loss/reassignment/conflicts. All8 release assets and complete encoded/decoded disposition inventory agree. Actual bounded125-row native consumer proof draws/picks134cells and conserves old owners.",
+      "status": "supported",
+      "source_ids": [
+        "retained-county-source-and-native-custody"
+      ]
+    },
+    {
+      "text": "Proposals remain UNACTIVATED. N2 selection/current-bank rebind, normal review/CI/merge and eventual release activation remain required. Contemporary factual/source authority and worldwide gap repair completion are not established; #1523/#1202 remain open.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/additive-gap-repair.test.mjs test/additive-release.test.mjs test/effective-footprint.test.mjs test/additive-native-consumers.test.mjs test/native-location-context.test.mjs",
+    "node coordination/engineering/additive-native-gap-batch-20261008/check-execution-custody.mjs",
+    "node <exact-frozen-supervise.mjs> <exact-frozen-batch-request.json>; new admitted request and fresh destination required; no reuse of completed outputs"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "unactivated-batch-components",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "unactivated-batch-assigned_components",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/assigned_components"
+    },
+    {
+      "metric_id": "unactivated-batch-assigned_cells",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/assigned_cells"
+    },
+    {
+      "metric_id": "unactivated-batch-source_exceptions",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/source_exceptions"
+    },
+    {
+      "metric_id": "unactivated-batch-native_conflicts",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/native_conflicts"
+    },
+    {
+      "metric_id": "unactivated-batch-removed_cells",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/removed_cells"
+    },
+    {
+      "metric_id": "unactivated-batch-reassigned_cells",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/reassigned_cells"
+    },
+    {
+      "metric_id": "unactivated-batch-zero_cell_components",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "json_pointer": "/zero_cell_components"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "explicit-retained-base-or-additions-native-v1",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/additive-native-gap-batch-20261008/final-positive-control.json"
+    },
+    {
+      "method_id": "explicit-retained-base-or-additions-native-v1",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/additive-native-gap-batch-20261008/final-negative-control.json"
+    },
+    {
+      "method_id": "explicit-retained-base-or-additions-native-v1",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/additive-native-gap-batch-20261008/final-reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/features.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/ledger-batch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-samples.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owners-batch.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/patch-batch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/virtual-owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/features.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/ledger-batch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-samples.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/operating-stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/owners-batch.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/patch-batch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run2/virtual-owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/bounded-mechanism-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/check-execution-custody.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/check-native-batch.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/assistance-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/bounds.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/complete-owner-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-index.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-owner-proof.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-proof.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-transport-index.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-43500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-45000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-46500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/extract.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/official-reader-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/official-reader.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-44705.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-45711.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46045.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46121.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46395.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-46957.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/owner-47017.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/ownership-codec.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/part-001.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/pixel-grid.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/pixel-ownership.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/rows-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-10485760.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-11534336.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-12582912.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-6291456.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-7340032.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-8388608.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/runs-9437184.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/execution-custody-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-focused-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-focused-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/final-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/batch-request-v1-run1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/batch-request-v1-run2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/059062d321204290561bc757873848efab818f6d",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/061fa05406f3058fcd186dee7f83897a2d0552a8",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/0c73282307526101812f25e3fabb5fca68d8acf0",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/2028448b752955e02e3c535ef36593214557c357",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/21327de015b1b4d6f68235a325e385922d2cee10",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/23e1dcc6f4ff44c2ee2d101af33aa44a85460ecd",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/35051fc1e9bc4d0595bb28f76f952b6349683bb5",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/3703dbca77a991f5771d0dd98f97ecce109fe4e6",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/3d820f04ba33fc7d1054442a473eeae1ca0cea47",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/3f8980f573af0a9fb48b763ed875026f0ce99199",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/500fbdf1e5a703aeb34dc539f8e2ff756daa6d14",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/5118cc760e61c1081a4cedf3f3f21df4f33fe6aa",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/54cf2745c10a61436aced33f4190b775aef7e93e",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/54cfd5f745a8608ab5ea5cdb758929a806512e0f",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/5f3bca9d47e73715637ba29113c8fdc613fc0d70",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/68fa9e4b004126fd9b2be952055c6d2f8cce991f",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/6be387f2c2a5f349d52957cdd476bbf87780b8c1",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/760000bff46acf8f7dd988fe167c509a2cc16544",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/78fcf8ab2ef8c7b67652e18a43654c6b4dcdd094",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/7d4ddf6ffe096699431e731783e8902ccc114ace",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/82dfd09d6d1b89aa0e155c0557299fd70427657f",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/839abe54e65a98d7be47f7e6d8d58eda0b5a7abe",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/8556e1f4ce450bcd2d482e8785dabaecfbdc0f3c",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/86f70e03855340a83d3abfadf4943a08088842d1",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/89612d7cd22a887c5657bc140cba33f10fbb63ae",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/8dc2d80e110d32d796d3468beefa435ae126a98a",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/97e66b8d924d5022b80cb63d38ab5c713ca760fd",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/9b71559fef4a5394bb1e1e534479bdbd751c027b",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/9c9487bde05494a53b64ec3d287d1361d7243f08",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a0c412e3ad0216312913a24dc09b3d11a314ce1f",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a4c6f558efe3f2720f2916624f2d7d4175f492a1",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a4f8432ac213c5d489db07249d403f7ef91c1296",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a6d60162cd4ee51bb90bed913110b8fe2b323521",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a7cff4940e085a588d415e66784a3f8fa23feae9",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a858fd5fc2f0405f12341171d4a64b0aa5aff350",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/a8c561484725a3b3c39973cc60b638244c956464",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/bc5619798e88b1d2abd4bd11e3fba3b7dd18cf12",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/bf45916269e5cc73d9a2c1e5494ef45456e9583a",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/c5cbd906c999c7a13095846d9cbab16bddcff910",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/cafd0a7efa72b682a46ece67a654d191b029ef9c",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/cc484fcebcd22a44089d96deecefb5fc83600f1a",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/de0dab2ce5647c718fbe7beeb4062908b0046094",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/e59c03b3f025c220206bfbcaa53d65933de5cdea",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/ed85fe9ad89284c93bc63b1630d09161d05638e5",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/f346966fd4f21909db97407140bf1287ad2d12b0",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/f4029c16f7ccfbca822978e7b2408695f77df4b2",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/f6dc54852a7dda788c718287c8a3bc497691c893",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/fb6e620d129019616910b50595747948ab03c382",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/fd4b1aa9a8c628e170d3ad88d45988491d0c1acb",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/objects/ffa32416fd946ac89da621d02b554ca27733e688",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/receipt-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/source-premises-request-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/owned_child_termination.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/prepare-batch-requests.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/prepare-source-request.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-samples.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/source-premises-request-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/supervise.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/supervise.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/two-cold-batch-runs.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/ADDITIVE_GAP_REPAIR.md",
+      "status": "modified",
+      "original_sha256": "cb4666c896a35bd85460b5c6fe07117b29373429b18577d12a6ef77407b58a47"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "status": "modified",
+      "original_sha256": "870b4d7b0d52ed2a2fe2cd2a36a6b3a144d2166f03726e9c450a02cd6595bd73"
+    },
+    {
+      "path": "test/additive-gap-repair.test.mjs",
+      "status": "modified",
+      "original_sha256": "fd52deeae34ebc6d2b384cab8dda3439828e4d7be7ddc0d779d2518a65d991c3"
+    },
+    {
+      "path": "test/additive-release.test.mjs",
+      "status": "modified",
+      "original_sha256": "4bbb4ed7698aa13dd2543f495124642808489bc7870bd375a364e62adf09a9b7"
+    }
+  ]
+}

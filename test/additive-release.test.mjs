@@ -154,3 +154,43 @@ test('actual frozen add031 full-owner window draws and picks exactly seven gaine
  const drift=structuredClone(patch);drift.rows[0].runs[0][0]=window[0].complete_owner_intervals[0][0];drift.rows[0].runs[0][1]=drift.rows[0].runs[0][0]+1;drift.rows[0].y=window[0].y;
  assert.throws(()=>applyAdditiveNativePatch(base,drift,{baseReference:patch.base_reference,effectiveReference:patch.effective_reference,features:ownerFeatures}),/assigned/);
 });
+
+test('actual shared thirteen-case batch draws and picks all134 new cells with complete125-row old-owner conservation',async()=>{
+ const {default:fs}=await import('node:fs'),{pointInFeature}=await import('../src/geometry.js');
+ const p='coordination/engineering/additive-native-gap-batch-20261008/',output=p+'batch-proposal-v1-run1/';
+ const publication=JSON.parse(fs.readFileSync(output+'publication.json'));
+ const read=name=>{const descriptor=publication.assets.find(row=>row.path===name),raw=fs.readFileSync(output+name);
+  assert.equal(raw.length,descriptor.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),descriptor.sha256);return JSON.parse(raw);};
+ const patch=read('patch-batch.json'),effective=read('features.json'),ledger=read('ledger-batch.json');
+ assert.equal(ledger.scope_ids.length,13);assert.equal(ledger.rows.filter(row=>row.disposition==='assigned').length,11);
+ assert.equal(ledger.rows.filter(row=>row.disposition==='rejected').length,2);assert.equal(effective.length,6);
+ const originalWindow=JSON.parse(fs.readFileSync(p+'current-v8/complete-owner-rows.json'));
+ assert.equal(originalWindow.length,125);const rows=Array(262166).fill(new Uint32Array());
+ for(const row of originalWindow)rows[row.y]=Uint32Array.from(row.complete_owner_intervals.flat());
+ // Declared complete observed-row VIEW: unobserved world rows are not evidence.
+ // Full real owner identities and affected target geometry remain authenticated.
+ const rosterRaw=gunzipSync(fs.readFileSync(output+'owners-batch.json.gz')),descriptor=publication.assets.find(row=>row.path==='owners-batch.json.gz');
+ assert.equal(rosterRaw.length,descriptor.uncompressed_bytes);assert.equal(createHash('sha256').update(rosterRaw).digest('hex'),descriptor.uncompressed_sha256);
+ const bounds=JSON.parse(rosterRaw),byId=new Map(effective.map(feature=>[feature.id,feature])),model=rectangle(0,0,1,1);
+ const features=bounds.map(row=>byId.get(row.id)??{id:row.id,pixelIndex:row.index,geometry:model});
+ const base={...packOwnership({size:262166,rows}),method:'native-linear-evenodd-first-owner-v1',geographic_release:patch.base_reference.id,...patch.base_reference,
+  reference_owner_sha256:createHash('sha256').update(JSON.stringify(bounds.map(row=>[row.index,row.id]).sort((a,b)=>a[0]-b[0]))).digest('hex')};
+ const oldRows=base.rows.slice(),oldRuns=base.runs.slice();
+ const out=applyAdditiveNativePatch(base,patch,{baseReference:patch.base_reference,effectiveReference:patch.effective_reference,features});
+ let added=0,existing=0;for(const row of originalWindow){
+  const before=samplePackedOwnership(base,{x:0,y:row.y,width:262166,height:1}),after=samplePackedOwnership(out,{x:0,y:row.y,width:262166,height:1});
+  for(let x=0;x<before.length;x++){if(before[x]){assert.equal(after[x],before[x]);existing++;}else if(after[x]){assert.equal(pickOwnership(out,x,row.y),after[x]);added++;}}
+ }
+ assert.equal(added,134);assert.ok(existing>0);assert.equal(out.additive_added_cells,134);assert.deepEqual(base.rows,oldRows);assert.deepEqual(base.runs,oldRuns);
+ const latitudeBody=gunzipSync(fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz'));
+ const byOwner=new Map(effective.map(feature=>[feature.pixelIndex,feature]));
+ for(const row of patch.rows)for(const [start,end,owner]of row.runs)for(let x=start;x<end;x++){
+  assert.equal(pickOwnership(base,x,row.y),0);assert.equal(pickOwnership(out,x,row.y),owner);
+  assert.equal(pointInFeature([(x+.5)/262166*360-180,latitudeBody.readDoubleLE(row.y*8)],byOwner.get(owner)),true);
+ }
+ // More than one original primitive is aggregated under one stable owner.
+ assert.ok(effective.some(feature=>feature.additiveFootprint.additions.length>1));
+ const drift=structuredClone(patch),occupied=originalWindow.find(row=>row.complete_owner_intervals.length);
+ drift.rows=[{y:occupied.y,runs:[[occupied.complete_owner_intervals[0][0],occupied.complete_owner_intervals[0][0]+1,effective[0].pixelIndex]]}];
+ assert.throws(()=>applyAdditiveNativePatch(base,drift,{baseReference:patch.base_reference,effectiveReference:patch.effective_reference,features}),/assigned/);
+});
