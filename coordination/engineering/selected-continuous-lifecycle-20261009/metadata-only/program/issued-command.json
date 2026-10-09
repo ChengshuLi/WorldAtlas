@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "code_head": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "baseline": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "candidate": "e9bd90b13b56cc50c0609dd502a5648d8a6e7a5d",
+  "source_files": [
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/package.json",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "mode": "100644",
+      "git_blob_oid": "09015e2d1e179b6856b6b9e51d51e3ea77d7b2fd",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/scripts/check-effective-geographic-regression.mjs",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "mode": "100644",
+      "git_blob_oid": "539636ee1a6d9c719ab6e20c7b7f822cc66e0833",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/scripts/run-geographic-check.py",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "mode": "100644",
+      "git_blob_oid": "a9f221d139a019a5240b3f4d45249226ae49f3c4",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/scripts/check-geographic-regression.py",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "mode": "100644",
+      "git_blob_oid": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/scripts/evidence/immutable.py",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "mode": "100644",
+      "git_blob_oid": "f1c2f3206bc5698201441a775b8bf8560977368d",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/scripts/evidence/geometry.py",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "mode": "100644",
+      "git_blob_oid": "518dcaada9e94907d7d886636dcbf928bd0788fa",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/scripts/ellipsoidal_area.py",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/src/ownership-codec.js",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "requirements.txt",
+      "mode": "100644",
+      "git_blob_oid": "a51a1fe5d483cadf8c6bbfb8390f8c5bbad61f9c",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/requirements.txt",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "mode": "100644",
+      "git_blob_oid": "a0a6d7e6094dbfa108f782e093fa7784f5b7ca04",
+      "bytes": 64248,
+      "sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "mode": "100644",
+      "git_blob_oid": "010a25b7afd29149093dfcd79a56f238789a69fa",
+      "bytes": 15768,
+      "sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+    },
+    {
+      "path": "diagnose-metadata.mjs",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-metadata-only-20261009/program/diagnose-metadata.mjs",
+      "bytes": 2179,
+      "sha256": "9dcbe1340bbe524daf3ad9554286248fc94446edaa653da40f7479c5a95401a6",
+      "provenance": "explicit new metadata-only diagnostic; not original Git code"
+    }
+  ],
+  "execution_runtimes": [
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "bytes": 121304480,
+      "mode": 493,
+      "sha256": "9caea9deafcb0c7f22fac3206c32f0dcaf8d1f13460b0be3017fa09e7a4be4f6"
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "bytes": 18058560,
+      "mode": 493,
+      "sha256": "2498a31965647f1507a53e391842b23c29d96f0ef4550475f34a1d2b30c23ddb"
+    }
+  ],
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-metadata-only-20261009/program/diagnose-metadata.mjs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review",
+    "6951c117534f69742acd1f61820cfc21a4ad17f5",
+    "e9bd90b13b56cc50c0609dd502a5648d8a6e7a5d",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+  ]
+}

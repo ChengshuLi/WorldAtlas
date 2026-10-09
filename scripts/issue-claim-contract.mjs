@@ -1,7 +1,7 @@
 import {quotaDelay,completeReads} from './github-quota.mjs';
 import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 import {conditionalSnapshots} from './github-snapshots.mjs';
-import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
+import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths,validateEngineeringOwnedPaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
 
@@ -20,6 +20,7 @@ export function workSpec(body){
 function checkLaneMode(branch,spec){
  const {lane}=laneForBranch(branch);
  if(lane==='engineering'&&spec.mode!=='engineering'||lane==='geography'&&spec.mode!=='geography'||lane==='research'&&!['source-only','content'].includes(spec.mode))throw Error('Scope mode must agree with the issue lane');
+ if(lane==='engineering')validateEngineeringOwnedPaths(spec.owned_paths);
 }
 export function readinessDependencyIds(spec,geographyGate){
  const ids=new Set(spec?.depends_on??[]);
@@ -123,7 +124,7 @@ export function verifyClaimForPR({branch,issue,comments,prs=[],now=Date.now()}){
  if(prs.filter(p=>p.merged_at).length>=spec.max_prs)throw Error('Issue PR budget exhausted; create a bounded follow-up');
  if(!claim?.active||claim.branch!==branch||Date.parse(claim.expires_at)<=now)throw Error('PR needs a current unexpired claim for this exact branch');
  if(spec.mode==='geography'&&(claim.mode!==spec.mode||JSON.stringify(claim.owned_paths)!==JSON.stringify(spec.owned_paths)))throw Error('Geography claim must retain the exact declared ownership scope');
- return {worker_id:claim.worker_id,claim_id:claim.claim_id,mode:spec.mode,...(spec.mode==='geography'?{owned_paths:[...spec.owned_paths]}:{})};
+ return {worker_id:claim.worker_id,claim_id:claim.claim_id,mode:spec.mode,...(spec.mode==='geography'||spec.mode==='engineering'&&spec.owned_paths!==undefined?{owned_paths:[...spec.owned_paths]}:{})};
 }
 export async function githubPages(api,route){
  const all=[];for(let page=1;page<=100;page++){const rows=await api(`${route}${route.includes('?')?'&':'?'}per_page=100&page=${page}`);const list=Array.isArray(rows)?rows:rows?.check_runs;if(!Array.isArray(list))throw Error('Invalid paginated GitHub response');all.push(...list);if(list.length<100)return all;}throw Error('GitHub pagination limit reached; stop rather than assume completeness');

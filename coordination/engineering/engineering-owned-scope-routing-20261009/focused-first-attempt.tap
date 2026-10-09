@@ -1,0 +1,116 @@
+✔ lane IDs must be explicit and safe (1.518917ms)
+✔ research owns only campaign files, excluding shared handovers and other campaigns (0.226583ms)
+✔ engineering preserves research and other engineering progress (0.176833ms)
+✔ partial and final PRs link one issue without needing a document tracker ID (0.525541ms)
+✔ PR policy rejects ambiguous issue links and accidental additional closures (0.124917ms)
+✔ GitHub issue type agrees with its lane and references an open issue (0.144583ms)
+✔ real git diff checks rename source paths, not only allowed destinations (254.440458ms)
+✔ another lane advancing work is not mistaken for this branch changing its files (283.33125ms)
+✔ remote issue validation reads only the event repository and requires successful labeled issue metadata (7.484083ms)
+✔ geography may own narrower subdirectories without acquiring sibling or parent files (0.392792ms)
+✔ engineering literal grants retain branch fallback, exact-file and directory boundaries (0.452625ms)
+✔ actual CLI consumes only valid matched engineering issue grants (1675.489791ms)
+✖ actual linked-issue reader passes engineering grants to git scope and rejects foreign declarations (0.353125ms)
+✔ serialized contenders on one issue have exactly one holder even under the same GitHub account (7.416541ms)
+✔ renewal and release require the actual worker plus ownership nonce (0.588083ms)
+✔ an idempotent lost-response retry retains original ownership (0.190416ms)
+✔ renewal, rotation and reassignment retain one canonical comment ID (0.460416ms)
+✔ umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed (0.297542ms)
+✔ expired reservations cannot silently discard branches or active PR/live operations (0.43025ms)
+✔ multiple PRs retain ownership and rotate branches only after previous work completes (0.312625ms)
+✔ canonical comments cannot be impersonated or ambiguous (0.133042ms)
+✔ PR validation uses current exact-branch ownership and rejects expired or blocked claims (0.340042ms)
+✖ location-content claims wait for worldwide approval while source-only work can start (77.457292ms)
+✔ the PR budget cannot be bypassed by claiming another part indefinitely (0.268666ms)
+✔ pagination inspects later pages rather than assuming only the first page exists (0.15975ms)
+✔ claim lock keys use canonical issue numbers so aliases cannot acquire independent locks (0.320917ms)
+✔ approved research is bound to all three geographic pins and ordinary bot audit text is not authority (0.468125ms)
+✔ production-only child is reserved by its publisher, not an ordinary implementer (1.73325ms)
+✔ production child accepts only original-issue or legacy tracking and designated publisher (1.324666ms)
+✔ verified engineering reservation carries only safe actual work declarations (1.853833ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 28
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2291.496584
+
+✖ failing tests:
+
+test at test/handoff-scope.test.mjs:103:1
+✖ actual linked-issue reader passes engineering grants to git scope and rejects foreign declarations (0.353125ms)
+  ReferenceError: owned_paths is not defined
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/test/handoff-scope.test.mjs:106:182)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test/issue-claims.test.mjs:73:1
+✖ location-content claims wait for worldwide approval while source-only work can start (77.457292ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  Error: Command failed: /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/import-research-bundle.mjs https://example.com unused-bundle
+  node:fs:484
+      return binding.readFileUtf8(path, stringToFlags(options.flag));
+                     ^
+  
+  Error: ENOENT: no such file or directory, open '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/data/research-geography-gate.json'
+      at Object.readFileSync (node:fs:484:20)
+      at readResearchImportGate (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/scripts/research-import-gate.mjs:4:63)
+      at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/scripts/import-research-bundle.mjs:85:25
+      at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+      at async node:internal/modules/esm/loader:643:26
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/data/research-geography-gate.json'
+  }
+  
+  Node.js v24.19.0
+  
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/test/issue-claims.test.mjs:79:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Command failed: /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/import-research-bundle.mjs https://example.com unused-bundle
+    node:fs:484
+        return binding.readFileUtf8(path, stringToFlags(options.flag));
+                       ^
+    
+    Error: ENOENT: no such file or directory, open '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/data/research-geography-gate.json'
+        at Object.readFileSync (node:fs:484:20)
+        at readResearchImportGate (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/scripts/research-import-gate.mjs:4:63)
+        at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/scripts/import-research-bundle.mjs:85:25
+        at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+        at async node:internal/modules/esm/loader:643:26
+        at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+      errno: -2,
+      code: 'ENOENT',
+      syscall: 'open',
+      path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/data/research-geography-gate.json'
+    }
+    
+    Node.js v24.19.0
+    
+        at genericNodeError (node:internal/errors:985:15)
+        at wrappedFn (node:internal/errors:539:14)
+        at checkExecSyncError (node:child_process:942:11)
+        at execFileSync (node:child_process:978:15)
+        at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/test/issue-claims.test.mjs:79:20
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/60930555d1ece0966c419d44a9cbd83c07578356cfd0515e4d69a96226110a63/work/test/issue-claims.test.mjs:79:9)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25),
+    operator: 'throws',
+    diff: 'simple'
+  }

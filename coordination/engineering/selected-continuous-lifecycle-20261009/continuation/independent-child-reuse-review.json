@@ -1,0 +1,61 @@
+{
+  "kind": "independent-retained-cold-child-reuse-review",
+  "producer_commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+  "original_source_sha256": "d250fdc7bb3800628fb65f119b348134565bce8cef4ff31c457521a87634baab",
+  "products": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/operating-receipt.json",
+      "bytes": 55321,
+      "sha256": "4ae1c6b8e3cb6c0bb0555c18a7ee1eea96c921d661894549643f32fe87ff49a1"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/checker.stderr",
+      "bytes": 2710,
+      "sha256": "715b40ff4403d63823eff3d9a53fb90704b1fb86d00a930a527715a7f0c0e74c"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/program/issued-command.json",
+      "bytes": 7927,
+      "sha256": "27411ae78e960bb9e4401335775b59ad957b50b20f991834569d17fd4ee86714"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/supervise.py",
+      "bytes": 6568,
+      "sha256": "44d8d62fd96ce39cd8a180d156178b4dc2858dc0647fcede481a3351cff9b1e1"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/complete/baseline/publication.json",
+      "bytes": 442,
+      "sha256": "8870d2167c3ce644d9929eaf1bce3ba01f19f2b0d951225d6675ec05fda7cccf"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/complete/baseline/facts.json",
+      "bytes": 44057,
+      "sha256": "232d6be2951da69c52f7c9a727409fb94b82921d274a6570b4c0e9836a05e397"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/complete/baseline/certificate.json.gz",
+      "bytes": 7513603,
+      "sha256": "e32aae1eb4dda816d5b979f1d2a27765212ac1b2924388f41c103cdf9528d9e3"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/complete/candidate/publication.json",
+      "bytes": 442,
+      "sha256": "14891490037288b4316aea0580b8883ff15f20698811ab2f229c61e1cc970f5b"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/complete/candidate/facts.json",
+      "bytes": 56230,
+      "sha256": "cb6bac9f768e10392954983de119e557d135b4f66014f229ca07ef49a6bc157f"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/complete/candidate/certificate.json.gz",
+      "bytes": 7515130,
+      "sha256": "ee8638145feaa008e1692b0f01f5c2c9d5615b3e8c78f9f949c26d02459273ba"
+    }
+  ],
+  "approved_reuse_scope": "Original completed cold products only; reconstructed child return VALUES from immutable producer return code and observed parent flow; raw stdout not retained",
+  "basis": "Both execFileSync children exit0, parse and publication.complete checks precede observed failure in first validatePersistedColdSide. Whole persisted publication-bound facts and certificates verified.",
+  "parent_status": "failed, unqualified; retained unchanged",
+  "new_consumer_requirement": "Own complete product authentication, selected source binding, whole affected neighbor plan, operands, operating admission; no relabel of original producer or failed parent"
+}

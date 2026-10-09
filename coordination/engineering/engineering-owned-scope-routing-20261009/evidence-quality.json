@@ -1,0 +1,612 @@
+{
+  "version": 1,
+  "issue": 1622,
+  "lane": "engineering",
+  "worker_id": "01a1222d-b893-7861-9c9c-8b8daa788d16",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+    "files": [
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 7069,
+        "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "scripts/check-linked-github-issue.mjs",
+        "bytes": 3182,
+        "sha256": "d6f0fcd561fd760418f46ed67fde65d77ec8cff872ecef204fc7a9f082e72d3a",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 23973,
+        "sha256": "950536fcdafbbcd5b770cf24fcab567b9928d47f0a7825e4dd91c0139c17bd91",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "test/handoff-scope.test.mjs",
+        "bytes": 7745,
+        "sha256": "81558c2f6d989bd7cabcf4802b85deb66e961dd047ed40118635d8d2dce59048",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "test/issue-claims.test.mjs",
+        "bytes": 11494,
+        "sha256": "12e1f845eeb426d2ec53d96e34bc104044aef16129e5915c3619e306578fcc00",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "data/research-geography-gate.json",
+        "bytes": 4229,
+        "sha256": "3981e89f8a2022730b90a16d2a995036f71ff9ce6b9d69cf6be33f42549e57b7",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 23988,
+        "sha256": "7eda8972e90888d4ee897c970815af596319bea3c2e2c0210a838199a4b545de",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 27176,
+        "sha256": "d8578824b12cdd2ea19c5dc2b7d14d0b05bc6ec0314f775212980b8a6f091323",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 24619,
+        "sha256": "0c6ec67620a8a5963b94df7540bc78e00923a196ea82f925f71da93bf5a67c66",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "test/geography-worker-lane.test.mjs",
+        "bytes": 8645,
+        "sha256": "5cb4597a8aa3a5338aabfcd92e2ccbffcc59580d59a62d393cb3cf5e66663dd1",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "test/trusted-workflow-checkouts.test.mjs",
+        "bytes": 11199,
+        "sha256": "6a4f56915eedbfe8d8bc7c20047ef188cc1044790dd9283400361b2271e1727f",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 11944,
+        "sha256": "6c48511ab0035949a9215811049a0e31fb2eba2b479c75b26e32a43725b7b014",
+        "hash_kind": "file-bytes",
+        "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2443,
+        "sha256": "14cd71768884d7caa315b26a1d3afe34b6edd9f5b35717f226f63fdcf2c5d746",
+        "hash_kind": "file-bytes",
+        "commit": "6951c117534f69742acd1f61820cfc21a4ad17f5"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {},
+    "version": 2
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/README.md",
+      "bytes": 5821,
+      "sha256": "04b1cf588dafa88a01e2bf17f2f97fe24c13cfad06afe56f86558dddd21434d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/adjacent-final.tap",
+      "bytes": 8770,
+      "sha256": "3f9d7d4dad16be2c897aa6f04c2cfbc119319af045b0ebdb0106eb6cd2aa2b4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim-second-caller.json",
+      "bytes": 1479,
+      "sha256": "24fbbf2597482bc133a6293c030c3f6ebd81773657883dbe1927d64d3f0f67b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim-test-organized.json",
+      "bytes": 1479,
+      "sha256": "3bdc99d8bde996705cca1b50c486bd2fbbdc5bd567a869464bd696f96e889a88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim-workflow-amend.json",
+      "bytes": 1364,
+      "sha256": "dd161b4eb4d9522e56f8d45b5364a183fc3279763bc5844eba6f3ad0b104e92a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim.json",
+      "bytes": 1479,
+      "sha256": "585773552762c53bafaaa1118cf651854b59cbc1e252d10cbd424bd44bf411f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/final-caller.tap",
+      "bytes": 12437,
+      "sha256": "0f8c8e6ffa15f7849e923a885ff753636374b9c6464f483d36f4291fdb429dbf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-final.tap",
+      "bytes": 6884,
+      "sha256": "cee03e54d9fcb1eff1b4b01f43782653cc854e852ae947b6b985bb1123b32a97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-first-attempt.tap",
+      "bytes": 8465,
+      "sha256": "fff09959da9910644a23595fada71f7a3b5e4c1e4e825783f57fc48737cf62f8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-metadata-phase-failure.log",
+      "bytes": 27088,
+      "sha256": "c66c7358c3629ac786e7de1f8184ea847cabf35dae92a2921c3504bc6463da49",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-regression-first.log",
+      "bytes": 129033,
+      "sha256": "c4500552450e29c07e09830db84f0f4bb3ded0c64850c9760ca0167a3609e880",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-regression-second.log",
+      "bytes": 125755,
+      "sha256": "31d82f5a4a48d1ca92d21a225dfc0a4fef38b511963fd6f0c9d276b36b44439e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-scope-first.log",
+      "bytes": 66758,
+      "sha256": "c8ca557ab48e6ee724f1c3f20cb8bd2c1ea174cd77b72931cd749fa10ca09c11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1523.json",
+      "bytes": 23829,
+      "sha256": "abe5a72be8635503a276ea2aa960afcba46c598aef1fcfcc9d7cc5e4c8f18574",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622-second-caller.json",
+      "bytes": 9991,
+      "sha256": "9bc249d717f37ec34659feae7ac0744a36e4063efb444ff677908ab9acc0a706",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622-test-organized.json",
+      "bytes": 11319,
+      "sha256": "9523a2fc8958ede9b0d641e2018ee49507cd1a4d6dd5a176cec744707280d17d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622-workflow-amend.json",
+      "bytes": 8896,
+      "sha256": "755dff07509c61ddf93dfb08ee0fc6227542eed30a17ae3b75ba5b2c19a7154c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622.json",
+      "bytes": 7186,
+      "sha256": "3cd6edc069a0adc33e5410558100030c5922572019a5779c57790821aa25c794",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control-v2.json",
+      "bytes": 762,
+      "sha256": "1ee84c9f616eb65b39ce2cb3e5289291943491475df41d255ff5398f5221a9fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control-v3.json",
+      "bytes": 875,
+      "sha256": "55f72104e9483527fac6609de8a0104b7ca810177dadc623a2f4091cf60b31e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control-v4.json",
+      "bytes": 1057,
+      "sha256": "d442f61bf074231d7306674ef643221b679588dbb854549c0fb1678d026f5e6d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control.json",
+      "bytes": 656,
+      "sha256": "b0000e3964976a40c82cd32fcdfa252ccf460ec28cb8a2ebfbb4cd8e5651b12b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/normal-profile-admission.json",
+      "bytes": 682,
+      "sha256": "84fce5620bc01466b1eeb09472dedb72dd75f8a23948dae91836e7f1638959c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/organized-final-caller.tap",
+      "bytes": 12469,
+      "sha256": "d9a2ddb35463e358d98febaae367d40c88043339cad4a2561dabea1ee3c0b243",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control-v2.json",
+      "bytes": 639,
+      "sha256": "25367005a2cd1e1abce678542195ef5bd0a5547dfdc329832e5beeed57d58310",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control-v3.json",
+      "bytes": 752,
+      "sha256": "295ec0fcc0efce9d4ce6325851d2d6819371cc110a1d9369543dd97b9d0244d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control-v4.json",
+      "bytes": 934,
+      "sha256": "587ebaee8c84a2398087e6d49e3ea09208bb976a69dbf9a031dc0206729333ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control.json",
+      "bytes": 533,
+      "sha256": "9fed2e68461f102012277188f9b62a3530b267a23e6ea0a23d1160b533bebfc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-second-caller.json",
+      "bytes": 6669,
+      "sha256": "38b74110a2353ed952950ab4330e00834f3e24575a2cef086ab7d41c4e4b1f59",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-test-organized.json",
+      "bytes": 7997,
+      "sha256": "39cad318fd6d78ff408b7b50bdcf5721ef9ba6fba56fb58fd8db687e03d16bae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-workflow-candidate-failure.json",
+      "bytes": 5683,
+      "sha256": "1cc3d97d568e21cd63628990e0bd4d4fb27b78147d50e7dce254226b59486f3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-workflow-main-owned.json",
+      "bytes": 5687,
+      "sha256": "87b3d6e741759b0b66fb7484ad0a98666ec033a7c887cdd8dcd3fde316182417",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness.json",
+      "bytes": 4166,
+      "sha256": "9aa0eb7f99eb48709e8959ab9e17d3cbfe4ba88563eefcc6fd183ea8a93dcda8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/release-before-second-caller.json",
+      "bytes": 1527,
+      "sha256": "ed21c3b6e074b435cc85d98e2acf1ebd34209667ef001bea5fb47b474018a01c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/release-before-test-organization.json",
+      "bytes": 1412,
+      "sha256": "8fae4e09663c18be95ba4d0f561a6cae8aa9c004225a0050c10cd657e3351d5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/release-before-workflow-amend.json",
+      "bytes": 1412,
+      "sha256": "4c85db70e22ed81ba5f3f07accbd8fd598341f47586713d726eadf3db9b2dea8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/renew-source-read-race-refusal.json",
+      "bytes": 1092,
+      "sha256": "fad72d3bf671fb24558f6f815fb95056b15640d430af27bda0436cf99d41b086",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/two-caller-cold-controls.tap",
+      "bytes": 3768,
+      "sha256": "3b4d6c845fbf897c15bcf947ebaecea89ef4f3eee88f1ecd29a9bd07677ab95b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 8678,
+      "sha256": "4b446da771f3b847976bb3942041a0e24840c6ec6c8280909e14ceb48add9aba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-linked-github-issue.mjs",
+      "bytes": 3469,
+      "sha256": "50955e72d0d9774acd5bc1f69f5e1d1f00fef0444468b81b0426f9fd3b6339d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 24134,
+      "sha256": "bc4d198873d20f902a9f330f43003522cc8afb218102410e905d52f04bf952f4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/engineering-owned-scope-routing.test.mjs",
+      "bytes": 6989,
+      "sha256": "8732b067a3d5478eff61b3ae74087ebbdc680ccd91d7aa9bfdbfdab4cb16ef3f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "bytes": 12813,
+      "sha256": "b0ef6eb3852f6b573c877cc6bcf069a0598f7f46e606e70c0f821ed813bdc9f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 24705,
+      "sha256": "60ea5c7ddb7a16f15dba92e534f13c8dcc36230a75fe950fd751eaf359171566",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 12030,
+      "sha256": "2dbf5a78f4856b517a7de06c5b4c371a88dfb9fe510aff99b8d0dcf2768ab0d0",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "engineering-owned-scope-routing",
+      "kind": "code",
+      "description": "Run actual CLI scope fixtures and adjacent linked-issue/canonical reservation consumers with positive and adverse engineering declarations; retain initial failures and final suite output.",
+      "software": "Node v24.19.0 and git",
+      "units": "repository paths and exit outcomes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-reporter=tap test/handoff-scope.test.mjs test/issue-claims.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/engineering-owned-scope-routing-20261009/evidence-quality.json",
+    "node --test --test-reporter=tap test/handoff-scope.test.mjs test/issue-claims.test.mjs test/geography-worker-lane.test.mjs",
+    "node --test --test-reporter=tap test/handoff-scope.test.mjs test/issue-claims.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "node --test --test-reporter=tap test/handoff-scope.test.mjs test/engineering-owned-scope-routing.test.mjs test/issue-claims.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs"
+  ],
+  "validation": [
+    {
+      "method_id": "engineering-owned-scope-routing",
+      "kind": "positive",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control-v4.json"
+    },
+    {
+      "method_id": "engineering-owned-scope-routing",
+      "kind": "negative",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control-v4.json"
+    }
+  ],
+  "metric_bindings": [],
+  "change_receipts": [
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "status": "modified",
+      "original_sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa"
+    },
+    {
+      "path": "scripts/check-linked-github-issue.mjs",
+      "status": "modified",
+      "original_sha256": "d6f0fcd561fd760418f46ed67fde65d77ec8cff872ecef204fc7a9f082e72d3a"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "950536fcdafbbcd5b770cf24fcab567b9928d47f0a7825e4dd91c0139c17bd91"
+    },
+    {
+      "path": "test/engineering-owned-scope-routing.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "status": "modified",
+      "original_sha256": "12e1f845eeb426d2ec53d96e34bc104044aef16129e5915c3619e306578fcc00"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "0c6ec67620a8a5963b94df7540bc78e00923a196ea82f925f71da93bf5a67c66"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "6c48511ab0035949a9215811049a0e31fb2eba2b479c75b26e32a43725b7b014"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/adjacent-final.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim-second-caller.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim-test-organized.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim-workflow-amend.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/final-caller.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-final.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-first-attempt.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-metadata-phase-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-regression-first.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-regression-second.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/hosted-scope-first.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1523.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622-second-caller.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622-test-organized.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622-workflow-amend.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control-v4.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/normal-profile-admission.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/organized-final-caller.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control-v4.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-second-caller.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-test-organized.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-workflow-candidate-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness-workflow-main-owned.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/release-before-second-caller.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/release-before-test-organization.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/release-before-workflow-amend.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/renew-source-read-race-refusal.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/two-caller-cold-controls.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

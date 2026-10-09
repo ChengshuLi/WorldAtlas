@@ -3,7 +3,7 @@ import {requestAccounting,quotaDelay,completeReads} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {githubPages,githubAPI,linkedPulls,verifyClaimForPR,workSpec} from './issue-claim-contract.mjs';
-import {validateIssuePRBody,validateIssueMetadata,checkGitScope,laneForBranch} from './check-handoff-scope.mjs';
+import {validateIssuePRBody,validateIssueMetadata,checkGitScope,laneForBranch,validateEngineeringOwnedPaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
 
 export async function checkLinkedIssue({branch,event,token,fetchIssue,api,checkClaim=false,base,head='HEAD',run,evidencePolicy}){
@@ -21,7 +21,9 @@ export async function checkLinkedIssue({branch,event,token,fetchIssue,api,checkC
  const policy=evidencePolicy??loadEvidencePolicy();
  try{metadata.evidence_policy=evidenceRequirement(issue,workSpec(issue.body),policy,branch);}
  catch(error){if(policy.mode!=='report-only')throw error;metadata.evidence_policy={status:'report-failure',reason:error.message};}
- const ownedPaths=laneForBranch(branch).lane==='geography'?workSpec(issue.body).owned_paths:undefined;
+ const lane=laneForBranch(branch).lane,spec=['geography','engineering'].includes(lane)?workSpec(issue.body):null;
+ if(lane==='engineering'&&spec.mode!=='engineering')throw Error('Issue ownership requires engineering mode');
+ const ownedPaths=lane==='engineering'&&spec.owned_paths!==undefined?validateEngineeringOwnedPaths(spec.owned_paths):spec?.owned_paths;
  if(ownedPaths)metadata.owned_paths=ownedPaths;
  if(checkClaim){const [comments,prs]=await completeReads([githubPages(client,`/repos/${repo}/issues/${github_issue}/comments`),linkedPulls(client,repo,github_issue)]);Object.assign(metadata,verifyClaimForPR({branch,issue,comments,prs}));}
  if(base)metadata.git_scope=checkGitScope({branch,base,head,run,prBody:pr.body??'',ownedPaths});

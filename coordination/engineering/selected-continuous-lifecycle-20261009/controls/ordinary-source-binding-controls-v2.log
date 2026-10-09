@@ -1,0 +1,23 @@
+✔ ordinary Git source join authenticates whole-consumed inventory without inventing a SHA pin (265.842ms)
+✖ genuine acknowledged cold facts refuse coherent source SHA rebinding (3390.5915ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3727.845167
+
+✖ failing tests:
+
+test at test/selected-continuous-lifecycle.test.mjs:165:1
+✖ genuine acknowledged cold facts refuse coherent source SHA rebinding (3390.5915ms)
+  TypeError: Cannot read properties of undefined (reading 'geometrySources')
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/selected-continuous-lifecycle.test.mjs:167:241)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
