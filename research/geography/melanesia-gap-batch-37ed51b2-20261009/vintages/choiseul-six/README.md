@@ -23,6 +23,8 @@ The authoritative run is [choiseul-six-exact-003](choiseul-six-exact-003/analysi
 
 Reproduction uses Python 3.12.14, Shapely 2.1.2 and GEOS 3.13.1. The script's `RUN` constant must be changed to a fresh name before another execution; the helper refuses to overwrite an existing vintage.
 
+The earlier `run-001` receipt, analysis, and stdout are preserved as historical artifacts, but that run is incomplete and unqualified for reproducible custody. Its receipt records a 11,987-byte script with SHA-256 `747ea6781d7cfcec5cf4b0c2342c72a78da16f0484e6a0c34d90a036da790303`; that exact script body is not retained in the packet or branch history. The retained 14,629-byte script (`3ad9a545…`) and archived 11,806-byte provisional script (`e40a8087…`) both differ. The receipt also reports Python 3.7.3 while its command names the Python 3.12 executable. The original receipt and outputs have not been rewritten and no science was rerun to repair this history. Use the separately admitted `choiseul-six-exact-003` vintage for the qualified source-fit results.
+
 ## Limits
 
 The represented source year 2021 is not an effective date or proof of current legal authority. Present-day physical ground truth, historic water or ice, processing cause, and boundary authority remain unresolved. These source-relative results support geographic coverage for an existing stable reference location; they do not infer political/legal affiliation, change hierarchy, or authorize publication.
