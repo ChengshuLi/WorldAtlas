@@ -4,6 +4,16 @@
   "timezone": "UTC",
   "scope": "Original current administrative rosters and legally authoritative polygon evidence for the issue's exact 228 Chongqing, Guizhou and Sichuan county-level subjects",
   "result": "Original current roster bytes and suitable current polygon bytes were not retained. Search discovery is recorded only as a retrieval lead and is not used as row-level evidence.",
+  "direct_access_retry": {
+    "attempted_at": "2026-10-09 UTC",
+    "method": "curl via direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
+    "results": [
+      {"url": "https://mzj.cq.gov.cn/zwgk_218/zfxxgkml/tzgg/202601/t20260119_15332641.html", "curl_exit": 28, "http_status": "000", "bytes_received": 0, "source_sha256": null},
+      {"url": "https://mzt.guizhou.gov.cn/xwzx/tzgg/202601/t20260128_89347775.html", "curl_exit": 28, "http_status": "000", "bytes_received": 0, "source_sha256": null},
+      {"url": "https://mzt.sc.gov.cn/scmzt/mzxx/article_list_2.shtml", "curl_exit": 28, "http_status": "000", "bytes_received": 0, "source_sha256": null}
+    ],
+    "interpretation": "Connection timeout before response; no roster or source bytes were retrieved or hashable."
+  },
   "attempts": [
     {
       "source_id": "cq-2025-december-roster",
