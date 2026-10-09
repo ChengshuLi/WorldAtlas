@@ -16,12 +16,16 @@ export function bindPublishedGeometryReceipt(header,raw,binding){
  assert.equal(previous.before_footprints_sha256,'b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433');
  assert.equal(previous.after_footprints_sha256,'2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9');
  assert.equal(header.source.metadata.proposal_commit,previous.commit);
+ assert.equal(header.source.metadata.migration_sha256,digest);
  const receipt=JSON.parse(raw);assert.equal(receipt.issue,1520);assert.equal(receipt.geometry_stage_validated,true);
  assert.equal(receipt.historical_claims_transferred,false);assert.equal(receipt.reused_ids.length,49623);
  assert.deepEqual(receipt.changed_ids,['atlas:physical:CAN-15:NWT','atlas:physical:CAN-25:NUN']);
+ assert.equal(receipt.limits,header.source.metadata.source_limits);
+ assert.equal(receipt.source_approval_transferred,false);
  assert.equal(receipt.before_footprints_sha256,previous.before_footprints_sha256);
  assert.equal(receipt.after_footprints_sha256,previous.after_footprints_sha256);
- return {...header,release:{...header.release,metadata:{...header.release.metadata,
+ return {...header,source:{...header.source,metadata:{...header.source.metadata,
+  source_policy:receipt.limits,geometry_migration:{...previous,commit:binding.commit}}},release:{...header.release,metadata:{...header.release.metadata,
   geometry_migration:{...previous,commit:binding.commit},original_geometry_proposal_commit:previous.commit}},
   published_geometry_receipt:{...binding},header_kind:'committed-receipt-bound-release-header'};
 }
