@@ -195,6 +195,30 @@
         "sha256": "3fac43e8326b51787961ed5eda67fc260390f9daad25a0a1cd83bd0d854a6b49",
         "hash_kind": "file-bytes",
         "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "evaluation-snapshot"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+        "bytes": 15161514,
+        "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+        "hash_kind": "file-bytes",
+        "role": "evaluation-snapshot"
+      },
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+        "bytes": 7618692,
+        "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+        "hash_kind": "file-bytes",
+        "role": "evaluation-snapshot"
       }
     ],
     "pins": {
@@ -210,11 +234,11 @@
     "subject_files": {
       "atlas:territory:HKG": {
         "path": "data/geography/part-28.json",
-        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
       },
       "atlas:territory:MAC": {
         "path": "data/geography/part-28.json",
-        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
       }
     }
   },
@@ -481,7 +505,11 @@
       "unit": "native source IDs",
       "vintage": "baseline",
       "input_sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
-      "evaluation_commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+      "input_file": {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
     },
     {
       "id": "hkg_exact_member_join_fraction",
@@ -491,7 +519,11 @@
       "denominator": 18,
       "vintage": "baseline",
       "input_sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
-      "evaluation_commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+      "input_file": {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
     },
     {
       "id": "hk_current_official_roster_name_match_count",
@@ -507,7 +539,11 @@
       "unit": "feature",
       "vintage": "baseline",
       "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
-      "evaluation_commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+      "input_file": {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
     },
     {
       "id": "mac_atlas_coordinate_pair_count",
@@ -515,7 +551,11 @@
       "unit": "coordinate pairs",
       "vintage": "baseline",
       "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
-      "evaluation_commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+      "input_file": {
+        "path": "data/geography/part-28.json",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
     },
     {
       "id": "mac_geoboundaries_coordinate_pair_count",
@@ -523,7 +563,11 @@
       "unit": "coordinate pairs",
       "vintage": "baseline",
       "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
-      "evaluation_commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+      "input_file": {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
     }
   ],
   "metric_bindings": [
