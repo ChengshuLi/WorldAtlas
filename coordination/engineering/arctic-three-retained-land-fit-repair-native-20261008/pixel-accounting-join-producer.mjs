@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {admitPhase,authenticateAdmittedBody,readAdmittedBody} from './phase-admission.mjs';
-import {joinPixelAccounting} from './pixel-accounting-join.mjs';
+import {joinPixelAccounting,installedPixelTarget} from './pixel-accounting-join.mjs';
 import {sumCompleteOwnerRuns,nativeRowArea} from './pixel-area-order.mjs';
 const sha=body=>createHash('sha256').update(body).digest('hex');
 export function producePixelAccountingJoin(plan,outputValue) {
@@ -22,7 +22,7 @@ export function producePixelAccountingJoin(plan,outputValue) {
  const admission=admitPhase({inputs:plan.inputs,runtime:plan.runtime,
   outputReserve:plan.output_reserve,metadataBytes:plan.metadata_bytes});
  const sources=plan.code.map(pin=>readAdmittedBody(admission,pin.path).toString());
- const functions=[producePixelAccountingJoin,joinPixelAccounting,sumCompleteOwnerRuns,nativeRowArea,
+ const functions=[producePixelAccountingJoin,joinPixelAccounting,installedPixelTarget,sumCompleteOwnerRuns,nativeRowArea,
   admitPhase,authenticateAdmittedBody,readAdmittedBody];
  const fingerprints=functions.map(fn=>Function.prototype.toString.call(fn));
  const guard=()=>{

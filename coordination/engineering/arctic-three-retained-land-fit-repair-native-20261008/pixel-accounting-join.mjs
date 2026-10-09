@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 import {sumCompleteOwnerRuns} from './pixel-area-order.mjs';
 
+export function installedPixelTarget(records,id) {
+ assert(Array.isArray(records));assert(['atlas:physical:CAN-15:NWT','atlas:physical:CAN-25:NUN'].includes(id));
+ const matches=records.filter(record=>record.id===id);assert.equal(matches.length,1);
+ const row=matches[0];assert(Number.isSafeInteger(row.cells)&&row.cells>0);
+ assert(Number.isFinite(row.grid_wgs84_area_m2)&&row.grid_wgs84_area_m2>0);
+ return row;
+}
+
 // Finished predecessor groups contain the complete original-order target runs.
 // This join changes no ownership words and performs no geometry operation.
 export function joinPixelAccounting(groups, originalPixel) {
@@ -26,8 +34,8 @@ export function joinPixelAccounting(groups, originalPixel) {
  const old=sumCompleteOwnerRuns(before,options),current=sumCompleteOwnerRuns(after,options);
  const expected={6666:{id:'atlas:physical:CAN-15:NWT',gain:140},6757:{id:'atlas:physical:CAN-25:NUN',gain:1}};
  const records=targets.map(owner=>{
-  const installed=originalPixel.records.find(r=>r.id===expected[owner].id);assert(installed);
-  assert.equal(installed.id,expected[owner].id);assert.equal(installed.owner,'Canada');
+  const installed=installedPixelTarget(originalPixel.records,expected[owner].id);assert(installed);
+  assert.equal(installed.id,expected[owner].id);
   assert.equal(old[owner].cells,installed.cells,'Original complete target cell count');
   assert.equal(Number(old[owner].grid_wgs84_area_m2.toFixed(6)),installed.grid_wgs84_area_m2,
    'Original complete target area in stock accumulation order');

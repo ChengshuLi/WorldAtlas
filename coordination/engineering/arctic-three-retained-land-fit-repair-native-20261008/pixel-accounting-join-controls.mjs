@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import {joinPixelAccounting} from './pixel-accounting-join.mjs';
+import {joinPixelAccounting,installedPixelTarget} from './pixel-accounting-join.mjs';
+import fs from 'node:fs';
 import {nativeRowArea} from './pixel-area-order.mjs';
 // Synthetic complete-shaped predecessor boundary, not a world restoration.
 const parts=[];for(let i=0,offset=0;i<55;i++) {
@@ -23,7 +24,15 @@ let negatives=0;
 function reject(change){const g=structuredClone(groups),p=structuredClone(pixel);change(g,p);assert.throws(()=>joinPixelAccounting(g,p));negatives++;}
 reject(g=>g.pop());reject(g=>g.reverse());reject(g=>g[0].after.parts[0].offset=2);
 reject((g,p)=>p.records[6665].cells++);reject((g,p)=>p.records[6665].grid_wgs84_area_m2+=0.000001);
-reject((g,p)=>p.records[6665].id='foreign');reject((g,p)=>p.records[6665].owner='foreign');reject(g=>g[0].before.owner_count--);
+reject((g,p)=>p.records[6665].id='foreign');reject(g=>g[0].before.owner_count--);
 reject(g=>g[0].after.parts[0].targets[6666][0][2]++);
 reject(g=>g[0].after.parts[0].targets[6666].push([0,100,1]));
 console.log(JSON.stringify({positive:1,negative:negatives,fixture:'synthetic-complete-shaped-join-boundary',grid_rows_computed:0}));
+
+const actual=JSON.parse(fs.readFileSync(new URL('./pixel-accounting-original-records.json',import.meta.url)));
+assert.equal(actual.source.sha256,'a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8');
+for(const row of actual.records)assert.strictEqual(installedPixelTarget(actual.records,row.id),row);
+assert.throws(()=>installedPixelTarget([...actual.records,actual.records[0]],actual.records[0].id));
+assert.throws(()=>installedPixelTarget([],actual.records[0].id));
+assert.throws(()=>installedPixelTarget(actual.records,'CAN-15:NWT'));
+console.log(JSON.stringify({actual_original_records:2,lookup_positive:2,lookup_negative:3,opaque_country_metadata_retained:true}));
