@@ -6,7 +6,7 @@ import path from 'node:path';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata} from '../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -55,7 +55,7 @@ function fixture(){
   return commit();
  };
  return {repo,git,write,commit,select,cleanup:()=>{
-  if(retained){const objects=[...new Set(git('rev-list','--objects',...issued).split('\n').map(row=>row.split(' ')[0]))].map(oid=>{const type=git('cat-file','-t',oid),body=execFileSync('git',['-C',repo,'cat-file',type,oid]);assert.equal(createHash('sha1').update(Buffer.from(type+' '+body.length+'\0')).update(body).digest('hex'),oid);return {oid,type,bytes:body.length,sha256:sha(body),base64:body.toString('base64')};});const result={kind:'complete-synthetic-immutable-entry-fixture',commits:issued,objects,source_approval:false};fs.writeFileSync(path.join(retained,`fixture-${fixtureOrdinal++}.json.gz`),gzipSync(Buffer.from(JSON.stringify(result))),{flag:'wx'});}
+  if(retained){const objects=[...new Set(git('rev-list','--objects',...issued).split('\n').map(row=>row.split(' ')[0]))].map(oid=>{const type=git('cat-file','-t',oid),body=execFileSync('git',['-C',repo,'cat-file',type,oid],{maxBuffer:32*1024*1024});assert.equal(createHash('sha1').update(Buffer.from(type+' '+body.length+'\0')).update(body).digest('hex'),oid);return {oid,type,bytes:body.length,sha256:sha(body),base64:body.toString('base64')};});const result={kind:'complete-synthetic-immutable-entry-fixture',commits:issued,objects,source_approval:false};fs.writeFileSync(path.join(retained,`fixture-${fixtureOrdinal++}.json.gz`),gzipSync(Buffer.from(JSON.stringify(result))),{flag:'wx'});}
   fs.rmSync(repo,{recursive:true,force:true});
  }};
 }
@@ -422,8 +422,8 @@ test('Cloudflare fourth entry is explicit and cannot reinterpret historical prof
 });
 
 
-test('genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles',()=>{
- const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354');
+for(const [title,relative]of [['genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles','coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354'],['renewed installer authority retains genuine complete 533-role custody','coordination/engineering/selected-native-side-acquisition-20261009/authority-121149']])test(title,()=>{
+ const directory=path.join(root,relative);
  const read=name=>fs.readFileSync(path.join(directory,name));
  const rows=JSON.parse(read('original-inputs.json')).pins;
  for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
@@ -454,7 +454,7 @@ test('genuine Cloudflare authority retains complete 533 roles and four explicit 
   for(const p of rows)f.write(p.path,read(p.copy));let head=f.commit();
   const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
   const reader=new ImmutableReader(f.repo,head),result=readArtifactConsumption(reader,selection,manifest);
-  assert.equal(result.review_id,6081097955);assert.equal(result.releaseCatalogue.complete_roles,533);assert.equal(result.sourceCustody.source_critical_roles,33);
+  assert.equal(result.review_id,JSON.parse(read('review.json')).id);assert.equal(result.releaseCatalogue.complete_roles,533);assert.equal(result.sourceCustody.source_critical_roles,33);
   assert.equal(reader.charged.size,6);assert.ok(reader.used<=256*1024*1024);
   // The original whole certificate/GET binds all inline metadata. Coherently
   // editing a metadata body cannot mint a new accepted certificate authority.
@@ -473,5 +473,137 @@ test('genuine Cloudflare authority retains complete 533 roles and four explicit 
   limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
   limited.used=256*1024*1024-5*1024*1024;
   assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
+ }finally{f.cleanup();}
+});
+
+
+test('separate authenticated native stages preserve all rows and relinquish containing buffers',()=>{
+ const f=fixture();try{
+  const before=f.select([[[0,2,1]],[[1,3,2]],[],[]]);
+  const after=f.select([[[0,3,1]],[[1,4,2]],[],[]],{transport:true});
+  const result=inspectSelected(f.repo,before,after);
+  assert.equal(result.status,'no-new-native-loss');assert.equal(result.lost_or_reassigned_cells,0);
+  assert.equal(result.affected_rows,2);assert.equal(result.phases.length,1);
+  const phase=result.phases[0];assert.deepEqual(phase.baseline.rows,[0,1]);assert.deepEqual(phase.candidate.rows,[0,1]);
+  assert.equal(phase.baseline.whole_parts.length,1);assert.equal(phase.candidate.whole_parts.length,1);
+  assert.ok(phase.baseline_carried_bytes>0);assert.ok(phase.baseline.phase_bytes<=256*1024*1024);assert.ok(phase.candidate.phase_bytes<=256*1024*1024);
+  const lost=f.select([[[0,1,1]],[[1,4,2]],[],[]],{transport:true});
+  assert.equal(inspectSelected(f.repo,before,lost).lost_or_reassigned_cells,1);
+ }finally{f.cleanup();}
+});
+
+test('actual whole-part acquisition reads once for several rows and rejects incomplete or forged carry',()=>{
+ const f=fixture();try{
+  const version=f.select([[[0,2,1]],[[1,3,2]],[[0,1,1]],[]],{transport:true});
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();
+  const table=loadNativeRowTable(snapshot);let bodies=0;const actual=reader.read.bind(reader);
+  reader.read=(name,options)=>{if(name.includes('/bank/group/'))bodies++;return actual(name,options);};
+  const product=acquireNativeRows(snapshot,table,[0,1,2]);
+  assert.equal(bodies,product.custody.whole_inputs.length); // One containing roster, not three row decodes.
+  assert.equal(product.custody.whole_parts.length,1);assert.equal(product.words.length,9);
+  assert.deepEqual([...product.words],[0,2,1,1,3,2,0,1,1]);validateNativeRowCarry(product,snapshot,[0,1,2]);
+  assert.throws(()=>validateNativeRowCarry({...product},snapshot,[0,1,2]),/carry/);
+  assert.throws(()=>validateNativeRowCarry(product,snapshot,[0,2]),/carry/);
+  product.words[2]=2;assert.throws(()=>validateNativeRowCarry(product,snapshot,[0,1,2]),/carry/);product.words[2]=1;
+  product.custody.whole_inputs=[];assert.throws(()=>validateNativeRowCarry(product,snapshot,[0,1,2]),/carry/);
+  assert.throws(()=>acquireNativeRows(snapshot,table,[0,0]),/duplicate/);
+  assert.throws(()=>acquireNativeRows(snapshot,table,[4]),/foreign/);
+  assert.throws(()=>acquireNativeRows({...snapshot},table,[0]),/authenticated/);
+  const altered=table.slice();assert.throws(()=>acquireNativeRows(snapshot,altered,[0]),/authenticated/);
+  table[0]++;assert.throws(()=>acquireNativeRows(snapshot,table,[0]),/unchanged/);
+ }finally{f.cleanup();}
+});
+
+test('complete side runtime and carried projection admission refuses before whole body opens',()=>{
+ const f=fixture();try{
+  const version=f.select([[[0,2,1]],[[1,3,2]],[],[]],{transport:true});
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
+  let opens=0;const actual=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return actual(...args);};
+  assert.throws(()=>acquireNativeRows(snapshot,table,[0,1],{carry:{bytes:256*1024*1024}}),/authenticated native carry/);assert.equal(opens,0);
+  reader.runtimeBytes=256*1024*1024-1;
+  assert.throws(()=>acquireNativeRows(snapshot,table,[0,1]),/prospective cap/);assert.equal(opens,0);
+ }finally{f.cleanup();}
+});
+
+
+test('real complete side acquisition fits bounded carry where simultaneous whole-body admission cannot',()=>{
+ const f=fixture();try{
+  const version=f.select([[[0,2,1]],[[1,3,2]],[],[]],{transport:true});
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
+  const original=acquireNativeRows(snapshot,table,[0,1]);
+  const sideBytes=original.custody.phase_bytes-(reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes);
+  reader.runtimeBytes=256*1024*1024-reader.executionBytes-reader.metadataBytes-reader.outputBytes-sideBytes-original.bytes-16;
+  const base=reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes;
+  assert.ok(base+2*sideBytes>256*1024*1024);
+  const before=acquireNativeRows(snapshot,table,[0,1]);const after=acquireNativeRows(snapshot,table,[0,1],{carry:before});
+  validateNativeRowCarry(before,snapshot,[0,1]);validateNativeRowCarry(after,snapshot,[0,1]);assert.deepEqual([...before.words],[...after.words]);
+  assert.ok(after.custody.phase_bytes<=256*1024*1024);
+  reader.runtimeBytes+=32;
+  let opens=0;const actual=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return actual(...args);};
+  assert.throws(()=>acquireNativeRows(snapshot,table,[0,1],{carry:before}),/prospective cap/);assert.equal(opens,0);
+ }finally{f.cleanup();}
+});
+
+
+test('one complete row spanning two whole native members uses genuine bounded member frames',()=>{
+ const f=fixture();try{
+  f.select([[[0,1,1],[1,2,2]],[],[],[]]);
+  const manifestPath='data/canonical-grid/fixture/manifest.json',manifest=JSON.parse(fs.readFileSync(path.join(f.repo,manifestPath)));
+  const halves=[Uint32Array.from([4,0]),Uint32Array.from([9,1])];
+  manifest.parts=[manifest.parts.find(p=>p.kind==='rows'),...halves.map((words,i)=>{
+   const encoded=gzipSync(shuffleOwnershipBytes(words)),name=`native-v1/ownership/runs-${i*2}.bin.gz`;f.write('data/canonical-grid/fixture/'+name,encoded);
+   return {kind:'runs',offset:i*2,words:2,path:name,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:8,decoded_sha256:sha(Buffer.from(words.buffer)),encoding:'byte-shuffle'};
+  })];
+  const raw=f.write(manifestPath,manifest),selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));selection.sha256=sha(raw);
+  const products=[{path:'manifest.json',bytes:raw.length,sha256:sha(raw)},...manifest.parts];
+  const receipt={method:manifest.method,checked_rows:4,checked_cells:16,unchecked_cells:0,checked_runs:manifest.runWords/2,installation_ready:false,products,two_run_products:products.length,run_one_sha256:sha(Buffer.from(JSON.stringify(products))),run_two_sha256:sha(Buffer.from(JSON.stringify(products)))};
+  const receiptRaw=f.write('coordination/engineering/fixture/receipt.json',receipt),proofCommit=f.commit();
+  f.write('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[sha(raw)]:{commit:proofCommit,path:'coordination/engineering/fixture/receipt.json',sha256:sha(receiptRaw),role:'reviewed-exhaustive-native-rule-comparison',installation_approval:false}}});
+  f.write('data/ownership-selection.json',selection);const version=f.commit();
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
+  const initial=acquireNativeRows(snapshot,table,[0]);assert.equal(initial.custody.member_phases.length,2);assert.deepEqual([...initial.words],[0,1,1,1,2,2]);
+  const sideCost=initial.custody.phase_bytes-reader.runtimeBytes-reader.executionBytes-reader.metadataBytes-reader.outputBytes;
+  reader.runtimeBytes=256*1024*1024-reader.executionBytes-reader.metadataBytes-reader.outputBytes-sideCost-8;
+  let memberReads=0;const actual=reader.read.bind(reader);reader.read=(name,options)=>{if(name.includes('/runs-'))memberReads++;return actual(name,options);};
+  const complete=acquireNativeRows(snapshot,table,[0]);assert.equal(memberReads,2);assert.equal(complete.custody.member_phases.length,2);validateNativeRowCarry(complete,snapshot,[0]);assert.deepEqual([...complete.words],[0,1,1,1,2,2]);
+  for(const phase of complete.custody.member_phases)assert.ok(phase.phase_bytes<=256*1024*1024);
+ }finally{f.cleanup();}
+});
+
+
+test('actual whole encoded interval outside the original native grid refuses during projection',()=>{
+ const f=fixture();try{
+  f.select([[[0,1,1]],[],[],[]]);
+  const manifestPath='data/canonical-grid/fixture/manifest.json',manifest=JSON.parse(fs.readFileSync(path.join(f.repo,manifestPath)));
+  manifest.size=3;
+  const rowWords=Uint32Array.from([0,1,1,0,1,0]),rowEncoded=gzipSync(shuffleOwnershipBytes(rowWords)),rowPin=manifest.parts.find(p=>p.kind==='rows');
+  Object.assign(rowPin,{words:6,bytes:rowEncoded.length,sha256:sha(rowEncoded),decoded_bytes:24,decoded_sha256:sha(Buffer.from(rowWords.buffer))});f.write('data/canonical-grid/fixture/'+rowPin.path,rowEncoded);
+  const words=Uint32Array.from([6,3]),encoded=gzipSync(shuffleOwnershipBytes(words)),pin=manifest.parts.find(p=>p.kind==='runs');
+  Object.assign(pin,{bytes:encoded.length,sha256:sha(encoded),decoded_bytes:8,decoded_sha256:sha(Buffer.from(words.buffer))});
+  f.write('data/canonical-grid/fixture/'+pin.path,encoded);
+  const raw=f.write(manifestPath,manifest),selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));selection.sha256=sha(raw);
+  const products=[{path:'manifest.json',bytes:raw.length,sha256:sha(raw)},...manifest.parts];
+  const receipt={method:manifest.method,checked_rows:3,checked_cells:9,unchecked_cells:0,checked_runs:1,installation_ready:false,products,two_run_products:products.length,run_one_sha256:sha(Buffer.from(JSON.stringify(products))),run_two_sha256:sha(Buffer.from(JSON.stringify(products)))};
+  const receiptRaw=f.write('coordination/engineering/fixture/receipt.json',receipt),proofCommit=f.commit();
+  f.write('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[sha(raw)]:{commit:proofCommit,path:'coordination/engineering/fixture/receipt.json',sha256:sha(receiptRaw),role:'reviewed-exhaustive-native-rule-comparison',installation_approval:false}}});
+  f.write('data/ownership-selection.json',selection);const version=f.commit();
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
+  assert.throws(()=>acquireNativeRows(snapshot,table,[0]),/original grid domain/);
+ }finally{f.cleanup();}
+});
+
+
+test('complete zero-interval row starts its own charged projection and carry phase',()=>{
+ const f=fixture();try{
+  const version=f.select([[],[[0,1,1]],[],[]]);
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
+  reader.used+=4096;const stalePhase=reader.used;
+  let opens=0;const actual=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return actual(...args);};
+  const empty=acquireNativeRows(snapshot,table,[0]);
+  const phaseBase=reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes;
+  assert.equal(opens,0);assert.equal(empty.words.length,0);assert.equal(empty.custody.member_phases.length,0);assert.equal(reader.used,phaseBase+empty.bytes);assert.notEqual(reader.used,stalePhase);assert.equal(empty.custody.phase_bytes,reader.used);
+  validateNativeRowCarry(empty,snapshot,[0]);
+  const next=acquireNativeRows(snapshot,table,[0],{carry:empty});validateNativeRowCarry(next,snapshot,[0]);
+  assert.equal(opens,0);assert.equal(reader.used,phaseBase+empty.bytes+next.bytes);assert.equal(next.custody.phase_bytes,reader.used);
  }finally{f.cleanup();}
 });
