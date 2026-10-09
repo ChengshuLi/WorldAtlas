@@ -24,7 +24,7 @@ Among the 126 previously mapped-land cases, retained source comparisons show 26 
 
 `vintages/source-remainders-084-001/` keeps the 65 exact geoBoundaries candidate-minus-source-union geometries from the earlier comparison and calculates exact candidate-minus-source geometry for the 19 NCL positive matches. Of the NCL matches, 15 cover the whole candidate exactly and four have a source-coverage remainder. Across both source groups, 41 candidates have complete retained-source coverage and 69 remain partial. The other ten NCL candidates have no positive-area match. Remainders show source noncoverage only; they do not establish water or cause.
 
-`vintages/batch-outcomes-363-001/` lists every assigned component ID, exact candidate feature/geometry hash and full candidate feature. It joins the source comparison and targeted NCL results to the 110 prepared payloads and the 253 specific held outcomes. The exact remainder geometries are preserved separately above, so none of the 69 partial cases is treated as full-component coverage.
+`vintages/batch-outcomes-363-002/` is the current full outcome ledger: every assigned component ID, exact candidate feature/geometry hash and full candidate feature, the 110 prepared payloads, 253 specific held outcomes, plus exact source coverage status and remainder geometry. It reports 41 complete source coverages, 69 partial coverages with geometry remainders and 10 NCL source-unmatched cases. The prior `batch-outcomes-363-001/` remains a historical checkpoint.
 
 These are additive geometry/target payloads, not accepted edits. Current native-grid unowned-cell verification and complete conservation of every pre-existing native assignment remain required before acceptance. No assignment has been changed.
 
