@@ -8,7 +8,8 @@ export async function nativeSourceDigest(features, {signal, onProgress = () => {
   if(additiveBaseReference&&features.some(feature=>Object.hasOwn(feature,'additiveFootprint'))){
     const base=await nativeSourceDigest(features.map(feature=>({id:feature.id,geometry:feature.geometry})),{signal,onProgress});
     if(base.sha256!==additiveBaseReference.footprints_sha256)throw Error('Complete loaded original base footprint differs from selected additive bank');
-    return {...base,sha256:additiveReleaseFootprintDigest(additiveBaseReference,features),base_sha256:base.sha256,domain:'worldatlas-effective-native-footprints:v1'};
+    return {...base,sha256:additiveReleaseFootprintDigest(additiveBaseReference,features),base_sha256:base.sha256,
+      domain:features.some(feature=>feature?.additiveFootprint?.version===2)?'worldatlas-effective-native-footprints:v2':'worldatlas-effective-native-footprints:v1'};
   }
   const ordered = features.map(feature => [feature.id, Object.hasOwn(feature,'additiveFootprint') ? effectiveFootprintValue(feature) : feature.geometry])
     .sort((a, b) => a[0].localeCompare(b[0]));

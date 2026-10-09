@@ -1,0 +1,34 @@
+// External custody parser controls. Every execution record is synthetic; no
+// actual cold command or selected-bank qualification is implied by this test.
+import assert from 'node:assert/strict';import fs from 'node:fs';import {createHash} from 'node:crypto';
+import {all} from './current-rebind-controls.mjs';
+import {verifyCurrentRebindExecution,valueBytes} from '../../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+const sha=b=>createHash('sha256').update(b).digest('hex'),Q='coordination/engineering/additive-native-gap-batch-20261008/composition-v2/';
+const clone=()=>{const c=structuredClone(all);for(const name of Object.keys(c.executionCustody))c.executionCustody[name]=Buffer.from(c.executionCustody[name]);return c;};
+const refresh=(c,name)=>{const b=c.executionCustody[name],p=c.operating.execution_custody[name];p.bytes=b.length;p.sha256=sha(b);};
+const edit=(c,name,f)=>{const v=JSON.parse(c.executionCustody[name]);f(v);c.executionCustody[name]=valueBytes(v);refresh(c,name);};
+const verify=c=>verifyCurrentRebindExecution({request:c.request,operating:c.operating,expectedCode:c.expectedCode,custody:{...c.executionCustody,result_sha256:c.bodyPins.result.sha256}});
+assert.equal(verify(all).runtime.length,9);
+const hosted=clone();edit(hosted,'code_source',p=>{p.pre_use.runtime[0].mode=511;p.pre_use.runtime[0].bytes=126595440;p.post_use=structuredClone(p.pre_use);hosted.request.execution.pre_use=structuredClone(p.pre_use);});edit(hosted,'terminal',t=>t.code_source_sha256=hosted.operating.execution_custody.code_source.sha256);assert.equal(verify(hosted).runtime[0].mode,511);
+let negative=0;const reject=(f,error)=>{const c=clone();f(c);assert.throws(()=>verify(c),error);negative++;};
+reject(c=>edit(c,'code_source',p=>{p.pre_use.entry.mode=511;p.post_use=structuredClone(p.pre_use);c.request.execution.pre_use=structuredClone(p.pre_use);}),/Unsafe\/untyped external/);
+reject(c=>edit(c,'code_source',p=>p.post_use.runtime[0].sha256='f'.repeat(64)),/changed before\/after/);
+reject(c=>{edit(c,'code_source',p=>{p.pre_use.code.pop();p.post_use=structuredClone(p.pre_use);c.request.execution.pre_use=structuredClone(p.pre_use);});},/executing code closure/);
+reject(c=>{edit(c,'code_source',p=>{p.pre_use.runtime=p.pre_use.runtime.filter(r=>r.role!=='installed-dependency');p.post_use=structuredClone(p.pre_use);c.request.execution.pre_use=structuredClone(p.pre_use);});},/installed hash import closure/);
+reject(c=>{edit(c,'code_source',p=>{p.pre_use.runtime.push(p.pre_use.runtime[0]);p.post_use=structuredClone(p.pre_use);c.request.execution.pre_use=structuredClone(p.pre_use);});},/duplicate installed runtime/);
+reject(c=>{c.executionCustody.stderr=Buffer.from('100000001 maximum resident set size\n');refresh(c,'stderr');},/time lifetime RSS differs/);
+reject(c=>{c.executionCustody.stderr=Buffer.from('100000000 maximum resident set size\n100000000 maximum resident set size\n');refresh(c,'stderr');},/time lifetime RSS differs/);
+reject(c=>edit(c,'terminal',t=>t.exit_code=false),/Failed\/foreign external/);
+reject(c=>edit(c,'terminal',t=>t.owned_processes_remaining=[123]),/surviving owned process/);
+reject(c=>edit(c,'terminal',t=>t.sampled_group_peak_bytes=t.sampled_stop_bytes),/numeric journal/);
+reject(c=>edit(c,'terminal',t=>t.sampled_stop_bytes++),/numeric journal/);
+reject(c=>edit(c,'terminal',t=>t.elapsed_seconds=1201),/actual lifetime\/wall bound/);
+reject(c=>{c.executionCustody.stderr=Buffer.from('        2.00 real         0.80 user         0.10 sys\n             100000000 maximum resident set size\n');refresh(c,'stderr');},/time wall duration differs/);
+reject(c=>{c.executionCustody.stderr=Buffer.from('100000000 maximum resident set size\n');refresh(c,'stderr');},/raw external time wall duration/);
+reject(c=>edit(c,'terminal',t=>t.code_source_sha256='f'.repeat(64)),/Failed\/foreign external/);
+reject(c=>edit(c,'stdout',p=>p.result_sha256='f'.repeat(64)),/publication\/output identity/);
+reject(c=>{edit(c,'issued_plan',p=>p.target_sources.pop());const b=c.executionCustody.issued_plan;edit(c,'code_source',p=>{p.pre_use.plan.bytes=b.length;p.pre_use.plan.sha256=sha(b);p.post_use=structuredClone(p.pre_use);c.request.execution.pre_use=structuredClone(p.pre_use);});},/issued input plan changes/);
+reject(c=>edit(c,'code_source',p=>{p.command[2]='/foreign/node';c.request.execution.command=[...p.command];}),/external command differs/);
+reject(c=>{c.executionCustody.stderr=Buffer.alloc(40961,32);refresh(c,'stderr');},/metadata\/log bound/);
+reject(c=>delete c.operating.execution_custody.issued_plan,/Incomplete external execution roster/);
+fs.writeFileSync(Q+'execution-custody-controls.json',valueBytes({version:1,kind:'complete-external-rebind-execution-custody-controls',positives:2,negatives:negative,code:all.expectedCode,runtime_roles:verify(all).runtime.map(r=>r.role),limits:['Whole raw/canonical execution records are synthetic. This is a parser/crossbinding test, not actual preimport/runtime/operating qualification.','No child command, original source fitness/native operator, selected-bank read or activation executed.']}));console.log(JSON.stringify({positive:2,negative,executing_source_bodies:all.expectedCode.length,runtime_roles:9}));

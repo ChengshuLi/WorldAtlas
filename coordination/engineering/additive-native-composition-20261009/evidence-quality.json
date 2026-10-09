@@ -1,0 +1,1042 @@
+{
+  "version": 1,
+  "issue": 1523,
+  "lane": "engineering",
+  "worker_id": "01a119de-e3de-7860-aa56-0484afa8a261",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+    "files": [
+      {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+        "bytes": 166310,
+        "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "bytes": 94693,
+        "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+        "uncompressed_bytes": 320200,
+        "uncompressed_sha256": "897ca97928956c190fb4b1a25f0364333528b8d789f5e9f60f345f9299803e3e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+        "bytes": 13848,
+        "sha256": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "merged_alaska_source_only_delivery": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "accepted1295_original_pointset_packet": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+      "accepted1295_offline_delivery": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28"
+    },
+    "pin_files": {
+      "merged_alaska_source_only_delivery": {
+        "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "accepted1295_original_pointset_packet": {
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4"
+      },
+      "accepted1295_offline_delivery": {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-original-additive-authority-and-control-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1523",
+      "role": "Existing immutable source-relative premise and ownership custody; not contemporary land/water authority",
+      "vintage": "Original pilot52bed, Alaska b82ee, Arctic29b67 retained literal; controls at recorded execution heads",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source reuse/fitness caveats remain; no new rights grant or physical approval"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Full original immutable source/record/native/context bodies remain necessary; exact whole source input/code/runtime and original Merkle/request custody retained. Actual completed stage files and operating evidence are retained whole in this packet.",
+      "limit": "Source/consumer introduction only. Actual current-bank rebind, two cold qualifications, selection and activation remain deferred. Original physical/source authority limits and eight exception rows persist."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/README.md",
+      "bytes": 5024,
+      "sha256": "85fad2945e917d1daee7f9e8cc8c1c6819d982e50c8f7544c8a28ed430ecaeb2",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind-controls.json",
+      "bytes": 271,
+      "sha256": "65129ddf18ae98541449a18025917037e64cd38115b9324121b34311b8c6214a",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind-controls.mjs",
+      "bytes": 3326,
+      "sha256": "ffc6cd954d8716eaf852517286ebe1e125518b7173c8e2a43053ec3430f0a40c",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+      "bytes": 9349,
+      "sha256": "85db804ef8b0ab12727ccfe07d38a613f70e0efa044376bdc098ed9691773bdb",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/cold-entry-controls.json",
+      "bytes": 344,
+      "sha256": "aeec86ca9cf0b36a283ea1be619320d2c0eb452f451879503fc4cea1377d0a78",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/cold-entry-controls.mjs",
+      "bytes": 3415,
+      "sha256": "519d329f2d5c3e0ab7aef2f7de208ec3b33c7b1e527aaedf3c483537646390bb",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-acquisition-body-controls.json",
+      "bytes": 1996,
+      "sha256": "86c7328db3d85d099e2bff14b2d7cc4e564bdf26799252b46d38f9157e0b7d32",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-browser-v2-controls.json",
+      "bytes": 494,
+      "sha256": "a932906dad07787aa470dcefcd0c9198257ff6cbd6bb1ac765d7be32f3325360",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-controls.json",
+      "bytes": 3874,
+      "sha256": "4900138b025172b663e4039986125c35a0c4ea77b86b959a3beb2ea81b95208d",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-current-geometry-controls.json",
+      "bytes": 377,
+      "sha256": "33d1c2feab04d816c0c8c18d2850bba35f514cff91d5d37d47a795ca419ccb2d",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-current-rebind-controls.json",
+      "bytes": 5285,
+      "sha256": "fbeeae8bd638c90da702031dbcd50f73d5996df38563fe33f7899f8b31c6d481",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-execution-custody-controls.json",
+      "bytes": 5404,
+      "sha256": "fd71fb90f95266ea6c60f1f9bf140089e6de3d12807d5ab2b8685d65cf6b2165",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-native-v2-controls.json",
+      "bytes": 295,
+      "sha256": "40777ed53b78ead7bfd45f617b3cd7ecd08580623eb24f0f7f445ff8db59a992",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-predecessor-native-controls.json",
+      "bytes": 662,
+      "sha256": "9267f06f7682617e8073076f8f5dfa5f684191a1ea5858c18ceff9ce48ea071c",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-rebind-reader-controls.json",
+      "bytes": 14823,
+      "sha256": "f8bacadc739e42a7c1d8a8fed9008d5b9ca02a548034146aa29acd8ebbfcdad2",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-renderer-domain-controls.json",
+      "bytes": 363,
+      "sha256": "38c78e14a45019e05dcb746e28b6e493af0c08c434a23c99e7f80f4af41449bc",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-capture-current-rebind-controls.json",
+      "bytes": 271,
+      "sha256": "65129ddf18ae98541449a18025917037e64cd38115b9324121b34311b8c6214a",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-cold-entry-controls.json",
+      "bytes": 344,
+      "sha256": "aeec86ca9cf0b36a283ea1be619320d2c0eb452f451879503fc4cea1377d0a78",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-external-execution-controls.json",
+      "bytes": 366,
+      "sha256": "b24d646b6a81081875a94a16c23101ac585ae9d9a2bf7c2c41a0e6c6f2ef4802",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-operating-order-controls.json",
+      "bytes": 337,
+      "sha256": "f339c74731e2dbaaeb038cd9a43f5dd58d6c5140d58c9fbac7d02ca6a21bd993",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+      "bytes": 2197,
+      "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+      "bytes": 3168,
+      "sha256": "4a0f1947ce98c18f4c75d007e8ae2dbaed44d6a8e98a5f389131aaa1736413c2",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/external-execution-controls.json",
+      "bytes": 366,
+      "sha256": "b24d646b6a81081875a94a16c23101ac585ae9d9a2bf7c2c41a0e6c6f2ef4802",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/external-execution-controls.py",
+      "bytes": 3941,
+      "sha256": "b09c4c48f383d8cf298f882108dab4f75cbe7d168581ed20c81f859379d1e5b5",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/final-focused-controls.json",
+      "bytes": 2584,
+      "sha256": "08f055f8d625934e21a706591b9afb913334be05b6c38e9c0f046ec4d51c3707",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/final-focused-controls.log",
+      "bytes": 5119,
+      "sha256": "bd287ef3e3cbe34ff988f7847169932b74594a5ed62ecda09137f5bcce1d290f",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+      "bytes": 4185,
+      "sha256": "30aae2e0071d32de925e387de8e4f45d23208e097a800e29e17803e1cbdaeda2",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/launch-cleanup-correction-controls.json",
+      "bytes": 1356,
+      "sha256": "3811aba9405c2c413dfe7d09c1c42c34f658f1dce241d03a6681a38ac0617823",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/launch-failure-controls.json",
+      "bytes": 224,
+      "sha256": "4b9b25ae6ca330fb5d4d7676da792642f06c88ebde6ca24f1bc5e66b6adda327",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/launch-failure-controls.py",
+      "bytes": 1584,
+      "sha256": "142deb7cde69b752d5269d589b3d7db6f0ad109df9b665f504bd6bb709239f8e",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+      "bytes": 22001,
+      "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/operating-order-controls.json",
+      "bytes": 337,
+      "sha256": "f339c74731e2dbaaeb038cd9a43f5dd58d6c5140d58c9fbac7d02ca6a21bd993",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/operating-order-controls.py",
+      "bytes": 3158,
+      "sha256": "a944fd1a511f693342fcf6b4e355f91408c4efb48d43f0df64f5d6428a0e5b65",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+      "bytes": 2596,
+      "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+      "bytes": 2201,
+      "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/predecessor-native/original-custody.json",
+      "bytes": 1352,
+      "sha256": "4bb821177490e64410eaa94010373ff89501b753a37f8e27e5bfc0e367641a83",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/predecessor-native/selected-native-proof-original.json",
+      "bytes": 1990604,
+      "sha256": "d8af3b2eaf77f4fa948c01937ccb107f3d7eaa833ea4bac1d4480c633d509794",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+      "bytes": 4872,
+      "sha256": "cdfbd6f876ed0668630102a73c85844271ae31014407359765598976ff3d6015",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+      "bytes": 10434,
+      "sha256": "020e08d7fcefd5a8dd37fb418eda2be44fc5fb9f7748d33859fa0b7aa536824a",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/README.md",
+      "bytes": 4763,
+      "sha256": "118236dd9f9afa02d9d003cadd64d81d330cd2f5ff348024632ad6ac6e90fc3e",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-arctic-controls.log",
+      "bytes": 131,
+      "sha256": "98921c5b3a3ed9fbb8ec2d317c824a322e32ec320e2691e5e7dd038f074446cc",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-carryover-controls.log",
+      "bytes": 131,
+      "sha256": "a1d4a506dfacea8b6e0148b4129d729691bd1310d6e6115e4a3760ef64fafcde",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-controls-final.log",
+      "bytes": 131,
+      "sha256": "412924fb37c4d7e997f8bf367306ee2d3b86777e570dd6781c9532aedff35deb",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-controls.json",
+      "bytes": 1996,
+      "sha256": "11c6021ab48778b53646c8451449630f02892f4a4d60f4364cb0912f16820ce8",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-controls.mjs",
+      "bytes": 9082,
+      "sha256": "27c1b8c32f479709202ba500ef7abf0aabc12028eaf760844711396a960e92e9",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-grouped-controls.log",
+      "bytes": 131,
+      "sha256": "a1d4a506dfacea8b6e0148b4129d729691bd1310d6e6115e4a3760ef64fafcde",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-provenance-controls.log",
+      "bytes": 131,
+      "sha256": "dead935c7e0c3cc6b6402e17edfd982b5fb6973e3a9f94f9a7d9206f8736c968",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-control-installed-custody.json",
+      "bytes": 2074,
+      "sha256": "cd5043a542304d1200e2d0bb562d65f9c0c3f19683014874d80969861d666aed",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-v2-controls-final.log",
+      "bytes": 71,
+      "sha256": "95797436ab848c2de32353495dd33bae2e9c76f5aa5689cd1182d45fe022ac12",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-v2-controls.json",
+      "bytes": 494,
+      "sha256": "a932906dad07787aa470dcefcd0c9198257ff6cbd6bb1ac765d7be32f3325360",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-v2-controls.mjs",
+      "bytes": 6832,
+      "sha256": "c90d6acff10b6723f8b365617829b1891f5ef2e884dd8f5334205b087ebe6b57",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "bytes": 2279,
+      "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/composed-original-ledger.json",
+      "bytes": 198458,
+      "sha256": "c6f161a1a4ea05eeb6493bee580f5c96483126b1be5f04a45a58cc2e31e2c3a7",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/controls.json",
+      "bytes": 3874,
+      "sha256": "4900138b025172b663e4039986125c35a0c4ea77b86b959a3beb2ea81b95208d",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/controls.mjs",
+      "bytes": 6395,
+      "sha256": "06f92a499ac28d11721c36af5f3411ff0c8d8a945853ddfea803508eba760da1",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry-controls-final.log",
+      "bytes": 59,
+      "sha256": "ab4e36ad61feade80f48d8d69037f15eb6dc90ddacdfbc6cb41decd81313c0c6",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry-controls.json",
+      "bytes": 377,
+      "sha256": "33d1c2feab04d816c0c8c18d2850bba35f514cff91d5d37d47a795ca419ccb2d",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry-controls.mjs",
+      "bytes": 3075,
+      "sha256": "97627b23e14bafcfedf7530493be5dd204981ce1d2b115dc9e4db210b0f049f6",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+      "bytes": 242,
+      "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind-controls-final.log",
+      "bytes": 70,
+      "sha256": "c943db9d42d019e9821331b75305f7003f294a1486cb88336be29c67584ceabc",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind-controls.json",
+      "bytes": 5285,
+      "sha256": "4c7fa839acf2caeeeef3868146a4f73ee1bdab2c3f05c995292a36e92f0da9a1",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind-controls.mjs",
+      "bytes": 10036,
+      "sha256": "15c2b405e08435b05e0f12e66c52d7ed263e04f17c792c8e9ead95133c82a83e",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+      "bytes": 317,
+      "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/execution-custody-controls.json",
+      "bytes": 5404,
+      "sha256": "856e238b635e4af906f6c1a8af20fd71ebfea20cf7c0f4c9d735b32ea26fed7d",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/execution-custody-controls.mjs",
+      "bytes": 5247,
+      "sha256": "e7154b7b3dc352adcc5196773396c3d5c9563ceefa8a4692fe816ca1040cc816",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/execution-custody-fixture.mjs",
+      "bytes": 3166,
+      "sha256": "b5e34cfb4926f389e35bb4c75f3ad0a7a2e9623a3c6c1e77428dda280abd3e35",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/legacy-consumer-controls.log",
+      "bytes": 575,
+      "sha256": "aff1913c8ab9e600a152e119bf692cb20967d5b81b75ff8be23a0d20692be212",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/legacy-consumer-final.log",
+      "bytes": 575,
+      "sha256": "28e895ba8da108e3dc3c0ee464d61c6cc185a39653090dea25a8d5d61705cf4e",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/native-v2-controls-final.log",
+      "bytes": 30,
+      "sha256": "3ceeb267df38f7379d8bc6294336d5c3920032a3d5fc6c11c2fd07b9c5097d78",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/native-v2-controls.json",
+      "bytes": 295,
+      "sha256": "40777ed53b78ead7bfd45f617b3cd7ecd08580623eb24f0f7f445ff8db59a992",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/native-v2-controls.mjs",
+      "bytes": 3978,
+      "sha256": "451820f5fccd44b252a596d5cfe1b6046be72989c3da6d2b862d1d9c3177f91d",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/original-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/predecessor-native-controls.json",
+      "bytes": 662,
+      "sha256": "9267f06f7682617e8073076f8f5dfa5f684191a1ea5858c18ceff9ce48ea071c",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/predecessor-native-controls.mjs",
+      "bytes": 1988,
+      "sha256": "07a329087f0304a681f2dbe7e4ede7e00483adf27c4260c4260282e59d37e4a5",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-controls-final.log",
+      "bytes": 132,
+      "sha256": "d731d06cf9b67e8ef93d2bc075652759a3f42371bd6d9e2eca59ee02cd0ba1bf",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-controls.json",
+      "bytes": 22132,
+      "sha256": "40bd7982ccf71dc5db1b6054a3d7c6e5f79b846df0a136161752311b162a5b3e",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-controls.mjs",
+      "bytes": 6572,
+      "sha256": "d24d8fbe7a5113931bb3d2bd45d4c4f563ff55744f8b4e1b4bb4c862e457e908",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-private-controls.log",
+      "bytes": 132,
+      "sha256": "000703849c93e9926717e9d2d7e047628765fb22e19d13feb2d296906bf93a97",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/renderer-domain-controls-final.log",
+      "bytes": 30,
+      "sha256": "219a2976b92699908917646291f1e30d4fee5a363047ffb5416bd1c8ee509274",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/renderer-domain-controls.json",
+      "bytes": 363,
+      "sha256": "38c78e14a45019e05dcb746e28b6e493af0c08c434a23c99e7f80f4af41449bc",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/renderer-domain-controls.mjs",
+      "bytes": 2870,
+      "sha256": "bb746782e39b678ed1a97c173ca1053016d069ce72075e8305fdb0ee2548f423",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 111454,
+      "sha256": "166aa5fff94a73211c9728a3e8fbec61fa7aa803483ea64cb0bcd48d7780a433",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 42446,
+      "sha256": "0d20d47ae37da3fe820ab350f8c3492e341aad8b856384ad81de20905dc68218",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "src/native-source-digest.js",
+      "bytes": 2285,
+      "sha256": "5e1ef33dd195ba2df2d336c8ee48f388d5ca9b4e1a15308fbcb37d6ccea07172",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "bytes": 12324,
+      "sha256": "adaf30f744095c1cb512ab69cd1435dc6d2df2e77563d9ba5d912164b513f23f",
+      "hash_kind": "file-bytes",
+      "role": "source-introduction-code-or-retained-controls"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-additive-composition-current-rebind-introduction",
+      "kind": "code",
+      "description": "Strict V2 per-component original authority composition, whole current-source/native acquisition and external execution custody; bounded actual entry/helper controls only. No current-bank scientific qualification or selection.",
+      "software": "Node24.19.0 and original pinned Mac Python/Git; actual control scripts/output/source custody retained",
+      "units": "complete retained records, exact native words and whole bytes"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "Focused bounded controls: final-focused-controls.log. Actual current-bank cold issuer and supervisor deferred."
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/cold-entry-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/cold-entry-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-acquisition-body-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-browser-v2-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-current-geometry-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-current-rebind-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-execution-custody-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-native-v2-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-predecessor-native-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-rebind-reader-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/composition-renderer-domain-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-capture-current-rebind-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-cold-entry-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-external-execution-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/control-history-before-final/external-operating-order-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/external-execution-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/external-execution-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/final-focused-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/final-focused-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/launch-cleanup-correction-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/launch-failure-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/launch-failure-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/operating-order-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/operating-order-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/predecessor-native/original-custody.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/predecessor-native/selected-native-proof-original.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-arctic-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-carryover-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-body-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-grouped-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/acquisition-provenance-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-control-installed-custody.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-v2-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-v2-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/browser-v2-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/composed-original-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/execution-custody-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/execution-custody-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/execution-custody-fixture.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/legacy-consumer-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/legacy-consumer-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/native-v2-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/native-v2-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/native-v2-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/original-registry.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/predecessor-native-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/predecessor-native-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/rebind-reader-private-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/renderer-domain-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/renderer-domain-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/renderer-domain-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "status": "modified",
+      "original_sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "status": "modified",
+      "original_sha256": "aca206b6c253e3bc7291bd27ce932747c279a09832b285ddb875e806703b05ea"
+    },
+    {
+      "path": "src/native-source-digest.js",
+      "status": "modified",
+      "original_sha256": "adc2071f8f393a37324cd498450e6c1d725c3c5f29971f52ce7943e9f598960b"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "status": "modified",
+      "original_sha256": "43e6eeb4b4df6cc7bea0235c4f5770f8826de8eece00340d6a4b2fd9381a115c"
+    }
+  ]
+}
