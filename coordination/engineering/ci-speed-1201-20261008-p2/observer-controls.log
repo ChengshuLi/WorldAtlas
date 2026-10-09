@@ -1,0 +1,46 @@
+✔ an hour waiting on a durable request uses only result reads after initial identity check (2.399084ms)
+✔ successful receipt requires fresh actual merge, exact head and merge commit (0.331375ms)
+✔ a completed merge can be observed after the original chat disappears (0.249583ms)
+✔ mismatched merge receipt never reports success (0.330458ms)
+✔ malformed accepted receipts cannot authorize success (0.290792ms)
+✔ jitter never exceeds the five-minute cap and reads receive bounded timeouts (0.413ms)
+✔ a response arriving after the observation deadline cannot authorize another action (0.253833ms)
+✔ rate limit during final verification cannot turn a receipt into confirmed success (6.256917ms)
+✔ changed reviewed head stops before submission (0.217875ms)
+✔ known rejection ends observation without submission (0.189875ms)
+✔ rate exhaustion pauses every read until the actual reset before continuing (0.183333ms)
+✔ secondary throttling honors retry-after and does not redispatch (0.148959ms)
+✔ secondary retry-after does not wait for a non-exhausted primary reset (0.233292ms)
+✔ repeated body-only secondary throttles have a finite exponential retry budget (0.15875ms)
+✔ a reset beyond observation deadline returns pending without additional requests (0.094834ms)
+✔ ordinary permission denial is not disguised as a rate limit (0.086792ms)
+✔ read-only observation never submits an absent request (0.096959ms)
+✔ resuming an uncertain request never submits even without explicit read-only mode (0.090583ms)
+✔ an existing registration workflow prevents duplicate dispatch and is latched (0.134167ms)
+✔ registration discovered on a later complete page is resumed without submission (0.143083ms)
+✔ new submission happens once, then durable registration eliminates workflow checks (0.134208ms)
+✔ uncertain submission is never automatically repeated (0.750708ms)
+✔ fresh submission refuses an already registered pending request for the same reviewed head (0.12925ms)
+✔ incomplete registration search fails without dispatching a duplicate (0.255917ms)
+✔ failed registration remains explicit rather than silently resubmitting (0.07725ms)
+✔ CLI read-only resume confirms actual merged receipt without a write (306.933666ms)
+✔ CLI parses actual rate headers and recovers without resubmission (308.712625ms)
+✔ CLI recognizes explicit body-only secondary throttling without treating ordinary permission denial as throttling (330.981167ms)
+✔ CLI prints request identity before uncertain submission and never repeats it (285.693917ms)
+✔ CLI only claims registration after reading the durable request (575.541542ms)
+✔ CLI ordinary permission errors stop without false rate-limit recovery (290.746709ms)
+✔ CLI waiting timeout returns pending, avoids cleanup and has bounded reads (742.200667ms)
+✔ actual trusted entry point preserves the original rejection before a denied comment (106.481208ms)
+✔ actual trusted entry point retains its preparation receipt before successful notification (93.235459ms)
+✔ trusted preparation has PR comment permission while candidate tests remain read-only (0.683208ms)
+✔ actual entry point saves stale/head/conflict/base diagnostics even when notification fails (365.6715ms)
+✔ actual final entry point cleans only its owned ref and retains successful merge on cleanup failure (271.027833ms)
+✔ actual fallback prepare cleans its confirmed ref when receipt notification is denied (95.497375ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2939.479667

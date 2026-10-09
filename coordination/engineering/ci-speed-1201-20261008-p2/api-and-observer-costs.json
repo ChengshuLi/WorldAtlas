@@ -1,0 +1,189 @@
+{
+  "request_id": "beaae415-c705-4119-9b70-98a9b4e5845d",
+  "registration_run": 37859584935,
+  "execution_run": 37859632825,
+  "phase_accounting": [
+    {
+      "phase": "register",
+      "actual_http_attempts": 4,
+      "counts": {
+        "GET:actions:200": 1,
+        "GET:pulls:200": 1,
+        "GET:comments:200": 1,
+        "POST:comments:201": 1
+      }
+    },
+    {
+      "phase": "schedule",
+      "actual_http_attempts": 12,
+      "counts": {
+        "GET:actions:200": 6,
+        "GET:repository-authority:200": 1,
+        "GET:pulls:200": 1,
+        "GET:comments:200": 2,
+        "POST:comments:201": 1,
+        "POST:actions:204": 1
+      }
+    },
+    {
+      "phase": "prepare",
+      "actual_http_attempts": 99,
+      "counts": {
+        "GET:pulls:200": 16,
+        "GET:comments:200": 8,
+        "GET:actions:200": 5,
+        "GET:issues:200": 6,
+        "GET:checks:200": 6,
+        "GET:immutable-metadata:200": 42,
+        "GET:immutable-blob:200": 1,
+        "GET:repository-authority:200": 12,
+        "POST:repository-authority:201": 2,
+        "POST:comments:201": 1
+      }
+    },
+    {
+      "phase": "merge",
+      "actual_http_attempts": 106,
+      "counts": {
+        "GET:repository-authority:200": 15,
+        "GET:pulls:200": 17,
+        "GET:comments:200": 15,
+        "GET:actions:200": 12,
+        "GET:issues:200": 8,
+        "GET:checks:200": 8,
+        "GET:immutable-metadata:200": 26,
+        "GET:immutable-blob:200": 1,
+        "PUT:pulls:200": 1,
+        "DELETE:repository-authority:204": 2,
+        "POST:comments:201": 1
+      }
+    }
+  ],
+  "accounting_point": "Terminal instrumented wrapper totals, including the final result-comment POST. Accepted/testing receipt bodies precede that notification and have one fewer attempt.",
+  "log_hashes": {
+    "registration_and_schedule": "18dad2f2fd8263ab82d8a79d946089ca72590459040b52e607ae4a48b76cf59c",
+    "prepare": "67a82fa9c6ee40ac5b276b98a7a6db800af1977aacf5dd0289adaa479e6f61fa",
+    "final_merge": "b23dea323971d1166ddb0190ac3061565a1335c7beacbde0915b0336a5aabdc8"
+  },
+  "pre_notification_accounting": {
+    "prepare": {
+      "phase": "prepare",
+      "actual_http_attempts": 98,
+      "counts": {
+        "GET:pulls:200": 16,
+        "GET:comments:200": 8,
+        "GET:actions:200": 5,
+        "GET:issues:200": 6,
+        "GET:checks:200": 6,
+        "GET:immutable-metadata:200": 42,
+        "GET:immutable-blob:200": 1,
+        "GET:repository-authority:200": 12,
+        "POST:repository-authority:201": 2
+      }
+    },
+    "merge": {
+      "phase": "merge",
+      "actual_http_attempts": 105,
+      "counts": {
+        "GET:repository-authority:200": 15,
+        "GET:pulls:200": 17,
+        "GET:comments:200": 15,
+        "GET:actions:200": 12,
+        "GET:issues:200": 8,
+        "GET:checks:200": 8,
+        "GET:immutable-metadata:200": 26,
+        "GET:immutable-blob:200": 1,
+        "PUT:pulls:200": 1,
+        "DELETE:repository-authority:204": 2
+      }
+    }
+  },
+  "immutable_transport": {
+    "blob_count": 24,
+    "decoded_bytes": 279317
+  },
+  "candidate_refresh_attempts": 6,
+  "final_capacity": {
+    "phase": "final-capacity",
+    "reserved": false,
+    "planning": {
+      "limit": 5000,
+      "remaining": 4782,
+      "reset": 1791506691,
+      "resource": "core",
+      "required": 17,
+      "observations": 1,
+      "waited_ms": 347,
+      "reserved": false
+    },
+    "planning_attempts": 1,
+    "required": 124,
+    "metadata_calls": 20,
+    "admission_calls": 10,
+    "proof_calls": 0,
+    "artifact_pages": 1,
+    "inventory": {
+      "blob_calls": 25,
+      "water": false,
+      "descriptor_count": 24,
+      "original_count": 4,
+      "immutable_oids": 25,
+      "cache_fit": true,
+      "exact_git_transport": false,
+      "review_pages": 1
+    },
+    "limit": 5000,
+    "remaining": 4732,
+    "reset": 1791506691,
+    "resource": "core",
+    "observations": 1,
+    "elapsed_ms": 236,
+    "waited_ms": 236,
+    "status": "observed-sufficient",
+    "validation_call_bound": 108
+  },
+  "quota_observation": {
+    "source": "Authenticated local gh pull metadata response, separate from Actions job token quota",
+    "observed_at": "2026-10-09T00:06:46+00:00",
+    "response_headers": {
+      "x-ratelimit-limit": "5000",
+      "x-ratelimit-remaining": "4650",
+      "x-ratelimit-reset": "1791506727",
+      "x-ratelimit-resource": "core",
+      "x-ratelimit-used": "350"
+    }
+  },
+  "original_observer": {
+    "source": "Captured final stdout line of original native queue client session 50430; retained observation, not rerun",
+    "read_requests": 9,
+    "elapsed_ms": 1351071,
+    "command": "node scripts/queue-pr-merge.mjs --pr 1537 --head defda65defb79a403788228bdf3f229039a5aa70",
+    "registration_submissions": 1,
+    "limits": [
+      "Elapsed time includes queue execution and adaptive sleep/observation lag; original CPU/RSS were not instrumented."
+    ]
+  },
+  "accepted_read_only_probe": {
+    "execution_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+    "command": "/usr/bin/time -l node scripts/queue-pr-merge.mjs --pr 1537 --head defda65defb79a403788228bdf3f229039a5aa70 --request-id beaae415-c705-4119-9b70-98a9b4e5845d --observe",
+    "read_requests": 3,
+    "elapsed_ms": 2020,
+    "real_seconds": 2.07,
+    "user_cpu_seconds": 0.22,
+    "system_cpu_seconds": 0.07,
+    "maximum_rss_bytes": 52363264,
+    "peak_footprint_bytes": 17669312,
+    "output_log_sha256": "f9da73fd4418b2e175be0d2e02b6ed29c63eb6b0837ae4a14d37bd31440ec4f3",
+    "resource_log_sha256": "eee5a87eb073a04ce1cc7eda1d304dae0d168016c251a499a03c27bffb5220ee",
+    "writes": 0,
+    "cleanup_requested": false
+  },
+  "limits": [
+    "Per-phase counts are REST wrapper attempts, not Git transport/download bytes or a total of every external host request.",
+    "No 403/429 appears in these recorded phase counts. Final capacity reports observed-sufficient; its waited_ms include quota-observation HTTP latency and cannot be relabeled quota-induced sleep.",
+    "Prepare/registration do not retain separate quota-induced sleep counters; that component is unmeasured rather than assumed zero.",
+    "Mutable ownership/body/review/head/base/check and complete paginated inventories must still be freshly rechecked; counts alone do not justify removing guards.",
+    "The final accepted-state read-only probe is not a resource profile of the entire long queue or all active workers.",
+    "Local header diagnostics concern the human API credential; Actions GITHUB_TOKEN has its own quota."
+  ]
+}
