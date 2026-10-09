@@ -1,0 +1,40 @@
+{
+  "accepted": false,
+  "request_id": "a227326b-69b5-4195-8425-067d9ed59a21",
+  "issue_number": 1641,
+  "reason": "Geography workers stage evidence only and cannot reserve live operations",
+  "mutation_attempted": false,
+  "reconcile_required": false,
+  "retryable": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6090623242,
+  "logical_observation_reads": 4,
+  "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/38001504400",
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 6,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 2,
+      "GET:actions:200": 2
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4540,
+        "reset": 1791587151
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4533,
+        "reset": 1791587151
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4533,
+        "reset": 1791587151
+      }
+    }
+  }
+}
