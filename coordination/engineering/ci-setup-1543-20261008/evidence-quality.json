@@ -9,6 +9,12 @@
     "commit": "664dfe7a682fb3838ce827600792c832235a238a",
     "files": [
       {
+        "path": ".github/workflows/deployment-budget.yml",
+        "bytes": 4473,
+        "sha256": "658526950edf4ed8fe90ad5ab5b96e2d5862af32904b511ba4f4abf94f5c859c",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": ".github/workflows/handoff-scope.yml",
         "bytes": 5253,
         "sha256": "69fde03bef00ad07d646a84b0e8dfab4f1f4fc71722e678d6890ab0026609115",
@@ -18,6 +24,12 @@
         "path": ".github/workflows/issue-claims.yml",
         "bytes": 1710,
         "sha256": "27277d9b292ae13f7d9f3639d5fcbfa531352d75f838a34256a810c726b70ed8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 9544,
+        "sha256": "d8d7b07bfbbbdf558308100cc9da7531ddc7d1a7ec73e9c24bc2bd7b9bd6c867",
         "hash_kind": "file-bytes"
       },
       {
@@ -75,6 +87,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/classify-deployment-budget.mjs",
+        "bytes": 5793,
+        "sha256": "ff0821618996397b8367e48db0df17faa8d7127527867ba4005086fd2371b6a1",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "scripts/github-quota.mjs",
         "bytes": 1758,
         "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23",
@@ -96,6 +114,12 @@
         "path": "test/claim-readiness-races.test.mjs",
         "bytes": 3831,
         "sha256": "fc7a10bf8b73ddbbb2ffa24e46b7bd1f1c095aa4ba46f24b86211ac0c0b95857",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/deployment-budget-scope.test.mjs",
+        "bytes": 10581,
+        "sha256": "1c9d01740f9692085b4ea4f41332575572c6740b290f8e84055c6bb913aecea8",
         "hash_kind": "file-bytes"
       },
       {
@@ -134,6 +158,12 @@
   "sources": [],
   "outputs": [
     {
+      "path": ".github/workflows/deployment-budget.yml",
+      "bytes": 5133,
+      "sha256": "48ece870ab249d6385ffe2e5e1331a222059d3ca58778f6b61b4b4554afb4f0d",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": ".github/workflows/handoff-scope.yml",
       "bytes": 5511,
       "sha256": "75e8ca673ee2f591bc56a15594c816460455d341b5d0df518944a283ae0014fc",
@@ -146,9 +176,15 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 9725,
+      "sha256": "6392094b26c1d6c5e80df709d0dab167d3897a2f6c24c38459a3c953e6fffd2b",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/ci-setup-1543-20261008/README.md",
-      "bytes": 3933,
-      "sha256": "5357a9135d8069b6327a3ee73a7186931b070658f56979616f9d08bd2fb70e58",
+      "bytes": 4325,
+      "sha256": "e9603f019360e91651a7c4e8f9c01029d5cd8e51d22f8e08af847ce2ed6890d9",
       "hash_kind": "file-bytes"
     },
     {
@@ -171,14 +207,14 @@
     },
     {
       "path": "coordination/engineering/ci-setup-1543-20261008/quota-controls.log",
-      "bytes": 10054,
-      "sha256": "138c1c1e38335c5fe6f2cf5ab5cd0e875934e9638c4a2379b40fe137c7590d84",
+      "bytes": 11510,
+      "sha256": "d087ffa330b0e074649b239e6e405c23581d5d87ff0bb764ef6287c0e3a0fb24",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 45940,
-      "sha256": "47bf33630d11590c02ee42379de6b1ac6ac58b743c12c9a44db5b520195aa8f9",
+      "bytes": 46511,
+      "sha256": "840413356a03572194af1086223536373925f58196692c5e06dc418cfdf71ace",
       "hash_kind": "file-bytes"
     },
     {
@@ -213,38 +249,44 @@
     },
     {
       "path": "scripts/check-integration-profile.mjs",
-      "bytes": 3353,
-      "sha256": "0d34b1b56620bda98bebe310693d1714488e2a024ffa52f35fc655885530a4d3",
+      "bytes": 3369,
+      "sha256": "61f7b4f139a9fef7785c1424ae96f96ed5fa40e2ca801256cb610e78e4b8d11b",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/check-linked-github-issue.mjs",
-      "bytes": 3166,
-      "sha256": "e4f396416ab02b8c837bfc49c8cc066bbeb733d094a31a206a2171a7a92f950e",
+      "bytes": 3182,
+      "sha256": "d6f0fcd561fd760418f46ed67fde65d77ec8cff872ecef204fc7a9f082e72d3a",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/check-pr-evidence.mjs",
-      "bytes": 3397,
-      "sha256": "e3e3181cc3303e20260d61e44d804b14f09a85a59758197935a561c54f91c594",
+      "bytes": 3414,
+      "sha256": "56bf7de3ed4e6a9345403c1a5551d344285a86743ad9ecad6774668b825a14c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "bytes": 7280,
+      "sha256": "7cdf02b7baa81bd63d73905095870eadfb872569df0d146595979db32e499df3",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/github-quota.mjs",
-      "bytes": 2359,
-      "sha256": "010793e86d3d1ef63bba60f7116c72713cd61ab5556239e92f6926718311fdec",
+      "bytes": 2743,
+      "sha256": "b58a3f5a858ccd9a2b3fb5207be30265fd69201a3d2d5a46f7c82ce484fb4690",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/issue-claim-contract.mjs",
-      "bytes": 17852,
-      "sha256": "e220b1d13e837572c0b64ee71bbbb79e07c64b7ec616f043cea1417f2cec7095",
+      "bytes": 17868,
+      "sha256": "3713189e0768249fb9b10c5c847a192c7c78419dd1bfbb649874157c896cc7cc",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/run-issue-claim.mjs",
-      "bytes": 6377,
-      "sha256": "84e6d17cfff401e81f4503f93c7fbd9becc88a0dc9a248262ea8af5bc0aab36c",
+      "bytes": 6400,
+      "sha256": "dd2aa9173cff9d3fecd8a75643de5f454e22e6efe9e60ac0e3839f0f62502cbb",
       "hash_kind": "file-bytes"
     },
     {
@@ -254,15 +296,21 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 12163,
+      "sha256": "65a81b1ee7553a3ba46a9c770a701c1172fb42752991cb7c7294dd0afa81e0c7",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/github-quota.test.mjs",
-      "bytes": 7303,
-      "sha256": "0e6be7dd3da61c6ecc0b6fc025f928ac0967e66f44261c60ce877d83ee1f9fcf",
+      "bytes": 8815,
+      "sha256": "e57f96f5bf340a0420adbf74edcbbe4917f07e8a07f451aa655a5459c37e4456",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/issue-claim-quota.test.mjs",
-      "bytes": 3761,
-      "sha256": "fe3266bac8ae832893e6a9a60d24c638473767c2288fe7a41e233603721a3d41",
+      "bytes": 4674,
+      "sha256": "5254bb46fd6b4adb0214229ef8271a72fb710ccb8b34d06318ff1cc36b01370b",
       "hash_kind": "file-bytes"
     },
     {
@@ -355,6 +403,11 @@
   ],
   "change_receipts": [
     {
+      "path": ".github/workflows/deployment-budget.yml",
+      "status": "modified",
+      "original_sha256": "658526950edf4ed8fe90ad5ab5b96e2d5862af32904b511ba4f4abf94f5c859c"
+    },
+    {
       "path": ".github/workflows/handoff-scope.yml",
       "status": "modified",
       "original_sha256": "69fde03bef00ad07d646a84b0e8dfab4f1f4fc71722e678d6890ab0026609115"
@@ -363,6 +416,11 @@
       "path": ".github/workflows/issue-claims.yml",
       "status": "modified",
       "original_sha256": "27277d9b292ae13f7d9f3639d5fcbfa531352d75f838a34256a810c726b70ed8"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "d8d7b07bfbbbdf558308100cc9da7531ddc7d1a7ec73e9c24bc2bd7b9bd6c867"
     },
     {
       "path": "coordination/engineering/ci-setup-1543-20261008/README.md",
@@ -430,6 +488,11 @@
       "original_sha256": "ae699bc1c626d6514cde4b2a6c076550daf6fb19debe39f1d52cd12209a2db60"
     },
     {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "status": "modified",
+      "original_sha256": "ff0821618996397b8367e48db0df17faa8d7127527867ba4005086fd2371b6a1"
+    },
+    {
       "path": "scripts/github-quota.mjs",
       "status": "modified",
       "original_sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23"
@@ -448,6 +511,11 @@
       "path": "test/claim-readiness-races.test.mjs",
       "status": "modified",
       "original_sha256": "fc7a10bf8b73ddbbb2ffa24e46b7bd1f1c095aa4ba46f24b86211ac0c0b95857"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "1c9d01740f9692085b4ea4f41332575572c6740b290f8e84055c6bb913aecea8"
     },
     {
       "path": "test/github-quota.test.mjs",

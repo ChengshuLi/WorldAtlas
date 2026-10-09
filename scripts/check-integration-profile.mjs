@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import {requestAccounting,quotaDelay} from './github-quota.mjs';
+import {requestAccounting,quotaDelay,completeReads} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {githubAPI, githubPages, readClaim, verifyClaimForPR} from './issue-claim-contract.mjs';
@@ -25,7 +25,7 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
   let reservation = {};
   if (pr.head.ref.startsWith('geography/')) {
     const {github_issue} = validateIssuePRBody(pr.body ?? '');
-    const [issue, comments] = await Promise.all([
+    const [issue, comments] = await completeReads([
       api(`${prefix}/issues/${github_issue}`),
       githubPages(api, `${prefix}/issues/${github_issue}/comments`)
     ]);

@@ -8,7 +8,8 @@ The concrete missing optimization was the trusted premerge evidence entry point:
 queue validation used authenticated exact-OID Git batches, while premerge fetched
 whole files individually through REST. The revised entry uses the existing bounded
 transport with complete byte validation and fresh mutable authority. Superseded
-read-only handoff runs for the same PR are cancelled. Other workflows, including
+read-only handoff, PR regression and PR package runs for the same PR are cancelled.
+Main package push observations remain separate. Other workflows, including
 the five-minute scheduler and serialized mutations, retain their scheduling.
 
 `pr-1547-comparison.json` and `pr-1552-comparison.json` bind observed candidate/base
@@ -48,7 +49,11 @@ Claim failures now retain their exact quota diagnostics and HTTP accounting even
 when notification fails. Proven quota rejection avoids another doomed comment;
 possible writes require reconciliation of canonical state. No internal mutation
 retry or unbounded quota sleep is added to the five-minute job. Profile and linked
-issue failures similarly retain their actual sanitized quota evidence. Successful
+issue failures similarly retain their actual sanitized quota evidence. Deployment
+classification retains a proven quota refusal and makes the required package job
+fail before costly setup/build work; unknown non-quota input inventories still
+choose the conservative full-build fallback. Concurrent read batches drain their
+bounded requests before accounting/diagnostics are finalized. Successful
 response headers provide numeric capacity observations without additional polls.
 
 Limits: Actions installation and local credentials have distinct budgets. Shared

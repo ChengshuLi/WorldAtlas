@@ -40,3 +40,12 @@ export function copyAPIFeatures(target, source) {
     if (typeof source[name] === 'function') target[name] = source[name].bind(source);
   return target;
 }
+
+// Drain concurrently launched bounded reads before recording a refusal. Otherwise
+// a fast rejection leaves both the HTTP receipt and snapshot incomplete.
+export async function completeReads(promises) {
+  const rows=await Promise.allSettled(promises);
+  const failure=rows.find(row=>row.status==='rejected');
+  if(failure)throw failure.reason;
+  return rows.map(row=>row.value);
+}

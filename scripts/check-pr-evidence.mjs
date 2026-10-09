@@ -5,7 +5,7 @@ import {githubAPI, githubPages, workSpec, readClaim} from './issue-claim-contrac
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {gitBlobTransport} from './git-blob-transport.mjs';
-import {requestAccounting, quotaDelay} from './github-quota.mjs';
+import {requestAccounting, quotaDelay, completeReads} from './github-quota.mjs';
 
 // Only trusted base code executes. Transport supplies tree-bound immutable
 // bytes; PR identities, contracts, ownership and trees remain freshly read.
@@ -17,7 +17,7 @@ export async function checkPREvidence({event, api, verify = checkPremergeEvidenc
   const pr = await api(`/repos/${repo}/pulls/${scheduled.number}`);
   if (pr.head.sha !== scheduled.head.sha) throw Error('PR head changed since this check was scheduled');
   const {github_issue} = validateIssuePRBody(pr.body ?? '');
-  const [issue, comments, files] = await Promise.all([
+  const [issue, comments, files] = await completeReads([
     api(`/repos/${repo}/issues/${github_issue}`), githubPages(api, `/repos/${repo}/issues/${github_issue}/comments`),
     githubPages(api, `/repos/${repo}/pulls/${pr.number}/files`)
   ]);

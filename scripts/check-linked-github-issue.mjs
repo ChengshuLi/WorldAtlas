@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import {requestAccounting,quotaDelay} from './github-quota.mjs';
+import {requestAccounting,quotaDelay,completeReads} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {githubPages,githubAPI,linkedPulls,verifyClaimForPR,workSpec} from './issue-claim-contract.mjs';
@@ -23,7 +23,7 @@ export async function checkLinkedIssue({branch,event,token,fetchIssue,api,checkC
  catch(error){if(policy.mode!=='report-only')throw error;metadata.evidence_policy={status:'report-failure',reason:error.message};}
  const ownedPaths=laneForBranch(branch).lane==='geography'?workSpec(issue.body).owned_paths:undefined;
  if(ownedPaths)metadata.owned_paths=ownedPaths;
- if(checkClaim){const [comments,prs]=await Promise.all([githubPages(client,`/repos/${repo}/issues/${github_issue}/comments`),linkedPulls(client,repo,github_issue)]);Object.assign(metadata,verifyClaimForPR({branch,issue,comments,prs}));}
+ if(checkClaim){const [comments,prs]=await completeReads([githubPages(client,`/repos/${repo}/issues/${github_issue}/comments`),linkedPulls(client,repo,github_issue)]);Object.assign(metadata,verifyClaimForPR({branch,issue,comments,prs}));}
  if(base)metadata.git_scope=checkGitScope({branch,base,head,run,prBody:pr.body??'',ownedPaths});
  return {github_issue,issue_action,...metadata};
 }

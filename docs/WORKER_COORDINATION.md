@@ -393,10 +393,12 @@ has recovered. The premerge evidence entry point uses the same bounded,
 exact-tree-bound Git blob transport as the merge queue, rather than one REST
 request per evidence file. It still verifies complete bytes and every declared
 binding; mutable issue, claim, PR, tree, ancestry and review authority stay fresh.
-The read-only handoff workflow cancels superseded runs for the same PR. It does
+Read-only handoff, PR regression and PR package workflows cancel superseded
+runs for the same PR; main package push observations remain separate. This does
 not cancel the merge scheduler, claim mutations or publication.
 
-Premerge evidence, linked-issue checks, profile selection, claims and the existing
+Premerge evidence, linked-issue checks, profile selection, deployment classification,
+claims and the existing
 queue/scheduler emit actual categorized HTTP attempt counts. Their existing
 responses supply allowlisted numeric repository-core observations when available;
 no extra quota poll is added. These observations describe that credential and
@@ -420,3 +422,10 @@ write. A worker must inspect the canonical reservation and exact request before
 resuming or redispatching; an artifact alone never confers ownership. Preserve
 active work and checkpoints while waiting. Refresh this guidance before the next
 job; no new chat monitor or provider credential is introduced.
+
+A proven quota refusal during deployment classification retains its blocked
+decision and retry evidence; the required package job fails before checkout or
+dependency/build work. It never reports package success or a source-only skip.
+Unknown non-quota inventories retain the conservative full-build fallback.
+Concurrent read batches finish their existing bounded requests before receipts
+are finalized, so a fast rejection cannot hide other already-started attempts.

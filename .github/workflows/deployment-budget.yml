@@ -8,6 +8,11 @@ on:
 
 permissions: {}
 
+# Cancel superseded read-only PR builds; keep main push observations separate.
+concurrency:
+  group: worldatlas-package-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   classify:
     runs-on: ubuntu-latest
@@ -17,6 +22,7 @@ jobs:
       pull-requests: read
     outputs:
       full: ${{ steps.profile.outputs.full }}
+      blocked: ${{ steps.profile.outputs.blocked }}
     steps:
       # Never execute the candidate classifier with the read-only API token.
       # Before the helper reaches trusted base, every event gets a full build.
@@ -30,6 +36,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             scripts/classify-deployment-budget.mjs
+            scripts/github-quota.mjs
             scripts/package-inputs.mjs
             .github/package-inputs.json
             package.json
@@ -64,6 +71,11 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Refuse package verification while Actions API quota is unavailable
+        if: needs.classify.outputs.blocked == 'true'
+        run: |
+          echo 'Package is unverified: Actions API quota refused classification. Inspect the retained reset/retry receipt before retrying.'
+          exit 1
       - name: Checkout complete package inputs
         if: needs.classify.outputs.full != 'false'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803

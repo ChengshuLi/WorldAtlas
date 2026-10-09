@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {quotaDelay,requestAccounting} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadPackageInputs, readPackageInputs, packagePathRequired, safePackagePath, validatePackageInputs} from './package-inputs.mjs';
@@ -67,29 +68,43 @@ export async function deploymentBudgetProfile({event, eventName, repository, api
     const definition = await readPackageInputs({route, base, api});
     return {version: 2, event: eventName, ...classifyBudgetFiles(files, definition)};
   } catch (error) {
+    const delay=quotaDelay(error);
     return {version: 2, event: eventName, full: true,
+      ...(delay!==null?{blocked:true,api_error:error.github,retry_at:new Date(Date.now()+delay).toISOString()}:{}),
       reason: error instanceof Error ? error.message : 'Inventory lookup failed', paths: [], fallback: true};
   }
 }
 
-export async function githubBudgetAPI(route, {token = process.env.GH_TOKEN, fetchImpl = fetch} = {}) {
+export async function githubBudgetAPI(route, {token = process.env.GH_TOKEN, fetchImpl = fetch, onRequest=()=>{}} = {}) {
   if (!token) throw Error('Read-only GitHub token unavailable');
-  const response = await fetchImpl(`https://api.github.com${route}`, {
+  let response;try{response = await fetchImpl(`https://api.github.com${route}`, {
     headers: {Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'},
     signal: AbortSignal.timeout(15000),
-  });
-  if (!response.ok) throw Error(`GitHub inventory HTTP ${response.status}`);
+  });}catch(error){onRequest({route,method:'GET',status:'transport-error'});throw error;}
+  const numeric=name=>{const value=response.headers?.get(name);return /^\d{1,13}$/.test(value??'')?value:undefined;};
+  onRequest({route,method:'GET',status:response.status,capacity:{resource:response.headers?.get('x-ratelimit-resource'),
+    limit:Number(numeric('x-ratelimit-limit')),remaining:Number(numeric('x-ratelimit-remaining')),reset:Number(numeric('x-ratelimit-reset'))}});
+  if (!response.ok) {
+    const error=Error(`GitHub inventory HTTP ${response.status}`);
+    const requestId=response.headers?.get('x-github-request-id');
+    error.github={http_status:response.status,...(/^[a-fA-F0-9:]{1,100}$/.test(requestId??'')?{request_id:requestId}:{}),...Object.fromEntries([
+      ['rate_remaining',numeric('x-ratelimit-remaining')],['rate_reset',numeric('x-ratelimit-reset')],
+      ['retry_after',numeric('retry-after')]].filter(([,value])=>value!==undefined))};
+    throw error;
+  }
   return response.json();
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  let result;
+  let result;const accounting=requestAccounting('deployment-classifier');
   try {
     result = await deploymentBudgetProfile({event: JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')),
-      eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: githubBudgetAPI});
+      eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: route=>githubBudgetAPI(route,{onRequest:accounting.observe})});
   } catch { result = {version: 2, full: true, reason: 'Classifier inputs unavailable', paths: [], fallback: true}; }
   fs.mkdirSync('.cache', {recursive: true});
   fs.writeFileSync('.cache/deployment-budget-scope.json', JSON.stringify(result, null, 2) + '\n');
-  fs.appendFileSync(process.env.GITHUB_OUTPUT, `full=${result.full}\n`);
-  console.log(JSON.stringify(result));
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `full=${result.full}\nblocked=${Boolean(result.blocked)}\n`);
+  console.log(JSON.stringify({...result,request_accounting:accounting.receipt()}));
+  // A structured blocked decision makes the package job fail before setup.
+  // Unknown non-quota inventories keep the conservative full-build fallback.
 }

@@ -1,4 +1,4 @@
-import {quotaDelay} from './github-quota.mjs';
+import {quotaDelay,completeReads} from './github-quota.mjs';
 import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
@@ -130,7 +130,7 @@ export async function githubPages(api,route){
 export async function linkedPulls(api,repo,number){
  const timeline=await githubPages(api,`/repos/${repo}/issues/${number}/timeline`),ids=new Set();
  for(const event of timeline){const source=event.source?.issue;if(!source?.pull_request)continue;try{if(validateIssuePRBody(source.body??'').github_issue===number)ids.add(source.number);}catch{}}
- return Promise.all([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
+ return completeReads([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
 export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining} = {}){
  if(!token)throw Error('Read/write GitHub token required');

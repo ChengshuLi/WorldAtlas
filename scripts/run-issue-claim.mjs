@@ -2,7 +2,7 @@ import {renderWorkerResult} from './worker-result.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {requestAccounting, quotaDelay} from './github-quota.mjs';
+import {requestAccounting, quotaDelay, completeReads} from './github-quota.mjs';
 import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber,readinessDependencyIds} from './issue-claim-contract.mjs';
 import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
 
@@ -15,16 +15,16 @@ const accounting=requestAccounting('issue-claim');
 const api=apiFactory(env.GH_TOKEN,{onRequest:accounting.observe}),result={accepted:false,request_id:input.request_id,issue_number:number};
 let mutationAttempted=false;
 try{
- const [issue,comments,prs]=await Promise.all([api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),linkedPulls(api,repo,number)]);
+ const [issue,comments,prs]=await completeReads([api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),linkedPulls(api,repo,number)]);
  const spec=input.action==='release'?null:workSpec(issue.body);
  if(spec&&loadEvidencePolicy().mode==='enforce-new')evidenceRequirement(issue,spec,undefined,input.branch);
  const geographyGate=spec?.mode==='content'?JSON.parse(fs.readFileSync('data/research-geography-gate.json','utf8')):null;
  const ids=readinessDependencyIds(spec,geographyGate);
- const dependencies=await Promise.all([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
+ const dependencies=await completeReads([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
  const otherIssues=spec?.mode==='geography'?await githubPages(api,`/repos/${repo}/issues?state=open&labels=type%3Ageography`):[];
- const [freshIssue,freshComments,freshDependencies,freshPRs,freshOtherIssues]=await Promise.all([
+ const [freshIssue,freshComments,freshDependencies,freshPRs,freshOtherIssues]=await completeReads([
   api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),
-  Promise.all(ids.map(id=>api(`/repos/${repo}/issues/${id}`))),linkedPulls(api,repo,number),
+  completeReads(ids.map(id=>api(`/repos/${repo}/issues/${id}`))),linkedPulls(api,repo,number),
   spec?.mode==='geography'?githubPages(api,`/repos/${repo}/issues?state=open&labels=type%3Ageography`):[]]);
  const snapshot=value=>JSON.stringify([value.number,value.state,value.body,value.updated_at,(value.labels??[]).map(x=>x.name??x).sort()]);
  const commentSnapshot=rows=>JSON.stringify(rows.map(c=>[c.id,c.body,c.user?.login]));

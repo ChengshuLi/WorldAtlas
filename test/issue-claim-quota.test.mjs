@@ -48,3 +48,21 @@ test('successful canonical mutation is preserved when durable confirmation canno
  assert.equal(result.notification_error.api_error.rate_remaining,'0');assert.equal(result.retryable,true);
  assert.equal(f.calls.filter(r=>r.method==='POST').length,2);
 });
+
+test('fast parallel quota refusal drains bounded reads before recording actual HTTP attempts',async()=>{
+ const {githubAPI}=await import('../scripts/issue-claim-contract.mjs');
+ const old=globalThis.fetch;let started=0,completed=0;
+ globalThis.fetch=async url=>{
+  started++;
+  if(!url.endsWith('/issues/22'))await new Promise(resolve=>setTimeout(resolve,30));
+  completed++;
+  return new Response(url.endsWith('/issues/22')?'{}':'[]',{status:url.endsWith('/issues/22')?403:200,
+   headers:{'x-ratelimit-remaining':'0','x-ratelimit-reset':'100'}});
+ };
+ try{
+  const result=await runIssueClaim({event,env,apiFactory:githubAPI,wallNow:()=>99000});
+  assert.equal(started,3);assert.equal(completed,started);
+  assert.equal(result.request_accounting.actual_http_attempts,started);
+  assert.equal(result.notification_deferred,true);assert.equal(result.mutation_attempted,false);
+ }finally{globalThis.fetch=old;}
+});
