@@ -91,7 +91,7 @@
       "retention": "restoration-only",
       "restoration": "Whole original repository metadata copies retained as outputs with original commit/mode/OID/SHA in original-inputs.json; complete original qualifications remain independently pinned. No new factual source rights inference.",
       "verification": "unverified",
-      "limit": "Metadata/source provenance admission only; original source/water/date/history unapproved, no native or additive activation/deployment. Normal exact-head review/CI/queue remain required.",
+      "limit": "Metadata/source provenance admission only; original source/water/date/history unapproved, no native or additive activation/deployment. Normal exact-head review/CI and independently controlled integration remain required; the documented one-time bootstrap recovery is separate.",
       "temporal_status": "unknown"
     }
   ],
@@ -107,8 +107,20 @@
   "outputs": [
     {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/REPRODUCTION.md",
-      "bytes": 1820,
-      "sha256": "74630fea1d44c0bb0c24893d546d6fa33f4dfc498c11021f5b02e33c8c771b10",
+      "bytes": 2468,
+      "sha256": "a850dc51e3719078245e5878c4bf3df969f254c8793f21f8e5c9598288b62421",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/actual-scope-declared-fixture-controls.log",
+      "bytes": 11116,
+      "sha256": "0cd85bbfed5631420b493f4848f4524148d13af0d20785ee2d74faa14d382766",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/actual-scope-fixture-materialization.json",
+      "bytes": 234616,
+      "sha256": "6c99ea28ecf05a11b9abdb9b642392167063c1b049fa415f6951ffbdd4bafae8",
       "hash_kind": "file-bytes"
     },
     {
@@ -130,9 +142,39 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-actual-scope-fixture-controls.log",
+      "bytes": 11317,
+      "sha256": "78e3b02ea3af839f1d53dbf840477da00a014bac4a1ea82e7efc4613789357b6",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-four-profile-actual-controls.log",
       "bytes": 2015,
       "sha256": "eabf043c2b0f52396e5d0a337b6a3cca85a01f813e1ee20aaa62808c8830117f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-scope-fixture-materialization.json",
+      "bytes": 234654,
+      "sha256": "f3924a8779c38a5aab0ddac4d9080d79efd1e1f468e19da7dd16247fa8d6456b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-source-scope-failure.log",
+      "bytes": 66621,
+      "sha256": "b7e0e38d96146d81f06baf891bdfba3dfb6ed5428dddb7b6085cb93facf7ed60",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final57654-original-ci-terminal-jobs.json",
+      "bytes": 25538,
+      "sha256": "87f076f7db9f1ce506fef1481d68078ad8e6bc1b08512191812f009d300821d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final57654-original-ci-terminal-run.json",
+      "bytes": 12884,
+      "sha256": "e20084856504ba5684e3cad02cdf18a3b7ef19cf03c94fa6200cc0418691acf2",
       "hash_kind": "file-bytes"
     },
     {
@@ -167,8 +209,8 @@
     },
     {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/validation-results.json",
-      "bytes": 852,
-      "sha256": "9b59427127369f65917d63b666ff2408b2f0b7443583cf8731f43f83f4462f50",
+      "bytes": 1126,
+      "sha256": "737b8884bb58126adba9f310e39b188a54a8120d60a53023b26f447274bac88c",
       "hash_kind": "file-bytes"
     },
     {
@@ -191,20 +233,20 @@
     },
     {
       "path": ".github/workflows/merge-integration-checks.yml",
-      "bytes": 19816,
-      "sha256": "247fc4848d4685e22640bc2d140d6a7bd1655327ae2c1aa33d6d01ceff405559",
+      "bytes": 24619,
+      "sha256": "0c6ec67620a8a5963b94df7540bc78e00923a196ea82f925f71da93bf5a67c66",
       "hash_kind": "file-bytes"
     },
     {
       "path": ".github/workflows/worker-merge.yml",
-      "bytes": 9432,
-      "sha256": "cb1967ef610601761afcd7cf40718e457439421fb5c68aaf33dc7b43fbe5f629",
+      "bytes": 11944,
+      "sha256": "6c48511ab0035949a9215811049a0e31fb2eba2b479c75b26e32a43725b7b014",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/trusted-workflow-checkouts.test.mjs",
-      "bytes": 7016,
-      "sha256": "aa8c1f603222b57302bd0c146b5617c3ff7008f4a5f9abf1ce71b16816f9f6af",
+      "bytes": 11199,
+      "sha256": "6a4f56915eedbfe8d8bc7c20047ef188cc1044790dd9283400361b2271e1727f",
       "hash_kind": "file-bytes"
     },
     {
@@ -368,7 +410,7 @@
       "unit": "unique complete metadata roles",
       "vintage": "archived",
       "evaluation_commit": "2df0aa3153fc5078c8c456ebe4dc74148b8b85f9",
-      "input_sha256": "9b59427127369f65917d63b666ff2408b2f0b7443583cf8731f43f83f4462f50",
+      "input_sha256": "737b8884bb58126adba9f310e39b188a54a8120d60a53023b26f447274bac88c",
       "input_file": {
         "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/validation-results.json",
         "commit": "candidate"
@@ -380,7 +422,7 @@
       "unit": "unique complete metadata roles",
       "vintage": "archived",
       "evaluation_commit": "2df0aa3153fc5078c8c456ebe4dc74148b8b85f9",
-      "input_sha256": "9b59427127369f65917d63b666ff2408b2f0b7443583cf8731f43f83f4462f50",
+      "input_sha256": "737b8884bb58126adba9f310e39b188a54a8120d60a53023b26f447274bac88c",
       "input_file": {
         "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/validation-results.json",
         "commit": "candidate"
@@ -433,6 +475,14 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/actual-scope-declared-fixture-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/actual-scope-fixture-materialization.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/actual480-533-controls.log",
       "status": "added"
     },
@@ -449,7 +499,27 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-actual-scope-fixture-controls.log",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-four-profile-actual-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-scope-fixture-materialization.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final-source-scope-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final57654-original-ci-terminal-jobs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/qualified-artifact-authority-admission-20261009/final57654-original-ci-terminal-run.json",
       "status": "added"
     },
     {

@@ -6,6 +6,10 @@
   "full_adjacent_failures": 0,
   "skips": 0,
   "workflow_source_head": "31997a9c0a7cdee96520ccf089e55f75f678aa34",
+  "scope_source_head": "806afe3b6a48311078752811e61aadc3b48303ea",
+  "scope_declared_fixture_tests": 112,
+  "scope_declared_fixture_failures": 0,
+  "scope_declared_fixture_skips": 0,
   "workflow_checkout_tests": 12,
   "workflow_and_merge_integration_tests": 56,
   "workflow_checkout_failures": 0,
@@ -17,5 +21,5 @@
   "actual_opened_authority_metadata": 6,
   "candidate_code_executed": false,
   "scientific_qualification_reexecuted": false,
-  "limits": "Metadata/source provenance admission only; original source/water/date/history unapproved, no native or additive activation/deployment. Normal exact-head review/CI/queue remain required."
+  "limits": "Metadata/source provenance admission only; original source/water/date/history unapproved, no native or additive activation/deployment. Normal exact-head review/CI and independently controlled integration remain required; the documented one-time bootstrap recovery is separate."
 }
