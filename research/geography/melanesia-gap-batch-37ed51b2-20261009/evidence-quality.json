@@ -2208,14 +2208,14 @@
       "description": "Exact geometry intersections and candidate-minus-source-union differences; source-positive areas create source-relative proposals. No snapping or tolerance is applied. Candidate and source feature hashes are retained in outputs.",
       "distance_method": "No distance-based matching used; candidate-to-source association requires positive-area intersection.",
       "id": "exact-candidate-capture-and-source-overlay",
-      "kind": "geography",
+      "kind": "source",
       "software": "Python with Shapely; repository immutable evidence helpers; per-run environment receipts",
       "units": "longitude-latitude degrees for overlay inputs; area ratios are dimensionless"
     },
     {
       "description": "Preserve each of the 363 assigned IDs once and count complete, partial, unmatched and held outcomes from the final ledger.",
       "id": "batch-outcome-accounting",
-      "kind": "accounting",
+      "kind": "code",
       "software": "Python standard library; ledger-generation scripts and pinned run receipts",
       "units": "component IDs"
     }
