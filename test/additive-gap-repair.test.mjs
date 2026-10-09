@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
+import {combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
 import {footprintValueSha256 as hash} from '../src/effective-footprint.js';
 const row=(id,status='mapped-land-support')=>({component_id:id,candidate_feature_sha256:hash(id),candidate_geometry_sha256:hash([id]),status,
  physical_authority:'unapproved',physical_status:'unknown-source-fitness-and-observation-date',physical_limits:['original retained source limits'],complete_support:{whole_original_geometry:true}});
@@ -15,6 +15,44 @@ const parent={version:1,components:4,report_sha256:'a'.repeat(64),roster_sha256:
 const source={commit:'b'.repeat(40),path:'original.gz',sha256:'c'.repeat(64)};
 const rawRows=rows=>rows.map(row=>Buffer.from(JSON.stringify(row)+'\n'));
 const child=rows=>inventoryRows(rows,{source,parent,expectedIds:rows.map(r=>r.component_id),expectedRosterSha256:roster(rows),originalRecordBytes:rawRows(rows)});
+const batchSource=(id,owner=1,compatible=true)=>({component_id:id,target_id:'target-'+owner,pixelIndex:owner,source_compatible:compatible,
+ physical_authority:'unapproved',physical_status:'source-relative-only',failed_premises:compatible?[]:['parent-coverage'],limits:['synthetic mechanism fixture']});
+const batchCandidate=(id,owner,runs)=>({component_id:id,target_id:'target-'+owner,pixelIndex:owner,row_start:1,row_end:2,rows:[{y:1,runs:runs.map(([start,end])=>[start,end,owner])}]});
+const batch=(sources,candidates,old=[],scope=sources.map(row=>row.component_id))=>combineNativeBatch({scopeIds:scope,sourceRows:sources,candidates,
+ ownerRows:[{y:1,complete_owner_intervals:old}],size:8});
+test('shared batch preserves every source exception and distinguishes positive geometry with zero native cells',()=>{
+ const sources=[batchSource('a'),batchSource('zero'),batchSource('b'),batchSource('parent-1',1,false),batchSource('parent-2',1,false)];
+ const result=batch(sources,[batchCandidate('a',1,[[0,2]]),batchCandidate('zero',1,[]),batchCandidate('b',1,[[4,7]])]);
+ assert.deepEqual(result.decisions.map(row=>[row.component_id,row.disposition]),[['a','assigned'],['zero','zero-cell'],['b','assigned'],['parent-1','rejected'],['parent-2','rejected']]);
+ assert.equal(result.assigned_cells,5);assert.equal(result.assigned_components,2);assert.equal(result.zero_cell_components,1);assert.equal(result.source_exceptions,2);
+ assert(result.decisions.every(row=>row.physical_authority==='unapproved'));assert.equal(result.removed_cells,0);assert.equal(result.reassigned_cells,0);
+});
+test('same-owner additions are aggregated and shared cells counted once, independent of candidate order',()=>{
+ const sources=[batchSource('a'),batchSource('b')],candidates=[batchCandidate('a',1,[[1,4]]),batchCandidate('b',1,[[2,5]])];
+ const result=batch(sources,candidates);assert.deepEqual(result,batch([...sources].reverse(),[...candidates].reverse(),[],['a','b']));
+ assert.deepEqual(result.rows,[{y:1,runs:[[1,5,1]]}]);assert.equal(result.assigned_cells,4);assert.equal(result.candidate_cell_contributions,6);assert.equal(result.shared_same_owner_cells,2);
+});
+test('competing batch owners are both refused, never assigned by first-target ordering',()=>{
+ const sources=[batchSource('a'),batchSource('b',2)],candidates=[batchCandidate('a',1,[[1,4]]),batchCandidate('b',2,[[3,5]])];
+ const result=batch(sources,candidates);assert.deepEqual(result,batch([...sources].reverse(),[...candidates].reverse(),[],['a','b']));
+ assert.equal(result.assigned_cells,0);assert.equal(result.native_conflicts,2);assert(result.decisions.every(row=>row.native_conflicts.includes('competing-batch-owner')));
+});
+test('complete old owners survive virtual interval split/merge; only previously empty cells are emitted',()=>{
+ const result=batch([batchSource('a')],[batchCandidate('a',1,[[0,5]])],[[2,4,1]]);
+ assert.deepEqual(result.rows,[{y:1,runs:[[0,2,1],[4,5,1]]}]);assert.deepEqual(result.virtual_owner_rows,[{y:1,complete_owner_intervals:[[0,5,1]]}]);assert.equal(result.assigned_cells,3);
+ const foreign=batch([batchSource('a')],[batchCandidate('a',1,[[0,5]])],[[2,4,2]]);assert.equal(foreign.assigned_cells,0);assert.equal(foreign.native_conflicts,1);
+});
+test('batch rejects omitted, duplicate, foreign or incompletely measured candidates and owner windows',()=>{
+ const sources=[batchSource('a')],candidate=batchCandidate('a',1,[[1,2]]);
+ assert.throws(()=>batch(sources,[]),/no actual native/);
+ assert.throws(()=>batch(sources,[candidate,candidate]),/Foreign\/duplicate/);
+ assert.throws(()=>batch(sources,[{...candidate,component_id:'foreign'}]),/Foreign\/duplicate/);
+ assert.throws(()=>batch(sources,[{...candidate,rows:[]}]),/target\/window join/);
+ assert.throws(()=>combineNativeBatch({scopeIds:['a'],sourceRows:sources,candidates:[candidate],ownerRows:[],size:8}),/Missing full owner/);
+ assert.throws(()=>batch([sources[0],sources[0]],[candidate],[],['a']),/source decision/);
+ assert.throws(()=>batch([{...sources[0],source_compatible:undefined}],[candidate]),/incomplete source/);
+ assert.throws(()=>batch(sources,[{...candidate,pixelIndex:2}]),/target\/window join/);
+});
 test('all provisional candidates preserved exactly once; land is not repair permission, water rejected',()=>{
  const one=child(all.slice(0,2)),two=child(all.slice(2)); const result=joinInventoryFacts([one,two],parent);
  assert.equal(result.components,4);assert.deepEqual(result.counts,{eligible:0,assigned:0,'zero-cell':0,'already-resolved':0,rejected:1,'awaiting-evidence':3});
@@ -111,4 +149,30 @@ test('actual whole source-supported shared-edge pilot derives source premises wi
  assert.equal(JSON.stringify(pilot.before.geometry),originalGeometry);
  // Neither these premises nor the independent source PASS labels release cells:
  assert.equal(candidateDisposition(record).disposition,'awaiting-evidence');
+});
+
+// These are complete immutable source observations, not synthetic source
+// approvals. The two original parent failures must remain exceptions.
+test('actual thirteen county sources derive eleven support decisions and two parent exceptions; contextual disjoint queries stay valid',()=>{
+ const base='research/geography/alaska-thirteen-source-fitness-20261008/sources/';
+ const measurement=JSON.parse(fs.readFileSync('research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/measurement.json'));
+ const candidates=JSON.parse(fs.readFileSync(base+'candidate-components.geojson')).features;
+ const records=fs.readFileSync(base+'physical-query-rows.jsonl','utf8').trimEnd().split('\n').map(JSON.parse);
+ const targets=JSON.parse(fs.readFileSync(base+'native-atlas-target-features.geojson')).features;
+ const inputs=measurement.cases.map(sourceCase=>({sourceCase,sourceScope:measurement,
+  record:records.find(row=>row.component_id===sourceCase.component_id),
+  candidate:candidates.find(feature=>feature.id===sourceCase.component_id).geometry,
+  target:targets.find(feature=>feature.id===sourceCase.county_target.atlas_target_id)}));
+ const decisions=inputs.map(retainedCountySourcePremises);
+ assert.equal(decisions.length,13);assert.equal(decisions.filter(row=>row.source_compatible).length,11);
+ assert.equal(decisions.filter(row=>!row.source_compatible).length,2);
+ for(const row of decisions.filter(row=>!row.source_compatible))assert.ok(row.failed_premises.includes('original-parent-coverage'));
+ assert.equal(inputs[0].record.query_relations[0].disjoint,true);assert.equal(decisions[0].source_compatible,true);
+ const altered=(mutate)=>{const value=structuredClone(inputs[0]);mutate(value);return retainedCountySourcePremises(value);};
+ for(const mutation of [v=>v.record.complete_support.mapped_inland_water_support.kind='whole-operation-pointset',
+  v=>v.sourceCase.county_target.represented_year_claim='2026',v=>v.sourceCase.native_land_relations[0].record_sha256='0'.repeat(64),
+  v=>v.sourceCase.linked_gshhg_native_ids=[2],v=>v.sourceCase.measured_actual_atlas_intersecting_neighbor_ids.push('foreign'),
+  v=>v.sourceCase.candidate_to_target_intersections_and_uncovered.candidate_vs_full_county.candidate_uncovered_area_projected_m2_exact=1])
+   assert.equal(altered(mutation).source_compatible,false);
+ assert.throws(()=>altered(v=>v.sourceCase.native_land_relations.pop()),/Incomplete original county queries/);
 });

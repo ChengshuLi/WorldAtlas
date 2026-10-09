@@ -13,6 +13,7 @@ import {nativePolygonIntervals} from '../src/native-grid.js';
 import {nativeRuntimeIndex} from '../src/native-runtime.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 export const ADDITIVE_PROPOSAL_VERSION='unactivated-additive-native-release-v1';
+export const ADDITIVE_BATCH_PROPOSAL_VERSION='unactivated-additive-native-batch-v1';
 export const SOURCE_PREMISES_VERSION='retained-land-source-premises-v1';
 export const INVENTORY_VERSION = 'complete-source-relative-gap-inventory-v1';
 export const DISPOSITIONS = ['eligible', 'assigned', 'zero-cell', 'already-resolved', 'rejected', 'awaiting-evidence'];
@@ -21,6 +22,89 @@ const sha = raw => createHash('sha256').update(raw).digest('hex');
 const canonical = value => Buffer.from(JSON.stringify(canonicalValue(value)) + '\n');
 const hex = value => /^[a-f0-9]{64}$/.test(value ?? '');
 function demand(value, message) { if (!value) throw Error(message); }
+
+// Input intervals are produced by the literal native operator, never accepted
+// from a source approval flag. The cold entry authenticates that operator and
+// complete containing owner assets before calling this shared combination.
+export function combineNativeBatch({scopeIds,sourceRows,candidates,ownerRows,size=262166}) {
+  demand(Array.isArray(scopeIds)&&scopeIds.length>0&&new Set(scopeIds).size===scopeIds.length
+    &&scopeIds.every(id=>typeof id==='string'&&id),'Invalid complete batch scope');
+  demand(Number.isInteger(size)&&size>0&&size<=262166,'Invalid native batch grid');
+  const original=new Map(),native=new Map(),old=new Map();
+  for(const row of sourceRows){demand(scopeIds.includes(row.component_id)&&!original.has(row.component_id)
+    &&typeof row.source_compatible==='boolean','Foreign/duplicate/incomplete source decision');original.set(row.component_id,row);}
+  demand(original.size===scopeIds.length,'Source batch omitted a candidate');
+  const validRun=run=>Array.isArray(run)&&run.length===3&&run.every(Number.isInteger)
+    &&run[0]>=0&&run[1]>run[0]&&run[1]<=size&&run[2]>0&&run[2]<=49625;
+  for(const row of ownerRows){
+    demand(Number.isInteger(row.y)&&row.y>=0&&row.y<size&&!old.has(row.y)
+      &&Array.isArray(row.complete_owner_intervals),'Foreign/duplicate complete owner row');
+    let end=0;for(const run of row.complete_owner_intervals){demand(validRun(run)&&run[0]>=end,'Corrupt complete owner interval');end=run[1];}
+    old.set(row.y,row.complete_owner_intervals.map(run=>[...run]));
+  }
+  for(const candidate of candidates){
+    const source=original.get(candidate.component_id);
+    demand(source?.source_compatible===true&&!native.has(candidate.component_id)
+      &&candidate.target_id===source.target_id&&candidate.pixelIndex===source.pixelIndex
+      &&Number.isInteger(candidate.pixelIndex)&&candidate.pixelIndex>0&&candidate.pixelIndex<=49625
+      &&Number.isInteger(candidate.row_start)&&Number.isInteger(candidate.row_end)&&candidate.row_start>=0
+      &&candidate.row_end>candidate.row_start&&candidate.row_end<=size
+      &&Array.isArray(candidate.rows)&&candidate.rows.length===candidate.row_end-candidate.row_start,'Foreign/duplicate candidate or target/window join');
+    const seen=new Set();for(const row of candidate.rows){
+      demand(Number.isInteger(row.y)&&row.y>=candidate.row_start&&row.y<candidate.row_end
+        &&!seen.has(row.y)&&old.has(row.y)&&Array.isArray(row.runs),'Missing full owner row or duplicate candidate row');seen.add(row.y);
+      let end=0;for(const run of row.runs){demand(validRun(run)&&run[2]===candidate.pixelIndex&&run[0]>=end,'Invalid native candidate interval');end=run[1];}
+    }
+    native.set(candidate.component_id,candidate);
+  }
+  demand([...original.values()].every(row=>row.source_compatible!==true||native.has(row.component_id)),'Eligible candidate has no actual native result');
+  const conflicts=new Map();const conflict=(id,reason)=>{if(!conflicts.has(id))conflicts.set(id,new Set());conflicts.get(id).add(reason);};
+  const byRow=new Map();
+  for(const candidate of native.values())for(const row of candidate.rows)for(const run of row.runs){
+    for(const previous of old.get(row.y))if(previous[2]!==run[2]&&Math.max(previous[0],run[0])<Math.min(previous[1],run[1]))conflict(candidate.component_id,'existing-foreign-owner');
+    if(!byRow.has(row.y))byRow.set(row.y,[]);byRow.get(row.y).push({id:candidate.component_id,run});
+  }
+  // Symmetric refusal: ordering must never choose the first competing owner.
+  for(const values of byRow.values())for(let a=0;a<values.length;a++)for(let b=a+1;b<values.length;b++){
+    const one=values[a],two=values[b];if(one.run[2]!==two.run[2]&&Math.max(one.run[0],two.run[0])<Math.min(one.run[1],two.run[1])){
+      conflict(one.id,'competing-batch-owner');conflict(two.id,'competing-batch-owner');
+    }
+  }
+  const subtract=(run,prior)=>{
+    let spans=[[run[0],run[1],run[2]]];
+    for(const previous of prior){const next=[];for(const span of spans){
+      if(Math.max(span[0],previous[0])>=Math.min(span[1],previous[1]))next.push(span);
+      else {demand(previous[2]===span[2],'Unrefused foreign owner');if(span[0]<previous[0])next.push([span[0],previous[0],span[2]]);if(previous[1]<span[1])next.push([previous[1],span[1],span[2]]);}
+    }spans=next;}return spans;
+  };
+  const merge=runs=>{
+    const sorted=runs.map(run=>[...run]).sort((a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2]),result=[];
+    for(const run of sorted){const previous=result.at(-1);if(previous&&previous[2]===run[2]&&run[0]<=previous[1])previous[1]=Math.max(previous[1],run[1]);
+      else {demand(!previous||run[0]>=previous[1],'Combined owner overlap');result.push(run);}}
+    return result;
+  };
+  const patch=new Map(),decisions=[];let candidateCells=0;
+  for(const id of scopeIds){
+    const source=original.get(id),candidate=native.get(id);
+    if(source.source_compatible!==true){decisions.push({...source,disposition:'rejected',reason_kind:'source-exception',native_cells:0});continue;}
+    if(conflicts.has(id)){decisions.push({...source,disposition:'rejected',reason_kind:'native-conflict',native_conflicts:[...conflicts.get(id)].sort(),native_cells:0});continue;}
+    let cells=0;for(const row of candidate.rows)for(const run of row.runs)for(const span of subtract(run,old.get(row.y))){
+      if(!patch.has(row.y))patch.set(row.y,[]);patch.get(row.y).push(span);cells+=span[1]-span[0];
+    }
+    candidateCells+=cells;decisions.push({...source,disposition:cells?'assigned':'zero-cell',reason_kind:cells?'new-unowned-native-cells':'positive-geometry-no-new-native-cells',native_cells:cells});
+  }
+  const rows=[...patch].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>({y,runs:merge(runs)}));
+  const virtual=rows.map(row=>({y:row.y,complete_owner_intervals:merge([...old.get(row.y),...row.runs])}));
+  const assignedCells=rows.reduce((sum,row)=>sum+row.runs.reduce((n,run)=>n+run[1]-run[0],0),0);
+  // Shared same-owner candidate cells count once globally. Per-candidate counts
+  // describe support/contribution and are deliberately not summed as repairs.
+  return {decisions,rows,virtual_owner_rows:virtual,assigned_cells:assignedCells,
+    candidate_cell_contributions:candidateCells,shared_same_owner_cells:candidateCells-assignedCells,
+    removed_cells:0,reassigned_cells:0,source_exceptions:decisions.filter(row=>row.reason_kind==='source-exception').length,
+    native_conflicts:decisions.filter(row=>row.reason_kind==='native-conflict').length,
+    assigned_components:decisions.filter(row=>row.disposition==='assigned').length,
+    zero_cell_components:decisions.filter(row=>row.disposition==='zero-cell').length};
+}
 function safe(name) { return typeof name === 'string' && /^[a-zA-Z0-9_.\/-]+$/.test(name) && name.split('/').every(p => p && p !== '.' && p !== '..'); }
 
 // These predicates consume full authenticated predecessor operation products.
@@ -75,6 +159,66 @@ export function retainedLandSourcePremises({record,candidate,sourceCase,sourceSc
     &&wholePrimitivePointsetEqual(candidate,sourceCase.gain_geometry));
   return {component_id:record.component_id,source_compatible:failures.length===0,failed_premises:failures,
     representation:'retained-base-plus-additions',authority:record.physical_authority,status:record.physical_status,limits:record.physical_limits};
+}
+
+// Typed retained-source rule for the original ADM2 county comparison. This
+// consumes the complete predecessor observations; it does not turn source
+// compatibility into present-day physical authority or a native assignment.
+export function retainedCountySourcePremises({record,candidate,sourceCase,sourceScope,target}) {
+  demand(record?.component_id===sourceCase?.component_id&&typeof record.component_id==='string','County component join differs');
+  polygonParts(candidate);polygonParts(target.geometry);
+  const failures=[],premise=(name,value)=>{if(!value)failures.push(name);};
+  const support=record.complete_support,empty=operation=>operation?.kind==='empty'&&operation.area_m2===0
+    &&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
+  demand(support?.hierarchy_disagreements,'Incomplete county source operations');
+  premise('retained-whole-land-pointset',record.status==='mapped-land-support'
+    &&support.mapped_land_support?.kind==='whole-operation-pointset'
+    &&wholePrimitivePointsetEqual(candidate,support.mapped_land_support.geometry));
+  for(const key of ['mapped_inland_water_support','outside_mapped_L1_context','contradictory_land_water_support','missing_reconstruction','extra_reconstruction'])premise(key,empty(support[key]));
+  for(const key of ['L2-outside-L1','L3-outside-L2','L4-outside-L3'])premise(key,empty(support.hierarchy_disagreements[key]));
+  const county=sourceCase.county_target;
+  premise('typed-original-county-vintage',county?.administrative_level==='ADM2'&&county.source_role==='Counties'
+    &&county.represented_year_claim==='2018'&&county.atlas_target_id==='gb:USA:ADM2:'+county.shape_id);
+  premise('current-target-identity',target.id===county?.atlas_target_id&&target.properties?.name===county?.name
+    &&target.properties?.parent_id==='framework:province:alaska:4057e2fddbc5');
+  const valid=sourceCase.geometry_validity;
+  premise('complete-valid-original-geometries',['candidate','atlas_target','full_county_source','simplified_county_source','alaska_adm1_parent']
+    .every(key=>valid?.[key]?.valid===true&&valid[key].empty===false));
+  const covered=value=>value?.status==='measured'&&value.candidate_covered_exactly===true
+    &&value.candidate_uncovered_area_projected_m2_exact===0&&value.candidate_coverage_ratio===1;
+  for(const key of ['candidate_vs_alaska_parent','candidate_vs_full_county','candidate_vs_simplified_county'])
+    premise(key,covered(sourceCase.candidate_to_target_intersections_and_uncovered?.[key]));
+  premise('original-parent-coverage',covered(sourceCase.source_parent_coverage));
+  premise('candidate-source-variants-agree',sourceCase.source_variants_same_for_this_candidate===true);
+  // Disjoint contextual native queries are preserved, never mistaken for
+  // candidate-covering records. Every original ordered query must match.
+  const queries=record.query_relations,native=sourceCase.native_land_relations;
+  demand(Array.isArray(queries)&&Array.isArray(native)&&queries.length===native.length,'Incomplete original county queries');
+  premise('all-original-query-predicates',queries.every((query,i)=>{
+    const row=native[i],original=row?.original_query_relation;
+    return row?.component_id===record.component_id&&row.gshhg_native_id===query.source_id
+      &&row.gshhg_level===query.source_level&&row.record_sha256===query.source_record_sha256
+      &&original?.source_record_sha256===query.source_record_sha256&&original.source_level===query.source_level
+      &&original.candidate_covered===query.source_covers_candidate
+      &&original.candidate_covers_source===query.candidate_covers_source&&original.disjoint===query.disjoint
+      &&original.witness===query.witness&&row.original_predicates_match===true
+      &&row.measured?.status==='measured'&&row.measured.intersects===query.intersects
+      &&row.measured.candidate_covered_exactly===query.source_covers_candidate;
+  }));
+  const linked=sourceCase.linked_gshhg_native_ids;
+  premise('actual-linked-native-land-support',Array.isArray(linked)&&linked.length>0&&new Set(linked).size===linked.length
+    &&linked.every(id=>native.some(row=>row.gshhg_native_id===id&&row.gshhg_level===1&&covered(row.measured))));
+  premise('complete-original-contact-scope',sourceScope?.assigned_scope?.component_ids?.includes(record.component_id)
+    &&sourceScope.assigned_scope.physical_query_relation_count===25&&sourceScope.assigned_scope.read_only_edge_neighbor_ids?.length===17
+    &&sourceCase.original_contacts_match_all_17_actual_atlas_features===true
+    &&sourceCase.original_25_relation_predicates_match===true);
+  premise('other-atlas-owner-exclusion',Array.isArray(sourceCase.measured_actual_atlas_intersecting_neighbor_ids)
+    &&sourceCase.measured_actual_atlas_intersecting_neighbor_ids.length===1
+    &&sourceCase.measured_actual_atlas_intersecting_neighbor_ids[0]===target.id);
+  return {component_id:record.component_id,source_compatible:failures.length===0,failed_premises:failures,
+    source_profile:'retained-USA-ADM2-counties-2018',target_id:target.id,
+    authority:record.physical_authority,status:record.physical_status,limits:record.physical_limits,
+    representation:'retained-base-plus-additions'};
 }
 
 const resolutionBrands = new WeakSet();
@@ -415,7 +559,92 @@ export function admitInventoryDestination(repo, destination) {
   return sourceRoot;
 }
 
+function countySourcePremiseStage(repo,request) {
+  const rule=request.source_rule,bodies=new Map();
+  demand(rule?.profile==='retained-USA-ADM2-counties-2018'&&Array.isArray(rule.expected_ids)
+    &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length,'Incomplete typed county scope');
+  for(const pin of rule.inputs){demand(pin.kind===undefined&&!bodies.has(pin.path),'Duplicate county operand');bodies.set(pin.path,{pin,body:readPin(repo,pin)});}
+  const get=name=>{const value=bodies.get(name);demand(value,'Missing complete county operand');return value;};
+  const json=name=>JSON.parse(get(name).body),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  const measurement=json(rule.cases_path),publication=json(rule.publication_path),operating=json(rule.operating_path);
+  demand(publication.status==='complete'&&publication.outputs.some(pin=>pin.path===rule.cases_path
+    &&pin.bytes===get(rule.cases_path).pin.bytes&&pin.sha256===get(rule.cases_path).pin.sha256),'County predecessor whole publication mismatch');
+  demand(operating.exit_code===0&&operating.natural_terminal===true&&operating.owned_processes_absent_after_run===true
+    &&operating.stop_reason===null&&operating.peak_sampled_group_rss_bytes<=operating.rss_cap_bytes,'Unqualified original county predecessor');
+  const reported=JSON.parse(operating.stdout);
+  demand(reported.published_outputs.some(pin=>pin.path===rule.cases_path&&pin.sha256===get(rule.cases_path).pin.sha256)
+    &&reported.component_count===rule.expected_ids.length,'County operating receipt belongs to other output');
+  demand(equal(measurement.assigned_scope.component_ids,rule.expected_ids)
+    &&equal(measurement.cases.map(row=>row.component_id),rule.expected_ids),'Incomplete/reordered original county cases');
+  // All original source files are consumed as whole authenticated bodies.
+  for(const pin of measurement.inputs.files){const value=get(pin.path);demand(value.body.length===pin.bytes&&sha(value.body)===pin.sha256,'Original county input differs');}
+  const admission=json(rule.admission_path);
+  demand(admission.status==='PASS'&&admission.complete_phase_bytes<=admission.cap_bytes,'Original county source admission incomplete');
+  demand(equal(rule.original_code,admission.project_code),'Incomplete original county execution-code roster');
+  for(const pin of rule.original_code){const value=get(pin.path);demand(value.body.length===pin.bytes&&sha(value.body)===pin.sha256,'Original county code differs');}
+  const candidates=json(rule.candidate_path).features,originalTargets=json(rule.original_targets_path).features;
+  const raw=get(rule.records_path).body.toString('utf8').split('\n');demand(raw.pop()==='','Truncated original county row body');
+  const records=raw.map(JSON.parse),context=[];
+  const baselineIndexPin=request.baseline.pins.find(pin=>pin.path===request.baseline.canonical_index_path),baselinePartPin=request.baseline.pins.find(pin=>pin.path===request.baseline.canonical_first_part_path);
+  demand(baselineIndexPin&&baselinePartPin,'Missing selected canonical source closure');
+  const canonicalIndex=JSON.parse(readPin(repo,baselineIndexPin)),firstPart=readPin(repo,baselinePartPin),pathmap=canonicalIndex.files.find(pin=>pin.path==='canonical-path-map.json');
+  demand(pathmap?.offset===0&&sha(firstPart.subarray(0,pathmap.bytes))===pathmap.sha256,'Selected source path-map drift');
+  const actualMap=JSON.parse(firstPart.subarray(0,pathmap.bytes)),contextIndex=get(rule.context_index_path),indexBinding=actualMap.logical_targets.find(pin=>pin.target==='data/canonical-grid/eastern-v8/context-index.json');
+  demand(indexBinding?.mode==='100644'&&indexBinding.bytes===contextIndex.body.length&&indexBinding.sha256===sha(contextIndex.body),'Context index is not selected canonical source');
+  const parts=JSON.parse(contextIndex.body).parts;
+  for(const name of rule.target_banks){const value=get(name),part=parts.find(pin=>pin.path==='context/'+name.split('/').at(-1));
+    demand(part&&value.pin.bytes===part.bytes&&value.pin.sha256===part.sha256&&value.pin.uncompressed_bytes===part.decoded_bytes
+      &&value.pin.uncompressed_sha256===part.decoded_sha256,'Foreign selected containing context');
+    const rows=JSON.parse(value.body);demand(Array.isArray(rows)&&rows.length===part.owners
+      &&rows.every((row,i)=>row.pixelIndex===part.first_owner+i),'Invalid complete target context');context.push(...rows);}
+  const nativeReceipt=json(rule.native_receipt_path),nativeBody=get(rule.native_body_path).body,selected=nativeReceipt.selected_output;
+  demand(nativeReceipt.status==='bytes-verified'&&selected.bytes===nativeBody.length&&selected.sha256===sha(nativeBody)
+    &&equal(selected.record_order,measurement.assigned_scope.native_gshhg_record_ids),'Whole original native selection differs');
+  let offset=0;const nativeHashes=new Map();
+  for(const descriptor of selected.records){
+    demand(descriptor.output_offset===offset&&descriptor.bytes===44+descriptor.header_int32[1]*8
+      &&offset+descriptor.bytes<=nativeBody.length,'Incomplete/overlapping native record boundaries');
+    const body=nativeBody.subarray(offset,offset+descriptor.bytes);
+    demand(sha(body)===descriptor.sha256&&sha(body.subarray(44))===descriptor.coordinate_bytes_sha256
+      &&descriptor.header_int32.every((value,i)=>body.readInt32BE(i*4)===value)
+      &&descriptor.id===descriptor.header_int32[0]&&descriptor.level===(descriptor.header_int32[2]&255)
+      &&!nativeHashes.has(descriptor.id),'Original whole native record/header changed');
+    nativeHashes.set(descriptor.id,descriptor.sha256);offset+=descriptor.bytes;
+  }
+  demand(offset===nativeBody.length&&nativeHashes.size===measurement.assigned_scope.native_gshhg_record_count,'Native selected record omitted');
+  for(const record of records)for(const query of record.query_relations)demand(nativeHashes.get(query.source_id)===query.source_record_sha256
+    &&query.periodic_offset===0&&query.container_chain_issues.length===0,'Original native query/body differs');
+  const neighbors=json(rule.neighbor_path).features,contact=json(rule.contact_path);
+  demand(equal(neighbors.map(row=>row.id).sort(),measurement.assigned_scope.read_only_edge_neighbor_ids.slice().sort())
+    &&equal(contact.all_contact_ids.slice().sort(),neighbors.map(row=>row.id).sort())
+    &&contact.edge_ids_equal_all_contact_ids_for_this_family===true&&contact.full_family995_ids_unique===true,'Incomplete original contact authority');
+  for(const old of neighbors){const rows=context.filter(row=>row.id===old.id);demand(rows.length===1
+    &&rows[0].properties.parent_id===old.properties.parent_id&&wholePrimitivePointsetEqual(rows[0].geometry,old.geometry),'Original contact geometry changed in selected bank');}
+  demand(candidates.length===rule.expected_ids.length&&records.length===rule.expected_ids.length
+    &&new Set(candidates.map(row=>row.id)).size===candidates.length&&new Set(records.map(row=>row.component_id)).size===records.length,'Duplicate/missing county source rows');
+  const rows=measurement.cases.map((sourceCase,ordinal)=>{
+    const record=records.find(row=>row.component_id===sourceCase.component_id),candidate=candidates.find(row=>row.id===sourceCase.component_id);
+    const old=originalTargets.find(row=>row.id===sourceCase.county_target.atlas_target_id),actual=context.filter(row=>row.id===old?.id);
+    demand(record&&candidate&&old&&actual.length===1&&actual[0].properties.parent_id===old.properties.parent_id
+      &&wholePrimitivePointsetEqual(actual[0].geometry,old.geometry),'Stale/foreign selected county target');
+    const target={...old,geometry:actual[0].geometry,pixelIndex:actual[0].pixelIndex};
+    const original=measurement.physical_relation_preservation.rows.find(row=>row.component_id===record.component_id);
+    demand(original&&original.original_row_sha256===sha(Buffer.from(raw[records.indexOf(record)]+'\n'))
+      &&original.relation_count===record.query_relations.length,'Original full county row boundary mismatch');
+    const premises=retainedCountySourcePremises({record,candidate:candidate.geometry,sourceCase,sourceScope:measurement,target});
+    return {...premises,pixelIndex:target.pixelIndex,disposition:premises.source_compatible?'awaiting-native-exclusion':'awaiting-evidence',
+      candidate:candidate.geometry,target_geometry_sha256:footprintValueSha256(target.geometry),
+      original_record:{source:get(rule.records_path).pin,ordinal:records.indexOf(record),row_sha256:original.original_row_sha256},
+      source_case:{source:get(rule.cases_path).pin,ordinal,row_sha256:sha(canonical(sourceCase))}};
+  });
+  return {rows,facts:{version:1,operation:SOURCE_PREMISES_VERSION,source_profile:rule.profile,parent:request.parent,
+    components:rows.length,source_compatible:rows.filter(row=>row.source_compatible).length,assigned_cells:0,source_rule:rule,
+    source_limits:measurement.source_limits,limits:[...Object.entries(measurement.source_limits).map(([key,value])=>key+': '+value),'Retained 2018 ADM2 county and GSHHG source compatibility only; physical authority/date/shoreline remain unapproved.',
+      'No cells assigned; complete selected native owner and combined-candidate exclusions remain required.']}};
+}
+
 function sourcePremiseStage(repo,request,report) {
+  if(request.source_rule?.profile==='retained-USA-ADM2-counties-2018')return countySourcePremiseStage(repo,request);
   const rule=request.source_rule;
   demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===12&&Array.isArray(rule.expected_ids)
     &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length,'Incomplete independently frozen source-rule scope');
@@ -558,6 +787,109 @@ function additiveProposalStage(repo,request) {
         'N2 strict two-repair selection must precede final current-bank rebind and activation.']}};
 }
 
+// Shared bounded producer: one source roster, one whole current asset closure,
+// one symmetric batch decision and one sparse overlay. The base bank is literal.
+function additiveBatchProposalStage(repo,request) {
+  const spec=request.additive,inputs=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
+  const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
+  const json=name=>JSON.parse(get(name).body),publication=json(spec.publication_path),facts=json(spec.facts_path),issued=json(spec.source_request_path),operating=json(spec.operating_path);
+  demand(publication.complete===true&&publication.facts.bytes===get(spec.facts_path).pin.bytes&&publication.facts.sha256===get(spec.facts_path).pin.sha256
+    &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>publication.inventory[key]===get(spec.inventory_path).pin[key]),'Incomplete batch source predecessor');
+  demand(facts.operation===SOURCE_PREMISES_VERSION&&facts.source_profile==='retained-USA-ADM2-counties-2018'
+    &&facts.execution_commit===spec.source_execution_commit&&equal(facts.request,get(spec.source_request_path).pin)
+    &&equal(facts.executed_code,issued.executed_code)&&equal(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])
+    &&equal(facts.runtime,spec.source_runtime)&&equal(facts.installed_modules,issued.installed_modules)
+    &&equal(facts.parent,request.parent)&&equal(issued.baseline,request.baseline),'Batch predecessor closure/vintage differs');
+  demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0
+    &&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null
+    &&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified batch source execution');
+  const lines=get(spec.inventory_path).body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated full batch source roster');
+  const sourceRows=lines.map(JSON.parse);
+  demand(equal(sourceRows.map(row=>row.component_id),spec.scope_ids)&&equal(spec.scope_ids,issued.source_rule.expected_ids)
+    &&sourceRows.length===facts.components,'Batch selection omitted/reordered a source candidate');
+  const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),targets=new Map();
+  for(const name of issued.source_rule.target_banks){demand(spec.inputs.some(pin=>equal(pin,issued.source_rule.inputs.find(source=>source.path===name))),'Batch containing context differs from source proof');const rows=json(name);demand(Array.isArray(rows),'Invalid complete selected context');
+    for(const target of rows){demand(!targets.has(target.id),'Duplicate selected context identity');targets.set(target.id,target);}}
+  demand(bounds.length===49625&&new Set(bounds.map(row=>row.id)).size===49625&&new Set(bounds.map(row=>row.index)).size===49625
+    &&equal(manifest.original_assets.bounds,spec.original_bounds)&&get(spec.bounds_path).pin.sha256===manifest.original_assets.bounds.sha256,'Foreign selected native owner roster');
+  const owners=new Map(bounds.map(row=>[row.id,row]));
+  const latitudeBody=get(spec.latitudes_path).body,size=262166;
+  demand(latitudeBody.length===size*8&&sha(latitudeBody)==='66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23','Changed native latitude rule');
+  const latitudes=Float64Array.from({length:size},(_,y)=>latitudeBody.readDoubleLE(y*8)),candidates=[],wantedRows=new Set();
+  for(const selected of sourceRows){
+    const target=targets.get(selected.target_id),owner=owners.get(selected.target_id);
+    demand(target&&owner&&target.pixelIndex===owner.index&&selected.pixelIndex===owner.index
+      &&target.properties.parent_id===owner.province_id&&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale batch target/owner join');
+    const casePin=selected.source_case?.source;demand(casePin&&spec.inputs.some(pin=>equal(pin,casePin)),'Original full batch case omitted');
+    const sourceCase=json(casePin.path).cases[selected.source_case.ordinal];
+    demand(sourceCase?.component_id===selected.component_id&&sha(canonical(sourceCase))===selected.source_case.row_sha256,'Original batch case drift');
+    if(!selected.source_compatible)continue;
+    demand(sourceCase.geometry_validity.candidate.valid===true&&sourceCase.geometry_validity.candidate.empty===false,'Invalid original batch primitive');
+    const coordinates=polygonParts(selected.candidate).flat(2),max=Math.max(...coordinates.map(point=>point[1])),min=Math.min(...coordinates.map(point=>point[1]));
+    const first=Math.max(0,latitudes.findIndex(value=>value<=max)-1),stop=latitudes.findIndex(value=>value<min),end=stop<0?size:Math.min(size,stop+1);
+    demand(first>=0&&end>first&&end-first<=4096,'Batch candidate requires another bounded row phase');
+    const index=nativeRuntimeIndex([{id:target.id,pixelIndex:owner.index,geometry:selected.candidate}]);
+    const native=nativePolygonIntervals(index,{size,latitudes,rowStart:first,rowEnd:end});
+    const rows=[];for(let y=first;y<end;y++){wantedRows.add(y);rows.push({y,runs:(native.rows.get(y)??[]).map(span=>[span.start,span.end,owner.index])});}
+    candidates.push({component_id:selected.component_id,target_id:target.id,pixelIndex:owner.index,row_start:first,row_end:end,rows});
+  }
+  const containers=[];
+  for(const body of spec.owner_parts){const descriptor=manifest.parts.find(part=>part.path===body.manifest_path),entry=get(body.path);
+    demand(descriptor&&equal(descriptor,body.manifest_descriptor)&&descriptor.encoding==='byte-shuffle'
+      &&entry.pin.sha256===descriptor.sha256&&entry.pin.bytes===descriptor.bytes,'Foreign batch owner container');
+    const words=unshuffleOwnershipBytes(entry.body,descriptor.words);
+    demand(words.byteLength===descriptor.decoded_bytes&&sha(Buffer.from(words.buffer))===descriptor.decoded_sha256,'Whole batch native words changed');containers.push({descriptor,words});}
+  const table=containers.find(value=>value.descriptor.kind==='rows'&&value.descriptor.offset===0);
+  demand(table&&table.words.length===size*2,'Missing complete batch row table');const ownerRows=[];
+  for(const y of [...wantedRows].sort((a,b)=>a-b)){const offset=table.words[y*2],count=table.words[y*2+1],runs=[];
+    for(let n=offset;n<offset+count;n++){const source=containers.find(value=>value.descriptor.kind==='runs'&&n*2>=value.descriptor.offset&&n*2+1<value.descriptor.offset+value.words.length);
+      demand(source,'Missing whole batch containing native asset');const i=n*2-source.descriptor.offset,a=source.words[i],b=source.words[i+1];
+      runs.push([a%2**19,b%2**19+1,Math.floor(a/2**19)+Math.floor(b/2**19)*2**13]);}
+    ownerRows.push({y,complete_owner_intervals:runs});}
+  const combined=combineNativeBatch({scopeIds:spec.scope_ids,sourceRows,candidates,ownerRows,size});
+  const baseReference={id:manifest.geographic_release,footprints_sha256:manifest.footprints_sha256,hierarchy_sha256:manifest.hierarchy_sha256};
+  const ruleSha=sha(canonical({version:3,source_profile:issued.source_rule.profile,source_rule:issued.source_rule,
+    representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code}));
+  const receiptSha=get(spec.facts_path).pin.sha256;
+  const ledgerRows=combined.decisions.map(row=>{
+    if(!['assigned','zero-cell'].includes(row.disposition))return {component_id:row.component_id,disposition:'rejected',reason_kind:row.reason_kind,
+      failed_premises:row.failed_premises,native_conflicts:row.native_conflicts??[],source_limits:row.limits,native_cells:0};
+    const target=targets.get(row.target_id);return {component_id:row.component_id,disposition:row.disposition,target_id:row.target_id,pixelIndex:row.pixelIndex,
+      base_geometry:target.geometry,base_geometry_sha256:footprintValueSha256(target.geometry),geometry:row.candidate,
+      geometry_sha256:footprintValueSha256(row.candidate),source_receipt_sha256:receiptSha,native_cells:row.native_cells};});
+  const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:ruleSha,base_reference:baseReference,parent_inventory:request.parent,
+    scope_ids:spec.scope_ids,assigned_cells:combined.assigned_cells,rows:ledgerRows};
+  const ledgerBody=canonical(ledger),ledgerSha=sha(ledgerBody),features=[];
+  for(const targetId of [...new Set(ledgerRows.filter(row=>['assigned','zero-cell'].includes(row.disposition)).map(row=>row.target_id))].sort()){
+    const target=targets.get(targetId),additions=ledgerRows.filter(row=>row.target_id===targetId).map(row=>({component_id:row.component_id,geometry:row.geometry,
+      geometry_sha256:row.geometry_sha256,source_receipt_sha256:receiptSha}));
+    features.push({...target,additiveFootprint:{version:1,kind:'retained-base-plus-additions',baseline_release_sha256:baseReference.footprints_sha256,
+      base_geometry_sha256:footprintValueSha256(target.geometry),ledger_sha256:ledgerSha,rule_sha256:ruleSha,additions}});}
+  const effectiveReference={...baseReference,id:'geography:additive:'+ledgerSha,footprints_sha256:additiveReleaseFootprintDigest(baseReference,features)};
+  const patch={version:1,kind:'unassigned-native-cells-v1',base_reference:baseReference,effective_reference:effectiveReference,
+    ledger_sha256:ledgerSha,rule_sha256:ruleSha,rows:combined.rows};
+  const boundsPin=get(spec.bounds_path).pin,encodedBounds=readPin(repo,Object.fromEntries(Object.entries(boundsPin).filter(([key])=>!['uncompressed_bytes','uncompressed_sha256'].includes(key))));
+  const asset=(name,body)=>({path:'additive-repairs/'+name,bytes:body.length,sha256:sha(body)}),patchBody=canonical(patch);
+  const release={reference_release:effectiveReference,additiveRelease:{version:1,kind:'retained-native-base-plus-delta-v1',base_reference:baseReference,effective_reference:effectiveReference,
+    base_manifest:asset('base-native-manifest.json',get(spec.manifest_path).body),ledger:asset('ledger-batch.json',ledgerBody),patch:asset('patch-batch.json',patchBody),
+    owner_roster:{...asset('owners-batch.json.gz',encodedBounds),encoding:'gzip',decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256}}};
+  const assets=[{name:'base-native-manifest.json',body:get(spec.manifest_path).body},{name:'ledger-batch.json',body:ledgerBody},{name:'patch-batch.json',body:patchBody},
+    {name:'features.json',body:canonical(features)},{name:'owners-batch.json.gz',body:encodedBounds,decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256},
+    {name:'release-envelope.json',body:canonical(release)},{name:'owner-window.json',body:canonical(ownerRows)},
+    {name:'virtual-owner-window.json',body:canonical(combined.virtual_owner_rows)}];
+  return {rows:combined.decisions.map(row=>({component_id:row.component_id,target_id:row.target_id,disposition:row.disposition,
+      reason_kind:row.reason_kind,native_cells:row.native_cells,failed_premises:row.failed_premises,native_conflicts:row.native_conflicts??[],activation:false})),assets,
+    facts:{version:1,operation:ADDITIVE_BATCH_PROPOSAL_VERSION,parent:request.parent,components:sourceRows.length,
+      source_predecessor:spec,assigned_cells:combined.assigned_cells,assigned_components:combined.assigned_components,zero_cell_components:combined.zero_cell_components,
+      source_exceptions:combined.source_exceptions,native_conflicts:combined.native_conflicts,
+      candidate_cell_contributions:combined.candidate_cell_contributions,shared_same_owner_cells:combined.shared_same_owner_cells,
+      removed_cells:0,reassigned_cells:0,complete_owner_rows:ownerRows.length,effective_reference:effectiveReference,
+      limits:['Unactivated source-compatible batch; no new physical authority or current shoreline approval.',
+        'Literal original native word layout retained; combined virtual intervals conserve all old owners.',
+        'N2 selection and actual current-bank rebind required before activation.']}};
+}
+
 // One genuine detached whole-shard acquisition per invocation. The parent
 // report supplies the complete denominator; an independently frozen scope
 // supplies exact selected IDs/ordered feature hashes. No all-world JSON lives
@@ -581,7 +913,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
   const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
   const request = JSON.parse(readPin(sourceRoot,requestPin));
-  demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION].includes(request.operation)
+  demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)
     && JSON.stringify(canonicalValue(request.executed_code)) === JSON.stringify(canonicalValue(project)),
     'Foreign request operation/head');
   demand(typeof destination === 'string' && destination === request.destination
@@ -597,9 +929,9 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     demand(stat.isFile() && !stat.isSymbolicLink() && fs.realpathSync(file) === file && stat.size === pin.bytes && sha(fs.readFileSync(file)) === pin.sha256,
       'Actual installed module drift');
   });
-  const stagePins=request.operation===ADDITIVE_PROPOSAL_VERSION?request.additive?.inputs:request.operation===SOURCE_PREMISES_VERSION?request.source_rule?.inputs:request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
+  const stagePins=[ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?request.additive?.inputs:request.operation===SOURCE_PREMISES_VERSION?request.source_rule?.inputs:request.operation===INVENTORY_VERSION?[request.source]:request.children?.flatMap(child=>[child.publication,child.facts,child.inventory]);
   demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
-  const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
+  const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
   const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
   const runtimeRead=()=>{
@@ -621,7 +953,9 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     && request.parent.roster_sha256 === report.complete_roster_sha256, 'Wrong complete original report');
   const resolutions=baselinePins.length?readBaselineResolutions(sourceRoot,request.baseline):undefined;
   let result;
-  if(request.operation===ADDITIVE_PROPOSAL_VERSION){
+  if(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION){
+    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveBatchProposalStage(sourceRoot,request);
+  }else if(request.operation===ADDITIVE_PROPOSAL_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');result=additiveProposalStage(sourceRoot,request);
   }else if(request.operation===SOURCE_PREMISES_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');
