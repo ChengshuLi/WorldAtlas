@@ -1511,14 +1511,14 @@
   "outputs": [
     {
       "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/README.md",
-      "bytes": 2077,
-      "sha256": "77dddc710fb28c5fb7479f19a2768809a9cbdbc2aebe21a96ecb43b62d09f0e7",
+      "bytes": 2416,
+      "sha256": "22660fbde0001a6979f98b0a6da04e6cedca026ee0ea6f70f1001f9aefd1c78f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/RESEARCH.md",
-      "bytes": 11911,
-      "sha256": "0cd8ff06578960190d7fd468255ff4d712f9175dc1e47fe2c489c5e6d25519d6",
+      "bytes": 12947,
+      "sha256": "4a287e093a6760472c9accb9bd964a67dd3121bb68ef9fca043bd2e77af013d7",
       "hash_kind": "file-bytes"
     },
     {
@@ -1529,8 +1529,8 @@
     },
     {
       "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/controls.py",
-      "bytes": 24638,
-      "sha256": "0d726c0ba369b0f410e6c81ec5cb9adc91b2a64f7389cb42e6e41b30530be59f",
+      "bytes": 27807,
+      "sha256": "5c945458bbedfa8a59e119ae65c5a3011ca84588be628d43502ab01fbabd09a8",
       "hash_kind": "file-bytes"
     },
     {
@@ -1728,6 +1728,62 @@
       "equivalent_to": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r3/run-1/scoped-location-assessments.csv"
     },
     {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/assessment-summary.json",
+      "bytes": 10913,
+      "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/province-completeness.csv",
+      "bytes": 1448,
+      "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37",
+      "hash_kind": "file-bytes",
+      "role": "reproducibility-copy",
+      "equivalent_to": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r3/run-1/province-completeness.csv"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/run-record.json",
+      "bytes": 62853,
+      "sha256": "2ae1b77095837dcd9979cb55ef66adfacd635cc27ff961caf6cdd9bb89942ff6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/scoped-location-assessments.csv",
+      "bytes": 167059,
+      "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420",
+      "hash_kind": "file-bytes",
+      "role": "reproducibility-copy",
+      "equivalent_to": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r3/run-1/scoped-location-assessments.csv"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/assessment-summary.json",
+      "bytes": 10913,
+      "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/province-completeness.csv",
+      "bytes": 1448,
+      "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37",
+      "hash_kind": "file-bytes",
+      "role": "reproducibility-copy",
+      "equivalent_to": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r3/run-2/province-completeness.csv"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/run-record.json",
+      "bytes": 62853,
+      "sha256": "2ae1b77095837dcd9979cb55ef66adfacd635cc27ff961caf6cdd9bb89942ff6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/scoped-location-assessments.csv",
+      "bytes": 167059,
+      "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420",
+      "hash_kind": "file-bytes",
+      "role": "reproducibility-copy",
+      "equivalent_to": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r3/run-2/scoped-location-assessments.csv"
+    },
+    {
       "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/complete-report-table-ledger.json",
       "bytes": 467389,
       "sha256": "f72639284f4c571bbdbe5462d5b4bd28f1b43eafc104bbc8cc3bb1aa71099c00",
@@ -1776,9 +1832,39 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/controls.json",
+      "bytes": 143736,
+      "sha256": "08a64e74f0a0fb66aee6ba8962ce86eca4c2650d005c83182836890f55bfcf85",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/negative-control.json",
+      "bytes": 323,
+      "sha256": "1297c7aca981929329bdb7eb25332bc6f6aedf451957f7b1327a3a70c6a9925f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/positive-control.json",
+      "bytes": 166,
+      "sha256": "b98d8a8edca84d0d6362018ae928173a23247e3ed239e2b2ec83456e31f07730",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/rendered-table-ledger.json",
+      "bytes": 333083,
+      "sha256": "7d05eb7c869bced294ab0efdd98845d5b4615343270e41808c4da2afd76f744b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/reproducibility.json",
+      "bytes": 281,
+      "sha256": "bf0abf000c612e76c0ea4d09945a8a52b783041526fd70cc3d024b668b7cb1a3",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/reproduce.py",
-      "bytes": 27953,
-      "sha256": "f788e768b6fe49a3da533ee8c54e9390c7646ef5948f46fd43779c789464bb77",
+      "bytes": 28328,
+      "sha256": "c1bc3618b8f93165c9dc879748f3a9bdb35ec20851899a6916a55f5de03bd515",
       "hash_kind": "file-bytes"
     },
     {
@@ -1826,7 +1912,7 @@
   ],
   "methods": [
     {
-      "id": "croatia-authenticated-fresh-controls",
+      "id": "croatia-run-provenance-controls",
       "kind": "generator",
       "helper_version": "worldatlas-evidence-preparation-v1",
       "description": "Authenticate the complete captured #1209 API bytes once and the distinct retrieval receipt; validate complete pinned source inventories and exact 224-subject scope; run the immutable historical builder from frozen blobs; execute two fresh report runs, malformed-receipt and unsafe-output controls, and compare every complete report vintage bytewise. Controls attest reproduction only, not geography.",
@@ -7421,22 +7507,22 @@
   ],
   "validation": [
     {
-      "method_id": "croatia-authenticated-fresh-controls",
+      "method_id": "croatia-run-provenance-controls",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r3/positive-control.json"
+      "evidence_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/positive-control.json"
     },
     {
-      "method_id": "croatia-authenticated-fresh-controls",
+      "method_id": "croatia-run-provenance-controls",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r3/negative-control.json"
+      "evidence_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/negative-control.json"
     },
     {
-      "method_id": "croatia-authenticated-fresh-controls",
+      "method_id": "croatia-run-provenance-controls",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r3/reproducibility.json"
+      "evidence_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/reproducibility.json"
     }
   ],
   "conclusions": [
@@ -7606,6 +7692,38 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/assessment-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/province-completeness.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/run-record.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-1/scoped-location-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/assessment-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/province-completeness.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/run-record.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r4/run-2/scoped-location-assessments.csv",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/complete-report-table-ledger.json",
       "status": "added"
     },
@@ -7635,6 +7753,26 @@
     },
     {
       "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r3/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/rendered-table-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/reproducibility.json",
       "status": "added"
     },
     {
