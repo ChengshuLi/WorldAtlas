@@ -20,6 +20,7 @@ const {packageOwnershipHistory} = await import('./package-ownership-history.mjs'
 const {packageReferenceBundle} = await import('./package-reference-bundle.mjs');
 const {loadCoverageClassification} = await import('../src/coverage-classification.js');
 const {packageStartupOwnership} = await import('./package-startup-ownership.mjs');
+const {packageVersionedStartupOwnership} = await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs');
 const {selectBuildOwnership,readBuildOwnershipSelection} = await import('./select-build-ownership.mjs');
 const {validateBuildContextVintage: validateOriginalBuildContext} = await import('../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs');
 const {validateBuildContextStage: validateCurrentBuildContext,BUILD_CONTEXT_STAGE_PATH} = await import('./native-ownership/validate-build-context-stage.mjs');
@@ -132,7 +133,11 @@ try {
     const words=ownership[kind].slice(offset,offset+1048576),path=`ownership/${kind}-${offset}.bin.gz`;
     await fs.writeFile(`dist/${path}`,gzipSync(shuffleOwnershipBytes(words),{level:9}));pixelMap.parts.push({kind,offset,words:words.length,path,encoding:'byte-shuffle'});
   }
-  if(fixedGrid?.version===2){const transport=await packageStartupOwnership({manifest:fixedGrid,source:selectedGrid.source,destination:'dist'});Object.assign(pixelMap,transport.pixelMap);}
+  if(fixedGrid?.version===2){
+    const versioned=contextStage?.version===3&&contextStage.issue===1520&&contextStage.kind==='arctic-retained-land-context-continuation-v3';
+    const transport=versioned?await packageVersionedStartupOwnership({manifest:fixedGrid,manifestSha:selectedGrid.sha256,manifestPath:selectedGrid.manifestPath,source:selectedGrid.source,destination:'dist'}):await packageStartupOwnership({manifest:fixedGrid,source:selectedGrid.source,destination:'dist'});
+    Object.assign(pixelMap,transport.pixelMap);
+  }
   if(fixedGrid?.method){const latitude=await packageNativeLatitudes({manifest:fixedGrid,expectedReference:geographicRelease,destination:'dist'});pixelMap.native_latitudes=latitude.native_latitudes;}
   if(fixedGrid?.method)pixelMap.reference_owner_sha256=createHash('sha256').update(JSON.stringify(gridIndex.map(item=>[item.index,item.feature.id]))).digest('hex');
   const catalog=gridIndex.map(({feature,index,bounds})=>({...feature,geometry:null,pixelIndex:index,gridBounds:bounds}));
