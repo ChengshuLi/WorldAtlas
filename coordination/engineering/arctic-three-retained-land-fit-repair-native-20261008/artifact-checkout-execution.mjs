@@ -33,7 +33,7 @@ function actualEntry(root) {
   assert.equal(fs.realpathSync(root),root);
   assert.equal(path.resolve(process.argv[1]),path.join(root,ENTRY),'Actual model-reader runner required');
   assert.equal(process.env.INTEGRATION_PROFILE,'full');
-  assert.equal(process.env.INTEGRATION_SHARD,'2','Only the model-reader shard installs checkout products');
+  assert(['1','2'].includes(process.env.INTEGRATION_SHARD),'Only declared prepared/model-reader shards install checkout products');
   assert(!process.env.NODE_OPTIONS&&!process.env.NODE_PATH&&process.execArgv.length===0,'Plain checkout execution required');
 }
 export function checkoutExecutionClosure(root) {
@@ -67,7 +67,7 @@ export function issueCheckoutExecution({root,admission}) {
     return {path:relative,mode:pin.mode,bytes:pin.bytes,sha256:pin.sha256,git_blob:oid};
   });
   const executable=fs.realpathSync(process.execPath),runtime=authenticateInstalledCheckoutExecutable(executable);
-  const record={version:1,issue:1520,kind:'model-reader-checkout-execution',entry_point:ENTRY,
+  const record={version:1,issue:1520,kind:'model-reader-checkout-execution',entry_point:ENTRY,profile:process.env.INTEGRATION_PROFILE,shard:Number(process.env.INTEGRATION_SHARD),
     source_root:root,stage_root:root,source_commit:commit,source_tree:tree,
     runtime:{executable,...runtime},tool:{executable:tool,...toolPin},files,admission};
   assert.equal(git(['rev-parse','HEAD']),commit);assert.deepEqual(authenticateInstalledCheckoutExecutable(tool),toolPin);
@@ -75,7 +75,7 @@ export function issueCheckoutExecution({root,admission}) {
 }
 export function requireCheckoutExecution(record) {
   const saved=authenticated.get(record);assert(saved,'Actual private model-reader execution required');
-  actualEntry(saved.root);assert.equal(sha(JSON.stringify(record)),saved.fingerprint);
+  actualEntry(saved.root);assert.equal(record.profile,process.env.INTEGRATION_PROFILE);assert.equal(record.shard,Number(process.env.INTEGRATION_SHARD));assert.equal(sha(JSON.stringify(record)),saved.fingerprint);
   assert.deepEqual(authenticateInstalledCheckoutExecutable(record.runtime.executable),Object.fromEntries(Object.entries(record.runtime).filter(([k])=>k!=='executable')));
   assert.deepEqual(authenticateInstalledCheckoutExecutable(record.tool.executable),Object.fromEntries(Object.entries(record.tool).filter(([k])=>k!=='executable')));
   const commit=execFileSync(record.tool.executable,['-C',saved.root,'rev-parse','HEAD'],{encoding:'utf8'}).trim();assert.equal(commit,record.source_commit);

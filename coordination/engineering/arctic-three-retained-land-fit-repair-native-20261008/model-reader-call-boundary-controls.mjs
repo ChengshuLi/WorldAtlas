@@ -28,11 +28,12 @@ async function invoke({profile='full',shard=2,changeSelection,changeStage,failPr
 }
 const positive=await invoke();
 assert.deepEqual(positive.events,['preflight','issue','mkdir','restore','consume','install']);assert.equal(positive.result.applicable,true);
+const preparedPositive=await invoke({shard:1});assert.deepEqual(preparedPositive.events,positive.events);
 let rejected=0;
 for(const options of [{profile:'evidence'},{shard:0},{changeStage:s=>s.version=3},{changeSelection:s=>s.artifact_consumption.certificate.sha256='0'.repeat(64)},{failPreflight:true}]){
  await assert.rejects(()=>invoke(options),error=>{assert(!error.events.includes('restore'));return true;});rejected++;
 }
-console.log(JSON.stringify({positive:1,rejected,actual_production_source_sha256:createHash('sha256').update(raw).digest('hex'),metadata:{selection,stage},order:positive.events,
+console.log(JSON.stringify({positive:2,rejected,actual_production_source_sha256:createHash('sha256').update(raw).digest('hex'),metadata:{selection,stage},order:positive.events,
  limitation:'Exact production function, real complete metadata and stubbed delegated boundaries; no restoration, consumption, installer or full normal checkout qualification.'},null,2));
 
 // Complete selected root-space inputs and actual executing source closure must
@@ -91,14 +92,18 @@ const invocation=runner.slice(begin,finish);
 const delegatedImport="const {prepareModelReaderCheckout}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs');";
 assert(invocation.includes(delegatedImport));
 const actualCall=new AsyncFunction('observeSetupPhase','prepareModelReaderCheckout','profile','shard',invocation.replace(delegatedImport,'')+'\nreturn selectedCheckout;');
+assert(runner.includes('if ([1,2].includes(shard)) {'));
 const observations=[];let delegated=0;
 const observed=(name,work)=>observeSetupPhase(name,work,{emit:value=>observations.push(value)});
-const selected=await actualCall(observed,async options=>{delegated++;assert.deepEqual(options,{root:process.cwd(),profile:'full',shard:2});return {distinct_selected_checkout_fixture:true};},'full',2);
-assert.equal(selected.distinct_selected_checkout_fixture,true);assert.equal(delegated,1);
-assert.deepEqual(observations.map(value=>[value.setup_phase,value.status]),[['canonical-checkout','started'],['canonical-checkout','success']]);
+for(const shard of [1,2]){
+ const selected=await actualCall(observed,async options=>{delegated++;assert.deepEqual(options,{root:process.cwd(),profile:'full',shard});return {distinct_selected_checkout_fixture:true};},'full',shard);
+ assert.equal(selected.distinct_selected_checkout_fixture,true);
+}
+assert.equal(delegated,2);
+assert.deepEqual(observations.map(value=>[value.setup_phase,value.status]),[['canonical-checkout','started'],['canonical-checkout','success'],['canonical-checkout','started'],['canonical-checkout','success']]);
 let forbiddenDelegated=0;
 await assert.rejects(()=>observeSetupPhase('selected-model-reader-checkout',async()=>{forbiddenDelegated++;}),/assert|expression/i);
 assert.equal(forbiddenDelegated,0);
-console.log(JSON.stringify({actual_runner_observer_positive:1,unsupported_label_refused_before_work:1,
+console.log(JSON.stringify({actual_runner_observer_positive:2,unsupported_label_refused_before_work:1,
  runner_sha256:createHash('sha256').update(runner).digest('hex'),
  limitation:'Exact runner invocation and actual observer with delegated checkout stub; no restore, consumption or full regression run.'},null,2));

@@ -19,6 +19,7 @@ const entry=[
   "try{assert.throws(()=>issueCheckoutExecution({root:process.cwd(),admission}));assert.equal(opens,0);console.log(JSON.stringify({refused:true,opens}));}finally{fs.openSync=original;}}",
   "else{const record=issueCheckoutExecution({root:process.cwd(),admission});assert.equal(requireCheckoutExecution(record),record);",
   "let rejected=0;for(const foreign of [{},structuredClone(record)]){assert.throws(()=>requireCheckoutExecution(foreign));rejected++;}",
+  "const originalShard=process.env.INTEGRATION_SHARD;process.env.INTEGRATION_SHARD=originalShard==='2'?'1':'2';assert.throws(()=>requireCheckoutExecution(record));rejected++;process.env.INTEGRATION_SHARD=originalShard;",
   "const hash=record.runtime.sha256;record.runtime.sha256='0'.repeat(64);assert.throws(()=>requireCheckoutExecution(record));rejected++;record.runtime.sha256=hash;",
   "const name='scripts/artifact-checkout-execution.mjs',raw=fs.readFileSync(name);fs.appendFileSync(name,'\\n// body drift\\n');",
   "try{assert.throws(()=>requireCheckoutExecution(record));rejected++;}finally{fs.writeFileSync(name,raw);}",
@@ -36,8 +37,10 @@ fs.chmodSync(installedFixture,0o644);assert.throws(()=>authenticateInstalledChec
 fs.chmodSync(path.join(destination,'scripts/artifact-checkout-execution.mjs'),0o777);assert.throws(()=>checkoutExecutionClosure(destination));
 fs.chmodSync(path.join(destination,'scripts/artifact-checkout-execution.mjs'),0o644);
 const positive=JSON.parse(run(process.execPath,['scripts/run-integration-tests.mjs'],{INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'2'}));
+const preparedPositive=JSON.parse(run(process.execPath,['scripts/run-integration-tests.mjs'],{INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'1'}));
+assert.equal(preparedPositive.positive,2);
 const refusals=[];
 for(const [script,profile,shard] of [['scripts/wrong-entry.mjs','full','2'],['scripts/run-integration-tests.mjs','evidence','2'],['scripts/run-integration-tests.mjs','full','0']])
   refusals.push(JSON.parse(run(process.execPath,[script],{INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,CONTROL_REFUSAL:'1'})));
-console.log(JSON.stringify({kind:'actual-checkout-execution-boundary-controls',production_module_sha256:createHash('sha256').update(source).digest('hex'),fixture:destination,installed_executable_0777:installed777,non_executable_and_source_0777_refusals:2,positive,zero_open_entry_refusals:refusals,
+console.log(JSON.stringify({kind:'actual-checkout-execution-boundary-controls',production_module_sha256:createHash('sha256').update(source).digest('hex'),fixture:destination,installed_executable_0777:installed777,non_executable_and_source_0777_refusals:2,positive,prepared_shard_positive:preparedPositive,zero_open_entry_refusals:refusals,
   limitation:'Fixture runner differs from the production runner; final production closure and actual selected-product checkout remain required.'},null,2));
