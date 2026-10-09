@@ -50,6 +50,8 @@ async function builtOutputReadback(report){
  const nativeRaw=fs.readFileSync(N2+'/native-v9/manifest.json'),native=JSON.parse(nativeRaw),nativeSha=readbackHash(nativeRaw);
  const stage=JSON.parse(fs.readFileSync(N2+'/context-stage-v9.json'));
  const selected=JSON.parse(fs.readFileSync('data/ownership-selection.json'));
+ assert.deepEqual(selected.artifact_consumption,stage.artifact_consumption);
+ for(const pin of Object.values(stage.artifact_consumption)){const bytes=fs.readFileSync(pin.path);assert.equal(bytes.length,pin.bytes);assert.equal(readbackHash(bytes),pin.sha256);}
  assert.equal(nativeSha,selected.sha256);
  const pixel=atlas.pixelMap;assert.equal(pixel.version,2);assert.equal(pixel.size,native.size);assert.equal(pixel.runWords,native.runWords);
  assert.equal(atlas.reference_release.id,'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb');
@@ -58,6 +60,7 @@ async function builtOutputReadback(report){
  const rowsPart=pixel.parts.filter(x=>x.kind==='rows');assert.equal(rowsPart.length,1);
  const rowRaw=requireEmittedPin(base,rowsPart[0]),rows=unshuffleOwnershipBytes(gunzipSync(rowRaw),rowsPart[0].words);
  assert.equal(readbackHash(Buffer.from(rows.buffer)),rowsPart[0].decoded_sha256);assert.equal(rows.length,native.size*2);
+ let completeOffset=0;for(let y=0;y<native.size;y++){assert.equal(rows[y*2],completeOffset);completeOffset+=rows[y*2+1];assert(completeOffset<=native.runWords/2);}assert.equal(completeOffset,native.runWords/2);
  function counts(parts,decodedPins){
   const out=new Float64Array(49626),streamHash=createHash('sha256');let wordOffset=0,row=0,rowEnd=rows[1],previous=0;
   for(const part of parts){
