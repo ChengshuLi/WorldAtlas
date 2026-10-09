@@ -60,8 +60,12 @@ def execute(pair_id: str) -> dict:
     # Bind both original copies for the audit, but replace that claim in the
     # published pair with this receipt computed only after exact set equality.
     products = {name: raw for name, raw in left.items() if name != "reproducibility.json"}
+    run_one_sha256 = sha(canonical([{"path": name, "sha256": sha(left[name])} for name in OUTPUTS]))
+    run_two_sha256 = sha(canonical([{"path": name, "sha256": sha(right[name])} for name in OUTPUTS]))
     pair_receipt = {
         "version": 1,
+        "run_one_sha256": run_one_sha256,
+        "run_two_sha256": run_two_sha256,
         "method_id": "batch3-provenance-crossfield-validator",
         "kind": "reproducibility",
         "outcome": "passed",

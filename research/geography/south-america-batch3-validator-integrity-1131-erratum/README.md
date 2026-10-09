@@ -42,7 +42,7 @@ PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/south-america-batch3-val
 node scripts/evidence-quality.mjs research/geography/south-america-batch3-validator-integrity-1131-erratum/evidence-quality.json .
 ```
 
-The `verified-pair-05` run starts two separate Python processes against the same
+The `verified-pair-07` run starts two separate Python processes against the same
 unchanged source and ledger. Each run has a unique execution ID, UTC timestamp,
 code SHA-256, complete source-ledger SHA-256, Python/Shapely/GEOS versions, seven
 product hashes and an exclusive publication receipt. All seven products matched byte-for-byte. Only
@@ -52,7 +52,7 @@ six regenerated products. The original generated one-run reproducibility file
 is retained inside each raw run directory for audit, but is not the pair's
 passed receipt.
 The earlier complete `verified-pair-03` reproduction is retained as a prior
-paired run; `verified-pair-05` also records the GEOS runtime explicitly.
+paired run; `verified-pair-07` also records the GEOS runtime explicitly.
 
 `pointer-destination-controls.json` records actual CLI rejection for duplicate
 records at the first, middle and last positions; missing and foreign IDs; wrong
