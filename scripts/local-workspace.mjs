@@ -6,7 +6,7 @@ import {createHash, randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 export const GiB = 1024 ** 3;
-export const policy = {minimumFree: 10 * GiB, maximumCheckouts: 50 * GiB};
+export const policy = {minimumFree: 10 * GiB};
 const support = ['docs', 'scripts', 'test', 'src', 'hosted', 'drizzle', '.github', '.agents', 'coordination/templates'];
 const id = value => typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.test(value);
 const safeInclude = value => typeof value === 'string' && /^(data|research|coordination)\/[a-zA-Z0-9_./-]+$/.test(value)
@@ -83,7 +83,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
   const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = [], reserveGiB = 1}) => locked(() => {
     if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
     if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
-    if (!Number.isFinite(reserveGiB) || reserveGiB <= 0 || reserveGiB > 50) throw Error('Reserve must be greater than zero and at most 50 GiB');
+    if (!Number.isFinite(reserveGiB) || reserveGiB <= 0 || !Number.isSafeInteger(Math.ceil(reserveGiB * GiB))) throw Error('Reserve must be positive and represent a safe finite byte count');
     if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
     if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
     const value = state();
@@ -107,9 +107,9 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
       }
     }
     const reservation = Math.max(Math.ceil(reserveGiB * GiB), estimated);
+    if (!Number.isSafeInteger(reservation)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
     const usage = report();
     if (usage.freeBytes - reservation < limits.minimumFree) throw Error('Insufficient disk headroom; release completed workspaces before allocation');
-    if (usage.checkoutBytes + reservation > limits.maximumCheckouts) throw Error('Checkout budget exceeded, including legacy checkouts; inspect report and clean completed work');
     const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
       profile, include, reservation, status: 'preparing', createdAt: new Date().toISOString()};
     value.entries.push(entry);
@@ -154,7 +154,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
   });
   const check = () => {
     const usage = report();
-    if (usage.freeBytes < limits.minimumFree || usage.checkoutBytes > limits.maximumCheckouts) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
+    if (usage.freeBytes < limits.minimumFree) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
     return usage;
   };
   const ownedEntry = directory => state().entries.find(entry => entry.path === directory && entry.slot === 'work');
