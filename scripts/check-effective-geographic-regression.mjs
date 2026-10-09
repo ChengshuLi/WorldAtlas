@@ -298,13 +298,13 @@ export function loadSelection(reader) {
   // owner-body buffers before a genuinely separate additive acquisition stage.
   // The full authenticated owners/map/index and all descriptor custody survive.
   const snapshot=loadBaseSelection(reader);if(!snapshot)return null;
-  const basePhase={kind:'complete-selected-base-acquisition-v1',complete_phase_bytes:reader.used,inputs:[...reader.inventory.values()]};
+  const basePhase={kind:'complete-selected-base-acquisition-v1',complete_phase_bytes:reader.used,inputs:structuredClone([...reader.inventory.values()])};
   snapshot.acquisitionPhases=[basePhase];
   if(snapshot.selection.additive_release!==undefined){
     reader.metadataBytes+=snapshot.metadataBytes+Buffer.byteLength(JSON.stringify(basePhase));
     reader.phase();
     snapshot.additive=readSelectedAdditive(snapshot);
-    snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',complete_phase_bytes:reader.used,inputs:[...reader.inventory.values()]});
+    snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',complete_phase_bytes:reader.used,inputs:structuredClone([...reader.inventory.values()])});
     snapshot.metadataBytes+=snapshot.additive.metadata_bytes;
   }else snapshot.additive=null;
   snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.acquisitionPhases));
