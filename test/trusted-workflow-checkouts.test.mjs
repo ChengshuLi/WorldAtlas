@@ -123,3 +123,38 @@ test('actual scope candidate sparse declaration contains cold-checkout test impo
   const missing = probe(directories.filter(row => !row.startsWith('coordination/')), {geography: true});
   assert.notEqual(missing.status, 0);assert.match(missing.stderr, /selected-geography-effective-prevention-20261009/);
 });
+
+for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worker-merge.yml', 1]]) {
+  test(`${workflow}: actual post-build readback refuses missing selected helper`, () => {
+    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
+    const blocks = [...source.matchAll(/- name: Read back qualified native build outputs when selected\n        if: .+\n        run: \|\n((?:          .+\n)+)/g)];
+    assert.equal(blocks.length, expected);
+    const helper = 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs';
+    const base = {version: 1, method: 'native-linear-evenodd-first-owner-v1', manifest_path: 'data/base.json', sha256: '1'.repeat(64), release_id: 'fixture-release'};
+    const pin = {path: 'data/pin.json', mode: '100644', bytes: 1, sha256: '2'.repeat(64)};
+    for (const block of blocks) {
+      const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-built-readback-routing-'));
+      try {
+        fs.mkdirSync(path.join(directory, 'data'));
+        const file = path.join(directory, 'data/ownership-selection.json'), calls = path.join(directory, 'calls.jsonl');
+        const invoke = env => spawnSync('/bin/bash', ['-e', '-o', 'pipefail', '-c', block[1].split('\n').map(row => row.slice(10)).join('\n')], {
+          cwd: directory, encoding: 'utf8', env: {PATH: path.dirname(process.execPath) + ':/usr/bin:/bin', ...env}
+        });
+        fs.writeFileSync(file, JSON.stringify(base));
+        let result = invoke();assert.equal(result.status, 0, result.stderr);assert.equal(fs.existsSync(calls), false);assert.match(result.stdout, /no report claimed/);
+        fs.writeFileSync(file, JSON.stringify({...base, artifact_consumption: {certificate: pin, review: pin}}));
+        result = invoke();assert.equal(result.status, 1);assert.equal(fs.existsSync(calls), false);assert.match(result.stderr, /helper is missing/);
+        fs.mkdirSync(path.dirname(path.join(directory, helper)), {recursive: true});
+        fs.writeFileSync(path.join(directory, helper), `import fs from 'node:fs'; fs.appendFileSync('calls.jsonl',JSON.stringify(process.argv.slice(2))+'\n'); process.exit(Number(process.env.FIXTURE_HELPER_EXIT||0));`.replace("+'\n'", "+'\\n'"));
+        result = invoke();assert.equal(result.status, 0, result.stderr);
+        assert.deepEqual(JSON.parse(fs.readFileSync(calls, 'utf8')), ['--built-output-readback', '.cache/native-normal-built-output.json']);
+        fs.unlinkSync(calls);result = invoke({FIXTURE_HELPER_EXIT: '23'});assert.equal(result.status, 23);fs.unlinkSync(calls);
+        for (const value of ['{malformed', JSON.stringify({...base, artifact_consumption: null}), JSON.stringify({...base, artifact_consumption: {certificate: {...pin, bytes: 33554433}, review: pin}})]) {
+          fs.writeFileSync(file, value);result = invoke();assert.notEqual(result.status, 0);assert.equal(fs.existsSync(calls), false);
+        }
+        fs.unlinkSync(file);result = invoke();assert.notEqual(result.status, 0);assert.equal(fs.existsSync(calls), false);
+      } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+    }
+    assert.match(source, /path: (?:\|\n[\s\S]*?)?[^\n]*\.cache\/native-normal-built-output\.json/);
+  });
+}
