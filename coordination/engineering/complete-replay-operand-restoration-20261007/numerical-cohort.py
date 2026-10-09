@@ -104,8 +104,10 @@ class BudgetedProducts:
 def bounded_objects(objects_module, products, loaded, records, native_aliases):
     """Initialize the unchanged literal object class with shorter scratch lifetime.
 
-    Every index selector, whole-byte inverse and inherited method is unchanged.
-    Only the temporary first mapping is released before its independent inverse.
+    Every index selector and complete expected-versus-reconstructed byte check
+    is preserved; non-native resolution and recursive retention remain literal.
+    Native mapping serialization avoids the redundant JSON-to-list graph.
+    Scientific replay still uses the original kernel and literal methods.
     """
     objects_module.require(objects_module.Objects.__new__ is object.__new__,
                            'Original Objects allocation binding differs')
@@ -117,16 +119,45 @@ def bounded_objects(objects_module, products, loaded, records, native_aliases):
     self.component = {}
     self.emitted = {}
     self.kernel = loaded['modules']['kernel']
+    literal_resolved_bytes = self._resolved_bytes
+    literal_mapping = self.kernel.mapping
+    def check_resolution_binding():
+        objects_module.require(self._resolved_bytes is resolved_bytes and
+                               literal_resolved_bytes.__self__ is self and
+                               literal_resolved_bytes.__func__ is objects_module.Objects._resolved_bytes and
+                               self.kernel.mapping is literal_mapping,
+                               'Original native inverse callable binding differs')
+    def resolved_bytes(alias):
+        check_resolution_binding()
+        if alias['kind'] != 'complete-native-record-geometry':
+            raw = literal_resolved_bytes(alias)
+            check_resolution_binding()
+            return raw
+        identity, offset = alias['source_id'], alias['periodic_offset']
+        objects_module.require(type(identity) is int and type(offset) in (int, float) and
+                               offset in (-360, 0, 360), 'Bad native inverse alias identity/frame')
+        objects_module.require(alias['original_native_record'] == self.native_aliases[identity],
+                               'Native inverse alias record binding differs')
+        geometry = self.records[identity][1]
+        shifted = objects_module.translate(geometry, xoff=offset) if offset else geometry
+        # JSON canonical bytes are identical for tuples and their decoded lists.
+        # Avoid retaining a second complete coordinate graph during verification.
+        raw = objects_module.canonical(literal_mapping(shifted))
+        objects_module.require(len(raw) == alias['whole_mapping_bytes'] and
+                               objects_module.sha(raw) == alias['whole_mapping_sha256'],
+                               'Complete inverse alias reconstructed bytes differ')
+        check_resolution_binding()
+        return raw
+    self._resolved_bytes = resolved_bytes
     wanted = {(q['source_id'], q['periodic_offset']) for row, pin in
               loaded['physical'].values() for q in row['query_relations']}
     for identity, offset in sorted(wanted):
+        check_resolution_binding()
         geometry = records[identity][1]
         if geometry is None:
             continue
         shifted = objects_module.translate(geometry, xoff=offset) if offset else geometry
-        value = self.kernel.ordinary_mapping(shifted)
-        raw = objects_module.canonical(value)
-        del value
+        raw = objects_module.canonical(literal_mapping(shifted))
         key = objects_module.sha(raw)
         alias = {'kind': 'complete-native-record-geometry', 'source_id': identity,
                  'periodic_offset': offset, 'original_native_record': native_aliases[identity],
