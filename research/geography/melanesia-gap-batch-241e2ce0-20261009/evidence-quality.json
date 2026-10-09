@@ -342,14 +342,14 @@
     },
     {
       "path": "research/geography/melanesia-gap-batch-241e2ce0-20261009/assemble.py",
-      "bytes": 10340,
-      "sha256": "7ae1556c4c323f07be1b959c94696e5f2c2e83a0d88ef94884b35b53ff4f7358",
+      "bytes": 10244,
+      "sha256": "c0c9c25f48e559fb9468456ba3d9e59acd2f75b0741b33b001ef14d24b631543",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/melanesia-gap-batch-241e2ce0-20261009/finalize_manifest.py",
-      "bytes": 13438,
-      "sha256": "1c0ddac5448f0f790b3b9fdf6c2711fd4176f8a1a9b3d4077806b16fdf57f87e",
+      "bytes": 13356,
+      "sha256": "d50a8f7f67561c3f443042c8fa59706c8dd9a83ffbcbb0a71c1f4de297940eb6",
       "hash_kind": "file-bytes"
     },
     {
@@ -392,6 +392,7 @@
   "methods": [
     {
       "id": "exact-retained-record-join",
+      "kind": "code",
       "description": "Selects exact component features from custody-verified components-v3 payloads and joins retained #1424 physical/admin rows. It attaches only already-unique source/current targets. No GIS operation or source acquisition is performed.",
       "software": "Python standard library; Python 3.x",
       "units": "Exact IDs, source record byte offsets, pointset hashes, geometry hashes, and retained row fields."

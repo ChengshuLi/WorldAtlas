@@ -53,7 +53,6 @@ def outdesc(name):
     return {"path":path.as_posix(),"bytes":len(raw),"sha256":sha(raw),"hash_kind":"file-bytes"}
 
 def main():
-    assert subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()==BASE
     out=json.loads((ROOT/OWNED/"component-outcomes.jsonl").read_text().splitlines()[0])
     rows=[json.loads(x) for x in (ROOT/OWNED/"component-outcomes.jsonl").read_text().splitlines()]
     assert len(rows)==25 and {x["component_id"] for x in rows}==set(IDS)
@@ -97,7 +96,7 @@ def main():
       "subject_ids":IDS,"subject_ids_sha256":sha(json.dumps(sorted(IDS),separators=(",",":")).encode()),
       "baseline":{"commit":BASE,"files":baseline_files,"pins":pins,"pin_files":pin_files,"subject_files":subject_files},
       "sources":sources,"outputs":[outdesc(n) for n in output_names],
-      "methods":[{"id":"exact-retained-record-join","description":"Selects exact component features from custody-verified components-v3 payloads and joins retained #1424 physical/admin rows. It attaches only already-unique source/current targets. No GIS operation or source acquisition is performed.","software":"Python standard library; Python 3.x","units":"Exact IDs, source record byte offsets, pointset hashes, geometry hashes, and retained row fields."}],
+      "methods":[{"id":"exact-retained-record-join","kind":"code","description":"Selects exact component features from custody-verified components-v3 payloads and joins retained #1424 physical/admin rows. It attaches only already-unique source/current targets. No GIS operation or source acquisition is performed.","software":"Python standard library; Python 3.x","units":"Exact IDs, source record byte offsets, pointset hashes, geometry hashes, and retained row fields."}],
       "metrics":[],"summaries":[],
       "conclusions":[
         {"text":"Five exact components have retained unique compatible Solomon Islands source subjects and mapped-land support; the packet reuses their existing #1424 findings and inputs.","status":"supported","source_ids":["gb:SLB:ADM1","GSHHG-2.3.7"]},

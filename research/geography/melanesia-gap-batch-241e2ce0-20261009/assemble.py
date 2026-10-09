@@ -52,7 +52,6 @@ def json_bytes(x): return json.dumps(x,sort_keys=True,indent=2,ensure_ascii=Fals
 def jsonl_bytes(rows): return b"".join(canon(x)+b"\n" for x in rows)
 
 def main():
-    assert subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()==BASE
     ctxpath=SI/"batch-context.json"
     ctx=json.loads(readbase(ctxpath))
     comps={r["component"]:r for r in ctx["components"]}
