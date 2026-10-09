@@ -8,7 +8,7 @@ import {requireValidatedGeometryMigrations} from './prepare-geographic-release.m
 assertPackageStage();
 import {restoreCanonicalProducts} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
 await fs.mkdir('.cache',{recursive:true});
-await restoreCanonicalProducts({root:process.cwd(),temporaryRoot:process.cwd()+'/.cache'});
+const restoredCanonical=await restoreCanonicalProducts({root:process.cwd(),temporaryRoot:process.cwd()+'/.cache'});
 const {resolveTypedSnapshot} = await import('../src/typed-snapshot.js');
 const {createGridIndex} = await import('../src/pixel-grid.js');
 const {compileOwnership,packOwnership} = await import('../src/pixel-ownership.js');
@@ -29,9 +29,10 @@ const {rebindCoverageManifest} = await import('./rebind-coverage-manifest.mjs');
 const {foldCoverageContinuation,selectBuildContextValidator} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs');
 const {readPackageCurrentExecution} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs');
 function releaseBuildContextBaselines(context) {
-  const results=[context.geometryValidation,context.coverageContinuation.originalGeometryValidation];
+  const third=context.coverageContinuation.predecessorGeometryValidation;
+  const results=third?[context.geometryValidation,third,context.coverageContinuation.originalGeometryValidation]:[context.geometryValidation,context.coverageContinuation.originalGeometryValidation];
   const expected=context.receipt.migration.locations;
-  if(!Number.isSafeInteger(expected)||expected<=0||new Set(results).size!==2)throw Error('Complete distinct context validation results required');
+  if(!Number.isSafeInteger(expected)||expected<=0||new Set(results).size!==results.length)throw Error('Complete distinct context validation results required');
   for(const result of results){
     requireValidatedGeometryMigrations(result);
     if(!Array.isArray(result.baselineFeatures)||result.baselineFeatures.length!==expected)throw Error('Complete validated baseline work arrays required');
@@ -41,14 +42,32 @@ function releaseBuildContextBaselines(context) {
   // General validators and their other callers keep their own baselineFeatures.
   for(const result of results)result.baselineFeatures=null;
   for(const result of results)requireValidatedGeometryMigrations(result);
-  return {results:2,released_baseline_feature_references:expected*2,proofs_and_dispositions_retained:true};
+  return {results:results.length,released_baseline_feature_references:expected*results.length,proofs_and_dispositions_retained:true};
 }
-const contextStage=await fs.readFile(BUILD_CONTEXT_STAGE_PATH,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
-const validateBuildContextStage=selectBuildContextValidator(contextStage,{legacy:validateOriginalBuildContext,current:validateCurrentBuildContext});
+const originalContextStage=await fs.readFile(BUILD_CONTEXT_STAGE_PATH,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
+let contextStage=originalContextStage;
+const validateBuildContextStage=selectBuildContextValidator(originalContextStage,{legacy:validateOriginalBuildContext,current:validateCurrentBuildContext});
 const {readGeographicReleaseManifest,decodeGeographicReleaseBatch} = await import('./read-geographic-release-manifest.mjs');
 const {checkPrepared} = await import('./check-prepared.mjs');
 const {environmentClassifications} = await import('../src/environment-classifications.js');
 const { openDatabase, seedDatabase, geography } = await import('../database.mjs');
+// The outer package retains literal oldV2 so it issues genuine current code
+// authority. A separately owned sidecar opts into the third continuation.
+const sidecarPath='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json';
+const sidecarRaw=await fs.readFile(sidecarPath).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+let continuedContext=null;
+if(sidecarRaw){
+  contextStage=JSON.parse(sidecarRaw);if(originalContextStage?.version!==2)throw Error('Successor requires genuine originalV2 package execution');
+  const {preflightArcticPackage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs');
+  const {validateArcticBuildContext}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs');
+  const {installV9Stage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs');
+  const admission=preflightArcticPackage({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,priorImage:restoredCanonical.priorImage});
+  const execution=readPackageCurrentExecution(process.cwd());
+  const priorRegistry=JSON.parse(gunzipSync(await fs.readFile(contextStage.priorRegistry.path)));
+  continuedContext=await validateArcticBuildContext({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,currentExecution:execution,reservation:admission.reservation,predecessorReference:priorRegistry.releases.at(-1)});
+  releaseBuildContextBaselines(continuedContext);
+  continuedContext.installation=await installV9Stage({root:process.cwd(),stage:contextStage,context:continuedContext});
+}
 const ownershipSelection=await readBuildOwnershipSelection();
 const audit=JSON.parse(await fs.readFile('data/granularity-audit.json','utf8'));
 if(audit.issues.length || !audit.input_sha256)throw new Error('Geography audit has not passed');
@@ -66,10 +85,11 @@ if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicReleas
 const fixedGridPath=ownershipSelection.manifestPath;
 const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
 const fixedGrid=selectedGrid?.manifest;
-const currentExecution=contextStage?.version===2?readPackageCurrentExecution(process.cwd()):undefined;
-const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease,currentExecution}):null;
+const currentExecution=!continuedContext&&contextStage?.version===2?readPackageCurrentExecution(process.cwd()):undefined;
+const nativeBuildContext=continuedContext??(fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease,currentExecution}):null);
+if(continuedContext&&(fixedGridPath!==contextStage.nativeManifest.path||selectedGrid.sha256!==contextStage.nativeManifest.sha256||geographicRelease.id!==contextStage.release_id))throw Error('Normal selected bank differs from actual three-step validation');
 const nativeContextInputStage=nativeBuildContext?.receipt??null;
-if(nativeBuildContext?.coverageContinuation)releaseBuildContextBaselines(nativeBuildContext);
+if(!continuedContext&&nativeBuildContext?.coverageContinuation)releaseBuildContextBaselines(nativeBuildContext);
 const db = openDatabase();
 try {
   seedDatabase(db);
@@ -87,15 +107,19 @@ try {
       const payload=decodeGeographicReleaseBatch(await fs.readFile('data/geographic-releases/'+name),part);
       sources.push(...JSON.parse(payload).sources);
     }
-    const source=sources.find(source=>source.id===geographicRelease.source_id);
-    if(!source?.metadata?.source_policy)throw Error('Migrated reference lacks its source policy');
-    if(source.metadata.geometry_migration?.sha256!==geographicRelease.metadata.geometry_migration.sha256)throw Error('Migrated boundary attribution belongs to another geometry proof');
-    for(const id of nativeContextInputStage.migration.changed_ids)boundarySourceReviews[id]={
-      source:source.name,url:source.url,license:source.license,vintage:source.vintage,
-      policy:source.metadata.source_policy,source_offer:source.metadata.source_offer,
-      derivative_url:'https://github.com/ChengshuLi/WorldAtlas/tree/'+geographicRelease.metadata.geometry_migration.commit,
-      original_sources:source.metadata.source_evidence
-    };
+    const associations=nativeBuildContext.sourceAssociations??[{release:geographicRelease,changed_ids:nativeContextInputStage.migration.changed_ids}];
+    for(const association of associations){
+      const associated=association.release;
+      const source=sources.find(source=>source.id===associated.source_id);
+      if(!source?.metadata?.source_policy)throw Error('Migrated reference lacks its source policy');
+      if(source.metadata.geometry_migration?.sha256!==associated.metadata.geometry_migration.sha256)throw Error('Migrated boundary attribution belongs to another geometry proof');
+      for(const id of association.changed_ids)boundarySourceReviews[id]={
+        source:source.name,url:source.url,license:source.license,vintage:source.vintage,
+        policy:source.metadata.source_policy,source_offer:source.metadata.source_offer,
+        derivative_url:'https://github.com/ChengshuLi/WorldAtlas/tree/'+associated.metadata.geometry_migration.commit,
+        original_sources:source.metadata.source_evidence
+      };
+    }
   }
   let gridIndex,ownership;
   if(fixedGrid){
@@ -165,7 +189,10 @@ try {
     if(fixedGrid.method){
       const originalBytes=await fs.readFile('data/canonical-grid/manifest.json'),originalGrid=JSON.parse(originalBytes),originalGridSha256=createHash('sha256').update(originalBytes).digest('hex');
       const continuation=nativeBuildContext?.coverageContinuation;
-      if(continuation){
+      if(continuation?.predecessorGeometryValidation){
+        const {foldArcticCoverage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs');
+        coverageClassification=foldArcticCoverage(coverageClassification,{context:nativeBuildContext,originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease});
+      }else if(continuation){
         const middle={selectedGrid:continuation.middleGrid,selectedGridSha256:continuation.middleGridSha256,release:continuation.middleRelease};
         coverageClassification=foldCoverageContinuation(coverageClassification,{originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,steps:[
           {originalGrid,originalGridSha256,...middle,predecessorRelease:continuation.originalRelease,geometryValidation:continuation.originalGeometryValidation},
