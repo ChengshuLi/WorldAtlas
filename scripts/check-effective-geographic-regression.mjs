@@ -261,21 +261,23 @@ const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
   // a reviewer identity or approval boolean as an authority.
   '79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd':Object.freeze({review_id:6078458358,github_user_id:6732996,issue:1520,retired:true}),
   '5d6758debd9c2e141b83c40594486939f6fa2fd819816070957bbc4b0f1075c2':Object.freeze({review_id:6078884054,github_user_id:6732996,issue:1520,releaseCatalogue:true}),
-  '7bd742247d4f2c2435fcb8c9bbc3134d3edc6193f312171bdb9a3b2ffd769c72':Object.freeze({review_id:6079096820,github_user_id:6732996,issue:1520,releaseCatalogue:true})
+  '7bd742247d4f2c2435fcb8c9bbc3134d3edc6193f312171bdb9a3b2ffd769c72':Object.freeze({review_id:6079096820,github_user_id:6732996,issue:1520,releaseCatalogue:true}),
+  '5ff3e90bed0618f66c290eac5a0d813821b6ae513378a003ae2452e6e131350b':Object.freeze({review_id:6080211722,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true}),
+  '7158e9be36852eb4c2997309cf3d3818bcf46f67034f625dc9f57b67afb53d62':Object.freeze({review_id:6081097955,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true})
 });
 // Validate the complete ordered installer catalogue as immutable provenance.
 // Reading these descriptors does not claim this gate installs their payloads.
 export function validateReleaseCatalogue(certificate,catalogue,registry) {
   const pin=certificate.release_product_catalogue,inline=certificate.application_inputs;
   demand(catalogue?.version===1&&catalogue.kind==='qualified-arctic-release-product-roster-v1'&&catalogue.issue===1520&&same(Object.keys(catalogue).sort(),['issue','kind','products','version'])&&Array.isArray(catalogue.products)&&catalogue.products.length===343,'Incomplete qualified release product catalogue');
-  demand(Array.isArray(inline)&&inline.length===137&&same(inline.find(p=>p.space==='root'&&p.path===pin.path),{space:'root',...pin}),'Release catalogue is not the exact inline application input');
+  demand(Array.isArray(inline)&&inline.length>0&&same(inline.find(p=>(p.space??'root')==='root'&&p.path===pin.path),{space:'root',...pin}),'Release catalogue is not the exact inline application input');
   const seen=new Set();
   function descriptor(p,space) {
     demand(['root','prior','image'].includes(space)&&safe(p.path)&&p.mode==='100644'&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256),'Invalid complete application role');
     if(p.decoded_bytes!==undefined)demand(Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>0&&p.decoded_bytes<=FILE&&hash(p.decoded_sha256),'Invalid full application decoded role');
     const key=space+':'+p.path;demand(!seen.has(key),'Duplicate/overlapping complete application role');seen.add(key);
   }
-  for(const p of inline)descriptor(p,p.space);
+  for(const p of inline)descriptor(p,p.space??'root');
   const directory=path.posix.dirname(certificate.selected_artifact_bindings.registry.path);
   demand(Array.isArray(registry?.batches)&&registry.batches.length>=343,'Missing complete release registry product roster');
   const rows=registry.batches.slice(-343);
@@ -284,14 +286,49 @@ export function validateReleaseCatalogue(certificate,catalogue,registry) {
     demand(same(Object.keys(p).sort(),['bytes','decoded_bytes','decoded_sha256','mode','path','sha256']),'Incomplete whole release product descriptor');descriptor(p,'root');
     demand(safe(row.path)&&p.path===path.posix.join(directory,row.path)&&row.encoding==='gzip'&&row.sha256===p.sha256&&row.payload_sha256===p.decoded_sha256,'Release catalogue ordered path/encoded/payload join differs');
   }
-  demand(seen.size===480,'Incomplete expanded application closure');
-  return {inline_roles:137,release_products:343,complete_roles:480};
+  demand(seen.size===inline.length+catalogue.products.length,'Incomplete expanded application closure');
+  return {inline_roles:inline.length,release_products:catalogue.products.length,complete_roles:seen.size};
 }
 function readArtifactGzip(reader,pin) {
   demand(pin&&safe(pin.path)&&pin.mode==='100644'&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=FILE&&hash(pin.sha256)&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=FILE&&hash(pin.decoded_sha256),'Unbounded artifact gzip pin');
   const actual=reader.descriptor(pin.path);demand(actual.bytes===pin.bytes&&actual.mode===pin.mode,'Artifact gzip whole mode/size differs');reader.admit(actual,pin.decoded_bytes);
   const encoded=reader.read(pin.path,{expected:pin.sha256,decoded:pin.decoded_bytes});demand(encoded.readUInt32LE(encoded.length-4)===pin.decoded_bytes,'Artifact decoded size differs before inflate');
   const body=gunzipSync(encoded,{maxOutputLength:pin.decoded_bytes});demand(body.length===pin.decoded_bytes&&sha(body)===pin.decoded_sha256,'Artifact whole decoded body differs');return JSON.parse(body);
+}
+// Code inventories are source custody. This trusted reader executes none of
+// these candidate bodies; actual application entries authenticate their own
+// current execution closure separately from shared and other-entry critical code.
+export function validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles=false,cloudflareProfile=false}={}) {
+  const pins=new Map(certificate.application_inputs.map(p=>[(p.space??'root')+':'+p.path,p]));
+  const whole=p=>p&&safe(p.path)&&p.mode==='100644'&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256);
+  demand(code?.version===1&&code.kind==='qualified-artifact-application-code-closure-v1'&&Array.isArray(code.critical_files)&&code.critical_files.length>0&&typeof code.semantics==='string','Incomplete application code source custody');
+  const shared=new Map();
+  function critical(p,map){
+    demand(whole(p)&&/^[a-f0-9]{40}$/.test(p.git_blob)&&!map.has(p.path),'Invalid/duplicate critical source role');map.set(p.path,p);
+    if(entryProfiles){const input=pins.get('root:'+p.path);demand(input&&['mode','bytes','sha256'].every(k=>input[k]===p[k]),'Critical source role omitted/rebound in complete application inputs');}
+  }
+  for(const p of code.critical_files)critical(p,shared);
+  demand(!cloudflareProfile||entryProfiles,'Cloudflare requires explicit entry-specific source custody');
+  const allowed=['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs',...(entryProfiles?['scripts/run-integration-tests.mjs']:[]),...(cloudflareProfile?['scripts/build-cloudflare-inner.mjs']:[])];
+  demand(same(Object.keys(code.entry_roles??{}).sort(),allowed.toSorted()),'Missing/foreign actual entry profile');
+  if(entryProfiles)demand(same(Object.keys(code.entry_critical_files??{}).sort(),allowed.toSorted()),'Missing/foreign entry-specific source custody');
+  else demand(code.entry_critical_files===undefined,'Unsupported historical entry-specific profile');
+  const complete=new Map(shared),profiles={};
+  for(const entry of allowed){
+    const role=code.entry_roles[entry],groups=entryProfiles?[role?.actual_current_execution_wrappers]:Object.values(role??{});
+    demand(groups.length>0&&groups.every(a=>Array.isArray(a)&&a.length>0),'Missing original entry role groups');
+    const wrappers=groups.flat();
+    demand(Array.isArray(wrappers)&&wrappers.length>0&&wrappers.every(safe)&&new Set(wrappers).size===wrappers.length,'Incomplete/duplicate actual wrapper profile');
+    const local=new Map();
+    if(entryProfiles){demand(Array.isArray(code.entry_critical_files[entry])&&code.entry_critical_files[entry].length>0,'Missing entry-specific critical source role');for(const p of code.entry_critical_files[entry]){critical(p,local);demand(!shared.has(p.path),'Shared/entry critical role overlap');const previous=complete.get(p.path);demand(!previous||same(previous,p),'Cross-entry critical source drift');complete.set(p.path,p);}}
+    profiles[entry]={shared_critical_roles:shared.size,entry_critical_roles:local.size,declared_current_role_groups:structuredClone(role)};
+  }
+  demand(qualification?.kind==='complete-qualified-scientific-artifact-inventory-v1'&&qualification.version===1&&qualification.issue===1520&&sha(Buffer.from(JSON.stringify(qualification.source_policy)))===certificate.source_policy.sha256,'Original qualification/source policy differs');
+  const phases=qualification.complete_phase_inventory;
+  demand(Array.isArray(phases)&&phases.length>0&&new Set(phases.map(p=>p.phase)).size===phases.length,'Incomplete/duplicate original qualification phases');
+  for(const phase of phases){demand(typeof phase.phase==='string'&&Number.isSafeInteger(phase.complete_actual_runs)&&phase.complete_actual_runs>0&&Array.isArray(phase.runs)&&phase.runs.length===phase.complete_actual_runs,'Missing original qualification runs');for(const run of phase.runs){const t=run.actual_terminal;demand(t?.qualified===true&&t.exit_code===0&&t.guard_reason===null&&same(t.owned_group_survivors,[]),'Unqualified original operating evidence');}}
+  demand(Array.isArray(qualification.original_source_and_qualification_publications)&&qualification.original_source_and_qualification_publications.length>0&&Array.isArray(qualification.complete_operating_custody)&&qualification.complete_operating_custody.length>0,'Missing complete original source/operating custody');
+  return {source_critical_roles:complete.size,entry_profiles:profiles,original_phases:phases.length,candidate_code_executed:false};
 }
 export function readArtifactConsumption(reader,selection,manifest) {
   const hook=selection.artifact_consumption;if(hook===undefined)return null;
@@ -319,7 +356,13 @@ export function readArtifactConsumption(reader,selection,manifest) {
     for(const pin of [cataloguePin,registryPin]){demand(pin&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=FILE,'Missing bounded complete release catalogue');const d=reader.descriptor(pin.path);demand(d.bytes===pin.bytes&&d.mode===pin.mode,'Complete release catalogue pin differs');reader.admit(d,pin.decoded_bytes);}
     releaseCatalogue=validateReleaseCatalogue(certificate,readArtifactGzip(reader,cataloguePin),readArtifactGzip(reader,registryPin));
   }
-  return freezeJson({releaseCatalogue,certificate_pin:hook.certificate,review_pin:hook.review,certificate,review_id:review.id,limits:accepted.limits,
+  const codePin=certificate.application_consumer_code,qualificationPin=certificate.qualification_inventory;
+  // Both complete metadata bodies and the decoded qualification are charged
+  // before either body opens. Descriptor references never masquerade as reads.
+  for(const p of [codePin,qualificationPin]){demand(p&&safe(p.path)&&p.mode==='100644'&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE,'Incomplete source custody metadata pin');const d=reader.descriptor(p.path);demand(d.mode===p.mode&&d.bytes===p.bytes,'Source custody metadata mode/size differs');reader.admit(d,p.decoded_bytes??0);}
+  const code=reader.json(codePin.path,{expected:codePin.sha256}),qualification=readArtifactGzip(reader,qualificationPin);
+  const sourceCustody=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:registration.entryProfiles===true,cloudflareProfile:registration.cloudflareProfile===true});
+  return freezeJson({releaseCatalogue,sourceCustody,certificate_pin:hook.certificate,review_pin:hook.review,certificate,review_id:review.id,limits:accepted.limits,
     scope:'Once-qualified immutable artifact provenance only. This gate independently consumes actual selected native/source products; no source authority, activation or production approval.'});
 }
 

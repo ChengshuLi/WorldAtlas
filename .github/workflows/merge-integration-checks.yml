@@ -11,6 +11,8 @@ concurrency:
   # Body edits and draft readiness refresh authority without canceling code work.
   group: worldatlas-regression-pr-${{ github.event.pull_request.number }}-${{ (github.event.action == 'edited' || github.event.action == 'ready_for_review') && 'metadata' || 'code' }}
   cancel-in-progress: true
+# The intended normal package target is Cloudflare; the separate Site gate is retained.
+
 jobs:
   profile:
     runs-on: ubuntu-latest
@@ -187,6 +189,7 @@ jobs:
             .github
             drizzle
             hosted
+            coordination/engineering/selected-geography-effective-prevention-20261009
             data/research-geography-gate.json
             package.json
             package-lock.json
@@ -231,6 +234,7 @@ jobs:
             scripts
             src
             .github
+            coordination/engineering/selected-geography-effective-prevention-20261009
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
@@ -338,12 +342,43 @@ jobs:
           fi
       - name: Build hosted assets
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
-        run: npm run build:hosted
+        run: npm run build:cloudflare
+      - name: Read back qualified native build outputs when selected
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        run: |
+          if node --input-type=module -e '
+            import fs from "node:fs";
+            const file="data/ownership-selection.json", stat=fs.lstatSync(file);
+            if (!stat.isFile() || stat.isSymbolicLink() || stat.size>33554432) throw Error("Nonordinary selection");
+            const s=JSON.parse(fs.readFileSync(file,"utf8"));
+            const safe=p=>typeof p==="string" && p.length>0 && !p.startsWith("/") && !p.includes("\\") && p.split("/").every(x=>x!=="" && x!=="." && x!=="..");
+            const hash=v=>typeof v==="string" && /^[a-f0-9]{64}$/.test(v);
+            if (s?.version!==1 || s.method!=="native-linear-evenodd-first-owner-v1" || !safe(s.manifest_path) || !hash(s.sha256) || typeof s.release_id!=="string" || !s.release_id) throw Error("Malformed native selection");
+            if (!Object.hasOwn(s,"artifact_consumption")) process.exit(3);
+            const a=s.artifact_consumption;
+            if (!a || typeof a!=="object" || Object.keys(a).sort().join(",")!=="certificate,review") throw Error("Malformed artifact selection");
+            for (const p of [a.certificate,a.review]) if (!p || !safe(p.path) || p.mode!=="100644" || !Number.isSafeInteger(p.bytes) || p.bytes<=0 || p.bytes>33554432 || !hash(p.sha256)) throw Error("Malformed artifact pin");
+          '; then
+            test -f coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs || { echo 'Selected artifact readback helper is missing.' >&2; exit 1; }
+            node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/native-normal-built-output.json
+          else
+            status=$?
+            if test "$status" -ne 3; then exit "$status"; fi
+            echo 'No artifact selection: native built-output readback is inapplicable; no report claimed.'
+          fi
       - name: Complete regression shard
         env:
           INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
         run: node scripts/run-integration-tests.mjs
+      - name: Retain native built-output readback
+        if: always() && needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-built-output-regression-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+          path: .cache/native-normal-built-output.json
+          include-hidden-files: true
+          if-no-files-found: ignore
   package:
     needs: profile
     # Failed trusted metadata stays failed; it cannot launch a doomed build.
@@ -382,7 +417,30 @@ jobs:
         if: needs.profile.outputs.full != 'false'
       - name: Build and enforce archive/file reserves without publishing
         if: needs.profile.outputs.full != 'false'
-        run: npm run build:hosted
+        run: npm run build:cloudflare
+      - name: Read back qualified native build outputs when selected
+        if: needs.profile.outputs.full != 'false'
+        run: |
+          if node --input-type=module -e '
+            import fs from "node:fs";
+            const file="data/ownership-selection.json", stat=fs.lstatSync(file);
+            if (!stat.isFile() || stat.isSymbolicLink() || stat.size>33554432) throw Error("Nonordinary selection");
+            const s=JSON.parse(fs.readFileSync(file,"utf8"));
+            const safe=p=>typeof p==="string" && p.length>0 && !p.startsWith("/") && !p.includes("\\") && p.split("/").every(x=>x!=="" && x!=="." && x!=="..");
+            const hash=v=>typeof v==="string" && /^[a-f0-9]{64}$/.test(v);
+            if (s?.version!==1 || s.method!=="native-linear-evenodd-first-owner-v1" || !safe(s.manifest_path) || !hash(s.sha256) || typeof s.release_id!=="string" || !s.release_id) throw Error("Malformed native selection");
+            if (!Object.hasOwn(s,"artifact_consumption")) process.exit(3);
+            const a=s.artifact_consumption;
+            if (!a || typeof a!=="object" || Object.keys(a).sort().join(",")!=="certificate,review") throw Error("Malformed artifact selection");
+            for (const p of [a.certificate,a.review]) if (!p || !safe(p.path) || p.mode!=="100644" || !Number.isSafeInteger(p.bytes) || p.bytes<=0 || p.bytes>33554432 || !hash(p.sha256)) throw Error("Malformed artifact pin");
+          '; then
+            test -f coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs || { echo 'Selected artifact readback helper is missing.' >&2; exit 1; }
+            node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/native-normal-built-output.json
+          else
+            status=$?
+            if test "$status" -ne 3; then exit "$status"; fi
+            echo 'No artifact selection: native built-output readback is inapplicable; no report claimed.'
+          fi
       - name: Record package rebuild inapplicability
         if: needs.profile.outputs.full == 'false'
         run: echo 'No declared package input or verification path changed; package unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
@@ -391,7 +449,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: package-input-build
-          path: .cache/package-input-build.json
+          path: |
+            .cache/package-input-build.json
+            .cache/native-normal-built-output.json
           include-hidden-files: true
           if-no-files-found: ignore
       - name: Retain exact file and archive accounting

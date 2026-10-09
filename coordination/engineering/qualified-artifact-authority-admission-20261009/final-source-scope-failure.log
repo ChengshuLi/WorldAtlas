@@ -1,0 +1,665 @@
+﻿2026-10-09T12:46:22.7622292Z Current runner version: '2.337.0'
+2026-10-09T12:46:22.7648609Z ##[group]Runner Image Provisioner
+2026-10-09T12:46:22.7649628Z Hosted Compute Agent
+2026-10-09T12:46:22.7650349Z Version: 20261002.596
+2026-10-09T12:46:22.7650988Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-09T12:46:22.7651717Z Build Date: 2026-10-02T22:28:27Z
+2026-10-09T12:46:22.7652534Z Worker ID: {bcdc5917-99fb-4af0-b376-7c2d455e3100}
+2026-10-09T12:46:22.7653300Z Region: eastus2
+2026-10-09T12:46:22.7653891Z Cloud: Azure
+2026-10-09T12:46:22.7654446Z ##[endgroup]
+2026-10-09T12:46:22.7656748Z ##[group]Operating System
+2026-10-09T12:46:22.7657559Z Ubuntu
+2026-10-09T12:46:22.7658469Z 24.04.5
+2026-10-09T12:46:22.7659119Z LTS
+2026-10-09T12:46:22.7659667Z ##[endgroup]
+2026-10-09T12:46:22.7660226Z ##[group]Runner Image
+2026-10-09T12:46:22.7660918Z Image: ubuntu-24.04
+2026-10-09T12:46:22.7661498Z Version: 20261004.327.1
+2026-10-09T12:46:22.7662851Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-09T12:46:22.7665137Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-09T12:46:22.7666253Z ##[endgroup]
+2026-10-09T12:46:22.7667543Z ##[group]GITHUB_TOKEN Permissions
+2026-10-09T12:46:22.7669963Z Contents: read
+2026-10-09T12:46:22.7670574Z Metadata: read
+2026-10-09T12:46:22.7671191Z PullRequests: read
+2026-10-09T12:46:22.7672019Z ##[endgroup]
+2026-10-09T12:46:22.7674174Z Secret source: Actions
+2026-10-09T12:46:22.7675159Z Cache mode: write
+2026-10-09T12:46:22.7675902Z Prepare workflow directory
+2026-10-09T12:46:22.8014463Z Prepare all required actions
+2026-10-09T12:46:22.8063495Z Getting action download info
+2026-10-09T12:46:23.0426945Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+2026-10-09T12:46:23.1643796Z Download action repository 'actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+2026-10-09T12:46:23.4051249Z Complete job name: scope
+2026-10-09T12:46:23.4838585Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-10-09T12:46:23.4839691Z with:
+2026-10-09T12:46:23.4840160Z   ref: 381d8733e2f105ac16e764c20bb800c40cafea3a
+2026-10-09T12:46:23.4840737Z   path: trusted
+2026-10-09T12:46:23.4841190Z   persist-credentials: false
+2026-10-09T12:46:23.4841738Z   sparse-checkout: scripts
+src
+.github
+
+2026-10-09T12:46:23.4842331Z   repository: ChengshuLi/WorldAtlas
+2026-10-09T12:46:23.4846403Z   token: ***
+2026-10-09T12:46:23.4846844Z   ssh-strict: true
+2026-10-09T12:46:23.4847284Z   ssh-user: git
+2026-10-09T12:46:23.4847763Z   clean: true
+2026-10-09T12:46:23.4848397Z   sparse-checkout-cone-mode: true
+2026-10-09T12:46:23.4848931Z   fetch-depth: 1
+2026-10-09T12:46:23.4849374Z   fetch-tags: false
+2026-10-09T12:46:23.4849830Z   show-progress: true
+2026-10-09T12:46:23.4850285Z   lfs: false
+2026-10-09T12:46:23.4850708Z   submodules: false
+2026-10-09T12:46:23.4851160Z   set-safe-directory: true
+2026-10-09T12:46:23.4851735Z   allow-unsafe-pr-checkout: false
+2026-10-09T12:46:23.4852524Z ##[endgroup]
+2026-10-09T12:46:23.5883544Z Syncing repository: ChengshuLi/WorldAtlas
+2026-10-09T12:46:23.5885922Z ##[group]Getting Git version info
+2026-10-09T12:46:23.5886758Z Working directory is '/home/runner/work/WorldAtlas/WorldAtlas/trusted'
+2026-10-09T12:46:23.5887840Z [command]/usr/bin/git version
+2026-10-09T12:46:23.5975163Z git version 2.55.0
+2026-10-09T12:46:23.6003296Z ##[endgroup]
+2026-10-09T12:46:23.6019283Z Temporarily overriding HOME='/home/runner/work/_temp/993aef50-b65d-40fb-af4b-f37a4b82d78c' before making global git config changes
+2026-10-09T12:46:23.6021711Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T12:46:23.6024268Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas/trusted
+2026-10-09T12:46:23.6088189Z ##[group]Determining repository object format
+2026-10-09T12:46:23.6090227Z ##[endgroup]
+2026-10-09T12:46:23.6092023Z ##[group]Initializing the repository
+2026-10-09T12:46:23.6093403Z [command]/usr/bin/git init /home/runner/work/WorldAtlas/WorldAtlas/trusted
+2026-10-09T12:46:23.6188588Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-09T12:46:23.6190513Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-09T12:46:23.6192336Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-09T12:46:23.6193809Z hint: call:
+2026-10-09T12:46:23.6194670Z hint:
+2026-10-09T12:46:23.6195684Z hint: 	git config --global init.defaultBranch <name>
+2026-10-09T12:46:23.6196853Z hint:
+2026-10-09T12:46:23.6198277Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-09T12:46:23.6200152Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-09T12:46:23.6201626Z hint:
+2026-10-09T12:46:23.6203535Z hint: 	git branch -m <name>
+2026-10-09T12:46:23.6204720Z hint:
+2026-10-09T12:46:23.6205954Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-09T12:46:23.6207387Z Initialized empty Git repository in /home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/
+2026-10-09T12:46:23.6210692Z [command]/usr/bin/git remote add origin https://github.com/ChengshuLi/WorldAtlas
+2026-10-09T12:46:23.6256818Z ##[endgroup]
+2026-10-09T12:46:23.6257640Z ##[group]Disabling automatic garbage collection
+2026-10-09T12:46:23.6261745Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-09T12:46:23.6295439Z ##[endgroup]
+2026-10-09T12:46:23.6296520Z ##[group]Setting up auth
+2026-10-09T12:46:23.6297454Z Removing SSH command configuration
+2026-10-09T12:46:23.6304869Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T12:46:23.6344203Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T12:46:23.6712819Z Removing HTTP extra header
+2026-10-09T12:46:23.6724833Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T12:46:23.6767898Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T12:46:23.7004239Z Removing includeIf entries pointing to credentials config files
+2026-10-09T12:46:23.7011001Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T12:46:23.7049944Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T12:46:23.7292671Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-09T12:46:23.7341955Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path /home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:23.7386425Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:23.7426768Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/trusted/.git.path /github/runner_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:23.7471871Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/trusted/.git/worktrees/*.path /github/runner_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:23.7502301Z ##[endgroup]
+2026-10-09T12:46:23.7503062Z ##[group]Fetching the repository
+2026-10-09T12:46:23.7511405Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none --depth=1 origin 381d8733e2f105ac16e764c20bb800c40cafea3a
+2026-10-09T12:46:24.0659263Z From https://github.com/ChengshuLi/WorldAtlas
+2026-10-09T12:46:24.0660826Z  * branch            381d8733e2f105ac16e764c20bb800c40cafea3a -> FETCH_HEAD
+2026-10-09T12:46:24.0671804Z [command]/usr/bin/git rev-parse --verify --quiet 381d8733e2f105ac16e764c20bb800c40cafea3a^{object}
+2026-10-09T12:46:24.0701836Z 381d8733e2f105ac16e764c20bb800c40cafea3a
+2026-10-09T12:46:24.0707713Z ##[endgroup]
+2026-10-09T12:46:24.0709395Z ##[group]Determining the checkout info
+2026-10-09T12:46:24.0710952Z ##[endgroup]
+2026-10-09T12:46:24.0712169Z ##[group]Setting up sparse checkout
+2026-10-09T12:46:24.0715709Z [command]/usr/bin/git sparse-checkout set scripts src .github
+2026-10-09T12:46:24.0766593Z ##[endgroup]
+2026-10-09T12:46:24.0767781Z ##[group]Checking out the ref
+2026-10-09T12:46:24.0770815Z [command]/usr/bin/git checkout --progress --force 381d8733e2f105ac16e764c20bb800c40cafea3a
+2026-10-09T12:46:24.5340598Z Note: switching to '381d8733e2f105ac16e764c20bb800c40cafea3a'.
+2026-10-09T12:46:24.5341972Z 
+2026-10-09T12:46:24.5342922Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-09T12:46:24.5345197Z changes and commit them, and you can discard any commits you make in this
+2026-10-09T12:46:24.5347422Z state without impacting any branches by switching back to a branch.
+2026-10-09T12:46:24.5349677Z 
+2026-10-09T12:46:24.5350555Z If you want to create a new branch to retain commits you create, you may
+2026-10-09T12:46:24.5352743Z do so (now or later) by using -c with the switch command. Example:
+2026-10-09T12:46:24.5354056Z 
+2026-10-09T12:46:24.5354651Z   git switch -c <new-branch-name>
+2026-10-09T12:46:24.5355619Z 
+2026-10-09T12:46:24.5356152Z Or undo this operation with:
+2026-10-09T12:46:24.5357020Z 
+2026-10-09T12:46:24.5357542Z   git switch -
+2026-10-09T12:46:24.5358536Z 
+2026-10-09T12:46:24.5359633Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-09T12:46:24.5361775Z 
+2026-10-09T12:46:24.5363502Z HEAD is now at 381d873 Protect selected effective geography and authenticate qualified native artifacts
+2026-10-09T12:46:24.5369124Z ##[endgroup]
+2026-10-09T12:46:24.5410478Z [command]/usr/bin/git log -1 --format=%H
+2026-10-09T12:46:24.5439632Z 381d8733e2f105ac16e764c20bb800c40cafea3a
+2026-10-09T12:46:24.5452065Z ##[group]Removing auth
+2026-10-09T12:46:24.5453579Z Removing SSH command configuration
+2026-10-09T12:46:24.5456665Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T12:46:24.5496034Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T12:46:24.5759078Z Removing HTTP extra header
+2026-10-09T12:46:24.5763261Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T12:46:24.5809559Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T12:46:24.6063631Z Removing includeIf entries pointing to credentials config files
+2026-10-09T12:46:24.6066845Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T12:46:24.6098746Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path
+2026-10-09T12:46:24.6102104Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path
+2026-10-09T12:46:24.6105105Z includeif.gitdir:/github/workspace/trusted/.git.path
+2026-10-09T12:46:24.6107595Z includeif.gitdir:/github/workspace/trusted/.git/worktrees/*.path
+2026-10-09T12:46:24.6112952Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path
+2026-10-09T12:46:24.6145098Z /home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6159445Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path /home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6199091Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path
+2026-10-09T12:46:24.6225013Z /home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6240541Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6277569Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/trusted/.git.path
+2026-10-09T12:46:24.6364408Z /github/runner_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6373317Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/trusted/.git.path /github/runner_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6380273Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/trusted/.git/worktrees/*.path
+2026-10-09T12:46:24.6426392Z /github/runner_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6434030Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/trusted/.git/worktrees/*.path /github/runner_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config
+2026-10-09T12:46:24.6470340Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T12:46:24.6721461Z Removing credentials config '/home/runner/work/_temp/git-credentials-6924047a-bb9b-4c96-9b29-c97d0fc3bf12.config'
+2026-10-09T12:46:24.6730956Z ##[endgroup]
+2026-10-09T12:46:24.7124016Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-10-09T12:46:24.7125601Z with:
+2026-10-09T12:46:24.7126472Z   ref: 57654a8ca123f5933be3e4b13981b4bc97632aee
+2026-10-09T12:46:24.7127634Z   path: candidate
+2026-10-09T12:46:24.7128711Z   fetch-depth: 0
+2026-10-09T12:46:24.7129604Z   persist-credentials: false
+2026-10-09T12:46:24.7130653Z   sparse-checkout-cone-mode: false
+2026-10-09T12:46:24.7133131Z   sparse-checkout: scripts
+src
+test
+.github
+drizzle
+hosted
+data/research-geography-gate.json
+package.json
+package-lock.json
+requirements.txt
+
+2026-10-09T12:46:24.7135716Z   repository: ChengshuLi/WorldAtlas
+2026-10-09T12:46:24.7146216Z   token: ***
+2026-10-09T12:46:24.7147060Z   ssh-strict: true
+2026-10-09T12:46:24.7147893Z   ssh-user: git
+2026-10-09T12:46:24.7148832Z   clean: true
+2026-10-09T12:46:24.7149631Z   fetch-tags: false
+2026-10-09T12:46:24.7150498Z   show-progress: true
+2026-10-09T12:46:24.7151361Z   lfs: false
+2026-10-09T12:46:24.7152215Z   submodules: false
+2026-10-09T12:46:24.7153089Z   set-safe-directory: true
+2026-10-09T12:46:24.7154085Z   allow-unsafe-pr-checkout: false
+2026-10-09T12:46:24.7155108Z ##[endgroup]
+2026-10-09T12:46:24.8273532Z Syncing repository: ChengshuLi/WorldAtlas
+2026-10-09T12:46:24.8277383Z ##[group]Getting Git version info
+2026-10-09T12:46:24.8280135Z Working directory is '/home/runner/work/WorldAtlas/WorldAtlas/candidate'
+2026-10-09T12:46:24.8345269Z [command]/usr/bin/git version
+2026-10-09T12:46:24.8404271Z git version 2.55.0
+2026-10-09T12:46:24.8440682Z ##[endgroup]
+2026-10-09T12:46:24.8455082Z Temporarily overriding HOME='/home/runner/work/_temp/ba84a2ec-f420-48a2-9741-a704d353e143' before making global git config changes
+2026-10-09T12:46:24.8458664Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T12:46:24.8463072Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas/candidate
+2026-10-09T12:46:24.8524839Z ##[group]Determining repository object format
+2026-10-09T12:46:24.8527593Z ##[endgroup]
+2026-10-09T12:46:24.8530748Z ##[group]Initializing the repository
+2026-10-09T12:46:24.8540588Z [command]/usr/bin/git init /home/runner/work/WorldAtlas/WorldAtlas/candidate
+2026-10-09T12:46:24.8580911Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-09T12:46:24.8584528Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-09T12:46:24.8589922Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-09T12:46:24.8592622Z hint: call:
+2026-10-09T12:46:24.8594947Z hint:
+2026-10-09T12:46:24.8596642Z hint: 	git config --global init.defaultBranch <name>
+2026-10-09T12:46:24.8599114Z hint:
+2026-10-09T12:46:24.8600918Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-09T12:46:24.8604249Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-09T12:46:24.8606710Z hint:
+2026-10-09T12:46:24.8607912Z hint: 	git branch -m <name>
+2026-10-09T12:46:24.8609596Z hint:
+2026-10-09T12:46:24.8611524Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-09T12:46:24.8614941Z Initialized empty Git repository in /home/runner/work/WorldAtlas/WorldAtlas/candidate/.git/
+2026-10-09T12:46:24.8620509Z [command]/usr/bin/git remote add origin https://github.com/ChengshuLi/WorldAtlas
+2026-10-09T12:46:24.8638448Z ##[endgroup]
+2026-10-09T12:46:24.8640649Z ##[group]Disabling automatic garbage collection
+2026-10-09T12:46:24.8642768Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-09T12:46:24.8680677Z ##[endgroup]
+2026-10-09T12:46:24.8682680Z ##[group]Setting up auth
+2026-10-09T12:46:24.8684653Z Removing SSH command configuration
+2026-10-09T12:46:24.8688461Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T12:46:24.8734180Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T12:46:24.8987295Z Removing HTTP extra header
+2026-10-09T12:46:24.8996859Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T12:46:24.9064272Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T12:46:24.9317509Z Removing includeIf entries pointing to credentials config files
+2026-10-09T12:46:24.9323912Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T12:46:24.9373071Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T12:46:24.9665980Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-09T12:46:24.9719724Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git.path /home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:24.9759327Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:24.9798335Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/candidate/.git.path /github/runner_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:24.9836374Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/candidate/.git/worktrees/*.path /github/runner_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:24.9870405Z ##[endgroup]
+2026-10-09T12:46:24.9871489Z ##[group]Fetching the repository
+2026-10-09T12:46:24.9879325Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+2026-10-09T12:46:25.5382535Z From https://github.com/ChengshuLi/WorldAtlas
+2026-10-09T12:46:25.5385290Z  * [new branch]      engineering/arctic-three-retained-land-fit-repair-native-20261008 -> origin/engineering/arctic-three-retained-land-fit-repair-native-20261008
+2026-10-09T12:46:25.5387934Z  * [new branch]      engineering/cloudflare-public-822-deploy -> origin/engineering/cloudflare-public-822-deploy
+2026-10-09T12:46:25.5390609Z  * [new branch]      engineering/complete-replay-operand-restoration-20261007 -> origin/engineering/complete-replay-operand-restoration-20261007
+2026-10-09T12:46:25.5393492Z  * [new branch]      engineering/global-source-comparisons-a-000-20261006 -> origin/engineering/global-source-comparisons-a-000-20261006
+2026-10-09T12:46:25.5396603Z  * [new branch]      engineering/iran-pakistan-offline-integration-991-20261006-proto22 -> origin/engineering/iran-pakistan-offline-integration-991-20261006-proto22
+2026-10-09T12:46:25.5400171Z  * [new branch]      engineering/iran-pakistan-shared-edge-991-20261005-local13 -> origin/engineering/iran-pakistan-shared-edge-991-20261005-local13
+2026-10-09T12:46:25.5403005Z  * [new branch]      engineering/north-slope46-construction-trace-20261007 -> origin/engineering/north-slope46-construction-trace-20261007
+2026-10-09T12:46:25.5405520Z  * [new branch]      engineering/qualified-artifact-authority-admission-20261009 -> origin/engineering/qualified-artifact-authority-admission-20261009
+2026-10-09T12:46:25.5408512Z  * [new branch]      geography/bc-admin-vintage-crosswalk-20261004-607-0589ac8b -> origin/geography/bc-admin-vintage-crosswalk-20261004-607-0589ac8b
+2026-10-09T12:46:25.5411125Z  * [new branch]      geography/cabinda-law-14-24-896-20261005 -> origin/geography/cabinda-law-14-24-896-20261005
+2026-10-09T12:46:25.5413933Z  * [new branch]      geography/cabinda-law-14-24-896-20261005-r2 -> origin/geography/cabinda-law-14-24-896-20261005-r2
+2026-10-09T12:46:25.5416149Z  * [new branch]      geography/kosovo-district-reproduction-999-erratum-g0-20261006 -> origin/geography/kosovo-district-reproduction-999-erratum-g0-20261006
+2026-10-09T12:46:25.5418662Z  * [new branch]      geography/minnesota-lake-superior-boundaries-20261006 -> origin/geography/minnesota-lake-superior-boundaries-20261006
+2026-10-09T12:46:25.5420806Z  * [new branch]      geography/namibia-angola-water-history-20261007 -> origin/geography/namibia-angola-water-history-20261007
+2026-10-09T12:46:25.5422804Z  * [new branch]      geography/north-macedonia-guard-1237-20261006 -> origin/geography/north-macedonia-guard-1237-20261006
+2026-10-09T12:46:25.5424760Z  * [new branch]      geography/regional-review-920c7b12f5777da1 -> origin/geography/regional-review-920c7b12f5777da1
+2026-10-09T12:46:25.5426803Z  * [new branch]      geography/vanuatu-source-digest-1250-20261007 -> origin/geography/vanuatu-source-digest-1250-20261007
+2026-10-09T12:46:25.5428637Z  * [new branch]      geography/yugoslavia-parent-guard-1189-20261006 -> origin/geography/yugoslavia-parent-guard-1189-20261006
+2026-10-09T12:46:25.5430955Z  * [new branch]      geography/zambia-feature-type-1048-20261009-01a10947 -> origin/geography/zambia-feature-type-1048-20261009-01a10947
+2026-10-09T12:46:25.5432333Z  * [new branch]      main       -> origin/main
+2026-10-09T12:46:25.5434425Z  * [new branch]      worldatlas-integration/pr-1015-a25be397-9aa4-461f-8a55-9ae51381ca53-37362962848 -> origin/worldatlas-integration/pr-1015-a25be397-9aa4-461f-8a55-9ae51381ca53-37362962848
+2026-10-09T12:46:25.5436896Z  * [new branch]      worldatlas-integration/pr-1150-5bfbaf47-9d5a-4319-ab53-1df30e4dc767-37479915599 -> origin/worldatlas-integration/pr-1150-5bfbaf47-9d5a-4319-ab53-1df30e4dc767-37479915599
+2026-10-09T12:46:25.5439802Z  * [new branch]      worldatlas-integration/pr-1254-32ada8af-0226-4322-bc22-a678ff44280c-37555263069 -> origin/worldatlas-integration/pr-1254-32ada8af-0226-4322-bc22-a678ff44280c-37555263069
+2026-10-09T12:46:25.5442190Z  * [new tag]         evidence-1300-delivery-1631c29c-20261007 -> evidence-1300-delivery-1631c29c-20261007
+2026-10-09T12:46:25.5443815Z  * [new tag]         evidence-1376-science-bc1dcbecebed -> evidence-1376-science-bc1dcbecebed
+2026-10-09T12:46:25.5445651Z  * [new tag]         evidence-1393-controls-90e3e58de82c -> evidence-1393-controls-90e3e58de82c
+2026-10-09T12:46:25.5447236Z  * [new tag]         evidence-1393-controls-99160ebecb6e -> evidence-1393-controls-99160ebecb6e
+2026-10-09T12:46:25.5449833Z  * [new tag]         evidence-1421-science-2c8ff13e141498887676b6983fff449d83e0d504 -> evidence-1421-science-2c8ff13e141498887676b6983fff449d83e0d504
+2026-10-09T12:46:25.5451737Z  * [new tag]         evidence-control-1261-custody-00 -> evidence-control-1261-custody-00
+2026-10-09T12:46:25.5452821Z  * [new tag]         evidence-control-1261-custody-01 -> evidence-control-1261-custody-01
+2026-10-09T12:46:25.5453784Z  * [new tag]         evidence-freeze-1246-package0-3b4ca9e9 -> evidence-freeze-1246-package0-3b4ca9e9
+2026-10-09T12:46:25.5454767Z  * [new tag]         evidence-freeze-1246-package1-7c154c52 -> evidence-freeze-1246-package1-7c154c52
+2026-10-09T12:46:25.5455760Z  * [new tag]         evidence-freeze-1246-package1-a1be3354 -> evidence-freeze-1246-package1-a1be3354
+2026-10-09T12:46:25.5456760Z  * [new tag]         evidence-freeze-1247-package2-c0bb4c62 -> evidence-freeze-1247-package2-c0bb4c62
+2026-10-09T12:46:25.5457753Z  * [new tag]         evidence-freeze-1247-package3-9b440dcb -> evidence-freeze-1247-package3-9b440dcb
+2026-10-09T12:46:25.5459509Z  * [new tag]         evidence-freeze-1261-comparison-104091cf -> evidence-freeze-1261-comparison-104091cf
+2026-10-09T12:46:25.5460565Z  * [new tag]         evidence-freeze-1261-comparison-337589bc -> evidence-freeze-1261-comparison-337589bc
+2026-10-09T12:46:25.5461804Z  * [new tag]         evidence-freeze-1261-custody-f778478c -> evidence-freeze-1261-custody-f778478c
+2026-10-09T12:46:25.5462844Z  * [new tag]         evidence-freeze-1261-transport-eceb3ca2 -> evidence-freeze-1261-transport-eceb3ca2
+2026-10-09T12:46:25.5463776Z  * [new tag]         evidence-freeze-1267-4397e069 -> evidence-freeze-1267-4397e069
+2026-10-09T12:46:25.5464689Z  * [new tag]         evidence-freeze-1298-routing-cc3c4d72 -> evidence-freeze-1298-routing-cc3c4d72
+2026-10-09T12:46:25.5465691Z  * [new tag]         evidence-startup712-varint-20261004-a9c2 -> evidence-startup712-varint-20261004-a9c2
+2026-10-09T12:46:25.5467707Z [command]/usr/bin/git rev-parse --verify --quiet 57654a8ca123f5933be3e4b13981b4bc97632aee^{object}
+2026-10-09T12:46:25.5468670Z 57654a8ca123f5933be3e4b13981b4bc97632aee
+2026-10-09T12:46:25.5469997Z ##[endgroup]
+2026-10-09T12:46:25.5470710Z ##[group]Determining the checkout info
+2026-10-09T12:46:25.5471453Z ##[endgroup]
+2026-10-09T12:46:25.5472145Z ##[group]Setting up sparse checkout
+2026-10-09T12:46:25.5474632Z [command]/usr/bin/git config core.sparseCheckout true
+2026-10-09T12:46:25.5511491Z [command]/usr/bin/git rev-parse --git-path info/sparse-checkout
+2026-10-09T12:46:25.5537675Z .git/info/sparse-checkout
+2026-10-09T12:46:25.5545323Z ##[endgroup]
+2026-10-09T12:46:25.5546077Z ##[group]Checking out the ref
+2026-10-09T12:46:25.5549591Z [command]/usr/bin/git checkout --progress --force 57654a8ca123f5933be3e4b13981b4bc97632aee
+2026-10-09T12:46:26.5844546Z Updating files:  46% (380/824)
+2026-10-09T12:46:26.5851285Z Updating files:  47% (388/824)
+2026-10-09T12:46:26.5858315Z Updating files:  48% (396/824)
+2026-10-09T12:46:26.5864940Z Updating files:  49% (404/824)
+2026-10-09T12:46:26.5874154Z Updating files:  50% (412/824)
+2026-10-09T12:46:26.5882588Z Updating files:  51% (421/824)
+2026-10-09T12:46:26.5889896Z Updating files:  52% (429/824)
+2026-10-09T12:46:26.5896460Z Updating files:  53% (437/824)
+2026-10-09T12:46:26.5903991Z Updating files:  54% (445/824)
+2026-10-09T12:46:26.5910095Z Updating files:  55% (454/824)
+2026-10-09T12:46:26.5916071Z Updating files:  56% (462/824)
+2026-10-09T12:46:26.5926514Z Updating files:  57% (470/824)
+2026-10-09T12:46:26.5934087Z Updating files:  58% (478/824)
+2026-10-09T12:46:26.5941648Z Updating files:  59% (487/824)
+2026-10-09T12:46:26.5946549Z Updating files:  60% (495/824)
+2026-10-09T12:46:26.5952135Z Updating files:  61% (503/824)
+2026-10-09T12:46:26.5957776Z Updating files:  62% (511/824)
+2026-10-09T12:46:26.5963359Z Updating files:  63% (520/824)
+2026-10-09T12:46:26.5971170Z Updating files:  64% (528/824)
+2026-10-09T12:46:26.5977899Z Updating files:  65% (536/824)
+2026-10-09T12:46:26.5985425Z Updating files:  66% (544/824)
+2026-10-09T12:46:26.5991752Z Updating files:  67% (553/824)
+2026-10-09T12:46:26.5996553Z Updating files:  68% (561/824)
+2026-10-09T12:46:26.6005456Z Updating files:  69% (569/824)
+2026-10-09T12:46:26.6012595Z Updating files:  70% (577/824)
+2026-10-09T12:46:26.6019678Z Updating files:  71% (586/824)
+2026-10-09T12:46:26.6027161Z Updating files:  72% (594/824)
+2026-10-09T12:46:26.6033381Z Updating files:  73% (602/824)
+2026-10-09T12:46:26.6041811Z Updating files:  74% (610/824)
+2026-10-09T12:46:26.6049852Z Updating files:  75% (618/824)
+2026-10-09T12:46:26.6056482Z Updating files:  76% (627/824)
+2026-10-09T12:46:26.6064258Z Updating files:  77% (635/824)
+2026-10-09T12:46:26.6072289Z Updating files:  78% (643/824)
+2026-10-09T12:46:26.6079005Z Updating files:  79% (651/824)
+2026-10-09T12:46:26.6084567Z Updating files:  80% (660/824)
+2026-10-09T12:46:26.6091410Z Updating files:  81% (668/824)
+2026-10-09T12:46:26.6098848Z Updating files:  82% (676/824)
+2026-10-09T12:46:26.6105036Z Updating files:  83% (684/824)
+2026-10-09T12:46:26.6111116Z Updating files:  84% (693/824)
+2026-10-09T12:46:26.6117014Z Updating files:  85% (701/824)
+2026-10-09T12:46:26.6124283Z Updating files:  86% (709/824)
+2026-10-09T12:46:26.6130330Z Updating files:  87% (717/824)
+2026-10-09T12:46:26.6135437Z Updating files:  88% (726/824)
+2026-10-09T12:46:26.6156296Z Updating files:  89% (734/824)
+2026-10-09T12:46:26.6156776Z Updating files:  90% (742/824)
+2026-10-09T12:46:26.6164722Z Updating files:  91% (750/824)
+2026-10-09T12:46:26.6170373Z Updating files:  92% (759/824)
+2026-10-09T12:46:26.6176092Z Updating files:  93% (767/824)
+2026-10-09T12:46:26.6182645Z Updating files:  94% (775/824)
+2026-10-09T12:46:26.6189754Z Updating files:  95% (783/824)
+2026-10-09T12:46:26.6197683Z Updating files:  96% (792/824)
+2026-10-09T12:46:26.6203056Z Updating files:  97% (800/824)
+2026-10-09T12:46:26.6209710Z Updating files:  98% (808/824)
+2026-10-09T12:46:26.6214615Z Updating files:  99% (816/824)
+2026-10-09T12:46:26.6218917Z Updating files: 100% (824/824)
+2026-10-09T12:46:26.6219241Z Updating files: 100% (824/824), done.
+2026-10-09T12:46:26.6486939Z Note: switching to '57654a8ca123f5933be3e4b13981b4bc97632aee'.
+2026-10-09T12:46:26.6487647Z 
+2026-10-09T12:46:26.6488415Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-09T12:46:26.6489409Z changes and commit them, and you can discard any commits you make in this
+2026-10-09T12:46:26.6490302Z state without impacting any branches by switching back to a branch.
+2026-10-09T12:46:26.6490792Z 
+2026-10-09T12:46:26.6491129Z If you want to create a new branch to retain commits you create, you may
+2026-10-09T12:46:26.6491882Z do so (now or later) by using -c with the switch command. Example:
+2026-10-09T12:46:26.6492351Z 
+2026-10-09T12:46:26.6492520Z   git switch -c <new-branch-name>
+2026-10-09T12:46:26.6492805Z 
+2026-10-09T12:46:26.6492977Z Or undo this operation with:
+2026-10-09T12:46:26.6493254Z 
+2026-10-09T12:46:26.6493407Z   git switch -
+2026-10-09T12:46:26.6493662Z 
+2026-10-09T12:46:26.6494041Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-09T12:46:26.6494710Z 
+2026-10-09T12:46:26.6495149Z HEAD is now at 57654a8 Retain final authority and literal Cloudflare routing evidence
+2026-10-09T12:46:26.6502564Z ##[endgroup]
+2026-10-09T12:46:26.6555428Z [command]/usr/bin/git log -1 --format=%H
+2026-10-09T12:46:26.6585118Z 57654a8ca123f5933be3e4b13981b4bc97632aee
+2026-10-09T12:46:26.6598691Z ##[group]Removing auth
+2026-10-09T12:46:26.6599148Z Removing SSH command configuration
+2026-10-09T12:46:26.6609696Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T12:46:26.6639605Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T12:46:26.6895059Z Removing HTTP extra header
+2026-10-09T12:46:26.6899966Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T12:46:26.6940255Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T12:46:26.7200093Z Removing includeIf entries pointing to credentials config files
+2026-10-09T12:46:26.7205835Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T12:46:26.7251717Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git.path
+2026-10-09T12:46:26.7267202Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git/worktrees/*.path
+2026-10-09T12:46:26.7284300Z includeif.gitdir:/github/workspace/candidate/.git.path
+2026-10-09T12:46:26.7285471Z includeif.gitdir:/github/workspace/candidate/.git/worktrees/*.path
+2026-10-09T12:46:26.7288248Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git.path
+2026-10-09T12:46:26.7316051Z /home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7332450Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git.path /home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7409781Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git/worktrees/*.path
+2026-10-09T12:46:26.7438801Z /home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7454056Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/candidate/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7503177Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/candidate/.git.path
+2026-10-09T12:46:26.7544603Z /github/runner_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7560015Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/candidate/.git.path /github/runner_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7613623Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/candidate/.git/worktrees/*.path
+2026-10-09T12:46:26.7641834Z /github/runner_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7653140Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/candidate/.git/worktrees/*.path /github/runner_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config
+2026-10-09T12:46:26.7701689Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T12:46:26.7974126Z Removing credentials config '/home/runner/work/_temp/git-credentials-bc1c0d57-53cb-4d09-a28c-a33dc3a38d65.config'
+2026-10-09T12:46:26.7984864Z ##[endgroup]
+2026-10-09T12:46:26.8247530Z ##[group]Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+2026-10-09T12:46:26.8247923Z with:
+2026-10-09T12:46:26.8248402Z   node-version: 24
+2026-10-09T12:46:26.8248631Z   check-latest: false
+2026-10-09T12:46:26.8251364Z   token: ***
+2026-10-09T12:46:26.8251783Z   package-manager-cache: true
+2026-10-09T12:46:26.8252029Z ##[endgroup]
+2026-10-09T12:46:26.9671240Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+2026-10-09T12:46:26.9674496Z ##[group]Environment details
+2026-10-09T12:46:27.3773740Z node: v24.21.0
+2026-10-09T12:46:27.3774432Z npm: 11.19.0
+2026-10-09T12:46:27.3774960Z yarn: 1.22.22
+2026-10-09T12:46:27.3775755Z ##[endgroup]
+2026-10-09T12:46:27.3960059Z ##[group]Run node --input-type=module <<'NODE'
+2026-10-09T12:46:27.3960487Z [36;1mnode --input-type=module <<'NODE'[0m
+2026-10-09T12:46:27.3960933Z [36;1mimport {checkGitScope} from '../trusted/scripts/check-handoff-scope.mjs';[0m
+2026-10-09T12:46:27.3961505Z [36;1mconsole.log(JSON.stringify(checkGitScope({branch: process.env.LANE_BRANCH,[0m
+2026-10-09T12:46:27.3962120Z [36;1m  base: process.env.BASE_SHA, head: 'HEAD', ownedPaths: JSON.parse(process.env.OWNED_PATHS),[0m
+2026-10-09T12:46:27.3962650Z [36;1m  prBody: JSON.parse(process.env.PR_BODY_JSON)})));[0m
+2026-10-09T12:46:27.3963002Z [36;1mNODE[0m
+2026-10-09T12:46:27.4225858Z shell: /usr/bin/bash -e {0}
+2026-10-09T12:46:27.4226210Z env:
+2026-10-09T12:46:27.4226652Z   LANE_BRANCH: engineering/qualified-artifact-authority-admission-20261009
+2026-10-09T12:46:27.4227253Z   BASE_SHA: 381d8733e2f105ac16e764c20bb800c40cafea3a
+2026-10-09T12:46:27.4227640Z   OWNED_PATHS: []
+2026-10-09T12:46:27.4236520Z   PR_BODY_JSON: "Closes #1601\n\nThe trusted artifact reader derives the complete registered role union instead of requiring137 inline/480 total roles. It admits the independently reviewed190+343=533 successor, authenticates whole code/qualification metadata and four explicit entry profiles, and preserves source custody separately from current execution. Historical480 and three-entry533 authorities retain their exact schemas.\n\nThe geography jobs now include their actual trusted coordination import closure. Normal PR/package and combined-tree builds literally target Cloudflare; the separate Site reserve gate is unchanged. This fixes the demonstrated missing-checkout failure and intended build routing, without claiming live-host migration or deployment. The superseded mutable repository-variable draft is not used.\n\nActual controls:18 complete reader tests and56 workflow/adjacent integration tests pass with zero failures/skips. They cover genuine old/new immutable Git metadata, missing/rebound inputs, four-profile/source-policy/operating drift, prospective zero-body-read refusal and actual declared checkout/routing paths. Original343 ordered product joins and512 actual-input/32MiB member/256MiB phase limits remain. No scientific qualification is rerun, selected bank activated, or source uncertainty approved.\n\nEvidence: `coordination/engineering/qualified-artifact-authority-admission-20261009/evidence-quality.json`. Earlier failure and executed-code vintages are retained. Current main's FIFO worker cannot bootstrap its own missing checkout include; any one-time Main-controlled recovery requires independent exact-head review, normal candidate checks and actual combined-tree evidence, and will be recorded explicitly. This PR performs no direct merge or worker bypass. Parent campaign #1202 remains open; Arctic application delivery belongs to #1520.\n"
+2026-10-09T12:46:27.4243360Z ##[endgroup]
+2026-10-09T12:46:27.4851921Z {"lane":"engineering","id":"qualified-artifact-authority-admission-20261009","github_issue":1601,"issue_action":"close","base":"381d8733e2f105ac16e764c20bb800c40cafea3a","merge_base":"381d8733e2f105ac16e764c20bb800c40cafea3a","head":"57654a8ca123f5933be3e4b13981b4bc97632aee","changed_files":40}
+2026-10-09T12:46:27.4940311Z ##[group]Run node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs
+2026-10-09T12:46:27.4942652Z [36;1mnode --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs[0m
+2026-10-09T12:46:27.5010244Z shell: /usr/bin/bash -e {0}
+2026-10-09T12:46:27.5010520Z ##[endgroup]
+2026-10-09T12:46:27.6749267Z ✔ verifies bytes without claiming factual correctness (4.282374ms)
+2026-10-09T12:46:27.6782949Z ✔ schema-only validation reports unverified bytes (0.54523ms)
+2026-10-09T12:46:27.6807385Z ✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (3.292423ms)
+2026-10-09T12:46:27.6839559Z ✔ source access/license limits remain explicit; no unsafe retention (1.206305ms)
+2026-10-09T12:46:27.6864399Z ✔ research cannot grant approval; supported conclusions need known sources (0.709266ms)
+2026-10-09T12:46:27.6890352Z ✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.124993ms)
+2026-10-09T12:46:27.6899645Z ✔ compressed vs uncompressed hashes and decompression budgets are checked (2.581535ms)
+2026-10-09T12:46:27.6901202Z ✔ paths and symlinks cannot escape candidate reader (1.908186ms)
+2026-10-09T12:46:27.6903114Z ✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (2.336437ms)
+2026-10-09T12:46:27.6905284Z ✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (2.685759ms)
+2026-10-09T12:46:27.6907481Z ✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.832606ms)
+2026-10-09T12:46:27.6910565Z ✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (7.646654ms)
+2026-10-09T12:46:27.6912962Z ✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (7.25476ms)
+2026-10-09T12:46:27.6915127Z ✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.47143ms)
+2026-10-09T12:46:27.6917237Z ✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.495445ms)
+2026-10-09T12:46:27.9279656Z ✔ geography has its own branch and exactly one matching type (2.371182ms)
+2026-10-09T12:46:27.9309831Z ✔ declared geography ownership is finite, safe and limited to source evidence namespaces (0.528418ms)
+2026-10-09T12:46:27.9339971Z ✔ geography cannot edit core, history, another packet or an undeclared proposal directory (0.702293ms)
+2026-10-09T12:46:27.9380308Z ✔ engineering consumes but preserves geography evidence while existing lanes still work (0.361406ms)
+2026-10-09T12:46:27.9398295Z ✔ geography claims retain exact ownership through renewal and rotation, without content approval (2.710686ms)
+2026-10-09T12:46:27.9400087Z ✔ claims and PRs refuse issue ownership expansion and incompatible modes (1.190415ms)
+2026-10-09T12:46:27.9402280Z ✔ actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration (2.619176ms)
+2026-10-09T12:46:27.9404212Z ✔ real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership (270.870429ms)
+2026-10-09T12:46:27.9479427Z ✔ lane IDs must be explicit and safe (2.893598ms)
+2026-10-09T12:46:27.9480710Z ✔ research owns only campaign files, excluding shared handovers and other campaigns (0.722229ms)
+2026-10-09T12:46:27.9481803Z ✔ engineering preserves research and other engineering progress (0.350185ms)
+2026-10-09T12:46:27.9482949Z ✔ partial and final PRs link one issue without needing a document tracker ID (1.010999ms)
+2026-10-09T12:46:27.9483747Z ✔ PR policy rejects ambiguous issue links and accidental additional closures (0.612385ms)
+2026-10-09T12:46:27.9484463Z ✔ GitHub issue type agrees with its lane and references an open issue (0.463797ms)
+2026-10-09T12:46:27.9485171Z ✔ real git diff checks rename source paths, not only allowed destinations (74.057133ms)
+2026-10-09T12:46:27.9485934Z ✔ another lane advancing work is not mistaken for this branch changing its files (100.715516ms)
+2026-10-09T12:46:27.9487128Z ✔ remote issue validation reads only the event repository and requires successful labeled issue metadata (19.429715ms)
+2026-10-09T12:46:27.9488312Z ✔ geography may own narrower subdirectories without acquiring sibling or parent files (0.983927ms)
+2026-10-09T12:46:27.9489885Z ✔ historical bytes and metric evaluation use distinct authenticated vintages (6.801151ms)
+2026-10-09T12:46:27.9491697Z ✔ wrong hashes/commits, missing versions, candidate historical bytes and unsupported version declarations fail (5.280824ms)
+2026-10-09T12:46:27.9493302Z ✔ duplicate paths at different vintages require explicit pin and metric identities (1.357143ms)
+2026-10-09T12:46:27.9494632Z ✔ historical inventories retain bounded file/phase/commit admission (1.085606ms)
+2026-10-09T12:46:27.9495986Z ✔ subject lookup selects the declared historical file rather than snapshot bytes (1.48608ms)
+2026-10-09T12:46:27.9497434Z ✔ structured references cannot silently use another historical version (1.211688ms)
+2026-10-09T12:46:27.9498969Z ✔ trusted hosted gate authenticates each vintage before loading and preserves independent evaluation (4.525403ms)
+2026-10-09T12:46:27.9500052Z ✔ trusted hosted gate refuses nonancestor/missing commits and absent immutable files despite candidate copies (3.670123ms)
+2026-10-09T12:46:27.9501008Z ✔ prior-evidence subject rosters use their selected commit and preserve source limitations (2.801593ms)
+2026-10-09T12:46:27.9501787Z ✔ historical versions do not widen remote descriptors or tree reads (10.48009ms)
+2026-10-09T12:46:27.9502570Z ✔ altering consumed historical bytes fails while hashes and summaries remain unchanged (0.605619ms)
+2026-10-09T12:46:27.9503488Z ✔ composed geography identities select historical bytes while retaining existing binding rules (3.057121ms)
+2026-10-09T12:46:27.9504429Z ✔ local validation rejects excess descriptors and ignored source commit declarations before reading (2.967722ms)
+2026-10-09T12:46:28.0447908Z ✔ serialized contenders on one issue have exactly one holder even under the same GitHub account (5.350861ms)
+2026-10-09T12:46:28.0492265Z ✔ renewal and release require the actual worker plus ownership nonce (1.752457ms)
+2026-10-09T12:46:28.0493914Z ✔ an idempotent lost-response retry retains original ownership (0.598187ms)
+2026-10-09T12:46:28.0495609Z ✔ renewal, rotation and reassignment retain one canonical comment ID (1.296451ms)
+2026-10-09T12:46:28.0497550Z ✔ umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed (0.868171ms)
+2026-10-09T12:46:28.0499913Z ✔ expired reservations cannot silently discard branches or active PR/live operations (1.70619ms)
+2026-10-09T12:46:28.0501936Z ✔ multiple PRs retain ownership and rotate branches only after previous work completes (2.174659ms)
+2026-10-09T12:46:28.0503669Z ✔ canonical comments cannot be impersonated or ambiguous (0.5292ms)
+2026-10-09T12:46:28.0505497Z ✔ PR validation uses current exact-branch ownership and rejects expired or blocked claims (1.216266ms)
+2026-10-09T12:46:28.0507582Z ✔ location-content claims wait for worldwide approval while source-only work can start (82.693518ms)
+2026-10-09T12:46:28.0509701Z ✔ the PR budget cannot be bypassed by claiming another part indefinitely (0.592306ms)
+2026-10-09T12:46:28.0511517Z ✔ pagination inspects later pages rather than assuming only the first page exists (1.889368ms)
+2026-10-09T12:46:28.0513553Z ✔ claim lock keys use canonical issue numbers so aliases cannot acquire independent locks (0.614153ms)
+2026-10-09T12:46:28.0516152Z ✔ approved research is bound to all three geographic pins and ordinary bot audit text is not authority (0.724859ms)
+2026-10-09T12:46:28.0518540Z ✔ production-only child is reserved by its publisher, not an ordinary implementer (1.556148ms)
+2026-10-09T12:46:28.0520615Z ✔ production child accepts only original-issue or legacy tracking and designated publisher (1.083382ms)
+2026-10-09T12:46:28.1040740Z ✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (4.602282ms)
+2026-10-09T12:46:28.1043445Z ✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.923045ms)
+2026-10-09T12:46:28.1059821Z ✔ positive real-format ledger validates actual files and binds an independent review (4.015956ms)
+2026-10-09T12:46:28.1070060Z ✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.82852ms)
+2026-10-09T12:46:28.1072455Z ✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (2.046012ms)
+2026-10-09T12:46:28.1074894Z ✔ coordinate/helper policies require positive and negative controls; generators need reproducibility (1.488373ms)
+2026-10-09T12:46:28.1076961Z ✔ generator controls bind actual positive, negative and equal two-run output bytes (1.292955ms)
+2026-10-09T12:46:28.1079279Z ✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.071572ms)
+2026-10-09T12:46:28.1081491Z ✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.676981ms)
+2026-10-09T12:46:28.1083576Z ✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (5.841677ms)
+2026-10-09T12:46:28.1090366Z ✔ incomplete remote trees cannot become a passed byte check (0.601021ms)
+2026-10-09T12:46:28.1092126Z ✔ remote decisions reject stale exact-head reviews and a later change request (3.785007ms)
+2026-10-09T12:46:28.1103167Z ✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.445009ms)
+2026-10-09T12:46:28.1110218Z ✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.779786ms)
+2026-10-09T12:46:28.1114269Z ✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (15.378599ms)
+2026-10-09T12:46:28.1116944Z ✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (1.849331ms)
+2026-10-09T12:46:28.1119583Z ✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.161101ms)
+2026-10-09T12:46:28.1121661Z ✔ compact review binds canonical complete inventory and preserves literal receipts (0.908949ms)
+2026-10-09T12:46:28.1123730Z ✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (3.26991ms)
+2026-10-09T12:46:28.1130641Z ✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (1.660684ms)
+2026-10-09T12:46:28.1134469Z ✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (100.913388ms)
+2026-10-09T12:46:28.1324380Z ✔ current manifest is closed and no region can claim invented approvals (1.746097ms)
+2026-10-09T12:46:28.1325954Z ✔ v1 worldwide approval remains compatible (0.815873ms)
+2026-10-09T12:46:28.1327769Z ✔ regional content claims depend on macro and branch approval, not unfinished worldwide descendants (2.518006ms)
+2026-10-09T12:46:28.1329926Z ✔ macro approval and explicit complete region certificates are required (0.597766ms)
+2026-10-09T12:46:28.1331655Z ✔ pins and every location target are checked against explicitly selected regions (1.326572ms)
+2026-10-09T12:46:28.1333130Z ✔ ambiguous territorial membership fails closed (0.228885ms)
+2026-10-09T12:46:28.1334913Z ✔ all name, relationship and media targets are scoped; ancillary or geographic writes are refused (0.54648ms)
+2026-10-09T12:46:28.1336997Z ✔ verified raw batches are inspected rather than trusting caller target summaries (0.57058ms)
+2026-10-09T12:46:28.1339130Z ✔ corrections require a territorial crosswalk and cannot transfer facts to another location (0.878918ms)
+2026-10-09T12:46:29.2210570Z ✖ worker-merge.yml: actual geographic checkout imports its complete trusted closure (39.864879ms)
+2026-10-09T12:46:29.2221991Z ✖ merge-integration-checks.yml: actual geographic checkout imports its complete trusted closure (26.364391ms)
+2026-10-09T12:46:29.2224292Z ✔ negative control: old geographic sparse tree omits mandatory coordinator bodies (85.32159ms)
+2026-10-09T12:46:29.2226505Z ✔ issue-claims.yml: actual sparse declarations include trusted module dependencies (77.279193ms)
+2026-10-09T12:46:29.2249765Z ✖ worker-merge.yml: actual sparse declarations include trusted module dependencies (106.83491ms)
+2026-10-09T12:46:29.2251841Z ✖ merge-integration-checks.yml: actual sparse declarations include trusted module dependencies (369.237654ms)
+2026-10-09T12:46:29.2253953Z ✔ queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies (76.488246ms)
+2026-10-09T12:46:29.2256027Z ✔ merge-scheduler.yml: actual sparse declarations include trusted module dependencies (157.021214ms)
+2026-10-09T12:46:29.2258345Z ✔ negative control: old scripts-only tree cannot load relocated regional gate (68.948153ms)
+2026-10-09T12:46:29.2260084Z ✔ sparse candidate still detects changes and rename sources outside the working tree (78.581388ms)
+2026-10-09T12:46:29.2262277Z ✔ merge-integration-checks.yml: immutable normal routes build Cloudflare and retain the separate Site gate (11.591756ms)
+2026-10-09T12:46:29.2265488Z ✔ worker-merge.yml: immutable normal routes build Cloudflare and retain the separate Site gate (2.632109ms)
+2026-10-09T12:46:29.2353860Z ✔ results are bound to the bot, request and issue, including denial (1.377698ms)
+2026-10-09T12:46:29.2354737Z ✔ latest matching response wins, unrelated or malformed comments cannot confer ownership (0.328703ms)
+2026-10-09T12:46:29.2356196Z ✔ positive confirmations require current exact canonical ownership, not stale success (1.142391ms)
+2026-10-09T12:46:29.2357524Z ✔ bootstrap fallback requires exact request and releases require inactive state (0.491346ms)
+2026-10-09T12:46:29.2358999Z ✔ merge responses retain exact PR binding and embedded HTML cannot break the marker (0.303962ms)
+2026-10-09T12:46:29.2359924Z ℹ tests 109
+2026-10-09T12:46:29.2360284Z ℹ suites 0
+2026-10-09T12:46:29.2360636Z ℹ pass 105
+2026-10-09T12:46:29.2360955Z ℹ fail 4
+2026-10-09T12:46:29.2361365Z ℹ cancelled 0
+2026-10-09T12:46:29.2361771Z ℹ skipped 0
+2026-10-09T12:46:29.2362149Z ℹ todo 0
+2026-10-09T12:46:29.2362598Z ℹ duration_ms 1693.19346
+2026-10-09T12:46:29.2383872Z 
+2026-10-09T12:46:29.2384235Z ✖ failing tests:
+2026-10-09T12:46:29.2384489Z 
+2026-10-09T12:46:29.2384931Z test at test/trusted-workflow-checkouts.test.mjs:32:3
+2026-10-09T12:46:29.2386023Z ✖ worker-merge.yml: actual geographic checkout imports its complete trusted closure (39.864879ms)
+2026-10-09T12:46:29.2388348Z   Error: ENOENT: no such file or directory, lstat '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2390103Z       at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+2026-10-09T12:46:29.2390752Z       at Object.cpSync (node:fs:3242:3)
+2026-10-09T12:46:29.2391941Z       at probe (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:22:10)
+2026-10-09T12:46:29.2393910Z       at TestContext.<anonymous> (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:36:20)
+2026-10-09T12:46:29.2395291Z       at Test.runInAsyncScope (node:async_hooks:227:14)
+2026-10-09T12:46:29.2396080Z       at Test.run (node:internal/test_runner/test:1402:25)
+2026-10-09T12:46:29.2396876Z       at Test.start (node:internal/test_runner/test:1262:17)
+2026-10-09T12:46:29.2397853Z       at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+2026-10-09T12:46:29.2410020Z     errno: -2,
+2026-10-09T12:46:29.2410445Z     code: 'ENOENT',
+2026-10-09T12:46:29.2410841Z     syscall: 'lstat',
+2026-10-09T12:46:29.2412138Z     path: '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2413391Z   }
+2026-10-09T12:46:29.2413596Z 
+2026-10-09T12:46:29.2414081Z test at test/trusted-workflow-checkouts.test.mjs:32:3
+2026-10-09T12:46:29.2415654Z ✖ merge-integration-checks.yml: actual geographic checkout imports its complete trusted closure (26.364391ms)
+2026-10-09T12:46:29.2438281Z   Error: ENOENT: no such file or directory, lstat '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2440113Z       at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+2026-10-09T12:46:29.2440741Z       at Object.cpSync (node:fs:3242:3)
+2026-10-09T12:46:29.2441932Z       at probe (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:22:10)
+2026-10-09T12:46:29.2443867Z       at TestContext.<anonymous> (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:36:20)
+2026-10-09T12:46:29.2445238Z       at Test.runInAsyncScope (node:async_hooks:227:14)
+2026-10-09T12:46:29.2446016Z       at Test.run (node:internal/test_runner/test:1402:25)
+2026-10-09T12:46:29.2446735Z       at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+2026-10-09T12:46:29.2447488Z       at Test.postRun (node:internal/test_runner/test:1542:19)
+2026-10-09T12:46:29.2448377Z       at Test.run (node:internal/test_runner/test:1467:12)
+2026-10-09T12:46:29.2449222Z       at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+2026-10-09T12:46:29.2449903Z     errno: -2,
+2026-10-09T12:46:29.2450262Z     code: 'ENOENT',
+2026-10-09T12:46:29.2450592Z     syscall: 'lstat',
+2026-10-09T12:46:29.2451739Z     path: '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2452906Z   }
+2026-10-09T12:46:29.2453082Z 
+2026-10-09T12:46:29.2453482Z test at test/trusted-workflow-checkouts.test.mjs:50:3
+2026-10-09T12:46:29.2454567Z ✖ worker-merge.yml: actual sparse declarations include trusted module dependencies (106.83491ms)
+2026-10-09T12:46:29.2455647Z   Error: ENOENT: no such file or directory, lstat '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2456507Z       at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+2026-10-09T12:46:29.2456861Z       at Object.cpSync (node:fs:3242:3)
+2026-10-09T12:46:29.2457490Z       at probe (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:22:10)
+2026-10-09T12:46:29.2458882Z       at TestContext.<anonymous> (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:56:22)
+2026-10-09T12:46:29.2459589Z       at Test.runInAsyncScope (node:async_hooks:227:14)
+2026-10-09T12:46:29.2459980Z       at Test.run (node:internal/test_runner/test:1402:25)
+2026-10-09T12:46:29.2460456Z       at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+2026-10-09T12:46:29.2460946Z       at Test.postRun (node:internal/test_runner/test:1542:19)
+2026-10-09T12:46:29.2461348Z       at Test.run (node:internal/test_runner/test:1467:12)
+2026-10-09T12:46:29.2461842Z       at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+2026-10-09T12:46:29.2462249Z     errno: -2,
+2026-10-09T12:46:29.2462457Z     code: 'ENOENT',
+2026-10-09T12:46:29.2462675Z     syscall: 'lstat',
+2026-10-09T12:46:29.2463328Z     path: '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2463942Z   }
+2026-10-09T12:46:29.2464050Z 
+2026-10-09T12:46:29.2464267Z test at test/trusted-workflow-checkouts.test.mjs:50:3
+2026-10-09T12:46:29.2465254Z ✖ merge-integration-checks.yml: actual sparse declarations include trusted module dependencies (369.237654ms)
+2026-10-09T12:46:29.2466374Z   Error: ENOENT: no such file or directory, lstat '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2467206Z       at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+2026-10-09T12:46:29.2467550Z       at Object.cpSync (node:fs:3242:3)
+2026-10-09T12:46:29.2468549Z       at probe (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:22:10)
+2026-10-09T12:46:29.2469520Z       at TestContext.<anonymous> (file:///home/runner/work/WorldAtlas/WorldAtlas/candidate/test/trusted-workflow-checkouts.test.mjs:56:22)
+2026-10-09T12:46:29.2470209Z       at Test.runInAsyncScope (node:async_hooks:227:14)
+2026-10-09T12:46:29.2470601Z       at Test.run (node:internal/test_runner/test:1402:25)
+2026-10-09T12:46:29.2471083Z       at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+2026-10-09T12:46:29.2471573Z       at Test.postRun (node:internal/test_runner/test:1542:19)
+2026-10-09T12:46:29.2471991Z       at Test.run (node:internal/test_runner/test:1467:12)
+2026-10-09T12:46:29.2472484Z       at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+2026-10-09T12:46:29.2472901Z     errno: -2,
+2026-10-09T12:46:29.2473110Z     code: 'ENOENT',
+2026-10-09T12:46:29.2473363Z     syscall: 'lstat',
+2026-10-09T12:46:29.2474025Z     path: '/home/runner/work/WorldAtlas/WorldAtlas/candidate/coordination/engineering/selected-geography-effective-prevention-20261009'
+2026-10-09T12:46:29.2474644Z   }
+2026-10-09T12:46:29.2497687Z ##[error]Process completed with exit code 1.
+2026-10-09T12:46:29.2618238Z Post job cleanup.
+2026-10-09T12:46:29.3490699Z [command]/usr/bin/git version
+2026-10-09T12:46:29.3534260Z git version 2.55.0
+2026-10-09T12:46:29.3583582Z Temporarily overriding HOME='/home/runner/work/_temp/4fc84f3c-1b72-45cc-b071-8ec6716d2fcb' before making global git config changes
+2026-10-09T12:46:29.3584583Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T12:46:29.3590448Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas/candidate
+2026-10-09T12:46:29.3627397Z Removing SSH command configuration
+2026-10-09T12:46:29.3635252Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T12:46:29.3676400Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T12:46:29.3952410Z Removing HTTP extra header
+2026-10-09T12:46:29.3958814Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T12:46:29.3997918Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T12:46:29.4289646Z Removing includeIf entries pointing to credentials config files
+2026-10-09T12:46:29.4297650Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T12:46:29.4341112Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T12:46:29.4789851Z Post job cleanup.
+2026-10-09T12:46:29.5727843Z [command]/usr/bin/git version
+2026-10-09T12:46:29.5771419Z git version 2.55.0
+2026-10-09T12:46:29.5816429Z Temporarily overriding HOME='/home/runner/work/_temp/36329e8e-b834-44c2-a60c-6e18684511f2' before making global git config changes
+2026-10-09T12:46:29.5818646Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T12:46:29.5822816Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas/trusted
+2026-10-09T12:46:29.5862584Z Removing SSH command configuration
+2026-10-09T12:46:29.5864156Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T12:46:29.5904127Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-09T12:46:29.6184690Z Removing HTTP extra header
+2026-10-09T12:46:29.6192366Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T12:46:29.6242919Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-09T12:46:29.6520300Z Removing includeIf entries pointing to credentials config files
+2026-10-09T12:46:29.6529011Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T12:46:29.6571826Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-09T12:46:29.7001558Z Cleaning up orphan processes

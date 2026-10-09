@@ -11,7 +11,7 @@ const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-ch
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
-function probe(directories) {
+function probe(directories, {geography = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
@@ -22,10 +22,29 @@ function probe(directories) {
       fs.cpSync(source, destination, {recursive: true});
     }
     return spawnSync(process.execPath, ['--input-type=module', '-e',
-      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs'); await import('./scripts/check-pr-gates.mjs');"],
+      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs'); await import('./scripts/check-pr-gates.mjs');" +
+      (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 }
+
+for (const workflow of ['worker-merge.yml', 'merge-integration-checks.yml']) {
+  test(`${workflow}: actual geographic checkout imports its complete trusted closure`, () => {
+    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
+    const match = source.match(/- name: Checkout trusted geographic checker[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+    assert.ok(match, 'actual trusted geography checkout must be declared');
+    const result = probe(match[1].trim().split('\n').map(row => row.trim()), {geography: true});
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /complete trusted geography closure imported/);
+  });
+}
+
+test('negative control: old geographic sparse tree omits mandatory coordinator bodies', () => {
+  const result = probe(['scripts', 'src', '.github'], {geography: true});
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /ERR_MODULE_NOT_FOUND/);
+  assert.match(result.stderr, /selected-geography-effective-prevention-20261009/);
+});
 
 for (const workflow of workflows) {
   test(`${workflow}: actual sparse declarations include trusted module dependencies`, () => {
@@ -71,3 +90,71 @@ test('sparse candidate still detects changes and rename sources outside the work
     assert.throws(() => checkGitScope({branch: 'research/example', base, run}), /Research changes/);
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 });
+
+
+for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worker-merge.yml', 1]]) {
+  test(`${workflow}: immutable normal routes build Cloudflare and retain the separate Site gate`, () => {
+    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
+    const routes = [...source.matchAll(/^        run: (npm run build:cloudflare)$/gm)];
+    assert.equal(routes.length, expected, 'all actual package/shard routes must be covered');
+    assert.doesNotMatch(source, /WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
+    const site = fs.readFileSync(path.join(root, '.github/workflows/deployment-budget.yml'), 'utf8');
+    assert.match(site, /run: npm run build:hosted/);
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-package-routing-'));
+    try {
+      fs.writeFileSync(path.join(directory, 'npm'), '#!/bin/sh\nprintf "%s\\n" "$*"\n', {mode: 0o755});
+      for (const route of routes) {
+        const result = spawnSync('/bin/bash', ['-c', route[1]], {encoding: 'utf8', env: {PATH: directory, WORLDATLAS_PACKAGE_PROFILE: 'foreign'}});
+        assert.equal(result.status, 0, result.stderr);assert.equal(result.stdout.trim(), 'run build:cloudflare');
+      }
+    } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+  });
+}
+
+
+test('actual scope candidate sparse declaration contains cold-checkout test imports', () => {
+  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
+  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
+  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+  assert.ok(candidate, 'actual scope candidate checkout must be declared');
+  const directories = candidate[1].trim().split('\n').map(row => row.trim());
+  const qualified = probe(directories, {geography: true});
+  assert.equal(qualified.status, 0, qualified.stderr);
+  const missing = probe(directories.filter(row => !row.startsWith('coordination/')), {geography: true});
+  assert.notEqual(missing.status, 0);assert.match(missing.stderr, /selected-geography-effective-prevention-20261009/);
+});
+
+for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worker-merge.yml', 1]]) {
+  test(`${workflow}: actual post-build readback refuses missing selected helper`, () => {
+    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
+    const blocks = [...source.matchAll(/- name: Read back qualified native build outputs when selected\n        if: .+\n        run: \|\n((?:          .+\n)+)/g)];
+    assert.equal(blocks.length, expected);
+    const helper = 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs';
+    const base = {version: 1, method: 'native-linear-evenodd-first-owner-v1', manifest_path: 'data/base.json', sha256: '1'.repeat(64), release_id: 'fixture-release'};
+    const pin = {path: 'data/pin.json', mode: '100644', bytes: 1, sha256: '2'.repeat(64)};
+    for (const block of blocks) {
+      const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-built-readback-routing-'));
+      try {
+        fs.mkdirSync(path.join(directory, 'data'));
+        const file = path.join(directory, 'data/ownership-selection.json'), calls = path.join(directory, 'calls.jsonl');
+        const invoke = env => spawnSync('/bin/bash', ['-e', '-o', 'pipefail', '-c', block[1].split('\n').map(row => row.slice(10)).join('\n')], {
+          cwd: directory, encoding: 'utf8', env: {PATH: path.dirname(process.execPath) + ':/usr/bin:/bin', ...env}
+        });
+        fs.writeFileSync(file, JSON.stringify(base));
+        let result = invoke();assert.equal(result.status, 0, result.stderr);assert.equal(fs.existsSync(calls), false);assert.match(result.stdout, /no report claimed/);
+        fs.writeFileSync(file, JSON.stringify({...base, artifact_consumption: {certificate: pin, review: pin}}));
+        result = invoke();assert.equal(result.status, 1);assert.equal(fs.existsSync(calls), false);assert.match(result.stderr, /helper is missing/);
+        fs.mkdirSync(path.dirname(path.join(directory, helper)), {recursive: true});
+        fs.writeFileSync(path.join(directory, helper), `import fs from 'node:fs'; fs.appendFileSync('calls.jsonl',JSON.stringify(process.argv.slice(2))+'\n'); process.exit(Number(process.env.FIXTURE_HELPER_EXIT||0));`.replace("+'\n'", "+'\\n'"));
+        result = invoke();assert.equal(result.status, 0, result.stderr);
+        assert.deepEqual(JSON.parse(fs.readFileSync(calls, 'utf8')), ['--built-output-readback', '.cache/native-normal-built-output.json']);
+        fs.unlinkSync(calls);result = invoke({FIXTURE_HELPER_EXIT: '23'});assert.equal(result.status, 23);fs.unlinkSync(calls);
+        for (const value of ['{malformed', JSON.stringify({...base, artifact_consumption: null}), JSON.stringify({...base, artifact_consumption: {certificate: {...pin, bytes: 33554433}, review: pin}})]) {
+          fs.writeFileSync(file, value);result = invoke();assert.notEqual(result.status, 0);assert.equal(fs.existsSync(calls), false);
+        }
+        fs.unlinkSync(file);result = invoke();assert.notEqual(result.status, 0);assert.equal(fs.existsSync(calls), false);
+      } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+    }
+    assert.match(source, /path: (?:\|\n[\s\S]*?)?[^\n]*\.cache\/native-normal-built-output\.json/);
+  });
+}
