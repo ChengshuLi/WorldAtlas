@@ -137,7 +137,8 @@ class TrustedCheckControls(unittest.TestCase):
         def git(*args, env=None):
             return subprocess.run(['git', '-C', str(checkout), *args], capture_output=True, text=True, env=env)
         self.assertEqual(git('sparse-checkout', 'init', '--cone').returncode, 0)
-        self.assertEqual(git('sparse-checkout', 'set', 'scripts', 'src', '.github').returncode, 0)
+        self.assertEqual(git('sparse-checkout', 'set', 'scripts', 'src', '.github',
+                             'coordination/engineering/selected-geography-effective-prevention-20261009').returncode, 0)
         self.assertEqual(git('checkout', '--quiet', 'trusted').returncode, 0)
         self.assertEqual(git('rev-parse', '--is-shallow-repository').stdout.strip(), 'true')
         self.assertFalse((checkout / 'data').exists())
@@ -155,6 +156,7 @@ class TrustedCheckControls(unittest.TestCase):
                                  '--candidate', candidate, '--fetch', '--out', str(output)],
                                 capture_output=True, text=True, env={**os.environ, 'GH_TOKEN': token})
         self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertTrue(output.is_file(), result.stderr)
         report = json.loads(output.read_bytes())
         self.assertEqual(report['status'], 'regressions-found')
         self.assertEqual(report['regressions'], 1)
