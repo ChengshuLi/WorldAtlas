@@ -115,3 +115,17 @@ test('production child accepts only original-issue or legacy tracking and design
   assert.throws(()=>transitionClaim({issue:operationIssue,comments:[],request:request(),now}),/designated publisher/);
  }
 });
+
+
+test('verified engineering reservation carries only safe actual work declarations',()=>{
+ const owned_paths=['coordination/engineering/batch/','coordination/engineering/prevention/helper.mjs'];
+ const scoped=issue({body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,owned_paths})}\n-->`});
+ const claim=transitionClaim({issue:scoped,comments:[],request:request(),now}).claim;
+ const reservation=verifyClaimForPR({issue:scoped,comments:[comment(claim)],branch:claim.branch,now});
+ assert.deepEqual(reservation.owned_paths,owned_paths);
+ // Existing engineering claims have no stored path array: the matched issue remains authority.
+ assert.equal(claim.owned_paths,undefined);
+ assert.equal(verifyClaimForPR({issue:issue(),comments:[comment(claim)],branch:claim.branch,now}).owned_paths,undefined);
+ for(const owned_paths of [['coordination/engineering/'],['coordination/engineering/batch/','coordination/engineering/batch/'],['coordination/engineering/batch/../other/'],['research/geography/a/']])assert.throws(()=>verifyClaimForPR({issue:issue({body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,owned_paths})}\n-->`}),comments:[comment(claim)],branch:claim.branch,now}));
+ assert.throws(()=>verifyClaimForPR({issue:scoped,comments:[comment(claim)],branch:'engineering/foreign',now}),/exact branch/);
+});

@@ -21,7 +21,9 @@ function rgb(css){
 export class PixelCanvasLayer extends L.Layer {
   constructor(features,options){super();
     const composite=features.some(feature=>Object.hasOwn(feature,'additiveFootprint'));
-    if(composite && (options.ownership?.method!==NATIVE_GRID_METHOD || !((options.ownership.effective_footprint_domain==='worldatlas-effective-native-footprints:v1'&&/^[a-f0-9]{64}$/.test(options.ownership.effective_footprint_sha256??''))||(options.ownership.context_footprint_domain==='worldatlas-display-context-footprints:v1'&&/^[a-f0-9]{64}$/.test(options.ownership.context_footprints_sha256??'')&&/^[a-f0-9]{64}$/.test(options.ownership.reference_footprints_sha256??'')))))
+    const versions=new Set(features.filter(feature=>Object.hasOwn(feature,'additiveFootprint')).map(feature=>feature.additiveFootprint.version));
+    const referenceDomain=versions.size===1&&[1,2].includes([...versions][0])?`worldatlas-effective-native-footprints:v${[...versions][0]}`:null;
+    if(composite && (referenceDomain===null || options.ownership?.method!==NATIVE_GRID_METHOD || !((referenceDomain&&options.ownership.effective_footprint_domain===referenceDomain&&/^[a-f0-9]{64}$/.test(options.ownership.effective_footprint_sha256??''))||(options.ownership.context_footprint_domain==='worldatlas-display-context-footprints:v1'&&/^[a-f0-9]{64}$/.test(options.ownership.context_footprints_sha256??'')&&/^[a-f0-9]{64}$/.test(options.ownership.reference_footprints_sha256??'')))))
       throw Error('Additive footprints require the authenticated native grid; projected fallback is unsupported');
     this.index=createGridIndex(features,{ordered:options.orderedOwners===true});
     if(composite)for(const item of this.index){

@@ -1,0 +1,328 @@
+TAP version 13
+# Subtest: geography has its own branch and exactly one matching type
+ok 1 - geography has its own branch and exactly one matching type
+  ---
+  duration_ms: 1.965708
+  type: 'test'
+  ...
+# Subtest: declared geography ownership is finite, safe and limited to source evidence namespaces
+ok 2 - declared geography ownership is finite, safe and limited to source evidence namespaces
+  ---
+  duration_ms: 0.321916
+  type: 'test'
+  ...
+# Subtest: geography cannot edit core, history, another packet or an undeclared proposal directory
+ok 3 - geography cannot edit core, history, another packet or an undeclared proposal directory
+  ---
+  duration_ms: 0.315583
+  type: 'test'
+  ...
+# Subtest: engineering consumes but preserves geography evidence while existing lanes still work
+ok 4 - engineering consumes but preserves geography evidence while existing lanes still work
+  ---
+  duration_ms: 0.160667
+  type: 'test'
+  ...
+# Subtest: geography claims retain exact ownership through renewal and rotation, without content approval
+ok 5 - geography claims retain exact ownership through renewal and rotation, without content approval
+  ---
+  duration_ms: 1.854292
+  type: 'test'
+  ...
+# Subtest: claims and PRs refuse issue ownership expansion and incompatible modes
+ok 6 - claims and PRs refuse issue ownership expansion and incompatible modes
+  ---
+  duration_ms: 0.520084
+  type: 'test'
+  ...
+# Subtest: actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration
+ok 7 - actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration
+  ---
+  duration_ms: 2.429083
+  type: 'test'
+  ...
+# Subtest: real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership
+ok 8 - real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership
+  ---
+  duration_ms: 610.0065
+  type: 'test'
+  ...
+# Subtest: lane IDs must be explicit and safe
+ok 9 - lane IDs must be explicit and safe
+  ---
+  duration_ms: 2.4645
+  type: 'test'
+  ...
+# Subtest: research owns only campaign files, excluding shared handovers and other campaigns
+ok 10 - research owns only campaign files, excluding shared handovers and other campaigns
+  ---
+  duration_ms: 0.402833
+  type: 'test'
+  ...
+# Subtest: engineering preserves research and other engineering progress
+ok 11 - engineering preserves research and other engineering progress
+  ---
+  duration_ms: 0.3895
+  type: 'test'
+  ...
+# Subtest: partial and final PRs link one issue without needing a document tracker ID
+ok 12 - partial and final PRs link one issue without needing a document tracker ID
+  ---
+  duration_ms: 0.566125
+  type: 'test'
+  ...
+# Subtest: PR policy rejects ambiguous issue links and accidental additional closures
+ok 13 - PR policy rejects ambiguous issue links and accidental additional closures
+  ---
+  duration_ms: 0.439791
+  type: 'test'
+  ...
+# Subtest: GitHub issue type agrees with its lane and references an open issue
+ok 14 - GitHub issue type agrees with its lane and references an open issue
+  ---
+  duration_ms: 0.700083
+  type: 'test'
+  ...
+# Subtest: real git diff checks rename source paths, not only allowed destinations
+ok 15 - real git diff checks rename source paths, not only allowed destinations
+  ---
+  duration_ms: 217.385791
+  type: 'test'
+  ...
+# Subtest: another lane advancing work is not mistaken for this branch changing its files
+ok 16 - another lane advancing work is not mistaken for this branch changing its files
+  ---
+  duration_ms: 279.716166
+  type: 'test'
+  ...
+# Subtest: remote issue validation reads only the event repository and requires successful labeled issue metadata
+ok 17 - remote issue validation reads only the event repository and requires successful labeled issue metadata
+  ---
+  duration_ms: 7.638416
+  type: 'test'
+  ...
+# Subtest: geography may own narrower subdirectories without acquiring sibling or parent files
+ok 18 - geography may own narrower subdirectories without acquiring sibling or parent files
+  ---
+  duration_ms: 0.401084
+  type: 'test'
+  ...
+# Subtest: engineering literal grants retain branch fallback, exact-file and directory boundaries
+ok 19 - engineering literal grants retain branch fallback, exact-file and directory boundaries
+  ---
+  duration_ms: 0.423042
+  type: 'test'
+  ...
+# Subtest: actual CLI consumes only valid matched engineering issue grants
+ok 20 - actual CLI consumes only valid matched engineering issue grants
+  ---
+  duration_ms: 1918.771542
+  type: 'test'
+  ...
+# Subtest: actual linked-issue reader passes engineering grants to git scope and rejects foreign declarations
+ok 21 - actual linked-issue reader passes engineering grants to git scope and rejects foreign declarations
+  ---
+  duration_ms: 0.923041
+  type: 'test'
+  ...
+# Subtest: serialized contenders on one issue have exactly one holder even under the same GitHub account
+ok 22 - serialized contenders on one issue have exactly one holder even under the same GitHub account
+  ---
+  duration_ms: 3.45825
+  type: 'test'
+  ...
+# Subtest: renewal and release require the actual worker plus ownership nonce
+ok 23 - renewal and release require the actual worker plus ownership nonce
+  ---
+  duration_ms: 0.726375
+  type: 'test'
+  ...
+# Subtest: an idempotent lost-response retry retains original ownership
+ok 24 - an idempotent lost-response retry retains original ownership
+  ---
+  duration_ms: 0.214125
+  type: 'test'
+  ...
+# Subtest: renewal, rotation and reassignment retain one canonical comment ID
+ok 25 - renewal, rotation and reassignment retain one canonical comment ID
+  ---
+  duration_ms: 0.438042
+  type: 'test'
+  ...
+# Subtest: umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed
+ok 26 - umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed
+  ---
+  duration_ms: 0.278125
+  type: 'test'
+  ...
+# Subtest: expired reservations cannot silently discard branches or active PR/live operations
+ok 27 - expired reservations cannot silently discard branches or active PR/live operations
+  ---
+  duration_ms: 0.453167
+  type: 'test'
+  ...
+# Subtest: multiple PRs retain ownership and rotate branches only after previous work completes
+ok 28 - multiple PRs retain ownership and rotate branches only after previous work completes
+  ---
+  duration_ms: 1.824584
+  type: 'test'
+  ...
+# Subtest: canonical comments cannot be impersonated or ambiguous
+ok 29 - canonical comments cannot be impersonated or ambiguous
+  ---
+  duration_ms: 0.2295
+  type: 'test'
+  ...
+# Subtest: PR validation uses current exact-branch ownership and rejects expired or blocked claims
+ok 30 - PR validation uses current exact-branch ownership and rejects expired or blocked claims
+  ---
+  duration_ms: 0.411292
+  type: 'test'
+  ...
+# Subtest: location-content claims wait for worldwide approval while source-only work can start
+ok 31 - location-content claims wait for worldwide approval while source-only work can start
+  ---
+  duration_ms: 54.94075
+  type: 'test'
+  ...
+# Subtest: the PR budget cannot be bypassed by claiming another part indefinitely
+ok 32 - the PR budget cannot be bypassed by claiming another part indefinitely
+  ---
+  duration_ms: 0.335792
+  type: 'test'
+  ...
+# Subtest: pagination inspects later pages rather than assuming only the first page exists
+ok 33 - pagination inspects later pages rather than assuming only the first page exists
+  ---
+  duration_ms: 0.199584
+  type: 'test'
+  ...
+# Subtest: claim lock keys use canonical issue numbers so aliases cannot acquire independent locks
+ok 34 - claim lock keys use canonical issue numbers so aliases cannot acquire independent locks
+  ---
+  duration_ms: 0.283834
+  type: 'test'
+  ...
+# Subtest: approved research is bound to all three geographic pins and ordinary bot audit text is not authority
+ok 35 - approved research is bound to all three geographic pins and ordinary bot audit text is not authority
+  ---
+  duration_ms: 0.306125
+  type: 'test'
+  ...
+# Subtest: production-only child is reserved by its publisher, not an ordinary implementer
+ok 36 - production-only child is reserved by its publisher, not an ordinary implementer
+  ---
+  duration_ms: 0.305834
+  type: 'test'
+  ...
+# Subtest: production child accepts only original-issue or legacy tracking and designated publisher
+ok 37 - production child accepts only original-issue or legacy tracking and designated publisher
+  ---
+  duration_ms: 0.371666
+  type: 'test'
+  ...
+# Subtest: verified engineering reservation carries only safe actual work declarations
+ok 38 - verified engineering reservation carries only safe actual work declarations
+  ---
+  duration_ms: 0.848125
+  type: 'test'
+  ...
+# Subtest: worker-merge.yml: actual geographic checkout imports its complete trusted closure
+ok 39 - worker-merge.yml: actual geographic checkout imports its complete trusted closure
+  ---
+  duration_ms: 247.503625
+  type: 'test'
+  ...
+# Subtest: merge-integration-checks.yml: actual geographic checkout imports its complete trusted closure
+ok 40 - merge-integration-checks.yml: actual geographic checkout imports its complete trusted closure
+  ---
+  duration_ms: 179.175208
+  type: 'test'
+  ...
+# Subtest: negative control: old geographic sparse tree omits mandatory coordinator bodies
+ok 41 - negative control: old geographic sparse tree omits mandatory coordinator bodies
+  ---
+  duration_ms: 139.575917
+  type: 'test'
+  ...
+# Subtest: issue-claims.yml: actual sparse declarations include trusted module dependencies
+ok 42 - issue-claims.yml: actual sparse declarations include trusted module dependencies
+  ---
+  duration_ms: 134.086125
+  type: 'test'
+  ...
+# Subtest: worker-merge.yml: actual sparse declarations include trusted module dependencies
+ok 43 - worker-merge.yml: actual sparse declarations include trusted module dependencies
+  ---
+  duration_ms: 796.68775
+  type: 'test'
+  ...
+# Subtest: merge-integration-checks.yml: actual sparse declarations include trusted module dependencies
+ok 44 - merge-integration-checks.yml: actual sparse declarations include trusted module dependencies
+  ---
+  duration_ms: 1159.516833
+  type: 'test'
+  ...
+# Subtest: queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies
+ok 45 - queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies
+  ---
+  duration_ms: 116.699916
+  type: 'test'
+  ...
+# Subtest: merge-scheduler.yml: actual sparse declarations include trusted module dependencies
+ok 46 - merge-scheduler.yml: actual sparse declarations include trusted module dependencies
+  ---
+  duration_ms: 240.220333
+  type: 'test'
+  ...
+# Subtest: negative control: old scripts-only tree cannot load relocated regional gate
+ok 47 - negative control: old scripts-only tree cannot load relocated regional gate
+  ---
+  duration_ms: 108.701125
+  type: 'test'
+  ...
+# Subtest: sparse candidate still detects changes and rename sources outside the working tree
+ok 48 - sparse candidate still detects changes and rename sources outside the working tree
+  ---
+  duration_ms: 334.461667
+  type: 'test'
+  ...
+# Subtest: merge-integration-checks.yml: immutable normal routes build Cloudflare and retain the separate Site gate
+ok 49 - merge-integration-checks.yml: immutable normal routes build Cloudflare and retain the separate Site gate
+  ---
+  duration_ms: 454.151583
+  type: 'test'
+  ...
+# Subtest: worker-merge.yml: immutable normal routes build Cloudflare and retain the separate Site gate
+ok 50 - worker-merge.yml: immutable normal routes build Cloudflare and retain the separate Site gate
+  ---
+  duration_ms: 171.931542
+  type: 'test'
+  ...
+# Subtest: actual scope candidate sparse declaration contains cold-checkout test imports
+ok 51 - actual scope candidate sparse declaration contains cold-checkout test imports
+  ---
+  duration_ms: 490.822292
+  type: 'test'
+  ...
+# Subtest: merge-integration-checks.yml: actual post-build readback refuses missing selected helper
+ok 52 - merge-integration-checks.yml: actual post-build readback refuses missing selected helper
+  ---
+  duration_ms: 2531.151958
+  type: 'test'
+  ...
+# Subtest: worker-merge.yml: actual post-build readback refuses missing selected helper
+ok 53 - worker-merge.yml: actual post-build readback refuses missing selected helper
+  ---
+  duration_ms: 3387.816334
+  type: 'test'
+  ...
+1..53
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10601.864084
