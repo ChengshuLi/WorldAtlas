@@ -1335,12 +1335,15 @@
   "methods": [
     {
       "id": "retained-roster-reconciliation",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
       "description": "Exact identity join from the complete refreshed membership outputs to the retained 318-ID/122-family batch index; no classification is inferred.",
       "software": "Python 3.12 standard library and scripts/evidence/immutable.py",
       "units": "component IDs and family locators"
     },
     {
       "id": "retained-source-pointset-binding",
+      "kind": "source",
       "description": "Select exact source features from whole preserved Atlas-consumed simplified products and exact target features from the pinned whole current component shards; cite existing comparisons without recalculation.",
       "software": "Python 3.12 standard library; no geometry engine invoked",
       "units": "feature identities and SHA-256 whole/canonical feature digests"
