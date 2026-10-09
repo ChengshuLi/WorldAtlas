@@ -420,3 +420,58 @@ test('Cloudflare fourth entry is explicit and cannot reinterpret historical prof
  delete code.entry_critical_files[cloudflare];
  assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true,cloudflareProfile:true}),/entry-specific source/);
 });
+
+
+test('genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles',()=>{
+ const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354');
+ const read=name=>fs.readFileSync(path.join(directory,name));
+ const rows=JSON.parse(read('original-inputs.json')).pins;
+ for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
+ const certificate=JSON.parse(read('certificate.json')),code=JSON.parse(read('code.json')),qualification=JSON.parse(gunzipSync(read('qualification.json.gz'))),catalogue=JSON.parse(gunzipSync(read('catalogue.json.gz'))),registry=JSON.parse(gunzipSync(read('registry.json.gz')));
+ assert.deepEqual(validateReleaseCatalogue(certificate,catalogue,registry),{inline_roles:190,release_products:343,complete_roles:533});
+ const custody=validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true,cloudflareProfile:true});
+ assert.equal(custody.entry_profiles['scripts/build-cloudflare-inner.mjs'].entry_critical_roles,3);
+ assert.equal(custody.entry_profiles['scripts/build-cloudflare-inner.mjs'].declared_current_role_groups.actual_current_execution_wrappers.length,58);
+ assert.throws(()=>validateArtifactSourceMetadata(certificate,code,qualification,{entryProfiles:true}),/actual entry profile/);
+ assert.equal(custody.source_critical_roles,33);assert.equal(custody.candidate_code_executed,false);
+ assert.equal(custody.entry_profiles['scripts/run-integration-tests.mjs'].entry_critical_roles,1);
+ for(const [change,pattern]of [
+  [(c,a)=>a.critical_files[1]=structuredClone(a.critical_files[0]),/duplicate critical/],
+  [(c,a)=>a.critical_files[0].sha256='0'.repeat(64),/omitted\/rebound/],
+  [(c,a)=>delete a.entry_roles['scripts/run-integration-tests.mjs'],/actual entry profile/],
+  [(c,a)=>delete a.entry_roles['scripts/build-cloudflare-inner.mjs'],/actual entry profile/],
+  [(c,a)=>delete a.entry_critical_files['scripts/build-cloudflare-inner.mjs'],/entry-specific source/],
+  [(c,a)=>a.entry_roles['scripts/build-cloudflare-inner.mjs'].actual_current_execution_wrappers.push('../foreign'),/wrapper profile/],
+  [(c,a)=>delete a.entry_critical_files['scripts/build-static-inner.mjs'],/entry-specific source/],
+  [(c,a)=>a.entry_critical_files['scripts/build-hosted-inner.mjs'][0].bytes++,/omitted\/rebound/],
+  [(c,a)=>a.entry_roles['scripts/run-integration-tests.mjs'].actual_current_execution_wrappers.push('../foreign'),/wrapper profile/],
+  [(c,a,q)=>q.source_policy.water_status='approved',/source policy/],
+  [(c,a,q)=>q.complete_phase_inventory[0].runs.pop(),/qualification runs/],
+  [(c,a,q)=>q.complete_phase_inventory[0].runs[0].actual_terminal.qualified=false,/Unqualified/],
+  [(c)=>c.application_inputs=c.application_inputs.filter(p=>p.path!==code.critical_files[0].path),/omitted\/rebound/]
+ ]){const c=structuredClone(certificate),a=structuredClone(code),q=structuredClone(qualification);change(c,a,q);assert.throws(()=>validateArtifactSourceMetadata(c,a,q,{entryProfiles:true,cloudflareProfile:true}),pattern);}
+ const f=fixture();try{
+  for(const p of rows)f.write(p.path,read(p.copy));let head=f.commit();
+  const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
+  const reader=new ImmutableReader(f.repo,head),result=readArtifactConsumption(reader,selection,manifest);
+  assert.equal(result.review_id,6081097955);assert.equal(result.releaseCatalogue.complete_roles,533);assert.equal(result.sourceCustody.source_critical_roles,33);
+  assert.equal(reader.charged.size,6);assert.ok(reader.used<=256*1024*1024);
+  // The original whole certificate/GET binds all inline metadata. Coherently
+  // editing a metadata body cannot mint a new accepted certificate authority.
+  for(const [copy,change]of [
+   ['certificate.json',c=>c.application_inputs.pop()],
+   ['certificate.json',c=>c.application_inputs[1]=structuredClone(c.application_inputs[0])],
+   ['certificate.json',c=>c.application_inputs[1].sha256='0'.repeat(64)],
+   ['code.json',c=>c.critical_files.pop()],
+   ['code.json',c=>delete c.entry_critical_files['scripts/run-integration-tests.mjs']],
+   ['review.json',c=>c.user.id++],
+  ]){const pin=rows.find(p=>p.copy===copy),value=JSON.parse(read(copy));change(value);f.write(pin.path,value);head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/differs/);f.write(pin.path,read(copy));head=f.commit();}
+  const codePin=rows.find(p=>p.copy==='code.json');fs.unlinkSync(path.join(f.repo,codePin.path));head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/whole ordinary Git input/);f.write(codePin.path,read('code.json'));head=f.commit();
+  // All complete source metadata is prospectively charged before code or
+  // qualification body reads; distinguish declarations from actual opens.
+  const limited=new ImmutableReader(f.repo,head);const original=limited.git.bind(limited);let sourceOpens=0;
+  limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
+  limited.used=256*1024*1024-5*1024*1024;
+  assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
+ }finally{f.cleanup();}
+});
