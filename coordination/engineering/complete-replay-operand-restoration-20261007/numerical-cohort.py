@@ -11,6 +11,7 @@ import hashlib
 import io
 import json
 import re
+from shapely.geometry.base import BaseGeometry
 
 
 def canonical(value):
@@ -191,6 +192,77 @@ def bounded_objects(objects_module, products, loaded, records, native_aliases):
     return self
 
 
+"""Adapter-only eviction; unchanged original checks recompute on every miss."""
+
+def bounded_replay_caches(comparison):
+    def cache_require(condition, message):
+        if not condition:
+            raise ValueError(message)
+    literal_class = comparison.ValidityCache
+    literal_init, literal_check = (literal_class.__init__, literal_class.check)
+    init_code, check_code = (literal_init.__code__, literal_check.__code__)
+    init_defaults, check_defaults = (literal_init.__defaults__, literal_check.__defaults__)
+
+    def binding():
+        cache_require(comparison.ValidityCache is literal_class, 'Bounded original replay cache binding/type differs')
+        cache_require(literal_class.__init__ is literal_init and literal_class.check is literal_check, 'Bounded original replay cache binding/type differs')
+        cache_require(literal_init.__code__ is init_code and literal_check.__code__ is check_code, 'Bounded original replay cache binding/type differs')
+        cache_require(literal_init.__defaults__ == init_defaults and literal_check.__defaults__ == check_defaults, 'Bounded original replay cache binding/type differs')
+
+    class OneEntry(dict):
+
+        def __init__(self, kind):
+            super().__init__()
+            self.kind = kind
+
+        def __contains__(self, key):
+            binding()
+            found = dict.__contains__(self, key)
+            if not found:
+                dict.clear(self)
+            return found
+
+        def get(self, key, default=None):
+            binding()
+            if not dict.__contains__(self, key):
+                dict.clear(self)
+            return dict.get(self, key, default)
+
+        def __setitem__(self, key, value):
+            binding()
+            if self.kind == 'shift':
+                cache_require(type(key) is tuple and len(key) == 2 and (type(key[0]) is int), 'Bounded original replay cache binding/type differs')
+                cache_require(type(key[1]) in (int, float) and key[1] in (-360, 0, 360), 'Bounded original replay cache binding/type differs')
+                cache_require(isinstance(value, BaseGeometry), 'Bounded original replay cache binding/type differs')
+            else:
+                cache_require(self.kind == 'validity' and type(key) is int, 'Bounded original replay cache binding/type differs')
+                cache_require(type(value) is tuple and len(value) == 2, 'Bounded original replay cache binding/type differs')
+                cache_require(isinstance(value[0], BaseGeometry) and key == id(value[0]) and (type(value[1]) is bool), 'Bounded original replay cache binding/type differs')
+            if key not in self:
+                self.clear()
+            super().__setitem__(key, value)
+            cache_require(len(self) <= 1, 'Bounded original replay cache binding/type differs')
+
+    class BoundedValidity(literal_class):
+
+        def __init__(self):
+            binding()
+            literal_init(self)
+            cache_require(type(self._rows) is dict and (not self._rows), 'Bounded original replay cache binding/type differs')
+            self._rows = OneEntry('validity')
+
+        def check(self, geometry):
+            binding()
+            cache_require(type(self._rows) is OneEntry and self._rows.kind == 'validity', 'Bounded original replay cache binding/type differs')
+            cache_require(isinstance(geometry, BaseGeometry), 'Bounded original replay cache binding/type differs')
+            answer = literal_check(self, geometry)
+            binding()
+            cache_require(type(self._rows) is OneEntry and len(self._rows) <= 1, 'Bounded original replay cache binding/type differs')
+            cache_require(type(answer) is bool, 'Bounded original replay cache binding/type differs')
+            return answer
+    binding()
+    return (BoundedValidity(), OneEntry('shift'))
+
 def replay(phase, operands, records, native_aliases, native_proof, *, acquisition,
            literal_products, objects_module, replay_module, scientific_modules,
            query_bind, project_guard):
@@ -214,8 +286,7 @@ def replay(phase, operands, records, native_aliases, native_proof, *, acquisitio
     objects = bounded_objects(objects_module, products, loaded, records, native_aliases)
     counts, queries = Counter(), 0
     for identity in sorted(subjects):
-        validity = scientific_modules['comparison'].ValidityCache()
-        shifted = {}
+        validity, shifted = bounded_replay_caches(scientific_modules['comparison'])
         objects.begin(identity)
         result = replay_module.execute(identity, loaded, records, validity, shifted)
         acquisition.require(result['component_id'] == identity and
