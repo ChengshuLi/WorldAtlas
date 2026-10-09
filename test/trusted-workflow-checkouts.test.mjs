@@ -11,7 +11,7 @@ const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-ch
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
-function probe(directories) {
+function probe(directories, {geography = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
@@ -22,10 +22,29 @@ function probe(directories) {
       fs.cpSync(source, destination, {recursive: true});
     }
     return spawnSync(process.execPath, ['--input-type=module', '-e',
-      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs'); await import('./scripts/check-pr-gates.mjs');"],
+      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs'); await import('./scripts/check-pr-gates.mjs');" +
+      (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 }
+
+for (const workflow of ['worker-merge.yml', 'merge-integration-checks.yml']) {
+  test(`${workflow}: actual geographic checkout imports its complete trusted closure`, () => {
+    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
+    const match = source.match(/- name: Checkout trusted geographic checker[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+    assert.ok(match, 'actual trusted geography checkout must be declared');
+    const result = probe(match[1].trim().split('\n').map(row => row.trim()), {geography: true});
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /complete trusted geography closure imported/);
+  });
+}
+
+test('negative control: old geographic sparse tree omits mandatory coordinator bodies', () => {
+  const result = probe(['scripts', 'src', '.github'], {geography: true});
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /ERR_MODULE_NOT_FOUND/);
+  assert.match(result.stderr, /selected-geography-effective-prevention-20261009/);
+});
 
 for (const workflow of workflows) {
   test(`${workflow}: actual sparse declarations include trusted module dependencies`, () => {
