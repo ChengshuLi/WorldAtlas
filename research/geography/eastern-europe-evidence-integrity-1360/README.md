@@ -1,0 +1,34 @@
+# Poland–Belarus–Ukraine evidence integrity correction for #1515
+
+Prepared 2026-10-08 America/Los_Angeles under the existing #1515 reservation. This is an additive integrity correction for the exact one-family / one-component / nine-contact scope of #1344 and PR #1360. It does not alter the earlier packet, its source files, source IDs, results, dates, or failed attempts.
+
+## Geographic scope and limits
+
+The frozen source assessment covers one complete candidate feature and its nine exact current Atlas ADM2 contacts: one Belarus, three Poland, and five Ukraine records. The complete simplified geoBoundaries ADM2 products retained for these neighboring countries contain 118, 380, and 495 features. The issue’s original report reconciled all 993 source features and each contact’s native `shapeID`. These counts establish the bounded source inventory, not legal membership, territorial authority, current boundaries, or complete administrative granularity.
+
+The retained inputs identify a candidate crossing the Belarus–Poland–Ukraine neighborhood and current ADM2 contact records. They do not establish which state owns the candidate, whether it is dry land, river/channel, wetland, or a registration mismatch, or which level is suitable for a final boundary correction. Neighboring products are simplified ADM2 representations from different source-represented years (Belarus 2005, Poland 2017, Ukraine 2006); those dates are metadata claims, not effective dates. The source registry and original source-corpus catalogue retain the recorded national parent roles, citations, full-product feature counts, and source metadata. No boundary or parent assignment is changed here.
+
+The original source packet records the product reuse claims as CC BY 3.0 for Belarus, ODbL 1.0 for Poland, and Public Domain for Ukraine. It retains the source-corpus attribution/use text and whole compressed Git blobs with modes, blob OIDs, transport hashes, and decoded product hashes. Underlying attribution, national authority, positional accuracy, transformation history, and effective applicability remain unverified. Natural Earth 10m lakes is only modern major-lake context; it is not full hydrology or a legal boundary source. GSHHG terms remain unresolved in the inherited evidence. These limits are carried forward unchanged.
+
+The original source-relative findings remain as reported: all nine contacts join uniquely to the three complete products; none is topologically equal to the simplified source geometry; the candidate’s complete cause, partition, current physical class, legal boundary, historical ownership, dates, positional accuracy, lineage, and permitted engineering action remain unresolved. The new exact rerun confirms preservation and reproducibility of those bytes and outputs. It does not independently establish geographic truth or regional completion.
+
+## Safe reproduction
+
+`safe_workflow.py` copies the five original entry-point scripts by their exact issue-pinned SHA-256 values, stages the 33 custody-listed whole input records plus the custody index into an exclusive fresh directory, and verifies every whole-file length/hash. It admits the full two-run input, decoded-input, helper, output, and receipt phase before execution. The unmodified pinned producer runs twice using the staged inputs and fresh private output directories. Every output file is independently rehashed, checked against the producer’s actual summary, checked against the pinned retained output inventory, and compared across both complete runs before success receipts are created. `execution-replay-02/subject-bindings.json` independently rejoins all nine current records to their exact native source `shapeID` in the complete country products, carries the internal current parent IDs, and records where the retained source product lacks a subnational parent ID.
+
+After the successful pair, the controls command runs the actual producer’s six rejection cases and tests the safe stage/run/receipt/control/manifest admission paths against occupied files, dangling links, and linked ancestors while checking sentinels. It then tampers with an actual row, removes an actual product, and falsifies a run summary while leaving the recorded hashes stale; every comparison must reject. Failed runs and fixtures do not receive a success receipt.
+
+From a clean checkout at the repository root, use an unused directory name under this owned packet:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 /path/to/python3.12 research/geography/eastern-europe-evidence-integrity-1360/safe_workflow.py --fresh --workspace execution-replay-01
+PYTHONDONTWRITEBYTECODE=1 /path/to/python3.12 research/geography/eastern-europe-evidence-integrity-1360/safe_workflow.py --controls --workspace execution-replay-01
+```
+
+Each execution directory is immutable evidence and is never reused. The earlier `execution/` attempt is retained as an audit trail; its two producer runs and six negative controls succeeded, but its writer-control receipt omitted four of the five writer summaries. The corrected `execution-replay-02/` reports all five writer suites and three product-comparison probes. The local run used Python 3.12.14, NumPy 2.3.5, pyproj 3.7.2, Shapely 2.1.2, and GEOS 3.13.1. No dependencies were installed. See `execution-replay-02/fresh-execution.json`, `execution-replay-02/controls/producer-negative-control.json`, `execution-replay-02/controls/writer-and-comparison-controls.json`, and `evidence-quality.json` for exact results and limits.
+
+## Original evidence and next action
+
+All original source inputs, the candidate and contact subjects, historical run summaries, historical reports, and pre-fix/failed attempts remain in `research/geography/eastern-europe-border-source-fitness-20261007/`. The 20 immutable issue pins are retained by their actual historical commits in the new evidence manifest. New staged copies and run products are additive and byte-pinned. No core geography, hierarchy, source archive, production data, publication, or deployment was changed.
+
+This completes only the bounded integrity work in #1515 if the independently reviewed exact head and merge gates accept it. The underlying #1344 geography assessment remains limited and unapproved; source/legal/physical evidence gaps require their existing owners or separately scoped work.
