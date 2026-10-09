@@ -100,6 +100,14 @@ export async function runPackageBuild(kind, {root = repository, execute} = {}) {
     const context=await fs.readFile(contextPath,'utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
     let currentExecution;
     if(context?.version===2&&context.kind==='retained-identity-context-continuation-v2'&&context.issue===1295){
+      // Only the explicit successor sidecar adds a whole numerical-input
+      // admission before the first current execution/runtime authentication.
+      const successorSidecar=path.join(stage,'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json');
+      const successorStat=await fs.lstat(successorSidecar).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+      if(successorStat){
+        const {preflightOuterArcticPackage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs');
+        preflightOuterArcticPackage({source:root,stage,entry:entries[kind]});
+      }
       currentExecution=issueCurrentExecution({source:root,stage,entry:entries[kind]});
       authenticateCurrentExecution(currentExecution,{root:stage,executingRoot:root,sourceRoot:root});
       const raw=Buffer.from(JSON.stringify(currentExecution)+'\n');

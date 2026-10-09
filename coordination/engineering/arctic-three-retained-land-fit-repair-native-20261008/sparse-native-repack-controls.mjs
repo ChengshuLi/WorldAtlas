@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {patchCompleteRunPart,reindexCompleteRows} from './sparse-native-repack.mjs';
+const original=Uint32Array.from([8,2,12,5,17,3]);
+const rows=Uint32Array.from([0,1,1,1,2,1]);
+const patches=[{row:1,offset:2,before:original.slice(2,4),after:Uint32Array.from([12,5,20,7])}];
+assert.deepEqual(patchCompleteRunPart(original,0,patches),Uint32Array.from([8,2,12,5,20,7,17,3]));
+assert.deepEqual(reindexCompleteRows(rows,patches),{rows:Uint32Array.from([0,1,1,2,3,1]),old_run_words:6,new_run_words:8,changed_rows:1,unchanged_row_counts:2});
+assert.deepEqual(patchCompleteRunPart(original,0,[]),original);
+assert.throws(()=>patchCompleteRunPart(original,0,[{...patches[0],before:Uint32Array.from([99,5])}]));
+assert.throws(()=>patchCompleteRunPart(original,0,[patches[0],patches[0]]));
+assert.throws(()=>patchCompleteRunPart(original,0,[{...patches[0],offset:6}]));
+assert.throws(()=>patchCompleteRunPart(original,0,patches,16));
+assert.throws(()=>reindexCompleteRows(Uint32Array.from([0,1,3,1,2,1]),patches));
+assert.throws(()=>reindexCompleteRows(rows,[patches[0],patches[0]]));
+console.log(JSON.stringify({positive:3,negative:6,complete_original_inverse:true,scope:'actual pure-word custody on tiny fixtures',grid_rows_computed:0}));

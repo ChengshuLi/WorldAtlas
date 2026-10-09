@@ -11,7 +11,7 @@ const focused=['handoff-scope','issue-claims','worker-result','regional-research
   'merge-integration-client','merge-integration-entrypoint','integration-proof'];
 const helper='scripts/canonical-restoration.mjs';
 
-function fixture(t,{full=false,helperBody,skip=false}={}) {
+function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=false,skip=false}={}) {
   // This is a tiny actual runner boundary fixture, not a scientific restoration.
   const sources=['scripts/run-integration-tests.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
   const bodies=sources.map(name=>{
@@ -33,6 +33,15 @@ test('actual selected test',${skip?'{skip:true},':''}()=>{
   fs.writeFileSync('tests-reached-'+${JSON.stringify(name)},'reached',{flag:'wx'});
 });\n`);
   if(helperBody!==undefined)write(helper,helperBody);
+  if(full&&!omitSelectedHelper)write('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs',selectedHelperBody??`import fs from 'node:fs';import assert from 'node:assert/strict';
+export function prepareModelReaderCheckout({root,profile,shard}){
+ assert.equal(root,process.cwd());assert.equal(profile,'full');assert([0,1,2].includes(shard));
+ assert.equal(fs.existsSync('data/ownership-selection.json'),false,'This tiny fixture has no selected artifact');
+ fs.writeFileSync('selected-checkout-fixture-reached.json','{"fixture_only":true}',{flag:'wx'});
+ return {applicable:false,fixture_only:true};
+}
+`);
+
   return {root,run(profile=full?'full':'evidence',shard='0') {
     const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard};
     // Match a plain CLI launch, rather than inheriting node:test's recursion tag.
@@ -55,6 +64,15 @@ test('real full entry calls canonical preparation before selected readers',t=>{
 export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{"complete":true}',{flag:'wx'});return {fixture_only:true};}\n`});
   const r=f.run();assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/canonical_checkout/);
   assert.match(r.stdout,/# skipped 0/);assert.ok(fs.existsSync(path.join(f.root,'tests-reached-probe')));
+  assert.ok(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));assert.match(r.stdout,/selected_model_reader_checkout/);
+});
+test('real full entry refuses a missing selected checkout helper before tests',t=>{
+ const f=fixture(t,{full:true,omitSelectedHelper:true,helperBody:`export function prepareCanonicalCheckout(){return {fixture_only:true};}\n`}),r=f.run();
+ assert.notEqual(r.status,0);assert.match(r.stderr,/ERR_MODULE_NOT_FOUND/);assert.ok(!fs.existsSync(path.join(f.root,'tests-reached-probe')));
+});
+test('real full entry propagates selected checkout refusal before tests',t=>{
+ const f=fixture(t,{full:true,helperBody:`export function prepareCanonicalCheckout(){return {fixture_only:true};}\n`,selectedHelperBody:`export function prepareModelReaderCheckout(){throw Error('selected artifact association rejected');}\n`}),r=f.run();
+ assert.notEqual(r.status,0);assert.match(r.stderr,/selected artifact association rejected/);assert.ok(!fs.existsSync(path.join(f.root,'tests-reached-probe')));
 });
 test('real full entry rejects an absent canonical helper before tests',t=>{
   const f=fixture(t,{full:true}),r=f.run();assert.notEqual(r.status,0);
