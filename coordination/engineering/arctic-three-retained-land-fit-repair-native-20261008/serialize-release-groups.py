@@ -97,7 +97,7 @@ def run(plan,output):
         nonlocal retained
         assert '/' not in name and '\\' not in name and name.endswith('.json.gz')
         raw=codec.canonical_json(payload);assert len(raw)<=1048576
-        encoded=codec.deterministic_gzip(raw);assert gzip.decompress(encoded)==raw
+        encoded=codec.deterministic_gzip(raw);assert len(encoded)<=len(raw)+1024;assert gzip.decompress(encoded)==raw
         retained+=len(raw)+len(encoded);assert retained+1024*1024<=plan['output_reserve']
         with (output/name).open('xb') as stream:stream.write(encoded)
         os.chmod(output/name,0o644)
