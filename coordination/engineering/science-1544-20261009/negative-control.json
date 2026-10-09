@@ -1,0 +1,20 @@
+{
+  "method_id": "complete-world-runtime",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "entry_points": [
+    "test/physical-component-evidence-controls.test.mjs",
+    "test/physical-component-custody.test.mjs",
+    "test/physical-component-structure.test.mjs",
+    "test/physical-component-fixture.test.mjs",
+    "test/physical-component-report-binding.test.mjs"
+  ],
+  "observation": "All seven original complete-world rehashed corruptions reached their intended rejection, and focused custody freshness, decoded-mode, exact-coordinate, harness-input and report-consumption controls passed. Actual whole-byte custody was exercised before the report was changed and the original bytes remained unchanged.",
+  "evidence_paths": [
+    "coordination/engineering/science-1544-20261009/final-mandatory.tap",
+    "coordination/engineering/science-1544-20261009/focused-validation.log"
+  ],
+  "limits": [
+    "Additional independently supplied fixtures and exact-head reviewer acceptance remain pending."
+  ]
+}

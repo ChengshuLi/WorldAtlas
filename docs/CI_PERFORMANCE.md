@@ -33,12 +33,28 @@ Unchanged descriptors remain original, including incorrect ones: preparation doe
 not repair them into apparent validity. `validate_science` authenticates every
 actual file through the complete custody validator before each required semantic
 rejection. The redundant preceding custody pass is removed. The separate positive
-world test remains uncached and unchanged; the existing narrowly input-keyed
+world test remains uncached and performs every scientific check; the existing narrowly input-keyed
 component reconstruction cache in the adverse controls is unchanged. Actual
 cache-entry controls exercise unchanged hits, changed feature identity/roster,
 properties/geometry, blocked-tile identity/bounds and scope bounds. A fresh setup
 with a different counted kernel recomputes the same inputs; teardown deletes the
 old cache. These bounded controls test caching, not geographic reconstruction.
+
+Whole-file custody derives descriptors once per captured physical payload and
+logical decoding mode within each validation. Every alias and generation still
+compares its complete descriptor, inventory and original executed-code bindings.
+Nothing is retained between validation calls: changed payloads are recaptured,
+and plain aliases cannot supply a compressed alias's decoded descriptor. The
+scientific validator also authenticates the report bytes it actually parses.
+
+Invalid accounting is rejected before connected-component reconstruction. This
+changes rejection order, not the acceptance requirements: every successful run
+still reconstructs the complete world and verifies exact component shapes and
+edge, point and dateline contacts. Fully checked parsed accounting objects are
+retired before reconstruction; original files and custody bytes are preserved.
+The seven complete-world corruption scenarios retain their intended scientific
+rejections after honest descriptor rebinding. Comparative measurements must
+separate profiler attribution from unprofiled timing and report memory limits.
 
 The integration runner streams stdout/stderr while tests run, retains a bounded
 TAP tail and enforces the existing 64 MiB transcript limit and zero-skips condition.

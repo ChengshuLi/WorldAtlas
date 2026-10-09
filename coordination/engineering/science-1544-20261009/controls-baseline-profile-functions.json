@@ -1,0 +1,650 @@
+[
+  {
+    "file": "<frozen runpy>",
+    "line": 262,
+    "function": "run_path",
+    "calls": 1,
+    "self_seconds": 1.1542e-05,
+    "cumulative_seconds": 336.73028529100003
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method builtins.exec>",
+    "calls": 201,
+    "self_seconds": 0.000618086,
+    "cumulative_seconds": 336.728258084
+  },
+  {
+    "file": "<frozen runpy>",
+    "line": 91,
+    "function": "_run_module_code",
+    "calls": 1,
+    "self_seconds": 3.0791000000000004e-05,
+    "cumulative_seconds": 336.720598041
+  },
+  {
+    "file": "<frozen runpy>",
+    "line": 65,
+    "function": "_run_code",
+    "calls": 1,
+    "self_seconds": 1.666e-06,
+    "cumulative_seconds": 336.720547208
+  },
+  {
+    "file": "stdlib/unittest/main.py",
+    "line": 67,
+    "function": "__init__",
+    "calls": 1,
+    "self_seconds": 1.6916000000000002e-05,
+    "cumulative_seconds": 336.636212833
+  },
+  {
+    "file": "stdlib/unittest/main.py",
+    "line": 255,
+    "function": "runTests",
+    "calls": 1,
+    "self_seconds": 4.7709e-05,
+    "cumulative_seconds": 336.634923625
+  },
+  {
+    "file": "stdlib/unittest/runner.py",
+    "line": 224,
+    "function": "run",
+    "calls": 1,
+    "self_seconds": 0.00047633200000000005,
+    "cumulative_seconds": 336.63487150000003
+  },
+  {
+    "file": "stdlib/unittest/suite.py",
+    "line": 83,
+    "function": "__call__",
+    "calls": 2,
+    "self_seconds": 5.834e-06,
+    "cumulative_seconds": 336.634321875
+  },
+  {
+    "file": "stdlib/unittest/suite.py",
+    "line": 102,
+    "function": "run",
+    "calls": 2,
+    "self_seconds": 0.00020591700000000001,
+    "cumulative_seconds": 336.63431925000003
+  },
+  {
+    "file": "stdlib/unittest/case.py",
+    "line": 689,
+    "function": "__call__",
+    "calls": 7,
+    "self_seconds": 3.0501e-05,
+    "cumulative_seconds": 336.63133366600005
+  },
+  {
+    "file": "stdlib/unittest/case.py",
+    "line": 599,
+    "function": "run",
+    "calls": 7,
+    "self_seconds": 0.0006074930000000001,
+    "cumulative_seconds": 336.631303165
+  },
+  {
+    "file": "stdlib/unittest/case.py",
+    "line": 588,
+    "function": "_callTestMethod",
+    "calls": 7,
+    "self_seconds": 0.000280998,
+    "cumulative_seconds": 336.628049915
+  },
+  {
+    "file": "scripts/validate-physical-component-evidence.py",
+    "line": 127,
+    "function": "validate_science",
+    "calls": 7,
+    "self_seconds": 30.258126359000002,
+    "cumulative_seconds": 324.653229001
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 34,
+    "function": "canonical_json",
+    "calls": 5074118,
+    "self_seconds": 3.6823044510000003,
+    "cumulative_seconds": 94.757527135
+  },
+  {
+    "file": "scripts/validate-physical-component-evidence.py",
+    "line": 153,
+    "function": "bundle",
+    "calls": 581,
+    "self_seconds": 0.247436392,
+    "cumulative_seconds": 93.182823755
+  },
+  {
+    "file": "stdlib/json/__init__.py",
+    "line": 183,
+    "function": "dumps",
+    "calls": 5074118,
+    "self_seconds": 3.234888278,
+    "cumulative_seconds": 89.29748267000001
+  },
+  {
+    "file": "stdlib/json/encoder.py",
+    "line": 183,
+    "function": "encode",
+    "calls": 5074118,
+    "self_seconds": 2.9611079670000002,
+    "cumulative_seconds": 85.423549252
+  },
+  {
+    "file": "stdlib/json/encoder.py",
+    "line": 205,
+    "function": "iterencode",
+    "calls": 5074118,
+    "self_seconds": 81.157905314,
+    "cumulative_seconds": 81.157905314
+  },
+  {
+    "file": "scripts/validate-physical-component-evidence.py",
+    "line": 158,
+    "function": "features",
+    "calls": 70,
+    "self_seconds": 0.44318888900000003,
+    "cumulative_seconds": 77.762158838
+  },
+  {
+    "file": "stdlib/json/__init__.py",
+    "line": 299,
+    "function": "loads",
+    "calls": 694,
+    "self_seconds": 0.168185083,
+    "cumulative_seconds": 66.34095187
+  },
+  {
+    "file": "stdlib/json/decoder.py",
+    "line": 333,
+    "function": "decode",
+    "calls": 694,
+    "self_seconds": 0.005687974,
+    "cumulative_seconds": 64.664684445
+  },
+  {
+    "file": "stdlib/json/decoder.py",
+    "line": 344,
+    "function": "raw_decode",
+    "calls": 694,
+    "self_seconds": 64.649848715,
+    "cumulative_seconds": 64.649848715
+  },
+  {
+    "file": "scripts/physical_gap_crosswalk.py",
+    "line": 20,
+    "function": "membership",
+    "calls": 21,
+    "self_seconds": 9.491310682,
+    "cumulative_seconds": 53.177382082
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 52,
+    "function": "validate",
+    "calls": 7,
+    "self_seconds": 0.109106457,
+    "cumulative_seconds": 44.603260876
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 39,
+    "function": "describe",
+    "calls": 2631,
+    "self_seconds": 0.021347085000000002,
+    "cumulative_seconds": 42.010933067
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 70,
+    "function": "_git",
+    "calls": 2254,
+    "self_seconds": 0.014546132000000002,
+    "cumulative_seconds": 41.121793728
+  },
+  {
+    "file": "stdlib/subprocess.py",
+    "line": 417,
+    "function": "check_output",
+    "calls": 2254,
+    "self_seconds": 0.150059037,
+    "cumulative_seconds": 41.107247596
+  },
+  {
+    "file": "stdlib/subprocess.py",
+    "line": 506,
+    "function": "run",
+    "calls": 2254,
+    "self_seconds": 0.062227117000000005,
+    "cumulative_seconds": 40.955366188
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 73,
+    "function": "read",
+    "calls": 742,
+    "self_seconds": 0.040342081,
+    "cumulative_seconds": 40.581456491000004
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'read' of '_io.BufferedReader' objects>",
+    "calls": 3779,
+    "self_seconds": 3.3529771960000003,
+    "cumulative_seconds": 31.684006859000004
+  },
+  {
+    "file": "stdlib/subprocess.py",
+    "line": 1165,
+    "function": "communicate",
+    "calls": 2254,
+    "self_seconds": 0.047739628000000006,
+    "cumulative_seconds": 31.429043002
+  },
+  {
+    "file": "stdlib/subprocess.py",
+    "line": 2062,
+    "function": "_communicate",
+    "calls": 2254,
+    "self_seconds": 0.130662158,
+    "cumulative_seconds": 31.375901771000002
+  },
+  {
+    "file": "stdlib/gzip.py",
+    "line": 333,
+    "function": "read",
+    "calls": 2519,
+    "self_seconds": 0.0033432970000000003,
+    "cumulative_seconds": 30.479480394000003
+  },
+  {
+    "file": "stdlib/selectors.py",
+    "line": 402,
+    "function": "select",
+    "calls": 30909,
+    "self_seconds": 0.062802778,
+    "cumulative_seconds": 30.446055949
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'poll' of 'select.poll' objects>",
+    "calls": 30909,
+    "self_seconds": 30.370326194,
+    "cumulative_seconds": 30.370326194
+  },
+  {
+    "file": "stdlib/_compression.py",
+    "line": 66,
+    "function": "readinto",
+    "calls": 44719,
+    "self_seconds": 3.0114328890000004,
+    "cumulative_seconds": 28.331029663000002
+  },
+  {
+    "file": "stdlib/gzip.py",
+    "line": 519,
+    "function": "read",
+    "calls": 44719,
+    "self_seconds": 0.079163933,
+    "cumulative_seconds": 25.296596806
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'decompress' of 'zlib._ZlibDecompressor' objects>",
+    "calls": 42200,
+    "self_seconds": 24.344168269,
+    "cumulative_seconds": 24.344168269
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 18,
+    "function": "components",
+    "calls": 1,
+    "self_seconds": 1.194674309,
+    "cumulative_seconds": 21.80482625
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 47,
+    "function": "__init__",
+    "calls": 28,
+    "self_seconds": 0.015217746,
+    "cumulative_seconds": 21.037300918
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 26,
+    "function": "sha256",
+    "calls": 3881332,
+    "self_seconds": 1.292052695,
+    "cumulative_seconds": 19.095264114000003
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method _hashlib.openssl_sha256>",
+    "calls": 3881333,
+    "self_seconds": 16.467428686,
+    "cumulative_seconds": 16.467428686
+  },
+  {
+    "file": "scripts/validate-physical-component-evidence.py",
+    "line": 144,
+    "function": "read",
+    "calls": 266,
+    "self_seconds": 0.0310172,
+    "cumulative_seconds": 15.708798826
+  },
+  {
+    "file": "scripts/validate-physical-component-evidence.py",
+    "line": 108,
+    "function": "require_exact_reconstruction",
+    "calls": 13,
+    "self_seconds": 0.16271775200000002,
+    "cumulative_seconds": 15.600343001
+  },
+  {
+    "file": "scripts/validate-physical-component-evidence.py",
+    "line": 96,
+    "function": "same_structural_row",
+    "calls": 600378,
+    "self_seconds": 0.23538060600000002,
+    "cumulative_seconds": 15.437563666
+  },
+  {
+    "file": "stdlib/site-packages/shapely/decorators.py",
+    "line": 73,
+    "function": "wrapped",
+    "calls": 2533523,
+    "self_seconds": 2.514002707,
+    "cumulative_seconds": 10.097786331
+  },
+  {
+    "file": "stdlib/subprocess.py",
+    "line": 807,
+    "function": "__init__",
+    "calls": 2254,
+    "self_seconds": 0.129393263,
+    "cumulative_seconds": 9.457069442
+  },
+  {
+    "file": "stdlib/unittest/case.py",
+    "line": 253,
+    "function": "__exit__",
+    "calls": 7,
+    "self_seconds": 0.002000328,
+    "cumulative_seconds": 9.441005166
+  },
+  {
+    "file": "stdlib/traceback.py",
+    "line": 237,
+    "function": "clear_frames",
+    "calls": 7,
+    "self_seconds": 0.00035645500000000004,
+    "cumulative_seconds": 9.438668999
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'clear' of 'frame' objects>",
+    "calls": 22,
+    "self_seconds": 9.438312544,
+    "cumulative_seconds": 9.438312544
+  },
+  {
+    "file": "stdlib/subprocess.py",
+    "line": 1791,
+    "function": "_execute_child",
+    "calls": 2254,
+    "self_seconds": 0.199824627,
+    "cumulative_seconds": 9.200335561000001
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method _posixsubprocess.fork_exec>",
+    "calls": 2254,
+    "self_seconds": 7.270842608000001,
+    "cumulative_seconds": 7.270842608000001
+  },
+  {
+    "file": "stdlib/gzip.py",
+    "line": 637,
+    "function": "decompress",
+    "calls": 595,
+    "self_seconds": 0.136568282,
+    "cumulative_seconds": 6.9737407750000004
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'decompress' of 'zlib.Decompress' objects>",
+    "calls": 595,
+    "self_seconds": 6.597943661,
+    "cumulative_seconds": 6.597943661
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 30,
+    "function": "descriptor",
+    "calls": 5115,
+    "self_seconds": 0.0061568890000000005,
+    "cumulative_seconds": 4.208955079
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/polygon.py",
+    "line": 227,
+    "function": "__new__",
+    "calls": 193927,
+    "self_seconds": 0.157091332,
+    "cumulative_seconds": 3.580478359
+  },
+  {
+    "file": "stdlib/site-packages/shapely/decorators.py",
+    "line": 171,
+    "function": "wrapper",
+    "calls": 691168,
+    "self_seconds": 0.31082903300000003,
+    "cumulative_seconds": 3.5006715350000004
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/geo.py",
+    "line": 121,
+    "function": "mapping",
+    "calls": 100063,
+    "self_seconds": 0.027128886,
+    "cumulative_seconds": 3.437355912
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/polygon.py",
+    "line": 270,
+    "function": "__geo_interface__",
+    "calls": 95170,
+    "self_seconds": 0.34009135,
+    "cumulative_seconds": 3.354363556
+  },
+  {
+    "file": "stdlib/gzip.py",
+    "line": 619,
+    "function": "compress",
+    "calls": 7,
+    "self_seconds": 4.1208e-05,
+    "cumulative_seconds": 2.811892415
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method zlib.compress>",
+    "calls": 7,
+    "self_seconds": 2.811851207,
+    "cumulative_seconds": 2.811851207
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/polygon.py",
+    "line": 61,
+    "function": "__new__",
+    "calls": 289731,
+    "self_seconds": 0.45987268600000003,
+    "cumulative_seconds": 2.663138946
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/geo.py",
+    "line": 54,
+    "function": "shape",
+    "calls": 96963,
+    "self_seconds": 0.103440709,
+    "cumulative_seconds": 2.273937688
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/base.py",
+    "line": 764,
+    "function": "covers",
+    "calls": 193926,
+    "self_seconds": 0.082719305,
+    "cumulative_seconds": 2.092414966
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/geo.py",
+    "line": 46,
+    "function": "box",
+    "calls": 96964,
+    "self_seconds": 0.04848435,
+    "cumulative_seconds": 1.7897238910000002
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'encode' of 'str' objects>",
+    "calls": 5121541,
+    "self_seconds": 1.7859571840000001,
+    "cumulative_seconds": 1.7859571840000001
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method builtins.any>",
+    "calls": 296298,
+    "self_seconds": 0.106345269,
+    "cumulative_seconds": 1.756627355
+  },
+  {
+    "file": "stdlib/site-packages/shapely/predicates.py",
+    "line": 714,
+    "function": "covers",
+    "calls": 193926,
+    "self_seconds": 1.611875175,
+    "cumulative_seconds": 1.611875175
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/base.py",
+    "line": 749,
+    "function": "is_valid",
+    "calls": 192137,
+    "self_seconds": 0.060612659000000006,
+    "cumulative_seconds": 1.5755089910000002
+  },
+  {
+    "file": "stdlib/site-packages/shapely/geometry/base.py",
+    "line": 219,
+    "function": "coords",
+    "calls": 197717,
+    "self_seconds": 0.17985394100000002,
+    "cumulative_seconds": 1.565547406
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 108,
+    "function": "<genexpr>",
+    "calls": 192137,
+    "self_seconds": 0.036659827,
+    "cumulative_seconds": 1.5370813140000001
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'decode' of 'bytes' objects>",
+    "calls": 3726,
+    "self_seconds": 1.517351593,
+    "cumulative_seconds": 1.517351593
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method posix.read>",
+    "calls": 35417,
+    "self_seconds": 1.487562639,
+    "cumulative_seconds": 1.487562639
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method builtins.isinstance>",
+    "calls": 18019692,
+    "self_seconds": 1.436380503,
+    "cumulative_seconds": 1.4545670190000002
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 23,
+    "function": "ordinary_read",
+    "calls": 1015,
+    "self_seconds": 0.020871445000000002,
+    "cumulative_seconds": 1.4459682390000002
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method builtins.all>",
+    "calls": 387884,
+    "self_seconds": 0.24677680300000002,
+    "cumulative_seconds": 1.436003093
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<method 'hexdigest' of '_hashlib.HASH' objects>",
+    "calls": 3881332,
+    "self_seconds": 1.335783817,
+    "cumulative_seconds": 1.335783817
+  },
+  {
+    "file": "stdlib/site-packages/shapely/predicates.py",
+    "line": 429,
+    "function": "is_valid",
+    "calls": 192137,
+    "self_seconds": 0.7748173930000001,
+    "cumulative_seconds": 1.29931094
+  },
+  {
+    "file": "stdlib/pathlib.py",
+    "line": 1015,
+    "function": "read_bytes",
+    "calls": 1057,
+    "self_seconds": 0.003332892,
+    "cumulative_seconds": 1.2888767700000001
+  },
+  {
+    "file": "~",
+    "line": 0,
+    "function": "<built-in method builtins.sorted>",
+    "calls": 307552,
+    "self_seconds": 0.131816458,
+    "cumulative_seconds": 1.2746155840000002
+  },
+  {
+    "file": "scripts/validate-physical-component-evidence.py",
+    "line": 235,
+    "function": "<genexpr>",
+    "calls": 42,
+    "self_seconds": 0.609472267,
+    "cumulative_seconds": 1.122657792
+  }
+]
