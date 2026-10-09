@@ -49,6 +49,14 @@ class Invalid(ValueError):
     pass
 
 
+def validate_runtime() -> None:
+    shapely = __import__("shapely")
+    expected = ("3.12.14", "2.1.2", "3.13.1")
+    actual = (platform.python_version(), shapely.__version__, shapely.geos_version_string)
+    if actual != expected:
+        raise Invalid(f"reproduction requires Python/Shapely/GEOS {expected}; found {actual}")
+
+
 def sha(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
@@ -131,6 +139,7 @@ def write_complete(root: Path, files: dict[str, bytes], metadata: dict) -> dict:
 
 
 def run(run_id: str, fixture: Path | None = None) -> dict:
+    validate_runtime()
     root = safe_root(run_id)
     ledger_path = ROOT / LEDGER
     source_raw, source_doc = read_ledger(fixture if fixture else ledger_path)

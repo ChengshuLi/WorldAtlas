@@ -13,7 +13,7 @@ import sys
 import uuid
 from datetime import datetime, timezone
 
-from reproduce import OUTPUTS, ROOT, OWNED, Invalid, canonical, sha
+from reproduce import OUTPUTS, ROOT, OWNED, Invalid, canonical, sha, validate_runtime
 
 
 def pair_root(pair_id: str) -> Path:
@@ -33,6 +33,7 @@ def pair_root(pair_id: str) -> Path:
 
 
 def execute(pair_id: str) -> dict:
+    validate_runtime()
     destination = pair_root(pair_id)
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination = pair_root(pair_id)
