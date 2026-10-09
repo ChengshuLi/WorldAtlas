@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "issue": 1295,
+  "status": "full-normal-hosted-build-PASS",
+  "qualified_head": "dc57a93eeb93acaf9590e4fd020051c638876aec",
+  "run_id": 37821375182,
+  "job_id": 113463076468,
+  "workflow": "Existing Deployment package budget",
+  "actual_merged_source_commit": "48030afc4f0f318e9c575a1b7165175f1cbb64b1",
+  "actual_merged_source_tree": "68b4ac19ffa9aff7aa7eb39a813bc57cc5d91c49",
+  "entry": "npm run build:hosted",
+  "source_files": 7248,
+  "source_bytes": 2375276509,
+  "outer_node_exec_argv": [],
+  "installed_runtime_bytes": 126595440,
+  "installed_runtime_sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+  "original_v1_child_old_space_mib": 1536,
+  "full_package_files": 455,
+  "full_package_bytes": 255507873,
+  "actual_archive_bytes": 199153601,
+  "archive_sha256": "6f7bcff590bd365c3da8a7cdedbde51b5e7151a8a4a46d3ec96d69c45f17f449",
+  "violations": [],
+  "artifacts": [
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/hosted-package-input-build.json.gz",
+      "bytes": 8934,
+      "sha256": "2e97d75de7df8e71d8680948157dbf410edad0f19bdd790afa7cec80c5163979",
+      "uncompressed_bytes": 32170,
+      "uncompressed_sha256": "fa0595757d42d5ec336d973c0bfb80dcd21d7a61d12994d1e6c33503248bcb1c"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/hosted-deployment-budget.json.gz",
+      "bytes": 23502,
+      "sha256": "5148a2a7a81474b4a43318b433186d033f8e86ebf1039650ad1a05c63f8e1d13",
+      "uncompressed_bytes": 101310,
+      "uncompressed_sha256": "1f8c8ceb7f7ec7bd5c36a5d7ce083f246841187a23b663b6b228ccea1fdc2e85"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/hosted-normal-build-success.log.gz",
+      "bytes": 16138,
+      "sha256": "a8a091bb5bfca782c3054a42023cc9a4c409f7da2b1f782086c6dbe53a023e7e",
+      "uncompressed_bytes": 118738,
+      "uncompressed_sha256": "2ee2c0647e4e8ce40dc680e77daa1e7decd3761071729e188b10e25c460f4223"
+    }
+  ],
+  "qualification_limits": [
+    "Existing hosted workflow does not sample process-tree RSS; heap setting is not RSS measurement",
+    "Deployment artifact contains all455 file hashes, not whole dist bodies",
+    "Original factual/source limits and62 unresolved siblings preserved; no production deployment",
+    "All remaining regression jobs and final exact-head review/queue still required"
+  ]
+}

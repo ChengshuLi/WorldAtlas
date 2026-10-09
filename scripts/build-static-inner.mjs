@@ -61,11 +61,19 @@ if(sidecarRaw){
   const {preflightArcticPackage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs');
   const {validateArcticBuildContext}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs');
   const {installV9Stage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs');
-  const admission=preflightArcticPackage({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,priorImage:restoredCanonical.priorImage});
-  const execution=readPackageCurrentExecution(process.cwd());
-  const priorRegistry=JSON.parse(gunzipSync(await fs.readFile(contextStage.priorRegistry.path)));
-  continuedContext=await validateArcticBuildContext({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,currentExecution:execution,reservation:admission.reservation,predecessorReference:priorRegistry.releases.at(-1)});
-  releaseBuildContextBaselines(continuedContext);
+  if(contextStage.version===4){
+    const {preflightArtifactPackage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs');
+    preflightArtifactPackage({source:process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT,stage:process.cwd(),sidecar:contextStage});
+    const currentExecution=readPackageCurrentExecution(process.cwd());
+    const {consumeQualifiedArcticArtifacts}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs');
+    continuedContext=await consumeQualifiedArcticArtifacts({root:process.cwd(),stage:contextStage,selection:JSON.parse(await fs.readFile('data/ownership-selection.json')),restoredReceipt:restoredCanonical,currentExecution});
+  }else{
+    const admission=preflightArcticPackage({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,priorImage:restoredCanonical.priorImage});
+    const execution=readPackageCurrentExecution(process.cwd());
+    const priorRegistry=JSON.parse(gunzipSync(await fs.readFile(contextStage.priorRegistry.path)));
+    continuedContext=await validateArcticBuildContext({root:process.cwd(),stageRaw:sidecarRaw,stage:contextStage,currentExecution:execution,reservation:admission.reservation,predecessorReference:priorRegistry.releases.at(-1)});
+    releaseBuildContextBaselines(continuedContext);
+  }
   continuedContext.installation=await installV9Stage({root:process.cwd(),stage:contextStage,context:continuedContext});
 }
 const ownershipSelection=await readBuildOwnershipSelection();
@@ -158,7 +166,10 @@ try {
     await fs.writeFile(`dist/${path}`,gzipSync(shuffleOwnershipBytes(words),{level:9}));pixelMap.parts.push({kind,offset,words:words.length,path,encoding:'byte-shuffle'});
   }
   if(fixedGrid?.version===2){
-    const versioned=contextStage?.version===3&&contextStage.issue===1520&&contextStage.kind==='arctic-retained-land-context-continuation-v3';
+    const liveVersioned=contextStage?.version===3&&contextStage.issue===1520&&contextStage.kind==='arctic-retained-land-context-continuation-v3';
+    const artifactVersioned=contextStage?.version===4&&contextStage.issue===1520&&nativeBuildContext?.kind==='authenticated-qualified-artifact-consumption-v1';
+    if(artifactVersioned){const {requireConsumedArcticArtifacts}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs');requireConsumedArcticArtifacts(nativeBuildContext);}
+    const versioned=liveVersioned||artifactVersioned;
     if(versioned){
       // A clean output must retain the actual predecessor URLs for cached v8 clients.
       const priorPath='data/canonical-grid/eastern-v8/manifest.json';
@@ -189,7 +200,10 @@ try {
     if(fixedGrid.method){
       const originalBytes=await fs.readFile('data/canonical-grid/manifest.json'),originalGrid=JSON.parse(originalBytes),originalGridSha256=createHash('sha256').update(originalBytes).digest('hex');
       const continuation=nativeBuildContext?.coverageContinuation;
-      if(continuation?.predecessorGeometryValidation){
+      if(nativeBuildContext?.kind==='authenticated-qualified-artifact-consumption-v1'){
+        const {associateQualifiedCoverage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-association.mjs');
+        coverageClassification=associateQualifiedCoverage(coverageClassification,{consumption:nativeBuildContext,originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease});
+      }else if(continuation?.predecessorGeometryValidation){
         const {foldArcticCoverage}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs');
         coverageClassification=foldArcticCoverage(coverageClassification,{context:nativeBuildContext,originalGrid,originalGridSha256,selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease});
       }else if(continuation){

@@ -1,4 +1,5 @@
-// Normal package data installation only after all three genuine validations.
+// Normal package data installation after the explicit live-validation or
+// independently qualified immutable-artifact consumption authority.
 // No producer, geometry kernel, or stock ownership codec is replaced here.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';import {gunzipSync} from 'node:zlib';
@@ -7,6 +8,7 @@ import {continueTemporalBucket} from './temporal-runtime-binding.mjs';
 import {continueRetainedProductIndex} from './retained-product-binding.mjs';
 import {readPreparedEvidenceBundle} from '../../../scripts/read-prepared-evidence-bundle.mjs';
 import {requireArcticContinuation} from './arctic-context.mjs';
+import {requireConsumedArcticArtifacts} from './qualified-artifact-consumer.mjs';
 const N='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 function body(root,pin){
@@ -25,7 +27,8 @@ function write(root,relative,raw){
 }
 export async function installV9Stage({root,stage,context}){
  assert.equal(process.env.WORLDATLAS_PACKAGE_STAGE,root);assert.equal(fs.realpathSync(root),root);assert.notEqual(root,fs.realpathSync(process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT));
- const success=requireArcticContinuation(context);assert.equal(success.manifest_sha256,stage.nativeManifest.sha256);assert.equal(success.release_id,stage.release_id);
+ const artifact=context.kind==='authenticated-qualified-artifact-consumption-v1';
+ const success=artifact?requireConsumedArcticArtifacts(context):requireArcticContinuation(context);assert.equal(success.manifest_sha256,stage.nativeManifest.sha256);assert.equal(success.release_id,stage.release_id);
  const manifestRaw=body(root,stage.nativeManifest),manifest=JSON.parse(manifestRaw),indexPin=manifest.native_asset_transport.index;
  const indexRaw=body(root,indexPin),index=JSON.parse(indexRaw);assert.equal(index.files.length,56);assert.equal(index.whole_bytes,47604645);
  const pixelPin={path:N+'/pixel-audit-v9.json',bytes:14325660,sha256:'fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda'};
@@ -54,8 +57,9 @@ export async function installV9Stage({root,stage,context}){
  for(const p of releases)body(root,{path:N+'/release-v9/'+p.path,bytes:p.bytes,sha256:p.sha256});
  // Every original gzip stays immutable; restore authentic full compressed
  // native assets into a FRESH temporary tree then install the56 exact files.
- const temporary=fs.mkdtempSync(path.join(root,'.cache/native-v9-install-')),image=path.join(temporary,'image');
- restoreWholeImage(path.dirname(path.join(root,indexPin.path)),image,{expectedIndexSha:indexPin.sha256});
+ let image;
+ if(artifact)image=success.nativeImage;
+ else{const temporary=fs.mkdtempSync(path.join(root,'.cache/native-v9-install-'));image=path.join(temporary,'image');restoreWholeImage(path.dirname(path.join(root,indexPin.path)),image,{expectedIndexSha:indexPin.sha256});}
  assert.deepEqual(index.files.map(p=>p.path).sort(),manifest.parts.map(p=>p.path).sort());
  for(const pin of index.files){const part=manifest.parts.find(p=>p.path===pin.path);assert.equal(pin.bytes,part.bytes);assert.equal(pin.sha256,part.sha256);assert.equal(pin.mode,'100644');}
  for(const pin of index.files){const raw=body(image,pin);write(root,N+'/native-v9/'+pin.path,raw);}
@@ -71,5 +75,5 @@ export async function installV9Stage({root,stage,context}){
  for(let i=0;i<retainedPins.length;i++){write(root,'.cache/n2-preserved-v8/'+retainedPins[i].path,body(root,retainedPins[i]));write(root,retainedPins[i].path,Buffer.from(JSON.stringify(continuedIndices[i])+'\n'));}
  write(root,'data/geography/part-29.json',geometry);write(root,'data/pixel-audit.json',pixel);write(root,'data/granularity-audit.json',Buffer.from(JSON.stringify(audit)+'\n'));
  for(const p of releases)write(root,'data/geographic-releases/'+p.path,body(root,{path:N+'/release-v9/'+p.path,bytes:p.bytes,sha256:p.sha256}));
- return {kind:'ephemeral-after-three-live-validations',native_parts:56,old_native_urls_preserved:true,release_products:343,old_global_bodies_preserved:oldPins.map(p=>({...p,path:'.cache/n2-preserved-v8/'+p.path})),scientific_producers_invoked:false,normal_package_aggregate_cap_invented:false};
+ return {kind:artifact?'ephemeral-after-qualified-artifact-consumption':'ephemeral-after-three-live-validations',native_parts:56,old_native_urls_preserved:true,release_products:343,old_global_bodies_preserved:oldPins.map(p=>({...p,path:'.cache/n2-preserved-v8/'+p.path})),scientific_producers_invoked:false,normal_package_aggregate_cap_invented:false};
 }

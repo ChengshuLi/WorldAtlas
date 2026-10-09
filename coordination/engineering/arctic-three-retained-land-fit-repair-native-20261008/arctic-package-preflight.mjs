@@ -52,6 +52,44 @@ export function preflightArcticPackage({root,stageRaw,stage,priorImage}){
  return {record,reservation,complete_phase_bytes:complete,descriptors:count,numerical_catalogue_sha256:CATALOGUE,original_acquisitions_and_validations_still_required:true};
 }
 
+
+// This distinct route is ordinary application consumption, not a numerical
+// qualification phase. Preserve member caps and report complete real bytes;
+// do not apply the unrelated aggregate numerical cap to the normal package.
+export function preflightArtifactPackage({source, stage, sidecar}) {
+ assert.equal(sidecar.version,4);assert.equal(sidecar.kind,'arctic-qualified-artifact-application-consumption-v1');assert.equal(sidecar.issue,1520);
+ const certificatePin=sidecar.artifact_consumption.certificate;
+ const certificate=metadata(stage,certificatePin);
+ assert.equal(certificate.kind,'qualified-arctic-immutable-product-certificate-v1');
+ assert.equal(certificate.issue,1520);
+ assert(Array.isArray(certificate.application_inputs)&&certificate.application_inputs.length>0);
+ const pins=[certificatePin,sidecar.artifact_consumption.review,...certificate.application_inputs];
+ const physical=new Map();let encoded=0,decoded=0;
+ for(const root of new Set([source,stage]))for(const pin of pins){
+  assert(['root','prior','image'].includes(pin.space??'root'));
+  assert.equal(pin.mode,'100644');
+  if(pin.space==='prior'||pin.space==='image'){
+   assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&pin.bytes<=CAP&&/^[a-f0-9]{64}$/.test(pin.sha256));
+   assert(Number.isSafeInteger(pin.decoded_bytes??0)&&(pin.decoded_bytes??0)<=CAP);
+   continue; // Reconstructed members: physical transport is in this roster,
+             // complete member admission/authentication occurs after restoration.
+  }
+  const {file}=ordinary(root,pin);
+  const previous=physical.get(file);if(previous){assert.deepEqual(previous,pin);continue;}
+  physical.set(file,pin);encoded+=pin.bytes;
+  assert(Number.isSafeInteger(pin.decoded_bytes??0)&&(pin.decoded_bytes??0)<=CAP);decoded+=pin.decoded_bytes??0;
+ }
+ assert(Number.isSafeInteger(encoded+decoded));
+ return {version:1,kind:'qualified-artifact-normal-package-stat-admission',
+  numerical_producers_invoked:false,numerical_aggregate_cap_applied:false,
+  encoded_input_bytes:encoded,decoded_input_bytes:decoded,
+  distinct_physical_members:physical.size,
+  declared_reconstructed_members:certificate.application_inputs.filter(pin=>['prior','image'].includes(pin.space)).length,
+  reconstructed_member_bytes:certificate.application_inputs.filter(pin=>['prior','image'].includes(pin.space)).reduce((total,pin)=>total+pin.bytes+(pin.decoded_bytes??0),0),
+  reconstructed_members_authenticated_before_consumption_in_inner:true,installed_runtime_bytes:fs.statSync(process.execPath).size,
+  certificate_sha256:certificatePin.sha256,ordinary_member_cap:CAP};
+}
+
 // Outer boundary: bounded immutable metadata discovery precedes execution
 // issuance. No old bank is restored here; the inner boundary authenticates its
 // actual complete reconstructed source bodies before the numerical methods.
@@ -63,7 +101,9 @@ export function preflightOuterArcticPackage({source,stage,entry}){
  const runtime=fs.statSync(process.execPath).size;assert(runtime+initial.size+131072<TOTAL,'Bounded metadata discovery before first runtime open');
  const raw=boundedMetadataBytes(stage,relative,initial.size);
  const sourceRaw=boundedMetadataBytes(source,relative,initial.size);assert(raw.equals(sourceRaw),'Package sidecar differs from actual source');
- const sidecar=JSON.parse(raw);assert.equal(sidecar.numericalCatalogue.sha256,CATALOGUE);
+ const sidecar=JSON.parse(raw);
+ if(sidecar.version===4)return preflightArtifactPackage({source,stage,sidecar});
+ assert.equal(sidecar.numericalCatalogue.sha256,CATALOGUE);
  const catalogue=metadata(stage,sidecar.numericalCatalogue);assert.equal(catalogue.kind,'original-v6-v7-v8-complete-numerical-input-catalogue');assert.equal(catalogue.stage_sha256,'78347715e701c7e7d9775d17f3934dd3c1b61dbc46533d6179c979ae629d69d7');
  assert.equal(catalogue.prior_stage_sha256,'471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765');assert.equal(catalogue.files.length,69);
  const reservation=reserveArcticContinuation({root:stage,stageRaw:raw,stage:sidecar,declaredOriginalInputs:catalogue.files});
