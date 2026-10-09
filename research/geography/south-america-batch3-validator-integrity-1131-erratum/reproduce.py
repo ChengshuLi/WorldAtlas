@@ -187,6 +187,7 @@ def run(run_id: str, fixture: Path | None = None) -> dict:
         "shared_helper_sha256": sha((ROOT / "scripts/evidence/immutable.py").read_bytes()),
         "python_version": platform.python_version(),
         "shapely_version": __import__("shapely").__version__,
+        "geos_version": __import__("shapely").geos_version_string,
         "pointer_ledger_path": str(LEDGER),
         "pointer_ledger_sha256": sha(source_raw),
         "pointer_record_count": len(source_doc["objects"]),

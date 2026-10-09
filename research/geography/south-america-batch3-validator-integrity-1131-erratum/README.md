@@ -25,7 +25,7 @@ regional-interior conclusion is made.
 
 ## Reproduction and safeguards
 
-Use Python 3.12 with Shapely 2.1.2 and run from the repository root. The
+Use Python 3.12.14, Shapely 2.1.2 and GEOS 3.13.1, and run from the repository root. The
 wrapper validates a raw six-row pointer ledger before any identity mapping,
 then runs the unchanged validator as a real `__main__` entry point. It intercepts
 only the seven exact legacy output writes and their subsequent reads, so the
@@ -42,15 +42,17 @@ PYTHONDONTWRITEBYTECODE=1 python3 research/geography/south-america-batch3-valida
 node scripts/evidence-quality.mjs research/geography/south-america-batch3-validator-integrity-1131-erratum/evidence-quality.json .
 ```
 
-The `verified-pair-03` run starts two separate Python processes against the same
+The `verified-pair-04` run starts two separate Python processes against the same
 unchanged source and ledger. Each run has a unique execution ID, UTC timestamp,
-code SHA-256, complete source-ledger SHA-256, seven product hashes and an
-exclusive publication receipt. All seven products matched byte-for-byte. Only
+code SHA-256, complete source-ledger SHA-256, Python/Shapely/GEOS versions, seven
+product hashes and an exclusive publication receipt. All seven products matched byte-for-byte. Only
 after that comparison, the pair packet replaces the inherited one-run
 `reproducibility.json` claim with a receipt binding both executions and the
 six regenerated products. The original generated one-run reproducibility file
 is retained inside each raw run directory for audit, but is not the pair's
 passed receipt.
+The earlier complete `verified-pair-03` reproduction is retained as a prior
+paired run; `verified-pair-04` also records the GEOS runtime explicitly.
 
 `pointer-destination-controls.json` records actual CLI rejection for duplicate
 records at the first, middle and last positions; missing and foreign IDs; wrong
@@ -64,7 +66,10 @@ published. The full entry point also retains the original false-parent control
 (old checker accepts; current validator rejects) and all nine existing
 meaningful negative controls. `pair-failure-controls.json` additionally drives
 the actual pair orchestration through a failed second-process result and a
-one-file mismatch; neither case publishes a completion receipt.
+one-file mismatch; neither case publishes a completion receipt. The associated
+`runs/*control-run-*` files are synthetic mismatch fixtures with no publication
+receipt, not successful validator executions. Existing-file and directory
+sentinels remain untouched as collision controls.
 
 ## Inputs, dates, licenses and remaining uncertainty
 
