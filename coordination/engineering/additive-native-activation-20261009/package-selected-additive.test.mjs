@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {preparePackageSelectedAdditive,publishPackageSelectedAdditive,prepareOrdinaryPublicationDirectory} from './package-selected-additive.mjs';
+import {preparePackageSelectedAdditive,publishPackageSelectedAdditive,prepareOrdinaryPublicationDirectory,readBoundPublicationAssets} from './package-selected-additive.mjs';
 
 test('ordinary nonadditive selection preserves the default route without execution or payload reads',async()=>{
   const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'additive-package-default-'));
@@ -43,5 +43,28 @@ test('whole selection metadata rejects oversize and symlink boundaries',async()=
     fs.writeFileSync(name,' '.repeat(131073));await assert.rejects(preparePackageSelectedAdditive({root}),/Bounded selection/);
     fs.unlinkSync(name);fs.writeFileSync(path.join(root,'source.json'),'{}');fs.symlinkSync(path.join(root,'source.json'),name);
     await assert.rejects(preparePackageSelectedAdditive({root}),/Ordinary ancestors/);
+  }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+// Tiny actual Git copy-frame control; it does not create publication authority.
+test('fresh publication frame authenticates frozen accepted descriptors and refuses whole-pin drift',async()=>{
+  const {execFileSync}=await import('node:child_process');
+  const {ImmutableReader}=await import('../../../scripts/check-effective-geographic-regression.mjs');
+  const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'additive-frozen-copy-'));
+  const git=process.platform==='darwin'?'/Library/Developer/CommandLineTools/usr/bin/git':'/usr/bin/git';
+  const run=args=>execFileSync(git,['-C',root,...args],{stdio:'pipe'});
+  try{
+    run(['init']);for(let i=0;i<4;i++)fs.writeFileSync(path.join(root,`asset-${i}.json`),JSON.stringify({i})+'\n');
+    run(['add','.']);run(['-c','user.name=fixture','-c','user.email=fixture@example.invalid','commit','-m','bounded fixture']);
+    const head=run(['rev-parse','HEAD']).toString().trim(),reader=new ImmutableReader(root,head,{gitExecutable:git}),roster=[];
+    for(let i=0;i<4;i++){const name=`asset-${i}.json`;reader.read(name);const pin=reader.descriptor(name);Object.freeze(pin);roster.push({pin});}
+    const saved=JSON.stringify([...reader.inventory.values()]),copy=readBoundPublicationAssets(reader,roster,()=>true);
+    assert.equal(copy.bodies.length,4);copy.bodies.forEach((b,i)=>assert.equal(b.toString(),JSON.stringify({i})+'\n'));
+    assert.equal(JSON.stringify([...reader.inventory.values()]),saved);
+    assert(copy.complete_phase_bytes>=reader.metadataBytes+2*Buffer.byteLength(saved));
+    assert.throws(()=>readBoundPublicationAssets(reader,roster.slice(0,3),()=>true),/Four distinct/);
+    assert.throws(()=>readBoundPublicationAssets(reader,roster,()=>false),/Undeclared/);
+    const changed=structuredClone(roster);changed[0].pin.sha256='0'.repeat(64);
+    assert.throws(()=>readBoundPublicationAssets(reader,changed,()=>true),/Whole immutable input differs/);
   }finally{fs.rmSync(root,{recursive:true,force:true});}
 });

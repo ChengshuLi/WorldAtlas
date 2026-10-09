@@ -16,6 +16,26 @@ const ordinary=name=>{
   const stat=fs.lstatSync(name);demand(stat.isFile(),'Ordinary whole file required');return stat;
 };
 
+// A selected reader deliberately freezes its accepted descriptors. A new copy
+// frame reauthenticates the four already accepted pins while charging every
+// retained selection/view/descriptor byte. Returned bytes grant no authority.
+export function readBoundPublicationAssets(reader,roster,declared) {
+  demand(roster.length===4&&new Set(roster.map(p=>p.pin.path)).size===4,'Four distinct bound publication bodies required');
+  const copy=new ImmutableReader(reader.repo,reader.version,{
+    runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,
+    metadataBytes:reader.metadataBytes+2*valueBytes([...reader.inventory.values()]).length,
+    outputBytes:reader.outputBytes,gitExecutable:reader.gitExecutable});
+  const actual=roster.map(({pin})=>{
+    demand(declared(pin.path),'Undeclared additive publication body');
+    let version=pin.commit;try{copy.git('cat-file','-e',version+'^{commit}');}catch{version=copy.version;}
+    const p=copy.descriptor(pin.path,version);
+    demand(p.mode===pin.mode&&p.git_blob_oid===pin.git_blob_oid&&p.bytes===pin.bytes,'Additive publication whole custody differs');
+    copy.admit(p,pin.decoded_bytes??0);return {pin,version};
+  });
+  const bodies=actual.map(({pin,version})=>copy.read(pin.path,{version,expected:pin.sha256,decoded:pin.decoded_bytes??0}));
+  return {bodies,input_inventory:structuredClone([...reader.inventory.values(),...copy.inventory.values()]),complete_phase_bytes:copy.used};
+}
+
 // Called before context/database allocations. The package issuer authenticates
 // its executing closure; the existing private selected reader authenticates all
 // source/rule/current-rebind authority. This bridge grants no new authority.
@@ -84,16 +104,14 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   demand(new Set(roster.map(p=>p.logical.path)).size===4,'Four distinct additive public assets required');
   const outputBytes=roster.reduce((n,p)=>n+p.pin.bytes,0);demand(outputBytes<=4194304,'Complete additive publication exceeds reserved output');
   reader.metadataBytes+=snapshot.metadataBytes+2*valueBytes(view).length;reader.phase();
-  const actual=roster.map(({pin})=>{let version=pin.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
-    const p=reader.descriptor(pin.path,version);demand(p.mode===pin.mode&&p.git_blob_oid===pin.git_blob_oid&&p.bytes===pin.bytes,'Additive publication whole custody differs');
-    reader.admit(p,pin.decoded_bytes??0);return {pin,version};});
-  const bodies=actual.map(({pin,version})=>reader.read(pin.path,{version,expected:pin.sha256,decoded:pin.decoded_bytes??0}));
+  const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
+  const bodies=copied.bodies;
   requireExecution(execution);
   const gitEnd=ordinary(git);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(gitEnd[k]===gitStat[k],'Git program pathname drift');
   demand(createHash('sha256').update(fs.readFileSync(git)).digest('hex')===gitHash,'Whole executing Git program drift');
   const token=Object.freeze({additiveRelease:envelope,reference_release:envelope.effective_reference});
   publications.set(token,{root:fs.realpathSync(root),roster,bodies,gitHash,inheritedBytes,outputBytes,
-    input_inventory:structuredClone([...reader.inventory.values()]),complete_phase_bytes:reader.used});
+    input_inventory:copied.input_inventory,complete_phase_bytes:copied.complete_phase_bytes});
   return token;
 }
 
