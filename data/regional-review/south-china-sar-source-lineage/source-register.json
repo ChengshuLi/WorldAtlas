@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-10-08T23:49:31-07:00",
+  "baseline_commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+  "sources": [
+    {
+      "id": "hk-had-district-boundary-api",
+      "title": "Home Affairs Department, District Boundary (English / Traditional Chinese), CSDI FeatureServer layer DCD",
+      "url": "https://portal.csdi.gov.hk/server/rest/services/common/had_rcd_1634523272907_75218/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "dataset_page": "https://data.gov.hk/en-data/dataset/hk-had-json1-hong-kong-administrative-boundaries/resource/855f034a-c330-435c-a911-1d63538a6d55",
+      "role": "Current 18-district administrative geometry and source roster check; not the outer SAR legal boundary",
+      "vintage": "Service snapshot retrieved 2026-10-08 America/Los_Angeles; data.gov.hk says created 2016-01-01, published 2022-07-01, update as needed",
+      "retrieved_at": "2026-10-08",
+      "license": "DATA.GOV.HK Terms of Use v1.2, updated 2025-05-26: free commercial and noncommercial distribution/reproduction with clear source, Government/Relevant Organisation ownership acknowledgement and attribution. Terms disclaim accuracy/completeness/timeliness.",
+      "license_url": "https://data.gov.hk/en/terms-and-conditions",
+      "license_terms_sha256": "c901a8f56c42a4cbcb2502c10d3623309529500e38f5d6c247aab68c6149dde0",
+      "attribution": "Home Affairs Department, Government of the Hong Kong Special Administrative Region, via DATA.GOV.HK / CSDI",
+      "query": "where=1=1; outFields=*; returnGeometry=true; outSR=4326; f=geojson",
+      "retained_files": [
+        {"path":"data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-boundaries.geojson","bytes":757172,"sha256":"41059eb78c13fdda2de335cff4e93ce617b59cb2914e52729954f4945799f941"},
+        {"path":"data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-service.json","bytes":3488,"sha256":"ef1918743f6977b34f10a206c36c07cc96a5f11a95c4215534493f38ad37e4cd"},
+        {"path":"data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-layer.json","bytes":6887,"sha256":"5d3a11dd31f42ead09366e7fadfba0664ac77410633db4e66c974a4f73a6421b"}
+      ],
+      "limit": "The 18 district layer cannot establish outer land/maritime SAR limits, all island/coastal coverage, legal boundary accuracy or neighbor topology. Its service provides current reference geometry, not a stated legally promulgated outer SAR polygon."
+    },
+    {
+      "id": "hk-state-council-order-221",
+      "title": "Hong Kong Basic Law Instrument 9, State Council Order 221 and boundary description",
+      "url": "https://www.basiclaw.gov.hk/filemanager/content/en/files/basiclawtext/basiclawtext_doc9.pdf",
+      "role": "Primary legal territorial boundary text and approved map provenance",
+      "vintage": "Promulgated 1997-07-01; map approved by State Council 1997-05-07",
+      "retrieved_at": "2026-10-08",
+      "license": "No specific reuse license for the embedded official map was identified",
+      "license_status": "unknown",
+      "retention": "restoration-only",
+      "restoration": "Fetch the exact HTTPS URL, retain only if its reuse terms are confirmed, and verify the retrieved PDF SHA-256 before use. Retrieved body was 1,220,263 bytes with SHA-256 06c407a00d980ddd1ccf6fd6eeb9d42e919302789acfa5c34af0a8fe7e72e407.",
+      "source_hash": {"bytes":1220263,"sha256":"06c407a00d980ddd1ccf6fd6eeb9d42e919302789acfa5c34af0a8fe7e72e407"},
+      "limit": "Establishes the legal description and map's promulgation, not geometry equivalence of the generalized Atlas footprint."
+    },
+    {
+      "id": "hk-basic-law-chapter-i",
+      "title": "Hong Kong Basic Law, Chapter I, Articles 1-2",
+      "url": "https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html",
+      "role": "Current legal role of HKSAR",
+      "vintage": "Current Basic Law text, retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": "Official legal text; no explicit reuse statement recorded",
+      "license_status": "unknown",
+      "retention": "restoration-only",
+      "restoration": "Restore the official chapter page at the exact canonical URL and record its response SHA-256 before any later reuse.",
+      "limit": "Articles 1-2 establish SAR status and autonomy; they do not establish boundaries. A dated prior capture and hash is preserved in #408 source evidence."
+    },
+    {
+      "id": "hk-open-data-terms",
+      "title": "DATA.GOV.HK Terms and Conditions, v1.2",
+      "url": "https://data.gov.hk/en/terms-and-conditions",
+      "role": "Reuse terms for the retained HAD district-boundary dataset",
+      "vintage": "Version 1.2, last updated 2025-05-26",
+      "retrieved_at": "2026-10-08",
+      "license": "Terms allow free browse, download, distribute, reproduce, hyperlink and print for commercial and noncommercial use subject to attribution, ownership acknowledgement and other conditions; Government disclaims completeness/timeliness/accuracy warranties.",
+      "license_status": "redistributable",
+      "retention": "restoration-only",
+      "restoration": "Restore the terms page from the exact URL. Fetched response was 39,948 bytes, SHA-256 c901a8f56c42a4cbcb2502c10d3623309529500e38f5d6c247aab68c6149dde0.",
+      "source_hash": {"bytes":39948,"sha256":"c901a8f56c42a4cbcb2502c10d3623309529500e38f5d6c247aab68c6149dde0"},
+      "limit": "Dataset reuse retains its attribution and ownership-acknowledgement duties; this terms hash only binds the fetched page snapshot."
+    },
+    {
+      "id": "hk-landsd-ehkg-2026-area-map",
+      "title": "Lands Department, e-HongKongGuide 2026, Area of Hong Kong SAR",
+      "url": "https://www.landsd.gov.hk/doc/en/mapping/ehkg/individual_PDF/AreaOfHKSAR_eHKG2026.pdf",
+      "context_page": "https://www.landsd.gov.hk/en/resources/mapping-information/hk-geographic-data.html",
+      "role": "Official current land/sea area reference and major-island map",
+      "vintage": "e-HongKongGuide 2026; map data described by LandsD as 1:10,000 data as at October 2025",
+      "retrieved_at": "2026-10-08T23:53:37-07:00",
+      "license": "Guide is free for noncommercial use; redistribution of PDF/map artwork is not claimed",
+      "license_status": "unknown",
+      "retention": "restoration-only",
+      "restoration": "Restore the official PDF URL and verify its byte hash. Retrieved PDF was 975,399 bytes, SHA-256 ffcc96174339ecb7dd090e65fe3c61e448c21d3d8da55732784ada08592588e1. LandsD reports 1,114.57 km2 land, 1,640.40 km2 sea, and 2,754.97 km2 total; e-HKG area data date October 2025.",
+      "source_hash": {"bytes":975399,"sha256":"ffcc96174339ecb7dd090e65fe3c61e448c21d3d8da55732784ada08592588e1"},
+      "limit": "Not redistributed in this packet. Official aggregate area totals and a map are not a GIS overlay or proof that Atlas coastal/island geometry is complete."
+    },
+    {
+      "id": "macao-state-council-order-665-notice-128-2015",
+      "title": "Macao Official Gazette, Chief Executive Notice 128/2015 and State Council Order 665",
+      "url": "https://bo.dsaj.gov.mo/bo/i/2015/50/extra/aviso128.asp",
+      "official_map_pdf": "https://images.bo.dsaj.gov.mo/bo/i/2015/50/extra/avce-128-2015.pdf",
+      "role": "Primary legal source for Macao SAR land and maritime administrative boundary and map",
+      "vintage": "Order approved 2015-12-16, effective 2015-12-20; Notice promulgated 2015-12-20 and revoked the 1999 map",
+      "retrieved_at": "2026-10-08",
+      "license": "Reuse terms for Gazette map artwork and embedded cartographic base were not identified",
+      "license_status": "unknown",
+      "retention": "restoration-only",
+      "restoration": "Restore HTML and PDF from these exact official URLs. HTML response: 25,879 bytes, SHA-256 e6a65f3081fe08254e3fd7fdbee51a7431962d8c373f6284e77fd72f9939956b. PDF response: 787,814 bytes, SHA-256 9b33be45094e18b30bacdaff9104cd3a12cf4701b2dbd15a5b7cd17361859426. Official PDF pages 2-3 (gazette pp. 18-19) visually inspected; do not redistribute map bytes absent rights review.",
+      "source_hashes": [
+        {"url":"https://bo.dsaj.gov.mo/bo/i/2015/50/extra/aviso128.asp","bytes":25879,"sha256":"e6a65f3081fe08254e3fd7fdbee51a7431962d8c373f6284e77fd72f9939956b"},
+        {"url":"https://images.bo.dsaj.gov.mo/bo/i/2015/50/extra/avce-128-2015.pdf","bytes":787814,"sha256":"9b33be45094e18b30bacdaff9104cd3a12cf4701b2dbd15a5b7cd17361859426"}
+      ],
+      "findings": ["The legal division has land and maritime components.","The order specifies an 85 km2 managed maritime area and a Border Gate land segment.","The official map shows the boundary extending offshore around the land areas; this visual inspection does not yield a reproducible polygon."],
+      "limit": "No lawful reusable official vector or coordinate reconstruction was obtained. A raster map and legal text cannot establish exact geometry/topology by visual inspection alone."
+    },
+    {
+      "id": "macao-dsscu-coastline-context",
+      "title": "Macao DSSCU, Purpose of Coastline Survey and Revision",
+      "url": "https://geomatics.dsscu.gov.mo/en/geo_coastline_intro_details/article/geo_coastline1.html",
+      "role": "Current government contextual source on managed maritime area and coastal boundary volatility",
+      "vintage": "Current page, accessed through official-site search result on 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": "No reuse terms identified; the local TLS client could not validate this host's certificate",
+      "license_status": "unknown",
+      "retention": "restoration-only",
+      "restoration": "Retry the canonical HTTPS URL using a trust-verified client and record the exact bytes/hash; do not disable certificate validation. Current official-site search excerpt says Order 665 clarified land/water scope and the SAR manages 85 km2 of water area.",
+      "limit": "No local response bytes/hash due UNABLE_TO_VERIFY_LEAF_SIGNATURE; no downloaded geometry or coastline layer."
+    },
+    {
+      "id": "gba-plan-2019-prior-official-capture",
+      "title": "Central Committee / State Council, Greater Bay Area Outline Development Plan, Chapter 3, Section 1",
+      "url": "https://app.www.gov.cn/govdata/gov/201902/18/435204/article.html",
+      "role": "Planning purpose of Hong Kong-Shenzhen and Macao-Zhuhai cooperation-pole parent labels",
+      "vintage": "2019 plan; captured 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": "No blanket reuse license was located; exact prior capture is preserved for internal evidence and is not claimed freely redistributable",
+      "license_status": "unknown",
+      "retention": "restoration-only",
+      "restoration": "Use the existing immutable #408 capture at data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/prc-gba-development-outline-2019.html (92,626 bytes, SHA-256 66ea0583af542ac8a9239cef36ad051ed686b5f8596eba4f632e52b51bf0ee94).",
+      "limit": "Planning cooperation poles are not legal province or administrative-parent evidence."
+    }
+  ],
+  "primary_research_limits": [
+    "No original aggregate/import code or exact transformation recipe has been found; exact member ID joins are not geometry derivation proof.",
+    "No current licensed outer boundary vector for either SAR was retained.",
+    "No GIS union, overlay, topology, island-completeness, coastline-completeness, maritime-area or neighbor check was performed.",
+    "The identifiers remain distinct SAR territories. The policy grouping parent names are not legal administrative parents."
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "historical_code": {
+    "path": "scripts/semantic-locations.py",
+    "commit": "4bdba3d40acc2d725e4aeb54c3b9aab559a91469",
+    "sha256": "ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a",
+    "merge_operation": "polygon(make_valid(union_all([geoms[i] for i in indices])))"
+  },
+  "source_vintage_limit": "The historical cache input.geojson used by CODE_COMMIT was untracked and is not present in the parent commit. This bounded replay uses retained Natural Earth shapefile source and retained 2017 geoBoundaries bytes; it does not claim byte-identical historical inputs.",
+  "geometry_reader_limit": "Natural Earth polygons are reconstructed from ESRI ring orientation and point-in-ring shell/hole assignment. The reconstructed geometry was not crosschecked against the unavailable historical GeoJSON cache, so shapefile reader/serialization differences may contribute to measured differences.",
+  "runtime": {
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "sources": {
+    "natural_earth_admin1_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+    "geoboundaries_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+    "baseline_commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+  },
+  "subjects": {
+    "atlas:territory:HKG": {
+      "selected_member_count": 18,
+      "member_bounds": [
+        [
+          114.08236738400001,
+          22.4680694980089,
+          114.3327742848054,
+          22.56394603200009
+        ],
+        [
+          113.837331576,
+          22.177069403000075,
+          114.15463300900001,
+          22.316164201813187
+        ],
+        [
+          114.11255944100003,
+          22.189561265000066,
+          114.25611412900003,
+          22.271511135000083
+        ],
+        [
+          114.11255944100003,
+          22.257383048788654,
+          114.16570071700005,
+          22.288723049000055
+        ],
+        [
+          114.16248450595515,
+          22.258232423387597,
+          114.1950024506026,
+          22.2793643250036
+        ],
+        [
+          114.17888431076233,
+          22.248887437605163,
+          114.25147545700008,
+          22.291856187000064
+        ],
+        [
+          113.99563229595493,
+          22.315835371008028,
+          114.17315348534498,
+          22.417824579440776
+        ],
+        [
+          114.12555395495099,
+          22.395499720835403,
+          114.36784915500004,
+          22.5119489602763
+        ],
+        [
+          114.15052420083111,
+          22.3418706686964,
+          114.25196582376373,
+          22.43553294500009
+        ],
+        [
+          114.22309397710535,
+          22.258286851000037,
+          114.40129642000011,
+          22.44627513200004
+        ],
+        [
+          114.2051586185753,
+          22.281683661000045,
+          114.24344822074931,
+          22.33453870739544
+        ],
+        [
+          114.17003220472247,
+          22.29108307492396,
+          114.21485436300009,
+          22.34798825925077
+        ],
+        [
+          114.15951582100001,
+          22.288723049000055,
+          114.17705508702261,
+          22.323052736194825
+        ],
+        [
+          114.14568437780467,
+          22.32225169500009,
+          114.17627476686698,
+          22.344778908919466
+        ],
+        [
+          114.11248803705261,
+          22.33199857942035,
+          114.15947909578358,
+          22.379893317722406
+        ],
+        [
+          113.89698326900009,
+          22.35036855700008,
+          114.03581713345386,
+          22.426784572000088
+        ],
+        [
+          113.94100996200007,
+          22.382234278189344,
+          114.13959971775273,
+          22.522935288832514
+        ],
+        [
+          114.18562047660362,
+          22.333074106584718,
+          114.23401846018373,
+          22.355703391997906
+        ]
+      ],
+      "replayed_union": {
+        "type": "MultiPolygon",
+        "valid": true,
+        "area_degrees2": 0.09086578189868472,
+        "bounds_wgs84_lonlat": [
+          113.837331576,
+          22.177069403000075,
+          114.40129642000011,
+          22.56394603200009
+        ],
+        "position_count": 404,
+        "geometry_json_sha256": "21aa3c1fc967aebde6c52b78e488c5315213d4d92cc161f96e9261c68fefa816"
+      },
+      "baseline_atlas": {
+        "type": "MultiPolygon",
+        "valid": true,
+        "area_degrees2": 0.09038068198568754,
+        "bounds_wgs84_lonlat": [
+          113.8373,
+          22.1771,
+          114.4013,
+          22.5639
+        ],
+        "position_count": 255,
+        "geometry_json_sha256": "35433d2d2f0a37144deaf49ce03a2eacf1df1e618cb2dd3a351ba83a58b2a495"
+      },
+      "topologically_equals_baseline": false,
+      "symmetric_difference_area_degrees2": 0.003352914582248336,
+      "hausdorff_distance_degrees": 0.02103014569054354
+    },
+    "atlas:territory:MAC": {
+      "selected_member_count": 2,
+      "member_bounds": [
+        [
+          113.51986738400001,
+          22.10537344000005,
+          113.58749433700007,
+          22.220770575000074
+        ],
+        [
+          113.53044452800009,
+          22.094499232000032,
+          113.60087459500005,
+          22.198665653000035
+        ]
+      ],
+      "replayed_union": {
+        "type": "MultiPolygon",
+        "valid": true,
+        "area_degrees2": 0.004039646496080803,
+        "bounds_wgs84_lonlat": [
+          113.51986738400001,
+          22.094499232000032,
+          113.60087459500005,
+          22.220770575000074
+        ],
+        "position_count": 114,
+        "geometry_json_sha256": "941a88aa52c6060695cac6804e7f971116583f99703225ae63c8cef3d94f49c2"
+      },
+      "baseline_atlas": {
+        "type": "Polygon",
+        "valid": true,
+        "area_degrees2": 0.0036200746149960984,
+        "bounds_wgs84_lonlat": [
+          113.5199,
+          22.0945,
+          113.5963,
+          22.2171
+        ],
+        "position_count": 65,
+        "geometry_json_sha256": "324b8095f82af0b755dc1e04321c46bbe827a6528534acc309014a79d3bf56ca"
+      },
+      "topologically_equals_baseline": false,
+      "symmetric_difference_area_degrees2": 0.0006902633571228161,
+      "hausdorff_distance_degrees": 0.01807680577530709
+    }
+  }
+}

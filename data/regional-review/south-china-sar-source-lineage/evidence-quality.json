@@ -1,0 +1,783 @@
+{
+  "version": 1,
+  "issue": 1225,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "atlas:territory:HKG",
+    "atlas:territory:MAC"
+  ],
+  "subject_ids_sha256": "a127524e79dc17757514e3cb92bbd0a3f3fc368841b639a1b80b5cd3d0cea384",
+  "baseline": {
+    "version": 2,
+    "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+    "files": [
+      {
+        "path": "data/hierarchy.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-173ccc74c2fd93ae/row-assessments.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 427317,
+        "sha256": "079ae0e08f2741ba76492334ea1bb539bd458fa9438cff734133f7fcf59e3f2d",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-173ccc74c2fd93ae/source-review.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 18057,
+        "sha256": "8fbc510d1cf76c89853a9852278498d24bb8ac073027eda7da787c4d5e276f87",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "scripts/semantic-locations.py",
+        "commit": "4bdba3d40acc2d725e4aeb54c3b9aab559a91469",
+        "bytes": 36266,
+        "sha256": "ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a",
+        "hash_kind": "file-bytes",
+        "role": "historical-method-code"
+      },
+      {
+        "path": "data/regional-review/regional-review-173ccc74c2fd93ae/reproduce-scope.py",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 37479,
+        "sha256": "266c7cef7562f4e3f4c4101b3feaca3db5b1e5ea191448ec211dd33e23f0828f",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-173ccc74c2fd93ae/README.md",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 12496,
+        "sha256": "b8b121fd94088c67893f80511ed266505383d0e413faabdc12ecab08476417df",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/hong-kong-basic-law-ch1.html",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 5171,
+        "sha256": "c8a6f3c384be366ce0c33d070809db07df0691515edefc558b9a5b354f0eee3b",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/macao-constitutional-documents.html",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 69251,
+        "sha256": "392ef4bfc645ce43dff1a34b672ff247e2ba1cfb82c6d866e4e0779a15757935",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/prc-gba-development-outline-2019.html",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 92626,
+        "sha256": "66ea0583af542ac8a9239cef36ad051ed686b5f8596eba4f632e52b51bf0ee94",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/LICENSE.md.gz",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 1403,
+        "sha256": "5c150db3b362f1c4930500613ad105f11ab7331bdbf36e009ad550117f1c2aa1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/README.html.gz",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 10152,
+        "sha256": "2bd8c98597e4712c5b7eb9be80be26033466a0ff567851c66433a6ae345521ed",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/source-register.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 5292,
+        "sha256": "ac5d510c312d71a83122109fc56d5505461c46945713a77cfc0ab7958417965d",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.shp",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 20998780,
+        "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.shx",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 36868,
+        "sha256": "37a9e2bc79ed31d3bdea3cb62d928f77281a1c88d645cd33430231c75dbcf350",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 15161514,
+        "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.prj",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 145,
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.cpg",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 7618692,
+        "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-metadata.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 1101,
+        "sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/source-register.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 9905,
+        "sha256": "1440ad7f6afe8b1420e3e9ea82d7c1855c7113738f5885caa845c4b9108ac0bd",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-citation-and-use.txt",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/pr2-source-access-register.json",
+        "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+        "bytes": 7984,
+        "sha256": "3fac43e8326b51787961ed5eda67fc260390f9daad25a0a1cd83bd0d854a6b49",
+        "hash_kind": "file-bytes",
+        "role": "pinned-prior-evidence"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "evaluation-snapshot"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+        "bytes": 15161514,
+        "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+        "hash_kind": "file-bytes",
+        "role": "evaluation-snapshot"
+      },
+      {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
+        "bytes": 7618692,
+        "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+        "hash_kind": "file-bytes",
+        "role": "evaluation-snapshot"
+      }
+    ],
+    "pins": {
+      "baseline:data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline:data/regional-review/regional-review-173ccc74c2fd93ae/row-assessments.json": "079ae0e08f2741ba76492334ea1bb539bd458fa9438cff734133f7fcf59e3f2d",
+      "baseline:data/regional-review/regional-review-173ccc74c2fd93ae/source-review.json": "8fbc510d1cf76c89853a9852278498d24bb8ac073027eda7da787c4d5e276f87"
+    },
+    "pin_files": {
+      "baseline:data/hierarchy.json": "data/hierarchy.json",
+      "baseline:data/regional-review/regional-review-173ccc74c2fd93ae/row-assessments.json": "data/regional-review/regional-review-173ccc74c2fd93ae/row-assessments.json",
+      "baseline:data/regional-review/regional-review-173ccc74c2fd93ae/source-review.json": "data/regional-review/regional-review-173ccc74c2fd93ae/source-review.json"
+    },
+    "subject_files": {
+      "atlas:territory:HKG": {
+        "path": "data/geography/part-28.json",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "atlas:territory:MAC": {
+        "path": "data/geography/part-28.json",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "hk-had-district-boundary-api",
+      "url": "https://portal.csdi.gov.hk/server/rest/services/common/had_rcd_1634523272907_75218/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "role": "Current 18-district roster/geometry reference; not outer SAR boundary",
+      "vintage": "Current service snapshot retrieved 2026-10-08; dataset created 2016-01-01, published 2022-07-01, updates as needed",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "redistributable",
+        "terms": "DATA.GOV.HK Terms v1.2 permit commercial/noncommercial reuse with attribution and Government/Relevant Organisation ownership acknowledgement; disclaim accuracy/completeness/timeliness. Attribute Home Affairs Department, HKSAR Government, via DATA.GOV.HK/CSDI."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-boundaries.geojson",
+          "bytes": 757172,
+          "sha256": "41059eb78c13fdda2de335cff4e93ce617b59cb2914e52729954f4945799f941",
+          "hash_kind": "file-bytes",
+          "role": "retained-original-source"
+        },
+        {
+          "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-service.json",
+          "bytes": 3488,
+          "sha256": "ef1918743f6977b34f10a206c36c07cc96a5f11a95c4215534493f38ad37e4cd",
+          "hash_kind": "file-bytes",
+          "role": "retained-original-source"
+        },
+        {
+          "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-layer.json",
+          "bytes": 6887,
+          "sha256": "5d3a11dd31f42ead09366e7fadfba0664ac77410633db4e66c974a4f73a6421b",
+          "hash_kind": "file-bytes",
+          "role": "retained-original-source"
+        }
+      ],
+      "limit": "District geometry does not establish the outer land/maritime SAR boundary, island/coast completeness or topology."
+    },
+    {
+      "id": "natural-earth-admin1-hkg-mac",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19/10m_cultural",
+      "role": "Natural Earth Admin-1 source rows and raw geometry records",
+      "vintage": "Commit ca96624a56bd078437bca8184e78163e5039ad19, dated 2022-06-02; 1:10m layer",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Natural Earth LICENSE.md claims its vector/raster data are public domain; that claim does not establish upstream authority/reuse terms for every contributing HKG/MAC source."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Use original bytes at d43cce74959376d8ef052afd3fd09e875bb08938:data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/; pinned SHP/SHX/DBF/PRJ/CPG/license and source register are inventoried in the manifest.",
+      "limit": "Generalized 1:10m source is not current legal/cadastral boundary evidence; upstream rights and exact historical input snapshot remain unresolved."
+    },
+    {
+      "id": "geoboundaries-china-adm2-2017",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2",
+      "role": "Exact native-ID predecessor candidate for unnamed Macao member",
+      "vintage": "Declared boundaryYear 2017; updated 2023-01-19; build 2023-12-12; immutable commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Layer metadata declares PDDL 1.0; retained citation/use text says derivative CC BY 4.0 and asks attribution to geoBoundaries and original source. Original upstream URLs are malformed, leaving that chain unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Use original file at d43cce74959376d8ef052afd3fd09e875bb08938:data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson; SHA-256 2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34.",
+      "limit": "Exact ShapeID and ADM2 label do not prove current legal Macao correspondence or Atlas transformation."
+    },
+    {
+      "id": "hk-order-221",
+      "url": "https://www.basiclaw.gov.hk/filemanager/content/en/files/basiclawtext/basiclawtext_doc9.pdf",
+      "role": "Primary legal source for HKSAR outer land/maritime boundary",
+      "vintage": "Map approved 1997-05-07; Order 221 promulgated 1997-07-01",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for official map artwork not established."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieved PDF 1,220,263 bytes, SHA-256 06c407a00d980ddd1ccf6fd6eeb9d42e919302789acfa5c34af0a8fe7e72e407; restore from exact canonical URL and check terms before retention.",
+      "limit": "Legal provenance does not establish equivalence to Atlas generalized geometry."
+    },
+    {
+      "id": "hk-basic-law-chapter-i",
+      "url": "https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html",
+      "role": "Current HKSAR legal role",
+      "vintage": "Current Basic Law chapter retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text; no explicit reuse terms recorded."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use canonical URL and pinned prior capture data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/hong-kong-basic-law-ch1.html at d43cce74959376d8ef052afd3fd09e875bb08938.",
+      "limit": "Defines SAR status/autonomy but not geometry."
+    },
+    {
+      "id": "hk-landsd-ehkg-2026-area-map",
+      "url": "https://www.landsd.gov.hk/doc/en/mapping/ehkg/individual_PDF/AreaOfHKSAR_eHKG2026.pdf",
+      "role": "Current official land/sea area and major-island map",
+      "vintage": "e-HongKongGuide 2026; area map data date October 2025",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "e-HongKongGuide is free for noncommercial use; redistribution of PDF/map artwork is not claimed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieved PDF 975,399 bytes, SHA-256 ffcc96174339ecb7dd090e65fe3c61e448c21d3d8da55732784ada08592588e1; restore exact official URL. Map separates dashed Order 221 boundary from red 2023 district lines, identifies 23 major islands and reports 1,114.57 km2 land / 1,640.40 km2 sea.",
+      "limit": "Map and areas are not a reusable vector or matched CRS/coast/area calculation against Atlas."
+    },
+    {
+      "id": "macao-order-665-notice-128-2015",
+      "url": "https://bo.dsaj.gov.mo/bo/i/2015/50/extra/aviso128.asp",
+      "role": "Primary legal source for Macao SAR land/maritime boundary",
+      "vintage": "Order approved 2015-12-16, effective 2015-12-20; Notice promulgated 2015-12-20",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for Gazette map artwork/cartographic base not established."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "HTML 25,879 bytes SHA-256 e6a65f3081fe08254e3fd7fdbee51a7431962d8c373f6284e77fd72f9939956b; official PDF https://images.bo.dsaj.gov.mo/bo/i/2015/50/extra/avce-128-2015.pdf was 787,814 bytes SHA-256 9b33be45094e18b30bacdaff9104cd3a12cf4701b2dbd15a5b7cd17361859426. PDF pp. 18-19 visually inspected; no copies redistributed.",
+      "limit": "Specifies 85 km2 maritime water and Border Gate land component; raster map does not supply reproducible vector/topology."
+    },
+    {
+      "id": "macao-dsscu-coastline-context",
+      "url": "https://geomatics.dsscu.gov.mo/en/geo_coastline_intro_details/article/geo_coastline1.html",
+      "role": "Current authority context on Macao coastline/managed water",
+      "vintage": "Current official site search result retrieved 2026-10-08",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms unknown; local TLS validation failed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Retry only with trust-verified TLS; local client returned UNABLE_TO_VERIFY_LEAF_SIGNATURE; no content bytes or hash.",
+      "limit": "No authorized current vector/API bytes locally available."
+    },
+    {
+      "id": "gba-outline-2019",
+      "url": "https://app.www.gov.cn/govdata/gov/201902/18/435204/article.html",
+      "role": "Planning purpose of HKG-Shenzhen and MAC-Zhuhai parent labels",
+      "vintage": "2019 plan; exact prior capture retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "No blanket reuse terms located; cite official URL and use prior capture only as internal evidence."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Pinned prior capture at data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/prc-gba-development-outline-2019.html in d43cce74959376d8ef052afd3fd09e875bb08938; 92,626 bytes SHA-256 66ea0583af542ac8a9239cef36ad051ed686b5f8596eba4f632e52b51bf0ee94.",
+      "limit": "Cooperation poles are not legal provinces or administrative parents."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/README.md",
+      "bytes": 11012,
+      "sha256": "75728e6943a3c4dd2d9c226405916e902568ac0fda428a4174294d5761924a56",
+      "hash_kind": "file-bytes",
+      "role": "research-report"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/reproduce-lineage.mjs",
+      "bytes": 13553,
+      "sha256": "9a9df009bf849e994cabceff2540592a4bab1be2be4bc08d0d5f573da2ddf981",
+      "hash_kind": "file-bytes",
+      "role": "method-code"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/reproduce-original-union.py",
+      "bytes": 11256,
+      "sha256": "7ce87484d379af02d5065a29dc5c330f0eb1c1bdb5b3f9ee1c8e6f4acb844051",
+      "hash_kind": "file-bytes",
+      "role": "source-register"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "bytes": 11414,
+      "sha256": "a57681ed68be62f1aca7db7638856253d65dff3c307f7129a5fefa80bee09afd",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-results.json",
+      "bytes": 6232,
+      "sha256": "ec489b97ee1277b18951b658486cc9cc82fd73137179bb4a470db6103e554157",
+      "hash_kind": "file-bytes",
+      "role": "source-register"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-positive-control.json",
+      "bytes": 1358,
+      "sha256": "94858870f9bcfbc249115e7978e5ded829595c4ef6dd73ef64f08bf774adba08",
+      "hash_kind": "file-bytes",
+      "role": "control-output"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-negative-control.json",
+      "bytes": 613,
+      "sha256": "7b83fe3ebc958d2b8066e63b2b3ccc2ffd33d20d4ca9365742de0ae04bf56411",
+      "hash_kind": "file-bytes",
+      "role": "control-output"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/positive-control.json",
+      "bytes": 374,
+      "sha256": "2f93d692e070505ac2f1f15cb354b9339c6d9cbcd7b66c1ad41bbeb35773e00d",
+      "hash_kind": "file-bytes",
+      "role": "control-output"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/negative-control.json",
+      "bytes": 362,
+      "sha256": "1e539d371bc7c0881ca01f1dfbc18d22623dc0792709f5e46b94bbe0161c84e9",
+      "hash_kind": "file-bytes",
+      "role": "control-output"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/source-register.json",
+      "bytes": 11658,
+      "sha256": "6921b40194c633147185070356b2fcf82ee3a66723da3e25725c3ff2b84edf1c",
+      "hash_kind": "file-bytes",
+      "role": "source-register"
+    }
+  ],
+  "methods": [
+    {
+      "id": "historical-aggregate-replay",
+      "kind": "measurement",
+      "description": "Replay the exact historical merge operation polygon(make_valid(union_all(...))) for the exact retained HKG/MAC member rosters, compare topology and symmetric difference against baseline Atlas geometry, and assert that omitting required members fails the roster guard. Historical cached input.geojson is untracked and absent; the shapefile ring adapter also remains unverified against that cache.",
+      "software": "Python 3.12.14; Shapely 2.1.2; original transformation source pinned at commit 4bdba3d40acc2d725e4aeb54c3b9aab559a91469",
+      "units": "WGS84 longitude/latitude degrees; symmetric-difference area in degrees squared; topology equality"
+    },
+    {
+      "id": "sar-source-identity-reproduction",
+      "kind": "measurement",
+      "description": "Read Natural Earth DBF attributes and SHP/SHX polygon records by shared record index; join frozen HKG source_member_ids to adm1_code and HKG adm0_a3 rows; exact ShapeID search in retained geoBoundaries GeoJSON; compare source component coordinate counts/envelopes to Atlas baseline and current HK district names to Natural Earth name values after removing the official District suffix.",
+      "software": "Node.js v24.19.0; built-in Buffer, JSON, crypto; no third-party GIS library",
+      "units": "native IDs, feature/record counts, coordinate pairs, WGS84 longitude/latitude degrees; no area/distance measurement"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "hkg_exact_member_join_count",
+      "value": 18,
+      "unit": "native source IDs",
+      "vintage": "baseline",
+      "input_sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+      "input_file": {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+    },
+    {
+      "id": "hkg_exact_member_join_fraction",
+      "value": 1,
+      "unit": "fraction",
+      "numerator": 18,
+      "denominator": 18,
+      "vintage": "baseline",
+      "input_sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+      "input_file": {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+    },
+    {
+      "id": "hk_current_official_roster_name_match_count",
+      "value": 18,
+      "unit": "district names",
+      "vintage": "current",
+      "input_sha256": "41059eb78c13fdda2de335cff4e93ce617b59cb2914e52729954f4945799f941",
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+    },
+    {
+      "id": "mac_unique_geoboundaries_native_id_count",
+      "value": 1,
+      "unit": "feature",
+      "vintage": "baseline",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "input_file": {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+    },
+    {
+      "id": "mac_atlas_coordinate_pair_count",
+      "value": 65,
+      "unit": "coordinate pairs",
+      "vintage": "baseline",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "input_file": {
+        "path": "data/geography/part-28.json",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+    },
+    {
+      "id": "mac_geoboundaries_coordinate_pair_count",
+      "value": 62,
+      "unit": "coordinate pairs",
+      "vintage": "baseline",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "input_file": {
+        "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+        "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+      },
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "hkg_exact_member_join_count",
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "json_pointer": "/subjects/atlas:territory:HKG/matched_member_count"
+    },
+    {
+      "metric_id": "hkg_exact_member_join_fraction",
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "json_pointer": "/subjects/atlas:territory:HKG/member_id_match_fraction"
+    },
+    {
+      "metric_id": "hk_current_official_roster_name_match_count",
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "json_pointer": "/subjects/atlas:territory:HKG/current_official_district_name_match_count"
+    },
+    {
+      "metric_id": "mac_unique_geoboundaries_native_id_count",
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "json_pointer": "/subjects/atlas:territory:MAC/geoboundaries_match_count"
+    },
+    {
+      "metric_id": "mac_atlas_coordinate_pair_count",
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "json_pointer": "/subjects/atlas:territory:MAC/atlas_geometry/position_count"
+    },
+    {
+      "metric_id": "mac_geoboundaries_coordinate_pair_count",
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "json_pointer": "/subjects/atlas:territory:MAC/geoboundaries_match/geometry/position_count"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "historical-aggregate-replay",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-china-sar-source-lineage/original-union-positive-control.json"
+    },
+    {
+      "method_id": "historical-aggregate-replay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-china-sar-source-lineage/original-union-negative-control.json"
+    },
+    {
+      "method_id": "sar-source-identity-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-china-sar-source-lineage/positive-control.json"
+    },
+    {
+      "method_id": "sar-source-identity-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-china-sar-source-lineage/negative-control.json"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "hkg_exact_member_join_count",
+      "value": 18,
+      "unit": "native source IDs"
+    },
+    {
+      "metric_id": "hkg_exact_member_join_fraction",
+      "value": 1,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "hk_current_official_roster_name_match_count",
+      "value": 18,
+      "unit": "district names"
+    },
+    {
+      "metric_id": "mac_unique_geoboundaries_native_id_count",
+      "value": 1,
+      "unit": "feature"
+    },
+    {
+      "metric_id": "mac_atlas_coordinate_pair_count",
+      "value": 65,
+      "unit": "coordinate pairs"
+    },
+    {
+      "metric_id": "mac_geoboundaries_coordinate_pair_count",
+      "value": 62,
+      "unit": "coordinate pairs"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "HKG and MAC remain distinct SAR territory identities under their legal sources; legal role does not establish Atlas geometry.",
+      "status": "supported",
+      "source_ids": [
+        "hk-basic-law-chapter-i"
+      ]
+    },
+    {
+      "text": "HKG member IDs join exactly to 18 Natural Earth rows and the current HAD district names match one-to-one at administrative name level.",
+      "status": "supported",
+      "source_ids": [
+        "natural-earth-admin1-hkg-mac",
+        "hk-had-district-boundary-api"
+      ]
+    },
+    {
+      "text": "The unnamed geoBoundaries predecessor is exactly ShapeID 17275852B34966799109471 in the retained CHN ADM2 source, but its current legal correspondence and contribution to Atlas geometry remain unverified.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-china-adm2-2017"
+      ]
+    },
+    {
+      "text": "Order 221 and Order 665/Notice 128/2015 establish authoritative boundary provenance/effective dates; retained Atlas geometries are not shown to reproduce the complete legal land-and-maritime envelopes.",
+      "status": "supported",
+      "source_ids": [
+        "hk-order-221",
+        "hk-landsd-ehkg-2026-area-map",
+        "macao-order-665-notice-128-2015"
+      ]
+    },
+    {
+      "text": "Exact aggregate transformation, legal geometry/topology, full islands/coastline and neighbor completeness, and lawful reusable Macao vector evidence remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-admin1-hkg-mac",
+        "geoboundaries-china-adm2-2017",
+        "hk-order-221",
+        "macao-order-665-notice-128-2015",
+        "macao-dsscu-coastline-context"
+      ]
+    },
+    {
+      "text": "The Hong Kong-Shenzhen and Macao-Zhuhai parent labels reflect Greater Bay Area planning groupings, not legal administrative/provincial parentage.",
+      "status": "supported",
+      "source_ids": [
+        "gba-outline-2019"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node data/regional-review/south-china-sar-source-lineage/reproduce-lineage.mjs",
+    "python3 data/regional-review/south-china-sar-source-lineage/reproduce-original-union.py",
+    "node scripts/evidence-quality.mjs data/regional-review/south-china-sar-source-lineage/evidence-quality.json",
+    "node scripts/check-handoff-scope.mjs --issue-file /tmp/worldatlas-issue-1225.json --body-file /tmp/worldatlas-pr-1225.md"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/lineage-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/original-union-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/reproduce-lineage.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/reproduce-original-union.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/source-register.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-boundaries.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-layer.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-china-sar-source-lineage/source/hong-kong-district-service.json",
+      "status": "added"
+    }
+  ]
+}

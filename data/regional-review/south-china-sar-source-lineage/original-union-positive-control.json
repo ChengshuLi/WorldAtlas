@@ -1,0 +1,65 @@
+{
+  "method_id": "historical-aggregate-replay",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "id": "HKG exact baseline member roster and valid replay",
+      "expected_ids": [
+        "HKG-5168",
+        "HKG-5170",
+        "HKG-5156",
+        "HKG-5153",
+        "HKG-5154",
+        "HKG-5155",
+        "HKG-5165",
+        "HKG-5169",
+        "HKG-5163",
+        "HKG-5162",
+        "HKG-5161",
+        "HKG-5158",
+        "HKG-5157",
+        "HKG-5159",
+        "HKG-5164",
+        "HKG-5166",
+        "HKG-5167",
+        "HKG-5160"
+      ],
+      "actual_ids": [
+        "HKG-5168",
+        "HKG-5170",
+        "HKG-5156",
+        "HKG-5153",
+        "HKG-5154",
+        "HKG-5155",
+        "HKG-5165",
+        "HKG-5169",
+        "HKG-5163",
+        "HKG-5162",
+        "HKG-5161",
+        "HKG-5158",
+        "HKG-5157",
+        "HKG-5159",
+        "HKG-5164",
+        "HKG-5166",
+        "HKG-5167",
+        "HKG-5160"
+      ],
+      "matched_member_count": 18,
+      "valid": true
+    },
+    {
+      "id": "MAC exact baseline member roster and valid replay",
+      "expected_ids": [
+        "gb:CHN:ADM2:17275852B34966799109471",
+        "MAC+00?"
+      ],
+      "actual_ids": [
+        "MAC+00?",
+        "gb:CHN:ADM2:17275852B34966799109471"
+      ],
+      "matched_member_count": 2,
+      "valid": true
+    }
+  ]
+}
