@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 
 OWN = Path(__file__).resolve().parent
@@ -24,10 +25,46 @@ def load_run(name: str) -> tuple[bytes, dict]:
     return data, document
 
 
-def write_new(path: Path, value: dict) -> None:
-    assert OWN in path.parent.resolve().parents and not path.exists() and not path.is_symlink()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+def write_admitted(rows: list[tuple[Path, dict]]) -> None:
+    """Admit every result and its aggregate bytes before exclusive creation."""
+    encoded = [(path, (json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+               for path, value in rows]
+    assert len({path for path, _ in encoded}) == len(encoded)
+    assert sum(len(data) for _, data in encoded) <= 2 * 1024 * 1024
+    directory = OWN / "controls"
+    assert directory.parent.resolve() == OWN.resolve()
+    assert not directory.is_symlink()
+    if os.path.lexists(directory):
+        assert directory.is_dir()
+    for path, data in encoded:
+        assert path.parent == directory and OWN in path.parent.resolve().parents
+        assert len(data) <= 1024 * 1024
+        assert not os.path.lexists(path), f"Refuse existing output: {path}"
+    if not directory.exists():
+        directory.mkdir(mode=0o755)
+
+    created: list[tuple[Path, int, int]] = []
+    try:
+        for path, data in encoded:
+            fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0), 0o644)
+            st = os.fstat(fd)
+            created.append((path, st.st_dev, st.st_ino))
+            try:
+                offset = 0
+                while offset < len(data):
+                    offset += os.write(fd, data[offset:])
+                os.fsync(fd)
+            finally:
+                os.close(fd)
+    except Exception:
+        for path, device, inode in reversed(created):
+            try:
+                st = path.lstat()
+                if (st.st_dev, st.st_ino) == (device, inode):
+                    path.unlink()
+            except FileNotFoundError:
+                pass
+        raise
 
 
 def main() -> None:
@@ -89,8 +126,10 @@ def main() -> None:
         "rejected_adversarial_fixtures": adverse,
         "interpretation": "Every shifted, wrong-CRS, flipped-row, out-of-coverage, and refreshed-hash false-location control was rejected.",
     }
-    write_new(OWN / "controls/native-footprint-positive.json", positive)
-    write_new(OWN / "controls/native-footprint-negative.json", negative)
+    write_admitted([
+        (OWN / "controls/native-footprint-positive.json", positive),
+        (OWN / "controls/native-footprint-negative.json", negative),
+    ])
     print(json.dumps({"status": "passed", "runs": dict(zip(RUNS, hashes)), "controls": [
         "controls/native-footprint-positive.json", "controls/native-footprint-negative.json"]}, indent=2))
 
