@@ -1,5 +1,6 @@
 """Actual projection, admission and paired-report metadata controls."""
 import contextlib,io,json,pathlib,sys,uuid
+sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 import refresh
 b=refresh.bio;Q=refresh.Q
 repo=pathlib.Path(refresh.git(pathlib.Path.cwd(),'rev-parse','--show-toplevel').decode().strip());head=refresh.git(repo,'rev-parse','HEAD').decode().strip();destination=repo/Q/'vintages'/sys.argv[1]
