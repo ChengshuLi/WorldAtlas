@@ -30,7 +30,9 @@ node coordination/engineering/ci-setup-1543-20261008/compare-transport.mjs 1547 
 
 It requires the existing local GitHub credential, never prints it, creates bounded
 transport scratch in the working checkout, removes that scratch and retains small
-reports under `.cache`. Current heads can change; a different head is a different
+reports in a fresh exclusive `.cache/quota-probe-*` directory. At most two distinct
+PRs are accepted per run; failed probes remove only their newly owned scratch and
+never publish partial comparison reports. Current heads can change; a different head is a different
 observation. No candidate code, hooks, provider actions or live scientific
 computation run. The retained results are observations, not expected outputs for
 a new reproduction. Missing local objects fail rather than being assumed valid.

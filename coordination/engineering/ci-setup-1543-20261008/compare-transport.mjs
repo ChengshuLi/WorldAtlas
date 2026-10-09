@@ -1,17 +1,22 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {runPREvidence,checkPREvidence} from '../../../scripts/check-pr-evidence.mjs';
 import {githubAPI} from '../../../scripts/issue-claim-contract.mjs';
 const repo='ChengshuLi/WorldAtlas';
-const token=execFileSync('gh',['auth','token'],{encoding:'utf8'}).trim();
 const numbers=process.argv.slice(2).map(Number);
-if(!numbers.length||numbers.some(number=>!Number.isSafeInteger(number)||number<1))throw Error('Supply explicit current PR numbers; this probe performs read-only authenticated downloads');
-fs.mkdirSync('.cache',{recursive:true});
+if(!numbers.length||numbers.length>2||new Set(numbers).size!==numbers.length||numbers.some(number=>!Number.isSafeInteger(number)||number<1))throw Error('Supply explicit current PR numbers; this probe performs read-only authenticated downloads');
+const root=fs.realpathSync(process.cwd()),cache=path.join(root,'.cache');
+if(fs.lstatSync(cache,{throwIfNoEntry:false})&&(!fs.lstatSync(cache).isDirectory()||fs.realpathSync(cache)!==cache))throw Error('Ordinary owned cache required');
+fs.mkdirSync(cache,{recursive:true});
+const destination=fs.mkdtempSync(path.join(cache,'quota-probe-')),reports=[];
+try{
+const token=execFileSync('gh',['auth','token'],{encoding:'utf8'}).trim();
 for(const number of numbers){
  const pr=JSON.parse(execFileSync('gh',['api',`repos/${repo}/pulls/${number}`],{encoding:'utf8'}));
  const event={repository:{full_name:repo},pull_request:{number,head:{sha:pr.head.sha}}};
  const captured=new Map();
- const result=await runPREvidence({event,env:{GITHUB_REPOSITORY:repo,GH_TOKEN:token},directory:process.cwd(),
+ const result=await runPREvidence({event,env:{GITHUB_REPOSITORY:repo,GH_TOKEN:token},directory:destination,
   apiFactory:(token,options)=>{const raw=githubAPI(token,options);return async(route,...rest)=>{const data=await raw(route,...rest);captured.set(route,data);return data;};}});
  let calls=0,blobs=0;
  const baseline=await checkPREvidence({event,api:async(route,method='GET')=>{
@@ -28,5 +33,11 @@ for(const number of numbers){
   new_path_actual_api:result.request_accounting,new_path_actual_transport:result.immutable_transport,
   identical_validation_result:true,limits:result.limits,
   measurement:'New path real remote reads using local credential; old path offline replay of same metadata and exact Git blobs. Not hosted installation quota measurement.'};
- fs.writeFileSync(`.cache/p0-pr-${number}-comparison.json`,JSON.stringify(row,null,2)+'\n');console.log(JSON.stringify(row));
+ reports.push(row);
 }
+// Reports publish only after every requested proof succeeds; existing reports
+// and durable evidence are never opened for writing.
+for(const row of reports)fs.writeFileSync(path.join(destination,`pr-${row.pr}-comparison.json`),JSON.stringify(row,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({destination,reports}));
+}catch(error){fs.rmSync(destination,{recursive:true,force:true});throw error;}
+
