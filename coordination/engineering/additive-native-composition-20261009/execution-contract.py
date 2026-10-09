@@ -8,7 +8,7 @@ def stat_pin(pin):
  p=pathlib.Path(pin['path']);assert p.is_absolute() and '..' not in p.parts
  for a in [p,*p.parents]:assert not a.is_symlink()
  s=p.stat();assert p.is_file() and s.st_size==pin['bytes'] and s.st_mode&0o777==pin['mode']
- assert type(pin['bytes']) is int and 0<pin['bytes']<=PHASE and len(pin['sha256'])==64
+ assert type(pin['bytes']) is int and 0<=pin['bytes']<=PHASE and len(pin['sha256'])==64
  return s
 
 def authenticate_file(pin):
