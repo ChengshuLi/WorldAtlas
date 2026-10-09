@@ -1,0 +1,58 @@
+{
+  "pr": 1552,
+  "head": "e2c3887f76e62ed38eec2577171dad0e285a411d",
+  "baseline": "664dfe7a682fb3838ce827600792c832235a238a",
+  "status": "limited",
+  "changed_files": 17,
+  "manifest_sha256": "00a9b0be3bb334f7d267fe493a467ae509b2361230c8a0a0d00f682df48c250f",
+  "old_path_simulated_api_attempts": 228,
+  "old_path_simulated_blob_attempts": 215,
+  "new_path_actual_api": {
+    "phase": "premerge-evidence",
+    "actual_http_attempts": 14,
+    "counts": {
+      "GET:pulls:200": 2,
+      "GET:comments:200": 1,
+      "GET:issues:200": 1,
+      "GET:immutable-metadata:200": 8,
+      "GET:immutable-blob:200": 1,
+      "GET:repository-authority:200": 1
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4820,
+        "reset": 1791510333
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4805,
+        "reset": 1791510333
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4805,
+        "reset": 1791510333
+      }
+    }
+  },
+  "new_path_actual_transport": [
+    {
+      "blob_count": 151,
+      "decoded_bytes": 167565493
+    }
+  ],
+  "identical_validation_result": true,
+  "limits": [
+    "jrc-tiles: No duplicate rasters are included in this erratum. The current retrieval is exact-byte verified against the earlier stored files; complete corrected monthly pixel counts remain unexecuted because the full decoded phase exceeds the complete-operation cap.",
+    "jrc-access: A page capture establishes what the official site said at capture time, not future terms or full scientific fitness.",
+    "jrc-guide: Official guide values are interpreted as monthly observations; they do not classify whole components.",
+    "atlas-scope: Atlas parent and source-contact lineage is identity/hierarchy context, not independent adjudication of territorial entitlement or the physical component boundary.",
+    "geoboundaries-esp: The simplified administrative product is contextual source granularity and does not prove effective boundary date or physical component ownership.",
+    "geoboundaries-prt: The simplified administrative product is contextual source granularity and does not prove effective boundary date or physical component ownership.",
+    "mapa-current: Joins do not restore the missing historical Atlas source bytes or prove historical boundaries.",
+    "apa-wfd: Planning lines are not water-surface polygons, wetted widths or a complete water/land reference.",
+    "miteco-phc: Anti-automation challenge was not bypassed; no MITECO geometry is available for analysis."
+  ],
+  "measurement": "New path real remote reads using local credential; old path offline replay of same metadata and exact Git blobs. Not hosted installation quota measurement."
+}

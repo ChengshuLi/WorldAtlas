@@ -1,0 +1,560 @@
+{
+  "version": 1,
+  "issue": 1543,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "664dfe7a682fb3838ce827600792c832235a238a",
+    "files": [
+      {
+        "path": ".github/workflows/deployment-budget.yml",
+        "bytes": 4473,
+        "sha256": "658526950edf4ed8fe90ad5ab5b96e2d5862af32904b511ba4f4abf94f5c859c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/handoff-scope.yml",
+        "bytes": 5253,
+        "sha256": "69fde03bef00ad07d646a84b0e8dfab4f1f4fc71722e678d6890ab0026609115",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/issue-claims.yml",
+        "bytes": 1710,
+        "sha256": "27277d9b292ae13f7d9f3639d5fcbfa531352d75f838a34256a810c726b70ed8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 9544,
+        "sha256": "d8d7b07bfbbbdf558308100cc9da7531ddc7d1a7ec73e9c24bc2bd7b9bd6c867",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 43533,
+        "sha256": "1352aa52a80a5f6c27edfa22b2d91737dc393602417f95e9e0dd7e4f519fd8ed",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/AUDITOR.txt",
+        "bytes": 11413,
+        "sha256": "22151df870b98623ed2d5d66f7bf1f938a93b315785e406eff680aeb24a62e08",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 14945,
+        "sha256": "1f0fb8e7e9a166350e37880c12a006e6e5f5243b2630eb4885835acf8c696d22",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 12430,
+        "sha256": "983fba274f28406bf7550aed8c0e2fba846825581e48a50a087a42efd81d8cf2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 13275,
+        "sha256": "be16bf5b30714379e71b3db909c4f8c73d61a8ff4953955764d15b6fa22bed58",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/PUBLISHER.txt",
+        "bytes": 8341,
+        "sha256": "97c136e59f3e530d2f23ad98fcfe23fc8bec9f41314b7c66ff78d150426eb35a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-integration-profile.mjs",
+        "bytes": 2796,
+        "sha256": "f42347e8e517b4054cb61d8344547ff4ca7a33c9570c59eecf140e84b2708bdd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-linked-github-issue.mjs",
+        "bytes": 2466,
+        "sha256": "434206e68fbb9fc7f8a436b62b6818169a768e1c066a14282fb0261e40273454",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-pr-evidence.mjs",
+        "bytes": 1514,
+        "sha256": "ae699bc1c626d6514cde4b2a6c076550daf6fb19debe39f1d52cd12209a2db60",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/classify-deployment-budget.mjs",
+        "bytes": 5793,
+        "sha256": "ff0821618996397b8367e48db0df17faa8d7127527867ba4005086fd2371b6a1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/github-quota.mjs",
+        "bytes": 1758,
+        "sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 17819,
+        "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-issue-claim.mjs",
+        "bytes": 4757,
+        "sha256": "1f79b67ad5caee35acab3c315095f52f940ec54e1950ef36c8aa78232b989a23",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/claim-readiness-races.test.mjs",
+        "bytes": 3831,
+        "sha256": "fc7a10bf8b73ddbbb2ffa24e46b7bd1f1c095aa4ba46f24b86211ac0c0b95857",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/deployment-budget-scope.test.mjs",
+        "bytes": 10581,
+        "sha256": "1c9d01740f9692085b4ea4f41332575572c6740b290f8e84055c6bb913aecea8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/github-quota.test.mjs",
+        "bytes": 5885,
+        "sha256": "a55ec32f91052bece03d92214699abfb6ccec48431d0165e596916add4474d0d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 21870,
+        "sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/git-blob-transport.mjs",
+        "bytes": 4576,
+        "sha256": "f77d927e5f4096f03518c5d785cfde08952909597b5a429b12e3b118096f4c1c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 28506,
+        "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 286,
+        "sha256": "ea67d5b8cea88fb6aa5e48366923e06cc06f10977ba320684e8fd04a21d659c2",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "bytes": 5133,
+      "sha256": "cc6b3b35b2da21b9483a86d77db0d22b37ebbc166ff0aba032cd5d4773284ddb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "bytes": 5511,
+      "sha256": "75e8ca673ee2f591bc56a15594c816460455d341b5d0df518944a283ae0014fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/issue-claims.yml",
+      "bytes": 1731,
+      "sha256": "df49629260f1b1e0ae6703177bd784aa3e6582ff390e65928756cada36bf8a91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 9725,
+      "sha256": "6392094b26c1d6c5e80df709d0dab167d3897a2f6c24c38459a3c953e6fffd2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/README.md",
+      "bytes": 4325,
+      "sha256": "e9603f019360e91651a7c4e8f9c01029d5cd8e51d22f8e08af847ce2ed6890d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/compare-transport.mjs",
+      "bytes": 3282,
+      "sha256": "5103880fa9d3d1479079f07c54046d774e5b42a64f4ee9630afe69ad08337daf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1547-comparison.json",
+      "bytes": 1903,
+      "sha256": "dbb01afa78e84f4574bd02c19f98dfc1a5e756f9a637ac2dc5f951e7132b2c7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1552-comparison.json",
+      "bytes": 2764,
+      "sha256": "6b211915a090149088e02f103c56503746c60cd90cb42635ee77996dcacf6d72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/quota-controls.log",
+      "bytes": 11510,
+      "sha256": "d087ffa330b0e074649b239e6e405c23581d5d87ff0bb764ef6287c0e3a0fb24",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 46511,
+      "sha256": "840413356a03572194af1086223536373925f58196692c5e06dc418cfdf71ace",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 11953,
+      "sha256": "88d189dac131a81522122c8b3a505cf296e6f61627a2e147fe3f729770f12eb9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 15485,
+      "sha256": "6b498027aa4032a0c72c40c8f5600a36935579617cd44ddf6b513ee78617fe9e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 12970,
+      "sha256": "e25891006afacbd2c4699b9a1358acb0f9884bfbb4cc137113bca37083d5b15f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 13815,
+      "sha256": "5bef09d202ee057a063c69cdb06f34318a5688720b3fcd29c615d1dd2bfba626",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 8881,
+      "sha256": "8713ffe0e9f48cc314b972f5e1695ef55a45e5dffec0d056a63a60264684cf6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "bytes": 3369,
+      "sha256": "61f7b4f139a9fef7785c1424ae96f96ed5fa40e2ca801256cb610e78e4b8d11b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-linked-github-issue.mjs",
+      "bytes": 3182,
+      "sha256": "d6f0fcd561fd760418f46ed67fde65d77ec8cff872ecef204fc7a9f082e72d3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-pr-evidence.mjs",
+      "bytes": 3414,
+      "sha256": "56bf7de3ed4e6a9345403c1a5551d344285a86743ad9ecad6774668b825a14c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "bytes": 7280,
+      "sha256": "7cdf02b7baa81bd63d73905095870eadfb872569df0d146595979db32e499df3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "bytes": 2743,
+      "sha256": "b58a3f5a858ccd9a2b3fb5207be30265fd69201a3d2d5a46f7c82ce484fb4690",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 17868,
+      "sha256": "3713189e0768249fb9b10c5c847a192c7c78419dd1bfbb649874157c896cc7cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-issue-claim.mjs",
+      "bytes": 6400,
+      "sha256": "dd2aa9173cff9d3fecd8a75643de5f454e22e6efe9e60ac0e3839f0f62502cbb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "bytes": 3891,
+      "sha256": "16a51678a08ba83a6b420be1dbcfef318e8a9ae2ddd2001ceb9236667aa7e0ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 12163,
+      "sha256": "3801b2f978e00fa07ab7cead1f0c8a75c0783500a995e07be0e6463eb8343a8a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/github-quota.test.mjs",
+      "bytes": 8815,
+      "sha256": "e57f96f5bf340a0420adbf74edcbbe4917f07e8a07f451aa655a5459c37e4456",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-claim-quota.test.mjs",
+      "bytes": 4674,
+      "sha256": "5254bb46fd6b4adb0214229ef8271a72fb710ccb8b34d06318ff1cc36b01370b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/pr-evidence-transport.test.mjs",
+      "bytes": 7881,
+      "sha256": "47972d415297f55af5cae2425c2faf3b300372adf2aa8b4bdb1c5322a6a3bc01",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "quota-boundary",
+      "kind": "code",
+      "description": "Real entry-point quota/custody/race controls and remote Git transport compared with offline request replay using identical metadata and exact blob bytes; baseline validator unchanged.",
+      "software": "Node 24 and Git",
+      "units": "HTTP requests"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "pr-1547-old-requests",
+      "value": 347,
+      "unit": "HTTP requests",
+      "vintage": "current",
+      "input_sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a"
+    },
+    {
+      "id": "pr-1547-new-requests",
+      "value": 25,
+      "unit": "HTTP requests",
+      "vintage": "current",
+      "input_sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a"
+    },
+    {
+      "id": "pr-1552-old-requests",
+      "value": 228,
+      "unit": "HTTP requests",
+      "vintage": "current",
+      "input_sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a"
+    },
+    {
+      "id": "pr-1552-new-requests",
+      "value": 14,
+      "unit": "HTTP requests",
+      "vintage": "current",
+      "input_sha256": "99dc50b386a211cdb8e24285986cde3d94acb71eb69a9e3c97603faba09fb0b6",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "pr-1547-old-requests",
+      "value": 347,
+      "unit": "HTTP requests"
+    },
+    {
+      "metric_id": "pr-1547-new-requests",
+      "value": 25,
+      "unit": "HTTP requests"
+    },
+    {
+      "metric_id": "pr-1552-old-requests",
+      "value": 228,
+      "unit": "HTTP requests"
+    },
+    {
+      "metric_id": "pr-1552-new-requests",
+      "value": 14,
+      "unit": "HTTP requests"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Two observed PR evidence paths produce identical validation conclusions and source limits with fewer REST requests. Local credential observations do not prove hosted installation recovery or unlimited global capacity.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/pr-evidence-transport.test.mjs test/git-blob-transport.test.mjs test/premerge-evidence.test.mjs test/github-quota.test.mjs test/issue-claim-quota.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/claim-readiness-races.test.mjs test/trusted-workflow-checkouts.test.mjs test/handoff-scope.test.mjs test/integration-profile.test.mjs test/job-deadline.test.mjs",
+    "node coordination/engineering/ci-setup-1543-20261008/compare-transport.mjs 1547 1552"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "status": "modified",
+      "original_sha256": "658526950edf4ed8fe90ad5ab5b96e2d5862af32904b511ba4f4abf94f5c859c"
+    },
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "status": "modified",
+      "original_sha256": "69fde03bef00ad07d646a84b0e8dfab4f1f4fc71722e678d6890ab0026609115"
+    },
+    {
+      "path": ".github/workflows/issue-claims.yml",
+      "status": "modified",
+      "original_sha256": "27277d9b292ae13f7d9f3639d5fcbfa531352d75f838a34256a810c726b70ed8"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "d8d7b07bfbbbdf558308100cc9da7531ddc7d1a7ec73e9c24bc2bd7b9bd6c867"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/compare-transport.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1547-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1552-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/quota-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "1352aa52a80a5f6c27edfa22b2d91737dc393602417f95e9e0dd7e4f519fd8ed"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "modified",
+      "original_sha256": "22151df870b98623ed2d5d66f7bf1f938a93b315785e406eff680aeb24a62e08"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "1f0fb8e7e9a166350e37880c12a006e6e5f5243b2630eb4885835acf8c696d22"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "983fba274f28406bf7550aed8c0e2fba846825581e48a50a087a42efd81d8cf2"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "be16bf5b30714379e71b3db909c4f8c73d61a8ff4953955764d15b6fa22bed58"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "modified",
+      "original_sha256": "97c136e59f3e530d2f23ad98fcfe23fc8bec9f41314b7c66ff78d150426eb35a"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "status": "modified",
+      "original_sha256": "f42347e8e517b4054cb61d8344547ff4ca7a33c9570c59eecf140e84b2708bdd"
+    },
+    {
+      "path": "scripts/check-linked-github-issue.mjs",
+      "status": "modified",
+      "original_sha256": "434206e68fbb9fc7f8a436b62b6818169a768e1c066a14282fb0261e40273454"
+    },
+    {
+      "path": "scripts/check-pr-evidence.mjs",
+      "status": "modified",
+      "original_sha256": "ae699bc1c626d6514cde4b2a6c076550daf6fb19debe39f1d52cd12209a2db60"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "status": "modified",
+      "original_sha256": "ff0821618996397b8367e48db0df17faa8d7127527867ba4005086fd2371b6a1"
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "status": "modified",
+      "original_sha256": "caffcd1d1fb28f61715b58317816f1a214e6384fb36361222a822fe2d95f9a23"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504"
+    },
+    {
+      "path": "scripts/run-issue-claim.mjs",
+      "status": "modified",
+      "original_sha256": "1f79b67ad5caee35acab3c315095f52f940ec54e1950ef36c8aa78232b989a23"
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "status": "modified",
+      "original_sha256": "fc7a10bf8b73ddbbb2ffa24e46b7bd1f1c095aa4ba46f24b86211ac0c0b95857"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "1c9d01740f9692085b4ea4f41332575572c6740b290f8e84055c6bb913aecea8"
+    },
+    {
+      "path": "test/github-quota.test.mjs",
+      "status": "modified",
+      "original_sha256": "a55ec32f91052bece03d92214699abfb6ccec48431d0165e596916add4474d0d"
+    },
+    {
+      "path": "test/issue-claim-quota.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/pr-evidence-transport.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-setup-1543-20261008/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "pr-1547-old-requests",
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1547-comparison.json",
+      "json_pointer": "/old_path_simulated_api_attempts"
+    },
+    {
+      "metric_id": "pr-1547-new-requests",
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1547-comparison.json",
+      "json_pointer": "/new_path_actual_api/actual_http_attempts"
+    },
+    {
+      "metric_id": "pr-1552-old-requests",
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1552-comparison.json",
+      "json_pointer": "/old_path_simulated_api_attempts"
+    },
+    {
+      "metric_id": "pr-1552-new-requests",
+      "path": "coordination/engineering/ci-setup-1543-20261008/pr-1552-comparison.json",
+      "json_pointer": "/new_path_actual_api/actual_http_attempts"
+    }
+  ]
+}

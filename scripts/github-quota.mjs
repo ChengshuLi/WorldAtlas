@@ -21,14 +21,31 @@ export function requestCategory(route) {
   return 'repository-authority';
 }
 export function requestAccounting(phase) {
-  const counts = {};
-  return {observe({route, method, status}) {
+  const counts = {};let first,last,lowest;
+  return {observe({route, method, status, capacity}) {
     const key = `${method}:${requestCategory(route)}:${status}`;
     counts[key] = (counts[key] ?? 0) + 1;
-  }, receipt() {return {phase, actual_http_attempts: Object.values(counts).reduce((a,b)=>a+b,0), counts: {...counts}};}};
+    // Observe existing responses; never add a polling request or retain headers.
+    if(capacity?.resource==='core'&&['limit','remaining','reset'].every(key=>Number.isSafeInteger(capacity[key]))&&
+       capacity.limit>0&&capacity.remaining>=0&&capacity.remaining<=capacity.limit&&capacity.reset>0){
+      const row={limit:capacity.limit,remaining:capacity.remaining,reset:capacity.reset};
+      first??=row;last=row;
+      if(!lowest||row.remaining<lowest.remaining)lowest=row;
+    }
+  }, receipt() {return {phase, actual_http_attempts: Object.values(counts).reduce((a,b)=>a+b,0), counts: {...counts},
+    ...(first?{observed_repository_core:{first,last,lowest_remaining:lowest}}:{})};}};
 }
 export function copyAPIFeatures(target, source) {
   for (const name of ['readRepositoryCapacity', 'prefetchGitBlobs', 'setHTTPAdmission', 'hasGitBlobs'])
     if (typeof source[name] === 'function') target[name] = source[name].bind(source);
   return target;
+}
+
+// Drain concurrently launched bounded reads before recording a refusal. Otherwise
+// a fast rejection leaves both the HTTP receipt and snapshot incomplete.
+export async function completeReads(promises) {
+  const rows=await Promise.allSettled(promises);
+  const failure=rows.find(row=>row.status==='rejected');
+  if(failure)throw failure.reason;
+  return rows.map(row=>row.value);
 }

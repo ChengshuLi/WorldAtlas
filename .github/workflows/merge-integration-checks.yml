@@ -5,6 +5,10 @@ on:
 permissions:
   contents: read
   pull-requests: read
+# Superseded read-only PR tests cannot satisfy the new exact head.
+concurrency:
+  group: worldatlas-regression-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 jobs:
   profile:
     runs-on: ubuntu-latest

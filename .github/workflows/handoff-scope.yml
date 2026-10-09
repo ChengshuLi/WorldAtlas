@@ -10,6 +10,12 @@ permissions:
   issues: read
   pull-requests: read
 
+# Superseded heads cannot satisfy current-head evidence. These jobs are
+# read-only: cancel duplicate downloads instead of spending shared quota.
+concurrency:
+  group: worldatlas-handoff-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   evidence:
     runs-on: ubuntu-latest

@@ -77,3 +77,41 @@ test('final deadline is checked before a retry actually sends HTTP',async()=>{
   await assert.rejects(budget.api('/repos/a/b/pulls/1'),/deadline/);assert.equal(calls,1);budget.dispose();
  });
 });
+
+test('accounting observes real repository headers without an extra capacity poll or retained secrets',async()=>{
+ const accounting=requestAccounting('probe');let calls=0;
+ await mocked(async()=>{calls++;return response(200,calls===1?'42':'39',{'authorization':'private-secret'});},async()=>{
+  const api=githubAPI('private-secret',{onRequest:accounting.observe});
+  await api('/repos/a/b/pulls/1');await api('/repos/a/b/issues/2');
+ });
+ const receipt=accounting.receipt();assert.equal(calls,2);assert.equal(receipt.actual_http_attempts,2);
+ assert.deepEqual(receipt.observed_repository_core.first,{limit:1000,remaining:42,reset:100});
+ assert.deepEqual(receipt.observed_repository_core.last,{limit:1000,remaining:39,reset:100});
+ assert.equal(receipt.observed_repository_core.lowest_remaining.remaining,39);
+ assert(!JSON.stringify(receipt).includes('private-secret'));
+});
+test('unknown or wrong-resource headers cannot manufacture an observed repository quota',()=>{
+ const accounting=requestAccounting('probe');
+ for(const capacity of [{resource:'core',limit:1000,remaining:undefined,reset:100},{resource:'search',limit:30,remaining:3,reset:100},
+  {resource:'core',limit:1000,remaining:1001,reset:100}])accounting.observe({route:'/repos/a/b',method:'GET',status:200,capacity});
+ assert.equal(accounting.receipt().observed_repository_core,undefined);assert.equal(accounting.receipt().actual_http_attempts,3);
+});
+
+test('deployment classification quota refusal does not authorize a wasteful full-build fallback',async()=>{
+ const {deploymentBudgetProfile,githubBudgetAPI}=await import('../scripts/classify-deployment-budget.mjs');
+ const event={repository:{full_name:'a/b'},pull_request:{number:1,head:{sha:'a'.repeat(40)},base:{sha:'b'.repeat(40)}}};
+ const run=remaining=>deploymentBudgetProfile({event,eventName:'pull_request',repository:'a/b',
+  api:route=>githubBudgetAPI(route,{token:'private',fetchImpl:async()=>response(403,remaining)})});
+ const quota=await run('0');assert.equal(quota.blocked,true);assert.equal(quota.full,true);assert.equal(quota.api_error.rate_remaining,'0');
+ assert.equal(quota.fallback,true);assert(quota.retry_at);
+ const ordinary=await run('500');assert.equal(ordinary.blocked,undefined);assert.equal(ordinary.full,true);assert.equal(ordinary.fallback,true);
+});
+
+test('deployment transport ambiguity counts its attempt without inventing quota or retrying',async()=>{
+ const {githubBudgetAPI}=await import('../scripts/classify-deployment-budget.mjs');
+ const accounting=requestAccounting('deployment-classifier');let attempts=0;
+ await assert.rejects(githubBudgetAPI('/repos/a/b',{token:'private',onRequest:accounting.observe,
+  fetchImpl:async()=>{attempts++;throw Error('transport lost');}}),/transport lost/);
+ assert.equal(attempts,1);assert.equal(accounting.receipt().actual_http_attempts,1);
+ assert.equal(accounting.receipt().counts['GET:repository-authority:transport-error'],1);
+});

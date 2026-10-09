@@ -1,4 +1,4 @@
-import {quotaDelay} from './github-quota.mjs';
+import {quotaDelay,completeReads} from './github-quota.mjs';
 import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
@@ -130,7 +130,7 @@ export async function githubPages(api,route){
 export async function linkedPulls(api,repo,number){
  const timeline=await githubPages(api,`/repos/${repo}/issues/${number}/timeline`),ids=new Set();
  for(const event of timeline){const source=event.source?.issue;if(!source?.pull_request)continue;try{if(validateIssuePRBody(source.body??'').github_issue===number)ids.add(source.number);}catch{}}
- return Promise.all([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
+ return completeReads([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
 export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining} = {}){
  if(!token)throw Error('Read/write GitHub token required');
@@ -145,9 +145,10 @@ export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Da
   let response;
   try {response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS)});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
-  onRequest({route, method, status: response.status});
   const headerNumber = name => {const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
-  observeCapacity({limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')});
+  const capacity={limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')};
+  onRequest({route,method,status:response.status,capacity});
+  observeCapacity(capacity);
   if(!response.ok){
    const error=Error(`GitHub ${method} ${route} failed (HTTP ${response.status})`);
    let payload;try{payload=await response.json();}catch{/* Keep the actual HTTP rejection even without a JSON message. */}
