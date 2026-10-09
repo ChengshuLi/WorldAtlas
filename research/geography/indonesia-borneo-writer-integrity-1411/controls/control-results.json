@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "issue": 1557,
+  "command": "python3 -m unittest discover -s research/geography/indonesia-borneo-writer-integrity-1411 -p test_*.py -v",
+  "result": {
+    "passed": 11,
+    "total": 11,
+    "log_path": "research/geography/indonesia-borneo-writer-integrity-1411/controls/test-results.txt",
+    "log_sha256": "bbbc20b4c2b7f536d940416c9dd8ee47729b3ea63cb361e4fdbfee3fc322994c"
+  },
+  "tests": [
+    "test_big_changed_comparison_product_is_rejected (test_writer_integrity.OutputAdmissionTests.test_big_changed_comparison_product_is_rejected)",
+    "test_big_component_identity_controls_reject_missing_duplicate_fabricated (test_writer_integrity.OutputAdmissionTests.test_big_component_identity_controls_reject_missing_duplicate_fabricated)",
+    "test_big_refusal_precedes_both_source_reader_and_geometry_computer (test_writer_integrity.OutputAdmissionTests.test_big_refusal_precedes_both_source_reader_and_geometry_computer)",
+    "test_big_selection_tamper_refuses_before_external_source_read (test_writer_integrity.OutputAdmissionTests.test_big_selection_tamper_refuses_before_external_source_read)",
+    "test_big_source_subject_controls_reject_missing_duplicate_fabricated (test_writer_integrity.OutputAdmissionTests.test_big_source_subject_controls_reject_missing_duplicate_fabricated)",
+    "test_identity_changed_comparison_product_is_rejected (test_writer_integrity.OutputAdmissionTests.test_identity_changed_comparison_product_is_rejected)",
+    "test_identity_refuses_tampered_pinned_input_without_product_or_receipt (test_writer_integrity.OutputAdmissionTests.test_identity_refuses_tampered_pinned_input_without_product_or_receipt)",
+    "test_identity_semantics_reject_missing_duplicate_and_fabricated_subjects (test_writer_integrity.OutputAdmissionTests.test_identity_semantics_reject_missing_duplicate_and_fabricated_subjects)",
+    "test_persistent_occupied_output_sentinels_and_dangling_link_survive_both_writers (test_writer_integrity.OutputAdmissionTests.test_persistent_occupied_output_sentinels_and_dangling_link_survive_both_writers)",
+    "test_successful_synthetic_big_writer_fixture_receipt_detects_changed_product (test_writer_integrity.OutputAdmissionTests.test_successful_synthetic_big_writer_fixture_receipt_detects_changed_product)",
+    "test_traversal_dangling_leaf_ordinary_file_and_symlink_ancestor_refuse (test_writer_integrity.OutputAdmissionTests.test_traversal_dangling_leaf_ordinary_file_and_symlink_ancestor_refuse)"
+  ],
+  "persistent_sentinels": {
+    "controls/fixtures/runs/run-occupied/big-ksp-overlay-assessment.json": "d6dc0b8277812fc95723e8956ee6ec86f1399d7bf7f207259f986955701aac75",
+    "controls/fixtures/runs/run-occupied/completion.json": "d0c754fa04ca81ab887633bf303a5750956cc483b87d08ccac011a3ccba4d3ff",
+    "controls/fixtures/runs/run-occupied/subject-inventory.json": "101b713aa0645b266745ceb1ce43577e10a0e4cb4715462f6ccbce8bba5c2828",
+    "controls/fixtures/runs/run-occupied/subject-registry.json": "e327ac5435014f763488d91ac5584b1afc64b3ca6770a654cc9ef263c46f87f5"
+  },
+  "temporary_link_fixtures": {
+    "dangling_leaf_target": "run-missing-target",
+    "dangling_ancestor_target": "../ancestor-target",
+    "target_creation_observed": false
+  },
+  "big_output_refusal_callbacks": {
+    "local_source_read_count": 0,
+    "geometry_compute_count": 0
+  },
+  "synthetic_big_output_fixture": "Writer publication/receipt only; no geometry or source claim.",
+  "input_integrity": "Identity family-row tamper and retained selection-snapshot tamper both refused before product or success-receipt publication.",
+  "subject_controls": "Missing, duplicate, and fabricated component IDs and BIG object IDs are rejected; all 8 current contact identities are pinned/read-only."
+}
