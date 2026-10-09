@@ -26,6 +26,7 @@ try {
  reject(()=>pixelNativeGroup(admission,{...plan,parts:[{...pairs[0],before:{...pairs[0].before,offset:2}},...pairs.slice(1)]}));
  reject(()=>pixelNativeGroup(admission,{...plan,parts:[{...pairs[0],before:{...pairs[0].before,original_path:'foreign'}},...pairs.slice(1)]}));
  reject(()=>pixelNativeGroup(admission,{...plan,parts:[{...pairs[0],after:{...pairs[0].after,sha256:'0'.repeat(64)}},...pairs.slice(1)]}));
+ reject(()=>pixelNativeGroup(admission,{...plan,parts:[{...pairs[0],after:{...pairs[0].after,path:path.join(root,'foreign-current')}},...pairs.slice(1)]}));
  const originalOpen=fs.openSync;let opens=0;fs.openSync=(...args)=>{opens++;return originalOpen(...args);};
  try{reject(()=>producePixelNativeGroup({},path.join(process.cwd(),'.cache','..','..','escaped')));reject(()=>producePixelNativeGroup({},root));assert.equal(opens,0);}finally{fs.openSync=originalOpen;}
  console.log(JSON.stringify({positive:1,negative,actual_full_group_boundary:true,destination_zero_body_opens:true,synthetic_fixture_not_world:true}));

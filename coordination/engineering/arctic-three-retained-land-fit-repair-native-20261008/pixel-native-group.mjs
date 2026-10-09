@@ -26,6 +26,9 @@ export function pixelNativeGroup(admission, plan) {
   for(const key of ['kind','offset','words','bytes','sha256','decoded_bytes','decoded_sha256','encoding'])assert.equal(old[key],expected[i][key]);
   assert.equal(old.original_path,expected[i].path);
   assert.equal(current.offset,old.offset);assert.equal(current.words,old.words);
+  const replacements={1048576:['fceeec44661182bb9344083dd8aefee195d521b982619602f55a4c4e21f84ce7','f52a0988fd97fb763e971e801beeead98750b07d3a91203c001b16fd19ccb703'],3145728:['51a2e4a95b922856870e644fcf1c2ec6685fc36d49a1ad684708d6df8e42b47b','7592fb5201a5fc0dc3624708a2bd6ffabca5b84e1d68023955a1b77fc96ad511']};
+  if(replacements[old.offset]){assert.notEqual(current.path,old.path);assert.equal(current.sha256,replacements[old.offset][0]);assert.equal(current.decoded_sha256,replacements[old.offset][1]);}
+  else assert.equal(current.path,old.path,'Only the two qualified whole replacement parts are allowed');
   const before=decodeInstalledWords(admission,old);
   const after=current.path===old.path?before:decodeInstalledWords(admission,current);
   if(current.path===old.path)for(const key of ['bytes','sha256','decoded_bytes','decoded_sha256'])assert.equal(current[key],old[key]);
