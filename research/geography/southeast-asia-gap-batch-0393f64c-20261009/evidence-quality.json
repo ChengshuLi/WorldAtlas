@@ -1,0 +1,1459 @@
+{
+  "version": 1,
+  "issue": 1641,
+  "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612",
+  "lane": "geography",
+  "subject_ids": [
+    "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+    "physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737",
+    "physical-component:2a6f76f2cc30dc3b93f08d59750b9519adc26ae7bd22a328683f5a048c2b4d8f",
+    "physical-component:2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff",
+    "physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da",
+    "physical-component:328987ce3f5504e7d598e7a94928a309cddbe9e00c774cd488dfdfb57bb585fe",
+    "physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f",
+    "physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2",
+    "physical-component:5e2faf09bde718e22120c26bc79f98ee620f8e47ccb3e93b96345f80cbc548bf",
+    "physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22",
+    "physical-component:6c46d18235a22c15683039d3346b55f1a7625a3ce49ead2111413d91d75362d2",
+    "physical-component:849377ccf645d794deaa1f43fd91ab9bfe9d9464c1c1cb31b19cf53b990291c4",
+    "physical-component:9094128c18d3075578719177328356ff5147b1abbe17e09626010f91b79aeea8",
+    "physical-component:98ba8cabf21ed4bdcfb0761cb6aabac54f7fd153a60f656a06587e2125cc8f36",
+    "physical-component:9c46373452264bbd5441d6a6349cab667177ff6ecfda374df366433502da9c61",
+    "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b",
+    "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b",
+    "physical-component:b90682fb902bb719879e69d1a161080cb46a7cd041cb3ad0c9bd963b5e1f4900",
+    "physical-component:b971f9d191cf018cfbaa158f4f32be07f9c8bbbd3ae248ddc1261fba50e8af94",
+    "physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8",
+    "physical-component:cd6c8035a1a2e8c52ab5b851b7ba26eb366acafd2babbbd82e149d7ea7e5c7e5",
+    "physical-component:dd50282d0498fe710bf1ecaf6ca06f22d97391356cfe8c17fb9d5c10b25d874e",
+    "physical-component:dd8aab5edb2689e1b07b799505f2c052799dd3d1f3770dd2d8ac668e0dfdffaf",
+    "physical-component:e499668746ebf62edfaef15068a437158e322c29a711aef7598f7e78a99148fb",
+    "physical-component:e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf",
+    "physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902",
+    "physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef",
+    "physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34",
+    "physical-component:f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc",
+    "physical-component:fa8aa714b724a4eef86de954326dcfd9cb04db5fdb0695a4e76b7e90b2f29966"
+  ],
+  "subject_ids_sha256": "247d1dc5c6fddb8b143d6d06dd834ddf565ae9e5833fb45aa4f3ff7f76338d02",
+  "baseline": {
+    "version": 2,
+    "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+    "files": [
+      {
+        "bytes": 300776,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/evidence-quality.json",
+        "sha256": "dd89a125dcada0d67cf059c173624a0e650837fbcce91101a55502d32ae58617"
+      },
+      {
+        "bytes": 498802,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-00.jsonl.gz",
+        "sha256": "0f69911a5aa0059b87d3f212fa2781ab1eb7cc29ca90f240160e737b5c0efd52",
+        "uncompressed_bytes": 8387419,
+        "uncompressed_sha256": "1d633aea36cae19ed2bd7ec2e0b3a6ade79c511554f4d24cc1a7e28448d07b44"
+      },
+      {
+        "bytes": 498718,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-01.jsonl.gz",
+        "sha256": "2e456c7326960b4c80a4b43190cb795061258b3b84a479cabaa1fc0a7df43223",
+        "uncompressed_bytes": 8387798,
+        "uncompressed_sha256": "ad13c342fece37637bd8076a12e897c74d10952030753e9e058eaa0a87b8ac51"
+      },
+      {
+        "bytes": 500311,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-02.jsonl.gz",
+        "sha256": "3fe5f77f95cf25ea1b37d3a33b1e43de058b673b1a90dc9cd42536b8182cc815",
+        "uncompressed_bytes": 8385740,
+        "uncompressed_sha256": "7a91780b9aac6f8d2899669d00e2d36ef211a4f4ca755a1d78178e12cc938734"
+      },
+      {
+        "bytes": 500737,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-03.jsonl.gz",
+        "sha256": "dcb722ea38d0c4e798683a2b83db048bbcfa9c5509b10ad5717b6ec373dece8b",
+        "uncompressed_bytes": 8387311,
+        "uncompressed_sha256": "04f5156d28a77cf77046109f2bc8142042dd5687789ee342ce26af69a9b9f492"
+      },
+      {
+        "bytes": 496755,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-04.jsonl.gz",
+        "sha256": "02bebd70f6ef295e36bac75738052467c840c98221b7d15ff0b559fe74bca8ed",
+        "uncompressed_bytes": 8387358,
+        "uncompressed_sha256": "d9eaac9d0c83b28ed00c8786916d970270bad0947fe678cb6e2bc5db24dd3a60"
+      },
+      {
+        "bytes": 500673,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-05.jsonl.gz",
+        "sha256": "008fce0d9ddc509dec2031a428a34207125ab17d6cca102b17e34cd773a0c4d0",
+        "uncompressed_bytes": 8387945,
+        "uncompressed_sha256": "9f7b0a1a52221abfaf28befcfcc48433d07799187c3da67d136ca4bdf407f1ae"
+      },
+      {
+        "bytes": 109571,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-06.jsonl.gz",
+        "sha256": "99e636a094512717d60b7457e5cbe8d4c61db8ea4f2baafc90538fc04d95da9b",
+        "uncompressed_bytes": 1792166,
+        "uncompressed_sha256": "287fb7968707eb9f46c1e9794f530609894dafb1ba18050dd67290d8b296f755"
+      },
+      {
+        "bytes": 1837915,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/membership-metrics.jsonl.gz",
+        "sha256": "3664149929a3d390c00a5f9bceae3410e6ac7b594f90443a76337abdaef25d9a",
+        "uncompressed_bytes": 14928567,
+        "uncompressed_sha256": "39aeb6b1fced68a50e2d3b4441bebf37e19e425dee5e69a23f4e721abde641c5"
+      },
+      {
+        "bytes": 501171,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-00.jsonl.gz",
+        "sha256": "8da3e9bb4f3d5fa5e8d30fb137c31c1426753df428c21e4933817c686a3c7c6b",
+        "uncompressed_bytes": 8387943,
+        "uncompressed_sha256": "b617b4a748d1e5586e621a21d6aee685bcb0510ac23b03fa45af67fd152bc82f"
+      },
+      {
+        "bytes": 498988,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-01.jsonl.gz",
+        "sha256": "4ea929882b644f66e46c911940ac838698c9ee0433bb4f34ab2f8d82d8085b36",
+        "uncompressed_bytes": 8385820,
+        "uncompressed_sha256": "3131a2c0f47509b0b65f7b0ddddc44db6c66980e9a72047d3b1356fce834533c"
+      },
+      {
+        "bytes": 500488,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-02.jsonl.gz",
+        "sha256": "e8a5dfa8afcba492bd74262262a52495f6718a057942ebbff0e25f76366b12bd",
+        "uncompressed_bytes": 8385335,
+        "uncompressed_sha256": "5d02915e2f8af61d6e634013f97ad434f380fdaa732a007ac76020b5baf6310a"
+      },
+      {
+        "bytes": 499489,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-03.jsonl.gz",
+        "sha256": "ad957279acf029f7b912e0d209d076eac6dce470dc0d54d76ad8fafd3c0aa3f4",
+        "uncompressed_bytes": 8385924,
+        "uncompressed_sha256": "c3cfbdf0a632cca8fba55b5203b1b913c4503d61d984d145dffe42bfc617e69e"
+      },
+      {
+        "bytes": 501975,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-04.jsonl.gz",
+        "sha256": "28137485d9d2533e94f9fbc7e1420e0775599f0da9ff94a2bcabcd3adf9f39ca",
+        "uncompressed_bytes": 8388206,
+        "uncompressed_sha256": "c826d6f6b676f37a003260019ac855557c0619b1e7093989668853f59c8980a7"
+      },
+      {
+        "bytes": 502473,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-05.jsonl.gz",
+        "sha256": "769cdf359789f13a167bab505ce995a7f9d73afb57505fb8387721f33464b08a",
+        "uncompressed_bytes": 8386932,
+        "uncompressed_sha256": "e43d30093349c2b4dd395f2fad700887658daecb52741d2b96c1aa21136f3ccf"
+      },
+      {
+        "bytes": 107849,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-06.jsonl.gz",
+        "sha256": "388c584b849b22819e41b814bb702d721fa7c74017480a1d14547294dd450769",
+        "uncompressed_bytes": 1800593,
+        "uncompressed_sha256": "62dd0d4da2b0abb527bd80fc5424928f733e730568d90b5b383e929c93c1144c"
+      },
+      {
+        "bytes": 1835366,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/membership-metrics.jsonl.gz",
+        "sha256": "599724d621b6f7db9b1da9b9a16da06ab564b27ebef36c4c6806649f68df4393",
+        "uncompressed_bytes": 14906604,
+        "uncompressed_sha256": "b5f791fff37da2776cac5071210a103c41bda272d9872922c53daab4dbfe0402"
+      },
+      {
+        "bytes": 499144,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-00.jsonl.gz",
+        "sha256": "d7fed22592ec8856a1ac5e0bf06e7dffe57d25377bc256d01b2438f3944196e2",
+        "uncompressed_bytes": 8387292,
+        "uncompressed_sha256": "f68f3ab2b6a6965a89ab37d48ec10af84f1efd0deb541f60b76a126bd9506cec"
+      },
+      {
+        "bytes": 496907,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-01.jsonl.gz",
+        "sha256": "a6e8e3fc5fb28856a16d064a37f13a1822a9741529115e63e09d1f7efabb42f2",
+        "uncompressed_bytes": 8388317,
+        "uncompressed_sha256": "f2919d7a219372f23bf3619abb219a5bacf8e791240dd633824cd2e4bf5bf383"
+      },
+      {
+        "bytes": 499315,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-02.jsonl.gz",
+        "sha256": "c4d8bb35866f69777d868207c17da2d38d1e05c688d1a7dbe9543ceb1562326a",
+        "uncompressed_bytes": 8388377,
+        "uncompressed_sha256": "6a0e1a5051165690648616c616ac3c1069e698539d3460c733fa8f631854d9d2"
+      },
+      {
+        "bytes": 501636,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-03.jsonl.gz",
+        "sha256": "c9a5be90494221b6bd90cf2189d3d29790ade7572c499a059f04b71e9a761889",
+        "uncompressed_bytes": 8385348,
+        "uncompressed_sha256": "148746876d88446afa3936080e71cb07c678466f83d228a0b27afbf0582a30ca"
+      },
+      {
+        "bytes": 500235,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-04.jsonl.gz",
+        "sha256": "59cfb90fbc44e326fda69b634002311a268249e314f7dd624f29d0fa7badb1a9",
+        "uncompressed_bytes": 8387028,
+        "uncompressed_sha256": "5cafcc7da119b135472737678d47571cddcf5b3d17a983e377fcab44a88cb084"
+      },
+      {
+        "bytes": 499701,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-05.jsonl.gz",
+        "sha256": "a81b94aeca50b2afb6ad26e7f86df3ba82d427448597e82d4f5bf139f5684297",
+        "uncompressed_bytes": 8387310,
+        "uncompressed_sha256": "2a4eb7101d3b5cf8cae569716744fc89054c1227b159c79a316d51b3f8ac5704"
+      },
+      {
+        "bytes": 109622,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-06.jsonl.gz",
+        "sha256": "1520a1e07f36d174e6213e39e0c4eadc6343ce342682876dd18394a0aeca5d86",
+        "uncompressed_bytes": 1791785,
+        "uncompressed_sha256": "2be13a7ac54b3592eb4c162e2f47cf887a00d408f604e340f144f597329799d5"
+      },
+      {
+        "bytes": 1837247,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/membership-metrics.jsonl.gz",
+        "sha256": "afdb33b64dd7b9c96739bb7e246fed429d8e6e620eb2d8be4a41025bdee701ee",
+        "uncompressed_bytes": 14916080,
+        "uncompressed_sha256": "4290e0cc7591fab8ac19405369f86205323c56491a9e118edea51bd1b108feee"
+      },
+      {
+        "bytes": 499680,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-00.jsonl.gz",
+        "sha256": "130563ba3e86bee6a62c2b7a1ea1858f928c63475110cd0a9ccfc16a61197941",
+        "uncompressed_bytes": 8386284,
+        "uncompressed_sha256": "ac4401975d77b6d8441b614501990974ad3f549ae3d9c6fa1e319634d881c6f5"
+      },
+      {
+        "bytes": 495047,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-01.jsonl.gz",
+        "sha256": "9d36415fc006aab64fd0671df5ae9d8924b0cee84e2084616bb38557b527cb98",
+        "uncompressed_bytes": 8388419,
+        "uncompressed_sha256": "a58634ef5cb6e48b1e5233a50923191c72f132a04564330f3e41c07d1118921e"
+      },
+      {
+        "bytes": 499437,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-02.jsonl.gz",
+        "sha256": "2a467d8777f2db489d9e6c9041edd2c258bf05659f09d5f381ff73a3e5bf79de",
+        "uncompressed_bytes": 8386334,
+        "uncompressed_sha256": "366e2523c16247b5157e3753bd125227105b9582ce0815df61532db23af8affd"
+      },
+      {
+        "bytes": 499834,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-03.jsonl.gz",
+        "sha256": "ae02d8600a4d72c429444b71ff23c302c062a5efbad02c5e3d6222012bea8522",
+        "uncompressed_bytes": 8386106,
+        "uncompressed_sha256": "f2b73edc0a827acd085c5fa663287c6bcc8efb7afd383c4ed72ebafec657cc2e"
+      },
+      {
+        "bytes": 498067,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-04.jsonl.gz",
+        "sha256": "631af20f95d06eee3e3b91882febdb83fa15b13ddb211328c208213c8a17abff",
+        "uncompressed_bytes": 8385680,
+        "uncompressed_sha256": "cb22400750268b0c3331e469b8b210bf73887ba31f93175811e1aa37e4d54b4c"
+      },
+      {
+        "bytes": 497495,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-05.jsonl.gz",
+        "sha256": "aa2c1fa3a0a4774bf9133b267015326824a9c933fcfdbb27b3dec6ed0703507e",
+        "uncompressed_bytes": 8387905,
+        "uncompressed_sha256": "608e971ecfae47f1c0e1528c68bab947665514bd6d708acdbd6ec06095aacabe"
+      },
+      {
+        "bytes": 112451,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-06.jsonl.gz",
+        "sha256": "05d364c66b8cc347fa4fd527d835d6b7fbdf8279107f143ecc18f4671e9ca359",
+        "uncompressed_bytes": 1854223,
+        "uncompressed_sha256": "92ad27edf78c7af56a4338ec7642a31ebeacecc90d511a1ed9f8f2678c4ae664"
+      },
+      {
+        "bytes": 1835640,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/membership-metrics.jsonl.gz",
+        "sha256": "387af1304568817a9fcfb190ad736e7efee72fdc48661370c29333abe9411171",
+        "uncompressed_bytes": 14911778,
+        "uncompressed_sha256": "d47b8f6d62bffcd52e2677ddc51f6c085a44c3bba2d5d5aad9becd03a505a805"
+      },
+      {
+        "bytes": 498262,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-00.jsonl.gz",
+        "sha256": "97ea3d7a0f09f4e4b9aba923350f095d6fa37351d8c21a6c073af5ac6d7fb655",
+        "uncompressed_bytes": 8385322,
+        "uncompressed_sha256": "84892392e8f1a9602cc0bcf674f857c9b2b22093a568fe66e070febfbd70f021"
+      },
+      {
+        "bytes": 500803,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-01.jsonl.gz",
+        "sha256": "1d7ae72df2ae1e894cb410649b222ffc5f969c424b4cbd12fc728bf69937ca19",
+        "uncompressed_bytes": 8387957,
+        "uncompressed_sha256": "f2608af48ac4c9327e64094b8c158ac341239f56b4e97492bc26ef9cecedd6b8"
+      },
+      {
+        "bytes": 502294,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-02.jsonl.gz",
+        "sha256": "82657a539fdfcc470ddfddcecf3fb659fb73243d7dbc545e31a35b5536317692",
+        "uncompressed_bytes": 8387244,
+        "uncompressed_sha256": "6b64a5cd6438773b98b2a0eb066d7e70711c0e7bb52ad51068e3cb379045cad3"
+      },
+      {
+        "bytes": 497707,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-03.jsonl.gz",
+        "sha256": "9a34f85af8fb6bb0c07cda6646d51a5e7beeca304b850ac4d73b2db43869306d",
+        "uncompressed_bytes": 8385141,
+        "uncompressed_sha256": "b323aca96d05e257ca94e77caeb8eac3c8eac7a2d3bff72b55da4400247cd590"
+      },
+      {
+        "bytes": 497704,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-04.jsonl.gz",
+        "sha256": "194135ba81cff62ead4ec46fd018beb5ac3d6edb4425867f07571aee1c4403e0",
+        "uncompressed_bytes": 8385783,
+        "uncompressed_sha256": "489f4e04cce2bfe5e6b6cd245152f75092aa6ef2f7254512fcd1e053dbfb8412"
+      },
+      {
+        "bytes": 499934,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-05.jsonl.gz",
+        "sha256": "d4794e9ed96b19efb9855d2301b92bc400070a38757e0fe95e64f9e1e7727a89",
+        "uncompressed_bytes": 8385656,
+        "uncompressed_sha256": "2a02219598e981008a833d654039a88f36548c0560418ae73366451560b29a16"
+      },
+      {
+        "bytes": 110188,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-06.jsonl.gz",
+        "sha256": "de0ea49511649f415de4b2b1a3cbc7f2f8505e0a76dadab1aeefab3096db817d",
+        "uncompressed_bytes": 1831609,
+        "uncompressed_sha256": "ad89ab50c1df4a8a42063741fa0e4dc96fcc3977044cf9638572538bf24e6a0e"
+      },
+      {
+        "bytes": 1834252,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/membership-metrics.jsonl.gz",
+        "sha256": "8c62819a7c7b62613b7885559b3d6feb19ea01415cbd9a30b4cf75be3109e1fc",
+        "uncompressed_bytes": 14903834,
+        "uncompressed_sha256": "8114a2964c695954fac0136302077606ee6e5959708d5cf6b9b6fa0df28ce931"
+      },
+      {
+        "bytes": 498558,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-00.jsonl.gz",
+        "sha256": "ed8454ba3bbf168cfde034a7972c3d0392ccb5df0db35cd379b0c220a48cb28b",
+        "uncompressed_bytes": 8385750,
+        "uncompressed_sha256": "a5a4ecbf4db8ce74cf533307e294dc825eca8522acab52066b1b38ce9104cd99"
+      },
+      {
+        "bytes": 498605,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-01.jsonl.gz",
+        "sha256": "16c2d328d979f355761ebab19be50c8b6f2885a177465bc83872ac04178d9286",
+        "uncompressed_bytes": 8386329,
+        "uncompressed_sha256": "7cebe877d76a0864cb161ae1541312ccf8c592f91f63ea858a9b7d5bd4f7bedc"
+      },
+      {
+        "bytes": 499695,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-02.jsonl.gz",
+        "sha256": "50dfdfe5f49feeed6ed859bfba4e986c1125968e58de815f2cd418b5dd3b301b",
+        "uncompressed_bytes": 8387079,
+        "uncompressed_sha256": "660f3bcff50469d77458f708cee10639baf42b213eeb5770857b4a6aa87edea9"
+      },
+      {
+        "bytes": 497857,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-03.jsonl.gz",
+        "sha256": "1c90f52f5408eb5673ad34454e8a830e4a0d729133f6808cc514ea45b1e74092",
+        "uncompressed_bytes": 8385476,
+        "uncompressed_sha256": "4daf32bb7664f947ccb682551a3fd0d86c28055ec11b68661c971b14af7cf0d0"
+      },
+      {
+        "bytes": 496373,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-04.jsonl.gz",
+        "sha256": "c16a7c2ef9621c30b5c4c7a9ed78fd98556a4ff98d5a9d038b5dc51cf6cf3c30",
+        "uncompressed_bytes": 8385648,
+        "uncompressed_sha256": "0c3e8bc778d46e246139ad8c9263c7a83f52840ab1a58acaa29d50d6caacccdb"
+      },
+      {
+        "bytes": 498931,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-05.jsonl.gz",
+        "sha256": "b44f75e5b47e3b3aef387c6b4b9e75be6a5d2c993dc8183c1b6aa8ec8f2902ef",
+        "uncompressed_bytes": 8388526,
+        "uncompressed_sha256": "b79a277e5f2507be4a7c9f2c6cb9c38b08fc4f7b1b88bd7e2e51bf59054d16d9"
+      },
+      {
+        "bytes": 111201,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-06.jsonl.gz",
+        "sha256": "199776d3f627f4ab9061e8b7dd63aefc71c5125aa1ee97fb027dfb53ba2c6ed1",
+        "uncompressed_bytes": 1851149,
+        "uncompressed_sha256": "830c187766827d9ce06e838e91d976d2b68b4df168d9225f4058e01b19eba23f"
+      },
+      {
+        "bytes": 1837063,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/membership-metrics.jsonl.gz",
+        "sha256": "22ff3a0dab80922d60b263daa2bf02924fbdf4ded13f5b9193785ef8db00831f",
+        "uncompressed_bytes": 14919853,
+        "uncompressed_sha256": "910b52f627d0c56aa23f45f6a8a96c560d3737488be0ee6c1d5b412f62c73027"
+      },
+      {
+        "bytes": 498687,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/catalog-00.jsonl.gz",
+        "sha256": "7a1ed04fafb8b816d87c548568618d5ab8305b72c942f39447405134024cd888",
+        "uncompressed_bytes": 8387126,
+        "uncompressed_sha256": "8176bb9b88a56781e805f5879d8431cc25706296a4c411c3b29a4b4c38080921"
+      },
+      {
+        "bytes": 501089,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/catalog-01.jsonl.gz",
+        "sha256": "fbca002ef28bb623b390e96cdfe04d57cee6c7a779156d80075019cd34a28978",
+        "uncompressed_bytes": 8385584,
+        "uncompressed_sha256": "da402af1f589cf779751fe9d4e29e196129c37845af6a8fee21257d5e295bb70"
+      },
+      {
+        "bytes": 424360,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/catalog-02.jsonl.gz",
+        "sha256": "4d1129507737392891b5c3bef0853cd5097829bf85968810b3744f5c806b4400",
+        "uncompressed_bytes": 7113572,
+        "uncompressed_sha256": "3afc13db77f611e354c9109640c7544986c3c76160ff374e79b55f615c86e71f"
+      },
+      {
+        "bytes": 842073,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/membership-metrics.jsonl.gz",
+        "sha256": "16d7ce5ddba91e53baf15b712769579e85284bae26264f99fea186a1d182ed5b",
+        "uncompressed_bytes": 6835740,
+        "uncompressed_sha256": "02117a3e873206f68984832f697feb907d2c051ad224b4dd286d56e535c4ce6e"
+      },
+      {
+        "bytes": 228693,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/evidence-quality.json",
+        "sha256": "c08361a2ee616ff8f100645de56425d7b1dbe62869c46b96cf9fbe901d9d48c4"
+      },
+      {
+        "bytes": 1396414,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/141.bin",
+        "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+        "uncompressed_bytes": 4205367,
+        "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+      },
+      {
+        "bytes": 2688274,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/143.bin",
+        "sha256": "9ecb1bca78b481b24ed1e94d6a3c4230cde4b1c02c3618a45c784a77e6bcd4ed",
+        "uncompressed_bytes": 8461813,
+        "uncompressed_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+      },
+      {
+        "bytes": 1624579,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/155.bin",
+        "sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+        "uncompressed_bytes": 5273788,
+        "uncompressed_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6"
+      },
+      {
+        "bytes": 2224353,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/169.bin",
+        "sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+        "uncompressed_bytes": 7071267,
+        "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+      },
+      {
+        "bytes": 3051391,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/i/187.bin",
+        "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+        "uncompressed_bytes": 11002896,
+        "uncompressed_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+      },
+      {
+        "bytes": 1596085,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-003.json.gz",
+        "sha256": "e365fcb45223bd78bcdab54b61801262ac76ec2e4feb180160fbb672679aab47",
+        "uncompressed_bytes": 8383857,
+        "uncompressed_sha256": "f4d401274e5570be8147c5bcb894523ed43c3c5ea401e40e80c218cd699908f4"
+      },
+      {
+        "bytes": 1561673,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-004.json.gz",
+        "sha256": "877c584ff139266fa6c08c4e7e97e3b95025586f9fdc7c6ef29cdce32d8c8893",
+        "uncompressed_bytes": 8385018,
+        "uncompressed_sha256": "a0a9bc1fb95bd1ad360175c934a39f8ee3cf165f0ccd43dd513ede3b14f1b149"
+      },
+      {
+        "bytes": 1567993,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-005.json.gz",
+        "sha256": "151ac6bc90d349cd998a676e30bfa1a0f503ad012016981e3aac9fa7d6e05487",
+        "uncompressed_bytes": 8384214,
+        "uncompressed_sha256": "56c34719a397c7cb1ec1385121a3e5c747fff1cb28168ecaf4318485d8f5a826"
+      },
+      {
+        "bytes": 1549820,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-007.json.gz",
+        "sha256": "5b3f3ce414f3866cf8af23e0ca74507d37e25b07e3753212ce5258811334718c",
+        "uncompressed_bytes": 8384712,
+        "uncompressed_sha256": "f0151e7cb8a7d3e1a132b643af44c3817792c9dd7cf2489f18d56a8440a1bb57"
+      },
+      {
+        "bytes": 1543112,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-008.json.gz",
+        "sha256": "eed125c093b517cbdc495fd4e4e4d997e206e0f93d7bbd46861db4903c79809c",
+        "uncompressed_bytes": 8383528,
+        "uncompressed_sha256": "f9747f261c5a8cad297d5189842b97b72d25c88cf2e91d57bb1cb21098cacae8"
+      },
+      {
+        "bytes": 1454299,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-009.json.gz",
+        "sha256": "edc2bf599aef3fdce7f3f03d74cc1e392346af0d34b0dda30ecf01f3d972063a",
+        "uncompressed_bytes": 8387388,
+        "uncompressed_sha256": "50d8fadf9fe98934ac52ddb427aa861225585b1a30e0ff4ed248695cc48b4056"
+      },
+      {
+        "bytes": 1480733,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-010.json.gz",
+        "sha256": "a7c4fe2efbc9feb0d41ccd2fb0fb05bce6ccc37d3577513b075d6cee910e0c93",
+        "uncompressed_bytes": 8387074,
+        "uncompressed_sha256": "a2a67ca8fc35da6392f56d0707d4e5af52a0a5d0714f72313a16b54129980d61"
+      },
+      {
+        "bytes": 754172,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-011.json.gz",
+        "sha256": "c23403bddb316a691126954828294061daf09b4305f58e18d53b1010a57df317",
+        "uncompressed_bytes": 4351012,
+        "uncompressed_sha256": "780dbe4ae306e0f58f1528eaa04416c13250c94f3cc57d677cc127fafbafee49"
+      },
+      {
+        "bytes": 233567,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/evidence-quality.json",
+        "sha256": "ab075eaf2d8fac1d483b060cdaa3c89d40014b050ef1ebab863f95d44fd6dd1b"
+      },
+      {
+        "bytes": 1486084,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-009.json.gz",
+        "sha256": "5a7c0702860b7d6713dfa847f8634b42afabb8e626b4dd7a491ff8541e170551",
+        "uncompressed_bytes": 8384903,
+        "uncompressed_sha256": "c6a7a2f11df97ed48cf03f9862c41f18daebd9d57231c2a53775fbfa0878371b"
+      },
+      {
+        "bytes": 1210288,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-010.json.gz",
+        "sha256": "07f327dc2a78b9b1ff9f44f0b96a10c54d52667826a177c6c5b9ea3bf049764a",
+        "uncompressed_bytes": 6834240,
+        "uncompressed_sha256": "a06638da8991941a9f93509cf59ddb6203839c7aac26f49b9424890246443ed0"
+      },
+      {
+        "bytes": 246059,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/evidence-quality.json",
+        "sha256": "6f2cc7858eef3959b36413a9ce34f33e3cade1da2a5e80ca098d2ec69131b7ad"
+      },
+      {
+        "bytes": 289207,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-030.json.gz",
+        "sha256": "06b16ae88b18484dbea5b2ad0216811414563e81d151a22100a7216db6397726",
+        "uncompressed_bytes": 1523001,
+        "uncompressed_sha256": "4b25e94948f7f6080e429d7b3f1f09326e69ebc5df3baf0598eb29b4d1751a4e"
+      },
+      {
+        "bytes": 291847,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-033.json.gz",
+        "sha256": "eee799d72959efdd19cc85baaed2b9799b943c814a40140bf17be50f1244db9b",
+        "uncompressed_bytes": 1544816,
+        "uncompressed_sha256": "91c7302ba9cd0a5f5f627295c1e25ea9418bbaf07441e7c30b3a84524ff3a223"
+      },
+      {
+        "bytes": 298568,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-044.json.gz",
+        "sha256": "d2c74f715b758dd641da76677225b42622e9e3720896ad8e5090c691761dc4a8",
+        "uncompressed_bytes": 1583449,
+        "uncompressed_sha256": "6db567872f5c7d10b619d785c07803a3744209ffefe877d36deb4314acf45200"
+      },
+      {
+        "bytes": 242545,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/evidence-quality.json",
+        "sha256": "404b1a86a6d4004c6f3ae7312ae78d18b5ec655705fc2adf218f92c3ef0fcd59"
+      },
+      {
+        "bytes": 2210535,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/i/148.bin",
+        "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+        "uncompressed_bytes": 7979916,
+        "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db"
+      },
+      {
+        "bytes": 10409,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/i/153.bin",
+        "sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563",
+        "uncompressed_bytes": 34750,
+        "uncompressed_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b"
+      },
+      {
+        "bytes": 1577600,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-002.json.gz",
+        "sha256": "c367e7d031555071a357595a86c24b4ba5a36d45a4141faa8ea91a20799c737d",
+        "uncompressed_bytes": 8381096,
+        "uncompressed_sha256": "5cf9d11cbe8bbacdd8dab80d2dae26f26d6ec78390a8761d68d593d968a61c8e"
+      },
+      {
+        "bytes": 1694175,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-005.json.gz",
+        "sha256": "60ea1c7fe9146aad7bfbd8afe92d5120f02d108d17b34a4040ce5e7aea996f44",
+        "uncompressed_bytes": 8387177,
+        "uncompressed_sha256": "39fc044d6b81783a4750253de1b12b1ca082b1ccb94d8f502a5f131c40b0831a"
+      },
+      {
+        "bytes": 1557326,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-008.json.gz",
+        "sha256": "ebfb4bb047ec2203e49136b4de55a6a222112a52a6c85b32a565d8c7472cfaa0",
+        "uncompressed_bytes": 8382967,
+        "uncompressed_sha256": "202db7d8768721f470b588c95b547839e305d558d521e19a3b40dd0efbf1f9fd"
+      },
+      {
+        "bytes": 1480398,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-010.json.gz",
+        "sha256": "69423ae7e41146f8149ad4627c42a56bf32dee545539d8d3e8651dc0291796b5",
+        "uncompressed_bytes": 8383333,
+        "uncompressed_sha256": "72a54649e3470857d6fdc1ba1a63922b27bb3844ec64c634f63071f9fade879d"
+      },
+      {
+        "bytes": 174876,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-011.json.gz",
+        "sha256": "613c33930682e1cc35d0fab72a83a2ba8f7cc1545373c881d615ef11fbede843",
+        "uncompressed_bytes": 982274,
+        "uncompressed_sha256": "730dc3717f523b25f936e6e081150bbc7ddd4846cf60345c7e2cb7e36f6cf2c9"
+      },
+      {
+        "bytes": 147194,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/evidence-quality.json",
+        "sha256": "8f46d85462d95189cadf138dc49b31e293db6b911d9dc91111df82244e13dd69"
+      },
+      {
+        "bytes": 8387182,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+        "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "bytes": 8388214,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-001.json",
+        "sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "bytes": 8388138,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-002.json",
+        "sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "bytes": 8388063,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+        "sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "bytes": 8387395,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-004.json",
+        "sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "bytes": 8387970,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-005.json",
+        "sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "bytes": 8387875,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-006.json",
+        "sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "bytes": 8387777,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-007.json",
+        "sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "bytes": 8388464,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-008.json",
+        "sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "bytes": 8387897,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+        "sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "bytes": 6909917,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json",
+        "sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "bytes": 17414,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+      }
+    ],
+    "pins": {
+      "membership_leaf_01": "3664149929a3d390c00a5f9bceae3410e6ac7b594f90443a76337abdaef25d9a",
+      "catalog_leaf_01_shard_00": "0f69911a5aa0059b87d3f212fa2781ab1eb7cc29ca90f240160e737b5c0efd52",
+      "catalog_leaf_01_shard_01": "2e456c7326960b4c80a4b43190cb795061258b3b84a479cabaa1fc0a7df43223",
+      "catalog_leaf_01_shard_02": "3fe5f77f95cf25ea1b37d3a33b1e43de058b673b1a90dc9cd42536b8182cc815",
+      "catalog_leaf_01_shard_03": "dcb722ea38d0c4e798683a2b83db048bbcfa9c5509b10ad5717b6ec373dece8b",
+      "catalog_leaf_01_shard_04": "02bebd70f6ef295e36bac75738052467c840c98221b7d15ff0b559fe74bca8ed",
+      "catalog_leaf_01_shard_05": "008fce0d9ddc509dec2031a428a34207125ab17d6cca102b17e34cd773a0c4d0",
+      "catalog_leaf_01_shard_06": "99e636a094512717d60b7457e5cbe8d4c61db8ea4f2baafc90538fc04d95da9b",
+      "membership_leaf_02": "599724d621b6f7db9b1da9b9a16da06ab564b27ebef36c4c6806649f68df4393",
+      "catalog_leaf_02_shard_00": "8da3e9bb4f3d5fa5e8d30fb137c31c1426753df428c21e4933817c686a3c7c6b",
+      "catalog_leaf_02_shard_01": "4ea929882b644f66e46c911940ac838698c9ee0433bb4f34ab2f8d82d8085b36",
+      "catalog_leaf_02_shard_02": "e8a5dfa8afcba492bd74262262a52495f6718a057942ebbff0e25f76366b12bd",
+      "catalog_leaf_02_shard_03": "ad957279acf029f7b912e0d209d076eac6dce470dc0d54d76ad8fafd3c0aa3f4",
+      "catalog_leaf_02_shard_04": "28137485d9d2533e94f9fbc7e1420e0775599f0da9ff94a2bcabcd3adf9f39ca",
+      "catalog_leaf_02_shard_05": "769cdf359789f13a167bab505ce995a7f9d73afb57505fb8387721f33464b08a",
+      "catalog_leaf_02_shard_06": "388c584b849b22819e41b814bb702d721fa7c74017480a1d14547294dd450769",
+      "membership_leaf_03": "afdb33b64dd7b9c96739bb7e246fed429d8e6e620eb2d8be4a41025bdee701ee",
+      "catalog_leaf_03_shard_00": "d7fed22592ec8856a1ac5e0bf06e7dffe57d25377bc256d01b2438f3944196e2",
+      "catalog_leaf_03_shard_01": "a6e8e3fc5fb28856a16d064a37f13a1822a9741529115e63e09d1f7efabb42f2",
+      "catalog_leaf_03_shard_02": "c4d8bb35866f69777d868207c17da2d38d1e05c688d1a7dbe9543ceb1562326a",
+      "catalog_leaf_03_shard_03": "c9a5be90494221b6bd90cf2189d3d29790ade7572c499a059f04b71e9a761889",
+      "catalog_leaf_03_shard_04": "59cfb90fbc44e326fda69b634002311a268249e314f7dd624f29d0fa7badb1a9",
+      "catalog_leaf_03_shard_05": "a81b94aeca50b2afb6ad26e7f86df3ba82d427448597e82d4f5bf139f5684297",
+      "catalog_leaf_03_shard_06": "1520a1e07f36d174e6213e39e0c4eadc6343ce342682876dd18394a0aeca5d86",
+      "membership_leaf_04": "387af1304568817a9fcfb190ad736e7efee72fdc48661370c29333abe9411171",
+      "catalog_leaf_04_shard_00": "130563ba3e86bee6a62c2b7a1ea1858f928c63475110cd0a9ccfc16a61197941",
+      "catalog_leaf_04_shard_01": "9d36415fc006aab64fd0671df5ae9d8924b0cee84e2084616bb38557b527cb98",
+      "catalog_leaf_04_shard_02": "2a467d8777f2db489d9e6c9041edd2c258bf05659f09d5f381ff73a3e5bf79de",
+      "catalog_leaf_04_shard_03": "ae02d8600a4d72c429444b71ff23c302c062a5efbad02c5e3d6222012bea8522",
+      "catalog_leaf_04_shard_04": "631af20f95d06eee3e3b91882febdb83fa15b13ddb211328c208213c8a17abff",
+      "catalog_leaf_04_shard_05": "aa2c1fa3a0a4774bf9133b267015326824a9c933fcfdbb27b3dec6ed0703507e",
+      "catalog_leaf_04_shard_06": "05d364c66b8cc347fa4fd527d835d6b7fbdf8279107f143ecc18f4671e9ca359",
+      "membership_leaf_05": "8c62819a7c7b62613b7885559b3d6feb19ea01415cbd9a30b4cf75be3109e1fc",
+      "catalog_leaf_05_shard_00": "97ea3d7a0f09f4e4b9aba923350f095d6fa37351d8c21a6c073af5ac6d7fb655",
+      "catalog_leaf_05_shard_01": "1d7ae72df2ae1e894cb410649b222ffc5f969c424b4cbd12fc728bf69937ca19",
+      "catalog_leaf_05_shard_02": "82657a539fdfcc470ddfddcecf3fb659fb73243d7dbc545e31a35b5536317692",
+      "catalog_leaf_05_shard_03": "9a34f85af8fb6bb0c07cda6646d51a5e7beeca304b850ac4d73b2db43869306d",
+      "catalog_leaf_05_shard_04": "194135ba81cff62ead4ec46fd018beb5ac3d6edb4425867f07571aee1c4403e0",
+      "catalog_leaf_05_shard_05": "d4794e9ed96b19efb9855d2301b92bc400070a38757e0fe95e64f9e1e7727a89",
+      "catalog_leaf_05_shard_06": "de0ea49511649f415de4b2b1a3cbc7f2f8505e0a76dadab1aeefab3096db817d",
+      "membership_leaf_06": "22ff3a0dab80922d60b263daa2bf02924fbdf4ded13f5b9193785ef8db00831f",
+      "catalog_leaf_06_shard_00": "ed8454ba3bbf168cfde034a7972c3d0392ccb5df0db35cd379b0c220a48cb28b",
+      "catalog_leaf_06_shard_01": "16c2d328d979f355761ebab19be50c8b6f2885a177465bc83872ac04178d9286",
+      "catalog_leaf_06_shard_02": "50dfdfe5f49feeed6ed859bfba4e986c1125968e58de815f2cd418b5dd3b301b",
+      "catalog_leaf_06_shard_03": "1c90f52f5408eb5673ad34454e8a830e4a0d729133f6808cc514ea45b1e74092",
+      "catalog_leaf_06_shard_04": "c16a7c2ef9621c30b5c4c7a9ed78fd98556a4ff98d5a9d038b5dc51cf6cf3c30",
+      "catalog_leaf_06_shard_05": "b44f75e5b47e3b3aef387c6b4b9e75be6a5d2c993dc8183c1b6aa8ec8f2902ef",
+      "catalog_leaf_06_shard_06": "199776d3f627f4ab9061e8b7dd63aefc71c5125aa1ee97fb027dfb53ba2c6ed1",
+      "membership_leaf_07": "16d7ce5ddba91e53baf15b712769579e85284bae26264f99fea186a1d182ed5b",
+      "catalog_leaf_07_shard_00": "7a1ed04fafb8b816d87c548568618d5ab8305b72c942f39447405134024cd888",
+      "catalog_leaf_07_shard_01": "fbca002ef28bb623b390e96cdfe04d57cee6c7a779156d80075019cd34a28978",
+      "catalog_leaf_07_shard_02": "4d1129507737392891b5c3bef0853cd5097829bf85968810b3744f5c806b4400",
+      "prior_component_shard_000": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+      "prior_component_shard_001": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a",
+      "prior_component_shard_002": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb",
+      "prior_component_shard_003": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85",
+      "prior_component_shard_004": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9",
+      "prior_component_shard_005": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584",
+      "prior_component_shard_006": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9",
+      "prior_component_shard_007": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2",
+      "prior_component_shard_008": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d",
+      "prior_component_shard_009": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd",
+      "prior_component_shard_010": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+    },
+    "pin_files": {
+      "membership_leaf_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/membership-metrics.jsonl.gz",
+      "catalog_leaf_01_shard_00": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-00.jsonl.gz",
+      "catalog_leaf_01_shard_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-01.jsonl.gz",
+      "catalog_leaf_01_shard_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-02.jsonl.gz",
+      "catalog_leaf_01_shard_03": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-03.jsonl.gz",
+      "catalog_leaf_01_shard_04": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-04.jsonl.gz",
+      "catalog_leaf_01_shard_05": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-05.jsonl.gz",
+      "catalog_leaf_01_shard_06": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-01/catalog-06.jsonl.gz",
+      "membership_leaf_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/membership-metrics.jsonl.gz",
+      "catalog_leaf_02_shard_00": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-00.jsonl.gz",
+      "catalog_leaf_02_shard_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-01.jsonl.gz",
+      "catalog_leaf_02_shard_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-02.jsonl.gz",
+      "catalog_leaf_02_shard_03": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-03.jsonl.gz",
+      "catalog_leaf_02_shard_04": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-04.jsonl.gz",
+      "catalog_leaf_02_shard_05": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-05.jsonl.gz",
+      "catalog_leaf_02_shard_06": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-02/catalog-06.jsonl.gz",
+      "membership_leaf_03": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/membership-metrics.jsonl.gz",
+      "catalog_leaf_03_shard_00": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-00.jsonl.gz",
+      "catalog_leaf_03_shard_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-01.jsonl.gz",
+      "catalog_leaf_03_shard_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-02.jsonl.gz",
+      "catalog_leaf_03_shard_03": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-03.jsonl.gz",
+      "catalog_leaf_03_shard_04": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-04.jsonl.gz",
+      "catalog_leaf_03_shard_05": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-05.jsonl.gz",
+      "catalog_leaf_03_shard_06": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-03/catalog-06.jsonl.gz",
+      "membership_leaf_04": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/membership-metrics.jsonl.gz",
+      "catalog_leaf_04_shard_00": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-00.jsonl.gz",
+      "catalog_leaf_04_shard_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-01.jsonl.gz",
+      "catalog_leaf_04_shard_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-02.jsonl.gz",
+      "catalog_leaf_04_shard_03": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-03.jsonl.gz",
+      "catalog_leaf_04_shard_04": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-04.jsonl.gz",
+      "catalog_leaf_04_shard_05": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-05.jsonl.gz",
+      "catalog_leaf_04_shard_06": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-04/catalog-06.jsonl.gz",
+      "membership_leaf_05": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/membership-metrics.jsonl.gz",
+      "catalog_leaf_05_shard_00": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-00.jsonl.gz",
+      "catalog_leaf_05_shard_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-01.jsonl.gz",
+      "catalog_leaf_05_shard_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-02.jsonl.gz",
+      "catalog_leaf_05_shard_03": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-03.jsonl.gz",
+      "catalog_leaf_05_shard_04": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-04.jsonl.gz",
+      "catalog_leaf_05_shard_05": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-05.jsonl.gz",
+      "catalog_leaf_05_shard_06": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-05/catalog-06.jsonl.gz",
+      "membership_leaf_06": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/membership-metrics.jsonl.gz",
+      "catalog_leaf_06_shard_00": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-00.jsonl.gz",
+      "catalog_leaf_06_shard_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-01.jsonl.gz",
+      "catalog_leaf_06_shard_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-02.jsonl.gz",
+      "catalog_leaf_06_shard_03": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-03.jsonl.gz",
+      "catalog_leaf_06_shard_04": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-04.jsonl.gz",
+      "catalog_leaf_06_shard_05": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-05.jsonl.gz",
+      "catalog_leaf_06_shard_06": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-06/catalog-06.jsonl.gz",
+      "membership_leaf_07": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/membership-metrics.jsonl.gz",
+      "catalog_leaf_07_shard_00": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/catalog-00.jsonl.gz",
+      "catalog_leaf_07_shard_01": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/catalog-01.jsonl.gz",
+      "catalog_leaf_07_shard_02": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/corrected-run-1-leaf-07/catalog-02.jsonl.gz",
+      "prior_component_shard_000": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "prior_component_shard_001": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-001.json",
+      "prior_component_shard_002": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-002.json",
+      "prior_component_shard_003": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "prior_component_shard_004": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-004.json",
+      "prior_component_shard_005": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-005.json",
+      "prior_component_shard_006": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-006.json",
+      "prior_component_shard_007": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-007.json",
+      "prior_component_shard_008": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-008.json",
+      "prior_component_shard_009": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "prior_component_shard_010": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json"
+    },
+    "subject_files": {
+      "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "physical-component:2a6f76f2cc30dc3b93f08d59750b9519adc26ae7bd22a328683f5a048c2b4d8f": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-001.json",
+      "physical-component:2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-001.json",
+      "physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-002.json",
+      "physical-component:328987ce3f5504e7d598e7a94928a309cddbe9e00c774cd488dfdfb57bb585fe": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-002.json",
+      "physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "physical-component:5e2faf09bde718e22120c26bc79f98ee620f8e47ccb3e93b96345f80cbc548bf": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-004.json",
+      "physical-component:6c46d18235a22c15683039d3346b55f1a7625a3ce49ead2111413d91d75362d2": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-004.json",
+      "physical-component:849377ccf645d794deaa1f43fd91ab9bfe9d9464c1c1cb31b19cf53b990291c4": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-005.json",
+      "physical-component:9094128c18d3075578719177328356ff5147b1abbe17e09626010f91b79aeea8": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-006.json",
+      "physical-component:98ba8cabf21ed4bdcfb0761cb6aabac54f7fd153a60f656a06587e2125cc8f36": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-006.json",
+      "physical-component:9c46373452264bbd5441d6a6349cab667177ff6ecfda374df366433502da9c61": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-006.json",
+      "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-006.json",
+      "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-007.json",
+      "physical-component:b90682fb902bb719879e69d1a161080cb46a7cd041cb3ad0c9bd963b5e1f4900": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-007.json",
+      "physical-component:b971f9d191cf018cfbaa158f4f32be07f9c8bbbd3ae248ddc1261fba50e8af94": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-007.json",
+      "physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-008.json",
+      "physical-component:cd6c8035a1a2e8c52ab5b851b7ba26eb366acafd2babbbd82e149d7ea7e5c7e5": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-008.json",
+      "physical-component:dd50282d0498fe710bf1ecaf6ca06f22d97391356cfe8c17fb9d5c10b25d874e": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "physical-component:dd8aab5edb2689e1b07b799505f2c052799dd3d1f3770dd2d8ac668e0dfdffaf": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "physical-component:e499668746ebf62edfaef15068a437158e322c29a711aef7598f7e78a99148fb": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "physical-component:e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json",
+      "physical-component:f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json",
+      "physical-component:fa8aa714b724a4eef86de954326dcfd9cb04db5fdb0695a4e76b7e90b2f29966": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:BRN:ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1_simplified.geojson",
+      "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+      "vintage": "Original consumed whole SHA 6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b; advertised represented year 2011",
+      "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain; original source metadata and attribution retained through source catalogue and feature bindings."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+      "files": [
+        {
+          "bytes": 10409,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-BRN-ADM1.bin",
+          "sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563",
+          "uncompressed_bytes": 34750,
+          "uncompressed_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b"
+        }
+      ]
+    },
+    {
+      "id": "gb:IDN:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+      "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+      "vintage": "Original consumed whole SHA 146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c; advertised represented year 2020",
+      "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); original source metadata and attribution retained through source catalogue and feature bindings."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+      "files": [
+        {
+          "bytes": 3051391,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-IDN-ADM2.bin",
+          "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+          "uncompressed_bytes": 11002896,
+          "uncompressed_sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        }
+      ]
+    },
+    {
+      "id": "gb:IND:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2_simplified.geojson",
+      "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+      "vintage": "Original consumed whole SHA d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db; advertised represented year 2021",
+      "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; original source metadata and attribution retained through source catalogue and feature bindings."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+      "files": [
+        {
+          "bytes": 2210535,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-IND-ADM2.bin",
+          "sha256": "fb067b600f7bf557064674af536aa7b727fddf74121e46763ae1eec121524c94",
+          "uncompressed_bytes": 7979916,
+          "uncompressed_sha256": "d68db39cd3e2d0892af268e2b0454166368ce3b5b8a78fcda63069ec92a641db"
+        }
+      ]
+    },
+    {
+      "id": "gb:MMR:ADM3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+      "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+      "vintage": "Original consumed whole SHA 94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2; advertised represented year 2019",
+      "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 (CC BY 4.0); original source metadata and attribution retained through source catalogue and feature bindings."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+      "files": [
+        {
+          "bytes": 1396414,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-MMR-ADM3.bin",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+          "uncompressed_bytes": 4205367,
+          "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+        }
+      ]
+    },
+    {
+      "id": "gb:PHL:ADM3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3_simplified.geojson",
+      "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+      "vintage": "Original consumed whole SHA 2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc; advertised represented year 2020",
+      "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); original source metadata and attribution retained through source catalogue and feature bindings."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+      "files": [
+        {
+          "bytes": 2224353,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-PHL-ADM3.bin",
+          "sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+          "uncompressed_bytes": 7071267,
+          "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+        }
+      ]
+    },
+    {
+      "id": "gb:THA:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2_simplified.geojson",
+      "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+      "vintage": "Original consumed whole SHA faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10; advertised represented year 2019",
+      "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); original source metadata and attribution retained through source catalogue and feature bindings."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+      "files": [
+        {
+          "bytes": 2688274,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-THA-ADM2.bin",
+          "sha256": "9ecb1bca78b481b24ed1e94d6a3c4230cde4b1c02c3618a45c784a77e6bcd4ed",
+          "uncompressed_bytes": 8461813,
+          "uncompressed_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10"
+        }
+      ]
+    },
+    {
+      "id": "gb:VNM:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2_simplified.geojson",
+      "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+      "vintage": "Original consumed whole SHA 2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6; advertised represented year 2020",
+      "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); original source metadata and attribution retained through source catalogue and feature bindings."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+      "files": [
+        {
+          "bytes": 1624579,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-VNM-ADM2.bin",
+          "sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+          "uncompressed_bytes": 5273788,
+          "uncompressed_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6"
+        }
+      ]
+    },
+    {
+      "id": "batch-membership-ledger",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "role": "Pinned refreshed candidate membership ledger used only for exact unresolved state reconciliation.",
+      "vintage": "2026-10-09 corrected-run-1",
+      "retrieved_at": "2026-10-09 immutable repository checkout",
+      "license": {
+        "status": "redistributable",
+        "terms": "Repository research artifact; source metadata and license limits remain attached in original ledgers."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "See the manifest-pinned complete seven-leaf membership output files in baseline.files.",
+      "limit": "Membership class/status is not geographic approval or source fitness."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+      "bytes": 1270464,
+      "sha256": "447ce96ad4ec40ceafca3752aedc01d3096114c4bd478c1b25bcd6a17fc53dfa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/component-state.json",
+      "bytes": 465796,
+      "sha256": "2f7672a6aaba6fe78b9f62511d1df1e90caf313b07e5bdd36dcda0f476b6ea78",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/summary.json",
+      "bytes": 3682,
+      "sha256": "717e0ff058070f062821cd0f6c5fa3402b50de80d610be0246c86a33f338d7a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/provenance/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/provenance/administrative.py",
+      "bytes": 12313,
+      "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/README.md",
+      "bytes": 3378,
+      "sha256": "3562a260f519ac91922a8655424df139058667f23d5337e9d546835f21838f11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-readback-renewed.json",
+      "bytes": 608,
+      "sha256": "4275db0078f1207cd4548671ec550365d2d8486e3e3a2748308d17aa7c4a1acd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-readback.json",
+      "bytes": 608,
+      "sha256": "e94dd8df544ecc9ac62fffa1729d811037dcaea16ccfbcb21c98cc6d33eb2496",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-receipt.json",
+      "bytes": 939,
+      "sha256": "dd4e36b8a055bbbbbe1cd489fb0a1a7031fa285fba22620562e87eb4645f7a61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-renewal-receipt.json",
+      "bytes": 939,
+      "sha256": "5fc68b9da20eee68831fe925197b3213be09eb4dd2d0cef16a64993ed8a9e090",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-work-renewal.json",
+      "bytes": 1072,
+      "sha256": "2264e769e3bb4fb4bcae883495b8b1ea309f4e7e618d5df2695b1ff9ff6c1034",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/geo3-next-full-batch-318.json",
+      "bytes": 217700,
+      "sha256": "9857d3c03f94799b4e7e22c9afce68259dc4e2747d2864d6eb580030222f3430",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/issue-contract-readback.json",
+      "bytes": 10338,
+      "sha256": "44d626c625afca3820d7285347ccefed86173344e250c1be4ccea9e3c594633d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/live-claim-scope-readback.json",
+      "bytes": 14790,
+      "sha256": "8b3b9ca0ea596969add24b727c649efdb8c5322c36927840e55f8b685fd829ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/preclaim-readiness-18735.json",
+      "bytes": 41908,
+      "sha256": "232886a4cd125999ede9a2b118dcc246df198dd66dca2f4fb6d967e8ac02f931",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-roster-reconciliation",
+      "description": "Exact identity join from the complete refreshed membership outputs to the retained 318-ID/122-family batch index; no classification is inferred.",
+      "software": "Python 3.12 standard library and scripts/evidence/immutable.py",
+      "units": "component IDs and family locators"
+    },
+    {
+      "id": "retained-source-pointset-binding",
+      "description": "Select exact source features from whole preserved Atlas-consumed simplified products and exact target features from the pinned whole current component shards; cite existing comparisons without recalculation.",
+      "software": "Python 3.12 standard library; no geometry engine invoked",
+      "units": "feature identities and SHA-256 whole/canonical feature digests"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "batch_components",
+      "value": 318,
+      "unit": "component IDs",
+      "vintage": "current",
+      "input_sha256": "2f7672a6aaba6fe78b9f62511d1df1e90caf313b07e5bdd36dcda0f476b6ea78",
+      "input_file": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/component-state.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
+    },
+    {
+      "id": "batch_families",
+      "value": 122,
+      "unit": "family locators",
+      "vintage": "current",
+      "input_sha256": "2f7672a6aaba6fe78b9f62511d1df1e90caf313b07e5bdd36dcda0f476b6ea78",
+      "input_file": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/component-state.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
+    },
+    {
+      "id": "priority_bindings",
+      "value": 30,
+      "unit": "source-current-target bindings",
+      "vintage": "current",
+      "input_sha256": "447ce96ad4ec40ceafca3752aedc01d3096114c4bd478c1b25bcd6a17fc53dfa",
+      "input_file": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
+    },
+    {
+      "id": "unresolved_priority_decisions",
+      "value": 30,
+      "unit": "unresolved decisions",
+      "vintage": "current",
+      "input_sha256": "447ce96ad4ec40ceafca3752aedc01d3096114c4bd478c1b25bcd6a17fc53dfa",
+      "input_file": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
+    },
+    {
+      "id": "approved_repairs",
+      "value": 0,
+      "unit": "approved repairs",
+      "vintage": "current",
+      "input_sha256": "447ce96ad4ec40ceafca3752aedc01d3096114c4bd478c1b25bcd6a17fc53dfa",
+      "input_file": {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "batch_components",
+      "value": 318,
+      "unit": "component IDs"
+    },
+    {
+      "metric_id": "batch_families",
+      "value": 122,
+      "unit": "family locators"
+    },
+    {
+      "metric_id": "priority_bindings",
+      "value": 30,
+      "unit": "source-current-target bindings"
+    },
+    {
+      "metric_id": "unresolved_priority_decisions",
+      "value": 30,
+      "unit": "unresolved decisions"
+    },
+    {
+      "metric_id": "approved_repairs",
+      "value": 0,
+      "unit": "approved repairs"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The retained full batch contains 318 exact component IDs mapped to 122 family locators; current complete refreshed membership evidence keeps all 318 unresolved.",
+      "source_ids": [
+        "batch-membership-ledger"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "The 30 contract-prioritized cases are source-feature/current-target-feature bound to seven exact Atlas-consumed simplified administrative products and preserved existing comparison rows.",
+      "source_ids": [
+        "gb:BRN:ADM1",
+        "gb:IDN:ADM2",
+        "gb:IND:ADM2",
+        "gb:MMR:ADM3",
+        "gb:PHL:ADM3",
+        "gb:THA:ADM2",
+        "gb:VNM:ADM2"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Accepted physical class, current physical status, causal mechanism, legal or administrative authority, and repair eligibility remain unresolved; no approval or repair is asserted.",
+      "source_ids": [
+        "gb:BRN:ADM1",
+        "gb:IDN:ADM2",
+        "gb:IND:ADM2",
+        "gb:MMR:ADM3",
+        "gb:PHL:ADM3",
+        "gb:THA:ADM2",
+        "gb:VNM:ADM2"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
+    "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
+    "node scripts/evidence-quality.mjs research/geography/southeast-asia-gap-batch-0393f64c-20261009/evidence-quality.json"
+  ]
+}
