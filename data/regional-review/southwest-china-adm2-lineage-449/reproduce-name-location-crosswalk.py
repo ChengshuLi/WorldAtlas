@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import argparse
 from pathlib import Path
 
 
@@ -17,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[3]
 OWNED = ROOT / "data/regional-review/southwest-china-adm2-lineage-449"
 SOURCE = ROOT / "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson"
 ATLAS = ROOT / "data/geography/part-3.json"
-OUTPUT = OWNED / "findings/name-location-crosswalk.json"
+OUTPUT_DIR = OWNED / "findings"
 SUBJECT = "gb:CHN:ADM2:17275852B74051544695436"
 SHAPE_ID = "17275852B74051544695436"
 SOURCE_SHA256 = "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34"
@@ -67,6 +68,16 @@ def intersects(left: list[float], right: list[float]) -> bool:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-name", required=True,
+                        help="new JSON filename created exclusively inside this packet's findings directory")
+    args = parser.parse_args()
+    if (not args.output_name or Path(args.output_name).name != args.output_name
+            or args.output_name in {".", ".."} or not args.output_name.endswith(".json")):
+        raise ValueError("--output-name must be a simple .json filename")
+    if OWNED.is_symlink() or OUTPUT_DIR.is_symlink() or not OUTPUT_DIR.is_dir():
+        raise ValueError("Owned findings directory must be a real directory, not a symlink")
+    output = OUTPUT_DIR / args.output_name
     source_bytes = SOURCE.read_bytes()
     atlas_bytes = ATLAS.read_bytes()
     if sha256(source_bytes) != SOURCE_SHA256:
@@ -164,8 +175,12 @@ def main() -> None:
             "The indexed official sources do not provide a Chinese source name/code for this geoBoundaries shapeID; candidate identity remains unresolved.",
         ],
     }
-    OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"output": str(OUTPUT.relative_to(ROOT)), "source_bbox_intersects_dazhu": dazhu_intersection, "source_bbox_intersects_dazu": dazu_intersection, "result": result["assessment"]}, ensure_ascii=False))
+    encoded = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+    # Exclusive creation refuses existing files and dangling symlinks rather
+    # than overwriting retained evidence or following a link.
+    with output.open("x", encoding="utf-8", newline="\n") as handle:
+        handle.write(encoded)
+    print(json.dumps({"output": str(output.relative_to(ROOT)), "source_bbox_intersects_dazhu": dazhu_intersection, "source_bbox_intersects_dazu": dazu_intersection, "result": result["assessment"]}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

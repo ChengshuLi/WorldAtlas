@@ -692,7 +692,7 @@
       "id": "cq-updated-standard-maps-2026",
       "url": "https://ghzrzyj.cq.gov.cn/zwxx_186/bmdt/202602/t20260212_15440345_wap.html",
       "role": "Official locator for current standard-map display products; a directly retrieved raster map shows the 2026 Chongqing county-level depiction and Liangjiang administrative area.",
-      "vintage": "Retrieved citywide and Liangjiang sheets print 2026-01, approval 渝S(2025)130号. Catalog data/qh.js says 2024-06, conflicting with image vintages. 大足区 sheet prints 2026-01 but approval 渝S(2024)029号. Per-file metadata and hashes are in findings/retrieval-log.json.",
+      "vintage": "Retrieved citywide and Liangjiang sheets print 2026-01, approval \u6e1dS(2025)130\u53f7. Catalog data/qh.js says 2024-06, conflicting with image vintages. \u5927\u8db3\u533a sheet prints 2026-01 but approval \u6e1dS(2024)029\u53f7. Per-file metadata and hashes are in findings/retrieval-log.json.",
       "retrieved_at": "2026-10-09",
       "license": {
         "status": "unknown",
@@ -834,8 +834,8 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
-      "bytes": 15038,
-      "sha256": "e4fbc4e68da60f7cbf0dc91360a0e4403d7819bd58027774d115845090f3a97f",
+      "bytes": 15314,
+      "sha256": "475d32edeb3b9ea44ab852a330c2aa9f1d8803327a3063f745599e0ead2bbeab",
       "hash_kind": "file-bytes"
     },
     {
@@ -852,20 +852,44 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-runs.json",
-      "bytes": 2390,
-      "sha256": "0bc3ba26a35bc364891eda8dfdb0cdf057c43d5d7e52f1ee46ee9829af19bf56",
+      "bytes": 3707,
+      "sha256": "8b04f66676f775a13bb7acc17d6a047a8931148bf0a58b1430b7f989a5143cb6",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py",
-      "bytes": 9128,
-      "sha256": "2b18f639717b114bdd2b7b68b4b4e71aa5f2679e65b7213acd2d5163c0c26073",
+      "bytes": 10047,
+      "sha256": "e68511f7901e2b598b874ddcd4e09fc6c00d632e425b95dda7ac5248bc11f80b",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json",
       "bytes": 4184,
       "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-a-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-b-20261009.json",
+      "bytes": 4184,
+      "sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-positive-control.json",
+      "bytes": 826,
+      "sha256": "22a27bb29e105454ce58485e3a929492831ec3c778609d63ce7be2f1f2ec222e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json",
+      "bytes": 458,
+      "sha256": "3f4a4b831ecff51f4cc04cce590f0224dfa0cf242c5aa9a3d78ca052ec657861",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1141,7 +1165,7 @@
   "commands": [
     "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-lineage.py",
     "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-lineage.py --self-test",
-    "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py"
+    "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py --output-name <fresh-findings-filename>.json"
   ],
   "validation": [
     {
@@ -1160,13 +1184,13 @@
       "method_id": "name-location-extent-crosswalk",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json"
+      "evidence_path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-positive-control.json"
     },
     {
       "method_id": "name-location-extent-crosswalk",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json"
+      "evidence_path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json"
     }
   ],
   "change_receipts": [
@@ -1197,6 +1221,22 @@
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/reproduction-runs.json",
       "status": "modified",
       "original_sha256": "36a49c31f34eb81f26f489e40824f736e2dcc8e8ebf7e06fabce3f68cf2f4792"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-a-20261009.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk-run-b-20261009.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-output-negative-control.json",
+      "status": "added"
     }
   ],
   "metric_bindings": [
