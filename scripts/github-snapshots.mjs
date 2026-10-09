@@ -16,7 +16,11 @@ export function conditionalSnapshots({maxBytes = 64 * 1024 * 1024, maxEntries = 
       rows.set(route, Object.freeze({etag, text, bytes: size})); bytes += size;
     },
     revalidated(snapshot, etag) {
-      if (!snapshot || (etag !== null && etag !== snapshot.etag)) throw Error('Unbound conditional GitHub response');
+      // RFC 9110 §13.1.2 requires weak comparison for If-None-Match.
+      // Content coding can change W/ without changing the opaque validator.
+      if (!snapshot || !tag(snapshot.etag) || (etag !== null &&
+          (!tag(etag) || etag.replace(/^W\//, '') !== snapshot.etag.replace(/^W\//, ''))))
+        throw Error('Unbound conditional GitHub response');
       return JSON.parse(snapshot.text);
     },
     invalidate(route) {

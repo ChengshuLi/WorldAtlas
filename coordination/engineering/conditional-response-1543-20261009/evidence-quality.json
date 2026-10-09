@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "issue": 1578,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "9ccb16dcb3ebe89e9f38df01dc75934cd6d11c9b",
+    "files": [
+      {
+        "path": "scripts/github-snapshots.mjs",
+        "bytes": 1350,
+        "sha256": "c84af609081a989f8541906a5c47e39fde446adad7077f4e69e1c42e4b5fcd32",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/github-snapshots.test.mjs",
+        "bytes": 5694,
+        "sha256": "3c68bf56256f2b4a138534b72c238fd098168329fbc052044d4afcb886197e34",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 23973,
+        "sha256": "950536fcdafbbcd5b770cf24fcab567b9928d47f0a7825e4dd91c0139c17bd91",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/github-snapshots.mjs",
+      "bytes": 1595,
+      "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/github-snapshots.test.mjs",
+      "bytes": 7543,
+      "sha256": "0e42b8b0428cd7c71d5fc27b601c7ede65b83b9c404a8a0a224d0e505ce059ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/HANDOFF.md",
+      "bytes": 2720,
+      "sha256": "87c49f32049e8038f73965bc572b405c9f630ad5e068cc59492c147b79d04aec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/controls.log",
+      "bytes": 8324,
+      "sha256": "e37f5200fdd18443cdd4e58ef86cf212858b0252187e9f296f409cdcf4cae289",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/live-reproduction.json",
+      "bytes": 533,
+      "sha256": "cc782b6b8cc8fd4bf181f62301c70e298b198175a242a889d1c96563b0fd095e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/reproduce-live.mjs",
+      "bytes": 1148,
+      "sha256": "64f6816a0102889406cd699446e73992a317d13099a2b1d38e59e0c6a347a12a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "conditional-validator-controls",
+      "kind": "code",
+      "description": "Authenticate actual conditional GET consumption and weak-equivalence at shared API boundary, preserving different/malformed response rejection and adjacent authority/capacity controls.",
+      "software": "Node 24; GitHub API version 2022-11-28",
+      "units": "opaque HTTP entity tags; no geographic or performance measurement"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Actual-main deployment and subsequent real queue recovery remain unverified. Normal claim/readiness is blocked by the same defect; see explicit incident rollout exception.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/github-snapshots.test.mjs test/github-admission.test.mjs test/github-quota.test.mjs test/issue-lease-client.test.mjs test/pr-gates.test.mjs test/merge-integration-entrypoint.test.mjs test/github-git-transport.test.mjs",
+    "node coordination/engineering/conditional-response-1543-20261009/reproduce-live.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/conditional-response-1543-20261009/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "scripts/github-snapshots.mjs",
+      "status": "modified",
+      "original_sha256": "c84af609081a989f8541906a5c47e39fde446adad7077f4e69e1c42e4b5fcd32"
+    },
+    {
+      "path": "test/github-snapshots.test.mjs",
+      "status": "modified",
+      "original_sha256": "3c68bf56256f2b4a138534b72c238fd098168329fbc052044d4afcb886197e34"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/HANDOFF.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/live-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/reproduce-live.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/conditional-response-1543-20261009/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "rendered_tables": []
+}

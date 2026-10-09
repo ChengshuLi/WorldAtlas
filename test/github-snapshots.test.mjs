@@ -97,3 +97,44 @@ test('missing and malformed ETags erase the old binding',async()=>{
     });
   }
 });
+
+// Native Node fetch negotiates encoded content: GitHub can return W/ on 200
+// and the same opaque tag without W/ on 304. Exercise the shared API boundary.
+test('conditional GET accepts weak-equivalent validators in both directions without extra requests', async () => {
+  for (const [initial, returned] of [['W/"same"', '"same"'], ['"same"', 'W/"same"']]) {
+    let calls = 0;
+    await mocked(async (url, options) => {
+      calls++;
+      assert.equal(options.headers.Authorization, 'Bearer private');
+      if (calls === 1) return fresh({head: 'exact', labels: ['ready']}, initial);
+      assert.equal(options.headers['If-None-Match'], initial);
+      return unchanged(returned);
+    }, async () => {
+      const api = githubAPI('private');
+      const first = await api('/repos/a/b/git/commits/' + 'a'.repeat(40));
+      first.labels.push('poison');
+      const second = await api('/repos/a/b/git/commits/' + 'a'.repeat(40));
+      assert.deepEqual(second, {head: 'exact', labels: ['ready']});
+      second.head = 'poison';
+      assert.deepEqual(await api('/repos/a/b/git/commits/' + 'a'.repeat(40)), {head: 'exact', labels: ['ready']});
+    });
+    assert.equal(calls, 3);
+  }
+});
+
+test('weak comparison still rejects different or malformed conditional validators', async () => {
+  for (const returned of ['W/"different"', '"different"', 'same', 'w/"same"', '"same", "different"']) {
+    let calls = 0;
+    await mocked(async (url, options) => {
+      calls++;
+      if (calls === 1) return fresh({approved: true}, 'W/"same"');
+      assert.equal(options.headers['If-None-Match'], 'W/"same"');
+      return unchanged(returned);
+    }, async () => {
+      const api = githubAPI('private');
+      await api('/repos/a/b/issues/1');
+      await assert.rejects(api('/repos/a/b/issues/1'), /Unbound/);
+    });
+    assert.equal(calls, 2);
+  }
+});
