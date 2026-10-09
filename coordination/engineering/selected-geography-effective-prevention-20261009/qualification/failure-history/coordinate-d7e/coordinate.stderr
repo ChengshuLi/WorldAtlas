@@ -1,0 +1,29 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:11
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Retained coordinate certificate metadata exceeds ordinary bound
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:11:34)
+    at Module.selectedCoordinateShard (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:63:2)
+    at coordinateStage (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:39:55)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:113:48
+
+Node.js v24.19.0
+       12.96 real        13.84 user         1.71 sys
+           513654784  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              377620  page reclaims
+                7074  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+               10518  messages sent
+                4222  messages received
+                   0  signals received
+                1935  voluntary context switches
+               25672  involuntary context switches
+        146125587490  instructions retired
+         40587202570  cycles elapsed
+           397326592  peak memory footprint

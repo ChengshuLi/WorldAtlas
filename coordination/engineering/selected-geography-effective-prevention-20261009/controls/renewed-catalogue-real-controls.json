@@ -1,0 +1,24 @@
+{
+  "kind": "actual-renewed-release-catalogue-metadata-controls",
+  "input_commit": "62f7165050c352af7e7a5ca219b138994a9bb041",
+  "source": "uncommitted scoped trusted module; not frozen cold qualification",
+  "positive": {
+    "inline_roles": 137,
+    "release_products": 343,
+    "complete_roles": 480
+  },
+  "negative_controls": [
+    "missing-product",
+    "duplicate-product",
+    "foreign-product",
+    "reordered-products",
+    "changed-encoded-pin",
+    "changed-payload-pin",
+    "missing-decoded-pin",
+    "over-cap-product",
+    "missing-inline-catalogue",
+    "duplicate-inline-role"
+  ],
+  "science_reexecuted": false,
+  "activation": false
+}

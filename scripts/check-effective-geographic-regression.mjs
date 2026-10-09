@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const FILE=32*1024*1024, PHASE=256*1024*1024, OUTPUT=4*1024*1024;
 const sha=b=>createHash('sha256').update(b).digest('hex');
@@ -14,7 +15,9 @@ const hash=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
 const commit=v=>typeof v==='string'&&/^[a-f0-9]{40}$/.test(v);
 const safe=v=>typeof v==='string'&&v&&!v.includes('\\')&&!v.includes('\0')&&!path.isAbsolute(v)&&v.split('/').every(p=>p&&p!=='.'&&p!=='..');
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const freezeJson=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freezeJson);Object.freeze(value);}return value;};
 const installedRuntimes=new Map();
+const selectedSnapshots=new WeakMap();
 function runtimeIdentity(executable=process.execPath) {
   const executablePath=fs.realpathSync(executable);
   if(installedRuntimes.has(executablePath))return installedRuntimes.get(executablePath);
@@ -100,6 +103,148 @@ class StockImage {
   }
 }
 
+// Explicit selected manifest-bound native asset transport. This consumes only
+// immutable data; candidate whole-image/restoration code is never executed.
+export class NativeAssetImage {
+  constructor(reader,manifest,manifestPath) {
+    demand(safe(manifestPath),'Missing selected native manifest path');this.nativeRoot=path.posix.dirname(manifestPath);
+    this.reader=reader;const t=manifest.native_asset_transport;
+    demand(t&&same(Object.keys(t).sort(),['index','kind','logical_assets','original_compressed_bytes','version'])&&t.version===1&&t.kind==='ordered-exact-original-byte-fragments','Unsupported selected native asset transport');
+    demand(t.index&&same(Object.keys(t.index).sort(),['bytes','path','sha256'])&&safe(t.index.path)&&hash(t.index.sha256)&&Number.isSafeInteger(t.index.bytes)&&t.index.bytes>0&&t.index.bytes<=FILE,'Unbound selected native transport index');
+    this.directory=path.posix.dirname(t.index.path);
+    const descriptor=reader.descriptor(t.index.path);demand(descriptor.bytes===t.index.bytes,'Selected native index whole size differs');
+    this.index=reader.json(t.index.path,{expected:t.index.sha256});
+    demand(this.index.version===1&&this.index.kind===t.kind&&hash(this.index.whole_sha256)&&Number.isSafeInteger(this.index.whole_bytes)&&this.index.whole_bytes>0&&this.index.whole_bytes===t.original_compressed_bytes,'Unknown/incomplete native byte bank');
+    demand(Number.isSafeInteger(t.logical_assets)&&t.logical_assets===manifest.parts.length&&Array.isArray(this.index.files)&&this.index.files.length===t.logical_assets&&Array.isArray(this.index.parts)&&this.index.parts.length>0&&this.index.parts.length<=512,'Incomplete native asset transport roster');
+    for(const list of [this.index.files,this.index.parts]) {
+      let offset=0;const names=new Set();for(const p of list){const length=list===this.index.parts?p.decoded_bytes:p.bytes;
+        demand(safe(p.path)&&!names.has(p.path)&&Number.isSafeInteger(p.offset)&&p.offset===offset&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&Number.isSafeInteger(length)&&length>0&&length<=FILE&&hash(p.sha256),'Invalid complete native byte partition');
+        if(list===this.index.files)demand(p.mode==='100644'&&manifest.parts.some(a=>a.path===p.path&&a.bytes===p.bytes&&a.sha256===p.sha256),'Foreign/rebound whole native member');
+        else{demand(hash(p.decoded_sha256),'Missing full native fragment decoded hash');const d=reader.descriptor(path.posix.join(this.directory,p.path));demand(d.bytes===p.bytes,'Whole native fragment size differs');}
+        names.add(p.path);offset+=length;
+      }demand(offset===this.index.whole_bytes,'Native transport omitted complete bytes');
+    }
+  }
+  logical(name,pin) {
+    demand(name===path.posix.join(this.nativeRoot,pin.path),'Foreign selected native logical path');
+    const member=this.index.files.find(p=>p.path===pin.path);
+    demand(member&&member.bytes===pin.bytes&&member.sha256===pin.sha256,'Selected native asset differs from manifest-bound whole member');
+    const containing=this.index.parts.filter(p=>p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes);
+    const descriptors=containing.map(p=>({p,d:this.reader.descriptor(path.posix.join(this.directory,p.path))}));
+    for(const {p,d}of descriptors)this.reader.admit(d,p.decoded_bytes);
+    demand(member.bytes<=FILE&&this.reader.used+member.bytes<=PHASE,'Native complete member reconstruction exceeds phase');this.reader.used+=member.bytes;
+    const chunks=[];let bytes=0;for(const {p}of descriptors){const encoded=this.reader.read(path.posix.join(this.directory,p.path),{expected:p.sha256,decoded:p.decoded_bytes});demand(encoded.length===p.bytes&&encoded.readUInt32LE(encoded.length-4)===p.decoded_bytes,'Native fragment declared decoded size differs before inflate');
+      const raw=gunzipSync(encoded,{maxOutputLength:p.decoded_bytes});demand(raw.length===p.decoded_bytes&&sha(raw)===p.decoded_sha256,'Whole native fragment decoded body differs');
+      const start=Math.max(member.offset,p.offset),end=Math.min(member.offset+member.bytes,p.offset+raw.length);chunks.push(raw.subarray(start-p.offset,end-p.offset));bytes+=end-start;
+    }demand(bytes===member.bytes,'Incomplete whole native member inverse');const body=Buffer.concat(chunks,bytes);demand(sha(body)===member.sha256,'Whole native member changed');return body;
+  }
+}
+
+// Resolve the selected continuous source independently of raw Git target bytes.
+// The accepted v8 bank replaces part29 while the same raw Git path remains the
+// historical original. Logical inverse provenance stays distinct from Git pins.
+export class SelectedGeometrySources {
+  constructor(snapshot) {
+    demand(selectedSnapshots.has(snapshot)&&snapshot?.reader instanceof ImmutableReader,'Require authenticated selected snapshot');
+    this.reader=snapshot.reader;this.snapshot=snapshot;
+    const accepted=selectedSnapshots.get(snapshot);demand(accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),'Selected snapshot metadata drift');
+    const declared=snapshot.selection.selected_geography;
+    if(declared){
+      demand(declared.version===1&&declared.kind==='complete-world-index-with-exact-encoded-overrides'&&same(Object.keys(declared).sort(),['bytes','kind','path','sha256','version'])&&safe(declared.path)&&hash(declared.sha256)&&Number.isSafeInteger(declared.bytes)&&declared.bytes>0&&declared.bytes<=FILE,'Unsupported explicit selected geometry bank');
+      const pin=this.reader.descriptor(declared.path);demand(pin.bytes===declared.bytes,'Selected source map size differs');
+      this.bank=this.reader.json(declared.path,{expected:declared.sha256});
+      demand(this.bank.version===1&&this.bank.kind===declared.kind&&this.bank.release_id===snapshot.selection.release_id&&this.bank.native_manifest_sha256===snapshot.selection.sha256&&hash(this.bank.footprints_sha256),'Selected source/native/release binding differs');
+    }else{
+      demand(snapshot.selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Selected continuous source transport unsupported; explicit release binding required');
+      this.image=snapshot.image instanceof StockImage?snapshot.image:new StockImage(this.reader);
+    }
+    // Native preflight has discarded its whole containing buffers. Retain all
+    // live snapshot metadata and any acquisition-frame bounds buffers explicitly
+    // before the distinct release/source metadata acquisition phase.
+    const external=Math.max(0,this.reader.metadataBytes-8*1024*1024);
+    const ownImageBytes=this.image&&this.image!==snapshot.image?Buffer.byteLength(JSON.stringify({index:this.image.index,map:this.image.map})):0;
+    this.reader.metadataBytes=8*1024*1024+external+2*(snapshot.metadataBytes+ownImageBytes)+snapshot.acquisition_buffer_bytes;
+    this.reader.phase();
+    const pointer=this.reader.json('data/geographic-releases/current-manifest.json');
+    demand(safe(pointer.path)&&hash(pointer.sha256),'Unbound selected geographic release');
+    const releasePath=path.posix.join('data/geographic-releases',pointer.path);
+    // This ordinary gzip is charged at its maximum ordinary decoded bound BEFORE
+    // reading. A smaller trusted decoded pin can be introduced by a typed release
+    // descriptor, never by inspecting uncharged compressed bytes.
+    const encoded=this.reader.read(releasePath,{expected:pointer.sha256,decoded:FILE});
+    const release=JSON.parse(gunzipSync(encoded,{maxOutputLength:FILE}));
+    const entries=release.releases;
+    demand(Array.isArray(entries)&&entries.length>0&&new Set(entries.map(r=>r.id)).size===entries.length,'Incomplete selected release roster');
+    this.release=entries.find(r=>r.id===snapshot.selection.release_id);
+    demand(this.release&&this.release===entries.at(-1)&&hash(this.release.footprints_sha256),'Native source differs from current selected geographic release');
+    const index=this.reader.json('data/world-index.json');
+    demand(Array.isArray(index.parts)&&index.parts.length>0&&index.parts.length<=512&&new Set(index.parts).size===index.parts.length,'Incomplete whole source containing roster');
+    this.paths=index.parts.map(p=>{demand(safe(p),'Unsafe world source part');return 'data/'+p;});
+    const pathSet=new Set(this.paths);
+    if(this.bank){
+      demand(this.bank.footprints_sha256===this.release.footprints_sha256&&this.bank.locations===snapshot.owners.length,'Selected source full scope/digest differs');
+      const original=this.readPinned(this.bank.world_index);demand(original.equals(this.reader.read('data/world-index.json')),'Source bank original index differs from current complete index');
+      demand(Array.isArray(this.bank.unchanged_files)&&Array.isArray(this.bank.overrides),'Incomplete selected source map');
+      const roster=new Map();
+      for(const p of this.bank.unchanged_files){demand(pathSet.has(p.path)&&!roster.has(p.path),'Foreign/duplicate selected original containing source');this.checkPin(p);const actual=this.reader.descriptor(p.path);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Current original containing body differs from selected source map');roster.set(p.path,{...p,kind:'ordinary-immutable-git-source'});}
+      for(const p of this.bank.overrides){demand(pathSet.has(p.logical_path)&&!roster.has(p.logical_path)&&p.encoding==='gzip','Foreign/duplicate/unsupported selected source override');this.checkPin(p);demand(Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>0&&p.decoded_bytes<=FILE&&hash(p.decoded_sha256),'Unbounded whole source override');roster.set(p.logical_path,{...p,kind:'selected-exact-encoded-override'});}
+      demand(roster.size===this.paths.length&&this.paths.every(p=>roster.has(p)),'Incomplete selected source containing inventory');
+      this.sources=this.paths.map(p=>roster.get(p));this.replacements=new Map(this.bank.overrides.map(p=>[p.logical_path,p]));
+    }else{
+      const replacements=this.image.map.logical_targets.filter(p=>p.target.startsWith('data/geography/'));
+      demand(replacements.every(p=>pathSet.has(p.target)),'Selected bank contains unrostered source replacement');
+      this.replacements=new Map(replacements.map(p=>[p.target,p]));
+      this.sources=this.paths.map(name=>{
+        const replacement=this.replacements.get(name);
+        if(replacement){demand(replacement.mode==='100644'&&hash(replacement.sha256)&&Number.isSafeInteger(replacement.bytes)&&replacement.bytes>0&&replacement.bytes<=FILE,'Invalid whole selected geometry member');return {path:name,kind:'selected-whole-bank-member',bytes:replacement.bytes,sha256:replacement.sha256,mode:replacement.mode,transport_index_sha256:STOCK_INDEX,physical_member:replacement.object,origin:replacement.origin,existing_original:replacement.existing_original};}
+        return {...this.reader.descriptor(name),kind:'ordinary-immutable-git-source'};
+      });
+    }
+    freezeJson(this.paths);freezeJson(this.sources);freezeJson(this.bank);freezeJson(this.release);Object.freeze(this);
+
+  }
+  checkPin(p) {
+    demand(p&&commit(p.commit)&&safe(p.path)&&p.mode==='100644'&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256),'Incomplete whole selected source pin');
+  }
+  readPinned(p) {
+    this.checkPin(p);let version=p.commit;
+    // Squash retention is allowed ONLY for the exact same original ordinary
+    // path/mode/Git blob/full SHA. Actual consumed provenance remains explicit.
+    try{this.reader.git('cat-file','-e',version+'^{commit}');}catch{version=this.reader.version;}
+    const actual=this.reader.descriptor(p.path,version);
+    demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Selected source original mode/OID/body differs');
+    const raw=this.reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes??0});
+    return raw;
+  }
+
+  read(name) {
+    demand(this.paths.includes(name),'Foreign source outside complete selected roster');
+    const replacement=this.replacements.get(name);
+    const source=this.sources[this.paths.indexOf(name)];let raw;
+    if(this.bank){
+      const encoded=this.readPinned(source);
+      if(replacement){demand(encoded.length>=18&&encoded[0]===31&&encoded[1]===139&&encoded.readUInt32LE(encoded.length-4)===source.decoded_bytes,'Source override gzip size differs before decode');raw=gunzipSync(encoded,{maxOutputLength:source.decoded_bytes});demand(raw.length===source.decoded_bytes&&sha(raw)===source.decoded_sha256,'Whole selected source override differs');}
+      else raw=encoded;
+    }else if(replacement&&name==='data/geography/part-29.json'&&replacement.sha256==='c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8'&&replacement.bytes===12932407){
+      // The accepted v8 logical member has a separately retained whole ordinary
+      // gzip inverse. It is a fixed byte-exact alias, never a proposal scan.
+      const alias='coordination/engineering/eastern-two-gap-repair-20261007/run-two/proposed-part-29.json.gz';
+      demand(this.reader.descriptor(alias).mode==='100644','Accepted whole v8 alias mode differs');
+      const encoded=this.reader.read(alias,{expected:'fa286f44f47494cacab793e4109eb18db3e6016dc7103d930b9dff2dbf3573fb',decoded:replacement.bytes});
+      demand(encoded.length===3400273&&encoded.length>=18&&encoded.readUInt32LE(encoded.length-4)===replacement.bytes,'Accepted whole v8 alias size differs');
+      raw=gunzipSync(encoded,{maxOutputLength:replacement.bytes});demand(raw.length===replacement.bytes&&sha(raw)===replacement.sha256,'Accepted whole v8 alias inverse differs');
+      return this.collection(raw,{...source,whole_encoded_alias:{...this.reader.inventory.get(this.reader.version+':'+alias)}});
+    }else raw=replacement?this.image.logical(name,replacement):this.reader.read(name);
+
+    return this.collection(raw,source);
+  }
+  collection(raw,source) {
+    const collection=JSON.parse(raw);
+    demand(collection?.type==='FeatureCollection'&&Array.isArray(collection.features)&&collection.features.length>0,'Incomplete whole selected source collection');
+    return {body:raw,collection,source,whole_sha256:sha(raw)};
+  }
+}
+
 function validateParts(manifest) {
   demand(manifest.version===2&&manifest.method==='native-linear-evenodd-first-owner-v1'&&Number.isSafeInteger(manifest.size)&&manifest.size>1&&manifest.coordinateBits===Math.ceil(Math.log2(manifest.size)),'Unsupported selected ownership domain');
   demand(Array.isArray(manifest.parts)&&manifest.parts.length>0&&manifest.parts.length<=512,'Missing native whole parts');
@@ -107,13 +252,86 @@ function validateParts(manifest) {
   for(const kind of ['rows','runs']){let offset=0;const parts=manifest.parts.filter(p=>p.kind===kind);demand(parts.length>0,'Missing native '+kind);for(const p of parts){demand(safe(p.path)&&!names.has(p.path)&&p.offset===offset&&Number.isSafeInteger(p.words)&&p.words>0&&p.words%2===0&&p.encoding==='byte-shuffle'&&p.decoded_bytes===p.words*4&&p.decoded_bytes<=FILE&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256)&&hash(p.decoded_sha256),'Invalid complete native partition');names.add(p.path);offset+=p.words;}demand(offset===(kind==='rows'?manifest.size*2:manifest.runWords),'Native partition omitted words');}
 }
 
-export function loadSelection(reader) {
+// Independently accepted immutable scientific artifacts are consumed as data.
+// This exact registered authority preserves original scientific qualification;
+// it never imports the proposed consumer or fabricates a scientific brand.
+const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
+  // Retained original acceptance. New independent decisions append their whole
+  // GET hash here after ordinary trusted-code review; candidate data cannot mint
+  // a reviewer identity or approval boolean as an authority.
+  '79024f6fd9335b0ad9da0ed936f5eabc600188f6176d9f953ceb006946626dbd':Object.freeze({review_id:6078458358,github_user_id:6732996,issue:1520,retired:true}),
+  '5d6758debd9c2e141b83c40594486939f6fa2fd819816070957bbc4b0f1075c2':Object.freeze({review_id:6078884054,github_user_id:6732996,issue:1520,releaseCatalogue:true}),
+  '7bd742247d4f2c2435fcb8c9bbc3134d3edc6193f312171bdb9a3b2ffd769c72':Object.freeze({review_id:6079096820,github_user_id:6732996,issue:1520,releaseCatalogue:true})
+});
+// Validate the complete ordered installer catalogue as immutable provenance.
+// Reading these descriptors does not claim this gate installs their payloads.
+export function validateReleaseCatalogue(certificate,catalogue,registry) {
+  const pin=certificate.release_product_catalogue,inline=certificate.application_inputs;
+  demand(catalogue?.version===1&&catalogue.kind==='qualified-arctic-release-product-roster-v1'&&catalogue.issue===1520&&same(Object.keys(catalogue).sort(),['issue','kind','products','version'])&&Array.isArray(catalogue.products)&&catalogue.products.length===343,'Incomplete qualified release product catalogue');
+  demand(Array.isArray(inline)&&inline.length===137&&same(inline.find(p=>p.space==='root'&&p.path===pin.path),{space:'root',...pin}),'Release catalogue is not the exact inline application input');
+  const seen=new Set();
+  function descriptor(p,space) {
+    demand(['root','prior','image'].includes(space)&&safe(p.path)&&p.mode==='100644'&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256),'Invalid complete application role');
+    if(p.decoded_bytes!==undefined)demand(Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>0&&p.decoded_bytes<=FILE&&hash(p.decoded_sha256),'Invalid full application decoded role');
+    const key=space+':'+p.path;demand(!seen.has(key),'Duplicate/overlapping complete application role');seen.add(key);
+  }
+  for(const p of inline)descriptor(p,p.space);
+  const directory=path.posix.dirname(certificate.selected_artifact_bindings.registry.path);
+  demand(Array.isArray(registry?.batches)&&registry.batches.length>=343,'Missing complete release registry product roster');
+  const rows=registry.batches.slice(-343);
+  for(let i=0;i<catalogue.products.length;i++) {
+    const p=catalogue.products[i],row=rows[i];
+    demand(same(Object.keys(p).sort(),['bytes','decoded_bytes','decoded_sha256','mode','path','sha256']),'Incomplete whole release product descriptor');descriptor(p,'root');
+    demand(safe(row.path)&&p.path===path.posix.join(directory,row.path)&&row.encoding==='gzip'&&row.sha256===p.sha256&&row.payload_sha256===p.decoded_sha256,'Release catalogue ordered path/encoded/payload join differs');
+  }
+  demand(seen.size===480,'Incomplete expanded application closure');
+  return {inline_roles:137,release_products:343,complete_roles:480};
+}
+function readArtifactGzip(reader,pin) {
+  demand(pin&&safe(pin.path)&&pin.mode==='100644'&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=FILE&&hash(pin.sha256)&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=FILE&&hash(pin.decoded_sha256),'Unbounded artifact gzip pin');
+  const actual=reader.descriptor(pin.path);demand(actual.bytes===pin.bytes&&actual.mode===pin.mode,'Artifact gzip whole mode/size differs');reader.admit(actual,pin.decoded_bytes);
+  const encoded=reader.read(pin.path,{expected:pin.sha256,decoded:pin.decoded_bytes});demand(encoded.readUInt32LE(encoded.length-4)===pin.decoded_bytes,'Artifact decoded size differs before inflate');
+  const body=gunzipSync(encoded,{maxOutputLength:pin.decoded_bytes});demand(body.length===pin.decoded_bytes&&sha(body)===pin.decoded_sha256,'Artifact whole decoded body differs');return JSON.parse(body);
+}
+export function readArtifactConsumption(reader,selection,manifest) {
+  const hook=selection.artifact_consumption;if(hook===undefined)return null;
+  demand(hook&&same(Object.keys(hook).sort(),['certificate','review']),'Unsupported artifact-consumption selector');
+  const registration=REGISTERED_ARTIFACT_REVIEW_GETS[hook.review?.sha256];
+  demand(registration,'Missing independently registered artifact authority');
+  demand(!registration.retired,'Historical artifact authority cannot select the superseded application closure');
+  for(const pin of [hook.certificate,hook.review]){
+    demand(pin&&same(Object.keys(pin).sort(),['bytes','mode','path','sha256'])&&pin.mode==='100644'&&safe(pin.path)&&hash(pin.sha256)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=FILE,'Unsupported whole artifact authority pin');
+    const actual=reader.descriptor(pin.path);demand(actual.mode===pin.mode&&actual.bytes===pin.bytes,'Artifact authority whole mode/size differs');reader.admit(actual);
+  }
+  const certificate=reader.json(hook.certificate.path,{expected:hook.certificate.sha256}),review=reader.json(hook.review.path,{expected:hook.review.sha256});
+  demand(review.id===registration.review_id&&review.user?.id===registration.github_user_id&&typeof review.body==='string','Artifact authority is not the independently retained review GET');
+  const block=review.body.match(/<!-- worldatlas-qualified-artifact-consumption:v1\s*([\s\S]*?)\s*-->/);demand(block,'Missing typed artifact review');const accepted=JSON.parse(block[1]);
+  demand(accepted.version===1&&accepted.issue===registration.issue&&accepted.decision==='accept-qualified-artifact-consumption'&&accepted.certificate_sha256===hook.certificate.sha256&&accepted.certificate_bytes===hook.certificate.bytes&&accepted.native_manifest_sha256===selection.sha256,'Typed independent artifact authority differs');
+  demand(certificate.version===1&&certificate.kind==='qualified-arctic-immutable-product-certificate-v1'&&certificate.issue===registration.issue&&certificate.native_manifest_sha256===accepted.native_manifest_sha256&&selection.sha256===accepted.native_manifest_sha256&&certificate.complete_locations===49625,'Unsupported qualified artifact domain');
+  const bindings=certificate.selected_artifact_bindings,last=certificate.steps?.at(-1),declared=bindings?.native_manifest,actual=reader.descriptor(selection.manifest_path);
+  demand(declared?.path===selection.manifest_path&&declared.bytes===actual.bytes&&declared.sha256===selection.sha256&&last?.successor_release_id===selection.release_id&&last.selected_grid.path===declared.path&&last.selected_grid.sha256===declared.sha256&&last.selected_grid.bytes===declared.bytes,'Selected native/release is not the qualified artifact');
+  demand(same(bindings.selected_geography,selection.selected_geography)&&certificate.source_policy.sha256===accepted.source_policy_sha256&&certificate.application_consumer_code.sha256===accepted.application_consumer_code_sha256&&certificate.qualification_inventory.sha256===accepted.qualification_inventory_sha256,'Selected source/policy/qualification binding differs');
+  demand(Array.isArray(certificate.application_inputs)&&certificate.application_inputs.length>0&&certificate.steps.length===3&&certificate.limits.science_reexecuted_for_application===false&&manifest.geographic_release===selection.release_id,'Incomplete original artifact-consumption closure');
+  let releaseCatalogue=null;
+  if(registration.releaseCatalogue){
+    const cataloguePin=certificate.release_product_catalogue,registryPin={mode:'100644',...bindings.registry};
+    // Admit BOTH complete gzip bodies before reading either one.
+    for(const pin of [cataloguePin,registryPin]){demand(pin&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=FILE,'Missing bounded complete release catalogue');const d=reader.descriptor(pin.path);demand(d.bytes===pin.bytes&&d.mode===pin.mode,'Complete release catalogue pin differs');reader.admit(d,pin.decoded_bytes);}
+    releaseCatalogue=validateReleaseCatalogue(certificate,readArtifactGzip(reader,cataloguePin),readArtifactGzip(reader,registryPin));
+  }
+  return freezeJson({releaseCatalogue,certificate_pin:hook.certificate,review_pin:hook.review,certificate,review_id:review.id,limits:accepted.limits,
+    scope:'Once-qualified immutable artifact provenance only. This gate independently consumes actual selected native/source products; no source authority, activation or production approval.'});
+}
+
+function loadBaseSelection(reader) {
   const has=reader.git('ls-tree','-z',reader.version,'--','data/ownership-selection.json').length;
   if(!has)return null;
   const selection=reader.json('data/ownership-selection.json');
-  demand(same(Object.keys(selection).sort(),['manifest_path','method','release_id','sha256','version']),'Unsupported committed additive/ownership selection; no proposal scanning');
+  const selectionKeys=['manifest_path','method','release_id','sha256','version',...(selection.selected_geography?['selected_geography']:[]),...(Object.hasOwn(selection,'additive_release')?['additive_release']:[]),...(Object.hasOwn(selection,'artifact_consumption')?['artifact_consumption']:[])].sort();
+  demand(same(Object.keys(selection).sort(),selectionKeys),'Unsupported committed additive/ownership selection; no proposal scanning');
   demand(selection.version===1&&selection.method==='native-linear-evenodd-first-owner-v1'&&safe(selection.manifest_path)&&hash(selection.sha256),'Unsupported ownership selection');
   const manifest=reader.json(selection.manifest_path,{expected:selection.sha256});validateParts(manifest);
+  const artifactConsumption=readArtifactConsumption(reader,selection,manifest);
   demand(selection.release_id===manifest.geographic_release,'Selected reference differs from native bank');
   const bounds=manifest.original_assets?.bounds;
   demand(bounds?.role==='original-identity-parent-camera-context'&&commit(bounds.commit)&&bounds.path==='data/canonical-grid/bounds.json.gz'&&bounds.sha256===manifest.bounds?.sha256,'Missing independent original native owner roster');
@@ -136,12 +354,37 @@ export function loadSelection(reader) {
   demand(Array.isArray(products)&&products.length>0&&products.length<=512&&products.every(p=>safe(p.path)&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&p.bytes<=FILE)&&new Set(products.map(p=>p.path)).size===products.length&&receipt.two_run_products===products.length&&receipt.run_one_sha256===sha(Buffer.from(JSON.stringify(products)))&&receipt.run_two_sha256===receipt.run_one_sha256&&products.find(p=>p.path==='manifest.json')?.sha256===selection.sha256,'Incomplete two-run native comparison');
   demand(products.filter(p=>p.path.startsWith('native-v1/ownership/')).length===manifest.parts.length,'Comparison contains foreign/missing native assets');
   for(const part of manifest.parts)demand(products.some(p=>p.path===part.path&&p.sha256===part.sha256&&p.bytes===part.bytes),'Comparison omitted selected native asset');
-  let image;
+  let image=manifest.native_asset_transport?new NativeAssetImage(reader,manifest,selection.manifest_path):undefined;
   for(const part of manifest.parts){const name=path.posix.join(path.posix.dirname(selection.manifest_path),part.path);
     if(reader.git('ls-tree','-z',reader.version,'--',name).length)reader.descriptor(name);
-    else{demand(selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');image??=new StockImage(reader);const target=image.map.logical_targets.find(p=>p.target===name);demand(target&&target.bytes===part.bytes&&target.sha256===part.sha256,'Selected native asset absent from complete bank');}}
-  if(image)for(const part of image.index.parts){const actual=reader.descriptor(NS+'/'+part.path);demand(actual.bytes===part.bytes,'Whole selected container length differs');}
-  return {selection,manifest,owners,image,receiptProvenance,metadataBytes:decoded.length+JSON.stringify(manifest).length+(image?JSON.stringify(image.map).length:0),reader};
+    else{if(image instanceof NativeAssetImage){demand(image.index.files.some(p=>p.path===part.path&&p.bytes===part.bytes&&p.sha256===part.sha256),'Missing selected native transport asset');}else{demand(selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');image??=new StockImage(reader);const target=image.map.logical_targets.find(p=>p.target===name);demand(target&&target.bytes===part.bytes&&target.sha256===part.sha256,'Selected native asset absent from complete bank');}}}
+  if(image instanceof StockImage)for(const part of image.index.parts){const actual=reader.descriptor(NS+'/'+part.path);demand(actual.bytes===part.bytes,'Whole selected container length differs');}
+  const snapshot={selection,manifest,owners,image,receiptProvenance,artifactConsumption,metadataBytes:decoded.length+Buffer.byteLength(JSON.stringify(manifest))+(image instanceof StockImage?Buffer.byteLength(JSON.stringify(image.map))+Buffer.byteLength(JSON.stringify(image.index)):image?Buffer.byteLength(JSON.stringify(image.index)):0),acquisition_buffer_bytes:rawBounds.length+decoded.length,reader};
+  if(artifactConsumption)snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(artifactConsumption));
+  selectedSnapshots.set(snapshot,{selection:JSON.stringify(selection),manifest:JSON.stringify(manifest)});
+  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
+  return snapshot;
+}
+
+export function loadSelection(reader) {
+  // This completed helper frame relinquishes raw base containers and decoded
+  // owner-body buffers before a genuinely separate additive acquisition stage.
+  // The full authenticated owners/map/index and all descriptor custody survive.
+  const snapshot=loadBaseSelection(reader);if(!snapshot)return null;
+  // The returned owner objects remain, but the helper's encoded/decoded byte
+  // buffers do not. Their full consumption remains in the completed phase below.
+  snapshot.acquisition_buffer_bytes=0;
+  const basePhase={kind:'complete-selected-base-acquisition-v1',complete_phase_bytes:reader.used,inputs:structuredClone([...reader.inventory.values()])};
+  snapshot.acquisitionPhases=[basePhase];
+  if(snapshot.selection.additive_release!==undefined){
+    reader.metadataBytes+=snapshot.metadataBytes+Buffer.byteLength(JSON.stringify(basePhase));
+    reader.phase();
+    snapshot.additive=readSelectedAdditive(snapshot);
+    snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',complete_phase_bytes:reader.used,inputs:structuredClone([...reader.inventory.values()])});
+    snapshot.metadataBytes+=snapshot.additive.metadata_bytes;
+  }else snapshot.additive=null;
+  snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.acquisitionPhases));
+  freezeJson(snapshot.acquisitionPhases);freezeJson(snapshot.selection);freezeJson(snapshot.manifest);freezeJson(snapshot.owners);return Object.freeze(snapshot);
 }
 
 function asset(snapshot,pin) {
@@ -152,7 +395,7 @@ function asset(snapshot,pin) {
   let raw;
   if(exists)raw=reader.read(name,{expected:pin.sha256,decoded:pin.decoded_bytes});
   else {
-    demand(selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');
+    demand(snapshot.image instanceof NativeAssetImage||selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');
     const image=snapshot.image??new StockImage(reader);raw=image.logical(name,pin);
   }
   demand(raw.length===pin.bytes&&sha(raw)===pin.sha256,'Whole selected native encoded body differs');
@@ -180,10 +423,10 @@ export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
   return losses;
 }
 
-export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
+export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
   const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-  const codePaths=['scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
+  const codePaths=['scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'];
   const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&stat.size<=FILE,'Nonordinary/oversized trusted execution code');return {name,file,stat};});
   const executionBytes=codeStats.reduce((n,p)=>n+p.stat.size,0);
   const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
@@ -199,13 +442,23 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   const identities=[...new Set(runtimePaths)].map(p=>runtimeIdentity(p));
   const runtime=identities.find(p=>p.path===fs.realpathSync(process.execPath)),callerRuntime=parentRuntimePath?identities.find(p=>p.path===fs.realpathSync(parentRuntimePath)):null;
   const executionCode=codeStats.map(({name,file,stat})=>{const body=fs.readFileSync(file);demand(body.length===stat.size,'Trusted execution code changed during whole read');return {path:name,bytes:body.length,mode:stat.mode&0o777,sha256:sha(body)};});
-  const before=loadSelection(beforeReader),after=loadSelection(afterReader);
+  return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode};
+}
+
+export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
+  const {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode}=selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
+  const before=loadSelection(beforeReader);
+  // loadSelection's raw acquisition buffers are no longer live. Its complete
+  // decoded metadata remains retained and is charged during the candidate
+  // acquisition; this is a lifecycle boundary, not two simultaneous free phases.
+  if(before){afterReader.metadataBytes=8*1024*1024+2*before.metadataBytes;afterReader.phase();}
+  const after=loadSelection(afterReader);
   if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
   demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
   const a=before.manifest,b=after.manifest;
   // A changed transport body with an unchanged declared selected member must
   // still authenticate against its independently pinned whole container hash.
-  for(const snapshot of [before,after])if(snapshot.image)for(const part of snapshot.image.index.parts){const name=NS+'/'+part.path,own=snapshot.reader.inventory.get(snapshot.reader.version+':'+name),other=(snapshot===before?afterReader:beforeReader).inventory.get((snapshot===before?candidate:baseline)+':'+name);if(!other||own.git_blob_oid!==other.git_blob_oid){snapshot.reader.phase();const encoded=snapshot.reader.read(name,{expected:part.sha256,decoded:part.decoded_bytes});const body=gunzipSync(encoded,{maxOutputLength:part.decoded_bytes});demand(body.length===part.decoded_bytes&&sha(body)===part.decoded_sha256,'Changed selected whole transport body differs');}}
+  for(const snapshot of [before,after])if(snapshot.image)for(const part of snapshot.image.index.parts){const name=(snapshot.image instanceof NativeAssetImage?snapshot.image.directory:NS)+'/'+part.path,own=snapshot.reader.inventory.get(snapshot.reader.version+':'+name),other=(snapshot===before?afterReader:beforeReader).inventory.get((snapshot===before?candidate:baseline)+':'+name);if(!other||own.git_blob_oid!==other.git_blob_oid){snapshot.reader.phase();const encoded=snapshot.reader.read(name,{expected:part.sha256,decoded:part.decoded_bytes});const body=gunzipSync(encoded,{maxOutputLength:part.decoded_bytes});demand(body.length===part.decoded_bytes&&sha(body)===part.decoded_sha256,'Changed selected whole transport body differs');}}
   demand(a.size===b.size&&a.version===b.version&&a.method===b.method&&a.coordinateBits===b.coordinateBits&&same(a.native_latitudes,b.native_latitudes),'Changed native grid/domain requires independent migration');
   demand(same(before.owners.map(p=>[p.index,p.id,p.province_id,p.province_index]),after.owners.map(p=>[p.index,p.id,p.province_id,p.province_index])),'Original stable owner/parent indices rebound');
   const metadataBytes=before.metadataBytes+after.metadataBytes+8*1024*1024;
@@ -224,16 +477,18 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   offset=0;for(let y=0;y<b.size;y++){demand(newRows[y*2]===offset,'Candidate row partition incomplete');offset+=newRows[y*2+1];}demand(offset*2===b.runWords,'Candidate rows omitted runs');
   const bodyChanged=(p,snapshot,other)=>{const ownPath=path.posix.join(path.posix.dirname(snapshot.selection.manifest_path),p.path),otherPath=path.posix.join(path.posix.dirname(other.selection.manifest_path),p.path),own=snapshot.reader.inventory.get(snapshot.reader.version+':'+ownPath),prior=other.reader.inventory.get(other.reader.version+':'+otherPath);return !!own!==!!prior||!!own&&(own.mode!==prior.mode||own.git_blob_oid!==prior.git_blob_oid);};
   const changed=oldParts.filter(p=>!newParts.some(q=>same(p,q))||bodyChanged(p,before,after)).concat(newParts.filter(p=>!oldParts.some(q=>same(p,q))||bodyChanged(p,after,before)));
-  const affected=[];for(let y=0;y<a.size;y++){const spans=[[oldRows[y*2]*2,(oldRows[y*2]+oldRows[y*2+1])*2],[newRows[y*2]*2,(newRows[y*2]+newRows[y*2+1])*2]];if(oldRows[y*2]!==newRows[y*2]||oldRows[y*2+1]!==newRows[y*2+1]||spans.some(([s,e])=>changed.some(p=>s<p.offset+p.words&&p.offset<e)))affected.push(y);}
+  const additiveRows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(r=>r.y));
+  let additiveConservation=null;if(before.additive){demand(after.additive,'Previously selected additive repair ledger removed');additiveConservation=compareVersionedRepairLedgers(before.additive.ledger,after.additive.ledger,{beforeRegistry:before.additive.registry,afterRegistry:after.additive.registry});}
+  const affected=[];for(let y=0;y<a.size;y++){const spans=[[oldRows[y*2]*2,(oldRows[y*2]+oldRows[y*2+1])*2],[newRows[y*2]*2,(newRows[y*2]+newRows[y*2+1])*2]];if(additiveRows.has(y)||oldRows[y*2]!==newRows[y*2]||oldRows[y*2+1]!==newRows[y*2+1]||spans.some(([s,e])=>changed.some(p=>s<p.offset+p.words&&p.offset<e)))affected.push(y);}
   // A genuine detached cohort owns both sides' whole containing parts. Its
   // decoded words are discarded before resetting admission for another cohort.
   let cache=new Map(),cacheKey='';const phases=[];
   const needed=(snapshot,table,y)=>{const start=table[y*2]*2,end=start+table[y*2+1]*2;return runs(snapshot).filter(p=>start<p.offset+p.words&&p.offset<end);};
   const row=(snapshot,table,y)=>{const start=table[y*2]*2,end=start+table[y*2+1]*2,out=[];for(const p of needed(snapshot,table,y)){const words=cache.get(snapshot.reader.version+':'+p.path);for(let i=Math.max(start,p.offset);i<Math.min(end,p.offset+p.words);i+=2){const x=words[i-p.offset],z=words[i-p.offset+1],bits=snapshot.manifest.coordinateBits,mask=2**bits-1;out.push([x&mask,(z&mask)+1,(x>>>bits)+(z>>>bits)*2**(32-bits)]);}}demand(out.length===table[y*2+1]&&out.every(r=>r[1]<=a.size),'Complete row extraction differs');return out;};
   const losses=[];let lostCells=0;
-  for(const y of affected){const roster=[...needed(before,oldRows,y).map(p=>({snapshot:before,p})),...needed(after,newRows,y).map(p=>({snapshot:after,p}))];const key=JSON.stringify(roster.map(({snapshot,p})=>[snapshot.reader.version,p.path]));if(key!==cacheKey){cache.clear();beforeReader.phase();cacheKey=key;for(const {snapshot,p}of roster)cache.set(snapshot.reader.version+':'+p.path,asset(snapshot,p));phases.push({first_row:y,input_bytes:beforeReader.used,descriptors:beforeReader.charged.size});}const previous=row(before,oldRows,y),next=row(after,newRows,y);const found=compareIntervals(previous,next,{row:y,ownersBefore:before.owners,ownersAfter:after.owners});for(const loss of found){lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);}}
+  for(const y of affected){const roster=[...needed(before,oldRows,y).map(p=>({snapshot:before,p})),...needed(after,newRows,y).map(p=>({snapshot:after,p}))];const key=JSON.stringify(roster.map(({snapshot,p})=>[snapshot.reader.version,p.path]));if(key!==cacheKey){cache.clear();beforeReader.phase();cacheKey=key;for(const {snapshot,p}of roster)cache.set(snapshot.reader.version+':'+p.path,asset(snapshot,p));phases.push({first_row:y,input_bytes:beforeReader.used,descriptors:beforeReader.charged.size});}const oldBase=row(before,oldRows,y),newBase=row(after,newRows,y),previous=before.additive?selectedAdditiveRows(before.additive,y,oldBase):oldBase,next=after.additive?selectedAdditiveRows(after.additive,y,newBase):newBase;const found=compareIntervals(previous,next,{row:y,ownersBefore:before.owners,ownersAfter:after.owners});for(const loss of found){lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);}}
   cache.clear();
-  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Explicit additive selection is unsupported until its normal activation contract is integrated; proposal files never select a release.']};
+  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
