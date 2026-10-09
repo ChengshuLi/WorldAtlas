@@ -13,6 +13,12 @@ export function producePixelNativeGroup(plan,outputValue) {
  const output=path.resolve(outputValue);assert(output.startsWith(path.join(process.cwd(),'.cache')+path.sep));assert(!fs.existsSync(output));
  for(let p=output;;p=path.dirname(p)){try{const s=fs.lstatSync(p);assert(!s.isSymbolicLink());if(p!==output)assert(s.isDirectory());}catch(e){if(e.code!=='ENOENT')throw e;}if(p===path.dirname(p))break;}
  assert.equal(plan.kind,'complete-native-target-run-accounting-group');
+ assert(plan.parts.length>=1&&plan.parts.length<=2);
+ for(const pair of plan.parts)assert(Number.isSafeInteger(pair.before.words)&&pair.before.words>0&&pair.before.words<=1048576&&pair.before.words%2===0);
+ // Each [run,row,length] has at most25 JSON bytes including its delimiter;
+ // the two complete side files each remain below32MiB before source reads.
+ const maximumSideBytes=plan.parts.reduce((n,p)=>n+p.before.words/2,0)*25+131072;
+ assert(maximumSideBytes<=32*1024*1024);assert(maximumSideBytes*2+262144<=plan.output_reserve);
  assert.equal(plan.source_head,process.env.WORLDATLAS_SELECTED_NATIVE_HEAD);
  assert.equal(sha(JSON.stringify(plan)),process.env.WORLDATLAS_SELECTED_NATIVE_PLAN_SHA256);
  assert.equal(process.execPath,plan.runtime.path);assert.equal(process.version,plan.runtime.version);
@@ -31,11 +37,14 @@ export function producePixelNativeGroup(plan,outputValue) {
   for(const fingerprint of fingerprints)assert(sources.some(s=>s.includes(fingerprint)));
   for(const p of plan.code)authenticateAdmittedBody(admission,p.path);authenticateAdmittedBody(admission,plan.runtime.path);};
  guard();const started=new Date().toISOString(),report=pixelNativeGroup(admission,plan);
- const raw=Buffer.from(JSON.stringify(report)+'\n');assert(raw.length<=32*1024*1024);
+ const bodies=['before','after'].map(side=>({name:`target-runs-${side}.json`,raw:Buffer.from(JSON.stringify({...report,side,parts:report.parts.map(p=>({offset:p.offset,words:p.words,targets:p[side]}))})+'\n')}));
+ const metadata=Buffer.from(JSON.stringify({...report,parts:report.parts.map(({before,after,...p})=>p)})+'\n');
+ for(const body of bodies)assert(body.raw.length<=32*1024*1024);assert(metadata.length<=131072);
+ const outputBytes=bodies.reduce((n,b)=>n+b.raw.length,metadata.length);
  for(const p of plan.inputs)authenticateAdmittedBody(admission,p.path);guard();
  const execution=Buffer.from(JSON.stringify({kind:plan.kind,source_head:plan.source_head,started_at:started,completed_at:new Date().toISOString(),
-  phase_bytes:admission.bytes,descriptors:admission.descriptors,scientific_output_sha256:sha(raw),grid_rows_computed:0,activated:false})+'\n');
- assert(raw.length+execution.length<=plan.output_reserve);
- fs.mkdirSync(output,{recursive:true});fs.writeFileSync(path.join(output,'target-runs.json'),raw,{flag:'wx',mode:0o644});
+  phase_bytes:admission.bytes,descriptors:admission.descriptors,scientific_outputs:bodies.map(b=>({path:b.name,bytes:b.raw.length,sha256:sha(b.raw)})),metadata_sha256:sha(metadata),grid_rows_computed:0,activated:false})+'\n');
+ assert(outputBytes+execution.length<=plan.output_reserve);
+ fs.mkdirSync(output,{recursive:true});for(const body of bodies)fs.writeFileSync(path.join(output,body.name),body.raw,{flag:'wx',mode:0o644});fs.writeFileSync(path.join(output,'group-index.json'),metadata,{flag:'wx',mode:0o644});
  fs.writeFileSync(path.join(output,'execution.json'),execution,{flag:'wx',mode:0o644});return JSON.parse(execution);
 }

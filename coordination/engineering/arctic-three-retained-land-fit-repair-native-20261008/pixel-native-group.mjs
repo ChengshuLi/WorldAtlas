@@ -13,8 +13,8 @@ export function pixelNativeGroup(admission, plan) {
  assert.equal(parts.length,55);let offset=0;
  for(const part of parts){assert.equal(part.offset,offset);offset+=part.words;}
  assert.equal(offset,manifest.runWords);
- assert(Number.isSafeInteger(plan.ordinal)&&plan.ordinal>=0&&plan.ordinal<14);
- const expected=parts.slice(plan.ordinal*4,plan.ordinal*4+4);
+ assert(Number.isSafeInteger(plan.ordinal)&&plan.ordinal>=0&&plan.ordinal<28);
+ const expected=parts.slice(plan.ordinal*2,plan.ordinal*2+2);
  assert.equal(plan.parts.length,expected.length);
  const rows=decodeInstalledWords(admission,plan.rows);
  assert.equal(rows.length,manifest.size*2);let next=0;
@@ -36,6 +36,6 @@ export function pixelNativeGroup(admission, plan) {
   results.push({offset:old.offset,words:old.words,before:selectedOwnerRuns(rows,before,options),after:selectedOwnerRuns(rows,after,options),
    original_encoded_sha256:old.sha256,current_encoded_sha256:current.sha256,original_canonical_sha256:old.decoded_sha256,current_canonical_sha256:current.decoded_sha256});
  }
- return {version:1,kind:plan.kind,ordinal:plan.ordinal,total_groups:14,full_run_parts:55,full_row_count:262166,
+ return {version:1,kind:plan.kind,ordinal:plan.ordinal,total_groups:28,full_run_parts:55,full_row_count:262166,
   owner_count:49625,total_run_words:57617774,target_owners:[6666,6757],parts:results,grid_rows_computed:0,activated:false};
 }
