@@ -44,9 +44,14 @@ def run(plan, output):
         expected = {code.co_name: code for code in constants if hasattr(code, 'co_code')}
         assert fn.__code__ == expected[fn.__name__]
     captured = [(fn, fn.__code__, fn.__defaults__, fn.__kwdefaults__) for fn in callbacks]
+    guard_aliases = [(name, getattr(guards, name)) for name in
+                    ('ordinary', 'admitted_read', 'load_codec', 'loaded_paths',
+                     'capture_serialization_bindings', 'require_serialization_bindings')]
     allowed = {pin['path'] for pin in pins}
 
     def guard():
+        for name, original in guard_aliases:
+            assert getattr(guards, name) is original
         guards.require_serialization_bindings(bindings)
         assert callbacks[-2:] == [codec.canonical_json, codec.deterministic_gzip]
         for fn, code, defaults, kwdefaults in captured:
