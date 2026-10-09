@@ -14,13 +14,14 @@ const hash=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
 const commit=v=>typeof v==='string'&&/^[a-f0-9]{40}$/.test(v);
 const safe=v=>typeof v==='string'&&v&&!v.includes('\\')&&!v.includes('\0')&&!path.isAbsolute(v)&&v.split('/').every(p=>p&&p!=='.'&&p!=='..');
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
-let installedRuntime;
-function runtimeIdentity() {
-  if(installedRuntime)return installedRuntime;
-  const stat=fs.statSync(process.execPath);demand(stat.isFile()&&stat.size<PHASE,'Installed execution runtime exceeds phase');
-  const fd=fs.openSync(process.execPath,'r'),hasher=createHash('sha256'),buffer=Buffer.alloc(1024*1024);let bytes=0;
+const installedRuntimes=new Map();
+function runtimeIdentity(executable=process.execPath) {
+  const executablePath=fs.realpathSync(executable);
+  if(installedRuntimes.has(executablePath))return installedRuntimes.get(executablePath);
+  const stat=fs.statSync(executablePath);demand(stat.isFile()&&stat.size<PHASE,'Installed execution runtime exceeds phase');
+  const fd=fs.openSync(executablePath,'r'),hasher=createHash('sha256'),buffer=Buffer.alloc(1024*1024);let bytes=0;
   try{for(let n;(n=fs.readSync(fd,buffer,0,buffer.length,null));){hasher.update(buffer.subarray(0,n));bytes+=n;}const end=fs.fstatSync(fd);demand(end.size===stat.size&&end.ino===stat.ino&&bytes===stat.size,'Installed runtime changed during complete read');}finally{fs.closeSync(fd);}
-  installedRuntime={path:process.execPath,bytes,mode:stat.mode&0o777,sha256:hasher.digest('hex'),version:process.version};return installedRuntime;
+  const runtime={path:executablePath,bytes,mode:stat.mode&0o777,sha256:hasher.digest('hex'),version:executable===process.execPath?process.version:null};installedRuntimes.set(executablePath,runtime);return runtime;
 }
 const NS='coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products';
 const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
@@ -173,9 +174,10 @@ export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
   return losses;
 }
 
-export function inspectSelected(repo,baseline,candidate) {
-  const beforeReader=new ImmutableReader(repo,baseline),afterReader=new ImmutableReader(repo,candidate,{budget:beforeReader.budget});
-  const runtime=runtimeIdentity();
+export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
+  const runtimeBytes=fs.statSync(process.execPath).size+(parentRuntimePath?fs.statSync(fs.realpathSync(parentRuntimePath)).size:0);
+  const beforeReader=new ImmutableReader(repo,baseline,{runtimeBytes}),afterReader=new ImmutableReader(repo,candidate,{runtimeBytes,budget:beforeReader.budget});
+  const runtime=runtimeIdentity(),callerRuntime=parentRuntimePath?runtimeIdentity(parentRuntimePath):null;
   const before=loadSelection(beforeReader),after=loadSelection(afterReader);
   if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
   demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
@@ -210,9 +212,9 @@ export function inspectSelected(repo,baseline,candidate) {
   const losses=[];let lostCells=0;
   for(const y of affected){const roster=[...needed(before,oldRows,y).map(p=>({snapshot:before,p})),...needed(after,newRows,y).map(p=>({snapshot:after,p}))];const key=JSON.stringify(roster.map(({snapshot,p})=>[snapshot.reader.version,p.path]));if(key!==cacheKey){cache.clear();beforeReader.phase();cacheKey=key;for(const {snapshot,p}of roster)cache.set(snapshot.reader.version+':'+p.path,asset(snapshot,p));phases.push({first_row:y,input_bytes:beforeReader.used,descriptors:beforeReader.charged.size});}const previous=row(before,oldRows,y),next=row(after,newRows,y);const found=compareIntervals(previous,next,{row:y,ownersBefore:before.owners,ownersAfter:after.owners});for(const loss of found){lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);}}
   cache.clear();
-  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Explicit additive selection is unsupported until its normal activation contract is integrated; proposal files never select a release.']};
+  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Explicit additive selection is unsupported until its normal activation contract is integrated; proposal files never select a release.']};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
-  const [repo,baseline,candidate]=process.argv.slice(2);const result=inspectSelected(repo,baseline,candidate);process.stdout.write(JSON.stringify(result)+'\n');
+  const [repo,baseline,candidate,parentRuntimePath]=process.argv.slice(2);const result=inspectSelected(repo,baseline,candidate,{parentRuntimePath});process.stdout.write(JSON.stringify(result)+'\n');
 }
