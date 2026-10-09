@@ -105,7 +105,7 @@ test('full ledger comparison retains zero-cell primitives and rejects coherent o
 });
 
 test('aggregate admission rejects before any actual body read',()=>{
- const reader=new ImmutableReader('.', '1'.repeat(40),{runtimeBytes:256*1024*1024-100,metadataBytes:0});let bodies=0;
+ const reader=new ImmutableReader('.', '1'.repeat(40),{runtimeBytes:256*1024*1024-100,metadataBytes:0,outputBytes:0});let bodies=0;
  reader.descriptor=()=>({commit:'1'.repeat(40),path:'input',bytes:101});reader.git=()=>{bodies++;return Buffer.alloc(101);};
  assert.throws(()=>reader.read('input'),/prospective cap/);assert.equal(bodies,0);
  assert.throws(()=>reader.admit({commit:'1'.repeat(40),path:'input',bytes:1},32*1024*1024+1),/decoded member/);assert.equal(bodies,0);
