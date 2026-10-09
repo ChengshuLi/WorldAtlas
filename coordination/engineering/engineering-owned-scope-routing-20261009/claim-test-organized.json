@@ -1,0 +1,53 @@
+{
+  "accepted": true,
+  "request_id": "bcb64342-bdd4-4dbb-b2c7-937ea18c155e",
+  "issue_number": 1622,
+  "claim": {
+    "comment_id": 6088014751,
+    "version": 1,
+    "active": true,
+    "worker_id": "01a1222d-b893-7861-9c9c-8b8daa788d16",
+    "claim_id": "df86e030-a6d9-4e8e-ae6f-07a146a47984",
+    "branch": "engineering/engineering-owned-scope-routing-20261009",
+    "request_id": "bcb64342-bdd4-4dbb-b2c7-937ea18c155e",
+    "issue_number": 1622,
+    "claimed_at": "2026-10-09T20:09:02.280Z",
+    "updated_at": "2026-10-09T20:09:02.280Z",
+    "expires_at": "2026-10-10T20:09:02.280Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 1
+  },
+  "replayed": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6088428409,
+  "logical_observation_reads": 4,
+  "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37984984186",
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 6,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 2,
+      "GET:actions:200": 2
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4951,
+        "reset": 1791579934
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4930,
+        "reset": 1791579934
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4930,
+        "reset": 1791579934
+      }
+    }
+  }
+}

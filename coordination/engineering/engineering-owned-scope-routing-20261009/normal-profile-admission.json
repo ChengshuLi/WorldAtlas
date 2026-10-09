@@ -1,0 +1,13 @@
+{
+  "method_id": "engineering-owned-scope-routing",
+  "kind": "positive",
+  "outcome": "passed",
+  "profile": "full",
+  "basis": "The substantive new dedicated engineering-routing test is outside the unchanged existing coordination allowlist; actual integrationProfile selected existing default full.",
+  "classifier_path": "scripts/integration-profile.mjs",
+  "classifier_commit": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "dedicated_test": "test/engineering-owned-scope-routing.test.mjs",
+  "workflow_gates_changed": false,
+  "test_expectations_changed": false,
+  "scope": "normal stronger complete checkout admission; hosted and serialized combined success still required"
+}
