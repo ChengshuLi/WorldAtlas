@@ -12,6 +12,8 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import runpy
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -177,6 +179,53 @@ def load_helper(helper_raw: bytes, module_name: str):
     return module
 
 
+def prepare_vintage(descriptors: dict[str, dict], helper_raw: bytes, vintage: str):
+    """Pin inputs and admit every final path before running any experiment."""
+    helper = load_helper(helper_raw, "worldatlas_immutable_preflight")
+    baseline = helper.Baseline(ROOT, BASELINE, list(descriptors.values()))
+    return helper.NewVintage(baseline, OWNED_PATH, vintage, OUTPUT_NAMES)
+
+
+def whole_runner_collision_probe(vintage: str) -> dict:
+    """Call the normal runner with an occupied final path and trap any execution."""
+    from uuid import uuid4
+
+    probe_vintage = f"admission-probe-{uuid4().hex[:12]}"
+    candidate_root = ROOT / OWNED_PATH / "vintages" / probe_vintage
+    target = candidate_root / OUTPUT_NAMES[0]
+    marker_parent = tempfile.TemporaryDirectory(prefix="worldatlas-preflight-marker-")
+    marker = Path(marker_parent.name) / "computation-was-reached"
+    candidate_root.mkdir(parents=True, exist_ok=False)
+    target.write_bytes(b"pre-existing-sentinel")
+    before = target.read_bytes()
+    namespace = runpy.run_path(str(Path(__file__).resolve()))
+
+    def forbidden_execution(*_args, **_kwargs):
+        marker.write_text("runner reached calculation")
+        raise AssertionError("Existing target was not rejected before computation")
+
+    namespace["execute"] = forbidden_execution
+    original_argv = sys.argv
+    rejected = False
+    try:
+        sys.argv = [str(Path(__file__).resolve()), probe_vintage]
+        try:
+            namespace["main"](preflight_probe=False)
+        except FileExistsError:
+            rejected = True
+        if not rejected:
+            raise AssertionError("Normal runner accepted an existing final output")
+        if marker.exists() or target.read_bytes() != before:
+            raise AssertionError("Existing-target admission ran computation or changed its sentinel")
+    finally:
+        sys.argv = original_argv
+        if candidate_root.exists() and candidate_root.is_dir() and not candidate_root.is_symlink():
+            shutil.rmtree(candidate_root)
+        marker_parent.cleanup()
+    return {"case": "normal-runner-existing-final-output", "rejected_before_computation": True,
+            "sentinel_preserved": True, "computation_marker_created": False}
+
+
 def fixture_record(helper_raw: bytes) -> dict:
     """Exercise shared fresh-run admission in a separate temporary Git repo."""
     module = load_helper(helper_raw, "worldatlas_immutable_admission")
@@ -255,14 +304,17 @@ def fixture_record(helper_raw: bytes) -> dict:
         return {"version": 1, "kind": "fresh-output-admission-controls", "outcome": "passed", "cases": cases,
                 "runtime": {"python": sys.version.split()[0], "shapely": shapely.__version__,
                             "geos": shapely.geos_version_string, "pyproj": pyproj.__version__},
-                "scope": "Shared NewVintage admission with disposable temporary repository; no production or original evidence paths used."}
+                "scope": "Disposable repository fixtures plus a unique cleaned sentinel under this issue-owned path; no production or original evidence paths used."}
 
 
-def main() -> None:
+def main(*, preflight_probe: bool = True) -> None:
     if len(sys.argv) != 2:
         raise SystemExit("usage: reproduce-preservation.py FRESH_VINTAGE_NAME")
     vintage = sys.argv[1]
     files, descriptors, helper_bytes = capture_inputs()
+    # This complete-set admission precedes the first actual control run or fixture.
+    vintage_writer = prepare_vintage(descriptors, helper_bytes, vintage)
+    whole_run_admission = whole_runner_collision_probe(vintage) if preflight_probe else None
     positive_one = execute(files)
     positive_two = execute(files)
     for name in positive_one:
@@ -304,7 +356,10 @@ def main() -> None:
     })
     failure = execute(files, mismatch=True)
     controls.update(failure)
-    controls["admission-controls.json"] = json_bytes(fixture_record(helper_bytes))
+    admission = fixture_record(helper_bytes)
+    if whole_run_admission is not None:
+        admission["cases"].insert(0, whole_run_admission)
+    controls["admission-controls.json"] = json_bytes(admission)
 
     # Recheck every historical issue pin after execution. The sandboxed CLI has
     # no path to the originals, and these checks bind that preservation claim.
@@ -313,10 +368,6 @@ def main() -> None:
         if actual != expected:
             raise AssertionError(f"Historical pinned input changed: {relative}")
     new_hash = {name: sha(raw) for name, raw in controls.items()}
-    baseline_files = list(descriptors.values())
-    helper_module = load_helper(helper_bytes, "worldatlas_immutable_publish")
-    baseline = helper_module.Baseline(ROOT, BASELINE, baseline_files)
-    vintage_writer = helper_module.NewVintage(baseline, OWNED_PATH, vintage, OUTPUT_NAMES)
     records = vintage_writer.publish_bytes(controls)
     print(json.dumps({"vintage": vintage, "output_count": len(records), "outputs": new_hash,
                       "runner_sha256": sha(Path(__file__).read_bytes()),
