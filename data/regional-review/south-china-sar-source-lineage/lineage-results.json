@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+  "subjects": {
+    "atlas:territory:HKG": {
+      "atlas_name": "Hong Kong",
+      "atlas_geometry": {
+        "type": "MultiPolygon",
+        "position_count": 255,
+        "bbox_wgs84_lonlat": [
+          113.8373,
+          22.1771,
+          114.4013,
+          22.5639
+        ],
+        "geometry_json_sha256": "35433d2d2f0a37144deaf49ce03a2eacf1df1e618cb2dd3a351ba83a58b2a495"
+      },
+      "source_component_union_bbox_wgs84_lonlat": [
+        113.837331576,
+        22.177069403000075,
+        114.40129642000011,
+        22.56394603200009
+      ],
+      "atlas_bbox_matches_source_component_union_bbox_at_4dp": true,
+      "member_ids": [
+        "HKG-5168",
+        "HKG-5170",
+        "HKG-5156",
+        "HKG-5153",
+        "HKG-5154",
+        "HKG-5155",
+        "HKG-5165",
+        "HKG-5169",
+        "HKG-5163",
+        "HKG-5162",
+        "HKG-5161",
+        "HKG-5158",
+        "HKG-5157",
+        "HKG-5159",
+        "HKG-5164",
+        "HKG-5166",
+        "HKG-5167",
+        "HKG-5160"
+      ],
+      "retained_member_count": 18,
+      "matched_member_count": 18,
+      "member_id_match_fraction": 1,
+      "current_official_district_name_match_count": 18,
+      "current_official_district_name_match_fraction": 1,
+      "exact_retained_natural_earth_id_join": true,
+      "retained_natural_earth_rows": [
+        {
+          "id": "HKG-5168",
+          "name": "North",
+          "name_en": "North District",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5170",
+          "name": "Islands",
+          "name_en": "Lantau Island",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5156",
+          "name": "Southern",
+          "name_en": "Southern District",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5153",
+          "name": "Central and Western",
+          "name_en": "Central and Western District",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5154",
+          "name": "Wan Chai",
+          "name_en": "Wan Chai",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5155",
+          "name": "Eastern",
+          "name_en": "Siu Ma Shan",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5165",
+          "name": "Tsuen Wan",
+          "name_en": "Tsuen Wan",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5169",
+          "name": "Tai Po",
+          "name_en": "Tai Po",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5163",
+          "name": "Sha Tin",
+          "name_en": "Sha Tin",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5162",
+          "name": "Sai Kung",
+          "name_en": "Sai Kung",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5161",
+          "name": "Kwun Tong",
+          "name_en": "Kwun Tong",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5158",
+          "name": "Kowloon City",
+          "name_en": "Kowloon City",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5157",
+          "name": "Yau Tsim Mong",
+          "name_en": "Yau Tsim Mong",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5159",
+          "name": "Sham Shui Po",
+          "name_en": "Sham Shui Po",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5164",
+          "name": "Kwai Tsing",
+          "name_en": "Kwai Tsing",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5166",
+          "name": "Tuen Mun",
+          "name_en": "Tuen Mun",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5167",
+          "name": "Yuen Long",
+          "name_en": "Yuen Long",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        },
+        {
+          "id": "HKG-5160",
+          "name": "Wong Tai Sin",
+          "name_en": "Wong Tai Sin District",
+          "admin": "Hong Kong S.A.R.",
+          "featurecla": "Admin-1 states provinces"
+        }
+      ],
+      "official_current_district_source": {
+        "record_count": 18,
+        "english_names": [
+          "Central and Western District",
+          "Eastern District",
+          "Islands District",
+          "Kowloon City District",
+          "Kwai Tsing District",
+          "Kwun Tong District",
+          "North District",
+          "Sai Kung District",
+          "Sha Tin District",
+          "Sham Shui Po District",
+          "Southern District",
+          "Tai Po District",
+          "Tsuen Wan District",
+          "Tuen Mun District",
+          "Wan Chai District",
+          "Wong Tai Sin District",
+          "Yau Tsim Mong District",
+          "Yuen Long District"
+        ],
+        "ne_id_count": 18
+      },
+      "island_coast_and_legal_boundary_completeness": "not tested; current official 18-district land administration source does not establish the legal outer SAR land-and-maritime boundary or full island/coast completeness"
+    },
+    "atlas:territory:MAC": {
+      "atlas_name": "Macau",
+      "atlas_geometry": {
+        "type": "Polygon",
+        "position_count": 65,
+        "bbox_wgs84_lonlat": [
+          113.5199,
+          22.0945,
+          113.5963,
+          22.2171
+        ],
+        "geometry_json_sha256": "324b8095f82af0b755dc1e04321c46bbe827a6528534acc309014a79d3bf56ca"
+      },
+      "source_component_union_bbox_wgs84_lonlat": [
+        113.51986738400001,
+        22.094499232000032,
+        113.60087459500005,
+        22.220770575000074
+      ],
+      "atlas_bbox_matches_source_component_union_bbox_at_4dp": false,
+      "member_ids": [
+        "gb:CHN:ADM2:17275852B34966799109471",
+        "MAC+00?"
+      ],
+      "geoboundaries_match_count": 1,
+      "retained_natural_earth_rows": [
+        {
+          "id": "MAC+00?",
+          "name": "Macau",
+          "name_en": "Macau",
+          "admin": "Macau S.A.R",
+          "featurecla": "Admin-1 states provinces",
+          "geometry_facts": {
+            "record_index": 3133,
+            "shape_type": 5,
+            "part_count": 2,
+            "point_count": 92,
+            "bbox_wgs84_lonlat": [
+              113.51986738400001,
+              22.10537344000005,
+              113.58749433700007,
+              22.220770575000074
+            ],
+            "coordinate_pairs_sha256": "46f4402de92492bd9907b252684c4e8c0ab7a9b6cd4ac23f5e6217121b8c7a40",
+            "part_offsets": [
+              0,
+              47
+            ]
+          }
+        }
+      ],
+      "geoboundaries_match": {
+        "native_id": "17275852B34966799109471",
+        "shapeName": null,
+        "shapeISO": "",
+        "shapeGroup": "CHN",
+        "shapeType": "ADM2",
+        "geometry": {
+          "type": "MultiPolygon",
+          "position_count": 62,
+          "bbox_wgs84_lonlat": [
+            113.53044452800009,
+            22.094499232000032,
+            113.60087459500005,
+            22.198665653000035
+          ],
+          "geometry_json_sha256": "09ba5a0757be182e9423067f29cbefcd52cf8c4017160906fc43f12aad5ade2a"
+        }
+      },
+      "atlas_vs_unnamed_geoboundaries_geometry": {
+        "atlas_equals_source_at_4dp": false,
+        "atlas": {
+          "type": "Polygon",
+          "position_count": 65,
+          "bbox_wgs84_lonlat": [
+            113.5199,
+            22.0945,
+            113.5963,
+            22.2171
+          ],
+          "geometry_json_sha256": "324b8095f82af0b755dc1e04321c46bbe827a6528534acc309014a79d3bf56ca"
+        },
+        "source": {
+          "type": "MultiPolygon",
+          "position_count": 62,
+          "bbox_wgs84_lonlat": [
+            113.53044452800009,
+            22.094499232000032,
+            113.60087459500005,
+            22.198665653000035
+          ],
+          "geometry_json_sha256": "09ba5a0757be182e9423067f29cbefcd52cf8c4017160906fc43f12aad5ade2a"
+        }
+      },
+      "island_coast_and_legal_boundary_completeness": "not tested; retained 2017 ADM2 polygon is not an authoritative current SAR land-and-maritime boundary source"
+    }
+  },
+  "controls": {
+    "hkg_exact_id_roster_positive": {
+      "outcome": "passed",
+      "expected": "exact 18-member source ID roster equals DBF rows with adm0_a3=HKG"
+    },
+    "hkg_absent_id_negative": {
+      "outcome": "passed",
+      "expected": "replacement with absent sentinel is rejected"
+    },
+    "mac_native_id_positive": {
+      "outcome": "passed",
+      "expected": "one exact ShapeID match and matching Atlas source member ID"
+    },
+    "mac_absent_native_id_negative": {
+      "outcome": "passed",
+      "expected": "absent sentinel has zero ShapeID matches"
+    }
+  },
+  "unverified": [
+    "No original import/aggregation implementation or executable recipe was found in retained source packet or reachable git history searched for the aggregate/native IDs. The outputs permit exact member-ID joins; they do not establish how source geometry was unioned, clipped, simplified, projected or assigned to Atlas IDs.",
+    "No GIS topology/overlay was run. Polygon counts, coordinate counts and rounded direct-source comparisons do not establish legal boundary correctness, gaps, overlaps, islands, coastline, maritime coverage or neighbors.",
+    "Natural Earth package declares its vector data public domain; upstream authority and rights for its source contributors remain unverified. geoBoundaries predecessor terms/citation chain remain unresolved in retained malformed source URLs."
+  ]
+}
