@@ -10,7 +10,7 @@ permissions: {}
 
 # Cancel superseded read-only PR builds; keep main push observations separate.
 concurrency:
-  group: worldatlas-package-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  group: worldatlas-package-${{ github.event_name }}-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

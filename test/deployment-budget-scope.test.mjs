@@ -171,7 +171,7 @@ test('only read-only superseded PR work is cancelled; main package and merge sch
  const budget=fs.readFileSync(new URL('../.github/workflows/deployment-budget.yml',import.meta.url),'utf8');
  const regression=fs.readFileSync(new URL('../.github/workflows/merge-integration-checks.yml',import.meta.url),'utf8');
  const handoff=fs.readFileSync(new URL('../.github/workflows/handoff-scope.yml',import.meta.url),'utf8');
- assert.match(budget,/group: worldatlas-package-\$\{\{ github\.event_name \}\}-\$\{\{ github\.event\.pull_request\.number \|\| github\.ref \}\}/);
+ assert.match(budget,/group: worldatlas-package-\$\{\{ github\.event_name \}\}-\$\{\{ github\.event\.pull_request\.number \|\| github\.sha \}\}/);
  assert.match(budget,/cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}/);
  for(const yaml of [regression,handoff])assert.match(yaml,/concurrency:[\s\S]*?github\.event\.pull_request\.number[\s\S]*?cancel-in-progress: true/);
 });
