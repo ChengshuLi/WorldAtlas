@@ -1,7 +1,9 @@
 # CI performance and coverage
 
 Use `coordination/engineering/ci-speed-1201-20261008-p1/` for the #1201 baseline,
-complete test/workflow inventory and measurements. Timings describe actual runs,
+complete test/workflow inventory and local measurements. The final hosted
+verification and all-lane assessment are in
+`coordination/engineering/ci-speed-1201-20261008-p2/`. Timings describe actual runs,
 not deadlines or a guarantee that later hosts are equally fast.
 
 PR integration and the merge queue use the same `integrationProfile` and

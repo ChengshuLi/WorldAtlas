@@ -1,0 +1,186 @@
+✔ package applicability comes only from the enforced declaration (32.535375ms)
+✔ renamed or copied runtime origins cannot hide behind documentation or receipt destinations (5.405ms)
+✔ PR inventory exhausts pages and catches a relevant path on a later page (2.918833ms)
+✔ PR missing pages, changed heads, unavailable lookup and malformed inventories default full (0.924084ms)
+✔ push before/after comparison includes rename origins and fails full for missing or capped inventories (1.764125ms)
+✔ API failures use bounded authenticated read-only requests (0.308458ms)
+✔ workflow keeps trusted bootstrap fallback and runs package checks only when their inputs can change (42.891291ms)
+✔ promoting research is explicit and exact, without freezing implementation bytes (2.970333ms)
+✔ unavailable or altered declaration bytes conservatively require the package build (0.382875ms)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Missing actual package-issued current execution
++ actual - expected
+
++ undefined
+- '.cache/current-context-execution.json'
+
+    at readPackageCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-sFRlL4/.cache/package-input-image-cKeukm/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:117:9)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-sFRlL4/.cache/package-input-image-cKeukm/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: '.cache/current-context-execution.json',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'e1fc4f5062ffdb072c5bda01a5606326a58dce6d9d95b3eb26d755e88191274f'
+- '0000000000000000000000000000000000000000000000000000000000000000'
+
+    at readPackageCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-GsoHIW/.cache/package-input-image-QN5fQI/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:118:98)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-GsoHIW/.cache/package-input-image-QN5fQI/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'e1fc4f5062ffdb072c5bda01a5606326a58dce6d9d95b3eb26d755e88191274f',
+  expected: '0000000000000000000000000000000000000000000000000000000000000000',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Wrong independently supplied source root
++ actual - expected
+
++ '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-ti4Dna'
+- '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-ti4Dna/.cache/package-input-image-zQcOrE'
+
+    at authenticateCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-ti4Dna/.cache/package-input-image-zQcOrE/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:101:9)
+    at readPackageCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-ti4Dna/.cache/package-input-image-zQcOrE/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:119:9)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-ti4Dna/.cache/package-input-image-zQcOrE/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-ti4Dna',
+  expected: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-ti4Dna/.cache/package-input-image-zQcOrE',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Missing actual package-issued current execution
++ actual - expected
+
++ '../foreign.json'
+- '.cache/current-context-execution.json'
+
+    at readPackageCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-wmiCYl/.cache/package-input-image-RRijtt/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:117:9)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-wmiCYl/.cache/package-input-image-RRijtt/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '../foreign.json',
+  expected: '.cache/current-context-execution.json',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+39 !== 31
+
+    at verifyFiles (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-JkxRPV/.cache/package-input-image-IjGqNy/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:78:47)
+    at authenticateCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-JkxRPV/.cache/package-input-image-IjGqNy/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:106:2)
+    at readPackageCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-JkxRPV/.cache/package-input-image-IjGqNy/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:119:9)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-JkxRPV/.cache/package-input-image-IjGqNy/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 39,
+  expected: 31,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+✔ current-execution real plain-child package positives and hostile boundaries (8400.982667ms)
+✔ only declared files enter the source image; unrelated research cannot alter artifact bytes (94.934791ms)
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open 'research/paper.json'
+    at Object.openSync (node:fs:622:18)
+    at Object.readFileSync (node:fs:488:35)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-tWNLLj/.cache/package-input-image-0Z5bkU/scripts/build-static-inner.mjs:1:30
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'research/paper.json'
+}
+
+Node.js v24.19.0
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-CIeaJD/.cache/package-input-image-EhfxIQ/research/secret.mjs' imported from /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-CIeaJD/.cache/package-input-image-EhfxIQ/scripts/build-static-inner.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at node:internal/modules/esm/loader:632:32
+    at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/.scratch/atlas-package-boundary-CIeaJD/.cache/package-input-image-EhfxIQ/research/secret.mjs'
+}
+
+Node.js v24.19.0
+✔ undeclared reads and imports fail before replacing caller outputs and clean the image (98.416833ms)
+✔ explicit research promotion makes the same read available (36.599ms)
+✔ input symlinks, including ancestor aliases, cannot expose undeclared files (4.679667ms)
+✔ missing mandatory inputs fail; optional absent inputs are allowed (3.748208ms)
+✔ dependency links must stay within the installed dependency tree (2.652791ms)
+✔ output and cache ancestor links are rejected (2.130209ms)
+✔ private builder requires the actual declared image identity (0.200792ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (11.11ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8709.408375

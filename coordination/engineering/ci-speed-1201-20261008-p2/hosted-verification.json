@@ -1,0 +1,1762 @@
+{
+  "version": 1,
+  "issue": 1201,
+  "implementation": {
+    "pr": 1537,
+    "reviewed_head": "defda65defb79a403788228bdf3f229039a5aa70",
+    "merge_commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49",
+    "queue_request": "beaae415-c705-4119-9b70-98a9b4e5845d",
+    "tested_base": "19ca4765a6de436f868742279f86f1f4e340e289",
+    "tested_candidate": "4134cbe8ac5cf433b2f2c94949236b064bc42114"
+  },
+  "pr_before": {
+    "run": {
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "html_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291",
+      "id": 37848776291,
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "run_attempt": 1
+    },
+    "shards": [
+      {
+        "job_id": 113556280410,
+        "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291/job/113556280410",
+        "started_at": "2026-10-08T21:43:54Z",
+        "completed_at": "2026-10-08T21:56:21Z",
+        "conclusion": "success",
+        "job_seconds": 747.0,
+        "test_seconds": 235.98108478,
+        "passed": 404,
+        "skipped": 0,
+        "raw_log_sha256": "ef24468f36742f951007090bd3d41cd3a9d9aaedca89784566db915d344dc01c",
+        "longest_tests": [
+          {
+            "name": "static and server exports resolve every active location identically, with examples on and off",
+            "duration_seconds": 83.86722348400001
+          },
+          {
+            "name": "whole-world physical components retain every original shape, relationship and unknown",
+            "duration_seconds": 68.382524462
+          },
+          {
+            "name": "complete worldwide priority inventory matches original source ledgers and exhaustive ranks",
+            "duration_seconds": 52.546103755
+          },
+          {
+            "name": "mandatory context stage rejects missing, tampered, stale and over-budget inputs",
+            "duration_seconds": 35.282754579
+          },
+          {
+            "name": "packaged coverage supports all modes, gap explanations and unavailable-reference policy",
+            "duration_seconds": 24.883550871
+          }
+        ]
+      },
+      {
+        "job_id": 113556280338,
+        "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291/job/113556280338",
+        "started_at": "2026-10-08T21:43:54Z",
+        "completed_at": "2026-10-08T21:53:42Z",
+        "conclusion": "success",
+        "job_seconds": 588.0,
+        "test_seconds": 180.531713016,
+        "passed": 636,
+        "skipped": 0,
+        "raw_log_sha256": "0eb95e2337e868e00a2868d997093c6762f68109cea3c89254c50de894320304",
+        "longest_tests": [
+          {
+            "name": "semantic replacements preserve source history and custom locations without transferring their values",
+            "duration_seconds": 79.32395806999999
+          },
+          {
+            "name": "Native grid has actual GPU/Canvas fill, picking, gap classification and GPU recovery",
+            "duration_seconds": 45.325721161000004
+          },
+          {
+            "name": "every generated hosted catalog batch imports through the actual service and generated D1 constraints",
+            "duration_seconds": 16.6420897
+          },
+          {
+            "name": "GPU and Canvas explain and render physical coverage without changing ownership",
+            "duration_seconds": 13.724725144
+          },
+          {
+            "name": "existing inherited, privileged, owning or broadly granted role is rejected without silent downgrade",
+            "duration_seconds": 13.498537137
+          }
+        ]
+      },
+      {
+        "job_id": 113556280372,
+        "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37848776291/job/113556280372",
+        "started_at": "2026-10-08T21:43:55Z",
+        "completed_at": "2026-10-08T22:02:06Z",
+        "conclusion": "success",
+        "job_seconds": 1091.0,
+        "test_seconds": 557.630358965,
+        "passed": 476,
+        "skipped": 0,
+        "raw_log_sha256": "7c58df12052c702b4ef9d8195dd165fa95fff46a824fb502d627be3dad694629",
+        "longest_tests": [
+          {
+            "name": "complete world component evidence rejects rehashed identity, uncertainty and relationship omissions",
+            "duration_seconds": 417.368177482
+          },
+          {
+            "name": "topology migration retires duplicate coverage while preserving its imported history",
+            "duration_seconds": 53.784805171
+          },
+          {
+            "name": "retained worldwide physical audit restores every original and verifies all five complete vintages",
+            "duration_seconds": 46.317835695
+          },
+          {
+            "name": "legacy hierarchy migration preserves historical records and repairs skipped parents",
+            "duration_seconds": 45.744758035
+          },
+          {
+            "name": "actual main year selection joins native browser worker to GPU/Canvas and rejects stale contexts",
+            "duration_seconds": 18.076950927000002
+          }
+        ]
+      }
+    ],
+    "geography_baseline": {
+      "pr": 1512,
+      "head": "efd69befaddd8eb7c0141eab581b2de92d03e468",
+      "checks": [
+        {
+          "completedAt": "2026-10-08T20:51:56Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842574014/job/113535359498",
+          "name": "scope",
+          "startedAt": "2026-10-08T20:51:40Z",
+          "state": "SUCCESS"
+        },
+        {
+          "completedAt": "2026-10-08T20:52:46Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842574014/job/113535358867",
+          "name": "evidence",
+          "startedAt": "2026-10-08T20:51:38Z",
+          "state": "SUCCESS"
+        },
+        {
+          "completedAt": "2026-10-08T20:51:35Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842574014/job/113535362307",
+          "name": "initial-foundation",
+          "startedAt": "2026-10-08T20:51:36Z",
+          "state": "SKIPPED"
+        },
+        {
+          "completedAt": "2026-10-08T20:51:35Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842533968/job/113535314833",
+          "name": "package",
+          "startedAt": "2026-10-08T20:51:31Z",
+          "state": "SUCCESS"
+        },
+        {
+          "completedAt": "2026-10-08T20:51:43Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842534055/job/113535311398",
+          "name": "regression (0)",
+          "startedAt": "2026-10-08T20:51:31Z",
+          "state": "SUCCESS"
+        },
+        {
+          "completedAt": "2026-10-08T20:51:28Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842534055/job/113535223250",
+          "name": "profile",
+          "startedAt": "2026-10-08T20:51:19Z",
+          "state": "SUCCESS"
+        },
+        {
+          "completedAt": "2026-10-08T20:51:28Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842533968/job/113535222236",
+          "name": "classify",
+          "startedAt": "2026-10-08T20:51:18Z",
+          "state": "SUCCESS"
+        },
+        {
+          "completedAt": "2026-10-08T20:51:41Z",
+          "link": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37842534055/job/113535223096",
+          "name": "geography",
+          "startedAt": "2026-10-08T20:51:18Z",
+          "state": "SUCCESS"
+        }
+      ]
+    },
+    "limits": [
+      "Historical hosted observations, not a same-host experiment.",
+      "API job times include setup; TAP test duration does not.",
+      "No provider workflow invoked."
+    ]
+  },
+  "pr_after": {
+    "run": {
+      "id": 37857741876,
+      "head_sha": "defda65defb79a403788228bdf3f229039a5aa70",
+      "html_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37857741876",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-08T23:08:33Z",
+      "updated_at": "2026-10-08T23:26:12Z",
+      "run_attempt": 1,
+      "path": ".github/workflows/merge-integration-checks.yml"
+    },
+    "shards": [
+      {
+        "shard": 0,
+        "job_id": 113585943820,
+        "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37857741876/job/113585943820",
+        "job_seconds": 1045.0,
+        "test_seconds": 336.446839852,
+        "passed": 426,
+        "failed": 0,
+        "skipped": 0,
+        "native_fetch_seconds": 101.455935,
+        "canonical_restoration_seconds": 100.571551,
+        "longest_tests": [
+          {
+            "name": "static and server exports resolve every active location identically, with examples on and off",
+            "seconds": 123.21407812000001
+          },
+          {
+            "name": "complete worldwide priority inventory matches original source ledgers and exhaustive ranks",
+            "seconds": 67.42440862699999
+          },
+          {
+            "name": "retained worldwide physical audit restores every original and verifies all five complete vintages",
+            "seconds": 65.727013445
+          },
+          {
+            "name": "mandatory context stage rejects missing, tampered, stale and over-budget inputs",
+            "seconds": 39.047851505
+          },
+          {
+            "name": "packaged coverage supports all modes, gap explanations and unavailable-reference policy",
+            "seconds": 37.744502041
+          },
+          {
+            "name": "every published canonical run survives compact packing, including its boundary cells and gaps",
+            "seconds": 36.411988999
+          },
+          {
+            "name": "actual main year selection joins native browser worker to GPU/Canvas and rejects stale contexts",
+            "seconds": 23.19166769
+          },
+          {
+            "name": "actual prepared historical records match independent compact-table interpretation",
+            "seconds": 19.654898068999998
+          }
+        ],
+        "raw_log_sha256": "475d7cdd222b28837c293b862aa6e96d7df70cb3b4d79ee55cd39cc2a102db11",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:08:47Z",
+            "completed_at": "2026-10-08T23:08:48Z"
+          },
+          {
+            "name": "Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:08:48Z",
+            "completed_at": "2026-10-08T23:12:28Z"
+          },
+          {
+            "name": "Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:12:28Z",
+            "completed_at": "2026-10-08T23:12:28Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:12:28Z",
+            "completed_at": "2026-10-08T23:12:29Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:12:29Z",
+            "completed_at": "2026-10-08T23:12:29Z"
+          },
+          {
+            "name": "Install Node dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:12:29Z",
+            "completed_at": "2026-10-08T23:12:42Z"
+          },
+          {
+            "name": "Install Python dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:12:42Z",
+            "completed_at": "2026-10-08T23:12:52Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:12:52Z",
+            "completed_at": "2026-10-08T23:13:15Z"
+          },
+          {
+            "name": "Build hosted assets",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:13:15Z",
+            "completed_at": "2026-10-08T23:17:09Z"
+          },
+          {
+            "name": "Complete regression shard",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:17:09Z",
+            "completed_at": "2026-10-08T23:26:07Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:26:07Z",
+            "completed_at": "2026-10-08T23:26:07Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:26:07Z",
+            "completed_at": "2026-10-08T23:26:07Z"
+          },
+          {
+            "name": "Post Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:26:07Z",
+            "completed_at": "2026-10-08T23:26:08Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:26:08Z",
+            "completed_at": "2026-10-08T23:26:08Z"
+          }
+        ]
+      },
+      {
+        "shard": 1,
+        "job_id": 113585943800,
+        "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37857741876/job/113585943800",
+        "job_seconds": 838.0,
+        "test_seconds": 489.30615395200005,
+        "passed": 574,
+        "failed": 0,
+        "skipped": 0,
+        "native_fetch_seconds": 56.38314,
+        "canonical_restoration_seconds": 100.784566,
+        "longest_tests": [
+          {
+            "name": "complete world component evidence rejects rehashed identity, uncertainty and relationship omissions",
+            "seconds": 419.849496345
+          },
+          {
+            "name": "semantic replacements preserve source history and custom locations without transferring their values",
+            "seconds": 67.456536268
+          },
+          {
+            "name": "every generated hosted catalog batch imports through the actual service and generated D1 constraints",
+            "seconds": 17.70292091
+          },
+          {
+            "name": "GPU and Canvas explain and render physical coverage without changing ownership",
+            "seconds": 15.337540549
+          },
+          {
+            "name": "existing inherited, privileged, owning or broadly granted role is rejected without silent downgrade",
+            "seconds": 12.530228658
+          },
+          {
+            "name": "full candidate release preparation emits the explicit merge, archived predecessor and exact unchanged baseline",
+            "seconds": 12.144224264
+          },
+          {
+            "name": "immutable physical-gap successor reuse rejects stale, incomplete and unknown inputs",
+            "seconds": 10.144975891
+          },
+          {
+            "name": "differential geography checks preserve neighbor, water, dateline and immutable-input controls",
+            "seconds": 6.786901031
+          }
+        ],
+        "raw_log_sha256": "39c8389e82f3af34f4aeab78750eafe2292032ff47ac9ca0b9a7be6a88573acd",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:08:46Z",
+            "completed_at": "2026-10-08T23:08:47Z"
+          },
+          {
+            "name": "Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:08:47Z",
+            "completed_at": "2026-10-08T23:11:07Z"
+          },
+          {
+            "name": "Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:11:07Z",
+            "completed_at": "2026-10-08T23:11:07Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:07Z",
+            "completed_at": "2026-10-08T23:11:07Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:07Z",
+            "completed_at": "2026-10-08T23:11:08Z"
+          },
+          {
+            "name": "Install Node dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:08Z",
+            "completed_at": "2026-10-08T23:11:21Z"
+          },
+          {
+            "name": "Install Python dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:21Z",
+            "completed_at": "2026-10-08T23:11:34Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:34Z",
+            "completed_at": "2026-10-08T23:11:55Z"
+          },
+          {
+            "name": "Build hosted assets",
+            "status": "completed",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:11:55Z",
+            "completed_at": "2026-10-08T23:11:55Z"
+          },
+          {
+            "name": "Complete regression shard",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:55Z",
+            "completed_at": "2026-10-08T23:22:41Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:22:41Z",
+            "completed_at": "2026-10-08T23:22:41Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:22:41Z",
+            "completed_at": "2026-10-08T23:22:41Z"
+          },
+          {
+            "name": "Post Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:22:41Z",
+            "completed_at": "2026-10-08T23:22:42Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:22:42Z",
+            "completed_at": "2026-10-08T23:22:42Z"
+          }
+        ]
+      },
+      {
+        "shard": 2,
+        "job_id": 113585943819,
+        "job_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37857741876/job/113585943819",
+        "job_seconds": 614.0,
+        "test_seconds": 227.77413563000002,
+        "passed": 528,
+        "failed": 0,
+        "skipped": 0,
+        "native_fetch_seconds": 71.860908,
+        "canonical_restoration_seconds": 90.346534,
+        "longest_tests": [
+          {
+            "name": "whole-world physical components retain every original shape, relationship and unknown",
+            "seconds": 88.296391026
+          },
+          {
+            "name": "topology migration retires duplicate coverage while preserving its imported history",
+            "seconds": 61.757694382000004
+          },
+          {
+            "name": "legacy hierarchy migration preserves historical records and repairs skipped parents",
+            "seconds": 54.501934975
+          },
+          {
+            "name": "Native grid has actual GPU/Canvas fill, picking, gap classification and GPU recovery",
+            "seconds": 33.916492562
+          },
+          {
+            "name": "seed is idempotent and missing history stays missing",
+            "seconds": 13.770099837
+          },
+          {
+            "name": "compact V4 preserves every raw collection and restricted runtime over frozen V2",
+            "seconds": 7.477789209
+          },
+          {
+            "name": "declared ordinary package snapshots authenticate complete native source stage and transport without any Git repository",
+            "seconds": 7.2168508540000005
+          },
+          {
+            "name": "compact V4 preserves every raw collection and restricted runtime over frozen V3",
+            "seconds": 6.182201178000001
+          }
+        ],
+        "raw_log_sha256": "3b75183d1e23866696df2b5ec42591025b35c73e2017ac42d6b5fd6d1a988196",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:08:47Z",
+            "completed_at": "2026-10-08T23:08:47Z"
+          },
+          {
+            "name": "Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:08:47Z",
+            "completed_at": "2026-10-08T23:11:33Z"
+          },
+          {
+            "name": "Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:11:33Z",
+            "completed_at": "2026-10-08T23:11:33Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:33Z",
+            "completed_at": "2026-10-08T23:11:33Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:33Z",
+            "completed_at": "2026-10-08T23:11:33Z"
+          },
+          {
+            "name": "Install Node dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:33Z",
+            "completed_at": "2026-10-08T23:11:53Z"
+          },
+          {
+            "name": "Install Python dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:11:53Z",
+            "completed_at": "2026-10-08T23:12:03Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:12:03Z",
+            "completed_at": "2026-10-08T23:12:26Z"
+          },
+          {
+            "name": "Build hosted assets",
+            "status": "completed",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:12:26Z",
+            "completed_at": "2026-10-08T23:12:26Z"
+          },
+          {
+            "name": "Complete regression shard",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:12:26Z",
+            "completed_at": "2026-10-08T23:18:56Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:18:56Z",
+            "completed_at": "2026-10-08T23:18:56Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:18:56Z",
+            "completed_at": "2026-10-08T23:18:56Z"
+          },
+          {
+            "name": "Post Checkout reviewed head",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:18:56Z",
+            "completed_at": "2026-10-08T23:18:56Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:18:56Z",
+            "completed_at": "2026-10-08T23:18:56Z"
+          }
+        ]
+      }
+    ]
+  },
+  "queue_before": {
+    "run_id": 37851051485,
+    "jobs": [
+      {
+        "id": 113563762514,
+        "name": "prepare",
+        "conclusion": "success",
+        "started_at": "2026-10-08T22:04:01Z",
+        "completed_at": "2026-10-08T22:04:57Z",
+        "job_seconds": 56.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:01Z",
+            "completed_at": "2026-10-08T22:04:03Z"
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:03Z",
+            "completed_at": "2026-10-08T22:04:06Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:06Z",
+            "completed_at": "2026-10-08T22:04:07Z"
+          },
+          {
+            "name": "Validate ready reviewed head and pin current integration candidate",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:07Z",
+            "completed_at": "2026-10-08T22:04:54Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:54Z",
+            "completed_at": "2026-10-08T22:04:55Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:55Z",
+            "completed_at": "2026-10-08T22:04:55Z"
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:55Z",
+            "completed_at": "2026-10-08T22:04:55Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:04:55Z",
+            "completed_at": "2026-10-08T22:04:55Z"
+          }
+        ]
+      },
+      {
+        "id": 113564115687,
+        "name": "integration (1)",
+        "conclusion": "success",
+        "started_at": "2026-10-08T22:05:00Z",
+        "completed_at": "2026-10-08T22:19:35Z",
+        "job_seconds": 875.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:01Z",
+            "completed_at": "2026-10-08T22:05:02Z"
+          },
+          {
+            "name": "Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:02Z",
+            "completed_at": "2026-10-08T22:07:48Z"
+          },
+          {
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T22:07:48Z",
+            "completed_at": "2026-10-08T22:07:48Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:48Z",
+            "completed_at": "2026-10-08T22:07:49Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:49Z",
+            "completed_at": "2026-10-08T22:07:49Z"
+          },
+          {
+            "name": "Run npm ci --no-audit --no-fund",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:49Z",
+            "completed_at": "2026-10-08T22:08:06Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:08:06Z",
+            "completed_at": "2026-10-08T22:08:15Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:08:15Z",
+            "completed_at": "2026-10-08T22:08:39Z"
+          },
+          {
+            "name": "Build the combined application once before asset-dependent tests",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T22:08:39Z",
+            "completed_at": "2026-10-08T22:08:39Z"
+          },
+          {
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:08:39Z",
+            "completed_at": "2026-10-08T22:19:32Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:19:32Z",
+            "completed_at": "2026-10-08T22:19:32Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:19:32Z",
+            "completed_at": "2026-10-08T22:19:32Z"
+          },
+          {
+            "name": "Post Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:19:32Z",
+            "completed_at": "2026-10-08T22:19:33Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:19:33Z",
+            "completed_at": "2026-10-08T22:19:33Z"
+          }
+        ]
+      },
+      {
+        "id": 113564115727,
+        "name": "geography",
+        "conclusion": "success",
+        "started_at": "2026-10-08T22:05:05Z",
+        "completed_at": "2026-10-08T22:05:27Z",
+        "job_seconds": 22.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:06Z",
+            "completed_at": "2026-10-08T22:05:07Z"
+          },
+          {
+            "name": "Checkout trusted geographic checker",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:07Z",
+            "completed_at": "2026-10-08T22:05:09Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:09Z",
+            "completed_at": "2026-10-08T22:05:10Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:10Z",
+            "completed_at": "2026-10-08T22:05:10Z"
+          },
+          {
+            "name": "Install trusted geographic dependencies",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:10Z",
+            "completed_at": "2026-10-08T22:05:19Z"
+          },
+          {
+            "name": "Check exact combined geography with trusted baseline code",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:19Z",
+            "completed_at": "2026-10-08T22:05:23Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:23Z",
+            "completed_at": "2026-10-08T22:05:24Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:24Z",
+            "completed_at": "2026-10-08T22:05:24Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:24Z",
+            "completed_at": "2026-10-08T22:05:24Z"
+          },
+          {
+            "name": "Post Checkout trusted geographic checker",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:24Z",
+            "completed_at": "2026-10-08T22:05:25Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:25Z",
+            "completed_at": "2026-10-08T22:05:25Z"
+          }
+        ]
+      },
+      {
+        "id": 113564115831,
+        "name": "integration (2)",
+        "conclusion": "success",
+        "started_at": "2026-10-08T22:05:02Z",
+        "completed_at": "2026-10-08T22:22:37Z",
+        "job_seconds": 1055.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:03Z",
+            "completed_at": "2026-10-08T22:05:04Z"
+          },
+          {
+            "name": "Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:04Z",
+            "completed_at": "2026-10-08T22:07:25Z"
+          },
+          {
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T22:07:25Z",
+            "completed_at": "2026-10-08T22:07:25Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:25Z",
+            "completed_at": "2026-10-08T22:07:26Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:26Z",
+            "completed_at": "2026-10-08T22:07:26Z"
+          },
+          {
+            "name": "Run npm ci --no-audit --no-fund",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:26Z",
+            "completed_at": "2026-10-08T22:07:40Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:40Z",
+            "completed_at": "2026-10-08T22:07:53Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:53Z",
+            "completed_at": "2026-10-08T22:08:16Z"
+          },
+          {
+            "name": "Build the combined application once before asset-dependent tests",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T22:08:16Z",
+            "completed_at": "2026-10-08T22:08:16Z"
+          },
+          {
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:08:16Z",
+            "completed_at": "2026-10-08T22:22:33Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:33Z",
+            "completed_at": "2026-10-08T22:22:33Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:33Z",
+            "completed_at": "2026-10-08T22:22:33Z"
+          },
+          {
+            "name": "Post Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:33Z",
+            "completed_at": "2026-10-08T22:22:34Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:34Z",
+            "completed_at": "2026-10-08T22:22:34Z"
+          }
+        ]
+      },
+      {
+        "id": 113564115840,
+        "name": "integration (0)",
+        "conclusion": "success",
+        "started_at": "2026-10-08T22:05:01Z",
+        "completed_at": "2026-10-08T22:20:30Z",
+        "job_seconds": 929.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:02Z",
+            "completed_at": "2026-10-08T22:05:03Z"
+          },
+          {
+            "name": "Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:05:03Z",
+            "completed_at": "2026-10-08T22:07:20Z"
+          },
+          {
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T22:07:20Z",
+            "completed_at": "2026-10-08T22:07:20Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:20Z",
+            "completed_at": "2026-10-08T22:07:20Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:20Z",
+            "completed_at": "2026-10-08T22:07:21Z"
+          },
+          {
+            "name": "Run npm ci --no-audit --no-fund",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:21Z",
+            "completed_at": "2026-10-08T22:07:39Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:39Z",
+            "completed_at": "2026-10-08T22:07:51Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:07:51Z",
+            "completed_at": "2026-10-08T22:08:11Z"
+          },
+          {
+            "name": "Build the combined application once before asset-dependent tests",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:08:11Z",
+            "completed_at": "2026-10-08T22:12:06Z"
+          },
+          {
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:12:06Z",
+            "completed_at": "2026-10-08T22:20:26Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:20:26Z",
+            "completed_at": "2026-10-08T22:20:26Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:20:26Z",
+            "completed_at": "2026-10-08T22:20:26Z"
+          },
+          {
+            "name": "Post Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:20:27Z",
+            "completed_at": "2026-10-08T22:20:27Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:20:27Z",
+            "completed_at": "2026-10-08T22:20:27Z"
+          }
+        ]
+      },
+      {
+        "id": 113570628064,
+        "name": "merge",
+        "conclusion": "success",
+        "started_at": "2026-10-08T22:22:41Z",
+        "completed_at": "2026-10-08T22:23:48Z",
+        "job_seconds": 67.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:42Z",
+            "completed_at": "2026-10-08T22:22:43Z"
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:43Z",
+            "completed_at": "2026-10-08T22:22:47Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:47Z",
+            "completed_at": "2026-10-08T22:22:47Z"
+          },
+          {
+            "name": "Recheck tested base, ownership, reviewed bytes and checks before squash",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:22:47Z",
+            "completed_at": "2026-10-08T22:23:42Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:23:42Z",
+            "completed_at": "2026-10-08T22:23:44Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:23:44Z",
+            "completed_at": "2026-10-08T22:23:44Z"
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:23:44Z",
+            "completed_at": "2026-10-08T22:23:44Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T22:23:44Z",
+            "completed_at": "2026-10-08T22:23:44Z"
+          }
+        ]
+      }
+    ]
+  },
+  "queue_after": {
+    "run_id": 37859632825,
+    "jobs": [
+      {
+        "id": 113592021667,
+        "name": "prepare",
+        "conclusion": "success",
+        "started_at": "2026-10-08T23:28:35Z",
+        "completed_at": "2026-10-08T23:29:28Z",
+        "job_seconds": 53.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:28:36Z",
+            "completed_at": "2026-10-08T23:28:37Z"
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:28:37Z",
+            "completed_at": "2026-10-08T23:28:39Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:28:39Z",
+            "completed_at": "2026-10-08T23:28:40Z"
+          },
+          {
+            "name": "Validate ready reviewed head and pin current integration candidate",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:28:40Z",
+            "completed_at": "2026-10-08T23:29:25Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:25Z",
+            "completed_at": "2026-10-08T23:29:26Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:26Z",
+            "completed_at": "2026-10-08T23:29:26Z"
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:26Z",
+            "completed_at": "2026-10-08T23:29:26Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:26Z",
+            "completed_at": "2026-10-08T23:29:26Z"
+          }
+        ]
+      },
+      {
+        "id": 113592297128,
+        "name": "integration (2)",
+        "conclusion": "success",
+        "started_at": "2026-10-08T23:29:31Z",
+        "completed_at": "2026-10-08T23:43:29Z",
+        "job_seconds": 838.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:32Z",
+            "completed_at": "2026-10-08T23:29:33Z"
+          },
+          {
+            "name": "Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:33Z",
+            "completed_at": "2026-10-08T23:34:23Z"
+          },
+          {
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:34:23Z",
+            "completed_at": "2026-10-08T23:34:23Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:34:23Z",
+            "completed_at": "2026-10-08T23:34:23Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:34:23Z",
+            "completed_at": "2026-10-08T23:34:23Z"
+          },
+          {
+            "name": "Run npm ci --no-audit --no-fund",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:34:23Z",
+            "completed_at": "2026-10-08T23:34:41Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:34:41Z",
+            "completed_at": "2026-10-08T23:34:50Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:34:50Z",
+            "completed_at": "2026-10-08T23:35:16Z"
+          },
+          {
+            "name": "Build the combined application once before asset-dependent tests",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:35:16Z",
+            "completed_at": "2026-10-08T23:35:16Z"
+          },
+          {
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:35:16Z",
+            "completed_at": "2026-10-08T23:43:25Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:43:25Z",
+            "completed_at": "2026-10-08T23:43:26Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:43:26Z",
+            "completed_at": "2026-10-08T23:43:26Z"
+          },
+          {
+            "name": "Post Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:43:26Z",
+            "completed_at": "2026-10-08T23:43:26Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:43:26Z",
+            "completed_at": "2026-10-08T23:43:26Z"
+          }
+        ]
+      },
+      {
+        "id": 113592297153,
+        "name": "integration (1)",
+        "conclusion": "success",
+        "started_at": "2026-10-08T23:29:32Z",
+        "completed_at": "2026-10-08T23:46:08Z",
+        "job_seconds": 996.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:32Z",
+            "completed_at": "2026-10-08T23:29:34Z"
+          },
+          {
+            "name": "Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:34Z",
+            "completed_at": "2026-10-08T23:33:24Z"
+          },
+          {
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:33:24Z",
+            "completed_at": "2026-10-08T23:33:24Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:33:24Z",
+            "completed_at": "2026-10-08T23:33:31Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:33:31Z",
+            "completed_at": "2026-10-08T23:33:31Z"
+          },
+          {
+            "name": "Run npm ci --no-audit --no-fund",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:33:31Z",
+            "completed_at": "2026-10-08T23:33:48Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:33:48Z",
+            "completed_at": "2026-10-08T23:34:04Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:34:04Z",
+            "completed_at": "2026-10-08T23:34:42Z"
+          },
+          {
+            "name": "Build the combined application once before asset-dependent tests",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:34:42Z",
+            "completed_at": "2026-10-08T23:34:42Z"
+          },
+          {
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:34:42Z",
+            "completed_at": "2026-10-08T23:46:04Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:04Z",
+            "completed_at": "2026-10-08T23:46:04Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:04Z",
+            "completed_at": "2026-10-08T23:46:04Z"
+          },
+          {
+            "name": "Post Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:04Z",
+            "completed_at": "2026-10-08T23:46:05Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:05Z",
+            "completed_at": "2026-10-08T23:46:05Z"
+          }
+        ]
+      },
+      {
+        "id": 113592297157,
+        "name": "integration (0)",
+        "conclusion": "success",
+        "started_at": "2026-10-08T23:29:33Z",
+        "completed_at": "2026-10-08T23:45:05Z",
+        "job_seconds": 932.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:33Z",
+            "completed_at": "2026-10-08T23:29:34Z"
+          },
+          {
+            "name": "Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:34Z",
+            "completed_at": "2026-10-08T23:32:01Z"
+          },
+          {
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "conclusion": "skipped",
+            "started_at": "2026-10-08T23:32:01Z",
+            "completed_at": "2026-10-08T23:32:01Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:32:01Z",
+            "completed_at": "2026-10-08T23:32:02Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:32:02Z",
+            "completed_at": "2026-10-08T23:32:02Z"
+          },
+          {
+            "name": "Run npm ci --no-audit --no-fund",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:32:02Z",
+            "completed_at": "2026-10-08T23:32:18Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:32:18Z",
+            "completed_at": "2026-10-08T23:32:28Z"
+          },
+          {
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:32:28Z",
+            "completed_at": "2026-10-08T23:32:49Z"
+          },
+          {
+            "name": "Build the combined application once before asset-dependent tests",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:32:49Z",
+            "completed_at": "2026-10-08T23:36:46Z"
+          },
+          {
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:36:46Z",
+            "completed_at": "2026-10-08T23:45:01Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:45:01Z",
+            "completed_at": "2026-10-08T23:45:01Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:45:01Z",
+            "completed_at": "2026-10-08T23:45:02Z"
+          },
+          {
+            "name": "Post Checkout complete candidate for application regression",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:45:02Z",
+            "completed_at": "2026-10-08T23:45:02Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:45:02Z",
+            "completed_at": "2026-10-08T23:45:02Z"
+          }
+        ]
+      },
+      {
+        "id": 113592297184,
+        "name": "geography",
+        "conclusion": "success",
+        "started_at": "2026-10-08T23:29:31Z",
+        "completed_at": "2026-10-08T23:29:54Z",
+        "job_seconds": 23.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:32Z",
+            "completed_at": "2026-10-08T23:29:33Z"
+          },
+          {
+            "name": "Checkout trusted geographic checker",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:33Z",
+            "completed_at": "2026-10-08T23:29:35Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:35Z",
+            "completed_at": "2026-10-08T23:29:35Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:35Z",
+            "completed_at": "2026-10-08T23:29:36Z"
+          },
+          {
+            "name": "Install trusted geographic dependencies",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:36Z",
+            "completed_at": "2026-10-08T23:29:47Z"
+          },
+          {
+            "name": "Check exact combined geography with trusted baseline code",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:47Z",
+            "completed_at": "2026-10-08T23:29:50Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:50Z",
+            "completed_at": "2026-10-08T23:29:51Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:51Z",
+            "completed_at": "2026-10-08T23:29:51Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:51Z",
+            "completed_at": "2026-10-08T23:29:51Z"
+          },
+          {
+            "name": "Post Checkout trusted geographic checker",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:51Z",
+            "completed_at": "2026-10-08T23:29:51Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:29:52Z",
+            "completed_at": "2026-10-08T23:29:52Z"
+          }
+        ]
+      },
+      {
+        "id": 113597226106,
+        "name": "merge",
+        "conclusion": "success",
+        "started_at": "2026-10-08T23:46:14Z",
+        "completed_at": "2026-10-08T23:47:02Z",
+        "job_seconds": 48.0,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:15Z",
+            "completed_at": "2026-10-08T23:46:16Z"
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:16Z",
+            "completed_at": "2026-10-08T23:46:18Z"
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:18Z",
+            "completed_at": "2026-10-08T23:46:19Z"
+          },
+          {
+            "name": "Recheck tested base, ownership, reviewed bytes and checks before squash",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:19Z",
+            "completed_at": "2026-10-08T23:46:58Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:58Z",
+            "completed_at": "2026-10-08T23:46:59Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:59Z",
+            "completed_at": "2026-10-08T23:46:59Z"
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:59Z",
+            "completed_at": "2026-10-08T23:46:59Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-10-08T23:46:59Z",
+            "completed_at": "2026-10-08T23:47:00Z"
+          }
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard": 0,
+        "job_id": 113592297157,
+        "job_seconds": 932.0,
+        "test_seconds": 337.61899518,
+        "passed": 426,
+        "failed": 0,
+        "skipped": 0,
+        "longest_tests": [
+          {
+            "name": "static and server exports resolve every active location identically, with examples on and off",
+            "seconds": 124.142837193
+          },
+          {
+            "name": "complete worldwide priority inventory matches original source ledgers and exhaustive ranks",
+            "seconds": 67.527737918
+          },
+          {
+            "name": "retained worldwide physical audit restores every original and verifies all five complete vintages",
+            "seconds": 64.127938847
+          },
+          {
+            "name": "packaged coverage supports all modes, gap explanations and unavailable-reference policy",
+            "seconds": 38.68176778
+          },
+          {
+            "name": "every published canonical run survives compact packing, including its boundary cells and gaps",
+            "seconds": 36.727680695000004
+          },
+          {
+            "name": "mandatory context stage rejects missing, tampered, stale and over-budget inputs",
+            "seconds": 34.178992869
+          },
+          {
+            "name": "actual main year selection joins native browser worker to GPU/Canvas and rejects stale contexts",
+            "seconds": 22.934135704
+          },
+          {
+            "name": "actual prepared historical records match independent compact-table interpretation",
+            "seconds": 19.398829919
+          }
+        ],
+        "raw_log_sha256": "6918e1f47bd8c7363f33099d1d687dec13a4f08a54d6fd44609f209aadcb6f92",
+        "phase_lines": []
+      },
+      {
+        "shard": 1,
+        "job_id": 113592297153,
+        "job_seconds": 996.0,
+        "test_seconds": 485.64664714900005,
+        "passed": 574,
+        "failed": 0,
+        "skipped": 0,
+        "longest_tests": [
+          {
+            "name": "complete world component evidence rejects rehashed identity, uncertainty and relationship omissions",
+            "seconds": 418.73603797
+          },
+          {
+            "name": "semantic replacements preserve source history and custom locations without transferring their values",
+            "seconds": 66.31136905199999
+          },
+          {
+            "name": "every generated hosted catalog batch imports through the actual service and generated D1 constraints",
+            "seconds": 17.948620724
+          },
+          {
+            "name": "existing inherited, privileged, owning or broadly granted role is rejected without silent downgrade",
+            "seconds": 12.269901652
+          },
+          {
+            "name": "full candidate release preparation emits the explicit merge, archived predecessor and exact unchanged baseline",
+            "seconds": 12.192984794
+          },
+          {
+            "name": "GPU and Canvas explain and render physical coverage without changing ownership",
+            "seconds": 12.070292531
+          },
+          {
+            "name": "immutable physical-gap successor reuse rejects stale, incomplete and unknown inputs",
+            "seconds": 10.145366816
+          },
+          {
+            "name": "inline geography never widens the total scalar response byte limit",
+            "seconds": 6.0465346559999995
+          }
+        ],
+        "raw_log_sha256": "45e1a27e124bcd18c65838ad4e1a589112344e8509981a7be9e7d506b1d9d346",
+        "phase_lines": [
+          "2026-10-08T23:40:51.2264766Z # test_component_link_cannot_omit_a_pair (__main__.Controls.test_component_link_cannot_omit_a_pair) ... ok",
+          "2026-10-08T23:41:35.1957791Z # test_edge_point_dateline_contacts_cannot_be_erased (__main__.Controls.test_edge_point_dateline_contacts_cannot_be_erased) ... ok",
+          "2026-10-08T23:42:21.6056319Z # test_missing_fragment_with_self_consistent_reported_count (__main__.Controls.test_missing_fragment_with_self_consistent_reported_count) ... ok",
+          "2026-10-08T23:43:23.7588329Z # test_original_blocked_tile_binding_cannot_be_redirected (__main__.Controls.test_original_blocked_tile_binding_cannot_be_redirected) ... ok",
+          "2026-10-08T23:44:15.3519598Z # test_original_unmeasured_area_cannot_be_fabricated (__main__.Controls.test_original_unmeasured_area_cannot_be_fabricated) ... ok",
+          "2026-10-08T23:45:00.2161625Z # test_pair_cannot_claim_another_component (__main__.Controls.test_pair_cannot_claim_another_component) ... ok",
+          "2026-10-08T23:46:04.4109930Z # test_unlinked_component_cannot_disappear (__main__.Controls.test_unlinked_component_cannot_disappear) ... ok",
+          "2026-10-08T23:46:04.4123211Z # Ran 7 tests in 418.488s"
+        ]
+      },
+      {
+        "shard": 2,
+        "job_id": 113592297128,
+        "job_seconds": 838.0,
+        "test_seconds": 264.84488660899996,
+        "passed": 528,
+        "failed": 0,
+        "skipped": 0,
+        "longest_tests": [
+          {
+            "name": "whole-world physical components retain every original shape, relationship and unknown",
+            "seconds": 97.406376056
+          },
+          {
+            "name": "topology migration retires duplicate coverage while preserving its imported history",
+            "seconds": 70.890689828
+          },
+          {
+            "name": "legacy hierarchy migration preserves historical records and repairs skipped parents",
+            "seconds": 57.398039511
+          },
+          {
+            "name": "Native grid has actual GPU/Canvas fill, picking, gap classification and GPU recovery",
+            "seconds": 46.13834628
+          },
+          {
+            "name": "seed is idempotent and missing history stays missing",
+            "seconds": 17.890700851000002
+          },
+          {
+            "name": "declared ordinary package snapshots authenticate complete native source stage and transport without any Git repository",
+            "seconds": 8.866914122
+          },
+          {
+            "name": "compact V4 preserves every raw collection and restricted runtime over frozen V2",
+            "seconds": 8.77266592
+          },
+          {
+            "name": "compact V4 preserves every raw collection and restricted runtime over frozen V3",
+            "seconds": 7.315823166
+          }
+        ],
+        "raw_log_sha256": "563e5ae13636dc0a1353a2210d86535ef34e1ca19376ec7868f06f02b854a8fa",
+        "phase_lines": []
+      }
+    ]
+  },
+  "limits": [
+    "One successful final-head run and queue attempt, not a controlled host-speed experiment or guaranteed latency.",
+    "Checkout, restoration, build and TAP totals overlap in different job phases; do not add them as disjoint costs.",
+    "All-world negative control runtime did not improve materially. Fixture-preparation equivalence is independently measured, not an end-to-end kernel speedup.",
+    "Hosted logs are independently retrievable by run/job IDs at observation time; the compact report retains their hashes, not the full bodies.",
+    "History lane is established by real selector controls; no history campaign, production write or provider action was invented for benchmarking."
+  ]
+}
