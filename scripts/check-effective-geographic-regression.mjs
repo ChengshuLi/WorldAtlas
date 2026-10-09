@@ -252,7 +252,7 @@ function validateParts(manifest) {
   for(const kind of ['rows','runs']){let offset=0;const parts=manifest.parts.filter(p=>p.kind===kind);demand(parts.length>0,'Missing native '+kind);for(const p of parts){demand(safe(p.path)&&!names.has(p.path)&&p.offset===offset&&Number.isSafeInteger(p.words)&&p.words>0&&p.words%2===0&&p.encoding==='byte-shuffle'&&p.decoded_bytes===p.words*4&&p.decoded_bytes<=FILE&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256)&&hash(p.decoded_sha256),'Invalid complete native partition');names.add(p.path);offset+=p.words;}demand(offset===(kind==='rows'?manifest.size*2:manifest.runWords),'Native partition omitted words');}
 }
 
-export function loadSelection(reader) {
+function loadBaseSelection(reader) {
   const has=reader.git('ls-tree','-z',reader.version,'--','data/ownership-selection.json').length;
   if(!has)return null;
   const selection=reader.json('data/ownership-selection.json');
@@ -287,11 +287,28 @@ export function loadSelection(reader) {
     if(reader.git('ls-tree','-z',reader.version,'--',name).length)reader.descriptor(name);
     else{if(image instanceof NativeAssetImage){demand(image.index.files.some(p=>p.path===part.path&&p.bytes===part.bytes&&p.sha256===part.sha256),'Missing selected native transport asset');}else{demand(selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');image??=new StockImage(reader);const target=image.map.logical_targets.find(p=>p.target===name);demand(target&&target.bytes===part.bytes&&target.sha256===part.sha256,'Selected native asset absent from complete bank');}}}
   if(image instanceof StockImage)for(const part of image.index.parts){const actual=reader.descriptor(NS+'/'+part.path);demand(actual.bytes===part.bytes,'Whole selected container length differs');}
-  const snapshot={selection,manifest,owners,image,receiptProvenance,metadataBytes:decoded.length+Buffer.byteLength(JSON.stringify(manifest))+(image instanceof StockImage?Buffer.byteLength(JSON.stringify(image.map)):image?Buffer.byteLength(JSON.stringify(image.index)):0),acquisition_buffer_bytes:rawBounds.length+decoded.length,reader};
+  const snapshot={selection,manifest,owners,image,receiptProvenance,metadataBytes:decoded.length+Buffer.byteLength(JSON.stringify(manifest))+(image instanceof StockImage?Buffer.byteLength(JSON.stringify(image.map))+Buffer.byteLength(JSON.stringify(image.index)):image?Buffer.byteLength(JSON.stringify(image.index)):0),acquisition_buffer_bytes:rawBounds.length+decoded.length,reader};
   selectedSnapshots.set(snapshot,{selection:JSON.stringify(selection),manifest:JSON.stringify(manifest)});
   if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
-  snapshot.additive=readSelectedAdditive(snapshot);if(snapshot.additive)snapshot.metadataBytes+=snapshot.additive.metadata_bytes;
-  freezeJson(snapshot.selection);freezeJson(snapshot.manifest);freezeJson(snapshot.owners);return Object.freeze(snapshot);
+  return snapshot;
+}
+
+export function loadSelection(reader) {
+  // This completed helper frame relinquishes raw base containers and decoded
+  // owner-body buffers before a genuinely separate additive acquisition stage.
+  // The full authenticated owners/map/index and all descriptor custody survive.
+  const snapshot=loadBaseSelection(reader);if(!snapshot)return null;
+  const basePhase={kind:'complete-selected-base-acquisition-v1',complete_phase_bytes:reader.used,inputs:[...reader.inventory.values()]};
+  snapshot.acquisitionPhases=[basePhase];
+  if(snapshot.selection.additive_release!==undefined){
+    reader.metadataBytes+=snapshot.metadataBytes+Buffer.byteLength(JSON.stringify(basePhase));
+    reader.phase();
+    snapshot.additive=readSelectedAdditive(snapshot);
+    snapshot.acquisitionPhases.push({kind:'complete-selected-additive-acquisition-v1',complete_phase_bytes:reader.used,inputs:[...reader.inventory.values()]});
+    snapshot.metadataBytes+=snapshot.additive.metadata_bytes;
+  }else snapshot.additive=null;
+  snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.acquisitionPhases));
+  freezeJson(snapshot.acquisitionPhases);freezeJson(snapshot.selection);freezeJson(snapshot.manifest);freezeJson(snapshot.owners);return Object.freeze(snapshot);
 }
 
 function asset(snapshot,pin) {
