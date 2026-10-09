@@ -10,17 +10,19 @@ These values describe byte accounting recorded in the accepted reports. They are
 
 ## Reproduction and controls
 
-Use Python 3.12.14 and the pinned `worldatlas-evidence-preparation-v1` helper. Each run reads the immutable v14 report pair, verifies the accepted runner/report pins and exact phase-pointer inventory, then publishes one JSON result with a completion receipt written last:
+Use Python 3.12.14 and the pinned `worldatlas-evidence-preparation-v1` helper. These final runs read the immutable v14 report pair, verify the accepted runner/report pins and exact phase-pointer inventory, reserve fresh writer-control fixtures exclusively under the already admitted owned `vintages/` parent, and publish each JSON result with a completion receipt written last:
 
 ```sh
-PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --run-id report-correction-one-20261009
-PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --run-id report-correction-two-20261009
-PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --compare-runs report-correction-one-20261009 report-correction-two-20261009 --summary-id report-correction-summary-20261009
+PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --run-id report-correction-four-20261009
+PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --run-id report-correction-five-20261009
+PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/nordic-final-evidence-1409-erratum/reconcile_final_accounting.py --compare-runs report-correction-four-20261009 report-correction-five-20261009 --summary-id report-correction-summary-two-20261009
 ```
 
-Both independent runs derived the same canonical assessment SHA-256 `1b58eb8072f10b9b22641fc0311c9f033926555cb6822d5fc53f9fbfc8c5c001`. Their distinct full result and publication hashes, and the final pairwise/control output hashes, are recorded in `evidence-quality.json` and the generated files.
+Both final independent runs derived canonical assessment SHA-256 `1b58eb8072f10b9b22641fc0311c9f033926555cb6822d5fc53f9fbfc8c5c001`, each with 23 passing negative controls. Their distinct report and publication hashes, plus the pairwise/control product hashes, are recorded in `evidence-quality.json` and the generated files.
 
-The entry point rejected each of the 12 missing phase members, a missing maximum candidate, changed report bytes, a foreign v14 report in the v14-one slot, a v12 run ID or path, a stale prior summary, and a modified comparison result. The first run also exercised occupied-run and output destinations, a dangling run symlink, and an escaped run ID; sentinels and the literal link remained unchanged. These controls exercise the report/input and output-admission boundaries without rerunning GIS or changing original files.
+The final entry point rejected each of the 12 missing phase members, a missing maximum candidate, changed report bytes, a foreign v14 report in the v14-one slot, a v12 run ID or path, a stale prior summary, a modified comparison result, occupied run/output paths, a dangling run symlink, and an escaped run ID. Fixture directories were reserved atomically and sentinel files created exclusively; sentinel bytes and the literal symlink target were checked before cleanup. These controls exercise the report/input and output-admission boundaries without rerunning GIS or changing original files.
+
+The earlier `report-correction-one`, `report-correction-two`, `report-correction-three`, and `report-correction-summary` outputs are preserved as superseded history. The first used pre-admission fixture setup, the second omitted writer controls, and the third was generated before writer controls were enabled on every run. They are not evidence for the final writer-control acceptance; only runs four/five and `report-correction-summary-two` support that result.
 
 ## Scope and unresolved findings
 

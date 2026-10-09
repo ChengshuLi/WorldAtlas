@@ -17,6 +17,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import types
 
 ROOT = Path(subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip())
@@ -295,38 +296,58 @@ def run_writer_controls(baseline, helper, run_id):
             raise ValueError("symlink in owned destination ancestry")
         if ancestor == ROOT.parent:
             break
-    vintage_root.mkdir(mode=0o700, exist_ok=True)
+    if vintage_root.is_symlink() or not vintage_root.is_dir():
+        raise ValueError("owned vintage parent must already exist as an ordinary directory")
     controls = []
-
-    occupied = vintage_root / "control-occupied-directory"
-    occupied.mkdir(mode=0o700)
+    occupied = Path(tempfile.mkdtemp(prefix="occupied-run-", dir=vintage_root))
     sentinel = occupied / "report.json"
-    sentinel.write_text("foreign-preserved\n", encoding="utf-8")
-    controls.append(rejection_control("occupied-run-directory", lambda: helper.NewVintage(baseline, OWNED, "control-occupied-directory", ["report.json"])))
-    if sentinel.read_text(encoding="utf-8") != "foreign-preserved\n":
-        raise ValueError("occupied run sentinel changed")
-    controls[-1]["sentinel_preserved"] = True
-    sentinel.unlink(); occupied.rmdir()
-
-    broken = vintage_root / "control-broken-link"
-    broken.symlink_to(vintage_root / "missing-target")
-    controls.append(rejection_control("dangling-run-destination", lambda: helper.NewVintage(baseline, OWNED, "control-broken-link", ["report.json"])))
-    if not broken.is_symlink():
-        raise ValueError("dangling destination link changed")
-    controls[-1]["link_preserved"] = True
-    broken.unlink()
-
-    occupied_output = vintage_root / "control-output-collision"
-    occupied_output.mkdir(mode=0o700)
+    broken = vintage_root / (occupied.name + "-broken-link")
+    occupied_output = Path(tempfile.mkdtemp(prefix="occupied-output-", dir=vintage_root))
     out = occupied_output / "report.json"
-    out.write_text("output-sentinel-preserved\n", encoding="utf-8")
-    controls.append(rejection_control("occupied-output-file", lambda: helper.NewVintage(baseline, OWNED, "control-output-collision", ["report.json"])))
-    if out.read_text(encoding="utf-8") != "output-sentinel-preserved\n":
-        raise ValueError("occupied output sentinel changed")
-    controls[-1]["sentinel_preserved"] = True
-    out.unlink(); occupied_output.rmdir()
+    sentinel_bytes = b"foreign-preserved\n"
+    output_bytes = b"output-sentinel-preserved\n"
+    broken_target = vintage_root / "missing-target-never-created"
+    try:
+        # mkdtemp reserves each fixture directory atomically under the already
+        # admitted owned parent; exclusive file creation cannot truncate a peer.
+        with sentinel.open("xb") as stream:
+            stream.write(sentinel_bytes)
+        controls.append(rejection_control("occupied-run-directory", lambda: helper.NewVintage(baseline, OWNED, occupied.name, ["report.json"])))
+        if sentinel.read_bytes() != sentinel_bytes:
+            raise ValueError("occupied run sentinel changed")
+        controls[-1]["sentinel_preserved"] = True
 
-    controls.append(rejection_control("escaped-destination", lambda: helper.NewVintage(baseline, OWNED, "../escaped-run", ["report.json"])))
+        broken.symlink_to(broken_target)
+        controls.append(rejection_control("dangling-run-destination", lambda: helper.NewVintage(baseline, OWNED, broken.name, ["report.json"])))
+        if not broken.is_symlink() or broken.resolve(strict=False) != broken_target:
+            raise ValueError("dangling destination link changed")
+        controls[-1]["link_preserved"] = True
+
+        with out.open("xb") as stream:
+            stream.write(output_bytes)
+        controls.append(rejection_control("occupied-output-file", lambda: helper.NewVintage(baseline, OWNED, occupied_output.name, ["report.json"])))
+        if out.read_bytes() != output_bytes:
+            raise ValueError("occupied output sentinel changed")
+        controls[-1]["sentinel_preserved"] = True
+
+        controls.append(rejection_control("escaped-destination", lambda: helper.NewVintage(baseline, OWNED, "../escaped-run", ["report.json"])))
+    finally:
+        if sentinel.exists():
+            if sentinel.read_bytes() != sentinel_bytes:
+                raise ValueError("refusing to remove a changed occupied-run sentinel")
+            sentinel.unlink()
+        if occupied.exists():
+            occupied.rmdir()
+        if broken.is_symlink():
+            if broken.resolve(strict=False) != broken_target:
+                raise ValueError("refusing to remove a changed dangling test link")
+            broken.unlink()
+        if out.exists():
+            if out.read_bytes() != output_bytes:
+                raise ValueError("refusing to remove a changed occupied-output sentinel")
+            out.unlink()
+        if occupied_output.exists():
+            occupied_output.rmdir()
     return controls
 
 
@@ -347,8 +368,7 @@ def run_one(run_id):
     output = helper.NewVintage(baseline, OWNED, run_id, ["report.json"])
     script_bytes = HERE.joinpath(Path(__file__).name).read_bytes()
     controls = run_input_controls(baseline, analysis, helper, helper_pin, helper_raw)
-    if run_id == "report-correction-one-20261009":
-        controls.extend(run_writer_controls(baseline, helper, run_id))
+    controls.extend(run_writer_controls(baseline, helper, run_id))
     assessment = {"method_id": "correct-v14-recorded-phase-maximum", "maximum_recorded_phase_bytes": analysis["maximum_recorded_phase_bytes"], "phase_count": analysis["phase_count"], "phase_values": analysis["phases"], "prior_published_maximum_bytes": analysis["prior_published_maximum_bytes"], "correction_delta_bytes": analysis["correction_delta_bytes"], "phase_limit_bytes": analysis["phase_limit_bytes"], "remaining_below_limit_bytes": analysis["remaining_below_limit_bytes"]}
     value = {
         "version": 1, "issue": 1559, "kind": "measurement", "method_id": "correct-v14-recorded-phase-maximum", "outcome": "passed", "run_id": run_id,
