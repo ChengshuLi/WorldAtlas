@@ -143,7 +143,8 @@ def make_baseline(commit: str, assets: list[dict]):
 
 
 def component_phase(commit: str, phase: str, component: dict, geometry: dict, capture: dict,
-                    audit: dict, scope_rows: dict, assets: list[dict], baseline, evidence):
+                    audit: dict, scope_rows: dict, assets: list[dict], baseline, evidence,
+                    descriptors: list[dict]):
     component_id = component["component_id"]
     geom = shape(geometry["geometry"])
     source_row = scope_rows[component_id]
@@ -302,6 +303,25 @@ def component_phase(commit: str, phase: str, component: dict, geometry: dict, ca
     return writer.publish({"component-month-summary.json": summary})
 
 
+def write_failure(commit: str, phase: str, component_id: str, failure_head: str,
+                  error: str, baseline, evidence):
+    """Retain a bounded failure receipt; it never masquerades as a result."""
+    vintage = f"failed-{sha((failure_head + phase + component_id).encode())[:16]}"
+    writer = evidence.NewVintage(baseline, OWN_REL, vintage, ["failure.json"])
+    payload = {
+        "schema": "worldatlas-geography-phase-failure-v1",
+        "status": "failed-no-scientific-output",
+        "phase": phase,
+        "component_id": component_id,
+        "attempt_head": failure_head,
+        "pinned_baseline": commit,
+        "error": error,
+        "admitted_bytes_before_failure_receipt": sum(baseline.consumed.values()),
+        "limits": ["No component counts or geographic conclusions are retained by this failure receipt."],
+    }
+    writer.publish({"failure.json": payload})
+
+
 def run_phase(phase: str) -> dict:
     if phase not in ("run-1", "run-2"):
         raise ValueError("Run must be run-1 or run-2")
@@ -343,16 +363,53 @@ def run_phase(phase: str) -> dict:
         geometry_row = geo_by_id[row["component_id"]]
         if covered_index:
             baseline, evidence, descriptors = make_baseline(commit, assets)
-        result = component_phase(commit, phase, row, geometry_row, capture, audit, scope_rows, assets, baseline, evidence)
+        try:
+            result = component_phase(commit, phase, row, geometry_row, capture, audit, scope_rows, assets, baseline, evidence, descriptors)
+        except Exception as exc:
+            write_failure(commit, phase, row["component_id"], commit, f"{type(exc).__name__}: {exc}", baseline, evidence)
+            raise
         results.append({"component_id": row["component_id"], "path": result[0]["path"], "bytes": result[0]["bytes"], "sha256": result[0]["sha256"]})
         print(json.dumps({"phase": phase, "component_id": row["component_id"], "path": result[0]["path"], "sha256": result[0]["sha256"]}), flush=True)
     return {"phase": phase, "component_count": len(results), "results": results}
 
 
+def record_prior_failure(commit: str, phase: str, component_id: str, error: str) -> None:
+    capture_raw = git_bytes(commit, CAPTURE_REL)
+    if sha(capture_raw) != SOURCE_CAPTURE_SHA:
+        raise ValueError("Failure attempt source capture differs from the retained pin")
+    capture = json.loads(capture_raw)
+    baseline, evidence, _ = make_baseline(commit, capture["assets"])
+    # The first reproduction had already admitted and decoded this complete
+    # component phase before failing while building its output binding.
+    audit = json.loads(baseline.pinned_bytes(AUDIT_REL))
+    component = next(row for row in audit["components"] if row["component_id"] == component_id)
+    geometry_raw = baseline.pinned_bytes(GEOMETRY_REL)
+    geometry = next(feature for feature in json.loads(geometry_raw)["features"]
+                    if feature["properties"]["source_payload_id"] == component_id)
+    geom = shape(geometry["geometry"])
+    asset = next(row for row in capture["assets"] if row["filename"].endswith("_01.tif") and "10W_40N" in row["filename"])
+    tile_path = OLD_REL + "sources/jrc/monthlyhistory-v1_5-2024/" + asset["filename"]
+    with rasterio.open(ROOT / tile_path) as ds:
+        blocks = candidate_blocks(geom, ds)
+    if not blocks:
+        raise ValueError("Failure component no longer has native raster blocks")
+    for month_asset in capture["assets"]:
+        if "10W_40N" not in month_asset["filename"]:
+            continue
+        for br, bc in blocks:
+            baseline.admit(f"decoded:{month_asset['filename']}:block:{br}:{bc}", BLOCK_BYTES)
+    baseline.admit("planned-output-reserve:component-month-summary.json", OUTPUT_RESERVE)
+    write_failure(commit, phase, component_id, commit, error, baseline, evidence)
+
+
 def main() -> None:
-    if len(sys.argv) != 2 or sys.argv[1] not in ("run-1", "run-2"):
-        raise SystemExit("Usage: summarize-native-monthly-components.py run-1|run-2")
-    print(json.dumps(run_phase(sys.argv[1]), sort_keys=True))
+    if len(sys.argv) == 2 and sys.argv[1] in ("run-1", "run-2"):
+        print(json.dumps(run_phase(sys.argv[1]), sort_keys=True))
+        return
+    if len(sys.argv) == 5 and sys.argv[1] == "record-failure":
+        record_prior_failure(sys.argv[2], sys.argv[3], sys.argv[4], "NameError: name 'descriptors' is not defined after complete component computation")
+        return
+    raise SystemExit("Usage: summarize-native-monthly-components.py run-1|run-2 | record-failure COMMIT PHASE COMPONENT_ID")
 
 
 if __name__ == "__main__":
