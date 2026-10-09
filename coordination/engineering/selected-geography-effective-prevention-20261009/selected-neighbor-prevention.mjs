@@ -335,7 +335,7 @@ export function readRetainedRegistryAuthority(reader, entry) {
  demand(same(preimage,custody.rule_preimage)&&custody.rule_sha256===entry.rule_sha256,'Registry relabelled original executed rule');
  const original=originalAuthorities.get(custody).bodies;
  const supported=SUPPORTED_PROGRAMS.find(p=>p.preimage_version===preimage.version&&p.source_profile===(custody.source_rule.profile??null));
- const codeIdentity=rows=>rows.map(p=>({path:p.path,mode:p.mode,git_blob_oid:p.git_blob_oid??p.blob,bytes:p.bytes,sha256:p.sha256}));
+ const codeIdentity=rows=>rows.map(p=>{demand(Object.keys(p).sort().join(',')==='bytes,path,sha256','Unsupported original complete code roster shape');return {path:p.path,bytes:p.bytes,sha256:p.sha256};});
  demand(supported&&same(codeIdentity(original.source_request.executed_code),codeIdentity(supported.source_executed_code))&&same(codeIdentity(original.native_request.executed_code),codeIdentity(supported.native_executed_code)),'Unreviewed source/native policy program closure');
  const source=qualifyOriginalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
  return freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
@@ -414,9 +414,28 @@ export function readSelectedAdditive(snapshot) {
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
    demand(original&&['assigned','zero-cell'].includes(original.disposition)&&same({...original,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},row),'Selected component rebinds original full native/source primitive');
   }
-  const view={authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256,source_scope_ids:proof.source_scope_ids,native_proof:proof.native_proof,pins:proof.pins,original_pins:proof.original_pins};proofs.push(view);retained+=valueBytes(view).length;
+  const view={authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256,source_scope_ids:proof.source_scope_ids,native_proof:proof.native_proof,original_ledger:proof.original_ledger,pins:proof.pins,original_pins:proof.original_pins};proofs.push(view);retained+=valueBytes(view).length;
+ }
+
+ const expectedScope=new Map();
+ for(const proof of proofs){
+  demand(same(named.ledger.parent_inventory,proof.original_ledger.parent_inventory),'Selected ledger changes complete original inventory denominator');
+  for(const original of proof.original_ledger.rows){
+   demand(!expectedScope.has(original.component_id),'Ambiguous repeated original authority component');expectedScope.set(original.component_id,{original,proof});
+  }
+ }
+ demand(named.ledger.rows.length===expectedScope.size&&named.ledger.scope_ids.every(id=>expectedScope.has(id)),'Selected ledger omits/invents complete original native scope or exceptions');
+ for(const row of named.ledger.rows){const {original,proof}=expectedScope.get(row.component_id);
+  if(named.ledger.version===1)demand(same(row,original),'Selected original v1 row rebound');
+  else{const {authority_sha256,rule_sha256,...literal}=row;demand(authority_sha256===proof.authority_sha256&&(rule_sha256===undefined||rule_sha256===proof.rule_sha256)&&same(literal,original),'Selected v2 row rebinds original full primitive/exception authority');}
  }
  demand(normalized.rows.size>0,'Selected additive hook contains no effective primitives');
+
+ const reference=r=>demand(r&&Object.keys(r).sort().join(',')==='footprints_sha256,hierarchy_sha256,id'&&typeof r.id==='string'&&r.id.startsWith('geography:')&&hash(r.footprints_sha256)&&hash(r.hierarchy_sha256),'Unsupported complete effective reference');
+ reference(envelope.base_reference);reference(envelope.effective_reference);
+ demand(envelope.base_reference.hierarchy_sha256===resolver.release.hierarchy_sha256&&envelope.effective_reference.hierarchy_sha256===envelope.base_reference.hierarchy_sha256,'Effective release silently changes selected hierarchy');
+ if(envelope.version===1)demand(proofs.length===1&&proofs[0].native_proof.native_patches.every(p=>same(p.effective_reference,envelope.effective_reference)),'Selected original v1 effective reference rebound');
+ else demand(envelope.effective_reference.footprints_sha256===valueSha({domain:'worldatlas-effective-native-footprints:v2',base_reference:envelope.base_reference,authority_registry_sha256:valueSha(registry),ledger_sha256:sidecar.logical_asset_map.ledger.sha256,components:[...normalized.rows.values()]}),'Selected explicit v2 effective domain differs from complete authority/component set');
  const patch=named.patch;
  demand(patch&&Object.keys(patch).sort().join(',')===(patch.version===1?'base_reference,effective_reference,kind,ledger_sha256,rows,rule_sha256,version':'authority_registry_sha256,base_reference,effective_reference,kind,ledger_sha256,rows,version')&&patch.kind==='unassigned-native-cells-v1'&&same(patch.base_reference,envelope.base_reference)&&same(patch.effective_reference,envelope.effective_reference)&&patch.ledger_sha256===sidecar.logical_asset_map.ledger.sha256,'Stale/foreign native additive patch');
  demand(named.ledger.version===1?patch.version===1&&patch.rule_sha256===named.ledger.rule_sha256:patch.version===2&&patch.authority_registry_sha256===valueSha(registry),'Native delta rule/registry binding differs');
@@ -438,7 +457,12 @@ export function readSelectedAdditive(snapshot) {
  demand(same(patch.rows,expectedRows),'Selected native patch omits/invents original qualified assignment cells');
  // Current-bank target pointsets and zero-owned native exclusion are checked by
  // the actual affected-source/interval callers, never inferred from this delta.
- const result=freeze({sidecar,registry,ledger:named.ledger,patch,envelope,normalized_rows:[...normalized.rows.values()],authority_proofs:proofs,assigned_cells:total,metadata_bytes:retained});
+ // The whole encoded/decoded acquisition remains charged above while this
+ // helper owns its body arrays. After return those arrays (including the second
+ // owner-roster decode) are dead; only this complete view is carried onward.
+ // The independently authenticated original owner roster remains in snapshot.
+ const carried={sidecar,registry,ledger:named.ledger,patch,envelope,normalized_rows:[...normalized.rows.values()],authority_proofs:proofs,assigned_cells:total};
+ const result=freeze({...carried,metadata_bytes:valueBytes(carried).length+4096});
  selectedAdditions.set(result,{snapshot});return result;
 }
 export function selectedAdditiveRows(view,row,base) {
