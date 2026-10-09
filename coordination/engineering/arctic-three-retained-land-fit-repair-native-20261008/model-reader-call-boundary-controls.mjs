@@ -127,7 +127,19 @@ if(process.argv[2]==='--built-output-controls'){
   const dangling=path.join(scratch,'dangling.json');fs.symlinkSync(path.join(scratch,'absent'),dangling);assert.throws(()=>reportDestination(dangling));refusals++;
   assert.throws(()=>reportDestination(path.join(root,'.cache/../outside.json')));refusals++;
   fs.symlinkSync(path.join(scratch,'absent'),path.join(base,'symlink'));assert.throws(()=>emittedInventory(base));refusals++;
-  console.log(JSON.stringify({built_output_controls:{positives:2,refusals},limitation:'Tiny actual output reader and destination boundaries only; no full build qualification.'}));
+  const {gzipSync,gunzipSync}=await import('node:zlib');const {shuffleOwnershipBytes,unshuffleOwnershipBytes}=await import('../../../src/ownership-codec.js');
+  const producer=fs.readFileSync(new URL('./model-reader-call-boundary-controls.mjs',import.meta.url),'utf8');
+  const begin=producer.indexOf(' function counts(parts,decodedPins,qualifiedManifest){'),end=producer.indexOf('\n const oldParts=',begin);assert(begin>=0&&end>begin);
+  const native={size:2,runWords:4},rows=new Uint32Array([0,1,1,1]);
+  const actualCounts=new Function('native','rows','base','assert','unshuffleOwnershipBytes','gunzipSync','requireEmittedPin','readbackHash','createHash',producer.slice(begin,end)+';return counts;')(native,rows,base,assert,unshuffleOwnershipBytes,gunzipSync,requireEmittedPin,readbackHash,createHash);
+  const originalWords=new Uint32Array([524288,0,1048577,1]);
+  const qualified={parts:[0,2].map(offset=>({kind:'runs',offset,words:2,decoded_sha256:readbackHash(Buffer.from(originalWords.buffer,offset*4,8))}))};
+  const encoded=gzipSync(shuffleOwnershipBytes(originalWords)),emitted={path:'tiny.gz',bytes:encoded.length,sha256:readbackHash(encoded),offset:0,words:4,decoded_sha256:readbackHash(Buffer.from(originalWords.buffer))};fs.writeFileSync(path.join(base,'tiny.gz'),encoded);
+  const joined=actualCounts([emitted],true,qualified);assert.equal(joined.counts[1],1);assert.equal(joined.counts[2],1);assert.equal(joined.qualified_native_blocks.length,2);
+  for(const drift of [()=>{const q=structuredClone(qualified);q.parts.pop();return q;},()=>{const q=structuredClone(qualified);q.parts[0].decoded_sha256='0'.repeat(64);return q;},()=>{const q=structuredClone(qualified);q.parts[1].offset=3;return q;}]){assert.throws(()=>actualCounts([emitted],true,drift()));refusals++;}
+  const swapped=new Uint32Array([1048576,0,524289,1]),changed=gzipSync(shuffleOwnershipBytes(swapped));fs.writeFileSync(path.join(base,'tiny.gz'),changed);
+  assert.throws(()=>actualCounts([{...emitted,bytes:changed.length,sha256:readbackHash(changed),decoded_sha256:readbackHash(Buffer.from(swapped.buffer))}],true,qualified),/differs from qualified/);refusals++;
+  console.log(JSON.stringify({built_output_controls:{positives:3,refusals},limitation:'Tiny actual output reader and destination boundaries only; no full build qualification.'}));
  }finally{fs.rmSync(scratch,{recursive:true,force:true});}
  process.exit(0);
 }
