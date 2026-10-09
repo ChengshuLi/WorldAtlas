@@ -161,9 +161,33 @@
   ],
   "outputs": [
     {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/negative-control.json",
+      "bytes": 343,
+      "sha256": "2060b0da0842220b30e5d64ca0d56e2bcab4abe6dbc314ebf4200c5403375217",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/positive-control.json",
+      "bytes": 343,
+      "sha256": "27368671d06f3bc1717cba1a598ce2d4439809c6ccf094d8caa7d7724bbed788",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/report.json",
+      "bytes": 1109,
+      "sha256": "529b208c192f4419eb1b61e58bd2f134f79b0a02b16efd92ea7e7491acdd94eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/reproducibility.json",
+      "bytes": 518,
+      "sha256": "60c7466b5637a29a2029ae887e175e8e1b5f00d2b6e7167ba25df6d567c3307e",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": ".github/package-inputs.json",
-      "bytes": 13210,
-      "sha256": "634de29e8f403db2579df5be409186d47af4f435264cfd08bf5a1f702b568e97",
+      "bytes": 13323,
+      "sha256": "2d0a8f8f356ef6c106aa79cec4f5f9fa3f6e58e714a95b51f0a2aec9d5af9b84",
       "hash_kind": "file-bytes"
     },
     {
@@ -204,8 +228,8 @@
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs",
-      "bytes": 12651,
-      "sha256": "a2ddf83a25b3fdef68060156f649b09dc5363d97466019cd681ce1ed7f691c59",
+      "bytes": 13941,
+      "sha256": "b5f538cffc737d52519a9246cd86cdc2cfa36daeed30a3c8cf1ad0ecda514807",
       "hash_kind": "file-bytes"
     },
     {
@@ -252,8 +276,8 @@
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json",
-      "bytes": 4802,
-      "sha256": "e99cdbbf56d170627122b66cf6c9a25032285911098c40c2e1b678506dc6a7f8",
+      "bytes": 4811,
+      "sha256": "2e3e5da77ebbe40e7b95425057a6ded33ca5fd290efd8f8cfeb02e46875167c0",
       "hash_kind": "file-bytes"
     },
     {
@@ -266,12 +290,6 @@
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/encode-release-registry.py",
       "bytes": 7341,
       "sha256": "4bdb41dd893573a093fa2927dd2335f6bc13f9c2cc4a48e11195a449fc79d8a5",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/evidence-quality.json",
-      "bytes": 229252,
-      "sha256": "edec11d36fd89a78b2b42a6d0292aa996adfd5d2cf9d6f9bdfaa2dd4f8459c20",
       "hash_kind": "file-bytes"
     },
     {
@@ -312,8 +330,8 @@
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs",
-      "bytes": 10658,
-      "sha256": "6ca33a5da60e6914ab7f5edfa601979b7a1f707befd4ca629a6ef0e76ac9d1ff",
+      "bytes": 11498,
+      "sha256": "f9db419a187d9a3d9bf3b0b5fd9847ddb80d53e8bf7c738ecafe40c924f8e560",
       "hash_kind": "file-bytes"
     },
     {
@@ -552,26 +570,32 @@
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs",
-      "bytes": 31425,
-      "sha256": "8d6820522ae7a55d5d861e6c3b98f095214690c535548c3dbc910d4c6bef0907",
+      "bytes": 33470,
+      "sha256": "d4565565eb56bcfa560f55e77db2145875d26a2adfff8d97df0e28739fb51871",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-controls.mjs",
-      "bytes": 4010,
-      "sha256": "bb3db6b879dd8bfb9dbd40ee141b6f845b4f896159141122f2d1d6d799cedd73",
+      "bytes": 6668,
+      "sha256": "ad11a9340c059faf7f05b232c8d27ecf74784e17b4941d369c363d1a62eae895",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-consumer-code.json",
-      "bytes": 14509,
-      "sha256": "d33c84c022e70a6ccb70de11b33cf5c0d6ca0a398774b5aa7c335986451c2bed",
+      "bytes": 14926,
+      "sha256": "acf668c27e352e19e26de3dad0eada13a04fb068bfa77709e0a501a99f34777d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
-      "bytes": 43178,
-      "sha256": "dd6f0de69cbe16a70743d8c590cb2c7ccbb82fc01090422b60d78b362a460fb6",
+      "bytes": 44026,
+      "sha256": "440b3965b783671ed51fb27d14419322b2987ef55a985af41c775ac46daf1a30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review-62f71650.json",
+      "bytes": 6411,
+      "sha256": "5d6758debd9c2e141b83c40594486939f6fa2fd819816070957bbc4b0f1075c2",
       "hash_kind": "file-bytes"
     },
     {
@@ -683,6 +707,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/release-products.json.gz",
+      "bytes": 32082,
+      "sha256": "d1d4e039b468b0dd460a803e4469e93e266633e3e01a96f0d78e3f7d8d9f261b",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/registry-continuation-controls.mjs",
       "bytes": 2230,
       "sha256": "167b868853c6137933ea1594d8d5ca6ef79beeed61f5002fcc0b7e9ce04b6665",
@@ -704,6 +734,12 @@
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-issuer.mjs",
       "bytes": 6859,
       "sha256": "29273bb999f0939b19b8a6fa52435f5de0500728d34d430221766c2e97640849",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-product-inputs.mjs",
+      "bytes": 1716,
+      "sha256": "0253b8fb2fe4902b261bed9b0ae48b163cc78add588965c0ecd0dad34b79b58c",
       "hash_kind": "file-bytes"
     },
     {
@@ -2934,8 +2970,8 @@
     },
     {
       "path": "data/ownership-selection.json",
-      "bytes": 1352,
-      "sha256": "402644f50ff0f783caf05cbe08c3520c974714777e00692e023db2a85133bcfa",
+      "bytes": 1361,
+      "sha256": "e5f77bb127484dd19766b473a98d8359352318e613c2b1f1b7da75a8ff9930c3",
       "hash_kind": "file-bytes"
     },
     {
@@ -3147,7 +3183,7 @@
     {
       "path": ".github/package-inputs.json",
       "status": "modified",
-      "original_sha256": "117299e90acdf9518f0bdb84511334bbd28c932b4504b5cc652e89c0945f8e9f"
+      "original_sha256": "24cddab53701dbaeca873408e092e14cc7cb778aab14a89d55c381af86d5ad91"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/README.md",
@@ -3215,10 +3251,6 @@
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/encode-release-registry.py",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/evidence-quality.json",
       "status": "added"
     },
     {
@@ -3422,6 +3454,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review-62f71650.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review.json",
       "status": "added"
     },
@@ -3494,6 +3530,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/release-products.json.gz",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/registry-continuation-controls.mjs",
       "status": "added"
     },
@@ -3507,6 +3547,10 @@
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-issuer.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-product-inputs.mjs",
       "status": "added"
     },
     {
@@ -5002,7 +5046,7 @@
     {
       "path": "scripts/build-static-inner.mjs",
       "status": "modified",
-      "original_sha256": "8d0d4176ff2dd432e478e063b6437886c972d7b20bbd173a59ff152fe591470a"
+      "original_sha256": "db6d42a29eccd7c40325b31618bb7c3d7e1617a87d7d6e4e4676b7cf681f12ff"
     },
     {
       "path": "scripts/native-ownership/verified-candidates.json",
