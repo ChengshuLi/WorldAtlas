@@ -298,6 +298,9 @@ export function loadSelection(reader) {
   // owner-body buffers before a genuinely separate additive acquisition stage.
   // The full authenticated owners/map/index and all descriptor custody survive.
   const snapshot=loadBaseSelection(reader);if(!snapshot)return null;
+  // The returned owner objects remain, but the helper's encoded/decoded byte
+  // buffers do not. Their full consumption remains in the completed phase below.
+  snapshot.acquisition_buffer_bytes=0;
   const basePhase={kind:'complete-selected-base-acquisition-v1',complete_phase_bytes:reader.used,inputs:structuredClone([...reader.inventory.values()])};
   snapshot.acquisitionPhases=[basePhase];
   if(snapshot.selection.additive_release!==undefined){

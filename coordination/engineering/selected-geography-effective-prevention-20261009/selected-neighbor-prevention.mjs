@@ -400,7 +400,16 @@ export function readSelectedAdditive(snapshot) {
  }
  demand(sidecar.logical_asset_map.base_manifest.sha256===selection.sha256&&same(named.base_manifest,manifest),'Additive runtime rebinds actual selected native manifest');
  demand(sidecar.logical_asset_map.owner_roster.sha256===manifest.original_assets.bounds.sha256&&same(named.owner_roster,owners),'Additive owner roster differs from independent original native bounds');
- const resolver=snapshot.geometrySources??new SelectedGeometrySources(snapshot);
+ let resolver=snapshot.geometrySources;
+ if(!resolver){
+  // The source-bank metadata has been completely authenticated in this stage.
+  // Retain its actual view for later whole-source phases; do not reopen it while
+  // the current acquisition's complete input charges are still resident.
+  resolver=new SelectedGeometrySources(snapshot);snapshot.geometrySources=resolver;
+  const retainedSourceMetadata=valueBytes({...(resolver.bank?{bank:resolver.bank}:{}),sources:resolver.sources,release:resolver.release}).length;
+  demand(reader.used+retainedSourceMetadata<=PHASE,'Complete selected source metadata exceeds acquisition phase');
+  reader.used+=retainedSourceMetadata;reader.metadataBytes+=retainedSourceMetadata;snapshot.metadataBytes+=retainedSourceMetadata;
+ }
  demand(envelope.base_reference.id===selection.release_id&&envelope.base_reference.footprints_sha256===resolver.release.footprints_sha256,'Additive effective baseline differs from actual selected source bank');
  const normalized=normaliseRetainedRepairLedger(named.ledger,registry),proofs=[];
  let retained=metadata;
