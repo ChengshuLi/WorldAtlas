@@ -1,0 +1,1933 @@
+{
+  "kind": "actual-full-selected-native-comparison-operating-receipt",
+  "code_head": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+  "baseline": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "candidate": "9d096bc93a055578cef4b895b942ef44e2e8333a",
+  "issued_command_sha256": "27411ae78e960bb9e4401335775b59ad957b50b20f991834569d17fd4ee86714",
+  "contract": {
+    "issued_command_sha256": "27411ae78e960bb9e4401335775b59ad957b50b20f991834569d17fd4ee86714",
+    "supervisor_sha256": "44d8d62fd96ce39cd8a180d156178b4dc2858dc0647fcede481a3351cff9b1e1",
+    "maximum_RSS_bytes": 1073741824,
+    "minimum_host_reserve_bytes": 402653184,
+    "sample_margin_bytes": 33554432,
+    "maximum_wall_seconds": 1200,
+    "maximum_new_storage_bytes": 67108864,
+    "maximum_result_bytes": 4194304,
+    "maximum_stderr_bytes": 40960,
+    "termination_helper_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/1394-physical-continuation-e9b03/owned-child-termination-00c6028d.py",
+    "termination_helper_sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+    "scope": "Complete current selected certificates/neighbor plan/affected original geometry input acquisition; no polygon kernel or native reconstruction. Fresh1GiB groupRSS/32MiB sample margin/384MiB hostreserve/1200s/64MiB newstorage/4MiB stdout/40KiBstderr. No cap waiver or completed scientific rerun.",
+    "reviewer": "01a10893-2a57-72e0-aa08-5c36088d5206",
+    "no_automatic_envelope_increase_or_started_retry": true
+  },
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+    "continuous",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work",
+    "417187c6a9f68561f3c73a9bf2808c29bf598328",
+    "6951c117534f69742acd1f61820cfc21a4ad17f5",
+    "9d096bc93a055578cef4b895b942ef44e2e8333a",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/complete",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+  ],
+  "started_at": "2026-10-09T20:53:41.723196+00:00",
+  "finished_at": "2026-10-09T20:54:25.372875+00:00",
+  "exit_code": 1,
+  "stop_reason": null,
+  "elapsed_s": 43.648602584027685,
+  "actual_external_lifetime_process_peak_RSS_bytes": 497188864,
+  "max_sampled_group_RSS_bytes": 499695616,
+  "VM_supply_upper_estimate_before_launch": 1524170752,
+  "operating_admission_qualified": false,
+  "natural_terminal_owned_processes_absent": true,
+  "new_storage_bytes": 15132614,
+  "samples": [
+    {
+      "elapsed_s": 0.053923459025099874,
+      "group_RSS_bytes": 48529408,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 0.5978152920142747,
+      "group_RSS_bytes": 50741248,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.1563274590298533,
+      "group_RSS_bytes": 169869312,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74421": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:42 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.7014486250118352,
+      "group_RSS_bytes": 140869632,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74513": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:43 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.244787917006761,
+      "group_RSS_bytes": 212582400,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74562": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:43 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.792915209021885,
+      "group_RSS_bytes": 187826176,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.333832959004212,
+      "group_RSS_bytes": 175767552,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.935265750042163,
+      "group_RSS_bytes": 207437824,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        },
+        "74832": {
+          "ppid": 74826,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 4.475902084028348,
+      "group_RSS_bytes": 188235776,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 5.021145083999727,
+      "group_RSS_bytes": 269615104,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        },
+        "74984": {
+          "ppid": 74826,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:46 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 5.564070041989908,
+      "group_RSS_bytes": 242122752,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 6.101658250030596,
+      "group_RSS_bytes": 329383936,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 6.676530792028643,
+      "group_RSS_bytes": 347242496,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 7.224296834028792,
+      "group_RSS_bytes": 411336704,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 7.764433292031754,
+      "group_RSS_bytes": 403537920,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 8.312246666988358,
+      "group_RSS_bytes": 395853824,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 8.857876709022094,
+      "group_RSS_bytes": 418791424,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        },
+        "75328": {
+          "ppid": 74826,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:50 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 9.404302459035534,
+      "group_RSS_bytes": 372588544,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 9.95577341702301,
+      "group_RSS_bytes": 404307968,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 10.510163958999328,
+      "group_RSS_bytes": 387104768,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 11.138235208985861,
+      "group_RSS_bytes": 347226112,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 11.692596125009004,
+      "group_RSS_bytes": 419610624,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 12.260192000016104,
+      "group_RSS_bytes": 365133824,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 12.812140583992004,
+      "group_RSS_bytes": 389922816,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 13.390896250028163,
+      "group_RSS_bytes": 372359168,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 13.987673124996945,
+      "group_RSS_bytes": 361693184,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 14.541391334030777,
+      "group_RSS_bytes": 445759488,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 15.147428333992139,
+      "group_RSS_bytes": 357220352,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 15.69633387500653,
+      "group_RSS_bytes": 415825920,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 16.245195834024344,
+      "group_RSS_bytes": 439566336,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 16.79164883401245,
+      "group_RSS_bytes": 415399936,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 17.336967499984894,
+      "group_RSS_bytes": 445644800,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 17.882201083994005,
+      "group_RSS_bytes": 440549376,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 18.426879334030673,
+      "group_RSS_bytes": 471384064,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 18.98523175000446,
+      "group_RSS_bytes": 433831936,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 19.527896750019863,
+      "group_RSS_bytes": 465649664,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 20.07356345903827,
+      "group_RSS_bytes": 429473792,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 20.6207282920368,
+      "group_RSS_bytes": 421543936,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 21.170836250006687,
+      "group_RSS_bytes": 428785664,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 21.739902959030587,
+      "group_RSS_bytes": 236224512,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74826": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:45 2026"
+        },
+        "75737": {
+          "ppid": 74826,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 22.28673533402616,
+      "group_RSS_bytes": 100794368,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        },
+        "75858": {
+          "ppid": 75830,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 22.833380417025182,
+      "group_RSS_bytes": 112410624,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        },
+        "75968": {
+          "ppid": 75830,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:04 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 23.38631550001446,
+      "group_RSS_bytes": 167723008,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        },
+        "76046": {
+          "ppid": 75830,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:05 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 23.92261883401079,
+      "group_RSS_bytes": 168198144,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        },
+        "76153": {
+          "ppid": 75830,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:05 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 24.47451708401786,
+      "group_RSS_bytes": 236306432,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 25.02515795902582,
+      "group_RSS_bytes": 412516352,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 25.571835834009107,
+      "group_RSS_bytes": 380993536,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 26.263021791994106,
+      "group_RSS_bytes": 372670464,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 26.814481542038266,
+      "group_RSS_bytes": 428228608,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        },
+        "76384": {
+          "ppid": 75830,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:08 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 27.366738167009316,
+      "group_RSS_bytes": 414646272,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 27.923366792034358,
+      "group_RSS_bytes": 422297600,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 28.47287158400286,
+      "group_RSS_bytes": 408993792,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 29.026202417036984,
+      "group_RSS_bytes": 383860736,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 29.586777209013235,
+      "group_RSS_bytes": 417300480,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 30.12735716701718,
+      "group_RSS_bytes": 386793472,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 30.669111208990216,
+      "group_RSS_bytes": 433111040,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 31.223737167019863,
+      "group_RSS_bytes": 415907840,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 31.774655167013407,
+      "group_RSS_bytes": 384499712,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 32.32068308402086,
+      "group_RSS_bytes": 411123712,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 32.88780195900472,
+      "group_RSS_bytes": 440762368,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 33.43331741698785,
+      "group_RSS_bytes": 413761536,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 33.979509000026155,
+      "group_RSS_bytes": 466550784,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 34.51525291701546,
+      "group_RSS_bytes": 451788800,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 35.09594716702122,
+      "group_RSS_bytes": 376373248,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 35.65707916702377,
+      "group_RSS_bytes": 360513536,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 36.224812000000384,
+      "group_RSS_bytes": 379731968,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 36.80724662501598,
+      "group_RSS_bytes": 391692288,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 37.452029999985825,
+      "group_RSS_bytes": 158760960,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 38.00588729203446,
+      "group_RSS_bytes": 350470144,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 38.56147816701559,
+      "group_RSS_bytes": 433602560,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 39.11257649998879,
+      "group_RSS_bytes": 447430656,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 39.65829616703559,
+      "group_RSS_bytes": 499695616,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        },
+        "76791": {
+          "ppid": 75830,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:21 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 40.22563420899678,
+      "group_RSS_bytes": 453541888,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 40.770732125034556,
+      "group_RSS_bytes": 403374080,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 41.31647691701073,
+      "group_RSS_bytes": 412860416,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "75830": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:03 2026"
+        },
+        "76972": {
+          "ppid": 75830,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:22 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 41.85712170903571,
+      "group_RSS_bytes": 198246400,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "77028": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:23 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 42.40013158402871,
+      "group_RSS_bytes": 228507648,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "77110": {
+          "ppid": 74259,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:54:24 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 42.95030020899139,
+      "group_RSS_bytes": 235569152,
+      "members": {
+        "74257": {
+          "ppid": 74037,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        },
+        "74259": {
+          "ppid": 74257,
+          "pgid": 74257,
+          "started": "Fri Oct 9 13:53:41 2026"
+        }
+      }
+    }
+  ],
+  "termination_events": [],
+  "whole_output_pins": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/checker.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-continuous-actual417-20261009/checker.stderr",
+      "bytes": 2710,
+      "sha256": "715b40ff4403d63823eff3d9a53fb90704b1fb86d00a930a527715a7f0c0e74c"
+    }
+  ],
+  "source_pre_use": [
+    {
+      "path": "package.json",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/package.json"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "09015e2d1e179b6856b6b9e51d51e3ea77d7b2fd",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "539636ee1a6d9c719ab6e20c7b7f822cc66e0833",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/run-geographic-check.py"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "a9f221d139a019a5240b3f4d45249226ae49f3c4",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-geographic-regression.py"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/immutable.py"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "f1c2f3206bc5698201441a775b8bf8560977368d",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/geometry.py"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "518dcaada9e94907d7d886636dcbf928bd0788fa",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/ellipsoidal_area.py"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/src/ownership-codec.js"
+    },
+    {
+      "path": "requirements.txt",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "a51a1fe5d483cadf8c6bbfb8390f8c5bbad61f9c",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/requirements.txt"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "3c0964f55cecbe3761247783dc30c3584f6d3d5c",
+      "bytes": 67468,
+      "sha256": "776f010db97d101e458a29e6d0b58245a9bec2e9be5e54fcd0ff3ca6e88940aa",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "173238c970c0e9f4b610323fe89c96d72db65d95",
+      "bytes": 20843,
+      "sha256": "d250fdc7bb3800628fb65f119b348134565bce8cef4ff31c457521a87634baab",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs"
+    }
+  ],
+  "source_post_use": [
+    {
+      "path": "package.json",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/package.json"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "09015e2d1e179b6856b6b9e51d51e3ea77d7b2fd",
+      "bytes": 70214,
+      "sha256": "8c1252833602da6bbd451a603fd849c915766f4786edb86e14f03d2c389ab34e",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "539636ee1a6d9c719ab6e20c7b7f822cc66e0833",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/run-geographic-check.py"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "a9f221d139a019a5240b3f4d45249226ae49f3c4",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-geographic-regression.py"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/immutable.py"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "f1c2f3206bc5698201441a775b8bf8560977368d",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/evidence/geometry.py"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "518dcaada9e94907d7d886636dcbf928bd0788fa",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/ellipsoidal_area.py"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/src/ownership-codec.js"
+    },
+    {
+      "path": "requirements.txt",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "a51a1fe5d483cadf8c6bbfb8390f8c5bbad61f9c",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/requirements.txt"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "3c0964f55cecbe3761247783dc30c3584f6d3d5c",
+      "bytes": 67468,
+      "sha256": "776f010db97d101e458a29e6d0b58245a9bec2e9be5e54fcd0ff3ca6e88940aa",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "commit": "417187c6a9f68561f3c73a9bf2808c29bf598328",
+      "mode": "100644",
+      "git_blob_oid": "173238c970c0e9f4b610323fe89c96d72db65d95",
+      "bytes": 20843,
+      "sha256": "d250fdc7bb3800628fb65f119b348134565bce8cef4ff31c457521a87634baab",
+      "consumed_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs"
+    }
+  ],
+  "global_scientific_executions": 0
+}

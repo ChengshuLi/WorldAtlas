@@ -1,0 +1,25 @@
+{
+  "supervisor_sha256": "44d8d62fd96ce39cd8a180d156178b4dc2858dc0647fcede481a3351cff9b1e1",
+  "actual_extracted_supervisor_blocks": true,
+  "controls": [
+    {
+      "branch": "missing_initial_snapshot",
+      "exit_code": -9,
+      "stop_reason": "Owned launch/sampling exception: AssertionError: ",
+      "owned_group_absent": true
+    },
+    {
+      "branch": "sampler_snapshot_failure",
+      "exit_code": -9,
+      "stop_reason": "Owned launch/sampling exception: OSError: injected sampler snapshot failure",
+      "owned_group_absent": true
+    },
+    {
+      "branch": "sampler_ps_failure",
+      "exit_code": -9,
+      "stop_reason": "Owned launch/sampling exception: OSError: injected sampler ps failure",
+      "owned_group_absent": true
+    }
+  ],
+  "scientific_execution": false
+}

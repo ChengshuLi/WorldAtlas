@@ -107,7 +107,7 @@ export function reopenCompleteColdPlan(native,helper,{repo,baseline,candidate,pa
  demand(rows.baseline.length===required.size&&rows.candidate.length===required.size,'Complete affected cold row closure differs');
  return {plan,rows,inputs:{baseline:oldCertificate.inputs,candidate:newCertificate.inputs},complete_phase_bytes:reader.used};
 }
-export function acquireContinuousSource(native,helper,{repo,selected,parentRuntimePath,name,receipt,rows,inputs,context,carriedBytes}) {
+function acquireContinuousSource(native,helper,{repo,selected,parentRuntimePath,name,receipt,rows,inputs,context,carriedBytes}) {
  const reader=coldReader(native,context,selected,carriedBytes);
  reader.metadataBytes=8388608+carriedBytes;reader.outputBytes=FILE;reader.phase();
  const snapshot=native.loadSelection(reader);demand(snapshot,'Required selected side removed');

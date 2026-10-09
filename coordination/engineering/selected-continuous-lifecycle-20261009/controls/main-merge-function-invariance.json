@@ -1,0 +1,69 @@
+{
+  "proof_consumer_commit": "a7ecb9fa901fa4688131dc3bbeb315a7cbcf7350",
+  "current_merge_commit": "d40947d25d90b8dc1c2f3451d4333f423d656c74",
+  "merged_main": "b220e43f837ed1895f13956764214dfb921c7b6b",
+  "source_vintages_not_relabelled": true,
+  "invariants": [
+    {
+      "function": "selectedCoordinateShard",
+      "bytes": 4115,
+      "sha256": "13536baba1a3601bedf6aa4f1eb797c20d30df88cda3818b36803d794e3cbf93",
+      "literal_equal": true
+    },
+    {
+      "function": "joinSelectedCoordinateCertificate",
+      "bytes": 3186,
+      "sha256": "62c0a5fa03336c080f7419f5309cd16d5c5dccec66c3aa8d0c825e33af7048fd",
+      "literal_equal": true
+    },
+    {
+      "function": "validateColdSourceBody",
+      "bytes": 964,
+      "sha256": "ffa99198fa8e41e0351f620b0e41e4e2e6a40412f44da315c47359fdf6464b7d",
+      "literal_equal": true
+    },
+    {
+      "function": "acceptColdCoordinateCertificate",
+      "bytes": 4004,
+      "sha256": "c6cf95a745f6c428fb924f596217658b496de37a8992f5e699fe3a29456fc261",
+      "literal_equal": true
+    },
+    {
+      "function": "sealColdCoordinateCertificate",
+      "bytes": 2103,
+      "sha256": "5c943ec6bfe027dfe7847dd384eff986f147f12e46d412cd3fc34e441c8015cd",
+      "literal_equal": true
+    },
+    {
+      "function": "reopenColdCoordinateCertificate",
+      "bytes": 649,
+      "sha256": "098c82adf87c589c778c805aea2e5f1aec8b19cd877f5fcd405d4dd48972d1cd",
+      "literal_equal": true
+    },
+    {
+      "function": "selectedCertificateAffectedPlan",
+      "bytes": 1872,
+      "sha256": "ad7fed2cb93d409e588746fd3b9457fa4bf23643ee5b99684581b29e89a5860b",
+      "literal_equal": true
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 20850,
+      "sha256": "2b1abb25712cfb233aba0c6eef8b2581e35fc5a99f00e7bd161c6dcd8ecf6292",
+      "literal_equal": true
+    },
+    {
+      "path": "test/selected-continuous-lifecycle.test.mjs",
+      "bytes": 22514,
+      "sha256": "43c468d425f30538ec2e1d13d7a080743e86eb8795f78c24d453940b81de0538",
+      "literal_equal": true
+    },
+    {
+      "path": "coordination/engineering/selected-continuous-lifecycle-20261009/continuation/continue-original-cold-products.mjs",
+      "bytes": 8375,
+      "sha256": "893907fe457e181ce17b87298f4708188202227b59943b405c79eb20b13bf194",
+      "literal_equal": true
+    }
+  ],
+  "other_helper_changes": "Preserved canonical1621 current-rebind introduction and its original-native contract projection; extra named imports reuse already consumed checker/codec modules."
+}
