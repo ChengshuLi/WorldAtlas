@@ -128,6 +128,12 @@
         "bytes": 12122,
         "sha256": "bd7d346c6ee6ed9734f0afbb58a69460b279e6343d444e1124991c1fb3ba19a1",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-pr-gates.mjs",
+        "bytes": 10066,
+        "sha256": "795697c2a180629c168fd5afcf0a0325de13943988c7591997027871f26ac3d6",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {},
@@ -150,8 +156,8 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/README.md",
-      "bytes": 6464,
-      "sha256": "0071a5c8ddeb2179bc4684e9f5809fe871c3ad90abaee183304d5372dfba9a95",
+      "bytes": 7547,
+      "sha256": "d9c02d8863cebd9a7e389992708ae05ae5748e1dcc1783162329216f132cf168",
       "hash_kind": "file-bytes"
     },
     {
@@ -311,6 +317,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-controls-final.log",
+      "bytes": 9588,
+      "sha256": "2e2e33688c9628d667c8629efa286a1ee3d50c8e6e818a80faa0b70703f0708a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-old-path-rejected.log",
+      "bytes": 1333,
+      "sha256": "fc4a64d7ce4baf1f8cf1cdf14dd756e9c74d52eeedcc3944377436dd210eca54",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/instrumented-capture.mjs.txt",
       "bytes": 7683,
       "sha256": "46219c328c84b25ba8cc54125018508b6678742ea5455c46760dd57c98be428e",
@@ -348,8 +366,8 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
-      "bytes": 1920,
-      "sha256": "5649c401dcce0a1ed9bae321ee9e4e8a7606fe00b56d20af021b99a862241c2a",
+      "bytes": 2119,
+      "sha256": "54fc68667775a9ff00bd1d43c46dfd1f4195ea15b7d264c00f0bd95ad3ba3699",
       "hash_kind": "file-bytes"
     },
     {
@@ -408,8 +426,8 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
-      "bytes": 1517,
-      "sha256": "5c83dfd7cfd2dfe531186e821f1714c11fbbba5acd0c53f47ffa2a5a4d6e2738",
+      "bytes": 1713,
+      "sha256": "298f0e0a90726aa9b9718c381976e2c2452a6c6790119d468de8e1dbf1b02d91",
       "hash_kind": "file-bytes"
     },
     {
@@ -458,6 +476,12 @@
       "path": "scripts/check-geographic-adjudications.mjs",
       "bytes": 3023,
       "sha256": "41870c7097e569f184b15b30b2edc5adb60c97a590ce1c4af4c38331929de630",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-pr-gates.mjs",
+      "bytes": 10269,
+      "sha256": "7ba570fa29ccaddbdf1942f0fb6b2848d17778f460e2a4f21f47dcec748b6452",
       "hash_kind": "file-bytes"
     },
     {
@@ -534,8 +558,8 @@
     },
     {
       "path": "test/pr-gates.test.mjs",
-      "bytes": 19296,
-      "sha256": "ec96aad46e31eb6b4de867164c6031a5c8ebce645cded9627a52a19aed40fb74",
+      "bytes": 23394,
+      "sha256": "3e36f474c403d0fb37a0de7a1525d573fd6bf8c193b12fb94357203049a051f3",
       "hash_kind": "file-bytes"
     },
     {
@@ -665,6 +689,14 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-controls-final.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/composed-transport-old-path-rejected.log",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/setup-1543-20261009/diagnostic-source/instrumented-capture.mjs.txt",
       "status": "added"
     },
@@ -770,6 +802,11 @@
       "path": "scripts/check-geographic-adjudications.mjs",
       "status": "modified",
       "original_sha256": "c1047ff3b45572ef4a668ab41360201b98e4eedff6f6553940b0c75a89f7da86"
+    },
+    {
+      "path": "scripts/check-pr-gates.mjs",
+      "status": "modified",
+      "original_sha256": "795697c2a180629c168fd5afcf0a0325de13943988c7591997027871f26ac3d6"
     },
     {
       "path": "scripts/ci-setup-observations.mjs",
