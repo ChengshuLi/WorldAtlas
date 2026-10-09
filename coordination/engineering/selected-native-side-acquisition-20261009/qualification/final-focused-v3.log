@@ -1,0 +1,72 @@
+✔ actual immutable entry rejects owner loss/reassignment with rawworld geometry unchanged (18387.962041ms)
+✔ missing native selection, dishonest row partition and unsupported additive hook fail closed (3237.465375ms)
+✔ changed actual asset body cannot hide behind an unchanged manifest descriptor (2071.888792ms)
+✔ full stable owner identity detects coherent index relabel and boundary-sized gaps (0.210792ms)
+✔ full ledger comparison retains zero-cell primitives and rejects coherent omission/source drift (0.347291ms)
+✔ aggregate admission rejects before any actual body read (0.140875ms)
+✔ complete bootstrap admission precedes runtime opens and trusted code reads (0.422208ms)
+✔ missing original proof object uses only the exact whole same-path retained receipt (2340.771083ms)
+✔ manifest-bound immutable native transport restores full cross-fragment original members (1842.503334ms)
+✔ actual selected entry compares typed whole native bank against ordinary predecessor (4365.922625ms)
+✔ selected continuous source consumes exact encoded override and rejects incomplete or stale maps (6650.470375ms)
+✔ explicit v2 authority conservation permits append but preserves every original zero-cell primitive (1.390458ms)
+✔ whole original rule custody derives actual issued preimage and refuses rebinding before selection (3210.322042ms)
+✔ cold selected continuous operands preserve complete neighbors and original loss/overlap comparisons (22194.39325ms)
+✔ renewed immutable artifact entry binds complete catalogue and independent authority (2538.419958ms)
+✔ registered 533-role authority derives complete custody without raising actual read caps (6558.377541ms)
+✔ Cloudflare fourth entry is explicit and cannot reinterpret historical profile shapes (40.912959ms)
+✔ genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles (5896.1035ms)
+✖ renewed installer authority retains genuine complete 533-role custody (2260.523292ms)
+✔ separate authenticated native stages preserve all rows and relinquish containing buffers (3960.594417ms)
+✔ actual whole-part acquisition reads once for several rows and rejects incomplete or forged carry (2548.853542ms)
+✔ complete side runtime and carried projection admission refuses before whole body opens (2205.191791ms)
+✔ real complete side acquisition fits bounded carry where simultaneous whole-body admission cannot (2532.560209ms)
+✖ one complete row spanning two whole native members uses genuine bounded member frames (1926.479833ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 22
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 94858.50675
+
+✖ failing tests:
+
+test at test/effective-geographic-regression.test.mjs:425:384
+✖ renewed installer authority retains genuine complete 533-role custody (2260.523292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 6087324521
+  - 6081097955
+       ^
+  
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:457:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 6087324521,
+    expected: 6081097955,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/effective-geographic-regression.test.mjs:548:1
+✖ one complete row spanning two whole native members uses genuine bounded member frames (1926.479833ms)
+  Error: Missing registered complete native comparison
+      at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:13:34)
+      at loadBaseSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:388:3)
+      at loadSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:417:18)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:558:61)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

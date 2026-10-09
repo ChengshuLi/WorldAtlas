@@ -1,0 +1,94 @@
+{
+  "time_utc": "2026-10-09T18:48:20.244783Z",
+  "baseline": "d416ec3fa35b94d114aa42bd858317504e50923f",
+  "candidate": "13298ef3a3e365c153329c77ce9f7ccacdeff685",
+  "hosted_job": 113968631112,
+  "candidate_code_executed": false,
+  "global_native_comparison_executed": false,
+  "scope": "Original trusted immutable source closure plus paired selected metadata and ONLY first affected native containing-part cohort; copied literalasset diagnostic adapter",
+  "paired_metadata": {
+    "passed": true,
+    "baseline_owner_count": 49625,
+    "candidate_owner_count": 49625,
+    "baseline_metadata_bytes": 11886442,
+    "candidate_metadata_bytes": 11481099,
+    "candidate_phase_bytes": 235479038
+  },
+  "first_cohort": {
+    "row": 36929,
+    "phase_before_baseline_parts": 168865309,
+    "phase_after_baseline_runs0": 210627573,
+    "phase_after_baseline_runs1048576": 255049628,
+    "candidate_first_part": "native-v1/ownership/runs-0.bin.gz",
+    "rejection": "Complete phase exceeds prospective cap",
+    "stack": "ImmutableReader.admit -> NativeAssetImage.logical -> copied literalasset"
+  },
+  "limits": [
+    "Mac Node runtime/accounting differs from hostedLinux; underlying hostederror notretained, cannot assert identical failingphase withoutactual hostedstdout. This is actual consequential localstrictboundary reproduction.",
+    "Nointerval comparison/scientificmethod/nativeassignment/sourceapproval occurred.",
+    "No tracked edits or repeatedCI."
+  ],
+  "recommended_minimal_remedy": "Separate genuine completed baseline whole-part acquisition/extraction from candidate acquisition; retain complete exactaffectedrows+fullcustody andchargeallcarriedmetadata/compactrows/runtime/code/output in nextphase; discardwholebaseline buffers before candidate; unchangedcompareIntervals consumesbothcomplete rows. Wholebyteidentity aliases onlywhen independently demonstrated. Never resetwhilewholebuffersremainlive orwaive256MiB.",
+  "files": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 15768,
+      "sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 64248,
+      "sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/probe-first-native-cohort.mjs",
+      "bytes": 3257,
+      "sha256": "a7e7a0a32f58015c59981e9d6bdc64a2982b50ae5d7f0d3333987233955bf40a"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/scripts/check-effective-geographic-regression.mjs",
+      "bytes": 60844,
+      "sha256": "02ff5dea739a8acc98db0c5b1061394b9745b482520aee1773e0940dbfb1c02f"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/scripts/check-geographic-regression.py",
+      "bytes": 15093,
+      "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/scripts/run-geographic-check.py",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-geography-diagnostic-20261009/src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    }
+  ]
+}

@@ -1,0 +1,582 @@
+{
+  "version": 1,
+  "lane": "engineering",
+  "worker_id": "01a11935-1ccd-7fa3-a01f-563ff29045ee",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "summaries": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "issue": 1618,
+  "baseline": {
+    "version": 2,
+    "commit": "d416ec3fa35b94d114aa42bd858317504e50923f",
+    "files": [
+      {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 60844,
+        "sha256": "02ff5dea739a8acc98db0c5b1061394b9745b482520aee1773e0940dbfb1c02f",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "test/effective-geographic-regression.test.mjs",
+        "bytes": 56048,
+        "sha256": "39a58bd692547b4d7e9f2ae6210b6c8365aec65d97fb2f14421cea664e26d8fd",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      },
+      {
+        "path": "docs/GEOGRAPHIC_REGRESSION.md",
+        "bytes": 17001,
+        "sha256": "533a31ebc7158d794a1bb2c24a6d084aae4032b328e86f15020d5f6bc1b7fbfd",
+        "hash_kind": "file-bytes",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      }
+    ],
+    "pins": {
+      "trusted_checker_sha256": "02ff5dea739a8acc98db0c5b1061394b9745b482520aee1773e0940dbfb1c02f"
+    },
+    "pin_files": {
+      "trusted_checker_sha256": {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "commit": "d416ec3fa35b94d114aa42bd858317504e50923f"
+      }
+    },
+    "subject_files": []
+  },
+  "sources": [
+    {
+      "id": "retained-native-application-authority",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1520#issuecomment-6087324521",
+      "role": "Original whole registered application/source qualification metadata; no new physical source claims",
+      "vintage": "df133bbd09fc1a33c5bcfe99006aa9fb7b1e1ef3; original121149 critical installer and independent review6087324521",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source authority/rights/date remain unchanged and unapproved."
+      },
+      "retention": "restoration-only",
+      "restoration": "Eight ordinary original Git bodies retained literally in authority-121149 with full original commit/mode/OID/size/SHA descriptors; genuine independently posted GET retained whole. Complete synthetic fixture Git object inverse is archived separately.",
+      "verification": "unverified",
+      "limit": "Engineering admission and provenance only; physical source/water/date/history remain unapproved. Synthetic fixtures do not qualify actual full selected-bank execution or activation. Normal exact-head review/CI/combined integration remain required.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "methods": [
+    {
+      "id": "whole-native-side-admission",
+      "kind": "code",
+      "description": "Prospective full member frames, private complete interval projection and exact-row group splitting; unchanged compareIntervals/affected-row method; registered genuine review renewal only",
+      "software": "Node24.19.0; existing immutable Git/body and gzip/ownership codec",
+      "units": "whole bodies, complete interval rows and ordinary source custody"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/REPRODUCTION.md",
+      "bytes": 2248,
+      "sha256": "5bb3972a0befb62845dc37b11e5a8da6d0ac07befc087965b2d033ae24c431f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/catalogue.json.gz",
+      "bytes": 32082,
+      "sha256": "d1d4e039b468b0dd460a803e4469e93e266633e3e01a96f0d78e3f7d8d9f261b",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 117061,
+      "uncompressed_sha256": "f45c64324d821763cb3faa1c76bd6bdee62b2f508ad891deab9839d20b3cc5d4"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/certificate.json",
+      "bytes": 68158,
+      "sha256": "2e2c9f87e238b4a96e02f14fbd7ebf076c5314e4d7af0a43f20ac3841195667a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/code.json",
+      "bytes": 21685,
+      "sha256": "762154195e308e5a08fd33d15cd8505a016062da394d787ba25874d50791678f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/original-inputs.json",
+      "bytes": 3448,
+      "sha256": "6fb2997c6a9f5853bd8c236db6cb1b8a7c3923a3895317b4cf6e4bc41d67a637",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/qualification.json.gz",
+      "bytes": 1142795,
+      "sha256": "d298552dca773e992d78cf1deaefa1f7f33e53c20804bf0e1576af325861d93a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11431701,
+      "uncompressed_sha256": "302d60928b8d8d7f9bb21cf094e99f4c76ac1bda5463c81bafb385ecb1224285"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/registry.json.gz",
+      "bytes": 237425,
+      "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 745951,
+      "uncompressed_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/review.json",
+      "bytes": 8189,
+      "sha256": "d75f436320deff42c9ecac8dfff46da252ebbdfeef69cec0ce633620a87184f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/selection.json",
+      "bytes": 1361,
+      "sha256": "de6b01f237083f3cad1c7c02686d2f19d2c804bb0774e47bebc1c46f318be4e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/original-paired-diagnostic.json",
+      "bytes": 5291,
+      "sha256": "da1351658f3d358c4151e492274166a77637457ea03015300d998164f3bc3451",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/final-focused-v3.log",
+      "bytes": 5353,
+      "sha256": "1471f043707d51826b9ccbc3b8831fcbecee7cf0c0d267b01f8cf5000688e506",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/final-focused-v4.log",
+      "bytes": 2662,
+      "sha256": "9ce5e48e5e097d74d3e9885ab63b656b7fd7fea491b69e13bc9c676310ecc32f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/final-focused.log",
+      "bytes": 11957,
+      "sha256": "bd6ee9c3c008f681ab9229b33aba5d159b012a58397f221556207a9a5516a802",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/first-focused.log",
+      "bytes": 11842,
+      "sha256": "d3bc8a791b24bb8eb087837a9c4091f8ec74fc4eae658e9fa6d01649443f2ba0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixture-inverse-result.json",
+      "bytes": 209,
+      "sha256": "90a9f358b763fdc68ccfd097f1e85a89d58142cafa3b0f4634cd01d2d23a7c11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-0.json.gz",
+      "bytes": 115246,
+      "sha256": "9b6c7d147fa49fff9a8e4e25687f23b3c33ef28435e433338c5dcd99e23a8726",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 346982,
+      "uncompressed_sha256": "eba09118b292d4265f9c0a57efeb1ad21e0fbb99206a93d66362f5cf37838a0c"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-1.json.gz",
+      "bytes": 111198,
+      "sha256": "34ce0a58c180a8ee4201359fb79c3a378343a3821c7b4fffbbc58a122f22841f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 332194,
+      "uncompressed_sha256": "a4b0ac0f33f9c5c30b26ffb6f62a24385263d34c7fdfb901fb9942cfed7552f4"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-10.json.gz",
+      "bytes": 1715825,
+      "sha256": "4c82873fd2b8884ef2c2f81c2fb17e424a6edfa4c8180ca0f537a3e24b55c694",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2952112,
+      "uncompressed_sha256": "1f32d4b495889d867aea223b7502ef1f9914763d77c25f9d5586051035dd6c52"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-11.json.gz",
+      "bytes": 1717223,
+      "sha256": "70eb9a707a9d58fcd518189508fcfbb10dbd0d38ecd8a81386af17b3b37a66c1",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2965276,
+      "uncompressed_sha256": "823e827aff98e78019d76971c6a50d12aa85e560b97f876181dccdd36562260f"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-12.json.gz",
+      "bytes": 1710664,
+      "sha256": "3aca2d19124a4b315d5a000e4572d7d302de01c82b8aac1d074b23e8eeca5a2e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2965284,
+      "uncompressed_sha256": "d4f133ab9754f000c93d4eecd2a3c834522ad0b415c2ff045e8b7f061a2799a6"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-13.json.gz",
+      "bytes": 115780,
+      "sha256": "f7b58fe198e1c5e05e9eb5c915445d027c1e5c4686d4b8938eab670407e4e78a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 342627,
+      "uncompressed_sha256": "94684a06aa878a2204ee52454be92c0efc73acdbbb98549461159addee27d568"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-14.json.gz",
+      "bytes": 106863,
+      "sha256": "ab58bb95e862a718c531897caa712e217452ff442c0defcc5692e03057a9e5aa",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 318788,
+      "uncompressed_sha256": "3a58b283598a29c1478be69bd85152cffe1e150709bde64ffdb9cf11215a2b72"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-15.json.gz",
+      "bytes": 106016,
+      "sha256": "bcaa06e39446bbff0345b070a2c928ca95b56ea0ecc8d3d6d53a4c7bd7152564",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 318788,
+      "uncompressed_sha256": "483a4d9fd6841d68df981824e7ac654a50e3a9ca9699f58b5ce1dafa43274443"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-16.json.gz",
+      "bytes": 106025,
+      "sha256": "1e6927c421f4888cf2bec76895b7ba16e39ac96a9a4db7ef33e2239a96c0c237",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 318788,
+      "uncompressed_sha256": "816d8ff10be2a503e783ff1ae62d69b09f5f21ca0179d2cc17ae9a07013cc7bf"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-17.json.gz",
+      "bytes": 110043,
+      "sha256": "a8616c1bdb45730111e01f8c6154f5a258bc935b78f0fc380bee720c3c0d2045",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 327149,
+      "uncompressed_sha256": "445d9df9ae2396dc7873d4358ea8ee565c0bc89964bdc159f37b7d0fe44a459a"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-2.json.gz",
+      "bytes": 105523,
+      "sha256": "d31ad3467d6477a1c44d8172e9bd671cae460d450f3208753a5856c14586b440",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 318560,
+      "uncompressed_sha256": "de4a15883e12abd5613e789164ed35f826637838244ba862e7e82b675af53f15"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-3.json.gz",
+      "bytes": 105813,
+      "sha256": "c1aa36bac0b0cbdb5bbb2b3827ecf91a7335803bff88ef8f34f3aa92f734943a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 320184,
+      "uncompressed_sha256": "42203cb60773431d3035db18827e3713f84beb31175398f302aa8cb01514b099"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-4.json.gz",
+      "bytes": 102927,
+      "sha256": "0d9e0ffd34d50238431bacdec1fcd64d4a3002f16bc48f2a2a6fd7856ec61c76",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 311470,
+      "uncompressed_sha256": "d15a31e25dda95bfc9eb48a85f10a44502fa77052cecb9d49a2c2c7ca1ac8cf1"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-5.json.gz",
+      "bytes": 116127,
+      "sha256": "167e87f543fb0492efc232878ce734cb2ff2235802f6b2edb87b774ac0076942",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 344596,
+      "uncompressed_sha256": "71a314eb6a3c85657f4beb1b579d3c417bc0e018e66733ea92fe37d1aca5f31a"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-6.json.gz",
+      "bytes": 112695,
+      "sha256": "55f5970de75f02198744db6bc47db61607e5985a4df0b20806c336551475c9bd",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 338211,
+      "uncompressed_sha256": "517838557113faa0cf1e171c36c7f6d58be500cdb69b01755006c84ecfb7d586"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-7.json.gz",
+      "bytes": 106121,
+      "sha256": "7a537e21707768a8553213fcf5699eb490d68fde3c5f585c8ef135553666f205",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 321815,
+      "uncompressed_sha256": "4c5a90eabc159558c9a2367ba2e3b8e5e17cb1b53e76decc9c079154ba2dc6c5"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-8.json.gz",
+      "bytes": 125963,
+      "sha256": "c180f0d1b88421ce483acc323120467446f7bc4a00faf5d1602d8a17e1bd1763",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 379495,
+      "uncompressed_sha256": "273655f484b9a8b51e2e8ba80aa5c0bf83b01d2509909982f1d4fbbb9d27bbc8"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-9.json.gz",
+      "bytes": 1620081,
+      "sha256": "d61e78ec4dd1d7aec1d5dbee61762d99d7ecb785ce4692227316b7a8778d5091",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2619879,
+      "uncompressed_sha256": "3415a27c9d65cd19ddbd30bb82001e9374dcd7fc260159d6098f382e417c0e2c"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/two-fixture-corrections.log",
+      "bytes": 312,
+      "sha256": "53d6417da9706160989f263f25abc38890e7307c91628e764586ef7bc9afe1f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/validation-results.json",
+      "bytes": 1663,
+      "sha256": "994e7d028d21c66c843bfa38b1577958fbce726c5c1cb1b4c06a97aa41db96ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/verify-fixture-custody.py",
+      "bytes": 1386,
+      "sha256": "4398aa076520d41480ff115f0d56379bd198647417dac7f38c61c01aa2109284",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "bytes": 18548,
+      "sha256": "5cd4086074279036d6e5e1365db632b66995cd91c480917d6e2c918eb9c35963",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 69985,
+      "sha256": "cb7aa8b863f70ce46c563ddf2a11715ccbb6b1e8834df8a3cd0b2618095692e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/effective-geographic-regression.test.mjs",
+      "bytes": 64237,
+      "sha256": "f23445403142085f8e7b831f59b616bba6d53dd5a70909de5f7d9b45313564fa",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "passed_controls",
+      "value": 24,
+      "unit": "passed actual bounded controls",
+      "vintage": "archived",
+      "evaluation_commit": "26ea2e6a3e5c0f9503df7c3a93ee7e72529980db",
+      "input_sha256": "994e7d028d21c66c843bfa38b1577958fbce726c5c1cb1b4c06a97aa41db96ed",
+      "input_file": {
+        "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/validation-results.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "complete_roles",
+      "value": 533,
+      "unit": "whole declared application metadata roles",
+      "vintage": "archived",
+      "evaluation_commit": "26ea2e6a3e5c0f9503df7c3a93ee7e72529980db",
+      "input_sha256": "994e7d028d21c66c843bfa38b1577958fbce726c5c1cb1b4c06a97aa41db96ed",
+      "input_file": {
+        "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/validation-results.json",
+        "commit": "candidate"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "passed_controls",
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/validation-results.json",
+      "json_pointer": "/passed"
+    },
+    {
+      "metric_id": "complete_roles",
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/validation-results.json",
+      "json_pointer": "/complete_roles"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Complete bounded native side/carry controls pass; actual selected-bank/full hosted execution remains required and no geographic/source approval or selection is conferred.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-native-application-authority"
+      ]
+    }
+  ],
+  "commands": [
+    "node --test test/effective-geographic-regression.test.mjs",
+    "python3 -I -B coordination/engineering/selected-native-side-acquisition-20261009/verify-fixture-custody.py"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/REPRODUCTION.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/catalogue.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/certificate.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/code.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/original-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/qualification.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/registry.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/authority-121149/selection.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/original-paired-diagnostic.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/final-focused-v3.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/final-focused-v4.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/final-focused.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/first-focused.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixture-inverse-result.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-10.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-11.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-12.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-13.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-14.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-15.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-16.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-17.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-3.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-4.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-5.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-6.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-7.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-8.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/fixtures/fixture-9.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/two-fixture-corrections.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/qualification/validation-results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-native-side-acquisition-20261009/verify-fixture-custody.py",
+      "status": "added"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "status": "modified",
+      "original_sha256": "533a31ebc7158d794a1bb2c24a6d084aae4032b328e86f15020d5f6bc1b7fbfd"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "status": "modified",
+      "original_sha256": "02ff5dea739a8acc98db0c5b1061394b9745b482520aee1773e0940dbfb1c02f"
+    },
+    {
+      "path": "test/effective-geographic-regression.test.mjs",
+      "status": "modified",
+      "original_sha256": "39a58bd692547b4d7e9f2ae6210b6c8365aec65d97fb2f14421cea664e26d8fd"
+    }
+  ]
+}
