@@ -15,6 +15,7 @@ const project=committedPreparationFiles(process.cwd(),head,previous.executed_cod
 const inputs=[],seen=new Set(),add=(name,commit=head,gzip=false)=>{if(seen.has(name))return;seen.add(name);inputs.push(pin(commit,name,gzip));};
 for(const name of ['publication.json','facts.json','operating-receipt.json'])add(P+'/qualified-source-premises-v1/'+name);
 add(P+'/qualified-source-premises-v1/inventory.jsonl.gz',head,true);add(P+'/source-premises-request-v1.json',facts.execution_commit);
+for(const code of source.executed_code){add(code.path,facts.execution_commit);const actual=inputs.at(-1);if(actual.bytes!==code.bytes||actual.sha256!==code.sha256)throw Error('Complete original source-stage code drift');}
 inputs.push(source.source_rule.inputs.find(pin=>pin.path===source.source_rule.cases_path));seen.add(source.source_rule.cases_path);
 for(const name of source.source_rule.target_banks)inputs.push(source.source_rule.inputs.find(pin=>pin.path===name));
 const bounds=P+'/current-v8/bounds.json.gz';add(bounds,head,true);

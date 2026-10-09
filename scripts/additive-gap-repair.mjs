@@ -26,7 +26,7 @@ function demand(value, message) { if (!value) throw Error(message); }
 // Input intervals are produced by the literal native operator, never accepted
 // from a source approval flag. The cold entry authenticates that operator and
 // complete containing owner assets before calling this shared combination.
-export function combineNativeBatch({scopeIds,sourceRows,candidates,ownerRows,size=262166}) {
+export function combineNativeBatch({scopeIds,sourceRows,candidates,ownerRows,continuousConflicts=[],size=262166}) {
   demand(Array.isArray(scopeIds)&&scopeIds.length>0&&new Set(scopeIds).size===scopeIds.length
     &&scopeIds.every(id=>typeof id==='string'&&id),'Invalid complete batch scope');
   demand(Number.isInteger(size)&&size>0&&size<=262166,'Invalid native batch grid');
@@ -59,6 +59,12 @@ export function combineNativeBatch({scopeIds,sourceRows,candidates,ownerRows,siz
   }
   demand([...original.values()].every(row=>row.source_compatible!==true||native.has(row.component_id)),'Eligible candidate has no actual native result');
   const conflicts=new Map();const conflict=(id,reason)=>{if(!conflicts.has(id))conflicts.set(id,new Set());conflicts.get(id).add(reason);};
+  demand(Array.isArray(continuousConflicts),'Missing continuous batch conflict roster');
+  const seenPairs=new Set();
+  for(const pair of continuousConflicts){demand(Array.isArray(pair)&&pair.length===2&&pair[0]!==pair[1]
+    &&native.has(pair[0])&&native.has(pair[1]),'Foreign continuous batch conflict');
+    const key=[...pair].sort().join('\n');demand(!seenPairs.has(key),'Duplicate continuous conflict');seenPairs.add(key);
+    if(original.get(pair[0]).target_id!==original.get(pair[1]).target_id){conflict(pair[0],'continuous-batch-owner-conflict');conflict(pair[1],'continuous-batch-owner-conflict');}}
   const byRow=new Map();
   for(const candidate of native.values())for(const row of candidate.rows)for(const run of row.runs){
     for(const previous of old.get(row.y))if(previous[2]!==run[2]&&Math.max(previous[0],run[0])<Math.min(previous[1],run[1]))conflict(candidate.component_id,'existing-foreign-owner');
@@ -847,7 +853,19 @@ function additiveBatchProposalStage(repo,request) {
       demand(source,'Missing whole batch containing native asset');const i=n*2-source.descriptor.offset,a=source.words[i],b=source.words[i+1];
       runs.push([a%2**19,b%2**19+1,Math.floor(a/2**19)+Math.floor(b/2**19)*2**13]);}
     ownerRows.push({y,complete_owner_intervals:runs});}
-  const combined=combineNativeBatch({scopeIds:spec.scope_ids,sourceRows,candidates,ownerRows,size});
+  const measurement=json(issued.source_rule.cases_path),pairRows=measurement.candidate_pairwise_contacts;
+  demand(Array.isArray(pairRows)&&pairRows.length===sourceRows.length*(sourceRows.length-1)/2,'Incomplete original continuous pair matrix');
+  const seenPairs=new Set(),continuousConflicts=[],eligible=new Set(candidates.map(row=>row.component_id));
+  for(const pair of pairRows){
+    demand(spec.scope_ids.includes(pair.left_component_id)&&spec.scope_ids.includes(pair.right_component_id)
+      &&pair.left_component_id!==pair.right_component_id&&pair.status==='measured'&&typeof pair.positive_area_overlap==='boolean'
+      &&typeof pair.intersection_area_raw_square_degrees_exact==='number'&&pair.intersection_area_raw_square_degrees_exact>=0,
+      'Foreign/invalid original continuous pair');
+    const key=[pair.left_component_id,pair.right_component_id].sort().join('\n');demand(!seenPairs.has(key),'Duplicate original continuous pair');seenPairs.add(key);
+    demand(pair.positive_area_overlap===(pair.intersection_area_raw_square_degrees_exact>0),'Continuous pair predicate/area differs');
+    if(pair.positive_area_overlap&&eligible.has(pair.left_component_id)&&eligible.has(pair.right_component_id))continuousConflicts.push([pair.left_component_id,pair.right_component_id]);
+  }
+  const combined=combineNativeBatch({scopeIds:spec.scope_ids,sourceRows,candidates,ownerRows,continuousConflicts,size});
   const baseReference={id:manifest.geographic_release,footprints_sha256:manifest.footprints_sha256,hierarchy_sha256:manifest.hierarchy_sha256};
   const ruleSha=sha(canonical({version:3,source_profile:issued.source_rule.profile,source_rule:issued.source_rule,
     representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code}));

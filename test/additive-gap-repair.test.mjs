@@ -176,3 +176,12 @@ test('actual thirteen county sources derive eleven support decisions and two par
    assert.equal(altered(mutation).source_compatible,false);
  assert.throws(()=>altered(v=>v.sourceCase.native_land_relations.pop()),/Incomplete original county queries/);
 });
+
+test('continuous different-owner overlap is refused even when no native cell is sampled; same-owner primitive sets may overlap',()=>{
+ const sources=[batchSource('a',1),batchSource('b',2)],candidates=[batchCandidate('a',1,[]),batchCandidate('b',2,[])];
+ const result=combineNativeBatch({scopeIds:['a','b'],sourceRows:sources,candidates,ownerRows:[{y:1,complete_owner_intervals:[]}],continuousConflicts:[['a','b']],size:32});
+ assert.equal(result.native_conflicts,2);assert.equal(result.assigned_cells,0);assert.equal(result.zero_cell_components,0);
+ assert.throws(()=>combineNativeBatch({scopeIds:['a','b'],sourceRows:sources,candidates,ownerRows:[{y:1,complete_owner_intervals:[]}],continuousConflicts:[['a','foreign']],size:32}),/Foreign continuous/);
+ const same=combineNativeBatch({scopeIds:['a','b'],sourceRows:[batchSource('a'),batchSource('b')],candidates:[batchCandidate('a',1,[]),batchCandidate('b',1,[])],ownerRows:[{y:1,complete_owner_intervals:[]}],continuousConflicts:[['a','b']],size:32});
+ assert.equal(same.zero_cell_components,2);assert.equal(same.native_conflicts,0);
+});
