@@ -166,6 +166,22 @@ def write_set_exclusive(payloads: dict[Path, bytes]) -> list[dict]:
     return [write_exclusive(path, payloads[path]) for path in payloads]
 
 
+def write_invocation_receipts(payloads: dict[Path, bytes]) -> list[dict]:
+    """Admit and exclusively write an invocation receipt set."""
+    return write_set_exclusive(payloads)
+
+
+def write_control_receipts(payloads: dict[Path, bytes]) -> list[dict]:
+    """Admit and exclusively write a control receipt set."""
+    return write_set_exclusive(payloads)
+
+
+def write_manifest_receipt(path: Path, raw: bytes) -> dict:
+    """Admit the manifest destination before installing its immutable bytes."""
+    admit_targets([path])
+    return write_exclusive(path, raw)
+
+
 def preflight_producer_output(output: Path, names: set[str]) -> None:
     if not names or any(Path(name).name != name for name in names):
         fail("producer output inventory must contain plain filenames")
@@ -430,7 +446,7 @@ def run_one(name: str, inputs: Path, code_dir: Path, admission: dict) -> dict:
         row["output_inventory"] = inventory
         row["run_summary_sha256"] = sha(require_regular(output / "run-summary.json"))
         row["admission"] = admission
-    write_exclusive(receipt, canonical(row))
+    write_invocation_receipts({receipt: canonical(row)})
     if outcome != "passed":
         fail(f"frozen producer failed in {name}: exit={proc.returncode}; see invocation receipt")
     return row
@@ -695,32 +711,47 @@ def writer_self_tests() -> list[dict]:
             link_ancestor.symlink_to(redirected, target_is_directory=True)
             through_link = link_ancestor / "new.json"
             probes = []
-            for kind, target in (("existing-file", existing), ("dangling-target", dangling),
+            for kind, hazard in (("existing-file", existing), ("dangling-target", dangling),
                                  ("linked-ancestor", through_link)):
                 fresh = nested / "new.json"
                 try:
-                    write_set_exclusive({fresh: b"new-value\n", target: b"must-not-write\n"})
+                    if writer == "stage":
+                        target = {"existing-file": case / "occupied-stage",
+                                  "dangling-target": case / "dangling-stage",
+                                  "linked-ancestor": link_ancestor / "stage"}[kind]
+                        if kind == "existing-file":
+                            target.mkdir(); write_exclusive(target / "sentinel.json", original)
+                        elif kind == "dangling-target":
+                            target.symlink_to(case / "absent-stage", target_is_directory=True)
+                        copy_input_tree(ORIGINAL / "inputs", target)
+                    elif writer == "producer":
+                        output = case / f"producer-output-{kind}"
+                        if kind == "existing-file":
+                            output.mkdir(); write_exclusive(output / "source-fitness.json", b"occupied\n")
+                        elif kind == "dangling-target":
+                            output.mkdir(); (output / "source-fitness.json").symlink_to(case / "absent-product")
+                        else:
+                            output = link_ancestor / "products"
+                        preflight_producer_output(output, PRODUCTS)
+                    elif writer == "invocation":
+                        write_invocation_receipts({fresh: b"new-value\n", hazard: b"must-not-write\n"})
+                    elif writer == "control":
+                        write_control_receipts({fresh: b"new-value\n", hazard: b"must-not-write\n"})
+                    else:
+                        target = {"existing-file": existing, "dangling-target": dangling,
+                                  "linked-ancestor": through_link}[kind]
+                        write_manifest_receipt(target, b"must-not-write\n")
                     outcome, reason = "accepted", ""
                 except EvidenceError as exc:
                     outcome, reason = "rejected", str(exc)
                 if fresh.exists():
-                    fail(f"writer {writer} wrote a new member before rejecting the complete set")
+                    fail(f"writer {writer} wrote a new member before rejecting its unsafe destination")
                 probes.append({"case": kind, "outcome": outcome, "reason": reason})
             if any(x["outcome"] != "rejected" for x in probes):
                 fail(f"writer {writer} admitted an occupied destination")
             if (sentinel.read_bytes() != original or existing.read_bytes() != b"occupied\n" or
                 outside_sentinel.read_bytes() != b"preserve-outside-sentinel\n"):
                 fail(f"writer {writer} changed a preservation sentinel")
-            # Exercise each writer's shared producer path admission against its full output set.
-            try:
-                preflight_producer_output(case / "producer-output", {"run-summary.json", "result.json"})
-            except EvidenceError as exc:
-                fail(f"writer {writer} unexpectedly rejected a fresh producer namespace: {exc}")
-            try:
-                preflight_producer_output(through_link / "products", {"run-summary.json", "result.json"})
-                fail(f"writer {writer} accepted a linked producer ancestor")
-            except EvidenceError:
-                pass
             results.append({"writer": writer, "probes": probes, "sentinels_unchanged": True})
     return results
 
@@ -853,13 +884,13 @@ def main() -> None:
         actual = run_negative_controls(input_root, code_dir)
         actual["method_id"] = "frozen-producer"
         out_actual = EXEC / "controls/producer-negative-control.json"
-        write_set_exclusive({out_actual: canonical(actual)})
+        write_control_receipts({out_actual: canonical(actual)})
         results = writer_self_tests()
         results += [comparison_probe("altered-actual-row", "change-real-row"),
                     comparison_probe("missing-actual-product", "remove-product"),
                     comparison_probe("false-actual-run-summary", "false-summary-status")]
         out = EXEC / "controls/writer-and-comparison-controls.json"
-        write_set_exclusive({out: canonical({"version": 1, "method_id": "safe-writers", "kind": "negative-control", "outcome": "passed", "staged_input_files": len(checked), "cases": results})})
+        write_control_receipts({out: canonical({"version": 1, "method_id": "safe-writers", "kind": "negative-control", "outcome": "passed", "staged_input_files": len(checked), "cases": results})})
         print(json.dumps({"status": "passed", "producer_negative_cases": len(actual["controls"]), "writer_and_comparison_cases": len(results)}, sort_keys=True))
     else:
         parser.error("choose --fresh or --controls")

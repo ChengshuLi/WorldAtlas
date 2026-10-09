@@ -9,7 +9,7 @@ import os
 import subprocess
 from pathlib import Path
 
-from safe_workflow import PACKET, REPO, EXEC, ORIGINAL, EvidenceError, canonical, load_json, require_regular, safe_relative, sha, write_exclusive
+from safe_workflow import PACKET, REPO, EXEC, ORIGINAL, EvidenceError, canonical, load_json, require_regular, safe_relative, sha, write_manifest_receipt
 
 ISSUE = 1515
 WORKER = "01a10948-7d38-75d0-bc01-4cc28ea41f49"
@@ -72,6 +72,15 @@ def descriptor(path: Path, role: str) -> dict:
             "sha256": sha(raw), "hash_kind": "file-bytes", "role": role}
 
 
+def packet_evidence_files():
+    """Only inventory the selected successful workspace and packet-level sources/code."""
+    for path in sorted(PACKET.rglob("*")):
+        if not path.is_file() or path.is_symlink() or "__pycache__" in path.parts or path.suffix == ".pyc":
+            continue
+        if path.parent == PACKET or path.is_relative_to(EXEC):
+            yield path
+
+
 def main() -> None:
     global EXEC
     parser = argparse.ArgumentParser()
@@ -128,8 +137,8 @@ def main() -> None:
         sources.append(source)
 
     outputs = []
-    for path in sorted(PACKET.rglob("*")):
-        if not path.is_file() or path == MANIFEST or path.is_symlink() or "__pycache__" in path.parts or path.suffix == ".pyc":
+    for path in packet_evidence_files():
+        if path == MANIFEST:
             continue
         relative = path.relative_to(REPO).as_posix()
         if relative in source_files:
@@ -156,9 +165,9 @@ def main() -> None:
 
     # The machine-readable receipt accounts for each newly added path, including
     # itself, while source files remain indexed in their source records.
-    changes = [{"path": path.relative_to(REPO).as_posix(), "status": "added", "previous_path": None}
-               for path in sorted(PACKET.rglob("*")) if path.is_file() and path != MANIFEST and not path.is_symlink()]
-    changes.append({"path": MANIFEST.relative_to(REPO).as_posix(), "status": "added", "previous_path": None})
+    changes = [{"path": path.relative_to(REPO).as_posix(), "status": "added"}
+               for path in packet_evidence_files() if path != MANIFEST]
+    changes.append({"path": MANIFEST.relative_to(REPO).as_posix(), "status": "added"})
     changes.sort(key=lambda x: x["path"])
 
     generated = load_json(EXEC / "fresh-execution.json")
@@ -215,7 +224,7 @@ def main() -> None:
         ],
         "change_receipts": changes,
     }
-    write_exclusive(MANIFEST, canonical(manifest))
+    write_manifest_receipt(MANIFEST, canonical(manifest))
     print(json.dumps({"status": "built", "baseline_pins": len(pins), "subjects": len(SUBJECTS),
                       "sources": len(sources), "outputs": len(outputs), "changed_paths": len(changes)}, sort_keys=True))
 
