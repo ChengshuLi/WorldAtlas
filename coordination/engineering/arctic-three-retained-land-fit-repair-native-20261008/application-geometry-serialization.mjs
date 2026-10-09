@@ -26,7 +26,7 @@ export function serializeQualifiedGeometryChanges(originalRaw, qualifiedRaw, cha
   }
   assert.deepEqual(actual.slice().sort(), changedIds.slice().sort(), 'Missing qualified target');
   const text = originalRaw.toString('utf8');
-  assert.equal(Buffer.byteLength(text), originalRaw.length);
+  assert(Buffer.from(text).equals(originalRaw), 'Original must be exact UTF-8');
   // Locate the top-level features array using JSON lexical depth, not a
   // substring which could occur in a name/property value.
   let depth = 0, arrayStart = -1;
