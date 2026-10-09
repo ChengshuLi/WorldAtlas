@@ -468,6 +468,12 @@
   ],
   "outputs": [
     {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/README.md",
+      "bytes": 11235,
+      "sha256": "a135f321323a6fa3da519188a42b433971692b1acb4d8ae831c1e4247a930760",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/adversarial_controls.py",
       "bytes": 3358,
       "sha256": "c54efabd639a2e2a27549634981cd5865ffd592095427700d068196e376e3a74",
@@ -489,12 +495,6 @@
       "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/compare.py",
       "bytes": 17424,
       "sha256": "c14f7a8f66c5207b966371a5b969ebd6ebd8f8f473d0ea6a0dc6067f6aaf0093",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/README.md",
-      "bytes": 10421,
-      "sha256": "01764fc49b954a263e42d713c47b7d5cb59d22465f3bf30d433161c2eb3b2174",
       "hash_kind": "file-bytes"
     },
     {
@@ -747,6 +747,114 @@
       "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/result.json",
       "bytes": 15796,
       "sha256": "f40f17c60f5ac8e709985508a37af02fd8bda1c2a8bcfb9a8e2faf3f39d0ddc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/publication.json",
+      "bytes": 767,
+      "sha256": "bb4c50fdf90122f99a62406c118522a60f95a14a760eb762375733b728c9f553",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/result.json",
+      "bytes": 15796,
+      "sha256": "2444d59b4b6074b1ef2c53b08348c937692c8929441618cd5259e115b26a4e0f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/publication.json",
+      "bytes": 767,
+      "sha256": "1147d3f745bfdcaa1cd8d1524ea90dcdcb4005489e29b7e9ec64ec60d3213c46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/result.json",
+      "bytes": 15796,
+      "sha256": "2444d59b4b6074b1ef2c53b08348c937692c8929441618cd5259e115b26a4e0f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-replay-audit/publication.json",
+      "bytes": 280,
+      "sha256": "0a696e638e4f82f6f727c204661d0ac4c55a834140f00d83aacdb7e41f131bab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-replay-audit/result.json",
+      "bytes": 1542,
+      "sha256": "90d28e6bee324755ccea25d1fcfdea44e1a79cfb67b1844ae305c6c23a6d0156",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/publication.json",
+      "bytes": 769,
+      "sha256": "fc0437665543a6e3a7ea60003ea412bf2736dbaaec4bf3ab5f374ca44da07af2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/result.json",
+      "bytes": 3540,
+      "sha256": "cfa34d6e826818172ebd29f5cd003bc5e64d4638869a64149c5ca7fd83a7c761",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/publication.json",
+      "bytes": 769,
+      "sha256": "cff89628fefd8d23505cf54d574a2b1a4d2d1a5715e608f073573bd84d46523d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/result.json",
+      "bytes": 3540,
+      "sha256": "cfa34d6e826818172ebd29f5cd003bc5e64d4638869a64149c5ca7fd83a7c761",
       "hash_kind": "file-bytes"
     },
     {
@@ -1078,6 +1186,13 @@
       "description": "Exercise exclusive new-vintage publication used by both scientific CLIs against sentinels, symlinks, traversal and a controlled partial write; require complete receipt to be last.",
       "software": "Python 3.12.14; shared immutable NewVintage helper at declared commit",
       "units": "output files and whole-file receipts"
+    },
+    {
+      "id": "post-main-replay-preservation",
+      "kind": "code",
+      "description": "After the merge base advanced, run both documented entry points twice into fresh owned vintages, hash-check every published file against its completion receipt, compare the paired result/positive/negative payloads, and retain a replay audit while preserving all historical pins and archived metric vintages.",
+      "software": "Python 3.12.14, NumPy 2.3.5, Shapely 2.1.2, GEOS 3.13.1, pyproj 3.7.2, PROJ 9.5.1; shared immutable helper pinned at 696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "units": "whole-file SHA-256"
     }
   ],
   "metrics": [
@@ -1105,7 +1220,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "irn_gb_covered_by_osm",
@@ -1131,7 +1246,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "irn_osm_covered_by_gb",
@@ -1157,7 +1272,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "pak_iou",
@@ -1183,7 +1298,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "pak_gb_covered_by_osm",
@@ -1209,7 +1324,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "pak_osm_covered_by_gb",
@@ -1235,7 +1350,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "irn_iou_delta_vs_pinned_prior",
@@ -1254,7 +1369,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "irn_gb_covered_by_osm_delta_vs_pinned_prior",
@@ -1273,7 +1388,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "irn_osm_covered_by_gb_delta_vs_pinned_prior",
@@ -1292,7 +1407,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "pak_iou_delta_vs_pinned_prior",
@@ -1311,7 +1426,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "pak_gb_covered_by_osm_delta_vs_pinned_prior",
@@ -1330,7 +1445,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "id": "pak_osm_covered_by_gb_delta_vs_pinned_prior",
@@ -1349,7 +1464,7 @@
         }
       ],
       "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
-      "vintage": "current"
+      "vintage": "archived"
     }
   ],
   "summaries": [
@@ -1476,7 +1591,11 @@
     "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/adversarial_controls.py",
     "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/writer_controls.py",
     "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/reproducibility.py",
-    "node scripts/evidence-quality.mjs research/geography/saravan-panjgur-source-execution-1121-erratum/evidence-quality.json"
+    "node scripts/evidence-quality.mjs research/geography/saravan-panjgur-source-execution-1121-erratum/evidence-quality.json",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/compare.py --vintage main-7319-comparison-1",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/compare.py --vintage main-7319-comparison-2",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/shared_edge.py --vintage main-7319-shared-edge-1",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/shared_edge.py --vintage main-7319-shared-edge-2"
   ],
   "metric_bindings": [
     {
@@ -1588,6 +1707,60 @@
       "kind": "negative-control",
       "outcome": "passed",
       "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-verified/result.json"
+    },
+    {
+      "method_id": "post-main-replay-preservation",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-replay-audit/result.json"
+    },
+    {
+      "method_id": "authenticated-source-comparison",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/positive-control.json"
+    },
+    {
+      "method_id": "authenticated-source-comparison",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/negative-control.json"
+    },
+    {
+      "method_id": "authenticated-source-comparison",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/positive-control.json"
+    },
+    {
+      "method_id": "authenticated-source-comparison",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/negative-control.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/positive-control.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/negative-control.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/positive-control.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/negative-control.json"
     }
   ],
   "change_receipts": [
@@ -1781,6 +1954,78 @@
     },
     {
       "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-comparison-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-replay-audit/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-replay-audit/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/main-7319-shared-edge-2/result.json",
       "status": "added"
     },
     {
