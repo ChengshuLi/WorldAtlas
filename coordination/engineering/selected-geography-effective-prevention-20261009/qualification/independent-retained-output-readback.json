@@ -1,0 +1,136 @@
+{
+  "kind": "independent-retained-coordinate-qualification-readback-v1",
+  "science_executed": false,
+  "stages": [
+    {
+      "label": "bare-v8",
+      "execution_commit": "5a29ed4260f816c1cc9fbccc2567061f6a57890b",
+      "selected_commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "publication_sha256": "5d325e48600754cc6aebf4adb10ed40720f9bebf13e75bcf0b9fe1ce11348dde",
+      "certificate": {
+        "bytes": 7513600,
+        "decoded_bytes": 18406343,
+        "decoded_sha256": "266bb3d9f51ea538fa162c7d53210483fc418e285e20511bdd15c73391272512",
+        "path": "certificate.json.gz",
+        "sha256": "1507ea56e3e95c54ee08b8e65b1d0e786b4af3a1b12b64126ed6d5c55fc116a7"
+      },
+      "facts": {
+        "bytes": 43830,
+        "path": "facts.json",
+        "sha256": "42a646f845a920b1c28c0e2ea4a63047cf7a602a05db352b85bacb5a7a488a1f"
+      },
+      "owner_count": 49625,
+      "source_count": 36,
+      "code_bodies": 10,
+      "consumed_git_inputs": 46,
+      "other_declared_git_descriptors": 11,
+      "join_phase_bytes": 255322905,
+      "source_phase_max": 238398951,
+      "lifetime_rss_bytes": 518455296,
+      "elapsed_seconds": 16.31043516600039,
+      "samples": 31,
+      "operating_sha256": "c7217bfcd7618347e76f55b36ac36c7ec27aac2cc99f87bf74d80eb48cc6159e"
+    },
+    {
+      "label": "effective-v8",
+      "execution_commit": "72923df093fb712392cecf74d7e5fd49487e9e5b",
+      "selected_commit": "4f1639082dc1e9c54fd11e06a9530a7ce78d4f12",
+      "publication_sha256": "6bec568d569dc55cb31ea33c1ccbe49df4e1cc9c627182cf6cb8ce1869b924e2",
+      "certificate": {
+        "bytes": 7513712,
+        "decoded_bytes": 18406580,
+        "decoded_sha256": "e3558c631bf712e4607c012a924065b24e7103986a4ef9dfae1f105437ee126a",
+        "path": "certificate.json.gz",
+        "sha256": "650c43b24920a32a17c70e5d7e1c7df12c6d4fc8705b94a55deb290b078277b0"
+      },
+      "facts": {
+        "bytes": 46609,
+        "path": "facts.json",
+        "sha256": "658cb7d797a0a2be31571dc184cce837231a86040e829011d98d4cef0e81ce71"
+      },
+      "owner_count": 49625,
+      "source_count": 36,
+      "code_bodies": 10,
+      "consumed_git_inputs": 53,
+      "other_declared_git_descriptors": 11,
+      "join_phase_bytes": 242802906,
+      "source_phase_max": 225875634,
+      "lifetime_rss_bytes": 515424256,
+      "elapsed_seconds": 44.006117249999996,
+      "samples": 79,
+      "operating_sha256": "3e1c12824f4fdb332c83326da58739e713f073bc643a996a6d1e85fc3c501161"
+    }
+  ],
+  "effective_geometry_changed_ids": [
+    "gb:USA:ADM2:52423323B16539688175930",
+    "gb:USA:ADM2:52423323B46246640861022",
+    "gb:USA:ADM2:52423323B55198873775030",
+    "gb:USA:ADM2:52423323B64721050065013",
+    "gb:USA:ADM2:52423323B80008995120080",
+    "gb:USA:ADM2:52423323B82121365400499"
+  ],
+  "whole_git_bindings_checked": 139,
+  "whole_git_bytes_read": 675941119,
+  "limits": [
+    "Original execution vintages remain 5a29 and 72923df; not qualification at current source head.",
+    "No pointset, geometry boxes, continuous-neighbor predicates or native cells recomputed.",
+    "Current runtime hash observations, where performed, do not manufacture original pre-use observations.",
+    "Historical absence is the original qualified operating receipt and termination custody."
+  ],
+  "additive_original_ledger_join": {
+    "whole_pin": {
+      "bytes": 157584,
+      "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "git_blob_oid": "06e609feec84066ebfeff3c9d85b565928732913",
+      "mode": "100644",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/ledger-batch.json",
+      "sha256": "d5eda4b890a45a61d8bcf916f8cc07c01515af33812612dab63bb885af1a6c74",
+      "whole_body_consumed": true
+    },
+    "assigned_primitives": 11,
+    "affected_owners": 6,
+    "assigned_cells": 134,
+    "source_exceptions": 2,
+    "changed_owner_ids_exact": true
+  },
+  "archive_inverse": {
+    "whole_objects": 71,
+    "original_bindings": 141,
+    "published_aliases_compared": 0,
+    "producers_executed": false,
+    "complete_prospective_bytes": 48129640,
+    "decoded_archive_bytes": 952910,
+    "limits": [
+      "Git tree/commit objects prove each original path; unrelated history/tree member payloads are not retained.",
+      "Published whole-source bodies remain complete immutable Git data aliases; this archive does not claim to duplicate the world source bank.",
+      "Installed complete Node/Git executable identities remain in original runtime facts; runtime binaries are not ordinary evidence descriptors.",
+      "No original producer or geography method was rerun."
+    ]
+  },
+  "current_runtime_readback": {
+    "observed_after_original_execution": true,
+    "unchanged_matching_historical_runtime_pins": [
+      {
+        "bytes": 121304480,
+        "mode": 493,
+        "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "sha256": "9caea9deafcb0c7f22fac3206c32f0dcaf8d1f13460b0be3017fa09e7a4be4f6",
+        "version": "v24.19.0"
+      },
+      {
+        "bytes": 118864,
+        "mode": 493,
+        "path": "/usr/bin/git",
+        "sha256": "7588ceab299393618d6f8861502ac0588d1594025f301d9a61a898215b5571d3",
+        "version": null
+      },
+      {
+        "bytes": 7058848,
+        "mode": 493,
+        "path": "/Library/Developer/CommandLineTools/usr/bin/git",
+        "sha256": "4c5ca299b5311572b4f948d11efd7c66dcadf30950fbf260688ee32f4a63f6a4",
+        "version": null
+      }
+    ]
+  }
+}
