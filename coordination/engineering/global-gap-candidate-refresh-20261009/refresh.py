@@ -47,18 +47,18 @@ def build_progress(inputs):
     bio.need(match and merge['user']['login']=='github-actions[bot]','Actual accepted merge receipt required');receipt=json.loads(match.group(1));bio.need(receipt['accepted'] is True and receipt['merge_commit']==trans['merge_commit'],'Foreign/unaccepted merge transition')
     bio.need(migration['activated'] is True and migration['activation']['kind']=='installed-offline-repository' and migration['activation']['production_deployment_verified'] is False,'Offline activation identity')
     bio.need(selection['sha256']==trans['selected_native_manifest_ref']['sha256'] and selection['release_id']==trans['selected_release'],'Missing installed selected-bank binding')
-    bio.need(manifest['geographic_release']==selection['release_id'] and normal['status']=='full-normal-hosted-build-PASS','Selected manifest/normal consumer identity')
+    bio.need(manifest['geographic_release']==selection['release_id'] and normal['status']=='full-normal-hosted-build-PASS' and normal['violations']==[] and migration['after_footprints_sha256']==manifest['footprints_sha256'] and migration['activation']['native_manifest_sha256']==selection['sha256'],'Selected manifest/normal consumer identity')
     mp=next(p for p in tp if p['path'].endswith('/index.json'));sp=next(p for p in tp if p['path']=='data/ownership-selection.json');np=next(p for p in tp if p['path'].endswith('hosted-normal-build-qualification.json'))
     for row in trans['rows']:
         identity=row['component_id'];proposal=value(row['proposal_ref']);candidate=proposal[int(row['proposal_ref']['pointer'][1:])]
         bio.need(candidate['component_id']==identity and candidate['component_geometry_sha256']==row['original_geometry_sha256'],'Foreign/stale complete proposal transition')
-        bio.need(identity in value(row['approval_ref'])['body'] and row['original_geometry_sha256'] in value(row['approval_ref'])['body'],'Exact original approved geometry')
+        bio.need(identity in value(row['approval_ref'])['body'] and row['original_geometry_sha256'] in value(row['approval_ref'])['body'],'Exact original approved geometry');bio.need(candidate['subject_id'] in migration['proposed_subjects'] and set(migration['proposed_subjects'])==set(manifest['provenance']['source_migration']['changed_ids']),'Actual selected migration target identities')
         refs={'source':reference(row['approval_ref']), 'rule':reference(row['approval_ref']), 'review':reference(row['approval_ref']), 'proposal':reference(row['proposal_ref'],row['proposal_ref']['pointer'])}
         source={'authority_domain':'retained-source-relative-reference','eligible':True,'constructed':True,'current_bank_rebound':True,'activated':True,'physical_authority_approved':False,'current_physical_truth_approved':False,'evidence':refs,'profile':'Main-approved-narrow-reference-correction','limits':['Original narrow reference approval is preserved; no contemporary physical-truth or production delivery claim.']}
         evidence={'migration':reference(mp),'selection':reference(sp),'manifest':reference(trans['selected_native_manifest_ref']),'normal_build':reference(np),'accepted_merge':dict(inputs['accepted-merge.json'][0],pointer='/body')}
         progress[identity]={'component_id':identity,'geometry_sha256':row['original_geometry_sha256'],'source_relative_repair':source,'integrated':{'component_id':identity,'geometry_sha256':row['original_geometry_sha256'],'production_delivered':False,'evidence':evidence}}
     extraction=named('additive-authorities.json');arctic_proof=next((json.loads(b) for p,b in inputs.values() if p.get('original_binding',{}).get('path','').endswith('/delivery/run-1/geometry-proof.json')),None)
-    bio.need(arctic_proof and arctic_proof['current_pointers_activated'] is False,'Actual unactivated Arctic construction proof')
+    bio.need(arctic_proof and arctic_proof['current_pointers_activated'] is False,'Actual unactivated Arctic construction proof');arctic_pin=next(p for p,b in inputs.values() if p.get('original_binding',{}).get('path','').endswith('/delivery/run-1/geometry-proof.json'))
     for a in extraction['authorities']:
         request=value(a['pins']['native_request']);source_request=value(a['pins']['source_request']);facts=value(a['pins']['source_facts']);ledger=value(a['pins']['ledger']);native=value(a['pins']['native_facts'])
         preimage=a['rule_preimage'];bio.need(bio.sha(bio.canonical(preimage))==a['rule_sha256']==ledger['rule_sha256'],'Exact original rule preimage drift')
@@ -73,7 +73,7 @@ def build_progress(inputs):
         bio.need(native['removed_cells']==native['reassigned_cells']==0 and sum(r['native_cells'] for r in assignments.values())==ledger['assigned_cells']==native['assigned_cells'],'Actual proposal conservation binding')
         for ordinal,r in enumerate(rows):
             identity=r['component_id'];bio.need(type(r['source_compatible']) is bool and r['source_compatible']==(not r['failed_premises']),'Source premises/exception mismatch')
-            case=value(r['source_case']['source']);case_rows=case.get('results',case.get('cases'));bio.need(isinstance(case_rows,list),'Whole original source case roster required');case_row=case_rows[r['source_case']['ordinal']]
+            case=value(r['source_case']['source']);case_rows=case.get('results',case.get('cases'));bio.need(isinstance(case_rows,list),'Whole original source case roster required');case_row=case_rows[r['source_case']['ordinal']];bio.need(case_row['component_id']==identity,'Coherently foreign complete source case')
             case_pin,case_bytes=inputs['case-'+r['source_case']['row_sha256']+'.json'];bio.need(bio.sha(case_bytes)==r['source_case']['row_sha256'] and json.loads(case_bytes)==case_row and case_pin['ordinal']==r['source_case']['ordinal'] and case_pin['case_source_sha256']==r['source_case']['source']['sha256'],'Full source case ordinal/hash mismatch')
             if a['name']=='pilot-add031':
                 derived=all(v is True for v in case_row['repair_ready_criteria'].values()) and case_row['native_source_covers_candidate'] is True and case_row['v22_source_covers_candidate'] is True
@@ -83,11 +83,16 @@ def build_progress(inputs):
             if not r['source_compatible']:
                 exceptions[identity]={'source':dict(ip,pointer='/records/'+str(ordinal)),'failed_premises':r['failed_premises']};continue
             bio.need(identity not in progress,'Duplicate source eligible original component')
-            geometry=bio.sha(bio.canonical(r['candidate']));bio.need(not r.get('original_candidate_geometry_sha256') or geometry==r['original_candidate_geometry_sha256'],'Complete original candidate geometry drift')
+            geometry=bio.sha(bio.canonical(r['candidate']));bio.need((case_row.get('candidate_geometry')==r['candidate']) if a['name']=='pilot-add031' else case_row['candidate_geometry_sha256']==geometry,'Whole source case candidate geometry binding');bio.need(not r.get('original_candidate_geometry_sha256') or geometry==r['original_candidate_geometry_sha256'],'Complete original candidate geometry drift')
             assignment=assignments.get(identity);constructed=assignment is not None or identity in arctic_proof['constructed_components']
             if assignment:bio.need(assignment['geometry']==r['candidate'] and assignment['source_receipt_sha256']==a['pins']['source_facts']['sha256'],'Foreign/stale constructed candidate source binding')
             source={'authority_domain':'retained-source-relative-reference','eligible':True,'constructed':constructed,'current_bank_rebound':False,'activated':False,'physical_authority_approved':False,'current_physical_truth_approved':False,'profile':facts.get('source_profile','retained-AAFC-GSHHG-pilot'),'rule_sha256':ledger['rule_sha256'],'evidence':{'source':dict(ip,pointer='/records/'+str(ordinal)),'rule':dict(inputs['additive-authorities.json'][0],pointer='/authorities/'+str(extraction['authorities'].index(a))+'/rule_preimage'),'review':dict(inputs[review_name][0],pointer='/body'),'proposal':reference(a['pins']['ledger'],'/rows/'+str(next(i for i,v in enumerate(ledger['rows']) if v['component_id']==identity)))},'limits':r['limits']}
-            progress[identity]={'component_id':identity,'geometry_sha256':geometry,'source_relative_repair':source}
+            if identity in arctic_proof['constructed_components']:
+                source['evidence']['construction']=dict(arctic_pin,pointer='/exact_constructions/'+str(next(i for i,c in enumerate(arctic_proof['exact_constructions']) if identity in c['component_ids'])))
+            elif assignment:source['evidence']['construction']=source['evidence']['proposal']
+            issue=1520 if identity in arctic_proof['constructed_components'] else 1523
+            taskpin,taskbody=inputs[f'current-issue-{issue}.json'];task=json.loads(taskbody);bio.need(task['number']==issue and task['state']=='open','Actual current remaining engineering task')
+            progress[identity]={'component_id':identity,'geometry_sha256':geometry,'source_relative_repair':source,'remaining_tasks':[{'issue':issue,'role':'source-relative-integration','scope_ref':dict(taskpin,pointer='/body'),'missing_facts':['fresh-current-bank-rebind','normal-consumer-integration']}]} 
     bio.need(len(progress)==16 and len(set(progress))==16,'Frozen source eligibility roster/count drift')
     return progress,exceptions
 
@@ -99,11 +104,11 @@ def leaf(repo,head,index,dest):
         bio.need(any(all(p.get(k)==v.get(k) for k in ('path','bytes','sha256','uncompressed_bytes','uncompressed_sha256')) for v in inventory['outputs']),'Original whole leaf output inventory binding')
         body=phase.read(p)
         if p['path'].endswith('membership-metrics.jsonl.gz'):expected=catalog.exact_ids(map(json.loads,body.splitlines()))
-    output=[]
+    current_task_pin,current_task_raw=inputs['current-issue-1394.json'];current_task=json.loads(current_task_raw);bio.need(current_task['number']==1394 and current_task['state']=='open','Actual ongoing original replay task');output=[]
     for p in part['outputs']:
         if not p['path'].rsplit('/',1)[-1].startswith('catalog-'):continue
         for row in map(json.loads,phase.read(p).splitlines()):
-            identity=row['component_id'];bio.need(identity in expected,'Foreign original catalog row');row['source_rule_exception']=exceptions.get(identity)
+            identity=row['component_id'];bio.need(identity in expected,'Foreign original catalog row');row['source_rule_exception']=exceptions.get(identity);row['_current_tasks']=[dict(t,current_issue_ref=dict(current_task_pin,pointer='/body')) for t in row['next_work']['tasks'] if t['issue']==1394]
             output.append(catalog.refresh_record(row,progress.get(identity),row['current_geometry_sha256'],expected))
     bio.need(len(output)==len(expected) and len(catalog.exact_ids(output))==len(expected),'Complete original leaf conservation')
     shard=[];size=0;n=0

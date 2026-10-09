@@ -135,6 +135,7 @@ def refresh_record(original,progress,expected_geometry,authority_ids):
         require(source['physical_authority_approved'] is False and source['current_physical_truth_approved'] is False,'Source-only physical promotion')
         for ref in source['evidence'].values():immutable_ref(ref)
         require({'source','rule','review','proposal'}<=set(source['evidence']),'Missing source/rule/review/proposal custody')
+        require(not source['constructed'] or 'construction' in source['evidence'] or progress.get('integrated'),'True construction lacks supporting outcome')
         record['source_relative_repair']=source
         if progress.get('integrated'):
             require(record['implemented'] and record['class']=='missing-land','Proposal-only integration')
@@ -158,6 +159,10 @@ def refresh_record(original,progress,expected_geometry,authority_ids):
         state='awaiting-evidence';domain='unresolved';missing=list(record['next_work']['missing_facts'])
     require(state in PIPELINE,'Unknown disjoint pipeline status')
     record['pipeline_status']={'state':state,'authority_domain':domain}
+    record['next_work']['historical_scope_tasks']=record['next_work']['tasks']
+    record['next_work']['tasks']=progress.get('remaining_tasks',[]) if progress else record.pop('_current_tasks',[])
+    record.pop('_current_tasks',None)
+    for task in record['next_work']['tasks']:immutable_ref(task['scope_ref'])
     record['next_work']['missing_facts']=missing
     record['next_work']['unassigned_requirements']=[f for f in missing if not any(f in task['missing_facts'] for task in record['next_work']['tasks'])]
     record['progress_scope']='Verified offline integration and retained-source eligibility are separate domains; production delivery and contemporary physical authority remain unapproved.'
