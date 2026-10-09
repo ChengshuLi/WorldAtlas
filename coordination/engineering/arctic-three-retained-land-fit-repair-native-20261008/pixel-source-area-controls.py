@@ -37,5 +37,9 @@ try:
     for name in ('np','math'):
         original=getattr(ellipsoidal_area,name);setattr(ellipsoidal_area,name,object())
         reject(lambda:module.require_area_globals(ellipsoidal_area,numpy,math));setattr(ellipsoidal_area,name,original)
+    original_sqrt=math.sqrt;original_e=ellipsoidal_area.E
+    math.sqrt=lambda value:2.0;ellipsoidal_area.E=2.0
+    reject(lambda:module.require_area_globals(ellipsoidal_area,numpy,math))
+    math.sqrt=original_sqrt;ellipsoidal_area.E=original_e
     print({'positive':2,'negative':negatives,'source_body_opens_on_bad_destination':0,'source_areas_computed':0})
 finally:shutil.rmtree(root)

@@ -27,7 +27,7 @@ def admitted_read(pin,installed=False):
 def require_area_globals(module,np,math_module):
     flattening=1/298.257223563
     e2=flattening*(2-flattening)
-    expected={'A':6378137.0,'FLATTENING':flattening,'E2':e2,'E':math.sqrt(e2),'C':6378137.0**2*(1-e2)/2}
+    expected={'A':6378137.0,'FLATTENING':flattening,'E2':e2,'E':0.08181919084262149,'C':6378137.0**2*(1-e2)/2}
     assert module.np is np and module.math is math_module
     assert all(getattr(module,key)==value for key,value in expected.items())
 
@@ -96,9 +96,10 @@ def run(plan,output,guard_only=False):
     captured_codes=[f.__code__ for f in functions]
     native=shapely.lib.is_valid
     operators={name:getattr(numpy,name) for name in ('sin','cos','arctanh','deg2rad','dot','asarray')}
-    math_operators={name:getattr(math,name) for name in ('fsum','sin','cos','isfinite')}
+    math_operators={name:getattr(math,name) for name in ('fsum','sin','cos','isfinite','sqrt')}
     quadrature=[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
     def guard():
+        assert all(getattr(math,name) is value for name,value in math_operators.items())
         require_area_globals(ellipsoidal_area,numpy,math)
         assert functions[:3]==[ellipsoidal_area.area,ellipsoidal_area.ring_area,shape]
         assert shape is shapely.geometry.shape
