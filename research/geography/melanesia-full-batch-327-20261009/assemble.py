@@ -540,6 +540,18 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
     for path in (PRIOR_363, PRIOR_25):
         _oid, raw = blob(base_commit, path)
         add_baseline(path, base_commit, raw)
+    required_pin_paths = {
+        "global_actionability_routing": "coordination/engineering/global-actionability-routing-20261007/evidence-quality.json",
+        "global_physical_comparison": "coordination/engineering/global-physical-comparison-20261006/evidence-quality.json",
+        "original_geography_source_corpus": "coordination/engineering/original-geography-source-corpus-20261006/evidence-quality.json",
+        "solomon_islands_source_fitness": "research/campaigns/solomon-islands-source-fitness-20261007/evidence-quality.json",
+        "makira_15_source_fitness": f"{MAKIRA}/evidence-quality.json",
+    }
+    required_pins = {}
+    for key, path in required_pin_paths.items():
+        _oid, raw = blob(base_commit, path)
+        add_baseline(path, base_commit, raw)
+        required_pins[key] = sha(raw)
     catalogue_path = f"{CORPUS}/catalogue.json"
     catalogue_raw = local_bytes(catalogue_path)
     add_baseline(catalogue_path, base_commit, catalogue_raw)
@@ -616,7 +628,7 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
         "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245", "subject_ids": subject_ids,
         "subject_ids_sha256": subject_hash,
         "baseline": {"version": 2, "commit": base_commit, "files": list(baseline.values()),
-            "pins": {"actionability_report": sha(action_report_raw), "physical_report": sha(physical_report_raw),
+            "pins": required_pins | {"actionability_report": sha(action_report_raw), "physical_report": sha(physical_report_raw),
                      "source_corpus_catalogue": sha(catalogue_raw), "makira_assessment": sha(makira_assessment_raw),
                      "makira_source_register": sha(makira_register_raw), "solomon_context_1424": sha(context_raw)},
             "pin_files": {"actionability_report": {"commit": base_commit, "path": action_report_path},
@@ -624,7 +636,8 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
                           "source_corpus_catalogue": {"commit": base_commit, "path": catalogue_path},
                           "makira_assessment": {"commit": base_commit, "path": f"{MAKIRA}/assessment.json"},
                           "makira_source_register": {"commit": base_commit, "path": f"{MAKIRA}/source-register.json"},
-                          "solomon_context_1424": {"commit": base_commit, "path": CONTEXT}},
+                          "solomon_context_1424": {"commit": base_commit, "path": CONTEXT}} | {
+                key: {"commit": base_commit, "path": path} for key, path in required_pin_paths.items()},
             "subject_files": subject_files},
         "sources": source_rows, "outputs": out_files,
         "methods": [{"id": "retained-record-bundle-and-disjoint-roster", "description":
