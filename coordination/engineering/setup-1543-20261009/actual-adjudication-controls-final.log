@@ -1,0 +1,57 @@
+✔ source bindings match the actual shared Python canonical protocol (5680.644292ms)
+✔ actual evidence/claim/review validators produce bounded read-only authority carrier (72.899375ms)
+✔ source authority rejects self review (3.396041ms)
+✔ source authority rejects stale reviewed head (8.365291ms)
+✔ source authority rejects missing explicit source decisions (2.594167ms)
+✔ source authority rejects target uncertainty (2.771584ms)
+✔ source authority rejects target resolution (1.615333ms)
+✔ source authority rejects political source role (5.544959ms)
+✔ source authority rejects wrong source reference digest (2.386375ms)
+✔ source authority rejects revoked source decision after byte checks (5.393667ms)
+✔ source authority rejects rejected review after byte checks (1.354083ms)
+✔ source authority rejects changed canonical claim during byte checks (1.846959ms)
+✔ source authority rejects changed source contract during byte checks (2.2515ms)
+✖ actual Git CLI loss passes through real evidence validators and native whole-shape support (1850.309416ms)
+✔ final merge rechecks actual latest source authority: none (146.107333ms)
+✔ final merge rechecks actual latest source authority: withdraw (49.978ms)
+✔ final merge rechecks actual latest source authority: replace-limits (62.968833ms)
+✔ real adjudication entry uses exact Git blobs and retains authority rechecks (2560.740625ms)
+✔ not-requested entry never allocates immutable transport (16.700916ms)
+✔ failed adjudication fetch publishes no authority and cleans its owned store (207.327542ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12439.041791
+
+✖ failing tests:
+
+test at test/geographic-adjudication-api.test.mjs:98:1
+✖ actual Git CLI loss passes through real evidence validators and native whole-shape support (1850.309416ms)
+  AssertionError [ERR_ASSERTION]: Traceback (most recent call last):
+    File "test/geographic-adjudication-pipeline.py", line 16, in <module>
+      import geographic_adjudication as water
+    File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/scripts/geographic_adjudication.py", line 15, in <module>
+      from shapely import union_all
+  ModuleNotFoundError: No module named 'shapely'
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/test/geographic-adjudication-api.test.mjs:101:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

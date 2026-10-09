@@ -68,3 +68,5 @@ for independent verification. Preserve pre-existing files and verify whole-byte
 identities before releasing generated files; do not delete a shared cache or
 another worker's checkout. Full package/browser validation belongs to the normal
 hosted engineering path when the local slot cannot admit the complete package.
+
+Reports and initial-state checkpoints use lossless JSON gzip transport. The retained-report index records both original and compressed body identities. Diagnostic source text is archived provenance with original host paths, not a portable or approved reproduction command.

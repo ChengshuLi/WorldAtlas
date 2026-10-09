@@ -1,0 +1,28 @@
+✔ source bindings match the actual shared Python canonical protocol (994.025333ms)
+✔ actual evidence/claim/review validators produce bounded read-only authority carrier (94.379666ms)
+✔ source authority rejects self review (7.551083ms)
+✔ source authority rejects stale reviewed head (42.565ms)
+✔ source authority rejects missing explicit source decisions (7.089667ms)
+✔ source authority rejects target uncertainty (3.36675ms)
+✔ source authority rejects target resolution (3.431333ms)
+✔ source authority rejects political source role (3.493834ms)
+✔ source authority rejects wrong source reference digest (20.864875ms)
+✔ source authority rejects revoked source decision after byte checks (11.717542ms)
+✔ source authority rejects rejected review after byte checks (0.798375ms)
+✔ source authority rejects changed canonical claim during byte checks (1.630875ms)
+✔ source authority rejects changed source contract during byte checks (2.244875ms)
+✔ actual Git CLI loss passes through real evidence validators and native whole-shape support (90603.528083ms)
+✔ final merge rechecks actual latest source authority: none (121.136833ms)
+✔ final merge rechecks actual latest source authority: withdraw (24.528042ms)
+✔ final merge rechecks actual latest source authority: replace-limits (9.315709ms)
+✔ real adjudication entry uses exact Git blobs and retains authority rechecks (1231.750375ms)
+✔ not-requested entry never allocates immutable transport (2.491167ms)
+✔ failed adjudication fetch publishes no authority and cleans its owned store (109.830625ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95960.876041

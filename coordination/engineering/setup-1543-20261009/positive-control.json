@@ -1,0 +1,21 @@
+{
+  "method_id": "restoration-controls",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "evidence": [
+    {
+      "path": "coordination/engineering/setup-1543-20261009/operational-image-routing-controls.log",
+      "sha256": "1b3061f24cb5b2cf454c413aaab598cf587bb4dc15402aa5c55621ea8674bbbf"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
+      "sha256": "3998262f8aa956b001d2b66e4b0f97c2c94232171af7f63b1fd543031b1a88ae"
+    }
+  ],
+  "checks": [
+    "Complete cross-part restoration agrees with immutable original producer; all current/prior identities agree in full profiles; real adjudication preserves authority and dossier values."
+  ],
+  "limits": [
+    "Local controls do not establish hosted current-head full regression, scientific approval, publication or global quota margin."
+  ]
+}
