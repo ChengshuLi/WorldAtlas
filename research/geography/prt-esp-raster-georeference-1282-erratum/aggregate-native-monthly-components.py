@@ -136,6 +136,13 @@ def run() -> None:
                 raise ValueError("Native affine controls did not all pass")
             if row.get("family_ids") != coverage[component_id]["family_ids"] or row.get("contact_ids") != coverage[component_id]["contact_ids"]:
                 raise ValueError("Component source crosswalk mismatch")
+            totals = {str(code): sum(int(month["code_counts"][str(code)]) for month in row["months"]) for code in (0, 1, 2)}
+            control_codes = set(row.get("native_positive_pixel_controls", {}))
+            if any((totals[code] > 0) != (code in control_codes) for code in ("0", "1", "2")):
+                raise ValueError("Native positive pixel controls do not match complete annual code counts")
+            for code, control in row.get("native_positive_pixel_controls", {}).items():
+                if control.get("value") != int(code) or control.get("month") not in MONTHS:
+                    raise ValueError("Native pixel control has a wrong code or month")
             pair.append(row)
             result_bytes[(phase, component_id)] = raw
         if result_bytes[("run-1", component_id)] != result_bytes[("run-2", component_id)]:
@@ -182,6 +189,7 @@ def run() -> None:
             "native_tile_coverage": row["coverage_status"],
             "monthly_pixel_center_counts": row["months"],
             "source_grid_pixel_centers_with_code_2_in_any_month": row["components_with_any_monthly_code_2_pixel_center"],
+            "native_positive_pixel_controls": row["native_positive_pixel_controls"],
             "status": "measured-within-native-footprint",
             "limitation": "Counts are complete only for source-grid pixel centers inside this component and native tile footprint; a partial footprint does not establish total component counts.",
         })
@@ -209,6 +217,22 @@ def run() -> None:
             "limitation": "No family totals are emitted when any member lacks full native raster footprint coverage.",
         })
 
+    control_coverage = {
+        str(code): {
+            "components_with_positive_native_pixel": sorted(
+                component_id for component_id, row in result_rows.items()
+                if str(code) in row["native_positive_pixel_controls"]
+            ),
+            "components_without_positive_native_pixel": sorted(
+                component_id for component_id, row in result_rows.items()
+                if str(code) not in row["native_positive_pixel_controls"]
+            ),
+            "meaning": {0: "no observation", 1: "observed non-water in that month", 2: "water detected in that month"}[code],
+        }
+        for code in (0, 1, 2)
+    }
+    if any(not value["components_with_positive_native_pixel"] for value in control_coverage.values()):
+        raise ValueError("The complete covered scope lacks a native pixel control for code 0, 1, or 2")
     summary = {
         "schema": "worldatlas-jrc-2024-native-component-month-summary-v1",
         "source": {
@@ -224,6 +248,7 @@ def run() -> None:
         "reproduction": {"covered_components_run_twice_byte_identically": len(result_rows),
                          "components_without_native_footprint": sum(c["status"] == "unknown-no-native-2024-footprint" for c in components)},
         "code_meanings": {"0": "no observation", "1": "observed non-water for that month", "2": "water detected for that month"},
+        "native_pixel_controls": control_coverage,
         "components": components,
         "families": families,
         "limits": [
