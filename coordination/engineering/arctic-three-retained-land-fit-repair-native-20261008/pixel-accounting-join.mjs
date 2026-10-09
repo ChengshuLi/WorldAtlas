@@ -24,10 +24,10 @@ export function joinPixelAccounting(groups, originalPixel) {
  assert.equal(before.length,55);assert.equal(after.length,55);
  const options={size:262166,totalRunWords:57617774,targetOwners:targets};
  const old=sumCompleteOwnerRuns(before,options),current=sumCompleteOwnerRuns(after,options);
- const expected={6666:{id:'CAN-15:NWT',gain:140},6757:{id:'CAN-25:NUN',gain:1}};
+ const expected={6666:{id:'atlas:physical:CAN-15:NWT',gain:140},6757:{id:'atlas:physical:CAN-25:NUN',gain:1}};
  const records=targets.map(owner=>{
-  const installed=originalPixel.records.find(r=>r.owner===owner);assert(installed);
-  assert.equal(installed.id,expected[owner].id);
+  const installed=originalPixel.records.find(r=>r.id===expected[owner].id);assert(installed);
+  assert.equal(installed.id,expected[owner].id);assert.equal(installed.owner,'Canada');
   assert.equal(old[owner].cells,installed.cells,'Original complete target cell count');
   assert.equal(Number(old[owner].grid_wgs84_area_m2.toFixed(6)),installed.grid_wgs84_area_m2,
    'Original complete target area in stock accumulation order');

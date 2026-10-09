@@ -16,14 +16,14 @@ const groups=Array.from({length:28},(_,ordinal)=>{
  return {before,after};
 });
 const pixel={locations:49625,records:Array.from({length:49625},(_,i)=>({id:`id${i+1}`,owner:i+1}))};
-for(const [owner,id,cells] of [[6666,'CAN-15:NWT',20],[6757,'CAN-25:NUN',30]])
- Object.assign(pixel.records[owner-1],{id,cells,grid_wgs84_area_m2:Number((cells*nativeRowArea(100,262166)).toFixed(6))});
+for(const [owner,id,cells] of [[6666,'atlas:physical:CAN-15:NWT',20],[6757,'atlas:physical:CAN-25:NUN',30]])
+ Object.assign(pixel.records[owner-1],{id,owner:'Canada',cells,grid_wgs84_area_m2:Number((cells*nativeRowArea(100,262166)).toFixed(6))});
 const result=joinPixelAccounting(groups,pixel);assert.equal(result.added_cells,141);assert.equal(result.records.length,2);
 let negatives=0;
 function reject(change){const g=structuredClone(groups),p=structuredClone(pixel);change(g,p);assert.throws(()=>joinPixelAccounting(g,p));negatives++;}
 reject(g=>g.pop());reject(g=>g.reverse());reject(g=>g[0].after.parts[0].offset=2);
 reject((g,p)=>p.records[6665].cells++);reject((g,p)=>p.records[6665].grid_wgs84_area_m2+=0.000001);
-reject((g,p)=>p.records[6665].id='foreign');reject(g=>g[0].before.owner_count--);
+reject((g,p)=>p.records[6665].id='foreign');reject((g,p)=>p.records[6665].owner='foreign');reject(g=>g[0].before.owner_count--);
 reject(g=>g[0].after.parts[0].targets[6666][0][2]++);
 reject(g=>g[0].after.parts[0].targets[6666].push([0,100,1]));
 console.log(JSON.stringify({positive:1,negative:negatives,fixture:'synthetic-complete-shaped-join-boundary',grid_rows_computed:0}));
