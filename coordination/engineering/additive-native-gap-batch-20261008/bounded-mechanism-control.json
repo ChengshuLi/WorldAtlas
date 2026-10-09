@@ -1,0 +1,119 @@
+{
+  "kind": "bounded-native-batch-mechanism-control",
+  "qualifying_cold_execution": false,
+  "activation": false,
+  "source_approval": false,
+  "elapsed_ms": 76.84720800000002,
+  "component_count": 13,
+  "source_compatible": 11,
+  "source_exceptions": 2,
+  "native_conflicts": 0,
+  "assigned_components": 11,
+  "zero_cell_components": 0,
+  "assigned_cells": 134,
+  "removed_cells": 0,
+  "reassigned_cells": 0,
+  "decisions": [
+    {
+      "component_id": "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 2,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 19,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 45,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 11,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 9,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 12,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 1,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 26,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 5,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
+      "disposition": "rejected",
+      "reason_kind": "source-exception",
+      "native_cells": 0,
+      "failed_premises": [
+        "candidate_vs_alaska_parent",
+        "original-parent-coverage"
+      ]
+    },
+    {
+      "component_id": "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
+      "disposition": "rejected",
+      "reason_kind": "source-exception",
+      "native_cells": 0,
+      "failed_premises": [
+        "candidate_vs_alaska_parent",
+        "original-parent-coverage"
+      ]
+    },
+    {
+      "component_id": "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 1,
+      "failed_premises": []
+    },
+    {
+      "component_id": "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9",
+      "disposition": "assigned",
+      "reason_kind": "new-unowned-native-cells",
+      "native_cells": 3,
+      "failed_premises": []
+    }
+  ],
+  "limits": [
+    "Mechanism control over complete supplied current windows; not yet independently frozen source/cold/release acceptance.",
+    "Explicit v8 baseline; N2 rebind required before activation."
+  ]
+}

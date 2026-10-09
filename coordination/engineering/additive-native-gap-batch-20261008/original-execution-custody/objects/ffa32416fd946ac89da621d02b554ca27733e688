@@ -1,0 +1,42 @@
+tree 9c9487bde05494a53b64ec3d287d1361d7243f08
+parent 729d2448a6d9c40ca341b6fc3d45aff29bc8921d
+author Chengshu Li <chengshu.li.2013@gmail.com> 1791493561 -0700
+committer GitHub <noreply@github.com> 1791493561 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqyAW5CRC1aQ7uu5UhlAAAa54QAJMTv76uQvVEFmROCDXvakE1
+ uLQG68MPGnjl8ByCMWLJv019ajwAffWanzSNvHDvXnWKh3OoazaZKEBn4wMwNixG
+ 3TjN1dFIYcdZathitsxIUQKTYfCAV5K4larN3Td/vopvYnyCrSmvV5F1YgCm6N+D
+ eWzt4OZiyoF4SBnWR2fKMXuDDwVGFl5dvL304oQ29Y/uYEZjWAofPIjaB8QtFeyY
+ yEuHYe+ZaG4iupHzLrnSPt99Icr3QleErtYgFtAiSO5+dGxeAeBC/7y2pO9Ir1ye
+ QzM2V/nOaz3CaGbvb8s7unuptTozE3g7w5EszI8KhMtkb6sMfP8KhR3Xm1a+AJAW
+ EBcLTJ9d1jaJlNJyO8GvmIDq40+ix+2UvIfF5Hdr3/fQgRZiMkI9D/HKc04TZUBz
+ u8hSjpk83Ett42RfwtFGIhINnHUNPTUrzg8KHCRcJpzt9UAG6xwLrUb0bHLc81ev
+ x1CVIcgOjRLW0kaHiCkLU+vOJmD+FI34R3P2WoLlcbtp5z3L7yX4+v58x3yebDJB
+ mNlv+UqSggU0TXJhsrwL/spnjX5gm2INvsHc01Oyo/N9ceus+J85kSh5kl1TRUVB
+ nYXln3S80e1IBJ8PnFOblcj/VEqNDZJdCjp3KSKcX0IajRecC8CjfrseygGPg4wB
+ hQ8DHuBX0fTGYb+axEl7
+ =aPCi
+ -----END PGP SIGNATURE-----
+ 
+
+Measure 13 Alaska candidate components against county and coastline geometry
+
+## Scope
+
+Completes the bounded geometry measurement for the exact 13 Alaska component IDs in #1508. The packet preserves all 995 family members as context, seven Atlas county targets, 25 original physical relations, 11 referenced GSHHG native records and coordinates, 17 Atlas neighbors, and all 13 original detector contacts. It includes the full non-simplified geoBoundaries USA ADM2 source from immutable tag `9469f09`, source receipts, retained producer code, resource admission, and exact output inventories.
+
+## Findings
+
+- The full and simplified county sources produce the same candidate-specific intersection, coverage, and uncovered-area results for all 13 cases. The county geometries differ, so the applicable version and real-world authority remain unresolved.
+- No individual case or tested same-county batch meets the complete strict geometry gate. The candidate proposal and gain files are empty valid FeatureCollections.
+- GSHHG level-1 records provide coarse source-relative land-support evidence only; observation dates, precision, shoreline registration, current physical status, licensing interpretation, and repair authority remain unresolved.
+- Two fresh bounded runs completed naturally and their four scientific outputs are byte-identical. Positive and negative controls and the full 13-row truth table are retained.
+
+The packet is research evidence only. It makes no geographic approval, production change, import, publication, or release claim. Parent issue #1202 remains open for downstream engineering and unresolved authority work.
+
+## Validation
+
+The local evidence-quality validator reports `limited` with the source and authority limits above. The manifest binds all 27 numeric metrics to generated scalar outputs and records all changed files. Hosted premerge validation and independent exact-head review remain required.
+
+Closes #1508
