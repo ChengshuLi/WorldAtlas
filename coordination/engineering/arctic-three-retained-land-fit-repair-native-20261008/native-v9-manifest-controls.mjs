@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {continueNativeManifest,OLD_NATIVE_SHA} from './native-v9-manifest.mjs';
+const pins=JSON.parse(fs.readFileSync(process.argv[2]));
+const raw=fs.readFileSync(pins.original);assert.equal(createHash('sha256').update(raw).digest('hex'),OLD_NATIVE_SHA);
+const original=JSON.parse(raw),args={originalSha:OLD_NATIVE_SHA,replacements:pins.replacements,selectedProof:JSON.parse(fs.readFileSync(pins.selectedProof)),footprints:JSON.parse(fs.readFileSync(pins.footprints)),releaseId:'geography:review:'+'7'.repeat(64)};
+const before=JSON.stringify(original);const result=continueNativeManifest(original,args);assert.equal(result.parts.length,56);assert.equal(result.parts.filter((p,i)=>p===original.parts[i]).length,54);assert.equal(result.accounting.owned_cells,13854401626);assert.deepEqual(result.provinces,original.provinces);assert.deepEqual(result.bounds,original.bounds);assert.deepEqual(result.native_latitudes,original.native_latitudes);assert.equal(JSON.stringify(original),before);assert.deepEqual(fs.readFileSync(pins.original),raw);
+let negative=0;function reject(fn){assert.throws(fn);negative++;}
+reject(()=>continueNativeManifest(original,{...args,originalSha:'0'.repeat(64)}));
+reject(()=>continueNativeManifest({...original,footprints_sha256:'0'.repeat(64)},args));
+reject(()=>continueNativeManifest(original,{...args,replacements:args.replacements.slice(0,1)}));
+reject(()=>continueNativeManifest(original,{...args,replacements:[args.replacements[0],args.replacements[0]]}));
+reject(()=>continueNativeManifest(original,{...args,replacements:args.replacements.map((p,i)=>i?{...p,path:'../runs.bin.gz'}:p)}));
+reject(()=>continueNativeManifest(original,{...args,selectedProof:{...args.selectedProof,removed_cells:1}}));
+reject(()=>continueNativeManifest(original,{...args,selectedProof:{...args.selectedProof,full_owner_count:49624}}));
+reject(()=>continueNativeManifest(original,{...args,footprints:{...args.footprints,current_footprints_sha256:'0'.repeat(64)}}));
+reject(()=>continueNativeManifest(original,{...args,releaseId:original.geographic_release}));
+reject(()=>continueNativeManifest(original,{...args,replacements:args.replacements.map((p,i)=>i?{...p,words:p.words-1}:p)}));
+console.log(JSON.stringify({positive:1,negative,whole_original_manifest:OLD_NATIVE_SHA,unchanged_parts_same_descriptors:54,changed_parts:2,old_namespace_unchanged:true,limit:'Pure metadata continuation; fixture release ID is not final selection or activation'}));
