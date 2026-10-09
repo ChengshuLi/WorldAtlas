@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-10-09T23:43:00.349933+00:00",
+  "captured_at": "2026-10-09T23:45:34.078433+00:00",
   "issues": [
     {
       "active_claims": [],
@@ -26,15 +26,14 @@
         "version": 1,
         "worker_id": "codex-20261003-wna-486-d7aeefc5f37a450c8247ddbe8df5ffac"
       },
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "kind:work-item",
         "status:ready",
         "type:geography"
       ],
       "number": 486,
-      "published_component_id_count": 0,
-      "published_component_ids": [],
+      "published_component_id_count_excluding_this_handoff": 0,
       "state": "CLOSED",
       "title": "Review Western North America interior batch 2: Mountain, Pacific",
       "updated_at": "2026-10-04T08:57:54Z",
@@ -46,30 +45,13 @@
       "comments_count": 123,
       "comments_sha256": "91437629fabdd6b1d51d1755149d14451c0622e93e7dcaf754adafdd2f0ae0a5",
       "current_lease": null,
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "type:engineering",
         "kind:umbrella"
       ],
       "number": 1202,
-      "published_component_id_count": 15,
-      "published_component_ids": [
-        "physical-component:005bc7c364b9d663c7bde452916a80ca6cc4d06411ffbd8d5cd9bd621c84dbf5",
-        "physical-component:0ba5f016c1cac781aba0a9bd5e5fe1736d54077a2fa188026e3907fe98cfaac6",
-        "physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a",
-        "physical-component:147ddc6aed102d3f2c5e362d8a37a159db9d185a652feb75afe5f8e5b57918d0",
-        "physical-component:1635eecba78b0a2f8477bdd03d603cea93c4ff2d9c68f1a963bd44934790695a",
-        "physical-component:17bb5b7f043b0fb2b447b8ccef216e530fed4595da1aec0feb1dea235bed0dbd",
-        "physical-component:3ad5b5708983a0c6b48f370a238f08a56e562f05ab0c47484f065db3931c712a",
-        "physical-component:5234b8785cace7ed45cb21f3e42336bbb6c0b9484955a3b71326bd59e803f95b",
-        "physical-component:5eb203ea755668e2f35e8cf2881ef73a06e42508867f9f364e17dfb084af37f9",
-        "physical-component:6434b01a19d91e8b121cc47a79753478e77e4d3e1650506105c00b318f84a47e",
-        "physical-component:78100df8c42f6c8a6c936102b110cad2820bd219a083981d1dbb961273cb1881",
-        "physical-component:7bd46b9a5ab80cc933fa4de4f0564dc34ee1edf4eef0ed500b875c409ea6df04",
-        "physical-component:91bd8745a426b126855fef4cf183a85e8329b7943cc1c89b02898038c0dceea0",
-        "physical-component:b960e6adda1b56e25b52f8a501b7f6fdc86a461b71e94ec9aaec057cee45b27e",
-        "physical-component:c86d0a6bd3706c3dae7df4b91bc50af6ecd7f07e9bd886b471064c9c84beecdf"
-      ],
+      "published_component_id_count_excluding_this_handoff": 15,
       "state": "OPEN",
       "title": "Resolve geographic coverage gaps globally: inventory, classification, repairs and prevention",
       "updated_at": "2026-10-09T23:24:40Z",
@@ -100,59 +82,14 @@
         "version": 1,
         "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c"
       },
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "kind:work-item",
         "status:ready",
         "type:geography"
       ],
       "number": 1362,
-      "published_component_id_count": 43,
-      "published_component_ids": [
-        "physical-component:061346349ee4368f73143bfab79ebe708f5a277340f85d30f06db4ca8217b9a6",
-        "physical-component:0743ef078bbb50edae671a5925c6ba84670b2ea44edbe597b1023f13bddbb4f1",
-        "physical-component:09dcbe1acbf4ca618c80e365b8ac1bec605d4247b9028766962f14f08170dcf7",
-        "physical-component:0bcf0d3040d185b26b8ef0afd956b50685effa42483a8eaae4f3eca0b6b8dd71",
-        "physical-component:0c2f986e2aa06f893c62acc77014f5439e62fc633dbcf92ca9a3af1cd2fe7fd2",
-        "physical-component:1626dacd101b7d7bd055c7aab2b7ba78c1fe1f7095a193c539fdcd16189c5ba1",
-        "physical-component:20b882f1c7cfa4ae421d8fc6d9dcf81d8a9b1be484a6a03826723fb04aedd7b9",
-        "physical-component:299447ff4b162755c9ef6eca1542e70b5f644364597ad2b9ecd80fb3e1958b5d",
-        "physical-component:36c45387da8391bdf55df4732217e5c94243ebe8a31c3993bd3af99e06d9cf8b",
-        "physical-component:389340d085af249f7b7a85f32a55bd565f8216a7c04da4eb5eb38f50ea57dc43",
-        "physical-component:3c4b61ba491c0234251d13c5ac129ab3f091577732b02f04b977e009f2ee8d86",
-        "physical-component:3e84f2326adf27699a5080d97cce3f045b204fe97583fe65032277a407a649f7",
-        "physical-component:4ea6ac9536138502404025c5da7b81c471b77a55bf67a82a9d1bc975a765aa02",
-        "physical-component:5b0d6068e066ef989f2e1bf2c4eb8ee25fdea9a55a23adb4764cea323aa8af33",
-        "physical-component:5d5e9c2a710a51a04e5d5f9b1a0a75cffa8377f2a6f3231e15495ae76af41f0b",
-        "physical-component:64fb6fa3555012584942bdfeda8c66b7d1105d1ad9c86c6730cd71cb47d10058",
-        "physical-component:64fb7a9dddb23a2b2234f31c6e0690a2c8ed1179762f836fa64181ab02e94381",
-        "physical-component:6661138d27725b966e388fc10dd5755950232c5487e7a96c09f431d5be19160c",
-        "physical-component:6c45b20b999791ebb62ad1bdc569cc0e5a95c255aa7c84b6c66a08674aa430a0",
-        "physical-component:6c76c0ffbcfc28a5b06072aac859b4aa6b5f67e56a3fdbef0b462133cc006b03",
-        "physical-component:6dafe6710e12c6887ad2208928148fdab860378a96ab4b370216bec801474b45",
-        "physical-component:7218f2b59634a6d8be989cb60491f71388ac0e909799f70395d8e5f42fdf5a89",
-        "physical-component:7da3af5653dcf6e61b3c09104d39cf03289966c1dad69e6d94858e4a0c4ccadb",
-        "physical-component:821db28f686ae89887ff1140c2bb1744d1d5d74b8dc57c85f98ced3778553270",
-        "physical-component:822050d2ec469214d0604f8ea17aa636f7588ebbe4d27b44972f4308d0a11ea3",
-        "physical-component:8532bba41938e4fabea832de64a707f60835b234322936f4dd2086beb1eb256d",
-        "physical-component:85a34296175bd8445387803f1bb4157956e05a2a27b24bc3b74de6008378e8a5",
-        "physical-component:86f5c507aa78d1715c183c2793d527bb911a4302797de4bbc8f79204c549f9f4",
-        "physical-component:8707f71c902c0ec125ab6dd1426295dec275a0d054cd8ffcfb43ae79c647a19c",
-        "physical-component:93cc6322cd83e64cfb2ea63b5adb87f4e280d06c6f262bb57a0459fd0e8c28b0",
-        "physical-component:9b68f3dddb234787f736f6bf6300e80b52a2990c4a6625e358452476b56c777c",
-        "physical-component:a2e7e61580060877e2d587398675386b0d7bcbcab0e542b87c75d88285a94890",
-        "physical-component:a9c196dbd5aaddcfe2d536509d999e1d112520fc4112d341799187700a67bb10",
-        "physical-component:acc9bd74d9bc04c7141f125764e113186e2568a55240cb1983241678b9390ee1",
-        "physical-component:b955fe31c8ba191ef1c5a0cf2c4fee24e4eb1c35164fd1255ff5287cb1031a2b",
-        "physical-component:cc3b87d4d31ecdccbf605f8f5747e1befd6befd2d16fccb1fc689f5d0ed26399",
-        "physical-component:ddab05e70b66b84cf7273273b7415c5d9a22eb6f44bdd6a7b8f3302183151f47",
-        "physical-component:ded57a59bb1f6a5fea45c2818c615f4e3b367e57a91cbe1d9297820a75f47b31",
-        "physical-component:df4ddb5b8e22362aa21ebbc944576047a0748bd7de6c3b7df3f670113333888d",
-        "physical-component:ea26bb4e9b07eca3f3f7b78dd5f6be3a3680fcfff8696cb6daf7dbe5582d865b",
-        "physical-component:ea2cded5b0a6bb4fc7f331ba542c2e6df701caded23fa76ee68d9c6008ba0cd5",
-        "physical-component:ef375c1043b57fad20068697d8daf0cefe392f6fb5667fc3fe5f02f16e26c7e6",
-        "physical-component:fd47d0cfd13bc0aaceaf91e3f87aa1e5d48c0b8819219a717c15b8c519e87c0e"
-      ],
+      "published_component_id_count_excluding_this_handoff": 43,
       "state": "CLOSED",
       "title": "Assess source fitness for the complete 43-component British Columbia gap family",
       "updated_at": "2026-10-07T11:18:31Z",
@@ -183,47 +120,14 @@
         "version": 1,
         "worker_id": "01a11550-a19b-7330-955c-e56e90985bf3"
       },
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "kind:work-item",
         "status:ready",
         "type:geography"
       ],
       "number": 1377,
-      "published_component_id_count": 31,
-      "published_component_ids": [
-        "physical-component:0d5cd8f440225c82d59ce25614502e964386ee39735fb6b2e79d2fd87589f967",
-        "physical-component:1df9d15457f298f714af8558b2b16db209a635f9fb3ec03a5dac44efa3a23ec4",
-        "physical-component:1e3ca3d7f1b45ca1cbb4fde683b982ff34c8cd6aecc2faddf0c268102e74e1e3",
-        "physical-component:220fde3f67ccdeb3ce78c24dec30f25e23e07c6a251961c624b9cecd9e1d5de2",
-        "physical-component:2c7baec8900562907910e8aeacd785fbbd207d8c55f542827e8a99cbaad841ca",
-        "physical-component:3addcf1688f537a931f845dc07a36d10065a3ef4124154b4a4c3ca7f8a872b48",
-        "physical-component:3bd4c4c020ee3646ac7bdd4edb5246f42eb7284c832d09e77db2973cf3663baa",
-        "physical-component:4efaa659090038e509efd7ee5c874207eb602cfa1148f1ff1329a00a2e3e4789",
-        "physical-component:5ad1b17e738967f93f5853e612848035f5e327ca827a42754f14f9fc3cde8419",
-        "physical-component:5d2704040bde1a1f6d0c1611967c1db5d21925c538cafde7a213c06352425fa1",
-        "physical-component:61aab0fb0e7577153074a3f9c451a610234fa0becc1fe8fffffb9dff02c14dfc",
-        "physical-component:7038d5cd756212396c6a79db5fddff8e8a8498b82a6b33806b172cde40fd3e61",
-        "physical-component:7bbf331113650e658cb436223a5fd32d77f2db78bd875bab6e938cfbbc8e7e87",
-        "physical-component:7d8dce8a9315be3a3b1c2fcd6b7f282a06fdf2482e288691a1451152dd21319e",
-        "physical-component:865e780b790bfa12cdfb38c6fa88eec111dc2c2913469853e28d9f94382ea812",
-        "physical-component:94a9ca93e19fada086cf060698084d033bb9995b65c3d832bd6d9635612c432b",
-        "physical-component:9ad496ca9b29c51c464f7cf28469df69702f65da00d1517f7f28a71b88b93854",
-        "physical-component:a9508b456b2255dfc443dee9db07d52004ceffd276a1240184238e4fc9e69996",
-        "physical-component:af3dbd85007c6a292e9fb5b1b5b4fa4d18f8dac246d2cbd341e53375d37cd089",
-        "physical-component:b4d12d01304c262324cf85ab2a6109e8e04d8724e7d01eb5f43e37265b164219",
-        "physical-component:bc664631a586f1e27ef51cbd4c204e2c76c76508cb908623cfd724b89380a3c9",
-        "physical-component:bd883198a057109964cc5345182b6b5f2860e0804e3562ac6b614b4a2d7c3826",
-        "physical-component:c2c8e5c5acf10e5acac71b2dbd2e6cabcbe3c3581eb623a532ca0207672d0189",
-        "physical-component:d2216da42120f0ab9794f3f93f25471a78be05306449fd0c47d63d1378a497c2",
-        "physical-component:d25f41b84205be68248e012df2b562246641445878219e5b1b558186ee0c4e44",
-        "physical-component:d7bbc7721978ab1eb97340891ba6447601ace13bf7145687be979cf34ce4d311",
-        "physical-component:e1e5980f4bf2115afa927e4db9f71ce40fa6e0ac1507274e2177b67d1163002b",
-        "physical-component:e4585fcb416f8493c5fba83bbecc26fbf97cc1a80d1f12b99529f1a5aa0bc510",
-        "physical-component:eddb906492f46099a07b0ca4baea9c991a0d2d4bf9e36b79c723d450f73509fd",
-        "physical-component:f32b35fb8de66f53a0118e8b14c6abb745e36f7041a4b533925fb412df630cba",
-        "physical-component:fd82dda9164b11cdd30c2e329bed927aac031c881fab7c33cf311fe56700bbd5"
-      ],
+      "published_component_id_count_excluding_this_handoff": 31,
       "state": "CLOSED",
       "title": "Assess source fitness for the complete 31-component USA ADM2 gap family",
       "updated_at": "2026-10-07T11:53:57Z",
@@ -267,7 +171,7 @@
         "version": 1,
         "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206"
       },
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "type:engineering",
         "kind:work-item",
@@ -276,8 +180,7 @@
         "priority:urgent"
       ],
       "number": 1394,
-      "published_component_id_count": 0,
-      "published_component_ids": [],
+      "published_component_id_count_excluding_this_handoff": 0,
       "state": "OPEN",
       "title": "Recover original source operands for all 1,294 global replay mismatches",
       "updated_at": "2026-10-09T19:36:23Z",
@@ -308,29 +211,14 @@
         "version": 1,
         "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
       },
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "kind:work-item",
         "status:ready",
         "type:geography"
       ],
       "number": 1488,
-      "published_component_id_count": 13,
-      "published_component_ids": [
-        "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
-        "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
-        "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
-        "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
-        "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
-        "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
-        "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
-        "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
-        "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
-        "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
-        "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
-        "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
-        "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9"
-      ],
+      "published_component_id_count_excluding_this_handoff": 13,
       "state": "CLOSED",
       "title": "Assess native physical-source fitness for 13 Alaska gap components",
       "updated_at": "2026-10-09T19:22:00Z",
@@ -361,7 +249,7 @@
         "version": 1,
         "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
       },
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "kind:work-item",
         "status:ready",
@@ -370,22 +258,7 @@
         "follow-up"
       ],
       "number": 1508,
-      "published_component_id_count": 13,
-      "published_component_ids": [
-        "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
-        "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
-        "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
-        "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
-        "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
-        "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
-        "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
-        "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
-        "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
-        "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
-        "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
-        "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
-        "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9"
-      ],
+      "published_component_id_count_excluding_this_handoff": 13,
       "state": "CLOSED",
       "title": "Measure 13 Alaska candidate components against county and native coastline geometry",
       "updated_at": "2026-10-08T21:07:21Z",
@@ -397,7 +270,7 @@
       "comments_count": 1,
       "comments_sha256": "1bd4b5db0770ca4e3c11a0c19eb7bcd6a9401f53c2fba864ca4576a0692e9328",
       "current_lease": null,
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "bug",
         "type:engineering",
@@ -407,22 +280,7 @@
         "follow-up"
       ],
       "number": 1620,
-      "published_component_id_count": 13,
-      "published_component_ids": [
-        "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
-        "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
-        "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
-        "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
-        "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
-        "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
-        "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
-        "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
-        "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
-        "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
-        "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
-        "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
-        "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9"
-      ],
+      "published_component_id_count_excluding_this_handoff": 13,
       "state": "OPEN",
       "title": "Bound complete Alaska #1495 source-fitness reproduction before input reads",
       "updated_at": "2026-10-09T19:20:48Z",
@@ -451,8 +309,8 @@
         }
       ],
       "body_sha256": "32bbe486f582809b94b2bd6207ba78bc70b1d97d583ca7df68308b809ad69d48",
-      "comments_count": 8,
-      "comments_sha256": "b5d6706081d36120396374d5aeee92cc0d4488feb3793726ebcf184044c348f2",
+      "comments_count": 9,
+      "comments_sha256": "8548d304bcc2c1bcd2fff68e52898b36ac26c99a21d127034a896f16f2717770",
       "current_lease": {
         "active": true,
         "branch": "geography/alaska-west-four-source-custody-20261009",
@@ -472,7 +330,7 @@
         "version": 1,
         "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
       },
-      "four_case_ids_present": [],
+      "four_case_ids_present_before_this_handoff": [],
       "labels": [
         "kind:work-item",
         "status:ready",
@@ -480,30 +338,31 @@
         "type:geography"
       ],
       "number": 1630,
-      "published_component_id_count": 5,
-      "published_component_ids": [
-        "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
-        "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
-        "physical-component:26f7658cfe2bed03c9cca108e8c2d08277f9efdd0a8143c308a7d6d0357662ee",
-        "physical-component:f840c42d9967e89c74e47e4693392c474df5bfd4014d7c04acee9d04f58ed2f5",
-        "physical-component:ff63cb9b104fd5baada0f18a8426c9d0e11ddb99ceed1392c7f6f715e4b27064"
-      ],
+      "published_component_id_count_excluding_this_handoff": 5,
       "state": "OPEN",
       "title": "[GEO5] Reconcile complete North America operational gap batch",
-      "updated_at": "2026-10-09T23:32:49Z",
+      "updated_at": "2026-10-09T23:44:45Z",
       "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1630"
     }
   ],
   "limits": [
-    "Public issue text and exact published rosters were read live. Absence from published text does not establish absence from private working files.",
-    "Closed #486 describes Alaska physical ecoregion portions but publishes no IDs for these four; relationship remains unknown.",
-    "#1394 is open with an active claim and broader source-replay scope; no exact roster overlap is published, so relationship remains unknown.",
-    "The full #1630 batch and global #1202 umbrella scopes remain unchanged."
+    "Public issue text, comments, and merged source-PR diffs were checked. Absence from public text does not establish absence from private working files.",
+    "Closed #486 describes Alaska physical-ecoregion portions but publishes no IDs for these four; relationship remains unknown.",
+    "#1394 is open with an active engineering claim for broader source-operand recovery; no exact roster overlap is published, so relationship remains unknown.",
+    "The four exact IDs now appear in this handoff comment on #1630. The separate pre-handoff readback retains the prior public-roster overlap result.",
+    "#1630 full-batch scope and #1202 umbrella scope remain unchanged."
   ],
+  "pre_handoff_readback": {
+    "bytes": 36563,
+    "commit": "c02598f7",
+    "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-live-issue-readback.json",
+    "result": "all four exact IDs absent from the previously published issue/PR text captured in that readback",
+    "sha256": "84865863821d0d731f1be9aa35416c708efe4cebba50102e2e7d0b92bc257ea7"
+  },
   "pull_requests": [
     {
       "diff_sha256": "ca0c466a908f4f75cbf20edf2e44fca55b4994818ff9e8497395d774b040a45b",
-      "files_count": 24,
+      "file_count": 24,
       "four_case_ids_present": [],
       "merge_commit": "745cc86a5e1e4d9917730bad0b5a7a031de99ceb",
       "merged_at": "2026-10-07T11:16:56Z",
@@ -561,7 +420,7 @@
     },
     {
       "diff_sha256": "a159ba420f38ebec7e2edf629ac6732e4fe826662e4c13a5431450366f61558a",
-      "files_count": 48,
+      "file_count": 48,
       "four_case_ids_present": [],
       "merge_commit": "281424146684b98e754efba910178c7b42f3850a",
       "merged_at": "2026-10-07T11:49:35Z",
@@ -626,5 +485,13 @@
     "physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4",
     "physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6"
   ],
-  "version": 2
+  "this_handoff_comment": {
+    "body_sha256": "b067d0ed7824c40a71326ab12514dc384b35d959cc6d2a8be791630c94ef7472",
+    "comment_id": 6091183685,
+    "component_ids": [],
+    "created_at": "2026-10-09T23:44:45Z",
+    "issue": 1630,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1630#issuecomment-6091183685"
+  },
+  "version": 3
 }
