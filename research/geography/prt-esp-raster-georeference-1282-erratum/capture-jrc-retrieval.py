@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -13,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[3]
 PACKET = ROOT / "research/geography/portugal-spain-gap-source-families-20261007"
 OWN = Path(__file__).resolve().parent
 CAPTURE = PACKET / "sources/jrc/monthlyhistory-v1_5-2024-capture.json"
-OUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else OWN / "jrc-current-retrieval.json"
+OUT = Path(os.path.abspath(sys.argv[1])) if len(sys.argv) > 1 else OWN / "jrc-current-retrieval.json"
 MAX_FILE = 32 * 1024 * 1024
 MAX_TOTAL = 256 * 1024 * 1024
 CHUNK = 1024 * 1024
@@ -26,16 +27,21 @@ def sha_file(path: Path) -> str:
     return h.hexdigest()
 
 def main() -> None:
+    capture_bytes = CAPTURE.stat().st_size
+    code_bytes = Path(__file__).stat().st_size
+    assert not CAPTURE.is_symlink() and CAPTURE.is_file() and capture_bytes <= MAX_FILE
+    assert code_bytes <= MAX_FILE
+    out_parent = OUT.parent
+    assert out_parent.resolve() == out_parent and (out_parent == OWN or OWN in out_parent.parents) and not out_parent.is_symlink() and out_parent.is_dir()
+    assert OWN in OUT.parents and not os.path.lexists(OUT), "refuse overwrite/symlink or output outside owned packet"
+    reserve = 256 * 1024
+    assert capture_bytes + code_bytes + reserve <= MAX_TOTAL, "manifest/code/output admission failed"
+
     assets = json.loads(CAPTURE.read_text())["assets"]
     assert len(assets) == 24
     total_expected = sum(a["bytes"] for a in assets)
     assert all(a["bytes"] <= MAX_FILE for a in assets)
-    code_bytes = Path(__file__).stat().st_size
-    reserve = 256 * 1024
-    assert total_expected + code_bytes + reserve <= MAX_TOTAL
-    out_parent = OUT.parent.resolve()
-    assert (out_parent == OWN or OWN in out_parent.parents) and not OUT.exists() and not OUT.is_symlink(), "refuse overwrite/symlink or output outside owned packet"
-    OUT.parent.mkdir(parents=True, exist_ok=True)
+    assert total_expected + capture_bytes + code_bytes + reserve <= MAX_TOTAL, "complete retrieval phase exceeds 256 MiB"
     started = datetime.now(timezone.utc).isoformat()
     results = []
     bytes_read = 0
@@ -71,8 +77,25 @@ def main() -> None:
                                              "output_reserve_bytes": reserve, "status": "admitted"},
                                "results": results}, indent=2, sort_keys=True) + "\n"
     assert len(payload.encode()) <= reserve
-    with OUT.open("x", encoding="utf-8") as f:
-        f.write(payload)
+    assert not os.path.lexists(OUT), "refuse existing output, including dangling symlink"
+    fd = os.open(OUT, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0), 0o644)
+    st = os.fstat(fd)
+    try:
+        data = payload.encode("utf-8")
+        offset = 0
+        while offset < len(data):
+            offset += os.write(fd, data[offset:])
+        os.fsync(fd)
+    except Exception:
+        try:
+            current = OUT.lstat()
+            if (current.st_dev, current.st_ino) == (st.st_dev, st.st_ino):
+                OUT.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+    finally:
+        os.close(fd)
     print(f"Verified {len(results)} assets / {bytes_read} bytes; receipt {OUT}")
 
 if __name__ == "__main__":

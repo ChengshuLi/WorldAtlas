@@ -9,20 +9,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
-
-import rasterio
-from pyproj import Transformer
-from rasterio.windows import Window
-from shapely.geometry import box, shape
-from shapely.ops import transform as transform_geometry
-from shapely.ops import unary_union
 
 ROOT = Path(__file__).resolve().parents[3]
 OLD = ROOT / "research/geography/portugal-spain-gap-source-families-20261007"
 OWN = Path(__file__).resolve().parent
-OUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else OWN / "native-coverage-audit.json"
+OUT = Path(os.path.abspath(sys.argv[1])) if len(sys.argv) > 1 else OWN / "native-coverage-audit.json"
 CAPTURE = OLD / "sources/jrc/monthlyhistory-v1_5-2024-capture.json"
 GEOJSON = OLD / "inputs/selected-70-component-geometries.geojson"
 MATRIX = OLD / "outputs/source-status-matrix.json"
@@ -47,6 +41,42 @@ def file_bytes(path: Path) -> int:
 def roster_sha(values: set[str]) -> str:
     return hashlib.sha256(("\n".join(sorted(values)) + "\n").encode()).hexdigest()
 
+def admit_phase() -> tuple[list[Path], int, int]:
+    """Admit every fixed input, source TIFF, code, and output before parsing."""
+    raster_dir = CAPTURE.parent / "monthlyhistory-v1_5-2024"
+    rasters = sorted(raster_dir.glob("monthlyhistory_*_v1_5_2024_*.tif"))
+    assert len(rasters) == 24, "expected the complete 24-asset pinned raster set"
+    inputs = [CAPTURE, GEOJSON, MATRIX, SUMMARY, VALIDATION, OWN / "jrc-current-retrieval.json", *rasters, Path(__file__).resolve()]
+    assert all(p.resolve() == p and p.is_file() and not p.is_symlink() for p in inputs)
+    sizes = [p.stat().st_size for p in inputs]
+    assert all(size <= LIMIT_FILE for size in sizes), "per-file admission failed"
+    complete_phase = sum(sizes) + 512 * 1024
+    assert complete_phase <= LIMIT_PHASE, "complete metadata/coverage phase exceeds 256 MiB"
+    parent = OUT.parent
+    assert parent.resolve() == parent and OWN in parent.parents and not parent.is_symlink() and parent.is_dir()
+    assert OWN in OUT.parents and not os.path.lexists(OUT), "refuse overwrite/symlink or output outside owned packet"
+    return rasters, sum(p.stat().st_size for p in rasters), complete_phase
+
+def write_exclusive(path: Path, payload: bytes) -> None:
+    assert len(payload) <= 512 * 1024 and not os.path.lexists(path), "refuse existing output"
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0), 0o644)
+    st = os.fstat(fd)
+    try:
+        offset = 0
+        while offset < len(payload):
+            offset += os.write(fd, payload[offset:])
+        os.fsync(fd)
+    except Exception:
+        try:
+            current = path.lstat()
+            if (current.st_dev, current.st_ino) == (st.st_dev, st.st_ino):
+                path.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+    finally:
+        os.close(fd)
+
 def valid_native_header(epsg: int | None, transform: tuple[float, ...], expected_north: float) -> bool:
     if epsg != 4326 or len(transform) < 6:
         return False
@@ -56,9 +86,15 @@ def valid_native_header(epsg: int | None, transform: tuple[float, ...], expected
             abs(c + 10) < 1e-10 and abs(f - expected_north) < 1e-10)
 
 def main() -> None:
-    out_parent = OUT.parent.resolve()
-    assert OWN in out_parent.parents and not OUT.exists() and not OUT.is_symlink(), "refuse overwrite/symlink or output outside owned packet"
-    out_parent.mkdir(parents=True, exist_ok=True)
+    rasters, source_bytes, projected_phase_bytes = admit_phase()
+    global rasterio, Transformer, Window, box, shape, transform_geometry, unary_union
+    import rasterio
+    from pyproj import Transformer
+    from rasterio.windows import Window
+    from shapely.geometry import box, shape
+    from shapely.ops import transform as transform_geometry
+    from shapely.ops import unary_union
+
     capture = json.loads(CAPTURE.read_text())
     matrix = json.loads(MATRIX.read_text())
     validation = json.loads(VALIDATION.read_text())
@@ -67,14 +103,9 @@ def main() -> None:
     assert len(matrix["components"]) == 70 and len(matrix["families"]) == 52
     assert len(geo["features"]) == 70
 
-    source_bytes = sum(file_bytes(CAPTURE.parent / "monthlyhistory-v1_5-2024" / a["filename"]) for a in capture["assets"])
-    ordinary_inputs = [CAPTURE, GEOJSON, MATRIX, VALIDATION, SUMMARY]
-    ordinary_inputs.extend(CAPTURE.parent / "monthlyhistory-v1_5-2024" / a["filename"] for a in capture["assets"])
-    assert all(file_bytes(p) <= LIMIT_FILE for p in ordinary_inputs), "per-file admission failed"
+    admitted_raster_names = {p.name for p in rasters}
+    assert {a["filename"] for a in capture["assets"]} == admitted_raster_names
     code_bytes = file_bytes(Path(__file__))
-    fixture_bytes = file_bytes(CAPTURE) + file_bytes(GEOJSON) + file_bytes(MATRIX) + file_bytes(VALIDATION) + file_bytes(SUMMARY)
-    projected_phase_bytes = source_bytes + fixture_bytes + code_bytes + 512 * 1024
-    assert projected_phase_bytes <= LIMIT_PHASE, "complete metadata/coverage phase exceeds 256 MiB"
 
     by_name = {}
     assets = []
@@ -245,7 +276,7 @@ def main() -> None:
                            "prior_validator_result": {"path": str(VALIDATION.relative_to(ROOT)), "sha256": sha(VALIDATION), "bytes": file_bytes(VALIDATION)},
                            "current_official_retrieval": {"path": str(current_retrieval.relative_to(ROOT)), "sha256": sha(current_retrieval), "bytes": file_bytes(current_retrieval)}},
         "admission": {"max_file_bytes": LIMIT_FILE, "max_complete_phase_bytes": LIMIT_PHASE, "encoded_raster_bytes": source_bytes,
-                      "complete_phase_upper_bound_bytes_including_128KiB_output_reserve": projected_phase_bytes,
+                      "complete_phase_upper_bound_bytes_including_512KiB_output_reserve": projected_phase_bytes,
                       "status": "admitted for header/control/footprint phase only; full monthly pixel re-summarization refused (578813952 decoded bytes in the prior plan)"},
         "scope": {"families": len(family_ids), "components": len(component_rows), "contacts": len(contact_ids),
                   "component_roster_sha256": roster_sha({r["component_id"] for r in component_rows}), "family_roster_sha256": roster_sha(family_ids),
@@ -274,9 +305,8 @@ def main() -> None:
                     "components_with_no_native_tile_coverage": sum(x["native_tile_union_coverage_status"] == "none" for x in component_rows),
                     "limitations": ["Coverage is spatial tile-footprint coverage, not successful-observation coverage.", "The old JRC counts/control/family prose are withdrawn as spatially unsupported; administrative, APA and MAPA findings remain distinct and are not altered.", "No corrected water counts or full-component classification is established.", "The MITECO vectors were not acquired; APA reuse terms and historical MAPA source bytes/terms remain unresolved; these remain explicit neighboring-source gaps.", "No boundary, ownership, cause, ice or historical status is changed; all remain unknown."]}
     }
-    OUT.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n")
-    assert file_bytes(OUT) <= 512 * 1024
-    assert source_bytes + fixture_bytes + code_bytes + file_bytes(OUT) <= LIMIT_PHASE
+    payload = (json.dumps(output, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    write_exclusive(OUT, payload)
     print(json.dumps(output["summary"], indent=2))
     print(f"wrote {OUT} ({file_bytes(OUT)} bytes, sha256 {sha(OUT)})")
 
