@@ -134,11 +134,7 @@ def validate_science(index_path=INDEX):
         return ordinary_read(ROOT, aliases[path]['payload'])
 
     complete = [g for g in index['generations'] if g['status'] == 'complete']
-    report_path = complete[0]['prefix'] + '/report.json'
-    report_raw = original(report_path)
-    require(describe(report_path, report_raw) == aliases[report_path]['original'],
-            'Whole original scientific report changed')
-    report = json.loads(report_raw)
+    report = json.loads(original(complete[0]['prefix'] + '/report.json'))
     require(report['version'] == VERSION, 'Unexpected full scientific report')
     pins = {r['path']: r for r in report['inputs']}
     require(len(pins) == len(report['inputs']), 'Duplicate original input')

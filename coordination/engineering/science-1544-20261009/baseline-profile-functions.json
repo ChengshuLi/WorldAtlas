@@ -1,0 +1,394 @@
+[
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 34,
+    "function": "canonical_json",
+    "calls": 1460719,
+    "self_seconds": 0.7732460560000001,
+    "cumulative_seconds": 23.955801567
+  },
+  {
+    "file": "stdlib/json/__init__.py",
+    "line": 183,
+    "function": "dumps",
+    "calls": 1460720,
+    "self_seconds": 0.9982133670000001,
+    "cumulative_seconds": 22.814399394000002
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 18,
+    "function": "components",
+    "calls": 1,
+    "self_seconds": 1.318500236,
+    "cumulative_seconds": 22.348071833000002
+  },
+  {
+    "file": "stdlib/json/encoder.py",
+    "line": 205,
+    "function": "iterencode",
+    "calls": 1460720,
+    "self_seconds": 20.311965674,
+    "cumulative_seconds": 20.311965674
+  },
+  {
+    "file": "stdlib/json/__init__.py",
+    "line": 299,
+    "function": "loads",
+    "calls": 94,
+    "self_seconds": 0.022601212000000002,
+    "cumulative_seconds": 12.630726331
+  },
+  {
+    "file": "stdlib/json/decoder.py",
+    "line": 344,
+    "function": "raw_decode",
+    "calls": 94,
+    "self_seconds": 12.401723538,
+    "cumulative_seconds": 12.401723538
+  },
+  {
+    "file": "scripts/physical_gap_crosswalk.py",
+    "line": 20,
+    "function": "membership",
+    "calls": 4,
+    "self_seconds": 1.9655004390000002,
+    "cumulative_seconds": 10.94239875
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 52,
+    "function": "validate",
+    "calls": 1,
+    "self_seconds": 0.015343235,
+    "cumulative_seconds": 6.554416833
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 39,
+    "function": "describe",
+    "calls": 368,
+    "self_seconds": 0.003533468,
+    "cumulative_seconds": 6.036918914
+  },
+  {
+    "file": "scripts/physical_component_contacts.py",
+    "line": 10,
+    "function": "component_contacts",
+    "calls": 1,
+    "self_seconds": 0.31051764600000004,
+    "cumulative_seconds": 5.74164925
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 70,
+    "function": "_git",
+    "calls": 322,
+    "self_seconds": 0.001513877,
+    "cumulative_seconds": 5.702924375
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 73,
+    "function": "read",
+    "calls": 106,
+    "self_seconds": 0.004645396,
+    "cumulative_seconds": 5.626683048
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 26,
+    "function": "sha256",
+    "calls": 1261720,
+    "self_seconds": 0.44412989100000005,
+    "cumulative_seconds": 3.772054428
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 47,
+    "function": "__init__",
+    "calls": 4,
+    "self_seconds": 0.0035444060000000004,
+    "cumulative_seconds": 2.974775917
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 108,
+    "function": "<genexpr>",
+    "calls": 192137,
+    "self_seconds": 0.037299546,
+    "cumulative_seconds": 1.507612672
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 33,
+    "function": "<genexpr>",
+    "calls": 1710637,
+    "self_seconds": 0.33994100800000004,
+    "cumulative_seconds": 0.8131593760000001
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 30,
+    "function": "descriptor",
+    "calls": 719,
+    "self_seconds": 0.0009366190000000001,
+    "cumulative_seconds": 0.6083855970000001
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 55,
+    "function": "inspect",
+    "calls": 4892,
+    "self_seconds": 0.017415849,
+    "cumulative_seconds": 0.21211780800000002
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 23,
+    "function": "ordinary_read",
+    "calls": 145,
+    "self_seconds": 0.002749989,
+    "cumulative_seconds": 0.19808212600000003
+  },
+  {
+    "file": "scripts/physical_gap_crosswalk.py",
+    "line": 1,
+    "function": "<module>",
+    "calls": 1,
+    "self_seconds": 8.542e-06,
+    "cumulative_seconds": 0.109531417
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 124,
+    "function": "<genexpr>",
+    "calls": 190796,
+    "self_seconds": 0.035148554000000005,
+    "cumulative_seconds": 0.046179138
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 25,
+    "function": "<lambda>",
+    "calls": 96963,
+    "self_seconds": 0.028671831000000002,
+    "cumulative_seconds": 0.028671831000000002
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 27,
+    "function": "<genexpr>",
+    "calls": 96964,
+    "self_seconds": 0.014516575,
+    "cumulative_seconds": 0.018953978
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 118,
+    "function": "<genexpr>",
+    "calls": 192132,
+    "self_seconds": 0.016359609,
+    "cumulative_seconds": 0.016359609
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 119,
+    "function": "<genexpr>",
+    "calls": 192137,
+    "self_seconds": 0.016173626,
+    "cumulative_seconds": 0.016173626
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 1,
+    "function": "<module>",
+    "calls": 1,
+    "self_seconds": 1.2958e-05,
+    "cumulative_seconds": 0.015827458000000003
+  },
+  {
+    "file": "scripts/physical_component_contacts.py",
+    "line": 28,
+    "function": "<genexpr>",
+    "calls": 192137,
+    "self_seconds": 0.015039640000000002,
+    "cumulative_seconds": 0.015039640000000002
+  },
+  {
+    "file": "scripts/physical_component_contacts.py",
+    "line": 16,
+    "function": "<lambda>",
+    "calls": 96963,
+    "self_seconds": 0.009316782000000001,
+    "cumulative_seconds": 0.009316782000000001
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 122,
+    "function": "<genexpr>",
+    "calls": 95174,
+    "self_seconds": 0.008148637,
+    "cumulative_seconds": 0.008148637
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 20,
+    "function": "safe_path",
+    "calls": 1362,
+    "self_seconds": 0.0027907020000000004,
+    "cumulative_seconds": 0.0059428120000000004
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 43,
+    "function": "root",
+    "calls": 100557,
+    "self_seconds": 0.005585667000000001,
+    "cumulative_seconds": 0.005585667000000001
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 137,
+    "function": "<lambda>",
+    "calls": 4889,
+    "self_seconds": 0.005547634,
+    "cumulative_seconds": 0.005547634
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 136,
+    "function": "<lambda>",
+    "calls": 95174,
+    "self_seconds": 0.005251754,
+    "cumulative_seconds": 0.005251754
+  },
+  {
+    "file": "scripts/physical_component_contacts.py",
+    "line": 14,
+    "function": "<lambda>",
+    "calls": 95174,
+    "self_seconds": 0.0050600440000000005,
+    "cumulative_seconds": 0.0050600440000000005
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 28,
+    "function": "<genexpr>",
+    "calls": 976,
+    "self_seconds": 0.000195266,
+    "cumulative_seconds": 0.004337281
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 49,
+    "function": "join",
+    "calls": 1797,
+    "self_seconds": 0.001211904,
+    "cumulative_seconds": 0.0023771870000000002
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 21,
+    "function": "<genexpr>",
+    "calls": 8546,
+    "self_seconds": 0.0010162040000000002,
+    "cumulative_seconds": 0.0010162040000000002
+  },
+  {
+    "file": "scripts/physical_gap_audit.py",
+    "line": 1,
+    "function": "<module>",
+    "calls": 1,
+    "self_seconds": 7.083000000000001e-06,
+    "cumulative_seconds": 0.0005821250000000001
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 85,
+    "function": "admit",
+    "calls": 106,
+    "self_seconds": 0.000305211,
+    "cumulative_seconds": 0.000497585
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 1,
+    "function": "<module>",
+    "calls": 1,
+    "self_seconds": 1.1626e-05,
+    "cumulative_seconds": 0.00015866600000000002
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 93,
+    "function": "<genexpr>",
+    "calls": 142,
+    "self_seconds": 2.0081e-05,
+    "cumulative_seconds": 3.5999000000000005e-05
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 134,
+    "function": "<genexpr>",
+    "calls": 150,
+    "self_seconds": 2.2612000000000003e-05,
+    "cumulative_seconds": 3.0111e-05
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 135,
+    "function": "<genexpr>",
+    "calls": 58,
+    "self_seconds": 6.992e-06,
+    "cumulative_seconds": 6.992e-06
+  },
+  {
+    "file": "scripts/geographic_components.py",
+    "line": 1,
+    "function": "<module>",
+    "calls": 1,
+    "self_seconds": 2.5410000000000003e-06,
+    "cumulative_seconds": 5.458e-06
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 45,
+    "function": "Baseline",
+    "calls": 1,
+    "self_seconds": 1.667e-06,
+    "cumulative_seconds": 1.667e-06
+  },
+  {
+    "file": "scripts/physical_component_contacts.py",
+    "line": 1,
+    "function": "<module>",
+    "calls": 1,
+    "self_seconds": 1.1660000000000001e-06,
+    "cumulative_seconds": 1.1660000000000001e-06
+  },
+  {
+    "file": "scripts/physical_component_custody.py",
+    "line": 57,
+    "function": "<genexpr>",
+    "calls": 4,
+    "self_seconds": 7.5e-07,
+    "cumulative_seconds": 7.5e-07
+  },
+  {
+    "file": "scripts/evidence/immutable.py",
+    "line": 239,
+    "function": "NewVintage",
+    "calls": 1,
+    "self_seconds": 7.08e-07,
+    "cumulative_seconds": 7.08e-07
+  },
+  {
+    "file": "scripts/physical_gap_audit.py",
+    "line": 160,
+    "function": "Detector",
+    "calls": 1,
+    "self_seconds": 6.25e-07,
+    "cumulative_seconds": 6.25e-07
+  }
+]
