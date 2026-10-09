@@ -1,0 +1,53 @@
+{
+  "attempt": "verified-20261008-r2",
+  "completion_receipt_written": false,
+  "error": "ValueError: prior result ledger no longer covers both complete retained report vintages",
+  "executed_code": {
+    "data/regional-review/croatia-batch4-run-provenance-1226-erratum/controls.py": {
+      "archived_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/source/controls-failed-r2.py",
+      "bytes": 24378,
+      "commit": "42dcbcd2f5e9ee27aac49588df7267d73c4f2253",
+      "git_blob": "69ef6799079670a57613da8085a25053db0938f9",
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/controls.py",
+      "sha256": "1e17728ec2599af0514c63734079b747038fd924f6c0607b74f86ff47d2a0da6"
+    },
+    "data/regional-review/croatia-batch4-run-provenance-1226-erratum/reproduce.py": {
+      "archived_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/source/runner-failed-controls-r2.py",
+      "bytes": 27953,
+      "commit": "42dcbcd2f5e9ee27aac49588df7267d73c4f2253",
+      "git_blob": "1947693a966d54a5a5a705c5d4d894b7e5b9d3d1",
+      "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/reproduce.py",
+      "sha256": "f788e768b6fe49a3da533ee8c54e9390c7646ef5948f46fd43779c789464bb77"
+    }
+  },
+  "issue": 1396,
+  "observed_at": "2026-10-08T23:51:00Z",
+  "outcome": "incomplete-controls-attempt",
+  "preservation": "Both actual report runs, their complete run-records, and the exact executing runner/control sources are retained. No path was overwritten; the corrected controls pass will use a fresh run ID.",
+  "reason": "The controls reader incorrectly expected 464 source ledger rows; the retained metric ledger has 232 unique metric rows, while four separate rendered-table inventories cover 464 lines. The validator needs to replicate each authenticated metric onto the five preserved/fresh report vintages and validate the matching template per vintage.",
+  "report_runs": [
+    {
+      "record_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r2/run-1/run-record.json",
+      "record_sha256": "db037729a0a07e36efaa835bf53452e39cf7a04dffed8664f80978c3c5372edb",
+      "report_outputs": {
+        "assessment-summary.json": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467",
+        "province-completeness.csv": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37",
+        "scoped-location-assessments.csv": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+      },
+      "run_id": "verified-20261008-r2/run-1",
+      "runner_commit": "42dcbcd2f5e9ee27aac49588df7267d73c4f2253"
+    },
+    {
+      "record_path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/runs/verified-20261008-r2/run-2/run-record.json",
+      "record_sha256": "db037729a0a07e36efaa835bf53452e39cf7a04dffed8664f80978c3c5372edb",
+      "report_outputs": {
+        "assessment-summary.json": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467",
+        "province-completeness.csv": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37",
+        "scoped-location-assessments.csv": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+      },
+      "run_id": "verified-20261008-r2/run-2",
+      "runner_commit": "42dcbcd2f5e9ee27aac49588df7267d73c4f2253"
+    }
+  ],
+  "version": 1
+}
