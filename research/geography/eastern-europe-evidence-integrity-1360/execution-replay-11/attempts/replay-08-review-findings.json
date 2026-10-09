@@ -1,0 +1,8 @@
+{
+  "correction": "Replay-09 invokes build_manifest.py through the already bound safe_workflow.py wrapper. It captures the builder hash before and after a successful first build, stores the invocation receipt, preserves the intermediate manifest, then regenerates the final manifest and verifies that the final blob matches the receipt.",
+  "finding": "The newly authored root build_manifest.py was present as an output descriptor, but no invocation receipt bound the bytes actually executed. Reviewer required executed-code inventory under current PREMERGE_EVIDENCE_REVIEW.md.",
+  "prior_head": "d8782b7b31d4d1c41eb3a8fc41a9548c4954020b",
+  "prior_manifest_sha256": "3d95fecf24718bb6552ca3af03e5d1a5d9312fa9573ff2355c441ee5a98987a4",
+  "replacement_workspace": "execution-replay-09",
+  "review_receipt_posted": false
+}
