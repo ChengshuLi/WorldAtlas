@@ -1,0 +1,37 @@
+{
+  "issue": 1629,
+  "updated_at": "2026-10-09T21:26:34Z",
+  "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1629",
+  "correction_kind": "machine evidence pin binding only",
+  "original_body_sha256": "889b5d9418909dfca11d2b68d4c20be41046a3a9244eb85a371935b3f02d6a66",
+  "corrected_body_sha256": "33d933de6d8fbcbcdf6148bd2d73400ae40e902637ba7ec17e0e6a95fa5d33a7",
+  "original_pin_keys": {
+    "baseline_administrative_metadata": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "baseline_administrative_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+    "accepted_arctic_fit_rule": "27c1155b5c917e90324886d0a4d75a9b567de5e4f1bd370e21e5eebf08d003f6",
+    "candidate_refresh_contract": "a34ab3987cb024e01f941eadbba2705ef67e8837aa3ba5d414408fb7f387d20b",
+    "cog_simplified_product": "b44d1fdcc6f61f0d0b2a4b3402f49dfd317ea9cdddd0a854bd20cae0996291ae",
+    "caf_simplified_product": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+    "ago_simplified_neighbor_product": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+    "tcd_simplified_neighbor_product": "b8178a45b9a2060889181f75d2754395bba9d165ff06a9fac33c9f3ca45f7e99"
+  },
+  "corrected_pin_keys": {
+    "baseline_administrative_metadata": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "baseline_administrative_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+    "accepted_arctic_fit_rule": "27c1155b5c917e90324886d0a4d75a9b567de5e4f1bd370e21e5eebf08d003f6",
+    "candidate_refresh_contract": "a34ab3987cb024e01f941eadbba2705ef67e8837aa3ba5d414408fb7f387d20b"
+  },
+  "removed_from_baseline_pins": [
+    "cog_simplified_product",
+    "caf_simplified_product",
+    "ago_simplified_neighbor_product",
+    "tcd_simplified_neighbor_product"
+  ],
+  "preserved_in_retained_sources": {
+    "gb:COG:ADM2": "b44d1fdcc6f61f0d0b2a4b3402f49dfd317ea9cdddd0a854bd20cae0996291ae",
+    "gb:CAF:ADM3": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+    "gb:AGO:ADM2": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+    "gb:TCD:ADM2": "b8178a45b9a2060889181f75d2754395bba9d165ff06a9fac33c9f3ca45f7e99"
+  },
+  "scope_and_scientific_results_changed": false
+}

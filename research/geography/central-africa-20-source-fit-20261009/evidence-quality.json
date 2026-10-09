@@ -1,0 +1,1248 @@
+{
+  "version": 1,
+  "issue": 1629,
+  "lane": "geography",
+  "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612",
+  "subject_ids": [
+    "physical-component:03f6ccdfef23d7f3e030650e71c57224ff986471f131563b9020b6b325674785",
+    "physical-component:0481dc6542faa251f7c384985ec16385c65add1df7c7483b737ffcfb2b7a018e",
+    "physical-component:0c92016fa076f98dd3388d031bd0f83930fdd010dda2ccdd74f04b2c12136860",
+    "physical-component:2a0b79b740f40fc2ed7e0b52484e5cf874bc0920bae00aa01f7d820bc9d2a8be",
+    "physical-component:3186670e0b3c07cf1ebb6287c12be4100b29b021ad114b5a44f1c34b546fe3d4",
+    "physical-component:374a9667e997a8a54961870ed7b765bbfff64320addb3828b98e9a8eb37ec3f5",
+    "physical-component:3b1849f97706c81011a21e9c8ba8ba37523a9f92ea66da1a1deeb13198f51cc3",
+    "physical-component:5599b02467743a3a1785272bee642039c01531ce97ca51d9300ababd37a80a08",
+    "physical-component:77a908bd776974f3f2db1ac74ef2cd3a661803e046b6452d6587a49754f0ee50",
+    "physical-component:8f72e31d2921dd094f271cff3e9b37093fcaeb002651d941a9ffcd9ce15e4b4e",
+    "physical-component:9c7a657a3a9b5aa3edef2d1826108bae5f37bc800849226a3f342981b65831df",
+    "physical-component:9fc3ecddc0387b5cb816542b1664b747639d6e1ccae217bea73e17108e0876cd",
+    "physical-component:a3fb71ee49fa32d2dd3b19d640b456c80e914211587c382a04e10941420246f2",
+    "physical-component:a5dfa7fb5f2266a9fba3a34106ba57d6c8410f917b8975c60022b0ff348a8a9e",
+    "physical-component:ab2e9995f89c6ab263f586b833c8837b8cd354697336131f95d95f41be341f53",
+    "physical-component:afd09f0c5c3661734969cb4ba60aeae1238e9a3b032c4575250296bf68cb0253",
+    "physical-component:d0cef00e196c2e9d07ea72d885832473a568b6e655ac9155a29846ae8dfb7c97",
+    "physical-component:dd7afea067487d39e9fdcee006e1f7849d7f01729d9ecd8c71f1fb572718cea2",
+    "physical-component:e868c1bab3c756b332c31657004f6000a61615329fad661d582f03b0226f5075",
+    "physical-component:eb90996750fe4e3aa4113edcef86d316cfbfdad41fd84d0481efa74fa39b6861"
+  ],
+  "subject_ids_sha256": "ba833bb4fca5708c5040120f88ec5cd0fe6e2578350b91c44e3b86e4459739d1",
+  "baseline": {
+    "version": 2,
+    "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+    "files": [
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "bytes": 301503,
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/README.md",
+        "bytes": 8410,
+        "sha256": "a34ab3987cb024e01f941eadbba2705ef67e8837aa3ba5d414408fb7f387d20b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-physical-sources-20261006/catalogue.json",
+        "bytes": 1355,
+        "sha256": "4217ccadad0060ac4b1f150f94bba93af4204c567242cb30c324351cffb1c48a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-005.json.gz",
+        "bytes": 1584534,
+        "sha256": "9dad08bf51b832b1c8e1868f3571d58ec52633cf7e9b43016f681aad398f20d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-006.json.gz",
+        "bytes": 1571720,
+        "sha256": "4ac0e4489cae9461599d8f02128771b010f6edb987573191bcac79998e7ab1eb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-a-20261006/global-source-comparisons-a-000-20261006/scientific/components-007.json.gz",
+        "bytes": 1566061,
+        "sha256": "89b1bdf8472d92dbad5dd65ba0d00dcbf76f808af844b7e9b78cb5fc318f22d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-008.json.gz",
+        "bytes": 384474,
+        "sha256": "f00178fdb4edeeb8e4b839f09c9db8ba8673967041b4bde423aa41d11dd51882",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-027.json.gz",
+        "bytes": 285180,
+        "sha256": "df655a07aa1e9f72b9cdcabbbfeb419ad6a00bf6e03d7efc746c9b05a1d35df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-029.json.gz",
+        "bytes": 297245,
+        "sha256": "e392b100bf715f113862e1c939c522a4b583089f06c79a6dc6bcee252ac41b45",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-030.json.gz",
+        "bytes": 289207,
+        "sha256": "06b16ae88b18484dbea5b2ad0216811414563e81d151a22100a7216db6397726",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-031.json.gz",
+        "bytes": 286973,
+        "sha256": "1792a50e557617c09befa32995cf7d9419fd604145a02a56ac5297a893b712d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-005.json.gz",
+        "bytes": 1694175,
+        "sha256": "60ea1c7fe9146aad7bfbd8afe92d5120f02d108d17b34a4040ce5e7aea996f44",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-006.json.gz",
+        "bytes": 1563330,
+        "sha256": "bc97119b9f928947410f71dca0e4f228862a8e096b68948df08a271178551a38",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-007.json.gz",
+        "bytes": 1564997,
+        "sha256": "8c4ce8a49c96ea14bbe1e089e6cb819ff3f0093fb4947d7f7fec8f3efd588741",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-008.json.gz",
+        "bytes": 1557326,
+        "sha256": "ebfb4bb047ec2203e49136b4de55a6a222112a52a6c85b32a565d8c7472cfaa0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-009.json.gz",
+        "bytes": 1503204,
+        "sha256": "f41027713434934502934d0b5b91c9eea18f605e818bbce26f30737f7f8737a3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/downstream-reader.json",
+        "bytes": 548,
+        "sha256": "39a571ab73464d46cc2029b430e7db0bfccca82fed3a74d652765fbe5317f731",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/members.json",
+        "bytes": 5175,
+        "sha256": "e100d81787bfc7f76ea1c077655a0da8c038ec245d51945ee4a7faa1d77fb19d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+        "bytes": 22743455,
+        "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+        "bytes": 23286998,
+        "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+        "bytes": 19571844,
+        "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 28700472,
+        "uncompressed_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-000.jsonl.gz",
+        "bytes": 1888476,
+        "sha256": "888e0fbe4ff2c466a96e9bdf089cc9a796e807de5dd4782ad58e0c3ebdb4ab50",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388394,
+        "uncompressed_sha256": "2270f64f3ed5b693df2466006902a58467f026d7260e55e8082058349facfe1b"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-001.jsonl.gz",
+        "bytes": 1829227,
+        "sha256": "d6b70d352cbe2e8344e2fc8f97a92acf02fb23d042b26b85633dbccfa0cb0376",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388286,
+        "uncompressed_sha256": "db5bae3eb62575f652428e9e558f422a041d7c9cf5609fb0a08dbda37932524a"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-002.jsonl.gz",
+        "bytes": 1809983,
+        "sha256": "8cba5bd46b5ce61e2e82fe25b635b3089872dae07b713bd87d6a7a320b749534",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388030,
+        "uncompressed_sha256": "5e95cd9db9cd7b42e2257ad33a333b7b7b627e6af41e893c6879377686b15e36"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-003.jsonl.gz",
+        "bytes": 1795948,
+        "sha256": "73bb0b314a4c9e8571727c74bb41a8bd351025ce46b61d1c943d60a8bf5c4965",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388541,
+        "uncompressed_sha256": "269ca49eac003fb303cac6a3b51a2cba378a91689f959ad8c30775315a12e792"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-004.jsonl.gz",
+        "bytes": 1785624,
+        "sha256": "0c356b6fff12db48ea8b45b8e9f121ddc98dbf16106ab70e931e0b75ea81e853",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387974,
+        "uncompressed_sha256": "388d41d2d3baf5a8b1c3057b72839f0360996b81bd1c292798bbac01db65ff8a"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-005.jsonl.gz",
+        "bytes": 1779621,
+        "sha256": "cb1ccdabc997dac000c32efb862d22d8334b2539ee9e7db5ec4c3cc76cecd230",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388290,
+        "uncompressed_sha256": "ac62acebef58709421133e8d95df93cad588235beef56ec4e6180bcd1e0f01aa"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-006.jsonl.gz",
+        "bytes": 1774058,
+        "sha256": "5781519b8370c516861b23f85b0a960fd2d18c80c130c827776ef5f697de4b8d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388592,
+        "uncompressed_sha256": "0627feb1f559e26366461d778d21891d33c7c9f4965f11be77f5516760a3fc2a"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-007.jsonl.gz",
+        "bytes": 1771943,
+        "sha256": "946e48b915c444d16dabde3af73dff97f2575c4021f8b5eb0ebcb3b712df2096",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388410,
+        "uncompressed_sha256": "915370a2cc24ef70e6a933a6f326be86be74a42875c6e0f368f060b62d02b3fe"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-008.jsonl.gz",
+        "bytes": 1765747,
+        "sha256": "c4630ab00633afa9291ccfd3ab0ef68e382826d0fdd0eb30f972d67bb2559d72",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388250,
+        "uncompressed_sha256": "6fe5ebe9b1709a60923596a10e3d45d181a8d30d7634f3f93e8b3744f0b8c141"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-009.jsonl.gz",
+        "bytes": 1759063,
+        "sha256": "9bc1a94804c7d0067f8a9ed0428860132733a9c3fb5ea0ab34e9e21e6d80a2ac",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388037,
+        "uncompressed_sha256": "d4846456d82550d9669a482cf71afea8bcade13f54f999b773699d0d30bb8eaa"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-010.jsonl.gz",
+        "bytes": 1758025,
+        "sha256": "ca99fa62b6e7f5770c93714aa6b2de19cb83f4b59699caf8feffb22d72e05ba8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388442,
+        "uncompressed_sha256": "c2554d4e70e0523d3374abf5e3b11f6312370bfc64e4d3b7bb1c819239057aeb"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-011.jsonl.gz",
+        "bytes": 1755032,
+        "sha256": "cdd97954c8f32b59ad27b4ca2e737c08697b9ea37f8b38a4c5199eaf57f4b54d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388503,
+        "uncompressed_sha256": "bc5929e27a8d53c46faf9c324c8c7bd55ffc131a5ef5f9afd1a63e0ffb4efb50"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-012.jsonl.gz",
+        "bytes": 1754652,
+        "sha256": "9aa948137f288aa3db164994095600daf7f25d8adbaa021b1bdc4546e31dbeab",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388297,
+        "uncompressed_sha256": "3ae2fd4e19124cfef24c212dcf193cb1e67f899bffbcae9f369297cfa1532757"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-013.jsonl.gz",
+        "bytes": 1750101,
+        "sha256": "8053624a0f727734a774ca90b38af0086acc4d0904941afc4788e6a6a042114a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387960,
+        "uncompressed_sha256": "afd70bb43c7df4c7ff8e4bdb3666ed972df10573a4acdd6487bf40739ac0ef25"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-014.jsonl.gz",
+        "bytes": 1733038,
+        "sha256": "027932b27dbef840d53adb4d1aef12a48208dc14ef7a5e2acaa66609b2469f92",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388274,
+        "uncompressed_sha256": "fd8e0557edcb2152fa9eaa7c7f4844048ef69eb1fab7a12180d081a7720cf9d5"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-015.jsonl.gz",
+        "bytes": 1815151,
+        "sha256": "7540ae55f4710f9a64e016d9295e25620303c3c78ff952f7595ccf599b2ffebf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388294,
+        "uncompressed_sha256": "1dcd1257084bb0bf255ab9b3b35af43bc1cdf4cf1177d7447391770bac1724c8"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/records-016.jsonl.gz",
+        "bytes": 23058,
+        "sha256": "d0353a528dc526957a1c436614387f73b9e5bca9206e0253c84884c5b4864b7f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 102954,
+        "uncompressed_sha256": "0212403db84a02274a19c5e43cd2dc70fde10d9fde8d810f67a4c818235592bb"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+        "bytes": 492083,
+        "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "bytes": 2085110,
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "research/geography/arctic-seven-source-fit-20261008/README.md",
+        "bytes": 13575,
+        "sha256": "27c1155b5c917e90324886d0a4d75a9b567de5e4f1bd370e21e5eebf08d003f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "scripts/administrative.py",
+        "bytes": 12313,
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "baseline_administrative_metadata": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "baseline_administrative_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+      "accepted_arctic_fit_rule": "27c1155b5c917e90324886d0a4d75a9b567de5e4f1bd370e21e5eebf08d003f6",
+      "candidate_refresh_contract": "a34ab3987cb024e01f941eadbba2705ef67e8837aa3ba5d414408fb7f387d20b"
+    },
+    "pin_files": {
+      "baseline_administrative_metadata": "data/administrative-sources.json",
+      "baseline_administrative_recipe": "scripts/administrative.py",
+      "accepted_arctic_fit_rule": "research/geography/arctic-seven-source-fit-20261008/README.md",
+      "candidate_refresh_contract": "coordination/engineering/global-gap-candidate-refresh-20261009/README.md"
+    },
+    "subject_files": {
+      "physical-component:03f6ccdfef23d7f3e030650e71c57224ff986471f131563b9020b6b325674785": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin"
+      },
+      "physical-component:0481dc6542faa251f7c384985ec16385c65add1df7c7483b737ffcfb2b7a018e": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin"
+      },
+      "physical-component:0c92016fa076f98dd3388d031bd0f83930fdd010dda2ccdd74f04b2c12136860": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin"
+      },
+      "physical-component:2a0b79b740f40fc2ed7e0b52484e5cf874bc0920bae00aa01f7d820bc9d2a8be": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin"
+      },
+      "physical-component:3186670e0b3c07cf1ebb6287c12be4100b29b021ad114b5a44f1c34b546fe3d4": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin"
+      },
+      "physical-component:374a9667e997a8a54961870ed7b765bbfff64320addb3828b98e9a8eb37ec3f5": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin"
+      },
+      "physical-component:3b1849f97706c81011a21e9c8ba8ba37523a9f92ea66da1a1deeb13198f51cc3": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin"
+      },
+      "physical-component:5599b02467743a3a1785272bee642039c01531ce97ca51d9300ababd37a80a08": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin"
+      },
+      "physical-component:77a908bd776974f3f2db1ac74ef2cd3a661803e046b6452d6587a49754f0ee50": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin"
+      },
+      "physical-component:8f72e31d2921dd094f271cff3e9b37093fcaeb002651d941a9ffcd9ce15e4b4e": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin"
+      },
+      "physical-component:9c7a657a3a9b5aa3edef2d1826108bae5f37bc800849226a3f342981b65831df": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin"
+      },
+      "physical-component:9fc3ecddc0387b5cb816542b1664b747639d6e1ccae217bea73e17108e0876cd": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin"
+      },
+      "physical-component:a3fb71ee49fa32d2dd3b19d640b456c80e914211587c382a04e10941420246f2": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin"
+      },
+      "physical-component:a5dfa7fb5f2266a9fba3a34106ba57d6c8410f917b8975c60022b0ff348a8a9e": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin"
+      },
+      "physical-component:ab2e9995f89c6ab263f586b833c8837b8cd354697336131f95d95f41be341f53": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin"
+      },
+      "physical-component:afd09f0c5c3661734969cb4ba60aeae1238e9a3b032c4575250296bf68cb0253": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin"
+      },
+      "physical-component:d0cef00e196c2e9d07ea72d885832473a568b6e655ac9155a29846ae8dfb7c97": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin"
+      },
+      "physical-component:dd7afea067487d39e9fdcee006e1f7849d7f01729d9ecd8c71f1fb572718cea2": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin"
+      },
+      "physical-component:e868c1bab3c756b332c31657004f6000a61615329fad661d582f03b0226f5075": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin"
+      },
+      "physical-component:eb90996750fe4e3aa4113edcef86d316cfbfdad41fd84d0481efa74fa39b6861": {
+        "commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:AGO:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2_simplified.geojson",
+      "role": "Exact baseline-consumed simplified administrative reference product; source-relative fit only",
+      "vintage": "geoBoundaries commit 9469f09; represented year 2018",
+      "retrieved_at": "Whole bytes reauthenticated and captured 2026-10-09; first retrieval time unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-AGO-ADM2_simplified.geojson",
+          "bytes": 813152,
+          "sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "publication": {
+        "encoding": "plain UTF-8 GeoJSON; identity byte decoding",
+        "published_product_bytes": 813152,
+        "published_product_sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+        "decoded_product_bytes": 813152,
+        "decoded_product_sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+        "retained_candidate_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-AGO-ADM2_simplified.geojson"
+      },
+      "limit": "Product authenticity and coverage do not establish legal/current authority, historical truth or physical land/water status."
+    },
+    {
+      "id": "gb:TCD:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TCD/ADM2/geoBoundaries-TCD-ADM2_simplified.geojson",
+      "role": "Exact baseline-consumed simplified administrative reference product; source-relative fit only",
+      "vintage": "geoBoundaries commit 9469f09; represented year 2019",
+      "retrieved_at": "Whole bytes reauthenticated and captured 2026-10-09; first retrieval time unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-TCD-ADM2_simplified.geojson",
+          "bytes": 173765,
+          "sha256": "b8178a45b9a2060889181f75d2754395bba9d165ff06a9fac33c9f3ca45f7e99",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "publication": {
+        "encoding": "plain UTF-8 GeoJSON; identity byte decoding",
+        "published_product_bytes": 173765,
+        "published_product_sha256": "b8178a45b9a2060889181f75d2754395bba9d165ff06a9fac33c9f3ca45f7e99",
+        "decoded_product_bytes": 173765,
+        "decoded_product_sha256": "b8178a45b9a2060889181f75d2754395bba9d165ff06a9fac33c9f3ca45f7e99",
+        "retained_candidate_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-TCD-ADM2_simplified.geojson"
+      },
+      "limit": "Product authenticity and coverage do not establish legal/current authority, historical truth or physical land/water status."
+    },
+    {
+      "id": "gb:COG:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM2/geoBoundaries-COG-ADM2_simplified.geojson",
+      "role": "Exact baseline-consumed simplified administrative reference product; source-relative fit only",
+      "vintage": "geoBoundaries commit 9469f09; represented year 2007",
+      "retrieved_at": "Whole bytes reauthenticated and captured 2026-10-09; first retrieval time unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain"
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-COG-ADM2_simplified.geojson",
+          "bytes": 336602,
+          "sha256": "b44d1fdcc6f61f0d0b2a4b3402f49dfd317ea9cdddd0a854bd20cae0996291ae",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "publication": {
+        "encoding": "plain UTF-8 GeoJSON; identity byte decoding",
+        "published_product_bytes": 336602,
+        "published_product_sha256": "b44d1fdcc6f61f0d0b2a4b3402f49dfd317ea9cdddd0a854bd20cae0996291ae",
+        "decoded_product_bytes": 336602,
+        "decoded_product_sha256": "b44d1fdcc6f61f0d0b2a4b3402f49dfd317ea9cdddd0a854bd20cae0996291ae",
+        "retained_candidate_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-COG-ADM2_simplified.geojson"
+      },
+      "limit": "Product authenticity and coverage do not establish legal/current authority, historical truth or physical land/water status."
+    },
+    {
+      "id": "gb:CAF:ADM3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM3/geoBoundaries-CAF-ADM3_simplified.geojson",
+      "role": "Exact baseline-consumed simplified administrative reference product; source-relative fit only",
+      "vintage": "geoBoundaries commit 9469f09; represented year 2018",
+      "retrieved_at": "Whole bytes reauthenticated and captured 2026-10-09; first retrieval time unknown",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-CAF-ADM3_simplified.geojson",
+          "bytes": 807513,
+          "sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "publication": {
+        "encoding": "plain UTF-8 GeoJSON; identity byte decoding",
+        "published_product_bytes": 807513,
+        "published_product_sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+        "decoded_product_bytes": 807513,
+        "decoded_product_sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+        "retained_candidate_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-CAF-ADM3_simplified.geojson"
+      },
+      "limit": "Product authenticity and coverage do not establish legal/current authority, historical truth or physical land/water status."
+    },
+    {
+      "id": "gshhg-native-2.3.7",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "role": "Exact native-byte custody only; selected records are bbox candidates and are not geometric evidence",
+      "vintage": "GSHHG 2.3.7, released 2017-06-15; heterogeneous observation dates",
+      "retrieved_at": "Original immutable Git source capture reauthenticated 2026-10-09; first retrieval time unknown",
+      "license": {
+        "status": "unknown",
+        "terms": "GSHHG redistribution terms were not adjudicated in this bounded assessment."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore original source records through coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json and the pinned native byte parts in baseline.files.",
+      "limit": "The retained custody explicitly records geometry validity as not evaluated; bytes and bounding boxes establish no physical class."
+    },
+    {
+      "id": "atlas-current-reference-map",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/1bba8b0c1772bbdf58310ab9e2dec67a7559d483/data/geography",
+      "role": "Exact current-map target and complete five-country neighbor input records",
+      "vintage": "Repository baseline 1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+      "retrieved_at": "Immutable Git blobs authenticated 2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Mixed source rights remain as recorded in the baseline administrative registry; no new license conclusion."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore the four exact data/geography part blobs listed in baseline.files; packet copies are candidate outputs.",
+      "limit": "Reference map input only; no source authority, legal status or publication approval is implied."
+    },
+    {
+      "id": "retained-physical-gap-component-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/7c7cdf2388e0e7200b937c2cfb440b53165d9d98/coordination/engineering/physical-gap-components-1005-20261005-local19",
+      "role": "Original exact component identities/geometries and prior source-comparison lineage",
+      "vintage": "Immutable component custody commit 7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+      "retrieved_at": "Immutable Git blobs reauthenticated 2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying source rights are heterogeneous; no generalized redistribution statement is made."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore the original component whole-file payloads and comparison files listed in baseline.files.",
+      "limit": "Component and comparison records preserve identities and diagnostics; they do not certify factual land/water status."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/assemble_proposals.py",
+      "bytes": 6908,
+      "sha256": "81c3558fe4c4a629af00fbe6b852bc6b651c35906512a16f05221fd4c4f89f11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/component-custody.json",
+      "bytes": 23941,
+      "sha256": "9e92cdaa266e093783065466dc428d4a03162fb0ded406c588212f5aea40734b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/controls/negative-control.json",
+      "bytes": 788,
+      "sha256": "d4ad818470c94c6b48c7bb163b62c069c6ddace70648f408255faea052b5e57a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/controls/positive-control.json",
+      "bytes": 987,
+      "sha256": "b27775de78a4ea127d2ff8496e3252042771c51bc8e00dad6fe9ecd7e73a3521",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/fit_simplified_sources.py",
+      "bytes": 15745,
+      "sha256": "de160045afe31bd71bf15d7950e27667c17c74828a07f8648809a898cba86c41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/gshhg-custody.json",
+      "bytes": 14517,
+      "sha256": "d00ee2f510e20cbef7eae3182a83f1dc17f140146053ddb543acfef37f829e51",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/components/selected-20-components.json.gz",
+      "bytes": 4393,
+      "sha256": "4dc7d9771e93901786567567448ceb82e549ab4cd1b5273f55ce68e7566d7abd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-0.bin",
+      "bytes": 9448844,
+      "sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-1.bin",
+      "bytes": 2058964,
+      "sha256": "014c5126c1ae164042272eca4c392587e4997db73020bfe679e6c7122f2c0910",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-180523.bin",
+      "bytes": 43684,
+      "sha256": "13010e6756a91c31e80d637a26f961620608e39486b7e7ac3d95a0839360bba7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-187110.bin",
+      "bytes": 47500,
+      "sha256": "e7fc547df6258ea8803b1508aa84f9758dfacca566ce4a8259cac46b78e2e6aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/issue-1629-correction.json",
+      "bytes": 2287,
+      "sha256": "424b1e5aa48bfd3a61169f1092d635469127d8dc141685c3178d311199abf962",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/issue-1629-original-body.md",
+      "bytes": 8735,
+      "sha256": "889b5d9418909dfca11d2b68d4c20be41046a3a9244eb85a371935b3f02d6a66",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/issue-1629-original-snapshot.json",
+      "bytes": 504,
+      "sha256": "f9c16c1c0ae7a2394bdd7cd1ae395b53cc744ac67c5fa005b0d2282dcd8d42d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/source-comparisons/selected-20-source-comparison-rows.json.gz",
+      "bytes": 17034,
+      "sha256": "c648bfe51322ce5d608a0d6e820dc5b52b3239b2a3a0f965bbd50790a80f54e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/pin_gshhg_records.py",
+      "bytes": 7737,
+      "sha256": "1fcf8e8f8cc558970b6274507e0919a46043ba19fa6f2bcd1e7225d3fda25027",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/prepare_evidence.py",
+      "bytes": 17197,
+      "sha256": "739c788789bbfabd6aa6adbcae96045ba4a98deef1ae935587a74c97ab101fc0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/proposals/additive-proposals-manifest.json",
+      "bytes": 2552,
+      "sha256": "39cbd738489590872b786e1b508d65cb9b4c017a29bd4436c686f1db5c386cbd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/proposals/additive-proposals.geojson",
+      "bytes": 22745,
+      "sha256": "811d7aa339a6c05dda03af975e74f2a508343c4e3199d5ed243733580094d1d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/results/per-id-decisions.csv",
+      "bytes": 7057,
+      "sha256": "75f43b18e163be94dcc33ced1837e37df2b129d4dfbb9502e5b44c220447a476",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+      "bytes": 317967,
+      "sha256": "e1c5e2af0c6f6a13b5d20f3059471c3e2fa16a5ae57e2aa8988a66236ecfa398",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/run_controls.py",
+      "bytes": 3230,
+      "sha256": "3e7780e5ec926b0771db2e38d823b9de18fdaddd1c8f35534611ad1a39a12d2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/source-comparison-custody.json",
+      "bytes": 30941,
+      "sha256": "d39b44cb90652ff57fed7ce9bdebc6538ea2d726bda7ddb7bca43c3ad114d58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/source-custody.json",
+      "bytes": 4998,
+      "sha256": "8e05b8b2a390166b86d9c338410750d82cf16e2d855b2b87fdfe192a107d1189",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "simplified-source-fit",
+      "kind": "measurement",
+      "description": "Exact Shapely/GEOS predicates and set operations on the actual baseline-consumed simplified geoBoundaries products and current country feature sets; candidate overlays limited to ten unique land-support IDs. GSHHG selection is a separate integer-bounds byte-custody filter only. No snapping, tolerance, buffering, repair, or normalization.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1",
+      "coordinate_order": "longitude-latitude as stored in source GeoJSON; no coordinate transformation",
+      "overlay_area": "Exact planar GEOS in source coordinates; area is used only for exact zero/nonzero topology predicates, not as physical area",
+      "distance_method": "Not used",
+      "units": "square degrees for exact overlay predicates; integer microdegrees for GSHHG record bbox custody"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "fit-pass-count",
+      "value": 9,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+      "input_sha256": "e1c5e2af0c6f6a13b5d20f3059471c3e2fa16a5ae57e2aa8988a66236ecfa398",
+      "input_file": {
+        "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "fit-refusal-count",
+      "value": 1,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+      "input_sha256": "e1c5e2af0c6f6a13b5d20f3059471c3e2fa16a5ae57e2aa8988a66236ecfa398",
+      "input_file": {
+        "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "unresolved-count",
+      "value": 10,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+      "input_sha256": "e1c5e2af0c6f6a13b5d20f3059471c3e2fa16a5ae57e2aa8988a66236ecfa398",
+      "input_file": {
+        "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+        "commit": "candidate"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "fit-pass-count",
+      "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+      "json_pointer": "/fit_pass_count"
+    },
+    {
+      "metric_id": "fit-refusal-count",
+      "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+      "json_pointer": "/fit_refusal_count"
+    },
+    {
+      "metric_id": "unresolved-count",
+      "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+      "json_pointer": "/unknown_count"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "fit-pass-count",
+      "value": 9,
+      "unit": "components"
+    },
+    {
+      "metric_id": "fit-refusal-count",
+      "value": 1,
+      "unit": "components"
+    },
+    {
+      "metric_id": "unresolved-count",
+      "value": 10,
+      "unit": "components"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "Nine exact COG components pass the narrow source-relative additive fit and exact current-neighbor predicates against the baseline-consumed simplified product; their geometries remain proposals only.",
+      "source_ids": [
+        "gb:COG:ADM2",
+        "atlas-current-reference-map",
+        "retained-physical-gap-component-custody"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Eleven candidates remain unresolved: one unique water-support exception, seven mixed/partial coverage cases, two contact-only cases, and one CAF sliver whose union gain is not exactly the candidate. Physical class, cause, current water/ice, legal authority, and publication status remain unknown.",
+      "source_ids": [
+        "gb:COG:ADM2",
+        "gb:CAF:ADM3",
+        "gb:AGO:ADM2",
+        "gb:TCD:ADM2",
+        "gshhg-native-2.3.7",
+        "atlas-current-reference-map",
+        "retained-physical-gap-component-custody"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "validation": [
+    {
+      "method_id": "simplified-source-fit",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/central-africa-20-source-fit-20261009/controls/positive-control.json"
+    },
+    {
+      "method_id": "simplified-source-fit",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/central-africa-20-source-fit-20261009/controls/negative-control.json"
+    }
+  ],
+  "commands": [
+    "python3 research/geography/central-africa-20-source-fit-20261009/pin_gshhg_records.py",
+    "python3 research/geography/central-africa-20-source-fit-20261009/fit_simplified_sources.py",
+    "python3 research/geography/central-africa-20-source-fit-20261009/run_controls.py",
+    "python3 research/geography/central-africa-20-source-fit-20261009/assemble_proposals.py"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/assemble_proposals.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/component-custody.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/controls/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/controls/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/fit_simplified_sources.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/gshhg-custody.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/components/selected-20-components.json.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-2.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-23.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-29.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/current-map/part-5.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-0.bin",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-1.bin",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-180523.bin",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/gshhg-records/gshhs_f-record-187110.bin",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/issue-1629-correction.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/issue-1629-original-body.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/issue-1629-original-snapshot.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/source-comparisons/selected-20-source-comparison-rows.json.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-AGO-ADM2_simplified.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-CAF-ADM3_simplified.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-COG-ADM2_simplified.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-TCD-ADM2_simplified.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/pin_gshhg_records.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/prepare_evidence.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/proposals/additive-proposals-manifest.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/proposals/additive-proposals.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/results/per-id-decisions.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/results/simplified-source-fit.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/run_controls.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/source-comparison-custody.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/source-custody.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/central-africa-20-source-fit-20261009/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "schema": "worldatlas-central-africa-source-custody-v1",
+  "frozen_git_head": "1bba8b0c1772bbdf58310ab9e2dec67a7559d483",
+  "producer": {
+    "path": "scripts/administrative.py",
+    "bytes": 12313,
+    "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+  },
+  "registry": {
+    "path": "data/administrative-sources.json",
+    "bytes": 661416,
+    "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+  },
+  "products": [
+    {
+      "registry_key": "gb:AGO:ADM2",
+      "capture_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-AGO-ADM2_simplified.geojson",
+      "bytes": 813152,
+      "sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+      "actual_consumed_product_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2_simplified.geojson",
+      "expected_registry_sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+      "boundary_id": "AGO-ADM2-16411231",
+      "boundary_type": "ADM2",
+      "boundary_year_represented": "2018",
+      "boundary_canonical": "Unknown",
+      "boundary_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "boundary_source": "www.gadm.org and Instituto Nacional de Estatística (INE - www.ine.gov.ao) - see methodology, HDX",
+      "boundary_source_url": "data.humdata.org/dataset/cod-ab-ago",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "collection": "gbHumanitarian"
+    },
+    {
+      "registry_key": "gb:TCD:ADM2",
+      "capture_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-TCD-ADM2_simplified.geojson",
+      "bytes": 173765,
+      "sha256": "b8178a45b9a2060889181f75d2754395bba9d165ff06a9fac33c9f3ca45f7e99",
+      "actual_consumed_product_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TCD/ADM2/geoBoundaries-TCD-ADM2_simplified.geojson",
+      "expected_registry_sha256": "b8178a45b9a2060889181f75d2754395bba9d165ff06a9fac33c9f3ca45f7e99",
+      "boundary_id": "TCD-ADM2-50815135",
+      "boundary_type": "ADM2",
+      "boundary_year_represented": "2019",
+      "boundary_canonical": "Departments",
+      "boundary_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "boundary_source": "OCHA Chad, OCHA Chad",
+      "boundary_source_url": "data.humdata.org/dataset/chad-admin-boundaries-admin-1-and-admin-2",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "collection": null
+    },
+    {
+      "registry_key": "gb:COG:ADM2",
+      "capture_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-COG-ADM2_simplified.geojson",
+      "bytes": 336602,
+      "sha256": "b44d1fdcc6f61f0d0b2a4b3402f49dfd317ea9cdddd0a854bd20cae0996291ae",
+      "actual_consumed_product_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM2/geoBoundaries-COG-ADM2_simplified.geojson",
+      "expected_registry_sha256": "b44d1fdcc6f61f0d0b2a4b3402f49dfd317ea9cdddd0a854bd20cae0996291ae",
+      "boundary_id": "COG-ADM2-1427508",
+      "boundary_type": "ADM2",
+      "boundary_year_represented": "2007",
+      "boundary_canonical": "Unknown",
+      "boundary_license": "Public Domain",
+      "boundary_source": "New York University Spatial Data Repository, Stanford University, Map Maker Limited",
+      "boundary_source_url": "geo.nyu.edu/catalog/stanford-hz799nq4536",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "collection": null
+    },
+    {
+      "registry_key": "gb:CAF:ADM3",
+      "capture_path": "research/geography/central-africa-20-source-fit-20261009/inputs/sources/geoBoundaries-CAF-ADM3_simplified.geojson",
+      "bytes": 807513,
+      "sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+      "actual_consumed_product_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM3/geoBoundaries-CAF-ADM3_simplified.geojson",
+      "expected_registry_sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+      "boundary_id": "CAF-ADM3-52401652",
+      "boundary_type": "ADM3",
+      "boundary_year_represented": "2018",
+      "boundary_canonical": "Municipalities",
+      "boundary_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "boundary_source": "Agency for Technical Cooperation and Development (ACTED), OCHA Central African Republic",
+      "boundary_source_url": "data.humdata.org/dataset/central-african-republic-administrative-boundaries",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "collection": null
+    }
+  ],
+  "method": "Pin exact simplifiedGeometryGeoJSON products selected by the baseline recipe; this custody record makes no spatial or land/water claim."
+}
