@@ -1,0 +1,54 @@
+{
+  "baseline_ledger_commit": "43b064f0fb7a6711489d2a075a748aec596491d4",
+  "baseline_candidates": 95173,
+  "kind": "exact-id-selected-release-progress-delta",
+  "selected_merge": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+  "selected_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+  "updates": [
+    {
+      "component_id": "physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a",
+      "batch_id": "gap-operational-batch:596e1d071f5d90be10e3e8ed",
+      "previous_state": "eligible-source-relative-rule",
+      "state": "repaired-verified-selected-release",
+      "assigned_native_pixels": 140,
+      "evidence": {
+        "pr": 1593,
+        "merge": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "changed_output_readback_sha256": "b56184be65346870e528d1286cf2fd0a5a747127dca63b28638f178fb7341a3f"
+      },
+      "remaining_missing_fact": null,
+      "production_delivered": false
+    },
+    {
+      "component_id": "physical-component:17bb5b7f043b0fb2b447b8ccef216e530fed4595da1aec0feb1dea235bed0dbd",
+      "batch_id": "gap-operational-batch:da7e01fd9a715c338247a0ea",
+      "previous_state": "eligible-source-relative-rule",
+      "state": "repaired-verified-selected-release",
+      "assigned_native_pixels": 1,
+      "evidence": {
+        "pr": 1593,
+        "merge": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "changed_output_readback_sha256": "b56184be65346870e528d1286cf2fd0a5a747127dca63b28638f178fb7341a3f"
+      },
+      "remaining_missing_fact": null,
+      "production_delivered": false
+    }
+  ],
+  "projected_disjoint_counts": {
+    "awaiting-evidence": 27279,
+    "evidence-ready": 67872,
+    "eligible-source-relative-rule": 12,
+    "repaired-verified-selected-release": 4,
+    "confirmed-water-or-no-defect": 0,
+    "rejected-or-ambiguous": 6
+  },
+  "repaired_percent": 0.004202872663465479,
+  "fully_repaired_batches": 0,
+  "original_batches": 594,
+  "limits": [
+    "Only the two named source-relative decisions change state; all other original rows and unresolved limits remain intact.",
+    "evidence-ready remains the historical provisional evidence state, not new scientific approval.",
+    "Offline selected release only; no deployment or contemporary physical authority claim.",
+    "Area remains recorded in original accepted source records; native pixel gain is not converted to inferred area."
+  ]
+}
