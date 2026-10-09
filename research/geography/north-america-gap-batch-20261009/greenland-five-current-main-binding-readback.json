@@ -1,7 +1,7 @@
 {
   "kind": "greenland-five-current-main-binding-and-decision-readback",
-  "captured_at": "2026-10-09T22:52:37.367796Z",
-  "current_main_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+  "captured_at": "2026-10-09T23:19:11.850782Z",
+  "current_main_commit": "f0a0c5f1c252e68b3b987cef8625ba9d185c215f",
   "component_ids": [
     "physical-component:0441b8d2c49152a8ad4e5c8a0426eba450eb7298957b46eceadcac5c59c904ad",
     "physical-component:074e4f2fbdd5d53d94cd654c9737406325cfc851b36abb17940b3609187a2cc2",
@@ -255,5 +255,97 @@
     "Catalog funnel rows remain the pinned accepted-funnel evidence; current selected-release delta records only two unrelated component transitions and preserves other baseline states.",
     "Administrative target identity does not prove candidate geometry overlap or physical-source acceptance.",
     "Current v9 native exact-five metrics are unavailable: bounded attempt failed unchanged phase cap and produced no output."
-  ]
+  ],
+  "current_main_comparison": {
+    "compared_from_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+    "current_main_commit": "f0a0c5f1c252e68b3b987cef8625ba9d185c215f",
+    "changed_paths_since_comparison": [
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/README.md",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/assemble.py",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/candidate-geometries.geojson",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/component-outcomes.jsonl",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/current-target-geometries.geojson",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/evidence-quality.json",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/family-outcomes.json",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/finalize_manifest.py",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/native-ready-inputs.jsonl",
+      "research/geography/melanesia-gap-batch-241e2ce0-20261009/source-target-geometries.geojson",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/README.md",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/evidence-quality.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-readback-renewed.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-readback.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-receipt.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-renewal-receipt.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-work-renewal.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/geo3-next-full-batch-318.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/issue-contract-readback.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/live-claim-scope-readback.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/preclaim-readiness-18735.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/provenance/administrative-sources.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/provenance/administrative.py",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-BRN-ADM1.bin",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-IDN-ADM2.bin",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-IND-ADM2.bin",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-MMR-ADM3.bin",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-PHL-ADM3.bin",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-THA-ADM2.bin",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-VNM-ADM2.bin",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/publication.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/component-state.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/publication.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/summary.json"
+    ],
+    "catalog_target_and_selected_v9_inputs_unchanged": true,
+    "relevant_file_pins": [
+      {
+        "path": "data/location-policy.json",
+        "bytes": 69433,
+        "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1361,
+        "sha256": "de6b01f237083f3cad1c7c02686d2f19d2c804bb0774e47bebc1c46f318be4e5"
+      },
+      {
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "bytes": 1810,
+        "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 201,
+        "sha256": "387fae929ec86fd6076ae1e667bf0f1c63ed8aef6b2d19b91c758110412d438e"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+        "bytes": 14656,
+        "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+      }
+    ],
+    "statement": "Main advances since the selected-v9 readback are confined to separate Melanesia and Southeast Asia research batches. The global funnel catalog, Greenland administrative source and selected target, and selected-v9 release inputs are unchanged."
+  },
+  "fresh_live_issue_readback": {
+    "path": "greenland-five-live-issue-readback.json",
+    "captured_at": "2026-10-09T23:17:24.990564Z",
+    "bytes": 7606,
+    "sha256": "a616592fef26ab30cb12106ef1713781dddbe73f6ac1795522d3a1914f96a4e6",
+    "issue_1630_exact_five_ids_now_published": true,
+    "issue_1630_claim_live_work": false,
+    "issue_1394_active_97_subject_roster_published": false,
+    "issue_1394_exact_overlap": "unknown"
+  }
 }
