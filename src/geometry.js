@@ -1,3 +1,4 @@
+import {effectivePrimitiveGeometries} from './effective-footprint.js';
 // Point sampling is only an explicitly labelled estimate, never evidence of whole-location ownership.
 export function pointInGeometry(point, geometry) {
   function ringContains(ring) {
@@ -10,4 +11,9 @@ export function pointInGeometry(point, geometry) {
   }
   const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
   return polygons.some(rings=>ringContains(rings[0]) && !rings.slice(1).some(ringContains));
+}
+
+// An explicit set of primitives preserves the base without a floating union.
+export function pointInFeature(point, feature) {
+  return effectivePrimitiveGeometries(feature).some(geometry => pointInGeometry(point, geometry));
 }

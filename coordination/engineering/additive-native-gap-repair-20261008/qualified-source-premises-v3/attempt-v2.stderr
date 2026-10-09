@@ -1,0 +1,32 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/additive-gap-repair.mjs:19
+function demand(value, message) { if (!value) throw Error(message); }
+                                                    ^
+
+Error: Missing complete original source-rule component
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/additive-gap-repair.mjs:19:53)
+    at sourcePremiseStage (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/additive-gap-repair.mjs:438:3)
+    at inventoryCommand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/additive-gap-repair.mjs:525:12)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/additive-gap-repair.mjs:570:23
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0
+       12.06 real         2.77 user         1.80 sys
+           207896576  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              177474  page reclaims
+                3160  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                2041  messages sent
+                1249  messages received
+                   0  signals received
+                1011  voluntary context switches
+               56881  involuntary context switches
+          7119593033  instructions retired
+          3566988733  cycles elapsed
+           248429952  peak memory footprint

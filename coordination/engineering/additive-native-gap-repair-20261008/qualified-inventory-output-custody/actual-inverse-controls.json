@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "index_sha256": "0a3bc3d9d8be977ba72c9560314b80240f8901ccefa35ec7add34464c565c5ba",
+  "reader_sha256": "1f40f691dbc1f2a258f3dd4d9b62e0abd7a6728aeeadfccd1273ed5cb274d791",
+  "positive": {
+    "jobs": 160,
+    "members": 480,
+    "encoded_member_bytes": 64232236,
+    "complete": true,
+    "scope": "Original inventory output byte restoration only; no scientific or physical approval."
+  },
+  "rejected": [
+    {
+      "name": "omitted_member",
+      "error": "Foreign/duplicate/missing members"
+    },
+    {
+      "name": "duplicate_member",
+      "error": "Foreign/duplicate/missing members"
+    },
+    {
+      "name": "foreign_original_path",
+      "error": "Foreign/duplicate/missing members"
+    },
+    {
+      "name": "changed_execution_commit",
+      "error": "Foreign/duplicate/missing members"
+    },
+    {
+      "name": "whole_phase_over_cap",
+      "error": "Prospective complete phase"
+    },
+    {
+      "name": "changed_original_decoded_charge",
+      "error": "Prospective complete phase"
+    },
+    {
+      "name": "changed_archive_encoded_hash",
+      "error": "Whole encoded hash"
+    },
+    {
+      "name": "coherent_changed_body",
+      "error": "Whole inverse bytes"
+    }
+  ],
+  "limits": "Byte custody controls only; no new scientific execution or physical authority approval."
+}

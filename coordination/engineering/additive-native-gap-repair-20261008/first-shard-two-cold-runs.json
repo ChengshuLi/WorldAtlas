@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "execution_commit": "e598780c34699ad959477739dede0e9ae312f003",
+  "status": "Two actual cold immutable CLI runs PASS for whole original component shard000 only; no GIS/source approval or full-world processing claim",
+  "whole_encoded_and_decoded_outputs_equal": true,
+  "inventory": {
+    "bytes": 209732,
+    "sha256": "b56f2bc493ef5ceb2e3178b1b7bb543086e1deab8698f6b8f67735505f3991c1",
+    "uncompressed_bytes": 1788934,
+    "uncompressed_sha256": "95bcd41843168720e3d7204827637c3e104d36a1b42308668b915898c0e85ec6"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "lifetime_rss_bytes": 260603904,
+      "terminal_exit": 0,
+      "components": 1301,
+      "admission": {
+        "accounted_bytes": 10122952,
+        "accounted_descriptors": 18,
+        "limit_bytes": 268435456,
+        "limit_descriptors": 512,
+        "limits_include_reserve": true,
+        "reserved_review_bytes": 129824160,
+        "reserved_review_descriptors": 16
+      }
+    },
+    {
+      "run": 2,
+      "lifetime_rss_bytes": 267501568,
+      "terminal_exit": 0,
+      "components": 1301,
+      "admission": {
+        "accounted_bytes": 10122952,
+        "accounted_descriptors": 18,
+        "limit_bytes": 268435456,
+        "limit_descriptors": 512,
+        "limits_include_reserve": true,
+        "reserved_review_bytes": 129824160,
+        "reserved_review_descriptors": 16
+      }
+    }
+  ],
+  "limits": [
+    "1301 original candidates retained;8 source-relative water rejected and1293 awaiting evidence.",
+    "Full95173 cold inventory join, mechanical source rule and selected release remain unfinished."
+  ]
+}

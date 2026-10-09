@@ -1,0 +1,31 @@
+{
+  "archive_sha256": "c42ddacace7325343d4c82e523e9c609f0ed6291a59175731decb2ef7d2fb804",
+  "archive_only_full_git_path_inverse_pass": true,
+  "code_bindings": 42,
+  "git_objects": 23,
+  "modules": 5,
+  "all160_execution_bindings_verified": true,
+  "adverses": [
+    {
+      "case": "wrong-commit-path-root",
+      "rejected": true
+    },
+    {
+      "case": "wrong-code-mode",
+      "rejected": true
+    },
+    {
+      "case": "changed-body",
+      "rejected": true
+    },
+    {
+      "case": "missing-module",
+      "rejected": true
+    },
+    {
+      "case": "changed-execution-code-binding",
+      "rejected": true
+    }
+  ],
+  "no_original_producer_execution": true
+}
