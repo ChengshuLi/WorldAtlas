@@ -324,6 +324,16 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
   const criticalPins=[...consumerCode.critical_files,...entryCritical];
   const critical = new Map(criticalPins.map(pin => [pin.path, pin]));
   assert.equal(critical.size, criticalPins.length);
+  // The certificate carries critical source custody for every supported entry.
+  // Authenticate those complete bodies even when this invocation does not
+  // execute another entry's adapter. Only the exact current entry's subset is
+  // labelled as executed below.
+  const sourceCustody=new Map();
+  for(const pin of [...consumerCode.critical_files,...Object.values(consumerCode.entry_critical_files??{}).flat()]){
+    const previous=sourceCustody.get(pin.path);
+    if(previous)assert.deepEqual(previous,pin);else sourceCustody.set(pin.path,pin);
+  }
+  for(const pin of sourceCustody.values())read(pin);
   const wrapperPaths = Object.values(consumerCode.entry_roles[issued.entry_point]).flat();
   assert(wrapperPaths.every(name => typeof name === 'string'));
   assert.equal(new Set(wrapperPaths).size, wrapperPaths.length);
