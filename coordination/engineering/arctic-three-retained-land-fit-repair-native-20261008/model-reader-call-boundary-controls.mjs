@@ -53,6 +53,7 @@ async function builtOutputReadback(report){
  assert.deepEqual(selected.artifact_consumption,stage.artifact_consumption);
  for(const pin of Object.values(stage.artifact_consumption)){const bytes=fs.readFileSync(pin.path);assert.equal(bytes.length,pin.bytes);assert.equal(readbackHash(bytes),pin.sha256);}
  assert.equal(nativeSha,selected.sha256);
+ const beforeRaw=fs.readFileSync(N2+'/qualified-artifacts/prior-v8/input-04.bin');assert.equal(beforeRaw.length,251732);assert.equal(readbackHash(beforeRaw),'a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885');const beforeNative=JSON.parse(beforeRaw);
  const pixel=atlas.pixelMap;assert.equal(pixel.version,2);assert.equal(pixel.size,native.size);assert.equal(pixel.runWords,native.runWords);
  assert.equal(atlas.reference_release.id,'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb');
  assert.equal(atlas.preparedEvidence.footprints_sha256,native.footprints_sha256);assert.equal(atlas.preparedEvidence.hierarchy_sha256,native.hierarchy_sha256);
@@ -61,25 +62,29 @@ async function builtOutputReadback(report){
  const rowRaw=requireEmittedPin(base,rowsPart[0]),rows=unshuffleOwnershipBytes(gunzipSync(rowRaw),rowsPart[0].words);
  assert.equal(readbackHash(Buffer.from(rows.buffer)),rowsPart[0].decoded_sha256);assert.equal(rows.length,native.size*2);
  let completeOffset=0;for(let y=0;y<native.size;y++){assert.equal(rows[y*2],completeOffset);completeOffset+=rows[y*2+1];assert(completeOffset<=native.runWords/2);}assert.equal(completeOffset,native.runWords/2);
- function counts(parts,decodedPins){
+ function counts(parts,decodedPins,qualifiedManifest){
+  const qualified=qualifiedManifest.parts.filter(p=>p.kind==='runs').sort((a,b)=>a.offset-b.offset),joins=[];let sourceNext=0;
   const out=new Float64Array(49626),streamHash=createHash('sha256');let wordOffset=0,row=0,rowEnd=rows[1],previous=0;
   for(const part of parts){
    assert.equal(part.offset,wordOffset);const words=unshuffleOwnershipBytes(gunzipSync(requireEmittedPin(base,part)),part.words);
    streamHash.update(Buffer.from(words.buffer));if(decodedPins)assert.equal(readbackHash(Buffer.from(words.buffer)),part.decoded_sha256);
-   assert.equal(words.length%2,0);
+   let joined=0;while(sourceNext<qualified.length&&qualified[sourceNext].offset<wordOffset+words.length){
+    const original=qualified[sourceNext++];assert.equal(original.offset,wordOffset+joined);assert(original.offset+original.words<=wordOffset+words.length,'Source part crosses startup boundary');
+    const actual=readbackHash(Buffer.from(words.buffer,joined*4,original.words*4));assert.equal(actual,original.decoded_sha256,'Emitted word stream differs from qualified native output');joins.push({offset:original.offset,words:original.words,decoded_sha256:actual});joined+=original.words;
+   }assert.equal(joined,words.length);assert.equal(words.length%2,0);
    for(let i=0;i<words.length;i+=2){const run=(wordOffset+i)/2;
     while(run===rowEnd&&row<native.size-1){row++;assert.equal(rows[row*2],run);rowEnd=run+rows[row*2+1];previous=0;}
     assert(run<rowEnd,'Unreferenced ownership run');const a=words[i],b=words[i+1],start=a&524287,end=(b&524287)+1,id=(a>>>19)+(b>>>19)*8192;
     assert(id>0&&id<out.length&&start>=previous&&end>start&&end<=native.size,'Invalid ownership interval');out[id]+=end-start;previous=end;
    }wordOffset+=words.length;
   }
-  assert.equal(wordOffset,native.runWords);assert.equal(rowEnd,native.runWords/2);return {counts:out,word_stream_sha256:streamHash.digest('hex')};
+  assert.equal(wordOffset,native.runWords);assert.equal(rowEnd,native.runWords/2);assert.equal(sourceNext,qualified.length);return {counts:out,word_stream_sha256:streamHash.digest('hex'),qualified_native_blocks:joins};
  }
  const oldParts=originalStartupPins.map(pin=>({...pin,kind:'runs',offset:Number(pin.path.match(/startup-runs-(\d+)/)[1]),words:Math.min(4194304,native.runWords-Number(pin.path.match(/startup-runs-(\d+)/)[1]))})).sort((a,b)=>a.offset-b.offset);
- const oldDecoded=counts(oldParts,false),oldCounts=oldDecoded.counts;
+ const oldDecoded=counts(oldParts,false,beforeNative),oldCounts=oldDecoded.counts;
  const runs=pixel.parts.filter(x=>x.kind==='runs').sort((a,b)=>a.offset-b.offset);
  assert(runs.every(x=>x.path.startsWith('ownership-vintages/'+nativeSha+'/')),'Successor URL vintage missing');
- const newDecoded=counts(runs,true),newCounts=newDecoded.counts,deltas=[];let total=0;
+ const newDecoded=counts(runs,true,native),newCounts=newDecoded.counts,deltas=[];let total=0;
  for(let id=1;id<newCounts.length;id++){total+=newCounts[id];if(newCounts[id]!==oldCounts[id])deltas.push({owner:id,old:oldCounts[id],current:newCounts[id],gain:newCounts[id]-oldCounts[id]});}
  assert.deepEqual(deltas,[{owner:6666,old:25131612,current:25131752,gain:140},{owner:6757,old:15853829,current:15853830,gain:1}]);
  assert.equal(total,native.accounting.owned_cells);
@@ -102,7 +107,7 @@ async function builtOutputReadback(report){
   selected_manifest_sha256:nativeSha,certificate:stage.artifact_consumption.certificate,review:stage.artifact_consumption.review,
   static_assets:{count:files.length,bytes:files.reduce((n,x)=>n+x.bytes,0),largest,limits:{file_bytes:25*1024*1024,free_count:20000},files},worker_bundle_files:worker,
   old_url_provenance:{original_budget_sha256:'1f8c8ceb7f7ec7bd5c36a5d7ce083f246841187a23b663b6b228ccea1fdc2e85',pins:originalStartupPins},
-  ownership:{complete_source_owners:ids.size,unchanged_owner_counts:49623,rows:native.size,runWords:native.runWords,total_owned_cells:total,deltas,old_word_stream_sha256:oldDecoded.word_stream_sha256,current_word_stream_sha256:newDecoded.word_stream_sha256},
+  ownership:{complete_source_owners:ids.size,unchanged_owner_counts:49623,rows:native.size,runWords:native.runWords,total_owned_cells:total,deltas,old_word_stream_sha256:oldDecoded.word_stream_sha256,current_word_stream_sha256:newDecoded.word_stream_sha256,qualified_before_manifest_sha256:readbackHash(beforeRaw),qualified_after_manifest_sha256:nativeSha,before_blocks:oldDecoded.qualified_native_blocks,after_blocks:newDecoded.qualified_native_blocks},
   emitted_geometry:{records:seenGeometry.size,qualified_targets:actualTargets},reference_release:atlas.reference_release,preparedEvidence:atlas.preparedEvidence,coverageClassification:atlas.coverageClassification,
   nativeContextInputStage:atlas.nativeContextInputStage,contentCapabilities:atlas.contentCapabilities,referenceAttributes:atlas.referenceAttributes,
   history_sha256:readbackHash(emittedFile(base,'atlas-history.json.gz')),history_keys:Object.keys(history),
@@ -175,7 +180,7 @@ assert.equal(catalogueDecoded.length,cataloguePin.decoded_bytes);
 assert.equal(createHash('sha256').update(catalogueDecoded).digest('hex'),cataloguePin.decoded_sha256);
 const expanded=completeReleaseProductInputs(certificate,JSON.parse(catalogueDecoded));
 assert.equal(expanded.length,533);
-const required=new Set([stage.artifact_consumption.certificate.path,stage.artifact_consumption.review.path]);
+const required=new Set([stage.artifact_consumption.certificate.path,stage.artifact_consumption.review.path,N2+'/model-reader-call-boundary-controls.mjs']);
 for(const pin of expanded)if((pin.space??'root')==='root')required.add(pin.path);
 for(const pin of codeInventory.critical_files)required.add(pin.path);
 for(const entry of ['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs']){
@@ -193,7 +198,7 @@ let missingPathRefusals=0;
 for(const relative of [
  N2+'/selected-geography/part-29-application.json.gz',
  N2+'/application-geometry-serialization.mjs',N2+'/application-geometry-producer.mjs',
- N2+'/phase-admission.mjs',N2+'/artifact-checkout-execution.mjs',N2+'/prepare-model-reader-checkout.mjs'
+ N2+'/phase-admission.mjs',N2+'/artifact-checkout-execution.mjs',N2+'/prepare-model-reader-checkout.mjs',N2+'/model-reader-call-boundary-controls.mjs'
 ]){
  const omitted=structuredClone(definition);
  omitted.inputs=omitted.inputs.filter(input=>input!==relative);
