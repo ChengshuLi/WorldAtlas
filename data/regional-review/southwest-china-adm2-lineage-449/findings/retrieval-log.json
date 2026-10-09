@@ -165,7 +165,8 @@
     "Search-indexed excerpts and third-party mirrors were not substituted for official source files or row-level evidence.",
     "No license was inferred for official roster or map data; no extracts or geometry bytes were redistributed.",
     "No current official county-boundary polygon source, versioned legal boundary map, or approved map original was available for per-feature completeness, disconnected-piece, island, coastline or neighbor-edge comparison.",
-    "Official Chongqing standard-map/custodian pages and current province roster pages were located, but direct HTTPS requests returned HTTP 000 with zero bytes. Indexed page text is retained only as a locator/suitability lead; no current boundary original, approval/version artifact or license was obtained."
+    "Official Chongqing standard-map/custodian pages and current province roster pages were located, but direct HTTPS requests returned HTTP 000 with zero bytes. Indexed page text is retained only as a locator/suitability lead; no current boundary original, approval/version artifact or license was obtained.",
+    "Wayback CDX queries for the three official roster notices also timed out before response; archive snapshot availability remains unknown and no archived copies were used."
   ],
   "followup_direct_attempt": {
     "attempted_at": "2026-10-09 UTC",
@@ -252,5 +253,33 @@
       "restoration": "Retrieve the ten map originals and metadata only if useful as provincial context; seek more detailed current approved county boundary evidence for subject-level geometry review.",
       "limit": "The stated small-scale thematic package is not suitable evidence for county polygon completeness, small detached pieces, islands or shared-edge topology."
     }
-  ]
+  ],
+  "archive_retry": {
+    "attempted_at": "2026-10-09 UTC",
+    "method": "Wayback CDX API over direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
+    "results": [
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=mzj.cq.gov.cn%2Fzwgk_218%2Fzfxxgkml%2Ftzgg%2F202601%2Ft20260119_15332641.html&output=json",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=mzt.guizhou.gov.cn%2Fxwzx%2Ftzgg%2F202601%2Ft20260128_89347775.html&output=json",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=mzt.sc.gov.cn%2Fscmzt%2Fquhuaxinxi%2F2026%2F1%2F28%2Ffd96cce824a44fdaa434c341eb096cde.shtml&output=json",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      }
+    ],
+    "interpretation": "No CDX response was received, so snapshot availability is unknown. No archived capture was confirmed or used as evidence."
+  }
 }
