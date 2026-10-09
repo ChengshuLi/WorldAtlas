@@ -95,6 +95,41 @@ workflow jobs below invoke the check on exact PR and combined merge commits.
 
 ## Trusted premerge enforcement
 
+### Selected native assignment conservation
+
+The same trusted wrapper also compares `data/ownership-selection.json` when
+present on either side. It reads immutable selected manifests and registered
+comparison receipts, authenticates the independent original bounds identity and
+parent roster, and compares complete affected native rows by stable owner ID.
+Candidate code is never imported. The accepted v8 bank's retained whole fragment
+transport is read as data; raw historical geography is not substituted for a
+restored selected native asset.
+
+Affected rows come from all changed whole native run-part ranges and changes to
+the complete row table. Both whole containing parts are authenticated, including
+canonical unshuffled words; full row width is compared. New unowned cells or a
+transfer to another owner fails the gate. New assignments remain gained coverage,
+not physical source approval. Whole decoded part cohorts are discarded before
+the next genuine bounded acquisition; metadata, row tables, runtime and live
+representations count toward the complete phase.
+
+This native test does not detect sub-cell polygon gaps. The existing polygon
+detector remains unchanged. Selected pointset comparison and a complete current
+effective-neighbor exclusion index are the second deliverable of #1569; historical
+native camera bounds do not supply that proof.
+
+There is currently no committed additive ownership selection. Extra/unknown
+selection fields, removal of a native selection and changed native grid domains
+fail closed rather than select a staged proposal or ignore unsupported effective
+geometry. The full repair-ledger preservation comparator retains zero-cell
+primitives as well as assigned primitives, but its active selection hook must be
+integrated with the normal reviewed additive activation contract before use.
+No files in coordination namespaces are automatically selected or activated.
+
+Focused controls live in `test/effective-geographic-regression.test.mjs` and invoke
+both the immutable reader and real trusted wrapper with complete small synthetic
+Git fixtures. They are safeguards, not new geographic source approvals.
+
 The PR and serialized queue workflows run a separate read-only geography job.
 It checks out the immutable trusted baseline, fetches the proposed commit as
 Git data, and executes `python -I -B scripts/run-geographic-check.py --fetch
