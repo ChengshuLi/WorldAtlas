@@ -246,19 +246,27 @@ def main():
     if set(physical_rows) != id_set:
         raise ValueError("retained physical result does not cover all 327 components")
 
+    # Pin exact byte-identical custody aliases to the current base tree so all
+    # historical evidence commits are ancestors of the PR base. Preserve each
+    # original content-addressed custody reference in a separate output.
+    source_tree_commit = git("merge-base", "HEAD", "origin/main").decode().strip()
     # Exact source component FeatureCollections at the physical-product delivery.
     physical_config_path = f"{PHYSICAL}/input-config.json"
-    physical_config, _physical_config_raw = read_json_blob("HEAD", physical_config_path)
+    physical_config, physical_config_raw = read_json_blob(source_tree_commit, physical_config_path)
     component_features = {}
     component_source_files = {}
     component_source_file_records = {}
+    component_custody_origin = {}
     for pin in physical_config["inputs"]:
         if pin.get("kind") != "components":
             continue
         path = pin["path"]
-        oid, raw = blob(pin["commit"], path)
-        if len(raw) != pin["bytes"] or sha(raw) != pin["sha256"]:
+        origin_oid, origin_raw = blob(pin["commit"], path)
+        if len(origin_raw) != pin["bytes"] or sha(origin_raw) != pin["sha256"]:
             raise ValueError(f"candidate component custody bytes differ: {path}")
+        oid, raw = blob(source_tree_commit, path)
+        if raw != origin_raw:
+            raise ValueError(f"current-base custody alias differs from recorded origin: {path}")
         decoded = gzip.decompress(raw)
         if (len(decoded), sha(decoded)) != (pin["uncompressed_bytes"], pin["uncompressed_sha256"]):
             raise ValueError(f"candidate component decoded custody bytes differ: {path}")
@@ -271,12 +279,15 @@ def main():
                 component_features[component] = feature
                 component_source_files[component] = path
         if any(feature.get("id") in id_set for feature in collection["features"]):
-            component_source_file_records[path] = (pin, raw, decoded, oid)
+            component_source_file_records[path] = ({**pin, "commit": source_tree_commit}, raw, decoded, oid)
+            component_custody_origin[path] = {"origin_commit": pin["commit"], "origin_git_blob": origin_oid,
+                "origin_sha256": sha(origin_raw), "rebound_commit": source_tree_commit,
+                "rebound_git_blob": oid, "rebound_sha256": sha(raw),
+                "component_ids": sorted(feature.get("id") for feature in collection["features"] if feature.get("id") in id_set)}
     if set(component_features) != id_set:
         raise ValueError("physical custody source does not contain all exact candidate features")
 
     # Existing original source-comparison records are pulled from their pinned base tree.
-    source_tree_commit = git("merge-base", "HEAD", "origin/main").decode().strip()
     comparison_rows = {}
     comparison_file_records = {}
     for component, (binding, _line) in admin_rows.items():
@@ -392,6 +403,12 @@ def main():
         component: {"commit": component_commit_by_path[component_source_files[component]],
                    "path": component_source_files[component]}
         for component in sorted(ids)
+    })
+    write_json(out / "component-custody-origin.json", {
+        "version": 1, "physical_input_config_path": physical_config_path,
+        "physical_input_config_commit": source_tree_commit,
+        "physical_input_config_sha256": sha(physical_config_raw),
+        "rebound_payloads": [component_custody_origin[path] for path in sorted(component_custody_origin)]
     })
     source_feature_index = []
     for source_id in sorted(used_source_features):
@@ -509,7 +526,7 @@ def main():
     create_evidence_manifest(out, source_tree_commit, ids, component_source_file_records,
                              action_report_path, action_report_raw, action_parts,
                              physical_report_path, _physical_report_raw, physical_quality_path, physical_quality_raw,
-                             physical_input_file_records,
+                             physical_input_file_records, physical_config_path, physical_config_raw,
                              comparison_file_records, source_encoded_inputs, catalogue,
                              makira_register_raw, makira_assessment_raw, context_raw)
 
@@ -517,7 +534,7 @@ def main():
 def create_evidence_manifest(out, base_commit, ids, component_files, action_report_path,
                              action_report_raw, action_parts, physical_report_path,
                              physical_report_raw, physical_quality_path, physical_quality_raw,
-                             physical_files, comparison_files,
+                             physical_files, physical_config_path, physical_config_raw, comparison_files,
                              source_files, catalogue, makira_register_raw,
                              makira_assessment_raw, context_raw):
     baseline = {}
@@ -527,6 +544,7 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
     add_baseline(action_report_path, base_commit, action_report_raw)
     add_baseline(physical_report_path, base_commit, physical_report_raw)
     add_baseline(physical_quality_path, base_commit, physical_quality_raw)
+    add_baseline(physical_config_path, base_commit, physical_config_raw)
     for path, expected in action_parts.items():
         raw, decoded = verified_gzip(path, expected)
         add_baseline(path, base_commit, raw, decoded)
@@ -555,6 +573,11 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
     catalogue_path = f"{CORPUS}/catalogue.json"
     catalogue_raw = local_bytes(catalogue_path)
     add_baseline(catalogue_path, base_commit, catalogue_raw)
+    helper_path = "scripts/evidence/immutable.py"
+    _helper_oid, helper_raw = blob(base_commit, helper_path)
+    if helper_raw != (ROOT / helper_path).read_bytes():
+        raise ValueError("executed immutable evidence helper differs from the pinned base helper")
+    add_baseline(helper_path, base_commit, helper_raw)
     for path, (raw, decoded) in source_files.items():
         add_baseline(path, base_commit, raw, decoded)
     for path, raw in [(f"{MAKIRA}/source-register.json", makira_register_raw),
@@ -647,7 +670,7 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
         "metrics": [], "summaries": [],
         "conclusions": [{"text": "The 327-subject roster is complete and partitioned into 38 exact fine families within the unchanged 594 operational-batch accounting.", "status": "supported", "source_ids": ["gb:FJI:ADM2", "gb:IDN:ADM2", "gb:PNG:ADM3", "gb:SLB:ADM1", "gb:VUT:ADM1"]},
             {"text": "Retained administrative source comparisons and GSHHG-based physical support records are source-relative geometric observations only; source, physical, territorial and causal authority remain unapproved or unknown.", "status": "unresolved", "source_ids": ["gb:FJI:ADM2", "gb:IDN:ADM2", "gb:PNG:ADM3", "gb:SLB:ADM1", "gb:VUT:ADM1", "gshhg-2.3.7-original-binary"]},
-            {"text": "All 15 Makira overlaps inherit the unresolved #1457 assessment; no new imagery/source fitness is asserted for them or the remaining 14 priority components.", "status": "unresolved", "source_ids": ["makira-prior-assessment-1457"]}],
+            {"text": "All 15 Makira overlaps inherit the unresolved #1457 assessment; four overlap the 29 priority IDs, leaving 25 priority components without that inherited assessment; no new imagery/source fitness is asserted.", "status": "unresolved", "source_ids": ["makira-prior-assessment-1457"]}],
         "stages": {"research": "complete", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": ["python3 research/geography/melanesia-full-batch-327-20261009/assemble.py --work-index .cache/global-gap-work-index-20261009/geo4-next-full-batch-327.json",
                      "Assembly validates recorded whole-byte and row-hash relationships, extracts retained features/rows, and performs no new geometry operation.",
