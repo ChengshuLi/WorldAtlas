@@ -1,0 +1,24 @@
+✖ actual whole encoded interval outside the original native grid refuses during projection (469.164875ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 558.41825
+
+✖ failing tests:
+
+test at test/effective-geographic-regression.test.mjs:574:1
+✖ actual whole encoded interval outside the original native grid refuses during projection (469.164875ms)
+  Error: Unsupported selected ownership domain
+      at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:13:34)
+      at validateParts (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:249:3)
+      at loadBaseSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:377:83)
+      at loadSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:417:18)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:588:61)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)

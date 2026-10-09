@@ -263,6 +263,7 @@ const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
   '5d6758debd9c2e141b83c40594486939f6fa2fd819816070957bbc4b0f1075c2':Object.freeze({review_id:6078884054,github_user_id:6732996,issue:1520,releaseCatalogue:true}),
   '7bd742247d4f2c2435fcb8c9bbc3134d3edc6193f312171bdb9a3b2ffd769c72':Object.freeze({review_id:6079096820,github_user_id:6732996,issue:1520,releaseCatalogue:true}),
   '5ff3e90bed0618f66c290eac5a0d813821b6ae513378a003ae2452e6e131350b':Object.freeze({review_id:6080211722,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true}),
+  'd75f436320deff42c9ecac8dfff46da252ebbdfeef69cec0ce633620a87184f3':Object.freeze({review_id:6087324521,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   '7158e9be36852eb4c2997309cf3d3818bcf46f67034f625dc9f57b67afb53d62':Object.freeze({review_id:6081097955,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true})
 });
 // Validate the complete ordered installer catalogue as immutable provenance.
@@ -448,6 +449,98 @@ function asset(snapshot,pin) {
   demand(sha(canonical)===pin.decoded_sha256,'Native canonical unshuffled words differ');return words;
 }
 
+// Complete row projections are private products of authenticated whole-part
+// acquisition. They retain every interval, never whole transport/word buffers.
+const nativeTables=new WeakMap(), nativeProjections=new WeakMap();
+const projectionSha=p=>{const h=createHash('sha256');for(const words of [p.rows,p.offsets,p.words])h.update(Buffer.from(words.buffer,words.byteOffset,words.byteLength));return h.digest('hex');};
+function nativeParts(snapshot,table,y) {
+  const start=table[y*2]*2,end=start+table[y*2+1]*2;
+  return snapshot.manifest.parts.filter(p=>p.kind==='runs'&&start<p.offset+p.words&&p.offset<end);
+}
+export function loadNativeRowTable(snapshot) {
+  demand(selectedSnapshots.has(snapshot),'Require authenticated selected snapshot');
+  const pins=snapshot.manifest.parts.filter(p=>p.kind==='rows');demand(pins.length===1,'Unsupported split native row table');
+  const table=asset(snapshot,pins[0]);nativeTables.set(table,{snapshot,sha256:sha(Buffer.from(table.buffer,table.byteOffset,table.byteLength))});return table;
+}
+function sidePlan(snapshot,table,rows) {
+  const tableProof=nativeTables.get(table);demand(selectedSnapshots.has(snapshot)&&tableProof?.snapshot===snapshot&&sha(Buffer.from(table.buffer,table.byteOffset,table.byteLength))===tableProof.sha256,'Require authenticated unchanged selected row table');
+  demand(rows.length>0&&rows.every((y,i)=>Number.isSafeInteger(y)&&y>=0&&y<snapshot.manifest.size&&(!i||rows[i-1]<y)),'Missing/duplicate/foreign planned native row');
+  const pins=[...new Map(rows.flatMap(y=>nativeParts(snapshot,table,y)).map(p=>[p.path,p])).values()];
+  const inputs=new Map(),members=[];
+  for(const pin of pins){
+    const memberInputs=new Map();let buffers=0;
+    demand(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=FILE,'Whole decoded native member exceeds cap');
+    const name=path.posix.join(path.posix.dirname(snapshot.selection.manifest_path),pin.path),reader=snapshot.reader;
+    if(reader.git('ls-tree','-z',reader.version,'--',name).length){
+      const d=reader.descriptor(name);demand(d.bytes===pin.bytes,'Whole immutable input differs (native size)');inputs.set(d.commit+':'+d.path,{pin:d,decoded:pin.decoded_bytes});memberInputs.set(d.commit+':'+d.path,{pin:d,decoded:pin.decoded_bytes});buffers+=2*pin.decoded_bytes;
+    }else{
+      const image=snapshot.image;demand(image instanceof NativeAssetImage||image instanceof StockImage,'Missing selected whole native byte bank');
+      const member=image instanceof NativeAssetImage?image.index.files.find(p=>p.path===pin.path):image.index.files.find(p=>p.path===image.map.logical_targets.find(t=>t.target===name)?.object);
+      demand(member&&member.bytes===pin.bytes&&member.sha256===pin.sha256&&member.bytes<=FILE,'Missing/rebound complete native member');
+      for(const part of image.index.parts.filter(p=>p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes)){
+        const d=reader.descriptor((image instanceof NativeAssetImage?image.directory:NS)+'/'+part.path),key=d.commit+':'+d.path;
+        demand(d.bytes===part.bytes&&part.decoded_bytes<=FILE,'Whole native fragment size differs');
+        const old=inputs.get(key);demand(!old||old.decoded===part.decoded_bytes,'Conflicting native containing fragment');inputs.set(key,{pin:d,decoded:part.decoded_bytes});memberInputs.set(key,{pin:d,decoded:part.decoded_bytes});
+      }
+      buffers+=3*pin.decoded_bytes+member.bytes;
+    }
+    members.push({pin,inputs:[...memberInputs.values()],buffers});
+  }
+  const intervals=rows.reduce((n,y)=>n+table[y*2+1],0);
+  demand(Number.isSafeInteger(intervals)&&intervals>=0,'Invalid complete projected interval count');
+  const completeInputs=list=>list.map(p=>({...p.pin,sha256:'0'.repeat(64),whole_body_consumed:true}));
+  const custodyBytes=2*Buffer.byteLength(JSON.stringify({selection:snapshot.selection.sha256,rows,whole_parts:pins,whole_inputs:completeInputs([...inputs.values()]),member_phases:members.map(m=>({part:m.pin.path,whole_inputs:completeInputs(m.inputs),phase_bytes:PHASE})),phase_bytes:PHASE,planned_phase_bytes:PHASE}));
+  const projectionBytes=intervals*12+rows.length*12+4+custodyBytes+512;
+  return {rows,pins,inputs:[...inputs.values()],members,intervals,projectionBytes,custodyBytes};
+}
+function sideAdmission(snapshot,plan,carriedBytes) {
+  const reader=snapshot.reader;
+  demand(Number.isSafeInteger(carriedBytes)&&carriedBytes>=0,'Missing complete native carried-state admission');
+  const bytes=reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes+carriedBytes+plan.projectionBytes+Math.max(0,...plan.members.map(m=>m.buffers+m.inputs.reduce((n,p)=>n+p.pin.bytes+p.decoded,0))); 
+  demand(plan.inputs.length<=512&&bytes<=PHASE,'Complete native side/carry phase exceeds prospective cap');return bytes;
+}
+export function acquireNativeRows(snapshot,table,rows,options={}) {
+  demand(Object.keys(options).every(k=>k==='carry'),'Undeclared native carried state');
+  const carry=options.carry;let carriedBytes=0;
+  if(carry){const proof=nativeProjections.get(carry);demand(proof,'Missing authenticated native carry');validateNativeRowCarry(carry,proof.snapshot,rows);carriedBytes=proof.bytes;}
+  const plan=sidePlan(snapshot,table,rows),plannedBytes=sideAdmission(snapshot,plan,carriedBytes),reader=snapshot.reader;
+  // Allocate the complete projection before body reads; every member phase
+  // reserves it in full, including portions not yet populated. A member helper
+  // never returns native/transport buffers into the next genuine phase.
+  const words=new Uint32Array(plan.intervals*3),indices=Uint32Array.from(rows),offsets=new Uint32Array(rows.length+1),counts=new Uint32Array(rows.length);
+  let at=0;for(let k=0;k<rows.length;k++){offsets[k]=at;at+=table[rows[k]*2+1]*3;}offsets[rows.length]=at;
+  const memberPhases=[];
+  const extract=member=>{
+    reader.phase();reader.used+=carriedBytes+plan.projectionBytes;
+    for(const item of member.inputs)reader.admit(item.pin,item.decoded);
+    const pin=member.pin,body=asset(snapshot,pin);
+    for(let k=0;k<rows.length;k++){
+      const y=rows[k],start=table[y*2]*2,end=start+table[y*2+1]*2;
+      for(let i=Math.max(start,pin.offset);i<Math.min(end,pin.offset+pin.words);i+=2){
+        const x=body[i-pin.offset],z=body[i-pin.offset+1],bits=snapshot.manifest.coordinateBits,mask=2**bits-1,target=offsets[k]+(i-start)/2*3;
+        demand(Number.isSafeInteger(target)&&target>=offsets[k]&&target+2<offsets[k+1],'Foreign native projected ordinal');
+        words[target]=x&mask;words[target+1]=(z&mask)+1;words[target+2]=(x>>>bits)+(z>>>bits)*2**(32-bits);
+        demand(words[target]<words[target+1]&&words[target+1]<=snapshot.manifest.size,'Native interval exceeds original grid domain');counts[k]++;
+      }
+    }
+    return {part:pin.path,whole_inputs:member.inputs.map(p=>p.pin),phase_bytes:reader.used};
+  };
+  if(plan.members.length===0){reader.phase();reader.used+=carriedBytes+plan.projectionBytes;}
+  for(const member of plan.members)memberPhases.push(extract(member));
+  for(let k=0;k<rows.length;k++)demand(counts[k]===table[rows[k]*2+1],'Incomplete projected native row');
+  demand(at===words.length,'Incomplete native row projection');
+  const digest=projectionSha({rows:indices,offsets,words});
+  const product={rows:indices,offsets,words,bytes:plan.projectionBytes,custody:{selection:snapshot.selection.sha256,rows:plan.rows,whole_parts:plan.pins,whole_inputs:plan.inputs.map(p=>p.pin),member_phases:memberPhases,phase_bytes:Math.max(reader.used,...memberPhases.map(p=>p.phase_bytes)),planned_phase_bytes:plannedBytes}};
+  nativeProjections.set(product,{snapshot,digest,bytes:plan.projectionBytes,custody:JSON.stringify(product.custody)});return product;
+}
+export function validateNativeRowCarry(product,snapshot,rows) {
+  const proof=nativeProjections.get(product);
+  demand(proof&&proof.snapshot===snapshot&&product.bytes===proof.bytes&&JSON.stringify(product.custody)===proof.custody&&same([...product.rows],rows)&&projectionSha(product)===proof.digest,'Missing/altered/incomplete native row carry');
+}
+function projectedRow(product,k) {
+  const out=[];for(let i=product.offsets[k];i<product.offsets[k+1];i+=3)out.push([product.words[i],product.words[i+1],product.words[i+2]]);return out;
+}
+
 // Also used by the eventual explicit additive selection hook. Full geometry rows
 // are retained, including zero-cell additions: cell conservation alone is weaker.
 export function compareRepairLedgers(before,after) {
@@ -499,15 +592,15 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
   demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
   const a=before.manifest,b=after.manifest;
+  const metadataBytes=before.metadataBytes+after.metadataBytes+8*1024*1024;
+  beforeReader.metadataBytes=afterReader.metadataBytes=metadataBytes;
   // A changed transport body with an unchanged declared selected member must
   // still authenticate against its independently pinned whole container hash.
   for(const snapshot of [before,after])if(snapshot.image)for(const part of snapshot.image.index.parts){const name=(snapshot.image instanceof NativeAssetImage?snapshot.image.directory:NS)+'/'+part.path,own=snapshot.reader.inventory.get(snapshot.reader.version+':'+name),other=(snapshot===before?afterReader:beforeReader).inventory.get((snapshot===before?candidate:baseline)+':'+name);if(!other||own.git_blob_oid!==other.git_blob_oid){snapshot.reader.phase();const encoded=snapshot.reader.read(name,{expected:part.sha256,decoded:part.decoded_bytes});const body=gunzipSync(encoded,{maxOutputLength:part.decoded_bytes});demand(body.length===part.decoded_bytes&&sha(body)===part.decoded_sha256,'Changed selected whole transport body differs');}}
   demand(a.size===b.size&&a.version===b.version&&a.method===b.method&&a.coordinateBits===b.coordinateBits&&same(a.native_latitudes,b.native_latitudes),'Changed native grid/domain requires independent migration');
   demand(same(before.owners.map(p=>[p.index,p.id,p.province_id,p.province_index]),after.owners.map(p=>[p.index,p.id,p.province_id,p.province_index])),'Original stable owner/parent indices rebound');
-  const metadataBytes=before.metadataBytes+after.metadataBytes+8*1024*1024;
-  beforeReader.metadataBytes=metadataBytes;afterReader.metadataBytes=metadataBytes;
   beforeReader.phase();
-  const rows=snapshot=>{const pins=snapshot.manifest.parts.filter(p=>p.kind==='rows');demand(pins.length===1,'Unsupported split native row table');return asset(snapshot,pins[0]);};
+  const rows=loadNativeRowTable;
   const oldRows=rows(before),newRows=rows(after);
   let largestRow=0;for(let y=0;y<a.size;y++)largestRow=Math.max(largestRow,oldRows[y*2+1]+newRows[y*2+1]);
   // Both complete row tables and both complete reconstructed interval rows stay
@@ -523,14 +616,45 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   const additiveRows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(r=>r.y));
   let additiveConservation=null;if(before.additive){demand(after.additive,'Previously selected additive repair ledger removed');additiveConservation=compareVersionedRepairLedgers(before.additive.ledger,after.additive.ledger,{beforeRegistry:before.additive.registry,afterRegistry:after.additive.registry});}
   const affected=[];for(let y=0;y<a.size;y++){const spans=[[oldRows[y*2]*2,(oldRows[y*2]+oldRows[y*2+1])*2],[newRows[y*2]*2,(newRows[y*2]+newRows[y*2+1])*2]];if(additiveRows.has(y)||oldRows[y*2]!==newRows[y*2]||oldRows[y*2+1]!==newRows[y*2+1]||spans.some(([s,e])=>changed.some(p=>s<p.offset+p.words&&p.offset<e)))affected.push(y);}
-  // A genuine detached cohort owns both sides' whole containing parts. Its
-  // decoded words are discarded before resetting admission for another cohort.
-  let cache=new Map(),cacheKey='';const phases=[];
-  const needed=(snapshot,table,y)=>{const start=table[y*2]*2,end=start+table[y*2+1]*2;return runs(snapshot).filter(p=>start<p.offset+p.words&&p.offset<end);};
-  const row=(snapshot,table,y)=>{const start=table[y*2]*2,end=start+table[y*2+1]*2,out=[];for(const p of needed(snapshot,table,y)){const words=cache.get(snapshot.reader.version+':'+p.path);for(let i=Math.max(start,p.offset);i<Math.min(end,p.offset+p.words);i+=2){const x=words[i-p.offset],z=words[i-p.offset+1],bits=snapshot.manifest.coordinateBits,mask=2**bits-1;out.push([x&mask,(z&mask)+1,(x>>>bits)+(z>>>bits)*2**(32-bits)]);}}demand(out.length===table[y*2+1]&&out.every(r=>r[1]<=a.size),'Complete row extraction differs');return out;};
-  const losses=[];let lostCells=0;
-  for(const y of affected){const roster=[...needed(before,oldRows,y).map(p=>({snapshot:before,p})),...needed(after,newRows,y).map(p=>({snapshot:after,p}))];const key=JSON.stringify(roster.map(({snapshot,p})=>[snapshot.reader.version,p.path]));if(key!==cacheKey){cache.clear();beforeReader.phase();cacheKey=key;for(const {snapshot,p}of roster)cache.set(snapshot.reader.version+':'+p.path,asset(snapshot,p));phases.push({first_row:y,input_bytes:beforeReader.used,descriptors:beforeReader.charged.size});}const oldBase=row(before,oldRows,y),newBase=row(after,newRows,y),previous=before.additive?selectedAdditiveRows(before.additive,y,oldBase):oldBase,next=after.additive?selectedAdditiveRows(after.additive,y,newBase):newBase;const found=compareIntervals(previous,next,{row:y,ownersBefore:before.owners,ownersAfter:after.owners});for(const loss of found){lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);}}
-  cache.clear();
+  // Plan consecutive identical containing rosters, splitting by the actual
+  // complete carry/output cost when necessary. Every affected row appears once.
+  const phases=[];let lostCells=0;const losses=[];
+  const groups=[],wholeGroups=[];let pending=[],pendingKey='';
+  const rosterKey=y=>JSON.stringify([nativeParts(before,oldRows,y).map(p=>p.path),nativeParts(after,newRows,y).map(p=>p.path)]);
+  const carriedMetadata=()=>2*Buffer.byteLength(JSON.stringify({before:[...beforeReader.inventory.values()],after:[...afterReader.inventory.values()],phases}))+affected.length*32;
+  const baseMetadata=beforeReader.metadataBytes;
+  const fits=rows=>{
+    beforeReader.metadataBytes=afterReader.metadataBytes=baseMetadata+carriedMetadata();
+    const previous=sidePlan(before,oldRows,rows),next=sidePlan(after,newRows,rows);
+    sideAdmission(before,previous,0);sideAdmission(after,next,previous.projectionBytes);
+  };
+  for(const y of affected){const key=rosterKey(y);if(pending.length&&key!==pendingKey){wholeGroups.push(pending);pending=[];}pending.push(y);pendingKey=key;}
+  if(pending.length)wholeGroups.push(pending);
+  const split=rows=>{
+    try{fits(rows);groups.push(rows);}catch(error){
+      if(rows.length===1||!error.message.includes('phase exceeds prospective cap'))throw error;
+      const middle=Math.floor(rows.length/2);split(rows.slice(0,middle));split(rows.slice(middle));
+    }
+  };
+  for(const rows of wholeGroups)split(rows);
+  let checkedRows=0;
+  for(const group of groups){
+    fits(group);
+    // This frame returns compact complete intervals and custody only. All whole
+    // baseline native/transport buffers are out of scope before candidate opens.
+    const previous=acquireNativeRows(before,oldRows,group);validateNativeRowCarry(previous,before,group);
+    const next=acquireNativeRows(after,newRows,group,{carry:previous});
+    validateNativeRowCarry(previous,before,group);validateNativeRowCarry(next,after,group);
+    for(let k=0;k<group.length;k++){
+      const y=group[k],oldBase=projectedRow(previous,k),newBase=projectedRow(next,k),old=before.additive?selectedAdditiveRows(before.additive,y,oldBase):oldBase,current=after.additive?selectedAdditiveRows(after.additive,y,newBase):newBase;
+      for(const loss of compareIntervals(old,current,{row:y,ownersBefore:before.owners,ownersAfter:after.owners})){
+        lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);
+      }checkedRows++;
+    }
+    phases.push({first_row:group[0],last_row:group.at(-1),rows:group.length,baseline:previous.custody,candidate:next.custody,baseline_carried_bytes:previous.bytes});
+    demand(Buffer.byteLength(JSON.stringify(phases))+Buffer.byteLength(JSON.stringify(losses))<=OUTPUT,'Native phase/finding receipt exceeds admitted output reserve');
+  }
+  demand(checkedRows===affected.length&&groups.flat().every((y,i)=>y===affected[i]),'Incomplete affected native row comparison');
   return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
 }
 

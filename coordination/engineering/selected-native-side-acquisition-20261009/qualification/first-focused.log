@@ -1,0 +1,134 @@
+✔ actual immutable entry rejects owner loss/reassignment with rawworld geometry unchanged (17820.291209ms)
+✔ missing native selection, dishonest row partition and unsupported additive hook fail closed (1112.7805ms)
+✖ changed actual asset body cannot hide behind an unchanged manifest descriptor (577.16675ms)
+✔ full stable owner identity detects coherent index relabel and boundary-sized gaps (0.193125ms)
+✔ full ledger comparison retains zero-cell primitives and rejects coherent omission/source drift (0.31475ms)
+✔ aggregate admission rejects before any actual body read (0.150166ms)
+✔ complete bootstrap admission precedes runtime opens and trusted code reads (0.484583ms)
+✔ missing original proof object uses only the exact whole same-path retained receipt (849.6705ms)
+✔ manifest-bound immutable native transport restores full cross-fragment original members (752.339208ms)
+✔ actual selected entry compares typed whole native bank against ordinary predecessor (1750.048166ms)
+✔ selected continuous source consumes exact encoded override and rejects incomplete or stale maps (4590.01025ms)
+✔ explicit v2 authority conservation permits append but preserves every original zero-cell primitive (1.521833ms)
+✔ whole original rule custody derives actual issued preimage and refuses rebinding before selection (2015.119416ms)
+✔ cold selected continuous operands preserve complete neighbors and original loss/overlap comparisons (20042.0115ms)
+✖ renewed immutable artifact entry binds complete catalogue and independent authority (143.813625ms)
+✖ registered 533-role authority derives complete custody without raising actual read caps (0.391334ms)
+✖ Cloudflare fourth entry is explicit and cannot reinterpret historical profile shapes (0.174458ms)
+✖ genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles (0.255333ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 13
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49736.771583
+
+✖ failing tests:
+
+test at test/effective-geographic-regression.test.mjs:95:1
+✖ changed actual asset body cannot hide behind an unchanged manifest descriptor (577.16675ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Whole immutable input differs/. Input:
+  
+  'Error: Whole native size differs'
+  
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:98:35)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Whole native size differs
+        at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:13:34)
+        at sidePlan (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:468:39)
+        at fits (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:609:55)
+        at split (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:615:9)
+        at inspectSelected (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:620:33)
+        at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:98:46
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:98:35)
+        at Test.runInAsyncScope (node:async_hooks:227:14),
+    expected: /Whole immutable input differs/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/effective-geographic-regression.test.mjs:318:1
+✖ renewed immutable artifact entry binds complete catalogue and independent authority (143.813625ms)
+  Error: ENOENT: no such file or directory, open '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/original-999/original-inputs.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:340:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/original-999/original-inputs.json'
+  }
+
+test at test/effective-geographic-regression.test.mjs:358:1
+✖ registered 533-role authority derives complete custody without raising actual read caps (0.391334ms)
+  Error: ENOENT: no such file or directory, open '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177/original-inputs.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at read (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:360:22)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:361:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177/original-inputs.json'
+  }
+
+test at test/effective-geographic-regression.test.mjs:407:1
+✖ Cloudflare fourth entry is explicit and cannot reinterpret historical profile shapes (0.174458ms)
+  Error: ENOENT: no such file or directory, open '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177/certificate.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at read (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:409:22)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:410:31)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177/certificate.json'
+  }
+
+test at test/effective-geographic-regression.test.mjs:425:1
+✖ genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles (0.255333ms)
+  Error: ENOENT: no such file or directory, open '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/original-inputs.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at read (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:427:22)
+      at TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/effective-geographic-regression.test.mjs:428:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354/original-inputs.json'
+  }
