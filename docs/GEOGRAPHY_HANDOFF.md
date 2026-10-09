@@ -4,7 +4,7 @@ Use [the geography worker prompt](prompts/GEOGRAPHY.txt) with current `main` in 
 
 Geography workers research territorial boundaries, hierarchy purpose, source suitability and granularity. Engineering implements executable migrations, shared schema/UI changes, canonical-grid preparation, integration and publication. History workers research dated attributes of approved territories. GitHub Issues remains the queue and dated work record; do not create a competing TODO document.
 
-Claim one reviewed `type:geography`, `kind:work-item`, `status:ready` issue with a 1–3 PR budget through [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Umbrellas cannot be claimed. Branch from fresh `origin/main` as `geography/<job-id>` in an isolated checkout. Require confirmed `accepted: true` before implementation.
+Claim one reviewed `type:geography`, `kind:work-item`, `status:ready` issue with a PR planning estimate through [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Umbrellas cannot be claimed. Branch from fresh `origin/main` as `geography/<job-id>` in an isolated checkout. Require confirmed `accepted: true` before implementation.
 
 Every geography issue declares an exact `owned_paths` array in its machine block. Permitted prefixes are `data/regional-review/<packet-id>/` and `research/geography/<campaign-id>/`. The current regional packets retain their existing evidence directories. Use the declared directory even when a later PR needs a fresh branch name. No undeclared, shared hierarchy, original-source, grid, application, hosted, schema, other worker or history-campaign edits are permitted. Ordinary files only: no symlinks or submodules. Engineering consumes these evidence files but preserves them.
 

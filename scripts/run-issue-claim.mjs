@@ -30,7 +30,7 @@ try{
  const commentSnapshot=rows=>JSON.stringify(rows.map(c=>[c.id,c.body,c.user?.login]));
  if(snapshot(freshIssue)!==snapshot(issue)||commentSnapshot(freshComments)!==commentSnapshot(comments)||
   JSON.stringify(freshDependencies.map(snapshot))!==JSON.stringify(dependencies.map(snapshot))||JSON.stringify(freshPRs)!==JSON.stringify(prs)||
-  JSON.stringify(freshOtherIssues.map(snapshot))!==JSON.stringify(otherIssues.map(snapshot)))throw Error('Issue, ownership, dependencies or linked PR budget changed during claim; reread before retry');
+  JSON.stringify(freshOtherIssues.map(snapshot))!==JSON.stringify(otherIssues.map(snapshot)))throw Error('Issue, ownership, dependencies or linked PR state changed during claim; reread before retry');
  const next=transitionClaim({issue:freshIssue,comments:freshComments,prs:freshPRs,dependencies:freshDependencies,geographyGate,otherIssues:freshOtherIssues,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
  // The canonical bot comment is authority; labels are a repairable display projection.
  mutationAttempted=true; // A lost write response requires reconciliation, never blind replay.

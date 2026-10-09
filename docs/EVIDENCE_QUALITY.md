@@ -4,6 +4,16 @@ The manifest is a reproducible evidence receipt, not a certificate of historical
 
 New packets can copy `coordination/templates/evidence-v1.json`, replace every placeholder, and keep the completed `evidence-quality.json` inside their declared owned directory. Never replace an older manifest/source/output in another worker's packet. Older packets are legacy evidence; this first implementation does not retroactively enforce a new gate or authorize imports. Activation is tracked separately in #627.
 
+## Keep the receipt proportional
+
+Describe the actual evidence relied on, not a second copy of Git's change inventory.
+Code/tests/docs need no output hash merely because they changed. `change_receipts`
+and `validation` control-file wrappers are optional in the existing v1 format; if
+present, the trusted gate still checks them. Keep source/result descriptors, identity,
+metric/record bindings and honest limits. Reference valid retained experiments rather
+than copying packets or rerunning unchanged science. The complete actual diff and
+independent exact-head review remain mandatory. See PREMERGE_EVIDENCE_REVIEW.md.
+
 ## Inputs and identity
 
 Record the exact baseline commit and actual containing file paths. Hash raw whole-file bytes with SHA-256; `hash_kind` must be `file-bytes`. Per-entry hashes are different evidence and must never substitute for file hashes. For compressed inputs record both compressed and uncompressed bytes/digests. `baseline.pins` maps named pins to hashes and `baseline.pin_files` binds every pin to an actual baseline file descriptor. The verifier reads baseline files from the immutable Git commit, not whatever main currently contains.

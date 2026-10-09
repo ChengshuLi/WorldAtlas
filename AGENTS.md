@@ -2,7 +2,7 @@
 
 ## Project context
 
-`docs/THREE_THREAD_START.md` links the role handovers/prompts, including geography research. M geography, N engineering and P history workers use `docs/WORKER_COORDINATION.md`: claim one ready 1–3-PR work item with a unique worker ID before implementation; umbrellas cannot be claimed. Use the serialized worker merge queue and one designated Cloudflare publisher. The original private Site is retained for recovery; see `docs/CLOUDFLARE_RECOVERY_HANDOFF.md`. New location-attribute imports require globally approved continent/subcontinent/region boundaries and the target region's complete published branch certificate, exact subjects and release pins; the global macro partition is approved and published, but no complete regional branches are approved yet. Use `docs/MACRO_FOUNDATION_APPROVAL.md` and the exhaustive `data/macro-foundation/regional-handoffs.json.gz` inventory for fixed region scopes. Follow `docs/TOP_DOWN_GEOGRAPHY_WORKFLOW.md`; current research is source-only. Issue creation updates GitHub Issues only; engineering, geography and history-research workers use their isolated lane branches and continue through their queues.
+`docs/THREE_THREAD_START.md` links the role handovers/prompts, including geography research. M geography, N engineering and P history workers use `docs/WORKER_COORDINATION.md`: claim one ready bounded work item with a unique worker ID before implementation; umbrellas cannot be claimed. Use the serialized worker merge queue and one designated Cloudflare publisher. The original private Site is retained for recovery; see `docs/CLOUDFLARE_RECOVERY_HANDOFF.md`. New location-attribute imports require globally approved continent/subcontinent/region boundaries and the target region's complete published branch certificate, exact subjects and release pins; the global macro partition is approved and published, but no complete regional branches are approved yet. Use `docs/MACRO_FOUNDATION_APPROVAL.md` and the exhaustive `data/macro-foundation/regional-handoffs.json.gz` inventory for fixed region scopes. Follow `docs/TOP_DOWN_GEOGRAPHY_WORKFLOW.md`; current research is source-only. Issue creation updates GitHub Issues only; engineering, geography and history-research workers use their isolated lane branches and continue through their queues.
 
 WorldAtlas is a world-history atlas with stable territorial locations, a six-tier hierarchy, whole-location map modes, sparse dated evidence, and a persistent hosted content API. Read `README.md`, `docs/IMPLEMENTATION_PROGRESS.md`, and `docs/LUNA_DATA_HANDOFF.md` before changing its geography or historical content.
 
@@ -22,6 +22,10 @@ Use the current chat’s exact `CODEX_THREAD_ID` for new author work, stable acr
 ## Local storage
 
 Read [LOCAL_WORKSPACES.md](docs/LOCAL_WORKSPACES.md) before allocating local author/reviewer checkouts. Use the shared `scripts/local-workspace.mjs` allocator, sparse scopes and storage checks; release completed slots after preserving work. Fresh branches must not accumulate full dataset copies.
+
+## Delivery priority
+
+Follow the delivery and proportionate-verification policy in docs/WORKER_COORDINATION.md. Finish supported batches through integration, reuse valid unchanged evidence and correct an ineffective approach early. PR count is a planning estimate; supporting artifacts and issue counts are not delivered results. The complete Git diff, exact-head review, applicable tests and scientific input/result bindings remain authoritative.
 
 ## Working in this repository
 

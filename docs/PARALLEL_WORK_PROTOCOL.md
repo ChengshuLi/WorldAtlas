@@ -1,6 +1,6 @@
 # Concurrent engineering, geography and content research
 
-M geography, N engineering and P history workers follow [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Claim a ready 1–3-PR work item through the serialized workflow; do not claim umbrellas. Use the merge queue and one designated Site publisher. [Worldwide geographic approval](GEOGRAPHY_RESEARCH_READINESS.md) now gates all new location-attribute imports; research workers stage sources only until engineering closes that gate.
+M geography, N engineering and P history workers follow [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Claim a ready bounded work item through the serialized workflow; do not claim umbrellas. Use the merge queue and one designated Site publisher. [Worldwide geographic approval](GEOGRAPHY_RESEARCH_READINESS.md) now gates all new location-attribute imports; research workers stage sources only until engineering closes that gate.
 
 [THREE_THREAD_START.md](THREE_THREAD_START.md) links the issue-creation, engineering, geography and history-research handovers/prompts. Issue creation changes GitHub Issues only; it does not compete for worker-owned files or production imports.
 

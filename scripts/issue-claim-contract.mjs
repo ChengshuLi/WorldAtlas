@@ -7,11 +7,13 @@ import {assertResearchImportsReady} from './research-import-gate.mjs';
 
 export const claimMarker='worldatlas-claim:v1';
 export function canonicalIssueNumber(value){if(!/^[1-9]\d*$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw Error('Use a canonical positive issue number, without leading zeros or exponent notation');return Number(value);}
+// max_prs is retained as a planning estimate for compatible v1 contracts/claims.
+// Scope, ownership and acceptance bound work; merged-PR count does not.
 export function workSpec(body){
  const matches=[...String(body??'').matchAll(/<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->/g)];
  if(matches.length!==1)throw Error('A reviewed worldatlas-work:v1 scope is required');
  const spec=JSON.parse(matches[0][1]);
- if(!Number.isInteger(spec.max_prs)||spec.max_prs<1||spec.max_prs>3||!Array.isArray(spec.depends_on)||spec.depends_on.some(n=>!Number.isSafeInteger(n)||n<1)||!spec.scope||typeof spec.scope!=='string')throw Error('Work items need bounded scope, 1–3 PRs and explicit dependency issue numbers');
+ if(!Number.isSafeInteger(spec.max_prs)||spec.max_prs<1||!Array.isArray(spec.depends_on)||spec.depends_on.some(n=>!Number.isSafeInteger(n)||n<1)||!spec.scope||typeof spec.scope!=='string')throw Error('Work items need bounded scope, a positive PR estimate and explicit dependency issue numbers');
  if(!['content','source-only','engineering','geography'].includes(spec.mode))throw Error('Declare engineering, geography, content or source-only mode');
  if(spec.mode==='geography')validateGeographyOwnedPaths(spec.owned_paths);
  if(spec.mode==='content'&&(!spec.geographic_release||!spec.scope_manifest||!spec.territory_match_review))throw Error('Content issues need released geography, an entity/interval/attribute scope manifest and territory-match review');
@@ -43,7 +45,7 @@ export function activeIssueBlockers(comments){
  return [...latest.values()].filter(x=>x.active);
 }
 // Shared mechanical eligibility; no scientific approval or label mutation.
-export function assertIssueReadiness({issue,branch,dependencies=[],prs=[],otherIssues=[],comments=[],geographyGate=null,evidencePolicy,requireReady=true,allowExhausted=false}) {
+export function assertIssueReadiness({issue,branch,dependencies=[],prs=[],otherIssues=[],comments=[],geographyGate=null,evidencePolicy,requireReady=true}) {
  validateIssueMetadata(branch,issue);
  const spec=workSpec(issue.body);checkLaneMode(branch,spec);
  const labels=(issue.labels??[]).map(x=>typeof x==='string'?x:x.name);
@@ -52,7 +54,6 @@ export function assertIssueReadiness({issue,branch,dependencies=[],prs=[],otherI
  evidenceRequirement(issue,spec,evidencePolicy,branch);
  if(activeIssueBlockers(comments).length)throw Error('Explicit unresolved issue blocker; review its resume condition before readying or claiming');
  if(spec.depends_on.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed'&&!d.pull_request)))throw Error('A dependency is still open or missing');
- if(!allowExhausted&&prs.filter(p=>p.merged_at).length>=spec.max_prs)throw Error('PR budget exhausted; review acceptance, reuse bounded remaining work or record an explicit wait');
  if(spec.mode==='geography')for(const other of otherIssues){
   if(other.number===issue.number||other.state!=='open'||other.pull_request)continue;
   const otherLabels=(other.labels??[]).map(x=>typeof x==='string'?x:x.name);
@@ -98,8 +99,7 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
   if(openPR||current.live_work)throw Error('Preserve the active PR/live operation; finish or hand over before release');
   return {claim:{...current,active:false,request_id,released_at:new Date(now).toISOString()},previous:current};
  }
- const spec=assertIssueReadiness({issue,branch,dependencies,prs,otherIssues,comments,geographyGate,evidencePolicy,
-  allowExhausted:action==='renew'&&branch===current?.branch});
+ const spec=assertIssueReadiness({issue,branch,dependencies,prs,otherIssues,comments,geographyGate,evidencePolicy});
  if(spec.production_operation&&(spec.mode!=='engineering'||!Number.isSafeInteger(spec.production_operation.source_issue)||spec.production_operation.source_issue<1||![714,spec.production_operation.source_issue].includes(spec.production_operation.queue)||spec.production_operation.publisher_worker_id!==worker_id))throw Error('Production-only child reservations belong to their designated publisher');
  if(spec.mode==='geography'&&request.live_work)throw Error('Geography workers stage evidence only and cannot reserve live operations');
  if(current?.active&&own&&spec.mode==='geography'&&JSON.stringify(current.owned_paths)!==JSON.stringify(spec.owned_paths))throw Error('Geography ownership changed; preserve the work and coordinate release/reclaim before expanding scope');
@@ -121,7 +121,6 @@ export function verifyClaimForPR({branch,issue,comments,prs=[],now=Date.now()}){
  checkLaneMode(branch,spec);
  const labels=issue.labels.map(l=>typeof l==='string'?l:l.name);
  if(labels.includes('kind:umbrella')||labels.includes('status:blocked')||!labels.includes('status:ready'))throw Error('Issue is not ready for implementation');
- if(prs.filter(p=>p.merged_at).length>=spec.max_prs)throw Error('Issue PR budget exhausted; create a bounded follow-up');
  if(!claim?.active||claim.branch!==branch||Date.parse(claim.expires_at)<=now)throw Error('PR needs a current unexpired claim for this exact branch');
  if(spec.mode==='geography'&&(claim.mode!==spec.mode||JSON.stringify(claim.owned_paths)!==JSON.stringify(spec.owned_paths)))throw Error('Geography claim must retain the exact declared ownership scope');
  return {worker_id:claim.worker_id,claim_id:claim.claim_id,mode:spec.mode,...(spec.mode==='geography'||spec.mode==='engineering'&&spec.owned_paths!==undefined?{owned_paths:[...spec.owned_paths]}:{})};

@@ -53,7 +53,6 @@ export function assessIssue(issue, {dependencies=[], comments=[], prs=[], now=Da
   if (claim?.active) add(Date.parse(claim.expires_at)<=now?'expired-claim':'active-claim',{worker:claim.worker_id,branch:claim.branch,expires_at:claim.expires_at,live_work:Boolean(claim.live_work)});
   if (claim?.live_work) add('live-operation','Coordinate the existing holder; do not recover automatically');
   if (labels.includes('status:claimed')!==Boolean(claim?.active)) add('claim-label-drift','Canonical bot claim and convenience label differ');
-  if (scope && prs.filter(p=>p.merged_at).length>=scope.max_prs) add('pr-budget','Review original acceptance: close only if complete; otherwise reuse bounded continuation or preserve an explicit wait');
   if(scope)try {assertIssueReadiness({issue,branch:({engineering:'engineering',geography:'geography','source-only':'research',content:'research'}[scope.mode])+'/readiness',dependencies,prs,comments,requireReady:false});}catch(e){add('eligibility-rejection',e.message);}
   if (scope && !open.length && !claim?.active && !openPRs.length && !blockers.active.length) {
     if (labels.includes('status:blocked')) add('review-blocked','Declared dependencies closed; inspect semantic/source/publication and comment blockers before changing status');
@@ -92,7 +91,7 @@ export async function auditQueue({api,repo,previous=null,now=Date.now()}) {
     try {
       let scope; try {scope=workSpec(issue.body);} catch {scope=null;}
       const [comments,dependencies]=await Promise.all([githubPages(api,`${base}/issues/${issue.number}/comments`),Promise.all((scope?.depends_on??[]).map(getDependency))]);
-      // Exhaust the timeline too: PR budget includes prior merged work, not just open PRs.
+      // Exhaust the timeline too: prior merged work and live PRs establish the continuation checkpoint.
       const timeline=await githubPages(api,`${base}/issues/${issue.number}/timeline`);
       const ids=new Set((linked.get(issue.number)??[]).map(p=>p.number));
       for (const event of timeline) {

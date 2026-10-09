@@ -18,8 +18,11 @@ correction or production acceptance cannot be closed on the strength of a hash.
 
 Before reading the author's proposed tests as proof, the independent reviewer reads
 the acceptance criteria, actual diff and referenced source records, then determines
-which failure families apply. For each applicable family, exercise the real entry
-point with an independently constructed adverse fixture or record a precise limit.
+which failure families apply. For changed behavior in an applicable family, independently determine the expected
+result and test the relevant boundary, or record a precise limit. Inspect and reuse
+applicable retained tests for unchanged behavior; every new review does not require
+repeating all earlier experiments. A targeted bounded probe is preferable to a full
+scientific rerun when it can establish the changed invariant.
 Author controls are useful evidence, not the reviewer's independent expectation.
 Capture the actual altered complete input, entry point, observation and unchanged
 originals. Do not invent a pass receipt for an experiment that was not performed.
@@ -31,7 +34,7 @@ These details belong in the existing review comment/domain scope and linked evid
 | Exact identities and joins | Read the authoritative raw roster and actual rows independently. Missing, duplicate, fabricated IDs and wrong parent/source/alias fields must fail even when all candidate hashes and summary counts are refreshed coherently. |
 | Complete inventory | Use all paths in the pinned index, including supplemental files. An incomplete scan or absent stored point cannot prove worldwide absence; explicitly limit regional/subset claims. |
 | Source and scientific interpretation | Inspect retained supporting content, dates, actual license declaration/native CRS, units and geometry validity. HTTP 200, a matching hash or similar coordinates cannot substitute for those facts. Test wrong datum/units, missing cited content and relevant geometry edge cases. |
-| Safe reproduction | Execute the documented CLI twice into fresh owned run names. Test existing ordinary files, broken symlinks, traversal, escaped destinations and failures after computation. Admission failures create nothing; originals remain unchanged; partial runs have no valid completion receipt. |
+| Safe reproduction | For changed output handling, test the affected collision, traversal, symlink and failure paths in fresh owned destinations. A second full run is needed only for a changed determinism claim or explicit acceptance; reuse prior safety tests when the writer is unchanged. Admission failures create nothing; originals remain unchanged; partial runs have no valid completion receipt. |
 | Nonvacuous verification | Remove a required input, comparison target, required metric or expected source record. Empty responses and absent checks must fail; count actual experiment executions. |
 | Operating limits | Test producer-to-consumer bytes AND row bounds, retries against remaining job time and complete cleanup at realistic index size. Successful individual components do not establish end-to-end compatibility. |
 
@@ -39,7 +42,7 @@ Do not run every family on every PR. Select those implicated by changed behavior
 the acceptance claims. A correction requires examination of adjacent execution paths:
 producer/control writer, wrapper/imported helpers, scope/row joins or builder/consumer.
 Test the invariant that failed, not only the first reported fixture. Preserve successful
-parts of earlier repairs and do not reset another issue's PR allowance.
+parts of earlier repairs and do not expand another issue's acceptance or ownership.
 
 Missing required proof prevents the corresponding completion claim. Limited evidence
 may still advance a partial research PR when its acceptance permits those limits.
