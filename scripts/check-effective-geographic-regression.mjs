@@ -519,7 +519,8 @@ export function acquireNativeRows(snapshot,table,rows,options={}) {
       for(let i=Math.max(start,pin.offset);i<Math.min(end,pin.offset+pin.words);i+=2){
         const x=body[i-pin.offset],z=body[i-pin.offset+1],bits=snapshot.manifest.coordinateBits,mask=2**bits-1,target=offsets[k]+(i-start)/2*3;
         demand(Number.isSafeInteger(target)&&target>=offsets[k]&&target+2<offsets[k+1],'Foreign native projected ordinal');
-        words[target]=x&mask;words[target+1]=(z&mask)+1;words[target+2]=(x>>>bits)+(z>>>bits)*2**(32-bits);counts[k]++;
+        words[target]=x&mask;words[target+1]=(z&mask)+1;words[target+2]=(x>>>bits)+(z>>>bits)*2**(32-bits);
+        demand(words[target]<words[target+1]&&words[target+1]<=snapshot.manifest.size,'Native interval exceeds original grid domain');counts[k]++;
       }
     }
     return {part:pin.path,whole_inputs:member.inputs.map(p=>p.pin),phase_bytes:reader.used};

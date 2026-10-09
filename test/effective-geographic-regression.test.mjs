@@ -569,3 +569,25 @@ test('one complete row spanning two whole native members uses genuine bounded me
   for(const phase of complete.custody.member_phases)assert.ok(phase.phase_bytes<=256*1024*1024);
  }finally{f.cleanup();}
 });
+
+
+test('actual whole encoded interval outside the original native grid refuses during projection',()=>{
+ const f=fixture();try{
+  f.select([[[0,1,1]],[],[],[]]);
+  const manifestPath='data/canonical-grid/fixture/manifest.json',manifest=JSON.parse(fs.readFileSync(path.join(f.repo,manifestPath)));
+  manifest.size=3;
+  const rowWords=Uint32Array.from([0,1,1,0,1,0]),rowEncoded=gzipSync(shuffleOwnershipBytes(rowWords)),rowPin=manifest.parts.find(p=>p.kind==='rows');
+  Object.assign(rowPin,{words:6,bytes:rowEncoded.length,sha256:sha(rowEncoded),decoded_bytes:24,decoded_sha256:sha(Buffer.from(rowWords.buffer))});f.write('data/canonical-grid/fixture/'+rowPin.path,rowEncoded);
+  const words=Uint32Array.from([6,3]),encoded=gzipSync(shuffleOwnershipBytes(words)),pin=manifest.parts.find(p=>p.kind==='runs');
+  Object.assign(pin,{bytes:encoded.length,sha256:sha(encoded),decoded_bytes:8,decoded_sha256:sha(Buffer.from(words.buffer))});
+  f.write('data/canonical-grid/fixture/'+pin.path,encoded);
+  const raw=f.write(manifestPath,manifest),selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));selection.sha256=sha(raw);
+  const products=[{path:'manifest.json',bytes:raw.length,sha256:sha(raw)},...manifest.parts];
+  const receipt={method:manifest.method,checked_rows:3,checked_cells:9,unchecked_cells:0,checked_runs:1,installation_ready:false,products,two_run_products:products.length,run_one_sha256:sha(Buffer.from(JSON.stringify(products))),run_two_sha256:sha(Buffer.from(JSON.stringify(products)))};
+  const receiptRaw=f.write('coordination/engineering/fixture/receipt.json',receipt),proofCommit=f.commit();
+  f.write('scripts/native-ownership/verified-candidates.json',{version:1,candidates:{[sha(raw)]:{commit:proofCommit,path:'coordination/engineering/fixture/receipt.json',sha256:sha(receiptRaw),role:'reviewed-exhaustive-native-rule-comparison',installation_approval:false}}});
+  f.write('data/ownership-selection.json',selection);const version=f.commit();
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
+  assert.throws(()=>acquireNativeRows(snapshot,table,[0]),/original grid domain/);
+ }finally{f.cleanup();}
+});
