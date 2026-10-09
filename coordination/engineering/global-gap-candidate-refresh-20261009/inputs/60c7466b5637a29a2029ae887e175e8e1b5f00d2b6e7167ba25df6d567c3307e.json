@@ -1,0 +1,12 @@
+{
+  "method_id": "strict-world-proposal",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "actual_evidence_paths": [
+    "delivery/execution/controls-final-finish.json",
+    "delivery/execution/whole-pair-equality.json"
+  ],
+  "limit": "Guard controls and two full proposal runs; no activation or derived/native consumer completion.",
+  "run_one_sha256": "4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c",
+  "run_two_sha256": "4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c"
+}
