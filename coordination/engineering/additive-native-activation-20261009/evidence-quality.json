@@ -631,13 +631,15 @@
       "id": "current-before-rebind",
       "description": "One actual current-before qualification plus repeats only for demonstrated changed-code or duplicate certificate binding defects. Whole original source, current target/native rows, all Arctic predecessor rows and execution/time custody are verified; unchanged source science is reused.",
       "software": "Node24.19.0/Python3.12 exact installed runtime bodies captured in original issued and terminal custody",
-      "units": "native cells, complete rows, bytes and seconds"
+      "units": "native cells, complete rows, bytes and seconds",
+      "kind": "measurement"
     },
     {
       "id": "selected-consumer",
       "description": "Existing private V4 artifact consumption and selected additive reader, ordinary committed four-asset envelope/sidecar, production sparse patch and render/pick invariants",
       "software": "Actual current package-issued import closure; no submitted historical code executes as data authority",
-      "units": "native cells and complete owners"
+      "units": "native cells and complete owners",
+      "kind": "code"
     }
   ],
   "metrics": [
@@ -645,7 +647,7 @@
       "id": "current-supported-components",
       "value": 12,
       "unit": "components",
-      "vintage": "current",
+      "vintage": "baseline",
       "input_sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
       "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
     },
@@ -653,7 +655,7 @@
       "id": "current-new-native-cells",
       "value": 141,
       "unit": "cells",
-      "vintage": "current",
+      "vintage": "baseline",
       "input_sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
       "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
     }
@@ -702,5 +704,17 @@
     "Original current qualification exact command and runtime identity are retained in current-v9-qualification-final/terminal.json and issued-execution.json.",
     "node scripts/build-static.mjs through the ordinary package materializer and V4 private execution boundary.",
     "PATH=<bundled-node-bin>:<bundled-python-bin>:/usr/bin:/bin node scripts/build-static.mjs"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "current-supported-components",
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/selected-assets-readback.json",
+      "json_pointer": "/supported_components"
+    },
+    {
+      "metric_id": "current-new-native-cells",
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/selected-assets-readback.json",
+      "json_pointer": "/new_native_cells"
+    }
   ]
 }
