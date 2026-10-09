@@ -1,0 +1,16 @@
+{
+  "method_id": "engineering-owned-scope-routing",
+  "kind": "negative",
+  "outcome": "passed",
+  "executed_command": "node --test --test-reporter=tap test/handoff-scope.test.mjs test/issue-claims.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs",
+  "evidence_path": "coordination/engineering/engineering-owned-scope-routing-20261009/final-caller.tap",
+  "controls": [
+    "missing/malformed/duplicate/foreign work block",
+    "closed or foreign type issue and issue-number mismatch",
+    "unrelated and sibling namespaces and exact-file suffixes",
+    "unsafe broad roots, traversal, globs and duplicate grants",
+    "research campaigns, geography research and regional-review evidence",
+    "unchanged geography worker claim-mode and scope compatibility",
+    "existing cold-checkout caller controls using required P2 namespace"
+  ]
+}

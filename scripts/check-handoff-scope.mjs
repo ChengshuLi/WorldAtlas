@@ -12,14 +12,28 @@ export function validateGeographyOwnedPaths(ownedPaths){
  if(!Array.isArray(ownedPaths)||ownedPaths.length<1||ownedPaths.length>8||new Set(ownedPaths).size!==ownedPaths.length||ownedPaths.some(prefix=>typeof prefix!=='string'||prefix.length>512||!/^(data\/regional-review|research\/geography)\/[a-z0-9][a-z0-9-]{0,63}\/(?:[a-z0-9][a-z0-9-]{0,63}\/){0,8}$/.test(prefix)))throw Error('Geography needs 1–8 distinct declared owned_paths under data/regional-review/<packet-id>/ or research/geography/<campaign-id>/, optionally narrowed to safe subdirectories');
  return [...ownedPaths];
 }
+// A trailing slash grants a directory; otherwise the declaration grants one file.
+export function validateEngineeringOwnedPaths(ownedPaths){
+ if(ownedPaths===undefined)return [];
+ if(!Array.isArray(ownedPaths)||new Set(ownedPaths).size!==ownedPaths.length)throw Error('Engineering owned_paths must be distinct literal safe repository paths');
+ for(const owned of ownedPaths){
+  if(typeof owned!=='string'||!owned||owned.length>512)throw Error('Engineering owned_paths must be literal safe repository paths');
+  const prefix=owned.endsWith('/'),parts=(prefix?owned.slice(0,-1):owned).split('/');
+  if(parts.some(part=>! /^[a-zA-Z0-9_.-]+$/.test(part)||part==='.'||part==='..')||
+   prefix&&parts.length<2||['coordination/engineering','coordination/engineering/'].includes(owned)||
+   ['research/campaigns','research/geography','data/regional-review'].some(root=>owned===root||owned.startsWith(root+'/')))
+   throw Error('Engineering owned_paths cannot grant unsafe paths, namespace roots or research/geography evidence');
+ }
+ return [...ownedPaths];
+}
 export function validateLanePaths(branch,paths,{ownedPaths}={}){
  const {lane,id}=laneForBranch(branch);
- const owned=lane==='geography'?validateGeographyOwnedPaths(ownedPaths):null;
+ const owned=lane==='geography'?validateGeographyOwnedPaths(ownedPaths):lane==='engineering'?validateEngineeringOwnedPaths(ownedPaths):null;
  for(const file of paths){
   if(typeof file!=='string'||!file||file.startsWith('/')||file.includes('\\')||file.includes('\0')||file.split('/').some(part=>part==='..'||part===''||part==='.'))throw Error('Invalid repository path');
   if(lane==='research'&&!file.startsWith(`research/campaigns/${id}/`))throw Error(`Research changes must stay in its own campaign: ${file}`);
   if(lane==='geography'&&!owned.some(prefix=>file.startsWith(prefix)))throw Error(`Geography changes must stay in its declared owned_paths: ${file}`);
-  if(lane==='engineering'&&(file.startsWith('research/campaigns/')||file.startsWith('research/geography/')||file.startsWith('data/regional-review/')||file.startsWith('coordination/engineering/')&&file!==`coordination/engineering/${id}.json`&&!file.startsWith(`coordination/engineering/${id}/`)))throw Error(`Engineering must preserve other lanes' owned progress and research: ${file}`);
+  if(lane==='engineering'&&(file.startsWith('research/campaigns/')||file.startsWith('research/geography/')||file.startsWith('data/regional-review/')||file.startsWith('coordination/engineering/')&&file!==`coordination/engineering/${id}.json`&&!file.startsWith(`coordination/engineering/${id}/`)&&!owned.some(grant=>grant.endsWith('/')?file.startsWith(grant):file===grant)))throw Error(`Engineering must preserve other lanes' owned progress and research: ${file}`);
  }
  return {lane,id};
 }
@@ -67,12 +81,14 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
  if(options['issue-file']){
   const issue=JSON.parse(fs.readFileSync(options['issue-file'],'utf8'));
   validateIssueMetadata(options.branch,issue);
-  if(laneForBranch(options.branch).lane==='geography'){
+  const {lane}=laneForBranch(options.branch);
+  if(lane==='geography'||lane==='engineering'){
    const blocks=[...String(issue.body??'').matchAll(/<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->/g)];
-   if(blocks.length!==1)throw Error('A reviewed geography work scope is required');
+   if(blocks.length!==1)throw Error(`A reviewed ${lane} work scope is required`);
    const spec=JSON.parse(blocks[0][1]);
-   if(spec.mode!=='geography')throw Error('Geography issue ownership requires geography mode');
-   options.ownedPaths=validateGeographyOwnedPaths(spec.owned_paths);
+   if(spec.mode!==lane)throw Error(`Issue ownership requires ${lane} mode`);
+   if(lane==='engineering'&&(!Number.isInteger(spec.max_prs)||spec.max_prs<1||spec.max_prs>3||!Array.isArray(spec.depends_on)||spec.depends_on.some(n=>!Number.isSafeInteger(n)||n<1)||typeof spec.scope!=='string'||!spec.scope))throw Error('Engineering work items need bounded scope, 1–3 PRs and explicit dependency issue numbers');
+   options.ownedPaths=lane==='geography'?validateGeographyOwnedPaths(spec.owned_paths):validateEngineeringOwnedPaths(spec.owned_paths);
   }
   if(options.prBody&&validateIssuePRBody(options.prBody).github_issue!==issue.number)throw Error('Issue ownership file must match the PR issue');
  }
