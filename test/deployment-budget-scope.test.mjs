@@ -93,11 +93,12 @@ test('push before/after comparison includes rename origins and fails full for mi
 test('API failures use bounded authenticated read-only requests', async () => {
   let request;
   await assert.rejects(githubBudgetAPI('/repos/ChengshuLi/WorldAtlas/pulls/5', {token: 'fixture',
-    fetchImpl: async (url, options) => { request = {url, options}; return {ok: false, status: 503}; }}), /HTTP 503/);
+    fetchImpl: async (url, options) => { request = {url, options}; return new Response('{}', {status: 503}); }}), /HTTP 503/);
   assert.equal(request.url, 'https://api.github.com/repos/ChengshuLi/WorldAtlas/pulls/5');
   assert.equal(request.options.headers.Authorization, 'Bearer fixture');
   assert.ok(request.options.signal);
-  assert.equal(request.options.method, undefined);
+  assert.equal(request.options.method, 'GET');
+  assert.equal(request.options.redirect, 'error');
 });
 
 test('workflow keeps trusted bootstrap fallback and runs package checks only when their inputs can change', () => {
@@ -125,7 +126,7 @@ test('workflow keeps trusted bootstrap fallback and runs package checks only whe
     for (const entry of block.trim().split('\n').map(line => line.trim())) {
       assert.ok(!['package-lock.json', 'requirements.txt'].includes(entry));
       fs.mkdirSync(path.dirname(path.join(directory, entry)), {recursive: true});
-      fs.copyFileSync(entry, path.join(directory, entry));
+      fs.cpSync(entry, path.join(directory, entry), {recursive: true});
     }
     assert.equal(fs.existsSync(path.join(directory, 'node_modules')), false);
     assert.equal(fs.existsSync(path.join(directory, 'data')), false);
@@ -170,8 +171,9 @@ test('quota-blocked classification fails the required package job before expensi
 test('only read-only superseded PR work is cancelled; main package and merge scheduling remain separate',()=>{
  const budget=fs.readFileSync(new URL('../.github/workflows/deployment-budget.yml',import.meta.url),'utf8');
  const regression=fs.readFileSync(new URL('../.github/workflows/merge-integration-checks.yml',import.meta.url),'utf8');
- const handoff=fs.readFileSync(new URL('../.github/workflows/handoff-scope.yml',import.meta.url),'utf8');
- assert.match(budget,/group: worldatlas-package-\$\{\{ github\.event_name \}\}-\$\{\{ github\.event\.pull_request\.number \|\| github\.sha \}\}/);
- assert.match(budget,/cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}/);
- for(const yaml of [regression,handoff])assert.match(yaml,/concurrency:[\s\S]*?github\.event\.pull_request\.number[\s\S]*?cancel-in-progress: true/);
+ assert.match(budget,/group: worldatlas-package-main-\$\{\{ github\.sha \}\}/);
+ assert.match(budget,/cancel-in-progress: false/);
+ assert.match(regression,/concurrency:[\s\S]*?github\.event\.pull_request\.number[\s\S]*?cancel-in-progress: true/);
+ assert.match(regression,/github\.event\.action == 'edited' && 'metadata' \|\| 'code'/);
+ assert.doesNotMatch(budget,/^  pull_request:/m);
 });

@@ -55,7 +55,7 @@ node scripts/issue-lease.mjs inspect --issue 22
 
 Replace placeholders. Begin only after the command exits successfully and its result says `accepted: true`. Retain the receipt, claim ID and workflow link in your owned execution artifacts. A `status:claimed` label is visible convenience; the canonical bot-authored comment is authority. Public ownership nonces prevent accidental collisions, not impersonation by someone with repository write access.
 
-Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client retries canceled runs boundedly with jitter and never treats cancellation, timeout or missing confirmation as success. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
+Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client dispatches once and retains its request ID and pending checkpoint. It discovers the execution through a complete bounded inventory, then observes that exact execution and its durable result. Cancellation, timeout or missing confirmation is never success or permission to redispatch blindly. Resume observation with the original request/checkpoint; reconcile terminal or ambiguous results before deciding on a new request. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
 
 ## Keep, rotate and release a reservation
 

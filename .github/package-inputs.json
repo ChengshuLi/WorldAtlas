@@ -222,7 +222,10 @@
     "test/deployment-budget-scope.test.mjs",
     "test/package-inputs.test.mjs",
     "test/package-build.test.mjs",
-    "test/deployment-budget.test.mjs"
+    "test/deployment-budget.test.mjs",
+    ".github/workflows/merge-integration-checks.yml",
+    "scripts/check-pr-gates.mjs",
+    "test/pr-gates.test.mjs"
   ],
   "generated_outputs": [
     "dist/",

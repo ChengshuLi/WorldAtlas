@@ -1,0 +1,403 @@
+{
+  "version": 1,
+  "issue": 1543,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "8a10dbee77d2ab4e5a3ee6f6f456e457ad1fac8c",
+    "files": [
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 17868,
+        "sha256": "3713189e0768249fb9b10c5c847a192c7c78419dd1bfbb649874157c896cc7cc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/github-quota.mjs",
+        "bytes": 2743,
+        "sha256": "b58a3f5a858ccd9a2b3fb5207be30265fd69201a3d2d5a46f7c82ce484fb4690",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 27097,
+        "sha256": "2e514b20872d7358821f0c85eddeeee11a2b1ea7facf7ea5250efede8ad4dbae",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 3844,
+        "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/job-deadline.mjs",
+        "bytes": 4238,
+        "sha256": "c14b239a08d5b27f64253e164c8647b13ac0c593ffc21dc387982fbf11711a13",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 9725,
+        "sha256": "6392094b26c1d6c5e80df709d0dab167d3897a2f6c24c38459a3c953e6fffd2b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/handoff-scope.yml",
+        "bytes": 5511,
+        "sha256": "75e8ca673ee2f591bc56a15594c816460455d341b5d0df518944a283ae0014fc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/deployment-budget.yml",
+        "bytes": 5133,
+        "sha256": "cc6b3b35b2da21b9483a86d77db0d22b37ebbc166ff0aba032cd5d4773284ddb",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 10212,
+      "sha256": "117299e90acdf9518f0bdb84511334bbd28c932b4504b5cc652e89c0945f8e9f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "bytes": 4957,
+      "sha256": "9f9edcb7bd707de299422962e1b80a1ddaedfd16d3eae7280a6c8a9d7c37c767",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 17146,
+      "sha256": "9576abe3dc1e789ac97bf92265891a6238558df8a411df0a79f90d41579707e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/HANDOFF.md",
+      "bytes": 2926,
+      "sha256": "73d283b6fe438fe64e03c833eeac18c0de8445faefa8ea1b2014cf6b94176e5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/global-findings.json",
+      "bytes": 2856,
+      "sha256": "81babd39328555a1c7b0a18296b243fc1372558f8ac57c0fd936b62a31498eb2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/no-throttle-expanded-controls.log",
+      "bytes": 23003,
+      "sha256": "27df33266976a997f03b091b0b188eb3c3c0e42f09f00fdeeacae001c8dcd297",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ACTIONS_API_CAPACITY.md",
+      "bytes": 10414,
+      "sha256": "4ab39767f506ea153fc2eb83c9ec607434450073e257f2370bfb76011ca2f002",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 46814,
+      "sha256": "a1aad013a540904c4c43332200f9fb5107094bf5490740bcb3342c034b458a53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-pr-gates.mjs",
+      "bytes": 10066,
+      "sha256": "795697c2a180629c168fd5afcf0a0325de13943988c7591997027871f26ac3d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "bytes": 6194,
+      "sha256": "369a1a067513d6b2b95feb62bce481fd33cbf01e9bfcc1b345c408c9bf587b0f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/geographic-report-artifact.mjs",
+      "bytes": 7038,
+      "sha256": "9dcb0a4496ae821004440afa6c4d4530387f9fc6a8ef2b6f99062141d79134f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "bytes": 3360,
+      "sha256": "2aba14cfc473559fa9bb09f8bba8c1519fc34bad33c3095805f87a9acd38c885",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/github-snapshots.mjs",
+      "bytes": 1350,
+      "sha256": "c84af609081a989f8541906a5c47e39fde446adad7077f4e69e1c42e4b5fcd32",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 3876,
+      "sha256": "bcd873e6de93e79abe4cb9d677b95625b951f34d4982a040375ccdb73d0d523a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 23973,
+      "sha256": "950536fcdafbbcd5b770cf24fcab567b9928d47f0a7825e4dd91c0139c17bd91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-lease-client.mjs",
+      "bytes": 5569,
+      "sha256": "a42c1af582bf4bda669be1de3c843a7d32fe0afdc629db6166c842f91026cddf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-lease.mjs",
+      "bytes": 3607,
+      "sha256": "1bfc605befcedb5c3fa0cc4acc98f54435da94d8515fbf760ba52a036b141c31",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "bytes": 4661,
+      "sha256": "f6257e37a3139ceea7c886de48c446c94541112261d9f0b1b3622f584865ee32",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 27176,
+      "sha256": "d8578824b12cdd2ea19c5dc2b7d14d0b05bc6ec0314f775212980b8a6f091323",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 7383,
+      "sha256": "ef4dda2f43f98c16680fa33f89705c15d12345f8cc45aa2b15c337ba8e6d3f96",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 12122,
+      "sha256": "bd7d346c6ee6ed9734f0afbb58a69460b279e6343d444e1124991c1fb3ba19a1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-report-artifact.test.mjs",
+      "bytes": 8051,
+      "sha256": "18953301610269e648d725969f7ed35dac00185995a43068062bf4fa92d03081",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/github-admission.test.mjs",
+      "bytes": 11910,
+      "sha256": "6ea62bbbe1f66d8da1172e4b2d048dfab92161d25a0bcc3ed5d72faece00ea0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/github-snapshots.test.mjs",
+      "bytes": 5694,
+      "sha256": "3c68bf56256f2b4a138534b72c238fd098168329fbc052044d4afcb886197e34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-lease-cli.test.mjs",
+      "bytes": 5323,
+      "sha256": "04345b56e1e3c53421bc696f670e2133c54412bbcfa7b71f26f6c822977567ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-lease-client.test.mjs",
+      "bytes": 5681,
+      "sha256": "2205d08107a0a9004960339264df22627eef37858edaad0303abca22977f5d45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/pr-gates.test.mjs",
+      "bytes": 17308,
+      "sha256": "1e14acd61d4c7553a052fe2f1493b2f6de8ff76459e7f8560c09a9b9826b9ed3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "bytes": 4329,
+      "sha256": "d6eb617f1329042aea61b5492838bc7e377fc0c4c7c041665235380aca5593fd",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-fixture-controls",
+      "description": "Real entry points and isolated negative/positive controls; recorded local execution, not hosted adoption or global capacity proof.",
+      "software": "Node 24",
+      "units": "tests, milliseconds, HTTP attempts; no global reduction percentage inferred",
+      "kind": "code"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Hosted latency, global quota headroom and actual worker adoption remain unverified. Original setup and scientific performance acceptance remains unfinished.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/github-admission.test.mjs test/github-snapshots.test.mjs test/github-quota.test.mjs test/geographic-report-artifact.test.mjs test/deployment-budget-scope.test.mjs test/trusted-workflow-checkouts.test.mjs test/pr-gates.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/issue-lease-cli.test.mjs test/issue-lease-client.test.mjs test/git-blob-transport.test.mjs test/integration-proof.test.mjs test/job-deadline.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/global-quota-1543-20261009/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/package-inputs.json",
+      "status": "modified",
+      "original_sha256": "63870e3a32d8c16f863b59e8c66574d214b41e6d34f9ad42241270dc44d88a0f"
+    },
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "status": "modified",
+      "original_sha256": "cc6b3b35b2da21b9483a86d77db0d22b37ebbc166ff0aba032cd5d4773284ddb"
+    },
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "status": "removed",
+      "original_sha256": "75e8ca673ee2f591bc56a15594c816460455d341b5d0df518944a283ae0014fc",
+      "reason": "Scope/evidence checks move into the integration workflow with the same required identities. The exact original workflow remains in immutable Git history; no scientific evidence is deleted."
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "6392094b26c1d6c5e80df709d0dab167d3897a2f6c24c38459a3c953e6fffd2b"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/HANDOFF.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/global-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/no-throttle-expanded-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "docs/ACTIONS_API_CAPACITY.md",
+      "status": "modified",
+      "original_sha256": "0058ca83bb6c3717a4111d8a230d2332e665f5420e121b7cf55b88fd051acdb0"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "840413356a03572194af1086223536373925f58196692c5e06dc418cfdf71ace"
+    },
+    {
+      "path": "scripts/check-pr-gates.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "status": "modified",
+      "original_sha256": "7cdf02b7baa81bd63d73905095870eadfb872569df0d146595979db32e499df3"
+    },
+    {
+      "path": "scripts/geographic-report-artifact.mjs",
+      "status": "modified",
+      "original_sha256": "949732c85dbf8ffb06b19c2a76abaacfca26e4120da3940bf16f7b76ef531cfb"
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "status": "modified",
+      "original_sha256": "b58a3f5a858ccd9a2b3fb5207be30265fd69201a3d2d5a46f7c82ce484fb4690"
+    },
+    {
+      "path": "scripts/github-snapshots.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "status": "modified",
+      "original_sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "3713189e0768249fb9b10c5c847a192c7c78419dd1bfbb649874157c896cc7cc"
+    },
+    {
+      "path": "scripts/issue-lease-client.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/issue-lease.mjs",
+      "status": "modified",
+      "original_sha256": "5c6784a212607eece10bcb820f3713ccff38fc484d231879729bbb848f1a7d8d"
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "status": "modified",
+      "original_sha256": "c14b239a08d5b27f64253e164c8647b13ac0c593ffc21dc387982fbf11711a13"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "2e514b20872d7358821f0c85eddeeee11a2b1ea7facf7ea5250efede8ad4dbae"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "6c6b74512880f1d7bede38a1caccc0f08e64aadb48a94a059e8a400ae934d1ab"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "3801b2f978e00fa07ab7cead1f0c8a75c0783500a995e07be0e6463eb8343a8a"
+    },
+    {
+      "path": "test/geographic-report-artifact.test.mjs",
+      "status": "modified",
+      "original_sha256": "7d3c27335996fd390a8d1876661f7808fb6d4f36eec182e255796c749e685a6f"
+    },
+    {
+      "path": "test/github-admission.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/github-snapshots.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/issue-lease-cli.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/issue-lease-client.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/pr-gates.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "status": "modified",
+      "original_sha256": "6ae8f171f169c7a864a5ebc31a1dd5fff0496f22208cd060a3d8ae30360dc040"
+    }
+  ],
+  "metric_bindings": []
+}

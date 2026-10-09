@@ -1,17 +1,16 @@
 name: Deployment package budget
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches: [main]
 
 permissions: {}
 
-# Cancel superseded read-only PR builds; keep main push observations separate.
+# PR applicability now shares the trusted Integration queue regression phase.
+# Main push observations retain their own exact-commit execution.
 concurrency:
-  group: worldatlas-package-${{ github.event_name }}-${{ github.event.pull_request.number || github.sha }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: worldatlas-package-main-${{ github.sha }}
+  cancel-in-progress: false
 
 jobs:
   classify:
@@ -35,10 +34,9 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            scripts/classify-deployment-budget.mjs
-            scripts/github-quota.mjs
-            scripts/package-inputs.mjs
-            .github/package-inputs.json
+            scripts
+            src
+            .github
             package.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:

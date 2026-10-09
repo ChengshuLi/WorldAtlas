@@ -1,6 +1,7 @@
 // Privileged merge jobs inspect bounded bytes in memory, never extract archives.
 import {inflateRawSync, crc32} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {githubAPI} from './issue-claim-contract.mjs';
 
 const MAX_REPORT = 32 * 1024 * 1024;
 const MAX_ARCHIVE = 40 * 1024 * 1024;
@@ -69,7 +70,7 @@ async function boundedBody(response) {
   return Buffer.concat(chunks, size);
 }
 
-export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, token, fetchImpl = fetch}) {
+export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, token, fetchImpl = fetch, onRequest = () => {}}) {
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
     /^geography-[-a-zA-Z0-9]{16,100}-[1-9]\d*$/.test(artifactName ?? '') &&
     /^[a-f0-9]{64}$/.test(expectedHash ?? '') && token, 'Missing trusted geographic artifact outputs');
@@ -89,9 +90,8 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
     'Missing, duplicate, expired or oversized geographic artifact');
   // The initial fixed API host receives the token. Redirect delivery receives
   // no credentials, and its signed URL is never included in errors or logs.
-  const response = await fetchImpl(`https://api.github.com/repos/${repo}/actions/artifacts/${matches[0].id}/zip`, {
-    headers: {Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json'},
-    redirect: 'manual', signal: AbortSignal.timeout(30000)});
+  const client = typeof api.artifactRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
+  const response = await client.artifactRedirect(`/repos/${repo}/actions/artifacts/${matches[0].id}/zip`);
   need(response.status === 302, 'Geographic artifact API did not return a download');
   let destination;
   try { destination = new URL(response.headers.get('location')); } catch { throw Error('Invalid geographic artifact delivery address'); }
