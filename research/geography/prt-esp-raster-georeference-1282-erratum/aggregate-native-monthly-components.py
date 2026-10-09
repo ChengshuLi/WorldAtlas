@@ -14,6 +14,7 @@ OWN = "research/geography/prt-esp-raster-georeference-1282-erratum/"
 OLD = "research/geography/portugal-spain-gap-source-families-20261007/"
 HELPER = "scripts/evidence/immutable.py"
 RUNNER = OWN + "summarize-native-monthly-components.py"
+AGGREGATOR = OWN + "aggregate-native-monthly-components.py"
 INDEX = OLD + "inputs/complete-input-index.json"
 MATRIX = OLD + "outputs/source-status-matrix.json"
 AUDIT = OWN + "runs/run-1/native-coverage-audit.json"
@@ -102,7 +103,7 @@ def run() -> None:
     failure_vintage = "failed-" + sha((failure_head + "run-1" + failure_component).encode())[:16]
     failure_path = OWN + f"vintages/{failure_vintage}/failure.json"
     failure_receipt = str(Path(failure_path).parent / "publication.json")
-    pinned_paths = [HELPER, RUNNER, INDEX, MATRIX, AUDIT, GEOMETRY]
+    pinned_paths = [HELPER, RUNNER, AGGREGATOR, INDEX, MATRIX, AUDIT, GEOMETRY]
     pinned_paths += sorted(set(result_paths.values()))
     pinned_paths += [publication_path(path) for path in sorted(set(result_paths.values()))]
     pinned_paths += [failure_path, failure_receipt]
