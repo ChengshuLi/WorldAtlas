@@ -23,6 +23,7 @@ from pathlib import Path
 
 import numpy as np
 import rasterio
+from rasterio.io import MemoryFile
 from rasterio.windows import Window
 from shapely import contains_xy
 from shapely.geometry import Point, box, shape
@@ -172,15 +173,18 @@ def component_phase(commit: str, phase: str, component: dict, geometry: dict, ca
         by_tile[tile].append(asset)
 
     selected = []
+    authenticated_assets = {}
     for tile, tile_assets in sorted(by_tile.items()):
         first = next((a for a in tile_assets if a["filename"].endswith("_01.tif")), None)
         if first is None:
             raise ValueError("Missing January native transform for " + tile)
-        first_path = ROOT / OLD_REL / "sources/jrc/monthlyhistory-v1_5-2024" / first["filename"]
-        with rasterio.open(first_path) as ds:
+        first_path = OLD_REL + "sources/jrc/monthlyhistory-v1_5-2024/" + first["filename"]
+        first_raw = baseline.materialized_bytes(first_path)
+        if sha(first_raw) != first["sha256"]:
+            raise ValueError("Materialized raster differs from captured bytes")
+        authenticated_assets[first_path] = first_raw
+        with MemoryFile(first_raw) as memory_file, memory_file.open() as ds:
             meta = audit_assets[first["filename"]]
-            if sha(baseline.materialized_bytes(OLD_REL + "sources/jrc/monthlyhistory-v1_5-2024/" + first["filename"])) != first["sha256"]:
-                raise ValueError("Materialized raster differs from captured bytes")
             if not valid_header(ds.crs.to_string() if ds.crs else None, tuple(ds.transform), meta):
                 raise ValueError("Native header differs from retained independent metadata")
             if ds.width != 40000 or ds.height != 40000 or ds.dtypes != ("uint8",) or ds.block_shapes != [(1024, 1024)]:
@@ -198,9 +202,14 @@ def component_phase(commit: str, phase: str, component: dict, geometry: dict, ca
             raise ValueError("A complete twelve-month tile series is required")
         for asset in tile_assets:
             asset_path = OLD_REL + "sources/jrc/monthlyhistory-v1_5-2024/" + asset["filename"]
-            baseline.materialized_bytes(asset_path)
+            raw = authenticated_assets.get(asset_path)
+            if raw is None:
+                raw = baseline.materialized_bytes(asset_path)
+                authenticated_assets[asset_path] = raw
+            if sha(raw) != asset["sha256"]:
+                raise ValueError("Materialized raster differs from captured bytes")
             native = audit_assets[asset["filename"]]
-            with rasterio.open(ROOT / asset_path) as ds:
+            with MemoryFile(raw) as memory_file, memory_file.open() as ds:
                 if not valid_header(ds.crs.to_string() if ds.crs else None, tuple(ds.transform), native):
                     raise ValueError("Monthly native affine differs from its audited metadata")
                 for br, bc in blocks:
@@ -221,7 +230,8 @@ def component_phase(commit: str, phase: str, component: dict, geometry: dict, ca
         tile_assets = sorted(by_tile[tile], key=lambda row: row["filename"])
         for asset in tile_assets:
             asset_path = OLD_REL + "sources/jrc/monthlyhistory-v1_5-2024/" + asset["filename"]
-            with rasterio.open(ROOT / asset_path) as ds:
+            raw = authenticated_assets[asset_path]
+            with MemoryFile(raw) as memory_file, memory_file.open() as ds:
                 if not valid_header(ds.crs.to_string() if ds.crs else None, tuple(ds.transform), audit_assets[asset["filename"]]):
                     raise ValueError("Native transform changed after phase admission")
                 month = int(asset["filename"][-6:-4])
@@ -405,7 +415,10 @@ def record_prior_failure(commit: str, phase: str, component_id: str, error: str)
     geom = shape(geometry["geometry"])
     asset = next(row for row in capture["assets"] if row["filename"].endswith("_01.tif") and "10W_40N" in row["filename"])
     tile_path = OLD_REL + "sources/jrc/monthlyhistory-v1_5-2024/" + asset["filename"]
-    with rasterio.open(ROOT / tile_path) as ds:
+    tile_raw = baseline.materialized_bytes(tile_path)
+    if sha(tile_raw) != asset["sha256"]:
+        raise ValueError("Failure-record source differs from captured bytes")
+    with MemoryFile(tile_raw) as memory_file, memory_file.open() as ds:
         blocks = candidate_blocks(geom, ds)
     if not blocks:
         raise ValueError("Failure component no longer has native raster blocks")
