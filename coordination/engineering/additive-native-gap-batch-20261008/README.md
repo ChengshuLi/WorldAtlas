@@ -61,7 +61,10 @@ including hostile source, identity, ordering, conflict and owner cases.
 `original-execution-custody/receipt-v2.json` retains whole Git commit/tree/blob
 objects and original commit/path/mode bindings for all three issued requests,
 executed source/batch code, original source-code bodies and both supervisors.
-The five installed Noble module bodies are retained separately. Run
+The five installed Noble module bodies are retained as ordinary tracked files
+in `original-execution-custody/module-bodies/`. The supported reader maps each
+original `node_modules/@noble/hashes/<name>` receipt path to that explicit archive
+filename; it never falls back to an installed or ignored dependency directory. Run
 `node coordination/engineering/additive-native-gap-batch-20261008/check-execution-custody.mjs`
 for a read-only whole-object and complete Merkle-path check. It executes no
 scientific producer. The full exact external Node executable is separately pinned
