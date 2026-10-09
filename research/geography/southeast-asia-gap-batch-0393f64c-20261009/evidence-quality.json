@@ -1455,5 +1455,32 @@
     "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
     "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
     "node scripts/evidence-quality.mjs research/geography/southeast-asia-gap-batch-0393f64c-20261009/evidence-quality.json"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "batch_components",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/component-state.json",
+      "json_pointer": "/component_count"
+    },
+    {
+      "metric_id": "batch_families",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/component-state.json",
+      "json_pointer": "/family_count"
+    },
+    {
+      "metric_id": "priority_bindings",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+      "json_pointer": "/summary/priority_cases"
+    },
+    {
+      "metric_id": "unresolved_priority_decisions",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+      "json_pointer": "/summary/unresolved_decisions"
+    },
+    {
+      "metric_id": "approved_repairs",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+      "json_pointer": "/summary/approved_repairs"
+    }
   ]
 }
