@@ -1,0 +1,31 @@
+"""Actual cold producer custody boundaries; no world/area calculation."""
+import pathlib,tempfile,hashlib,importlib.util,os,shutil
+SOURCE=pathlib.Path(__file__).with_name('pixel-source-area.py')
+spec=importlib.util.spec_from_file_location('pixel_source_area_controls_target',SOURCE)
+module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+root=pathlib.Path(tempfile.mkdtemp(prefix='pixel-source-area-')).resolve()
+try:
+    body=root/'body';body.write_bytes(b'complete-body');body.chmod(0o644)
+    pin={'path':str(body),'bytes':len(b'complete-body'),'mode':0o644,'sha256':hashlib.sha256(b'complete-body').hexdigest()}
+    assert module.admitted_read(pin)==b'complete-body'
+    negatives=0
+    def reject(call):
+        global negatives
+        try:call()
+        except (AssertionError,FileNotFoundError):negatives+=1
+        else:raise AssertionError('Adverse body accepted')
+    reject(lambda:module.admitted_read({**pin,'bytes':pin['bytes']-1}))
+    reject(lambda:module.admitted_read({**pin,'mode':0o755}))
+    reject(lambda:module.admitted_read({**pin,'sha256':'0'*64}))
+    reject(lambda:module.admitted_read({**pin,'path':str(root/'missing')}))
+    link=root/'link';link.symlink_to(body)
+    reject(lambda:module.admitted_read({**pin,'path':str(link)}))
+    reject(lambda:module.ordinary(root/'..'/root.name/'body'))
+    # Output refusal precedes runtime/module/source body reads at real run entry.
+    calls=[];original=module.admitted_read
+    module.admitted_read=lambda *args,**kwargs:calls.append(args)
+    reject(lambda:module.run({},root/'foreign-output'))
+    reject(lambda:module.run({},module.ROOT/'.cache'/'..'/'escaped'))
+    assert calls==[];module.admitted_read=original
+    print({'positive':1,'negative':negatives,'source_body_opens_on_bad_destination':0,'source_areas_computed':0})
+finally:shutil.rmtree(root)
