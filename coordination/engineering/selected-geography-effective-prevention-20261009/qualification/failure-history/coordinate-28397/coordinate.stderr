@@ -1,0 +1,30 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:11
+const demand=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
+                                 ^
+
+Error: Complete selected source order differs from legacy footprint digest; bounded sorted acquisition required
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:11:34)
+    at onFeature (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:33:72)
+    at Module.selectedCoordinateShard (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:69:109)
+    at coordinateStage (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:34:54)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:104:48
+
+Node.js v24.19.0
+        2.32 real         1.51 user         0.75 sys
+           344178688  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              147404  page reclaims
+                2995  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                1859  messages sent
+                1435  messages received
+                   0  signals received
+                 205  voluntary context switches
+                5219  involuntary context switches
+          5678472933  instructions retired
+          2200330483  cycles elapsed
+           203662912  peak memory footprint

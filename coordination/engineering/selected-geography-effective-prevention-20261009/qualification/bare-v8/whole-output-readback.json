@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "scope": "Actual frozen cold source certificate output inverse/complete projection only; no new scientific predicates, physical source approval, activation or final prevention acceptance.",
+  "head": "5a29ed4260f816c1cc9fbccc2567061f6a57890b",
+  "input": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+  "publication_sha256": "5d325e48600754cc6aebf4adb10ed40720f9bebf13e75bcf0b9fe1ce11348dde",
+  "certificate": {
+    "bytes": 7513600,
+    "decoded_bytes": 18406343,
+    "decoded_sha256": "266bb3d9f51ea538fa162c7d53210483fc418e285e20511bdd15c73391272512",
+    "path": "certificate.json.gz",
+    "sha256": "1507ea56e3e95c54ee08b8e65b1d0e786b4af3a1b12b64126ed6d5c55fc116a7"
+  },
+  "facts": {
+    "bytes": 43830,
+    "path": "facts.json",
+    "sha256": "42a646f845a920b1c28c0e2ea4a63047cf7a602a05db352b85bacb5a7a488a1f"
+  },
+  "complete_owners": 49625,
+  "complete_sources": 36,
+  "source_phases": 36,
+  "max_source_phase_bytes": 238398951,
+  "join_phase_bytes": 255322905,
+  "historical_footprint_authority": {
+    "recomputed": false,
+    "release": {
+      "changes_sha256": "4a2fa90b72843f8fe26f56719f85a8044c30367576f9a938d26988182d11e540",
+      "expected_counts": {
+        "area": 480,
+        "continent": 6,
+        "location": 49625,
+        "province": 5137,
+        "region": 81,
+        "subcontinent": 29
+      },
+      "footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "id": "geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e",
+      "location_ids_sha256": "b8eb3ab175f84531156e4f61297aca4205cefe63a660909b0a5db79fed36e8d1",
+      "membership_sha256": "3e2e7b48166d503a510a5554be751119b6f00c41fe090ad27cc2f5ea3eab328d",
+      "metadata": {
+        "decision_sha256": {
+          "africa.json": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
+          "asia.json": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+          "europe.json": "c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f",
+          "north-america.json": "0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1",
+          "oceania.json": "48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34",
+          "south-america.json": "f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6"
+        },
+        "geometry_migration": {
+          "after_footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433",
+          "before_footprints_sha256": "6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1",
+          "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+          "history_transfer": "none",
+          "path": "data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz",
+          "sha256": "84af24772c716b5252ef7b2048c0a2787bfa72d8c8723fb5220d6a89a85aba23"
+        },
+        "geometry_proof_sha256": {
+          "geometry-0": {
+            "after_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+            "before_footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+            "manifest_sha256": "ae64e938771d28e6cbd9d79e97f83b1893bb43c99c0e22e50145043293cbb4c1",
+            "receipt_sha256": "c53b644a641f85d6bc225997e8f6836afd0a4ae82d46e0a86d5147a3d9255c3e"
+          },
+          "geometry-1": {
+            "after_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1",
+            "before_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+            "manifest_sha256": "ebab41faa03d9dad97463959870af47ae4f2a9aae45e873934f1a82da21daec3",
+            "receipt_sha256": "30022e81d3363ab8b6b62866255165844bc7b67f2dd83617072e0f3e45c0837a"
+          },
+          "geometry-2": {
+            "after_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+            "before_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1",
+            "manifest_sha256": "028e882cd2f8e372922ed2a3fa442edb1babc9c49abeee15940728f9f186d27c",
+            "receipt_sha256": "952eda1e94bae652cb6c7f48e606c5102b32f21a4a53451f9307a538fc49d562"
+          },
+          "geometry-3": {
+            "after_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09",
+            "before_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+            "manifest_sha256": "c2db31d0e0eecf50148dc00f30032d8bfe59021ea1ff804a7eff784537ae063b",
+            "receipt_sha256": "1f5266158232abf60e88719aed7a693960507e5df6e3d125d7e277bb97609f34"
+          },
+          "geometry-4": {
+            "after_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+            "before_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09",
+            "manifest_sha256": "de04ca036fb210452b6f8a50b075c816a57a46483fb1371248e162e6992bddd0",
+            "receipt_sha256": "01be7e7e383e1ba7be7a1d8292a61e928f6195e3a11ce4a03839cbb96889f58b"
+          }
+        },
+        "historical_membership_not_asserted": true,
+        "metadata_migration_sha256": {
+          "metadata-0": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5",
+          "metadata-1": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937",
+          "metadata-2": "5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468",
+          "metadata-3": "09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f",
+          "metadata-4": "ddf8546553aaeb32905d6d60fbe3d001876f40b41b0c6f337f55978776c2367f",
+          "metadata-5": "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f"
+        },
+        "migration_sha256": "8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324",
+        "original_registry_preserved": true,
+        "physical_reference_correction": {
+          "historical_cause_approval": false,
+          "issue": 1295,
+          "legal_administrative_authority": false,
+          "source_role": "Main-approved physical-reference envelope only",
+          "subjects": [
+            "atlas:physical:CAN-103:QUE",
+            "atlas:physical:CAN-114:NFL"
+          ],
+          "water_classification": false
+        },
+        "predecessor_manifest_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7",
+        "predecessor_release_id": "geography:review:2632d51da0efa5574c74638afe441c4efd5f29e93804c507a24cc6dbb56c0199",
+        "reference_only": true,
+        "registered_identity_manifest_sha256": {
+          "082167093c95839c141e63a8e414016b3f24f755cc471bb380e57158ff5c8b7b": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+          "0b7060d963f5c5ecef5ae2bde33b521a3d51bf9490d57ad41eb56cff1554a766": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+          "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e"
+        }
+      },
+      "reference_date": "2026-10-07",
+      "source_id": "source:atlas:geographic-review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e",
+      "version": 8
+    },
+    "value": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433"
+  },
+  "operating": {
+    "version": 1,
+    "kind": "selected-coordinate-operating-v1",
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--expose-gc",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "coordinate",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work",
+      "5a29ed4260f816c1cc9fbccc2567061f6a57890b",
+      "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/selected-prevention/coordinate-5a29/current-v8-coordinate-5a29"
+    ],
+    "head": "5a29ed4260f816c1cc9fbccc2567061f6a57890b",
+    "input_commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+    "limits": {
+      "rss_bytes": 536870912,
+      "wall_seconds": 1200,
+      "sample_seconds": 0.5
+    },
+    "elapsed": 16.31043516600039,
+    "root_identity": {
+      "ppid": 8243,
+      "pgid": 8244,
+      "started": "Fri Oct 9 02:21:39 2026"
+    },
+    "exit_code": 0,
+    "refusal": null,
+    "lifetime_rss_bytes": 518455296,
+    "sample_peak_bytes": 489193472,
+    "owned_processes_remaining": [],
+    "termination_events": [],
+    "qualified": true,
+    "publication_exists": true,
+    "supervisor_sha256": "a379a570b98a8464be5eaa91bfbac4c77ba05ecf3964fe57b3d177f297bec08b",
+    "helper_sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+  }
+}

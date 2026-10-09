@@ -1,0 +1,1421 @@
+{
+  "version": 1,
+  "issue": 1569,
+  "lane": "engineering",
+  "worker_id": "01a11935-1ccd-7fa3-a01f-563ff29045ee",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 298,
+        "sha256": "e00f6a6e02661e60085688ff336c91001f3c691bf2694dd336fa7a18e357a876",
+        "hash_kind": "file-bytes",
+        "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de"
+      },
+      {
+        "path": "data/canonical-grid/eastern-v8/manifest.json",
+        "bytes": 251732,
+        "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+        "hash_kind": "file-bytes",
+        "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de"
+      },
+      {
+        "path": "scripts/check-geographic-regression.py",
+        "bytes": 15093,
+        "sha256": "5d64ca376f29e9468eda5f617e77774dc7b43160f4d490b3ade9045b6913f569",
+        "hash_kind": "file-bytes",
+        "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de"
+      }
+    ],
+    "pins": {
+      "selected_native_manifest": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+    },
+    "pin_files": {
+      "selected_native_manifest": {
+        "path": "data/canonical-grid/eastern-v8/manifest.json",
+        "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de"
+      }
+    },
+    "subject_files": []
+  },
+  "sources": [
+    {
+      "id": "selected-source-native-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "role": "Complete immutable selected source/native and original qualification provenance; not new physical approval",
+      "vintage": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing geographic source rights/authority/date remain unapproved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Read complete retained certificate triples, complete original Git Merkle/code/private-body custody and full published immutable source aliases. No source science rerun.",
+      "limit": "Physical source authority/water/date/history unapproved; staged additive repair unactivated and N2 current-bank rebind remains required. Normal final exact-head CI/review/queue remain required.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/REPRODUCTION.md",
+      "bytes": 4149,
+      "sha256": "247cb03bc3ff7f9f7f28c81ef0a5b3b9fe11f6eea1eb2a5233773f37a09a0d9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/catalogue.json.gz",
+      "bytes": 32082,
+      "sha256": "d1d4e039b468b0dd460a803e4469e93e266633e3e01a96f0d78e3f7d8d9f261b",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 117061,
+      "uncompressed_sha256": "f45c64324d821763cb3faa1c76bd6bdee62b2f508ad891deab9839d20b3cc5d4"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/certificate.json",
+      "bytes": 44026,
+      "sha256": "440b3965b783671ed51fb27d14419322b2987ef55a985af41c775ac46daf1a30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/catalogue.json.gz",
+      "bytes": 32082,
+      "sha256": "d1d4e039b468b0dd460a803e4469e93e266633e3e01a96f0d78e3f7d8d9f261b",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 117061,
+      "uncompressed_sha256": "f45c64324d821763cb3faa1c76bd6bdee62b2f508ad891deab9839d20b3cc5d4"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/certificate.json",
+      "bytes": 44026,
+      "sha256": "c968712b2d72ebb95a0a0d53f58a551d06d5daf06563ba088d842ba15e47b70e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/original-inputs.json",
+      "bytes": 2716,
+      "sha256": "c4e46ef68bcd90653330cdd118bc28dad6d12e25549414eda3f6229e99920c2a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/registry.json.gz",
+      "bytes": 237425,
+      "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 745951,
+      "uncompressed_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/review.json",
+      "bytes": 7071,
+      "sha256": "7bd742247d4f2c2435fcb8c9bbc3134d3edc6193f312171bdb9a3b2ffd769c72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/selection.json",
+      "bytes": 1361,
+      "sha256": "a8981a41e9cbd9cee8ce5185b1f38e87959b19b5d054ddbc501ac4f5e084e6ad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/original-inputs.json",
+      "bytes": 2707,
+      "sha256": "94262ce2dbc8c576f5f4354261b92870e8ca03cd8e29a80ba27b48c379ca454c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/registry.json.gz",
+      "bytes": 237425,
+      "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 745951,
+      "uncompressed_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/review.json",
+      "bytes": 6411,
+      "sha256": "5d6758debd9c2e141b83c40594486939f6fa2fd819816070957bbc4b0f1075c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/selection.json",
+      "bytes": 1361,
+      "sha256": "e5f77bb127484dd19766b473a98d8359352318e613c2b1f1b7da75a8ff9930c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/artifact-consumption-renewed-real-controls.json",
+      "bytes": 674,
+      "sha256": "71dfb4224e7ad4faed55d7ad920557c4221b0dd48878666457b4e8725882a856",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/fifo-original-shallow-closure-failure.log",
+      "bytes": 614319,
+      "sha256": "392238668cabc5ad5fe79504b8a28d2037b1da4e39e67161057636edca653d90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/fifo-original-shallow-closure-observer.log",
+      "bytes": 1036,
+      "sha256": "90a7d4b608e3a2e9bc3635b9b43dccb5bc06e1fbdbd73d45a329dd922edddeb6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/final87f-effective-controls.log",
+      "bytes": 1699,
+      "sha256": "0340b2de7cc7727731e9c4fc55dec7b7e33900c79eda1b274a653239528fb128",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/full44-regression-controls-v3.log",
+      "bytes": 144,
+      "sha256": "5d4283e23c82f8e323b43a0aef656d41f19aa1d9041ca550a693d21d5ab162e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/latest999-interface-tracked-controls.log",
+      "bytes": 220,
+      "sha256": "fa337a8556176303d37d6a7c3e040b38b1e47f52624d558a63863d9f6448396f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/local-draft-evidence-check.json",
+      "bytes": 17663,
+      "sha256": "eca337d92fd7cef895ba7359d73942bb522fd7b27fc6a6166166cd0b515caf93",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/original-custody-adverse-controls.json",
+      "bytes": 391,
+      "sha256": "58cd93df375aa207fccbc947adbf6d72bc631030055e8f2c07d51baad05957ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/original-custody-offline-inverse.json",
+      "bytes": 680,
+      "sha256": "93e513066cd20c9142ad564edbe96a34636a0f8ee3bfb4205c7b059545a5e538",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/qualified-original-native-controls-v5.log",
+      "bytes": 9082,
+      "sha256": "ff5569439ede75c4f1f2f98a76733a23999c5b9defa753cdfb2f80f80ee8c8ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/registry-authority-real-controls-v2.log",
+      "bytes": 2824,
+      "sha256": "aec144e7a3f0e428c073713c978ccf7d6289a0abb3ac9d2339834b6119e095a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/renewed-catalogue-real-controls.json",
+      "bytes": 656,
+      "sha256": "c3525df6b12c4bfe80ee3f5c9e64ab2e8dbd7126f9af40650802266130a17a19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/renewed-interface-no-downgrade-controls.log",
+      "bytes": 220,
+      "sha256": "e320cedba288d1b26e42d6ecdf3bacd1dbcc304ef16f2bf1a89a42e8aa2727cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/result.json",
+      "bytes": 418,
+      "sha256": "a8dea6ce35fe0e8d9d2bf20a86dea63c75875f307fa1c6712a89a13df3a2a2bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/selected-hook-real-adverses-v2.json",
+      "bytes": 1332,
+      "sha256": "5d7e7986ee8b689ba64631129e3da35940809daa8bca77a0ff530c9ede8f8ec7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-bare-runtime-environment-failure.log",
+      "bytes": 17569,
+      "sha256": "54c712cc17ab3a0fc99af3d1c46a9a55e9ba04c74e6b05a871b0b7694eaba1da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-corrected17-controls.log",
+      "bytes": 2431,
+      "sha256": "66a4d593590ee1d349ca4f112357169995fc7f2d96553cfcd714950addd0ec42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-correction-receipt.json",
+      "bytes": 1042,
+      "sha256": "20f890593c7efa528e36b021e830dcacab555f09f3278a77035acbd48a742e79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-local-scientific-test-launcher",
+      "bytes": 437,
+      "sha256": "d2d2cb7d7e9d2c841f87b51dc70886260173082813cb42415cf47757288fd2ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-original-diagnostic.log",
+      "bytes": 3013,
+      "sha256": "ab15a8f022943a412a3eaa68fe01a1566a4da1f7021c7019a8baa1e3cb635485",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/accepted-review-6071720745.json",
+      "bytes": 80643,
+      "sha256": "9289881b1d98ec6381138c00069e4ab6ee99a43d8d346d346dd0f705779d9208",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/accepted-review-6073179645.json",
+      "bytes": 52917,
+      "sha256": "47650f2a7499ba2952f64481c4b2003bf432be92c77a3b72918cbfe16eeaeda0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-preimage.json",
+      "bytes": 20553,
+      "sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-source-custody.json",
+      "bytes": 6001,
+      "sha256": "1dadbf639bb94a7fb739782e0196ad27f667ee40638303ca5bf54c2be38e7e5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-preimage.json",
+      "bytes": 2246,
+      "sha256": "f08ddf9c1d0534aecda36ff134d6398d48c618a7e6982e7f51c31914c2140faf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-source-custody.json",
+      "bytes": 5808,
+      "sha256": "5f395fb1a8537a1e266e976a9debc07ba7cd11838a8e820f87ede39fe64146d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/supported-programs.json",
+      "bytes": 11915,
+      "sha256": "ebc3a6ca3c5f496a3e46e553dcc8455332cad49768e5c1ac32d29ad43c036528",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/certificate.json.gz",
+      "bytes": 7513600,
+      "sha256": "1507ea56e3e95c54ee08b8e65b1d0e786b4af3a1b12b64126ed6d5c55fc116a7",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 18406343,
+      "uncompressed_sha256": "266bb3d9f51ea538fa162c7d53210483fc418e285e20511bdd15c73391272512"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/coordinate-operating-receipt.json",
+      "bytes": 1737,
+      "sha256": "c7217bfcd7618347e76f55b36ac36c7ec27aac2cc99f87bf74d80eb48cc6159e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/coordinate.stderr",
+      "bytes": 777,
+      "sha256": "9b7e224bce9c5bf2efc0a3f63d17f3fe00145d9e65e7b41c6db0359734dd4416",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/facts.json",
+      "bytes": 43830,
+      "sha256": "42a646f845a920b1c28c0e2ea4a63047cf7a602a05db352b85bacb5a7a488a1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/publication.json",
+      "bytes": 442,
+      "sha256": "5d325e48600754cc6aebf4adb10ed40720f9bebf13e75bcf0b9fe1ce11348dde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/supervisor.py",
+      "bytes": 3455,
+      "sha256": "a379a570b98a8464be5eaa91bfbac4c77ba05ecf3964fe57b3d177f297bec08b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/supervisor.stdout",
+      "bytes": 1623,
+      "sha256": "1753ccbd42746fa6f4a82da877f92927bf9f73a0dd417f54fa98e0f3b88b8477",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/whole-output-readback.json",
+      "bytes": 9410,
+      "sha256": "e83df1e44788f65c7c18368a1798526c254281b057bc35e10df0eede18e0b819",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/certificate.json.gz",
+      "bytes": 7513712,
+      "sha256": "650c43b24920a32a17c70e5d7e1c7df12c6d4fc8705b94a55deb290b078277b0",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 18406580,
+      "uncompressed_sha256": "e3558c631bf712e4607c012a924065b24e7103986a4ef9dfae1f105437ee126a"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/coordinate-operating-receipt.json",
+      "bytes": 1748,
+      "sha256": "3e1c12824f4fdb332c83326da58739e713f073bc643a996a6d1e85fc3c501161",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/coordinate.stderr",
+      "bytes": 777,
+      "sha256": "902b21b50482cc189e5aaf2102f0dbfd9bcef16d8ee5cc9d836ef370d1c722c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/facts.json",
+      "bytes": 46609,
+      "sha256": "658cb7d797a0a2be31571dc184cce837231a86040e829011d98d4cef0e81ce71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/publication.json",
+      "bytes": 442,
+      "sha256": "6bec568d569dc55cb31ea33c1ccbe49df4e1cc9c627182cf6cb8ce1869b924e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/supervisor.py",
+      "bytes": 3463,
+      "sha256": "fa83d97f7ec0825217d2d4d6ce4c5e996c8ae6b079a93a7c310768c9d9575af8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/supervisor.stdout",
+      "bytes": 1634,
+      "sha256": "e9d8e04079a18597c888501158c320402ff024b3671c6860da4497e1a5b22797",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/whole-output-readback.json",
+      "bytes": 606,
+      "sha256": "61cdb95519578e946682a6164408727e38759d7afba480031838fcc038b96091",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/coordinate-operating-receipt.json",
+      "bytes": 1906,
+      "sha256": "4ed4bb3b339760babbe84b203c1fb6ceffb54e2468d444e27305921c867916bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/coordinate.stderr",
+      "bytes": 813,
+      "sha256": "2b89a8a0cc788e35c87a53bf980ca920241e2fcfaf21dde427941c42f3c84014",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/supervisor.py",
+      "bytes": 3441,
+      "sha256": "2c2c58cc3aa8e41ecd8e4d6b27566ab3957d40796eabafacdc4984885ddd77bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/supervisor.stdout",
+      "bytes": 1732,
+      "sha256": "ad0a5037fec19f90b997ca5ac42cf909de82792293755bb02e209b33071ac4ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate-operating-receipt.json",
+      "bytes": 1707,
+      "sha256": "31c1ba5d8312daf0c6756a4f857aa47a80e9d610116c46648375d4d45997ba94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate-supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate-supervisor.stdout",
+      "bytes": 1597,
+      "sha256": "1ac3d9542b3fda85e774e94299cafd4bb8dbf1a8217102da5d64311608417ca2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate.stderr",
+      "bytes": 2757,
+      "sha256": "5402e0d066874d32bffbea2cbe668e1f81ae215ca076142b91355721ef461aba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/coordinate-operating-receipt.json",
+      "bytes": 1739,
+      "sha256": "79fb8301e5a11cf17e1b663857a25ae9fc589b4d6b055e75d97988ceb134cdef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/coordinate.stderr",
+      "bytes": 2511,
+      "sha256": "84f3b4b46be6634000fbc15e48f65ba3fd0e920adcb636d461e1325a8aa70659",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/supervisor.py",
+      "bytes": 3453,
+      "sha256": "a6dcd3d5d17ebf4088450301556c3731b7a9bc2970b9f616905987ffca489fb6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/supervisor.stdout",
+      "bytes": 1625,
+      "sha256": "d8ac3baad30ca34ba40a7bf752ec190a61ef7510b6908425f5c844e901af3026",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/coordinate-operating-receipt.json",
+      "bytes": 1740,
+      "sha256": "f2836b5a4f4184d56b95c9040e808dd2b2d1da4cf0300057a150afd0eebf7cb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/coordinate.stderr",
+      "bytes": 2382,
+      "sha256": "5e6add2a7747bf6011f50598dea4e5872df10211e89a07463c86bae1fcdc1256",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/supervisor.py",
+      "bytes": 3453,
+      "sha256": "1a3d5f7952b3d77ad5779f8c87fab3c33bcdccf8c6975992a71aa834510a8d64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/supervisor.stdout",
+      "bytes": 1626,
+      "sha256": "8670364b3f8848a2e02b5844f30ada3808f2c6772e8baed6e6f8ce27a3b22ec9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/coordinate-operating-receipt.json",
+      "bytes": 1746,
+      "sha256": "60949aae1bc2cd53ec0b5790609e4230cf1a4752a8827b3ed11cfacd138780fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/coordinate.stderr",
+      "bytes": 3239,
+      "sha256": "687bea51eeaf26c246ab950aa03d81f915009373c45850f4f18959e28bbfba5d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/supervisor.py",
+      "bytes": 3465,
+      "sha256": "0f221bf86a79fed6acf03e6e6fd035108176ad240052f93b01ad90177df39605",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/supervisor.stdout",
+      "bytes": 1632,
+      "sha256": "3b14507b4efc5e277654f575d391769f91011e14eeb1dcd6c73ed6a2fa4a01a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/coordinate-operating-receipt.json",
+      "bytes": 1746,
+      "sha256": "81867f16893e1dc62d14ceaaadad5d3924d690858f803f5c1cb7e10f1dee6de1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/coordinate.stderr",
+      "bytes": 2465,
+      "sha256": "5bfdb5cd6f5b456574064df0ae08ac84b425d6e3d7802449b702cd8e5c17418d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/supervisor.py",
+      "bytes": 3465,
+      "sha256": "45d4b4e00ed217916cadd3bbbad12f1086b9346bdf115f837fdb04a7ae75247d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/supervisor.stdout",
+      "bytes": 1632,
+      "sha256": "a659fc7736a83890ef3116335160fb6041ec537709604d4a174d8ab195ef194b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/coordinate-operating-receipt.json",
+      "bytes": 1744,
+      "sha256": "1d9a01ee73f76a9f50af33fbd27e1962a4c7c29f04e4c2fa9cb14366be51bde3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/coordinate.stderr",
+      "bytes": 2672,
+      "sha256": "87f6f222f8d52bc0b9d0dcf5fc8336eccbcd7e6fe1ffb66198a398cca94b8faa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/supervisor.py",
+      "bytes": 3463,
+      "sha256": "bcb54f6527d789e47ac86a59c997d7129773a8d225c464fab7ded02a28b0a21f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/supervisor.stdout",
+      "bytes": 1630,
+      "sha256": "e61b4c43b1ed437f259861ae4792dab0fe0c4eaf1015533f97a605a4d2b636bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/coordinate-operating-receipt.json",
+      "bytes": 1745,
+      "sha256": "8d70b4d49ae22d203233b6cfb25524a847d8b110a6fae915b172a37d5b4198d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/coordinate.stderr",
+      "bytes": 2613,
+      "sha256": "5fe0b7f114d824659caabc65f4edd7af38a1ddc0d8f186d8fb634b080587ce3f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/coordinate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/supervisor.py",
+      "bytes": 3465,
+      "sha256": "4d8ff7c742b13e49ff46e8579424949757e8ce809c1a4a8d27fc07a0db0e712a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/supervisor.stdout",
+      "bytes": 1631,
+      "sha256": "600d7bda9969dd1e61333627289004a939b699c46fdd1eb4231f284d3c2a9af0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/index.json",
+      "bytes": 1732,
+      "sha256": "c8b1e9445eb7b109c21ad35befe18931b40e58351ec954e1b09327e808885c09",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/independent-retained-output-readback.json",
+      "bytes": 5504,
+      "sha256": "f4f50cd8e6f82d6518a9404783aa46e8afd2f2541d81b2a18f3ca99735ca1fd8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/original-custody-adverse-controls.py",
+      "bytes": 1379,
+      "sha256": "0dfb8479a1f4e0925f61fef08fd4d87ca1f373662f7cbb8e4bbe65ad920b3212",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/original-execution-custody-receipt.json",
+      "bytes": 929,
+      "sha256": "086bae4d43c17f7fadfaea57464f105ddda649c7330e86c1fd6f1453dd3a45ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/original-execution-custody.json.gz",
+      "bytes": 327068,
+      "sha256": "08a2fddd1c824638565432c03ba4d553c2a2d583ce21b67a7271f4a80e5230fa",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 952910,
+      "uncompressed_sha256": "b235449a6d5acd899b3856aa18d218e3b1eed7ae1f148e819cbe2b9b18b021d9"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/owned-child-termination-original.py",
+      "bytes": 2596,
+      "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/retain-original-custody.py",
+      "bytes": 3578,
+      "sha256": "21618598b493e5b283371f37c78cec6257df7554747071a78e79f3bc6db4bdb9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/verify-original-custody.py",
+      "bytes": 3774,
+      "sha256": "3336eac81a645edfcee6817b11fb13aec57d0560e4bd75e769c78ec01b0776e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 15768,
+      "sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 64248,
+      "sha256": "e325c0d99d4fe5a699dceff6c59561237b409ca36e50a6a35987c0cc3d6400ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/validation-results.json",
+      "bytes": 358,
+      "sha256": "8f1ea36d7891f9ae247252692a7f7cbbc09e517da8c8f82784aa5a527235bd08",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "bytes": 14691,
+      "sha256": "663e82489cee69cc3372c8834dd222b84dbfe39f8342620eac2cf217f7753641",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 54921,
+      "sha256": "7e09b1da6ddddbfaa3bd53dd5a21d2cbe061adb6a70b1e22aa220ba63a49ee63",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 24636,
+      "sha256": "f32023fa83ed1bcf2c985c4c0c129d491983efe69185da3761d01f59d3ac4e99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/effective-geographic-regression.test.mjs",
+      "bytes": 44014,
+      "sha256": "1014ea58ae82de4d8ae5b0175dee0217fa4183f8cfcc3c446c62ebe34e0ccccc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-regression.py",
+      "bytes": 42003,
+      "sha256": "fe75400f62bb6994a91abdd89ee9a5a00d2f3b9188af161483d581be19240bae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-regression.test.mjs",
+      "bytes": 510,
+      "sha256": "3f93253f82f8ae4d153da8a7d58795c322a0c94666fd81b963440a3f701fd3ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/trusted-geography-check.py",
+      "bytes": 19325,
+      "sha256": "4ea6d92cbcddf08c87938f707f10f1bf6082b0855451355a2fe531fe60c84a6f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "selected-effective-prevention",
+      "kind": "code",
+      "description": "Complete coordinate-source certificate, full both-vintage conservative neighbor selection, literal BASE/ADDITION original comparisons, native owner conservation, per-component original authority joins and typed complete V4 catalogue.",
+      "software": "Node v24.19.0; original Python 3.12/Shapely2.1.2/GEOS3.13.1 comparisons unchanged.",
+      "units": "exact whole bytes, ordered identities, coordinates and native cells"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "complete_source_bodies",
+      "value": 36,
+      "unit": "whole sources",
+      "vintage": "archived",
+      "evaluation_commit": "72923df093fb712392cecf74d7e5fd49487e9e5b",
+      "input_sha256": "658cb7d797a0a2be31571dc184cce837231a86040e829011d98d4cef0e81ce71",
+      "input_file": {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/facts.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "complete_owner_records",
+      "value": 49625,
+      "unit": "ordered unique owner records",
+      "vintage": "archived",
+      "evaluation_commit": "72923df093fb712392cecf74d7e5fd49487e9e5b",
+      "input_sha256": "658cb7d797a0a2be31571dc184cce837231a86040e829011d98d4cef0e81ce71",
+      "input_file": {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/facts.json",
+        "commit": "candidate"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "complete_source_bodies",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/validation-results.json",
+      "json_pointer": "/complete_source_bodies"
+    },
+    {
+      "metric_id": "complete_owner_records",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/validation-results.json",
+      "json_pointer": "/complete_owner_records"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Trusted selected/effective prevention is implemented and bounded controls/certificates qualify; staged source-relative examples do not approve physical truth or activate a bank.",
+      "status": "unresolved",
+      "source_ids": [
+        "selected-source-native-custody"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "See REPRODUCTION.md; immutable evidence validation does not execute packet source producers."
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/REPRODUCTION.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/catalogue.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/certificate.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/catalogue.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/certificate.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/original-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/registry.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db/selection.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/original-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/registry.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/selection.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/artifact-consumption-renewed-real-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/fifo-original-shallow-closure-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/fifo-original-shallow-closure-observer.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/final87f-effective-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/full44-regression-controls-v3.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/latest999-interface-tracked-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/local-draft-evidence-check.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/original-custody-adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/original-custody-offline-inverse.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/qualified-original-native-controls-v5.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/registry-authority-real-controls-v2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/renewed-catalogue-real-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/renewed-interface-no-downgrade-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/result.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/selected-hook-real-adverses-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-bare-runtime-environment-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-corrected17-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-correction-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-local-scientific-test-launcher",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/controls/shallow-closure-original-diagnostic.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/accepted-review-6071720745.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/accepted-review-6073179645.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-preimage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-source-custody.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-preimage.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-source-custody.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/supported-programs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/certificate.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/bare-v8/whole-output-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/certificate.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/effective-v8/whole-output-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-076f/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate-supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate-supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-28397/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-2fc/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-d7e/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-d186/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook-e7b0/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook1e39/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/coordinate-operating-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/coordinate.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/coordinate.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/supervisor.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/supervisor.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/coordinate-hook48ead/supervisor.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/failure-history/index.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/independent-retained-output-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/original-custody-adverse-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/original-execution-custody-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/original-execution-custody.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/owned-child-termination-original.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/retain-original-custody.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/qualification/verify-original-custody.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/validation-results.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "status": "modified",
+      "original_sha256": "3424a5a5ab94b392dab7aefdefe48dbee0c252527e43d520f4d426b16c97cc12"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "status": "modified",
+      "original_sha256": "9d012779cf1315049a36e379a120e7867559c16fdf32a85294bc6265561f553e"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "status": "modified",
+      "original_sha256": "c098238670c1f1520887babd46964957c6ae8b2a55edd164432d8fd274e68208"
+    },
+    {
+      "path": "test/effective-geographic-regression.test.mjs",
+      "status": "modified",
+      "original_sha256": "28aba0240aac1b45c363cc09b50bf8d7ee417595aef8c3cc4d00d0077153dc15"
+    },
+    {
+      "path": "test/geographic-regression.py",
+      "status": "modified",
+      "original_sha256": "de9e5bc5612500d46fc0d6ad42867a5ccfe93c9999225c76653bd19115c7144b"
+    },
+    {
+      "path": "test/geographic-regression.test.mjs",
+      "status": "modified",
+      "original_sha256": "b473fc371ac864e4dafc50a46610ee449cc5bfa68e8607a2177e2a4dc70cd6b4"
+    },
+    {
+      "path": "test/trusted-geography-check.py",
+      "status": "modified",
+      "original_sha256": "e4f3471312831e4bb0dc9d1386a56d4254bd7ee1fa21527b4ecacf9b87d59238"
+    }
+  ]
+}

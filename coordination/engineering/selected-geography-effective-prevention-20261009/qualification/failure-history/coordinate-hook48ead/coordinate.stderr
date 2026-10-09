@@ -1,0 +1,30 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:11
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Complete selected additive metadata admission before reads
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:11:34)
+    at readSelectedAdditive (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:389:76)
+    at Module.loadSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:293:21)
+    at coordinateStage (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:33:24)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:113:48
+
+Node.js v24.19.0
+        8.80 real         7.24 user         1.29 sys
+           166117376  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              355610  page reclaims
+                1324  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                1251  messages sent
+                1159  messages received
+                   0  signals received
+                  41  voluntary context switches
+                5458  involuntary context switches
+          2753777648  instructions retired
+          1245681621  cycles elapsed
+            96112128  peak memory footprint

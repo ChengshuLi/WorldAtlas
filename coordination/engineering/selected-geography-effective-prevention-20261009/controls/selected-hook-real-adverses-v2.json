@@ -1,0 +1,37 @@
+{
+  "kind": "bounded-actual-selected-reader-adverse-controls",
+  "source_head": "5a29ed4260f816c1cc9fbccc2567061f6a57890b",
+  "activation": false,
+  "controls": [
+    {
+      "name": "omitted-original-parent-exception",
+      "candidate": "21062cfef122b017e34b14693732eed36f24d0fb",
+      "rejected": true,
+      "actual_error": "Selected ledger omits/invents complete original native scope or exceptions"
+    },
+    {
+      "name": "coherent-rebound-original-primitive",
+      "candidate": "e781ed73d60ac821f41ba100a77287c9b566c8c4",
+      "rejected": true,
+      "actual_error": "Selected component rebinds original full native/source primitive"
+    },
+    {
+      "name": "coherent-stale-effective-reference",
+      "candidate": "81fe3d437dfbe96b719639d77605d5c5752c9526",
+      "rejected": true,
+      "actual_error": "Selected original v1 effective reference rebound"
+    },
+    {
+      "name": "omitted-qualified-native-cell",
+      "candidate": "1b000074329ae38099cbd40143ac01d30cbc4fa4",
+      "rejected": true,
+      "actual_error": "Selected native patch omits/invents original qualified assignment cells"
+    },
+    {
+      "name": "stale-selected-base",
+      "candidate": "0c3aacf55e0158eaf28b38ecb6727199a9d44dcf",
+      "rejected": true,
+      "actual_error": "Stale/foreign actual native base selection"
+    }
+  ]
+}

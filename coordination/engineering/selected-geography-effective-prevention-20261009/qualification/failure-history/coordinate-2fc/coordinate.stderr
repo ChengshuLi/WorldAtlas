@@ -1,0 +1,30 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:13
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Installed runtime/metadata exceeds complete phase
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:13:34)
+    at ImmutableReader.phase (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/scripts/check-effective-geographic-regression.mjs:52:118)
+    at Module.joinSelectedCoordinateCertificate (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:98:250)
+    at coordinateStage (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:44:27)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:113:48
+
+Node.js v24.19.0
+       16.24 real        17.35 user         2.13 sys
+           532168704  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              426758  page reclaims
+                7986  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+               13256  messages sent
+                5634  messages received
+                   0  signals received
+                2356  voluntary context switches
+               53031  involuntary context switches
+        169618287195  instructions retired
+         48592343354  cycles elapsed
+           430277888  peak memory footprint

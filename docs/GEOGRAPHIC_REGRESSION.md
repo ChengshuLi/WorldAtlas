@@ -161,3 +161,72 @@ finding. New overlaps and invalid geometry cannot receive this exception. This
 does not establish global hydrology or approve administrative ownership. Existing source,
 identity, crosswalk, regional certificate, content and publication requirements
 remain in force.
+
+### Complete selected-source prevention certificate
+
+The selected continuous gate reads complete ordinary source bodies from the
+committed world index and any explicit, whole-byte selected overrides. Its
+`complete-selected-source-pointsets:v1` certificate covers the full unique owner
+roster, original record order, containing-body hashes, complete per-record
+geometry hashes and coordinate-derived conservative exclusion bounds. Camera
+bounds cannot exclude a neighbor. Both baseline and candidate certificates are
+required; changed targets are compared against each other and every possible
+unchanged neighbor using complete original pointsets.
+
+The geographic release's previously qualified footprint digest is separately
+recorded as historical authority with `recomputed:false`. Source-file traversal
+is not the legacy global `localeCompare` digest order. The certificate does not
+claim to recompute that scientific output; it authenticates the whole selected
+source bank and every actual pointset under its own explicit domain. Altered,
+omitted, duplicated or misjoined source bodies fail closed. This separates
+once-qualified scientific custody from normal provenance enforcement.
+
+A future committed `additive_release` hook names one whole typed sidecar, never
+scans proposal files. It preserves the complete native base selection and binds
+the exact runtime envelope, ordinary ledger/delta/owner assets and append-only
+original authority registry. Each authority retains its original issued source
+and native requests, preimage, complete publications/inventories, operating
+receipts and code/runtime/input provenance. Batch hashes are not stable policy
+identities. Per-component authority and zero-cell geometry must remain unchanged
+when additional independently authenticated authorities are appended.
+
+Effective coverage means literal BASE OR complete ADDITION primitives. The
+trusted wrapper passes those separate, unchanged polygons to the original
+preparation/comparison functions; it does not persist a dissolved OGC polygon,
+round coordinates, use MakeValid or suppress coverage loss. Internal intersections
+between primitives of the same stable owner are not competing-owner overlap.
+All other loss/overlap/invalid-geometry findings remain failures. Native checks
+compare virtual combined rows against every original owner and reject delta
+cells that were previously assigned. No repair or release is activated by this
+checker, and source-relative qualification does not establish physical water,
+administrative or historical truth.
+
+The cold certificate retains one conservatively merged coordinate rectangle per
+owner and complete identity/index/parent tuples. It does not repeat camera fields
+or substitute bounds for actual source geometry. All original whole owner/camera
+custody and carried metadata remain authenticated and charged to the acquisition
+phase. A seam-spanning original member expands the merged longitude interval;
+merging never excludes a neighbor. After each whole containing body leaves its
+helper frame, the trusted cold child uses authenticated native GC (`--expose-gc`)
+to reclaim dead source objects. Missing or replaced GC refuses; this changes
+acquisition lifetime only, without changing source pointsets or polygon methods.
+
+The persisted certificate uses explicit version-2 fixed columns for every complete
+row, with a lossless shared field schema. Its trusted decoder restores field
+access without duplicating row objects. It retains every original identity,
+parent, source ordinal and full feature/base/effective hash. This is compact
+metadata representation, not source sampling or a change to geometry methods.
+Cold coordinate children admit exactly `--expose-gc`; extra preload flags or
+NODE_OPTIONS/NODE_PATH are refused, and trusted callers clear those variables.
+
+The optional `artifact_consumption` selection binds an ordinary whole qualified
+product certificate and an independently registered whole review API capture.
+The renewed Arctic interface includes a complete gzip release-product catalogue:
+137 inline roles plus 343 ordinary product roles, with unique space/path keys and
+ordered registry path, compressed hash and decoded payload hash joins. Both full
+catalogue and registry inputs are prospectively admitted before decompression.
+This authenticates the once-qualified application provenance; the prevention gate
+still reads its own selected native/source inputs and never executes a candidate
+installer or claims it has installed all catalogue products. Original authority
+captures remain historical evidence; each renewed certificate needs its actual
+independent review binding.

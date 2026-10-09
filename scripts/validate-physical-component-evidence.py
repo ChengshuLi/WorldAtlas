@@ -134,7 +134,11 @@ def validate_science(index_path=INDEX):
         return ordinary_read(ROOT, aliases[path]['payload'])
 
     complete = [g for g in index['generations'] if g['status'] == 'complete']
-    report = json.loads(original(complete[0]['prefix'] + '/report.json'))
+    report_path = complete[0]['prefix'] + '/report.json'
+    report_raw = original(report_path)
+    require(describe(report_path, report_raw) == aliases[report_path]['original'],
+            'Whole original scientific report changed')
+    report = json.loads(report_raw)
     require(report['version'] == VERSION, 'Unexpected full scientific report')
     pins = {r['path']: r for r in report['inputs']}
     require(len(pins) == len(report['inputs']), 'Duplicate original input')
@@ -186,18 +190,6 @@ def validate_science(index_path=INDEX):
     old_members, new_members = membership(old, old_records), membership(new, new_records)
     require(set(r['id'] for r in old_records).isdisjoint(r['id'] for r in new_records), 'Old/new component identities collide')
     require(all(r['id'].startswith('physical-component:') for r in new_records), 'Missing distinct physical namespace')
-    # Independently reconstruct complete connected sets and their edge/point/
-    # dateline contact roster; counts alone cannot detect a rehashed omission.
-    rebuilt, contacts = components(new, [t for t in new_report['tiles'] if t['status'] != 'checked'], new_report['bounds'])
-    for record in rebuilt:
-        record['id'] = 'physical-component:' + record['id'].split(':', 1)[1]
-    rebuilt_members = membership(new, rebuilt)
-    for contact in contacts:
-        contact['components'] = [rebuilt_members[i] for i in contact['fragments']]
-    require_exact_reconstruction(rows['new_contacts'], contacts,
-                                 'Complete original edge/point/dateline contact roster changed')
-    require_exact_reconstruction(new_records, rebuilt,
-                                 'Complete exact connected component shapes changed')
     for name, value in [('old_fragments', len(old)), ('new_fragments', len(new)), ('old_components', len(old_records)),
                         ('new_components', len(new_records)), ('fragment_pairs', len(rows['fragment_pairs'])),
                         ('component_links', len(rows['component_links'])), ('new_remnants_preserved_in_original_bundles', len(remnants))]:
@@ -277,8 +269,31 @@ def validate_science(index_path=INDEX):
     for binding, tile in zip(report['original_blocked_domains'], old_report['tiles_blocked']):
         same = [t for t in new_report['tiles'] if t['bounds'] == tile['bounds']]
         require(len(same) == 1 and binding == {'original': tile, 'new': same[0]}, 'Old blocked domain binding changed')
+    # These parsed accounting rows and lookup tables have been checked in full.
+    # Retire them before reconstruction, rather than growing its working set.
+    # Original custody bytes and files remain unchanged and independently bound.
+    fragment_pair_count = len(rows['fragment_pairs'])
+    for family in set(rows) - {'new_components', 'new_contacts'}:
+        del rows[family]
+    del pair_refs, link_refs, component_refs, old_by, new_by, old_members, new_members
+    del identities, seen_links, seen, records, ledgers, links, errors, differences
+    del old, old_records, remnants
+    # Reject invalid accounting before expensive reconstruction. Every successful
+    # execution still reconstructs the complete world and checks exact shapes.
+    # Independently reconstruct complete connected sets and their edge/point/
+    # dateline contact roster; counts alone cannot detect a rehashed omission.
+    rebuilt, contacts = components(new, [t for t in new_report['tiles'] if t['status'] != 'checked'], new_report['bounds'])
+    for record in rebuilt:
+        record['id'] = 'physical-component:' + record['id'].split(':', 1)[1]
+    rebuilt_members = membership(new, rebuilt)
+    for contact in contacts:
+        contact['components'] = [rebuilt_members[i] for i in contact['fragments']]
+    require_exact_reconstruction(rows['new_contacts'], contacts,
+                                 'Complete original edge/point/dateline contact roster changed')
+    require_exact_reconstruction(new_records, rebuilt,
+                                 'Complete exact connected component shapes changed')
     resolved = component_contacts(new, new_records)
-    result.update(fragment_pairs=len(rows['fragment_pairs']), new_components=len(new_records),
+    result.update(fragment_pairs=fragment_pair_count, new_components=len(new_records),
                   source_contact_components=len(resolved), source_contact_unknowns=sum(r['status'] != 'complete-recorded-contacts' for r in resolved))
     return result
 

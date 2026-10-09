@@ -1,0 +1,31 @@
+test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code (trusted_controls.TrustedCheckControls.test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code) ... ACTUAL_CHILD_RETURN 1 ACTUAL_CHILD_STDERR Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_rokrz_9/isolated-fetch-control/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_rokrz_9/isolated-fetch-control/scripts/run-geographic-check.py", line 384, in main
+    verify_trusted_checkout(repo, args.baseline)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_rokrz_9/isolated-fetch-control/scripts/run-geographic-check.py", line 106, in verify_trusted_checkout
+    raise ValueError('Trusted dependency metadata or evidence policy differs from baseline')
+ValueError: Trusted dependency metadata or evidence policy differs from baseline
+
+ERROR
+
+======================================================================
+ERROR: test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code (trusted_controls.TrustedCheckControls.test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/test/trusted-geography-check.py", line 158, in test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code
+    report = json.loads(output.read_bytes())
+                        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f37144f48568734be4c4d84e67e369ea25708759c9cd4f3ba8016200850ca79/work/.cache/trusted-geography-fixtures/tmp_rokrz_9/isolated-fetch-control/fetch-report.json'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.613s
+
+FAILED (errors=1)
