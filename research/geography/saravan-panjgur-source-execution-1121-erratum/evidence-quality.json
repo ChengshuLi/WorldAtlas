@@ -1,0 +1,1987 @@
+{
+  "version": 1,
+  "issue": 1341,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:IRN:ADM2:26516999B17111396986996",
+    "gb:PAK:ADM2:60131773B78019453337506"
+  ],
+  "subject_ids_sha256": "0c405b5930054180f3bf0244d221b947ac40e5924412bffaa25c893517f7ca16",
+  "baseline": {
+    "version": 2,
+    "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+    "files": [
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 16649405,
+        "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 1082661,
+        "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 864,
+        "sha256": "02f1671f06a4a1e62834fb45105622008d6aa3127189ad7440774d00d6602301",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 801,
+        "sha256": "2d5077f656aae8202338520cc02f594e243eb425efbb44e4f32fca7d41868d88",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 133,
+        "sha256": "b6628169366bebe8b8e6fc643073c0706a43033e4f251d3f648ca116342e1206",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 132,
+        "sha256": "a459290c3cf4a81239d325c6d6526a347719020a0df846b8a47c15a281907b06",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 346713,
+        "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 894050,
+        "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 96398,
+        "sha256": "7e7c08b25918ad750468365a9fa45b07e2d961931daa600180fe6e1a7f588908",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 96398,
+        "sha256": "bbd63239e335cb4795076ffe70a4a0f5994b3eb1f2439fe2dd517e3392312db3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 10397,
+        "sha256": "dc2c8be8f228d3fcde49d864bfb61addf69f48a7748c165ab5d775d4f6cec233",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 3712,
+        "sha256": "0e7794d8755d9bf5de8c0f694cc4d83712d648fe8e5cc8c012ef721705530ed6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 5883,
+        "sha256": "dfdf59cbf74819c3f1b97b5b942741dcb44b80b1685b3ecefe88c7ecf79dade9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 7239,
+        "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 13067,
+        "sha256": "74e0030da2ec1f3bb45f66772c736f018d6e035754f00ab14a09ec0be979f5c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 5264,
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/ellipsoidal_area.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 1953,
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/evidence-quality.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+        "bytes": 17813,
+        "sha256": "0bac89e14bf13a4ebef26cc1648cc668b7e3d82996992e28d62955b3f136b610",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full-receipt.json",
+        "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+        "bytes": 741,
+        "sha256": "4c27c75a41998b9244995e55be8e95e186e57696fa655a9f5dcb3ae4cfe02c6f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full-receipt.json",
+        "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+        "bytes": 545,
+        "sha256": "9380679cf9037eb6f522499218ad32c4457b77b3ea104765ce8aaca63d2b0f4b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations-receipt.json",
+        "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+        "bytes": 383,
+        "sha256": "6cdb39e6c89c2ac787baf8b5b24d52955bd3bb9b8014f702c8959065e9ce6e20",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations-receipt.json",
+        "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+        "bytes": 383,
+        "sha256": "de2eb36653926ba83930e6ce82b93fbec4c5565f5c081a528d91a1a28a641d7f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json": "02f1671f06a4a1e62834fb45105622008d6aa3127189ad7440774d00d6602301",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json": "2d5077f656aae8202338520cc02f594e243eb425efbb44e4f32fca7d41868d88",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt": "b6628169366bebe8b8e6fc643073c0706a43033e4f251d3f648ca116342e1206",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt": "a459290c3cf4a81239d325c6d6526a347719020a0df846b8a47c15a281907b06",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be",
+      "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d",
+      "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations.json": "7e7c08b25918ad750468365a9fa45b07e2d961931daa600180fe6e1a7f588908",
+      "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations.json": "bbd63239e335cb4795076ffe70a4a0f5994b3eb1f2439fe2dd517e3392312db3",
+      "data/canonical-grid/manifest.json": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/geography/part-11.json": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+      "data/geography/part-17.json": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py": "dc2c8be8f228d3fcde49d864bfb61addf69f48a7748c165ab5d775d4f6cec233",
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py": "0e7794d8755d9bf5de8c0f694cc4d83712d648fe8e5cc8c012ef721705530ed6",
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json": "dfdf59cbf74819c3f1b97b5b942741dcb44b80b1685b3ecefe88c7ecf79dade9",
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py": "74e0030da2ec1f3bb45f66772c736f018d6e035754f00ab14a09ec0be979f5c2",
+      "scripts/evidence/immutable.py": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+      "scripts/evidence/geometry.py": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "scripts/ellipsoidal_area.py": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/evidence-quality.json": "0bac89e14bf13a4ebef26cc1648cc668b7e3d82996992e28d62955b3f136b610",
+      "execution_helper_current": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    "pin_files": {
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json": {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations.json": {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations.json": {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "data/canonical-grid/manifest.json": {
+        "path": "data/canonical-grid/manifest.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "data/hierarchy.json": {
+        "path": "data/hierarchy.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "data/geography/part-11.json": {
+        "path": "data/geography/part-11.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "data/geography/part-17.json": {
+        "path": "data/geography/part-17.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "scripts/evidence/immutable.py": {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "scripts/evidence/geometry.py": {
+        "path": "scripts/evidence/geometry.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "scripts/ellipsoidal_area.py": {
+        "path": "scripts/ellipsoidal_area.py",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "research/geography/shared-seam-irn-pak-source-assessment-20261006/evidence-quality.json": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/evidence-quality.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "execution_helper_current": {
+        "path": "scripts/evidence/immutable.py",
+        "commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5"
+      }
+    },
+    "subject_files": {
+      "gb:IRN:ADM2:26516999B17111396986996": {
+        "path": "data/geography/part-11.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "gb:PAK:ADM2:60131773B78019453337506": {
+        "path": "data/geography/part-17.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-irn",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IRN/ADM2",
+      "role": "Complete IRN ADM2 source roster, target boundary, metadata, LFS pointer and product citation notice.",
+      "vintage": "Boundary year 2017; source-data update 2023-01-19; product build 2023-12-12; geoBoundaries source commit 9469f09592ced973a3448cf66b6100b741b64c0d.",
+      "retrieved_at": "2026-10-05 (geometry retrieval recorded to day precision)",
+      "license": {
+        "status": "redistributable",
+        "terms": "Metadata states underlying ODbL 1.0 and names OpenStreetMap/Wambacher. Product notice requires geoBoundaries attribution/source citation and describes product derivative works/code as CC BY 4.0. No combined-release legal opinion is made."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore the exact full GeoJSON, metadata, source notice and LFS pointer by their issue-pinned hashes from coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals.",
+      "limit": "Provider disclaims accuracy warranties; source does not establish observation/effective date, legal authority or positional accuracy.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "geoboundaries-pak",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PAK/ADM2",
+      "role": "Complete PAK ADM2 source roster, target boundary, metadata, LFS pointer and product citation notice.",
+      "vintage": "Boundary year 2019; source-data update 2023-01-19; product build 2023-12-12; geoBoundaries source commit 9469f09592ced973a3448cf66b6100b741b64c0d.",
+      "retrieved_at": "2026-10-05 (geometry retrieval recorded to day precision)",
+      "license": {
+        "status": "unknown",
+        "terms": "Metadata says Public Domain with blank licenseDetail and names geoBoundaries/Wikipedia; specific underlying Wikipedia work/license remains unresolved. Product notice requires geoBoundaries attribution/source citation and describes product derivative works/code as CC BY 4.0; compatibility is not adjudicated."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore the exact full GeoJSON, metadata, source notice and LFS pointer by their issue-pinned hashes from coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals.",
+      "limit": "Specific upstream Wikipedia work/license and complete source-compatibility question are unresolved; no observation/effective date or accuracy is established.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "openstreetmap-snapshots",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/6555069/full.json",
+      "role": "Complete Saravan and Panjgur county relation responses plus exact way-to-relation membership responses for ways 239441239 and 239453665.",
+      "vintage": "API snapshots retrieved 2026-10-05; county relation edit timestamps 2023-11-10 and 2023-11-08; node/way edit times vary by member.",
+      "retrieved_at": "2026-10-05 (exact UTC timestamps retained in source receipts)",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution required; derivative-database share-alike plan remains to be addressed by the publisher."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore the exact complete responses and separate receipts from coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals and coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals using the pinned hashes.",
+      "limit": "Source-recorded tags/topology only; no official/legal/historical approval, effective date, positional accuracy, physical-water classification, or sovereignty finding. Parent relation chain is retained prior evidence, not a new raw parent-response extraction.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "worldatlas-historical-identities",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3/data/geography",
+      "role": "Historical Atlas subject IDs and parent links in the pinned part files/hierarchy used in the prior comparison.",
+      "vintage": "Immutable repository records at commit 2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3.",
+      "retrieved_at": "2026-10-09 (read from pinned Git objects)",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository records are used only to reconcile Atlas identity/parent fields; no separate reuse or geographic-authority conclusion."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read data/geography/part-11.json, part-17.json and data/hierarchy.json from the exact commits declared in baseline.version 2.",
+      "limit": "Records establish the Atlas current/historical linkage as recorded, not independent authority or geographic correctness.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "prior-crosswalk-record",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/39eff6e40063a4a22bfc4e6655487404c35c54c4/research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json",
+      "role": "Pinned prior source crosswalk, native OSM parent-chain claims and prior whole-geometry results reconciled by this execution erratum.",
+      "vintage": "Authored source-only assessment records at commit 39eff6e40063a4a22bfc4e6655487404c35c54c4.",
+      "retrieved_at": "2026-10-09 (read from pinned Git objects)",
+      "license": {
+        "status": "unknown",
+        "terms": "Prior authored research packet; this is not an original source response or an independent validation of its parent claims."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json and results-2ed630f9/whole-geometry.json from their pinned commit descriptors.",
+      "limit": "The existing parent-chain labels were compared to the captured county tags and Atlas links but are not re-extracted from full parent relation responses in this erratum.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/adversarial_controls.py",
+      "bytes": 3358,
+      "sha256": "c54efabd639a2e2a27549634981cd5865ffd592095427700d068196e376e3a74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/authenticated.py",
+      "bytes": 6965,
+      "sha256": "116de517fb787584f1bcfcb8e535e15889e8e2dc100f787aa5613175cb5b8671",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/claim-receipt.json",
+      "bytes": 943,
+      "sha256": "944cd04b2401ba70a3380776ec145ba865672050a31e298e59fbc71e815d504d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/compare.py",
+      "bytes": 17424,
+      "sha256": "c14f7a8f66c5207b966371a5b969ebd6ebd8f8f473d0ea6a0dc6067f6aaf0093",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/README.md",
+      "bytes": 10421,
+      "sha256": "01764fc49b954a263e42d713c47b7d5cb59d22465f3bf30d433161c2eb3b2174",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/reproducibility.py",
+      "bytes": 2185,
+      "sha256": "49d82749a221a5c164b92fe6ba613036c3ab94b599b983e5cd79a68fbfebcc56",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/shared_edge.py",
+      "bytes": 7765,
+      "sha256": "c00c106ae57ce2c89bf17d663dbc7200ebad1d1fc4cf457f98d0c7bb9fdb0c9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-ancestor-final/publication.json",
+      "bytes": 292,
+      "sha256": "e7f4e3bdf394dc0da65b8e35d821b0926428ef70852eba43399e0902ea542ec2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-ancestor-final/result.json",
+      "bytes": 1366,
+      "sha256": "9e112578404a8140e0b0a531d528644afe8cec9674c75d94c9c5a98d1032da91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-final/publication.json",
+      "bytes": 283,
+      "sha256": "b2498ab702c20ff48da79ee1c6e20bbca10eaf6d8b1de7fb1f0328628790bdb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-final/result.json",
+      "bytes": 1366,
+      "sha256": "f51261bcfcfefc5119a52fee8d1c40901ce7e6b1ef86637671fe90602e128cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-verified/publication.json",
+      "bytes": 286,
+      "sha256": "5f4a88a7a8d6077823e935f17ab533551cfd59940f7a87c361c9b1f6569e437e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-verified/result.json",
+      "bytes": 1366,
+      "sha256": "9e112578404a8140e0b0a531d528644afe8cec9674c75d94c9c5a98d1032da91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls/publication.json",
+      "bytes": 277,
+      "sha256": "475952bb3e7eb9ed030451c97ed1ab2d78cca53df392d24c969d2ddb245d7e92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls/result.json",
+      "bytes": 1366,
+      "sha256": "f51261bcfcfefc5119a52fee8d1c40901ce7e6b1ef86637671fe90602e128cd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/publication.json",
+      "bytes": 782,
+      "sha256": "e300f3e3cdc858c08246e006344ec0a9e6549b2b7d78521eca3751b93a865285",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/result.json",
+      "bytes": 14696,
+      "sha256": "f14a51b50e053a35ff1755bc2d566bc138f3a2f8e1b9df5335a78c60878f6e57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/publication.json",
+      "bytes": 782,
+      "sha256": "ddda968b0eaeeee9347f05788f6122cc5bf049a338cdac2496998367e0aa85a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/result.json",
+      "bytes": 14696,
+      "sha256": "f14a51b50e053a35ff1755bc2d566bc138f3a2f8e1b9df5335a78c60878f6e57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/publication.json",
+      "bytes": 755,
+      "sha256": "023529f8fd2bbeda3598ea3b0eda7fa127adfebf34619c7a0e991686b2760f70",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/result.json",
+      "bytes": 14614,
+      "sha256": "222f1379c2f0f3cdd59cf9082559e40a671792466a5a27c2c31797f898fc89af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/publication.json",
+      "bytes": 755,
+      "sha256": "a902c96940699a208445c0b6f4303ef1b4e4a1754f270425ab140e0db95c9662",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/result.json",
+      "bytes": 14614,
+      "sha256": "222f1379c2f0f3cdd59cf9082559e40a671792466a5a27c2c31797f898fc89af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/negative-control.json",
+      "bytes": 289,
+      "sha256": "f2f455024e4b25c2019c5e5fb89ecf534d6b4763c807e457cc410ce2fa6c2ca5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/publication.json",
+      "bytes": 748,
+      "sha256": "c9521142c150dacc5fac822fb9117c95d76ae93e4d520ffa1647410ccd24eca8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/result.json",
+      "bytes": 7630,
+      "sha256": "e9c615601764fd823c75be98237bc211bc2560c1ffa9abc93898cd13a92d5252",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/negative-control.json",
+      "bytes": 289,
+      "sha256": "f2f455024e4b25c2019c5e5fb89ecf534d6b4763c807e457cc410ce2fa6c2ca5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/publication.json",
+      "bytes": 748,
+      "sha256": "d4961de57b658af9e5d78510b9132b7ba8343db26f5c5965efc06f7b365bdcfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/result.json",
+      "bytes": 7630,
+      "sha256": "e9c615601764fd823c75be98237bc211bc2560c1ffa9abc93898cd13a92d5252",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/publication.json",
+      "bytes": 764,
+      "sha256": "844603b11fbb19c9dc8d473c3b8565bb0f74279bb76ab606e8bedc88b7b96d9f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "bytes": 15796,
+      "sha256": "f40f17c60f5ac8e709985508a37af02fd8bda1c2a8bcfb9a8e2faf3f39d0ddc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/negative-control.json",
+      "bytes": 378,
+      "sha256": "84ae5494a3cbce0245bd14a9a0ccde2bb695ebf6492df9edb1daa62b02117e27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/positive-control.json",
+      "bytes": 286,
+      "sha256": "0d1da81ee817401ac79d47e76f4ab0d668ec8effa6f2a23211ad685a63307f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/publication.json",
+      "bytes": 764,
+      "sha256": "5f60a3a3c1121457e0c21bbe97dbc54ca4b3c6ced581128e7e4167469749ece3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/result.json",
+      "bytes": 15796,
+      "sha256": "f40f17c60f5ac8e709985508a37af02fd8bda1c2a8bcfb9a8e2faf3f39d0ddc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-ancestor-final/comparison.json",
+      "bytes": 743,
+      "sha256": "3f38511fa895eacf0dd3db06603a91fabc9913c35ea390b879204ffcc48707ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-ancestor-final/publication.json",
+      "bytes": 537,
+      "sha256": "ae7ca5de787d582ed7d58072e14a7e4f9262be71303013564888194d7b7489f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-ancestor-final/shared-edge.json",
+      "bytes": 747,
+      "sha256": "5563d5ce94272db97ded7b0f782945d85c98e2ab77ba24ccedb57d39cd1b556c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-controls/comparison.json",
+      "bytes": 725,
+      "sha256": "97a803ce2776bcad2fa682bb9f829fe2f91d2be0573b0cf45b8684b09be8f3a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-controls/publication.json",
+      "bytes": 525,
+      "sha256": "0a551d114f8107308971aa00784e1bb5c3da4711cd7f1ac20e3fcd12e44f32be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-controls/shared-edge.json",
+      "bytes": 729,
+      "sha256": "38311b5daa18bff032a86646ffca70f1a124679521f074ea69b83a7a80845b33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/comparison.json",
+      "bytes": 731,
+      "sha256": "330047022243d3450027733bc98782c5b9302e91c91e95b321008c97edfcef5c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/publication.json",
+      "bytes": 525,
+      "sha256": "e2851f6dbdf7b839d3604308be0d405f828e09e62e7a8cf3687c3895e5ff88d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/shared-edge.json",
+      "bytes": 735,
+      "sha256": "951f9e7a4a76fdd102a969a496e33fc87fffa7be86e8079d81e3bafc3c190d63",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/publication.json",
+      "bytes": 784,
+      "sha256": "79aa00147d924844c34e710c72bbfe1ace6c59eb81f2b1f1ac7e3db5f343e2fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/result.json",
+      "bytes": 2440,
+      "sha256": "233fd51ab9de04ee1b3b30912d42b23ec8429bbf0a0f35ba2f29a266f81d2707",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/publication.json",
+      "bytes": 784,
+      "sha256": "f902559a7f28100f184afedebcbc489807f2b402a644ab5074f7c175a628b1a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/result.json",
+      "bytes": 2440,
+      "sha256": "233fd51ab9de04ee1b3b30912d42b23ec8429bbf0a0f35ba2f29a266f81d2707",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/publication.json",
+      "bytes": 757,
+      "sha256": "775052ca5eae2fb0cf064189b3ac76c859d9e43c8db2e182281ea421e5650eaf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/result.json",
+      "bytes": 2440,
+      "sha256": "e0c543680e70b61c155d04a8f92247f0285c9ab0c31454d8031d9a2f91edf1b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/publication.json",
+      "bytes": 757,
+      "sha256": "a33e5b53ecfae851052938c0276b286ad2fcbbba4f39ae4f5c4f39da3b6466ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/result.json",
+      "bytes": 2440,
+      "sha256": "e0c543680e70b61c155d04a8f92247f0285c9ab0c31454d8031d9a2f91edf1b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/negative-control.json",
+      "bytes": 277,
+      "sha256": "c3a829f0f676e87cc51a74e37fa5094ad8b2d996b9d9cf1c021b9b521003b02c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/publication.json",
+      "bytes": 751,
+      "sha256": "a01136fc411de60e601a6c3f76e8f8b14f299798d559b9362e3e89954c63efb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/result.json",
+      "bytes": 2327,
+      "sha256": "0cd60ff700f89a2fa2852d90ecc892393620e48d6dcc0df7ddfe19927679d889",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/negative-control.json",
+      "bytes": 277,
+      "sha256": "c3a829f0f676e87cc51a74e37fa5094ad8b2d996b9d9cf1c021b9b521003b02c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/publication.json",
+      "bytes": 751,
+      "sha256": "5402a13516ed278dacb0e7e5fd6bfd7d0fa5c0598705cdc4f2257e98f2b46e6c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/result.json",
+      "bytes": 2327,
+      "sha256": "0cd60ff700f89a2fa2852d90ecc892393620e48d6dcc0df7ddfe19927679d889",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/publication.json",
+      "bytes": 766,
+      "sha256": "f6f42f6f9a54bc8bd4904b82dac497ea6d613cee6f85ec68e70b4f071794c27c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/result.json",
+      "bytes": 3540,
+      "sha256": "cfa34d6e826818172ebd29f5cd003bc5e64d4638869a64149c5ca7fd83a7c761",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/negative-control.json",
+      "bytes": 347,
+      "sha256": "36f3c2fd2e51bb4d3218f558f44b7da59d5135fd457e5d77b2263a8fcad03957",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/positive-control.json",
+      "bytes": 607,
+      "sha256": "fca1c7f9f75c002c07ba491bd8afe1de23fee3f01610d888270c9e38698b9415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/publication.json",
+      "bytes": 766,
+      "sha256": "a363df7217c985d01afe388db77a1362a2f4312d785578977943a17bb723fc2d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/result.json",
+      "bytes": 3540,
+      "sha256": "cfa34d6e826818172ebd29f5cd003bc5e64d4638869a64149c5ca7fd83a7c761",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-ancestor-final/publication.json",
+      "bytes": 294,
+      "sha256": "ec05e309928ea4e60f3d2abc003fd3f0ad79d21de6f4fd209c7a0fc7ba6cc053",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-ancestor-final/result.json",
+      "bytes": 871,
+      "sha256": "ce5f6b645eff6e832304f5c4ebca3fa09f11c6c54e5fdde8a8ca4a2ecab70937",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-final/publication.json",
+      "bytes": 285,
+      "sha256": "b7a73c19240dc39e1a2b115e4bb566900fe3b4c47e771c2073d193ed7b605eaf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-final/result.json",
+      "bytes": 871,
+      "sha256": "ce5f6b645eff6e832304f5c4ebca3fa09f11c6c54e5fdde8a8ca4a2ecab70937",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-verified/publication.json",
+      "bytes": 288,
+      "sha256": "219e227164320c75bff9bd5d90c725fb94f5f9c8b9da57f837a3afcd8fa98924",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-verified/result.json",
+      "bytes": 871,
+      "sha256": "ce5f6b645eff6e832304f5c4ebca3fa09f11c6c54e5fdde8a8ca4a2ecab70937",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls/publication.json",
+      "bytes": 279,
+      "sha256": "a94823d38770dee5a45b63736a654dfd6d3fd55b005286dabb61c956ad3057af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls/result.json",
+      "bytes": 871,
+      "sha256": "ce5f6b645eff6e832304f5c4ebca3fa09f11c6c54e5fdde8a8ca4a2ecab70937",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/writer_controls.py",
+      "bytes": 5089,
+      "sha256": "7794b47860ae0ef63b56b1ff4041f4d2762995d0aa50e16146d4cd8478f5df56",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "authenticated-source-comparison",
+      "kind": "measurement",
+      "description": "Execute the original pinned OSM assembly closure from captured Git bytes; identify both native geoBoundaries subjects and compare complete polygons using longitude/latitude coordinates transformed to EPSG:6933 with pyproj always_xy, planar overlay, no densification.",
+      "software": "Python 3.12.14, NumPy 2.3.5, Shapely 2.1.2, GEOS 3.13.1, pyproj 3.7.2, PROJ 9.5.1",
+      "units": "square metres and area fractions"
+    },
+    {
+      "id": "osm-shared-edge-source-membership",
+      "kind": "source",
+      "description": "Reconcile exact full way objects, ordered OSM node IDs/coordinates, county outer-way membership, and national parent relation outer-way membership in four captured complete response files.",
+      "software": "Python 3.12.14; captured historical helper closure and pinned JSON source bytes",
+      "units": "way, relation and node counts"
+    },
+    {
+      "id": "captured-project-code-drift",
+      "kind": "code",
+      "description": "Substitute complete altered captured source module bytes through an in-memory Git-blob reader while fixed issue pins remain unchanged; actual comparison entrypoint must reject before output.",
+      "software": "Python 3.12.14; shared immutable helper at declared commit",
+      "units": "whole-file bytes and SHA-256"
+    },
+    {
+      "id": "exclusive-output-publication",
+      "kind": "code",
+      "description": "Exercise exclusive new-vintage publication used by both scientific CLIs against sentinels, symlinks, traversal and a controlled partial write; require complete receipt to be last.",
+      "software": "Python 3.12.14; shared immutable NewVintage helper at declared commit",
+      "units": "output files and whole-file receipts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "irn_iou",
+      "value": 0.602997293451444,
+      "unit": "fraction",
+      "numerator": 8814832867.683807,
+      "denominator": 14618362243.766216,
+      "input_sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+      "input_file": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a"
+        },
+        {
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+          "commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
+          "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "irn_gb_covered_by_osm",
+      "value": 0.6814807804175339,
+      "unit": "fraction",
+      "numerator": 8814832867.683807,
+      "denominator": 12934822405.824976,
+      "input_sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+      "input_file": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a"
+        },
+        {
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+          "commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
+          "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "irn_osm_covered_by_gb",
+      "value": 0.8396380196104828,
+      "unit": "fraction",
+      "numerator": 8814832867.683807,
+      "denominator": 10498372705.625103,
+      "input_sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+      "input_file": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a"
+        },
+        {
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+          "commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
+          "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "pak_iou",
+      "value": 0.8517888797887251,
+      "unit": "fraction",
+      "numerator": 16682710943.463781,
+      "denominator": 19585499810.23667,
+      "input_sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+      "input_file": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c"
+        },
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+          "commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
+          "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "pak_gb_covered_by_osm",
+      "value": 0.908809654658024,
+      "unit": "fraction",
+      "numerator": 16682710943.463781,
+      "denominator": 18356661219.385174,
+      "input_sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+      "input_file": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c"
+        },
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+          "commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
+          "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "pak_osm_covered_by_gb",
+      "value": 0.9313940656838654,
+      "unit": "fraction",
+      "numerator": 16682710943.463781,
+      "denominator": 17911549534.3152,
+      "input_sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+      "input_file": {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c"
+        },
+        {
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+          "commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
+          "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "irn_iou_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference",
+      "input_sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "input_file": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "irn_gb_covered_by_osm_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference",
+      "input_sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "input_file": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "irn_osm_covered_by_gb_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference",
+      "input_sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "input_file": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "pak_iou_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference",
+      "input_sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "input_file": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "pak_gb_covered_by_osm_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference",
+      "input_sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "input_file": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    },
+    {
+      "id": "pak_osm_covered_by_gb_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference",
+      "input_sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "input_file": {
+        "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+        "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4"
+      },
+      "operand_files": [
+        {
+          "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+          "commit": "39eff6e40063a4a22bfc4e6655487404c35c54c4",
+          "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356"
+        }
+      ],
+      "evaluation_commit": "696d1eadd9afdff8267ef3166c4c6b8b849011f5",
+      "vintage": "current"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "irn_iou",
+      "value": 0.602997293451444,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "irn_gb_covered_by_osm",
+      "value": 0.6814807804175339,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "irn_osm_covered_by_gb",
+      "value": 0.8396380196104828,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pak_iou",
+      "value": 0.8517888797887251,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pak_gb_covered_by_osm",
+      "value": 0.908809654658024,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pak_osm_covered_by_gb",
+      "value": 0.9313940656838654,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "irn_iou_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference"
+    },
+    {
+      "metric_id": "irn_gb_covered_by_osm_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference"
+    },
+    {
+      "metric_id": "irn_osm_covered_by_gb_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference"
+    },
+    {
+      "metric_id": "pak_iou_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference"
+    },
+    {
+      "metric_id": "pak_gb_covered_by_osm_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference"
+    },
+    {
+      "metric_id": "pak_osm_covered_by_gb_delta_vs_pinned_prior",
+      "value": 0,
+      "unit": "fraction difference"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Both exact Atlas subject IDs resolve to the pinned native geoBoundaries features, each uniquely named in its complete country ADM2 roster. The source-record parent and name links remain an authored crosswalk based on the cited existing evidence.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-irn",
+        "geoboundaries-pak",
+        "worldatlas-historical-identities",
+        "prior-crosswalk-record",
+        "openstreetmap-snapshots"
+      ]
+    },
+    {
+      "text": "The two complete-footprint discrepancy ratios were independently recomputed from captured source/code bytes and agree with the retained prior ratios. They do not select an authoritative or accurate footprint.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-irn",
+        "geoboundaries-pak",
+        "openstreetmap-snapshots",
+        "prior-crosswalk-record"
+      ]
+    },
+    {
+      "text": "The two specified ways have identical nodes and coordinates in the retained county responses and exact outer membership in the retained county/national relation records. This establishes source-record topology only.",
+      "status": "supported",
+      "source_ids": [
+        "openstreetmap-snapshots",
+        "prior-crosswalk-record"
+      ]
+    },
+    {
+      "text": "Official/legal/historical boundary identity, an effective date, positional accuracy, physical water, sovereignty, and the PAK underlying Wikipedia work/license remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-irn",
+        "geoboundaries-pak",
+        "openstreetmap-snapshots",
+        "prior-crosswalk-record"
+      ]
+    },
+    {
+      "text": "The native parent-chain labels rely on the exact prior authored source-claims record; full raw parent relation responses were not independently re-fetched for this bounded execution erratum.",
+      "status": "unresolved",
+      "source_ids": [
+        "openstreetmap-snapshots",
+        "prior-crosswalk-record"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/compare.py --vintage comparison-verified-1",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/compare.py --vintage comparison-verified-2",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/shared_edge.py --vintage shared-edge-verified-1",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/shared_edge.py --vintage shared-edge-verified-2",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/adversarial_controls.py",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/writer_controls.py",
+    "python3 research/geography/saravan-panjgur-source-execution-1121-erratum/reproducibility.py",
+    "node scripts/evidence-quality.mjs research/geography/saravan-panjgur-source-execution-1121-erratum/evidence-quality.json"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "irn_iou",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/IRN/whole_geometry/iou"
+    },
+    {
+      "metric_id": "irn_gb_covered_by_osm",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/IRN/whole_geometry/gb_covered_by_osm"
+    },
+    {
+      "metric_id": "irn_osm_covered_by_gb",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/IRN/whole_geometry/osm_covered_by_gb"
+    },
+    {
+      "metric_id": "pak_iou",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/PAK/whole_geometry/iou"
+    },
+    {
+      "metric_id": "pak_gb_covered_by_osm",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/PAK/whole_geometry/gb_covered_by_osm"
+    },
+    {
+      "metric_id": "pak_osm_covered_by_gb",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/PAK/whole_geometry/osm_covered_by_gb"
+    },
+    {
+      "metric_id": "irn_iou_delta_vs_pinned_prior",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/IRN/archived_ratio_reconciliation/iou/absolute_delta"
+    },
+    {
+      "metric_id": "irn_gb_covered_by_osm_delta_vs_pinned_prior",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/IRN/archived_ratio_reconciliation/gb_covered_by_osm/absolute_delta"
+    },
+    {
+      "metric_id": "irn_osm_covered_by_gb_delta_vs_pinned_prior",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/IRN/archived_ratio_reconciliation/osm_covered_by_gb/absolute_delta"
+    },
+    {
+      "metric_id": "pak_iou_delta_vs_pinned_prior",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/PAK/archived_ratio_reconciliation/iou/absolute_delta"
+    },
+    {
+      "metric_id": "pak_gb_covered_by_osm_delta_vs_pinned_prior",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/PAK/archived_ratio_reconciliation/gb_covered_by_osm/absolute_delta"
+    },
+    {
+      "metric_id": "pak_osm_covered_by_gb_delta_vs_pinned_prior",
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "json_pointer": "/subjects/PAK/archived_ratio_reconciliation/osm_covered_by_gb/absolute_delta"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "authenticated-source-comparison",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/positive-control.json"
+    },
+    {
+      "method_id": "authenticated-source-comparison",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/negative-control.json"
+    },
+    {
+      "method_id": "authenticated-source-comparison",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/comparison.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/positive-control.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/negative-control.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/shared-edge.json"
+    },
+    {
+      "method_id": "captured-project-code-drift",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-verified/result.json"
+    },
+    {
+      "method_id": "exclusive-output-publication",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-verified/result.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/adversarial_controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/authenticated.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/compare.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/reproducibility.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/shared_edge.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-ancestor-final/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-ancestor-final/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-final/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-final/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-verified/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls-verified/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/code-drift-controls/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-ancestor-final-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-final-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-run-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/comparison-verified-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-ancestor-final/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-ancestor-final/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-ancestor-final/shared-edge.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-controls/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-controls/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-controls/shared-edge.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/reproducibility-verified/shared-edge.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-ancestor-final-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-final-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-run-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/shared-edge-verified-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-ancestor-final/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-ancestor-final/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-final/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-final/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-verified/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls-verified/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/vintages/writer-safety-controls/result.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saravan-panjgur-source-execution-1121-erratum/writer_controls.py",
+      "status": "added"
+    }
+  ]
+}
