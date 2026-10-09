@@ -14,13 +14,13 @@ export function workSpec(body){
  if(!Number.isInteger(spec.max_prs)||spec.max_prs<1||spec.max_prs>3||!Array.isArray(spec.depends_on)||spec.depends_on.some(n=>!Number.isSafeInteger(n)||n<1)||!spec.scope||typeof spec.scope!=='string')throw Error('Work items need bounded scope, 1–3 PRs and explicit dependency issue numbers');
  if(!['content','source-only','engineering','geography'].includes(spec.mode))throw Error('Declare engineering, geography, content or source-only mode');
  if(spec.mode==='geography')validateGeographyOwnedPaths(spec.owned_paths);
- if(spec.mode==='engineering')validateEngineeringOwnedPaths(spec.owned_paths);
  if(spec.mode==='content'&&(!spec.geographic_release||!spec.scope_manifest||!spec.territory_match_review))throw Error('Content issues need released geography, an entity/interval/attribute scope manifest and territory-match review');
  return spec;
 }
 function checkLaneMode(branch,spec){
  const {lane}=laneForBranch(branch);
  if(lane==='engineering'&&spec.mode!=='engineering'||lane==='geography'&&spec.mode!=='geography'||lane==='research'&&!['source-only','content'].includes(spec.mode))throw Error('Scope mode must agree with the issue lane');
+ if(lane==='engineering')validateEngineeringOwnedPaths(spec.owned_paths);
 }
 export function readinessDependencyIds(spec,geographyGate){
  const ids=new Set(spec?.depends_on??[]);
