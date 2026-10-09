@@ -221,8 +221,8 @@ def main():
     receipts = []
     for p in sorted(PACKET.rglob("*")):
         if p.is_file() and p.name != "evidence-quality.json":
-            receipts.append({"path": str(p.relative_to(ROOT)), "status": "added", "previous_path": None})
-    receipts.append({"path": manifest_path, "status": "added", "previous_path": None})
+            receipts.append({"path": str(p.relative_to(ROOT)), "status": "added"})
+    receipts.append({"path": manifest_path, "status": "added"})
     manifest["change_receipts"] = receipts
     dest = PACKET / "evidence-quality.json"
     raw = json.dumps(manifest, indent=2, ensure_ascii=False).encode() + b"\n"
