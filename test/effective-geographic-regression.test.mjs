@@ -118,3 +118,12 @@ test('complete bootstrap admission precedes runtime opens and trusted code reads
   assert.throws(()=>inspectSelected('.', '1'.repeat(40),'1'.repeat(40)),/bootstrap exceeds prospective phase/);assert.equal(opens,0);assert.equal(reads,0);
  }finally{fs.statSync=stat;fs.openSync=open;fs.readFileSync=read;}
 });
+
+
+test('missing original proof object uses only the exact whole same-path retained receipt',()=>{
+ const f=fixture();try{const base=f.select([[[0,2,1]],[],[],[]]);
+  const file='scripts/native-ownership/verified-candidates.json',registry=JSON.parse(fs.readFileSync(path.join(f.repo,file))),proof=Object.values(registry.candidates)[0];proof.commit='f'.repeat(40);f.write(file,registry);const retained=f.commit();
+  const report=inspectSelected(f.repo,retained,retained);assert.equal(report.status,'no-new-native-loss');assert.equal(report.baseline_receipt_provenance.registered_origin.commit,'f'.repeat(40));assert.equal(report.baseline_receipt_provenance.consumed.commit,retained);assert.equal(report.baseline_receipt_provenance.whole_body_alias,true);
+  f.write(proof.path,{coherent:'foreign receipt body'});const wrong=f.commit();assert.throws(()=>inspectSelected(f.repo,retained,wrong),/Whole immutable input differs/);
+ }finally{f.cleanup();}
+});

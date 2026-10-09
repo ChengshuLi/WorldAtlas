@@ -124,7 +124,13 @@ export function loadSelection(reader) {
   const registry=reader.json('scripts/native-ownership/verified-candidates.json');
   const proof=registry.candidates?.[selection.sha256];
   demand(registry.version===1&&proof?.role==='reviewed-exhaustive-native-rule-comparison'&&proof.installation_approval===false&&commit(proof.commit)&&safe(proof.path)&&hash(proof.sha256),'Missing registered complete native comparison');
-  const receipt=reader.json(proof.path,{version:proof.commit,expected:proof.sha256});
+  let proofVersion=proof.commit;
+  // Squash merges may omit the original producer commit from a clean clone.
+  // Its independently registered WHOLE byte hash still binds the exact retained
+  // same-path copy; consumed provenance never pretends to be the original commit.
+  try{reader.git('cat-file','-e',proof.commit+'^{commit}');}catch{proofVersion=reader.version;}
+  const receipt=reader.json(proof.path,{version:proofVersion,expected:proof.sha256});
+  const receiptProvenance={registered_origin:{commit:proof.commit,path:proof.path,sha256:proof.sha256},consumed:{...reader.inventory.get(proofVersion+':'+proof.path)},whole_body_alias:proofVersion!==proof.commit};
   demand(receipt.method===manifest.method&&receipt.baseline_commit===manifest.provenance?.baseline_commit&&receipt.preparation_commit===manifest.provenance?.evaluation_commit&&receipt.owned_cells===manifest.accounting?.owned_cells&&receipt.owners===manifest.accounting?.owners&&receipt.checked_rows===manifest.size&&receipt.checked_cells===manifest.size**2&&receipt.unchecked_cells===0&&receipt.checked_runs*2===manifest.runWords&&receipt.installation_ready===false,'Native registered comparison differs');
   const products=receipt.products;
   demand(Array.isArray(products)&&products.length>0&&products.length<=512&&products.every(p=>safe(p.path)&&hash(p.sha256)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&p.bytes<=FILE)&&new Set(products.map(p=>p.path)).size===products.length&&receipt.two_run_products===products.length&&receipt.run_one_sha256===sha(Buffer.from(JSON.stringify(products)))&&receipt.run_two_sha256===receipt.run_one_sha256&&products.find(p=>p.path==='manifest.json')?.sha256===selection.sha256,'Incomplete two-run native comparison');
@@ -135,7 +141,7 @@ export function loadSelection(reader) {
     if(reader.git('ls-tree','-z',reader.version,'--',name).length)reader.descriptor(name);
     else{demand(selection.manifest_path==='data/canonical-grid/eastern-v8/manifest.json','Missing selected ordinary bank asset');image??=new StockImage(reader);const target=image.map.logical_targets.find(p=>p.target===name);demand(target&&target.bytes===part.bytes&&target.sha256===part.sha256,'Selected native asset absent from complete bank');}}
   if(image)for(const part of image.index.parts){const actual=reader.descriptor(NS+'/'+part.path);demand(actual.bytes===part.bytes,'Whole selected container length differs');}
-  return {selection,manifest,owners,image,metadataBytes:decoded.length+JSON.stringify(manifest).length+(image?JSON.stringify(image.map).length:0),reader};
+  return {selection,manifest,owners,image,receiptProvenance,metadataBytes:decoded.length+JSON.stringify(manifest).length+(image?JSON.stringify(image.map).length:0),reader};
 }
 
 function asset(snapshot,pin) {
@@ -227,7 +233,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   const losses=[];let lostCells=0;
   for(const y of affected){const roster=[...needed(before,oldRows,y).map(p=>({snapshot:before,p})),...needed(after,newRows,y).map(p=>({snapshot:after,p}))];const key=JSON.stringify(roster.map(({snapshot,p})=>[snapshot.reader.version,p.path]));if(key!==cacheKey){cache.clear();beforeReader.phase();cacheKey=key;for(const {snapshot,p}of roster)cache.set(snapshot.reader.version+':'+p.path,asset(snapshot,p));phases.push({first_row:y,input_bytes:beforeReader.used,descriptors:beforeReader.charged.size});}const previous=row(before,oldRows,y),next=row(after,newRows,y);const found=compareIntervals(previous,next,{row:y,ownersBefore:before.owners,ownersAfter:after.owners});for(const loss of found){lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);}}
   cache.clear();
-  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Explicit additive selection is unsupported until its normal activation contract is integrated; proposal files never select a release.']};
+  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Explicit additive selection is unsupported until its normal activation contract is integrated; proposal files never select a release.']};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
