@@ -648,9 +648,9 @@ def write_final_receipts(comparison: dict) -> list[dict]:
 
 def comparison_probe(name: str, mutate: str) -> dict:
     probe_root = EXEC / "comparison-probes" / name
-    d1 = probe_root / "run-one"
-    d2 = probe_root / "run-two"
-    rel_files = [Path("run-one") / x for x in PRODUCTS] + [Path("run-two") / x for x in PRODUCTS]
+    d1 = probe_root / "run-one" / "products"
+    d2 = probe_root / "run-two" / "products"
+    rel_files = [Path("run-one/products") / x for x in PRODUCTS] + [Path("run-two/products") / x for x in PRODUCTS]
     preadmit_fresh(probe_root, rel_files)
     mkdir_fresh(probe_root)
     for source, dest in ((EXEC / "runs/run-one/products", d1), (EXEC / "runs/run-two/products", d2)):
