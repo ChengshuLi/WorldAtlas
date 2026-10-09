@@ -73,6 +73,15 @@ def shp_geometries(shp_path, shx_path):
                       __import__('shapely').geometry.MultiPolygon([Polygon(s.exterior.coords, assigned[j]) for j, s in enumerate(shells)]))
     return result
 
+def assert_roster(name, expected, observed):
+    if len(expected) != len(set(expected)) or len(observed) != len(set(observed)) or set(expected) != set(observed):
+        raise ValueError(f"{name} source member roster is incomplete or mismatched")
+
+def rejected_roster(expected, observed):
+    try: assert_roster("negative control", expected, observed)
+    except ValueError: return True
+    return False
+
 def polygon(g):
     if g.is_empty: return Polygon()
     if g.geom_type in ("Polygon", "MultiPolygon"): return g
@@ -96,16 +105,27 @@ def main():
     rows = dbf_rows(stem.with_suffix(".dbf"))
     geoms = shp_geometries(stem.with_suffix(".shp"), stem.with_suffix(".shx"))
     if len(rows) != len(geoms): raise ValueError("SHP/SHX/DBF counts differ")
+    baseline = json.loads(subprocess.check_output(["git", "show", f"{BASELINE}:data/geography/part-28.json"], cwd=ROOT))
+    atlas = {f["properties"]["id"]: f for f in baseline["features"]}
+    hkg_ids = atlas["atlas:territory:HKG"]["properties"]["metadata"]["source_member_ids"]
+    mac_ids = atlas["atlas:territory:MAC"]["properties"]["metadata"]["source_member_ids"]
     hkg_rows = [r for r in rows if r["adm0_a3"] == "HKG"]
     mac_rows = [r for r in rows if r["adm1_code"] == "MAC+00?"]
+    observed_hkg_ids = [r["adm1_code"] for r in hkg_rows]
+    expected_mac_ne_ids = [ident for ident in mac_ids if not ident.startswith("gb:")]
+    expected_mac_gb_ids = [ident.removeprefix("gb:CHN:ADM2:") for ident in mac_ids if ident.startswith("gb:")]
+    observed_mac_ne_ids = [r["adm1_code"] for r in mac_rows]
     hkg = [geoms[r["__index"]] for r in hkg_rows]
     mac_ne = [geoms[r["__index"]] for r in mac_rows]
     gb_doc = json.loads(GB_PATH.read_text())
-    gb = [shape(f["geometry"]) for f in gb_doc["features"] if f["properties"].get("shapeID") == "17275852B34966799109471"]
+    gb_matches = [f for f in gb_doc["features"] if f["properties"].get("shapeID") in expected_mac_gb_ids]
+    gb = [shape(f["geometry"]) for f in gb_matches]
+    observed_mac_gb_ids = [f"gb:CHN:ADM2:{f['properties']['shapeID']}" for f in gb_matches]
+    assert_roster("HKG", hkg_ids, observed_hkg_ids)
+    assert_roster("MAC Natural Earth", expected_mac_ne_ids, observed_mac_ne_ids)
+    assert_roster("MAC geoBoundaries", [f"gb:CHN:ADM2:{i}" for i in expected_mac_gb_ids], observed_mac_gb_ids)
     if len(hkg) != 18 or len(mac_ne) != 1 or len(gb) != 1:
         raise ValueError(f"Unexpected source member counts: HKG={len(hkg)} MAC-NE={len(mac_ne)} MAC-GB={len(gb)}")
-    baseline = json.loads(subprocess.check_output(["git", "show", f"{BASELINE}:data/geography/part-28.json"], cwd=ROOT))
-    atlas = {f["properties"]["id"]: f for f in baseline["features"]}
     subjects = {}
     for ident, members in (("atlas:territory:HKG", hkg), ("atlas:territory:MAC", mac_ne + gb)):
         # Mirrors historical merge(): polygon(make_valid(union_all(geoms))).
@@ -130,14 +150,20 @@ def main():
               "sources":{"natural_earth_admin1_commit":"ca96624a56bd078437bca8184e78163e5039ad19", "geoboundaries_sha256":sha(GB_PATH.read_bytes()), "baseline_commit":BASELINE},
               "subjects":subjects}
     positive = {"method_id":"historical-aggregate-replay","kind":"positive-control","outcome":"passed","cases":[
-        {"id":"HKG member roster and valid replay","expected_members":18,"actual_members":len(hkg),"valid":subjects["atlas:territory:HKG"]["replayed_union"]["valid"]},
-        {"id":"MAC two-source-member roster and valid replay","expected_members":2,"actual_members":len(mac_ne)+len(gb),"valid":subjects["atlas:territory:MAC"]["replayed_union"]["valid"]}]}
+        {"id":"HKG exact baseline member roster and valid replay","expected_ids":hkg_ids,"actual_ids":observed_hkg_ids,"matched_member_count":len(set(hkg_ids)&set(observed_hkg_ids)),"valid":subjects["atlas:territory:HKG"]["replayed_union"]["valid"]},
+        {"id":"MAC exact baseline member roster and valid replay","expected_ids":mac_ids,"actual_ids":observed_mac_ne_ids+observed_mac_gb_ids,"matched_member_count":len(set(mac_ids)&set(observed_mac_ne_ids+observed_mac_gb_ids)),"valid":subjects["atlas:territory:MAC"]["replayed_union"]["valid"]}]}
     absent_hkg = [r for r in rows if r["adm0_a3"] == "ZZZ-NONEXISTENT"]
     absent_mac = [f for f in gb_doc["features"] if f["properties"].get("shapeID") == "CONTROL:NONEXISTENT"]
     if absent_hkg or absent_mac: raise ValueError("Negative-control sentinel unexpectedly matched source")
+    hkg_omission_rejected = rejected_roster(hkg_ids, observed_hkg_ids[1:])
+    mac_observed_ids = observed_mac_ne_ids + observed_mac_gb_ids
+    mac_omission_rejected = rejected_roster(mac_ids, mac_observed_ids[1:])
+    if not hkg_omission_rejected or not mac_omission_rejected: raise ValueError("Required-member omission was not rejected")
     negative = {"method_id":"historical-aggregate-replay","kind":"negative-control","outcome":"passed","cases":[
         {"id":"Absent Natural Earth owner sentinel","expected":0,"actual":len(absent_hkg),"rejected":len(absent_hkg)==0},
-        {"id":"Absent geoBoundaries ShapeID sentinel","expected":0,"actual":len(absent_mac),"rejected":len(absent_mac)==0}]}
+        {"id":"Absent geoBoundaries ShapeID sentinel","expected":0,"actual":len(absent_mac),"rejected":len(absent_mac)==0},
+        {"id":"Omitted required HKG member","expected_rejected":True,"actual_rejected":hkg_omission_rejected},
+        {"id":"Omitted required MAC member","expected_rejected":True,"actual_rejected":mac_omission_rejected}]}
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     OUT.with_name("original-union-positive-control.json").write_text(json.dumps(positive, indent=2) + "\n")
     OUT.with_name("original-union-negative-control.json").write_text(json.dumps(negative, indent=2) + "\n")

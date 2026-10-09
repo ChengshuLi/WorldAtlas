@@ -10,7 +10,7 @@
   "subject_ids_sha256": "a127524e79dc17757514e3cb92bbd0a3f3fc368841b639a1b80b5cd3d0cea384",
   "baseline": {
     "version": 2,
-    "commit": "d43cce74959376d8ef052afd3fd09e875bb08938",
+    "commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d",
     "files": [
       {
         "path": "data/hierarchy.json",
@@ -403,8 +403,8 @@
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/reproduce-original-union.py",
-      "bytes": 9231,
-      "sha256": "f62af755e6695db132980a74d3ca39f1c9f9c941be2f5f46614c2e80f10abc2c",
+      "bytes": 11256,
+      "sha256": "7ce87484d379af02d5065a29dc5c330f0eb1c1bdb5b3f9ee1c8e6f4acb844051",
       "hash_kind": "file-bytes",
       "role": "source-register"
     },
@@ -424,15 +424,15 @@
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/original-union-positive-control.json",
-      "bytes": 410,
-      "sha256": "1527238017ce2ad100cf830d7b39949a243abf87117ebec2ef05ccfe86f89a56",
+      "bytes": 1358,
+      "sha256": "94858870f9bcfbc249115e7978e5ded829595c4ef6dd73ef64f08bf774adba08",
       "hash_kind": "file-bytes",
       "role": "control-output"
     },
     {
       "path": "data/regional-review/south-china-sar-source-lineage/original-union-negative-control.json",
-      "bytes": 375,
-      "sha256": "3ebce4ba6ce5b9dbfe57a05958e7070ee2af9cc08442457872d4170f4f9e55a1",
+      "bytes": 613,
+      "sha256": "7b83fe3ebc958d2b8066e63b2b3ccc2ffd33d20d4ca9365742de0ae04bf56411",
       "hash_kind": "file-bytes",
       "role": "control-output"
     },
@@ -462,7 +462,7 @@
     {
       "id": "historical-aggregate-replay",
       "kind": "measurement",
-      "description": "Replay the exact historical merge operation polygon(make_valid(union_all(...))) for the 18 retained HKG Admin-1 members and the retained MAC Natural Earth plus geoBoundaries members; compare topology and symmetric difference against baseline Atlas geometry. Historical cached input.geojson is untracked and absent, so this uses retained pinned sources and is not an exact byte reconstruction.",
+      "description": "Replay the exact historical merge operation polygon(make_valid(union_all(...))) for the exact retained HKG/MAC member rosters, compare topology and symmetric difference against baseline Atlas geometry, and assert that omitting required members fails the roster guard. Historical cached input.geojson is untracked and absent; the shapefile ring adapter also remains unverified against that cache.",
       "software": "Python 3.12.14; Shapely 2.1.2; original transformation source pinned at commit 4bdba3d40acc2d725e4aeb54c3b9aab559a91469",
       "units": "WGS84 longitude/latitude degrees; symmetric-difference area in degrees squared; topology equality"
     },
@@ -499,7 +499,7 @@
       "unit": "district names",
       "vintage": "current",
       "input_sha256": "41059eb78c13fdda2de335cff4e93ce617b59cb2914e52729954f4945799f941",
-      "evaluation_commit": "d43cce74959376d8ef052afd3fd09e875bb08938"
+      "evaluation_commit": "bceb52ad482a15cebfceafecf3b527ca5fa4422d"
     },
     {
       "id": "mac_unique_geoboundaries_native_id_count",
