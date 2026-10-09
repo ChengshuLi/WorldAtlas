@@ -687,6 +687,54 @@
       "restoration": "Retrieve suitable approved province/county maps with approval IDs, version, scale, original bytes and terms.",
       "limit": "Original source bytes were not retained; search discovery is not row-level evidence. See findings/retrieval-log.json for access status and consequence.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "cq-updated-standard-maps-2026",
+      "url": "https://ghzrzyj.cq.gov.cn/zwxx_186/bmdt/202602/t20260212_15440345_wap.html",
+      "role": "Locator for standard-map depictions updated after Chongqing administrative adjustment; possible display-boundary reference only.",
+      "vintage": "Update announcement 2026-02-12; individual map vintages unknown.",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Individual map approval and reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve relevant originals and approval IDs, vintage, scale, coverage and terms from the official Chongqing map module; assess suitability before any comparison.",
+      "limit": "Original page/map bytes were not retained; indexed discovery is not map evidence. See findings/retrieval-log.json.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cq-approved-boundary-data-custodian-2026",
+      "url": "https://mzj.cq.gov.cn/zwgk_218/jyta/202606/t20260602_15723243.html",
+      "role": "Locator identifying a potential authorized custodian route for approved county boundary results.",
+      "vintage": "Reply dated 2026-06-02; references a 2025 linkage mechanism.",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "No boundary data or access permission retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve original reply and request only through the authorized issue/data-custodian channel a permitted, versioned extract suitable for research.",
+      "limit": "Original reply/boundary data were not retained; no access right or subject-level boundary fact is established. See findings/retrieval-log.json.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gz-standard-map-2024-suitability",
+      "url": "https://zrzy.guizhou.gov.cn/wzgb/zwgk/zdlyxxgk/dlxxgl/chdlxxdt/202407/t20240710_85083701.html",
+      "role": "Suitability screening for a public 2024 Guizhou thematic standard-map package.",
+      "vintage": "2024 package; announcement 2024-07-10.",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Public download is announced; individual map terms/approval metadata were not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "If context maps are needed, retrieve original sheets and approval metadata; obtain more detailed county-boundary evidence for geometry review.",
+      "limit": "Accessible article text describes ten 1:3,000,000 A4 thematic maps; not subject-level county polygon/completeness evidence. Original bytes not retained. See findings/retrieval-log.json.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
@@ -716,14 +764,14 @@
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/retrieval-log.json",
-      "bytes": 12450,
-      "sha256": "b709cec69b624d1ef6e633782a9ff8f6dafd6ca321871c958755b7be1b51af93",
+      "bytes": 18746,
+      "sha256": "12e1aaebcf13413de765209f2568492c0cac5ea4fbcade703a766af4f8dcd2ac",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southwest-china-adm2-lineage-449/findings/report.md",
-      "bytes": 9580,
-      "sha256": "07a64c07004f02bfc8170057dcc4b35ca2e4662cb6b9387718e0e857c9bccd4d",
+      "bytes": 11310,
+      "sha256": "3cc8c5775eb468a0cefd5f60808e7ea93d144473e43e3aa900616ba34a60e402",
       "hash_kind": "file-bytes"
     },
     {
