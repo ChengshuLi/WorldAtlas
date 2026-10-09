@@ -85,6 +85,7 @@ def main() -> None:
     global EXEC
     parser = argparse.ArgumentParser()
     parser.add_argument("--workspace", default="execution", help="existing successful run directory under the owned packet")
+    parser.add_argument("--intermediate", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     EXEC = PACKET / safe_relative(Path(args.workspace), PACKET)
     if not (EXEC / "fresh-execution.json").is_file():
@@ -219,6 +220,34 @@ def main() -> None:
             writer_controls.get("workflow_code") != workflow_code or
             load_json(EXEC / "history/two-run-summary.json").get("workflow_code") != workflow_code):
         raise EvidenceError("fresh, control, and summary receipts do not bind the same orchestration source")
+    builder_path = PACKET / "build_manifest.py"
+    builder_raw = require_regular(builder_path)
+    builder_identity = {"path": builder_path.relative_to(REPO).as_posix(),
+                        "bytes": len(builder_raw), "sha256": sha(builder_raw)}
+    builder_receipt_path = EXEC / "builder-invocation.json"
+    if args.intermediate:
+        if os.path.lexists(builder_receipt_path):
+            raise EvidenceError("intermediate builder pass unexpectedly has a final invocation receipt")
+        builder_execution = {"status": "intermediate", "source_sha256": builder_identity["sha256"],
+                             "final_source_sha256": builder_identity["sha256"]}
+    else:
+        if not os.path.isfile(builder_receipt_path) or builder_receipt_path.is_symlink():
+            raise EvidenceError("final builder invocation receipt is missing or unsafe")
+        builder_receipt = load_json(builder_receipt_path)
+        if (builder_receipt.get("kind") != "manifest-builder-invocation" or
+                builder_receipt.get("outcome") != "passed" or
+                builder_receipt.get("unchanged_during_execution") is not True or
+                builder_receipt.get("outer_workflow") != workflow_code or
+                builder_receipt.get("source_before") != builder_identity or
+                builder_receipt.get("source_after") != builder_identity):
+            raise EvidenceError("manifest-builder invocation does not bind the final report-writer bytes")
+        builder_execution = {"status": "bound", "source_sha256": builder_identity["sha256"],
+                             "final_source_sha256": builder_identity["sha256"],
+                             "invocation_receipt_path": builder_receipt_path.relative_to(REPO).as_posix(),
+                             "invocation_receipt_sha256": sha(require_regular(builder_receipt_path)),
+                             "outer_workflow_sha256": workflow_code["before_execution"]["sha256"],
+                             "intermediate_manifest_sha256": builder_receipt.get("intermediate_manifest_sha256"),
+                             "archived_intermediate_manifest": builder_receipt.get("archived_intermediate_manifest")}
 
     methods = [
         {"id": "frozen-producer", "kind": "source", "description": "Run the exact pinned #1344 producer and hash-bind the safe_workflow.py orchestration source against its final manifest blob; compare all actual products to their declared actual summaries and historical whole-file pins.", "software": "Python 3.12.14; NumPy 2.3.5; pyproj 3.7.2; Shapely 2.1.2; GEOS 3.13.1", "units": "whole-file bytes and SHA-256; no new geographic unit or measurement"},
@@ -261,6 +290,7 @@ def main() -> None:
                      "pin_files": pin_files, "subject_files": subject_files},
         "sources": sources,
         "outputs": outputs,
+        "executed_code": {"workflow_orchestrator": workflow_code, "manifest_builder": builder_execution},
         "methods": methods,
         "metrics": metrics, "summaries": summaries, "metric_bindings": metric_bindings, "record_checks": [],
         "validation": validation,
@@ -273,7 +303,7 @@ def main() -> None:
         "commands": [
             f"PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/eastern-europe-evidence-integrity-1360/safe_workflow.py --fresh --workspace {EXEC.relative_to(PACKET).as_posix()}",
             f"PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/eastern-europe-evidence-integrity-1360/safe_workflow.py --controls --workspace {EXEC.relative_to(PACKET).as_posix()}",
-            f"PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/eastern-europe-evidence-integrity-1360/build_manifest.py --workspace {EXEC.relative_to(PACKET).as_posix()}",
+            f"PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/eastern-europe-evidence-integrity-1360/safe_workflow.py --build-manifest --workspace {EXEC.relative_to(PACKET).as_posix()}",
             "node scripts/evidence-quality.mjs research/geography/eastern-europe-evidence-integrity-1360/evidence-quality.json",
         ],
         "change_receipts": changes,

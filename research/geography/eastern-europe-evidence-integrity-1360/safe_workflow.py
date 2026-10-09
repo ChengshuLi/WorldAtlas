@@ -137,12 +137,77 @@ def workflow_code_descriptor() -> dict:
             "bytes": len(raw), "sha256": sha(raw)}
 
 
+def code_file_descriptor(path: Path) -> dict:
+    raw = require_regular(path)
+    return {"path": path.relative_to(REPO).as_posix(), "bytes": len(raw), "sha256": sha(raw)}
+
+
 def bind_workflow_code(before: dict) -> dict:
     after = workflow_code_descriptor()
     if before != after:
         fail("safe_workflow.py changed while the entry point was running")
     return {"before_execution": before, "after_execution": after,
             "unchanged_during_execution": True}
+
+
+def run_bound_manifest_builder(workspace: str, workflow_before: dict) -> None:
+    """Run the packet manifest builder, then bind its successful exact bytes."""
+    builder = PACKET / "build_manifest.py"
+    manifest = PACKET / "evidence-quality.json"
+    invocation = EXEC / "builder-invocation.json"
+    attempts = EXEC / "attempts"
+    before = code_file_descriptor(builder)
+    if not os.path.lexists(attempts):
+        mkdir_fresh(attempts)
+    if os.path.lexists(invocation) or os.path.lexists(manifest):
+        fail("builder binding requires an unused invocation receipt and manifest destination")
+
+    base_args = [sys.executable, "-B", str(builder), "--workspace", workspace]
+    env = {k: v for k, v in os.environ.items() if k not in {"GH_TOKEN", "GITHUB_TOKEN", "GH_ENTERPRISE_TOKEN"}}
+    first_args = [*base_args, "--intermediate"]
+    first = subprocess.run(first_args, cwd=REPO, env=env, text=True, stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE, timeout=120)
+    after_first = code_file_descriptor(builder)
+    if first.returncode != 0 or before != after_first or not os.path.lexists(manifest):
+        fail(f"initial manifest-builder execution failed or source changed: exit={first.returncode}; {first.stderr[-1000:]}")
+    outer_workflow = bind_workflow_code(workflow_before)
+    first_manifest = require_regular(manifest)
+    archive = attempts / "evidence-quality-before-builder-receipt.json"
+    if os.path.lexists(archive):
+        archive = attempts / f"evidence-quality-before-builder-receipt-{sha(first_manifest)[:12]}.json"
+    if os.path.lexists(archive):
+        fail("intermediate manifest archive destination already exists")
+    write_exclusive(archive, first_manifest)
+    receipt = {"version": 1, "kind": "manifest-builder-invocation", "outcome": "passed",
+               "source_before": before, "source_after": after_first,
+               "outer_workflow": outer_workflow,
+               "unchanged_during_execution": before == after_first,
+               "argv": first_args, "reproduction_command": ["python3.12", builder.relative_to(REPO).as_posix(), "--workspace", workspace, "--intermediate"],
+               "exit_code": first.returncode, "stdout_sha256": sha(first.stdout.encode()),
+               "intermediate_manifest_sha256": sha(first_manifest),
+               "archived_intermediate_manifest": archive.relative_to(REPO).as_posix(),
+               "final_invocation_uses_same_builder_blob": True}
+    write_exclusive(invocation, canonical(receipt))
+    manifest.unlink()
+
+    final = subprocess.run(base_args, cwd=REPO, env=env, text=True, stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE, timeout=120)
+    after_final = code_file_descriptor(builder)
+    if final.returncode != 0 or before != after_final or not os.path.lexists(manifest):
+        fail(f"final manifest-builder execution failed or source changed: exit={final.returncode}; {final.stderr[-1000:]}")
+    final_manifest = load_json(manifest)
+    receipt_hash = sha(require_regular(invocation))
+    builder_binding = final_manifest.get("executed_code", {}).get("manifest_builder", {})
+    if (builder_binding.get("invocation_receipt_sha256") != receipt_hash or
+            builder_binding.get("source_sha256") != before["sha256"] or
+            builder_binding.get("final_source_sha256") != after_final["sha256"] or
+            builder_binding.get("outer_workflow_sha256") != workflow_before["sha256"]):
+        fail("final evidence manifest does not bind the successful manifest-builder invocation")
+    # Recheck the outer runner after the nested command closure completed.
+    bind_workflow_code(workflow_before)
+    print(json.dumps({"status": "passed", "builder_sha256": before["sha256"],
+                      "manifest_sha256": sha(require_regular(manifest)),
+                      "invocation_receipt_sha256": receipt_hash}, sort_keys=True))
 
 
 def preadmit_fresh(root: Path, relative_files: list[Path]) -> list[Path]:
@@ -964,6 +1029,7 @@ def main() -> None:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--fresh", action="store_true", help="stage exact inputs, copy pinned code and execute two runs")
     mode.add_argument("--controls", action="store_true", help="run actual producer negatives and positive-output tamper probes")
+    mode.add_argument("--build-manifest", action="store_true", help="run and bind the owned evidence-manifest builder")
     parser.add_argument("--workspace", default="execution", help="fresh directory under this owned packet")
     args = parser.parse_args()
     workflow_before = workflow_code_descriptor()
@@ -1019,6 +1085,11 @@ def main() -> None:
         out = EXEC / "controls/writer-and-comparison-controls.json"
         write_control_receipts({out: canonical({"version": 1, "method_id": "safe-writers", "kind": "negative-control", "outcome": "passed", "staged_input_files": len(checked), "workflow_code": workflow_code, "cases": results})})
         print(json.dumps({"status": "passed", "producer_negative_cases": len(actual["controls"]), "writer_and_comparison_cases": len(results)}, sort_keys=True))
+    elif args.build_manifest:
+        check_no_links(EXEC, allow_missing=False)
+        if not EXEC.is_dir():
+            fail(f"execution workspace is not a directory: {EXEC}")
+        run_bound_manifest_builder(args.workspace, workflow_before)
     else:
         parser.error("choose --fresh or --controls")
 
