@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "issue": 1622,
+  "lane": "engineering",
+  "worker_id": "01a1222d-b893-7861-9c9c-8b8daa788d16",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "d416ec3fa35b94d114aa42bd858317504e50923f",
+    "files": [
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 7069,
+        "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-linked-github-issue.mjs",
+        "bytes": 3182,
+        "sha256": "d6f0fcd561fd760418f46ed67fde65d77ec8cff872ecef204fc7a9f082e72d3a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 23973,
+        "sha256": "950536fcdafbbcd5b770cf24fcab567b9928d47f0a7825e4dd91c0139c17bd91",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/handoff-scope.test.mjs",
+        "bytes": 7745,
+        "sha256": "81558c2f6d989bd7cabcf4802b85deb66e961dd047ed40118635d8d2dce59048",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/issue-claims.test.mjs",
+        "bytes": 11494,
+        "sha256": "12e1f845eeb426d2ec53d96e34bc104044aef16129e5915c3619e306578fcc00",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/research-geography-gate.json",
+        "bytes": 4229,
+        "sha256": "3981e89f8a2022730b90a16d2a995036f71ff9ce6b9d69cf6be33f42549e57b7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 23988,
+        "sha256": "7eda8972e90888d4ee897c970815af596319bea3c2e2c0210a838199a4b545de",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 27176,
+        "sha256": "d8578824b12cdd2ea19c5dc2b7d14d0b05bc6ec0314f775212980b8a6f091323",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/README.md",
+      "bytes": 1845,
+      "sha256": "453747fcaafbfb3fcc3d8b24e7efa904374da77d20ef5a9ae493c7118348ec02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim.json",
+      "bytes": 1479,
+      "sha256": "585773552762c53bafaaa1118cf651854b59cbc1e252d10cbd424bd44bf411f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-final.tap",
+      "bytes": 6884,
+      "sha256": "cee03e54d9fcb1eff1b4b01f43782653cc854e852ae947b6b985bb1123b32a97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-first-attempt.tap",
+      "bytes": 8465,
+      "sha256": "fff09959da9910644a23595fada71f7a3b5e4c1e4e825783f57fc48737cf62f8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1523.json",
+      "bytes": 23829,
+      "sha256": "abe5a72be8635503a276ea2aa960afcba46c598aef1fcfcc9d7cc5e4c8f18574",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622.json",
+      "bytes": 7186,
+      "sha256": "3cd6edc069a0adc33e5410558100030c5922572019a5779c57790821aa25c794",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control.json",
+      "bytes": 656,
+      "sha256": "b0000e3964976a40c82cd32fcdfa252ccf460ec28cb8a2ebfbb4cd8e5651b12b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control.json",
+      "bytes": 533,
+      "sha256": "9fed2e68461f102012277188f9b62a3530b267a23e6ea0a23d1160b533bebfc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness.json",
+      "bytes": 4166,
+      "sha256": "9aa0eb7f99eb48709e8959ab9e17d3cbfe4ba88563eefcc6fd183ea8a93dcda8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 8691,
+      "sha256": "c45f2111040e7d74f0ec31a94ce02a804783858f6a561caa14e07a083ff84eb2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-linked-github-issue.mjs",
+      "bytes": 3340,
+      "sha256": "83d855389567d6e04e6c5635963175a2da35b815158f9ccc8376dc55c9b5d243",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 24139,
+      "sha256": "62a25800e510cb434e6cbca6926d9ede5810855363ae82bc7895d61981bb00e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/handoff-scope.test.mjs",
+      "bytes": 14399,
+      "sha256": "ac467d6578a2af426ef59b7edd5cb01d6f6d8632935e2dd6453ab872ed917040",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "bytes": 12813,
+      "sha256": "b0ef6eb3852f6b573c877cc6bcf069a0598f7f46e606e70c0f821ed813bdc9f5",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "engineering-owned-scope-routing",
+      "kind": "code",
+      "description": "Run actual CLI scope fixtures and adjacent linked-issue/canonical reservation consumers with positive and adverse engineering declarations; retain initial failures and final suite output.",
+      "software": "Node v24.19.0 and git",
+      "units": "repository paths and exit outcomes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-reporter=tap test/handoff-scope.test.mjs test/issue-claims.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/engineering-owned-scope-routing-20261009/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "engineering-owned-scope-routing",
+      "kind": "positive",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control.json"
+    },
+    {
+      "method_id": "engineering-owned-scope-routing",
+      "kind": "negative",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control.json"
+    }
+  ],
+  "metric_bindings": [],
+  "change_receipts": [
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "status": "modified",
+      "original_sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa"
+    },
+    {
+      "path": "scripts/check-linked-github-issue.mjs",
+      "status": "modified",
+      "original_sha256": "d6f0fcd561fd760418f46ed67fde65d77ec8cff872ecef204fc7a9f082e72d3a"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "950536fcdafbbcd5b770cf24fcab567b9928d47f0a7825e4dd91c0139c17bd91"
+    },
+    {
+      "path": "test/handoff-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "81558c2f6d989bd7cabcf4802b85deb66e961dd047ed40118635d8d2dce59048"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "status": "modified",
+      "original_sha256": "12e1f845eeb426d2ec53d96e34bc104044aef16129e5915c3619e306578fcc00"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-final.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/focused-first-attempt.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1523.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/issue-1622.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/readiness.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/engineering-owned-scope-routing-20261009/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

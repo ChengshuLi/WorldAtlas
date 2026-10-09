@@ -1,0 +1,11 @@
+# Explicit engineering coordination routing
+
+Issue #1622, code baseline `d416ec3fa35b94d114aa42bd858317504e50923f`, Node v24.19.0.
+
+Engineering's existing branch coordination namespace remains accepted. Additional coordination directories and exact files require literal safe declarations from the actual matched open engineering issue. A trailing slash grants descendants; a file declaration grants only that file. Duplicate, unsafe, broad namespace, glob and research/geography grants refuse. Existing research/geography path exclusions remain unconditional.
+
+The actual issue-file CLI validates one bounded engineering work block and the PR issue number. The linked issue reader and verified canonical reservation carry the same validated actual issue declarations to existing scope and premerge consumers. Existing engineering claims without a stored ownership array remain compatible; no new claim authority is created.
+
+The focused scope and claim suites exercise real credential-free CLI Git fixtures plus the existing linked reader and verified reservation. `focused-final.tap` is the passing run. `focused-first-attempt.tap` preserves a new test variable typo and the missing sparse research-gate input; the typo was corrected and the immutable baseline gate file materialized before the final run.
+
+Limits: local fixtures prove code routing only. Hosted checks, independent exact-head review and serialized combined integration remain required before completion. No GIS/scientific or full application build was run locally. No geographic/source acceptance, native selection, deployment, provider operation or production write is established. Original issue/source vintages remain in the captured snapshots. Next action is independent review, normal CI/queue, merge readback, issue/dependent reconciliation and claim/workspace cleanup.
