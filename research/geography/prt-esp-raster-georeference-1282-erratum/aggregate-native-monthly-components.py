@@ -108,10 +108,16 @@ def run() -> None:
     full_failure_path = OWN + f"vintages/{full_failure_vintage}/failure.json"
     full_failure_log = OWN + f"vintages/{full_failure_vintage}/failure.log"
     full_failure_receipt = str(Path(full_failure_path).parent / "publication.json")
+    collision_head = "ff53c2d14555187c9e6f6d72f8db31f47bfad988"
+    collision_vintage = "failed-full-" + sha((collision_head + "run-1" + failure_component).encode())[:16]
+    collision_failure_path = OWN + f"vintages/{collision_vintage}/failure.json"
+    collision_failure_log = OWN + f"vintages/{collision_vintage}/failure.log"
+    collision_failure_receipt = str(Path(collision_failure_path).parent / "publication.json")
     pinned_paths = [HELPER, RUNNER, AGGREGATOR, INDEX, MATRIX, AUDIT, GEOMETRY]
     pinned_paths += sorted(set(result_paths.values()))
     pinned_paths += [publication_path(path) for path in sorted(set(result_paths.values()))]
-    pinned_paths += [failure_path, failure_receipt, full_failure_path, full_failure_log, full_failure_receipt]
+    pinned_paths += [failure_path, failure_receipt, full_failure_path, full_failure_log, full_failure_receipt,
+                     collision_failure_path, collision_failure_log, collision_failure_receipt]
     helper, baseline, pins = load_helper(commit, pinned_paths)
     index_data = json.loads(baseline.pinned_bytes(INDEX))
     matrix_data = json.loads(baseline.pinned_bytes(MATRIX))
@@ -172,6 +178,21 @@ def run() -> None:
     full_failure = json.loads(full_failure_raw)
     if full_failure.get("status") != "failed-no-scientific-output" or full_failure.get("log_bytes") != len(full_failure_log_raw) or full_failure.get("log_sha256") != sha(full_failure_log_raw):
         raise ValueError("Whole-byte failure log binding mismatch")
+    collision_failure_raw = baseline.pinned_bytes(collision_failure_path)
+    collision_failure_log_raw = baseline.pinned_bytes(collision_failure_log)
+    collision_receipt = json.loads(baseline.pinned_bytes(collision_failure_receipt))
+    expected_collision_outputs = [
+        {"path": collision_failure_path, "bytes": len(collision_failure_raw), "sha256": sha(collision_failure_raw), "hash_kind": "file-bytes"},
+        {"path": collision_failure_log, "bytes": len(collision_failure_log_raw), "sha256": sha(collision_failure_log_raw), "hash_kind": "file-bytes"},
+    ]
+    collision_failure = json.loads(collision_failure_raw)
+    if (collision_receipt.get("version") != 1 or collision_receipt.get("status") != "complete" or
+        collision_receipt.get("outputs") != expected_collision_outputs or
+        collision_failure.get("attempt_head") != collision_head or
+        collision_failure.get("status") != "failed-no-scientific-output" or
+        collision_failure.get("log_bytes") != len(collision_failure_log_raw) or
+        collision_failure.get("log_sha256") != sha(collision_failure_log_raw)):
+        raise ValueError("Output-collision failure is not faithfully preserved")
 
     matrix_components = {row["component_id"]: row for row in matrix_data["components"]}
     index_families = index_data["scope"]["family_component_contact_rows"]
@@ -311,6 +332,9 @@ def run() -> None:
             {"path": full_failure_path, "bytes": len(full_failure_raw), "sha256": sha(full_failure_raw),
              "log_path": full_failure_log, "log_bytes": len(full_failure_log_raw), "log_sha256": sha(full_failure_log_raw),
              "attempt_head": failure_head, "status": "failed-no-scientific-output", "log_preserved": True},
+            {"path": collision_failure_path, "bytes": len(collision_failure_raw), "sha256": sha(collision_failure_raw),
+             "log_path": collision_failure_log, "log_bytes": len(collision_failure_log_raw), "log_sha256": sha(collision_failure_log_raw),
+             "attempt_head": collision_head, "status": "failed-no-scientific-output", "log_preserved": True},
         ],
         "aggregate_inputs": [{"path": row["path"], "bytes": row["bytes"], "sha256": row["sha256"]} for row in pins],
         "limits": ["The aggregate step reads only completed component JSON outputs; it does not reopen or decode raster pixels."],
