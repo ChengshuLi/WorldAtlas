@@ -125,10 +125,57 @@ def run(plan,output):
     os.chmod(output/'serialization-proof.json',0o644)
     print(json.dumps({'started_at':started,'completed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),**report}))
 
+def compare_finished_group(plan,output):
+    root=pathlib.Path(plan['root']);output=pathlib.Path(output)
+    assert output.is_absolute() and '..' not in output.parts and output.is_relative_to(root/'.cache')
+    assert not output.exists()
+    for parent in [output,*output.parents]:assert not parent.is_symlink()
+    assert plan['kind']=='finished-full-release-group-whole-inverse-comparison'
+    assert sys.flags.isolated and sys.dont_write_bytecode
+    assert sys.version_info[:3]==(3,12,14) and os.path.realpath(sys.executable)==plan['executable']
+    assert plan['source_head']==os.environ['WORLDATLAS_SELECTED_NATIVE_HEAD']
+    pins=[*plan['inputs'],*plan['code'],*plan['runtime_files']]
+    assert len(pins)<=512 and len({p['path'] for p in pins})==len(pins)
+    cost=sum(p['bytes']+p.get('decoded_bytes',0) for p in pins)+plan['output_reserve']+plan['metadata_bytes']
+    assert cost<=256*1024*1024
+    for pin in pins:
+        stat=ordinary(pin['path']);assert stat.st_size==pin['bytes'] and stat.st_mode&0o777==pin['mode']
+        assert pin in plan['runtime_files'] or (pin['bytes']<=CAP and pin.get('decoded_bytes',0)<=CAP)
+    for pin in [*plan['code'],*plan['runtime_files']]:admitted_read(pin,pin in plan['runtime_files'])
+    load_codec(root)
+    allowed={p['path'] for p in pins};assert loaded_paths()<=allowed
+    sources={p['path']:admitted_read(p,p in plan['runtime_files']) for p in plan['code']}
+    callbacks=[compare_finished_group,ordinary,admitted_read,load_codec,loaded_paths]
+    for fn in callbacks:
+        filename=os.path.realpath(fn.__code__.co_filename)
+        expected={code.co_name:code for code in compile(sources[filename],filename,'exec').co_consts if hasattr(code,'co_code')}
+        assert fn.__code__==expected[fn.__name__]
+    captured=[fn.__code__ for fn in callbacks]
+    products=[]
+    for pair in plan['pairs']:
+        left,right=pair
+        assert left['relative']==right['relative']
+        for field in ('bytes','sha256','decoded_bytes','decoded_sha256','mode'):assert left[field]==right[field]
+        bodies=[admitted_read(pin) for pin in pair];assert bodies[0]==bodies[1]
+        raw=gzip.decompress(bodies[0]);assert len(raw)==left['decoded_bytes'] and hashlib.sha256(raw).hexdigest()==left['decoded_sha256']
+        products.append({key:value for key,value in left.items() if key!='path'})
+    assert all(fn.__code__ is before for fn,before in zip(callbacks,captured));assert loaded_paths()<=allowed
+    for pin in [*plan['code'],*plan['runtime_files']]:admitted_read(pin,pin in plan['runtime_files'])
+    report={'version':1,'issue':1520,'source_head':plan['source_head'],'group':plan['group'],'complete_phase_bytes':cost,
+        'descriptors':len(pins),'whole_pairs':products,'every_whole_body_equal':True,'every_gzip_inverse_exact':True,
+        'scientific_algorithms_rerun':False,'activation':False}
+    raw=json.dumps(report,separators=(',',':')).encode()+b'\n';assert len(raw)<=plan['output_reserve']
+    output.mkdir(parents=True)
+    with (output/'complete-group-pair-inverse.json').open('xb') as stream:stream.write(raw)
+    os.chmod(output/'complete-group-pair-inverse.json',0o644)
+    print(json.dumps(report))
+
 if __name__=='__main__':
     if sys.argv[1]=='--runtime-only':
         load_codec(sys.argv[2]);files=sorted(loaded_paths()-{os.path.realpath(__file__),str(pathlib.Path(sys.argv[2])/'scripts/evidence/immutable.py')})
         print(json.dumps([dict(path=p,bytes=ordinary(p).st_size,sha256=hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest(),mode=ordinary(p).st_mode&0o777) for p in files]))
     else:
         raw=pathlib.Path(sys.argv[1]).read_bytes();assert hashlib.sha256(raw).hexdigest()==os.environ['WORLDATLAS_SELECTED_NATIVE_PLAN_RAW_SHA256']
-        run(json.loads(raw),sys.argv[2])
+        plan=json.loads(raw)
+        if plan['kind']=='finished-full-release-group-whole-inverse-comparison':compare_finished_group(plan,sys.argv[2])
+        else:run(plan,sys.argv[2])
