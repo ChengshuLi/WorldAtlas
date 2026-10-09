@@ -478,6 +478,28 @@ export function conserveCurrentNativeRows({originalPatches,currentRows,size}) {
 }
 
 const rebindKeys=(v,w,m)=>demand(v&&Object.keys(v).sort().join(',')===w.split(',').sort().join(','),m);
+export function nativeBaseSelection(selection) {
+ demand(selection&&typeof selection==='object'&&!Array.isArray(selection),'Missing complete selected native identity');
+ const {additive_release,...base}=selection;
+ return base;
+}
+
+// Only the actual checker-consumed prior view can establish earlier additions.
+// Conservation covers complete authority entries, primitives and exceptions;
+// a caller-supplied prior ledger or an asserted qualified flag is insufficient.
+export function requirePriorAdditiveConservation(snapshot,registry,ledger) {
+ if(snapshot.selection.additive_release===undefined)return {prior_components:0,prior_authorities:0};
+ const prior=snapshot.additive;
+ demand(prior&&selectedAdditions.get(prior)?.snapshot===snapshot,
+  'Require actual privately consumed prior additive selection');
+ const proof=compareVersionedRepairLedgers(prior.ledger,ledger,{beforeRegistry:prior.registry,afterRegistry:registry});
+ const byId=new Map(ledger.rows.map(row=>[row.component_id,row]));
+ const literal=row=>{if(prior.ledger.version!==1)return row;const {authority_sha256,rule_sha256,...body}=row;return body;};
+ for(const row of prior.ledger.rows)demand(byId.has(row.component_id)&&same(literal(byId.get(row.component_id)),literal(row)),
+  'Previously selected complete row or exception changed');
+ return {prior_components:proof.preserved_components,prior_authorities:proof.preserved_authorities};
+}
+
 export const CURRENT_REBIND_CODE=Object.freeze([
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs',
@@ -539,9 +561,9 @@ export function verifyCurrentRebindExecution({request,operating,expectedCode,cus
  demand(proof.version===1&&proof.kind==='whole-current-rebind-execution-custody-v1'&&proof.execution_commit===request.execution_commit&&same(proof.command,request.execution.command)&&same(proof.pre_use,request.execution.pre_use)&&same(proof.pre_use,proof.post_use),'Execution source/runtime changed before/after actual command');
  const before=proof.pre_use;rebindKeys(before,'runtime,code,entry,supervisor,plan','Incomplete actual executed closure');
  demand(same(before.code,expectedCode),'Whole actual executing code closure differs');
- const ordinary=(p,installedExecutable=false)=>{rebindKeys(p,'path,bytes,sha256,mode','Incomplete external executing body');demand(typeof p.path==='string'&&p.path.startsWith('/')&&!p.path.split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..'))&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&hash(p.sha256)&&(installedExecutable?[420,493,511]:[420,493]).includes(p.mode),'Unsafe/untyped external execution identity');};
+ const ordinary=(p,installedExecutable=false,emptyStdlib=false)=>{rebindKeys(p,'path,bytes,sha256,mode','Incomplete external executing body');demand(typeof p.path==='string'&&p.path.startsWith('/')&&!p.path.split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..'))&&Number.isSafeInteger(p.bytes)&&(p.bytes>0||(emptyStdlib&&p.bytes===0&&p.sha256==='e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'))&&hash(p.sha256)&&(installedExecutable?[420,493,511]:[420,493]).includes(p.mode),'Unsafe/untyped external execution identity');};
  demand(Array.isArray(before.runtime)&&before.runtime.length>=4&&before.runtime.length<=512,'Missing complete actual runtime');const seen=new Set();let runtimeBytes=0;
- for(const p of before.runtime){rebindKeys(p,'role,path,bytes,sha256,mode','Foreign installed runtime identity');const {role,...body}=p;ordinary(body,['node','git','time','supervisor-python'].includes(role));demand(['node','git','time','supervisor-python','supervisor-stdlib','installed-dependency','process-inspector','resource-command'].includes(role)&&!seen.has(p.path),'Foreign/duplicate installed runtime');seen.add(p.path);runtimeBytes+=p.bytes;}
+ for(const p of before.runtime){rebindKeys(p,'role,path,bytes,sha256,mode','Foreign installed runtime identity');const {role,...body}=p;ordinary(body,['node','git','time','supervisor-python'].includes(role),role==='supervisor-stdlib');demand(['node','git','time','supervisor-python','supervisor-stdlib','installed-dependency','process-inspector','resource-command'].includes(role)&&!seen.has(p.path),'Foreign/duplicate installed runtime');seen.add(p.path);runtimeBytes+=p.bytes;}
  demand(Number.isSafeInteger(runtimeBytes)&&runtimeBytes<request.limits.complete_phase_bytes&&['node','git','time','supervisor-python'].every(role=>before.runtime.filter(p=>p.role===role).length===1),'Incomplete installed runtime roles/complete admission');
  const dependencyRoot='coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/';
  const dependencies=expectedCode.filter(p=>p.path.startsWith(dependencyRoot));demand(dependencies.length===5&&before.runtime.filter(p=>p.role==='installed-dependency').length===5&&dependencies.every(p=>before.runtime.some(r=>r.role==='installed-dependency'&&r.path.endsWith('/node_modules/@noble/hashes/'+p.path.slice(dependencyRoot.length))&&r.bytes===p.bytes&&r.sha256===p.sha256&&r.mode===420)),'Actual installed hash import closure differs from whole source custody');
@@ -581,7 +603,7 @@ export function verifyCurrentRebindProducts({certificate,request,facts,publicati
  demand(acquired&&same(acquired.base_selection,baseSelection)&&same(acquired.current_targets,request.current_targets)&&same(acquired.current_rows,request.current_rows),'Current operands differ from independently acquired selected bodies');
  rebindKeys(request.acquisition,'version,kind,target_sources,source_inputs,native_inputs,predecessor_proof,predecessor_rows,manifest_sha256','Incomplete current rebind acquisition custody');
  demand(request.acquisition.version===1&&request.acquisition.kind==='complete-selected-rebind-inputs-v1'&&same(request.acquisition,acquired.acquisition),'Issued acquisition is not the complete independently consumed source/native roster');
- demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0&&acquired.acquisition_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=request.limits.complete_phase_bytes&&Number.isSafeInteger(p.descriptors)&&p.descriptors>0&&p.descriptors<=request.limits.descriptors),'Independent acquisition admission exceeds issued bounds');
+ demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0&&acquired.acquisition_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=PHASE&&Number.isSafeInteger(p.descriptors)&&p.descriptors>0&&p.descriptors<=request.limits.descriptors),'Independent acquisition exceeds consumer bounds');
  const expected=currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets:request.current_targets,currentRows:request.current_rows,size});
  demand(same(result,expected),'Complete current rebind result/inverse differs');
  rebindKeys(facts,'version,kind,execution_commit,request_sha256,result_sha256,complete_phase_bytes,descriptors,acquisition_sha256,acquisition_phases','Foreign rebind facts');
@@ -621,7 +643,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=PHASE,'Incomplete retained rebind reader metadata');
  // The private snapshot authenticates the selected base and optional additive
  // hook. Acquisition reads only its base manifest/source roster, never a delta.
- const {additive_release,...baseSelection}=snapshot.selection;
+ const baseSelection=nativeBaseSelection(snapshot.selection);
  const targets=new Map();for(const row of originalRows){demand(['assigned','zero-cell'].includes(row.disposition),'Unsupported original rebind row');const owner=snapshot.owners[row.pixelIndex-1];demand(owner?.id===row.target_id,'Current rebind target owner differs');targets.set(row.target_id,owner);}
  const phases=[],sourceInputs=[],nativeInputs=[],currentTargets=[];let predecessorRows=[];
  const bodyIdentity=({commit,...p})=>p;
@@ -744,7 +766,7 @@ export function readSelectedAdditive(snapshot) {
  const descriptor=reader.descriptor(hook.path);demand(descriptor.bytes===hook.bytes,'Committed additive sidecar whole length differs');
  const sidecar=reader.json(hook.path,{expected:hook.sha256});
  demand(sidecar?.version===2&&sidecar.kind==='retained-native-additive-selection-v2'&&Object.keys(sidecar).sort().join(',')==='authority_registry,base_selection,kind,logical_asset_map,runtime_envelope,version','Unsupported committed additive sidecar');
- const {additive_release,...baseSelection}=selection;
+ const baseSelection=nativeBaseSelection(selection);
  demand(same(sidecar.base_selection,baseSelection),'Stale/foreign actual native base selection');
  const whole=p=>{
   pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
@@ -754,19 +776,26 @@ export function readSelectedAdditive(snapshot) {
  demand(Object.keys(sidecar.logical_asset_map).sort().join(',')==='base_manifest,ledger,owner_roster,patch','Incomplete/foreign logical additive asset map');
  const roster=[sidecar.runtime_envelope,sidecar.authority_registry,...Object.values(sidecar.logical_asset_map)];
  const metadata=roster.reduce((n,p)=>n+2*(p.bytes+(p.decoded_bytes??0)),0);demand(Number.isSafeInteger(metadata)&&metadata<=PHASE&&reader.used+metadata<=PHASE,'Complete selected additive metadata admission before reads');reader.used+=metadata;
- const admitted=roster.map(whole),bodies=admitted.map(({p,version})=>{
+ const admitted=roster.map(whole);
+ // The second whole owner/body graph is authenticated only in this completed
+ // frame. Keep the original snapshot owners; retain just the ledger and patch.
+ const assetFrame=()=>{
+  const bodies=admitted.map(({p,version})=>{
   const raw=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes??0});if(p.decoded_bytes===undefined)return JSON.parse(raw);
   const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Selected additive whole decoded inverse differs');return JSON.parse(decoded);
  });
- const [wrapped,registry,...assets]=bodies,envelope=wrapped.additiveRelease??wrapped;
- demand(envelope&&Object.keys(envelope).sort().join(',')==='base_manifest,base_reference,effective_reference,kind,ledger,owner_roster,patch,version'&&([1,2].includes(envelope.version))&&envelope.kind===(envelope.version===1?'retained-native-base-plus-delta-v1':'retained-native-base-plus-delta-v2'),'Unsupported explicit additive runtime envelope');
- const named=Object.fromEntries(Object.keys(sidecar.logical_asset_map).map((k,i)=>[k,assets[i]]));
- for(const key of Object.keys(named)){
+  const [wrapped,registry,...assets]=bodies,envelope=wrapped.additiveRelease??wrapped;
+  demand(envelope&&Object.keys(envelope).sort().join(',')==='base_manifest,base_reference,effective_reference,kind,ledger,owner_roster,patch,version'&&([1,2].includes(envelope.version))&&envelope.kind===(envelope.version===1?'retained-native-base-plus-delta-v1':'retained-native-base-plus-delta-v2'),'Unsupported explicit additive runtime envelope');
+  const named=Object.fromEntries(Object.keys(sidecar.logical_asset_map).map((k,i)=>[k,assets[i]]));
+  for(const key of Object.keys(named)){
   const p=sidecar.logical_asset_map[key],declared=envelope[key];
   demand(declared&&p.bytes===declared.bytes&&p.sha256===declared.sha256&&(p.decoded_bytes??p.bytes)===(declared.decoded_bytes??declared.bytes)&&(p.decoded_sha256??p.sha256)===(declared.decoded_sha256??declared.sha256),'Runtime logical asset differs from committed ordinary pin: '+key);
  }
- demand(sidecar.logical_asset_map.base_manifest.sha256===selection.sha256&&same(named.base_manifest,manifest),'Additive runtime rebinds actual selected native manifest');
- demand(sidecar.logical_asset_map.owner_roster.sha256===manifest.original_assets.bounds.sha256&&same(named.owner_roster,owners),'Additive owner roster differs from independent original native bounds');
+  demand(sidecar.logical_asset_map.base_manifest.sha256===selection.sha256&&same(named.base_manifest,manifest),'Additive runtime rebinds actual selected native manifest');
+  demand(sidecar.logical_asset_map.owner_roster.sha256===manifest.original_assets.bounds.sha256&&same(named.owner_roster,owners),'Additive owner roster differs from independent original native bounds');
+  return {registry,envelope,named:{ledger:named.ledger,patch:named.patch}};
+ };
+ const {registry,envelope,named}=assetFrame();
  let resolver=snapshot.geometrySources;
  if(!resolver){
   // The source-bank metadata has been completely authenticated in this stage.
@@ -779,7 +808,7 @@ export function readSelectedAdditive(snapshot) {
  }
  demand(envelope.base_reference.id===selection.release_id&&envelope.base_reference.footprints_sha256===resolver.release.footprints_sha256,'Additive effective baseline differs from actual selected source bank');
  const normalized=normaliseRetainedRepairLedger(named.ledger,registry),proofs=[];
- let retained=metadata;
+ let retained=2*valueBytes({sidecar,admitted,envelope,named,registry}).length;
  for(const entry of registry.entries){
   demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported source policy semantics/version');
   // Previous acquisition bodies have been discarded. Only the complete selected
@@ -827,7 +856,7 @@ export function readSelectedAdditive(snapshot) {
   demand(named.ledger.version===2&&envelope.version===2,'Current rebind is an explicit v2-only extension');
   const currentContract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,manifest[k]]));
   demand(proofs.every(p=>same(p.native_proof.native_contract,currentContract)),'Current rebind changes original native lattice/method/owner-parent contract');
-  rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry,originalRows:[...normalized.rows.values()],originalPatches,size:manifest.size,snapshot,carriedMetadataBytes:2*valueBytes({sidecar,admitted,bodies,envelope,named,proofs,patch}).length});
+  rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry,originalRows:[...normalized.rows.values()],originalPatches,size:manifest.size,snapshot,carriedMetadataBytes:2*valueBytes({sidecar,admitted,envelope,named,proofs,patch}).length});
   demand(same(named.ledger.current_targets,rebind.current_targets),'Ledger current target pointsets differ from complete qualified rebind result');
  }else demand(!Object.hasOwn(named.ledger,'current_targets'),'Current targets require complete rebind custody');
  const expectedByRow=new Map();

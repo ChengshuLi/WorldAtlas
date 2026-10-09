@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "issue": 1632,
+  "lane": "engineering",
+  "worker_id": "01a119de-e3de-7860-aa56-0484afa8a261",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "f0a0c5f1c252e68b3b987cef8625ba9d185c215f",
+    "files": [
+      {
+        "path": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json",
+        "bytes": 46730,
+        "sha256": "6148952a9b53f652f4832a549d75f7b13076fb04546d889bdc694010d1d2d294",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "merged_source_introduction_manifest": "6148952a9b53f652f4832a549d75f7b13076fb04546d889bdc694010d1d2d294"
+    },
+    "pin_files": {
+      "merged_source_introduction_manifest": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json"
+    }
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "trusted-reader-prerequisite",
+      "kind": "code",
+      "description": "Introduce already reviewed authority registrations and selected additive consumer lifetime/custody corrections before selection changes, preserving original scientific operators and current selection.",
+      "software": "Node 24; original immutable Git source bodies from PR1648 head68e89",
+      "units": "code behavior"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test test/selected-continuous-lifecycle.test.mjs"
+  ],
+  "limits": [
+    "Code-only prerequisite. Selection, certificate/context, package routing and qualification products remain unchanged. No new current-bank qualification, integrated repair, geographic authority, water classification, deployment or visual rendering claim.",
+    "Existing qualification, selected-package and mathematical row-view proof at PR1648 head68e89 remains its original execution vintage; this PR does not relabel or replay it. Activation requires the subsequent normal reviewed delivery."
+  ]
+}
