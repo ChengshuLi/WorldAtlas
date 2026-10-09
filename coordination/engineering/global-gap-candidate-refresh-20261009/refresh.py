@@ -2,10 +2,10 @@
 import argparse,collections,gzip,hashlib,json,pathlib,re,subprocess,sys
 P='coordination/engineering/global-gap-candidate-funnel-20261008/'
 Q='coordination/engineering/global-gap-candidate-refresh-20261009/'
-sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'global-gap-candidate-funnel-20261008'))
+sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 import bounded_io as bio
 import catalog
-CODE=(P+'catalog.py',P+'bounded_io.py',Q+'refresh.py')
+CODE=(Q+'catalog.py',Q+'bounded_io.py',Q+'refresh.py')
 def git(repo,*args):return subprocess.check_output(['git','-c','gc.auto=0','-C',str(repo),*args])
 def metadata(repo,head,path):
     size=int(git(repo,'cat-file','-s',head+':'+path));bio.need(size<=1048576,'Small frozen declaration cap');return git(repo,'show',head+':'+path)

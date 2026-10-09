@@ -26,17 +26,31 @@ def ordinary(path):
     return p
 
 class Phase:
-    def __init__(self,repo,destination,pins,reserve):
+    def __init__(self,repo,destination,pins,reserve,execution_inputs=()):
         self.repo=ordinary(repo).resolve();self.destination=ordinary(destination)
         need(self.destination.parent.is_dir() and not os.path.lexists(self.destination),'Fresh whole run destination required')
-        need(self.destination.resolve().is_relative_to(self.repo/'coordination/engineering/global-gap-candidate-funnel-20261008/vintages'),'Owned run containment required')
+        need(any(self.destination.resolve().is_relative_to(self.repo/p) for p in ('coordination/engineering/global-gap-candidate-funnel-20261008/vintages','coordination/engineering/global-gap-candidate-refresh-20261009/vintages')),'Owned run containment required')
         need(type(reserve) is int and reserve>=0,'Complete prospective output reserve')
         self.pins={};self.reads=set();self.outputs={};self.reserve=reserve
         for p in pins:
             safe(p['path']);need(re.fullmatch('[a-f0-9]{40}',p.get('commit','')),'Immutable input vintage required');cost(p)
             key=(p['commit'],p['path']);need(key not in self.pins,'Duplicate declared input');self.pins[key]=p
-        self.input_cost=sum(cost(p) for p in pins)
-        need(len(pins)<512 and self.input_cost+reserve+RECEIPT<=PHASE,'Complete prospective input/code/output budget')
+        self.execution_inputs=list(execution_inputs)
+        self.execution_cost=sum(cost(p) for p in self.execution_inputs)
+        self.input_cost=sum(cost(p) for p in pins)+self.execution_cost
+        need(len(pins)+len(self.execution_inputs)<512 and self.input_cost+reserve+RECEIPT<=PHASE,'Complete prospective input/code/output budget')
+        for p in self.execution_inputs:
+            path=ordinary(p['path']);need(path.is_file() and path.stat().st_size==p['bytes'],'Actual runtime/tool size')
+            before=path.stat();fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+            try:
+                held=os.fstat(fd);need((held.st_dev,held.st_ino,held.st_size,held.st_mode)==(before.st_dev,before.st_ino,before.st_size,before.st_mode),'Runtime opened identity')
+                digest=hashlib.sha256();total=0
+                while True:
+                    body=os.read(fd,1024*1024)
+                    if not body:break
+                    total+=len(body);need(total<=p['bytes'],'Runtime stream cap');digest.update(body)
+                after=os.fstat(fd);current=path.stat();need(total==p['bytes'] and digest.hexdigest()==p['sha256'] and (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns)==(current.st_dev,current.st_ino,current.st_size,current.st_mtime_ns,current.st_ctime_ns)==(before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns,before.st_ctime_ns),'Whole actual runtime/tool identity drift')
+            finally:os.close(fd)
     def read(self,p):
         key=(p['commit'],p['path']);need(self.pins.get(key)==p,'Undeclared actual input')
         tree=subprocess.check_output(['git','-C',str(self.repo),'ls-tree','-z',p['commit'],'--',p['path']]).decode().rstrip('\0')
@@ -57,13 +71,13 @@ class Phase:
         self.outputs[name]=(p,encoded)
     def finish(self,facts):
         need(self.reads==set(self.pins),'Declared actual code/data input not consumed')
-        need(len(self.pins)+len(self.outputs)+1<=512,'Complete input/output descriptor bound')
+        need(len(self.pins)+len(self.execution_inputs)+len(self.outputs)+1<=512,'Complete input/output descriptor bound')
         records=[dict(p,path=str((self.destination/name).relative_to(self.repo))) for name,(p,_) in self.outputs.items()]
-        inventory=canonical({'version':1,'facts':facts,'inputs':list(self.pins.values()),'outputs':records,'input_encoded_decoded_bytes':self.input_cost,'output_encoded_decoded_bytes':sum(cost(p) for p,_ in self.outputs.values())})
+        inventory=canonical({'version':1,'facts':facts,'inputs':list(self.pins.values()),'execution_inputs':self.execution_inputs,'outputs':records,'input_encoded_decoded_bytes':self.input_cost,'output_encoded_decoded_bytes':sum(cost(p) for p,_ in self.outputs.values())})
         self.output('inventory.json.gz',inventory,True)
         records.append(dict(self.outputs['inventory.json.gz'][0],path=str((self.destination/'inventory.json.gz').relative_to(self.repo))))
         receipt=canonical({'version':1,'status':'complete','facts':facts,'inventory':records[-1],'output_descriptor_count':len(records),'complete_phase_bytes':self.input_cost+sum(cost(p) for p,_ in self.outputs.values())+RECEIPT})
-        need(len(receipt)<=RECEIPT and len(self.pins)+len(self.outputs)+1<=512,'Complete final receipt bounds')
+        need(len(receipt)<=RECEIPT and len(self.pins)+len(self.execution_inputs)+len(self.outputs)+1<=512,'Complete final receipt bounds')
         ordinary(self.destination);need(not os.path.lexists(self.destination),'Output collision before publication')
         self.destination.mkdir()
         for name,(_,raw) in self.outputs.items():

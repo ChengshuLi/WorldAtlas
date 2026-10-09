@@ -113,3 +113,57 @@ def summarize(records,expected_ids):
     require(seen==set(expected_ids),'Missing complete original catalog identity')
     n=len(seen);require(sum(classes.values())==n,'Final class count conservation failure')
     return {'component_count':n,'classes':dict(classes),'counts':dict(counts),'percentages':{k:100*v/n for k,v in counts.items()},'task_candidate_counts':dict(task_counts),'missing_fact_counts':dict(missing),'limits':['Provisional source comparison/numerical diagnoses are not accepted physical truth.','Implementation, full integration and verified delivery are separate measured states.','Component percentages use original component count, not affected geographic area.']}
+
+PIPELINE=('awaiting-evidence','evidence-ready','eligible-source-relative-rule','repaired-verified-selected-release','confirmed-water-or-no-defect','rejected-or-ambiguous')
+
+def refresh_record(original,progress,expected_geometry,authority_ids):
+    """Project authenticated transitions onto the existing original catalog row.
+    Source-relative eligibility is a separate domain; it never changes class.
+    """
+    record=json.loads(json.dumps(original));identity=record['component_id']
+    require(record['current_geometry_sha256']==expected_geometry,'Stale original catalog geometry')
+    require(identity in authority_ids,'Foreign catalog identity')
+    record['source_relative_repair']=None
+    if progress is not None:
+        require(progress['component_id']==identity and progress['geometry_sha256']==expected_geometry,'Foreign/stale progress candidate')
+        source=progress['source_relative_repair']
+        require(source['authority_domain']=='retained-source-relative-reference','Wrong source authority domain')
+        require(type(source['eligible']) is bool and source['eligible'],'Source decision must be eligible')
+        require(type(source['constructed']) is bool and type(source['current_bank_rebound']) is bool and type(source['activated']) is bool,'Explicit source transition types')
+        require(source['current_bank_rebound']==source['activated'],'Unbound selected bank transition')
+        require(not source['activated'] or source['constructed'],'Activation without complete construction')
+        require(source['physical_authority_approved'] is False and source['current_physical_truth_approved'] is False,'Source-only physical promotion')
+        for ref in source['evidence'].values():immutable_ref(ref)
+        require({'source','rule','review','proposal'}<=set(source['evidence']),'Missing source/rule/review/proposal custody')
+        require(not source['constructed'] or 'construction' in source['evidence'] or progress.get('integrated'),'True construction lacks supporting outcome')
+        record['source_relative_repair']=source
+        if progress.get('integrated'):
+            require(record['implemented'] and record['class']=='missing-land','Proposal-only integration')
+            integration=progress['integrated']
+            require(integration['component_id']==identity and integration['geometry_sha256']==expected_geometry,'Coherently foreign integrated transition')
+            require(integration['production_delivered'] is False,'Unknown delivery cannot become delivered')
+            require({'migration','selection','manifest','normal_build','accepted_merge'}<=set(integration['evidence']),'Missing current bank/normal consumer binding')
+            for ref in integration['evidence'].values():immutable_ref(ref)
+            record['fully_integrated']=True;record['state_evidence']['fully_integrated']=integration['evidence']['normal_build']
+    if record['fully_integrated']:
+        state='repaired-verified-selected-release';domain='verified-offline-selected-release';missing=['verified-production-delivery']
+    elif record['source_relative_repair']:
+        state='eligible-source-relative-rule';domain='retained-source-relative-reference';missing=['fresh-current-bank-rebind','normal-consumer-integration','physical-authority-and-observation-date']
+    elif record['class'] in ('water','reference-disagreement'):
+        state='confirmed-water-or-no-defect';domain='accepted-physical-classification';missing=[]
+    elif record.get('source_rule_exception'):
+        state='rejected-or-ambiguous';domain='retained-source-relative-reference';missing=['source-parent-exception-resolution','physical-authority-and-observation-date']
+    elif record['source_flags']['source_comparison'] or record['source_flags']['numerical_diagnosis']:
+        state='evidence-ready';domain='provisional-observations';missing=list(record['next_work']['missing_facts'])
+    else:
+        state='awaiting-evidence';domain='unresolved';missing=list(record['next_work']['missing_facts'])
+    require(state in PIPELINE,'Unknown disjoint pipeline status')
+    record['pipeline_status']={'state':state,'authority_domain':domain}
+    record['next_work']['historical_scope_tasks']=record['next_work']['tasks']
+    record['next_work']['tasks']=progress.get('remaining_tasks',[]) if progress else record.pop('_current_tasks',[])
+    record.pop('_current_tasks',None)
+    for task in record['next_work']['tasks']:immutable_ref(task['scope_ref'])
+    record['next_work']['missing_facts']=missing
+    record['next_work']['unassigned_requirements']=[f for f in missing if not any(f in task['missing_facts'] for task in record['next_work']['tasks'])]
+    record['progress_scope']='Verified offline integration and retained-source eligibility are separate domains; production delivery and contemporary physical authority remain unapproved.'
+    return record
