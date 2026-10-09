@@ -1,0 +1,21 @@
+{
+  "entries": [
+    {
+      "fresh_execution_sha256": "2ef532a34946e794e8205e76a11f38fcfdbfc658dd95ee3f9109218c7362adce",
+      "manifest_sha256": "03924f39973a90a81495b42cd9b94803fe22999911f92516cef2eb007fbb05d0",
+      "reason": "Independent exact-head review identified missing transactional late-failure coverage and an empty numeric ledger/bindings; prior artifacts remain in Git history and these compact receipts.",
+      "status": "superseded-after-independent-review",
+      "workspace": "execution-replay-06"
+    },
+    {
+      "contact_total": 9,
+      "fresh_execution_sha256": "9e8245fee965d7b7441fa13adbf6df003b76a37cb3ebb35476ecf3a781bc2cc4",
+      "numeric_summary_sha256": "edc12a1609493b19e872e19ff01cda6b2f8890267f699a9bfdf916acafde8eee",
+      "overlay_rows": 993,
+      "status": "passed",
+      "workspace": "execution-replay-07"
+    }
+  ],
+  "issue": 1515,
+  "version": 1
+}

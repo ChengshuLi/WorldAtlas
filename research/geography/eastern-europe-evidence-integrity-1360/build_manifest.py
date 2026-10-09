@@ -110,6 +110,24 @@ def main() -> None:
         pins[name] = digest
         pin_files[name] = {"path": path, "commit": commit}
 
+    # Authenticate original numeric inputs that are intentionally not part of
+    # the issue's 20 contractual pins. Explicit metric selectors preserve their
+    # historical source identity without expanding the issue's pin set.
+    metric_inputs = {
+        "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8": (BASELINE, "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-012.geojson.gz"),
+        "8d88002a6b05014da9af4dc1f33f8cb928d961b23c1912654cc056cddca5841a": (ORIGINAL_MERGE, "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/geoBoundaries-BLR-ADM2_simplified.geojson"),
+        "c19830763e611df9b4b56bab55c0c856a9a33dc7b80a6d28fe611f3462e1f3ce": (ORIGINAL_MERGE, "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/geoBoundaries-POL-ADM2_simplified.geojson"),
+        "c102ab08775ce4dc25a64e133bb7726a1b50715d31140e9846eaad26602631cb": (ORIGINAL_MERGE, "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/geoBoundaries-UKR-ADM2_simplified.geojson"),
+        "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9": (ORIGINAL_MERGE, "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/natural-earth-10m-lakes.geojson"),
+        "SOURCE_CATALOGUE": (ORIGINAL_MERGE, "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/source-corpus-catalogue.json"),
+    }
+    for value in metric_inputs.values():
+        commit, path = value
+        raw, mode = git_bytes(commit, path)
+        historical.append({"path": path, "commit": commit, "bytes": len(raw), "sha256": sha(raw),
+                           "hash_kind": "file-bytes", "git_mode": mode, "role": "original-source"})
+    metric_inputs["SOURCE_CATALOGUE"] = (ORIGINAL_MERGE, "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/source-corpus-catalogue.json")
+
     subject_files = {}
     for subject in SUBJECTS:
         country = subject.split(":")[1]
@@ -191,7 +209,7 @@ def main() -> None:
 
     methods = [
         {"id": "frozen-producer", "kind": "source", "description": "Run the exact pinned #1344 producer against the exact source-custody input tree in two fresh admitted namespaces; compare all actual products to their declared actual summaries and historical whole-file pins.", "software": "Python 3.12.14; NumPy 2.3.5; pyproj 3.7.2; Shapely 2.1.2; GEOS 3.13.1", "units": "whole-file bytes and SHA-256; no new geographic unit or measurement"},
-        {"id": "safe-writers", "kind": "code", "description": "Exercise exclusive complete-set staging/receipt admission, the actual producer's six rejection branches, and changed/missing/false actual-output controls with sentinel preservation.", "software": "Python 3.12.14; standard library", "units": "file existence, byte lengths, SHA-256, exit status, and exact rejection reason"},
+        {"id": "safe-writers", "kind": "code", "description": "Exercise exclusive complete-set staging/receipt admission, transactional rollback after a real late collision, the actual producer's six rejection branches, and changed/missing/false actual-output controls with sentinel preservation.", "software": "Python 3.12.14; standard library", "units": "file existence, byte lengths, SHA-256, exit status, and exact rejection reason"},
     ]
     validation = [
         {"method_id": "frozen-producer", "kind": "positive-control", "outcome": "passed", "evidence_path": positive_path},
@@ -199,6 +217,29 @@ def main() -> None:
         {"method_id": "frozen-producer", "kind": "reproducibility", "outcome": "passed", "evidence_path": reproducibility_path},
         {"method_id": "safe-writers", "kind": "negative-control", "outcome": "passed", "evidence_path": comparison_path},
     ]
+    original_metrics = load_json(ORIGINAL / "evidence-quality.json")["metrics"]
+    original_bindings = load_json(ORIGINAL / "evidence-quality.json")["metric_bindings"]
+    metrics = []
+    for metric in original_metrics:
+        updated = {**metric, "evaluation_commit": EVALUATION,
+                   "input_file": {"path": metric_inputs[metric["input_sha256"]][1],
+                                  "commit": metric_inputs[metric["input_sha256"]][0]}}
+        metrics.append(updated)
+    metrics.extend([
+        {"id": "complete-source-overlay-row-count", "value": 993, "unit": "rows", "input_sha256": sha(git_bytes(*metric_inputs["SOURCE_CATALOGUE"])[0]), "evaluation_commit": EVALUATION, "vintage": "baseline", "input_file": {"path": metric_inputs["SOURCE_CATALOGUE"][1], "commit": ORIGINAL_MERGE}},
+        {"id": "blr-scoped-contact-count", "value": 1, "unit": "contacts", "input_sha256": pins["scoped_contact_part_0"], "evaluation_commit": EVALUATION, "vintage": "baseline", "input_file": {"path": "data/geography/part-2.json", "commit": BASELINE}},
+        {"id": "pol-scoped-contact-count", "value": 3, "unit": "contacts", "input_sha256": pins["scoped_contact_part_1"], "evaluation_commit": EVALUATION, "vintage": "baseline", "input_file": {"path": "data/geography/part-19.json", "commit": BASELINE}},
+        {"id": "ukr-scoped-contact-count", "value": 5, "unit": "contacts", "input_sha256": pins["scoped_contact_part_2"], "evaluation_commit": EVALUATION, "vintage": "baseline", "input_file": {"path": "data/geography/part-25.json", "commit": BASELINE}},
+    ])
+    metric_bindings = [{**binding, "path": f"{OWNED}/{EXEC.relative_to(PACKET).as_posix()}/runs/run-one/products/source-fitness.json"}
+                       for binding in original_bindings]
+    metric_bindings.extend([
+        {"metric_id": "complete-source-overlay-row-count", "path": f"{OWNED}/{EXEC.relative_to(PACKET).as_posix()}/numeric-summary.json", "json_pointer": "/overlay_row_count"},
+        {"metric_id": "blr-scoped-contact-count", "path": f"{OWNED}/{EXEC.relative_to(PACKET).as_posix()}/numeric-summary.json", "json_pointer": "/contact_counts_by_country/BLR"},
+        {"metric_id": "pol-scoped-contact-count", "path": f"{OWNED}/{EXEC.relative_to(PACKET).as_posix()}/numeric-summary.json", "json_pointer": "/contact_counts_by_country/POL"},
+        {"metric_id": "ukr-scoped-contact-count", "path": f"{OWNED}/{EXEC.relative_to(PACKET).as_posix()}/numeric-summary.json", "json_pointer": "/contact_counts_by_country/UKR"},
+    ])
+    summaries = [{"metric_id": metric["id"], "value": metric["value"], "unit": metric["unit"]} for metric in metrics]
     manifest = {
         "version": 1, "issue": ISSUE, "lane": "geography", "worker_id": WORKER,
         "subject_ids": SUBJECTS,
@@ -208,7 +249,7 @@ def main() -> None:
         "sources": sources,
         "outputs": outputs,
         "methods": methods,
-        "metrics": [], "summaries": [], "metric_bindings": [], "record_checks": [],
+        "metrics": metrics, "summaries": summaries, "metric_bindings": metric_bindings, "record_checks": [],
         "validation": validation,
         "conclusions": [
             {"source_ids": ["geoboundaries-blr-adm2-simplified", "geoboundaries-pol-adm2-simplified", "geoboundaries-ukr-adm2-simplified"], "status": "supported", "text": "The frozen complete Belarus, Poland and Ukraine simplified ADM2 source bytes, feature inventory, and nine exact source-shapeID joins reproduce the inherited #1344 assessment. This is byte/source inventory evidence only; represented years, national authority, effective dates, positional accuracy, and legal boundary are not newly verified."},

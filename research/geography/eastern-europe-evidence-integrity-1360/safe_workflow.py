@@ -160,10 +160,48 @@ def admit_targets(targets: list[Path]) -> None:
             fail(f"destination already exists: {target}")
 
 
-def write_set_exclusive(payloads: dict[Path, bytes]) -> list[dict]:
-    """Admit a complete receipt set before writing its first member."""
+def write_set_exclusive(payloads: dict[Path, bytes], *, before_install=None) -> list[dict]:
+    """Stage a complete receipt set and roll back links if any final install fails."""
     admit_targets(list(payloads))
-    return [write_exclusive(path, payloads[path]) for path in payloads]
+    if not payloads:
+        return []
+    import tempfile
+    check_no_links(EXEC, allow_missing=False)
+    if not EXEC.is_dir():
+        fail("receipt staging root is not a directory")
+    installed: list[tuple[Path, Path]] = []
+    with tempfile.TemporaryDirectory(prefix="receipt-stage-", dir=EXEC) as temp:
+        stage_root = Path(temp)
+        staged = []
+        for index, target in enumerate(payloads):
+            stage_path = stage_root / f"{index:04d}.receipt"
+            write_exclusive(stage_path, payloads[target])
+            staged.append((stage_path, target))
+        try:
+            for index, (stage_path, target) in enumerate(staged):
+                check_no_links(target.parent, allow_missing=False)
+                if before_install is not None:
+                    before_install(index, target)
+                os.link(stage_path, target, follow_symlinks=False)
+                installed.append((stage_path, target))
+        except OSError as exc:
+            for stage_path, target in reversed(installed):
+                try:
+                    if os.path.samefile(stage_path, target):
+                        target.unlink()
+                except FileNotFoundError:
+                    pass
+            fail(f"receipt set install failed and prior installs were rolled back: {type(exc).__name__}: {exc}")
+        except BaseException:
+            for stage_path, target in reversed(installed):
+                try:
+                    if os.path.samefile(stage_path, target):
+                        target.unlink()
+                except FileNotFoundError:
+                    pass
+            raise
+    return [{"path": path.relative_to(REPO).as_posix(), "bytes": len(payloads[path]),
+             "sha256": sha(payloads[path])} for path in payloads]
 
 
 def write_invocation_receipts(payloads: dict[Path, bytes]) -> list[dict]:
@@ -174,6 +212,11 @@ def write_invocation_receipts(payloads: dict[Path, bytes]) -> list[dict]:
 def write_control_receipts(payloads: dict[Path, bytes]) -> list[dict]:
     """Admit and exclusively write a control receipt set."""
     return write_set_exclusive(payloads)
+
+
+def write_completion_receipts(payloads: dict[Path, bytes], *, before_install=None) -> list[dict]:
+    """Install the complete positive/reproducibility/history receipt set transactionally."""
+    return write_set_exclusive(payloads, before_install=before_install)
 
 
 def write_manifest_receipt(path: Path, raw: bytes) -> dict:
@@ -622,7 +665,43 @@ def build_subject_crosswalk(inputs: Path) -> dict:
             "subjects": rows}
 
 
-def write_final_receipts(comparison: dict) -> list[dict]:
+def build_numeric_summary(inputs: Path) -> dict:
+    """Bind the complete per-feature overlay inventory and nine scoped contacts."""
+    import csv
+    from collections import Counter
+    fitness_path = EXEC / "runs/run-one/products/source-fitness.json"
+    fitness = json.loads(require_regular(fitness_path))
+    overlays_path = EXEC / "runs/run-one/products/whole-source-neighbor-overlays.csv"
+    with overlays_path.open(newline="", encoding="utf-8") as stream:
+        overlays = list(csv.DictReader(stream))
+    identities = [(row.get("country"), row.get("source_shape_id")) for row in overlays]
+    expected_counts = {country: count for country, (_, count) in PRODUCTS_BY_COUNTRY.items()}
+    observed_counts = dict(Counter(country for country, _ in identities))
+    if (len(overlays) != 993 or len(set(identities)) != 993 or
+            observed_counts != expected_counts or any(not sid for _, sid in identities)):
+        fail("complete 993-row overlay inventory is missing, duplicated or miscounted")
+    contacts = fitness.get("current_atlas_contact_source_comparisons", [])
+    contact_counts = dict(Counter(row.get("country") for row in contacts))
+    expected_contacts = {"BLR": 1, "POL": 3, "UKR": 5}
+    if len(contacts) != 9 or contact_counts != expected_contacts or len({x.get("contact_id") for x in contacts}) != 9:
+        fail("the complete nine-contact comparison inventory is missing or miscounted")
+    catalogue = inputs / "baseline/source-corpus-catalogue.json"
+    catalogue_raw = require_regular(catalogue)
+    return {"version": 1, "issue": 1515, "method_id": "frozen-producer",
+            "overlay_row_count": len(overlays), "overlay_unique_country_shape_ids": len(set(identities)),
+            "source_feature_counts_by_country": expected_counts,
+            "source_feature_total": sum(expected_counts.values()),
+            "contact_counts_by_country": expected_contacts, "contact_total": len(contacts),
+            "overlay_csv": {"path": overlays_path.relative_to(REPO).as_posix(),
+                            "bytes": len(require_regular(overlays_path)), "sha256": sha(require_regular(overlays_path))},
+            "source_corpus_catalogue": {"path": catalogue.relative_to(REPO).as_posix(),
+                                        "bytes": len(catalogue_raw), "sha256": sha(catalogue_raw)},
+            "units": {"overlay_row_count": "rows", "source_feature_counts_by_country": "features",
+                      "source_feature_total": "features", "contact_counts_by_country": "contacts",
+                      "contact_total": "contacts"}}
+
+
+def write_final_receipts(comparison: dict, numeric_summary: dict) -> list[dict]:
     controls = EXEC / "controls"
     if not os.path.lexists(controls):
         mkdir_fresh(controls)
@@ -641,8 +720,10 @@ def write_final_receipts(comparison: dict) -> list[dict]:
                        "outcome": "passed", "actual_products_equal": True,
                        "run_one_sha256": aggregate, "run_two_sha256": sha(canonical(comparison["run_two"])),
                        "actual_product_inventory": comparison["run_one"]}
-    receipts = write_set_exclusive({summary_path: canonical(full), positive_path: canonical(positive),
-                                    reproducibility_path: canonical(reproducibility)})
+    numeric_path = EXEC / "numeric-summary.json"
+    receipts = write_completion_receipts({summary_path: canonical(full), positive_path: canonical(positive),
+                                          reproducibility_path: canonical(reproducibility),
+                                          numeric_path: canonical(numeric_summary)})
     return receipts
 
 
@@ -753,6 +834,25 @@ def writer_self_tests() -> list[dict]:
                 outside_sentinel.read_bytes() != b"preserve-outside-sentinel\n"):
                 fail(f"writer {writer} changed a preservation sentinel")
             results.append({"writer": writer, "probes": probes, "sentinels_unchanged": True})
+        case = root / "completion-late-failure"
+        case.mkdir()
+        nested = case / "nested"
+        nested.mkdir()
+        first, raced, last = (nested / name for name in ("first.json", "raced.json", "last.json"))
+        raced_bytes = b"concurrent-writer-sentinel\n"
+        def introduce_real_collision(index, target):
+            if index == 1:
+                write_exclusive(target, raced_bytes)
+        try:
+            write_completion_receipts({first: b"first\n", raced: b"raced\n", last: b"last\n"},
+                                      before_install=introduce_real_collision)
+            fail("late completion receipt collision was accepted")
+        except EvidenceError as exc:
+            if first.exists() or last.exists() or raced.read_bytes() != raced_bytes:
+                fail("late completion receipt failure left partial products or changed the racing sentinel")
+            results.append({"writer": "completion-receipts-late-failure", "outcome": "rejected",
+                            "reason": str(exc), "first_rolled_back": True,
+                            "racing_sentinel_preserved": True, "later_member_absent": True})
     return results
 
 
@@ -864,10 +964,16 @@ def main() -> None:
         crosswalk = build_subject_crosswalk(input_root)
         crosswalk_path = EXEC / "subject-bindings.json"
         write_exclusive(crosswalk_path, canonical(crosswalk))
-        receipts = write_final_receipts(compared)
+        numeric_summary = build_numeric_summary(input_root)
+        numeric_path = EXEC / "numeric-summary.json"
+        receipts = write_final_receipts(compared, numeric_summary)
         result = {"status": "passed", "staged_input_count": len(staged), "staged_input_bytes": sum(x["bytes"] for x in staged),
                   "stage_admission": stage_admission,
-                  "code": code, "runs": [a, b], "comparison": compared, "subject_crosswalk": {"path": crosswalk_path.relative_to(PACKET).as_posix(), "subject_count": crosswalk["subject_count"], "sha256": sha(require_regular(crosswalk_path))}, "receipts": receipts}
+                  "code": code, "runs": [a, b], "comparison": compared,
+                  "subject_crosswalk": {"path": crosswalk_path.relative_to(PACKET).as_posix(), "subject_count": crosswalk["subject_count"], "sha256": sha(require_regular(crosswalk_path))},
+                  "numeric_summary": {"path": numeric_path.relative_to(PACKET).as_posix(), "sha256": sha(require_regular(numeric_path)),
+                                      "overlay_rows": numeric_summary["overlay_row_count"], "contact_total": numeric_summary["contact_total"]},
+                  "receipts": receipts}
         path = EXEC / "fresh-execution.json"
         if os.path.lexists(path): fail("fresh-execution receipt already exists")
         write_exclusive(path, canonical(result))
