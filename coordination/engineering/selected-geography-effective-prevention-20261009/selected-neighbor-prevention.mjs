@@ -59,19 +59,24 @@ export function selectedCoordinateShard(resolver,sourcePaths,{priorShards=[],out
  // Complete immutable metadata is the only state retained across genuine
  // acquisition phases. Original source collections are discarded after each
  // iteration; bounds are not substitute geometry inputs to polygon consumers.
- const retained=valueBytes({binding,owners:snapshot.owners,image:resolver.image?{index:resolver.image.index,map:resolver.image.map}:null,bank:resolver.bank??null,priorShards}).length;
+ const ownerIdentity=snapshot.owners.map(r=>[r.index,r.id,r.province_index,r.province_id]);
+ const retained=valueBytes({binding,ownerIdentity,image:resolver.image?{index:resolver.image.index,map:resolver.image.map}:null,bank:resolver.bank??null,priorShards}).length;
  demand(retained<=FILE,'Retained coordinate certificate metadata exceeds ordinary bound');
- reader.metadataBytes=8*1024*1024+2*retained;reader.phase();
+ reader.metadataBytes=8*1024*1024+2*(snapshot.metadataBytes+retained)+snapshot.acquisition_buffer_bytes;reader.phase();
  const roster=new Map(snapshot.owners.map(r=>[r.id,r])),entries=[],seen=new Set(),inputFacts=[],phases=[];
  for(const name of sourcePaths){
-  reader.metadataBytes=8*1024*1024+2*(retained+valueBytes({entries,inputFacts}).length);reader.phase();const actual=resolver.read(name);inputFacts.push({path:name,source:actual.source,whole_body_sha256:actual.whole_sha256,bytes:actual.body.length});
+  reader.metadataBytes=8*1024*1024+2*(snapshot.metadataBytes+retained+valueBytes({entries,inputFacts}).length)+snapshot.acquisition_buffer_bytes;reader.phase();const actual=resolver.read(name);inputFacts.push({path:name,source:actual.source,whole_body_sha256:actual.whole_sha256,bytes:actual.body.length});
   for(let ordinal=0;ordinal<actual.collection.features.length;ordinal++){
    const f=actual.collection.features[ordinal],id=f.id??f.properties?.id,owner=roster.get(id);
    demand(f.type==='Feature'&&owner&&!seen.has(id)&&f.properties?.parent_id===owner.province_id,'Foreign/duplicate/misparented whole selected row');seen.add(id);
    const additions=(snapshot.additive?.normalized_rows??[]).filter(r=>r.target_id===id);
    for(const addition of additions)demand(addition.base_geometry_sha256===valueSha(f.geometry),'Effective addition target pointsets are stale against complete selected source');
    const effective={base_geometry_sha256:valueSha(f.geometry),additions};
-   entries.push({id,index:owner.index,parent_id:owner.province_id,parent_index:owner.province_index,source:name,ordinal,whole_feature_sha256:valueSha(f),geometry_sha256:valueSha(f.geometry),effective_geometry_sha256:valueSha(effective),boxes:[...coordinateBounds(f.geometry),...additions.flatMap(r=>coordinateBounds(r.geometry))]});
+   const allBounds=[...coordinateBounds(f.geometry),...additions.flatMap(r=>coordinateBounds(r.geometry))];
+   // One conservative rectangle contains every original member/addition bound.
+   // A seam member already spans all longitude; merging can only widen exclusion.
+   const boxes=[allBounds.reduce((a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])])];
+   entries.push({id,index:owner.index,parent_id:owner.province_id,parent_index:owner.province_index,source:name,ordinal,whole_feature_sha256:valueSha(f),geometry_sha256:valueSha(f.geometry),effective_geometry_sha256:valueSha(effective),boxes});
    if(onFeature!==undefined){demand(typeof onFeature==='function','Require trusted source digest callback');onFeature(f);}
   }
   phases.push({source:name,complete_phase_bytes:reader.used,descriptors:reader.charged.size});
@@ -89,10 +94,10 @@ export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve
   for(const input of shard.inputs){demand(input.path===resolver.paths[inputs.length]&&same(input.source,{...resolver.sources[inputs.length],...(input.source.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})}), 'Complete selected source input order or whole binding differs');inputs.push(input);}for(const row of shard.entries){demand(!seenIds.has(row.id),'Duplicate complete location join');seenIds.add(row.id);entries.push(row);}
  }
  demand(seenPaths.size===expected.size&&seenIds.size===resolver.snapshot.owners.length&&resolver.snapshot.owners.every(o=>seenIds.has(o.id)),'Incomplete canonical source/owner roster; exclusion forbidden');
- const retained=2*valueBytes({shards,owners:resolver.snapshot.owners,binding}).length;
+ const retained=2*(resolver.snapshot.metadataBytes+valueBytes({shards,ownerIdentity:resolver.snapshot.owners.map(r=>[r.index,r.id,r.province_index,r.province_id]),binding}).length)+resolver.snapshot.acquisition_buffer_bytes;
  const reader=resolver.reader;demand(Number.isSafeInteger(outputReserve)&&outputReserve>0&&outputReserve<=FILE,'Bounded complete certificate output reserve required');reader.outputBytes=outputReserve;reader.metadataBytes=8*1024*1024+retained;reader.phase();
  demand(shards.length+inputs.length<=SLOT,'Complete coordinate join descriptor cap');entries.sort((a,b)=>a.index-b.index);
- const result={version:1,kind:'selected-coordinate-neighbor-certificate-v1',binding,entries,inputs,complete_phase_bytes:reader.used,limitations:['Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.']};
+ const result={version:1,kind:'selected-coordinate-neighbor-certificate-v1',binding,entries,inputs,complete_phase_bytes:reader.used,limitations:['Certificate projects complete owner identity/index/parent tuples and merged coordinate bounds. Full original camera metadata remains authenticated source custody and charged carried state; it is not duplicated as certificate geometry.','Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.']};
  demand(valueBytes(result).length<=reader.outputBytes,'Complete selected certificate exceeds prospective output');freeze(result);certificates.set(result,{binding,resolver});return result;
 }
 // Qualification of a persisted cold product uses the independently retained

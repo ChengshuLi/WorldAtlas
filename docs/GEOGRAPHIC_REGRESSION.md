@@ -200,3 +200,13 @@ compare virtual combined rows against every original owner and reject delta
 cells that were previously assigned. No repair or release is activated by this
 checker, and source-relative qualification does not establish physical water,
 administrative or historical truth.
+
+The cold certificate retains one conservatively merged coordinate rectangle per
+owner and complete identity/index/parent tuples. It does not repeat camera fields
+or substitute bounds for actual source geometry. All original whole owner/camera
+custody and carried metadata remain authenticated and charged to the acquisition
+phase. A seam-spanning original member expands the merged longitude interval;
+merging never excludes a neighbor. After each whole containing body leaves its
+helper frame, the trusted cold child uses authenticated native GC (`--expose-gc`)
+to reclaim dead source objects. Missing or replaced GC refuses; this changes
+acquisition lifetime only, without changing source pointsets or polygon methods.
