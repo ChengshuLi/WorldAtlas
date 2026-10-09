@@ -1,0 +1,31 @@
+✔ only named no-data activation branch can report bootstrap absence (226.419208ms)
+✔ bootstrap rejects another branch (103.56225ms)
+✔ bootstrap rejects stale head (93.513708ms)
+✔ bootstrap rejects fork head (105.445541ms)
+✔ bootstrap rejects live data change (130.8055ms)
+✔ bootstrap rejects renamed live data (96.655208ms)
+✔ bootstrap rejects incomplete inventory (145.41675ms)
+✔ bootstrap rejects duplicate inventory (162.186042ms)
+✔ bootstrap rejects oversized inventory (109.978209ms)
+✔ bootstrap job explicitly grants only the read permissions its API calls require (0.446167ms)
+✔ root-format 1479 blob requests become 474 verified immutable fetches across three authority passes (1093.026209ms)
+✔ cache keeps fresh changed OIDs, repository identity, trees and authority reads (0.96ms)
+✔ failed, malformed, truncated, changed content and mismatched OID responses never populate cache (0.65125ms)
+✔ bounded memory/entry overflow stays uncached without evicting useful initial scan; execution caches are separate (0.271125ms)
+✔ actual API rejection preserves only sanitized message/status and allowlisted rate/request headers (25.657833ms)
+✔ callers and origin objects cannot mutate cached bytes or metadata used by later checks (0.2215ms)
+✔ actual failure-only workflow diagnostic uses one bounded read and redacts known token/prefix/Bearer without bypass (96.27675ms)
+✔ actual trusted entry point preserves the original rejection before a denied comment (296.809834ms)
+✔ actual trusted entry point retains its preparation receipt before successful notification (162.191042ms)
+✔ trusted preparation has PR comment permission while candidate tests remain read-only (0.662042ms)
+✔ actual entry point saves stale/head/conflict/base diagnostics even when notification fails (815.927875ms)
+✔ actual final entry point cleans only its owned ref and retains successful merge on cleanup failure (290.534708ms)
+✔ actual fallback prepare cleans its confirmed ref when receipt notification is denied (172.977875ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1875.231375

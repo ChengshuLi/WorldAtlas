@@ -76,14 +76,14 @@
     },
     {
       "path": ".github/workflows/merge-integration-checks.yml",
-      "bytes": 17146,
-      "sha256": "9576abe3dc1e789ac97bf92265891a6238558df8a411df0a79f90d41579707e9",
+      "bytes": 19446,
+      "sha256": "e36c2f9b54a92e8ab7d926b2601bdc823d8ffab93d159fa422ae93986afc47c4",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/global-quota-1543-20261009/HANDOFF.md",
-      "bytes": 4751,
-      "sha256": "4c857a15180812a789716ba676703407c81856c00e33a15f852c7a0bfc54c9e8",
+      "bytes": 6233,
+      "sha256": "d1145ac9a8a23c90ecac64d77fbc782f21956588c27ed99c27a84eaebc6368c3",
       "hash_kind": "file-bytes"
     },
     {
@@ -147,9 +147,21 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/expanded-actions-regression.log",
+      "bytes": 25961,
+      "sha256": "4d83105c0d7beaab7a8c638367bef6d45e4504904df9103b900db7ff8edd3e51",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/global-findings.json",
       "bytes": 2856,
       "sha256": "81babd39328555a1c7b0a18296b243fc1372558f8ac57c0fd936b62a31498eb2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/hosted-fixture-repair.log",
+      "bytes": 2171,
+      "sha256": "7a8b7e7ca0de5cd34564311eed372ddf3b40156d7b9db43d402d5d192d82b799",
       "hash_kind": "file-bytes"
     },
     {
@@ -334,6 +346,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/geography-bootstrap.test.mjs",
+      "bytes": 4178,
+      "sha256": "c10a807876c117b91772746e41b82df933bab6b7c70e031e1bcf2aa61b255ce4",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/github-admission.test.mjs",
       "bytes": 11910,
       "sha256": "6ea62bbbe1f66d8da1172e4b2d048dfab92161d25a0bcc3ed5d72faece00ea0a",
@@ -361,6 +379,12 @@
       "path": "test/issue-lease-client.test.mjs",
       "bytes": 5681,
       "sha256": "2205d08107a0a9004960339264df22627eef37858edaad0303abca22977f5d45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "bytes": 15260,
+      "sha256": "3f14f53bf8d2829c1244cc2583a905c01f1460450586770491a70f338cad68cf",
       "hash_kind": "file-bytes"
     },
     {
@@ -685,7 +709,15 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/expanded-actions-regression.log",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/global-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/hosted-fixture-repair.log",
       "status": "added"
     },
     {
@@ -822,6 +854,11 @@
       "original_sha256": "7d3c27335996fd390a8d1876661f7808fb6d4f36eec182e255796c749e685a6f"
     },
     {
+      "path": "test/geography-bootstrap.test.mjs",
+      "status": "modified",
+      "original_sha256": "22e199bf859162191cca3167e047eb6b5deea8e7c09bb8bbb6d999683fde6633"
+    },
+    {
       "path": "test/github-admission.test.mjs",
       "status": "added"
     },
@@ -840,6 +877,11 @@
     {
       "path": "test/issue-lease-client.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "status": "modified",
+      "original_sha256": "67475a665686ddf3a127f46d9128b17c8b0b1072cab1cdccd99956dc9e2806fc"
     },
     {
       "path": "test/pr-gates.test.mjs",

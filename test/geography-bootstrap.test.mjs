@@ -7,7 +7,9 @@ import {pathToFileURL} from 'node:url';
 
 const root=path.resolve(import.meta.dirname,'..');
 const yaml=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8');
-const match=yaml.match(/node --input-type=module <<'NODE'\n([\s\S]+?)\n          NODE/);
+const geographyJob=yaml.match(/\n  geography:\n([\s\S]*?)(?=\n  [a-z][a-z-]*:|$)/)?.[1];
+assert.ok(geographyJob,'geography job missing');
+const match=geographyJob.match(/node --input-type=module <<'NODE'\n([\s\S]+?)\n          NODE/);
 assert.ok(match,'bounded bootstrap script missing');
 // Execute the actual workflow body with its trusted helper at the real source
 // path; only read-only GitHub transport is mocked. No live mutation or checkout.
@@ -19,7 +21,7 @@ function probe({delta={},files=[{filename:'scripts/run-geographic-check.py'}],co
  const dir=fs.mkdtempSync(path.join(scratch,'case-'));
  const pr={head:{sha:head,ref:branch,repo:{full_name:'owner/repo'}},base:{ref:'main'},changed_files:count,...delta};
  fs.writeFileSync(path.join(dir,'event.json'),JSON.stringify({pull_request:{number:1}}));
- const fake=`globalThis.fetch=async url=>new Response(JSON.stringify(String(url).includes('/files')?${JSON.stringify(files)}:${JSON.stringify(pr)}),{status:200,headers:{'Content-Type':'application/json'}});\n`;
+ const fake=`globalThis.fetch=async url=>new Response(JSON.stringify(String(url).includes('/files')?${JSON.stringify(files)}:${JSON.stringify(pr)}),{status:200,headers:{'Content-Type':'application/json','x-ratelimit-resource':'core','x-ratelimit-limit':'5000','x-ratelimit-remaining':'4900','x-ratelimit-reset':String(Math.floor(Date.now()/1000)+3600)}});\n`;
  try {
   const result=spawnSync(process.execPath,['--input-type=module','-e',fake+body],{cwd:dir,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-read-only-token',GITHUB_EVENT_PATH:path.join(dir,'event.json'),GITHUB_REPOSITORY:'owner/repo',GEOGRAPHY_CANDIDATE:head}});
   const out=path.join(dir,'geography-check.json');
@@ -50,6 +52,6 @@ test('bootstrap job explicitly grants only the read permissions its API calls re
   return permissions?.trim()==='contents: read\n      pull-requests: read\n      issues: read';
  }
  assert.equal(allowed(yaml),true);
- assert.equal(allowed(yaml.replace('      pull-requests: read\n','')),false);
- assert.equal(allowed(yaml.replace('      pull-requests: read','      pull-requests: write')),false);
+ assert.equal(allowed(yaml.replace(geographyJob,geographyJob.replace('      pull-requests: read\n',''))),false);
+ assert.equal(allowed(yaml.replace(geographyJob,geographyJob.replace('      pull-requests: read','      pull-requests: write'))),false);
 });

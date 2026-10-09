@@ -29,3 +29,11 @@ Mutating claim CLI actions now require a durable output path and exclusively own
 The four `day-*.py.txt` files are archived extraction provenance only. They preserve the historical extraction logic and paths, have no safe output admission, and are not reproduction commands. Use the bounded fresh-destination aggregator for reproduction of retained records; independent refetching of original logs is a separate investigation.
 
 The renewed control run (`repro-final-20261009/`) uses the admitted fresh destination and binds all retained consumer records to the authoritative workflow inventory, including exact selected rosters. Wrong consumer joins and missing receipts reject before any output. Falsey/nonpending JSON receipts are preserved. The latest complete local regression log records 258 passing controls; earlier logs remain historical observations.
+
+## Hosted full-suite correction
+
+Hosted code run 37883373337 at f5e8f287500287f441737bd999ab8ec17749ae05 exposed tests omitted from the focused local selection. The geography bootstrap fixture selected the first inline workflow script rather than the geographic fallback and mutated the first permission block rather than the geographic job. Merge-entrypoint mock responses omitted authenticated core capacity headers while their child processes inherited Actions admission. These fixtures now exercise the intended boundaries with realistic capacity headers; production admission is unchanged.
+
+The existing failure-only, read-only API diagnostic is restored. It uses one bounded request only after failure, preserves validation failure and redacts tokens, request metadata and unsafe message content. Successful jobs incur no diagnostic request or delay.
+
+`hosted-fixture-repair.log` records 23 passing actual-entrypoint/bootstrap/diagnostic controls with `GITHUB_ACTIONS=true`. `expanded-actions-regression.log` records 278 passing selected controls with that same environment. These are not a claim that the complete hosted world/regression suite passed. Other hosted shards and renewed exact-head review remain pending. Metadata-only run 37883392065 succeeded while its same-head code run continued; package and regression jobs were skipped in the metadata run. This establishes the event split's behavior, not installation-wide quota savings or new baseline-helper adoption.
