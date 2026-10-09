@@ -1,0 +1,53 @@
+{
+  "accepted": true,
+  "request_id": "1beca157-937d-4bc8-abef-01944b1ee894",
+  "issue_number": 1589,
+  "claim": {
+    "comment_id": 6077585219,
+    "version": 1,
+    "active": true,
+    "worker_id": "01a119de-e3de-7860-aa56-0484afa8a261",
+    "claim_id": "50edbb90-a47e-4de5-9c3b-a0e13eced56c",
+    "branch": "engineering/global-gap-candidate-refresh-20261009",
+    "request_id": "1beca157-937d-4bc8-abef-01944b1ee894",
+    "issue_number": 1589,
+    "claimed_at": "2026-10-09T08:46:34.273Z",
+    "updated_at": "2026-10-09T09:28:23.566Z",
+    "expires_at": "2026-10-10T09:28:23.566Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 1
+  },
+  "replayed": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6078212052,
+  "logical_observation_reads": 4,
+  "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37911459725",
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 6,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 2,
+      "GET:actions:200": 2
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4792,
+        "reset": 1791539499
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4787,
+        "reset": 1791539499
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4787,
+        "reset": 1791539499
+      }
+    }
+  }
+}

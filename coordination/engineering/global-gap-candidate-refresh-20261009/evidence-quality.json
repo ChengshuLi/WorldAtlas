@@ -548,7 +548,7 @@
         "role": "evidence-artifact"
       },
       {
-        "commit": "7b95cfc2d811cc39697f9090ffb18c8d5d5b91cc",
+        "commit": "c8df65e1d5c4d235c33e2f488c3e29d26223860f",
         "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/scope-one/scope.jsonl.gz",
         "bytes": 11159162,
         "sha256": "94d3b9521c0f5fdbb3e11dec6f72a964c364130c8607dc341e25a0eef5fdd654",
@@ -588,30 +588,16 @@
   ],
   "outputs": [
     {
-      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/README.md",
-      "bytes": 7291,
-      "sha256": "1702a9cd9b90958ef01c7a520715446d90719d24aae74d130ade56fb4ec85064",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/README.md",
+      "bytes": 7041,
+      "sha256": "e417504145c962abf85a71f3b741059fb4665277ea90e819886d5092a2d03a90",
       "hash_kind": "file-bytes",
       "role": "evidence-artifact"
     },
     {
-      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/bounded_io.py",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/bounded_io.py",
       "bytes": 7563,
       "sha256": "cdd5e2ac206143f531c40ae9cd89b13732bfeca1ac739ff9d3e1fc18a9570919",
-      "hash_kind": "file-bytes",
-      "role": "evidence-artifact"
-    },
-    {
-      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/catalog.py",
-      "bytes": 14822,
-      "sha256": "5160331c23841ecff5c64d4695ab0198214c4953fe560e7381e58236c62b8b79",
-      "hash_kind": "file-bytes",
-      "role": "evidence-artifact"
-    },
-    {
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/README.md",
-      "bytes": 6253,
-      "sha256": "566dc3e14f3cfba50aea806fdc44276901068b846ebcb1489b11206e769b810d",
       "hash_kind": "file-bytes",
       "role": "evidence-artifact"
     },
@@ -619,6 +605,13 @@
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/capture-case-canonical.mjs",
       "bytes": 1870,
       "sha256": "fa40880ee4909bcc45f18f823d6f8cf5ce9dec6ef2d01b109872f19e93fc67b7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/catalog.py",
+      "bytes": 14822,
+      "sha256": "5160331c23841ecff5c64d4695ab0198214c4953fe560e7381e58236c62b8b79",
       "hash_kind": "file-bytes",
       "role": "evidence-artifact"
     },
@@ -1124,8 +1117,8 @@
     },
     {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/inputs/parent-pins.json",
-      "bytes": 6469,
-      "sha256": "70eaa8220bdf03e7442c3264c713814f316611e662825d2fa52cd00235b8bba3",
+      "bytes": 6918,
+      "sha256": "bb4ca960ee1500f252867bcf8a7506040ec084a73ac9a7db10a24ab7a525dfd8",
       "hash_kind": "file-bytes",
       "role": "evidence-artifact"
     },
@@ -1161,6 +1154,13 @@
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/actual-metadata-rss-readback.json",
       "bytes": 6309,
       "sha256": "7d715910fb2df5fd6f523df1525645a6247f790b21c52cece236b102ba2443a8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/claim-routing-renewal.json",
+      "bytes": 1476,
+      "sha256": "bf9af73eaef1d7a3a2a694f473dd2f879f4becf8a3f5f48bb8bf38be457736b7",
       "hash_kind": "file-bytes",
       "role": "evidence-artifact"
     },
@@ -1494,6 +1494,27 @@
       "role": "evidence-artifact"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/final-controls-3.stderr.log",
+      "bytes": 777,
+      "sha256": "4202463902849aeb5aef5cfee545a19b58b517194ba37120def8bbaccbf01671",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/final-controls-3.stdout.json",
+      "bytes": 678,
+      "sha256": "4fc51aaa89386d08f8aa3ecd99507bfd8f57575020b48d2def485e90f38f24e7",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/merged-original-custody-aliases.json",
+      "bytes": 995,
+      "sha256": "33646b1acf63aa616b69de8eb6cb085936cb2225c5499a0e2f0d6f29e757d087",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/pair-parent-operating.json",
       "bytes": 10049,
       "sha256": "47b880511180932fcee678e1c4d937bc55eee09426dbbf3070e30923d5faaea0",
@@ -1543,6 +1564,41 @@
       "role": "evidence-artifact"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-operating.json",
+      "bytes": 337,
+      "sha256": "70c3c087c6944bbdd14dda82b87c6df41d7f571eb0abbfd77554e043d7717310",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-1.stderr.log",
+      "bytes": 777,
+      "sha256": "ccd4a40501b7d9e3b1f6b97bc53534d6ae05e7c68f315f235fc10697ed6335fe",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-1.stdout.json",
+      "bytes": 779,
+      "sha256": "8118edf5c723fa3aec8ac00e5460d5c1df60bff0be6c72287d6057936fbac3cb",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-2.stderr.log",
+      "bytes": 777,
+      "sha256": "1020aa8664149c14c54a6c231f40f2ac8104a92617689ca0e5bb6bd14a7d83cc",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-2.stdout.json",
+      "bytes": 779,
+      "sha256": "2bdad1739a95c033b8edf5bb09c2359614149f0d69845431a47c0d8886e0b890",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/run-corrected-leaves.py",
       "bytes": 2225,
       "sha256": "53f9ecbb5848798f6c1b5360b67ff223e8744b86f89f2d7b83756d9c98430013",
@@ -1571,6 +1627,13 @@
       "role": "evidence-artifact"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/versioned-adapter-routing.json",
+      "bytes": 1230,
+      "sha256": "64f2ec3d2712179a0ca8e04da073e98b3051f33a096df58272dda49212f5e238",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/refresh-controls.py",
       "bytes": 4628,
       "sha256": "3732e7d2900b6527ab2bac4d679ccfeaa5eec399d6c058d1467c99c92d058302",
@@ -1579,8 +1642,8 @@
     },
     {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/refresh.py",
-      "bytes": 22374,
-      "sha256": "db0bb19bd6898dfee97aff05045c6f27bef3ed442926496f63cebdafa9061aa1",
+      "bytes": 22331,
+      "sha256": "42f09b8724025bc2624967db103757f0ec3f7a2f18377971704f8f0e7d3481df",
       "hash_kind": "file-bytes",
       "role": "evidence-artifact"
     },
@@ -2957,6 +3020,57 @@
       "role": "evidence-artifact"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/admission-controls.json",
+      "bytes": 621,
+      "sha256": "65190df6583a4296047a34c980bac7ca8421f92949081345f8a243c658a48757",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/helper-controls.json",
+      "bytes": 1320,
+      "sha256": "b90e822dace8f735d6e9c6be89102ce25f18a3c8c2fce5a74d6cb290ab1fa898",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/inventory.json.gz",
+      "bytes": 11526,
+      "sha256": "37b783970491dd7b63c70a1a8b1dec89757d3a275b6901cdaebeb7dfc80df5fe",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 67833,
+      "uncompressed_sha256": "ed648cd20bac3377ff7d3858bc32fed16fdd93d75dbf7e89cd67d959495f80c7"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/negative-control.json",
+      "bytes": 139,
+      "sha256": "0f9bd8826faa20c91e93ab0c7f3d4641cbe1551f7801d4cf82a9aae9c8e1f3fa",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/positive-control.json",
+      "bytes": 220,
+      "sha256": "46022ef184a1d8776154192882be175aa77b47387f93e602b36a5e939a276206",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/publication.json",
+      "bytes": 649,
+      "sha256": "228ff30f83ffb517eeba4c0dbdc2c5a3d840162491e66e894475add73cb7051a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/reproducibility.json",
+      "bytes": 47140,
+      "sha256": "d27b87973264c63a0d0200e0eb4481a03bc90cac63b45b5d5a758a98a422ccf2",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/inventory.json.gz",
       "bytes": 5828,
       "sha256": "b9d6e1ccbf1a855441f14db88da6e0d86ff5f6866000e327f32233475d0b0041",
@@ -3011,6 +3125,66 @@
     },
     {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-2/report.md",
+      "bytes": 743,
+      "sha256": "93774175f20165cf47369a541405348ef83d4d67bdb310630c9f05673575c5cf",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/inventory.json.gz",
+      "bytes": 5829,
+      "sha256": "34ab606613208743049938fd6b7cf341d0ce31d20c89e7b25e72dd9aca5debbb",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 21067,
+      "uncompressed_sha256": "1ca956eb7fe4b9266a91e58a15d039abc0cb10c3ffe7f58abaf733ddd7428679"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/publication.json",
+      "bytes": 740,
+      "sha256": "f9982c191dbe7a0b746f2bf24dae4dbc74ec4ce0a5fa725923c1977443a4c508",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
+      "bytes": 18890,
+      "sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.md",
+      "bytes": 743,
+      "sha256": "93774175f20165cf47369a541405348ef83d4d67bdb310630c9f05673575c5cf",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/inventory.json.gz",
+      "bytes": 5830,
+      "sha256": "fe9d9fabb399e8cf8a7f48126d32c9cedd5a14fd3eab246bbe47c8a114dd434c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact",
+      "uncompressed_bytes": 21067,
+      "uncompressed_sha256": "b8c628070de17c35c6c9036c54ad7720827b05714775be32d6219312fd8510e8"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/publication.json",
+      "bytes": 740,
+      "sha256": "7ed8bb3d0112816c543baab8ebb2dfa23864ba307e6cad2782b4492821e5813a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/report.json",
+      "bytes": 18890,
+      "sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-artifact"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/report.md",
       "bytes": 743,
       "sha256": "93774175f20165cf47369a541405348ef83d4d67bdb310630c9f05673575c5cf",
       "hash_kind": "file-bytes",
@@ -3789,11 +3963,11 @@
       "value": 95173,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     },
     {
@@ -3801,11 +3975,11 @@
       "value": 2,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     },
     {
@@ -3813,11 +3987,11 @@
       "value": 16,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     },
     {
@@ -3825,11 +3999,11 @@
       "value": 0,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     },
     {
@@ -3837,11 +4011,11 @@
       "value": 2,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     },
     {
@@ -3849,11 +4023,11 @@
       "value": 2,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     },
     {
@@ -3861,11 +4035,11 @@
       "value": 2,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     },
     {
@@ -3873,53 +4047,53 @@
       "value": 16,
       "unit": "original candidates",
       "vintage": "archived",
-      "evaluation_commit": "315fba5bcdc4ba6f5b69eb7251ac608acdec2b95",
+      "evaluation_commit": "6c756ae0ec70b119f2d4be5a9e97811a4eecf7c3",
       "input_sha256": "6bfb08b0041a4fbdd0795389bf7ec92ffde531c02322e8c4b5aceea28590097c",
       "input_file": {
         "commit": "candidate",
-        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json"
+        "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json"
       }
     }
   ],
   "metric_bindings": [
     {
       "metric_id": "refresh-component_count",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/component_count"
     },
     {
       "metric_id": "refresh-accepted_classifications",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/counts/accepted_classifications"
     },
     {
       "metric_id": "refresh-accepted_source_relative_repair_decisions",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/counts/accepted_source_relative_repair_decisions"
     },
     {
       "metric_id": "refresh-delivered",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/counts/delivered"
     },
     {
       "metric_id": "refresh-fully_integrated",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/counts/fully_integrated"
     },
     {
       "metric_id": "refresh-implemented",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/counts/implemented"
     },
     {
       "metric_id": "refresh-repair_ready",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/counts/repair_ready"
     },
     {
       "metric_id": "refresh-source_relative_constructed",
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/report.json",
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
       "json_pointer": "/counts/source_relative_constructed"
     }
   ],
@@ -3984,45 +4158,38 @@
       "method_id": "catalog-progress-refresh",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-2/positive-control.json"
+      "evidence_path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/positive-control.json"
     },
     {
       "method_id": "catalog-progress-refresh",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-2/negative-control.json"
+      "evidence_path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/negative-control.json"
     },
     {
       "method_id": "catalog-progress-refresh",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-2/reproducibility.json"
+      "evidence_path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/reproducibility.json"
     }
   ],
   "record_checks": [],
   "rendered_tables": [],
   "change_receipts": [
     {
-      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/README.md",
-      "status": "modified",
-      "original_sha256": "2eb6e5c00352726ab4f7909e61b152d4196906e750a4b3172e41e610e9e41ce0"
-    },
-    {
-      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/bounded_io.py",
-      "status": "modified",
-      "original_sha256": "1db2e3fd1ee52d14bf9b7de16e1786db40a75e9414bf0281c891d7c0e43c27f8"
-    },
-    {
-      "path": "coordination/engineering/global-gap-candidate-funnel-20261008/catalog.py",
-      "status": "modified",
-      "original_sha256": "28cf18af11b82121bb7265c2a1a5b1299065a7ce1faec543c2318b696cc09ead"
-    },
-    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/README.md",
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/bounded_io.py",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/capture-case-canonical.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/catalog.py",
       "status": "added"
     },
     {
@@ -4031,6 +4198,10 @@
     },
     {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/control-runner.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/evidence-quality.json",
       "status": "added"
     },
     {
@@ -4330,6 +4501,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/claim-routing-renewal.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/complete-pair-01.stderr.log",
       "status": "added"
     },
@@ -4518,6 +4693,18 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/final-controls-3.stderr.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/final-controls-3.stdout.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/merged-original-custody-aliases.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/pair-parent-operating.json",
       "status": "added"
     },
@@ -4546,6 +4733,26 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-1.stderr.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-1.stdout.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-2.stderr.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/routed-parent-run-2.stdout.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/run-corrected-leaves.py",
       "status": "added"
     },
@@ -4559,6 +4766,10 @@
     },
     {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/unqualified-control-import-final-controls.stdout.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/operating/versioned-adapter-routing.json",
       "status": "added"
     },
     {
@@ -5210,6 +5421,34 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/admission-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/helper-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/final-controls-3/reproducibility.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-1/inventory.json.gz",
       "status": "added"
     },
@@ -5239,6 +5478,38 @@
     },
     {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/parent-run-2/report.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-1/report.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/inventory.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/routed-parent-run-2/report.md",
       "status": "added"
     },
     {
@@ -5583,10 +5854,6 @@
     },
     {
       "path": "coordination/engineering/global-gap-candidate-refresh-20261009/vintages/run-one-fullhead-01/publication.json",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/global-gap-candidate-refresh-20261009/evidence-quality.json",
       "status": "added"
     }
   ],
