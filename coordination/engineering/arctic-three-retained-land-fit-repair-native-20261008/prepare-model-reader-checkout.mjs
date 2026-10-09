@@ -9,7 +9,7 @@ import {consumeQualifiedArcticArtifacts} from './qualified-artifact-consumer.mjs
 import {installV9Stage} from './install-v9-stage.mjs';
 const N2='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008';
 export async function prepareModelReaderCheckout({root=process.cwd(),profile,shard}) {
-  assert.equal(profile,'full');assert([1,2].includes(shard),'Declared prepared/model-reader shard required');
+  assert.equal(profile,'full');assert([0,1,2].includes(shard),'Declared full regression shard required');
   root=fs.realpathSync(root);
   const selection=JSON.parse(fs.readFileSync(path.join(root,'data/ownership-selection.json')));
   if(!selection.artifact_consumption)return {applicable:false};

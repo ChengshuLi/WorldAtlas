@@ -39,8 +39,10 @@ fs.chmodSync(path.join(destination,'scripts/artifact-checkout-execution.mjs'),0o
 const positive=JSON.parse(run(process.execPath,['scripts/run-integration-tests.mjs'],{INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'2'}));
 const preparedPositive=JSON.parse(run(process.execPath,['scripts/run-integration-tests.mjs'],{INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'1'}));
 assert.equal(preparedPositive.positive,2);
+const packagedPositive=JSON.parse(run(process.execPath,['scripts/run-integration-tests.mjs'],{INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0'}));
+assert.equal(packagedPositive.positive,2);
 const refusals=[];
-for(const [script,profile,shard] of [['scripts/wrong-entry.mjs','full','2'],['scripts/run-integration-tests.mjs','evidence','2'],['scripts/run-integration-tests.mjs','full','0']])
+for(const [script,profile,shard] of [['scripts/wrong-entry.mjs','full','2'],['scripts/run-integration-tests.mjs','evidence','2'],['scripts/run-integration-tests.mjs','full','3']])
   refusals.push(JSON.parse(run(process.execPath,[script],{INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,CONTROL_REFUSAL:'1'})));
-console.log(JSON.stringify({kind:'actual-checkout-execution-boundary-controls',production_module_sha256:createHash('sha256').update(source).digest('hex'),fixture:destination,installed_executable_0777:installed777,non_executable_and_source_0777_refusals:2,positive,prepared_shard_positive:preparedPositive,zero_open_entry_refusals:refusals,
+console.log(JSON.stringify({kind:'actual-checkout-execution-boundary-controls',production_module_sha256:createHash('sha256').update(source).digest('hex'),fixture:destination,installed_executable_0777:installed777,non_executable_and_source_0777_refusals:2,positive,prepared_shard_positive:preparedPositive,packaged_shard_positive:packagedPositive,zero_open_entry_refusals:refusals,
   limitation:'Fixture runner differs from the production runner; final production closure and actual selected-product checkout remain required.'},null,2));

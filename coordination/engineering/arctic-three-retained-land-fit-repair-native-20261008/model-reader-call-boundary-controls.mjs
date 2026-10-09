@@ -29,11 +29,12 @@ async function invoke({profile='full',shard=2,changeSelection,changeStage,failPr
 const positive=await invoke();
 assert.deepEqual(positive.events,['preflight','issue','mkdir','restore','consume','install']);assert.equal(positive.result.applicable,true);
 const preparedPositive=await invoke({shard:1});assert.deepEqual(preparedPositive.events,positive.events);
+const packagedPositive=await invoke({shard:0});assert.deepEqual(packagedPositive.events,positive.events);
 let rejected=0;
-for(const options of [{profile:'evidence'},{shard:0},{changeStage:s=>s.version=3},{changeSelection:s=>s.artifact_consumption.certificate.sha256='0'.repeat(64)},{failPreflight:true}]){
+for(const options of [{profile:'evidence'},{shard:3},{changeStage:s=>s.version=3},{changeSelection:s=>s.artifact_consumption.certificate.sha256='0'.repeat(64)},{failPreflight:true}]){
  await assert.rejects(()=>invoke(options),error=>{assert(!error.events.includes('restore'));return true;});rejected++;
 }
-console.log(JSON.stringify({positive:2,rejected,actual_production_source_sha256:createHash('sha256').update(raw).digest('hex'),metadata:{selection,stage},order:positive.events,
+console.log(JSON.stringify({positive:3,rejected,actual_production_source_sha256:createHash('sha256').update(raw).digest('hex'),metadata:{selection,stage},order:positive.events,
  limitation:'Exact production function, real complete metadata and stubbed delegated boundaries; no restoration, consumption, installer or full normal checkout qualification.'},null,2));
 
 // Complete selected root-space inputs and actual executing source closure must
@@ -55,7 +56,7 @@ assert.equal(expanded.length,533);
 const required=new Set([stage.artifact_consumption.certificate.path,stage.artifact_consumption.review.path]);
 for(const pin of expanded)if((pin.space??'root')==='root')required.add(pin.path);
 for(const pin of codeInventory.critical_files)required.add(pin.path);
-for(const entry of ['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs']){
+for(const entry of ['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs']){
  for(const pin of codeInventory.entry_critical_files[entry])required.add(pin.path);
  for(const relative of codeInventory.entry_roles[entry].actual_current_execution_wrappers)required.add(relative);
 }
@@ -92,18 +93,39 @@ const invocation=runner.slice(begin,finish);
 const delegatedImport="const {prepareModelReaderCheckout}=await import('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs');";
 assert(invocation.includes(delegatedImport));
 const actualCall=new AsyncFunction('observeSetupPhase','prepareModelReaderCheckout','profile','shard',invocation.replace(delegatedImport,'')+'\nreturn selectedCheckout;');
-assert(runner.includes('if ([1,2].includes(shard)) {'));
+assert(runner.includes('if ([0,1,2].includes(shard)) {'));
 const observations=[];let delegated=0;
 const observed=(name,work)=>observeSetupPhase(name,work,{emit:value=>observations.push(value)});
-for(const shard of [1,2]){
+for(const shard of [0,1,2]){
  const selected=await actualCall(observed,async options=>{delegated++;assert.deepEqual(options,{root:process.cwd(),profile:'full',shard});return {distinct_selected_checkout_fixture:true};},'full',shard);
  assert.equal(selected.distinct_selected_checkout_fixture,true);
 }
-assert.equal(delegated,2);
-assert.deepEqual(observations.map(value=>[value.setup_phase,value.status]),[['canonical-checkout','started'],['canonical-checkout','success'],['canonical-checkout','started'],['canonical-checkout','success']]);
+assert.equal(delegated,3);
+assert.deepEqual(observations.map(value=>[value.setup_phase,value.status]),[['canonical-checkout','started'],['canonical-checkout','success'],['canonical-checkout','started'],['canonical-checkout','success'],['canonical-checkout','started'],['canonical-checkout','success']]);
 let forbiddenDelegated=0;
 await assert.rejects(()=>observeSetupPhase('selected-model-reader-checkout',async()=>{forbiddenDelegated++;}),/assert|expression/i);
 assert.equal(forbiddenDelegated,0);
-console.log(JSON.stringify({actual_runner_observer_positive:2,unsupported_label_refused_before_work:1,
+console.log(JSON.stringify({actual_runner_observer_positive:3,unsupported_label_refused_before_work:1,
  runner_sha256:createHash('sha256').update(runner).digest('hex'),
  limitation:'Exact runner invocation and actual observer with delegated checkout stub; no restore, consumption or full regression run.'},null,2));
+
+// Real original package issuer/validator, with the Cloudflare outer entry.
+// The complete fixture contains frozen source bodies but performs no compiler,
+// application installation, provider operation or historical science.
+const {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution,currentExecutionClosure}=await import('../eastern-two-gap-repair-native-20261007/current-execution.mjs');
+const cloudflareEntry='scripts/build-cloudflare-inner.mjs';
+const cloudflareFiles=currentExecutionClosure(root,cloudflareEntry);
+const cloudflareRecord=issueCurrentExecution({source:root,stage:root,entry:cloudflareEntry});
+authenticateCurrentExecution(cloudflareRecord,{root,executingRoot:root,sourceRoot:root});
+assert.equal(requireCurrentExecution(cloudflareRecord),cloudflareRecord);
+assert.equal(cloudflareRecord.entry_point,cloudflareEntry);
+assert(cloudflareFiles.includes('scripts/build-static-inner.mjs'),'Cloudflare imports the static compiler in the same process');
+const declaredCritical=[...codeInventory.critical_files,...codeInventory.entry_critical_files[cloudflareEntry]];
+const declaredWrappers=Object.values(codeInventory.entry_roles[cloudflareEntry]).flat();
+assert.deepEqual([...declaredCritical.map(pin=>pin.path),...declaredWrappers].sort(),cloudflareFiles);
+for(const pin of declaredCritical){const actual=cloudflareRecord.files.find(file=>file.path===pin.path);assert.deepEqual(actual,pin);}
+for(const foreign of [{},structuredClone(cloudflareRecord)])assert.throws(()=>requireCurrentExecution(foreign));
+console.log(JSON.stringify({actual_cloudflare_issuer_positive:1,private_authority_refusals:2,
+ entry:cloudflareRecord.entry_point,complete_execution_files:cloudflareRecord.files.length,
+ admission:cloudflareRecord.runtime.bytes,
+ limitation:'Actual immutable original issuer/authenticator and full Cloudflare execution closure on a complete source-only Git fixture; no full normal build, deployment or scientific qualification.'},null,2));

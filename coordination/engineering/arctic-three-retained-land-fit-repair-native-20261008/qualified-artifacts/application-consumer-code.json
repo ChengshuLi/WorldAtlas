@@ -12,9 +12,9 @@
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs",
       "mode": "100644",
-      "bytes": 6328,
-      "sha256": "2e3cab1f51e01a4818ebf13ca6c4c3da68b5fa3b49efa4a6dfb344c72adb530d",
-      "git_blob": "44dab399cb290d32b2c9732271ecf95d6ef86919"
+      "bytes": 6326,
+      "sha256": "e85797d9ad90a2c3ddcda29ffabd9600beb0682b8a0c4cac5426a3f11f760b3d",
+      "git_blob": "3c6bf04d6eb6853171f7ef390c1557bd0844940a"
     },
     {
       "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs",
@@ -257,9 +257,32 @@
       {
         "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs",
         "mode": "100644",
-        "bytes": 2125,
-        "sha256": "855e4bf1cf8afce18ae71f1eaef8248bb55a07577b65137e259a13b169cdebbc",
-        "git_blob": "ed835cfac1049ea23e75d809cf3cd9aa6eb6bab1"
+        "bytes": 2121,
+        "sha256": "c285032b7201d456577660da1ebd8b9653b7748a9200a8c104fbc09e6e06124c",
+        "git_blob": "e8a6a2413f67d282f7883fd4e8a3e5227d4b034b"
+      }
+    ],
+    "scripts/build-cloudflare-inner.mjs": [
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs",
+        "mode": "100644",
+        "bytes": 2465,
+        "sha256": "710f7c342f98e275f077c50fc7028271166861551757437ad3564f9d3bbcf1f9",
+        "git_blob": "73fa6ef08230944f6ba7562b1698e7512b98ae86"
+      },
+      {
+        "path": "scripts/package-startup-ownership.mjs",
+        "mode": "100644",
+        "bytes": 4093,
+        "sha256": "a088c1296be000afdbc6ee1b8d51e12946ac1b90beb18be15a05decfec7293fc",
+        "git_blob": "0ed65ad3e1f3aaffc0bb20987021d134a3817b8f"
+      },
+      {
+        "path": "src/ownership-assets.js",
+        "mode": "100644",
+        "bytes": 4437,
+        "sha256": "7bc1938dbc3b1215a2c1a378c1bc4f85ee191a9d5c6779db91549e3d2b34dcba",
+        "git_blob": "f574fab74d46576c4ef835ec22b2e2d0fd42f5c3"
       }
     ]
   },
@@ -412,6 +435,68 @@
         "scripts/run-integration-tests.mjs",
         "src/native-grid.js",
         "src/native-runtime.js"
+      ]
+    },
+    "scripts/build-cloudflare-inner.mjs": {
+      "actual_current_execution_wrappers": [
+        ".github/package-inputs.json",
+        "attribute-records.mjs",
+        "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs",
+        "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/predecessor-context-v9.mjs",
+        "coordination/engineering/eastern-two-gap-repair-native-20261007/context-record-alias.mjs",
+        "coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs",
+        "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
+        "data/observation-registry-history/base-v1.json",
+        "database.mjs",
+        "derived.mjs",
+        "geographic-archive.mjs",
+        "hierarchy.mjs",
+        "package.json",
+        "prepared-evidence.mjs",
+        "reference-archive.mjs",
+        "reference.mjs",
+        "scripts/audit-grid-intervals.mjs",
+        "scripts/build-cloudflare-inner.mjs",
+        "scripts/build-static-inner.mjs",
+        "scripts/canonical-restoration.mjs",
+        "scripts/ci-setup-observations.mjs",
+        "scripts/evidence/captured-byte-patch.mjs",
+        "scripts/evidence/restore-whole-image.mjs",
+        "scripts/native-ownership/chained-build-context.mjs",
+        "scripts/native-ownership/compact-context-inputs.mjs",
+        "scripts/native-ownership/compile-native-ownership.mjs",
+        "scripts/native-ownership/native-candidate-manifest.mjs",
+        "scripts/native-ownership/native-only-inputs.mjs",
+        "scripts/native-ownership/native-preparation-guards.mjs",
+        "scripts/native-ownership/validate-build-context-stage.mjs",
+        "scripts/native-ownership/validate-context-input-stage.mjs",
+        "scripts/native-ownership/validate-context-migration.mjs",
+        "scripts/native-ownership/verified-candidates.json",
+        "scripts/package-build.mjs",
+        "scripts/package-inputs.mjs",
+        "scripts/package-native-latitudes.mjs",
+        "scripts/package-ownership-history.mjs",
+        "scripts/package-reference-bundle.mjs",
+        "scripts/prepare-evidence-bundle.mjs",
+        "scripts/rebind-coverage-manifest.mjs",
+        "scripts/select-build-ownership.mjs",
+        "src/attributes.js",
+        "src/derived-records.js",
+        "src/evidence-priority.js",
+        "src/hierarchy.js",
+        "src/json-contract.js",
+        "src/native-grid.js",
+        "src/native-runtime.js",
+        "src/observation-modules.js",
+        "src/observation-registry.js",
+        "src/reference-context.js",
+        "src/reference-records.js",
+        "src/runtime-ownership.js",
+        "src/typed-derivations.js",
+        "src/typed-observations.js",
+        "src/typed-snapshot.js",
+        "temporal.mjs",
+        "topology.mjs"
       ]
     }
   },

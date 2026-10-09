@@ -33,7 +33,7 @@ function actualEntry(root) {
   assert.equal(fs.realpathSync(root),root);
   assert.equal(path.resolve(process.argv[1]),path.join(root,ENTRY),'Actual model-reader runner required');
   assert.equal(process.env.INTEGRATION_PROFILE,'full');
-  assert(['1','2'].includes(process.env.INTEGRATION_SHARD),'Only declared prepared/model-reader shards install checkout products');
+  assert(['0','1','2'].includes(process.env.INTEGRATION_SHARD),'Only declared full regression shards install checkout products');
   assert(!process.env.NODE_OPTIONS&&!process.env.NODE_PATH&&process.execArgv.length===0,'Plain checkout execution required');
 }
 export function checkoutExecutionClosure(root) {
