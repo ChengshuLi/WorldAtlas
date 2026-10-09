@@ -525,6 +525,7 @@ export function acquireNativeRows(snapshot,table,rows,options={}) {
     }
     return {part:pin.path,whole_inputs:member.inputs.map(p=>p.pin),phase_bytes:reader.used};
   };
+  if(plan.members.length===0){reader.phase();reader.used+=carriedBytes+plan.projectionBytes;}
   for(const member of plan.members)memberPhases.push(extract(member));
   for(let k=0;k<rows.length;k++)demand(counts[k]===table[rows[k]*2+1],'Incomplete projected native row');
   demand(at===words.length,'Incomplete native row projection');

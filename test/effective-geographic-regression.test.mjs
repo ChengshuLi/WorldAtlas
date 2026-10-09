@@ -591,3 +591,19 @@ test('actual whole encoded interval outside the original native grid refuses dur
   assert.throws(()=>acquireNativeRows(snapshot,table,[0]),/original grid domain/);
  }finally{f.cleanup();}
 });
+
+
+test('complete zero-interval row starts its own charged projection and carry phase',()=>{
+ const f=fixture();try{
+  const version=f.select([[],[[0,1,1]],[],[]]);
+  const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
+  reader.used+=4096;const stalePhase=reader.used;
+  let opens=0;const actual=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return actual(...args);};
+  const empty=acquireNativeRows(snapshot,table,[0]);
+  const phaseBase=reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes;
+  assert.equal(opens,0);assert.equal(empty.words.length,0);assert.equal(empty.custody.member_phases.length,0);assert.equal(reader.used,phaseBase+empty.bytes);assert.notEqual(reader.used,stalePhase);assert.equal(empty.custody.phase_bytes,reader.used);
+  validateNativeRowCarry(empty,snapshot,[0]);
+  const next=acquireNativeRows(snapshot,table,[0],{carry:empty});validateNativeRowCarry(next,snapshot,[0]);
+  assert.equal(opens,0);assert.equal(reader.used,phaseBase+empty.bytes+next.bytes);assert.equal(next.custody.phase_bytes,reader.used);
+ }finally{f.cleanup();}
+});
