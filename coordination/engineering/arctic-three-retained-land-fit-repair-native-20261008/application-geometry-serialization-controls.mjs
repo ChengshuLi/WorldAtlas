@@ -1,0 +1,15 @@
+// Real complete source-record controls. Arguments are original part29, qualified gzip, and qualified changed-row publication.
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import {gunzipSync} from 'node:zlib';
+import {serializeQualifiedGeometryChanges,restoreOriginalGeometrySerialization} from './application-geometry-serialization.mjs';
+const hash=b=>createHash('sha256').update(b).digest('hex');
+const oldraw=fs.readFileSync(process.argv[2]);assert.equal(hash(oldraw),'c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8');
+const encoded=fs.readFileSync(process.argv[3]);assert.equal(hash(encoded),'5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8');const raw=gunzipSync(encoded);assert.equal(hash(raw),'4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c');
+
+const changedRows=JSON.parse(fs.readFileSync(process.argv[4]));const ids=changedRows.map(row=>row.id);
+const result=serializeQualifiedGeometryChanges(oldraw,raw,ids);assert.equal(result.unchanged_full_records,1498);assert.deepEqual(restoreOriginalGeometrySerialization(result.output,result.inverse),oldraw);
+const before=JSON.parse(oldraw),after=JSON.parse(result.output),q=JSON.parse(raw);let same=0;for(let i=0;i<1500;i++){assert.deepEqual(after.features[i],q.features[i]);if(!ids.includes(before.features[i].id)){assert.equal(JSON.stringify(after.features[i]),JSON.stringify(before.features[i]));same++;}else assert.equal(JSON.stringify(after.features[i].geometry),JSON.stringify(changedRows.find(r=>r.id===before.features[i].id).geometry));}assert.equal(same,1498);
+const reject=(fn)=>assert.throws(fn);let negatives=0;
+for(const bad of [[],[ids[0]],[...ids,ids[0]],[...ids,'foreign']]){reject(()=>serializeQualifiedGeometryChanges(oldraw,raw,bad));negatives++;}
+for(const mutate of [v=>v.features.reverse(),v=>v.features[0].properties={foreign:true},v=>{let a=v.features[0].geometry.coordinates;while(Array.isArray(a[0]))a=a[0];a[0]+=1;},v=>v.features[0].id='foreign']){const v=JSON.parse(raw);mutate(v);reject(()=>serializeQualifiedGeometryChanges(oldraw,Buffer.from(JSON.stringify(v)),ids));negatives++;}
+const badInverse=structuredClone(result.inverse);badInverse[0].replacement_record+=' ';reject(()=>restoreOriginalGeometrySerialization(result.output,badInverse));negatives++;
+const report={source_head:'0d04d2ff797f25297e26010b401d3eb617ea2c57',positive:1,negative:negatives,original:{bytes:oldraw.length,sha256:hash(oldraw)},qualified_scientific:{bytes:raw.length,sha256:hash(raw)},application:{bytes:result.output.length,sha256:hash(result.output)},unchanged_literal_records:same,changed_ids:ids,complete_original_byte_inverse:true,qualified_full_coordinate_values_equal:true,stock_target_geometry_strings_equal_qualified_context:true,scientific_execution:false,application_publication:false};console.log(JSON.stringify(report));
