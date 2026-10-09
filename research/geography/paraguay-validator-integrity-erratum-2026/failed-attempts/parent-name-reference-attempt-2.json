@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "issue": 1330,
+  "attempt": "second-integrity-reproducer-run",
+  "retrieved_at": "2026-10-09 07:04:43 UTC",
+  "status": "failed-before-publication",
+  "failure": "The independent roster validator looked up 32 parent IDs in the issue's 263-subject feature subset; parent features are intentionally absent from that subset. The correct independent parent-name reference is scope.json province_scopes.original_name/name.",
+  "evidence": {
+    "legacy_entrypoint_completed": true,
+    "legacy_products_captured_only_in_memory": true,
+    "all_three_retained_products_compared_byte_for_byte": true,
+    "all_twelve_original_controls_present": true,
+    "strict_parent_check_completed": false,
+    "owned_vintage_published": false,
+    "original_packet_written": false,
+    "partial_completion_receipt": false
+  },
+  "disposition": "Not counted as an accepted reproduction. The independent parent-name join now uses the immutable 32-row source scope; rerun under the unused original-run-one vintage."
+}
