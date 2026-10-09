@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "execution_commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+  "science_executed": false,
+  "code": [
+    {
+      "commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "path": "scripts/premerge-evidence.mjs",
+      "bytes": 23988,
+      "sha256": "7eda8972e90888d4ee897c970815af596319bea3c2e2c0210a838199a4b545de",
+      "mode": "100644",
+      "git_blob_oid": "39406abc64a24d10bcd515791ea67902b5c83877"
+    },
+    {
+      "commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 27859,
+      "sha256": "c83d7359e6355dac6fdbd7810ee48830210f08440edfc27706431b1d85a4bb22",
+      "mode": "100644",
+      "git_blob_oid": "7d0898fa2e6b7f92925633cdd7948a8429edf3c1"
+    },
+    {
+      "commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 22153,
+      "sha256": "2eb001f2df26a133b19ae2b81d2ebefa12622940b3e4cfc1f7422ffd81b4658c",
+      "mode": "100644",
+      "git_blob_oid": "6a5cbba8cda4f7ec7bcea18ae8cfef575d31acdf"
+    },
+    {
+      "commit": "011137ed94d3589b1bf4a9b0064b7648ffd9555b",
+      "path": "coordination/engineering/compact-review-inventory-20261009/measure.mjs",
+      "bytes": 4272,
+      "sha256": "f77f853884237cc32f76b5c2e34f307b880c2741c97df5cddf7f26f78b4dcabe",
+      "mode": "100644",
+      "git_blob_oid": "653855440232832f58c02f152f8e836889f2b3cd"
+    }
+  ],
+  "test_runs": [
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/run-one.log",
+      "sha256": "f36f6ee0ff1c5e54f034584c50739e7522b8044c80173f47e505121531e22841",
+      "tests": 21,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "coordination/engineering/compact-review-inventory-20261009/controls/run-two.log",
+      "sha256": "ac761fc8efeb41c87efcca318c25727e50d89f91c3063e3971d1b027951ce932",
+      "tests": 21,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "measurement_whole_equal": true,
+  "measurement_sha256": "aa47e54fece5d8a85d20c873f3aa08915484334514a5022db974f1757e758ee0",
+  "limits": [
+    "Actual normal comment-route fixture controls use a complete470-file synthetic shape; the real1593 inventory measurement is not substantive geographic review.",
+    "Actual subsequent PR1593 queue admission remains pending its independent completed review and mandatory checks."
+  ]
+}
