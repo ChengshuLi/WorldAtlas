@@ -102,8 +102,15 @@ def run(plan,output,guard_only=False):
     native={name:getattr(shapely.lib,name) for name in ('is_valid','make_valid','unary_union','intersection')}
     canonical_aliases={name:getattr(majority,name) for name in ('make_valid','union_all','Polygon','box','translate')}
     canonical_functions=[majority.canonical,majority.polygons]
+    constructors=(majority.Polygon.__new__,majority.Polygon.__init__)
+    alias_callbacks=list(canonical_aliases.values())+list(constructors)
+    for callback in list(alias_callbacks):
+        while hasattr(callback,'__wrapped__'):
+            callback=callback.__wrapped__;alias_callbacks.append(callback)
+    alias_states=[(callback,getattr(callback,'__code__',None),getattr(callback,'__defaults__',None),
+        getattr(callback,'__kwdefaults__',None),tuple((getattr(callback,'__kwdefaults__',None) or {}).items())) for callback in alias_callbacks]
     operators={name:getattr(numpy,name) for name in ('sin','cos','arctanh','deg2rad','dot','asarray')}
-    math_operators={name:getattr(math,name) for name in ('fsum','sin','cos','isfinite','sqrt')}
+    math_operators={name:getattr(math,name) for name in ('fsum','sin','cos','isfinite','sqrt','floor')}
     quadrature=[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
     def guard():
         assert all(getattr(math,name) is value for name,value in math_operators.items())
@@ -117,6 +124,12 @@ def run(plan,output,guard_only=False):
         assert all(getattr(shapely.lib,name) is value for name,value in native.items())
         assert all(getattr(majority,name) is value for name,value in canonical_aliases.items())
         assert canonical_functions==[majority.canonical,majority.polygons]
+        assert constructors==(majority.Polygon.__new__,majority.Polygon.__init__)
+        for callback,code,defaults,kwdefaults,items in alias_states:
+            assert getattr(callback,'__code__',None) is code
+            assert getattr(callback,'__defaults__',None) is defaults
+            assert getattr(callback,'__kwdefaults__',None) is kwdefaults
+            assert tuple((getattr(callback,'__kwdefaults__',None) or {}).items())==items
         assert majority.make_valid is shapely.make_valid and majority.union_all is shapely.union_all
         assert majority.math is math and majority.area is ellipsoidal_area.area
         assert quadrature==[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
