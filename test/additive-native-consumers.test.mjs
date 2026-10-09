@@ -61,3 +61,10 @@ test('complete approved original pointsets produce identical native intervals un
  }
  assert.equal(gained,3); // Exact original accepted CAN103 two cells + CAN114 one.
 });
+
+test('legacy byte hashing does not bypass strict validation for actual additive records',async()=>{
+ for(const mutate of [f=>f.geometry=null,f=>f.additiveFootprint=undefined,f=>f.additiveFootprint.rule_sha256='bad',f=>f.additiveFootprint.additions[0].geometry.coordinates=[]]){
+  const changed=structuredClone(feature);mutate(changed);
+  await assert.rejects(nativeSourceDigest([changed]));
+ }
+});

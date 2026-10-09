@@ -10,7 +10,7 @@ export async function nativeSourceDigest(features, {signal, onProgress = () => {
     if(base.sha256!==additiveBaseReference.footprints_sha256)throw Error('Complete loaded original base footprint differs from selected additive bank');
     return {...base,sha256:additiveReleaseFootprintDigest(additiveBaseReference,features),base_sha256:base.sha256,domain:'worldatlas-effective-native-footprints:v1'};
   }
-  const ordered = features.map(feature => [feature.id, effectiveFootprintValue(feature)])
+  const ordered = features.map(feature => [feature.id, Object.hasOwn(feature,'additiveFootprint') ? effectiveFootprintValue(feature) : feature.geometry])
     .sort((a, b) => a[0].localeCompare(b[0]));
   const hash = sha256.create(), encoder = new TextEncoder();
   let bytes = 2, largestFeatureBytes = 0;
