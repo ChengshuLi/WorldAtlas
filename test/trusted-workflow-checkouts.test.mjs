@@ -110,3 +110,16 @@ for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worke
     } finally { fs.rmSync(directory, {recursive: true, force: true}); }
   });
 }
+
+
+test('actual scope candidate sparse declaration contains cold-checkout test imports', () => {
+  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
+  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
+  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+  assert.ok(candidate, 'actual scope candidate checkout must be declared');
+  const directories = candidate[1].trim().split('\n').map(row => row.trim());
+  const qualified = probe(directories, {geography: true});
+  assert.equal(qualified.status, 0, qualified.stderr);
+  const missing = probe(directories.filter(row => !row.startsWith('coordination/')), {geography: true});
+  assert.notEqual(missing.status, 0);assert.match(missing.stderr, /selected-geography-effective-prevention-20261009/);
+});
