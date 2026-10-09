@@ -9,6 +9,33 @@ import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs
 import{requireCurrentExecution,admitCurrentExecution}from'./current-execution.mjs';
 import{acquireOriginalContextPair,constructAliasedContextChunk,readContextBody}from'./context-record-alias.mjs';
 import{applyBytePatch,verifyWholeBytes}from'./byte-patch.mjs';
+import{requireValidatedGeometryMigrations}from'../../../scripts/prepare-geographic-release.mjs';
+// Current wrapper plumbing only. Archived stages and algorithm banks remain
+// literal; the package boundary authenticates this separately executing body.
+const successfulContexts=new WeakMap();
+function freezeContext(value){
+ if(value&&typeof value==='object'&&!Object.isFrozen(value)){
+  for(const child of Object.values(value))freezeContext(child);Object.freeze(value);
+ }return value;
+}
+function retainSuccessfulContext(result,rows,index){
+ assert.equal(result.receipt.status,'verified');
+ requireValidatedGeometryMigrations(result.geometryValidation);
+ requireValidatedGeometryMigrations(result.coverageContinuation.originalGeometryValidation);
+ assert.equal(rows.length,49625);assert.equal(new Set(rows.map(row=>row.id)).size,49625);
+ assert.equal(index.locations,49625);assert.equal(index.footprints_sha256,AFTER);
+ assert.equal(index.owner_sha256,result.receipt.migration.owner_sha256);
+ successfulContexts.set(result,{receipt_sha256:sha(JSON.stringify(result.receipt)),
+  rows:freezeContext(rows),index:freezeContext(index)});
+ return result;
+}
+export function getSuccessfulChainedContext(result){
+ const saved=successfulContexts.get(result);assert(saved,'Actual successful chained validation identity required');
+ assert.equal(sha(JSON.stringify(result.receipt)),saved.receipt_sha256,'Validated receipt changed');
+ requireValidatedGeometryMigrations(result.geometryValidation);
+ requireValidatedGeometryMigrations(result.coverageContinuation.originalGeometryValidation);
+ return Object.freeze({rows:saved.rows,index:saved.index});
+}
 const executeFile=promisify(execFile);
 // Preserve the replay boundary; bound only the original child old-space, not the plain outer Node.
 export async function replayOriginalV1(runner,image){
@@ -193,8 +220,8 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const migration=validateContextMigration({original:before.rows,migrated:after,candidates,predecessorRelease:predecessor,release,migrationManifestFile:path.join(root,stage.geometry_manifest.path)});
  assert.equal(migration.owner_sha256,prior.migration.owner_sha256);const {geometryValidation,...compact}=migration;
  requireCurrentExecution(currentExecution);
- return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,current_execution:currentExecution,authored_validator_code_index_sha256:sha(codeIndexRaw),
+ return retainSuccessfulContext({receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,current_execution:currentExecution,authored_validator_code_index_sha256:sha(codeIndexRaw),
   original_v1_replay:{actual_command:command,child_invocation:{executable:process.execPath,exec_argv:['--max-old-space-size=1536'],cwd:image,max_buffer_bytes:32*1024*1024,timeout_ms:0,kill_signal:'SIGTERM',old_space_is_not_rss_cap:true},explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
    advertised_commit_matches_validator_closure:false,receipt_sha256:sha(priorRaw),receipt:prior,input_image_index_sha256:stage.prior_image.sha256},
-  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_record_acquisitions:acquisitions,context_transport:{transport_redecoded:false,index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:{...budget.snapshot(),installed_runtime_bytes:currentAdmission.installed_runtime_bytes,reserved_review_bytes:131072,complete_phase_bytes:budget.snapshot().accounted_bytes+currentAdmission.installed_runtime_bytes+131072},scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
+  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_record_acquisitions:acquisitions,context_transport:{transport_redecoded:false,index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:{...budget.snapshot(),installed_runtime_bytes:currentAdmission.installed_runtime_bytes,reserved_review_bytes:131072,complete_phase_bytes:budget.snapshot().accounted_bytes+currentAdmission.installed_runtime_bytes+131072},scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}},after,afterIndex);
 }
