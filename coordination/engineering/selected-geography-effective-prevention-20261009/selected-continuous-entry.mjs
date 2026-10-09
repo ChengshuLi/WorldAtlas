@@ -31,6 +31,9 @@ export async function coordinateStage(repo,trusted,selected,destination,parentRu
  const startup=native.selectedBootstrap(repo,selected,selected,{parentRuntimePath});
  startup.beforeReader.outputBytes=FILE;startup.beforeReader.phase();
  const snapshot=native.loadSelection(startup.beforeReader);demand(snapshot,'Selected continuous certificate requires a committed native selection');
+ // Completed metadata helper frames no longer retain raw decoded containers.
+ // The complete authenticated snapshot remains live and charged below.
+ checkColdReclaimer();coldGc();
  const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot),shards=[];
  // The issued footprint value is once-qualified historical authority. This
  // separate certificate authenticates every actual selected whole source body,
