@@ -135,6 +135,15 @@ try {
   }
   if(fixedGrid?.version===2){
     const versioned=contextStage?.version===3&&contextStage.issue===1520&&contextStage.kind==='arctic-retained-land-context-continuation-v3';
+    if(versioned){
+      // A clean output must retain the actual predecessor URLs for cached v8 clients.
+      const priorPath='data/canonical-grid/eastern-v8/manifest.json';
+      const priorRaw=await fs.readFile(priorPath);
+      if(createHash('sha256').update(priorRaw).digest('hex')!=='a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885')throw Error('Prior native manifest changed');
+      const prior=JSON.parse(priorRaw),priorRows=prior.parts.filter(part=>part.kind==='rows');
+      if(JSON.stringify(priorRows)!==JSON.stringify(fixedGrid.parts.filter(part=>part.kind==='rows')))throw Error('Successor row asset differs');
+      await packageStartupOwnership({manifest:prior,source:path.dirname(priorPath),destination:'dist'});
+    }
     const transport=versioned?await packageVersionedStartupOwnership({manifest:fixedGrid,manifestSha:selectedGrid.sha256,manifestPath:selectedGrid.manifestPath,source:selectedGrid.source,destination:'dist'}):await packageStartupOwnership({manifest:fixedGrid,source:selectedGrid.source,destination:'dist'});
     Object.assign(pixelMap,transport.pixelMap);
   }

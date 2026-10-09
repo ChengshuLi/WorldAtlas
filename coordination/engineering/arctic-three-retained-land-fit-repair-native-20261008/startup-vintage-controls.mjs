@@ -20,18 +20,24 @@ try{
  const originals=new Map();for(const [kind,words] of [['rows',rows],['runs',runs]]){const relative=`native-v1/ownership/${kind}-0.bin.gz`,bytes=gzipSync(shuffleOwnershipBytes(words));await fs.writeFile(path.join(source,relative),bytes);originals.set(relative,bytes);manifest.parts.push({kind,path:relative,offset:0,words:words.length,encoding:'byte-shuffle',sha256:sha(bytes),decoded_sha256:sha(Buffer.from(words.buffer))});}
  const manifestPath=path.join(source,'manifest.json'),manifestBytes=Buffer.from(JSON.stringify(manifest));await fs.writeFile(manifestPath,manifestBytes);const manifestSha=sha(manifestBytes),args={manifest,manifestPath,manifestSha,source,destination:dest};
  const old=await packageStartupOwnership({manifest,source,destination:dest});const oldBytes=await fs.readFile(path.join(dest,old.outputs[0].path));
- const versioned=await packageVersionedStartupOwnership(args);assert.equal(versioned.pixelMap.parts[0].path,manifest.parts[0].path);assert.deepEqual(versioned.pixelMap.parts[0],manifest.parts[0]);
+ const oldRuns=runs.slice();runs[3]=(1<<19)|9;
+ const newSource=path.join(root,'successor');await fs.cp(source,newSource,{recursive:true});
+ const newRun=gzipSync(shuffleOwnershipBytes(runs));manifest.parts[1]={...manifest.parts[1],sha256:sha(newRun),decoded_sha256:sha(Buffer.from(runs.buffer))};
+ await fs.writeFile(path.join(newSource,manifest.parts[1].path),newRun);const newManifestRaw=Buffer.from(JSON.stringify(manifest));await fs.writeFile(path.join(newSource,'manifest.json'),newManifestRaw);
+ const nextArgs={...args,source:newSource,manifestPath:path.join(newSource,'manifest.json'),manifestSha:sha(newManifestRaw)};
+ const versioned=await packageVersionedStartupOwnership(nextArgs);assert.equal(versioned.pixelMap.parts[0].path,manifest.parts[0].path);assert.deepEqual(versioned.pixelMap.parts[0],manifest.parts[0]);
  await fs.mkdir(path.dirname(path.join(dest,manifest.parts[0].path)),{recursive:true});await fs.writeFile(path.join(dest,manifest.parts[0].path),originals.get(manifest.parts[0].path));
  const urls=[];const fetcher=async url=>{urls.push(url);try{return new Response(await fs.readFile(path.join(dest,url.slice(2))));}catch{return new Response('',{status:404});}};
- const loaded=await loadOwnershipAssets(versioned.pixelMap,fetcher);assert.deepEqual(loaded.rows,rows);assert.deepEqual(loaded.runs,runs);assert(urls.some(url=>url===`./ownership-vintages/${manifestSha}/native-v1/ownership/startup-runs-0.bin.gz`));
+ const loaded=await loadOwnershipAssets(versioned.pixelMap,fetcher);assert.deepEqual(loaded.rows,rows);assert.deepEqual(loaded.runs,runs);assert(urls.some(url=>url===`./ownership-vintages/${nextArgs.manifestSha}/native-v1/ownership/startup-runs-0.bin.gz`));
  assert.deepEqual(await fs.readFile(path.join(dest,old.outputs[0].path)),oldBytes);for(const [relative,bytes] of originals)assert.deepEqual(await fs.readFile(path.join(source,relative)),bytes);
- assert.deepEqual(await fs.readFile(path.join(dest,versioned.outputs[0].path)),oldBytes);
+ const oldLoaded=await loadOwnershipAssets(old.pixelMap,fetcher);assert.deepEqual(oldLoaded.runs,oldRuns);
+ assert.notDeepEqual(await fs.readFile(path.join(dest,versioned.outputs[0].path)),oldBytes);
  const expectRejected=async fn=>{await assert.rejects(fn);};
  await expectRejected(()=>packageVersionedStartupOwnership({...args,destination:path.join(root,'fresh'),manifestSha:'5'.repeat(64)}));
  await expectRejected(()=>packageVersionedStartupOwnership({...args,destination:dest+'/../escape'}));
  await expectRejected(()=>packageVersionedStartupOwnership({...args,manifestSha:'../escape'}));
  await expectRejected(()=>packageVersionedStartupOwnership({...args,destination:path.join(root,'missing'),manifestPath:path.join(root,'absent')}));
- await expectRejected(()=>packageVersionedStartupOwnership(args));
+ await expectRejected(()=>packageVersionedStartupOwnership(nextArgs));
  const missing={...versioned.pixelMap,parts:versioned.pixelMap.parts.map(p=>p.kind==='runs'?{...p,path:p.path+'-missing'}:p)};await expectRejected(()=>loadOwnershipAssets(missing,fetcher));
  const changed={...versioned.pixelMap,parts:versioned.pixelMap.parts.map(p=>p.kind==='runs'?{...p,sha256:'6'.repeat(64)}:p)};await expectRejected(()=>loadOwnershipAssets(changed,fetcher));
  await fs.symlink(dest,path.join(root,'linked'));await expectRejected(()=>packageVersionedStartupOwnership({...args,destination:path.join(root,'linked')}));
