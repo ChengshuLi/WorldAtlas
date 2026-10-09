@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
-import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION, reviewContractBinding, reviewBindingRequired} from '../scripts/premerge-evidence.mjs';
+import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, reviewInventoryCommitment, checkPremergeEvidence, GEOMETRY_VERSION, reviewContractBinding, reviewBindingRequired} from '../scripts/premerge-evidence.mjs';
 
 const commit = 'a'.repeat(40), head = 'b'.repeat(40), branch = 'engineering/synthetic';
 const manifestPath = 'coordination/engineering/synthetic/evidence-quality.json';
@@ -132,9 +132,9 @@ test('reviews reject self approval, stale heads, omitted hashes/files and absent
   assert.throws(() => review(f, receipt(f), {limits: ['Primary source inaccessible']}), /limits/);
 });
 
-function remoteFixture(f, comments = []) {
+function remoteFixture(f, comments = [], extraContents = []) {
   const bytes = Buffer.from(JSON.stringify(f.manifest));
-  const contents = new Map([['baseline.txt', baseline], [outputPath, output], [manifestPath, bytes]]);
+  const contents = new Map([['baseline.txt', baseline], [outputPath, output], [manifestPath, bytes], ...extraContents]);
   const oid = bytes => createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
   const blobs = new Map([...contents].map(([name, bytes]) => [oid(bytes), bytes]));
   const tree = [...contents].map(([path, bytes]) => ({path, type: 'blob', mode: '100644', size: bytes.length, sha: oid(bytes)}));
@@ -264,4 +264,104 @@ test('binding activation preserves existing PRs and rejects unknown activation t
  assert.equal(reviewBindingRequired({created_at:'2026-10-06T20:44:00Z'},p),false);
  assert.equal(reviewBindingRequired({created_at:'2026-10-06T20:45:00Z'},p),true);
  assert.throws(()=>reviewBindingRequired({},p),/timestamp/);
+});
+
+function compactReceipt(f) {
+  const value = receipt(f);
+  delete value.inspected_files;
+  delete value.evidence_hashes;
+  value.inventory_commitment = reviewInventoryCommitment(f);
+  return value;
+}
+
+test('compact review binds canonical complete inventory and preserves literal receipts', () => {
+  const f = fixture();
+  f.files[0].previous_filename = 'previous-name.json';
+  const value = compactReceipt(f);
+  assert.deepEqual(value.inventory_commitment, {version: 1,
+    inspected_files: {count: 3, sha256: sha256(JSON.stringify([manifestPath, outputPath, 'previous-name.json'].sort()))},
+    evidence_hashes: {count: 2, sha256: sha256(JSON.stringify([sha256(baseline), sha256(output)].sort()))}});
+  assert.equal(review(f, value).reviewer, 'reviewer');
+  f.files.reverse();
+  assert.equal(review(f, value).reviewer, 'reviewer');
+  assert.equal(review(fixture()).reviewer, 'reviewer');
+  assert.notEqual(value.inventory_commitment.inspected_files.sha256,
+    sha256(JSON.stringify([manifestPath, outputPath, 'previous-name.json'].sort()) + '\n'));
+});
+
+test('compact reviews refuse malformed, mixed, omitted, changed and renamed inventories', () => {
+  const changes = [
+    r => r.inspected_files = [], r => r.evidence_hashes = [],
+    r => r.inventory_commitment = null, r => r.inventory_commitment.version = 2,
+    r => delete r.inventory_commitment.evidence_hashes,
+    r => r.inventory_commitment.extra = true,
+    r => r.inventory_commitment.inspected_files.count--,
+    r => r.inventory_commitment.evidence_hashes.count++,
+    r => r.inventory_commitment.inspected_files.count = false,
+    r => r.inventory_commitment.inspected_files.sha256 = 'broken',
+    r => r.inventory_commitment.evidence_hashes.sha256 = 'A'.repeat(64),
+    r => delete r.inventory_commitment.inspected_files.sha256,
+    r => r.inventory_commitment.inspected_files.extra = true,
+    r => r.inventory_commitment.inspected_files.sha256 = sha256(JSON.stringify([manifestPath])),
+    r => r.inventory_commitment.evidence_hashes.sha256 = sha256(JSON.stringify([sha256(baseline)]))
+  ];
+  for (const change of changes) {
+    const f = fixture(), value = compactReceipt(f); change(value);
+    assert.throws(() => review(f, value), /inventory|commitment/);
+  }
+  for (const change of [
+    f => f.files[0].filename += '.changed',
+    f => f.files[0].previous_filename = 'renamed-original.json',
+    f => f.manifest.outputs[0].sha256 = 'c'.repeat(64),
+    f => f.manifest.outputs.pop()
+  ]) {
+    const f = fixture(), value = compactReceipt(f); change(f);
+    value.manifest_sha256 = sha256(JSON.stringify(f.manifest));
+    assert.throws(() => review(f, value), /commitment differs/);
+  }
+});
+
+test('compact inventory does not weaken head, reviewer, contract, domain or limit authority', () => {
+  for (const change of [r => r.head_sha = commit, r => r.reviewer_worker_id = 'author',
+    r => delete r.domains.implementation, r => r.outcome = 'changes-requested']) {
+    const f = fixture(), value = compactReceipt(f); change(value);
+    assert.throws(() => review(f, value));
+  }
+  const f = fixture(), value = {...compactReceipt(f), ...reviewContractBinding(f.issue, f.pr)};
+  assert.equal(review(f, value, {issue: f.issue, requireContractBinding: true}).reviewer, 'reviewer');
+  f.issue.body = 'Changed acceptance\n' + f.issue.body;
+  assert.throws(() => review(f, value, {issue: f.issue, requireContractBinding: true}), /contract/);
+  assert.throws(() => review(f, compactReceipt(f), {limits: ['Retained source uncertainty']}), /limits/);
+  assert.throws(() => review(f, compactReceipt(f), {reviewKind: 'geometry'}), /geometry/);
+});
+
+test('normal remote comment route admits a complete compact review beyond literal GitHub comment size', async () => {
+  const f = fixture(), contents = [];
+  for (let i = 0; i < 468; i++) {
+    const path = `coordination/engineering/synthetic/${'complete-original-custody-'.repeat(5)}${String(i).padStart(3, '0')}.json`;
+    const raw = Buffer.from(JSON.stringify({original_record: i}));
+    f.files.push({filename: path, status: 'added'});
+    f.manifest.outputs.push(desc(path, raw));
+    f.manifest.change_receipts.push({path, status: 'added'});
+    contents.push([path, raw]);
+  }
+  f.pr.changed_files = f.files.length;
+  const value = {...compactReceipt(f), ...reviewContractBinding(f.issue, f.pr)};
+  const literal = {...value, inspected_files: f.files.map(x => x.filename),
+    evidence_hashes: [sha256(baseline), ...f.manifest.outputs.map(x => x.sha256)]};
+  delete literal.inventory_commitment;
+  assert.ok(JSON.stringify(literal).length > 65536);
+  assert.ok(JSON.stringify(value).length < 4096);
+  const comment = (r, id = 1) => ({id, author_association: 'OWNER',
+    body: `<!-- worldatlas-review:v1\n${JSON.stringify(r)}\n-->`});
+  const run = comments => checkPremergeEvidence({...f, repo: 'test/repo', policy, review: true,
+    api: remoteFixture(f, comments, contents).api});
+  const positive = await run([comment(value)]);
+  assert.equal(positive.change_files_checked, 470);
+  assert.equal(positive.review.reviewer, 'reviewer');
+  await assert.rejects(() => run([comment(value), comment({...value, outcome: 'changes-requested'}, 2)]), /unresolved/);
+  const omitted = structuredClone(value); omitted.inventory_commitment.inspected_files.count--;
+  await assert.rejects(() => run([comment(omitted)]), /commitment differs/);
+  const stale = {...value, head_sha: commit};
+  await assert.rejects(() => run([comment(stale)]), /Missing independent/);
 });
