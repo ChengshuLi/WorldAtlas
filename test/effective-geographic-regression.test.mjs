@@ -197,7 +197,9 @@ test('selected continuous source consumes exact encoded override and rejects inc
   assert.notDeepEqual(actual.body,execFileSync('git',['-C',f.repo,'show',current+':data/geography/fixture.json']),'historical ordinary path must never replace selected body');
   const cold=path.join(f.repo,'cold-coordinate-control'),entry=path.join(f.repo,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs');
   const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
-  const invoke=dest=>spawnSync(process.execPath,[entry,'coordinate',f.repo,current,current,dest],{env,encoding:'utf8'});
+  const invoke=dest=>spawnSync(process.execPath,['--expose-gc',entry,'coordinate',f.repo,current,current,dest],{env,encoding:'utf8'});
+  const noGc=spawnSync(process.execPath,[entry,'coordinate',f.repo,current,current,cold+'-missing-gc'],{env,encoding:'utf8'});assert.notEqual(noGc.status,0);assert.match(noGc.stderr,/authenticated native GC/);assert.equal(fs.existsSync(cold+'-missing-gc'),false);
+  const gcDrift=spawnSync(process.execPath,['--expose-gc','--input-type=module','-e',`const m=await import(${JSON.stringify('file://'+entry)});globalThis.gc=()=>{};m.checkColdReclaimer();`],{env,encoding:'utf8'});assert.notEqual(gcDrift.status,0);assert.match(gcDrift.stderr,/authenticated native GC/);
   const emitted=invoke(cold);assert.equal(emitted.status,0,emitted.stderr);assert.equal(JSON.parse(emitted.stdout).complete_owners,2);
   const publication=JSON.parse(fs.readFileSync(path.join(cold,'publication.json'))),facts=fs.readFileSync(path.join(cold,'facts.json'));
   assert.equal(sha(facts),publication.facts.sha256);assert.equal(JSON.parse(facts).candidate_code_executed,false);

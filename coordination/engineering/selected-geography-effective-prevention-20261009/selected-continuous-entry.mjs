@@ -9,6 +9,9 @@ const FILE=33554432,PHASE=268435456,ROOT=path.resolve(path.dirname(fileURLToPath
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const CODE=[P+'selected-continuous-entry.mjs',P+'selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
 const demand=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
+const coldGc=globalThis.gc;
+export function checkColdReclaimer(){demand(process.execArgv.includes('--expose-gc')&&typeof coldGc==='function'&&globalThis.gc===coldGc&&Function.prototype.toString.call(coldGc).includes('[native code]'),'Cold whole-source acquisition requires authenticated native GC entry');}
+function reclaimCompletedSource(){checkColdReclaimer();coldGc();}
 const commit=v=>typeof v==='string'&&/^[a-f0-9]{40}$/.test(v);
 function ordinaryParents(target){for(let p=path.dirname(target);;p=path.dirname(p)){const s=fs.lstatSync(p);demand(s.isDirectory()&&!s.isSymbolicLink(),'Nonordinary cold output ancestor');if(p===path.dirname(p))break;}}
 function fresh(target){ordinaryParents(target);let exists=true;try{fs.lstatSync(target);}catch(e){if(e.code!=='ENOENT')throw e;exists=false;}demand(!exists,'Cold output already exists');}
@@ -21,7 +24,7 @@ function guard(repo,trusted){
  return stats.map(({name,f,s})=>{const row=git('ls-tree','-z',trusted,'--',name).toString();demand(/^100(644|755) blob [a-f0-9]{40}\t/.test(row)&&row.endsWith('\t'+name+'\0'),'Unbound cold execution code');const [mode,,oid]=row.slice(0,row.indexOf('\t')).split(' ');demand(Number(git('cat-file','-s',oid))===s.size,'Cold code size differs');const local=fs.readFileSync(f),raw=git('cat-file','blob',oid);demand(local.equals(raw)&&(s.mode&0o777)===(mode==='100755'?0o755:0o644),'Cold code whole body/mode differs');return {commit:trusted,path:name,mode,git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};});
 }
 export async function coordinateStage(repo,trusted,selected,destination,parentRuntimePath){
- demand(commit(selected),'Missing immutable selected input commit');destination=path.resolve(destination);fresh(destination);
+ demand(commit(selected),'Missing immutable selected input commit');destination=path.resolve(destination);fresh(destination);checkColdReclaimer();
  const code=guard(repo,trusted);
  const native=await import('../../../scripts/check-effective-geographic-regression.mjs');
  const helper=await import('./selected-neighbor-prevention.mjs');
@@ -33,12 +36,16 @@ export async function coordinateStage(repo,trusted,selected,destination,parentRu
  // separate certificate authenticates every actual selected whole source body,
  // full unique owner roster and per-record pointsets; it does not recompute the
  // legacy world digest using a source traversal that was never its method.
- for(const name of resolver.paths)shards.push(helper.selectedCoordinateShard(resolver,[name],{priorShards:shards}));
+ for(const name of resolver.paths){shards.push(helper.selectedCoordinateShard(resolver,[name],{priorShards:shards}));
+  // Only compact immutable certificates survive here. The complete original
+  // FeatureCollection has left the helper frame; reclaim it before next input.
+  reclaimCompletedSource();
+ }
  const certificate=helper.joinSelectedCoordinateCertificate(resolver,shards),decoded=helper.valueBytes(certificate);
  demand(decoded.length<=FILE,'Complete certificate ordinary decoded cap');
  const encoded=gzipSync(decoded,{level:9,mtime:0});
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',executing_commit:trusted,selected_commit:selected,execution_code:code,
-  runtime:startup.identities,source_certificate_domain:'complete-selected-source-pointsets:v1',historical_footprint_authority:{value:resolver.release.footprints_sha256,release:resolver.release,recomputed:false},binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:resolver.paths.length,
+  runtime:startup.identities,runtime_argv:process.execArgv,source_lifecycle:'whole-containing-body-authenticate-extract-discard-native-gc',source_certificate_domain:'complete-selected-source-pointsets:v1',historical_footprint_authority:{value:resolver.release.footprints_sha256,release:resolver.release,recomputed:false},binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:resolver.paths.length,
   inputs:[...startup.beforeReader.inventory.values()],acquisition_phases:shards.flatMap(s=>s.phases),join_phase_bytes:certificate.complete_phase_bytes,
   limits:certificate.limitations,candidate_code_executed:false};
  const factsBody=helper.valueBytes(facts),publication={version:1,complete:true,kind:facts.kind,
@@ -74,7 +81,7 @@ export async function continuousOperandsStage(repo,trusted,baseline,candidate,de
  fs.mkdirSync(destination);const stagePaths=[path.join(destination,'baseline'),path.join(destination,'candidate')],ack=[];
  const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
  for(const [i,selected]of [baseline,candidate].entries()){
-  const raw=execFileSync(process.execPath,[fileURLToPath(import.meta.url),'coordinate',repo,trusted,selected,stagePaths[i],...(parentRuntimePath?[parentRuntimePath]:[])],{env,maxBuffer:1048576,stdio:['ignore','pipe','pipe']});const value=JSON.parse(raw);demand(value.publication?.complete===true,'Cold coordinate child lacks complete acknowledgement');ack.push(value);
+  const raw=execFileSync(process.execPath,['--expose-gc',fileURLToPath(import.meta.url),'coordinate',repo,trusted,selected,stagePaths[i],...(parentRuntimePath?[parentRuntimePath]:[])],{env,maxBuffer:1048576,stdio:['ignore','pipe','pipe']});const value=JSON.parse(raw);demand(value.publication?.complete===true,'Cold coordinate child lacks complete acknowledgement');ack.push(value);
  }
  startup=native.selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});before=native.loadSelection(startup.beforeReader);startup.afterReader.metadataBytes=8388608+2*before.metadataBytes;startup.afterReader.phase();after=native.loadSelection(startup.afterReader);
  oldResolver=before.geometrySources??new native.SelectedGeometrySources(before);newResolver=after.geometrySources??new native.SelectedGeometrySources(after);
