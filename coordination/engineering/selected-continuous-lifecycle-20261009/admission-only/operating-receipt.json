@@ -1,0 +1,239 @@
+{
+  "kind": "actual-full-selected-native-comparison-operating-receipt",
+  "code_head": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "baseline": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "candidate": "e9bd90b13b56cc50c0609dd502a5648d8a6e7a5d",
+  "issued_command_sha256": "dfe7250920c9933e7f72b990dec515cf3eb52f230996174ec6d31632ac8e9a9e",
+  "contract": {
+    "issued_command_sha256": "dfe7250920c9933e7f72b990dec515cf3eb52f230996174ec6d31632ac8e9a9e",
+    "supervisor_sha256": "7133f9fd81eabf3470be284fd57d2771a9398e7ac60604b94fdc7c72cfddd873",
+    "maximum_RSS_bytes": 536870912,
+    "minimum_host_reserve_bytes": 402653184,
+    "sample_margin_bytes": 33554432,
+    "maximum_wall_seconds": 1200,
+    "maximum_new_storage_bytes": 67108864,
+    "maximum_result_bytes": 4194304,
+    "maximum_stderr_bytes": 40960,
+    "termination_helper_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/1394-physical-continuation-e9b03/owned-child-termination-00c6028d.py",
+    "termination_helper_sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+    "scope": "Fresh512MiB admission-only authentic current snapshots and historical full publication descriptor. No certificate/source/native body opens or scientific operators.",
+    "reviewer": "01a10893-2a57-72e0-aa08-5c36088d5206",
+    "no_automatic_envelope_increase_or_started_retry": true
+  },
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-cold-admission-only-20261009/program/diagnose-metadata.mjs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review",
+    "6951c117534f69742acd1f61820cfc21a4ad17f5",
+    "e9bd90b13b56cc50c0609dd502a5648d8a6e7a5d",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+  ],
+  "started_at": "2026-10-09T20:22:22.910044+00:00",
+  "finished_at": "2026-10-09T20:22:28.021494+00:00",
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_s": 5.111457499966491,
+  "actual_external_lifetime_process_peak_RSS_bytes": 203046912,
+  "max_sampled_group_RSS_bytes": 184205312,
+  "VM_supply_upper_estimate_before_launch": 1391132672,
+  "operating_admission_qualified": true,
+  "natural_terminal_owned_processes_absent": true,
+  "new_storage_bytes": 2326,
+  "samples": [
+    {
+      "elapsed_s": 0.13248404196929187,
+      "group_RSS_bytes": 57360384,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 0.6775455419556238,
+      "group_RSS_bytes": 116146176,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21865": {
+          "ppid": 21836,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:23 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.217319957970176,
+      "group_RSS_bytes": 158072832,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21921": {
+          "ppid": 21836,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:24 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.7652215419802815,
+      "group_RSS_bytes": 135938048,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21988": {
+          "ppid": 21836,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:24 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.3213043329888023,
+      "group_RSS_bytes": 184205312,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "22020": {
+          "ppid": 21836,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.869704249955248,
+      "group_RSS_bytes": 97583104,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "22083": {
+          "ppid": 21836,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:25 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.441223166999407,
+      "group_RSS_bytes": 81969152,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "22141": {
+          "ppid": 21836,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:26 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.990823125001043,
+      "group_RSS_bytes": 102907904,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 4.583041707985103,
+      "group_RSS_bytes": 99254272,
+      "members": {
+        "21834": {
+          "ppid": 21743,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "21836": {
+          "ppid": 21834,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:22 2026"
+        },
+        "22330": {
+          "ppid": 21836,
+          "pgid": 21834,
+          "started": "Fri Oct 9 13:22:27 2026"
+        }
+      }
+    }
+  ],
+  "termination_events": [],
+  "whole_output_pins": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-cold-admission-only-20261009/checker.stdout",
+      "bytes": 1549,
+      "sha256": "278211a6f2fda4c6596719485d07890a19fae13a9551f19f6c0fec81176452b5"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-cold-admission-only-20261009/checker.stderr",
+      "bytes": 777,
+      "sha256": "dce89e2259953f3a79c1035e550b1aa5c512869b8010f2cfecc6256942e5915c"
+    }
+  ],
+  "global_scientific_executions": 0
+}

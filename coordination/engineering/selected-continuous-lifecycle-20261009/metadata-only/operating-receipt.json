@@ -1,0 +1,197 @@
+{
+  "kind": "actual-full-selected-native-comparison-operating-receipt",
+  "code_head": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "baseline": "6951c117534f69742acd1f61820cfc21a4ad17f5",
+  "candidate": "e9bd90b13b56cc50c0609dd502a5648d8a6e7a5d",
+  "issued_command_sha256": "006555d42ed2342e4576b8f4afc9d0782733053e173b80743f73f642c736ebbb",
+  "contract": {
+    "issued_command_sha256": "006555d42ed2342e4576b8f4afc9d0782733053e173b80743f73f642c736ebbb",
+    "supervisor_sha256": "7133f9fd81eabf3470be284fd57d2771a9398e7ac60604b94fdc7c72cfddd873",
+    "maximum_RSS_bytes": 536870912,
+    "minimum_host_reserve_bytes": 402653184,
+    "sample_margin_bytes": 33554432,
+    "maximum_wall_seconds": 1200,
+    "maximum_new_storage_bytes": 67108864,
+    "maximum_result_bytes": 4194304,
+    "maximum_stderr_bytes": 40960,
+    "termination_helper_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/1394-physical-continuation-e9b03/owned-child-termination-00c6028d.py",
+    "termination_helper_sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61",
+    "scope": "Fresh stricter512MiB metadata-only6951 bootstrap/loadSelection diagnostic. Preserve original1GiB prelaunch refusal; no continuous/native/source geometry operator qualification.",
+    "reviewer": "01a10893-2a57-72e0-aa08-5c36088d5206",
+    "no_automatic_envelope_increase_or_started_retry": true
+  },
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-metadata-only-20261009/program/diagnose-metadata.mjs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/review",
+    "6951c117534f69742acd1f61820cfc21a4ad17f5",
+    "e9bd90b13b56cc50c0609dd502a5648d8a6e7a5d",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+  ],
+  "started_at": "2026-10-09T20:18:38.502068+00:00",
+  "finished_at": "2026-10-09T20:18:42.365808+00:00",
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_s": 3.8637490830151364,
+  "actual_external_lifetime_process_peak_RSS_bytes": 200425472,
+  "max_sampled_group_RSS_bytes": 197820416,
+  "VM_supply_upper_estimate_before_launch": 1347223552,
+  "operating_admission_qualified": true,
+  "natural_terminal_owned_processes_absent": true,
+  "new_storage_bytes": 2108,
+  "samples": [
+    {
+      "elapsed_s": 0.057480874995235354,
+      "group_RSS_bytes": 51822592,
+      "members": {
+        "16490": {
+          "ppid": 16251,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16494": {
+          "ppid": 16490,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 0.5971176250022836,
+      "group_RSS_bytes": 140279808,
+      "members": {
+        "16490": {
+          "ppid": 16251,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16494": {
+          "ppid": 16490,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16540": {
+          "ppid": 16494,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:39 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.1386910830042325,
+      "group_RSS_bytes": 124862464,
+      "members": {
+        "16490": {
+          "ppid": 16251,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16494": {
+          "ppid": 16490,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16631": {
+          "ppid": 16494,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:39 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 1.7098162500187755,
+      "group_RSS_bytes": 197820416,
+      "members": {
+        "16490": {
+          "ppid": 16251,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16494": {
+          "ppid": 16490,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.2549069999950007,
+      "group_RSS_bytes": 137592832,
+      "members": {
+        "16490": {
+          "ppid": 16251,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16494": {
+          "ppid": 16490,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16745": {
+          "ppid": 16494,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:40 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 2.800094624981284,
+      "group_RSS_bytes": 100614144,
+      "members": {
+        "16490": {
+          "ppid": 16251,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16494": {
+          "ppid": 16490,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16817": {
+          "ppid": 16494,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:41 2026"
+        }
+      }
+    },
+    {
+      "elapsed_s": 3.3386513750301674,
+      "group_RSS_bytes": 121716736,
+      "members": {
+        "16490": {
+          "ppid": 16251,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16494": {
+          "ppid": 16490,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:38 2026"
+        },
+        "16910": {
+          "ppid": 16494,
+          "pgid": 16490,
+          "started": "Fri Oct 9 13:18:41 2026"
+        }
+      }
+    }
+  ],
+  "termination_events": [],
+  "whole_output_pins": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-metadata-only-20261009/checker.stdout",
+      "bytes": 1331,
+      "sha256": "c22eeaee0d042292823202f408d8d959ad2f7f405da5a1ad6840e08c9dd5f3cc"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-1593-metadata-only-20261009/checker.stderr",
+      "bytes": 777,
+      "sha256": "353fe5e478f730a9617a7c88df3a177312f5f09c6a2f699f0a11231fc3e0b82f"
+    }
+  ],
+  "global_scientific_executions": 0
+}
