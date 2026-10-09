@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {isDeepStrictEqual} from 'node:util';
-import {validateChainedBuildContext,getSuccessfulChainedContext,foldCoverageContinuation} from '../eastern-two-gap-repair-native-20261007/chained-context.mjs';
+import {validateChainedBuildContext,getSuccessfulChainedContext,foldCoverageContinuation} from './predecessor-context-v9.mjs';
 import {validateContextMigration} from '../../../scripts/native-ownership/validate-context-migration.mjs';
 import {requireValidatedGeometryMigrations} from '../../../scripts/prepare-geographic-release.mjs';
 import {validateNativeSelectionReceipt} from '../../../scripts/native-ownership/require-verified-selection.mjs';

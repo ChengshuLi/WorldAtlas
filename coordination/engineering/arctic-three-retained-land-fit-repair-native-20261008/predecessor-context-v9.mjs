@@ -1,14 +1,42 @@
 // Exactly the approved unchanged v6→v7 stage, followed by the two-target v7→v8 stage.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFile}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
-import{restoreWholeImage}from'./whole-image.mjs';import{restoreCanonicalProducts,getRestoredCanonicalProducts,restoredContextMember,restoredContextPatch}from'./restore-canonical-products.mjs';import{validateContextMigration}from'../../../scripts/native-ownership/validate-context-migration.mjs';
+import{restoreWholeImage}from'../eastern-two-gap-repair-native-20261007/whole-image.mjs';import{restoreCanonicalProducts,getRestoredCanonicalProducts,restoredContextMember,restoredContextPatch}from'../eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';import{validateContextMigration}from'../../../scripts/native-ownership/validate-context-migration.mjs';
 import{candidateBudget,requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../../../scripts/evidence-quality.mjs';
 import{validateNativeSelectionReceipt}from'../../../scripts/native-ownership/require-verified-selection.mjs';
-import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
+import{BEFORE,AFTER,TARGETS}from'../eastern-two-gap-repair-native-20261007/native-producer.mjs';
 import{isDeepStrictEqual,promisify}from'node:util';
 import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs';
-import{requireCurrentExecution,admitCurrentExecution}from'./current-execution.mjs';
-import{acquireOriginalContextPair,constructAliasedContextChunk,readContextBody}from'./context-record-alias.mjs';
-import{applyBytePatch,verifyWholeBytes}from'./byte-patch.mjs';
+import{requireCurrentExecution,admitCurrentExecution}from'../eastern-two-gap-repair-native-20261007/current-execution.mjs';
+import{acquireOriginalContextPair,constructAliasedContextChunk,readContextBody}from'../eastern-two-gap-repair-native-20261007/context-record-alias.mjs';
+import{applyBytePatch,verifyWholeBytes}from'../eastern-two-gap-repair-native-20261007/byte-patch.mjs';
+import{requireValidatedGeometryMigrations}from'../../../scripts/prepare-geographic-release.mjs';
+// Current wrapper plumbing only. Archived stages and algorithm banks remain
+// literal; the package boundary authenticates this separately executing body.
+const successfulContexts=new WeakMap();
+function freezeContext(value){
+ if(value&&typeof value==='object'&&!Object.isFrozen(value)){
+  for(const child of Object.values(value))freezeContext(child);Object.freeze(value);
+ }return value;
+}
+function retainSuccessfulContext(result,rows,index,enabled=false){
+ assert.equal(typeof enabled,'boolean');if(!enabled)return result;
+ assert.equal(result.receipt.status,'verified');
+ requireValidatedGeometryMigrations(result.geometryValidation);
+ requireValidatedGeometryMigrations(result.coverageContinuation.originalGeometryValidation);
+ assert.equal(rows.length,49625);assert.equal(new Set(rows.map(row=>row.id)).size,49625);
+ assert.equal(index.locations,49625);assert.equal(index.footprints_sha256,AFTER);
+ assert.equal(index.owner_sha256,result.receipt.migration.owner_sha256);
+ successfulContexts.set(result,{receipt_sha256:sha(JSON.stringify(result.receipt)),
+  rows:freezeContext(rows),index:freezeContext(index)});
+ return result;
+}
+export function getSuccessfulChainedContext(result){
+ const saved=successfulContexts.get(result);assert(saved,'Actual successful chained validation identity required');
+ assert.equal(sha(JSON.stringify(result.receipt)),saved.receipt_sha256,'Validated receipt changed');
+ requireValidatedGeometryMigrations(result.geometryValidation);
+ requireValidatedGeometryMigrations(result.coverageContinuation.originalGeometryValidation);
+ return Object.freeze({rows:saved.rows,index:saved.index});
+}
 const executeFile=promisify(execFile);
 // Preserve the replay boundary; bound only the original child old-space, not the plain outer Node.
 export async function replayOriginalV1(runner,image){
@@ -64,26 +92,43 @@ export function authenticateSuccessorContextInventory(indexRaw,imageIndex,compar
   assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
  }return index;
 }
-export function verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles,currentRoot,charge=()=>{}}){
+export function verifyRegistryContinuation(originalRaw,currentRaw,binding){
+ assert(binding&&/^[a-f0-9]{64}$/.test(binding.manifest_sha256),'Explicit successor registry binding required');
+ const original=JSON.parse(originalRaw),current=JSON.parse(currentRaw);
+ assert.equal(original.version,1);assert.equal(current.version,1);assert.deepEqual(Object.keys(current).sort(),Object.keys(original).sort());
+ const expected={...original,candidates:{...original.candidates,[binding.manifest_sha256]:binding.pin}};
+ assert(!Object.hasOwn(original.candidates,binding.manifest_sha256),'Successor must be a new immutable manifest');
+ assert(/^[a-f0-9]{40}$/.test(binding.pin?.commit));assert(/^[a-f0-9]{64}$/.test(binding.pin?.sha256));
+ assert.equal(binding.pin.path,'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json');
+ assert.equal(binding.pin.role,'reviewed-exhaustive-native-rule-comparison');assert.equal(binding.pin.installation_approval,false);
+ assert.deepEqual(current,expected,'Entire original registry must remain exact; only one bound successor allowed');
+ return {original_entries:Object.keys(original.candidates).length,added_entries:1,manifest_sha256:binding.manifest_sha256};
+}
+export function verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles,currentRoot,registryContinuation,charge=()=>{}}){
  const required=new Set(['package.json']);
  function visit(p){if(required.has(p))return;required.add(p);safeEvidencePath(p);const raw=fs.readFileSync(path.join(authored,p));for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));}
  visit('scripts/native-ownership/validate-build-context-stage.mjs');assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...required].sort(),'Complete authored validator import closure required');
  const wrappers=new Set(['package.json','scripts/evidence-quality.mjs','scripts/native-ownership/validate-build-context-stage.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs']);
  for(const pin of stage.validator_sources){const member=codeIndex.files.find(p=>p.path===pin.path);assert(member);assert.equal(member.bytes,pin.bytes);assert.equal(member.sha256,pin.sha256);const raw=fs.readFileSync(path.join(authored,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);charge(raw.length);
-  if(!wrappers.has(pin.path)){const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
+  if(!wrappers.has(pin.path)){const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path==='scripts/native-ownership/verified-candidates.json'&&current.sha256!==pin.sha256){
+   assert(currentRoot);const extended=fs.readFileSync(path.join(currentRoot,pin.path));assert.equal(extended.length,current.bytes);assert.equal(sha(extended),current.sha256);verifyRegistryContinuation(raw,extended,registryContinuation);
+  }else if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
    assert(currentRoot,'Exact current restoration extension source required');const extended=fs.readFileSync(path.join(currentRoot,pin.path));assert.equal(sha(extended),current.sha256);
    const start=extended.indexOf(Buffer.from('// Select an exact member')),end=extended.indexOf(Buffer.from('function checkoutMetadata'),start);assert(start>=0&&end>start);
    assert.equal(sha(extended.subarray(start,end)),'6563ec0357559af17da4d14de887e9f06426a73a5e67392cc739aac4188e7e6b','Only the exact reviewed selected-member extension is allowed');
    assert.equal(sha(Buffer.concat([extended.subarray(0,start),extended.subarray(end)])),pin.sha256,'Entire original restoration module must remain byte-identical');
-  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+(current.sha256===pin.sha256?0:2525));assert.equal(current.mode,member.mode);}
+  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');if(pin.path!=='scripts/native-ownership/verified-candidates.json')assert.equal(current.bytes,pin.bytes+(current.sha256===pin.sha256?0:2525));assert.equal(current.mode,member.mode);}
  }
- return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)).length};
+ return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)&&p.path!=='scripts/native-ownership/verified-candidates.json').length,registry_continuation_requested:registryContinuation!==undefined};
 }
-export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution}){
+export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution,retainContextForContinuation=false,registryContinuation,continuationReservedBytes=0,continuationReservedDescriptors=0}){
  requirePlainExecution();assert.equal(stage.version,2);assert.equal(stage.issue,1295);assert.equal(stage.kind,'retained-identity-context-continuation-v2');assert.equal(stage.lane,'engineering');
  assert.deepEqual(stage.subject_ids,[...TARGETS]);assert.equal(stage.prior_stage_sha256,FIXED_PRIOR_STAGE_SHA);
+ assert(Number.isSafeInteger(continuationReservedBytes)&&continuationReservedBytes>=0);assert(Number.isInteger(continuationReservedDescriptors)&&continuationReservedDescriptors>=0);
+ assert(continuationReservedBytes===0&&continuationReservedDescriptors===0||retainContextForContinuation===true&&registryContinuation,'Continuation reserve requires explicit guarded successor route');
  const currentAdmission=admitCurrentExecution(currentExecution,[currentExecution.source_root,currentExecution.stage_root]);
- const ordinary=readFile??repositoryReader(root),budget=candidateBudget([],{reserveBytes:currentAdmission.installed_runtime_bytes+131072}),seen=new Map(),admitted=new Set();budget.add({bytes:stageRaw.length});
+ assert(currentAdmission.complete_phase_bytes+continuationReservedBytes<=256*1024*1024,'Current execution and whole continuation exceed cap before runtime/body reads');
+ const ordinary=readFile??repositoryReader(root),budget=candidateBudget([],{reserveBytes:currentAdmission.installed_runtime_bytes+131072+continuationReservedBytes,reserveDescriptors:16+continuationReservedDescriptors}),seen=new Map(),admitted=new Set();budget.add({bytes:stageRaw.length});
  function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
   if(!admitted.has(pin.path)){budget.add({bytes:pin.bytes});admitted.add(pin.path);}
   const raw=ordinary(pin.path,'candidate');assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);if(!seen.has(pin.path))seen.set(pin.path,pin);return raw;}
@@ -101,7 +146,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const codeParent=path.join(root,'.cache');fs.mkdirSync(codeParent,{recursive:true});assert.equal(fs.realpathSync(codeParent),codeParent);
  const codeTemporary=fs.mkdtempSync(path.join(codeParent,'context-authored-code-'));
  const authored=path.join(codeTemporary,'image');restoreWholeImage(path.join(root,codeBase),authored,{expectedIndexSha:sha(codeIndexRaw)});
- verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles:currentExecution.files,currentRoot:root});
+ verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles:currentExecution.files,currentRoot:root,registryContinuation:retainContextForContinuation?registryContinuation:undefined});
  const imageIndexRaw=read(stage.prior_image),imageIndex=JSON.parse(imageIndexRaw),imageBase=path.posix.dirname(stage.prior_image.path);
  // Complete original transport lineage remains pinned; the prior image was already restored and authenticated before stock readers.
  const parent=path.join(root,'.cache');fs.mkdirSync(parent,{recursive:true});assert.equal(fs.realpathSync(parent),parent);
@@ -193,8 +238,8 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const migration=validateContextMigration({original:before.rows,migrated:after,candidates,predecessorRelease:predecessor,release,migrationManifestFile:path.join(root,stage.geometry_manifest.path)});
  assert.equal(migration.owner_sha256,prior.migration.owner_sha256);const {geometryValidation,...compact}=migration;
  requireCurrentExecution(currentExecution);
- return {receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,current_execution:currentExecution,authored_validator_code_index_sha256:sha(codeIndexRaw),
+ return retainSuccessfulContext({receipt:{status:'verified',stage_path:stagePath,stage_sha256:sha(stageRaw),original_stage:prior.original_stage,migration:compact,current_execution:currentExecution,authored_validator_code_index_sha256:sha(codeIndexRaw),
   original_v1_replay:{actual_command:command,child_invocation:{executable:process.execPath,exec_argv:['--max-old-space-size=1536'],cwd:image,max_buffer_bytes:32*1024*1024,timeout_ms:0,kill_signal:'SIGTERM',old_space_is_not_rss_cap:true},explicit_module_pins:oldStage.validator_sources,accepted_module_read_vintage:'913db0624b8aa79b188ff17a7f5c4ae0c0f63965',advertised_prior_execution_commit:oldStage.execution_commit,
    advertised_commit_matches_validator_closure:false,receipt_sha256:sha(priorRaw),receipt:prior,input_image_index_sha256:stage.prior_image.sha256},
-  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_record_acquisitions:acquisitions,context_transport:{transport_redecoded:false,index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:{...budget.snapshot(),installed_runtime_bytes:currentAdmission.installed_runtime_bytes,reserved_review_bytes:131072,complete_phase_bytes:budget.snapshot().accounted_bytes+currentAdmission.installed_runtime_bytes+131072},scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}};
+  physical_association_chain:{versions:[6,7,8],middle_native_manifest_sha256:sha(middleRaw),original_migration_receipt_sha256:priorMigration.geometryValidation.proofs[0].receipt_sha256,successor_migration_receipt_sha256:geometryValidation.proofs[0].receipt_sha256,physical_assets_recalculated:false},checked_files:seen.size,context_record_acquisitions:acquisitions,context_transport:{transport_redecoded:false,index_sha256:stage.after_context_image.sha256,original_encoded_bodies:afterImageIndex.files.length,original_encoded_bytes:afterImageIndex.whole_bytes,ordinary_parts:afterImageIndex.parts.length,full_context_rows:after.length},budget:{...budget.snapshot(),installed_runtime_bytes:currentAdmission.installed_runtime_bytes,reserved_review_bytes:131072,complete_phase_bytes:budget.snapshot().accounted_bytes+currentAdmission.installed_runtime_bytes+131072+continuationReservedBytes,...(continuationReservedBytes?{continuation_reserved_bytes:continuationReservedBytes,continuation_reserved_descriptors:continuationReservedDescriptors}:{})},scientific_approval:false,limits:['Original v1 advertised daa8 execution differs from its explicitly pinned reviewed validator closure; exact accepted pin bytes are actually replayed','No geographic factual or publication approval granted by context lineage']},predecessorRelease:predecessor,geometryValidation,coverageContinuation:{originalRelease,middleRelease:predecessor,middleGrid,middleGridSha256:sha(middleRaw),originalGeometryValidation:priorMigration.geometryValidation}},after,afterIndex,retainContextForContinuation);
 }
