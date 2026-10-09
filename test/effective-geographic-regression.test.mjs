@@ -199,7 +199,10 @@ test('selected continuous source consumes exact encoded override and rejects inc
   const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
   const invoke=dest=>spawnSync(process.execPath,['--expose-gc',entry,'coordinate',f.repo,current,current,dest],{env,encoding:'utf8'});
   const noGc=spawnSync(process.execPath,[entry,'coordinate',f.repo,current,current,cold+'-missing-gc'],{env,encoding:'utf8'});assert.notEqual(noGc.status,0);assert.match(noGc.stderr,/authenticated native GC/);assert.equal(fs.existsSync(cold+'-missing-gc'),false);
-  const gcDrift=spawnSync(process.execPath,['--expose-gc','--input-type=module','-e',`const m=await import(${JSON.stringify('file://'+entry)});globalThis.gc=()=>{};m.checkColdReclaimer();`],{env,encoding:'utf8'});assert.notEqual(gcDrift.status,0);assert.match(gcDrift.stderr,/authenticated native GC/);
+  const gcScript=path.join(f.repo,'gc-identity-drift-control.mjs');fs.writeFileSync(gcScript,`const m=await import(${JSON.stringify('file://'+entry)});globalThis.gc=()=>{};m.checkColdReclaimer();`);
+  const gcDrift=spawnSync(process.execPath,['--expose-gc',gcScript],{env,encoding:'utf8'});assert.notEqual(gcDrift.status,0);assert.match(gcDrift.stderr,/authenticated native GC/);fs.unlinkSync(gcScript);
+  const extraFlag=spawnSync(process.execPath,['--expose-gc','--require=node:fs',entry,'coordinate',f.repo,current,current,cold+'-extra-flag'],{env,encoding:'utf8'});assert.notEqual(extraFlag.status,0);assert.match(extraFlag.stderr,/authenticated native GC/);assert.equal(fs.existsSync(cold+'-extra-flag'),false);
+
   const emitted=invoke(cold);assert.equal(emitted.status,0,emitted.stderr);assert.equal(JSON.parse(emitted.stdout).complete_owners,2);
   const publication=JSON.parse(fs.readFileSync(path.join(cold,'publication.json'))),facts=fs.readFileSync(path.join(cold,'facts.json'));
   assert.equal(sha(facts),publication.facts.sha256);assert.equal(JSON.parse(facts).candidate_code_executed,false);
@@ -211,7 +214,7 @@ test('selected continuous source consumes exact encoded override and rejects inc
   const omitted=structuredClone(completeCertificate);omitted.inputs=[];assert.throws(()=>accept(omitted),/Incomplete cold/);
   const reordered=structuredClone(completeCertificate);reordered.entries.reverse();assert.throws(()=>accept(reordered),/cold owner record/);
   const rebound=structuredClone(completeCertificate);rebound.inputs[0].source.sha256='0'.repeat(64);assert.throws(()=>accept(rebound),/drifted complete cold source/);
-  const wrongEffective=structuredClone(completeCertificate);wrongEffective.entries[0].effective_geometry_sha256='0'.repeat(64);assert.throws(()=>accept(wrongEffective),/effective primitive set/);
+  const wrongEffective=structuredClone(completeCertificate);wrongEffective.entries[0][8]='0'.repeat(64);assert.throws(()=>accept(wrongEffective),/effective primitive set/);
 
   const collision=invoke(cold);assert.notEqual(collision.status,0);assert.match(collision.stderr,/already exists/);assert.equal(sha(fs.readFileSync(path.join(cold,'facts.json'))),publication.facts.sha256);
   const dangling=path.join(f.repo,'dangling-coordinate-control');fs.symlinkSync('/nonexistent-coordinate-fixture',dangling);const link=invoke(dangling);assert.notEqual(link.status,0);assert.match(link.stderr,/already exists/);assert.equal(fs.readlinkSync(dangling),'/nonexistent-coordinate-fixture');fs.unlinkSync(dangling);

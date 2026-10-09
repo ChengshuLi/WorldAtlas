@@ -210,3 +210,11 @@ merging never excludes a neighbor. After each whole containing body leaves its
 helper frame, the trusted cold child uses authenticated native GC (`--expose-gc`)
 to reclaim dead source objects. Missing or replaced GC refuses; this changes
 acquisition lifetime only, without changing source pointsets or polygon methods.
+
+The persisted certificate uses explicit version-2 fixed columns for every complete
+row, with a lossless shared field schema. Its trusted decoder restores field
+access without duplicating row objects. It retains every original identity,
+parent, source ordinal and full feature/base/effective hash. This is compact
+metadata representation, not source sampling or a change to geometry methods.
+Cold coordinate children admit exactly `--expose-gc`; extra preload flags or
+NODE_OPTIONS/NODE_PATH are refused, and trusted callers clear those variables.

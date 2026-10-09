@@ -10,7 +10,7 @@ const P='coordination/engineering/selected-geography-effective-prevention-202610
 const CODE=[P+'selected-continuous-entry.mjs',P+'selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
 const demand=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
 const coldGc=globalThis.gc;
-export function checkColdReclaimer(){demand(process.execArgv.includes('--expose-gc')&&typeof coldGc==='function'&&globalThis.gc===coldGc&&Function.prototype.toString.call(coldGc).includes('[native code]'),'Cold whole-source acquisition requires authenticated native GC entry');}
+export function checkColdReclaimer(){demand(process.execArgv.length===1&&process.execArgv[0]==='--expose-gc'&&process.env.NODE_OPTIONS===undefined&&process.env.NODE_PATH===undefined&&typeof coldGc==='function'&&globalThis.gc===coldGc&&Function.prototype.toString.call(coldGc).includes('[native code]'),'Cold whole-source acquisition requires authenticated native GC entry');}
 function reclaimCompletedSource(){checkColdReclaimer();coldGc();}
 const commit=v=>typeof v==='string'&&/^[a-f0-9]{40}$/.test(v);
 function ordinaryParents(target){for(let p=path.dirname(target);;p=path.dirname(p)){const s=fs.lstatSync(p);demand(s.isDirectory()&&!s.isSymbolicLink(),'Nonordinary cold output ancestor');if(p===path.dirname(p))break;}}

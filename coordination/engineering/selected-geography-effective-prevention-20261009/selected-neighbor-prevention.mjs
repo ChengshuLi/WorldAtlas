@@ -41,10 +41,21 @@ export function coordinateBounds(g){
  return boxes;
 }
 export function possibleNeighbors(certificate,changedGeometry,{targetId}={}){
- demand(certificates.has(certificate)&&certificate.kind==='selected-coordinate-neighbor-certificate-v1','Incomplete/unqualified neighbor certificate');
+ demand(certificates.has(certificate)&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Incomplete/unqualified neighbor certificate');
  demand(typeof targetId==='string'&&certificate.entries.some(r=>r.id===targetId),'Require exact SELF target identity; no arbitrary exclusions');
  const boxes=coordinateBounds(changedGeometry),skip=new Set([targetId]);const hit=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
  return certificate.entries.filter(r=>!skip.has(r.id)&&r.boxes.some(a=>boxes.some(b=>hit(a,b))));
+}
+// Lossless fixed-column projection: all original identity/source/hash/bounds
+// values remain complete. Shared getters avoid materializing duplicate rows.
+const COORDINATE_FIELDS=Object.freeze(['id','index','parent_id','parent_index','source','ordinal','whole_feature_sha256','geometry_sha256','effective_geometry_sha256','boxes']);
+class CoordinateRow extends Array {}
+for(const [i,name]of COORDINATE_FIELDS.entries())Object.defineProperty(CoordinateRow.prototype,name,{get(){return this[i];},enumerable:false,configurable:false});
+Object.freeze(CoordinateRow.prototype);
+const coordinateRow=value=>Object.setPrototypeOf(COORDINATE_FIELDS.map(k=>value[k]),CoordinateRow.prototype);
+function bindCoordinateRows(certificate){
+ demand(certificate?.version===2&&same(certificate.entry_fields,COORDINATE_FIELDS)&&Array.isArray(certificate.entries),'Unsupported lossless coordinate row schema');
+ for(const row of certificate.entries){demand(Array.isArray(row)&&row.length===COORDINATE_FIELDS.length&&Object.keys(row).join(',')===COORDINATE_FIELDS.map((_,i)=>String(i)).join(','),'Foreign/incomplete coordinate tuple');Object.setPrototypeOf(row,CoordinateRow.prototype);}
 }
 // Selected source adapter: whole source bodies are acquired through the trusted
 // data-only selected-bank resolver, never the historical raw target path.
@@ -76,19 +87,19 @@ export function selectedCoordinateShard(resolver,sourcePaths,{priorShards=[],out
    // One conservative rectangle contains every original member/addition bound.
    // A seam member already spans all longitude; merging can only widen exclusion.
    const boxes=[allBounds.reduce((a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])])];
-   entries.push({id,index:owner.index,parent_id:owner.province_id,parent_index:owner.province_index,source:name,ordinal,whole_feature_sha256:valueSha(f),geometry_sha256:valueSha(f.geometry),effective_geometry_sha256:valueSha(effective),boxes});
+   entries.push(coordinateRow({id,index:owner.index,parent_id:owner.province_id,parent_index:owner.province_index,source:name,ordinal,whole_feature_sha256:valueSha(f),geometry_sha256:valueSha(f.geometry),effective_geometry_sha256:valueSha(effective),boxes}));
    if(onFeature!==undefined){demand(typeof onFeature==='function','Require trusted source digest callback');onFeature(f);}
   }
   phases.push({source:name,complete_phase_bytes:reader.used,descriptors:reader.charged.size});
  }
- const result={version:1,kind:'selected-complete-coordinate-shard-v1',binding,paths:sourcePaths,inputs:inputFacts,entries,phases};
+ const result={version:2,kind:'selected-complete-coordinate-shard-v2',entry_fields:COORDINATE_FIELDS,binding,paths:sourcePaths,inputs:inputFacts,entries,phases};
  demand(valueBytes(result).length<=reader.outputBytes,'Selected coordinate shard exceeds prospective output');freeze(result);certificates.set(result,{binding,resolver});return result;
 }
 export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve=32*1024*1024}={}) {
  demand(resolver instanceof SelectedGeometrySources&&Array.isArray(shards)&&shards.length>0,'Missing actual selected coordinate shards');
  const expected=new Set(resolver.paths),seenPaths=new Set(),seenIds=new Set(),entries=[],inputs=[];
  let binding;for(const shard of shards){
-  const proof=certificates.get(shard);demand(proof&&proof.resolver===resolver&&shard.kind==='selected-complete-coordinate-shard-v1','Unqualified/foreign selected coordinate stage');
+  const proof=certificates.get(shard);demand(proof&&proof.resolver===resolver&&shard.kind==='selected-complete-coordinate-shard-v2','Unqualified/foreign selected coordinate stage');
   if(!binding)binding=shard.binding;demand(same(binding,shard.binding),'Mixed selected coordinate vintage');
   for(const p of shard.paths){demand(expected.has(p)&&!seenPaths.has(p),'Foreign/duplicate source containing closure');seenPaths.add(p);}
   for(const input of shard.inputs){demand(input.path===resolver.paths[inputs.length]&&same(input.source,{...resolver.sources[inputs.length],...(input.source.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})}), 'Complete selected source input order or whole binding differs');inputs.push(input);}for(const row of shard.entries){demand(!seenIds.has(row.id),'Duplicate complete location join');seenIds.add(row.id);entries.push(row);}
@@ -97,7 +108,7 @@ export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve
  const retained=2*(resolver.snapshot.metadataBytes+valueBytes({shards,ownerIdentity:resolver.snapshot.owners.map(r=>[r.index,r.id,r.province_index,r.province_id]),binding}).length)+resolver.snapshot.acquisition_buffer_bytes;
  const reader=resolver.reader;demand(Number.isSafeInteger(outputReserve)&&outputReserve>0&&outputReserve<=FILE,'Bounded complete certificate output reserve required');reader.outputBytes=outputReserve;reader.metadataBytes=8*1024*1024+retained;reader.phase();
  demand(shards.length+inputs.length<=SLOT,'Complete coordinate join descriptor cap');entries.sort((a,b)=>a.index-b.index);
- const result={version:1,kind:'selected-coordinate-neighbor-certificate-v1',binding,entries,inputs,complete_phase_bytes:reader.used,limitations:['Certificate projects complete owner identity/index/parent tuples and merged coordinate bounds. Full original camera metadata remains authenticated source custody and charged carried state; it is not duplicated as certificate geometry.','Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.']};
+ const result={version:2,kind:'selected-coordinate-neighbor-certificate-v2',entry_fields:COORDINATE_FIELDS,binding,entries,inputs,complete_phase_bytes:reader.used,limitations:['Certificate projects complete owner identity/index/parent tuples and merged coordinate bounds. Full original camera metadata remains authenticated source custody and charged carried state; it is not duplicated as certificate geometry.','Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.']};
  demand(valueBytes(result).length<=reader.outputBytes,'Complete selected certificate exceeds prospective output');freeze(result);certificates.set(result,{binding,resolver});return result;
 }
 // Qualification of a persisted cold product uses the independently retained
@@ -107,8 +118,9 @@ export function joinSelectedCoordinateCertificate(resolver,shards,{outputReserve
 export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expectedPublication,publication,encoded_sha256,decoded_sha256}) {
  demand(resolver instanceof SelectedGeometrySources&&same(publication,expectedPublication)&&publication.complete===true&&publication.kind==='trusted-selected-coordinate-stage-v1','Missing actual issued cold-stage acknowledgement');
  demand(encoded_sha256===publication.certificate.sha256&&decoded_sha256===publication.certificate.decoded_sha256,'Cold complete certificate bytes differ');
- demand(facts.kind===publication.kind&&facts.selected_commit===resolver.reader.version&&facts.candidate_code_executed===false&&certificate.kind==='selected-coordinate-neighbor-certificate-v1','Foreign cold certificate execution/input');
+ demand(facts.kind===publication.kind&&facts.selected_commit===resolver.reader.version&&facts.candidate_code_executed===false&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Foreign cold certificate execution/input');
  demand(same(certificate.binding.selection,resolver.snapshot.selection)&&same(certificate.binding.release,resolver.release)&&same(certificate.binding.sources,resolver.sources)&&certificate.binding.owners_sha256===valueSha(resolver.snapshot.owners)&&same(facts.binding,certificate.binding),'Cold certificate selected source/owner binding differs');
+ bindCoordinateRows(certificate);
  const paths=new Set(resolver.paths),owners=new Map(resolver.snapshot.owners.map(r=>[r.id,r])),seen=new Set(),sources=new Set();
  demand(Array.isArray(certificate.inputs)&&certificate.inputs.length===paths.size&&Array.isArray(certificate.entries)&&certificate.entries.length===owners.size,'Incomplete cold source/owner certificate');
  for(let i=0;i<certificate.inputs.length;i++){const input=certificate.inputs[i],expected=resolver.sources[i];
@@ -141,7 +153,7 @@ export function selectedCertificateAffectedPlan(before,after) {
 // No caller-supplied exclusion set. Other changed owners remain possible
 // neighbors and are compared pairwise; same-owner additions keep all primitives.
 export function selectedAffectedPlan(certificate,changes) {
- demand(certificates.has(certificate)&&certificate.kind==='selected-coordinate-neighbor-certificate-v1'&&Array.isArray(changes)&&changes.length>0,'Missing qualified complete selected certificate');
+ demand(certificates.has(certificate)&&certificate.kind==='selected-coordinate-neighbor-certificate-v2'&&Array.isArray(changes)&&changes.length>0,'Missing qualified complete selected certificate');
  const targets=new Map(),pairs=new Set(),needed=new Set();
  for(const change of changes){demand(change&&typeof change.id==='string'&&!targets.has(change.id),'Duplicate/foreign changed target');
   const own=certificate.entries.find(r=>r.id===change.id);demand(own&&Array.isArray(change.primitives)&&change.primitives.length>0,'Changed target outside original complete roster');
