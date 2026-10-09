@@ -36,10 +36,13 @@ python3 -m venv /tmp/worldatlas-1458-venv
 /tmp/worldatlas-1458-venv/bin/python research/geography/prt-esp-raster-georeference-1282-erratum/audit-native-coverage.py research/geography/prt-esp-raster-georeference-1282-erratum/runs/run-2/native-coverage-audit.json
 /tmp/worldatlas-1458-venv/bin/python research/geography/prt-esp-raster-georeference-1282-erratum/build-subject-lineage.py
 /tmp/worldatlas-1458-venv/bin/python research/geography/prt-esp-raster-georeference-1282-erratum/finalize-runs.py
+/tmp/worldatlas-1458-venv/bin/python research/geography/prt-esp-raster-georeference-1282-erratum/build-measurement-controls.py
 node scripts/evidence-quality.mjs research/geography/prt-esp-raster-georeference-1282-erratum/evidence-quality.json
 ```
 
 Both native-footprint runs are written to fresh destinations and refuse overwrite. Their identical output SHA-256 is `101390e3521ccefd6937efadbb528add17fb35f91f87c17ad054ac77e704b09b`; `reproducibility.json` and both run manifests bind the exact source, code, and output hashes. The audit exercises the real native header and pixel reads and rejects a +10° north-edge transform, Web Mercator CRS, flipped row direction, and an out-of-coverage point. It does not rerun the oversized full monthly analysis.
+
+The evidence manifest classifies the EPSG:6933/Shapely footprint fractions and native pixel-center checks as measurements; the shared WGS84 land-area helper is not used for this overlay. `build-measurement-controls.py` rechecks the two byte-identical audit outputs, asserts the 24 native headers and three exact pixel controls, and writes separate positive and negative control receipts for the trusted evidence gate. The negative receipt retains all five adversarial cases. Neither receipt upgrades tile-footprint coverage to successful monthly observation or physical classification.
 
 ## Corrective handoff and remaining work
 

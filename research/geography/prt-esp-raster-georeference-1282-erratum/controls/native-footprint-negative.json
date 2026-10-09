@@ -1,0 +1,43 @@
+{
+  "audit_runs": [
+    {
+      "run": "run-1",
+      "sha256": "101390e3521ccefd6937efadbb528add17fb35f91f87c17ad054ac77e704b09b"
+    },
+    {
+      "run": "run-2",
+      "sha256": "101390e3521ccefd6937efadbb528add17fb35f91f87c17ad054ac77e704b09b"
+    }
+  ],
+  "interpretation": "Every shifted, wrong-CRS, flipped-row, out-of-coverage, and refreshed-hash false-location control was rejected.",
+  "kind": "negative-control",
+  "method_id": "native-geotiff-coverage-and-pixel-controls",
+  "outcome": "passed",
+  "rejected_adversarial_fixtures": [
+    {
+      "case": "north-edge-shifted-plus-10-degrees",
+      "rejected": true
+    },
+    {
+      "case": "wrong-crs-web-mercator",
+      "rejected": true
+    },
+    {
+      "case": "flipped-row-direction",
+      "rejected": true
+    },
+    {
+      "case": "out-of-native-coverage-point",
+      "point_lonlat": [
+        -7.0,
+        41.0
+      ],
+      "rejected": true
+    },
+    {
+      "case": "claimed-controls-even-if-hashes-refresh",
+      "rejected": true
+    }
+  ],
+  "schema": "worldatlas-measurement-control-v1"
+}

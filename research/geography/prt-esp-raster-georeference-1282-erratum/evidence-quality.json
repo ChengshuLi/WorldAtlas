@@ -1,6 +1,6 @@
 {
   "baseline": {
-    "commit": "63c51738fc38f0024c024fc0f3fae6278c3a75b3",
+    "commit": "664dfe7a682fb3838ce827600792c832235a238a",
     "files": [
       {
         "bytes": 4583022,
@@ -1373,11 +1373,23 @@
       "status": "added"
     },
     {
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/build-measurement-controls.py",
+      "status": "added"
+    },
+    {
       "path": "research/geography/prt-esp-raster-georeference-1282-erratum/build-subject-lineage.py",
       "status": "added"
     },
     {
       "path": "research/geography/prt-esp-raster-georeference-1282-erratum/capture-jrc-retrieval.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/controls/native-footprint-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/controls/native-footprint-positive.json",
       "status": "added"
     },
     {
@@ -1477,13 +1489,13 @@
   "lane": "geography",
   "methods": [
     {
-      "area_method": "Transform source polygon and native TIFF footprint from EPSG:4326 to EPSG:6933 with pyproj always_xy and use Shapely polygon intersection area.",
+      "area_method": "Transform component polygons and native TIFF footprints from EPSG:4326 to EPSG:6933 with pyproj always_xy and calculate Shapely intersection area; this is not the shared WGS84 land-area helper.",
       "axis_order": "longitude-latitude",
-      "crs": "TIFF EPSG:4326; equal-area calculation EPSG:6933",
+      "crs": "Native TIFF EPSG:4326; equal-area overlay EPSG:6933",
       "description": "Verify all 24 complete source hashes and native Rasterio/GDAL geotransforms; read three 1x1 pixel controls independently; calculate geometric coverage of all 70 unchanged polygons from actual raster bounds. Full monthly raster summarization refused under complete-operation byte limits.",
-      "distance_method": "No distance metric used; controls use native raster point centers and exact component point-in-polygon membership.",
+      "distance_method": "No distance metric; native pixel-center coordinates are checked with exact component point-in-polygon membership.",
       "id": "native-geotiff-coverage-and-pixel-controls",
-      "kind": "geography",
+      "kind": "measurement",
       "software": "Python 3.12.14; Rasterio 1.4.3 / GDAL 3.9.3; Shapely 2.1.2; pyproj 3.7.2; NumPy 2.3.5",
       "units": "native coordinates in degrees; coverage fractions from EPSG:6933 square metres"
     },
@@ -1526,7 +1538,7 @@
   ],
   "metrics": [
     {
-      "evaluation_commit": "63c51738fc38f0024c024fc0f3fae6278c3a75b3",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a",
       "id": "components-tile-covered",
       "input_sha256": "c320f2be4a560532c0255e655bed696958a5638f6c37e4ab83b10e8aef02d1a4",
       "unit": "components",
@@ -1534,7 +1546,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "63c51738fc38f0024c024fc0f3fae6278c3a75b3",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a",
       "id": "components-tile-partial",
       "input_sha256": "c320f2be4a560532c0255e655bed696958a5638f6c37e4ab83b10e8aef02d1a4",
       "unit": "components",
@@ -1542,7 +1554,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "63c51738fc38f0024c024fc0f3fae6278c3a75b3",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a",
       "id": "components-tile-full",
       "input_sha256": "c320f2be4a560532c0255e655bed696958a5638f6c37e4ab83b10e8aef02d1a4",
       "unit": "components",
@@ -1550,7 +1562,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "63c51738fc38f0024c024fc0f3fae6278c3a75b3",
+      "evaluation_commit": "664dfe7a682fb3838ce827600792c832235a238a",
       "id": "components-no-tile-coverage",
       "input_sha256": "c320f2be4a560532c0255e655bed696958a5638f6c37e4ab83b10e8aef02d1a4",
       "unit": "components",
@@ -1560,16 +1572,22 @@
   ],
   "outputs": [
     {
-      "bytes": 8151,
+      "bytes": 8865,
       "hash_kind": "file-bytes",
       "path": "research/geography/prt-esp-raster-georeference-1282-erratum/README.md",
-      "sha256": "fd215cc3f630d103766f0b1a6be9628a2b8c1b154ac6d6b83a3fade0940a7707"
+      "sha256": "16295e09272f12b08ab822a89c1d94664c9e68612568322244cb8c7365ea356c"
     },
     {
       "bytes": 22922,
       "hash_kind": "file-bytes",
       "path": "research/geography/prt-esp-raster-georeference-1282-erratum/audit-native-coverage.py",
       "sha256": "c7bb46c7b97c3ccf94753128d67ed3c2452a7b67b8d3221410c16b52ab591124"
+    },
+    {
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/build-measurement-controls.py",
+      "bytes": 4574,
+      "sha256": "1d8ba41ecd4951307ce0ecdefe4d0ffe781b03e482e518e1c1f590dcd477a8ba",
+      "hash_kind": "file-bytes"
     },
     {
       "bytes": 6655,
@@ -1582,6 +1600,18 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/prt-esp-raster-georeference-1282-erratum/capture-jrc-retrieval.py",
       "sha256": "092f9278110a0625a12160a2d4be0be8aa6eca531a01443164fb33d2620fb950"
+    },
+    {
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/controls/native-footprint-negative.json",
+      "bytes": 1074,
+      "sha256": "1290c4ded955277338825c42011e1e2b2846095e2da7c76a2d79a4c08dc2aa8e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/prt-esp-raster-georeference-1282-erratum/controls/native-footprint-positive.json",
+      "bytes": 1800,
+      "sha256": "fb17349c07103c0fd581526d10ddf021f60327c64342096604db2e1af8336750",
+      "hash_kind": "file-bytes"
     },
     {
       "bytes": 3225,
@@ -1872,5 +1902,19 @@
     }
   ],
   "version": 1,
-  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49"
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "validation": [
+    {
+      "method_id": "native-geotiff-coverage-and-pixel-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/prt-esp-raster-georeference-1282-erratum/controls/native-footprint-positive.json"
+    },
+    {
+      "method_id": "native-geotiff-coverage-and-pixel-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/prt-esp-raster-georeference-1282-erratum/controls/native-footprint-negative.json"
+    }
+  ]
 }
