@@ -29,10 +29,21 @@ Arctic eligibility directly retains independent issue1520 receipt6069239768; PR1
 
 Both corrected catalog executions used7743d731c33215cc926ba84d967b31631abac34f. Seven separately admitted pair comparisons authenticate every encoded/decoded catalog and membership body and its original mode. Two fresh parent executions consume the same frozen complete paired catalog authority (the run1 inventories and membership ledgers); they do not represent independent geographic experiments. Earlier0a134 metadata outputs remain limited historical vintages.
 
-Final report (`vintages/parent-run-1/report.json`, identical to run2) contains95,173 candidates,16 source-relative decisions/16 constructed candidates,2 offline integrations and0 production deliveries. The disjoint states are27,279 awaiting evidence,67,872 evidence ready,14 eligible source-relative,6 source exceptions and2 verified selected-release repairs. Actual final controls:4 helper positives,13 helper refusals and5 zero-Git-body-read admission refusals; `vintages/final-controls-2/` records these. The earlier isolated control import refusal and two fixture development failures are preserved as unqualified history.
+Prior count-only report (`vintages/parent-run-1/report.json`, identical to run2) contains95,173 candidates,16 source-relative decisions/16 constructed candidates,2 offline integrations and0 production deliveries. The disjoint states are27,279 awaiting evidence,67,872 evidence ready,14 eligible source-relative,6 source exceptions and2 verified selected-release repairs. Prior routed controls:4 helper positives,13 helper refusals and5 zero-Git-body-read admission refusals; `vintages/final-controls-2/` records these. The earlier isolated control import refusal and two fixture development failures are preserved as unqualified history.
 
 Final supported adapters `catalog.py` and `bounded_io.py` now live in this refresh namespace and are whole-byte copies of the reviewed prior adapters. The original funnel namespace is restored entirely to its main bytes. Historical7743 leaves and315f summaries keep their actual original code/path bindings; final small control/parent entry executions validate the supported versioned routing.
 
 Supported original-leaf/scope input plans bind whole-byte-identical PR1483 merged custody atc8df65e1d5c4d235c33e2f488c3e29d26223860f for nonancestor original worker commits. Original execution locators remain `original_binding`; historical executions retain their actual consumed pins. Eligible-ancestor manifest references name authentic merged copies without relabelling execution history.
 
 Review correction: final parent summaries include all six disjoint pipeline counts/percentages, including zero confirmed water/no-defect, and every progress count percentage against the explicit original-candidate denominator95,173. Reference disagreement alone is rejected/ambiguous, not confirmed no-defect; existing rows contain no such disposition and completed catalog leaves remain unchanged. New bounded helper controls reject wrong denominators, nonconservation and boolean counts. Prior count-only summaries remain historical.
+
+The final report is `vintages/percent-parent-run-1/report.json`, whole-byte-identical to run2. Every percentage denominator is the original95,173 candidates. Offline integrated2 is0.0021014363317327393%; source-relative16 is0.016811490653861914%; production delivered0 is0%. These domains are distinct. Final controls in `vintages/final-controls-4/` passed6 helper positives,16 helper refusals and5 admission refusals.
+
+| Disjoint pipeline state | Count | Percent of95,173 |
+| --- | ---: | ---: |
+| awaiting-evidence | 27279 | 28.662540846668698 |
+| confirmed-water-or-no-defect | 0 | 0.0 |
+| eligible-source-relative-rule | 14 | 0.014710054322129176 |
+| evidence-ready | 67872 | 71.31434335368225 |
+| rejected-or-ambiguous | 6 | 0.006304308995198218 |
+| repaired-verified-selected-release | 2 | 0.0021014363317327393 |
