@@ -2,6 +2,7 @@
 """Join every scoped contact to its Atlas feature, parents, and families."""
 import hashlib
 import json
+import os
 from pathlib import Path
 
 OWN = Path(__file__).resolve().parent
@@ -25,11 +26,15 @@ def roster_sha(values):
     return hashlib.sha256(("\n".join(sorted(values)) + "\n").encode()).hexdigest()
 
 def main():
-    assert not OUT.exists() and not OUT.is_symlink(), "refuse overwrite"
+    assert OUT.parent.resolve() == OUT.parent and OUT.parent == OWN and not OUT.parent.is_symlink()
+    assert OWN in OUT.parents and not os.path.lexists(OUT), "refuse overwrite or symlink"
     files = [*DATA, MATRIX, GEOM]
-    assert all(p.stat().st_size <= MAX_FILE for p in files), "per-file budget failed"
+    assert all(p.resolve() == p and p.is_file() and not p.is_symlink() for p in files), "input path admission failed"
+    sizes = [p.stat().st_size for p in files]
+    assert all(size <= MAX_FILE for size in sizes), "per-file budget failed"
     code_bytes = Path(__file__).stat().st_size
-    projected = sum(p.stat().st_size for p in files) + code_bytes + 256 * 1024
+    input_bytes = sum(sizes) + code_bytes
+    projected = input_bytes + 256 * 1024
     assert projected <= MAX_TOTAL, "complete subject-lineage phase exceeds 256 MiB"
     matrix = json.loads(MATRIX.read_text())
     features = {}
@@ -74,7 +79,7 @@ def main():
     assert len(rows) == 57 and len(families) == 52 and len(components) == 70
     geom = json.loads(GEOM.read_text())
     assert len(geom["features"]) == 70
-    OUT.write_text(json.dumps({"schema": "worldatlas-scoped-subject-lineage-v1", "issue": 1458,
+    document = {"schema": "worldatlas-scoped-subject-lineage-v1", "issue": 1458,
                                "method": "Exact issue contact identifiers joined to immutable Atlas data-part features by native id; component and family memberships come from the retained source-status matrix.",
                                "admission": {"max_file_bytes": MAX_FILE, "max_phase_bytes": MAX_TOTAL,
                                              "input_bytes": projected - 256 * 1024, "output_reserve": 256 * 1024,
@@ -88,10 +93,29 @@ def main():
                                "limits": ["Atlas parent IDs and source administrative levels are recorded source context, not an adjudication of border entitlement.",
                                           "Spain contacts are agricultural comarcas (MAPA), whose boundaries/license/history remain unresolved; geoBoundaries Spain ADM3 municipalities and Portugal ADM2 municipalities are adjacent source granularity, not substitute physical boundaries.",
                                           "The Portugal and Spain geoBoundaries products have respective recorded vintages 2020 and 2018. Their source-year values do not prove effective dates for any physical component.",
-                                          "Prior MAPA/APA findings are retained separately; historical MAPA bytes, current MAPA geometry terms, APA reuse license and MITECO vectors remain unresolved."]}, indent=2, sort_keys=True) + "\n")
-    assert OUT.stat().st_size <= 256 * 1024
-    assert projected - 256 * 1024 + OUT.stat().st_size <= MAX_TOTAL
-    print(f"wrote {OUT} ({OUT.stat().st_size} bytes, sha256 {sha(OUT)}); subjects={len(rows)}")
+                                          "Prior MAPA/APA findings are retained separately; historical MAPA bytes, current MAPA geometry terms, APA reuse license and MITECO vectors remain unresolved."]}
+    payload = (json.dumps(document, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    assert len(payload) <= 256 * 1024, "subject-lineage output exceeds its admitted reserve"
+    assert input_bytes + len(payload) <= MAX_TOTAL, "subject-lineage complete phase exceeds 256 MiB"
+    assert not os.path.lexists(OUT), "refuse existing output including dangling symlink"
+    fd = os.open(OUT, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0), 0o644)
+    st = os.fstat(fd)
+    try:
+        offset = 0
+        while offset < len(payload):
+            offset += os.write(fd, payload[offset:])
+        os.fsync(fd)
+    except Exception:
+        try:
+            current = OUT.lstat()
+            if (current.st_dev, current.st_ino) == (st.st_dev, st.st_ino):
+                OUT.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+    finally:
+        os.close(fd)
+    print(f"wrote {OUT} ({len(payload)} bytes, sha256 {hashlib.sha256(payload).hexdigest()}); subjects={len(rows)}")
 
 if __name__ == "__main__":
     main()
