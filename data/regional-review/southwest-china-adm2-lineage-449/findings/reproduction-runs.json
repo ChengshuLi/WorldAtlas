@@ -14,5 +14,24 @@
   "outputs_identical": true,
   "script_sha256": "b8c990849655cb9abc35db48b1d42865706c7b12103451648afdbaac97ceec32",
   "executed_at": "2026-10-09 UTC",
-  "scope": "228 issue-declared feature identities joined to immutable baseline Atlas parts and the retained #449 geoBoundaries source"
+  "scope": "228 issue-declared feature identities joined to immutable baseline Atlas parts and the retained #449 geoBoundaries source",
+  "additional_runs": [
+    {
+      "method_id": "name-location-extent-crosswalk",
+      "command": "python3 data/regional-review/southwest-china-adm2-lineage-449/reproduce-name-location-crosswalk.py",
+      "subject_id": "gb:CHN:ADM2:17275852B74051544695436",
+      "run_one_sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "run_two_sha256": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c",
+      "per_output_sha256_run_one": {
+        "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c"
+      },
+      "per_output_sha256_run_two": {
+        "data/regional-review/southwest-china-adm2-lineage-449/findings/name-location-crosswalk.json": "988ddd122b519aed014a8bd2b33feee43d4ff0633f02f3e2043109da6a015d9c"
+      },
+      "outputs_identical": true,
+      "script_sha256": "2b18f639717b114bdd2b7b68b4b4e71aa5f2679e65b7213acd2d5163c0c26073",
+      "executed_at": "2026-10-09 UTC",
+      "limit": "Only retained geoBoundaries/Atlas bytes and the officially indexed extents hard-coded from cited source locators were used. The official pages/PDFs were not fetched; identity and legal geometry remain unverified."
+    }
+  ]
 }
