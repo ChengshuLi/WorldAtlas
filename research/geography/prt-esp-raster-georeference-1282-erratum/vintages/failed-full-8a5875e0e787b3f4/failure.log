@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py", line 393, in run_phase
+    result = component_phase(commit, phase, row, geometry_row, capture, audit, scope_rows, assets, baseline, evidence, descriptors)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py", line 221, in component_phase
+    writer = evidence.NewVintage(baseline, OWN_REL, vintage, ["component-month-summary.json"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/scripts/evidence/immutable.py", line 246, in __init__
+    self.root = admit_destination(baseline, owned_path, vintage, self.filenames)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/scripts/evidence/immutable.py", line 235, in admit_destination
+    raise FileExistsError('Evidence already exists; choose a new vintage')
+FileExistsError: Evidence already exists; choose a new vintage
