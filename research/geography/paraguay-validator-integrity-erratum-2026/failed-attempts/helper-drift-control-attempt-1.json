@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "issue": 1330,
+  "attempt": "helper-drift-control-first-invocation",
+  "retrieved_at": "2026-10-09 07:10:14 UTC",
+  "status": "failed-before-fixture-or-publication",
+  "failure": "The control dispatcher treated the captured module object as a mapping. This was a harness error; the fixture was not created, the validator was not invoked, and no original or output file changed.",
+  "disposition": "Not counted. Corrected the module access and reran the complete helper-code drift control through an exclusively admitted vintage."
+}

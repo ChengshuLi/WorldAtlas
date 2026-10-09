@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "issue": 1330,
+  "attempt": "first-integrity-reproducer-run",
+  "retrieved_at": "2026-10-09 07:00:41 UTC",
+  "status": "failed-before-publication",
+  "failure": "The independent erratum gate expected an incorrect seven-column unit-review.csv header. The immutable file actually has twenty columns; the fixed gate now checks the exact pinned header.",
+  "evidence": {
+    "legacy_entrypoint_completed": true,
+    "legacy_products_captured_only_in_memory": true,
+    "all_three_retained_products_compared_byte_for_byte": true,
+    "all_twelve_original_controls_present": true,
+    "strict_parent_check_completed": false,
+    "owned_vintage_published": false,
+    "original_packet_written": false,
+    "partial_completion_receipt": false
+  },
+  "disposition": "Not counted as an accepted reproduction. Re-run with corrected pinned headers and fresh output vintage names; originals and old outputs remain preserved."
+}

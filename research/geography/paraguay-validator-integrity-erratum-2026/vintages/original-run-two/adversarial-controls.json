@@ -1,0 +1,67 @@
+{
+  "all_passed": true,
+  "controls": [
+    {
+      "id": "candidate-packet-index-omission",
+      "outcome": "passed",
+      "rejection": "Candidate packet inventory has omitted, extra or substituted files"
+    },
+    {
+      "id": "duplicate-and-omitted-source-row",
+      "outcome": "passed",
+      "rejection": "Crosswalk has duplicate, omitted or extra source IDs"
+    },
+    {
+      "id": "foreign-vintage-or-scope-row",
+      "outcome": "passed",
+      "rejection": "Crosswalk source IDs differ from exact baseline native/member roster"
+    },
+    {
+      "id": "omitted-source-row",
+      "outcome": "passed",
+      "rejection": "Crosswalk has duplicate, omitted or extra source IDs"
+    },
+    {
+      "id": "rehashed-duplicate-unit-id",
+      "outcome": "passed",
+      "rejection": "Unit review ledger is not exactly the 215 scope IDs"
+    },
+    {
+      "id": "rehashed-wrong-atlas-target",
+      "outcome": "passed",
+      "rejection": "Atlas target disagrees with baseline native/member mapping: 47425931B83994928044563"
+    },
+    {
+      "id": "rehashed-wrong-parent-child-inventory",
+      "outcome": "passed",
+      "rejection": "Parent child inventory mismatch: framework:province:alto-parana:e2d2fcc6ce30"
+    },
+    {
+      "id": "wrong-aggregate-source-name",
+      "outcome": "passed",
+      "rejection": "Source name changed from pinned baseline row: 47425931B88739802745947"
+    },
+    {
+      "id": "wrong-atlas-name",
+      "outcome": "passed",
+      "rejection": "Atlas target name disagrees with target feature: 47425931B83994928044563"
+    },
+    {
+      "id": "wrong-mapping-type",
+      "outcome": "passed",
+      "rejection": "Mapping type disagrees with baseline native/member identity: 47425931B83994928044563"
+    },
+    {
+      "id": "wrong-source-level",
+      "outcome": "passed",
+      "rejection": "Source level/type mismatch: 47425931B83994928044563"
+    },
+    {
+      "id": "wrong-source-name",
+      "outcome": "passed",
+      "rejection": "Source name changed from pinned baseline row: 47425931B83994928044563"
+    }
+  ],
+  "issue": 1111,
+  "version": 1
+}
