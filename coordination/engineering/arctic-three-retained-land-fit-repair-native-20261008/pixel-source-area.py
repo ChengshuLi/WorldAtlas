@@ -93,7 +93,7 @@ def run(plan,output,guard_only=False):
         source=admitted_read(pins[0],pins[0] in plan['runtime_files'])
         codes={code.co_name:code for code in compile(source,filename,'exec').co_consts if hasattr(code,'co_code')}
         assert function.__code__==codes[function.__name__],function.__name__
-    signatures=[hashlib.sha256(marshal.dumps(f.__code__)).hexdigest() for f in functions]
+    captured_codes=[f.__code__ for f in functions]
     native=shapely.lib.is_valid
     operators={name:getattr(numpy,name) for name in ('sin','cos','arctanh','deg2rad','dot','asarray')}
     math_operators={name:getattr(math,name) for name in ('fsum','sin','cos','isfinite')}
@@ -105,7 +105,7 @@ def run(plan,output,guard_only=False):
         assert functions[3:]==[run,ordinary,admitted_read,require_area_globals]
         assert all(getattr(numpy,name) is value for name,value in operators.items())
         assert all(getattr(math,name) is value for name,value in math_operators.items())
-        assert signatures==[hashlib.sha256(marshal.dumps(f.__code__)).hexdigest() for f in functions]
+        assert all(f.__code__ is code for f,code in zip(functions,captured_codes))
         assert shapely.lib.is_valid is native
         assert quadrature==[a.tobytes() for a in [ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS]]
         assert ellipsoidal_area.ring_area.__defaults__==(ellipsoidal_area.NODES,ellipsoidal_area.WEIGHTS)
