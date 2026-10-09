@@ -1,0 +1,146 @@
+{
+  "positive": 1,
+  "rejected": 5,
+  "actual_production_source_sha256": "ca588adfa1eac6ac5ca62878b33c43c5b4d3d3fd065636661e0776cfa22bb7c8",
+  "metadata": {
+    "selection": {
+      "version": 1,
+      "method": "native-linear-evenodd-first-owner-v1",
+      "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+      "selected_geography": {
+        "version": 1,
+        "kind": "complete-world-index-with-exact-encoded-overrides",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+        "bytes": 14644,
+        "sha256": "e2907b8ccfcbb4d5f7747cc5bbaf289ad43da4aee61f88da73699fb533b56776"
+      },
+      "artifact_consumption": {
+        "certificate": {
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+          "mode": "100644",
+          "bytes": 44026,
+          "sha256": "c968712b2d72ebb95a0a0d53f58a551d06d5daf06563ba088d842ba15e47b70e"
+        },
+        "review": {
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review-999db53b.json",
+          "mode": "100644",
+          "bytes": 7071,
+          "sha256": "7bd742247d4f2c2435fcb8c9bbc3134d3edc6193f312171bdb9a3b2ffd769c72"
+        }
+      }
+    },
+    "stage": {
+      "version": 4,
+      "issue": 1520,
+      "kind": "arctic-qualified-artifact-application-consumption-v1",
+      "subjects": [
+        "atlas:physical:CAN-15:NWT",
+        "atlas:physical:CAN-25:NUN"
+      ],
+      "before_footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433",
+      "after_footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json",
+      "priorStage": {
+        "path": "data/native-context-migration/manifest.json",
+        "bytes": 9279,
+        "sha256": "78347715e701c7e7d9775d17f3934dd3c1b61dbc46533d6179c979ae629d69d7"
+      },
+      "registry": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/releases-v9.json.gz",
+        "bytes": 237425,
+        "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+        "decoded_bytes": 745951,
+        "decoded_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+      },
+      "priorRegistry": {
+        "path": "data/geographic-releases/releases-v8.json.gz",
+        "bytes": 195488,
+        "sha256": "10052f88a3ecdd42d555f05a2d5672c212d2ca9196cff383f8ce7a4cccd7652e",
+        "decoded_bytes": 655490,
+        "decoded_sha256": "a937c0fe3afee1e565d05580daa5822f686b7c7678ed244958e8730a98b44b33"
+      },
+      "changedRows": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/changed-complete-context-rows.json",
+        "bytes": 56733,
+        "sha256": "415fe26f080cbf831be326dc7ac29b59c7758ba04a6143fe454fb86a54be62a3"
+      },
+      "contextIndex": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-index-v9.json",
+        "bytes": 9411,
+        "sha256": "049a956fb1225a3188807a9949393a1343b17926021fb40a415f374de8a91e2b"
+      },
+      "nativeManifest": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "bytes": 252447,
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+      },
+      "priorNativeManifest": {
+        "path": "data/canonical-grid/eastern-v8/manifest.json",
+        "bytes": 251732,
+        "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+      },
+      "nativeComparison": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+        "bytes": 14625,
+        "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691"
+      },
+      "geometryManifest": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/geometry-manifest.json",
+        "bytes": 423,
+        "sha256": "09b5eb619d15eef705fff210e78360734de5804e1c573c984f78254d62a78bb0"
+      },
+      "migrationReceipt": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json",
+        "bytes": 1930289,
+        "sha256": "fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6"
+      },
+      "numericalCatalogue": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prior-numerical-inputs.json",
+        "bytes": 24253,
+        "sha256": "c30a7f4412ee422c2995e305d227aaf32d09adddb8b670a116f2aed3502429f0"
+      },
+      "registryContinuation": {
+        "manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+        "pin": {
+          "commit": "77b345faf2fc02df8e6669ac4b6ea746e81a61cd",
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+          "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691",
+          "role": "reviewed-exhaustive-native-rule-comparison",
+          "installation_approval": false
+        }
+      },
+      "artifact_consumption": {
+        "certificate": {
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+          "mode": "100644",
+          "bytes": 44026,
+          "sha256": "c968712b2d72ebb95a0a0d53f58a551d06d5daf06563ba088d842ba15e47b70e"
+        },
+        "review": {
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/independent-consumption-review-999db53b.json",
+          "mode": "100644",
+          "bytes": 7071,
+          "sha256": "7bd742247d4f2c2435fcb8c9bbc3134d3edc6193f312171bdb9a3b2ffd769c72"
+        }
+      },
+      "pixelAudit": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/pixel-audit-v9.json",
+        "mode": "100644",
+        "bytes": 14325660,
+        "sha256": "fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda"
+      }
+    }
+  },
+  "order": [
+    "preflight",
+    "issue",
+    "mkdir",
+    "restore",
+    "consume",
+    "install"
+  ],
+  "limitation": "Exact production function, real complete metadata and stubbed delegated boundaries; no restoration, consumption, installer or full normal checkout qualification."
+}

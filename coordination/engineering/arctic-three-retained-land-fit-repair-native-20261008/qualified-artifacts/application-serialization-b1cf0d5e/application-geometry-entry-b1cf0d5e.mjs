@@ -1,0 +1,3 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash}from'node:crypto';
+import {issueApplicationGeometry}from"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-producer.mjs";
+const raw=fs.readFileSync(process.argv[2]);assert.equal(createHash('sha256').update(raw).digest('hex'),process.env.WORLDATLAS_SELECTED_NATIVE_PLAN_RAW_SHA256);const plan=JSON.parse(raw);assert.equal(plan.head,process.env.WORLDATLAS_SELECTED_NATIVE_HEAD);console.log(JSON.stringify(issueApplicationGeometry(plan,process.argv[3])));

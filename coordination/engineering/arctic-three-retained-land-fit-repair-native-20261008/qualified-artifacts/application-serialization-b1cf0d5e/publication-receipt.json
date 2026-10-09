@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "kind": "qualified-geometry-application-serialization",
+  "source_head": "b1cf0d5efa6943c1c1a991aaec8ead3d83bf5511",
+  "sources": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1295-normal-consumer-materialization-20261008/image-e079-async/data/geography/part-29.json",
+      "mode": 420,
+      "bytes": 12932407,
+      "sha256": "c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8",
+      "role": "original-application-part"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29.json.gz",
+      "mode": 420,
+      "bytes": 3399520,
+      "sha256": "5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8",
+      "role": "qualified-scientific-part",
+      "decoded_bytes": 12932723,
+      "decoded_sha256": "4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/changed-complete-context-rows.json",
+      "mode": 420,
+      "bytes": 56733,
+      "sha256": "415fe26f080cbf831be326dc7ac29b59c7758ba04a6143fe454fb86a54be62a3",
+      "role": "qualified-changed-records"
+    }
+  ],
+  "code": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-producer.mjs",
+      "mode": 420,
+      "bytes": 5096,
+      "sha256": "e3c821f3d30691b4c626127af80a8792864b258a3c4e04eb7a474773697baf5c"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-serialization.mjs",
+      "mode": 420,
+      "bytes": 5382,
+      "sha256": "0cd990c586eba990671a535931ee9385d55fc963d2d2e473e83b2a2a37fa45e0"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/phase-admission.mjs",
+      "mode": 420,
+      "bytes": 5103,
+      "sha256": "990a1f09cc0757cd4ddfef4253b07b184e3dd023e746c0046259a8a7f5d85d8f"
+    }
+  ],
+  "runtime": {
+    "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "mode": 493,
+    "bytes": 121304480,
+    "sha256": "9caea9deafcb0c7f22fac3206c32f0dcaf8d1f13460b0be3017fa09e7a4be4f6"
+  },
+  "changed_ids": [
+    "atlas:physical:CAN-15:NWT",
+    "atlas:physical:CAN-25:NUN"
+  ],
+  "unchanged_literal_full_records": 1498,
+  "application": {
+    "bytes": 3353763,
+    "sha256": "d7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49",
+    "decoded_bytes": 12932719,
+    "decoded_sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3"
+  },
+  "inverse": {
+    "bytes": 122564,
+    "sha256": "ba9f1a903fa1619d2ce6e10adc9eb01f446210bb71741fd9361b7360c648368d"
+  },
+  "full_qualified_record_values_equal": true,
+  "exact_qualified_target_geometry_json": true,
+  "complete_original_byte_inverse": true,
+  "scientific_execution": false,
+  "prospective_phase_bytes": 171744036,
+  "output_reserve_bytes": 20971520
+}
