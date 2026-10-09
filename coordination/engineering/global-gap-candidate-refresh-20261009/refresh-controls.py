@@ -26,4 +26,9 @@ r=copy.deepcopy(row);r.update({'component_id':source_id,'current_geometry_sha256
 result=catalog.refresh_record(r,progress[source_id],r['current_geometry_sha256'],{source_id});assert result['class']=='unresolved' and not result['repair_ready'] and result['pipeline_status']['state']=='eligible-source-relative-rule'
 for name,edit,expected in [('unknown-production-delivery',lambda v:v['integrated'].update(production_delivered=True),'Unknown delivery'),('missing-selected-bank-binding',lambda v:v['integrated']['evidence'].pop('selection'),'Missing current bank'),('source-only-physical-promotion',lambda v:v['source_relative_repair'].update(physical_authority_approved=True),'Source-only'),('foreign-candidate-ID',lambda v:v.update(component_id=source_id),'Foreign/stale')]:
  x=copy.deepcopy(p);edit(x);reject(name,lambda:catalog.refresh_record(row,x,row['current_geometry_sha256'],{identity}),expected)
-print(json.dumps({'scope':'Actual retained input/helper controls only; no GIS, native or scientific execution','positive_count':3,'negative_count':len(neg),'negatives':neg},sort_keys=True))
+arctic=next(v for v in progress.values() if v.get('remaining_tasks',[{}])[0].get('issue')==1520)
+assert arctic['remaining_tasks'][0]['issue']==1520 and arctic['source_relative_repair']['constructed'] is True
+x=copy.deepcopy(arctic);x['source_relative_repair']['evidence'].pop('construction')
+reject('missing-actual-construction-outcome',lambda:catalog.refresh_record(dict(r,component_id=x['component_id'],current_geometry_sha256=x['geometry_sha256']),x,x['geometry_sha256'],{x['component_id']}),'construction lacks supporting outcome')
+mutation('closed-current-integration-task','current-issue-1520.json',lambda v:v.update(state='closed'),'current remaining')
+print(json.dumps({'scope':'Actual retained input/helper controls only; no GIS, native or scientific execution','positive_count':4,'negative_count':len(neg),'negatives':neg},sort_keys=True))
