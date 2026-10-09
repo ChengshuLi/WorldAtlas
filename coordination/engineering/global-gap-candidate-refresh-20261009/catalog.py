@@ -149,8 +149,10 @@ def refresh_record(original,progress,expected_geometry,authority_ids):
         state='repaired-verified-selected-release';domain='verified-offline-selected-release';missing=['verified-production-delivery']
     elif record['source_relative_repair']:
         state='eligible-source-relative-rule';domain='retained-source-relative-reference';missing=['fresh-current-bank-rebind','normal-consumer-integration','physical-authority-and-observation-date']
-    elif record['class'] in ('water','reference-disagreement'):
+    elif record['class']=='water':
         state='confirmed-water-or-no-defect';domain='accepted-physical-classification';missing=[]
+    elif record['class']=='reference-disagreement':
+        state='rejected-or-ambiguous';domain='accepted-reference-disagreement';missing=['accepted-no-defect-or-reference-resolution']
     elif record.get('source_rule_exception'):
         state='rejected-or-ambiguous';domain='retained-source-relative-reference';missing=['source-parent-exception-resolution','physical-authority-and-observation-date']
     elif record['source_flags']['source_comparison'] or record['source_flags']['numerical_diagnosis']:

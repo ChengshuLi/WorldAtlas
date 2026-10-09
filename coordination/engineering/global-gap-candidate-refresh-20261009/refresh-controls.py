@@ -31,4 +31,10 @@ assert arctic['remaining_tasks'][0]['issue']==1520 and arctic['source_relative_r
 x=copy.deepcopy(arctic);x['source_relative_repair']['evidence'].pop('construction')
 reject('missing-actual-construction-outcome',lambda:catalog.refresh_record(dict(r,component_id=x['component_id'],current_geometry_sha256=x['geometry_sha256']),x,x['geometry_sha256'],{x['component_id']}),'construction lacks supporting outcome')
 mutation('closed-current-integration-task','current-issue-1520.json',lambda v:v.update(state='closed'),'current remaining')
-print(json.dumps({'scope':'Actual retained input/helper controls only; no GIS, native or scientific execution','positive_count':4,'negative_count':len(neg),'negatives':neg},sort_keys=True))
+ambiguous=copy.deepcopy(r);ambiguous['class']='reference-disagreement'
+projected=catalog.refresh_record(ambiguous,None,ambiguous['current_geometry_sha256'],{ambiguous['component_id']});assert projected['pipeline_status']['state']=='rejected-or-ambiguous' and projected['next_work']['missing_facts']==['accepted-no-defect-or-reference-resolution']
+d=refresh.distributions(95173,{'awaiting-evidence':95173},{'delivered':0},95173);assert len(d['exclusive_pipeline_counts'])==6 and d['exclusive_pipeline_percentages']['awaiting-evidence']==100 and d['exclusive_pipeline_percentages']['confirmed-water-or-no-defect']==0 and d['count_percentages']['delivered']==0
+reject('wrong-percentage-denominator',lambda:refresh.distributions(95172,{'awaiting-evidence':95172},{'delivered':0},95173),'denominator')
+reject('percentage-conservation-drift',lambda:refresh.distributions(95173,{'awaiting-evidence':95172},{'delivered':0},95173),'conservation')
+reject('bool-percentage-count',lambda:refresh.distributions(95173,{'awaiting-evidence':95173},{'delivered':True},95173),'count types')
+print(json.dumps({'scope':'Actual retained input/helper controls only; no GIS, native or scientific execution','positive_count':6,'negative_count':len(neg),'negatives':neg},sort_keys=True))

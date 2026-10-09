@@ -121,6 +121,14 @@ def leaf(repo,head,index,dest):
     phase.output('membership-metrics.jsonl.gz',b''.join(bio.canonical(r) for r in metrics),True)
     return finish(phase,code,{'stage':'refreshed-catalog-leaf','execution_commit':head,'ordinal':index,'component_count':len(output),'original_inventory':part['inventory'],'limits':'Metadata reconciliation only; no new scientific, physical or production approval.'})
 
+def distributions(component_count,pipeline,counts,expected_total):
+    bio.need(type(component_count) is int and type(expected_total) is int and component_count==expected_total and component_count>0,'Exact original percentage denominator')
+    bio.need(set(pipeline)<=set(catalog.PIPELINE) and all(type(v) is int and v>=0 for v in pipeline.values()),'Exact disjoint pipeline count types')
+    full={state:pipeline.get(state,0) for state in catalog.PIPELINE}
+    bio.need(sum(full.values())==component_count,'Percentage disjoint count conservation')
+    bio.need(all(type(v) is int and 0<=v<=component_count for v in counts.values()),'Exact bounded progress count types')
+    return {'percentage_denominator':{'value':component_count,'unit':'original candidates','scope':'complete original catalog'},'exclusive_pipeline_counts':full,'exclusive_pipeline_percentages':{k:100*v/component_count for k,v in full.items()},'count_percentages':{k:100*v/component_count for k,v in counts.items()}}
+
 def parent(repo,head,dest):
     path=Q+'inputs/parent-pins.json';raw=metadata(repo,head,path);pins=json.loads(raw);own={'commit':head,'path':path,'bytes':len(raw),'sha256':bio.sha(raw)}
     basepins=declaration(repo,head);ep=next(p for p in basepins if p['path'].endswith('/expectation.json'));rp=next(p for p in basepins if p['path'].endswith('/runtime.json'))
@@ -138,7 +146,7 @@ def parent(repo,head,dest):
     for k in ('accepted_classifications','implemented','fully_integrated','delivered','accepted_source_relative_repair_decisions'):bio.need(counts[k]==expect[k],'Frozen refresh expectation drift: '+k)
     for k,v in {'source_comparison':57785,'historical_555_witness':555,'unique_source_witness_1391':1391,'land_plus_unique_route_1005':1005}.items():bio.need(flags[k]==v,'Original observation cohort drift')
     bio.need(nested=={'numeric_1391':142,'numeric_555':60,'555_1005':430},'Original exact intersections drift')
-    report={'component_count':len(seen),'counts':dict(counts),'classes':dict(classes),'exclusive_pipeline_counts':dict(pipeline),'supporting_observation_counts':dict(flags),'exact_intersections':dict(nested),'catalog_output_inventory':catalog_outputs,'authority_domains_separate':True,'limits':expect['limits']+['Offline integration2 is not production delivery. Accepted source-relative16 is not accepted contemporary physical authority.','Original source/numerical full scientific work remains separate; this refresh does no source preparation, geometry calculation, native computation or activation.']}
+    report={'component_count':len(seen),'counts':dict(counts),'classes':dict(classes),**distributions(len(seen),dict(pipeline),dict(counts),expect['original_component_count']),'supporting_observation_counts':dict(flags),'exact_intersections':dict(nested),'catalog_output_inventory':catalog_outputs,'authority_domains_separate':True,'limits':expect['limits']+['Offline integration2 is not production delivery. Accepted source-relative16 is not accepted contemporary physical authority.','Original source/numerical full scientific work remains separate; this refresh does no source preparation, geometry calculation, native computation or activation.']}
     phase.output('report.json',bio.canonical(report));phase.output('report.md',('Original candidates: '+str(len(seen))+'\n\n'+json.dumps(dict(counts),sort_keys=True)+'\n\n'+'\n'.join(report['limits'])+'\n').encode())
     return finish(phase,code,{'stage':'refreshed-parent-report','execution_commit':head,**{k:v for k,v in counts.items()},'component_count':len(seen)})
 
