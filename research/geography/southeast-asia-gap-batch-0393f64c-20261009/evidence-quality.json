@@ -1306,6 +1306,30 @@
       "bytes": 41908,
       "sha256": "232886a4cd125999ede9a2b118dcc246df198dd66dca2f4fb6d967e8ac02f931",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
+      "bytes": 27522,
+      "sha256": "42d129e32555fb98af80aa4397ed6244c500ec82f1fd0b9bc02cfc09f99aa7b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
+      "bytes": 7872,
+      "sha256": "f89db720d719aa202f75c5b0bb11bb2da8e3e4af08654177f6858af4cb53841d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/publication.json",
+      "bytes": 300,
+      "sha256": "bc2ed3d3e640191c64e6258505cefc6b01ec485de12f047a2333d750a4113cf0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/publication.json",
+      "bytes": 516,
+      "sha256": "70b9ad1062369974965b435875912b0fcb259b3e03097a6e5d7995dc8ff6eff9",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -1455,6 +1479,116 @@
     "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
     "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
     "node scripts/evidence-quality.mjs research/geography/southeast-asia-gap-batch-0393f64c-20261009/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-readback-renewed.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-renewal-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/claim-work-renewal.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/geo3-next-full-batch-318.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/issue-contract-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/live-claim-scope-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/preclaim-readiness-18735.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/provenance/administrative-sources.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/provenance/administrative.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-BRN-ADM1.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-IDN-ADM2.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-IND-ADM2.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-MMR-ADM3.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-PHL-ADM3.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-THA-ADM2.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-VNM-ADM2.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/priority-source-target.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/priority-source-target-001/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/component-state.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/summary.json",
+      "status": "added"
+    }
   ],
   "metric_bindings": [
     {
