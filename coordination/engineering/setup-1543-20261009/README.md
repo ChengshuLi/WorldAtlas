@@ -70,3 +70,5 @@ another worker's checkout. Full package/browser validation belongs to the normal
 hosted engineering path when the local slot cannot admit the complete package.
 
 Reports and initial-state checkpoints use lossless JSON gzip transport. The retained-report index records both original and compressed body identities. Diagnostic source text is archived provenance with original host paths, not a portable or approved reproduction command.
+
+Independent review correction: output collision admission uses lstat, so dangling symlinks reject before input reads or lease/checkpoint creation. The final focused control rerun passes 48 tests with zero skips. Its first two attempts lacked sparse manifest fixtures; these setup failures are retained locally, and the rerun materialized the three exact HEAD manifest inputs without rebuilding products. Archived timings predate this admission-only correction; they are not measurements of the final source hash.

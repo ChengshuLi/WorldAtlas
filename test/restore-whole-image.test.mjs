@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
 import {retainWholeImage,restoreWholeImage as originalRestore} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs';
 import {restoreWholeImage} from '../scripts/evidence/restore-whole-image.mjs';
 const sha = raw => createHash('sha256').update(raw).digest('hex');
@@ -59,4 +60,24 @@ test('existing destination and linked parts preserve original sentinels',t=>{
  assert.throws(()=>restoreWholeImage(f.wire,f.out,{expectedIndexSha:f.pin()}));assert.equal(fs.readFileSync(sentinel,'utf8'),'untouched');
  fs.rmSync(f.out,{recursive:true});const part=path.join(f.wire,f.index.parts[0].path),backup=path.join(f.root,'backup');fs.renameSync(part,backup);fs.symlinkSync(backup,part);
  assert.throws(()=>restoreWholeImage(f.wire,f.out,{expectedIndexSha:f.pin()}));assert(!fs.existsSync(f.out));
+});
+
+test('dangling destination is rejected before reading image inputs',t=>{
+ const f=fixture(t);fs.symlinkSync('missing-target',f.out);
+ fs.unlinkSync(path.join(f.wire,'index.json'));
+ assert.throws(()=>restoreWholeImage(f.wire,f.out,{expectedIndexSha:'0'.repeat(64)}),/Fresh ordinary image destination/);
+ assert.equal(fs.readlinkSync(f.out),'missing-target');
+ assert(!fs.existsSync(path.join(f.root,'missing-target')));
+});
+
+for(const suffix of ['', '.initial.json', '.lease'])test(`profile refuses dangling ${suffix||'result'} before input reads or output writes`,t=>{
+ const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'worldatlas-profile-collision-')));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const relative='coordination/engineering/setup-1543-20261009/result.json',output=path.join(root,relative);
+ fs.mkdirSync(path.dirname(output),{recursive:true});fs.symlinkSync('missing-target',output+suffix);
+ const env={...process.env};delete env.GH_TOKEN;delete env.GITHUB_TOKEN;delete env.NODE_OPTIONS;
+ const run=spawnSync(process.execPath,[path.resolve('coordination/engineering/setup-1543-20261009/profile-restoration.mjs'),'captured',relative],{cwd:root,env,encoding:'utf8'});
+ assert.notEqual(run.status,0);assert.match(run.stderr,/Fresh ordinary profile output required/);
+ assert.deepEqual(fs.readdirSync(path.dirname(output)),['result.json'+suffix]);
+ assert.equal(fs.readlinkSync(output+suffix),'missing-target');
 });

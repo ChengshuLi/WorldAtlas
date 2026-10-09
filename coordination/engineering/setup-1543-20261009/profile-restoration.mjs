@@ -4,7 +4,8 @@ const [variant,output]=process.argv.slice(2);
 assert(['original','captured'].includes(variant)&&typeof output==='string');
 const root=fs.realpathSync(process.cwd()),owned='coordination/engineering/setup-1543-20261009/';
 assert(output.startsWith(owned)&&!output.includes('..')&&!path.isAbsolute(output));
-assert(!fs.existsSync(output)&&!fs.existsSync(output+'.initial.json')&&!fs.existsSync(output+'.lease')&&fs.realpathSync(path.dirname(path.join(root,output)))===path.dirname(path.join(root,output)),'Fresh ordinary profile output required');
+function absent(file){try{fs.lstatSync(file);return false;}catch(error){if(error.code==='ENOENT')return true;throw error;}}
+assert(absent(output)&&absent(output+'.initial.json')&&absent(output+'.lease')&&fs.realpathSync(path.dirname(path.join(root,output)))===path.dirname(path.join(root,output)),'Fresh ordinary profile output required');
 assert(!process.env.GH_TOKEN&&!process.env.GITHUB_TOKEN&&!process.env.NODE_OPTIONS);
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const namespace='coordination/engineering/eastern-two-gap-repair-native-20261007';

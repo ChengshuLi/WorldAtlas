@@ -35,12 +35,16 @@ function bytes(root, relative) {
     return raw.subarray(0, offset);
   } finally { fs.closeSync(fd); }
 }
+function absent(file) {
+  try { fs.lstatSync(file); return false; }
+  catch (error) { if (error.code === 'ENOENT') return true; throw error; }
+}
 function boundedInteger(value, limit, name) {
   assert(Number.isSafeInteger(value) && value > 0 && value <= limit, name);
 }
 export function restoreWholeImage(source, out, {expectedIndexSha}) {
   assert(path.isAbsolute(source) && fs.realpathSync(source) === source);
-  assert(path.isAbsolute(out) && !fs.existsSync(out));
+  assert(path.isAbsolute(out) && absent(out), 'Fresh ordinary image destination required');
   assert(fs.realpathSync(path.dirname(out)) === path.dirname(out));
   assert(digest(expectedIndexSha));
   const indexRaw = bytes(source, 'index.json');
