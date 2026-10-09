@@ -408,8 +408,9 @@ export function readSelectedAdditive(snapshot) {
   demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported source policy semantics/version');
   // Previous acquisition bodies have been discarded. Only the complete selected
   // metadata/proof views are live across genuine detached authority phases.
-  const child=new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,outputBytes:reader.outputBytes,metadataBytes:reader.metadataBytes+retained,gitExecutable:reader.gitExecutable});
+  const child=new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,outputBytes:4*1024*1024,metadataBytes:reader.metadataBytes+retained,gitExecutable:reader.gitExecutable});
   const proof=readRetainedRegistryAuthority(child,entry);
+  demand(valueBytes(proof).length<=child.outputBytes,'Complete detached authority view exceeds prospective output reserve');
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
    demand(original&&['assigned','zero-cell'].includes(original.disposition)&&same({...original,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},row),'Selected component rebinds original full native/source primitive');
