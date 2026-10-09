@@ -6,6 +6,46 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 const root=process.cwd(),N2='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008';
+// Faithful retained-index boundary: real whole original metadata, exact
+// production reader/inverse and continuation bodies. The private authority
+// callback is a distinct fixture identity; this does not qualify consumption.
+if(process.argv[2]==='--retained-index-controls') {
+ const git=process.platform==='darwin'?'/Library/Developer/CommandLineTools/usr/bin/git':'/usr/bin/git';
+ const before=execFileSync(git,['show','HEAD:data/prepared-evidence/index.json']);
+ const pin={path:'data/prepared-evidence/index.json',bytes:14987,sha256:'b233282e4ea3f3e51658f6f1a272e995ddf93823c9f74759e1a353261c3baa5e'};
+ const hash=b=>createHash('sha256').update(b).digest('hex');assert.equal(before.length,pin.bytes);assert.equal(hash(before),pin.sha256);
+ const receipt=JSON.parse(fs.readFileSync(path.join(N2,'migration-receipt.json')));
+ const token={kind:'authenticated-qualified-artifact-consumption-v1',steps:[{receipt,receipt_sha256:hash(fs.readFileSync(path.join(N2,'migration-receipt.json')))}]};
+ const continuationSource=fs.readFileSync(path.join(N2,'retained-product-binding.mjs'),'utf8');
+ const begin=continuationSource.indexOf('export function continueRetainedProductIndex');assert(begin>0);
+ const authority=value=>assert.equal(value,token,'Foreign control authority');
+ const continueIndex=new Function('assert','requireValidatedGeometryMigrations','requireConsumedArcticArtifacts','BEFORE','AFTER',continuationSource.slice(begin).replace('export function','function')+'\nreturn continueRetainedProductIndex;')(assert,()=>assert.fail('Unexpected live route'),authority,receipt.before_footprints_sha256,receipt.after_footprints_sha256);
+ const installer=fs.readFileSync(path.join(N2,'install-v9-stage.mjs'),'utf8');
+ const body=installer.slice(installer.indexOf('function body('),installer.indexOf('function write('));
+ const fn=installer.slice(installer.indexOf('export function authenticateRetainedIndex('),installer.indexOf('export async function installV9Stage(')).replace('export function','function');
+ const authenticate=new Function('assert','fs','path','sha','continueRetainedProductIndex',body+fn+'\nreturn authenticateRetainedIndex;')(assert,fs,path,hash,continueIndex);
+ const directory=fs.mkdtempSync(path.join(root,'.cache/retained-index-controls-'));const file=path.join(directory,pin.path);fs.mkdirSync(path.dirname(file),{recursive:true});
+ const original=JSON.parse(before),next=continueIndex(original,{context:token,kind:'prepared-evidence'}),current=Buffer.from(JSON.stringify(next)+'\n');
+ let positive=0,refused=0;
+ const invoke=(raw,context=token)=>{fs.writeFileSync(file,raw,{mode:0o644});return authenticate(directory,pin,{context,kind:'prepared-evidence'});};
+ try {
+  for(const raw of [before,current]){const value=invoke(raw);assert(value.originalRaw.equals(before));assert.deepEqual(value.original,original);assert.equal(value.alreadyContinued,raw===current);positive++;}
+  const changes=[v=>v.footprints_sha256='0'.repeat(64),v=>v.physical_association_continuation.receipt_sha256='0'.repeat(64),v=>v.physical_association_continuation.kind='reference-attributes',v=>v.physical_association_continuation.changed_ids.pop(),v=>v.physical_association_continuation.predecessor_footprints_sha256='0'.repeat(64),v=>v.physical_association_continuation.new_factual_import=true,v=>v.parts[0].sha256='0'.repeat(64),v=>delete v.physical_association_continuation];
+  for(const change of changes){const value=structuredClone(next);change(value);assert.throws(()=>invoke(Buffer.from(JSON.stringify(value)+'\n')));refused++;}
+  assert.throws(()=>invoke(Buffer.from(JSON.stringify(next,null,2)+'\n')));refused++;
+  assert.throws(()=>invoke(current,structuredClone(token)));refused++;
+  assert.throws(()=>invoke(Buffer.from(before.toString().replace(original.footprints_sha256,'0'.repeat(64)))));refused++;
+  invoke(current);fs.chmodSync(file,0o755);assert.throws(()=>authenticate(directory,pin,{context:token,kind:'prepared-evidence'}));fs.chmodSync(file,0o644);refused++;
+  const referencePin={path:'data/reference-attributes/index.json',bytes:36740,sha256:'e21a5361d7ab74f8c9a909b681c6eda0d0c6c1e1becf36154bcf5b4b2215c356'};
+  const referenceRaw=execFileSync(git,['show','HEAD:'+referencePin.path]);assert.equal(referenceRaw.length,referencePin.bytes);assert.equal(hash(referenceRaw),referencePin.sha256);
+  const reference=JSON.parse(referenceRaw),referenceNext=continueIndex(reference,{context:token,kind:'reference-attributes'}),referenceFile=path.join(directory,referencePin.path);fs.mkdirSync(path.dirname(referenceFile),{recursive:true});
+  for(const bytes of [referenceRaw,Buffer.from(JSON.stringify(referenceNext)+'\n')]){fs.writeFileSync(referenceFile,bytes,{mode:0o644});const value=authenticate(directory,referencePin,{context:token,kind:'reference-attributes'});assert(value.originalRaw.equals(referenceRaw));assert.deepEqual(value.original,reference);positive++;}
+  invoke(current);const {readPreparedEvidenceBundle}=await import('../../../scripts/read-prepared-evidence-bundle.mjs');
+  await assert.rejects(()=>readPreparedEvidenceBundle(path.dirname(file)),/ENOENT/);refused++;
+  console.log(JSON.stringify({retained_index_positive:positive,refusals:refused,original_pin:pin,continued_bytes:current.length,continued_sha256:hash(current),installer_sha256:hash(Buffer.from(installer)),limitation:'Real original metadata and exact production function bodies; distinct fixture authority, no whole artifact consumption, payload restoration or scientific execution.'}));
+ } finally {fs.rmSync(directory,{recursive:true,force:true});}
+ process.exit(0);
+}
 // This observational branch runs only AFTER the ordinary build has completed.
 // It does not issue a consumption identity or re-execute scientific qualification.
 function reportDestination(value){

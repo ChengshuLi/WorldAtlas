@@ -11,14 +11,14 @@ import {requireArcticContinuation} from './arctic-context.mjs';
 import {requireConsumedArcticArtifacts, normalizedReleaseProductPins} from './qualified-artifact-consumer.mjs';
 const N='coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008';
 const sha=b=>createHash('sha256').update(b).digest('hex');
-function body(root,pin){
+function body(root,pin,{retainedIndex=false}={}){
  assert(!path.isAbsolute(pin.path)&&pin.path.split('/').every(s=>s&&s!=='.'&&s!=='..'));
  assert(Number.isSafeInteger(pin.bytes)&&pin.bytes<=32*1024*1024);
  const file=path.join(root,pin.path);for(let p=file;;p=path.dirname(p)){assert(!fs.lstatSync(p).isSymbolicLink());if(p===path.dirname(p))break}
- const before=fs.lstatSync(file);assert(before.isFile()&&(before.mode&511)===420&&before.size===pin.bytes);
+ const before=fs.lstatSync(file);assert(before.isFile()&&(before.mode&511)===420&&before.size<=32*1024*1024);if(!retainedIndex)assert.equal(before.size,pin.bytes);
  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
  try{for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(before[k],fs.fstatSync(fd)[k]);raw=fs.readFileSync(fd);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(before[k],fs.fstatSync(fd)[k]);}finally{fs.closeSync(fd)}
- const after=fs.lstatSync(file);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(before[k],after[k]);assert.equal(sha(raw),pin.sha256);return raw;
+ const after=fs.lstatSync(file);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(before[k],after[k]);if(!retainedIndex)assert.equal(sha(raw),pin.sha256);return raw;
 }
 function write(root,relative,raw){
  assert(!path.isAbsolute(relative)&&relative.split('/').every(s=>s&&s!=='.'&&s!=='..'));assert(raw.length<=32*1024*1024);const file=path.join(root,relative);
@@ -40,6 +40,23 @@ export function authenticateSelectedGeometry(root,pin) {
  assert.equal(geometry.length,pin.decoded_bytes);assert.equal(sha(geometry),pin.decoded_sha256);
  return geometry;
 }
+// A normal build exports the continued prepared index to its checkout. The
+// next model reader accepts it only through the complete original-byte inverse
+// and the same privately authorized continuation; no metadata allowlist grows.
+export function authenticateRetainedIndex(root,pin,{context,kind}) {
+ const raw=body(root,pin,{retainedIndex:true}),current=JSON.parse(raw);
+ if(raw.length===pin.bytes&&sha(raw)===pin.sha256)return {original:current,originalRaw:raw,current,alreadyContinued:false};
+ const original=structuredClone(current);
+ assert(Object.hasOwn(original,'physical_association_continuation'),'Unrecognized retained index vintage');
+ const association=original.physical_association_continuation;
+ assert.equal(association.predecessor_footprints_sha256,'b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433');
+ delete original.physical_association_continuation;original.footprints_sha256=association.predecessor_footprints_sha256;
+ const originals=[JSON.stringify(original),JSON.stringify(original,null,2)].map(text=>Buffer.from(text)).filter(bytes=>bytes.length===pin.bytes&&sha(bytes)===pin.sha256);
+ assert.equal(originals.length,1,'Retained index original-byte inverse differs');const originalRaw=originals[0];
+ const expected=continueRetainedProductIndex(original,{context,kind});
+ assert(raw.equals(Buffer.from(JSON.stringify(expected)+'\n')),'Continued index differs from its private authorized association');
+ return {original,originalRaw,current,alreadyContinued:true};
+}
 export async function installV9Stage({root,stage,context}){
  assert.equal(fs.realpathSync(root),root);
  const artifact=context.kind==='authenticated-qualified-artifact-consumption-v1';
@@ -55,10 +72,11 @@ export async function installV9Stage({root,stage,context}){
  // Actual normal-package union: no invented scientific aggregate limit. All
  // ordinary members retain32MiB cap; input/decode/output costs are reported.
  const retainedPins=[{path:'data/prepared-evidence/index.json',bytes:14987,sha256:'b233282e4ea3f3e51658f6f1a272e995ddf93823c9f74759e1a353261c3baa5e'},{path:'data/reference-attributes/index.json',bytes:36740,sha256:'e21a5361d7ab74f8c9a909b681c6eda0d0c6c1e1becf36154bcf5b4b2215c356'}];
- const retainedIndices=retainedPins.map(p=>JSON.parse(body(root,p)));
+ const retained=retainedPins.map((pin,i)=>authenticateRetainedIndex(root,pin,{context,kind:i===0?'prepared-evidence':'reference-attributes'}));
+ const retainedIndices=retained.map(value=>value.original);
  // The unchanged stock reader verifies all prepared payload/import bodies before
  // binding their retained same-ID records to the new physical reference.
- assert.deepEqual(await readPreparedEvidenceBundle(path.join(root,'data/prepared-evidence')),retainedIndices[0]);
+ assert.deepEqual(await readPreparedEvidenceBundle(path.join(root,'data/prepared-evidence')),retained[0].current);
  const continuedIndices=retainedIndices.map((index,i)=>continueRetainedProductIndex(index,{context,kind:i===0?'prepared-evidence':'reference-attributes'}));
  const ownerPin={path:'data/ownership-history/index.json',bytes:587478,sha256:'5ebc361385644f3a3069daafa2202403a47ec574bb723f82b68fa229a4c875fc'};
  const runtimePin={path:'data/ownership-runtime/index.json',bytes:789596,sha256:'6b900c855bb221fd1070b106d53432b362b0ef1128c92f765c4c29c9077541d8'};
@@ -96,7 +114,7 @@ export async function installV9Stage({root,stage,context}){
   const name='v9-'+nextOwnerSha+'/'+bucket.path;nextRuntime.buckets[i]={...rebound.pin,path:name};write(root,'data/ownership-runtime/'+name,rebound.bytes);temporalProofs.push({...rebound.proof,original_path:bucket.path,successor_path:name});}
  write(root,ownerPin.path,nextOwner);write(root,runtimePin.path,Buffer.from(JSON.stringify(nextRuntime)+'\n'));
  write(root,'.cache/n2-temporal-header-continuation.json',Buffer.from(JSON.stringify({version:1,issue:1520,old_source_index_sha256:ownerPin.sha256,new_source_index_sha256:nextOwnerSha,all_original_paths_retained:true,proofs:temporalProofs})+'\n'));
- for(let i=0;i<retainedPins.length;i++){write(root,'.cache/n2-preserved-v8/'+retainedPins[i].path,body(root,retainedPins[i]));write(root,retainedPins[i].path,Buffer.from(JSON.stringify(continuedIndices[i])+'\n'));}
+ for(let i=0;i<retainedPins.length;i++){write(root,'.cache/n2-preserved-v8/'+retainedPins[i].path,retained[i].originalRaw);write(root,retainedPins[i].path,Buffer.from(JSON.stringify(continuedIndices[i])+'\n'));}
  write(root,'data/geography/part-29.json',geometry);write(root,'data/pixel-audit.json',pixel);write(root,'data/granularity-audit.json',Buffer.from(JSON.stringify(audit)+'\n'));
  for(let i=0;i<releases.length;i++)write(root,'data/geographic-releases/'+releases[i].path,body(root,releasePins[i]));
  return {kind:artifact?'ephemeral-after-qualified-artifact-consumption':'ephemeral-after-three-live-validations',native_parts:56,old_native_urls_preserved:true,release_products:343,additional_release_installation_encoded_read_bytes:releasePins.reduce((sum,pin)=>sum+2*pin.bytes,0),old_global_bodies_preserved:oldPins.map(p=>({...p,path:'.cache/n2-preserved-v8/'+p.path})),scientific_producers_invoked:false,normal_package_aggregate_cap_invented:false};
