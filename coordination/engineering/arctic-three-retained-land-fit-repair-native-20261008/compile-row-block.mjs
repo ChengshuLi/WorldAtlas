@@ -2,6 +2,7 @@
 // The caller must authenticate and admit the COMPLETE owner operand roster.
 import {nativePolygonIntervals, NATIVE_GRID_METHOD} from '../../../src/native-grid.js';
 import {coverageRow} from '../../../scripts/audit-grid-intervals.mjs';
+import {createHash} from 'node:crypto';
 
 export function compileRowBlock(index, {size, latitudes, rowStart, rowEnd, maxRunBytes = 32 * 1024 * 1024}) {
   if (!Number.isInteger(size) || size < 2 || size > 300000 ||
@@ -66,6 +67,10 @@ export function compileRowBlock(index, {size, latitudes, rowStart, rowEnd, maxRu
     row_start: rowStart, row_end: rowEnd, checked_rows: rowEnd - rowStart,
     checked_cells: (rowEnd - rowStart) * size, rows, runs: Uint32Array.from(words),
     total_runs: totalRuns, owned_cells: ownedCells, multiple_owner_cells: multipleOwnerCells,
-    boundary_tie_records: native.ties.length, per_owner_cells: [...ownerCounts],
+    boundary_tie_records: native.ties.length,
+    // Ring direction may change enumeration order; preserve exact multiset.
+    boundary_tie_multiset_sha256: createHash('sha256').update(JSON.stringify(
+      native.ties.map(tie => JSON.stringify(tie)).sort())).digest('hex'),
+    per_owner_cells: [...ownerCounts],
     scientific_approval: false, installation_ready: false};
 }
