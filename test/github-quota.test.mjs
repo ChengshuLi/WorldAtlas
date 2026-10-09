@@ -77,3 +77,22 @@ test('final deadline is checked before a retry actually sends HTTP',async()=>{
   await assert.rejects(budget.api('/repos/a/b/pulls/1'),/deadline/);assert.equal(calls,1);budget.dispose();
  });
 });
+
+test('accounting observes real repository headers without an extra capacity poll or retained secrets',async()=>{
+ const accounting=requestAccounting('probe');let calls=0;
+ await mocked(async()=>{calls++;return response(200,calls===1?'42':'39',{'authorization':'private-secret'});},async()=>{
+  const api=githubAPI('private-secret',{onRequest:accounting.observe});
+  await api('/repos/a/b/pulls/1');await api('/repos/a/b/issues/2');
+ });
+ const receipt=accounting.receipt();assert.equal(calls,2);assert.equal(receipt.actual_http_attempts,2);
+ assert.deepEqual(receipt.observed_repository_core.first,{limit:1000,remaining:42,reset:100});
+ assert.deepEqual(receipt.observed_repository_core.last,{limit:1000,remaining:39,reset:100});
+ assert.equal(receipt.observed_repository_core.lowest_remaining.remaining,39);
+ assert(!JSON.stringify(receipt).includes('private-secret'));
+});
+test('unknown or wrong-resource headers cannot manufacture an observed repository quota',()=>{
+ const accounting=requestAccounting('probe');
+ for(const capacity of [{resource:'core',limit:1000,remaining:undefined,reset:100},{resource:'search',limit:30,remaining:3,reset:100},
+  {resource:'core',limit:1000,remaining:1001,reset:100}])accounting.observe({route:'/repos/a/b',method:'GET',status:200,capacity});
+ assert.equal(accounting.receipt().observed_repository_core,undefined);assert.equal(accounting.receipt().actual_http_attempts,3);
+});

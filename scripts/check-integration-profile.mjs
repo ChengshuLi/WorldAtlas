@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {requestAccounting,quotaDelay} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {githubAPI, githubPages, readClaim, verifyClaimForPR} from './issue-claim-contract.mjs';
@@ -42,9 +43,17 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
-  const result = await selectIntegrationProfile({event, repo: process.env.GITHUB_REPOSITORY,
-    api: githubAPI(process.env.GH_TOKEN)});
-  fs.appendFileSync(process.env.GITHUB_OUTPUT,
-    `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\n`);
-  console.log(JSON.stringify({integration_profile: result.profile, shards: result.shards}));
+  const accounting=requestAccounting('integration-profile');
+  try{
+    const result = await selectIntegrationProfile({event, repo: process.env.GITHUB_REPOSITORY,
+      api: githubAPI(process.env.GH_TOKEN,{onRequest:accounting.observe})});
+    fs.appendFileSync(process.env.GITHUB_OUTPUT,
+      `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\n`);
+    console.log(JSON.stringify({integration_profile: result.profile, shards: result.shards}));
+  }catch(error){
+    const delay=quotaDelay(error);
+    console.log(JSON.stringify({status:'refused',reason:error.message,...(error.github?{api_error:error.github}:{}),
+      retryable:delay!==null,...(delay!==null?{retry_at:new Date(Date.now()+delay).toISOString()}:{})}));
+    process.exitCode=1;
+  }finally{console.log(JSON.stringify({request_accounting:accounting.receipt()}));}
 }

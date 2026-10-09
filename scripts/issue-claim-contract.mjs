@@ -145,9 +145,10 @@ export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Da
   let response;
   try {response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS)});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
-  onRequest({route, method, status: response.status});
   const headerNumber = name => {const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
-  observeCapacity({limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')});
+  const capacity={limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')};
+  onRequest({route,method,status:response.status,capacity});
+  observeCapacity(capacity);
   if(!response.ok){
    const error=Error(`GitHub ${method} ${route} failed (HTTP ${response.status})`);
    let payload;try{payload=await response.json();}catch{/* Keep the actual HTTP rejection even without a JSON message. */}

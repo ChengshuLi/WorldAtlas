@@ -29,8 +29,9 @@ async function runCase(drift){
    else throw Error('Unexpected mock route '+route);
    return new Response(JSON.stringify(payload),{status:200,headers:{'Content-Type':'application/json'}});
   };
-  await import(runner.href+'?race='+caseNumber++);
-  return {result:JSON.parse(fs.readFileSync('claim-result.json')),writes};
+  const {runIssueClaim}=await import(runner.href+'?race='+caseNumber++);
+  const result=await runIssueClaim({event:JSON.parse(fs.readFileSync('event.json'))});
+  return {result,writes};
  }finally{
   globalThis.fetch=fetchBefore;process.chdir(cwd);
   for(const k of keys)if(before[k]===undefined)delete process.env[k];else process.env[k]=before[k];
