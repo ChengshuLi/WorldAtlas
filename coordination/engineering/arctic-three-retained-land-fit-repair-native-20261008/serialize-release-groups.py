@@ -41,6 +41,32 @@ def loaded_paths():
         if os.path.isfile(file) and not file.startswith(('/System/','/usr/lib/')):files.add(file)
     return files
 
+def capture_serialization_bindings(codec):
+    # The unchanged codec uses these live module/class callback bindings.
+    modules=[(codec,'json'),(codec,'gzip'),(codec,'io'),(json,'encoder'),(json,'decoder'),(json,'scanner'),(gzip,'zlib'),(gzip,'struct'),(gzip,'io')]
+    callbacks=[(json,'dumps'),(json,'loads'),(json,'JSONEncoder'),(json,'JSONDecoder'),
+        (json,'_default_encoder'),(json,'_default_decoder'),
+        (json.encoder,'JSONEncoder'),(json.encoder,'c_make_encoder'),(json.encoder,'_make_iterencode'),
+        (json.decoder,'scanstring'),(json.scanner,'make_scanner'),
+        (json.encoder,'encode_basestring'),(json.encoder,'encode_basestring_ascii'),
+        (json.JSONEncoder,'__init__'),(json.JSONEncoder,'encode'),(json.JSONEncoder,'iterencode'),(json.JSONEncoder,'default'),
+        (json.JSONDecoder,'__init__'),(json.JSONDecoder,'decode'),(json.JSONDecoder,'raw_decode'),
+        (gzip,'decompress'),(gzip,'GzipFile'),(gzip.GzipFile,'__init__'),(gzip.GzipFile,'write'),
+        (gzip.GzipFile,'close'),(gzip.GzipFile,'_write_gzip_header'),(gzip,'write32u'),(gzip,'_read_gzip_header'),
+        (gzip.struct,'pack'),(gzip.struct,'unpack'),(gzip.zlib,'crc32'),(gzip.zlib,'compressobj'),(gzip.zlib,'decompressobj'),
+        (codec.io,'BytesIO'),(hashlib,'sha256')]
+    return [(scope,name,getattr(scope,name),getattr(getattr(scope,name),'__code__',None),
+        getattr(getattr(scope,name),'__defaults__',None),getattr(getattr(scope,name),'__kwdefaults__',None),
+        repr(getattr(getattr(scope,name),'__defaults__',None)),repr(getattr(getattr(scope,name),'__kwdefaults__',None)))
+        for scope,name in [*modules,*callbacks]]
+
+def require_serialization_bindings(bindings):
+    for scope,name,original,code,defaults,kwdefaults,defaults_state,kwdefaults_state in bindings:
+        current=getattr(scope,name)
+        assert current is original and getattr(current,'__code__',None) is code
+        assert getattr(current,'__defaults__',None) is defaults and getattr(current,'__kwdefaults__',None) is kwdefaults
+        assert repr(getattr(current,'__defaults__',None))==defaults_state and repr(getattr(current,'__kwdefaults__',None))==kwdefaults_state
+
 def successor_member_payload(original,header,pin):
     release=header['release'];old='geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e'
     assert release['version']==9 and release['metadata']['predecessor_release_id']==old
@@ -72,7 +98,8 @@ def run(plan,output):
         assert pin in plan['runtime_files'] or (pin['bytes']<=CAP and pin.get('decoded_bytes',0)<=CAP)
     for pin in [*plan['runtime_files'],*plan['code']]:admitted_read(pin,pin in plan['runtime_files'])
     codec=load_codec(root)
-    callbacks=[run,ordinary,admitted_read,load_codec,loaded_paths,successor_member_payload,codec.canonical_json,codec.deterministic_gzip]
+    bindings=capture_serialization_bindings(codec)
+    callbacks=[run,ordinary,admitted_read,load_codec,loaded_paths,capture_serialization_bindings,require_serialization_bindings,successor_member_payload,codec.canonical_json,codec.deterministic_gzip]
     for function in callbacks:
         filename=os.path.realpath(function.__code__.co_filename)
         matches=[pin for pin in pins if pin['path']==filename];assert len(matches)==1
@@ -81,6 +108,7 @@ def run(plan,output):
     captured=[(fn,fn.__code__,fn.__defaults__,fn.__kwdefaults__) for fn in callbacks]
     allowed={pin['path'] for pin in pins}
     def guard():
+        require_serialization_bindings(bindings)
         assert callbacks[-2:]==[codec.canonical_json,codec.deterministic_gzip]
         for fn,code,defaults,kwdefaults in captured:
             assert fn.__code__ is code and fn.__defaults__ is defaults and fn.__kwdefaults__ is kwdefaults
@@ -142,15 +170,16 @@ def compare_finished_group(plan,output):
         stat=ordinary(pin['path']);assert stat.st_size==pin['bytes'] and stat.st_mode&0o777==pin['mode']
         assert pin in plan['runtime_files'] or (pin['bytes']<=CAP and pin.get('decoded_bytes',0)<=CAP)
     for pin in [*plan['code'],*plan['runtime_files']]:admitted_read(pin,pin in plan['runtime_files'])
-    load_codec(root)
+    codec=load_codec(root);bindings=capture_serialization_bindings(codec)
     allowed={p['path'] for p in pins};assert loaded_paths()<=allowed
     sources={p['path']:admitted_read(p,p in plan['runtime_files']) for p in plan['code']}
-    callbacks=[compare_finished_group,ordinary,admitted_read,load_codec,loaded_paths]
+    callbacks=[compare_finished_group,ordinary,admitted_read,load_codec,loaded_paths,capture_serialization_bindings,require_serialization_bindings]
     for fn in callbacks:
         filename=os.path.realpath(fn.__code__.co_filename)
         expected={code.co_name:code for code in compile(sources[filename],filename,'exec').co_consts if hasattr(code,'co_code')}
         assert fn.__code__==expected[fn.__name__]
     captured=[fn.__code__ for fn in callbacks]
+    require_serialization_bindings(bindings)
     products=[]
     for pair in plan['pairs']:
         left,right=pair
@@ -159,6 +188,7 @@ def compare_finished_group(plan,output):
         bodies=[admitted_read(pin) for pin in pair];assert bodies[0]==bodies[1]
         raw=gzip.decompress(bodies[0]);assert len(raw)==left['decoded_bytes'] and hashlib.sha256(raw).hexdigest()==left['decoded_sha256']
         products.append({key:value for key,value in left.items() if key!='path'})
+    require_serialization_bindings(bindings)
     assert all(fn.__code__ is before for fn,before in zip(callbacks,captured));assert loaded_paths()<=allowed
     for pin in [*plan['code'],*plan['runtime_files']]:admitted_read(pin,pin in plan['runtime_files'])
     report={'version':1,'issue':1520,'source_head':plan['source_head'],'group':plan['group'],'complete_phase_bytes':cost,
