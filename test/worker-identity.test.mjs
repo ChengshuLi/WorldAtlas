@@ -37,7 +37,7 @@ test('legacy renew/release, inspect and independent review are not mistaken for 
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-identity-legacy-'));
   t.after(() => fs.rmSync(cwd, {recursive: true, force: true}));
   const calls = [
-    ...['renew', 'release'].map(action => ['issue-lease.mjs', action, '--issue', '1', '--worker', 'legacy-id', '--branch', 'engineering/test', '--claim-id', 'held-claim']),
+    ...['renew', 'release'].map(action => ['issue-lease.mjs', action, '--issue', '1', '--worker', 'legacy-id', '--branch', 'engineering/test', '--claim-id', 'held-claim', '--out', path.join(cwd, action+'-receipt.json')]),
     ['issue-lease.mjs', 'inspect', '--issue', '1'],
     ['local-workspace.mjs', 'allocate', '--worker', 'distinct-review-agent', '--slot', 'review', '--commit', 'a'.repeat(40)],
     ['local-workspace.mjs', 'report'],

@@ -82,8 +82,8 @@
     },
     {
       "path": "coordination/engineering/global-quota-1543-20261009/HANDOFF.md",
-      "bytes": 6233,
-      "sha256": "d1145ac9a8a23c90ecac64d77fbc782f21956588c27ed99c27a84eaebc6368c3",
+      "bytes": 6899,
+      "sha256": "d2dfdb8325de8e05502de51b9c67fbdc73e4d824046446a20d4537d7063a3320",
       "hash_kind": "file-bytes"
     },
     {
@@ -180,6 +180,12 @@
       "path": "coordination/engineering/global-quota-1543-20261009/positive-control.json",
       "bytes": 344,
       "sha256": "e1371863b80d16c64c4b3dd97e4c730d4b224dc8f3f7596ae88270e8fe9074b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/remaining-hosted-fixtures.log",
+      "bytes": 683,
+      "sha256": "c7c7806c5050694cb0a3750358fcf5b3ecd08255e1f6b64e604df6ea44087bbf",
       "hash_kind": "file-bytes"
     },
     {
@@ -334,6 +340,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/claim-readiness-races.test.mjs",
+      "bytes": 4040,
+      "sha256": "d237412089a765349bea68d9161a4541afeff73d3183a8c9e0fc6771aff2b042",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/deployment-budget-scope.test.mjs",
       "bytes": 12122,
       "sha256": "bd7d346c6ee6ed9734f0afbb58a69460b279e6343d444e1124991c1fb3ba19a1",
@@ -403,6 +415,12 @@
       "path": "test/trusted-workflow-checkouts.test.mjs",
       "bytes": 4329,
       "sha256": "d6eb617f1329042aea61b5492838bc7e377fc0c4c7c041665235380aca5593fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/worker-identity.test.mjs",
+      "bytes": 3190,
+      "sha256": "95d34eba51dde7a01db5e3f1a2f1dd7d4e423126d9fd8c35134deaac8725d977",
       "hash_kind": "file-bytes"
     }
   ],
@@ -733,6 +751,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/remaining-hosted-fixtures.log",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/demand-summary.json",
       "status": "added"
     },
@@ -844,6 +866,11 @@
       "original_sha256": "6c6b74512880f1d7bede38a1caccc0f08e64aadb48a94a059e8a400ae934d1ab"
     },
     {
+      "path": "test/claim-readiness-races.test.mjs",
+      "status": "modified",
+      "original_sha256": "16a51678a08ba83a6b420be1dbcfef318e8a9ae2ddd2001ceb9236667aa7e0ae"
+    },
+    {
       "path": "test/deployment-budget-scope.test.mjs",
       "status": "modified",
       "original_sha256": "3801b2f978e00fa07ab7cead1f0c8a75c0783500a995e07be0e6463eb8343a8a"
@@ -895,6 +922,11 @@
       "path": "test/trusted-workflow-checkouts.test.mjs",
       "status": "modified",
       "original_sha256": "6ae8f171f169c7a864a5ebc31a1dd5fff0496f22208cd060a3d8ae30360dc040"
+    },
+    {
+      "path": "test/worker-identity.test.mjs",
+      "status": "modified",
+      "original_sha256": "8aeec6d702f48d09f3791b6548657c4e2781393fdf0986a56fab586c37a471a6"
     }
   ],
   "metric_bindings": [
