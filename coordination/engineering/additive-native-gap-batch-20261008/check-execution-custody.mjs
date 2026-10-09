@@ -5,7 +5,17 @@ import {createHash} from 'node:crypto';
 const home=path.join(path.dirname(fileURLToPath(import.meta.url)),'original-execution-custody');
 const hash=(kind,b)=>createHash(kind).update(b).digest('hex');
 const need=(ok,msg)=>{if(!ok)throw Error(msg);};
-const receipt=JSON.parse(fs.readFileSync(path.join(home,'receipt-v2.json')));
+const receiptPath=path.join(home,'receipt-v2.json'),receiptStat=fs.lstatSync(receiptPath);
+need(receiptStat.isFile()&&receiptStat.size<=1024*1024,'Custody receipt admission exceeded');
+const receipt=JSON.parse(fs.readFileSync(receiptPath));
+need(Array.isArray(receipt.git_objects)&&Array.isArray(receipt.installed_modules),'Missing whole custody roster');
+need(receipt.git_objects.every(pin=>/^[a-f0-9]{40}$/.test(pin.oid)&&pin.archive_path===`objects/${pin.oid}`),'Foreign Git object path');
+need(receipt.installed_modules.every(pin=>pin.path.startsWith('node_modules/@noble/hashes/')&&!pin.path.split('/').some(p=>!p||p==='.'||p==='..')),'Foreign installed member path');
+const inputs=[...receipt.git_objects.map(pin=>({pin,file:path.join(home,`objects/${pin.oid}`)})),...receipt.installed_modules.map(pin=>({pin,file:path.join(home,'installed',pin.path)}))];
+need(inputs.length+1<=512,'Custody descriptor cap exceeded');
+let admitted=receiptStat.size;
+for(const {pin,file} of inputs){need(Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&pin.bytes<=32*1024*1024,'Ordinary custody cap exceeded');admitted+=pin.bytes;need(admitted<=256*1024*1024,'Complete custody admission exceeded');}
+for(const {pin,file} of inputs){const st=fs.lstatSync(file);need(st.isFile()&&st.size===pin.bytes,'Custody must be a complete ordinary admitted body');}
 const objects=new Map();let total=0;
 for(const pin of receipt.git_objects){
  need(pin.archive_path===`objects/${pin.oid}`&&!objects.has(pin.oid),'Foreign or duplicate Git object');
