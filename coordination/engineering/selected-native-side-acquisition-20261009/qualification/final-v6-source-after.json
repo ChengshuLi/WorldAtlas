@@ -1,9 +1,6 @@
 {
-  "version": 1,
-  "source_freeze": "7e1ce1b71440201759fb3ab749d0786ebcbb2f93",
-  "checkout_HEAD_at_control_launch": "7e1ce1b71440201759fb3ab749d0786ebcbb2f93",
-  "source_note": "Final26 controls ran at immutable7e1 with whole13-file pre/post pins and unchangedHEAD; earlier25-control run is interim with mixed later fixture copies and is not final qualification.",
-  "source_files": [
+  "head": "7e1ce1b71440201759fb3ab749d0786ebcbb2f93",
+  "files": [
     {
       "path": "test/effective-geographic-regression.test.mjs",
       "bytes": 67710,
@@ -70,24 +67,14 @@
       "sha256": "04d52ab12f73d41391886fea205beeaadfcaac36c24f8679607bcb0058949feb"
     }
   ],
-  "tests": 26,
-  "passed": 26,
-  "failed": 0,
-  "skipped": 0,
-  "complete_roles": 533,
-  "registered_review_id": 6087324521,
-  "command": "node --test test/effective-geographic-regression.test.mjs",
-  "duration_ms": 761465.952625,
-  "scientific_qualification_rerun": false,
-  "selected_bank_activated": false,
-  "limits": [
-    "Synthetic runtime-size controls model admission; they do not measure installed-runtime RSS or qualify the actual full selected-bank comparison.",
-    "Original physical source, water, date, historical and administrative authority remains unapproved; no selection or deployment.",
-    "Original paired refusal and failed control attempts remain truthful historical failures."
+  "exit_code": 0,
+  "pre_post_equal": true,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--test",
+    "test/effective-geographic-regression.test.mjs"
   ],
-  "original_compareIntervals_sha256": "b1cd36f8a3f252b189c97e522bc4ed1db513af84224538e01d0e168bd9df2fa4",
-  "current_compareIntervals_sha256": "b1cd36f8a3f252b189c97e522bc4ed1db513af84224538e01d0e168bd9df2fa4",
-  "pre_post_source_equal": true,
+  "completed_at": "2026-10-09T19:29:26.933318+00:00",
   "runtime": {
     "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
     "bytes": 121304480,
