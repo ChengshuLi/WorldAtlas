@@ -133,7 +133,32 @@ export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expe
   for(const box of row.boxes)demand(Array.isArray(box)&&box.length===4&&box.every(Number.isFinite)&&box[0]>=-180&&box[2]<=180&&box[1]>=-90&&box[3]<=90&&box[0]<=box[2]&&box[1]<=box[3],'Invalid complete coordinate exclusion bound');
  }
  demand(facts.complete_owners===owners.size&&facts.complete_sources===paths.size,'Cold scope denominator differs');
- freeze(certificate);certificates.set(certificate,{binding:certificate.binding,resolver});return certificate;
+ freeze(certificate);certificates.set(certificate,{binding:certificate.binding,resolver,accepted:{publication_sha256:valueSha(publication),facts_sha256:valueSha(facts),encoded_sha256,decoded_sha256}});return certificate;
+}
+
+// A persisted receipt is issued only after the genuine resolver has validated
+// every complete source/owner row. It holds custody, never the resolver, native
+// image, camera roster, or live certificate. Reopening requires the exact whole
+// originally validated product; a serializable copy cannot issue this authority.
+const coldReceipts=new WeakMap();
+export function sealColdCoordinateCertificate(certificate,product) {
+ const proof=certificates.get(certificate);
+ demand(proof?.resolver instanceof SelectedGeometrySources&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Require genuine complete cold validation before detachment');
+ demand(proof.accepted&&valueSha(product.publication)===proof.accepted.publication_sha256&&valueSha(product.facts)===proof.accepted.facts_sha256&&product.encoded_sha256===proof.accepted.encoded_sha256&&product.decoded_sha256===proof.accepted.decoded_sha256,'Persisted custody differs from privately accepted whole product');
+ demand(valueSha(certificate)===product.decoded_sha256&&same(product.publication.certificate,{path:'certificate.json.gz',bytes:product.publication.certificate.bytes,sha256:product.encoded_sha256,decoded_bytes:product.publication.certificate.decoded_bytes,decoded_sha256:product.decoded_sha256})&&valueSha(product.facts)===product.publication.facts.sha256,'Validated persisted cold product changed');
+ const inventory=[...proof.resolver.reader.inventory.values()],completePhaseBytes=proof.resolver.reader.used;
+ demand(Array.isArray(inventory)&&Number.isSafeInteger(completePhaseBytes)&&completePhaseBytes>0&&completePhaseBytes<=PHASE,'Missing complete persisted cold acquisition custody');
+ const receipt=JSON.parse(valueBytes({version:1,kind:'privately-validated-persisted-coordinate-receipt-v1',binding:certificate.binding,publication:product.publication,facts:product.facts,inventory,complete_phase_bytes:completePhaseBytes,effective_additions:proof.resolver.snapshot.additive?.normalized_rows??[]}));
+ demand(valueBytes(receipt).length<=FILE,'Complete persisted cold custody exceeds member bound');
+ freeze(receipt);coldReceipts.set(receipt,{decoded_sha256:product.decoded_sha256,encoded_sha256:product.encoded_sha256});
+ // Shard proofs retain their resolver identity. Only the fully validated cold
+// certificate proof relinquishes the selected snapshot after its helper ends.
+ certificates.set(certificate,{binding:certificate.binding,persisted:true});return receipt;
+}
+export function reopenColdCoordinateCertificate(receipt,product) {
+ const proof=coldReceipts.get(receipt);
+ demand(proof&&same(product.publication,receipt.publication)&&same(product.facts,receipt.facts)&&product.encoded_sha256===proof.encoded_sha256&&product.decoded_sha256===proof.decoded_sha256&&valueSha(product.certificate)===proof.decoded_sha256&&same(product.certificate.binding,receipt.binding),'Missing private persisted custody or changed whole cold product');
+ bindCoordinateRows(product.certificate);freeze(product.certificate);certificates.set(product.certificate,{binding:receipt.binding,persisted:true});return product.certificate;
 }
 
 export function selectedCertificateAffectedPlan(before,after) {
