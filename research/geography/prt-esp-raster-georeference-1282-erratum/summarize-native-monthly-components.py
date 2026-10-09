@@ -17,6 +17,7 @@ import os
 import platform
 import subprocess
 import sys
+import traceback
 import types
 from pathlib import Path
 
@@ -46,6 +47,17 @@ MAX_FILE = 32 * 1024 * 1024
 MAX_PHASE = 256 * 1024 * 1024
 BLOCK_BYTES = 1024 * 1024
 OUTPUT_RESERVE = 256 * 1024
+PRIOR_FAILURE_LOG = """Traceback (most recent call last):
+  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py\", line 359, in <module>
+    main()
+  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py\", line 355, in main
+    print(json.dumps(run_phase(sys.argv[1]), sort_keys=True))
+  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py\", line 346, in run_phase
+    result = component_phase(commit, phase, row, geometry_row, capture, audit, scope_rows, assets, baseline, evidence)
+  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py\", line 289, in component_phase
+    \"input_bindings\": {d[\"path\"]: {\"bytes\": d[\"bytes\"], \"sha256\": d[\"sha256\"]} for d in descriptors},
+NameError: name 'descriptors' is not defined
+"""
 
 
 def sha(raw: bytes) -> str:
@@ -304,10 +316,11 @@ def component_phase(commit: str, phase: str, component: dict, geometry: dict, ca
 
 
 def write_failure(commit: str, phase: str, component_id: str, failure_head: str,
-                  error: str, baseline, evidence):
+                  error: str, error_log: str, baseline, evidence):
     """Retain a bounded failure receipt; it never masquerades as a result."""
-    vintage = f"failed-{sha((failure_head + phase + component_id).encode())[:16]}"
-    writer = evidence.NewVintage(baseline, OWN_REL, vintage, ["failure.json"])
+    vintage = f"failed-full-{sha((failure_head + phase + component_id).encode())[:16]}"
+    writer = evidence.NewVintage(baseline, OWN_REL, vintage, ["failure.json", "failure.log"])
+    log_raw = error_log.encode("utf-8")
     payload = {
         "schema": "worldatlas-geography-phase-failure-v1",
         "status": "failed-no-scientific-output",
@@ -316,10 +329,13 @@ def write_failure(commit: str, phase: str, component_id: str, failure_head: str,
         "attempt_head": failure_head,
         "pinned_baseline": commit,
         "error": error,
+        "log_bytes": len(log_raw),
+        "log_sha256": sha(log_raw),
+        "stdout_bytes": 0,
         "admitted_bytes_before_failure_receipt": sum(baseline.consumed.values()),
         "limits": ["No component counts or geographic conclusions are retained by this failure receipt."],
     }
-    writer.publish({"failure.json": payload})
+    writer.publish_bytes({"failure.json": evidence.canonical_json(payload), "failure.log": log_raw})
 
 
 def run_phase(phase: str) -> dict:
@@ -366,7 +382,7 @@ def run_phase(phase: str) -> dict:
         try:
             result = component_phase(commit, phase, row, geometry_row, capture, audit, scope_rows, assets, baseline, evidence, descriptors)
         except Exception as exc:
-            write_failure(commit, phase, row["component_id"], commit, f"{type(exc).__name__}: {exc}", baseline, evidence)
+            write_failure(commit, phase, row["component_id"], commit, f"{type(exc).__name__}: {exc}", traceback.format_exc(), baseline, evidence)
             raise
         results.append({"component_id": row["component_id"], "path": result[0]["path"], "bytes": result[0]["bytes"], "sha256": result[0]["sha256"]})
         print(json.dumps({"phase": phase, "component_id": row["component_id"], "path": result[0]["path"], "sha256": result[0]["sha256"]}), flush=True)
@@ -399,7 +415,7 @@ def record_prior_failure(commit: str, phase: str, component_id: str, error: str)
         for br, bc in blocks:
             baseline.admit(f"decoded:{month_asset['filename']}:block:{br}:{bc}", BLOCK_BYTES)
     baseline.admit("planned-output-reserve:component-month-summary.json", OUTPUT_RESERVE)
-    write_failure(commit, phase, component_id, commit, error, baseline, evidence)
+    write_failure(commit, phase, component_id, commit, error, PRIOR_FAILURE_LOG, baseline, evidence)
 
 
 def main() -> None:

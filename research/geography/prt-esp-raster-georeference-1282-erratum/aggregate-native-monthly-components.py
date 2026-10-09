@@ -103,10 +103,14 @@ def run() -> None:
     failure_vintage = "failed-" + sha((failure_head + "run-1" + failure_component).encode())[:16]
     failure_path = OWN + f"vintages/{failure_vintage}/failure.json"
     failure_receipt = str(Path(failure_path).parent / "publication.json")
+    full_failure_vintage = "failed-full-" + sha((failure_head + "run-1" + failure_component).encode())[:16]
+    full_failure_path = OWN + f"vintages/{full_failure_vintage}/failure.json"
+    full_failure_log = OWN + f"vintages/{full_failure_vintage}/failure.log"
+    full_failure_receipt = str(Path(full_failure_path).parent / "publication.json")
     pinned_paths = [HELPER, RUNNER, AGGREGATOR, INDEX, MATRIX, AUDIT, GEOMETRY]
     pinned_paths += sorted(set(result_paths.values()))
     pinned_paths += [publication_path(path) for path in sorted(set(result_paths.values()))]
-    pinned_paths += [failure_path, failure_receipt]
+    pinned_paths += [failure_path, failure_receipt, full_failure_path, full_failure_log, full_failure_receipt]
     helper, baseline, pins = load_helper(commit, pinned_paths)
     index_data = json.loads(baseline.pinned_bytes(INDEX))
     matrix_data = json.loads(baseline.pinned_bytes(MATRIX))
@@ -155,6 +159,18 @@ def run() -> None:
     failure = json.loads(failure_raw)
     if failure.get("status") != "failed-no-scientific-output" or failure.get("attempt_head") != failure_head:
         raise ValueError("Prior failed attempt is not accurately retained")
+    full_failure_raw = baseline.pinned_bytes(full_failure_path)
+    full_failure_log_raw = baseline.pinned_bytes(full_failure_log)
+    full_receipt = json.loads(baseline.pinned_bytes(full_failure_receipt))
+    expected_full_outputs = [
+        {"path": full_failure_path, "bytes": len(full_failure_raw), "sha256": sha(full_failure_raw), "hash_kind": "file-bytes"},
+        {"path": full_failure_log, "bytes": len(full_failure_log_raw), "sha256": sha(full_failure_log_raw), "hash_kind": "file-bytes"},
+    ]
+    if full_receipt.get("version") != 1 or full_receipt.get("status") != "complete" or full_receipt.get("outputs") != expected_full_outputs:
+        raise ValueError("Whole-byte prior failure log lacks its exact completion receipt")
+    full_failure = json.loads(full_failure_raw)
+    if full_failure.get("status") != "failed-no-scientific-output" or full_failure.get("log_bytes") != len(full_failure_log_raw) or full_failure.get("log_sha256") != sha(full_failure_log_raw):
+        raise ValueError("Whole-byte failure log binding mismatch")
 
     matrix_components = {row["component_id"]: row for row in matrix_data["components"]}
     index_families = index_data["scope"]["family_component_contact_rows"]
@@ -271,8 +287,13 @@ def run() -> None:
              "identical": result_bytes[("run-1", component_id)] == result_bytes[("run-2", component_id)]}
             for component_id in covered_ids
         ],
-        "failed_attempts": [{"path": failure_path, "bytes": len(failure_raw), "sha256": sha(failure_raw),
-                             "attempt_head": failure_head, "status": "failed-no-scientific-output"}],
+        "failed_attempts": [
+            {"path": failure_path, "bytes": len(failure_raw), "sha256": sha(failure_raw),
+             "attempt_head": failure_head, "status": "failed-no-scientific-output", "log_preserved": False},
+            {"path": full_failure_path, "bytes": len(full_failure_raw), "sha256": sha(full_failure_raw),
+             "log_path": full_failure_log, "log_bytes": len(full_failure_log_raw), "log_sha256": sha(full_failure_log_raw),
+             "attempt_head": failure_head, "status": "failed-no-scientific-output", "log_preserved": True},
+        ],
         "aggregate_inputs": [{"path": row["path"], "bytes": row["bytes"], "sha256": row["sha256"]} for row in pins],
         "limits": ["The aggregate step reads only completed component JSON outputs; it does not reopen or decode raster pixels."],
     }
