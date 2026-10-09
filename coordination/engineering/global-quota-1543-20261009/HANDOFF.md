@@ -19,3 +19,9 @@ Use Node 24, without provider credentials or full-world materialization:
 ```
 node --test test/github-admission.test.mjs test/github-snapshots.test.mjs test/github-quota.test.mjs test/geographic-report-artifact.test.mjs test/deployment-budget-scope.test.mjs test/trusted-workflow-checkouts.test.mjs test/pr-gates.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/issue-lease-cli.test.mjs test/issue-lease-client.test.mjs test/git-blob-transport.test.mjs test/integration-proof.test.mjs test/job-deadline.test.mjs
 ```
+
+## Independent-review amendments
+
+The retained per-run inventories and classified accounting records are included with their original extraction scripts. Run `node coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs` to reproduce the summary and execute duplicate/inconsistent-accounting controls. These records authenticate the retained investigation, not new independent retrieval of every original hosted log.
+
+Mutating claim CLI actions now require a durable output path and exclusively own that local receipt. Atomic synced publication retains the last complete checkpoint on interruption; pending observation resumes the original identity. Missing output, unrelated/completed collisions and symlink outputs are rejected before HTTP. A dead local process lock can be released without treating the provider operation as failed. This is local request ownership, not an API queue or scheduling delay.

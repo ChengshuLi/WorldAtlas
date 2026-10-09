@@ -49,11 +49,11 @@ globalThis.fetch = async (url, init) => {
  throw Error('Unrecognized synthetic route');
 };
 `);
-  const run = () => spawnSync(process.execPath, ['--import', shim, path.join(root, 'scripts/issue-lease.mjs'),
+  const run = (extra=[]) => spawnSync(process.execPath, ['--import', shim, path.join(root, 'scripts/issue-lease.mjs'),
     'renew', '--issue', '26', '--worker', 'synthetic-worker', '--branch', 'engineering/fixture',
-    '--claim-id', 'synthetic-claim-unique', '--reason', 'Preserve original rationale', '--out', out], {cwd: root, encoding: 'utf8', timeout: 10000,
+    '--claim-id', 'synthetic-claim-unique', '--reason', 'Preserve original rationale', ...(extra.includes('omit-output')?[]:['--out',out])], {cwd: root, encoding: 'utf8', timeout: 10000,
     env: {PATH: directory + path.delimiter + process.env.PATH}});
-  return {run, out, rows: () => JSON.parse(fs.readFileSync(log, 'utf8')), close: () => fs.rmSync(directory, {recursive:true,force:true})};
+  return {run, out, rows: () => fs.existsSync(log)?JSON.parse(fs.readFileSync(log, 'utf8')):[], close: () => fs.rmSync(directory, {recursive:true,force:true})};
 }
 for (const mode of ['accepted', 'uncertain']) test(`actual lease CLI ${mode} dispatch confirms ownership without a second write`, () => {
   const h = harness(mode);
@@ -78,4 +78,15 @@ test('actual cancelled lease CLI preserves checkpoint; rerunning observes the sa
     assert.equal(before.request_id, after.request_id); assert.equal(after.submitted, true);
     assert.equal(h.rows().filter(row => row.method === 'POST').length, 1);
   } finally {h.close();}
+});
+
+for(const mode of ['missing','collision','symlink'])test(`actual lease CLI rejects ${mode} output before any HTTP`,()=>{
+ const h=harness('accepted');const sentinel=h.out+'.sentinel';
+ try{
+  if(mode==='collision')fs.writeFileSync(h.out,JSON.stringify({status:'accepted',unique:'retain'}));
+  if(mode==='symlink'){fs.writeFileSync(sentinel,'retain');fs.symlinkSync(sentinel,h.out);}
+  const before=mode==='missing'?null:fs.readFileSync(h.out,'utf8');
+  const r=h.run(mode==='missing'?['omit-output']:[]);assert.notEqual(r.status,0);assert.equal(h.rows().length,0);
+  if(before!==null)assert.equal(fs.readFileSync(h.out,'utf8'),before);
+ }finally{h.close();}
 });

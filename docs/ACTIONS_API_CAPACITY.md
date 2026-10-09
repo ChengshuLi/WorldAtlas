@@ -43,10 +43,10 @@ selected runs, not the billing hour of each request. The measured demand is:
 
 | Consumer | Recorded demand | Measurement limit |
 | --- | ---: | --- |
-| PR evidence file reads | At least 21,454 requests | Code-derived lower bound from 171 successful authenticated receipts; failed scans, comparison originals and metadata excluded |
-| Merge preparation/finalization | 13,987 HTTP attempts | All 91 attempts accounted; 4,532 immutable metadata attempts and 9,455 other attempts |
-| Merge registration/scheduling | 1,873 HTTP attempts | 118 of 119 runs accounted; the missing count is unknown |
-| Accepted claim transitions | At least 1,515 requests | Code-derived floor for 158 accepted transitions; refused transitions, dynamic dependencies and additional pages excluded |
+| PR evidence file reads | At least 21454 requests | Code-derived lower bound from 171 successful authenticated receipts; failed scans, comparison originals and metadata excluded |
+| Merge preparation/finalization | 13987 HTTP attempts | All 91 attempts accounted; 4532 immutable metadata attempts and 9455 other attempts |
+| Merge registration/scheduling | 1873 HTTP attempts | 118 of 119 runs accounted; the missing count is unknown |
+| Accepted claim transitions | At least 1515 requests | Code-derived floor for 158 accepted transitions; refused transitions, dynamic dependencies and additional pages excluded |
 
 These are different measurement kinds. Do not combine them into an exact total,
 market share or percentage reduction. Historical worker CLI reads, Actions'

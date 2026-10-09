@@ -6,7 +6,7 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "8a10dbee77d2ab4e5a3ee6f6f456e457ad1fac8c",
+    "commit": "777b082b0a3447c39205255312ec69f453e85e7a",
     "files": [
       {
         "path": "scripts/issue-claim-contract.mjs",
@@ -82,8 +82,68 @@
     },
     {
       "path": "coordination/engineering/global-quota-1543-20261009/HANDOFF.md",
-      "bytes": 2926,
-      "sha256": "73d283b6fe438fe64e03c833eeac18c0de8445faefa8ea1b2014cf6b94176e5e",
+      "bytes": 3851,
+      "sha256": "2b22bcc618504a971dcad196cbc4ff33444c2310d9c85b7813972c8441e8bcef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs",
+      "bytes": 5494,
+      "sha256": "749b399810a2504a7016c61e6feac64b606d627a2eadf19167148e751938cc01",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.json",
+      "bytes": 81949,
+      "sha256": "21d8dd593b31c2035560ff14c03a96ce3fa79ee1d3a8975c5be5f4777b4187c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.py",
+      "bytes": 2135,
+      "sha256": "207e9b2602e2db6cb7149bfb144c1e7052c344b46c77f0380edcca4559d08a72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.json",
+      "bytes": 259449,
+      "sha256": "7bf843fc59cdf3a0f740a2127538b7614b51db7f184ba6b23c8f917e65d78e0f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.py",
+      "bytes": 2835,
+      "sha256": "b901d47706cd68b299e8b1d749d9d45fddd2f59940dc2524c0616bfdb4a22c49",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.json",
+      "bytes": 220564,
+      "sha256": "fee81fc10da61ad7af85538d91514bdcdd12b35fc6ea410dc0a29a68e0ed1d99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.py",
+      "bytes": 2481,
+      "sha256": "6ba58fa8931e6a7b032fd0570994dfcfa158d42ab2b0a551630555a99768bcac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.json",
+      "bytes": 643988,
+      "sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.py",
+      "bytes": 1635,
+      "sha256": "e1584e05e8f98be422b52334847d517e6bb57cc6754deeca4490635fb4f61644",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "bytes": 432,
+      "sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
       "hash_kind": "file-bytes"
     },
     {
@@ -93,21 +153,40 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/negative-control.json",
+      "bytes": 446,
+      "sha256": "c783b6f76a37806fb7a8704d1ac0412164a072e95717739cf34a9a661f87bcdf",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/no-throttle-expanded-controls.log",
       "bytes": 23003,
       "sha256": "27df33266976a997f03b091b0b188eb3c3c0e42f09f00fdeeacae001c8dcd297",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "docs/ACTIONS_API_CAPACITY.md",
-      "bytes": 10414,
-      "sha256": "4ab39767f506ea153fc2eb83c9ec607434450073e257f2370bfb76011ca2f002",
+      "path": "coordination/engineering/global-quota-1543-20261009/positive-control.json",
+      "bytes": 344,
+      "sha256": "e1371863b80d16c64c4b3dd97e4c730d4b224dc8f3f7596ae88270e8fe9074b8",
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/review-amended-controls.log",
+      "bytes": 23614,
+      "sha256": "a0f765895cc3694e5f1da2dde1ccf2ac0cd0c8f21784e902b25c1c5c3dc82a18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ACTIONS_API_CAPACITY.md",
+      "bytes": 10408,
+      "sha256": "d0f31653f2a923028cd12883a2e8039dfe0a38c51dcd221985ce0ce48d377687",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
       "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 46814,
-      "sha256": "a1aad013a540904c4c43332200f9fb5107094bf5490740bcb3342c034b458a53",
+      "bytes": 47155,
+      "sha256": "0ebe739b297b9f451be7eb2eb0b728e192e7d4303bbbdd599fdb777630c89231",
       "hash_kind": "file-bytes"
     },
     {
@@ -153,6 +232,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "scripts/issue-lease-checkpoint.mjs",
+      "bytes": 3212,
+      "sha256": "9e83f574ab25327b7e8c6b4a110af250e59df4c1ca861d07b3685801a85042ba",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "scripts/issue-lease-client.mjs",
       "bytes": 5569,
       "sha256": "a42c1af582bf4bda669be1de3c843a7d32fe0afdc629db6166c842f91026cddf",
@@ -160,8 +245,8 @@
     },
     {
       "path": "scripts/issue-lease.mjs",
-      "bytes": 3607,
-      "sha256": "1bfc605befcedb5c3fa0cc4acc98f54435da94d8515fbf760ba52a036b141c31",
+      "bytes": 3630,
+      "sha256": "9e74eb033b872043ef5921fcd43a944ba90adbbf4ee6142b68c40aa6e5374d3b",
       "hash_kind": "file-bytes"
     },
     {
@@ -207,9 +292,15 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/issue-lease-checkpoint.test.mjs",
+      "bytes": 2393,
+      "sha256": "93dd8e4399451f00fbe24fd42bdc6748d72a5094bcbbce55eb9ac85c730cfc32",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/issue-lease-cli.test.mjs",
-      "bytes": 5323,
-      "sha256": "04345b56e1e3c53421bc696f670e2133c54412bbcfa7b71f26f6c822977567ff",
+      "bytes": 6055,
+      "sha256": "6c0ba14319df1c952c4edfc74b6965b9e85d9b007b72c1124d5dd9d37cbfb8f9",
       "hash_kind": "file-bytes"
     },
     {
@@ -238,10 +329,214 @@
       "software": "Node 24",
       "units": "tests, milliseconds, HTTP attempts; no global reduction percentage inferred",
       "kind": "code"
+    },
+    {
+      "id": "demand-aggregation",
+      "kind": "measurement",
+      "description": "Aggregate retained complete created-run inventory and per-run receipt categories; distinguish measured HTTP attempts from code-derived evidence/claim lower bounds. Extraction does not reproduce every original hosted log independently.",
+      "software": "Node 24, retained Python3 extraction scripts and GitHub Actions public logs",
+      "units": "HTTP attempts, inferred request lower bounds, workflow runs, branch/head pairs"
     }
   ],
-  "metrics": [],
-  "summaries": [],
+  "metrics": [
+    {
+      "id": "workflow_runs",
+      "value": 1243,
+      "unit": "workflow-runs",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "evidence_requests_floor",
+      "value": 21454,
+      "unit": "inferred-request-lower-bound",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "merge_http_attempts",
+      "value": 13987,
+      "unit": "HTTP-attempts",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "scheduler_http_attempts",
+      "value": 1873,
+      "unit": "HTTP-attempts",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "claim_requests_floor",
+      "value": 1515,
+      "unit": "inferred-request-lower-bound",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "merge_immutable_metadata",
+      "value": 4532,
+      "unit": "HTTP-attempts",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "merge_other_attempts",
+      "value": 9455,
+      "unit": "HTTP-attempts",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "get_attempts",
+      "value": 15144,
+      "unit": "HTTP-attempts",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "mutation_attempts",
+      "value": 716,
+      "unit": "HTTP-attempts",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "geography_runs",
+      "value": 698,
+      "unit": "workflow-runs",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "geography_pairs",
+      "value": 212,
+      "unit": "branch-head-pairs",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "engineering_runs",
+      "value": 141,
+      "unit": "workflow-runs",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "engineering_pairs",
+      "value": 38,
+      "unit": "branch-head-pairs",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "history_runs",
+      "value": 3,
+      "unit": "workflow-runs",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    },
+    {
+      "id": "history_pairs",
+      "value": 1,
+      "unit": "branch-head-pairs",
+      "vintage": "baseline",
+      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "workflow_runs",
+      "value": 1243,
+      "unit": "workflow-runs"
+    },
+    {
+      "metric_id": "evidence_requests_floor",
+      "value": 21454,
+      "unit": "inferred-request-lower-bound"
+    },
+    {
+      "metric_id": "merge_http_attempts",
+      "value": 13987,
+      "unit": "HTTP-attempts"
+    },
+    {
+      "metric_id": "scheduler_http_attempts",
+      "value": 1873,
+      "unit": "HTTP-attempts"
+    },
+    {
+      "metric_id": "claim_requests_floor",
+      "value": 1515,
+      "unit": "inferred-request-lower-bound"
+    },
+    {
+      "metric_id": "merge_immutable_metadata",
+      "value": 4532,
+      "unit": "HTTP-attempts"
+    },
+    {
+      "metric_id": "merge_other_attempts",
+      "value": 9455,
+      "unit": "HTTP-attempts"
+    },
+    {
+      "metric_id": "get_attempts",
+      "value": 15144,
+      "unit": "HTTP-attempts"
+    },
+    {
+      "metric_id": "mutation_attempts",
+      "value": 716,
+      "unit": "HTTP-attempts"
+    },
+    {
+      "metric_id": "geography_runs",
+      "value": 698,
+      "unit": "workflow-runs"
+    },
+    {
+      "metric_id": "geography_pairs",
+      "value": 212,
+      "unit": "branch-head-pairs"
+    },
+    {
+      "metric_id": "engineering_runs",
+      "value": 141,
+      "unit": "workflow-runs"
+    },
+    {
+      "metric_id": "engineering_pairs",
+      "value": 38,
+      "unit": "branch-head-pairs"
+    },
+    {
+      "metric_id": "history_runs",
+      "value": 3,
+      "unit": "workflow-runs"
+    },
+    {
+      "metric_id": "history_pairs",
+      "value": 1,
+      "unit": "branch-head-pairs"
+    }
+  ],
   "conclusions": [
     {
       "text": "Hosted latency, global quota headroom and actual worker adoption remain unverified. Original setup and scientific performance acceptance remains unfinished.",
@@ -256,7 +551,8 @@
   },
   "commands": [
     "node --test test/github-admission.test.mjs test/github-snapshots.test.mjs test/github-quota.test.mjs test/geographic-report-artifact.test.mjs test/deployment-budget-scope.test.mjs test/trusted-workflow-checkouts.test.mjs test/pr-gates.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/issue-lease-cli.test.mjs test/issue-lease-client.test.mjs test/git-blob-transport.test.mjs test/integration-proof.test.mjs test/job-deadline.test.mjs",
-    "node scripts/evidence-quality.mjs coordination/engineering/global-quota-1543-20261009/evidence-quality.json ."
+    "node scripts/evidence-quality.mjs coordination/engineering/global-quota-1543-20261009/evidence-quality.json .",
+    "node coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs"
   ],
   "change_receipts": [
     {
@@ -285,6 +581,46 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/evidence-quality.json",
       "status": "added"
     },
@@ -293,7 +629,19 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/negative-control.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/no-throttle-expanded-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/review-amended-controls.log",
       "status": "added"
     },
     {
@@ -340,6 +688,10 @@
       "original_sha256": "3713189e0768249fb9b10c5c847a192c7c78419dd1bfbb649874157c896cc7cc"
     },
     {
+      "path": "scripts/issue-lease-checkpoint.mjs",
+      "status": "added"
+    },
+    {
       "path": "scripts/issue-lease-client.mjs",
       "status": "added"
     },
@@ -382,6 +734,10 @@
       "status": "added"
     },
     {
+      "path": "test/issue-lease-checkpoint.test.mjs",
+      "status": "added"
+    },
+    {
       "path": "test/issue-lease-cli.test.mjs",
       "status": "added"
     },
@@ -399,5 +755,138 @@
       "original_sha256": "6ae8f171f169c7a864a5ebc31a1dd5fff0496f22208cd060a3d8ae30360dc040"
     }
   ],
-  "metric_bindings": []
+  "metric_bindings": [
+    {
+      "metric_id": "workflow_runs",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/workflow_runs"
+    },
+    {
+      "metric_id": "evidence_requests_floor",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/evidence_requests_floor"
+    },
+    {
+      "metric_id": "merge_http_attempts",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/merge_http_attempts"
+    },
+    {
+      "metric_id": "scheduler_http_attempts",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/scheduler_http_attempts"
+    },
+    {
+      "metric_id": "claim_requests_floor",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/claim_requests_floor"
+    },
+    {
+      "metric_id": "merge_immutable_metadata",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/merge_immutable_metadata"
+    },
+    {
+      "metric_id": "merge_other_attempts",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/merge_other_attempts"
+    },
+    {
+      "metric_id": "get_attempts",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/get_attempts"
+    },
+    {
+      "metric_id": "mutation_attempts",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/mutation_attempts"
+    },
+    {
+      "metric_id": "geography_runs",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/geography_runs"
+    },
+    {
+      "metric_id": "geography_pairs",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/geography_pairs"
+    },
+    {
+      "metric_id": "engineering_runs",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/engineering_runs"
+    },
+    {
+      "metric_id": "engineering_pairs",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/engineering_pairs"
+    },
+    {
+      "metric_id": "history_runs",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/history_runs"
+    },
+    {
+      "metric_id": "history_pairs",
+      "path": "coordination/engineering/global-quota-1543-20261009/demand-summary.json",
+      "json_pointer": "/history_pairs"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "docs/ACTIONS_API_CAPACITY.md",
+      "rows": [
+        {
+          "metric_id": "evidence_requests_floor",
+          "line": 46,
+          "template": "| PR evidence file reads | At least {value} requests | Code-derived lower bound from 171 successful authenticated receipts; failed scans, comparison originals and metadata excluded |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "merge_http_attempts",
+          "line": 47,
+          "template": "| Merge preparation/finalization | {value} HTTP attempts | All 91 attempts accounted; 4532 immutable metadata attempts and 9455 other attempts |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "scheduler_http_attempts",
+          "line": 48,
+          "template": "| Merge registration/scheduling | {value} HTTP attempts | 118 of 119 runs accounted; the missing count is unknown |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "claim_requests_floor",
+          "line": 49,
+          "template": "| Accepted claim transitions | At least {value} requests | Code-derived floor for 158 accepted transitions; refused transitions, dynamic dependencies and additional pages excluded |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "merge_immutable_metadata",
+          "line": 47,
+          "template": "| Merge preparation/finalization | 13987 HTTP attempts | All 91 attempts accounted; {value} immutable metadata attempts and 9455 other attempts |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "merge_other_attempts",
+          "line": 47,
+          "template": "| Merge preparation/finalization | 13987 HTTP attempts | All 91 attempts accounted; 4532 immutable metadata attempts and {value} other attempts |",
+          "decimals": 0
+        }
+      ]
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "demand-aggregation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/global-quota-1543-20261009/positive-control.json"
+    },
+    {
+      "method_id": "demand-aggregation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/global-quota-1543-20261009/negative-control.json"
+    }
+  ]
 }
