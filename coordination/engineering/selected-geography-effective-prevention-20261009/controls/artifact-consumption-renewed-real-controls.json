@@ -1,0 +1,21 @@
+{
+  "kind": "actual-immutable-reviewed-artifact-reader-controls",
+  "source": "uncommitted scoped validator; not final frozen cold entry",
+  "input_commit": "6fe6233adb07ff9603c56810139bea93f7806a04",
+  "review": 6078884054,
+  "certificate_sha256": "440b3965b783671ed51fb27d14419322b2987ef55a985af41c775ac46daf1a30",
+  "complete_phase_bytes": 142707550,
+  "positive": true,
+  "negative_controls": [
+    "unregistered-certificate",
+    "rebound-review",
+    "wrong-whole-mode",
+    "wrong-whole-size",
+    "stale-native-bank",
+    "rebound-selected-geography",
+    "rebound-release",
+    "extra-authority-field"
+  ],
+  "scientific_reexecuted": false,
+  "activation": false
+}
