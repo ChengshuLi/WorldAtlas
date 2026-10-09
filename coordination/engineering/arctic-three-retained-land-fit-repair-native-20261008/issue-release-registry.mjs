@@ -13,7 +13,13 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export function issueReleaseRegistry(plan, destination) {
   assert.equal(plan.kind, 'complete-qualified-release-registry-1520');
   assert(path.isAbsolute(destination) && !destination.split(path.sep).includes('..'));
-  assert(destination.startsWith(plan.root + '/.cache/') && !fs.existsSync(destination));
+  assert(destination.startsWith(plan.root + '/.cache/'));
+  let destinationExists = true;
+  try { fs.lstatSync(destination); } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    destinationExists = false;
+  }
+  assert(!destinationExists, 'Fresh destination entry required, including dangling links');
   for (let current = path.dirname(destination); ; current = path.dirname(current)) {
     assert(!fs.lstatSync(current).isSymbolicLink());
     if (current === path.dirname(current)) break;
@@ -52,9 +58,6 @@ export function issueReleaseRegistry(plan, destination) {
   assert.deepEqual(result.batches.slice(0, baseline.batches.length), baseline.batches);
   for (const pin of [...inputs, plan.runtime]) authenticateAdmittedBody(admission, pin.path);
   const output = Buffer.from(JSON.stringify(result) + '\n');
-  assert(output.length <= 4194304);
-  fs.mkdirSync(destination);
-  fs.writeFileSync(path.join(destination, 'releases-v9.json'), output, {flag: 'wx', mode: 0o644});
   const receipt = {issue: 1520, source_head: plan.head, kind: plan.kind,
     complete_phase_bytes: admission.bytes, descriptors: admission.descriptors,
     immutable_git_body_output_bytes: gitBodyBytes,
@@ -67,6 +70,10 @@ export function issueReleaseRegistry(plan, destination) {
     new_products: 343, membership_records_retained: 84833,
     activated: false, scientific_reexecution: false,
     limit: 'Raw registry metadata only; encoded registry, current pointer and normal caller remain unqualified.'};
-  fs.writeFileSync(path.join(destination, 'registry-issuance.json'), JSON.stringify(receipt) + '\n', {flag: 'wx', mode: 0o644});
+  const receiptBytes = Buffer.from(JSON.stringify(receipt) + '\n');
+  assert(output.length + receiptBytes.length <= admission.outputReserve, 'Complete two-product output reserve');
+  fs.mkdirSync(destination);
+  fs.writeFileSync(path.join(destination, 'releases-v9.json'), output, {flag: 'wx', mode: 0o644});
+  fs.writeFileSync(path.join(destination, 'registry-issuance.json'), receiptBytes, {flag: 'wx', mode: 0o644});
   return receipt;
 }
