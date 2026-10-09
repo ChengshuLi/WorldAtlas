@@ -1,0 +1,44 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:8
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Undeclared additive package source/code payload: coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:8:34)
+    at reader.read (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:62:5)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:740:79
+    at Array.map (<anonymous>)
+    at readCurrentRebindCustody (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:740:26)
+    at readSelectedAdditive (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:859:10)
+    at loadSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/scripts/check-effective-geographic-regression.mjs:428:23)
+    at preparePackageSelectedAdditive (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:71:18)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-xlhwOq/scripts/build-static-inner.mjs:106:23
+
+Node.js v24.19.0
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:123
+      child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
+                                                                         ^
+
+Error: Package static build failed (1); prior outputs retained
+    at ChildProcess.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:123:74)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+
+Node.js v24.19.0
+      122.88 real        94.67 user        16.55 sys
+           449626112  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             1846084  page reclaims
+               18143  page faults
+                   0  swaps
+                   0  block input operations
+                   2  block output operations
+                2430  messages sent
+                2040  messages received
+                   0  signals received
+               24463  voluntary context switches
+              362694  involuntary context switches
+         39393970255  instructions retired
+         16540869161  cycles elapsed
+            47991360  peak memory footprint

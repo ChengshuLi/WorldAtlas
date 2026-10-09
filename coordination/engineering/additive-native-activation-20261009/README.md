@@ -73,7 +73,19 @@ That is a bounded row view, not a new global-world scientific audit.
 
 The static bridge obtains genuine privately authenticated V4 package execution,
 reads only declared whole assets, and publishes the four bound runtime assets.
-Ordinary package output and final normal-gate delivery remain pending until their
-actual completion. These source-relative repairs do not establish contemporary
+The ordinary declared static package completed at `7e4225b2356da2ee2f0937a63ce2b285edcc2014`
+in 250.56 seconds. Its four published additive assets match the selected committed
+outputs exactly; `package-current-v9/` retains the full atlas manifest, issued
+package input receipt, raw output/time log, and selected-asset readback. Ordinary
+package lifetime RSS was 1,399,062,528 bytes, distinct from bounded scientific
+acquisition. The render/pick proof uses production mathematical APIs on the complete
+132-row view; no GPU/Canvas/browser capture was executed. Normal geographic checks
+and final queue delivery remain pending. These source-relative repairs do not establish contemporary
 physical authority, water status, historical borders or new source-policy classes.
 Choiseul and future administrative source classes remain separate work.
+
+`choiseul-six-existing-dispositions.json` joins the exact six retained source cases
+to the historical 59ac/v8 native diagnostic: five yielded zero cells, while
+`5eb203…` yielded one cell and remains held outside this pilot/Alaska policy.
+Zero cells mean neither water nor repaired geography. These are historical
+measurements, not a fresh selected-v9 qualification, and contribute no gains here.
